@@ -185,6 +185,10 @@ curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/
 
 For more information on using custom and outbound webhooks, see the xref:webhooks#[Use webhooks to integrate with services] page. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
++
+NOTE: when handling custom webhook requests, we talk to 3rd party integrations via their APIs to fetch information such as what commit we should checkout, or where we should fetch the config file from. Integrations such as GitHub, do not have any consistency guarantees publicly documented and as such, there is a small posibility that we are given data that isn't fully up-to-date. 
++
+
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config
 
