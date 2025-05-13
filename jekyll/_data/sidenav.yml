@@ -678,8 +678,8 @@ en:
             link: add-ssh-key
       - name: Reference
         children:
-          - name: Webhooks reference
-            link: webhooks-reference
+          - name: Outbound webhooks reference
+            link: outbound-webhooks-reference
 
   - name: Developer toolkit
     icon: icons/sidebar/code.svg
