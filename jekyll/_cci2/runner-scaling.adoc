@@ -4,10 +4,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-runner
 ---
 = Scaling self-hosted runners
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

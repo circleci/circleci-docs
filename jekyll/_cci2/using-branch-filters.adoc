@@ -1,13 +1,13 @@
 ---
-description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
 contentTags:
   platform:
   - Cloud
   - Server v4+
-document-type:
-- How-to
+component: guides
+module: orchestrate-trigger
 ---
 = Using branch filters
+:page-description: A how to guide for using branch fileters at the job level to simplify your CircleCI configuration.
 :page-layout: classic-docs
 :icons: font
 :experimental:

@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: test
 ---
 = Automated testing in CircleCI
 :page-description: An overview of setting up testing automation, integration, and analytics.

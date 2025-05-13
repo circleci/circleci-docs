@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: orbs
+module: author
 ---
 = Orb development kit
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :page-description: How to use CircleCI's orb development kit.
 :experimental:

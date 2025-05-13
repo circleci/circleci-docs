@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: reference
+module: ROOT
 ---
 = Reusable config reference
 :page-description: Reference guide for CircleCI 2.1 Configuration

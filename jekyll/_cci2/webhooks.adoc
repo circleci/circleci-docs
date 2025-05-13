@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: integration
 ---
 = Webhook integration
 :page-layout: classic-docs

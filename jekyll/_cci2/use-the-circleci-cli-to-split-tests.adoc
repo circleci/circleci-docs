@@ -1,13 +1,14 @@
 ---
-description: How-to guide for using the CLI to split tests across parallel compute environments in a pipeline.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: optimize
 ---
 = Use the CircleCI CLI to split tests
+:page-description: How-to guide for using the CLI to split tests across parallel compute environments in a pipeline.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 

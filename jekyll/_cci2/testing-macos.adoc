@@ -2,13 +2,14 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: test
 ---
 = Testing macOS applications
 :page-description: Testing macOS applications.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document describes how to configure CircleCI for macOS app UI testing.
 

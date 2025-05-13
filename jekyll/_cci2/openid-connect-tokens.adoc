@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4.4+
+component: guides
+module: permissions-authentication
 ---
 = Using OpenID Connect tokens in jobs
 :page-layout: classic-docs

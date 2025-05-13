@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4.3+
+component: guides
+module: execution-runner
 ---
 = Container runner performance benchmarks
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Performance benchmarks and tuning.
 :icons: font
 :experimental:

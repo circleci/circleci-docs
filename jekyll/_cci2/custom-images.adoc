@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Using custom-built Docker images
 :page-description: Why and how to create custom Docker images

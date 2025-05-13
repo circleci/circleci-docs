@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: orchestrate-trigger
 ---
 = Set a nightly scheduled pipeline
 :page-layout: classic-docs
-:page-liquid:
 :page-description: "Learn how to create scheduled pipelines on a specific timetable."
 :icons: font
 :experimental:
