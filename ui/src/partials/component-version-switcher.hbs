@@ -1,0 +1,19 @@
+{{#if page.component.versions.[1]}}
+  {{#with (component-versions-to-nav page.component) }} 
+    <div data-dropdown class="relative flex font-normal w-1/2 mt-6 mb-8 mr-2">
+      <!-- Trigger Button -->
+      <button
+        data-dropdown-button
+        class="px-2 py-2 border rounded-[8px] border-vapor text-left flex items-center justify-between focus:border-link-on-light hover:border-link-on-light"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <span data-dropdown-selected>{{#if ./selected}}{{./selected}}{{else}}{{@root.page.component.title}}{{/if}}</span>
+        <img src="{{{@root.uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="ml-2 w-[8px] h-[8px]">
+      </button>
+
+      <!-- Dropdown Menu -->
+      {{> dropdown-menu navList=./navList }}
+    </div>
+  {{/with}}
+{{/if}}

@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
   "scripts": {
-    "start:dev": "npm run build:ui && gulp",
-    "build:docs": "npm run build:ui && antora antora-playbook.yml --log-failure-level=warn",
-    "build:ui": " cd scripts && chmod +x build-ui-bundle.sh && ./build-ui-bundle.sh"
+    "start:dev": "npm run build:ui && gulp preview:docs",
+    "preview:ui": "gulp preview:ui",
+    "build:ui": "gulp build:ui",
+    "build:docs": "npm run build:ui && gulp build:docs"
   },
   "repository": {
     "type": "git",

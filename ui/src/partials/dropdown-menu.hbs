@@ -1,0 +1,26 @@
+<ul
+    data-dropdown-menu
+    class="w-full absolute top-10 py-2 left-0 rounded-xl shadow-default bg-white max-h-60 overflow-y-auto z-10 hidden"
+    role="listbox"
+    tabindex="-1"
+  >
+    {{#each navList}}
+      <li
+        data-dropdown-option
+        class="ml-2 p-[8px] hover:bg-fog cursor-pointer rounded-lg max-w-fit"
+        role="option"
+        data-value="{{./value}}"
+        data-label="{{./label}}"
+      >
+        {{#if ./url}}
+          <a href="{{{relativize ./url}}}">
+            {{./label}}
+          </a>
+        {{else}}
+          <span>
+            {{./label}}
+          </span>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>

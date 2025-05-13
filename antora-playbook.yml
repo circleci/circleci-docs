@@ -5,13 +5,16 @@ site:
 content:
   sources:
   - url: .
-    start_paths:
-    - docs/root
-    - docs/guides
-    - docs/reference
-    - docs/orbs
-    - docs/server-admin
-    - docs/contributors
+    start_path: docs/root
+  - url: .
+    start_path: docs/guides
+  - url: .
+    start_path: docs/reference
+  - url: .
+    start_path: docs/server-admin
+    branches: [HEAD, server-v*]
+  - url: .
+    start_path: docs/contributors
 ui:
   bundle:
     url: ./ui-bundle.zip

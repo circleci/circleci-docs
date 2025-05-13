@@ -1,0 +1,15 @@
+<div data-dropdown class="{{#if class}}{{class}}{{/if}} relative flex justify-center items-center text-sm font-normal">
+  <!-- Trigger Button -->
+  <button
+    data-dropdown-button
+    class="px-4 py-3 border rounded-full text-sm m-auto w-full text-left flex items-center justify-between focus:border-link-on-light hover:border-link-on-light"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <span data-dropdown-selected>{{#if options.selected}}{{options.selected}}{{else}}{{@root.page.component.title}}{{/if}}</span>
+    <img src="{{{uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[8px] h-[8px]">
+  </button>
+
+  <!-- Dropdown Menu -->
+  {{> dropdown-menu navList=options.navList }}
+</div>

@@ -1,0 +1,36 @@
+<nav class="flex items-center justify-between mt-7 text-terminal-black font-light">
+
+  <ul class="hidden md:flex space-x-8">
+    {{#each options.navList}}
+      <li class="flex items-center mr-2">
+        <a href="{{{relativize ./url}}}" class="inline-block px-2 py-3 {{#if (eq ./name @root.page.component.name)}} border-b-2 border-operational-green font-medium {{/if}} ">
+          {{{./label}}}
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+
+  <ul class="hidden lg:flex">
+    <li class="flex items-center">
+      <a href="#" class="inline-block px-2 py-3">
+        Dev Hub
+      </a>
+    </li>
+    <li class="flex items-center ml-2">
+      <a href="#" class="inline-block px-2 py-3">
+        API
+      </a>
+      <button class="p-1">
+        <img src="{{{uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px]">
+      </button>
+    </li>
+    <li class="flex items-center ml-2">
+      <a href="#" class="inline-block px-2 py-3">
+        Help
+      </a>
+      <button class="p-1">
+        <img src="{{{uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px]">
+      </button>
+    </li>
+  </ul>
+</nav>

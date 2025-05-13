@@ -1,0 +1,27 @@
+<header class="max-w-full px-9 pt-6 border-b border-vapor">
+  <div class="flex items-center justify-between">
+    <!-- Logo + Title -->
+    <div class="flex items-center space-x-2">
+      <img src="{{{uiRootPath}}}/img/logo.svg" alt="CircleCI Logo" class="h-[44px]">
+    </div>
+
+    <!-- Search Bar -->
+
+    {{> search-bar class="hidden md:block flex-1 md:px-4" }}
+
+    <!-- Localization + CTA -->
+
+    <div class="flex items-center space-x-4 ml-2">
+      <img src="{{{uiRootPath}}}/img/language-icon.svg" alt="Language Icon" class="h-5 w-5">
+      <img data-page-navigation-toggle src="{{{uiRootPath}}}/img/nav-menu.svg" alt="Navigation Menu Icon" class="h-5 w-5 lg:hidden">
+      <a href="#" class="hidden md:block bg-slime-green text-dark-green rounded-full px-3 border py-1 border-operational-green">
+        Go to Application
+      </a>
+    </div>
+  </div>
+
+  <!-- Components Nav -->
+
+  {{> component-explorer-nav options=(components-to-nav-list)}}
+
+</header>

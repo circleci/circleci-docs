@@ -1,5 +1,5 @@
 name: contributors
-title: Contribute to CircleCI Docs
+title: Contributing
 version: ~
 nav:
 - modules/ROOT/nav.adoc
