@@ -19,7 +19,7 @@ demonstrate how one could capture and visualize the output of your pipelines.
 == Prerequisites
 
 * An account with CircleCI.
-* A familiarity with xref:webhooks#[webhooks on CircleCI].
+* A familiarity with xref:outbound-webhooks#[outbound webhooks on CircleCI].
 * An Airtable account, if you wish to follow along.
 
 [#get-setup-in-airtable]
