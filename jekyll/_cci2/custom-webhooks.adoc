@@ -18,7 +18,7 @@ NOTE: Custom webhooks are available for projects integrated via the GitHub App. 
 
 Use **custom webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command.
 
-TIP: Custom webhooks are inbound to CircleCI and are used to trigger pipelines from other services. If you are looking for a way to have a CircleCI pipeline trigger a service, use an <<outbound-webhooks,outbound webhook>>.
+TIP: Custom webhooks are inbound to CircleCI and are used to trigger pipelines from other services. If you are looking for a way to have a CircleCI pipeline trigger a service, use an xref:outbound-webhooks#[outbound webhook].
 
 This section presents some use cases for CircleCI custom webhooks.
 
