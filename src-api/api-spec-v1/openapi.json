@@ -1,0 +1,14 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CircleCI API v1",
+    "version": "1.0.0",
+    "description": {
+      "$ref": "markdown/overview.md"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://circleci.com/api/v1.1"
+    }
+}

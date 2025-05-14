@@ -1,0 +1,169 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CircleCI API v1 - Projects Endpoints",
+    "version": "1.0.0",
+    "description": "Project-related endpoints for CircleCI API v1."
+  },
+  "servers": [
+    { "url": "https://circleci.com/api/v1.1" }
+  ],
+  "tags": [
+    { "name": "Projects", "description": "Project management endpoints" }
+  ],
+  "paths": {
+    "/projects": {
+      "get": {
+        "tags": ["Projects"],
+        "summary": "List all followed projects",
+        "description": "Lists all projects you are following on CircleCI, with job information organized by branch.",
+        "operationId": "listProjects",
+        "security": [ { "circleToken": [] } ],
+        "responses": {
+          "200": {
+            "description": "A list of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Project" }
+                },
+                "examples": {
+                  "curl": {
+                    "summary": "Curl Example",
+                    "value": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/projects"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}": {
+      "get": {
+        "tags": ["Projects"],
+        "summary": "Get recent jobs for a single project",
+        "description": "Returns a summary for each of the last 30 job runs for a single project.",
+        "operationId": "getProjectRecentJobs",
+        "security": [ { "circleToken": [] } ],
+        "parameters": [
+          { "name": "vcs-type", "in": "path", "required": true, "schema": { "type": "string" }, "description": "VCS type (e.g., github, bitbucket)" },
+          { "name": "username", "in": "path", "required": true, "schema": { "type": "string" }, "description": "VCS username or org" },
+          { "name": "project", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Project name" }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of recent jobs for the project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/JobSummary" }
+                },
+                "examples": {
+                  "curl": {
+                    "summary": "Curl Example",
+                    "value": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/follow": {
+      "post": {
+        "tags": ["Projects"],
+        "summary": "Follow a new project on CircleCI",
+        "description": "Follow a new project on CircleCI.",
+        "operationId": "followProject",
+        "security": [ { "circleToken": [] } ],
+        "parameters": [
+          { "name": "vcs-type", "in": "path", "required": true, "schema": { "type": "string" }, "description": "VCS type (e.g., github, bitbucket)" },
+          { "name": "username", "in": "path", "required": true, "schema": { "type": "string" }, "description": "VCS username or org" },
+          { "name": "project", "in": "path", "required": true, "schema": { "type": "string" }, "description": "Project name" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project followed successfully",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Project" },
+                "examples": {
+                  "curl": {
+                    "summary": "Curl Example",
+                    "value": "curl -X POST -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/follow"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/recent-builds": {
+      "get": {
+        "tags": ["Projects"],
+        "summary": "Get recent jobs across all projects",
+        "description": "Returns a summary for each of the last 30 recent job runs, ordered by build_num.",
+        "operationId": "getRecentBuilds",
+        "security": [ { "circleToken": [] } ],
+        "responses": {
+          "200": {
+            "description": "A list of recent jobs across all projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/JobSummary" }
+                },
+                "examples": {
+                  "curl": {
+                    "summary": "Curl Example",
+                    "value": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/recent-builds"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "circleToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Circle-Token"
+      }
+    },
+    "schemas": {
+      "Project": {
+        "type": "object",
+        "properties": {
+          "vcs_url": { "type": "string" },
+          "username": { "type": "string" },
+          "reponame": { "type": "string" },
+          "branches": { "type": "object" }
+        }
+      },
+      "JobSummary": {
+        "type": "object",
+        "properties": {
+          "build_num": { "type": "integer" },
+          "status": { "type": "string" },
+          "branch": { "type": "string" },
+          "vcs_revision": { "type": "string" },
+          "committer_name": { "type": "string" },
+          "committer_email": { "type": "string" },
+          "subject": { "type": "string" },
+          "start_time": { "type": "string", "format": "date-time" },
+          "stop_time": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  }
+}
