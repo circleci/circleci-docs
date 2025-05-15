@@ -25,7 +25,7 @@
     "eslint": "~8.57.0",
     "eslint-config-standard": "~17.1.0",
     "eslint-plugin-import": "~2.31.0",
-    "eslint-plugin-n": "~16.0.0",
+    "eslint-plugin-n": "~17.18.0",
     "eslint-plugin-promise": "~6.6.0",
     "eslint-plugin-standard": "~5.0",
     "fancy-log": "~1.3",
