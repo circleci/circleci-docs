@@ -15,8 +15,8 @@
   ],
   "devDependencies": {
     "@asciidoctor/core": "~2.2",
-    "@fontsource/roboto": "~4.5",
-    "@fontsource/roboto-mono": "~4.5",
+    "@fontsource/roboto": "~5.2.0",
+    "@fontsource/roboto-mono": "~5.2.0",
     "@vscode/gulp-vinyl-zip": "~2.6.0",
     "autoprefixer": "~10.4.21",
     "browser-pack-flat": "~3.5.0",
