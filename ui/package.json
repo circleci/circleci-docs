@@ -14,7 +14,7 @@
     "last 2 versions"
   ],
   "devDependencies": {
-    "@asciidoctor/core": "~2.2",
+    "@asciidoctor/core": "~3.0.0",
     "@fontsource/roboto": "~5.2.0",
     "@fontsource/roboto-mono": "~5.2.0",
     "@vscode/gulp-vinyl-zip": "~2.6.0",
