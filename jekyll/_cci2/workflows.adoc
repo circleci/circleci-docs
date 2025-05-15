@@ -279,6 +279,49 @@ curl --request POST \
 ----
 --
 
+
+=== Identify the user who approved a job
+
+[.tab.identify.CircleCI_web_app]
+--
+* If the user signed up via GitHub, the (non-clickable) avatar of the GitHub user appears next to the approval job. Hovering over that avatar brings up a tooltip with the user's name as specified in their GitHub/Bitbucket account settings.
+
+* If the user signed up via email, the anonymous avatar appears next to the approval job; hovering over that avatar brings up a tooltip with the user's email address.
+--
+
+[.tab.identify.API]
+--
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID.
+. Then use the link:https://circleci.com/docs/api/v2/index.html#operation/getUser[user information] endpoint to get the username or email address.
+
+
+TIP: You can find detailed instructions in link:https://support.circleci.com/hc/en-us/articles/360044820493-How-to-Find-hold-Step-Approver-in-a-Workflow[this support article]
+
+* If the user who approved the job signed up via GitHub or Bitbucket, the response from the user information endpoint will have the following format:
+
+[,json]
+----
+ {
+   "name" : "User’s name as specified in their VCS account settings",
+   "login" : "VCS username",
+   "id" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+ }
+----
+
+* If the user who approved the job signed up via email, the response from the user information endpoint will have the following format:
+
+[,json]
+----
+ {
+   "name" : "Email address",
+   "login" : "Email address",
+   "id" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+ }
+----
+
+--
+
 === Cancel a job
 
 To Cancel a job follow these steps:
