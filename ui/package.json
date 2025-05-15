@@ -17,7 +17,7 @@
     "@asciidoctor/core": "~2.2",
     "@fontsource/roboto": "~4.5",
     "@fontsource/roboto-mono": "~4.5",
-    "@vscode/gulp-vinyl-zip": "~2.5",
+    "@vscode/gulp-vinyl-zip": "~2.6.0",
     "autoprefixer": "~10.4.21",
     "browser-pack-flat": "~3.4",
     "browserify": "~16.5",
