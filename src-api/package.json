@@ -13,13 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "snippet-enricher-cli": "0.0.8",
-    "@redocly/cli": "1.34.1"
-  },
-  "resolutions": {
-    "@babel/runtime": "7.26.10"
-  },
-  "resolutions:comments": {
-    "@babel/runtime": "CVE-2025-27789"
+    "@redocly/cli": "1.34.3",
+    "snippet-enricher-cli": "0.0.8"
   }
 }
