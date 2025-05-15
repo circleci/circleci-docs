@@ -64,7 +64,7 @@
     "cross-spawn": "~6.0.6",
     "got": "~11.8.3",
     "http-cache-semantics": "~4.2.0",
-    "nth-check": "~2.0.1",
+    "nth-check": "~2.1.0",
     "semver-regex": "~4.0.5",
     "send": "~1.2.0",
     "trim-newlines": "~4.1.1"
