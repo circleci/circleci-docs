@@ -422,4 +422,39 @@ a|  * GitLab: push, merge request
 | icon:check[]
 | icon:times[]
 
+| `pipeline.deploy.component_name`
+| GitHub App
+| String
+| The name of a component to be rolled back. Specified by the user when triggering a rollback pipeline.
+| icon:check[]
+| icon:times[]
+
+| `pipeline.deploy.environment_name`
+| GitHub App
+| String
+| The name of the target environment for a rollback. Specified by the user when triggering a rollback pipeline.
+| icon:check[]
+| icon:times[]
+
+| `pipeline.deploy.namespace`
+| GitHub App
+| String
+| The name of the target namespace for a rollback. Specified by the user when triggering a rollback pipeline.
+| icon:check[]
+| icon:times[]
+
+| `pipeline.deploy.current_version`
+| GitHub App
+| String
+| The expected live version for a component in a given environment when performing a rollback. Specified by the user when triggering a rollback pipeline.
+| icon:check[]
+| icon:times[]
+
+| `pipeline.deploy.target_version`
+| GitHub App
+| String
+| The target version for a rollback. Specified by the user when triggering a rollback pipeline.
+| icon:check[]
+| icon:times[]
+
 |===
