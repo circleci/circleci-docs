@@ -146,6 +146,8 @@ You can do that as shown below:
 echo "FAILURE_REASON='Deployment was not found'" > failure_reason.env
 ----
 
+CAUTION: Trying to update the status of the deploy after updating it to a terminal status such as `SUCCESS`, `FAILED` or `CANCELED` is not supported and will result in an error.
+
 === 1.3 Update the deploy status to canceled
 
 If you want to update your deployment to `canceled` when the deploy job is canceled, you can do so by adding the following job to your configuration.
