@@ -52,9 +52,6 @@ Once your Bitbucket Cloud project is set up in CircleCI, a pipeline is triggered
 --
 
 [tab.event-trigger.BitBucket_Data_Center]
---
-include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
---
 
 Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
 
