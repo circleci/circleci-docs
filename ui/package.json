@@ -35,7 +35,7 @@
     "gulp-connect": "~5.7",
     "gulp-eslint": "~6.0",
     "gulp-imagemin": "~9.1.0",
-    "gulp-postcss": "~9.0.1",
+    "gulp-postcss": "~10.0.0",
     "gulp-stylelint": "~13.0",
     "gulp-uglify": "~3.0",
     "handlebars": "~4.7",
