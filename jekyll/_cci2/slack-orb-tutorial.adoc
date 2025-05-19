@@ -52,11 +52,22 @@ jobs:
       - image: cimg/base:current
     steps:
       - slack/notify:
-          event: fail
-          template: basic_fail_1
-      - slack/notify:
-          event: pass
-          template: success_tagged_deploy_1
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 workflows:
   send-notification:
     jobs:
@@ -256,9 +267,9 @@ You can also include a mention for a failed job, to alert a specific person or t
 [source,yaml]
 ----
 - slack/notify:
-	event: fail
-	mentions: '@EngineeringTeam'
-	template: basic_fail_1
+    event: fail
+    mentions: '@EngineeringTeam'
+    template: basic_fail_1
 ----
 
 To notify multiple channels, place the IDs in quotes and separate them with a comma:
@@ -269,17 +280,16 @@ To notify multiple channels, place the IDs in quotes and separate them with a co
     channel: 'ABCXYZ, ZXCBN'
     event: fail
     template: basic_fail_1
-
 ----
 
 To restrict your alert to a specific branch, add a `branch_pattern` parameter:
 
 [source,yaml]
 ----
- - slack/notify:
-      branch_pattern: main
-      event: fail
-      template: basic_fail_1
+- slack/notify:
+    branch_pattern: main
+    event: fail
+    template: basic_fail_1
 ----
 
 Restricting your alert to a specific branch is useful if, for example, you do not want to receive alerts for feature branches.
@@ -310,7 +320,6 @@ Once you have created your block (which is a JSON object), copy and paste it int
           }
         ]
       }
-
 ----
 
 [#conclusion]
