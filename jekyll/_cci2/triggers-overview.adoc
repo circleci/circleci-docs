@@ -51,8 +51,6 @@ When you create a GitLab project in CircleCI you can set up multiple pipelines a
 Once your Bitbucket Cloud project is set up in CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. One exception to this is if you use the "Only build pull requests" option. For more information on "Only build pull requests", see the xref:oss#[Build open source projects] page.
 --
 
-[tab.event-trigger.BitBucket_Data_Center]
-
 Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
 
 .Pipeline running and visible on the dashboard
