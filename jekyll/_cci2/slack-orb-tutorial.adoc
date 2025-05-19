@@ -52,22 +52,11 @@ jobs:
       - image: cimg/base:current
     steps:
       - slack/notify:
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
-          event: always
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 workflows:
   send-notification:
     jobs:
@@ -240,12 +229,12 @@ jobs:
     docker:
       - image: cimg/base:current
     steps:
-- slack/notify:
-	  event: fail
-	  template: basic_fail_1
-- slack/notify:
-	  event: pass
-	  template: success_tagged_deploy_1
+      - slack/notify:
+          event: fail
+          template: basic_fail_1
+      - slack/notify:
+          event: pass
+          template: success_tagged_deploy_1
 ----
 
 * *Line 7* specifies that the template on the next line is used for failed events.
