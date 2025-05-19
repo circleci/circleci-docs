@@ -382,6 +382,7 @@ If xref:container-runner-installation#enable-rerun-job-with-ssh[Rerun job with S
 In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
 
 * Pods, Pods/Logs
+** List
 ** Watch
 
 By default a `Role`, `RoleBinding` and service account are created and attached to the container runner pod, but if you customize these, the above are the minimum required permissions.
