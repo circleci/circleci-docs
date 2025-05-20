@@ -494,7 +494,7 @@ workflows:
 
 A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the xref:env-vars#[Environment variables] page.
 
-*Example* to show settings an environmenta variable names `FOO` with a value of `bar` for use in a job.
+*Example* to show setting an environment variable named `FOO` with a value of `bar` for use in a job.
 
 [source,yaml]
 ----
@@ -1303,7 +1303,7 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | `environment`
 | N
 | Map
-| Additional environmental variables, locally scoped to command
+| Additional environment variables, locally scoped to command
 
 | `background`
 | N
