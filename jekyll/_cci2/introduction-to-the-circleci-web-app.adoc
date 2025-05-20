@@ -179,6 +179,7 @@ The following settings are available in the project settings page. If you do not
 * Auto-cancel redundant workflows
 * Free and open source
 * Enable dynamic config using setup workflows.
+* xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config] feature
 
 More information on these settings can be found on this page, as well as in our documentation.
 
@@ -191,8 +192,6 @@ More information on these settings can be found on this page, as well as in our 
 **LLMOps**: Set up integrations with LLMOps providers to streamline the process of configuring pipelines to build and test LLM-enabled applications.
 
 **Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
-
-**VS Code Integration**: Provides information and a link to organization settings to enable the xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config] feature, which is currently in open-preview for some customers.
 
 **Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
 
