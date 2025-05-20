@@ -27,7 +27,7 @@ NOTE: An nginx reverse proxy is placed in front of link:https://github.com/Kong/
 
 CAUTION: When using Amazon Certificate Manager (ACM), the name of the nginx service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the load balancer and you will have to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
 
-CAUTION: When using nomad clients and servers should be configured to use MTLS for secure communication. 
+CAUTION: When using Nomad, clients and servers should be configured to use MTLS for secure communication. 
 
 [#network-traffic]
 == Network traffic
