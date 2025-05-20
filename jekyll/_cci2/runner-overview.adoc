@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = CircleCI's self-hosted runner overview
 :page-layout: classic-docs
@@ -128,7 +127,7 @@ Using a supported platform, you get the following:
 
 **Machine runners:**
 
-* macOS X 11.2+ (Intel, Apple M1)
+* macOS X 11.2+ (Intel, Apple silicon)
 * Windows Server 2019, 2016 (x86_64)
 * Linux distributions - RHEL8, SUSE, Debian, etc (x86_64, ARM64, s390x, ppc64le)
 

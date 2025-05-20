@@ -2,12 +2,10 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Resource class overview
 :page-layout: classic-docs
-:page-liquid:
 :page-description: An overview of resource classes in CircleCI
 :icons: font
 :experimental:
@@ -104,7 +102,7 @@ Alternatively, use the "Get job details" endpoint to return information about a 
 [#view-resource-usage-per-job]
 === View resource usage per job
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/partials/execution-resources/resource-class-view.adoc[]
 
 === Resource class Insights
 

@@ -22,7 +22,7 @@ Orbs are accessed via the xref:../../../local-cli#[CircleCI CLI]. Orbs require y
 
 Ensure that you are using a personal API token generated _after_ your user account is made an admin.
 
-Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, you can run orb commands local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
+Providing a local repository location using the `--host` option allows you to access your local server orbs, rather than public cloud orbs. For example, if your server installation is located at `\http://circleci.somehostname.com`, you can run orb commands local to that orb repository by passing `--host \http://circleci.somehostname.com`.
 
 [#list-available-orbs]
 == List available orbs

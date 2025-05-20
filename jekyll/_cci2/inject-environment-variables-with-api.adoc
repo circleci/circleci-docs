@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server 3.x
-  - Server 4.x
+  - Server v4+
 ---
 = Inject environment variables with the CircleCI API
 :page-layout: classic-docs
@@ -11,6 +10,8 @@ contentTags:
 :page-description: How to inject env var values using the API.
 :icons: font
 :experimental:
+
+include::../_includes/partials/notes/server-api-examples.adoc[]
 
 [#api-v2]
 == API v2

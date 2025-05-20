@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Glossary
 :page-layout: classic-docs
@@ -59,7 +58,7 @@ All the containers being run by an <<#executor,executor>> for the current job.
 [#orbs]
 == Orbs
 
-<<orb-concepts#,Orbs>> are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
+<<orb-concepts#,Orbs>> are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
 
 [#owner]
 == Owner

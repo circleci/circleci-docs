@@ -61,4 +61,4 @@ Consider reading the section below on <<#billing-faqs,billing>>. For any further
 [#billing-faqs]
 == FAQs
 
-include::../_includes/snippets/faq/billing-faq-snip.adoc[]
+include::../_includes/partials/faq/billing-faq-snip.adoc[]

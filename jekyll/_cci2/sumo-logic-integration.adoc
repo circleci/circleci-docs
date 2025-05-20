@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Sumo Logic integration
 :page-layout: classic-docs
@@ -32,7 +31,7 @@ Use this dashboard to:
 * Monitor real-time CI performance, activity, and health, or track over time.
 * Identify opportunities for optimization.
 
-image:{{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
+image:Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
 
 Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
 
@@ -50,7 +49,7 @@ Gain insights into your pipelines with the included dashboard panels. Filter eac
 
 Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
 
-image:{{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png[Sumo Logic App catalogue]
+image:sumologic_app_catalog.png[Sumo Logic App catalogue]
 
 NOTE: This dashboard receives data through the link:https://circleci.com/developer/orbs/orb/sumologic/sumologic[Sumo Logic orb] which must be included in your projects to be tracked.
 
@@ -60,7 +59,7 @@ NOTE: This dashboard receives data through the link:https://circleci.com/develop
 To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
 
 [#configure-webhooks]
-=== Configure Webhooks
+=== Configure webhooks
 
 [#step-1-configure-hosted-collector]
 ==== 1. Configure hosted collector
@@ -68,50 +67,49 @@ To begin collecting and visualizing data with Sumo Logic, first configure Circle
 Follow the Sumo Logic documentation for link:https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector[Configuring a Hosted Collector].
 
 [#step-2-add-an-http-source]
-==== 2. Add an HTTP Source
+==== 2. Add an HTTP source
 
 To get the URL where the CircleCI webhooks will be sent and recorded to the collector, link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[add an HTTP Source].
 
-When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
+When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This URL will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
 
 [#step-3-configure-project-webhooks]
-==== 3. Configure Project Webhooks
+==== 3. Configure project webhooks
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to Sumo Logic.
 
-. Log in to the link:https://app.circleci.com/projects)[CircleCI web app]
+. Log in to the link:https://app.circleci.com/projects[CircleCI web app].
 
-. Access one of your CircleCI projects
+. Access one of your CircleCI projects.
 
-. Open **Project settings**
+. Open **Project settings**.
 
-. In the project settings sidebar, click **Webhooks**
+. In the project settings sidebar, click **Webhooks**.
 
-. Click **Add webhook**
+. Select **Add webhook**.
 
 . Complete the following fields:
 ** **Webhook name**: `Sumo Logic CI Visibility` or any other identifier name that you want to provide.
-** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section
+** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section.
 ** **Events**: Select **Workflow Completed** and **Job Completed**.
 ** Enable the check: **Certificate verifications**.
 
-. Click **Add Webhook** to save the new webhook.
+. Select **Add Webhook** to save the new webhook.
 
 [#install-the-circleci-app-for-sumo-logic]
 === Install the CircleCI App for Sumo Logic
 
 Now that you have set up collection, install the Sumo Logic App for CircleCI to use pre-configured searches and dashboards that provide insight into your CI/CD pipeline.
 
-. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
-. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
-. To install the app, complete the following fields:
-** **App Name**. You can retain the existing name, or enter a name of your choice for the app
-** **Data Source**. Select either of these options for the data source:
-*** Choose **Source Category**, and select a source category from the list
-*** Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
-** **Advanced**. Select the location in the library (the default is the personal folder in the library), or click **New Folder** to add a new folder
-. Click **Add to Library**
+. Select *App Catalog*.
+. In the *Search Apps* field, run a search for your desired app, then select it.
+. Select *Install App*.
+. Select *Next* in the *Setup Data* section.
+. In the *Configure* section of your respective app, complete the following fields.
+.. *Field Name*. If you already have collectors and sources set up, select the configured metadata field name (for example, `_sourceCategory`) or specify other custom metadata (for example, `_collector`) along with its metadata *Field Value*.
+. Select *Next*. You will be redirected to the *Preview & Done* section.
 
-Once the app is installed, it will appear in your personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization. Panels will start to fill automatically.
 
-NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available immediately, but with a bit of time, you will see full graphs and maps.
+Once the app is installed, it will appear in your Installed Apps folder. Panels will start to fill automatically.
+
+NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available, but will update with full graphs and charts over time.

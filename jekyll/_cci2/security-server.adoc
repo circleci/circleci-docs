@@ -1,8 +1,7 @@
 ---
 contentTags:
   platform:
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
   - Server Admin
 ---
 = Security
@@ -46,7 +45,7 @@ The Audit Log feature is available for CircleCI installed on your servers or pri
 
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 
-Complete Audit logs may be downloaded as a CSV file from the Audit Log page within the Admin section of the application. Audit log fields with nested data contain JSON blobs. Please note the audit log download can take a very long time to start; we recommend clicking the Download button once and leaving it to run.
+Complete Audit logs may be downloaded as a CSV file from the Audit Log page within the Admin section of the application. Audit log fields with nested data contain JSON blobs. Note the audit log download can take a very long time to start; we recommend clicking the Download button once and leaving it to run.
 
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
@@ -75,17 +74,17 @@ The following are the system events that are logged. See `action` in the Field s
 [#audit-log-fields]
 === Audit log fields
 
-- **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
-- **actor:** The actor who performed this event. In most cases, this will be a CircleCI user. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
-- **target:** The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
-- **payload:** A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
-- **occurred_at:** When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
-- **metadata:** A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
-- **id:** A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-- **version:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
-- **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **success:** A flag to indicate if the action was successful.
-- **request:** If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+- `action`: The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
+- `actor`: The actor who performed this event. In most cases, this will be a CircleCI user. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+- `target`: The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+- `payload`: A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
+- `occurred_at`: When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
+- `metadata`: A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
+- `id`: A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
+- `version`: Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
+- `scope`: If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+- `success`: A flag to indicate if the action was successful.
+- `request`: If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 
 [#checklist-to-using-CircleCI-securely-as-a-customer]
 == Checklist to using CircleCI securely as a customer
@@ -97,7 +96,7 @@ If you are getting started with CircleCI, there are some points you can ask your
   ** It is important to rotate secrets regularly in your organization, especially as team members come and go.
   ** Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
   ** Ensure the secrets you _do_ use are of limited scope, with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or GitHub's https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
-* Sometimes user misuse of certain tools might accidentally print secrets to stdout which will appear in your logs. Please be aware of:
+* Sometimes user misuse of certain tools might accidentally print secrets to stdout which will appear in your logs. Be aware of the following:
   ** running `env` or `printenv` which will print all your environment variables to stdout.
   ** literally printing secrets in your codebase or in your shell with `echo`.
   ** programs or debugging tools that print secrets on error.
@@ -105,4 +104,4 @@ If you are getting started with CircleCI, there are some points you can ask your
 * Use Restricted Contexts with teams to share environment variables with a select security group. Read through the https://circleci.com/docs/contexts/#restrict-a-context[contexts] document to learn more.
 * Ensure you audit who has access to SSH keys in your organization.
 * Ensure that your team is using Two-Factor Authentication (2FA) with your VCS (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA], https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket]). If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
-* If your project is open source and public, please make note of whether you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our https://circleci.com/docs/oss/#security[Open Source Projects Document].
+* If your project is open source and public, make note of whether you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our https://circleci.com/docs/oss/#security[Open Source Projects Document].

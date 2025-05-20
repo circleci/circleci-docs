@@ -1,0 +1,503 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= Orchestration cookbook
+:page-layout: classic-docs
+:page-liquid:
+:page-description: A cookbook of common pipeline, workflow and job execution goals and patterns
+:icons: font
+:experimental:
+
+This cookbook contains "recipes" for common pipeline, workflow and job execution goals and patterns.
+
+== Trigger a pipeline when a PR is marked ready for review
+
+=== Goal
+
+You may want to run a set of high credit-consuming tests only when a pull request is ready to be taken out of "draft" -- marked as ready for review. To do this, set up a trigger for your pipeline that triggers when a pull request is marked ready for review, as follows:
+
+=== Steps
+
+. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
++
+.Add pipeline options for GitHub App
+image::add-pipeline.png[Add pipeline options for GitHub App]
+. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines#add-a-trigger[Pipelines and triggers overview] page.
++
+.Run on trigger options for GitHub App triggers
+image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+
+=== Notes
+
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
++
+include::../_includes/partials/tips/check-github-type-org.adoc[]
+
+== Trigger a pipeline when a PR is merged
+
+=== Goal
+
+You may want to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged.
+
+=== Steps
+. Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
++
+.Add pipeline options for GitHub App
+image::add-pipeline.png[Add pipeline options for GitHub App]
+. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines#add-a-trigger[Pipelines and triggers overview] page.
++
+.Run on trigger options for GitHub App triggers
+image::triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+
+=== Notes
+
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
++
+include::../_includes/partials/tips/check-github-type-org.adoc[]
+
+
+== Run a workflow only when a pull request is opened
+
+=== Goal
+You may want to configure a workflow in your pipeline that will only run on a pipeline that is triggered when a pull request is opened. To do this you can use a workflow filter.
+
+=== Steps
+
+* Update your CircleCI config to include a workflow that you only want to run when a PR is opened.
++
+[,yml]
+----
+workflows:
+  workflow-pr-open:
+    # Only run this workflow when a PR is opened
+    when: pipeline.event.name == "pull_request" and pipeline.event.action == "opened"
+    jobs:
+      - my-job-1
+      - my-job-2
+----
+
+=== Notes
+
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
++
+include::../_includes/partials/tips/check-github-type-org.adoc[]
+
+// == Trigger a pipeline when a branch has an open PR
+
+// You may want to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
+
+// #TODO steps to build when there is an open PR#
+
+// == Trigger a pipeline when a label is added to a PR
+
+// You may want to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
+
+// #ToDO add steps to set up a trigger when label added#
+
+// == Trigger a pipeline when a PR is opened
+
+// Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
+
+// #TODO steps to trigger on a PR being opened#
+
+== Run a workflow only for specific branches
+
+=== Goal
+You may want to configure a workflow that will only run when the pipeline is triggered on a specific branch.
+
+=== Steps
+
+* Update your CircleCI config to include a workflow that will only run for specific branches.
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+* Alternatively, you can use the classic/legacy syntax to achieve the same result:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
+----
+
+
+* You can also choose to prevent the workflow from running for specific branches:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/exclude-branch-legacy.yml[]
+----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a workflow depending on the value of a boolean parameter
+
+=== Goal
+You may want to configure a workflow that will only run when a boolean pipeline parameter is true.
+
+=== Steps
+
+. Update config to declare a pipeline parameter with a default value of `false`
+
+. Update you workflow config to use a when statement so the workflow will only run when the pipeline parameter is true
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+* You can also use the shorthand syntax to achieve the same result:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
+----
+
+* You can create complex logic statements that involve multiple parameters:
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
+----
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a step depending on the output of a nested logic statement
+
+=== Goal
+
+You may want to configure a step that will run depending on the output of a nested logic statement.
+
+=== Steps
+
+* Update your CircleCI config to use xref:configuration-reference#the-when-step[the `when` step].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-unless-steps/when-step-nested.yml[]
+----
+
+=== Notes
+
+* The logic statement can be nested to a maximum depth of 100 levels.
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a job only on specific branches **or** when the value of a pipeline parameter is true
+
+=== Goal
+
+You may want to configure a job that only runs on specific branches or when the value of a pipeline parameter is `true` when triggered via the API.
+
+=== Steps
+
+* Update your CircleCI config to include an xref:configuration-reference/#expression-based-job-filters[expression-based job filter].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/expression-based-job-filters/multiple-or.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+include::../_includes/partials/tips/trigger-pipeline-with-parameters.adoc[]
+
+== Run a workflow only for scheduled pipelines with a specific name
+
+=== Goal
+
+In some cases, you may want to configure a workflow that will only run when a scheduled pipeline has a specific name.
+
+=== Steps
+
+* Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables#pipeline-values[pipeline values].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+----
+
+=== Notes
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+== Run a workflow when open pull requests are modified
+
+=== Goal
+
+You may want to have a workflow run when a open pull requests are updated with new commits (synchronize) or labeled.
+
+=== Steps
+
+* Update your CircleCI config to use the `pipeline.event.name` and `pipeline.event.action` xref:pipeline-variables#pipeline-values[pipeline values].
++
+[,yaml]
+----
+include::../_includes/snippets/logic-statement-examples/when-in-workflows/pr-synced-or-labeled.yml[]
+----
+
+=== Notes
+
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:github-integration#installing-github-app-alongside-github-oauth-app[GitHub integration] page.
+
+include::../_includes/partials/using-expressions/env-vars-in-conditional-caveat.adoc[]
+
+== Use no-op jobs to create a cleaner workflow graph
+
+=== Goal
+
+You may want to organize your workflow graph to make it more readable without adding additional build time or consuming credits. Using `no-op` jobs can help create a cleaner structure for complex workflows with many dependencies.
+
+The following snippet shows how your workflow configuration might look without using a `no-op` job:
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run build
+
+  test-unit:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:unit
+
+  test-integration:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:integration
+
+  test-e2e:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:e2e
+
+  deploy:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run deploy
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
+      - test-unit:
+          requires:
+            - build
+      - test-integration:
+          requires:
+            - build
+      - test-e2e:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test-unit
+            - test-integration
+            - test-e2e
+----
+
+Notice how the `deploy` job needs to explicitly list all three test jobs in its `requires` section. As your workflow grows, this list could become longer and more difficult to maintain.
+
+Here is the workflow graph for this config:
+
+image::orchestrate-and-trigger/clean-graph-before.png[Workflow graph showing snippet without `no-op` job]
+
+=== Steps
+
+. Add a `no-op` job to your CircleCI configuration file.
++
+[,yaml]
+----
+jobs:
+  test-coordinator:
+    type: no-op
+
+  test-unit:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:unit
+
+  test-integration:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:integration
+
+  test-e2e:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run test:e2e
+----
+
+. Configure your workflow to use the `no-op` job as a coordinator for downstream jobs.
++
+[,yaml]
+----
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
+      - test-unit:
+          requires:
+            - build
+      - test-integration:
+          requires:
+            - build
+      - test-e2e:
+          requires:
+            - build
+      - test-coordinator:
+          requires:
+            - test-unit
+            - test-integration
+            - test-e2e
+      - deploy:
+          requires:
+            - test-coordinator
+----
+
+The workflow graph will now look like this:
+
+image::orchestrate-and-trigger/clean-graph-after.png[Workflow graph showing snippet with `no-op` job]
+
+=== Notes
+
+* The `no-op` job performs no actions and consumes no credits. This makes it an ideal structural element in your workflow.
+* This pattern is useful when you want to visually group related jobs in the CircleCI UI.
+* Using `no-op` jobs can simplify workflow management when dealing with complex dependency chains.
+* Without the `test-coordinator` job, the `deploy` job would need to list all test jobs in its `requires` section.
+
+== Simplify GitHub required status checks with no-op jobs
+
+=== Goal
+
+You may want to simplify the management of GitHub required status checks for your branch protection rules. Use a single `no-op` job as a gatekeeper that depends on all your critical checks. This approach is means you only need to manage a single required status check rather than multiple status checks in GitHub.
+
+The following snippet shows how your workflow configuration might look without using a `no-op` job:
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run lint
+
+  test:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm test
+
+  security-scan:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run security-check
+
+workflows:
+  main:
+    jobs:
+      - lint
+      - test
+      - security-scan
+----
+
+With this configuration, in GitHub you would need to set up branch protection rules for each job (`lint`, `test`, `security-scan`). You would need to update both CircleCI config and GitHub settings when adding more jobs.
+
+=== Steps
+
+. Add a `no-op` job to your CircleCI configuration file that will serve as your single required status check. In this example the no-op job is `all-tests-passed`:
++
+[,yaml]
+----
+jobs:
+  all-tests-passed:
+    type: no-op
+
+  lint:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run lint
+
+  test:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm test
+
+  security-scan:
+    docker:
+      - image: cimg/node:20.10
+    steps:
+      - checkout
+      - run: npm run security-check
+----
+
+. Configure your workflow to make all critical jobs prerequisites for the `no-op` job. The `all-tests-passed` will only succeed if all its required jobs succeed.
++
+[,yaml]
+----
+workflows:
+  main:
+    jobs:
+      - lint
+      - test
+      - security-scan
+      - all-tests-passed:
+          requires:
+            - lint
+            - test
+            - security-scan
+----
+
+. In GitHub, set up a branch protection rule to require only the `all-tests-passed` job as a required status check. See the link:https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches[GitHub docs] for more information on branch protection rules.
+
+=== Notes
+
+* This approach simplifies branch protection management in GitHub by requiring only one status check.
+* When you add new checks, you only need to update the `requires` list for your `no-op` job.
+* The `no-op` job will succeed only if all its required jobs succeed.
+* This pattern helps keep GitHub and CircleCI configurations in sync without manual updates.

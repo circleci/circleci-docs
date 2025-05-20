@@ -1,8 +1,8 @@
 ---
 contentTags:
   platform:
-    - Cloud
-    - Server
+  - Cloud
+  - Server v4+
 ---
 = Automate LLM evaluation testing with the CircleCI Evals orb
 :description: How to use CircleCI Evals orb.
