@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = Usage data collection
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about CircleCI usage data collection for the purpose of improving our product and services.
+:page-description: Learn about CircleCI server v4.1 usage data collection for the purpose of improving our product and services.
 :icons: font
 :experimental:
 

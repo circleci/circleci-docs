@@ -3,11 +3,12 @@ contentTags:
   platform:
     - Server v4.1
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.1 release notes
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Details of the new features included in each CircleCI server 4.x release.
+:page-description: Details of the new features included in each CircleCI server 4.1 release.
 :icons: font
 :experimental:
 

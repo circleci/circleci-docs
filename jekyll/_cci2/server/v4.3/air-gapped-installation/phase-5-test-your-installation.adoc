@@ -3,11 +3,12 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
 = Phase 5 - Test your installation
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to test your CircleCI server installation in an air-gapped environment.
+:page-description: How to test your CircleCI server v4.3 installation in an air-gapped environment.
 :icons: font
 :toc: macro
 :toc-title:
@@ -26,7 +27,7 @@ CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `o
 
 [#modify-reality-check]
 == 3. Modify Reality Check source code
-Replace any references to docker images in .circleci/config.yml with your internal docker registry.
+Replace any references to Docker images in .circleci/config.yml with your internal Docker registry.
 
 For example, in your GitHub Enterprise instance, change the following:
 

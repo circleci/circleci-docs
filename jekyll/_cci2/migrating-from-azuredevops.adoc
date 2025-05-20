@@ -2,12 +2,10 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Migrate from Azure DevOps
 :page-layout: classic-docs
-:page-liquid:
 :page-description: An overview of how to migrate from Azure DevOps to CircleCI.
 :icons: font
 :experimental:
@@ -57,7 +55,7 @@ If you need to export other Azure DevOps artifacts, you can download most of the
 Once you have imported your code into GitHub, Bitbucket, or GitLab, you can start creating a project in CircleCI using the xref:getting-started#[Getting Started guide].
 
 [#build-configuration]
-== Build Configuration
+== Build configuration
 
 If you are using Azure DevOps Pipelines or TFS Build and Release, you will need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a JSON file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
@@ -72,7 +70,7 @@ The Azure DevOps Pipelines and CircleCI configurations will be different. It may
 [#configuration-comparison]
 == Configuration comparison
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

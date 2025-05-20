@@ -1,10 +1,14 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
 = Using the Linux VM execution environment
-:contentTags: {"platform"=>["Cloud", "Server v4.x", "Server v3.x"]}
 :description: Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 You can run your jobs in the Linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
 
@@ -47,17 +51,17 @@ jobs:
 ----
 --
 
-You can view the list of available images xref:configuration-reference#available-linux-machine-images[in the docs Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
+You can view the list of available images xref:configuration-reference#available-linux-machine-images-cloud[in the Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 
 [#available-linuxvm-resource-classes]
 == Available LinuxVM resource classes
 
-{% include snippets/machine-resource-table.adoc %}
+include::../_includes/partials/execution-resources/machine-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/partials/execution-resources/resource-class-view.adoc[]
 
 [#pre-installed-software]
 == Pre-installed software

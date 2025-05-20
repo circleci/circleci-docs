@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
 = Phase 2 - core services
 :page-layout: classic-docs

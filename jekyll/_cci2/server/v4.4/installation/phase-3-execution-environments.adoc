@@ -3,6 +3,7 @@ contentTags:
   platform:
   - Server v4.4
   - Server Admin
+noindex: true
 ---
 = Phase 3 - execution environments
 :page-layout: classic-docs
@@ -588,7 +589,10 @@ aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --p
 [#set-up-authentication]
 ==== Set up authentication
 
-There are two ways to authenticate CircleCI with your cloud provider: IAM Roles for Service Accounts (IRSA), and IAM access keys. IRSA is the recommended method.
+Authenticate CircleCI with your cloud provider in one of two ways:
+
+* IAM Roles for Service Accounts (IRSA) - recommended.
+* IAM access keys.
 
 [.tab.vmauthaws.IRSA]
 --
@@ -809,7 +813,7 @@ Create a `policy.json` file with the following content. You should fill in the I
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
+        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>",
         "arn:aws:ec2:*:*:volume/*"
       ]
     },
@@ -999,7 +1003,7 @@ Choose one of the following options, depending on whether you are using Workload
 +
 [.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:../../../server-3-install-prerequisites/index.html#enabling-workload-identities-in-gke-optional[Phase 1 - Prerequisites].
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:phase-1-prerequisites#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
 
 [source,shell]
 ----

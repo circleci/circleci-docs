@@ -1,0 +1,100 @@
+=== Config could not be located error
+
+If you see the following error message, check the steps below to remediate the issue.
+
+[,shell]
+----
+config file .circleci/sample-filename.yml could not be located on branch sample-branch-name in repository sample-repo-name
+----
+
+* Ensure that there is a CircleCI configuration file in the repository on the branch that uses the filename specified in the error message. If there is not one present, add a CircleCI configuration file.
+
+* If there is a config file present:
+.. Navigate to menu:Project Settings[Pipelines] in the CircleCI web app for the project where you are seeing this error message.
+.. Select the pencil icon for each pipeline listed and ensure that the "Config File Path" field matches the filepath of the config file that is in your repository. If you changed the name of the config file in your repository, the reference to that filepath must also be changed in the menu:Project Settings[Pipelines] section for any pipeline that uses that configuration file.
+
+[#why-is-my-scheduled-pipeline-not-running]
+=== Why is my scheduled pipeline not running?
+
+If your scheduled pipeline is not running, verify the following things:
+
+- Is the actor who is set for the scheduled pipelines still part of the organization? You can find this setting is under **Attribution** in the **Triggers** section of the web app.
+- Is the branch set for the schedule deleted?
+- Is your VCS organization using SAML protection? SAML tokens expire often, which can cause requests to fail.
+
+[#jobs-not-running-when-push-commits]
+=== Why are my jobs not running when I push commits?
+
+In the CircleCI application, check the individual job and workflow views for error messages. More often than not, the error is because of formatting errors in your `.circleci/config.yml` file.
+
+See the xref:introduction-to-yaml-configurations#[YAML Introduction] page for more details.
+
+After checking your `.circleci/config.yml` for formatting errors, search for your issue in the link:https://support.circleci.com/hc/en-us[CircleCI support center].
+
+[#why-is-my-job-queued]
+=== Why is my job queued?
+
+A job might end up being queued because of a concurrency limit being imposed due your organization's plan. If your jobs are queuing often, you can consider link:https://circleci.com/pricing/[upgrading your plan].
+
+[#why-are-my-jobs-queuing-performance-plan]
+=== Why are my jobs queuing even though I am on the Performance Plan?
+
+In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resourceclass[Resource classes]. If you are experiencing queuing on your jobs, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request raises on these limits.
+
+[#find-project-projects-dashboard]
+=== Why can I not find my project on the Projects dashboard?
+
+If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For instance, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available under *Projects*.  If you want to build the project `your-org/project`, you must switch your organization on the application's organization switcher menu to `your-org`.
+
+[#how-do-docker-image-names-work]
+=== How do Docker image names work? Where do they come from?
+
+CircleCI currently supports pulling (and pushing with Docker Engine) Docker images from link:https://hub.docker.com/[Docker Hub]. For link:https://hub.docker.com/explore/[official images], you can pull by simply specifying the name of the image and a tag:
+
+[,yml]
+----
+golang:1.7.1-jessie
+redis:3.0.7-jessie
+----
+
+For public images on Docker Hub, you can pull the image by prefixing the account or team username:
+
+[,yml]
+----
+my-user/couchdb:1.6.1
+----
+
+[#best-practice-for-specifying-image-versions]
+=== What is the best practice for specifying image versions?
+
+It is best practice *not* to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `cimg/ruby:3.0.4-browsers`, to pin down the image and prevent upstream changes to your containers when the underlying base distribution changes. For example, specifying only `cimg/ruby:3.0.4` could result in unexpected changes from `browsers` to `node`. For more context, refer to xref:using-docker#docker-image-best-practices[Docker image best practices], and xref:circleci-images#best-practices[CircleCI image best practices].
+
+[#set-the-timezone-in-docker-images]
+=== How can I set the timezone in Docker images?
+
+You can set the timezone in Docker images with the `TZ` environment variable. A sample `.circleci/config.yml` with a defined `TZ` variable would look like the following:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: your/primary-image:version-tag
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: mysql:5.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
+           TZ: "America/Los_Angeles"
+    working_directory: ~/your-dir
+    environment:
+      TZ: "America/Los_Angeles"
+----
+
+In this example, the timezone is set for both the primary image and an additional mySQL image.
+
+A full list of available timezone options is link:https://en.wikipedia.org/wiki/List_of_tz_database_time_zones[available on Wikipedia].

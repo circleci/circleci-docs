@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Create an orb
 :page-layout: classic-docs
@@ -52,11 +51,11 @@ Create a new, empty, link:https://github.com/new[GitHub repository]. The name of
 
 CAUTION: Ensure that the repository is completely empty. Uncheck any options such as "Add a README.md" or "Choose a license".
 
-image::{{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png[New GitHub repository]
+image::new_orb_repo_gh.png[New GitHub repository]
 
 Once complete, you should see the generated git URL. Note it down, you will need it in step 4. You can select SSH or HTTPS, whichever you can authenticate with.
 
-image::{{site.baseurl}}/assets/img/docs/github_new_quick_setup.png[Orb registry]
+image::github_new_quick_setup.png[Orb registry]
 
 CAUTION: Do not pull down the orb repository at this point. This will be completed when you run `orb init` in the next step. Pulling the repository before this can cause issues.
 
@@ -68,13 +67,13 @@ WARNING: Once an orb is initialized, it **cannot be switched from public to priv
 
 NOTE: The `--private` flag is not currently supported on CircleCI server. Orbs created within a server installation will only be visible to authenticated users.
 
-* To initialize a xref:orb-intro#public-orbs[public] orb:
+* To initialize a xref:orb-intro#public-or-private[public] orb:
 +
 ```shell
 circleci orb init </path/to/myProject-orb>
 ```
 
-* To initialize a link:orb-intro#private-orbs[private] orb:
+* To initialize a xref:orb-intro#public-or-private[private] orb:
 +
 ```shell
 circleci orb init </path/to/myProject-orb> --private
@@ -121,7 +120,7 @@ In the setup process you will be asked if you would like to save your xref:manag
 
 Use xref:contexts#restrict-a-context-to-a-security-group-or-groups[security groups] to limit access to users that are allowed to trigger jobs. Only these users will have access to the private xref:managing-api-tokens#[personal API token].
 
-xref:contexts#restricting-a-context[Contexts] can be located by navigating to **Organization Settings > Contexts** in the web app. After creating your orb, you will have a new context called `orb-publishing`. Click into `orb-publishing` and add a **Security Group**.
+xref:contexts#restrict-a-context[Contexts] can be located by navigating to **Organization Settings > Contexts** in the web app. After creating your orb, you will have a new context called `orb-publishing`. Click into `orb-publishing` and add a **Security Group**.
 
 .Secure contexts
 video::ImPE969yv08[youtube]

@@ -1,0 +1,38 @@
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Class | vCPUs | RAM | Cloud | Server
+
+| `macos.m1.medium.gen1`
+| 4 @ 3.2 GHz
+| 6GB
+| icon:check[]
+| icon:times[]
+
+| `macos.m1.large.gen1`
+| 8 @ 3.2 GHz
+| 12GB
+| icon:check[]
+| icon:times[]
+
+| `m2pro.medium`
+| 4 @ 3.49 GHz
+| 8GB
+| icon:check[]
+| icon:times[]
+
+| `m2pro.large`
+| 8 @ 3.49 GHz
+| 16GB
+| icon:check[]
+| icon:times[]
+|===
+
+[WARNING]
+====
+*We have deprecated support for all Intel-based macOS resources.*
+
+The `macos.x86.medium.gen2` resource class was deprecated on June 28, 2024.
+
+See our link:https://discuss.circleci.com/t/macos-intel-support-deprecation-in-january-2024/48718[announcement] for more details.
+====

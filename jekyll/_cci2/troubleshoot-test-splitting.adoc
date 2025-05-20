@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Troubleshoot test splitting
 :page-layout: classic-docs
@@ -129,18 +128,17 @@ NOTE: To follow along with the commands in the video below you will need to be x
 [#other-ways-to-split-tests]
 ## Other ways to split tests
 
-Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
+Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
 
 * **link:https://knapsackpro.com[Knapsack Pro]** - Enables allocating tests
   dynamically across parallel CI nodes, allowing your test suite execution to run
   faster. See link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI build time graph examples].
 
-* **link:https://github.com/previousnext/phpunit-finder[phpunit-finder]** - This is
-  a helper CLI tool that queries `phpunit.xml` files to get a list of test
+* **link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`]** - A helper CLI tool that queries `phpunit.xml` files to get a list of test
   filenames and print them. This is useful if you want to split tests to run
   them in parallel based on timings on CI tools.
 
-* **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[go list]** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers.
+* **link:https://golang.org/cmd/go/#hdr-List_packages_or_modules[`go list`]** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers.
 
 [source,shell]
 ----

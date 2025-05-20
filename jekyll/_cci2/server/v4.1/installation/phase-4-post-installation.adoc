@@ -3,9 +3,11 @@ contentTags:
   platform:
   - Server v4.1
   - Server Admin
+noindex: true
 ---
 = Phase 4 - post installation
 :page-layout: classic-docs
+:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.1 application.
 :icons: font
 :experimental:
 

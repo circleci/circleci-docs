@@ -3,6 +3,7 @@ contentTags:
   platform:
     - Server v4.3
     - Server Admin
+noindex: true
 ---
 = CircleCI server v4.3 release notes
 :page-layout: classic-docs
@@ -26,12 +27,43 @@ The v4.3 release introduces upgraded execution architecture. Previously, VM serv
 ** Distributing load across availability zones through round-robining
 ** Sending a percentage of traffic to a different zone
 ** Instance type fallbacks based on deficits and success
+* The artifact paths have changed to improve download performance. The new path will now be `<server-domain>/output/job/<job-id>/artifacts/0/home/circleci/artifacts/<artifact-file>`
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.3 guide]. There is a background database migration job that is run on install/upgrade to server 4.3. When upgrading to 4.3 you **must ensure this job completes**.
+For upgrade steps see the xref:../installation/upgrade-server#[Upgrade server v4.3 guide]. A background database migration job runs on install/upgrade to server 4.3. When upgrading to 4.3 you **must ensure this job completes**.
 
-https://circleci.com/changelog/server-release-4-3-5/
+[#release-4-3-9]
+== Release 4.3.9
+
+[#changelog-4-3-9]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-3-9/[changelog].
+
+[#release-4-3-8]
+== Release 4.3.8
+
+[#changelog-4-3-8]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-3-8/[changelog].
+
+[#release-4-3-7]
+== Release 4.3.7
+
+[#changelog-4-3-7]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-3-7/[changelog].
+
+[#release-4-3-6]
+== Release 4.3.6
+
+[#changelog-4-3-6]
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-3-6/[changelog].
 
 [#release-4-3-5]
 == Release 4.3.5

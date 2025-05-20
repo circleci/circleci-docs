@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = CircleCI remote Docker images support policy
 :page-layout: classic-docs
@@ -15,7 +14,7 @@ contentTags:
 [#overview]
 == Overview
 
-This document outlines the link:https://circleci.com/docs/building-docker-images/[CircleCI remote Docker image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (setup_remote_docker).
+This document outlines the xref:building-docker-images#[CircleCI remote Docker image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (setup_remote_docker).
 
 [#release-policy]
 == Release policy

@@ -2,13 +2,11 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
-= Using Workspaces to Share Data between Jobs
+= Using workspaces to share data between jobs
 :page-layout: classic-docs
 :page-description: This document describes how to use workspaces to share data to downstream jobs in your workflows.
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -35,7 +33,7 @@ Some notes about workspaces:
 * If multiple concurrent jobs persist the same filename, then attaching the workspace will error.
 * If a workflow is re-run, it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
-By default, workspace storage duration is set to 15 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 15 days is also the maximum storage duration you can set.
+By default, on CircleCI cloud, workspace storage duration is set to 15 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 15 days is also the maximum storage duration you can set.
 
 image::/docs/assets/img/docs/workspaces.png[workspaces data flow]
 
@@ -48,7 +46,7 @@ If you have custom storage settings, `persist_to_workspace` will default to the 
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `.circleci/config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [source,yaml]
 ----
@@ -101,8 +99,6 @@ workflows:
 
 For a live example of using workspaces to pass data between build and deploy jobs, see the link:https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml[`.circleci/config.yml`] that is configured to build the CircleCI documentation.
 
-For additional conceptual information on using workspaces, caching, and artifacts, refer to the link:https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces] blog post.
-
 [#workspaces-and-self-hosted-runner]
 == Workspace storage customization
 
@@ -110,7 +106,7 @@ When using self-hosted runners, there is a network and storage usage limit inclu
 
 Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
 
-You can customize storage usage retention periods for workspaces on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data#managing-network-and-storage-use[Persisting Data] page.
+You can customize storage usage retention periods for workspaces on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:persist-data#managing-network-and-storage-usage[Persisting Data] page.
 
 [#workspace-usage-optimization]
 == Workspace optimization

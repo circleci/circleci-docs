@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Server v4.3
   - Server Admin
+noindex: true
 ---
 = Phase 4 - post installation
 :page-layout: classic-docs
-:page-description: CircleCI server post installation steps for v4.3
+:page-description: CircleCI server v4.3 post installation steps
 :icons: font
 :toc: macro
 :toc-title:

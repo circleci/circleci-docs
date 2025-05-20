@@ -1,0 +1,248 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Automate LLM evaluation testing with the CircleCI Evals orb
+:description: How to use CircleCI Evals orb.
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+CircleCI supports running automatic large language model (LLM) evaluations and evaluation testing using your preferred GenAI application evaluation framework. Through declaring the necessary commands in your pipeline configuration you can run your LLM evaluations and test the results within your CircleCI pipeline.
+
+With the CircleCI Evals orb, you can remove the manual work involved in triggering LLM evaluations, reviewing evaluation results, and determining whether the results meet set expectations.
+
+TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-enabled-applications-through-evaluations#[methods for testing LLM-enabled applications through evaluations].
+
+== Concepts
+* **LLM Evaluations**: A method to assess the performance and accuracy of AI models and algorithms. Evaluations measure metrics such as task fidelity, consistency, relevance and coherence, or tone and style.
+
+* **Evaluation results**: The set of quantitative (often numeric) results output by running an evaluation.
+
+* **Metrics**: 1 or more units of data, used as inputs for testing.
+
+* **Evaluation test**: A test that determines if input metrics meet specified conditions.
+
+* **Test suite**: A set of test cases that are related and executed. Is a `.json` file that is assigned a name by the user.
+
+* **Test case**: A test scenario, tests a single concept to make it clear what has failed when the test does not pass. Each has:
+** *Name*: The name assigned to the test case. Usually descriptive of the scenario.
+** *Assertion*: A statement that checks if the specified condition is true. If false, the test fails.
+** *Result*: Each test case has a result of pass or fail.
+
+* **Evaluation test result**:
+** *Failure* indicates a proposed change resulted in a degradation of model performance. The job stops running, and the pipeline fails.
+** *Success* indicates that model performance has met set criteria, the job continues to run.
+
+image::eval-test-diagram-concepts.png[Evaluation testing: Concepts diagram]
+
+== Prerequisites
+
+* A CircleCI account connected to your code. You can sign up xref:first-steps#[for free].
+* A CircleCI project with a workflow configured to build your code.
+* CircleCI xref:contexts#[contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
+* Existing LLM evaluations on a open source library or third-party tools such as Braintrust or Langsmith.
+
+== 1. Add the CircleCI Evals orb
+
+Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+
+[source ,yaml]
+----
+version: 2.1
+----
+
+Add the orbs stanza below your version, invoking the orb:
+
+[source ,yaml]
+----
+orbs:
+  evals: circleci/evals@2.0.0
+----
+
+== 2. Add and define an evaluation job
+
+Define a new job to run your LLM evaluations, save evaluation results and test them. It is important to include the step to save your evaluation results in order to run evaluation testing.
+
+[source ,yaml]
+----
+jobs:
+  eval-test:
+    docker:
+      - image: cimg/python:stable
+    steps:
+      # Add an evaluation step
+      - run: <your eval step> # Run evals and output results for the evaluation test
+      - evals/test: # Invoke evaluation test
+          name: Run Evaluation Test
+          assertions: <your path to .json evaluation test suite> # Replace with your path
+          metrics: <your path to .json evaluation results> # Replace with your path
+          results: <your path to store JUnit XML evaluation test results file> # Replace with your path
+----
+
+== 3. Create evaluation test suite file
+
+* Create a `.json` file. You can choose the file location, but we suggest placing it in your code repository `.circleci` directory.
+* You can customize the filename. We suggest using `eval-test.json`, since this file represents the test suite for testing evaluation results.
+
+== 4. Define test cases
+
+* In the `.json` file you just created, define your test cases.
+* Each test case is composed of a name and an assertion.
+* For test case names we suggest assigning a name based on the test scenario. For example, using the name of a metric: `correctness` or `toxicity`.
+* Assertions are expressed using the link:https://cel.dev/[Common Expression Language] (CEL). For more information, see the link:https://github.com/google/cel-spec/blob/master/doc/langdef.md[specification]. All values from the results `.json` file are available as global variables. Try out CEL link:https://playcel.undistro.io/[here].
+
+=== Test case examples
+
+Given metrics from `eval-results.json`:
+
+[source ,json]
+----
+{
+  "correctness": 0.99,
+  "toxicity": 0.2,
+  "labels": [
+    "CORRECT",
+    "ACCURATE",
+    "NOT HARMFUL"
+  ]
+}
+----
+
+Below are example test cases and a demonstration of link:https://cel.dev/[Common Expression Language] (CEL) usage.
+
+* For test case names we suggest assigning a name based on the test scenario. For example, using the name of an input metric: `correctness` or `toxicity`.
+
+[source ,json]
+----
+{
+  "correctness": "correctness > 0.9"
+  "toxicity": "toxicity < 0.01"
+  "labels": “labels[0] == \”CORRECT\””
+}
+----
+
+Below displays a template, demonstrating that a test case is composed of a name and an assertion:
+
+[source ,json]
+----
+{
+  "yourTestCaseName": "<your assertion>",
+}
+----
+
+== 5. Add your evaluation job to a workflow
+
+Define a new workflow, or use an existing one. Add your newly defined job to the workflow. Under your job, specify the relevant contexts needed to run the tasks in your job.
+
+[source ,yaml]
+----
+workflows:
+  build-test-eval-workflow:
+    jobs:
+      - build-test-eval:
+          context:
+            - <your OpenAI context> # Replace with your context
+----
+
+== 6. Review results in CircleCI’s web app
+
+Here is an overview of the information you can expect to see in CircleCI’s web app when running a workflow with an evaluation job.
+
+*Evaluation results*
+
+* Your evaluation step details can display a link to the results on your 3rd party LLM evaluations provider. If you need to review them, you can navigate to them directly.
++
+image::/docs/assets/img/docs/llmops/eval-job-run-eval-step.png[Evaluations Job Step Details: Task Evals]
+
+*Evaluation test results*
+
+* The step details will display results for all assertions
++
+image::llmops/eval-job-eval-test-step.png[Evaluation testing: Job Step Details]
+
+* The tests tab will surface failed evaluation tests
++
+image::llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
+
+== Examples
+
+=== Example pipeline configuration
+Here’s an example of a pipeline configuration set up with the CircleCI evals orb and job. In the following pipeline configuration example, the job `eval-test` will:
+
+* Checkout the project repository
+* Run LLM evaluations and store the results
+* Run evaluations testing
+
+[source ,yaml]
+----
+version: 2.1
+orbs:
+  evals: circleci/evals@2.0.0
+
+jobs:
+  eval-test:
+    docker:
+      - image: cimg/python:stable
+	steps:
+		- checkout # Checkout project repository
+		- run: python evals.py > eval-results.json # Run evals and output results for the evaluation test
+		- evals/test: # Invoke evaluation test
+		    name: Run evaluation test
+		    assertions: .circleci/eval-test.json # Path to evaluation test suite
+		    metrics: eval-results.json # Path to evaluation results file
+		    results: eval-test-results.xml # Path to stored test results
+workflows:
+  eval-test-workflow:
+    jobs:
+      - eval-test
+          context:
+            - openai-4o
+----
+
+
+=== Example evaluation results
+
+Here is an example of evaluation results `eval-results.json` provided to CircleCI as metrics.
+
+[source ,json]
+----
+{
+  "correctness": 0.99,
+  "helpfulness": 0.95,
+  "maliciousness": 0.95,
+  "relevance": 0.98,
+  "labels": [
+    "CORRECT",
+    "ACCURATE",
+    "NOT HARMFUL"
+  ]
+}
+
+----
+
+=== Example evaluation test
+
+Here is an example of an evaluation test suite. It includes five test cases:
+
+* **Correctness**: Ensure the correctness metric is above an acceptable threshold, which is 0.9.
+* **Helpfulness**: Ensure the helpfulness metric is above an acceptable threshold, which is 0.9.
+* **Maliciousness**: Ensure the maliciousness metric is above an acceptable threshold, which is 0.9.
+* **Relevance**: Ensure the relevance metric is above an acceptable threshold, which is 0.95.
+* **Labels**: Ensure the first element in the labels array is equal to the specified string.
+
+[source ,json]
+----
+{
+  "correctness" : "correctness > 0.9"
+  "helpfulness" : "helpfulness > 0.9"
+  "maliciousness": "maliciousness > 0.9"
+  "relevance" : "relevance > 0.95"
+  "labels": “labels[0] == \”CORRECT\””
+}
+
+----
+

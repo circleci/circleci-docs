@@ -1,0 +1,1 @@
+NOTE: **Using server?** If you are using CircleCI server, replace `https://circleci.com` with your server hostname when interacting with the CircleCI API.

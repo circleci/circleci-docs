@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Add additional SSH keys to CircleCI
 :page-layout: classic-docs
@@ -14,7 +13,7 @@ contentTags:
 
 Add additional SSH keys to your project for access to deploy other services or to write to, or checkout code from other repositories.
 
-If you want to set up an SSH key in order to checkout code from additional repositories in GitHub (xref:github-integration#[GitHub OAuth app only]) or Bitbucket within a job, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket] integration pages.  If you need additional SSH keys to access other services and your org is set up to the use xref:github-integration#[GitHub OAuth app] or Bitbucket, follow the steps below.
+If you want to set up an SSH key in order to checkout code from additional repositories in GitHub (xref:github-integration#[GitHub OAuth app only]) or Bitbucket Cloud within a job, refer to the xref:github-integration#enable-your-project-to-check-out-additional-private-repositories[GitHub OAuth app] or xref:bitbucket-integration#enable-your-project-to-check-out-additional-private-repositories[Bitbucket Cloud] integration pages.  If you need additional SSH keys to access other services and your org is set up to the use xref:github-integration#[GitHub OAuth app] or Bitbucket Cloud, follow the steps below.
 
 You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
 
@@ -32,23 +31,24 @@ See the following VCS-specific docs for additional details on creating SSH keys:
 
 CircleCI cannot decrypt SSH keys, therefore every new key must have an empty passphrase. The below examples are for macOS.
 
-. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
-. In the CircleCI application, go to your project's settings by clicking the *Project Settings* button (top-right on the *Pipelines* page of the project).
-. On the *Project Settings* page, click on *SSH Keys*.
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
+. In the sidebar menu, select *SSH Keys*.
 . Scroll down to the *Additional SSH Keys* section.
 +
 If you have a GitLab integration, you will find that an additional SSH key already exists. This was created automatically by CircleCI during the project creation process. This key is used to checkout your code so it should not be removed.
-. Click the *Add SSH Key* button.
+. Select *Add SSH Key*.
 . In the *Hostname* field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
 . In the *Private Key* field, paste the SSH key you are adding.
-. Click the *Add SSH Key* button.
+. Select *Add SSH Key*.
 
 [#add-ssh-keys-to-a-job]
 == 2. Add SSH keys to a job
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add_ssh_keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint can be SHA256 or MD5. SHA256 fingerprints should be prefixed with `SHA256:` and MD5 fingerprints should include the colons between character pairs. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
+To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add-ssh-keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint can be SHA256 or MD5. SHA256 fingerprints should be prefixed with `SHA256:` and MD5 fingerprints should include the colons between character pairs. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
 
 CAUTION: **Using server?** Only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 
@@ -79,7 +79,8 @@ If you need to add multiple SSH keys with blank hostnames to your project, you w
 [#see-also]
 == See also
 
-* xref:github-integration#[GitHub OAuth Integration]
-* xref:github-apps-integration#[GitHub Apps Integration]
-* xref:bitbucket-integration#[Bitbucket Integration]
-* xref:gitlab-integration#[GitLab CI Integration]
+* xref:github-integration#[GitHub OAuth app integration]
+* xref:github-apps-integration#[GitHub App integration]
+* xref:bitbucket-integration#[Bitbucket integration]
+* xref:bitbucket-data-center-integration#[Bitbucket Data Center integration]
+* xref:gitlab-integration#[GitLab integration]
