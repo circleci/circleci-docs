@@ -185,6 +185,13 @@ curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/
 
 For more information on using custom and outbound webhooks, see the xref:webhooks#[Use webhooks to integrate with services] page. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
+[NOTE]
+====
+When handling custom webhook requests, we use the "config branch" and "checkout branch" fields (`config_ref` and `checkout_ref` in the API) to determine which commits should be used for config and code checkout. This information is retrieved from link:https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit[GitHub's API].
+
+Since GitHub does not provide documented consistency guarantees for their API responses, there can be a brief delay (typically seconds) between when a commit is pushed and when the API returns the updated reference, especially with larger repositories. As a result, when fetching a branch reference, you may receive a slightly outdated commit rather than the most recent one.
+====
+
 [#trigger-a-pipeline-from-vs-code-with-unversioned-config]
 == Trigger a pipeline from VS Code with unversioned config
 
