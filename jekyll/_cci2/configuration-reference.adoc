@@ -2160,12 +2160,29 @@ The Workflows `version` field is used to issue warnings for deprecation or break
 | Should currently be `2`
 |===
 
+[,yml]
+----
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - my-job
+----
+
 '''
 
 [#workflowname]
 === *<``workflow_name``>*
 
 A unique name for your workflow.
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job
+----
 
 '''
 
@@ -2407,6 +2424,23 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
 A job name that exists in your `config.yml`.
 
+[,ym]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/node:20.18.1
+    steps:
+      - run: echo "Hello World"
+
+workflows:
+  my-workflow:
+    jobs:
+      - my-job
+----
+
 '''
 ====== `serial-group`
 
@@ -2457,6 +2491,7 @@ include::../_includes/snippets/orchestration-examples/serial-group.yml[]
 ----
 
 For more information, see the xref:controlling-serial-execution-across-your-organization#[Controlling serial execution across your organization] page.
+
 '''
 
 [#requires]
@@ -2525,6 +2560,15 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times, and a job requires one of the duplicate jobs, this key is required. (2.1 only)
 |===
 
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job:
+          name: my-alternative-job-name
+----
+
 '''
 
 [#context]
@@ -2542,6 +2586,28 @@ Jobs may be configured to use global environment variables set for an organizati
 | String/List
 | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
 |===
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job:
+          context: org-global
+----
+
+It is also possible to use a list of contexts, as follows:
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job:
+          context:
+            - org-global
+            - project-global
+----
 
 '''
 
