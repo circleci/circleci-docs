@@ -15,14 +15,14 @@ The https://circleci-public.github.io/circleci-cli/[CircleCI command line interf
 
 Some of the things you can do with the CLI include:
 
-* link:/docs/how-to-use-the-circleci-local-cli/#validate-a-circleci-config[Debug and validate your CircleCI configuration]
-* link:/docs/how-to-use-the-circleci-local-cli/#run-a-job-in-a-container-on-your-machine[Run jobs locally]
+* xref:how-to-use-the-circleci-local-cli#validate-a-circleci-config[Debug and validate your CircleCI configuration]
+* xref:how-to-use-the-circleci-local-cli#run-a-job-in-a-container-on-your-machine[Run jobs locally]
 * Query CircleCI's API
-* link:/docs/how-to-use-the-circleci-local-cli/#orb-development-kit[Create, publish, view, and manage orbs]
-* link:/docs/how-to-use-the-circleci-local-cli/#context-management[Manage contexts]
-* link:/docs/how-to-use-the-circleci-local-cli/#test-splitting[Split your tests] to run across link:/docs/parallelism-faster-jobs/[parallel environments] to reduce pipeline duration
+* xref:how-to-use-the-circleci-local-cli#orb-development-kit[Create, publish, view, and manage orbs]
+* xref:how-to-use-the-circleci-local-cli#context-management[Manage contexts]
+* xref:how-to-use-the-circleci-local-cli#test-splitting[Split your tests] to run across link:/docs/parallelism-faster-jobs/[parallel environments] to reduce pipeline duration
 
-This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, link:{{site.baseurl}}/concepts[CircleCI's concepts]. You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
+This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, xref:concepts#[CircleCI's concepts]. You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
 
 [#installation]
 == Installation

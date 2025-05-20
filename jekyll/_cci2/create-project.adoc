@@ -153,7 +153,7 @@ For guidance on creating a `config.yml` file, see the following pages:
 [.tab.create-project.Bitbucket_Data_Center]
 --
 
-{% include snippets/bitbucket-data-center-closed-preview.adoc %}
+include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 
 Follow these steps to create a new project in CircleCI:
 

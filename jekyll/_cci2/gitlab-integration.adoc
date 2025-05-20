@@ -88,7 +88,7 @@ gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nO
 
 Follow the steps on the **Create New Project** page:
 
-image::{{site.baseurl}}/assets/img/docs/gl-sm-create-project.png[Create a new project in a self-managed org]
+image::gl-sm-create-project.png[Create a new project in a self-managed org]
 
 . Enter your self-managed instance URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`. Select **Verify**.
 
@@ -137,7 +137,7 @@ When you commit this change in your repository, you should see the pipeline trig
 
 Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+image::gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
 Editing an existing CircleCI configuration within the web app is not currently available. You may make further changes to the config in your GitLab repository.
 
@@ -229,7 +229,7 @@ For GitLab Self-managed organizations, you may connect additional self-managed i
 
 . Navigate to **Integrations** within **Organization Settings** to add a new instance.
 +
-image::{{site.baseurl}}/assets/img/docs/gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
+image::gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
 
 . You will need to enter the instance URL, as described in the xref:#sign-up[Sign up] section above.
 
@@ -259,7 +259,7 @@ CircleCI users have different abilities depending on assigned roles in a particu
 
 In the **User Settings** section of your CircleCI user profile, you have the ability to enable multiple account integrations.
 
-image::{{site.baseurl}}/assets/img/docs/gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
+image::gl-ga/gitlab-ga-account-integrations.png[User account integrations page]
 
 The ability to connect to multiple account integrations on CircleCI allows you to:
 
