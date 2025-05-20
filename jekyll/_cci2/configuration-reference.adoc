@@ -110,6 +110,8 @@ Use the `orbs` key to reference or define reusable configuration blocks (orbs) f
 
 The following example uses the `node` orb that exists in the certified `circleci` namespace. Refer to the Node orb page in the https://circleci.com/developer/orbs/orb/circleci/node[Orb Registry] for more examples and information.
 
+*Example:*
+
 [,yaml]
 ----
 version: 2.1
@@ -649,6 +651,8 @@ A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavio
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
 
+*Example:*
+
 [source,yaml]
 ----
 version: 2.1
@@ -717,12 +721,14 @@ jobs:
 [#aws-authentication]
 ===== AWS authentication
 
-Using an image hosted on https://aws.amazon.com/ecr/[AWS ECR] requires authentication using AWS credentials.
+Using an image hosted on https://aws.amazon.com/ecr/[AWS ECR] requires authentication using AWS credentials. The two configuration options are described in the following sections.
 
 [#oidc]
 ====== Use OIDC
 
 Authenticate using OpenID Connect (OIDC) using the `oidc_role_arn` field, as follows:
+
+*Example:*
 
 [,yaml]
 ----
@@ -740,6 +746,8 @@ For steps to get set up with OIDC to pull images from AWS ECR, see the xref:pull
 ====== Use environment variables
 
 By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the `aws_auth` field as in the following example:
+
+*Example:*
 
 [,yaml]
 ----
@@ -808,7 +816,7 @@ jobs:
 '''
 
 [#available-linux-machine-images-cloud]
-===== Available Linux `machine` images
+===== Linux `machine` images
 
 *Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
@@ -822,14 +830,14 @@ The machine executor supports xref:docker-layer-caching#[Docker Layer Caching], 
 '''
 
 [#available-linux-machine-images-server]
-===== Available Linux `machine` images on server
+===== Linux `machine` images on server
 
 If you are using CircleCI server, contact your system administrator for details of available Linux machine images.
 
 '''
 
 [#available-linux-gpu-images]
-===== Available Linux GPU `machine` images
+===== Linux GPU `machine` images
 
 When using the Linux xref:using-gpu#[GPU executor], the available images are:
 
@@ -839,7 +847,7 @@ When using the Linux xref:using-gpu#[GPU executor], the available images are:
 '''
 
 [#available-android-machine-images]
-===== Available Android `machine` images
+===== Android `machine` images
 
 CircleCI supports running jobs on Android for testing and deploying Android applications.
 
@@ -862,7 +870,7 @@ For examples, refer to the xref:android-machine-image#[Using Android Images with
 '''
 
 [#available-windows-machine-images-cloud]
-===== Available Windows `machine` images
+===== Windows `machine` images
 
 *Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Windows machine images that can be specified in the `image` field.
 
@@ -878,14 +886,14 @@ Alternatively, use the link:https://circleci.com/developer/orbs/orb/circleci/win
 '''
 
 [#available-windows-machine-images-server]
-===== Available Windows `machine` images on server
+===== Windows `machine` images on server
 
 If you are using CircleCI server, contact your system administrator for details of available Windows machine images.
 
 '''
 
 [#available-windows-gpu-image]
-===== Available Windows GPU `machine` image
+===== Windows GPU `machine` image
 
 When using the Windows xref:using-gpu#[GPU executor], the available image is:
 
@@ -1318,7 +1326,9 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 |===
 
-Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell:
+Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell.
+
+*Example:*
 
 [,yml]
 ----
@@ -1360,6 +1370,8 @@ Exit immediately if any of the following exits with a non-zero status:
 
 In the previous example, `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
 
+*Example:*
+
 [,yml]
 ----
 - run:
@@ -1381,7 +1393,7 @@ In the previous example, `mkdir` failed to create a directory and returned a non
 
 If `pipefail` is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
-For example:
+*Example:*
 
 [,yml]
 ----
@@ -1403,7 +1415,9 @@ For more information, see the xref:using-shell-scripts#[Using Shell Scripts] doc
 [#background-commands]
 ====== _Background commands_
 
-The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the configuration for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
+The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the configuration for running the X virtual framebuffer in the background which is commonly required to run Selenium tests.
+
+*Example:*
 
 [,yml]
 ----
@@ -1420,7 +1434,9 @@ The `background` attribute enables you to configure commands to run in the backg
 [#shorthand-syntax]
 ====== _Shorthand syntax_
 
-`run` has a very convenient shorthand syntax:
+`run` has a very convenient shorthand syntax.
+
+*Example:*
 
 [,yml]
 ----
@@ -1453,6 +1469,8 @@ The `when` attribute accepts the following values:
 
 NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a *step has failed* (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
 
+*Example:*
+
 [,yml]
 ----
 - run:
@@ -1468,7 +1486,7 @@ NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always
 
 A job can exit without failing by using `run: circleci-agent step halt`. However, if a step within the job is already failing then the job will continue to fail. This can be useful in situations where jobs need to conditionally execute.
 
-Here is an example where `halt` is used to avoid running a job on the `develop` branch:
+*Example:* `halt` is used to avoid running a job on the `develop` branch:
 
 [,yml]
 ----
@@ -1579,7 +1597,9 @@ If `path` already exists and is:
 * A git repository - step will not clone whole repository, instead will fetch origin
 * NOT a git repository - step will fail.
 
-In the case of `checkout`, the step type is just a string with no additional attributes:
+In the case of `checkout`, the step type is just a string with no additional attributes.
+
+*Example:*
 
 [,yml]
 ----
@@ -1638,6 +1658,7 @@ Allows Docker commands to be run locally. See xref:building-docker-images#[Runni
 | Version string of Docker you would like to use (default: `24.0.9`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
 |===
 
+*Example:*
 
 [,yaml]
 ----
@@ -1735,7 +1756,7 @@ While choosing suitable templates for your cache `key`, keep in mind the followi
 * Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 * Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 
-*Example:*
+*Examples:*
 
 [,yml]
 ----
@@ -1745,10 +1766,6 @@ While choosing suitable templates for your cache `key`, keep in mind the followi
       - /home/ubuntu/.m2
 ----
 
-
-
-
-
 [,yml]
 ----
 - save_cache:
@@ -1757,8 +1774,6 @@ While choosing suitable templates for your cache `key`, keep in mind the followi
       - node_modules/workspace-a
       - node_modules/workspace-c
 ----
-
-
 
 [NOTE]
 ====
@@ -1799,7 +1814,7 @@ A key is searched against existing keys as a prefix.
 
 NOTE: When there are multiple matches, the *most recent match* will be used, even if there is a more precise match.
 
-For example:
+*Example:*
 
 [,yml]
 ----
@@ -1846,8 +1861,6 @@ A path is not required here because the cache will be restored to the location f
     paths:
       - /foo
 ----
-
-
 
 '''
 
@@ -1967,7 +1980,7 @@ Workspace storage retention can be customized on the https://app.circleci.com/[C
 
 The root key is a directory on the container which is taken to be the root directory of the workspace. The path values are all relative to the root.
 
-*Example for root Key*
+*Example for root Key:*
 
 For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
 
@@ -1987,7 +2000,7 @@ After this step completes, the following directories are added to the workspace:
 /tmp/dir/baz
 ----
 
-*Example for paths Key*
+*Example for paths Key:*
 
 [,yml]
 ----
@@ -3196,6 +3209,8 @@ for its `pattern`. A full match pattern must be provided, prefix matching is not
 
 NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
+*Example:*
+
 [,yaml]
 ----
 workflows:
@@ -3215,8 +3230,6 @@ You can find usage examples on the xref:orchestration-cookbook#["Orchestration c
 == Example full configuration
 
 include::../_includes/partials/notes/docker-auth.adoc[]
-
-
 
 [,yaml]
 ----
