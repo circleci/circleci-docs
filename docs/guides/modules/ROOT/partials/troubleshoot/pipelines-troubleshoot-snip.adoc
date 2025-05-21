@@ -27,7 +27,7 @@ If your scheduled pipeline is not running, verify the following things:
 
 In the CircleCI application, check the individual job and workflow views for error messages. More often than not, the error is because of formatting errors in your `.circleci/config.yml` file.
 
-See the xref:introduction-to-yaml-configurations#[YAML Introduction] page for more details.
+See the xref:guides:getting-started:introduction-to-yaml-configurations.adoc#[YAML Introduction] page for more details.
 
 After checking your `.circleci/config.yml` for formatting errors, search for your issue in the link:https://support.circleci.com/hc/en-us[CircleCI support center].
 
@@ -39,7 +39,7 @@ A job might end up being queued because of a concurrency limit being imposed due
 [#why-are-my-jobs-queuing-performance-plan]
 === Why are my jobs queuing even though I am on the Performance Plan?
 
-In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:configuration-reference#resourceclass[Resource classes]. If you are experiencing queuing on your jobs, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request raises on these limits.
+In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource classes]. If you are experiencing queuing on your jobs, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request raises on these limits.
 
 [#find-project-projects-dashboard]
 === Why can I not find my project on the Projects dashboard?
@@ -67,7 +67,7 @@ my-user/couchdb:1.6.1
 [#best-practice-for-specifying-image-versions]
 === What is the best practice for specifying image versions?
 
-It is best practice *not* to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `cimg/ruby:3.0.4-browsers`, to pin down the image and prevent upstream changes to your containers when the underlying base distribution changes. For example, specifying only `cimg/ruby:3.0.4` could result in unexpected changes from `browsers` to `node`. For more context, refer to xref:using-docker#docker-image-best-practices[Docker image best practices], and xref:circleci-images#best-practices[CircleCI image best practices].
+It is best practice *not* to use the `latest` tag for specifying image versions. It is also best practice to use a specific version and tag, for example `cimg/ruby:3.0.4-browsers`, to pin down the image and prevent upstream changes to your containers when the underlying base distribution changes. For example, specifying only `cimg/ruby:3.0.4` could result in unexpected changes from `browsers` to `node`. For more context, refer to xref:guides:execution-managed:using-docker.adoc#docker-image-best-practices[Docker image best practices], and xref:guides:execution-managed:circleci-images.adoc#best-practices[CircleCI image best practices].
 
 [#set-the-timezone-in-docker-images]
 === How can I set the timezone in Docker images?
@@ -80,7 +80,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image::guides:ROOT:your/primary-image:version-tag
+      - image:your-primary-image:version-tag
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

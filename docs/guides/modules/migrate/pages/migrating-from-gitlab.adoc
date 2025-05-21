@@ -1,0 +1,230 @@
+= Migrate from GitLab
+:page-platform: Cloud, Server v4+
+:page-description: An overview of how to migrate from GitLab to CircleCI.
+:icons: font
+:experimental:
+
+This document provides an overview of how to migrate from GitLab to CircleCI.
+
+TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.
+
+**Tips provided by ImagineX Consulting**
+
+[#sign-up-with-gitlab]
+== Sign up with GitLab
+
+Follow the steps on the link:/docs/first-steps/#github-gitlab-bitbucket-data-center[Sign Up and Try] page to connect your GitLab account with CircleCI, then follow the steps in the following sections to migrate your CI/CD setup to CircleCI.
+
+[#build-configuration]
+== Build configuration
+
+If you are using link:/docs/gitlab-integration/[GitLab's CI/CD], you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/config-intro/[here] to learn how to configure the `.config.yml` file.
+
+The GitLab and CircleCI configurations will be different. It may be helpful to have both GitLab and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+
+* https://docs.gitlab.com/ee/ci/yaml/[GitLab YML Reference]
+
+* https://circleci.com/docs/configuration-reference/[CircleCI YML Reference]
+
+[#configuration-comparison]
+== Configuration comparison
+
+include::guides:ROOT:partial$notes/docker-auth.adoc[]
+
+[.table.table-striped.table-migrating-page]
+[cols=2*, options="header,unbreakable,autowidth", stripes=even]
+[cols="5,5"]
+|===
+| GitLab | CircleCI
+
+2+| Defining a job that executes a single build step
+a|
+[source, yaml]
+----
+job1:
+  script: "execute-script-for-job1"
+----
+
+a|
+[source, yaml]
+----
+jobs:
+  job1:
+    steps:
+      - checkout
+      - run: "execute-script-for-job1"
+----
+
+2+| Specify a Docker image to use for a job.
+
+a|
+[source, yaml]
+----
+job1:
+  image: node:10
+----
+
+a|
+[source, yaml]
+----
+jobs:
+  job1:
+    docker:
+      - image: node:10
+----
+
+2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.
+
+a|
+[source, yaml]
+----
+job1:
+  stage: build
+  script: make build dependencies
+
+job2:
+  stage: build
+  script: make build artifacts
+
+job3:
+  stage: test
+  script: make test
+
+job4:
+  stage: deploy
+  script: make deploy
+
+stages:
+  - build
+  - test
+  - deploy
+----
+
+a|
+[source, yaml]
+----
+version: 2.1
+jobs:
+  job1:
+    steps:
+      - checkout
+      - run: make build dependencies
+  job2:
+    steps:
+      - run: make build artifacts
+  job3:
+    steps:
+      - run: make test
+  job4:
+    steps:
+      - run: make deploy
+
+workflows:
+  jobs:
+    - job1
+    - job2
+    - job3:
+        requires:
+          - job1
+          - job2
+    - job4:
+        requires:
+          - job3
+----
+
+
+
+2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/executor-intro/#section=configuration[execution environments documentation] for more information.
+
+a|
+[source, yaml]
+----
+ubuntu job:
+  tags:
+    - ubuntu
+  script:
+    - echo "Hello, $USER!"
+
+osx job:
+  tags:
+    - osx
+  script:
+    - echo "Hello, $USER!"
+----
+
+a|
+[source, yaml]
+----
+jobs:
+  ubuntu-job:
+    machine:
+      # The image uses the current tag, which always points to the most recent
+      # supported release. If stability and determinism are crucial for your CI
+      # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
+      ubuntu-2004:current
+    steps:
+      - checkout
+      - run: echo "Hello, $USER!"
+  osx-job:
+    macos:
+      xcode: 14.2.0
+    steps:
+      - checkout
+      - run: echo "Hello, $USER!"
+----
+
+
+2+| Cache Dependencies.
+
+a|
+[source, yaml]
+----
+image: node:latest
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+before_script:
+  - npm install
+
+test_async:
+  script:
+    - node ./specs/start.js
+----
+
+a|
+[source, yaml]
+----
+jobs:
+  test_async:
+    steps:
+      - restore_cache:
+          key: source-v1-{{ checksum "package.json" }}
+      - checkout
+      - run: npm install
+      - save_cache:
+          key: source-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: node ./specs/start.js
+----
+|===
+
+For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
+
+. https://circleci.com/docs/executor-intro/[Pick your executor]
+. https://circleci.com/docs/configuration-reference/#checkout[Checkout code]
+. https://circleci.com/docs/env-vars/[Environment variables] and https://circleci.com/docs/contexts/[Contexts]
+. Install dependencies, also see https://circleci.com/docs/caching/[Cache dependencies]
+. https://circleci.com/docs/configuration-reference/#docker[Service containers]
+. Run testing commands
+. https://circleci.com/docs/custom-images/[Custom convenience images]
+. https://circleci.com/docs/configuration-reference/#resourceclass[Resource classes]
+. https://circleci.com/docs/workflows/[Workflows]
+. https://circleci.com/docs/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/parallelism-faster-jobs/[parallelism]
+. https://circleci.com/docs/artifacts/[Artifacts]

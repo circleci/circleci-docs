@@ -1,0 +1,35 @@
+= Using branch filters
+:page-platform: Cloud, Server v4+
+:page-description: A how to guide for using branch fileters at the job level to simplify your CircleCI configuration.
+:icons: font
+:experimental:
+
+[#branch-filtering-for-job-steps]
+== Branch-filtering to control when job steps will run
+
+Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
+
+The following example shows using the xref:pipeline-variables.adoc#pipeline-values[pipeline value] `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
+
+include::guides:ROOT:partial$notes/docker-auth.adoc[]
+
+```yaml
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run: echo "I am on main"
+
+workflows:
+  my-workflow:
+    jobs:
+      - my-job
+```

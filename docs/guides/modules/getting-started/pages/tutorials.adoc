@@ -1,4 +1,3 @@
 = Getting started tutorials
 
 This section contains tutorials that help you get started with CircleCI.
-

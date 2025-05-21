@@ -15,7 +15,7 @@
             <img src="{{{@root.uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px] transform {{#if (not (has-active-child ./items)) }}-rotate-90{{/if}}">
           </button>
         {{/if}}
-        {{#if ./url}}
+        {{#if (and ./url (not (eq ./url @root.page.url)))}}
           <a class="nav-link hover:text-link-on-light {{#if (has-active-child ./items)}}text-accent-green font-medium md:text-inherit {{/if}}" href="
             {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
             {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>

@@ -1,0 +1,356 @@
+= CircleCI's self-hosted runner API
+:page-platform: Cloud, Server v4+
+:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
+:icons: font
+:experimental:
+
+This document contains all the external facing endpoints for the CircleCI's self-hosted runner API. This API is separate from the main CircleCI v2 API and is used for the management and execution of self-hosted runner jobs. It is hosted at `runner.circleci.com`
+
+[#authentication-methods]
+== Authentication methods
+
+The CircleCI's self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
+
+[#circle-token-personal-authentication]
+=== Circle-Token (personal authentication)
+
+This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Name
+| Description
+
+| Circle-Token header
+| Header that contains the `<circle-token>` used to authenticate the user.
+
+| HTTP Basic auth username
+| The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
+|===
+
+[#browser-session-authentication]
+=== Browser session authentication
+
+Ring-session sent through a cookie on the request. This authentication allows users that are already logged into CircleCI.com to access certain endpoints seamlessly.
+
+[#resource-class-authentication-token]
+=== Resource class token authentication
+
+This token is generated when creating a new resource class. This token is only displayed once when creating a resource class, and cannot be retrieved again. This token is used exclusively by the self-hosted runner agents for claiming tasks.
+
+[#supported-methods]
+==== Supported methods
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Name
+| Description
+
+| HTTP Bearer auth
+| The token that should be provided using the Bearer scheme.
+|===
+
+[#endpoints]
+== Endpoints
+
+[#get-api-v3-runner]
+=== `GET /api/v3/runner`
+
+Lists the available self-hosted runners based on the specified parameters. It is mandatory to use one parameter to filter results.
+
+[#get-api-v3-runner-authentication-methods]
+==== Authentication methods
+
+* Circle-Token (personal authentication)
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
+
+[#get-api-v3-runner-request]
+===== Request
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Input
+| Required
+| Description
+
+| `resource-class`
+| string
+| query
+| false
+| filters the list of self-hosted runners by specific resource class.
+
+| `namespace`
+| string
+| query
+| false
+| filters the list of self-hosted runners by namespace.
+|===
+
+[#get-api-v3-runner-examples]
+==== Examples
+
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
+```
+
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
+    -H "Circle-Token: secret-token"
+```
+
+[#get-api-v3-runner-response]
+==== Response
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Status
+| Description
+| Format
+
+|`200`
+|List of agents
+|JSON
+|===
+
+[#get-api-v3-runner-response-schema]
+==== Response schema
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Required
+| Description
+
+|`items`
+|[object]
+|true
+|array containing the self-hosted runners
+
+|`resource_class`
+|string
+|true
+|self-hosted runner resource class
+
+|`hostname`
+|string
+|true
+|self-hosted runner hostname
+
+|`name`
+|string
+|true
+|self-hosted runner name
+
+|`first_connected`
+|string (date-time)
+|true
+|first time the self-hosted runner was connected
+
+|`last_connected`
+|string (date-time)
+|true
+|last time the self-hosted runner was connected
+
+|`last_used`
+|string (date-time)
+|true
+|last time the self-hosted runner was used to run a job
+
+|`version`
+|string
+|true
+|version of the machine runner launch-agent running
+|===
+
+[#get-api-v3-runner-example]
+==== Example
+
+```json
+{
+    "items": [
+        {
+            "resource_class": "test-namespace/test-resource",
+            "hostname": "bobby",
+            "name": "bobby-sue",
+            "first_connected": "2020-05-15T00:00:00Z",
+            "last_connected": "2020-05-16T00:00:00Z",
+            "last_used": "2020-05-17T00:00:00Z",
+            "version": "5.4.3.2.1"
+        }
+    ]
+}
+```
+
+---
+
+[#get-api-v3-tasks]
+=== `GET /api/v3/runner/tasks`
+
+Get the number of unclaimed tasks for a given resource class.
+
+[#get-api-v3-tasks-authentication-methods]
+==== Authentication methods
+
+* Circle-Token (personal authentication)
+* Browser session authentication
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
+
+[#get-api-v3-tasks-request]
+==== Request
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Input
+| Required
+| Description
+
+| `resource-class`
+| string
+| query
+| true
+| filters tasks by specific resource class.
+|===
+
+[#get-api-v3-tasks-examples]
+==== Examples
+
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
+```
+
+[#get-api-v3-tasks-response]
+==== Response
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Status
+| Description
+| Format
+
+|`200`
+|Number of unclaimed tasks
+|JSON
+|===
+
+[#get-api-v3-tasks-response-schema]
+==== Response schema
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Required
+| Description
+
+|`unclaimed_task_count`
+|int
+|true
+|number of unclaimed tasks
+|===
+
+[#get-api-v3-tasks-example]
+==== Example
+
+```json
+{
+    "unclaimed_task_count": 42
+}
+```
+
+---
+
+[#get-api-v3-tasks-running]
+=== `GET /api/v3/runner/tasks/running`
+
+Get the number of running tasks for a given resource class.
+
+[#get-api-v3-tasks-running-authentication-methods]
+==== Authentication methods
+
+* Circle-Token (personal authentication)
+* Browser Session Authentication
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com.
+
+[#get-api-v3-tasks-running-request]
+==== Request
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Input
+| Required
+| Description
+
+| `resource-class`
+| string
+| query
+| true
+| filters tasks by specific resource class.
+|===
+
+[#get-api-v3-tasks-running-examples]
+==== Examples
+
+```shell
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
+```
+
+[#get-api-v3-tasks-running-response]
+==== Response
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Status
+| Description
+| Format
+
+|`200`
+|Number of running tasks
+|JSON
+|===
+
+[#get-api-v3-tasks-running-response-schema]
+==== Response schema
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Required
+| Description
+
+|`running_runner_tasks`
+|int
+|true
+|number of running tasks
+|===
+
+[#get-api-v3-tasks-running-example]
+==== Example
+
+```json
+{
+    "running_runner_tasks": 42
+}
+```

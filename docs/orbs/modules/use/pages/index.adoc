@@ -1,1 +1,3 @@
 = Use Orbs
+
+Use orbs to simplify and reuse config across projects.

@@ -1,5 +1,5 @@
 = Version control system integration overview
-:platform: Cloud, Server
+:page-platform: Cloud, Server
 :description: An overview guide to the version control systems you can integrate with CircleCI.
 :icons: font
 :experimental:
@@ -17,7 +17,7 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * Bitbucket Cloud
 * Bitbucket Data Center
 +
-include::ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
+include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 
 link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
 
@@ -32,7 +32,7 @@ The following tables show feature support per VCS for **CircleCI cloud**, along 
 * Features that are supported for a VCS integration type are indicated with [.circle-green]#**Yes**#.
 * Features that are not supported are indicated with [.circle-red]#**No**#.
 
-include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
 === Code checkout and repository integration
 
@@ -377,4 +377,3 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-green]#**Yes**#
 
 |===
-

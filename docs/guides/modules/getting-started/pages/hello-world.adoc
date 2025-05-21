@@ -10,9 +10,9 @@ This page provides configuration examples to get started with a basic pipeline u
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
-* Follow the xref:create-a-project.adoc[Create a Project] guide to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
+* Follow the xref:create-project.adoc[Create a Project] guide to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
 
-include::ROOT:partial$notes/docker-auth.adoc[]
+include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
 [#echo-hello-world-cloud]
 == Echo hello world
@@ -271,7 +271,7 @@ workflows:
 ----
 --
 
-image::ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
+image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 

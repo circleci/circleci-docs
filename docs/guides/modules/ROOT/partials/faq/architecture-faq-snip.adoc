@@ -1,21 +1,21 @@
 [#operating-systems-circleci-20-support]
 === What operating systems does CircleCI support?
 
-- xref:using-linuxvm#[Linux]
-- xref:android-machine-image#[Android]
-- xref:using-macos#[macOS]
-- xref:testing-ios#[iOS]
-- xref:using-windows#[Windows]
+- xref:guides:execution-managed:using-linuxvm.adoc#[Linux]
+- xref:guides:execution-managed:android-machine-image.adoc#[Android]
+- xref:guides:execution-managed:using-macos.adoc#[macOS]
+- xref:guides:test:testing-ios.adoc#[iOS]
+- xref:guides:execution-managed:using-windows.adoc#[Windows]
 
 [#cpu-architecture-circleci-support]
 === Which CPU architectures does CircleCI support?
 
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:using-arm#[Arm resources] for machine jobs.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:guides:execution-managed:using-arm.adoc#[Arm resources] for machine jobs.
 
 [#ipv6-in-tests]
 === Can I use IPv6 in my tests?
 
-You can use the xref:configuration-reference#machine[Machine executor] for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+You can use the xref:reference:ROOT:configuration-reference.adoc#machine[Machine executor] for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
 Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 

@@ -6,3 +6,5 @@ ui/build/
 ui/node_modules/
 ui/public/
 ui/**/.DS_Store
+extensions/.temp
+.env

@@ -54,7 +54,7 @@ The steps in this section show how an org admin can invite teammates to join the
 
 [.tab.invite.GitHub_App_/_GitLab_/_Bitbucket_Data_Center]
 --
-include::ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
+include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Navigate to menu:Organization Settings[People], then select btn:[Invite].

@@ -1,0 +1,37 @@
+<div class="mt-3 md:mt-0 w-fit max-w-full px-4 flex border border-vapor rounded-xl items-stretch justify-between {{#if class}}{{class}}{{/if}}">
+  {{#with (get-page-meta page)}}
+    
+    <div class="flex items-center pr-3 py-2">
+      <!-- Article Last Updated -->
+      {{#if lastUpdate}}
+        <a href="{{commitUrl}}" class="flex min-w-fit items-center text-link-on-light">
+          <img src="{{{@root.uiRootPath}}}/img/calendar.svg" alt="Language Icon" class="inline-block h-5 w-5 mr-2">
+          {{format-time-ago lastUpdate}}
+        </a>
+        <span class="text-xl px-2">&middot;</span>
+      {{/if}}
+      <!-- Read Time -->
+      {{#if readingTime}}
+        <span class="flex min-w-fit items-center">
+          {{readingTime}}
+        </span>
+      {{/if}}
+    </div>
+  {{/with}}
+  
+  <!-- Platform Tags -->
+  {{#if page.attributes.platform}}
+    <div class="flex items-center min-w-fit space-x-1 px-3 border-l border-inherit">
+      {{#each (split page.attributes.platform ',')}}
+        <span class=" text-[10px] text-terminal-black border rounded-full py-1 px-1.5">{{this}}</span>
+      {{/each}}
+    </div>
+  {{/if}}
+  <!-- Edit Page -->
+  {{#if page.editUrl}}
+    <a class="flex items-center pl-3 min-w-fit border-l border-inherit text-link-on-light" href="{{page.editUrl}}">
+      Contribute
+      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="ml-2 inline-block w-[13px] h-[13px]">
+    </a>
+  {{/if}}
+</div>

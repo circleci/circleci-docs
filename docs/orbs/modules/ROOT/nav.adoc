@@ -1,3 +1,5 @@
-* xref:index.adoc[Package and re-use config with orbs]
+* xref:index.adoc[Orbs]
 ** xref:use:index.adoc[Use Orbs]
+*** xref:use:orb-intro.adoc[Introduction to using orbs]
+*** xref:use:orbs-faq.adoc[Orbs FAQ]
 ** xref:author:index.adoc[Author Orbs]

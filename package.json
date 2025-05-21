@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
   "scripts": {
-    "start:dev": "npm run build:ui && gulp preview:docs",
-    "preview:ui": "gulp preview:ui",
+    "start:dev": "dotenvx run -- npm run build:ui && gulp preview:docs",
+    "preview:ui": "dotenvx run -- gulp preview:ui",
     "build:ui": "gulp build:ui",
     "build:docs": "npm run build:ui && gulp build:docs"
   },
@@ -15,9 +15,16 @@
   "license": "",
   "type": "commonjs",
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.40.0",
     "@antora/cli": "3.1.10",
     "@antora/site-generator": "3.1.10",
     "browser-sync": "^3.0.4",
     "gulp": "^5.0.0"
+  },
+  "dependencies": {
+    "@asciidoctor/tabs": "^1.0.0-beta.6",
+    "algoliasearch": "^5.25.0",
+    "node-html-parser": "^7.0.1",
+    "reading-time": "^1.5.0"
   }
 }

@@ -1,6 +1,6 @@
 name: server-admin
-title: Server
-version: '0.1'
-display_version: 'latest'
+title: Server Administration
+version: draft-server-v4.8
+display_version: DRAFT DRAFT DRAFT DRAFT Server v4.8
 nav:
 - modules/ROOT/nav.adoc

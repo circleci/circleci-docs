@@ -1,1 +1,6 @@
-= Installation
+= Installing CircleCI server
+
+This section contains information about installing CircleCI Server.
+
+== Prerequisites
+

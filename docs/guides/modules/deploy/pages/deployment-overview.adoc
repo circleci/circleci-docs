@@ -1,0 +1,112 @@
+= Deployment overview
+:page-platform: Cloud, Server v4+
+:page-description: Learn the basics of CircleCI deployment.
+:icons: font
+:experimental:
+
+[#introduction]
+== Introduction
+
+Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience.
+With CircleCI, you can deploy to virtually any target.
+
+You can also configure CircleCI to integrate with other services for:
+
+* QA and testing
+* Feature management
+* Deployment strategies such as blue-green or canary deployment
+
+Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
+
+NOTE: **Deploy to Kubernetes?** Refer to our xref:deploy:deploys-overview.adoc#[Deploys overview] page to start managing your deployments in the CircleCI web app.
+
+[#the-basics-of-deployment]
+== The basics of deployment
+
+Here are the core concepts you need to get a deployment set up:
+
+* **Deployment job**: To deploy your application, add a xref:orchestrate:jobs-steps.adoc#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
++
+TIP: Add a deployment log step to your deployment job to **view a log of deployments** in the CircleCI web app. See the xref:deploy:configure-deploy-markers.adoc#[Deployment markers] guide to learn more.
+
+* **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
+Environment variables can be:
+** Defined within your configuration
+** Added to the project itself through the CircleCI web app:
+*** Add project-level xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[environment variables]
+***  Add project-level xref:integration:add-ssh-key.adoc#[SSH keys].
+
+* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[hold/approve] job in your workflow.
+This job will create a manual approval button visible in the CircleCI web app workflows map.
+
+If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc#[IP ranges] for your deployment job.
+
+[#using-orbs-to-simplify-deployment]
+== Using orbs to simplify deployment
+
+xref:orbs:use:orb-intro.adoc#[Orbs] are packages of reusable configuration.
+For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
+Orbs are available for many common deployment targets.
+
+For example, the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb] has a pre-configured `deploy` job that you can include in your configuration with the single line: `aws-code-deploy/deploy`. Orb jobs can be used once the orb has been invoked by adding the orbs stanza:
+
+```yaml
+version: 2.1
+
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@x.y
+  aws-cli: circleci/aws-cli@x.z
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          auth:
+            - aws-cli/setup
+          application-name: myApplication
+          bundle-bucket: myApplicationS3Bucket
+          bundle-key: myS3BucketKey
+          deployment-group: myDeploymentGroup
+          service-role-arn: myDeploymentGroupRoleARN
+```
+
+Under the hood, this orb creates, bundles, and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
+
+Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider xref:orbs:author:orb-author-intro.adoc#[authoring one]!
+
+[#using-images-to-simplify-deployment]
+== Using images to simplify deployment
+
+CircleCI provides maintained Docker images (convenience images) that contain the tools required for common deployment scenarios.
+Convenience images provide fast spin-up times, reliability, and stability.
+Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub] to learn more about each convenience image:
+
+- link:https://circleci.com/developer/images/image/cimg/deploy[`cimg/deploy`]
+- link:https://circleci.com/developer/images/image/cimg/aws[`cimg/aws`]
+- link:https://circleci.com/developer/images/image/cimg/azure[`cimg/azure`]
+- link:https://circleci.com/developer/images/image/cimg/gcp[`cimg/gcp`]
+
+[#next-steps]
+== Handling common deployment scenarios
+
+Use the following how-to guides to manage common deployment use cases:
+
+* For examples of deploying to Kubernetes, see the guides in the link:https://github.com/CircleCI-Public/cd-config-examples/blob/main/docs/cci_deploy/deployment_helm.md[Continuous deployment config examples] repo.
+* xref:deploy-to-amazon-sagemaker.adoc#[Deploy to Amazon SageMaker]
+* xref:deploy-android-applications.adoc#[Deploy Android applications]
+* xref:deploy-to-artifactory.adoc#[Deploy to Artifactory]
+* xref:deploy-to-aws.adoc#[Deploy to AWS]
+* xref:deploy-service-update-to-aws-ecs.adoc#[Deploy to AWS ECS]
+* xref:ecs-ecr.adoc#[Deploy to AWS ECR/ECS]
+* xref:deploy-to-azure-container-registry.adoc#[Deploy to Azure Container Registry]
+* xref:deploy-to-capistrano.adoc#[Deploy to Capistrano]
+* xref:deploy-to-cloud-foundry.adoc#[Deploy to Cloud Foundry]
+* xref:deploy-to-firebase.adoc#[Deploy to Firebase]
+* xref:deploy-to-google-cloud-platform.adoc#[Deploy to Google Cloud Platform]
+* xref:deploy-to-heroku.adoc#[Deploy to Heroku]
+* xref:deploy-ios-applications.adoc#[Deploy iOS applications]
+* xref:deploy-to-npm-registry.adoc#[Deploy to npm registry]
+* xref:deploy-over-ssh.adoc#[Deploy over SSH]
+* xref:integration:authorize-google-cloud-sdk.adoc#[Authorize Google Cloud SDK]
+* xref:publish-packages-to-packagecloud.adoc#[Publish packages to Packagecloud]
+
+Go to the link:https://circleci.com/developer/orbs[orbs registry] to simplify your configuration by using an orb for your deployment target.

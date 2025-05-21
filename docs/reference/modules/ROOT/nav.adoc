@@ -1,1 +1,10 @@
-* xref:index.adoc[Reference]
+* xref:config-homepage.adoc[Configuration]
+** xref:configuration-reference.adoc[Configuration reference]
+** xref:reusing-config.adoc[Reusable configuration reference]
+
+* xref:api-homepage.adoc[API reference]
+
+* xref:general-homepage.adoc[General reference]
+** xref:faq.adoc[Frequently asked questions]
+** xref:troubleshoot.adoc[Troubleshoot]
+** xref:variables.adoc[Project values and variables]

@@ -1,0 +1,78 @@
+= Examples and guides overview
+:page-platform: Cloud, Server v4+
+:page-description: Resources for learning CircleCI using examples.
+:icons: font
+:experimental:
+
+This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.
+
+If you are new to CircleCI, we recommend going through our xref:getting-started:getting-started.adoc#[Quickstart guide] for getting your first successful pipeline.
+
+For basic examples of adding pipeline jobs in a specific execution environment such as a Docker container or Linux VM, review our xref:getting-started:hello-world.adoc#[Hello World] page.
+
+[#languages]
+== Language guides
+
+To get a project up and running on CircleCI, see the following quickstart guides:
+
+* xref:getting-started:language-javascript.adoc#[Configure a Node.js application on CircleCI]
+* xref:getting-started:language-python.adoc#[Configure a Python application on CircleCI]
+* xref:getting-started:language-go.adoc#[Configure a Go application on CircleCI]
+
+We have created demo applications in various languages so you can learn by example. Each language listed below has an associated guide and public repository on GitHub.
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Language Guide
+| Framework
+| GitHub Repo Name
+
+| xref:getting-started:language-javascript.adoc#[Configuring a Node.js Application on CircleCI^]
+| Vue.js
+| link:https://github.com/CircleCI-Public/sample-javascript-cfd[sample-javascript-cfd]
+
+| xref:getting-started:language-python.adoc#[Configuring a Python Application on CircleCI^]
+| Flask
+| link:https://github.com/CircleCI-Public/sample-python-cfd[sample-python-cfd]
+
+| link:https://github.com/CircleCI-Public/sample-java-cfd/blob/master/README.md[Java]
+| Spring Boot
+| link:https://github.com/CircleCI-Public/sample-java-cfd[sample-java-cfd]
+
+| link:https://github.com/CircleCI-Public/sample-dotnet-cfd/blob/master/README.md[C#/.NET]
+| ASP.NET Core
+| link:https://github.com/CircleCI-Public/sample-dotnet-cfd[sample-dotnet-cfd]
+
+| link:https://github.com/CircleCI-Public/sample-monorepo-cfd/blob/master/README.md[Mono repo - Python backend and Node.js frontend]
+| Flask, Vue.js
+| link:https://github.com/CircleCI-Public/sample-monorepo-cfd[sample-monorepo-cfd]
+|===
+
+
+
+[#platforms]
+== Platform guides
+
+Use the tutorial associated with your platform to learn about the customization that is possible in a xref:reference:ROOT:configuration-reference.adoc#[`.circleci/config.yml`].
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Platform guide
+| Description
+
+| xref:execution-managed:hello-world-macos.adoc#example-application[macOS Project Tutorial]
+| Set up a macOS project in CircleCI.
+
+| xref:test:testing-ios.adoc#example-application[Testing iOS]
+| Set up and test iOS projects in CircleCI.
+
+| xref:execution-managed:hello-world-windows.adoc#example-application[Windows Project Tutorial]
+| Full example of setting up a .NET project in CircleCI.
+|===
+
+[#next-steps]
+== Next steps
+- Read the xref:sample-config.adoc#[Sample config.yml files] document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.
+- Refer to the xref:reference:ROOT:configuration-reference.adoc#[Configuration reference page] for detailed syntax.

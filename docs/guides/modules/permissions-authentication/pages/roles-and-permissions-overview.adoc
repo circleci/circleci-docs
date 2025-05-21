@@ -1,0 +1,515 @@
+= Roles and permissions
+:page-platform: Cloud
+:page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
+:icons: font
+:experimental:
+
+NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc#[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc#[GitHub App], the content on this page applies to you.
+
+Manage user access to organizations and projects with CircleCI roles and associated permissions. By default, users can access projects based on roles set at an organization level. For more granular control, you can assign roles at the project level. Manage roles for groups of users with xref:manage-groups.adoc#[groups].
+
+[#quickstart]
+== Quickstart
+
+For instructions on managing roles and permissions, see the xref:manage-roles-and-permissions.adoc#[Manage roles and permissions] page. For more information on managing project roles for groups of users, see the xref:manage-groups.adoc#[manage-groups] page.
+
+[#organization-role-permissions-matrix]
+== Organization role permissions matrix
+
+The table below shows the permissions associated with each CircleCI organization role:
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| ACTIONS
+
+3+^| ORGANIZATION ROLES
+
+|
+|
+|
+|
+
+| *Organization*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| Create namespace
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| Manage namespace
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View org settings
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Manage org settings
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View org access
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Manage org access
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View org credentials
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| View org policies
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Manage org policies
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View org connections
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Manage org connections
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| Manage org credentials
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View org audit logs
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View plan
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Manage plan
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Insights*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View org insights
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+| *Runner*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View runners
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Manage runners
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Projects*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View projects
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Create projects
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Manage project settings
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Contexts*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View contexts
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Use contexts
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Edit context variables
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Manage contexts
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+| *Orbs*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| Create/update orb
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View private orb
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Publish development orb
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Publish orb
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Webhooks*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View org webhooks
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Manage org webhooks
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View project webhooks
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Manage project webhooks
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Schedule*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View schedule
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Edit schedule
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Triggers*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View triggers
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Trigger re-run via the CircleCI web app
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Edit triggers
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Pipelines*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View pipelines
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Edit pipelines
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Releases*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| Create environment integration
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Delete environment integration
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| View environment integration
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Create environment integration token
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Revoke environment integration token
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| List environment integration token
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| View components
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| View releases
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+|===
+
+
+[#project-role-permissions-matrix]
+=== Project role permissions matrix
+
+The table below shows the permissions associated with each CircleCI project role:
+
+[.table.table-striped]
+[cols=4*, options="header"]
+|===
+| ACTIONS
+
+3+^| PROJECT ROLES
+
+|
+|
+|
+|
+
+| *Projects*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View projects
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| View project access
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| View project credentials
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Manage project
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Webhooks*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View project webhooks
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Manage project webhooks
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Schedule*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View schedule
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Edit schedule
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Triggers*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View triggers
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Trigger build
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Edit triggers
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Contexts*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View contexts
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Use contexts
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Edit context variables
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+^| Manage contexts
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Pipelines*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| View pipelines
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+
+^| Edit pipelines
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| *Releases*
+| *Admin*
+| *Contributor*
+| *Viewer*
+
+^| Restore component version
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Restart component
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Scale component
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Cancel release
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Promote release steps
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+^| Retry release
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+|===
+
+[#permissions-scope]
+== Permissions scope
+
+Your CircleCI roles and associated permissions are **not** derived from the permissions set in your VCS (version control system). Your CircleCI role permissions do **not** allow you to bypass permissions in the VCS.
+
+For example, you may be an _Organization Administrator_ within CircleCI, which gives you access to view and modify organization and project settings _within your CircleCI organization_. However, you will not be able to edit a project’s `.circleci/config.yml` hosted in your VCS without your user also having the write permissions _within that VCS's repository project_. Your CircleCI user’s VCS permissions are determined by its associated VCS identity.
+
+[#role-hierarchy]
+== Role hierarchy across groups and individuals
+
+Users can have roles assigned to them both individually and as part of a xref:manage-groups.adoc#[group]. The _highest_ role always applies. For example, if a user has the role of **admin** assigned for a project, and that user is also part of a group with the role of **contributor** for the project, the user will still have **admin** permissions for the project.
+
+[#next-steps]
+== Next steps
+
+* xref:manage-roles-and-permissions.adoc#[Manage roles and permissions]

@@ -1,0 +1,20 @@
+= Orb author FAQ
+:page-platform: Cloud, Server v4+
+:icons: font
+:page-description: This page answers the most frequently asked questions by orb authors.
+:experimental:
+
+This document describes various questions and technical issues that you may find helpful when authoring orbs.
+
+[#orb-author-faqs]
+== FAQs
+
+include::guides:ROOT:partial$faq/orb-author-faq-snip.adoc[]
+
+[#see-also]
+== See also
+- xref:orbs-best-practices.adoc#[Orbs best practices] for suggestions on creating a production-ready orb.
+- xref:orb-concepts.adoc#[Orbs concepts] for high-level information about CircleCI orbs.
+- xref:creating-orbs.adoc#[Orb publishing process] for information about orbs that you may use in your workflows and jobs.
+- xref:reference:ROOT:reusing-config.adoc#[Orbs reference] for examples of reusable orbs, commands, parameters, and executors.
+- xref:testing-orbs.adoc#[Orb testing methodologies] for information on how to test orbs you have created.

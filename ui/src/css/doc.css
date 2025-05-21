@@ -368,6 +368,79 @@
   margin: 1.4rem 0 0;
 }
 
+.doc .admonitionblock > table {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 1rem;
+  box-sizing: border-box;
+  padding: 1rem 1rem 0.75rem;
+}
+
+.doc .admonitionblock > table > tbody > tr {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+
+.doc .admonitionblock.note > table {
+  border-color: #1A66F7;
+}
+
+.doc .admonitionblock.tip > table {
+  border-color: #697387;
+}
+
+.doc .admonitionblock.warning > table {
+  border-color: #BF8532;
+}
+
+.doc .admonitionblock.important > table {
+  border-color: #CC4242;
+}
+
+.doc .admonitionblock.caution > table {
+  border-color: #CC4242;
+}
+
+.doc .admonitionblock td.icon {
+  flex: 0 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.doc .admonitionblock td.icon i {
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+
+.doc .admonitionblock td.icon i.icon-caution {
+  background: url('../img/caution_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-important {
+  background: url('../img/caution_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-note {
+  background: url('../img/note_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-tip {
+  background: url('../img/tip_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-warning {
+  background: url('../img/alert_icon.svg') no-repeat center / contain;
+}
+
+
 .doc .admonitionblock p,
 .doc .admonitionblock td.content {
   font-size: calc(16 / var(--rem-base) * 1rem);
@@ -382,70 +455,10 @@
   font-size: calc(15 / var(--rem-base) * 1rem);
 }
 
-.doc .admonitionblock > table {
-  table-layout: fixed;
-  position: relative;
-  width: 100%;
-}
 
 .doc .admonitionblock td.content {
-  padding: 1rem 1rem 0.75rem;
-  background: var(--admonition-background);
   width: 100%;
   word-wrap: anywhere;
-}
-
-.doc .admonitionblock td.icon {
-  font-size: calc(15 / var(--rem-base) * 1rem);
-  left: 0;
-  line-height: 1;
-  padding: 0;
-  position: absolute;
-  top: 0;
-  transform: translate(-0.5rem, -50%);
-}
-
-.doc .admonitionblock td.icon i {
-  align-items: center;
-  border-radius: 0.45rem;
-  display: inline-flex;
-  filter: initial;
-  height: 1.25rem;
-  padding: 0 0.5rem;
-  vertical-align: initial;
-  width: fit-content;
-}
-
-.doc .admonitionblock td.icon i::after {
-  content: attr(title);
-  font-weight: var(--admonition-label-font-weight);
-  font-style: normal;
-  text-transform: uppercase;
-}
-
-.doc .admonitionblock td.icon i.icon-caution {
-  background-color: var(--caution-color);
-  color: var(--caution-on-color);
-}
-
-.doc .admonitionblock td.icon i.icon-important {
-  background-color: var(--important-color);
-  color: var(--important-on-color);
-}
-
-.doc .admonitionblock td.icon i.icon-note {
-  background-color: var(--note-color);
-  color: var(--note-on-color);
-}
-
-.doc .admonitionblock td.icon i.icon-tip {
-  background-color: var(--tip-color);
-  color: var(--tip-on-color);
-}
-
-.doc .admonitionblock td.icon i.icon-warning {
-  background-color: var(--warning-color);
-  color: var(--warning-on-color);
 }
 
 .doc .imageblock,

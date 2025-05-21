@@ -1,21 +1,21 @@
 [#can-orbs-be-private]
 === Can orbs be made private?
 
-xref:orb-intro#public-or-private[Private orbs] are available on any of our link:https://circleci.com/pricing[current plans].
+xref:orbs:use:orb-intro.adoc#public-or-private[Private orbs] are available on any of our link:https://circleci.com/pricing[current plans].
 
 [#difference-between-commands-and-jobs]
 === What is the difference between commands and jobs?
 
-Both xref:reusing-config#the-commands-key[commands] and xref:reusing-config#authoring-parameterized-jobs[jobs] are elements that can be used within orbs.
+Both xref:reference:ROOT:reusing-config.adoc#the-commands-key[commands] and xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[jobs] are elements that can be used within orbs.
 
-_Commands_ contain one or many xref:configuration-reference#steps[steps], which contain the logic of the orb. Commands generally execute some shell code (bash).
+_Commands_ contain one or many xref:reference:ROOT:configuration-reference.adoc#steps[steps], which contain the logic of the orb. Commands generally execute some shell code (bash).
 
-_Jobs_ are a definition of what steps/commands to run and the xref:reusing-config#the-executors-key[executor] to run them in. _Jobs_ invoke commands, and are orchestrated using xref:workflows#workflows-configuration-examples[workflows].
+_Jobs_ are a definition of what steps/commands to run and the xref:reference:ROOT:reusing-config.adoc#the-executors-key[executor] to run them in. _Jobs_ invoke commands, and are orchestrated using xref:guides:orchestrate:workflows.adoc#workflows-configuration-examples[workflows].
 
 [#orbs-on-private-installation-server]
 === Can orbs be used on a private installation of CircleCI server?
 
-Orbs can be used with installations of CircleCI server. For information on importing and using orbs for server, see the xref:/server/v4.3/operator/managing-orbs#[CircleCI server managing orbs] page.
+Orbs can be used with installations of CircleCI server. For information on importing and using orbs for server, see the xref:server-admin:operator:managing-orbs.adoc#[CircleCI server managing orbs] page.
 
 [#report-an-issue-with-a-public-orb]
 === How can I report a bug or issue with a public orb?

@@ -1,0 +1,99 @@
+= FAQ
+:page-platform: Cloud, Server v4+
+:description: Frequently asked questions about CircleCI
+:experimental:
+:icons: font
+
+This page answers frequently asked questions about the following CircleCI topics:
+
+[.table]
+[cols=2*]
+|===
+| <<#general,General>>
+| <<#self-hosted-runner,Self-hosted runner>>
+
+| <<#migration,Migration>>
+| <<#pipelines,Pipelines>>
+
+| <<#host-circleci,Host CircleCI>>
+| <<#scheduled-pipelines,Scheduled pipelines>>
+
+| <<#architecture,Architecture>>
+| <<#workflows,Workflows>>
+
+| <<#orbs,Orbs>>
+| <<#dynamic-configuration,Dynamic configuration>>
+
+| <<#author-orbs,Author orbs>>
+| <<#billing,Billing>>
+
+| <<#cancel-performance-plan,Cancel Performance Plan>>
+|
+|===
+
+[#general]
+== General
+
+include::guides:ROOT:partial$faq/general-faq-snip.adoc[]
+
+[#migration]
+== Migration
+
+include::guides:ROOT:partial$faq/migration-faq-snip.adoc[]
+
+[#host-circleci]
+== Host CircleCI
+
+include::guides:ROOT:partial$faq/host-faq-snip.adoc[]
+
+[#architecture]
+== Architecture
+
+include::guides:ROOT:partial$faq/architecture-faq-snip.adoc[]
+
+[#orbs]
+== Orbs
+
+include::guides:ROOT:partial$faq/orb-faq-snip.adoc[]
+
+[#author-orbs]
+== Author orbs
+
+include::guides:ROOT:partial$faq/orb-author-faq-snip.adoc[]
+
+[#self-hosted-runner]
+== Self-hosted runner
+
+include::guides:ROOT:partial$faq/self-hosted-runner-faq-snip.adoc[]
+
+[#pipelines]
+== Pipelines
+
+include::guides:ROOT:partial$faq/pipelines-faq-snip.adoc[]
+
+[#scheduled-pipelines]
+== Scheduled pipelines
+
+include::guides:ROOT:partial$faq/scheduled-pipelines-faq-snip.adoc[]
+
+[#workflows]
+== Workflows
+
+include::guides:ROOT:partial$faq/workflows-faq-snip.adoc[]
+
+[#dynamic-configuration]
+== Dynamic configuration
+
+include::guides:ROOT:partial$faq/dynamic-configuration-faq-snip.adoc[]
+
+[#billing]
+== Billing
+
+Visit our link:https://circleci.com/pricing/[Pricing page] to find details about CircleCI's plans.
+
+include::guides:ROOT:partial$faq/billing-faq-snip.adoc[]
+
+[#cancel-performance-plan]
+== Cancel Performance Plan
+
+include::guides:ROOT:partial$faq/cancel-subscription-faq-snip.adoc[]

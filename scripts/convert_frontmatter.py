@@ -1,6 +1,7 @@
 import re
 import os
 import sys
+import yaml
 from pathlib import Path
 
 def convert_file(file_path):
@@ -9,38 +10,35 @@ def convert_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Pattern to match Jekyll frontmatter between --- markers
+    # Pattern to match YAML frontmatter between --- markers
     frontmatter_pattern = r'^---\n(.*?)\n---\n'
     frontmatter_match = re.search(frontmatter_pattern, content, re.DOTALL)
 
-    if not frontmatter_match:
-        print(f"No frontmatter found in {file_path}")
-        return
-
-    frontmatter = frontmatter_match.group(1)
-    print(f"\nFound frontmatter:\n{frontmatter}")
-
-    # Pattern to match nested platform list with dashes
-    platform_pattern = r'platform:.*?\n(\s*-.*(?:\n\s*-.*)*)'
-    platform_match = re.search(platform_pattern, frontmatter, re.DOTALL)
-
     platforms = []
-    if platform_match:
-        # Extract platforms from the YAML list format with dashes
-        platforms = [p.strip('- \n') for p in platform_match.group(1).splitlines() if p.strip()]
-        print(f"\nFound platforms: {platforms}")
-    else:
-        print("\nNo platform tags found in frontmatter")
 
-    # Remove the frontmatter
-    content = re.sub(frontmatter_pattern, '', content, flags=re.DOTALL)
+    if frontmatter_match:
+        frontmatter = frontmatter_match.group(1)
+        print(f"\nFound frontmatter:\n{frontmatter}")
+
+        # Parse YAML frontmatter
+        try:
+            fm_data = yaml.safe_load(frontmatter)
+        except Exception as e:
+            print(f"YAML parse error in {file_path}: {e}")
+            fm_data = {}
+
+        # Extract platform tags from contentTags
+        if 'contentTags' in fm_data and 'platform' in fm_data['contentTags']:
+            platforms = fm_data['contentTags']['platform']
+        # Remove the old frontmatter entirely
+        content = re.sub(frontmatter_pattern, '', content, flags=re.DOTALL)
+    else:
+        print(f"No frontmatter found in {file_path}")
 
     # If we found platforms, add them as an attribute after the first heading
     if platforms:
-        # Changed format to remove square brackets
-        platform_attr = f":platform: {', '.join(platforms)}"
+        platform_attr = f":page-platform: {', '.join(platforms)}"
         print(f"\nAdding platform attribute:\n{platform_attr}")
-
         # Find the first heading and insert the platform attribute after it
         heading_pattern = r'^(=+\s+.*?\n)'
         if re.search(heading_pattern, content, re.MULTILINE):

@@ -1,7 +1,7 @@
 [#can-i-migrate-existing-scheduled-workflows]
 === Can I migrate existing scheduled workflows to scheduled pipelines?
 
-Yes, visit the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Scheduled pipelines migration] guide for more information.
+Yes, visit the xref:guides:orchestrate:migrate-scheduled-workflows-to-scheduled-pipelines.adoc#[Scheduled pipelines migration] guide for more information.
 
 [#find-schedules-that-i-have-created]
 === How do I find the schedules that I have created?
@@ -13,7 +13,7 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 --header "circle-token: <PERSONAL_API_KEY>"
 ```
 
-Refer to the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+Refer to the xref:guides:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#what-time-zone-is-used-for-scheduled-pipelines]
 === What time zone is used for scheduled pipelines?
@@ -23,9 +23,9 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 [#pipelines-scheduled-to-run-specific-time-of-day]
 === Can pipelines be scheduled to run at a specific time of day?
 
-Yes, you can set up xref:scheduled-pipelines#[Scheduled pipelines] through the xref:scheduled-pipelines#use-project-settings[CircleCI web app], or with xref:scheduled-pipelines#use-the-api[CircleCI API v2].
+Yes, you can set up xref:guides:orchestrate:scheduled-pipelines.adoc#[Scheduled pipelines] through the xref:guides:orchestrate:scheduled-pipelines.adoc#use-project-settings[CircleCI web app], or with xref:guides:orchestrate:scheduled-pipelines.adoc#use-the-api[CircleCI API v2].
 
-If you are currently using xref:workflows#scheduling-a-workflow[Scheduled workflows], see the xref:migrate-scheduled-workflows-to-scheduled-pipelines#[Migration guide] to update your scheduled workflows to scheduled pipelines.
+If you are currently using xref:guides:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled workflows], see the xref:guides:orchestrate:migrate-scheduled-workflows-to-scheduled-pipelines.adoc#[Migration guide] to update your scheduled workflows to scheduled pipelines.
 
 [#scheduled-pipelines-guaranteed-to-run-time-scheduled]
 === Are scheduled pipelines guaranteed to run at precisely the time scheduled?

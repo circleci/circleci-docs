@@ -1,0 +1,11 @@
+= Troubleshoot pipelines
+:page-platform: Cloud
+:page-description: Troubleshooting guide for pipelines and scheduled pipelines.
+:icons: font
+:experimental:
+
+This page describes errors and troubleshooting methods for pipelines and scheduled pipelines.
+
+== Troubleshooting
+
+include::guides:ROOT:partial$troubleshoot/pipelines-troubleshoot-snip.adoc[]

@@ -33,4 +33,4 @@ If you do not have the required permission level you might see an error similar 
 Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 ```
 
-Read more in the xref:orb-author-intro#permissions-matrix[Orb CLI permissions matrix].
+Read more in the xref:orbs:author:orb-author-intro.adoc#permissions-matrix[Orb CLI permissions matrix].

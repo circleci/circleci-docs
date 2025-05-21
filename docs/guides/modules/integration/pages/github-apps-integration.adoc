@@ -180,4 +180,3 @@ The recommendation is to either:
 
 * Suspend your installation. This would stop sending all events to CircleCI, so all builds will stop. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option.
 * Stop a single project from sending events to CircleCI. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option. Under **Repository access**, select **Only select repositories** and deselect the repository you want to stop building.
-

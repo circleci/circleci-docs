@@ -3,13 +3,13 @@
 
 Yes, CircleCI offers migration guides for the following:
 
-- xref:migrating-from-aws#[AWS]
-- xref:migrating-from-azuredevops#[Azure]
-- xref:migrating-from-buildkite#[Buildkite]
-- xref:migrating-from-github#[GitHub]
-- xref:migrating-from-gitlab#[GitLab]
-- xref:migrating-from-jenkins#[Jenkins]
-- xref:migrating-from-teamcity#[TeamCity]
-- xref:migrating-from-travis#[Travis CI]
+- xref:guides:migrate:migrating-from-aws.adoc#[AWS]
+- xref:guides:migrate:migrating-from-azuredevops.adoc#[Azure]
+- xref:guides:migrate:migrating-from-buildkite.adoc#[Buildkite]
+- xref:guides:migrate:migrating-from-github.adoc#[GitHub]
+- xref:guides:migrate:migrating-from-gitlab.adoc#[GitLab]
+- xref:guides:migrate:migrating-from-jenkins.adoc#[Jenkins]
+- xref:guides:migrate:migrating-from-teamcity.adoc#[TeamCity]
+- xref:guides:migrate:migrating-from-travis.adoc#[Travis CI]
 
-You can also visit the xref:migration-intro#[Migration introduction] page for more information.
+You can also visit the xref:guides:migrate:migration-intro.adoc#[Migration introduction] page for more information.

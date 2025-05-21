@@ -3,3 +3,4 @@ title: Reference
 version: ~
 nav:
 - modules/ROOT/nav.adoc
+start_page: ROOT:configuration-reference.adoc

@@ -3,7 +3,7 @@
 :experimental:
 :icons: font
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::guides:ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 

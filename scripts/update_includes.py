@@ -5,16 +5,16 @@ def update_include_directive(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
-    # Update any path containing partials to ROOT:partial$
+    # Update any path containing partials (with any number of ../ before) to ROOT:partial$
     content = re.sub(
-        r'include::.*?partials/',
+        r'include::(?:\.\./)*partials/',
         'include::ROOT:partial$',
         content
     )
 
-    # Update any path containing snippets to ROOT:example$
+    # Update any path containing snippets (with any number of ../ before) to ROOT:example$
     content = re.sub(
-        r'include::.*?snippets/',
+        r'include::(?:\.\./)*snippets/',
         'include::ROOT:example$',
         content
     )
@@ -31,4 +31,4 @@ def process_directory(directory):
         update_include_directive(str(file_path))
 
 if __name__ == '__main__':
-    process_directory('docs/guides')
+    process_directory('docs')

@@ -14,7 +14,7 @@ Your role within your org is determined differently depending on how you integra
 
 * If your code is integrated with CircleCI via the GitHub OAuth App or Bitbucket Cloud, CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
 
-* If your code is integrated with CircleCI via the GitHub App, GitLab, or Bitbucket Data Center, you can check roles by navigating to menu:Organization Settings[People]. Full details on roles and permissions are available in the xref:roles-and-permissions-overview#[Roles and permissions overview].
+* If your code is integrated with CircleCI via the GitHub App, GitLab, or Bitbucket Data Center, you can check roles by navigating to menu:Organization Settings[People]. Full details on roles and permissions are available in the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc#[Roles and permissions overview].
 
 [TIP]
 ====

@@ -1,4 +1,4 @@
-<header class="max-w-full px-9 pt-6 border-b border-vapor">
+<header class="flex flex-col max-w-full px-9 pt-6 border-b border-vapor bg-white sticky top-0 z-10">
   <div class="flex items-center justify-between">
     <!-- Logo + Title -->
     <div class="flex items-center space-x-2">
@@ -23,5 +23,7 @@
   <!-- Components Nav -->
 
   {{> component-explorer-nav options=(components-to-nav-list)}}
+
+  {{> search-results class="hidden flex-1 pt-6 overflow-auto bg-white"}}
 
 </header>

@@ -26,7 +26,7 @@ From the link:https://circleci.com/signup/[Sign Up] page, do one of the followin
 
 If you want to build mainly **GitHub**, **GitLab** or **Bitbucket Data Center** projects, sign up with your email address to create an account.
 
-include::ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
+include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 
 TIP: If you want to collaborate on an existing org you can create an account and request an invite later.
 
@@ -34,7 +34,7 @@ TIP: If you want to collaborate on an existing org you can create an account and
 . Enter your email address and create a password.
 . Answer a few questions about how you plan to use CircleCI.
 . You can now choose one of the following:
-** Use the xref:invite-your-team.adoc[Find Your Team] option to connect your account to a shared org
+** Use the xref:guides:getting-started:invite-your-team.adoc[Find Your Team] option to connect your account to a shared org
 ** <<sign-up-and-create-an-org>>
 
 === Building Bitbucket Cloud projects?
@@ -47,7 +47,7 @@ If you want to primarily build **Bitbucket Cloud** projects, sign up with your B
 
 . Choose between creating an organization or joining your teammates in an existing org:
 ** If you are **creating a new CircleCI org** for your team, follow the <<sign-up-and-create-an-org>> steps below.
-** If you want to join an existing shared organization, follow the steps on the xref:invite-your-team.adoc[Join your teammates] page.
+** If you want to join an existing shared organization, follow the steps on the xref:guides:getting-started:invite-your-team.adoc[Join your teammates] page.
 
 [#sign-up-and-create-an-org]
 == Create an org
@@ -68,7 +68,7 @@ If you choose not to connect your code at this time, you can still explore some 
 * Or some of our own sample projects: a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-javascript-cfd/[sample JavaScript app], and a link:https://app.circleci.com/pipelines/github/CircleCI-Public/sample-python-cfd/[sample Python app].
 ====
 
-. Invite your team by navigating to menu:Organization Settings[People]. For more information on inviting people to your org, see the xref:invite-your-team#invite-teammates[Join your teammates] page.
+. Invite your team by navigating to menu:Organization Settings[People]. For more information on inviting people to your org, see the xref:guides:getting-started:invite-your-team.adoc#invite-teammates[Join your teammates] page.
 
 [#sign-up-with-an-invite]
 == Sign up with an invite

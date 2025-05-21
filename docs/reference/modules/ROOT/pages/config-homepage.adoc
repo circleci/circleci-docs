@@ -1,0 +1,7 @@
+= Configuration reference
+
+Find detailed information about the configuration options available in CircleCI.
+
+The xref:configuration-reference.adoc[Configuration reference] page is a comprehensive guide to the configuration options available in CircleCI.
+
+The xref:reusing-config.adoc[Reusable configuration reference] page is a guide to the reusable configuration options available in CircleCI.
