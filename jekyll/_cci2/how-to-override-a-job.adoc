@@ -4,7 +4,7 @@
 :icons: font
 :experimental:
 
-This guide explains how to use the `override-with` key in CircleCI to override a job in a pipeline with another job, which is stored in an orb. Config overrides allow you to manage standardized pipelines across your organization. You will learn how platform teams can maintain central configuration standards while allowing development teams to customize specific parts of the pipeline.
+By following this guide you will learn how to use the `override-with` key to override a job in a pipeline with a job from an orb. Config overrides allow you to manage _standardized_ pipelines across your organization. Platform teams can maintain central configuration standards while allowing development teams to customize specific parts of the pipeline.
 
 By implementing config overrides, you can access the following benefits:
 
@@ -12,6 +12,8 @@ By implementing config overrides, you can access the following benefits:
 * Enforce security and compliance standards.
 * Simplify pipeline maintenance.
 * Preserve team autonomy.
+
+TIP: Platform teams (sometimes called "Infrastructure teams" or "DevOps teams") automate infrastructure management and enable developers to self-serve reliable tools and workflows from a centrally managed technology platform.
 
 [#understanding-the-override-with-key]
 == Understanding the override-with key
@@ -132,9 +134,12 @@ When the `main` workflow runs, CircleCI will use the custom-test job from your U
 [#real-world-template-example]
 == 2. Real-world example: Platform team template with team overrides
 This example demonstrates how platform teams can maintain standardized pipelines while allowing development teams the flexibility to customize specific parts.
+
 === a. Create a centralized configuration template
 The platform team creates a central configuration in a dedicated repository:
+
 [source,yaml]
+----
 central-template.yml in platform-team/ci-standards repository
 version: 2.1
 Import the team's config as an orb
@@ -194,9 +199,13 @@ requires: [build]
 requires: [build]
 - deploy:
 requires: [test, security-scan]
+----
+
 === b. Set up team-specific override configuration
 Each development team creates their own configuration file in their repository:
+
 [source,yaml]
+----
 team-config.yml in dev-team/project repository
 version: 2.1
 jobs:
@@ -219,11 +228,16 @@ paths:
 - run:
 name: "Run team-specific tests"
 command: npm run test:integration
+----
 === c. Configure URL allow lists
 To use URL-based orbs for team configurations, configure your organization's allowlist settings to include:
+
 [source,text]
+----
 https://raw.githubusercontent.com/
 This allows importing configurations from any repository in your GitHub organization.
+----
+
 === d. Setup pipeline definitions
 For each project using the centralized configuration:
 
@@ -242,18 +256,25 @@ The standard security-scan and deploy jobs continue to run as defined by the pla
 [#transitioning-to-centralized-configs]
 == 4. Transitioning to centralized configs
 Follow these steps to migrate existing projects to a centralized configuration model:
+
 === a. Create central configuration repository
 Copy an existing project configuration to a central repository that will serve as your template.
+
 === b. Setup pipeline definitions
 Create a pipeline definition that uses the central config as its source.
+
 === c. Remove duplicate workflows
 Remove workflow definitions from individual project repositories as they are now defined in the central config.
+
 === d. Remove duplicate job definitions
 Remove standard job definitions from project repositories, keeping only those that need customization.
+
 === e. Implement overrides
 For jobs requiring customization, implement the override mechanism using the steps outlined above.
+
 [#troubleshooting]
 == 5. Troubleshooting
+
 === a. Job not being overridden
 If your job is not being overridden as expected:
 
@@ -284,26 +305,38 @@ Check that your config policy management is correctly set up if using that featu
 
 [#frequently-asked-questions]
 == 6. Frequently asked questions
+
 === a. Can I override workflow job's parameters?
 No, the current implementation doesn't support overriding a workflow job's type, requires, context, or filters. These must be defined in the centralized workflow configuration.
+
 === b. Do I need GitHub App integration?
 While not strictly required, GitHub App integration provides the best experience for centralized configuration management. Without it, you would need to duplicate the centralized config across multiple repositories or use alternative approaches.
+
 === c. Can I use this with legacy GitHub OAuth projects?
 The override mechanism will work for legacy projects, but there's no way to enforce a single config across multiple legacy projects within the CircleCI platform. Installing the GitHub App would be the first step toward a better solution.
+
 === d. Are scheduled pipelines supported?
 Scheduled pipelines are not supported for decoupled projects (GitHub App/GitLab/BDC), so they cannot be triggered from a centralized config.
+
 === e. Can I override entire workflows?
 The current implementation only supports job overrides. Workflow overrides may be added in future iterations based on customer feedback.
+
 === f. Can I use private URLs for URL-based orbs?
 URL-based orbs currently have limited support for private URLs. Work is being done to extend support for fetching from private URLs, which will enable GitHub App projects to leverage URL-based orbs more effectively.
+
 === g. How do I implement this with Terraform?
 CircleCI provides a Terraform provider that can help automate the setup of projects with standardized configurations. This can be especially useful when implementing configuration overrides across multiple projects:
+
 [source,text]
+----
 https://github.com/CircleCI-Public/terraform-provider-circleci
+----
+
 [#conclusion]
 == Conclusion
 The override-with key provides a powerful mechanism for balancing standardization and flexibility in CircleCI pipelines. By implementing a centralized configuration approach with targeted overrides, platform teams can enforce standards while development teams maintain autonomy over their specific requirements.
 This approach significantly reduces configuration duplication (up to 70% in many organizations), improves security compliance, and simplifies pipeline maintenance across your organization.
+
 [#next-steps]
 == Next steps
 
