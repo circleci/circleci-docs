@@ -293,8 +293,26 @@ curl --request POST \
 --
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
 . You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID.
+
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/workflow/<workflow-ID>/job \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+----
+
+In the JSON response, take note of the value associated with the `approved_by` key.
+
 . Then use the link:https://circleci.com/docs/api/v2/index.html#operation/getUser[user information] endpoint to get the username or email address.
 
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/user/<user-ID> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+----
 
 TIP: You can find detailed instructions in link:https://support.circleci.com/hc/en-us/articles/360044820493-How-to-Find-hold-Step-Approver-in-a-Workflow[this support article]
 
