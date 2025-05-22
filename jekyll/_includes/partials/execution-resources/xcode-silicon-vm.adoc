@@ -7,6 +7,18 @@
 | VM Software Manifest
 | Release Notes
 
+| `16.4.0`
+| Xcode 16.4 RC (16F6)
+| 15.3.2
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15338/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-16-4-rc-available/[Release Notes]
+
+| `16.3.0`
+| Xcode 16.3 (16E140)
+| 15.3.2
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15328/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-16-3-available/[Release Notes]
+
 | `16.2.0`
 | Xcode 16.2 GA (16C5032a)
 | 14.6.1
