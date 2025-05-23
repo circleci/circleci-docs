@@ -52,7 +52,10 @@ NOTE: If you do not see the organization you would like to join listed, you will
 
 The steps in this section show how an org admin can invite teammates to join their organization.
 
-[.tab.invite.GitHub_App_/_GitLab_/_Bitbucket_Data_Center]
+[tabs]
+====
+GitHub_App_GitLab_Bitbucket_Data_Center::
++
 --
 include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 
@@ -61,11 +64,12 @@ include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 . To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
 . Once they join your org, you can then also assign each team member a role on an individual project level.
 --
-
-[.tab.invite.GitHub_OAuth_/_Bitbucket_Cloud]
+GitHub_OAuth_Bitbucket_Cloud::
++
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Select *Organization Setting* from the sidebar and select *People*.
 . Select btn:[Copy Invite Link] -- an invite message is now copied to your clipboard.
 . Past the invite message to your teammates via email or whatever method you prefer.
 --
+====

@@ -6,7 +6,10 @@
 
 You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes Arm resources, and then specifying an Arm resource class.
 
-[.tab.armblock.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -21,8 +24,8 @@ jobs:
       - run: echo "Hello, Arm!"
 ----
 --
-
-[.tab.armblock.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -37,6 +40,7 @@ jobs:
       - run: echo "Hello, Arm!"
 ----
 --
+====
 
 [#available-resource-classes]
 == Available resource classes

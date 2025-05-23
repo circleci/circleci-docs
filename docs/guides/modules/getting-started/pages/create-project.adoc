@@ -190,12 +190,12 @@ image::guides:ROOT:create-project/set-up-a-project.png[Set up a project button]
 . Find your project in the list and select btn:[Set Up Project].
 +
 [TIP]
-====
+****
 **Can't see your project?** Select the CircleCI logo at the top of the window to navigate to your user homepage and select an organization.
 
 .Access your user homepage
 image::guides:ROOT:create-project/user-home-page.png[Select Organization]
-====
+****
 
 . Choose a `config.yml` option in the modal. You can choose from the following:
 ** **Fastest**: Use a CircleCI `.circleci/config.yml` you have already committed to your repository. For guidance on creating a `config.yml` file, see the xref:config-intro.adoc#[Configuration Introduction]. You will also need to specify a branch.

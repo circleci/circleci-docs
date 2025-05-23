@@ -39,10 +39,10 @@ Each filter follows a specific format:
 * Parameter value.
 
 [TIP]
-====
+****
 Use the btn:[Add Filter] button to configure multiple filters. +
 Then specify the `and` or `or` relationship between all configured filters.
-====
+****
 
 === Available parameters
 

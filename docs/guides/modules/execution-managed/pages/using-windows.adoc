@@ -20,7 +20,10 @@ Configuration options for using the Windows execution environment are shown belo
 
 
 
-[.tab.windowsblock.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -38,8 +41,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
-
-[.tab.windowsblock.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -55,6 +58,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
+====
 
 [#the-windows-orb]
 === The Windows orb
@@ -103,7 +107,10 @@ workflows:
 
 include::guides:ROOT:partial$execution-resources/windows-resource-table.adoc[]
 
-[.tab.windowsresourceblock.Cloud_with_orb]
+[tabs]
+====
+Cloud_with_orb::
++
 --
 [,yaml]
 ----
@@ -124,8 +131,8 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ----
 --
-
-[.tab.windowsresourceblock.Cloud_with_machine]
+Cloud_with_machine::
++
 --
 [,yaml]
 ----
@@ -142,8 +149,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
-
-[.tab.windowsresourceblock.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -160,6 +167,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
+====
 
 [#view-resource-usage]
 === View resource usage
@@ -193,7 +201,10 @@ You can use one of three shells to run job steps on Windows:
 
 You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, PowerShell, and CMD by adding a `shell:` argument to our `job` and `step` declarations:
 
-[.tab.windowsblockthree.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -219,8 +230,8 @@ jobs:
          shell: cmd.exe
 ----
 --
-
-[.tab.windowsblockthree.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -243,10 +254,14 @@ jobs:
          shell: cmd.exe
 ----
 --
+====
 
 NOTE: It is possible to install updated or other Windows shell-tooling. For example, you could install the latest version of PowerShell Core with the `dotnet` CLI and use it in a job's successive steps:
 
-[.tab.windowsblockfour.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -265,8 +280,8 @@ jobs:
       - run: pwsh ./<my-script>.ps1
 ----
 --
-
-[.tab.windowsblockfour.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -282,13 +297,17 @@ jobs:
       - run: pwsh ./<my-script>.ps1
 ----
 --
+====
 
 [#windows-docker-containers-on-windows-executor]
 == Running Windows Docker containers on the Windows executor
 
 You can run Windows Docker containers on the Windows executor like so:
 
-[.tab.windowsblockone.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -313,8 +332,8 @@ jobs:
             docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
 ----
 --
-
-[.tab.windowsblockone.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -335,6 +354,7 @@ jobs:
             docker run hello-world:nanoserver-1809
 ----
 --
+====
 
 [#ssh-into-your-windows-build]
 == SSH into your Windows build

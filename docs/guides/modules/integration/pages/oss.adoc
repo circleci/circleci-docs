@@ -40,7 +40,10 @@ You can modify this behaviour by restricting builds to branches that have pull r
 
 NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Center integration.
 
-[.tab.create-project.GitHub_App]
+[tabs]
+====
+GitHub_App::
++
 --
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
@@ -51,8 +54,8 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[Inser
 
 image::guides:ROOT:triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requests]
 --
-
-[.tab.create-project.GitHub_OAuth_/_Bitbucket_Cloud]
+GitHub_OAuth_Bitbucket_Cloud::
++
 --
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
@@ -71,8 +74,8 @@ Enabling *Only build pull requests* may result in duplicate builds. You can find
 
 NOTE: CircleCI will always build all commits from your project's _default branch and tags_ regardless of any setting.
 --
-
-[.tab.create-project.GitLab]
+GitLab::
++
 --
 
 NOTE: Although the Add/Edit Trigger pages in GitLab Cloud and GitLab self-managed slightly differ, the following steps apply to both integrations.
@@ -89,6 +92,7 @@ image::guides:ROOT:triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only
 .Trigger page for GitLab self-managed
 image::guides:ROOT:triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option in GitLab self-managed trigger]
 --
+====
 
 
 [#build-pull-requests-from-forked-repositories]

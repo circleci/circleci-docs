@@ -262,15 +262,18 @@ NOTE: You must be an organization administrator to set an expression restriction
 
 Follow these steps to set an expression restriction on a context:
 
-[.tab.set-expression-restriction.CircleCI_UI]
+[tabs]
+====
+CircleCI_UI::
++
 --
 . Navigate to the menu:Organization Settings[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]
 . Select the context you want to add an expression restriction to
 . Select btn:[Add Expression Restriction]
 . Enter your expression in the text box and select btn:[Add Expression Restriction] again to confirm
 --
-
-[.tab.set-expression-restriction.API]
+API::
++
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
@@ -298,6 +301,7 @@ curl --request POST \
   --data '{"restriction_type":"expression","restriction_value":"<your-expression-restriction>"}'
 ----
 --
+====
 
 [#examples]
 === Examples
@@ -490,7 +494,10 @@ Environment variables declared inside a shell command `run step`, for example `F
 [#creating-environment-variables]
 === Add an environment variable to a context
 
-[.tab.addEnvVar.CLI]
+[tabs]
+====
+CLI::
++
 --
 NOTE: Before using the CLI ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[configured the CLI] with a token.
 
@@ -512,18 +519,22 @@ circleci context store-secret --org-id <org-id> <context-name> <environment-vari
 +
 The CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 --
-
-[.tab.addEnvVar.API]
+API::
++
 --
 To create an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add Environment Variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plain text secret as a string.
 --
+====
 
 [#deleting-environment-variables]
 === Remove an environment variable from a context
 
 Removing an environment variable from a context deletes the environment variable from your account.
 
-[.tab.removeEnvVar.CLI]
+[tabs]
+====
+CLI::
++
 --
 NOTE: Before using the CLI ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[configured the CLI] with a token.
 
@@ -550,13 +561,14 @@ circleci context show --org-id <org-id> <context-name>
 circleci context remove-secret --org-id <org-id> <context-name> <secret name>
 ----
 --
-
-[.tab.removeEnvVar.API]
+API::
++
 --
 To delete an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Delete environment variable] endpoint.
 
 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated.
 --
+====
 
 [#rotating-environment-variables]
 === Rotate environment variables with the CLI or API
@@ -567,7 +579,10 @@ Because environment variables can be shared, passed around between employees and
 
 Context environment variables can be rotated using CircleCI's CLI or API.
 
-[.tab.rotateEnvVar.CLI]
+[tabs]
+====
+CLI::
++
 --
 NOTE: Before using the CLI ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[configured the CLI] with a token.
 
@@ -596,11 +611,12 @@ circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
 +
 Note that the CLI will prompt you to input the new secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 --
-
-[.tab.rotateEnvVar.API]
+API::
++
 --
 To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plain text secret as a string.
 --
+====
 
 include::guides:ROOT:partial$shared-sections/secrets-masking.adoc[]
 

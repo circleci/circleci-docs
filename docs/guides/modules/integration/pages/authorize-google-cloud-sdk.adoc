@@ -48,12 +48,12 @@ For convenience, add two more environment variables to your CircleCI project:
 * `GOOGLE_COMPUTE_ZONE`: the default link:https://cloud.google.com/compute/docs/regions-zones/[compute zone].
 
 [NOTE]
-====
+****
 If you are having issues pushing container images to GCR you may need more granular permissions than the default `service account` provides. You can grant permission changes in the Cloud Storage link:https://console.cloud.google.com/iam-admin/iam/project[IAM Console].
 
 Refer to the Cloud Storage link:https://cloud.google.com/storage/docs/access-control/iam-permissions[permission documentation]
 to learn more about Identity and Access Management (IAM) permissions.
-====
+****
 
 [#authenticate-to-google-container-registry]
 == 3. Authenticate to Google Container Registry

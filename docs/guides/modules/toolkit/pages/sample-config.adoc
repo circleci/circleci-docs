@@ -445,7 +445,10 @@ In `Example-1` each push will build and test the project on Linux, Windows and m
 
 In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools (link:https://github.com/realm/SwiftLint[SwiftLint] and link:https://github.com/danger/danger[Danger]) will be run in Docker.
 
-[tab.multiple-executors.Example_1]
+[tabs]
+====
+Example_1::
++
 --
 [,yaml]
 ----
@@ -710,8 +713,8 @@ workflows:
               only: main
 ----
 --
-
-[tab.multiple-executors.Example_2]
+Example_2::
++
 --
 [,yaml]
 ----
@@ -767,6 +770,7 @@ workflows:
       - build-and-test
 ----
 --
+====
 
 [#see-also]
 == See also

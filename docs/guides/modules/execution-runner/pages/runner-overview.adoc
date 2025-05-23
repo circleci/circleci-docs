@@ -16,17 +16,21 @@ Self-hosted runner installation options are as follows:
 
 The diagrams below illustrate how CircleCI's container and machine runners extend our existing systems.
 
-[.tab.runner.Container_runner]
+[tabs]
+====
+Container_runner::
++
 --
 .Container runner architecture
 image::guides:ROOT:container-runner-model.png[CircleCI's container runner architecture]
 --
-
-[.tab.runner.Machine_runner]
+Machine_runner::
++
 --
 .Machine runner architecture
 image::guides:ROOT:runner-overview-diagram.png[CircleCI's machine runner architecture]
 --
+====
 
 [#circleci-launch-agent-1-1-deprecated]
 == Launch agent 1.1 deprecated

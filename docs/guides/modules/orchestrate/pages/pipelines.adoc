@@ -99,9 +99,11 @@ A trigger kicks off a pipeline to run the workflows defined in your connected co
 
 To add a trigger for a pipeline, follow these steps:
 
-[.tab.trigger.GitHub_App]
+[tabs]
+====
+GitHub_App::
++
 --
-
 When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
 
 image::guides:ROOT:triggers/add-trigger-github.png[Add a trigger]
@@ -125,8 +127,8 @@ To add a trigger for a pipeline, follow these steps:
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
-
-[.tab.trigger.Custom_webhook]
+Custom_webhook::
++
 --
 NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
 
@@ -140,10 +142,9 @@ include::guides:ROOT:partial$pipelines-and-triggers/custom-webhook-setup.adoc[]
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --
-
-[.tab.trigger.GitLab]
+GitLab::
++
 --
-
 When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
 
 In addition to a pipeline, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repository. You can view webhooks for a project in GitLab at menu:Settings[Webhooks].
@@ -174,18 +175,19 @@ CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** r
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
-
-[.tab.trigger.Bitbucket_Data_Center]
+Bitbucket_Data_Center::
++
 --
 For steps to add a trigger for a pipeline using Bitbucket Data Center, see the xref:integration:bitbucket-data-center-integration.adoc#[Bitbucket Data Center] page.
 --
-
-[.tab.trigger.Scheduled]
+Scheduled::
++
 --
 include::guides:ROOT:partial$notes/standalone-unsupported.adoc[Unsupported for GitHub App, GitLab, Bitbucket Data Center orgs]
 
 include::guides:ROOT:partial$pipelines-and-triggers/scheduled-pipeline-setup.adoc[Setting up a scheduled pipeline using the CircleCI web app]
 --
+====
 
 == Pipeline parameters
 
@@ -193,7 +195,8 @@ Pipeline parameters are declared using the `parameters` key at the top level of 
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
-```yml
+[source,yml]
+----
 version: 2.1
 
 parameters:
@@ -214,7 +217,7 @@ jobs:
     steps:
       - run: echo "Image tag used was ${IMAGETAG}"
       - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
-```
+----
 
 A pipeline can be triggered with specific `parameter` values using the API v2 or via the CircleCI web app.
 

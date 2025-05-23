@@ -251,13 +251,16 @@ In this example, the `deploy` job will not run until the `hold` job is approved.
 
 To approve a job follow these steps:
 
-[.tab.approve.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.
 . Select btn:[Approve].
 --
-
-[.tab.approve.API]
+API::
++
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
@@ -272,18 +275,22 @@ curl --request POST \
   --header 'content-type: application/json' \
 ----
 --
+====
 
 === Cancel a job
 
 To Cancel a job follow these steps:
 
-[.tab.cancel.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.
 . Select btn:[Cancel].
 --
-
-[.tab.cancel.API]
+API::
++
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
 . You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc#[pipeline values or environment variables], or by xref:integration:webhooks.adoc#[receiving webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
@@ -296,6 +303,7 @@ curl --request POST \
   --header 'content-type: application/json' \
 ----
 --
+====
 
 In this example, the purpose of the `hold` job is to wait for approval to begin deployment. A job can be approved for up to 90 days after it starts.
 
@@ -477,14 +485,14 @@ This example prevents the workflow `integration_tests` from running unless the `
 For more examples of using conditional logic in your workflows, see the xref:orchestration-cookbook.adoc#[Orchestration cookbook].
 
 [TIP]
-====
+****
 If you want to conditionally run workflows based on the type of event that triggers your pipeline, you can also consider splitting your workflows into separate YAML files and leveraging the different GitHub trigger event options.
 
 For further details see the following guides:
 
 * xref:set-up-multiple-configuration-files-for-a-project.adoc#[Set up multiple configuration files for a project]
 * xref:github-trigger-event-options.adoc#[GitHub trigger event options]
-====
+****
 
 [#using-filters-in-your-workflows]
 == Using filters in your workflows
@@ -721,15 +729,19 @@ Workflows help to speed up your ability to respond to failures. One way to do th
 . Use the filters to find your project and pipeline.
 . Find the row in the pipeline view for the workflow you would like to rerun from failed and select the *Rerun from failed* icon. This option is also available in the workflow view using the rerun dropdown menu, which you can access by clicking on the workflow name or badge.
 
-[tab.rerun-screenshot.Rerun_from_the_pipelines_page]
+[tabs]
+====
+Rerun_from_the_pipelines_page::
++
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-pipelines-page.png[Rerun a workflow from failed from the pipelines page]
 --
-
-[tab.rerun-screenshot.Rerun_from_the_workflows_page]
+Rerun_from_the_workflows_page::
++
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[Rerun a workflow from failed from the workflows page]
 --
+====
 
 NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
 

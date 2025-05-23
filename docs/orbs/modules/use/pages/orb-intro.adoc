@@ -34,7 +34,10 @@ Each orb within the link:https://circleci.com/developer/orbs[registry] provides 
 
 The example below shows how to import any orb into your CircleCI configuration file. Use the tabs to switch between a generic layout for importing any orb, and a specific example of importing the Node.JS orb:
 
-[.tab.nodeExample.Node]
+[tabs]
+====
+Node::
++
 --
 [,yaml]
 ----
@@ -44,8 +47,8 @@ orbs:
   node: circleci/node@5.0.3
 ----
 --
-
-[.tab.nodeExample.Generic]
+Generic::
++
 --
 [,yaml]
 ----
@@ -55,6 +58,7 @@ orbs:
   <orb-name>: <namespace>/<orb-name>@x.y.z
 ----
 --
+====
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors. The parameters available for each element are listed in the orb registry in a table under each element.
 
@@ -89,7 +93,10 @@ Orbs provide parameterizable configuration elements that can greatly simplify yo
 
 Orbs let you pull in pre-defined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
 
-[.tab.nodeTest.With_Orbs]
+[tabs]
+====
+With_Orbs::
++
 --
 [,yaml]
 ----
@@ -105,8 +112,8 @@ workflows:
           version: <node-version> # replace node version
 ----
 --
-
-[.tab.nodeTest.Without_orbs]
+Without_orbs::
++
 --
 [,yaml]
 ----
@@ -138,6 +145,7 @@ workflows:
       - test
 ----
 --
+====
 
 [#the-orb-registry]
 == The orb registry

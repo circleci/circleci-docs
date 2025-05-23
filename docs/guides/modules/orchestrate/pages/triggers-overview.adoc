@@ -11,7 +11,10 @@ Pipelines are triggered in response to actions or scheduled to run at specific t
 
 Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:pipelines.adoc#add-a-trigger[Pipelines and triggers] page.
 
-[tab.event-trigger.GitHub]
+[tabs]
+====
+GitHub::
++
 --
 include::guides:ROOT:partial$tips/check-github-type-org.adoc[]
 
@@ -30,23 +33,24 @@ If you only use the **GitHub OAuth** integration, once a project is set up in Ci
 
 TIP: If your org uses the **GitHub OAuth** integration, you can install the GitHub App into your org to set up GitHub App pipelines and access the trigger options described above. An org admin must take the one-time action of installing the CircleCI GitHub App to enable this functionality. For more information, see the xref:integration:github-integration.adoc#installing-github-app-alongside-github-oauth-app[GitHub OAuth integration overview].
 --
-
-[tab.event-trigger.GitLab]
+GitLab::
++
 --
 NOTE: The available GitLab trigger options are the same for GitLab Cloud and self-managed.
 
 When you create a GitLab project in CircleCI you can set up multiple pipelines and triggers. The default trigger option is to build on every push to your repo. Select from a list or configure a combination of trigger options to control when each pipeline will trigger. You can choose from a selection of supported GitLab events. For a full list of options, see the xref:gitlab-trigger-options.adoc#[GitLab trigger options] page.
 --
-
-[tab.event-trigger.BitBucket_Cloud]
+BitBucket_Cloud::
++
 --
 Once your Bitbucket Cloud project is set up in CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. One exception to this is if you use the "Only build pull requests" option. For more information on "Only build pull requests", see the xref:integration:oss.adoc#[Build open source projects] page.
 --
-
-[tab.event-trigger.BitBucket_Data_Center]
+BitBucket_Data_Center::
++
 --
 include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 --
+====
 
 Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
 
@@ -87,7 +91,10 @@ NOTE: If your GitHub user account connection to CircleCI is not yet authorized, 
 
 NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported for GitLab projects.
 
-[.tab.trigger-pipeline-api.GitHub_and_Bitbucket]
+[tabs]
+====
+GitHub_and_Bitbucket::
++
 --
 This method is supported for GitHub (OAuth and App) and Bitbucket (Cloud and Data Center) orgs.
 
@@ -135,8 +142,8 @@ curl -X POST https://circleci.com/api/v2/project/<project-slug>/pipeline/run \
 ----
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
 --
-
-[.tab.trigger-pipeline-api.CircleCI_server]
+CircleCI_server::
++
 --
 . If you have not already, get set up to use API v2 by following the steps in the xref:toolkit:api-developers-guide.adoc#authentication-and-authorization[API Developers Guide].
 
@@ -156,6 +163,7 @@ curl -X POST https://<your-circleci-hostname>/api/v2/project/<VCS>/<your-vcs-org
 
 TIP: You can also specify pipeline parameters when triggering a pipeline using the API. For full details, see the https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[API v2 Docs].
 --
+====
 
 [#trigger-a-pipeline-from-a-custom-webhook]
 == Trigger a pipeline from a custom webhook

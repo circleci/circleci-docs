@@ -528,7 +528,10 @@ Authenticate CircleCI with S3 in one of two ways:
 * IAM Roles for Service Accounts (IRSA) - **recommended**
 * IAM access keys
 
-[.tab.authentication.IRSA]
+[tabs]
+====
+IRSA::
++
 --
 **Option 1:** IRSA
 
@@ -725,8 +728,8 @@ aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY
 aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<STORAGE_POLICY_ARN>
 ----
 --
-
-[.tab.authentication.IAM_access_keys]
+IAM_access_keys::
++
 --
 **Option 2:** IAM access keys
 
@@ -865,6 +868,7 @@ The result should look like this:
 }
 ----
 --
+====
 
 endif::env-gcp[]
 
@@ -906,7 +910,10 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 
 . Either enable Workload Identity or use static credentials.
 +
-[.tab.gcpauth.Workload_Identity]
+[tabs]
+====
+Workload_Identity::
++
 --
 **Option 1:** Workload Identity
 
@@ -932,8 +939,8 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition=None
 ----
 --
-
-[tab.gcpauth.Static_credentials]
+Static_credentials::
++
 --
 **Option 2:** Static credentials
 
@@ -945,6 +952,8 @@ gcloud iam service-accounts keys create <KEY_FILE> \
     --iam-account circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com
 ----
 --
+====
+
 endif::env-aws[]
 
 ifndef::pdf[]

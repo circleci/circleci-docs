@@ -9,13 +9,13 @@ NOTE: The config policies feature is available on the **Scale** Plan and from Ci
 Follow the how-to guides on this page to manage, create, and use config policies.
 
 [NOTE]
-====
+****
 **Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
-====
+****
 
 [#config-policy-management-enablement]
 == Enable or disable policy evaluation for an organization
@@ -154,14 +154,14 @@ Your file structure should now look something like:
 ----
 +
 [NOTE]
-====
+****
 The context for each job is shown as `my-context`. This context name is arbitrary, but it must be active and declare the following environment variables:
 
 * `CIRCLECI_CLI_TOKEN` with the value of a personal API token to authenticate the CLI
 * `ORG_ID` with the value of the organization ID
 
 For setup steps see the <<prerequisites>> on this page.
-====
+****
 
 [#create-a-policy]
 == Create a policy
@@ -219,7 +219,10 @@ You can now push your new policy to your organization for it to take effect. You
 * Push the policy manually using the CLI from your local environment
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown <<manage-policies-with-your-vcs,above>>.
 
-[tab.allow.manual]
+[tabs]
+====
+manual::
++
 --
 Create and upload the policy bundle using CircleCI CLI:
 
@@ -237,13 +240,14 @@ If the upload was successful, you will see something like the following:
 }
 ----
 --
-
-[tab.allow.push_to_vcs]
+push_to_vcs::
++
 --
 If you have set up your config policies with the sample configuration shown <<manage-policies-with-your-vcs,above>>, push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --
+====
 
 Now, when a pipeline is triggered within your organization, the project's `.circleci/config.yml` will be validated against this policy.
 
@@ -264,7 +268,10 @@ To illustrate making a change to an existing policy, suppose you made an error w
 
 . Push the policy directory containing the updated policy:
 +
-[tab.change.manual]
+[tabs]
+====
+manual::
++
 --
 Create and upload the policy bundle using CircleCI CLI:
 
@@ -282,13 +289,18 @@ If the upload was successful, you will see something like the following:
 }
 ----
 --
+====
 +
-[tab.change.push_to_vcs]
+[tabs]
+====
+push_to_vcs::
++
 --
 Push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --
+====
 
 [#next-steps]
 == Next steps

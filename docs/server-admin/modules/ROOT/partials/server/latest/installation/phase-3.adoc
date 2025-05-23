@@ -160,7 +160,10 @@ Create an IAM user or role and policy for Nomad Autoscaler. You may take **one**
 
 When using access and secret keys, you have two options for configuration:
 
-[.tab.awsautoscaler.CircleCI_creates_Secret]
+[tabs]
+====
+CircleCI_creates_Secret::
++
 --
 **Option 1:** CircleCI creates the Kubernetes Secret for you.
 
@@ -176,8 +179,8 @@ nomad:
       secretKey: "<secret-key>"
 ----
 --
-
-[.tab.awsautoscaler.You_create_Secret]
+You_create_Secret::
++
 --
 **Option 2:** Create the Kubernetes Secret yourself
 
@@ -210,6 +213,7 @@ kubectl create secret generic nomad-autoscaler-secret \
   --from-literal=secret.hcl=$ADDITIONAL_CONFIG
 ----
 --
+====
 
 
 [#iam-policy-for-nomad-autoscaler]
@@ -251,21 +255,24 @@ ifndef::env-aws[]
 ==== GCP autoscaler service account
 Create a service account for Nomad Autoscaler. You may take **one** of the following approaches:
 
-[.tab.gcpautoscaler.CircleCI_creates_Secret]
+[tabs]
+====
+CircleCI_creates_Secret::
++
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
 The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account and output a file with the JSON key. For this option, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. The created service account key will be available in a file named `nomad-as-key.json`.
 --
-
-[.tab.gcpautoscaler.Use_Workload_Identity]
+Use_Workload_Identity::
++
 --
 **Option 2:** Use Workload Identity.
 
 The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account using xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
-
-[.tab.gcpautoscaler.You_create_Secret]
+You_create_Secret::
++
 --
 **Option 3:** Create the Kubernetes Secret yourself.
 
@@ -282,6 +289,7 @@ kubectl create secret generic nomad-autoscaler-secret \
 
 When creating a Nomad GCP service account manually, the service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using Workload Identity. This step is only required if you choose not to create the service account using Terraform.
 --
+====
 
 endif::env-aws[]
 
@@ -295,7 +303,10 @@ Now that you have successfully deployed your Nomad clients and have the permissi
 
 Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage Kubernetes Secrets, there are two options:
 
-[.tab.encryption.You_create_Secret]
+[tabs]
+====
+You_create_Secret::
++
 --
 **Option 1:** Create the Kubernetes Secret yourself.
 
@@ -315,21 +326,25 @@ kubectl -n <namespace> label secret/nomad-gossip-encryption-key \
 
 Once the Kubernetes Secret exists, no change to `values.yaml` is required. The Kubernetes Secret will be referenced by default.
 --
-
-[.tab.encryption.CircleCI_creates_Secret]
+CircleCI_creates_Secret::
++
 --
 **Option 2:** CircleCI creates the Kubernetes Secret.
 
 CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automatically.
 
 --
+====
 
 [#nomad-mtls]
 === b. Nomad mTLS
 
 The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
 
-[.tab.mtlsencryption.You_create_Secret]
+[tabs]
+====
+You_create_Secret::
++
 --
 **Option 1:** Generate a secret with the mTLS cert values
 
@@ -349,7 +364,8 @@ kubectl -n <namespace> label secret/nomad-mtls \
   app.kubernetes.io/managed-by=Helm --overwrite
 ----
 --
-[.tab.mtlsencryption.CircleCI_creates_Secret]
+CircleCI_creates_Secret::
++
 --
 **Option 2:** Add the base64 encoded values to your `values.yaml`
 
@@ -366,6 +382,7 @@ nomad:
         CACertificate: "<base64-encoded-ca-certificate>"
 ----
 --
+====
 
 [#nomad-autoscaler]
 === c. Nomad Autoscaler
@@ -591,7 +608,10 @@ Authenticate CircleCI with your cloud provider in one of two ways:
 * IAM Roles for Service Accounts (IRSA) - **recommended**
 * IAM access keys
 
-[.tab.vmauthaws.IRSA]
+[tabs]
+====
+IRSA::
++
 --
 The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring machine provisioner in CircleCI.
 
@@ -775,8 +795,8 @@ machine_provisioner:
       securityGroupId: "<SECURITY_GROUP_ID>"
 ----
 --
-
-[.tab.vmauthaws.IAM_Access_Keys]
+IAM_Access_Keys::
++
 --
 . *Create user*
 +
@@ -925,6 +945,7 @@ kubectl create secret generic machine-provisioner-secret \
   --from-literal=secretKey=<secret-key>
 ----
 --
+====
 
 endif::env-gcp[]
 
@@ -998,7 +1019,10 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 +
 Choose one of the following options, depending on whether you are using Workload Identity.
 +
-[.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
+[tabs]
+====
+Enable_Workload_Identity_for_Service_Account::
++
 --
 This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
 
@@ -1014,8 +1038,12 @@ gcloud iam service-accounts add-iam-policy-binding circleci-server-vm@<PROJECT_I
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/machine-provisioner]"
 ----
 --
+====
 +
-[.tab.workloadorjson.Get_Service_Account_JSON_key_file]
+[tabs]
+====
+Get_Service_Account_JSON_key_file::
++
 --
 If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required.
 
@@ -1026,12 +1054,16 @@ After running the following command, you should have a file named `circleci-serv
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ----
 --
+====
 
 . *Configure CircleCI server*
 +
 When using service account keys for configuring access for the machine provisioner, there are two options.
 +
-[.tab.configureserver.CircleCI_creates_Secret]
+[tabs]
+====
+CircleCI_creates_Secret::
++
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
@@ -1061,8 +1093,8 @@ machine_provisioner:
 ----
 
 --
-
-[.tab.configureserver.You_create_Secret]
+You_create_Secret::
++
 --
 **Option 2:** Create the Kubernetes Secret yourself.
 
@@ -1074,6 +1106,7 @@ kubectl create secret generic machine-provisioner-secret \
   --from-literal=gcp_sa.json=<access-key>
 ----
 --
+====
 
 endif::env-aws[]
 

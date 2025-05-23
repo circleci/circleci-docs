@@ -37,15 +37,20 @@ The number of containers running in parallel on the host is constrained by the h
 [#create-namespace-and-resource-class]
 === 1. Create namespace and resource class
 
-[.tab.machine-runner.Web_app_installation]
+[tabs]
+====
+Web_app_installation::
++
 --
 include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-[.tab.machine-runner.CLI_installation]
+CLI_installation::
++
 --
 include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 --
+====
 
 [#create-a-dockerfile-that-extends-the-machine-runner-image]
 === 2. Create a Dockerfile that extends the machine runner image

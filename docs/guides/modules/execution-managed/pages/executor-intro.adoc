@@ -69,7 +69,10 @@ NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specif
 
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]
 
-[.tab.machine.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yml]
 ----
@@ -82,8 +85,8 @@ jobs:
         # Commands run in a Linux virtual machine environment
 ----
 --
-
-[.tab.machine.Server]
+Server::
++
 --
 [,yml]
 ----
@@ -94,6 +97,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ----
 --
+====
 
 Find out more about the Linux VM execution environment in the xref:using-linuxvm.adoc#[Using Linux Virtual Machines] page.
 
@@ -128,7 +132,10 @@ To access the Windows execution environment, you can either:
 
 For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[.tab.windowsblock.Cloud_with_orb]
+[tabs]
+====
+Cloud_with_orb::
++
 --
 [,yml]
 ----
@@ -147,8 +154,8 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ----
 --
-
-[.tab.windowsblock.Cloud]
+Cloud::
++
 --
 [,yaml]
 ----
@@ -166,8 +173,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
-
-[.tab.windowsblock.Server]
+Server::
++
 --
 [,yml]
 ----
@@ -183,6 +190,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
+====
 
 Find out more about the Windows execution environment in the xref:using-windows.adoc#[Using the Windows Execution Environment] page. See link:https://circleci.com/developer/orbs/orb/circleci/windows[the Windows orb page in the developer hub] for the list of options available in the Windows orb.
 
@@ -198,7 +206,10 @@ For a full list of `machine` images, see the link:https://circleci.com/developer
 
 NOTE: It is not possible to run a GPU build on CircleCI server.
 
-[.tab.gpublock.Linux]
+[tabs]
+====
+Linux::
++
 --
 [,yml]
 ----
@@ -213,8 +224,8 @@ jobs:
       - run: nvidia-smi
 ----
 --
-
-[.tab.gpublock.Windows_without_orb]
+Windows_without_orb::
++
 --
 [,yml]
 ----
@@ -229,8 +240,8 @@ jobs:
       - run: nvidia-smi
 ----
 --
-
-[.tab.gpublock.Windows_with_orb]
+Windows_with_orb::
++
 --
 [,yml]
 ----
@@ -246,6 +257,7 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ----
 --
+====
 
 Find out more about the GPU execution environment on the xref:using-gpu.adoc#[Using the GPU Execution Environment] page.
 
@@ -254,7 +266,10 @@ Find out more about the GPU execution environment on the xref:using-gpu.adoc#[Us
 
 To access the Arm VM execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[.tab.armblock.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yml]
 ----
@@ -285,8 +300,8 @@ workflows:
       - build-large
 ----
 --
-
-[.tab.armblock.Server_on_AWS]
+Server_on_AWS::
++
 --
 [,yml]
 ----
@@ -317,6 +332,7 @@ workflows:
       - build-large
 ----
 --
+====
 
 Find out more about the Arm VM execution environment in the xref:using-arm.adoc#[Using the Arm VM Execution Environment] page. You can also use xref:using-docker.adoc#arm[Arm on Docker].
 

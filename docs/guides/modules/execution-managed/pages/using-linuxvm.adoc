@@ -20,7 +20,10 @@ The use of `machine: true` is deprecated when using **CircleCI cloud**. You must
 * When using the machine executor on CircleCI server
 ====
 
-[.tab.machineblock.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -32,8 +35,8 @@ jobs:
     resource_class: large
 ----
 --
-
-[.tab.machineblock.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -44,6 +47,7 @@ jobs:
     resource_class: large
 ----
 --
+====
 
 You can view the list of available images xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[in the Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI server, you will notice in the example above the syntax is slightly different, and the available Linux images are managed by your system administrator.
 

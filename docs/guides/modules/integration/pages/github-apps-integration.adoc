@@ -40,12 +40,12 @@ If you attempt to integrate a GitHub org with the CircleCI GitHub App installed 
 When you click btn:[Commit config and run], as described above, a pipeline is triggered. You will see the pipeline running when you are taken to the CircleCI dashboard.
 
 [NOTE]
-====
+****
 Editing an existing CircleCI configuration within the web app is not currently available. All further changes to the configuration should be made in your GitHub repository. Committing further changes in your repository will automatically trigger a pipeline.
 
 If you would like to manually trigger a pipeline from the CircleCI web app, see the link:https://circleci.com/docs/triggers-overview/#run-a-pipeline-from-the-circleci-web-app[Triggers page].
 
-====
+****
 
 [#project-settings]
 == Project settings

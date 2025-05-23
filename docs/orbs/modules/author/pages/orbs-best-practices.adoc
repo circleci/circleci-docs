@@ -88,7 +88,10 @@ Most orbs will contain at least a single command. Commands are used to execute s
 
 When writing a xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Reusable Command] for your orb, you may input any number of xref:reference:ROOT:configuration-reference.adoc#steps[steps]. Each step should be properly named as it will appear in the user's UI. To limit the amount of "noise" in the UI, attempt to use as few steps as possible.
 
-[.tab.minsteps.Deploy_Command_GOOD]
+[tabs]
+====
+Deploy_Command_GOOD::
++
 --
 [,yaml]
 ----
@@ -106,8 +109,8 @@ steps:
         example deploy my-app
 ----
 --
-
-[.tab.minsteps.Deploy_Command_BAD]
+Deploy_Command_BAD::
++
 --
 [,yaml]
 ----
@@ -122,6 +125,7 @@ steps:
   - run: example deploy my-app
 ----
 --
+====
 
 [#check-for-root]
 ==== Check for root
@@ -147,7 +151,10 @@ Inside your job, if you are utilizing any commands or executors, you must includ
 
 For example, here is a partial snippet of the link:https://circleci.com/developer/orbs/orb/circleci/node#jobs-test[Node orb's `test` job]:
 
-[.tab.nodeParam.Test_Job]
+[tabs]
+====
+Test_Job::
++
 --
 [,yaml]
 ----
@@ -165,8 +172,8 @@ executor:
   tag: << parameters.version >>
 ----
 --
-
-[.tab.nodeParam.Default_Executor]
+Default_Executor::
++
 --
 [,yaml]
 ----
@@ -187,6 +194,7 @@ parameters:
     type: string
 ----
 --
+====
 
 As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
 

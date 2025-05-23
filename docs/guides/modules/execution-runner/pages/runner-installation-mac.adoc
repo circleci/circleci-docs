@@ -34,15 +34,20 @@ include::guides:ROOT:partial$runner/terms.adoc[]
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-[.tab.machine-runner.Web_app_installation]
+[tabs]
+====
+Web_app_installation::
++
 --
 include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-[.tab.machine-runner.CLI_installation]
+CLI_installation::
++
 --
 include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 --
+====
 
 
 [#download-the-launch-agent-script]
