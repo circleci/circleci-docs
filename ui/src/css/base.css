@@ -40,6 +40,8 @@ code,
 kbd,
 pre {
   font-family: var(--monospace-font-family);
+  font-size: 16px;
+  font-weight: 300;
 }
 
 b,

@@ -3,9 +3,10 @@
 }
 
 .toc.sidebar .toc-menu {
+  margin-top: -2.1rem;
   margin-right: 0.75rem;
   position: sticky;
-  top: calc(var(--spacing) * 12);
+  top: calc(var(--spacing) * 35);
 }
 
 .toc .toc-menu h3 {
@@ -73,6 +74,12 @@
   padding: 0.6rem 0 0.6rem 0.8rem;
   text-decoration: none;
   transition: border-left-color 0.3s ease, border-left-width 0.3s ease;
+}
+
+@media screen and (max-width: 48rem) {
+  .toc .toc-menu a {
+    color: var(--link-font-color);
+  }
 }
 
 .sidebar.toc .toc-menu a {

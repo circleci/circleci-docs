@@ -8,7 +8,8 @@ body.-toc aside.toc.sidebar {
   }
 
   main > .content {
-    /*overflow-x: auto;*/
+    overflow-x: auto;
+    max-width: 100vw;
   }
 }
 

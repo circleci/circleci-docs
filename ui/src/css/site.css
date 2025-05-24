@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "typeface-inter.css";
-@import "typeface-roboto-mono.css";
+@import "typeface-ibm-plex-mono.css";
 @import "vars.css";
 @import "base.css";
 @import "body.css";
@@ -38,4 +38,6 @@
   --color-disabled-element: #959595;
 
   --shadow-default: 0 0 6px 4px #1616161F;
+
+  --breakpoint-lg: 65rem;
 }

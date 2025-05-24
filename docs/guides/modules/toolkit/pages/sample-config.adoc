@@ -37,7 +37,7 @@ This image shows the workflow view for the following configuration example:
 
 image::guides:ROOT:concurrent-workflow-map.png[Concurrent Workflow Graph]
 
-[,yaml]
+[%linenums,yaml, title=app.js]
 ----
 version: 2.1
 

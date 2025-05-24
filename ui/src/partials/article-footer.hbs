@@ -1,4 +1,5 @@
 <footer class="mt-10 mb-12 border-t border-vapor w-full text-sm px-12 pt-6">
+  <!--
   <div class="flex flex-col md:flex-row md:items-center">
     <h4 class="text-xl font-normal">
       Was this page helpful ?
@@ -19,37 +20,43 @@
     </div>
 
   </div>
+  -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
 
-    <div class="rounded-lg border border-vapor p-6 space-y-4">
+    <div class="rounded-lg border border-vapor p-[24px] space-y-4">
       <h4 class="text-lg font-medium">
         Suggest an edit to this page
       </h4>
 
       <ul class="space-y-2 text-link-on-light">
-        <li>
-          <a href="#">Make a contribution</a>
+        <li class="group flex items-center">
+          <a href="{{page.editUrl}}">Make a contribution</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="invisible group-hover:visible ml-2 inline-block w-[13px] h-[13px]">
         </li>
-        <li>
+        <li class="group flex items-center">
           <a href="#">Learn how to contribute</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="invisible group-hover:visible ml-2 inline-block w-[13px] h-[13px]">
         </li>
       </ul>
     </div>
 
-    <div class="rounded-lg border border-vapor p-6 space-y-4">
+    <div class="rounded-lg border border-vapor p-[24px] space-y-4">
       <h4 class="text-lg font-medium">
         Still need help?
       </h4>
 
       <ul class="space-y-2 text-link-on-light">
-        <li>
+        <li class="group flex items-center">
           <a href="#">Ask the CircleCI community</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="invisible group-hover:visible ml-2 inline-block w-[13px] h-[13px]">
         </li>
-        <li>
+        <li class="group flex items-center">
           <a href="#">Join the research community</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="invisible group-hover:visible ml-2 inline-block w-[13px] h-[13px]">
         </li>
-        <li>
+        <li class="group flex items-center">
           <a href="#">Visit our support site</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="invisible group-hover:visible ml-2 inline-block w-[13px] h-[13px]">
         </li>
       </ul>
     </div>

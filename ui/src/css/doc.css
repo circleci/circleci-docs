@@ -4,7 +4,6 @@
   hyphens: auto;
   line-height: var(--doc-line-height);
   margin: var(--doc-margin);
-  max-width: var(--doc-max-width);
   padding: 0 1rem 4rem;
 }
 
@@ -32,18 +31,14 @@
 }
 
 .doc > h1.page:first-child {
-  font-size: calc(36 / var(--rem-base) * 1rem);
-  margin: 1.5rem 0;
+  font-size: 32px;
+  margin: 16px 0;
 }
 
 @media screen and (min-width: 769px) {
   .doc > h1.page:first-child {
     margin-top: 2.5rem;
   }
-}
-
-.doc > h1.page:first-child + aside.toc.embedded {
-  margin-top: -0.5rem;
 }
 
 .doc > h2#name + .sectionbody {
@@ -63,15 +58,16 @@
 }
 
 .doc h2:not(.discrete) {
-  border-bottom: 1px solid var(--section-divider-color);
   margin-left: -1rem;
   margin-right: -1rem;
   padding: 0.4rem 1rem 0.1rem;
+  font-weight: var(--alt-heading-font-weight);
 }
 
 .doc h3:not(.discrete),
 .doc h4:not(.discrete) {
   font-weight: var(--alt-heading-font-weight);
+  font-size: 20px;
 }
 
 .doc h1 .anchor,
@@ -134,6 +130,16 @@
   font-style: normal;
 }
 
+.doc .olist ol{
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.doc .ulist ul{
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
 .doc p code,
 .doc thead code,
 .doc .colist > table code {
@@ -150,7 +156,8 @@
 }
 
 .doc pre {
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
+  font-weight: inherit;
   line-height: 1.5;
   margin: 0;
 }
@@ -252,6 +259,14 @@
 
 .doc table.tableblock {
   font-size: calc(15 / var(--rem-base) * 1rem);
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  display: block;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border: 1px solid #D4D4D4;
+  border-radius: 8px;
 }
 
 .doc p.tableblock + p.tableblock {
@@ -273,28 +288,48 @@
 .doc table.tableblock th,
 .doc table.tableblock td {
   padding: 0.5rem;
+  border-bottom: 1px solid #D4D4D4;
 }
 
 .doc table.tableblock,
-.doc table.tableblock > * > tr > * {
-  border: 0 solid var(--table-border-color);
+.doc table.tableblock > * > tr:last-child > * {
+  border-bottom: 1px solid #D4D4D4;
 }
 
 .doc table.grid-all > * > tr > * {
-  border-width: 1px;
+  border-width: 0;
+  border-bottom: 1px solid #D4D4D4;
 }
 
 .doc table.grid-cols > * > tr > * {
-  border-width: 0 1px;
+  border-width: 0;
 }
 
 .doc table.grid-rows > * > tr > * {
-  border-width: 1px 0;
+  border-width: 0;
+  border-bottom: 1px solid #D4D4D4;
 }
 
 .doc table.grid-all > thead th,
 .doc table.grid-rows > thead th {
-  border-bottom-width: 2.5px;
+  border-bottom-width: 2px;
+}
+
+/* Handle border radius for tables */
+.doc table.tableblock > thead:first-child > tr:first-child > th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.doc table.tableblock > thead:first-child > tr:first-child > th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.doc table.tableblock > tbody:last-child > tr:last-child > td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.doc table.tableblock > tbody:last-child > tr:last-child > td:last-child {
+  border-bottom-right-radius: 8px;
 }
 
 .doc table.frame-all {
@@ -329,11 +364,22 @@
   border-right-width: 0;
 }
 
-.doc table.stripes-all > tbody > tr,
-.doc table.stripes-odd > tbody > tr:nth-of-type(odd),
-.doc table.stripes-even > tbody > tr:nth-of-type(even),
+.doc table.tableblock > tbody > tr:nth-of-type(odd) {
+  background: white;
+}
+
+.doc table.tableblock > tbody > tr:nth-of-type(even) {
+  background: #FAFAFA;
+}
+
 .doc table.stripes-hover > tbody > tr:hover {
   background: var(--table-stripe-background);
+}
+
+.doc table.tableblock > thead > tr > th {
+  font-weight: bold;
+  border-bottom: 2px solid #D4D4D4;
+  background-color: #FAFAFA;
 }
 
 .doc table.tableblock > tfoot {
@@ -443,7 +489,7 @@
 
 .doc .admonitionblock p,
 .doc .admonitionblock td.content {
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
 }
 
 .doc .admonitionblock td.content > :not(.title):first-child,
@@ -452,7 +498,7 @@
 }
 
 .doc .admonitionblock td.content pre {
-  font-size: calc(15 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
 }
 
 
@@ -471,6 +517,8 @@
 .doc .imageblock .content {
   align-self: stretch;
   text-align: center;
+  position: relative; /* Add position relative to position the magnifier icon */
+  cursor: zoom-in; /* Add zoom-in cursor to indicate the image is clickable */
 }
 
 .doc .imageblock.text-left,
@@ -500,7 +548,9 @@
   display: inline-block;
   height: auto;
   max-width: 100%;
+  width: auto;
   vertical-align: middle;
+  object-fit: contain;
 }
 
 .doc .image:not(.left):not(.right) > img {
@@ -517,7 +567,7 @@
   background: var(--abstract-background);
   border-left: 5px solid var(--abstract-border-color);
   color: var(--abstract-font-color);
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
   padding: 0.75em 1em;
 }
 
@@ -534,7 +584,7 @@
 
 .doc .quoteblock .attribution {
   color: var(--quote-attribution-font-color);
-  font-size: calc(15 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
   margin-top: 0.75rem;
 }
 
@@ -684,7 +734,7 @@
 .doc .videoblock .title,
 .doc table.tableblock caption {
   color: var(--caption-font-color);
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
   font-style: var(--caption-font-style);
   font-weight: var(--caption-font-weight);
   hyphens: none;
@@ -809,22 +859,74 @@
   white-space: pre-wrap;
 }
 
+/* Styling for code blocks and listing blocks */
 .doc pre.highlight > code,
 .doc .listingblock pre:not(.highlight),
 .doc .literalblock pre {
   background: var(--pre-background);
-  box-shadow: inset 0 0 1.75px var(--pre-border-color);
   display: block;
   overflow-x: auto;
   padding: 0.875em;
+  border-radius: inherit;
+  color: #FFFFFF;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
+/* Style listing blocks with titles */
+.doc .listingblock > .title {
+  background: var(--pre-title-background);
+  border-radius: 12px 12px 0 0;
+  padding: 0.5em 0.875em;
+  margin-bottom: 0;
+  position: relative;
+  padding-left: 2em; /* Add space for the SVG */
+  cursor: pointer; /* Indicate clickable */
+  transition: border-radius 0.3s ease;
+}
+
+/* Add the arrow-down SVG after the title */
+.doc .listingblock > .title::after {
+  content: "";
+  position: absolute;
+  left: 0.875em;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 4px;
+  background: url('../img/arrow-down.svg') no-repeat center / contain;
+  transition: transform 0.3s ease;
+}
+
+/* When title is collapsed, rotate the arrow */
+.doc .listingblock > .title.collapsed::after {
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+/* When title is collapsed, adjust the border radius */
+.doc .listingblock > .title.collapsed {
+  border-radius: 12px;
+}
+
+/* When a title is present, adjust the code block border radius */
+.doc .listingblock > .title + .content pre {
+  border-radius: 0 0 12px 12px;
+}
+
+/* When title is not present, use border-radius: 12px for code blocks */
+.doc .listingblock > .content pre {
+  border-radius: 12px;
+}
+
+/* Keep existing position relative for the content */
 .doc .listingblock > .content {
   position: relative;
 }
 
 .doc .source-toolbox {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   visibility: hidden;
   position: absolute;
   top: 0.25rem;
@@ -845,49 +947,49 @@
 .doc .source-toolbox .source-lang {
   text-transform: uppercase;
   letter-spacing: 0.075em;
-}
-
-.doc .source-toolbox > :not(:last-child)::after {
-  content: "|";
-  letter-spacing: 0;
-  padding: 0 1ch;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
 
 .doc .source-toolbox .copy-button {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background: none;
+  justify-content: center;
+  background-color: #E8E8E8;
   border: none;
+  border-radius: 50%;
   color: inherit;
   outline: none;
   padding: 0;
   font-size: inherit;
   line-height: inherit;
-  width: 1em;
-  height: 1em;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
 }
 
 .doc .source-toolbox .copy-icon {
   flex: none;
-  width: inherit;
-  height: inherit;
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: auto;
 }
 
 .doc .source-toolbox img.copy-icon {
-  filter: invert(50.2%);
-}
-
-.doc .source-toolbox svg.copy-icon {
-  fill: currentColor;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  object-position: center;
 }
 
 .doc .source-toolbox .copy-toast {
   flex: none;
-  position: relative;
+  position: absolute;
   display: inline-flex;
   justify-content: center;
-  margin-top: 1em;
+  margin-top: 0.5em;
   background-color: var(--doc-font-color);
   border-radius: 0.25em;
   padding: 0.5em;
@@ -895,18 +997,18 @@
   cursor: auto;
   opacity: 0;
   transition: opacity 0.5s ease 0.5s;
+  bottom: -10px;
 }
 
 .doc .source-toolbox .copy-toast::after {
   content: "";
   position: absolute;
-  top: 0;
+  top: -0.5em;
   width: 1em;
   height: 1em;
   border: 0.55em solid transparent;
-  border-left-color: var(--doc-font-color);
-  transform: rotate(-90deg) translateX(50%) translateY(50%);
-  transform-origin: left;
+  border-bottom-color: var(--doc-font-color);
+  transform-origin: center;
 }
 
 .doc .source-toolbox .copy-button.clicked .copy-toast {
@@ -952,7 +1054,7 @@
 }
 
 .doc .colist {
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
   margin: 0.25rem 0 -0.25rem;
 }
 
@@ -1028,7 +1130,7 @@
 }
 
 .doc .keyseq {
-  font-size: calc(16 / var(--rem-base) * 1rem);
+  font-size: var(--doc-font-size);
 }
 
 .doc .keyseq kbd {
@@ -1107,11 +1209,13 @@
 .doc h4,
 .doc h5,
 .doc h6 {
-  margin: 1rem 0;
+  margin: 16px 0;
   padding: 0;
   text-align: left;
   margin-left: 0;
   margin-right: 0;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 /* remove negative offsets on section headers */
@@ -1131,9 +1235,65 @@
 .doc dl,
 .doc table {
   margin: 0 0 1rem;
+  font-weight: 300;
 }
 
 /* inline links pick up the new blue */
 .doc a {
   color: #2152E5;
+}
+
+/* Image Modal Styles */
+.image-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image-modal-container {
+  position: relative;
+  max-width: 90%;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-modal-container img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+}
+
+.image-modal-title {
+  color: #fff;
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.image-modal-close {
+  position: absolute;
+  top: -4rem;
+  right: -2rem;
+  width: 30px;
+  height: 30px;
+  background: url('../img/close.svg') no-repeat center / contain;
+  border: none;
+  cursor: pointer;
+  filter: invert(1); /* Make the close icon white */
+}
+
+.image-modal-overlay.show {
+  display: flex;
 }

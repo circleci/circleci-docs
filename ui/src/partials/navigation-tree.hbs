@@ -1,10 +1,4 @@
 {{#if navigation.length}}
-  {{#if (eq (or ../level 0) 0)}}
-    <div data-navigation-tree-mobile-base data-depth="-1"
-        class="mobile-main-nav text-terminal-black font-light hidden lg:hidden">
-      {{> mobile-main-nav}}
-    </div>
-  {{/if}}
 <ul class="{{#if class}}{{class}}{{/if}} text-terminal-black font-light">
   {{#each navigation}}
   <li data-navigation-tree-content class="my-1" data-depth="{{or ../level 0}}" {{#if (eq ./url @root.page.url)}} data-current{{/if}}>
@@ -12,7 +6,7 @@
       <div data-navigation-tree-toggle class="flex items-center p-[8px] space-x-2 max-w-fit {{#if (eq ./url @root.page.url)}} -ml-1 rounded-lg bg-fog{{/if}} {{#if (has-active-child ./items)}} border-l-2 border-l-accent-green -ml-4 pl-4 md:border-none md:ml-0 md:pl-0{{/if}}">
         {{#if ./items.length }}
           <button class="hidden md:block -ml-[1.3rem] p-1 h-full">
-            <img src="{{{@root.uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px] transform {{#if (not (has-active-child ./items)) }}-rotate-90{{/if}}">
+            <img src="{{{@root.uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px] transform {{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url))) }}-rotate-90{{/if}}">
           </button>
         {{/if}}
         {{#if (and ./url (not (eq ./url @root.page.url)))}}
@@ -25,7 +19,7 @@
       </div>
     {{/if}}
   </li>
-  <li class="{{#if (and ./content ./items.length (not (has-active-child ./items))) }}hidden{{/if}}">
+  <li class="{{#if (and ./content ./items.length (not (has-active-child ./items)) (not (eq ./url @root.page.url)) ) }}hidden{{/if}}">
     {{> navigation-tree class="px-2 md:pr-2 md:pl-6" navigation=./items level=(increment ../level)}}
   </li>
   {{/each}}

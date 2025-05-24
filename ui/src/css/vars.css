@@ -27,7 +27,7 @@
   --body-font-color: var(--color-body-dark);
   --body-font-family: "Inter", sans-serif;
   --body-font-weight-bold: 600;
-  --monospace-font-family: "Roboto Mono", monospace;
+  --monospace-font-family: "IBM Plex Mono", monospace;
   --monospace-font-weight-bold: 600;
   /* base */
   --body-background: var(--color-white);
@@ -75,14 +75,14 @@
   --warning-on-color: var(--color-white);
   /* doc */
   --doc-font-color: #343434;
-  --doc-font-size: inherit;
-  --doc-font-size--desktop: calc(17 / var(--rem-base) * 1rem);
+  --doc-font-size: 16px;
+  --doc-font-size--desktop: 16px;
   --doc-line-height: 1.6;
   --doc-margin: 0 auto;
   --doc-margin--desktop: 0 2rem;
   --heading-font-color: #161616;
   --heading-font-weight: normal;
-  --alt-heading-font-weight: var(--body-font-weight-bold);
+  --alt-heading-font-weight: 500;
   --section-divider-color: var(--panel-border-color);
   --link-font-color: #2152E5;
   --link_hover-font-color: #104d92;
@@ -94,14 +94,15 @@
   --admonition-label-font-weight: var(--body-font-weight-bold);
   --caption-font-color: #343434;
   --caption-font-style: italic;
-  --caption-font-weight: 400;
+  --caption-font-weight: 300;
   --code-background: var(--panel-background);
   --code-font-color: var(--body-font-color);
   --example-background: var(--color-white);
   --example-border-color: var(--color-gray-70);
   --kbd-background: var(--panel-background);
   --kbd-border-color: var(--color-gray-10);
-  --pre-background: var(--panel-background);
+  --pre-title-background: #EDEDED;
+  --pre-background: #1C273A;
   --pre-border-color: var(--panel-border-color);
   --pre-annotation-font-color: var(--color-gray-50);
   --quote-background: var(--panel-background);

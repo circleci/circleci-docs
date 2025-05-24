@@ -7,7 +7,6 @@
 
   var config = (document.getElementById('site-script') || { dataset: {} }).dataset
   var supportsCopy = window.navigator.clipboard
-  var svgAs = config.svgAs
   var uiRootPath = (config.uiRootPath == null ? window.uiRootPath : config.uiRootPath) || '.'
 
   ;[].slice.call(document.querySelectorAll('.doc pre.highlight, .doc .literalblock pre')).forEach(function (pre) {
@@ -35,20 +34,11 @@
     if (supportsCopy) {
       ;(copy = document.createElement('button')).className = 'copy-button'
       copy.setAttribute('title', 'Copy to clipboard')
-      if (svgAs === 'svg') {
-        var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-        svg.setAttribute('class', 'copy-icon')
-        var use = document.createElementNS('http://www.w3.org/2000/svg', 'use')
-        use.setAttribute('href', uiRootPath + '/img/octicons-16.svg#icon-clippy')
-        svg.appendChild(use)
-        copy.appendChild(svg)
-      } else {
-        var img = document.createElement('img')
-        img.src = uiRootPath + '/img/octicons-16.svg#view-clippy'
-        img.alt = 'copy icon'
-        img.className = 'copy-icon'
-        copy.appendChild(img)
-      }
+      var img = document.createElement('img')
+      img.src = uiRootPath + '/img/copy.svg'
+      img.alt = 'copy icon'
+      img.className = 'copy-icon'
+      copy.appendChild(img)
       ;(toast = document.createElement('span')).className = 'copy-toast'
       toast.appendChild(document.createTextNode('Copied!'))
       copy.appendChild(toast)

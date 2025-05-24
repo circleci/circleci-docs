@@ -1,11 +1,13 @@
 <div data-page-navigation class="{{#if class}}{{class}}{{/if}} border-r border-vapor fixed lg:relative inset-0 lg:inset-auto transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-white w-full" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
   <aside class="h-full py-6 px-9 overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-thumb-fog scrollbar-track-vapor scrollbar-track-border">
     <div class="flex items-center justify-between lg:hidden text-terminal-black mb-10">
-      <img data-page-navigation-back-button src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Language Icon" class="h-4 w-4">
+      <img data-page-navigation-back-button src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Arrow Back" class="md:hidden h-4 w-4">
       <h3 class="font-medium"> {{page.component.title}}</h3>
-      <img data-page-navigation-toggle src="{{{uiRootPath}}}/img/close.svg" alt="Language Icon" class="h-4 w-4">
+      <img data-page-navigation-toggle src="{{{uiRootPath}}}/img/close.svg" alt="Close Navigation" class="h-4 w-4">
     </div>
-    {{> search-bar class="lg:hidden mb-12" }}
+    {{> search-bar class="md:hidden mb-12" }}
+    {{> search-results class="hidden"}}
+    {{> component-explorer-nav class="hidden" options=(components-to-nav-list)}}
     {{> left-side-nav}}
   </aside>
 </div>

@@ -1,36 +1,35 @@
-<nav class="flex items-center justify-between mt-7 text-terminal-black font-light">
+<nav data-component-explorer-nav class="flex items-center justify-between text-terminal-black font-light {{#if class}}{{class}}{{/if}}">
 
-  <ul class="hidden md:flex space-x-8">
+  <ul class="flex flex-col md:flex-row md:space-x-8">
     {{#each options.navList}}
       <li class="flex items-center mr-2">
-        <a href="{{{relativize ./url}}}" class="inline-block px-2 py-3 {{#if (eq ./name @root.page.component.name)}} border-b-2 border-operational-green font-medium {{/if}} ">
+        <a href="{{{relativize ./url}}}" class="inline-block px-2 py-2 md:py-3 {{#if (eq ./name @root.page.component.name)}} text-accent-green md:text-inherit border-l-2 md:border-l-0 md:border-b-2 border-accent-green font-medium {{/if}} ">
           {{{./label}}}
         </a>
       </li>
     {{/each}}
   </ul>
 
-  <ul class="hidden lg:flex">
+  <ul class="hidden lg:flex gap-2">
     <li class="flex items-center">
-      <a href="#" class="inline-block px-2 py-3">
+      <a href="https://circleci.com/developer/" class="inline-block px-2 py-3">
         Dev Hub
       </a>
     </li>
-    <li class="flex items-center ml-2">
-      <a href="#" class="inline-block px-2 py-3">
+    <li class="flex items-center">
+      <a href="https://circleci.com/docs/api/v2/index.html" class="inline-block px-2 py-3">
         API
       </a>
-      <button class="p-1">
-        <img src="{{{uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px]">
-      </button>
     </li>
-    <li class="flex items-center ml-2">
-      <a href="#" class="inline-block px-2 py-3">
-        Help
+    <li class="flex items-center">
+      <a href="https://support.circleci.com/hc/en-us/" class="inline-block px-2 py-3">
+        Support
       </a>
-      <button class="p-1">
-        <img src="{{{uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px]">
-      </button>
+    </li>
+    <li class="flex items-center">
+      <a href="https://discuss.circleci.com/" class="inline-block px-2 py-3">
+        Discuss
+      </a>
     </li>
   </ul>
 </nav>

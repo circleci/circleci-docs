@@ -3,11 +3,11 @@
   <ul>
     {{#with page.componentVersion}}
     {{#if (and ./title (ne ./title @root.page.breadcrumbs.0.content))}}
-    <li class="inline after:content-['/'] after:px-2"><a class="text-link-on-light font-normal" href="{{{relativize ./url}}}">{{{./title}}}</a></li>
+    <li class="inline after:text-[#959595] after:content-['/'] after:px-2"><a class="text-link-on-light font-normal" href="{{{relativize ./url}}}">{{{./title}}}</a></li>
     {{/if}}
     {{/with}}
     {{#each page.breadcrumbs}}
-    <li class="inline {{#unless @last}}after:content-['/'] after:px-2{{/unless}}">
+    <li class="inline {{#unless @last}}after:text-[#959595] after:content-['/'] after:px-2{{/unless}}">
     {{#if @last}}
       <span class="font-normal">{{{./content}}}</span>
     {{else}}

@@ -69,7 +69,7 @@ Once your project is created you will land on your pipelines page.
 GitLab_Cloud::
 +
 --
-Follow these steps to create a new project in CircleCI:
+Follow these steps to create a new project in CircleCI Gitlab:
 
 include::guides:ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
