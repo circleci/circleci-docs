@@ -1,4 +1,4 @@
-<nav data-component-explorer-nav class="flex items-center justify-between text-terminal-black font-light {{#if class}}{{class}}{{/if}}">
+<nav data-component-explorer-nav class="flex flex-col md:flex-row md:items-center justify-between text-terminal-black font-medium md:font-light {{#if class}}{{class}}{{/if}}">
 
   <ul class="flex flex-col md:flex-row md:space-x-8">
     {{#each options.navList}}
@@ -10,26 +10,30 @@
     {{/each}}
   </ul>
 
-  <ul class="hidden lg:flex gap-2">
+  <ul class="flex flex-col ml-2 mt-10 md:mt-0 md:ml-0 md:flex-row gap-2">
     <li class="flex items-center">
-      <a href="https://circleci.com/developer/" class="inline-block px-2 py-3">
+      <a href="https://circleci.com/developer/" class="inline-block md:px-2 md:py-3">
         Dev Hub
       </a>
+      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="md:hidden ml-2 inline-block w-[13px] h-[13px]">
     </li>
     <li class="flex items-center">
-      <a href="https://circleci.com/docs/api/v2/index.html" class="inline-block px-2 py-3">
+      <a href="https://circleci.com/docs/api/v2/index.html" class="inline-block md:px-2 md:py-3">
         API
       </a>
+      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="md:hidden ml-2 inline-block w-[13px] h-[13px]">
     </li>
     <li class="flex items-center">
-      <a href="https://support.circleci.com/hc/en-us/" class="inline-block px-2 py-3">
+      <a href="https://support.circleci.com/hc/en-us/" class="inline-block md:px-2 md:py-3">
         Support
       </a>
+      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="md:hidden ml-2 inline-block w-[13px] h-[13px]">
     </li>
     <li class="flex items-center">
-      <a href="https://discuss.circleci.com/" class="inline-block px-2 py-3">
+      <a href="https://discuss.circleci.com/" class="inline-block md:px-2 md:py-3">
         Discuss
       </a>
+      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="md:hidden ml-2 inline-block w-[13px] h-[13px]">
     </li>
   </ul>
 </nav>

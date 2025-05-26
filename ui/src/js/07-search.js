@@ -34,6 +34,7 @@
       mobileSearchContainer: document.querySelector('[data-page-navigation] [data-search-results-container]'),
       navigation: document.querySelector('[data-page-navigation]'),
       leftSideNav: document.querySelector('[data-left-side-nav-container]'),
+      goToAppMobileButton: document.querySelector('[data-left-side-nav-container] + a'),
       searchResultPathsContainer: null,
       mobileSearchResultPathsContainer: null,
       pathsList: null,
@@ -445,6 +446,7 @@
 
       // Hide the navigation content
       elements.leftSideNav.classList.add('hidden')
+      elements.goToAppMobileButton.classList.add('hidden')
 
       // Show the search results
       elements.mobileSearchContainer.classList.remove('hidden')
@@ -460,6 +462,7 @@
 
       // Show the navigation content
       elements.leftSideNav.classList.remove('hidden')
+      elements.goToAppMobileButton.classList.remove('hidden')
 
       // Hide the search results
       elements.mobileSearchContainer.classList.add('hidden')

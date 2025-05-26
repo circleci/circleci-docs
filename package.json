@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@asciidoctor/tabs": "^1.0.0-beta.6",
-    "@fontsource/ibm-plex-mono": "^5.2.5",
     "algoliasearch": "^5.25.0",
     "node-html-parser": "^7.0.1",
     "reading-time": "^1.5.0"
