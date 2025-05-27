@@ -40,8 +40,13 @@ This technical documentation consists of several specialized files:
    cd circleci-docs-static
    npm ci
    ```
+2. **Make sure you've cloned server-v branches (Server Administration Docs)**
 
-2. **Start the development server**:
+```bash
+   npm run fetch-server-branches
+   ```
+
+3. **Start the development server**:
    ```bash
    npm run start:dev
    ```
