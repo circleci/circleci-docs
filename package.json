@@ -6,7 +6,8 @@
     "start:dev": "dotenvx run -- npm run build:ui && gulp preview:docs",
     "preview:ui": "dotenvx run -- gulp preview:ui",
     "build:ui": "gulp build:ui",
-    "build:docs": "npm run build:ui && gulp build:docs"
+    "build:docs": "npm run build:ui && gulp build:docs",
+    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh"
   },
   "repository": {
     "type": "git",

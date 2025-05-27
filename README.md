@@ -1,95 +1,77 @@
-# CircleCI Docs Static Site
+# CircleCI Docs Static Site: Technical Documentation
 
-This repository houses and manages the documentation for CircleCI Docs. Here you will find an overview of the project structure, components, and usage.
+Welcome to the comprehensive technical documentation for the CircleCI Docs Static Site project. This documentation is designed to help developers, content authors, and contributors understand the project's architecture, workflow, and best practices.
 
 ## Table of Contents
-- [Project Structure](#project-structure)
-- [Components](#components)
-- [Scripts](#scripts)
-- [UI Customization](#ui-customization)
-- [Prerequisites](#prerequisites)
+- [Overview](#overview)
+- [Documentation Files](#documentation-files)
 - [Getting Started](#getting-started)
+- [Contributing](#contributing)
 
-## Project Structure
-```text
-.
-├── .circleci/                  # CircleCI pipelines
-├── .github/workflows/          # GitHub Actions configurations
-├── docs/                       # Antora component sources
-│   ├── about/
-│   ├── contributors/
-│   ├── guides/
-│   ├── orbs/
-│   ├── reference/
-│   ├── root/
-│   └── server-admin/
-├── scripts/                    # Helper scripts
-│   └── build-ui-bundle.sh      # Script to build the UI bundle
-├── ui/                         # Antora UI submodule
-├── antora-playbook.yml         # Antora playbook: site metadata, component sources, UI bundle, output settings
-├── gulpfile.js                 # Local development server and watch tasks
-├── package.json                # npm scripts and dependencies
-├── package-lock.json           # Locked npm dependencies
-├── ui-bundle.zip               # Generated UI bundle
-└── .gitignore                  # Ignored files and directories
-```
+## Overview
 
-## Components
-- **docs/**: Contains Antora components. Each subfolder represents a component loaded by the Antora playbook. Place new or updated documentation under `docs/<component-name>/`, defining `antora.yml` and navigation in `modules/ROOT/nav.adoc`.
-- **scripts/**: Contains utility scripts used for building and maintaining the documentation site.
-- **ui/**: Git submodule containing the Antora UI theme. This is used to generate the `ui-bundle.zip` file required by Antora.
-- **antora-playbook.yml**: Defines how Antora loads components, site metadata (title, URL, robots), UI bundle source, and output directory (`./build`).
-- **package.json / package-lock.json**: Manage project dependencies and scripts for building and serving the documentation.
+The CircleCI Docs Static Site is a documentation platform built using [Antora](https://antora.org/), a static site generator designed for multi-repository documentation. This project combines:
 
-## Scripts
-- **`npm run build:docs`**: Builds the entire documentation site and outputs static files to the `build/` directory. Automatically builds the UI bundle if needed.
-- **`npm run start:dev`**: Launches a local development server with live reload, rebuilding on file changes. Ensures the UI bundle is built first.
-- **`npm run build:ui`**: Builds only the UI bundle using the `build-ui-bundle.sh` script, creating a `ui-bundle.zip` file in the project root.
+- **Component-based architecture**: Organized documentation into logical sections
+- **AsciiDoc content**: Powerful markup language for technical documentation
+- **Custom UI**: Tailored presentation with modern web technologies
+- **Automated build pipeline**: Streamlined development and deployment process
 
-## UI Customization
-The documentation site uses a custom UI theme managed as a Git submodule. The `build-ui-bundle.sh` script handles:
+## Documentation Files
 
-1. Checking if the UI bundle already exists
-2. Initializing the Git submodule if needed
-3. Installing dependencies for the UI
-4. Building the UI bundle
-5. Copying the bundle to the project root
+This technical documentation consists of several specialized files:
 
-When making UI changes:
-1. Update the UI submodule
-2. Run `npm run build:ui` to rebuild the UI bundle
-3. Then rebuild the docs with `npm run build:docs`
-
-## Prerequisites
-- Node.js (v16 or later)
-- npm (v8 or later)
-- Git (for submodule management)
+| File | Purpose |
+|------|---------|
+| [README.md](README.md) | Project overview and basic usage |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Detailed system architecture |
+| [DEVELOPMENT.md](DEVELOPMENT.md) | Development setup and workflows |
+| [CONTENT_AUTHORING.md](CONTENT_AUTHORING.md) | Writing and formatting guidelines |
+| [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) | Detailed technical specifications |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Guidelines for contributors |
 
 ## Getting Started
-1. Clone the repository with submodules:
-   ```bash
-   git clone --recurse-submodules https://github.com/circleci/circleci-docs-static.git
-   ```
-   
-   If you've already cloned the repository without submodules:
-   ```bash
-   git submodule init
-   git submodule update --remote --checkout
-   ```
 
-2. Install dependencies:
+### For Contributors
+
+1. **Set up your environment**:
    ```bash
+   git clone https://github.com/circleci/circleci-docs-static.git
+   cd circleci-docs-static
    npm ci
    ```
 
-3. Start the development server:
+2. **Start the development server**:
    ```bash
    npm run start:dev
    ```
-   This will build the UI bundle (if not already built) and start the local server.
 
-4. To build the static site for production:
-   ```bash
-   npm run build:docs
-   ```
-   The output will be in the `build/` directory.
+3. **Review the architecture**:
+   - Read [ARCHITECTURE.md](ARCHITECTURE.md) for system design
+   - Review [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow
+   - Consult [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) for detailed specs
+
+### For Content Authors
+
+1. **Understand the content organization**:
+   - Read [CONTENT_AUTHORING.md](CONTENT_AUTHORING.md) for guidelines
+   - Review existing content for examples and patterns
+
+2. **Set up your environment**:
+   - Follow the developer setup instructions
+   - Start the development server to preview changes
+
+3. **Create or edit content**:
+   - Follow the AsciiDoc formatting guidelines
+   - Use the appropriate component structure
+   - Test your content locally
+
+## Contributing
+
+We welcome contributions to both the documentation content and the technical infrastructure. To contribute:
+
+1. Review [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines
+2. Set up your development environment
+3. Create a branch for your changes
+4. Submit a pull request
+
