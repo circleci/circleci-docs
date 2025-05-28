@@ -1,0 +1,132 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= URL orbs
+:page-description: How to manage URL orbs allow-lists
+:experimental:
+:icons: font
+:page-layout: classic-docs
+
+[#introduction]
+== Introduction
+
+The ability for an organization to use private orbs is no longer dependent on publishing orbs. URL-referenced orbs offer a way to create orbs as well as control access within the organization.
+
+The use of URL orbs is recommended for private orbs where there are additional trust and access controls within the VCS.
+
+
+INFO:
+====
+URL orbs may themselves reference other URL orbs or Registry orbs.
+
+Registry orbs may not reference URL orbs.
+
+Unlike Registry orbs, URL orbs are expanded at the time of use, not the time of publication.
+
+====
+
+
+Example:
+
+[source,yaml]
+----
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/refs/heads/main/platform-team.yaml
+----
+
+== Managing allow-lists
+
+
+An allow-list is a security mechanism that controls which external URLs an organization can use to reference orbs in their CircleCI configurations.
+
+Each allow-list entry contains three components:
+
+* Name - A descriptive identifier for the entry
+* URL prefix - The approved URL pattern that orb references must match (must use HTTPS and end with /)
+* Auth - The authentication method to use (`none`, `github-oauth`, or `github-app`)
+
+For an organization to use a URL-referenced orb, there must be at least one allow-list entry whose URL prefix matches the beginning of the orb's URL. If no matching entry exists, the orb reference will be blocked.
+
+The allow-list applies organization-wide - once configured, all projects within that organization can use orbs from the approved URL prefixes. 
+
+=== Adding a URL orb allow-list entry
+
+[.tab.add.CircleCI_web_app]
+
+. Navigate to the menu:Organization Settings[Orbs].
+. In the *Allow-List URLs*  section, select btn:[Add].
+. Fill out the name, URL, and VCS fileds.
+. Select btn:[Add URL].
+
+[.tab.add.API]
+
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. Send a *POST* request to the https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list endpoint to add an allow-list entry, with a JSON map containing name, prefix, and auth keys, as the request body.
+
+Example:
+
+[source, shell]
+----
+curl -X POST https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+  --data '{"name": "Private URL Orbs", "prefix": "https://raw.githubusercontent.com/my-org/private-orbs/", "auth": "github-app"}'
+----
+Example response:
+
+[source, shell]
+----
+{
+  "id":"6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx",
+  "message":"Created."
+}
+----
+
+
+=== View the orgaznization's URL orb allow-lists
+
+
+[.tab.get.CircleCI_web_app]
+
+. Navigate to menu:Organization Settings[Orbs].
+. Scroll to the *Allow-List URLs* section.
+. Existing allow-list entries are displayed in the table.
+
+
+[.tab.add.API]
+
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. Send a *GET* request to the https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list endpoint to view the organization's URL orb allow-lists.
+
+Example:
+
+[source, shell]
+----
+curl -X GET https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+Example response:
+
+[source, shell]
+----
+{
+  "items": [
+    {
+       "id": "6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx",
+       "name": "Private URL Orbs",
+       "prefix": "https://raw.githubusercontent.com/my-org/private-orbs/",
+       "auth": "github-oauth"
+    }
+  ]
+}
+
+----
+
