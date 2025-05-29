@@ -316,6 +316,8 @@ stdin
 [Ss]ubkeys?
 [Ss]ubshells?
 subcommand
+[Ss]ubnets?
+[Ss]ubnetworks?
 superset
 Sysbox
 systemd

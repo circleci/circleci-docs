@@ -12,7 +12,7 @@ contentTags:
 :toc: macro
 :toc-title:
 
-CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment. CircleCI server requires nomad client images to use CGroupsV1 and is not compatible with CgroupsV2.
+CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment. CircleCI server requires Nomad client images to use CGroupsV1 and is not compatible with CgroupsV2.
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
