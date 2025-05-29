@@ -136,8 +136,8 @@ en:
             link: github-trigger-event-options
           - name: GitLab trigger options
             link: gitlab-trigger-options
-          - name: Webhook integration
-            link: webhooks
+          - name: Custom webhooks
+            link: custom-webhooks
       - name: Schedule
         children:
           - name: Scheduled pipelines
@@ -637,8 +637,8 @@ en:
     children:
       - name: Integration features
         children:
-          - name: Webhook integration
-            link: webhooks
+          - name: Outbound webhooks
+            link: outbound-webhooks
           - name: Notifications overview
             link: notifications
           - name: Build open source projects
@@ -684,8 +684,8 @@ en:
             link: add-ssh-key
       - name: Reference
         children:
-          - name: Webhooks reference
-            link: webhooks-reference
+          - name: Outbound webhooks reference
+            link: outbound-webhooks-reference
 
   - name: Developer toolkit
     icon: icons/sidebar/code.svg
