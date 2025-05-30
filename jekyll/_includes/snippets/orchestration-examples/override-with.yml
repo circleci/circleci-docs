@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   build:
-    steps: 
+    steps:
       - run: task build
   test:
     steps:
@@ -17,7 +17,7 @@ jobs:
 workflows:
   - build-test-deploy:
       jobs:
-        - build:
+        - build
         - test:
             override-with: my-orb/my-test
             requires: build

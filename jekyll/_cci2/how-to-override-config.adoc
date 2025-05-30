@@ -84,6 +84,8 @@ In your orb, define the custom-test job that will replace the standard test job 
 [source,yaml]
 ----
 # my-orb
+version: 2.1
+
 jobs:
   custom-test:
     docker:
@@ -96,7 +98,6 @@ jobs:
 
 Notice that this file:
 
-* Does NOT include `version: 2.1`.
 * Does NOT include `orbs:` or `workflows:` sections.
 * Contains only the `jobs:` section with the specific job definitions the team wants to override.
 
@@ -108,7 +109,7 @@ Notice that this file:
 
 Add your URL orb to the `orbs` section of your configuration.
 
-Use the `override-with` key to replace the test job with a job from your orb. When the `main` workflow runs, CircleCI will use the custom-test job from your URL orb instead of your locally defined test job. If the `custom-test` job the orb does not exist, the `test` job configured in your main config will be used.
+Use the `override-with` key to replace the test job with a job from your orb. When the `main` workflow runs, CircleCI will use the custom-test job from your URL orb instead of your locally defined test job. If the `custom-test` job in the orb does not exist, the `test` job configured in your main config will be used.
 
 [source,yaml]
 ----
@@ -165,7 +166,7 @@ orbs:
 parameters:
   config-override-url:
     type: string
-    default: "https://raw.githubusercontent.com/default-team/project/main/.circleci/team-config.yml"
+    default: "https://raw.githubusercontent.com/my-org/my-repo/refs/heads/main/.circleci/team-config.yml"
 
 # Standard jobs defined by platform team
 jobs:
@@ -301,7 +302,14 @@ If your job is not being overridden as expected, try the following:
 If using pipeline parameters with URL-based orbs, check the following:
 
 * Remember that pipeline parameters are only provided when triggering a pipeline via the API.
-* For VCS triggers, ensure you are using pipeline values that are available at runtime.
+* For VCS triggers, ensure you are using pipeline values that are available at runtime. For example, you could use:
++
+[source,yaml]
+----
+https://raw.githubusercontent.com/<< pipeline.git.repo_owner >>/<< pipeline.git.repo_name >>/refs/heads/main/path/to/file/orb.yml
+----
++
+These pipeline values will be compiled to the team's repo that triggered the change, and fetch that team's override. This assumes the org is using the Github App, and all the teams' repos are under the same GitHub org.
 
 === Centralized config changes not applying
 If changes to your centralized configuration are not taking effect, check the following:
