@@ -72,7 +72,7 @@ Example:
 
 [source, shell]
 ----
-curl -X POST https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list \
+curl -X POST https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list \
   --header "Circle-Token: ${CIRCLE_TOKEN}" \
   --header 'content-type: application/json' \
   --data '{"name": "Private URL Orbs", "prefix": "https://raw.githubusercontent.com/my-org/private-orbs/", "auth": "github-app"}'
@@ -109,7 +109,7 @@ Example:
 
 [source, shell]
 ----
-curl -X GET https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list \
+curl -X GET https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list \
   --header "Circle-Token: ${CIRCLE_TOKEN}"
 ----
 
@@ -130,3 +130,44 @@ Example response:
 
 ----
 
+=== Delete a URL orb allow-list entry
+
+[.tab.delete.CircleCI_web_app]
+
+. Navigate to menu:Organization Settings[Orbs].
+. Scroll to the *Allow-List URLs* section.
+. Select the btn:[Delete] icon next to the allow-list entry to delete.
+
+[.tab.delete.API]
+
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. Send a *DELETE* request to the https://circleci.com/docs/api/private/organization/<organization-id>/url-orb-allow-list/<allow-list-id> endpoint to delete the allow-list entry.
+
+Example:
+
+[source, shell]
+----
+curl -X DELETE https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list/6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+Example response:
+
+[source, shell]
+----
+{
+  "id": "6a7e25f1-6da7-461b-9fb0-69e7b92f6xxx",
+  "message": "Deleted."
+}
+----
+
+=== Limitations & Caveats
+
+* The URL Orb allow-list is limited to at most 5 entries.
+* A single config may use no more than 50 URL orbs in total, whether referenced directly or indirectly in a hierarchy.
+* A hierarchy of URL orbs may not exceed a depth of 5 orb references.
+* The `github-oauth` auth type assumes that any member of the organization known to CircleCI has permission to fetch the URL orb. If this is not true then seemingly arbitrary failures to fetch URL orbs will occur. The `github-app` auth type does not have the above limitation.
+* URL orbs are cached for 5 minutes.
+* There is currently no support for Bitbucket or GitLab authentication.
