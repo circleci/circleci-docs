@@ -2455,6 +2455,36 @@ workflows:
 ----
 
 '''
+
+[#override-with]
+====== *`override-with`*
+
+The `override-with` key is used to override the job configuration with a job from the referenced orb.
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key | Required | Type | Description
+
+| `override-with`
+| N
+| String
+| The orb job name that will be used to override the existing job configuration. (Both URL-based and registry orbs are supported)
+|===
+
+*Example:*
+
+[,yml]
+----
+include::../_includes/snippets/orchestration-examples/override-with.yml[]
+----
+
+In the example above, the `test` job in the workflow is being overriden with the orb job `my-orb/my-test`. The `my-orb/my-test` job might be defined with a different resource class or execution steps. 
+
+If the `my-orb/my-test` job is not defined inside the orb, the `test` job will compile using the local job definition.
+
+'''
+[#serial-group]
 ====== `serial-group`
 
 The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control the orchestration of jobs across an organization, not just within projects and pipelines.
