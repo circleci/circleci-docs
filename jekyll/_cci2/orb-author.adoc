@@ -11,17 +11,40 @@ contentTags:
 :page-layout: classic-docs
 :page-liquid:
 
-[#introduction]
-== Introduction
+CircleCI orbs are packages of xref:orb-concepts#orb-configuration-elements[reusable configuration] that you can import into you CircleCI configuration files. Orbs come in two types:
 
-This orb authoring guide assumes you have read the xref:orb-intro#[Introduction to orbs] document, the xref:orb-author-intro#[Introduction to authoring an orb] document, and claimed your namespace. Now you are ready to develop an orb.
+* Registry orbs are packaged in a way that can be published to the link:https://circleci.com/developer/orbs[orb registry] and imported into multiple configuration files.
+* URL orbs can be stored anywhere that can be accessed by your CircleCI project. URL orbs are referenced by a URL to import into your configuration files.
+
+If you manage multiple, similar projects, consider abstracting out your config with orbs.
+
+The majority of these guides focus on authoring, testing and publishing *registry orbs*. *URL orbs* can contain the same reusable config component mentioned in this guide but are not restricted by the publishing process and versioning rules.
+
+== Prerequisites
+
+Before authoring an orb, it is recommended that you become familiar with the xref:config-intro#[CircleCI config] and authoring xref:reusing-config#[parameterized reusable config elements] pages.
+
+Orbs consist of three main elements:
+
+* xref:orb-concepts#commands[Commands]
+* xref:orb-concepts#jobs[Jobs]
+* xref:orb-concepts#executors[Executors]
+
+Practice with xref:reusing-config#writing-inline-orbs[inline orbs]. Inline orbs can be defined within a single config file for testing.
+
+NOTE: Registry orb authors automatically agree to the CircleCI link:https://circleci.com/legal/code-sharing-terms/[Code Sharing Terms of Service]. All publicly published orbs are made available on the Orb Registry under the link:https://opensource.org/licenses/MIT[MIT License agreement]. For more information, see link:https://circleci.com/developer/orbs/licensing[Orb Licensing].
+
+CAUTION: Once a registry orb is created it cannot be deleted. Registry orbs are link:https://semver.org/[SemVer compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+
+[#getting-started]
+== Getting started with registry orbs
 
 Whether you are writing your first orb or getting ready for production level, we recommend using our <<orb-development-kit>> to get started. Alternatively, as orbs are packages of xref:reusing-config#[reusable configuration], they can be written xref:orb-author-validate-publish#[manually], as singular `yaml` files, and published using our xref:local-cli#installation[CircleCI orb CLI].
 
 [#orb-development-kit]
-== Orb development kit
+=== Orb development kit
 
-The orb development kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. The `orb init` command is the key to using the orb development kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
+The orb development kit refers to a suite of tools that work together to simplify the registry orb development process, with automatic testing and deployment on CircleCI. The `orb init` command is the key to using the orb development kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
 
 The orb development kit is made up of the following components:
 
@@ -37,15 +60,61 @@ The *CircleCI CLI* contains two commands which are designed to work with the kit
 
 The *orb tools orb* is an orb for creating orbs.
 
-[#create-test-and-publish-an-orb]
-== Create, test and publish an orb
+[#orb-cli]
+=== Orb CLI
 
-Follow the steps below to create, test and publish your own orb, using the orb development kit.
+To begin creating orbs, you will need to xref:local-cli#installation[set up the CircleCI CLI] on your local machine, with a link:https://app.circleci.com/settings/user/tokens[personal access token]. For a full list of orb-related commands inside the CircleCI CLI, visit link:https://circleci-public.github.io/circleci-cli/circleci_orb.html[CircleCI CLI help].
+
+[#permissions-matrix]
+=== Permissions matrix
+
+Orb CLI commands are scoped to different user permission levels, set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Orb Command | Permission Scope
+
+| `circleci namespace create`
+| Owner
+
+| `circleci orb init`
+| Owner
+
+| `circleci orb create`
+| Owner
+
+| `circleci orb publish` development version
+| Member
+
+| `circleci orb publish` production version
+| Owner
+|===
+
+[#register-a-namespace]
+=== Register a namespace
+
+Every organization registered on CircleCI is able to claim *one* unique xref:orb-concepts#namespaces[namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
+
+Enter the following command to claim your namespace, if you have not yet claimed one:
+
+[,shell]
+----
+circleci namespace create <name> --org-id <your-organization-id>
+----
+
+NOTE: If you need help finding your organization ID, visit the xref:introduction-to-the-circleci-web-app#[Introduction to the CircleCI Web App] page.
+
+
+[#create-test-and-publish-an-orb]
+== Create, test and publish a registry orb
+
+Follow the steps below to create, test and publish your registry orb, using the orb development kit.
 
 [#getting-started]
 === Getting started
 
-To get started with orb authoring, first follow the xref:create-an-orb#[Create an orb tutorial].
+To get started with orb authoring, first follow the xref:create-an-orb#[Create an orb tutorial]. Once you have set up your orb project, you can begin writing your orb, using the following steps.
 
 [#writing-your-orb]
 === Writing your orb
@@ -170,7 +239,7 @@ steps:
 [#examples]
 ===== Examples
 
-Author and add xref:orb-concepts#usage-examples[Usage Examples] to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the link:https://circleci.com/developer/orbs[Orb Registry] for users to reference.
+Author and add xref:orb-concepts#usage-examples[Usage Examples] to the `src/examples` directory. Usage examples are not for use directly by end users in their configs. They provide a way for you to share use-case specific examples for users to reference.
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 
@@ -217,7 +286,7 @@ steps:
 [#scripts]
 ==== Scripts
 
-One of the major benefits of the orb development kit is a xref:orb-concepts#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command in the CLI (automated when using the orb development kit), you can use the value `<<include(file)>>` within your orb config code, for any key, to include the file contents directly in the orb.
+One of the major benefits of the orb development kit is a xref:orb-concepts#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `<<include(file)>>` within your orb config code to include the file contents directly in the orb.
 
 Script inclusion is especially useful when writing complex orb commands, which might contain a lot of _Bash_ code, _(although you could use Python too!)_.
 
@@ -260,7 +329,11 @@ steps:
 
 CircleCI configuration is written in `YAML`. Logical code such as `bash` can be encapsulated and executed on CircleCI through `YAML`, but, for developers, it is not convenient to write and test programmatic code within a non-executable format. Also, parameters can become cumbersome in more complex scripts as the `<<parameter>>` syntax is a CircleCI native YAML enhancement, and not something that can be interpreted and executed locally.
 
-Using the orb development kit and the `<<include(file)>>` syntax, you can import existing scripts into your orb, locally execute and test your orb scripts, and even utilize true testing frameworks for your code.
+Using the orb development kit and the `<<include(file)>>` syntax, you can:
+
+* Import existing scripts into your orb.
+* Locally execute and test your orb scripts.
+* Utilize true testing frameworks for your code.
 
 [#using-parameters-with-scripts]
 ===== Using parameters with scripts
