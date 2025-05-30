@@ -107,7 +107,7 @@ Notice that this file:
 
 === 4. Override a job using the orb
 
-Add your URL orb to the `orbs` section of your configuration.
+Add your URL orb to the `orbs` section of your configuration. If you copy the example below, you will need to update the URL to point to your orb.
 
 Use the `override-with` key to replace the test job with a job from your orb. When the `main` workflow runs, CircleCI will use the custom-test job from your URL orb instead of your locally defined test job. If the `custom-test` job in the orb does not exist, the `test` job configured in your main config will be used.
 
@@ -137,8 +137,9 @@ workflows:
     jobs:
       - build
       - test:
-        override-with: my-orb/custom-test
-        requires: build
+          override-with: my-orb/custom-test
+          requires:
+            - build
 ----
 
 [#real-world-template-example]
