@@ -32,7 +32,7 @@ CircleCI supports two types of orbs:
 
 Orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
 
-If you would like to author your own orb, read more on the xref:orb-author-intro#[Introduction to Authoring Orbs] page.
+If you would like to author your own orb, read more on the xref:orb-author#[Introduction to Authoring Orbs] page.
 
 [#quickstart]
 == Quickstart
@@ -174,7 +174,7 @@ workflows:
 [#the-orb-registry]
 == The orb registry
 
-The link:https://circleci.com/developer/orbs[Orb Registry] is an open repository of all published orbs. Find the orb for your stack or consider developing and xref:orb-author-intro#[publishing your own orb].
+The link:https://circleci.com/developer/orbs[Orb Registry] is an open repository of all published orbs. Find the orb for your stack or consider developing and xref:orb-author#[publishing your own orb].
 
 image::orbs-registry.png[Orb Registry]
 
