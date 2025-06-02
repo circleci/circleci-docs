@@ -5,7 +5,7 @@ orbs:
 
 jobs:
   build:
-    steps:
+    steps: 
       - run: task build
   test:
     steps:
