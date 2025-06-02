@@ -5,7 +5,7 @@ contentTags:
   - Cloud
   - Server v4+
 ---
-= Webhooks reference
+= Outbound webhooks reference
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
