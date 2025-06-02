@@ -2,15 +2,13 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Concepts
 :description: CircleCI concepts
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#introduction]
 == Introduction
@@ -48,7 +46,7 @@ Your CircleCI configuration can be adapted to fit many different needs of your p
 
 The following illustration uses an link:https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config[example Java application] to show the various configuration elements:
 
-image::{{site.baseurl}}/assets/img/docs/config-elements.png[configuration elements]
+image::config-elements.png[configuration elements]
 
 CircleCI configurations use YAML. See the xref:introduction-to-yaml-configurations#[Introduction to YAML configurations] page for basic guidance. For a full overview of what is possible in a configuration file, see the xref:configuration-reference#[Configuration reference] page.
 
@@ -57,7 +55,7 @@ CircleCI configurations use YAML. See the xref:introduction-to-yaml-configuratio
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the `context` key in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context.
 
-image::{{site.baseurl}}/assets/img/docs/contexts_cloud.png[Contexts Overview]
+image::contexts_cloud.png[Contexts Overview]
 
 See the xref:contexts#[Using contexts] page for more information.
 
@@ -66,7 +64,7 @@ See the xref:contexts#[Using contexts] page for more information.
 
 Persist data to move data between jobs and speed up your build. There are three main methods for persisting data in CircleCI: artifacts, caches, and workspaces.
 
-image::{{site.baseurl}}/assets/img/docs/workspaces.png[workflow illustration]
+image::workspaces.png[workflow illustration]
 
 Note the following distinctions between artifacts, caches and workspaces:
 
@@ -91,14 +89,10 @@ Note the following distinctions between artifacts, caches and workspaces:
 | The `attach_workspace` copies and recreates the entire workspace content when it runs.
 |===
 
-See link:https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces[Persisting data in workflows guide] for additional conceptual information about using artifacts, caches, and workspaces.
-
 [#artifacts]
 === Artifacts
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -146,8 +140,6 @@ workflows:
             - build2
 ----
 
-{% endraw %}
-
 See the xref:artifacts#[Storing build artifacts] page for more information.
 
 [#caches]
@@ -156,8 +148,6 @@ See the xref:artifacts#[Storing build artifacts] page for more information.
 A cache stores a file or directory of files such as dependencies or source code in object storage. To speed up the build, each job may contain special steps for caching dependencies from previous jobs.
 
 If you need to clear your cache, refer to the xref:caching#clearing-cache[Caching dependencies] page for more information.
-
-{% raw %}
 
 [,yaml]
 ----
@@ -196,8 +186,6 @@ workflows:
           requires:
             - build1
 ----
-
-{% endraw %}
 
 For more information see the xref:caching#[Caching dependencies] and xref:caching-strategy#[Caching strategies] pages.
 
@@ -252,11 +240,11 @@ See the xref:dynamic-config#[Dynamic configuration] page for more information.
 
 Each separate job defined within your configuration runs in a unique execution environment, known as executors. An executor can be a Docker container, or a virtual machine running Linux, Windows, or macOS. In some of these instances, you can set up an environment using GPU, or Arm. CircleCI also provides a machine-based and container-based self-hosted runner solution.
 
-image::{{site.baseurl}}/assets/img/docs/executor_types.png[Illustration of a CircleCI job]
+image::executor_types.png[Illustration of a CircleCI job]
 
 An _image_ is a packaged system that includes instructions for creating a running container or virtual machine, and you can define an image for each executor. CircleCI provides a range of images for use with the Docker executor, called _convenience images_ (details in the <<images,images>> section).
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [.tab.executors.Cloud]
 [,yaml]
@@ -281,9 +269,9 @@ jobs:
   build2:
     machine: # Specifies a machine image that uses
       # an Ubuntu version 20.04 image with Docker 20.10.12
-      # and docker-compose 1.29.2, follow CircleCI Discuss Announcements
+      # and docker compose 1.29.2, follow CircleCI Discuss Announcements
       # for new image releases.
-      image: ubuntu-2004:202201-02
+      image: ubuntu-2004:current
     steps:
       - checkout
 
@@ -350,7 +338,7 @@ An image is a packaged system that includes instructions for creating a running 
 
 The *Docker executor* spins up a container with a Docker image. CircleCI maintains xref:circleci-images#[convenience images] for popular languages on Docker Hub.
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 The *machine executor* spins up a complete Ubuntu virtual machine image, giving you full access to OS resources and complete control over the job environment. For more information, see the xref:configuration-reference#machine[Using machine] page.
 
@@ -403,20 +391,20 @@ See the xref:circleci-images#[Images] page for more information.
 
 Jobs are the building blocks of your configuration. Jobs are collections of <<steps,steps>>, which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows`, or `macos`. For `docker` you must xref:executor-intro#docker[specify an image] to use for the primary container. For `macos` you must specify an xref:executor-intro#macos[Xcode version]. For `windows` you must use the xref:executor-intro#windows[Windows orb].
 
-image::{{site.baseurl}}/assets/img/docs/job.png[Illustration of a CircleCI job]
+image::job.png[Illustration of a CircleCI job]
 
 See the xref:jobs-steps#[Jobs and steps] page for more information.
 
 [#orbs]
 == Orbs
 
-Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools.
+Orbs are reusable snippets of code that help automate repeated processes, accelerate project setup, and help you to integrate with third-party tools.
 
 The illustration in the <<configuration,Configuration>> section showing an example Java configuration could be simplified using orbs. The following illustration demonstrates a simplified configuration with link:https://circleci.com/developer/orbs/orb/circleci/maven[the Maven orb]. Here, the orb sets up a default executor that can execute steps with Maven and run a common job (`maven/test`).
 
 // Turn this into a config snippet
 
-image::{{site.baseurl}}/assets/img/docs/config-elements-orbs.png[Configuration using Maven orb]
+image::config-elements-orbs.png[Configuration using Maven orb]
 
 See xref:orb-concepts#[Using orbs] for details on how to use orbs in your configuration and an introduction to orb design. Visit the link:https://circleci.com/developer/orbs[Orbs registry] to search for orbs to help simplify your configuration.
 
@@ -441,7 +429,7 @@ jobs:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
-image::{{site.baseurl}}/assets/img/docs/executor_types_plus_parallelism.png[Executor types with parallelism]
+image::executor_types_plus_parallelism.png[Executor types with parallelism]
 
 See xref:parallelism-faster-jobs#[Test splitting and parallelism] page for more information.
 
@@ -452,7 +440,15 @@ A CircleCI pipeline is the full set of processes you run when you trigger work o
 
 Pipelines represent methods for interacting with your configuration:
 
-{% include snippets/pipelines-benefits.adoc %}
+* Trigger a pipeline through the API with the link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[trigger a pipeline] endpoint.
+* Use pipeline parameters to trigger xref:pipeline-variables#conditional-workflows[conditional workflows].
+* Use `version 2.1` configuration, which provides access to:
+    * xref:reusing-config#[Reusable configuration] elements, including executors, commands and jobs.
+    * Packaged reusable configuration, known as xref:orb-intro#[orbs].
+    * Improved configuration validation error messages.
+    * Option to enable auto-cancel, within **Advanced** project settings in the web app to terminate workflows when new pipelines are triggered on non-default branches.
+
+NOTE: It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
 See the xref:pipelines#[Pipelines overview] page for more information.
 
@@ -482,7 +478,7 @@ Select *Projects* in the CircleCI web app sidebar to enter the projects dashboar
 * _Set Up_ or _Create_ any project that you are the owner of in your VCS.
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to link:/docs/notifications/[email notifications] for the project's status.
 
-image::{{site.baseurl}}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png[Project dashboard]
+image::CircleCI-2.0-setup-project-circle101_cloud.png[Project dashboard]
 
 [#resource-class]
 == Resource class
@@ -544,14 +540,29 @@ jobs:
 See the xref:jobs-steps#[Jobs and steps] page for more information.
 
 [#user-types]
-== User types
+== User roles
 
-CircleCI has various user types with permissions inherited from VCS accounts.
+CircleCI roles are set up differently depending on how you xref:version-control-system-integration-overview#[integrate your code].
+
+TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:github-apps-integration#[GitHub App integration] page.
+
+=== GitHub App, GitLab and Bitbucket Data Center users
+Roles are set at the organization and project level and are separate to permissions and roles set in the version control system in which your code is stored. The available roles are:
+
+* Admin
+* Contributor
+* Viewer
+
+For an overview of organization and project role permissions, see the xref:roles-and-permissions-overview#organization-role-permissions-matrix[Roles and permissions overview] page.
+
+See the xref:manage-roles-and-permissions#[Manage roles and permissions] page for steps to add, remove, and change org and project level roles. You can also manages roles and permissions in xref:manage-groups#[groups].
+
+=== GitHub OAuth app and Bitbucket Cloud users
+CircleCI has various user roles with permissions inherited from VCS accounts.
 
 * The _Organization Administrator_ is a permission level inherited from your VCS:
  ** GitHub: *Owner* and following at least one project building on CircleCI.
  ** Bitbucket: *Admin* and following at least one project building on CircleCI.
- ** GitLab: *Admin* and following at least one project building on CircleCI.
 * The _Project Administrator_ is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project.
 * A _User_ is an individual user within an organization, inherited from your VCS.
 * A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to an org in the VCS to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
@@ -565,9 +576,7 @@ image::/docs/assets/img/docs/workflow_detail_newui.png[Workflows illustration cl
 
 The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
 
-{% include snippets/docker-auth.adoc %}
-
-{% raw %}
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -619,8 +628,6 @@ workflows:
            - build1 # wait for build1 job to complete successfully before starting
            # run build2 and build3 concurrently to save time.
 ----
-
-{% endraw %}
 
 See the xref:workflows#[Using workflows] page for more information.
 

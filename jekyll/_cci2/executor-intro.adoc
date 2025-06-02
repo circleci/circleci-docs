@@ -2,7 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
+  - Server v4+
 ---
 = Execution environments overview
 :page-description: An overview of all CircleCI execution environments.

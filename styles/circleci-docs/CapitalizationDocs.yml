@@ -9,7 +9,7 @@ match: $sentence
 # E.g.,
 #
 # a. This is my heading
-prefix: '^[a-z]\.\s'
+prefix: '^[a-z]{1,3}\.\s'
 exceptions:
   - DEPRECATED
   - Deprecated

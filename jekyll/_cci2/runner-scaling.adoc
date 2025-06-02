@@ -3,8 +3,7 @@ description: Learn how to scale CircleCI's self-hosted runners.
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Scaling self-hosted runners
 :page-layout: classic-docs
@@ -27,7 +26,7 @@ If you're using the container runner on Kubernetes, it will automatically spin u
 [#scaling-data]
 == Scaling data
 
-There are several API endpoints to help you set up a solution to scale machine runners or your Kubernetes cluster for container runners:
+Several API endpoints are available to help you set up a solution to scale machine runners or your Kubernetes cluster for container runners:
 
 * <<runner-api#get-api-v3-tasks,Unclaimed Tasks>>
 * <<runner-api#get-api-v3-tasks-running,Running Tasks>>
@@ -42,7 +41,7 @@ NOTE: You will also need to be aware of your plan's concurrency limit to avoid s
 [#agent-configuration]
 == Agent configuration for machine runner
 
-There are some machine runner configuration settings which can be used by your scaling solution, particularly to assist resource cleanup when the demand drops:
+The following machine runner configuration settings can be used by your scaling solution to assist resource cleanup when the demand drops:
 
 * <<runner-config-reference#runner-mode,Runner Mode>>
 ** Choosing `single-task` mode will cause machine runner to shut down after a single task. This is useful if using completely ephemeral compute as the resources can be automatically recycled upon machine runner exit.

@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 ---
-= Using Docker Authenticated Pulls
+= Using Docker authenticated pulls
 :page-layout: classic-docs
 :page-liquid:
 :page-description: This document describes how to authenticate with your Docker registry provider to pull images.
@@ -116,7 +116,7 @@ jobs:
     resource_class: large
     working_directory: ~/my_app
     steps:
-      # Docker is preinstalled, along with docker-compose
+      # Docker is preinstalled, along with docker compose
       - checkout
 
       # start proprietary DB using private Docker image

@@ -1,0 +1,32 @@
+. In the link:https://app.circleci.com/home[CircleCI web app], select **Organization Home** in the sidebar.
+. Select btn:[Create Project] at the top of the page, or anywhere in the btn:[Create a project] card if this is your first project.
++
+.Create a project button
+image::create-project/create-project-button.png[Create a project]
++
+.Create a project card view when creating your first project
+image::create-project/first-project.png[Create your first project]
+
+. Choose an option to match the work you want to do in your project.
++
+.Tell CircleCI what your project is for
+image::create-project/what-project.png[Screenshot showing options to choose what you want to do in your project]
+
+. Give your project a descriptive name and then select btn:[Next: Set up a pipeline].
++
+[TIP]
+====
+**Project names** must meet the following requirements:
+
+* Begin with a letter.
+* Be 3-40 characters long.
+* Contain only letters, numbers, or the following characters: `" - _ . : ! & + [ ] " ;`.
+====
++
+.Name your project
+image::create-project/enter-project-details.png[Screenshot showing options to enter project details]
+
+. Next, set up your first pipeline for your project. Pipelines orchestrate executable commands and scripts for your CI/CD processes. The first step is to name your pipeline. Use a name that describes the purpose of the pipeline, for example, `build-and-test`. Then select btn:[Next: Choose a repo].
++
+.Set up a pipeline
+image::create-project/set-up-a-pipeline.png[Screenshot showing options to set up your pipeline]

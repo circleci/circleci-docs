@@ -12,7 +12,7 @@ contentTags:
 
 NOTE: **The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-NOTE: Scheduled pipelines are not currently available for GitLab, GitHub App and Bitbucket Data Center projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:github-apps-integration#[GitHub App integration page].
+include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 [#introduction]
 == Introduction
@@ -56,7 +56,7 @@ daily-run-workflow:
 Before you can create a new schedule, you will need to interpret the frequency your trigger needs to run from the cron expression. Once you have done that, you will create a schedule using either the API or the project settings in the web app. Both methods are described below.
 
 [#use-the-api]
-=== Use the API
+=== a. Use the API
 
 Have your CircleCI token ready, or create a new token by following the steps on the xref:managing-api-tokens#[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
 
@@ -80,10 +80,12 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
+include::../_includes/partials/tips/find-project-slug.adoc[]
+
 For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs]. Also see the xref:api-developers-guide#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#use-project-settings]
-=== Use project settings in the web app
+=== b. Use project settings in the web app
 
 . In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and select **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
 . Navigate to **Triggers**.

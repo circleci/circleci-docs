@@ -1,20 +1,20 @@
 ---
 contentTags:
   platform:
-    - Server v4.6
+    - Server v4.7
     - Server Admin
 ---
 = Upgrade MongoDB
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server v4.6.
+:page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server v4.7.
 :icons: font
 :toc: macro
 :toc-title:
 
 MongoDB is a database service used by CircleCI server. This page describes how to upgrade MongoDB to version `4.4.15`.
 
-MongoDB `3.6.22` is shipped with CircleCI server v4.6.
+MongoDB `3.6.22` is shipped with CircleCI server v4.7.
 
 [#prerequisites]
 == Prerequisites

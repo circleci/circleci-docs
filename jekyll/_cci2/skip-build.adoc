@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Skip CI and cancel workflows
 :page-layout: classic-docs
@@ -12,7 +11,7 @@ contentTags:
 :icons: font
 :experimental:
 
-This page describes how to skip or cancel work when triggering pipelines. There are a couple of ways to do this:
+This page describes how to skip or cancel work when triggering pipelines, as follows:
 
 * The CI processes can be skipped for a commit, on push to your repo.
 * Workflows can be cancelled using the auto-cancel feature.
@@ -31,21 +30,15 @@ Adding one of these tags skips pipeline execution for all the commits included i
 
 === The skip CI process
 
-When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this infomation to decide not to build your project.
+When you include `[ci skip]` or `[skip ci]` in the first 250 characters of the body or title of a commit, CircleCI uses this information to decide not to build your project.
 
-The skip process is different depending on your VCS integration, as follows:
+A skipped pipeline will not show on the pipelines page, and no pipeline will be returned for a skipped commit using the API.
 
-* xref:github-apps-integration#[GitHub App]: A skipped pipeline will not show on the pipelines page, and no pipeline will be returned for a skipped commit using the API.
-
-* GitHub OAuth, GitLab, Bitbucket: A skipped pipeline will show in the CircleCI web app pipelines page with a status of NOT RUN. A pipeline will be returned for the skipped commit using the API with a status of `created` but the workflows and jobs will be `not run`.
-
-NOTE: **GitLab known issue**: If you skip a commit using GitLab a pipeline will appear to be running indefinitely in the GitLab UI but the pipeline is not triggered in CircleCI.
 
 === Scope
 
 A few points to note regarding the scope of the `ci skip` feature:
 
-* The pipeline and workflows will still exist for these commits but no jobs will be run.
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
@@ -93,14 +86,13 @@ To save time, you can configure CircleCI to automatically cancel any non-termina
 
 A few points to note regarding the use of the auto-cancel feature:
 
-* Your project's default branch (usually `main`) will never auto-cancel workflows.
-* Auto-cancel affect pipelines triggered by pushes to a VCS or via the API.
+* Pushing to a default branch (usually `main`) will never auto-cancel workflows.
+* Auto-cancel affects pipelines triggered by pushes to a VCS or via the API.
 * Only workflows that are triggered when the feature is enabled will be auto-cancelled.
 
 ### Enable auto-cancel
 
-It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
-{: class="alert alert-warning"}
+CAUTION: It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
 . In the CircleCI application, go to your **Project Settings**.
 
