@@ -148,6 +148,8 @@ en:
             link: orchestration-cookbook
           - name: Set up multiple configuration files for a project
             link: set-up-multiple-configuration-files-for-a-project
+          - name: How to override config
+            link: how-to-override-config
           - name: Notify a Slack channel of a paused workflow
             link: notify-a-slack-channel-of-a-paused-workflow
           - name: Use branch filters

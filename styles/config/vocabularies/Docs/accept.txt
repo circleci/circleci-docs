@@ -356,6 +356,7 @@ URI
 URLEncoder
 UUID
 UUIDs?
+[Vv]alidator
 VCS
 Velero
 Viget
