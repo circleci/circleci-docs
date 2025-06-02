@@ -46,7 +46,7 @@ Each allow-list entry contains three components:
 
 * Name - A descriptive identifier for the entry
 * URL prefix - The approved URL pattern that orb references must match (must use HTTPS and end with /)
-* Auth - The authentication method to use (`none`, `github-oauth`, or `github-app`)
+* Auth - The authentication method to use (`None`, `GitHub OAuth`, `GitHub App`, or `Bitbucket OAuth`)
 
 For an organization to use a URL-referenced orb, there must be at least one allow-list entry whose URL prefix matches the beginning of the orb's URL. If no matching entry exists, the orb reference will be blocked.
 
@@ -57,9 +57,9 @@ The allow-list applies organization-wide - once configured, all projects within 
 [.tab.add.CircleCI_web_app]
 
 . Navigate to the menu:Organization Settings[Orbs].
-. In the *Allow-List URLs*  section, select btn:[Add].
-. Fill out the name, URL, and VCS fileds.
-. Select btn:[Add URL].
+. In the *Allowed URL Orb prefixes*  section, select btn:[Add].
+. Fill out the *Name*, *URL Prefix*, and *Auth* fields.
+. Select btn:[Add URL Prefix].
 
 [.tab.add.API]
 
@@ -94,7 +94,7 @@ Example response:
 [.tab.get.CircleCI_web_app]
 
 . Navigate to menu:Organization Settings[Orbs].
-. Scroll to the *Allow-List URLs* section.
+. Scroll to the *Allowed URL Orb prefixes* section.
 . Existing allow-list entries are displayed in the table.
 
 
@@ -135,7 +135,7 @@ Example response:
 [.tab.delete.CircleCI_web_app]
 
 . Navigate to menu:Organization Settings[Orbs].
-. Scroll to the *Allow-List URLs* section.
+. Scroll to the *Allowed URL Orb prefixes* section.
 . Select the btn:[Delete] icon next to the allow-list entry to delete.
 
 [.tab.delete.API]
@@ -170,4 +170,4 @@ Example response:
 * A hierarchy of URL orbs may not exceed a depth of 5 orb references.
 * The `github-oauth` auth type assumes that any member of the organization known to CircleCI has permission to fetch the URL orb. If this is not true then seemingly arbitrary failures to fetch URL orbs will occur. The `github-app` auth type does not have the above limitation.
 * URL orbs are cached for 5 minutes.
-* There is currently no support for Bitbucket or GitLab authentication.
+* There is currently no support for GitLab authentication.
