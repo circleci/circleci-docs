@@ -310,7 +310,7 @@ If using pipeline parameters with URL-based orbs, check the following:
 https://raw.githubusercontent.com/<< pipeline.git.repo_owner >>/<< pipeline.git.repo_name >>/refs/heads/main/path/to/file/orb.yml
 ----
 +
-These pipeline values will be compiled to the team's repo that triggered the change, and fetch that team's override. This assumes the org is using the Github App, and all the teams' repos are under the same GitHub org.
+These pipeline values will be compiled to the team's repo that triggered the change, and fetch that team's override. This assumes the org is using the GitHub App, and all the teams' repos are under the same GitHub org.
 
 === Centralized config changes not applying
 If changes to your centralized configuration are not taking effect, check the following:
@@ -350,4 +350,4 @@ This approach significantly reduces configuration duplication, improves security
 
 * xref:config-policy-management-overview#[Learn about config policy management]
 * xref:reusing-config#[Explore other configuration reuse patterns]
-* xref:orbs-concepts#[Understand orbs concepts and design]
+* xref:orb-concepts#[Understand orbs concepts and design]
