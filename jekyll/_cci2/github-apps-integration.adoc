@@ -222,6 +222,9 @@ The recommendation is to either:
 
 Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. If you are looking to set up an SSH key to check out code from additional repositories in GitHub, see xref:add-ssh-key#steps-to-add-additional-ssh-keys[Add additional SSH keys].
 
+[#outbound-webhooks]
+=== Outbound webhooks
+While outbound webhooks *are* available for GitHub App pipelines, their payload differs in part from that of GitHub OAuth pipelines. See the xref:outbound-webhooks-reference[outbound webhook reference] page for more details.
 
 [#test-insights]
 === Test Insights
