@@ -1,0 +1,1948 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CircleCI API v1",
+    "version": "1.1.0",
+    "description": "# CircleCI V1 API Overview\n\nThe CircleCI API is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. RESTful APIs enable you to call individual API endpoints to perform the following actions:\n\n* GET - retrieve specific information, which may include arrays and sets of data and information.\n* POST - create/add a new API element.\n* PUT - update an existing API element in the API server.\n* DELETE - remove/delete an API element in the API server.\n\n<aside class=\"notice\">\nAlthough RESTful APIs include these 4 HTTP verbs, the CircleCI API does not currently use the PUT verb.\n</aside>\n\n<aside class=\"notice\">\nAccess to billing functions is only available from the CircleCI application.\n</aside>\n\n## Authentication\n\nThe CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.\n\n**Note** You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.\n\n## Add an API Token\n\n```sh\n$ curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/me\n```\n\n\n```json\n{\n  \"user_key_fingerprint\" : null,\n  \"days_left_in_trial\" : -238,\n  \"trial_end\" : \"2011-12-28T22:02:15Z\",\n  \"basic_email_prefs\" : \"smart\",\n  \"admin\" : true,\n  \"login\" : \"pbiggar\"\n }\n```\n\nTo add an API token, perform the steps listed below.\n\n1.  Add an API token from your [account dashboard](https://circleci.com/account/api).\n2.  To test it, [View it in your browser](https://circleci.com/api/v1.1/me) or call the API using\n3.  You should see a response similar to the example shown in the right pane.\n\n<aside class=\"notice\">\nAll API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.\n</aside>\n\n## Get Authenticated\n\n\n```sh\ncurl -H \"Circle-Token: <circle-token>\" \"https://circleci.com/api/...\"\n```\n\n```sh\ncurl -u <circle-token>: \"https://circleci.com/api/...\"\n```\n\n```sh\ncurl \"https://circleci.com/api/v1.1/me?circle-token=<circle-token>\"\n```\n\nYou can add the API token using your [account dashboard](https://circleci.com/account/api). We recommend using **personal API tokens** at this time because project API tokens are **not** supported for API v2. Project API tokens are supported for most API v1 endpoints. Notes are included below to indicate when a personal API token is required.\n\nTo be authenticated by the API server, use this as the value of the Circle-Token header:\n\nOr you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:\n\n<aside class=\"notice\">\nthe colon \":\" tells curl that there's no password.\n</aside>\n\nDEPRECATED (this option will be removed in the future): The API token can be added to the `circle-token` query param:\n\n\n## Summary of API Endpoints\n\nAll CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`\n\n### GET Requests\n\n**API** | **Description**\n------- | -------------\n/me | Provides information about the signed in user.\n/projects | Lists all projects you are following on CircleCI, with job information organized by branch.\n /project/:vcs-type/:username/:project | Returns a summary for each of the last 30 job runs for a single project.\n/recent-builds | Returns a summary for each of the last 30 recent job runs, ordered by build\\_num.\n/project/:vcs-type/:username/:project/:build_num | Returns full details for a single job run. The response includes all of the fields from the job summary. This is also the payload for the [notification webhooks](https://circleci.com/docs/configuration-reference/#notify), in which case this object is the value to a key named ‘payload’.\n/project/:vcs-type/:username/:project/:build_num/artifacts | Lists the artifacts produced by a given job run.\n/project/:vcs-type/:username/:project/checkout-key/:fingerprint | Retrieves a checkout key.\n\n### POST Requests\n\n**API** | **Description**\n------- | -------------\n/project/:vcs-type/:username/:project/follow | Follow a new project on CircleCI.\n/project/:vcs-type/:org_name/:project/:build\\_num/retry | Retries the job, returns a summary of the new job run.\n/project/:vcs-type/:username/:project/:build\\_num/cancel | Cancels the job, returns a summary of the job run.\n/project/:vcs-type/:username/:project/:build_num/ssh-users | Adds a user to the job's SSH permissions.\n/project/:vcs-type/:username/:project/tree/:branch | Triggers a new job, returns a summary of the job run. Optional [build parameters](https://circleci.com/docs/inject-environment-variables-with-api/#api-v1) can be set.\n/project/:vcs-type/:username/:project/ssh-key | Creates an SSH key used to access external systems that require SSH key-based authentication.\n/project/:vcs-type/:username/:project/checkout-key | Creates a new checkout key.\n\n### DELETE Requests\n\n**API** | **Description**\n------- | -------------\n/project/:vcs-type/:username/:project/checkout-key/:fingerprint | Deletes a checkout key.\n/project/:vcs-type/:username/:project/ssh-key | Delete the SSH key from a project.\n\n## Getting Started\n\n### API Syntax\n\nWhen making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown in the pane to the right:\n\n```sh\n\"https://circleci.com/api/v1.1\"\n```\n\nWhere:\n\n* https://circleci.com - the resource URL for the API being called.\n* api - the class being called.\n* v1.1 - the API version.\n\n### Version Control Systems\n\n```sh\ncurl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch\n```\n\nNew with v1.1 of the API, for endpoints under `/project`` you will now need to tell CircleCI what version control system type your project uses. You may currently select either ‘github’ or ‘bitbucket’. The command for recent builds for a project would be formatted like the example shown in the right pane.\n\n## Rate Limiting\n\nThe CircleCI API is protected by a number of rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.\n\nAs the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure.\nThere are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.\n\nFor HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.\nIn most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.\n\n## List Ordering\n\nThere are two API endpoints where the list order is significant:\n\n* [Recent jobs across all projects](https://circleci.com/docs/api/v1-reference/#recent-builds)\n* [Recent jobs for a single project](https://circleci.com/docs/api/v1-reference/#recent-builds-project)\n\nIn both cases, jobs are returned in the order that they were created. For all other endpoints, the order has no special significance.\n\n## Accept Header\n\n```sh\ncurl https://circleci.com/api/v1.1/me -H \"Accept: application/json\" -H \"Circle-Token: <circle-token>\"\n```\n\nIf no accept header is specified (or it is empty), CircleCI will return the data in a Clojure EDN format. To receive the data as nicely formatted JSON, include any value for the `Accept` header (e.g `text/plain`). If you prefer to receive compact JSON with no whitespace or comments, use `application/json` as the `Accept` header.\n\n## Cache-Control Header\n\nSome CircleCI APIs may emit a `Cache-Control` header to indicate that the response may be cached for a period of time. This feature can be used to avoid unnecessary re-fetching of data that will not change. If you plan to make a large volume of API requests you are strongly encouraged to make use of this header in order to improve your performance and lower your risk of being rate limited.\n\n## F/OSS\n\nIf you have a [Free / Open Source Software (F/OSS) project] (https://www.gnu.org/philosophy/free-sw.html), and have the setting turned on in Advanced Settings in your project dashboard, some read-only `/project` endpoints will return the requested data without the need for a token. People will also be able to view the job results dashboard for the project as well.\n",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/license/MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://circleci.com/api/v1.1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Keys",
+      "description": "SSH and API key management"
+    },
+    {
+      "name": "User",
+      "description": "User-related endpoints"
+    },
+    {
+      "name": "Artifacts",
+      "description": "Artifact retrieval endpoints"
+    },
+    {
+      "name": "Jobs",
+      "description": "Job and build endpoints"
+    },
+    {
+      "name": "Environment Variables",
+      "description": "Environment variable management"
+    },
+    {
+      "name": "Projects",
+      "description": "Project management endpoints"
+    }
+  ],
+  "paths": {
+    "/project/{vcs-type}/{username}/{project}/checkout-key": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "List checkout keys",
+        "description": "Returns an array of checkout keys for the project.",
+        "operationId": "listCheckoutKeys",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "digest",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "md5",
+                "sha256"
+              ]
+            },
+            "description": "Fingerprint digest. Optional; 'md5' by default. Pass 'sha256' to return SHA-256 key fingerprint."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of checkout keys",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CheckoutKey"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/checkout-key"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Create a new checkout key",
+        "description": "Creates a new checkout key for the project.",
+        "operationId": "createCheckoutKey",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckoutKeyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Checkout key created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutKey"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST --header \"Content-Type: application/json\" -d '{\"type\":\"github-user-key\"}' https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/checkout-key -H \"Circle-Token: <circle-token>\""
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/checkout-key/{fingerprint}": {
+      "get": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Get a checkout key",
+        "description": "Returns an individual checkout key.",
+        "operationId": "getCheckoutKey",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "fingerprint",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Key fingerprint (md5 or sha256, sha256 should be URL-encoded)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Checkout key details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutKey"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/checkout-key/{fingerprint}"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Delete a checkout key",
+        "description": "Deletes a checkout key by fingerprint.",
+        "operationId": "deleteCheckoutKey",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "fingerprint",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Key fingerprint (md5 or sha256, sha256 should be URL-encoded)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Checkout key deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X DELETE -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/checkout-key/{fingerprint}"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/ssh-key": {
+      "post": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Create SSH key",
+        "description": "Creates an SSH key for the project.",
+        "operationId": "createSshKey",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SshKeyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSH key created (no response body)"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST --header \"Content-Type: application/json\" -d '{\"hostname\":\"hostname\",\"private_key\":\"RSA private key\"}' https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/ssh-key -H \"Circle-Token: <circle-token>\""
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Keys"
+        ],
+        "summary": "Delete SSH key",
+        "description": "Deletes an SSH key from the system by fingerprint.",
+        "operationId": "deleteSshKey",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SshKeyDeleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSH key deleted (no response body)"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X DELETE --header \"Content-Type: application/json\" -d '{\"fingerprint\":\"Fingerprint\", \"hostname\":\"Hostname\"}' https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/ssh-key -H \"Circle-Token: <circle-token>\""
+          }
+        ]
+      }
+    },
+    "/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get information about the signed-in user",
+        "description": "Provides information about the signed in user.",
+        "operationId": "getMe",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/me"
+          }
+        ]
+      }
+    },
+    "/user/heroku-key": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add Heroku API key to CircleCI",
+        "description": "Adds your Heroku API key to CircleCI.",
+        "operationId": "addHerokuKey",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HerokuKeyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success (no response body)"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST --header \"Content-Type: application/json\" -d '{\"apikey\":\"Heroku key\"}' https://circleci.com/api/v1.1/user/heroku-key -H \"Circle-Token: <circle-token>\""
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/{build_num}/artifacts": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "List artifacts of a job",
+        "description": "Returns an array of artifacts produced by a given job run.",
+        "operationId": "listJobArtifacts",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "build_num",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Build number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of artifacts for the job",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Artifact"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/{build_num}/artifacts"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/latest/artifacts": {
+      "get": {
+        "tags": [
+          "Artifacts"
+        ],
+        "summary": "List artifacts of the latest job run",
+        "description": "Returns an array of artifacts produced by the latest job run on a given branch.",
+        "operationId": "listLatestJobArtifacts",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "branch",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The branch to look in for the latest job run. Returns artifacts for latest job run in entire project if omitted."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "completed",
+                "successful",
+                "failed",
+                "running"
+              ]
+            },
+            "description": "Restricts which jobs are returned. Set to 'completed', 'successful', 'failed', 'running', or defaults to no filter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of artifacts for the latest job run",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Artifact"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/latest/artifacts?branch={branch}&filter={filter}"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/{build_num}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Get details for a single job run",
+        "description": "Returns full details for a single job run.",
+        "operationId": "getJobDetails",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "build_num",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Build number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/{build_num}"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/{build_num}/retry": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Retry a job",
+        "description": "Retries the job, returns a summary of the new job run.",
+        "operationId": "retryJob",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "build_num",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Build number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job retried successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/{build_num}/retry"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/{build_num}/cancel": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Cancel a job",
+        "description": "Cancels the job, returns a summary of the job run.",
+        "operationId": "cancelJob",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "build_num",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Build number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job cancelled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/{build_num}/cancel"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/tree/{branch}": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Trigger a new job on a branch",
+        "description": "Triggers a new job, returns a summary of the job run. Optional build parameters can be set in the request body.",
+        "operationId": "triggerJobOnBranch",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "branch",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Branch name"
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BuildParameters"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Job triggered successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST -H \"Content-Type: application/json\" -d '{\"build_parameters\":{}}' -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/tree/{branch}"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/{build_num}/ssh-users": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Add a user to the job's SSH permissions",
+        "description": "Adds a user to the job's SSH permissions.",
+        "operationId": "addSshUserToJob",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "build_num",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Build number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User added to SSH permissions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JobDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/{build_num}/ssh-users"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/{build_num}/tests": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Get test metadata for a job",
+        "description": "Provides test metadata for a job.",
+        "operationId": "getJobTestMetadata",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "build_num",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Build number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Test metadata for the job",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestMetadataResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/{build_num}/tests"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/envvar": {
+      "get": {
+        "tags": [
+          "Environment Variables"
+        ],
+        "summary": "List environment variables",
+        "description": "Returns all environment variables for the project.",
+        "operationId": "listEnvVars",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of environment variables",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EnvVar"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/envvar"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Environment Variables"
+        ],
+        "summary": "Add an environment variable",
+        "description": "Creates a new environment variable for the project.",
+        "operationId": "addEnvVar",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnvVarRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Environment variable created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvVar"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST --header \"Content-Type: application/json\" -d '{\"name\":\"foo\", \"value\":\"bar\"}' https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/envvar -H \"Circle-Token: <circle-token>\""
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/envvar/{name}": {
+      "get": {
+        "tags": [
+          "Environment Variables"
+        ],
+        "summary": "Get a single environment variable",
+        "description": "Returns the hidden value of the environment variable.",
+        "operationId": "getEnvVar",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Environment variable name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Environment variable details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvVar"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/envvar/{name}"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Environment Variables"
+        ],
+        "summary": "Delete an environment variable",
+        "description": "Deletes the environment variable named {name}.",
+        "operationId": "deleteEnvVar",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Environment variable name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Environment variable deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X DELETE -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/envvar/{name}"
+          }
+        ]
+      }
+    },
+    "/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "List all followed projects",
+        "description": "Lists all projects you are following on CircleCI, with job information organized by branch.",
+        "operationId": "listProjects",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Project"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/projects"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Get recent jobs for a single project",
+        "description": "Returns a summary for each of the last 30 job runs for a single project.",
+        "operationId": "getProjectRecentJobs",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of recent jobs for the project",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JobSummary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}"
+          }
+        ]
+      }
+    },
+    "/project/{vcs-type}/{username}/{project}/follow": {
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Follow a new project on CircleCI",
+        "description": "Follow a new project on CircleCI.",
+        "operationId": "followProject",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "vcs-type",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS type (e.g., github, bitbucket)"
+          },
+          {
+            "name": "username",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "VCS username or org"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Project name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Project followed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Project"
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -X POST -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/project/{vcs-type}/{username}/{project}/follow"
+          }
+        ]
+      }
+    },
+    "/recent-builds": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Get recent jobs across all projects",
+        "description": "Returns a summary for each of the last 30 recent job runs, ordered by build_num.",
+        "operationId": "getRecentBuilds",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of recent jobs across all projects",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/JobSummary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "label": "cURL",
+            "source": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/recent-builds"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "circleToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Circle-Token"
+      }
+    },
+    "schemas": {
+      "CheckoutKey": {
+        "type": "object",
+        "properties": {
+          "public_key": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "deploy-key",
+              "github-user-key",
+              "user-key"
+            ]
+          },
+          "fingerprint": {
+            "type": "string"
+          },
+          "preferred": {
+            "type": "boolean"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CheckoutKeyRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "deploy-key",
+              "github-user-key"
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "SshKeyRequest": {
+        "type": "object",
+        "properties": {
+          "hostname": {
+            "type": "string"
+          },
+          "private_key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "hostname",
+          "private_key"
+        ]
+      },
+      "SshKeyDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "fingerprint": {
+            "type": "string"
+          },
+          "hostname": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fingerprint",
+          "hostname"
+        ]
+      },
+      "MessageResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "JobSummary": {
+        "type": "object",
+        "properties": {
+          "build_num": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "vcs_revision": {
+            "type": "string"
+          },
+          "committer_name": {
+            "type": "string"
+          },
+          "committer_email": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stop_time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "vcs_url": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "reponame": {
+            "type": "string"
+          },
+          "branches": {
+            "type": "object"
+          }
+        }
+      },
+      "EnvVar": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "user_key_fingerprint": {
+            "type": "string",
+            "nullable": true
+          },
+          "days_left_in_trial": {
+            "type": "integer"
+          },
+          "trial_end": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "basic_email_prefs": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "login": {
+            "type": "string"
+          }
+        }
+      },
+      "HerokuKeyRequest": {
+        "type": "object",
+        "properties": {
+          "apikey": {
+            "type": "string",
+            "description": "Heroku API key"
+          }
+        },
+        "required": [
+          "apikey"
+        ]
+      },
+      "JobDetails": {
+        "type": "object",
+        "properties": {
+          "build_num": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "branch": {
+            "type": "string"
+          },
+          "vcs_revision": {
+            "type": "string"
+          },
+          "committer_name": {
+            "type": "string"
+          },
+          "committer_email": {
+            "type": "string"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stop_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "outcome": {
+            "type": "string"
+          },
+          "lifecycle": {
+            "type": "string"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "build_parameters": {
+            "type": "object"
+          }
+        }
+      },
+      "EnvVarRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "TestMetadataResponse": {
+        "type": "object",
+        "properties": {
+          "tests": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "file": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "run_time": {
+                  "type": "number"
+                },
+                "result": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "classname": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BuildParameters": {
+        "type": "object",
+        "properties": {
+          "build_parameters": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      },
+      "Artifact": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "pretty_path": {
+            "type": "string"
+          },
+          "node_index": {
+            "type": "integer"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      }
+    }
+  }
+}

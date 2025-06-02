@@ -812,7 +812,7 @@ Create a `policy.json` file with the following content. You should fill in the I
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
+        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>",
         "arn:aws:ec2:*:*:volume/*"
       ]
     },
