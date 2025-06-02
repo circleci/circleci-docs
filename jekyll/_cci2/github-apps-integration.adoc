@@ -224,7 +224,7 @@ Deploy keys and user keys are not used by GitHub App integrations. All keys are 
 
 [#outbound-webhooks]
 === Outbound webhooks
-While outbound webhooks *are* available for GitHub App pipelines, their payload differs in part from that of GitHub OAuth pipelines. See the xref:outbound-webhooks-reference[outbound webhook reference] page for more details.
+While outbound webhooks *are* available for GitHub App pipelines, their payload differs from that of GitHub OAuth pipelines. See the xref:outbound-webhooks-reference[outbound webhook reference] page for more details.
 
 [#test-insights]
 === Test Insights
