@@ -501,10 +501,12 @@ en:
             link: orb-intro
       - name: Author orbs
         children:
-          - name: Intro to authoring an orb
-            link: orb-author-intro
           - name: Author an orb
             link: orb-author
+          - name: Create an orb
+            link: create-an-orb
+          - name: Manually author an orb
+            link: orb-author-validate-publish
           - name: Orb authoring best practices
             link: orbs-best-practices
       - name: Test orbs
@@ -515,12 +517,6 @@ en:
         children:
           - name: Orb publishing process
             link: creating-orbs
-      - name: Tutorials
-        children:
-          - name: Create an orb
-            link: create-an-orb
-          - name: Manually author an orb
-            link: orb-author-validate-publish
       - name: How-to guides
         children:
           - name: Deploy service update to ECS
