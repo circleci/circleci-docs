@@ -29,23 +29,22 @@ Each allow-list entry contains three components:
 
 For an organization to use a URL orb, there must be at least one allow-list entry whose URL prefix matches the beginning of the orb's URL. If no matching entry exists, the orb reference will be blocked.
 
-The allow-list applies organization-wide - once configured, all projects within that organization can use orbs from the approved URL prefixes. 
+The allow-list applies organization-wide. Once configured, all projects within that organization can use orbs from the approved URL prefixes.
 
 === Adding a URL orb allow-list entry
 
 [.tab.add.CircleCI_web_app]
-
+--
 . Navigate to the menu:Organization Settings[Orbs].
 . In the *Allowed URL Orb prefixes*  section, select btn:[Add].
 . Fill out the *Name*, *URL Prefix*, and *Auth* fields.
 . Select btn:[Add URL Prefix].
 
+image::add-allow-list-url-prefix-modal.png[Add URL Prefix modal]
+--
 
-#Screenshot showing Organization Settings > Orbs pages with "Add URL Prefix" highlighted#
-
-#Screenshot showing the Add URL Prefix modal with Name, URL Prefix, and Auth fields#
 [.tab.add.API]
-
+--
 include::../_includes/partials/notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
@@ -60,6 +59,7 @@ curl -X POST https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xx
   --header 'content-type: application/json' \
   --data '{"name": "Private URL Orbs", "prefix": "https://raw.githubusercontent.com/my-org/private-orbs/", "auth": "github-app"}'
 ----
+
 Example response:
 
 [source, shell]
@@ -69,20 +69,22 @@ Example response:
   "message":"Created."
 }
 ----
+--
 
-
-=== View the orgaznization's URL orb allow-lists
+=== View the organization's URL orb allow-lists
 
 
 [.tab.get.CircleCI_web_app]
-
+--
 . Navigate to menu:Organization Settings[Orbs].
 . Scroll to the *Allowed URL Orb prefixes* section.
 . Existing allow-list entries are displayed in the table.
 
-#Screenshot showing the Allowed URL Orb prefixes section with existing allow-list entries#
-[.tab.get.API]
+image::allow-list.png[Allow-list in Organization settings > Orbs]
+--
 
+[.tab.get.API]
+--
 include::../_includes/partials/notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
@@ -112,19 +114,21 @@ Example response:
 }
 
 ----
+--
 
 === Delete a URL orb allow-list entry
 
 [.tab.delete.CircleCI_web_app]
-
+--
 . Navigate to menu:Organization Settings[Orbs].
 . Scroll to the *Allowed URL Orb prefixes* section.
 . Select the btn:[Delete] icon next to the allow-list entry to delete.
 
-#Screenshot showing the Allowed URL Orb prefixes section with the Delete icon highlighted or pointed at with an arrow#
+image::delete-url-prefix.png[Delete URL Prefix modal]
+--
 
 [.tab.delete.API]
-
+--
 include::../_includes/partials/notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
@@ -147,12 +151,13 @@ Example response:
   "message": "Deleted."
 }
 ----
+--
 
-=== Limitations & Caveats
+=== Limitations and caveats
 
-* The URL Orb allow-list is limited to at most 5 entries.
+* The URL orb allow-list is limited to at most 5 entries.
 * A single config may use no more than 50 URL orbs in total, whether referenced directly or indirectly in a hierarchy.
 * A hierarchy of URL orbs may not exceed a depth of 5 orb references.
-* The `GitHub OAuth` and `Bitbucket OAuth` auth types assume that any member of the organization known to CircleCI has permission to fetch the URL orb. If this is not true then seemingly arbitrary failures to fetch URL orbs will occur. The `GitHub App` auth type does not have the above limitation.
+* The `GitHub OAuth` and `Bitbucket OAuth` auth types assume that any member of the organization known to CircleCI has permission to fetch the URL orb. If this is not true then seemingly arbitrary failures to fetch URL orbs will occur. The `GitHub App` auth type does not have this limitation.
 * Once an orb has been fetched the content is cached for 5 minutes. This is both to reduce load on the remote system hosting the orb, and to improve build times for busy projects.
 * GitLab authentication is currently not supported.

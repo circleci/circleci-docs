@@ -497,6 +497,8 @@ en:
         children:
           - name: Orb introduction
             link: orb-intro
+          - name: Managing URL orb allow-lists
+            link: managing-url-orbs-allow-lists
       - name: Author orbs
         children:
           - name: Intro to authoring an orb
