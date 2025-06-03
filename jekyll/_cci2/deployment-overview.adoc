@@ -78,7 +78,7 @@ workflows:
 
 Under the hood, this orb creates, bundles, and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
-Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider xref:orb-author-intro#[authoring one]!
+Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider xref:orb-author#[authoring one]!
 
 [#using-images-to-simplify-deployment]
 == Using images to simplify deployment
