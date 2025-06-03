@@ -27,7 +27,7 @@ Orbs are reusable packages of parameterizable configuration that can be used in 
 
 CircleCI supports two types of orbs:
 
-*Registry orbs*:: Orbs that are developed and published using the orb publishing process. Semver-based versioning is used to manage the versions of registry orbs. Registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry]
+*Registry orbs*:: Orbs that are developed and published using the orb publishing process. SemVer-based versioning is used to manage the versions of registry orbs. Registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry]
 *URL orbs*:: Orbs that are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry. URL orbs do not follow semantic versioning, and can be accessed directly using an `https` URL. An org-level allow list is used to manage the addresses of URL orbs that can be used in a project in that organization. Manage the allow list at menu:Organization Settings[Orbs]
 
 Orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
@@ -117,7 +117,10 @@ After the orb has been imported into the configuration file, the elements provid
 [#benefits-of-using-orbs]
 == Benefits of using orbs
 
-Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the link:https://circleci.com/developer/orbs/orb/circleci/node[`circleci/node`] orb), compared to the configuration required without using the orb (defining a job with the required steps for testing the application).
+Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows the following:
+
+* A typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the link:https://circleci.com/developer/orbs/orb/circleci/node[`circleci/node`] orb).
+* Configuration required without using the orb (defining a job with the required steps for testing the application).
 
 Orbs let you pull in pre-defined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
 
@@ -237,3 +240,6 @@ The orbs page also includes your org's allow list URLs for URL orbs.
 * Refer to xref:orbs-faq#[Orbs FAQ] for information on known issues and questions that have been addressed when using CircleCI orbs.
 * Refer to xref:reusing-config#[Reusable Configuration Reference] for examples of reusable orbs, commands, parameters, and executors.
 * Refer to xref:testing-orbs#[Orb Testing Methodologies] for information on how to test orbs you have created.
+* Refer to xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] for information on how to manage URL orb allow-lists.
+* See the xref:how-to-override-config#[How to override config] guide for information on how to override a job using an orb.
+

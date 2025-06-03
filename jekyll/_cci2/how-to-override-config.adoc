@@ -35,7 +35,7 @@ Before following this how-to guide, ensure you have met the following prerequisi
 
 * A CircleCI account, xref:first-steps#[you can sign up for free].
 * Familiarity with CircleCI configuration files. See the xref:introduction-to-yaml-configurations#[Introduction to YAML Configurations] guide for more information.
-* Familiarity with the concepts of URL and registry orbs, and the URL orb allow-list. #INSERT LINKS WHEN AVAILABLE#
+* Familiarity with the concepts of URL and registry orbs, and the URL orb allow-list. See the xref:orb-intro#[Orbs intro] and the xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] guide for more information.
 * xref:github-apps-integration#[GitHub App integration]. This is optional but recommended to get the best experience with centralized configs due to the ability to define pipelines in which the configuration files is stored outside the project repository.
 
 == Simple config override example
@@ -103,7 +103,7 @@ Notice that this file:
 
 === 3. Add your URL orb prefix to your allow-list
 
-#ADD LINK TO ALLOW-LIST HOW-TO WHEN READY#
+See the xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
 
 === 4. Override a job using the orb
 
@@ -264,7 +264,7 @@ Notice that this file:
 === 3. Configure your URL allow list
 To use URL-based orbs for team configurations, configure your organization's allow-list settings to include the URL prefix to match the orb file:
 
-#ADD LINK TO ALLOW-LIST HOW-TO WHEN READY#
+See the xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
 
 [source,text]
 ----
