@@ -13,38 +13,19 @@ contentTags:
 [#introduction]
 == Introduction
 
-The ability for an organization to use private orbs is no longer dependent on publishing orbs. URL orbs offer a way to create orbs as well as control access within the organization.
+The allow-list is a security mechanism that restricts orb URL references to only approved URL prefixes, providing security and access control for organizations using private or external orbs.
 
-The allow-list acts as a safe-list that restricts orb URL references to only approved URL prefixes, providing security and access control for organizations using private or external orbs.
-
-
-[INFO]
-====
-URL orbs may themselves reference other URL orbs or Registry orbs.
-
-Registry orbs may not reference URL orbs.
-
-Because there is no publishing step, URL orbs are expanded when the config is processed at the beginning of a pipeline. Registry orbs are expanded when the orb is published.
-====
-
-Example:
-
-[source,yaml]
-----
-orbs:
-  platform: https://raw.githubusercontent.com/my-org/orbs/refs/heads/main/platform-team.yaml
-----
+This guide explains how to add, view, or delete allow-lists in the CircleCI Web App and via the API.
 
 == Managing allow-lists
-
-
-An allow-list is a security mechanism that controls which external URLs an organization can use to reference orbs in their CircleCI configurations.
 
 Each allow-list entry contains three components:
 
 * Name - A descriptive identifier for the entry
 * URL prefix - The approved URL pattern that orb references must match (must use HTTPS and end with /)
-* Auth - The authentication method to use (`None`, `GitHub OAuth`, `GitHub App`, or `Bitbucket OAuth`)
+* Auth - The authentication method to use.
+** In the CircleCI Web App, the available values are: `None`, `GitHub OAuth`, `GitHub App`, or `Bitbucket OAuth`.
+** In the API, the available values are: `none`, `github-oauth`, `github-app`, or `bitbucket-oauth`.
 
 For an organization to use a URL orb, there must be at least one allow-list entry whose URL prefix matches the beginning of the orb's URL. If no matching entry exists, the orb reference will be blocked.
 
@@ -59,6 +40,10 @@ The allow-list applies organization-wide - once configured, all projects within 
 . Fill out the *Name*, *URL Prefix*, and *Auth* fields.
 . Select btn:[Add URL Prefix].
 
+
+#Screenshot showing Organization Settings > Orbs pages with "Add URL Prefix" highlighted#
+
+#Screenshot showing the Add URL Prefix modal with Name, URL Prefix, and Auth fields#
 [.tab.add.API]
 
 include::../_includes/partials/notes/server-api-examples.adoc[]
@@ -95,7 +80,7 @@ Example response:
 . Scroll to the *Allowed URL Orb prefixes* section.
 . Existing allow-list entries are displayed in the table.
 
-
+#Screenshot showing the Allowed URL Orb prefixes section with existing allow-list entries#
 [.tab.get.API]
 
 include::../_includes/partials/notes/server-api-examples.adoc[]
@@ -135,6 +120,8 @@ Example response:
 . Navigate to menu:Organization Settings[Orbs].
 . Scroll to the *Allowed URL Orb prefixes* section.
 . Select the btn:[Delete] icon next to the allow-list entry to delete.
+
+#Screenshot showing the Allowed URL Orb prefixes section with the Delete icon highlighted or pointed at with an arrow#
 
 [.tab.delete.API]
 
