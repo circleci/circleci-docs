@@ -2479,7 +2479,7 @@ The `override-with` key is used to override the job configuration with a job fro
 include::../_includes/snippets/orchestration-examples/override-with.yml[]
 ----
 
-In the example above, the `test` job in the workflow is being overriden with the orb job `my-orb/my-test`. The `my-orb/my-test` job might be defined with a different resource class or execution steps.
+In the example above, the `test` job in the workflow is being overridden with the orb job `my-orb/my-test`. The `my-orb/my-test` job might be defined with a different resource class or execution steps.
 
 If the `my-orb/my-test` job is not defined inside the orb, the `test` job will compile using the local job definition.
 

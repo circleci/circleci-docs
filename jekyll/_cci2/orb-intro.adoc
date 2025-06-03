@@ -28,7 +28,7 @@ Orbs are reusable packages of parameterizable configuration that can be used in 
 CircleCI supports two types of orbs:
 
 *Registry orbs*:: Orbs that are developed and published using the orb publishing process. SemVer-based versioning is used to manage the versions of registry orbs. Registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry]
-*URL orbs*:: Orbs that are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry. URL orbs do not follow semantic versioning, and can be accessed directly using an `https` URL. An org-level allow list is used to manage the addresses of URL orbs that can be used in a project in that organization. Manage the allow list at menu:Organization Settings[Orbs]
+*URL orbs*:: Orbs that are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry. URL orbs do not follow semantic versioning, and can be accessed directly using an `https` URL. An org-level allow list is used to manage the addresses of URL orbs that can be used in a project in that organization. Manage the allow list at menu:Organization Settings[Orbs]. See the xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] guide for more information on scoping allowed URL orbs for your organization.
 
 Orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
 
