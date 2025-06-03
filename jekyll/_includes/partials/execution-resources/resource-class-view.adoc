@@ -7,6 +7,6 @@ To view the compute resource usage for the duration of a job in the CircleCI web
 . Select a job by clicking on the job name
 . Select the btn:[Resources] tab to view CPU and RAM usage for the duration of the job
 
-You can use these insights to decide whether to make changes to the job's configured resource class. You can also access xref:resource-class-overview#resource-class-insights[resource class Insights].
+You can use these insights to decide whether to make changes to the job's configured resource class.
 
 image::view-resource-usage.png[Resources tab]
