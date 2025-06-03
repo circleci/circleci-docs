@@ -22,8 +22,8 @@ Rollbacks allow you to quickly revert your application to a previous stable vers
 
 == Set up rollbacks
 
-=== 1. Set up deploy markers
-If not already set up, you must configure deploy markers in your CircleCI workflows. Deploy markers track when deployments occur and are essential for rollback functionality. Follow the xref:configure-deploy-markers#[Configure Deploy Markers] guide to set this up.
+=== 1. Manually configure deploy markers
+If not already set up, you must configure deploy markers in your CircleCI workflows. Deploy markers track when deployments occur and are essential for rollback functionality. Follow the xref:configure-deploy-markers#[Configure Deploy Markers] guide to set this up. Autodetected deploy markers are *not* supported for use with rollbacks.
 
 === 2. Navigate to project overview
 
