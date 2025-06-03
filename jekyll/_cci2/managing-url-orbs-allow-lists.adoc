@@ -48,7 +48,7 @@ image::add-allow-list-url-prefix-modal.png[Add URL Prefix modal]
 include::../_includes/partials/notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
-. Send a *POST* request to the https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list endpoint to add an allow-list entry, with a JSON map containing name, prefix, and auth keys, as the request body.
+. Send a *POST* request to the link:https://circleci.com/docs/api/v2/index.html#tag/Organization/operation/createURLOrbAllowListEntry[Create a new URL orb allow-list entry] endpoint to add an allow-list entry, with a JSON map containing name, prefix, and auth keys, as the request body.
 
 Example:
 
@@ -88,7 +88,7 @@ image::allow-list.png[Allow-list in Organization settings > Orbs]
 include::../_includes/partials/notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
-. Send a *GET* request to the https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list endpoint to view the organization's URL orb allow-lists.
+. Send a *GET* request to the link:https://circleci.com/docs/api/v2/index.html#tag/Organization/operation/listURLOrbAllowListEntries[List the entries in the org's URL Orb allow-list] endpoint to view the organization's URL orb allow-lists.
 
 Example:
 
@@ -132,7 +132,7 @@ image::delete-url-prefix.png[Delete URL Prefix modal]
 include::../_includes/partials/notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
-. Send a *DELETE* request to the https://circleci.com/docs/api/private/organization/<organization-id>/url-orb-allow-list/<allow-list-id> endpoint to delete the allow-list entry.
+. Send a *DELETE* request to the link:https://circleci.com/docs/api/v2/index.html#tag/Organization/operation/removeURLOrbAllowListEntry[Remove an entry from the org's URL orb allow-list] endpoint to delete the allow-list entry.
 
 Example:
 
