@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 ---
-= URL orbs
+= Managing URL orbs allow-lists
 :page-description: How to manage URL orbs allow-lists
 :experimental:
 :icons: font
@@ -13,21 +13,19 @@ contentTags:
 [#introduction]
 == Introduction
 
-The ability for an organization to use private orbs is no longer dependent on publishing orbs. URL-referenced orbs offer a way to create orbs as well as control access within the organization.
+The ability for an organization to use private orbs is no longer dependent on publishing orbs. URL orbs offer a way to create orbs as well as control access within the organization.
 
-The use of URL orbs is recommended for private orbs where there are additional trust and access controls within the VCS.
+The allow-list acts as a safe-list that restricts orb URL references to only approved URL prefixes, providing security and access control for organizations using private or external orbs.
 
 
-INFO:
+[INFO]
 ====
 URL orbs may themselves reference other URL orbs or Registry orbs.
 
 Registry orbs may not reference URL orbs.
 
-Unlike Registry orbs, URL orbs are expanded at the time of use, not the time of publication.
-
+Because there is no publishing step, URL orbs are expanded when the config is processed at the beginning of a pipeline. Registry orbs are expanded when the orb is published.
 ====
-
 
 Example:
 
@@ -48,7 +46,7 @@ Each allow-list entry contains three components:
 * URL prefix - The approved URL pattern that orb references must match (must use HTTPS and end with /)
 * Auth - The authentication method to use (`None`, `GitHub OAuth`, `GitHub App`, or `Bitbucket OAuth`)
 
-For an organization to use a URL-referenced orb, there must be at least one allow-list entry whose URL prefix matches the beginning of the orb's URL. If no matching entry exists, the orb reference will be blocked.
+For an organization to use a URL orb, there must be at least one allow-list entry whose URL prefix matches the beginning of the orb's URL. If no matching entry exists, the orb reference will be blocked.
 
 The allow-list applies organization-wide - once configured, all projects within that organization can use orbs from the approved URL prefixes. 
 
@@ -98,7 +96,7 @@ Example response:
 . Existing allow-list entries are displayed in the table.
 
 
-[.tab.add.API]
+[.tab.get.API]
 
 include::../_includes/partials/notes/server-api-examples.adoc[]
 
@@ -168,6 +166,6 @@ Example response:
 * The URL Orb allow-list is limited to at most 5 entries.
 * A single config may use no more than 50 URL orbs in total, whether referenced directly or indirectly in a hierarchy.
 * A hierarchy of URL orbs may not exceed a depth of 5 orb references.
-* The `github-oauth` auth type assumes that any member of the organization known to CircleCI has permission to fetch the URL orb. If this is not true then seemingly arbitrary failures to fetch URL orbs will occur. The `github-app` auth type does not have the above limitation.
-* URL orbs are cached for 5 minutes.
-* There is currently no support for GitLab authentication.
+* The `GitHub OAuth` and `Bitbucket OAuth` auth types assume that any member of the organization known to CircleCI has permission to fetch the URL orb. If this is not true then seemingly arbitrary failures to fetch URL orbs will occur. The `GitHub App` auth type does not have the above limitation.
+* Once an orb has been fetched the content is cached for 5 minutes. This is both to reduce load on the remote system hosting the orb, and to improve build times for busy projects.
+* GitLab authentication is currently not supported.
