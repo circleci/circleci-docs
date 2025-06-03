@@ -25,6 +25,8 @@ Rollbacks allow you to quickly revert your application to a previous stable vers
 === 1. Manually configure deploy markers
 If not already set up, you must configure deploy markers in your CircleCI workflows. Deploy markers track when deployments occur and are essential for rollback functionality. Follow the xref:configure-deploy-markers#[Configure Deploy Markers] guide to set this up. Autodetected deploy markers are *not* supported for use with rollbacks.
 
+The rest of this guide covers how to set up rollbacks using a custom rollback pipeline. At this point, after deploy markers are configured, you can use the xref:rollback-a-project-by-workflow-rerun#[Rollback by workflow rerun] method.
+
 === 2. Navigate to project overview
 
 . In the CircleCI dashboard, navigate to *Organization Home* from the sidebar.

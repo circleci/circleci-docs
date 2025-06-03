@@ -12,17 +12,20 @@ contentTags:
 
 == Prerequisites
 
-Before performing a rollback by workflow rerun, ensure you have:
-
-* *Deploy markers configured*. You must configure deploy markers in your CircleCI workflows. Deploy markers track when deployments occur and are essential for rollback functionality. Follow the Configure Deploy Markers guide to set this up.
+Before performing a rollback by workflow rerun, ensure you have configured deploy markers in your CircleCI workflows. Deploy markers track when deployments occur and are essential for rollback functionality. Follow the xref:configure-deploy-markers#[Configure Deploy Markers] guide to set this up. Autodetected deploy markers are *not* supported for use with rollbacks.
 
 == Performing a rollback by workflow rerun
 
-Workflow rerun rollbacks are the simplest form of rollback where you do not need to set up any additional configuration. To perform a rollback using workflow rerun:
+Workflow rerun rollbacks do not need any additional configuration beyond setting up deploy markers. To perform a rollback using workflow rerun:
 
-. Navigate to the Project Overview page.
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the *Overview* link for your project.
 . Select btn:[Rollback].
 . Select btn:[Rollback by workflow re-run].
+
+.Rollback options on project overview page
+image::deploy/project-overview-rollback.png[Rollback button on project overview page]
 
 This will open the workflow re-run modal with the following options:
 
