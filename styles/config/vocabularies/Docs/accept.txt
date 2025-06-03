@@ -343,6 +343,7 @@ UIDs?
 [Uu]int
 [Uu]ncheck
 [Uu]nchecked
+[Uu]ncomment
 [Uu]ndeploy
 [Uu]ndeployed
 unencrypted
