@@ -13,14 +13,13 @@ contentTags:
 Use resource classes to:
 
 * Specify compute resource size (CPU and RAM) for running a link:/docs/concepts/#jobs[job].
-* Optimize executors based on historical trends with resource class Insights.
 * Configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
 * Specify an execution environment.
 
 [#introduction]
 == Introduction
 
-The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution evironment.
+The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution environment.
 
 The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
 
@@ -103,22 +102,6 @@ Alternatively, use the "Get job details" endpoint to return information about a 
 === View resource usage per job
 
 include::../_includes/partials/execution-resources/resource-class-view.adoc[]
-
-=== Resource class Insights
-
-Resource class Insights let you track resource utilization for your jobs. You can inspect and use this information to update your executors based on historical trends and job requirements.
-
-To find resource class Insights:
-
-. Select **Insights** from the web app sidebar.
-. The dashboard shows Insights at the project level. To find resource class Insights you need to drill down to the job level:
-.. Select a project from the drop down.
-.. Select a workflow from the list.
-.. Select the **Jobs** tab.
-.. Expand a job to view the resource class Insights.
-+
-.Resource class Insights
-image::resource-class-insights.png[Screenshot showing resource class Insights]
 
 [#see-also]
 == See also

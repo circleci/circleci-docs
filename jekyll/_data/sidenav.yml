@@ -136,8 +136,8 @@ en:
             link: github-trigger-event-options
           - name: GitLab trigger options
             link: gitlab-trigger-options
-          - name: Webhook integration
-            link: webhooks
+          - name: Custom webhooks
+            link: custom-webhooks
       - name: Schedule
         children:
           - name: Scheduled pipelines
@@ -148,6 +148,8 @@ en:
             link: orchestration-cookbook
           - name: Set up multiple configuration files for a project
             link: set-up-multiple-configuration-files-for-a-project
+          - name: How to override config
+            link: how-to-override-config
           - name: Notify a Slack channel of a paused workflow
             link: notify-a-slack-channel-of-a-paused-workflow
           - name: Use branch filters
@@ -497,12 +499,16 @@ en:
         children:
           - name: Orb introduction
             link: orb-intro
+          - name: Managing URL orb allow-lists
+            link: managing-url-orbs-allow-lists
       - name: Author orbs
         children:
-          - name: Intro to authoring an orb
-            link: orb-author-intro
           - name: Author an orb
             link: orb-author
+          - name: Create an orb
+            link: create-an-orb
+          - name: Manually author an orb
+            link: orb-author-validate-publish
           - name: Orb authoring best practices
             link: orbs-best-practices
       - name: Test orbs
@@ -513,12 +519,6 @@ en:
         children:
           - name: Orb publishing process
             link: creating-orbs
-      - name: Tutorials
-        children:
-          - name: Create an orb
-            link: create-an-orb
-          - name: Manually author an orb
-            link: orb-author-validate-publish
       - name: How-to guides
         children:
           - name: Deploy service update to ECS
@@ -553,6 +553,10 @@ en:
             link: authentication/set-up-sso
           - name: Sign in to an SSO-enabled org
             link: authentication/sign-in-to-an-sso-enabled-organization
+      - name: Multi-Factor Authentication (MFA)
+        children:
+          - name: MFA overview
+            link: authentication/mfa
       - name: OIDC tokens
         children:
           - name: Use OpenID Connect tokens in jobs
@@ -631,8 +635,8 @@ en:
     children:
       - name: Integration features
         children:
-          - name: Webhook integration
-            link: webhooks
+          - name: Outbound webhooks
+            link: outbound-webhooks
           - name: Notifications overview
             link: notifications
           - name: Build open source projects
@@ -678,8 +682,8 @@ en:
             link: add-ssh-key
       - name: Reference
         children:
-          - name: Webhooks reference
-            link: webhooks-reference
+          - name: Outbound webhooks reference
+            link: outbound-webhooks-reference
 
   - name: Developer toolkit
     icon: icons/sidebar/code.svg
