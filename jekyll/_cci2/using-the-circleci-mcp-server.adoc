@@ -76,7 +76,7 @@ npx -y @smithery/cli install @CircleCI-Public/mcp-server-circleci --client claud
 
 === Cursor IDE
 
-For guidance on setting up and using an MCP server in Cursor, see the link:https://docs.cursor.so/docs/mcp-servers[Cursor docs].
+For guidance on setting up and using an MCP server in Cursor, see the link:https://docs.cursor.com/context/model-context-protocol[Cursor docs].
 
 Add this configuration to your Cursor MCP config file. You will need to supply your personal API token.
 
