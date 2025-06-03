@@ -20,7 +20,7 @@ This guide is for you if you would rather create deploy markers yourself. For mo
 
 Autodetected or manually configured deploy markers provide a lightweight way to log your deployments without requiring a you to install the CircleCI release agent. If you install deploy markers manually, as described in this guide you will also be able to use the xref:set-up-rollbacks#[CircleCI rollback feature].
 
-FOr a full guide to CircleCI's deploys features and functionality, refer to the xref:set-up-circleci-deploys#[Set up CircleCI deploys] guide.
+For a full guide to CircleCI's deploys features and functionality, refer to the xref:set-up-circleci-deploys#[Set up CircleCI deploys] guide.
 
 == Prerequisites
 
