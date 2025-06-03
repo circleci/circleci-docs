@@ -1,0 +1,130 @@
+# This is a template CircleCI rollback config. Uncomment and configure the section for your platform.
+
+version: 2.1
+
+parameters:
+
+  # ECS cluster name (required for ecs platform)
+  ecs_cluster_name:
+    type: string
+    default: ""
+
+  # ECS service name (required for ecs platform)
+  ecs_service_name:
+    type: string
+    default: ""
+
+  # ECS task family for identifying previous task definition (required for ecs platform)
+  ecs_task_family:
+    type: string
+    default: ""
+
+  # Helm release name (required for helm platform)
+  helm_release_name:
+    type: string
+    default: ""
+
+jobs:
+  rollback-app:
+    docker:
+      - image: cimg/node:23.11.0
+    environment:
+      FORCE_COLOR: 3
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      # --- Rollback to Previous Version (Platform-specific) ---
+      # Uncomment and configure the section below that matches your deployment infrastructure.
+
+      # --- Kubernetes Rollback Example ---
+      # - run:
+      #     name: Rollback Kubernetes Deployment
+      #     command: |
+      #       if [ -z "<< pipeline.deploy.component_name >>" ]; then
+      #         echo "component_name value is required for Kubernetes rollback"
+      #         exit 1
+      #       fi
+      #       if [ -n "<< pipeline.deploy.target_version >>" ]; then
+      #         # Find deployment using app and version labels
+      #         DEPLOYMENT_NAME=$(kubectl get deployment -n "<< pipeline.deploy.namespace >>" -l app="<< pipeline.deploy.component_name >>",version="<< pipeline.deploy.target_version >>" -o jsonpath='{.items[0].metadata.name}')
+      #         if [ -z "$DEPLOYMENT_NAME" ]; then
+      #           echo "No deployment found for app=<< pipeline.deploy.component_name >>, version=<< pipeline.deploy.target_version >>"
+      #           exit 1
+      #         fi
+      #         kubectl rollout undo deployment/$DEPLOYMENT_NAME -n "<< pipeline.deploy.namespace >>"
+      #         kubectl rollout status deployment/$DEPLOYMENT_NAME -n "<< pipeline.deploy.namespace >>"
+      #       else
+      #         # Rollback the main deployment for the component to the previous version
+      #         kubectl rollout undo deployment/"<< pipeline.deploy.component_name >>" -n "<< pipeline.deploy.namespace >>"
+      #         kubectl rollout status deployment/"<< pipeline.deploy.component_name >>" -n "<< pipeline.deploy.namespace >>"
+      #       fi
+
+      # --- Helm Rollback Example ---
+      # - run:
+      #     name: Rollback Helm Release
+      #     command: |
+      #       if [ -z "<< parameters.helm_release_name >>" ] || [ -z "<< pipeline.deploy.namespace >>" ]; then
+      #         echo "helm_release_name and namespace values are required for Helm rollback"
+      #         exit 1
+      #       fi
+      #       if [ -n "<< pipeline.deploy.target_version >>" ]; then
+      #         # Find the revision number that matches the target version
+      #         REVISION=$(helm history "<< parameters.helm_release_name >>" -n "<< pipeline.deploy.namespace >>" | grep "<< pipeline.deploy.target_version >>" | awk '{print $1}')
+      #         if [ -z "$REVISION" ]; then
+      #           echo "No Helm revision found with version << pipeline.deploy.target_version >>"
+      #           exit 1
+      #         fi
+      #         helm rollback "<< parameters.helm_release_name >>" "$REVISION" -n "<< pipeline.deploy.namespace >>"
+      #       else
+      #         # Rollback to the previous release
+      #         helm rollback "<< parameters.helm_release_name >>" -n "<< pipeline.deploy.namespace >>"
+      #       fi
+
+      # --- AWS ECS Rollback Example ---
+      # - run:
+      #     name: Rollback AWS ECS Service to Previous Task Definition
+      #     command: |
+      #       if [ -z "<< parameters.ecs_cluster_name >>" ] || [ -z "<< parameters.ecs_service_name >>" ] || [ -z "<< parameters.ecs_task_family >>" ]; then
+      #         echo "ecs_cluster_name, ecs_service_name, and ecs_task_family parameters are required for ECS rollback"
+      #         exit 1
+      #       fi
+      #       if [ -n "<< pipeline.deploy.target_version >>" ]; then
+      #         # Find task definition with specific version
+      #         TASK_DEF_ARN=$(aws ecs list-task-definitions --family-prefix << parameters.ecs_task_family >> --status ACTIVE | grep "<< pipeline.deploy.target_version >>" | head -1)
+      #       else
+      #         # Get previous task definition
+      #         TASK_DEF_ARN=$(aws ecs list-task-definitions --family-prefix << parameters.ecs_task_family >> --sort DESC --status ACTIVE --query 'taskDefinitionArns[1]' --output text)
+      #       fi
+      #       aws ecs update-service \
+      #         --cluster << parameters.ecs_cluster_name >> \
+      #         --service << parameters.ecs_service_name >> \
+      #         --task-definition $TASK_DEF_ARN
+
+      # --- Custom Script Rollback Example ---
+      # - run:
+      #     name: Run Custom Rollback Script
+      #     command: |
+      #       # Edit the rollback script path or add your custom rollback commands directly here
+      #       # You can use pipeline values in your script like << pipeline.deploy.component_name >>
+      #       
+      #       # Example: Run a custom script
+      #       # ./scripts/rollback-to-previous.sh
+      #       
+      #       # Example: Directly implement rollback logic
+      #       echo "Rolling back << pipeline.deploy.component_name >> to version << pipeline.deploy.target_version >>"
+      #       # Add your custom rollback commands here
+
+      # --- Default Placeholder (runs by default) ---
+      - run:
+          name: Placeholder
+          command: |
+            echo "Rollback is not currently configured."
+            echo "To enable rollback, edit .circleci/rollback.yml and uncomment or modify the example for your platform (kubernetes, ecs, helm, or custom)."
+            echo "You can use pipeline values to control your rollback (component_name, environment_name, namespace, target_version, etc)."
+            echo "For more advanced use cases, you can pass custom parameters to the pipeline and reference them in your rollback script."
+
+workflows:
+  rollback:
+    jobs:
+      - rollback-app
