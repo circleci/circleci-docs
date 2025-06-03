@@ -1,0 +1,163 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Managing URL orbs allow-lists
+:page-description: How to manage URL orbs allow-lists
+:experimental:
+:icons: font
+:page-layout: classic-docs
+
+[#introduction]
+== Introduction
+
+The allow-list is a security mechanism that restricts orb URL references to only approved URL prefixes, providing security and access control for organizations using private or external orbs.
+
+This guide explains how to add, view, or delete allow-lists in the CircleCI Web App and via the API.
+
+== Managing allow-lists
+
+Each allow-list entry contains three components:
+
+* Name - A descriptive identifier for the entry
+* URL prefix - The approved URL pattern that orb references must match (must use HTTPS and end with /)
+* Auth - The authentication method to use.
+** In the CircleCI Web App, the available values are: `None`, `GitHub OAuth`, `GitHub App`, or `Bitbucket OAuth`.
+** In the API, the available values are: `none`, `github-oauth`, `github-app`, or `bitbucket-oauth`.
+
+For an organization to use a URL orb, there must be at least one allow-list entry whose URL prefix matches the beginning of the orb's URL. If no matching entry exists, the orb reference will be blocked.
+
+The allow-list applies organization-wide. Once configured, all projects within that organization can use orbs from the approved URL prefixes.
+
+=== Adding a URL orb allow-list entry
+
+[.tab.add.CircleCI_web_app]
+--
+. Navigate to the menu:Organization Settings[Orbs].
+. In the *Allowed URL Orb prefixes*  section, select btn:[Add].
+. Fill out the *Name*, *URL Prefix*, and *Auth* fields.
+. Select btn:[Add URL Prefix].
+
+image::add-allow-list-url-prefix-modal.png[Add URL Prefix modal]
+--
+
+[.tab.add.API]
+--
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. Send a *POST* request to the https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list endpoint to add an allow-list entry, with a JSON map containing name, prefix, and auth keys, as the request body.
+
+Example:
+
+[source, shell]
+----
+curl -X POST https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+  --data '{"name": "Private URL Orbs", "prefix": "https://raw.githubusercontent.com/my-org/private-orbs/", "auth": "github-app"}'
+----
+
+Example response:
+
+[source, shell]
+----
+{
+  "id":"6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx",
+  "message":"Created."
+}
+----
+--
+
+=== View the organization's URL orb allow-lists
+
+
+[.tab.get.CircleCI_web_app]
+--
+. Navigate to menu:Organization Settings[Orbs].
+. Scroll to the *Allowed URL Orb prefixes* section.
+. Existing allow-list entries are displayed in the table.
+
+image::allow-list.png[Allow-list in Organization settings > Orbs]
+--
+
+[.tab.get.API]
+--
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. Send a *GET* request to the https://circleci.com/docs/api/private/organization/<organization-id/url-orb-allow-list endpoint to view the organization's URL orb allow-lists.
+
+Example:
+
+[source, shell]
+----
+curl -X GET https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+Example response:
+
+[source, shell]
+----
+{
+  "items": [
+    {
+       "id": "6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx",
+       "name": "Private URL Orbs",
+       "prefix": "https://raw.githubusercontent.com/my-org/private-orbs/",
+       "auth": "github-oauth"
+    }
+  ]
+}
+
+----
+--
+
+=== Delete a URL orb allow-list entry
+
+[.tab.delete.CircleCI_web_app]
+--
+. Navigate to menu:Organization Settings[Orbs].
+. Scroll to the *Allowed URL Orb prefixes* section.
+. Select the btn:[Delete] icon next to the allow-list entry to delete.
+
+image::delete-url-prefix.png[Delete URL Prefix modal]
+--
+
+[.tab.delete.API]
+--
+include::../_includes/partials/notes/server-api-examples.adoc[]
+
+. Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
+. Send a *DELETE* request to the https://circleci.com/docs/api/private/organization/<organization-id>/url-orb-allow-list/<allow-list-id> endpoint to delete the allow-list entry.
+
+Example:
+
+[source, shell]
+----
+curl -X DELETE https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list/6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+
+Example response:
+
+[source, shell]
+----
+{
+  "id": "6a7e25f1-6da7-461b-9fb0-69e7b92f6xxx",
+  "message": "Deleted."
+}
+----
+--
+
+=== Limitations and caveats
+
+* The URL orb allow-list is limited to at most 5 entries.
+* A single config may use no more than 50 URL orbs in total, whether referenced directly or indirectly in a hierarchy.
+* A hierarchy of URL orbs may not exceed a depth of 5 orb references.
+* The `GitHub OAuth` and `Bitbucket OAuth` auth types assume that any member of the organization known to CircleCI has permission to fetch the URL orb. If this is not true then seemingly arbitrary failures to fetch URL orbs will occur. The `GitHub App` auth type does not have this limitation.
+* Once an orb has been fetched the content is cached for 5 minutes. This is both to reduce load on the remote system hosting the orb, and to improve build times for busy projects.
+* GitLab authentication is currently not supported.
