@@ -64,6 +64,14 @@
   padding-left: 2rem;
 }
 
+.toc .toc-menu li[data-level="4"] a {
+  padding-left: 2.75rem;
+}
+
+.toc .toc-menu li[data-level="5"] a {
+  padding-left: 3.5rem;
+}
+
 .toc .toc-menu a {
   font-family: 'Inter', sans-serif;
   font-size: medium;
