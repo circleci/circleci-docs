@@ -61,7 +61,7 @@ xref:jobs-steps#[Jobs] are nested under each workflow, and can contain tests and
 
 - View job details
 +
-image:vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
+image::vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
 
 Expanding a job also lets you:
 
