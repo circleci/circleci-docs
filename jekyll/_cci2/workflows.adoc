@@ -282,6 +282,8 @@ curl --request POST \
 
 === Identify the user who approved a job
 
+To identify the user who approved a job, you can use the CircleCI web app or the API.
+
 [.tab.identify.CircleCI_web_app]
 --
 * If the user signed up via GitHub, the (non-clickable) avatar of the GitHub user appears next to the approval job. Hovering over that avatar brings up a tooltip with the user's name as specified in their GitHub/Bitbucket account settings.
