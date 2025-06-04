@@ -495,7 +495,7 @@ With Sysbox installed and the runtime class updated in your container-agent reso
 
 ```yaml
 docker:
-  - image: registry.nestybox.com/nestybox/ubuntu-bionic-systemd-docker
+  - image: nestybox/ubuntu-noble-systemd-docker
     entrypoint: ["dockerd"]
     command: ["--host=unix:///var/run/docker.sock"]
 ```
