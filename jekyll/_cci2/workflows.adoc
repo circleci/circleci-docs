@@ -292,8 +292,8 @@ curl --request POST \
 [.tab.identify.API]
 --
 . Set up your API authentication. Steps are available in the xref:api-developers-guide#add-an-api-token[API developers guide].
-. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID.
-
+. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:variables#[pipeline values or environment variables], or by xref:webhooks#[receiving webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API]
++
 [,shell]
 ----
 curl --request GET \
@@ -302,10 +302,19 @@ curl --request GET \
   --header 'content-type: application/json' \
 ----
 
-In the JSON response, take note of the value associated with the `approved_by` key.
+. In the JSON response, take note of the value associated with the `approved_by` key. This is the user ID of the user who approved the job.
++
+[,json]
+----
+ "name" : "hold",
+ "project_slug" : "gh/<org>/<project>",
+ "approved_by" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+ "type" : "approval",
+ "status" : "success",
+----
 
 . Then use the link:https://circleci.com/docs/api/v2/index.html#operation/getUser[user information] endpoint to get the username or email address.
-
++
 [,shell]
 ----
 curl --request GET \
@@ -314,10 +323,8 @@ curl --request GET \
   --header 'content-type: application/json' \
 ----
 
-TIP: You can find detailed instructions in link:https://support.circleci.com/hc/en-us/articles/360044820493-How-to-Find-hold-Step-Approver-in-a-Workflow[this support article]
-
-* If the user who approved the job signed up via GitHub or Bitbucket, the response from the user information endpoint will have the following format:
-
+** If the user who approved the job signed up via GitHub or Bitbucket, the response from the user information endpoint will have the following format:
++
 [,json]
 ----
  {
@@ -327,8 +334,8 @@ TIP: You can find detailed instructions in link:https://support.circleci.com/hc/
  }
 ----
 
-* If the user who approved the job signed up via email, the response from the user information endpoint will have the following format:
-
+** If the user who approved the job signed up via email, the response from the user information endpoint will have the following format:
++
 [,json]
 ----
  {
@@ -337,6 +344,10 @@ TIP: You can find detailed instructions in link:https://support.circleci.com/hc/
    "id" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
  }
 ----
+
+TIP: You can find detailed instructions in link:https://support.circleci.com/hc/en-us/articles/360044820493-How-to-Find-hold-Step-Approver-in-a-Workflow[this support article]
+
+
 
 --
 
