@@ -44,7 +44,7 @@ The included `config.yml` and `test-deploy.yml` files in the `./circleci` direct
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app.
 Notice there are two workflows, `lint-pack` will run first and contains our linting, ShellCheck, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready.
 +
-image:orbtools-11-checks.png[Orb test results as reported by GitHub Checks API on pull request]
+image::orbtools-11-checks.png[Orb test results as reported by GitHub Checks API on pull request]
 . *"Squash" Merge.*
 +
 When your changes are complete, we recommend (not required) link:https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits[Squash Merging] your changes into a single commit, with a link:https://www.conventionalcommits.org/[Conventional Commit Message].

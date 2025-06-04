@@ -476,7 +476,7 @@ A standalone project can have:
 Select *Projects* in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow any project you have access to. There are two options:
 
 * _Set Up_ or _Create_ any project that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to link:/docs/notifications/[email notifications] for the project's status.
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:notifications#[email notifications] for the project's status.
 
 image::CircleCI-2.0-setup-project-circle101_cloud.png[Project dashboard]
 
