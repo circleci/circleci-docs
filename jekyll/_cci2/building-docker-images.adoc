@@ -67,22 +67,16 @@ CircleCI runs remote Docker environments using **Linux or Arm machine resource c
 |===
 | Docker resource class
 | Remote Docker (Linux Machine) resource class
-|
 | `small`
 | `medium` (Linux VM)
-|
 | `medium`
 | `medium` (Linux VM)
-|
 | `medium+`
 | `large` (Linux VM)
-|
 | `large`
 | `large` (Linux VM)
-|
 | `xlarge`
 | `xlarge` (Linux VM)
-|
 | `2xlarge`
 | `2xlarge` (Linux VM)
 |===
@@ -94,16 +88,12 @@ CircleCI runs remote Docker environments using **Linux or Arm machine resource c
 |===
 | Docker resource class
 | Remote Docker (Arm Linux Machine) resource class
-|
 | `arm.medium`
 | `arm.medium` (Arm VM)
-|
 | `arm.large` 
 | `arm.large` (Arm VM)  
-|
 | `arm.xlarge`  
 | `arm.xlarge` (Arm VM)
-|
 | `arm.2xlarge`  
 | `arm.2xlarge` (Arm VM)
 |===
