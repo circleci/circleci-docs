@@ -61,7 +61,7 @@ xref:jobs-steps#[Jobs] are nested under each workflow, and can contain tests and
 
 - View job details
 +
-image:vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
+image::vs_code_extension_job-details-gif.gif[Screenshot of side panel with job details]
 
 Expanding a job also lets you:
 
@@ -217,7 +217,7 @@ The ability to trigger pipelines from VS Code can be controlled **at the org lev
 
 * Organization level settings can be found under menu:Organization Settings[Advanced]. The setting default is **Off**. Toggle the "Trigger pipelines with unversioned config" option to **On** to opt-in. Organization level settings override project settings, and they can be changed only by organization admins.
 
-* Project level settings can be found under menu:Project Settings[VS Code integration]. The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to **Off** to opt-out.
+* Project level settings can be found under menu:Project Settings[Advanced]. The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to **Off** to opt-out.
 
 [#security-implications]
 === Security Implications

@@ -1,4 +1,5 @@
 .circleci/config.yml
+[Aa]gentless
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
@@ -88,6 +89,7 @@ CLI
 [Cc]lojure
 [Cc]loud\b
 \bCloud Foundry\b
+Claude Code
 CMake
 CocoaPods
 Codecov
@@ -102,6 +104,7 @@ ConfigMap
 Coreutils
 CPUs
 CRD
+crontab
 CTest
 Cucumber
 CVEs?
@@ -212,6 +215,7 @@ LLMOps
 macOS
 \bMac\b
 manpage
+MCP server
 MFEs?
 [Mm]iddleware
 minitest
@@ -256,6 +260,7 @@ PowerShell
 [Pp]rox[ying|ied]
 \b[Pp]roject [Aa]\b
 \bProject B\b
+[Pp]roxying
 Pusher
 PVC
 Python
@@ -295,6 +300,7 @@ seccomp
 Selenium
 SemVer
 Server Plan
+SELinux
 \b[Ss]hellchecking\b
 [Ss]harded
 \b[Ss]ingle sign-on\b
@@ -351,6 +357,7 @@ URI
 URLEncoder
 UUID
 UUIDs?
+[Vv]alidator
 VCS
 Velero
 Viget
