@@ -10,8 +10,6 @@ contentTags:
 :icons: font
 :experimental:
 
-NOTE: To use rollbacks, your organization must be connected to the *CircleCI GitHub App*. If the GitHub App is not installed in your org, the rollback setup process will automatically prompt you to install it during setup.
-
 Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to configure your CircleCI pipeline to support manual rollback capabilities.
 
 == Prerequisites
@@ -41,6 +39,8 @@ image::deploy/project-overview-rollback.png[Rollback button on project overview 
 
 . Select the btn:[Rollback] dropdown.
 . Select *Set up custom rollback pipeline* from the dropdown menu. This launches the rollback setup wizard.
++
+NOTE: To use the rollback by pipeline method, your organization must be connected to the *CircleCI GitHub App*. If the GitHub App is not installed in your org, the rollback setup process will automatically prompt you to install it during setup.
 
 The setup wizard guides you through configuring your custom rollback pipeline.
 
