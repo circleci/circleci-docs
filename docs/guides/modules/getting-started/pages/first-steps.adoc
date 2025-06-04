@@ -6,7 +6,6 @@
 
 To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page or follow an email invite link from your team, and create an account. After signing up you can create an organization or find your teammates.
 
-[NOTE]
 ****
 CircleCI supports GitHub, Bitbucket, and GitLab projects.
 
