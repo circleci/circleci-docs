@@ -232,6 +232,8 @@ Each development team creates their own orb file (for example, `team-config.yml`
 
 [source,yaml]
 ----
+version: 2.1
+
 jobs:
   custom-test:
     docker:
@@ -257,7 +259,7 @@ jobs:
 
 Notice that this file:
 
-* Does NOT include `version: 2.1`.
+* Must include `version: 2.1`.
 * Does NOT include `orbs:` or `workflows:` sections.
 * Contains only the `jobs:` section with the specific job definitions the team wants to override.
 
