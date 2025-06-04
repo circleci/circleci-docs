@@ -36,7 +36,7 @@ Using cache keys that are too strict can mean that you will get a minimal number
 
 If your project has "flaky tests," workflows might be rerun unnecessarily. This will both use up your credits and increase your storage usage. To avoid this situation, address flaky tests. For help with identifying them, see xref:insights-tests#flaky-tests[Test Insights].
 
-You can also consider configuring your projects to rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information, see the link:/docs/configuration-reference/#the-when-attribute[Configuration Reference].
+You can also consider configuring your projects to rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information, see the xref:configuration-reference#the-when-attribute[Configuration Reference].
 
 [#split-cache-keys-by-directory]
 === Split cache keys by directory
