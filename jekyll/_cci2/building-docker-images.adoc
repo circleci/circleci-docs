@@ -49,10 +49,10 @@ CircleCI runs remote Docker environments using **Linux or Arm machine resource c
 
 === x86 architecture
 
-- A remote Docker environment uses a **Linux VM machine** resource class that corresponds to the Docker executor class.
-- **Exceptions**:
-  - `small` maps to `medium` (Linux VM)
-  - `medium+` maps to `large` (Linux VM)
+A remote Docker environment uses a **Linux VM machine** resource class that corresponds to the Docker executor class with the following exceptions:
+
+* `small` maps to `medium` (Linux VM)
+* `medium+` maps to `large` (Linux VM)
 
 === Arm architecture
 
