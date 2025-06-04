@@ -69,7 +69,7 @@ CircleCI policies are managed by pushing directories of policies to CircleCI via
 
 * Store your policies in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing a policy bundle is done by triggering a CircleCI pipeline.
 
-* Create a bot account for pushing policies, and use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
+* Create a bot account for pushing policies, and use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the xref:contexts#[Using Contexts] page.
 
 The rest on the steps in this section show how to set up a CI/CD pipeline to manage your policies.
 
@@ -177,7 +177,7 @@ Once you have decided how to manage your policies, the next step is to create a 
 [#write-your-policy]
 === 1. Write your policy
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
 
 . <<config-policy-management-enablement,Enable config policies>> for your organization, if you have not already done so.
 
