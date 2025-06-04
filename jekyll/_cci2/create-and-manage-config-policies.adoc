@@ -181,7 +181,7 @@ CAUTION: Ensure you have authenticated your version of the CLI with a token, and
 
 . <<config-policy-management-enablement,Enable config policies>> for your organization, if you have not already done so.
 
-. If you have followed the steps above to set up CI/CD for your config policies, you will already have a directly for storing your policies. If not, create an empty directory to store your policies. For example:
+. If you have followed the steps above to set up CI/CD for your config policies, you will already have a directory for storing your policies. If not, create an empty directory to store your policies. For example:
 +
 [source,shell]
 ----
