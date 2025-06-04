@@ -260,6 +260,7 @@ PowerShell
 [Pp]rox[ying|ied]
 \b[Pp]roject [Aa]\b
 \bProject B\b
+[Pp]roxying
 Pusher
 PVC
 Python
@@ -356,6 +357,7 @@ URI
 URLEncoder
 UUID
 UUIDs?
+[Vv]alidator
 VCS
 Velero
 Viget
