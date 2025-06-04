@@ -58,7 +58,7 @@ A remote Docker environment uses a **Linux VM machine** resource class that corr
 
 Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
 
-=== Mapping: Docker executor ➜ Remote Docker (Linux/Arm Machine)
+=== Docker executor to Remote Docker (Linux/Arm Machine) mapping
 
 ==== x86 architecture
 
