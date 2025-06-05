@@ -432,21 +432,28 @@ a|  * GitLab: push, merge request
 | `pipeline.deploy.environment_name`
 | GitHub App
 | String
-| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The name of the environment that was deployed.
+| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The name of the environment that was deployed to.
 | icon:check[]
 | icon:times[]
 
 | `pipeline.deploy.target_version`
 | GitHub App
 | String
-| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The version of the component that was deployed.
+| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The version of the component that needs to be rolled back to.
 | icon:check[]
 | icon:times[]
 
-| pipeline.deploy.namespace`
+| `pipeline.deploy.current_version`
 | GitHub App
 | String
-| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The namespace of the environment that was deployed.
+| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The current version of the component that was deployed.
+| icon:check[]
+| icon:times[]
+
+| `pipeline.deploy.namespace`
+| GitHub App
+| String
+| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The namespace of the environment that was deployed to.
 | icon:check[]
 | icon:times[]
 
