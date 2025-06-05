@@ -217,9 +217,11 @@ workflows:
       - build
       - test:
           override-with: team-config/custom-test
-          requires: build
+          requires:
+            - build
       - security-scan:
-          requires: build
+          requires:
+            - build
       - deploy:
           requires:
             - test
