@@ -101,7 +101,7 @@ You can add or delete pipelines for your project. For details see the xref:pipel
 [#only-build-pull-requests]
 === Only build pull requests
 
-In your trigger settings, select the "PR opened or pushed to, default branch pushes, tag pushes" option under the "Run on" menu. For a full list of GitHub event trigger options, see the xref:github-trigger-event-options/#supported-trigger-options[GitHub event trigger options] page.
+In your trigger settings, select the "PR opened or pushed to, default branch and tag pushes" option under the "Run on" menu. For a full list of GitHub event trigger options, see the xref:github-trigger-event-options/#supported-trigger-options[GitHub event trigger options] page.
 
 image::triggers/run-on-open.png[Run on trigger menu options]
 
@@ -132,7 +132,7 @@ A subset of built-in environment variables are not available in GitHub-based pro
 
 CircleCI's GitHub App integration provides fine-grained permissions, uses short-lived tokens, and gives you more control over which repositories CircleCI has access to.  The CircleCI GitHub App also enables the following functions:
 
-* xref:webhooks#custom-webhooks[Custom webhooks]
+* xref:custom-webhooks#[Custom webhooks]
 * link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI's config suggestions bot]
 * The ability to use xref:set-up-multiple-configuration-files-for-a-project#[multiple configuration files within one project]
 
@@ -196,7 +196,7 @@ You cannot currently manage the connection with GitHub outside of the project se
 [#scheduled-pipelines]
 === Scheduled pipelines
 
-The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. As an alternative, use a xref:webhooks#custom-webhooks[custom webhook] or the xref:triggers-overview/#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
+The ability to xref:scheduled-pipelines#[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. As an alternative, use a xref:custom-webhooks#[custom webhook] or the xref:triggers-overview/#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
 
 [#build-forked-pull-requests]
 === Build forked pull requests
@@ -223,6 +223,9 @@ The recommendation is to either:
 
 Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. If you are looking to set up an SSH key to check out code from additional repositories in GitHub, see xref:add-ssh-key#steps-to-add-additional-ssh-keys[Add additional SSH keys].
 
+[#outbound-webhooks]
+=== Outbound webhooks
+While outbound webhooks *are* available for GitHub App pipelines, their payload differs from that of GitHub OAuth pipelines. See the xref:outbound-webhooks-reference#[outbound webhook reference] page for more details.
 
 [#test-insights]
 === Test Insights

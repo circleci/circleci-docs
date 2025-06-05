@@ -68,7 +68,7 @@ jobs:
         # Commands run in the primary container
 ----
 
-Find out more about the Docker execution environment on the link:/docs/using-docker/[Using Docker] page.
+Find out more about the Docker execution environment on the xref:using-docker#[Using Docker] page.
 
 [#linux-vm]
 == Linux VM

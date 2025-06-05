@@ -54,7 +54,7 @@ include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[Ins
 
 . In the sidebar, click *Triggers*.
 . Edit an existing GitHub App trigger or add a new GitHub App trigger.
-. In the *Run on* dropdown list, select *PR opened or pushed to, default branch pushes, tag pushes*.
+. In the *Run on* dropdown list, select *PR opened or pushed to, default branch and tag pushes*.
 
 image::triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requests]
 --

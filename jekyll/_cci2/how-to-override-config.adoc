@@ -1,0 +1,355 @@
+---
+contentTags:
+  platform:
+  - Cloud
+---
+= How to override config using an orb
+:page-layout: classic-docs
+:page-description: Learn how to use the override-with key in CircleCI to standardize pipelines across your organization while maintaining team flexibility.
+:icons: font
+:experimental:
+
+This guide shows you how to use the `override-with` key to override a job in a pipeline with a job from an orb. Config overrides allow you to manage _standardized_ pipelines across your organization. Platform teams can maintain central configuration standards while allowing development teams to customize specific parts of the pipeline.
+
+By implementing config overrides, you can access the following benefits:
+
+* Reduce configuration duplication across projects.
+* Enforce security and compliance standards.
+* Simplify pipeline maintenance.
+* Preserve team autonomy.
+
+TIP: *Platform teams* (sometimes called "Infrastructure teams" or "DevOps teams") automate infrastructure management and enable developers to self-serve reliable tools and workflows from a centrally managed technology platform.
+
+== Understanding the override-with key
+The `override-with` key allows you to substitute a job in your workflow with a job defined in an orb.
+
+When you use the `override-with` key in a workflow, the following processes occur:
+
+* If the job referenced under `override-with` exists, the job definition from the referenced orb replaces your original job configuration.
+* If the referenced orb job does not exist, your original job definition is used as a fallback.
+
+See the xref:configuration-reference#override-with[`override-with` key reference] for more information.
+
+== Prerequisites
+Before following this how-to guide, ensure you have met the following prerequisites:
+
+* A CircleCI account, xref:first-steps#[you can sign up for free].
+* Familiarity with CircleCI configuration files. See the xref:introduction-to-yaml-configurations#[Introduction to YAML Configurations] guide for more information.
+* Familiarity with the concepts of URL and registry orbs, and the URL orb allow-list. See the xref:orb-intro#[Orbs intro] and the xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] guide for more information.
+* xref:github-apps-integration#[GitHub App integration]. This is optional but recommended to get the best experience with centralized configs due to the ability to define pipelines in which the configuration files is stored outside the project repository.
+
+== Simple config override example
+
+This basic how-to guide demonstrates how to override a job in your workflow with a job from a URL orb. The orb is stored in a location that is accessible as defined by your org's allow-list.
+
+=== 1. Define your base configuration
+
+Create a configuration with standard jobs, to build and test an application:
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "Building application"
+  test:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "Running standard tests"
+
+workflows:
+  main:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+----
+
+=== 2. Define the override job in your orb
+
+Create a URL orb for your custom test job in a location that is accessible for your project. In the next step you will ensure that the URL is included in your org's allow list.
+
+A URL orb can be very simple, just a YAML file that defines the job you want to use to override one of your standard jobs.
+
+In your orb, define the custom-test job that will replace the standard test job you defined in your base configuration:
+
+[source,yaml]
+----
+# my-orb
+version: 2.1
+
+jobs:
+  custom-test:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - run: echo "Running custom test suite"
+      - run: npm test
+----
+
+Notice that this file:
+
+* Does NOT include `orbs:` or `workflows:` sections.
+* Contains only the `jobs:` section with the specific job definitions the team wants to override.
+
+=== 3. Add your URL orb prefix to your allow-list
+
+See the xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
+
+=== 4. Override a job using the orb
+
+Add your URL orb to the `orbs` section of your configuration. If you copy the example below, you will need to update the URL to point to your orb.
+
+Use the `override-with` key to replace the test job with a job from your orb. When the `main` workflow runs, CircleCI will use the custom-test job from your URL orb instead of your locally defined test job. If the `custom-test` job in the orb does not exist, the `test` job configured in your main config will be used.
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  my-orb: https://raw.githubusercontent.com/my-org/my-repo/path/to/file/orb.yml
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "Building application"
+  test:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run: echo "Running standard tests"
+
+workflows:
+  main:
+    jobs:
+      - build
+      - test:
+          override-with: my-orb/custom-test
+          requires:
+            - build
+----
+
+[#real-world-template-example]
+== Real-world example: Platform team template with team overrides
+This example demonstrates how platform teams can maintain standardized pipelines, using config templates, while allowing development teams the flexibility to customize specific parts. The following list describes a centrally managed pipeline in which an application is built using a standard job and a test job is configured with a team-specific override:
+
+* When a pipeline triggers, the centralized template config is used.
+* The template imports the development team's custom job configuration as an orb.
+* The workflow runs the standard build job defined in the centralized template config.
+* For the test job, the configured override job (if it exists) is used instead of the template's standard test job.
+* The standard security-scan and deploy jobs continue to run as defined in the template config.
+
+=== 1. Create a centralized configuration template
+The platform team creates a central configuration (for example, `central-template.yml`) in a dedicated platform-team/ci-standards repository:
+
+[source,yaml]
+----
+version: 2.1
+
+# Import the team's config as an orb
+orbs:
+  team-config: << pipeline.parameters.config-override-url >>
+
+# Define parameters for configuration
+parameters:
+  config-override-url:
+    type: string
+    default: "https://raw.githubusercontent.com/my-org/my-repo/refs/heads/main/.circleci/team-config.yml"
+
+# Standard jobs defined by platform team
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.03
+    resource_class: medium
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: "Build application"
+          command: ./scripts/build.sh
+
+  test:
+    docker:
+      - image: cimg/base:2023.03
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: "Run standard test suite"
+          command: ./scripts/test.sh
+
+  security-scan:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run:
+          name: "Run security scanning"
+          command: ./scripts/security-scan.sh
+
+  deploy:
+    docker:
+      - image: cimg/base:2023.03
+    steps:
+      - checkout
+      - run:
+          name: "Deploy application"
+          command: ./scripts/deploy.sh
+
+# Standard workflow defined by platform team
+workflows:
+  main-pipeline:
+    jobs:
+      - build
+      - test:
+          override-with: team-config/custom-test
+          requires: build
+      - security-scan:
+          requires: build
+      - deploy:
+          requires:
+            - test
+            - security-scan
+----
+
+=== 2. Set up team-specific override configuration
+
+Each development team creates their own orb file (for example, `team-config.yml`) in their dev-team/project repository. This file contains only the job definition needed for overrides. This config file is a URL orb:
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  custom-test:
+    docker:
+      - image: cimg/node:18.0
+    resource_class: large
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-deps-{{ checksum "package-lock.json" }}
+      - run:
+          name: "Install dependencies"
+          command: npm install
+      - save_cache:
+          key: node-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: "Run team-specific tests"
+          command: npm run test:integration
+----
+
+Notice that this file:
+
+* Must include `version: 2.1`.
+* Does NOT include `orbs:` or `workflows:` sections.
+* Contains only the `jobs:` section with the specific job definitions the team wants to override.
+
+=== 3. Configure your URL allow list
+To use URL-based orbs for team configurations, configure your organization's allow-list settings to include the URL prefix to match the orb file:
+
+See the xref:managing-url-orbs-allow-lists#[Managing URL orb allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
+
+[source,text]
+----
+https://raw.githubusercontent.com/
+This allows importing configurations from any repository in your GitHub organization.
+----
+
+=== 4. Set up pipeline definitions
+For each project using the centralized configuration the platform team needs to:
+
+* Configure the project to use GitHub App integration. The CircleCI GitHub App integration is required to use a config source outside the project repo. See the xref:github-apps-integration#[GitHub App integration] guide for more information.
+* Create a pipeline definition pointing to the central template configuration. This means setting up a pipeline in which the config source is outside the project repository. The config source will be the centralized, _template_ configuration managed by the platform team.
+
+[#transitioning-to-centralized-configs]
+== Transitioning to centralized configs
+Follow these steps to migrate existing projects to a centralized configuration model:
+
+. *Create central configuration repository:* Copy an existing project configuration to a central repository that will serve as your template.
+. *Setup pipeline definitions:* Create a pipeline definition that uses the central config as its source.
+. *Remove duplicate workflows:* Remove workflow definitions from individual project repositories as they are now defined in the central config.
+. *Remove duplicate job definitions:* Remove standard job definitions from project repositories, keeping only those that need customization.
+. *Implement overrides:* For jobs requiring customization, implement the override mechanism using the steps outlined above.
+
+[#troubleshooting]
+== Troubleshooting
+
+=== Job not being overridden
+If your job is not being overridden as expected, try the following:
+
+* Verify the orb is correctly referenced in your configuration.
+* Check that the job name in the orb matches exactly what you specified in override-with.
+* Ensure the URL for URL-based orbs is in your organization's allow list.
+* Confirm the orb file exists at the specified URL.
+
+=== Pipeline parameter issues
+If using pipeline parameters with URL-based orbs, check the following:
+
+* Remember that pipeline parameters are only provided when triggering a pipeline via the API.
+* For VCS triggers, ensure you are using pipeline values that are available at runtime. For example, you could use:
++
+[source,yaml]
+----
+https://raw.githubusercontent.com/<< pipeline.git.repo_owner >>/<< pipeline.git.repo_name >>/refs/heads/main/path/to/file/orb.yml
+----
++
+These pipeline values will be compiled to the team's repo that triggered the change, and fetch that team's override. This assumes the org is using the GitHub App, and all the teams' repos are under the same GitHub org.
+
+=== Centralized config changes not applying
+If changes to your centralized configuration are not taking effect, check the following:
+
+* Check if you are using the correct branch reference in your pipeline definition.
+* Verify that your project is set up to use the GitHub App integration.
+* Check for syntax errors in your configuration using the CircleCI CLI validator.
+
+[#frequently-asked-questions]
+== Frequently asked questions
+
+=== Can I override a job's workflow config?
+No, the current implementation does not support overriding workflow configuration elements, such as a job's `type`, `requires`, `context`, or `filters`. These must be defined in the centralized workflow configuration.
+
+=== Do I need GitHub App integration?
+While not strictly required, GitHub App integration provides the best experience for centralized configuration management. Without it, you would need to duplicate the centralized config across multiple repositories.
+
+=== Can I use this with legacy GitHub OAuth projects?
+The override mechanism will work for GitHub OAuth projects, but there is no way to enforce a single config across multiple OAuth projects within the CircleCI platform. The "centralized" config would need to be duplicated in each project.
+
+=== Are scheduled pipelines supported?
+Scheduled pipelines are not supported for GitHub App/GitLab projects, so they cannot be triggered from a centralized config.
+
+=== Can I override entire workflows?
+Config overrides only supports job overrides at this time.
+
+=== How do I implement this with Terraform?
+CircleCI provides a link:https://github.com/CircleCI-Public/terraform-provider-circleci[Terraform provider] that can help automate the setup of projects with standardized configurations. This can be useful when implementing configuration overrides across multiple projects.
+
+[#conclusion]
+== Conclusion
+The `override-with` key provides a powerful mechanism for balancing standardization and flexibility in CircleCI pipelines. By implementing a centralized configuration approach with targeted overrides, platform teams can enforce standards while development teams maintain autonomy over their specific requirements.
+This approach significantly reduces configuration duplication, improves security compliance, and simplifies pipeline maintenance across your organization.
+
+[#next-steps]
+== Next steps
+
+* xref:config-policy-management-overview#[Learn about config policy management]
+* xref:reusing-config#[Explore other configuration reuse patterns]
+* xref:orb-concepts#[Understand orbs concepts and design]

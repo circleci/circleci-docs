@@ -21,7 +21,7 @@ Some of the things you can do with the CLI include:
 * Query CircleCI's API
 * xref:how-to-use-the-circleci-local-cli#orb-development-kit[Create, publish, view, and manage orbs]
 * xref:how-to-use-the-circleci-local-cli#context-management[Manage contexts]
-* xref:how-to-use-the-circleci-local-cli#test-splitting[Split your tests] to run across link:/docs/parallelism-faster-jobs/[parallel environments] to reduce pipeline duration
+* xref:how-to-use-the-circleci-local-cli#test-splitting[Split your tests] to run across xref:parallelism-faster-jobs#[parallel environments] to reduce pipeline duration
 
 This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, xref:concepts#[CircleCI's concepts]. You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
 
@@ -195,11 +195,11 @@ choco uninstall circleci-cli -y --remove dependencies
 [#next-steps]
 == Next steps
 
-* link:/docs/how-to-use-the-circleci-local-cli/#validate-a-circleci-config[How to validate your CircleCI configuration]
-* link:/docs/how-to-use-the-circleci-local-cli/#run-a-job-in-a-container-on-your-machine[How to run a job in a container on your local machine]
-* link:/docs/how-to-use-the-circleci-local-cli/#orb-development-kit[How to create, publish, view, and manage orbs]
-* link:/docs/how-to-use-the-circleci-local-cli/#context-management[How to manage contexts]
-* link:/docs/how-to-use-the-circleci-local-cli/#test-splitting[How to split your tests] to run across link:/docs/parallelism-faster-jobs/[parallel environments] to reduce pipeline duration
+* xref:how-to-use-the-circleci-local-cli#validate-a-circleci-config[How to validate your CircleCI configuration]
+* xref:how-to-use-the-circleci-local-cli#run-a-job-in-a-container-on-your-machine[How to run a job in a container on your local machine]
+* xref:how-to-use-the-circleci-local-cli#orb-development-kit[How to create, publish, view, and manage orbs]
+* xref:how-to-use-the-circleci-local-cli#context-management[How to manage contexts]
+* xref:how-to-use-the-circleci-local-cli#test-splitting[How to split your tests] to run across xref:parallelism-faster-jobs#[parallel environments] to reduce pipeline duration
 
 '''
 

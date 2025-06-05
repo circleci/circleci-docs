@@ -204,7 +204,7 @@ Orbs are reusable packages of parameterizable configuration that can be used in 
 * Accelerate project setup
 * Simplify integration with third-party tools
 
-Read more about orbs on the link:/docs/orb-intro/[Orbs overview] page.
+Read more about orbs on the xref:orb-intro#[Orbs overview] page.
 
 [#see-also]
 == See also

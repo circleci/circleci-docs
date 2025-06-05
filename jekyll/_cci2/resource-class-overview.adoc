@@ -14,15 +14,14 @@ module: execution-managed
 
 Use resource classes to:
 
-* Specify compute resource size (CPU and RAM) for running a link:/docs/concepts/#jobs[job].
-* Optimize executors based on historical trends with resource class Insights.
-* Configure link:/docs/runner-concepts/#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
+* Specify compute resource size (CPU and RAM) for running a xref:concepts#jobs[job].
+* Configure xref:runner-concepts#namespaces-and-resource-classes[self-hosted runners] for use in your `.circleci/config.yml` file.
 * Specify an execution environment.
 
 [#introduction]
 == Introduction
 
-The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution evironment.
+The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution environment.
 
 The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
 
@@ -39,7 +38,7 @@ jobs:
 
 Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements.
 
-NOTE: **For a full list of available resource class options,** see the link:/docs/configuration-reference/#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
+NOTE: **For a full list of available resource class options,** see the xref:configuration-reference#resourceclass[configuration reference]. The link:https://circleci.com/product/features/resource-classes[resource class product page] provides information on credit usage per resource class, and resource class availability for each plan type.
 
 When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the xref:runner-overview/#getting-started[installation process].
 
@@ -53,7 +52,7 @@ jobs:
       - run: echo "Hello runner"
 ----
 
-Another use of the `resource_class` key is to specify an execution environment. For example, link:/docs/using-arm[Arm] is a resource class option when using the `machine` executor.
+Another use of the `resource_class` key is to specify an execution environment. For example, xref:using-arm#[Arm] is a resource class option when using the `machine` executor.
 
 [source,yaml]
 ----
@@ -99,31 +98,15 @@ The job details page in the web app shows the resource class used for a job.
 .Resource class identifier in web app
 image::resource-class-job.png[Screenshot showing how to view the resource class used for a job in the web app]
 
-Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the link:/docs/api-developers-guide/#get-job-details[get job details] how-to guide.
+Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the xref:api-developers-guide#get-job-details[get job details] how-to guide.
 
 [#view-resource-usage-per-job]
 === View resource usage per job
 
 include::../_includes/partials/execution-resources/resource-class-view.adoc[]
 
-=== Resource class Insights
-
-Resource class Insights let you track resource utilization for your jobs. You can inspect and use this information to update your executors based on historical trends and job requirements.
-
-To find resource class Insights:
-
-. Select **Insights** from the web app sidebar.
-. The dashboard shows Insights at the project level. To find resource class Insights you need to drill down to the job level:
-.. Select a project from the drop down.
-.. Select a workflow from the list.
-.. Select the **Jobs** tab.
-.. Expand a job to view the resource class Insights.
-+
-.Resource class Insights
-image::resource-class-insights.png[Screenshot showing resource class Insights]
-
 [#see-also]
 == See also
 
-* For a full list of available resource class options, see the link:/docs/configuration-reference/#resourceclass[configuration reference].
+* For a full list of available resource class options, see the xref:configuration-reference#resourceclass[configuration reference].
 * For information on credit usage per resource class, and to find out resource class availability per plan type, see the link:https://circleci.com/product/features/resource-classes[resource class product page].

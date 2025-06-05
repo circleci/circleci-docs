@@ -11,6 +11,12 @@ module: toolkit
 :icons: font
 :experimental:
 
+[#notice]
+== Notice
+The SDK is no longer maintained, supported, or monitored by CircleCI. It will be archived in the next 90 days. It can be forked for those that would like to continue using it.
+
+This SDK is provided on an ‘as-is’ and ‘as available’ basis without any warranties of any kind. CircleCI disclaims all warranties, express or implied, including, but not limited to, all implied warranties of merchantability, title, fitness for a particular purpose, and noninfringement.
+
 [#overview]
 == Overview
 

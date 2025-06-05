@@ -43,11 +43,11 @@ jobs:
           command: npm test
 ----
 
-`run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the link:/docs/configuration-reference[Configuration reference] page.
+`run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the xref:configuration-reference#[Configuration reference] page.
 
 Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
 
-For a more in-depth look at workflows functionality, visit the link:/docs/workflows[Workflows] page. You can also refer to the link:/docs/sample-config[Sample configuration] page for more workflow examples.
+For a more in-depth look at workflows functionality, visit the xref:workflows#[Workflows] page. You can also refer to the xref:sample-config#[Sample configuration] page for more workflow examples.
 
 If you need to restrict the connections allowed in your test jobs, consider enabling xref:ip-ranges#[IP ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 

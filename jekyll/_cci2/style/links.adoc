@@ -14,7 +14,7 @@ module: style
 +
 [source,adoc]
 ----
-link:/docs/github-integration#user-keys-and-deploy-keys[User Keys and Deploy Keys]
+xref:github-integration#user-keys-and-deploy-keys[User Keys and Deploy Keys]
 ----
 
 * The **.md** equivalent would be to use a link:

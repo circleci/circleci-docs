@@ -24,33 +24,33 @@ Integrate your CI/CD build and deployment status notifications directly into you
 
 . Install the link:https://marketplace.atlassian.com/apps/1215946/circleci-for-jira[CircleCI for Jira] app from the Atlassian Marketplace in the appropriate Jira Cloud instance. To do this you must be a link:https://support.atlassian.com/jira-software-cloud/docs/manage-atlassian-marketplace-apps-in-team-managed-projects/[Jira Admin]
 +
-image:jira_install_app.png[Select organization and confirm app installation]
+image::jira_install_app.png[Select organization and confirm app installation]
 
 . Navigate to the link:https://confluence.atlassian.com/upm/viewing-installed-apps-273875714.html[configuration page]. To find the configuration page, navigate to link:https://admin.atlassian.com/[`admin.atlassian.com`], select the appropriate organization, and then on the appropriate Jira instance, click the three-dot menu, and then click *Manage Jira apps*.
 +
-image:jira_manage_apps.png[manage apps menu]
+image::jira_manage_apps.png[manage apps menu]
 
 . From the *Manage apps* page, click on the *CircleCI for Jira* app under *User-installed apps* to expand the app details and click *Configure*.
 +
-image:jira_expand_app_details.png[Expand App Details]
+image::jira_expand_app_details.png[Expand App Details]
 
 . To display the app fully, it is essential that you grant it permission to access Atlassian products on your behalf. Click *Allow access* to authorize.
 +
-image:jira_allow_app_access.png[Allow the app access to Atlassian on your behalf]
+image::jira_allow_app_access.png[Allow the app access to Atlassian on your behalf]
 
 . For the initial setup you will need to provide your CircleCI Organization ID, which you can find by navigating to menu:Organization Settings[Overview] in the https://app.circleci.com/[CircleCI application].
 +
-image:jira_get_org_id.png[Get CircleCI Organization ID]
+image::jira_get_org_id.png[Get CircleCI Organization ID]
 
 . This integration authenticates via xref:openid-connect-tokens#[OpenID Connect (OIDC)]. By default, the organization ID provided is used for audience validation, but this can be modified, or more can be added.
 
 . Once you have provided your CircleCI Organization ID and optionally modified the allowed audiences, click *Submit* to save your changes.
 +
-image:jira_set_organization_id.png[Set the Organization ID on the app Configure page]
+image::jira_set_organization_id.png[Set the Organization ID on the app Configure page]
 
 . Now copy your *Webhook URL* for use in the next section.
 +
-image:jira_copy_webtrigger_url.png[Click on button to copy the Webtrigger URL]
+image::jira_copy_webtrigger_url.png[Click on button to copy the Webtrigger URL]
 
 [#configure-the-jira-orb]
 === Configure the Jira orb

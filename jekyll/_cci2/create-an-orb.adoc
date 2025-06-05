@@ -38,7 +38,7 @@ circleci update
 
 circleci version
 ```
-* xref:orb-author-intro#register-a-namespace[Register a namespace] for your GitHub organization. Ensure the organization on GitHub is the owner for the CircleCI namespace for which you are developing your orb. This will be automatically configured correctly if you are using your own personal organization and namespace.
+* xref:orb-author#register-a-namespace[Register a namespace] for your GitHub organization. Ensure the organization on GitHub is the owner for the CircleCI namespace for which you are developing your orb. This will be automatically configured correctly if you are using your own personal organization and namespace.
 
 [#create-your-orb]
 == Create your orb

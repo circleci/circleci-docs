@@ -127,7 +127,7 @@ It is important to define paths and files when using `persist_to_workspace`. Not
 [#see-also]
 == See also
 
-* For conceptual and usage information on Workflows, see the link:/docs/workflows/[Using Workflows to Orchestrate Jobs] page.
+* For conceptual and usage information on Workflows, see the xref:workflows#[Using Workflows to Orchestrate Jobs] page.
 * xref:persist-data#[Persisting Data]
 * xref:caching#[Caching Dependencies]
 * xref:caching-strategy#[Caching Strategies]

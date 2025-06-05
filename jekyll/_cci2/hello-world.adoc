@@ -131,7 +131,7 @@ workflows:
 --
 NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] Plan.
 
-The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for xref:configuration-reference#available-windows-gpu-image[Windows] and xref:configuration-reference#available-linux-gpu-images[Linux]. Refer to link:/docs/using-gpu[Using the GPU execution environment] page for more information.
+The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for xref:configuration-reference#available-windows-gpu-image[Windows] and xref:configuration-reference#available-linux-gpu-images[Linux]. Refer to xref:using-gpu#[Using the GPU execution environment] page for more information.
 
 [source,yaml]
 ----
@@ -177,7 +177,7 @@ workflows:
 ----
 --
 
-image:hello-world-app.png[Screenshot showing hello world in the job step output]
+image::hello-world-app.png[Screenshot showing hello world in the job step output]
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
@@ -282,7 +282,7 @@ workflows:
 ----
 --
 
-image:hello-world-app.png[Screenshot showing hello world in the job step output]
+image::hello-world-app.png[Screenshot showing hello world in the job step output]
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 

@@ -6,8 +6,7 @@ contentTags:
 component: reference
 module: ROOT
 ---
-= Webhooks reference
-:page-description: Reference page for webhooks payloads
+= Outbound webhooks reference
 :page-layout: classic-docs
 :icons: font
 :experimental:
@@ -95,7 +94,7 @@ The following data about the organization associated with the webhook event is p
 [#job]
 === Job
 
-A link:/docs/jobs-steps/[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
+A xref:jobs-steps#[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
 
 The following data about the job associated with the webhook event is provided:
 
@@ -134,7 +133,7 @@ The following data about the job associated with the webhook event is provided:
 [#workflow]
 === Workflow
 
-link:/docs/workflows[Workflows] orchestrate jobs. The following data about the workflow associated with the webhook event is provided:
+xref:workflows#[Workflows] orchestrate jobs. The following data about the workflow associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -629,4 +628,4 @@ NOTE: To find out which GitHub integration you have, see the xref:github-apps-in
 [#next-steps]
 == Next steps
 
-* Follow the link:/docs/webhooks-airtable/[Using webhooks with third party tools] tutorial.
+* Follow the xref:webhooks-airtable#[Using webhooks with third party tools] tutorial.

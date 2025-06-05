@@ -154,4 +154,4 @@ workflows:
 [#next-steps]
 == Next steps
 
-Find out about authoring your own orbs on the <<orb-author-intro#,Introduction to Authoring Orbs>> page.
+Find out about authoring your own orbs on the xref:orb-author#[Introduction to Authoring Orbs] page.

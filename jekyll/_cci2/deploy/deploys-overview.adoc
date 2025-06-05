@@ -21,7 +21,7 @@ When setting up deploys you can choose one of two options:
 
 * *Release agent*: Choose to use the CircleCI release agent, which you install in your cluster to enable you to manage your deployments through CircleCI.
 
-* *Agentless*: Add CLI commands to your config to enable logging and tracking of deploys and deployment status in the CircleCI UI.
+* *Agentless*: Add CLI commands to your config to enable logging and tracking of deploys and deployment status in the CircleCI UI. Use rollbacks to rollback to a previous version of a component.
 
 If you choose the release agent approach, you will have access to the following deploy management tools from CircleCI:
 
