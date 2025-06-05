@@ -1,0 +1,128 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CircleCI API v1 - User Endpoints",
+    "version": "1.0.0",
+    "description": "User-related endpoints for CircleCI API v1."
+  },
+  "servers": [
+    {
+      "url": "https://circleci.com/api/v1.1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User-related endpoints"
+    }
+  ],
+  "paths": {
+    "/me": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get information about the signed-in user",
+        "description": "Provides information about the signed in user.",
+        "operationId": "getMe",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                },
+                "x-curl-example": "curl -H \"Circle-Token: <circle-token>\" https://circleci.com/api/v1.1/me"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/heroku-key": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Add Heroku API key to CircleCI",
+        "description": "Adds your Heroku API key to CircleCI.",
+        "operationId": "addHerokuKey",
+        "security": [
+          {
+            "circleToken": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/HerokuKeyRequest"
+              },
+              "x-curl-example": "curl -X POST --header \"Content-Type: application/json\" -d '{\"apikey\":\"Heroku key\"}' https://circleci.com/api/v1.1/user/heroku-key -H \"Circle-Token: <circle-token>\""
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success (no response body)"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "circleToken": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Circle-Token"
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "user_key_fingerprint": {
+            "type": "string",
+            "nullable": true
+          },
+          "days_left_in_trial": {
+            "type": "integer"
+          },
+          "trial_end": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "basic_email_prefs": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean"
+          },
+          "login": {
+            "type": "string"
+          }
+        }
+      },
+      "HerokuKeyRequest": {
+        "type": "object",
+        "properties": {
+          "apikey": {
+            "type": "string",
+            "description": "Heroku API key"
+          }
+        },
+        "required": [
+          "apikey"
+        ]
+      }
+    }
+  }
+}
