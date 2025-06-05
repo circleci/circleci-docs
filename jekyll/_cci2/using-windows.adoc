@@ -356,7 +356,7 @@ NOTE: The steps described in this section apply to all CircleCI accounts. If you
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the "Rerun Workflow" dropdown menu.
 . To see the connection details, expand the "Enable SSH" section in the job output where you will see the SSH command needed to connect:
 +
-image:ssh-windows-obf.png[SSH connection details]
+image::ssh-windows-obf.png[SSH connection details]
 
 Ensure that you are passing the name of the shell you want to run when you SSH
 in. To run  `cmd.exe` in the build above you would run: `+ssh -p <remote_ip> -- cmd.exe+`

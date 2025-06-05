@@ -8,10 +8,10 @@
 | Release Notes
 
 | `16.4.0`
-| Xcode 16.4 RC (16F6)
+| Xcode 16.4 GA (16F6)
 | 15.3.2
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15338/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-16-4-rc-available/[Release Notes]
+| link:https://circleci.com/changelog/xcode-16-4-ga-available/[Release Notes]
 
 | `16.3.0`
 | Xcode 16.3 (16E140)
