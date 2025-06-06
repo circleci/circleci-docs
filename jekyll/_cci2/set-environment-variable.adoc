@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: security
 ---
 = Set an environment variable
 :page-layout: classic-docs

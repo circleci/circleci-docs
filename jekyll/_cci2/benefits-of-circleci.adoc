@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: about-circleci
 ---
 = Benefits of CircleCI
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Benefits of choosing CircleCI for CI/CD
 :icons: font
 :experimental:

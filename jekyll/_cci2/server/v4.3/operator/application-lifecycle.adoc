@@ -4,10 +4,11 @@ contentTags:
     - Server v4.3
     - Server Admin
 noindex: true
+component: server-admin-4.3
+module: operator
 ---
 = Application lifecycle
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn about CircleCI server v4.3 semantic versioning and release schedules.
 :icons: font
 :toc: macro

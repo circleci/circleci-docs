@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
 = Deploy to Artifactory
 :page-description: How to upload artifacts to Artifactory in CircleCI

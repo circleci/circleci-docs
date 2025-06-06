@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4.3+
+component: guides
+module: execution-runner
 ---
 = Container runner installation (Kubernetes)
 :page-layout: classic-docs

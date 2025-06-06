@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: optimize
 ---
 = Test splitting and parallelism
 :page-description: A guide for test splitting and running tests across parallel compute environments to optimize your CircleCI pipelines.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 Use parallelism and test splitting to:
 

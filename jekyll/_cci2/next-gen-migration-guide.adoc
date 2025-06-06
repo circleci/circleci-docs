@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Migrating to next-gen Convenience Images
 :page-description: A guide for migrating from using legacy images to next-gen images.

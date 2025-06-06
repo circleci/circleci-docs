@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: toolkit
 ---
 = Sample config.yml Files
 :description: Sample config.yml File

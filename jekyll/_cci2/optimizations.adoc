@@ -3,12 +3,13 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: optimize
 ---
 = Optimization reference
 :page-layout: classic-docs
 :page-description: Learn about ways to optimize your CircleCI pipelines
 :icons: font
-:page-liquid:
 :toc: macro
 :toc-title:
 :experimental:

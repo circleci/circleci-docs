@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: optimize
 ---
 = Caching strategies
 :page-description: A guide to the various caching strategies available for managing dependency caches in CircleCI.

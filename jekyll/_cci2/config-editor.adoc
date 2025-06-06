@@ -3,14 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-
+component: guides
+module: getting-started
 ---
 = Using the CircleCI in-app configuration editor
 :page-description: Docs page on In-app configuration editor use and features
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 

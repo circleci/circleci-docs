@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Execution environments overview
 :page-description: An overview of all CircleCI execution environments.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 CircleCI offers several execution environments:
 

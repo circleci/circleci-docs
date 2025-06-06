@@ -3,9 +3,10 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: reference
+module: ROOT
 ---
 = FAQ
-:categories: ["migration"]
 :description: Frequently asked questions about CircleCI
 :experimental:
 :icons: font

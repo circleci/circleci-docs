@@ -2,6 +2,8 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: deploy
 ---
 = Rollback a project by workflow rerun
 :page-layout: classic-docs
