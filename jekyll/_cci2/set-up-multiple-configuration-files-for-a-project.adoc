@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Set up multiple configuration files for a project
 :page-layout: classic-docs

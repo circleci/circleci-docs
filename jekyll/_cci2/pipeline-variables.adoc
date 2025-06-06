@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Pipeline values and parameters
 :experimental:

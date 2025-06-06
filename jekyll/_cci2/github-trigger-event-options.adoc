@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = GitHub trigger event options
 :page-layout: classic-docs

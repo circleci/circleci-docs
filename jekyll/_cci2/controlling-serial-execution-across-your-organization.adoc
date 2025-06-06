@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Controlling serial execution across your organization
 :page-layout: classic-docs

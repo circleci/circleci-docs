@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Trigger a pipeline
 :page-description: "A guide to the various ways to manage pipeline triggering in CircleCI"

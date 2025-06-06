@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Using branch filters
 :page-description: A how to guide for using branch fileters at the job level to simplify your CircleCI configuration.

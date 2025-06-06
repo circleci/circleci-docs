@@ -4,7 +4,7 @@ contentTags:
     - Cloud
     - Server v4+
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Dynamic configuration overview
 :description: A guide to using CircleCI's dynamic configuration features

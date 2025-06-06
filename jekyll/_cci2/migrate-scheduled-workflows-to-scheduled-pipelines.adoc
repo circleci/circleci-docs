@@ -3,7 +3,7 @@ contentTags:
   platform:
   - Cloud
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Migrate scheduled workflows to scheduled pipelines
 :page-layout: classic-docs

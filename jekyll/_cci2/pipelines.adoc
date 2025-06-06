@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Pipelines and triggers overview
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.

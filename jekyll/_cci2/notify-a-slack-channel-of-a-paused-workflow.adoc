@@ -4,7 +4,7 @@ contentTags:
   - Cloud
   - Server v4+
 component: guides
-module: orchestrate-trigger
+module: orchestrate
 ---
 = Notify a Slack channel of a paused workflow
 :page-description: A how to guide for using the Slack orb to notify a Slack channel of a paused workflow.
