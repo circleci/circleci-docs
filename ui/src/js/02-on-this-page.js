@@ -22,7 +22,16 @@
     headingsSelector.push(headingSelector.join('>'))
   }
   var headings = find(headingsSelector.join(','), article.parentNode)
-  if (!headings.length) return sidebar.parentNode.removeChild(sidebar)
+  if (!headings.length) {
+    var menu = sidebar.querySelector('.toc-menu')
+    if (!menu) {
+      menu = document.createElement('div')
+      menu.className = 'toc-menu'
+      sidebar.appendChild(menu)
+    }
+    menu.innerHTML = '' // No title, no placeholder, just empty
+    return
+  }
 
   var lastActiveFragment
   var links = {}

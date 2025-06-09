@@ -1,1 +1,4 @@
 = Contributing to CircleCI Docs
+:page-description: An overview of contributing to CircleCI docs including page templates and our style guide.
+:icons: font
+:experimental:
