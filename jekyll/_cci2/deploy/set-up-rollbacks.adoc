@@ -84,6 +84,7 @@ When customizing your rollback configuration, you can use the following pipeline
 * `pipeline.deploy.component_name`
 * `pipeline.deploy.environment_name`
 * `pipeline.deploy.target_version`
+* `pipeline.deploy.current_version`
 * `pipeline.deploy.namespace`
 
 ==== Deploy markers for rollbacks
