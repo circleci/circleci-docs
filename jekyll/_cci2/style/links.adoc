@@ -1,7 +1,7 @@
 ---
 toc: false
 component: contributors
-module: style
+module: docs-style
 ---
 = Cross references and links
 :page-layout: classic-docs

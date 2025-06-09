@@ -4,7 +4,7 @@ contentTags:
   - Server v4.7
   - Server Admin
 component: server-admin-latest
-module: air-gapped
+module: air-gapped-installation
 ---
 = Phase 5 - Test your installation
 :page-layout: classic-docs

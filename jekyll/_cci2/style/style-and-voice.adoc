@@ -1,6 +1,6 @@
 ---
 component: contributors
-module: style
+module: docs-style
 ---
 = Style and voice
 :page-layout: classic-docs

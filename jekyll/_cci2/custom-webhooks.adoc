@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: orchestrate
 ---
 = Custom webhooks
 :page-layout: classic-docs

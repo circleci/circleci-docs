@@ -4,7 +4,7 @@ permalink: style/
 page-type: index
 toc: false
 component: contributors
-module: style
+module: docs-style
 ---
 = Style guide overview
 :page-layout: classic-docs

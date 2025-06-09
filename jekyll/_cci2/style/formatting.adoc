@@ -1,6 +1,6 @@
 ---
 component: contributors
-module: style
+module: docs-style
 ---
 = Formatting
 :page-layout: classic-docs
