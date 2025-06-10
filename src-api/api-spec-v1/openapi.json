@@ -499,43 +499,6 @@
         ]
       }
     },
-    "/user/heroku-key": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Add Heroku API key to CircleCI",
-        "description": "Adds your Heroku API key to CircleCI.",
-        "operationId": "addHerokuKey",
-        "security": [
-          {
-            "circleToken": []
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/HerokuKeyRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success (no response body)"
-          }
-        },
-        "x-codeSamples": [
-          {
-            "lang": "Shell",
-            "label": "cURL",
-            "source": "curl -X POST --header \"Content-Type: application/json\" -d '{\"apikey\":\"Heroku key\"}' https://circleci.com/api/v1.1/user/heroku-key -H \"Circle-Token: <circle-token>\""
-          }
-        ]
-      }
-    },
     "/project/{vcs-type}/{username}/{project}/{build_num}/artifacts": {
       "get": {
         "tags": [
