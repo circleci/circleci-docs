@@ -8,14 +8,14 @@ Slack is a real-time collaboration application where team members can work toget
 
 The https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb] enables you to create different notifications and messages that can be delivered to your desired recipients.
 
-This page shows how to use a built-in job from the Slack orb to notify a Slack channel when there is a paused workflow awaiting approval. For more information on approval see the xref:workflows.adoc#holding-a-workflow-for-a-manual-approval[Using Workflows to Orchestrate Jobs] page.
+This page shows how to use a built-in job from the Slack orb to notify a Slack channel when there is a paused workflow awaiting approval. For more information on approval see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Using Workflows to Orchestrate Jobs] page.
 
-For a full tutorial to get you started with the Slack orb, see xref:getting-started:slack-orb-tutorial.adoc#[Using The Slack Orb to Set Up Slack Notifications].
+For a full tutorial to get you started with the Slack orb, see xref:getting-started:slack-orb-tutorial.adoc[Using The Slack Orb to Set Up Slack Notifications].
 
 [#configuration-walkthrough]
 == Configuration walkthrough
 
-Every CircleCI project requires a configuration file called xref:getting-started:introduction-to-yaml-configurations.adoc#[`.circleci/config.yml`]. Follow the steps below to create a complete `config.yml` file.
+Every CircleCI project requires a configuration file called xref:getting-started:introduction-to-yaml-configurations.adoc[`.circleci/config.yml`]. Follow the steps below to create a complete `config.yml` file.
 
 [#specify-a-version]
 === 1. Specify a version
@@ -47,7 +47,7 @@ TIP: When using an orb, it is a good idea to check the https://circleci.com/deve
 [#create-jobs]
 === 3. Create jobs
 
-Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the xref:jobs-steps.adoc#[Jobs and Steps] page.
+Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the xref:orchestrate:jobs-steps.adoc[Jobs and Steps] page.
 
 This guide assumes you have jobs for testing and deploying your project. In the following sections these jobs are `test` and `deploy`.
 
@@ -64,7 +64,7 @@ workflows:
 
 === 5. Add jobs to your workflow
 
-Now that we have our workflow, `test-hold-deploy`, we can use it to orchestrate the running of our `test` and `deploy` jobs with a pause requiring manual approval in-between. Refer to the xref:workflows.adoc#using-workflows-to-orchestrate-jobs[Using Workflows to Orchestrate Jobs] page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
+Now that we have our workflow, `test-hold-deploy`, we can use it to orchestrate the running of our `test` and `deploy` jobs with a pause requiring manual approval in-between. Refer to the xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs] page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
 We can add an `approval` job to pause the workflow until manual approval has been given. Notice that the jobs in this workflow are configured to run sequentially using the `requires` key.
 
@@ -146,4 +146,4 @@ workflows:
 [#next-steps]
 == Next steps
 
-Find out about authoring your own orbs on the xref:orbs:author:orb-author-intro.adoc#[Introduction to Authoring Orbs] page.
+Find out about authoring your own orbs on the xref:orbs:author:orb-author.adoc[Introduction to Authoring Orbs] page.

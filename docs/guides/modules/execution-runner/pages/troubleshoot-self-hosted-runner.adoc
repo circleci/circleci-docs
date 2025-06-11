@@ -6,4 +6,4 @@
 
 This page describes errors and troubleshooting methods for container and machine runners.
 
-include::guides:ROOT:partial$troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
+include::ROOT:partial$troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]

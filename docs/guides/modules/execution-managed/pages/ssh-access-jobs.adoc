@@ -165,5 +165,5 @@ $ ssh -vvv git@github.com
 [#see-also]
 == See also
 
-* xref:integration:github-integration.adoc#[GitHub integration]
-* xref:integration:bitbucket-integration.adoc#[Bitbucket integration]
+* xref:integration:github-integration.adoc[GitHub integration]
+* xref:integration:bitbucket-integration.adoc[Bitbucket integration]

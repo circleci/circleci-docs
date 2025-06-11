@@ -1,16 +1,16 @@
 [#operating-systems-circleci-20-support]
 === What operating systems does CircleCI support?
 
-- xref:guides:execution-managed:using-linuxvm.adoc#[Linux]
-- xref:guides:execution-managed:android-machine-image.adoc#[Android]
-- xref:guides:execution-managed:using-macos.adoc#[macOS]
-- xref:guides:test:testing-ios.adoc#[iOS]
-- xref:guides:execution-managed:using-windows.adoc#[Windows]
+- xref:guides:execution-managed:using-linuxvm.adoc[Linux]
+- xref:guides:execution-managed:android-machine-image.adoc[Android]
+- xref:guides:execution-managed:using-macos.adoc[macOS]
+- xref:guides:test:testing-ios.adoc[iOS]
+- xref:guides:execution-managed:using-windows.adoc[Windows]
 
 [#cpu-architecture-circleci-support]
 === Which CPU architectures does CircleCI support?
 
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:guides:execution-managed:using-arm.adoc#[Arm resources] for machine jobs.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:guides:execution-managed:using-arm.adoc[Arm resources] for machine jobs.
 
 [#ipv6-in-tests]
 === Can I use IPv6 in my tests?
@@ -29,7 +29,7 @@ jobs:
       # The image uses the current tag, which always points to the most recent
       # supported release. If stability and determinism are crucial for your CI
       # pipeline, use a release date tag with your image, e.g. ubuntu-2004:202201-02
-      image::guides:ROOT:ubuntu-2004:current
+      image: ubuntu-2004:current
     steps:
       - checkout
       - run:
@@ -44,4 +44,4 @@ jobs:
             sudo service docker restart
 ----
 
-Docker allows enabling IPv6 at different levels: link:https://docs.docker.com/engine/userguide/networking/default_network/ipv6[globally via daemon config like above], with link:https://docs.docker.com/engine/reference/commandline/network_create/[`docker network create` command], and with link:https://docs.docker.com/compose/compose-file/#enable_ipv6[`docker-compose`].
+Docker allows enabling IPv6 at different levels: link:https://docs.docker.com/engine/userguide/networking/default_network/ipv6/[globally via daemon config like above], with link:https://docs.docker.com/engine/reference/commandline/network_create/[`docker network create` command], and with link:https://docs.docker.com/compose/compose-file/#enable_ipv6[`docker-compose`].

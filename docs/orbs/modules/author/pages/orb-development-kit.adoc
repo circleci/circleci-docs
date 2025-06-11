@@ -7,9 +7,9 @@
 [#orb-development-kit]
 == Overview
 
-xref:use:orb-intro.adoc#[Orbs] are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools. CircleCI maintains an link:https://circleci.com/developer/orbs[orb registry] with certified, partner, and third-party orbs.
+xref:use:orb-intro.adoc[Orbs] are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools. CircleCI maintains an link:https://circleci.com/developer/orbs[orb registry] with certified, partner, and third-party orbs.
 
-The orb development kit refers to a suite of tools that work together to simplify the xref:orb-author.adoc#[orb development process] when authoring your own orb. The kit provides automatic testing and deployment on CircleCI.
+The orb development kit refers to a suite of tools that work together to simplify the xref:orb-author.adoc[orb development process] when authoring your own orb. The kit provides automatic testing and deployment on CircleCI.
 
 The `orb init` command is the key to using the orb development kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
 

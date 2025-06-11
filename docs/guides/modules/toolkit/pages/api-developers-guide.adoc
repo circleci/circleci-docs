@@ -6,7 +6,7 @@
 
 This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
 
-include::guides:ROOT:partial$notes/server-api-examples.adoc[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
 
 [#api-categories]
 == API categories
@@ -46,7 +46,7 @@ CircleCI encourages security best practices when using cURL with the API. Visit 
 To add an API token, perform the steps listed below.
 
 . Log in to the https://app.circleci.com[CircleCI web application]
-. xref:managing-api-tokens.adoc#creating-a-personal-api-token[Create a personal API token] by visiting the link:https://app.circleci.com/settings/user/tokens[Personal API Tokens] page, and follow the steps to add an API token
+. xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a personal API token] by visiting the link:https://app.circleci.com/settings/user/tokens[Personal API Tokens] page, and follow the steps to add an API token
 . To test your token, call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 +
 [,shell]
@@ -141,9 +141,9 @@ NOTE: As we transition some APIs from one rate limit system to another, a differ
 
 The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a demo repository called `hello-world`. Alternatively, you can use a pre-existing repository to follow along if you choose.
 
-Many of the API calls make use of the +`{project-slug}`+ triplet, described <<getting-started-with-the-api,above>>.
+Many of the API calls make use of the +++`{project-slug}`+++ triplet, described <<getting-started-with-the-api,above>>.
 
-You will get a list of pipelines for your project using link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listPipelinesForProject[GET /project/<project-slug>/pipeline].
+You will get a list of pipelines for your project using link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listPipelinesForProject[+++`GET /project/{project-slug}/pipeline`+++].
 
 [#prerequisites]
 === Prerequisites
@@ -154,7 +154,7 @@ You will get a list of pipelines for your project using link:https://circleci.co
 === Steps
 
 . In your VCS, create a repository (or use an existing one if you prefer). The repository for this how-to guide will be called `hello-world`. Create a README for your repository so that it is not empty.
-. Set up your new project on the link:https://app.circleci.com/[CircleCI web app]. Refer to the xref:getting-started:create-project.adoc#[Create a project] guide for steps.
+. Set up your new project on the link:https://app.circleci.com/[CircleCI web app]. Refer to the xref:getting-started:create-project.adoc[Create a project] guide for steps.
 +
 After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. Something like the following:
 +
@@ -330,7 +330,7 @@ You may often find it helpful to retrieve information about a specific project, 
 [#get-project-steps]
 ==== Steps
 
-Make a GET request to the +`/project/{project-slug}`+ endpoint to return detailed information about a specific project.
+Make a GET request to the +++`/project/{project-slug}`+++ endpoint to return detailed information about a specific project.
 
 NOTE: Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
 
@@ -342,7 +342,7 @@ To return project details, follow these steps:
 +
 [,shell]
 ----
-curl -X GET https://circleci.com/api/v2/project/{project_slug} \
+curl -X GET https://circleci.com/api/v2/project/{project-slug} \
   --header "Content-Type: application/json" \
   --header "Accept: application/json" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -376,7 +376,7 @@ Retrieving job information can be very useful when you want information about ho
 [#get-job-details-steps]
 ==== Steps
 
-The +`GET /project/{project_slug}/job/{job-number}`+ endpoint enables you to return detailed information about a specific job.
+The `+GET /project/{project_slug}/job/{job-number}+` endpoint enables you to return detailed information about a specific job.
 
 NOTE: Whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
 
@@ -391,7 +391,7 @@ To return job details, perform the following steps:
 +
 [,shell]
 ----
-curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
+curl -X GET https://circleci.com/api/v2/project/{project-slug}/job/{job_number} \
   --header "Content-Type: application/json" \
   --header "Accept: application/json" \
   --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -523,7 +523,7 @@ NOTE: `grep` is used to locate all the URLs for downloading the job artifacts, w
 [#gather-insights]
 === Gather insights
 
-The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. Read the xref:insights:insights.adoc#[Using Insights] page to learn more about insights data.
+The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. Read the xref:insights:insights.adoc[Using Insights] page to learn more about insights data.
 
 The example below describes how you can return information about a single workflow containing information about metrics and credit usage.
 
@@ -544,7 +544,7 @@ curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
 --header "Circle-Token: $CIRCLE_TOKEN"
 ----
 
-. After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
+. After you have defined the +`project-slug`+ and made the API request, you will receive unformatted JSON text similar to the example shown below.
 
 [,json]
 ----
@@ -636,7 +636,7 @@ NOTE: The above example only shows a small number of builds. When you run this c
 
 Now that you have retrieved aggregated data for up to 250 different jobs, you will most likely want to review specific information about a single job, or smaller number of jobs, to ensure that your jobs are running efficiently. To review an individual job, follow the steps below.
 
-. Using your `project-slug` from the previous API call you made to return workflow data, make a GET API call to the following Insights endpoint:
+. Using your +`project-slug`+ from the previous API call you made to return workflow data, make a GET API call to the following Insights endpoint:
 +
 [,shell]
 ----
@@ -715,5 +715,5 @@ The following information is returned for each job:
 [#reference]
 == Reference
 
-* Refer to xref:api-intro.adoc#[API V2 Introduction] for high-level information about the CircleCI V2 API.
+* Refer to xref:api-intro.adoc[API V2 Introduction] for high-level information about the CircleCI V2 API.
 * Refer to link:https://circleci.com/docs/api/v2/[API V2 Reference Guide] for a detailed list of all endpoints that make up the CircleCI V2 API.

@@ -84,7 +84,7 @@ Fastlane allows you to avoid calling lengthy Xcode commands manually and instead
 
 See the link:https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication[Fastlane docs] for more information.
 
-A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the xref:execution-managed:ios-codesigning.adoc#[Code signing] guide (the code signing documentation talks about iOS but it is also applicable to macOS).
+A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the xref:execution-managed:ios-codesigning.adoc[Code signing] guide (the code signing documentation talks about iOS but it is also applicable to macOS).
 
 [,ruby]
 ----
@@ -250,4 +250,4 @@ jobs:
 [#see-also]
 == See also
 
-* xref:execution-managed:ios-codesigning.adoc#[iOS code signing]
+* xref:execution-managed:ios-codesigning.adoc[iOS code signing]

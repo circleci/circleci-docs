@@ -16,13 +16,13 @@ The Scale Plan offers several improvements over the Free and Performance Plans:
 === Access to IP ranges
 Configure IP-based access to restricted environments with IP ranges. Jobs that have the IP ranges feature enabled have traffic routed through one of the defined IP address ranges during job execution. The IP ranges feature is the same on the Performance and Scale Plans.
 
-For more information about this features, refer to the xref:security:ip-ranges.adoc#[IP ranges] page.
+For more information about this features, refer to the xref:security:ip-ranges.adoc[IP ranges] page.
 
 [#access-to-all-resource-classes]
 === Access to all resource classes
 Access to all of the machine sizes on Docker, Linux, Windows, and macOS. The additional resource classes on the compute type/execution environment give you access to higher CPU and memory limits.
 
-For more information about these resources, refer to the xref:execution-managed:executor-intro.adoc#[Executors and images] page.
+For more information about these resources, refer to the xref:execution-managed:executor-intro.adoc[Executors and images] page.
 
 [#custom-concurrency]
 === Custom concurrency
@@ -48,4 +48,4 @@ Additional support through expanded SLAs, an available account team, training an
 == CircleCI features
 In addition to the upgraded features listed above, the Scale Plan also has access to the features listed below. Refer to the link:https://circleci.com/pricing/[Pricing] page for more detailed information on credit amounts, included resource classes, key features, and support. Refer to the link:https://circleci.com/product/features/resource-classes/[Resource class features] page for details on CPU, memory, network and storage, and credit usage for compute type/execution environment. The following features are available across all of CircleCI's plans.
 
-include::guides:ROOT:partial$shared-sections/features-of-circleci.adoc[]
+include::ROOT:partial$shared-sections/features-of-circleci.adoc[]

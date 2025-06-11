@@ -14,12 +14,12 @@ GitLab CI/CD allows you to build, test (continuous integration) and deploy (cont
 Integrate with CircleCI to access features for automated software delivery:
 
 * xref:orchestrate:workflows.adoc#workflows-configuration-examples[Workflow orchestration]
-* xref:optimize:optimizations.adoc#[Data, compute, and time optimization]
-* Control over xref:security:security.adoc#[security] and xref:security:contexts.adoc#[permissions], and org-level control with xref:config-policies:config-policy-management-overview.adoc#[config policies]
-* xref:execution-managed:executor-intro.adoc#[Managed execution environments] (Docker, Linux VM, macOS, Windows, Arm VM, GPU), plus xref:execution-runner:runner-overview.adoc#[self-hosted runners]
-* xref:test:test.adoc#[Test integrations], and xref:optimize:parallelism-faster-jobs.adoc#[test-splitting] to reduce length of the testing phase of your pipelines
-* xref:orbs:use:orb-intro.adoc#[Packaged config (orbs)] to simplify integration with many third party platforms, services, language tools etc.
-* Developer tools: xref:toolkit:local-cli.adoc#[CircleCI CLI], xref:toolkit:api-intro.adoc#[APIs], and xref:toolkit:vs-code-extension-overview.adoc#[VS Code extension], xref:toolkit:circleci-config-sdk.adoc#[config SDK]
+* xref:optimize:optimizations.adoc[Data, compute, and time optimization]
+* Control over xref:security:security.adoc[security] and xref:security:contexts.adoc[permissions], and org-level control with xref:config-policies:config-policy-management-overview.adoc[config policies]
+* xref:execution-managed:executor-intro.adoc[Managed execution environments] (Docker, Linux VM, macOS, Windows, Arm VM, GPU), plus xref:execution-runner:runner-overview.adoc[self-hosted runners]
+* xref:test:test.adoc[Test integrations], and xref:optimize:parallelism-faster-jobs.adoc[test-splitting] to reduce length of the testing phase of your pipelines
+* xref:orbs:use:orb-intro.adoc[Packaged config (orbs)] to simplify integration with many third party platforms, services, language tools etc.
+* Developer tools: xref:toolkit:local-cli.adoc[CircleCI CLI], xref:toolkit:api-intro.adoc[APIs], and xref:toolkit:vs-code-extension-overview.adoc[VS Code extension], xref:toolkit:circleci-config-sdk.adoc[config SDK]
 
 [#sign-up]
 == Steps to integrate GitLab projects with CircleCI
@@ -28,10 +28,7 @@ Follow the steps on the xref:getting-started:first-steps.adoc#github-gitlab-bitb
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the "maintainer" role or higher.
 
-[tabs]
-====
-GitLab_SaaS::
-+
+[.tab.signup.GitLab_SaaS]
 --
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
 
@@ -52,8 +49,8 @@ You can choose a sample `.circleci/config.yml` to best fit your project from a v
 
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
 --
-GitLab_Self-Managed::
-+
+
+[.tab.signup.GitLab_Self-Managed]
 --
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
 
@@ -101,9 +98,8 @@ NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Man
 
 The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repository to see your pipeline on the dashboard.
 --
-====
 
-NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started:hello-world.adoc#[Hello world] example, or take a look at some of our xref:toolkit:sample-config.adoc#[sample configurations] that demonstrate different types of workflows. The xref:reference:ROOT:configuration-reference.adoc#[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
+NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started:hello-world.adoc[Hello world] example, or take a look at some of our xref:toolkit:sample-config.adoc[sample configurations] that demonstrate different types of workflows. The xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
 
 When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your GitLab repository. You may verify this once you have successfully created the project by navigating to your repository's **Settings > Webhooks** page.
 
@@ -114,28 +110,24 @@ The following limits are currently in place for GitLab integrations:
 - Each user can create up to three organizations.
 - Each organization under a Free Plan can have up to 10 projects.
 
-If you need more organizations or projects, consider upgrading to a xref:plans-pricing:plan-overview.adoc#[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+If you need more organizations or projects, consider upgrading to a xref:plans-pricing:plan-overview.adoc[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
 
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
-[tabs]
-====
-com::
-+
+[.tab.pipeline.GitLab.com]
 --
 When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
 If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
 --
-GitLab_Self-Managed::
-+
+
+[.tab.pipeline.GitLab_Self-Managed]
 --
 If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.
 
 When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
 --
-====
 
 Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 
@@ -163,7 +155,7 @@ Project roles give control over which users have access to which projects within
 * Contributor: Read and write access to the project and some settings.
 * Viewer: Read only access to the project and some settings.
 
-For a complete list of permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc#[Roles and permissions overview] page.
+For a complete list of permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview] page.
 
 [#configuration]
 === Pipelines and triggers
@@ -173,7 +165,7 @@ You can add or delete pipelines and triggers for your project. For details see t
 [#project-settings-advanced]
 === Advanced
 
-- You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:orchestrate:dynamic-config.adoc#[Dynamic configuration] guide.
+- You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:orchestrate:dynamic-config.adoc[Dynamic configuration] guide.
 - At this time, the **Free and Open Source** setting is not currently supported for GitLab integrations.
 
 [#project-settings-ssh-keys]
@@ -210,7 +202,7 @@ When creating a GitLab-based project in CircleCI, an SSH key is created, which i
 When you push to your GitLab repository from a job, CircleCI will use the SSH key you added.
 
 
-For more information on SSH keys, refer to the xref:add-ssh-key.adoc#[Adding an SSH key to CircleCI] page.
+For more information on SSH keys, refer to the xref:add-ssh-key.adoc[Adding an SSH key to CircleCI] page.
 
 [#organization-settings]
 == Organization settings - GitLab
@@ -222,7 +214,7 @@ To manage settings at the organization level, select btn:[Organization Settings]
 [#organization-settings-people]
 === People
 
-Add or remove users, and manage user roles for the organization as well as user invites. See the xref:permissions-authentication:roles-and-permissions-overview.adoc#[Roles and permissions overview] page for full details.
+Add or remove users, and manage user roles for the organization as well as user invites. See the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview] page for full details.
 
 [#organization-settings-integrations]
 === Integrations (GitLab self-managed only)
@@ -251,7 +243,7 @@ When retrieving the host keys, you can confirm that you have the correct key by 
 [#roles-and-permissions]
 == Roles and permissions
 
-CircleCI users have different abilities depending on assigned roles in a particular organization. For a detailed list of CircleCI org and project roles and associated permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc#[Roles and permissions] page.
+CircleCI users have different abilities depending on assigned roles in a particular organization. For a detailed list of CircleCI org and project roles and associated permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions] page.
 
 [#user-settings]
 == User settings
@@ -271,7 +263,7 @@ The ability to connect to multiple account integrations on CircleCI allows you t
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables
 
-A number of built-in environment variables are not available in GitLab-based projects. VCS support for each environment variable is indicated in the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:orchestrate:pipeline-variables.adoc#[pipeline values].
+A number of built-in environment variables are not available in GitLab-based projects. VCS support for each environment variable is indicated in the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:orchestrate:pipeline-variables.adoc[pipeline values].
 
 [#coming-soon]
 == Coming soon
@@ -291,7 +283,7 @@ Passing secrets to forked pull requests is not a currently supported option for 
 [#scheduled-pipelines]
 === Scheduled pipelines
 
-The ability to xref:orchestrate:scheduled-pipelines.adoc#[schedule pipelines] is not currently supported for GitLab projects. This feature is planned for a future release.
+The ability to xref:orchestrate:scheduled-pipelines.adoc[schedule pipelines] is not currently supported for GitLab projects. This feature is planned for a future release.
 
 [#stop-building]
 === Stop building
@@ -311,7 +303,7 @@ Open source plans are not currently available to GitLab customers. CircleCI will
 [#test-insights]
 === Test Insights
 
-xref:insights:insights-tests.adoc#[Test Insights] is currently not supported for GitLab customers.
+xref:insights:insights-tests.adoc[Test Insights] is currently not supported for GitLab customers.
 
 [#circleci-server]
 === CircleCI self-hosted server product
@@ -320,8 +312,8 @@ GitLab is not yet supported for link:https://circleci.com/pricing/server/[Circle
 
 [#next-steps]
 == Next steps
-- xref:getting-started:config-intro.adoc#[Configuration tutorial]
-- xref:getting-started:hello-world.adoc#[Hello world]
+- xref:getting-started:config-intro.adoc[Configuration tutorial]
+- xref:getting-started:hello-world.adoc[Hello world]
 
 [#relevant-gitlab-articles]
 == Relevant GitLab articles

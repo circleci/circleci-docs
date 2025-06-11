@@ -14,7 +14,7 @@ This page covers some dynamic configuration examples. The following examples are
 [#prerequisites]
 == Prerequisites
 
-* The content on this page assumes you have already read the xref:dynamic-config.adoc#[Dynamic Configuration] page.
+* The content on this page assumes you have already read the xref:dynamic-config.adoc[Dynamic Configuration] page.
 * If your project was created before December 1st 2023 you will need to enable dynamic configuration in your xref:dynamic-config.adoc#enable-dynamic-config[project settings].
 
 [#a-basic-example]
@@ -55,7 +55,7 @@ workflows:
 
 * **Line 4**: Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
 * **Line 8**: Invoke the `continuation` orb so we can use it.
-* **Lines 11-20**: Define a job called `setup` that uses the default xref:execution-managed:executor-intro.adoc#[`executor`] provided by the `continuation` orb as an . This job:
+* **Lines 11-20**: Define a job called `setup` that uses the default xref:execution-managed:executor-intro.adoc[`executor`] provided by the `continuation` orb as an . This job:
 ** Calls the xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout`] step to checkout code from the configured repository.
 ** Calls the xref:reference:ROOT:configuration-reference.adoc#run[`run`] step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
 ** Continues running the pipeline based on what configuration is provided to the required `configuration_path`.

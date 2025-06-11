@@ -7,7 +7,7 @@
 [#overview]
 == Overview
 
-This document outlines the xref:building-docker-images.adoc#[CircleCI remote Docker image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (setup_remote_docker).
+This document outlines the xref:building-docker-images.adoc[CircleCI remote Docker image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (setup_remote_docker).
 
 [#release-policy]
 == Release policy

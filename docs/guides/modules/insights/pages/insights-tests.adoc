@@ -4,7 +4,7 @@
 :experimental:
 :icons: font
 
-include::guides:ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 [#overview]
 == Overview

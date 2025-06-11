@@ -11,7 +11,7 @@ If you are new to Docker Compose, you can review the link:https://docs.docker.co
 [#using-docker-compose-with-machine-executor]
 == Using Docker Compose with machine executor
 
-If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker compose` as you would normally (see Linux VM execution environment documentation xref:using-linuxvm.adoc#[here] for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected.
+If you want to use Docker Compose to manage a multi-container setup with a Docker Compose file, use the `machine` key in your `.circleci/config.yml` file and use `docker compose` as you would normally (see Linux VM execution environment documentation xref:using-linuxvm.adoc[here] for more details). That is, if you have a Docker Compose file that shares local directories with a container, this will work as expected.
 
 [#using-docker-compose-with-docker-executor]
 == Using Docker Compose with Docker executor
@@ -23,7 +23,7 @@ Using the `docker` execution environment combined with `setup_remote_docker` ena
 The Docker Compose utility is xref:circleci-images#pre-installed-tools[pre-installed in the CircleCI convenience
 images] and machine executor images.
 
-If you are using the Docker executor and *are not* using a convenience image, you can install Docker Compose into your xref:reference:ROOT:glossary.adoc#primary-container[primary container] during the job execution and use the xref:building-docker-images.adoc#[Remote Docker Environment], as follows:
+If you are using the Docker executor and *are not* using a convenience image, you can install Docker Compose into your xref:reference:ROOT:glossary.adoc#primary-container[primary container] during the job execution and use the xref:building-docker-images.adoc[Remote Docker Environment], as follows:
 
 [,yml]
 ----
@@ -49,7 +49,7 @@ If you are using the Docker executor and *are not* using a convenience image, yo
 ----
 
 If you are constructing your own Docker images, consider reading the
-xref:custom-images.adoc#[custom Docker images page].
+xref:custom-images.adoc[custom Docker images page].
 
 Once you have Docker Compose installed, you can use it to build images and run containers:
 
@@ -105,4 +105,4 @@ See link:https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-D
 [#see-also]
 == See also
 
-xref:building-docker-images.adoc#[Running Docker Commands]
+xref:building-docker-images.adoc[Running Docker Commands]

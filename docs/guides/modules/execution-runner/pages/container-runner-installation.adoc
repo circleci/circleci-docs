@@ -10,29 +10,24 @@ This page describes how to install CircleCI's container runner.
 [#prerequisites]
 == Prerequisites
 
-include::guides:ROOT:partial$runner/container-runner-prereq.adoc[]
+include::ROOT:partial$runner/container-runner-prereq.adoc[]
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::guides:ROOT:partial$runner/terms.adoc[]
+include::ROOT:partial$runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-[tabs]
-====
-Web_app_installation::
-+
+[.tab.container-runner.Web_app_installation]
 --
-include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
-+
+[.tab.container-runner.CLI_installation]
 --
-include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 --
-====
 
 [#container-runner-installation]
 == 2. Container runner installation
@@ -60,13 +55,12 @@ kubectl create namespace circleci
 
 . Create a file called `values.yaml` containing the following, substituting your namespace and resource class and token:
 +
-[source,yaml]
-----
+```yaml
 agent:
   resourceClasses:
     <your-namespace>/<your-resource-class-name>:
       token: <your-resource_class_token>
-----
+```
 
 . Finally, run the following command:
 +
@@ -165,8 +159,7 @@ Once you have installed the container runner within your cluster, create and tri
 
 Simple example of how you could set up a job (`cimg/base:2021.11` is a commonly used CircleCI Docker image):
 
-[source,yaml]
-----
+```yaml
 version: 2.1
 
 jobs:
@@ -182,14 +175,14 @@ workflows:
   build-workflow:
     jobs:
       - build
-----
+```
 
-CAUTION: **Do not** use an existing job that uses xref:execution-managed:building-docker-images.adoc#[setup_remote_docker] (see xref:container-runner.adoc#building-container-images,Building container images for more information).
+CAUTION: **Do not** use an existing job that uses xref:execution-managed:building-docker-images.adoc[setup_remote_docker] (see xref:container-runner.adoc#building-container-images[Building container images] for more information).
 
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the xref:troubleshoot-self-hosted-runner.adoc#container-runner[Troubleshoot Container Runner] section of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running container runner.
+Refer to the <<troubleshoot-self-hosted-runner#container-runner,Troubleshoot Container Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running container runner.
 
 [#additional-resources]
 == Additional resources

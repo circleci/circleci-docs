@@ -1,5 +1,5 @@
 //== CircleCI web app installation: pre-steps
-In order to install self-hosted runners, you will need to create a namespace and resource class token. To create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the xref:guides:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Concepts] page.
+In order to install self-hosted runners, you will need to create a namespace and resource class token. To create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
 
 You can view your installed runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
 
@@ -7,7 +7,7 @@ You can view your installed runners on the inventory page, by clicking *Self-Hos
 +
 image::guides:ROOT:runner/runner-ui-step-one.png[Runner set up, step one - Get started]
 
-. Next, you will create a custom xref:guides:execution-managed:resource-class-overview.adoc#[resource class] to use when configuring jobs to use your self-hosted runners. If this is your organization's first time using self-hosted runners. You will need to create or enter a namespace. If your organization already creates orbs, do not create a new namespace, but instead enter the namespace your organization uses for orbs here too. Enter aname for your self-hosted runner resource class.
+. Next, you will create a custom xref:guides:execution-managed:resource-class-overview.adoc[resource class] to use when configuring jobs to use your self-hosted runners. If this is your organization's first time using self-hosted runners. You will need to create or enter a namespace. If your organization already creates orbs, do not create a new namespace, but instead enter the namespace your organization uses for orbs here too. Enter aname for your self-hosted runner resource class.
 +
 TIP: *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
 +

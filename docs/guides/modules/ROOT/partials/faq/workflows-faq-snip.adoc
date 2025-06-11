@@ -11,4 +11,4 @@ Yes, this is supported. See the xref:guides:toolkit:sample-config.adoc#sample-co
 [#build-only-the-jobs-that-changed]
 === Can I build only the jobs that changed?
 
-You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with xref:guides:orchestrate:pipeline-variables.adoc#conditional-workflows[Conditional workflows] and xref:guides:orchestrate:dynamic-config.adoc#[Dynamic configurations]. Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline.
+You can set up your workflows to conditionally run jobs based on specific updates to your repository. You can do this with xref:guides:orchestrate:pipeline-variables.adoc#conditional-workflows[Conditional workflows] and xref:guides:orchestrate:dynamic-config.adoc[Dynamic configurations]. Dynamic configurations will dynamically generate CircleCI configuration and pipeline parameters, and run the resulting work within the same pipeline.

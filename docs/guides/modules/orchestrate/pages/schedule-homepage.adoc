@@ -1,1 +1,1 @@
-= Schedule pipelines
+= Scheduling work on CircleCI

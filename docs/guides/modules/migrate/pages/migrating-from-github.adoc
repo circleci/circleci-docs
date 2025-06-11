@@ -70,7 +70,7 @@ workflows:
 === Actions vs. orbs
 "Actions" in GitHub are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
 
-CircleCI offers similar functionality in our xref:orbs:use:orb-intro.adoc#[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can create orbs with reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
+CircleCI offers similar functionality in our xref:orbs:use:orb-intro.adoc[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can create orbs with reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
 GitHub offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
 
@@ -87,7 +87,7 @@ See the table in the next section to compare configuration.
 [#configuration-comparison]
 == Configuration comparison
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
@@ -279,11 +279,11 @@ jobs:
 ----
 |===
 
-For more configuration examples on CircleCI, visit our xref:toolkit:examples-and-guides-overview.adoc#[Examples and Guides Overview] and xref:toolkit:example-configs.adoc#[Example Projects] pages.
+For more configuration examples on CircleCI, visit our xref:toolkit:examples-and-guides-overview.adoc[Examples and Guides Overview] and xref:toolkit:example-configs.adoc[Example Projects] pages.
 
 Since the configuration between GitHub Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
 
-. xref:about-circleci:concepts.adoc#jobs[Jobs, Steps, and Workflows]
-. xref:orchestrate:workflows.adoc#[More Advanced Workflow and Job Dependency Configuration]
-. xref:orbs:use:orb-intro.adoc#[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
-. xref:optimize:optimizations.adoc#[Optimizations like caching, workspaces, and parallelism]
+. xref:about-circleci:concepts.adoc[Jobs, Steps, and Workflows]
+. xref:orchestrate:workflows.adoc[More Advanced Workflow and Job Dependency Configuration]
+. xref:orbs:use:orb-intro.adoc[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
+. xref:optimize:optimizations.adoc[Optimizations like caching, workspaces, and parallelism]

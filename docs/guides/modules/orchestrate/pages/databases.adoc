@@ -13,7 +13,7 @@ CircleCI provides pre-built images (Docker and VM) for languages and services, l
 
 When configuring a job, the first executor you select is the primary container. The primary container is where all execution occurs. You can add additional containers to the job, these are service, or secondary containers.
 
-The example in the next section shows a xref:reference:ROOT:configuration-reference.adoc#[CircleCI configuration] file with the following:
+The example in the next section shows a xref:reference:ROOT:configuration-reference.adoc[CircleCI configuration] file with the following:
 
 * One job named `build`.
 * Docker is selected for the execution environment.
@@ -27,7 +27,7 @@ In the primary image, the config defines an environment variable with the `envir
 
 Set the `POSTGRES_USER` environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [,yml]
 ----
@@ -139,4 +139,4 @@ Redis also has a CLI available: `sudo apt-get install redis-tools ; while ! redi
 [#see-also]
 == See also
 
-Refer to the xref:toolkit:postgres-config.adoc#[Database Configuration Examples] document for additional configuration file examples.
+Refer to the xref:toolkit:postgres-config.adoc[Database Configuration Examples] document for additional configuration file examples.

@@ -18,11 +18,11 @@ Pipeline values and parameters can be used to create reusable pipeline configura
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
-For a full list of values and built-in environment variables, see the xref:reference:ROOT:variables.adoc#[Project values and variables] guide.
+For a full list of values and built-in environment variables, see the xref:reference:ROOT:variables.adoc[Project values and variables] guide.
 
-include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
-include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
+include::ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
 Usage example:
 
@@ -85,7 +85,7 @@ jobs:
 [#passing-parameters-when-triggering-pipelines-via-the-api]
 === Passing parameters when triggering pipelines via the API
 
-include::guides:ROOT:partial$notes/server-api-examples.adoc[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to link:https://circleci.com/docs/api/v2/#trigger-a-new-pipeline[trigger a pipeline]. This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
@@ -110,7 +110,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 }' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
 
-include::guides:ROOT:partial$tips/find-project-slug.adoc[]
+include::ROOT:partial$tips/find-project-slug.adoc[]
 
 Refer to the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 

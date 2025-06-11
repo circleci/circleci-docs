@@ -16,7 +16,7 @@ Some notes on attributes
 ////
 
 [NOTE]
-****
+====
 This template will help you create a new docs page that shows the reader how to carry out a task and accomplish a specific goal with CircleCI. Content templates help you to:
 
 * Develop new content quickly
@@ -25,7 +25,7 @@ This template will help you create a new docs page that shows the reader how to 
 To use this template, make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-how-to.adoc?plain=1[here]. There is additional detail in the comments.
 
 Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
-****
+====
 
 In a how-to guide, include one or two opening paragraphs. The opening paragraph should be used to briefly describe to the reader what the reader will do using this guide, and what the outcomes are when they successfully finish the task. The information in the opening paragraph should help answer the following questions for the reader:
 
@@ -34,7 +34,7 @@ In a how-to guide, include one or two opening paragraphs. The opening paragraph 
 
 TIP: Since the reader will usually want to quickly get to the task at hand, keep the introduction succinct.
 
-TIP: Consider providing a link to an xref:template-conceptual.adoc#[overview or conceptual doc], should the reader be interested in more explanatory or background information regarding the feature or task.
+TIP: Consider providing a link to an xref:template-conceptual.adoc[overview or conceptual doc], should the reader be interested in more explanatory or background information regarding the feature or task.
 
 [#prerequisites]
 == Prerequisites
@@ -48,7 +48,7 @@ This is the first subsection in the how-to guide. List any prerequisites that th
 * Roles and permissions
 * Skills/knowledge
 // This renders as a nested item
-** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:guides:optimize:parallelism-faster-jobs.adoc#[Test splitting and parallelism] page."
+** Link to any helpful documentation or pages that they can refer to, for example, "For more information on how test splitting works, refer to the xref:guides:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism] page."
 * Any other dependencies
 
 Sometimes, there may be topics to know or tasks to complete that are _helpful_ in order to successfully finish the how-to guide, but do not necessarily have a negative impact on the user's flow if they only do those as they go along. For example, you may include generating an API token in the how-to steps itself, rather than listing it as a strict prerequisite. Use your best judgment to decide whether to add such a requirement as a prerequisite or as a step that is part of the how-to.
@@ -70,8 +70,8 @@ In a how-to guide, you might walk the reader through an example scenario. Exampl
 
 Subsections can be used to break steps into logical sub-parts as needed. Level 2 section titles (`===`) should also be ordered:
 
-* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:guides:config-policies:manage-contexts-with-config-policies.adoc#[Manage contexts with config policies] guide)
-* Otherwise, consider using lowercase letters. (As an example, see xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to split tests])
+* If the document comprises multiple smaller how-to guide, use numbers in the Level 2 titles. (As an example, see the xref:guides:config-policies:manage-contexts-with-config-policies.adoc[Manage contexts with config policies] guide)
+* Otherwise, consider using lowercase letters. (As an example, see xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests])
 
 Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
 
@@ -107,7 +107,7 @@ link:https://circleci.com/[CircleCI website]
 
 To link to another page within the docs use a cross reference:
 
-xref:guides:about-circleci:about-circleci.adoc#[About CircleCI]
+xref:guides:about-circleci:about-circleci.adoc[About CircleCI]
 
 Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
 
@@ -170,5 +170,5 @@ End the guide with a conclusion section that summarizes what was covered.
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:guides:about-circleci:benefits-of-circleci.adoc#[Benefits of CircleCI]
-* xref:guides:about-circleci:concepts.adoc#[CircleCI concepts]
+* xref:guides:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
+* xref:guides:about-circleci:concepts.adoc[CircleCI concepts]

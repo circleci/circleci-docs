@@ -9,9 +9,9 @@
 
 Use environment variables to set up various configuration options, and keep your set-up secure with secrets, private keys, and contexts. Environment variables in CircleCI are governed by an <<order-of-precedence,order of precedence>>, allowing control at each level in your configuration.
 
-See the xref:set-environment-variable.adoc#[Set an environment variable] page for guidance on the different ways to set an environment variable.
+See the xref:set-environment-variable.adoc[Set an environment variable] page for guidance on the different ways to set an environment variable.
 
-If you have existing environment variables (or contexts) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+If you have existing environment variables (or contexts) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#built-in-environment-variables]
 == Built-in environment variables
@@ -25,9 +25,9 @@ For a full list of built-in environment variables, see the xref:reference:ROOT:v
 
 To add private keys or secrets as environment variables for use throughout your project, navigate to menu:Project Settings[Environment Variables] in the link:https://app.circleci.com/[CircleCI web app]. You can find step-by-step instructions of this process on the xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Environment variables] page. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable, and add it again with the new value.
 
-Private environment variables enable you to store secrets safely, even when your project is public. Refer to the xref:integration:oss.adoc#[Building open source projects] page for associated security and settings information.
+Private environment variables enable you to store secrets safely, even when your project is public. Refer to the xref:integration:oss.adoc[Building open source projects] page for associated security and settings information.
 
-include::guides:ROOT:partial$shared-sections/secrets-masking.adoc[]
+include::ROOT:partial$shared-sections/secrets-masking.adoc[]
 
 [#environment-variable-usage-options]
 == Environment variable usage options
@@ -43,7 +43,7 @@ Environment variables are used according to a specific precedence order, as foll
 . Environment variables declared with the `environment` key xref:set-environment-variable.adoc#set-an-environment-variable-in-a-step[for a `run` step].
 . Environment variables set with the `environment` key xref:set-environment-variable.adoc#set-an-environment-variable-in-a-job[for a job].
 . Special CircleCI environment variables defined in the xref:reference:ROOT:variables.adoc#built-in-environment-variables[CircleCI Built-in environment variables] document.
-. Context environment variables (assuming the user has access to the context). See the xref:contexts.adoc#[Contexts] documentation for more information.
+. Context environment variables (assuming the user has access to the context). See the xref:contexts.adoc[Contexts] documentation for more information.
 . xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project-level environment variables] set on the *Project Settings* page in the web app.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the *Contexts* page in the web app will take precedence over variables added on the *Project Settings* page.
@@ -123,7 +123,7 @@ In the example below, `$ORGNAME` and `$REPONAME` will not be interpolated.
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ----
 
-NOTE: An exception to this interpolation rule is using project environment variables to pull xref:execution-managed:private-images.adoc#[private images].
+NOTE: An exception to this interpolation rule is using project environment variables to pull xref:execution-managed:private-images.adoc[private images].
 
 You can reuse pieces of configuration across your `.circleci/config.yml` file. By using the `parameters` declaration, you can pass values into reusable `commands`, `jobs`, and `executors`:
 
@@ -204,7 +204,7 @@ Within your repository create a file such as `template.json`, with value replace
 
 `envsubst` can convert all types of environment variable strings, including those encased in curly braces (`{}`).
 
-The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating the environment variables in the CircleCI app, either in xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Settings] or as a xref:contexts.adoc#[context].
+The config example below shows the corresponding environment variables as if they were defined directly within a step in the config. However, we strongly recommend creating the environment variables in the CircleCI app, either in xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Settings] or as a xref:contexts.adoc[context].
 
 [,yaml]
 ----
@@ -244,7 +244,7 @@ Output:
 }
 ----
 
-For instructions on installing the CircleCI CLI locally, read the xref:toolkit:local-cli.adoc#[Installing the CircleCI local CLI] guide.
+For instructions on installing the CircleCI CLI locally, read the xref:toolkit:local-cli.adoc[Installing the CircleCI local CLI] guide.
 
 [#alpine-linux]
 === Alpine Linux
@@ -279,11 +279,11 @@ Running scripts within configuration may expose secret environment variables. Se
 [#contexts]
 == Contexts
 
-You can further restrict access to environment variables using xref:contexts.adoc#[contexts]. Contexts are set from the *Organization Settings* in the CircleCI web app.
+You can further restrict access to environment variables using xref:contexts.adoc[contexts]. Contexts are set from the *Organization Settings* in the CircleCI web app.
 
 [#see-also]
 == See also
 
-* xref:security-recommendations.adoc#[Security recommendations]
-* xref:set-environment-variable.adoc#[Set an environment variable]
-* xref:inject-environment-variables-with-api.adoc#[Inject variables using the CircleCI API]
+* xref:security-recommendations.adoc[Security recommendations]
+* xref:set-environment-variable.adoc[Set an environment variable]
+* xref:inject-environment-variables-with-api.adoc[Inject variables using the CircleCI API]

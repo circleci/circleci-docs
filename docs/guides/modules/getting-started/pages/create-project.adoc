@@ -26,18 +26,15 @@ NOTE: Using CircleCI server? Use the <<set-up-a-project>> steps below. Rather th
 [#create-a-project]
 === Create a project
 
-NOTE: If you have integrated your code with the xref:integration:github-apps-integration.adoc#[CircleCI GitHub App], xref:integration:gitlab-integration.adoc#[GitLab], or xref:integration:bitbucket-data-center-integration.adoc#[Bitbucket Data Center], the steps in this section apply to you.
+NOTE: If you have integrated your code with the xref:integration:github-apps-integration.adoc[CircleCI GitHub App], xref:integration:gitlab-integration.adoc[GitLab], or xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center], the steps in this section apply to you.
 
 Choose steps to follow below, depending on where your code is stored:
 
-[tabs]
-====
-GitHub App::
-+
+[.tab.create-project.GitHub_App]
 --
 Follow these steps to create a new project in CircleCI:
 
-include::guides:ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
 . Choose a repo to connect to your project.
 +
@@ -66,12 +63,11 @@ image::guides:ROOT:create-project/review-and-finish-setup.png[Screenshot showing
 Once your project is created you will land on your pipelines page.
 --
 
-GitLab_Cloud::
-+
+[.tab.create-project.GitLab_Cloud]
 --
-Follow these steps to create a new project in CircleCI Gitlab:
+Follow these steps to create a new project in CircleCI:
 
-include::guides:ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] or btn:[Connect to GitLab Cloud] to authorise access to your GitLab repositories.
 +
@@ -105,12 +101,11 @@ image::guides:ROOT:create-project/generated-config-commit-and-run.png[Window sho
 image::guides:ROOT:create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
 --
 
-GitLab_self-managed::
-+
+[.tab.create-project.GitLab_self-managed]
 --
 Follow these steps to create a new project in CircleCI:
 
-include::guides:ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] or btn:[Connect to GitLab self-managed] to access repositories from your GitLab self-managed instance. Select btn:[GitLab self-managed] and then btn:[Authorize in GitLab self-managed]
 +
@@ -126,37 +121,34 @@ image::guides:ROOT:create-project/authorize-gitlab-self-managed.png[Option to au
 image::guides:ROOT:create-project/create-new-gitlab-self-managed-project.png[Create new project window]
 +
 [NOTE]
-****
+====
 If this is your first GitLab self-managed project you will now set up your integration:
 
 * Verify your GitLab URL
 * Generate an add a personal access token
 * Add your known hosts, following the instructions in the app
-****
+====
 
 ** Use the repository dropdown menu to tell CircleCI where your code is stored.
 ** Select **Create Project**. You will then be redirected to the Pipelines page.
 ** The express CircleCI configuration setup is not currently available for GitLab self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
 +
 [TIP]
-****
+====
 For guidance on creating a `config.yml` file, see the following pages:
 
-* xref:config-intro.adoc#[Configuration introduction]
-* xref:toolkit:sample-config.adoc#[Sample config.yml files]
-* xref:reference:ROOT:configuration-reference.adoc#[Configuration reference]
-****
+* xref:config-intro.adoc[Configuration introduction]
+* xref:toolkit:sample-config.adoc[Sample config.yml files]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
+====
 --
 
-Bitbucket_Data_Center::
-+
+[.tab.create-project.Bitbucket_Data_Center]
 --
-
-include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 
 Follow these steps to create a new project in CircleCI:
 
-include::guides:ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[Bitbucket Data Center] and then btn:[Authorize in Bitbucket Data Center]
 +
@@ -169,7 +161,6 @@ image::guides:ROOT:create-project/authorize-bitbucket-data-center.png[Choose a r
 ** Add a configuration file to your repo.
 
 --
-====
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
 
@@ -178,7 +169,7 @@ Through creating a project and connecting your code you have set up your pipelin
 [#set-up-a-project]
 === Set up a project
 
-NOTE: If you authenticated CircleCI with either the xref:integration:github-integration.adoc#[GitHub OAuth app] or xref:integration:bitbucket-integration.adoc#[Bitbucket Cloud], or if you use CircleCI server, the steps in this section apply to you.
+NOTE: If you authenticated CircleCI with either the xref:integration:github-integration.adoc[GitHub OAuth app] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud], or if you use CircleCI server, the steps in this section apply to you.
 
 Follow these steps to  set up a new project in CircleCI:
 
@@ -190,15 +181,15 @@ image::guides:ROOT:create-project/set-up-a-project.png[Set up a project button]
 . Find your project in the list and select btn:[Set Up Project].
 +
 [TIP]
-****
+====
 **Can't see your project?** Select the CircleCI logo at the top of the window to navigate to your user homepage and select an organization.
 
 .Access your user homepage
 image::guides:ROOT:create-project/user-home-page.png[Select Organization]
-****
+====
 
 . Choose a `config.yml` option in the modal. You can choose from the following:
-** **Fastest**: Use a CircleCI `.circleci/config.yml` you have already committed to your repository. For guidance on creating a `config.yml` file, see the xref:config-intro.adoc#[Configuration Introduction]. You will also need to specify a branch.
+** **Fastest**: Use a CircleCI `.circleci/config.yml` you have already committed to your repository. For guidance on creating a `config.yml` file, see the <<config-intro#,Configuration Introduction>>. You will also need to specify a branch.
 ** **Faster**: Commit a starter CI pipeline to a new `circleci-project-setup` branch of your repository.
 ** **Fast**: View, edit, and commit a template `config.yml`.
 
@@ -218,7 +209,7 @@ image::guides:ROOT:create-project/configuration-file.png[Edit Configuration File
 [#see-also]
 == See also
 
-* xref:config-intro.adoc#[Configuration Introduction]
-* xref:toolkit:sample-config.adoc#[Sample config.yml files]
-* xref:reference:ROOT:configuration-reference.adoc#[Configuration reference]
-* xref:config-editor.adoc#[Using the CircleCI Configuration Editor]
+* xref:config-intro.adoc[Configuration Introduction]
+* xref:toolkit:sample-config.adoc[Sample config.yml files]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
+* xref:config-editor.adoc[Using the CircleCI Configuration Editor]

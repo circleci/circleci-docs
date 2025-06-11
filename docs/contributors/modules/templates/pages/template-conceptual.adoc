@@ -146,6 +146,6 @@ For more information, see xref:docs-style:formatting.adoc#using-notes-tips-cauti
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:template-tutorial.adoc#[Tutorial template]
+* xref:template-tutorial.adoc[Tutorial template]
 * xref:guides:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
-* xref:guides:about-circleci:concepts.adoc#[CircleCI concepts]
+* xref:guides:about-circleci:concepts.adoc[CircleCI concepts]

@@ -14,7 +14,7 @@ When setting up deploys you can choose one of two options:
 
 * *Release agent*: Choose to use the CircleCI release agent, which you install in your cluster to enable you to manage your deployments through CircleCI.
 
-* *Agentless*: Add CLI commands to your config to enable logging and tracking of deploys and deployment status in the CircleCI UI.
+* *Agentless*: Add CLI commands to your config to enable logging and tracking of deploys and deployment status in the CircleCI UI. Use rollbacks to rollback to a previous version of a component.
 
 If you choose the release agent approach, you will have access to the following deploy management tools from CircleCI:
 
@@ -33,12 +33,12 @@ The release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo R
 
 To get started with CircleCI deploys for Kubernetes right away, refer to the following guides:
 
-* xref:configure-deploy-markers.adoc#[Tutorial 1: Configure CircleCI deploy markers]
-* xref:set-up-circleci-deploys.adoc#[Tutorial 2: Set up CircleCI deploys environments]
-* xref:configure-your-kubernetes-components.adoc#[Tutorial 3: Configure your Kubernetes components]
-* xref:manage-deploys.adoc#[How-to: Manage deploys]
+* xref:configure-deploy-markers.adoc[Tutorial 1: Configure CircleCI deploy markers]
+* xref:set-up-circleci-deploys.adoc[Tutorial 2: Set up CircleCI deploys environments]
+* xref:configure-your-kubernetes-components.adoc[Tutorial 3: Configure your Kubernetes components]
+* xref:manage-deploys.adoc[How-to: Manage deploys]
 
-To get set up with deploys for Amazon SageMaker, refer to the xref:deploy-to-amazon-sagemaker.adoc#[Deploy to Amazon SageMaker] page.
+To get set up with deploys for Amazon SageMaker, refer to the xref:deploy-to-amazon-sagemaker.adoc[Deploy to Amazon SageMaker] page.
 
 [#how-it-works]
 == How it works
@@ -212,7 +212,7 @@ To view all commands run for a component, follow these steps:
 
 We test the versions listed here. Older versions may work but are not guaranteed.
 
-include::guides:ROOT:partial$deploy/supported-versions.adoc[]
+include::ROOT:partial$deploy/supported-versions.adoc[]
 
 [#labels-and-annotations]
 === Labels and annotations
@@ -319,7 +319,7 @@ If any of the following conditions are true, CircleCI **will not** automatically
 ==== Manual configuration of automatically detected deploys
 Some points to consider when manually configuring an automatically detected deploy are as follows:
 
-* If you decide you would like to manually configure a deploy marker for an environment integration that was created as part of an automatically detected deploy, refer to the xref:configure-deploy-markers.adoc#[Configure deploy markers] page to set up a deploy marker and a new environment integration.
+* If you decide you would like to manually configure a deploy marker for an environment integration that was created as part of an automatically detected deploy, refer to the xref:configure-deploy-markers.adoc[Configure deploy markers] page to set up a deploy marker and a new environment integration.
 
 * If you change a component name that was originally autodetected by CircleCI, we create a new component and the history **will not** carry over. If you do not update the component name, the history **will** carry over.
 
@@ -356,7 +356,7 @@ Automatically detected deploys are retained for 30 days.
 
 === Manual deploy marker setup
 
-If you would rather set up deploy markers yourself, see the xref:configure-deploy-markers.adoc#[Configure deploy markers] page.
+If you would rather set up deploy markers yourself, see the xref:configure-deploy-markers.adoc[Configure deploy markers] page.
 
 [#release-status]
 == Deploy status
@@ -407,10 +407,10 @@ We are working on updates to:
 [#troubleshooting]
 == Troubleshooting
 
-include::guides:ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]
+include::ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]
 
 [#next-steps]
 == Next steps
 
-* xref:set-up-circleci-deploys.adoc#[Set up CircleCI deploys]
+* xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys]
 * To try out CircleCI deploys for a Kubernetes deployment, visit the link:https://github.com/CircleCI-Public/cd-config-examples[Continuous delivery config examples] repo.

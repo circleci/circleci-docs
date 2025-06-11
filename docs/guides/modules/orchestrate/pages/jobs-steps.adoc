@@ -9,7 +9,7 @@ This page provides an overview of CircleCI jobs and steps.
 [#jobs-overview]
 == Jobs overview
 
-A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using xref:workflows.adoc#[workflows].
+A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using xref:workflows.adoc[workflows].
 
 The following diagram illustrates how data flows between jobs:
 
@@ -23,7 +23,7 @@ Jobs can be run in Docker containers, using the Docker executor, or in virtual m
 
 When using the Docker executor, images listed under the `docker` key specify the containers you want to start for your job. Any public Docker images can be used with the Docker executor, but CircleCI provides convenience images for a variety of use-cases. Full lists of available convenience and VM images are available in the link:https://circleci.com/developer/images[CircleCI Developer Hub].
 
-See the xref:execution-managed:executor-intro.adoc#[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
+See the xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments] document for a comparison of the different executor types, and links to further information for each option.
 
 === Job naming
 
@@ -77,7 +77,7 @@ image::guides:ROOT:pipelines-job-step-test-artifact.png[Job tab options in the C
 
 Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is xref:reference:ROOT:configuration-reference.adoc#matrix[matrix jobs]. Below is a basic example of passing a parameter to a job when it is run.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [,yml]
 ----
@@ -171,5 +171,5 @@ workflows:
 [#next-steps]
 == Next steps
 
-* Read more about orchestrating jobs in the xref:workflows.adoc#[Using Workflows to Schedule Jobs] page.
-* Read more about passing data between jobs in the xref:workspaces.adoc#[Using Workspaces to Share Data between Jobs] page.
+* Read more about orchestrating jobs in the xref:workflows.adoc[Using Workflows to Schedule Jobs] page.
+* Read more about passing data between jobs in the xref:workspaces.adoc[Using Workspaces to Share Data between Jobs] page.

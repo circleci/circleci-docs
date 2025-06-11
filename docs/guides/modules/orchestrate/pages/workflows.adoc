@@ -33,7 +33,7 @@ The example in this section shows the default workflow orchestration model of co
 * Name the workflow, in this case, `build_and_test`.
 * Nest the `jobs` key with a list of job names that are defined in the configuration file. In this example the jobs have no dependencies defined, so they run concurrently.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [source,yaml]
 ----
@@ -64,7 +64,7 @@ When using workflows, note the following best practices:
 * Move the quickest jobs up to the start of your workflow. For example, lint or syntax checking should happen before longer-running, more computationally expensive jobs.
 * Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
 
-TIP: Refer to the xref:optimize:optimizations.adoc#[Optimization reference] for tips to improve your configuration.
+TIP: Refer to the xref:optimize:optimizations.adoc[Optimization reference] for tips to improve your configuration.
 
 [#sequential-job-execution]
 === Sequential job execution
@@ -251,21 +251,18 @@ In this example, the `deploy` job will not run until the `hold` job is approved.
 
 To approve a job follow these steps:
 
-[tabs]
-====
-CircleCI_web_app::
-+
+[.tab.approve.CircleCI_web_app]
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.
 . Select btn:[Approve].
 --
-API::
-+
+
+[.tab.approve.API]
 --
-include::guides:ROOT:partial$notes/server-api-examples.adoc[]
+include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
-. You need your workflow ID and the `approval_request_id` (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc#[pipeline values or environment variables], or by xref:integration:webhooks.adoc#[receiving webhooks] or polling the API. To approve a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/approvePendingApprovalJobById[approve a job] endpoint, for example:
+. You need your workflow ID and the `approval_request_id` (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[pipeline values or environment variables], or by xref:integration:outbound-webhooks.adoc[receiving webhooks] or polling the API. To approve a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/approvePendingApprovalJobById[approve a job] endpoint, for example:
 +
 [,shell]
 ----
@@ -275,25 +272,95 @@ curl --request POST \
   --header 'content-type: application/json' \
 ----
 --
-====
+
+
+=== Identify the user who approved a job
+
+To identify the user who approved a job, you can use the CircleCI web app or the API.
+
+[.tab.identify.CircleCI_web_app]
+--
+* If the user signed up via GitHub, the (non-clickable) avatar of the GitHub user appears next to the approval job. Hovering over that avatar brings up a tooltip with the user's name as specified in their GitHub/Bitbucket account settings.
+
+* If the user signed up via email, the anonymous avatar appears next to the approval job; hovering over that avatar brings up a tooltip with the user's email address.
+--
+
+[.tab.identify.API]
+--
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[pipeline values or environment variables], or by xref:integration:outbound-webhooks.adoc[receiving webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API]
++
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/workflow/<workflow-ID>/job \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+----
+
+. In the JSON response, take note of the value associated with the `approved_by` key. This is the user ID of the user who approved the job.
++
+[,json]
+----
+ "name" : "hold",
+ "project_slug" : "gh/<org>/<project>",
+ "approved_by" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+ "type" : "approval",
+ "status" : "success",
+----
+
+. Then use the link:https://circleci.com/docs/api/v2/index.html#operation/getUser[user information] endpoint to get the username or email address.
++
+[,shell]
+----
+curl --request GET \
+  --url https://circleci.com/api/v2/user/<user-ID> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}" \
+  --header 'content-type: application/json' \
+----
+
+** If the user who approved the job signed up via GitHub or Bitbucket, the response from the user information endpoint will have the following format:
++
+[,json]
+----
+ {
+   "name" : "User’s name as specified in their VCS account settings",
+   "login" : "VCS username",
+   "id" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+ }
+----
+
+** If the user who approved the job signed up via email, the response from the user information endpoint will have the following format:
++
+[,json]
+----
+ {
+   "name" : "Email address",
+   "login" : "Email address",
+   "id" : "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx"
+ }
+----
+
+TIP: You can find detailed instructions in link:https://support.circleci.com/hc/en-us/articles/360044820493-How-to-Find-hold-Step-Approver-in-a-Workflow[this support article]
+
+
+
+--
 
 === Cancel a job
 
 To Cancel a job follow these steps:
 
-[tabs]
-====
-CircleCI_web_app::
-+
+[.tab.cancel.CircleCI_web_app]
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.
 . Select btn:[Cancel].
 --
-API::
-+
+
+[.tab.cancel.API]
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
-. You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc#[pipeline values or environment variables], or by xref:integration:webhooks.adoc#[receiving webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
+. You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[pipeline values or environment variables], or by xref:integration:outbound-webhooks.adoc[receiving webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
 +
 [,shell]
 ----
@@ -303,7 +370,6 @@ curl --request POST \
   --header 'content-type: application/json' \
 ----
 --
-====
 
 In this example, the purpose of the `hold` job is to wait for approval to begin deployment. A job can be approved for up to 90 days after it starts.
 
@@ -314,7 +380,7 @@ NOTE: Scheduled workflows are not available for projects integrated through the 
 
 NOTE: *The deprecation of the scheduled workflows feature is postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work for us to do to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc#[Dynamic configuration]. If you use dynamic configuration you will need to use xref:scheduled-pipelines.adoc#[Scheduled pipelines] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
+CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc[Dynamic configuration]. If you use dynamic configuration you will need to use xref:scheduled-pipelines.adoc[Scheduled pipelines] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
 
 By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
 
@@ -416,7 +482,7 @@ In a workflow, you can use a context to securely provide environment variables t
 Contexts allow you to define environment variables at the organization level and control access to them through security restrictions.
 Using contexts, sensitive data like API keys or credentials are securely shared with only the jobs that require them. Sensitive data in contexts will not be exposed in your config file.
 
-The following example shows a workflow with four sequential jobs that each use a context to access environment variables. See the xref:security:contexts.adoc#[Contexts] page for detailed instructions on this setting in the application.
+The following example shows a workflow with four sequential jobs that each use a context to access environment variables. See the xref:security:contexts.adoc[Contexts] page for detailed instructions on this setting in the application.
 
 The following `config.yml` snippet is an example of a sequential job workflow configured to use the environment variables defined in the `org-global` context:
 
@@ -482,17 +548,17 @@ This example prevents the workflow `integration_tests` from running unless the `
 }
 ----
 
-For more examples of using conditional logic in your workflows, see the xref:orchestration-cookbook.adoc#[Orchestration cookbook].
+For more examples of using conditional logic in your workflows, see the xref:orchestration-cookbook.adoc[Orchestration cookbook].
 
 [TIP]
-****
+====
 If you want to conditionally run workflows based on the type of event that triggers your pipeline, you can also consider splitting your workflows into separate YAML files and leveraging the different GitHub trigger event options.
 
 For further details see the following guides:
 
-* xref:set-up-multiple-configuration-files-for-a-project.adoc#[Set up multiple configuration files for a project]
-* xref:github-trigger-event-options.adoc#[GitHub trigger event options]
-****
+* xref:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
+* xref:github-trigger-event-options.adoc[GitHub trigger event options]
+====
 
 [#using-filters-in-your-workflows]
 == Using filters in your workflows
@@ -717,7 +783,7 @@ Configuration options are available to:
     at: /tmp/workspace
 ----
 
-For further information on workspaces and their configuration see the xref:workspaces.adoc#[Using Workspaces to Share Data Between Jobs] doc.
+For further information on workspaces and their configuration see the xref:workspaces.adoc[Using Workspaces to Share Data Between Jobs] doc.
 
 [#rerunning-a-workflows-failed-jobs]
 == Rerunning a workflow's failed jobs
@@ -729,19 +795,15 @@ Workflows help to speed up your ability to respond to failures. One way to do th
 . Use the filters to find your project and pipeline.
 . Find the row in the pipeline view for the workflow you would like to rerun from failed and select the *Rerun from failed* icon. This option is also available in the workflow view using the rerun dropdown menu, which you can access by clicking on the workflow name or badge.
 
-[tabs]
-====
-Rerun_from_the_pipelines_page::
-+
+[tab.rerun-screenshot.Rerun_from_the_pipelines_page]
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-pipelines-page.png[Rerun a workflow from failed from the pipelines page]
 --
-Rerun_from_the_workflows_page::
-+
+
+[tab.rerun-screenshot.Rerun_from_the_workflows_page]
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[Rerun a workflow from failed from the workflows page]
 --
-====
 
 NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
 

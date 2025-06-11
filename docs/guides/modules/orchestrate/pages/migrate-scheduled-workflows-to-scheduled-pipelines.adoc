@@ -6,7 +6,7 @@
 
 NOTE: **The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-include::guides:ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 [#introduction]
 == Introduction
@@ -52,7 +52,7 @@ Before you can create a new schedule, you will need to interpret the frequency y
 [#use-the-api]
 === a. Use the API
 
-Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc#[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
+Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
 
 ```shell
 curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
@@ -74,7 +74,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 }'
 ```
 
-include::guides:ROOT:partial$tips/find-project-slug.adoc[]
+include::ROOT:partial$tips/find-project-slug.adoc[]
 
 For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2[API v2 docs]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
@@ -86,7 +86,7 @@ For additional information, refer to the **Schedule** section under the link:htt
 . To create a new schedule, select **Add Trigger**.
 . Define the new schedule by filling out the form, then select **Save Trigger**.
 
-The form also provides the option of adding xref:pipeline-variables.adoc#[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
+The form also provides the option of adding xref:pipeline-variables.adoc[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
 
 [#remove-triggers-section]
 == 3. Remove triggers section

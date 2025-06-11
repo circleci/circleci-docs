@@ -9,7 +9,7 @@ This guide walks you through a basic example of test splitting in CircleCI. Test
 [#introduction]
 == Introduction
 
-Test splitting is a technique in which tests are executed simultaneously across multiple execution environments. Test splitting takes advantage of a feature called xref:optimize:parallelism-faster-jobs.adoc#[_parallelism_], which allows you to run a job in CircleCI on different nodes at the same time.
+Test splitting is a technique in which tests are executed simultaneously across multiple execution environments. Test splitting takes advantage of a feature called xref:optimize:parallelism-faster-jobs.adoc[_parallelism_], which allows you to run a job in CircleCI on different nodes at the same time.
 
 You may have a test suite that consists of dozens or hundreds of tests, and executing them one after the other can take up a lot of time. When you split tests, you have the opportunity to significantly reduce wait times and receive feedback more quickly.
 
@@ -24,8 +24,8 @@ In this tutorial, you will:
 
 To complete this tutorial, you need:
 
-* A CircleCI account - if you do not have an account, xref:getting-started:first-steps.adoc#[you can sign up for free].
-* A Version Control System (VCS) provider, such as GitHub, Bitbucket, or GitLab, connected to your CircleCI account. If you have not already done so, follow the steps in the xref:integration:github-integration.adoc#[GitHub], xref:integration:bitbucket-integration.adoc#[Bitbucket], or xref:integration:gitlab-integration.adoc#[GitLab] integration pages to connect your VCS provider.
+* A CircleCI account - if you do not have an account, xref:getting-started:first-steps.adoc[you can sign up for free].
+* A Version Control System (VCS) provider, such as GitHub, Bitbucket, or GitLab, connected to your CircleCI account. If you have not already done so, follow the steps in the xref:integration:github-integration.adoc[GitHub], xref:integration:bitbucket-integration.adoc[Bitbucket], or xref:integration:gitlab-integration.adoc[GitLab] integration pages to connect your VCS provider.
 
 [#about-the-sample-app]
 == About the sample app
@@ -39,7 +39,7 @@ When you set up the project in CircleCI later in this tutorial, you'll select th
 
 The following is a copy of the `.circleci/config.yml` template that you will *edit* later.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [source,yaml]
 ----
@@ -66,8 +66,8 @@ workflows:
       - build-and-test
 ----
 
-* **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and reusable configuration. More information on config version 2.1 can be found in the xref:reference:ROOT:configuration-reference.adoc#[Configuration reference] page.
-* **Lines 3-4:** This project uses the CircleCI Node xref:orbs:use:orb-intro.adoc#[orb]. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the link:https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].
+* **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and reusable configuration. More information on config version 2.1 can be found in the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
+* **Lines 3-4:** This project uses the CircleCI Node xref:orbs:use:orb-intro.adoc[orb]. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the link:https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].
 * **Lines 18-21:** The project pipeline consists of one workflow called `sample`. This workflow is comprised of one job, named `build-and-test`, which is made up of a few steps to check out the project code, install Node packages and set the default package manager, and run tests (lines 8 to 16).
 
 Test splitting is typically set up within a job. In this tutorial you will modify the `build-and-test` job to define the following:
@@ -79,12 +79,9 @@ Test splitting is typically set up within a job. In this tutorial you will modif
 [#step-one-add-the-project]
 == 1. Add the project
 
-To get started, you need to get the sample app building as a project on CircleCI. If you are using GitHub the steps are slightly different depending on whether you have a GitHub OAuth app or CircleCI GitHub App integration. To find out which integration you have, see the xref:integration:github-apps-integration.adoc#[GitHub App integration] page.
+To get started, you need to get the sample app building as a project on CircleCI. If you are using GitHub the steps are slightly different depending on whether you have a GitHub OAuth app or CircleCI GitHub App integration. To find out which integration you have, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
 
-[tabs]
-====
-GitHub_Oauth_app::
-+
+[.tab.add_project.GitHub_Oauth_app]
 --
 . link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[Fork the repository] on GitHub.
 
@@ -123,8 +120,8 @@ Feel free to take a look at the steps run in the pipeline by expanding the green
 +
 image::guides:ROOT:test-splitting-first-setup-steps.png[Steps run successfully within the job]
 --
-Bitbucket_Cloud::
-+
+
+[.tab.add_project.Bitbucket_Cloud]
 --
 . Import the project code into Bitbucket, using the repo URL: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
 
@@ -163,8 +160,8 @@ Feel free to take a look at the steps run in the pipeline by expanding the green
 +
 image::guides:ROOT:test-splitting-first-setup-steps.png[Steps run successfully within the job]
 --
-GitLab_GitHub_App_Bitbucket_Data_Center::
-+
+
+[.tab.add_project.GitLab_/_GitHub_App_/_Bitbucket_Data_Center]
 --
 . link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[Fork the repository] if you are using GitHub, or import to Bitbucket or GitLab using the repository URL: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
 
@@ -201,7 +198,6 @@ Take a look at the steps run in the pipeline by expanding the green Success stat
 +
 image::guides:ROOT:test-splitting-first-setup-steps.png[Steps run successfully within the job]
 --
-====
 
 [#step-two-set-up-test-splitting]
 == 2. Set up test splitting
@@ -245,7 +241,7 @@ This step uses the CircleCI CLI to pass in the location of the test suites and c
 +
 * First, you want those that match the `+src/__tests__/*.js+` globbing pattern, that is, any `.js` files located in `+src/__tests__+` and any of its subdirectories.
 * Then, the matching files are piped into `circleci tests run`, which creates the test split groupings and then runs your tests.
-* The `--split-by=timings` flag indicates that the tests should be split according to timing data. For other test splitting options, see the xref:optimize:parallelism-faster-jobs.adoc#[Test splitting and parallelism] page.
+* The `--split-by=timings` flag indicates that the tests should be split according to timing data. For other test splitting options, see the xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism] page.
 +
 NOTE: The `circleci tests` commands (`glob` and `run`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
 +
@@ -266,7 +262,7 @@ NOTE: The `circleci tests` commands (`glob` and `run`) cannot be run locally via
     path: ~/junit
 ----
 +
-This step uploads the test data to CircleCI and is **required** to split tests by timing data. This step allows test data to be accessible on the Tests tab of the job in the CircleCI web app, and can be helpful for debugging if tests fail. To read more about the Tests tab and test insights in CircleCI, visit the xref:collect-test-data.adoc#[Collect test data] page.
+This step uploads the test data to CircleCI and is **required** to split tests by timing data. This step allows test data to be accessible on the Tests tab of the job in the CircleCI web app, and can be helpful for debugging if tests fail. To read more about the Tests tab and test insights in CircleCI, visit the xref:collect-test-data.adoc[Collect test data] page.
 
 Here is a full copy of the updated configuration:
 
@@ -331,6 +327,13 @@ Requested weighting by historical based timing, but they are not present. Fallin
 +
 CircleCI defaults to splitting tests by name. As this is the first time you are storing test data from the pipeline, CircleCI does not yet have timing data to work with.
 // Check if this applies to GitLab
+
+On subsequent runs, you'll see an additional step labelled **Downloading previous test results**:
++
+image::guides:ROOT:downloading-previous-test-results-step.png[Downloading previous test results step]
++
+The presence of this step confirms that, during this run, the test results stored by a previous run (with the `store_test_results` step) were successfully retrieved. Provided that the data is xref:optimize:parallelism-faster-jobs.adoc#junit-xml-reports[properly formatted], the test suite will be split as evenly as possible over the specified number of test environments.
+
 . Open the **Timing** tab in the job. This tab provides a visualization of how each parallel run did relative to each other.
 +
 image::guides:ROOT:test-splitting-timing-tab.png[Parallel runs visualization in Timings tab]
@@ -363,4 +366,4 @@ In this tutorial, you have configured your pipeline to split tests by timing dat
 == Next steps
 
 * For a more in-depth discussion of the demo used in this tutorial, read our link:https://circleci.com/blog/a-guide-to-test-splitting/[A Guide to Test Splitting] blog post.
-* Learn about xref:insights:insights-tests.adoc#[Test insights] available in CircleCI.
+* Learn about xref:insights:insights-tests.adoc[Test insights] available in CircleCI.

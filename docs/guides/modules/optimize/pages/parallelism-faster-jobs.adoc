@@ -7,10 +7,10 @@
 Use parallelism and test splitting to:
 
 * Reduce the time taken for the testing portion of your CI/CD pipeline.
-* Specify a number of xref:execution-managed:executor-intro.adoc#[executors] across which to split your tests.
+* Specify a number of xref:execution-managed:executor-intro.adoc[executors] across which to split your tests.
 * Split your test suite using one of the options provided by the CircleCI CLI: by name, size or by using timing data.
 
-If you are interested to read about concurrent job runs, see the xref:concurrency.adoc#[Concurrency overview] page.
+If you are interested to read about concurrent job runs, see the xref:concurrency.adoc[Concurrency overview] page.
 
 [#introduction]
 == Introduction
@@ -30,12 +30,12 @@ It is also possible to use the CLI to <<manual-allocation,manually allocate test
 
 The following how-to guide walks you through the steps required to glob your test files, split your tests evenly across parallel containers or VMs, and then run your tests in parallel:
 
-* *How-to*: xref:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to split tests]
+* *How-to*: xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
 
 [#specify-a-jobs-parallelism-level]
 == Specify parallel environments for a test job
 
-Test suites are conventionally defined at the xref:orchestrate:jobs-steps.adoc#[job] level in your `.circleci/config.yml` file.
+Test suites are conventionally defined at the xref:orchestrate:jobs-steps.adoc[job] level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors are set up to run the job.
 
 To run a job's steps in multiple, parallel execution environments, set the `parallelism` key to a value greater than `1`. In the example below, `parallelism` is set to `4`, meaning four identical execution environments will be set up for the job, in this case, four Docker containers using the `cimg/base:2023.09` image.
@@ -60,9 +60,9 @@ image::guides:ROOT:executor_types_plus_parallelism.png[Parallelism]
 [#use-parallelism-with-self-hosted-runners]
 === Use parallelism with self-hosted runners
 
-To use the parallelism feature with jobs that use xref:execution-runner:runner-overview.adoc#[self-hosted runners], ensure that you have at least two self-hosted machine runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
+To use the parallelism feature with jobs that use xref:execution-runner:runner-overview.adoc[self-hosted runners], ensure that you have at least two self-hosted machine runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
 
-If you are using parallelism on xref:execution-runner:container-runner.adoc#[Container Runner], you will need to make sure that `agent.maxConcurrentTasks` and your Kubernetes cluster can accommodate the number of parallel tasks you want to run. If you do not have adequate resources, your parallel runs will be subject to queuing.
+If you are using parallelism on xref:execution-runner:container-runner.adoc[Container Runner], you will need to make sure that `agent.maxConcurrentTasks` and your Kubernetes cluster can accommodate the number of parallel tasks you want to run. If you do not have adequate resources, your parallel runs will be subject to queuing.
 
 For more information, see the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration reference] page.
 
@@ -160,14 +160,14 @@ jobs:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
-For a more detailed walkthrough, read the xref:use-the-circleci-cli-to-split-tests.adoc#[guide to using the CLI to split tests], or follow our xref:test:test-splitting-tutorial.adoc#[Test splitting tutorial].
+For a more detailed walkthrough, read the xref:use-the-circleci-cli-to-split-tests.adoc[guide to using the CLI to split tests], or follow our xref:test:test-splitting-tutorial.adoc[Test splitting tutorial].
 
 The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 
 [#the-tests-run-command]
 === The tests run command
 
-Use the `circleci tests run` command to run your tests, split your tests across parallel executors and take advantage of the xref:test:rerun-failed-tests.adoc#[rerun failed tests] options.
+Use the `circleci tests run` command to run your tests, split your tests across parallel executors and take advantage of the xref:test:rerun-failed-tests.adoc[rerun failed tests] options.
 
 The following table show a full list of option flags available when using `circleci tests run`.
 
@@ -222,7 +222,7 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ----
 
-The `circleci tests split` command has been superseded by `circleci tests run` as this command also gives you access to the xref:test:rerun-failed-tests.adoc#[rerun failed tests] options.
+The `circleci tests split` command has been superseded by `circleci tests run` as this command also gives you access to the xref:test:rerun-failed-tests.adoc[rerun failed tests] options.
 
 Integrating with some <<other-ways-to-split-tests,third party tools>> might still require you to use `circleci tests split`. For usage steps see, xref:use-the-circleci-cli-to-split-tests.adoc#tests-split-examples[Use the CircleCI CLI to split tests].
 
@@ -302,8 +302,8 @@ job-name:
 [#next-steps]
 == Next steps
 
-* xref:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to split tests]
-* xref:test:test-splitting-tutorial.adoc#[Test splitting to speed up your pipelines]
-* xref:test:troubleshoot-test-splitting.adoc#[Troubleshooting Test Splitting]
-* xref:test:collect-test-data.adoc#[Collecting Test Data]
-* xref:insights:insights-tests.adoc#[Test Insights]
+* xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+* xref:test:test-splitting-tutorial.adoc[Test splitting to speed up your pipelines]
+* xref:test:troubleshoot-test-splitting.adoc[Troubleshooting Test Splitting]
+* xref:test:collect-test-data.adoc[Collecting Test Data]
+* xref:insights:insights-tests.adoc[Test Insights]

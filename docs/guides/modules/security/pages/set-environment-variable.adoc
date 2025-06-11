@@ -6,7 +6,7 @@
 
 Environment variables can be stored and configured for use in CircleCI jobs in several ways to provide variety in scope and authorization level.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [#set-an-environment-variable-in-a-shell-command]
 == Set an environment variable in a shell command

@@ -18,19 +18,19 @@ The right plan for you and your team will depend on several factors:
 - If you want access to different machine-types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-You can view the xref:plan-overview.adoc#[Plan overview] page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
+You can view the xref:plan-overview.adoc[Plan overview] page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
 
-- xref:plan-free.adoc#[Free Plan]
-- xref:plan-performance.adoc#[Performance Plan]
-- xref:plan-scale.adoc#[Scale Plan]
-- xref:plan-server.adoc#[Server Plan]
+- xref:plan-free.adoc[Free Plan]
+- xref:plan-performance.adoc[Performance Plan]
+- xref:plan-scale.adoc[Scale Plan]
+- xref:plan-server.adoc[Server Plan]
 
 Take a look at the CircleCI link:https://circleci.com/pricing/[Pricing] page, and the link:https://circleci.com/product/features/resource-classes/[resource class comparison table], to learn more about how credits are distributed across different machine types and resource classes.
 
 [#managing-credit-usage]
 == Managing credit usage
 
-Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc#[Persisting data] page.
+Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc[Persisting data] page.
 
 [#open-source-credit-usage]
 == Open source credit usage
@@ -44,7 +44,7 @@ If you build on macOS, we also offer organizations on our Free Plan 30,000 credi
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
-If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent Docker images. See xref:execution-managed:building-docker-images.adoc#[Building Docker images] for more information.
+If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent Docker images. See xref:execution-managed:building-docker-images.adoc[Building Docker images] for more information.
 
 [#questions-and-comments]
 ## Questions and comments
@@ -54,4 +54,4 @@ Consider reading the section below on <<#billing-faqs,billing>>. For any further
 [#billing-faqs]
 == FAQs
 
-include::guides:ROOT:partial$faq/billing-faq-snip.adoc[]
+include::ROOT:partial$faq/billing-faq-snip.adoc[]

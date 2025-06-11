@@ -9,7 +9,7 @@ The steps outlined on this page guide you through the tasks required to manage y
 [#prerequisites]
 == Prerequisites
 
-Before following the steps below, ensure the environment integration has been set up and configured successfully. Refer to the xref:set-up-circleci-deploys.adoc#[Set up CircleCI deploys] and xref:configure-your-kubernetes-components.adoc#[Configure your Kubernetes components] pages for more information.
+Before following the steps below, ensure the environment integration has been set up and configured successfully. Refer to the xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys] and xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components] pages for more information.
 
 [#restore-version]
 == Restore version

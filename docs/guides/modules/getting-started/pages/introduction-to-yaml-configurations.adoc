@@ -31,11 +31,11 @@ Next, your configuration needs a job to run, and an execution environment for th
 - GPU
 - Arm
 
-Some limitations exist depending on the execution environment in your configuration. Visit the xref:execution-managed:executor-intro.adoc#[Introduction to Execution Environments] page to get started and find information on each execution environment.
+Some limitations exist depending on the execution environment in your configuration. Visit the xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page to get started and find information on each execution environment.
 
 In the `.circleci/config.yml` file, we will add a Docker execution environment to our job `build`.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 ```yaml
 # CircleCI configuration file
@@ -64,7 +64,7 @@ jobs:
 
 You will notice that the key-value pairs do not follow the same syntax. Each execution environment will be set up a little differently. You can refer to our execution environment documentation, or visit the CircleCI developer hub to find a list of https://circleci.com/developer/images?imageType=docker[convenience images] and https://circleci.com/developer/images?imageType=machine[machine images], and their syntax.
 
-The developer hub also has a list of available CircleCI https://circleci.com/developer/orbs[orbs], which are shareable packages of configuration you can use to simplify your builds. Visit the xref:slack-orb-tutorial.adoc#[Slack Orb Tutorial] page for instructions on how to set up one of the most popular orbs.
+The developer hub also has a list of available CircleCI https://circleci.com/developer/orbs[orbs], which are shareable packages of configuration you can use to simplify your builds. Visit the <<slack-orb-tutorial#,Slack Orb Tutorial>> page for instructions on how to set up one of the most popular orbs.
 
 [#circleci-jobs]
 == CircleCI jobs and workflows
@@ -118,12 +118,12 @@ If you have a CircleCI account, you can create a new project and add these examp
 
 YAML can be quite picky about indentations. You can use a https://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
 
-If you would like a more complex configuration tutorial, visit the xref:config-intro.adoc#[Configuration Tutorial] page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the xref:toolkit:sample-config.adoc#[Sample Configuration] page.
+If you would like a more complex configuration tutorial, visit the xref:config-intro.adoc[Configuration Tutorial] page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the xref:toolkit:sample-config.adoc[Sample Configuration] page.
 
 [#visual-studio-code-extension]
 ## VS Code extension
 
-If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
 
 The extension provides real-time syntax highlighting and validation, improved navigation through go-to-definition and go-to-reference commands, usage hints and autocomplete suggestions.
 
@@ -149,7 +149,7 @@ haiku: >
   Oh, and persimmons.
 ```
 
-NOTE: Quotes are not necessary when using multiline strings.
+**Note**: Quotes are not necessary when using multiline strings.
 
 [#sequences]
 === Sequences
@@ -174,7 +174,7 @@ simulation:
       a_glitch: "in the matrix"
 ```
 
-NOTE: Remember to properly indent a key-value pair when it is the value of an item in a sequence.
+**Note**: Remember to properly indent a key-value pair when it is the value of an item in a sequence.
 
 [#anchors-and-aliases]
 === Anchors and aliases
@@ -238,4 +238,4 @@ harry_data:
   <<: [*harry_name, *harry_address]
 ```
 
-NOTE: As mentioned in https://github.com/yaml/yaml/issues/35[a YAML repository issue], it is possible to merge maps, but not sequences (also called arrays or lists). For a more complex example, see https://gist.github.com/bowsersenior/979804[this gist].
+**Note**: As mentioned in https://github.com/yaml/yaml/issues/35[a YAML repository issue], it is possible to merge maps, but not sequences (also called arrays or lists). For a more complex example, see https://gist.github.com/bowsersenior/979804[this gist].

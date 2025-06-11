@@ -4,7 +4,7 @@
 :icons: font
 :experimental:
 
-include::guides:ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]
+include::ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]
 
 [#overview]
 == Overview

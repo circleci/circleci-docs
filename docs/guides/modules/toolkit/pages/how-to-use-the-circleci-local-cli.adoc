@@ -12,13 +12,13 @@ This page describes how to use some features of the CircleCI CLI.
 To follow the guides on this page you will need the following:
 
 * A CircleCI account (you can link:https://circleci.com/signup/[sign up for free])
-* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli.adoc#[Installing the local CLI] page.
+* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli.adoc[Installing the local CLI] page.
 * xref:local-cli.adoc#configure-the-cli[Set up and configure] the CircleCI CLI.
 
 [#validate-a-circleci-config]
 == Validate a CircleCI config
 
-TIP: *Using VS Code?* You can validate you CircleCI configuration using the VS Code extension. For full information about the features provided in the VS Code extension, see the xref:vs-code-extension-overview.adoc#[VS Code extension overview] page.
+TIP: *Using VS Code?* You can validate you CircleCI configuration using the VS Code extension. For full information about the features provided in the VS Code extension, see the xref:vs-code-extension-overview.adoc[VS Code extension overview] page.
 
 You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally. Follow these steps:
 
@@ -52,7 +52,7 @@ Error: config compilation contains errors: config compilation contains errors:
 [#orb-development-kit]
 == Orb development kit
 
-The xref:orbs:author:orb-author.adoc#create-test-and-publish-an-orb[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc#[orb] development process, with automatic testing and deployment on CircleCI. There are two commands in the CLI that are a part of the orb development kit:
+The xref:orbs:author:orb-author.adoc#create-test-and-publish-an-orb[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. There are two commands in the CLI that are a part of the orb development kit:
 
 * The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[initializes a new orb project]:
 +
@@ -305,9 +305,9 @@ The CLI tool does not provide support for running workflows. By nature, workflow
 [#caching-and-online-only-commands]
 ==== Caching and online-only commands
 
-Caching is not currently supported in local jobs. When you have either a xref:reference:ROOT:configuration-reference#savecache[`save_cache`] or xref:reference:ROOT:configuration-reference#restorecache[`restore_cache`] step in your config, `circleci` will skip them and display a warning.
+Caching is not currently supported in local jobs. When you have either a xref:reference:ROOT:configuration-reference.adoc#savecache[`save_cache`] or xref:reference:ROOT:configuration-reference.adoc#restorecache[`restore_cache`] step in your config, `circleci` will skip them and display a warning.
 
-Further, not all commands may work on your local machine as they do online. For example, the Golang build reference above runs a xref:reference:ROOT:configuration-reference#storeartifacts[`store_artifacts`] step, however, local builds will not upload artifacts. If a step is not available on a local build you will see an error in the console.
+Further, not all commands may work on your local machine as they do online. For example, the Golang build reference above runs a xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts`] step, however, local builds will not upload artifacts. If a step is not available on a local build you will see an error in the console.
 
 [#environment-variables]
 ==== Environment variables
@@ -329,12 +329,12 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 [#test-splitting]
 == Test splitting
 
-The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc#[test splitting] for build time optimization.
+The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc[test splitting] for build time optimization.
 
 [#context-management]
 == Context management
 
-xref:security:contexts.adoc#[Contexts] provide a mechanism for securing and sharing environment variables across projects. While contexts have been traditionally managed on the CircleCI web application, the CircleCI CLI provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several context-oriented commands:
+xref:security:contexts.adoc[Contexts] provide a mechanism for securing and sharing environment variables across projects. While contexts have been traditionally managed on the CircleCI web application, the CircleCI CLI provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several context-oriented commands:
 
 - `create` - Create a new context
 - `delete` - Delete the named context
@@ -352,15 +352,15 @@ circleci context create --org-id <org-id> <context-name> [flags]
 
 Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-include::guides:ROOT:partial$notes/find-organization-id.adoc[]
+include::ROOT:partial$notes/find-organization-id.adoc[]
 
 [#config-policy-management]
 == Config policy management
 
 The CircleCI CLI can be used to manage config policies for your projects. Config policies allow you to enforce best practices and standards across your organization.
 
-For full details on creating, testing, and managing config policies for your organization, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc#[Manage config policies] section.
+For full details on creating, testing, and managing config policies for your organization, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage config policies] section.
 
 [#next-steps]
 == Next steps
-- xref:execution-managed:executor-intro.adoc#[Introduction to Execution Environments]
+- xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments]

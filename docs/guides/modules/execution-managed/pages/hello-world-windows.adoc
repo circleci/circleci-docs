@@ -4,7 +4,7 @@
 :experimental:
 :icons: font
 
-This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc#[Getting Started guide].
+This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started guide].
 
 A Windows Server 2022 image is available to CircleCI cloud customers, read more on link:https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198[Discuss].
 
@@ -28,7 +28,7 @@ You can view the entire configuration link:https://github.com/CircleCI-Public/ci
 version: 2.1
 ----
 
-Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to link:https://circleci.com/orbs/[orbs] and xref:orchestrate:pipelines.adoc#[Pipelines].
+Above, we start by declaring that we will use version `2.1` of CircleCI, giving us access to link:https://circleci.com/orbs/[orbs] and xref:orchestrate:pipelines.adoc[Pipelines].
 
 [,yaml]
 ----
@@ -78,7 +78,7 @@ In our first step, we run the xref:reference:ROOT:configuration-reference.adoc#c
             - C:\Users\circleci\.nuget\packages
 ----
 
-Next in the config, we make use of caching to restore cached dependencies from previous builds. The command `dotnet restore` will fetch any dependencies that are not already installed/restored from the cache. Learn more about caching in our xref:optimize:caching.adoc#[caching document].
+Next in the config, we make use of caching to restore cached dependencies from previous builds. The command `dotnet restore` will fetch any dependencies that are not already installed/restored from the cache. Learn more about caching in our xref:optimize:caching.adoc[caching document].
 
 [,yaml]
 ----
@@ -105,6 +105,6 @@ In our last step, we store the build executable as an artifact, making it access
 
 Consider reading documentation on some of CircleCI's features:
 
-* See the xref:about-circleci:concepts.adoc#[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
-* Refer to the xref:orchestrate:workflows.adoc#[Workflows] document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
-* Find complete reference information for all keys and pre-built Docker images in the xref:reference:ROOT:configuration-reference.adoc#[Configuring CircleCI] and xref:circleci-images.adoc#[CircleCI Images] documentation, respectively.
+* See the xref:about-circleci:concepts.adoc[Concepts] document for a summary of configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+* Refer to the xref:orchestrate:workflows.adoc[Workflows] document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
+* Find complete reference information for all keys and pre-built Docker images in the xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI] and xref:circleci-images.adoc[CircleCI Images] documentation, respectively.

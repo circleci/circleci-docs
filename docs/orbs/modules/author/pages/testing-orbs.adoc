@@ -295,11 +295,11 @@ Similar to how we could use additional steps to test our commands, we can take a
 [#whats-next]
 == What's next?
 
-Once you have added new orb features, and created tests that pass your CI, it is time to publish your orb to the Orb Registry. View the xref:creating-orbs.adoc#[Orb Publishing Process] guide for information on releasing production-ready orbs.
+Once you have added new orb features, and created tests that pass your CI, it is time to publish your orb to the Orb Registry. View the xref:creating-orbs.adoc[Orb Publishing Process] guide for information on releasing production-ready orbs.
 
 [#see-also]
 == See also
 
-* Refer to xref:orb-concepts.adoc#[Orbs Concepts] for high-level information about CircleCI orbs.
-* Refer to xref:creating-orbs.adoc#[Orb Publishing Process] for information about orbs that you may use in your workflows and jobs.
-* Refer to xref:reference:ROOT:reusing-config.adoc#[Orbs Reference] for examples of reusable orbs, commands, parameters, and executors.
+* Refer to xref:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
+* Refer to xref:creating-orbs.adoc[Orb Publishing Process] for information about orbs that you may use in your workflows and jobs.
+* Refer to xref:reference:ROOT:reusing-config.adoc[Orbs Reference] for examples of reusable orbs, commands, parameters, and executors.

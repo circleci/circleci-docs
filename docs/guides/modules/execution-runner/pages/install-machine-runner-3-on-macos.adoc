@@ -22,30 +22,25 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * https://www.gnu.org/software/tar/[tar]
 
-* The xref:toolkit:local-cli.adoc#[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::guides:ROOT:partial$runner/terms.adoc[]
+include::ROOT:partial$runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-[tabs]
-====
-Web_app_installation::
-+
+[.tab.machine-runner.Web_app_installation]
 --
-include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
-+
+[.tab.machine-runner.CLI_installation]
 --
-include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 --
-====
 
 [#install-circleci-runner]
 == 2. Install CircleCI runner on macOS
@@ -104,7 +99,7 @@ api:
 ----
 
 [TIP]
-****
+====
 **If you are migrating an existing configuration from a previous runner installation**, you may move the existing launch agent file from its current path to the new path.
 
 **This will overwrite the default config file installed via brew and replace it with your existing config file.**
@@ -122,7 +117,7 @@ After copying the file, you may remove the logging block to send logs to the def
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ----
-****
+====
 
 [#review-accept-apple-signature-notarization]
 == 3. Review and accept the Apple signature notarization
@@ -157,10 +152,7 @@ sudo xattr -r -d com.apple.quarantine "$(brew --prefix)/bin/circleci-runner"
 
 To start the macOS machine runner 3 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
 
-[tabs]
-====
-GUI_domain::
-+
+[.tab.startdomain.GUI_domain]
 --
 
 . For running the agent in a GUI session, you can bootstrap the provided `.plist` file and enable the service by running the following commands:
@@ -178,8 +170,8 @@ launchctl kickstart -k gui/$(id -u)/com.circleci.runner
 launchctl print gui/$(id -u)/com.circleci.runner
 ----
 --
-User_domain::
-+
+
+[.tab.startdomain.User_domain]
 --
 
 1. When using a non-GUI (or headless) session, the provided `.plist` file should be moved to `/Library/LaunchAgents`. This location is for per-user agents configured by the administrator, which allows the service to load after a reboot. Run the following command to do this:
@@ -203,19 +195,15 @@ launchctl kickstart -k user/$(id -u)/com.circleci.runner
 launchctl print user/$(id -u)/com.circleci.runner
 ----
 --
-====
 
-include::guides:ROOT:partial$runner/machine-runner-example.adoc[]
+include::ROOT:partial$runner/machine-runner-example.adoc[]
 
 [#stop-macos-machine-runner]
 == Stop macOS machine runner 3
 
 To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
 
-[tabs]
-====
-GUI_domain::
-+
+[.tab.stopdomain.GUI_domain]
 --
 
 [source,shell]
@@ -223,8 +211,7 @@ GUI_domain::
 launchctl disable gui/$(id -u)/com.circleci.runner
 ----
 --
-User_domain::
-+
+[.tab.stopdomain.User_domain]
 --
 
 [source,shell]
@@ -232,7 +219,6 @@ User_domain::
 launchctl disable user/$(id -u)/com.circleci.runner
 ----
 --
-====
 
 [#uninstall-machine-runner-macos]
 == Uninstall machine runner 3 on macOS
@@ -240,10 +226,7 @@ To uninstall machine runner 3 from your macOS device, follow these steps.
 
 . Stop the machine runner service by using the following command to disable it, depending on the service target used during installation:
 +
-[tabs]
-====
-GUI_domain::
-+
+[.tab.uninstalldomain.GUI_domain]
 --
 Targeting the GUI domain:
 [source,shell]
@@ -251,12 +234,8 @@ Targeting the GUI domain:
 launchctl bootout gui/$(id -u)/com.circleci.runner
 ----
 --
-====
 +
-[tabs]
-====
-User_domain::
-+
+[.tab.uninstalldomain.User_domain]
 --
 Targeting the user domain:
 [source,shell]
@@ -264,13 +243,9 @@ Targeting the user domain:
 launchctl bootout user/$(id -u)/com.circleci.runner
 ----
 --
-====
 . Uninstall machine runner:
 +
-[tabs]
-====
-Keep_logs_and_configuration::
-+
+[.tab.machine-runner-uninstall-macos.Keep_logs_and_configuration]
 --
 To uninstall without purging logs and configuration files, run the following command.
 
@@ -279,12 +254,8 @@ To uninstall without purging logs and configuration files, run the following com
 brew uninstall --cask circleci-public/homebrew-circleci/circleci-runner
 ----
 --
-====
 +
-[tabs]
-====
-Purge_logs_and_configuration::
-+
+[.tab.machine-runner-uninstall-macos.Purge_logs_and_configuration]
 --
 
 CAUTION: This command will *purge all logs and configuration files*.
@@ -296,7 +267,6 @@ To uninstall and purge all logs and configuration files, run the following comma
 brew uninstall --cask --zap circleci-public/homebrew-circleci/circleci-runner
 ----
 --
-====
 
 [#access-runner-logs]
 == Access runner logs

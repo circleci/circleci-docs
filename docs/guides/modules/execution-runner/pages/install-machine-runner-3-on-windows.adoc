@@ -23,32 +23,27 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * link:https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remote-desktop-services-overview[Remote Desktop Services (RDS)]
 
-* The xref:toolkit:local-cli.adoc#[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
 
-NOTE: Additional utilities and tools, such as Chocolatey, Git, and Gzip are automatically installed as part of the <<installation-steps,installation script>>.
+NOTE: Additional utilities and tools, such as Chocolatey, Git, and Gzip are automatically installed as part of the <<#installation-steps,installation script>>.
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::guides:ROOT:partial$runner/terms.adoc[]
+include::ROOT:partial$runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-[tabs]
-====
-Web_app_installation::
-+
+[.tab.machine-runner.Web_app_installation]
 --
-include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
-+
+[.tab.machine-runner.CLI_installation]
 --
-include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 --
-====
 
 [#installation-steps]
 == 2. Machine runner installation on Windows
@@ -71,7 +66,7 @@ The installation will be output into your PowerShell interface.
 
 After your setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
-include::guides:ROOT:partial$runner/machine-runner-example.adoc[]
+include::ROOT:partial$runner/machine-runner-example.adoc[]
 
 [#uninstall-reinstall-steps]
 == Uninstall / reinstall steps
@@ -98,7 +93,7 @@ A Windows machine runner *can* be run in `continuous` mode. However, doing so el
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the xref:troubleshoot-self-hosted-runner.adoc#machine-runner[Troubleshoot Machine Runner] guide if you encounter issues installing or running machine runner on Windows.
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner>> guide if you encounter issues installing or running machine runner on Windows.
 
 [#additional-resources]
 == Additional resources

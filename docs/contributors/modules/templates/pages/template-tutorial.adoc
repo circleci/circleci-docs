@@ -30,7 +30,7 @@ Contributors from within CircleCI can also consider setting up a local developme
 [#introduction]
 == Introduction
 
-Use the introduction to explain what the reader is going to achieve through following the tutorial. Link back to the _conceptual_ page that accompanies the tutorial, to illustrate this here is a link to the xref:template-conceptual.adoc#[template for conceptual pages]. If possible provide a demo or example. The tutorial should ideally be written to accompany a public/open source example that any reader can use, but the tutorial should also be able to accommodate a reader’s own project.
+Use the introduction to explain what the reader is going to achieve through following the tutorial. Link back to the _conceptual_ page that accompanies the tutorial, to illustrate this here is a link to the xref:template-conceptual.adoc[template for conceptual pages]. If possible provide a demo or example. The tutorial should ideally be written to accompany a public/open source example that any reader can use, but the tutorial should also be able to accommodate a reader’s own project.
 
 [#prerequisites]
 == Prerequisites
@@ -92,7 +92,7 @@ link:https://circleci.com/[CircleCI website]
 
 To link to another page within the docs use a cross reference:
 
-xref:guides:about-circleci:about-circleci.adoc#[About CircleCI]
+xref:guides:about-circleci:about-circleci.adoc[About CircleCI]
 
 Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
 
@@ -153,5 +153,5 @@ End the tutoral with a conclusion section that summarizes what was covered.
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
-* xref:guides:about-circleci:benefits-of-circleci.adoc#[Benefits of CircleCI]
-* xref:guides:about-circleci:concepts.adoc#[CircleCI concepts]
+* xref:guides:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
+* xref:guides:about-circleci:concepts.adoc[CircleCI concepts]

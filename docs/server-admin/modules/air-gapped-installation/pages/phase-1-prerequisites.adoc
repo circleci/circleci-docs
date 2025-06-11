@@ -162,4 +162,4 @@ Copy the downloaded `.tgz` Helm chart to your air-gapped environment.
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:phase-2-configure-object-storage.adoc#[Phase 2 - Configure object storage] guide.
+Once the steps on this page are complete, go to the xref:phase-2-configure-object-storage.adoc[Phase 2 - Configure object storage] guide.

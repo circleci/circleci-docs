@@ -16,11 +16,11 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 
 | Sample `config.yml` Files
 | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file.
-| xref:sample-config.adoc#[Sample `config.yml` Files]
+| xref:sample-config.adoc[Sample `config.yml` Files]
 
 | Example Database Configurations
 | Three example `config.yml` files using PostgreSQL/Rails, Go/PostgreSQL, and Ruby/MySQL
-| xref:postgres-config.adoc#[Example Database Configurations]
+| xref:postgres-config.adoc[Example Database Configurations]
 
 | Parallel
 | Concurrent job run workflow configuration.

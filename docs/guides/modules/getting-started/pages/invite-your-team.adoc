@@ -1,9 +1,8 @@
 = Join teammates on CircleCI
+:page-platform: Cloud
 :page-description: Add your team to your CircleCI organization
 :icons: font
 :experimental:
-
-#NEED AN ATTRIBUTE TO SHOW THIS IS FOR CLOUD ONLY#
 
 After setting up an organization in CircleCI, ensure your whole team get access.
 
@@ -11,11 +10,14 @@ After setting up an organization in CircleCI, ensure your whole team get access.
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* At least one project created in your organization. See the xref:create-project.adoc[Create a project] page for instructions.
 
 [#find-your-team]
 == Find your team
 
 After creating an account, you can join an existing CircleCI organization using the **Find Your Team** dropdown menu in the **Join Your Teammates** card on the link:https://app.circleci.com/home/[homepage].
+
+image::guides:ROOT:getting-started/find-your-team.png[Screenshot showing the welcome screen with the find your team menu expanded]
 
 To join an organization, there are three options:
 
@@ -52,24 +54,31 @@ NOTE: If you do not see the organization you would like to join listed, you will
 
 The steps in this section show how an org admin can invite teammates to join their organization.
 
-[tabs]
-====
-GitHub_App_GitLab_Bitbucket_Data_Center::
-+
+include::ROOT:partial$tips/check-github-type-org.adoc[]
+
+[.tab.invite.GitHub_App_/_GitLab_/_Bitbucket_Data_Center]
 --
-include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Navigate to menu:Organization Settings[People], then select btn:[Invite].
 . To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
-. Once they join your org, you can then also assign each team member a role on an individual project level.
+. Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions] page for more details.
+
+image::guides:ROOT:invite-teammates-standalone.png[Navigate to Organization Settings, People, use the Invite form]
 --
-GitHub_OAuth_Bitbucket_Cloud::
-+
+
+[.tab.invite.GitHub_OAuth_/_Bitbucket_Cloud]
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Select *Organization Setting* from the sidebar and select *People*.
 . Select btn:[Copy Invite Link] -- an invite message is now copied to your clipboard.
 . Past the invite message to your teammates via email or whatever method you prefer.
+
+image::guides:ROOT:invite-teammates-classic.png[Navigate to Organization Settings, People, use the Copy Invite Link button]
 --
-====
+
+
+[#see-also]
+== See also
+
+- xref:permissions-authentication:roles-and-permissions-overview.adoc[CircleCI roles and permissions overview]

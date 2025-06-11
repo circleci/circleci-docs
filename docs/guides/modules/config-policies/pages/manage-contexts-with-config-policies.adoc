@@ -6,7 +6,7 @@
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
 
-Follow this how-to guide to create config policies for managing the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview.adoc#[Config policies overview].
+Follow this how-to guide to create config policies for managing the use of contexts in your organization. For more information about config policies, see the xref:config-policy-management-overview.adoc[Config policies overview].
 
 [NOTE]
 ====
@@ -47,9 +47,9 @@ In the examples on this page, project IDs, branch names, and context names can b
 [#prerequisites]
 == Prerequisites
 
-* A xref:getting-started:first-steps.adoc#[CircleCI account] connected to a supported VCS.
+* A xref:getting-started:first-steps.adoc[CircleCI account] connected to a supported VCS.
 
-* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:toolkit:local-cli.adoc#[Installing the Local CLI] page for more information.
+* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:toolkit:local-cli.adoc[Installing the Local CLI] page for more information.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
 +
@@ -67,11 +67,11 @@ Example output:
 }
 ----
 +
-include::guides:ROOT:partial$notes/find-organization-id.adoc[]
+include::ROOT:partial$notes/find-organization-id.adoc[]
 
 * It is recommended to run through the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a policy] and xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS] guides first. Best practice is to use a repository within your organization to store and develop your policies. The xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS] guide walks through setting this up and setting up a pipeline for policy development.
 
-* To use the examples set out on this page, you will need to be using contexts to store secrets. For more information, see the xref:security:contexts.adoc#[Using contexts] page.
+* To use the examples set out on this page, you will need to be using contexts to store secrets. For more information, see the xref:security:contexts.adoc[Using contexts] page.
 
 [#define-the-contexts-allowed-for-a-project]
 == Define the contexts allowed for a project
@@ -136,10 +136,7 @@ You can now push your new policy to your organization for it to take effect. You
 * Push the policy manually using the CLI from your local environment
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
-[tabs]
-====
-manual::
-+
+[tab.allow.manual]
 --
 Create and upload the policy bundle using CircleCI CLI:
 
@@ -157,16 +154,15 @@ If the upload was successful, you will see something like the following:
 }
 ----
 --
-push_to_vcs::
-+
+
+[tab.allow.push_to_vcs]
 --
 If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --
-====
 
-NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc#[Test config policies] guide.
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc[Test config policies] guide.
 
 [#conclusion-1]
 === Conclusion
@@ -300,10 +296,7 @@ You can now push your new policy to your organization for it to take effect. You
 * Push the policy manually using the CLI from your local environment, or;
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
-[tabs]
-====
-manual::
-+
+[tab.block.manual]
 --
 Create and upload the policy bundle using CircleCI CLI:
 
@@ -321,16 +314,15 @@ If the upload was successful, you will see something like the following:
 }
 ----
 --
-push_to_vcs::
-+
+
+[tab.block.push_to_vcs]
 --
 If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --
-====
 
-NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc#[Test config policies] guide.
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc[Test config policies] guide.
 
 [#conclusion-2]
 === Conclusion
@@ -401,10 +393,7 @@ You can now push your new policy to your organization for it to take effect. You
 * Push the policy manually using the CLI from your local environment, or;
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
-[tabs]
-====
-manual::
-+
+[tab.reserve.manual]
 --
 Create and upload the policy bundle using CircleCI CLI:
 
@@ -422,16 +411,15 @@ If the upload was successful, you will see something like the following:
 }
 ----
 --
-push_to_vcs::
-+
+
+[tab.reserve.push_to_vcs]
 --
 If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --
-====
 
-NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc#[Test config policies] guide.
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc[Test config policies] guide.
 
 [#conclusion-3]
 === Conclusion
@@ -509,10 +497,7 @@ You can now push your new policy to your organization for it to take effect. You
 * Push the policy manually using the CLI from your local environment, or;
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
-[tabs]
-====
-manual::
-+
+[tab.branch.manual]
 --
 Create and upload the policy bundle using CircleCI CLI:
 
@@ -530,16 +515,15 @@ If the upload was successful, you will see something like the following:
 }
 ----
 --
-push_to_vcs::
-+
+
+[tab.branch.push_to_vcs]
 --
 If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
 
 You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
 --
-====
 
-NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc#[Test config policies] guide.
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc[Test config policies] guide.
 
 [#conclusion-4]
 === Conclusion
@@ -548,6 +532,6 @@ Once you have pushed your new `context_protection.rego` policy, if an attempt to
 [#next-steps]
 == Next steps
 
-* xref:create-and-manage-config-policies.adoc#[Create and manage config policies]
-* xref:test-config-policies.adoc#[Test config policies]
-* xref:config-policy-reference.adoc#[Config policy reference]
+* xref:create-and-manage-config-policies.adoc[Create and manage config policies]
+* xref:test-config-policies.adoc[Test config policies]
+* xref:config-policy-reference.adoc[Config policy reference]

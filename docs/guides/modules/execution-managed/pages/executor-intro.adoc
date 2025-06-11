@@ -19,7 +19,7 @@ Each job defined in your project configuration is run in a separate execution en
 
 For each job in your project config you will specify an execution environment by assigning it an *executor*. An *executor* defines the underlying technology or environment in which to run a job, and which image to use to suit your job.
 
-It is possible to specify a different executor and image for each job in your xref:reference:ROOT:configuration-reference.adoc#[.configuration file].
+It is possible to specify a different executor and image for each job in your xref:reference:ROOT:configuration-reference.adoc[.configuration file].
 
 === Images, containers, and virtual machines
 
@@ -29,7 +29,7 @@ A _container_ or _virtual machine_ is the term used for a running instance of an
 
 For example:
 
-* Jobs that require Docker images (`docker`) may use an image for Node.js, Python etc. The xref:circleci-images.adoc#[pre-built CircleCI Docker image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
+* Jobs that require Docker images (`docker`) may use an image for Node.js, Python etc. The xref:circleci-images.adoc[pre-built CircleCI Docker image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
 
 * Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[list of available machine images].
 
@@ -39,7 +39,7 @@ For example:
 
 When you configure an executor it is recommended that you also specify a resource class to specify compute resource size (CPU and RAM).
 
-* For an overview of resource classes, see the xref:resource-class-overview.adoc#[Resource class overview] page.
+* For an overview of resource classes, see the xref:resource-class-overview.adoc[Resource class overview] page.
 * For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
 
 [#docker]
@@ -60,7 +60,7 @@ jobs:
         # Commands run in the primary container
 ----
 
-Find out more about the Docker execution environment on the link:/docs/using-docker/[Using Docker] page.
+Find out more about the Docker execution environment on the xref:using-docker.adoc[Using Docker] page.
 
 [#linux-vm]
 == Linux VM
@@ -69,10 +69,7 @@ NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specif
 
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub]
 
-[tabs]
-====
-Cloud::
-+
+[.tab.machine.Cloud]
 --
 [,yml]
 ----
@@ -85,8 +82,8 @@ jobs:
         # Commands run in a Linux virtual machine environment
 ----
 --
-Server::
-+
+
+[.tab.machine.Server]
 --
 [,yml]
 ----
@@ -97,16 +94,15 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ----
 --
-====
 
-Find out more about the Linux VM execution environment in the xref:using-linuxvm.adoc#[Using Linux Virtual Machines] page.
+Find out more about the Linux VM execution environment in the xref:using-linuxvm.adoc[Using Linux Virtual Machines] page.
 
 [#macos]
 == macOS
 
 To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/macos[CircleCI Developer Hub].
 
-NOTE: If you want to run a macOS build on CircleCI server, you will need to use xref:execution-runner:runner-overview.adoc#[self-hosted runner].
+NOTE: If you want to run a macOS build on CircleCI server, you will need to use xref:execution-runner:runner-overview.adoc[self-hosted runner].
 
 [,yml]
 ----
@@ -120,7 +116,7 @@ jobs:
       # with Xcode 14.2.0 installed
 ----
 
-Find out more about the macOS execution environment on the xref:using-macos.adoc#[Using macOS] page.
+Find out more about the macOS execution environment on the xref:using-macos.adoc[Using macOS] page.
 
 [#windows]
 == Windows
@@ -132,10 +128,7 @@ To access the Windows execution environment, you can either:
 
 For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
-====
-Cloud_with_orb::
-+
+[.tab.windowsblock.Cloud_with_orb]
 --
 [,yml]
 ----
@@ -154,8 +147,8 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ----
 --
-Cloud::
-+
+
+[.tab.windowsblock.Cloud]
 --
 [,yaml]
 ----
@@ -173,8 +166,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
-Server::
-+
+
+[.tab.windowsblock.Server]
 --
 [,yml]
 ----
@@ -190,9 +183,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ----
 --
-====
 
-Find out more about the Windows execution environment in the xref:using-windows.adoc#[Using the Windows Execution Environment] page. See link:https://circleci.com/developer/orbs/orb/circleci/windows[the Windows orb page in the developer hub] for the list of options available in the Windows orb.
+Find out more about the Windows execution environment in the xref:using-windows.adoc[Using the Windows Execution Environment] page. See link:https://circleci.com/developer/orbs/orb/circleci/windows[the Windows orb page in the developer hub] for the list of options available in the Windows orb.
 
 [#gpu]
 == GPU
@@ -206,10 +198,7 @@ For a full list of `machine` images, see the link:https://circleci.com/developer
 
 NOTE: It is not possible to run a GPU build on CircleCI server.
 
-[tabs]
-====
-Linux::
-+
+[.tab.gpublock.Linux]
 --
 [,yml]
 ----
@@ -224,8 +213,8 @@ jobs:
       - run: nvidia-smi
 ----
 --
-Windows_without_orb::
-+
+
+[.tab.gpublock.Windows_without_orb]
 --
 [,yml]
 ----
@@ -240,8 +229,8 @@ jobs:
       - run: nvidia-smi
 ----
 --
-Windows_with_orb::
-+
+
+[.tab.gpublock.Windows_with_orb]
 --
 [,yml]
 ----
@@ -257,19 +246,15 @@ jobs:
       - run: 'Write-Host ''Hello, Windows'''
 ----
 --
-====
 
-Find out more about the GPU execution environment on the xref:using-gpu.adoc#[Using the GPU Execution Environment] page.
+Find out more about the GPU execution environment on the xref:using-gpu.adoc[Using the GPU Execution Environment] page.
 
 [#arm]
 == Arm VM
 
 To access the Arm VM execution environment, use the `machine` executor as detailed below, and specify either the `arm.medium` or the `arm.large` resource class. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-[tabs]
-====
-Cloud::
-+
+[.tab.armblock.Cloud]
 --
 [,yml]
 ----
@@ -300,8 +285,8 @@ workflows:
       - build-large
 ----
 --
-Server_on_AWS::
-+
+
+[.tab.armblock.Server_on_AWS]
 --
 [,yml]
 ----
@@ -332,16 +317,15 @@ workflows:
       - build-large
 ----
 --
-====
 
-Find out more about the Arm VM execution environment in the xref:using-arm.adoc#[Using the Arm VM Execution Environment] page. You can also use xref:using-docker.adoc#arm[Arm on Docker].
+Find out more about the Arm VM execution environment in the xref:using-arm.adoc[Using the Arm VM Execution Environment] page. You can also use xref:using-docker.adoc#arm[Arm on Docker].
 
 [#self-hosted-runner]
 == Self-hosted runner
 
 CircleCI provides the ability to have self-hosted runners:
 
-* xref:execution-runner:container-runner.adoc#[Container runner] using Kubernetes.
+* xref:execution-runner:container-runner.adoc[Container runner] using Kubernetes.
 * xref:execution-runner:runner-overview.adoc#machine-runner-use-case[Machine runner] using Linux, Windows, and macOS virtual machines.
 
 [#port-ranges]
@@ -352,4 +336,4 @@ When using a machine executor, if a port range is hard coded, the range in `/pro
 [#next-steps]
 == Next steps
 
-* Read more about xref:circleci-images.adoc#[Pre-built CircleCI convenience images] for the Docker execution environment.
+* Read more about xref:circleci-images.adoc[Pre-built CircleCI convenience images] for the Docker execution environment.

@@ -7,7 +7,7 @@
 [#introduction]
 == Introduction
 
-A configuration file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not xref:optimize:parallelism-faster-jobs.adoc#[parallelism] is used in the job.
+A configuration file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not xref:optimize:parallelism-faster-jobs.adoc[parallelism] is used in the job.
 
 - *Does your job have parallelism of 1?* Swap out the `deploy` key for the xref:reference:ROOT:configuration-reference.adoc#run[`run`] key. Nothing more is needed to migrate.
 
@@ -97,7 +97,7 @@ workflows:
 [#using-workspaces]
 === Using workspaces
 
-If files are needed from `doing-things-job` in the `deploy-job`, use xref:workspaces.adoc#[workspaces]. This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below.
+If files are needed from `doing-things-job` in the `deploy-job`, use xref:workspaces.adoc[workspaces]. This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below.
 
 ```yml
 version: 2.1

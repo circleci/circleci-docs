@@ -19,17 +19,17 @@ This guide covers the following topics:
 * How to use workflows to orchestrate your build.
 * How to add approval steps to your workflow.
 
-CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repository project. CircleCI uses the YAML syntax for config. See the xref:introduction-to-yaml-configurations.adoc#[Introduction to YAML configurations] page for guidance on the basics.
+CircleCI believes in *configuration as code*. Consequently, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`. The `config.yml` file is located in a folder called `.circleci` at the top of your repository project. CircleCI uses the YAML syntax for config. See the xref:introduction-to-yaml-configurations.adoc[Introduction to YAML configurations] page for guidance on the basics.
 
 [#part-1-using-the-shell]
 == Part 1: Using the shell
 
 CircleCI provides an on-demand shell to run commands. In this first example, you will set up a build and execute a shell command.
 
-. If you have not done so already, xref:first-steps.adoc#[sign up with CircleCI] and then either create or set up a new project. You can follow the steps to connect a code repository in our xref:getting-started.adoc#[Quickstart guide].
+. If you have not done so already, <<first-steps#,sign up with CircleCI>> and then either create or set up a new project. You can follow the steps to connect a code repository in our xref:getting-started.adoc[Quickstart guide].
 . Once you have created or set up your project in CircleCI, go to the `.circleci/config.yml` file and replace its contents with the following code:
 +
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 +
 [source,yaml]
 ----
@@ -217,7 +217,7 @@ In this example, you have:
 * Created a workflow to define the order in which your jobs run.
 * Introduced some logic to ensure that the previous job must complete successfully before the next job is executed.
 
-TIP: To increase your understanding, experiment with other xref:execution-managed:circleci-images.adoc#[CircleCI images], or add some more jobs to your workflow.
+TIP: To increase your understanding, experiment with other xref:execution-managed:circleci-images.adoc[CircleCI images], or add some more jobs to your workflow.
 
 [#part-4-adding-a-manual-approval]
 == Part 4: Adding a manual approval
@@ -312,7 +312,7 @@ Select the _Now-Complete_ job, then the _Approval Complete_ step. You should see
 
 image::guides:ROOT:config-approval-complete.png[Approval complete]
 
-TIP: If you encounter errors, the problem is likely to be caused by incorrect indentation. The xref:config-editor.adoc#[CircleCI Configuration Editor] validates your syntax, provides autocomplete suggestions, and offers tips.
+TIP: If you encounter errors, the problem is likely to be caused by incorrect indentation. The xref:config-editor.adoc[CircleCI Configuration Editor] validates your syntax, provides autocomplete suggestions, and offers tips.
 
 In this example, you have:
 
@@ -324,7 +324,7 @@ Using what you have learned above, you are ready to create some powerful pipelin
 [#visual-studio-code-extension]
 ## VS Code extension
 
-If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc#[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
 
 The extension provides real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
 
@@ -335,6 +335,6 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 [#see-also]
 == See also
 
-* xref:reference:ROOT:configuration-reference.adoc#[Configuring CircleCI]
-* xref:execution-managed:executor-intro.adoc#[Executors and Images]
-* xref:orchestrate:workflows.adoc#[Using Workflows to Orchestrate Jobs]
+* xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI]
+* xref:execution-managed:executor-intro.adoc[Executors and Images]
+* xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs]

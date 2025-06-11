@@ -6,7 +6,7 @@
 
 If your CircleCI organization is authenticated with GitHub through the **GitHub OAuth app**, the content on this page is for you.
 
-include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
 [#introduction]
 == Introduction
@@ -67,7 +67,7 @@ For more information on GitHub Checks and GitHub status updates, see the xref:en
 [#connect-a-github-account]
 == Connect a GitHub account
 
-In the link:https://app.circleci.com/[CircleCI web app], select the organization you want to connect to GitHub and navigate to the **User Settings** by clicking on the user icon on the bottom of sidebar. Here you will be able to select GitHub. Once connected, you should see any existing projects populate on your dashboard, and you can choose which projects to follow.
+In the link:https://app.circleci.com/[CircleCI web app], select the organization you want to connect to GitHub and navigate to the **User Settings** via the user icon on the bottom of sidebar. Here you will be able to select GitHub. Once connected, you should see any existing projects populate on your dashboard, and you can choose which projects to follow.
 
 Next you will need to set up the necessary permissions to run your projects on CircleCI.
 
@@ -96,7 +96,7 @@ Once disconnected, you will be redirected to the CircleCI login page. To reconne
 
 **What is a deploy key?**
 
-When you add a new project, CircleCI creates a deployment key on GitHub for your project. A deploy key is an SSH key-pair, one public, one private. GitHub stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+When you add a new project, CircleCI creates a deployment key on GitHub for your project. A deploy key is an SSH key-pair, one public, one private. GitHub stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only. To set up a CircleCI project, you must first enable the creation of deploy keys in your GitHub organization. For more information, see link:https://support.circleci.com/hc/en-us/articles/36222961831067-Unable-to-Set-Up-New-Projects-in-New-GitHub-Organizations/[this support article].
 
 If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
 
@@ -106,12 +106,12 @@ A user key is user-specific an SSH key-pair. GitHub stores the public key, and C
 
 **What is the difference between deploy keys and user keys?**
 
-Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of _scope_ separate from the user associated with them.
+Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique, no mechanism exists to make a deploy key with access to multiple repositories. User keys have no notion of _scope_ separate from the user associated with them.
 
-To achieve fine-grained access to more than one repository, consider creating what GitHub calls a <<controlling-access-via-a-machine-user,machine user>>. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
+To achieve fine-grained access to more than one repository, consider creating what GitHub calls a <<#controlling-access-via-a-machine-user,machine user>>. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
 [NOTE]
-****
+====
 If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
 
 * GitHub will remove inactive keys if they are unused for over a year.
@@ -119,7 +119,20 @@ If your deploy keys or user keys appear to have been removed, it may be due to o
 * In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
 * If your CircleCI project has no xref:about-circleci:introduction-to-the-circleci-web-app.adoc#projects[followers], CircleCI will consider it disabled and remove the associated keys.
 * When you delete a CircleCI project, CircleCI will remove its associated keys.
-****
+====
+
+[#create-a-github-user-key]
+=== Create a GitHub user key
+
+To create a GitHub user key, follow these steps:
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
+. In the sidebar menu, select *SSH Keys*.
+. Under the **User Key** section, select btn:[Authorize With GitHub]. The page will refresh while the authorization takes place and you will be redirected back to the project settings overview page.
+. Navigate back to **SSH keys** and go to the **User Key** section.
+. Select btn:[Add User Key], then btn:[Confirm User]. You will now see your user key displayed on the page.
 
 [#create-additional-github-ssh-keys]
 === Create additional GitHub SSH keys
@@ -163,7 +176,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Checking out any GitHub-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-Private keys are also used to enable your project to <<enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
+Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
 
 [#user-key-security]
 === User key security
@@ -198,14 +211,14 @@ After the necessary permissions have been set up, the next step is adding a `.ci
 
 After you create and commit a `.circleci/config.yml` file to your GitHub repository, CircleCI immediately checks your code out and runs your first job along with any configured tests.
 
-CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on link:https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on GitHub. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
+CircleCI runs your tests on a clean container every time. Your tests are fresh each time you push code, and your code is never accessible to other users. Watch your tests update in real-time on link:https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on GitHub. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
 
-See the xref:getting-started:config-intro.adoc#[Configuration tutorial] page for a configuration walkthrough.
+See the xref:getting-started:config-intro.adoc[Configuration tutorial] page for a configuration walkthrough.
 
 [#enable-your-project-to-check-out-additional-private-repositories]
 == Enable your project to check out additional private repositories
 
-If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository, while a GitHub user key has access to _all_ of your GitHub repositories.
+If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key. Each deploy key is valid for only _one_ repository, while a GitHub user key has access to _all_ your GitHub repositories.
 
 Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and select **Authorize with GitHub**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
 
@@ -213,7 +226,7 @@ Provide CircleCI with a GitHub user key in your project's **Project Settings** >
 == Best practices for keys
 
 * Use Deploy Keys whenever possible.
-* When Deploy Keys cannot be used, <<controlling-access-via-a-machine-user,Machine user keys>> must be used, and have their access restricted to the most limited set of repository and permissions necessary.
+* When Deploy Keys cannot be used, <<#controlling-access-via-a-machine-user,Machine user keys>> must be used, and have their access restricted to the most limited set of repository and permissions necessary.
 * Never use non-Machine user keys (keys should be associated with the build, not with a specific person).
 * You must rotate the Deploy or User key as part of revoking user access to that repository.
 .. After revoking the user’s access in GitHub, delete keys in GitHub.
@@ -224,7 +237,7 @@ Provide CircleCI with a GitHub user key in your project's **Project Settings** >
 [#establish-the-authenticity-of-an-ssh-host]
 == Establish the authenticity of an SSH host
 
-When using SSH keys to check out repositories, it may be necessary to add the fingerprints for GitHub to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it is connecting to is authentic. The xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` job step] does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+When using SSH keys to check out a repository, it may be necessary to add the fingerprints for GitHub to a "known hosts" file (`~/.ssh/known_hosts`). Using `known_hosts` allows the executor can verify that the host it is connecting to is authentic. The xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` job step] does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
 
 ```shell
 mkdir -p ~/.ssh
@@ -275,7 +288,10 @@ Now, CircleCI will use the machine user's SSH key for any Git commands that run 
 [#third-party-applications]
 == Third party applications
 
-GitHub recently added the ability to approve third party application access on a link:https://help.github.com/articles/about-third-party-application-restrictions/[per-organization level]. Before this change, any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account), and the application could use that OAuth token to act on behalf of the user via the API, with whatever permissions were granted during the OAuth flow.
+GitHub recently added the ability to approve third party application access on a link:https://help.github.com/articles/about-third-party-application-restrictions/[per-organization level]. Before this change, the following was true:
+
+* Any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account).
+* The application could use that OAuth token to act on behalf of the user via the API, with whatever permissions were granted during the OAuth flow.
 
 Now OAuth tokens will, by default, _not_ have access to organization data when third party access restrictions are enabled. You must specifically request access on a per organization basis, either during the OAuth process or later, and an organization admin must approve the request.
 
@@ -288,7 +304,10 @@ NOTE: If you enable these restrictions on an organization for which CircleCI has
 [#how-to-re-enable-circleci-for-a-github-organization]
 === How to re-enable CircleCI for a GitHub organization
 
-This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to link:https://github.com/settings/connections/applications/78a2ba87f071c28e65bb[GitHub Settings], and in the **Organization access** section, you will have the option to request access if you are not an admin, or grant access if you are an admin.
+This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to link:https://github.com/settings/connections/applications/78a2ba87f071c28e65bb[GitHub Settings], and in the **Organization access** section, you will have the option to:
+
+* Request access if you are not an admin.
+* Grant access if you are an admin.
 
 [#non-admin-member-workflow]
 ==== Non-admin member workflow
@@ -310,25 +329,25 @@ After access is granted, CircleCI should behave normally again.
 [#rename-organizations-and-repositories]
 ## Rename organizations and repositories
 
-If you would like to rename your organization or repository, follow the xref:security:rename-organizations-and-repositories.adoc#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+If you would like to rename your organization or repository, follow the xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories] guide. Following these steps will ensure you do not lose access to environment variables or contexts in the process.
 
 [#using-github-app-functionality]
 == Using GitHub App functionality alongside the GitHub OAuth App
 
-Some existing and future functionality on CircleCI can only be enabled through the more secure xref:github-apps-integration.adoc#[CircleCI GitHub App integration].
+Some existing and future functionality on CircleCI can only be enabled through the more secure xref:github-apps-integration.adoc[CircleCI GitHub App integration].
 
 Until October 2024, the CircleCI GitHub App integration was available exclusively to organizations created after September 2023. **Now, all organizations can install the CircleCI GitHub App to access new functionality. This includes organizations that currently integrate with CircleCI GitHub OAuth app.**
 
-The GitHub App and OAuth app can **co-exist side-by-side in the same organization** without the need to sacrifice functionality that is xref:version-control-system-integration-overview.adoc#feature-support-for-each-integration-type[not yet available to either integration], or migrate to a new organization.
+The GitHub App and OAuth app can **co-exist side-by-side in the same organization**. You do not need to sacrifice functionality that is xref:version-control-system-integration-overview.adoc#feature-support-for-each-integration-type[not yet available to either integration], or migrate to a new organization.
 
 Key functionality enabled through the GitHub App integration includes the following:
 
 * The option to have **multiple pipelines in the same project**, each defined in its own YAML file.
 * The possibility to set up your pipelines so that the **config file and the application code are stored in different repositories**. Refer to the link:https://circleci.com/changelog/unlocking-any-cross-repo-pipeline-and-trigger-setups-including-central/[changelog entry] for more information.
 * A **more flexible trigger system**, with each pipeline having any number of VCS or non-VCS triggers. This includes:
-** **Non-repo based triggers**: xref:webhooks.adoc#custom-webhooks[Custom webhooks] enable triggering builds from any system that can emit webhook events. Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
+** **Non-repo based triggers**: xref:orchestrate:custom-webhooks.adoc[Custom webhooks] enable triggering builds from any system that can emit webhook events. Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
 ** **Cross-repo triggers**: Events in one repository can trigger builds on one or many other repositories.
-** **More GitHub events as triggers**: Pipelines can be set up to run on events other than "push", including pull request events, with more powerful customization of trigger conditions. For full details, see the xref:orchestrate:github-trigger-event-options.adoc#[GitHub trigger event options] page.
+** **More GitHub events as triggers**: Pipelines can be set up to run on events other than "push", including pull request events, with more powerful customization of trigger conditions. For full details, see the xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options] page.
 
 [#installing-github-app-alongside-github-oauth-app]
 ### Installing GitHub App alongside the GitHub OAuth app
@@ -359,19 +378,21 @@ Once the GitHub App is installed, each user should authorize the GitHub App conn
 Authorizing the GitHub App ensures that users can:
 
 * Trigger pipelines xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[from the CircleCI web app].
-* Run builds, if the flag xref:plans-pricing:prevent-unregistered-users-from-spending-credits.adoc#[Prevent unregistered user spend] is set to "On".
-* Run builds, if they require access to xref:security:contexts.adoc#[contexts].
+* Run builds, if the flag xref:plans-pricing:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered user spend] is set to "On".
+* Run builds, if they require access to xref:security:contexts.adoc[contexts].
 
 [#github-app-integration]
 ### The GitHub App integration
 
-Compared to the GitHub OAuth App, the xref:github-apps-integration.adoc#[CircleCI GitHub App integration] offers increased control over which resources in your VCS CircleCI can access, and lets CircleCI access those resources in a more secure manner. Specifically:
+Compared to the GitHub OAuth app, the xref:github-apps-integration.adoc[CircleCI GitHub App integration] offers the following:
 
-- You can choose to only allow the CircleCI GitHub App access to specific repositories within your GitHub organization.
-- The CircleCI GitHub App only asks for fine-grained permissions to access your resources.
-- The CircleCI GitHub App uses short-lived tokens when accessing your resources.
+* Increased control over the resources that CircleCI can access.
+* Lets CircleCI access those resources in a more secure manner, specifically:
+** You can choose to only allow the CircleCI GitHub App access to specific repositories within your GitHub organization.
+** The CircleCI GitHub App only asks for fine-grained permissions to access your resources.
+** The CircleCI GitHub App uses short-lived tokens when accessing your resources.
 
 [#next-steps]
 == Next steps
-- xref:getting-started:config-intro.adoc#[Configuration tutorial]
-- xref:getting-started:hello-world.adoc#[Hello world]
+- xref:getting-started:config-intro.adoc[Configuration tutorial]
+- xref:getting-started:hello-world.adoc[Hello world]

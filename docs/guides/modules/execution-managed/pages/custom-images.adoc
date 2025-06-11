@@ -10,11 +10,11 @@ This page describes how to create and use custom Docker images with CircleCI.
 == Overview
 
 CircleCI supports Docker, providing you with a powerful way to specify dependencies for your projects.
-If the xref:circleci-images.adoc#[CircleCI convenience images] do not suit your needs, consider creating a custom Docker image for your jobs.
+If the xref:circleci-images.adoc[CircleCI convenience images] do not suit your needs, consider creating a custom Docker image for your jobs.
 There are two major benefits:
 
 * *Faster job execution:* Packaging your required tools into a custom image removes the need to install them for every job.
-* *Cleaner configuration:* Adding lengthy installation scripts to a custom image reduces the number of lines in your xref:reference:ROOT:configuration-reference.adoc#[`config.yml` file].
+* *Cleaner configuration:* Adding lengthy installation scripts to a custom image reduces the number of lines in your xref:reference:ROOT:configuration-reference.adoc[`config.yml` file].
 
 NOTE: When building Docker images, CircleCI does not preserve entrypoints by default.
 See <<adding-an-entrypoint,Adding an Entrypoint>> for more details.
@@ -138,8 +138,8 @@ To allow CircleCI to use your custom image, store it in a public https://docs.do
 The easiest mechanism is to create an account on https://hub.docker.com/[Docker Hub], because Docker Hub allows you to store unlimited public images for free.
 If your organization is already using Docker Hub you can use your existing account.
 
-NOTE: To use an image with the CircleCI xref:using-docker.adoc#[Docker Executor] you must have a public repository.
-If you want to keep your image private, refer to the xref:private-images.adoc#[Using Docker Authenticated Pulls] document for instructions.
+NOTE: To use an image with the CircleCI xref:using-docker.adoc[Docker Executor] you must have a public repository.
+If you want to keep your image private, refer to the xref:private-images.adoc[Using Docker Authenticated Pulls] document for instructions.
 
 The example uses Docker Hub, but you can use different registries if you prefer. Adapt the example based on the registry you are using.
 
@@ -189,7 +189,7 @@ jobs:
       - image: circleci/cci-demo-docker-primary:0.0.1
 ----
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 If you have any questions, head over to our https://discuss.circleci.com/[community forum].
 

@@ -7,7 +7,7 @@
 [#introduction]
 == Introduction
 
-When you run tests in CircleCI there are two ways to store your test results. You can either use xref:optimize:artifacts.adoc#[artifacts] or the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
+When you run tests in CircleCI there are two ways to store your test results. You can either use xref:optimize:artifacts.adoc[artifacts] or the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
 
 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
@@ -57,9 +57,9 @@ For information on viewing your storage usage, and calculating your monthly stor
 [#test-insights]
 == Test Insights
 
-include::guides:ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
-See the xref:insights:insights-tests.adoc#[Test Insights] page for information on using the Insights feature to gather information about your tests.
+See the xref:insights:insights-tests.adoc[Test Insights] page for information on using the Insights feature to gather information about your tests.
 This includes flaky test detection, viewing tests that failed most often, slowest tests, and an overall performance summary.
 
 Also, see the link:https://circleci.com/docs/api/v2/index.html#tag/Insights[API v2 Insights endpoints] to find test failure information.
@@ -85,7 +85,7 @@ gem 'minitest-ci'
 
 * Django should be configured using the link:https://github.com/django-nose/django-nose[`django-nose`] test runner.
 
-For detailed information on how to test your iOS applications, refer to the xref:testing-ios.adoc#[Testing iOS applications] page.
+For detailed information on how to test your iOS applications, refer to the xref:testing-ios.adoc[Testing iOS applications] page.
 
 [#test-runner-examples-by-language]
 == Test runner examples by language
@@ -810,5 +810,5 @@ To access test metadata for a job from the API, refer to the link:https://circle
 [#see-also]
 == See Also
 
-* xref:insights:insights.adoc#[Using Insights]
-* xref:insights:insights-tests.adoc#[Test Insights]
+* xref:insights:insights.adoc[Using Insights]
+* xref:insights:insights-tests.adoc[Test Insights]

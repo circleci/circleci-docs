@@ -5,8 +5,8 @@
 :icons: font
 
 This document describes how to get started with CI/CD using a *macOS execution environment* on CircleCI.
-If you need to learn the basics of CircleCI, see the xref:getting-started:getting-started.adoc#[getting started guide].
-You may also want to visit the documentation for xref:test:testing-ios.adoc#[testing and setting up iOS projects].
+If you need to learn the basics of CircleCI, see the xref:getting-started:getting-started.adoc[getting started guide].
+You may also want to visit the documentation for xref:test:testing-ios.adoc[testing and setting up iOS projects].
 
 [#prerequisites]
 == Prerequisites
@@ -98,7 +98,7 @@ The example `.circleci/config.yml` above covers the following:
 * Build the application.
 * Compress the application and store it using the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts`] key.
 
-You can learn more about the `.circleci/config.yml` file in the xref:reference:ROOT:configuration-reference.adoc#[Configuration Reference].
+You can learn more about the `.circleci/config.yml` file in the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
 
 [#next-steps]
 == Next steps
@@ -108,5 +108,5 @@ which can be more complex in their continuous integration configuration. If you
 are interested in building and/or testing iOS applications, consider checking
 out our following docs that further explore this topic:
 
-* xref:test:testing-ios.adoc#[Testing iOS Applications on macOS]
-* xref:ios-codesigning.adoc#[Setting Up Code Signing for iOS Projects]
+* xref:test:testing-ios.adoc[Testing iOS Applications on macOS]
+* xref:ios-codesigning.adoc[Setting Up Code Signing for iOS Projects]

@@ -1,3 +1,1 @@
-= Docs Style Guide
-
-The pages in this section make up the CircleCI documentation style guide.
+= Docs style guide

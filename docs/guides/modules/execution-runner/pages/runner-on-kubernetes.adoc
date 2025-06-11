@@ -7,9 +7,9 @@
 [#strongly-recommended-method]
 == Strongly recommended method
 
-The xref:container-runner.adoc#[container runner] is the recommended approach for using self-hosted runners with Kubernetes.
+The <<container-runner#,container runner>> is the recommended approach for using self-hosted runners with Kubernetes.
 
 [#deprecated-method]
 == Deprecated method
 
-If you are not using a xref:container-runner.adoc#[container runner], see this link:https://github.com/CircleCI-Public/circleci-runner-k8s[README] for documentation on the old method for using self-hosted runners with Kubernetes.
+If you are not using a <<container-runner#,container runner>>, see this link:https://github.com/CircleCI-Public/circleci-runner-k8s[README] for documentation on the old method for using self-hosted runners with Kubernetes.

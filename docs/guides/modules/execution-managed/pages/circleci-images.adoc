@@ -27,7 +27,7 @@ NOTE: CircleCI occasionally makes scheduled changes to images to fix bugs or oth
 [#examples]
 === Examples
 
-Refer to the xref:toolkit:examples-and-guides-overview.adoc#[Examples and Guides Overview] for examples of using pre-built CircleCI Docker Images in a demo application.
+Refer to the xref:toolkit:examples-and-guides-overview.adoc[Examples and Guides Overview] for examples of using pre-built CircleCI Docker Images in a demo application.
 
 [#next-generation-convenience-images]
 == Next-generation convenience images
@@ -56,7 +56,7 @@ jobs:
       - image: cimg/base:2021.04
 ----
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 `cimg/base:2021.04` is a Ubuntu-based image designed to install the bare minimum. The
 next-generation convenience images are based on this image.
@@ -419,6 +419,6 @@ images.
 [#next-steps]
 == Next steps
 
-* See xref:private-images.adoc#[Using Docker Authenticated Pulls] for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
-* For information about macOS images for iOS, see the xref:test:testing-ios.adoc#[Testing iOS] page.
-* See xref:building-docker-images.adoc#[Running Docker Commands] for information about how to build Docker images.
+* See xref:private-images.adoc[Using Docker Authenticated Pulls] for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+* For information about macOS images for iOS, see the xref:test:testing-ios.adoc[Testing iOS] page.
+* See xref:building-docker-images.adoc[Running Docker Commands] for information about how to build Docker images.

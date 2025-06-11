@@ -96,7 +96,7 @@ command: |
 
 The full `.circleci/config.yml` file would look something like the following:
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [,yml]
 ----
@@ -143,5 +143,5 @@ workflows:
 [#see-also]
 == See also
 
-* xref:optimize:artifacts.adoc#[Storing and Accessing Artifacts]
+* xref:optimize:artifacts.adoc[Storing and Accessing Artifacts]
 * link:https://circleci.com/circleci-and-jfrog/[CircleCI and JFrog]

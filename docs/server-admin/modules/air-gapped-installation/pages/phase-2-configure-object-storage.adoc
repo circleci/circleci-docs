@@ -209,4 +209,4 @@ Copy this `candidate.txt` file to the root directory of the `circleci-data` buck
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:phase-3-install-circleci-server.adoc#[Phase 3 - Install CircleCI server] guide.
+Once the steps on this page are complete, go to the xref:phase-3-install-circleci-server.adoc[Phase 3 - Install CircleCI server] guide.

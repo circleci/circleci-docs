@@ -88,10 +88,7 @@ Most orbs will contain at least a single command. Commands are used to execute s
 
 When writing a xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Reusable Command] for your orb, you may input any number of xref:reference:ROOT:configuration-reference.adoc#steps[steps]. Each step should be properly named as it will appear in the user's UI. To limit the amount of "noise" in the UI, attempt to use as few steps as possible.
 
-[tabs]
-====
-Deploy_Command_GOOD::
-+
+[.tab.minsteps.Deploy_Command_GOOD]
 --
 [,yaml]
 ----
@@ -109,8 +106,8 @@ steps:
         example deploy my-app
 ----
 --
-Deploy_Command_BAD::
-+
+
+[.tab.minsteps.Deploy_Command_BAD]
 --
 [,yaml]
 ----
@@ -125,7 +122,6 @@ steps:
   - run: example deploy my-app
 ----
 --
-====
 
 [#check-for-root]
 ==== Check for root
@@ -151,10 +147,7 @@ Inside your job, if you are utilizing any commands or executors, you must includ
 
 For example, here is a partial snippet of the link:https://circleci.com/developer/orbs/orb/circleci/node#jobs-test[Node orb's `test` job]:
 
-[tabs]
-====
-Test_Job::
-+
+[.tab.nodeParam.Test_Job]
 --
 [,yaml]
 ----
@@ -172,8 +165,8 @@ executor:
   tag: << parameters.version >>
 ----
 --
-Default_Executor::
-+
+
+[.tab.nodeParam.Default_Executor]
 --
 [,yaml]
 ----
@@ -194,7 +187,6 @@ parameters:
     type: string
 ----
 --
-====
 
 As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
 
@@ -296,7 +288,7 @@ steps:
 [#accepting-parameters-as-strings-or-environment-variables]
 ==== Accepting parameters as strings or environment variables
 
-When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually enter a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, for example, if you were using a xref:guides:security:contexts.adoc#[context] to store your AWS metadata for multiple projects.
+When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually enter a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, for example, if you were using a xref:guides:security:contexts.adoc[context] to store your AWS metadata for multiple projects.
 
 CircleCI ships with the xref:guides:security:env-vars.adoc#environment-variable-substitution[`envsubst`] CLI built in, which allows us to evaluate environment variables in strings.
 

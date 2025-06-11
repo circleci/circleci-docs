@@ -20,21 +20,21 @@ Config policy decisions are stored, and can be audited. This provides useful dat
 [#quickstart]
 == Quickstart
 
-If you already have a xref:getting-started:first-steps.adoc#[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a policy] how-to guide to get started.
+If you already have a xref:getting-started:first-steps.adoc[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a policy] how-to guide to get started.
 
 The following how-to guides are available for config policies:
 
-* xref:create-and-manage-config-policies.adoc#[Create and manage config policies]
-* xref:test-config-policies.adoc#[Test config policies]
-* xref:use-the-cli-for-config-and-policy-development.adoc#[Use the CLI for config and policy development]
-* xref:config-policies-for-self-hosted-runner.adoc#[Config policies for self-hosted runner]
+* xref:create-and-manage-config-policies.adoc[Create and manage config policies]
+* xref:test-config-policies.adoc[Test config policies]
+* xref:use-the-cli-for-config-and-policy-development.adoc[Use the CLI for config and policy development]
+* xref:config-policies-for-self-hosted-runner.adoc[Config policies for self-hosted runner]
 
 [#how-config-policy-work]
 == How config policies work
 
 Config policies use a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
 
-Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/create-and-manage-config-policies[Create and manage config policies] page.
+Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the xref:create-and-manage-config-policies.adoc[Create and manage config policies] page.
 
 CircleCI uses the result of OPA output to generate _decisions_ from policy executions. Those decisions have the following outputs:
 
@@ -52,13 +52,13 @@ The decision result tracks which rules were included in the making of the decisi
 == Use the CLI with config policies
 
 [NOTE]
-****
+====
 **Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
-****
+====
 
 Use the CircleCI CLI to manage your organization's policies programmatically. Config policies sub-commands are grouped under the `circleci policy` command.
 
@@ -109,7 +109,7 @@ ok    policies    0.001s
 3/3 tests passed (0.001s)
 ----
 
-include::guides:ROOT:partial$notes/find-organization-id.adoc[]
+include::ROOT:partial$notes/find-organization-id.adoc[]
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == Writing Rego policies using CircleCI domain-specific language
@@ -145,7 +145,7 @@ After declaring the `org` package and `policy_name` rule, policies can then be d
 * Enforcement status - Determines how a violation should be enforced.
 * Enablement - Determines if a policy violation should be enabled.
 
-Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the link:/docs/config-policy-reference[Config policy reference].
+Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the xref:config-policy-reference.adoc[Config policy reference].
 
 NOTE: **Helpers** in the context of config policies are rules like any other, but rules that are not individually _enabled_ for the process of determining policy violation. Helpers can be written and used as building blocks for your policies.
 
@@ -367,7 +367,7 @@ disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
 [#policies-and-parameterization]
 == Config policies with parameterization and reusable config
 
-Writing policies for CircleCI `version 2.1` configuration introduces some challenges due to the parameterization and reusable configuration options. To read more about these options, see the xref:reference:ROOT:reusing-config.adoc#[Reusable config reference guide].
+Writing policies for CircleCI `version 2.1` configuration introduces some challenges due to the parameterization and reusable configuration options. To read more about these options, see the xref:reference:ROOT:reusing-config.adoc[Reusable config reference guide].
 
 Before executing any pipelines, config `version 2.1` is compiled into config `version 2.0`. This compilation expands all parameters and reusable config blocks (jobs, executors, commands, orbs) into workflows and jobs.
 
@@ -605,7 +605,7 @@ For further reading, see the link:https://circleci.com/blog/compliance-with-conf
 [#testing-policies]
 == Testing policies
 
-It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and OPA test commands. For more information on setting up testing, see the xref:test-config-policies.adoc#[Test config policies] guide.
+It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and OPA test commands. For more information on setting up testing, see the xref:test-config-policies.adoc[Test config policies] guide.
 
 The `circleci policy test` command is intended for testing the validity of the policy when adding and updating your config policies only within your config policy repo. Usage outside of adding/updating your config policy repo could result in false responses resulting from race conditions when reading and writing to the config policy service at the same time.
 
@@ -635,7 +635,7 @@ enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that
 enable_hard["some_rule"] # rule applied to all configs
 ----
 
-For more information about dynamic configuration, see the xref:orchestrate:dynamic-config.adoc#[Dynamic configuration overview].
+For more information about dynamic configuration, see the xref:orchestrate:dynamic-config.adoc[Dynamic configuration overview].
 
 [#example-policy]
 == Example policy
@@ -672,7 +672,7 @@ enable_hard["use_official_docker_image"]
 [#next-steps]
 == Next steps
 
-* xref:create-and-manage-config-policies.adoc#[Create and manage config policies]
-* xref:test-config-policies.adoc#[Test config policies]
-* xref:use-the-cli-for-config-and-policy-development.adoc#[Use the CircleCI CLI for config and policy development]
-* xref:config-policy-reference.adoc#[Config policy reference]
+* xref:create-and-manage-config-policies.adoc[Create and manage config policies]
+* xref:test-config-policies.adoc[Test config policies]
+* xref:use-the-cli-for-config-and-policy-development.adoc[Use the CircleCI CLI for config and policy development]
+* xref:config-policy-reference.adoc[Config policy reference]

@@ -35,7 +35,7 @@ image::guides:ROOT:jira_allow_app_access.png[Allow the app access to Atlassian o
 +
 image::guides:ROOT:jira_get_org_id.png[Get CircleCI Organization ID]
 
-. This integration authenticates via xref:permissions-authentication:openid-connect-tokens.adoc#[OpenID Connect (OIDC)]. By default, the organization ID provided is used for audience validation, but this can be modified, or more can be added.
+. This integration authenticates via xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect (OIDC)]. By default, the organization ID provided is used for audience validation, but this can be modified, or more can be added.
 
 . Once you have provided your CircleCI Organization ID and optionally modified the allowed audiences, click *Submit* to save your changes.
 +

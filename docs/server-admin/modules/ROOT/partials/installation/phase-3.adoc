@@ -1,13 +1,13 @@
 Before you begin with the CircleCI server v4.7 execution environment installation phase, ensure you have run through the following:
 
 ifndef::env-aws[]
-* xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#[Phase 1 GCP – Prerequisites]
-* xref:server-admin:installation:phase-2-gcp-core-services.adoc#[Phase 2 GCP - Core Services Installation]
+* xref:server-admin:installation:phase-1-gcp-prerequisites.adoc[Phase 1 GCP – Prerequisites]
+* xref:server-admin:installation:phase-2-gcp-core-services.adoc[Phase 2 GCP - Core Services Installation]
 endif::env-aws[]
 
 ifndef::env-gcp[]
-* xref:server-admin:installation:phase-1-aws-prerequisites.adoc#[Phase 1 AWS – Prerequisites]
-* xref:server-admin:installation:phase-2-aws-core-services.adoc#[Phase 2 AWS - Core Services Installation]
+* xref:server-admin:installation:phase-1-aws-prerequisites.adoc[Phase 1 AWS – Prerequisites]
+* xref:server-admin:installation:phase-2-aws-core-services.adoc[Phase 2 AWS - Core Services Installation]
 endif::env-gcp[]
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
@@ -22,7 +22,7 @@ Execution environments in CircleCI server are resourced in the following ways:
 
 * <<machine-provisioner,Machine provisioner>> is used in AWS/GCP installations to provision resources and run jobs that are configured to use the `machine` execution environment, including Linux and Windows VMs, including Arm resources, if your server installation is within AWS. If you install outside AWS or GCP (that is, a local installation) you will use self-hosted runners to run VM-configured jobs.
 
-* xref:guides:execution-runner:runner-overview.adoc#[Runner] can be used for all execution environments, including macOS.
+* xref:guides:execution-runner:runner-overview.adoc[Runner] can be used for all execution environments, including macOS.
 
 [#nomad-clients]
 == 1. Nomad clients
@@ -30,7 +30,7 @@ Nomad is a workload orchestration tool that CircleCI uses to schedule (through N
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) is installed within the cluster. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
-NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, see the xref:server-admin:air-gapped-installation:phase-4-configure-nomad-clients.adoc#[Air-gapped] docs on setting up Nomad clients.
+NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, see the xref:server-admin:air-gapped-installation:phase-4-configure-nomad-clients.adoc[Air-gapped] docs on setting up Nomad clients.
 
 [#create-your-cluster-with-terraform]
 === a. Create your cluster with Terraform
@@ -143,6 +143,8 @@ After Terraform is done spinning up the Nomad client(s), it outputs the certific
 // Stop hiding from AWS page
 endif::env-aws[]
 
+NOTE: The CircleCI Terraform uses an Ubuntu 22.04 image customized to use CgroupsV1 and not the default CgroupsV2. CgroupsV1 is a requirement for CircleCI Docker execution environments.
+
 [#nomad-autoscaler-configuration]
 === b. Nomad Autoscaler configuration
 Nomad can automatically scale up or down your Nomad clients, provided your clients are managed by a cloud provider's auto scaling resource. With Nomad Autoscaler, you need to provide permission for the utility to manage your auto scaling resource and specify where it is located. CircleCI's Nomad Terraform module can provision the permissions resources, or it can be done manually.
@@ -160,10 +162,7 @@ Create an IAM user or role and policy for Nomad Autoscaler. You may take **one**
 
 When using access and secret keys, you have two options for configuration:
 
-[tabs]
-====
-CircleCI_creates_Secret::
-+
+[.tab.awsautoscaler.CircleCI_creates_Secret]
 --
 **Option 1:** CircleCI creates the Kubernetes Secret for you.
 
@@ -179,8 +178,8 @@ nomad:
       secretKey: "<secret-key>"
 ----
 --
-You_create_Secret::
-+
+
+[.tab.awsautoscaler.You_create_Secret]
 --
 **Option 2:** Create the Kubernetes Secret yourself
 
@@ -213,7 +212,6 @@ kubectl create secret generic nomad-autoscaler-secret \
   --from-literal=secret.hcl=$ADDITIONAL_CONFIG
 ----
 --
-====
 
 
 [#iam-policy-for-nomad-autoscaler]
@@ -255,24 +253,21 @@ ifndef::env-aws[]
 ==== GCP autoscaler service account
 Create a service account for Nomad Autoscaler. You may take **one** of the following approaches:
 
-[tabs]
-====
-CircleCI_creates_Secret::
-+
+[.tab.gcpautoscaler.CircleCI_creates_Secret]
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
 The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account and output a file with the JSON key. For this option, set the variable `nomad_auto_scaler = true`. You may reference the examples in the link for more details. The created service account key will be available in a file named `nomad-as-key.json`.
 --
-Use_Workload_Identity::
-+
+
+[.tab.gcpautoscaler.Use_Workload_Identity]
 --
 **Option 2:** Use Workload Identity.
 
 The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account using xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
-You_create_Secret::
-+
+
+[.tab.gcpautoscaler.You_create_Secret]
 --
 **Option 3:** Create the Kubernetes Secret yourself.
 
@@ -289,7 +284,6 @@ kubectl create secret generic nomad-autoscaler-secret \
 
 When creating a Nomad GCP service account manually, the service account will need the role `compute.admin`. It will also need the role `iam.workloadIdentityUser` if using Workload Identity. This step is only required if you choose not to create the service account using Terraform.
 --
-====
 
 endif::env-aws[]
 
@@ -303,10 +297,7 @@ Now that you have successfully deployed your Nomad clients and have the permissi
 
 Nomad requires a key to encrypt communications. This key must be exactly 32 bytes long. CircleCI will not be able to recover the values if lost. Depending on how you prefer to manage Kubernetes Secrets, there are two options:
 
-[tabs]
-====
-You_create_Secret::
-+
+[.tab.encryption.You_create_Secret]
 --
 **Option 1:** Create the Kubernetes Secret yourself.
 
@@ -326,25 +317,21 @@ kubectl -n <namespace> label secret/nomad-gossip-encryption-key \
 
 Once the Kubernetes Secret exists, no change to `values.yaml` is required. The Kubernetes Secret will be referenced by default.
 --
-CircleCI_creates_Secret::
-+
+
+[.tab.encryption.CircleCI_creates_Secret]
 --
 **Option 2:** CircleCI creates the Kubernetes Secret.
 
 CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automatically.
 
 --
-====
 
 [#nomad-mtls]
 === b. Nomad mTLS
 
 The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
 
-[tabs]
-====
-You_create_Secret::
-+
+[.tab.mtlsencryption.You_create_Secret]
 --
 **Option 1:** Generate a secret with the mTLS cert values
 
@@ -364,8 +351,7 @@ kubectl -n <namespace> label secret/nomad-mtls \
   app.kubernetes.io/managed-by=Helm --overwrite
 ----
 --
-CircleCI_creates_Secret::
-+
+[.tab.mtlsencryption.CircleCI_creates_Secret]
 --
 **Option 2:** Add the base64 encoded values to your `values.yaml`
 
@@ -382,7 +368,6 @@ nomad:
         CACertificate: "<base64-encoded-ca-certificate>"
 ----
 --
-====
 
 [#nomad-autoscaler]
 === c. Nomad Autoscaler
@@ -550,7 +535,7 @@ NOTE: Overriding scaling options is currently not supported, but will be support
 
 Machine provisioner is used to configure virtual machines for jobs that run in Linux VM, Windows and Arm VM execution environments, and those that are configured to use xref:reference:ROOT:configuration-reference.adoc#setupremotedocker[remote Docker]. Machine provisioner is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
-Once you have completed the server installation process you can further configure machine provisioner, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Manage Virtual Machines with machine provisioner] page.
+Once you have completed the server installation process you can further configure machine provisioner. Including building and specifying a Windows image, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc[Manage Virtual Machines with machine provisioner] page.
 
 Before moving on to platform specific steps, create your firewall rules. External VMs need the networking rules described in xref:hardening-your-cluster.adoc#external-vms[Hardening your Cluster]
 
@@ -608,10 +593,7 @@ Authenticate CircleCI with your cloud provider in one of two ways:
 * IAM Roles for Service Accounts (IRSA) - **recommended**
 * IAM access keys
 
-[tabs]
-====
-IRSA::
-+
+[.tab.vmauthaws.IRSA]
 --
 The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring machine provisioner in CircleCI.
 
@@ -795,8 +777,8 @@ machine_provisioner:
       securityGroupId: "<SECURITY_GROUP_ID>"
 ----
 --
-IAM_Access_Keys::
-+
+
+[.tab.vmauthaws.IAM_Access_Keys]
 --
 . *Create user*
 +
@@ -945,7 +927,6 @@ kubectl create secret generic machine-provisioner-secret \
   --from-literal=secretKey=<secret-key>
 ----
 --
-====
 
 endif::env-gcp[]
 
@@ -1019,10 +1000,7 @@ gcloud projects add-iam-policy-binding <YOUR_PROJECT_ID> --member serviceAccount
 +
 Choose one of the following options, depending on whether you are using Workload Identity.
 +
-[tabs]
-====
-Enable_Workload_Identity_for_Service_Account::
-+
+[.tab.workloadorjson.Enable_Workload_Identity_for_Service_Account]
 --
 This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
 
@@ -1038,12 +1016,8 @@ gcloud iam service-accounts add-iam-policy-binding circleci-server-vm@<PROJECT_I
     --member "serviceAccount:<GCP_PROJECT_ID>.svc.id.goog[circleci-server/machine-provisioner]"
 ----
 --
-====
 +
-[tabs]
-====
-Get_Service_Account_JSON_key_file::
-+
+[.tab.workloadorjson.Get_Service_Account_JSON_key_file]
 --
 If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required.
 
@@ -1054,16 +1028,12 @@ After running the following command, you should have a file named `circleci-serv
 gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account <YOUR_SERVICE_ACCOUNT_EMAIL>
 ----
 --
-====
 
 . *Configure CircleCI server*
 +
 When using service account keys for configuring access for the machine provisioner, there are two options.
 +
-[tabs]
-====
-CircleCI_creates_Secret::
-+
+[.tab.configureserver.CircleCI_creates_Secret]
 --
 **Option 1:** CircleCI creates the Kubernetes Secret.
 
@@ -1093,8 +1063,8 @@ machine_provisioner:
 ----
 
 --
-You_create_Secret::
-+
+
+[.tab.configureserver.You_create_Secret]
 --
 **Option 2:** Create the Kubernetes Secret yourself.
 
@@ -1106,7 +1076,6 @@ kubectl create secret generic machine-provisioner-secret \
   --from-literal=gcp_sa.json=<access-key>
 ----
 --
-====
 
 endif::env-aws[]
 
@@ -1129,7 +1098,7 @@ Once you have configured and deployed CircleCI server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. CircleCI server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:guides:execution-runner:runner-overview.adoc#[runner documentation].
+CircleCI runner does not require any additional server configuration. CircleCI server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:guides:execution-runner:runner-overview.adoc[runner documentation].
 
 NOTE: Runner requires a namespace per organization. CircleCI server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
@@ -1138,11 +1107,11 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 ifndef::env-gcp[]
-* xref:server-admin:installation:phase-4-aws-post-installation.adoc#[Phase 4 AWS: Post Installation]
+* xref:server-admin:installation:phase-4-aws-post-installation.adoc[Phase 4 AWS: Post Installation]
 endif::env-gcp[]
 
 ifndef::env-aws[]
-* xref:server-admin:installation:phase-4-gcp-post-installation.adoc#[Phase 4 GCP: Post Installation]
+* xref:server-admin:installation:phase-4-gcp-post-installation.adoc[Phase 4 GCP: Post Installation]
 endif::env-aws[]
 
 endif::pdf[]

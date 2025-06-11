@@ -1,1 +1,1 @@
-= First Steps
+= Get started with CircleCI

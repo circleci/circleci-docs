@@ -30,7 +30,7 @@ Using cache keys that are too strict can mean that you will get a minimal number
 
 If your project has "flaky tests," workflows might be rerun unnecessarily. This will both use up your credits and increase your storage usage. To avoid this situation, address flaky tests. For help with identifying them, see xref:insights:insights-tests.adoc#flaky-tests[Test Insights].
 
-You can also consider configuring your projects to rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information, see the link:/docs/configuration-reference/#the-when-attribute[Configuration Reference].
+You can also consider configuring your projects to rerun failed jobs rather than entire workflows. To achieve this you can use the `when` step. For further information, see the xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[Configuration Reference].
 
 [#split-cache-keys-by-directory]
 === Split cache keys by directory
@@ -348,8 +348,8 @@ Do not cache everything, but _do_ consider caching for costly steps like compila
 [#see-also]
 == See also
 
-* xref:persist-data.adoc#[Persisting Data]
-* xref:caching.adoc#[Caching Dependencies]
-* xref:orchestrate:workspaces.adoc#[Workspaces]
-* xref:artifacts.adoc#[Artifacts]
-* xref:optimizations.adoc#[Optimizations Overview]
+* xref:persist-data.adoc[Persisting Data]
+* xref:caching.adoc[Caching Dependencies]
+* xref:orchestrate:workspaces.adoc[Workspaces]
+* xref:artifacts.adoc[Artifacts]
+* xref:optimizations.adoc[Optimizations Overview]

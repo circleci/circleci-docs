@@ -9,11 +9,11 @@ This page offers troubleshooting suggestions for the following aspects of Circle
 [.table]
 [cols=2*]
 |===
-| <<#orbs,Orbs>>
-| <<#container-runner,Container runner>>
+| <<orbs>>
+| <<container-runner>>
 
-| <<#pipelines,Pipelines>>
-| <<#machine-runner,Machine runner>>
+| <<pipelines>>
+| <<machine-runner>>
 
 |===
 
@@ -28,6 +28,6 @@ include::guides:ROOT:partial$troubleshoot/pipelines-troubleshoot-snip.adoc[]
 // Self-hosted runner (H2s need to be in the snippet for now)
 include::guides:ROOT:partial$troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
 
-//== Releases
-// Removing this section until the Antora migration when the xrefs will work correctly
-//include::guides:ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]
+== Releases
+
+include::guides:ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]

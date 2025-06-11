@@ -58,7 +58,7 @@ workflows:
 [#example-configuration-pipeline-parameters]
 === Example configuration file using IP ranges with pipeline parameters.
 
-Use conditional logic to control when IP ranges is enabled with pipeline parameters. You can set the pipeline parameter `ip_ranges` to `true` to enable IP ranges for the `build` job. For more information on triggering pipelines with pipeline parameters, see the xref:orchestrate:triggers-overview.adoc#[Trigger a pipeline] page.
+Use conditional logic to control when IP ranges is enabled with pipeline parameters. You can set the pipeline parameter `ip_ranges` to `true` to enable IP ranges for the `build` job. For more information on triggering pipelines with pipeline parameters, see the xref:orchestrate:triggers-overview.adoc[Trigger a pipeline] page.
 
 [,yaml]
 ----

@@ -20,8 +20,8 @@ The chart assumes an environment with the following resources:
 
 For more information about specific values, see the standard installation documentation, starting with the following:
 
-* xref:server-admin:installation:phase-2-aws-core-services.adoc#[Phase 2 AWS - Core services]
-* xref:server-admin:installation:phase-2-gcp-core-services.adoc#[Phase 2 GCP - Core services]
+* xref:server-admin:installation:phase-2-aws-core-services.adoc[Phase 2 AWS - Core services]
+* xref:server-admin:installation:phase-2-gcp-core-services.adoc[Phase 2 GCP - Core services]
 
 [#values]
 == `Values.yaml`

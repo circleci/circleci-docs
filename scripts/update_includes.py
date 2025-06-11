@@ -7,14 +7,14 @@ def update_include_directive(file_path):
 
     # Update any path containing partials (with any number of ../ before) to ROOT:partial$
     content = re.sub(
-        r'include::(?:\.\./)*partials/',
+        r'include::(?:\.\./)*(?:_includes/)?partials/',
         'include::ROOT:partial$',
         content
     )
 
     # Update any path containing snippets (with any number of ../ before) to ROOT:example$
     content = re.sub(
-        r'include::(?:\.\./)*snippets/',
+        r'include::(?:\.\./)*(?:_includes/)?snippets/',
         'include::ROOT:example$',
         content
     )

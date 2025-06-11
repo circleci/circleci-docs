@@ -6,7 +6,7 @@
 
 The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch, and Apple TV simulators.
 
-You can use the macOS execution environment to run your xref:orchestrate:jobs-steps.adoc#[jobs] in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
+You can use the macOS execution environment to run your xref:orchestrate:jobs-steps.adoc[jobs] in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
 
 [source,yaml]
 ----
@@ -28,12 +28,12 @@ jobs:
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-include::guides:ROOT:partial$execution-resources/xcode-silicon-vm.adoc[]
+include::ROOT:partial$execution-resources/xcode-silicon-vm.adoc[]
 
 [#available-resource-classes]
 == Available resource classes
 
-include::guides:ROOT:partial$execution-resources/macos-resource-table.adoc[]
+include::ROOT:partial$execution-resources/macos-resource-table.adoc[]
 
 [source,yaml]
 ----
@@ -47,7 +47,7 @@ jobs:
 [#view-resource-usage]
 === View resource usage
 
-include::guides:ROOT:partial$execution-resources/resource-class-view.adoc[]
+include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
 [#using-the-macos-executor]
 == Image update cycle for the macOS executor
@@ -252,7 +252,7 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 [#using-multiple-executor-types-macos-docker]
 == Using multiple executor types (macOS + Docker)
 
-It is possible to use multiple xref:executor-intro.adoc#[executor types] in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
+It is possible to use multiple xref:executor-intro.adoc[executor types] in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
 
 [source,yaml]
 ----
@@ -302,4 +302,4 @@ workflows:
 [#next-steps]
 == Next steps
 
-Get started with xref:hello-world-macos.adoc#[Configuring a Simple macOS Application on CircleCI].
+Get started with xref:hello-world-macos.adoc[Configuring a Simple macOS Application on CircleCI].

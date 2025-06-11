@@ -4,9 +4,9 @@
 :experimental:
 :icons: font
 
-This document provides example database xref:orchestrate:databases.adoc#[config.yml] files using PostgreSQL/Rails and MySQL/Ruby.
+This document provides example database xref:orchestrate:databases.adoc[config.yml] files using PostgreSQL/Rails and MySQL/Ruby.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [#example-circleci-configuration-for-a-rails-app-with-structuresql]
 == Example CircleCI configuration for a rails app with structure.sql
@@ -284,4 +284,4 @@ VALUES (
 [#see-also]
 == See also
 
-Refer to the xref:orchestrate:databases.adoc#[Configuring Databases] document for a walkthrough of conceptual information about using service images and database testing steps.
+Refer to the xref:orchestrate:databases.adoc[Configuring Databases] document for a walkthrough of conceptual information about using service images and database testing steps.

@@ -27,10 +27,10 @@ The documents in this section cover what each plan offers developers for their C
 == Our plans
 Visit the pages below to learn about the features of CircleCI's plans.
 
-- xref:plan-free.adoc#[Free Plan]
-- xref:plan-performance.adoc#[Performance Plan]
-- xref:plan-scale.adoc#[Scale Plan]
-- xref:plan-server.adoc#[Server Plan]
+- xref:plan-free.adoc[Free Plan]
+- xref:plan-performance.adoc[Performance Plan]
+- xref:plan-scale.adoc[Scale Plan]
+- xref:plan-server.adoc[Server Plan]
 
 [#configuring-your-credit-plan]
 == Configuring your credit plan
@@ -40,4 +40,4 @@ For details on cancelling a Performance Plan, refer to the xref:server-admin:ope
 
 [#managing-credit-usage]
 == Managing credit usage
-Optimizations can be implemented to help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc#[Persisting data] page.
+Optimizations can be implemented to help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc[Persisting data] page.

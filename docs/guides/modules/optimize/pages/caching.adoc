@@ -15,7 +15,7 @@ WARNING: Caching files between different executors, for example, between Docker 
 [#introduction]
 == Introduction
 
-Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration enables advanced strategies and fine-grained control. See the xref:caching-strategy.adoc#[Caching Strategies] and xref:persist-data.adoc#[Persisting Data] pages for tips on caching strategies and management.
+Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration enables advanced strategies and fine-grained control. See the xref:caching-strategy.adoc[Caching Strategies] and xref:persist-data.adoc[Persisting Data] pages for tips on caching strategies and management.
 
 This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching.
 
@@ -25,7 +25,7 @@ NOTE: The Docker images used for CircleCI jobs are automatically cached on the s
 
 CAUTION: Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.
 
-For information about caching and reuse of unchanged layers of a Docker image, see the xref:docker-layer-caching.adoc#[Docker Layer Caching] document.
+For information about caching and reuse of unchanged layers of a Docker image, see the xref:docker-layer-caching.adoc[Docker Layer Caching] document.
 
 [#how-caching-works]
 == How caching works
@@ -139,12 +139,12 @@ If your project is open source/available to be forked and receive PRs from contr
 
 * PRs from the same fork repository share a cache (this includes, as previously stated, that PRs in the main repository share a cache with main).
 * Two PRs in different fork repositories have different caches.
-* Enabling the sharing of xref:security:env-vars.adoc#[environment variables] allows cache sharing between the original repository and all forked builds.
+* Enabling the sharing of xref:security:env-vars.adoc[environment variables] allows cache sharing between the original repository and all forked builds.
 
 [#caching-libraries]
 == Caching libraries
 
-If a job fetches data at any point, it is likely that you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our xref:toolkit:examples-and-guides-overview.adoc#[Language guides and demo projects] for the specifics for your stack.
+If a job fetches data at any point, it is likely that you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our xref:toolkit:examples-and-guides-overview.adoc[Language guides and demo projects] for the specifics for your stack.
 
 Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) built by the CircleCI team have tools preinstalled that are generic for building projects using the relevant language. For example, the `cimg/ruby:3.1.2` image includes useful tools like git, openssh-client, and Gzip.
 
@@ -331,7 +331,7 @@ During step execution, the templates above are replaced by runtime values and us
 | The VCS revision currently being built.
 
 | `{{ .Environment.variableName }}`
-| The environment variable `variableName` (supports any environment variable xref:security:env-vars.adoc#[exported by CircleCI] or added to a specific xref:security:contexts.adoc#[Context], not any arbitrary environment variable).
+| The environment variable `variableName` (supports any environment variable xref:security:env-vars.adoc[exported by CircleCI] or added to a specific xref:security:contexts.adoc[Context], not any arbitrary environment variable).
 
 | `{{ epoch }}`
 | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
@@ -353,7 +353,7 @@ During step execution, the templates above are replaced by runtime values and us
 
 The following example demonstrates how to use `restore_cache` and `save_cache`, together with templates and keys in your `.circleci/config.yml` file.
 
-CAUTION: This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important to be aware that this can *significantly increase* your storage usage. For tips on optimizing your caching strategy, see the xref:caching-strategy.adoc#[Caching Strategies] page.
+CAUTION: This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important to be aware that this can *significantly increase* your storage usage. For tips on optimizing your caching strategy, see the xref:caching-strategy.adoc[Caching Strategies] page.
 This example is only a _potential_ solution and might be unsuitable for your specific needs, and increase storage costs.
 
 
@@ -419,7 +419,7 @@ jobs:
 ----
 
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [#source-caching]
 == Source caching
@@ -467,8 +467,8 @@ NOTE: The built-in `checkout` command disables git's automatic garbage collectio
 [#see-also]
 == See also
 
-* xref:persist-data.adoc#[Persisting Data]
-* xref:caching-strategy.adoc#[Caching Strategies]
-* xref:orchestrate:workspaces.adoc#[Workspaces]
-* xref:artifacts.adoc#[Artifacts]
-* xref:optimizations.adoc#[Optimizations Overview]
+* xref:persist-data.adoc[Persisting Data]
+* xref:caching-strategy.adoc[Caching Strategies]
+* xref:orchestrate:workspaces.adoc[Workspaces]
+* xref:artifacts.adoc[Artifacts]
+* xref:optimizations.adoc[Optimizations Overview]

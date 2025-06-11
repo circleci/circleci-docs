@@ -4,17 +4,17 @@
 :experimental:
 :icons: font
 
-This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:reference:ROOT:configuration-reference.adoc#[Configuration reference] page.
+This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
 
 If you would like to get set up quickly, see our language-specific quickstart guides:
 
-* xref:getting-started:language-javascript.adoc#[Node]
-* xref:getting-started:language-python.adoc#[Python]
-* xref:getting-started:language-go.adoc#[Go]
+* xref:getting-started:language-javascript.adoc[Node]
+* xref:getting-started:language-python.adoc[Python]
+* xref:getting-started:language-go.adoc[Go]
 
 == Tools for editing configuration files
 
-CircleCI has created an xref:vs-code-extension-overview.adoc#[extension for Visual Studio Code] that reduces context switching between the web app and VS Code through a set of helpful features.
+CircleCI has created an xref:vs-code-extension-overview.adoc[extension for Visual Studio Code] that reduces context switching between the web app and VS Code through a set of helpful features.
 
 The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
 
@@ -23,21 +23,21 @@ The CircleCI VS Code extension is available to download on the link:https://mark
 [#simple-configuration-examples]
 == Simple configuration examples
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [#concurrent-workflow]
 === Concurrent workflow
 
 The configuration example below shows a concurrent workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
-* Refer to the xref:orchestrate:workflows.adoc#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the xref:orchestrate:workflows.adoc[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 * Refer to the link:https://circleci.com/developer/images?imageType=docker[Developer Hub convenience images] page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example:
 
 image::guides:ROOT:concurrent-workflow-map.png[Concurrent Workflow Graph]
 
-[%linenums,yaml, title=app.js]
+[,yaml]
 ----
 version: 2.1
 
@@ -69,7 +69,7 @@ workflows:
 
 The configuration example below shows a sequential workflow where the `build` job runs, and then the `test` job runs once `build` has completed. Configure sequential workflows using the xref:reference:ROOT:configuration-reference.adoc#requires[`requires` key], and specifying the `test` job "requires" the `build` job in order to run. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
-* Refer to the xref:orchestrate:workflows.adoc#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the xref:orchestrate:workflows.adoc[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 * Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example, in which jobs run sequentially (one after the other):
@@ -170,7 +170,7 @@ The image below shows the workflow view for the following configuration example.
 
 image::guides:ROOT:approval-workflow-map.png[Approval Workflow Graph]
 
-* Refer to the xref:orchestrate:workflows.adoc#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+* Refer to the xref:orchestrate:workflows.adoc[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 * Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
 
 === Hello world
@@ -289,7 +289,7 @@ workflows:
             - build
 ----
 
-This example shows a sequential workflow with the `test` job configured to run only on the main branch. Refer to the xref:orchestrate:workflows.adoc#[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+This example shows a sequential workflow with the `test` job configured to run only on the main branch. Refer to the xref:orchestrate:workflows.adoc[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 [#sample-configuration-with-fan-infan-out-workflow]
 == Sample configuration with fan-in/fan-out workflow
@@ -438,17 +438,14 @@ NOTE: A job can only run when its dependencies are satisfied therefore it requir
 [#sample-configuration-with-multiple-executor-types]
 == Sample configuration with multiple executor types
 
-It is possible to use multiple xref:execution-managed:executor-intro.adoc#[executor types]
+It is possible to use multiple xref:execution-managed:executor-intro.adoc[executor types]
 in the same workflow.
 
 In `Example-1` each push will build and test the project on Linux, Windows and macOS.
 
 In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools (link:https://github.com/realm/SwiftLint[SwiftLint] and link:https://github.com/danger/danger[Danger]) will be run in Docker.
 
-[tabs]
-====
-Example_1::
-+
+[tab.multiple-executors.Example_1]
 --
 [,yaml]
 ----
@@ -713,8 +710,8 @@ workflows:
               only: main
 ----
 --
-Example_2::
-+
+
+[tab.multiple-executors.Example_2]
 --
 [,yaml]
 ----
@@ -770,11 +767,10 @@ workflows:
       - build-and-test
 ----
 --
-====
 
 [#see-also]
 == See also
 
-* See the xref:about-circleci:concepts.adoc#configuration[Concepts document] and xref:orchestrate:workflows.adoc#[Workflows] for more details of the concepts covered in this example.
-* See the xref:reference:ROOT:configuration-reference.adoc#[Configuration Reference] document for full details of each individual configuration key.
-* See the xref:example-configs.adoc#[Example Public Repos] document for a list of public projects that use CircleCI.
+* See the xref:about-circleci:concepts.adoc#configuration[Concepts document] and xref:orchestrate:workflows.adoc[Workflows] for more details of the concepts covered in this example.
+* See the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] document for full details of each individual configuration key.
+* See the xref:example-configs.adoc[Example Public Repos] document for a list of public projects that use CircleCI.

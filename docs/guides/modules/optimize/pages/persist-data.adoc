@@ -38,7 +38,7 @@ A prime example of a caching strategy is using a cache with dependency managers,
 
 Because caches are global within a project, a cache saved on one branch will be used by jobs run on other branches. Caches should only be used for data that is suitable to share across branches.
 
-* For more information on caching dependencies, including race conditions, managing caches, and using cache keys, see the xref:caching.adoc#[Caching Dependencies] page.
+* For more information on caching dependencies, including race conditions, managing caches, and using cache keys, see the xref:caching.adoc[Caching Dependencies] page.
 
 [#cache-optimization]
 === Caching optimization
@@ -47,7 +47,7 @@ Optimize your pipelines to ensure you are getting the most out of your network a
 
 Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
 
-* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the xref:caching-strategy.adoc#[Caching Strategies] page.
+* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the xref:caching-strategy.adoc[Caching Strategies] page.
 
 [#workspaces]
 == Workspaces
@@ -61,8 +61,8 @@ If you notice your workspace usage is high and would like to reduce it, try sear
 
 You also might find that you are only using workspaces to be able to re-run builds from fail. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
 
-* For more information on workspace optimization, configuration, and expiration, see the xref:orchestrate:workspaces.adoc#[Using Workspaces] page.
-* For more information on workflows, see the xref:orchestrate:workflows.adoc#[Workflows] page.
+* For more information on workspace optimization, configuration, and expiration, see the xref:orchestrate:workspaces.adoc[Using Workspaces] page.
+* For more information on workflows, see the xref:orchestrate:workflows.adoc[Workflows] page.
 * Also see the link:https://circleci.com/blog/deep-diving-into-circleci-workspaces/[Deep Diving into CircleCI Workspaces] blog post.
 
 [#artifacts]
@@ -87,7 +87,7 @@ If you need to store artifacts for longer periods of time, there are other optim
 * Upload artifacts to a single branch
 * Upload large artifacts to your own bucket at no cost
 
-For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the xref:artifacts.adoc#[Storing Build Artifacts] page.
+For more information on artifact optimization, and using artifacts to persist data once a job has completed, see the xref:artifacts.adoc[Storing Build Artifacts] page.
 
 [#managing-network-and-storage-usage]
 == Managing network and storage usage
@@ -170,9 +170,9 @@ Billing for storage can be minimized by evaluating your storage needs and settin
 [#see-also]
 == See also
 
-* xref:caching.adoc#[Caching Dependencies]
-* xref:caching-strategy.adoc#[Caching Strategies]
-* xref:orchestrate:workspaces.adoc#[Workspaces]
-* xref:artifacts.adoc#[Artifacts]
-* xref:security:ip-ranges.adoc#[IP Ranges]
-* xref:optimizations.adoc#[Optimizations Overview]
+* xref:caching.adoc[Caching Dependencies]
+* xref:caching-strategy.adoc[Caching Strategies]
+* xref:orchestrate:workspaces.adoc[Workspaces]
+* xref:artifacts.adoc[Artifacts]
+* xref:security:ip-ranges.adoc[IP Ranges]
+* xref:optimizations.adoc[Optimizations Overview]

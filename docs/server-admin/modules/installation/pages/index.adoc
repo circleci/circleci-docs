@@ -1,6 +1,3 @@
-= Installing CircleCI server
+= Installing CircleCI Server
 
-This section contains information about installing CircleCI Server.
-
-== Prerequisites
-
+In this section find installation guides for installing on AWS, GCP and in an air-gapped environment.

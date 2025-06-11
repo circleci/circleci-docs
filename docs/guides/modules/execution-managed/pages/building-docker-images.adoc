@@ -15,7 +15,7 @@ NOTE: The _remote_ in "remote Docker" is a legacy term from when remote Docker u
 
 To build Docker images (for example, using `docker` or `docker compose` commands) when using the Docker execution environment, you must use the `setup_remote_docker` key in your job:
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -39,25 +39,61 @@ CAUTION: Only use `setup_remote_docker` key for jobs where your primary executor
 [#specifications]
 == Specifications
 
-The resource class used for the remote Docker environment is determined by how you configure the primary container for the job. The sections below show how Docker and remote Docker environments correlate.
+CircleCI runs remote Docker environments using **Linux or Arm machine resource classes**, depending on the resource class you assign to the Docker executor.
 
-For specification, credit, and pricing information for all resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource class product page].
+=== x86 architecture
 
-=== x86
-For *x86* architecture, the equivalent Linux VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also. Exceptions to this are as follows:
+A remote Docker environment uses a **Linux VM machine** resource class that corresponds to the Docker executor class with the following exceptions:
 
-* If you use the `small` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `medium`.
-* If you use the `medium+` Docker resource class for your primary execution environment, the remote Docker environment uses Linux VM, `large`.
+* `small` maps to `medium` (Linux VM)
+* `medium+` maps to `large` (Linux VM)
 
-For a full list of available Linux VM resource classes see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[Configuration Reference].
+=== Arm architecture
 
-=== Arm
+Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
 
-TIP: *Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
+=== Docker executor to Remote Docker (Linux/Arm Machine) mapping
 
-For *Arm* architecture the equivalent Arm VM resource class is used for remote Docker, relative to how the primary Docker container is configured. For example, if your Docker executor is configured to use a `medium` resource class, the remote Docker environment for that job uses `medium` also.
+==== x86 architecture
 
-For a full list of available Arm VM resource classes see the xref:reference:ROOT:configuration-reference.adoc#arm-execution-environment-linux[Configuration Reference].
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Docker resource class
+| Remote Docker (Linux Machine) resource class
+| `small`
+| `medium` (Linux VM)
+| `medium`
+| `medium` (Linux VM)
+| `medium+`
+| `large` (Linux VM)
+| `large`
+| `large` (Linux VM)
+| `xlarge`
+| `xlarge` (Linux VM)
+| `2xlarge`
+| `2xlarge` (Linux VM)
+|===
+
+==== Arm architecture
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Docker resource class
+| Remote Docker (Arm Linux Machine) resource class
+| `arm.medium`
+| `arm.medium` (Arm VM)
+| `arm.large`
+| `arm.large` (Arm VM)
+| `arm.xlarge`
+| `arm.xlarge` (Arm VM)
+| `arm.2xlarge`
+| `arm.2xlarge` (Arm VM)
+|===
+
+- Full list of resource classes: xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference].
+- Full specifications and pricing: link:https://circleci.com/pricing/price-list/[CircleCI Pricing]
 
 === CircleCI server
 For CircleCI server installations, contact the systems administrator for specifications.
@@ -101,7 +137,7 @@ Below is a break down of what is happening during this build's execution:
 [#install-the-docker-cli]
 == Install the Docker CLI
 
-xref:circleci-images.adoc#[CircleCI convenience images] have the Docker CLI pre-installed. If you are using a third-party image for your primary container that does not have the Docker CLI installed, then link:https://docs.docker.com/install/#supported-platforms[you will need to install it] as part of your job before calling any `docker` commands.
+xref:circleci-images.adoc[CircleCI convenience images] have the Docker CLI pre-installed. If you are using a third-party image for your primary container that does not have the Docker CLI installed, then link:https://docs.docker.com/install/#supported-platforms[you will need to install it] as part of your job before calling any `docker` commands.
 
 [,yml]
 ----
@@ -175,6 +211,6 @@ jobs:
 [#see-also]
 == See also
 
-* xref:optimize:docker-layer-caching.adoc#[Docker Layer Caching]
+* xref:optimize:docker-layer-caching.adoc[Docker Layer Caching]
 * xref:reference:ROOT:glossary.adoc#job-space[job-space]
 * xref:reference:ROOT:glossary.adoc#primary-container[primary-container]

@@ -1,6 +1,5 @@
-= Webhooks reference
+= Outbound webhooks reference
 :page-platform: Cloud, Server v4+
-:page-description: Reference page for webhooks payloads
 :icons: font
 :experimental:
 
@@ -87,7 +86,7 @@ The following data about the organization associated with the webhook event is p
 [#job]
 === Job
 
-A link:/docs/jobs-steps/[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
+A xref:guides:orchestrate:jobs-steps.adoc[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
 
 The following data about the job associated with the webhook event is provided:
 
@@ -126,7 +125,7 @@ The following data about the job associated with the webhook event is provided:
 [#workflow]
 === Workflow
 
-link:/docs/workflows[Workflows] orchestrate jobs. The following data about the workflow associated with the webhook event is provided:
+xref:guides:orchestrate:workflows.adoc[Workflows] orchestrate jobs. The following data about the workflow associated with the webhook event is provided:
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -219,7 +218,7 @@ The following data about the trigger associated with the webhook event is provid
 [#trigger-parameters]
 === Trigger parameters
 
-NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Bitbucket Data Center. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc#[GitHub Apps integration] page.
+NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Bitbucket Data Center. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -271,7 +270,7 @@ NOTE: Data associated to the pipeline. Present for pipelines associated with Git
 [#vcs]
 === VCS
 
-NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud projects, but not for GitLab, GitHub App or Bitbucket Data Center projects. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App or Bitbucket Data Center parameters.  To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc#[GitHub Apps integration] page.
+NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud projects, but not for GitLab, GitHub App or Bitbucket Data Center projects. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App or Bitbucket Data Center parameters.  To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
 
 
 [.table.table-striped]
@@ -337,7 +336,7 @@ NOTE: The VCS map and its contents are always present for GitHub OAuth app and B
 [#sample-webhook-payloads]
 == Sample webhook payloads
 
-NOTE: To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc#[GitHub Apps integration] page.
+NOTE: To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
 
 [#workflow-completed-for-github-and-bitbucket]
 === `workflow-completed` for GitHub OAuth and Bitbucket Cloud
@@ -621,4 +620,4 @@ NOTE: To find out which GitHub integration you have, see the xref:guides:integra
 [#next-steps]
 == Next steps
 
-* Follow the link:/docs/webhooks-airtable/[Using webhooks with third party tools] tutorial.
+* Follow the xref:guides:integration:webhooks-airtable.adoc[Using webhooks with third party tools] tutorial.

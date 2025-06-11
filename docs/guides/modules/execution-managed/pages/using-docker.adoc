@@ -6,11 +6,11 @@
 
 CAUTION: *Legacy images with the prefix `circleci/`` were link:https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
 
-You can use the Docker execution environment to run your xref:orchestrate:jobs-steps.adoc#[jobs] in Docker containers. The Docker execution environment is accessed using the xref:reference:ROOT:configuration-reference.adoc#docker[Docker executor]. Using Docker increases performance by building only what is required for your application.
+You can use the Docker execution environment to run your xref:orchestrate:jobs-steps.adoc[jobs] in Docker containers. The Docker execution environment is accessed using the xref:reference:ROOT:configuration-reference.adoc#docker[Docker executor]. Using Docker increases performance by building only what is required for your application.
 
-Specify a Docker image in your xref:reference:ROOT:configuration-reference.adoc#[`.circleci/config.yml`] file to spin up a container. All steps in your job will be run in this container.
+Specify a Docker image in your xref:reference:ROOT:configuration-reference.adoc[`.circleci/config.yml`] file to spin up a container. All steps in your job will be run in this container.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -34,7 +34,7 @@ Docker images may be specified in a few ways:
 * By the image name and version tag on Docker Hub, or
 * By using the URL to an image in a registry.
 
-Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, refer to xref:private-images.adoc#[Using Docker Authenticated Pulls].
+Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, refer to xref:private-images.adoc[Using Docker Authenticated Pulls].
 
 The following examples show how you can use public images from various sources:
 
@@ -85,31 +85,31 @@ jobs:
 
 For the Docker execution environment, the following resources classes are available for the x86 architecture:
 
-include::guides:ROOT:partial$execution-resources/docker-resource-table.adoc[]
+include::ROOT:partial$execution-resources/docker-resource-table.adoc[]
 
 [#arm]
 === Arm
 
 The following resource classes are available for Arm with Docker:
 
-include::guides:ROOT:partial$execution-resources/docker-arm-resource-table.adoc[]
+include::ROOT:partial$execution-resources/docker-arm-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
 
-include::guides:ROOT:partial$execution-resources/resource-class-view.adoc[]
+include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
 [#docker-benefits-and-limitations]
 == Docker benefits and limitations
 
-Docker also has built-in image caching and enables you to build, run, and publish Docker images via xref:building-docker-images.adoc#[Remote Docker]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
+Docker also has built-in image caching and enables you to build, run, and publish Docker images via xref:building-docker-images.adoc[Remote Docker]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
 
 * Your application is self-sufficient.
 * Your application requires additional services to be tested.
-* Your application is distributed as a Docker image (requires using xref:building-docker-images.adoc#[Remote Docker]).
-* You want to use `docker compose` (requires using xref:building-docker-images.adoc#[Remote Docker]).
+* Your application is distributed as a Docker image (requires using xref:building-docker-images.adoc[Remote Docker]).
+* You want to use `docker compose` (requires using xref:building-docker-images.adoc[Remote Docker]).
 
-Choosing Docker limits your runs to what is possible from within a Docker container (including our xref:building-docker-images.adoc#[Remote Docker] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
+Choosing Docker limits your runs to what is possible from within a Docker container (including our xref:building-docker-images.adoc[Remote Docker] feature). For instance, if you require low-level access to the network or need to mount external volumes, consider using `machine`.
 
 The table below shows tradeoffs between using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container:
 
@@ -150,7 +150,7 @@ The table below shows tradeoffs between using a `docker` image versus an Ubuntu-
 | No
 | Yes
 
-| xref:optimize:docker-layer-caching.adoc#[Docker layer caching]
+| xref:optimize:docker-layer-caching.adoc[Docker layer caching]
 | Yes
 | Yes
 
@@ -169,9 +169,9 @@ The table below shows tradeoffs between using a `docker` image versus an Ubuntu-
 
 ^(1)^ Some less commonly used execution environments may see up to 90 seconds of start time.
 
-^(2)^ See xref:custom-images.adoc#[Using Custom Docker Images].
+^(2)^ See xref:custom-images.adoc[Using Custom Docker Images].
 
-^(3)^ Requires using xref:building-docker-images.adoc#[Remote Docker].
+^(3)^ Requires using xref:building-docker-images.adoc[Remote Docker].
 
 ^(4)^ While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your plan.
 
@@ -180,19 +180,19 @@ For more information on `machine`, see the next section below.
 [#docker-image-best-practices]
 == Docker image best practices
 
-* If you encounter problems with rate limits imposed by your registry provider, using xref:private-images.adoc#[authenticated Docker pulls] may grant higher limits.
+* If you encounter problems with rate limits imposed by your registry provider, using xref:private-images.adoc[authenticated Docker pulls] may grant higher limits.
 
-* CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to xref:private-images.adoc#[add Docker Hub authentication] to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+* CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to xref:private-images.adoc[add Docker Hub authentication] to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
 
 * Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `+redis@sha256:95f0c9434f37db0a4f...+` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
 
-* If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the xref:custom-images.adoc#[Using Custom-Built Docker Images] page for more information.
+* If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the xref:custom-images.adoc[Using Custom-Built Docker Images] page for more information.
 
 * When you use xref:private-images.adoc#aws-ecr[AWS ECR] images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
 
 * If your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with the Docker images being used.
 
-More details on the Docker executor are available on the xref:reference:ROOT:configuration-reference.adoc#[Configuration reference] page.
+More details on the Docker executor are available on the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
 
 [#using-multiple-docker-images]
 == Using multiple Docker images
@@ -248,7 +248,7 @@ jobs:
 [#caching-docker-images]
 == Caching Docker images
 
-NOTE: This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to xref:optimize:docker-layer-caching.adoc#[Docker layer caching], which is a feature used to speed up building new Docker images in your projects.
+NOTE: This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to xref:optimize:docker-layer-caching.adoc[Docker layer caching], which is a feature used to speed up building new Docker images in your projects.
 
 The time it takes to spin up a Docker container to run a job can vary based on several different factors, such as the size of the image and if some, or all, of the layers are already cached on the underlying Docker host machine.
 
@@ -263,4 +263,4 @@ In summary, the availability of caching is not something that can be controlled 
 [#next-steps]
 == Next steps
 
-Find out more about using xref:circleci-images.adoc#[Convenience Images] with the Docker executor.
+Find out more about using xref:circleci-images.adoc[Convenience Images] with the Docker executor.

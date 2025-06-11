@@ -16,7 +16,7 @@ NOTE: xref:execution-runner:runner-overview.adoc[Self-hosted runners] can invoke
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* A project in CircleCI where you run tests. See the xref:getting-started:create-project.adoc#[Create a project] page to get set up, and xref:test:collect-test-data.adoc#[Collect test data] page for information about tests in your CI/CD pipeline.
+* A project in CircleCI where you run tests. See the xref:getting-started:create-project.adoc[Create a project] page to get set up, and xref:test:collect-test-data.adoc[Collect test data] page for information about tests in your CI/CD pipeline.
 
 == Use `circleci tests run`
 
@@ -58,14 +58,14 @@ jobs:
 
 === 2. Split and run tests
 
-Two commands are available for you to split your tests. We recommend using `circleci tests run` as this enables you to also take advantage of the xref:test:rerun-failed-tests.adoc#[rerun failed tests] feature. The examples in this section use the `circleci tests run` command.
+Two commands are available for you to split your tests. We recommend using `circleci tests run` as this enables you to also take advantage of the xref:test:rerun-failed-tests.adoc[rerun failed tests] feature. The examples in this section use the `circleci tests run` command.
 
 Alternatively, you can see `circleci tests split` examples <<tests-split-examples,here>>
 
 [#tests-run-examples]
 ==== Test framework examples using `circleci tests run`
 
-The following set of examples show how to use the `circelci tests run` command to split and run your tests across parallel execution environments. Using this command also allows you to use the xref:test:rerun-failed-tests.adoc#[rerun failed tests] feature.
+The following set of examples show how to use the `circelci tests run` command to split and run your tests across parallel execution environments. Using this command also allows you to use the xref:test:rerun-failed-tests.adoc[rerun failed tests] feature.
 
 Some notes on the examples below:
 
@@ -566,6 +566,6 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 [#see-also]
 == See also
 
-* xref:parallelism-faster-jobs.adoc#[Test splitting and parallelism]
-* xref:test:test-splitting-tutorial.adoc#[Test splitting tutorial]
+* xref:parallelism-faster-jobs.adoc[Test splitting and parallelism]
+* xref:test:test-splitting-tutorial.adoc[Test splitting tutorial]
 * xref:reference:ROOT:configuration-reference.adoc#parallelism[CircleCI configuration reference: parallelism]

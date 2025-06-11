@@ -8,7 +8,7 @@ CircleCI supports running automatic large language model (LLM) evaluations and e
 
 With the CircleCI Evals orb, you can remove the manual work involved in triggering LLM evaluations, reviewing evaluation results, and determining whether the results meet set expectations.
 
-TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-enabled-applications-through-evaluations.adoc#[methods for testing LLM-enabled applications through evaluations].
+TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-enabled-applications-through-evaluations.adoc[methods for testing LLM-enabled applications through evaluations].
 
 == Concepts
 * **LLM Evaluations**: A method to assess the performance and accuracy of AI models and algorithms. Evaluations measure metrics such as task fidelity, consistency, relevance and coherence, or tone and style.
@@ -34,9 +34,9 @@ image::guides:ROOT:eval-test-diagram-concepts.png[Evaluation testing: Concepts d
 
 == Prerequisites
 
-* A CircleCI account connected to your code. You can sign up xref:getting-started:first-steps.adoc#[for free].
+* A CircleCI account connected to your code. You can sign up xref:getting-started:first-steps.adoc[for free].
 * A CircleCI project with a workflow configured to build your code.
-* CircleCI xref:security:contexts.adoc#[contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
+* CircleCI xref:security:contexts.adoc[contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
 * Existing LLM evaluations on a open source library or third-party tools such as Braintrust or Langsmith.
 
 == 1. Add the CircleCI Evals orb

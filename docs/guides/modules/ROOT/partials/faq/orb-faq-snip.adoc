@@ -15,7 +15,7 @@ _Jobs_ are a definition of what steps/commands to run and the xref:reference:ROO
 [#orbs-on-private-installation-server]
 === Can orbs be used on a private installation of CircleCI server?
 
-Orbs can be used with installations of CircleCI server. For information on importing and using orbs for server, see the xref:server-admin:operator:managing-orbs.adoc#[CircleCI server managing orbs] page.
+Orbs can be used with installations of CircleCI server. For information on importing and using orbs for server, see the xref:server-admin:operator:managing-orbs.adoc[CircleCI server managing orbs] page.
 
 [#report-an-issue-with-a-public-orb]
 === How can I report a bug or issue with a public orb?

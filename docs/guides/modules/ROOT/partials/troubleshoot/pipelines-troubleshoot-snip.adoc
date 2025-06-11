@@ -27,7 +27,7 @@ If your scheduled pipeline is not running, verify the following things:
 
 In the CircleCI application, check the individual job and workflow views for error messages. More often than not, the error is because of formatting errors in your `.circleci/config.yml` file.
 
-See the xref:guides:getting-started:introduction-to-yaml-configurations.adoc#[YAML Introduction] page for more details.
+See the xref:guides:getting-started:introduction-to-yaml-configurations.adoc[YAML Introduction] page for more details.
 
 After checking your `.circleci/config.yml` for formatting errors, search for your issue in the link:https://support.circleci.com/hc/en-us[CircleCI support center].
 
@@ -80,7 +80,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image:your-primary-image:version-tag
+      - image: your/primary-image:version-tag
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

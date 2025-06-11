@@ -12,7 +12,7 @@ The v4.7 release introduces security improvements with the implementation of roo
 
 [#upgrade]
 == Upgrade
-For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade server v4.7 guide].
+For upgrade steps see the xref:installation:upgrade-server.adoc[Upgrade server v4.7 guide].
 
 == Release 4.7.0
 

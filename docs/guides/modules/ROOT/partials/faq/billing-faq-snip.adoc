@@ -155,12 +155,12 @@ Credit usage covers access to compute. We prefer to keep usage costs as low as p
 An active user is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
 
 - Commits from users that trigger builds, including PR Merge commits
-- Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc#[SSH debug]
+- Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc[SSH debug]
 - Approving xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[manual jobs] (approver will be considered the actor of all downstream jobs).
 - Using scheduled workflows
 - Machine users
 
-NOTE: If your project is xref:guides:integration:oss.adoc#[open-source] you will *not* be considered an active user.
+NOTE: If your project is xref:guides:integration:oss.adoc[open-source] you will *not* be considered an active user.
 
 To find a list of your active users, log in to the CircleCI web app, select menu:Plan[Plan Usage > Users].
 
@@ -194,7 +194,7 @@ CircleCI no longer offers discounts for open source customers on the Performance
 [#charge-for-docker-layer-caching]
 === Why does CircleCI charge for Docker layer caching?
 
-Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the xref:guides:optimize:docker-layer-caching.adoc#[Docker Layer Caching] page). DLC costs 200 credits per job run.
+Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching] page). DLC costs 200 credits per job run.
 
 To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
 

@@ -8,4 +8,4 @@ This page describes errors and troubleshooting methods for pipelines and schedul
 
 == Troubleshooting
 
-include::guides:ROOT:partial$troubleshoot/pipelines-troubleshoot-snip.adoc[]
+include::ROOT:partial$troubleshoot/pipelines-troubleshoot-snip.adoc[]

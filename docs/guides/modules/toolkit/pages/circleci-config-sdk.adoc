@@ -4,6 +4,12 @@
 :icons: font
 :experimental:
 
+[#notice]
+== Notice
+The SDK is no longer maintained, supported, or monitored by CircleCI. It will be archived in the next 90 days. It can be forked for those that would like to continue using it.
+
+This SDK is provided on an ‘as-is’ and ‘as available’ basis without any warranties of any kind. CircleCI disclaims all warranties, express or implied, including, but not limited to, all implied warranties of merchantability, title, fitness for a particular purpose, and noninfringement.
+
 [#overview]
 == Overview
 
@@ -12,7 +18,7 @@ The link:https://circleci-public.github.io/circleci-config-sdk-ts[CircleCI Confi
 * Replace writing YAML configuration files
 * Generate a static YAML configuration file
 * Modularize and manage your configuration as JavaScript packages
-* Enhance CircleCI's xref:orchestrate:using-dynamic-configuration.adoc#[dynamic configuration]
+* Enhance CircleCI's xref:orchestrate:using-dynamic-configuration.adoc[dynamic configuration]
 * Build integrations with CLI tools or browser-based experiences
 
 For example, generating a static configuration file can be useful for CLI tools where you want to create a CircleCI configuration, or browser-based tooling, such as a link:https://github.com/CircleCI-Public/visual-config-editor/[visual config editor].

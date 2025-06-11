@@ -27,7 +27,7 @@ You can generate code for the following formats:
 
 To get the code you need to embed a status badge for your project, follow these steps:
 
-include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 [start=4]
 . Select **Status Badges** from the sidebar.
@@ -38,7 +38,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 == Manually generate status badge code
 
-If your project is integrated with CircleCI through GitHub OAuth or Bitbucket Cloud, you can manually generate a status badge for your project. To check which method of GitHub authorization you have, see the xref:github-integration.adoc#[GitHub integration] guide.
+If your project is integrated with CircleCI through GitHub OAuth or Bitbucket Cloud, you can manually generate a status badge for your project. To check which method of GitHub authorization you have, see the xref:github-integration.adoc[GitHub integration] guide.
 
 The manual steps in this section will not work if your project is integrated with GitHub App, GitLab or Bitbucket Data Center
 
@@ -55,10 +55,7 @@ To generate your own status badge, you will need to know, and substitute, the fo
 
 The following examples demonstrate how to generate a status badge for various template languages. Each example also provides a status badge code for a specific branch.
 
-[tabs]
-====
-Markdown::
-+
+[.tab.status.Markdown]
 --
 [,md]
 ----
@@ -72,8 +69,8 @@ Markdown::
 [![CircleCI](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5)
 ----
 --
-Textile::
-+
+
+[.tab.status.Textile]
 --
 [,textile]
 ----
@@ -87,8 +84,8 @@ Textile::
 !https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg!:https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
 ----
 --
-Rdoc::
-+
+
+[.tab.status.Rdoc]
 --
 [,rdoc]
 ----
@@ -102,8 +99,8 @@ Rdoc::
 {<img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5]
 ----
 --
-Asciidoc::
-+
+
+[.tab.status.Asciidoc]
 --
 [,adoc]
 ----
@@ -117,8 +114,8 @@ image:https://circleci.com/gh/circleci/circleci-docs.svg?style=svg["CircleCI", l
 image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg["CircleCI", link="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"]
 ----
 --
-reStructuredText::
-+
+
+[.tab.status.reStructuredText]
 --
 [,rst]
 ----
@@ -135,8 +132,8 @@ reStructuredText::
     :target: https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
 ----
 --
-pod::
-+
+
+[.tab.status.pod]
 --
 [source]
 ----
@@ -150,7 +147,6 @@ pod::
 =for HTML <a href="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"><img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg"></a>
 ----
 --
-====
 
 [#creating-badges-for-private-repositories]
 === Creating badges for private repositories

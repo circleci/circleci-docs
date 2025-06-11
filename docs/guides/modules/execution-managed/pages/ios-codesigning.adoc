@@ -16,7 +16,7 @@ Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
 your repository.
 
 If you have not yet configured your iOS project on CircleCI,
-you can find the configuration instructions in the xref:test:testing-ios.adoc#[Testing iOS Applications document].
+you can find the configuration instructions in the xref:test:testing-ios.adoc[Testing iOS Applications document].
 
 NOTE: CircleCI only officially supports Fastlane Match for code signing. Other methods may be used, but are not guaranteed to work and are unsupported.
 
@@ -94,7 +94,7 @@ project repository and the certificates / keys repository to the CircleCI projec
 
 To add a user key:
 
-include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 [start=4]
 . In the sidebar menu, select **SSH Keys**.

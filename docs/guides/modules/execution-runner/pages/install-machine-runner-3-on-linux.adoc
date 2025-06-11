@@ -31,53 +31,43 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * link:https://gnupg.org/download/[GPG 2.1+]
 
-* The xref:toolkit:local-cli.adoc#[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::guides:ROOT:partial$runner/terms.adoc[]
+include::ROOT:partial$runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-[tabs]
-====
-Web_app_installation::
-+
+[.tab.machine-runner.Web_app_installation]
 --
-include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
-+
+[.tab.machine-runner.CLI_installation]
 --
-include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 --
-====
 
 [#install-circleci-runner]
 == 2. Install CircleCI runner
-[tabs]
-====
-debian::
-+
+[.tab.machine-runner-package-installation.debian]
 --
-include::guides:ROOT:partial$runner/machine-runner-deb-package-install.adoc[]
+include::ROOT:partial$runner/machine-runner-deb-package-install.adoc[]
 --
-rpm::
-+
+[.tab.machine-runner-package-installation.rpm]
 --
-include::guides:ROOT:partial$runner/machine-runner-rpm-package-install.adoc[]
+include::ROOT:partial$runner/machine-runner-rpm-package-install.adoc[]
 --
-====
 
-include::guides:ROOT:partial$runner/machine-runner-example.adoc[]
+include::ROOT:partial$runner/machine-runner-example.adoc[]
 
 [#troubleshooting]
 == Troubleshooting
 
-Refer to the xref:troubleshoot-self-hosted-runner.adoc#machine-runner[Troubleshoot Machine Runner section] of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner section>> of the Troubleshoot Self-hosted Runner guide if you encounter issues installing or running machine runner on Linux.
 
 [#additional-resources]
 == Additional resources

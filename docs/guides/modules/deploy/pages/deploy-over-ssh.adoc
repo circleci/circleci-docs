@@ -27,7 +27,7 @@ Add the SSH key for the target to which you are deploying (these instructions ar
 
 . Select **Add SSH Key**.
 
-For additional context, see the xref:integration:add-ssh-key.adoc#[Adding an SSH Key to CircleCI] page.
+For additional context, see the xref:integration:add-ssh-key.adoc[Adding an SSH Key to CircleCI] page.
 
 [#ssh-username-and-hostname]
 == 2. Add the SSH username and hostname

@@ -9,13 +9,12 @@ This document is a comprehensive guide to operating and configuring jobs with th
 [#running-your-first-job]
 == Running your first job with container runner
 
-Follow the instructions outlined on the xref:container-runner-installation.adoc#[Container runner installation] page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
+Follow the instructions outlined on the xref:container-runner-installation.adoc[Container runner installation] page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
 
 [#sample-configuration-container-agent]
 == Container runner sample configuration
 
-[source,yaml]
-----
+```yaml
 version: 2.1
 
 jobs:
@@ -31,7 +30,7 @@ workflows:
   build-workflow:
     jobs:
       - build
-----
+```
 
 [#resource-class-configuration-custom-pod]
 == Resource class configuration and custom task pod configuration
@@ -43,7 +42,7 @@ Each resource class supports the following parameters:
 - `token`: The runner resource class token used to claim tasks (**required**).
 - Custom Kubernetes pod configuration for pods used to run CircleCI jobs.
 
-The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. <<customizable-service-containers>> can be used to provide different container configuration between service containers and the main task container.
+The pod configuration takes all fields that a normal link:https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#debugging[Kubernetes pod does]. If service containers are used in a CircleCI job, the first `container` spec is used for all containers within the task pod. <<customizable-service-containers,Customizable service containers>> can be used to provide different container configuration between service containers and the main task container.
 
 The following fields will be overwritten by container runner to ensure correct task function, and expected CircleCI configuration behavior:
 
@@ -58,8 +57,7 @@ The following fields will be overwritten by container runner to ensure correct t
 
 Below is a full configuration example, containing two resource classes:
 
-[source,yaml]
-----
+```yaml
 agent:
   resourceClasses:
     circleci-runner/resourceClass:
@@ -88,7 +86,7 @@ agent:
       spec:
         imagePullSecrets:
           - name: "other"
-----
+```
 
 [#customizable-service-containers]
 === Customizable service containers
@@ -139,7 +137,6 @@ agent:
 ----
 
 And the following CircleCI `config.yml` snippet:
-
 [source,yaml]
 ----
 jobs:
@@ -251,9 +248,9 @@ Container runner sets link:https://kubernetes.io/docs/concepts/overview/working-
 
 These values take the following form: `app.circleci.com/container-spec-secondary-<ordinal-number>: {"selectionScope":"<global|resource-class>","imageMatchType":"<exact|prefix|pattern|default>"}`.
 
-For instance, consider again the configurations from the <<customizable-service-containers-example>> above. These would lead to the following annotations being added to the pod, which you can also find on the pod description in the job's Task lifecycle step:
+For instance, consider again the configurations from the <<#customizable-service-containers-example,example>> above. These would lead to the following annotations being added to the pod, which you can also find on the pod description in the job's Task lifecycle step:
 
-[source,yaml]
+[source]
 ----
 Annotations:
   app.circleci.com/container-spec-secondary-1: {"selectionScope":"global","imageMatchType":"exact"}  <- Corresponds to "cimg/redis:6"
@@ -316,8 +313,7 @@ Using the configuration described above provisions a Kubernetes secret containin
 
 The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
 
-[source,yaml]
-----
+```yaml
 agent:
   resourceClasses:
     circleci-runner/resourceClass:
@@ -327,15 +323,14 @@ agent:
 
     circleci-runner/resourceClass2:
   customSecret: <name_of_secret>
-----
+```
 
 The corresponding custom secret would have 2 fields:
 
-[source,yaml]
-----
+```yaml
 circleci-runner.resourceClass: <my-token>
 circleci-runner.resourceClass2: <my-token-2>
-----
+```
 
 Due to Kubernetes secret key character constraints, the `/` separating the namespace and resource class name is replaced with a `.` character. Other than this, the name must exactly match the `resourceClasses` config to match the token with the correct configuration.
 
@@ -377,9 +372,10 @@ If xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun job w
 * link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
 ** Get
 
-In addition, <<logging-containers>> require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
+In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:
 
 * Pods, Pods/Logs
+** List
 ** Watch
 
 By default a `Role`, `RoleBinding` and service account are created and attached to the container runner pod, but if you customize these, the above are the minimum required permissions.
@@ -410,15 +406,14 @@ Logging containers require a service account token with the minimal privileges t
 
 Container runner currently sets default resource limits and requests on the logging container, they are:
 
-[source,yaml]
-----
+```yaml
 requests:
   cpu: 50m
   memory: 64Mi
 limits:
   cpu: 100m
   memory: 128Mi
-----
+```
 
 [#constraint-validation]
 == Constraint validation
@@ -435,8 +430,7 @@ Currently the following constraints are checked against the cluster state:
 
 As an example of how this works, consider the following resource class configuration:
 
-[source,yaml]
-----
+```yaml
 agent:
   resourceClasses:
     circleci-runner/resourceClass:
@@ -447,7 +441,7 @@ agent:
 
     circleci-runner/resourceClass2:
       token: TOKEN2
-----
+```
 
 The first resource class has a node selector to ensure it is scheduled to nodes with an SSD. For some reason during operations the cluster no longer has any nodes with that label. The constraint checker will now fail checks for `circleci-runner/resourceClass` and will disable claiming jobs until it finds nodes with the correct label again. `circleci-runner/resourceClass2` claiming is not affected, the checks for different resource classes are independent of each other.
 
@@ -471,15 +465,14 @@ To build container images in a container-agent job, a user may use:
 
 Note: Third-party tools should be used at your own discretion.
 
-While jobs that run with container-agent cannot use CircleCI's xref:execution-managed:building-docker-images.adoc#[`setup_remote_docker`] feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
+While jobs that run with container-agent cannot use CircleCI's xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
 
 You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used kaniko to build a container image.
 
 Another option is to use a tool called link:https://github.com/nestybox/sysbox[Sysbox] which must first be link:https://github.com/nestybox/sysbox/blob/master/docs/user-guide/install-k8s.md[installed on your Kubernetes cluster].
 Once installed, update the container-agent <<resource-class-configuration-custom-pod,resource class configuration>> and apply the changes:
 
-[source,yaml]
-----
+```yaml
 resourceClasses:
  <namespace>/<resourceClass>:
   token: <token>
@@ -489,27 +482,26 @@ resourceClasses:
   spec:
     runtimeClassName: sysbox-runc
     ...
-----
+```
 
 With Sysbox installed and the runtime class updated in your container-agent resource class configuration, you may now use Sysbox in your CircleCI config, for example:
 
-[source,yaml]
-----
+```yaml
 docker:
-  - image: registry.nestybox.com/nestybox/ubuntu-bionic-systemd-docker
+  - image: nestybox/ubuntu-noble-systemd-docker
     entrypoint: ["dockerd"]
     command: ["--host=unix:///var/run/docker.sock"]
-----
+```
 
 [#limitations]
 == Limitations
 
 * Any known xref:runner-overview.adoc#limitations[limitation] for the existing self-hosted runner will continue to be a limitation of container agent.
 * Only Kubernetes container environments are supported at this time.
-* xref:execution-managed:building-docker-images.adoc#[`setup_remote_docker`] as a command is not supported with container runner.  See <<building-container-images>>.
+* xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] as a command is not supported with container runner.  See <<building-container-images>>.
 * `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:reference:ROOT:configuration-reference.adoc#oidc[Configuration Reference].
 
 [#faqs]
 == FAQs
 
-Visit the xref:runner-faqs.adoc#container-runner-specific-faqs[runner FAQ page] to see commonly asked questions about container runner.
+Visit the <<runner-faqs#container-runner-specific-faqs,runner FAQ page>> to see commonly asked questions about container runner.

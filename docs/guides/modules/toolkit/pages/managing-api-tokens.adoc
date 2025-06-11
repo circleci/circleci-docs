@@ -13,7 +13,7 @@ In CircleCI you can create personal and project API tokens:
 
 *Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2), and grant full read and write permissions.
 *Project API tokens*:: These tokens allow you to read/write information for specific projects. Project tokens have three scope options: _Status_, _Read Only_, and _Admin_.
-* _Status_ tokens grant read access to the project's build statuses. Used for xref:integration:status-badges.adoc#[embedding status badges].
+* _Status_ tokens grant read access to the project's build statuses. Used for xref:integration:status-badges.adoc[embedding status badges].
 * _Read Only_ tokens grant read only access to the project's API (v1 only).
 * - _Admin_ tokens grant read and write access for the project's API (v1 only).
 
@@ -85,6 +85,6 @@ When the confirmation window appears, enter the text `DELETE` in the form and cl
 
 Some possible use cases for an API token might be:
 
-* xref:integration:status-badges.adoc#[Embed Build Status Badges] in your project's README or other external page.
+* xref:integration:status-badges.adoc[Embed Build Status Badges] in your project's README or other external page.
 * xref:optimize:artifacts.adoc#downloading-all-artifacts-for-a-build-on-circleci[Download a build's artifacts] for safekeeping.
-* xref:security:inject-environment-variables-with-api.adoc#[Inject environment variables] into a build.
+* xref:security:inject-environment-variables-with-api.adoc[Inject environment variables] into a build.

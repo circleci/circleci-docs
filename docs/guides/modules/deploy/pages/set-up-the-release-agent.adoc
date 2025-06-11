@@ -4,11 +4,11 @@
 :icons: font
 :experimental:
 
-This tutorial shows how to manually install the CircleCI release agent into your Kubernetes cluster. This manual installation guide is an alternative to using the in-app deploys set up process as described in the xref:set-up-circleci-deploys.adoc#[Set up CircleCI deploys] page.
+This tutorial shows how to manually install the CircleCI release agent into your Kubernetes cluster. This manual installation guide is an alternative to using the in-app deploys set up process as described in the xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys] page.
 
 == Prerequisites
 
-Before setting up the CircleCI release agent in your Kubernetes cluster, check you have an environment integration set up in the CircleCI web app for your deployment. See the xref:set-up-circleci-deploys.adoc#[Set up CircleCI deploys] page for steps and prerequisites.
+Before setting up the CircleCI release agent in your Kubernetes cluster, check you have an environment integration set up in the CircleCI web app for your deployment. See the xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys] page for steps and prerequisites.
 
 == 1. Add the release agent into your Kubernetes cluster
 
@@ -67,4 +67,4 @@ Once you have run this command, you can check your environment is set up by navi
 
 In this tutorial you have integrated your Kubernetes cluster with CircleCI. You can now:
 
-* xref:configure-your-kubernetes-components.adoc#[Configure your Kubernetes components]
+* xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]

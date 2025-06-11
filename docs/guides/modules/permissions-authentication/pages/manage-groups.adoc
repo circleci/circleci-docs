@@ -4,9 +4,9 @@
 :icons: font
 :experimental:
 
-NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc#[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc#[GitHub App], the content on this page applies to you.
+NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc[GitHub App], the content on this page applies to you.
 
-Use groups to manage access to projects and features. By creating groups based on teams or roles within your organization, you can, for example, add a user to a group to give them access to all required projects (for example, mobile projects, DevOps projects). For more information about the roles available, and their associated permissions, see the xref:roles-and-permissions-overview.adoc#[Roles and permissions] overview page.
+Use groups to manage access to projects and features. By creating groups based on teams or roles within your organization, you can, for example, add a user to a group to give them access to all required projects (for example, mobile projects, DevOps projects). For more information about the roles available, and their associated permissions, see the xref:roles-and-permissions-overview.adoc[Roles and permissions] overview page.
 
 The how-to guides on this page provide steps for some common group management tasks.
 
@@ -14,7 +14,7 @@ The how-to guides on this page provide steps for some common group management ta
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* At least one project created in your organization. See the xref:getting-started:create-project.adoc#[Create a project] page for instructions.
+* At least one project created in your organization. See the xref:getting-started:create-project.adoc[Create a project] page for instructions.
 
 [#create-a-group]
 == Create a group

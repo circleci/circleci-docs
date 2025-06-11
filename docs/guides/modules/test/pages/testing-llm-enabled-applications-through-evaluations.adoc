@@ -64,9 +64,9 @@ CircleCI provides an link:https://circleci.com/developer/orbs/orb/circleci/evals
 * Tests evaluation results to determine if they meet specified conditions.
 
 [NOTE]
-****
+====
 Reach out to mailto:ai-feedback@circleci.com[] if you have a feature request for the Evals orb.
-****
+====
 
 ==== Run evaluations in CircleCI
 
@@ -155,4 +155,4 @@ image::guides:ROOT:llmops/openai-context.png[Project Settings > LLMOps: View con
 
 == Next steps
 
-* Follow our how to guide to xref:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc#[automate LLM evaluation testing with the CircleCI evals orb].
+* Follow our how to guide to xref:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[automate LLM evaluation testing with the CircleCI evals orb].

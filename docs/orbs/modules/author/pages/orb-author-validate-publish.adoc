@@ -4,7 +4,7 @@
 :experimental:
 :icons: font
 
-This guide covers the steps required to create a simple xref:use:orb-intro.adoc#[orb], manually, without using the orb development kit. We recommend the xref:orb-development-kit.adoc#[orb development kit] for most orb projects.
+This guide covers the steps required to create a simple xref:use:orb-intro.adoc[orb], manually, without using the orb development kit. We recommend the xref:orb-development-kit.adoc[orb development kit] for most orb projects.
 
 [#create-a-namespace]
 == 1. Create a namespace

@@ -19,7 +19,7 @@ As both a downstream user or publisher of software, you can protect yourself and
 [#using-contexts]
 === Using contexts
 
-When using CircleCI, you can split credentials and secrets into multiple xref:contexts.adoc#[contexts] that can be used individually, or combined in a build step. Avoid putting everything into the org-global context. This means that if there is a security error in one build step, only a small subset of your credentials are exposed. This effort is known as the link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[principle of least]. As an example, the step where you download dependencies and execute their build
+When using CircleCI, you can split credentials and secrets into multiple xref:contexts.adoc[contexts] that can be used individually, or combined in a build step. Avoid putting everything into the org-global context. This means that if there is a security error in one build step, only a small subset of your credentials are exposed. This effort is known as the link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[principle of least]. As an example, the step where you download dependencies and execute their build
 scripts should not have access to your deploy keys because nothing in that step needs them.
 
 Additionally, you can put sensitive contexts used for deploying and signing software into xref:contexts.adoc#restrict-a-context[restricted contexts] that are governed by your VCS groups. These secrets are only then accessible to authorized users. In combination with restricted contexts, you can reduce the likelihood of exposing credentials to malicious code by also using VCS branch protection, which requires a review before merging.
@@ -63,4 +63,4 @@ Using dependency pinning with hashes like this prevents malicious binaries or pa
 [#see-also]
 == See also
 
-* xref:security-recommendations.adoc#[Security recommendations]
+* xref:security-recommendations.adoc[Security recommendations]

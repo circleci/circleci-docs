@@ -17,7 +17,7 @@ Resource classes help you identify a pool of self-hosted runners, which allow yo
 
 Optionally, you can give your resource class a description.
 
-NOTE: If you are already using xref:orbs:use:orb-intro.adoc#[orbs], you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].
+NOTE: If you are already using xref:orbs:use:orb-intro.adoc[orbs], you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].
 
 [#task-agent]
 == Task-agent

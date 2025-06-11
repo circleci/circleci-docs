@@ -13,7 +13,7 @@ The `values.yaml` file for installing CircleCI should be prepared according to t
 
 === a. Configure global values
 
-NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values.adoc#[Example `values.yaml`] page.
+NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values.adoc[Example `values.yaml`] page.
 
 In the `global.container` section of your `values.yaml` file:
 
@@ -178,4 +178,4 @@ After the Helm deployment, depending on your installation, it may be necessary t
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:phase-4-configure-nomad-clients.adoc#[Phase 4 - Configure Nomad clients] guide.
+Once the steps on this page are complete, go to the xref:phase-4-configure-nomad-clients.adoc[Phase 4 - Configure Nomad clients] guide.

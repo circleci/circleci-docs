@@ -15,13 +15,13 @@ image::guides:ROOT:create-project/what-project.png[Screenshot showing options to
 . Give your project a descriptive name and then select btn:[Next: Set up a pipeline].
 +
 [TIP]
-****
+====
 **Project names** must meet the following requirements:
 
 * Begin with a letter.
 * Be 3-40 characters long.
 * Contain only letters, numbers, or the following characters: `" - _ . : ! & + [ ] " ;`.
-****
+====
 +
 .Name your project
 image::guides:ROOT:create-project/enter-project-details.png[Screenshot showing options to enter project details]

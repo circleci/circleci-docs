@@ -4,9 +4,9 @@
 :experimental:
 :icons: font
 
-include::guides:ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
-With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc#[CircleCI CLI] or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 
 image::guides:ROOT:config-editor-main.png[Configuration Editor]
 
@@ -68,10 +68,10 @@ Similar features to the in-app configuration editor can be found in the official
 
 Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from VS Code, and be notified of workflow status changes.
 
-For more information, see the xref:toolkit:vs-code-extension-overview.adoc#[VS Code extension overview].
+For more information, see the xref:toolkit:vs-code-extension-overview.adoc[VS Code extension overview].
 
 [#see-also]
 == See also
 
-* xref:reference:ROOT:configuration-reference.adoc#[CircleCI Configuration Reference]
-* xref:toolkit:local-cli.adoc#[Using the CircleCI CLI]
+* xref:reference:ROOT:configuration-reference.adoc[CircleCI Configuration Reference]
+* xref:toolkit:local-cli.adoc[Using the CircleCI CLI]

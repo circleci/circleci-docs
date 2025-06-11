@@ -38,7 +38,7 @@ the status of the skipped builds will not be reported even though the checks wil
 == Prerequisites
 
 * You must be using the cloud-hosted version of CircleCI.
-* Your project must be using xref:orchestrate:workflows.adoc#[Workflows].
+* Your project must be using xref:orchestrate:workflows.adoc[Workflows].
 * You must be an admin on your GitHub repository to authorize installation of the CircleCI Checks integration.
 
 [#enable-github-checks]
@@ -108,4 +108,4 @@ Go to menu:Settings[Branches] in GitHub and select the *Edit* button on the prot
 [#next-steps]
 == Next steps
 
-* xref:add-ssh-key.adoc#[Add an SSH key to CircleCI]
+* xref:add-ssh-key.adoc[Add an SSH key to CircleCI]

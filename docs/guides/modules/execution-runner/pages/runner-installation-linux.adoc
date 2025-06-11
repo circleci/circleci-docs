@@ -6,7 +6,7 @@
 :machine:
 :linux:
 
-CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux.adoc#[machine runner 3 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux.adoc[machine runner 3 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
 
 This page describes how to install CircleCI's machine runner on Linux for **CircleCI server** customers.
 
@@ -31,35 +31,30 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * `rpmbuild` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only)
 
-* The xref:toolkit:local-cli.adoc#[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::guides:ROOT:partial$runner/terms.adoc[]
+include::ROOT:partial$runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-[tabs]
-====
-Web_app_installation::
-+
+[.tab.machine-runner.Web_app_installation]
 --
-include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
-+
+[.tab.machine-runner.CLI_installation]
 --
-include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 --
-====
 
 [#download-the-launch-agent-script]
 == 2. Download launch-agent script and install binary
 
-include::guides:ROOT:partial$runner/launch-agent-download.adoc[]
+include::ROOT:partial$runner/launch-agent-download.adoc[]
 
 [#create-the-circleci-user-and-working-directory]
 == 3. Create `circleci` user and working directory
@@ -174,9 +169,9 @@ You can now start machine runner as follows:
 sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent-config.yaml
 ```
 
-You can also optionally run machine runner <<enable-the-systemd-unit,as a systemd service>>.
+You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
-include::guides:ROOT:partial$runner/machine-runner-example.adoc[]
+include::ROOT:partial$runner/machine-runner-example.adoc[]
 
 The job will then execute using your self-hosted runner when you push the config to your VCS provider.
 

@@ -20,7 +20,7 @@ Unix and Linux shells can expose sensitive data in several ways. It is important
 [#mitigation-techniques]
 == Mitigation techniques
 
-In this section, several techniques to help mitigate the risks discussed above are presented. We will focus on methods for using `curl` commands and xref:toolkit:local-cli.adoc#[the CircleCI CLI] securely with the Bash shell.
+In this section, several techniques to help mitigate the risks discussed above are presented. We will focus on methods for using `curl` commands and xref:toolkit:local-cli.adoc[the CircleCI CLI] securely with the Bash shell.
 
 [#general-precautions]
 === General precautions
@@ -63,7 +63,7 @@ export MY_VAR
 [#use-the-circleci-cli]
 === Use the CircleCI CLI
 
-Use the xref:toolkit:local-cli.adoc#[CircleCI local CLI] instead of `curl` commands when possible. The CLI takes extra precautions to avoid leaking secrets when performing sensitive operations. For example, when xref:contexts.adoc#creating-environment-variables[creating environment variables], the CLI will prompt you to enter the secret rather than accepting it as a command line argument.
+Use the xref:toolkit:local-cli.adoc[CircleCI local CLI] instead of `curl` commands when possible. The CLI takes extra precautions to avoid leaking secrets when performing sensitive operations. For example, when xref:contexts.adoc#creating-environment-variables[creating environment variables], the CLI will prompt you to enter the secret rather than accepting it as a command line argument.
 
 If writing a shell script that uses the CircleCI CLI, remember that in Bash you can avoid exposing secrets stored in environment variables or text by using the `<<<` construct, which does not spawn a new process while piping a value:
 

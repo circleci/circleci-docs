@@ -13,7 +13,7 @@ Docker layer caching (DLC) is beneficial if building Docker images is a regular 
 
 DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent job runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the less time your image-building jobs will take to run.
 
-DLC can be used with both the `machine` executor and in a xref:execution-managed:building-docker-images.adoc#[remote Docker environment] (`setup_remote_docker`).
+DLC can be used with both the `machine` executor and in a xref:execution-managed:building-docker-images.adoc[remote Docker environment] (`setup_remote_docker`).
 
 DLC is charged at 200 credits per job run. For more information about DLC charges, see the xref:plans-pricing:credits.adoc#charge-for-docker-layer-caching[FAQ].
 
@@ -23,7 +23,7 @@ DLC is charged at 200 credits per job run. For more information about DLC charge
 [#remote-docker-environment]
 === Remote Docker environment
 
-To use DLC with the Docker execution environment, you will need to configure your job to run in a xref:execution-managed:building-docker-images.adoc#[Remote Docker Environment]. To do this, add `docker_layer_caching: true` under the `setup_remote_docker` key in your xref:reference:ROOT:configuration-reference.adoc#[`.circleci/config.yml`] file:
+To use DLC with the Docker execution environment, you will need to configure your job to run in a xref:execution-managed:building-docker-images.adoc[Remote Docker Environment]. To do this, add `docker_layer_caching: true` under the `setup_remote_docker` key in your xref:reference:ROOT:configuration-reference.adoc[`.circleci/config.yml`] file:
 
 [,yaml]
 ----
@@ -86,7 +86,7 @@ jobs:
       - run: docker build .
 ----
 
-NOTE: DLC has *no* effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the xref:execution-managed:using-docker.adoc#[`docker` executor] and appear in the *Spin up Environment* step on your jobs pages.
+NOTE: DLC has *no* effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the xref:execution-managed:using-docker.adoc[`docker` executor] and appear in the *Spin up Environment* step on your jobs pages.
 
 [#buildx-builder-instances]
 === Buildx builder instances

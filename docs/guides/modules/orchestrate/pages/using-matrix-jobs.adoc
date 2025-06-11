@@ -11,7 +11,7 @@ Matrix jobs provide a way to run a job multiple times with arguments. Arguments 
 
 In the following example, the `test` job is run across a Linux Docker container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job, different parameters are passed to set both the OS and the Node.js version:
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [source,yaml]
 ----

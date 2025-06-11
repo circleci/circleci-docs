@@ -26,8 +26,8 @@ Some advantages to using OIDC over using AWS credentials to pull images from ECR
 [#prerequisites]
 == Prerequisites
 
-* A xref:getting-started:first-steps.adoc#[CircleCI account] integrated with a supported VCS.
-* A project `.circleci/config.yml` file containing a job that uses the xref:execution-managed:using-docker.adoc#[Docker execution environment], for which you want to use a Docker image stored in AWS ECR.
+* A xref:getting-started:first-steps.adoc[CircleCI account] integrated with a supported VCS.
+* A project `.circleci/config.yml` file containing a job that uses the xref:execution-managed:using-docker.adoc[Docker execution environment], for which you want to use a Docker image stored in AWS ECR.
 * Set up CircleCI as a trusted identity provider in AWS. Follow the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS instructions].
 
 [#set-up-iam-role]

@@ -129,7 +129,7 @@ CircleCI job execution infrastructure is in the `us-east-1` region, so using `us
 
 You can pull images from ECR for your jobs using a few different methods.
 
-The best practice approach is to pull from ECR using OpenID Connect (OIDC). See the xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc#[Pull an image from AWS ECR with OIDC] how-to guide for full details.
+The best practice approach is to pull from ECR using OpenID Connect (OIDC). See the xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC] how-to guide for full details.
 
 Some advantages to using OIDC over using AWS credentials to pull images from ECR:
 

@@ -76,7 +76,7 @@ In the CircleCI application, set the following xref:security:set-environment-var
 [#configuration-walkthrough]
 == Configuration walkthrough
 
-Every CircleCI project requires a configuration file called xref:reference:ROOT:configuration-reference.adoc#[`.circleci/config.yml`]. Follow the steps below to create a complete `config.yml` file.
+Every CircleCI project requires a configuration file called xref:reference:ROOT:configuration-reference.adoc[`.circleci/config.yml`]. Follow the steps below to create a complete `config.yml` file.
 
 NOTE: The sample project described in this section makes use of the CircleCI AWS-ECR and AWS-ECS orbs, which can be found in the CircleCI developer hub using the following links:
 
@@ -135,7 +135,7 @@ workflows:
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
 ----
 
-Note the use of Workflows to define job run order/concurrency. See the xref:orchestrate:workflows.adoc#[Using Workflows to Orchestrate Jobs] page for more information.
+Note the use of Workflows to define job run order/concurrency. See the xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs] page for more information.
 
 [#see-also]
 == See also

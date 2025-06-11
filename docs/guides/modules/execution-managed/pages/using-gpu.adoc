@@ -4,7 +4,7 @@
 :experimental:
 :icons: font
 
-include::guides:ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]
+include::ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]
 
 You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to NVIDIA GPUs for specialized workloads.
 
@@ -25,10 +25,7 @@ jobs:
 
 To use the Windows GPU execution environment, you can either choose to use the Windows orb and specify the built-in GPU executor, or use the machine executor and specify a Windows GPU-enabled image. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/windows[Orb Registry page] for full details, and the link:https://circleci.com/developer/images?imageType=machine[Developer Hub] for full details of available machine executor images.
 
-[tabs]
-====
-Windows_GPU_with_orb::
-+
+[.tab.gpublock.Windows_GPU_with_orb]
 --
 [,yaml]
 ----
@@ -44,8 +41,8 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ----
 --
-Windows_GPU_with_machine::
-+
+
+[.tab.gpublock.Windows_GPU_with_machine]
 --
 [,yaml]
 ----
@@ -59,7 +56,6 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ----
 --
-====
 
 [#available-resource-classes]
 == Available resource classes
@@ -82,15 +78,15 @@ jobs:
       - run: nvidia-smi
 ----
 
-include::guides:ROOT:partial$execution-resources/gpu-linux-resource-table.adoc[]
+include::ROOT:partial$execution-resources/gpu-linux-resource-table.adoc[]
 
 === Windows GPU
 
 For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
 
-include::guides:ROOT:partial$execution-resources/gpu-windows-resource-table.adoc[]
+include::ROOT:partial$execution-resources/gpu-windows-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
 
-include::guides:ROOT:partial$execution-resources/resource-class-view.adoc[]
+include::ROOT:partial$execution-resources/resource-class-view.adoc[]

@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-Machine provisioner controls how xref:reference:ROOT:configuration-reference.adoc#machine[`machine`] executor and xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs are run.
+Machine provisioner controls how xref:reference:ROOT:configuration-reference.adoc#machine[`machine`] executor and xref:guides:execution-managed:building-docker-images.adoc[Remote Docker] jobs are run.
 
 This section describes the available configuration options for machine provisioner.
 
@@ -19,10 +19,11 @@ The following configuration options are for the machine provisioner provider, ei
 
 [#aws]
 === AWS
-Configure machine provisioner to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the execution environment installation pages for more information:
+Configure machine provisioner to work with AWS EC2 in your `values.yaml` file. During installation you will have set up a security group and authentication. See the following guides:
 
 * xref:installation:phase-3-aws-execution-environments.adoc#machine-provisioner[Installation Phase 3 AWS - Execution Environments]
 * xref:installation:phase-3-gcp-execution-environments.adoc#machine-provisioner[Installation Phase 3 GCP - Execution Environments]
+
 The information in this section describes post-installation configuration options for machine provisioner.
 
 [#windows-image-aws]

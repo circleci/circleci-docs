@@ -5,12 +5,12 @@
 :experimental:
 :machine:
 
-This page describes how to install CircleCI's machine runner with the Docker executor on server. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the xref:container-runner.adoc#[Container runner] page.
+This page describes how to install CircleCI's machine runner with the Docker executor on server. If you are looking to set up self-hosted runners in a private Kubernetes cluster, visit the <<container-runner#,Container runner>> page.
 
 [#new-recommended-method-container-runner]
 == Supported method for Docker installation (container runner)
 
-The xref:container-runner.adoc#[container runner] is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
+The <<container-runner#,container runner>> is the recommended approach for running containerized jobs on self-hosted runners. Container runner offers the ability to seamlessly define, publish, and use custom Docker images during job execution, as well as the ability to easily manage dependencies or libraries through custom Docker images instead of enumerating dependencies as part of `steps` in the `.circleci/config.yml` file.
 
 [#machine-approach-with-docker]
 == Machine-based approach with Docker
@@ -20,7 +20,7 @@ CAUTION: The instructions below are not supported for Cloud customers.
 [#runner-terms]
 === Runner terms
 
-include::guides:ROOT:partial$runner/terms.adoc[]
+include::ROOT:partial$runner/terms.adoc[]
 
 [#machine-runner-prerequsites]
 === Prerequisites
@@ -37,20 +37,15 @@ The number of containers running in parallel on the host is constrained by the h
 [#create-namespace-and-resource-class]
 === 1. Create namespace and resource class
 
-[tabs]
-====
-Web_app_installation::
-+
+[.tab.machine-runner.Web_app_installation]
 --
-include::guides:ROOT:partial$runner/install-with-web-app-steps.adoc[]
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
-+
+[.tab.machine-runner.CLI_installation]
 --
-include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 --
-====
 
 [#create-a-dockerfile-that-extends-the-machine-runner-image]
 === 2. Create a Dockerfile that extends the machine runner image

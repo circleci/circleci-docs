@@ -14,10 +14,10 @@ CircleCI has various differences in setup and configuration from TeamCity. For t
 
 . **Read (or at least browse) this document** to solidify conceptual differences.
 . **Quickly build and run a simple https://circleci.com/docs/hello-world/#section=getting-started[Hello World job] in any repository**. This configuration demonstrates the simplicity of our YAML setup, and it showcases how to define both an execution environment and the steps to run within it. All jobs on CircleCI share this format.
-. **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our xref:toolkit:examples-and-guides-overview.adoc#[Examples and Guides Overview] for various examples in different languages and frameworks.
-. **After finishing one job, setup your other jobs on CircleCI and then xref:orchestrate:workflows.adoc#[configure a workflow]**. This would essentially migrate your Build Chain.
-. **Next, xref:optimize:optimizations.adoc[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
-. **Throughout this process, consult the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
+. **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our xref:toolkit:examples-and-guides-overview.adoc[Examples and Guides Overview] for various examples in different languages and frameworks.
+. **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/workflows/[configure a workflow]**. This would essentially migrate your Build Chain.
+. **Next, https://circleci.com/docs/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
+. **Throughout this process, consult the https://circleci.com/docs/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?
@@ -287,9 +287,9 @@ jobs:
 
 In TeamCity, build steps are chosen from a list of defined Runner Types (for example, Visual Studio, Maven, Gradle, etc.). On CircleCI, step definition can flexibly take any commands you would run in a Terminal or Command Prompt.
 
-Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/language-javascript/[Node.js project] may use a Node container and `npm` commands. Visit our xref:toolkit:examples-and-guides-overview.adoc#[Examples and Guides Overview] for various language and framework examples.
+Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/language-javascript/[Node.js project] may use a Node container and `npm` commands. Visit our xref:toolkit:examples-and-guides-overview.adoc[Examples and Guides Overview] for various language and framework examples.
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

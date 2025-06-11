@@ -11,7 +11,7 @@ This document describes how to set up and customize testing for an iOS applicati
 
 CircleCI offers support for building, testing, and deploying iOS projects on macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the <<supported-xcode-versions,software manifest>> for each Xcode image.
 
-Refer to xref:execution-managed:ios-codesigning.adoc#[iOS code signing projects] and xref:execution-managed:hello-world-macos.adoc#[getting started on macOS] pages for further information.
+Refer to xref:execution-managed:ios-codesigning.adoc[iOS code signing projects] and xref:execution-managed:hello-world-macos.adoc[getting started on macOS] pages for further information.
 
 [#supported-xcode-versions]
 == Supported Xcode versions
@@ -19,7 +19,7 @@ Refer to xref:execution-managed:ios-codesigning.adoc#[iOS code signing projects]
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-include::guides:ROOT:partial$execution-resources/xcode-silicon-vm.adoc[]
+include::ROOT:partial$execution-resources/xcode-silicon-vm.adoc[]
 
 [#getting-started]
 == Getting started
@@ -168,7 +168,7 @@ The environment variable `FL_OUTPUT_DIR` is the artifact directory where Fastlan
 
 We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
 
-For more information on how to get started with Fastlane Match, visit the xref:execution-managed:ios-codesigning.adoc#[iOS code signing] page.
+For more information on how to get started with Fastlane Match, visit the xref:execution-managed:ios-codesigning.adoc[iOS code signing] page.
 
 [#using-ruby]
 == Using Ruby
@@ -364,7 +364,7 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 [#configuring-deployment]
 == Configuring deployment
 
-After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the xref:deploy:deploy-ios-applications.adoc#[deploying iOS apps guide].
+After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the xref:deploy:deploy-ios-applications.adoc[deploying iOS apps guide].
 
 [#troubleshooting]
 == Troubleshooting
@@ -375,4 +375,4 @@ If you are facing build failures while executing your jobs, check out our link:h
 == Next steps
 
 * See the link:https://github.com/CircleCI-Public/circleci-demo-ios[`circleci-demo-ios` GitHub repository] for a full example of how to build, test, sign and deploy an iOS  project using Fastlane on CircleCI.
-* See the xref:execution-managed:ios-codesigning.adoc#[iOS code signing] page to learn how to configure Fastlane Match for your project.
+* See the xref:execution-managed:ios-codesigning.adoc[iOS code signing] page to learn how to configure Fastlane Match for your project.

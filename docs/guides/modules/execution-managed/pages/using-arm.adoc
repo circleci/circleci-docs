@@ -6,10 +6,7 @@
 
 You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes Arm resources, and then specifying an Arm resource class.
 
-[tabs]
-====
-Cloud::
-+
+[.tab.armblock.Cloud]
 --
 [,yaml]
 ----
@@ -24,8 +21,8 @@ jobs:
       - run: echo "Hello, Arm!"
 ----
 --
-Server::
-+
+
+[.tab.armblock.Server]
 --
 [,yaml]
 ----
@@ -40,21 +37,20 @@ jobs:
       - run: echo "Hello, Arm!"
 ----
 --
-====
 
 [#available-resource-classes]
 == Available resource classes
 
 The following Arm resources are available part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
 
-include::guides:ROOT:partial$execution-resources/arm-resource-table.adoc[]
+include::ROOT:partial$execution-resources/arm-resource-table.adoc[]
 
 For pricing and plans information, see the link:https://circleci.com/product/features/resource-classes/[resource class pricing overview].
 
 [#view-resource-usage]
 === View resource usage
 
-include::guides:ROOT:partial$execution-resources/resource-class-view.adoc[]
+include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
 == Images with Arm support
 

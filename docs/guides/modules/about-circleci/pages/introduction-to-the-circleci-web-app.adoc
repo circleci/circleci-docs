@@ -18,7 +18,7 @@ Inside the application, you will find the features including the following:
 
 This page is not an exhaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
-NOTE: Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for xref:integration:github-apps-integration.adoc#[GitHub App], xref:integration:gitlab-integration.adoc#[GitLab] and xref:integration:bitbucket-data-center-integration.adoc#[Bitbucket Data Center] projects. For an overview of feature availability for each integration type, see the xref:integration:version-control-system-integration-overview.adoc#[VCS integration overview] page.
+NOTE: Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for xref:integration:github-apps-integration.adoc[GitHub App], xref:integration:gitlab-integration.adoc[GitLab] and xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] projects. For an overview of feature availability for each integration type, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
 
 == User homepage
 
@@ -65,13 +65,13 @@ From your organization home page you have access to org-level options. You can c
 
 **Pipelines**: View all pipelines associated with your organization, You can expand each pipeline to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. Multi-workflow pipelines display a grey bar to the left. You can see the status of each workflow and expand them individually to view the status of each job.
 
-**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:getting-started:create-project.adoc#[create/set up new projects].
+**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:getting-started:create-project.adoc[create/set up new projects].
 
-**Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy:deploys-overview.adoc#[Deploys overview] page.
+**Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy:deploys-overview.adoc[Deploys overview] page.
 
-**Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights:insights.adoc#[Using Insights] page.
+**Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights:insights.adoc[Using Insights] page.
 
-**Self-Hosted Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc#[Self-hosted runners overview] page.
+**Self-Hosted Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc[Self-hosted runners overview] page.
 
 **Organization Settings**: Settings for your organization including org roles and groups, contexts, security, orbs and more. You can find your organization ID on this page.
 
@@ -115,13 +115,13 @@ If you do not see your project and it is not currently building on CircleCI, che
 [#projects]
 == Projects
 
-TIP: The options available to you will be different depending on how you xref:integration:version-control-system-integration-overview.adoc#[integrate your code] with CircleCI.
+TIP: The options available to you will be different depending on how you xref:integration:version-control-system-integration-overview.adoc[integrate your code] with CircleCI.
 
 Projects associated with your organization appear on the **Projects** page. You have the option to:
 
 * xref:getting-started:create-project.adoc#create-a-project[Create a project]
 * xref:getting-started:create-project.adoc#set-up-a-project[Set Up any project] that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:integration:notifications.adoc#[email notifications] for the project's status.
+* _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:integration:notifications.adoc[email notifications] for the project's status.
 * _Unfollow_ a project to removes it from your Pipelines page and unsubscribe from notifications.
 
 Select the ellipsis menu icon (icon:ellipsis-h[ellipsis]) in a project row to access project assets, as follows:
@@ -146,22 +146,22 @@ Access project settings in one of the following ways:
 
 image::guides:ROOT:find-project-settings.png[Where to find project settings page in the CircleCI web app]
 
-The following settings are available in the project settings page. If you do not see an option, this indicates it is not supported for your xref:integration:version-control-system-integration-overview.adoc#[integration type]:
+The following settings are available in the project settings page. If you do not see an option, this indicates it is not supported for your xref:integration:version-control-system-integration-overview.adoc[integration type]:
 
 **Overview**: Displays your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
 
-**People**: Provides a list of users who have been grated project-specific permissions. For more information, see the xref:permissions-authentication:manage-roles-and-permissions.adoc#[Manage roles and permissions] page.
+**People**: Provides a list of users who have been granted project-specific permissions. For more information, see the xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions] page.
 
-**Groups**: Provides a list of user groups that have been grated project-specific permissions. For more information, see the xref:permissions-authentication:manage-groups.adoc#[Manage groups] page.
+**Groups**: Provides a list of user groups that have been granted project-specific permissions. For more information, see the xref:permissions-authentication:manage-groups.adoc[Manage groups] page.
 
 **Pipelines**: Provides a list of pipelines that have been set up for the project, or the option to begin setting up pipelines if none exist.
 
 **Triggers**: Depending on your integration type, the triggers page shows either:
 
 * A list of configured xref:orchestrate:pipelines.adoc#pipelines-and-triggers[pipeline triggers]
-* Set up UI for scheduled pipelines if available for your integration. To set up a xref:orchestrate:scheduled-pipelines.adoc#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+* Set up UI for scheduled pipelines if available for your integration. To set up a xref:orchestrate:scheduled-pipelines.adoc[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
-**Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy:deploys-overview.adoc#[Deploys overview] page.
+**Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy:deploys-overview.adoc[Deploys overview] page.
 
 **Advanced**: Toggle options on and off for:
 
@@ -172,6 +172,7 @@ The following settings are available in the project settings page. If you do not
 * Auto-cancel redundant workflows
 * Free and open source
 * Enable dynamic config using setup workflows.
+* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config].
 
 More information on these settings can be found on this page, as well as in our documentation.
 
@@ -184,8 +185,6 @@ More information on these settings can be found on this page, as well as in our 
 **LLMOps**: Set up integrations with LLMOps providers to streamline the process of configuring pipelines to build and test LLM-enabled applications.
 
 **Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
-
-**VS Code Integration**: Provides information and a link to organization settings to enable the xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config] feature, which is currently in open-preview for some customers.
 
 **Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
 
@@ -216,7 +215,7 @@ The self-hosted runners page displays an inventory of your self-hosted runners a
 
 image::guides:ROOT:web_ui_runner.png[Runner inventory]
 
-Learn more and get started with self-hosted runners on the xref:execution-runner:runner-overview.adoc#[CircleCI self-hosted runners overview].
+Learn more and get started with self-hosted runners on the xref:execution-runner:runner-overview.adoc[CircleCI self-hosted runners overview].
 
 [#organization-settings]
 == Organization settings
@@ -233,22 +232,22 @@ Learn more and get started with self-hosted runners on the xref:execution-runner
 
 **Security**: Allows you to set whether or not you want to allow the use of partner and community orbs, or private orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
 
-**Policies**: Provides a list of all policies that have been set up for your organization. For more information on config policies, see the xref:config-policies:config-policy-management-overview.adoc#[Config policy management overview].
+**Policies**: Provides a list of all policies that have been set up for your organization. For more information on config policies, see the xref:config-policies:config-policy-management-overview.adoc[Config policy management overview].
 
-**Advanced**: Enable/disable the use of xref:toolkit:intelligent-summaries.adoc#[intelligent summaries] for contextual help with build failures. Some orgs have the option to allow xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-vs-code-with-unversioned-config[triggering pipelines with unversioned config] from VS Code.
+**Advanced**: Enable/disable the use of xref:toolkit:intelligent-summaries.adoc[intelligent summaries] for contextual help with build failures. Some orgs have the option to allow xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-vs-code-with-unversioned-config[triggering pipelines with unversioned config] from VS Code.
 
 **Orbs**: View a list of all the orbs authored by your organization.
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
 
-**Deploys**: Find links to set up release markers or release monitoring for your projects. Enable/disable autodetected deployments, which allows CircleCI to automatically detect deployments in your projects and create release markers for you.
+**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects. Enable/disable autodetected deployments, which allows CircleCI to automatically detect deployments in your projects and create deploy markers for you.
 
 **Integrations**: Set up integrations with self-hosted version control systems.
 
 [#plan]
 == Plan
 
-If you have administrative privileges, the plan overview and upgrade page displays the features available in your current plan, as well as a snapshot of your usage. Details of the next tier of plan upgrade are also shown. You can read more about plans in CircleCI's xref:plans-pricing:plan-overview.adoc#[Plan] section.
+If you have administrative privileges, the plan overview and upgrade page displays the features available in your current plan, as well as a snapshot of your usage. Details of the next tier of plan upgrade are also shown. You can read more about plans in CircleCI's xref:plans-pricing:plan-overview.adoc[Plan] section.
 
 If you are on a paid plan, you can choose to share your plan. This allows any organization you belong to, to share and run builds on your paid-for plan. You can also transfer your plan to another organization.
 
@@ -263,7 +262,7 @@ In terms of network and storage, usage can be tricky to understand, so it is sug
 
 image::guides:ROOT:web_ui_plan_network.png[Network usage]
 
-You can learn more about billing in the billing section of the xref:reference:ROOT:faq.adoc#billing[FAQ] page.
+You can learn more about billing in the billing section of the xref:server-admin:operator:faq.adoc#billing[FAQ] page.
 
 [#usage-controls]
 === Usage controls
@@ -274,5 +273,5 @@ image::guides:ROOT:web_ui_plan_controls.png[Usage controls]
 
 == Next steps
 
-- xref:concepts.adoc#[CircleCI concepts]
-- xref:getting-started:config-editor.adoc#[Using the CircleCI in-app configuration editor]
+- xref:concepts.adoc[CircleCI concepts]
+- xref:getting-started:config-editor.adoc[Using the CircleCI in-app configuration editor]

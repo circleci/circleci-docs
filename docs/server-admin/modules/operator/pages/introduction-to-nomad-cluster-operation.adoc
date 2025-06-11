@@ -17,7 +17,7 @@ image::guides:ROOT:nomad-diagram-v2.png[Diagram of the Nomad cluster]
 
 - **Nomad client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) to take full advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
 
-- **Nomad jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses xref:guides:optimize:parallelism-faster-jobs.adoc#[parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
+- **Nomad jobs:** A Nomad job is a specification, provided by a user, that declares a workload for Nomad. A Nomad job corresponds to an execution of a CircleCI job. If the job uses xref:guides:optimize:parallelism-faster-jobs.adoc[parallelism], for example `parallelism: 10`, then Nomad runs 10 jobs.
 
 - **Build agent:** Build agent is a Go program written by CircleCI that executes steps in a job and reports the results. Build agent is executed as the main process inside a Nomad job.
 
@@ -127,5 +127,5 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* Read the xref:managing-user-accounts.adoc#[Managing user accounts] guide.
+* Read the xref:managing-user-accounts.adoc[Managing user accounts] guide.
 endif::[]

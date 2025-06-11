@@ -40,25 +40,22 @@ You can modify this behaviour by restricting builds to branches that have pull r
 
 NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Center integration.
 
-[tabs]
-====
-GitHub_App::
-+
+[.tab.create-project.GitHub_App]
 --
 
-include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
 . In the sidebar, click *Triggers*.
 . Edit an existing GitHub App trigger or add a new GitHub App trigger.
-. In the *Run on* dropdown list, select *PR opened or pushed to, default branch pushes, tag pushes*.
+. In the *Run on* dropdown list, select *PR opened or pushed to, default branch and tag pushes*.
 
 image::guides:ROOT:triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requests]
 --
-GitHub_OAuth_Bitbucket_Cloud::
-+
+
+[.tab.create-project.GitHub_OAuth_/_Bitbucket_Cloud]
 --
 
-include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 . In the sidebar, click *Advanced*
 . Enable the *Only build pull requests* option.
 
@@ -74,13 +71,13 @@ Enabling *Only build pull requests* may result in duplicate builds. You can find
 
 NOTE: CircleCI will always build all commits from your project's _default branch and tags_ regardless of any setting.
 --
-GitLab::
-+
+
+[.tab.create-project.GitLab]
 --
 
 NOTE: Although the Add/Edit Trigger pages in GitLab Cloud and GitLab self-managed slightly differ, the following steps apply to both integrations.
 
-include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
 . In the sidebar, click *Triggers*.
 . Edit an existing GitLab trigger or add a new GitLab trigger.
@@ -92,13 +89,12 @@ image::guides:ROOT:triggers/gitlab-cloud-trigger-filter-only-mr.png[Set the Only
 .Trigger page for GitLab self-managed
 image::guides:ROOT:triggers/gitlab-self-managed-trigger-filter-only-mr.png[Set the Only Build Merge Requests option in GitLab self-managed trigger]
 --
-====
 
 
 [#build-pull-requests-from-forked-repositories]
 === Build pull requests from forked repositories
 
-include::guides:ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
@@ -109,7 +105,7 @@ If a user submits a pull request to your repository from a fork, but no pipeline
 [#pass-secrets-to-builds-from-forked-pull-requests]
 === Pass secrets to builds from forked pull requests
 
-include::guides:ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
@@ -117,12 +113,12 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 * <<private-environment-variables,Environment variables>> set through the application.
 * xref:github-integration.adoc#deploy-keys-and-user-keys[Deployment keys and user keys].
-* Passphraseless private SSH keys you have xref:add-ssh-key.adoc#[added to CircleCI] to access arbitrary hosts during a build.
-* xref:deploy:deploy-to-aws.adoc#[AWS permissions] and configuration files.
+* Passphraseless private SSH keys you have xref:add-ssh-key.adoc[added to CircleCI] to access arbitrary hosts during a build.
+* xref:deploy:deploy-to-aws.adoc[AWS permissions] and configuration files.
 
 Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
-If you wish to use OpenID Connect in your project, the OIDC tokens will _only_ be generated if you have this setting turned on. This prevents your token data being shared with forked builds unless you require it. If you do choose to use OIDC with open source projects by enabling the *Pass secrets to builds from forked pull requests* option, you *must* check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require. For more information on OIDC, see the xref:permissions-authentication:openid-connect-tokens.adoc#[Using OpenID Connect tokens in jobs] page.
+If you wish to use OpenID Connect in your project, the OIDC tokens will _only_ be generated if you have this setting turned on. This prevents your token data being shared with forked builds unless you require it. If you do choose to use OIDC with open source projects by enabling the *Pass secrets to builds from forked pull requests* option, you *must* check the `oidc.circleci.com/vcs-origin` claims in your policies to avoid forked builds having access to resources outside those that you require. For more information on OIDC, see the xref:permissions-authentication:openid-connect-tokens.adoc[Using OpenID Connect tokens in jobs] page.
 
 If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the *Pass secrets to builds from forked pull requests* option:
 
@@ -158,4 +154,4 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 
 == See also
 
-Refer to the xref:toolkit:example-configs.adoc#[Examples] document for more public and open source project configuration links organized by CircleCI features and by programming language.
+Refer to the xref:toolkit:example-configs.adoc[Examples] document for more public and open source project configuration links organized by CircleCI features and by programming language.

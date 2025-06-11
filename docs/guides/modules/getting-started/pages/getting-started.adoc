@@ -10,7 +10,7 @@ This quickstart provides a guided tour through setting up a project, collaborati
 * Use the VS Code extension to debug and extend your config.
 * SSH into a build to debug your project.
 
-If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:reference:ROOT:configuration-reference.adoc#[Configuration reference].
+If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:reference:ROOT:configuration-reference.adoc[Configuration reference].
 
 == Prerequisites
 
@@ -45,12 +45,9 @@ pass:[<!-- vale off -->]
 <br />
 ++++
 
-include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
-[tabs]
-====
-GitHub_App::
-+
+[.tab.quickstart1.GitHub_App]
 --
 ++++
 <div class="include-two-up">
@@ -100,8 +97,8 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 </div>
 ++++
 --
-GitLab_&_Bitbucket_Data_Center::
-+
+
+[.tab.quickstart1.GitLab_&_Bitbucket_Data_Center]
 --
 ++++
 <div class="include-two-up">
@@ -161,8 +158,8 @@ GitLab_&_Bitbucket_Data_Center::
 </div>
 ++++
 --
-GitHub_OAuth_app_&_Bitbucket_Cloud::
-+
+
+[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket_Cloud]
 --
 ++++
 <div class="include-two-up">
@@ -200,7 +197,6 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 </div>
 ++++
 --
-====
 
 ++++
 <div class='section-header-wrapper'>
@@ -290,6 +286,6 @@ pass:[<!-- vale on -->]
 == Next steps
 
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
-* xref:config-intro.adoc#[Introduction to configuration]
-* xref:about-circleci:concepts.adoc#[CircleCI concepts]
-* xref:plans-pricing:plan-free.adoc#[Benefits of CircleCI Free Plan]
+* xref:config-intro.adoc[Introduction to configuration]
+* xref:about-circleci:concepts.adoc[CircleCI concepts]
+* xref:plans-pricing:plan-free.adoc[Benefits of CircleCI Free Plan]

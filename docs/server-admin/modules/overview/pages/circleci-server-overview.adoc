@@ -95,7 +95,7 @@ The Nomad control plane runs inside your Kubernetes cluster. Nomad clients, whic
 
 CircleCI server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
-For more information on Nomad architecture and use, see the xref:operator:introduction-to-nomad-cluster-operation.adoc#[Introduction to Nomad Cluster operation].
+For more information on Nomad architecture and use, see the xref:operator:introduction-to-nomad-cluster-operation.adoc[Introduction to Nomad Cluster operation].
 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, Google Cloud Storage, or other supported options). Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
 
@@ -401,15 +401,15 @@ We do our best to support a wide range of platforms for installation. We use env
 
 CircleCI server can be installed using cloud resources (GCP or AWS), locally, and in an air-gapped environment. For installation instructions, refer to the following:
 
-* Cloud installation guides for xref:installation:phase-1-aws-prerequisites.adoc#[AWS] and xref:installation:phase-1-gcp-prerequisites.adoc#[GCP]. Follow the sections for your chosen cloud provider.
-* xref:installation:phase-1-aws-prerequisites.adoc#[Local] installation. Notes are provided in the main installation guide to show which sections are optional, or different, for local installations.
-* xref:air-gapped-installation:phase-1-prerequisites.adoc#[Air-gapped] installation guide. This guide is designed to be used along-side key sections of the main installation guides for xref:installation:phase-1-aws-prerequisites.adoc#[AWS] and xref:installation:phase-1-gcp-prerequisites.adoc#[GCP].
+* Cloud installation guides for xref:server-admin:installation:phase-1-aws-prerequisites.adoc[AWS] and xref:server-admin:installation:phase-1-gcp-prerequisites.adoc[GCP]. Follow the sections for your chosen cloud provider.
+* xref:server-admin:installation:phase-1-aws-prerequisites.adoc[Local] installation. Notes are provided in the main installation guide to show which sections are optional, or different, for local installations.
+* xref:air-gapped-installation:phase-1-prerequisites.adoc[Air-gapped] installation guide. This guide is designed to be used along-side key sections of the main installation guides for xref:server-admin:installation:phase-1-aws-prerequisites.adoc[AWS] and xref:server-admin:installation:phase-1-gcp-prerequisites.adoc[GCP].
 
 ifndef::pdf[]
 
 [#next-steps]
 == Next steps
 
-* xref:release-notes.adoc#[CircleCI server v4.7 release notes].
-* Server v4.7 installation prerequisites for xref:installation:phase-1-aws-prerequisites.adoc#[AWS] and xref:installation:phase-1-gcp-prerequisites.adoc#[GCP].
+* xref:release-notes.adoc[CircleCI server v4.7 release notes].
+* Server v4.7 installation prerequisites for xref:server-admin:installation:phase-1-aws-prerequisites.adoc[AWS] and xref:server-admin:installation:phase-1-gcp-prerequisites.adoc[GCP].
 endif::pdf[]

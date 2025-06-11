@@ -12,14 +12,14 @@ CircleCI provides different options for code coverage reporting using built-in C
 [#view-coverage-on-circleci]
 == View coverage on CircleCI
 
-You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports are stored as build artifacts where they can be viewed or downloaded. See our xref:optimize:artifacts.adoc#[build artifacts] guide for more information on downloading coverage reports stored in your artifacts.
+You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports are stored as build artifacts where they can be viewed or downloaded. See our xref:optimize:artifacts.adoc[build artifacts] guide for more information on downloading coverage reports stored in your artifacts.
 
 image::guides:ROOT:artifacts.png[Artifacts tab in the web app]
 
 [#language-specific-code-coverage-options]
 == Language-specific code coverage options
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [#ruby]
 === Ruby
@@ -390,6 +390,6 @@ Read more about Codecov's orb in their link:https://circleci.com/blog/making-cod
 [#coveralls]
 === Coveralls
 
-If you are a Coveralls customer, follow their link:https://docs.coveralls.io/[guide to set up your coverage stats]. You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI xref:security:env-vars.adoc#[environment variables].
+If you are a Coveralls customer, follow their link:https://docs.coveralls.io/[guide to set up your coverage stats]. You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI xref:security:env-vars.adoc[environment variables].
 
 Coveralls will automatically handle the merging of coverage stats in concurrent jobs.

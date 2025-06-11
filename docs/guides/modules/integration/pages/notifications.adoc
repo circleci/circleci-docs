@@ -4,7 +4,7 @@
 :experimental:
 :icons: font
 
-CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc#[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
 [,yaml]
 ----
@@ -96,7 +96,7 @@ workflows:
           context: slack-secrets
 ----
 
-See xref:getting-started:slack-orb-tutorial.adoc#[Using the Slack Orb] for a full tutorial with examples.
+See xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb] for a full tutorial with examples.
 
 CircleCI's Slack orb can be used for other types of notification, including notifying a Slack channel of a pending approval. For more information and to view usage examples, see the link:https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb page].
 
@@ -132,5 +132,5 @@ Replace the values in brackets (`< >`) with your own details.
 
 == See also
 
-* xref:orbs:use:orb-intro.adoc#[Orbs Introduction]
-* xref:getting-started:slack-orb-tutorial.adoc#[Using the Slack Orb]
+* xref:orbs:use:orb-intro.adoc[Orbs Introduction]
+* xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb]

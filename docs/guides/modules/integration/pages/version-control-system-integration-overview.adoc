@@ -17,7 +17,6 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * Bitbucket Cloud
 * Bitbucket Data Center
 +
-include::guides:ROOT:partial$notes/bitbucket-data-center-closed-preview.adoc[]
 
 link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
 
@@ -32,7 +31,7 @@ The following tables show feature support per VCS for **CircleCI cloud**, along 
 * Features that are supported for a VCS integration type are indicated with [.circle-green]#**Yes**#.
 * Features that are not supported are indicated with [.circle-red]#**No**#.
 
-include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
 === Code checkout and repository integration
 
@@ -68,7 +67,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref
+| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 | [.circle-red]#**No** ^1^#
@@ -77,7 +76,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 
-| xref
+| xref:enable-checks.adoc#github-check-and-github-status-updates[Status Updates]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -86,7 +85,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref ^3^
+| xref:enable-checks.adoc[GitHub Checks] ^3^
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -96,9 +95,9 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 |===
 
-^1^ _Possible_
+^1^ _Possible using xref:orchestrate:dynamic-config.adoc[dynamic configuration]._
 
-^2^ _Enable by using the GitHub App integration alongside the OAuth app integration._
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration.adoc#using-github-app-functionality[here]._
 
 ^3^ _When GitHub Checks are enabled we automatically disable GitHub status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
 
@@ -112,7 +111,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
-| xref
+| xref:orchestrate:custom-webhooks.adoc[Custom _inbound_ webhook triggers]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -121,7 +120,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref
+| xref:orchestrate:scheduled-pipelines.adoc[Scheduled pipelines]
 | [.circle-red]#**No** ^1^#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -139,7 +138,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -148,7 +147,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Trigger pipelines on non-push events]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes** ^3^#
 | [.circle-green]#**Yes** ^3^#
@@ -157,7 +156,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:outbound-webhooks.adoc[Outbound webhooks]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -167,9 +166,9 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 |===
 
-^1^ _One alternative is to use ato generate a URL that you `curl` with a 3rd party scheduling tool._
+^1^ _One alternative is to use a xref:orchestrate:custom-webhooks.adoc[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
 
-^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details_
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration.adoc#using-github-app-functionality[here]._
 
 ^3^ _For GitLab Cloud and GitLab self-managed projects, you can choose to trigger pipelines upon the creation of merge requests, by selecting the *Only Build Merge Requests* trigger filter._
 
@@ -181,7 +180,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 [cols=8*, options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
-| xref
+| xref:optimize:artifacts.adoc[Artifact storage]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -190,7 +189,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Test run config from VS Code]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -199,7 +198,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:orchestrate:dynamic-config.adoc[Dynamic configuration]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -208,7 +207,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:test:rerun-failed-tests.adoc[Rerun failed tests]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -217,7 +216,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| xref
+| xref:orbs:use:orb-intro.adoc[Orbs]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -226,7 +225,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -235,7 +234,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:optimize:docker-layer-caching.adoc[Docker layer caching]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -244,7 +243,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -253,7 +252,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:orchestrate:skip-build.adoc#auto-cancel[Auto-cancel redundant workflows]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -262,7 +261,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:getting-started:config-editor.adoc[In-app config viewing and editing]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -271,7 +270,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:insights:insights-tests.adoc[Test insights]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -280,7 +279,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref
+| xref:oss.adoc#only-build-pull-requests[Only build pull requests]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -297,7 +296,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 [cols=8*, options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
-| xref
+| xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect tokens]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -306,7 +305,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:config-policies:config-policy-management-overview.adoc[Config policies]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -315,7 +314,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:security:audit-logs.adoc[Audit logs]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -324,7 +323,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:security:contexts.adoc#security-group-restrictions[Security group context restriction]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -333,7 +332,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:security:contexts.adoc#expression-restrictions[Expression context restriction]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -349,7 +348,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 [cols=8*, options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
-| xref
+| xref:oss.adoc[OSS support]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -358,7 +357,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref
+| xref:oss.adoc#build-pull-requests-from-forked-repositories[Build pull requests from forked repositories]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -367,7 +366,7 @@ include::guides:ROOT:partial$tips/check-github-type.adoc[Check your GitHub integ
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref
+| xref:oss.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass secrets to builds from forked pull requests]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#

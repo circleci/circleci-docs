@@ -39,7 +39,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-Once you have imported your code into GitHub, Bitbucket or GitLab, you can start creating a project in CircleCI using the xref:getting-started:getting-started.adoc#[Getting Started guide].
+Once you have imported your code into GitHub, Bitbucket or GitLab, you can start creating a project in CircleCI using the xref:getting-started:getting-started.adoc[Getting Started guide].
 
 [#build-configuration]
 == Build configuration
@@ -57,7 +57,7 @@ The AWS CodeBuild and CircleCI configurations will be different. It may be helpf
 [#configuration-comparison]
 == Configuration comparison
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]

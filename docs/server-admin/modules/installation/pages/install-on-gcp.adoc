@@ -1,1 +1,1 @@
-= Install on GCP
+= Install CircleCI server on GCP

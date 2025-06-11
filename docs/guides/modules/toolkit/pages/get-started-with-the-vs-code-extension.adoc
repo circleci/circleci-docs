@@ -4,7 +4,7 @@
 :icons: font
 :experimental:
 
-This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview.adoc#[overview].
+This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview.adoc[overview].
 
 [#prerequisites]
 == Prerequisites
@@ -15,7 +15,7 @@ Before starting this tutorial, make sure you have:
 
 * A CircleCI account (you can link:https://circleci.com/signup/[sign up for free]).
 
-* A xref:getting-started:create-project.adoc#[project] you follow that is building on CircleCI.
+* A xref:getting-started:create-project.adoc[project] you follow that is building on CircleCI.
 
 * CircleCI server users: your self-hosted server URL.
 
@@ -46,7 +46,7 @@ If your VS Code workspace contains one or more CircleCI projects, the extension 
 
 If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (icon:cog[]) at the top of the pipelines panel), and select your projects manually. Only projects you follow are listed for selection.
 
-NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for xref:integration:github-apps-integration.adoc#[GitHub App] and xref:integration:gitlab-integration.adoc#[GitLab] projects. Select your project manually from the settings page.
+NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for xref:integration:github-apps-integration.adoc[GitHub App] and xref:integration:gitlab-integration.adoc[GitLab] projects. Select your project manually from the settings page.
 
 image::guides:ROOT:vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
 
@@ -74,7 +74,7 @@ You can configure specific workflow status changes you want to be notified for i
 [#configure-ssh-keys]
 == 6. Configure SSH keys
 
-The extension allows you to xref:execution-managed:ssh-access-jobs.adoc#[rerun jobs with SSH] directly from within VS Code, either in the terminal or in a link:https://code.visualstudio.com/docs/remote/ssh[remote VS Code window].
+The extension allows you to xref:execution-managed:ssh-access-jobs.adoc[rerun jobs with SSH] directly from within VS Code, either in the terminal or in a link:https://code.visualstudio.com/docs/remote/ssh[remote VS Code window].
 
 The SSH functionality uses the same key that you use for your VCS. The easiest way to configure SSH keys for the extension is to try re-running a job with SSH, by clicking on the action icon next to the job.
 
@@ -86,7 +86,7 @@ Alternatively, you can configure SSH keys for the extension manually through the
 
 To open an SSH session in a dedicated VS Code remote window, you need to install the link:https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer[official Remote Explorer extension for VS Code].
 
-NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:integration:github-apps-integration.adoc#[GitHub App] and xref:integration:gitlab-integration.adoc#[GitLab] projects.
+NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:integration:github-apps-integration.adoc[GitHub App] and xref:integration:gitlab-integration.adoc[GitLab] projects.
 
 image::guides:ROOT:vs_code_extension_ssh_remote_window.png[VS Code with remote development window]
 

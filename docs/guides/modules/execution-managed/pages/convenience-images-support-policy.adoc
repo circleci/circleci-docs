@@ -7,7 +7,7 @@
 [#overview]
 == Overview
 
-This document outlines the xref:circleci-images.adoc#[CircleCI Docker convenience images] release, update, and deprecation policy.
+This document outlines the xref:circleci-images.adoc[CircleCI Docker convenience images] release, update, and deprecation policy.
 
 This policy applies to all CircleCI convenience images we publish to the `cimg` namespace on Docker Hub.
 

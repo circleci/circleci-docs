@@ -13,7 +13,7 @@ Using Fastlane, CircleCI can automatically deploy iOS apps to various services. 
 
 Deployment _lanes_ can be combined with testing _lanes_ so that the app is automatically deployed upon a successful build and test.
 
-TIP: Using the deployment examples on this page requires that code signing is already configured for your project. To learn how to set up code signing, see the xref:execution-managed:ios-codesigning.adoc#[Setting up code signing] page.
+TIP: Using the deployment examples on this page requires that code signing is already configured for your project. To learn how to set up code signing, see the xref:execution-managed:ios-codesigning.adoc[Setting up code signing] page.
 
 [#best-practices]
 == Best practices
@@ -223,7 +223,7 @@ end
 
 Firebase is a distribution service from Google. Deploying to Firebase is simplified by installing the link:https://github.com/fastlane/fastlane-plugin-firebase_app_distribution[Firebase app distribution plugin].
 
-[#fastlane-plugin-setup-fb]
+[#fastlane-plugin-setup]
 === 1. Fastlane plugin setup
 
 To set up the plugin for your project, on your local machine, open your project directory in Terminal and run the following command:
@@ -247,7 +247,7 @@ Firebase requires a token to used during authentication. To generate the token, 
 . Complete the sign in via the browser window, then copy the token provided in the Terminal output.
 . Go to your project settings in CircleCI and create a new environment variable named `FIREBASE_TOKEN` with the value of the token.
 
-[#fastlane-configuration-fb]
+[#3-fastlane-configuration]
 === 3. Fastlane configuration
 
 The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the link:https://console.firebase.google.com[Firebase Console], then go to *Project Settings \-> General*. Under *Your apps*, you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
@@ -310,7 +310,7 @@ NOTE: The Firebase plugin may cause errors when run with the macOS system Ruby. 
 
 link:https://appcenter.ms/[Visual Studio App Center] (formally HockeyApp), is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the link:https://github.com/microsoft/fastlane-plugin-appcenter[App Center plugin].
 
-[#fastlane-plugin-setup-vs]
+[#fastlane-plugin-setup-2]
 === 1. Fastlane plugin setup
 
 To set up the plugin for your project, on your local machine open your project directory in Terminal and run the following command:
@@ -389,7 +389,7 @@ image::guides:ROOT:testfairy-open-preferences.png[TestFairy preferences image]
 . On the Preferences page, go to the API Key section and copy your API Key.
 . Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key
 
-[#fastlane-configuration-tf]
+[#fastlane-configuration]
 === Fastlane configuration
 
 To configure uploading to TestFairy within Fastlane, see the following example:

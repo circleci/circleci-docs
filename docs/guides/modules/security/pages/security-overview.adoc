@@ -15,12 +15,12 @@ Rotating secrets regularly means your secrets are only active for a certain amou
 
 Understand the role and permission systems of other platforms you use outside of CircleCI. For example, IAM permissions on AWS, or GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
 
-Follow the advice in xref:security-recommendations.adoc#[Secure secrets handling] when writing scripts and working on the command-line.
+Follow the advice in xref:security-recommendations.adoc[Secure secrets handling] when writing scripts and working on the command-line.
 
 [#secure-your-environment-variables]
 ## Secure your environment variables
 
-Use xref:contexts.adoc#restrict-a-context[restricted contexts] with teams to share environment variables with a select security group.
+Use xref:security:contexts.adoc#restrict-a-context[restricted contexts] with teams to share environment variables with a select security group.
 
 If your project is **open source and public**, make note of whether or not you want to share environment variables.
 
@@ -41,11 +41,11 @@ If a VCS account is compromised, a nefarious actor could push code or potentiall
 
 ## See also
 
-- xref:security.adoc#[Security features]
-- xref:security-recommendations.adoc#[Secure secrets handling]
-- xref:contexts.adoc#[Contexts]
-- xref:ip-ranges.adoc#[IP ranges]
-- xref:permissions-authentication:openid-connect-tokens.adoc#[Open ID connect tokens]
-- xref:env-vars.adoc#[Using environment variables]
+- xref:security.adoc[Security features]
+- xref:security-recommendations.adoc[Secure secrets handling]
+- xref:contexts.adoc[Contexts]
+- xref:ip-ranges.adoc[IP ranges]
+- xref:permissions-authentication:openid-connect-tokens.adoc[Open ID connect tokens]
+- xref:env-vars.adoc[Using environment variables]
 
 // - Ensure you audit who has access to SSH keys in your organization.

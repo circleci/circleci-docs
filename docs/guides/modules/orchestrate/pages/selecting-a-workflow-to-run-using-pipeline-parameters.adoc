@@ -68,7 +68,7 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
   -d '{ "parameters": { "action": report } }'
 ----
 
-include::guides:ROOT:partial$tips/find-project-slug.adoc[]
+include::ROOT:partial$tips/find-project-slug.adoc[]
 
 [#next-steps]
 == Next steps

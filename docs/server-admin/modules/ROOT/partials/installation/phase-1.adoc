@@ -1,4 +1,4 @@
-CircleCI server v4.7 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc#[CircleCI server v4.7 overview].
+CircleCI server v4.7 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI server v4.7 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -488,9 +488,9 @@ CircleCI server v4.7 hosts build artifacts, test results, and other state object
 
 While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
 
-If you are installing locally rather than in AWS or GCP, follow the MinIO instructions in the xref:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped installation docs].
+If you are installing locally rather than in AWS or GCP, follow the MinIO instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc[Air-gapped installation docs].
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:installation:installing-server-behind-a-proxy.adoc#[Installing server behind a proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc[Installing server behind a proxy] guide.
 
 // Do not include in GCP page.
 ifndef::env-gcp[]
@@ -528,10 +528,7 @@ Authenticate CircleCI with S3 in one of two ways:
 * IAM Roles for Service Accounts (IRSA) - **recommended**
 * IAM access keys
 
-[tabs]
-====
-IRSA::
-+
+[.tab.authentication.IRSA]
 --
 **Option 1:** IRSA
 
@@ -728,8 +725,8 @@ aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY
 aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<STORAGE_POLICY_ARN>
 ----
 --
-IAM_access_keys::
-+
+
+[.tab.authentication.IAM_access_keys]
 --
 **Option 2:** IAM access keys
 
@@ -868,7 +865,6 @@ The result should look like this:
 }
 ----
 --
-====
 
 endif::env-gcp[]
 
@@ -910,10 +906,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 
 . Either enable Workload Identity or use static credentials.
 +
-[tabs]
-====
-Workload_Identity::
-+
+[.tab.gcpauth.Workload_Identity]
 --
 **Option 1:** Workload Identity
 
@@ -939,8 +932,8 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition=None
 ----
 --
-Static_credentials::
-+
+
+[tab.gcpauth.Static_credentials]
 --
 **Option 2:** Static credentials
 
@@ -952,19 +945,17 @@ gcloud iam service-accounts keys create <KEY_FILE> \
     --iam-account circleci-storage@<PROJECT_ID>.iam.gserviceaccount.com
 ----
 --
-====
-
 endif::env-aws[]
 
 ifndef::pdf[]
 [#next-steps]
 == Next steps
 ifndef::env-aws[]
-* xref:server-admin:installation:phase-2-gcp-core-services.adoc#[Phase 2 GCP: Core Services Installation].
+* xref:server-admin:installation:phase-2-gcp-core-services.adoc[Phase 2 GCP: Core Services Installation].
 endif::env-aws[]
 
 ifndef::env-gcp[]
-* xref:server-admin:installation:phase-2-aws-core-services.adoc#[Phase 2 AWS: Core Services Installation].
+* xref:server-admin:installation:phase-2-aws-core-services.adoc[Phase 2 AWS: Core Services Installation].
 endif::env-gcp[]
 
 

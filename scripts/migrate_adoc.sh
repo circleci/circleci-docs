@@ -2,7 +2,7 @@
 
 set -e
 
-SRC_DIR="old-docs/_cci2"
+SRC_DIR="old-docs"
 DEST_ROOT="docs"
 
 find "$SRC_DIR" -type f -name '*.adoc' | while read -r file; do

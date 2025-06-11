@@ -1,12 +1,22 @@
 {
+  "managing-url-orbs-allow-lists": {
+    "component": "orbs",
+    "module": "use",
+    "filename": "managing-url-orbs-allow-lists.adoc"
+  },
+  "how-to-override-config": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "how-to-override-config.adoc"
+  },
   "gitlab-trigger-options": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "gitlab-trigger-options.adoc"
   },
   "github-trigger-event-options": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "github-trigger-event-options.adoc"
   },
   "roles-and-permissions-overview": {
@@ -61,7 +71,7 @@
   },
   "using-branch-filters": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "using-branch-filters.adoc"
   },
   "introduction-to-the-circleci-web-app": {
@@ -191,7 +201,7 @@
   },
   "migrate-scheduled-workflows-to-scheduled-pipelines": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "migrate-scheduled-workflows-to-scheduled-pipelines.adoc"
   },
   "rerun-failed-tests": {
@@ -206,13 +216,8 @@
   },
   "using-dynamic-configuration": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "using-dynamic-configuration.adoc"
-  },
-  "webhooks": {
-    "component": "guides",
-    "module": "integration",
-    "filename": "webhooks.adoc"
   },
   "security-server": {
     "component": "server-admin",
@@ -299,6 +304,11 @@
     "module": "execution-managed",
     "filename": "convenience-images-support-policy.adoc"
   },
+  "custom-webhooks": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "custom-webhooks.adoc"
+  },
   "windows-images-support-policy": {
     "component": "guides",
     "module": "execution-managed",
@@ -379,6 +389,11 @@
     "module": "permissions-authentication",
     "filename": "oidc-tokens-with-custom-claims.adoc"
   },
+  "outbound-webhooks-reference": {
+    "component": "reference",
+    "module": "ROOT",
+    "filename": "outbound-webhooks-reference.adoc"
+  },
   "linux-cuda-images-support-policy": {
     "component": "guides",
     "module": "execution-managed",
@@ -401,17 +416,17 @@
   },
   "set-up-multiple-configuration-files-for-a-project": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "set-up-multiple-configuration-files-for-a-project.adoc"
   },
   "workflows": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "workflows.adoc"
   },
   "selecting-a-workflow-to-run-using-pipeline-parameters": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "selecting-a-workflow-to-run-using-pipeline-parameters.adoc"
   },
   "circleci-config-sdk": {
@@ -426,7 +441,7 @@
   },
   "using-matrix-jobs": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "using-matrix-jobs.adoc"
   },
   "openid-connect-tokens": {
@@ -436,7 +451,7 @@
   },
   "pipeline-variables": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "pipeline-variables.adoc"
   },
   "private-images": {
@@ -466,7 +481,7 @@
   },
   "dynamic-config": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "dynamic-config.adoc"
   },
   "ip-ranges": {
@@ -491,7 +506,7 @@
   },
   "pipelines": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "pipelines.adoc"
   },
   "language-javascript": {
@@ -586,7 +601,7 @@
   },
   "workspaces": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "workspaces.adoc"
   },
   "runner-api": {
@@ -651,7 +666,7 @@
   },
   "troubleshoot-pipelines": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "troubleshoot-pipelines.adoc"
   },
   "api-intro": {
@@ -676,7 +691,7 @@
   },
   "triggers-overview": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "triggers-overview.adoc"
   },
   "migrate-from-launch-agent-to-machine-runner-3-on-macos": {
@@ -751,7 +766,7 @@
   },
   "notify-a-slack-channel-of-a-paused-workflow": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "notify-a-slack-channel-of-a-paused-workflow.adoc"
   },
   "runner-installation-linux": {
@@ -776,7 +791,7 @@
   },
   "migrate-from-deploy-to-run": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "migrate-from-deploy-to-run.adoc"
   },
   "enable-checks": {
@@ -801,7 +816,7 @@
   },
   "databases": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "databases.adoc"
   },
   "vs-code-extension-overview": {
@@ -839,20 +854,20 @@
     "module": "execution-runner",
     "filename": "container-runner.adoc"
   },
+  "outbound-webhooks": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "outbound-webhooks.adoc"
+  },
   "controlling-serial-execution-across-your-organization": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "controlling-serial-execution-across-your-organization.adoc"
   },
   "runner-installation-mac": {
     "component": "guides",
     "module": "execution-runner",
     "filename": "runner-installation-mac.adoc"
-  },
-  "webhooks-reference": {
-    "component": "reference",
-    "module": "ROOT",
-    "filename": "webhooks-reference.adoc"
   },
   "test-splitting-tutorial": {
     "component": "guides",
@@ -866,7 +881,7 @@
   },
   "using-shell-scripts": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "using-shell-scripts.adoc"
   },
   "deploy-to-amazon-sagemaker": {
@@ -941,7 +956,7 @@
   },
   "jobs-steps": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "jobs-steps.adoc"
   },
   "postgres-config": {
@@ -961,7 +976,7 @@
   },
   "schedule-pipelines-with-multiple-workflows": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "schedule-pipelines-with-multiple-workflows.adoc"
   },
   "security-recommendations": {
@@ -1011,7 +1026,7 @@
   },
   "orchestration-cookbook": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "orchestration-cookbook.adoc"
   },
   "parallelism-faster-jobs": {
@@ -1041,7 +1056,7 @@
   },
   "scheduled-pipelines": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "scheduled-pipelines.adoc"
   },
   "docker-layer-caching": {
@@ -1066,7 +1081,7 @@
   },
   "set-a-nightly-scheduled-pipeline": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "set-a-nightly-scheduled-pipeline.adoc"
   },
   "ecs-ecr": {
@@ -1096,18 +1111,13 @@
   },
   "skip-build": {
     "component": "guides",
-    "module": "orchestrate-trigger",
+    "module": "orchestrate",
     "filename": "skip-build.adoc"
   },
   "open-source": {
     "component": "guides",
     "module": "about-circleci",
     "filename": "open-source.adoc"
-  },
-  "orb-author-intro": {
-    "component": "orbs",
-    "module": "author",
-    "filename": "orb-author-intro.adoc"
   },
   "using-arm": {
     "component": "guides",
@@ -1174,6 +1184,11 @@
     "module": "execution-managed",
     "filename": "resource-class-overview.adoc"
   },
+  "set-up-rollbacks": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "set-up-rollbacks.adoc"
+  },
   "configure-deploy-markers": {
     "component": "guides",
     "module": "deploy",
@@ -1184,10 +1199,20 @@
     "module": "deploy",
     "filename": "deploys-overview.adoc"
   },
+  "rollback-a-project-by-workflow-rerun": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "rollback-a-project-by-workflow-rerun.adoc"
+  },
   "update-the-kubernetes-release-agent": {
     "component": "guides",
     "module": "deploy",
     "filename": "update-the-kubernetes-release-agent.adoc"
+  },
+  "rollback-a-project-using-the-rollback-pipeline": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "rollback-a-project-using-the-rollback-pipeline.adoc"
   },
   "configure-your-kubernetes-components": {
     "component": "guides",
@@ -1416,47 +1441,47 @@
   },
   "style-and-voice": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "style-and-voice.adoc"
   },
   "style-guide-overview": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "style-guide-overview.adoc"
   },
   "using-code-samples": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "using-code-samples.adoc"
   },
   "headings": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "headings.adoc"
   },
   "links": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "links.adoc"
   },
   "using-lists": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "using-lists.adoc"
   },
   "using-images": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "using-images.adoc"
   },
   "using-tables": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "using-tables.adoc"
   },
   "formatting": {
     "component": "contributors",
-    "module": "style",
+    "module": "docs-style",
     "filename": "formatting.adoc"
   },
   "template-conceptual": {
@@ -1478,6 +1503,11 @@
     "component": "contributors",
     "module": "templates",
     "filename": "template-how-to.adoc"
+  },
+  "mfa": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "mfa.adoc"
   },
   "sso-overview": {
     "component": "guides",

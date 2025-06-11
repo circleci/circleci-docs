@@ -139,7 +139,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Checking out any Bitbucket-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-Private keys are also used to enable your project to <<enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
+Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
 
 [#user-key-security]
 === User key security
@@ -176,7 +176,7 @@ After you create and commit a `.circleci/config.yml` file to your Bitbucket Clou
 
 CircleCI runs your tests on a clean container every time so that your tests are fresh each time you push code, and so that your code is never accessible to other users. Watch your tests update in real-time on link:https://circleci.com/dashboard[your dashboard]. You can also get status updates through email notifications, or look for the status badges that appear on Bitbucket. Integrated statuses also appear on the pull request screen, to show that all tests have passed.
 
-See the xref:getting-started:config-intro.adoc#[Configuration tutorial] for a configuration walkthrough.
+See the xref:getting-started:config-intro.adoc[Configuration tutorial] for a configuration walkthrough.
 
 [#enable-your-project-to-check-out-additional-private-repositories]
 == Enable your project to check out additional private repositories
@@ -226,7 +226,7 @@ ssh-keyscan bitbucket.com >> ~/.ssh/known_hosts
 [#rename-organizations-and-repositories]
 == Rename organizations and repositories
 
-If you would like to rename your organization or repository, follow the xref:security:rename-organizations-and-repositories.adoc#[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
+If you would like to rename your organization or repository, follow the xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories] guide to make sure you do not lose access to environment variables or contexts in the process.
 
 [#grant-permissions-to-organiztion-members]
 == Grant permissions to workspace members
@@ -235,5 +235,5 @@ By default, only Bitbucket Cloud workspace administrators can view your organiza
 
 [#next-steps]
 == Next steps
-- xref:getting-started:config-intro.adoc#[Configuration tutorial]
-- xref:getting-started:hello-world.adoc#[Hello world]
+- xref:getting-started:config-intro.adoc[Configuration tutorial]
+- xref:getting-started:hello-world.adoc[Hello world]

@@ -38,17 +38,17 @@ To install machine runners and run jobs, you will need to have root access, and 
 * `sepolicy` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
 * `rpmbuild` (https://www.redhat.com/en/enterprise-linux-8/details[RHEL 8] only) - Linux only
 
-* The xref:toolkit:local-cli.adoc#[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::guides:ROOT:partial$runner/terms.adoc[]
+include::ROOT:partial$runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-include::guides:ROOT:partial$runner/install-with-cli-steps.adoc[]
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 [#download-circleci-runner]
 

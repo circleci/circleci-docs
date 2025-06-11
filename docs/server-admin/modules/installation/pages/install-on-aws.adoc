@@ -1,1 +1,1 @@
-= Install on AWS
+= Install CircleCI server on AWS

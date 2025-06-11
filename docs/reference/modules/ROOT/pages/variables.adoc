@@ -217,7 +217,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | `CIRCLE_WORKFLOW_WORKSPACE_ID`
 | GitHub, Bitbucket, GitLab
 | String
-| An identifier for the xref:glossary.adoc#workspace[workspace] of the current job. This identifier is the same for every job in a given workflow.
+| An identifier for the <<glossary#workspace,workspace>> of the current job. This identifier is the same for every job in a given workflow.
 | icon:check[]
 | icon:check[]
 
@@ -238,8 +238,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 
 If you must use the environment variables that are deprecated for GitLab SaaS in your GitLab pipelines, you can recreate this functionality using pipeline values in your configuration file. The following example shows how to set an environment variable `CIRCLE_PROJECT_REPONAME` using the xref:guides:security:env-vars.adoc#environment-variable-usage-options[`environment` key] and populating it with the `pipeline.trigger_parameters.gitlab.repo_name` value:
 
-[source,yaml]
-----
+```yaml
 build:
   docker:
     - image: cimg/node:17.0
@@ -250,7 +249,7 @@ build:
     CIRCLE_PROJECT_REPONAME: << pipeline.trigger_parameters.gitlab.repo_name >>
   steps:
     - run: echo $CIRCLE_PROJECT_REPONAME
-----
+```
 
 
 [#pipeline-values]
@@ -258,14 +257,13 @@ build:
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
 
-NOTE: For GitHub users, refer to the xref:guides:integration:github-apps-integration.adoc#[GitHub App integration] or xref:guides:integration:github-integration.adoc#[GitHub OAuth app integration] guides to check which integration type applies to you.
+NOTE: For GitHub users, refer to the xref:guides:integration:github-apps-integration.adoc[GitHub App integration] or xref:guides:integration:github-integration.adoc[GitHub OAuth app integration] guides to check which integration type applies to you.
 
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
 For example:
 
-[source,yaml]
-----
+```yaml
 version: 2.1
 
 jobs:
@@ -278,6 +276,6 @@ jobs:
     steps:
       - run: echo "This is pipeline ID << pipeline.id >>"
       - run: echo $CIRCLE_COMPARE_URL
-----
+```
 
 When using the above method to set the variables in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[set the variable in a shell command].

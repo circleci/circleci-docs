@@ -12,12 +12,12 @@ In this how-to guide, you will learn how to automatically deploy your Android ap
 To complete this tutorial, you will need the following:
 
 - An Android project, built using link:https://gradle.org/[Gradle].
-- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our xref:getting-started:getting-started.adoc#[Quickstart guide] for a walkthrough.
+- Your Android project set up in CircleCI. If this is your first time setting up a project in CircleCI, refer to our xref:getting-started:getting-started.adoc[Quickstart guide] for a walkthrough.
 - Fastlane installed and granted access to Google Play Store using credentials from your Google Developers service account. You may follow the instructions to install, set up, and configure Fastlane supply in the link:https://docs.fastlane.tools/getting-started/android/setup/[Fastlane Android setup documentation].
 
 NOTE: In the Fastlane setup, you will download a credentials file from your Google Developers service account. This tutorial assumes that you have saved this file in the `fastlane` folder as `api.json`.
 
-This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the xref:orbs:use:orb-intro.adoc#[Orb introduction page] if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
+This tutorial also walks you through how to use the Android orb for deployment. You are not required to be familiar with the Android orb for this tutorial, but we recommend reading the xref:orbs:use:orb-intro.adoc[Orb introduction page] if you have not used CircleCI orbs before. Alternatively, this tutorial also shows you how to deploy your project without using the orb.
 
 [#configure-fastlane-for-deployment-to-google-play-store]
 == 1. Configure Fastlane for deployment to Google Play Store
@@ -167,7 +167,7 @@ Save the output. You will need it in the next step.
 [#set-env-vars]
 === b. Set environment variables
 
-Next, you need to set xref:security:env-vars.adoc#[environment variables] for deployment through CircleCI.
+Next, you need to set xref:security:env-vars.adoc[environment variables] for deployment through CircleCI.
 
 Open your Android project in the link:https://app.circleci.com/[CircleCI web app] and select *Project Settings*. Navigate to *Environment Variables* and add the following variables:
 
@@ -220,10 +220,7 @@ You can set up your configuration with the link:https://circleci.com/developer/o
 
 Using the Android orb gives you two options for deploying to the Google Play Store. You can either use the `deploy_to_play_store` job from the orb, or run each command individually in a job.
 
-[tabs]
-====
-Use_the_deploy-to-play-store_job::
-+
+[.tab.configAndroidOrb.Use_the_deploy-to-play-store_job]
 --
 To deploy using the `deploy-to-play-store` job you just need to add an `android/deploy_to_play_store` job to your list of jobs in your workflow.
 
@@ -258,8 +255,8 @@ workflows:
 
 NOTE: The executor has no default value and must be set in the configuration.
 --
-Run each command individually::
-+
+
+[.tab.configAndroidOrb.Run_each_command_individually]
 --
 To run each command individually in a job, you will need to add the following commands to your job:
 
@@ -300,7 +297,6 @@ jobs:
             lane_name: internal
 ```
 --
-====
 
 [#set-up-config-without-the-android-orb]
 === b. Set up configuration without the Android orb
@@ -365,4 +361,4 @@ Then, replace the `run: fastlane playstore` step with `run: bundle exec fastlane
 [#next-steps]
 == Next steps
 
-- xref:deploy-ios-applications.adoc#[Deploy iOS apps]
+- xref:deploy-ios-applications.adoc[Deploy iOS apps]

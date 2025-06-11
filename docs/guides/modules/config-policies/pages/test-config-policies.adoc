@@ -17,7 +17,7 @@ circleci policy test ./config-policies --policy-base-url <your-circleci-server-d
 ----
 ====
 
-This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config policies overview] and xref:create-and-manage-config-policies.adoc#[Create and manage config policies] pages.
+This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config policies overview] and xref:create-and-manage-config-policies.adoc[Create and manage config policies] pages.
 
 [#prerequisites]
 == Prerequisites

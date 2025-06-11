@@ -11,10 +11,10 @@ TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI con
 
 CircleCI is a first-class CI tool. CI/CD has been CircleCI's specialization since the company's founding over a decade ago. On top of the features you would expect from any CI/CD tool, what sets CircleCI apart are the following productivity-boosting features:
 
-. **Advanced Caching** - On top of xref:optimize:caching.adoc#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to xref:optimize:docker-layer-caching.adoc#[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
-. **SSH Into Builds** - CircleCI offers the ability to xref:execution-managed:ssh-access-jobs.adoc#[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
+. **Advanced Caching** - On top of xref:optimize:caching.adoc#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to xref:optimize:docker-layer-caching.adoc[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
+. **SSH Into Builds** - CircleCI offers the ability to xref:execution-managed:ssh-access-jobs.adoc[securely SSH into an execution environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
 . **Resource Classes** - You can use various different xref:optimize:optimizations.adoc#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
-. **Test Parallelism** - CircleCI's platform provides not only xref:optimize:concurrency.adoc#[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[splitting workloads] between different containers.
+. **Test Parallelism** - CircleCI's platform provides not only xref:optimize:concurrency.adoc[concurrent job execution], but also the ability to split tests between parallel environments. You can dramatically cut build times by xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[splitting workloads] between different containers.
 
 https://circleci.com/signup/[Sign up for a free account today].
 
@@ -51,17 +51,17 @@ Take stock of the current landscape, and understand the differences between Circ
 
 Some things consider during this phase:
 
-- xref:orbs:use:orb-intro.adoc#[Orbs] as an alternative to, for example, Jenkins Plugins
-- CircleCI YAML xref:reference:ROOT:configuration-reference.adoc#[Configuration Reference]
-- xref:execution-managed:executor-intro.adoc#[Execution Environments]
-- xref:test:collect-test-data.adoc#[Testing]
+- xref:orbs:use:orb-intro.adoc[Orbs] as an alternative to, for example, Jenkins Plugins
+- CircleCI YAML xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
+- xref:execution-managed:executor-intro.adoc[Execution Environments]
+- xref:test:collect-test-data.adoc[Testing]
 
 [#planning-phase]
 ==  Planning phase
 
-Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:getting-started:first-steps.adoc#[Sign Up and Try CircleCI] page.
+Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:getting-started:first-steps.adoc[Sign Up and Try CircleCI] page.
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described in the server installation guides (xref:server-admin:installation:phase-1-aws-prerequisites.adoc#[AWS Prerequisites] and xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#[GCP Prerequisites]).
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described in the server installation guides (xref:server-admin:installation:phase-1-aws-prerequisites.adoc[AWS Prerequisites] and xref:server-admin:installation:phase-1-gcp-prerequisites.adoc[GCP Prerequisites]).
 
 [#preparation-phase]
 == Preparation phase
@@ -125,11 +125,11 @@ In this phase you will resolve any last-minute issues, run your project migratio
 
 In the following sections we provide helpful guides and tips for migrating your CI/CD pipelines to CircleCI.
 
-* xref:migrating-from-aws.adoc#[Migrate from AWS]
-* xref:migrating-from-azuredevops.adoc#[Migrate from Azure DevOps]
-* xref:migrating-from-buildkite.adoc#[Migrate from Buildkite]
-* xref:migrating-from-gitlab.adoc#[Migrate from GitLab]
-* xref:migrating-from-github.adoc#[Migrate from GitHub Actions]
-* xref:migrating-from-jenkins.adoc#[Migrate from Jenkins]
-* xref:migrating-from-teamcity.adoc#[Migrate from TeamCity]
-* xref:migrating-from-travis.adoc#[Migrate from Travis CI]
+* <<migrating-from-aws#,Migrate from AWS>>
+* <<migrating-from-azuredevops#,Migrate from Azure DevOps>>
+* <<migrating-from-buildkite#,Migrate from Buildkite>>
+* <<migrating-from-gitlab#,Migrate from GitLab>>
+* <<migrating-from-github#,Migrate from GitHub Actions>>
+* <<migrating-from-jenkins#,Migrate from Jenkins>>
+* <<migrating-from-teamcity#,Migrate from TeamCity>>
+* <<migrating-from-travis#,Migrate from Travis CI>>

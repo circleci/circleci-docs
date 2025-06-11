@@ -18,7 +18,7 @@ Every time you commit and push code, CircleCI automatically runs your tests agai
 [#prerequisites]
 == Prerequisites
 
-Refer to the xref:execution-managed:circleci-images.adoc#[Pre-built CircleCI convenience images] and add `-browsers:` to the image name. This will give you a variant that includes Java 8, geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
+Refer to the xref:execution-managed:circleci-images.adoc[Pre-built CircleCI convenience images] and add `-browsers:` to the image name. This will give you a variant that includes Java 8, geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 [#selenium]
 == Selenium
@@ -34,7 +34,7 @@ WebDriver can operate in two modes, local, or remote:
 
 If Selenium is not included in your primary Docker image, install, and run Selenium as shown below:
 
-include::guides:ROOT:partial$notes/docker-auth.adoc[]
+include::ROOT:partial$notes/docker-auth.adoc[]
 
 [,yaml]
 ----
@@ -90,7 +90,7 @@ Sauce Labs has an extensive network of operating system and browser combinations
 
 If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using link:https://docs.saucelabs.com/testrunner-toolkit[`saucectl`] with the JS framework of your choice, and then integrating the link:https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run[saucectl-run orb] in your CircleCI workflow.
 
-. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as xref:security:env-vars.adoc#[environment variables] in your Circle CI project.
+. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as xref:security:env-vars.adoc[environment variables] in your Circle CI project.
 . Edit your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
 
 [,yaml]
@@ -119,9 +119,9 @@ workflows:
 [#browserstack-and-appium]
 == BrowserStack and Appium
 
-Following the example above, you can replace the installation of Sauce Labs with another cross-browser testing platform, such as BrowserStack. Then, set the `USERNAME` and `ACCESS_KEY` xref:security:env-vars.adoc#[environment variables] to those associated with your BrowserStack account.
+Following the example above, you can replace the installation of Sauce Labs with another cross-browser testing platform, such as BrowserStack. Then, set the `USERNAME` and `ACCESS_KEY` xref:security:env-vars.adoc[environment variables] to those associated with your BrowserStack account.
 
-For mobile applications, you can use Appium or an equivalent platform that uses the WebDriver protocol. To do this, install Appium in your job, and use CircleCI xref:security:env-vars.adoc#[environment variables] for the `USERNAME` and `ACCESS_KEY`.
+For mobile applications, you can use Appium or an equivalent platform that uses the WebDriver protocol. To do this, install Appium in your job, and use CircleCI xref:security:env-vars.adoc[environment variables] for the `USERNAME` and `ACCESS_KEY`.
 
 [#cypress]
 == Cypress
@@ -154,7 +154,7 @@ This section provides some examples of how to debug browser tests on CircleCI.
 [#using-screenshots-and-artifacts]
 === Using screenshots and artifacts
 
-Configure CircleCI to collect xref:optimize:artifacts.adoc#[build artifacts] and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` section] of the configuration reference for an example.
+Configure CircleCI to collect xref:optimize:artifacts.adoc[build artifacts] and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` section] of the configuration reference for an example.
 
 Saving screenshots is supported by most test suites, and is a built-in feature in WebKit and Selenium:
 
@@ -194,7 +194,7 @@ VNC allows you to view and interact with the browser that is running your tests.
 
 . Install a VNC viewer. If you are using macOS, consider link:https://sourceforge.net/projects/chicken/[Chicken of the VNC].
 link:https://www.realvnc.com/download/viewer/[RealVNC] is also available on most platforms.
-. Open a Terminal window, xref:execution-managed:ssh-access-jobs.adoc#[start an SSH run] to a CircleCI container and forward the remote port 5901 to the local port 5902.
+. Open a Terminal window, xref:execution-managed:ssh-access-jobs.adoc[start an SSH run] to a CircleCI container and forward the remote port 5901 to the local port 5902.
 +
 [,shell]
 ----
@@ -263,7 +263,7 @@ jobs:
           background: true
 ----
 
-. Now when you xref:execution-managed:ssh-access-jobs.adoc#[start an SSH build], you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
+. Now when you xref:execution-managed:ssh-access-jobs.adoc[start an SSH build], you'll be able to connect to the VNC server while your default test steps run. You can either use a VNC viewer that is capable of SSH tunneling, or set up a tunnel on your own:
 +
 [,shell]
 ----
@@ -276,7 +276,7 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
 . Install an X Window System on your computer. If you are using macOS, consider link:https://xquartz.macosforge.org/landing/[XQuartz].
-. With X set up on your system, xref:execution-managed:ssh-access-jobs.adoc#[start an SSH build] to a CircleCI VM, using the `-X` flag to set up forwarding:
+. With X set up on your system, xref:execution-managed:ssh-access-jobs.adoc[start an SSH build] to a CircleCI VM, using the `-X` flag to set up forwarding:
 +
 [,shell]
 ----
@@ -306,4 +306,4 @@ Now you can run your integration tests from the command line and watch the brows
 [#see-also]
 == See also
 
-* xref:security:env-vars.adoc#[Environment variables]
+* xref:security:env-vars.adoc[Environment variables]

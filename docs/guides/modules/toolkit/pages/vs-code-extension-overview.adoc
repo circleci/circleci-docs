@@ -14,7 +14,7 @@ The VS Code extension includes:
 - The **Pipeline Manager**, which lets you view and manage pipelines within the IDE (integrated development environment). The pipeline manager allows you to identify issues and take immediate action on your pipelines without switching between VS Code and your browser.
 - The **Config Helper**, which provides in-file help with navigating, writing, and editing configuration files.
 
-NOTE: Currently only the **Config Helper** is available for GitLab and GitHub App projects. To find out if you authenticated through the GitHub OAuth app or the CircleCI GitHub App, see the xref:integration:github-apps-integration.adoc#[GitHub App integration] page.
+NOTE: Currently only the **Config Helper** is available for GitLab and GitHub App projects. To find out if you authenticated through the GitHub OAuth app or the CircleCI GitHub App, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
 
 [#install-the-vs-code-extension]
 == Install the VS Code extension
@@ -31,13 +31,13 @@ For each object, you can trigger certain events on hover.
 
 [#pipeline]
 === Pipeline
-xref:orchestrate:pipelines.adoc#[Pipelines] are the top-level tree item in the panel, and they contain your workflows. Hovering over a pipeline lets you:
+xref:orchestrate:pipelines.adoc[Pipelines] are the top-level tree item in the panel, and they contain your workflows. Hovering over a pipeline lets you:
 
 - Open in browser, to view pipeline details in the CircleCI app in your default web browser
 
 [#workflow]
 === Workflow
-xref:orchestrate:workflows.adoc#[Workflows] are nested under each pipeline, and contain jobs. Hovering over a workflow lets you:
+xref:orchestrate:workflows.adoc[Workflows] are nested under each pipeline, and contain jobs. Hovering over a workflow lets you:
 
 - Open in browser, to view workflow details in the CircleCI app, in your default web browser
 - Rerun the workflow from start, to re-trigger the entire workflow
@@ -45,7 +45,7 @@ xref:orchestrate:workflows.adoc#[Workflows] are nested under each pipeline, and 
 
 [#job]
 === Job
-xref:orchestrate:jobs-steps.adoc#[Jobs] are nested under each workflow, and can contain tests and artifacts. Hovering over a job lets you:
+xref:orchestrate:jobs-steps.adoc[Jobs] are nested under each workflow, and can contain tests and artifacts. Hovering over a job lets you:
 
 - Approve the job (only if the job needs approval)
 
@@ -59,14 +59,14 @@ image::guides:ROOT:vs_code_extension_job-details-gif.gif[Screenshot of side pane
 
 Expanding a job also lets you:
 
-- Load xref:test:test.adoc#[tests], if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication `[FLAKY]`.
+- Load xref:test:test.adoc[tests], if you have configured test metadata to be available. Tests that CircleCI has detected as flaky will be prefaced by the indication `[FLAKY]`.
 
-- Load xref:optimize:artifacts.adoc#[artifacts], if any are created by the job. Once the artifacts are loaded, you can download them by clicking on them.
+- Load xref:optimize:artifacts.adoc[artifacts], if any are created by the job. Once the artifacts are loaded, you can download them by clicking on them.
 
 [#re-run-with-ssh]
 === Re-run with SSH
 
-NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:integration:github-apps-integration.adoc#[GitHub App] and xref:integration:gitlab-integration.adoc#[GitLab] projects.
+NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:integration:github-apps-integration.adoc[GitHub App] and xref:integration:gitlab-integration.adoc[GitLab] projects.
 
 Re-run jobs with SSH directly from VS Code in one of two ways:
 
@@ -179,9 +179,9 @@ image::guides:ROOT:vscode-ext-config-test-run-crop.png[Screenshot showing the ru
 === Prerequisites
 
 * CircleCI VS Code extension v2.3.0 or higher
-* A CircleCI account integrated through the GitHub OAuth app, or Bitbucket Cloud. To find out which GitHub account type you have, see the xref:integration:github-integration.adoc#[GitHub OAuth app integration] page
+* A CircleCI account integrated through the GitHub OAuth app, or Bitbucket Cloud. To find out which GitHub account type you have, see the xref:integration:github-integration.adoc[GitHub OAuth app integration] page
 * Your org must have opted-in to this feature through Organization Settings. You may need to ask your org admin to do so for you. See <<feature-controls>> for more details.
-* Your project must **not** make use of xref:orchestrate:dynamic-config.adoc#[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
+* Your project must **not** make use of xref:orchestrate:dynamic-config.adoc[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
 NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored. Instead, the configuration file is overridden by a custom configuration file passed as a parameter. The term "unversioned" refers to the fact the config file is not versioned in the VCS. It is, however, stored in CircleCI along with the pipeline, and it is available at any time in the CircleCI web app.
 
@@ -211,7 +211,7 @@ The ability to trigger pipelines from VS Code can be controlled **at the org lev
 
 * Organization level settings can be found under menu:Organization Settings[Advanced]. The setting default is **Off**. Toggle the "Trigger pipelines with unversioned config" option to **On** to opt-in. Organization level settings override project settings, and they can be changed only by organization admins.
 
-* Project level settings can be found under menu:Project Settings[VS Code integration]. The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to **Off** to opt-out.
+* Project level settings can be found under menu:Project Settings[Advanced]. The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to **Off** to opt-out.
 
 [#security-implications]
 === Security Implications
@@ -246,7 +246,7 @@ The audit log event `trigger-event.create` includes information that permit to d
 
 You will be able to use the information in the event payload to view the `config.yml` file associated with a given pipeline, by searching for it through the CircleCI web app, as follows:
 
-+`\https://app.circleci.com/projects/{VCS}/{ORGANIZATION_NAME}/{PROJECT_NAME}/config/?branchName={BRANCH_NAME}&pipelineNumber={PIPELINE_ID}`+
+`+\https://app.circleci.com/projects/{VCS}/{ORGANIZATION_NAME}/{PROJECT_NAME}/config/?branchName={BRANCH_NAME}&pipelineNumber={PIPELINE_ID}+`
 
 The following audit log events trace when organization and project level settings are changed for this feature:
 

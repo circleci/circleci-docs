@@ -57,7 +57,7 @@ The installation will be output into your PowerShell interface.
 
 After setup completes, the machine runner starts automatically and begins looking for jobs to process.
 
-include::guides:ROOT:partial$runner/machine-runner-example.adoc[]
+include::ROOT:partial$runner/machine-runner-example.adoc[]
 
 [#additional-resources]
 == Additional resources

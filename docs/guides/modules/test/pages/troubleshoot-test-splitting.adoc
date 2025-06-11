@@ -110,7 +110,7 @@ workflows:
 ### Video: troubleshooting globbing
 
 
-NOTE: To follow along with the commands in the video below you will need to be xref:execution-managed:ssh-access-jobs.adoc#[`SSH-ed into a job`].
+NOTE: To follow along with the commands in the video below you will need to be xref:execution-managed:ssh-access-jobs.adoc[`SSH-ed into a job`].
 
 ++++
 <div class="video-wrapper">
@@ -141,5 +141,5 @@ go test -v $(go list ./... | circleci tests split)
 [#next-steps]
 ## Next steps
 
-* xref:collect-test-data.adoc#[Collect test data]
-* xref:insights:insights-tests.adoc#[Test Insights]
+* xref:collect-test-data.adoc[Collect test data]
+* xref:insights:insights-tests.adoc[Test Insights]

@@ -9,25 +9,25 @@ This page answers frequently asked questions about the following CircleCI topics
 [.table]
 [cols=2*]
 |===
-| <<#general,General>>
-| <<#self-hosted-runner,Self-hosted runner>>
+| <<general>>
+| <<self-hosted-runner>>
 
-| <<#migration,Migration>>
-| <<#pipelines,Pipelines>>
+| <<migration>>
+| <<pipelines>>
 
-| <<#host-circleci,Host CircleCI>>
-| <<#scheduled-pipelines,Scheduled pipelines>>
+| <<host-circleci>>
+| <<scheduled-pipelines>>
 
-| <<#architecture,Architecture>>
-| <<#workflows,Workflows>>
+| <<architecture>>
+| <<workflows>>
 
-| <<#orbs,Orbs>>
-| <<#dynamic-configuration,Dynamic configuration>>
+| <<orbs>>
+| <<dynamic-configuration>>
 
-| <<#author-orbs,Author orbs>>
-| <<#billing,Billing>>
+| <<author-orbs>>
+| <<billing>>
 
-| <<#cancel-performance-plan,Cancel Performance Plan>>
+| <<cancel-performance-plan>>
 |
 |===
 

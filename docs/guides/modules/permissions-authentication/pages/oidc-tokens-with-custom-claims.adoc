@@ -6,7 +6,7 @@
 
 Use OpenID Connect (OIDC) tokens to connect your pipelines to compatible cloud services without the need to manage long-lived secrets in CircleCI. Create CircleCI OIDC tokens, using the CircleCI CLI, and customize the `aud` claim to meet the unique needs of different cloud services.
 
-For more information on OIDC token, see the xref:openid-connect-tokens.adoc#[OpenID Connect tokens] overview.
+For more information on OIDC token, see the xref:openid-connect-tokens.adoc[OpenID Connect tokens] overview.
 
 [#create-oidc-token-in-a-job-with-custom-claims]
 == Create OIDC token in a job with custom claims

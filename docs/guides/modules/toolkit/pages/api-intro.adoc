@@ -13,7 +13,7 @@ API v2 includes several powerful features (for example, support for pipelines an
 
 CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
-To get started with the API v2, see the xref:api-developers-guide.adoc#[API developers guide].
+To get started with the API v2, see the xref:api-developers-guide.adoc[API developers guide].
 
 [#changes-in-endpoints]
 == Changes in endpoints
@@ -45,4 +45,4 @@ With API v2, several endpoints from v1 have been deprecated, which are listed in
 [#next-steps]
 == Next steps
 
-* Review the xref:api-developers-guide.adoc#[API Developer's Guide] for a detailed walkthrough on authenticating as well as example API requests.
+* Review the xref:api-developers-guide.adoc[API Developer's Guide] for a detailed walkthrough on authenticating as well as example API requests.

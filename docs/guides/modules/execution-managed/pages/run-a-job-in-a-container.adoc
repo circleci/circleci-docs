@@ -16,27 +16,24 @@ You will need to have link:https://www.docker.com/products/docker-desktop[Docker
 
 The CLI allows you to run a single job from CircleCI on your desktop using Docker with the following command:
 
-[source,shell]
-----
+```shell
 $ circleci local execute JOB_NAME
-----
+```
 
 If your CircleCI configuration is set to version 2.1 or greater, you must first export your configuration to `process.yml`, and specify it when executing with the following commands:
 
-[source,shell]
-----
+```shell
 circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml JOB_NAME
-----
+```
 
 The following commands will run an example build on your local machine on one of CircleCI's demo applications:
 
-[source,shell]
-----
+```shell
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
 cd circleci-demo-go
 circleci local execute build
-----
+```
 
 The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and PostgreSQL Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
 
@@ -67,14 +64,12 @@ Further, not all commands may work on your local machine as they do online. For 
 
 For security reasons, encrypted environment variables or contexts configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
 
-[source,shell]
-----
+```shell
 circleci help build
-----
+```
 
 If you have multiple environment variables, you must use the flag for each variable, for example:
 
-[source,shell]
-----
+```shell
 circleci build -e VAR1=FOO -e VAR2=BAR
-----
+```

@@ -14,7 +14,7 @@ The Amazon Elastic Container Service (ECS) is a scalable container orchestration
 [#set-environment-variables]
 == 1. Set environment variables
 
-The following environment variables need to be set. For more information on how to set environment variables, refer to the xref:security:set-environment-variable.adoc#[Set an environment variable] page. You can also use a xref:security:contexts.adoc#[context]:
+The following environment variables need to be set. For more information on how to set environment variables, refer to the xref:security:set-environment-variable.adoc[Set an environment variable] page. You can also use a xref:security:contexts.adoc[context]:
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
