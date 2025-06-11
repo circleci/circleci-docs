@@ -16,14 +16,13 @@ To update the Kubernetes release agent you need an operational CircleCI environm
 * xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys]
 * xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
 
-[CAUTION]
-====
+****
 If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend to migrate to the new labels as soon as possible.
 
 Support for the old labels will be dropped in one of the next releases.
 
 After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
-====
+****
 
 [#update-steps]
 == Update steps

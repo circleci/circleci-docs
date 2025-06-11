@@ -192,8 +192,7 @@ android {
 }
 ```
 
-[NOTE]
-====
+****
 You can also create a `keystore.properties` file in your project directory for local bundling and deployment, if you wish. Do *not* push this file or your keystore to a remote repository.
 
 Use the following snippet to create this file:
@@ -204,7 +203,7 @@ releaseKeyPassword=YourKeyPassword
 releaseKeyStore=YourKeyStorePath
 releaseStorePassword=YourKeyStorePassword
 ```
-====
+****
 
 Now, you need to configure `.circleci/config.yml` to decrypt your keystore, generate `keystore.properties`, and create the Google Play API key at runtime.
 

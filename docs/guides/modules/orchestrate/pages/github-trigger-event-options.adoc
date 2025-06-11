@@ -33,8 +33,7 @@ If your CircleCI org is integrated via **GitHub OAuth** (see tip above), an org 
 
 == Supported trigger options
 
-[NOTE]
-====
+****
 Regardless of your chosen trigger option, CircleCI will **never** trigger a pipeline for the following:
 
 * On branch or tag deletion push events.
@@ -42,7 +41,7 @@ Regardless of your chosen trigger option, CircleCI will **never** trigger a pipe
 GitHub App pipelines are also never triggered on the following:
 
 * When a new branch is created if there are no new commits on the branch.
-====
+****
 
 GitHub App triggers allow you to define the work to do (pipeline) when an event takes place (trigger). GitHub App triggers are an orchestration tool available in CircleCI. You can access GitHub App trigger options using the "Run on" menu when setting up a trigger. The following preset trigger options are available:
 
@@ -58,10 +57,9 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 
 NOTE: **Forked pull requests** never trigger GitHub App pipelines.
 
-[NOTE]
-====
+****
 *Help us prioritize additional trigger options?* We are working to expand the available events and conditions for you to choose from. Let us know which additional triggers your team needs by filling out link:https://forms.gle/j7DC78CQNRmSBn159[this form].
-====
+****
 
 Two pipeline values are available for all GitHub App pipelines for you to use to further configure the workflows and jobs to run on specific events:
 

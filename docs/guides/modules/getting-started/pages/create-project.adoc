@@ -120,27 +120,25 @@ image::guides:ROOT:create-project/authorize-gitlab-self-managed.png[Option to au
 .Set up your new GitLab self-managed project
 image::guides:ROOT:create-project/create-new-gitlab-self-managed-project.png[Create new project window]
 +
-[NOTE]
-====
+****
 If this is your first GitLab self-managed project you will now set up your integration:
 
 * Verify your GitLab URL
 * Generate an add a personal access token
 * Add your known hosts, following the instructions in the app
-====
+****
 
 ** Use the repository dropdown menu to tell CircleCI where your code is stored.
 ** Select **Create Project**. You will then be redirected to the Pipelines page.
 ** The express CircleCI configuration setup is not currently available for GitLab self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
 +
-[TIP]
-====
+****
 For guidance on creating a `config.yml` file, see the following pages:
 
 * xref:config-intro.adoc[Configuration introduction]
 * xref:toolkit:sample-config.adoc[Sample config.yml files]
 * xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
-====
+****
 --
 
 [.tab.create-project.Bitbucket_Data_Center]
@@ -180,13 +178,12 @@ Follow these steps to  set up a new project in CircleCI:
 image::guides:ROOT:create-project/set-up-a-project.png[Set up a project button]
 . Find your project in the list and select btn:[Set Up Project].
 +
-[TIP]
-====
+****
 **Can't see your project?** Select the CircleCI logo at the top of the window to navigate to your user homepage and select an organization.
 
 .Access your user homepage
 image::guides:ROOT:create-project/user-home-page.png[Select Organization]
-====
+****
 
 . Choose a `config.yml` option in the modal. You can choose from the following:
 ** **Fastest**: Use a CircleCI `.circleci/config.yml` you have already committed to your repository. For guidance on creating a `config.yml` file, see the <<config-intro#,Configuration Introduction>>. You will also need to specify a branch.

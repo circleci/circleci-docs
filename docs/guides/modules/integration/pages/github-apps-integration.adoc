@@ -50,13 +50,12 @@ When the event you selected under the "Run on" menu occurs (see the xref:orchest
 
 image::guides:ROOT:gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
 
-[NOTE]
-====
+****
 Editing an existing CircleCI configuration within the web app is not currently available. All further changes to the configuration should be made in your GitHub repository. Committing further changes in your repository will automatically trigger a pipeline.
 
 If you would like to manually trigger a pipeline from the CircleCI web app, see the link:https://circleci.com/docs/triggers-overview/#run-a-pipeline-from-the-circleci-web-app[Triggers page].
 
-====
+****
 
 [#project-settings]
 == Project settings

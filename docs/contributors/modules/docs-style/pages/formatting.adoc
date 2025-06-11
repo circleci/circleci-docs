@@ -72,21 +72,19 @@ You can also make a longer admonition block for any of the types listed above:
 
 [source,adoc]
 ----
-[CAUTION]
-====
+****
 This is a longer admonition with an ordered list:
 
 . Step 1
 . Step 2
 . Step 3
-====
+****
 ----
 
-[CAUTION]
-====
+****
 This is a longer admonition with an ordered list:
 
 . Step 1
 . Step 2
 . Step 3
-====
+****

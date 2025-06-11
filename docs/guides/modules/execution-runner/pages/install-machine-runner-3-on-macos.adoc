@@ -98,8 +98,7 @@ api:
   url: https://your.domain.here
 ----
 
-[TIP]
-====
+****
 **If you are migrating an existing configuration from a previous runner installation**, you may move the existing launch agent file from its current path to the new path.
 
 **This will overwrite the default config file installed via brew and replace it with your existing config file.**
@@ -117,7 +116,7 @@ After copying the file, you may remove the logging block to send logs to the def
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ----
-====
+****
 
 [#review-accept-apple-signature-notarization]
 == 3. Review and accept the Apple signature notarization

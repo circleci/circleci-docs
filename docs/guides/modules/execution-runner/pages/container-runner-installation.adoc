@@ -77,8 +77,7 @@ NOTE: The ability to rerun a job with SSH for CircleCI container runner is in **
 
 To enable this optional feature, follow the instructions below **after reading through the considerations**. Rerunning jobs with SSH allows you to troubleshoot problems through inspecting log files, running processes, and directory paths.
 
-[CAUTION]
-====
+****
 **Retry with SSH considerations**
 
 - Task-agent runs an embedded SSH server and agent on a dedicated port when the “Rerun job with SSH” option is activated. This feature will not affect any other SSH servers or agents on the cluster that container runner is installed on.
@@ -88,16 +87,14 @@ To enable this optional feature, follow the instructions below **after reading t
 - Rerunning a job with SSH will hold the job open for **two hours** if a connection is made to the SSH server, or **10 minutes** if no connection is made, unless canceled. While in this state, the job is counted against an organization’s concurrency limit, and the task-agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when you have finished debugging.
 
 - When establishing a SSH connection, you may experience a warning relating to a host change, due to the reuse of a previously used port to connect to a different pod. RSA host fingerprints can be cross-referenced with the output in the console for verification.
-====
+****
 
 The rerun job with SSH feature makes use of the link:https://gateway-api.sigs.k8s.io/[Gateway API] to facilitate SSH access from outside your cluster. To enable this feature, Gateway API resources must first be provisioned on your cluster, and the CircleCI container agent configuration must be updated.
 
-
-[NOTE]
-====
+****
 **Supported Gateway API implementations:**
 CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[Envoy Gateway] as an implementation for the link:https://gateway-api.sigs.k8s.io/[Gateway API]. Other link:https://gateway-api.sigs.k8s.io/implementations/[Gateway API implementations] that support TCPRoute resources are likely to be compatible, but not all of these implementations have been tested, and therefore compatibility is not guaranteed. Our recommendation is to use Envoy Gateway as your implementation. Envoy Gateway is currently in beta and is under development.
-====
+****
 
 
 === a. Install Envoy Gateway to your cluster

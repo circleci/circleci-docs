@@ -453,14 +453,13 @@ For xref:integration:github-integration.adoc[GitHub OAuth app] and xref:integrat
 
 For xref:integration:github-apps-integration.adoc[GitHub App], xref:integration:gitlab-integration.adoc[GitLab SaaS and self-managed] and xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
 
-[TIP]
-====
+****
 **Project names** must meet the following requirements:
 
 * Begin with a letter
 * 3-40 characters long
 * Contain only letters, numbers, spaces, or the following characters `" - _ . : ! & + [ ] " ;`
-====
+****
 
 A standalone project can have:
 

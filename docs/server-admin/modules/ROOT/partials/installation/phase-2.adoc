@@ -499,11 +499,10 @@ nginx:
     enabled: true
 ----
 
-[WARNING]
-====
+****
 If you have already deployed CircleCI server, enabling ACM is a destructive change to the load balancer. The service will have to be regenerated to allow the use of your ACM certificates and so the associated load balancer will also be regenerated.
 You will need to update your DNS records to the new load balancer once you have redeployed CircleCI server.
-====
+****
 --
 endif::env-gcp[]
 

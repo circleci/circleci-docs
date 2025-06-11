@@ -51,14 +51,13 @@ The decision result tracks which rules were included in the making of the decisi
 [#use-the-cli-with-config-policies]
 == Use the CLI with config policies
 
-[NOTE]
-====
+****
 **Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
-====
+****
 
 Use the CircleCI CLI to manage your organization's policies programmatically. Config policies sub-commands are grouped under the `circleci policy` command.
 

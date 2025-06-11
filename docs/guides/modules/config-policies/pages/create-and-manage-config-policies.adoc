@@ -8,14 +8,13 @@ NOTE: The config policies feature is available on the **Scale** Plan and from Ci
 
 Follow the how-to guides on this page to manage, create, and use config policies.
 
-[NOTE]
-====
+****
 **Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
-====
+****
 
 [#config-policy-management-enablement]
 == Enable or disable policy evaluation for an organization
@@ -153,15 +152,14 @@ Your file structure should now look something like:
 └── config-policies
 ----
 +
-[NOTE]
-====
+****
 The context for each job is shown as `my-context`. This context name is arbitrary, but it must be active and declare the following environment variables:
 
 * `CIRCLECI_CLI_TOKEN` with the value of a personal API token to authenticate the CLI
 * `ORG_ID` with the value of the organization ID
 
 For setup steps see the <<prerequisites>> on this page.
-====
+****
 
 [#create-a-policy]
 == Create a policy
@@ -233,7 +231,7 @@ If the upload was successful, you will see something like the following:
 [source,shell]
 ----
 {
-  “Created”: [“example”]
+  "Created": ["example"]
 }
 ----
 --
@@ -278,7 +276,7 @@ If the upload was successful, you will see something like the following:
 [source,shell]
 ----
 {
-  “Created”: [“example”]
+  "Created": ["example"]
 }
 ----
 --

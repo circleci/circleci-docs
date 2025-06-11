@@ -10,15 +10,14 @@ Using the machine executor gives your application full access to OS resources an
 
 To use the machine executor, use the xref:reference:ROOT:configuration-reference.adoc#machine[`machine` key] in your job configuration and specify an image:
 
-[NOTE]
-====
+****
 The use of `machine: true` is deprecated when using **CircleCI cloud**. You must specify an image to use.
 
 `machine: true` **is** supported when using:
 
 * Self-hosted runners
 * When using the machine executor on CircleCI server
-====
+****
 
 [.tab.machineblock.Cloud]
 --

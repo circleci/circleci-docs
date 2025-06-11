@@ -36,8 +36,7 @@ To enable your deployment to show up on the deploys UI in the CircleCI web app, 
 * Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Spec.Template.Metadata.Labels`
 * Add the `circleci.com/project-id` annotation with the value set to your project ID
 +
-[NOTE]
-====
+****
 Specify your **project ID** in one of the following ways:
 
 *Built-in env var*: Use the `$CIRCLE_PROJECT_ID` xref:reference:ROOT:variables.adoc#built-in-environment-variables[built-in environment variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
@@ -50,7 +49,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Your project ID is available to copy from the overview page
 +
 image::guides:ROOT:project-id.png[Screenshot showing where to find the project ID]
-====
+****
 
 For example:
 
@@ -80,14 +79,13 @@ spec:
 
 NOTE: Do not add `circleci.com/version` and `circleci.com/component-name` to the selector labels. These labels can not be changed later, and `circleci.com//version` should change for every new release.
 
-[WARNING]
-====
+****
 If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend to migrate to the new labels as soon as possible.
 
 Support for the old labels will be dropped in one of the next releases.
 
 After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
-====
+****
 
 Once you have updated your Deployment or Rollout, check the CircleCI deploys dashboard and you should see your deployment in the timeline view.
 

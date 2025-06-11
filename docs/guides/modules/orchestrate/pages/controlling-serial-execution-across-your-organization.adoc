@@ -86,11 +86,6 @@ image::guides:ROOT:serial-groups/lock-job-queued-focus.png[A job in a serial gro
 
 * The serial group start and end block statuses indicate the status of the jobs place in the serial group. For example if a job starts and is then cancelled while running, either manually or due to waiting beyond the time limit, the group start block shows a "Completed" status because the job started.
 
-[NOTE]
-====
-Serial group jobs do not consume build minutes while waiting in queue, only when actively running.
-====
-
 === Managing serial groups
 
 From the CircleCI web app there are two ways to move a serial group along to the next job in the queue:
@@ -98,10 +93,9 @@ From the CircleCI web app there are two ways to move a serial group along to the
 * You can release a serial group so that the current workflow continues as normal while the next job in the serial group is allowed to run.
 * You can cancel a workflow containing a job in a serial group. In this case all jobs in the workflow are cancelled and the next job in the serial group is allowed to start.
 
-[TIP]
-====
+****
 Before taking either action, check which pipelines are waiting in the queue. The system protects against older pipelines running after newer pipelines.
-====
+****
 
 Each method is described in the following sections:
 
@@ -116,16 +110,6 @@ You can manually release a serial group from the CircleCI web app to allow queui
 +
 image::guides:ROOT:serial-groups/serial-group-release-modal.png[Serial group release modal]
 
-[NOTE]
-====
-*Implications of releasing a serial group:*
-
-* The job that is removed from the queue when released will continue to run.
-* The next job in queue will immediately start running.
-* If a workflow depends on maintaining its place in the queue throughout its execution, this may cause unexpected behavior.
-* If multiple operations should be atomic (run as a group), releasing the lock may break that expectation.
-====
-
 ==== Cancel a workflow with a serial group job
 
 You can cancel an entire workflow that contains serial group jobs. Cancelling a workflow will cancel all of its jobs, and the next job in the serial group in the org will start:
@@ -134,16 +118,6 @@ You can cancel an entire workflow that contains serial group jobs. Cancelling a 
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
 . Select the "Cancel Workflow" button to the right of the pipeline (icon:times-circle[cancel workflow])
 . Confirm the cancellation when prompted.
-
-[NOTE]
-====
-*Implications of Canceling a Workflow:*
-
-* All jobs in the workflow will be canceled, including the serial group job.
-* The next waiting job in the serial group will run.
-* The entire pipeline is aborted, which may disrupt dependent processes.
-* If ordering is critical, check the pipeline number of the next job in queue before cancelling the workflow.
-====
 
 == Troubleshooting serial groups
 

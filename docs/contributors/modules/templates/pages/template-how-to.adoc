@@ -15,8 +15,7 @@ Some notes on attributes
 
 ////
 
-[NOTE]
-====
+****
 This template will help you create a new docs page that shows the reader how to carry out a task and accomplish a specific goal with CircleCI. Content templates help you to:
 
 * Develop new content quickly
@@ -25,7 +24,7 @@ This template will help you create a new docs page that shows the reader how to 
 To use this template, make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-how-to.adoc?plain=1[here]. There is additional detail in the comments.
 
 Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
-====
+****
 
 In a how-to guide, include one or two opening paragraphs. The opening paragraph should be used to briefly describe to the reader what the reader will do using this guide, and what the outcomes are when they successfully finish the task. The information in the opening paragraph should help answer the following questions for the reader:
 
