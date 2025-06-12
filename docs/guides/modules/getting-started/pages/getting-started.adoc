@@ -47,7 +47,10 @@ pass:[<!-- vale off -->]
 
 include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
-[.tab.quickstart1.GitHub_App]
+[tabs]
+====
+GitHub_App::
++
 --
 ++++
 <div class="include-two-up">
@@ -97,8 +100,7 @@ Don’t see these options? Select the CircleCI logo in the top bar to get back t
 </div>
 ++++
 --
-
-[.tab.quickstart1.GitLab_&_Bitbucket_Data_Center]
+====
 --
 ++++
 <div class="include-two-up">

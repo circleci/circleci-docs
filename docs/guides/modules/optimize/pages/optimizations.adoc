@@ -84,7 +84,10 @@ Using `resource_class`, it is possible to specify CPU and RAM resources for each
 
 Examples of how to set a resource class:
 
-[.tab.resource-class.Docker]
+[tabs]
+====
+Docker::
++
 --
 [source,yaml]
 ----
@@ -97,8 +100,8 @@ jobs:
     #  ...  other config
 ----
 --
-
-[.tab.resource-class.Linux_VM]
+Linux_VM::
++
 --
 [source,yaml]
 ----
@@ -111,8 +114,8 @@ jobs:
     #  ...  other config
 ----
 --
-
-[.tab.resource-class.macOS]
+macOS::
++
 --
 [source,yaml]
 ----
@@ -125,8 +128,8 @@ jobs:
     #  ...  other config
 ----
 --
-
-[.tab.resource-class.Windows]
+Windows::
++
 --
 [source,yaml]
 ----
@@ -139,8 +142,8 @@ jobs:
     #  ...  other config
 ----
 --
-
-[.tab.resource-class.Arm]
+Arm::
++
 --
 [source,yaml]
 ----
@@ -153,8 +156,8 @@ jobs:
     #  ...  other config
 ----
 --
-
-[.tab.resource-class.GPU]
+GPU::
++
 --
 [source,yaml]
 ----
@@ -169,6 +172,7 @@ jobs:
 
 NOTE: Open a link:https://support.circleci.com/hc/en-us/requests/new[Support ticket] if you would like access to the GPU execution environment.
 --
+====
 
 * Read more about resource classes on the xref:execution-managed:resource-class-overview.adoc[resource class overview] page.
 

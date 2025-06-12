@@ -30,7 +30,10 @@ NOTE: If you have integrated your code with the xref:integration:github-apps-int
 
 Choose steps to follow below, depending on where your code is stored:
 
-[.tab.create-project.GitHub_App]
+[tabs]
+====
+GitHub_App::
++
 --
 Follow these steps to create a new project in CircleCI:
 
@@ -62,8 +65,8 @@ image::guides:ROOT:create-project/review-and-finish-setup.png[Screenshot showing
 
 Once your project is created you will land on your pipelines page.
 --
-
-[.tab.create-project.GitLab_Cloud]
+GitLab_Cloud::
++
 --
 Follow these steps to create a new project in CircleCI:
 
@@ -100,8 +103,8 @@ image::guides:ROOT:create-project/generated-config-commit-and-run.png[Window sho
 .Instructions for using an existing config file
 image::guides:ROOT:create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
 --
-
-[.tab.create-project.GitLab_self-managed]
+GitLab_self-managed::
++
 --
 Follow these steps to create a new project in CircleCI:
 
@@ -140,8 +143,8 @@ For guidance on creating a `config.yml` file, see the following pages:
 * xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
 ****
 --
-
-[.tab.create-project.Bitbucket_Data_Center]
+Bitbucket_Data_Center::
++
 --
 
 Follow these steps to create a new project in CircleCI:
@@ -159,6 +162,7 @@ image::guides:ROOT:create-project/authorize-bitbucket-data-center.png[Choose a r
 ** Add a configuration file to your repo.
 
 --
+====
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
 

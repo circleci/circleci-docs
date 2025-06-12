@@ -1,7 +1,10 @@
 //[#self-hosted-runner-terms-agreement]
 //== Self-hosted runner Terms Agreement
 
-[.tab.runner-terms.Web_app_installation]
+[tabs]
+====
+Web_app_installation::
++
 --
 
 Before you can install self-hosted runners through the web app, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app] or your CircleCI server app, an admin in your organization needs to navigate to menu:Organization Settings[Self-Hosted Runners], and agree to the terms.
@@ -26,7 +29,7 @@ For more information about the differences, see the link:https://docs.github.com
 ****
 
 --
-[.tab.runner-terms.CLI_installation]
+====
 --
 
 If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].

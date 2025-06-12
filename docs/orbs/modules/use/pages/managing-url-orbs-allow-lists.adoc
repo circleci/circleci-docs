@@ -27,7 +27,10 @@ The allow-list applies organization-wide. Once configured, all projects within t
 
 === Adding a URL orb allow-list entry
 
-[.tab.add.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 . Navigate to the menu:Organization Settings[Orbs].
 . In the *Allowed URL Orb prefixes*  section, select btn:[Add].
@@ -36,8 +39,8 @@ The allow-list applies organization-wide. Once configured, all projects within t
 
 image::guides:ROOT:add-allow-list-url-prefix-modal.png[Add URL Prefix modal]
 --
-
-[.tab.add.API]
+API::
++
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
@@ -64,11 +67,15 @@ Example response:
 }
 ----
 --
+====
 
 === View the organization's URL orb allow-lists
 
 
-[.tab.get.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 . Navigate to menu:Organization Settings[Orbs].
 . Scroll to the *Allowed URL Orb prefixes* section.
@@ -76,8 +83,8 @@ Example response:
 
 image::guides:ROOT:allow-list.png[Allow-list in Organization settings > Orbs]
 --
-
-[.tab.get.API]
+API::
++
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
@@ -109,10 +116,14 @@ Example response:
 
 ----
 --
+====
 
 === Delete a URL orb allow-list entry
 
-[.tab.delete.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 . Navigate to menu:Organization Settings[Orbs].
 . Scroll to the *Allowed URL Orb prefixes* section.
@@ -120,8 +131,8 @@ Example response:
 
 image::guides:ROOT:delete-url-prefix.png[Delete URL Prefix modal]
 --
-
-[.tab.delete.API]
+API::
++
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
@@ -146,6 +157,7 @@ Example response:
 }
 ----
 --
+====
 
 === Limitations and caveats
 

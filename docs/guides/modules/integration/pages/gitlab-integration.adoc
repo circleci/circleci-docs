@@ -28,7 +28,10 @@ Follow the steps on the xref:getting-started:first-steps.adoc#github-gitlab-bitb
 
 NOTE: You will need API access and write permissions on the repository you want to set up. Within GitLab, this is the "maintainer" role or higher.
 
-[.tab.signup.GitLab_SaaS]
+[tabs]
+====
+GitLab_SaaS::
++
 --
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
 
@@ -49,8 +52,8 @@ You can choose a sample `.circleci/config.yml` to best fit your project from a v
 
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
 --
-
-[.tab.signup.GitLab_Self-Managed]
+GitLab_Self-Managed::
++
 --
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
 
@@ -98,6 +101,7 @@ NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Man
 
 The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repository to see your pipeline on the dashboard.
 --
+====
 
 NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started:hello-world.adoc[Hello world] example, or take a look at some of our xref:toolkit:sample-config.adoc[sample configurations] that demonstrate different types of workflows. The xref:reference:ROOT:configuration-reference.adoc[Configuring CircleCI] page is a full reference to the keys used in a `.circleci/config.yml` file.
 
@@ -115,19 +119,23 @@ If you need more organizations or projects, consider upgrading to a xref:plans-p
 [#trigger-pipeline]
 == Trigger a pipeline in CircleCI
 
-[.tab.pipeline.GitLab.com]
+[tabs]
+====
+com::
++
 --
 When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
 If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
 --
-
-[.tab.pipeline.GitLab_Self-Managed]
+GitLab_Self-Managed::
++
 --
 If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.
 
 When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
 --
+====
 
 Each time you push changes to your GitLab repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 

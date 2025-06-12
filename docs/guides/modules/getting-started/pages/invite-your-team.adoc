@@ -56,9 +56,11 @@ The steps in this section show how an org admin can invite teammates to join the
 
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
-[.tab.invite.GitHub_App_/_GitLab_/_Bitbucket_Data_Center]
+[tabs]
+====
+GitHub_App_GitLab_Bitbucket_Data_Center::
++
 --
-
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Navigate to menu:Organization Settings[People], then select btn:[Invite].
 . To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
@@ -66,8 +68,8 @@ include::ROOT:partial$tips/check-github-type-org.adoc[]
 
 image::guides:ROOT:invite-teammates-standalone.png[Navigate to Organization Settings, People, use the Invite form]
 --
-
-[.tab.invite.GitHub_OAuth_/_Bitbucket_Cloud]
+GitHub_OAuth__Bitbucket_Cloud::
++
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Select *Organization Setting* from the sidebar and select *People*.
@@ -76,6 +78,7 @@ image::guides:ROOT:invite-teammates-standalone.png[Navigate to Organization Sett
 
 image::guides:ROOT:invite-teammates-classic.png[Navigate to Organization Settings, People, use the Copy Invite Link button]
 --
+====
 
 
 [#see-also]

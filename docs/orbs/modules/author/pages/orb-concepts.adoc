@@ -63,7 +63,10 @@ Executors defined within orbs can be used to run jobs within your project config
 [#executor-definition-example]
 ==== Executor definition example
 
-[.tab.executor.Node-Docker]
+[tabs]
+====
+Node-Docker::
++
 --
 [,yaml]
 ----
@@ -81,8 +84,8 @@ parameters:
     type: string
 ----
 --
-
-[.tab.executor.Ruby-Docker]
+Ruby-Docker::
++
 --
 [,yaml]
 ----
@@ -101,6 +104,7 @@ parameters:
     type: string
 ----
 --
+====
 
 In the link:https://circleci.com/developer/orbs/orb/circleci/node[Node orb], for example, a parameterized Docker-based executor is provided, through which you can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's link:https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing[test job].
 
@@ -340,7 +344,10 @@ When `circleci orb pack <dir> > orb.yml` is run against a directory containing a
 
 CAUTION: Included files are always referenced from the relative location of the `@orb.yml` file.
 
-[.tab.fileInclude.Command-yaml]
+[tabs]
+====
+Command-yaml::
++
 --
 [,yaml]
 ----
@@ -351,8 +358,8 @@ steps:
       command: <<include(scripts/file.sh)>>
 ----
 --
-
-[.tab.fileInclude.file-sh]
+file-sh::
++
 --
 [,shell]
 ----
@@ -360,8 +367,8 @@ steps:
 echo "Hello World"
 ----
 --
-
-[.tab.fileInclude.Packed_Command-yaml]
+Packed_Command-yaml::
++
 --
 [,yaml]
 ----
@@ -374,6 +381,7 @@ steps:
         echo "Hello World"
 ----
 --
+====
 
 File inclusion is especially useful for separating your configuration's Bash logic from your YAML. Including Bash scripts will allow you to develop and test your Bash outside of your orb.
 

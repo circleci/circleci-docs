@@ -769,7 +769,10 @@ The machine executor is configured using the `machine` key, which takes a map:
 
 *Example:*
 
-[.tab.machine.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yml]
 ----
@@ -782,8 +785,8 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ----
 --
-
-[.tab.machine.Server]
+Server::
++
 --
 [,yml]
 ----
@@ -794,6 +797,7 @@ jobs:
       # Commands run in a Linux virtual machine environment
 ----
 --
+====
 
 '''
 
@@ -997,7 +1001,10 @@ include::guides:ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
 *Example:*
 
-[.tab.linuxvm.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -1010,8 +1017,8 @@ jobs:
       ... // other config
 ----
 --
-
-[.tab.linuxvm.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -1023,6 +1030,7 @@ jobs:
       ... // other config
 ----
 --
+====
 
 '''
 
@@ -1060,7 +1068,10 @@ include::guides:ROOT:partial$execution-resources/windows-resource-table.adoc[]
 
 *Example:*
 
-[.tab.windowsblock.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -1078,8 +1089,8 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ----
 --
-
-[.tab.windowsblock.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -1095,6 +1106,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ----
 --
+====
 
 '''
 
@@ -1156,7 +1168,10 @@ include::guides:ROOT:partial$execution-resources/arm-resource-table.adoc[]
 
 *Example:*
 
-[.tab.armblock.Cloud]
+[tabs]
+====
+Cloud::
++
 --
 [,yaml]
 ----
@@ -1170,8 +1185,8 @@ jobs:
       - run: echo "Hello, Arm!"
 ----
 --
-
-[.tab.armblock.Server]
+Server::
++
 --
 [,yaml]
 ----
@@ -1185,6 +1200,7 @@ jobs:
       - run: echo "Hello, Arm!"
 ----
 --
+====
 
 '''
 

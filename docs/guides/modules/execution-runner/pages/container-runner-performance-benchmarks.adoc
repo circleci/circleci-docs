@@ -23,7 +23,10 @@ The tables below detail the aggregation of results from testing the link:https:/
 
 Distilling the differences between GOAT and the 3.0 self-hosted runner, there is a net improvement across all four categories, with the most notable being the reduction in queue times. GOAT also demonstrated a minor but notable decrease in failed runs, showing an improvement when run under stress.
 
-[.tab.runner_version.goat]
+[tabs]
+====
+goat::
++
 --
 [.table.table-striped]
 [cols=13, options="header", width="100%"]
@@ -554,8 +557,8 @@ h| Improvement From 3.0
 | 60%
 |===
 --
-
-[.tab.runner_version.version_3.0]
+0::
++
 --
 [.table.table-striped]
 [cols="9", options="header", width="100%"]
@@ -602,6 +605,7 @@ h| Improvement From 3.0
 |            |                |              |           | *Max*            | 6413           | 113833           | 207405       | 31100
 |===
 --
+====
 
 In summary, the average improvements of GOAT are as follows:
 

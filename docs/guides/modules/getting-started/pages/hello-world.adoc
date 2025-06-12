@@ -20,7 +20,10 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 
 These examples adds a job called `hello-job` that prints `hello world` to the console.
 
-[.tab.hellocloud.Docker]
+[tabs]
+====
+Docker::
++
 --
 The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker execution environment] page for more information.
 
@@ -42,8 +45,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.hellocloud.Linux_VM]
+Linux_VM::
++
 --
 The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.
 
@@ -65,8 +68,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.hellocloud.macOS]
+macOS::
++
 --
 The job `hello-job` spins up a macOS virtual machine running the specified Xcode version. Refer to xref:execution-managed:using-macos.adoc[Using the macOS execution environment] page for more information.
 
@@ -89,8 +92,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.hellocloud.Windows]
+Windows::
++
 --
 The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows execution environment] page for more information.
 
@@ -118,8 +121,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.hellocloud.GPU]
+GPU::
++
 --
 NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] Plan.
 
@@ -144,8 +147,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.hellocloud.Arm_VM]
+Arm_VM::
++
 --
 The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM execution environment] page for more information.
 
@@ -168,6 +171,7 @@ workflows:
       - hello-job
 ----
 --
+====
 
 image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
 
@@ -180,7 +184,10 @@ NOTE: To build in a macOS execution environment on server use xref:execution-run
 
 These examples add a job called `hello-job` that prints `hello world` to the console.
 
-[.tab.helloserver4.Docker]
+[tabs]
+====
+Docker::
++
 --
 The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker execution environment] page for more information.
 
@@ -202,8 +209,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.helloserver4.Linux_VM]
+Linux_VM::
++
 --
 The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.
 
@@ -224,8 +231,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.helloserver4.Windows]
+Windows::
++
 --
 The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows execution environment] page for more information.
 
@@ -249,8 +256,8 @@ workflows:
       - hello-job
 ----
 --
-
-[.tab.helloserver4.Arm]
+Arm::
++
 --
 The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM execution environment] page for more information.
 
@@ -273,6 +280,7 @@ workflows:
       - hello-job
 ----
 --
+====
 
 image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
 

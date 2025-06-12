@@ -55,7 +55,10 @@ To generate your own status badge, you will need to know, and substitute, the fo
 
 The following examples demonstrate how to generate a status badge for various template languages. Each example also provides a status badge code for a specific branch.
 
-[.tab.status.Markdown]
+[tabs]
+====
+Markdown::
++
 --
 [,md]
 ----
@@ -69,8 +72,8 @@ The following examples demonstrate how to generate a status badge for various te
 [![CircleCI](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5)
 ----
 --
-
-[.tab.status.Textile]
+Textile::
++
 --
 [,textile]
 ----
@@ -84,8 +87,8 @@ The following examples demonstrate how to generate a status badge for various te
 !https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg!:https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
 ----
 --
-
-[.tab.status.Rdoc]
+Rdoc::
++
 --
 [,rdoc]
 ----
@@ -99,8 +102,8 @@ The following examples demonstrate how to generate a status badge for various te
 {<img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5]
 ----
 --
-
-[.tab.status.Asciidoc]
+Asciidoc::
++
 --
 [,adoc]
 ----
@@ -114,8 +117,8 @@ image:https://circleci.com/gh/circleci/circleci-docs.svg?style=svg["CircleCI", l
 image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg["CircleCI", link="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"]
 ----
 --
-
-[.tab.status.reStructuredText]
+reStructuredText::
++
 --
 [,rst]
 ----
@@ -132,8 +135,8 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
     :target: https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
 ----
 --
-
-[.tab.status.pod]
+pod::
++
 --
 [source]
 ----
@@ -147,6 +150,7 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 =for HTML <a href="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"><img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg"></a>
 ----
 --
+====
 
 [#creating-badges-for-private-repositories]
 === Creating badges for private repositories

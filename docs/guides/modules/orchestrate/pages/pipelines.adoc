@@ -99,7 +99,10 @@ A trigger kicks off a pipeline to run the workflows defined in your connected co
 
 To add a trigger for a pipeline, follow these steps:
 
-[.tab.trigger.GitHub_App]
+[tabs]
+====
+GitHub_App::
++
 --
 
 When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
@@ -125,8 +128,8 @@ To add a trigger for a pipeline, follow these steps:
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
-
-[.tab.trigger.Custom_webhook]
+Custom_webhook::
++
 --
 NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
 
@@ -140,8 +143,8 @@ include::ROOT:partial$pipelines-and-triggers/custom-webhook-setup.adoc[]
 
 To verify your trigger is set up correctly, trigger an event from your third party system.
 --
-
-[.tab.trigger.GitLab]
+GitLab::
++
 --
 
 When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
@@ -174,18 +177,19 @@ CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** r
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
-
-[.tab.trigger.Bitbucket_Data_Center]
+Bitbucket_Data_Center::
++
 --
 For steps to add a trigger for a pipeline using Bitbucket Data Center, see the xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] page.
 --
-
-[.tab.trigger.Scheduled]
+Scheduled::
++
 --
 include::ROOT:partial$notes/standalone-unsupported.adoc[Unsupported for GitHub App, GitLab, Bitbucket Data Center orgs]
 
 include::ROOT:partial$pipelines-and-triggers/scheduled-pipeline-setup.adoc[Setting up a scheduled pipeline using the CircleCI web app]
 --
+====
 
 == Pipeline parameters
 

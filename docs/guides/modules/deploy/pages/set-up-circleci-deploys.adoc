@@ -34,7 +34,10 @@ include::ROOT:partial$deploy/supported-versions.adoc[]
 
 == Set up CircleCI deploys
 
-[.tab.environmentintegration.Kubernetes_cluster]
+[tabs]
+====
+Kubernetes_cluster::
++
 --
 . In the CircleCI web app, select **Deploys** in the sidebar.
 . If this is your first environment setup, select btn:[Create your first Environment Integration]. If you already have environments set up, choose the **Environments** tab and select btn:[Create Environment Integration].
@@ -48,8 +51,8 @@ After completing all the setup steps in the app, you will have done the followin
 * Installed the release agent into your Kubernetes cluster
 * Configured your Kubernetes components.
 --
-
-[.tab.environmentintegration.Amazon_SageMaker]
+Amazon_SageMaker::
++
 --
 . In the CircleCI web app, select **Deploys** in the sidebar.
 . If this is your first environment setup, select btn:[Create your first Environment Integration]. If you already have environments set up, choose the **Environments** tab and select btn:[Create Environment Integration].
@@ -57,6 +60,7 @@ After completing all the setup steps in the app, you will have done the followin
 . Use the dropdown menu to choose your environment integration type, Amazon SageMaker, then select btn:[Save and Continue].
 . To get set up with CircleCI deploys and Amazon SageMaker from this point, follow the steps outlined on the xref:deploy-to-amazon-sagemaker.adoc[Deploy to Amazon SageMaker] page.
 --
+====
 
 [#next-steps]
 == Next steps

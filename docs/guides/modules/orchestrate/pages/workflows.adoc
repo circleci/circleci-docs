@@ -251,13 +251,16 @@ In this example, the `deploy` job will not run until the `hold` job is approved.
 
 To approve a job follow these steps:
 
-[.tab.approve.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.
 . Select btn:[Approve].
 --
-
-[.tab.approve.API]
+API::
++
 --
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
@@ -272,20 +275,24 @@ curl --request POST \
   --header 'content-type: application/json' \
 ----
 --
+====
 
 
 === Identify the user who approved a job
 
 To identify the user who approved a job, you can use the CircleCI web app or the API.
 
-[.tab.identify.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 * If the user signed up via GitHub, the (non-clickable) avatar of the GitHub user appears next to the approval job. Hovering over that avatar brings up a tooltip with the user's name as specified in their GitHub/Bitbucket account settings.
 
 * If the user signed up via email, the anonymous avatar appears next to the approval job; hovering over that avatar brings up a tooltip with the user's email address.
 --
-
-[.tab.identify.API]
+API::
++
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
 . You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[pipeline values or environment variables], or by xref:integration:outbound-webhooks.adoc[receiving webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API]
@@ -346,18 +353,22 @@ TIP: You can find detailed instructions in link:https://support.circleci.com/hc/
 
 
 --
+====
 
 === Cancel a job
 
 To Cancel a job follow these steps:
 
-[.tab.cancel.CircleCI_web_app]
+[tabs]
+====
+CircleCI_web_app::
++
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.
 . Select btn:[Cancel].
 --
-
-[.tab.cancel.API]
+API::
++
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
 . You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[pipeline values or environment variables], or by xref:integration:outbound-webhooks.adoc[receiving webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
@@ -370,6 +381,7 @@ curl --request POST \
   --header 'content-type: application/json' \
 ----
 --
+====
 
 In this example, the purpose of the `hold` job is to wait for approval to begin deployment. A job can be approved for up to 90 days after it starts.
 

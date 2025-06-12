@@ -283,7 +283,10 @@ One of the major benefits of the orb development kit is a xref:orb-concepts.adoc
 
 Script inclusion is especially useful when writing complex orb commands, which might contain a lot of _Bash_ code, _(although you could use Python too!)_.
 
-[.tab.scripts.Orb_Development_Kit_Packing]
+[tabs]
+====
+Orb_Development_Kit_Packing::
++
 --
 [,yaml]
 ----
@@ -300,8 +303,8 @@ steps:
       command: <<include(scripts/greet.sh)>>
 ----
 --
-
-[.tab.scripts.Standard_YAML_Config]
+Standard_YAML_Config::
++
 --
 [,yaml]
 ----
@@ -316,6 +319,7 @@ steps:
       command: echo "Hello <<parameters.to>>"
 ----
 --
+====
 
 [#why-include-scripts]
 ===== Why include scripts?

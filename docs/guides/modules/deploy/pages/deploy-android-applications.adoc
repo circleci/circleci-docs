@@ -219,7 +219,10 @@ You can set up your configuration with the link:https://circleci.com/developer/o
 
 Using the Android orb gives you two options for deploying to the Google Play Store. You can either use the `deploy_to_play_store` job from the orb, or run each command individually in a job.
 
-[.tab.configAndroidOrb.Use_the_deploy-to-play-store_job]
+[tabs]
+====
+Use_the_deploy-to-play-store_job::
++
 --
 To deploy using the `deploy-to-play-store` job you just need to add an `android/deploy_to_play_store` job to your list of jobs in your workflow.
 
@@ -254,8 +257,8 @@ workflows:
 
 NOTE: The executor has no default value and must be set in the configuration.
 --
-
-[.tab.configAndroidOrb.Run_each_command_individually]
+Run_each_command_individually::
++
 --
 To run each command individually in a job, you will need to add the following commands to your job:
 
@@ -296,6 +299,7 @@ jobs:
             lane_name: internal
 ```
 --
+====
 
 [#set-up-config-without-the-android-orb]
 === b. Set up configuration without the Android orb
