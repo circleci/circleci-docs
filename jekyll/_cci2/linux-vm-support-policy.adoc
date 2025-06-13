@@ -31,18 +31,14 @@ Tags we support for this image (tag is what is specified in `.circleci/config.ym
 
 - `current` version of the image will receive updates approximately every three months.
 
-- `previous` version of the image will receive the previous version of `current`.
-
 - `edge` tags are reserved for previews of new releases, which will initially point to this tag. The edge tags may include incremental updates to the current quarterly (every 3 months) image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
 
-- Date based tagging: The Ubuntu LTS based images have the image slug format of: `ubuntu-<LTS version>:<year>.<month>.<patch>`, such as `ubuntu-2204:2023.10.1`. We recommend using the `default` version and not pinning to a date version.
-
-We always aim to release a version of this image every three months.
+We always aim to release a version of this image every three months. Tags will be supported on all versions we support.
 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in Linux VM images, we will investigate the impact that this has on our images being used within the CircleCI execution environment.  If customers are impacted by these CVEs we will push a patch fix to the released image(s). This image will supersede the original image.
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s). This image will supersede the original image.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
@@ -63,10 +59,8 @@ Current Deprecation (Jan 2024):
 | Support
 
 | Ubuntu 20.04 LTS
-| Build quarterly images for current year and retain Q4 (October) release from the past two years.
 
 | Ubuntu 22.04 LTS
-| Quarterly images built and only Q4 image retained each year
 |===
 
 
@@ -82,13 +76,13 @@ Example: When Ubuntu 24.04 LTS is released
 | Deprecated and removed entirely
 
 | Ubuntu 22.04 LTS
-| Retain only Q4 (October) releases from past two years
+| `current` and `edge` tags retained
 
 | Ubuntu 24.04 LTS
-| Quarterly images built and only Q4 (October) image retained from each year
+| `current` and `edge` tags retained
 |===
 
-When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs.
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.
 
 We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release.
 
