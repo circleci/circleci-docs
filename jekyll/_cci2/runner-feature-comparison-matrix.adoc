@@ -1,0 +1,119 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Self-hosted runner feature comparison
+:description: A comparison table of the features available for CircleCI runners.
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:experimental:
+
+This page offers a comparison of the features available for CircleCI machine runner vs. CircleCI container runner.
+
+[#feature-comparison-matrix]
+== Comparison matrix
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+|Feature
+|Description
+|Machine Runner
+|Container Runner
+
+|*Environment*
+|Where jobs run and how resources are managed
+|Full VM/bare metal
+|Kubernetes Pods
+
+|*Configuration File*
+|Primary file for runner setup
+|YAML config (location depends on OS)
+|Helm `values.yaml`
+
+|*Resource Control*
+|How compute resources are allocated
+|System level
+|Kubernetes limits
+
+|*Architecture Support*
+|CPU architectures available for builds
+|xref:runner-overview#available-self-hosted-runner-platforms[Depends on OS]
+|AMD64/ARM64 with `nodeSelector`
+
+|*Job Isolation*
+|How jobs are kept separate
+|VM-level
+|Container-level
+
+|*Scaling*
+|How runner capacity scales with demand
+|xref:runner-scaling#scaling-data[Manual/custom]
+|Kubernetes-based auto-scaling
+
+|*Service Containers*
+|Support for additional services in build
+|Not supported
+|Extensive support with resource controls
+
+|*Execution Modes*
+|How runner handles job execution
+|`single-task` or `continuous` 
+|Pod-based execution
+
+|*Docker Support*
+|How Docker-in-Docker is handled
+|Native OS support 
+|Possible xref:container-runner#building-container-images[with third-party tools]
+
+|*Resource Cleanup*
+|How build environments are cleaned after jobs
+|Working directory cleanup
+|Container lifecycle
+|===
+
+
+[#feature-highlights]
+== Feature Highlights
+
+*Machine Runner*
+
+* Latest generation of machine-based runners.
+* Full access to underlying operating system.
+* Ideal for workflows requiring VM-level isolation.
+* Consistent xref:variables#built-in-environment-variables[environment variables] with `CIRCLECI_RUNNER_*` prefix.
+* Supports SSH connectivity for debugging.
+
+*Container Runner*
+
+* Kubernetes-native solution for container-based workflows.
+* Fine-grained resource allocation and constraints.
+* Supports service container configurations with pattern matching.
+* Advanced node selection via Kubernetes annotations.
+* Custom security contexts and volume mounting.
+* Support for spot instances via tolerations.
+* Configurable resource limits for primary and service containers.
+* Supports SSH connectivity for debugging - xref:container-runner-installation#enable-rerun-job-with-ssh[Open preview].
+
+[#key-differences]
+== Key differences
+
+*Machine runner* offers full VM isolation with the newest
+configuration patterns and improved controls.
+
+*Container runner* leverages Kubernetes for:
+
+* Container-based isolation.
+* Better scaling capabilities.
+* Advanced resource management.
+* Multiple architecture support.
+
+[#choose-a-runner]
+== When to choose each runner
+
+*Machine runner*: Choose for full system access, custom system dependencies, or when Kubernetes is not available.
+
+*Container runner*: Best for cloud-native applications, teams using Kubernetes, and workloads that benefit from container orchestration.

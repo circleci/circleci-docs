@@ -16,7 +16,7 @@ include::../_includes/partials/notes/standalone-unsupported.adoc[This feature is
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:local-cli#[CircleCI CLI] or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-main.png[Configuration Editor]
+image::config-editor-main.png[Configuration Editor]
 
 The benefits of using the CircleCI configuration editor include:
 
@@ -32,7 +32,7 @@ In the link:https://app.circleci.com/[CircleCI web UI], select a pipeline in the
 
 To access the CircleCI configuration editor, select your desired branch from the *All Branches* drop-down menu near the top of the screen. Once you select a branch, the btn:[Edit Config] button will become enabled, and you can access the configuration editor.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-all-branches.png[Configuration Editor Access]
+image::config-editor-all-branches.png[Configuration Editor Access]
 
 In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
 
@@ -41,7 +41,7 @@ In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the 
 
 The CircleCI configuration editor provides auto-complete suggestions as you type, with the ability to click on a suggestion to find out more. You will also find links to relevant documentation within the auto-completion tooltip.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-auto-complete.png[Auto-completion]
+image::config-editor-auto-complete.png[Auto-completion]
 
 [#configuration-menu]
 == Configuration tab options
@@ -54,11 +54,11 @@ The docs tab will link out to some helpful documentation relating to configurati
 
 The workflow tab will show you all the jobs in the workflow, and link out to the individual job's *Job* view in the web UI.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-docs.png[Suggested Docs]
+image::config-editor-docs.png[Suggested Docs]
 
 When hovering over a key-value pair in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-tooltips.png[Tooltips]
+image::config-editor-tooltips.png[Tooltips]
 
 [#save-and-run]
 == Save and run
@@ -67,7 +67,7 @@ Once your changes are made and your configuration is valid, you may commit to yo
 
 If you are not making changes on your main branch, you will need to open a pull request on your VCS to save the changes to your main branch when you are ready.
 
-image::{{site.baseurl}}/assets/img/docs/config-editor-commit-and-run.png[Save and run]
+image::config-editor-commit-and-run.png[Save and run]
 
 [#visual-studio-code-extension]
 == VS Code extension

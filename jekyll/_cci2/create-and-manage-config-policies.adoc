@@ -1,13 +1,12 @@
 ---
-description: Learn how to write and manage config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 = Create and manage config policies
+:page-description: Learn how to write and manage config policies for CircleCI project configurations.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -61,7 +60,7 @@ Example output:
 }
 ----
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [#manage-policies-with-your-vcs]
 == Manage policies with your VCS
@@ -70,7 +69,7 @@ CircleCI policies are managed by pushing directories of policies to CircleCI via
 
 * Store your policies in a repository in your VCS, within your organization. This is how policies are managed internally at CircleCI. Pushing a policy bundle is done by triggering a CircleCI pipeline.
 
-* Create a bot account for pushing policies, and use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the link:/docs/contexts[Using Contexts] page.
+* Create a bot account for pushing policies, and use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the xref:contexts#[Using Contexts] page.
 
 The rest on the steps in this section show how to set up a CI/CD pipeline to manage your policies.
 
@@ -90,7 +89,7 @@ You can do this using a context. For more information about setting up and using
 . Select **Add Environment Variable** and enter `CIRCLECI_CLI_TOKEN` for the environment variable name, and your personal API token string for the value (For more information about this see the xref:local-cli#configure-the-cli[Installing the CircleCI local CLI] page). Then click **Add Environment Variable** again to complete.
 . Select **Add Environment Variable** and enter `ORG_ID` for the environment variable name, and your organization ID for the value.
 +
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [set-up-a-config-policy-management-ci-pipeline]
 === Set up a config policies CI/CD pipeline
@@ -178,11 +177,11 @@ Once you have decided how to manage your policies, the next step is to create a 
 [#write-your-policy]
 === 1. Write your policy
 
-CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the link:/docs/local-cli[Installing the Local CLI] page for more information.
+CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the xref:local-cli#[Installing the Local CLI] page for more information.
 
 . <<config-policy-management-enablement,Enable config policies>> for your organization, if you have not already done so.
 
-. If you have followed the steps above to set up CI/CD for your config policies, you will already have a directly for storing your policies. If not, create an empty directory to store your policies. For example:
+. If you have followed the steps above to set up CI/CD for your config policies, you will already have a directory for storing your policies. If not, create an empty directory to store your policies. For example:
 +
 [source,shell]
 ----

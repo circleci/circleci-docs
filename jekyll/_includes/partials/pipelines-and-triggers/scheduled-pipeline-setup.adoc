@@ -1,8 +1,18 @@
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+include::../app-navigation/steps-to-project-settings.adoc[]
 . Select **Triggers** in the sidebar.
 . Select btn:[Add Trigger].
++
+NOTE: The "Pipeline to run" menu only shows the OAuth pipelines, you cannot schedule GitHub App, GitLab or Bitbucket Data Center pipelines.
++
+** Give your trigger a descriptive name.
+** Enter an optional trigger description.
+** Select the pipeline to run.
+** Select a release frequencies (weekly/monthly, which days/months/time etc.).
+** Enter a branch or tag name to determine when to trigger the pipeline.
+** Optionally, enter pipeline parameters. If you declare pipeline parameters in the form, you need to make sure they are configured in your project's `.circleci/config.yml`. See the xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline values and parameters] page for more information.
+** Select an actor to initiate the trigger.
 . Define the new schedule by filling out the form, then select **Save Trigger**.
+
 
 The form also provides the option of adding xref:pipeline-variables#[pipeline parameters], which are typed pipeline variables that you declare at the top level of a configuration.
 
