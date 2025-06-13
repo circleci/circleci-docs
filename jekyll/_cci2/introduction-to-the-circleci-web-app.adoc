@@ -20,7 +20,7 @@ Inside the application, you will find the features including the following:
 * Access to job step output and logs.
 * Organization and project settings.
 * Insights for managing your projects and organizations.
-* Releases UI viewing and managing your releases.
+* Deploys UI viewing and managing your deployments.
 * Self-hosted runner setup and management.
 
 This page is not an exhaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
@@ -46,7 +46,7 @@ Select an **org card** and take a look around. The following section describe th
 
 User settings can be found by selecting your user icon at the top right of the user area (dark blue top bar) in the web app at any time. Select your icon and then select ** User Settings**.
 
-image:user_settings.png[User settings]
+image::user_settings.png[User settings]
 
 **Account Integrations**: Displays your user ID as well as account integrations such as your VCS provider.
 
@@ -62,7 +62,7 @@ image:user_settings.png[User settings]
 
 == Organization homepage and navigation
 
-After selecting an organization you will find yourself on the Organization homepage, or Dashboard if you are using CircleCI server. The organization home page gives you an overview of your org's projects and some metrics to help you get an overview of project health along with compute and credit usage for your org.
+After selecting an organization you will find yourself on the Organization homepage, or Dashboard if you are using CircleCI server. The organization homepage provides an overview of your org's projects, project health metrics, and compute and credit usage metrics for your org.
 
 image::org-homepage.png[Organization homepage]
 
@@ -70,11 +70,11 @@ TIP: Once you have selected an org, you can select the btn:[CircleCI] logo in th
 
 From your organization home page you have access to org-level options. You can create a project, select and existing project using the overview project cards, or use the sidebar navigation items to access other areas of the product. The sidebar navigation allows you to visit the following pages (some of these sections are discussed in more detail below):
 
-**Pipelines**: View all pipelines associated with your organization, You can expand each pipeline to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. If a pipeline has multiple workflows there will be a grey bar on the left, and you can see the status of each workflow and expand them individually to view the status of each individual job.
+**Pipelines**: View all pipelines associated with your organization, You can expand each pipeline to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. Multi-workflow pipelines display a grey bar to the left. You can see the status of each workflow and expand them individually to view the status of each job.
 
 **Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:create-project#[create/set up new projects].
 
-**Releases**: Set up environment integrations to manage releases for your projects. For full details of the releases feature, see the xref:release/releases-overview#[Release overview] page.
+**Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy/deploys-overview#[Deploys overview] page.
 
 **Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights#[Using Insights] page.
 
@@ -105,7 +105,7 @@ Your pipelines appear on the **Pipelines** dashboard of the CircleCI web app as 
 
 When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
 
-image:pipeline-navigation.png[Pipeline navigation]
+image::pipeline-navigation.png[Pipeline navigation]
 
 [#organization-switching]
 == Organization switching
@@ -115,7 +115,7 @@ If you want to change which org you are working within, you have a few options:
 * Select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time (1). From the user home page you can select the org that you want to work in. You can also create a new organization from your user home page.
 * Once in an org view you can also use the org switcher at the top of the sidebar (2).
 
-image:org-switch.png[Switch organization using the user homepage or the org switcher]
+image::org-switch.png[Switch organization using the user homepage or the org switcher]
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left displays your user `my-user`, only projects belonging to `my-user` will be available. If you want to add the project `your-org/project`, you must select `your-org` from the org switcher.
 
@@ -157,17 +157,31 @@ The following settings are available in the project settings page. If you do not
 
 **Overview**: Displays your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
 
-**People**: Provides a list of users who have been grated project-specific permissions. For more information, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page.
+**People**: Provides a list of users who have been granted project-specific permissions. For more information, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page.
 
-**Groups**: Provides a list of user groups that have been grated project-specific permissions. For more information, see the xref:manage-groups#[Manage groups] page.
+**Groups**: Provides a list of user groups that have been granted project-specific permissions. For more information, see the xref:manage-groups#[Manage groups] page.
 
 **Pipelines**: Provides a list of pipelines that have been set up for the project, or the option to begin setting up pipelines if none exist.
 
-**Triggers**: Depending on your integration type, the triggers page shows either a list of configured xref:pipelines#pipelines-and-triggers[pipeline triggers], or, if you have access to scheduled pipelines, you can set those up here. To set up a xref:scheduled-pipelines#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+**Triggers**: Depending on your integration type, the triggers page shows either:
 
-**Releases**: A UI for managing and viewing releases. Setup and manage environment integrations, setup components. For full information on releases features, start with the xref:release/releases-overview#[Releases overview] page.
+* A list of configured xref:pipelines#pipelines-and-triggers[pipeline triggers]
+* Set up UI for scheduled pipelines if available for your integration. To set up a xref:scheduled-pipelines#[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
-**Advanced**: Toggle options on and off for: VCS status updates, build forked pull requests, pass secrets to builds from forked pull requests, only build pull requests, auto-cancel redundant workflows, free and open source, enable dynamic config using setup workflows. More information on these settings can be found on this page, as well as in our documentation.
+**Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy/deploys-overview#[Deploys overview] page.
+
+**Advanced**: Toggle options on and off for:
+
+* VCS status updates
+* Build forked pull requests
+* Pass secrets to builds from forked pull requests
+* Only build pull requests
+* Auto-cancel redundant workflows
+* Free and open source
+* Enable dynamic config using setup workflows.
+* xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config].
+
+More information on these settings can be found on this page, as well as in our documentation.
 
 **Environment Variables**: Add or import environment variables to your jobs to keep sensitive data out of your repository.
 
@@ -179,8 +193,6 @@ The following settings are available in the project settings page. If you do not
 
 **Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
 
-**VS Code Integration**: Provides information and a link to organization settings to enable the xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config] feature, which is currently in open-preview for some customers.
-
 **Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
 
 **Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
@@ -190,7 +202,12 @@ The following settings are available in the project settings page. If you do not
 [#insights]
 == Insights
 
-The Insights page displays metrics related to workflow run, workflow duration, credits consumed, and the overall success rate for all projects in your organization over a selected time range (24 hours, seven, 30, 60, and 90 days).
+The Insights page displays metrics for all projects in your organization over a selected time range (24 hours, seven, 30, 60, and 90 days). The available metrics are as follows:
+
+* Workflow run
+* Workflow duration
+* Credits consumed
+* Overall success rate
 
 image::web_ui_insights_overview.png[Insights page]
 
@@ -218,7 +235,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 **Contexts**: Set up a new context, view a list of existing contexts, or remove contexts. Contexts provide a mechanism for securing and sharing environment variables across projects.
 
-**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub checks.
+**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub Checks.
 
 **Security**: Allows you to set whether or not you want to allow the use of partner and community orbs, or private orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
 
@@ -230,7 +247,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
 
-**Releases**: Find links to set up release markers or release monitoring for your projects. Enable/disable autodetected releases, which allows CircleCI to automatically detect releases in your projects and create release markers for you.
+**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects. Enable/disable autodetected deployments, which allows CircleCI to automatically detect deployments in your projects and create deploy markers for you.
 
 **Integrations**: Set up integrations with self-hosted version control systems.
 
@@ -239,7 +256,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 If you have administrative privileges, the plan overview and upgrade page displays the features available in your current plan, as well as a snapshot of your usage. Details of the next tier of plan upgrade are also shown. You can read more about plans in CircleCI's xref:plan-overview#[Plan] section.
 
-Depending on which plan you have, you can also choose to share your plan, which lets any organization you belong to share and run builds on your current plan, and you can also transfer your plan to another organization.
+If you are on a paid plan, you can choose to share your plan. This allows any organization you belong to, to share and run builds on your paid-for plan. You can also transfer your plan to another organization.
 
 [#plan-usage]
 === Plan usage

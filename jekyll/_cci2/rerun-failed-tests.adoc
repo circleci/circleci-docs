@@ -5,7 +5,6 @@ contentTags:
 ---
 = Rerun failed tests
 :page-layout: classic-docs
-:page-liquid:
 :page-description: How to rerun only failed tests in a job and optimize credit usage.
 :icons: font
 :experimental:
@@ -15,9 +14,9 @@ Use rerun failed tests to only rerun a subset of tests, instead of an entire tes
 [#introduction]
 == Introduction
 
-If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests runs a new workflow, which appears within your original pipeline. The rerun is created from the _same_ commit as the failed workkflow, not from subsequent commits.
+If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests runs a new workflow, which appears within your original pipeline. The rerun is created from the _same_ commit as the failed workflow, not from subsequent commits.
 
-image::{{site.baseurl}}/assets/img/docs/rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
+image::rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
 Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:workflows#rerunning-a-workflows-failed-jobs[rerun your workflow from failed]. Rerun from failed executes *all tests*, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
 
@@ -506,6 +505,45 @@ gem 'minitest-ci'
      path: test/reports
 ```
 
+[#configure-a-job-running-codeception-tests]
+=== Configure a job running Codeception tests
+
+Codeception doesn't support providing paths to multiple files in a single `codecept run` command execution directly. We can circumvent this by creating a dynamic group. Add the following to your `codeception.yml` file:
+
+[,yml]
+----
+groups:
+    circleci: tests/_output/circleci
+----
+
+In your `.circleci/config.yml` file, we can use `circleci tests glob` to get the Cest files from the path we need. `circleci tests run` will then sift through the Cest files and put the necessary ones into `tests/_output/circleci` file. Before running the tests with the `circleci` group, we ensure the `tests/_output/circleci` file exists. The `--xml` option is required for the rerun tests feature to work. The `--html` option is optional, but useful for easy debugging through artifacts.
+
+[,yml]
+----
+jobs:
+  my_test_job:
+    parallelism: 2
+    docker:
+      - image: codeception/codeception:5.1.2
+    steps:
+      - checkout
+      - run:
+          name: Run the acceptance tests
+          command: |
+            circleci tests glob ${CIRCLE_WORKING_DIRECTORY}/tests/Acceptance/**/*Cest.php | circleci tests run --command="xargs -I{} echo {} >> tests/_output/circleci" --verbose --split-by=timings
+            if [ -f tests/_output/circleci ]; then
+              codecept run -g circleci --xml --html
+            else
+              exit 0
+            fi
+      - store_test_results:
+          name: Store test results (junit xml file).
+          path: tests/_output
+      - store_artifacts:
+          name: Store test results (html and image files).
+          path: tests/_output
+----
+
 [#output-test-files-only]
 === Output test files only
 
@@ -518,7 +556,7 @@ Example:
  - run:
     command: |
       circleci tests glob "src/**/*js" | circleci tests run --command=">files.txt xargs echo" --verbose --split-by=timings #split-by=timings is optional
-      [ -s tmp/files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
+      [ -s files.txt ] || circleci-agent step halt #if a re-run and there are no tests to re-run for this parallel run, stop execution
 
  - run:
     name: Run tests
@@ -584,7 +622,6 @@ NOTE: The `halt` command will execute the rest of the _current_ step, regardless
 +
 To ensure that code coverage reports from the original job run are persisted to an artifact in addition to the report that is generated on a re-run, see the following example for a sample Go project:
 +
-{% raw %}
 [source,yaml]
 ----
 jobs:
@@ -634,7 +671,6 @@ workflows:
     jobs:
       - test-go
 ----
-{% endraw %}
 +
 The snippet above uses the built-in xref:caching#[`.Revision`] key to store a coverage report for the current VCS revision.  On a successful rerun, the original job run's coverage report will be restored to include the coverage from the skipped (passed) tests. It can then be used in a downstream job for aggregation or analysis.
 +

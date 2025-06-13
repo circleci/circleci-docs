@@ -81,7 +81,7 @@ circleci local execute orb-tools/lint
 [#orb-validation]
 === Orb Validation
 
-In addition to YAML Linting, we must validate the "packed" `orb.yml` file to ensure it properly conforms to orb schema. We first link:{{site.baseurl}}/orb-concepts/#orb-packing[pack] the orb to combine the multiple source files into an `orb.yml`. Then we run the `circleci orb validate` command for schema checking.
+In addition to YAML Linting, we must validate the "packed" `orb.yml` file to ensure it properly conforms to orb schema. We first xref:orb-concepts#orb-packing[pack] the orb to combine the multiple source files into an `orb.yml`. Then we run the `circleci orb validate` command for schema checking.
 
 [,yaml]
 ----
@@ -157,7 +157,7 @@ workflows:
 
 Review Checks output to JUnit XML format and are automatically uploaded to CircleCI to be displayed natively in the UI.
 
-image::{{site.baseurl}}/assets/img/docs/orbtools-rc008.png[orb-tools review check RC008]
+image::orbtools-rc008.png[orb-tools review check RC008]
 
 When you click into the error you will receive more information such as what file and at what line in the code the error was found, along with suggestions for resolution.
 
@@ -168,7 +168,7 @@ CAUTION: The `orb-tools/review` job currently can not be run locally due to the 
 
 If you are taking advantage of the orb development kit's xref:orb-concepts#file-include-syntax[`<<include(file)>>` file inclusion] feature and `src/scripts` directory to store and source your Bash files, you can write true integration tests for your scripts.
 
-image::{{site.baseurl}}/assets/img/docs/bats_tests_example.png[Unit testing Bash with BATS-Core]
+image::bats_tests_example.png[Unit testing Bash with BATS-Core]
 
 If you have an orb with sufficiently complex internal scripts, you may want to implement unit tests for better code quality and easier local development testing.
 

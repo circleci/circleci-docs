@@ -40,12 +40,11 @@ sectionTags:
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 [#introduction]
 == Introduction
 
-When you run tests in CircleCI there are two ways to store your test results. You can either use xref:artifacts#[artifacts] or the xref:configuration-reference#storetestresults[`store_test_results` step]. There are advantages to both methods, so the decision needs to be made for each project.
+When you run tests in CircleCI there are two ways to store your test results. You can either use xref:artifacts#[artifacts] or the xref:configuration-reference#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
 
 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
@@ -57,7 +56,7 @@ Using the *`store_test_results` step* gives you access to:
 
 You can also store test results as *artifacts*, which means you can look at the raw XML. Using artifacts can be useful when debugging issues with setting up your project's test results handling, for example, finding incorrectly uploaded files.
 
-To see test results as build artifacts, upload them using the xref:configuration-reference#storeartifacts[`store_artifacts` step]. There is a cost associated with storing artifacts due to the use of storage. See the xref:persist-data#custom-storage-usage[Persisting data] page for information on how to customize storage retention periods for objects like artifacts.
+To see test results as build artifacts, upload them using the xref:configuration-reference#storeartifacts[`store_artifacts` step]. Storing artifacts has associated costs due to the use of storage. See the xref:persist-data#custom-storage-usage[Persisting data] page for information on how to customize storage retention periods for objects like artifacts.
 
 TIP: You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
 
@@ -68,7 +67,7 @@ Using the xref:configuration-reference#storetestresults[`store_test_results` ste
 
 Access test results from the *Tests tab* when viewing a job, as shown below.
 
-image::{{site.baseurl}}/assets/img/docs/test-summary.png[store-test-results-view]
+image::test-summary.png[store-test-results-view]
 
 Below is an example of using the xref:configuration-reference#storetestresults[`store_test_results` key] in your `.circleci/config.yml`.
 
@@ -137,17 +136,17 @@ This section provides the following test runner examples:
 
 | JavaScript
 | Jest
-| link:https://www.npmjs.com/package/jest-junit[jest-junit]
+| link:https://www.npmjs.com/package/jest-junit[`jest-junit`]
 | <<jest,example>>
 
 | JavaScript
 | Mocha
-| link:https://www.npmjs.com/package/mocha-junit-reporter[mocha-junit-reporter]
-| <<mocha-for-node,example>>, <<mocha-with-nyc,example with NYC>>
+| link:https://www.npmjs.com/package/mocha-junit-reporter[`mocha-junit-reporter`]
+| <<mocha-for-node,example>>, <<mocha-with-nyc,example with nyc>>
 
 | JavaScript
 | Karma
-| link:https://www.npmjs.com/package/karma-junit-reporter[karma-junit-reporter]
+| link:https://www.npmjs.com/package/karma-junit-reporter[`karma-junit-reporter`]
 | <<karma,example>>
 
 | JavaScript
@@ -167,17 +166,17 @@ This section provides the following test runner examples:
 
 | JavaScript
 | Cypress
-| link:https://www.npmjs.com/package/mocha-junit-reporter[mocha-junit-reporter]
+| link:https://www.npmjs.com/package/mocha-junit-reporter[`mocha-junit-reporter`]
 | <<cypress,example>>
 
 | JavaScript
 | WebdriverIO
-| link:https://www.npmjs.com/package/@wdio/junit-reporter[@wdio/junit-reporter]
+| link:https://www.npmjs.com/package/@wdio/junit-reporter[`@wdio/junit-reporter`]
 | <<webdriverio,example>>
 
 | Ruby
 | RSpec
-| link:https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3[rspec_junit_formatter]
+| link:https://rubygems.org/gems/rspec_junit_formatter/versions/0.2.3[`rspec_junit_formatter`]
 | <<rspec,example>>
 
 | Ruby
@@ -222,12 +221,12 @@ This section provides the following test runner examples:
 
 | .NET
 | NUnit
-| link:https://github.com/nunit/nunit-transforms/tree/master/nunit3-junit[nunit-transforms]
+| link:https://github.com/nunit/nunit-transforms/tree/master/nunit3-junit[`nunit-transforms`]
 | link:https://github.com/nunit/nunit-transforms/tree/master/nunit3-junit[example]
 
 | Clojure
 | Kaocha
-| link:https://clojars.org/lambdaisland/kaocha-junit-xml[kaocha-junit-xml]
+| link:https://clojars.org/lambdaisland/kaocha-junit-xml[`kaocha-junit-xml`]
 | <<kaocha,example>>
 
 | Clojure
@@ -244,7 +243,7 @@ This section provides the following test runner examples:
 [#jest]
 === Jest
 
-To output JUnit compatible test data with Jest you can use link:https://www.npmjs.com/package/jest-junit[jest-junit].
+To output JUnit compatible test data with Jest you can use link:https://www.npmjs.com/package/jest-junit[`jest-junit`].
 
 A working `.circleci/config.yml` section might look like this:
 
@@ -273,7 +272,7 @@ For more details on `--runInBand`, refer to the link:https://jestjs.io/docs/cli#
 [#mocha-for-node]
 === Mocha for Node.js
 
-To output JUnit tests with the Mocha test runner you can use link:https://www.npmjs.com/package/mocha-junit-reporter[mocha-junit-reporter].
+To output JUnit tests with the Mocha test runner you can use link:https://www.npmjs.com/package/mocha-junit-reporter[`mocha-junit-reporter`].
 
 A working `.circleci/config.yml` section for testing might look like this:
 
@@ -295,9 +294,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 [#mocha-with-nyc]
 === Mocha with nyc
 
-Following is an example for Mocha with nyc, contributed by link:https://github.com/marcospgp[marcospgp].
-
-{% raw %}
+Following is an example for Mocha with nyc, contributed by link:https://github.com/marcospgp[`marcospgp`].
 
 [,yml]
 ----
@@ -387,12 +384,10 @@ jobs:
           prefix: tests
 ----
 
-{% endraw %}
-
 [#karma]
 === Karma
 
-To output JUnit tests with the Karma test runner you can use link:https://www.npmjs.com/package/karma-junit-reporter[karma-junit-reporter].
+To output JUnit tests with the Karma test runner you can use link:https://www.npmjs.com/package/karma-junit-reporter[`karma-junit-reporter`].
 
 A working `.circleci/config.yml` section might look like this:
 
@@ -634,7 +629,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
 [#trx2junit-for-visual-studio-net-core-tests]
 === trx2junit for Visual Studio / .NET core tests
 
-Use link:https://github.com/gfoidl/trx2junit[trx2junit] to convert Visual Studio / .NET Core trx output to XML format.
+Use link:https://github.com/gfoidl/trx2junit[trx2junit] to convert Visual Studio / .NET Core `trx` output to XML format.
 
 A working `.circleci/config.yml` section might look like this:
 
@@ -662,7 +657,7 @@ Assuming that your are already using kaocha as your test runner, do these things
 
 Add the `kaocha-junit-xml` plugin to your dependencies
 
-Edit your `project.clj` to add the lambdaisland/kaocha-junit-xml plugin, or do the equivalent if you are using deps.edn.
+Edit your `project.clj` to add the `lambdaisland/kaocha-junit-xml` plugin, or do the equivalent if you are using deps.edn.
 
 [,clojure]
 ----
@@ -681,7 +676,7 @@ Edit the kaocha config file `test.edn` to use this test reporter
  :kaocha.plugin.junit-xml/target-file "junit.xml"}
 ----
 
-Add the store_test_results step your `.circleci/config.yml`
+Add the `store_test_results` step your `.circleci/config.yml`
 
 [,yml]
 ----
@@ -725,7 +720,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
 
 link:https://bats-core.readthedocs.io/[Bats] provides a `--report-formatter junit` option to create a JUnit-format report in a location specified by the `--output` option. A subsequent `store_test_results` step can be passed to that same location.
 
-The link:https://circleci.com/developer/orbs/orb/circleci/bats[circleci/bats] orb's link:https://circleci.com/developer/orbs/orb/circleci/bats?version=1.1.0#jobs-run[run job] takes care of this functionality for you.
+The link:https://circleci.com/developer/orbs/orb/circleci/bats[`circleci/bats`] orb's link:https://circleci.com/developer/orbs/orb/circleci/bats?version=1.1.0#jobs-run[run job] takes care of this functionality for you.
 
 For example, a `.circleci/config.yml` section for running all `*.bats` tests within the `src/tests` folder might look like the following:
 
@@ -773,7 +768,7 @@ Xcode generates test results in a Xcode Test Results (`.xcresult`) bundle format
 
 To integrate with CircleCI's test results features you will need to convert your Xcode Test Result bundle to the JUnit XML format.
 
-To convert your Xcode Test Result bundle you can use a third party tool, for example, link:https://fastlane.tools/[Fastlane] or link:https://github.com/xcpretty/xcpretty[xcpretty]. Once your test results are converted you can use `store_test_results` to upload the results to CircleCI.
+To convert your Xcode Test Result bundle you can use a third party tool, for example, link:https://fastlane.tools/[Fastlane] or link:https://github.com/xcpretty/xcpretty[`xcpretty`]. Once your test results are converted you can use `store_test_results` to upload the results to CircleCI.
 
 [#playwright]
 === Playwright
@@ -811,7 +806,7 @@ NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier v
 [#webdriverio]
 === WebdriverIO
 
-Update your wdio.conf.js to use the link:https://webdriver.io/docs/junit-reporter/#configuration[junit reporter]:
+Update your wdio.conf.js to use the link:https://webdriver.io/docs/junit-reporter/#configuration[JUnit reporter]:
 
 ----
 // wdio.conf.js

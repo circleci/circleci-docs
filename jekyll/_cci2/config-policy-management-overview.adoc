@@ -1,13 +1,12 @@
 ---
-description: Config policies for CircleCI project configurations.
 contentTags:
   platform:
   - Cloud
   - Server v4+
 ---
 = Config policies overview
+:page-description: Config policies for CircleCI project configurations.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -41,7 +40,7 @@ The following how-to guides are available for config policies:
 
 Config policies use a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
 
-Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the link:/docs/create-and-manage-config-policies[Create and manage config policies] page.
+Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the xref:create-and-manage-config-policies#[Create and manage config policies] page.
 
 CircleCI uses the result of OPA output to generate _decisions_ from policy executions. Those decisions have the following outputs:
 
@@ -116,7 +115,7 @@ ok    policies    0.001s
 3/3 tests passed (0.001s)
 ----
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [#writing-rego-policies-using-circleci-domain-specific-language]
 == Writing Rego policies using CircleCI domain-specific language
@@ -152,7 +151,7 @@ After declaring the `org` package and `policy_name` rule, policies can then be d
 * Enforcement status - Determines how a violation should be enforced.
 * Enablement - Determines if a policy violation should be enabled.
 
-Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the link:/docs/config-policy-reference[Config policy reference].
+Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the xref:config-policy-reference#[Config policy reference].
 
 NOTE: **Helpers** in the context of config policies are rules like any other, but rules that are not individually _enabled_ for the process of determining policy violation. Helpers can be written and used as building blocks for your policies.
 

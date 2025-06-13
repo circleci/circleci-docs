@@ -228,23 +228,25 @@ NOTE: For a full list of options, see the xref:../installation/installation-refe
 [source,yaml]
 ----
 # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
-scheduled:
-    - executor: linux
-      class: medium
-      image: docker-default
-      cron: ""
-      count: 2
+preboot:
+   scheduled:
+       - executor: linux
+         class: medium
+         image: docker-default
+         cron: ""
+         count: 2
 ----
 
 [source,yaml]
 ----
 # -- Configuration options for, and numbers of, prescaled instances for machine jobs.
-scheduled:
-  - executor: linux
-    class: medium
-    image: default
-    cron: ""
-    count: 2
+preboot:
+   scheduled:
+     - executor: linux
+       class: medium
+       image: default
+       cron: ""
+       count: 2
 ----
 
 [#apply-changes]
