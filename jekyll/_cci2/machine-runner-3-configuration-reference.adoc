@@ -260,7 +260,7 @@ runner:
 [#cache-task-agent]
 === `runner.cache_task_agent`
 
-`$CACHE_TASK_AGENT`
+`$CIRCLECI_RUNNER_CACHE_TASK_AGENT`
 
 When set to true, machine runner will not clear the task-agent cache when the agent shuts down. On startup the machine agent will check for an already downloaded task agent and will use that task-agent unless there is a newer version of task-agent available for download. This feature is off by default. This may be particularly useful for Windows which relies on `single-task` mode.
 
