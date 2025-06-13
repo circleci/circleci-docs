@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: execution-managed
 ---
 = CircleCI Linux VM images support policy
 :page-layout: classic-docs
-:page-liquid:
 :page-description: CircleCI Linux VM images release, update, and deprecation policy
 :icons: font
 :experimental:

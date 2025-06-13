@@ -1,13 +1,14 @@
 ---
-description: Open preview of config policies for CircleCI. Reference page for function helpers.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: config-policies
 ---
 = Config policy reference
 :page-layout: classic-docs
-:page-liquid:
+:page-description: Open preview of config policies for CircleCI. Reference page for function helpers.
 :icons: font
 :experimental:
 

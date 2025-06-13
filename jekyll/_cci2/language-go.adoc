@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: getting-started
 ---
-= Configure a Go application on CircleCI
-:description: Set up CI/CD for a Go project on CircleCI using orbs
+= Language guide: Go
+:page-description: Learn how to set up a Go project with CircleCI.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This quickstart guide covers integrating a Go project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test, and deploy your Go project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
 

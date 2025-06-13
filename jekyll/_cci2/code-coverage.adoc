@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: test
 ---
 = Generate code coverage metrics
 :page-description: Generate code coverage metrics for different languages.

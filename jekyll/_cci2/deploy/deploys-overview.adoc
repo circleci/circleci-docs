@@ -2,10 +2,11 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: deploy
 ---
 = Deploys overview
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Learn CircleCI deploys for visibility into Kubernetes and Amazon SageMaker deployments, how it works, and how to get set up
 :icons: font
 :experimental:

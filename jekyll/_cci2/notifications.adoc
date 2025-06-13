@@ -2,6 +2,8 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: integration
 ---
 = Notifications overview
 :page-description: Learn how to use get CircleCI's job status through Slack, IRC and email notifications.

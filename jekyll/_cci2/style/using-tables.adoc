@@ -1,5 +1,7 @@
 ---
 toc: false
+component: contributors
+module: docs-style
 ---
 = Using tables
 :page-layout: classic-docs

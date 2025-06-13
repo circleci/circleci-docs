@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: execution-managed
 ---
 = Debug with SSH
 :page-description: How to access a build container using SSH on CircleCI
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 Troubleshoot problems in a job using *Rerun job with SSH*. Using this feature you can inspect log files, running processes, and directory paths.
 

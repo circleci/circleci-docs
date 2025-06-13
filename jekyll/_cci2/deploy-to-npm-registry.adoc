@@ -1,15 +1,16 @@
 ---
-description: This document provides examples of publishing to the NPM registry.
 contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: deploy
 ---
-= Publish to npm registry
-:page-layout: classic-docs
-:page-liquid:
-:icons: font
+= Deploy to npm registry
+:page-description: Learn how to deploy packages to the npm registry using CircleCI.
 :experimental:
+:icons: font
+:page-layout: classic-docs
 
 In this how-to guide, you will learn how to configure CircleCI to publish to the npm registry.
 

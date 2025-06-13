@@ -3,6 +3,8 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: test
 ---
 = Browser testing
 :page-description: Browser Testing on CircleCI

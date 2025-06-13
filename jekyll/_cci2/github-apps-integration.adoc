@@ -2,11 +2,12 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: integration
 ---
 = GitHub App integration overview
 :page-layout: classic-docs
-:page-liquid:
-:page-description: Learn how to integrate GitHub with CircleCI to manage your GitHub CI/CD pipelines.
+:page-description: Learn how to integrate CircleCI with GitHub using GitHub Apps.
 :icons: font
 :experimental:
 
@@ -190,7 +191,7 @@ The in-app config editor is currently **only** available for GitHub App accounts
 [#account-integrations]
 === Account integrations
 
-You cannot currently manage the connection with GitHub outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users’ GitHub identity as part of their user profile's account integration settings.
+You cannot currently manage the connection with GitHub outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users' GitHub identity as part of their user profile's account integration settings.
 
 [#scheduled-pipelines]
 === Scheduled pipelines

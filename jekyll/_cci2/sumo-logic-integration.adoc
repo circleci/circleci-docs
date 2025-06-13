@@ -3,10 +3,11 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: integration
 ---
 = Sumo Logic integration
 :page-layout: classic-docs
-:page-liquid:
 :page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Sumo Logic.
 :icons: font
 :experimental:

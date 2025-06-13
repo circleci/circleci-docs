@@ -3,13 +3,14 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: orbs
+module: author
 ---
 = Orb authoring process
 :page-description: Starting point for authoring CircleCI orbs
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 CircleCI orbs are packages of xref:orb-concepts#orb-configuration-elements[reusable configuration] that you can import into you CircleCI configuration files. Orbs come in two types:
 

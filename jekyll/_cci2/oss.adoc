@@ -2,13 +2,14 @@
 contentTags:
   platform:
   - Cloud
+component: guides
+module: integration
 ---
 = Build open source projects
 :description: Best practices for building open source projects
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This document provides tips and best practices for building your open source project on CircleCI.
 

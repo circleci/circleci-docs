@@ -3,15 +3,8 @@ contentTags:
   platform:
     - Cloud
     - Server v4+
-sectionTags:
-  cloud:
-    - "#echo-hello-world-cloud"
-  server-v4:
-    - "#echo-hello-world-server-4"
-  server-v3:
-    - "#echo-hello-world-server-3"
-  server-v2:
-    - "#echo-hello-world-server-2"
+component: guides
+module: getting-started
 ---
 = Hello world
 :page-layout: classic-docs

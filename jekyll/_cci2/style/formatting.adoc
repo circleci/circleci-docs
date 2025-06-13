@@ -1,3 +1,7 @@
+---
+component: contributors
+module: docs-style
+---
 = Formatting
 :page-layout: classic-docs
 :icons: font

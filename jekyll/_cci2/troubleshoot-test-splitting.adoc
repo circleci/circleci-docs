@@ -3,16 +3,17 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
+component: guides
+module: test
 ---
 = Troubleshoot test splitting
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Tips and common errors to help troubleshoot your CircleCI test splitting implementation.
 :icons: font
 :experimental:
 
 [#using-test-splitting-with-python-django-tests]
-## Using test splitting with Python Django tests
+== Using test splitting with Python Django tests
 
 To use test splitting with CircleCI, you must pass in a list of tests to run. However, with how you execute tests with Django, you are unable to simply glob the tests and pass them in.
 
