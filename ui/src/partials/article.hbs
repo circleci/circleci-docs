@@ -2,6 +2,8 @@
 {{#with page.title}}
 <h1 class="page">{{{this}}}</h1>
 {{/with}}
+{{#if (ne page.layout 'subsection')}}
 {{> article-info-bar}}
+{{/if}}
 {{{page.contents}}}
 </article>

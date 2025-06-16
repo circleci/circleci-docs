@@ -8,7 +8,7 @@
 {{> toc}}
 {{/if}}
   </div>
-  {{#if (ne page.layout '404')}}
+  {{#if (and (ne page.layout '404') (ne page.layout 'subsection'))}}
   {{> article-footer}}
   {{/if}}
 </main>
