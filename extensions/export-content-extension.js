@@ -17,7 +17,7 @@ module.exports.register = function () {
     await fsPromises.writeFile(outPath, JSON.stringify({ pages }, null, 2));
     console.log(`Wrote JSON to ${outPath}`);
 
-    if (!shouldSkipIndexing() && !hasIndexed(tempDir)) {
+    if (!shouldSkipIndexing() && !hasIndexed(tempDir) && hasAlgoliaCredentials()) {
       try {
         await indexToAlgolia(pages);
         await fsPromises.writeFile(path.join(tempDir, 'algolia-indexed.marker'), new Date().toISOString());
@@ -26,7 +26,7 @@ module.exports.register = function () {
         console.error('Error indexing to Algolia:', err);
       }
     } else {
-      console.log('Skipping Algolia indexing');
+      console.log('Skipping Algolia indexing (missing credentials or already indexed)');
     }
   });
 };
@@ -92,6 +92,13 @@ function shouldSkipIndexing() {
 
 function hasIndexed(dir) {
   return fs.existsSync(path.join(dir, 'algolia-indexed.marker'));
+}
+
+function hasAlgoliaCredentials() {
+  const appId = process.env.ALGOLIA_APP_ID;
+  const apiKey = process.env.ALGOLIA_ADMIN_KEY;
+  const indexName = process.env.ALGOLIA_INDEX_NAME;
+  return !!(appId && apiKey && indexName);
 }
 
 /**
