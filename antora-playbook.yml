@@ -42,5 +42,6 @@ asciidoc:
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
     kotsversion: 1.65.0
+    page-toclevels: 6
   extensions:
   - '@asciidoctor/tabs'
