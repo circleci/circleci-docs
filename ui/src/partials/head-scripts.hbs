@@ -3,6 +3,28 @@
     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','{{this}}')</script>
 {{/with}}
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
+{{#with site.keys.segmentWrite }}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+    <script>
+        !function(){var i="analytics",analytics=window[i]=window[i]||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","screen","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware","register"];analytics.factory=function(e){return function(){if(window[i].initialized)return window[i][e].apply(window[i],arguments);var n=Array.prototype.slice.call(arguments);if(["track","screen","alias","group","page","identify"].indexOf(e)>-1){var c=document.querySelector("link[rel='canonical']");n.push({__t:"bpc",c:c&&c.getAttribute("href")||void 0,p:location.pathname,u:location.href,s:location.search,t:document.title,r:document.referrer})}n.unshift(e);analytics.push(n);return analytics}};for(var n=0;n<analytics.methods.length;n++){var key=analytics.methods[n];analytics[key]=analytics.factory(key)}analytics.load=function(key,n){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute("data-global-segment-analytics-key",i);t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r);analytics._loadOptions=n};analytics._writeKey="{{this}}";;analytics.SNIPPET_VERSION="5.2.1";
+        analytics.load("{{this}}");
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const pathName = window.location.pathname.replace("docs/", "");
+        analytics.track("dd_docs_page", {
+            fullPath: pathName,
+            has2dot0: pathName.includes("2.0/"),
+            fbclid: urlSearchParams.get("fbclid"),
+            gclid: urlSearchParams.get("gclid"),
+            action: "viewed",
+            orgId: Cookies.get("cci-org-analytics-id") || null,
+            page: pathName == "/" ? "homepage" : pathName,
+            hash: window.location.hash ? window.location.hash.replace("#", "") : null,
+            locale: "en",
+            desktop: window.innerWidth >= 1200,
+        })
+        }}();
+    </script>
+{{/with}}
 <script defer src="https://widget.kapa.ai/kapa-widget.bundle.js" data-website-id="06cd008c-32ae-46d3-946b-211d1afd443c" data-project-name="CircleCI" data-project-color="#161616" data-project-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTI7jLeuu2k66svJDmHxYKlP7Ysf7FvNbkuvzAhHEPCsvLbhcpVRnoJCm538OSv6o5uzlQ&usqp=CAU"
 ></script>
 {{!--

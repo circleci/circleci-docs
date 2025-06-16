@@ -314,6 +314,7 @@ Or through npm scripts defined in `package.json`.
 | `ALGOLIA_APP_ID` | Algolia search app ID | - |
 | `ALGOLIA_API_KEY` | Algolia search API key | - |
 | `ALGOLIA_INDEX_NAME` | Algolia search index name | - |
+| `SEGMENT_WRITE_KEY` | Segment write key for analytics | - |
 | `NODE_ENV` | Node environment | `development` |
 
 ## Build Output
