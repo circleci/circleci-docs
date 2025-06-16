@@ -150,6 +150,7 @@
   border: 1px solid #D4D4D4;
   font-size: 0.95em;
   padding: 0.15em 0.4em;
+  white-space: nowrap;
 }
 
 .doc code,
@@ -264,8 +265,7 @@
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  display: block;
-  overflow-x: auto;
+  display: table;
   margin-bottom: 1rem;
   border: 1px solid #D4D4D4;
   border-radius: 8px;
@@ -277,6 +277,20 @@
 
 .doc table.tableblock pre {
   font-size: inherit;
+}
+
+/* Table cell styles */
+.doc table.tableblock td,
+.doc table.tableblock th {
+  box-sizing: border-box;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Prevent wrapping of inline literal text in tables */
+.doc table.tableblock td code,
+.doc table.tableblock th code {
+  white-space: nowrap;
 }
 
 .doc td.tableblock > .content {
