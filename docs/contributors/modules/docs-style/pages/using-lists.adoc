@@ -1,6 +1,5 @@
 = Using lists
 :icons: font
-:toc-title:
 
 * To generate numbered steps (an ordered list) use the following syntax:
 +

@@ -1,6 +1,5 @@
 = Cross references and links
 :icons: font
-:toc-title:
 
 [#cross-references]
 == Cross references
