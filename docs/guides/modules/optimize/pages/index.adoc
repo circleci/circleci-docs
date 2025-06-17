@@ -1,1 +1,6 @@
 = Optimize your pipelines
+:page-layout: subsection
+:page-description: Optimize your pipelines for speed, data, and credits.
+:icons: font
+
+Learn how to optimize your pipelines for speed, data, and credits. If you are not sure where to start, check out the xref:optimize:optimizations.adoc[optimization reference page].

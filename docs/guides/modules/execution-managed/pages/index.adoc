@@ -1,1 +1,5 @@
 = Execute on managed compute
+:page-layout: subsection
+:page-description: Execute your jobs on CircleCI's managed compute resources.
+
+Learn how to use the different execution environments available for running your jobs: Docker, Linux VM, macOS, Windows, Arm, and GPU.

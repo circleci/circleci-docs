@@ -1,1 +1,7 @@
 = About CircleCI
+:page-layout: subsection
+:page-description: Learn about CircleCI, its features, and how it works.
+:icons: font
+
+Learn about CircleCI, its features, and how it works. Take a look at the web app, or read about core concepts for CI/CD with CircleCI
+

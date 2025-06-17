@@ -1,1 +1,6 @@
 = Get started with CircleCI
+:page-layout: subsection
+:page-description: Get started with CircleCI.
+:icons: font
+
+Set up an organization, create a project, and learn how to invite your teammates to collaborate. Access language or use-case specific guides to get started.

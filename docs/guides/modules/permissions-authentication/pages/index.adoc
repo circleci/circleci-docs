@@ -1,1 +1,6 @@
-= Manage permissions and authentication
+= Manage roles, permissions, and authentication
+:page-layout: subsection
+:page-description: Manage org and project roles, permissions, and authentication.
+:icons: font
+
+Learn how to manage org and project roles to make sure your team have the permissions they need. Learn about SSO, MFA and OIDC authentication with CircleCI.
