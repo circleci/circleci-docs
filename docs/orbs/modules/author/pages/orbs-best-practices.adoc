@@ -6,9 +6,10 @@
 
 [#general]
 == General
+This guide covers best practices for creating orbs.
 
-[discrete#give-your-orb-a-descriptive-name]
-==== Give your orb a descriptive name
+[#give-your-orb-a-descriptive-name]
+=== Give your orb a descriptive name
 
 An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents, the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
 
@@ -24,13 +25,13 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 | `company/cci-plugin`
 |===
 
-[discrete#categorize-your-orb]
-==== Categorize your orb
+[#categorize-your-orb]
+=== Categorize your orb
 
 Categorizing your orb allows it to be searchable on the link:https://circleci.com/developer/orbs[Orb Registry] by category. To see how you can categorize your orb using the CircleCI CLI, refer to the relevant section in the xref:orb-author.adoc#categorizing-your-orb[Orb Authoring Process] guide.
 
-[discrete#ensure-all-orb-components-include-descriptions]
-==== Ensure all orb components include descriptions
+[#ensure-all-orb-components-include-descriptions]
+=== Ensure all orb components include descriptions
 
 Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
 
@@ -45,8 +46,8 @@ steps:
 
 Create detailed descriptions that fully explain the benefit and usage of the orb element. Descriptions are an excellent place for more specific documentation related to each component.
 
-[discrete#ensure-your-orb-publishing-context-is-restricted]
-==== Ensure your orb-publishing context is restricted
+[#ensure-your-orb-publishing-context-is-restricted]
+=== Ensure your orb-publishing context is restricted
 
 If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the xref:guides:security:contexts.adoc#restrict-a-context[Using Contexts] guide.
 
