@@ -1,5 +1,4 @@
-[TIP]
-====
+****
 **Check your project slug to discover which GitHub integration you have set up:**
 
 . Head to the link:https://app.circleci.com/home[CircleCI web app] and select your org from the cards on your user homepage.
@@ -12,4 +11,4 @@
 * **GitHub OAuth app**: Project slug is human readable. For example, `github/circleci/circleci-demo-workflows`.
 
 For more information about the differences, see the xref:guides:integration:version-control-system-integration-overview.adoc[VCS integration overview].
-====
+****

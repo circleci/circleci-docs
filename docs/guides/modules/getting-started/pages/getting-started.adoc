@@ -17,272 +17,173 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 * A CircleCI account. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 
-pass:[<!-- vale off -->]
-++++
-<div class='section-header-wrapper'>
-  <h2 class='section-title' id="header-banner-1">1. Connect your code</h2>
-  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--first-step.svg" alt="header banner" />
-  <div class='content-wrapper'>
-    <span>
-      Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app.
-    </span>
-  </div>
-</div>
-<br />
-
-<div class="banner-wrapper">
-  <div class="icon-container">
-    <img class='vcs-icon' src="/docs/assets/img/icons/companies/github-alt.svg" alt="Github Icon" />
-    <img class='vcs-icon' src="/docs/assets/img/icons/companies/bitbucket-alt.svg" alt="Bitbucket Icon" />
-    <img class='vcs-icon' src="/docs/assets/img/icons/companies/gitlab-color.svg" alt="GitLab Icon" />
-  </div>
-  <div class='text-container'>
-    <span>This guide assumes you have signed up and</span>
-    <a class="no-external-icon" href="https://circleci.com/docs/first-steps/"> connected to GitHub, Bitbucket or GitLab</a>
-  </div>
-</div>
-<br />
-<br />
-++++
+NOTE: This guide assumes you have xref:first-steps.adoc[signed up] and connected to GitHub, Bitbucket or GitLab
 
 include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+
+== 1. Connect your code
+
+image::guides:ROOT:getting-started-guide-exp/quick-start-first-step.svg[section one banner image]
+
+*Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app.*
 
 [tabs]
 ====
 GitHub_App::
 +
 --
-++++
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">1. Create a project</div>
-    <p>In the <a  href="https://app.circleci.com/home">CircleCI web app</a> select your org, then select <strong>Create Project</strong>, then follow the instructions in the app.
-Don’t see these options? Select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.</p>
-  </div>
+image:guides:ROOT:getting-started-guide-exp/create-project.png[float=right]
+[%hardbreaks]
+*Create a project*
+In the link:https://app.circleci.com/home[CircleCI web app] select your org, then select *Create project*, then follow the instructions in the app.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Create a project" />
-  </div>
-</div>
+If you do not see these options select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">2. Set up a pipeline</div>
-    <p>Follow the in-app instructions to set up your pipelinem including connecting your code, preparing a config file and reviewing triggers. For a more detailed look at this process see the <a  href="https://circleci.com/docs/create-project">Create a project</a> guide.</p>
-  </div>
+image:guides:ROOT:getting-started-guide-exp/setup-pipeline.png[float=right]
+[%hardbreaks]
+*Set up a pipeline*
+Follow the in-app instructions to set up your pipelinem including connecting your code, preparing a config file and reviewing triggers.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/setup-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
-  </div>
-</div>
+For a more detailed look at this process see the xref:create-project.adoc[Create a project guide].
+{empty} +
+{empty} +
+{empty} +
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">3. Commit and run</div>
-    <p>Once you have gone through the pipeline setup process in the app you have everything you need to commit your config (unless you have a config in your repo already) and build. Review your project details and select <strong>Commit config and run</strong>.
-  </div>
+image:guides:ROOT:getting-started-guide-exp/commit-and-run.png[float=right]
+[%hardbreaks]
+*Commit and run*
+Once you have gone through the pipeline setup process in the app you have everything you need to commit your config (unless you have a config in your repo already) and build.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/commit-and-run.png" alt="Follow in-app instructions to set up your pipeline" />
-  </div>
-</div>
+Review your project details and select *Commit config and run*.
+{empty} +
+{empty} +
 
+image:guides:ROOT:getting-started-guide-exp/pass-pipeline.png[float=right]
+[%hardbreaks]
+*Congratulations 🎉*
+You should soon have a passing pipeline.
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">4. Congratulations 🎉</div>
-    <p>You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.</p>
-    </div>
+In the next sections we will cover ways to modify and debug your config.
+{empty} +
+{empty} +
+{empty} +
+--
+GitLab & Bitbucket Data Center::
++
+--
+image:guides:ROOT:getting-started-guide-exp/create-project.png[float=right]
+[%hardbreaks]
+*Create a project*
+In the CircleCI web app, select link:https://app.circleci.com/projects[Projects] from the sidebar. Click *Create project*, then select the repository you would like to connect from the dropdown.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
-  </div>
-</div>
-++++
+If you do not see the org selector in the top left corner to find the correct organization.
+
+image:guides:ROOT:getting-started-guide-exp/select-config-gitlab.png[float=right]
+[%hardbreaks]
+*Select a config.yml*
+In the “Select your link:https://circleci.com/docs/config-start/[config.yml] file” modal, select *Fast*, then give your project a name, and select *Create Project*. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
+
+{empty} +
+
+image:guides:ROOT:getting-started-guide-exp/change-config-gitlab.png[float=right]
+[%hardbreaks]
+*CircleCI config editor*
+You are now in the <a class="no-external-icon" link:https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor[CircleCI config editor], pre-populated with a sample `config.yml` file. You can swap out this config for an alternative by selecting *Change: Hello World*.
+
+{empty} +
+{empty} +
+
+image:guides:ROOT:getting-started-guide-exp/commit-run-gitlab.png[float=right]
+[%hardbreaks]
+*Commit your config*
+Click *Commit and Run*. This will create a `.circleci/config.yml` file at the root of your repository on a new branch called `update-circleci-config`.
+
+{empty} +
+{empty} +
+
+image:guides:ROOT:getting-started-guide-exp/pass-pipeline.png[float=right]
+[%hardbreaks]
+*Congratulations* 🎉
+You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.
+
+{empty} +
+--
+GitHub_OAuth_app_&_Bitbucket_Cloud::
++
+--
+image:guides:ROOT:getting-started-guide-exp/set-up-project.png[float=right]
+[%hardbreaks]
+*Set up a project*
+In the link:https://app.circleci.com/home[CircleCI web app] select your org, then select *Set up a Project*, then select *Set up Project* next to your project in the list.
+
+If you do not see these options, select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.
+
+image:guides:ROOT:getting-started-guide-exp/select-config.png[float=right]
+[%hardbreaks]
+*Select a config.yml*
+In the “Select your config.yml file” modal, select *Faster*, then click *Set Up Project*.
+
+{empty} +
+{empty} +
+{empty} +
+{empty} +
+
+image:guides:ROOT:getting-started-guide-exp/pass-pipeline.png[float=right]
+[%hardbreaks]
+*Congratulations* 🎉
+You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.
+
+{empty} +
 --
 ====
---
-++++
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">1. Create a project</div>
-    In the CircleCI web app, select <a  href="https://app.circleci.com/projects">Projects</a> from the sidebar. Click <strong>Create Project</strong>, then select the repository you would like to connect from the dropdown.
-    Don’t see these options? Use the org selector in the top left corner to find the correct organization.
-  </div>
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/create-project.png" alt="Select Projects" />
-  </div>
-</div>
+== 2. Dig into your first pipeline
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">2. Select a config.yml</div>
-    In the “Select your <a class="no-external-icon" href="https://circleci.com/docs/config-start/">config.yml</a> file” modal, select <b>Fast</b>, then give your project a name, and click <b>Create Project</b>. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
-  </div>
+image::guides:ROOT:getting-started-guide-exp/quick-start-second-step.svg[section two banner image]
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/select-config-gitlab.png" alt="Choose Config"/>
-  </div>
-</div>
+*Explore your passing pipeline and invite your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster.*
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">3. CircleCI config editor</div>
-    You are now in the <a class="no-external-icon" href="https://circleci.com/docs/config-editor/#getting-started-with-the-circleci-config-editor">CircleCI config editor</a>, pre-populated with a sample <code>config.yml</code> file. You can swap out this config for an alternative by clicking <strong>Change: Hello World</strong>.
-  </div>
+image:guides:ROOT:getting-started-guide-exp/steps.png[float=right]
+[%hardbreaks]
+*So, what just happened?*
+Expand your workflow and select a job to view the steps that ran. Use the tabs along the top to access test results, timing data, artifacts, and resource usage metrics.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/change-config-gitlab.png" alt="Config Editor" />
-  </div>
-</div>
+{empty} +
+{empty} +
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">4. Commit your config</div>
-    Click <strong>Commit and Run</strong>. This will create a <code>.circleci/config.yml</code> file at the root of your repository on a new branch called <code>update-circleci-config</code>.
-  </div>
+image:guides:ROOT:getting-started-guide-exp/expand-step.png[float=right]
+[%hardbreaks]
+*View step output*
+Expand any step to view the build output. You can search, share or download the output for collaboration and debugging. If a step fails, use the xref:toolkit:intelligent-summaries.adoc[Explain this error] button for help.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/commit-run-gitlab.png" alt="Commit a config" />
-  </div>
-</div>
+{empty} +
+{empty} +
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">5. Congratulations 🎉</div>
-    You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.
-  </div>
+image:guides:ROOT:getting-started-guide-exp/invite.png[float=right]
+[%hardbreaks]
+*Invite teammates*
+Invite teammates to collaborate on your projects. Navigate to *Organization Settings > People* to generate invites and get further instructions. Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Passing pipeline" />
-  </div>
-</div>
-++++
---
+== 3. Debug and iterate
 
-[.tab.quickstart1.GitHub_OAuth_app_&_Bitbucket_Cloud]
---
-++++
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">1. Set up a project</div>
-    <p>In the <a  href="https://app.circleci.com/home">CircleCI web app</a> select your org, then select <strong>Set up a Project</strong>, then select <strong>Set up Project</strong> next to your project in the list.
-Don’t see these options? Select the CircleCI logo in the top bar to get back to your user homepage and check you have the correct org selected.</p>
-  </div>
+image::guides:ROOT:getting-started-guide-exp/quick-start-third-step.svg[section three banner image]
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/set-up-project.png" alt="Create a project" />
-  </div>
-</div>
+*Discover CircleCI features to help debug and configure your builds.*
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">2. Select a config.yml</div>
-    <p>In the “Select your config.yml file” modal, select <b>Faster</b>, then click <b>Set Up Project</b>.</p>
-  </div>
+image:guides:ROOT:getting-started-guide-exp/ssh-rerun.png[float=right]
+[%hardbreaks]
+*Rerun with SSH*
+To access a job's build environment for troubleshooting, rerun the job with SSH access. The VM remains active for 10 minutes after the pipeline finishes. For full details, see the xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH] page.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/select-config.png" alt="Create a project" />
-  </div>
-</div>
+{empty} +
+{empty} +
 
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">3. Congratulations 🎉</div>
-    <p>You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.</p>
-    </div>
+image:guides:ROOT:getting-started-guide-exp/validate-config.png[float=right]
+[%hardbreaks]
+*VS Code extension*
+Using the xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code extention], validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.
 
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/pass-pipeline.png" alt="Follow in-app instructions to set up your pipeline" />
-  </div>
-</div>
-++++
---
-
-++++
-<div class='section-header-wrapper'>
-  <h2 class='section-title' id="step-2">2. Dig into your first pipeline</h2>
-  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--second-step.svg" alt="header banner" />
-  <div class='content-wrapper'>
-    <span>
-      Explore your passing pipeline and invite your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster.
-    </span>
-  </div>
-</div>
-<br />
-
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">1. So, what just happened?</div>
-    <p>Expand your workflow and select a job to view the steps that ran. Use the tabs along the top to access test results, timing data, artifacts, and resource usage metrics.</p>
-  </div>
-
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/steps.png" alt="Exand the workflow and select a job to view steps" />
-  </div>
-</div>
-
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">2. View step output</div>
-    <p>Exand any step to view the build output. You can search, share or download the output for collaboration and debugging. If a step fails, use the <a href="https://circleci.com/docs/intelligent-summaries">Explain this error</a> button for help.</p>
-  </div>
-
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/expand-step.png" alt="Expand a step to view the output." />
-  </div>
-</div>
-
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">3. Invite teammates</div>
-    <p>Invite teammates to collaborate on your projects. Navigate to <strong>Organization Settings > People</strong> to generate invites and get further instructions. Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.</p>
-  </div>
-
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/invite.png" alt="Invite teammates to collaborate. Generate invites from your organizaiton settings." />
-  </div>
-</div>
-++++
-
-++++
-<div class='section-header-wrapper'>
-  <h2 class='section-title' id="next">3. Debug and iterate</h2>
-  <img class='image-banner' src="/docs/assets/img/docs/getting-started-guide-exp/quick-start--third-step.svg" alt="header banner" />
-  <div class='content-wrapper'>
-    <span>
-      Discover CircleCI features to help debug and configure your builds.
-    </span>
-  </div>
-</div>
-<br />
-
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">1. Rerun with SSH</div>
-    <p>To access a job's build environment for troubleshooting, rerun the job with SSH access. The VM remains active for 10 minutes after the pipeline finishes. For full details, see the <a href="https://circleci.com/docs/ssh-access-jobs/">Debug with SSH</a> page.</p>
-  </div>
-
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/ssh-rerun.png" alt="Rerun a job with SSH to directly access the build environment." />
-  </div>
-</div>
-
-<div class="include-two-up">
-  <div class="left-side">
-    <div class="section-heading">2. VS Code extention</div>
-    <p>Using the <a href="https://circleci.com/docs/vs-code-extension-overview/">CircleCI VS Code extention</a>, validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.</p>
-  </div>
-
-  <div class="right-side">
-    <img class="right-img" src="/docs/assets/img/docs/getting-started-guide-exp/validate-config.png" alt="Rerun a job with SSH to directly access the build environment." />
-  </div>
-</div>
-
-++++
-
-pass:[<!-- vale on -->]
+{empty} +
 
 [#next-steps]
 == Next steps

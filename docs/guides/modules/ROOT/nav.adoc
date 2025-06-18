@@ -9,6 +9,7 @@
 *** xref:getting-started:first-steps.adoc[Sign up and try CircleCI]
 *** xref:getting-started:invite-your-team.adoc[Join teammates on CircleCI]
 *** xref:getting-started:create-project.adoc[Create a project]
+*** xref:getting-started:getting-started.adoc[Quickstart guide]
 ** How-to guides
 *** xref:getting-started:hello-world.adoc[Hello World]
 *** xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML configuration]
