@@ -1,10 +1,18 @@
-* xref:config-homepage.adoc[Configuration]
+* Configuration
 ** xref:configuration-reference.adoc[Configuration reference]
 ** xref:reusing-config.adoc[Reusable configuration reference]
+** xref:guides:config-policies:config-policy-reference.adoc[Config policy reference]
+** xref:guides:optimize:optimizations.adoc[Optimization reference]
+** xref:outbound-webhooks-reference.adoc[Outbound webhooks reference]
 
-* xref:api-homepage.adoc[API reference]
+* API reference
+** https://circleci.com/docs/api/v2/index.html[API v2 reference,window=_blank]
+** https://circleci.com/docs/api/v1/index.html#circleci-v1-api-overview[API v1 reference,window=_blank]
+** xref:guides:execution-runner:runner-api.adoc[Runner API reference]
 
-* xref:general-homepage.adoc[General reference]
-** xref:faq.adoc[Frequently asked questions]
-** xref:troubleshoot.adoc[Troubleshoot]
+* General reference
+** xref:guides:about-circleci:concepts.adoc[Concepts]
+** xref:guides:insights:insights-glossary.adoc[Insights metrics glossary]
 ** xref:variables.adoc[Project values and variables]
+** xref:troubleshoot.adoc[Troubleshoot]
+** xref:faq.adoc[FAQ]
