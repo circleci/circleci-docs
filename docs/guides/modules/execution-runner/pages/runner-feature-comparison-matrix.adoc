@@ -1,7 +1,6 @@
 = Self-hosted runner feature comparison
 :page-platform: Cloud, Server v4+
 :description: A comparison table of the features available for CircleCI runners.
-:icons: font
 :experimental:
 
 This page offers a comparison of the features available for CircleCI machine runner vs. CircleCI container runner.

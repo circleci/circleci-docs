@@ -1,5 +1,4 @@
 = Formatting
-:icons: font
 :experimental:
 
 [#styling-text]

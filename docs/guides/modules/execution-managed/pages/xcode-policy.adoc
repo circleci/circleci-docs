@@ -1,7 +1,6 @@
 = CircleCI Xcode image release, update, and deprecation policy
 :page-platform: Cloud
 :page-description: CircleCI Xcode Image Release, Update and Deprecation Policy
-:icons: font
 :experimental:
 
 [#overview]

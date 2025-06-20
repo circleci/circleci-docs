@@ -1,5 +1,4 @@
 = Using tables
-:icons: font
 
 * For markdown content use the following format for tables:
 +

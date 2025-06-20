@@ -1,7 +1,6 @@
 = Rollback a project using the rollback pipeline
 :page-platform: Cloud
 :page-description:
-:icons: font
 :experimental:
 
 This guide covers how to rollback a project using the rollback pipeline.

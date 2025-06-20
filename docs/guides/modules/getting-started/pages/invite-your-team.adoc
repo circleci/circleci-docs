@@ -1,7 +1,6 @@
 = Join teammates on CircleCI
 :page-platform: Cloud
 :page-description: Add your team to your CircleCI organization
-:icons: font
 :experimental:
 
 After setting up an organization in CircleCI, ensure your whole team get access.

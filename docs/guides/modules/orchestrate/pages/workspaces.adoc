@@ -1,7 +1,6 @@
 = Using workspaces to share data between jobs
 :page-platform: Cloud, Server v4+
 :page-description: This document describes how to use workspaces to share data to downstream jobs in your workflows.
-:icons: font
 :experimental:
 
 Workflows each have an associated `workspace`. Workspaces are used to transfer data to downstream jobs as the workflow progresses.

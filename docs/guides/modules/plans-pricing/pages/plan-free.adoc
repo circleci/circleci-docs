@@ -1,7 +1,6 @@
 = Free Plan
 :page-platform: Cloud
 :page-description: This document describes the Free Plan available to developers on CircleCI.
-:icons: font
 :experimental:
 :orbs:
 

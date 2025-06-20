@@ -1,6 +1,5 @@
 = Developer toolkit and resources
 :page-layout: subsection
 :page-description: A guide to CircleCI tooling and resources.
-:icons: font
 
 In this toolkit you will find information about the tools available to help you develop and manage your pipelines. You will also find a selection of examples.

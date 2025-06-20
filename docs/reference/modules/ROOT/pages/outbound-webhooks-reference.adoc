@@ -1,6 +1,5 @@
 = Outbound webhooks reference
 :page-platform: Cloud, Server v4+
-:icons: font
 :experimental:
 
 [#common-top-level-keys]

@@ -1,7 +1,6 @@
 = Config policies for self-hosted runner
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
-:icons: font
 :experimental:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.

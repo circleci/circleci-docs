@@ -1,6 +1,5 @@
 = Scaling self-hosted runners
 :page-platform: Cloud, Server v4+
-:icons: font
 :experimental:
 
 [#introduction]

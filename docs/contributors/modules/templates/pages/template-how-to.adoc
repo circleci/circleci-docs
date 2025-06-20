@@ -2,14 +2,10 @@
 = Page title
 :page-platform: Cloud, Server v4+
 :page-description: A short page description goes here
-:icons: font
 :experimental:
 
 ////
 Some notes on attributes
-
-
-:icons: font - enables the use of font awesome icons https://docs.asciidoctor.org/asciidoc/latest/macros/icons-font/
 
 :experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
 

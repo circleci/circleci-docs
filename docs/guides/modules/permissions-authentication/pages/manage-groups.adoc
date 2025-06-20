@@ -1,7 +1,6 @@
 = Manage groups
 :page-platform: Cloud
 :page-description: How-to guides for setting up and assigning groups in CircleCI to manage roles and permissions across projects.
-:icons: font
 :experimental:
 
 NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc[GitHub App], the content on this page applies to you.
@@ -46,7 +45,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Projects** in the sidebar
-. Click on the ellipsis next to your project (icon:ellipsis-h[]) and then click **Project Settings**
+. Click on the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon] and then click **Project Settings**
 . Select **Groups** from the sidebar
 . Click btn:[Add Groups]
 . Select the group name and then use the dropdown to assign a project role (Admin/Contributor/Viewer)
@@ -57,7 +56,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 NOTE: To do this, you must have the _Organization Admin_ role.
 
 . In the CircleCI web app, click on **Projects** in the sidebar
-. Click on the ellipsis next to your project (icon:ellipsis-h[]) and then click **Project Settings**
+. Click on the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon] and then click **Project Settings**
 . Select **Groups** from the sidebar
 . Locate the group in the list and open up the "Project Grant" dropdown to access all role options
 . Select the new role you wish to assign to the group for this project. You will see a notification to confirm when the change is complete

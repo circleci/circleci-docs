@@ -1,7 +1,6 @@
 = Create and manage config policies
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to write and manage config policies for CircleCI project configurations.
-:icons: font
 :experimental:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2. You must be an organization admin in order to create and manage config policies.

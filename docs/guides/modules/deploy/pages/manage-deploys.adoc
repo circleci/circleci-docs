@@ -1,7 +1,6 @@
 = Manage deploys
 :page-platform: Cloud
 :page-description: How to guide for managing deploys from the CircleCI web app.
-:icons: font
 :experimental:
 
 The steps outlined on this page guide you through the tasks required to manage your deployments from the CircleCI web app.
@@ -68,7 +67,7 @@ image::guides:ROOT:releases/scale-component.png[Screenshot showing the scale com
 . Select btn:[Deploys] in the CircleCI web app sidebar.
 . Select the **Components** tab.
 . Scroll to find and select your component to enter the component view.
-. Find the active version that you would like to scale and select the ellipsis menu icon (icon:ellipsis-h[]).
+. Find the active version that you would like to scale and select the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon].
 . Select btn:[Scale Component].
 . Read through the notes associated with this action in the popup and to proceed type `SCALE` and select btn:[Scale].
 
@@ -106,7 +105,7 @@ image::guides:ROOT:releases/restart-component.png[Screenshot showing the restart
 . Select btn:[Deploys] in the CircleCI web app sidebar.
 . Select the **Components** tab.
 . Scroll to find and select your component to enter the component view.
-. Find the active version that you would like to restart and select the ellipsis menu icon (icon:ellipsis-h[]).
+. Find the active version that you would like to restart and select the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon].
 . Select btn:[Restart Component].
 . Read the note associated with this action in the popup and to proceed type `RESTART` and select btn:[RESTART].
 

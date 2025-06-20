@@ -1,5 +1,4 @@
 = Using code samples
-:icons: font
 
 
 * Provide code examples to help with clarity, and to help the reader reproduce the subject matter.

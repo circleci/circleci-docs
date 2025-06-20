@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-description: Testing macOS applications.
 :experimental:
-:icons: font
 
 This document describes how to configure CircleCI for macOS app UI testing.
 

@@ -1,7 +1,6 @@
 = New Relic integration
 :page-platform: Cloud, Server v4+
 :page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with New Relic.
-:icons: font
 
 This page describes how to connect Insights data with link:https://newrelic.com/[New Relic].
 

@@ -1,7 +1,6 @@
 = Configuration introduction
 :page-platform: Cloud, Server v4+
 :page-description: "Learn how to get started with the CircleCI config.yml file."
-:icons: font
 :experimental:
 
 This guide gets you started with the CircleCI `config.yml` file.

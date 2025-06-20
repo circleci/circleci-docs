@@ -1,7 +1,6 @@
 = CircleCI overview
 :page-platform: Cloud, Server v4+
 :page-description: An overview of CircleCI, continuous integration and continuous delivery
-:icons: font
 :experimental:
 
 [#introduction]

@@ -1,6 +1,5 @@
 = Execute on self-hosted runner
 :page-layout: subsection
 :page-description: Execute your jobs on self-hosted runners.
-:icons: font
 
 Learn how to use self-hosted runners to execute your jobs on your own infrastructure. Choose between container runner and machine runners

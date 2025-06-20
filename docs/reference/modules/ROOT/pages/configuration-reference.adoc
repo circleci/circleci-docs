@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Reference for .circleci/config.yml
 :experimental:
-:icons: font
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `.circleci/config.yml` file.
 

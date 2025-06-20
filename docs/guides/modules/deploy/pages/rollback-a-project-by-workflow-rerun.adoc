@@ -1,7 +1,6 @@
 = Rollback a project by workflow rerun
 :page-platform: Cloud
 :page-description:
-:icons: font
 :experimental:
 
 This guides covers how to rollback a project by workflow rerun.

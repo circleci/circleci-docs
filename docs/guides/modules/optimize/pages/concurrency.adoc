@@ -1,7 +1,6 @@
 = Concurrency
 :page-platform: Cloud, Server v4+
 :page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
-:icons: font
 :experimental:
 
 This page summarizes concurrency, and suggests ways to use concurrency to your advantage.

@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Debugging 'Container ID XXX cannot be mapped to a host ID' error when starting a container
 :experimental:
-:icons: font
 
 When starting a container, you may see this error message:
 

@@ -1,7 +1,6 @@
 = Managing URL orbs allow-lists
 :page-description: How to manage URL orbs allow-lists
 :experimental:
-:icons: font
 :page-platform: Cloud
 
 [#introduction]

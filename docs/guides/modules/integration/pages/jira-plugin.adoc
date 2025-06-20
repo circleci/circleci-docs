@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :description: Connecting Jira with CircleCI
 :experimental:
-:icons: font
 
 Integrate your CI/CD build and deployment status notifications directly into your Jira cards. Connect your CircleCI jobs with Jira Cloud using the following:
 

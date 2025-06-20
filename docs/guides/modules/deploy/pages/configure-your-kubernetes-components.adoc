@@ -1,7 +1,6 @@
 = Manual install - configure your Kubernetes components
 :page-platform: Cloud
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the deploys dashboard.
-:icons: font
 :experimental:
 
 The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app deploys set up process as described in the xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys] page.

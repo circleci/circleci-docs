@@ -1,7 +1,6 @@
 = Pull an image from AWS ECR with OIDC
 :page-platform: Cloud
 :page-description: Learn how to pull an image from AWS ECR using OIDC authentication
-:icons: font
 :experimental:
 
 Follow this how-to guide to configure a `docker` job to pull an image from AWS ECR using OIDC authentication.

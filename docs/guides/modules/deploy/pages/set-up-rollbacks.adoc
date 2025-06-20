@@ -1,7 +1,6 @@
 = Set up rollbacks in CircleCI
 :page-platform: Cloud
 :page-description:
-:icons: font
 :experimental:
 
 Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to configure your CircleCI pipeline to support manual rollback capabilities.

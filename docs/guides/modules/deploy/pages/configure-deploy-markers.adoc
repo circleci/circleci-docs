@@ -1,7 +1,6 @@
 = Configure deploy markers
 :page-platform: Cloud
 :page-description: Tutorial outlining how to configure deploy markers in your workflow.
-:icons: font
 :experimental:
 
 This tutorial shows how to add a deploy marker step to your workflow config. Deploy markers allow you to log all new deployments in one place, update their status and link back to the CI/CD pipelines that triggered them.

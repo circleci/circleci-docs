@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to configure a your jobs to run in the Arm VM execution environment.
 :experimental:
-:icons: font
 
 You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes Arm resources, and then specifying an Arm resource class.
 

@@ -1,7 +1,6 @@
 = Benefits of CircleCI
 :page-platform: Cloud, Server v4+
 :page-description: Benefits of choosing CircleCI for CI/CD
-:icons: font
 :experimental:
 
 

@@ -1,7 +1,6 @@
 = GitHub App integration overview
 :page-platform: Cloud
 :page-description: Learn how to integrate CircleCI with GitHub using GitHub Apps.
-:icons: font
 :experimental:
 
 If your CircleCI organization is authenticated with GitHub through the **GitHub App**, the content on this page is for you.
@@ -159,7 +158,7 @@ NOTE: You can install the CircleCI GitHub App into the same GitHub organization 
 . Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on xref:getting-started:invite-your-team.adoc[this page].
 . If you are on a **paid** pricing plan and followed step 6:
 .. Navigate back to the "old" organization and select menu:Plan[Share and Transfer].
-.. Select the icon:times[delete icon] next to the "new" organization to remove the shared relationship between the "new" and "old" organizations.
+.. Select the image:guides:ROOT:icons/cancel.svg[delete icon] next to the "new" organization to remove the shared relationship between the "new" and "old" organizations.
 .. Select btn:[Transfer Plan] and follow the instructions to transfer the plan from the "old" organization to the "new" organization.
 . At this point, you will be left with a GitHub App-integrated organization that has the same payment plan and projects as your previous organization. If you get logged out, you can continue to use the "Login with GitHub" button on link:https://circleci.com/login[the CircleCI login page] as long as the old organization is not deleted.
 

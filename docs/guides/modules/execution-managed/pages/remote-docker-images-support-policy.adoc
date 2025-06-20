@@ -1,7 +1,6 @@
 = CircleCI remote Docker images support policy
 :page-platform: Cloud, Server v4+
 :page-description: CircleCI remote Docker images release, update, and deprecation policy
-:icons: font
 :experimental:
 
 [#overview]

@@ -7,34 +7,34 @@
 | 2
 | 7.5 GB
 | 150GB
-| icon:check[]
-| icon:check[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon]
 
 | `large`
 | 4
 | 15 GB
 | 150GB
-| icon:check[]
-| icon:check[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon]
 
 | `xlarge`
 | 8
 | 32 GB
 | 150GB
-| icon:check[]
-| icon:check[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon]
 
 | `2xlarge`
 | 16
 | 64 GB
 | 150GB
-| icon:check[]
-| icon:check[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon]
 
 | `2xlarge+`
 | 32
 | 64 GB
 | 150GB
-| icon:check[]
-| icon:check[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon]
 |===

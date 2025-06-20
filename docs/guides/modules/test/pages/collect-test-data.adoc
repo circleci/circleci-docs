@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :description: A guide to collecting test data in your CircleCI projects.
 :experimental:
-:icons: font
 
 [#introduction]
 == Introduction

@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: API guide for internal and external CircleCI developers
 :experimental:
-:icons: font
 
 This guide was written to assist developers in making API calls to CircleCI services to return detailed information about users, pipelines, projects, and workflows. The API v2 Specification itself may be viewed in the https://circleci.com/docs/api/v2/[Reference documentation].
 
@@ -102,7 +101,7 @@ To find your project slug, follow these steps:
 
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the icon:ellipsis-h[ellipsis] next to your project and select **Project Settings**.
+. Select the ellipsis menu image:guides:ROOT:icons/more.svg[more icon] next to your project and select **Project Settings**.
 . The project slug is listed on the project settings homepage. Use the copy button to copy the slug to your clipboard.
 
 The `project_slug` is also included in the response payload when looking up a link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/getPipelineById[pipeline] or link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[workflow] by ID. The project slug can then be used to get information about the project.

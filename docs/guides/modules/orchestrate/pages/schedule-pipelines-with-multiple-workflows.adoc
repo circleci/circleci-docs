@@ -1,7 +1,6 @@
 = Schedule pipelines with multiple workflows
 :page-platform: Cloud
 :page-description: "Learn how to set conditionals for scheduled pipelines in multiple workflows."
-:icons: font
 :experimental:
 
 NOTE: Scheduled pipelines are not currently available for GitLab, Bitbucket Data Center or GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:integration:github-apps-integration.adoc[GitHub App integration page].

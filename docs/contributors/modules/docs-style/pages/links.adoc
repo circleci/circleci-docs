@@ -1,5 +1,4 @@
 = Cross references and links
-:icons: font
 
 [#cross-references]
 == Cross references

@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-description: Learn how to use get CircleCI's job status through Slack, IRC and email notifications.
 :experimental:
-:icons: font
 
 CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 

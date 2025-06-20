@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: How to avoid and debug Java memory errors on CircleCI.
 :experimental:
-:icons: font
 
 How to avoid and debug Java memory errors on CircleCI.
 

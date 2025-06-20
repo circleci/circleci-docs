@@ -1,7 +1,6 @@
 = CircleCI plan overview
 :page-platform: Cloud, Server v4+
 :page-description: This document is an introduction to the plans CircleCI offers to developers.
-:icons: font
 :experimental:
 
 This document is an introduction to the plans CircleCI offers to developers.

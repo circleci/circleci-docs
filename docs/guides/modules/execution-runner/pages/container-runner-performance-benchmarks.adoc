@@ -1,7 +1,6 @@
 = Container runner performance benchmarks
 :page-platform: Cloud, Server v4.3+
 :page-description: Performance benchmarks and tuning.
-:icons: font
 :experimental:
 :container:
 

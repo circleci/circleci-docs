@@ -1,7 +1,6 @@
 = Orbs FAQ
 :page-platform: Cloud, Server v4+
 :page-description: This page answers the most frequently asked questions about orbs.
-:icons: font
 :experimental:
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.

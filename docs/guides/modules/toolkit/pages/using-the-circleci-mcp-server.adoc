@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: A guide to using the CircleCI MCP server to diagnose build failures, fix issues, and manage CI pipelines through natural language commands.
 :experimental:
-:icons: font
 
 The CircleCI MCP server enables you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
 

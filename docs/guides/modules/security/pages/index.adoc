@@ -1,6 +1,5 @@
 = Security at CircleCI
 :page-layout: subsection
 :page-description: Learn about the security features and best practices for CircleCI.
-:icons: font
 
 Learn about the security features and best practices for CircleCI. Safely store secrets using environment variables and contexts. Access audit logs and restric traffic with IP ranges.

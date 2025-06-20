@@ -1,7 +1,6 @@
 = Dynamic configuration overview
 :page-platform: Cloud, Server v4+
 :description: A guide to using CircleCI's dynamic configuration features
-:icons: font
 :experimental:
 
 Dynamic configuration in CircleCI is the process of describing a pipeline in which the work done is dynamically determined. Dynamic configuration is flexible. The features described in this guide allow you to create a configuration to match the requirements of your specific project.
@@ -24,7 +23,7 @@ NOTE: Projects created **after** December 1st 2023 have dynamic config enabled b
 To enable dynamic configuration in CircleCI:
 
 . In the CircleCI web app, select **Projects** in the sidebar
-. Select the icon:ellipsis-h[ellipsis] next to your project and select **Project Settings**
+. Select the ellipsis menu image:guides:ROOT:icons/more.svg[more icon] next to your project and select **Project Settings**
 . From the sidebar, select *Advanced*.
 . Scroll to the *Enable dynamic config using setup workflows* setting, and toggle it to the "on" position, as shown below:
 +

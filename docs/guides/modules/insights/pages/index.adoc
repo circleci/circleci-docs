@@ -1,6 +1,5 @@
 = Insights for monitoring your projects and orgs
 :page-layout: subsection
 :page-description: Get insights about your projects and orgs.
-:icons: font
 
 Learn how to use CircleCI Insights to monitor your projects and orgs. Track usage, performance and credit spending. Drill down into your workflows and jobs to get an accurate picture.

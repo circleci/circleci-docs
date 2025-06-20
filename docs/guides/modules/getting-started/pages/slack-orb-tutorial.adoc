@@ -1,7 +1,6 @@
 = Use the Slack orb to set up notifications
 :page-platform: Cloud, Server v4+
 :page-description: "Learn how to get started with the CircleCI Slack orb"
-:icons: font
 :experimental:
 
 This guide gets you started with the CircleCI Slack orb.

@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-description: Analyze your test performance using test Insights.
 :experimental:
-:icons: font
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 

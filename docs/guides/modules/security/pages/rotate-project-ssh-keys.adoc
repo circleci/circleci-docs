@@ -1,7 +1,6 @@
 = Rotate project SSH keys
 :page-platform: Cloud, Server v4+
 :page-description: How to rotate your project SSH keys.
-:icons: font
 :experimental:
 
 To revoke usage of a project SSH key, rotate the key pairs by following the steps outlined below. There are separate instructions for each supported version control system (VCS).

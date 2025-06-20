@@ -1,7 +1,6 @@
 = Testing iOS applications on macOS
 :page-platform: Cloud
 :page-description: Testing iOS applications on macOS.
-:icons: font
 :experimental:
 
 This document describes how to set up and customize testing for an iOS application with CircleCI.

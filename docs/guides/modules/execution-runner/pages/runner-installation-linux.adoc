@@ -1,7 +1,6 @@
 = Machine runner installation on Linux
 :page-platform: Server v4.0 - v4.7
 :page-description: Instructions on how to install CircleCI's self-hosted runner on Linux.
-:icons: font
 :experimental:
 :machine:
 :linux:

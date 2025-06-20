@@ -1,7 +1,6 @@
 = VS Code extension overview
 :page-platform: Cloud
 :page-description: Learn about how the CircleCI VS Code extension can help you manage your pipelines, workflows and jobs.
-:icons: font
 :experimental:
 
 The CircleCI Visual Studio Code extension enables you to manage your CircleCI pipelines directly from VS Code.
@@ -199,7 +198,7 @@ The following steps show how to test run a pipeline from the VS Code extension:
 
 . Open VS Code and select the CircleCI logo in the sidebar. The **Pipelines** and **Run** panels will be visible.
 . Expand the **Run** panel to view your projects.
-. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and select icon:play[] **Run local config on branch <your-branch-name>**. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
+. For each project, there is a button to trigger the config test run, and check boxes for each workflow and job for you to choose which parts of your config you want to run. Select your options, and select the "play" icon **Run local config on branch <your-branch-name>**. Any local change you make to your `.circleci/config.yml` file will be included in the test run.
 . The pipeline is now visible in your link:https://app.circleci.com/pipelines/[dashboard] in the CircleCI web app, and the Pipelines panel in the VS Code extension. Currently, pipelines run with unversioned configuration are not differentiated from other pipelines in the CircleCI web app.
 
 [#feature-controls]

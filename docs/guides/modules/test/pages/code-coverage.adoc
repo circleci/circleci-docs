@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Generate code coverage metrics for different languages.
 :experimental:
-:icons: font
 
 [#introduction]
 == Introduction

@@ -1,7 +1,6 @@
 = Deploy to Heroku
 :page-platform: Cloud, Server v4+
 :page-description: This is document provides examples of deploying to Heroku.
-:icons: font
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Heroku.

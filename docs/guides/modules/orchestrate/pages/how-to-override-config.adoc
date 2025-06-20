@@ -1,7 +1,6 @@
 = How to override config using an orb
 :page-platform: Cloud
 :page-description: Learn how to use the override-with key in CircleCI to standardize pipelines across your organization while maintaining team flexibility.
-:icons: font
 :experimental:
 
 This guide shows you how to use the `override-with` key to override a job in a pipeline with a job from an orb. Config overrides allow you to manage _standardized_ pipelines across your organization. Platform teams can maintain central configuration standards while allowing development teams to customize specific parts of the pipeline.

@@ -1,7 +1,6 @@
 = Introduction to the CircleCI Web App
 :page-platform: Cloud, Server
 :page-description: This document describes the basic features and settings available in the CircleCI web app.
-:icons: font
 :experimental:
 
 The CircleCI web application is a graphic user interface for managing your projects, pipelines, settings, integrations and organizations. The application can be found at link:https://app.circleci.com[https://app.circleci.com].
@@ -124,7 +123,7 @@ Projects associated with your organization appear on the **Projects** page. You 
 * _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:integration:notifications.adoc[email notifications] for the project's status.
 * _Unfollow_ a project to removes it from your Pipelines page and unsubscribe from notifications.
 
-Select the ellipsis menu icon (icon:ellipsis-h[ellipsis]) in a project row to access project assets, as follows:
+Select the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon] in a project row to access project assets, as follows:
 
 * Configuration file in the config editor.
 * Insights.
@@ -141,8 +140,8 @@ image::guides:ROOT:web-ui-projects.png[Projects page in the CircleCI web app]
 Access project settings in one of the following ways:
 
 * From the pipelines dashboard when you have a project selected in the filter menu.
-* From a workflow or job page using the ellipsis menu (icon:ellipsis-h[ellipsis]).
-* From the projects page using the ellipsis menu icon (icon:ellipsis-h[ellipsis]) in a project row.
+* From a workflow or job page using the ellipsis menu image:guides:ROOT:icons/more.svg[more icon].
+* From the projects page using the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon] in a project row.
 
 image::guides:ROOT:find-project-settings.png[Where to find project settings page in the CircleCI web app]
 

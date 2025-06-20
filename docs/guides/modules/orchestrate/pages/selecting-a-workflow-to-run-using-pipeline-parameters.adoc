@@ -1,7 +1,6 @@
 = Selecting a workflow to run using pipeline parameters
 :page-platform: Cloud, Server v4+
 :page-description: "A how-to guide for selecting a workflow to run using pipeline parameters."
-:icons: font
 :experimental:
 
 You might find that you want to manually trigger a specific workflow to run using the API but still run a workflow on every push to your project. To achieve this, use xref:pipeline-variables.adoc#pipeline-parameters-in-configuration[pipeline parameters] to decide which workflow(s) to run.

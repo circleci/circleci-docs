@@ -1,7 +1,6 @@
 = Notify a Slack channel of a paused workflow
 :page-platform: Cloud, Server v4+
 :page-description: A how to guide for using the Slack orb to notify a Slack channel of a paused workflow.
-:icons: font
 :experimental:
 
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.

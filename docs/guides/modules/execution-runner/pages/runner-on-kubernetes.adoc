@@ -1,7 +1,6 @@
 = CircleCI's self-hosted runner installation on Kubernetes
 :page-platform: Cloud, Server v4+
 :page-description: Use this installation guide to set up CircleCI's self-hosted runners on your Kubernetes cluster.
-:icons: font
 :experimental:
 
 [#strongly-recommended-method]

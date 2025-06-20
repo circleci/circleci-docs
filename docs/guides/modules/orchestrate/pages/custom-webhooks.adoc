@@ -1,7 +1,6 @@
 = Custom webhooks
 :page-platform: Cloud, Server v4+
 :page-description: Use webhooks to integrate with third-party services and subscribe to CircleCI events
-:icons: font
 :experimental:
 
 Setting up an inbound webhook (as a **custom webhook** trigger) on CircleCI enables a third party service to trigger a CircleCI pipeline. Any service that can send a webhook or make a `curl` request can trigger a CircleCI pipeline.
@@ -62,7 +61,7 @@ TIP: As an alternative, you can add an environment variable using a xref:securit
 
 . In the link:https://app.circleci.com/[CircleCI web app] select your organization.
 . Select **Projects** in the sidebar.
-. Find your project in the list, select the ellipsis (icon:ellipsis-h[]), and select **Project Settings**.
+. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon], and select **Project Settings**.
 . Select **Environment Variables** from the sidebar.
 . Select btn:[Add Environment Variable].
 . Give your environment variable a name, for example, `WEBHOOK_SECRET`.

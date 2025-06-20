@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Introduction to environment variables in CircleCI
 :experimental:
-:icons: font
 
 [#introduction]
 == Introduction

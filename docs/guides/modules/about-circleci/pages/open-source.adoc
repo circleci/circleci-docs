@@ -1,7 +1,6 @@
 = Open source acknowledgments
 :page-platform: Cloud, Server v4+
 :page-description: List and acknowledgements for open-source projects and libraries that are used in CircleCI products and services.
-:icons: font
 :experimental:
 
 This page provides the details of 3rd-party open source components used in CircleCI products.

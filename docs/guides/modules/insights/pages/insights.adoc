@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Viewing the status of repos and test performance
 :experimental:
-:icons: font
 
 [#overview]
 == Overview

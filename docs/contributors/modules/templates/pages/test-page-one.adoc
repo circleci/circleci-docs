@@ -1,7 +1,6 @@
 = Test page for docs site
 :page-platform: Cloud, Server v4+
 :page-description: A page with all components for testing the new docs site.
-:icons: font
 :experimental:
 
 [#introduction]

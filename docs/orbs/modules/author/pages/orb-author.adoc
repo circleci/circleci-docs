@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Starting point for authoring CircleCI orbs
 :experimental:
-:icons: font
 
 CircleCI orbs are packages of xref:orb-concepts.adoc#orb-configuration-elements[reusable configuration] that you can import into you CircleCI configuration files. Orbs come in two types:
 

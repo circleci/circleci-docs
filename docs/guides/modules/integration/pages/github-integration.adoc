@@ -1,7 +1,6 @@
 = GitHub OAuth app integration overview
 :page-platform: Cloud
 :page-description: This document provides an overview of using GitHub and GitHub Enterprise with CircleCI.
-:icons: font
 :experimental:
 
 If your CircleCI organization is authenticated with GitHub through the **GitHub OAuth app**, the content on this page is for you.

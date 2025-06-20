@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: How to enable Docker Compose in your primary container
 :experimental:
-:icons: font
 
 This page describes how to use Docker Compose in your CircleCI pipelines.
 

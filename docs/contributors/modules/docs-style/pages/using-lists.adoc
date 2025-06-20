@@ -1,5 +1,4 @@
 = Using lists
-:icons: font
 
 * To generate numbered steps (an ordered list) use the following syntax:
 +

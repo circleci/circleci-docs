@@ -1,7 +1,6 @@
 = Sign in to an SSO-enabled organization
 :page-platform: Cloud
 :page-description: Instructions outlining how to sign in as an SSO user
-:icons: font
 :experimental:
 
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]

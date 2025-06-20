@@ -1,7 +1,6 @@
 = Scheduled pipelines
 :page-platform: Cloud
 :page-description: Learn about scheduled pipelines for your CircleCI projects.
-:icons: font
 :experimental:
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]

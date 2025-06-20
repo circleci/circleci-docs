@@ -1,7 +1,6 @@
 = Roles and permissions
 :page-platform: Cloud
 :page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
-:icons: font
 :experimental:
 
 NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc[GitHub App], the content on this page applies to you.

@@ -1,7 +1,6 @@
 = Bitbucket Data Center integration overview
 :page-platform: Cloud
 :page-description: Learn how to integrate Bitbucket Data Center with CircleCI to manage your pipelines with our.
-:icons: font
 :experimental:
 
 This page walks you through integrating a Bitbucket Data Center project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your Bitbucket Data Center project. CircleCI features that are in development for Bitbucket Data Center projects are detailed in the <<coming-soon>> section.

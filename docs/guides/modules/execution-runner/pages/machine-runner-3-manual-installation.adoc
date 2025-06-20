@@ -1,7 +1,6 @@
 = Machine runner 3 manual installation
 :page-platform: Cloud, Server v4.4+
 :page-description: Instructions on how to manually start CircleCI's self-hosted machine runner 3 on macOS and Linux.
-:icons: font
 :experimental:
 :machine:
 :macOS:

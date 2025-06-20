@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Docs page on In-app configuration editor use and features
 :experimental:
-:icons: font
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 

@@ -1,7 +1,6 @@
 = Sign up and try CircleCI
 :page-platform: Cloud
 :page-description: First step for using CircleCI.
-:icons: font
 :experimental:
 
 To start building on CircleCI, go to the link:https://circleci.com/signup/[Sign Up] page or follow an email invite link from your team, and create an account. After signing up you can create an organization or find your teammates.

@@ -1,7 +1,6 @@
 = CircleCI Linux CUDA images support policy
 :page-platform: Cloud, Server v4+
 :page-description: CircleCI Linux CUDA images release, update, and deprecation policy
-:icons: font
 :experimental:
 
 include::ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]

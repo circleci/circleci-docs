@@ -1,7 +1,6 @@
 = Examples and guides overview
 :page-platform: Cloud, Server v4+
 :page-description: Resources for learning CircleCI using examples.
-:icons: font
 :experimental:
 
 This page provides a collection of examples to help you learn how to build, test, and deploy applications written in the most common programming languages, frameworks, and platforms on CircleCI.

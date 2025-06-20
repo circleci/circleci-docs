@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: How to install the CircleCI local CLI
 :experimental:
-:icons: font
 
 The https://circleci-public.github.io/circleci-cli/[CircleCI command line interface (CLI)] brings CircleCI's advanced and powerful tools to your terminal.
 

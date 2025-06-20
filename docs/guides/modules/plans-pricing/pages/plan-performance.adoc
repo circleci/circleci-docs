@@ -1,7 +1,6 @@
 = Performance Plan
 :page-platform: Cloud
 :page-description: This document describes the Performance Plan available to developers on CircleCI.
-:icons: font
 :experimental:
 :orbs:
 

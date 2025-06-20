@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: How to upload artifacts to Artifactory in CircleCI
 :experimental:
-:icons: font
 
 In this how-to guide, you will learn how to upload artifacts to Artifactory in CircleCI.
 

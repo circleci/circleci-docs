@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: How to use the CircleCI local CLI
 :experimental:
-:icons: font
 
 This page describes how to use some features of the CircleCI CLI.
 

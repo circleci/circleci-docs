@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-description: Deploy iOS Applications
 :experimental:
-:icons: font
 
 In this how-to guide, you will learn how to configure link:https://fastlane.tools/[Fastlane] to automatically deploy iOS apps from CircleCI to a distribution service.
 

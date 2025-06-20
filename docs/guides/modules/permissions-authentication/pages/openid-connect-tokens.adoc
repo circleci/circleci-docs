@@ -1,7 +1,6 @@
 = Using OpenID Connect tokens in jobs
 :page-platform: Cloud, Server v4.4+
 :page-description: Learn how to use OpenID Connect ID tokens for access to compatible cloud services.
-:icons: font
 :experimental:
 
 CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. A job can be configured to use these tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.

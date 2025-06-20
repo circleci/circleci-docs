@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-description: How to set up code signing for an iOS app
 :experimental:
-:icons: font
 
 This document describes the guidelines for setting up code signing
 for your iOS project on CircleCI.

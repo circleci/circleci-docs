@@ -1,7 +1,6 @@
 = Migrate from GitLab
 :page-platform: Cloud, Server v4+
 :page-description: An overview of how to migrate from GitLab to CircleCI.
-:icons: font
 :experimental:
 
 This document provides an overview of how to migrate from GitLab to CircleCI.

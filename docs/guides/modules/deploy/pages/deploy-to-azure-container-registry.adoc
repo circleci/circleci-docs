@@ -1,7 +1,6 @@
 = Deploy to Azure Container Registry
 :page-platform: Cloud, Server v4+
 :page-description: This is document provides examples of deploying to Azure Container Registry.
-:icons: font
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Azure Container Registry.

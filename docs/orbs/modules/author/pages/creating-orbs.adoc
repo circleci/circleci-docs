@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :description: Publishing Orbs to the Orb Registry
 :experimental:
-:icons: font
 
 This guide covers the steps required to publish an orb.
 

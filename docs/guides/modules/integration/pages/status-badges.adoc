@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: How to embed a CircleCI status badge in any web page or document
 :experimental:
-:icons: font
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 

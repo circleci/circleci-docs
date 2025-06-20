@@ -1,7 +1,6 @@
 = Multi-factor authentication (MFA)
 :page-platform: Cloud
 :page-description: MFA Overview
-:icons: font
 :experimental:
 
 NOTE:  MFA is currently optional. Starting December 1, 2025 MFA will be required if you log in to CircleCI with email and password.

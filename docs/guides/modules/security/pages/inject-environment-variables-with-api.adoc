@@ -1,7 +1,6 @@
 = Inject environment variables with the CircleCI API
 :page-platform: Cloud, Server v4+
 :page-description: How to inject env var values using the API.
-:icons: font
 :experimental:
 
 include::ROOT:partial$notes/server-api-examples.adoc[]

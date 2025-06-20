@@ -1,7 +1,6 @@
 = Using matrix jobs
 :page-platform: Cloud, Server v4+
 :page-description: "A how to guide for using matrix jobs to simplify your CircleCI configuration."
-:icons: font
 :experimental:
 
 Matrix jobs provide a way to run a job multiple times with arguments. Arguments are supplied using parameters. There are many uses for this feature, including testing on multiple operating systems and against different language or library versions.

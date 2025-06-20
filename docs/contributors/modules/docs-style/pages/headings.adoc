@@ -1,5 +1,4 @@
 = Headings
-:icons: font
 
 * Write headings in a logical sequence. If you read section titles in order, the flow should present a good storyline for the doc.
 

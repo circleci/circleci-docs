@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Description of CircleCI jobs and steps.
 :experimental:
-:icons: font
 
 This page provides an overview of CircleCI jobs and steps.
 

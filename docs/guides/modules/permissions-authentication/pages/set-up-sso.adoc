@@ -1,7 +1,6 @@
 = Set up SSO
 :page-platform: Cloud
 :page-description: Tutorial outlining how to set up SSO for an organization
-:icons: font
 :experimental:
 
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]

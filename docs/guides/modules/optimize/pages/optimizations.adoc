@@ -1,7 +1,6 @@
 = Optimization reference
 :page-platform: Cloud, Server v4+
 :page-description: Learn about ways to optimize your CircleCI pipelines
-:icons: font
 :experimental:
 
 This page provides an overview of the various ways you can optimize your CircleCI configuration. Each optimization method is described briefly, along with possible use cases.

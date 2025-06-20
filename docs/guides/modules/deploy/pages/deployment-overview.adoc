@@ -1,7 +1,6 @@
 = Deployment overview
 :page-platform: Cloud, Server v4+
 :page-description: Learn the basics of CircleCI deployment.
-:icons: font
 :experimental:
 
 [#introduction]

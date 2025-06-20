@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-description: How to enable GitHub Checks for CircleCI
 :experimental:
-:icons: font
 
 [#introduction]
 == Introduction

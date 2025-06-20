@@ -1,6 +1,5 @@
 = Get information about CircleCI plans and pricing
 :page-layout: subsection
 :page-description: Learn about CircleCI plans and pricing.
-:icons: font
 
 Learn about CircleCI plans and pricing. Choose the plan that is right for you and your team.

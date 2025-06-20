@@ -10,8 +10,8 @@
 | NVIDIA Tesla P4
 | 16
 | 150
-| icon:check[]
-| icon:times[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/cancel.svg[cancel icon]
 
 | `gpu.nvidia.small.gen2`
 | 4
@@ -20,8 +20,8 @@
 | NVIDIA A10G
 | 24
 | 150
-| icon:check[]
-| icon:times[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/cancel.svg[cancel icon]
 
 | `gpu.nvidia.small.multi`
 | 4
@@ -30,8 +30,8 @@
 | NVIDIA Tesla T4
 | 16
 | 150
-| icon:check[]
-| icon:times[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/cancel.svg[cancel icon]
 
 | `gpu.nvidia.medium.multi`
 | 8
@@ -40,8 +40,8 @@
 | NVIDIA Tesla T4
 | 16
 | 150
-| icon:check[]
-| icon:times[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/cancel.svg[cancel icon]
 
 | `gpu.nvidia.medium`
 | 8
@@ -50,8 +50,8 @@
 | NVIDIA Tesla T4
 | 16
 | 150
-| icon:check[]
-| icon:times[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/cancel.svg[cancel icon]
 
 | `gpu.nvidia.large`
 | 8
@@ -60,6 +60,6 @@
 | NVIDIA Tesla V100
 | 16
 | 150
-| icon:check[]
-| icon:times[]
+| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/cancel.svg[cancel icon]
 |===

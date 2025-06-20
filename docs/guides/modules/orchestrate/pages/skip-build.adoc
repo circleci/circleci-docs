@@ -1,7 +1,6 @@
 = Skip CI and cancel workflows
 :page-platform: Cloud, Server v4+
 :page-description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
-:icons: font
 :experimental:
 
 This page describes how to skip or cancel work when triggering pipelines, as follows:

@@ -1,7 +1,6 @@
 = Self-hosted runner concepts
 :page-platform: Cloud, Server v4+
 :page-description: Conceptual Overview for CircleCI's self-hosted runner.
-:icons: font
 :experimental:
 
 [#namespaces-and-resource-classes]

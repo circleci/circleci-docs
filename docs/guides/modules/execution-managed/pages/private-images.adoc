@@ -1,7 +1,6 @@
 = Using Docker authenticated pulls
 :page-platform: Cloud
 :page-description: This document describes how to authenticate with your Docker registry provider to pull images.
-:icons: font
 :experimental:
 
 This document describes how to authenticate with your Docker registry provider to pull images.

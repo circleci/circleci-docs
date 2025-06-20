@@ -1,7 +1,6 @@
 = Manage roles and permissions
 :page-platform: Cloud
 :page-description: How-to guides for managing roles and permissions in CircleCI.
-:icons: font
 :experimental:
 
 NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc[GitHub App], the content on this page applies to you.

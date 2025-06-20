@@ -1,7 +1,6 @@
 = Get started with the VS Code extension
 :page-platform: Cloud, Server v4+
 :page-description: A quickstart tutorial for the CircleCI VS Code extension.
-:icons: font
 :experimental:
 
 This tutorial is a quickstart guide to setting up and using the official CircleCI VS Code extension. You can read more about the extension's capabilities in the xref:vs-code-extension-overview.adoc[overview].
@@ -44,7 +43,7 @@ image::guides:ROOT:vs_code_extension_login.png[Log in to CircleCI from VS Code]
 
 If your VS Code workspace contains one or more CircleCI projects, the extension will detect them automatically, and the pipelines panel will be populated with your most recent pipelines.
 
-If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon (icon:cog[]) at the top of the pipelines panel), and select your projects manually. Only projects you follow are listed for selection.
+If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon image:guides:ROOT:icons/settings.svg[settings icon] at the top of the pipelines panel), and select your projects manually. Only projects you follow are listed for selection.
 
 NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for xref:integration:github-apps-integration.adoc[GitHub App] and xref:integration:gitlab-integration.adoc[GitLab] projects. Select your project manually from the settings page.
 
@@ -55,7 +54,7 @@ NOTE: Your manual selection will only persist if no projects are detected automa
 [#configure-the-pipelines-panel-in-vs-code]
 == 4. Configure the pipelines panel in VS Code
 
-By default, the pipelines panel displays all the latest pipelines run on your project. However, you can also configure it to show only the pipelines you are interested in. You can do so in the extension's settings page (run `CircleCI: Open Settings` from the Command Palette, or click on the settings icon (icon:cog[]) at the top of the pipelines panel).
+By default, the pipelines panel displays all the latest pipelines run on your project. However, you can also configure it to show only the pipelines you are interested in. You can do so in the extension's settings page (run `CircleCI: Open Settings` from the Command Palette, or click on the settings icon image:guides:ROOT:icons/settings.svg[settings icon] at the top of the pipelines panel).
 
 Specifically, you can choose to display:
 

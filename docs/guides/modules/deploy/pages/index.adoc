@@ -1,7 +1,6 @@
 = Deploy with CircleCI
 :page-layout: subsection
 :page-description: Deploy your code and manage your deployments with CircleCI.
-:icons: font
 
 Learn how to deploy your code and manage your deployments with CircleCI. Choose an agentless setup, or install the Kubernetes release agent into your cluster.
 

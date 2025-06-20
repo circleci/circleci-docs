@@ -1,7 +1,6 @@
 = Test splitting to speed up your pipelines
 :page-platform: Cloud, Server v4+
 :page-description: Learn to split and run tests in parallel in CircleCI.
-:icons: font
 :experimental:
 
 This guide walks you through a basic example of test splitting in CircleCI. Test splitting helps speed up your pipelines.

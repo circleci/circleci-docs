@@ -1,7 +1,6 @@
 = Set up multiple configuration files for a project
 :page-platform: Cloud
 :page-description: A step by step guide for setting up multiple pipelines, each defined in a separate configuration file, in a CircleCI project.
-:icons: font
 :experimental:
 
 A CircleCI project integrated with GitHub can have one or more pipelines, each defined by a separate configuration file. CircleCI configuration files can be stored in the same repo as your code, or even in different repos if you wish.

@@ -1,7 +1,6 @@
 = Rerun failed tests
 :page-platform: Cloud
 :page-description: How to rerun only failed tests in a job and optimize credit usage.
-:icons: font
 :experimental:
 
 Use rerun failed tests to only rerun a subset of tests, instead of an entire test suite, when a transient test failure arises.

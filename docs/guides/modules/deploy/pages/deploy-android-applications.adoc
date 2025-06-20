@@ -1,7 +1,6 @@
 = Deploy Android applications
 :page-platform: Cloud
 :page-description: Learn to deploy Android apps through CircleCI.
-:icons: font
 :experimental:
 
 In this how-to guide, you will learn how to automatically deploy your Android app through CircleCI with link:https://fastlane.tools/[Fastlane].

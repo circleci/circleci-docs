@@ -1,7 +1,6 @@
 = Troubleshoot
 :page-platform: Cloud, Server v4+
 :page-description: Troubleshoot CircleCI and various setups and integrations.
-:icons: font
 :experimental:
 
 This page offers troubleshooting suggestions for the following aspects of CircleCI:

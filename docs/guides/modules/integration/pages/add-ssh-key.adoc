@@ -1,7 +1,6 @@
 = Add additional SSH keys to CircleCI
 :page-platform: Cloud, Server v4+
 :page-description: How to add additional SSH keys to CircleCI
-:icons: font
 :experimental:
 
 Add additional SSH keys to your project for access to deploy other services or to write to, or checkout code from other repositories.

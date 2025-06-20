@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and mysql project.
 :experimental:
-:icons: font
 
 This document provides example database xref:orchestrate:databases.adoc[config.yml] files using PostgreSQL/Rails and MySQL/Ruby.
 

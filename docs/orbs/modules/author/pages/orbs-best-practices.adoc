@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: A reference guide to best practices for developing orbs.
 :experimental:
-:icons: font
 
 [#general]
 == General

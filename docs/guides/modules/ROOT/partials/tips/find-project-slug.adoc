@@ -5,7 +5,7 @@
 
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 
-. Select the ellipsis menu (icon:ellipsis-h[ellipsis]) next to your project and select **Project Settings**. The project slug is listed on the project settings homepage.
+. Select the ellipsis menu image:guides:ROOT:icons/more.svg[more icon] next to your project and select **Project Settings**. The project slug is listed on the project settings homepage.
 
 * **GitHub App**: Project slug starts with `circleci` followed by UUIDs. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU/4nYdoKGkb6RXn7JGt8SQtg`).
 * **GitHub OAuth app**: Project slug is human readable. For example, `github/circleci/circleci-demo-workflows`.

@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Conceptual Overview for Orbs
 :experimental:
-:icons: font
 
 link:https://circleci.com/orbs/[CircleCI orbs] are shareable packages of configuration elements, including the following:
 

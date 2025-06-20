@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: An overview of setting up testing automation, integration, and analytics.
 :experimental:
-:icons: font
 
 [#introduction]
 == Introduction

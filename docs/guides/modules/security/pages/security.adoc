@@ -2,7 +2,6 @@
 :page-platform: Server v4+, Server Admin
 :page-description: An overview of security measures taken at CircleCI.
 :experimental:
-:icons: font
 
 This document outlines security initiatives taken by CircleCI.
 

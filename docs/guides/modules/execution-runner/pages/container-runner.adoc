@@ -1,7 +1,6 @@
 = Container runner reference
 :page-platform: Cloud, Server v4.3+
 :page-description: Details of CircleCI's container runner
-:icons: font
 :experimental:
 
 This document is a comprehensive guide to operating and configuring jobs with the CircleCI container runner.

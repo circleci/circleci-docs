@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: How to build Docker images using the Docker execution environment
 :experimental:
-:icons: font
 
 Use the remote Docker environment to build Docker images within the Docker execution environment.
 

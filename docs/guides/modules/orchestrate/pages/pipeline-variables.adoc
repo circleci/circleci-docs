@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :experimental:
 :page-description: This document describes the Free Plan available to developers on CircleCI.
-:icons: font
 :experimental:
 
 [#introduction]

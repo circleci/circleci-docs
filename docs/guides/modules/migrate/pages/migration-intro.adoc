@@ -1,7 +1,6 @@
 = Introduction to CircleCI migration
 :page-platform: Cloud
 :page-description: This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.
-:icons: font
 :experimental:
 
 TIP: The link:https://circleci.com/developer/tools/configTranslator[CircleCI configuration translator] provides a way to convert your GitHub Actions or GitLab config into a CircleCI `config.yml` file. The configuration translator is currently in open preview.

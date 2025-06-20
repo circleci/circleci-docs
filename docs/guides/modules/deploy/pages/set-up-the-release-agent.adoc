@@ -1,7 +1,6 @@
 = Manual install - set up the release agent
 :page-platform: Cloud
 :page-description: Tutorial outlining how to manually install the CircleCI release agent into your Kubernetes cluster
-:icons: font
 :experimental:
 
 This tutorial shows how to manually install the CircleCI release agent into your Kubernetes cluster. This manual installation guide is an alternative to using the in-app deploys set up process as described in the xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys] page.
@@ -34,7 +33,7 @@ You will need a `CCI_INTEGRATION_TOKEN` to install the CircleCI release agent in
 
 . In the CircleCI web app, select **Deploys** in the sidebar.
 . Navigate to the **Environments** tab.
-. Select the gear icon (icon:cog[]) corresponding to the environment you just created to enter the Environment Integration Settings page.
+. Select the gear icon image:guides:ROOT:icons/settings.svg[settings icon] corresponding to the environment you just created to enter the Environment Integration Settings page.
 . Select btn:[Create Integration Token] and then btn:[Create Token]
 . The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then select btn:[Done]
 

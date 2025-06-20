@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: An overview of all CircleCI execution environments.
 :experimental:
-:icons: font
 
 CircleCI offers several execution environments:
 

@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to configure a your jobs to run in the Windows execution environment.
 :experimental:
-:icons: font
 
 The Windows execution environment provides the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 

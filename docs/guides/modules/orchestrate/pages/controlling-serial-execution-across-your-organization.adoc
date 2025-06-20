@@ -1,7 +1,6 @@
 = Controlling serial execution across your organization
 :page-platform: Cloud
 :page-description: An overview of controlloing serial execution accross a CircleCI org.
-:icons: font
 :experimental:
 
 Serial groups enable controlled, sequential execution of CircleCI jobs across your organization to prevent conflicts when multiple jobs need to access shared resources or when operation order is critical.
@@ -116,7 +115,7 @@ You can cancel an entire workflow that contains serial group jobs. Cancelling a 
 
 . In the link:https://app.circleci.com/home[CircleCI web app], select your org.
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
-. Select the "Cancel Workflow" button to the right of the pipeline (icon:times-circle[cancel workflow])
+. Select the "Cancel Workflow" button to the right of the pipeline (image:guides:ROOT:icons/cancel.svg[cancel workflow])
 . Confirm the cancellation when prompted.
 
 == Troubleshooting serial groups

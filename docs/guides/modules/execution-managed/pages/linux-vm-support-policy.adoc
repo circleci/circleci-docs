@@ -1,7 +1,6 @@
 = CircleCI Linux VM images support policy
 :page-platform: Cloud
 :page-description: CircleCI Linux VM images release, update, and deprecation policy
-:icons: font
 :experimental:
 
 [#overview]

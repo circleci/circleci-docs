@@ -1,7 +1,6 @@
 = Workflow orchestration
 :page-platform: Cloud, Server v4+
 :page-description: Learn about using CircleCI workflows to orchestrate jobs
-:icons: font
 :experimental:
 
 Workflows in CircleCI are used to orchestrate jobs. Workflows have options to control run order, scheduling, and access to resources. This page explains how to configure workflows to suit your project. Optimizing your workflows can increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.

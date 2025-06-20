@@ -1,7 +1,6 @@
 = Single sign-on (SSO) overview
 :page-platform: Cloud
 :page-description: Introduction to CircleCI SAML SSO
-:icons: font
 :experimental:
 
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]

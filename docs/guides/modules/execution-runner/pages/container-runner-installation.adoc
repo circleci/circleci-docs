@@ -1,7 +1,6 @@
 = Container runner installation (Kubernetes)
 :page-platform: Cloud, Server v4.3+
 :page-description: Instructions on how to install CircleCI's container runner.
-:icons: font
 :experimental:
 :container:
 

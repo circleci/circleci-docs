@@ -1,7 +1,6 @@
 = Set a nightly scheduled pipeline
 :page-platform: Cloud
 :page-description: "Learn how to create scheduled pipelines on a specific timetable."
-:icons: font
 :experimental:
 
 NOTE: Scheduled pipelines are not currently available for GitLab, GitHub App or Bitbucket Data Center projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:integration:github-apps-integration.adoc[GitHub App integration page].

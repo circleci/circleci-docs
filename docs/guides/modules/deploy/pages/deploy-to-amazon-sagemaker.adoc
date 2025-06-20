@@ -1,7 +1,6 @@
 = Deploy to Amazon SageMaker
 :page-platform: Cloud
 :page-description: A guide to configuring deployments to Amazon SageMaker and monitoring in the CircleCI deploys UI.
-:icons: font
 :experimental:
 
 NOTE: The link:https://circleci.com/developer/orbs/orb/circleci/aws-sagemaker[SageMaker orb] is in **open preview**.

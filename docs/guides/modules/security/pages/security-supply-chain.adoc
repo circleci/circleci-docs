@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :description: Protecting against supply chain attacks on CircleCI
 :experimental:
-:icons: font
 
 [#overview]
 == Overview

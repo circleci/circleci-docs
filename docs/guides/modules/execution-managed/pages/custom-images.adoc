@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Why and how to create custom Docker images
 :experimental:
-:icons: font
 
 This page describes how to create and use custom Docker images with CircleCI.
 

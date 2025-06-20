@@ -1,7 +1,6 @@
 = GitHub trigger event options
 :page-platform: Cloud
 :page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
-:icons: font
 :experimental:
 
 When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties. Using GitHub App trigger options you can trigger pipeline on non-push events.
@@ -118,12 +117,12 @@ Config orchestration tools are available from within your pipelines are as follo
 === Steps
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, select the ellipsis (icon:ellipsis-h[]) next to it and choose **Project Settings**.
+. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon] next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
 . Select btn:[Add Trigger].
 . Select GitHub App in the "Trigger type" menu and select btn:[Next].
 . Complete the form fields and options:
-** Authorize your connection if this is not already showing with a icon:check-circle[].
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon].
 ** Give your trigger a descriptive name.
 ** Select the trigger source repository.
 ** Choose your pipeline from the "Choose pipeline to run" menu.

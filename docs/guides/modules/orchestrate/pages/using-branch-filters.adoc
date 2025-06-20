@@ -1,7 +1,6 @@
 = Using branch filters
 :page-platform: Cloud, Server v4+
 :page-description: A how to guide for using branch fileters at the job level to simplify your CircleCI configuration.
-:icons: font
 :experimental:
 
 [#branch-filtering-for-job-steps]

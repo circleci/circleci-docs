@@ -1,7 +1,6 @@
 = Glossary
 :page-platform: Cloud, Server v4+
 :page-description: A glossary of terms used for the CircleCI product.
-:icons: font
 :experimental:
 
 [#circleci-administrator]

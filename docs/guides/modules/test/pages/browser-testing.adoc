@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Browser Testing on CircleCI
 :experimental:
-:icons: font
 
 This page describes common methods for running and debugging browser testing in your CircleCI config.
 

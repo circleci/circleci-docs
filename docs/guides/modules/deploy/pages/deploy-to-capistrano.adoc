@@ -1,7 +1,6 @@
 = Deploy to Capistrano
 :page-platform: Cloud, Server v4+
 :page-description: This is document provides examples of deploying to Capistrano.
-:icons: font
 :experimental:
 
 This how-to guide covers an example CircleCI configuration to deploy to Capistrano.

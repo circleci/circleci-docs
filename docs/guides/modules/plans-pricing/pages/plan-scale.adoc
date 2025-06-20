@@ -1,7 +1,6 @@
 = Scale Plan
 :page-platform: Cloud
 :page-description: This document describes the Scale Plan available to developers on CircleCI.
-:icons: font
 :experimental:
 
 This document describes the CircleCI Scale Plan.

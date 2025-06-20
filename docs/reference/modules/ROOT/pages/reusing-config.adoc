@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Reference guide for CircleCI 2.1 Configuration
 :experimental:
-:icons: font
 
 This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
 

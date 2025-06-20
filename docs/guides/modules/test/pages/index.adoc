@@ -1,6 +1,5 @@
 = Testing on CircleCI
 :page-layout: subsection
 :page-description: Test your code on CircleCI.
-:icons: font
 
 Learn how to test your code on CircleCI. Find out about CircleCI's intelligent test splitting to run tests in parallel and speed up your pipelines.

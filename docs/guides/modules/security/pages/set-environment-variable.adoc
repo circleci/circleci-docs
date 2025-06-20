@@ -1,7 +1,6 @@
 = Set an environment variable
 :page-platform: Cloud, Server v4+
 :page-description: How to set environment variables for use in your CircleCI pipelines.
-:icons: font
 :experimental:
 
 Environment variables can be stored and configured for use in CircleCI jobs in several ways to provide variety in scope and authorization level.

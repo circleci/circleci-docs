@@ -1,7 +1,6 @@
 = Bitbucket Cloud integration overview
 :page-platform: Cloud
 :page-description: This document provides an overview of using Bitbucket Cloud with CircleCI.
-:icons: font
 :experimental:
 
 [#overview]

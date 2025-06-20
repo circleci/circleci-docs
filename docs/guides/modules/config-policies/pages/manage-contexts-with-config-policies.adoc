@@ -1,7 +1,6 @@
 = Manage contexts with config policies
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to manage the use of contexts with config policies.
-:icons: font
 :experimental:
 
 NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.

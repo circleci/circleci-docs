@@ -1,6 +1,5 @@
 = Orb development kit
 :page-platform: Cloud, Server v4+
-:icons: font
 :page-description: How to use CircleCI's orb development kit.
 :experimental:
 

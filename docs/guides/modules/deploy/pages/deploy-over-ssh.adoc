@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to deploy your application over SSH using CircleCI.
 :experimental:
-:icons: font
 
 In this how-to guide, you will learn how to configure CircleCI to deploy your application over SSH.
 

@@ -1,5 +1,4 @@
 = Style and voice
-:icons: font
 :experimental:
 
 == Talk confidently and directly

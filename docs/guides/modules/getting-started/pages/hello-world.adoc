@@ -1,7 +1,6 @@
 = Hello world
 :page-platform: Cloud, Server v4+
 :page-description: Get started with CircleCI by printing Hello World in any execution environment.
-:icons: font
 :experimental:
 
 This page provides configuration examples to get started with a basic pipeline using any execution environment.

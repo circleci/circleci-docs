@@ -1,5 +1,4 @@
 = Style guide overview
-:icons: font
 
 This guide is a reference for contributors to CircleCI docs. Our style guide evolves so you will probably find older documentation does not meet the requirements set out here. Use this guide to help you write new docs, and when working on existing documentation it would be great if you can make edits to help keep everything consistent.
 

@@ -1,7 +1,6 @@
 = Upgrading the CircleCI's self-hosted runner on server
 :page-platform: Server v4.0 - v4.6
 :page-description: Learn how to upgrade CircleCI's self-hosted runner on server.
-:icons: font
 :experimental:
 
 

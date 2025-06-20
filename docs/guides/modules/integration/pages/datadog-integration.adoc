@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to integrate CircleCI with Datadog for monitoring and observability.
 :experimental:
-:icons: font
 
 This page describes how to connect Insights data with link:https://www.datadoghq.com/[Datadog].
 

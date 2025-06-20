@@ -1,7 +1,6 @@
 = Resource class overview
 :page-platform: Cloud, Server v4+
 :page-description: An overview of resource classes in CircleCI
-:icons: font
 :experimental:
 
 Use resource classes to:

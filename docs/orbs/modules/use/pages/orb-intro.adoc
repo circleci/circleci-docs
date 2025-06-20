@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Starting point for using CircleCI orbs
 :experimental:
-:icons: font
 
 Use orbs to:
 

@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
 :experimental:
-:icons: font
 
 This page describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
 

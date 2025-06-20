@@ -2,7 +2,6 @@
 :page-platform: Cloud
 :page-description: Learn how to configure a your jobs to run in the GPU execution environment.
 :experimental:
-:icons: font
 
 include::ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]
 

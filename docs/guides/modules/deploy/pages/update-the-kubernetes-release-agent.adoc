@@ -1,7 +1,6 @@
 = Update the Kubernetes release agent
 :page-platform: Cloud
 :page-description: How to update the Kubernetes release agent for integrations with CircleCI deploys.
-:icons: font
 :experimental:
 
 Follow the steps on this page to update the CircleCI release agent installed in your Kubernetes cluster.

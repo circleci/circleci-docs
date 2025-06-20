@@ -2,7 +2,6 @@
 :page-platform: Cloud, Server v4+
 :page-description: Starting point for Testing CircleCI Orbs
 :experimental:
-:icons: font
 
 This guide covers various best practices for testing orbs.
 

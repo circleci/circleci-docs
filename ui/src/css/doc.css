@@ -1325,3 +1325,13 @@
 .image-modal-overlay.show {
   display: flex;
 }
+
+.doc .circle-green {
+  color: #008542 !important;
+  font-weight: var(--heading-font-weight);
+}
+
+.doc .circle-red {
+  color: #8F001C !important;
+  font-weight: var(--heading-font-weight);
+}
