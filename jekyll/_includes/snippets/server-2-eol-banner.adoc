@@ -1,1 +1,0 @@
-WARNING: CircleCI server version 2.x is no longer supported, and will cease to function at the end of March, 2023. Contact your account team for support in upgrading to a supported release.

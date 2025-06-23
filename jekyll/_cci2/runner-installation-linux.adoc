@@ -11,7 +11,7 @@ contentTags:
 :machine:
 :linux:
 
-CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3.0 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
+CAUTION: This installation method is deprecated for **CircleCI cloud** customers. Refer to the xref:install-machine-runner-3-on-linux#[machine runner 3 installation guide] for the recommended steps to set up Linux self-hosted runners on CircleCI cloud.
 
 This page describes how to install CircleCI's machine runner on Linux for **CircleCI server** customers.
 
@@ -41,25 +41,25 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-include::../_includes/snippets/runner/terms.adoc[]
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
 [.tab.machine-runner.Web_app_installation]
 --
-include::../_includes/snippets/runner/install-with-web-app-steps.adoc[]
+include::../_includes/partials/runner/install-with-web-app-steps.adoc[]
 --
 [.tab.machine-runner.CLI_installation]
 --
-include::../_includes/snippets/runner/install-with-cli-steps.adoc[]
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
 
 --
 
 [#download-the-launch-agent-script]
 == 2. Download launch-agent script and install binary
 
-include::../_includes/snippets/runner/launch-agent-download.adoc[]
+include::../_includes/partials/runner/launch-agent-download.adoc[]
 
 [#create-the-circleci-user-and-working-directory]
 == 3. Create `circleci` user and working directory
@@ -176,7 +176,7 @@ sudo /opt/circleci/circleci-launch-agent --config /etc/opt/circleci/launch-agent
 
 You can also optionally run machine runner <<#enable-the-systemd-unit,as a systemd service>>.
 
-include::../_includes/snippets/machine-runner-example.adoc[]
+include::../_includes/partials/runner/machine-runner-example.adoc[]
 
 The job will then execute using your self-hosted runner when you push the config to your VCS provider.
 
@@ -203,7 +203,7 @@ sudo chmod 755 /usr/lib/systemd/system/circleci.service
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for, which defaults to 5 hours.
 
-If you want to configure the CircleCI's self-hosted runner installation to start on boot, it is important to note that machine runner will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
+When running CircleCI's self-hosted runner installation to start on boot, the machine runner will attempt to consume and start jobs as soon as it starts. It should be configured appropriately before starting. Machine runner may be configured as a service and be managed by `systemd` with the following scripts:
 
 ```
 [Unit]
@@ -219,7 +219,7 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-Unlike task-agents, which use the environment of the `circleci` user, launch-agents will need to have any required environment variables (for example, proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
+Unlike task-agents, which use the environment of the `circleci` user, launch-agents need to have required environment variables (for example, proxy settings) explicitly defined in the unit configuration file. These can be set by `Environment=` or `EnvironmentFile=`. Visit the `systemd` https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment[documentation] for more information.
 
 You can now enable the service:
 

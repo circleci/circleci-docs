@@ -105,7 +105,7 @@ For the documentation for these scenarios, visit the following pages:
 [#scheduled-pipelines-faqs]
 == FAQs
 
-include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
+include::../_includes/partials/faq/scheduled-pipelines-faq-snip.adoc[]
 
 [#next-steps]
 == Next steps

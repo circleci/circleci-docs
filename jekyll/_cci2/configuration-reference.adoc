@@ -4,408 +4,6 @@ contentTags:
   platform:
   - Cloud
   - Server v4+
-sectionTags:
-  config-version-2:
-    - "#version"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-cloud"
-    - "#available-linux-machine-images-server"
-    - "#available-linux-gpu-images"
-    - "#available-windows-machine-images-cloud"
-    - "#available-windows-gpu-image"
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner"
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#macos-server" # Server-specific - v3 and v4
-    - "#windows-execution-environment"
-    - "#gpu-execution-environment-linux"
-    - "#gpu-execution-environment-windows"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#workflows"
-    - "#workflow-version" # 2.0 config version only
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#example-full-configuration"
-  config-version-2.1:
-    - "#version"
-    - "#setup" # only 2.1 config
-    - "#commands" # only 2.1 config
-    - "#parameters-pipeline" # only 2.1 config
-    - "#executors" # only 2.1 config
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-cloud"
-    - "#available-linux-machine-images-server"
-    - "#available-linux-gpu-images"
-    - "#available-windows-machine-images-cloud"
-    - "#available-windows-gpu-image"
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner"
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#windows-execution-environment"
-    - "#gpu-execution-environment-linux"
-    - "#gpu-execution-environment-windows"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" # 2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#circleciipranges" # I think only 2.1 and not supported on server
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  cloud:
-    - "#version"
-    - "#setup"
-    - "#commands"
-    - "#parameters-pipeline"
-    - "#executors"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-cloud"
-    - "#available-linux-gpu-images" # Not available on server
-    - "#available-windows-machine-images-cloud"
-    - "#available-windows-gpu-image" # Not available on server
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner"
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#windows-execution-environment"
-    - "#gpu-execution-environment-linux"
-    - "#gpu-execution-environment-windows"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" #2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#circleciipranges" # only 2.1 and not supported on server
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  server-v4:
-    - "#version"
-    - "#setup" # Not available on server 2
-    - "#commands"
-    - "#parameters-pipeline"
-    - "#executors"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-server" # Server-specific - all server versions
-    - "#available-windows-machine-images-server" # Server-specific - all server versions
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner" # not available for server v2
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#macos-server" # Server-specific - v3 and v4
-    - "#windows-execution-environment"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" #2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  server-v3:
-    - "#version"
-    - "#setup"
-    - "#commands"
-    - "#parameters-pipeline"
-    - "#executors"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-server" # Server-specific - all server versions
-    - "#available-windows-machine-images-server" # Server-specific - all server versions
-    - "#branches-deprecated"
-    - "#resourceclass"
-    - "#self-hosted-runner" # not available for server v2
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#macos-server" # Server-specific - v3 and v4
-    - "#windows-execution-environment"
-    - "#arm-execution-environment-linux"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#the-when-step" #2.1 only
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#using-pipeline-values" # 2.1 only
-    - "#workflows"
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#using-when-in-workflows" # 2.1 only
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#matrix" # 2.1 only
-    - "#excluding-sets-of-parameters-from-a-matrix" # 2.1 only
-    - "#dependencies-and-matrix-jobs" # 2.1 only
-    - "#pre-steps-and-post-steps" # 2.1 only
-    - "#logic-statements" # 2.1 only
-    - "#logic-statement-examples" # 2.1 only
-    - "#example-full-configuration"
-  server-v2:
-    - "#version"
-    - "#jobs"
-    - "#job-name"
-    - "#environment"
-    - "#parallelism"
-    - "#parameters-job"
-    - "#executor-job"
-    - "#docker"
-    - "#machine"
-    - "#available-linux-machine-images-server" # Server-specific - all server versions
-    - "#available-windows-machine-images-server" # Server-specific - all server versions
-    - "#branches-deprecated"
-    - "#resourceclass" # not available for server v2
-    - "#docker-execution-environment"
-    - "#linuxvm-execution-environment"
-    - "#macos-execution-environment"
-    - "#windows-execution-environment"
-    - "#steps"
-    - "#run"
-    - "#default-shell-options"
-    - "#background-commands"
-    - "#shorthand-syntax"
-    - "#the-when-attribute"
-    - "#ending-a-job-from-within-a-step"
-    - "#checkout"
-    - "#setupremotedocker"
-    - "#savecache"
-    - "#restorecache"
-    - "#deploy-deprecated"
-    - "#migrate-deploy-run"
-    - "#storeartifacts"
-    - "#storetestresults"
-    - "#persisttoworkspace"
-    - "#attachworkspace"
-    - "#add-ssh-keys"
-    - "#workflows"
-    - "#workflow-version" #2.0 config version only
-    - "#workflowname"
-    - "#triggers"
-    - "#schedule"
-    - "#cron"
-    - "#filters"
-    - "#branches"
-    - "#jobs-in-workflow"
-    - "#job-name-in-workflow"
-    - "#requires"
-    - "#name"
-    - "#context"
-    - "#type"
-    - "#jobfilters"
-    - "#branches"
-    - "#tags"
-    - "#example-full-configuration"
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
@@ -433,6 +31,8 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 [#version]
 == *`version`*
 
+The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
+
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
@@ -444,12 +44,19 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 | `2`, `2.0`, or `2.1` See the xref:reusing-config#[Reusable configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 |===
 
-The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
+*Example:*
+
+[,yaml]
+----
+version: 2.1
+----
 
 '''
 
 [#setup]
 == *`setup`*
+
+The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -462,7 +69,14 @@ The `version` field is intended to be used in order to issue warnings for deprec
 | Designates the `config.yaml` for use of CircleCI's xref:dynamic-config#[dynamic configuration] feature.
 |===
 
-The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
+*Example:*
+
+[,yaml]
+----
+version: 2.1
+
+setup: true
+----
 
 '''
 
@@ -470,6 +84,8 @@ The `setup` field enables you to conditionally trigger configurations from outsi
 == *`orbs`*
 
 NOTE: The `orbs` key is supported in `version: 2.1` configuration
+
+Use the `orbs` key to reference or define reusable configuration blocks (orbs) for use in your configuration.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -493,6 +109,8 @@ NOTE: The `orbs` key is supported in `version: 2.1` configuration
 |===
 
 The following example uses the `node` orb that exists in the certified `circleci` namespace. Refer to the Node orb page in the https://circleci.com/developer/orbs/orb/circleci/node[Orb Registry] for more examples and information.
+
+*Example:*
 
 [,yaml]
 ----
@@ -520,7 +138,7 @@ workflows:
 Documentation is available for orbs in the following sections:
 
 * xref:orb-intro#[Using Orbs]
-* xref:orb-author-intro#[Authoring Orbs].
+* xref:orb-author#[Authoring Orbs].
 
 Public orbs are listed in the https://circleci.com/developer/orbs[Orb Registry].
 
@@ -531,7 +149,7 @@ Public orbs are listed in the https://circleci.com/developer/orbs[Orb Registry].
 
 NOTE: The `commands` key is supported in `version: 2.1` configuration
 
-A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the xref:reusing-config#[Reusable Config Reference Guide].
+A `command` defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the xref:reusing-config#[Reusable Config Reference Guide].
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -554,10 +172,12 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 | A string that describes the purpose of the command.
 |===
 
-Example:
+*Example:*
 
 [,yaml]
 ----
+version: 2.1
+
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -576,7 +196,7 @@ commands:
 
 NOTE: The pipeline `parameters` key is supported in `version: 2.1` configuration
 
-Pipeline parameters declared for use in the configuration. See xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline Values and Parameters] for usage details.
+Use the `parameters` key at the top level of your config to declare _pipeline parameters_ for use in the configuration. See xref:pipeline-variables#pipeline-parameters-in-configuration[Pipeline Values and Parameters] for usage details.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -589,6 +209,21 @@ Pipeline parameters declared for use in the configuration. See xref:pipeline-var
 | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See xref:reusing-config#parameter-syntax[Parameter Syntax] for details.
 |===
 
+*Example:*
+
+This example declares a pipeline parameter named `image-tag` with a type of `string` and a default value of `current`.
+
+[,yaml]
+----
+version: 2.1
+
+parameters:
+  image-tag:
+    type: string
+    default: "current"
+----
+
+Once you have declared a pipeline parameter, you can pass a pipelines parameter value when triggering a pipeline via the API or from the CircleCI web app.
 '''
 
 [#executors]
@@ -646,7 +281,7 @@ Executors define the execution environment in which the steps of a job will be r
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
 
-Example:
+*Example:*
 
 [,yaml]
 ----
@@ -684,6 +319,21 @@ If your jobs are timing out, consider the following:
 * Using xref:parallelism-faster-jobs#[parallelism].
 * Run some of your jobs concurrently using xref:workflows#[workflows].
 * You can upgrade your pricing plan.
+
+*Example:*
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: xlarge
+    steps:
+      ... // other config
+----
 
 '''
 
@@ -760,6 +410,16 @@ Each job consists of the job's name as a key and a map as a value. A name should
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
 
+*Example:*
+
+In this example the job name is `my-job`.
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+----
 '''
 
 [#job-type]
@@ -794,7 +454,7 @@ jobs:
     plan_name: <my-service-release>
 ----
 
-The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required.
+The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using no-op jobs,  see the xref:orchestration-cookbook#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration cookbook]
 
 **Example** of a job with a `no-op` type:
 
@@ -834,6 +494,20 @@ workflows:
 
 A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the xref:env-vars#[Environment variables] page.
 
+*Example* to show setting an environment variable named `FOO` with a value of `bar` for use in a job.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2022.04-20.04
+    environment:
+      FOO: bar
+----
+
 '''
 
 [#parallelism]
@@ -847,7 +521,7 @@ You can use the CircleCI CLI to split your test suite across parallel containers
 * Refer to the xref:use-the-circleci-cli-to-split-tests#[Use the CircleCI CLI to split tests] how-to guide.
 * Follow the xref:test-splitting-tutorial#[Test splitting tutorial].
 
-Example:
+*Example:*
 
 [,yaml]
 ----
@@ -882,6 +556,31 @@ Reserved parameter-names:
 
 See xref:reusing-config#parameter-syntax[Parameter Syntax] for definition details.
 
+*Example* to show using a job parameter to set the parallelism for a job when a workflow is run.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    parameters:
+      my-parameter:
+        type: integer
+        default: 1
+    parallelism: << parameters.p >>
+    docker:
+      - image: cimg/base:2023.11
+    steps:
+      - checkout
+
+workflows:
+  workflow:
+    jobs:
+      - build:
+          my-parameter: 2
+----
+
 '''
 
 [#executor-job]
@@ -898,7 +597,7 @@ Learn more about execution environments and executors in the xref:executor-intro
 [#docker]
 ==== `docker`
 
-Configured by `docker` key which takes a list of maps:
+Configure a job to use the Docker execution environment using the  `docker` key which takes a list of maps:
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -952,6 +651,26 @@ A xref:custom-images#adding-an-entrypoint[custom image] may disable this behavio
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:using-docker#[Using the Docker Execution Environment] page.
 
+*Example:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+
 '''
 
 [#docker-auth]
@@ -959,7 +678,7 @@ You can specify image versions using tags or digest. You can use any public imag
 
 Some registries, Docker Hub, for example, may rate limit anonymous Docker pulls. We recommend that you authenticate to pull private and public images. The username and password can be specified in the `auth` field. See xref:private-images#[Using Docker Authenticated Pulls] for details.
 
-Example:
+*Example:*
 
 [,yaml]
 ----
@@ -1002,12 +721,14 @@ jobs:
 [#aws-authentication]
 ===== AWS authentication
 
-Using an image hosted on https://aws.amazon.com/ecr/[AWS ECR] requires authentication using AWS credentials.
+Using an image hosted on https://aws.amazon.com/ecr/[AWS ECR] requires authentication using AWS credentials. The two configuration options are described in the following sections.
 
 [#oidc]
 ====== Use OIDC
 
 Authenticate using OpenID Connect (OIDC) using the `oidc_role_arn` field, as follows:
+
+*Example:*
 
 [,yaml]
 ----
@@ -1026,6 +747,8 @@ For steps to get set up with OIDC to pull images from AWS ECR, see the xref:pull
 
 By default, CircleCI uses the AWS credentials you provide by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using the `aws_auth` field as in the following example:
 
+*Example:*
+
 [,yaml]
 ----
 jobs:
@@ -1042,7 +765,7 @@ jobs:
 [#machine]
 ==== *`machine`*
 
-NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specify an image to use.
+NOTE: *Using CircleCI cloud?* The use of `machine: true` is deprecated. You must specify an image to use.
 
 The machine executor is configured using the `machine` key, which takes a map:
 
@@ -1062,7 +785,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 | Set this to `true` to enable xref:docker-layer-caching#[Docker layer caching].
 |===
 
-Example:
+*Example:*
 
 [.tab.machine.Cloud]
 --
@@ -1093,7 +816,7 @@ jobs:
 '''
 
 [#available-linux-machine-images-cloud]
-===== Available Linux `machine` images
+===== Linux `machine` images
 
 *Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
@@ -1107,14 +830,14 @@ The machine executor supports xref:docker-layer-caching#[Docker Layer Caching], 
 '''
 
 [#available-linux-machine-images-server]
-===== Available Linux `machine` images on server
+===== Linux `machine` images on server
 
 If you are using CircleCI server, contact your system administrator for details of available Linux machine images.
 
 '''
 
 [#available-linux-gpu-images]
-===== Available Linux GPU `machine` images
+===== Linux GPU `machine` images
 
 When using the Linux xref:using-gpu#[GPU executor], the available images are:
 
@@ -1124,7 +847,7 @@ When using the Linux xref:using-gpu#[GPU executor], the available images are:
 '''
 
 [#available-android-machine-images]
-===== Available Android `machine` images
+===== Android `machine` images
 
 CircleCI supports running jobs on Android for testing and deploying Android applications.
 
@@ -1147,7 +870,7 @@ For examples, refer to the xref:android-machine-image#[Using Android Images with
 '''
 
 [#available-windows-machine-images-cloud]
-===== Available Windows `machine` images
+===== Windows `machine` images
 
 *Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Windows machine images that can be specified in the `image` field.
 
@@ -1163,20 +886,20 @@ Alternatively, use the link:https://circleci.com/developer/orbs/orb/circleci/win
 '''
 
 [#available-windows-machine-images-server]
-===== Available Windows `machine` images on server
+===== Windows `machine` images on server
 
 If you are using CircleCI server, contact your system administrator for details of available Windows machine images.
 
 '''
 
 [#available-windows-gpu-image]
-===== Available Windows GPU `machine` image
+===== Windows GPU `machine` image
 
 When using the Windows xref:using-gpu#[GPU executor], the available image is:
 
 * link:https://circleci.com/developer/machine/image/windows-server-2019-cuda[`windows-server-2019-cuda`]
 
-*Example*
+*Example:*
 
 [,yaml]
 ----
@@ -1206,7 +929,7 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 | The version of Xcode that is installed on the virtual machine, see the xref:using-macos#supported-xcode-versions[Supported Xcode Versions section of the Testing iOS] document for the complete list.
 |===
 
-Example: Use a macOS virtual machine with Xcode version 14.2.0:
+*Example:* Use a macOS virtual machine with Xcode version 14.2.0:
 
 [,yaml]
 ----
@@ -1260,7 +983,7 @@ jobs:
 [#docker-execution-environment]
 ===== Docker execution environment
 
-Example:
+*Example:*
 
 [,yaml]
 ----
@@ -1281,8 +1004,6 @@ include::../_includes/partials/execution-resources/docker-resource-table.adoc[]
 [#arm]
 ====== Arm
 
-*Arm on Docker* For pricing information, and a list of CircleCI Docker convenience images that support Arm resource classes, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page].
-
 include::../_includes/partials/execution-resources/docker-arm-resource-table.adoc[]
 
 '''
@@ -1292,7 +1013,7 @@ include::../_includes/partials/execution-resources/docker-arm-resource-table.ado
 
 include::../_includes/partials/execution-resources/machine-resource-table.adoc[]
 
-Example:
+*Example:*
 
 [.tab.linuxvm.Cloud]
 --
@@ -1328,7 +1049,7 @@ jobs:
 
 include::../_includes/partials/execution-resources/macos-resource-table.adoc[]
 
-*Example*
+*Example:*
 
 [,yaml]
 ----
@@ -1346,7 +1067,7 @@ jobs:
 [#macos-server]
 ===== macOS execution environment on server
 
-If you are working on CircleCI server v3.1 and up, you can access the macOS execution environment using xref:runner-overview#[self-hosted runner].
+If you are working on CircleCI server you can access the macOS execution environment using xref:runner-overview#[self-hosted runner].
 
 '''
 
@@ -1355,7 +1076,7 @@ If you are working on CircleCI server v3.1 and up, you can access the macOS exec
 
 include::../_includes/partials/execution-resources/windows-resource-table.adoc[]
 
-Example:
+*Example:*
 
 [.tab.windowsblock.Cloud]
 --
@@ -1400,7 +1121,7 @@ jobs:
 
 include::../_includes/partials/execution-resources/gpu-linux-resource-table.adoc[]
 
-Example:
+*Example:*
 
 [,yaml]
 ----
@@ -1425,11 +1146,12 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 
 include::../_includes/partials/execution-resources/gpu-windows-resource-table.adoc[]
 
-Example:
+*Example:*
 
 [,yaml]
 ----
 version: 2.1
+
 orbs:
   win: circleci/windows@5.0.0
 
@@ -1450,7 +1172,7 @@ jobs:
 
 include::../_includes/partials/execution-resources/arm-resource-table.adoc[]
 
-Example:
+*Example:*
 
 [.tab.armblock.Cloud]
 --
@@ -1493,6 +1215,8 @@ The `steps` setting in a job should be a list of single key/value pairs, the key
 ----
 jobs:
   build:
+    docker:
+      - image: cimg/base:2024.01
     working_directory: ~/canary-python
     environment:
       FOO: bar
@@ -1510,6 +1234,8 @@ Some steps may implement a shorthand semantic. For example, `run` may be also be
 ----
 jobs:
   build:
+    docker:
+      - image: cimg/base:2024.01
     steps:
       - run: make test
 ----
@@ -1522,6 +1248,8 @@ Another shorthand, which is possible for some steps, is to use the step name as 
 ----
 jobs:
   build:
+    docker:
+      - image: cimg/base:2024.01
     steps:
       - checkout
 ----
@@ -1575,7 +1303,7 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | `environment`
 | N
 | Map
-| Additional environmental variables, locally scoped to command
+| Additional environment variables, locally scoped to command
 
 | `background`
 | N
@@ -1598,15 +1326,23 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 |===
 
-Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell:
+Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell.
+
+*Example:*
 
 [,yml]
 ----
-- run:
-    command: |
-      echo Running test
-      mkdir -p /tmp/test-results
-      make test
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: xlarge
+    steps:
+      - run:
+          command: |
+            echo Running test
+            mkdir -p /tmp/test-results
+            make test
 ----
 
 You can also configure commands to run <<background-commands,in the background>> if you do not want to wait for the step to complete before moving on to subsequent run steps.
@@ -1634,6 +1370,8 @@ Exit immediately if any of the following exits with a non-zero status:
 
 In the previous example, `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
 
+*Example:*
+
 [,yml]
 ----
 - run:
@@ -1655,7 +1393,7 @@ In the previous example, `mkdir` failed to create a directory and returned a non
 
 If `pipefail` is enabled, the pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
-For example:
+*Example:*
 
 [,yml]
 ----
@@ -1677,7 +1415,9 @@ For more information, see the xref:using-shell-scripts#[Using Shell Scripts] doc
 [#background-commands]
 ====== _Background commands_
 
-The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the configuration for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
+The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the configuration for running the X virtual framebuffer in the background which is commonly required to run Selenium tests.
+
+*Example:*
 
 [,yml]
 ----
@@ -1694,7 +1434,9 @@ The `background` attribute enables you to configure commands to run in the backg
 [#shorthand-syntax]
 ====== _Shorthand syntax_
 
-`run` has a very convenient shorthand syntax:
+`run` has a very convenient shorthand syntax.
+
+*Example:*
 
 [,yml]
 ----
@@ -1727,6 +1469,8 @@ The `when` attribute accepts the following values:
 
 NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a *step has failed* (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
 
+*Example:*
+
 [,yml]
 ----
 - run:
@@ -1742,7 +1486,7 @@ NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always
 
 A job can exit without failing by using `run: circleci-agent step halt`. However, if a step within the job is already failing then the job will continue to fail. This can be useful in situations where jobs need to conditionally execute.
 
-Here is an example where `halt` is used to avoid running a job on the `develop` branch:
+*Example:* `halt` is used to avoid running a job on the `develop` branch:
 
 [,yml]
 ----
@@ -1777,7 +1521,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | A list of steps to execute when the condition is true
 |===
 
-Example:
+*Example:*
 
 [,yml]
 ----
@@ -1825,8 +1569,13 @@ While this improves performance in most cases, if a downstream step requires tho
 
 [,yml]
 ----
-- checkout
-- run: git fetch
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24.2
+    steps:
+      - checkout
+      - run: git fetch
 ----
 ====
 
@@ -1848,11 +1597,18 @@ If `path` already exists and is:
 * A git repository - step will not clone whole repository, instead will fetch origin
 * NOT a git repository - step will fail.
 
-In the case of `checkout`, the step type is just a string with no additional attributes:
+In the case of `checkout`, the step type is just a string with no additional attributes.
+
+*Example:*
 
 [,yml]
 ----
-- checkout
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24.2
+    steps:
+      - checkout
 ----
 
 The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH. These keys are detailed further in the xref:github-integration#establish-the-authenticity-of-an-ssh-host[integration guide]. This guide is also helpful if you wish to implement a custom checkout command.
@@ -1861,9 +1617,14 @@ CircleCI does not check out submodules. If your project requires submodules, add
 
 [,yml]
 ----
-- checkout
-- run: git submodule sync
-- run: git submodule update --init
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24.2
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
 ----
 
 NOTE: The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restorecache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run>> step with command `git gc` before doing so.
@@ -1873,19 +1634,13 @@ NOTE: The `checkout` step will configure Git to skip automatic garbage collectio
 [#setupremotedocker]
 ===== *`setup_remote_docker`*
 
-Allows Docker commands to be run locally. See xref:building-docker-images#[Running Docker commands] for details.
+[NOTE]
+====
+* `setup_remote_docker` is not compatible with the `machine` executor. See xref:docker-layer-caching#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
+* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server/latest/operator/manage-virtual-machines-with-machine-provisioner/#x86-ami-list[here].
+====
 
-[,yaml]
-----
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2024.06
-    steps:
-      # ... steps for building/testing app ...
-      - setup_remote_docker:
-          version: default
-----
+Allows Docker commands to be run locally. See xref:building-docker-images#[Running Docker commands] for details.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -1903,18 +1658,26 @@ jobs:
 | Version string of Docker you would like to use (default: `24.0.9`). View the list of supported Docker versions xref:building-docker-images#docker-version[here].
 |===
 
-[NOTE]
-====
-* `setup_remote_docker` is not compatible with the `machine` executor. See xref:docker-layer-caching#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
-* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server/latest/operator/manage-virtual-machines-with-machine-provisioner/#x86-ami-list[here].
-====
+*Example:*
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.06
+    steps:
+      # ... steps for building/testing app ...
+      - setup_remote_docker:
+          version: default
+----
 
 '''
 
 [#savecache]
 ===== *`save_cache`*
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can <<restorecache,restore this cache>>. Learn more on the xref:caching#[Caching Dependencies] page.
+Generates and stores a cache of a file or directory of files such as dependencies or source code. Caches are stored in CircleCI's object storage. Later jobs can <<restorecache,restore this cache>>. Learn more on the xref:caching#[Caching dependencies] page.
 
 Cache retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
@@ -1944,9 +1707,7 @@ Cache retention can be customized on the link:https://app.circleci.com/[CircleCI
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 |===
 
-The cache for a specific `key` is immutable and cannot be changed once written.
-
-NOTE: If the cache for the given `key` already exists it will not be modified, and job execution will proceed to the next step.
+The cache for a specific `key` is immutable and cannot be changed once written. If the cache for the given `key` already exists it will not be modified, and job execution will proceed to the next step.
 
 When storing a new cache, the `key` value may contain special, templated, values for your convenience:
 
@@ -1980,26 +1741,22 @@ When storing a new cache, the `key` value may contain special, templated, values
 | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 |===
 
-During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
+During step execution, the templates above will be replaced by runtime values and the resultant string is used as the `key`.
 
-Template examples:
+*Template examples:*
 
-* `myapp-{{ checksum "package-lock.json" }}` - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
-* `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}` - same as the previous one, but each branch will generate separate cache
-* `myapp-{{ epoch }}` - every run of a job will generate a separate cache
+`myapp-{{ checksum "package-lock.json" }}`:: cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
+`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`:: same as the previous one, but each branch will generate separate cache
+`myapp-{{ epoch }}`:: every run of a job will generate a separate cache
 
-While choosing suitable templates for your cache `key`, keep in mind that:
+While choosing suitable templates for your cache `key`, keep in mind the following:
 
 * Cache saving is not a free operation. See the billing section on the xref:faq#calculate-monthly-storage-and-network-costs[FAQ] page.
 * It takes time to upload the cache.
+* Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
+* Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
 
-Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
-
-NOTE: Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
-
-Example:
-
-
+*Examples:*
 
 [,yml]
 ----
@@ -2008,10 +1765,6 @@ Example:
     paths:
       - /home/ubuntu/.m2
 ----
-
-
-
-
 
 [,yml]
 ----
@@ -2022,12 +1775,9 @@ Example:
       - node_modules/workspace-c
 ----
 
-
-
 [NOTE]
 ====
-* Wildcards are not currently supported in `save_cache` paths. Visit the link:https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths[Ideas board] and vote for this feature if it would be useful for you or your organization.
-* In some instances, a workaround for this is to save a particular workspace to cache:
+Wildcards are not currently supported in `save_cache` paths. Visit the link:https://ideas.circleci.com/cloud-feature-requests/p/support-wildcards-in-savecachepaths[Ideas board] and vote for this feature if it would be useful for you or your organization.
 ====
 
 '''
@@ -2064,7 +1814,7 @@ A key is searched against existing keys as a prefix.
 
 NOTE: When there are multiple matches, the *most recent match* will be used, even if there is a more precise match.
 
-For example:
+*Example:*
 
 [,yml]
 ----
@@ -2093,9 +1843,7 @@ When CircleCI encounters a list of `keys`, the cache will be restored from the f
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
-Example:
-
-
+*Example:*
 
 [,yml]
 ----
@@ -2113,8 +1861,6 @@ Example:
     paths:
       - /foo
 ----
-
-
 
 '''
 
@@ -2150,7 +1896,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 Artifact storage retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
-Example:
+*Example:*
 
 [,yml]
 ----
@@ -2182,7 +1928,7 @@ You can also store test results as build artifacts. For steps, refer to <<storea
 | Path (absolute, or relative to your `working_directory`) to directory containing `JUnit` XML test metadata files, or to a single test file.
 |===
 
-Example:
+*Example:*
 
 Directory structure:
 
@@ -2234,7 +1980,7 @@ Workspace storage retention can be customized on the https://app.circleci.com/[C
 
 The root key is a directory on the container which is taken to be the root directory of the workspace. The path values are all relative to the root.
 
-*Example for root Key*
+*Example for root Key:*
 
 For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
 
@@ -2254,7 +2000,7 @@ After this step completes, the following directories are added to the workspace:
 /tmp/dir/baz
 ----
 
-*Example for paths Key*
+*Example for paths Key:*
 
 [,yml]
 ----
@@ -2308,7 +2054,7 @@ Special step used to attach the workflow's workspace to the current container. T
 
 Workspace storage retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
-Example:
+*Example:*
 
 [,yml]
 ----
@@ -2356,7 +2102,7 @@ NOTE: Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you *mus
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the xref:pipeline-variables#[Pipeline values and parameters] page.
 
-Example:
+*Example:*
 
 [,yaml]
 ----
@@ -2381,7 +2127,7 @@ NOTE: A paid account on a https://circleci.com/pricing/[Performance or Scale Pla
 
 Enables jobs to go through a set of well-defined IP address ranges. See xref:ip-ranges#[IP ranges] for details.
 
-Example:
+*Example:*
 
 [,yaml]
 ----
@@ -2427,12 +2173,29 @@ The Workflows `version` field is used to issue warnings for deprecation or break
 | Should currently be `2`
 |===
 
+[,yml]
+----
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - my-job
+----
+
 '''
 
 [#workflowname]
 === *<``workflow_name``>*
 
 A unique name for your workflow.
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job
+----
 
 '''
 
@@ -2674,7 +2437,54 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
 A job name that exists in your `config.yml`.
 
+[,ym]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/node:20.18.1
+    steps:
+      - run: echo "Hello World"
+
+workflows:
+  my-workflow:
+    jobs:
+      - my-job
+----
+
 '''
+
+[#override-with]
+====== *`override-with`*
+
+The `override-with` key is used to override the job configuration with a job from the referenced orb.
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key | Required | Type | Description
+
+| `override-with`
+| N
+| String
+| The orb job name that will be used to override the existing job configuration. (Both URL-based and registry orbs are supported)
+|===
+
+*Example:*
+
+[,yml]
+----
+include::../_includes/snippets/orchestration-examples/override-with.yml[]
+----
+
+In the example above, the `test` job in the workflow is being overridden with the orb job `my-orb/my-test`. The `my-orb/my-test` job might be defined with a different resource class or execution steps.
+
+If the `my-orb/my-test` job is not defined inside the orb, the `test` job will compile using the local job definition.
+
+'''
+[#serial-group]
 ====== `serial-group`
 
 The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control the orchestration of jobs across an organization, not just within projects and pipelines.
@@ -2724,6 +2534,7 @@ include::../_includes/snippets/orchestration-examples/serial-group.yml[]
 ----
 
 For more information, see the xref:controlling-serial-execution-across-your-organization#[Controlling serial execution across your organization] page.
+
 '''
 
 [#requires]
@@ -2792,6 +2603,15 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times, and a job requires one of the duplicate jobs, this key is required. (2.1 only)
 |===
 
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job:
+          name: my-alternative-job-name
+----
+
 '''
 
 [#context]
@@ -2809,6 +2629,28 @@ Jobs may be configured to use global environment variables set for an organizati
 | String/List
 | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
 |===
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job:
+          context: org-global
+----
+
+It is also possible to use a list of contexts, as follows:
+
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job:
+          context:
+            - org-global
+            - project-global
+----
 
 '''
 
@@ -2924,7 +2766,7 @@ workflows:
           filters: pipeline.git.branch == "main" and pipeline.parameters.my-custom-param starts-with "DEPLOY:"
 ----
 
-**Examples**
+*Examples:*
 
 Only run the job on the project's `main` branch:
 
@@ -3132,7 +2974,7 @@ The `matrix` stanza allows you to run a parameterized job multiple times with di
 | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 |===
 
-Example:
+*Example:*
 
 The following is a basic example of using matrix jobs.
 
@@ -3397,6 +3239,8 @@ for its `pattern`. A full match pattern must be provided, prefix matching is not
 
 NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
+*Example:*
+
 [,yaml]
 ----
 workflows:
@@ -3416,8 +3260,6 @@ You can find usage examples on the xref:orchestration-cookbook#["Orchestration c
 == Example full configuration
 
 include::../_includes/partials/notes/docker-auth.adoc[]
-
-
 
 [,yaml]
 ----

@@ -16,4 +16,4 @@ This page answers frequently asked questions for CircleCI's self-hosted containe
 [#self-hosted-runner-faqs]
 == FAQs
 
-include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]
+include::../_includes/partials/faq/self-hosted-runner-faq-snip.adoc[]

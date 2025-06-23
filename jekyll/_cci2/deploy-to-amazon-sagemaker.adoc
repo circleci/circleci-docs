@@ -57,7 +57,7 @@ image::deploy/aws-iam-add-provider.png[Screenshot showing AWS management console
 . Under "Provider Type", select **OpenID Connect**
 . Enter your "Provider URL". This will be `\https://oidc.circleci.com/org/<your-organization-id>`, where `<your-organization-id>` is the ID of your CircleCI organization.
 +
-include::../_includes/snippets/find-organization-id.adoc[]
+include::../_includes/partials/notes/find-organization-id.adoc[]
 . Select **Get Thumbprint**.
 . For "Audience" enter your organization ID.
 . Select btn:[Add Provider].

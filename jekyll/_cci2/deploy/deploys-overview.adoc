@@ -15,13 +15,20 @@ Visualize and control your deployments with CircleCI deploys. The CircleCI deplo
 [#introduction]
 == Introduction
 
-CircleCI deploys gives you visibility into your Kubernetes deployments within the CircleCI web app, as well as access to commands and visualisations for managing deployments. From the CircleCI web app, you can:
+CircleCI deploys gives you visibility into your Kubernetes deployments within the CircleCI web app.
+When setting up deploys you can choose one of two options:
+
+* *Release agent*: Choose to use the CircleCI release agent, which you install in your cluster to enable you to manage your deployments through CircleCI.
+
+* *Agentless*: Add CLI commands to your config to enable logging and tracking of deploys and deployment status in the CircleCI UI. Use rollbacks to rollback to a previous version of a component.
+
+If you choose the release agent approach, you will have access to the following deploy management tools from CircleCI:
 
 * Restore version
 * Scale component
 * Restart component
 
-We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
+The release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
 
 * Retry Rollout
 * Promote Rollout
@@ -32,8 +39,9 @@ We support link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for pro
 
 To get started with CircleCI deploys for Kubernetes right away, refer to the following guides:
 
-* xref:set-up-circleci-deploys#[Tutorial 1: Set up CircleCI deploys]
-* xref:configure-your-kubernetes-components#[Tutorial 2: Configure your Kubernetes components]
+* xref:configure-deploy-markers#[Tutorial 1: Configure CircleCI deploy markers]
+* xref:set-up-circleci-deploys#[Tutorial 2: Set up CircleCI deploys environments]
+* xref:configure-your-kubernetes-components#[Tutorial 3: Configure your Kubernetes components]
 * xref:manage-deploys#[How-to: Manage deploys]
 
 To get set up with deploys for Amazon SageMaker, refer to the xref:../deploy-to-amazon-sagemaker#[Deploy to Amazon SageMaker] page.
@@ -348,6 +356,10 @@ To opt out of automatic deploy detection for a **project**, follow these steps:
 . Select **Deploys**.
 . Toggle the "Enable automatic deploy marker detection" option left. You will see a confirmation message in the bottom right hand corner of the app. To re-enable the feature, toggle the option to the right.
 
+=== Retention Policy
+
+Automatically detected deploys are retained for 30 days.
+
 === Manual deploy marker setup
 
 If you would rather set up deploy markers yourself, see the xref:configure-deploy-markers#[Configure deploy markers] page.
@@ -401,7 +413,7 @@ We are working on updates to:
 [#troubleshooting]
 == Troubleshooting
 
-include::../../_includes/snippets/troubleshoot/releases-troubleshoot.adoc[]
+include::../../_includes/partials/troubleshoot/releases-troubleshoot.adoc[]
 
 [#next-steps]
 == Next steps

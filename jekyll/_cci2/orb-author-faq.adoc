@@ -16,7 +16,7 @@ This document describes various questions and technical issues that you may find
 [#orb-author-faqs]
 == FAQs
 
-include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+include::../_includes/partials/faq/orb-author-faq-snip.adoc[]
 
 [#see-also]
 == See also

@@ -96,7 +96,7 @@ A feature that enables building, running, and pushing images to Docker registrie
 
 [#resource-class]
 == Resource class
-A configuration option for specifying compute resource sizing for a job. Also used as a label to identify a pool of self-hosted runners and to configure a job to run on a self-hosted runner from that pool. Read more on the link:/docs/resource-class-overview[resource class overview] page.
+A configuration option for specifying compute resource sizing for a job. Also used as a label to identify a pool of self-hosted runners and to configure a job to run on a self-hosted runner from that pool. Read more on the xref:resource-class-overview#[resource class overview] page.
 
 [#step]
 == Step

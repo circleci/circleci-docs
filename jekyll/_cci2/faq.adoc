@@ -41,66 +41,66 @@ This page answers frequently asked questions about the following CircleCI topics
 [#general]
 == General
 
-include::../_includes/snippets/faq/general-faq-snip.adoc[]
+include::../_includes/partials/faq/general-faq-snip.adoc[]
 
 [#migration]
 == Migration
 
-include::../_includes/snippets/faq/migration-faq-snip.adoc[]
+include::../_includes/partials/faq/migration-faq-snip.adoc[]
 
 [#host-circleci]
 == Host CircleCI
 
-include::../_includes/snippets/faq/host-faq-snip.adoc[]
+include::../_includes/partials/faq/host-faq-snip.adoc[]
 
 [#architecture]
 == Architecture
 
-include::../_includes/snippets/faq/architecture-faq-snip.adoc[]
+include::../_includes/partials/faq/architecture-faq-snip.adoc[]
 
 [#orbs]
 == Orbs
 
-include::../_includes/snippets/faq/orb-faq-snip.adoc[]
+include::../_includes/partials/faq/orb-faq-snip.adoc[]
 
 [#author-orbs]
 == Author orbs
 
-include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+include::../_includes/partials/faq/orb-author-faq-snip.adoc[]
 
 [#self-hosted-runner]
 == Self-hosted runner
 
-include::../_includes/snippets/faq/self-hosted-runner-faq-snip.adoc[]
+include::../_includes/partials/faq/self-hosted-runner-faq-snip.adoc[]
 
 [#pipelines]
 == Pipelines
 
-include::../_includes/snippets/faq/pipelines-faq-snip.adoc[]
+include::../_includes/partials/faq/pipelines-faq-snip.adoc[]
 
 [#scheduled-pipelines]
 == Scheduled pipelines
 
-include::../_includes/snippets/faq/scheduled-pipelines-faq-snip.adoc[]
+include::../_includes/partials/faq/scheduled-pipelines-faq-snip.adoc[]
 
 [#workflows]
 == Workflows
 
-include::../_includes/snippets/faq/workflows-faq-snip.adoc[]
+include::../_includes/partials/faq/workflows-faq-snip.adoc[]
 
 [#dynamic-configuration]
 == Dynamic configuration
 
-include::../_includes/snippets/faq/dynamic-configuration-faq-snip.adoc[]
+include::../_includes/partials/faq/dynamic-configuration-faq-snip.adoc[]
 
 [#billing]
 == Billing
 
 Visit our link:https://circleci.com/pricing/[Pricing page] to find details about CircleCI's plans.
 
-include::../_includes/snippets/faq/billing-faq-snip.adoc[]
+include::../_includes/partials/faq/billing-faq-snip.adoc[]
 
 [#cancel-performance-plan]
 == Cancel Performance Plan
 
-include::../_includes/snippets/faq/cancel-subscription-faq-snip.adoc[]
+include::../_includes/partials/faq/cancel-subscription-faq-snip.adoc[]

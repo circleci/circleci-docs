@@ -14,9 +14,9 @@ contentTags:
 This document describes various questions and technical issues that you may find helpful when working with orbs.
 
 [#orb-faqs]
-== FAQS
+== FAQs
 
-include::../_includes/snippets/faq/orb-faq-snip.adoc[]
+include::../_includes/partials/faq/orb-faq-snip.adoc[]
 
 [#see-also]
 == See also

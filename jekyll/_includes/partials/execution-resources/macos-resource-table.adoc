@@ -3,17 +3,18 @@
 |===
 | Class | vCPUs | RAM | Cloud | Server
 
-| `macos.m1.medium.gen1`
-| 4 @ 3.2 GHz
-| 6GB
+| `m4pro.medium`
+| 6 @ 4.51 GHz
+| 28GB
 | icon:check[]
 | icon:times[]
 
-| `macos.m1.large.gen1`
-| 8 @ 3.2 GHz
-| 12GB
+| `m4pro.large`
+| 12 @ 4.51 GHz
+| 56GB
 | icon:check[]
 | icon:times[]
+
 
 | `m2pro.medium`
 | 4 @ 3.49 GHz
@@ -24,6 +25,18 @@
 | `m2pro.large`
 | 8 @ 3.49 GHz
 | 16GB
+| icon:check[]
+| icon:times[]
+
+| `macos.m1.medium.gen1`
+| 4 @ 3.2 GHz
+| 6GB
+| icon:check[]
+| icon:times[]
+
+| `macos.m1.large.gen1`
+| 8 @ 3.2 GHz
+| 12GB
 | icon:check[]
 | icon:times[]
 |===

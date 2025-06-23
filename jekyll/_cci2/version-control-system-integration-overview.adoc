@@ -7,7 +7,6 @@ contentTags:
 = Version control system integration overview
 :description: An overview guide to the version control systems you can integrate with CircleCI.
 :page-layout: classic-docs
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -24,7 +23,6 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * Bitbucket Cloud
 * Bitbucket Data Center
 +
-include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 
 link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
 
@@ -119,7 +117,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
-| xref:webhooks#custom-webhooks[Custom _inbound_ webhook triggers]
+| xref:custom-webhooks#[Custom _inbound_ webhook triggers]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -164,7 +162,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref:webhooks#outbound-webhooks[Outbound webhooks]
+| xref:outbound-webhooks#[Outbound webhooks]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -174,7 +172,7 @@ include::../_includes/partials/tips/check-github-type.adoc[Check your GitHub int
 | [.circle-green]#**Yes**#
 |===
 
-^1^ _One alternative is to use a xref:webhooks#custom-webhooks[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
+^1^ _One alternative is to use a xref:custom-webhooks#[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
 
 ^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration#using-github-app-functionality[here]._
 

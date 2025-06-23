@@ -46,7 +46,7 @@ Select an **org card** and take a look around. The following section describe th
 
 User settings can be found by selecting your user icon at the top right of the user area (dark blue top bar) in the web app at any time. Select your icon and then select ** User Settings**.
 
-image:user_settings.png[User settings]
+image::user_settings.png[User settings]
 
 **Account Integrations**: Displays your user ID as well as account integrations such as your VCS provider.
 
@@ -105,7 +105,7 @@ Your pipelines appear on the **Pipelines** dashboard of the CircleCI web app as 
 
 When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
 
-image:pipeline-navigation.png[Pipeline navigation]
+image::pipeline-navigation.png[Pipeline navigation]
 
 [#organization-switching]
 == Organization switching
@@ -115,7 +115,7 @@ If you want to change which org you are working within, you have a few options:
 * Select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time (1). From the user home page you can select the org that you want to work in. You can also create a new organization from your user home page.
 * Once in an org view you can also use the org switcher at the top of the sidebar (2).
 
-image:org-switch.png[Switch organization using the user homepage or the org switcher]
+image::org-switch.png[Switch organization using the user homepage or the org switcher]
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left displays your user `my-user`, only projects belonging to `my-user` will be available. If you want to add the project `your-org/project`, you must select `your-org` from the org switcher.
 
@@ -157,9 +157,9 @@ The following settings are available in the project settings page. If you do not
 
 **Overview**: Displays your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
 
-**People**: Provides a list of users who have been grated project-specific permissions. For more information, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page.
+**People**: Provides a list of users who have been granted project-specific permissions. For more information, see the xref:manage-roles-and-permissions#[Manage roles and permissions] page.
 
-**Groups**: Provides a list of user groups that have been grated project-specific permissions. For more information, see the xref:manage-groups#[Manage groups] page.
+**Groups**: Provides a list of user groups that have been granted project-specific permissions. For more information, see the xref:manage-groups#[Manage groups] page.
 
 **Pipelines**: Provides a list of pipelines that have been set up for the project, or the option to begin setting up pipelines if none exist.
 
@@ -179,6 +179,7 @@ The following settings are available in the project settings page. If you do not
 * Auto-cancel redundant workflows
 * Free and open source
 * Enable dynamic config using setup workflows.
+* xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config].
 
 More information on these settings can be found on this page, as well as in our documentation.
 
@@ -191,8 +192,6 @@ More information on these settings can be found on this page, as well as in our 
 **LLMOps**: Set up integrations with LLMOps providers to streamline the process of configuring pipelines to build and test LLM-enabled applications.
 
 **Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
-
-**VS Code Integration**: Provides information and a link to organization settings to enable the xref:triggers-overview#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config] feature, which is currently in open-preview for some customers.
 
 **Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
 
@@ -248,7 +247,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
 
-**Deploys**: Find links to set up release markers or release monitoring for your projects. Enable/disable autodetected deployments, which allows CircleCI to automatically detect deployments in your projects and create release markers for you.
+**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects. Enable/disable autodetected deployments, which allows CircleCI to automatically detect deployments in your projects and create deploy markers for you.
 
 **Integrations**: Set up integrations with self-hosted version control systems.
 

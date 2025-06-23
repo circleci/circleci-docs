@@ -46,7 +46,7 @@ Example output:
 }
 ----
 +
-include::../_includes/snippets/find-organization-id.adoc[]
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [#create-your-policy]
 == 1. Create your policy
