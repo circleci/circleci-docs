@@ -275,6 +275,7 @@
   margin-bottom: 1rem;
   border: 1px solid #D4D4D4;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .doc p.tableblock + p.tableblock {
