@@ -1,0 +1,1372 @@
+en:
+  - name: About CircleCI
+    icon: icons/sidebar/circle-logo.svg
+    children:
+      - name: Overview
+        children:
+          - name: CircleCI overview
+            link: about-circleci
+          - name: Benefits of CircleCI
+            link: benefits-of-circleci
+          - name: Web app introduction
+            link: introduction-to-the-circleci-web-app
+      - name: Reference
+        children:
+          - name: Concepts
+            link: concepts
+          - name: Glossary
+            link: glossary
+          - name: Open source acknowledgements
+            link: open-source
+
+  - name: Getting started
+    icon: icons/sidebar/continue.svg
+    children:
+      - name: First steps
+        children:
+          - name: Sign up and try
+            link: first-steps
+          - name: Join teammates on CircleCI
+            link: invite-your-team
+          - name: Create a project
+            link: create-project
+          - name: Quickstart guide
+            link: getting-started
+          - name: Hello world
+            link: hello-world
+          - name: YAML configuration intro
+            link: introduction-to-yaml-configurations
+          - name: In-app configuration editor
+            link: config-editor
+      - name: Migration
+        children:
+          - name: Introduction to CircleCI migration
+            link: migration-intro
+          - name: Migrate from AWS
+            link: migrating-from-aws
+          - name: Migrate from Azure DevOps
+            link: migrating-from-azuredevops
+          - name: Migrate from Buildkite
+            link: migrating-from-buildkite
+          - name: Migrate from GitHub Actions
+            link: migrating-from-github
+          - name: Migrate from GitLab
+            link: migrating-from-gitlab
+          - name: Migrate from Jenkins
+            link: migrating-from-jenkins
+          - name: Migrate from TeamCity
+            link: migrating-from-teamcity
+          - name: Migrate from Travis CI
+            link: migrating-from-travis
+      - name: Tutorials
+        children:
+          - name: Node quickstart
+            link: language-javascript
+          - name: Python quickstart
+            link: language-python
+          - name: Go quickstart
+            link: language-go
+          - name: Configuration tutorial
+            link: config-intro
+          - name: Use the Slack orb to set up notifications
+            link: slack-orb-tutorial
+      - name: Reference
+        children:
+          - name: Configuration reference
+            link: configuration-reference
+          - name: FAQ
+            link: faq
+
+  - name: Reference
+    icon: icons/sidebar/changelog.svg
+    children:
+      - name: Configuration reference
+        link: configuration-reference
+      - name: Concepts
+        link: concepts
+      - name: Reusable configuration reference
+        link: reusing-config
+      - name: Project values and variables
+        link: variables
+      - name: API v2 reference
+        link: https://circleci.com/docs/api/v2
+      - name: API v1 reference
+        link: https://circleci.com/docs/api/v1
+      - name: Self-hosted runner API
+        link: runner-api
+      - name: Optimization reference
+        link: optimizations
+      - name: Insights metrics glossary
+        link: insights-glossary
+      - name: Config policy reference
+        link: config-policy-reference
+      - name: Webhooks reference
+        link: webhooks-reference
+      - name: Frequently asked questions
+        link: faq
+      - name: Troubleshoot
+        link: troubleshoot
+
+  - name: Orchestrate and trigger
+    icon: icons/sidebar/pipeline.svg
+    children:
+      - name: Orchestrate
+        children:
+          - name: Pipelines and triggers overview
+            link: pipelines
+          - name: Jobs and steps
+            link: jobs-steps
+          - name: Workflow orchestration
+            link: workflows
+          - name: Use workspaces to share data between jobs
+            link: workspaces
+          - name: Dynamic configuration
+            link: dynamic-config
+          - name: Skip CI and cancel workflows
+            link: skip-build
+          - name: Controlling serial execution across your organization
+            link: controlling-serial-execution-across-your-organization
+          - name: Pipeline values and parameters
+            link: pipeline-variables
+      - name: Trigger
+        children:
+          - name: Trigger a pipeline
+            link: triggers-overview
+          - name: GitHub trigger event options
+            link: github-trigger-event-options
+          - name: GitLab trigger options
+            link: gitlab-trigger-options
+          - name: Custom webhooks
+            link: custom-webhooks
+      - name: Schedule
+        children:
+          - name: Scheduled pipelines
+            link: scheduled-pipelines
+      - name: How-to guides
+        children:
+          - name: Orchestration cookbook
+            link: orchestration-cookbook
+          - name: Set up multiple configuration files for a project
+            link: set-up-multiple-configuration-files-for-a-project
+          - name: How to override config
+            link: how-to-override-config
+          - name: Notify a Slack channel of a paused workflow
+            link: notify-a-slack-channel-of-a-paused-workflow
+          - name: Use branch filters
+            link: using-branch-filters
+          - name: Selecting a workflow to run
+            link: selecting-a-workflow-to-run-using-pipeline-parameters
+          - name: Use dynamic configuration
+            link: using-dynamic-configuration
+          - name: Migrate scheduled workflows to scheduled pipelines
+            link: migrate-scheduled-workflows-to-scheduled-pipelines
+          - name: Schedule pipelines with multiple workflows
+            link: schedule-pipelines-with-multiple-workflows
+          - name: Set a nightly scheduled pipeline
+            link: set-a-nightly-scheduled-pipeline
+          - name: Use dynamic configuration
+            link: using-dynamic-configuration
+          - name: Configure databases
+            link: databases
+          - name: Migrate from deploy to run
+            link: migrate-from-deploy-to-run
+          - name: Using shell scripts
+            link: using-shell-scripts
+      - name: Reference
+        children:
+          - name: Project values and variables
+            link: variables
+          - name: Troubleshoot
+            link: troubleshoot
+
+  - name: Execute jobs on managed compute resources
+    icon: icons/sidebar/builds.svg
+    children:
+      - name: Overview
+        children:
+          - name: Execution environments overview
+            link: executor-intro
+          - name: Resource class overview
+            link: resource-class-overview
+          - name: Migrate from Docker to machine
+            link: docker-to-machine
+      - name: Docker
+        children:
+          - name: Using the Docker execution environment
+            link: using-docker
+          - name: Convenience images
+            link: circleci-images
+          - name: Migrating to next-gen images
+            link: next-gen-migration-guide
+          - name: Using custom-built Docker images
+            link: custom-images
+          - name: Docker authenticated pulls
+            link: private-images
+          - name: Running Docker commands
+            link: building-docker-images
+      - name: Linux VM
+        children:
+          - name: Using the Linux VM execution environment
+            link: using-linuxvm
+          - name: Using Android images with the machine executor
+            link: android-machine-image
+      - name: macOS
+        children:
+          - name: Using the macOS execution environment
+            link: using-macos
+          - name: Configuring a macOS app
+            link: hello-world-macos
+          - name: iOS code signing
+            link: ios-codesigning
+      - name: Windows
+        children:
+          - name: Using the Windows execution environment
+            link: using-windows
+          - name: Hello world
+            link: hello-world-windows
+      - name: Arm
+        children:
+          - name: Using the Arm VM execution environment
+            link: using-arm
+      - name: GPU
+        children:
+          - name: Using the GPU execution environment
+            link: using-gpu
+      - name: How-to Guides
+        children:
+          - name: Pull an image from AWS ECR with OIDC
+            link: pull-an-image-from-aws-ecr-with-oidc
+          - name: Run a job in a container on your machine with Docker
+            link: run-a-job-in-a-container
+          - name: Installing and using docker-compose
+            link: docker-compose
+          - name: Debugging container ID cannot be mapped to host ID error
+            link: high-uid-error
+      - name: Reference
+        children:
+          - name: Android images support policy
+            link: android-images-support-policy
+          - name: Convenience images support policy
+            link: convenience-images-support-policy
+          - name: Linux VM images support policy
+            link: linux-vm-support-policy
+          - name: Linux CUDA images support policy
+            link: linux-cuda-images-support-policy
+          - name: Remote Docker images support policy
+            link: remote-docker-images-support-policy
+          - name: Windows images support policy
+            link: windows-images-support-policy
+          - name: Xcode image policy
+            link: xcode-policy
+
+  - name: Execute jobs on self-hosted runners
+    icon: icons/sidebar/build-agent.svg
+    children:
+      - name: Overview
+        children:
+          - name: Self-hosted runner overview
+            link: runner-overview
+          - name: Self-hosted runner concepts
+            link: runner-concepts
+          - name: Runner feature comparison matrix
+            link: runner-feature-comparison-matrix
+      - name: Container runner
+        children:
+          - name: Container runner installation
+            link: container-runner-installation
+          - name: Container runner performance benchmarks
+            link: container-runner-performance-benchmarks
+          - name: Container runner reference
+            link: container-runner
+      - name: Machine runner 3
+        children:
+          - name: Install on Linux
+            link: install-machine-runner-3-on-linux
+          - name: Install on macOS
+            link: install-machine-runner-3-on-macos
+          - name: Install on Windows
+            link: install-machine-runner-3-on-windows
+          - name: Install on Docker
+            link: install-machine-runner-3-on-docker
+          - name: Manual install on Linux and macOS
+            link: machine-runner-3-manual-installation
+          - name: Manual install on Windows
+            link: machine-runner-3-manual-installation-on-windows
+          - name: Migrate from launch agent to machine runner 3 on Linux
+            link: migrate-from-launch-agent-to-machine-runner-3-on-linux
+          - name: Migrate from launch agent to machine runner 3 on macOS
+            link: migrate-from-launch-agent-to-machine-runner-3-on-macos
+          - name: Migrate from launch agent to machine runner 3 on Windows
+            link: migrate-from-launch-agent-to-machine-runner-3-on-windows
+          - name: Machine runner 3 configuration reference
+            link: machine-runner-3-configuration-reference
+      - name: Machine runner
+        children:
+          - name: Linux installation
+            link: runner-installation-linux
+          - name: Windows installation
+            link: runner-installation-windows
+          - name: macOS installation
+            link: runner-installation-mac
+          - name: Docker installation
+            link: runner-installation-docker
+          - name: Machine runner configuration reference
+            link: runner-config-reference
+      - name: How-to Guides
+        children:
+          - name: Upgrade machine runner on server
+            link: runner-upgrading-on-server
+      - name: Reference
+        children:
+          - name: Self-hosted runner API
+            link: runner-api
+          - name: Self-hosted runner FAQ
+            link: runner-faqs
+          - name: Troubleshoot self-hosted runner
+            link: troubleshoot-self-hosted-runner
+          - name: Scaling self-hosted runner
+            link: runner-scaling
+
+  - name: Test
+    icon: icons/sidebar/passed.svg
+    children:
+      - name: Run tests
+        children:
+          - name: Automated testing
+            link: test
+          - name: Collect test data
+            link: collect-test-data
+      - name: Testing strategies
+        children:
+          - name: Testing LLM-enabled applications through evaluations
+            link: testing-llm-enabled-applications-through-evaluations
+          - name: Browser testing
+            link: browser-testing
+          - name: Generate code coverage metrics
+            link: code-coverage
+          - name: Re-run failed tests overview
+            link: rerun-failed-tests
+          - name: Test splitting and parallelism
+            link: parallelism-faster-jobs
+      - name: Monitor tests
+        children:
+          - name: Test Insights
+            link: insights-tests
+      - name: Tutorials
+        children:
+          - name: Speed up pipelines with test splitting
+            link: test-splitting-tutorial
+          - name: Testing iOS applications
+            link: testing-ios
+          - name: Testing macOS applications
+            link: testing-macos
+      - name: How-to guides
+        children:
+          - name: Use the CircleCI CLI to split tests
+            link: use-the-circleci-cli-to-split-tests
+          - name: Automate LLM evaluation testing with the CircleCI Evals orb
+            link: automate-llm-evaluation-testing-with-the-circleci-evals-orb
+      - name: Reference
+        children:
+          - name: Troubleshoot test splitting
+            link: troubleshoot-test-splitting
+
+  - name: Deploy
+    icon: icons/sidebar/getting-started-new.svg
+    children:
+      - name: Overview
+        children:
+          - name: Overview of deployment on CircleCI
+            link: deployment-overview
+          - name: CircleCI deploys overview
+            link: deploy/deploys-overview
+      - name: Set up - Release agent
+        children:
+          - name: Set up CircleCI deploys
+            link: deploy/set-up-circleci-deploys
+          - name: Manual install - Set up the release agent
+            link: deploy/set-up-the-release-agent
+          - name: Manual install - Configure your Kubernetes components
+            link: deploy/configure-your-kubernetes-components
+          - name: Update the Kubernetes release agent
+            link: deploy/update-the-kubernetes-release-agent
+          - name: Manage deploys
+            link: deploy/manage-deploys
+      - name: Set up - Agentless
+        children:
+          - name: Configure deploy markers
+            link: deploy/configure-deploy-markers
+          - name: Set up rollbacks in CircleCI
+            link: deploy/set-up-rollbacks
+          - name: Rollback a project using the rollback pipeline
+            link: deploy/rollback-a-project-using-the-rollback-pipeline
+          - name: Rollback a project by workflow rerun
+            link: deploy/rollback-a-project-by-workflow-rerun
+      - name: How to
+        children:
+          - name: Deploy to Amazon SageMaker
+            link: deploy-to-amazon-sagemaker
+          - name: Deploy Android applications
+            link: deploy-android-applications
+          - name: Deploy to Artifactory
+            link: deploy-to-artifactory
+          - name: Deploy to AWS
+            link: deploy-to-aws
+          - name: Push image to ECR and deploy to ECS
+            link: ecs-ecr
+          - name: Deploy to Azure Container Registry
+            link: deploy-to-azure-container-registry
+          - name: Deploy to Capistrano
+            link: deploy-to-capistrano
+          - name: Deploy to Cloud Foundry
+            link: deploy-to-cloud-foundry
+          - name: Deploy to Firebase
+            link: deploy-to-firebase
+          - name: Deploy to Google Cloud Platform
+            link: deploy-to-google-cloud-platform
+          - name: Deploy to Heroku
+            link: deploy-to-heroku
+          - name: Deploy iOS applications
+            link: deploy-ios-applications
+          - name: Deploy over SSH
+            link: deploy-over-ssh
+          - name: Publish packages to Packagecloud
+            link: publish-packages-to-packagecloud
+          - name: Publish to NPM registry
+            link: deploy-to-npm-registry
+
+
+  - name: Optimize
+    icon: icons/sidebar/sparkle.svg
+    children:
+      - name: Data
+        children:
+          - name: Persisting data overview
+            link: persist-data
+          - name: Caching dependencies
+            link: caching
+          - name: Caching strategies
+            link: caching-strategy
+          - name: Store build artifacts
+            link: artifacts
+      - name: Speed
+        children:
+          - name: Concurrency
+            link: concurrency
+          - name: Test splitting and parallelism
+            link: parallelism-faster-jobs
+          - name: Docker layer caching overview
+            link: docker-layer-caching
+      - name: Configuration
+        children:
+          - name: Dynamic configuration
+            link: dynamic-config
+      - name: Tutorials
+        children:
+          - name: Speed up pipelines with test splitting
+            link: test-splitting-tutorial
+      - name: How-to guides
+        children:
+          - name: Use the CircleCI CLI to split tests
+            link: use-the-circleci-cli-to-split-tests
+          - name: Use matrix jobs
+            link: using-matrix-jobs
+          - name: Use dynamic configuration
+            link: using-dynamic-configuration
+          - name: Avoid and debug Java memory errors
+            link: java-oom
+      - name: Reference
+        children:
+          - name: Reusable configuration reference
+            link: reusing-config
+          - name: Optimizations reference
+            link: optimizations
+
+  - name: Project Insights
+    icon: icons/sidebar/insights-new.svg
+    children:
+      - name: Monitor projects with Insights
+        children:
+          - name: Use Insights
+            link: insights
+      - name: How-to guides
+        children:
+          - name: Generate an Insights snapshot badge
+            link: insights-snapshot-badge
+      - name: Reference
+        children:
+          - name: Insights glossary
+            link: insights-glossary
+          - name: Insights API
+            link: https://circleci.com/docs/api/v2#tag/Insights
+
+  - name: Package and re-use config with orbs
+    icon: icons/sidebar/orb.svg
+    children:
+      - name: Use orbs
+        children:
+          - name: Orb introduction
+            link: orb-intro
+          - name: Managing URL orb allow-lists
+            link: managing-url-orbs-allow-lists
+      - name: Author orbs
+        children:
+          - name: Author an orb
+            link: orb-author
+          - name: Create an orb
+            link: create-an-orb
+          - name: Manually author an orb
+            link: orb-author-validate-publish
+          - name: Orb authoring best practices
+            link: orbs-best-practices
+      - name: Test orbs
+        children:
+          - name: Orb testing methodologies
+            link: testing-orbs
+      - name: Publish orbs
+        children:
+          - name: Orb publishing process
+            link: creating-orbs
+      - name: How-to guides
+        children:
+          - name: Deploy service update to ECS
+            link: deploy-service-update-to-aws-ecs
+      - name: Reference
+        children:
+          - name: Orbs concepts
+            link: orb-concepts
+          - name: Orbs FAQ
+            link: orbs-faq
+          - name: Orb author FAQ
+            link: orb-author-faq
+          - name: Reusing configuration
+            link: reusing-config
+
+  - name: Manage roles, permissions, and authentication
+    icon: icons/sidebar/avatar.svg
+    children:
+      - name: CircleCI account roles and permissions
+        children:
+          - name: Roles and permissions overview
+            link: roles-and-permissions-overview
+          - name: Manage roles and permissions
+            link: manage-roles-and-permissions
+          - name: Manage groups
+            link: manage-groups
+      - name: SSO authentication
+        children:
+          - name: SSO overview
+            link: authentication/sso-overview
+          - name: SSO setup
+            link: authentication/set-up-sso
+          - name: Sign in to an SSO-enabled org
+            link: authentication/sign-in-to-an-sso-enabled-organization
+      - name: Multi-Factor Authentication (MFA)
+        children:
+          - name: MFA overview
+            link: authentication/mfa
+      - name: OIDC tokens
+        children:
+          - name: Use OpenID Connect tokens in jobs
+            link: openid-connect-tokens
+          - name: OIDC tokens with custom claims
+            link: oidc-tokens-with-custom-claims
+      - name: How-to guides
+        children:
+          - name: Prevent unregistered users from spending credits
+            link: prevent-unregistered-users-from-spending-credits
+
+  - name: Manage security and secrets
+    icon: icons/sidebar/key.svg
+    children:
+      - name: Security features
+        children:
+          - name: How CircleCI handles security
+            link: security
+          - name: Intro to environment variables
+            link: env-vars
+          - name: Using contexts
+            link: contexts
+          - name: IP ranges
+            link: ip-ranges
+          - name: Audit logs
+            link: audit-logs
+      - name: Security recommendations
+        children:
+          - name: Security overview
+            link: security-overview
+          - name: Protecting against supply chain attacks
+            link: security-supply-chain
+          - name: Secure secrets handling
+            link: security-recommendations
+      - name: How-to guides
+        children:
+          - name: Set an environment variable
+            link: set-environment-variable
+          - name: Inject environment variables with the API
+            link: inject-environment-variables-with-api
+          - name: Debug with SSH
+            link: ssh-access-jobs
+          - name: Rotate project SSH keys
+            link: rotate-project-ssh-keys
+          - name: Stop building a project on CircleCI
+            link: stop-building-a-project-on-circleci
+          - name: Rename organizations and repositories
+            link: rename-organizations-and-repositories
+
+  - name: Manage config policies
+    icon: icons/sidebar/lock.svg
+    children:
+      - name: Overview
+        children:
+          - name: Config policies overview
+            link: config-policy-management-overview
+      - name: How-to guides
+        children:
+          - name: Create and manage config policies
+            link: create-and-manage-config-policies
+          - name: Test config policies
+            link: test-config-policies
+          - name: Use the CLI for config and policy development
+            link: use-the-cli-for-config-and-policy-development
+          - name: Config policies for self-hosted runner
+            link: config-policies-for-self-hosted-runner
+          - name: Manage contexts with config policies
+            link: manage-contexts-with-config-policies
+      - name: Reference
+        children:
+          - name: Config policy reference
+            link: config-policy-reference
+
+  - name: Integration
+    icon: icons/sidebar/webhook.svg
+    children:
+      - name: Integration features
+        children:
+          - name: Outbound webhooks
+            link: outbound-webhooks
+          - name: Notifications overview
+            link: notifications
+          - name: Build open source projects
+            link: oss
+      - name: VCS integration
+        children:
+          - name: VCS integration overview
+            link: version-control-system-integration-overview
+          - name: GitHub App integration
+            link: github-apps-integration
+          - name: GitLab integration
+            link: gitlab-integration
+          - name: Bitbucket Data Center integration
+            link: bitbucket-data-center-integration
+          - name: GitHub OAuth app integration
+            link: github-integration
+          - name: Bitbucket Cloud integration
+            link: bitbucket-integration
+
+      - name: Third-party integrations
+        children:
+          - name: Enable GitHub Checks
+            link: enable-checks
+          - name: Connect with Jira
+            link: jira-plugin
+          - name: New Relic integration
+            link: new-relic-integration
+          - name: Datadog integration
+            link: datadog-integration
+          - name: Sumo Logic integration
+            link: sumo-logic-integration
+      - name: Tutorials
+        children:
+          - name: Authorize Google Cloud SDK
+            link: authorize-google-cloud-sdk
+      - name: How-to guides
+        children:
+          - name: Adding status badges
+            link: status-badges
+          - name: CircleCI webhooks with Airtable
+            link: webhooks-airtable
+          - name: Add additional SSH keys
+            link: add-ssh-key
+      - name: Reference
+        children:
+          - name: Outbound webhooks reference
+            link: outbound-webhooks-reference
+
+  - name: Developer toolkit
+    icon: icons/sidebar/code.svg
+    children:
+      - name: AI features
+        children:
+          - name: Using the CircleCI MCP Server
+            link: using-the-circleci-mcp-server
+          - name: Intelligent summaries
+            link: intelligent-summaries
+      - name: CLI
+        children:
+          - name: Install and configure the CircleCI local CLI
+            link: local-cli
+          - name: How to use the CircleCI local CLI
+            link: how-to-use-the-circleci-local-cli
+      - name: APIs
+        children:
+          - name: API v2 introduction
+            link: api-intro
+          - name: API v2 developers guide
+            link: api-developers-guide
+          - name: Managing API tokens
+            link: managing-api-tokens
+          - name: API v2 reference
+            link: https://circleci.com/docs/api/v2
+          - name: API v1 reference
+            link: https://circleci.com/docs/api/v1
+      - name: IDE TOOLS
+        children:
+          - name: VS Code extension overview
+            link: vs-code-extension-overview
+          - name: Get started with the VS Code extension
+            link: get-started-with-the-vs-code-extension
+      - name: Config tools
+        children:
+          - name: CircleCI config SDK
+            link: circleci-config-sdk
+          - name: Orb development kit
+            link: orb-development-kit
+      - name: Example projects
+        children:
+          - name: Examples and guides overview
+            link: examples-and-guides-overview
+          - name: Sample config.yml files
+            link: sample-config
+          - name: Database examples
+            link: postgres-config
+
+  - name: Server administration v4.7
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.7 overview
+        children:
+          - name: CircleCI server v4.7 overview
+            link: server/latest/overview/circleci-server-overview
+          - name: Release notes
+            link: server/latest/overview/release-notes
+      - name: Server v4.7 installation
+        children:
+          - name: Phase 1 AWS - Prerequisites
+            link: server/latest/installation/phase-1-aws-prerequisites
+          - name: Phase 2 AWS - Core
+            link: server/latest/installation/phase-2-aws-core-services
+          - name: Phase 3 AWS - Execution
+            link: server/latest/installation/phase-3-aws-execution-environments
+          - name: Phase 4 AWS - Post-install
+            link: server/latest/installation/phase-4-aws-post-installation
+          - name: Phase 1 GCP - Prerequisites
+            link: server/latest/installation/phase-1-gcp-prerequisites
+          - name: Phase 2 GCP - Core
+            link: server/latest/installation/phase-2-gcp-core-services
+          - name: Phase 3 GCP - Execution
+            link: server/latest/installation/phase-3-gcp-execution-environments
+          - name: Phase 4 GCP - Post-install
+            link: server/latest/installation/phase-4-gcp-post-installation
+          - name: Hardening your cluster
+            link: server/latest/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/latest/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.7
+            link: server/latest/installation/upgrade-server
+          - name: Installation reference
+            link: server/latest/installation/installation-reference
+      - name: Air-gapped installation v4.7
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/latest/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/latest/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/latest/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/latest/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/latest/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/latest/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/latest/air-gapped-installation/example-values
+      - name: Server v4.7 operations
+        children:
+          - name: Operator overview
+            link: server/latest/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/latest/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/latest/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/latest/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/latest/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/latest/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/latest/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/latest/operator/managing-load-balancers
+          - name: User authentication
+            link: server/latest/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/latest/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/latest/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/latest/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/latest/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/latest/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/latest/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/latest/operator/upgrade-mongo
+          - name: FAQs
+            link: server/latest/operator/faq
+
+  - name: Server administration v4.6
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.6 overview
+        children:
+          - name: CircleCI server v4.6 overview
+            link: server/v4.6/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.6/overview/release-notes
+      - name: Server v4.6 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.6/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.6/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.6/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.6/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.6/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.6/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.6
+            link: server/v4.6/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.6/installation/installation-reference
+      - name: Air-gapped installation v4.6
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.6/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.6/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.6/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.6/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.6/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.6/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.6/air-gapped-installation/example-values
+      - name: Server v4.6 operations
+        children:
+          - name: Operator overview
+            link: server/v4.6/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.6/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.6/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.6/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/v4.6/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/v4.6/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.6/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.6/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.6/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.6/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.6/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.6/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.6/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.6/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.6/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.6/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.6/operator/faq
+
+  - name: Server administration v4.5
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.5 overview
+        children:
+          - name: CircleCI server v4.5 overview
+            link: server/v4.5/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.5/overview/release-notes
+      - name: Server v4.5 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.5/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.5/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.5/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.5/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.5/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.5/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.5
+            link: server/v4.5/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.5/installation/installation-reference
+      - name: Air-gapped installation v4.5
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.5/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.5/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.5/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.5/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.5/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.5/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.5/air-gapped-installation/example-values
+      - name: Server v4.5 operations
+        children:
+          - name: Operator overview
+            link: server/v4.5/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.5/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.5/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.5/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/v4.5/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/v4.5/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.5/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.5/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.5/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.5/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.5/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.5/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.5/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.5/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.5/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.5/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.5/operator/faq
+
+  - name: Server administration v4.4
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.4 overview
+        children:
+          - name: CircleCI server v4.4 overview
+            link: server/v4.4/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.4/overview/release-notes
+      - name: Server v4.4 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.4/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.4/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.4/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.4/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.4/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.4/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.4
+            link: server/v4.4/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.4/installation/installation-reference
+      - name: Air-gapped installation v4.4
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.4/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.4/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.4/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.4/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.4/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.4/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.4/air-gapped-installation/example-values
+      - name: Server v4.4 operations
+        children:
+          - name: Operator overview
+            link: server/v4.4/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.4/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.4/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.4/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/v4.4/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/v4.4/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.4/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.4/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.4/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.4/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.4/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.4/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.4/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.4/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.4/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.4/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.4/operator/faq
+
+  - name: Server administration v4.3
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.3 overview
+        children:
+          - name: CircleCI server v4.3 overview
+            link: server/v4.3/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.3/overview/release-notes
+      - name: Server v4.3 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.3/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.3/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.3/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.3/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.3/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.3/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.3
+            link: server/v4.3/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.3/installation/installation-reference
+      - name: Air-gapped installation v4.3
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.3/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.3/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.3/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.3/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.3/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.3/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.3/air-gapped-installation/example-values
+      - name: Server v4.3 operations
+        children:
+          - name: Operator overview
+            link: server/v4.3/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.3/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.3/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.3/operator/managing-orbs
+          - name: Manage virtual machines with Machine Provisioner
+            link: server/v4.3/operator/manage-virtual-machines-with-machine-provisioner
+          - name: Configuring external services
+            link: server/v4.3/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.3/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.3/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.3/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.3/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.3/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.3/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.3/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.3/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.3/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.3/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.3/operator/faq
+
+  - name: Server administration v4.2
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.2 overview
+        children:
+          - name: CircleCI server v4.2 overview
+            link: server/v4.2/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.2/overview/release-notes
+      - name: Server v4.2 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.2/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.2/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.2/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.2/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.2/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.2
+            link: server/v4.2/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.2/installation/installation-reference
+      - name: Air-gapped installation v4.2
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.2/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.2/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.2/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.2/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.2/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.2/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.2/air-gapped-installation/example-values
+      - name: Server v4.2 operations
+        children:
+          - name: Operator overview
+            link: server/v4.2/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.2/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.2/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.2/operator/managing-orbs
+          - name: Manage virtual machines with VM service
+            link: server/v4.2/operator/manage-virtual-machines-with-vm-service
+          - name: Configuring external services
+            link: server/v4.2/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.2/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.2/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.2/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.2/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.2/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.2/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.2/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.2/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.2/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.2/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.2/operator/faq
+
+  - name: Server administration v4.1
+    icon: icons/sidebar/admin-new.svg
+    children:
+      - name: Server v4.1 overview
+        children:
+          - name: CircleCI server v4.1 overview
+            link: server/v4.1/overview/circleci-server-overview
+          - name: Release notes
+            link: server/v4.1/overview/release-notes
+      - name: Server v4.1 installation
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.1/installation/phase-1-prerequisites
+          - name: Phase 2 - Core
+            link: server/v4.1/installation/phase-2-core-services
+          - name: Phase 3 - Execution
+            link: server/v4.1/installation/phase-3-execution-environments
+          - name: Phase 4 - Post-installation
+            link: server/v4.1/installation/phase-4-post-installation
+          - name: Hardening your cluster
+            link: server/v4.1/installation/hardening-your-cluster
+          - name: Installing server behind a proxy
+            link: server/v4.1/installation/installing-server-behind-a-proxy
+          - name: Upgrade server v4.x
+            link: server/v4.1/installation/upgrade-server
+          - name: Installation reference
+            link: server/v4.1/installation/installation-reference
+      - name: Air-gapped installation v4.1
+        children:
+          - name: Phase 1 - Prerequisites
+            link: server/v4.1/air-gapped-installation/phase-1-prerequisites
+          - name: Phase 2 - Configure object storage
+            link: server/v4.1/air-gapped-installation/phase-2-configure-object-storage
+          - name: Phase 3 - Install CircleCI server
+            link: server/v4.1/air-gapped-installation/phase-3-install-circleci-server
+          - name: Phase 4 - Configure Nomad clients
+            link: server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients
+          - name: Phase 5 - Test installation
+            link: server/v4.1/air-gapped-installation/phase-5-test-your-installation
+          - name: Additional considerations
+            link: server/v4.1/air-gapped-installation/additional-considerations
+          - name: Example values.yaml
+            link: server/v4.1/air-gapped-installation/example-values
+      - name: Server v4.1 operations
+        children:
+          - name: Operator overview
+            link: server/v4.1/operator/operator-overview
+          - name: Introduction to Nomad cluster operation
+            link: server/v4.1/operator/introduction-to-nomad-cluster-operation
+          - name: Managing user accounts
+            link: server/v4.1/operator/managing-user-accounts
+          - name: Managing orbs
+            link: server/v4.1/operator/managing-orbs
+          - name: Manage virtual machines with VM service
+            link: server/v4.1/operator/manage-virtual-machines-with-vm-service
+          - name: Configuring external services
+            link: server/v4.1/operator/configuring-external-services
+          - name: Expanding internal database volumes
+            link: server/v4.1/operator/expanding-internal-database-volumes
+          - name: Managing load balancers
+            link: server/v4.1/operator/managing-load-balancers
+          - name: User authentication
+            link: server/v4.1/operator/user-authentication
+          - name: Managing build artifacts
+            link: server/v4.1/operator/managing-build-artifacts
+          - name: Usage data collection
+            link: server/v4.1/operator/usage-data-collection
+          - name: CircleCI server security features
+            link: server/v4.1/operator/circleci-server-security-features
+          - name: Application lifecycle
+            link: server/v4.1/operator/application-lifecycle
+          - name: Troubleshooting and support
+            link: server/v4.1/operator/troubleshooting-and-support
+          - name: Backup and restore
+            link: server/v4.1/operator/backup-and-restore
+          - name: Upgrade MongoDB
+            link: server/v4.1/operator/upgrade-mongo
+          - name: FAQs
+            link: server/v4.1/operator/faq
+
+  - name: Plans and pricing
+    icon: icons/sidebar/plans-outline.svg
+    children:
+      - name: Overview
+        children:
+          - name: Plans overview
+            link: plan-overview
+          - name: Credits overview
+            link: credits
+      - name: Free
+        children:
+          - name: Free plan overview
+            link: plan-free
+      - name: Performance
+        children:
+          - name: Performance plan overview
+            link: plan-performance
+      - name: Scale
+        children:
+          - name: Scale plan overview
+            link: plan-scale
+      - name: Server
+        children:
+          - name: Server plan overview
+            link: plan-server
+      - name: How-to guides
+        children:
+          - name: Prevent unregistered users from spending credits
+            link: prevent-unregistered-users-from-spending-credits
+
+  - name: Contributing to CircleCI docs
+    icon: icons/sidebar/changelog.svg
+    children:
+      - name: Docs style guide
+        children:
+          - name: Style guide overview
+            link: style/style-guide-overview
+          - name: Formatting
+            link: style/formatting
+          - name: Style and voice
+            link: style/style-and-voice
+          - name: Headings
+            link: style/headings
+          - name: Using lists
+            link: style/using-lists
+          - name: Cross references and links
+            link: style/links
+          - name: Using images
+            link: style/using-images
+          - name: Using tables
+            link: style/using-tables
+          - name: Using code samples
+            link: style/using-code-samples
+      - name: Content templates
+        children:
+          - name: Conceptual page template
+            link: templates/template-conceptual
+          - name: How-to guide template
+            link: templates/template-how-to
+          - name: Tutorial page template
+            link: templates/template-tutorial
