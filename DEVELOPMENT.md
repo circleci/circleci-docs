@@ -125,7 +125,7 @@ docs/
 
    == Introduction
    This guide explains how to use the new feature.
-   
+
    == Steps
    1. First step
    2. Second step
@@ -143,7 +143,7 @@ docs/
 
 3. **Add images and attachments**:
    Place images in the `assets/images/` directory of the module.
-   
+
    Reference them using:
    ```asciidoc
    image::image-name.png[Alt text]
@@ -235,11 +235,22 @@ The UI uses Tailwind CSS for styling:
 
 2. **Bundle structure**:
    The main JavaScript bundle is `ui/src/js/site.js`
-   
+
 3. **Add new features**:
    Create new JavaScript files and import them in the main bundle
 
 ## Advanced Development Tasks
+
+## Updating server version branches
+
+When changes are made to the main branch to the build processes, the UI, or all components OTHER than server-administration, all server branches should be rebased once the changes are merged. The process for this is as follows:
+
+1. Update local main branch
+2. Checkout a server branch
+3. Run `git rebase main`
+4. Push those changes with `git push --force-with-lease origin server-v4.1` - remember to use the correct server branch number.
+
+This should be done for every server-v* branch.
 
 ### Creating a New Component
 
@@ -328,7 +339,7 @@ To create a custom extension:
 ### UI Bundle Issues
 
 **Problem**: UI bundle fails to build
-**Solution**: 
+**Solution**:
 ```bash
 # Clean UI directory and rebuild
 rm -rf ui/build ui/node_modules
@@ -339,7 +350,7 @@ npm run build:ui
 ### Navigation Problems
 
 **Problem**: Pages don't appear in navigation
-**Solution**: 
+**Solution**:
 - Verify `nav.adoc` entries use correct `xref:` syntax
 - Ensure page files exist at the referenced locations
 - Check component configuration in `antora.yml`
@@ -347,7 +358,7 @@ npm run build:ui
 ### Content Not Updating
 
 **Problem**: Changes don't appear after rebuilding
-**Solution**: 
+**Solution**:
 - Clear your browser cache
 - Restart the development server
 - Check for AsciiDoc syntax errors
@@ -356,7 +367,7 @@ npm run build:ui
 ### AsciiDoc Formatting Issues
 
 **Problem**: Content doesn't render as expected
-**Solution**: 
+**Solution**:
 - Check AsciiDoc syntax
 - Verify attributes are correctly defined
 - Ensure proper spacing around blocks and elements
