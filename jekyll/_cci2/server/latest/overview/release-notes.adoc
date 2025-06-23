@@ -15,7 +15,10 @@ contentTags:
 [#overview]
 == Overview
 
-The v4.8 release introduces security improvements with the implementation of rootless containers.
+The v4.8 release introduces further security improvements and support for the following features:
+
+* Flexible job dependencies
+* Expression-based job filters.
 
 [#upgrade]
 == Upgrade
