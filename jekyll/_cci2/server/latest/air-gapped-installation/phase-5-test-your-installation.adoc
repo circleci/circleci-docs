@@ -20,7 +20,7 @@ Copy the link:https://github.com/circleci/realitycheck[CircleCI server Reality C
 
 [#setup-reality-check]
 == 2. Set up CircleCI server Reality Check
-Set up CircleCI server Reality Check using the link:https://github.com/circleci/realitycheck#installation[instructions in the readme].
+Set up CircleCI server Reality Check using the link:https://github.com/circleci/realitycheck#installation[instructions in the README].
 
 CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
 
