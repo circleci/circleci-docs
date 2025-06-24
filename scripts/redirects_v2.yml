@@ -249,7 +249,7 @@
   new: /guides/execution-managed/executor-intro/
 
 - old: /faq/
-  new: /server-admin-4.6/operator/faq/
+  new: /server-admin/server-4.6/operator/faq/
 
 - old: /first-steps/
   new: /guides/getting-started/first-steps/
@@ -621,730 +621,730 @@
   new: /guides/orchestrate/selecting-a-workflow-to-run-using-pipeline-parameters/
 
 - old: /server/latest/air-gapped-installation/additional-considerations/
-  new: /server-admin-latest/air-gapped-installation/additional-considerations/
+  new: /server-admin/server-latest/air-gapped-installation/additional-considerations/
 
 - old: /server/latest/air-gapped-installation/example-values/
-  new: /server-admin-latest/air-gapped-installation/example-values/
+  new: /server-admin/server-latest/air-gapped-installation/example-values/
 
 - old: /server/latest/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin-latest/air-gapped-installation/phase-1-prerequisites/
+  new: /server-admin/server-latest/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/latest/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin-latest/air-gapped-installation/phase-2-configure-object-storage/
+  new: /server-admin/server-latest/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/latest/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin-latest/air-gapped-installation/phase-3-install-circleci-server/
+  new: /server-admin/server-latest/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/latest/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin-latest/air-gapped-installation/phase-4-configure-nomad-clients/
+  new: /server-admin/server-latest/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/latest/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin-latest/air-gapped-installation/phase-5-test-your-installation/
+  new: /server-admin/server-latest/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/latest/installation/hardening-your-cluster/
-  new: /server-admin-latest/installation/hardening-your-cluster/
+  new: /server-admin/server-latest/installation/hardening-your-cluster/
 
 - old: /server/latest/installation/installation-reference/
-  new: /server-admin-latest/installation/installation-reference/
+  new: /server-admin/server-latest/installation/installation-reference/
 
 - old: /server/latest/installation/installing-server-behind-a-proxy/
-  new: /server-admin-latest/installation/installing-server-behind-a-proxy/
+  new: /server-admin/server-latest/installation/installing-server-behind-a-proxy/
 
 - old: /server/latest/installation/phase-1-aws-prerequisites/
-  new: /server-admin-latest/installation/phase-1-aws-prerequisites/
+  new: /server-admin/server-latest/installation/phase-1-aws-prerequisites/
 
 - old: /server/latest/installation/phase-1-gcp-prerequisites/
-  new: /server-admin-latest/installation/phase-1-gcp-prerequisites/
+  new: /server-admin/server-latest/installation/phase-1-gcp-prerequisites/
 
 - old: /server/latest/installation/phase-2-aws-core-services/
-  new: /server-admin-latest/installation/phase-2-aws-core-services/
+  new: /server-admin/server-latest/installation/phase-2-aws-core-services/
 
 - old: /server/latest/installation/phase-2-gcp-core-services/
-  new: /server-admin-latest/installation/phase-2-gcp-core-services/
+  new: /server-admin/server-latest/installation/phase-2-gcp-core-services/
 
 - old: /server/latest/installation/phase-3-aws-execution-environments/
-  new: /server-admin-latest/installation/phase-3-aws-execution-environments/
+  new: /server-admin/server-latest/installation/phase-3-aws-execution-environments/
 
 - old: /server/latest/installation/phase-3-gcp-execution-environments/
-  new: /server-admin-latest/installation/phase-3-gcp-execution-environments/
+  new: /server-admin/server-latest/installation/phase-3-gcp-execution-environments/
 
 - old: /server/latest/installation/phase-4-aws-post-installation/
-  new: /server-admin-latest/installation/phase-4-aws-post-installation/
+  new: /server-admin/server-latest/installation/phase-4-aws-post-installation/
 
 - old: /server/latest/installation/phase-4-gcp-post-installation/
-  new: /server-admin-latest/installation/phase-4-gcp-post-installation/
+  new: /server-admin/server-latest/installation/phase-4-gcp-post-installation/
 
 - old: /server/latest/installation/upgrade-server/
-  new: /server-admin-latest/installation/upgrade-server/
+  new: /server-admin/server-latest/installation/upgrade-server/
 
 - old: /server/latest/operator/application-lifecycle/
-  new: /server-admin-latest/operator/application-lifecycle/
+  new: /server-admin/server-latest/operator/application-lifecycle/
 
 - old: /server/latest/operator/backup-and-restore/
-  new: /server-admin-latest/operator/backup-and-restore/
+  new: /server-admin/server-latest/operator/backup-and-restore/
 
 - old: /server/latest/operator/circleci-server-security-features/
-  new: /server-admin-latest/operator/circleci-server-security-features/
+  new: /server-admin/server-latest/operator/circleci-server-security-features/
 
 - old: /server/latest/operator/configuring-external-services/
-  new: /server-admin-latest/operator/configuring-external-services/
+  new: /server-admin/server-latest/operator/configuring-external-services/
 
 - old: /server/latest/operator/expanding-internal-database-volumes/
-  new: /server-admin-latest/operator/expanding-internal-database-volumes/
+  new: /server-admin/server-latest/operator/expanding-internal-database-volumes/
 
 - old: /server/latest/operator/faq/
-  new: /server-admin-latest/operator/faq/
+  new: /server-admin/server-latest/operator/faq/
 
 - old: /server/latest/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin-latest/operator/introduction-to-nomad-cluster-operation/
+  new: /server-admin/server-latest/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/latest/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin-latest/operator/manage-virtual-machines-with-machine-provisioner/
+  new: /server-admin/server-latest/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/latest/operator/managing-build-artifacts/
-  new: /server-admin-latest/operator/managing-build-artifacts/
+  new: /server-admin/server-latest/operator/managing-build-artifacts/
 
 - old: /server/latest/operator/managing-load-balancers/
-  new: /server-admin-latest/operator/managing-load-balancers/
+  new: /server-admin/server-latest/operator/managing-load-balancers/
 
 - old: /server/latest/operator/managing-orbs/
-  new: /server-admin-latest/operator/managing-orbs/
+  new: /server-admin/server-latest/operator/managing-orbs/
 
 - old: /server/latest/operator/managing-user-accounts/
-  new: /server-admin-latest/operator/managing-user-accounts/
+  new: /server-admin/server-latest/operator/managing-user-accounts/
 
 - old: /server/latest/operator/operator-overview/
-  new: /server-admin-latest/operator/operator-overview/
+  new: /server-admin/server-latest/operator/operator-overview/
 
 - old: /server/latest/operator/troubleshooting-and-support/
-  new: /server-admin-latest/operator/troubleshooting-and-support/
+  new: /server-admin/server-latest/operator/troubleshooting-and-support/
 
 - old: /server/latest/operator/upgrade-mongo/
-  new: /server-admin-latest/operator/upgrade-mongo/
+  new: /server-admin/server-latest/operator/upgrade-mongo/
 
 - old: /server/latest/operator/usage-data-collection/
-  new: /server-admin-latest/operator/usage-data-collection/
+  new: /server-admin/server-latest/operator/usage-data-collection/
 
 - old: /server/latest/operator/user-authentication/
-  new: /server-admin-latest/operator/user-authentication/
+  new: /server-admin/server-latest/operator/user-authentication/
 
 - old: /server/latest/overview/circleci-server-overview/
-  new: /server-admin-latest/overview/circleci-server-overview/
+  new: /server-admin/server-latest/overview/circleci-server-overview/
 
 - old: /server/latest/overview/release-notes/
-  new: /server-admin-latest/overview/release-notes/
+  new: /server-admin/server-latest/overview/release-notes/
 
 - old: /server/v4.1/air-gapped-installation/additional-considerations/
-  new: /server-admin-v4.1/air-gapped-installation/additional-considerations/
+  new: /server-admin/server-v4.1/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.1/air-gapped-installation/example-values/
-  new: /server-admin-v4.1/air-gapped-installation/example-values/
+  new: /server-admin/server-v4.1/air-gapped-installation/example-values/
 
 - old: /server/v4.1/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin-v4.1/air-gapped-installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.1/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.1/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin-v4.1/air-gapped-installation/phase-2-configure-object-storage/
+  new: /server-admin/server-v4.1/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.1/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin-v4.1/air-gapped-installation/phase-3-install-circleci-server/
+  new: /server-admin/server-v4.1/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.1/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin-v4.1/air-gapped-installation/phase-4-configure-nomad-clients/
+  new: /server-admin/server-v4.1/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.1/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin-v4.1/air-gapped-installation/phase-5-test-your-installation/
+  new: /server-admin/server-v4.1/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.1/installation/hardening-your-cluster/
-  new: /server-admin-v4.1/installation/hardening-your-cluster/
+  new: /server-admin/server-v4.1/installation/hardening-your-cluster/
 
 - old: /server/v4.1/installation/installation-reference/
-  new: /server-admin-v4.1/installation/installation-reference/
+  new: /server-admin/server-v4.1/installation/installation-reference/
 
 - old: /server/v4.1/installation/installing-server-behind-a-proxy/
-  new: /server-admin-v4.1/installation/installing-server-behind-a-proxy/
+  new: /server-admin/server-v4.1/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.1/installation/phase-1-prerequisites/
-  new: /server-admin-v4.1/installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.1/installation/phase-1-prerequisites/
 
 - old: /server/v4.1/installation/phase-2-core-services/
-  new: /server-admin-v4.1/installation/phase-2-core-services/
+  new: /server-admin/server-v4.1/installation/phase-2-core-services/
 
 - old: /server/v4.1/installation/phase-3-execution-environments/
-  new: /server-admin-v4.1/installation/phase-3-execution-environments/
+  new: /server-admin/server-v4.1/installation/phase-3-execution-environments/
 
 - old: /server/v4.1/installation/phase-4-post-installation/
-  new: /server-admin-v4.1/installation/phase-4-post-installation/
+  new: /server-admin/server-v4.1/installation/phase-4-post-installation/
 
 - old: /server/v4.1/installation/upgrade-server/
-  new: /server-admin-v4.1/installation/upgrade-server/
+  new: /server-admin/server-v4.1/installation/upgrade-server/
 
 - old: /server/v4.1/operator/application-lifecycle/
-  new: /server-admin-v4.1/operator/application-lifecycle/
+  new: /server-admin/server-v4.1/operator/application-lifecycle/
 
 - old: /server/v4.1/operator/backup-and-restore/
-  new: /server-admin-v4.1/operator/backup-and-restore/
+  new: /server-admin/server-v4.1/operator/backup-and-restore/
 
 - old: /server/v4.1/operator/circleci-server-security-features/
-  new: /server-admin-v4.1/operator/circleci-server-security-features/
+  new: /server-admin/server-v4.1/operator/circleci-server-security-features/
 
 - old: /server/v4.1/operator/configuring-external-services/
-  new: /server-admin-v4.1/operator/configuring-external-services/
+  new: /server-admin/server-v4.1/operator/configuring-external-services/
 
 - old: /server/v4.1/operator/expanding-internal-database-volumes/
-  new: /server-admin-v4.1/operator/expanding-internal-database-volumes/
+  new: /server-admin/server-v4.1/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.1/operator/faq/
-  new: /server-admin-v4.1/operator/faq/
+  new: /server-admin/server-v4.1/operator/faq/
 
 - old: /server/v4.1/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin-v4.1/operator/introduction-to-nomad-cluster-operation/
+  new: /server-admin/server-v4.1/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.1/operator/manage-virtual-machines-with-vm-service/
-  new: /server-admin-v4.1/operator/manage-virtual-machines-with-vm-service/
+  new: /server-admin/server-v4.1/operator/manage-virtual-machines-with-vm-service/
 
 - old: /server/v4.1/operator/managing-build-artifacts/
-  new: /server-admin-v4.1/operator/managing-build-artifacts/
+  new: /server-admin/server-v4.1/operator/managing-build-artifacts/
 
 - old: /server/v4.1/operator/managing-load-balancers/
-  new: /server-admin-v4.1/operator/managing-load-balancers/
+  new: /server-admin/server-v4.1/operator/managing-load-balancers/
 
 - old: /server/v4.1/operator/managing-orbs/
-  new: /server-admin-v4.1/operator/managing-orbs/
+  new: /server-admin/server-v4.1/operator/managing-orbs/
 
 - old: /server/v4.1/operator/managing-user-accounts/
-  new: /server-admin-v4.1/operator/managing-user-accounts/
+  new: /server-admin/server-v4.1/operator/managing-user-accounts/
 
 - old: /server/v4.1/operator/operator-overview/
-  new: /server-admin-v4.1/operator/operator-overview/
+  new: /server-admin/server-v4.1/operator/operator-overview/
 
 - old: /server/v4.1/operator/troubleshooting-and-support/
-  new: /server-admin-v4.1/operator/troubleshooting-and-support/
+  new: /server-admin/server-v4.1/operator/troubleshooting-and-support/
 
 - old: /server/v4.1/operator/upgrade-mongo/
-  new: /server-admin-v4.1/operator/upgrade-mongo/
+  new: /server-admin/server-v4.1/operator/upgrade-mongo/
 
 - old: /server/v4.1/operator/usage-data-collection/
-  new: /server-admin-v4.1/operator/usage-data-collection/
+  new: /server-admin/server-v4.1/operator/usage-data-collection/
 
 - old: /server/v4.1/operator/user-authentication/
-  new: /server-admin-v4.1/operator/user-authentication/
+  new: /server-admin/server-v4.1/operator/user-authentication/
 
 - old: /server/v4.1/overview/circleci-server-overview/
-  new: /server-admin-v4.1/overview/circleci-server-overview/
+  new: /server-admin/server-v4.1/overview/circleci-server-overview/
 
 - old: /server/v4.1/overview/release-notes/
-  new: /server-admin-v4.1/overview/release-notes/
+  new: /server-admin/server-v4.1/overview/release-notes/
 
 - old: /server/v4.2/air-gapped-installation/additional-considerations/
-  new: /server-admin-v4.2/air-gapped-installation/additional-considerations/
+  new: /server-admin/server-v4.2/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.2/air-gapped-installation/example-values/
-  new: /server-admin-v4.2/air-gapped-installation/example-values/
+  new: /server-admin/server-v4.2/air-gapped-installation/example-values/
 
 - old: /server/v4.2/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin-v4.2/air-gapped-installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.2/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.2/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin-v4.2/air-gapped-installation/phase-2-configure-object-storage/
+  new: /server-admin/server-v4.2/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.2/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin-v4.2/air-gapped-installation/phase-3-install-circleci-server/
+  new: /server-admin/server-v4.2/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.2/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin-v4.2/air-gapped-installation/phase-4-configure-nomad-clients/
+  new: /server-admin/server-v4.2/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.2/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin-v4.2/air-gapped-installation/phase-5-test-your-installation/
+  new: /server-admin/server-v4.2/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.2/installation/hardening-your-cluster/
-  new: /server-admin-v4.2/installation/hardening-your-cluster/
+  new: /server-admin/server-v4.2/installation/hardening-your-cluster/
 
 - old: /server/v4.2/installation/installation-reference/
-  new: /server-admin-v4.2/installation/installation-reference/
+  new: /server-admin/server-v4.2/installation/installation-reference/
 
 - old: /server/v4.2/installation/installing-server-behind-a-proxy/
-  new: /server-admin-v4.2/installation/installing-server-behind-a-proxy/
+  new: /server-admin/server-v4.2/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.2/installation/phase-1-prerequisites/
-  new: /server-admin-v4.2/installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.2/installation/phase-1-prerequisites/
 
 - old: /server/v4.2/installation/phase-2-core-services/
-  new: /server-admin-v4.2/installation/phase-2-core-services/
+  new: /server-admin/server-v4.2/installation/phase-2-core-services/
 
 - old: /server/v4.2/installation/phase-3-execution-environments/
-  new: /server-admin-v4.2/installation/phase-3-execution-environments/
+  new: /server-admin/server-v4.2/installation/phase-3-execution-environments/
 
 - old: /server/v4.2/installation/phase-4-post-installation/
-  new: /server-admin-v4.2/installation/phase-4-post-installation/
+  new: /server-admin/server-v4.2/installation/phase-4-post-installation/
 
 - old: /server/v4.2/installation/upgrade-server/
-  new: /server-admin-v4.2/installation/upgrade-server/
+  new: /server-admin/server-v4.2/installation/upgrade-server/
 
 - old: /server/v4.2/operator/application-lifecycle/
-  new: /server-admin-v4.2/operator/application-lifecycle/
+  new: /server-admin/server-v4.2/operator/application-lifecycle/
 
 - old: /server/v4.2/operator/backup-and-restore/
-  new: /server-admin-v4.2/operator/backup-and-restore/
+  new: /server-admin/server-v4.2/operator/backup-and-restore/
 
 - old: /server/v4.2/operator/circleci-server-security-features/
-  new: /server-admin-v4.2/operator/circleci-server-security-features/
+  new: /server-admin/server-v4.2/operator/circleci-server-security-features/
 
 - old: /server/v4.2/operator/configuring-external-services/
-  new: /server-admin-v4.2/operator/configuring-external-services/
+  new: /server-admin/server-v4.2/operator/configuring-external-services/
 
 - old: /server/v4.2/operator/expanding-internal-database-volumes/
-  new: /server-admin-v4.2/operator/expanding-internal-database-volumes/
+  new: /server-admin/server-v4.2/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.2/operator/faq/
-  new: /server-admin-v4.2/operator/faq/
+  new: /server-admin/server-v4.2/operator/faq/
 
 - old: /server/v4.2/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin-v4.2/operator/introduction-to-nomad-cluster-operation/
+  new: /server-admin/server-v4.2/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.2/operator/manage-virtual-machines-with-vm-service/
-  new: /server-admin-v4.2/operator/manage-virtual-machines-with-vm-service/
+  new: /server-admin/server-v4.2/operator/manage-virtual-machines-with-vm-service/
 
 - old: /server/v4.2/operator/managing-build-artifacts/
-  new: /server-admin-v4.2/operator/managing-build-artifacts/
+  new: /server-admin/server-v4.2/operator/managing-build-artifacts/
 
 - old: /server/v4.2/operator/managing-load-balancers/
-  new: /server-admin-v4.2/operator/managing-load-balancers/
+  new: /server-admin/server-v4.2/operator/managing-load-balancers/
 
 - old: /server/v4.2/operator/managing-orbs/
-  new: /server-admin-v4.2/operator/managing-orbs/
+  new: /server-admin/server-v4.2/operator/managing-orbs/
 
 - old: /server/v4.2/operator/managing-user-accounts/
-  new: /server-admin-v4.2/operator/managing-user-accounts/
+  new: /server-admin/server-v4.2/operator/managing-user-accounts/
 
 - old: /server/v4.2/operator/operator-overview/
-  new: /server-admin-v4.2/operator/operator-overview/
+  new: /server-admin/server-v4.2/operator/operator-overview/
 
 - old: /server/v4.2/operator/troubleshooting-and-support/
-  new: /server-admin-v4.2/operator/troubleshooting-and-support/
+  new: /server-admin/server-v4.2/operator/troubleshooting-and-support/
 
 - old: /server/v4.2/operator/upgrade-mongo/
-  new: /server-admin-v4.2/operator/upgrade-mongo/
+  new: /server-admin/server-v4.2/operator/upgrade-mongo/
 
 - old: /server/v4.2/operator/usage-data-collection/
-  new: /server-admin-v4.2/operator/usage-data-collection/
+  new: /server-admin/server-v4.2/operator/usage-data-collection/
 
 - old: /server/v4.2/operator/user-authentication/
-  new: /server-admin-v4.2/operator/user-authentication/
+  new: /server-admin/server-v4.2/operator/user-authentication/
 
 - old: /server/v4.2/overview/circleci-server-overview/
-  new: /server-admin-v4.2/overview/circleci-server-overview/
+  new: /server-admin/server-v4.2/overview/circleci-server-overview/
 
 - old: /server/v4.2/overview/release-notes/
-  new: /server-admin-v4.2/overview/release-notes/
+  new: /server-admin/server-v4.2/overview/release-notes/
 
 - old: /server/v4.3/air-gapped-installation/additional-considerations/
-  new: /server-admin-v4.3/air-gapped-installation/additional-considerations/
+  new: /server-admin/server-v4.3/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.3/air-gapped-installation/example-values/
-  new: /server-admin-v4.3/air-gapped-installation/example-values/
+  new: /server-admin/server-v4.3/air-gapped-installation/example-values/
 
 - old: /server/v4.3/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin-v4.3/air-gapped-installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.3/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.3/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin-v4.3/air-gapped-installation/phase-2-configure-object-storage/
+  new: /server-admin/server-v4.3/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.3/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin-v4.3/air-gapped-installation/phase-3-install-circleci-server/
+  new: /server-admin/server-v4.3/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.3/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin-v4.3/air-gapped-installation/phase-4-configure-nomad-clients/
+  new: /server-admin/server-v4.3/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.3/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin-v4.3/air-gapped-installation/phase-5-test-your-installation/
+  new: /server-admin/server-v4.3/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.3/installation/hardening-your-cluster/
-  new: /server-admin-v4.3/installation/hardening-your-cluster/
+  new: /server-admin/server-v4.3/installation/hardening-your-cluster/
 
 - old: /server/v4.3/installation/installation-reference/
-  new: /server-admin-v4.3/installation/installation-reference/
+  new: /server-admin/server-v4.3/installation/installation-reference/
 
 - old: /server/v4.3/installation/installing-server-behind-a-proxy/
-  new: /server-admin-v4.3/installation/installing-server-behind-a-proxy/
+  new: /server-admin/server-v4.3/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.3/installation/phase-1-prerequisites/
-  new: /server-admin-v4.3/installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.3/installation/phase-1-prerequisites/
 
 - old: /server/v4.3/installation/phase-2-core-services/
-  new: /server-admin-v4.3/installation/phase-2-core-services/
+  new: /server-admin/server-v4.3/installation/phase-2-core-services/
 
 - old: /server/v4.3/installation/phase-3-execution-environments/
-  new: /server-admin-v4.3/installation/phase-3-execution-environments/
+  new: /server-admin/server-v4.3/installation/phase-3-execution-environments/
 
 - old: /server/v4.3/installation/phase-4-post-installation/
-  new: /server-admin-v4.3/installation/phase-4-post-installation/
+  new: /server-admin/server-v4.3/installation/phase-4-post-installation/
 
 - old: /server/v4.3/installation/upgrade-server/
-  new: /server-admin-v4.3/installation/upgrade-server/
+  new: /server-admin/server-v4.3/installation/upgrade-server/
 
 - old: /server/v4.3/operator/application-lifecycle/
-  new: /server-admin-v4.3/operator/application-lifecycle/
+  new: /server-admin/server-v4.3/operator/application-lifecycle/
 
 - old: /server/v4.3/operator/backup-and-restore/
-  new: /server-admin-v4.3/operator/backup-and-restore/
+  new: /server-admin/server-v4.3/operator/backup-and-restore/
 
 - old: /server/v4.3/operator/circleci-server-security-features/
-  new: /server-admin-v4.3/operator/circleci-server-security-features/
+  new: /server-admin/server-v4.3/operator/circleci-server-security-features/
 
 - old: /server/v4.3/operator/configuring-external-services/
-  new: /server-admin-v4.3/operator/configuring-external-services/
+  new: /server-admin/server-v4.3/operator/configuring-external-services/
 
 - old: /server/v4.3/operator/expanding-internal-database-volumes/
-  new: /server-admin-v4.3/operator/expanding-internal-database-volumes/
+  new: /server-admin/server-v4.3/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.3/operator/faq/
-  new: /server-admin-v4.3/operator/faq/
+  new: /server-admin/server-v4.3/operator/faq/
 
 - old: /server/v4.3/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin-v4.3/operator/introduction-to-nomad-cluster-operation/
+  new: /server-admin/server-v4.3/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.3/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin-v4.3/operator/manage-virtual-machines-with-machine-provisioner/
+  new: /server-admin/server-v4.3/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.3/operator/managing-build-artifacts/
-  new: /server-admin-v4.3/operator/managing-build-artifacts/
+  new: /server-admin/server-v4.3/operator/managing-build-artifacts/
 
 - old: /server/v4.3/operator/managing-load-balancers/
-  new: /server-admin-v4.3/operator/managing-load-balancers/
+  new: /server-admin/server-v4.3/operator/managing-load-balancers/
 
 - old: /server/v4.3/operator/managing-orbs/
-  new: /server-admin-v4.3/operator/managing-orbs/
+  new: /server-admin/server-v4.3/operator/managing-orbs/
 
 - old: /server/v4.3/operator/managing-user-accounts/
-  new: /server-admin-v4.3/operator/managing-user-accounts/
+  new: /server-admin/server-v4.3/operator/managing-user-accounts/
 
 - old: /server/v4.3/operator/operator-overview/
-  new: /server-admin-v4.3/operator/operator-overview/
+  new: /server-admin/server-v4.3/operator/operator-overview/
 
 - old: /server/v4.3/operator/troubleshooting-and-support/
-  new: /server-admin-v4.3/operator/troubleshooting-and-support/
+  new: /server-admin/server-v4.3/operator/troubleshooting-and-support/
 
 - old: /server/v4.3/operator/upgrade-mongo/
-  new: /server-admin-v4.3/operator/upgrade-mongo/
+  new: /server-admin/server-v4.3/operator/upgrade-mongo/
 
 - old: /server/v4.3/operator/usage-data-collection/
-  new: /server-admin-v4.3/operator/usage-data-collection/
+  new: /server-admin/server-v4.3/operator/usage-data-collection/
 
 - old: /server/v4.3/operator/user-authentication/
-  new: /server-admin-v4.3/operator/user-authentication/
+  new: /server-admin/server-v4.3/operator/user-authentication/
 
 - old: /server/v4.3/overview/circleci-server-overview/
-  new: /server-admin-v4.3/overview/circleci-server-overview/
+  new: /server-admin/server-v4.3/overview/circleci-server-overview/
 
 - old: /server/v4.3/overview/release-notes/
-  new: /server-admin-v4.3/overview/release-notes/
+  new: /server-admin/server-v4.3/overview/release-notes/
 
 - old: /server/v4.4/air-gapped-installation/additional-considerations/
-  new: /server-admin-v4.4/air-gapped-installation/additional-considerations/
+  new: /server-admin/server-v4.4/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.4/air-gapped-installation/example-values/
-  new: /server-admin-v4.4/air-gapped-installation/example-values/
+  new: /server-admin/server-v4.4/air-gapped-installation/example-values/
 
 - old: /server/v4.4/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin-v4.4/air-gapped-installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.4/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.4/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin-v4.4/air-gapped-installation/phase-2-configure-object-storage/
+  new: /server-admin/server-v4.4/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.4/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin-v4.4/air-gapped-installation/phase-3-install-circleci-server/
+  new: /server-admin/server-v4.4/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.4/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin-v4.4/air-gapped-installation/phase-4-configure-nomad-clients/
+  new: /server-admin/server-v4.4/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.4/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin-v4.4/air-gapped-installation/phase-5-test-your-installation/
+  new: /server-admin/server-v4.4/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.4/installation/hardening-your-cluster/
-  new: /server-admin-v4.4/installation/hardening-your-cluster/
+  new: /server-admin/server-v4.4/installation/hardening-your-cluster/
 
 - old: /server/v4.4/installation/installation-reference/
-  new: /server-admin-v4.4/installation/installation-reference/
+  new: /server-admin/server-v4.4/installation/installation-reference/
 
 - old: /server/v4.4/installation/installing-server-behind-a-proxy/
-  new: /server-admin-v4.4/installation/installing-server-behind-a-proxy/
+  new: /server-admin/server-v4.4/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.4/installation/phase-1-prerequisites/
-  new: /server-admin-v4.4/installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.4/installation/phase-1-prerequisites/
 
 - old: /server/v4.4/installation/phase-2-core-services/
-  new: /server-admin-v4.4/installation/phase-2-core-services/
+  new: /server-admin/server-v4.4/installation/phase-2-core-services/
 
 - old: /server/v4.4/installation/phase-3-execution-environments/
-  new: /server-admin-v4.4/installation/phase-3-execution-environments/
+  new: /server-admin/server-v4.4/installation/phase-3-execution-environments/
 
 - old: /server/v4.4/installation/phase-4-post-installation/
-  new: /server-admin-v4.4/installation/phase-4-post-installation/
+  new: /server-admin/server-v4.4/installation/phase-4-post-installation/
 
 - old: /server/v4.4/installation/upgrade-server/
-  new: /server-admin-v4.4/installation/upgrade-server/
+  new: /server-admin/server-v4.4/installation/upgrade-server/
 
 - old: /server/v4.4/operator/application-lifecycle/
-  new: /server-admin-v4.4/operator/application-lifecycle/
+  new: /server-admin/server-v4.4/operator/application-lifecycle/
 
 - old: /server/v4.4/operator/backup-and-restore/
-  new: /server-admin-v4.4/operator/backup-and-restore/
+  new: /server-admin/server-v4.4/operator/backup-and-restore/
 
 - old: /server/v4.4/operator/circleci-server-security-features/
-  new: /server-admin-v4.4/operator/circleci-server-security-features/
+  new: /server-admin/server-v4.4/operator/circleci-server-security-features/
 
 - old: /server/v4.4/operator/configuring-external-services/
-  new: /server-admin-v4.4/operator/configuring-external-services/
+  new: /server-admin/server-v4.4/operator/configuring-external-services/
 
 - old: /server/v4.4/operator/expanding-internal-database-volumes/
-  new: /server-admin-v4.4/operator/expanding-internal-database-volumes/
+  new: /server-admin/server-v4.4/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.4/operator/faq/
-  new: /server-admin-v4.4/operator/faq/
+  new: /server-admin/server-v4.4/operator/faq/
 
 - old: /server/v4.4/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin-v4.4/operator/introduction-to-nomad-cluster-operation/
+  new: /server-admin/server-v4.4/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.4/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin-v4.4/operator/manage-virtual-machines-with-machine-provisioner/
+  new: /server-admin/server-v4.4/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.4/operator/managing-build-artifacts/
-  new: /server-admin-v4.4/operator/managing-build-artifacts/
+  new: /server-admin/server-v4.4/operator/managing-build-artifacts/
 
 - old: /server/v4.4/operator/managing-load-balancers/
-  new: /server-admin-v4.4/operator/managing-load-balancers/
+  new: /server-admin/server-v4.4/operator/managing-load-balancers/
 
 - old: /server/v4.4/operator/managing-orbs/
-  new: /server-admin-v4.4/operator/managing-orbs/
+  new: /server-admin/server-v4.4/operator/managing-orbs/
 
 - old: /server/v4.4/operator/managing-user-accounts/
-  new: /server-admin-v4.4/operator/managing-user-accounts/
+  new: /server-admin/server-v4.4/operator/managing-user-accounts/
 
 - old: /server/v4.4/operator/operator-overview/
-  new: /server-admin-v4.4/operator/operator-overview/
+  new: /server-admin/server-v4.4/operator/operator-overview/
 
 - old: /server/v4.4/operator/troubleshooting-and-support/
-  new: /server-admin-v4.4/operator/troubleshooting-and-support/
+  new: /server-admin/server-v4.4/operator/troubleshooting-and-support/
 
 - old: /server/v4.4/operator/upgrade-mongo/
-  new: /server-admin-v4.4/operator/upgrade-mongo/
+  new: /server-admin/server-v4.4/operator/upgrade-mongo/
 
 - old: /server/v4.4/operator/usage-data-collection/
-  new: /server-admin-v4.4/operator/usage-data-collection/
+  new: /server-admin/server-v4.4/operator/usage-data-collection/
 
 - old: /server/v4.4/operator/user-authentication/
-  new: /server-admin-v4.4/operator/user-authentication/
+  new: /server-admin/server-v4.4/operator/user-authentication/
 
 - old: /server/v4.4/overview/circleci-server-overview/
-  new: /server-admin-v4.4/overview/circleci-server-overview/
+  new: /server-admin/server-v4.4/overview/circleci-server-overview/
 
 - old: /server/v4.4/overview/release-notes/
-  new: /server-admin-v4.4/overview/release-notes/
+  new: /server-admin/server-v4.4/overview/release-notes/
 
 - old: /server/v4.5/air-gapped-installation/additional-considerations/
-  new: /server-admin-v4.5/air-gapped-installation/additional-considerations/
+  new: /server-admin/server-v4.5/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.5/air-gapped-installation/example-values/
-  new: /server-admin-v4.5/air-gapped-installation/example-values/
+  new: /server-admin/server-v4.5/air-gapped-installation/example-values/
 
 - old: /server/v4.5/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin-v4.5/air-gapped-installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.5/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.5/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin-v4.5/air-gapped-installation/phase-2-configure-object-storage/
+  new: /server-admin/server-v4.5/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.5/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin-v4.5/air-gapped-installation/phase-3-install-circleci-server/
+  new: /server-admin/server-v4.5/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.5/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin-v4.5/air-gapped-installation/phase-4-configure-nomad-clients/
+  new: /server-admin/server-v4.5/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.5/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin-v4.5/air-gapped-installation/phase-5-test-your-installation/
+  new: /server-admin/server-v4.5/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.5/installation/hardening-your-cluster/
-  new: /server-admin-v4.5/installation/hardening-your-cluster/
+  new: /server-admin/server-v4.5/installation/hardening-your-cluster/
 
 - old: /server/v4.5/installation/installation-reference/
-  new: /server-admin-v4.5/installation/installation-reference/
+  new: /server-admin/server-v4.5/installation/installation-reference/
 
 - old: /server/v4.5/installation/installing-server-behind-a-proxy/
-  new: /server-admin-v4.5/installation/installing-server-behind-a-proxy/
+  new: /server-admin/server-v4.5/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.5/installation/phase-1-prerequisites/
-  new: /server-admin-v4.5/installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.5/installation/phase-1-prerequisites/
 
 - old: /server/v4.5/installation/phase-2-core-services/
-  new: /server-admin-v4.5/installation/phase-2-core-services/
+  new: /server-admin/server-v4.5/installation/phase-2-core-services/
 
 - old: /server/v4.5/installation/phase-3-execution-environments/
-  new: /server-admin-v4.5/installation/phase-3-execution-environments/
+  new: /server-admin/server-v4.5/installation/phase-3-execution-environments/
 
 - old: /server/v4.5/installation/phase-4-post-installation/
-  new: /server-admin-v4.5/installation/phase-4-post-installation/
+  new: /server-admin/server-v4.5/installation/phase-4-post-installation/
 
 - old: /server/v4.5/installation/upgrade-server/
-  new: /server-admin-v4.5/installation/upgrade-server/
+  new: /server-admin/server-v4.5/installation/upgrade-server/
 
 - old: /server/v4.5/operator/application-lifecycle/
-  new: /server-admin-v4.5/operator/application-lifecycle/
+  new: /server-admin/server-v4.5/operator/application-lifecycle/
 
 - old: /server/v4.5/operator/backup-and-restore/
-  new: /server-admin-v4.5/operator/backup-and-restore/
+  new: /server-admin/server-v4.5/operator/backup-and-restore/
 
 - old: /server/v4.5/operator/circleci-server-security-features/
-  new: /server-admin-v4.5/operator/circleci-server-security-features/
+  new: /server-admin/server-v4.5/operator/circleci-server-security-features/
 
 - old: /server/v4.5/operator/configuring-external-services/
-  new: /server-admin-v4.5/operator/configuring-external-services/
+  new: /server-admin/server-v4.5/operator/configuring-external-services/
 
 - old: /server/v4.5/operator/expanding-internal-database-volumes/
-  new: /server-admin-v4.5/operator/expanding-internal-database-volumes/
+  new: /server-admin/server-v4.5/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.5/operator/faq/
-  new: /server-admin-v4.5/operator/faq/
+  new: /server-admin/server-v4.5/operator/faq/
 
 - old: /server/v4.5/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin-v4.5/operator/introduction-to-nomad-cluster-operation/
+  new: /server-admin/server-v4.5/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.5/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin-v4.5/operator/manage-virtual-machines-with-machine-provisioner/
+  new: /server-admin/server-v4.5/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.5/operator/managing-build-artifacts/
-  new: /server-admin-v4.5/operator/managing-build-artifacts/
+  new: /server-admin/server-v4.5/operator/managing-build-artifacts/
 
 - old: /server/v4.5/operator/managing-load-balancers/
-  new: /server-admin-v4.5/operator/managing-load-balancers/
+  new: /server-admin/server-v4.5/operator/managing-load-balancers/
 
 - old: /server/v4.5/operator/managing-orbs/
-  new: /server-admin-v4.5/operator/managing-orbs/
+  new: /server-admin/server-v4.5/operator/managing-orbs/
 
 - old: /server/v4.5/operator/managing-user-accounts/
-  new: /server-admin-v4.5/operator/managing-user-accounts/
+  new: /server-admin/server-v4.5/operator/managing-user-accounts/
 
 - old: /server/v4.5/operator/operator-overview/
-  new: /server-admin-v4.5/operator/operator-overview/
+  new: /server-admin/server-v4.5/operator/operator-overview/
 
 - old: /server/v4.5/operator/troubleshooting-and-support/
-  new: /server-admin-v4.5/operator/troubleshooting-and-support/
+  new: /server-admin/server-v4.5/operator/troubleshooting-and-support/
 
 - old: /server/v4.5/operator/upgrade-mongo/
-  new: /server-admin-v4.5/operator/upgrade-mongo/
+  new: /server-admin/server-v4.5/operator/upgrade-mongo/
 
 - old: /server/v4.5/operator/usage-data-collection/
-  new: /server-admin-v4.5/operator/usage-data-collection/
+  new: /server-admin/server-v4.5/operator/usage-data-collection/
 
 - old: /server/v4.5/operator/user-authentication/
-  new: /server-admin-v4.5/operator/user-authentication/
+  new: /server-admin/server-v4.5/operator/user-authentication/
 
 - old: /server/v4.5/overview/circleci-server-overview/
-  new: /server-admin-v4.5/overview/circleci-server-overview/
+  new: /server-admin/server-v4.5/overview/circleci-server-overview/
 
 - old: /server/v4.5/overview/release-notes/
-  new: /server-admin-v4.5/overview/release-notes/
+  new: /server-admin/server-v4.5/overview/release-notes/
 
 - old: /server/v4.6/air-gapped-installation/additional-considerations/
-  new: /server-admin-v4.6/air-gapped-installation/additional-considerations/
+  new: /server-admin/server-v4.6/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.6/air-gapped-installation/example-values/
-  new: /server-admin-v4.6/air-gapped-installation/example-values/
+  new: /server-admin/server-v4.6/air-gapped-installation/example-values/
 
 - old: /server/v4.6/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin-v4.6/air-gapped-installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.6/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.6/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin-v4.6/air-gapped-installation/phase-2-configure-object-storage/
+  new: /server-admin/server-v4.6/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.6/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin-v4.6/air-gapped-installation/phase-3-install-circleci-server/
+  new: /server-admin/server-v4.6/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.6/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin-v4.6/air-gapped-installation/phase-4-configure-nomad-clients/
+  new: /server-admin/server-v4.6/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.6/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin-v4.6/air-gapped-installation/phase-5-test-your-installation/
+  new: /server-admin/server-v4.6/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.6/installation/hardening-your-cluster/
-  new: /server-admin-v4.6/installation/hardening-your-cluster/
+  new: /server-admin/server-v4.6/installation/hardening-your-cluster/
 
 - old: /server/v4.6/installation/installation-reference/
-  new: /server-admin-v4.6/installation/installation-reference/
+  new: /server-admin/server-v4.6/installation/installation-reference/
 
 - old: /server/v4.6/installation/installing-server-behind-a-proxy/
-  new: /server-admin-v4.6/installation/installing-server-behind-a-proxy/
+  new: /server-admin/server-v4.6/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.6/installation/phase-1-prerequisites/
-  new: /server-admin-v4.6/installation/phase-1-prerequisites/
+  new: /server-admin/server-v4.6/installation/phase-1-prerequisites/
 
 - old: /server/v4.6/installation/phase-2-core-services/
-  new: /server-admin-v4.6/installation/phase-2-core-services/
+  new: /server-admin/server-v4.6/installation/phase-2-core-services/
 
 - old: /server/v4.6/installation/phase-3-execution-environments/
-  new: /server-admin-v4.6/installation/phase-3-execution-environments/
+  new: /server-admin/server-v4.6/installation/phase-3-execution-environments/
 
 - old: /server/v4.6/installation/phase-4-post-installation/
-  new: /server-admin-v4.6/installation/phase-4-post-installation/
+  new: /server-admin/server-v4.6/installation/phase-4-post-installation/
 
 - old: /server/v4.6/installation/upgrade-server/
-  new: /server-admin-v4.6/installation/upgrade-server/
+  new: /server-admin/server-v4.6/installation/upgrade-server/
 
 - old: /server/v4.6/operator/application-lifecycle/
-  new: /server-admin-v4.6/operator/application-lifecycle/
+  new: /server-admin/server-v4.6/operator/application-lifecycle/
 
 - old: /server/v4.6/operator/backup-and-restore/
-  new: /server-admin-v4.6/operator/backup-and-restore/
+  new: /server-admin/server-v4.6/operator/backup-and-restore/
 
 - old: /server/v4.6/operator/circleci-server-security-features/
-  new: /server-admin-v4.6/operator/circleci-server-security-features/
+  new: /server-admin/server-v4.6/operator/circleci-server-security-features/
 
 - old: /server/v4.6/operator/configuring-external-services/
-  new: /server-admin-v4.6/operator/configuring-external-services/
+  new: /server-admin/server-v4.6/operator/configuring-external-services/
 
 - old: /server/v4.6/operator/expanding-internal-database-volumes/
-  new: /server-admin-v4.6/operator/expanding-internal-database-volumes/
+  new: /server-admin/server-v4.6/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.6/operator/faq/
-  new: /server-admin-v4.6/operator/faq/
+  new: /server-admin/server-v4.6/operator/faq/
 
 - old: /server/v4.6/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin-v4.6/operator/introduction-to-nomad-cluster-operation/
+  new: /server-admin/server-v4.6/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.6/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin-v4.6/operator/manage-virtual-machines-with-machine-provisioner/
+  new: /server-admin/server-v4.6/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.6/operator/managing-build-artifacts/
-  new: /server-admin-v4.6/operator/managing-build-artifacts/
+  new: /server-admin/server-v4.6/operator/managing-build-artifacts/
 
 - old: /server/v4.6/operator/managing-load-balancers/
-  new: /server-admin-v4.6/operator/managing-load-balancers/
+  new: /server-admin/server-v4.6/operator/managing-load-balancers/
 
 - old: /server/v4.6/operator/managing-orbs/
-  new: /server-admin-v4.6/operator/managing-orbs/
+  new: /server-admin/server-v4.6/operator/managing-orbs/
 
 - old: /server/v4.6/operator/managing-user-accounts/
-  new: /server-admin-v4.6/operator/managing-user-accounts/
+  new: /server-admin/server-v4.6/operator/managing-user-accounts/
 
 - old: /server/v4.6/operator/operator-overview/
-  new: /server-admin-v4.6/operator/operator-overview/
+  new: /server-admin/server-v4.6/operator/operator-overview/
 
 - old: /server/v4.6/operator/troubleshooting-and-support/
-  new: /server-admin-v4.6/operator/troubleshooting-and-support/
+  new: /server-admin/server-v4.6/operator/troubleshooting-and-support/
 
 - old: /server/v4.6/operator/upgrade-mongo/
-  new: /server-admin-v4.6/operator/upgrade-mongo/
+  new: /server-admin/server-v4.6/operator/upgrade-mongo/
 
 - old: /server/v4.6/operator/usage-data-collection/
-  new: /server-admin-v4.6/operator/usage-data-collection/
+  new: /server-admin/server-v4.6/operator/usage-data-collection/
 
 - old: /server/v4.6/operator/user-authentication/
-  new: /server-admin-v4.6/operator/user-authentication/
+  new: /server-admin/server-v4.6/operator/user-authentication/
 
 - old: /server/v4.6/overview/circleci-server-overview/
-  new: /server-admin-v4.6/overview/circleci-server-overview/
+  new: /server-admin/server-v4.6/overview/circleci-server-overview/
 
 - old: /server/v4.6/overview/release-notes/
-  new: /server-admin-v4.6/overview/release-notes/
+  new: /server-admin/server-v4.6/overview/release-notes/
 
 - old: /set-a-nightly-scheduled-pipeline/
   new: /guides/orchestrate/set-a-nightly-scheduled-pipeline/
