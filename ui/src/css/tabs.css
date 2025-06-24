@@ -72,9 +72,14 @@
   padding: 1.25em;
 }
 
-.tablist > ul li,
+.tablist > ul li {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px 8px 0 0;
+}
+
 .tabpanel {
   border: 1px solid #dcdcdc;
+  border-radius: 0 0 8px 8px;
 }
 
 .tablist > ul li {

@@ -574,6 +574,8 @@
   width: auto;
   vertical-align: middle;
   object-fit: contain;
+  border: 1px solid #D4D4D4;
+  border-radius: 8px;
 }
 
 .doc .image:not(.left):not(.right) > img {
@@ -905,7 +907,7 @@
 /* Style listing blocks with titles */
 .doc .listingblock > .title {
   background: var(--pre-title-background);
-  border-radius: 12px 12px 0 0;
+  border-radius: 8px 8px 0 0;
   padding: 0.5em 0.875em;
   margin-bottom: 0;
   position: relative;
@@ -934,17 +936,17 @@
 
 /* When title is collapsed, adjust the border radius */
 .doc .listingblock > .title.collapsed {
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 /* When a title is present, adjust the code block border radius */
 .doc .listingblock > .title + .content pre {
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 8px 8px;
 }
 
-/* When title is not present, use border-radius: 12px for code blocks */
+/* When title is not present, use border-radius: 8px for code blocks */
 .doc .listingblock > .content pre {
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 /* Keep existing position relative for the content */
@@ -1132,12 +1134,10 @@
 }
 
 .doc b.button::before {
-  content: "[";
   padding-right: 0.25em;
 }
 
 .doc b.button::after {
-  content: "]";
   padding-left: 0.25em;
 }
 
