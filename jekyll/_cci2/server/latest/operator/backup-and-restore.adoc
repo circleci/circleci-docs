@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-    - Server v4.7
+    - Server v4.8
     - Server Admin
 ---
 = Backup and restore
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document outlines recommendations for how to back up and restore your CircleCI server v4.7 instance data and state.
+:page-description: This document outlines recommendations for how to back up and restore your CircleCI server v4.8 instance data and state.
 :icons: font
 :toc: macro
 :toc-title:
@@ -15,7 +15,7 @@ contentTags:
 [#overview-backup]
 == Overview
 
-While operating and administering CircleCI server, you will need to consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
+When operating and administering CircleCI server, you will need to consider how to maintain backups and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
 
 CircleCI recommends link:https://velero.io/[Velero] for backup and restore. The benefit of this approach is that it not only restores your application's data,
 but it also restores the state of the Kubernetes cluster and its resources at the time of the backup. CirleCI server supports backup and restore with Velero `1.12`. This document outlines recommendations for how to back up and restore your CircleCI server instance data and state using link:https://velero.io/[Velero].

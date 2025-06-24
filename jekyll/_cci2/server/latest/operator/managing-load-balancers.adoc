@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-    - Server v4.7
+    - Server v4.8
     - Server Admin
 ---
 = Managing load balancers
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this guide to make the frontend load balancer private for CircleCI server v4.7.
+:page-description: Use this guide to make the frontend load balancer private for CircleCI server v4.8.
 :icons: font
 :toc: macro
 :toc-title:

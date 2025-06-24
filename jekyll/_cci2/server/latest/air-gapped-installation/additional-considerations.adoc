@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Additional considerations
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server v4.7.
+:page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server v4.8.
 :icons: font
 :toc: macro
 :toc-title:
@@ -124,7 +124,7 @@ For each `hostname:port` combination, CircleCI server will, during installation,
 
 [#configuring-the-tls-certificates-array]
 === Configuring the TLS certificates array
-Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `values.yaml` file, in the `tls.certificates`  value, as a list of base64 encoded certificates strings.
+Instead of providing a list of `hostname:port` combinations for certificates to import, the public certificate chains of the corresponding TLS certificates to trust can be provided in the `values.yaml` file. Provide the trusted certificate list in the `tls.certificates`  value, as a list of base64 encoded certificates strings.
 
 [source, yaml]
 ----
