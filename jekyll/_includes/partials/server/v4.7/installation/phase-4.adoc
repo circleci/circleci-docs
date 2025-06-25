@@ -1,0 +1,53 @@
+Before you begin with the CircleCI server v4.7 post installation phase, ensure you have run through the following:
+
+ifndef::env-aws[]
+* xref:phase-1-gcp-prerequisites#[Phase 1 GCP – Prerequisites]
+* xref:phase-2-gcp-core-services#[Phase 2 GCP - Core Services Installation]
+* xref:phase-3-gcp-execution-environments#[Phase 3 GCP - Execution Environments Installation]
+endif::env-aws[]
+
+ifndef::env-gcp[]
+* xref:phase-1-aws-prerequisites#[Phase 1 AWS – Prerequisites]
+* xref:phase-2-aws-core-services#[Phase 2 AWS - Core Services Installation]
+* xref:phase-3-aws-execution-environments#[Phase 3 AWS - Execution Environments Installation]
+endif::env-gcp[]
+
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
+
+[#backup-and-restore]
+== Backup and restore
+
+Backups of CircleCI server can be created through link:https://velero.io/[Velero] which is detailed in our xref:../operator/backup-and-restore#[Backup and Restore] documentation.
+
+[#email-notifications]
+== Email notifications
+
+Add email notification support by adding the following to `values.yaml`:
+
+[source,yaml]
+----
+smtp:
+  host: <hostname-of-submission-server>
+  user: <username-for-submission-server>
+  password: <password-for-submission-server
+  port: <mail-port>
+----
+
+[#managing-orbs]
+== Managing orbs
+
+CircleCI server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
+
+* Copying orbs from the public registry.
+* Updating orbs that may have been copied previously.
+* Registering your company's private orbs, if you have any.
+
+For more information and steps to complete these tasks, see the xref:../operator/managing-orbs#[Orbs on server guide].
+
+ifndef::pdf[]
+[#next-steps]
+== Next steps
+
+* xref:hardening-your-cluster#[Hardening Your Cluster]
+* xref:../operator/backup-and-restore#[Backup & Restore]
+endif::[]

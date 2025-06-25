@@ -83,11 +83,6 @@ curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_n
 }
 ```
 
-
-<aside class="notice">
-This is also the payload for the notification webhooks, in which case this object is the value to a key named ‘payload’
-</aside>
-
 **`GET` Request:** Returns the full details for a single job. The response includes all of the fields from the job summary.
 
 

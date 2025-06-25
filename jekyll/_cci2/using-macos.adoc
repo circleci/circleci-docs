@@ -6,7 +6,6 @@ contentTags:
 = Using the macOS execution environment
 :page-layout: classic-docs
 :page-description: "Learn how to configure a your jobs to run in the macOS execution environment."
-:page-liquid:
 :icons: font
 :experimental:
 
@@ -19,12 +18,12 @@ You can use the macOS execution environment to run your xref:jobs-steps#[jobs] i
 jobs:
   build:
     macos:
-      xcode: 14.2.0
-    resource_class: macos.m1.medium.gen1
+      xcode: 16.4.0
+    resource_class: m4pro.medium
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 14.2.0 installed
+      # with Xcode 16.4.0 installed
       - run: xcodebuild -version
 ----
 
@@ -34,35 +33,33 @@ jobs:
 [#supported-xcode-versions-silicon]
 === Supported Xcode versions for Apple silicon
 
-{% include snippets/xcode-silicon-vm.adoc %}
+include::../_includes/partials/execution-resources/xcode-silicon-vm.adoc[]
 
 [#available-resource-classes]
 == Available resource classes
 
-{% include snippets/macos-resource-table.adoc %}
+include::../_includes/partials/execution-resources/macos-resource-table.adoc[]
 
 [source,yaml]
 ----
 jobs:
   build:
     macos:
-      xcode: "14.2.0"
-    resource_class: macos.m1.medium.gen1
+      xcode: 16.4.0
+    resource_class: m4pro.medium
 ----
 
 [#view-resource-usage]
 === View resource usage
 
-{% include snippets/resource-class-view.adoc %}
+include::../_includes/partials/execution-resources/resource-class-view.adoc[]
 
 [#using-the-macos-executor]
 == Image update cycle for the macOS executor
 
 Each `macos` job is run in a fresh virtual machine, using a specified version of macOS. CircleCI builds and deploys a new image each time a new stable, or beta, version of Xcode is released by Apple. The contents of build images remain unchanged in most circumstances. However, in exceptional circumstances CircleCI might be forced to re-build a container. CircleCI's goal is to keep your execution environment stable, and to allow you to opt-in to newer macOS environments by setting the `xcode` key in your `.circleci/config.yml` file.
 
-Periodically, CircleCI will update the version of macOS each image includes to ensure the execution environment is as up to date as possible. When a new major version of macOS is released, CircleCI will update once the new major version of Xcode reaches the `xx.2` release. This ensures the execution environment is kept stable.
-
-CircleCI will announce the availability of new macOS containers, including Xcode betas, in the announcements section of our link:https://discuss.circleci.com/c/announcements[Discuss site].
+CircleCI will announce the availability of new macOS images, including Xcode betas, on our link:https://circleci.com/changelog[changelog].
 
 [#beta-image-support]
 === Beta image support
@@ -143,9 +140,9 @@ Then call the `preboot-simulator` command, as shown in the example below:
 ----
 steps:
   - macos/preboot-simulator:
-      version: "15.0"
+      version: "18.5"
       platform: "iOS"
-      device: "iPhone 13 Pro Max"
+      device: "iPhone 16 Pro Max"
 ----
 
 It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
@@ -156,10 +153,10 @@ If you require an iPhone simulator that is paired with an Apple Watch simulator,
 ----
 steps:
   - macos/preboot-paired-simulator:
-      iphone-device: "iPhone 13"
-      iphone-version: "15.0"
-      watch-device: "Apple Watch Series 7 - 45mm"
-      watch-version: "8.0"
+      iphone-device: "iPhone 16"
+      iphone-version: "18.5"
+      watch-device: "Apple Watch Series 10 - 45mm"
+      watch-version: "11.5"
 ----
 
 NOTE: It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
@@ -208,7 +205,7 @@ To update CocoaPods to the latest stable version, simply update the Ruby gem wit
 sudo gem install cocoapods
 ----
 
-A further recommendation is to check your link:http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. This will ensure that you have a deterministic, reproducible build.
+A further recommendation is to check your link:https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control[Pods directory into source control]. This will ensure that you have a deterministic, reproducible build.
 
 WARNING: The previous S3 mirror provided by CircleCI for the CocoaPods Spec repository is no longer being maintained or updated since the release of CocoaPods 1.8. It will remain available to prevent existing jobs breaking, however, switching to the CDN method described above is recommended.
 
@@ -227,7 +224,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 14.2.0
+      xcode: 16.4.0
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -248,7 +245,7 @@ The following common test tools are known to work well on CircleCI:
 * link:https://developer.apple.com/library/ios/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/01-introduction.html[XCTest]
 * link:https://github.com/kiwi-bdd/Kiwi[Kiwi]
 * link:https://github.com/kif-framework/KIF[KIF]
-* link:http://appium.io/[Appium]
+* link:https://appium.io/[Appium]
 
 [#react-native-projects]
 === React Native projects
@@ -266,7 +263,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 14.2.0
+      xcode: 16.4.0
     environment:
       FL_OUTPUT_DIR: output
 

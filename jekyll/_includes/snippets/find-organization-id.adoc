@@ -1,6 +1,0 @@
-[NOTE]
-====
-To find your organization/user ID, select **Organization Settings** in the CircleCI web app side bar.
-
-image:org-id.png[screenshot showing where to find your organization ID]
-====

@@ -3,8 +3,7 @@ description: "A how to guide for using the Slack orb to notify a Slack channel o
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 document-type:
 - How-To
 ---
@@ -156,4 +155,4 @@ workflows:
 [#next-steps]
 == Next steps
 
-Find out about authoring your own orbs on the <<orb-author-intro#,Introduction to Authoring Orbs>> page.
+Find out about authoring your own orbs on the xref:orb-author#[Introduction to Authoring Orbs] page.

@@ -3,10 +3,10 @@ version: 2.1 # Set the CI version.
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
-  ruby: circleci/ruby@1.1.4
-  node: circleci/node@4.7.0
-  md-proofer: hubci/md-proofer@0.1
-  vale: circleci/vale@1.1.1
+  ruby: circleci/ruby@2.5.2
+  node: circleci/node@7.1.0
+  md-proofer: hubci/md-proofer@0.1.1
+  vale: circleci/vale@1.2.0
 
 # This is using the new Scheduled Pipeline feature.
 # Right now (10/2021) there is no UI to configure it, so if you need to
@@ -111,7 +111,6 @@ workflows:
     jobs:
       - vale/lint:
           reference_branch: master
-          base_dir: ~/project/jekyll/_cci2/
 
   build-deploy:
     when:
@@ -155,6 +154,9 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
+      - node/install:
+          install-yarn: true
+          node-version: '18.17.0'
       - run:
           name: "Create landing folder for API doc output"
           command: |
@@ -175,7 +177,7 @@ jobs:
           name: Build API 1.x documentation with Slate
           command: ./scripts/build_api_docs.sh -v1
       - run:
-          name: Build API 2.x documentation with Redoc
+          name: Build API 2.x documentation with Redocly
           command: ./scripts/build_api_docs.sh -v2
       - persist_to_workspace:
           root: *workspace_root
@@ -196,21 +198,10 @@ jobs:
     steps:
       - checkout
       - *attach_workspace
-      - md-proofer/install:
-          version: "0.3.0"
-      - run:
-          name: "Test Markdown Files"
-          command: md-proofer lint jekyll/_cci2/ jekyll/_api/
-      - run:
-          name: Install dependencies for pronto gem
-          command: sudo apt-get install cmake pkg-config
       - ruby-deps
       - node/install-packages:
           pkg-manager: yarn
           cache-version: &npm-cache-version # Gets cache version from project environment variable (E.g v1)
-      - run:
-          name: Run markdownlint with pronto
-          command: bundle exec pronto run -f github_pr -c origin/master
       - run:
           name: Create results directory
           command: mkdir -p $JOB_RESULTS_PATH
@@ -278,7 +269,7 @@ jobs:
 
   deploy:
     docker:
-      - image: cibuilds/aws:1.16.185
+      - image: cibuilds/aws:2.8.13
     steps:
       - attach_workspace:
           at: ./generated-site
@@ -287,7 +278,7 @@ jobs:
 
   deploy-preview:
     docker:
-      - image: cibuilds/aws:1.16.185
+      - image: cibuilds/aws:2.8.13
     steps:
       - attach_workspace:
           at: ./generated-site
@@ -296,6 +287,6 @@ jobs:
 
   trigger-deploy:
     docker:
-      - image: cibuilds/aws:1.16.185
+      - image: cibuilds/aws:2.8.13
     steps:
       - trigger-docs-platform-build

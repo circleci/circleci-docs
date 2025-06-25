@@ -555,7 +555,7 @@ set region: "`your-aws-region`".
 |object_storage.s3.endpoint |string
 |`+"https://s3.us-east-1.amazonaws.com"+` |API endpoint for S3. If in
 AWS us-west-2, for example, this would be the regional endpoint
-http://s3.us-west-2.amazonaws.com. If using S3 compatible storage,
+https://s3.us-west-2.amazonaws.com. If using S3 compatible storage,
 specify the API endpoint of your object storage server
 
 |orb_service.replicas |int |`+1+` |Number of replicas to deploy for the

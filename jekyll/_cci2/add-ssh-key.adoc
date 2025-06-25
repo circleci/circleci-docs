@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Add additional SSH keys to CircleCI
 :page-layout: classic-docs
@@ -32,9 +31,10 @@ See the following VCS-specific docs for additional details on creating SSH keys:
 
 CircleCI cannot decrypt SSH keys, therefore every new key must have an empty passphrase. The below examples are for macOS.
 
-. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See link:https://www.ssh.com/ssh/keygen/[Secure Shell documentation] for additional details.
-. In the CircleCI application, go to your project's settings by clicking the *Project Settings* button (top-right on the *Pipelines* page of the project).
-. On the *Project Settings* page, select *SSH Keys*.
+include::../_includes/partials/app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
+. In the sidebar menu, select *SSH Keys*.
 . Scroll down to the *Additional SSH Keys* section.
 +
 If you have a GitLab integration, you will find that an additional SSH key already exists. This was created automatically by CircleCI during the project creation process. This key is used to checkout your code so it should not be removed.
@@ -48,7 +48,7 @@ If you have a GitLab integration, you will find that an additional SSH key alrea
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you *must* use the `add_ssh_keys` key to actually add keys to a container.
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add_ssh_keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint can be SHA256 or MD5. SHA256 fingerprints should be prefixed with `SHA256:` and MD5 fingerprints should include the colons between character pairs. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
+To add a set of SSH keys to a container, use the `add_ssh_keys` xref:configuration-reference#add-ssh-keys[special step] within the appropriate xref:jobs-steps#[job] in your configuration file. The fingerprint can be SHA256 or MD5. SHA256 fingerprints should be prefixed with `SHA256:` and MD5 fingerprints should include the colons between character pairs. When you add your key to CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the SHA256 fingerprint will be visible.
 
 CAUTION: **Using server?** Only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 

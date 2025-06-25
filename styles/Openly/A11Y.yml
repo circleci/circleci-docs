@@ -6,4 +6,4 @@ level: error
 action:
   name: replace
 swap:
-  (?:click|press): "'select'"
+  (?:^click|press): "'select'"

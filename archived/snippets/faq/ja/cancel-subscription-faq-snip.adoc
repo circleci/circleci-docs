@@ -1,0 +1,34 @@
+[#how-do-i-cancel-a-performance-plan-subscription]
+=== Performance プランを解約するにはどうすればよいですか？
+
+ご利用中の xref:plan-performance#[Performance プラン]を解約するには、CircleCI 組織の管理者アクセスが必要です。
+
+. link:https://app.circleci.com/[CircleCI Web アプリ]で、左側のサイドバーにある **[Plan (プラン)]** をクリックして **[Billing (請求)]** タブを開きます。
+. ページ下部にある [Looking to cancel your plan? (プランの解約)] をクリックします。
+. **[Cancel (解約)]** をクリックします。 画面の指示に従って解約を完了します。
+
+[#how-do-i-know-if-i-am-an-org-admin-in-circleci]
+=== 自分が CircleCI 組織の管理者であるかどうかを確認するにはどうすればよいですか？
+
+GitHub ユーザーの場合は、アカウントに GitHub 組織の "Owner (所有者)" ロールが付与されます。
+
+Bitbucket ユーザーの場合は、アカウントに Bitbucket リポジトリの "Admin (管理者)" 権限が付与されます。
+
+GitLab ユーザーの場合は、CircleCI Web アプリの xref:gitlab-integration#organization-settings-people[**[Organization Settings (組織設定)]> [People (メンバー)]**] で、アカウントが "Org Admin (組織管理者)" として表示されます。
+
+[#what-happens-upon-cancelling-a-performance-plan-subscription]
+=== Performance プランを解約するとどうなりますか？
+
+現在の請求期間が終わるまでは、引き続き CircleCI Web アプリの Performance プラン設定にアクセス可能であり、クレジットもご利用いただけます。 請求期間が終了すると、組織のプランが xref:plan-free#[Free プラン]に切り替わり、1 か月に使用可能なクレジットの上限が 30,000 になります。
+
+なお、現在の請求期間が終了すると、請求書にアクセスできなくなります。 その前に請求書をダウンロードするようご注意ください。
+
+[#what-happens-to-unused-credits-if-a-plan-is-cancelled]
+=== プランを解約した場合、未使用のクレジットはどうなりますか？
+
+請求期間の終了時点で未使用のクレジットは失われます。返金の対象にはなりません。
+
+[#is-it-possible-to-reactivate-the-performance-plan-after-cancelling-the-subscription]
+=== Performance プランの解約後に再び有効化することはできますか？
+
+はい。CircleCI Web アプリの **[Plan (プラン)] > [Overview (概要)]** で、いつでも Performance プランにご登録いただけます。

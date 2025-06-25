@@ -1,0 +1,34 @@
+//== CircleCI web app installation: pre-steps
+In order to install self-hosted runners, you will need to create a namespace and resource class token. To create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
+
+You can view your installed runners on the inventory page, by clicking *Self-Hosted Runners* on the left navigation.
+
+. On the https://app.circleci.com/[CircleCI web app], navigate to *Self-Hosted Runners* and select btn:[Create Resource Class].
++
+image::runner/runner-ui-step-one.png[Runner set up, step one - Get started]
+
+. Next, you will create a custom xref:resource-class-overview#[resource class] to use when configuring jobs to use your self-hosted runners. If this is your organization's first time using self-hosted runners. You will need to create or enter a namespace. If your organization already creates orbs, do not create a new namespace, but instead enter the namespace your organization uses for orbs here too. Enter aname for your self-hosted runner resource class.
++
+TIP: *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
++
+image::runner/runner-ui-step-two.png[Runner set up, step two - Create a namespace and resource class]
+
+. Copy and save the resource class token. Self-hosted runners use this token to claim work for the associated resource class.
++
+CAUTION: The token cannot be retrieved again, be sure to store it safely.
++
+image::runner/runner-ui-step-three.png[Runner set up, step three - Create a resource class token]
+
+ifdef::container[]
++
+// Display the following step for container runner installation only
+. Select the **Container** tab and continue on to the container runner installation steps below.
++
+endif::[]
+
+ifdef::machine[]
++
+// Display the following step for machine runner installation only
+. Select the **Machine** tab and progress on to the platform-specific instructions in the next section of this installation guide.
++
+endif::[]

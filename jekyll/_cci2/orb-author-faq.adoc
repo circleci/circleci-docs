@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Orb author FAQ
 :page-layout: classic-docs
@@ -17,7 +16,7 @@ This document describes various questions and technical issues that you may find
 [#orb-author-faqs]
 == FAQs
 
-include::../_includes/snippets/faq/orb-author-faq-snip.adoc[]
+include::../_includes/partials/faq/orb-author-faq-snip.adoc[]
 
 [#see-also]
 == See also

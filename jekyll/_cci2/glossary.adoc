@@ -2,8 +2,7 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Glossary
 :page-layout: classic-docs
@@ -59,7 +58,7 @@ All the containers being run by an <<#executor,executor>> for the current job.
 [#orbs]
 == Orbs
 
-<<orb-concepts#,Orbs>> are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it easy to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
+<<orb-concepts#,Orbs>> are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
 
 [#owner]
 == Owner
@@ -97,7 +96,7 @@ A feature that enables building, running, and pushing images to Docker registrie
 
 [#resource-class]
 == Resource class
-A configuration option for specifying compute resource sizing for a job. Also used as a label to identify a pool of self-hosted runners and to configure a job to run on a self-hosted runner from that pool. Read more on the link:/docs/resource-class-overview[resource class overview] page.
+A configuration option for specifying compute resource sizing for a job. Also used as a label to identify a pool of self-hosted runners and to configure a job to run on a self-hosted runner from that pool. Read more on the xref:resource-class-overview#[resource class overview] page.
 
 [#step]
 == Step

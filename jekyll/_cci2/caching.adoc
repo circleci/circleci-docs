@@ -2,19 +2,17 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = Caching dependencies
 :page-description: This document is a guide to caching dependencies in CircleCI pipelines.
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 Caching is one of the most effective ways to make jobs faster on CircleCI. By reusing the data from previous jobs, you also reduce the cost of fetch operations. After an initial job run, subsequent instances of the job run faster, as you are not redoing work.
 
-image::/docs/assets/img/docs/caching-dependencies-overview.png[caching data flow]
+image::caching-dependencies-overview.png[caching data flow]
 
 Caching is useful with *package dependency managers* such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` need only download new or updated dependencies, rather than downloading everything on each build.
 
@@ -48,7 +46,7 @@ Caching is about achieving a balance between reliability and getting maximum per
 [#saving-cache]
 === Saving cache
 
-CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the xref:configuration-reference#save_cache[save cache section] of the Configuring CircleCI document for additional examples.
+CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the xref:configuration-reference#savecache[save cache section] of the Configuring CircleCI document for additional examples.
 
 To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
@@ -65,7 +63,7 @@ To save a cache of a file or directory, add the `save_cache` step to a job in yo
 CircleCI imposes a 900-character limit on the length of a `key`. Be sure to keep your cache keys under this maximum.
 The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
 
-NOTE: Unlike the special step xref:configuration-reference#persist_to_workspace[`persist_to_workspace`], neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
+NOTE: Unlike the special step xref:configuration-reference#persisttoworkspace[`persist_to_workspace`], neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 [#restoring-cache]
 === Restoring cache
@@ -73,8 +71,6 @@ NOTE: Unlike the special step xref:configuration-reference#persist_to_workspace[
 CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project and retrieval is prefix-matched. The cache is restored from the first matching key. If there are multiple matches, the most recently generated cache is used.
 
 In the example below, two keys are provided:
-
-{% raw %}
 
 [,yaml]
 ----
@@ -88,11 +84,9 @@ In the example below, two keys are provided:
             - v1-npm-deps-
 ----
 
-{% endraw %}
-
 Because the second key is less specific than the first, it is more likely there will be differences between the current state and the most recently generated cache. When a dependency tool runs, it would discover outdated dependencies and update them. This is referred to as a *partial cache restore*.
 
-Each line in the `keys:` list manages _one cache_ (each line does *not* correspond to its own cache). The list of keys {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} and `v1-npm-deps-`), in this example, represent a *single* cache. When it is time to restore the cache, CircleCI first validates the cache based on the first (and most specific) key, and then steps through the other keys looking for any other cache key changes.
+Each line in the `keys:` list manages _one cache_ (each line does *not* correspond to its own cache). The list of keys (`v1-npm-deps-{{ checksum "package-lock.json" }}` and `v1-npm-deps-`), in this example, represent a *single* cache. When it is time to restore the cache, CircleCI first validates the cache based on the first (and most specific) key, and then steps through the other keys looking for any other cache key changes.
 
 The first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`. If this file changed in your commit, CircleCI would see a new cache key.
 
@@ -106,8 +100,6 @@ link:https://yarnpkg.com/[Yarn] is an open-source package manager for JavaScript
 NOTE: Yarn 2.x comes with the ability to do link:https://yarnpkg.com/features/zero-installs[Zero Installs]. If you are using Zero Installs, you should not need to do any special caching within CircleCI.
 
 If you are using Yarn 2.x _without_ Zero Installs, you can do something like the following:
-
-{% raw %}
 
 [,yaml]
 ----
@@ -127,11 +119,7 @@ If you are using Yarn 2.x _without_ Zero Installs, you can do something like the
             - .yarn/unplugged
 ----
 
-{% endraw %}
-
 If you are using Yarn 1.x, you can do something like the following:
-
-{% raw %}
 
 [,yaml]
 ----
@@ -149,8 +137,6 @@ If you are using Yarn 1.x, you can do something like the following:
           paths:
             - ~/.cache/yarn
 ----
-
-{% endraw %}
 
 [#caching-and-open-source]
 == Caching and open source
@@ -173,8 +159,6 @@ image::/docs/assets/img/docs/cache_deps.png[Caching Dependencies]
 We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
 Example of caching `pip` dependencies:
-
-{% raw %}
 
 [,yaml]
 ----
@@ -199,10 +183,8 @@ jobs:
             - "venv"
 ----
 
-{% endraw %}
-
 Make note of the use of a `checksum` in the cache `key`. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_, and so the cache will be updated accordingly. In the above example, the
-xref:configuration-reference#restore_cache[`restore_cache`] example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
+xref:configuration-reference#restorecache[`restore_cache`] example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
 [#writing-to-the-cache-in-workflows]
 == Writing to the cache in workflows
@@ -218,14 +200,14 @@ Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: `+{Job1, Job
 
 In a run of the workflow, Job3 may use the cache written by Job1 _or_ Job2. Since caches are immutable, this would be whichever job saved its cache first.
 
-This is usually undesirable, because the results are not deterministic. Part of the result depends on chance.
+A caching scenario like this is usually undesirable, because the results are not deterministic. Part of the result depends on chance.
 
 You can make this workflow deterministic by changing the job dependencies. For example, make Job1 and Job2 write to different caches, and Job3 loads from only one. Or ensure there can be only one ordering: `+Job1 -> Job2 -> Job3+`.
 
 [#caching-race-condition-example-2]
 === Caching race condition example 2
 
-There are more complex cases where jobs can save using a dynamic key like {% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} and restore using a partial key match like `node-cache-`.
+A more complex caching example could be using a dynamic key, for example, `node-cache-{{ checksum "package-lock.json" }}` and restoring using a partial key match, for example, `node-cache-`.
 
 A race condition is still possible, but the details may change. For instance, the downstream job uses the cache from the upstream job that ran last.
 
@@ -234,14 +216,12 @@ Another race condition is possible when sharing caches between jobs. Consider a 
 [#using-caching-in-monorepos]
 == Using caching in monorepos
 
-There are many different approaches to utilizing caching in monorepos. The following approach can be used whenever you need to manage a shared cache based on multiple files in different parts of your monorepo.
+The following example is one approach to managing a shared cache based on multiple files in different parts of your monorepo.
 
 [#creating-and-building-a-concatenated-package-lock-file]
 === Creating and building a concatenated `package-lock` file
 
 . Add custom command to config:
-+
-{% raw %}
 +
 [,yaml]
 ----
@@ -257,12 +237,8 @@ commands:
           command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
 
 ----
-+
-{% endraw %}
 
 . Use custom command in build to generate the concatenated `package-lock` file:
-+
-{% raw %}
 +
 [,yaml]
 ----
@@ -276,8 +252,7 @@ commands:
             - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
             - v3-deps
 ----
-+
-{% endraw %}
+
 
 [#managing-caches]
 == Managing caches
@@ -318,7 +293,7 @@ A cache key is a _user-defined_ string that corresponds to a data cache. A cache
 
 [,shell]
 ----
-{% raw %}myapp-{{ checksum "package-lock.json" }}{% endraw %}
+myapp-{{ checksum "package-lock.json" }}
 ----
 
 The above example outputs a unique string to represent this key. The example is using a link:https://en.wikipedia.org/wiki/Checksum[checksum] to create a unique string that represents the contents of a `package-lock.json` file.
@@ -338,9 +313,9 @@ The first step is to decide when a cache will be saved or restored by using a ke
 
 The following are examples of caching strategies for different goals:
 
-* {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - Cache is regenerated every time something is changed in `package-lock.json` file. Different branches of this project generate the same cache key.
-* {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - Cache is regenerated every time something is changed in `package-lock.json` file. Different branches of this project generate separate cache keys.
-* {% raw %}`myapp-{{ epoch }}`{% endraw %} - Every build generates separate cache keys.
+* `myapp-{{ checksum "package-lock.json" }}` - Cache is regenerated every time something is changed in `package-lock.json` file. Different branches of this project generate the same cache key.
+* `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}` - Cache is regenerated every time something is changed in `package-lock.json` file. Different branches of this project generate separate cache keys.
+* `myapp-{{ epoch }}` - Every build generates separate cache keys.
 
 During step execution, the templates above are replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
 
@@ -349,25 +324,25 @@ During step execution, the templates above are replaced by runtime values and us
 |===
 | Template | Description
 
-| {% raw %}`{{ checksum "filename" }}`{% endraw %}
+| `{{ checksum "filename" }}`
 | A base64 encoded SHA256 hash of a given filename, so that a new cache key is generated if the file changes. This should be a file committed in your repository. Consider using dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache is saved under a cache key that is different from the file used at `restore_cache` time.
 
-| {% raw %}`{{ .Branch }}`{% endraw %}
+| `{{ .Branch }}`
 | The VCS branch currently being built.
 
-| {% raw %}`{{ .BuildNum }}`{% endraw %}
+| `{{ .BuildNum }}`
 | The CircleCI job number for this build.
 
-| {% raw %}`{{ .Revision }}`{% endraw %}
+| `{{ .Revision }}`
 | The VCS revision currently being built.
 
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %}
+| `{{ .Environment.variableName }}`
 | The environment variable `variableName` (supports any environment variable xref:env-vars#[exported by CircleCI] or added to a specific xref:contexts#[Context], not any arbitrary environment variable).
 
-| {% raw %}`{{ epoch }}`{% endraw %}
+| `{{ epoch }}`
 | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
 
-| {% raw %}`{{ arch }}`{% endraw %}
+| `{{ arch }}`
 | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See xref:faq#cpu-architecture-circleci-support[supported CPU architectures].
 |===
 
@@ -375,8 +350,8 @@ During step execution, the templates above are replaced by runtime values and us
 === Further notes on using keys and templates
 
 * A 900 character limit is imposed on each cache key. Be sure your key is shorter than this, otherwise your cache will not save.
-* When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you increase the chance of the cache being used.
-* Cache variables can also accept xref:reusing-config#using-parameters-in-executors[parameters], if your build makes use of them. For example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
+* When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as `{{ epoch }}`. If you use less specific template keys such as `{{ .Branch }}`or `{{ checksum "filename" }}`, you increase the chance of the cache being used.
+* Cache variables can also accept xref:reusing-config#using-parameters-in-executors[parameters], if your build makes use of them. For example: `v1-deps-<< parameters.varname >>`.
 * You do not have to use dynamic templates for your cache key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
 
 [#full-example-of-saving-and-restoring-cache]
@@ -387,7 +362,7 @@ The following example demonstrates how to use `restore_cache` and `save_cache`, 
 CAUTION: This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important to be aware that this can *significantly increase* your storage usage. For tips on optimizing your caching strategy, see the xref:caching-strategy#[Caching Strategies] page.
 This example is only a _potential_ solution and might be unsuitable for your specific needs, and increase storage costs.
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -449,16 +424,15 @@ jobs:
       - run: bundle exec cucumber
 ----
 
-{% endraw %}
 
-{% include snippets/docker-auth.adoc %}
+include::../_includes/partials/notes/docker-auth.adoc[]
 
 [#source-caching]
 == Source caching
 
 It is possible and often beneficial to cache your git repository to save time in your `checkout` step, especially for larger projects. Here is an example of source caching:
 
-{% raw %}
+
 
 [,yaml]
 ----
@@ -477,8 +451,6 @@ It is possible and often beneficial to cache your git repository to save time in
             - ".git"
 ----
 
-{% endraw %}
-
 In this example, `restore_cache` looks for a cache hit in the following order:
 
 * From the current git revision
@@ -489,7 +461,7 @@ When CircleCI encounters a list of `keys`, the cache is restored from the first 
 
 If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that updates more often as the current branch and git revision change.
 
-Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial, for example:
+Even with the narrowest `restore_cache` option (`source-v1-{{ .Branch }}-{{ .Revision }}`), source caching can be greatly beneficial, for example:
 
 * Running repeated builds against the same git revision (for example, with link:https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview[API-triggered builds])
 * When using workflows, where you might otherwise need to `checkout` the same repository once per workflow job.

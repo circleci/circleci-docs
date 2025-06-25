@@ -8,7 +8,7 @@ noindex: true
 = Operator overview
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server.
+:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server v4.4.
 :icons: font
 :toc: macro
 :toc-title:
@@ -41,7 +41,7 @@ See the link:https://www.nomadproject.io/docs/install/production/requirements#re
 NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to request use of larger machines for Nomad clients.
 
 For more information on Nomad port requirements, see the
-xref:../installation/hardening-your-cluster/[Hardening Your Cluster]
+xref:../installation/hardening-your-cluster#[Hardening Your Cluster]
 guide.
 
 [#github]

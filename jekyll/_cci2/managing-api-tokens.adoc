@@ -1,0 +1,97 @@
+---
+contentTags:
+  platform:
+  - Cloud
+  - Server v4+
+---
+= Managing API tokens
+:description: How to assign scoped tokens for using the CircleCI API
+:experimental:
+:icons: font
+:page-layout: classic-docs
+:page-liquid:
+
+To use the CircleCI API or view details about your pipelines, you will need API tokens with the appropriate permissions. This document describes the types of API tokens available, as well as how to create and delete them.
+
+[#overview]
+== Overview
+
+In CircleCI you can create personal and project API tokens:
+
+*Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2), and grant full read and write permissions.
+*Project API tokens*:: These tokens allow you to read/write information for specific projects. Project tokens have three scope options: _Status_, _Read Only_, and _Admin_.
+* _Status_ tokens grant read access to the project's build statuses. Used for xref:status-badges#[embedding status badges].
+* _Read Only_ tokens grant read only access to the project's API (v1 only).
+* - _Admin_ tokens grant read and write access for the project's API (v1 only).
+
+NOTE: API tokens cannot be modified after they have been created. The only way to change existing tokens is to delete and recreate them, also known as "token rotation".
+
+[#creating-a-personal-api-token]
+=== Create a personal API token
+
+. In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings].
+. Select link:https://app.circleci.com/settings/user/tokens[Personal API Tokens].
+. Select btn:[Create New Token] button.
+. In the *Token name* field, type a memorable name for the token.
+. Select btn:[Add API Token] button.
+. After the token appears, copy and paste it to another location. You will
+not be able to view the token again.
+
+To delete a personal API token, click the X in the *Remove* column and confirm
+your deletion in the dialog window.
+
+[#creating-a-project-api-token]
+=== Create a project API token
+
+. In the CircleCI application, go to your project's settings. There are various ways to get there. One way is to select *Projects* in the sidebar, then the ellipsis (`+...+`) next to your project and select *Project Settings*.
+. Select *API Permissions*.
+. Select btn:[Add API Token].
+. Choose a scope from the dropdown menu. These are described in the <<overview,Overview>> section above.
+. In the *Label* field, type a memorable label for the token.
+. Select btn:[Add API Token] button.
+
+To delete a project API token, Click the *X* in the *Remove* column for the
+token you wish to replace. When the confirmation window appears, enter the text
+`DELETE` in the form and click the *Delete API Token* button.
+
+[#rotating-personal-and-project-api-tokens]
+=== Rotate API tokens
+
+API Token rotation occurs when an old API token is replaced with a new token.
+
+Because API Tokens can be shared, passed around between employees and teams, and
+exposed inadvertently, it is always good practice to periodically regenerate new
+API Tokens. Many organizations automate this process, running a script when an
+employee leaves the company or when a token has been considered leaked.
+
+[#rotating-a-personal-api-token]
+==== Rotating a personal API token
+
+. In the CircleCI application, go to your https://app.circleci.com/settings/user[User settings].
+. Select https://app.circleci.com/settings/user/tokens[Personal API Tokens].
+. Select the *X* in the *Remove* column for the token you wish to replace and confirm your deletion.
+. Select btn:[Create New Token].
+. In the *Token name* field, type a new name for the old token you are rotating. It can be the same name given to the old token.
+. Select btn:[Add API Token].
+. After the token appears, copy and paste it to another location. You will not be able to view the token again.
+
+[#rotating-a-project-api-token]
+==== Rotating a project API token
+
+. In the CircleCI application, go to your project's settings. There are various ways to get there. One way is to select *Projects* in the sidebar, then the ellipsis (`+...+`) next to your project and select *Project Settings*.
+. Select *API Permissions*.
+. Select the *X* in the *Remove* column for the token you wish to replace.
+When the confirmation window appears, enter the text `DELETE` in the form and click the *Delete API Token* button.
+. Select btn:[Create API Token].
+. Choose the same scope used for the old token from the dropdown menu.
+. In the *Label* field, type a label for the token. It can be the same name given to the old token.
+. Select btn:[Add API Token].
+
+[#next-steps]
+== Next steps
+
+Some possible use cases for an API token might be:
+
+* xref:status-badges#[Embed Build Status Badges] in your project's README or other external page.
+* xref:artifacts#downloading-all-artifacts-for-a-build-on-circleci[Download a build's artifacts] for safekeeping.
+* xref:inject-environment-variables-with-api#[Inject environment variables] into a build.

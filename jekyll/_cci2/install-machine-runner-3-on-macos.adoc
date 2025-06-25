@@ -4,16 +4,15 @@ contentTags:
   - Cloud
   - Server v4.4+
 ---
-= Install machine runner 3.0 on macOS
+= Install machine runner 3 on macOS
 :page-layout: classic-docs
-:page-liquid:
 :page-description: Instructions on how to install CircleCI's self-hosted machine runner (3.0) on macOS.
 :icons: font
 :experimental:
 :machine:
 :macOS:
 
-This page describes how to install CircleCI's machine runner 3.0 on macOS.
+This page describes how to install CircleCI's machine runner 3 on macOS.
 
 [#prerequisites]
 == Prerequisites
@@ -34,17 +33,25 @@ To install machine runners and run jobs, you will need to have root access, and 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
 
-{% include snippets/runner/terms.adoc %}
+include::../_includes/partials/runner/terms.adoc[]
 
 [#create-namespace-and-resource-class]
 == 1. Create namespace and resource class
 
-{% include snippets/runner/install-with-cli-steps.adoc %}
+[.tab.machine-runner.Web_app_installation]
+--
+include::../_includes/partials/runner/install-with-web-app-steps.adoc[]
+--
+[.tab.machine-runner.CLI_installation]
+--
+include::../_includes/partials/runner/install-with-cli-steps.adoc[]
+
+--
 
 [#install-circleci-runner]
 == 2. Install CircleCI runner on macOS
 
-You can install runner on macOS with link:http://brew.sh/[Homebrew].
+You can install runner on macOS with link:https://brew.sh/[Homebrew].
 
 . On the target macOS machine with Homebrew installed, run the following command to add the CircleCI repository:
 +
@@ -80,7 +87,7 @@ api:
 ----
 Replace `api.auth_token` with the token generated in the steps above, and choose a name for your runner.
 
-. If you are using CircleCI server you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
+. **If you are using CircleCI server** you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
 [source,shell]
 ----
@@ -97,18 +104,18 @@ api:
   url: https://your.domain.here
 ----
 
-[#migrate-existing-configuration-files]
-=== Migrate existing configuration files
-If you are migrating an existing configuration from a previous runner installation, you may move the existing launch agent file from its current path to the new path.
+[TIP]
+====
+**If you are migrating an existing configuration from a previous runner installation**, you may move the existing launch agent file from its current path to the new path.
 
-NOTE: this will overwrite the default config file installed via brew and replace it with your existing config file.
+**This will overwrite the default config file installed via brew and replace it with your existing config file.**
 
 [,shell]
 ----
 mv /Library/Preferences/com.circleci.runner/launch-agent-config.yaml $HOME/Library/Preferences/com.circleci.runner/config.yaml
 ----
 
-After copying the file, you may remove the logging block to send logs to the default location for machine runner 3.0 (specified below):
+After copying the file, you may remove the logging block to send logs to the default location for machine runner 3 (specified below):
 
 [,yaml]
 ----
@@ -116,6 +123,7 @@ After copying the file, you may remove the logging block to send logs to the def
 logging:
   file: /Library/Logs/com.circleci.runner.log
 ----
+====
 
 [#review-accept-apple-signature-notarization]
 == 3. Review and accept the Apple signature notarization
@@ -146,9 +154,9 @@ sudo xattr -r -d com.apple.quarantine "$(brew --prefix)/bin/circleci-runner"
 ----
 
 [#start-macos-machine-runner]
-== 4. Start macOS machine runner 3.0
+== 4. Start macOS machine runner 3
 
-To start the macOS machine runner 3.0 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
+To start the macOS machine runner 3 for the first time, you will need to bootstrap the service. Depending on whether you are using a GUI or non-GUI session (for example, when remotely tunneling into the machine), the commands to bootstrap the service will differ:
 
 [.tab.startdomain.GUI_domain]
 --
@@ -194,8 +202,10 @@ launchctl print user/$(id -u)/com.circleci.runner
 ----
 --
 
+include::../_includes/partials/runner/machine-runner-example.adoc[]
+
 [#stop-macos-machine-runner]
-== 5. Stop macOS machine runner 3.0
+== Stop macOS machine runner 3
 
 To stop the machine runner service, run the following command to disable the machine runner service, depending on the service target used in the previous step:
 
@@ -217,8 +227,8 @@ launchctl disable user/$(id -u)/com.circleci.runner
 --
 
 [#uninstall-machine-runner-macos]
-== Uninstall machine runner 3.0 on macOS
-To uninstall machine runner 3.0 from your macOS device, follow these steps.
+== Uninstall machine runner 3 on macOS
+To uninstall machine runner 3 from your macOS device, follow these steps.
 
 . Stop the machine runner service by using the following command to disable it, depending on the service target used during installation:
 +
@@ -273,15 +283,11 @@ On your macOS machine, logs from `circleci-runner` are located in the following 
 $HOME/Library/Logs/com.circleci.runner/runner.log
 ----
 
-{% include snippets/machine-runner-example.adoc %}
-
-The job will then execute using your self-hosted runner when you push the `.circleci/config.yml` to your VCS provider.
-
 [#additional-resources]
 == Additional resources
 
-- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3.0]
-- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3.0 Linux package installation]
-- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3.0 Windows installation]
-- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3.0 Docker installation]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3.0 configuration reference]
+- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3 Windows installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]

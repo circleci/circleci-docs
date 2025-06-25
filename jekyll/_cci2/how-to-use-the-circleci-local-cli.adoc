@@ -2,15 +2,13 @@
 contentTags:
   platform:
   - Cloud
-  - Server v4.x
-  - Server v3.x
+  - Server v4+
 ---
 = How to use the CircleCI local CLI
 :page-description: How to use the CircleCI local CLI
 :experimental:
 :icons: font
 :page-layout: classic-docs
-:page-liquid:
 
 This page describes how to use some features of the CircleCI CLI.
 
@@ -145,15 +143,11 @@ A file beginning with `@` will have its contents merged into its parent folder l
 
 For example, the following structure:
 
-{% raw %}
-
 [,shell]
 ----
 cat foo/bar/@baz.yml
 \{baz: qux}
 ----
-
-{% endraw %}
 
 Maps to:
 
@@ -189,8 +183,6 @@ workflows:
 ----
 
 Processing this config file will output a YAML file like the example below. This is the expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed:
-
-{% raw %}
 
 [,yml]
 ----
@@ -258,8 +250,6 @@ workflows:
     jobs:
     - node/test
 ----
-
-{% endraw %}
 
 [#run-a-job-in-a-container-on-your-machine]
 == Run a job in a container on your machine
@@ -345,7 +335,7 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 [#test-splitting]
 == Test splitting
 
-The CircleCI CLI is used for some advanced features during job runs, for example xref:parallelism-faster-jobs#using-the-circleci-cli-to-split-tests[test splitting] for build time optimization.
+The CircleCI CLI is used for some advanced features during job runs, for example xref:use-the-circleci-cli-to-split-tests#[test splitting] for build time optimization.
 
 [#context-management]
 == Context management
@@ -368,7 +358,7 @@ circleci context create --org-id <org-id> <context-name> [flags]
 
 Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
 
-{% include snippets/find-organization-id.adoc %}
+include::../_includes/partials/notes/find-organization-id.adoc[]
 
 [#config-policy-management]
 == Config policy management
