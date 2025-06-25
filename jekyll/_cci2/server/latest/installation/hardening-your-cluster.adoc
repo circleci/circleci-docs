@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Hardening your cluster
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.7.
+:page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.8.
 :icons: font
 :toc: macro
 :toc-title:
@@ -18,13 +18,15 @@ This section provides supplemental information on hardening your Kubernetes clus
 == Network topology
 A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
 
-Best practice is to make as many of the resources as private as possible. If your users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a working NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
+Best practice is to make as many of the resources as private as possible. If users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses,  as long as you have a NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
 
-However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to SSH into jobs and scope access via networking rules.
+It is also recommended to place Nomad clients and VMs in a public subnet to enable users to SSH into jobs and scope access via networking rules.
 
 NOTE: An nginx reverse proxy is placed in front of link:https://github.com/Kong/charts[Kong] and exposed as a Kubernetes service named `circleci-proxy`. nginx is responsible routing the traffic to the following services: `kong` and `nomad`.
 
 CAUTION: When using Amazon Certificate Manager (ACM), the name of the nginx service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the load balancer and you will have to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
+
+CAUTION: When using Nomad, clients and servers should be configured to use MTLS for secure communication. 
 
 [#network-traffic]
 == Network traffic
@@ -53,7 +55,7 @@ You may wish to check the status of the services routing traffic in your CircleC
 
 [#kubernetes-load-balancers]
 ## Kubernetes load balancers
-Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing you are using with your installation.
+Depending on your setup, your load balancers might be transparent (that is, they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules, given the type of load balancing used by your installation.
 
 [#ingress-load-balancers]
 === Ingress
@@ -95,7 +97,7 @@ If the traffic rules for your load balancers have not been created automatically
 
 [#egress-load-balancers]
 === Egress
-The only type of egress needed is TCP traffic to the Kubernetes nodes on the Kubernetes load balancer ports (30000-32767). This is not needed if your load balancers are transparent.
+The only egress needed is for TCP traffic to the Kubernetes nodes on the Kubernetes load balancer ports (30000-32767). This egress is not needed if your load balancers are transparent.
 
 [#common-rules-for-compute-instances]
 == Common rules for compute instances
@@ -108,15 +110,15 @@ It is recommended to scope the rule as closely as possible to allowed source IP 
 
 [#egress-common]
 === Egress
-You most likely want all of your instances to access internet resources. This requires you to allow egress for UDP and TCP on port 53 to the DNS server within your VPC, as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
-Instances building jobs (that is, the Nomad clients and external VMs) also will likely need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with the destination of the VM subnet and your VCS, at the very least.
+You most likely want all of your instances to access internet resources. This requires allowing egress for UDP and TCP on port 53 to the DNS server within your VPC, and TCP ports 80 and 443 for HTTP and HTTPS traffic.
+Instances building jobs (that is, the Nomad clients and external VMs) also will likely need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, and should be allowed for all instances with the destination of the VM subnet and your VCS.
 
 [#kubernetes-nodes]
 == Kubernetes nodes
 
 [#intra-node-traffic]
 === Intra-node traffic
-By default, the traffic within your Kubernetes cluster is regulated by networking policies. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
+By default, the traffic within your Kubernetes cluster is regulated by networking policies. This should be sufficient to regulate the traffic between pods. No additional requirement are needed to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
 
@@ -256,7 +258,7 @@ Within the ingress rules of the VM security group, the following rules can be cr
 
 | 54782
 | CIDR range of your choice
-| Allows users to SSH into failed vm-based jobs and to retry and debug
+| Allows users to SSH into failed virtual machine based jobs and to retry and debug
 
 |===
 
@@ -276,11 +278,11 @@ When hardening an installation where the machine provisioner uses public IP addr
 
 | 54782
 | CIDR range of your choice
-| Allows users to SSH into failed vm-based jobs to retry and debug.
+| Allows users to SSH into failed virtual machine based jobs to retry and debug.
 
 |===
 
 ifndef::pdf[]
 ## Next steps
-* xref:../operator/operator-overview#[Server v4.7 Operator Overview]
+* xref:../operator/operator-overview#[server v4.8 Operator Overview]
 endif::[]

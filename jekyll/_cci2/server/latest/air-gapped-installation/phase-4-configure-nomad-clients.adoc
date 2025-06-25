@@ -1,18 +1,18 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Phase 4 - Configure Nomad clients
 :page-layout: classic-docs
 :page-liquid:
-:page-description: How to configure Nomad clients to run with CircleCI server v4.7 in an air-gapped environment.
+:page-description: How to configure Nomad clients to run with CircleCI server v4.8 in an air-gapped environment.
 :icons: font
 :toc: macro
 :toc-title:
 
-CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment.
+CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment. CircleCI server requires Nomad client images to use CGroupsV1 and is not compatible with CgroupsV2.
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 

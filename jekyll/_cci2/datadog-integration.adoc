@@ -41,6 +41,8 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 
 . Select **Add Webhook** to save the new webhook.
 
+NOTE: Webhook payload may be different depending on the integration used by the pipeline that emits the webhook. Checkout the xref:outbound-webhooks-reference#sample-webhook-payloads[sample webhook payloads] for each integration for more information.
+
 [#visualize-pipeline-data-in-datadog]
 === Visualize pipeline data in Datadog
 

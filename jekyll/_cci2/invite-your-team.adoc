@@ -64,7 +64,6 @@ include::../_includes/partials/tips/check-github-type-org.adoc[]
 
 [.tab.invite.GitHub_App_/_GitLab_/_Bitbucket_Data_Center]
 --
-include::../_includes/partials/notes/bitbucket-data-center-closed-preview.adoc[]
 
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Navigate to menu:Organization Settings[People], then select btn:[Invite].

@@ -29,7 +29,6 @@ When a CircleCI organization has SSO enabled, note the following:
 * Users need to authenticate using the IdP in order to access the organization's resources in CircleCI.
 * If a user tries to access the CircleCI org's resources _without_ authenticating using the IdP, they will be redirected to the IdP to authenticate.
 * When a user's session expires, they will no longer be able to access the organization's resources in CircleCI and will be prompted to re-authenticate.
-* The length of a user's session is configured in the organization's IdP.
 
 == Benefits of using SSO
 
@@ -39,7 +38,6 @@ Using SSO for authentication can result in improved security and user experience
 
 * Adding and deleting users.
 * Managing user permissions.
-* Controlling allowed session length.
 
 **For a member of an organization using SSO for authentication:** The process of authentication to access applications is simplified. Rather than authenticating separately for each application, SAML SSO enables the user to confirm their identity _once_ with an IdP and that authentication is communicated to the applications (such as CircleCI) that the user has access to. The user may then access these applications for the duration of their session.
 

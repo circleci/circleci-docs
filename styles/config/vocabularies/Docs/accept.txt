@@ -163,6 +163,7 @@ GKE
 \bGoogle Play Store\b
 GPU
 Gradle
+Grafana
 Gzip
 HashiCorp
 [Hh]eadspace
@@ -260,6 +261,8 @@ PowerShell
 [Pp]rox[ying|ied]
 \b[Pp]roject [Aa]\b
 \bProject B\b
+[Pp]roxied
+[Pp]roxying
 Pusher
 PVC
 Python
@@ -316,6 +319,8 @@ stdin
 [Ss]ubkeys?
 [Ss]ubshells?
 subcommand
+[Ss]ubnets?
+[Ss]ubnetworks?
 superset
 Sysbox
 systemd
@@ -343,6 +348,7 @@ UIDs?
 [Uu]int
 [Uu]ncheck
 [Uu]nchecked
+[Uu]ncomment
 [Uu]ndeploy
 [Uu]ndeployed
 unencrypted
@@ -352,10 +358,11 @@ unittest
 [Uu]nfollowing
 unformatted
 [Uu]ntrusted
-URI
+URIs?
 URLEncoder
 UUID
 UUIDs?
+[Vv]alidator
 VCS
 Velero
 Viget
