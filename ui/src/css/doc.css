@@ -1166,10 +1166,12 @@
 }
 
 .doc b.button::before {
+  content: "[";
   padding-right: 0.25em;
 }
 
 .doc b.button::after {
+  content: "]";
   padding-left: 0.25em;
 }
 
