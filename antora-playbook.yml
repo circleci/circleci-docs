@@ -2,6 +2,8 @@ site:
   title: CircleCI Documentation
   url: https://circleci.com/docs
   robots: allow
+urls:
+  html_extension_style: indexify
 content:
   sources:
   - url: .
