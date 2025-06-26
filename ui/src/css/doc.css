@@ -955,10 +955,9 @@
 }
 
 .doc .source-toolbox {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
-  visibility: hidden;
   position: absolute;
   top: 0.25rem;
   right: 0.5rem;
@@ -967,12 +966,32 @@
   font-size: calc(13 / var(--rem-base) * 1rem);
   line-height: 1;
   user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   white-space: nowrap;
   z-index: 1;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc .source-toolbox *:not(.copy-toast),
+.doc .source-toolbox *:not(.copy-toast)::before,
+.doc .source-toolbox *:not(.copy-toast)::after {
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
+}
+
+.doc .source-toolbox .copy-button {
+  pointer-events: auto !important;
 }
 
 .doc .listingblock:hover .source-toolbox {
-  visibility: visible;
+  display: flex;
 }
 
 .doc .source-toolbox .source-lang {
@@ -980,6 +999,7 @@
   letter-spacing: 0.075em;
   margin-bottom: 0.5rem;
   text-align: center;
+  display: none;
 }
 
 .doc .source-toolbox .copy-button {
@@ -1029,6 +1049,13 @@
   opacity: 0;
   transition: opacity 0.5s ease 0.5s;
   bottom: -10px;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
 }
 
 .doc .source-toolbox .copy-toast::after {
@@ -1040,6 +1067,11 @@
   border: 0.55em solid transparent;
   border-bottom-color: var(--doc-font-color);
   transform-origin: center;
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
 }
 
 .doc .source-toolbox .copy-button.clicked .copy-toast {
