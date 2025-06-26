@@ -294,10 +294,11 @@
   word-wrap: break-word;
 }
 
-/* Prevent wrapping of inline literal text in tables */
+/* Allow wrapping of inline literal text in tables */
 .doc table.tableblock td code,
 .doc table.tableblock th code {
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-all;
 }
 
 .doc td.tableblock > .content {
