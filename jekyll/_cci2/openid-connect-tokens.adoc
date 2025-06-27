@@ -56,7 +56,7 @@ For `$CIRCLE_OIDC_TOKEN` its value is: `"org/<organization_id>/project/<project_
 For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:triggers-overview#[trigger]:
 
 * If the trigger is an xref:triggers-overview#trigger-a-pipeline-from-a-custom-webhook[custom webhook] then:
-`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+`"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 * Otherwise it will be:
 `"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
