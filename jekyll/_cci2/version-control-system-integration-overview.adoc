@@ -22,7 +22,6 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * GitLab self-managed
 * Bitbucket Cloud
 * Bitbucket Data Center
-+
 
 link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
 
