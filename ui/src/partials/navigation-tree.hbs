@@ -1,9 +1,9 @@
 {{#if navigation.length}}
-<ul class="{{#if class}}{{class}}{{/if}} text-terminal-black font-light">
+<ul class="{{#if (and class (not (eq class "")))}}{{class}} {{/if}}text-terminal-black font-light">
   {{#each navigation}}
   <li data-navigation-tree-content class="my-1" data-depth="{{or ../level 0}}" {{#if (eq ./url @root.page.url)}} data-current{{/if}}>
     {{#if ./content}}
-      <div data-navigation-tree-toggle class="flex items-center p-[8px] space-x-2 max-w-fit {{#if (eq ./url @root.page.url)}} -ml-1 rounded-lg bg-fog{{/if}} {{#if (has-active-child ./items)}} border-l-2 border-l-accent-green -ml-4 pl-4 md:border-none md:ml-0 md:pl-0{{/if}}">
+      <div data-navigation-tree-toggle class="flex items-center py-[8px] px-[12px] space-x-2 max-w-fit {{#if (eq ./url @root.page.url)}} -ml-1 rounded-lg bg-fog{{/if}} {{#if (has-active-child ./items)}} border-l-2 border-l-accent-green -ml-4 pl-4 md:border-none md:ml-0 md:pl-0{{/if}}">
         {{#if ./items.length }}
           <button class="hidden md:block -ml-[1.3rem] p-1 h-full">
             <img src="{{{@root.uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px] transform {{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url))) }}-rotate-90{{/if}}">
