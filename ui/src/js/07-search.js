@@ -5,8 +5,8 @@
   document.addEventListener('DOMContentLoaded', setupSearch)
 
   // Configuration constants
-  const ALGOLIA_APP_ID = 'K1G4UE06DN'
-  const ALGOLIA_SEARCH_ONLY_KEY = 'b2ee3a11317bb3623765ef7fe73ee4c2'
+  const ALGOLIA_APP_ID = 'U0RXNGRK45'
+  const ALGOLIA_SEARCH_ONLY_KEY = 'acd02091c5079d698a0637ca692ebe07'
   const ALGOLIA_INDEX_NAME = 'circleci-docs'
   let PAGINATION_MAX_VISIBLE_PAGES = 5
   const SEARCH_DEBOUNCE_MS = 300

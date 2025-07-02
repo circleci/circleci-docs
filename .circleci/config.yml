@@ -6,7 +6,7 @@ parameters:
     default: ""
 
 orbs:
-  aws-cli: circleci/aws-cli@5.3.5 
+  aws-cli: circleci/aws-cli@5.3.5
 
 executors:
   node_executor:
@@ -247,7 +247,8 @@ workflows:
     when:
       equal: ["", << pipeline.parameters.cleanup_preview_branch >>]
     jobs:
-      - build
+      - build:
+          context: circleci-docs-static
       - validate:
           requires: [build]
       - deploy-preview:
