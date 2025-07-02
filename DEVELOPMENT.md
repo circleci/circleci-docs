@@ -84,10 +84,17 @@ The site will be available at `http://localhost:3000` by default.
   npm run build:docs
   ```
 
-- **Fetch server branches** (for server admin docs):
+- **Fetch server branches** (for server admin docs). You will need to have local copies of all server-v* branches to be able to build the full docs site locally:
   ```bash
   npm run fetch-server-branches
   ```
+
+- **Force fetch server branches** if you want to force all your server-v* branches to the state of the upstream "current" versions, use the --force flag. This is recommended if you have no local changes on any server-v* branch:
+
+  ```bash
+  npm run fetch-server-branches --force
+  ```
+
 
 ### Branch Strategy
 
