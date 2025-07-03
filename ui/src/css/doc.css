@@ -885,6 +885,24 @@
   margin-top: 0;
 }
 
+/* Fix wrapping issues inside sidebarblocks */
+.doc .sidebarblock code {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.doc .sidebarblock .listingblock pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.doc .sidebarblock .listingblock {
+  width: 100%;
+  max-width: 100%;
+}
+
 /* NEEDS REVIEW prevent pre in table from causing article to exceed bounds */
 .doc table.tableblock pre,
 .doc .listingblock.wrap pre {
