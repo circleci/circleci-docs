@@ -247,7 +247,7 @@ Learn more and get started with self-hosted runners on the xref:runner-overview#
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
 
-**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects. Enable/disable autodetected deployments, which allows CircleCI to automatically detect deployments in your projects and create deploy markers for you.
+**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects.
 
 **Integrations**: Set up integrations with self-hosted version control systems.
 

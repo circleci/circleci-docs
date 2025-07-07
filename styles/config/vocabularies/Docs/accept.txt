@@ -163,6 +163,7 @@ GKE
 \bGoogle Play Store\b
 GPU
 Gradle
+Grafana
 Gzip
 HashiCorp
 [Hh]eadspace
@@ -260,6 +261,7 @@ PowerShell
 [Pp]rox[ying|ied]
 \b[Pp]roject [Aa]\b
 \bProject B\b
+[Pp]roxied
 [Pp]roxying
 Pusher
 PVC
@@ -356,7 +358,7 @@ unittest
 [Uu]nfollowing
 unformatted
 [Uu]ntrusted
-URI
+URIs?
 URLEncoder
 UUID
 UUIDs?

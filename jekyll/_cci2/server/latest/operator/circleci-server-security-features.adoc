@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = CircleCI server security features
 :page-layout: classic-docs
 :page-liquid:
-:page-description: This document outlines security features built into CircleCI server v4.7 and related integrations.
+:page-description: This document outlines security features built into CircleCI server v4.8 and related integrations.
 :icons: font
 :toc: macro
 :toc-title:

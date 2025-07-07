@@ -1,13 +1,13 @@
 ---
 contentTags:
   platform:
-  - Server v4.7
+  - Server v4.8
   - Server Admin
 ---
 = Manage virtual machines with machine provisioner
 :page-layout: classic-docs
 :page-liquid:
-:page-description: CircleCI server v4.7 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-description: CircleCI server v4.8 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :icons: font
 :toc: macro
 :toc-title:
@@ -61,7 +61,7 @@ machine_provisioner:
 [#default-aws-ami-lists]
 ==== Default AWS AMI lists
 
-The default AMIs for server v4.7 are based on Ubuntu 22.04.
+The default AMIs for server v4.8 are based on Ubuntu 22.04.
 
 [#x86-ami-list]
 ===== x86 AMI list
@@ -257,5 +257,5 @@ Apply the changes made to your `values.yaml` file:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml>
 ----
