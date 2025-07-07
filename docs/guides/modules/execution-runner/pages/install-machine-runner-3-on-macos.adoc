@@ -33,12 +33,12 @@ include::ROOT:partial$runner/terms.adoc[]
 
 [tabs]
 ====
-Web_app_installation::
+Web app installation::
 +
 --
 include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
+CLI installation::
 +
 --
 include::ROOT:partial$runner/install-with-cli-steps.adoc[]
@@ -157,10 +157,9 @@ To start the macOS machine runner 3 for the first time, you will need to bootstr
 
 [tabs]
 ====
-GUI_domain::
+GUI domain::
 +
 --
-
 . For running the agent in a GUI session, you can bootstrap the provided `.plist` file and enable the service by running the following commands:
 +
 [source,shell]
@@ -176,7 +175,7 @@ launchctl kickstart -k gui/$(id -u)/com.circleci.runner
 launchctl print gui/$(id -u)/com.circleci.runner
 ----
 --
-User_domain::
+User domain::
 +
 --
 
@@ -212,7 +211,7 @@ To stop the machine runner service, run the following command to disable the mac
 
 [tabs]
 ====
-GUI_domain::
+GUI domain::
 +
 --
 
@@ -221,7 +220,7 @@ GUI_domain::
 launchctl disable gui/$(id -u)/com.circleci.runner
 ----
 --
-User_domain::
+User domain::
 +
 --
 
@@ -240,7 +239,7 @@ To uninstall machine runner 3 from your macOS device, follow these steps.
 +
 [tabs]
 ====
-GUI_domain::
+GUI domain::
 +
 --
 Targeting the GUI domain:
@@ -249,11 +248,7 @@ Targeting the GUI domain:
 launchctl bootout gui/$(id -u)/com.circleci.runner
 ----
 --
-====
-+
-[tabs]
-====
-User_domain::
+User domain::
 +
 --
 Targeting the user domain:
@@ -267,7 +262,7 @@ launchctl bootout user/$(id -u)/com.circleci.runner
 +
 [tabs]
 ====
-Keep_logs_and_configuration::
+Keep logs and configuration::
 +
 --
 To uninstall without purging logs and configuration files, run the following command.
@@ -277,14 +272,9 @@ To uninstall without purging logs and configuration files, run the following com
 brew uninstall --cask circleci-public/homebrew-circleci/circleci-runner
 ----
 --
-====
-+
-[tabs]
-====
-Purge_logs_and_configuration::
+Purge logs and configuration::
 +
 --
-
 CAUTION: This command will *purge all logs and configuration files*.
 
 To uninstall and purge all logs and configuration files, run the following command.

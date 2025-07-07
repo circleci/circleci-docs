@@ -382,8 +382,7 @@ NOTE: Whenever you see curly brackets `{}`, this represents a variable that you 
 To return job details, perform the following steps:
 
 . Find your project slug from the <<getting-started-with-the-api,project settings overview page>>.
-
-#TODO: create tip for finding build/job number#
+//#TODO: create tip for finding build/job number#
 . Find your job number
 
 . Run the following `curl` request:

@@ -263,7 +263,7 @@ Follow these steps to set an expression restriction on a context:
 
 [tabs]
 ====
-CircleCI_UI::
+CircleCI UI::
 +
 --
 . Navigate to the menu:Organization Settings[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]

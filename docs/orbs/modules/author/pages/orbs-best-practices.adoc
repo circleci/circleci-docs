@@ -90,7 +90,7 @@ When writing a xref:reference:ROOT:reusing-config.adoc#authoring-reusable-comman
 
 [tabs]
 ====
-Deploy_Command_GOOD::
+Deploy Command GOOD::
 +
 --
 [,yaml]
@@ -109,7 +109,7 @@ steps:
         example deploy my-app
 ----
 --
-Deploy_Command_BAD::
+Deploy Command BAD::
 +
 --
 [,yaml]
@@ -153,7 +153,7 @@ For example, here is a partial snippet of the link:https://circleci.com/develope
 
 [tabs]
 ====
-Test_Job::
+Test Job::
 +
 --
 [,yaml]
@@ -172,7 +172,7 @@ executor:
   tag: << parameters.version >>
 ----
 --
-Default_Executor::
+Default Executor::
 +
 --
 [,yaml]

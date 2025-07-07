@@ -220,7 +220,7 @@ Using the Android orb gives you two options for deploying to the Google Play Sto
 
 [tabs]
 ====
-Use_the_deploy-to-play-store_job::
+Use the deploy-to-play-store job::
 +
 --
 To deploy using the `deploy-to-play-store` job you just need to add an `android/deploy_to_play_store` job to your list of jobs in your workflow.
@@ -256,7 +256,7 @@ workflows:
 
 NOTE: The executor has no default value and must be set in the configuration.
 --
-Run_each_command_individually::
+Run each command individually::
 +
 --
 To run each command individually in a job, you will need to add the following commands to your job:

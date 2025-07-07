@@ -17,13 +17,13 @@ The diagrams below illustrate how CircleCI's container and machine runners exten
 
 [tabs]
 ====
-Container_runner::
+Container runner::
 +
 --
 .Container runner architecture
 image::guides:ROOT:container-runner-model.png[CircleCI's container runner architecture]
 --
-Machine_runner::
+Machine runner::
 +
 --
 .Machine runner architecture

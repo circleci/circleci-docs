@@ -35,7 +35,7 @@ include::ROOT:partial$deploy/supported-versions.adoc[]
 
 [tabs]
 ====
-Kubernetes_cluster::
+Kubernetes cluster::
 +
 --
 . In the CircleCI web app, select **Deploys** in the sidebar.
@@ -50,7 +50,7 @@ After completing all the setup steps in the app, you will have done the followin
 * Installed the release agent into your Kubernetes cluster
 * Configured your Kubernetes components.
 --
-Amazon_SageMaker::
+Amazon SageMaker::
 +
 --
 . In the CircleCI web app, select **Deploys** in the sidebar.

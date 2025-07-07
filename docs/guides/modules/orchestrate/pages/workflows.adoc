@@ -252,7 +252,7 @@ To approve a job follow these steps:
 
 [tabs]
 ====
-CircleCI_web_app::
+CircleCI web app::
 +
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.
@@ -283,7 +283,7 @@ To identify the user who approved a job, you can use the CircleCI web app or the
 
 [tabs]
 ====
-CircleCI_web_app::
+CircleCI web app::
 +
 --
 * If the user signed up via GitHub, the (non-clickable) avatar of the GitHub user appears next to the approval job. Hovering over that avatar brings up a tooltip with the user's name as specified in their GitHub/Bitbucket account settings.
@@ -348,9 +348,6 @@ curl --request GET \
 ----
 
 TIP: You can find detailed instructions in link:https://support.circleci.com/hc/en-us/articles/360044820493-How-to-Find-hold-Step-Approver-in-a-Workflow[this support article]
-
-
-
 --
 ====
 
@@ -360,7 +357,7 @@ To Cancel a job follow these steps:
 
 [tabs]
 ====
-CircleCI_web_app::
+CircleCI web app::
 +
 --
 . Select the `hold` job in the *Workflows* page of the CircleCI web app.

@@ -300,12 +300,12 @@
 *** xref:toolkit:vs-code-extension-overview.adoc[VS Code extension overview]
 *** xref:toolkit:get-started-with-the-vs-code-extension.adoc[Get started with the VS Code extension]
 ** Config tools
-*** xref:toolkit:circleci-config-sdk[Config SDK]
-*** xref:toolkit:orb-development-kit[Orb development kit]
+*** xref:toolkit:circleci-config-sdk.adoc[Config SDK]
+*** xref:orbs:author:orb-development-kit.adoc[Orb development kit]
 ** Example projects and configs
 *** xref:toolkit:examples-and-guides-overview.adoc[Examples and guides overview]
 *** xref:toolkit:sample-config.adoc[Sample config.yml files]
-*** xref:toolkit:postgres-config[Database examples]
+*** xref:toolkit:postgres-config.adoc[Database examples]
 
 * xref:plans-pricing:index.adoc[Plans and pricing]
 ** xref:plans-pricing:plan-overview.adoc[CircleCI plans overview]

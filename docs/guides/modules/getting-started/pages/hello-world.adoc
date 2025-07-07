@@ -44,7 +44,7 @@ workflows:
       - hello-job
 ----
 --
-Linux_VM::
+Linux VM::
 +
 --
 The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.
@@ -146,7 +146,7 @@ workflows:
       - hello-job
 ----
 --
-Arm_VM::
+Arm VM::
 +
 --
 The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM execution environment] page for more information.
@@ -208,7 +208,7 @@ workflows:
       - hello-job
 ----
 --
-Linux_VM::
+Linux VM::
 +
 --
 The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.

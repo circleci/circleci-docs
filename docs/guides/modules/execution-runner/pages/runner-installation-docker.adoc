@@ -38,12 +38,12 @@ The number of containers running in parallel on the host is constrained by the h
 
 [tabs]
 ====
-Web_app_installation::
+Web app installation::
 +
 --
 include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
+CLI installation::
 +
 --
 include::ROOT:partial$runner/install-with-cli-steps.adoc[]

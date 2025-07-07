@@ -28,7 +28,7 @@ The allow-list applies organization-wide. Once configured, all projects within t
 
 [tabs]
 ====
-CircleCI_web_app::
+CircleCI web app::
 +
 --
 . Navigate to the menu:Organization Settings[Orbs].
@@ -73,7 +73,7 @@ Example response:
 
 [tabs]
 ====
-CircleCI_web_app::
+CircleCI web app::
 +
 --
 . Navigate to menu:Organization Settings[Orbs].
@@ -121,7 +121,7 @@ Example response:
 
 [tabs]
 ====
-CircleCI_web_app::
+CircleCI web app::
 +
 --
 . Navigate to menu:Organization Settings[Orbs].

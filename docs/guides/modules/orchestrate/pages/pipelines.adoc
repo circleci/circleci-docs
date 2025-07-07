@@ -100,7 +100,7 @@ To add a trigger for a pipeline, follow these steps:
 
 [tabs]
 ====
-GitHub_App::
+GitHub App::
 +
 --
 
@@ -127,7 +127,7 @@ To add a trigger for a pipeline, follow these steps:
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
-Custom_webhook::
+Custom webhook::
 +
 --
 NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
@@ -176,7 +176,7 @@ CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** r
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
-Bitbucket_Data_Center::
+Bitbucket Data Center::
 +
 --
 For steps to add a trigger for a pipeline using Bitbucket Data Center, see the xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] page.

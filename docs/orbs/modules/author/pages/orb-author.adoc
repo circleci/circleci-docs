@@ -278,13 +278,13 @@ steps:
 [#scripts]
 ==== Scripts
 
-One of the major benefits of the orb development kit is a xref:orb-concepts.adoc#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `<<include(file)>>` within your orb config code to include the file contents directly in the orb.
+One of the major benefits of the orb development kit is a xref:orb-concepts.adoc#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `++<<include(file)>>++` within your orb config code to include the file contents directly in the orb.
 
 Script inclusion is especially useful when writing complex orb commands, which might contain a lot of _Bash_ code, _(although you could use Python too!)_.
 
 [tabs]
 ====
-Orb_Development_Kit_Packing::
+Orb Development Kit packing::
 +
 --
 [,yaml]
@@ -302,7 +302,7 @@ steps:
       command: <<include(scripts/greet.sh)>>
 ----
 --
-Standard_YAML_Config::
+Standard YAML config::
 +
 --
 [,yaml]

@@ -133,7 +133,7 @@ For a full list of `machine` images, see the link:https://circleci.com/developer
 
 [tabs]
 ====
-Cloud_with_orb::
+Cloud with orb::
 +
 --
 [,yml]
@@ -223,7 +223,7 @@ jobs:
       - run: nvidia-smi
 ----
 --
-Windows_without_orb::
+Windows without orb::
 +
 --
 [,yml]
@@ -239,7 +239,7 @@ jobs:
       - run: nvidia-smi
 ----
 --
-Windows_with_orb::
+Windows with orb::
 +
 --
 [,yml]
@@ -299,7 +299,7 @@ workflows:
       - build-large
 ----
 --
-Server_on_AWS::
+Server on AWS::
 +
 --
 [,yml]

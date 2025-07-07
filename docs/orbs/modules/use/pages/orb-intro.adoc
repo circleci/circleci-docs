@@ -123,7 +123,7 @@ Orbs let you pull in pre-defined, parameterized configuration elements into your
 
 [tabs]
 ====
-With_Orbs::
+With Orbs::
 +
 --
 [,yaml]
@@ -140,7 +140,7 @@ workflows:
           version: <node-version> # replace node version
 ----
 --
-Without_orbs::
+Without orbs::
 +
 --
 [,yaml]

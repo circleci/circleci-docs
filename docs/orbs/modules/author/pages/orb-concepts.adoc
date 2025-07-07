@@ -335,7 +335,7 @@ For orb development kit users, this step is handled automatically.
 [#file-include-syntax]
 == File include syntax
 
-The `file include` syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
+The `file include` syntax (`++<<include(dir/file)>>++`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
 
 The `<<include(dir/file)>>` syntax is a special key for use with the <<orb-packing,`circleci orb pack` command>> and _will not_ work more widely on CircleCI.
 
@@ -366,7 +366,7 @@ file-sh::
 echo "Hello World"
 ----
 --
-Packed_Command-yaml::
+Packed Command-yaml::
 +
 --
 [,yaml]

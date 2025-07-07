@@ -556,7 +556,7 @@ h| Improvement From 3.0
 | 60%
 |===
 --
-0::
+Version 3::
 +
 --
 [.table.table-striped]

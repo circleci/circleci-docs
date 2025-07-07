@@ -97,7 +97,7 @@ jobs:
     #  ...  other config
 ----
 --
-Linux_VM::
+Linux VM::
 +
 --
 [source,yaml]

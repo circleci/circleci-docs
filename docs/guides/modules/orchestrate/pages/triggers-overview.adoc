@@ -83,7 +83,7 @@ NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported f
 
 [tabs]
 ====
-GitHub_and_Bitbucket::
+GitHub and Bitbucket::
 +
 --
 This method is supported for GitHub (OAuth and App) and Bitbucket (Cloud and Data Center) orgs.
@@ -132,7 +132,7 @@ curl -X POST https://circleci.com/api/v2/project/<project-slug>/pipeline/run \
 ----
 . Head back to the CircleCI web app and see your pipeline running on the dashboard.
 --
-CircleCI_server::
+CircleCI server::
 +
 --
 . If you have not already, get set up to use API v2 by following the steps in the  xref:toolkit:api-developers-guide.adoc#authentication-and-authorization[API Developers Guide].
