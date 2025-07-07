@@ -61,7 +61,7 @@ TIP: As an alternative, you can add an environment variable using a xref:securit
 
 . In the link:https://app.circleci.com/[CircleCI web app] select your organization.
 . Select **Projects** in the sidebar.
-. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon], and select **Project Settings**.
+. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"], and select **Project Settings**.
 . Select **Environment Variables** from the sidebar.
 . Select btn:[Add Environment Variable].
 . Give your environment variable a name, for example, `WEBHOOK_SECRET`.

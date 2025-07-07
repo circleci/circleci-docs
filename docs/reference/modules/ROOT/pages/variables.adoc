@@ -28,211 +28,211 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | GitHub, Bitbucket, GitLab
 | Boolean
 | `true` (represents whether the current environment is a CI environment)
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLECI`
 | GitHub, Bitbucket, GitLab
 | Boolean
 | `true` (represents whether the current environment is a CircleCI environment)
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_BRANCH`
 | GitHub, Bitbucket, GitLab
 | String
 | The name of the Git branch currently being built.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_BUILD_NUM`
 | GitHub, Bitbucket, GitLab
 | Integer
 | The number of the current job. Job numbers are unique for each job.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_BUILD_URL`
 | GitHub, Bitbucket, GitLab
 | String
 | The URL for the current job on CircleCI.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_JOB`
 | GitHub, Bitbucket, GitLab
 | String
 | The name of the current job.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_NODE_INDEX`
 | GitHub, Bitbucket, GitLab
 | Integer
 | For jobs that run with parallelism enabled, this is the index of the current parallel run. The value ranges from 0 to (`CIRCLE_NODE_TOTAL` - 1)
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_NODE_TOTAL`
 | GitHub, Bitbucket, GitLab
 | Integer
 | For jobs that run with parallelism enabled, this is the number of parallel runs. This is equivalent to the value of `parallelism` in your config file.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_OIDC_TOKEN`
 | GitHub, Bitbucket, GitLab
 | String
 | An OpenID Connect token signed by CircleCI which includes details about the current job.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon] from v4.4
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"] from v4.4
 
 | `CIRCLE_OIDC_TOKEN_V2`
 | GitHub, Bitbucket, GitLab
 | String
 | An OpenID Connect token signed by CircleCI which includes details about the current job.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon] from v4.4
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"] from v4.4
 
 | `CIRCLE_ORGANIZATION_ID`
 | GitHub, Bitbucket, GitLab
 | String
 | A unique identifier for the CircleCI organization.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PIPELINE_ID`
 | GitHub, Bitbucket, GitLab
 | String
 | A unique identifier for the current pipeline.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PR_NUMBER`
 | GitHub OAuth, Bitbucket Cloud
 | Integer
 | The number of the associated GitHub or Bitbucket pull request. Only available on forked PRs.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PR_REPONAME`
 | GitHub OAuth, Bitbucket Cloud
 | String
 | The name of the GitHub or Bitbucket repository where the pull request was created. Only available on forked PRs.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PR_USERNAME`
 | GitHub OAuth, Bitbucket Cloud
 | String
 | The GitHub or Bitbucket username of the user who created the pull request. Only available on forked PRs.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PREVIOUS_BUILD_NUM`
 | GitHub, Bitbucket, GitLab
 | Integer
 | The largest job number in a given branch that is less than the current job number. **Note**: The variable is not always set, and is not deterministic. It is also not set on runner executors. This variable will be deprecated and is not recommended for use.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PROJECT_ID`
 | GitHub, Bitbucket, GitLab
 | String
 | A unique identifier for the current project.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PROJECT_REPONAME`
 | GitHub, GitLab, Bitbucket
 | String
 | The name of the repository of the current project.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PROJECT_USERNAME`
 | GitHub, GitLab, Bitbucket
 | String
 | The GitHub or Bitbucket username of the current project.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PULL_REQUEST`
 | GitHub, Bitbucket Cloud
 | String
 | The URL of the associated pull request. If there are multiple associated pull requests, one URL is randomly chosen.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_PULL_REQUESTS`
 | GitHub OAuth, Bitbucket Cloud
 | List
 | Comma-separated list of URLs of the current build's associated pull requests.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_REPOSITORY_URL`
 | GitHub OAuth, Bitbucket Cloud
 | String
 | The URL of your GitHub or Bitbucket repository.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_SHA1`
 | GitHub, GitLab, Bitbucket
 | String
 | The SHA1 hash of the last commit of the current build.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_TAG`
 | GitHub, Bitbucket, GitLab
 | String
 | The name of the git tag, if the current build is tagged. For more information, see the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Git tag job execution section] of the Workflows page.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_USERNAME`
 | GitHub, Bitbucket, GitLab
 | String
 | The GitHub or Bitbucket username of the user who triggered the pipeline (only if the user has a CircleCI account).
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_WORKFLOW_ID`
 | GitHub, Bitbucket, GitLab
 | String
 | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_WORKFLOW_JOB_ID`
 | GitHub, Bitbucket, GitLab
 | String
 | A unique identifier for the current job.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_WORKFLOW_WORKSPACE_ID`
 | GitHub, Bitbucket, GitLab
 | String
 | An identifier for the <<glossary#workspace,workspace>> of the current job. This identifier is the same for every job in a given workflow.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_WORKING_DIRECTORY`
 | GitHub, Bitbucket, GitLab
 | String
 | The value of the `working_directory` key of the current job.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `CIRCLE_INTERNAL_TASK_DATA`
 | GitHub, Bitbucket, GitLab
 | String
 | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 |===
 
 If you must use the environment variables that are deprecated for GitLab SaaS in your GitLab pipelines, you can recreate this functionality using pipeline values in your configuration file. The following example shows how to set an environment variable `CIRCLE_PROJECT_REPONAME` using the xref:guides:security:env-vars.adoc#environment-variable-usage-options[`environment` key] and populating it with the `pipeline.trigger_parameters.gitlab.repo_name` value:

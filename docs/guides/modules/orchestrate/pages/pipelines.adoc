@@ -64,7 +64,7 @@ image::guides:ROOT:add-pipeline.png[Add a pipeline]
 To add or edit a pipeline, follow these steps:
 
 . In the CircleCI web app, select **Projects** in the sidebar.
-. Select the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon] and choose **Project Settings**.
+. Select the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and choose **Project Settings**.
 . Select **Pipelines** in the sidebar.
 +
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
@@ -75,7 +75,7 @@ To add or edit a pipeline, follow these steps:
 NOTE: If you integrate with xref:integration:github-integration.adoc[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:integration:github-integration.adoc#using-github-app-functionality[improved security and new features]. This is a one-time step, which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be setup without this installation step.
 +
 NOTE: For GitLab self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:integration:gitlab-integration.adoc#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
-** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon].
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file.
@@ -111,12 +111,12 @@ image::guides:ROOT:triggers/add-trigger-github.png[Add a trigger]
 To add a trigger for a pipeline, follow these steps:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon] next to it and choose **Project Settings**.
+. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
 . Select btn:[Add Trigger].
 . Select GitHub App in the "Trigger type" menu and select btn:[Next].
 . Complete the form fields and options:
-** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon].
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Give your trigger a descriptive name.
 ** Select the trigger source repository.
 ** Choose your pipeline from the "Choose pipeline to run" menu.
@@ -155,7 +155,7 @@ image::guides:ROOT:add-trigger.png[Add a trigger]
 To add a trigger for a pipeline, follow these steps:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
-. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon] next to it and choose **Project Settings**.
+. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
 +
 TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:integration:github-integration.adoc[GitHub OAuth] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud] and these steps do not apply.
@@ -164,7 +164,7 @@ TIP: If you do not see **Triggers** in the sidebar, your project is integrated u
 . Select btn:[Next].
 . Complete the form fields and options:
 ** Give your trigger a descriptive name.
-** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon] (Not required for custom webhooks).
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] (Not required for custom webhooks).
 +
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
 ** Select your repository from the dropdown menu. This should match the repository your pipeline is connected to (not required for custom webhooks).

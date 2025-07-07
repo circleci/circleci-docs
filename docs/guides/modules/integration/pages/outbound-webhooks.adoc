@@ -32,7 +32,7 @@ To configure webhooks within the CircleCI app:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select your organization.
 . Select **Projects** in the sidebar.
-. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon], and select **Project Settings**.
+. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"], and select **Project Settings**.
 . In the sidebar select *Webhooks*
 . Select *Add Webhook*
 . Fill out the webhook form (the table below describes the fields and their intent)

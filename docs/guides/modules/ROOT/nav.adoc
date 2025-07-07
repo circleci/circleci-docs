@@ -2,6 +2,7 @@
 ** xref:about-circleci:about-circleci.adoc[CircleCI overview]
 ** xref:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 ** xref:about-circleci:concepts.adoc[Concepts]
+** xref:about-circleci:introduction-to-the-circleci-web-app.adoc[Intro to the CircleCI web app]
 ** xref:about-circleci:open-source.adoc[Open source acknowledgements]
 
 * xref:getting-started:index.adoc[Getting started]
@@ -12,17 +13,17 @@
 *** xref:getting-started:getting-started.adoc[Quickstart guide]
 ** How-to guides
 *** xref:getting-started:hello-world.adoc[Hello World]
-*** xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML configuration]
+*** xref:getting-started:introduction-to-yaml-configurations.adoc[Intro to YAML configuration]
 *** xref:getting-started:config-editor.adoc[In-app config editor]
 *** xref:getting-started:language-javascript.adoc[Node.js quickstart]
 *** xref:getting-started:language-python.adoc[Python quickstart]
 *** xref:getting-started:language-go.adoc[Go quickstart]
 ** Tutorials
-*** xref:getting-started:config-intro.adoc[Configuration introduction]
+*** xref:getting-started:config-intro.adoc[Configuration intro]
 *** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
 
 * xref:migrate:index.adoc[Migrate to CircleCI]
-** xref:migrate:migration-intro.adoc[Migration introduction]
+** xref:migrate:migration-intro.adoc[Migration intro]
 ** xref:migrate:migrating-from-aws.adoc[Migrate from AWS]
 ** xref:migrate:migrating-from-azuredevops.adoc[Migrate from Azure DevOps]
 ** xref:migrate:migrating-from-buildkite.adoc[Migrate from Buildkite]
@@ -292,7 +293,7 @@
 *** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
 *** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
 ** APIs
-*** xref:toolkit:api-intro.adoc[API v2 introduction]
+*** xref:toolkit:api-intro.adoc[API v2 intro]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]
 *** xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
 ** IDE tools

@@ -7,29 +7,29 @@
 | 4
 | 15GB
 | 200 GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `windows.large`
 | 8
 | 30GB
 | 200 GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `windows.xlarge`
 | 16
 | 60GB
 | 200 GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `windows.2xlarge`
 | 32
 | 128GB
 | 200 GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 |===
 
 NOTE: **Using server?** Check with your systems administrator whether you have access to the Windows execution environment.

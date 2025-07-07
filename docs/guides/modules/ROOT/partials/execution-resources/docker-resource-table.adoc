@@ -8,42 +8,42 @@ NOTE: For credit and access information, see the link:https://circleci.com/produ
 | `small`
 | 1
 | 2GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `medium`
 | 2
 | 4GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `medium+`
 | 3
 | 6GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `large`
 | 4
 | 8GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `xlarge`
 | 8
 | 16GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `2xlarge`
 | 16
 | 32GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `2xlarge+`
 | 20
 | 40GB
-| image:guides:ROOT:icons/check.svg[check icon]
-| image:guides:ROOT:icons/check.svg[check icon]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 |===

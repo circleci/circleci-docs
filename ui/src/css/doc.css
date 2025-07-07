@@ -143,7 +143,8 @@
 
 .doc p code,
 .doc thead code,
-.doc .colist > table code {
+.doc .colist > table code,
+.doc .admonitionblock td.content code {
   color: var(--code-font-color);
   background: #F7F7F7;
   border-radius: 4px;
@@ -577,6 +578,16 @@
   object-fit: contain;
   border: 1px solid #D4D4D4;
   border-radius: 8px;
+}
+
+/* Remove border for images with no-border class */
+.doc .imageblock.no-border img,
+.doc .imageblock.no-border object,
+.doc .imageblock.no-border svg,
+.doc .image.no-border > img,
+.doc .image.no-border > object,
+.doc .image.no-border > svg {
+  border: none;
 }
 
 .doc .image:not(.left):not(.right) > img {

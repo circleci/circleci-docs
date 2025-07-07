@@ -200,7 +200,7 @@ CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. Yo
 To make changes to your pipeline, choose one of the following:
 
 * Edit the config file in your repository,
-* Select the ellipsis image:guides:ROOT:icons/more.svg[more icon] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
+* Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
 * Access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
 
 .Access and edit a config file
