@@ -1,18 +1,18 @@
 ---
 contentTags:
   platform:
-    - Server v4.7
+    - Server v4.8
     - Server Admin
 ---
 = Troubleshooting and support
 :page-layout: classic-docs
 :page-liquid:
-:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.7 installation.
+:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server v4.8 installation.
 :icons: font
 :toc: macro
 :toc-title:
 
-This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.7 installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
+This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server v4.8 installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
 
 toc::[]
 
