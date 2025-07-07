@@ -279,6 +279,37 @@
   overflow: hidden;
 }
 
+
+/* Fix for wide tables - allow horizontal scrolling when content exceeds container */
+.doc table.tableblock.stretch {
+  width: auto;
+  min-width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+/* Restore proper table display for table elements */
+.doc table.tableblock.stretch tbody,
+.doc table.tableblock.stretch thead,
+.doc table.tableblock.stretch tfoot {
+  display: table-row-group;
+}
+
+.doc table.tableblock.stretch tr {
+  display: table-row;
+}
+
+.doc table.tableblock.stretch th,
+.doc table.tableblock.stretch td {
+  display: table-cell;
+}
+
+/* Keep existing tablecontainer support for special cases (tabs, etc.) */
+.doc .tablecontainer {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
 .doc p.tableblock + p.tableblock {
   margin-top: 0.5rem;
 }

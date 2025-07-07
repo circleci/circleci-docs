@@ -35,7 +35,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 === Code checkout and repository integration
 
 [.table.table-striped]
-[cols=8*, options="header", stripes=even]
+[cols="3,1,1,1,1,1,1,1", options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
@@ -106,7 +106,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 === Pipeline triggers and integrations
 
 [.table.table-striped]
-[cols=8*, options="header", stripes=even]
+[cols="3,1,1,1,1,1,1,1", options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 
@@ -176,7 +176,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 === Core capabilities
 
 [.table.table-striped]
-[cols=8*, options="header", stripes=even]
+[cols="3,1,1,1,1,1,1,1", options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:optimize:artifacts.adoc[Artifact storage]
@@ -292,7 +292,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 === Security and permissions
 
 [.table.table-striped]
-[cols=8*, options="header", stripes=even]
+[cols="3,1,1,1,1,1,1,1", options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
 | xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect tokens]
@@ -344,7 +344,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 === Open source support
 
 [.table.table-striped]
-[cols=8*, options="header", stripes=even]
+[cols="3,1,1,1,1,1,1,1", options="header", stripes=even]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
 | xref:oss.adoc[OSS support]
