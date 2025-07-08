@@ -40,8 +40,8 @@ CAUTION: Future dates listed here may change at any time.
 | Version | Released | End of Support
 
 |4.8.x
-|TBC
-|TBC
+|07/24/2025
+|07/24/2026*
 
 |4.7.x
 |11/07/2024
@@ -49,23 +49,23 @@ CAUTION: Future dates listed here may change at any time.
 
 |4.6.x
 |8/12/2024
-|8/12/2025*
+|07/24/2025
 
 |4.5.x
 |4/30/2024
-|4/30/2025*
+|4/30/2025
 
 |4.4.x
 |2/05/2024
-|2/28/2025*
+|2/28/2025
 
 |4.3.x
 |11/07/2023
-|11/30/2024*
+|11/30/2024
 
 |4.2.x
 |7/18/2023
-|7/31/2024*
+|7/31/2024
 
 |4.1.x
 |3/21/2023
