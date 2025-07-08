@@ -33,23 +33,19 @@ We support various tags for the Windows environment, allowing you to choose a su
 
 - `edge`: tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the current quarterly image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
 
-- `previous`: version of Windows Server will receive the previous version of `current`.
-
 We generally install the latest Major version of Visual Studio Community Edition that coincides with the Windows Server version in the image when it is built.
 
-We always aim to release a version of the supported windows images (for example, currently this is `Windows server 2019` and `Windows server 2022`) every 3 months. We recommend using the `default` version and not pinning to a date version.
+We always aim to release a version of the supported Windows images every 3 months. We recommend using the `default` version and not pinning to a date version.
 
 [#tagging-with-the-windows-orb]
 == Tagging with the Windows orb
 
 The variant of Windows Server can be specified by choosing the name parameter in the Windows orb. The most recent version of Windows Server will always be accessible via the `win/default` name, but previous versions require explicit definition, such as `win/server-2019`.
 
-Each quarterly (published every 3 months) image for the `current` tag Windows Server version is published to a date-based tag, such as `2023.10.1`, which can be explicitly defined in the version parameter of the orb.
-
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in our Windows Images, we will investigate the impact that this has on our images being used within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
@@ -59,11 +55,11 @@ You can file a link:https://support.circleci.com/hc/en-us/requests/new[support t
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-Once the next major version of Windows Server is released by Microsoft, and generally available to customers, we will deprecate the oldest version of Windows Server that we support and schedule it to be removed.
+Once the next major version of Windows Server is released, we will deprecate the oldest version of Windows Server that we support and schedule it to be removed.
 
-After the new version of Windows Server has been released, we will then move the current Windows Server version into an extended support phase and move to the tagging system described in the <<tagging>> section of this document.
+After the new version of Windows Server has been released, we will then move the current Windows Server version into an extended support phase.
 
-Current deprecation (Jan 2024):
+Current deprecation:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -72,10 +68,10 @@ Current deprecation (Jan 2024):
 | Support
 
 | Windows Server 2019
-| Build quarterly images and retain Q4 (October) releases from previous two years
+| `current` and `edge` tags retained
 
 | Windows Server 2022
-| Build quarterly images and only Q4 (October) releases retained each year
+| `current` and `edge` tags retained
 |===
 
 Example: When Windows Server 2025 is released
@@ -90,13 +86,13 @@ Example: When Windows Server 2025 is released
 | Deprecated and removed entirely
 
 | Windows Server 2022
-| Retain only current and past two Q4 (October) releases
+| `current` and `edge` tags retained
 
 | Windows Server 2025
-| Quarterly images built and only Q4 (October) image retained each year
+| `current` and `edge` tags retained
 |===
 
-When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs.
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.
 
 We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release.
 
