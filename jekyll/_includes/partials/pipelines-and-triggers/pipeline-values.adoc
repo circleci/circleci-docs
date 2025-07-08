@@ -457,4 +457,11 @@ a|  * GitLab: push, merge request
 | icon:check[]
 | icon:times[]
 
+| `pipeline.deploy.reason`
+| GitHub App
+| String
+| Only for use with xref:deploy/set-up-rollbacks#[rollbacks]. The reason for the deployment or rollback.
+| icon:check[]
+| icon:times[]
+
 |===
