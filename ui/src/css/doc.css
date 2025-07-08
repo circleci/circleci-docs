@@ -321,6 +321,16 @@
   border-bottom: 1px solid #D4D4D4;
 }
 
+.doc .table-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.doc .table-scroll table.tableblock {
+  min-width: 100%;
+  width: auto;
+}
+
 .doc table.grid-all > * > tr > * {
   border-width: 0;
   border-bottom: 1px solid #D4D4D4;

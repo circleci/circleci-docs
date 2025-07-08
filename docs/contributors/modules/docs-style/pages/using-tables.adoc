@@ -1,17 +1,8 @@
 = Using tables
 
-* For markdown content use the following format for tables:
-+
-[source,adoc]
-----
-Key | Required | Type | Description
----|---|---|---
-version | Y | String | Should currently be `2`
-{: class="table table-striped"}
-----
+== Basic table syntax
+Use the following format for tables:
 
-* For asciidoc content use the following:
-+
 [source,adoc]
 ----
 [.table.table-striped]
@@ -28,3 +19,66 @@ version | Y | String | Should currently be `2`
 | Should currently be `2`
 |===
 ----
+
+Looks like:
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key
+| Required
+| Type
+| Description
+
+| Version
+| Y
+| String
+| Should currently be `2`
+|===
+
+== Extra wide tables
+
+If you have a wide table that needs to scroll, wrap it in a scrollable container, as follows:
+
+[source,adoc]
+----
+[.table-scroll]
+--
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key
+| Required
+| Type
+| Description
+
+| `++Some very long text that can't wrap so the table needs to scroll++`
+| Some data
+| Some more data
+| Some more data
+|===
+--
+----
+
+Looks like:
+
+[.table-scroll]
+--
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Key
+| Required
+| Type
+| Description
+
+| `++Some very long text that can't wrap so the table needs to scroll++`
+| Some data
+| Some more data
+| Some more data
+|===
+--
+
+== Advanced table options
+
+There are a lot of options for formatting tables, cell, rows, columns. For more information, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs]
