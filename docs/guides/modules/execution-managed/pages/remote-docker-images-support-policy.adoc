@@ -6,14 +6,14 @@
 [#overview]
 == Overview
 
-This document outlines the xref:building-docker-images.adoc[CircleCI remote Docker image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (setup_remote_docker).
+This document outlines the xref:building-docker-images.adoc[CircleCI remote Docker image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (`setup_remote_docker`).
 
 [#release-policy]
 == Release policy
 
 The CircleCI remote Docker images are based on our Linux VM images with Docker installed for the purposes of providing a remote environment that can execute Docker commands within jobs on the Docker executor.
 
-We aim to support the latest two versions of the Docker Engine that are classified as within Security Support status.
+We aim to support the latest three versions of the Docker Engine that are classified as within Security Support status.
 
 Remote Docker images will be updated when a patch version is released upstream. Tags will be redirected to the updated images automatically as described in the xref:#tagging[tagging] section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
 
@@ -28,14 +28,12 @@ For the latest major version of Docker:
 
 - `edge`: This tag is reserved for previews of new releases, which will initially point to this tag. The tag may include incremental updates relative to the current quarterly image release, which may change without notice, and is not recommended for production CI workloads.
 
-- `previous`: Once an `edge` image is promoted to `default`, the previous `default` image is moved to the `previous` tag.
-
-For the previous major version of Docker, we support a single tag following the format of `dockerXX`, for example, `docker23` for Docker 23. This tag will point to the latest patch version of the major release, and will be updated if any patch versions are issued upstream. We recommend using the default version.
+For the previous major version of Docker, we support a single tag following the format of `dockerXX`, for example, `docker27` for Docker 27. This tag will point to the latest patch version of the major release, and will be updated if any patch versions are issued upstream. We recommend using the default version.
 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in our remote Docker images, we will investigate the impact that this has on our images being used within the CircleCI execution environment.  If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
@@ -55,17 +53,17 @@ Current Deprecation:
 | Version
 | Support
 
-| Docker 20
-| We will support one version of Docker 20 with a tag of `20.10.24`
+| Docker 25
+| `docker25` tag is maintained for Docker 25 support
 
-| Docker 23
-| `docker23` tag is maintained for Docker 23 support
+| Docker 26
+| `docker26` tag is maintained for Docker 26 support
 
-| Docker 24
-| Set to `default`, `edge` and `previous` tags
+| Docker 27
+| Set to `default` and `edge` tags. `docker27` tag is maintained for Docker 27 as default tag as well.
 |===
 
-Example: When Docker 25 is released:
+Example: When Docker 28 is released:
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
@@ -73,21 +71,21 @@ Example: When Docker 25 is released:
 | Version
 | Support
 
-| Docker 20
+| Docker 25
 | Deprecated and removed
 
-| Docker 23
-| `docker23` tag is frozen and kept until next cycle
+| Docker 26
+| `docker26` tag kept until next cycle
 
-| Docker 24
-| Moved from `default`, `edge` and `previous` tags to `docker24` tag
+| Docker 27
+| Moved from `default` and `edge` tags to `docker27` tag only
 
-| Docker 25
-| Set to `default`, `edge` and `previous` tags
+| Docker 28
+| Set to `default` and `edge` tags. With `docker28` tag for pinning Docker version.
 |===
 
 
-When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs.
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.
 
 We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release
 

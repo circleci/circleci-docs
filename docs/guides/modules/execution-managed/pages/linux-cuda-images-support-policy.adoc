@@ -13,9 +13,9 @@ This document outlines the xref:using-gpu.adoc#linux-gpu[CircleCI Linux CUDA ima
 [#release-policy]
 == Release policy
 
-The CircleCI CUDA images are based on our Linux VM machine images for the purpose of providing an image that can leverage the additional processing capabilities of CircleCI’s GPU executor.
+The CircleCI CUDA images are based on our Linux VM machine images. This provides an image that can leverage the additional processing capabilities of CircleCI’s GPU executor.
 
-We aim to support the three most recent minor versions (or three most recent even numbered minor versions, if minor version >= `6`) of the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release.
+We aim to support the two most recent and supported major CUDA releases. We closely track Nvidia’s own release cycle and aim to release our images within a week of the CUDA release.
 
 The release policy is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new CUDA images.
 
@@ -35,7 +35,7 @@ The following tags are available for the CircleCI Linux CUDA images:
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in either Linux or Windows images, we will investigate the impact that this has on our images being used across CircleCI execution environments.
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment.
 
 In most cases, due to the ephemeral and isolated nature of the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures via our link:https://discuss.circleci.com/[Discuss Forum].
 
@@ -94,7 +94,7 @@ A minor version release -- CUDA 11.8:
 
 Once a new even numbered minor version is released, that version will be added and the oldest existing version will be removed, provided that more than 3 minor versions exist.
 
-When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will also plan brownouts to help ensure you are aware of the approaching removal of deprecated images.
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.
 
 [#exceptions]
 == Exceptions
