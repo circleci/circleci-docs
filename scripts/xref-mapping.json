@@ -569,6 +569,11 @@
     "module": "execution-managed",
     "filename": "remote-docker-images-support-policy.adoc"
   },
+  "machine-convenience-image-lifecycle": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "machine-convenience-image-lifecycle.adoc"
+  },
   "runner-faqs": {
     "component": "guides",
     "module": "execution-runner",

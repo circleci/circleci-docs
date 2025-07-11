@@ -101,6 +101,7 @@
 *** xref:execution-managed:remote-docker-images-support-policy.adoc[Remote Docker images support policy]
 *** xref:execution-managed:windows-images-support-policy.adoc[Windows images support policy]
 *** xref:execution-managed:xcode-policy.adoc[Xcode image policy]
+*** xref:execution-managed:machine-convenience-image-lifecycle.adoc[CircleCI image lifecycle: A complete guide]
 
 * xref:execution-runner:index.adoc[Execute jobs on self-hosted runners]
 ** xref:execution-runner:runner-overview.adoc[Self-hosted runner overview]
@@ -302,6 +303,7 @@
 ** Config tools
 *** xref:toolkit:circleci-config-sdk.adoc[Config SDK]
 *** xref:orbs:author:orb-development-kit.adoc[Orb development kit]
+*** xref:toolkit:circleci-image-updater.adoc[Image Updater]
 ** Example projects and configs
 *** xref:toolkit:examples-and-guides-overview.adoc[Examples and guides overview]
 *** xref:toolkit:sample-config.adoc[Sample config.yml files]
