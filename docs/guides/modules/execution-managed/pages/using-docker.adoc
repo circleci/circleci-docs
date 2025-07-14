@@ -112,8 +112,7 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 
 The table below shows tradeoffs between using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols="2,1,1", options="header"]
 |===
 | Capability | `docker` | `machine`
 

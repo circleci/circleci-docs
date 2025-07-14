@@ -67,8 +67,7 @@ Two pipeline values are available for all GitHub App pipelines for you to use to
 
 The available GitHub App options for these values are listed in the following table:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 |Trigger type
 |`pipeline.event.name`

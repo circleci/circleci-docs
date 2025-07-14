@@ -12,9 +12,9 @@ The example build configurations referenced throughout this article are based on
 
 This document assumes that:
 
-. You have an account with CircleCI that is linked to a repository. If you do not have an account,
+* You have an account with CircleCI that is linked to a repository. If you do not have an account,
 consider reading our xref:getting-started:getting-started.adoc[Getting Started Guide].
-. You understand the xref:about-circleci:concepts.adoc[Basic Concepts] in CircleCI.
+* You understand the xref:about-circleci:concepts.adoc[Basic Concepts] in CircleCI.
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?
@@ -33,8 +33,7 @@ will live in `.circleci/config.yml` at the root of your repository.
 
 Below, you'll find a side-by-side comparison of different configuration declarations.
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols="2,2,3", options="header"]
 |===
 | Travis CI | CircleCI | Description
 

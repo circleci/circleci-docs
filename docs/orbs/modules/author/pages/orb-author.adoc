@@ -62,8 +62,7 @@ To begin creating orbs, you will need to xref:guides:toolkit:local-cli.adoc#inst
 
 Orb CLI commands are scoped to different user permission levels, set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Orb Command | Permission Scope
 
@@ -123,10 +122,8 @@ $ git branch
 
 If you have run the `circleci orb init` command, you will automatically be in the `alpha` branch and have a repository with `.circleci` and `src` directories.
 
-*_Example: Orb Project Structure_*
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Orb Project Structure
+[cols=2*, options="header"]
 |===
 | type | name
 
@@ -154,10 +151,8 @@ If you have run the `circleci orb init` command, you will automatically be in th
 
 Navigate to the `src` directory to look at the included sections.
 
-*_Example: Orb Project `src` Directory_*
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Orb Project `src` Directory
+[cols=2*, options="header"]
 |===
 | type | name
 

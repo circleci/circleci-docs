@@ -1,5 +1,4 @@
-[.table.table-striped]
-[cols=6*, options="header", stripes=even]
+[cols="2,1,1,2,1,1", options="header"]
 |===
 | Variable
 | Source

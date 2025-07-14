@@ -312,8 +312,7 @@ The following are examples of caching strategies for different goals:
 
 During step execution, the templates above are replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Template | Description
 

@@ -45,8 +45,7 @@ Image Lifespan will generally follow the support status of Ubuntu by Canonical. 
 
 Current Deprecation (Jan 2024):
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Version
 | Support
@@ -59,8 +58,7 @@ Current Deprecation (Jan 2024):
 
 Example: When Ubuntu 24.04 LTS is released
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Version
 | Support

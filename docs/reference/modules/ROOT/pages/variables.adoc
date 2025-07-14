@@ -14,8 +14,7 @@ Environment variables are scoped at the job level and can be used within the con
 
 NOTE: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step to export the new environment variables using `BASH_ENV`. For more details, see xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[Setting an Environment Variable in a Shell Command].
 
-[.table.table-striped]
-[cols=6*, options="header", stripes=even]
+[cols="2,2,1,2,1,1", options="header"]
 |===
 | Variable
 | VCS

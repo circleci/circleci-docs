@@ -55,8 +55,7 @@ Once a new major version of CUDA is released, we will begin the deprecation proc
 
 A major version release -- CUDA 12.0:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Version
 | Support
@@ -73,8 +72,7 @@ A major version release -- CUDA 12.0:
 
 A minor version release -- CUDA 11.8:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Version
 | Support

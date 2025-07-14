@@ -218,8 +218,7 @@ include::ROOT:partial$deploy/supported-versions.adoc[]
 
 The following table shows a complete list of labels and annotations either required or available for configuring your environment integration.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 |
 |Label/annotation
@@ -315,8 +314,7 @@ Some points to consider when manually configuring an automatically detected depl
 
 A deployment can be in one of the following states:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 |Status
 |Notes

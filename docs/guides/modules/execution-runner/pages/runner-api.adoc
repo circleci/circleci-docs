@@ -15,8 +15,7 @@ The CircleCI's self-hosted runner API contains different authentication methods.
 
 This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Name
 | Description
@@ -41,8 +40,7 @@ This token is generated when creating a new resource class. This token is only d
 [#supported-methods]
 ==== Supported methods
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Name
 | Description
@@ -69,8 +67,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 [#get-api-v3-runner-request]
 ===== Request
 
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
+[cols=5*, options="header"]
 |===
 | Name
 | Type
@@ -107,8 +104,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 [#get-api-v3-runner-response]
 ==== Response
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 | Status
 | Description
@@ -122,8 +118,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 [#get-api-v3-runner-response-schema]
 ==== Response schema
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 | Name
 | Type
@@ -207,8 +202,7 @@ Get the number of unclaimed tasks for a given resource class.
 [#get-api-v3-tasks-request]
 ==== Request
 
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
+[cols=5*, options="header"]
 |===
 | Name
 | Type
@@ -234,8 +228,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 [#get-api-v3-tasks-response]
 ==== Response
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 | Status
 | Description
@@ -249,8 +242,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 [#get-api-v3-tasks-response-schema]
 ==== Response schema
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 | Name
 | Type
@@ -289,8 +281,7 @@ Get the number of running tasks for a given resource class.
 [#get-api-v3-tasks-running-request]
 ==== Request
 
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
+[cols=5*, options="header"]
 |===
 | Name
 | Type
@@ -316,8 +307,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-cla
 [#get-api-v3-tasks-running-response]
 ==== Response
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 | Status
 | Description
@@ -331,8 +321,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-cla
 [#get-api-v3-tasks-running-response-schema]
 ==== Response schema
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="2,1,1,2", options="header"]
 |===
 | Name
 | Type

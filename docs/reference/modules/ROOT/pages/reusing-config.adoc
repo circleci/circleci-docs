@@ -52,8 +52,7 @@ workflows:
 
 A parameter can have the following keys as immediate children:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols="1,2,1", options="header"]
 |===
 | Key Name | Description | Default value
 
@@ -441,8 +440,7 @@ commands:
 
 A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -640,8 +638,7 @@ jobs:
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="2,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1151,8 +1148,7 @@ workflows:
 
 Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a truthy value.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1172,8 +1168,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 
 Under the `unless` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a falsy value.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 

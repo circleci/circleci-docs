@@ -5,8 +5,7 @@ Use the following format for tables:
 
 [source,adoc]
 ----
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 | Key
 | Required
@@ -22,8 +21,7 @@ Use the following format for tables:
 
 Looks like:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 | Key
 | Required
@@ -44,15 +42,14 @@ If you have a wide table that needs to scroll, wrap it in a scrollable container
 ----
 [.table-scroll]
 --
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 | Key
 | Required
 | Type
 | Description
 
-| `++Some very long text that can't wrap so the table needs to scroll++`
+| ++Some+very+long+text+that+can't+wrap+so+the+table+needs+to+scroll+Some+very+long+text+that+can't+wrap+so+the+table+needs+to+scroll++
 | Some data
 | Some more data
 | Some more data
@@ -64,15 +61,14 @@ Looks like:
 
 [.table-scroll]
 --
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 | Key
 | Required
 | Type
 | Description
 
-| `++Some very long text that can't wrap so the table needs to scroll++`
+| ++Some+very+long+text+that+can't+wrap+so+the+table+needs+to+scroll+Some+very+long+text+that+can't+wrap+so+the+table+needs+to+scroll++
 | Some data
 | Some more data
 | Some more data

@@ -175,8 +175,7 @@ In Semantic versioning, release versions are represented by three integers separ
 [Major].[Minor].[Patch]
 ----
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | SemVer | Description
 
@@ -192,8 +191,7 @@ In Semantic versioning, release versions are represented by three integers separ
 
 When you import an orb, you can pin it to a particular SemVer component.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Imported Version | Description
 
@@ -296,10 +294,8 @@ All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, f
 
 NOTE: If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the link:https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack[orb-tools/pack] job.
 
-*_Example: Orb Project Structure_*
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Orb Project Structure
+[cols=2*, options="header"]
 |===
 | type | name
 

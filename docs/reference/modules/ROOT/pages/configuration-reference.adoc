@@ -14,8 +14,7 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -39,8 +38,7 @@ version: 2.1
 
 The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -68,8 +66,7 @@ NOTE: The `orbs` key is supported in `version: 2.1` configuration
 
 Use the `orbs` key to reference or define reusable configuration blocks (orbs) for use in your configuration.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -132,8 +129,7 @@ NOTE: The `commands` key is supported in `version: 2.1` configuration
 
 A `command` defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the xref:reusing-config.adoc#[Reusable Config Reference Guide].
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -179,8 +175,7 @@ NOTE: The pipeline `parameters` key is supported in `version: 2.1` configuration
 
 Use the `parameters` key at the top level of your config to declare _pipeline parameters_ for use in the configuration. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters] for usage details.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -214,8 +209,7 @@ NOTE: The `executors` key is supported in `version: 2.1` configuration
 
 Executors define the execution environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -323,8 +317,7 @@ jobs:
 
 Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -580,8 +573,7 @@ Learn more about execution environments and executors in the xref:guides:executi
 
 Configure a job to use the Docker execution environment using the  `docker` key which takes a list of maps:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -750,8 +742,7 @@ NOTE: *Using CircleCI cloud?* The use of `machine: true` is deprecated. You must
 
 The machine executor is configured using the `machine` key, which takes a map:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -903,8 +894,7 @@ jobs:
 
 CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS], to allow you to build, test, and deploy apps for macOS, link:https://developer.apple.com/ios/[iOS], link:https://developer.apple.com/tvos/[tvOS] and https://developer.apple.com/watchos/[watchOS]. To run a job on a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode to use.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1255,8 +1245,7 @@ In this case, the `checkout` step will check out project source code into the jo
 
 In general all steps can be described as:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1277,8 +1266,7 @@ The `run` step is used to invoke command-line programs. The `run` step takes eit
 
 NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate from deploy to run].
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1502,8 +1490,7 @@ NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuratio
 
 A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps section of the reusable configuration reference] for more details.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1554,8 +1541,7 @@ workflows:
 [#checkout]
 ===== *`checkout`*
 
-[NOTE]
-====
+****
 *Blobless clones*
 
 A "blobless" strategy is being rolled out to help improve the performance of code checkouts from Git source code hosts.
@@ -1574,12 +1560,11 @@ jobs:
       - checkout
       - run: git fetch
 ----
-====
+****
 
 A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1639,8 +1624,7 @@ NOTE: The `checkout` step will configure Git to skip automatic garbage collectio
 
 Allows Docker commands to be run locally. See xref:guides:execution-managed:building-docker-images.adoc#[Running Docker commands] for details.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1678,8 +1662,7 @@ Generates and stores a cache of a file or directory of files such as dependencie
 
 Cache retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1708,8 +1691,7 @@ The cache for a specific `key` is immutable and cannot be changed once written. 
 
 When storing a new cache, the `key` value may contain special, templated, values for your convenience:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Template | Description
 
@@ -1742,7 +1724,7 @@ During step execution, the templates above will be replaced by runtime values an
 
 *Template examples:*
 
-`myapp-{{ checksum "package-lock.json" }}`:: cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
+`++myapp-{{ checksum "package-lock.json" }}++`:: cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
 `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`:: same as the previous one, but each branch will generate separate cache
 `myapp-{{ epoch }}`:: every run of a job will generate a separate cache
 
@@ -1784,8 +1766,7 @@ Wildcards are not currently supported in `save_cache` paths. Visit the link:http
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<savecache,`save_cache` step>>. Learn more in xref:guides:optimize:caching.adoc#[the caching documentation].
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1873,8 +1854,7 @@ See <<run>> for current processes. If you have parallelism `> 1` in your job, se
 
 Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the xref:guides:optimize:artifacts.adoc#[Uploading Artifacts] page for more information.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1914,8 +1894,7 @@ Special step used to upload and store test results for a build. Test results are
 
 You can also store test results as build artifacts. For steps, refer to <<storeartifacts,the `store_artifacts` step>> section.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1959,8 +1938,7 @@ Special step used to persist a temporary file to be used by another job in the w
 
 Workspace storage retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2038,8 +2016,7 @@ NOTE: Everything must be relative to the work space root directory.
 
 Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using workspaces] page.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2070,8 +2047,7 @@ Special step that adds SSH keys from a project's settings to a container. Also c
 
 CAUTION: *Using server?* only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2159,8 +2135,7 @@ NOTE: The workflows `version` key is *not* required for `version: 2.1` configura
 
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2201,8 +2176,7 @@ workflows:
 
 Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2262,8 +2236,7 @@ workflows:
 
 The `cron` key is defined using POSIX `crontab` syntax.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2296,8 +2269,7 @@ workflows:
 
 Trigger filters can have the key `branches`.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2356,8 +2328,7 @@ workflows:
       - coverage
 ----
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2416,8 +2387,7 @@ Refer to the xref:guides:orchestrate:workflows.adoc#[Workflows] for more example
 
 A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2458,8 +2428,7 @@ workflows:
 
 The `override-with` key is used to override the job configuration with a job from the referenced orb.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2512,8 +2481,7 @@ Jobs in a serial group follow an order protection mechanism, as follows:
 If there are no serial groups waiting/running, a pipeline with a lower number can start, such as restoring back to a previous pipeline via a rerun workflow.
 ====
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2539,8 +2507,7 @@ For more information, see the xref:guides:orchestrate:controlling-serial-executi
 
 Jobs are run concurrently by default, so you must explicitly require any dependencies by their job name if you need some jobs to run sequentially.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2589,8 +2556,7 @@ workflows:
 
 The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (for example, sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2616,8 +2582,7 @@ workflows:
 
 Jobs may be configured to use global environment variables set for an organization, see the xref:guides:security:contexts.adoc#[Contexts] document for adding a context in the application settings.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2692,8 +2657,7 @@ Job filters can have the keys `branches` or `tags`.
 
 NOTE: Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2848,8 +2812,7 @@ The branches filter can have the keys `only` and `ignore`, which map to a single
 * If neither `only` nor `ignore` are specified then all branches will run the job.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2904,8 +2867,7 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 * If neither `only` nor `ignore` are specified then the job is skipped for all tags.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -2950,8 +2912,7 @@ NOTE: The `matrix` key is supported in `version: 2.1` configuration
 
 The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on xref:guides:orchestrate:using-matrix-jobs.adoc#[Using Matrix Jobs]. In order to use the `matrix` stanza, you must use parameterized jobs.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -3163,8 +3124,7 @@ Logic statements are evaluated to boolean values at configuration compilation
 time, that is, before the workflow is run. The group of logic statements
 includes:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Type | Arguments | `true` if | Example
 

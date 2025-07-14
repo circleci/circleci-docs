@@ -183,8 +183,7 @@ curl --silent --request GET --url https://circleci.com/api/v2/workflow/:workflow
 
 You can read more about using CircleCI's API to interact with artifacts in our link:https://circleci.com/docs/api/v1/#artifacts[API reference guide].
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Placeholder | Meaning
 

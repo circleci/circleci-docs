@@ -13,8 +13,7 @@ This document provides definitions for all the metrics in CircleCI Insights. You
 
 General metrics appear across the Insights experience and can refer to different entities, depending on the context. For example, the `Runs` metric may refer to a count of workflow executions or jobs, depending on the context.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Term | Definition
 
@@ -46,8 +45,7 @@ image::guides:ROOT:insights-org-metrics.png[Organization-level metrics example]
 
 Organization-level metrics allow you to analyze your organization's performance.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Term | Definition
 
@@ -69,8 +67,7 @@ Organization-level metrics allow you to analyze your organization's performance.
 
 image::guides:ROOT:insights-workflow-metrics.png[Workflow metrics example]
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Term | Definition
 

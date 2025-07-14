@@ -54,8 +54,7 @@ After the new version of Windows Server has been released, we will then move the
 
 Current deprecation:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Version
 | Support
@@ -69,8 +68,7 @@ Current deprecation:
 
 Example: When Windows Server 2025 is released
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Version
 | Support

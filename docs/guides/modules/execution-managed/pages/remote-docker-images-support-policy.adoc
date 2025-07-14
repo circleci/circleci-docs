@@ -47,8 +47,7 @@ Image lifespan will generally follow the support status of Docker Engine by Dock
 
 Current Deprecation:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Version
 | Support
@@ -65,8 +64,7 @@ Current Deprecation:
 
 Example: When Docker 28 is released:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Version
 | Support

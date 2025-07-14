@@ -17,14 +17,14 @@ Both GitHub Actions and CircleCI share similar concepts around "jobs" and "workf
 
 CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
 
-[.table.table-striped.table-migrating-page.table-no-background]
-[cols=2*, options="header", stripes=even]
-[cols="50%,50%"]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | GitHub | CircleCI
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 name: My GitHub Actions Workflow
 
@@ -43,7 +43,7 @@ jobs:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   job_1:
@@ -64,6 +64,7 @@ workflows:
             - job_1
 ----
 |===
+--
 
 [#actions-vs-orbs]
 === Actions vs. orbs
@@ -88,9 +89,9 @@ See the table in the next section to compare configuration.
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-[.table.table-striped.table-migrating-page]
-[cols=2*, options="header,unbreakable,autowidth", stripes=even]
-[cols="5,5"]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | GitHub Config | CircleCI Config
 
@@ -98,7 +99,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 `docker` is its https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 # Choosing an Operating System
 runs-on: ubuntu-latest # or windows, etc.
@@ -109,7 +110,7 @@ container:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 # Docker (container) Executor
 docker:
@@ -132,7 +133,7 @@ resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
 2+| Specifying dependencies/services. All images specified after the first in CircleCI are treated https://circleci.com/docs/configuration-reference/#docker[as dependencies].
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   build:
@@ -153,7 +154,7 @@ jobs:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   build:
@@ -171,7 +172,7 @@ jobs:
 2+| Specifying steps to https://circleci.com/docs/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   build:
@@ -183,7 +184,7 @@ jobs:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   build:
@@ -199,7 +200,7 @@ jobs:
 and then https://circleci.com/docs/configuration-reference/#orbs[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   build:
@@ -217,7 +218,7 @@ jobs:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 orbs:
   slack-orb: circleci/slack@3.4.0
@@ -244,7 +245,7 @@ jobs:
 * Conditional, parameterized xref:orchestrate:workflows.adoc#use-conditional-logic-in-workflows[workflows].
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   build:
@@ -260,7 +261,7 @@ jobs:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   build:
@@ -277,6 +278,7 @@ jobs:
           when: always
 ----
 |===
+--
 
 For more configuration examples on CircleCI, visit our xref:toolkit:examples-and-guides-overview.adoc[Examples and Guides Overview] and xref:toolkit:example-configs.adoc[Example Projects] pages.
 

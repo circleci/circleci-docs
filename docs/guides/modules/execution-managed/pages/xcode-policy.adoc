@@ -17,8 +17,7 @@ We aim to retain four major versions of Xcode, with more recent versions having 
 
 For example, with Xcode 16 being the latest major version being released:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Xcode Version | Action
 
@@ -37,8 +36,7 @@ For example, with Xcode 16 being the latest major version being released:
 
 Future example, when Xcode 26 enters Beta:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Xcode Version | Action
 

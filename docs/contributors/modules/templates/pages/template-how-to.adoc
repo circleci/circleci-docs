@@ -79,8 +79,7 @@ Break up large blocks of text where possible to help make it easier to consume. 
 
 This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 |Header text column 1
 |Header text column 2

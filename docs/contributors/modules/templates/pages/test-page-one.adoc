@@ -50,8 +50,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 ==== This is a table
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 |Header text column 1
 |Header text column 2
@@ -107,7 +106,6 @@ workflows:
 
 [.table-scroll]
 --
-[.table.table-striped]
 [cols=4*, options="header"]
 |===
 |Key |Type |Default |Description

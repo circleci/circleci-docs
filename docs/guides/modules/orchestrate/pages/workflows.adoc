@@ -819,8 +819,7 @@ NOTE: If you rerun a workflow containing a job that was previously re-run with S
 
 Workflows may have one of the following states:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols="2,2,1", options="header"]
 |===
 | State | Description | Terminal state
 

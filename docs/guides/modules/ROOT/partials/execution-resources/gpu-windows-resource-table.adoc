@@ -1,5 +1,4 @@
-[.table.table-striped]
-[cols=9*, options="header", stripes=even]
+[cols=9*, options="header"]
 |===
 | Class | vCPUs | RAM | GPUs | GPU model | GPU Memory (GiB) | Disk Size (GiB)| Cloud | Server
 

@@ -9,8 +9,7 @@ Self-hosted runners on cloud auto-update to the latest supported versions. For s
 * If you are using **cloud**, use the table below to find your platform variable:
 +
 --
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Installation Target
 | Variable
@@ -70,8 +69,7 @@ endif::[]
 * For *server v4.x and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
 +
 --
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Server version
 | Launch agent version

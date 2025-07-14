@@ -26,8 +26,7 @@ For a complete list of all API v2 endpoints, refer to the https://circleci.com/d
 
 With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Endpoint | Description
 

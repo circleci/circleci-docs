@@ -9,8 +9,7 @@ To find out which CircleCI Docker convenience images support Arm resource classe
 . View what is supported under **OS/ARCH** for the latest tags. For example, `cimg/python` has `linux/amd64` and `linux/arm64`, which means Arm **is** supported.
 ****
 
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
+[cols=5*, options="header"]
 |===
 | Class | vCPUs | RAM | Cloud | Server
 
