@@ -46,7 +46,7 @@ CAUTION: Future dates listed here may change at any time.
 
 |4.6.x
 |8/12/2024
-|8/12/2025*
+|07/24/2025
 
 |4.5.x
 |4/30/2024
