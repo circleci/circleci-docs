@@ -48,3 +48,6 @@ asciidoc:
     page-toclevels: 6
   extensions:
   - '@asciidoctor/tabs'
+urls:
+  latest_version_segment: latest
+  latest_version_segment_strategy: redirect:to
