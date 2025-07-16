@@ -24,20 +24,24 @@ CircleCI web application.
 
 To access a specific project's Insights, view a pipeline's workflow and click the *Insights* button. Alternatively, you may access the Insights page by opening a pipeline's *Actions* menu while viewing the pipelines dashboard.
 
-[tab.access-insights.Access_by_sidebar]
+[tabs]
+====
+Access_by_sidebar::
++
 --
 image::guides:ROOT:screen_insights_access-3.png[Access insights from the CircleCI web app sidebar]
 --
-
-[tab.access-insights.Access_by_workflow]
+Access_by_workflow::
++
 --
 image::guides:ROOT:screen_insights_access-2.png[Access insights from a workflow in the CircleCI web app]
 --
-
-[tab.access-insights.Access_by_pipeline]
+Access_by_pipeline::
++
 --
 image::guides:ROOT:screen_insights_access-1.png[Access insights from a pipeline in the CircleCI web app]
 --
+====
 
 [#workflow-overview]
 === Workflow overview

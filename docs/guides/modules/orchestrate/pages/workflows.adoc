@@ -802,15 +802,19 @@ Workflows help to speed up your ability to respond to failures. One way to do th
 . Use the filters to find your project and pipeline.
 . Find the row in the pipeline view for the workflow you would like to rerun from failed and select the *Rerun from failed* icon. This option is also available in the workflow view using the rerun dropdown menu, which you can access by clicking on the workflow name or badge.
 
-[tab.rerun-screenshot.Rerun_from_the_pipelines_page]
+[tabs]
+====
+Rerun_from_the_pipelines_page::
++
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-pipelines-page.png[Rerun a workflow from failed from the pipelines page]
 --
-
-[tab.rerun-screenshot.Rerun_from_the_workflows_page]
+Rerun_from_the_workflows_page::
++
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[Rerun a workflow from failed from the workflows page]
 --
+====
 
 NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
 

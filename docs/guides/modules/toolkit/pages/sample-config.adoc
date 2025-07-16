@@ -440,11 +440,14 @@ NOTE: A job can only run when its dependencies are satisfied therefore it requir
 It is possible to use multiple xref:execution-managed:executor-intro.adoc[executor types]
 in the same workflow.
 
-In `Example-1` each push will build and test the project on Linux, Windows and macOS.
+In Example 1 each push will build and test the project on Linux, Windows and macOS.
 
-In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools (link:https://github.com/realm/SwiftLint[SwiftLint] and link:https://github.com/danger/danger[Danger]) will be run in Docker.
+In Example 2 each push of an iOS project will be built on macOS, and additional iOS tools (link:https://github.com/realm/SwiftLint[SwiftLint] and link:https://github.com/danger/danger[Danger]) will be run in Docker.
 
-[tab.multiple-executors.Example_1]
+[tabs]
+====
+Example 1::
++
 --
 [,yaml]
 ----
@@ -709,8 +712,8 @@ workflows:
               only: main
 ----
 --
-
-[tab.multiple-executors.Example_2]
+Example 2::
++
 --
 [,yaml]
 ----
@@ -766,6 +769,7 @@ workflows:
       - build-and-test
 ----
 --
+====
 
 [#see-also]
 == See also

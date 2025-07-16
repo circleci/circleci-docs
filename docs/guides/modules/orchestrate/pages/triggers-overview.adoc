@@ -10,7 +10,10 @@ Pipelines are triggered in response to actions or scheduled to run at specific t
 
 Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:pipelines.adoc#add-a-trigger[Pipelines and triggers] page.
 
-[tab.event-trigger.GitHub]
+[tabs]
+====
+GitHub::
++
 --
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
@@ -29,18 +32,19 @@ If you only use the **GitHub OAuth** integration, once a project is set up in Ci
 
 TIP: If your org uses the **GitHub OAuth** integration, you can install the GitHub App into your org to set up GitHub App pipelines and access the trigger options described above. An org admin must take the one-time action of installing the CircleCI GitHub App to enable this functionality. For more information, see the xref:integration:github-integration.adoc#installing-github-app-alongside-github-oauth-app[GitHub OAuth integration overview].
 --
-
-[tab.event-trigger.GitLab]
+GitLab::
++
 --
 NOTE: The available GitLab trigger options are the same for GitLab Cloud and self-managed.
 
 When you create a GitLab project in CircleCI you can set up multiple pipelines and triggers. The default trigger option is to build on every push to your repo. Select from a list or configure a combination of trigger options to control when each pipeline will trigger. You can choose from a selection of supported GitLab events. For a full list of options, see the xref:gitlab-trigger-options.adoc[GitLab trigger options] page.
 --
-
-[tab.event-trigger.BitBucket_Cloud]
+BitBucket_Cloud::
++
 --
 Once your Bitbucket Cloud project is set up in CircleCI, a pipeline is triggered each time a commit is pushed on a branch that has a `.circleci/config.yml` file included. One exception to this is if you use the "Only build pull requests" option. For more information on "Only build pull requests", see the xref:integration:oss.adoc[Build open source projects] page.
 --
+====
 
 Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Dashboard** from the left hand sidebar in the CircleCI web app.
 
