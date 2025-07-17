@@ -1,1 +1,10 @@
 = API reference docs
+:page-layout: subsection
+
+Find reference docs for the CircleCI APIs:
+
+* link:../api/v2/index.html[API v2 docs]
+* link:../api/v1/index.html[API v1 docs]
+
+
+

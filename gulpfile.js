@@ -10,9 +10,15 @@ const buildUiTask = createTask({
   call: tasks.buildUi,
 })
 
+const buildApiDocsTask = createTask({
+  name: 'build:api-docs',
+  desc: 'Build API docs with Redocly',
+  call: tasks.buildApiDocs,
+})
+
 const buildDocsTask = createTask({
   name: 'build:docs',
-  desc: 'Build Antora docs',
+  desc: 'Build Antora docs and API docs',
   call: tasks.buildSite,
 })
 
@@ -30,6 +36,7 @@ const uiPreviewTask = createTask({
 
 module.exports = exportTasks(
   buildUiTask,
+  buildApiDocsTask,
   buildDocsTask,
   docsPreviewTask,
   uiPreviewTask
