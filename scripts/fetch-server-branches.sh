@@ -4,8 +4,8 @@ set -e
 # Parse command line arguments
 FORCE_UPDATE=false
 if [[ "$1" == "--force" || "$1" == "-f" ]]; then
-    echo "[WARNING] Force update will discard any local changes on server-v* branches!"
-    echo "[WARNING] This will reset all server-v* branches to exactly match origin."
+    echo "[WARNING] Force update will discard any local changes on server-* branches!"
+    echo "[WARNING] This will reset all server-* branches to exactly match origin."
     read -p "Are you sure you want to continue? (y/N): " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -25,8 +25,8 @@ echo "[INFO] Current branch: $current_branch"
 echo "[INFO] Fetching remote branches..."
 git fetch origin
 
-# Process all server-v* branches
-for branch in $(git ls-remote --heads origin | awk '{print $2}' | grep 'refs/heads/server-v' | sed 's|refs/heads/||'); do
+# Process all server-* branches
+for branch in $(git ls-remote --heads origin | awk '{print $2}' | grep 'refs/heads/server-' | sed 's|refs/heads/||'); do
   echo "[INFO] Updating branch: $branch"
   git checkout "$branch" 2>/dev/null || {
     echo "[INFO] Branch $branch doesn't exist locally, creating it..."
@@ -48,8 +48,8 @@ echo "[INFO] Returning to original branch: $current_branch"
 git checkout "$current_branch"
 
 if [[ "$FORCE_UPDATE" == true ]]; then
-    echo "[INFO] All server-v* branches have been force-updated to match origin"
+    echo "[INFO] All server-* branches have been force-updated to match origin"
 else
-    echo "[INFO] All server-v* branches have been updated"
+    echo "[INFO] All server-* branches have been updated"
     echo "[INFO] Use --force or -f flag to force-update branches and avoid conflicts"
 fi

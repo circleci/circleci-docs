@@ -39,13 +39,13 @@ function collectPages(contentCatalog, siteUrl) {
 
   // Define which server-admin versions to exclude from indexing
   const excludedServerAdminVersions = [
-    'server-v4.1',
-    'server-v4.2',
-    'server-v4.3',
-    'server-v4.4',
-    'server-v4.5',
-    'server-v4.6',
-    'server-v4.7'
+    'server-4.1',
+    'server-4.2',
+    'server-4.3',
+    'server-4.4',
+    'server-4.5',
+    'server-4.6',
+    'server-4.7'
   ];
 
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
