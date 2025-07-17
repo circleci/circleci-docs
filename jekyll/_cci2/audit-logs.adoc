@@ -49,7 +49,7 @@ The following list shows common and important events found in the audit log. Thi
 - schedule.create
 - schedule.update
 - schedule.delete
-- workflow.job.approve
+- workflow.job.finish
 - workflow.job.scheduled
 - workflow.job.start
 - org.workflows.deleted
