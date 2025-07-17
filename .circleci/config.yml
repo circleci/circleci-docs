@@ -125,7 +125,7 @@ jobs:
           command: |
             set -e
             echo "[INFO] Validating built site with HTML Proofer..."
-            htmlproofer help
+            htmlproofer --help
             htmlproofer ./build --checks html --ignore-urls "/#.*/" --ignore-empty-alt
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
