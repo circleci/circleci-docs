@@ -125,6 +125,7 @@ jobs:
           command: |
             set -e
             echo "[INFO] Validating built site with HTML Proofer..."
+            ls -la
             htmlproofer --help
             htmlproofer ./build --ignore-empty-alt
       - notify_error:
