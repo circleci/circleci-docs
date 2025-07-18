@@ -129,7 +129,7 @@ jobs:
             htmlproofer --help
             # Handle path prefix and ignore search template placeholders
             htmlproofer ./build \
-              --ignore-empty-alt=true \
+              --ignore-empty-alt \
               --swap-urls "^/docs/:/" \
               --ignore-urls "^/docs/_/,^\\[url\\]$,^\\[path\\]$,https://circleci.com/api/v1.1/me" \
               --ignore-status-codes "999"
