@@ -131,7 +131,7 @@ jobs:
             htmlproofer ./build \
               --ignore-empty-alt=true \
               --swap-urls "^/docs/:/" \
-              --ignore-urls "/docs/_/,\[url\],\[path\]" \
+              --ignore-urls "^/docs/_/,^\\[url\\]$,^\\[path\\]$" \
               --ignore-status-codes "999"
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
