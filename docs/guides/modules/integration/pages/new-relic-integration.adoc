@@ -27,7 +27,7 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 ** **Webhook name**: give your webhook an identifiable name, for example, `New Relic CI Visibility`
 ** **Receiver URL**: Use New Relic's **Logs endpoint**. Use the region you set for your New Relic account.
 +
-Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can link:https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key)[retrieve from the UI or API].
+Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can link:https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key[retrieve from the UI or API].
 +
 **US**: `https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
 +
