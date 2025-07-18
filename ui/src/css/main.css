@@ -33,7 +33,7 @@ body.-toc aside.toc.sidebar {
   }
 }
 
-@media screen and (min-width: 1216px) {
+@media screen and (min-width: 1600px) {
   aside.toc.sidebar {
     flex-basis: var(--toc-width--widescreen);
   }

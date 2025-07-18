@@ -3,24 +3,24 @@
   {{#each navigation}}
   <li data-navigation-tree-content class="my-1" data-depth="{{or ../level 0}}" {{#if (eq ./url @root.page.url)}} data-current{{/if}}>
     {{#if ./content}}
-      <div data-navigation-tree-toggle class="flex items-center py-[8px] px-[12px] space-x-2 max-w-fit {{#if (eq ./url @root.page.url)}} -ml-1 rounded-lg bg-fog{{/if}} {{#if (has-active-child ./items)}} border-l-2 border-l-accent-green -ml-4 pl-4 md:border-none md:ml-0 md:pl-0{{/if}}">
+      <div data-navigation-tree-toggle class="flex items-center py-[8px] px-[12px] space-x-2 max-w-fit {{#if (eq ./url @root.page.url)}} rounded-lg bg-fog{{/if}} {{#if (has-active-child ./items)}} border-none{{/if}}">
         {{#if ./items.length }}
-          <button class="hidden md:block -ml-[1.3rem] p-1 h-full">
+          <button class="block -ml-[1.3rem] p-1 h-full">
             <img src="{{{@root.uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px] transform {{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url))) }}-rotate-90{{/if}}">
           </button>
         {{/if}}
         {{#if (and ./url (not (eq ./url @root.page.url)))}}
-          <a class="nav-link hover:text-link-on-light {{#if (has-active-child ./items)}}text-accent-green font-medium md:text-inherit {{/if}}" href="
+          <a class="nav-link hover:text-link-on-light {{#if (has-active-child ./items)}}font-medium text-inherit {{/if}}" href="
             {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
             {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
           {{else}}
-          <span class="{{#if (has-active-child ./items)}}text-accent-green font-medium md:text-inherit{{/if}}">{{{./content}}}</span>
+          <span class="{{#if (has-active-child ./items)}}text-accent-green font-medium text-inherit{{/if}}">{{{./content}}}</span>
         {{/if}}
       </div>
     {{/if}}
   </li>
-  <li class="{{#if (and ./content ./items.length (not (has-active-child ./items)) (not (eq ./url @root.page.url)) ) }}hidden{{/if}}">
-    {{> navigation-tree class="px-2 md:pr-2 md:pl-6" navigation=./items level=(increment ../level)}}
+  <li data-navigation-tree-children class="{{#if (and ./content ./items.length (not (has-active-child ./items)) (not (eq ./url @root.page.url)) ) }}hidden{{/if}}">
+    {{> navigation-tree class="pr-2 pl-6" navigation=./items level=(increment ../level)}}
   </li>
   {{/each}}
 </ul>
