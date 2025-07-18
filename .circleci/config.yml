@@ -127,7 +127,12 @@ jobs:
             echo "[INFO] Validating built site with HTML Proofer..."
             ls -la
             htmlproofer --help
-            htmlproofer ./build --ignore-empty-alt
+            # Handle path prefix and ignore search template placeholders
+            htmlproofer ./build \
+              --ignore-empty-alt=true \
+              --swap-urls "^/docs/:/" \
+              --ignore-urls "/docs/_/,\[url\],\[path\]" \
+              --ignore-status-codes "999"
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
 
