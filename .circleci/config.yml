@@ -135,7 +135,7 @@ jobs:
               --ignore-files './build/api/v1/index.html,./build/api/v2/index.html' \
               --ignore-urls '[url],[path],https://circleci.com/api/v1.1/me,https://circleci.com/docs/webhooks/#outbound-webhooks' \
               --ignore-status-codes '403,429,999' \
-              --check-external-hash=false \
+              --no-check-external-hash \
               --typhoeus '{"timeout":30,"followlocation":true,"headers":{"User-Agent":"Mozilla/5.0 (compatible; LinkChecker)"}}'
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
