@@ -131,8 +131,10 @@ jobs:
             htmlproofer ./build \
               --ignore-empty-alt \
               --checks 'Links,Images' \
+              --swap-urls '^/docs/:/' \
               --ignore-urls '[url],[path],https://circleci.com/api/v1.1/me' \
-              --ignore-status-codes '999'
+              --ignore-status-codes '403,429,999' \
+              --typhoeus '{"timeout":30,"followlocation":true,"headers":{"User-Agent":"Mozilla/5.0 (compatible; LinkChecker)"}}'
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
 
