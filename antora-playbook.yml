@@ -46,6 +46,8 @@ asciidoc:
     helmdiffversion: 3.5.0
     kotsversion: 1.65.0
     page-toclevels: 6
+    idprefix: ""
+    idseparator: "-"
   extensions:
   - '@asciidoctor/tabs'
 urls:
