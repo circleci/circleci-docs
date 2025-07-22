@@ -282,7 +282,7 @@ workflows:
           filters:
             branches:
               only: main
-          context: circleci-docs-static
+          context: [circleci-docs-static, web-ui-org-settings]
           bucket_dir: "dorian"
           bucket_name: "circleci-docs-platform-assets/docs"
           build_dir: "build"
