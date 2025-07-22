@@ -895,5 +895,5 @@ Go to menu:Settings[Branches] in GitHub and select btn:[Edit] on the protected b
 [#see-also]
 == See also
 
-* See the xref:server-admin:operator:faq.adoc#workflows[workflows] section of the FAQ.
+* See the xref:reference:ROOT:faq.adoc#workflows[workflows] section of the FAQ.
 * For workflow configuration examples, see the link:https://github.com/CircleCI-Public/circleci-demo-workflows[CircleCI Demo Workflows] page on GitHub.
