@@ -64,9 +64,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Fetch branches matching server-*
+          name: Fetch branches matching server-4*
           command: |
-            for branch in $(git ls-remote --heads origin | awk '{print $2}' | grep 'refs/heads/server-' | sed 's|refs/heads/||'); do
+            for branch in $(git ls-remote --heads origin | awk '{print $2}' | grep 'refs/heads/server-4' | sed 's|refs/heads/||'); do
               echo "[INFO] Fetching branch: $branch"
               git checkout "$branch"
               git pull origin "$branch"

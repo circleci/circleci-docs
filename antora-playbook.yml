@@ -16,7 +16,7 @@ content:
     start_path: docs/orbs
   - url: .
     start_path: docs/server-admin
-    branches: [server-*]
+    branches: [server-4*]
   - url: .
     start_path: docs/contributors
 ui:
