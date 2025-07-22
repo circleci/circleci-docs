@@ -7,6 +7,7 @@ parameters:
 
 orbs:
   aws-cli: circleci/aws-cli@5.3.5
+  vale: circleci/vale@1.2.0
 
 executors:
   node_executor:
@@ -243,6 +244,14 @@ jobs:
 
 
 workflows:
+
+  lint:
+    unless:
+      equal: [ main, << pipeline.git.branch >> ]
+    jobs:
+      - vale/lint:
+          reference_branch: main
+          base_dir: docs
   build_validate_and_deploy:
     when:
       equal: ["", << pipeline.parameters.cleanup_preview_branch >>]
