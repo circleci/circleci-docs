@@ -71,7 +71,7 @@ export param1="value1"
 export param2="500"
 ```
 
-A POST API call with an empty body will start a new run of the named branch. Refer to the link:https://circleci.com/docs/api/v1/#trigger-a-new-job-with-a-branch[Trigger a new job with a branch] section of the API v1 documentation for details.
+A POST API call with an empty body will start a new run of the named branch. Refer to the link:../api/v1/index.html#trigger-a-new-job-with-a-branch[Trigger a new job with a branch] section of the API v1 documentation for details.
 
 [#best-practices-for-using-build-parameters-with-api-v1]
 === Best practices for using build parameters with API v1

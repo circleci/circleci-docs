@@ -3,6 +3,7 @@
 }
 
 .toc.sidebar .toc-menu {
+  max-width: 474px;
   margin-top: -2.1rem;
   margin-right: 0.75rem;
   position: sticky;

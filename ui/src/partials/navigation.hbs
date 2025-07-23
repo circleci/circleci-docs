@@ -1,19 +1,22 @@
-<div data-page-navigation class="{{#if class}}{{class}}{{/if}} border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-white" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
+<div data-page-navigation class="{{#if class}}{{class}}{{/if}} h-full border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-white" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
   <aside class="relative h-full py-6 px-9 overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-thumb-fog scrollbar-track-vapor scrollbar-track-border">
     <div class="flex items-center justify-between lg:hidden text-terminal-black mb-10">
-      <img data-page-navigation-back-button src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Arrow Back" class="lg:hidden h-4 w-4">
+      <img data-page-navigation-back-button src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Arrow Back" class="invisible lg:hidden h-4 w-4">
       <h3 class="font-medium"> {{page.component.title}}</h3>
       <img data-page-navigation-toggle src="{{{uiRootPath}}}/img/close.svg" alt="Close Navigation" class="h-4 w-4">
     </div>
     {{> search-bar class="md:hidden mb-12" }}
     {{> search-results class="hidden"}}
+    {{> dropdown options=(components-to-nav-list) class="w-full md:hidden m-auto mt-8 mb-10" }}
     {{> component-explorer-nav class="hidden" options=(components-to-nav-list)}}
-    {{> left-side-nav}}
-    <a href="https://app.circleci.com/" class="absolute bottom-4 flex items-center ml-2 gap-2 font-medium md:hidden" >
-      Go to Application
-      <div class="inline-flex h-[24px] w-[24px] bg-accent-green rounded items-center justify-center">
-        <img src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Go to Application" class="rotate-180 w-[13px] h-[13px]">
-      </div>
-    </a>
+    <div class="flex flex-col space-between">
+      {{> left-side-nav}}
+      <a href="https://app.circleci.com/" class="fslex items-center mt-4 ml-2 gap-2 font-medium md:hidden bg-white" >
+        Go to Application
+        <div class="inline-flex h-[24px] w-[24px] bg-accent-green rounded items-center justify-center">
+          <img src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Go to Application" class="rotate-180 w-[13px] h-[13px]">
+        </div>
+      </a>
+    </div>
   </aside>
 </div>

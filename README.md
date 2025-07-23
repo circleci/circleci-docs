@@ -28,6 +28,7 @@ This technical documentation consists of several specialized files:
 | [DEVELOPMENT.md](DEVELOPMENT.md) | Development setup and workflows |
 | [CONTENT_AUTHORING.md](CONTENT_AUTHORING.md) | Writing and formatting guidelines |
 | [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) | Detailed technical specifications |
+| [API_DOCS_INTEGRATION.md](API_DOCS_INTEGRATION.md) | API documentation integration guide |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Guidelines for contributors |
 
 ## Getting Started
@@ -40,7 +41,7 @@ This technical documentation consists of several specialized files:
    cd circleci-docs-static
    npm ci
    ```
-2. **Make sure you've cloned server-v branches (Server Administration Docs)**
+2. **Make sure you've cloned server-4* branches (Server Administration Docs)**
 
 ```bash
    npm run fetch-server-branches
@@ -50,6 +51,32 @@ This technical documentation consists of several specialized files:
    ```bash
    npm run start:dev
    ```
+
+4. **Test the setup** (optional):
+   ```bash
+   ./scripts/test-setup.sh
+   ```
+
+### For API Documentation
+
+This project includes integrated API documentation built with Redocly:
+
+1. **Test the integration**:
+   ```bash
+   ./scripts/test-setup.sh
+   ```
+
+2. **Build API docs**:
+   ```bash
+   npm run build:api-docs
+   ```
+
+3. **Customize API docs**:
+   - Replace `api-spec.yaml` with your OpenAPI specification
+   - Edit `redocly.yaml` for styling and configuration
+   - See [API_DOCS_INTEGRATION.md](API_DOCS_INTEGRATION.md) for details
+
+### Technical Reference
 
 3. **Review the architecture**:
    - Read [ARCHITECTURE.md](ARCHITECTURE.md) for system design

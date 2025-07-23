@@ -16,7 +16,7 @@ content:
     start_path: docs/orbs
   - url: .
     start_path: docs/server-admin
-    branches: [server-v*]
+    branches: [server-4*]
   - url: .
     start_path: docs/contributors
 ui:
@@ -46,5 +46,10 @@ asciidoc:
     helmdiffversion: 3.5.0
     kotsversion: 1.65.0
     page-toclevels: 6
+    idprefix: ""
+    idseparator: "-"
   extensions:
   - '@asciidoctor/tabs'
+urls:
+  latest_version_segment: latest
+  latest_version_segment_strategy: redirect:to

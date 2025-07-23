@@ -8,3 +8,4 @@ ui/public/
 ui/**/.DS_Store
 extensions/.temp
 .env
+.vscode/

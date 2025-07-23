@@ -1,4 +1,5 @@
 = Formatting
+:page-noindex: true
 :experimental:
 
 [#styling-text]

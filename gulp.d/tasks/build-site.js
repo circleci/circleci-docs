@@ -2,6 +2,7 @@
 const { exec } = require('child_process')
 require('@dotenvx/dotenvx').config()
 const antoraPlaybook = 'antora-playbook.yml'
+const buildApiDocs = require('./build-api-docs')
 
 const resolvedPath =  require.resolve('../../extensions/page-metadata-extension');
 const resolvedPathExportExtension = require.resolve('../../extensions/export-content-extension');
@@ -13,6 +14,15 @@ module.exports = function buildSite(cb) {
     console.log(stdout)
     if (stderr) console.error(stderr)
     if (err) return cb(err)
-    cb()
+
+    // After Antora build succeeds, build API docs
+    console.log('Antora build completed, now building API docs...')
+    buildApiDocs((apiErr) => {
+      if (apiErr) {
+        console.error('API docs build failed, but continuing...')
+        console.error(apiErr)
+      }
+      cb()
+    })
   })
 }
