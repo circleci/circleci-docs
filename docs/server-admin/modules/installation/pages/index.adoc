@@ -1,0 +1,4 @@
+= Installing CircleCI Server
+:page-noindex: true
+
+In this section find installation guides for installing on AWS, GCP and in an air-gapped environment.
