@@ -158,10 +158,10 @@ Dual GitHub integration provide the following benefits:
 * Gradual migration path for complex projects
 * New trigger options without disrupting current pipelines
 
-=== Installation Steps
+=== Installation steps
 
 . Navigate to menu:Organization Settings[VCS Connections].
-. Click Install GitHub App.
+. Select btn:[Install GitHub App].
 . Select repositories to grant access.
 . Create new GitHub App pipelines alongside existing OAuth pipelines. This can be achieved in the following ways:
 ** Navigate to menu:Project Settings[Project setup]
@@ -178,7 +178,7 @@ Instead, duplicate the OAuth pipeline as a GitHub App pipeline, then disable the
 
 === Why can't I see GitHub App options?
 
-Ensure the GitHub App is installed via Organization Settings > VCS Connections.
+Ensure the GitHub App is installed via menu:Organization Settings[VCS Connections].
 
 === How do I prevent duplicate builds?
 
