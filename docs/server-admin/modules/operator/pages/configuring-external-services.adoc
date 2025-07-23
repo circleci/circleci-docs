@@ -1,0 +1,371 @@
+= Configuring external services
+:page-noindex: true
+:page-platform: Server v4.2, Server Admin
+:page-description: This document describes how to configure the following external services for use with a CircleCI server 4.2 installation
+:icons: font
+
+This page describes how to configure external services for use with either a new CircleCI server v4.2 installation or migrating internal PostgreSQL and MongoDB data from existing CircleCI server v4.2 installation to your externalized datastores.
+
+[#postgresql]
+== PostgreSQL
+
+[#best-practices-for-your-postgresql]
+=== Best practices for PostgreSQL
+
+NOTE: Your externalized PostgreSQL instance needs to be version 12.1 or higher.
+
+Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+|# of Daily Active Users
+|# of PostgreSQL Replicas
+|CPU
+|RAM
+|Disk
+|NIC Speed
+
+|<50
+|2
+|8 Cores
+|16 GB
+|100 GB
+| 1 Gbps
+
+|50 - 250
+|2
+|8 Cores
+|16 GB
+|200 GB
+|1 Gbps
+
+|250 - 1000
+|3
+|8 Cores
+|32 GB
+|500 GB
+|10 Gbps
+
+|1000 - 5000
+|3
+|8 Cores
+|32 GB
+|1 TB
+|10 Gbps
+
+|5000+
+|3
+|8 Cores
+|32 GB
+|1 TB
+|10 Gbps
+|===
+
+[#migrating-from-internal-postgres]
+=== Migrating from an internal PostgreSQL to an externalized source
+
+NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-postgres>>
+
+When a CircleCI server instance is deployed, Postgres is deployed internally by default via its helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external Postgres, you may use the guide below to migrate your Postgres data to your external database.
+
+CAUTION: This process requires downtime.
+
+==== 1. Disable the application
+
+Disable the CircleCI server application by scaling down the application layer pods. No Data is lost in this process, but the application will be unreachable.
+
+Scale down your application layer pods:
+
+[source,shell]
+----
+namespace=<your-server-namespace>
+kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
+----
+
+Running `kubectl -n "$namespace" get pods` will show most of your pods scaling to down, leaving your database pods running including PostgreSQL.
+
+==== 2. Validate access to your external PostgreSQL from within the cluster (optional)
+
+. Confirm that pods within your CircleCI server cluster can access your external PostgreSQL. You can do this from within your internal PostgreSQL.
++
+[source,shell]
+----
+PG_POD=$(kubectl -n "$namespace" get pods | grep postgresql | tail -1 | awk '{print $1}')
+kubectl exec -it -n "$namespace" "$PG_POD" -- bash
+----
+
+. While still connected to the pod run:
++
+[source,shell]
+----
+psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port>
+----
+
+You should be able to connect to your external Postgres at this point. If not, resolve any issues before proceeding.
+
+TIP: You may use `helm upgrade ...` to restore your CircleCI server instance to a running state.
+
+==== 3. Generate export of your internal PostgreSQL
+
+. Retrieve your internal Postgres credentials:
++
+[source,shell]
+----
+PG_PASSWORD=$(kubectl -n "$namespace" get secrets postgresql -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+----
++
+NOTE: The username for your internal Postgres is `postgres`. The password is randomly generated unless directly set at installation.
+
+. Connect to your Postgres pod and perform a Postgres dump:
++
+[source,shell]
+----
+kubectl -n "$namespace" exec -it "$PG_POD" -- bash -c "export PGPASSWORD='$PG_PASSWORD' && pg_dumpall -U postgres -c" > circle.sql
+----
++
+NOTE: This backup is created in the filesystem used by the Postgres pod. If you wish to store it locally, you may use `kubectl cp -n "$namespace" "$PG_POD":circle.sql /local/dir/circle.sql`
+
+. Clean up the Postgres Dump. Your internally deployed Postgres uses the username `postgres`. However, during the restore, the Postgres dump will drop all resources before trying to create new ones, including the `postgres` user. Access the Postgres pod where the dump is stored and run the following commands on the Postgres dump file to remove the lines that would delete the Postgres user.
++
+[source,shell]
+----
+PG_POD=$(kubectl -n "$namespace" get pods | grep postgresql | tail -1 | awk '{print $1}')
+kubectl exec -it -n "$namespace" "$PG_POD" -- bash
+
+sed -i".bak" '/DROP ROLE postgres/d' circle.sql
+sed -i".bak" '/CREATE ROLE postgres/d' circle.sql
+sed -i".bak" '/ALTER ROLE postgres WITH SUPERUSER INHERIT CREATEROLE CREATEDB LOGIN REPLICATION BYPASSRLS PASSWORD/d' circle.sql
+----
+
+==== 4. Restore your data in your external PostgreSQL
+
+While still connected to your the internally deployed Postgres, restore the dumped data to your external Postgres:
+
+[source,shell]
+----
+psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port> < circle.sql
+----
+
+Now your external Postgres will have your CircleCI server data. In the next section you will update CircleCI server to point to your external Postgres.
+
+[#connecting-your-external-postgres]
+=== Connecting your external PostgreSQL instance to CircleCI server
+
+Once you have set up your external PostgreSQL instance, add the following to your `values.yaml` file so that your CircleCI server instance can access it.
+
+[source,yaml]
+----
+postgresql:
+  internal: false
+  postgresqlHost: <domain> # The domain or IP address of your PostgreSQL instance
+  postgresqlPort: <port> # The port of your PostgreSQL instance
+----
+
+NOTE: `postgresql.internal: false` will remove any previously deployed PostgreSQL instance deployed internally
+
+[tabs]
+====
+Create Secret yourself::
++
+--
+Create the secret and then add the following values to `values.yaml`:
+
+[source,shell]
+----
+kubectl create secret generic postgresql \
+  --from-literal=postgres-password=<postgres-password>
+----
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username>
+    existingSecret: postgresql
+----
+--
+CircleCI creates Secret::
++
+--
+Add the following to
+the `values.yaml` file. CircleCI will create the secret automatically:
+
+[source,yaml]
+----
+postgresql:
+  ...
+  auth:
+    username: <username> # A user with the appropriate privileges to access your PostgreSQL instance.
+    password: <password> # The password of the user account used to access your PostgreSQL instance.
+----
+--
+====
+
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance then when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+
+
+[#backing-up-postgresql]
+=== Back up PostgreSQL
+PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found link:https://www.postgresql.org/docs/12/backup.html[here].
+
+We strongly recommend the following:
+
+* Take daily backups
+* Keep at least 30 days of backups
+* Use encrypted storage for backups as databases might contain sensitive information
+* Perform a backup before each upgrade of CircleCI server
+
+[#mongodb]
+== MongoDB
+
+NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
+
+[#migrating-from-internal-mongodb]
+=== Migrating from an internal MongoDB to an externalized source
+
+NOTE: If you are doing a fresh install of CircleCI server, then you can skip this section and head to <<connecting-your-external-mongodb>>
+
+When a CircleCI server instance deployed, MongoDB is deployed internally by default via its helm chart. However, as an operator, you may wish to externalize this database to have better control over scalability and availability. Once you have configured your external MongoDB, you may use the guide below to migrate your Mongo data to your external database.
+
+CAUTION: This process requires downtime.
+
+==== 1. Disable the application
+
+Disable the CircleCI server application by scaling down the application layer pods. No Data is lost in this process, but the application will be unreachable.
+
+Scale down your application layer pods:
+
+[source,shell]
+----
+namespace=<your-server-namespace>
+kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
+----
+
+Running `kubectl -n "$namespace" get pods` will show most of your pods scaling to down, leaving your database pods running, including Mongo.
+
+==== 2. Validate access to your external MongoDB from within the cluster (optional)
+
+. Confirm that pods within your CircleCI server cluster can access your external MongoDB. You can do this from within your internal MongoDB pod:
++
+[source,shell]
+----
+MONGO_POD="mongodb-0"
+kubectl exec -it -n "$namespace" "$MONGO_POD" -- bash
+----
+
+. While still connected to the pod run the following:
++
+[source,shell]
+----
+mongo --username <username> --password --authenticationDatabase admin --host <external-mongodb-host> --port <external-mongodb-port>
+----
+
+You should be able to connect to your external MongoDB at this point. If not, resolve any issues before proceeding.
+
+TIP: You may use `helm upgrade ...` to restore your CircleCI server instance to a running state.
+
+==== 3. Generate export of your internal MongoDB
+
+. Retrieve your internal MongoDB credentials:
++
+[source,shell]
+----
+MONGO_POD="mongodb-0"
+MONGODB_USERNAME="root"
+MONGODB_PASSWORD=$(kubectl -n "$namespace" get secrets mongodb -o jsonpath="{.data.mongodb-root-password}" | base64 --decode)
+----
+
+. Create a backup directory in your MongoDB pod:
++
+[source,shell]
+----
+kubectl -n "$namespace" exec "$MONGO_POD" -- mkdir -p /tmp/backups/
+----
+
+. Generate a MongoDB database dump to the backup directory you just created:
++
+[source,shell]
+----
+kubectl -n "$namespace" exec -it "$MONGO_POD" -- bash -c "mongodump -u '$MONGODB_USERNAME' -p '$MONGODB_PASSWORD' --authenticationDatabase admin --db=circle_ghe --out=/tmp/backups/"
+----
+
+==== 4. Restore your data in your external MongoDB
+
+Use the generated MongoDB backup to restore the data to your external MongoDB:
+
+[source,shell]
+----
+kubectl -n "$namespace" exec "$MONGO_POD" -- mongorestore --drop -u "$MONGODB_USERNAME" -p "$MONGODB_PASSWORD" --host <external-mongodb-host> --port <external-mongodb-port> --authenticationDatabase admin /tmp/backups/circle_ghe;
+----
+
+Now your external MongoDB will have your CircleCI server data. In the next section you will update CircleCI server to point to your external MongoDB.
+
+[#connecting-your-external-mongodb]
+=== Connecting your external MongoDB instance to CircleCI server
+
+Once you have configured your external MongoDB instance, add the following to your `values.yaml` file to connect your CircleCI server instance.
+
+[source,yaml]
+----
+mongodb:
+  internal: false
+  hosts: <hostname:port> # this can be a comma-separated list of multiple hosts for sharded instances
+  ssl: <ssl-enabled>
+  # If using an SSL connection with custom CA or self-signed certs, set this
+  # to true
+  tlsInsecure: false
+  # Any other options you'd like to append to the MongoDB connection string.
+  # Format as query string (key=value pairs, separated by &, special characters
+  # need to be URL encoded)
+  options: <additional-options>
+  auth:
+    database: <authentication-source-database
+    mechanism: SCRAM-SHA-1
+----
+
+[tabs]
+====
+Create Secret yourself::
++
+--
+Create the secret and then add the following values to `values.yaml`:
+
+[source,shell]
+----
+kubectl create secret generic mongodb \
+--from-literal=mongodb-root-password=<root-password> \
+--from-literal=mongodb-password=dontmatter
+----
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    existingSecret: mongodb
+----
+--
+CircleCI creates Secret::
++
+--
+Add the following to
+the `values.yaml` file. CircleCI will create the secret automatically:
+
+[source,yaml]
+----
+mongodb:
+  ...
+  auth:
+    ...
+    username: <username>
+    rootPassword: <root-password>
+    password: <password>
+----
+--
+====
+
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized MongoDB instance then when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
