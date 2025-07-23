@@ -1,0 +1,6 @@
+= Installing CircleCI server in an air-gapped environment
+:page-noindex: true
+:page-layout: subsection
+:page-description: Installing CircleCI server in an air-gapped environment.
+
+In this section find installation guides for installing CircleCI server in an air-gapped environment.
