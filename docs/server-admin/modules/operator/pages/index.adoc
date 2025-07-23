@@ -1,0 +1,5 @@
+= CircleCI server operators guide
+:page-description: CircleCI server 4.8 operator guides.
+:page-layout: subsection
+
+This section includes all operator guides for configuring and managing your CircleCI server installation.
