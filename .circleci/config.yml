@@ -217,7 +217,7 @@ jobs:
 
             set -e
             echo "[INFO] Deploying production site..."
-            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/$BUCKET_DIRECTORY/"
+            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/$BUCKET_DIRECTORY/" --acl public-read
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
