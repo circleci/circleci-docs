@@ -32,6 +32,8 @@ You will add commands to plan a deploy and then update its status based on the o
 
 Add a `circleci run release plan` command to your deployment job. This tells CircleCI to plan a new deploy and show it in the link:https://app.circleci.com/deploys[Deploys UI] with `pending` status.
 The `target-version` parameter should match the name of the version being deployed.
+You can set this parameter in several ways, but one simple option is to rely on CircleCI project variables. For example you could define it as
+`target-version="1.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"`, which would yield a value with the following format `1.0.28853-ffdbeb1`.
 
 [,yml]
 ----
@@ -281,6 +283,8 @@ jobs:
 ** The `environment-name` specifies the target environment. If the environment does not exist, it will be created.
 ** The `component-name` parameter sets the name that will be displayed in the CircleCI UI.
 ** The `target-version` parameter should match the name of the version being deployed.
+You can set this parameter in several ways, but one simple option is to rely on CircleCI project variables. For example you could define it as
+`target-version="1.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"`, which would yield a value with the following format `1.0.28853-ffdbeb1`.
 ** (Optional) You can provide the following parameter if required:
 *** The `namespace` parameter can be provided to use a value other than `default`.
 
