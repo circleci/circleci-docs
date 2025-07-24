@@ -41,7 +41,7 @@ This technical documentation consists of several specialized files:
    cd circleci-docs-static
    npm ci
    ```
-2. **Make sure you've cloned server-* branches (Server Administration Docs)**
+2. **Make sure you've cloned server-4* branches (Server Administration Docs)**
 
 ```bash
    npm run fetch-server-branches

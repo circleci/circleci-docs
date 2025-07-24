@@ -1,0 +1,19 @@
+---
+extends: substitution
+message: Use '%s' instead of '%s'
+level: warning
+action:
+  name: replace
+swap:
+  African-American: African American
+  Asian-American: Asian American
+  All American: All-American
+  'campus(?:-|\s)wide': campuswide
+  'college(?:-|\s)wide': collegewide
+  'state(?:-|\s)wide': statewide
+  'world(?:-|\s)wide': worldwide
+  'change(?:-|\s)maker': change maker
+  e-mail: email
+  game-changer: game changer
+  Native-American: Native American
+  right click: right-click
