@@ -188,15 +188,11 @@ jobs:
       #     command: |
       #       set -e
       #       echo "[INFO] Testing deploy to S3 bucket..."
-      #       aws s3 sync build "s3://circleci-docs-platform-assets/docs/dorian/"
+      #       aws s3 sync build "s3://circleci-docs-platform-assets/docs-preview" --acl public-read
 
   deploy-production:
     executor: node_executor
     parameters:
-      bucket_dir:
-        default: "dorian"
-        description: The directory in the bucket to deploy to.
-        type: string
       bucket_name:
         description: The name of the s3 bucket where static assets are stored.
         type: string
@@ -212,12 +208,11 @@ jobs:
           name: Deploy Production Site to S3
           command: |
             AWS_S3_BUCKET=<< parameters.bucket_name >>
-            BUCKET_DIRECTORY=<< parameters.bucket_dir >>
             BUILD_DIRECTORY=<< parameters.build_dir >>
 
             set -e
             echo "[INFO] Deploying production site..."
-            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/$BUCKET_DIRECTORY/" --acl public-read
+            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/" --acl public-read
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
@@ -302,8 +297,7 @@ workflows:
               web-ui-npm,
               web-ui-datadog,
             ]
-          bucket_dir: "dorian"
-          bucket_name: "circleci-docs-platform-assets/docs"
+          bucket_name: "circleci-docs-platform-assets/docs-preview"
           build_dir: "build"
   cleanup_preview:
     when: pipeline.parameters.cleanup_preview_branch != ""
