@@ -4,9 +4,9 @@
 :experimental:
 
 ****
-This page is relevant if your CircleCI organization has `/github/` in the URL. Throughout this guide we will refer to org types by the appearance of `/github/` or other strings in the URL.
+*This page is relevant if your CircleCI organization has `/github/` in the URL.* Throughout this guide we will refer to org types by the appearance of `/github/` or other strings in the URL.
 
-Another way to identify an org in this way is the organization slug which is available at menu:Organization settings[Overview].
+Another way to identify an organization type is by the organization slug, which is available at menu:Organization settings[Overview].
 ****
 
 This guide explains the two different ways your CircleCI organization can integrate with GitHub and how they affect the type of pipelines you can trigger.
@@ -17,15 +17,15 @@ Through reading this guide you will better understand your integration options, 
 
 CircleCI offers two methods for integrating with GitHub:
 
-GitHub OAuth app integration:: This integration is built-in into organizations with `/github/` in their URL. The GitHub OAuth app integration cannot be uninstalled, nor installed on any other type of organization.
+GitHub OAuth app integration:: This integration is built-in for organizations with `/github/` in their URL. The GitHub OAuth app integration cannot be uninstalled, nor installed, on any other org type.
 
-GitHub App integration (recommended):: The CircleCI GitHub App is an add-on integration. The GitHub App can be installed or uninstalled on any organization type, including organizations with `/github/` in their URL, which are already integrated with GitHub through the OAuth integration.
+GitHub App integration (recommended):: The CircleCI GitHub App is an add-on integration. The GitHub App can be installed or uninstalled on any organization type, including organizations with `/github/` in their URL that are already integrated with GitHub through the OAuth integration.
 
 TIP: The majority of new CircleCI work triggering functionality will be made available through the GitHub App integration. We recommend installing the CircleCI GitHub App to ensure access to all new features.
 
 [options="header",cols="1,1,1,1"]
 |===
-|Organization type identified by the URL
+|Organization type identified by URL
 |GitHub OAuth integration
 |GitHub App integration
 |Notes
