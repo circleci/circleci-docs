@@ -105,7 +105,7 @@ Nomad provides a web UI for inspecting your Nomad cluster. If you are using an i
 ----
 export NOMAD_IP=$(kubectl get svc nomad-server -o jsonpath='{.spec.clusterIP}' -n <server-namespace>)
 
-kubectl run nomad-tunnel --rm -it --image=alpine --restart=Never -n <server-namespace> -- /bin/sh -c "apk add --no-cache socat && socat TCP-LISTEN:4646,fork,reuseaddr TCP:$NOMAD_IP:4646"
+kubectl run nomad-tunnel --rm -it --restart=Never --image=alpine/socat -n <server-namespace> -- TCP-LISTEN:4646,fork,reuseaddr TCP:$NOMAD_IP:4646
 ----
 
 . In another terminal, run the following command to set up port forwarding:

@@ -470,7 +470,7 @@ Apply the changes made to your `values.yaml` file:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml>
 ----
 
 [#nomad-clients-validation]
@@ -1112,7 +1112,7 @@ Apply they changes made to your `values.yaml` file.
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml>
 ----
 
 Once you have configured and deployed CircleCI server, you should validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
