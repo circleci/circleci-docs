@@ -330,6 +330,37 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 
 The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc[test splitting] for build time optimization.
 
+
+[#create-a-trigger]
+== Create a trigger
+
+The CircleCI CLI can be used to create triggers for your projects.
+
+NOTE: The `trigger` command and its `create` sub-command only apply to pipeline definitions created with the GitHub App provider (Project slug starts with `circleci` followed by UUIDs. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU/4nYdoKGkb6RXn7JGt8SQtg`).
+
+For full details on creating, testing, and managing triggers for your organization, see the xref:orchestrate:triggers-overview.adoc[Triggers] section.
+
+The `trigger` command has the following sub-command:
+
+- `create` - Create a trigger for your project.
+
+Run the above sub-command as follows:
+
+[,shell]
+----
+circleci trigger create <project-id> [--pipeline-definition-id <pipeline-definition-id>] [--name <trigger-name>] [--repo-id <github-repo-id>] [flags]
+----
+
+`<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under *Project settings* > *Project ID*.
+
+`<pipeline-definition-id>` is the ID of the pipeline associated with the trigger. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under *Project settings* > *Pipelines*.
+
+`<github-repo-id>` is the ID of the GitHub repository associated with the trigger. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find this ID.
+
+
+For full details on this command and sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_trigger.html[CLI docs].
+
+
 [#context-management]
 == Context management
 
