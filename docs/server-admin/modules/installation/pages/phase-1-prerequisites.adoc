@@ -72,7 +72,7 @@ endif::env-aws[]
 [#s3-compatible-storage-required-software]
 === S3 compatible storage required software
 
-- Install and configure link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider.
+- Install and configure link:https://min.io/docs/minio/linux/reference/minio-mc.html[MinIO CLI] for your storage provider.
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
