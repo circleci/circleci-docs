@@ -344,19 +344,20 @@ The `trigger` command has the following sub-command:
 
 - `create` - Create a trigger for your project.
 
-Run the above sub-command as follows:
-
 [,shell]
 ----
-circleci trigger create <project-id> [--pipeline-definition-id <pipeline-definition-id>] [--name <trigger-name>] [--repo-id <github-repo-id>] [flags]
+circleci trigger create <project-id>  [flags]
 ----
 
-`<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under *Project settings* > *Project ID*.
+`<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under *Project settings* > *Overview*.
 
-`<pipeline-definition-id>` is the ID of the pipeline associated with the trigger. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under *Project settings* > *Pipelines*.
+The above example shows the minimal usage. You will be prompted for required values if you don't intially provide them using the appropriate flags.
 
-`<github-repo-id>` is the ID of the GitHub repository associated with the trigger. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find this ID.
+The `trigger create` sub-command requires the 
 
+- The ID of the pipeline associated with the trigger. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under *Project settings* > *Pipelines*.
+
+- The ID of the GitHub repository associated with the trigger. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find this ID.
 
 For full details on this command and sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_trigger.html[CLI docs].
 
