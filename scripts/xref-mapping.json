@@ -1528,5 +1528,10 @@
     "component": "guides",
     "module": "permissions-authentication",
     "filename": "set-up-sso.adoc"
+  },
+  "sso-group-mapping": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "sso-group-mapping.adoc"
   }
 }
