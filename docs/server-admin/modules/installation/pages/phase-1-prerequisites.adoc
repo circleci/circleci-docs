@@ -8,7 +8,7 @@
 
 // This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
-CircleCI server v4.6 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:overview:circleci-server-overview.adoc[CircleCI server v4.6 overview].
+CircleCI server v4.6 is installed as a Helm chart. The installation process is broken down into four phases. Each phase ends with a validation step, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:overview:circleci-server-overview.adoc[CircleCI server v4.6 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -54,7 +54,7 @@ Download and install the following software before continuing:
 | Infrastructure Management
 | Required for installations within GCP or AWS
 
-| Install and configure link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
+| Install and configure link:https://min.io/docs/minio/linux/reference/minio-mc.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
 | TBC
 | TBC
 | Required for installations outside AWS and GCP, for example, local installation.
@@ -95,7 +95,7 @@ ifndef::env-gcp[]
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
-CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. There are instructions for creating an EKS or GKE cluster below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
+CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. The following section covers creating an EKS or GKE cluster, or if you are installing locally, first consider the sizing, version, and permissions requirements.
 
 [#cluster-requirements]
 === Cluster requirements
@@ -266,7 +266,12 @@ You must repeat Step 3 for all the existing node pools. Follow these links for s
 
 CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
 
-Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
+Registering and setting up a new GitHub OAuth app for CircleCI server enables the following:
+
+* Authorization control for your server installation using GitHub OAuth.
+* Updates to GitHub projects/repos using build status information.
+
+The following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to menu:Your-GitHub-instance[User Settings>Developer Settings>OAuth Apps] and select **New OAuth App**.
 +
@@ -333,7 +338,7 @@ By default, CircleCI server creates self-signed certificates to get you started.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
-Once you have created your certificates using one of the methods described below, you can use the following commands to retrieve the certificates later when you need them during this installation:
+Once you have created your certificates using one of the methods described below, you can use these commands to retrieve the certificates when you need them during installation:
 
 [source,shell]
 ----
@@ -438,14 +443,14 @@ After running this command, navigate to the Certificate Manager AWS console and 
 
 [#upstream-tls]
 === Upstream TLS termination
-You may have a requirement to terminate TLS for CircleCI server outside the application. This is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
+You may have a requirement to terminate TLS for CircleCI server outside the application. Upstream TLS termination is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
 
 CircleCI server listens on the following port numbers, which need to be configured depending how you are routing the traffic:
 
 * Frontend / API Gateway [TCP 80, 443]
 * Nomad server [TCP 4647]
 
-Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports.
+Depending on your requirements you may choose to terminate TLS for only the `frontend/api-gateway` or provide TLS for services listening on all the ports.
 
 endif::env-aws[]
 
@@ -724,7 +729,7 @@ aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY
 aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<STORAGE_POLICY_ARN>
 ----
 --
-IAM_access_keys::
+IAM access keys::
 +
 --
 **Option 2:** IAM access keys
@@ -875,7 +880,7 @@ ifndef::env-aws[]
 
 [#create-a-gcp-bucket]
 ==== a. Create a GCP bucket
-If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
+If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin for this cluster. This permissions level is required to create RBAC (role-based access control) objects. More information can be found in the link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 
 [source,shell]
 ----
@@ -907,7 +912,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 +
 [tabs]
 ====
-Workload_Identity::
+Workload Identity::
 +
 --
 **Option 1:** Workload Identity
@@ -934,7 +939,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition=None
 ----
 --
-Static_credentials::
+Static credentials::
 +
 --
 **Option 2:** Static credentials
