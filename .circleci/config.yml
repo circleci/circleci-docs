@@ -182,13 +182,6 @@ jobs:
             fi
       - notify_error:
           message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
-      # - aws-setup
-      # - run:
-      #     name: Test S3 deployment
-      #     command: |
-      #       set -e
-      #       echo "[INFO] Testing deploy to S3 bucket..."
-      #       aws s3 sync build "s3://circleci-docs-platform-assets/docs-preview" --acl public-read
 
   deploy-production:
     executor: node_executor

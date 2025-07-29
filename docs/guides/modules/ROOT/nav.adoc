@@ -317,3 +317,7 @@
 ** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]
 ** xref:plans-pricing:plan-scale.adoc[Scale Plan overview]
 ** xref:plans-pricing:plan-server.adoc[Server Plan overview]
+
+* Testing deployment
+** xref:plans-pricing:plan-scale.adoc[Scale Plan overview]
+** xref:plans-pricing:plan-testing.adoc[Testing Plan overview]
