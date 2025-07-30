@@ -1,4 +1,4 @@
-CircleCI server v4.7 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI server v4.7 overview].
+CircleCI server v4.7 is installed as a Helm chart. The installation process is broken down into four phases. Each phase has a validation step at the end, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI server v4.7 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -48,7 +48,7 @@ endif::env-aws[]
 | Infrastructure Management
 | Required for installations within GCP or AWS
 
-| Install and configure link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
+| Install and configure link:https://min.io/docs/minio/linux/reference/minio-mc.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
 | TBC
 | TBC
 | Required for installations outside AWS and GCP, for example, local installation.
@@ -86,7 +86,7 @@ For high availability, and to avoid potential outages, you should provision subn
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
-CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. There are instructions for creating a cluster below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
+CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. Instructions for creating a cluster are provided below. If you are installing locally, first consider the sizing, version, and permissions requirements.
 
 [#cluster-requirements]
 === Cluster requirements
@@ -728,7 +728,7 @@ aws iam create-policy --policy-name circleci-s3 --policy-document file://<POLICY
 aws iam attach-role-policy --role-name <OBJECT_STORAGE_ROLE_NAME> --policy-arn=<STORAGE_POLICY_ARN>
 ----
 --
-IAM_access_keys::
+IAM access keys::
 +
 --
 **Option 2:** IAM access keys
@@ -912,7 +912,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
 +
 [tabs]
 ====
-Workload_Identity::
+Workload Identity::
 +
 --
 **Option 1:** Workload Identity
@@ -939,7 +939,7 @@ gcloud projects add-iam-policy-binding <PROJECT_ID> \
     --condition=None
 ----
 --
-Static_credentials::
+Static credentials::
 +
 --
 **Option 2:** Static credentials
