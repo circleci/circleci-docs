@@ -15,7 +15,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 Install the following two prerequisites on each instance designated as a Nomad client:
 
 - link:https://docs.docker.com/get-docker/[An installation of Docker]
-- link:https://developer.hashicorp.com/nomad/docs/install[An installation of Nomad]
+- link:https://developer.hashicorp.com/nomad/install[An installation of Nomad]
 
 
 [#create-nomad-directories]
