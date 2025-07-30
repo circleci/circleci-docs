@@ -54,7 +54,7 @@ Download and install the following software before continuing:
 | Infrastructure Management
 | Required for installations within GCP or AWS
 
-| Install and configure link:https://docs.min.io/docs/minio-client-quickstart-guide.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
+| Install and configure link:https://min.io/docs/minio/linux/reference/minio-mc.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
 | TBC
 | TBC
 | Required for installations outside AWS and GCP, for example, local installation.
