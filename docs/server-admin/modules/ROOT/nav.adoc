@@ -1,14 +1,14 @@
-* xref:overview:index.adoc[CircleCI server 4.7]
-** xref:overview:circleci-server-overview.adoc[CircleCI Server Overview]
+* CircleCI server 4.7
+** xref:overview:circleci-server-overview.adoc[CircleCI server Overview]
 ** xref:overview:release-notes.adoc[Release notes]
 
-* xref:installation:index.adoc[Installing CircleCI server]
-** xref:installation:install-on-aws.adoc[Install on AWS]
+* Installing CircleCI server
+** Install on AWS
 *** xref:installation:phase-1-aws-prerequisites.adoc[Phase 1: AWS prerequisites]
 *** xref:installation:phase-2-aws-core-services.adoc[Phase 2: AWS Core services installation]
 *** xref:installation:phase-3-aws-execution-environments.adoc[Phase 3: AWS execution environments installation]
 *** xref:installation:phase-4-aws-post-installation.adoc[Phase 4: AWS post-installation]
-** xref:installation:install-on-gcp.adoc[Install on GCP]
+** Install on GCP
 *** xref:installation:phase-1-gcp-prerequisites.adoc[Phase 1: GCP prerequisites]
 *** xref:installation:phase-2-gcp-core-services.adoc[Phase 2: GCP Core services installation]
 *** xref:installation:phase-3-gcp-execution-environments.adoc[Phase 3: GCP execution environments installation]
@@ -18,16 +18,16 @@
 ** xref:installation:upgrade-server.adoc[Upgrading server]
 ** xref:installation:installation-reference.adoc[Installation reference]
 
-* xref:air-gapped-installation:index.adoc[Installing CircleCI server in an air-gapped environment]
+* Installing CircleCI server in an air-gapped environment
 ** xref:air-gapped-installation:phase-1-prerequisites.adoc[Phase 1 - Prerequisites]
 ** xref:air-gapped-installation:phase-2-configure-object-storage.adoc[Phase 2 - Configure object storage]
 ** xref:air-gapped-installation:phase-3-install-circleci-server.adoc[Phase 3 - Install CircleCI server]
 ** xref:air-gapped-installation:phase-4-configure-nomad-clients.adoc[Phase 4 - Configure Nomad clients]
 ** xref:air-gapped-installation:phase-5-test-your-installation.adoc[Phase 5 - Test installation]
 ** xref:air-gapped-installation:additional-considerations.adoc[Additional considerations]
-** xref:air-gapped-installation:example-values.adoc[Example values.yaml]
+** xref:air-gapped-installation:example-values.adoc[Example Values YAML]
 
-* xref:operator:index.adoc[CircleCI server operator guide]
+* CircleCI server operator guide
 ** xref:operator:operator-overview.adoc[Operator overview]
 ** xref:operator:introduction-to-nomad-cluster-operation.adoc[Introduction to Nomad cluster operation]
 ** xref:operator:managing-user-accounts.adoc[Managing user accounts]
