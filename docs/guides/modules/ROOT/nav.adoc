@@ -38,6 +38,7 @@
 *** xref:orchestrate:pipelines.adoc[Pipeline and triggers overview]
 *** xref:orchestrate:jobs-steps.adoc[Jobs and steps overview]
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
+*** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
 *** xref:orchestrate:dynamic-config.adoc[Use dynamic configuration]
 *** xref:orchestrate:skip-build.adoc[Skip CI and cancel workflows]
