@@ -55,8 +55,7 @@ Arm-based Docker jobs use an equivalent **Arm machine** resource class for remot
 
 ==== x86 architecture
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Docker resource class
 | Remote Docker (Linux Machine) resource class
@@ -76,8 +75,7 @@ Arm-based Docker jobs use an equivalent **Arm machine** resource class for remot
 
 ==== Arm architecture
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Docker resource class
 | Remote Docker (Arm Linux Machine) resource class

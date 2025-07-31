@@ -35,7 +35,7 @@
   margin: 16px 0;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) {
   .doc > h1.page:first-child {
     margin-top: 2.5rem;
   }
@@ -143,7 +143,8 @@
 
 .doc p code,
 .doc thead code,
-.doc .colist > table code {
+.doc .colist > table code,
+.doc .admonitionblock td.content code {
   color: var(--code-font-color);
   background: #F7F7F7;
   border-radius: 4px;
@@ -275,6 +276,7 @@
   margin-bottom: 1rem;
   border: 1px solid #D4D4D4;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .doc p.tableblock + p.tableblock {
@@ -293,10 +295,11 @@
   word-wrap: break-word;
 }
 
-/* Prevent wrapping of inline literal text in tables */
+/* Allow wrapping of inline literal text in tables */
 .doc table.tableblock td code,
 .doc table.tableblock th code {
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-all;
 }
 
 .doc td.tableblock > .content {
@@ -316,6 +319,16 @@
 .doc table.tableblock,
 .doc table.tableblock > * > tr:last-child > * {
   border-bottom: 1px solid #D4D4D4;
+}
+
+.doc .table-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.doc .table-scroll table.tableblock {
+  min-width: 100%;
+  width: auto;
 }
 
 .doc table.grid-all > * > tr > * {
@@ -573,6 +586,18 @@
   width: auto;
   vertical-align: middle;
   object-fit: contain;
+  border: 1px solid #D4D4D4;
+  border-radius: 8px;
+}
+
+/* Remove border for images with no-border class */
+.doc .imageblock.no-border img,
+.doc .imageblock.no-border object,
+.doc .imageblock.no-border svg,
+.doc .image.no-border > img,
+.doc .image.no-border > object,
+.doc .image.no-border > svg {
+  border: none;
 }
 
 .doc .image:not(.left):not(.right) > img {
@@ -881,6 +906,24 @@
   margin-top: 0;
 }
 
+/* Fix wrapping issues inside sidebarblocks */
+.doc .sidebarblock code {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.doc .sidebarblock .listingblock pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.doc .sidebarblock .listingblock {
+  width: 100%;
+  max-width: 100%;
+}
+
 /* NEEDS REVIEW prevent pre in table from causing article to exceed bounds */
 .doc table.tableblock pre,
 .doc .listingblock.wrap pre {
@@ -901,10 +944,26 @@
   box-sizing: border-box;
 }
 
+/* Hide line numbers for code blocks with role="no-numbers" */
+.doc .no-numbers .hljs-ln-numbers {
+  display: none !important;
+}
+
+/* Remove border from code block table cells when inside regular tables */
+.doc table.tableblock .hljs-ln td {
+  border-bottom: none !important;
+}
+
+/* Preserve whitespace and indentation in code blocks */
+.doc .hljs-ln-code {
+  white-space: pre !important;
+  padding-left: 0 !important;
+}
+
 /* Style listing blocks with titles */
 .doc .listingblock > .title {
   background: var(--pre-title-background);
-  border-radius: 12px 12px 0 0;
+  border-radius: 8px 8px 0 0;
   padding: 0.5em 0.875em;
   margin-bottom: 0;
   position: relative;
@@ -933,17 +992,17 @@
 
 /* When title is collapsed, adjust the border radius */
 .doc .listingblock > .title.collapsed {
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 /* When a title is present, adjust the code block border radius */
 .doc .listingblock > .title + .content pre {
-  border-radius: 0 0 12px 12px;
+  border-radius: 0 0 8px 8px;
 }
 
-/* When title is not present, use border-radius: 12px for code blocks */
+/* When title is not present, use border-radius: 8px for code blocks */
 .doc .listingblock > .content pre {
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 /* Keep existing position relative for the content */
@@ -952,10 +1011,9 @@
 }
 
 .doc .source-toolbox {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
-  visibility: hidden;
   position: absolute;
   top: 0.25rem;
   right: 0.5rem;
@@ -964,12 +1022,32 @@
   font-size: calc(13 / var(--rem-base) * 1rem);
   line-height: 1;
   user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
   white-space: nowrap;
   z-index: 1;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc .source-toolbox *:not(.copy-toast),
+.doc .source-toolbox *:not(.copy-toast)::before,
+.doc .source-toolbox *:not(.copy-toast)::after {
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
+}
+
+.doc .source-toolbox .copy-button {
+  pointer-events: auto !important;
 }
 
 .doc .listingblock:hover .source-toolbox {
-  visibility: visible;
+  display: flex;
 }
 
 .doc .source-toolbox .source-lang {
@@ -977,6 +1055,7 @@
   letter-spacing: 0.075em;
   margin-bottom: 0.5rem;
   text-align: center;
+  display: none;
 }
 
 .doc .source-toolbox .copy-button {
@@ -1026,6 +1105,13 @@
   opacity: 0;
   transition: opacity 0.5s ease 0.5s;
   bottom: -10px;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
 }
 
 .doc .source-toolbox .copy-toast::after {
@@ -1037,6 +1123,11 @@
   border: 0.55em solid transparent;
   border-bottom-color: var(--doc-font-color);
   transform-origin: center;
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
 }
 
 .doc .source-toolbox .copy-button.clicked .copy-toast {

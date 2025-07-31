@@ -32,22 +32,22 @@ The GitLab and CircleCI configurations will be different. It may be helpful to h
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-[.table.table-striped.table-migrating-page]
-[cols=2*, options="header,unbreakable,autowidth", stripes=even]
-[cols="5,5"]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | GitLab | CircleCI
 
 2+| Defining a job that executes a single build step
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 job1:
   script: "execute-script-for-job1"
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   job1:
@@ -59,14 +59,14 @@ jobs:
 2+| Specify a Docker image to use for a job.
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 job1:
   image: node:10
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   job1:
@@ -77,7 +77,7 @@ jobs:
 2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 job1:
   stage: build
@@ -102,7 +102,7 @@ stages:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 version: 2.1
 jobs:
@@ -134,11 +134,10 @@ workflows:
 ----
 
 
-
 2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/executor-intro/#section=configuration[execution environments documentation] for more information.
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 ubuntu job:
   tags:
@@ -154,7 +153,7 @@ osx job:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   ubuntu-job:
@@ -178,7 +177,7 @@ jobs:
 2+| Cache Dependencies.
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 image: node:latest
 
@@ -197,7 +196,7 @@ test_async:
 ----
 
 a|
-[source, yaml]
+[source,yaml,role="no-numbers"]
 ----
 jobs:
   test_async:
@@ -213,6 +212,7 @@ jobs:
       - run: node ./specs/start.js
 ----
 |===
+--
 
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 

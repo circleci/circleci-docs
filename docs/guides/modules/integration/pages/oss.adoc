@@ -41,10 +41,9 @@ NOTE: This feature *is not supported* for orgs that use the Bitbucket Data Cente
 
 [tabs]
 ====
-GitHub_App::
+GitHub App::
 +
 --
-
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 
 . In the sidebar, click *Triggers*.
@@ -53,9 +52,9 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps
 
 image::guides:ROOT:triggers/run-on-pr-opened-pushed-to.png[Trigger option to build pull requests]
 --
-====
+GitHub OAuth app & Bitbucket Cloud::
++
 --
-
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
 . In the sidebar, click *Advanced*
 . Enable the *Only build pull requests* option.
@@ -68,13 +67,8 @@ Override the *Only build pull requests* setting by utilizing the API and followi
 
 Enabling *Only build pull requests* may result in duplicate builds. You can find troubleshooting steps in this link:https://support.circleci.com/hc/en-us/articles/115013353748-Troubleshooting-duplicate-builds-triggered-upon-every-commit-push[support article].
 
-
-
 NOTE: CircleCI will always build all commits from your project's _default branch and tags_ regardless of any setting.
 --
-
-[tabs]
-====
 GitLab::
 +
 --

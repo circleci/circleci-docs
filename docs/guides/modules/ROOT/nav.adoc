@@ -1,10 +1,11 @@
-* xref:about-circleci:index.adoc[About CircleCI]
+* About CircleCI
 ** xref:about-circleci:about-circleci.adoc[CircleCI overview]
 ** xref:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 ** xref:about-circleci:concepts.adoc[Concepts]
+** xref:about-circleci:introduction-to-the-circleci-web-app.adoc[Intro to the CircleCI web app]
 ** xref:about-circleci:open-source.adoc[Open source acknowledgements]
 
-* xref:getting-started:index.adoc[Getting started]
+* Getting started
 ** First steps
 *** xref:getting-started:first-steps.adoc[Sign up and try CircleCI]
 *** xref:getting-started:invite-your-team.adoc[Join teammates on CircleCI]
@@ -12,17 +13,17 @@
 *** xref:getting-started:getting-started.adoc[Quickstart guide]
 ** How-to guides
 *** xref:getting-started:hello-world.adoc[Hello World]
-*** xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML configuration]
+*** xref:getting-started:introduction-to-yaml-configurations.adoc[Intro to YAML configuration]
 *** xref:getting-started:config-editor.adoc[In-app config editor]
 *** xref:getting-started:language-javascript.adoc[Node.js quickstart]
 *** xref:getting-started:language-python.adoc[Python quickstart]
 *** xref:getting-started:language-go.adoc[Go quickstart]
 ** Tutorials
-*** xref:getting-started:config-intro.adoc[Configuration introduction]
+*** xref:getting-started:config-intro.adoc[Configuration intro]
 *** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
 
-* xref:migrate:index.adoc[Migrate to CircleCI]
-** xref:migrate:migration-intro.adoc[Migration introduction]
+* Migrate to CircleCI
+** xref:migrate:migration-intro.adoc[Migration intro]
 ** xref:migrate:migrating-from-aws.adoc[Migrate from AWS]
 ** xref:migrate:migrating-from-azuredevops.adoc[Migrate from Azure DevOps]
 ** xref:migrate:migrating-from-buildkite.adoc[Migrate from Buildkite]
@@ -32,11 +33,12 @@
 ** xref:migrate:migrating-from-teamcity.adoc[Migrate from TeamCity]
 ** xref:migrate:migrating-from-travis.adoc[Migrate from Travis CI]
 
-* xref:orchestrate:index.adoc[Orchestrate]
+* Orchestrate
 ** Pipelines
 *** xref:orchestrate:pipelines.adoc[Pipeline and triggers overview]
 *** xref:orchestrate:jobs-steps.adoc[Jobs and steps overview]
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
+*** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
 *** xref:orchestrate:dynamic-config.adoc[Use dynamic configuration]
 *** xref:orchestrate:skip-build.adoc[Skip CI and cancel workflows]
@@ -63,7 +65,7 @@
 *** xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate from deploy to run]
 *** xref:orchestrate:using-shell-scripts.adoc[Using shell scripts]
 
-* xref:execution-managed:index.adoc[Execute on managed compute]
+* Execute on managed compute
 ** xref:execution-managed:executor-intro.adoc[Execution environments overview]
 ** xref:execution-managed:resource-class-overview.adoc[Resource class overview]
 ** Docker
@@ -90,7 +92,7 @@
 ** How-to guides
 *** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
 *** xref:execution-managed:run-a-job-in-a-container.adoc[Run a job in a container on your machine with Docker]
-*** xref:execution-managed:docker-compose.adoc[Installing and using docker-compose]
+*** xref:execution-managed:docker-compose.adoc[Installing and using Docker Compose]
 *** xref:execution-managed:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
 ** Image support policies
 *** xref:execution-managed:android-images-support-policy.adoc[Android images support policy]
@@ -100,8 +102,9 @@
 *** xref:execution-managed:remote-docker-images-support-policy.adoc[Remote Docker images support policy]
 *** xref:execution-managed:windows-images-support-policy.adoc[Windows images support policy]
 *** xref:execution-managed:xcode-policy.adoc[Xcode image policy]
+*** xref:execution-managed:machine-convenience-image-lifecycle.adoc[CircleCI image lifecycle: A complete guide]
 
-* xref:execution-runner:index.adoc[Execute jobs on self-hosted runners]
+* Execute jobs on self-hosted runners
 ** xref:execution-runner:runner-overview.adoc[Self-hosted runner overview]
 ** xref:execution-runner:runner-concepts.adoc[Self-hosted runner concepts]
 ** xref:execution-runner:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
@@ -136,7 +139,7 @@
 *** xref:execution-runner:troubleshoot-self-hosted-runner.adoc[Troubleshoot self-hosted runner]
 *** xref:execution-runner:runner-scaling.adoc[Scaling self-hosted runner]
 
-* xref:test:index.adoc[Testing on CircleCI]
+* Testing on CircleCI
 ** Run tests on CircleCI
 *** xref:test:test.adoc[Automated testing]
 *** xref:test:collect-test-data.adoc[Collecting test data]
@@ -157,7 +160,7 @@
 ** Reference
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 
-* xref:deploy:index.adoc[Deploy with CircleCI]
+* Deploy with CircleCI
 ** xref:deploy:deployment-overview.adoc[Overview of deployment on CircleCI]
 ** xref:deploy:deploys-overview.adoc[CircleCI deploys overview]
 ** Release agent setup
@@ -186,9 +189,9 @@
 *** xref:deploy:deploy-ios-applications.adoc[Deploy iOS applications]
 *** xref:deploy:deploy-over-ssh.adoc[Deploy over SSH]
 *** xref:deploy:publish-packages-to-packagecloud.adoc[Publish packages to Packagecloud]
-*** xref:deploy:deploy-to-npm-registry.adoc[Deploy to NPM registry]
+*** xref:deploy:deploy-to-npm-registry.adoc[Deploy to npm registry]
 
-* xref:optimize:index.adoc[Optimize]
+* Optimize
 ** xref:optimize:optimizations.adoc[Optimizations reference]
 ** Data
 *** xref:optimize:persist-data.adoc[Persisting data overview]
@@ -208,13 +211,13 @@
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]
 *** xref:optimize:java-oom.adoc[Avoid and debug Java memory errors]
 
-* xref:insights:index.adoc[Insights]
+* Insights
 ** xref:insights:insights.adoc[Use Insights]
 ** xref:insights:insights-tests.adoc[Test Insights]
 ** xref:insights:insights-snapshot-badge.adoc[Generate an Insights snapshot badge]
 ** xref:insights:insights-glossary.adoc[Insights glossary]
 
-* xref:permissions-authentication:index.adoc[Manage roles, permissions, and authentication]
+* Manage roles, permissions, and authentication
 ** Roles and permissions
 *** xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]
 *** xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions]
@@ -223,6 +226,7 @@
 ** SSO authentication
 *** xref:permissions-authentication:sso-overview.adoc[SSO overview]
 *** xref:permissions-authentication:set-up-sso.adoc[SSO setup]
+*** xref:permissions-authentication:sso-group-mapping.adoc[Set up SSO group mapping with Okta]
 *** xref:permissions-authentication:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-enabled org]
 ** Multi-factor authentication (MFA)
 *** xref:permissions-authentication:mfa.adoc[MFA overview]
@@ -230,7 +234,7 @@
 *** xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs]
 *** xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OIDC tokens with custom claims]
 
-* xref:security:index.adoc[Manage security and secrets]
+* Manage security and secrets
 ** Security features
 *** xref:security:security.adoc[How CircleCI handles security]
 *** xref:security:env-vars.adoc[Intro to environment variables]
@@ -249,7 +253,7 @@
 *** xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
 *** xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories]
 
-* xref:config-policies:index.adoc[Manage config policies]
+* Manage config policies
 ** xref:config-policies:config-policy-management-overview.adoc[Config policy management overview]
 ** xref:config-policies:config-policy-reference.adoc[Config policy reference]
 ** How-to guides
@@ -259,7 +263,7 @@
 *** xref:config-policies:config-policies-for-self-hosted-runner.adoc[Config policies for self-hosted runner]
 *** xref:config-policies:manage-contexts-with-config-policies.adoc[Manage contexts with config policies]
 
-* xref:integration:index.adoc[Integration]
+* Integration
 ** Integration features
 *** xref:integration:outbound-webhooks.adoc[Outbound webhooks]
 *** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound webhooks reference]
@@ -284,32 +288,33 @@
 *** xref:integration:add-ssh-key.adoc[Add additional SSH keys]
 *** xref:integration:authorize-google-cloud-sdk.adoc[Authorize Google Cloud SDK]
 
-* xref:toolkit:index.adoc[Developer toolkit]
+* Developer toolkit
 ** AI features
-*** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP Server]
+*** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 ** CLI
 *** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
 *** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
 ** APIs
-*** xref:toolkit:api-intro.adoc[API v2 introduction]
+*** xref:toolkit:api-intro.adoc[API v2 intro]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]
 *** xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
 ** IDE tools
 *** xref:toolkit:vs-code-extension-overview.adoc[VS Code extension overview]
 *** xref:toolkit:get-started-with-the-vs-code-extension.adoc[Get started with the VS Code extension]
 ** Config tools
-*** xref:toolkit:circleci-config-sdk[Config SDK]
-*** xref:toolkit:orb-development-kit[Orb development kit]
+*** xref:toolkit:circleci-config-sdk.adoc[Config SDK]
+*** xref:orbs:author:orb-development-kit.adoc[Orb development kit]
+*** xref:toolkit:circleci-image-updater.adoc[Image Updater]
 ** Example projects and configs
 *** xref:toolkit:examples-and-guides-overview.adoc[Examples and guides overview]
 *** xref:toolkit:sample-config.adoc[Sample config.yml files]
-*** xref:toolkit:postgres-config[Database examples]
+*** xref:toolkit:postgres-config.adoc[Database examples]
 
-* xref:plans-pricing:index.adoc[Plans and pricing]
+* Plans and pricing
 ** xref:plans-pricing:plan-overview.adoc[CircleCI plans overview]
 ** xref:plans-pricing:credits.adoc[Credits overview]
-** xref:plans-pricing:plan-free.adoc[Free plan overview]
-** xref:plans-pricing:plan-performance.adoc[Performance plan overview]
-** xref:plans-pricing:plan-scale.adoc[Scale plan overview]
-** xref:plans-pricing:plan-server.adoc[Server plan overview]
+** xref:plans-pricing:plan-free.adoc[Free Plan overview]
+** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]
+** xref:plans-pricing:plan-scale.adoc[Scale Plan overview]
+** xref:plans-pricing:plan-server.adoc[Server Plan overview]

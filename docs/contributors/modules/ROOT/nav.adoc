@@ -1,4 +1,5 @@
 * Docs style guide
+** xref:docs-style:index.adoc[Overview]
 ** xref:docs-style:formatting.adoc[Formatting]
 ** xref:docs-style:style-and-voice.adoc[Style and voice]
 ** xref:docs-style:headings.adoc[Headings]

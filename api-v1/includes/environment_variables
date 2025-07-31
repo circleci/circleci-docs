@@ -1,0 +1,36 @@
+<h1 id='environment-variables'>Environment Variables</h1><h2 id='list-environment-variables'>List Environment Variables</h2>
+<p>Returns a list of all environment variables.</p>
+<div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span> https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
+<span class="sb">``</span>
+
+<span class="sb">```</span>json
+<span class="o">[{</span>
+    <span class="s2">"name"</span>: <span class="s2">"foo"</span>,
+    <span class="s2">"value"</span>: <span class="s2">"xxxx1234"</span>
+<span class="o">}]</span>
+</code></pre></div>
+<p><strong><code>GET</code> Request:</strong> Returns four &#39;x&#39; characters plus the last four ASCII characters of the value, consistent with the display of environment variable values in the CircleCI website.</p>
+<h2 id='add-environment-variables'>Add Environment Variables</h2>
+<p>Creates a new environment variable.</p>
+<div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span> <span class="nt">-X</span> POST <span class="nt">--header</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">-d</span> <span class="s1">'{"name":"foo", "value":"bar"}'</span> https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxx"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong><code>POST</code> Request:</strong> Creates a new environment variable.</p>
+<h2 id='get-single-environment-variable'>Get Single Environment Variable</h2>
+<p>Gets the hidden value of environment variable :name</p>
+<div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span> https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xxxx"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong><code>GET</code> Request:</strong> Returns the hidden value  of environment variable <code>:name</code>.</p>
+<h2 id='delete-environment-variables'>Delete Environment Variables</h2><div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span> <span class="nt">-X</span> DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ok"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p><strong><code>DELETE</code> Request:</strong>Deletes the environment variable named <code>:name</code>.</p>

@@ -36,8 +36,26 @@ module.exports.register = function () {
  */
 function collectPages(contentCatalog, siteUrl) {
   const all = [];
+
+  // Define which server-admin versions to exclude from indexing
+  const excludedServerAdminVersions = [
+    'server-4.1',
+    'server-4.2',
+    'server-4.3',
+    'server-4.4',
+    'server-4.5',
+    'server-4.6',
+    'server-4.7'
+  ];
+
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
     versions.forEach(({ version }) => {
+      // Skip indexing for excluded server-admin versions
+      if (comp === 'server-admin' && excludedServerAdminVersions.includes(version)) {
+        console.log(`Skipping Algolia indexing for server-admin version: ${version}`);
+        return; // Skip this entire component version
+      }
+
       const compVer = contentCatalog.getComponentVersion(comp, version);
       const navMap = getNavEntriesByUrl(compVer.navigation);
       contentCatalog
@@ -107,25 +125,25 @@ function hasAlgoliaCredentials() {
 function chunkText(text, maxBytes = 8500) {  // Reduced from 10000 to have margin for metadata
   const chunks = [];
   let current = '';
-  
+
   text.split(/\n\n/).forEach(paragraph => {
     const para = paragraph + '\n\n';
     const combined = current + para;
     const size = Buffer.byteLength(combined, 'utf8');
-    
+
     if (size > maxBytes) {
       if (current) chunks.push(current.trim());
-      
+
       if (Buffer.byteLength(para, 'utf8') > maxBytes) {
         // Paragraph too big: split by sentences
         let sentenceBuf = '';
         paragraph.split(/(?<=\.)\s/).forEach(sentence => {
           const combinedSentence = sentenceBuf + sentence + ' ';
           const sentSize = Buffer.byteLength(combinedSentence, 'utf8');
-          
+
           if (sentSize > maxBytes) {
             if (sentenceBuf) chunks.push(sentenceBuf.trim());
-            
+
             if (Buffer.byteLength(sentence, 'utf8') > maxBytes) {
               // Sentence too big: split by characters
               let charBuf = '';
@@ -144,7 +162,7 @@ function chunkText(text, maxBytes = 8500) {  // Reduced from 10000 to have margi
             sentenceBuf = combinedSentence;
           }
         });
-        
+
         if (sentenceBuf) chunks.push(sentenceBuf.trim());
         current = '';
       } else {
@@ -154,7 +172,7 @@ function chunkText(text, maxBytes = 8500) {  // Reduced from 10000 to have margi
       current = combined;
     }
   });
-  
+
   if (current) chunks.push(current.trim());
   return chunks;
 }
@@ -170,12 +188,12 @@ async function indexToAlgolia(pages) {
 
   const client = algoliasearch(appId, apiKey);
   const records = [];
-  
+
   pages.forEach((p) => {
     const pathId = p.relUrl.replace(/^\/+/, '').replace(/[\/]/g, '_');
     const baseId = `${p.component}:${p.version}:${pathId}`;
     const chunks = chunkText(p.text);
-    
+
     chunks.forEach((chunk, i) => {
       // Create the record with all fields except content
       const record = {
@@ -187,26 +205,26 @@ async function indexToAlgolia(pages) {
         version: p.version,
         objectID: `${baseId}:${i}`,
       };
-      
+
       // Calculate metadata size
       const metadataSize = Buffer.byteLength(JSON.stringify(record), 'utf8');
       // Maximum allowed content size
       const maxContentSize = 9500 - metadataSize;
-      
+
       // Trim content if necessary to ensure total record size is under limit
       let content = chunk;
       if (Buffer.byteLength(content, 'utf8') > maxContentSize) {
         content = content.slice(0, Math.floor(maxContentSize * 0.9));
       }
-      
+
       record.content = content;
       records.push(record);
     });
   });
-  
+
   console.log(`Prepared ${records.length} chunked records for indexing`);
 
-  
+
   // Configure index settings with path faceting
   try {
     const settingsResponse = await client.setSettings({
@@ -220,9 +238,9 @@ async function indexToAlgolia(pages) {
         paginationLimitedTo: 1000,
       },
     });
-    
+
     console.log(`Applied index settings, task ID: ${settingsResponse.taskID}`);
-    
+
     // Wait for task completion
     await waitForTask(client, indexName, settingsResponse.taskID);
     console.log('Index settings update completed successfully');
@@ -233,7 +251,7 @@ async function indexToAlgolia(pages) {
 
   const response = await client.saveObjects({ indexName, objects: records });
   console.log(`Indexed ${response[0]?.objectIDs.length} records to ${indexName}`);
-  
+
   return response;
 }
 
@@ -247,17 +265,17 @@ async function indexToAlgolia(pages) {
  */
 async function waitForTask(client, indexName, taskID, timeout = 60000, pollInterval = 1000) {
   const startTime = Date.now();
-  
+
   while (Date.now() - startTime < timeout) {
     const taskResponse = await client.getTask({ indexName, taskID });
-    
+
     if (taskResponse.status === 'published') {
       return taskResponse;
     }
-    
+
     // Wait before checking again
     await new Promise(resolve => setTimeout(resolve, pollInterval));
   }
-  
+
   throw new Error(`Task ${taskID} timed out after ${timeout}ms`);
 }

@@ -123,7 +123,7 @@ Orbs let you pull in pre-defined, parameterized configuration elements into your
 
 [tabs]
 ====
-With_Orbs::
+With Orbs::
 +
 --
 [,yaml]
@@ -140,7 +140,7 @@ workflows:
           version: <node-version> # replace node version
 ----
 --
-Without_orbs::
+Without orbs::
 +
 --
 [,yaml]
@@ -189,8 +189,7 @@ CAUTION: In order to use uncertified registry orbs (partner or community), your 
 
 Orbs in the registry will appear with one of three different namespace designations:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Designation | Description
 

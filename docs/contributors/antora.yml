@@ -1,5 +1,6 @@
 name: contributors
-title: Contributors guide
+title: Contributors
 version: ~
 nav:
 - modules/ROOT/nav.adoc
+start_page: docs-style:index.adoc

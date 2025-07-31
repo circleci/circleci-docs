@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import sys
 
 # Directory containing the new Antora docs
 DOCS_DIR = "docs"
@@ -88,13 +89,27 @@ def process_file(filepath):
 def main():
     """
     Walk through all .adoc files in DOCS_DIR and update their xrefs.
+    Or process a single file if provided as a command-line argument.
     """
-    for root, _, files in os.walk(DOCS_DIR):
-        for file in files:
-            if file.endswith(".adoc"):
-                full_path = os.path.join(root, file)
-                print(f"Processing: {full_path}")
-                process_file(full_path)
+    if len(sys.argv) > 1:
+        # Process single file provided as argument
+        filepath = sys.argv[1]
+        if not os.path.exists(filepath):
+            print(f"ERROR: File '{filepath}' does not exist.")
+            sys.exit(1)
+        if not filepath.endswith('.adoc'):
+            print(f"ERROR: File '{filepath}' is not an .adoc file.")
+            sys.exit(1)
+        print(f"Processing single file: {filepath}")
+        process_file(filepath)
+    else:
+        # Process all files in DOCS_DIR
+        for root, _, files in os.walk(DOCS_DIR):
+            for file in files:
+                if file.endswith(".adoc"):
+                    full_path = os.path.join(root, file)
+                    print(f"Processing: {full_path}")
+                    process_file(full_path)
 
 if __name__ == "__main__":
     main()

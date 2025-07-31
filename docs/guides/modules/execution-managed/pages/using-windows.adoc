@@ -108,7 +108,7 @@ include::ROOT:partial$execution-resources/windows-resource-table.adoc[]
 
 [tabs]
 ====
-Cloud_with_orb::
+Cloud with orb::
 +
 --
 [,yaml]
@@ -130,7 +130,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ----
 --
-Cloud_with_machine::
+Cloud with machine::
 +
 --
 [,yaml]

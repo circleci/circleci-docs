@@ -40,9 +40,61 @@ We have various other features that set our solution apart. https://circleci.com
 * TeamCity's Build Configurations are equivalent to https://circleci.com/docs/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (for example, run unit tests).
 * TeamCity has traditionally used the UI to configure most builds, with Kotlin Script configuration being a newer, recent feature. CircleCI uses YAML to configure the majority of pipeline functionality.
 
-[.table.table-striped.table-migrating-page.table-no-background]
-[cols=2*, options="header,unbreakable,autowidth", stripes=even]
-[cols="5,5"]
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| TeamCity _settings.kts_ | Equivalent CircleCI _config.yml_
+
+a|
+[source,kotlin,role="no-numbers"]
+----
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+
+version: "2019.2"
+
+project {
+  buildType(HelloWorld)
+}
+
+object HelloWorld: BuildType({
+  name = "Hello World"
+  steps {
+    script {
+      scriptContent = "echo 'Hello World!'"
+    }
+  }
+})
+----
+
+a|
+[source,yaml,role="no-numbers"]
+----
+version: 2.1
+workflows:
+  hello-workflow:
+    jobs:
+      - hello-job
+
+jobs:
+  # Define job
+  hello-job:
+    # Define environment
+    docker:
+      - image: cimg/base:stable
+
+    # Define steps for job
+    steps:
+      - checkout
+      - run: echo "Hello World!"
+----
+|===
+--
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | TeamCity _settings.kts_ | Equivalent CircleCI _config.yml_
 
@@ -90,71 +142,65 @@ jobs:
       - run: echo "Hello World!"
 ----
 |===
-
-[.table.table-striped.cf.table-migrate-mobile]
-[cols=1*, options="header", stripes=even]
-[cols="100%"]
-|===
-| TeamCity _settings.kts_
-
-a|
-[source, kotlin]
-----
-import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
-
-version: "2019.2"
-
-project {
-  buildType(HelloWorld)
-}
-
-object HelloWorld: BuildType({
-  name = "Hello World"
-  steps {
-    script {
-      scriptContent = "echo 'Hello World!'"
-    }
-  }
-})
-----
-|===
-
-[.table.table-striped.cf.table-migrate-mobile]
-[cols=1*, options="header", stripes=even]
-[cols="100%"]
-|===
-| Equivalent CircleCI _config.yml_
-
-a|
-[source, yaml]
-----
-version: 2.1
-workflows:
-  hello-workflow:
-    jobs:
-      - hello-job
-
-jobs:
-  # Define job
-  hello-job:
-    # Define environment
-    docker:
-      - image: cimg/base:stable
-
-    # Define steps for job
-    steps:
-      - checkout
-      - run: echo "Hello World!"
-----
-|===
+--
 
 * Instead of Build Chains, CircleCI has https://circleci.com/docs/workflows/[Workflows], which define dependencies and flow between jobs.
 * A https://circleci.com/docs/pipelines/[Pipeline] refers to all configuration, workflows, and jobs for a project. This multi-layer structure allows for strong flexibility and separation of concerns for different workloads.
 
-[.table.table-striped.table-migrating-page.table-no-background]
-[cols=2*, options="header,unbreakable,autowidth", stripes=even]
-[cols="5,5"]
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| TeamCity Build Chain | Equivalent CircleCI Workflow
+
+a|
+[source,kotlin,role="no-numbers"]
+----
+project {
+  sequence {
+    build(Compile)
+    parallel {
+        build(Test1)
+        build(Test2)
+    }
+    build(Package)
+    build(Publish)
+  }
+}
+
+/* BuildType definitions assumed
+----
+
+a|
+[source,yaml,role="no-numbers"]
+----
+version: 2.1
+workflows:
+  build-deploy:
+    jobs:
+      - Compile
+      - Test1:
+          requires:
+            - Compile
+      - Test2:
+          requires:
+            - Compile
+      - Package:
+          requires:
+            - Test1
+            - Test2
+      - Publish:
+          requires:
+            - Package
+
+# Job definitions assumed
+----
+|===
+--
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | TeamCity Build Chain | Equivalent CircleCI Workflow
 
@@ -174,6 +220,7 @@ project {
 }
 
 /* BuildType definitions assumed
+
 ----
 
 a|
@@ -201,64 +248,7 @@ workflows:
 # Job definitions assumed
 ----
 |===
-
-[.table.table-striped.cf.table-migrate-mobile]
-[cols=1*, options="header", stripes=even]
-[cols="100%"]
-|===
-| TeamCity Build Chain
-
-a|
-[source, kotlin]
-----
-project {
-  sequence {
-    build(Compile)
-    parallel {
-        build(Test1)
-        build(Test2)
-    }
-    build(Package)
-    build(Publish)
-  }
-}
-
-/* BuildType definitions assumed
-
-----
-|===
-
-[.table.table-striped.cf.table-migrate-mobile]
-[cols=1*, options="header", stripes=even]
-[cols="100%"]
-|===
-| Equivalent CircleCI Workflow
-
-a|
-[source, yaml]
-----
-version: 2.1
-workflows:
-  build-deploy:
-    jobs:
-      - Compile
-      - Test1:
-          requires:
-            - Compile
-      - Test2:
-          requires:
-            - Compile
-      - Package:
-          requires:
-            - Test1
-            - Test2
-      - Publish:
-          requires:
-            - Package
-
-# Job definitions assumed
-----
-|===
+--
 For more information on CircleCI Concepts, visit our https://circleci.com/docs/concepts/[Concepts] and https://circleci.com/docs/pipelines/#section=pipelines[Pipelines] documentation pages.
 
 == Configuration

@@ -47,7 +47,7 @@ workflows:
           executor:
             name: android/android-machine
             resource-class: large
-            tag: 2021.10.1
+            tag: default
 ```
 
 [#more-complex-orb-usage]
@@ -68,7 +68,7 @@ jobs:
     executor:
       name: android/android-machine
       resource-class: large
-      tag: 2021.10.1
+      tag: default
     steps:
       - checkout
       # Create an AVD named "myavd"

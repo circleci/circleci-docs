@@ -52,8 +52,7 @@ workflows:
 
 A parameter can have the following keys as immediate children:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols="1,2,1", options="header"]
 |===
 | Key Name | Description | Default value
 
@@ -363,8 +362,7 @@ The environment variable name (`env_var_name`) parameter is a string that must m
 
 The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example uses the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. If you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
 
-Original `config.yml` file:
-
+.Original `config.yml` file
 [,yaml]
 ----
 version: 2.1
@@ -385,8 +383,7 @@ workflows:
     - build
 ----
 
-New `config.yml` file:
-
+.New `config.yml` file:
 [,yaml]
 ----
 version: 2.1
@@ -443,8 +440,7 @@ commands:
 
 A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -642,8 +638,7 @@ jobs:
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="2,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -912,8 +907,7 @@ workflows:
 
 If a job is declared inside an orb it can use commands in that orb or the global commands. It is not possible to call commands outside the scope of declaration of the job.
 
-*hello-orb*
-
+.hello-orb
 [,yaml]
 ----
 version: 2.1
@@ -939,8 +933,7 @@ commands:
       - run: echo "<< parameters.saywhat >>"
 ----
 
-*Config leveraging hello-orb*
-
+.Config leveraging hello-orb
 [,yaml]
 ----
 # config.yml
@@ -1155,8 +1148,7 @@ workflows:
 
 Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a truthy value.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -1176,8 +1168,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 
 Under the `unless` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a falsy value.
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
 

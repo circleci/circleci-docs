@@ -1,5 +1,4 @@
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols="1,1,2", options="header"]
 |===
 | Operator type | Operators | Description
 

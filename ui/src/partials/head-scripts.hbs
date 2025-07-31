@@ -1,3 +1,6 @@
+{{#with site.keys.cookiebot}}
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="{{this}}" data-blockingmode="auto" type="text/javascript"></script>
+{{/with}}
 {{#with site.keys.googleAnalytics}}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{this}}"></script>
     <script>function gtag(){dataLayer.push(arguments)};window.dataLayer=window.dataLayer||[];gtag('js',new Date());gtag('config','{{this}}')</script>

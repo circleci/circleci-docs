@@ -15,7 +15,7 @@ image::guides:ROOT:circleci-system-diagram.png[CircleCI process diagram]
 [#what-is-ci-cd]
 == What is CI/CD?
 
-*Continuous integration (CI)* is a practice that integrates code into a chosen branch of a shared repository, early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by developers multiple times throughout the day by committing daily to a shared mainline. Every commit triggers automated tests and builds. If these fail, they can be repaired quickly.
+*Continuous integration (CI)* is a practice that integrates code into a chosen branch of a shared repository, early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository multiple times throughout the day. Every commit to a shared mainline triggers automated tests and builds. If these fail, they can be repaired quickly.
 
 *Continuous delivery (CD)* is a practice that produces reliable releases to a chosen development environment, like a staging or production branch.
 

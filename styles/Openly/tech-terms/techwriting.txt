@@ -1,0 +1,7 @@
+linter
+linters
+documentarian
+markdown
+onboarding
+readme
+snagit

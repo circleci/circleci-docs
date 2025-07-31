@@ -26,7 +26,7 @@ To use the Windows GPU execution environment, you can either choose to use the W
 
 [tabs]
 ====
-Windows_GPU_with_orb::
+Windows GPU with orb::
 +
 --
 [,yaml]
@@ -43,7 +43,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ----
 --
-Windows_GPU_with_machine::
+Windows GPU with machine::
 +
 --
 [,yaml]

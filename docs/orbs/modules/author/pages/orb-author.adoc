@@ -62,8 +62,7 @@ To begin creating orbs, you will need to xref:guides:toolkit:local-cli.adoc#inst
 
 Orb CLI commands are scoped to different user permission levels, set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Orb Command | Permission Scope
 
@@ -123,10 +122,8 @@ $ git branch
 
 If you have run the `circleci orb init` command, you will automatically be in the `alpha` branch and have a repository with `.circleci` and `src` directories.
 
-*_Example: Orb Project Structure_*
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Orb Project Structure
+[cols=2*, options="header"]
 |===
 | type | name
 
@@ -154,10 +151,8 @@ If you have run the `circleci orb init` command, you will automatically be in th
 
 Navigate to the `src` directory to look at the included sections.
 
-*_Example: Orb Project `src` Directory_*
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Orb Project `src` Directory
+[cols=2*, options="header"]
 |===
 | type | name
 
@@ -278,13 +273,13 @@ steps:
 [#scripts]
 ==== Scripts
 
-One of the major benefits of the orb development kit is a xref:orb-concepts.adoc#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `<<include(file)>>` within your orb config code to include the file contents directly in the orb.
+One of the major benefits of the orb development kit is a xref:orb-concepts.adoc#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `++<<include(file)>>++` within your orb config code to include the file contents directly in the orb.
 
 Script inclusion is especially useful when writing complex orb commands, which might contain a lot of _Bash_ code, _(although you could use Python too!)_.
 
 [tabs]
 ====
-Orb_Development_Kit_Packing::
+Orb Development Kit packing::
 +
 --
 [,yaml]
@@ -302,7 +297,7 @@ steps:
       command: <<include(scripts/greet.sh)>>
 ----
 --
-Standard_YAML_Config::
+Standard YAML config::
 +
 --
 [,yaml]

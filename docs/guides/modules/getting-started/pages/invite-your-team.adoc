@@ -57,7 +57,7 @@ include::ROOT:partial$tips/check-github-type-org.adoc[]
 
 [tabs]
 ====
-GitHub_App_GitLab_Bitbucket_Data_Center::
+GitHub App GitLab Bitbucket Data Center::
 +
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
@@ -67,7 +67,7 @@ GitHub_App_GitLab_Bitbucket_Data_Center::
 
 image::guides:ROOT:invite-teammates-standalone.png[Navigate to Organization Settings, People, use the Invite form]
 --
-GitHub_OAuth__Bitbucket_Cloud::
+GitHub OAuth Bitbucket Cloud::
 +
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.

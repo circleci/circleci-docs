@@ -61,8 +61,7 @@ image::guides:ROOT:workspaces.png[workflow illustration]
 
 Note the following distinctions between artifacts, caches and workspaces:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols="1,1,2,3", options="header"]
 |===
 | Type | Lifetime | Use | Example
 

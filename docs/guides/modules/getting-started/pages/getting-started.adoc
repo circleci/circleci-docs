@@ -28,7 +28,7 @@ image::guides:ROOT:getting-started-guide-exp/quick-start-first-step.svg[section 
 
 [tabs]
 ====
-GitHub_App::
+GitHub App::
 +
 --
 image:guides:ROOT:getting-started-guide-exp/create-project.png[float=right]
@@ -107,7 +107,7 @@ You should soon have a passing pipeline. If you are happy with this configuratio
 
 {empty} +
 --
-GitHub_OAuth_app_&_Bitbucket_Cloud::
+GitHub OAuth app & Bitbucket Cloud::
 +
 --
 image:guides:ROOT:getting-started-guide-exp/set-up-project.png[float=right]

@@ -39,9 +39,6 @@
       img.alt = 'copy icon'
       img.className = 'copy-icon'
       copy.appendChild(img)
-      ;(toast = document.createElement('span')).className = 'copy-toast'
-      toast.appendChild(document.createTextNode('Copied!'))
-      copy.appendChild(toast)
       toolbox.appendChild(copy)
     }
     pre.parentNode.appendChild(toolbox)
@@ -60,9 +57,22 @@
     if (code.dataset.lang === 'console' && text.startsWith('$ ')) text = extractCommands(text)
     window.navigator.clipboard.writeText(text).then(
       function () {
+        // Create toast element dynamically
+        var toast = document.createElement('span')
+        toast.className = 'copy-toast'
+        toast.appendChild(document.createTextNode('Copied!'))
+        this.appendChild(toast)
+
         this.classList.add('clicked')
         this.offsetHeight // eslint-disable-line no-unused-expressions
         this.classList.remove('clicked')
+
+        // Remove toast after animation completes
+        setTimeout(function () {
+          if (toast.parentNode) {
+            toast.parentNode.removeChild(toast)
+          }
+        }, 1000) // Wait for transition duration + delay
       }.bind(this),
       function () {}
     )

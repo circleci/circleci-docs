@@ -1,0 +1,11 @@
+\bCircleci\b
+\bcircleCI\b
+\bcircleci\s
+\bCircelCI\b
+please
+Please
+bitbucket
+BitBucket
+PostgrSQL
+[Ee]asy
+[Ee]asily

@@ -3,7 +3,7 @@
 
 [tabs]
 ====
-Web_app_installation::
+Web app installation::
 +
 --
 
@@ -27,10 +27,10 @@ To find out which GitHub integration you are using, head to the link:https://cir
 
 For more information about the differences, see the link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub docs comparison page].
 ****
-
 --
-====
+CLI installation::
++
 --
-
 If you are installing and using self-hosted runners through the CLI, you are agreeing to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms].
 --
+====

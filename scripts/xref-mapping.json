@@ -569,6 +569,11 @@
     "module": "execution-managed",
     "filename": "remote-docker-images-support-policy.adoc"
   },
+  "machine-convenience-image-lifecycle": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "machine-convenience-image-lifecycle.adoc"
+  },
   "runner-faqs": {
     "component": "guides",
     "module": "execution-runner",
@@ -1523,5 +1528,10 @@
     "component": "guides",
     "module": "permissions-authentication",
     "filename": "set-up-sso.adoc"
+  },
+  "sso-group-mapping": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "sso-group-mapping.adoc"
   }
 }

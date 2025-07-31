@@ -115,7 +115,7 @@ You can cancel an entire workflow that contains serial group jobs. Cancelling a 
 
 . In the link:https://app.circleci.com/home[CircleCI web app], select your org.
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
-. Select the "Cancel Workflow" button to the right of the pipeline (image:guides:ROOT:icons/cancel.svg[cancel workflow])
+. Select the "Cancel Workflow" button to the right of the pipeline (image:guides:ROOT:icons/cancel.svg[cancel workflow, role="no-border"])
 . Confirm the cancellation when prompted.
 
 == Troubleshooting serial groups

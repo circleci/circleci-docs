@@ -32,7 +32,7 @@ To configure webhooks within the CircleCI app:
 
 . In the link:https://app.circleci.com/[CircleCI web app] select your organization.
 . Select **Projects** in the sidebar.
-. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon], and select **Project Settings**.
+. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"], and select **Project Settings**.
 . In the sidebar select *Webhooks*
 . Select *Add Webhook*
 . Fill out the webhook form (the table below describes the fields and their intent)
@@ -40,8 +40,7 @@ To configure webhooks within the CircleCI app:
 +
 NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[sample webhook payloads] section of the webhooks reference.
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols="2,1,2", options="header"]
 |===
 | Field | Required? | Intent
 
@@ -84,8 +83,7 @@ If you have feedback about timeouts and retries, link:https://circleci.canny.io/
 
 A number of HTTP headers are set on webhooks, as detailed in the table below.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Header name | Value
 
@@ -120,8 +118,7 @@ The v1 signature is the HMAC-SHA256 digest of the request body, using the config
 
 Here are some example signatures for given request bodies:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 | Body | Secret Key | Signature
 
@@ -182,19 +179,25 @@ verify_signature(
 
 CircleCI currently offers outbound webhooks for the following events:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[cols=4*, options="header"]
 |===
-| Event type | Description | Potential statuses | Included sub-entities
+| Event type | Description | Potential status | Included sub-entities
 
 | workflow-completed
 | A workflow has reached a terminal state
-| "success", "failed", "error", "canceled", "unauthorized"
+a| * "success"
+* "failed"
+* "error"
+* "canceled"
+* "unauthorized"
 | project, organization, workflow, pipeline
 
 | job-completed
 | A job has reached a terminal state
-| "success", "failed", "canceled", "unauthorized"
+a| * "success"
+* "failed"
+* "canceled"
+* "unauthorized"
 | project, organization, workflow, pipeline, job
 |===
 

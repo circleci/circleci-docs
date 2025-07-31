@@ -195,13 +195,18 @@ In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs execut
 * 38.23.41.0/24
 * 38.23.42.0/24
 * 38.23.43.0/24
+* 38.23.48.0/24
+* 38.23.49.0/24
+* 38.23.50.0/24
+* 38.23.51.0/24
+* 38.23.52.0/24
 * 207.254.116.0/24
 * 207.254.118.0/24
 * 18.97.4.0/24
 * 18.97.6.0/24
 * 18.97.7.0/24
 
-A link:https://circleci.com/docs/ip-ranges-list.json[machine-readable list of these IP ranges] is available as well
+A xref:attachment$ip-ranges-list.json[machine-readable list of these IP ranges] is available as well
 
 This list of IP Ranges can also be downloaded and saved using the following curl command:
 

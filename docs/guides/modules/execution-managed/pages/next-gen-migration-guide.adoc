@@ -42,8 +42,7 @@ Also, the following image will be renamed:
 
 All Legacy to Next-Gen image changes are captured below in this table:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Legacy Image | Next-Gen Image
 
@@ -65,8 +64,7 @@ All Legacy to Next-Gen image changes are captured below in this table:
 
 With legacy images, there were 4 different variant tags you could use to get browser testing for a particular image. For example, if you were doing browser testing with the Python v3.7.0 image, you might have used Docker `image: circleci/python:3.7`.0-browsers. These 4 tags have now been consolidated into a single tag designed to be used together with the link:https://circleci.com/developer/orbs/orb/circleci/browser-tools[CircleCI Browser Tools orb].
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Legacy variant tags | Next-gen variant tags
 

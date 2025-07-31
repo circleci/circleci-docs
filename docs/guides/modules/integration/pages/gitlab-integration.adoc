@@ -29,7 +29,7 @@ NOTE: You will need API access and write permissions on the repository you want 
 
 [tabs]
 ====
-GitLab_SaaS::
+GitLab SaaS::
 +
 --
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
@@ -51,7 +51,7 @@ You can choose a sample `.circleci/config.yml` to best fit your project from a v
 
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
 --
-GitLab_Self-Managed::
+GitLab Self-Managed::
 +
 --
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
@@ -120,14 +120,14 @@ If you need more organizations or projects, consider upgrading to a xref:plans-p
 
 [tabs]
 ====
-com::
+GitLab SaaS::
 +
 --
 When you create a new project using the **Fastest** (use an existing `config.yml`) or **Faster** (commit a starter CI pipeline) options described in the section above, a pipeline is automatically triggered. You should see the pipeline running shortly after you are taken to the CircleCI dashboard.
 
 If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
 --
-GitLab_Self-Managed::
+GitLab Self-Managed::
 +
 --
 If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.

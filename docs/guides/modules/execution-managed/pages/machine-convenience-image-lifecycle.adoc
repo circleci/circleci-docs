@@ -1,0 +1,101 @@
+= CircleCI machine/convenience image lifecycle: A complete guide
+:page-platform: Cloud
+:page-description: CircleCI Machine/Convenience Image Lifecycle
+:experimental:
+
+CircleCI prioritizes support for the most recent stable releases of the following image families:
+
+* Linux VM
+* Android
+* Windows
+* Remote Docker
+* MacOS
+* CUDA
+
+When a new major version of an image is available, CircleCI will begin the deprecation process of the oldest version supported.
+
+[#image-deprecation-process]
+== Image deprecation process
+
+CircleCI machine image deprecations are announced via link:https://circleci.com/changelog/[changelog], email, and link:https://discuss.circleci.com/c/announcements/39[Discuss] post. Announcements include the list of affected images, scheduled brownout dates and durations, and end of life date. Scheduled brownout dates will also be listed on the CircleCI link:https://status.circleci.com/[status page].
+
+[#image-brownouts]
+== Image brownouts
+
+A CircleCI machine image brownout is a temporary, planned period during which deprecated virtual machine images are intentionally made unavailable on the CircleCI platform. During a brownout, CI/CD jobs that attempt to use deprecated images will fail, giving users advance notice of upcoming permanent image removals.
+
+Machine image brownouts serve several critical functions in CircleCI's image lifecycle management:
+
+* **Warning Mechanism**: They act as a highly visible alert that certain images are approaching end-of-life (EOL).
+* **Dependency Discovery**: They help teams identify hidden dependencies on deprecated images, particularly through orbs or inherited configurations.
+* **Preventing Major Service Disruption**: A short, planned brownout allows teams to update configurations before permanent image removal would cause extended workflow failures.
+
+During a brownout, jobs that use deprecated images will fail with the message "This job was rejected because the resource class is unavailable".
+
+If you need to get your workflows running during an active brownout, update your CircleCI config file to use a supported image:
+
+[,yaml]
+----
+# Change this:
+machine:
+image: ubuntu-2004:202201-01  # Deprecated image
+
+# To this:
+machine:
+  image: ubuntu-2004:current    # or "default" for the latest supported version
+----
+
+**For Remote Docker**: Update the version parameter:
+
+[,yaml]
+----
+- setup_remote_docker:
+    version: docker24           # Use a supported version
+----
+
+=== Tips to minimize brownout impact
+
+1. **Use dynamic image references**: Instead of pinning to specific dated versions, use the following tags:
+** `default`: Always points to the recommended stable version
+** `current`: Points to the latest stable version
+** `edge`: Points to the newest release (may include experimental features)
+2. **Regularly update orbs**: If you use CircleCI orbs, ensure they are updated to current versions. Outdated orbs may specify deprecated images internally.
+3. **Check hidden dependencies**: Inspect all workflows, including those triggered by external events or scheduled runs.
+4. **Subscribe to deprecation notices**: Follow the CircleCI Discuss forum's link:https://discuss.circleci.com/c/announcements/39[Announcements] category for announcements.
+5. **Use the image updater tool**: CircleCI provides link:https://github.com/CircleCI-Public/image-updater[a tool] to help identify and update deprecated images.
+
+[#brownout-faq]
+== FAQ About CircleCI Brownouts
+**Q: How long do brownouts typically last?**
+
+A: Most brownouts last from 10 minutes to 24 hours, depending on the image type and its usage across the platform.
+
+**Q: Will CircleCI notify me before a brownout occurs?**
+
+A: Yes, CircleCI sends email notifications to organizations whose projects use deprecated images and posts announcements on their Discuss forum.
+
+**Q: What happens if I don't update my images before the EOL date?**
+
+A: After the EOL date, deprecated images will be permanently removed, and any jobs attempting to use them will fail until configurations are updated.
+
+**Q: How can I test my workflows with new images before a brownout?**
+
+A: Create a branch with updated configuration files, then push and test this branch before merging changes to your main branch.
+
+**Q: Are there any costs associated with updating to newer images?**
+
+A: There's no additional cost for using newer CircleCI images, though you should test thoroughly as newer images may have updated software versions that could affect your workflows.
+
+[#additional-resources]
+== Additional resources
+
+- xref:guides:execution-managed:linux-vm-support-policy.adoc[CircleCI Linux VM Support Policy]
+- xref:guides:execution-managed:linux-cuda-images-support-policy.adoc[CircleCI CUDA Support Policy]
+- xref:guides:execution-managed:convenience-images-support-policy.adoc[CircleCI Convenience Image Support Policy]
+- xref:guides:execution-managed:android-images-support-policy.adoc[CircleCI Android Image Support Policy]
+- xref:guides:execution-managed:remote-docker-images-support-policy.adoc[CircleCI Remote Docker Image Support Policy]
+- xref:guides:execution-managed:windows-images-support-policy.adoc[CircleCI Windows Image Support Policy]
+- xref:guides:execution-managed:xcode-policy.adoc[CircleCI XCode Support Policy]
+- link:https://github.com/CircleCI-Public/image-updater[CircleCI Image Updater Tool]
+- link:https://discuss.circleci.com/c/announcements/notices/113[CircleCI Discuss Forum - Notices Category]
+- link:https://support.circleci.com/hc/en-us[CircleCI Support Center]

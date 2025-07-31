@@ -1,8 +1,11 @@
 = Using images
+:page-description: Guidelines for using images in CircleCI documentation.
 :experimental:
 
+This page provides guidelines for using images in CircleCI documentation.
+
 == Guidelines for all images
-* Ensure all images have descriptive alternative text. For example, in asciidoc:
+* Ensure all images have descriptive alternative text. For example:
 +
 [source,adoc]
 ----
@@ -49,7 +52,6 @@ The elements are highlighted with the approved markup color of #E8178A, with sha
 Any text added to a screenshot should be no less than 18px, and can be larger if the content requires. If text needs to be added on top of the #E8178A markup color, the text should be white.
 
 == Add images to a PR
-* If you are adding a screenshot, make it easier to see and help consistency across docs by sticking it in here: https://browserframe.com/. Choose **Generic Light** and drag and drop your screenshot into the window, then download and you will get a PNG.
 
 * When creating screenshots use a browser extension or similar to resize the window to 1440x900. For example, https://windowresizer.userecho.com/[Chrome Window Resizer].
 
@@ -61,11 +63,37 @@ Any text added to a screenshot should be no less than 18px, and can be larger if
 
 To add an icon to the flow of text we use the image macro as follows:
 
+.Example of using an icon in text
 [source,adoc]
 ----
-Some text with the edit icon image:guides:ROOT:icons/edit-solid.svg[edit icon] in it.
+Some text.
+Including an icon.
+Here is the icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
 ----
 
 Looks like this:
 
-Some text with the edit icon image:guides:ROOT:icons/edit-solid.svg[edit icon] in it.
+Some text.
+Including an icon.
+Here is the icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
+
+NOTE: The `role="no-border"` attribute is used to remove the border around the icon.
+
+You can find out which icons we have available by looking here:
+
+[,shell]
+----
+docs/
+└── guides/
+    └── modules/
+        └── ROOT/
+            └── images/
+                └── icons/
+                    ├── cancel.svg
+                    ├── check.svg
+                    ├── edit-solid.svg
+                    ├── more.svg
+                    ├── passed.svg
+                    └── settings.svg
+----
+

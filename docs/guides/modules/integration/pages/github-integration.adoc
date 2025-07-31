@@ -370,7 +370,7 @@ Once you have set up your first pipeline, you will be able to add triggers to it
 
 NOTE: Only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
 
-Once the GitHub App is installed, each user should authorize the GitHub App connection. To do this, each user should navigate to menu:Project Settings[Pipelines>Add Pipeline>Connection] and select btn:[Authorize].
+Once the GitHub App is installed, each user should authorize the GitHub App connection by clicking on the btn:[Authorize] button that is displayed on the web app navbar for unauthorized users.
 Authorizing the GitHub App ensures that users can:
 
 * Trigger pipelines xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[from the CircleCI web app].

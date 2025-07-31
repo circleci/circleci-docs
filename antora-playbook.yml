@@ -2,6 +2,8 @@ site:
   title: CircleCI Documentation
   url: https://circleci.com/docs
   robots: allow
+  keys:
+    cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
 content:
   sources:
   - url: .
@@ -14,7 +16,7 @@ content:
     start_path: docs/orbs
   - url: .
     start_path: docs/server-admin
-    branches: [server-v*]
+    branches: [server-4*]
   - url: .
     start_path: docs/contributors
 ui:
@@ -35,6 +37,7 @@ asciidoc:
     serverversion45: 4.5.5
     serverversion46: 4.6.2
     serverversion47: 4.7.0
+    serverversion48: 4.8.0
     serverversion: 3.4.8
     terraformversion: 0.15.4
     kubernetesversions: 1.26 - 1.31
@@ -43,5 +46,10 @@ asciidoc:
     helmdiffversion: 3.5.0
     kotsversion: 1.65.0
     page-toclevels: 6
+    idprefix: ""
+    idseparator: "-"
   extensions:
   - '@asciidoctor/tabs'
+urls:
+  latest_version_segment: latest
+  latest_version_segment_strategy: redirect:to

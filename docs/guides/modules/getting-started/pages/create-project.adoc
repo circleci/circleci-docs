@@ -31,7 +31,7 @@ Choose steps to follow below, depending on where your code is stored:
 
 [tabs]
 ====
-GitHub_App::
+GitHub App::
 +
 --
 Follow these steps to create a new project in CircleCI:
@@ -64,7 +64,7 @@ image::guides:ROOT:create-project/review-and-finish-setup.png[Screenshot showing
 
 Once your project is created you will land on your pipelines page.
 --
-GitLab_Cloud::
+GitLab Cloud::
 +
 --
 Follow these steps to create a new project in CircleCI:
@@ -102,7 +102,7 @@ image::guides:ROOT:create-project/generated-config-commit-and-run.png[Window sho
 .Instructions for using an existing config file
 image::guides:ROOT:create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
 --
-GitLab_self-managed::
+GitLab self-managed::
 +
 --
 Follow these steps to create a new project in CircleCI:
@@ -142,10 +142,9 @@ For guidance on creating a `config.yml` file, see the following pages:
 * xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
 ****
 --
-Bitbucket_Data_Center::
+Bitbucket Data Center::
 +
 --
-
 Follow these steps to create a new project in CircleCI:
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
@@ -159,7 +158,6 @@ image::guides:ROOT:create-project/authorize-bitbucket-data-center.png[Choose a r
 ** An integration with your Bitbucket Data Center instance (if not already set up for your org).
 ** Set up a pipeline and trigger for your project.
 ** Add a configuration file to your repo.
-
 --
 ====
 
@@ -200,7 +198,7 @@ CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. Yo
 To make changes to your pipeline, choose one of the following:
 
 * Edit the config file in your repository,
-* Select the ellipsis image:guides:ROOT:icons/more.svg[more icon] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
+* Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
 * Access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
 
 .Access and edit a config file

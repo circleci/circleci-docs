@@ -31,9 +31,7 @@ NOTE: It is possible to use CircleCI's OIDC tokens with multiple cloud services.
 
 The OIDC tokens contain the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
 
-[%autowidth]
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="1,2", options="header"]
 |===
 | Claims
 | Description
@@ -49,7 +47,7 @@ For `$CIRCLE_OIDC_TOKEN` its value is: `"org/<organization_id>/project/<project_
 For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:orchestrate:triggers-overview.adoc[trigger]:
 
 * If the trigger is an xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[custom webhook] then:
-`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+`"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 * Otherwise it will be:
 `"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
@@ -67,8 +65,7 @@ For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:orchestrate:triggers-o
 
 The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[additional claims] with extra metadata about the job:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols="2,2", options="header"]
 |===
 | Additional claims
 | Metadata
@@ -292,9 +289,7 @@ After navigating to the **Grant Access** section of the GCP web UI, follow these
 +
 Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding". Use this mapping:
 +
-[.table.table-striped]
-[cols=2*, stripes=even]
-
+[cols="1,2"]
 |===
 | `google.subject`
 | `assertion.sub`
@@ -370,8 +365,7 @@ echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 
 You will also need to add the following environment variables to a xref:security:contexts.adoc[context].
 
-[.table.table-striped]
-[cols=3*, stripes=even]
+[cols=3*, options="header"]
 |===
 | **Context var name**
 | **Example value**

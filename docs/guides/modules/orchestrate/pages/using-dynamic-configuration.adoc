@@ -313,9 +313,8 @@ workflows:
 
 The config files for building the separate directories, `src/` and `/docs`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
 
-[#code-config-1]
-==== `code-config.yml`
 
+.code-config.yml
 [,yaml]
 ----
 version: 2.1
@@ -335,9 +334,7 @@ workflows:
       - build-code
 ----
 
-[#docs-config-1]
-==== `docs-config.yml`
-
+.docs-config.yml
 [,yaml]
 ----
 version: 2.1
@@ -528,8 +525,7 @@ jobs:
   - any-change
 ----
 
-==== `shared/jobs/any-change.yml`
-
+.shared/jobs/any-change.yml
 [,yml]
 ----
 docker:
@@ -538,9 +534,7 @@ steps:
   - run: echo "This is a shared job that will run for any change in the project."
 ----
 
-[#lint]
-==== `shared/jobs/lint.yml`
-
+.shared/jobs/lint.yml
 [,yml]
 ----
 docker:
@@ -549,9 +543,7 @@ steps:
   - run: echo "Running linting"
 ----
 
-[#test]
-==== `shared/jobs/test.yml`
-
+.shared/jobs/test.yml
 [,yml]
 ----
 docker:
@@ -565,9 +557,7 @@ steps:
 
 The config files for building the separate directories, `src/` and `/docs`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
 
-[#code-config-2]
-==== `code-config.yml`
-
+.code-config.yml
 [,yaml]
 ----
 version: 2.1
@@ -587,9 +577,7 @@ workflows:
       - build-code
 ----
 
-[#docs-config-2]
-==== `docs-config.yml`
-
+.docs-config.yml
 [,yaml]
 ----
 version: 2.1

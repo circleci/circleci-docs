@@ -18,8 +18,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * Avoid contractions, for example "don't", "you're". They make the content harder for non-native english speakers to read.
 * Do not use time-sentitive language like, "new" or "soon" or "in preview" in main prose. These can get missed when changes are needed. If this language is needed it should be in a banner (admonition) that is clearly there to indicate the time-sensitive nature of the content.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Avoid
 | Use instead

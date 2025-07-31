@@ -6,7 +6,8 @@ parameters:
     default: ""
 
 orbs:
-  aws-cli: circleci/aws-cli@5.3.5 
+  aws-cli: circleci/aws-cli@5.4.1
+  vale: circleci/vale@1.2.0
 
 executors:
   node_executor:
@@ -63,9 +64,9 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Fetch branches matching server-v*
+          name: Fetch branches matching server-4*
           command: |
-            for branch in $(git ls-remote --heads origin | awk '{print $2}' | grep 'refs/heads/server-v' | sed 's|refs/heads/||'); do
+            for branch in $(git ls-remote --heads origin | awk '{print $2}' | grep 'refs/heads/server-4' | sed 's|refs/heads/||'); do
               echo "[INFO] Fetching branch: $branch"
               git checkout "$branch"
               git pull origin "$branch"
@@ -108,7 +109,6 @@ jobs:
       - notify_error:
           message: "Build job failed for branch ${CIRCLE_BRANCH}"
 
-
   validate:
     executor: ruby_executor
     steps:
@@ -128,7 +128,6 @@ jobs:
             htmlproofer ./build --checks html --ignore-urls "/#.*/" --ignore-empty-alt
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
-
 
   deploy-preview:
     executor: node_executor
@@ -184,9 +183,16 @@ jobs:
       - notify_error:
           message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
 
-
   deploy-production:
     executor: node_executor
+    parameters:
+      bucket_name:
+        description: The name of the s3 bucket where static assets are stored.
+        type: string
+      build_dir:
+        default: "build"
+        description: The path to the docs build directory
+        type: string
     steps:
       - attach_workspace:
           at: .
@@ -194,9 +200,12 @@ jobs:
       - run:
           name: Deploy Production Site to S3
           command: |
+            AWS_S3_BUCKET=<< parameters.bucket_name >>
+            BUILD_DIRECTORY=<< parameters.build_dir >>
+
             set -e
             echo "[INFO] Deploying production site..."
-            aws s3 sync build s3://${DOCS_BUILD_BUCKET}/ --delete --endpoint-url ${S3_ENDPOINT}
+            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
@@ -241,13 +250,20 @@ jobs:
               echo "[WARN] Tag '${TAG}' not found."
             fi
 
-
 workflows:
+  lint:
+    unless:
+      equal: [main, << pipeline.git.branch >>]
+    jobs:
+      - vale/lint:
+          reference_branch: main
+          base_dir: docs
   build_validate_and_deploy:
     when:
       equal: ["", << pipeline.parameters.cleanup_preview_branch >>]
     jobs:
-      - build
+      - build:
+          context: circleci-docs-static
       - validate:
           requires: [build]
       - deploy-preview:
@@ -255,13 +271,27 @@ workflows:
           filters:
             branches:
               ignore: main
-          context: circleci-docs-static
+          context:
+            [
+              circleci-docs-static,
+              docs-platform-assets,
+              web-ui-npm,
+              web-ui-datadog,
+            ]
       - deploy-production:
           requires: [validate]
           filters:
             branches:
               only: main
-          context: circleci-docs-static
+          context:
+            [
+              circleci-docs-static,
+              docs-platform-assets,
+              web-ui-npm,
+              web-ui-datadog,
+            ]
+          bucket_name: "circleci-docs-platform-assets/docs-preview"
+          build_dir: "build"
   cleanup_preview:
     when: pipeline.parameters.cleanup_preview_branch != ""
     jobs:

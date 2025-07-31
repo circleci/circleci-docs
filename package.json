@@ -6,6 +6,7 @@
     "start:dev": "dotenvx run -- npm run build:ui && gulp preview:docs",
     "preview:ui": "dotenvx run -- gulp preview:ui",
     "build:ui": "gulp build:ui",
+    "build:api-docs": "gulp build:api-docs",
     "build:docs": "npm run build:ui && gulp build:docs",
     "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh"
   },
@@ -19,8 +20,10 @@
     "@antora/cli": "3.1.10",
     "@antora/site-generator": "3.1.10",
     "@dotenvx/dotenvx": "^1.40.0",
+    "@redocly/cli": "^1.0.0",
     "browser-sync": "^3.0.4",
-    "gulp": "^5.0.0"
+    "gulp": "^5.0.0",
+    "snippet-enricher-cli": "0.0.8"
   },
   "dependencies": {
     "@asciidoctor/tabs": "^1.0.0-beta.6",

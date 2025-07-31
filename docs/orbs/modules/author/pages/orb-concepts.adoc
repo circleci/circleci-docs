@@ -175,8 +175,7 @@ In Semantic versioning, release versions are represented by three integers separ
 [Major].[Minor].[Patch]
 ----
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | SemVer | Description
 
@@ -192,8 +191,7 @@ In Semantic versioning, release versions are represented by three integers separ
 
 When you import an orb, you can pin it to a particular SemVer component.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 | Imported Version | Description
 
@@ -296,10 +294,8 @@ All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, f
 
 NOTE: If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the link:https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack[orb-tools/pack] job.
 
-*_Example: Orb Project Structure_*
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Orb Project Structure
+[cols=2*, options="header"]
 |===
 | type | name
 
@@ -335,7 +331,7 @@ For orb development kit users, this step is handled automatically.
 [#file-include-syntax]
 == File include syntax
 
-The `file include` syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
+The `file include` syntax (`++<<include(dir/file)>>++`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
 
 The `<<include(dir/file)>>` syntax is a special key for use with the <<orb-packing,`circleci orb pack` command>> and _will not_ work more widely on CircleCI.
 
@@ -366,7 +362,7 @@ file-sh::
 echo "Hello World"
 ----
 --
-Packed_Command-yaml::
+Packed Command-yaml::
 +
 --
 [,yaml]

@@ -21,12 +21,12 @@ include::ROOT:partial$runner/terms.adoc[]
 
 [tabs]
 ====
-Web_app_installation::
+Web app installation::
 +
 --
 include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
 --
-CLI_installation::
+CLI installation::
 +
 --
 include::ROOT:partial$runner/install-with-cli-steps.adoc[]

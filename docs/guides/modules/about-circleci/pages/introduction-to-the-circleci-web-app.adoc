@@ -123,7 +123,7 @@ Projects associated with your organization appear on the **Projects** page. You 
 * _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:integration:notifications.adoc[email notifications] for the project's status.
 * _Unfollow_ a project to removes it from your Pipelines page and unsubscribe from notifications.
 
-Select the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon] in a project row to access project assets, as follows:
+Select the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon, role="no-border"] in a project row to access project assets, as follows:
 
 * Configuration file in the config editor.
 * Insights.
@@ -140,8 +140,8 @@ image::guides:ROOT:web-ui-projects.png[Projects page in the CircleCI web app]
 Access project settings in one of the following ways:
 
 * From the pipelines dashboard when you have a project selected in the filter menu.
-* From a workflow or job page using the ellipsis menu image:guides:ROOT:icons/more.svg[more icon].
-* From the projects page using the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon] in a project row.
+* From a workflow or job page using the ellipsis menu image:guides:ROOT:icons/more.svg[more icon, role="no-border"].
+* From the projects page using the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon, role="no-border"] in a project row.
 
 image::guides:ROOT:find-project-settings.png[Where to find project settings page in the CircleCI web app]
 
@@ -239,7 +239,7 @@ Learn more and get started with self-hosted runners on the xref:execution-runner
 
 **Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
 
-**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects. Enable/disable autodetected deployments, which allows CircleCI to automatically detect deployments in your projects and create deploy markers for you.
+**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects.
 
 **Integrations**: Set up integrations with self-hosted version control systems.
 

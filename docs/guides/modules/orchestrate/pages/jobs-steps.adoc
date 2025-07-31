@@ -54,6 +54,23 @@ workflows:
 
 The job name within the workflow can be anything you like _including_ spaces and special characters.
 
+=== Job types
+
+There are four types of jobs:
+
+- `release`: Jobs with this type are used to connect your pipeline configuration to a deployment in the CircleCI deploys UI.
+
+- `approval`: This type is used to configure a manual approval step.
+
+- `no-op`: This type is used to configure a job that performs no actions and consumes no credits.
+
+- `build`: This is the default type used to build your code.
+
+
+You can set the type of a job by adding the `type` key to the job configuration.
+
+See the xref:reference:ROOT:configuration-reference.adoc#job-type[Confirguration reference] page for more information on how to use the different job types.
+
 [#steps-overview]
 == Steps overview
 
