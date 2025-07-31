@@ -349,15 +349,14 @@ The `trigger` command has the following sub-command:
 circleci trigger create <project-id>  [flags]
 ----
 
-`<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under *Project settings* > *Overview*.
-
 The above example shows the minimal usage. You will be prompted for required values if you don't intially provide them using the appropriate flags.
 
-The `trigger create` sub-command requires the 
+- `<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
-- The ID of the pipeline associated with the trigger. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under *Project settings* > *Pipelines*.
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines].
 
-- The ID of the GitHub repository associated with the trigger. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find this ID.
+
+- `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
 
 For full details on this command and sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_trigger.html[CLI docs].
 
