@@ -2171,6 +2171,32 @@ workflows:
 
 '''
 
+==== *`max_auto_reruns`*
+
+The `max_auto_reruns` key is used to configure the maximum number of automatic reruns for a workflow.
+
+[,yml]
+----
+version: 2.1
+
+workflows:
+  my-workflow:
+    max_auto_reruns: 3
+    jobs:
+      - build
+      - test
+      - deploy:
+          requires:
+            - build
+            - test
+----
+
+The value of `max_auto_reruns` can be an integer between 1 and 5.
+
+For more information, see the xref:guides:orchestrate:automatic-reruns.adoc[Automatic Reruns] page.
+
+'''
+
 [#triggers]
 ==== *`triggers`*
 

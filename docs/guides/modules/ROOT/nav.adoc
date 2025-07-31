@@ -38,6 +38,7 @@
 *** xref:orchestrate:pipelines.adoc[Pipeline and triggers overview]
 *** xref:orchestrate:jobs-steps.adoc[Jobs and steps overview]
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
+*** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
 *** xref:orchestrate:dynamic-config.adoc[Use dynamic configuration]
 *** xref:orchestrate:skip-build.adoc[Skip CI and cancel workflows]
@@ -91,7 +92,7 @@
 ** How-to guides
 *** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
 *** xref:execution-managed:run-a-job-in-a-container.adoc[Run a job in a container on your machine with Docker]
-*** xref:execution-managed:docker-compose.adoc[Installing and using docker-compose]
+*** xref:execution-managed:docker-compose.adoc[Installing and using Docker Compose]
 *** xref:execution-managed:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
 ** Image support policies
 *** xref:execution-managed:android-images-support-policy.adoc[Android images support policy]
@@ -188,7 +189,7 @@
 *** xref:deploy:deploy-ios-applications.adoc[Deploy iOS applications]
 *** xref:deploy:deploy-over-ssh.adoc[Deploy over SSH]
 *** xref:deploy:publish-packages-to-packagecloud.adoc[Publish packages to Packagecloud]
-*** xref:deploy:deploy-to-npm-registry.adoc[Deploy to NPM registry]
+*** xref:deploy:deploy-to-npm-registry.adoc[Deploy to npm registry]
 
 * Optimize
 ** xref:optimize:optimizations.adoc[Optimizations reference]
@@ -225,6 +226,7 @@
 ** SSO authentication
 *** xref:permissions-authentication:sso-overview.adoc[SSO overview]
 *** xref:permissions-authentication:set-up-sso.adoc[SSO setup]
+*** xref:permissions-authentication:sso-group-mapping.adoc[Set up SSO group mapping with Okta]
 *** xref:permissions-authentication:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-enabled org]
 ** Multi-factor authentication (MFA)
 *** xref:permissions-authentication:mfa.adoc[MFA overview]
@@ -288,7 +290,7 @@
 
 * Developer toolkit
 ** AI features
-*** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP Server]
+*** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 ** CLI
 *** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
@@ -312,7 +314,7 @@
 * Plans and pricing
 ** xref:plans-pricing:plan-overview.adoc[CircleCI plans overview]
 ** xref:plans-pricing:credits.adoc[Credits overview]
-** xref:plans-pricing:plan-free.adoc[Free plan overview]
-** xref:plans-pricing:plan-performance.adoc[Performance plan overview]
-** xref:plans-pricing:plan-scale.adoc[Scale plan overview]
-** xref:plans-pricing:plan-server.adoc[Server plan overview]
+** xref:plans-pricing:plan-free.adoc[Free Plan overview]
+** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]
+** xref:plans-pricing:plan-scale.adoc[Scale Plan overview]
+** xref:plans-pricing:plan-server.adoc[Server Plan overview]
