@@ -206,6 +206,20 @@ jobs:
             set -e
             echo "[INFO] Deploying production site..."
             aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
+      - run:
+          name: Install Python Dependencies for Redirects
+          command: |
+            set -e
+            echo "[INFO] Installing PyYAML for redirect processing..."
+            sudo pip3 install PyYAML
+      - run:
+          name: Deploy Redirects to S3
+          command: |
+            AWS_S3_BUCKET=<< parameters.bucket_name >>
+
+            set -e
+            echo "[INFO] Deploying redirects with batch processing..."
+            bash scripts/deploy-redirects-batch.sh "$AWS_S3_BUCKET" "scripts/test-single-redirect.yml"
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 

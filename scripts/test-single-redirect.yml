@@ -1,0 +1,5 @@
+# Test redirect file with a single redirect
+# Format: old (Jekyll) -> new (Antora)
+
+- old: /about-circleci/
+  new: /guides/about-circleci/about-circleci/index.html
