@@ -60,7 +60,7 @@ Some things consider during this phase:
 
 Ensure that your VCS org is linked to your CircleCI account and that your plan is applied. Log in using your VCS credentials as described on the xref:getting-started:first-steps.adoc[Sign Up and Try CircleCI] page.
 
-If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described in the xref:server-admin:installation:index.adoc[server installation guides].
+If using the Server product, ensure that you have been provided with your trial license and that all prerequisites are met as described in the xref:server-admin:ROOT:index.adoc[server installation guides].
 
 [#preparation-phase]
 == Preparation phase

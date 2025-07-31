@@ -559,7 +559,7 @@ This example prevents the workflow `integration_tests` from running unless the `
 For more examples of using conditional logic in your workflows, see the xref:orchestration-cookbook.adoc[Orchestration cookbook].
 
 ****
-If you want to conditionally run workflows based on the type of event that triggers your pipeline, you can also consider splitting your workflows into separate YAML files and leveraging the different GitHub trigger event options.
+If you want to conditionally run workflows based on trigger event types, consider splitting your workflows into separate YAML files and leveraging GitHub trigger event options.
 
 For further details see the following guides:
 
@@ -795,7 +795,11 @@ For further information on workspaces and their configuration see the xref:works
 [#rerunning-a-workflows-failed-jobs]
 == Rerunning a workflow's failed jobs
 
-Workflows help to speed up your ability to respond to failures. One way to do this is to only rerun failed jobs rather than a whole workflow. To rerun only a workflow's _failed_ jobs, follow these steps:
+Workflows help to speed up your ability to respond to failures. One way to do this is to only rerun failed jobs rather than a whole workflow.
+
+The steps detailed in this section show how to manually rerun only a workflow's failed jobs. You can also set up automatic reruns for failed jobs. For more information, see the xref:automatic-reruns.adoc[Automatic Reruns] page.
+
+To rerun only a workflow's failed jobs, follow these steps:
 
 . In the link:https://app.circleci.com/home/[CircleCI web app] select your organization.
 . Select **Pipelines** in the sidebar.
@@ -804,12 +808,12 @@ Workflows help to speed up your ability to respond to failures. One way to do th
 
 [tabs]
 ====
-Rerun_from_the_pipelines_page::
+Rerun from the pipelines page::
 +
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-pipelines-page.png[Rerun a workflow from failed from the pipelines page]
 --
-Rerun_from_the_workflows_page::
+Rerun from the workflows page::
 +
 --
 image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[Rerun a workflow from failed from the workflows page]
