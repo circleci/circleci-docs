@@ -1,6 +1,6 @@
 site:
   title: CircleCI Documentation
-  url: https://circleci.com/docs
+  url: https://circleci.com/docs-preview
   robots: allow
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
