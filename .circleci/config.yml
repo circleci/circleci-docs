@@ -131,7 +131,7 @@ jobs:
               --checks 'Links,Images' \
               --swap-urls '^/docs/:/' \
               --ignore-files './build/api/v1/index.html,./build/api/v2/index.html' \
-              --ignore-urls '[url],[path],https://circleci.com/api/v1.1/me,https://circleci.com/docs/webhooks/#outbound-webhooks,https://github.com/circleci/circleci-docs-static/edit' \
+              --ignore-urls '[url],[path],https://circleci.com/api/v1.1/me,https://circleci.com/docs/webhooks/#outbound-webhooks,https://github.com/circleci/circleci-docs-static/edit/' \
               --ignore-status-codes '0,403,429,999' \
               --no-check-external-hash \
               --typhoeus '{"timeout":30,"followlocation":true,"headers":{"User-Agent":"Mozilla/5.0 (compatible; LinkChecker)"}}'
