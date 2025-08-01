@@ -272,7 +272,7 @@ circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml <job-name>
 ----
 +
-If you are using `version: 2` configuration, you can simply run:
+If you are using `version: 2` configuration, you can run:
 +
 [,shell]
 ----
@@ -330,6 +330,88 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 
 The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc[test splitting] for build time optimization.
 
+[#project-management]
+== Project management
+
+The CircleCI CLI allows you to execute several project-oriented actions.
+
+=== Create a new project
+
+NOTE: This command only applies to GitLab or GitHub App organizations (Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Organization Settings[Overview]).
+
+Use the `create` sub-command to  create a new project.
+
+[,shell]
+----
+circleci project create <vcs-type> <org-id> [flags]
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. This command only supports the `circleci` VCS type.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `--name` is the flag that allows you to provide the project name. If not provided, you will be prompted to enter it.
+
+For full details on the `create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_create.html[CLI docs].
+
+
+=== Create an environment variable for a project
+
+Use the `secret create` sub-command to create an environment variable for a project:
+
+[,shell]
+---- 
+circleci project secret create <vcs-type> <org-id> <project-id> <env-name> [flags]
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+- `<env-name>` is the name of the environment variable to create.
+
+- `--env-value` is the flag that allows you to provide the value of the environment variable. If not provided, you will be prompted to enter it.
+
+For full details on the `secret create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_secret_create.html[CLI docs].
+
+=== List all environment variables for a project
+
+Use the `secret list` sub-command to list all environment variables for a project:
+
+[,shell]
+----
+circleci project secret list <vcs-type> <org-id> <project-id>
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `secret list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_secret_list.html[CLI docs].
+
+=== Purge Docker Layer Cache for a project
+
+Purging the xref:optimize:docker-layer-caching.adoc[Docker Layer Cache] means removing previously stored Docker image layers so that future builds will not reuse those cached layers. This forces CircleCI to rebuild Docker images from scratch, rather than leveraging layers from earlier builds to speed up the process.
+
+Use the `dlc purge` sub-command to purge Docker Layer Cache for a project:
+
+[,shell]
+----
+circleci dlc purge <vcs-type> <org-id> <project-id>
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI docs].
+
 [#context-management]
 == Context management
 
@@ -342,7 +424,7 @@ xref:security:contexts.adoc[Contexts] provide a mechanism for securing and shari
 - `show` - Show a context
 - `store-secret` - Store a new environment variable in the named context
 
-The above list are "sub-commands" in the CLI, which would be executed like so:
+The above list are "sub-commands" in the CLI, which are executed like so:
 
 [,shell]
 ----
