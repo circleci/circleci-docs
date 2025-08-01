@@ -1,6 +1,0 @@
-name: server-admin
-title: Server
-version: server-4.7
-display_version: Server 4.7
-nav:
-- modules/ROOT/nav.adoc
