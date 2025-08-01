@@ -206,6 +206,14 @@ jobs:
             set -e
             echo "[INFO] Deploying production site..."
             aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
+      - run:
+          name: Deploy Single Test Redirect to S3
+          command: |
+            AWS_S3_BUCKET=<< parameters.bucket_name >>
+
+            set -e
+            echo "[INFO] Deploying single test redirect..."
+            bash scripts/test-single-redirect.sh "$AWS_S3_BUCKET"
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
