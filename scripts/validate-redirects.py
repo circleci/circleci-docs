@@ -24,6 +24,7 @@ import argparse
 import sys
 import textwrap
 from pathlib import Path
+import time
 from typing import Iterable
 from urllib.parse import urljoin
 
@@ -124,6 +125,8 @@ def main() -> None:
 
     failures: list[str] = []
     for idx, entry in slice_iter(redirects, args.start, end):
+        # Throttle requests so we don't hammer the site
+        time.sleep(0.1)
         old = entry["old"]
         status, location = check_redirect(args.base_url, old)
         print(f"[DEBUG] ({idx}) status={status}, location='{location}'")
