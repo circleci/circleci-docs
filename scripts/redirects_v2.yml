@@ -3,10 +3,10 @@
 # Total redirects: 502
 
 - old: /about-circleci/
-  new: /guides/about-circleci/about-circleci/index.html
+  new: /guides/about-circleci/index.html
 
 - old: /add-ssh-key/
-  new: /guides/integration/add-ssh-key/index.html
+  new: /guides/integration/add-ssh-key.html
 
 - old: /android-images-support-policy/
   new: /guides/execution-managed/android-images-support-policy/index.html
