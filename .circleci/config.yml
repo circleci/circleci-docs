@@ -15,6 +15,11 @@ executors:
       - image: cimg/node:22.15.1
     working_directory: ~/project
 
+  python_executor:
+    docker:
+      - image: cimg/python:3.12.11
+    working_directory: ~/project
+
   ruby_executor:
     docker:
       - image: cimg/ruby:3.4
@@ -185,7 +190,7 @@ jobs:
           message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
 
   deploy-production:
-    executor: node_executor
+    executor: python_executor
     parameters:
       bucket_name:
         description: The name of the s3 bucket where static assets are stored.
@@ -208,13 +213,19 @@ jobs:
             echo "[INFO] Deploying production site..."
             aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
       - run:
-          name: Deploy Single Test Redirect to S3
+          name: install pyyaml
+          command: |
+            set -e
+            echo "[INFO] Installing pyyaml..."
+            pip install pyyaml
+      - run:
+          name: Deploy Redirects to S3
           command: |
             AWS_S3_BUCKET=<< parameters.bucket_name >>
 
             set -e
-            echo "[INFO] Deploying single test redirect..."
-            bash scripts/test-single-redirect.sh "$AWS_S3_BUCKET"
+            echo "[INFO] Deploying redirects..."
+            python scripts/create-redirects.py $AWS_S3_BUCKET --start 0 --end 10
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
@@ -299,7 +310,7 @@ workflows:
               web-ui-npm,
               web-ui-datadog,
             ]
-          bucket_name: "circleci-docs-platform-assets/docs-preview"
+          bucket_name: "circleci-docs-platform-assets"
           build_dir: "build"
   cleanup_preview:
     when: pipeline.parameters.cleanup_preview_branch != ""
