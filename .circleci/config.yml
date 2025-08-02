@@ -213,11 +213,11 @@ jobs:
             echo "[INFO] Deploying production site..."
             aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
       - run:
-          name: install pyyaml
+          name: install pyyaml requests
           command: |
             set -e
-            echo "[INFO] Installing pyyaml..."
-            pip install pyyaml
+            echo "[INFO] Installing pyyaml requests..."
+            pip install pyyaml requests
       - run:
           name: Deploy Redirects to S3
           command: |
@@ -225,7 +225,14 @@ jobs:
 
             set -e
             echo "[INFO] Deploying redirects..."
+            #REMEMBER TO UPDATE THE START/END PARAMETER IN THE VALIDATE JOB TO MATCH
             python scripts/create-redirects.py $AWS_S3_BUCKET --start 0 --end 10
+      - run:
+          name: Validate Redirects
+          command: |
+            set -e
+            echo "[INFO] Validating redirects..."
+            python scripts/validate-redirects.py https://circleci.com/docs-preview --start 0 --end 10
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
