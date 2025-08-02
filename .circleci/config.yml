@@ -102,6 +102,7 @@ jobs:
           paths:
             - build
             - build.zip
+            - scripts
       - persist_to_workspace:
           root: .
           paths:
