@@ -226,13 +226,13 @@ jobs:
             set -e
             echo "[INFO] Deploying redirects..."
             #REMEMBER TO UPDATE THE START/END PARAMETER IN THE VALIDATE JOB TO MATCH
-            python scripts/create-redirects.py $AWS_S3_BUCKET --start 0 --end 10
+            python scripts/create-redirects.py $AWS_S3_BUCKET
       - run:
           name: Validate Redirects
           command: |
             set -e
             echo "[INFO] Validating redirects..."
-            python scripts/validate-redirects.py https://circleci.com/docs-preview --start 0 --end 10
+            python scripts/validate-redirects.py https://circleci.com/docs-preview
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
