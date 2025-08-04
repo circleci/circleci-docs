@@ -1,1 +1,5 @@
 = Guides
+:page-description: Guides for using CircleCI.
+:page-layout: subsection
+
+In this section find all guides for using CircleCI.
