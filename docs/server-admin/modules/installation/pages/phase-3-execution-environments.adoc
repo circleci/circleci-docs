@@ -265,7 +265,7 @@ Use Workload Identity::
 --
 **Option 2:** Use Workload Identity.
 
-The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account using xref:air-gapped-installation:phase-1-prerequisites.adoc#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
+The CircleCI link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[Nomad module] can create a service account using xref:phase-1-prerequisites.adoc#enable-workload-identity-in-gke[Workload Identity] and send out the email. Set the variables `nomad_auto_scaler = true` and `enable_workload_identity = true`.
 --
 You create Secret::
 +
@@ -1020,7 +1020,7 @@ Choose one of the following options, depending on whether you are using Workload
 Enable Workload Identity for Service Account::
 +
 --
-This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:air-gapped-installation:phase-1-prerequisites.adoc#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
+This step is required only if you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE. Steps to enable Workload Identities are provided in xref:phase-1-prerequisites.adoc#enable-workload-identity-in-gke[Phase 1 - Prerequisites].
 
 [source,shell]
 ----
