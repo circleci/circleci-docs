@@ -100,9 +100,9 @@ terraform plan
 terraform apply
 ----
 
-After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe. The apply process usually only takes a minute.
-
 NOTE: The AMIs used in our terraform are now based on Ubuntu 22.04 with CgroupsV1 enabled. CgroupsV2 is currently unsupported. These nomad AMIs are built with automatic security updates enabled. You may use our AMIs as a base to build images with your own customizations or use the AWS image builder to create your own nomad AMIs. Currently the only requirement is Ubuntu 22.04 with CgroupsV1 enabled.
+
+After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe. The apply process usually only takes a minute.
 
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
