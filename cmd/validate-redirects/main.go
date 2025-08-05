@@ -23,7 +23,7 @@ import (
 
 const (
 	concurrency = 20
-	docsPath    = "docs-preview"
+	docsPath    = "docs"
 )
 
 type options struct {

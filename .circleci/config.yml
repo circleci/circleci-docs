@@ -210,7 +210,8 @@ jobs:
                   BUILD_DIRECTORY=<< parameters.build_dir >>
       
                   echo "[INFO] Deploying production site..."
-                  aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
+                  aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/" \
+                    --delete
             - run:
                 name: Deploy Redirects to S3
                 command: go run ./cmd/create-redirects "<< parameters.bucket_name >>"
