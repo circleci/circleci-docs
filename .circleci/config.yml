@@ -15,6 +15,11 @@ executors:
       - image: cimg/node:22.15.1
     working_directory: ~/project
 
+  python_executor:
+    docker:
+      - image: cimg/python:3.12.11
+    working_directory: ~/project
+
   ruby_executor:
     docker:
       - image: cimg/ruby:3.4
@@ -102,6 +107,7 @@ jobs:
           paths:
             - build
             - build.zip
+            - scripts
       - persist_to_workspace:
           root: .
           paths:
@@ -184,12 +190,8 @@ jobs:
           message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
 
   deploy-production:
-    executor: node_executor
+    executor: python_executor
     parameters:
-      bucket_dir:
-        default: "dorian"
-        description: The directory in the bucket to deploy to.
-        type: string
       bucket_name:
         description: The name of the s3 bucket where static assets are stored.
         type: string
@@ -205,12 +207,32 @@ jobs:
           name: Deploy Production Site to S3
           command: |
             AWS_S3_BUCKET=<< parameters.bucket_name >>
-            BUCKET_DIRECTORY=<< parameters.bucket_dir >>
             BUILD_DIRECTORY=<< parameters.build_dir >>
 
             set -e
             echo "[INFO] Deploying production site..."
-            aws s3 cp "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/$BUCKET_DIRECTORY/" --recursive
+            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
+      - run:
+          name: install pyyaml requests
+          command: |
+            set -e
+            echo "[INFO] Installing pyyaml requests..."
+            pip install pyyaml requests
+      - run:
+          name: Deploy Redirects to S3
+          command: |
+            AWS_S3_BUCKET=<< parameters.bucket_name >>
+
+            set -e
+            echo "[INFO] Deploying redirects..."
+            #REMEMBER TO UPDATE THE START/END PARAMETER IN THE VALIDATE JOB TO MATCH
+            python scripts/create-redirects.py $AWS_S3_BUCKET
+      - run:
+          name: Validate Redirects
+          command: |
+            set -e
+            echo "[INFO] Validating redirects..."
+            python scripts/validate-redirects.py https://circleci.com/docs-preview
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
@@ -276,15 +298,26 @@ workflows:
           filters:
             branches:
               ignore: main
-          context: circleci-docs-static
+          context:
+            [
+              circleci-docs-static,
+              docs-platform-assets,
+              web-ui-npm,
+              web-ui-datadog,
+            ]
       - deploy-production:
           requires: [validate]
           filters:
             branches:
               only: main
-          context: [circleci-docs-static, web-ui-org-settings, org-global]
-          bucket_dir: "dorian"
-          bucket_name: "circleci-docs-platform-assets/docs"
+          context:
+            [
+              circleci-docs-static,
+              docs-platform-assets,
+              web-ui-npm,
+              web-ui-datadog,
+            ]
+          bucket_name: "circleci-docs-platform-assets"
           build_dir: "build"
   cleanup_preview:
     when: pipeline.parameters.cleanup_preview_branch != ""

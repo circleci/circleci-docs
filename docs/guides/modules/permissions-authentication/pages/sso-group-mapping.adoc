@@ -1,0 +1,47 @@
+= Set up SSO group mapping with Okta
+:page-platform: Cloud
+:page-description: Follow this guide to set up SSO (Single sign-on) group mapping with Okta and CircleCI.
+:experimental:
+
+SSO Group Mapping automatically assigns users from your identity provider (IdP) to groups in CircleCI. Group assignments are updated in real-time when users authenticate through SSO.
+This feature enables you to manage both groups and their members directly within your identity provider, streamlining user administration across your organization.
+
+NOTE: Once SSO Group Mapping is configured, your IdP will have complete control over group management. Any group assignments created manually within CircleCI will be overwritten when users authenticate via SSO. All group management must be performed through your identity provider.
+
+== Prerequisites
+
+Before you begin, ensure you have the following:
+
+* You are using Okta as your IdP and have access to your Okta admin console.
+* SSO is configured in your CircleCI organization and you have the organization admin role in CircleCI. For information on roles and permissions, see the xref:roles-and-permissions-overview.adoc[Roles and permissions overview].
+* Your CircleCI organization has one or more groups. For more information on groups, see xref:manage-groups.adoc[Manage groups].
+
+== How to set up group mapping with Okta
+
+=== 1. Configure Okta
+
+First, you will need to configure your Okta settings. Follow the steps below, or refer to link:https://help.okta.com/oie/en-us/content/topics/apps/define-group-attribute-statements.htm[Okta's group attribute statements documentation] for more detailed information.
+
+. Open your Okta admin console and navigate to Applications.
+. Select your CircleCI application.
+. Navigate to the Sign On tab and scroll down to SAML Attributes.
+. Add a group attribute statement with the name 'groups'.
+. Use the filter to limit which groups will sync to CircleCI. Use the regex value `.*` to capture all groups.
+
+.Okta SSO group attribute settings
+image::guides:ROOT:authentication/sso-group-mapping-okta-setup.png[Screenshot of the Okta SSO group attribute settings]
+
+=== 2. Configure CircleCI
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Organization Settings** in the sidebar.
+. Select **Single sign-on (SSO)** from the sidebar.
+. Go to the Group Mappings section and click btn:[Add mapping]. This will open a form in a dropdown.
+. Enter the name of your Okta group under "SAML group name" and select the corresponding CircleCI group you want to map it to.
+. Select btn:[Add mapping] in the form to save your configuration.
+
+.Okta SSO group attribute settings in CircleCI
+image::guides:ROOT:authentication/sso-group-mapping-open.png[Screenshot of the Okta SSO group attribute settings]
+
+
+Once you have completed these steps, user assignments for any groups you have added to group mappings will be automatically updated when users authenticate via SSO into CircleCI.
