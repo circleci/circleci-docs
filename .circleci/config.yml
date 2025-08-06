@@ -8,6 +8,7 @@ parameters:
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
+  go: circleci/go@3.0.2
 
 executors:
   node_executor:
@@ -15,9 +16,9 @@ executors:
       - image: cimg/node:22.15.1
     working_directory: ~/project
 
-  python_executor:
+  go_executor:
     docker:
-      - image: cimg/python:3.12.11
+      - image: cimg/go:1.24
     working_directory: ~/project
 
   ruby_executor:
@@ -107,11 +108,6 @@ jobs:
           paths:
             - build
             - build.zip
-            - scripts
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build
       - notify_error:
           message: "Build job failed for branch ${CIRCLE_BRANCH}"
 
@@ -190,7 +186,7 @@ jobs:
           message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
 
   deploy-production:
-    executor: python_executor
+    executor: go_executor
     parameters:
       bucket_name:
         description: The name of the s3 bucket where static assets are stored.
@@ -200,39 +196,27 @@ jobs:
         description: The path to the docs build directory
         type: string
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - aws-setup
-      - run:
-          name: Deploy Production Site to S3
-          command: |
-            AWS_S3_BUCKET=<< parameters.bucket_name >>
-            BUILD_DIRECTORY=<< parameters.build_dir >>
-
-            set -e
-            echo "[INFO] Deploying production site..."
-            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
-      - run:
-          name: install pyyaml requests
-          command: |
-            set -e
-            echo "[INFO] Installing pyyaml requests..."
-            pip install pyyaml requests
-      - run:
-          name: Deploy Redirects to S3
-          command: |
-            AWS_S3_BUCKET=<< parameters.bucket_name >>
-
-            set -e
-            echo "[INFO] Deploying redirects..."
-            #REMEMBER TO UPDATE THE START/END PARAMETER IN THE VALIDATE JOB TO MATCH
-            python scripts/create-redirects.py $AWS_S3_BUCKET
-      - run:
-          name: Validate Redirects
-          command: |
-            set -e
-            echo "[INFO] Validating redirects..."
-            python scripts/validate-redirects.py https://circleci.com/docs-preview
+      - go/with-cache:
+          steps:
+            - go/mod-download
+            - run:
+                name: Deploy Production Site to S3
+                command: |
+                  AWS_S3_BUCKET=<< parameters.bucket_name >>
+                  BUILD_DIRECTORY=<< parameters.build_dir >>
+      
+                  echo "[INFO] Deploying production site..."
+                  aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
+            - run:
+                name: Deploy Redirects to S3
+                command: go run ./cmd/create-redirects "<< parameters.bucket_name >>"
+            - run:
+                name: Validate Redirects
+                command: go run ./cmd/validate-redirects https://circleci.com
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
