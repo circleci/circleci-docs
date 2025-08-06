@@ -94,15 +94,14 @@ jobs:
             echo "[INFO] Starting Antora build..."
             npm run build:docs
             echo "[INFO] Antora build completed."
+      - store_artifacts:
+          path: build
       - run:
           name: Create ZIP Archive of Build
           command: |
             set -e
             echo "[INFO] Creating zip archive of build directory..."
             zip -r build.zip build/
-      - store_artifacts:
-          path: build.zip
-          destination: preview-site.zip
       - persist_to_workspace:
           root: .
           paths:
