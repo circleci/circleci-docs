@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -33,6 +34,8 @@ type options struct {
 	BaseURL string
 }
 
+var errFailures = errors.New("failed validation")
+
 func main() {
 	ctx := context.Background()
 
@@ -54,9 +57,13 @@ func main() {
 	}
 
 	err := run(ctx, opts)
-	if err != nil {
+	switch {
+	case errors.Is(err, errFailures):
+		os.Exit(1)
+	case err != nil:
 		slog.Error("Unexpected error", "error", err)
 		os.Exit(1)
+	default:
 	}
 }
 
@@ -98,7 +105,7 @@ func run(ctx context.Context, opts options) error {
 		for _, fail := range failures {
 			slog.Warn("  " + fail)
 		}
-		return nil
+		return errFailures
 	}
 
 	slog.Info("Success")
