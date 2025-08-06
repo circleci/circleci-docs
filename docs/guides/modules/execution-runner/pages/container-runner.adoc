@@ -258,16 +258,67 @@ Annotations:
   app.circleci.com/container-spec-secondary-4: {"selectionScope":"resource-class","imageMatchType":"default"} <- Corresponds to "cimg/mongo:5"
 ----
 
+== Windows
+
+NOTE: Windows container support is currently in preview.
+
+Container runner supports running Windows containers on Windows Server nodes within your Kubernetes cluster. The container-agent pod must run on a Linux node. You can add an additional Windows Server node group with taints to prevent non-Windows workloads (such as container agent itself) from being scheduled on those nodes.
+
+Major cloud providers offer documentation for setting up Windows Server node groups:
+
+* https://docs.aws.amazon.com/eks/latest/userguide/windows-support.html[AWS]
+* https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster-windows[GCP]
+
+=== Resource class configuration
+
+The following example shows a Windows container runner resource class configuration that tolerates the Windows node taint and ensures scheduling on Windows nodes:
+
+```yaml
+agent:
+  resourceClasses:
+    <my-namespace>/<my-windows-resource-class>:
+      spec:
+        nodeSelector:
+          kubernetes.io/os: windows
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+              - matchExpressions:
+                - key: kubernetes.io/arch
+                  operator: In
+                  values:
+                  - amd64
+        tolerations:
+          - key: "os"
+            operator: "Exists"
+            value: "windows"
+            effect: "NoSchedule"
+```
+
+=== CircleCI job configuration
+
+You can then configure a CircleCI job to use Windows containers as follows:
+
+```yaml
+jobs:
+  windows-job:
+    docker:
+      - image: mcr.microsoft.com/powershell:nanoserver-ltsc2022
+    resource_class: <my-namespace>/<my-windows-resource-class>
+    shell: pwsh.exe
+    steps:
+      - run: Write-Host "Hello from Windows!"
+```
+
 [#unsafe-retries]
 === Unsafe retries
+
+CAUTION: Unlike automatic retries on startup, retrying tasks during runtime can be risky. This is because tasks can have arbitrary steps that produce external side effects which are not idempotent or stateless. This includes steps that could impact production environments or databases. Use this feature with care, knowing the risks of rerunning jobs and workflows that may or may not be idempotent.
 
 Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would be displayed in the CircleCI web app as an infrastructure fail should be expected to trigger an unsafe retry when enabled.
 
 Unsafe retries is useful when scheduling workloads on spot instances, which often come with cost-saving benefits at the risk of pod preemptions with many Kubernetes providers.
-
-****
-This feature is called “unsafe retries” for a reason. Unlike automatic retries on startup, retrying tasks during runtime can be risky. This is because tasks can have arbitrary steps that produce external side effects which are not idempotent or stateless. This includes steps that could impact production environments or databases. Use this feature with care, knowing the risks of rerunning jobs and workflows that may or may not be idempotent.
-****
 
 The following sequence shows how unsafe retires work:
 
