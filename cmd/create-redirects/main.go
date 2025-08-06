@@ -25,7 +25,7 @@ type options struct {
 
 const (
 	concurrency = 20
-	docsPath    = "docs-preview"
+	docsPath    = "docs"
 )
 
 func main() {
