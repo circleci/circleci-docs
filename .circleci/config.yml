@@ -95,7 +95,14 @@ jobs:
           command: |
             set -e
             echo "[INFO] Validating built site with HTML Proofer..."
-            htmlproofer ./build --checks html --ignore-urls "/#.*/" --ignore-empty-alt
+            # Handle path prefix and ignore search template placeholders
+            htmlproofer ./build \
+              --ignore-empty-alt \
+              --checks 'Links,Images' \
+              --disable-external \
+              --swap-urls '^/docs/:/' \
+              --ignore-files './build/api/v1/index.html,./build/api/v2/index.html' \
+              --ignore-urls '[url],[path]'
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
 

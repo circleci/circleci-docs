@@ -145,7 +145,7 @@ The example uses Docker Hub, but you can use different registries if you prefer.
 [#preparing-the-image-for-the-registry]
 === 8. Prepare the image for the registry
 
-. Log in to Docker Hub with your account and create a new repository on the https://hub.docker.com/add/repository/[add repository] page.
+. Log in to Docker Hub with your account and create a new repository on the Repositories page.
 It is best practice to use a pattern similar to `<project-name>-<container-name>` for a repository name (for example, `cci-demo-docker-primary`).
 
 . Next, rebuild your image using your account and repository name:
@@ -199,7 +199,7 @@ NOTE: This section assumes you have already used Docker login locally.
 
 This section demonstrates how to build a Ruby container to use on CircleCI.
 
-The example starts with the link:https://hub.docker.com/_/ruby/[Ruby 2.1] image. However, instead of using FROM `ruby:2.1` as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the link:https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10[2.1/Dockerfile].
+The example starts with the link:https://hub.docker.com/_/ruby/[Ruby 2.1] image. However, instead of using FROM `ruby:2.1` as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the 2.1/Dockerfile.
 
 Notice the environment variables that are used to pull in the correct versions.
 
