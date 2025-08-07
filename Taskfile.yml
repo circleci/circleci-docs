@@ -54,12 +54,11 @@ tasks:
 
   deploy:
     desc: Deploy to S3 bucket
-    vars:
-      TEMPDIR: $(mktemp -d)
     cmds:
-      - defer: rm -rf "{{.TEMPDIR}}"
-      - cp -r "./build" "{{.TEMPDIR}}/docs"
-      - aws s3 sync "{{.TEMPDIR}}" "s3://{{.BUCKET}}/" --delete
+      - dir=$(mktemp -d);
+        cp -r "./build" "${dir}/docs";
+        echo aws s3 sync "${dir}" "s3://{{.BUCKET}}/" --delete;
+        rm -rf "${dir}";
 
   deploy-redirects:
     desc: Build main
