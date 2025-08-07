@@ -5,8 +5,8 @@
 
 The CircleCI API may be used to make API calls to interact with your pipelines, projects and orgs, including retrieving detailed information about users, jobs, workflows, and pipelines, as well as triggering pipelines. There are currently two supported API versions:
 
-* link:../../api/v1/index.html[API v1.1 Reference]
-* link:../../api/v2/index.html[API v2 Reference]
+* link:../../../api/v1/[API v1.1 Reference]
+* link:../../../api/v2/[API v2 Reference]
 
 API v2 includes several powerful features (for example, support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI users migrate their scripts to API v2 stable endpoints as soon as possible.
 
@@ -19,7 +19,7 @@ To get started with the API v2, see the xref:api-developers-guide.adoc[API devel
 
 The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-For a complete list of all API v2 endpoints, refer to the link:../../api/v2/[API v2 Reference Guide], which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+For a complete list of all API v2 endpoints, refer to the link:../../../api/v2/[API v2 Reference Guide], which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
 [#deprecated-endpoints]
 === Deprecated endpoints
