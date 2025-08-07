@@ -77,34 +77,23 @@ jobs:
           message: "Build job failed for branch ${CIRCLE_BRANCH}"
 
   validate:
-    executor: ruby_executor
+    executor: go_executor
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run:
-          name: Dependencies
-          command: bundle install
-      - run:
-          name: html-proofer
-          command: |
-            # Handle path prefix and ignore search template placeholders
-            htmlproofer ./build \
-              --ignore-empty-alt \
-              --checks 'Links,Images' \
-              --disable-external \
-              --swap-urls '^/docs/:/' \
-              --ignore-files './build/api/v1/index.html,./build/api/v2/index.html' \
-              --ignore-urls '[url],[path]'
+      - go/with-cache:
+          golangci-lint: true
+          steps:
+            - run: task mod-download
+            - run: task ci:diff
+            - run: task ci:lint
+            - run: task validate-html
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
 
   deploy-production:
     executor: go_executor
-    parameters:
-      bucket_name:
-        description: The name of the s3 bucket where static assets are stored.
-        type: string
     steps:
       - checkout
       - attach_workspace:
@@ -112,21 +101,10 @@ jobs:
       - aws-setup
       - go/with-cache:
           steps:
-            - go/mod-download
-            - run:
-                name: Deploy Production Site to S3
-                command: |
-                  echo "[INFO] Deploying production site..."
-                  dir=$(mktemp -d)
-                  mv build "${dir}/docs"
-                  aws s3 sync "${dir}" "s3://<< parameters.bucket_name >>/" \
-                    --delete
-            - run:
-                name: Deploy Redirects to S3
-                command: go run ./cmd/create-redirects "<< parameters.bucket_name >>"
-            - run:
-                name: Validate Redirects
-                command: go run ./cmd/validate-redirects https://circleci.com
+            - run: task mod-download
+            - run: task deploy
+            - run: task deploy-redirects
+            - run: task validate-redirects
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
@@ -144,10 +122,12 @@ workflows:
           context: circleci-docs-static
 
       - validate:
-          requires: [build]
+          requires:
+            - build
 
       - deploy-production:
-          requires: [validate]
+          requires:
+            - validate
           filters:
             branches:
               only: main
@@ -156,4 +136,3 @@ workflows:
             - docs-platform-assets
             - web-ui-npm
             - web-ui-datadog
-          bucket_name: "circleci-docs-platform-assets"
