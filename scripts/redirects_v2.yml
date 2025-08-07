@@ -3,1406 +3,1406 @@
 # Total redirects: 502
 
 - old: /about-circleci/
-  new: /guides/about-circleci/about-circleci.html
+  new: /guides/about-circleci/about-circleci/
 
 - old: /add-ssh-key/
-  new: /guides/integration/add-ssh-key.html
+  new: /guides/integration/add-ssh-key/
 
 - old: /android-images-support-policy/
-  new: /guides/execution-managed/android-images-support-policy.html
+  new: /guides/execution-managed/android-images-support-policy/
 
 - old: /android-machine-image/
-  new: /guides/execution-managed/android-machine-image.html
+  new: /guides/execution-managed/android-machine-image/
 
 - old: /api-developers-guide/
-  new: /guides/toolkit/api-developers-guide.html
+  new: /guides/toolkit/api-developers-guide/
 
 - old: /api-intro/
-  new: /guides/toolkit/api-intro.html
+  new: /guides/toolkit/api-intro/
 
 - old: /artifacts/
-  new: /guides/optimize/artifacts.html
+  new: /guides/optimize/artifacts/
 
 - old: /audit-logs/
-  new: /guides/security/audit-logs.html
+  new: /guides/security/audit-logs/
 
 - old: /authentication/mfa/
-  new: /guides/permissions-authentication/mfa.html
+  new: /guides/permissions-authentication/mfa/
 
 - old: /authentication/set-up-sso/
-  new: /guides/permissions-authentication/set-up-sso.html
+  new: /guides/permissions-authentication/set-up-sso/
 
 - old: /authentication/sign-in-to-an-sso-enabled-organization/
-  new: /guides/permissions-authentication/sign-in-to-an-sso-enabled-organization.html
+  new: /guides/permissions-authentication/sign-in-to-an-sso-enabled-organization/
 
 - old: /authentication/sso-overview/
-  new: /guides/permissions-authentication/sso-overview.html
+  new: /guides/permissions-authentication/sso-overview/
 
 - old: /authorize-google-cloud-sdk/
-  new: /guides/integration/authorize-google-cloud-sdk.html
+  new: /guides/integration/authorize-google-cloud-sdk/
 
 - old: /automate-llm-evaluation-testing-with-the-circleci-evals-orb/
-  new: /guides/test/automate-llm-evaluation-testing-with-the-circleci-evals-orb.html
+  new: /guides/test/automate-llm-evaluation-testing-with-the-circleci-evals-orb/
 
 - old: /benefits-of-circleci/
-  new: /guides/about-circleci/benefits-of-circleci.html
+  new: /guides/about-circleci/benefits-of-circleci/
 
 - old: /bitbucket-data-center-integration/
-  new: /guides/integration/bitbucket-data-center-integration.html
+  new: /guides/integration/bitbucket-data-center-integration/
 
 - old: /bitbucket-integration/
-  new: /guides/integration/bitbucket-integration.html
+  new: /guides/integration/bitbucket-integration/
 
 - old: /browser-testing/
-  new: /guides/test/browser-testing.html
+  new: /guides/test/browser-testing/
 
 - old: /building-docker-images/
-  new: /guides/execution-managed/building-docker-images.html
+  new: /guides/execution-managed/building-docker-images/
 
 - old: /caching/
-  new: /guides/optimize/caching.html
+  new: /guides/optimize/caching/
 
 - old: /caching-strategy/
-  new: /guides/optimize/caching-strategy.html
+  new: /guides/optimize/caching-strategy/
 
 - old: /circleci-config-sdk/
-  new: /guides/toolkit/circleci-config-sdk.html
+  new: /guides/toolkit/circleci-config-sdk/
 
 - old: /circleci-images/
-  new: /guides/execution-managed/circleci-images.html
+  new: /guides/execution-managed/circleci-images/
 
 - old: /code-coverage/
-  new: /guides/test/code-coverage.html
+  new: /guides/test/code-coverage/
 
 - old: /collect-test-data/
-  new: /guides/test/collect-test-data.html
+  new: /guides/test/collect-test-data/
 
 - old: /concepts/
-  new: /guides/about-circleci/concepts.html
+  new: /guides/about-circleci/concepts/
 
 - old: /concurrency/
-  new: /guides/optimize/concurrency.html
+  new: /guides/optimize/concurrency/
 
 - old: /config-editor/
-  new: /guides/getting-started/config-editor.html
+  new: /guides/getting-started/config-editor/
 
 - old: /config-intro/
-  new: /guides/getting-started/config-intro.html
+  new: /guides/getting-started/config-intro/
 
 - old: /config-policies-for-self-hosted-runner/
-  new: /guides/config-policies/config-policies-for-self-hosted-runner.html
+  new: /guides/config-policies/config-policies-for-self-hosted-runner/
 
 - old: /config-policy-management-overview/
-  new: /guides/config-policies/config-policy-management-overview.html
+  new: /guides/config-policies/config-policy-management-overview/
 
 - old: /config-policy-reference/
-  new: /guides/config-policies/config-policy-reference.html
+  new: /guides/config-policies/config-policy-reference/
 
 - old: /configuration-reference/
-  new: /reference/configuration-reference.html
+  new: /reference/configuration-reference/
 
 - old: /container-runner/
-  new: /guides/execution-runner/container-runner.html
+  new: /guides/execution-runner/container-runner/
 
 - old: /container-runner-installation/
-  new: /guides/execution-runner/container-runner-installation.html
+  new: /guides/execution-runner/container-runner-installation/
 
 - old: /container-runner-performance-benchmarks/
-  new: /guides/execution-runner/container-runner-performance-benchmarks.html
+  new: /guides/execution-runner/container-runner-performance-benchmarks/
 
 - old: /contexts/
-  new: /guides/security/contexts.html
+  new: /guides/security/contexts/
 
 - old: /controlling-serial-execution-across-your-organization/
-  new: /guides/orchestrate/controlling-serial-execution-across-your-organization.html
+  new: /guides/orchestrate/controlling-serial-execution-across-your-organization/
 
 - old: /convenience-images-support-policy/
-  new: /guides/execution-managed/convenience-images-support-policy.html
+  new: /guides/execution-managed/convenience-images-support-policy/
 
 - old: /create-an-orb/
-  new: /orbs/author/create-an-orb.html
+  new: /orbs/author/create-an-orb/
 
 - old: /create-and-manage-config-policies/
-  new: /guides/config-policies/create-and-manage-config-policies.html
+  new: /guides/config-policies/create-and-manage-config-policies/
 
 - old: /create-project/
-  new: /guides/getting-started/create-project.html
+  new: /guides/getting-started/create-project/
 
 - old: /creating-orbs/
-  new: /orbs/author/creating-orbs.html
+  new: /orbs/author/creating-orbs/
 
 - old: /credits/
-  new: /guides/plans-pricing/credits.html
+  new: /guides/plans-pricing/credits/
 
 - old: /custom-images/
-  new: /guides/execution-managed/custom-images.html
+  new: /guides/execution-managed/custom-images/
 
 - old: /custom-webhooks/
-  new: /guides/orchestrate/custom-webhooks.html
+  new: /guides/orchestrate/custom-webhooks/
 
 - old: /databases/
-  new: /guides/orchestrate/databases.html
+  new: /guides/orchestrate/databases/
 
 - old: /datadog-integration/
-  new: /guides/integration/datadog-integration.html
+  new: /guides/integration/datadog-integration/
 
 - old: /deploy-android-applications/
-  new: /guides/deploy/deploy-android-applications.html
+  new: /guides/deploy/deploy-android-applications/
 
 - old: /deploy-ios-applications/
-  new: /guides/deploy/deploy-ios-applications.html
+  new: /guides/deploy/deploy-ios-applications/
 
 - old: /deploy-over-ssh/
-  new: /guides/deploy/deploy-over-ssh.html
+  new: /guides/deploy/deploy-over-ssh/
 
 - old: /deploy-service-update-to-aws-ecs/
-  new: /guides/deploy/deploy-service-update-to-aws-ecs.html
+  new: /guides/deploy/deploy-service-update-to-aws-ecs/
 
 - old: /deploy-to-amazon-sagemaker/
-  new: /guides/deploy/deploy-to-amazon-sagemaker.html
+  new: /guides/deploy/deploy-to-amazon-sagemaker/
 
 - old: /deploy-to-artifactory/
-  new: /guides/deploy/deploy-to-artifactory.html
+  new: /guides/deploy/deploy-to-artifactory/
 
 - old: /deploy-to-aws/
-  new: /guides/deploy/deploy-to-aws.html
+  new: /guides/deploy/deploy-to-aws/
 
 - old: /deploy-to-azure-container-registry/
-  new: /guides/deploy/deploy-to-azure-container-registry.html
+  new: /guides/deploy/deploy-to-azure-container-registry/
 
 - old: /deploy-to-capistrano/
-  new: /guides/deploy/deploy-to-capistrano.html
+  new: /guides/deploy/deploy-to-capistrano/
 
 - old: /deploy-to-cloud-foundry/
-  new: /guides/deploy/deploy-to-cloud-foundry.html
+  new: /guides/deploy/deploy-to-cloud-foundry/
 
 - old: /deploy-to-firebase/
-  new: /guides/deploy/deploy-to-firebase.html
+  new: /guides/deploy/deploy-to-firebase/
 
 - old: /deploy-to-google-cloud-platform/
-  new: /guides/deploy/deploy-to-google-cloud-platform.html
+  new: /guides/deploy/deploy-to-google-cloud-platform/
 
 - old: /deploy-to-heroku/
-  new: /guides/deploy/deploy-to-heroku.html
+  new: /guides/deploy/deploy-to-heroku/
 
 - old: /deploy-to-npm-registry/
-  new: /guides/deploy/deploy-to-npm-registry.html
+  new: /guides/deploy/deploy-to-npm-registry/
 
 - old: /deploy/configure-deploy-markers/
-  new: /guides/deploy/configure-deploy-markers.html
+  new: /guides/deploy/configure-deploy-markers/
 
 - old: /deploy/configure-your-kubernetes-components/
-  new: /guides/deploy/configure-your-kubernetes-components.html
+  new: /guides/deploy/configure-your-kubernetes-components/
 
 - old: /deploy/deploys-overview/
-  new: /guides/deploy/deploys-overview.html
+  new: /guides/deploy/deploys-overview/
 
 - old: /deploy/manage-deploys/
-  new: /guides/deploy/manage-deploys.html
+  new: /guides/deploy/manage-deploys/
 
 - old: /deploy/rollback-a-project-by-workflow-rerun/
-  new: /guides/deploy/rollback-a-project-by-workflow-rerun.html
+  new: /guides/deploy/rollback-a-project-by-workflow-rerun/
 
 - old: /deploy/rollback-a-project-using-the-rollback-pipeline/
-  new: /guides/deploy/rollback-a-project-using-the-rollback-pipeline.html
+  new: /guides/deploy/rollback-a-project-using-the-rollback-pipeline/
 
 - old: /deploy/set-up-circleci-deploys/
-  new: /guides/deploy/set-up-circleci-deploys.html
+  new: /guides/deploy/set-up-circleci-deploys/
 
 - old: /deploy/set-up-rollbacks/
-  new: /guides/deploy/set-up-rollbacks.html
+  new: /guides/deploy/set-up-rollbacks/
 
 - old: /deploy/set-up-the-release-agent/
-  new: /guides/deploy/set-up-the-release-agent.html
+  new: /guides/deploy/set-up-the-release-agent/
 
 - old: /deploy/update-the-kubernetes-release-agent/
-  new: /guides/deploy/update-the-kubernetes-release-agent.html
+  new: /guides/deploy/update-the-kubernetes-release-agent/
 
 - old: /deployment-overview/
-  new: /guides/deploy/deployment-overview.html
+  new: /guides/deploy/deployment-overview/
 
 - old: /docker-compose/
-  new: /guides/execution-managed/docker-compose.html
+  new: /guides/execution-managed/docker-compose/
 
 - old: /docker-layer-caching/
-  new: /guides/optimize/docker-layer-caching.html
+  new: /guides/optimize/docker-layer-caching/
 
 - old: /docker-to-machine/
-  new: /guides/execution-managed/docker-to-machine.html
+  new: /guides/execution-managed/docker-to-machine/
 
 - old: /dynamic-config/
-  new: /guides/orchestrate/dynamic-config.html
+  new: /guides/orchestrate/dynamic-config/
 
 - old: /ecs-ecr/
-  new: /guides/deploy/ecs-ecr.html
+  new: /guides/deploy/ecs-ecr/
 
 - old: /enable-checks/
-  new: /guides/integration/enable-checks.html
+  new: /guides/integration/enable-checks/
 
 - old: /env-vars/
-  new: /guides/security/env-vars.html
+  new: /guides/security/env-vars/
 
 - old: /examples-and-guides-overview/
-  new: /guides/toolkit/examples-and-guides-overview.html
+  new: /guides/toolkit/examples-and-guides-overview/
 
 - old: /executor-intro/
-  new: /guides/execution-managed/executor-intro.html
+  new: /guides/execution-managed/executor-intro/
 
 - old: /faq/
-  new: /server-admin/server-4.6/operator/faq.html
+  new: /server-admin/server-4.6/operator/faq/
 
 - old: /first-steps/
-  new: /guides/getting-started/first-steps.html
+  new: /guides/getting-started/first-steps/
 
 - old: /get-started-with-the-vs-code-extension/
-  new: /guides/toolkit/get-started-with-the-vs-code-extension.html
+  new: /guides/toolkit/get-started-with-the-vs-code-extension/
 
 - old: /getting-started/
-  new: /guides/getting-started/getting-started.html
+  new: /guides/getting-started/getting-started/
 
 - old: /github-apps-integration/
-  new: /guides/integration/github-apps-integration.html
+  new: /guides/integration/github-apps-integration/
 
 - old: /github-integration/
-  new: /guides/integration/github-integration.html
+  new: /guides/integration/github-integration/
 
 - old: /github-trigger-event-options/
-  new: /guides/orchestrate/github-trigger-event-options.html
+  new: /guides/orchestrate/github-trigger-event-options/
 
 - old: /gitlab-integration/
-  new: /guides/integration/gitlab-integration.html
+  new: /guides/integration/gitlab-integration/
 
 - old: /gitlab-trigger-options/
-  new: /guides/orchestrate/gitlab-trigger-options.html
+  new: /guides/orchestrate/gitlab-trigger-options/
 
 - old: /glossary/
-  new: /reference/glossary.html
+  new: /reference/glossary/
 
 - old: /hello-world/
-  new: /guides/getting-started/hello-world.html
+  new: /guides/getting-started/hello-world/
 
 - old: /hello-world-macos/
-  new: /guides/execution-managed/hello-world-macos.html
+  new: /guides/execution-managed/hello-world-macos/
 
 - old: /hello-world-windows/
-  new: /guides/execution-managed/hello-world-windows.html
+  new: /guides/execution-managed/hello-world-windows/
 
 - old: /high-uid-error/
-  new: /guides/execution-managed/high-uid-error.html
+  new: /guides/execution-managed/high-uid-error/
 
 - old: /how-to-override-config/
-  new: /guides/orchestrate/how-to-override-config.html
+  new: /guides/orchestrate/how-to-override-config/
 
 - old: /how-to-use-the-circleci-local-cli/
-  new: /guides/toolkit/how-to-use-the-circleci-local-cli.html
+  new: /guides/toolkit/how-to-use-the-circleci-local-cli/
 
 - old: /inject-environment-variables-with-api/
-  new: /guides/security/inject-environment-variables-with-api.html
+  new: /guides/security/inject-environment-variables-with-api/
 
 - old: /insights/
-  new: /guides/insights/insights.html
+  new: /guides/insights/insights/
 
 - old: /insights-glossary/
-  new: /guides/insights/insights-glossary.html
+  new: /guides/insights/insights-glossary/
 
 - old: /insights-snapshot-badge/
-  new: /guides/insights/insights-snapshot-badge.html
+  new: /guides/insights/insights-snapshot-badge/
 
 - old: /insights-tests/
-  new: /guides/insights/insights-tests.html
+  new: /guides/insights/insights-tests/
 
 - old: /install-machine-runner-3-on-docker/
-  new: /guides/execution-runner/install-machine-runner-3-on-docker.html
+  new: /guides/execution-runner/install-machine-runner-3-on-docker/
 
 - old: /install-machine-runner-3-on-linux/
-  new: /guides/execution-runner/install-machine-runner-3-on-linux.html
+  new: /guides/execution-runner/install-machine-runner-3-on-linux/
 
 - old: /install-machine-runner-3-on-macos/
-  new: /guides/execution-runner/install-machine-runner-3-on-macos.html
+  new: /guides/execution-runner/install-machine-runner-3-on-macos/
 
 - old: /install-machine-runner-3-on-windows/
-  new: /guides/execution-runner/install-machine-runner-3-on-windows.html
+  new: /guides/execution-runner/install-machine-runner-3-on-windows/
 
 - old: /intelligent-summaries/
-  new: /guides/toolkit/intelligent-summaries.html
+  new: /guides/toolkit/intelligent-summaries/
 
 - old: /introduction-to-the-circleci-web-app/
-  new: /guides/about-circleci/introduction-to-the-circleci-web-app.html
+  new: /guides/about-circleci/introduction-to-the-circleci-web-app/
 
 - old: /introduction-to-yaml-configurations/
-  new: /guides/getting-started/introduction-to-yaml-configurations.html
+  new: /guides/getting-started/introduction-to-yaml-configurations/
 
 - old: /invite-your-team/
-  new: /guides/getting-started/invite-your-team.html
+  new: /guides/getting-started/invite-your-team/
 
 - old: /ios-codesigning/
-  new: /guides/execution-managed/ios-codesigning.html
+  new: /guides/execution-managed/ios-codesigning/
 
 - old: /ip-ranges/
-  new: /guides/security/ip-ranges.html
+  new: /guides/security/ip-ranges/
 
 - old: /java-oom/
-  new: /guides/optimize/java-oom.html
+  new: /guides/optimize/java-oom/
 
 - old: /jira-plugin/
-  new: /guides/integration/jira-plugin.html
+  new: /guides/integration/jira-plugin/
 
 - old: /jobs-steps/
-  new: /guides/orchestrate/jobs-steps.html
+  new: /guides/orchestrate/jobs-steps/
 
 - old: /language-go/
-  new: /guides/getting-started/language-go.html
+  new: /guides/getting-started/language-go/
 
 - old: /language-javascript/
-  new: /guides/getting-started/language-javascript.html
+  new: /guides/getting-started/language-javascript/
 
 - old: /language-python/
-  new: /guides/getting-started/language-python.html
+  new: /guides/getting-started/language-python/
 
 - old: /linux-cuda-images-support-policy/
-  new: /guides/execution-managed/linux-cuda-images-support-policy.html
+  new: /guides/execution-managed/linux-cuda-images-support-policy/
 
 - old: /linux-vm-support-policy/
-  new: /guides/execution-managed/linux-vm-support-policy.html
+  new: /guides/execution-managed/linux-vm-support-policy/
 
 - old: /local-cli/
-  new: /guides/toolkit/local-cli.html
+  new: /guides/toolkit/local-cli/
 
 - old: /machine-runner-3-configuration-reference/
-  new: /guides/execution-runner/machine-runner-3-configuration-reference.html
+  new: /guides/execution-runner/machine-runner-3-configuration-reference/
 
 - old: /machine-runner-3-manual-installation/
-  new: /guides/execution-runner/machine-runner-3-manual-installation.html
+  new: /guides/execution-runner/machine-runner-3-manual-installation/
 
 - old: /machine-runner-3-manual-installation-on-windows/
-  new: /guides/execution-runner/machine-runner-3-manual-installation-on-windows.html
+  new: /guides/execution-runner/machine-runner-3-manual-installation-on-windows/
 
 - old: /manage-contexts-with-config-policies/
-  new: /guides/config-policies/manage-contexts-with-config-policies.html
+  new: /guides/config-policies/manage-contexts-with-config-policies/
 
 - old: /manage-groups/
-  new: /guides/permissions-authentication/manage-groups.html
+  new: /guides/permissions-authentication/manage-groups/
 
 - old: /manage-roles-and-permissions/
-  new: /guides/permissions-authentication/manage-roles-and-permissions.html
+  new: /guides/permissions-authentication/manage-roles-and-permissions/
 
 - old: /managing-api-tokens/
-  new: /guides/toolkit/managing-api-tokens.html
+  new: /guides/toolkit/managing-api-tokens/
 
 - old: /managing-url-orbs-allow-lists/
-  new: /orbs/use/managing-url-orbs-allow-lists.html
+  new: /orbs/use/managing-url-orbs-allow-lists/
 
 - old: /migrate-from-deploy-to-run/
-  new: /guides/orchestrate/migrate-from-deploy-to-run.html
+  new: /guides/orchestrate/migrate-from-deploy-to-run/
 
 - old: /migrate-from-launch-agent-to-machine-runner-3-on-linux/
-  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-linux.html
+  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/
 
 - old: /migrate-from-launch-agent-to-machine-runner-3-on-macos/
-  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-macos.html
+  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-macos/
 
 - old: /migrate-from-launch-agent-to-machine-runner-3-on-windows/
-  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-windows.html
+  new: /guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-windows/
 
 - old: /migrate-scheduled-workflows-to-scheduled-pipelines/
-  new: /guides/orchestrate/migrate-scheduled-workflows-to-scheduled-pipelines.html
+  new: /guides/orchestrate/migrate-scheduled-workflows-to-scheduled-pipelines/
 
 - old: /migrating-from-aws/
-  new: /guides/migrate/migrating-from-aws.html
+  new: /guides/migrate/migrating-from-aws/
 
 - old: /migrating-from-azuredevops/
-  new: /guides/migrate/migrating-from-azuredevops.html
+  new: /guides/migrate/migrating-from-azuredevops/
 
 - old: /migrating-from-buildkite/
-  new: /guides/migrate/migrating-from-buildkite.html
+  new: /guides/migrate/migrating-from-buildkite/
 
 - old: /migrating-from-github/
-  new: /guides/migrate/migrating-from-github.html
+  new: /guides/migrate/migrating-from-github/
 
 - old: /migrating-from-gitlab/
-  new: /guides/migrate/migrating-from-gitlab.html
+  new: /guides/migrate/migrating-from-gitlab/
 
 - old: /migrating-from-jenkins/
-  new: /guides/migrate/migrating-from-jenkins.html
+  new: /guides/migrate/migrating-from-jenkins/
 
 - old: /migrating-from-teamcity/
-  new: /guides/migrate/migrating-from-teamcity.html
+  new: /guides/migrate/migrating-from-teamcity/
 
 - old: /migrating-from-travis/
-  new: /guides/migrate/migrating-from-travis.html
+  new: /guides/migrate/migrating-from-travis/
 
 - old: /migration-intro/
-  new: /guides/migrate/migration-intro.html
+  new: /guides/migrate/migration-intro/
 
 - old: /new-relic-integration/
-  new: /guides/integration/new-relic-integration.html
+  new: /guides/integration/new-relic-integration/
 
 - old: /next-gen-migration-guide/
-  new: /guides/execution-managed/next-gen-migration-guide.html
+  new: /guides/execution-managed/next-gen-migration-guide/
 
 - old: /notifications/
-  new: /guides/integration/notifications.html
+  new: /guides/integration/notifications/
 
 - old: /notify-a-slack-channel-of-a-paused-workflow/
-  new: /guides/orchestrate/notify-a-slack-channel-of-a-paused-workflow.html
+  new: /guides/orchestrate/notify-a-slack-channel-of-a-paused-workflow/
 
 - old: /oidc-tokens-with-custom-claims/
-  new: /guides/permissions-authentication/oidc-tokens-with-custom-claims.html
+  new: /guides/permissions-authentication/oidc-tokens-with-custom-claims/
 
 - old: /open-source/
-  new: /guides/about-circleci/open-source.html
+  new: /guides/about-circleci/open-source/
 
 - old: /openid-connect-tokens/
-  new: /guides/permissions-authentication/openid-connect-tokens.html
+  new: /guides/permissions-authentication/openid-connect-tokens/
 
 - old: /optimizations/
-  new: /guides/optimize/optimizations.html
+  new: /guides/optimize/optimizations/
 
 - old: /orb-author/
-  new: /orbs/author/orb-author.html
+  new: /orbs/author/orb-author/
 
 - old: /orb-author-faq/
-  new: /orbs/author/orb-author-faq.html
+  new: /orbs/author/orb-author-faq/
 
 - old: /orb-author-validate-publish/
-  new: /orbs/author/orb-author-validate-publish.html
+  new: /orbs/author/orb-author-validate-publish/
 
 - old: /orb-concepts/
-  new: /orbs/author/orb-concepts.html
+  new: /orbs/author/orb-concepts/
 
 - old: /orb-development-kit/
-  new: /orbs/author/orb-development-kit.html
+  new: /orbs/author/orb-development-kit/
 
 - old: /orb-intro/
-  new: /orbs/use/orb-intro.html
+  new: /orbs/use/orb-intro/
 
 - old: /orbs-best-practices/
-  new: /orbs/author/orbs-best-practices.html
+  new: /orbs/author/orbs-best-practices/
 
 - old: /orbs-faq/
-  new: /orbs/use/orbs-faq.html
+  new: /orbs/use/orbs-faq/
 
 - old: /orchestration-cookbook/
-  new: /guides/orchestrate/orchestration-cookbook.html
+  new: /guides/orchestrate/orchestration-cookbook/
 
 - old: /oss/
-  new: /guides/integration/oss.html
+  new: /guides/integration/oss/
 
 - old: /outbound-webhooks/
-  new: /guides/integration/outbound-webhooks.html
+  new: /guides/integration/outbound-webhooks/
 
 - old: /outbound-webhooks-reference/
-  new: /reference/outbound-webhooks-reference.html
+  new: /reference/outbound-webhooks-reference/
 
 - old: /parallelism-faster-jobs/
-  new: /guides/optimize/parallelism-faster-jobs.html
+  new: /guides/optimize/parallelism-faster-jobs/
 
 - old: /persist-data/
-  new: /guides/optimize/persist-data.html
+  new: /guides/optimize/persist-data/
 
 - old: /pipeline-variables/
-  new: /guides/orchestrate/pipeline-variables.html
+  new: /guides/orchestrate/pipeline-variables/
 
 - old: /pipelines/
-  new: /guides/orchestrate/pipelines.html
+  new: /guides/orchestrate/pipelines/
 
 - old: /plan-free/
-  new: /guides/plans-pricing/plan-free.html
+  new: /guides/plans-pricing/plan-free/
 
 - old: /plan-overview/
-  new: /guides/plans-pricing/plan-overview.html
+  new: /guides/plans-pricing/plan-overview/
 
 - old: /plan-performance/
-  new: /guides/plans-pricing/plan-performance.html
+  new: /guides/plans-pricing/plan-performance/
 
 - old: /plan-scale/
-  new: /guides/plans-pricing/plan-scale.html
+  new: /guides/plans-pricing/plan-scale/
 
 - old: /plan-server/
-  new: /guides/plans-pricing/plan-server.html
+  new: /guides/plans-pricing/plan-server/
 
 - old: /postgres-config/
-  new: /guides/toolkit/postgres-config.html
+  new: /guides/toolkit/postgres-config/
 
 - old: /prevent-unregistered-users-from-spending-credits/
-  new: /guides/plans-pricing/prevent-unregistered-users-from-spending-credits.html
+  new: /guides/plans-pricing/prevent-unregistered-users-from-spending-credits/
 
 - old: /private-images/
-  new: /guides/execution-managed/private-images.html
+  new: /guides/execution-managed/private-images/
 
 - old: /publish-packages-to-packagecloud/
-  new: /guides/deploy/publish-packages-to-packagecloud.html
+  new: /guides/deploy/publish-packages-to-packagecloud/
 
 - old: /pull-an-image-from-aws-ecr-with-oidc/
-  new: /guides/permissions-authentication/pull-an-image-from-aws-ecr-with-oidc.html
+  new: /guides/permissions-authentication/pull-an-image-from-aws-ecr-with-oidc/
 
 - old: /remote-docker-images-support-policy/
-  new: /guides/execution-managed/remote-docker-images-support-policy.html
+  new: /guides/execution-managed/remote-docker-images-support-policy/
 
 - old: /rename-organizations-and-repositories/
-  new: /guides/security/rename-organizations-and-repositories.html
+  new: /guides/security/rename-organizations-and-repositories/
 
 - old: /rerun-failed-tests/
-  new: /guides/test/rerun-failed-tests.html
+  new: /guides/test/rerun-failed-tests/
 
 - old: /resource-class-overview/
-  new: /guides/execution-managed/resource-class-overview.html
+  new: /guides/execution-managed/resource-class-overview/
 
 - old: /reusing-config/
-  new: /reference/reusing-config.html
+  new: /reference/reusing-config/
 
 - old: /roles-and-permissions-overview/
-  new: /guides/permissions-authentication/roles-and-permissions-overview.html
+  new: /guides/permissions-authentication/roles-and-permissions-overview/
 
 - old: /rotate-project-ssh-keys/
-  new: /guides/security/rotate-project-ssh-keys.html
+  new: /guides/security/rotate-project-ssh-keys/
 
 - old: /run-a-job-in-a-container/
-  new: /guides/execution-managed/run-a-job-in-a-container.html
+  new: /guides/execution-managed/run-a-job-in-a-container/
 
 - old: /runner-api/
-  new: /guides/execution-runner/runner-api.html
+  new: /guides/execution-runner/runner-api/
 
 - old: /runner-concepts/
-  new: /guides/execution-runner/runner-concepts.html
+  new: /guides/execution-runner/runner-concepts/
 
 - old: /runner-config-reference/
-  new: /guides/execution-runner/runner-config-reference.html
+  new: /guides/execution-runner/runner-config-reference/
 
 - old: /runner-faqs/
-  new: /guides/execution-runner/runner-faqs.html
+  new: /guides/execution-runner/runner-faqs/
 
 - old: /runner-feature-comparison-matrix/
-  new: /guides/execution-runner/runner-feature-comparison-matrix.html
+  new: /guides/execution-runner/runner-feature-comparison-matrix/
 
 - old: /runner-installation-docker/
-  new: /guides/execution-runner/runner-installation-docker.html
+  new: /guides/execution-runner/runner-installation-docker/
 
 - old: /runner-installation-linux/
-  new: /guides/execution-runner/runner-installation-linux.html
+  new: /guides/execution-runner/runner-installation-linux/
 
 - old: /runner-installation-mac/
-  new: /guides/execution-runner/runner-installation-mac.html
+  new: /guides/execution-runner/runner-installation-mac/
 
 - old: /runner-installation-windows/
-  new: /guides/execution-runner/runner-installation-windows.html
+  new: /guides/execution-runner/runner-installation-windows/
 
 - old: /runner-overview/
-  new: /guides/execution-runner/runner-overview.html
+  new: /guides/execution-runner/runner-overview/
 
 - old: /runner-scaling/
-  new: /guides/execution-runner/runner-scaling.html
+  new: /guides/execution-runner/runner-scaling/
 
 - old: /runner-upgrading-on-server/
-  new: /guides/execution-runner/runner-upgrading-on-server.html
+  new: /guides/execution-runner/runner-upgrading-on-server/
 
 - old: /sample-config/
-  new: /guides/toolkit/sample-config.html
+  new: /guides/toolkit/sample-config/
 
 - old: /schedule-pipelines-with-multiple-workflows/
-  new: /guides/orchestrate/schedule-pipelines-with-multiple-workflows.html
+  new: /guides/orchestrate/schedule-pipelines-with-multiple-workflows/
 
 - old: /scheduled-pipelines/
-  new: /guides/orchestrate/scheduled-pipelines.html
+  new: /guides/orchestrate/scheduled-pipelines/
 
 - old: /security/
-  new: /guides/security/security.html
+  new: /guides/security/security/
 
 - old: /security-overview/
-  new: /guides/security/security-overview.html
+  new: /guides/security/security-overview/
 
 - old: /security-recommendations/
-  new: /guides/security/security-recommendations.html
+  new: /guides/security/security-recommendations/
 
 - old: /security-supply-chain/
-  new: /guides/security/security-supply-chain.html
+  new: /guides/security/security-supply-chain/
 
 - old: /selecting-a-workflow-to-run-using-pipeline-parameters/
-  new: /guides/orchestrate/selecting-a-workflow-to-run-using-pipeline-parameters.html
+  new: /guides/orchestrate/selecting-a-workflow-to-run-using-pipeline-parameters/
 
 - old: /server/latest/air-gapped-installation/additional-considerations/
-  new: /server-admin/latest/air-gapped-installation/additional-considerations.html
+  new: /server-admin/latest/air-gapped-installation/additional-considerations/
 
 - old: /server/latest/air-gapped-installation/example-values/
-  new: /server-admin/latest/air-gapped-installation/example-values.html
+  new: /server-admin/latest/air-gapped-installation/example-values/
 
 - old: /server/latest/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin/latest/air-gapped-installation/phase-1-prerequisites.html
+  new: /server-admin/latest/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/latest/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin/latest/air-gapped-installation/phase-2-configure-object-storage.html
+  new: /server-admin/latest/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/latest/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin/latest/air-gapped-installation/phase-3-install-circleci-server.html
+  new: /server-admin/latest/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/latest/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin/latest/air-gapped-installation/phase-4-configure-nomad-clients.html
+  new: /server-admin/latest/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/latest/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin/latest/air-gapped-installation/phase-5-test-your-installation.html
+  new: /server-admin/latest/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/latest/installation/hardening-your-cluster/
-  new: /server-admin/latest/installation/hardening-your-cluster.html
+  new: /server-admin/latest/installation/hardening-your-cluster/
 
 - old: /server/latest/installation/installation-reference/
-  new: /server-admin/latest/installation/installation-reference.html
+  new: /server-admin/latest/installation/installation-reference/
 
 - old: /server/latest/installation/installing-server-behind-a-proxy/
-  new: /server-admin/latest/installation/installing-server-behind-a-proxy.html
+  new: /server-admin/latest/installation/installing-server-behind-a-proxy/
 
 - old: /server/latest/installation/phase-1-aws-prerequisites/
-  new: /server-admin/latest/installation/phase-1-aws-prerequisites.html
+  new: /server-admin/latest/installation/phase-1-aws-prerequisites/
 
 - old: /server/latest/installation/phase-1-gcp-prerequisites/
-  new: /server-admin/latest/installation/phase-1-gcp-prerequisites.html
+  new: /server-admin/latest/installation/phase-1-gcp-prerequisites/
 
 - old: /server/latest/installation/phase-2-aws-core-services/
-  new: /server-admin/latest/installation/phase-2-aws-core-services.html
+  new: /server-admin/latest/installation/phase-2-aws-core-services/
 
 - old: /server/latest/installation/phase-2-gcp-core-services/
-  new: /server-admin/latest/installation/phase-2-gcp-core-services.html
+  new: /server-admin/latest/installation/phase-2-gcp-core-services/
 
 - old: /server/latest/installation/phase-3-aws-execution-environments/
-  new: /server-admin/latest/installation/phase-3-aws-execution-environments.html
+  new: /server-admin/latest/installation/phase-3-aws-execution-environments/
 
 - old: /server/latest/installation/phase-3-gcp-execution-environments/
-  new: /server-admin/latest/installation/phase-3-gcp-execution-environments.html
+  new: /server-admin/latest/installation/phase-3-gcp-execution-environments/
 
 - old: /server/latest/installation/phase-4-aws-post-installation/
-  new: /server-admin/latest/installation/phase-4-aws-post-installation.html
+  new: /server-admin/latest/installation/phase-4-aws-post-installation/
 
 - old: /server/latest/installation/phase-4-gcp-post-installation/
-  new: /server-admin/latest/installation/phase-4-gcp-post-installation.html
+  new: /server-admin/latest/installation/phase-4-gcp-post-installation/
 
 - old: /server/latest/installation/upgrade-server/
-  new: /server-admin/latest/installation/upgrade-server.html
+  new: /server-admin/latest/installation/upgrade-server/
 
 - old: /server/latest/operator/application-lifecycle/
-  new: /server-admin/latest/operator/application-lifecycle.html
+  new: /server-admin/latest/operator/application-lifecycle/
 
 - old: /server/latest/operator/backup-and-restore/
-  new: /server-admin/latest/operator/backup-and-restore.html
+  new: /server-admin/latest/operator/backup-and-restore/
 
 - old: /server/latest/operator/circleci-server-security-features/
-  new: /server-admin/latest/operator/circleci-server-security-features.html
+  new: /server-admin/latest/operator/circleci-server-security-features/
 
 - old: /server/latest/operator/configuring-external-services/
-  new: /server-admin/latest/operator/configuring-external-services.html
+  new: /server-admin/latest/operator/configuring-external-services/
 
 - old: /server/latest/operator/expanding-internal-database-volumes/
-  new: /server-admin/latest/operator/expanding-internal-database-volumes.html
+  new: /server-admin/latest/operator/expanding-internal-database-volumes/
 
 - old: /server/latest/operator/faq/
-  new: /server-admin/latest/operator/faq.html
+  new: /server-admin/latest/operator/faq/
 
 - old: /server/latest/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation.html
+  new: /server-admin/latest/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/latest/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin/latest/operator/manage-virtual-machines-with-machine-provisioner.html
+  new: /server-admin/latest/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/latest/operator/managing-build-artifacts/
-  new: /server-admin/latest/operator/managing-build-artifacts.html
+  new: /server-admin/latest/operator/managing-build-artifacts/
 
 - old: /server/latest/operator/managing-load-balancers/
-  new: /server-admin/latest/operator/managing-load-balancers.html
+  new: /server-admin/latest/operator/managing-load-balancers/
 
 - old: /server/latest/operator/managing-orbs/
-  new: /server-admin/latest/operator/managing-orbs.html
+  new: /server-admin/latest/operator/managing-orbs/
 
 - old: /server/latest/operator/managing-user-accounts/
-  new: /server-admin/latest/operator/managing-user-accounts.html
+  new: /server-admin/latest/operator/managing-user-accounts/
 
 - old: /server/latest/operator/operator-overview/
-  new: /server-admin/latest/operator/operator-overview.html
+  new: /server-admin/latest/operator/operator-overview/
 
 - old: /server/latest/operator/troubleshooting-and-support/
-  new: /server-admin/latest/operator/troubleshooting-and-support.html
+  new: /server-admin/latest/operator/troubleshooting-and-support/
 
 - old: /server/latest/operator/upgrade-mongo/
-  new: /server-admin/latest/operator/upgrade-mongo.html
+  new: /server-admin/latest/operator/upgrade-mongo/
 
 - old: /server/latest/operator/usage-data-collection/
-  new: /server-admin/latest/operator/usage-data-collection.html
+  new: /server-admin/latest/operator/usage-data-collection/
 
 - old: /server/latest/operator/user-authentication/
-  new: /server-admin/latest/operator/user-authentication.html
+  new: /server-admin/latest/operator/user-authentication/
 
 - old: /server/latest/overview/circleci-server-overview/
-  new: /server-admin/latest/overview/circleci-server-overview.html
+  new: /server-admin/latest/overview/circleci-server-overview/
 
 - old: /server/latest/overview/release-notes/
-  new: /server-admin/latest/overview/release-notes.html
+  new: /server-admin/latest/overview/release-notes/
 
 - old: /server/v4.2/air-gapped-installation/additional-considerations/
-  new: /server-admin/server-4.2/air-gapped-installation/additional-considerations.html
+  new: /server-admin/server-4.2/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.2/air-gapped-installation/example-values/
-  new: /server-admin/server-4.2/air-gapped-installation/example-values.html
+  new: /server-admin/server-4.2/air-gapped-installation/example-values/
 
 - old: /server/v4.2/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin/server-4.2/air-gapped-installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.2/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.2/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin/server-4.2/air-gapped-installation/phase-2-configure-object-storage.html
+  new: /server-admin/server-4.2/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.2/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin/server-4.2/air-gapped-installation/phase-3-install-circleci-server.html
+  new: /server-admin/server-4.2/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.2/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin/server-4.2/air-gapped-installation/phase-4-configure-nomad-clients.html
+  new: /server-admin/server-4.2/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.2/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin/server-4.2/air-gapped-installation/phase-5-test-your-installation.html
+  new: /server-admin/server-4.2/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.2/installation/hardening-your-cluster/
-  new: /server-admin/server-4.2/installation/hardening-your-cluster.html
+  new: /server-admin/server-4.2/installation/hardening-your-cluster/
 
 - old: /server/v4.2/installation/installation-reference/
-  new: /server-admin/server-4.2/installation/installation-reference.html
+  new: /server-admin/server-4.2/installation/installation-reference/
 
 - old: /server/v4.2/installation/installing-server-behind-a-proxy/
-  new: /server-admin/server-4.2/installation/installing-server-behind-a-proxy.html
+  new: /server-admin/server-4.2/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.2/installation/phase-1-prerequisites/
-  new: /server-admin/server-4.2/installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.2/installation/phase-1-prerequisites/
 
 - old: /server/v4.2/installation/phase-2-core-services/
-  new: /server-admin/server-4.2/installation/phase-2-core-services.html
+  new: /server-admin/server-4.2/installation/phase-2-core-services/
 
 - old: /server/v4.2/installation/phase-3-execution-environments/
-  new: /server-admin/server-4.2/installation/phase-3-execution-environments.html
+  new: /server-admin/server-4.2/installation/phase-3-execution-environments/
 
 - old: /server/v4.2/installation/phase-4-post-installation/
-  new: /server-admin/server-4.2/installation/phase-4-post-installation.html
+  new: /server-admin/server-4.2/installation/phase-4-post-installation/
 
 - old: /server/v4.2/installation/upgrade-server/
-  new: /server-admin/server-4.2/installation/upgrade-server.html
+  new: /server-admin/server-4.2/installation/upgrade-server/
 
 - old: /server/v4.2/operator/application-lifecycle/
-  new: /server-admin/server-4.2/operator/application-lifecycle.html
+  new: /server-admin/server-4.2/operator/application-lifecycle/
 
 - old: /server/v4.2/operator/backup-and-restore/
-  new: /server-admin/server-4.2/operator/backup-and-restore.html
+  new: /server-admin/server-4.2/operator/backup-and-restore/
 
 - old: /server/v4.2/operator/circleci-server-security-features/
-  new: /server-admin/server-4.2/operator/circleci-server-security-features.html
+  new: /server-admin/server-4.2/operator/circleci-server-security-features/
 
 - old: /server/v4.2/operator/configuring-external-services/
-  new: /server-admin/server-4.2/operator/configuring-external-services.html
+  new: /server-admin/server-4.2/operator/configuring-external-services/
 
 - old: /server/v4.2/operator/expanding-internal-database-volumes/
-  new: /server-admin/server-4.2/operator/expanding-internal-database-volumes.html
+  new: /server-admin/server-4.2/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.2/operator/faq/
-  new: /server-admin/server-4.2/operator/faq.html
+  new: /server-admin/server-4.2/operator/faq/
 
 - old: /server/v4.2/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin/server-4.2/operator/introduction-to-nomad-cluster-operation.html
+  new: /server-admin/server-4.2/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.2/operator/manage-virtual-machines-with-vm-service/
-  new: /server-admin/server-4.2/operator/manage-virtual-machines-with-vm-service.html
+  new: /server-admin/server-4.2/operator/manage-virtual-machines-with-vm-service/
 
 - old: /server/v4.2/operator/managing-build-artifacts/
-  new: /server-admin/server-4.2/operator/managing-build-artifacts.html
+  new: /server-admin/server-4.2/operator/managing-build-artifacts/
 
 - old: /server/v4.2/operator/managing-load-balancers/
-  new: /server-admin/server-4.2/operator/managing-load-balancers.html
+  new: /server-admin/server-4.2/operator/managing-load-balancers/
 
 - old: /server/v4.2/operator/managing-orbs/
-  new: /server-admin/server-4.2/operator/managing-orbs.html
+  new: /server-admin/server-4.2/operator/managing-orbs/
 
 - old: /server/v4.2/operator/managing-user-accounts/
-  new: /server-admin/server-4.2/operator/managing-user-accounts.html
+  new: /server-admin/server-4.2/operator/managing-user-accounts/
 
 - old: /server/v4.2/operator/operator-overview/
-  new: /server-admin/server-4.2/operator/operator-overview.html
+  new: /server-admin/server-4.2/operator/operator-overview/
 
 - old: /server/v4.2/operator/troubleshooting-and-support/
-  new: /server-admin/server-4.2/operator/troubleshooting-and-support.html
+  new: /server-admin/server-4.2/operator/troubleshooting-and-support/
 
 - old: /server/v4.2/operator/upgrade-mongo/
-  new: /server-admin/server-4.2/operator/upgrade-mongo.html
+  new: /server-admin/server-4.2/operator/upgrade-mongo/
 
 - old: /server/v4.2/operator/usage-data-collection/
-  new: /server-admin/server-4.2/operator/usage-data-collection.html
+  new: /server-admin/server-4.2/operator/usage-data-collection/
 
 - old: /server/v4.2/operator/user-authentication/
-  new: /server-admin/server-4.2/operator/user-authentication.html
+  new: /server-admin/server-4.2/operator/user-authentication/
 
 - old: /server/v4.2/overview/circleci-server-overview/
-  new: /server-admin/server-4.2/overview/circleci-server-overview.html
+  new: /server-admin/server-4.2/overview/circleci-server-overview/
 
 - old: /server/v4.2/overview/release-notes/
-  new: /server-admin/server-4.2/overview/release-notes.html
+  new: /server-admin/server-4.2/overview/release-notes/
 
 - old: /server/v4.3/air-gapped-installation/additional-considerations/
-  new: /server-admin/server-4.3/air-gapped-installation/additional-considerations.html
+  new: /server-admin/server-4.3/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.3/air-gapped-installation/example-values/
-  new: /server-admin/server-4.3/air-gapped-installation/example-values.html
+  new: /server-admin/server-4.3/air-gapped-installation/example-values/
 
 - old: /server/v4.3/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin/server-4.3/air-gapped-installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.3/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.3/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin/server-4.3/air-gapped-installation/phase-2-configure-object-storage.html
+  new: /server-admin/server-4.3/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.3/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin/server-4.3/air-gapped-installation/phase-3-install-circleci-server.html
+  new: /server-admin/server-4.3/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.3/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin/server-4.3/air-gapped-installation/phase-4-configure-nomad-clients.html
+  new: /server-admin/server-4.3/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.3/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin/server-4.3/air-gapped-installation/phase-5-test-your-installation.html
+  new: /server-admin/server-4.3/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.3/installation/hardening-your-cluster/
-  new: /server-admin/server-4.3/installation/hardening-your-cluster.html
+  new: /server-admin/server-4.3/installation/hardening-your-cluster/
 
 - old: /server/v4.3/installation/installation-reference/
-  new: /server-admin/server-4.3/installation/installation-reference.html
+  new: /server-admin/server-4.3/installation/installation-reference/
 
 - old: /server/v4.3/installation/installing-server-behind-a-proxy/
-  new: /server-admin/server-4.3/installation/installing-server-behind-a-proxy.html
+  new: /server-admin/server-4.3/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.3/installation/phase-1-prerequisites/
-  new: /server-admin/server-4.3/installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.3/installation/phase-1-prerequisites/
 
 - old: /server/v4.3/installation/phase-2-core-services/
-  new: /server-admin/server-4.3/installation/phase-2-core-services.html
+  new: /server-admin/server-4.3/installation/phase-2-core-services/
 
 - old: /server/v4.3/installation/phase-3-execution-environments/
-  new: /server-admin/server-4.3/installation/phase-3-execution-environments.html
+  new: /server-admin/server-4.3/installation/phase-3-execution-environments/
 
 - old: /server/v4.3/installation/phase-4-post-installation/
-  new: /server-admin/server-4.3/installation/phase-4-post-installation.html
+  new: /server-admin/server-4.3/installation/phase-4-post-installation/
 
 - old: /server/v4.3/installation/upgrade-server/
-  new: /server-admin/server-4.3/installation/upgrade-server.html
+  new: /server-admin/server-4.3/installation/upgrade-server/
 
 - old: /server/v4.3/operator/application-lifecycle/
-  new: /server-admin/server-4.3/operator/application-lifecycle.html
+  new: /server-admin/server-4.3/operator/application-lifecycle/
 
 - old: /server/v4.3/operator/backup-and-restore/
-  new: /server-admin/server-4.3/operator/backup-and-restore.html
+  new: /server-admin/server-4.3/operator/backup-and-restore/
 
 - old: /server/v4.3/operator/circleci-server-security-features/
-  new: /server-admin/server-4.3/operator/circleci-server-security-features.html
+  new: /server-admin/server-4.3/operator/circleci-server-security-features/
 
 - old: /server/v4.3/operator/configuring-external-services/
-  new: /server-admin/server-4.3/operator/configuring-external-services.html
+  new: /server-admin/server-4.3/operator/configuring-external-services/
 
 - old: /server/v4.3/operator/expanding-internal-database-volumes/
-  new: /server-admin/server-4.3/operator/expanding-internal-database-volumes.html
+  new: /server-admin/server-4.3/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.3/operator/faq/
-  new: /server-admin/server-4.3/operator/faq.html
+  new: /server-admin/server-4.3/operator/faq/
 
 - old: /server/v4.3/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin/server-4.3/operator/introduction-to-nomad-cluster-operation.html
+  new: /server-admin/server-4.3/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.3/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin/server-4.3/operator/manage-virtual-machines-with-machine-provisioner.html
+  new: /server-admin/server-4.3/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.3/operator/managing-build-artifacts/
-  new: /server-admin/server-4.3/operator/managing-build-artifacts.html
+  new: /server-admin/server-4.3/operator/managing-build-artifacts/
 
 - old: /server/v4.3/operator/managing-load-balancers/
-  new: /server-admin/server-4.3/operator/managing-load-balancers.html
+  new: /server-admin/server-4.3/operator/managing-load-balancers/
 
 - old: /server/v4.3/operator/managing-orbs/
-  new: /server-admin/server-4.3/operator/managing-orbs.html
+  new: /server-admin/server-4.3/operator/managing-orbs/
 
 - old: /server/v4.3/operator/managing-user-accounts/
-  new: /server-admin/server-4.3/operator/managing-user-accounts.html
+  new: /server-admin/server-4.3/operator/managing-user-accounts/
 
 - old: /server/v4.3/operator/operator-overview/
-  new: /server-admin/server-4.3/operator/operator-overview.html
+  new: /server-admin/server-4.3/operator/operator-overview/
 
 - old: /server/v4.3/operator/troubleshooting-and-support/
-  new: /server-admin/server-4.3/operator/troubleshooting-and-support.html
+  new: /server-admin/server-4.3/operator/troubleshooting-and-support/
 
 - old: /server/v4.3/operator/upgrade-mongo/
-  new: /server-admin/server-4.3/operator/upgrade-mongo.html
+  new: /server-admin/server-4.3/operator/upgrade-mongo/
 
 - old: /server/v4.3/operator/usage-data-collection/
-  new: /server-admin/server-4.3/operator/usage-data-collection.html
+  new: /server-admin/server-4.3/operator/usage-data-collection/
 
 - old: /server/v4.3/operator/user-authentication/
-  new: /server-admin/server-4.3/operator/user-authentication.html
+  new: /server-admin/server-4.3/operator/user-authentication/
 
 - old: /server/v4.3/overview/circleci-server-overview/
-  new: /server-admin/server-4.3/overview/circleci-server-overview.html
+  new: /server-admin/server-4.3/overview/circleci-server-overview/
 
 - old: /server/v4.3/overview/release-notes/
-  new: /server-admin/server-4.3/overview/release-notes.html
+  new: /server-admin/server-4.3/overview/release-notes/
 
 - old: /server/v4.4/air-gapped-installation/additional-considerations/
-  new: /server-admin/server-4.4/air-gapped-installation/additional-considerations.html
+  new: /server-admin/server-4.4/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.4/air-gapped-installation/example-values/
-  new: /server-admin/server-4.4/air-gapped-installation/example-values.html
+  new: /server-admin/server-4.4/air-gapped-installation/example-values/
 
 - old: /server/v4.4/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin/server-4.4/air-gapped-installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.4/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.4/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin/server-4.4/air-gapped-installation/phase-2-configure-object-storage.html
+  new: /server-admin/server-4.4/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.4/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin/server-4.4/air-gapped-installation/phase-3-install-circleci-server.html
+  new: /server-admin/server-4.4/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.4/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin/server-4.4/air-gapped-installation/phase-4-configure-nomad-clients.html
+  new: /server-admin/server-4.4/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.4/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin/server-4.4/air-gapped-installation/phase-5-test-your-installation.html
+  new: /server-admin/server-4.4/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.4/installation/hardening-your-cluster/
-  new: /server-admin/server-4.4/installation/hardening-your-cluster.html
+  new: /server-admin/server-4.4/installation/hardening-your-cluster/
 
 - old: /server/v4.4/installation/installation-reference/
-  new: /server-admin/server-4.4/installation/installation-reference.html
+  new: /server-admin/server-4.4/installation/installation-reference/
 
 - old: /server/v4.4/installation/installing-server-behind-a-proxy/
-  new: /server-admin/server-4.4/installation/installing-server-behind-a-proxy.html
+  new: /server-admin/server-4.4/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.4/installation/phase-1-prerequisites/
-  new: /server-admin/server-4.4/installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.4/installation/phase-1-prerequisites/
 
 - old: /server/v4.4/installation/phase-2-core-services/
-  new: /server-admin/server-4.4/installation/phase-2-core-services.html
+  new: /server-admin/server-4.4/installation/phase-2-core-services/
 
 - old: /server/v4.4/installation/phase-3-execution-environments/
-  new: /server-admin/server-4.4/installation/phase-3-execution-environments.html
+  new: /server-admin/server-4.4/installation/phase-3-execution-environments/
 
 - old: /server/v4.4/installation/phase-4-post-installation/
-  new: /server-admin/server-4.4/installation/phase-4-post-installation.html
+  new: /server-admin/server-4.4/installation/phase-4-post-installation/
 
 - old: /server/v4.4/installation/upgrade-server/
-  new: /server-admin/server-4.4/installation/upgrade-server.html
+  new: /server-admin/server-4.4/installation/upgrade-server/
 
 - old: /server/v4.4/operator/application-lifecycle/
-  new: /server-admin/server-4.4/operator/application-lifecycle.html
+  new: /server-admin/server-4.4/operator/application-lifecycle/
 
 - old: /server/v4.4/operator/backup-and-restore/
-  new: /server-admin/server-4.4/operator/backup-and-restore.html
+  new: /server-admin/server-4.4/operator/backup-and-restore/
 
 - old: /server/v4.4/operator/circleci-server-security-features/
-  new: /server-admin/server-4.4/operator/circleci-server-security-features.html
+  new: /server-admin/server-4.4/operator/circleci-server-security-features/
 
 - old: /server/v4.4/operator/configuring-external-services/
-  new: /server-admin/server-4.4/operator/configuring-external-services.html
+  new: /server-admin/server-4.4/operator/configuring-external-services/
 
 - old: /server/v4.4/operator/expanding-internal-database-volumes/
-  new: /server-admin/server-4.4/operator/expanding-internal-database-volumes.html
+  new: /server-admin/server-4.4/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.4/operator/faq/
-  new: /server-admin/server-4.4/operator/faq.html
+  new: /server-admin/server-4.4/operator/faq/
 
 - old: /server/v4.4/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin/server-4.4/operator/introduction-to-nomad-cluster-operation.html
+  new: /server-admin/server-4.4/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.4/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin/server-4.4/operator/manage-virtual-machines-with-machine-provisioner.html
+  new: /server-admin/server-4.4/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.4/operator/managing-build-artifacts/
-  new: /server-admin/server-4.4/operator/managing-build-artifacts.html
+  new: /server-admin/server-4.4/operator/managing-build-artifacts/
 
 - old: /server/v4.4/operator/managing-load-balancers/
-  new: /server-admin/server-4.4/operator/managing-load-balancers.html
+  new: /server-admin/server-4.4/operator/managing-load-balancers/
 
 - old: /server/v4.4/operator/managing-orbs/
-  new: /server-admin/server-4.4/operator/managing-orbs.html
+  new: /server-admin/server-4.4/operator/managing-orbs/
 
 - old: /server/v4.4/operator/managing-user-accounts/
-  new: /server-admin/server-4.4/operator/managing-user-accounts.html
+  new: /server-admin/server-4.4/operator/managing-user-accounts/
 
 - old: /server/v4.4/operator/operator-overview/
-  new: /server-admin/server-4.4/operator/operator-overview.html
+  new: /server-admin/server-4.4/operator/operator-overview/
 
 - old: /server/v4.4/operator/troubleshooting-and-support/
-  new: /server-admin/server-4.4/operator/troubleshooting-and-support.html
+  new: /server-admin/server-4.4/operator/troubleshooting-and-support/
 
 - old: /server/v4.4/operator/upgrade-mongo/
-  new: /server-admin/server-4.4/operator/upgrade-mongo.html
+  new: /server-admin/server-4.4/operator/upgrade-mongo/
 
 - old: /server/v4.4/operator/usage-data-collection/
-  new: /server-admin/server-4.4/operator/usage-data-collection.html
+  new: /server-admin/server-4.4/operator/usage-data-collection/
 
 - old: /server/v4.4/operator/user-authentication/
-  new: /server-admin/server-4.4/operator/user-authentication.html
+  new: /server-admin/server-4.4/operator/user-authentication/
 
 - old: /server/v4.4/overview/circleci-server-overview/
-  new: /server-admin/server-4.4/overview/circleci-server-overview.html
+  new: /server-admin/server-4.4/overview/circleci-server-overview/
 
 - old: /server/v4.4/overview/release-notes/
-  new: /server-admin/server-4.4/overview/release-notes.html
+  new: /server-admin/server-4.4/overview/release-notes/
 
 - old: /server/v4.5/air-gapped-installation/additional-considerations/
-  new: /server-admin/server-4.5/air-gapped-installation/additional-considerations.html
+  new: /server-admin/server-4.5/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.5/air-gapped-installation/example-values/
-  new: /server-admin/server-4.5/air-gapped-installation/example-values.html
+  new: /server-admin/server-4.5/air-gapped-installation/example-values/
 
 - old: /server/v4.5/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin/server-4.5/air-gapped-installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.5/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.5/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin/server-4.5/air-gapped-installation/phase-2-configure-object-storage.html
+  new: /server-admin/server-4.5/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.5/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin/server-4.5/air-gapped-installation/phase-3-install-circleci-server.html
+  new: /server-admin/server-4.5/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.5/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin/server-4.5/air-gapped-installation/phase-4-configure-nomad-clients.html
+  new: /server-admin/server-4.5/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.5/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin/server-4.5/air-gapped-installation/phase-5-test-your-installation.html
+  new: /server-admin/server-4.5/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.5/installation/hardening-your-cluster/
-  new: /server-admin/server-4.5/installation/hardening-your-cluster.html
+  new: /server-admin/server-4.5/installation/hardening-your-cluster/
 
 - old: /server/v4.5/installation/installation-reference/
-  new: /server-admin/server-4.5/installation/installation-reference.html
+  new: /server-admin/server-4.5/installation/installation-reference/
 
 - old: /server/v4.5/installation/installing-server-behind-a-proxy/
-  new: /server-admin/server-4.5/installation/installing-server-behind-a-proxy.html
+  new: /server-admin/server-4.5/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.5/installation/phase-1-prerequisites/
-  new: /server-admin/server-4.5/installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.5/installation/phase-1-prerequisites/
 
 - old: /server/v4.5/installation/phase-2-core-services/
-  new: /server-admin/server-4.5/installation/phase-2-core-services.html
+  new: /server-admin/server-4.5/installation/phase-2-core-services/
 
 - old: /server/v4.5/installation/phase-3-execution-environments/
-  new: /server-admin/server-4.5/installation/phase-3-execution-environments.html
+  new: /server-admin/server-4.5/installation/phase-3-execution-environments/
 
 - old: /server/v4.5/installation/phase-4-post-installation/
-  new: /server-admin/server-4.5/installation/phase-4-post-installation.html
+  new: /server-admin/server-4.5/installation/phase-4-post-installation/
 
 - old: /server/v4.5/installation/upgrade-server/
-  new: /server-admin/server-4.5/installation/upgrade-server.html
+  new: /server-admin/server-4.5/installation/upgrade-server/
 
 - old: /server/v4.5/operator/application-lifecycle/
-  new: /server-admin/server-4.5/operator/application-lifecycle.html
+  new: /server-admin/server-4.5/operator/application-lifecycle/
 
 - old: /server/v4.5/operator/backup-and-restore/
-  new: /server-admin/server-4.5/operator/backup-and-restore.html
+  new: /server-admin/server-4.5/operator/backup-and-restore/
 
 - old: /server/v4.5/operator/circleci-server-security-features/
-  new: /server-admin/server-4.5/operator/circleci-server-security-features.html
+  new: /server-admin/server-4.5/operator/circleci-server-security-features/
 
 - old: /server/v4.5/operator/configuring-external-services/
-  new: /server-admin/server-4.5/operator/configuring-external-services.html
+  new: /server-admin/server-4.5/operator/configuring-external-services/
 
 - old: /server/v4.5/operator/expanding-internal-database-volumes/
-  new: /server-admin/server-4.5/operator/expanding-internal-database-volumes.html
+  new: /server-admin/server-4.5/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.5/operator/faq/
-  new: /server-admin/server-4.5/operator/faq.html
+  new: /server-admin/server-4.5/operator/faq/
 
 - old: /server/v4.5/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin/server-4.5/operator/introduction-to-nomad-cluster-operation.html
+  new: /server-admin/server-4.5/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.5/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin/server-4.5/operator/manage-virtual-machines-with-machine-provisioner.html
+  new: /server-admin/server-4.5/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.5/operator/managing-build-artifacts/
-  new: /server-admin/server-4.5/operator/managing-build-artifacts.html
+  new: /server-admin/server-4.5/operator/managing-build-artifacts/
 
 - old: /server/v4.5/operator/managing-load-balancers/
-  new: /server-admin/server-4.5/operator/managing-load-balancers.html
+  new: /server-admin/server-4.5/operator/managing-load-balancers/
 
 - old: /server/v4.5/operator/managing-orbs/
-  new: /server-admin/server-4.5/operator/managing-orbs.html
+  new: /server-admin/server-4.5/operator/managing-orbs/
 
 - old: /server/v4.5/operator/managing-user-accounts/
-  new: /server-admin/server-4.5/operator/managing-user-accounts.html
+  new: /server-admin/server-4.5/operator/managing-user-accounts/
 
 - old: /server/v4.5/operator/operator-overview/
-  new: /server-admin/server-4.5/operator/operator-overview.html
+  new: /server-admin/server-4.5/operator/operator-overview/
 
 - old: /server/v4.5/operator/troubleshooting-and-support/
-  new: /server-admin/server-4.5/operator/troubleshooting-and-support.html
+  new: /server-admin/server-4.5/operator/troubleshooting-and-support/
 
 - old: /server/v4.5/operator/upgrade-mongo/
-  new: /server-admin/server-4.5/operator/upgrade-mongo.html
+  new: /server-admin/server-4.5/operator/upgrade-mongo/
 
 - old: /server/v4.5/operator/usage-data-collection/
-  new: /server-admin/server-4.5/operator/usage-data-collection.html
+  new: /server-admin/server-4.5/operator/usage-data-collection/
 
 - old: /server/v4.5/operator/user-authentication/
-  new: /server-admin/server-4.5/operator/user-authentication.html
+  new: /server-admin/server-4.5/operator/user-authentication/
 
 - old: /server/v4.5/overview/circleci-server-overview/
-  new: /server-admin/server-4.5/overview/circleci-server-overview.html
+  new: /server-admin/server-4.5/overview/circleci-server-overview/
 
 - old: /server/v4.5/overview/release-notes/
-  new: /server-admin/server-4.5/overview/release-notes.html
+  new: /server-admin/server-4.5/overview/release-notes/
 
 - old: /server/v4.6/air-gapped-installation/additional-considerations/
-  new: /server-admin/server-4.6/air-gapped-installation/additional-considerations.html
+  new: /server-admin/server-4.6/air-gapped-installation/additional-considerations/
 
 - old: /server/v4.6/air-gapped-installation/example-values/
-  new: /server-admin/server-4.6/air-gapped-installation/example-values.html
+  new: /server-admin/server-4.6/air-gapped-installation/example-values/
 
 - old: /server/v4.6/air-gapped-installation/phase-1-prerequisites/
-  new: /server-admin/server-4.6/air-gapped-installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.6/air-gapped-installation/phase-1-prerequisites/
 
 - old: /server/v4.6/air-gapped-installation/phase-2-configure-object-storage/
-  new: /server-admin/server-4.6/air-gapped-installation/phase-2-configure-object-storage.html
+  new: /server-admin/server-4.6/air-gapped-installation/phase-2-configure-object-storage/
 
 - old: /server/v4.6/air-gapped-installation/phase-3-install-circleci-server/
-  new: /server-admin/server-4.6/air-gapped-installation/phase-3-install-circleci-server.html
+  new: /server-admin/server-4.6/air-gapped-installation/phase-3-install-circleci-server/
 
 - old: /server/v4.6/air-gapped-installation/phase-4-configure-nomad-clients/
-  new: /server-admin/server-4.6/air-gapped-installation/phase-4-configure-nomad-clients.html
+  new: /server-admin/server-4.6/air-gapped-installation/phase-4-configure-nomad-clients/
 
 - old: /server/v4.6/air-gapped-installation/phase-5-test-your-installation/
-  new: /server-admin/server-4.6/air-gapped-installation/phase-5-test-your-installation.html
+  new: /server-admin/server-4.6/air-gapped-installation/phase-5-test-your-installation/
 
 - old: /server/v4.6/installation/hardening-your-cluster/
-  new: /server-admin/server-4.6/installation/hardening-your-cluster.html
+  new: /server-admin/server-4.6/installation/hardening-your-cluster/
 
 - old: /server/v4.6/installation/installation-reference/
-  new: /server-admin/server-4.6/installation/installation-reference.html
+  new: /server-admin/server-4.6/installation/installation-reference/
 
 - old: /server/v4.6/installation/installing-server-behind-a-proxy/
-  new: /server-admin/server-4.6/installation/installing-server-behind-a-proxy.html
+  new: /server-admin/server-4.6/installation/installing-server-behind-a-proxy/
 
 - old: /server/v4.6/installation/phase-1-prerequisites/
-  new: /server-admin/server-4.6/installation/phase-1-prerequisites.html
+  new: /server-admin/server-4.6/installation/phase-1-prerequisites/
 
 - old: /server/v4.6/installation/phase-2-core-services/
-  new: /server-admin/server-4.6/installation/phase-2-core-services.html
+  new: /server-admin/server-4.6/installation/phase-2-core-services/
 
 - old: /server/v4.6/installation/phase-3-execution-environments/
-  new: /server-admin/server-4.6/installation/phase-3-execution-environments.html
+  new: /server-admin/server-4.6/installation/phase-3-execution-environments/
 
 - old: /server/v4.6/installation/phase-4-post-installation/
-  new: /server-admin/server-4.6/installation/phase-4-post-installation.html
+  new: /server-admin/server-4.6/installation/phase-4-post-installation/
 
 - old: /server/v4.6/installation/upgrade-server/
-  new: /server-admin/server-4.6/installation/upgrade-server.html
+  new: /server-admin/server-4.6/installation/upgrade-server/
 
 - old: /server/v4.6/operator/application-lifecycle/
-  new: /server-admin/server-4.6/operator/application-lifecycle.html
+  new: /server-admin/server-4.6/operator/application-lifecycle/
 
 - old: /server/v4.6/operator/backup-and-restore/
-  new: /server-admin/server-4.6/operator/backup-and-restore.html
+  new: /server-admin/server-4.6/operator/backup-and-restore/
 
 - old: /server/v4.6/operator/circleci-server-security-features/
-  new: /server-admin/server-4.6/operator/circleci-server-security-features.html
+  new: /server-admin/server-4.6/operator/circleci-server-security-features/
 
 - old: /server/v4.6/operator/configuring-external-services/
-  new: /server-admin/server-4.6/operator/configuring-external-services.html
+  new: /server-admin/server-4.6/operator/configuring-external-services/
 
 - old: /server/v4.6/operator/expanding-internal-database-volumes/
-  new: /server-admin/server-4.6/operator/expanding-internal-database-volumes.html
+  new: /server-admin/server-4.6/operator/expanding-internal-database-volumes/
 
 - old: /server/v4.6/operator/faq/
-  new: /server-admin/server-4.6/operator/faq.html
+  new: /server-admin/server-4.6/operator/faq/
 
 - old: /server/v4.6/operator/introduction-to-nomad-cluster-operation/
-  new: /server-admin/server-4.6/operator/introduction-to-nomad-cluster-operation.html
+  new: /server-admin/server-4.6/operator/introduction-to-nomad-cluster-operation/
 
 - old: /server/v4.6/operator/manage-virtual-machines-with-machine-provisioner/
-  new: /server-admin/server-4.6/operator/manage-virtual-machines-with-machine-provisioner.html
+  new: /server-admin/server-4.6/operator/manage-virtual-machines-with-machine-provisioner/
 
 - old: /server/v4.6/operator/managing-build-artifacts/
-  new: /server-admin/server-4.6/operator/managing-build-artifacts.html
+  new: /server-admin/server-4.6/operator/managing-build-artifacts/
 
 - old: /server/v4.6/operator/managing-load-balancers/
-  new: /server-admin/server-4.6/operator/managing-load-balancers.html
+  new: /server-admin/server-4.6/operator/managing-load-balancers/
 
 - old: /server/v4.6/operator/managing-orbs/
-  new: /server-admin/server-4.6/operator/managing-orbs.html
+  new: /server-admin/server-4.6/operator/managing-orbs/
 
 - old: /server/v4.6/operator/managing-user-accounts/
-  new: /server-admin/server-4.6/operator/managing-user-accounts.html
+  new: /server-admin/server-4.6/operator/managing-user-accounts/
 
 - old: /server/v4.6/operator/operator-overview/
-  new: /server-admin/server-4.6/operator/operator-overview.html
+  new: /server-admin/server-4.6/operator/operator-overview/
 
 - old: /server/v4.6/operator/troubleshooting-and-support/
-  new: /server-admin/server-4.6/operator/troubleshooting-and-support.html
+  new: /server-admin/server-4.6/operator/troubleshooting-and-support/
 
 - old: /server/v4.6/operator/upgrade-mongo/
-  new: /server-admin/server-4.6/operator/upgrade-mongo.html
+  new: /server-admin/server-4.6/operator/upgrade-mongo/
 
 - old: /server/v4.6/operator/usage-data-collection/
-  new: /server-admin/server-4.6/operator/usage-data-collection.html
+  new: /server-admin/server-4.6/operator/usage-data-collection/
 
 - old: /server/v4.6/operator/user-authentication/
-  new: /server-admin/server-4.6/operator/user-authentication.html
+  new: /server-admin/server-4.6/operator/user-authentication/
 
 - old: /server/v4.6/overview/circleci-server-overview/
-  new: /server-admin/server-4.6/overview/circleci-server-overview.html
+  new: /server-admin/server-4.6/overview/circleci-server-overview/
 
 - old: /server/v4.6/overview/release-notes/
-  new: /server-admin/server-4.6/overview/release-notes.html
+  new: /server-admin/server-4.6/overview/release-notes/
 
 - old: /set-a-nightly-scheduled-pipeline/
-  new: /guides/orchestrate/set-a-nightly-scheduled-pipeline.html
+  new: /guides/orchestrate/set-a-nightly-scheduled-pipeline/
 
 - old: /set-environment-variable/
-  new: /guides/security/set-environment-variable.html
+  new: /guides/security/set-environment-variable/
 
 - old: /set-up-multiple-configuration-files-for-a-project/
-  new: /guides/orchestrate/set-up-multiple-configuration-files-for-a-project.html
+  new: /guides/orchestrate/set-up-multiple-configuration-files-for-a-project/
 
 - old: /skip-build/
-  new: /guides/orchestrate/skip-build.html
+  new: /guides/orchestrate/skip-build/
 
 - old: /slack-orb-tutorial/
-  new: /guides/getting-started/slack-orb-tutorial.html
+  new: /guides/getting-started/slack-orb-tutorial/
 
 - old: /ssh-access-jobs/
-  new: /guides/execution-managed/ssh-access-jobs.html
+  new: /guides/execution-managed/ssh-access-jobs/
 
 - old: /status-badges/
-  new: /guides/integration/status-badges.html
+  new: /guides/integration/status-badges/
 
 - old: /stop-building-a-project-on-circleci/
-  new: /guides/security/stop-building-a-project-on-circleci.html
+  new: /guides/security/stop-building-a-project-on-circleci/
 
 - old: /style/formatting/
-  new: /contributors/docs-style/formatting.html
+  new: /contributors/docs-style/formatting/
 
 - old: /style/headings/
-  new: /contributors/docs-style/headings.html
+  new: /contributors/docs-style/headings/
 
 - old: /style/links/
-  new: /contributors/docs-style/links.html
+  new: /contributors/docs-style/links/
 
 - old: /style/style-and-voice/
-  new: /contributors/docs-style/style-and-voice.html
+  new: /contributors/docs-style/style-and-voice/
 
 - old: /style/style-guide-overview/
-  new: /contributors/docs-style/style-guide-overview.html
+  new: /contributors/docs-style/style-guide-overview/
 
 - old: /style/using-code-samples/
-  new: /contributors/docs-style/using-code-samples.html
+  new: /contributors/docs-style/using-code-samples/
 
 - old: /style/using-images/
-  new: /contributors/docs-style/using-images.html
+  new: /contributors/docs-style/using-images/
 
 - old: /style/using-lists/
-  new: /contributors/docs-style/using-lists.html
+  new: /contributors/docs-style/using-lists/
 
 - old: /style/using-tables/
-  new: /contributors/docs-style/using-tables.html
+  new: /contributors/docs-style/using-tables/
 
 - old: /sumo-logic-integration/
-  new: /guides/integration/sumo-logic-integration.html
+  new: /guides/integration/sumo-logic-integration/
 
 - old: /templates/template-conceptual/
-  new: /contributors/templates/template-conceptual.html
+  new: /contributors/templates/template-conceptual/
 
 - old: /templates/template-how-to/
-  new: /contributors/templates/template-how-to.html
+  new: /contributors/templates/template-how-to/
 
 - old: /templates/template-tutorial/
-  new: /contributors/templates/template-tutorial.html
+  new: /contributors/templates/template-tutorial/
 
 - old: /test/
-  new: /guides/test/test.html
+  new: /guides/test/test/
 
 - old: /test-config-policies/
-  new: /guides/config-policies/test-config-policies.html
+  new: /guides/config-policies/test-config-policies/
 
 - old: /test-splitting-tutorial/
-  new: /guides/test/test-splitting-tutorial.html
+  new: /guides/test/test-splitting-tutorial/
 
 - old: /testing-ios/
-  new: /guides/test/testing-ios.html
+  new: /guides/test/testing-ios/
 
 - old: /testing-llm-enabled-applications-through-evaluations/
-  new: /guides/test/testing-llm-enabled-applications-through-evaluations.html
+  new: /guides/test/testing-llm-enabled-applications-through-evaluations/
 
 - old: /testing-macos/
-  new: /guides/test/testing-macos.html
+  new: /guides/test/testing-macos/
 
 - old: /testing-orbs/
-  new: /orbs/author/testing-orbs.html
+  new: /orbs/author/testing-orbs/
 
 - old: /triggers-overview/
-  new: /guides/orchestrate/triggers-overview.html
+  new: /guides/orchestrate/triggers-overview/
 
 - old: /troubleshoot/
-  new: /reference/troubleshoot.html
+  new: /reference/troubleshoot/
 
 - old: /troubleshoot-self-hosted-runner/
-  new: /guides/execution-runner/troubleshoot-self-hosted-runner.html
+  new: /guides/execution-runner/troubleshoot-self-hosted-runner/
 
 - old: /troubleshoot-test-splitting/
-  new: /guides/test/troubleshoot-test-splitting.html
+  new: /guides/test/troubleshoot-test-splitting/
 
 - old: /use-the-circleci-cli-to-split-tests/
-  new: /guides/optimize/use-the-circleci-cli-to-split-tests.html
+  new: /guides/optimize/use-the-circleci-cli-to-split-tests/
 
 - old: /use-the-cli-for-config-and-policy-development/
-  new: /guides/config-policies/use-the-cli-for-config-and-policy-development.html
+  new: /guides/config-policies/use-the-cli-for-config-and-policy-development/
 
 - old: /using-arm/
-  new: /guides/execution-managed/using-arm.html
+  new: /guides/execution-managed/using-arm/
 
 - old: /using-branch-filters/
-  new: /guides/orchestrate/using-branch-filters.html
+  new: /guides/orchestrate/using-branch-filters/
 
 - old: /using-docker/
-  new: /guides/execution-managed/using-docker.html
+  new: /guides/execution-managed/using-docker/
 
 - old: /using-dynamic-configuration/
-  new: /guides/orchestrate/using-dynamic-configuration.html
+  new: /guides/orchestrate/using-dynamic-configuration/
 
 - old: /using-gpu/
-  new: /guides/execution-managed/using-gpu.html
+  new: /guides/execution-managed/using-gpu/
 
 - old: /using-linuxvm/
-  new: /guides/execution-managed/using-linuxvm.html
+  new: /guides/execution-managed/using-linuxvm/
 
 - old: /using-macos/
-  new: /guides/execution-managed/using-macos.html
+  new: /guides/execution-managed/using-macos/
 
 - old: /using-matrix-jobs/
-  new: /guides/orchestrate/using-matrix-jobs.html
+  new: /guides/orchestrate/using-matrix-jobs/
 
 - old: /using-shell-scripts/
-  new: /guides/orchestrate/using-shell-scripts.html
+  new: /guides/orchestrate/using-shell-scripts/
 
 - old: /using-the-circleci-mcp-server/
-  new: /guides/toolkit/using-the-circleci-mcp-server.html
+  new: /guides/toolkit/using-the-circleci-mcp-server/
 
 - old: /using-windows/
-  new: /guides/execution-managed/using-windows.html
+  new: /guides/execution-managed/using-windows/
 
 - old: /variables/
-  new: /reference/variables.html
+  new: /reference/variables/
 
 - old: /version-control-system-integration-overview/
-  new: /guides/integration/version-control-system-integration-overview.html
+  new: /guides/integration/version-control-system-integration-overview/
 
 - old: /vs-code-extension-overview/
-  new: /guides/toolkit/vs-code-extension-overview.html
+  new: /guides/toolkit/vs-code-extension-overview/
 
 - old: /webhooks-airtable/
-  new: /guides/integration/webhooks-airtable.html
+  new: /guides/integration/webhooks-airtable/
 
 - old: /webhooks-reference/
-  new: /reference/outbound-webhooks-reference.html
+  new: /reference/outbound-webhooks-reference/
 
 - old: /windows-images-support-policy/
-  new: /guides/execution-managed/windows-images-support-policy.html
+  new: /guides/execution-managed/windows-images-support-policy/
 
 - old: /workflows/
-  new: /guides/orchestrate/workflows.html
+  new: /guides/orchestrate/workflows/
 
 - old: /workspaces/
-  new: /guides/orchestrate/workspaces.html
+  new: /guides/orchestrate/workspaces/
 
 - old: /xcode-policy/
-  new: /guides/execution-managed/xcode-policy.html
+  new: /guides/execution-managed/xcode-policy/
 
