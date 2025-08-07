@@ -4,6 +4,7 @@
   "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
   "scripts": {
     "start:dev": "dotenvx run -- npm run build:ui && gulp preview:docs",
+    "htmlproofer:dev": "htmlproofer ./build --ignore-empty-alt --checks 'Links,Images' --disable-external --swap-urls '^/docs/:/' --ignore-files './build/api/v1/index.html,./build/api/v2/index.html' --ignore-urls '[url],[path]'",
     "preview:ui": "dotenvx run -- gulp preview:ui",
     "build:ui": "gulp build:ui",
     "build:api-docs": "gulp build:api-docs",

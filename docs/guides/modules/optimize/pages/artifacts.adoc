@@ -181,7 +181,7 @@ curl --silent --request GET --url https://circleci.com/api/v2/workflow/:workflow
   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --no-verbose --input-file -
 ----
 
-You can read more about using CircleCI's API to interact with artifacts in our link:../../api/v1/index.html#artifacts[API reference guide].
+You can read more about using CircleCI's API to interact with artifacts in our link:../../../api/v1/#artifacts[API reference guide].
 
 [cols="1,2", options="header"]
 |===
