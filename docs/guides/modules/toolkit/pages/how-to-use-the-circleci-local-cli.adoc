@@ -412,6 +412,65 @@ circleci dlc purge <vcs-type> <org-id> <project-id>
 
 For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI docs].
 
+
+[#pipeline-management]
+== Pipeline management
+
+The CircleCI CLI allows you to operate on pipelines. You can use the CLI to create a new pipeline definition, list existing pipeline definitions, or run a specific pipeline.
+
+=== Create a new pipeline definition for a project
+
+Use the `create` sub-command to  create a new pipeline definition for your project.
+
+NOTE: The `create` sub-command of the `pipeline` command only applies to pipeline definitions created with the GitHub App provider Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Organization Settings[Overview]).
+
+[,shell]
+----
+circleci pipeline create <project-id> [flags]
+----
+
+- `<project-id>` is the ID of the project for which you are creating the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+
+- `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
+
+For full details on the `create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_create.html[CLI docs].
+
+
+=== List pipeline definitions for a project
+
+Use the `list` sub-command to list all pipeline definitions for your project.
+
+[,shell]
+----
+circleci pipeline list <project-id> [flags]
+----
+
+- `<project-id>` is the ID of the project you wish to list the pipeline definitions for. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_list.html[CLI docs].
+
+=== Run a pipeline
+
+Use the `run` sub-command to run a specific pipeline.
+
+[,shell]
+----
+circleci pipeline run <org-id> <project-id> [flags]
+----
+
+- `<org-id>` is the ID of the organization associated with the pipeline definition. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines]. 
+
+For full details on the `run` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_run.html[CLI docs].
+
+
 [#context-management]
 == Context management
 
