@@ -68,4 +68,4 @@ Select the *Jobs* tab next to *Overview* to view the following cumulative data o
 
 Refer to the xref:test:collect-test-data.adoc[Collect Test Data] document for guidance on configuring Insights into your most failed tests.
 
-See the link:https://circleci.com/docs/api/v2#tag/Insights[Insights API reference].
+See the link:https://circleci.com/docs/api/v2/#tag/Insights[Insights API reference].
