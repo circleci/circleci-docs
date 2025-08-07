@@ -1,0 +1,97 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    Ascii85 (2.0.1)
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
+    afm (0.2.2)
+    async (2.27.2)
+      console (~> 1.29)
+      fiber-annotation
+      io-event (~> 1.11)
+      metrics (~> 0.12)
+      traces (~> 0.15)
+    bigdecimal (3.2.2)
+    console (1.33.0)
+      fiber-annotation
+      fiber-local (~> 1.1)
+      json
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
+    ffi (1.17.2-aarch64-linux-gnu)
+    ffi (1.17.2-aarch64-linux-musl)
+    ffi (1.17.2-arm-linux-gnu)
+    ffi (1.17.2-arm-linux-musl)
+    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2-x86_64-darwin)
+    ffi (1.17.2-x86_64-linux-gnu)
+    ffi (1.17.2-x86_64-linux-musl)
+    fiber-annotation (0.2.0)
+    fiber-local (1.1.0)
+      fiber-storage
+    fiber-storage (1.0.1)
+    hashery (2.1.2)
+    html-proofer (5.0.10)
+      addressable (~> 2.3)
+      async (~> 2.1)
+      nokogiri (~> 1.13)
+      pdf-reader (~> 2.11)
+      rainbow (~> 3.0)
+      typhoeus (~> 1.3)
+      yell (~> 2.0)
+      zeitwerk (~> 2.5)
+    io-event (1.12.1)
+    json (2.13.2)
+    metrics (0.13.0)
+    nokogiri (1.18.9-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-musl)
+      racc (~> 1.4)
+    pdf-reader (2.14.1)
+      Ascii85 (>= 1.0, < 3.0, != 2.0.0)
+      afm (~> 0.2.1)
+      hashery (~> 2.0)
+      ruby-rc4
+      ttfunk
+    public_suffix (6.0.2)
+    racc (1.8.1)
+    rainbow (3.1.1)
+    ruby-rc4 (0.1.5)
+    traces (0.16.2)
+    ttfunk (1.8.0)
+      bigdecimal (~> 3.1)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
+    yell (2.2.2)
+    zeitwerk (2.7.3)
+
+PLATFORMS
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
+  x86_64-darwin
+  x86_64-linux-gnu
+  x86_64-linux-musl
+
+DEPENDENCIES
+  html-proofer
+
+RUBY VERSION
+   ruby 3.4.5p51
+
+BUNDLED WITH
+   2.6.9
