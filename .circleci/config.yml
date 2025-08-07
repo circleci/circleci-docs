@@ -138,29 +138,29 @@ jobs:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
 workflows:
-  lint:
-    unless:
-      equal: [main, << pipeline.git.branch >>]
+  main:
     jobs:
       - vale/lint:
           reference_branch: main
           base_dir: docs
-  build_validate_and_deploy:
-    jobs:
+          filters:
+            branches:
+              ignore: main
+
       - build:
           context: circleci-docs-static
+
       - validate:
           requires: [build]
+
       - deploy-production:
           requires: [validate]
           filters:
             branches:
               only: main
           context:
-            [
-              circleci-docs-static,
-              docs-platform-assets,
-              web-ui-npm,
-              web-ui-datadog,
-            ]
+            - circleci-docs-static
+            - docs-platform-assets
+            - web-ui-npm
+            - web-ui-datadog
           bucket_name: "circleci-docs-platform-assets"
