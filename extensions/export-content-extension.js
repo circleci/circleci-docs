@@ -101,9 +101,11 @@ function getNavEntriesByUrl(items = [], accum = {}, trail = []) {
 }
 
 function shouldSkipIndexing() {
+  if (process.env.CI === 'true') {
+      return process.env.CIRCLE_BRANCH === 'main';
+  }
+
   const val = (process.env.SKIP_INDEX_SEARCH || '').toLowerCase();
-  const ci = (process.env.CI || '').toLowerCase();
-  if (ci === 'true' || ci === '1') return false;
   return ['1', 'true'].includes(val);
 }
 

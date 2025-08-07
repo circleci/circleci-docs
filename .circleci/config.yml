@@ -18,7 +18,7 @@ executors:
 
   ruby_executor:
     docker:
-      - image: cimg/ruby:3.4
+      - image: cimg/ruby:3.4.5
     working_directory: ~/project
 
 commands:
@@ -59,10 +59,7 @@ jobs:
             - "SHA256:Plac654CPBty6yA26H7QMKCqM0yD1XWds7UwNqOYzJU"
       - run:
           name: Install Node Dependencies
-          command: |
-            set -e
-            echo "[INFO] Installing Node dependencies..."
-            npm ci
+          command: npm ci
       - run:
           name: Build the Documentation Site with Antora
           command: |
@@ -82,19 +79,15 @@ jobs:
   validate:
     executor: ruby_executor
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - run:
-          name: Install HTML Proofer
-          command: |
-            set -e
-            echo "[INFO] Installing HTML Proofer gem..."
-            sudo gem install html-proofer
+          name: Dependencies
+          command: bundle install
       - run:
-          name: Run HTML Proofer Validation
+          name: html-proofer
           command: |
-            set -e
-            echo "[INFO] Validating built site with HTML Proofer..."
             # Handle path prefix and ignore search template placeholders
             htmlproofer ./build \
               --ignore-empty-alt \
@@ -138,29 +131,29 @@ jobs:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
 workflows:
-  lint:
-    unless:
-      equal: [main, << pipeline.git.branch >>]
+  main:
     jobs:
       - vale/lint:
           reference_branch: main
           base_dir: docs
-  build_validate_and_deploy:
-    jobs:
+          filters:
+            branches:
+              ignore: main
+
       - build:
           context: circleci-docs-static
+
       - validate:
           requires: [build]
+
       - deploy-production:
           requires: [validate]
           filters:
             branches:
               only: main
           context:
-            [
-              circleci-docs-static,
-              docs-platform-assets,
-              web-ui-npm,
-              web-ui-datadog,
-            ]
+            - circleci-docs-static
+            - docs-platform-assets
+            - web-ui-npm
+            - web-ui-datadog
           bucket_name: "circleci-docs-platform-assets"
