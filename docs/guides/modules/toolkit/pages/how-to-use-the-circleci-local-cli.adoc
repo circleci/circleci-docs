@@ -421,9 +421,7 @@ NOTE: The `trigger` command and its `create` sub-command only apply to pipeline 
 
 For full details on creating, testing, and managing triggers for your organization, see the xref:orchestrate:triggers-overview.adoc[Trigger a pipeline] page.
 
-The `trigger` command has the following sub-command:
-
-- `create` - Create a trigger for your project.
+Use the `create` sub-command to create a trigger for your project.
 
 [,shell]
 ----
