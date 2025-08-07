@@ -415,7 +415,7 @@ For full details on the `dlc purge` sub-command, refer to the link:https://circl
 [#create-a-trigger]
 == Create a trigger
 
-The CircleCI CLI can be used to create triggers for your projects.
+You can use the CircleCI CLI to create triggers for your projects.
 
 NOTE: The `trigger` command and its `create` sub-command only apply to pipeline definitions created with the GitHub App provider (Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Organization Settings[Overview]).
 
@@ -436,8 +436,19 @@ The above example shows the minimal usage. You will be prompted for required val
 
 - `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines].
 
-
 - `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
+
+- `--event-preset` is the flag that allows you to specify xref:orchestrate:github-trigger-event-options.adoc[the name of the event preset] to use when filtering events for this trigger. The value can be any of:
+** `all-pushes`
+** `only-tags`
+** `default-branch-pushes`
+** `only-build-prs`
+** `only-open-prs`
+** `only-labeled-prs`
+** `only-merged-prs`
+** `only-ready-for-review-prs`
+** `only-branch-delete`
+** `only-build-pushes-to-non-draft-prs`
 
 For full details on this command and sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_trigger.html[CLI docs].
 
