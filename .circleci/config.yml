@@ -119,7 +119,8 @@ workflows:
               ignore: main
 
       - build:
-          context: circleci-docs-static
+          context:
+            - circleci-docs-static
 
       - validate:
           requires:

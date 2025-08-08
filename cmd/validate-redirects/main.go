@@ -18,8 +18,8 @@ import (
 	"golang.org/x/sync/errgroup"
 	"golang.org/x/sync/semaphore"
 
-	"github.com/circleci/circleci-docs-static/internal/closer"
-	"github.com/circleci/circleci-docs-static/internal/redirects"
+	"github.com/circleci/circleci-docs/internal/closer"
+	"github.com/circleci/circleci-docs/internal/redirects"
 )
 
 const (

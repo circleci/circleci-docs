@@ -1,4 +1,4 @@
-module github.com/circleci/circleci-docs-static
+module github.com/circleci/circleci-docs
 
 go 1.24.4
 

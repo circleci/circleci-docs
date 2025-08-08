@@ -1,5 +1,5 @@
 {
-  "name": "circleci-docs-static",
+  "name": "circleci-docs",
   "version": "1.0.0",
   "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/circleci/circleci-docs-static.git"
+    "url": "git://github.com/circleci/circleci-docs.git"
   },
   "license": "",
   "type": "commonjs",

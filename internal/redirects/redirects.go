@@ -5,7 +5,7 @@ import (
 
 	"github.com/goccy/go-yaml"
 
-	"github.com/circleci/circleci-docs-static/internal/closer"
+	"github.com/circleci/circleci-docs/internal/closer"
 )
 
 const DefaultFile = "scripts/redirects_v2.yml"
