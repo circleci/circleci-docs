@@ -40,11 +40,13 @@ This page details everything you need to know about deleting organizations and p
 [#delete-an-organization]
 == Delete an organization
 
-NOTE: You can only delete an organization when both the below conditions are met:
+[NOTE]
+====
+You can only delete an organization when both the below conditions are met:
 
 - The organization has a Free plan.
 - The user performing the action has an admin role in the organization.
-
+====
 You can delete your organization from the CircleCI web app or via the CircleCI API:
 
 [tabs]
@@ -87,7 +89,7 @@ CircleCI web app::
 . Select the organization associated with the project you want to remove.
 . Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
 . Select **Project Settings** (or the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and then select **Project Settings**).
-. Scroll to the bottom of the Overview page and select **Delete Project** and confirm your choice in the popup.
+. Scroll to the bottom of the Overview page, select **Delete Project**, and confirm your choice in the popup.
 --
 API::
 +
