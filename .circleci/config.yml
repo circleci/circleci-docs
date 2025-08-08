@@ -114,24 +114,25 @@ workflows:
       - vale/lint:
           reference_branch: main
           base_dir: docs
-          filters:
-            branches:
-              ignore: main
+          filters: pipeline.git.branch != "main"
 
       - build:
+          filters: pipeline.git.branch == "main"
+          name: build-main
           context:
             - circleci-docs-static
+      - build:
+          filters: pipeline.git.branch != "main"
 
       - validate:
           requires:
+            - build-main
             - build
 
       - deploy-production:
           requires:
             - validate
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == "main"
           context:
             - circleci-docs-static
             - docs-platform-assets
