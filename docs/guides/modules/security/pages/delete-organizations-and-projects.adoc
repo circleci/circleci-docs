@@ -1,0 +1,107 @@
+= Delete organizations and projects
+:page-platform: Cloud
+:page-description: Learn how to delete organizations and projects in CircleCI.
+:experimental:
+
+This page details everything you need to know about deleting organizations and projects connected to CircleCI.
+
+[cols="1,^1,^1,2", options="header"]
+|===
+| VCS integration | Delete organization | Delete project | Notes
+
+| GitHub App
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| Lore ipsum dolor sit amet.
+
+| GitLab
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| Lore ipsum dolor sit amet.
+
+| Bitbucket Data Center
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| Lore ipsum dolor sit amet.
+
+| GitHub OAuth app
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| Lore ipsum dolor sit amet.
+
+| Bitbucket Cloud
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| Lore ipsum dolor sit amet.
+
+|===
+
+
+[#delete-an-organization]
+== Delete an organization
+
+NOTE: You can only delete an organization when both the below conditions are met:
+
+- The organization has a Free plan.
+- The user performing the action has an admin role in the organization.
+
+You can delete your organization from the CircleCI web app or via the CircleCI API:
+
+[tabs]
+====
+CircleCI web app::
++
+--
+. Select the organization you want to remove.
+. Select **Organization Settings** in the sidebar.
+. Scroll to the bottom of the Overview page and select btn:[Delete Organization].
+. Confirm your choice by entering the organization and selecting the btn:[Permanently Delete Organization] in the popup.
+--
+API::
++
+--
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. You can use the link:https://circleci.com/docs/api/v2/#tag/Organization/operation/deleteOrganization[Delete an organization] endpoint with either your oprganization ID or your organization slug. Both can be retrieved from the CircleCI web app under menu:Organization Settings[Overview].
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/organization/<org-slug-or-id> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+--
+====
+
+[#delete-a-project]
+== Delete a project
+
+NOTE: Only organization admins and project admins can delete projects.
+
+If you want to remove a project from your CircleCI account, follow the steps below. Deleting a project will remove the complete build history. 
+
+[tabs]
+====
+CircleCI web app::
++
+--
+. Select the organization associated with the project you want to remove.
+. Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
+. Select **Project Settings** (or the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and then select **Project Settings**).
+. Scroll to the bottom of the Overview page and select **Delete Project** and confirm your choice in the popup.
+--
+API::
++
+--
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. You will need the project slug to use the link:https://circleci.com/docs/api/v2/#tag/Project/operation/deleteProjectBySlug[Delete a project] endpoint. You can retrieve the project slug from the CircleCI web app under menu:Project Settings[Overview].
++
+[,shell]
+----
+curl --request DELETE \
+  --url https://circleci.com/api/v2/project/<project-slug> \
+  --header "Circle-Token: ${CIRCLE_TOKEN}"
+----
+--
+====
+
+If you encounter an error, open a new link:https://support.circleci.com/hc/en-us/requests/new[support request] with details of the project that you wish to remove. Choose the "Build Failure/Configuration Help/Service Issue" option when opening the request. For more information on submitting support requests, see this https://support.circleci.com/hc/en-us/articles/27162205043995-How-to-submit-a-support-ticket[support article].
