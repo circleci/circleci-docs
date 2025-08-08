@@ -5,20 +5,46 @@
 
 Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to configure your CircleCI pipeline to support manual rollback capabilities.
 
+== Introduction
+
+CircleCI rollbacks support two methods: Rollback by running a custom rollback pipeline or Rollback by workflow re-run. Each method has appropriate use cases, advantages and disadvantages, as follows:
+
+[options="header", cols="1,1,1,1"]
+|===
+|
+|Advantages
+|Disadvantages
+|Applications
+
+|*Rollback by running a custom rollback pipeline*
+a| * Fast - Only execute deployment
+* Full control over rollback process
+a| * Requires pipeline setup
+a| * Complex systems
+* Time-critical requirements
+* Multi-component app deployments
+
+|*Rollback by workflow re-run*
+a| * No pipeline setup required
+a| * Limited control over rollback process
+* Full workflow is rerun
+* Slower execution
+a| * Simple systems
+* Need immediate rollback
+|===
+
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
-* Read through the xref:deploys-overview.adoc[CircleCI deploys overview] guide.
+* Deploy markers *must* be configured in your project. Follow the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up.
+* Familiarity with CircleCI deploys concepts. Find full details in the xref:deploys-overview.adoc[CircleCI deploys overview] guide.
 
 == Set up rollbacks
 
-=== 1. Manually configure deploy markers
-If not already set up, you must configure deploy markers in your CircleCI workflows. Deploy markers track when deployments occur and are essential for rollback functionality. Follow the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up. Autodetected deploy markers are *not* supported for use with rollbacks.
+The following steps guide you through setting up a custom rollback pipeline. This is the recommended rollback method.
 
-The rest of this guide covers how to set up rollbacks using a custom rollback pipeline. At this point, after deploy markers are configured, you can use the xref:rollback-a-project-by-workflow-rerun.adoc[Rollback by workflow rerun] method.
-
-=== 2. Navigate to project overview
+=== 1. Navigate to project overview
 
 . In the CircleCI dashboard, navigate to *Organization Home* from the sidebar.
 . Select the *Overview* link for your project.
@@ -27,6 +53,8 @@ You will see a red Rollback button with a dropdown option on the project overvie
 
 .Rollback options on project overview page
 image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on project overview page]
+
+The followng steps guide you through setting up a custom rollback pipeline. If you want details on how to *Rollback by workflow re-run*, see the <<rollback-by-workflow-re-run, Rollback by workflow re-run>> section at the end of this guide.
 
 === 2. Start the rollback setup
 
@@ -42,9 +70,9 @@ image::guides:ROOT:deploy/set-up-a-rollback-pipeline.png[Set up a rollback pipel
 === 3. Configure the rollback pipeline
 
 . From the "What repo are you deploying?" dropdown, select the repository you want to create rollbacks for.
-. Select *Create pipeline definition* to proceed.
+. Select btn:[Create pipeline definition] to proceed.
 
-CircleCI creates a pipeline definition called rollback-pipeline and use the selected repository to store your rollback configuration.
+CircleCI creates a pipeline definition called `rollback-pipeline` and uses the selected repository to store your rollback configuration.
 
 === 4. Review the generated configuration
 After creating the pipeline definition, the modal will display a pre-generated configuration file for performing rollbacks.
@@ -57,15 +85,15 @@ This config is a template rollback pipeline that includes the following:
 * *Parameters section*: Placeholder parameters that you can customize for your specific deployment needs
 * *Jobs section*: A basic rollback job structure with common rollback configuration setups included (but commented out)
 
-After committing, you can modify the configuration according to your needs by setting your own parameters and rollback logic. You can uncomment the included common rollback setups or write your own custom rollback implementation.
-
 === 5. Create pull request
-After committing the configuration template, the final step is to create a pull request:
+After committing the configuration template, you can create a pull request from the CircleCI UI:
 
 . Select btn:[Create PR] to generate a pull request with your rollback configuration.
 +
 image::guides:ROOT:deploy/rollback-create-pr.png[Create PR for rollback pipeline]
-. Navigate to the pull request in your repository and modify the rollback configuration according to your specific deployment needs.
+. Navigate to the pull request in your repository and modify the rollback configuration according to your specific deployment needs, for example, you can:
+** Set your own parameters and rollback logic.
+** Uncomment the included common rollback setups or write your own custom rollback implementation.
 . Once you have customized the configuration, merge the pull request to complete the rollback setup.
 
 CAUTION: Until the pull request is merged, the rollback setup will not be complete and rollback functionality will not be available.
@@ -97,4 +125,416 @@ circleci run release plan \
 You can also update the status of the rollback deployment as mentioned in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to reflect the state of the rollback accurately in the CircleCI UI.
 
 === 6. Access rollback functionality
-Once the pull request is merged, the rollback setup is complete. You can now use the rollback functionality in the CircleCI UI. For a full guide, see the xref:rollback-a-project-using-the-rollback-pipeline.adoc[Rollback a project using the rollback pipeline] guide.
+Once the pull request is merged, the rollback setup is complete. You can now use the rollback functionality in the CircleCI UI.
+
+== Perform a rollback
+
+To perform a rollback using the rollback pipeline you can select the btn:[Rollback] button on the project overview page or from the deploys UI. The following steps show how to perform a rollback from the project overview page:
+
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the *Overview* link for your project.
+. Select btn:[Rollback].
+. Select btn:[Rollback by running rollback pipeline]. This opens the rollback execution modal.
++
+image::guides:ROOT:deploy/rollback-execution-modal.png[Rollback execution modal]
++
+The modal displays several configuration options with parameters auto-filled based on your rollback configuration. The following sections explain each required property:
++
+*Component Name*:: The name of the component you wish to rollback. If your project deploys multiple components, this helps you choose a specific component you want to rollback.
+*Environment Name*:: The environment in which you wish to perform the rollback.
+*Current Version*:: Once you choose the component name and environment name, this will display all possible current versions. More often than not there should be just one current version available. You could have two in case a new progressive release is ongoing. Choose the version you believe is the current version of your component. To help you out, the relevant commit information is also displayed alongside the version.
+*Target Version*:: Choose the version you wish to rollback to. To help you out, the relevant commit information is also displayed alongside the version.
+*Namespace*:: This is optional. In case you use Kubernetes and do your deployments to a specific namespace, mention your namespace here, otherwise leave it empty.
++
+The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific rollback operation.
+
+. *Execute*. Select btn:[Rollback] to trigger the rollback pipeline
+
+The rollback pipeline will now execute and perform the rollback operation according to your configuration.
+
+== Change Rollback Pipeline
+
+If you have configured a new pipeline and want to trigger this pipeline when performing rollbacks, you can change which pipeline is used for rollback operations.
+
+To select a different pipeline for rollbacks, follow these steps:
+
+. Navigate to your project's Overview page.
+. Go to Settings.
+. Select the Deploys tab.
+. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown.
+
+This process allows you to switch between different rollback pipeline configurations as needed for your project.
+
+== Example rollback pipeline configuration
+
+In this section you can find a full example of a rollback pipeline config. This example uses Helm to perform a rollback on AWS EKS and kubectl to validate its status.
+
+****
+*This template assumes the following:*
+
+. Your deployment is annotated with a "version" label.
+. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way
+****
+
+.Example rollback pipeline configuration
+[source,yaml]
+----
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@5.4.0
+  helm: circleci/helm@3.2.0
+commands:
+  # The following command is needed only for the specific logic in this example. Feel free to remove it if you don't need it.
+  install_yq:
+    steps:
+      - run:
+          name: install yq
+          command: |
+            wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
+            wget https://github.com/mikefarah/yq/releases/latest/download/checksums
+            sha_file=$(sha256sum /tmp/yq | awk '{ print $1 }')
+            sha=$(awk '$1=="yq_linux_amd64"{print $19}' checksums)
+            if [ "$sha_file" != "$sha" ]; then
+                    echo "Checksum failed" >&2
+                    exit 1
+            fi
+            echo "The checksums match."
+            chmod +x /tmp/yq
+  verify_current_version:
+    description: "Verifies that the currently deployed version matches the expected value"
+    parameters:
+      resource_name:
+        type: string
+        description: "Name of the resource to roll back"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace (optional)"
+      current_version:
+        type: string
+        description: "Current version"
+    steps:
+      - run:
+          name: Verify current version
+          command: |
+            RELEASE_NAME="<< parameters.resource_name >>"
+            if [ "<< parameters.current_version >>" == "" ]; then
+              echo "Current version not specified."
+              exit 0
+            fi
+            if [ -z "$RELEASE_NAME" ]; then
+              echo "Missing release name"
+              exit 1
+            fi
+            helm get manifest "<< parameters.resource_name >>" --namespace "<< parameters.namespace >>" > manifest.yaml
+            VERSION_LABEL=$(yq e '
+              select(.kind == "Deployment") |
+              .spec.template.metadata.labels.version
+            ' manifest.yaml)
+            if [ -z "$VERSION_LABEL" ] || [ "$VERSION_LABEL" == "null" ]; then
+              echo "Could not extract version label from manifest"
+              exit 1
+            fi
+            if [ "$VERSION_LABEL" == "<< parameters.current_version >>" ]; then
+              echo "Version matches input version << parameters.current_version >>"
+            else
+              echo "Version mismatch: expected << parameters.current_version >> but found $VERSION_LABEL"
+              exit 1
+            fi
+  retrieve_target_revision:
+    description: "Retrieve previous version"
+    parameters:
+      resource_name:
+        type: string
+        description: "Name of the resource to roll back"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace (optional)"
+      target_version:
+        type: string
+        description: "Target version"
+    steps:
+      - run:
+          name: Identify previous revision
+          command: |
+            TARGET_VERSION="<< parameters.target_version >>"
+            RELEASE_NAME="<< parameters.resource_name >>"
+            NAMESPACE="<< parameters.namespace >>"
+            if [ -z "$TARGET_VERSION" ]; then
+              echo "TARGET_VERSION is required"
+              exit 1
+            fi
+            # Get full release history
+            REVISIONS=$(helm history "$RELEASE_NAME" --namespace "$NAMESPACE" --output json | jq '.[].revision')
+            if [ -z "$REVISIONS" ]; then
+              echo "Could not fetch Helm history for release '$RELEASE_NAME'"
+              exit 1
+            fi
+            # Search each revision for a Deployment with the matching version label
+            TARGET_REVISION=""
+            for REV in $REVISIONS; do
+              helm get manifest "$RELEASE_NAME" --namespace "$NAMESPACE" --revision "$REV" > manifest.yaml || continue
+              VERSION_LABEL=$(yq e '
+                select(.kind == "Deployment") |
+                .spec.template.metadata.labels.version
+              ' manifest.yaml)
+              if [ "$VERSION_LABEL" == "$TARGET_VERSION" ]; then
+                TARGET_REVISION=$REV
+                break
+              fi
+            done
+            if [ -n "$TARGET_REVISION" ]; then
+              echo "export CONTAINER_VERSION=${TARGET_VERSION}" >> $BASH_ENV
+              echo "export TARGET_REVISION=${TARGET_REVISION}" >> $BASH_ENV
+              source $BASH_ENV
+            else
+              echo "No revision found with version label: $TARGET_VERSION"
+              exit 1
+            fi
+  perform_rollback:
+    description: "perform rollback"
+    parameters:
+      resource_name:
+        type: string
+        description: "Name of the resource to roll back"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace (optional)"
+    steps:
+      - run:
+          name: Perform rollback
+          command: |
+            helm rollback << parameters.resource_name >> ${TARGET_REVISION}
+  # This command validates the deployment after rolling back. The provided example uses kubectl to check the ready replicas and number of restarts
+  # of pods associated with the deployment and causes the job to fail if the deployment is not ready or has too many restarts by
+  # the end of the validation duration.
+  # Mind the fact that the example assumes you have an app label with value equal to the component name, in order to retrieve the pods.
+  # If that is not the case you will have to adapt the logic in the script.
+  validate_deployment:
+    description: "Validates the deployment after rolling back"
+    parameters:
+      resource_name:
+        type: string
+        description: "Name of the resource that has been rolled back"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace (optional)"
+      target_version:
+        type: string
+        description: "Target version"
+      max_restarts:
+        type: integer
+        default: 5
+        description: "Maximum number of allowed restarts"
+      duration:
+        type: integer
+        default: 600
+        description: "Duration of the validation in seconds"
+    steps:
+      - run:
+          name: Validate deployment
+          command: |
+            CHECK_DURATION=$((SECONDS+<< parameters.duration >>))  # 10 minutes duration
+            REPLICAS_OK=false
+
+            LABEL_SELECTOR="app=<< parameters.resource_name >>,version=<< parameters.target_version >>"
+            DEPLOYMENT_FOUND=false
+            echo "Starting validation of version: << parameters.target_version >>"
+            while [ $SECONDS -lt $CHECK_DURATION ]; do
+              DEPLOYMENT=$(kubectl get deployment << parameters.resource_name >>  -n << parameters.namespace >> --ignore-not-found -o json)
+
+              if [ -n "$DEPLOYMENT" ]; then
+                  DEPLOYMENT_FOUND=true
+                  DESIRED=$(echo "$DEPLOYMENT" | jq -r '.spec.replicas // 0')
+                  READY=$(echo "$DEPLOYMENT" | jq -r '.status.readyReplicas // 0')
+
+                  # Handle empty values
+                  DESIRED=${DESIRED:-0}
+                  READY=${READY:-0}
+
+                  echo "Current replicas $READY/$DESIRED"
+                  if [ "$DESIRED" -eq "$READY" ]; then
+                    REPLICAS_OK=true
+                  else
+                    REPLICAS_OK=false
+                  fi
+              else
+                  DEPLOYMENT_FOUND=false
+                  echo "Deployment not found"
+                  continue
+              fi
+              RESTARTS=$(kubectl get pods -l $LABEL_SELECTOR -n << parameters.namespace >> \
+                -o jsonpath='{.items[*].status.containerStatuses[*].restartCount}' 2>/dev/null | awk '{sum=0; for(i=1; i<=NF; i++) sum+=$i; print sum+0}')
+              # Handle potential errors
+              if [[ -z "$RESTARTS" || ! "$RESTARTS" =~ ^[0-9]+$ ]]; then
+                RESTARTS=0
+              fi
+              echo "Number of restarts $RESTARTS"
+              if [ $RESTARTS -gt << parameters.max_restarts >> ]; then
+                echo "FAILURE_REASON='Exceeded maximum number of restarts'" > failure_reason.env
+                exit 1
+              fi
+              sleep 10  # Check every 10 seconds
+            done
+            if [ $DEPLOYMENT_FOUND = false ]; then
+                echo "FAILURE_REASON='Deployment was not found'" > failure_reason.env
+                exit 1
+            fi
+            if [ $REPLICAS_OK = false ]; then
+                echo "FAILURE_REASON='Desired replicas doesn't match ready replica'" > failure_reason.env
+                exit 1
+            fi
+jobs:
+  rollback-component:
+    docker:
+      - image: cimg/aws:2023.03
+    environment:
+      COMPONENT_NAME: << pipeline.deploy.component_name >>
+      NAMESPACE: << pipeline.deploy.namespace >>
+      ENVIRONMENT_NAME: << pipeline.deploy.environment_name >>
+      TARGET_VERSION: << pipeline.deploy.target_version >>
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      ### Uncomment this section if you are using AWS EKS, otherwise add the steps to authenticate with your platform
+      - aws-cli/setup:
+          role_arn: $AWS_OIDC_ROLE
+          region: $AWS_REGION
+          role_session_name: "example"
+          session_duration: "1800"
+      - run: aws sts get-caller-identity
+      - run: aws configure list
+      - run:
+          name: Update kubeconfig for EKS
+          command: |
+            aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME"
+            aws sts get-caller-identity  # Verify credentials are still valid
+      - helm/install_helm_client
+      - install_yq
+      # This command is used to validate that the current version on your cluster matches the value that was specified when
+      # the pipeline was triggered. If that is not the case it is possible that the deployment has been updated in the meantime
+      # this check is optional and can be removed if you don't need it.
+      # Refer to the commands section above for details about the implementation of this command.
+      - verify_current_version:
+          resource_name: "<< pipeline.deploy.component_name >>"
+          namespace: "<< pipeline.deploy.namespace >>"
+          current_version: "<< pipeline.deploy.current_version >>"
+      # This command is used to retrieve the target revision that will be used to perform the rollback.
+      # Depending on your implementation you may not need this, in which case feel free to remove it.
+      # Refer to the commands section above for details about the implementation of this command.
+      - retrieve_target_revision:
+          resource_name: "<< pipeline.deploy.component_name >>"
+          namespace: "<< pipeline.deploy.namespace >>"
+          target_version: "<< pipeline.deploy.target_version >>"
+      # This step will create a new deploy with PENDING status that will show up in the deploys tab in the UI
+      - run:
+          name: Plan release of deploy release smoke test
+          command: |
+            circleci run release plan  \
+              --environment-name=${ENVIRONMENT_NAME} \
+              --namespace=${NAMESPACE} \
+              --component-name=${COMPONENT_NAME} \
+              --target-version=${TARGET_VERSION} \
+              --rollback
+      # This command will perform the actual rollback, using the revision retrieved by retrieve_target_revision
+      - perform_rollback:
+          resource_name: "<< pipeline.deploy.component_name >>"
+          namespace: "<< pipeline.deploy.namespace >>"
+      # This step will update the PENDING deployment marker to RUNNING.
+      # If you are not going to perform any validation you can just remove this.
+      - run:
+          name: Update planned release to RUNNING
+          command: |
+            circleci run release update \
+              --status=RUNNING
+      # This step performs validation on the deployment status after the rollback and sets the failure reason if the validation fails.
+      # if you don't want to perform any validation you can just remove this.
+      - validate_deployment:
+          resource_name: "<< pipeline.deploy.component_name >>"
+          target_version: "<< pipeline.deploy.target_version >>"
+          namespace: "<< pipeline.deploy.namespace >>"
+      # These last two steps update the PENDING deployment marker to SUCCESS or FAILED, based on the outcome of the job.
+      - run:
+          name: Update planned release to SUCCESS
+          command: |
+            # if the rollback failed, we don't want to update the status to SUCCESS. This is unnecessary if there is no logic around
+            # validating the deployment status.
+            if [ -f failure_reason.env ]; then
+              exit 0
+            fi
+            circleci run release update \
+              --status=SUCCESS
+          when: on_success
+      - run:
+          name: Update planned release to FAILED
+          command: |
+            if [ -f failure_reason.env ]; then
+              source failure_reason.env
+            fi
+            FAILURE_REASON="${FAILURE_REASON:-}"
+            circleci run release update \
+             --status=FAILED \
+             --failure-reason="$FAILURE_REASON"
+          when: on_fail
+  # This job handles the cancellation of the rollback deploy marker if the rollback job is canceled
+  cancel-rollback:
+    docker:
+      - image: cimg/aws:2023.03
+    steps:
+      - run:
+          name: Update planned release to CANCELED
+          command: |
+            circleci run release update \
+             --status=CANCELED
+workflows:
+  rollback:
+    jobs:
+      - rollback-component:
+          context:
+            # provide any required context
+      - cancel-rollback:
+          context:
+            # provide any required context
+          requires:
+            - rollback-component:
+              - canceled
+          filters:
+            branches:
+              only: main
+----
+
+
+== Rollback by workflow re-run
+
+Workflow rerun rollbacks do not need any additional configuration beyond setting up deploy markers. There are advantages and disadvantages to using this method, as follows:
+
+* *Advantage*: No setup required. This rollback method works immediately after configuring deploy markers.
+* *Disadvantage*: The entire workflow will be re-run, which may not always be desirable depending on your workflow complexity and duration.
+
+The Rollback by workflow re-run method is only recommended for simple deployments. For complete control over the rollback process and to avoid re-running entire workflows, consider using the custom rollback pipeline approach described above.
+
+To perform a rollback using workflow rerun:
+
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the *Overview* link for your project.
+. Select btn:[Rollback].
+. Select btn:[Rollback by workflow re-run].
+
+.Rollback options on project overview page
+image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on project overview page]
+
+This will open the workflow re-run modal with the following options:
+
+* *Choose a version*. Select the version you want to roll back to from the list of available versions.
+* *Confirm rollback*. Select btn:[Next], confirm rollback to proceed.
+
+The workflow that originally deployed the selected version will be re-run, effectively performing a rollback to that version.
+
+
+

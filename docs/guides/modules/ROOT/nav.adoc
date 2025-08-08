@@ -161,19 +161,16 @@
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 
 * Deploy with CircleCI
-** xref:deploy:deployment-overview.adoc[Overview of deployment on CircleCI]
-** xref:deploy:deploys-overview.adoc[CircleCI deploys overview]
+** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
+** Setup
+*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
+*** xref:deploy:set-up-rollbacks.adoc[Rollbacks]
 ** Release agent setup
 *** xref:deploy:set-up-circleci-deploys.adoc[Set up CircleCI deploys]
 *** xref:deploy:set-up-the-release-agent.adoc[Set up the release agent]
 *** xref:deploy:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
 *** xref:deploy:update-the-kubernetes-release-agent.adoc[Update the Kubernetes release agent]
 *** xref:deploy:manage-deploys.adoc[Manage deploys]
-** Agentless setup
-*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
-*** xref:deploy:set-up-rollbacks.adoc[Set up rollbacks in CircleCI]
-*** xref:deploy:rollback-a-project-using-the-rollback-pipeline.adoc[Rollback a project using the rollback pipeline]
-*** xref:deploy:rollback-a-project-by-workflow-rerun.adoc[Rollback a project by workflow rerun]
 ** How-to guides
 *** xref:deploy:deploy-to-amazon-sagemaker.adoc[Deploy to Amazon SageMaker]
 *** xref:deploy:deploy-android-applications.adoc[Deploy Android applications]
