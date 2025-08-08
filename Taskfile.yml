@@ -57,7 +57,7 @@ tasks:
     cmds:
       - dir=$(mktemp -d);
         cp -r "./build" "${dir}/docs";
-        echo aws s3 sync "${dir}" "s3://{{.BUCKET}}/" --delete;
+        aws s3 sync "${dir}" "s3://{{.BUCKET}}/" --delete;
         rm -rf "${dir}";
 
   deploy-redirects:
