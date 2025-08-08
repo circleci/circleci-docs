@@ -79,7 +79,9 @@ curl --request DELETE \
 
 NOTE: Only organization admins and project admins can delete projects.
 
-If you want to remove a project from your CircleCI account, follow the steps below. Deleting a project removes the complete build history. 
+If you want to remove a project from your CircleCI account, follow the steps below.
+
+CAUTION: Deleting a project removes the complete build history. 
 
 [tabs]
 ====
