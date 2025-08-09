@@ -252,6 +252,7 @@
 *** xref:security:rotate-project-ssh-keys.adoc[Rotate project SSH keys]
 *** xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
 *** xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories]
+*** xref:security:delete-organizations-and-projects.adoc[Delete organizations and projects]
 
 * Manage config policies
 ** xref:config-policies:config-policy-management-overview.adoc[Config policy management overview]

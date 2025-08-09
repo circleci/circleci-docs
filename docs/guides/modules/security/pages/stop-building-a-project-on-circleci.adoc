@@ -10,7 +10,7 @@ This page outlines how to stop builds for a project on CircleCI, and how to dele
 [#stop-building-a-project]
 == Stop building a project
 
-CAUTION: The **Stop Building** option will not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI you need to contact CircleCI support, as detailed in the <<remove-a-project-from-circleci>> section.
+CAUTION: The **Stop Building** option will not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI, see the xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a project] documentation.
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
@@ -20,16 +20,3 @@ If you are using the GitHub OAuth App or Bitbucket Cloud, to stop building one o
 . Scroll to the bottom of the Overview page and select **Stop Building**. You will need to reconfirm your choice in the popup.
 
 NOTE: If you want to start building this project again, just go to the **Projects** page in the web app and select **Set Up Project** and follow the set up steps.
-
-[#remove-a-project-from-circleci]
-== Delete a project from CircleCI
-
-If you want to remove a project from your CircleCI account, follow the steps below. Deleting a project will remove the complete build history. Only organization admins and project admins can delete projects.
-
-. In the link:https://app.circleci.com/home/[CircleCI web app], select the organization associated with the project you want to remove.
-. Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
-. Select **Project Settings** (or the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and then select **Project Settings**).
-. Scroll to the bottom of the Overview page and select **Delete Project** and reconfirm your choice in the popup.
-
-
-If you encounter an error, open a new link:https://support.circleci.com/hc/en-us/requests/new[support request] with details of the project that you wish to remove. Choose the "Build Failure/Configuration Help/Service Issue" option when opening the request. For more information on submitting support requests, see this https://support.circleci.com/hc/en-us/articles/27162205043995-How-to-submit-a-support-ticket[support article].
