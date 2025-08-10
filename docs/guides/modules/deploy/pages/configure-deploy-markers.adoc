@@ -44,11 +44,11 @@ jobs:
 
 In this example, note the following flags and options:
 
-* The `deploy-name` parameter is used to identify the deployment. `deploy-name` is an arbitrary positional argument that will be used to identify the deployment and should be unique within the workflow. If not specified, the deployment name will be set to `default`. If you are deploying multiple components or to multiple environments from a single workflow, you need to provide the command with a deployment name.
-* The `environment-name` parameter sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
-* The `component-name` parameter sets the name that will be displayed in the Deploys UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
-* The `target-version` parameter should match the version being deployed. Some examples are provided <<examples-for-target-version,in the next section>>.
-* The `namespace` parameter is optional and can be provided to use a value other than `default`.
+* The `<deploy-name>` argument is used to identify the deployment. `deploy-name` is an arbitrary positional argument that will be used to identify the deployment and should be unique within the workflow. If not specified, the deployment name will be set to `default`. If you are deploying multiple components or to multiple environments from a single workflow, you need to provide the command with a deployment name.
+* The `--environment-name` flag sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
+* The `--component-name` flag sets the name that will be displayed in the Deploys UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
+* The `--target-version` flag should match the version being deployed. Some examples are provided <<examples-for-target-version,in the next section>>.
+* The `--namespace` flag is optional and can be provided to use a value other than `default`.
 
 Configuring `circleci run release plan` identifies the deployment you are planning so that you can reference it to update its status later on.
 
