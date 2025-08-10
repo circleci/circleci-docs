@@ -277,11 +277,11 @@ jobs:
       - run: circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
 ----
 
-** The `environment-name` specifies the target environment. If the environment does not exist, it will be created.
-** The `component-name` parameter sets the name that will be displayed in the CircleCI UI.
-** The `target-version` parameter should match the name of the version being deployed. Some examples are provided <<examples-for-target-version,above>>.
+** The `--environment-name` flag specifies the target environment. If the environment does not exist, it will be created.
+** The `--component-name` flag sets the name that will be displayed in the CircleCI UI.
+** The `--target-version` flag should match the name of the version being deployed. Some examples are provided <<examples-for-target-version,above>>.
 ** (Optional) You can provide the following parameter if required:
-*** The `namespace` parameter can be provided to use a value other than `default`.
+*** The `--namespace` flag can be provided to use a value other than `default`.
 
 == Manage environments
 
