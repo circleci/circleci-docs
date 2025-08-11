@@ -1,5 +1,5 @@
 = Deployment and deploy management overview
-:page-alias: deploys-overview
+:page-aliases: deploys-overview.adoc
 :page-platform: Cloud, Server v4+
 :page-description: Learn the basics of deployment and deploys management with CircleCI.
 :experimental:

@@ -38,11 +38,11 @@ a| * Simple systems
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
 * Deploy markers *must* be configured in your project. Follow the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up.
-* Familiarity with CircleCI deploys concepts. Find full details in the xref:deploys-overview.adoc[CircleCI deploys overview] guide.
+* Familiarity with CircleCI deploys concepts. Find full details in the xref:deployment-overview.adoc[CircleCI deploys overview] guide.
 
 == Set up rollbacks
 
-The following steps guide you through setting up a custom rollback pipeline. This is the recommended rollback method.
+The following steps guide you through setting up a custom rollback pipeline. Using a custom rollback pipeline is the recommended rollback method.
 
 === 1. Navigate to project overview
 
@@ -54,7 +54,7 @@ You will see a red Rollback button with a dropdown option on the project overvie
 .Rollback options on project overview page
 image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on project overview page]
 
-The followng steps guide you through setting up a custom rollback pipeline. If you want details on how to *Rollback by workflow re-run*, see the <<rollback-by-workflow-re-run, Rollback by workflow re-run>> section at the end of this guide.
+The following steps guide you through setting up a custom rollback pipeline. If you want details on how to *Rollback by workflow re-run*, see the <<rollback-by-workflow-re-run, Rollback by workflow re-run>> section at the end of this guide.
 
 === 2. Start the rollback setup
 
@@ -145,7 +145,7 @@ The modal displays several configuration options with parameters auto-filled bas
 *Environment Name*:: The environment in which you wish to perform the rollback.
 *Current Version*:: Once you choose the component name and environment name, this will display all possible current versions. More often than not there should be just one current version available. You could have two in case a new progressive release is ongoing. Choose the version you believe is the current version of your component. To help you out, the relevant commit information is also displayed alongside the version.
 *Target Version*:: Choose the version you wish to rollback to. To help you out, the relevant commit information is also displayed alongside the version.
-*Namespace*:: This is optional. In case you use Kubernetes and do your deployments to a specific namespace, mention your namespace here, otherwise leave it empty.
+*Namespace*:: Optional. In case you use Kubernetes and do your deployments to a specific namespace, mention your namespace here, otherwise leave it empty.
 +
 The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific rollback operation.
 
@@ -511,7 +511,7 @@ workflows:
 
 == Rollback by workflow re-run
 
-Workflow rerun rollbacks do not need any additional configuration beyond setting up deploy markers. There are advantages and disadvantages to using this method, as follows:
+Workflow rerun rollbacks do not need any additional configuration beyond setting up deploy markers. Advantages and disadvantages of using this method are as follows:
 
 * *Advantage*: No setup required. This rollback method works immediately after configuring deploy markers.
 * *Disadvantage*: The entire workflow will be re-run, which may not always be desirable depending on your workflow complexity and duration.
