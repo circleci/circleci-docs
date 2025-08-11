@@ -5,6 +5,8 @@
 
 This page details everything you need to know about deleting organizations and projects connected to CircleCI.
 
+If you only want to stop builds for a project and keep the complete build history, see the xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI] page.
+
 [cols="1,^1,^1,2", options="header"]
 |===
 | VCS integration | Delete organization | Delete project | Notes

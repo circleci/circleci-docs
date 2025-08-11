@@ -5,7 +5,7 @@
 
 [#introduction]
 == Introduction
-This page outlines how to stop builds for a project on CircleCI, and how to delete a project when required.
+This page outlines how to stop builds for a project on CircleCI.
 
 [#stop-building-a-project]
 == Stop building a project
