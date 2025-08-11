@@ -200,12 +200,6 @@
 - old: /deploy/manage-deploys/
   new: /guides/deploy/manage-deploys/
 
-- old: /deploy/rollback-a-project-by-workflow-rerun/
-  new: /guides/deploy/rollback-a-project-by-workflow-rerun/
-
-- old: /deploy/rollback-a-project-using-the-rollback-pipeline/
-  new: /guides/deploy/rollback-a-project-using-the-rollback-pipeline/
-
 - old: /deploy/set-up-circleci-deploys/
   new: /guides/deploy/set-up-circleci-deploys/
 
