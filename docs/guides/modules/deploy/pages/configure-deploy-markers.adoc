@@ -285,7 +285,7 @@ jobs:
 
 == Manage environments
 
-In this guide we created an environment integration by supplying a name with the `--envionment-name` flag. This was an optional step. If you did not specify an environment CircleCI will have created one for you with the name `default`.
+In this guide we created an environment integration by supplying a name with the `--environment-name` flag. This was an optional step. If you did not specify an environment CircleCI will have created one for you with the name `default`.
 
 You can also create an environment integration manually in the CircleCI web app.
 
