@@ -194,9 +194,6 @@
 - old: /deploy/configure-your-kubernetes-components/
   new: /guides/deploy/configure-your-kubernetes-components/
 
-- old: /deploy/deploys-overview/
-  new: /guides/deploy/deploys-overview/
-
 - old: /deploy/manage-deploys/
   new: /guides/deploy/manage-deploys/
 
