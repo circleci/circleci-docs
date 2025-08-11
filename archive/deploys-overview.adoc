@@ -50,12 +50,12 @@ Configure environment integrations to install the CircleCI release agent into yo
 
 Developers can monitor deployments in the CircleCI web app, and run commands to manage those deployments from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
 
-[#releases-concepts]
+
 == Concepts
 
 The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploys.
 
-[#component]
+
 === Component
 
 A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `circleci.com/component-name` label.
