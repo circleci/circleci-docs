@@ -17,7 +17,12 @@ module.exports.register = function () {
     await fsPromises.writeFile(outPath, JSON.stringify({ pages }, null, 2));
     console.log(`Wrote JSON to ${outPath}`);
 
-    if (!shouldSkipIndexing() && !hasIndexed(tempDir) && hasAlgoliaCredentials()) {
+    if (shouldSkipIndexing()) {
+        console.log('Skipping Algolia indexing (requested by configuration)');
+        return;
+    }
+
+    if (!hasIndexed(tempDir) && hasAlgoliaCredentials()) {
       try {
         await indexToAlgolia(pages);
         await fsPromises.writeFile(path.join(tempDir, 'algolia-indexed.marker'), new Date().toISOString());
@@ -102,7 +107,7 @@ function getNavEntriesByUrl(items = [], accum = {}, trail = []) {
 
 function shouldSkipIndexing() {
   if (process.env.CI === 'true') {
-      return process.env.CIRCLE_BRANCH === 'main';
+      return process.env.CIRCLE_BRANCH !== 'main';
   }
 
   const val = (process.env.SKIP_INDEX_SEARCH || '').toLowerCase();
