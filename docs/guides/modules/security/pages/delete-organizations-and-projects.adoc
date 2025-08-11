@@ -12,12 +12,12 @@ This page details everything you need to know about deleting organizations and p
 | GitHub App
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
-| Lorem ipsum dolor sit amet.
+| The organization will remain visible for several hours before disappearing.
 
 | GitLab
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
-| Lorem ipsum dolor sit amet.
+| The organization will remain visible for several hours before disappearing.
 
 | Bitbucket Data Center
 | [.circle-green]#Yes#
@@ -27,12 +27,12 @@ This page details everything you need to know about deleting organizations and p
 | GitHub OAuth app
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
-| Lorem ipsum dolor sit amet.
+| Deleting the organization removes all content from the organization. The organization will remain visible but without data underneath.
 
 | Bitbucket Cloud
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
-| Lorem ipsum dolor sit amet.
+| Deleting the organization removes all content from the organization. The organization will remain visible but without data underneath.
 
 |===
 
@@ -49,7 +49,7 @@ You can only delete an organization when both the below conditions are met:
 ====
 You can delete your organization from the CircleCI web app or via the CircleCI API:
 
-WARNING: This action will permanently delete the organization for you and all organization members.
+CAUTION: This action will permanently delete the organization for you and all organization members.
 
 [tabs]
 ====
@@ -111,4 +111,7 @@ curl --request DELETE \
 --
 ====
 
-If you encounter an error, open a new link:https://support.circleci.com/hc/en-us/requests/new[support request] with details of the project that you wish to remove. Choose the "Build Failure/Configuration Help/Service Issue" option when opening the request. For more information on submitting support requests, see this https://support.circleci.com/hc/en-us/articles/27162205043995-How-to-submit-a-support-ticket[support article].
+If you encounter an error, open a new link:https://support.circleci.com/hc/en-us/requests/new[support request] with details of the project that you wish to remove. Choose the "Build Failure/Configuration Help/Service Issue" option when opening the request.
+
+For more information on submitting support requests, see https://support.circleci.com/hc/en-us/articles/27162205043995-How-to-submit-a-support-ticket[How to submit a support ticket
+].
