@@ -24,7 +24,7 @@ If you only want to stop builds for a project and keep the complete build histor
 | Bitbucket Data Center
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
-| Lorem ipsum dolor sit amet.
+| The organization will remain visible for several hours before disappearing.
 
 | GitHub OAuth app
 | [.circle-green]#Yes#
