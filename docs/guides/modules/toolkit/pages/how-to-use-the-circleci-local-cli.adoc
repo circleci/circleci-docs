@@ -487,7 +487,7 @@ Use the `create` sub-command to create a trigger for your project.
 circleci trigger create <project-id>  [flags]
 ----
 
-The above example shows the minimal usage. You will be prompted for required values if you don't intially provide them using the appropriate flags.
+The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags.
 
 - `<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
@@ -508,7 +508,6 @@ The above example shows the minimal usage. You will be prompted for required val
 ** `only-build-pushes-to-non-draft-prs`
 
 For full details on this command and sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_trigger.html[CLI docs].
-=======
 
 [#context-management]
 == Context management
