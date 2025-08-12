@@ -23,8 +23,8 @@ This document provides comprehensive guidance for developers working on the Circ
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/circleci/circleci-docs-static.git
-   cd circleci-docs-static
+   git clone https://github.com/circleci/circleci-docs.git
+   cd circleci-docs
    ```
 
 2. **Install dependencies**:

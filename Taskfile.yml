@@ -1,0 +1,122 @@
+version: '3'
+
+vars:
+  BUCKET: "circleci-docs-platform-assets"
+  RESULTS_DIR: test-reports
+  TEST_REPORT: test-reports/tests.xml
+  LINT_REPORT: test-reports/lint.xml
+
+tasks:
+  lint:
+    desc: Run `golangci-lint run` to lint the code
+    summary: Lint the project with golangci-lint
+    vars:
+      ARGS: '{{default "./..." .CLI_ARGS}}'
+    cmds:
+      - go tool golangci-lint run {{.ARGS}}
+
+  lint-migrate:
+    desc: Migrate the `golangci-lint` config
+    cmds:
+      - go tool golangci-lint migrate
+
+  fmt:
+    desc: Format the code
+    vars:
+      ARGS: '{{default "." .CLI_ARGS}}'
+    cmds:
+      - go tool gosimports -local "$(go list -m)" -w {{.ARGS}}
+
+  test:
+    desc: Run the tests
+    vars:
+      ARGS: '{{default "./..." .CLI_ARGS}}'
+    cmds:
+      - mkdir -p {{.RESULTS_DIR}}
+      - go tool gotestsum -- -race {{.ARGS}}
+
+  generate:
+    desc: Run generation of any generated code
+    vars:
+      ARGS: '{{default "./..." .CLI_ARGS}}'
+    cmds:
+      - go generate -x {{.ARGS}}
+
+  mod-tidy:
+    desc: Run 'go mod tidy' to clean up module files.
+    cmds:
+      - go mod tidy -v
+
+  mod-download:
+    desc: Run 'go mod download' to retrieve module files.
+    cmds:
+      - go mod download -x
+
+  deploy:
+    desc: Deploy to S3 bucket
+    cmds:
+      - dir=$(mktemp -d);
+        cp -r "./build" "${dir}/docs";
+        aws s3 sync "${dir}" "s3://{{.BUCKET}}/" --delete;
+        rm -rf "${dir}";
+
+  deploy-redirects:
+    desc: Build main
+    cmds:
+      - go run ./cmd/create-redirects {{.BUCKET}}
+
+  validate-redirects:
+    desc: Build main
+    cmds:
+      - go run ./cmd/validate-redirects https://circleci.com
+
+  build:
+    desc: Build docs
+    cmds:
+      - npm run build:docs
+
+  validate-html:
+    desc: Validate HTML, links, etc
+    cmds:
+      - go tool htmltest
+
+  # Tasks for running the service locally
+
+  run-publicapi:
+    desc: Run the public API
+    cmds:
+      - go run ./cmd/publicapi
+
+  run-internalapi:
+    desc: Run the internal API
+    cmds:
+      - go run ./cmd/internalapi
+
+  # Tasks below here are intended mainly to be run as part of CI
+
+  ci:lint:
+    desc: Run `golangci-lint run` to lint the code, outputting a report.
+    cmds:
+      - mkdir -p "{{.RESULTS_DIR}}"
+      - task: lint
+        vars:
+          CLI_ARGS: |
+            ./... \
+            --output.junit-xml.path "{{.LINT_REPORT}}" --output.junit-xml.extended \
+            --output.text.path=stdout --output.text.colors=true
+
+  ci:test:
+    desc: Run the tests and output the test results
+    vars:
+      ARGS: '{{default "./..." .CLI_ARGS}}'
+    cmds:
+      - mkdir -p {{.RESULTS_DIR}}
+      - go tool gotestsum --junitfile="{{.TEST_REPORT}}" -- -race -count=1 {{.ARGS}}
+
+  ci:diff:
+    desc: Check no diffs
+    cmds:
+      - task: generate
+      - task: fmt
+      - task: mod-tidy
+      - git diff --exit-code

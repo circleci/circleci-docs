@@ -20,7 +20,7 @@ Your role within your org is determined differently depending on how you integra
 * If your code is integrated with CircleCI via the GitHub App, GitLab, or Bitbucket Data Center, you can check roles by navigating to menu:Organization Settings[People]. Full details on roles and permissions are available in the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview].
 
 ****
-To find out which GitHub integration you are using, head to the link:https://circleci.com/app[CircleCI web app], select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
+To find out which GitHub integration you are using, head to the link:https://app.circleci.com[CircleCI web app], select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
 
 * This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
 * This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
