@@ -10,7 +10,7 @@ This page outlines how to stop builds for a project on CircleCI.
 [#stop-building-a-project]
 == Stop building a project
 
-CAUTION: The **Stop Building** option will not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI, see the xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a project] documentation.
+CAUTION: The **Stop Building** option does not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI, see the xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a project] documentation.
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 

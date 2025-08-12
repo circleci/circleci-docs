@@ -101,6 +101,16 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
+
+| Rename org
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| Delete org
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 |===
 
 [cols=4*, options="header"]
@@ -410,6 +420,11 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-green]#**Yes**#
 
 | Manage project
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| Delete project
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
