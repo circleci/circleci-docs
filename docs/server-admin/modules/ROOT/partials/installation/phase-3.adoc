@@ -699,9 +699,16 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
         "arn:aws:ec2:*:*:launch-template/*",
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
-        "arn:aws:ec2:*:*:subnet/*",
         "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>",
         "arn:aws:ec2:*:*:volume/*"
+      ]
+    },
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
+        "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
       ]
     },
     {
@@ -729,7 +736,7 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:CreateAction" : "RunInstances"
+          "ec2:CreateAction": "RunInstances"
         }
       }
     },
@@ -756,10 +763,13 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
         "ec2:TerminateInstances"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:subnet/*",
+      "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
-        "StringEquals": {
-          "ec2:Vpc": "<VPC_ID>"
+        "StringLike": {
+          "ec2:Subnet": [
+            "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
+            "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
+          ]
         }
       }
     }
@@ -831,9 +841,16 @@ Create a `policy.json` file with the following content. You should fill in the I
         "arn:aws:ec2:*:*:launch-template/*",
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
-        "arn:aws:ec2:*:*:subnet/*",
         "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>",
         "arn:aws:ec2:*:*:volume/*"
+      ]
+    },
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
+        "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
       ]
     },
     {
@@ -888,10 +905,13 @@ Create a `policy.json` file with the following content. You should fill in the I
         "ec2:TerminateInstances"
       ],
       "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:subnet/*",
+      "Resource": "arn:aws:ec2:*:*:instance/*",
       "Condition": {
-        "StringEquals": {
-          "ec2:Vpc": "<VPC_ID>"
+        "StringLike": {
+          "ec2:Subnet": [
+            "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
+            "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
+          ]
         }
       }
     }
