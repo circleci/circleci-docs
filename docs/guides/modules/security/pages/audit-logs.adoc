@@ -22,8 +22,6 @@ Per link:https://circleci.com/privacy/#information[our data retention policy], a
 
 The following list shows common and important events found in the audit log. This list is not comprehensive, and you may see additional action types logged that are not represented below. See `action` in the Field section below for the definition and format.
 
-Here's your list in alphabetical order:
-
 - ams.invitation.accepted
 - ams.invitation.created
 - ams.invitation.revoked
