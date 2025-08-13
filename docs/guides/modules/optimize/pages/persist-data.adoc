@@ -154,9 +154,9 @@ Network charges apply when an organization has runner network egress beyond the 
 
 Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
-You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:server-admin:operator:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
+You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
 
-For questions on data usage for the IP ranges feature, visit the xref:server-admin:operator:faq.adoc#calculate-monthly-IP-ranges-costs[FAQ] page.
+For questions on data usage for the IP ranges feature, visit the xref:reference:ROOT:faq.adoc#calculate-monthly-IP-ranges-costs[FAQ] page.
 
 [#reducing-excess-use-of-network-egress-and-storage]
 === Reducing excess use of network egress and storage

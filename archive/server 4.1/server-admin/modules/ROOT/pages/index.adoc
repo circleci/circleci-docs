@@ -1,0 +1,6 @@
+= CircleCI server administration
+:page-noindex: true
+:page-layout: subsection
+:page-description: CircleCI server documentation for installing, configuring, and managing CircleCI server.
+
+CircleCI server is the on-premisis CircleCI platform. In this section you will find the documentation for installing, configuring, and managing CircleCI server.

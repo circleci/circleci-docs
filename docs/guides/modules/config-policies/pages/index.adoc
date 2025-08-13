@@ -1,5 +1,0 @@
-= Config policies
-:page-layout: subsection
-:page-description: Learn about config policies and how to use them to enforce best practices across your organization.
-
-Learn about config policies and how to use them to enforce best practices across your organization.

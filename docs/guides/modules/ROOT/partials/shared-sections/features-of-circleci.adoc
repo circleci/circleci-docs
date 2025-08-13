@@ -25,4 +25,4 @@ For more information about Docker Layer Caching, refer to the xref:guides:optimi
 
 Visualise and control your deployments with CircleCI deploys. Deployments to Kubernetes and SageMaker are supported.
 
-Start with the xref:guides:deploy:deploys-overview.adoc[Deploys overview] for more information.
+Start with the xref:guides:deploy:deployment-overview.adoc[Deploys overview] for more information.

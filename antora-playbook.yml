@@ -53,3 +53,4 @@ asciidoc:
 urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
+  html_extension_style: indexify
