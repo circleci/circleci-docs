@@ -28,7 +28,7 @@ module.exports = function buildUI(cb) {
   // install dependencies unless already present or forced
   let installStep = (!FORCE_INSTALL && fs.existsSync(MODULES_DIR))
     ? Promise.resolve()
-    : execPromise('npm install', { cwd: UI_DIR })
+    : execPromise('npm install --no-save', { cwd: UI_DIR })
   installStep
     .then(() => execPromise('npx gulp bundle', { cwd: UI_DIR }))
     .then(() => {
