@@ -92,9 +92,9 @@ Example:
 ====
 
 
-If you have added multiple SSH keys for the same hostname and you want to use a specific SSH key in your SSH commands, you need to:
+If you have added multiple SSH keys for the same hostname to your project and want to use a specific key in your SSH commands, you need to:
 
-1. Ensure you have added the SSH key to the CircleCI project and to the job using the `add_ssh_keys` step.
+1. Add the SSH key to the job using the `add_ssh_keys` step.
 2. Use the `-i` parameter to specify the exact SSH key file path in your SSH commands.
 3. Add the `-o "IdentitiesOnly=yes"` option to prevent SSH from using other keys from the SSH agent.
 
