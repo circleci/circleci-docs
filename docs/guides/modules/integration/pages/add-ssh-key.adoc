@@ -65,7 +65,9 @@ To checkout additional repositories from within your job, ensure that you run th
 [#adding-multiple-keys-with-blank-hostnames]
 === Adding multiple keys with blank hostnames
 
-If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use `ssh-agent`. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the `ssh-agent` for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
+If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use `ssh-agent`.
+
+This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly yes` in the appropriate block, or you can remove all keys from the `ssh-agent` for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
 
 [#using-specific-ssh-keys-for-a-job]
 === Using specific SSH keys for a job
@@ -84,7 +86,7 @@ To retrieve the MD5 fingerprint of an SSH key, locally run the following command
 ====
 
 
-If you want to use a specific SSH key in your SSH commands, you need to:
+If you have added multiple SSH keys for the same hostname want to use a specific SSH key in your SSH commands, you need to:
 
 1. Ensure you have added the SSH key to the CircleCI project and to the job using the `add_ssh_keys` step.
 2. Use the `-i` parameter to specify the exact SSH key file path in your SSH commands.
