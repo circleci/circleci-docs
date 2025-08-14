@@ -76,13 +76,19 @@ This will always cause the first key to be used, even if that is the incorrect k
 ====
 SSH keys are named using MD5 fingerprints with colons removed from the hash.
 
-Format: `id_rsa_[MD5_fingerprint_without_colons]`
-
-Example: If the MD5 fingerprint is `a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15`, the filename is `id_rsa_a3f982c51d479be68832a1bcf4297e15`.
-
-To retrieve the MD5 fingerprint of an SSH key, locally run the following command:
+To retrieve the MD5 fingerprint of an SSH key, run this command locally:
 
 `ssh-keygen -l -E md5 -f ~/.ssh/your_key_name`
+
+The filename follows this format:
+
+`id_rsa_[MD5_fingerprint_without_colons]`
+
+Example:
+
+- SSH key MD5 fingerprint: `a3:f9:82:c5:1d:47:9b:e6:88:32:a1:bc:f4:29:7e:15`.
+
+- SSH key filename: `id_rsa_a3f982c51d479be68832a1bcf4297e15`.
 ====
 
 
