@@ -172,7 +172,6 @@
 *** xref:deploy:update-the-kubernetes-release-agent.adoc[Update the Kubernetes release agent]
 *** xref:deploy:manage-deploys.adoc[Manage deploys]
 ** How-to guides
-*** xref:deploy:deploy-to-amazon-sagemaker.adoc[Deploy to Amazon SageMaker]
 *** xref:deploy:deploy-android-applications.adoc[Deploy Android applications]
 *** xref:deploy:deploy-to-artifactory.adoc[Deploy to Artifactory]
 *** xref:deploy:deploy-to-aws.adoc[Deploy to AWS]
