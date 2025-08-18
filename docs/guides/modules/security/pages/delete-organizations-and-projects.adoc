@@ -46,7 +46,7 @@ If you only want to stop builds for a project and keep the complete build histor
 ====
 You can only delete an organization when both the below conditions are met:
 
-- The organization is on a Free plan.
+- The organization is on a Free Plan.
 - The user performing the action has an admin role in the organization.
 ====
 You can delete your organization from the CircleCI web app or via the CircleCI API:
@@ -58,7 +58,7 @@ CAUTION: This action will permanently delete the organization for you and all or
 CircleCI web app::
 +
 --
-. Select the organization you want to remove.
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
 . Select **Organization Settings** in the sidebar.
 . Scroll to the bottom of the Overview page and select btn:[Delete Organization].
 . Confirm your choice by typing the organization name and selecting btn:[Permanently Delete Organization] in the popup.
@@ -92,9 +92,9 @@ CAUTION: Deleting a project will remove the complete build history.
 CircleCI web app::
 +
 --
-. Select the organization associated with the project you want to remove.
-. Select the project you want to remove from the project cards. If you do not see your project, select **Projects** in the sidebar and find it in the list.
-. Select **Project Settings** (or the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to your project and then select **Project Settings**).
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+[start=4]
 . Scroll to the bottom of the Overview page, select **Delete Project**.
 . Confirm your choice by typing the project name and selecting btn:[Permanently Delete Project] in the popup.
 --
