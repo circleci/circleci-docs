@@ -4,7 +4,7 @@
 :experimental:
 
 ****
-*This page is relevant if your CircleCI organization has `/github/` in the URL.* Throughout this guide we will refer to org types by the appearance of `/github/` or other strings in the URL.
+*This page is relevant if your CircleCI organization has `/github/` or `/gh/` in the URL.* Throughout this guide we will refer to org types by the appearance of `/github/` or other strings in the URL.
 
 Another way to identify an organization type is by the organization slug, which is available at menu:Organization settings[Overview].
 ****
@@ -33,7 +33,7 @@ TIP: The majority of new CircleCI work triggering functionality will be made ava
 |GitHub App integration
 |Notes
 
-|`/github/`
+|`/github/` or `/gh/`
 |built-in
 |add-on
 |Organization name, roles, permissions, and projects inherited from GitHub
@@ -43,7 +43,7 @@ TIP: The majority of new CircleCI work triggering functionality will be made ava
 |add-on
 |Independent user, permissions and project management
 
-|`/bitbucket/`
+|`/bitbucket/` or `/bb/`
 |Not available
 |Not available
 |-
