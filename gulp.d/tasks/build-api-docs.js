@@ -183,7 +183,28 @@ function buildApiV2(callback) {
             // STEP 6: Build final HTML documentation
             // Redocly transforms the OpenAPI spec into beautiful, interactive docs
             console.log('🏗️  Building docs with Redocly CLI...')
-            exec('npx @redocly/cli build-docs build/temp-api-v2/openapi-final.json --output build/api/v2/index.html', (err, stdout, stderr) => {
+
+            // Build options for enhanced customization (all free options):
+            // --title: Custom page title
+            // --theme.openapi.disableSearch: Disable search (if needed)
+            // --theme.openapi.hideDownloadButton: Hide download button
+            // --template: Custom template (requires template file)
+            // --options.maxDisplayedEnumValues: Limit enum display
+
+            const buildCommand = [
+              'npx @redocly/cli build-docs build/temp-api-v2/openapi-final.json',
+              '--output build/api/v2/index.html',
+              '--config redocly.yaml',
+              '--template custom-template.hbs',
+              '--title "CircleCI API v2 Documentation"',
+              '--disableGoogleFont=false',
+              // Additional options for free version:
+              // '--theme.openapi.hideDownloadButton=true',
+              // '--theme.openapi.disableSearch=true',
+              // '--theme.openapi.nativeScrollbars=true'
+            ].join(' ')
+
+            exec(buildCommand, (err, stdout, stderr) => {
               if (err) {
                 console.error('❌ Failed to build API docs:', err)
                 return callback(err)
@@ -191,11 +212,21 @@ function buildApiV2(callback) {
 
               console.log('✅ API v2 docs built successfully')
 
-              // STEP 7: Cleanup temporary files
-              // Remove intermediate files to keep build directory clean
-              exec('rm -rf build/temp-api-v2', () => {
-                console.log('🎉 API v2 documentation build completed!')
-                callback()
+              // STEP 7: Copy logo file for template
+              console.log('📋 Copying logo file...')
+              exec('cp logo.svg build/api/v2/', (err) => {
+                if (err) {
+                  console.warn('⚠️  Warning: Could not copy logo file:', err.message)
+                } else {
+                  console.log('✅ Logo file copied successfully')
+                }
+
+                // STEP 8: Cleanup temporary files
+                // Remove intermediate files to keep build directory clean
+                exec('rm -rf build/temp-api-v2', () => {
+                  console.log('🎉 API v2 documentation build completed!')
+                  callback()
+                })
               })
             })
           })

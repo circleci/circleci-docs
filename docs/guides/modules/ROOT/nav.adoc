@@ -38,6 +38,7 @@
 *** xref:orchestrate:pipelines.adoc[Pipeline and triggers overview]
 *** xref:orchestrate:jobs-steps.adoc[Jobs and steps overview]
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
+*** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
 *** xref:orchestrate:dynamic-config.adoc[Use dynamic configuration]
 *** xref:orchestrate:skip-build.adoc[Skip CI and cancel workflows]
@@ -91,7 +92,7 @@
 ** How-to guides
 *** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
 *** xref:execution-managed:run-a-job-in-a-container.adoc[Run a job in a container on your machine with Docker]
-*** xref:execution-managed:docker-compose.adoc[Installing and using Docker compose]
+*** xref:execution-managed:docker-compose.adoc[Installing and using Docker Compose]
 *** xref:execution-managed:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
 ** Image support policies
 *** xref:execution-managed:android-images-support-policy.adoc[Android images support policy]
@@ -160,19 +161,16 @@
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 
 * Deploy with CircleCI
-** xref:deploy:deployment-overview.adoc[Overview of deployment on CircleCI]
-** xref:deploy:deploys-overview.adoc[CircleCI deploys overview]
+** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
+** Setup
+*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
+*** xref:deploy:set-up-rollbacks.adoc[Rollbacks]
 ** Release agent setup
 *** xref:deploy:set-up-circleci-deploys.adoc[Set up CircleCI deploys]
 *** xref:deploy:set-up-the-release-agent.adoc[Set up the release agent]
 *** xref:deploy:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
 *** xref:deploy:update-the-kubernetes-release-agent.adoc[Update the Kubernetes release agent]
 *** xref:deploy:manage-deploys.adoc[Manage deploys]
-** Agentless setup
-*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
-*** xref:deploy:set-up-rollbacks.adoc[Set up rollbacks in CircleCI]
-*** xref:deploy:rollback-a-project-using-the-rollback-pipeline.adoc[Rollback a project using the rollback pipeline]
-*** xref:deploy:rollback-a-project-by-workflow-rerun.adoc[Rollback a project by workflow rerun]
 ** How-to guides
 *** xref:deploy:deploy-to-amazon-sagemaker.adoc[Deploy to Amazon SageMaker]
 *** xref:deploy:deploy-android-applications.adoc[Deploy Android applications]
@@ -225,6 +223,7 @@
 ** SSO authentication
 *** xref:permissions-authentication:sso-overview.adoc[SSO overview]
 *** xref:permissions-authentication:set-up-sso.adoc[SSO setup]
+*** xref:permissions-authentication:sso-group-mapping.adoc[Set up SSO group mapping with Okta]
 *** xref:permissions-authentication:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-enabled org]
 ** Multi-factor authentication (MFA)
 *** xref:permissions-authentication:mfa.adoc[MFA overview]

@@ -18,7 +18,7 @@ As a developer using CircleCI you can:
 - Access xref:execution-managed:using-arm.adoc[Arm VM resources] and xref:execution-managed:using-docker.adoc#arm[Arm on Docker].
 - Use xref:orbs:use:orb-intro.adoc[orbs], reusable packages of configuration, to integrate with third parties.
 - Use pre-built Docker xref:execution-managed:circleci-images.adoc[images] in a variety of languages.
-- Use the link:https://www.circleci.com/docs/api/v2[API] to retrieve information about jobs and workflows.
+- Use the link:https://www.circleci.com/docs/api/v2/[API] to retrieve information about jobs and workflows.
 - Use the xref:toolkit:local-cli.adoc[CLI] to access advanced tools locally.
 - Get flaky test detection with xref:insights:insights-tests.adoc[test insights].
 

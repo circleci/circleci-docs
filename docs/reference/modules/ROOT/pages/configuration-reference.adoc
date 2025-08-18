@@ -416,7 +416,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deploys-overview.adoc#[Deploys overview] page.
+Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys overview] page.
 
 **Example** of a job with a `release` type:
 
@@ -1730,7 +1730,7 @@ During step execution, the templates above will be replaced by runtime values an
 
 While choosing suitable templates for your cache `key`, keep in mind the following:
 
-* Cache saving is not a free operation. See the billing section on the xref:server-admin:operator:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
+* Cache saving is not a free operation. See the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
 * It takes time to upload the cache.
 * Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 * Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.
@@ -2168,6 +2168,32 @@ workflows:
     jobs:
       - my-job
 ----
+
+'''
+
+==== *`max_auto_reruns`*
+
+The `max_auto_reruns` key is used to configure the maximum number of automatic reruns for a workflow.
+
+[,yml]
+----
+version: 2.1
+
+workflows:
+  my-workflow:
+    max_auto_reruns: 3
+    jobs:
+      - build
+      - test
+      - deploy:
+          requires:
+            - build
+            - test
+----
+
+The value of `max_auto_reruns` can be an integer between 1 and 5.
+
+For more information, see the xref:guides:orchestrate:automatic-reruns.adoc[Automatic Reruns] page.
 
 '''
 

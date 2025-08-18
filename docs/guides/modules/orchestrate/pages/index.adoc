@@ -1,5 +1,0 @@
-= Orchestrate work on CircleCI
-:page-layout: subsection
-:page-description: Orchestrate your pipelines,workflows, and jobs on CircleCI.
-
-Orchestrate your pipelines, workflows, and jobs on CircleCI. Learn about the different ways to trigger your pipelines, and how to schedule and manage your workflows.

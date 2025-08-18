@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8" />
+  <title>{{title}}</title>
+  <!-- needed for adaptive design -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Custom logo styling - properly centered and clickable */
+    .custom-logo {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1001;
+      padding: 12px; /* Equal padding on all sides */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      transition: all 0.2s ease;
+    }
+
+    .custom-logo a:hover {
+      transform: translateY(-1px);
+    }
+
+    .custom-logo img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    /* Adjust sidebar to avoid logo overlap */
+    .menu-content {
+      padding-top: 70px !important;
+    }
+
+    /* Hide logo on very small screens to avoid clutter */
+    @media (max-width: 480px) {
+      .custom-logo {
+        display: none;
+      }
+    }
+
+    /* Adjust for medium screens */
+    @media (max-width: 768px) {
+      .custom-logo {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: 15px auto;
+        display: block;
+        text-align: center;
+        max-width: none;
+        width: fit-content;
+        padding: 15px 20px;
+      }
+
+      .menu-content {
+        padding-top: 20px !important;
+      }
+    }
+  </style>
+  {{{redocHead}}}
+  {{#unless disableGoogleFont}}<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">{{/unless}}
+</head>
+
+<body>
+  <!-- Clickable logo that routes to docs homepage -->
+  <div class="custom-logo">
+    <a href="../../reference/api-homepage/" title="Back to CircleCI Documentation">
+      <img src="logo.svg" alt="CircleCI" />
+    </a>
+  </div>
+
+  {{{redocHTML}}}
+</body>
+
+</html>
