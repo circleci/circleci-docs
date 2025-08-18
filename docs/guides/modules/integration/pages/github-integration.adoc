@@ -350,17 +350,7 @@ Key functionality enabled through the GitHub App integration includes the follow
 ### Installing GitHub App alongside the GitHub OAuth app
 
 ****
-Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by disabling the GitHub OAuth trigger. To do so, follow these steps:
-
-. Navigate to the GitHub repository associated with the project.
-. Go to menu:Settings[Webhooks].
-. Locate the CircleCI webhook (`https://circleci.com/hooks/github`) and select btn:[Delete].
-
-This action is reversible. To re-enable the OAuth trigger, follow these steps:
-
-. Go to menu:Project Settings[Overview]
-. Select "Stop building" at the bottom of the page
-. Then, select "Follow". This will create a new CircleCI webhook in your repository.
+Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by deleting the GitHub trigger associate with the GitHub OAuth pipeline, in menu:Project settings[Project setup]. This trigger can be re-created by selecting "click here" at the bottom of the GitHub OAuth pipeline card. 
 ****
 
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
