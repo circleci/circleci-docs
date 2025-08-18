@@ -112,7 +112,7 @@ workflows:
   main:
     jobs:
       - vale/lint:
-          reference_branch: main
+          reference_branch: "origin/server-4.8"
           base_dir: docs
           filters: pipeline.git.branch != "main"
 
