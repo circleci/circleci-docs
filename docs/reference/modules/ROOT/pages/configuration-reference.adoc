@@ -416,7 +416,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deploys-overview.adoc#[Deploys overview] page.
+Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys overview] page.
 
 **Example** of a job with a `release` type:
 

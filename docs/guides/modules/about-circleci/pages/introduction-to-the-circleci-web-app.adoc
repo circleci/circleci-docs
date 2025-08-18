@@ -66,7 +66,7 @@ From your organization home page you have access to org-level options. You can c
 
 **Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:getting-started:create-project.adoc[create/set up new projects].
 
-**Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy:deploys-overview.adoc[Deploys overview] page.
+**Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy:deployment-overview.adoc[Deployment overview] page.
 
 **Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights:insights.adoc[Using Insights] page.
 
@@ -160,7 +160,7 @@ The following settings are available in the project settings page. If you do not
 * A list of configured xref:orchestrate:pipelines.adoc#pipelines-and-triggers[pipeline triggers]
 * Set up UI for scheduled pipelines if available for your integration. To set up a xref:orchestrate:scheduled-pipelines.adoc[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
-**Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy:deploys-overview.adoc[Deploys overview] page.
+**Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy:deployment-overview.adoc[Deployment overview] page.
 
 **Advanced**: Toggle options on and off for:
 

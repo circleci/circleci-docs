@@ -21,10 +21,9 @@
     "autoprefixer": "~10.4.21",
     "browser-pack-flat": "~3.5.0",
     "browserify": "~17.0.0",
-    "cssnano": "~7.0.0",
-    "eslint": "~9.32.0",
-    "eslint-config-standard": "~17.1.0",
-    "eslint-plugin-import": "~2.31.0",
+    "cssnano": "~7.1.0",
+    "eslint": "~9.33.0",
+    "eslint-plugin-import": "~2.32.0",
     "eslint-plugin-n": "~17.21.0",
     "eslint-plugin-promise": "~7.2.0",
     "eslint-plugin-standard": "~5.0",
@@ -50,13 +49,13 @@
     "require-directory": "~2.1",
     "require-from-string": "~2.0",
     "stylelint": "~16.23.0",
-    "stylelint-config-standard": "~38.0.0",
+    "stylelint-config-standard": "~39.0.0",
     "tailwind-scrollbar": "^4.0.2",
     "vinyl-fs": "~3.0"
   },
   "overrides": {
     "eslint-plugin-node": {
-      "eslint": "~9.32.0"
+      "eslint": "~9.33.0"
     },
     "gulp-stylelint": {
       "stylelint": "~16.23.0"
@@ -72,8 +71,8 @@
     "trim-newlines": "~5.0.0"
   },
   "dependencies": {
-    "@fontsource/inter": "^5.2.5",
     "@fontsource/ibm-plex-mono": "^5.2.5",
+    "@fontsource/inter": "^5.2.5",
     "@tailwindcss/postcss": "^4.1.4",
     "tailwindcss": "^4.1.4"
   }
