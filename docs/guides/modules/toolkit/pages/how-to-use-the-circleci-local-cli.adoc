@@ -363,7 +363,7 @@ For full details on the `instance list` sub-command, refer to the link:https://c
 
 === Create a resource class
 
-Use the `resource-class create` sub-command to add a new resource class:
+Use the `resource-class create` sub-command to add a new resource class.
 
 [,shell]
 ----
@@ -380,7 +380,7 @@ For full details on the `resource-class create` sub-command, refer to the link:h
 
 === Delete a resource class
 
-Use the `resource-class delete` sub-command to delete an existing resource class:
+Use the `resource-class delete` sub-command to delete an existing resource class.
 
 [,shell]
 ----
@@ -395,7 +395,7 @@ For full details on the `resource-class delete` sub-command, refer to the link:h
 
 === List resource classes
 
-Use the `resource-class list` sub-command to list all resource classes for your namespace:
+Use the `resource-class list` sub-command to list all resource classes for your namespace.
 
 [,shell]
 ----
@@ -405,6 +405,52 @@ circleci runner resource-class list <namespace> [flags]
 - `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
 
 For full details on the `resource-class list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_list.html[CLI docs].
+
+=== Create a token for a resource class
+
+Use the `token create` sub-command to create a token for a resource class.
+
+[,shell]
+----
+circleci runner token create <namespace/resource-class> <nickname> [flags]
+----
+
+- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+
+- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+
+- `<nickname>` refers to a human-readable name you assign to the token.
+
+For full details on the `resource-class token create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_create.html[CLI docs].
+  
+
+=== List tokens for a resource class
+
+Use the `token list` sub-command to list all tokens for a resource class.
+
+[,shell]
+----
+circleci runner token list <namespace/resource-class> [flags]
+----
+
+- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+
+- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+
+For full details on the `token list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_list.html[CLI docs].
+
+=== Delete a token
+
+Use the `token delete` sub-command to delete a token for a resource class.
+
+[,shell]
+----
+circleci runner token delete <token-id> [flags]
+----
+
+- `<token-id>` is the ID of the token to delete. You can find the token ID by running the `token list` sub-command, described above.
+
+For full details on the `token delete` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_delete.html[CLI docs].
 
 
 [#project-management]
