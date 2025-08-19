@@ -330,6 +330,38 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 
 The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc[test splitting] for build time optimization.
 
+[#runner-management]
+== Runner management
+
+You can operate on your self-hosted runners using the CLI.
+
+=== List runner instances
+
+Use the `runner instance list` sub-command to get a list of your runner instances.
+
+For your namespace:
+
+[,shell]
+----
+circleci runner instance list <namespace> [flags]
+----
+
+For a specific resource class:
+
+[,shell]
+----
+circleci runner instance list <namespace/resource-class> [flags]
+----
+
+- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+
+To find out more on namespace and resource class, see the link:https://circleci.com/docs/guides/execution-runner/runner-concepts/#namespaces-and-resource-classes[Self-hosted runner concepts] page.
+
+For full details on the `instance list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_instance_list.html[CLI docs].
+
+
 [#project-management]
 == Project management
 
