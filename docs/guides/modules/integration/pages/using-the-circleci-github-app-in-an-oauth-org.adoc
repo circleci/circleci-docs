@@ -1,0 +1,185 @@
+= Using the CircleCI GitHub App in an OAuth org
+:page-platform: Cloud
+:page-description: A guide to using the CircleCI GitHub app in an OAuth org
+:experimental:
+
+****
+*This page is relevant if your CircleCI organization has `/github/` or `/gh/` in the URL.* Throughout this guide we will refer to org types by the appearance of `/github/` or other strings in the URL.
+
+Another way to identify an organization type is by the organization slug, which is available at menu:Organization settings[Overview].
+****
+
+This guide explains the two different ways your CircleCI organization can integrate with GitHub and how they affect the following:
+
+* The type of pipeline you can set up .
+* The triggers you can use.
+
+Through reading this guide you will better understand your integration options, and how to leverage both for maximum functionality.
+
+== Two types of GitHub integration
+
+CircleCI offers two methods for integrating with GitHub:
+
+GitHub OAuth app integration:: This integration is built-in for organizations with `/github/` in their URL. The GitHub OAuth app integration cannot be uninstalled from these organizations, nor installed, on any other org type.
+
+GitHub App integration (recommended):: The CircleCI GitHub App is an add-on integration. The GitHub App can be installed or uninstalled on any organization type, including organizations with `/github/` or `/circleci/` in their URL that are already integrated with GitHub through the OAuth integration.
+
+TIP: The majority of new CircleCI work triggering functionality will be made available through the GitHub App integration. We recommend installing the CircleCI GitHub App to ensure access to all new features.
+
+[options="header",cols="1,1,1,1"]
+|===
+|Organization type identified by URL
+|GitHub OAuth integration
+|GitHub App integration
+|Notes
+
+|`/github/` or `/gh/`
+|built-in
+|add-on
+|Organization name, roles, permissions, and projects inherited from GitHub
+
+|`/circleci/`
+|Not available
+|add-on
+|Independent user, permissions and project management
+
+|`/bitbucket/` or `/bb/`
+|Not available
+|Not available
+|-
+|===
+
+== Project types
+Projects are the same for all integration types.
+
+== Pipeline types
+When both GitHub integrations are installed in the same organization, different pipeline types can coexist within the same project. Each pipeline type has distinct characteristics and capabilities.
+
+TIP: All GitHub pipeline types can be managed through menu:Project settings[Project setup].
+
+[options="header",cols="1,2,2"]
+|===
+|
+|OAuth pipeline
+|GitHub App pipeline
+
+|
+|_If you are a long time CircleCI user, this is the classic pipeline you will be familiar with. Identified by a gray badge:_ image:guides:ROOT:icons/github-oauth.svg[OAuth pipeline badge, role="no-border"]
+|_Only available once the CircleCI GitHub App has been installed. Identified by a purple badge:_ image:guides:ROOT:icons/github-app.svg[GitHub App pipeline badge, role="no-border"]
+
+|*Pipeline characteristics*
+a|* One (and only one) per project, created automatically for OAuth organizations.
+* Cannot be deleted.
+* Cannot be renamed (always matches the project name).
+* Configuration file must be named `.circleci/config.yml` and stored in the repository that gives the project its name.
+* Checkout source is always the repository that gives the project its name.
+a|* Zero, one or many per project.
+* Can be created and deleted freely.
+* Can be renamed.
+* Configuration files can be stored in any repository the CircleCI GitHub App has access to, at any file path.
+* Checkout source can be configured independently from the project name and configuration source.
+
+|*Available triggers*
+a|*GitHub OAuth triggers* +
+_Used to trigger pipelines on push events from GitHub_
+
+* Zero or one can exist per pipeline.
+* Automatically created for all OAuth pipelines.
+* The *event source* repository is always the same repository that gives the project its name.
+* The *event name* field only has two options:
+** “All pushes to the repository”.
+** “Pushes to open pull requests, default branch, and tags” (equivalent to turning the xref:oss.adoc#only-build-pull-requests[project level flag] “only build pull request” on).
+
+*Schedules* +
+_Used to trigger pipelines on a schedule (nightly builds for example)_
+
+* Zero, one or many can be created per pipeline.
+
+*API / Manual* +
+OAuth pipelines can be triggered via API and manually through the CircleCI web app.
+
+a|*GitHub App triggers* +
+_Used to trigger pipelines on a wide range of events from GitHub_
+
+* Zero, one or many per pipeline.
+* The *event source* repository can be any repository the CircleCI GitHub App has access to. This enable cross-repository pipeline triggering.
+* Extensive *event name* options available, including all pushes, pull request opened, pull request merged, pull request marked ready for review, tag pushes, and many more (see xref:orchestrate:github-trigger-event-options.adoc[full list]).
+
+*Custom Webhook triggers* +
+_Used to trigger pipelines from any external system that can send HTTP requests_
+
+* Zero, one or many per pipeline.
+* Event name and event source are user-defined.
+
+*Schedules* +
+Not supported yet, but coming soon. As an alternative, use custom webhooks with third-party scheduling tools.
+
+*API / Manual* +
+GitHub App pipelines can be triggered via API and manually through the CircleCI web app.
+|===
+
+=== Summary of trigger availability by pipeline type
+The following table summarizes the trigger availability by pipeline type.
+
+[options="header",cols="1,1,1,1,1,1"]
+|===
+|Pipeline type
+^|OAuth trigger
+^|Schedule trigger
+^|GitHub App trigger
+^|Custom Webhook
+^|API / Manual triggering
+
+|GitHub OAuth image:guides:ROOT:icons/github-oauth.svg[OAuth pipeline badge, role="no-border"]
+^|Zero or one
+^|Zero, one, many
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|[.circle-green]#*Yes*#
+
+|GitHub App image:guides:ROOT:icons/github-app.svg[GitHub App pipeline badge, role="no-border"]
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|Zero, one, many
+^|Zero, one, many
+^|[.circle-green]#*Yes*#
+|===
+
+== Set up dual integration
+
+Organizations with `/github/` in their URL can leverage both GitHub integration types simultaneously for maximum flexibility.
+
+=== Benefits of Dual Integration
+
+Dual GitHub integration provide the following benefits:
+
+* Access to new GitHub App features while maintaining existing OAuth pipelines
+* Gradual migration path for complex projects
+* New trigger options without disrupting current pipelines
+
+=== Installation steps
+
+. Navigate to menu:Organization Settings[VCS Connections].
+. Select btn:[Install GitHub App].
+. Select repositories to grant access.
+. Create new GitHub App pipelines alongside existing OAuth pipelines. This can be achieved in the following ways:
+** Navigate to menu:Project Settings[Project setup]
+** Via API
+** Via CLI
+
+== Troubleshooting
+
+=== Can I convert an OAuth pipeline to a GitHub App pipeline?
+
+Pipelines cannot be directly converted.
+
+Instead, if you want to stop building through the OAuth integration, duplicate the OAuth pipeline as a GitHub App pipeline, then remove the OAuth GitHub trigger.
+
+=== Why can't I see GitHub App options?
+
+Ensure the GitHub App is installed via menu:Organization Settings[VCS Connections]. Then select btn:[Add pipeline] on the menu:Project Settings[Project setup] page to create a new GitHub App pipeline.
+
+=== How do I prevent duplicate builds?
+
+Configure trigger events carefully or delete OAuth triggers when using GitHub App pipelines for the same repository.
+

@@ -1,0 +1,15 @@
+DirectoryPath: "build"
+CheckExternal: false
+EnforceHTTPS: true
+CheckSelfReferencesAsInternal: true
+BaseURL: https://circleci.com/docs
+IgnoreAltEmpty: true
+IgnoreInternalEmptyHash: true
+IgnoreURLs:
+  - "[url]"
+  - "[path]"
+  - "/docs/"
+  - "/docs/_/img/x-icon.svg"
+IgnoreDirs:
+  - "api"
+OutputDir: ".htmltest"

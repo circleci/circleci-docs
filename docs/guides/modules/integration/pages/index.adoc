@@ -1,5 +1,0 @@
-= Integrate with CircleCI
-:page-layout: subsection
-:page-description: Integrate CircleCI with your version control and other tools and services.
-
-Integrate CircleCI with your version control and other tools and services.
