@@ -353,9 +353,9 @@ For a specific resource class:
 circleci runner instance list <namespace/resource-class> [flags]
 ----
 
-- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Self-Hosted Runners** in the sidebar.
 
-- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Self-Hosted Runners** in the sidebar.
 
 To find out more on namespace and resource class, see the xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-hosted runner concepts] page.
 
@@ -370,9 +370,9 @@ Use the `resource-class create` sub-command to add a new resource class.
 circleci runner instance create <namespace/resource-class> <description> [flags]
 ----
 
-- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Self-Hosted Runners** in the sidebar.
 
-- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Self-Hosted Runners** in the sidebar.
 
 - `<description>` is the argument that allows you to provide a description for the resource class. It must be enclosed in double-quotes.
 
@@ -387,9 +387,9 @@ Use the `resource-class delete` sub-command to delete an existing resource class
 circleci runner resource-class delete <namespace/resource-class> [flags]
 ----
 
-- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Self-Hosted Runners** in the sidebar.
 
-- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Self-Hosted Runners** in the sidebar.
 
 For full details on the `resource-class delete` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_delete.html[CLI docs].
 
@@ -405,7 +405,7 @@ circleci runner resource-class list <namespace> [flags]
 Alternatively, you can use the shorthand `ls`, instead of `list`.
 
 
-- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Self-Hosted Runners** in the sidebar.
 
 For full details on the `resource-class list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_list.html[CLI docs].
 
@@ -418,9 +418,9 @@ Use the `token create` sub-command to create a token for a resource class.
 circleci runner token create <namespace/resource-class> <nickname> [flags]
 ----
 
-- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Self-Hosted Runners** in the sidebar.
 
-- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Self-Hosted Runners** in the sidebar.
 
 - `<nickname>` refers to a human-readable name you assign to the token.
 
@@ -438,9 +438,9 @@ circleci runner token list <namespace/resource-class> [flags]
 
 Alternatively, you can use the shorthand `ls`, instead of `list`.
 
-- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Self-Hosted Runners** in the sidebar.
 
-- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Self-Hosted Runners** in the sidebar.
 
 For full details on the `token list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_list.html[CLI docs].
 
