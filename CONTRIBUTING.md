@@ -44,18 +44,18 @@ There are several ways to contribute to the CircleCI Docs Static Site:
 ### Initial Setup
 
 1. **Fork the repository**:
-   - Visit [https://github.com/circleci/circleci-docs-static](https://github.com/circleci/circleci-docs-static)
+   - Visit [https://github.com/circleci/circleci-docs](https://github.com/circleci/circleci-docs)
    - Click the "Fork" button to create your own copy
 
 2. **Clone your fork**:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/circleci-docs-static.git
-   cd circleci-docs-static
+   git clone https://github.com/YOUR-USERNAME/circleci-docs.git
+   cd circleci-docs
    ```
 
 3. **Add the upstream remote**:
    ```bash
-   git remote add upstream https://github.com/circleci/circleci-docs-static.git
+   git remote add upstream https://github.com/circleci/circleci-docs.git
    ```
 
 4. **Install dependencies**:

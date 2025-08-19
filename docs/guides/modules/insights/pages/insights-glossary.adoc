@@ -92,7 +92,7 @@ display the change in value or delta compared to the prior 7-day window.
 
 Trends displayed in the CircleCI UI are calculated as `100 * (current value - previous value) / prior-value`.
 
-Trends received from the link:https://circleci.com/docs/api/v2/index.html#operation/getProjectWorkflowsPageData[CircleCI API] are calculated as a ratio instead of a percentage with the following formula: `(current-value / prior-value)`. These trends are 1-based and not 0-based.
+Trends received from the link:https://circleci.com/docs/api/v2/#operation/getProjectWorkflowsPageData[CircleCI API] are calculated as a ratio instead of a percentage with the following formula: `(current-value / prior-value)`. These trends are 1-based and not 0-based.
 
 * A ratio of 1.0 indicates _no change_.
 * A value less than 1.0 indicates a negative trend, and a value greater than 1.0 indicates a positive trend.
@@ -100,8 +100,8 @@ Trends received from the link:https://circleci.com/docs/api/v2/index.html#operat
 
 This also applies to the following API endpoints:
 
-* link:https://circleci.com/docs/api/v2/index.html#operation/getOrgSummaryData[getOrgSummaryData]
-* link:https://circleci.com/docs/api/v2/index.html#operation/getWorkflowSummary[getWorkflowSummary].
+* link:https://circleci.com/docs/api/v2/#operation/getOrgSummaryData[getOrgSummaryData]
+* link:https://circleci.com/docs/api/v2/#operation/getWorkflowSummary[getWorkflowSummary].
 
 Despite the trend being reported as a ratio via the API, the result returned is still effectively equivalent to the percentage that is shown in the UI. To compare the ratio from the API with the percentage reported in the UI, you can compute `| trend-value - 1|` (vertical line indicates absolute value). For example, if the API returns a ratio of 3.33, in the UI it will be shown as `| 3.33 - 1 | = 2.33` which is equivalent to +233%.
 
