@@ -361,6 +361,51 @@ To find out more on namespace and resource class, see the link:https://circleci.
 
 For full details on the `instance list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_instance_list.html[CLI docs].
 
+=== Create a resource class
+
+Use the `resource-class create` sub-command to add a new resource class:
+
+[,shell]
+----
+circleci runner instance create <namespace/resource-class> <description> [flags]
+----
+
+- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+
+- `<description>` is the argument that allows you to provide a description for the resource class. It must be enclosed in double-quotes.
+
+For full details on the `resource-class create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_create.html[CLI docs].
+
+=== Delete a resource class
+
+Use the `resource-class delete` sub-command to delete an existing resource class:
+
+[,shell]
+----
+circleci runner resource-class delete <namespace/resource-class> [flags]
+----
+
+- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by navigating to menu:Self-Hosted Runners[] in the left navigation.
+
+For full details on the `resource-class delete` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_delete.html[CLI docs].
+
+=== List resource classes
+
+Use the `resource-class list` sub-command to list all resource classes for your namespace:
+
+[,shell]
+----
+circleci runner resource-class list <namespace> [flags]
+----
+
+- `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
+
+For full details on the `resource-class list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_list.html[CLI docs].
+
 
 [#project-management]
 == Project management
