@@ -4,6 +4,10 @@
     "config:recommended"
   ],
   "timezone": "Europe/London",
+  "postUpdateOptions": [
+    "gomodTidy",
+    "gomodUpdateImportPaths"
+  ],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
