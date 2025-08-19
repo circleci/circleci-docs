@@ -65,9 +65,9 @@ To checkout additional repositories from within your job, ensure that you run th
 [#adding-multiple-keys-with-blank-hostnames]
 === Adding multiple keys with blank hostnames
 
-If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use `ssh-agent`.
+If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. If you have multiple SSH keys for different purposes that have access to the same hosts, the default `IdentitiesOnly no` is set, which causes connections to use `ssh-agent`.
 
-This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly yes` in the appropriate block, or you can remove all keys from the `ssh-agent` for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
+In the scenario described above, the first key is used, regardless of whether it is the correct key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly yes` in the appropriate block, or you can remove all keys from the `ssh-agent` for this job using `ssh-add -D`, and read the key added using `ssh-add /path/to/key`.
 
 [#using-specific-ssh-keys-for-a-job]
 === Using specific SSH keys for a job
@@ -92,11 +92,11 @@ Example:
 ====
 
 
-If you have added multiple SSH keys for the same hostname to your project and want to use a specific key in your SSH commands, you need to:
+If you have added multiple SSH keys for the same hostname to your project and want to use a specific key in your SSH commands, follow these steps:
 
-1. Add the SSH key to the job using the `add_ssh_keys` step.
-2. Use the `-i` parameter to specify the exact SSH key file path in your SSH commands.
-3. Add the `-o "IdentitiesOnly=yes"` option to prevent SSH from using other keys from the SSH agent.
+. Add the SSH key to the job using the `add_ssh_keys` step.
+. Use the `-i` parameter to specify the exact SSH key file path in your SSH commands.
+. Add the `-o "IdentitiesOnly=yes"` option to prevent SSH from using other keys from the SSH agent.
 
 Example:
 
