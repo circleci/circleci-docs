@@ -380,6 +380,11 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | N
 | String
 | Amount of CPU and RAM allocated to each container in a job.
+
+| `retention`
+| N
+| Map
+| Configure job retention periods for cache data (1-15 days, for example, "1d", "7d", "15d"). Reduces organization-level retention by automatically removing cache data after the specified period.
 |===
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
@@ -480,6 +485,33 @@ jobs:
       - image: cimg/base:2022.04-20.04
     environment:
       FOO: bar
+----
+
+'''
+
+[#retention]
+==== `retention`
+
+Configure job retention periods to control how long job data is kept. Job retention specifically controls cache retention at the job level. This setting can be configured from 1 day to 15 days using string values (for example, "1d", "7d", "15d"). Job retention reduces the organization-level retention from the default by automatically removing cache data after the specified period.
+
+For more information on cache retention, see the xref:guides:optimize:persist-data.adoc#custom-storage-usage[Persisting data overview] page.
+
+*Example:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:18.0
+    retention:
+      caches: 7d
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
 ----
 
 '''
