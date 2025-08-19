@@ -1,5 +1,0 @@
-= Migrate to CircleCI
-:page-layout: subsection
-:page-description: Migrate to CircleCI.
-
-Get tips and best practices for migrating to CircleCI from a variety of CI/CD providers. In the migration into you will also find information on planning and carrying out your migration.

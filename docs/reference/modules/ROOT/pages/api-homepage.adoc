@@ -3,8 +3,8 @@
 
 Find reference docs for the CircleCI APIs:
 
-* link:../api/v2/index.html[API v2 docs]
-* link:../api/v1/index.html[API v1 docs]
+* link:../../api/v2/[API v2 docs]
+* link:../../api/v1/[API v1 docs]
 
 
 

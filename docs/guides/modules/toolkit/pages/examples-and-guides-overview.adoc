@@ -52,7 +52,7 @@ We have created demo applications in various languages so you can learn by examp
 [#platforms]
 == Platform guides
 
-Use the tutorial associated with your platform to learn about the customization that is possible in a xref:reference:ROOT:configuration-reference[`.circleci/config.yml`].
+Use the tutorial associated with your platform to learn about the customization that is possible in a xref:reference:ROOT:configuration-reference.adoc[`.circleci/config.yml`].
 
 [cols=2*, options="header"]
 |===
