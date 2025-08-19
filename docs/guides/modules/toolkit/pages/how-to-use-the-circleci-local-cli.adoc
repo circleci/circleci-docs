@@ -402,6 +402,9 @@ Use the `resource-class list` sub-command to list all resource classes for your 
 circleci runner resource-class list <namespace> [flags]
 ----
 
+Alternatively, you can use the shorthand `ls`, instead of `list`.
+
+
 - `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
 
 For full details on the `resource-class list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_list.html[CLI docs].
@@ -432,6 +435,8 @@ Use the `token list` sub-command to list all tokens for a resource class.
 ----
 circleci runner token list <namespace/resource-class> [flags]
 ----
+
+Alternatively, you can use the shorthand `ls`, instead of `list`.
 
 - `<namespace>` is the namespace of the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by navigation to menu:Self-Hosted Runners[] in the left navigation.
 
