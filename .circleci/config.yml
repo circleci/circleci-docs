@@ -1,23 +1,24 @@
 version: 2.1
 
-parameters:
-  cleanup_preview_branch:
-    type: string
-    default: ""
-
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
+  go: circleci/go@3.0.2
 
 executors:
   node_executor:
     docker:
-      - image: cimg/node:22.15.1
+      - image: cimg/node:22.18.0
+    working_directory: ~/project
+
+  go_executor:
+    docker:
+      - image: cimg/go:1.25
     working_directory: ~/project
 
   ruby_executor:
     docker:
-      - image: cimg/ruby:3.4
+      - image: cimg/ruby:3.4.5
     working_directory: ~/project
 
 commands:
@@ -27,25 +28,6 @@ commands:
           aws_access_key_id: ${AWS_ACCESS_KEY_ID}
           aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
           region: ${AWS_REGION}
-
-  sanitize-branch:
-    steps:
-      - run:
-          name: Sanitize Branch Name
-          command: |
-            if [ -n "<< pipeline.parameters.cleanup_preview_branch >>" ]; then
-              BRANCH_TO_USE="<< pipeline.parameters.cleanup_preview_branch >>"
-              echo "[INFO] Using provided branch param: ${BRANCH_TO_USE}"
-            else
-              BRANCH_TO_USE="${CIRCLE_BRANCH}"
-              echo "[INFO] Using current branch: ${BRANCH_TO_USE}"
-            fi
-
-            # Replace forward-slashes and spaces with double underscore
-            SANITIZED_BRANCH=$(echo "${BRANCH_TO_USE}" | tr '/ ' '__')
-            echo "[INFO] Sanitized branch: ${SANITIZED_BRANCH}"
-            echo "export SANITIZED_BRANCH=${SANITIZED_BRANCH}" >> $BASH_ENV
-            source $BASH_ENV
 
   notify_error:
     parameters:
@@ -77,10 +59,7 @@ jobs:
             - "SHA256:Plac654CPBty6yA26H7QMKCqM0yD1XWds7UwNqOYzJU"
       - run:
           name: Install Node Dependencies
-          command: |
-            set -e
-            echo "[INFO] Installing Node dependencies..."
-            npm ci
+          command: npm ci
       - run:
           name: Build the Documentation Site with Antora
           command: |
@@ -88,20 +67,8 @@ jobs:
             echo "[INFO] Starting Antora build..."
             npm run build:docs
             echo "[INFO] Antora build completed."
-      - run:
-          name: Create ZIP Archive of Build
-          command: |
-            set -e
-            echo "[INFO] Creating zip archive of build directory..."
-            zip -r build.zip build/
       - store_artifacts:
-          path: build.zip
-          destination: preview-site.zip
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build
-            - build.zip
+          path: build
       - persist_to_workspace:
           root: .
           paths:
@@ -110,190 +77,64 @@ jobs:
           message: "Build job failed for branch ${CIRCLE_BRANCH}"
 
   validate:
-    executor: ruby_executor
+    executor: go_executor
     steps:
+      - checkout
       - attach_workspace:
           at: .
-      - run:
-          name: Install HTML Proofer
-          command: |
-            set -e
-            echo "[INFO] Installing HTML Proofer gem..."
-            sudo gem install html-proofer
-      - run:
-          name: Run HTML Proofer Validation
-          command: |
-            set -e
-            echo "[INFO] Validating built site with HTML Proofer..."
-            htmlproofer ./build --checks html --ignore-urls "/#.*/" --ignore-empty-alt
+      - go/with-cache:
+          golangci-lint: true
+          steps:
+            - run: task mod-download
+            - run: task ci:diff
+            - run: task ci:lint
+            - run: task validate-html
       - notify_error:
           message: "Validation job failed for branch ${CIRCLE_BRANCH}"
 
-  deploy-preview:
-    executor: node_executor
-    steps:
-      - attach_workspace:
-          at: .
-      - sanitize-branch
-      - run:
-          name: Install GitHub CLI
-          command: |
-            set -e
-            echo "[INFO] Installing GitHub CLI..."
-            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-            sudo apt update
-            sudo apt install gh
-      - run:
-          name: Upload Preview ZIP to GitHub Release and Comment
-          command: |
-            set -e
-
-            if [[ -n "${CIRCLE_PULL_REQUEST}" ]]; then
-              PR_NUMBER=$(echo "$CIRCLE_PULL_REQUEST" | sed 's|.*/pull/||')
-              REPO_PATH="circleci/circleci-docs-static"
-              TAG="pr-${SANITIZED_BRANCH}"
-
-              echo "[INFO] Creating release for PR #${PR_NUMBER} - branch ${SANITIZED_BRANCH} in ${REPO_PATH}"
-
-              # Check if release already exists (if re-run)
-              if gh release view "${TAG}" -R "${REPO_PATH}" > /dev/null 2>&1; then
-                echo "[INFO] Release already exists. Replacing..."
-                gh release delete "${TAG}" -R "${REPO_PATH}" --yes
-              fi
-
-              # Create new release and upload ZIP
-              gh release create "${TAG}" build.zip \
-                --repo "${REPO_PATH}" \
-                --title "Preview for PR #${PR_NUMBER}" \
-                --notes "ZIP artifact for documentation preview." \
-                --prerelease
-
-              DOWNLOAD_URL="https://github.com/${REPO_PATH}/releases/tag/${TAG}/build.zip"
-
-              # Comment on the PR with release link
-              gh pr comment "${PR_NUMBER}" -R "${REPO_PATH}" -b "## Preview Documentation
-
-              📦 ZIP preview available here: [Preview Build Assets](${DOWNLOAD_URL})
-
-              Build: ${CIRCLE_BUILD_NUM} | Commit: ${CIRCLE_SHA1}"
-            else
-              echo "[INFO] Not a PR build, skipping preview release."
-            fi
-      - notify_error:
-          message: "Deploy preview job failed for branch ${CIRCLE_BRANCH}"
-
   deploy-production:
-    executor: node_executor
-    parameters:
-      bucket_name:
-        description: The name of the s3 bucket where static assets are stored.
-        type: string
-      build_dir:
-        default: "build"
-        description: The path to the docs build directory
-        type: string
+    executor: go_executor
     steps:
+      - checkout
       - attach_workspace:
           at: .
       - aws-setup
-      - run:
-          name: Deploy Production Site to S3
-          command: |
-            AWS_S3_BUCKET=<< parameters.bucket_name >>
-            BUILD_DIRECTORY=<< parameters.build_dir >>
-
-            set -e
-            echo "[INFO] Deploying production site..."
-            aws s3 sync "$BUILD_DIRECTORY" "s3://$AWS_S3_BUCKET/"
+      - go/with-cache:
+          steps:
+            - run: task mod-download
+            - run: task deploy
+            - run: task deploy-redirects
+            - run: task validate-redirects
       - notify_error:
           message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
 
-  cleanup-preview:
-    executor: node_executor
-    steps:
-      - sanitize-branch
-      - run:
-          name: Install GitHub CLI
-          command: |
-            set -e
-            echo "[INFO] Installing GitHub CLI..."
-            curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
-            echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
-            sudo apt update
-            sudo apt install gh
-      - run:
-          name: Delete GitHub Release and Tag
-          command: |
-            set -e
-            BRANCH="<< pipeline.parameters.cleanup_preview_branch >>"
-            REPO_PATH="circleci/circleci-docs-static"
-
-            # Extract TAG
-            TAG="pr-${SANITIZED_BRANCH}"
-
-            echo "[INFO] Cleaning up GitHub Release for ${TAG} in ${REPO_PATH}"
-
-            # Delete the release if it exists
-            if gh release view "${TAG}" -R "${REPO_PATH}" > /dev/null 2>&1; then
-              gh release delete "${TAG}" -R "${REPO_PATH}" --yes
-              echo "[INFO] Release '${TAG}' deleted."
-            else
-              echo "[WARN] Release '${TAG}' not found."
-            fi
-
-            # Delete the tag if it exists
-            if gh api -X GET "repos/${REPO_PATH}/git/refs/tags/${TAG}" > /dev/null 2>&1; then
-              gh tag delete "${TAG}" -R "${REPO_PATH}" --yes
-              echo "[INFO] Tag '${TAG}' deleted."
-            else
-              echo "[WARN] Tag '${TAG}' not found."
-            fi
-
 workflows:
-  lint:
-    unless:
-      equal: [main, << pipeline.git.branch >>]
+  main:
     jobs:
       - vale/lint:
           reference_branch: main
           base_dir: docs
-  build_validate_and_deploy:
-    when:
-      equal: ["", << pipeline.parameters.cleanup_preview_branch >>]
-    jobs:
+          filters: pipeline.git.branch != "main"
+
       - build:
-          context: circleci-docs-static
+          filters: pipeline.git.branch == "main"
+          name: build-main
+          context:
+            - circleci-docs-static
+      - build:
+          filters: pipeline.git.branch != "main"
+
       - validate:
-          requires: [build]
-      - deploy-preview:
-          requires: [validate]
-          filters:
-            branches:
-              ignore: main
-          context:
-            [
-              circleci-docs-static,
-              docs-platform-assets,
-              web-ui-npm,
-              web-ui-datadog,
-            ]
+          requires:
+            - build-main
+            - build
+
       - deploy-production:
-          requires: [validate]
-          filters:
-            branches:
-              only: main
+          requires:
+            - validate
+          filters: pipeline.git.branch == "main"
           context:
-            [
-              circleci-docs-static,
-              docs-platform-assets,
-              web-ui-npm,
-              web-ui-datadog,
-            ]
-          bucket_name: "circleci-docs-platform-assets/docs-preview"
-          build_dir: "build"
-  cleanup_preview:
-    when: pipeline.parameters.cleanup_preview_branch != ""
-    jobs:
-      - cleanup-preview:
-          context: circleci-docs-static
+            - circleci-docs-static
+            - docs-platform-assets
+            - web-ui-npm
+            - web-ui-datadog

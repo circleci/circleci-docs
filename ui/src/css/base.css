@@ -145,3 +145,11 @@ object[type="image/svg+xml"]:not([width]) {
     background-color: var(--scrollbar_hover-thumb-color);
   }
 }
+
+/* Firefox-specific CSS to fix flexbox shrinking issue */
+@-moz-document url-prefix() {
+  main > .content .doc,
+  article.doc {
+    flex-shrink: 0; /* Prevent excessive shrinking in Firefox */
+  }
+}

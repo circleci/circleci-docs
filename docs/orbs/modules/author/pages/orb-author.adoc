@@ -318,9 +318,9 @@ steps:
 [#why-include-scripts]
 ===== Why include scripts?
 
-CircleCI configuration is written in `YAML`. Logical code such as `bash` can be encapsulated and executed on CircleCI through `YAML`, but, for developers, it is not convenient to write and test programmatic code within a non-executable format. Also, parameters can become cumbersome in more complex scripts as the `<<parameter>>` syntax is a CircleCI native YAML enhancement, and not something that can be interpreted and executed locally.
+CircleCI configuration is written in `YAML`. Logical code such as `bash` can be encapsulated and executed on CircleCI through `YAML`, but, for developers, it is not convenient to write and test programmatic code within a non-executable format. Also, parameters can become cumbersome in more complex scripts as the `\<<parameter>>` syntax is a CircleCI native YAML enhancement, and not something that can be interpreted and executed locally.
 
-Using the orb development kit and the `<<include(file)>>` syntax, you can:
+Using the orb development kit and the `\<<include(file)>>` syntax, you can:
 
 * Import existing scripts into your orb.
 * Locally execute and test your orb scripts.
@@ -329,7 +329,7 @@ Using the orb development kit and the `<<include(file)>>` syntax, you can:
 [#using-parameters-with-scripts]
 ===== Using parameters with scripts
 
-To keep your scripts portable and locally executable, it is best practice to expect a set of environment variables within your scripts and set them at the config level. The `greet.sh` file, which was included with the special `<<include(file)>>` syntax above in our `greet.yml` command file, looks like this:
+To keep your scripts portable and locally executable, it is best practice to expect a set of environment variables within your scripts and set them at the config level. The `greet.sh` file, which was included with the special `\<<include(file)>>` syntax above in our `greet.yml` command file, looks like this:
 
 [,shell]
 ----
