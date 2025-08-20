@@ -53,20 +53,7 @@
   }
 
   function writeToClipboard (code) {
-    var text
-    // Check if this is a line-numbered code block (table structure)
-    var table = code.querySelector('table.hljs-ln')
-    if (table) {
-      // Extract text only from code cells (not line number cells)
-      var codeCells = table.querySelectorAll('td.hljs-ln-code')
-      text = Array.prototype.slice.call(codeCells).map(function (cell) {
-        return cell.textContent
-      }).join('\n')
-    } else {
-      // Fallback to original method for non-line-numbered blocks
-      text = code.innerText
-    }
-    text = text.replace(TRAILING_SPACE_RX, '')
+    var text = code.innerText.replace(TRAILING_SPACE_RX, '')
     if (code.dataset.lang === 'console' && text.startsWith('$ ')) text = extractCommands(text)
     window.navigator.clipboard.writeText(text).then(
       function () {
