@@ -272,7 +272,7 @@ circleci config process .circleci/config.yml > process.yml
 circleci local execute -c process.yml <job-name>
 ----
 +
-If you are using `version: 2` configuration, you can simply run:
+If you are using `version: 2` configuration, you can run:
 +
 [,shell]
 ----
@@ -330,6 +330,185 @@ circleci build -e VAR1=FOO -e VAR2=BAR
 
 The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc[test splitting] for build time optimization.
 
+[#project-management]
+== Project management
+
+The CircleCI CLI allows you to execute several project-oriented actions.
+
+=== Create a new project
+
+NOTE: This command only applies to GitLab or GitHub App organizations (Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Organization Settings[Overview]).
+
+Use the `create` sub-command to  create a new project.
+
+[,shell]
+----
+circleci project create <vcs-type> <org-id> [flags]
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. This command only supports the `circleci` VCS type.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `--name` is the flag that allows you to provide the project name. If not provided, you will be prompted to enter it.
+
+For full details on the `create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_create.html[CLI docs].
+
+
+=== Create an environment variable for a project
+
+Use the `secret create` sub-command to create an environment variable for a project:
+
+[,shell]
+---- 
+circleci project secret create <vcs-type> <org-id> <project-id> <env-name> [flags]
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+- `<env-name>` is the name of the environment variable to create.
+
+- `--env-value` is the flag that allows you to provide the value of the environment variable. If not provided, you will be prompted to enter it.
+
+For full details on the `secret create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_secret_create.html[CLI docs].
+
+=== List all environment variables for a project
+
+Use the `secret list` sub-command to list all environment variables for a project:
+
+[,shell]
+----
+circleci project secret list <vcs-type> <org-id> <project-id>
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `secret list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_secret_list.html[CLI docs].
+
+=== Purge Docker Layer Cache for a project
+
+Purging the xref:optimize:docker-layer-caching.adoc[Docker Layer Cache] means removing previously stored Docker image layers so that future builds will not reuse those cached layers. This forces CircleCI to rebuild Docker images from scratch, rather than leveraging layers from earlier builds to speed up the process.
+
+Use the `dlc purge` sub-command to purge Docker Layer Cache for a project:
+
+[,shell]
+----
+circleci dlc purge <vcs-type> <org-id> <project-id>
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI docs].
+
+
+[#pipeline-management]
+== Pipeline management
+
+The CircleCI CLI allows you to operate on pipelines. You can use the CLI to create a new pipeline definition, list existing pipeline definitions, or run a specific pipeline.
+
+=== Create a new pipeline definition for a project
+
+Use the `create` sub-command to  create a new pipeline definition for your project.
+
+NOTE: The `create` sub-command of the `pipeline` command only applies to pipeline definitions created with the GitHub App provider Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Organization Settings[Overview]).
+
+[,shell]
+----
+circleci pipeline create <project-id> [flags]
+----
+
+- `<project-id>` is the ID of the project for which you are creating the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+
+- `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
+
+For full details on the `create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_create.html[CLI docs].
+
+
+=== List pipeline definitions for a project
+
+Use the `list` sub-command to list all pipeline definitions for your project.
+
+[,shell]
+----
+circleci pipeline list <project-id> [flags]
+----
+
+- `<project-id>` is the ID of the project you wish to list the pipeline definitions for. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_list.html[CLI docs].
+
+=== Run a pipeline
+
+Use the `run` sub-command to run a specific pipeline.
+
+[,shell]
+----
+circleci pipeline run <org-id> <project-id> [flags]
+----
+
+- `<org-id>` is the ID of the organization associated with the pipeline definition. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines]. 
+
+For full details on the `run` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_run.html[CLI docs].
+
+
+[#create-a-trigger]
+== Create a trigger
+
+You can use the CircleCI CLI to create triggers for your projects.
+
+NOTE: The `trigger` command and its `create` sub-command only apply to pipeline definitions created with the GitHub App provider (Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Organization Settings[Overview]).
+
+For full details on creating, testing, and managing triggers for your organization, see the xref:orchestrate:triggers-overview.adoc[Trigger a pipeline] page.
+
+Use the `create` sub-command to create a trigger for your project.
+
+[,shell]
+----
+circleci trigger create <project-id>  [flags]
+----
+
+The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags.
+
+- `<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines].
+
+- `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
+
+- `--event-preset` is the flag that allows you to specify xref:orchestrate:github-trigger-event-options.adoc[the name of the event preset] to use when filtering events for this trigger. The value can be any of:
+** `all-pushes`
+** `only-tags`
+** `default-branch-pushes`
+** `only-build-prs`
+** `only-open-prs`
+** `only-labeled-prs`
+** `only-merged-prs`
+** `only-ready-for-review-prs`
+** `only-branch-delete`
+** `only-build-pushes-to-non-draft-prs`
+
+For full details on this command and sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_trigger.html[CLI docs].
+
 [#context-management]
 == Context management
 
@@ -342,7 +521,7 @@ xref:security:contexts.adoc[Contexts] provide a mechanism for securing and shari
 - `show` - Show a context
 - `store-secret` - Store a new environment variable in the named context
 
-The above list are "sub-commands" in the CLI, which would be executed like so:
+The above list are "sub-commands" in the CLI, which are executed like so:
 
 [,shell]
 ----

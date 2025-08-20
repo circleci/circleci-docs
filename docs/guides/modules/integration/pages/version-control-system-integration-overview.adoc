@@ -125,7 +125,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger pipelines via API]
+| link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[Trigger pipelines via API]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#

@@ -20,7 +20,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Organization*
 ^| *Admin*
@@ -101,12 +101,22 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
+
+| Rename org
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| Delete org
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 |===
 
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Insights*
 ^| *Admin*
@@ -122,7 +132,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Runner*
 ^| *Admin*
@@ -143,7 +153,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Projects*
 ^| *Admin*
@@ -169,7 +179,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Contexts*
 ^| *Admin*
@@ -200,7 +210,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Orbs*
 ^| *Admin*
@@ -231,7 +241,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Webhooks*
 ^| *Admin*
@@ -262,7 +272,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 | *Schedule*
 ^| *Admin*
@@ -283,7 +293,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 |*Triggers*
 ^| *Admin*
@@ -309,7 +319,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 |*Pipelines*
 ^| *Admin*
@@ -330,7 +340,7 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| ORGANIZATION ROLES
+3+^| ORGANIZATION ROLES
 
 |*Releases*
 ^| *Admin*
@@ -387,7 +397,7 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| PROJECT ROLES
+3+^| PROJECT ROLES
 
 | *Projects*
 ^| *Admin*
@@ -413,12 +423,17 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
+
+| Delete project
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
 |===
 
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| PROJECT ROLES
+3+^| PROJECT ROLES
 
 | *Webhooks*
 ^| *Admin*
@@ -439,7 +454,7 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| PROJECT ROLES
+3+^| PROJECT ROLES
 
 | *Schedule*
 ^| *Admin*
@@ -460,7 +475,7 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| PROJECT ROLES
+3+^| PROJECT ROLES
 
 | *Triggers*
 ^| *Admin*
@@ -486,7 +501,7 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| PROJECT ROLES
+3+^| PROJECT ROLES
 
 | *Contexts*
 ^| *Admin*
@@ -518,7 +533,7 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| PROJECT ROLES
+3+^| PROJECT ROLES
 
 | *Pipelines*
 ^| *Admin*
@@ -539,7 +554,7 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 | ACTIONS
-3+| PROJECT ROLES
+3+^| PROJECT ROLES
 
 | *Releases*
 ^| *Admin*

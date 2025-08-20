@@ -336,5 +336,5 @@
   })
 
   // Then, apply line numbers to highlighted blocks
-  hljs.initLineNumbersOnLoad()
+  // hljs.initLineNumbersOnLoad() // Disabled to fix copy/paste issues
 })()
