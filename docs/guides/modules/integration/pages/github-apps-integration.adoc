@@ -127,11 +127,13 @@ Before attempting to move your information from an org integrated with the GitHu
 
 The following steps will guide you through migrating from an organization integrated with GitHub through the OAuth integration by default (identifyable by `/github/` or `/gh/` in the URL) to an organization that does not have a default OAuth integration with GitHub (identifyable by `/circleci/` in the URL).
 
-Before proceeding, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below. If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
-
-CAUTION: You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
-
-CAUTION: The following steps include creating a new org. If you need to transfer private orbs or self-hosted runner resource classes to your new org, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.
+[CAUTION]
+====
+* You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
+* Before proceeding, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.
+* The following steps include *creating a new org*. If you need to transfer private orbs or self-hosted runner resource classes to your new org, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.
+* If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
+====
 
 . From your existing CircleCI organization in the CircleCI web app, select the organization dropdown in the top-left corner.
 . At the bottom of the drop-down, select btn:[Create New Organization].
