@@ -255,7 +255,10 @@ async function indexToAlgolia(pages) {
     console.error('Error configuring index settings:', err);
   }
 
-  const response = await client.saveObjects({ indexName, objects: records });
+  const response = await client.replaceAllObjects({
+    indexName: indexName,
+    objects: records,
+  });
   console.log(`Indexed ${response[0]?.objectIDs.length} records to ${indexName}`);
 
   return response;

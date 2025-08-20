@@ -172,7 +172,6 @@
 *** xref:deploy:update-the-kubernetes-release-agent.adoc[Update the Kubernetes release agent]
 *** xref:deploy:manage-deploys.adoc[Manage deploys]
 ** How-to guides
-*** xref:deploy:deploy-to-amazon-sagemaker.adoc[Deploy to Amazon SageMaker]
 *** xref:deploy:deploy-android-applications.adoc[Deploy Android applications]
 *** xref:deploy:deploy-to-artifactory.adoc[Deploy to Artifactory]
 *** xref:deploy:deploy-to-aws.adoc[Deploy to AWS]
@@ -249,6 +248,7 @@
 *** xref:security:rotate-project-ssh-keys.adoc[Rotate project SSH keys]
 *** xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
 *** xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories]
+*** xref:security:delete-organizations-and-projects.adoc[Delete organizations and projects]
 
 * Manage config policies
 ** xref:config-policies:config-policy-management-overview.adoc[Config policy management overview]
@@ -268,11 +268,13 @@
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS integration overview]
 *** xref:integration:github-apps-integration.adoc[GitHub App integration]
+*** xref:integration:github-integration.adoc[GitHub OAuth app integration]
+*** xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
 *** xref:integration:gitlab-integration.adoc[GitLab integration]
 *** xref:integration:bitbucket-data-center-integration.adoc[Bitbucket data center integration]
-*** xref:integration:github-integration.adoc[GitHub OAuth app integration]
 *** xref:integration:bitbucket-integration.adoc[Bitbucket Cloud integration]
 *** xref:integration:oss.adoc[Build open source projects]
+
 ** Third-party integrations
 *** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:jira-plugin.adoc[Connect with Jira]

@@ -92,7 +92,6 @@ The following list shows common and important events found in the audit log. Thi
 - webhook.delete
 - webhook.update
 - workflow.cancel
-- workflow.job.approve
 - workflow.job.context.request
 - workflow.job.finish
 - workflow.job.scheduled
