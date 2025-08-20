@@ -3,11 +3,14 @@
 :page-description: Learn how to integrate CircleCI with GitHub using GitHub Apps.
 :experimental:
 
-If your CircleCI organization is authenticated with GitHub through the **GitHub App**, the content on this page is for you.
+If your CircleCI organization is integrated with GitHub through the **CirlceCI GitHub App**, the content on this page is for you.
 
-include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+****
+The **CirlceCI GitHub App** is an add-on integration, and all organizations that have `/github/` or `/circleci/` in the URL can install it - including xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[if they are already integrated through the GitHub OAuth app]. 
+To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections]. 
+****
 
-This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
+This page walks you through integrating a GitHub project with CircleCI through the CircleCI GitHub App integration. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
 
 [#sign-up]
 == Steps to integrate GitHub projects with CircleCI
@@ -29,7 +32,7 @@ NOTE: If you are new to CircleCI, you may wish to get started with our xref:gett
 
 A GitHub org with the CircleCI GitHub App installed can only be integrated with one CircleCI organization.
 
-If you attempt to integrate a GitHub org with the CircleCI GitHub App installed with a second CircleCI organization, you will find yourself on a GitHub App integration settings page when attempting to create a project.
+If you attempt to integrate a GitHub org with the CircleCI GitHub App installed with a second CircleCI organization, you will find yourself on a GitHub App integration settings page when attempting to create a project. If you are not sure what other CirlceCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[here].
 
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
 
