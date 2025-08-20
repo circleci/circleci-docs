@@ -256,7 +256,7 @@ workflows:
       equal: [main, << pipeline.git.branch >>]
     jobs:
       - vale/lint:
-          reference_branch: server-4.8
+          reference_branch: main
           base_dir: docs
   build_validate_and_deploy:
     when:
