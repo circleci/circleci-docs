@@ -100,7 +100,7 @@ terraform plan
 terraform apply
 ----
 
-NOTE: The AMIs used in our terraform are now based on Ubuntu 22.04 with CgroupsV1 enabled. CgroupsV2 is currently unsupported. These nomad AMIs are built with automatic security updates enabled. You may use our AMIs as a base to build images with your own customizations or use the AWS image builder to create your own nomad AMIs. Currently the only requirement is Ubuntu 22.04 with CgroupsV1 enabled.
+NOTE: The AMIs used in our Terraform are now based on Ubuntu 22.04 with CgroupsV1 enabled. CgroupsV2 is currently unsupported. These Nomad AMIs are built with automatic security updates enabled. You may use our AMIs as a base to build images with your own customizations or use the AWS image builder to create your own Nomad AMIs. Currently the only requirement is Ubuntu 22.04 with CgroupsV1 enabled.
 
 After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe. The apply process usually only takes a minute.
 
@@ -302,8 +302,10 @@ endif::env-aws[]
 In the previous section you deployed your Nomad clients and have the IAM resources provisioned. Now you can deploy and configure the Nomad Servers.
 
 [#where-to-deploy-nomad-servers]
-=== a. Where to deploy nomad servers
-Nomad Servers are by default deployed within your CircleCI server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
+=== a. Where to deploy Nomad servers
+
+Nomad Servers are by default deployed within your CircleCI server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the Terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
+
 * If you wish to deploy your Nomad servers inside your CircleCI server cluster, continue to <<nomad-gossip-encryption-key>> below.
 * If you wish to deploy your Nomad servers externally, follow these steps:
 
@@ -315,7 +317,7 @@ endif::env-aws[]
 ifndef::env-gcp[]
 link:https://github.com/CircleCI-Public/server-terraform/blob/main/nomad-aws/variables.tf[public repository].
 endif::env-gcp[]
-.. Update the `nomad` block in your helm `values.yaml` with the following:
+.. Update the `nomad` block in your Helm `values.yaml` with the following:
 +
 [source,yaml]
 ----
@@ -579,7 +581,12 @@ NOTE: Overriding scaling options is currently not supported, but will be support
 
 Machine provisioner is used to configure virtual machines for jobs that run in Linux VM, Windows and Arm VM execution environments, and those that are configured to use xref:reference:ROOT:configuration-reference.adoc#setupremotedocker[remote Docker]. Machine provisioner is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
-Once you have completed the server installation process you can further configure machine provisioner, including building and specifying a Windows image to give developers access to the Windows execution environment, specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times. For more information, see the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Manage Virtual Machines with machine provisioner] page.
+Once you have completed the server installation process you can further configure machine provisioner, including the following:
+
+* Building and specifying a Windows image to give developers access to the Windows execution environment.
+* Specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times.
+
+For more information, see the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Manage Virtual Machines with machine provisioner] page.
 
 Before moving on to platform specific steps, create your firewall rules. External VMs need the networking rules described in xref:installation:hardening-your-cluster.adoc#external-vms[Hardening your Cluster]
 
