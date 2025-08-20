@@ -335,7 +335,7 @@ During step execution, the templates above are replaced by runtime values and us
 | The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
 
 | `{{ arch }}`
-| Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See xref:server-admin:operator:faq.adoc#cpu-architecture-circleci-support[supported CPU architectures].
+| Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See xref:reference:ROOT:faq.adoc#cpu-architecture-circleci-support[supported CPU architectures].
 |===
 
 [#further-notes-on-using-keys-and-templates]
@@ -455,7 +455,7 @@ If your source code changes frequently, we recommend using fewer, more specific 
 
 Even with the narrowest `restore_cache` option (`source-v1-{{ .Branch }}-{{ .Revision }}`), source caching can be greatly beneficial, for example:
 
-* Running repeated builds against the same git revision (for example, with link:../api/v1/index.html#trigger-a-new-build-by-project-preview[API-triggered builds])
+* Running repeated builds against the same git revision (for example, with link:../../../api/v2/#tag/Pipeline/operation/triggerPipelineRun[API-triggered builds])
 * When using workflows, where you might otherwise need to `checkout` the same repository once per workflow job.
 
 However, it is worth comparing build times with and without source caching. `git clone` is often faster than `restore_cache`.

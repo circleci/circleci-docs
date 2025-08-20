@@ -10,7 +10,7 @@ If you have existing contexts (or environment variables) and you would like to r
 [#overview]
 == Overview
 
-Manage contexts on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app], or via the link:https://circleci.com/docs/api/v2/index.html#tag/Context[API]. You must be an organization member to view, create, or edit contexts.
+Manage contexts on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app], or via the link:https://circleci.com/docs/api/v2/#tag/Context[API]. You must be an organization member to view, create, or edit contexts.
 
 Create a context and then add environment variables to it. You can use the xref:reference:ROOT:configuration-reference.adoc#context[`context` key] in the workflows section of a project's `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 

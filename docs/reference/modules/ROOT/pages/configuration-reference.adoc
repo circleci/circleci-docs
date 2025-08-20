@@ -380,6 +380,11 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | N
 | String
 | Amount of CPU and RAM allocated to each container in a job.
+
+| `retention`
+| N
+| Map
+| Configure job retention periods for cache data (1-15 days, for example, "1d", "7d", "15d").  This reduces retention from the organization-level default, automatically removing cache data after the specified period.
 |===
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
@@ -416,7 +421,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deploys-overview.adoc#[Deploys overview] page.
+Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys overview] page.
 
 **Example** of a job with a `release` type:
 
@@ -480,6 +485,73 @@ jobs:
       - image: cimg/base:2022.04-20.04
     environment:
       FOO: bar
+----
+
+'''
+
+[#retention]
+==== `retention`
+
+Configure job retention periods to control how long job data is kept. Job retention specifically controls cache retention at the job level. This setting can be configured from 1 day to 15 days using string values (for example, "1d", "7d", "15d"). Job retention reduces the organization-level retention from the default by automatically removing cache data after the specified period.
+
+*Example:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:18.0
+    retention:
+      caches: 7d
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
+----
+
+For more information on cache retention, see the xref:guides:optimize:persist-data.adoc#custom-storage-usage[Persisting data overview] page.
+
+[#retention-errors]
+===== Common errors
+
+When configuring job retention, you may encounter the following validation errors:
+
+* **Invalid time format**: The retention period must use the format `^([1-9]|[12][0-9]|30)d$` (1-30 days with "d" suffix). For example, use `"7d"` instead of `"12h"` or `"1w"`.
+
+* **Incorrect data type**: The `retention` key expects a map with `caches` as a string value, not a direct string.
+
+*Examples:*
+
+.Incorrect - direct string value
+[source,yaml]
+----
+# Incorrect - direct string value
+jobs:
+  say-hello:
+    retention: "12h"  # Error: expected type: String, found: Mapping
+----
+
+.Incorrect - invalid time format
+[source,yaml]
+----
+#Incorrect - invalid time format
+jobs:
+  say-hello:
+    retention:
+      caches: "12h"  # Error: does not match pattern ^([1-9]|[12][0-9]|30)d$
+----
+
+.Correct format
+[source,yaml]
+----
+# Correct format
+jobs:
+  say-hello:
+    retention:
+      caches: "7d"   # Valid: 7 days
 ----
 
 '''
@@ -1730,7 +1802,7 @@ During step execution, the templates above will be replaced by runtime values an
 
 While choosing suitable templates for your cache `key`, keep in mind the following:
 
-* Cache saving is not a free operation. See the billing section on the xref:server-admin:operator:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
+* Cache saving is not a free operation. See the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
 * It takes time to upload the cache.
 * Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
 * Given the immutability of caches, it might be helpful to start all your cache keys with a version prefix `+v1-...+`. That way you will be able to regenerate all your caches just by incrementing the version in this prefix.

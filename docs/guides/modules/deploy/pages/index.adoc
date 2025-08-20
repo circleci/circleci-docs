@@ -1,7 +1,0 @@
-= Deploy with CircleCI
-:page-layout: subsection
-:page-description: Deploy your code and manage your deployments with CircleCI.
-
-Learn how to deploy your code and manage your deployments with CircleCI. Choose an agentless setup, or install the Kubernetes release agent into your cluster.
-
-Also in this section you will find deployment guides for a variety of platforms.

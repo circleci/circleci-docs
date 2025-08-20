@@ -37,8 +37,8 @@ This technical documentation consists of several specialized files:
 
 1. **Set up your environment**:
    ```bash
-   git clone https://github.com/circleci/circleci-docs-static.git
-   cd circleci-docs-static
+   git clone https://github.com/circleci/circleci-docs.git
+   cd circleci-docs
    npm ci
    ```
 2. **Make sure you've cloned server-4* branches (Server Administration Docs)**

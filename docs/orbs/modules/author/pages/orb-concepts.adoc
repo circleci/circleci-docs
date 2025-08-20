@@ -317,7 +317,7 @@ NOTE: If you are using the orb development kit, orb packing is handled automatic
 
 In order to _pack_ an orb, an xref:orb-author.adoc#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[commands], xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[jobs], xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[executors], and <<usage-examples,examples>>. Any additional files or folders will be safely ignored.
 
-Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the xref:orb-concepts.adoc#file-include-syntax[file include syntax] (`<<include(file)>>`).
+Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the xref:orb-concepts.adoc#file-include-syntax[file include syntax] (`\<<include(file)>>`).
 
 === CLI command
 
@@ -333,9 +333,9 @@ For orb development kit users, this step is handled automatically.
 
 The `file include` syntax (`++<<include(dir/file)>>++`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
 
-The `<<include(dir/file)>>` syntax is a special key for use with the <<orb-packing,`circleci orb pack` command>> and _will not_ work more widely on CircleCI.
+The `\<<include(dir/file)>>` syntax is a special key for use with the <<orb-packing,`circleci orb pack` command>> and _will not_ work more widely on CircleCI.
 
-When `circleci orb pack <dir> > orb.yml` is run against a directory containing an `@orb.yml` file, the pack command begins to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
+When `circleci orb pack <dir> > orb.yml` is run against a directory containing an `@orb.yml` file, the pack command begins to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `\<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
 
 CAUTION: Included files are always referenced from the relative location of the `@orb.yml` file.
 
