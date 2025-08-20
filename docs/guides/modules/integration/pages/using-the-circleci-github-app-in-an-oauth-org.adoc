@@ -175,7 +175,7 @@ Installing the CircleCI GitHub App is a one-time action that enables all new fea
 If you run into issues while installing the CircleCI GitHub App, submit a request through link:https://forms.gle/p8k51xYmG1U5HjsF7[this form]. A member of our team will be in touch promptly.
 
 ****
-Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds, if you have two equivalent triggers on yoru OAuth pipeline and on a GitHub OAuth pipeline. To avoid this, you can delete the GitHub trigger from your OAuth pipeline from menu:Project Settings[Project setup].
+Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by deleting the GitHub trigger associate with the GitHub OAuth pipeline, in menu:Project settings[Project setup]. This trigger can be re-created easily by selecting "click here" at the bottom of the GitHub OAuth pipeline card. 
 ****
 
 === Authorization steps 
