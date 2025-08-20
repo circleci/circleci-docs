@@ -139,7 +139,7 @@ When you have determined your preferred storage retention for each object type, 
 
 The *Reset to Default Values* button will reset the object types to their default storage retention periods: 30 days for artifacts, and 15 days for caches and workspaces.
 
-You can also configure job retention periods to control how long job data is kept. Job retention specifically controls cache retention at the job level. This setting can be configured from 1 day to 15 days using string values (for example, "1d", "7d", "15d") in your CircleCI configuration YAML file. Job retention reduces the organization-level retention from the default by automatically removing cache data after the specified period.
+You can also configure job retention periods to control how long job data is kept. Job retention specifically controls cache retention at the job level. This setting can be configured from 1 day to 15 days using string values (for example, "1d", "7d", "15d") in your CircleCI configuration YAML file. This reduces retention from the organization-level default, automatically removing cache data after the specified period.
 
 The following example shows how to configure job retention in your configuration file:
 
