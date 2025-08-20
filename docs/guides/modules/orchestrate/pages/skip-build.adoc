@@ -1,4 +1,4 @@
-= Skip CI and cancel workflows
+n= Skip CI and cancel workflows
 :page-platform: Cloud, Server v4+
 :page-description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
 :experimental:
@@ -13,7 +13,7 @@ Both methods are described below.
 [#skip-jobs]
 == Skip CI for a specific push
 
-By default, CircleCI automatically triggers a pipeline whenever you push changes to your project. You can override this behavior by adding one of the following tags within the first 250 characters of the body or title of the **latest commit** you pushed:
+If you have a trigger configured to run a pipeline on push events to your repository, you can override this behavior by adding one of the following tags within the first 250 characters of the body or title of the **latest commit** you pushed:
 
 * `[ci skip]`
 * `[skip ci]`
@@ -33,6 +33,9 @@ A few points to note regarding the scope of the `ci skip` feature:
 
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
+* For GitHub OAuth and Bitbucket OAuth pipelines, this functionality applies also when the pipeline is triggered via API, manually via the web app, or via schedule.
+Instead, for GitHub App pipelines, pipeline triggred via API or manually are never skipped.
+* GitHub App pipelines triggered via Custom webhook, API, manually via the web app, or via schedule are never skipped
 
 === Example commit title
 
