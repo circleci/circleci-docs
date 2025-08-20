@@ -346,47 +346,7 @@ Key functionality enabled through the GitHub App integration includes the follow
 ** **Cross-repo triggers**: Events in one repository can trigger builds on one or many other repositories.
 ** **More GitHub events as triggers**: Pipelines can be set up to run on events other than "push", including pull request events, with more powerful customization of trigger conditions. For full details, see the xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options] page.
 
-[#installing-github-app-alongside-github-oauth-app]
-### Installing GitHub App alongside the GitHub OAuth app
-
-****
-Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by disabling the GitHub OAuth trigger. To do so, follow these steps:
-
-. Navigate to the GitHub repository associated with the project.
-. Go to menu:Settings[Webhooks].
-. Locate the CircleCI webhook (`https://circleci.com/hooks/github`) and select btn:[Delete].
-
-This action is reversible. To re-enable the OAuth trigger, follow these steps:
-
-. Go to menu:Project Settings[Overview]
-. Select "Stop building" at the bottom of the page
-. Then, select "Follow". This will create a new CircleCI webhook in your repository.
-****
-
-Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization.
-
-To get started, go to menu:Project Settings[Pipelines] for one of your projects and xref:orchestrate:pipelines.adoc#add-or-edit-a-pipeline[add a new pipeline]. One of the key steps in creating your first pipeline will be installing the CircleCI GitHub App and connecting to it.
-Once you have set up your first pipeline, you will be able to add triggers to it through the menu:Project Settings[Triggers] page.
-
-NOTE: Only organization admins and users that have admin access to at least one repository in an organization can install the GitHub App.
-
-Once the GitHub App is installed, each user should authorize the GitHub App connection by clicking on the btn:[Authorize] button that is displayed on the web app navbar for unauthorized users.
-Authorizing the GitHub App ensures that users can:
-
-* Trigger pipelines xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[from the CircleCI web app].
-* Run builds, if the flag xref:plans-pricing:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered user spend] is set to "On".
-* Run builds, if they require access to xref:security:contexts.adoc[contexts].
-
-[#github-app-integration]
-### The GitHub App integration
-
-Compared to the GitHub OAuth app, the xref:github-apps-integration.adoc[CircleCI GitHub App integration] offers the following:
-
-* Increased control over the resources that CircleCI can access.
-* Lets CircleCI access those resources in a more secure manner, specifically:
-** You can choose to only allow the CircleCI GitHub App access to specific repositories within your GitHub organization.
-** The CircleCI GitHub App only asks for fine-grained permissions to access your resources.
-** The CircleCI GitHub App uses short-lived tokens when accessing your resources.
+For more information, follow the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] guide.
 
 [#next-steps]
 == Next steps
