@@ -497,7 +497,7 @@ Configure job retention periods to control how long job data is kept. Job retent
 For more information on cache retention, see the xref:guides:optimize:persist-data.adoc#custom-storage-usage[Persisting data overview] page.
 
 [#retention-errors]
-==== Common errors
+===== Common errors
 
 When configuring job retention, you may encounter the following validation errors:
 
@@ -505,22 +505,31 @@ When configuring job retention, you may encounter the following validation error
 
 * **Incorrect data type**: The `retention` key expects a map with `caches` as a string value, not a direct string.
 
-*Example:*
+*Examples:*
 
+.Incorrect - direct string value
 [source,yaml]
 ----
-# ❌ Incorrect - direct string value
+# Incorrect - direct string value
 jobs:
   say-hello:
     retention: "12h"  # Error: expected type: String, found: Mapping
+----
 
-# ❌ Incorrect - invalid time format  
+.Incorrect - invalid time format
+[source,yaml]
+----
+#Incorrect - invalid time format
 jobs:
   say-hello:
     retention:
       caches: "12h"  # Error: does not match pattern ^([1-9]|[12][0-9]|30)d$
+----
 
-# ✅ Correct - proper format
+.Correct format
+[source,yaml]
+----
+# Correct format
 jobs:
   say-hello:
     retention:
