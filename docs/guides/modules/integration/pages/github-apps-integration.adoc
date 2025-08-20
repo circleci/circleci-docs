@@ -120,7 +120,7 @@ A subset of built-in environment variables are not available in GitHub-based pro
 Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI’s GitHub App, consider the following:
 
 * If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[this guide]. 
-* If the motivation is to **completely remove the OAuth app integration**, please follow the instructions in the <<steps-to-migrate-to-an-organization-without-default-GitHub-OAuth-integration>> section below.
+* If the motivation is to **completely remove the OAuth app integration** for security or compliance reasons, follow the steps below.
 
 [#Steps-to-migrate-to-an-organization-without-default-GitHub-OAuth-integration]
 === Steps to migrate to an organization without default GitHub OAuth integration
