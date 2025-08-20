@@ -1,4 +1,6 @@
 = Package and re-use config with orbs
+:page-description: Orbs are reusable packages of parameterizable configuration that help automate repeated processes.
+:page-layout: subsection
 
 Orbs are reusable packages of parameterizable configuration that help automate repeated processes, accelerate project setup, and simplify integration with third-party tools in CircleCI.
 

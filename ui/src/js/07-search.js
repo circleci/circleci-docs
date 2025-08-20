@@ -292,7 +292,7 @@
           ? contentText.substring(0, 200).replace(/\s+\S*$/, '') + '...'
           : contentText
 
-        resultElement.href = hit.relUrl
+        resultElement.href = hit.url
         container.appendChild(resultElement)
       })
     }

@@ -139,6 +139,26 @@ When you have determined your preferred storage retention for each object type, 
 
 The *Reset to Default Values* button will reset the object types to their default storage retention periods: 30 days for artifacts, and 15 days for caches and workspaces.
 
+You can also configure job retention periods to control how long job data is kept. Job retention specifically controls cache retention at the job level. This setting can be configured from 1 day to 15 days using string values (for example, "1d", "7d", "15d") in your CircleCI configuration YAML file. This reduces retention from the organization-level default, automatically removing cache data after the specified period.
+
+The following example shows how to configure job retention in your configuration file:
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:18.0
+    retention:
+      caches: 7d
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
+----
+
 Anyone in the organization can view the custom usage controls, but you must be an admin to make changes to the storage periods.
 
 image::guides:ROOT:storage-usage-controls.png[storage-usage-controls]
@@ -154,9 +174,9 @@ Network charges apply when an organization has runner network egress beyond the 
 
 Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
-You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:server-admin:operator:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
+You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
 
-For questions on data usage for the IP ranges feature, visit the xref:server-admin:operator:faq.adoc#calculate-monthly-IP-ranges-costs[FAQ] page.
+For questions on data usage for the IP ranges feature, visit the xref:reference:ROOT:faq.adoc#calculate-monthly-IP-ranges-costs[FAQ] page.
 
 [#reducing-excess-use-of-network-egress-and-storage]
 === Reducing excess use of network egress and storage
