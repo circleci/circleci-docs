@@ -494,6 +494,24 @@ jobs:
 
 Configure job retention periods to control how long job data is kept. Job retention specifically controls cache retention at the job level. This setting can be configured from 1 day to 15 days using string values (for example, "1d", "7d", "15d"). Job retention reduces the organization-level retention from the default by automatically removing cache data after the specified period.
 
+*Example:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:18.0
+    retention:
+      caches: 7d
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
+----
+
 For more information on cache retention, see the xref:guides:optimize:persist-data.adoc#custom-storage-usage[Persisting data overview] page.
 
 [#retention-errors]
@@ -534,24 +552,6 @@ jobs:
   say-hello:
     retention:
       caches: "7d"   # Valid: 7 days
-----
-
-*Example:*
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  test:
-    docker:
-      - image: cimg/node:18.0
-    retention:
-      caches: 7d
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm test
 ----
 
 '''
