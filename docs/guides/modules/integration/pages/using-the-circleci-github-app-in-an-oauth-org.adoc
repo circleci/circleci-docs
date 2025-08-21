@@ -177,7 +177,7 @@ Authorizing the GitHub App ensures that users can:
 * Run builds, if the flag xref:plans-pricing:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered user spend] is set to "On".
 * Run builds, if they require access to xref:security:contexts.adoc[contexts].
 
-If you run into issue while attempting to authorize, submit a request through link:https://forms.gle/f33wxNcZzZURYjDh8[this form]. A member of our team will be in touch promptly.
+If you run into an issue while attempting to authorize, submit a request through link:https://forms.gle/f33wxNcZzZURYjDh8[this form]. A member of our team will be in touch promptly.
 
 === Benefits of dual integration
 
