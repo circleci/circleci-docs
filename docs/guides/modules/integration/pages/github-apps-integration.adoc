@@ -32,7 +32,7 @@ NOTE: If you are new to CircleCI, you may wish to get started with our xref:gett
 
 A GitHub org with the CircleCI GitHub App installed can only be integrated with one CircleCI organization.
 
-If you attempt to integrate a GitHub org with the CircleCI GitHub App installed with a second CircleCI organization, you will find yourself on a GitHub App integration settings page when attempting to create a project. If you are not sure what other CirlceCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[here].
+If you attempt to integrate a GitHub org with the CircleCI GitHub App installed with a second CircleCI organization, you will find yourself on a GitHub App integration settings page when attempting to create a project. If you are not sure what other CircleCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[here].
 
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
 
