@@ -6,7 +6,7 @@
 If your CircleCI organization is integrated with GitHub through the **CircleCI GitHub App**, the content on this page is for you.
 
 ****
-The **CirlceCI GitHub App** is an add-on integration, and all organizations that have `/github/` or `/circleci/` in the URL can install it - including xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[if they are already integrated through the GitHub OAuth app]. 
+The **CircleCI GitHub App** is an add-on integration, and all organizations that have `/github/` or `/circleci/` in the URL can install it - including xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[if they are already integrated through the GitHub OAuth app]. 
 To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections]. 
 ****
 
