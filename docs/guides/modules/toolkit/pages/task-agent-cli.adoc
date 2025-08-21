@@ -1,0 +1,147 @@
+= CircleCI task agent CLI usage guide
+:page-platform: Cloud, Server v4+
+:page-description: Using the CircleCI task agent CLI in your CI/CD pipeline
+:experimental:
+
+This page provides reference documentation for the CircleCI task agent CLI. This CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
+
+== CLI differentiation
+
+The CircleCI Task Agent:: A specialized command-line interface. Task agent retrieves and configures a task before managing the execution of the job within a chosen compute environment. The Task agent CLI is available for use in your CI/CD pipelines.
+
+The Local CLI:: The development tool used on a local machine. It handles day-to-day development tasks, testing, and local workflow management.
+
+These tools share some similarities. However, they serve different purposes and operate in different contexts with different capabilities and permissions.
+
+== What you will find in this document
+
+This reference guide covers basic information about the CircleCI task-agent CLI, including:
+
+* Complete command reference for available commands and subcommands.
+* Flag documentation for flag options with descriptions.
+* Usage examples showing real-world usage patterns.
+
+== Root command
+
+* `circleci`: The CLI tool to be used in CircleCI jobs.
+
+== Subcommands
+
+=== task
+
+Manage tasks. You can also use the alias `step`.
+
+==== halt
+
+Halt the current task and treat it as successful.
+
+*Example usage:*
+
+[source,yaml]
+----
+## These commands would be equivalent:
+circleci task halt
+circleci step halt
+----
+
+=== version
+
+Output version information for the task agent CLI.
+
+*Flags:*
+
+* `short`: print only the version string.
+
+*Example usage:*
+
+[source,yaml]
+----
+circleci version [flag]
+----
+
+=== tests
+
+Collect and split tests so they may be run in parallel.
+
+==== split
+
+Group tests into independent buckets so they can be run in parallel.
+
+*Flags:*
+
+* `index`: index of node.
+* `total`: number of nodes.
+* `split-by`: how to weight the split, allowed values are "name", "filesize", and "timings".
+* `timings-type`: lookup historical timing data by: "classname", "filename", "testname" or "autodetect"(automatically choose classname or filename) (default "autodetect").
+* `show-counts`: print test file or test class counts to stderr (default false).
+* `time-default`: override default time value of test timing data when timing is not found (default 0s).
+* `timings-file`: JSON file containing historical timing data.
+
+==== glob
+
+Print files matching the glob pattern.
+
+*Flags:*
+
+NOTE: The flags for glob subcommand is a pattern. Pattern supports the following symbols:
+
+* `*` matches any sequence of non-path-separators.
+* `**` matches any sequence of characters, including path separators.
+* `?` matches any single non-path-separator character.
+* `[...]` matches any character in the set. May use '-' for a range.
+
+*Example usage:*
+
+[source,yaml]
+----
+## example usage of split
+circleci tests split [flags] [FILENAME]
+
+## example usage of glob
+circleci tests glob [flags] PATTERN
+
+## example usage of run
+circleci tests run [flags]
+----
+
+=== env
+
+Manage environment variables.
+
+==== subst
+
+Substitute environment variables in a string.
+
+*Example usage:*
+
+[source,yaml]
+----
+circleci env
+----
+
+=== run
+
+Invokes a task-agent subcommand by name.
+
+==== oidc
+
+Run authentication using OIDC.
+
+*Example usage:*
+
+[source,yaml]
+----
+## These would all be equivalent:
+circleci run oidc
+----
+
+== Global flags
+* `verbose`: enable verbose logging output.
+
+== Help
+Use the following for more information about a command.
+
+[source,bash]
+----
+circleci run [command] --help
+----
