@@ -346,7 +346,7 @@ Key functionality enabled through the GitHub App integration includes the follow
 ** **Cross-repo triggers**: Events in one repository can trigger builds on one or many other repositories.
 ** **More GitHub events as triggers**: Pipelines can be set up to run on events other than "push", including pull request events, with more powerful customization of trigger conditions. For full details, see the xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options] page.
 
-For more information, follow the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] guide.
+More information is available on the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
 
 [#next-steps]
 == Next steps
