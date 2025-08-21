@@ -21,7 +21,7 @@ CircleCI offers two methods for integrating with GitHub:
 GitHub OAuth app integration:: This integration is built-in for organizations with `/github/` in their URL. The GitHub OAuth app integration cannot be uninstalled from these organizations, nor installed on any other org type.
 
 GitHub App integration (recommended):: The CircleCI GitHub App is an add-on integration. The GitHub App can be installed or uninstalled on organizations with `/github/` or `/circleci/` in their URL, including organizations that are already integrated with GitHub through the OAuth integration.
-Compared to the GitHub OAuth app, it offers increased control over the resources that CircleCI can access, only asks for fine-grained permissions, and uses short-lived tokens when accessing resources.
+Compared to the GitHub OAuth app, the GitHub App offers increased control over the resources that CircleCI can access. The GitHub App only asks for fine-grained permissions, and uses short-lived tokens when accessing resources.
 
 TIP: The majority of new CircleCI work triggering functionality will be made available through the GitHub App integration. We recommend installing the CircleCI GitHub App to ensure access to all new features.
 
