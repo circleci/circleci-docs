@@ -176,6 +176,7 @@ Authorizing the GitHub App ensures that users can:
 * Trigger pipelines xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[from the CircleCI web app].
 * Run builds, if the flag xref:plans-pricing:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered user spend] is set to "On".
 * Run builds, if they require access to xref:security:contexts.adoc[contexts].
+
 If you run into issue while attempting to authorize, submit a request through link:https://forms.gle/f33wxNcZzZURYjDh8[this form]. A member of our team will be in touch promptly.
 
 === Benefits of dual integration
