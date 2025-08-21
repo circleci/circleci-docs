@@ -13,7 +13,7 @@ You will find the most up to date information on these images on the link:https:
 [#xcode-image-retention-and-deprecation]
 == Xcode image retention and deprecation
 
-We will retain the three latest minor versions of the latest major version of Xcode. In addition we will also retain the last minor version of the three previous major versions of Xcode.
+We support the three latest Xcode versions released. In addition, we will always support the latest minor release of the last four major Xcode versions.
 
 For example, with Xcode 16 being the latest major version being released:
 
@@ -34,17 +34,17 @@ For example, with Xcode 16 being the latest major version being released:
 | We will retain the last major.minor version
 |===
 
-Future example, when Xcode 26 enters Beta:
+Future example, when Xcode 26 is released:
 
 [cols=2*, options="header"]
 |===
 | Xcode Version | Action
 
 | Xcode 26
-| Beta image will be released and updated as per the beta image policy
+| We will support Xcode 26.0
 
 | Xcode 16
-| The latest 3 `major.minor` versions will be retained at the latest patch version, older images will be flagged for deprecation and removed when Xcode 26 reaches RC
+| No change. We will continue to support the latest 3 `major.minor` versions. Older images will be flagged for deprecation and removed as Xcode 26.1 and on is released.
 
 | Xcode 15
 | No change. The latest minor version release will continue to be supported.
@@ -53,7 +53,7 @@ Future example, when Xcode 26 enters Beta:
 | No change. The latest minor version release will continue to be supported.
 
 | Xcode 13
-| Flagged for deprecation, removed entirely when Xcode 26 reaches RC
+| Flagged for deprecation, removed entirely when Xcode 26 reaches GA
 |===
 
 Betas of new major versions of Xcode are shipped by Apple during WWDC, which usually occurs in early-mid June each year.
