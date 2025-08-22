@@ -195,7 +195,7 @@ JRuby
 JVM
 kaniko
 [Kk]aocha
-keyset
+[Kk]eysets?
 keystore
 \bKnapsack Pro\b
 known_hosts
@@ -258,6 +258,8 @@ PowerShell
 [Pp]reconfigured
 [Pp]reemptions?
 [Pp]rescaling
+[Pp]resign
+[Pp]resigned
 [Pp]rox[ying|ied]
 \b[Pp]roject [Aa]\b
 \bProject B\b
@@ -335,6 +337,7 @@ Terraform
 TestFairy
 \btime windows\b
 Tink
+Tinkey
 TLS
 [Tt]olerations
 [Tt]oolchains?
