@@ -10,9 +10,9 @@ With CircleCI you can deploy to any target and manage your deployments in the Ci
 
 Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience. With CircleCI, you can deploy to virtually any target and configure CircleCI to integrate with other services for:
 
-* QA and testing
-* Feature management
-* Deployment strategies such as blue-green or canary deployment
+* QA and testing.
+* Feature management.
+* Deployment strategies such as canary deployment.
 
 Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
@@ -97,7 +97,7 @@ If you are deploying to Kubernetes you can choose to use the CircleCI release ag
 * Scale component
 * Restart component
 
-The release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported, but in a future release link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#blue-green[blue-green] will also be supported. Some further controls are available for projects that use Argo Rollouts:
+The release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported. Some further controls are available for projects that use Argo Rollouts:
 
 * Retry Rollout
 * Promote Rollout
