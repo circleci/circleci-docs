@@ -535,9 +535,140 @@ include::ROOT:partial$notes/find-organization-id.adoc[]
 [#config-policy-management]
 == Config policy management
 
-The CircleCI CLI can be used to manage config policies for your projects. Config policies allow you to enforce best practices and standards across your organization.
+You can use the CircleCI CLI can be used to manage config policies for your projects.
 
-For full details on creating, testing, and managing config policies for your organization, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage config policies] section.
+For more information on config policies, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage config policies] section.
+
+=== Make a decision on a config policy
+
+Use the `decide` sub-command to make a decision on a config policy.
+
+[,shell]
+----
+circleci policy decide <policy-file-or-dir-path> --input <path-to-input-file>[flags]
+----
+
+- `<policy-file-or-dir-path>` is either the path to the policy file or directory containing the policy file.
+- `<path-to-input-file>` is the path to the input file.
+
+For full details on the `decide` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_decide.html[CLI docs].
+
+=== Compare local and remote policy bundles
+
+Use the `diff` sub-command to get a diff between local and remote policy bundles.
+
+[,shell]
+----
+circleci policy diff <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `diff` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_diff.html[CLI docs].
+
+=== Evaluate locally
+
+Use the `eval` sub-command to perform a raw link:https://www.openpolicyagent.org/[OPA (Open Policy Agent)] evaluation locally.
+
+[,shell]
+----
+circleci policy eval <policy-dir-path> --input <path-to-input-file>[flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+- `<path-to-input-file>` is the path to the input file.
+
+For full details on the `eval` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_eval.html[CLI docs].
+
+=== Fetch policies
+
+Use the `fetch` sub-command to fetch a policy bundle or a single policy.
+
+[,shell]
+----
+circleci policy fetch <policy-name> --owner-id <org-id> [flags]
+----
+
+- `<policy-name>` is the name of the policy to fetch. It is not required. If you do not provide a policy name, the CLI will fetch all policies for the organization.
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+For full details on the `fetch` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_fetch.html[CLI docs].
+
+
+===  Get policy decision logs
+
+Use the `logs` sub-command to get decision logs for a policy bundle or single policy.
+
+[,shell]
+----
+circleci policy logs <policy-name> --owner-id <org-id> [flags]
+----
+
+- `<policy-name>` is the name of the policy to get decision logs for. It is not required. If you do not provide a policy name, the CLI will get decision logs for all policies in the organization.
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+Note that you can filter results using any combination of the following flags:
+
+- `--after`: Filter results to only include logs after a specific date and time.
++
+Example: `--after 2025/03/14`
+- `--before`: Filter results to only include logs before a specific date and time.
++
+Example: `--before 2025/05/22`
+- `--branch`: Filter results to only include logs for a specific branch.
++
+Example: `--branch feature/fixes`
+
+For full details on the `logs` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_logs.html[CLI docs].
+
+=== Push a policy bundle
+
+Use the `push` sub-command to push a policy bundle.
+
+[,shell]
+----
+circleci policy push <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `push` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_push.html[CLI docs].
+
+=== Manage policy decision settings
+
+Use the `settings` sub-command to get or set policy decision settings.
+
+To read policy decision settings, run the command without any settings flags:
+
+[,shell]
+----
+circleci policy settings --owner-id <org-id>
+----
+
+To set policy decision settings, run the command with the appropriate settings flags:
+
+[,shell]
+----
+circleci policy settings --owner-id <org-id> --enable <true|false>
+----
+
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+For full details on the `settings` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_settings.html[CLI docs].
+
+=== Test policies
+
+Use the `test` sub-command to run policy tests.
+
+[,shell]
+----
+circleci policy test <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `test` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_test.html[CLI docs].
+
 
 [#next-steps]
 == Next steps
