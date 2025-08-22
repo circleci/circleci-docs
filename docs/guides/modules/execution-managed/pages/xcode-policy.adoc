@@ -96,7 +96,7 @@ Each Xcode image is built on top of a clean macOS install. We aim to keep the ma
 
 We aim to keep the macOS version aligned across our different macOS executors, however this may not always be the case. Check the xref:test:testing-ios.adoc#supported-xcode-versions[Software Manifest] file for the image for the most accurate information.
 
-When a new major version of macOS (ex: `12.0`) is released, we will start to use this version after a minimum of two minor Xcode releases have passed.
+When a new major version of macOS (ex: `26.0`) is released, we will start to use this version after a minimum of two minor Xcode releases have passed.
 
 [#exceptions]
 == Exceptions
