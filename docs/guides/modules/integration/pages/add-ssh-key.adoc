@@ -65,9 +65,11 @@ To checkout additional repositories from within your job, ensure that you run th
 [#adding-multiple-keys-with-blank-hostnames]
 === Adding multiple keys with blank hostnames
 
-If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. If you have multiple SSH keys for different purposes that have access to the same hosts, the default `IdentitiesOnly no` is set, which causes connections to use `ssh-agent`.
+If you add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI.
 
-In the scenario described above, the first key is used, regardless of whether it is the correct key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly yes` in the appropriate block, or you can remove all keys from the `ssh-agent` for this job using `ssh-add -D`, and read the key added using `ssh-add /path/to/key`.
+If you have multiple SSH keys for different purposes that have access to the same hosts, the default `IdentitiesOnly no` is set, which causes connections to use `ssh-agent`.
+
+In this scenario the first key is used regardless of whether it is the correct key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly yes` in the appropriate block, or you can remove all keys from the `ssh-agent` for the job using `ssh-add -D` and read the added key using `ssh-add /path/to/key`.
 
 [#using-specific-ssh-keys-for-a-job]
 === Using specific SSH keys for a job
