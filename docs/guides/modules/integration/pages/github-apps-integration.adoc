@@ -179,7 +179,7 @@ The in-app config editor is currently **only** available for GitHub App accounts
 [#account-integrations]
 === Account integrations
 
-You cannot currently manage the user connection as part of their user profile's account integration settings.
+Viewing menu:User settings[Account integrations] does not currently show a GitHub App integration. This page only shows GitHub Oauth app integrations.
 
 [#scheduled-pipelines]
 === Scheduled pipelines
