@@ -3,9 +3,11 @@
 :description: Connecting Jira with CircleCI
 :experimental:
 
-Integrate your CI/CD build and deployment status notifications directly into your Jira cards. Connect your CircleCI jobs with Jira Cloud using the following:
+Integrate your CI/CD build and deployment status notifications directly into your Jira cards.
 
-* The link:https://marketplace.atlassian.com/apps/1215946/circleci-for-jira[CircleCI for Jira] Atlassian Forge application
+Connect your CircleCI jobs with Jira Cloud using:
+
+* The *CircleCI for Jira* app from the link:https://marketplace.atlassian.com/apps/1215946/circleci-for-jira[Atlassian Marketplace]
 * The `circleci/jira` orb from the link:https://circleci.com/developer/orbs/orb/circleci/jira[CircleCI Orbs registry]
 
 [#installation-steps]
