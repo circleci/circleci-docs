@@ -1390,7 +1390,7 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | `auto_rerun_delay`
 | N
 | String
-| The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds or minutes up to a maximum of 10 minutes, such as "10s", "1m20s".
+| The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m".
 
 |===
 
@@ -1568,7 +1568,7 @@ A job can exit without failing by using `run: circleci-agent step halt`. However
 
 ====== Automatic step reruns
 
-The `max_auto_reruns` and `auto_rerun_delay` attributes can be used to automatically rerun a step if it fails. This is useful for steps that are expected to fail intermittently, such as tests.
+The `max_auto_reruns` and `auto_rerun_delay` attributes can be used to automatically rerun a step if it fails, and delay that rerun if required. This is useful for steps that are expected to fail intermittently, such as tests.
 
 *Example:*
 

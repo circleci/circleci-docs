@@ -53,7 +53,7 @@ jobs:
 
 You can can add a delay between the step failing and the automatic rerun starting, as follows:
 
-NOTE: If you configure a delay for your automatic step rerun, the delay must be less than 10 minutes. The delay can be configured using minutes and seconds, for example, `auto_rerun_delay: 10s` or `auto_rerun_delay: 3m20s`.
+NOTE: If you configure a delay for your automatic step rerun, the delay must be less than or equal to 10 minutes. The delay can be configured as a string with a unit suffix, using `m` (minutes) or `s` (seconds), for example, `auto_rerun_delay: 10s` or `auto_rerun_delay: 3m`.
 
 .CircleCI config to automatically retry a step up to 3 times if it fails with a 10 second delay between attempts
 [source,yaml]
@@ -167,7 +167,7 @@ image::guides:ROOT:orchestrate-and-trigger/automatic-rerun.png[Automatic reruns 
 
 === Get details via the API
 
-You can retrieve information about automatic workflow reruns using the link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[CircleCI API]:
+You can retrieve information about *automatic workflow reruns* using the link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[CircleCI API]:
 
 [source,bash]
 ----
@@ -175,10 +175,21 @@ curl -X GET "https://circleci.com/api/v2/workflow/{workflow-id}" \
   -H "Circle-Token: YOUR_TOKEN"
 ----
 
-The API response includes additional fields for automatic reruns:
+The API response includes the following fields for automatic workflow reruns:
 
 * `auto_rerun_number`: The current rerun attempt number.
 * `max_auto_reruns`: The maximum number of reruns configured.
+
+You can retrieve information about automatic step reruns using the link:https://circleci.com/docs/api/v1/index.html#single-job[job information API endpoint].
+
+[source,bash]
+----
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num -H "Circle-Token: <circle-token>"
+----
+
+The API response includes the following fields for automatic step reruns:
+
+#TBC#
 
 [#limitations]
 == Limitations
