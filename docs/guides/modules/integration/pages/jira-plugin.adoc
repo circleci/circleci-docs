@@ -6,7 +6,7 @@
 Integrate your CI/CD build and deployment status notifications directly into your Jira cards. Connect your CircleCI jobs with Jira Cloud using the following:
 
 * The link:https://marketplace.atlassian.com/apps/1215946/circleci-for-jira[CircleCI for Jira] Atlassian Forge application
-* The link:https://circleci.com/developer/orbs/orb/circleci/jira[`circleci/jira`] orb
+* The `circleci/jira` orb from the link:https://circleci.com/developer/orbs/orb/circleci/jira[CircleCI Orbs registry]
 
 [#installation-steps]
 == Installation steps
@@ -14,11 +14,21 @@ Integrate your CI/CD build and deployment status notifications directly into you
 [#install-the-circleci-for-jira-app]
 === Install the CircleCI for Jira app
 
-. Install the link:https://marketplace.atlassian.com/apps/1215946/circleci-for-jira[CircleCI for Jira] app from the Atlassian Marketplace in the appropriate Jira Cloud instance. To do this you must be a link:https://support.atlassian.com/jira-software-cloud/docs/manage-atlassian-marketplace-apps-in-team-managed-projects/[Jira Admin]
+. Go to the Atlassian Marketplace to install the link:https://marketplace.atlassian.com/apps/1215946/circleci-for-jira[CircleCI for Jira] app.
 +
-image::guides:ROOT:jira_install_app.png[Select organization and confirm app installation]
+image::guides:ROOT:jira_circleci_app.png[CircleCI for Jira app in Atlassian Marketplace]
 
-. Navigate to the link:https://confluence.atlassian.com/upm/viewing-installed-apps-273875714.html[configuration page]. To find the configuration page, navigate to link:https://admin.atlassian.com/[`admin.atlassian.com`], select the appropriate organization, and then on the appropriate Jira instance, click the three-dot menu, and then click *Manage Jira apps*.
+. Install the app in the appropriate Jira Cloud instance. To do this, you must be a link:https://support.atlassian.com/jira-software-cloud/docs/manage-atlassian-marketplace-apps-in-team-managed-projects/[Jira Admin].
++
+image::guides:ROOT:jira_install_app.png[Select organization]
++
+image::guides:ROOT:jira_review_install.png[Review and confirm app installation]
+
+. Navigate to the link:https://confluence.atlassian.com/upm/viewing-installed-apps-273875714.html[configuration page] by following these steps:
+.. Go to link:https://admin.atlassian.com/[`admin.atlassian.com`].
+.. Ensure you have selected the appropriate organization (if you have more than one), and then select menu:Products[].
+.. For the appropriate Jira instance, select the ellipsis (image:guides:ROOT:icons/more.svg[more icon, role="no-border"]) icon.
+.. In the contextual menu, select menu:Manage Jira apps[].
 +
 image::guides:ROOT:jira_manage_apps.png[manage apps menu]
 
@@ -26,21 +36,22 @@ image::guides:ROOT:jira_manage_apps.png[manage apps menu]
 +
 image::guides:ROOT:jira_expand_app_details.png[Expand App Details]
 
-. To display the app fully, it is essential that you grant it permission to access Atlassian products on your behalf. Click *Allow access* to authorize.
+. Provide your CircleCI Organization ID and allowed audiences.
 +
-image::guides:ROOT:jira_allow_app_access.png[Allow the app access to Atlassian on your behalf]
+[NOTE]
+====
+Your CircleCI Organization ID is only needed for the initial setup. You can find it by navigating to menu:Organization Settings[Overview] in the https://app.circleci.com/[CircleCI web app].
 
-. For the initial setup you will need to provide your CircleCI Organization ID, which you can find by navigating to menu:Organization Settings[Overview] in the https://app.circleci.com/[CircleCI application].
-+
-image::guides:ROOT:jira_get_org_id.png[Get CircleCI Organization ID]
-
-. This integration authenticates via xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect (OIDC)]. By default, the organization ID provided is used for audience validation, but this can be modified, or more can be added.
-
-. Once you have provided your CircleCI Organization ID and optionally modified the allowed audiences, click *Submit* to save your changes.
+This integration authenticates via xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect (OIDC)]. By default, the organization ID provided is used for audience validation, but this can be modified, or more can be added.
+====
 +
 image::guides:ROOT:jira_set_organization_id.png[Set the Organization ID on the app Configure page]
 
-. Now copy your *Webhook URL* for use in the next section.
+[start=6]
+. Click *Submit* to save your changes.
++
+image::guides:ROOT:jira_submit_changes.png[Set the Organization ID on the app Configure page]
+. Now copy your *Web Trigger URL* for use in the next section.
 +
 image::guides:ROOT:jira_copy_webtrigger_url.png[Click on button to copy the Webtrigger URL]
 
@@ -49,7 +60,7 @@ image::guides:ROOT:jira_copy_webtrigger_url.png[Click on button to copy the Webt
 
 The link:https://circleci.com/developer/orbs/orb/circleci/jira[`circleci/jira`] orb is responsible for relaying information about your build or deployment to the CircleCI Jira application.
 
-. Begin by saving the *Webhook URL* from the previous section as an _environment variable_. This could be added as a xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Environment Variable] or within a xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-context[Context]. We recommend naming the variable `JIRA_WEBHOOK_URL`.
+. Begin by saving the *Web Trigger URL* from the previous section as an _environment variable_. This could be added as a xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Environment Variable] or within a xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-context[Context]. We recommend naming the variable `JIRA_WEBHOOK_URL`.
 
 . Next, import the Jira orb into your `.circleci/config.yml` file and implement the `jira/notify` command at the _end_ of your build and deployment jobs. Detailed and up-to-date configuration examples can be found on the link:https://circleci.com/developer/orbs/orb/circleci/jira#usage-examples[orb page].
 
