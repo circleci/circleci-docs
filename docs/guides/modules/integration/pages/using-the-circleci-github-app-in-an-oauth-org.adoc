@@ -165,16 +165,17 @@ Installing the CircleCI GitHub App is a one-time action that enables all new fea
 If you run into issues while installing the CircleCI GitHub App, submit a request through link:https://forms.gle/p8k51xYmG1U5HjsF7[this form]. A member of our team will be in touch promptly.
 
 ****
-Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by deleting the GitHub trigger associate with the GitHub OAuth pipeline, in menu:Project settings[Project setup]. This trigger can be re-created easily by selecting "click here" at the bottom of the GitHub OAuth pipeline card. 
+Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by deleting the GitHub trigger associate with the GitHub OAuth pipeline, in menu:Project settings[Project setup]. This trigger can be re-created by selecting btn:[click here] at the bottom of the GitHub OAuth pipeline card.
 ****
 
-=== Authorization steps 
+=== Authorization steps
 
-Once the GitHub App is installed, each user should link:https://github.com/settings/apps/authorizations[authorize] the CircleCI App by clicking on the btn:[Authorize] button that is displayed on the web app navbar for unauthorized users.
+Once the GitHub App is installed, each user must link:https://github.com/settings/apps/authorizations[authorize] the CircleCI App by clicking on the btn:[Authorize] button displayed on the web app top bar for unauthorized users.
+
 Authorizing the GitHub App ensures that users can:
 
 * Trigger pipelines xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[from the CircleCI web app].
-* Run builds, if the flag xref:plans-pricing:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered user spend] is set to "On".
+* Run builds, if the flag xref:plans-pricing:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered user spend] is set to *On*.
 * Run builds, if they require access to xref:security:contexts.adoc[contexts].
 
 If you run into an issue while attempting to authorize, submit a request through link:https://forms.gle/f33wxNcZzZURYjDh8[this form]. A member of our team will be in touch promptly.
@@ -189,7 +190,7 @@ Dual integration provides the following benefits:
 ** A *more flexible trigger system*, with each pipeline having any number of VCS or non-VCS triggers. This includes:
 *** *Non-repo based triggers*: xref:orchestrate:custom-webhooks.adoc[Custom webhooks] enable triggering builds from any system that can emit webhook events. Refer to our link:https://discuss.circleci.com/t/product-update-trigger-pipelines-from-anywhere-custom-webhooks/49864[community forum] for an example and known limitations.
 *** *Cross-repo triggers*: Events in one repository can trigger builds on one or many other repositories.
-*** *More GitHub events as triggers*: Pipelines can be set up to run on events other than "push", including pull request events, with more powerful customization of trigger conditions. For full details, see the xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options] page.
+*** *More GitHub events as triggers*: Pipelines can be set up to run on events other than *push*, including pull request events, with more powerful customization of trigger conditions. For full details, see the xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options] page.
 * Gradual migration path for complex projects
 * New trigger options without disrupting current pipelines
 
