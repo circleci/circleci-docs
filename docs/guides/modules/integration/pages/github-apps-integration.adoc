@@ -6,8 +6,8 @@
 If your CircleCI organization is integrated with GitHub through the **CircleCI GitHub App**, the content on this page is for you.
 
 ****
-The **CircleCI GitHub App** is an add-on integration, and all organizations that have `/github/` or `/circleci/` in the URL can install it - including xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[if they are already integrated through the GitHub OAuth app]. 
-To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections]. 
+The **CircleCI GitHub App** is an add-on integration. All organizations that have `/github/` or `/circleci/` in the URL can install the GitHub App, including xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[those already integrated through the GitHub OAuth app].
+To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections].
 ****
 
 This page walks you through integrating a GitHub project with CircleCI through the CircleCI GitHub App integration. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
@@ -32,7 +32,7 @@ NOTE: If you are new to CircleCI, you may wish to get started with our xref:gett
 
 A GitHub org with the CircleCI GitHub App installed can only be integrated with one CircleCI organization.
 
-If you attempt to integrate a GitHub org with the CircleCI GitHub App installed with a second CircleCI organization, you will find yourself on a GitHub App integration settings page when attempting to create a project. If you are not sure what other CircleCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[here].
+In this scenario, attempting to integrate with a second CircleCI organization will redirect you to a GitHub App integration settings page when creating a project. If you are not sure what other CircleCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[here].
 
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
 
@@ -119,13 +119,16 @@ A subset of built-in environment variables are not available in GitHub-based pro
 
 Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI’s GitHub App, consider the following:
 
-* If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[this guide]. 
+* If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[this guide].
 * If the motivation is to **completely remove the OAuth app integration** for security, compliance, or other reasons, follow the steps below.
 
 [#Steps-to-migrate-to-an-organization-without-default-GitHub-OAuth-integration]
 === Steps to migrate to an organization without default GitHub OAuth integration
 
-The following steps will guide you through migrating from an organization integrated with GitHub through the OAuth integration by default (identifyable by `/github/` or `/gh/` in the URL) to an organization that does not have a default OAuth integration with GitHub (identifyable by `/circleci/` in the URL).
+The following steps guide you through migrating you organization as follows:
+
+* *From* an organization integrated with GitHub through the OAuth integration by default (identifiable by `/github/` or `/gh/` in the URL).
+* *To* an organization that does not have a default OAuth integration with GitHub (identifiable by `/circleci/` in the URL).
 
 [CAUTION]
 ====
@@ -179,7 +182,7 @@ The in-app config editor is currently **only** available for GitHub App accounts
 [#account-integrations]
 === Account integrations
 
-Viewing menu:User settings[Account integrations] does not currently show a GitHub App integration. This page only shows GitHub Oauth app integrations.
+Viewing menu:User settings[Account integrations] does not currently show a GitHub App integration. This page only shows GitHub OAuth app integrations.
 
 [#scheduled-pipelines]
 === Scheduled pipelines
