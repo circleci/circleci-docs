@@ -19,3 +19,5 @@
 * When referencing headings in prose, use the full heading with no quotes, and use title case.
 ** **Good:** For more information, see the https://circleci.com/docs/hello-world/[Hello World] guide. +
 ** **Bad:** For more information, see the https://circleci.com/docs/hello-world/["Hello world"] guide.
+
+* Do not use inline literal text in headings.

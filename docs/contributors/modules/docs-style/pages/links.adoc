@@ -1,24 +1,21 @@
 = Cross references and links
 
+This page covers how to create links and cross references in CircleCI docs.
+
 [#cross-references]
 == Cross references
-* Cross references (links between docs pages) in **.adoc** should be made in the following form:
+* Cross references (links between docs pages) are made using the resource ID of the destination page and section, in the following form:
 +
 [source,adoc]
 ----
 xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User Keys and Deploy Keys]
 ----
-
-* The **.md** equivalent would be to use a link:
 +
-[source,md]
-----
-[User Keys and Deploy Keys](/github-integration#user-keys-and-deploy-keys)
-----
+See the link:https://docs.antora.org/antora/latest/page/resource-id-coordinates/[Resource ID coordinates] page in the Antora docs for more information.
 
 * Cross references should explicitly name the document or section to which they are linking.
 ** **Good:** Refer to the https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document. +
-** **Bad:** See here for info on https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[adding project-level environment variables].
+** **Bad:** For more information on adding project-level environment variables head https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[here].
 
 [#links]
 == Links
@@ -28,11 +25,4 @@ xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User K
 [source,adoc]
 ----
 link:https://circleci.com[CircleCI]
-----
-
-* The markdown link syntax is as follows:
-+
-[source,md]
-----
-[CircleCI](https://circleci.com)
 ----
