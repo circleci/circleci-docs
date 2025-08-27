@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
-  go: circleci/go@3.0.2
+  go: circleci/go@3.0.3
 
 executors:
   node_executor:
