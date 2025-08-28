@@ -24,7 +24,9 @@ This reference guide covers some basic information about the CircleCI task-agent
 
 == Root command
 
-* `circleci`: The CLI tool to be used in CircleCI.
+=== circleci
+
+The CLI tool to be used in CircleCI.
 
 == Subcommands
 
@@ -34,7 +36,7 @@ Manage tasks. You can also use the alias `step` instead of `task`.
 
 ==== Halt
 
-Halt the current task and treat it as successful.
+Halt is a subcommand of `task`. This command stops the current task and treat it as successful.
 
 *Example usage:*
 
@@ -58,7 +60,13 @@ Output version information.
 
 [source,yaml]
 ----
-circleci version [flag]
+jobs:
+  my-job
+    executor: some-executor
+    steps:
+      - run: 
+          command: |
+            circleci --version [flag]
 ----
 
 === Tests
@@ -67,7 +75,7 @@ Collect and split tests so they may be run in parallel.
 
 ==== Split
 
-Group tests into independent buckets so they can be run in parallel.
+A subcommand of `Tests`. Split Group tests into independent buckets so they can be run in parallel.
 
 *Flags*
 
@@ -99,7 +107,7 @@ Group tests into independent buckets so they can be run in parallel.
 
 ==== Glob
 
-Print files matching the glob pattern.
+A subcommand of `Tests`. Glob Print files matching the glob pattern.
 
 *Flags*
 
@@ -128,7 +136,7 @@ following symbols:
 
 ==== Run
 
-Split and run tests.
+A subcommand of `Tests`. The run command splits and run tests.
 
 *Flags*
 
@@ -185,18 +193,58 @@ jobs:
 
 Use `env` to manage environment variables
 
-==== Substitute
+==== Subst
 
-Substitute environment variables in a string
+This is a subcommnd for `env`. It is used to substitute environment variables in a string
 
 *Example usage:*
 
+Say within your repository there exists a file called template.json, with values replaced by environment variable strings
+
+---
+{
+  "foo": "$FOO",
+  "provider": "${PROVIDER}"
+}
+---
+
+The config example below shows the corresponding environment variables as if they were defined directly within a step in the config.
+
 [source,yaml]
 ----
-circleci env
+version: 2.1
+jobs:
+  process-template:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: Process template file
+          environment:
+            FOO: bar
+            PROVIDER: circleci
+          command: |
+            ## circleci env subst [flags]
+            circleci env subst < template.json > deploy.json
+            cat deploy.json
+workflows:
+  env-subst-workflow:
+    jobs:
+      - process-template
 ----
 
-#This example needs expanding to show it being used in a job, I don't understand enough to do this myself, and we don't seem to have this in the env vars docs anywhere#
+In this example, the `<` symbol is used to redirect the contents of the `template.json` file as input to the env subst command, while the `>` symbol is used to redirect the output of the `env subst` command to the `deploy.json`.
+
+You could alternatively pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`
+
+Output:
+---
+{
+  "foo": "bar",
+  "provider": "circleci"
+}
+---
 
 === Run
 
@@ -204,15 +252,15 @@ Invokes a task-agent subcommand by name.
 
 ==== OIDC
 
-Run authentication using OIDC.
+A subcommand of `Run`. This command Run authentication using OIDC.
 
 ==== Release
 
-#Need a description for all the release subcommands#
+A subcommand of `Run`. This command allows you to manage deployments
 
 ===== Plan
 
-Plan and identify a new deployment that can be referenced to update its status later.
+A subcommand of `Release`. The `plan` command is used to plan and identify a new deployment that can be referenced to update its status later.
 
 A _planned_ deployment will show in the Deploys UI with `pending` status.
 
@@ -240,7 +288,7 @@ A _planned_ deployment will show in the Deploys UI with `pending` status.
 
 ===== Update
 
-Update the status of the deployment.
+A subcommand of `Release`. The `update` command is used to update the status of the deployment.
 
 *Flags*
 
@@ -254,14 +302,22 @@ Update the status of the deployment.
 
 ===== Log
 
-#Need a description for the log subcommand#
+A subcommand of `Release`. The `log` command allows you to log your deployments without status updates
 
 *Flags*
 
-* `environment-name`: sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
-* `component-name`: sets the name that will be displayed in the UI.
-* `target-version`: should match the version being deployed.
-* `namespace`: optional flag to use a namespace value other than default.
+| `environment-name`
+| Sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
+
+| `component-name`
+| Sets the name that will be displayed in the UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
+
+| `target-version`
+| Should match the version being deployed.
+
+| `namespace`
+| Optional flag to use a namespace value other than default.
+|===
 
 *Example usage:*
 
@@ -269,8 +325,18 @@ Update the status of the deployment.
 
 [source,yaml]
 ----
-circleci run oidc
-circleci run release [command] [flags]
+jobs:
+  deploy-my-service:
+    executor: some-executor
+    steps:
+      - run: 
+          command: |
+            ## example usage of run release plan
+            circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
+            ## example usage of run release update
+            circleci run release update <deploy-name> --status=running
+            ## example usage of run release log
+            circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
 ----
 
 *More information on using  the `run` command*:
