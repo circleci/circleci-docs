@@ -320,7 +320,7 @@ stdin
 [Ss]tdout
 [Ss]ubkeys?
 [Ss]ubshells?
-subcommand
+[Ss]ubcommands?
 [Ss]ubnets?
 [Ss]ubnetworks?
 superset
