@@ -236,17 +236,6 @@ The UI uses Tailwind CSS for styling:
 
 ## Advanced Development Tasks
 
-## Updating server version branches
-
-When changes are made to the main branch to the build processes, the UI, or all components OTHER than server-administration, all server branches should be rebased once the changes are merged. The process for this is as follows:
-
-1. Update local main branch
-2. Checkout a server branch
-3. Run `git rebase main`
-4. Push those changes with `git push --force-with-lease origin server-4.1` - remember to use the correct server branch number.
-
-This should be done for every server-4* branch.
-
 ### Creating a New Component
 
 1. **Create component directory**:
