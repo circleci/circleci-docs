@@ -8,7 +8,7 @@
 
 The Android machine image is accessed through the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Linux machine executor], like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. It also comes with the Android SDK pre-installed.
 
-[#using-the-android_machine-image]
+[#using-the-android-machine-image]
 == Using the Android machine image
 
 It is possible to configure the use of the Android image in your configuration with xref:orbs:use:orb-intro.adoc[orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Refer to the <<examples>> section below for more details.
@@ -16,7 +16,7 @@ It is possible to configure the use of the Android image in your configuration w
 [#pre-installed-software]
 == Pre-installed software
 
-View the quarterly update announcement on our link:https://discuss.circleci.com/t/android_machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
+View the quarterly update announcement on our link:https://discuss.circleci.com/t/android-machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
 
 [#examples]
 == Examples
