@@ -499,6 +499,7 @@ jobs:
       # Continue the pipeline with the generated configuration.
       - continuation/continue:
           configuration_path: /tmp/generated-config.yml
+          parameters: /tmp/pipeline-parameters.json
 
 workflows:
   setup-workflow:
