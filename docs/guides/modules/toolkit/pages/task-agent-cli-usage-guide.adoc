@@ -7,7 +7,7 @@ This page provides reference documentation for the CircleCI task agent CLI. This
 
 == CLI differentiation
 
-The CircleCI Task Agent:: A specialized command-line interface. Task agent retrieves and configures a task before managing the execution of the job within a chosen compute environment. The Task agent CLI is available for use in your CI/CD pipelines.
+The CircleCI task agent:: A specialized command-line interface. The task agent retrieves and configures a task before managing the execution of the job within a chosen compute environment. The task agent CLI is available for use in your CI/CD pipelines.
 
 The Local CLI:: The development tool used on a local machine. It handles day-to-day development tasks, testing, and local workflow management.
 
@@ -24,9 +24,7 @@ This reference guide covers some basic information about the CircleCI task-agent
 
 == Root command
 
-=== circleci
-
-The CLI tool to be used in CircleCI.
+The CLI tool to be used in CircleCI pipelines. The root command is `circleci`.
 
 == Subcommands
 
@@ -60,11 +58,14 @@ Output version information.
 
 [source,yaml]
 ----
+version: 2.1
+
 jobs:
   my-job
-    executor: some-executor
+    docker:
+      - image: cimg/base:current
     steps:
-      - run: 
+      - run:
           command: |
             circleci --version [flag]
 ----
@@ -75,7 +76,7 @@ Collect and split tests so they may be run in parallel.
 
 ==== Split
 
-A subcommand of `Tests`. Split Group tests into independent buckets so they can be run in parallel.
+A subcommand of `tests`. Split grouped tests into independent buckets so they can be run in parallel.
 
 *Flags*
 
@@ -136,7 +137,7 @@ following symbols:
 
 ==== Run
 
-A subcommand of `Tests`. The run command splits and run tests.
+A subcommand of `tests`. The `run` command splits and runs tests.
 
 *Flags*
 
@@ -172,7 +173,7 @@ version: 2.1
 jobs:
   my-job:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:current
     steps:
       - run:
           command: |
@@ -195,12 +196,13 @@ Use `env` to manage environment variables
 
 ==== Subst
 
-This is a subcommnd for `env`. It is used to substitute environment variables in a string
+`subst` is a subcommand for `env`. It is used to substitute environment variables in a string.
 
 *Example usage:*
 
-Say within your repository there exists a file called template.json, with values replaced by environment variable strings
+Consider this scenario: In your repository there exists a file called template.json, with values replaced by environment variable strings, as follows:
 
+[source,json]
 ---
 {
   "foo": "$FOO",
@@ -234,11 +236,13 @@ workflows:
       - process-template
 ----
 
-In this example, the `<` symbol is used to redirect the contents of the `template.json` file as input to the env subst command, while the `>` symbol is used to redirect the output of the `env subst` command to the `deploy.json`.
+In this example, the `<` symbol is used to redirect the contents of the `template.json` file as input to the `circleci env subst` command, while the `>` symbol is used to redirect the output of the `env subst` command to the `deploy.json` file.
 
-You could alternatively pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`
+Alternatively, you could pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`.
 
 Output:
+
+[source,json]
 ---
 {
   "foo": "bar",
@@ -252,15 +256,15 @@ Invokes a task-agent subcommand by name.
 
 ==== OIDC
 
-A subcommand of `Run`. This command Run authentication using OIDC.
+A subcommand of `run`. This command runs authentication using OIDC.
 
 ==== Release
 
-A subcommand of `Run`. This command allows you to manage deployments
+A subcommand of `run`. This command allows you to manage your deployments.
 
 ===== Plan
 
-A subcommand of `Release`. The `plan` command is used to plan and identify a new deployment that can be referenced to update its status later.
+A subcommand of `release`. The `plan` command is used to plan and identify a new deployment that can be referenced to update its status later.
 
 A _planned_ deployment will show in the Deploys UI with `pending` status.
 
@@ -288,7 +292,7 @@ A _planned_ deployment will show in the Deploys UI with `pending` status.
 
 ===== Update
 
-A subcommand of `Release`. The `update` command is used to update the status of the deployment.
+A subcommand of `release`. The `update` command is used to update the status of the deployment.
 
 *Flags*
 
@@ -302,9 +306,13 @@ A subcommand of `Release`. The `update` command is used to update the status of 
 
 ===== Log
 
-A subcommand of `Release`. The `log` command allows you to log your deployments without status updates
+A subcommand of `release`. The `log` command allows you to log your deployments without status updates
 
 *Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
 
 | `environment-name`
 | Sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
@@ -321,15 +329,13 @@ A subcommand of `Release`. The `log` command allows you to log your deployments 
 
 *Example usage:*
 
-#Need to show the example usage of the log subcommand and show them all in a job - full config#
-
 [source,yaml]
 ----
 jobs:
   deploy-my-service:
     executor: some-executor
     steps:
-      - run: 
+      - run:
           command: |
             ## example usage of run release plan
             circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
