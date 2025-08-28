@@ -31,6 +31,7 @@ image::guides:ROOT:jira_review_install.png[Review and confirm app installation]
 .. Ensure you have selected the appropriate organization (if you have more than one), and then select menu:Products[].
 .. For the appropriate Jira instance, select the ellipsis (image:guides:ROOT:icons/more.svg[more icon, role="no-border"]) icon.
 .. In the contextual menu, select menu:Manage Jira apps[].
+
 +
 image::guides:ROOT:jira_manage_apps.png[manage apps menu]
 
