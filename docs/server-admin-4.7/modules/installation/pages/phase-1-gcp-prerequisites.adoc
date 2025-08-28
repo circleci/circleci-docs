@@ -1,0 +1,12 @@
+= Phase 1 GCP - Prerequisites
+:page-noindex: true
+:page-platform: Server v4.7, Server Admin
+:page-description: Find the general and infrastructure-specific requirements that are needed in order to configure the CircleCI server v4.7 application.
+:icons: font
+:toc: macro
+:toc-title:
+:env-gcp:
+
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). The directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. This method was chosen to avoid unintentionally hiding content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+
+include::ROOT:partial$installation/phase-1.adoc[]
