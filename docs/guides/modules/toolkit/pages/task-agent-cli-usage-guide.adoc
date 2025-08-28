@@ -13,7 +13,7 @@ The Local CLI:: The development tool used on a local machine. It handles day-to-
 
 These tools share some similarities. However, they serve different purposes and operate in different contexts with different capabilities and permissions.
 
-=== What you will find in this document
+=== Introduction
 
 This reference guide covers some basic information about the CircleCI task-agent CLI, including:
 
@@ -24,7 +24,7 @@ This reference guide covers some basic information about the CircleCI task-agent
 
 == Root command
 
-The CLI tool to be used in CircleCI pipelines. The root command is `circleci`.
+The CLI tool available in CircleCI pipelines. The root command is `circleci`.
 
 == Subcommands
 
@@ -72,11 +72,11 @@ jobs:
 
 === Tests
 
-Collect and split tests so they may be run in parallel.
+Collect and split tests so they can run in parallel.
 
 ==== Split
 
-A subcommand of `tests`. Split grouped tests into independent buckets so they can be run in parallel.
+A subcommand of `tests`. Split grouped tests into independent buckets so they can run in parallel.
 
 *Flags*
 
@@ -146,7 +146,7 @@ A subcommand of `tests`. The `run` command splits and runs tests.
 | Flag | Description
 
 | `command`
-| Script that will be run for a list of tests.
+| Script to run for a list of tests.
 
 | `index`
 | Index of node.
@@ -194,23 +194,23 @@ jobs:
 
 Use `env` to manage environment variables
 
-==== Subst
+==== Substitution
 
-`subst` is a subcommand for `env`. It is used to substitute environment variables in a string.
+`subst` is a subcommand for `env`. Use `subst` to substitute environment variables in a string.
 
 *Example usage:*
 
-Consider this scenario: In your repository there exists a file called template.json, with values replaced by environment variable strings, as follows:
+Consider this scenario: In your repository there exists a file called `template.json`, with values replaced by environment variable strings, as follows:
 
 [source,json]
----
+----
 {
   "foo": "$FOO",
   "provider": "${PROVIDER}"
 }
----
+----
 
-The config example below shows the corresponding environment variables as if they were defined directly within a step in the config.
+The config example below shows the corresponding environment variables defined directly within a step in the config.
 
 [source,yaml]
 ----
@@ -236,19 +236,22 @@ workflows:
       - process-template
 ----
 
-In this example, the `<` symbol is used to redirect the contents of the `template.json` file as input to the `circleci env subst` command, while the `>` symbol is used to redirect the output of the `env subst` command to the `deploy.json` file.
+In this example:
 
-Alternatively, you could pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`.
+* The `<` symbol redirects the contents of the `template.json` file as input to the `circleci env subst` command.
+* The `>` symbol redirects the output of the `env subst` command to the `deploy.json` file.
+
+Alternatively, you can pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`.
 
 Output:
 
 [source,json]
----
+----
 {
   "foo": "bar",
   "provider": "circleci"
 }
----
+----
 
 === Run
 
@@ -266,7 +269,7 @@ A subcommand of `run`. This command allows you to manage your deployments.
 
 A subcommand of `release`. The `plan` command is used to plan and identify a new deployment that can be referenced to update its status later.
 
-A _planned_ deployment will show in the Deploys UI with `pending` status.
+A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 
 *Flags*
 
@@ -275,7 +278,7 @@ A _planned_ deployment will show in the Deploys UI with `pending` status.
 | Flag | Description
 
 | `deploy-name`
-| An arbitrary positional argument that will be used to identify the deployment. This should be unique within the workflow.
+| An arbitrary positional argument that is used to identify the deployment. This should be unique within the workflow.
 
 | `environment-name`
 | Sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
@@ -292,7 +295,7 @@ A _planned_ deployment will show in the Deploys UI with `pending` status.
 
 ===== Update
 
-A subcommand of `release`. The `update` command is used to update the status of the deployment.
+A subcommand of `release`. Use the `update` command to update the status of the deployment.
 
 *Flags*
 
@@ -318,10 +321,10 @@ A subcommand of `release`. The `log` command allows you to log your deployments 
 | Sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
 
 | `component-name`
-| Sets the name that will be displayed in the UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
+| Sets the name to display in the UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
 
 | `target-version`
-| Should match the version being deployed.
+| Should match the version you are deploying.
 
 | `namespace`
 | Optional flag to use a namespace value other than default.
