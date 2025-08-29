@@ -51,12 +51,12 @@ This integration authenticates via xref:permissions-authentication:openid-connec
 image::guides:ROOT:jira_set_organization_id.png[Set the Organization ID on the app Configure page]
 
 [start=6]
-. Click *Submit* to save your changes.
+. Select *Submit* to save your changes.
 +
 image::guides:ROOT:jira_submit_changes.png[Set the Organization ID on the app Configure page]
 . Now copy your *Web Trigger URL* for use in the next section.
 +
-image::guides:ROOT:jira_copy_webtrigger_url.png[Click on button to copy the Webtrigger URL]
+image::guides:ROOT:jira_copy_webtrigger_url.png[Copy the Webtrigger URL]
 
 [#configure-the-jira-orb]
 === Configure the Jira orb
