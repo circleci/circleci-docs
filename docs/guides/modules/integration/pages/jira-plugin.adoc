@@ -27,7 +27,7 @@ image::guides:ROOT:jira_install_app.png[Select organization]
 image::guides:ROOT:jira_review_install.png[Review and confirm app installation]
 
 . Navigate to the link:https://confluence.atlassian.com/upm/viewing-installed-apps-273875714.html[configuration page] by following these steps:
-.. Go to link:https://admin.atlassian.com/[admin.atlassian.com].
+.. Go to link:https://admin.atlassian.com/[the Atlassian admin page].
 .. Ensure you have selected the appropriate organization (if you have more than one), and then select menu:Products[].
 .. For the appropriate Jira instance, select the ellipsis (image:guides:ROOT:icons/more.svg[more icon, role="no-border"]) icon.
 .. In the contextual menu, select menu:Manage Jira apps[].
