@@ -1,0 +1,133 @@
+= Audit Log Streaming
+:page-platform: Cloud
+:page-description: "This document explains how to stream CircleCI audit logs to an S3 bucket."
+
+[#overview]
+== Overview
+The CircleCI Audit Log Streaming feature provides enterprise organizations with a solution for streaming audit logs directly to their own AWS S3 buckets. This enables organizations to maintain comprehensive security visibility, meet compliance requirements, and integrate CircleCI audit data with their existing security monitoring infrastructure.
+
+[#prerequisites]
+== Prerequisites
+
+Before setting up audit log streaming, ensure you have:
+
+* CircleCI Enterprise/Scale plan (not available to free or performance customers)
+* AWS account with permissions to create and manage S3 buckets
+* IAM role or user with appropriate S3 write permissions
+* Configuration to allow secure connections between CircleCI and AWS
+
+
+[#configure-audit-log-streaming]
+== Configure Audit Log Streaming
+
+. Navigate to menu:Organization Settings[Security].
+. Scroll down to the **Audit Logs > Streaming audit logs** section and select btn:[Stream audit logs].
++
+image::guides:ROOT:stream-audit-logs.png[Stream audit logs section]
+
+. Confirm that you have completed the prerequisites by selecting btn:[Continue].
++
+image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
+
+. In the configuration dialog, specify the following fields:
+.. **Region**: The AWS region where your S3 bucket is located.
+.. **S3 Bucket Name**: The name of the S3 bucket where audit logs will be streamed.
+.. **ARN Role ID**: The Amazon Resource Name (ARN) for the IAM role that CircleCI will use to access your S3 bucket.
+. Then select btn:[Connect CircleCI to AWS].
++
+image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
+
+
+===== Connection Verification
+
+After entering your configuration details, the system will verify the connection to your S3 bucket.
+
+image::figure2.png[Connection Testing and Verification]
+
+When the connection is successfully validated:
+
+1. You'll see a "Connection Successful" message with a green checkmark
+2. The "Stream audit log" button will become available
+3. Click "Stream audit log" to enable the streaming functionality
+
+===== Managing Active Streams
+
+Once configured, you can view and manage your audit log streaming from the main audit log page.
+
+The **Streaming log** section displays:
+
+* **Streaming start**: Date and time when streaming was initiated
+* **Requested by**: User who configured the streaming
+* **Last delivery**: Timestamp of the most recent successful log delivery
+* **Status**: Current connection status (Connected/Disconnected)
+* **Actions**: Toggle switch to enable/disable streaming and delete button to remove the configuration
+
+
+===== Connection Status Monitoring
+
+The system provides real-time status monitoring for your streaming configuration.
+
+
+When there's a service disruption:
+
+* The status will change to "Disconnected" with a red indicator
+* You can troubleshoot by checking your AWS configuration
+* Use the toggle switch to restart streaming once issues are resolved
+
+===== Management Operations
+
+From the streaming management interface, you can:
+
+* **Pause Streaming**: Use the toggle switch to temporarily disable log streaming
+* **Monitor Delivery**: Check the "Last delivery" field to verify recent successful deliveries
+* **Delete Configuration**: Click the trash icon to completely remove the streaming setup
+* **Restart Streaming**: Toggle the switch to resume paused streams
+
+=== Verification and Testing
+
+After setting up audit log streaming:
+
+1. Verify successful streaming by checking the "Last delivery" timestamp
+2. Confirm logs are appearing in your designated S3 bucket
+3. Test integrations with your SIEM or security monitoring tools
+4. Set up appropriate alerts for connection failures or delivery interruptions
+
+=== Audit Event Coverage
+
+All security-relevant events within CircleCI are captured and streamed, including:
+
+* **User Authentication Events**: Logins, failed attempts, password changes
+* **Authorization Changes**: Role assignments, permission updates  
+* **Project Configuration**: Modifications to project settings and configurations
+* **Pipeline Execution**: Events related to pipeline runs and builds
+* **Secrets and Context**: Modifications to sensitive data and execution contexts
+* **Organization Management**: Team and organization-level administrative activities
+
+
+== Service Availability
+
+* **Plan Restrictions**: Audit log streaming is only available to CircleCI Enterprise and Scale plan customers. Free and Performance plan customers do not have access to this feature.
+
+== Technical Limitations
+
+* **Storage Platform**: Currently supports AWS S3 as the primary storage solution. Support for Google Cloud Storage and Azure Blob Storage is not available at this time.
+
+* **Delivery Latency**: While the target is to deliver logs within 1 hour, the maximum delivery time may extend to 3 hours under certain conditions.
+
+
+== Configuration Requirements
+
+* **AWS Permissions**: Proper IAM configuration is critical for successful operation. Insufficient permissions will result in connection failures.
+
+* **Network Configuration**: Customer environments must allow secure connections between CircleCI and AWS services.
+
+* **Bucket Policies**: S3 bucket policies must be properly configured to accept writes from CircleCI's streaming service.
+
+
+== Support and Troubleshooting
+
+* **Configuration Issues**: Most streaming problems are related to AWS IAM permissions or S3 bucket configuration.
+
+* **Connection Failures**: If streaming shows as "Disconnected," verify AWS credentials and permissions before contacting support.
+
+* **Missing Logs**: Ensure that your S3 bucket policies allow write access from CircleCI's service accounts.
