@@ -34,7 +34,7 @@ include::ROOT:partial$tips/add-version-number.adoc[]
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@2.4.0
+  android: circleci/android@3.1.0
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 workflows:
   test:
@@ -45,7 +45,7 @@ workflows:
           # to execute custom steps before and afer any of the built-in steps
           system-image: system-images;android-29;default;x86
           executor:
-            name: android/android-machine
+            name: android/android_machine
             resource-class: large
             tag: default
 ```
@@ -61,12 +61,12 @@ include::ROOT:partial$tips/add-version-number.adoc[]
 # .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@2.4.0
+  android: circleci/android@3.1.0
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
   test:
     executor:
-      name: android/android-machine
+      name: android/android_machine
       resource-class: large
       tag: default
     steps:

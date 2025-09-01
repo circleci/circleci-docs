@@ -13,7 +13,7 @@ You will find the most up to date information on these images on the link:https:
 [#xcode-image-retention-and-deprecation]
 == Xcode image retention and deprecation
 
-We aim to retain four major versions of Xcode, with more recent versions having a larger number of minor versions to choose from.
+We support the three latest Xcode versions released. In addition, we will always support the latest minor release of the last four major Xcode versions.
 
 For example, with Xcode 16 being the latest major version being released:
 
@@ -22,50 +22,50 @@ For example, with Xcode 16 being the latest major version being released:
 | Xcode Version | Action
 
 | Xcode 16
-| We will retain all `major.minor` versions at the latest patch version
+| We will retain the three latest major.minor versions at the latest patch version
 
 | Xcode 15
-| We will retain the 4 latest `major.minor` versions at the latest patch version
+| We will retain the last major.minor version
 
 | Xcode 14
-| We retain a single image which will be the last stable release of Xcode 14
+| We will retain the last major.minor version
 
 | Xcode 13
-| We retain a single image which will be the last stable release of Xcode 13
+| We will retain the last major.minor version
 |===
 
-Future example, when Xcode 26 enters Beta:
+Future example, when Xcode 26 is released:
 
 [cols=2*, options="header"]
 |===
 | Xcode Version | Action
 
 | Xcode 26
-| Beta image will be released and updated as per the beta image policy
+| We will support Xcode 26.0
 
 | Xcode 16
-| The latest 4 `major.minor` versions will be retained at the latest patch version, older images will be flagged for deprecation and removed when Xcode 26 reaches RC
+| No change. We will continue to support the latest 3 `major.minor` versions. Older images will be flagged for deprecation and removed as Xcode 26.1 and on is released.
 
 | Xcode 15
-| All images except for the final release will be flagged for deprecation and removed when Xcode 26 reaches RC
+| No change. The latest minor version release will continue to be supported.
 
 | Xcode 14
-| All images except for the final release will be flagged for deprecation and removed when Xcode 26 reaches RC
+| No change. The latest minor version release will continue to be supported.
 
 | Xcode 13
-| Flagged for deprecation, removed entirely when Xcode 26 reaches RC
+| Flagged for deprecation, removed entirely when Xcode 26 reaches GA
 |===
 
 Betas of new major versions of Xcode are shipped by Apple during WWDC, which usually occurs in early-mid June each year.
 
-When an image is selected for deprecation and removal, we will create an announcement on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum], along with additional outreach where possible. We will always aim to provide four weeks' notice where possible.
+When an image is selected for deprecation and removal, we will create an announcement on our link:https://circleci.com/changelog/[changelog], along with additional outreach where possible. We will always aim to provide four weeks' notice where possible.
 
-We will never automatically redirect requests for images to different `major.minor` versions, so when one of these images is removed, jobs will start to fail if the `.circleci/config.yml` has not been updated.
+We will never automatically redirect requests for specific Xcode images to a different major or minor version. When an image is removed, jobs using that image will fail if the `.circleci/config.yml` has not been updated.
 
 [#xcode-patches]
 == Xcode patches
 
-We retain the latest patch version of each Xcode `major.minor` version we support. Once a new patch version has been released, we will deprecate the previous patch version and automatically redirect all requests to the new patch version.
+We retain the latest patch version of each Xcode `major.minor` version we support. Once a new patch version has been released, we will deprecate the previous patch version and automatically redirect all requests to the new patch of the same `major.minor` version.
 
 As patches are generally backwards compatible, redirects will be put in place within 24 hours of a new patch release. If any major issues are discovered, we retain the ability to issue a rollback and make both versions temporarily available.
 
@@ -87,16 +87,16 @@ To read about our customer support policy regarding beta images, check out this 
 
 We closely track and monitor Apple's Xcode releases and always aim to release new images as quickly as possible. Typically we aim to support a new Xcode image within a couple of days, however note that this is not an SLA. We can not, and do not, provide an official SLA turnaround time for new Xcode images.
 
-New images are always announced on our link:https://discuss.circleci.com/c/announcements/39[Discuss site] along with release notes, and will be added to the table of xref:using-macos.adoc#supported-xcode-versions[Xcode versions in the documentation].
+New images are always announced on our link:https://circleci.com/changelog/[changelog] along with release notes, and will be added to the table of xref:using-macos.adoc#supported-xcode-versions[Xcode versions in the documentation].
 
 [#macos-versions]
 == macOS versions
 
 Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version reasonably up to date with the latest version available. Generally our images can be up to 2 minor/patch versions behind the latest stable version.
 
-We aim to keep the macOS version aligned across our different macOS executors (for example, Intel and M1 platforms), however this may not always be the case. Check the xref:test:testing-ios.adoc#supported-xcode-versions[Software Manifest] file for the image for the most accurate information.
+We aim to keep the macOS version aligned across our different macOS executors, however this may not always be the case. Check the xref:test:testing-ios.adoc#supported-xcode-versions[Software Manifest] file for the image for the most accurate information.
 
-When a new major version of macOS (ex: `12.0`) is released, we will start to use this version after a minimum of two minor Xcode releases have passed. This will allow for any major bugs and issues to be resolved. Release timing for this is entirely dependent on Apple's own release cycle, but will always be announced on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum].
+When a new major version of macOS (ex: `26.0`) is released, we will start to use this version after a minimum of two minor Xcode releases have passed.
 
 [#exceptions]
 == Exceptions
