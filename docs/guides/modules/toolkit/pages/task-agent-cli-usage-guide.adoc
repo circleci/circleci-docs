@@ -3,7 +3,7 @@
 :page-description: Using the CircleCI task agent CLI in your CI/CD pipeline
 :experimental:
 
-This page provides reference documentation for the CircleCI task agent CLI. This CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
+This page provides reference documentation for the CircleCI task agent CLI, which is the CLI available in your CircleCI pipelines.
 
 == Introduction
 
@@ -15,6 +15,8 @@ This reference guide covers some basic information about the CircleCI task-agent
 * Command descriptions - Clear explanations of what each command does.
 
 == CLI differentiation
+
+The task agent CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
 
 The CircleCI task agent:: A specialized command-line interface. The task agent retrieves and configures a task before managing the execution of the job within a chosen compute environment. The task agent CLI is available for use in your CI/CD pipelines.
 
@@ -423,15 +425,42 @@ jobs:
 |===
 | Flag | Description
 
-| `verbose`
+| `--verbose`
 | Enable verbose logging output.
+
+| `--help`
+| Show help for a command.
 |===
 
-== Help
+*Example usage for `--verbose`:*
 
-Use the following for more information about a command.
-
-[source]
+[source,yaml]
 ----
-circleci run [command] --help
+version: 2.1
+
+jobs:
+  my-job
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            circleci run [command] --verbose
+----
+
+
+*Example usage for `--help`:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            circleci run [command] --help
 ----
