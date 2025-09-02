@@ -36,7 +36,7 @@ Use `env` to manage environment variables
 
 ==== Substitution
 
-`subst` is a subcommand for `env`. Use `subst` to substitute environment variables in a string.
+`subst` is a subcommand for `env`. Use `circleci env subst` to substitute environment variables in a string.
 
 *Example usage:*
 
@@ -101,17 +101,17 @@ Invokes a task-agent subcommand by name.
 
 ==== OpenID Connect tokens
 
-A subcommand of `run`. The `oidc` command runs authentication using OIDC.
+A subcommand of `run`. The `circleci run oidc` command runs authentication using OIDC.
 
 For more information, including an example, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims] page.
 
 ==== Release
 
-A subcommand of `run`. The `release` commands allow you to manage your deployments.
+A subcommand of `run`. The `circleci run release` commands allow you to manage your deployments.
 
 ===== Plan
 
-A subcommand of `release`. The `plan` command is used to plan and identify a new deployment that will be referenced in the CircleCI UI. When a release is planned you can then update its status later in your pipeline to track progress of a deployment.
+A subcommand of `release`. The `circleci run release plan` command is used to plan and identify a new deployment that will be referenced in the CircleCI UI. When a release is planned you can then update its status later in your pipeline to track progress of a deployment.
 
 A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 
@@ -156,7 +156,7 @@ For more information on using the `circleci runrelease plan` command, see the xr
 
 ===== Update
 
-A subcommand of `release`. Use the `update` command to update the status of the deployment.
+A subcommand of `release`. Use the `circleci run release update` command to update the status of the deployment.
 
 *Flags*
 
@@ -187,7 +187,7 @@ For more information on using the `circleci run release update` command, see the
 
 ===== Log
 
-A subcommand of `release`. The `log` command allows you to log your deployments without status updates
+A subcommand of `release`. The `circleci run release log` command allows you to log your deployments without status updates
 
 *Flags*
 
@@ -249,7 +249,7 @@ Collect and split tests so they can run in parallel. For full details of splitti
 
 ==== Split
 
-A subcommand of `tests`. Split grouped tests into independent buckets so they can run in parallel.
+A subcommand of `tests`. Use `circleci tests split` to split grouped tests into independent buckets so they can run in parallel.
 
 *Flags*
 
@@ -298,7 +298,7 @@ jobs:
 
 ==== Glob
 
-A subcommand of `Tests`. Glob Print files matching the glob pattern.
+A subcommand of `Tests`. Use `circleci tests glob` to print files matching the glob pattern.
 
 *Flags*
 
@@ -344,7 +344,7 @@ jobs:
 
 ==== Run
 
-A subcommand of `tests`. The `run` command splits and runs tests.
+A subcommand of `tests`. The `circleci tests run` command splits and runs tests.
 
 *Flags*
 
@@ -399,7 +399,7 @@ Output version information.
 
 *Flags*
 
-* `short`: print only the version string.
+* `--short` flag: print only the version string.
 
 *Example usage:*
 
