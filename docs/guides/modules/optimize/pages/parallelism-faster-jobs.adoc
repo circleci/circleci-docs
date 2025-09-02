@@ -27,9 +27,13 @@ It is also possible to use the CLI to <<manual-allocation,manually allocate test
 [#quickstart]
 == Quickstart
 
-The following how-to guide walks you through the steps required to glob your test files, split your tests evenly across parallel containers or VMs, and then run your tests in parallel:
+The following how-to guide walks you through the following:
 
-* *How-to*: xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+* Steps required to glob your test files.
+* Split your tests evenly across parallel containers or VMs.
+* Run your tests in parallel.
+
+*How-to*: xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
 
 [#specify-a-jobs-parallelism-level]
 == Specify parallel environments for a test job

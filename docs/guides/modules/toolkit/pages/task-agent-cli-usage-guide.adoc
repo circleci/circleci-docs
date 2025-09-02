@@ -103,9 +103,7 @@ Invokes a task-agent subcommand by name.
 
 A subcommand of `run`. The `oidc` command runs authentication using OIDC.
 
-#THIS SECTION NEEDS AN EXAMPLE TO SHOW USAGE#
-
-For more information, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims] page.
+For more information, including an example, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims] page.
 
 ==== Release
 
