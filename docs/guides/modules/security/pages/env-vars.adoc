@@ -177,7 +177,7 @@ In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_
 [#environment-variable-substitution]
 === Environment variable substitution
 
-The CircleCI CLI offers a wrapper around the link:https://github.com/a8m/envsubst[`envsubst`] tool, available both locally as well as in all jobs running on CircleCI. `envsubst` is a command-line utility used to replace environment variables in text strings.
+The CircleCI task agentCLI offers a wrapper around the link:https://github.com/a8m/envsubst[`envsubst`] tool, available both locally as well as in all jobs running on CircleCI. `envsubst` is a command-line utility used to replace environment variables in text strings. You can also refer to the full xref:toolkit:task-agent-cli-usage-guide.adoc[Task agent usage guide].
 
 CLI command:
 

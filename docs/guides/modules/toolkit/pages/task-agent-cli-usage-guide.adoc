@@ -5,15 +5,7 @@
 
 This page provides reference documentation for the CircleCI task agent CLI. This CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
 
-== CLI differentiation
-
-The CircleCI task agent:: A specialized command-line interface. The task agent retrieves and configures a task before managing the execution of the job within a chosen compute environment. The task agent CLI is available for use in your CI/CD pipelines.
-
-The Local CLI:: The development tool used on a local machine. It handles day-to-day development tasks, testing, and local workflow management.
-
-These tools share some similarities. However, they serve different purposes and operate in different contexts with different capabilities and permissions.
-
-=== Introduction
+== Introduction
 
 This reference guide covers some basic information about the CircleCI task-agent CLI, including:
 
@@ -22,173 +14,19 @@ This reference guide covers some basic information about the CircleCI task-agent
 * Usage examples - Practical examples showing real-world usage patterns.
 * Command descriptions - Clear explanations of what each command does.
 
+== CLI differentiation
+
+The CircleCI task agent:: A specialized command-line interface. The task agent retrieves and configures a task before managing the execution of the job within a chosen compute environment. The task agent CLI is available for use in your CI/CD pipelines.
+
+The Local CLI:: The development tool used on a local machine. It handles day-to-day development tasks, testing, and local workflow management.
+
+These tools share some similarities. However, they serve different purposes and operate in different contexts with different capabilities and permissions.
+
 == Root command
 
 The CLI tool available in CircleCI pipelines. The root command is `circleci`.
 
 == Subcommands
-
-=== Task
-
-Manage tasks. You can also use the alias `step` instead of `task`.
-
-==== Halt
-
-Halt is a subcommand of `task`. This command stops the current task and treat it as successful.
-
-*Example usage:*
-
-.Equivalent commands to halt the current task and treat it as successful
-[source,yaml]
-----
-## These commands would be equivalent:
-circleci task halt
-circleci step halt
-----
-
-=== Version
-
-Output version information.
-
-*Flags*
-
-* `short`: print only the version string.
-
-*Example usage:*
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  my-job
-    docker:
-      - image: cimg/base:current
-    steps:
-      - run:
-          command: |
-            circleci --version [flag]
-----
-
-=== Tests
-
-Collect and split tests so they can run in parallel.
-
-==== Split
-
-A subcommand of `tests`. Split grouped tests into independent buckets so they can run in parallel.
-
-*Flags*
-
-[cols="2,3"]
-|===
-| Flag | Description
-
-| `index`
-| Index of node.
-
-| `total`
-| Number of nodes.
-
-| `split-by`
-| How to weight the split, allowed values are `name`, `filesize`, and `timings`.
-
-| `timings-type`
-| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose `classname` or `filename`) (default `autodetect`).
-
-| `show-counts`
-| Print test file or test class counts to stderr (default `false`).
-
-| `time-default`
-| Override default time value of test timing data when timing is not found (default 0s).
-
-| `timings-file`
-| JSON file containing historical timing data.
-|===
-
-==== Glob
-
-A subcommand of `Tests`. Glob Print files matching the glob pattern.
-
-*Flags*
-
-NOTE: The available flag for the `glob` subcommand is a pattern, and supports the
-following symbols:
-
-[cols="2,3"]
-|===
-| Symbol | Description
-
-| `*`
-| Matches any sequence of non-path-separators.
-
-| `**`
-| Matches any sequence of characters, including path separators.
-
-| `?`
-| Matches any single non-path-separator character.
-
-| `[...]`
-| Matches any character in the set. May use '-' for a range.
-
-| `{...}`
-| Matches a sequence of characters, if any of the alternatives in braces matches.
-|===
-
-==== Run
-
-A subcommand of `tests`. The `run` command splits and runs tests.
-
-*Flags*
-
-[cols="2,3"]
-|===
-| Flag | Description
-
-| `command`
-| Script to run for a list of tests.
-
-| `index`
-| Index of node.
-
-| `total`
-| Number of nodes.
-
-| `split-by`
-| How to weight the split, allowed values are `name`, `filesize`, and `timings`.
-
-| `timings-type`
-| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose classname or filename) (default `autodetect`).
-
-| `show-counts`
-| Print test file or test class counts to stderr (default `false`).
-|===
-
-*Example usage:*
-
-[source,yaml]
-----
-version: 2.1
-
-jobs:
-  my-job:
-    docker:
-      - image: cimg/base:current
-    steps:
-      - run:
-          command: |
-            ## example usage of split
-            circleci tests split [flags] [FILENAME]
-            ## example usage of glob
-            circleci tests glob [flags] PATTERN
-            ## example usage of run
-            circleci tests run [flags]
-----
-
-*More information on using the `tests` command*:
-
-* xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[Guide to Test splitting and parallelism]
-* xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
 
 === Environment variables
 
@@ -253,21 +91,27 @@ Output:
 }
 ----
 
+For more information on using the `env` command, see the xref:security:env-vars.adoc#environment-variable-substitution[Introduction to environment variables] page.
+
 === Run
 
 Invokes a task-agent subcommand by name.
 
-==== OIDC
+==== OpenID Connect tokens
 
-A subcommand of `run`. This command runs authentication using OIDC.
+A subcommand of `run`. The `oidc` command runs authentication using OIDC.
+
+#THIS SECTION NEEDS AN EXAMPLE TO SHOW USAGE#
+
+For more information, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims] page.
 
 ==== Release
 
-A subcommand of `run`. This command allows you to manage your deployments.
+A subcommand of `run`. The `release` commands allow you to manage your deployments.
 
 ===== Plan
 
-A subcommand of `release`. The `plan` command is used to plan and identify a new deployment that can be referenced to update its status later.
+A subcommand of `release`. The `plan` command is used to plan and identify a new deployment that will be referenced in the CircleCI UI. When a release is planned you can then update its status later in your pipeline to track progress of a deployment.
 
 A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 
@@ -293,6 +137,23 @@ A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 | Optional flag to use a namespace value other than default.
 |===
 
+*Example usage:*
+
+[source,yaml]
+----
+jobs:
+  deploy-my-service:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run release plan
+            circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
+----
+
+For more information on using the `circleci runrelease plan` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+
 ===== Update
 
 A subcommand of `release`. Use the `update` command to update the status of the deployment.
@@ -306,6 +167,23 @@ A subcommand of `release`. Use the `update` command to update the status of the 
 | `status`
 | Update the deploy status (values can be `RUNNING`, `SUCCESS`, or `FAILED`).
 |===
+
+*Example usage:*
+
+[source,yaml]
+----
+jobs:
+  deploy-my-service:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run release update
+            circleci run release update <deploy-name> --status=running
+----
+
+For more information on using the `circleci run release update` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
 
 ===== Log
 
@@ -336,21 +214,208 @@ A subcommand of `release`. The `log` command allows you to log your deployments 
 ----
 jobs:
   deploy-my-service:
-    executor: some-executor
+    docker:
+      - image: cimg/base:current
     steps:
       - run:
           command: |
-            ## example usage of run release plan
-            circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
-            ## example usage of run release update
-            circleci run release update <deploy-name> --status=running
             ## example usage of run release log
             circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
 ----
 
-*More information on using  the `run` command*:
+For more information on using the `circleci run release log` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
 
-* xref:deploy:configure-deploy-markers.adoc#deploy-markers-with-status-updates[Configure deploy markers]
+=== Task
+
+Manage tasks. You can also use the alias `step` instead of `task`.
+
+==== Halt
+
+Halt is the only available subcommand of `task`. This command stops the current task and treat it as successful.
+
+*Example usage:*
+
+.Equivalent commands to halt the current task and treat it as successful
+[source,yaml]
+----
+## These commands would be equivalent:
+circleci task halt
+circleci step halt
+----
+
+=== Tests
+
+Collect and split tests so they can run in parallel. For full details of splitting and running tests using the task agent CLI, see the xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests] page.
+
+==== Split
+
+A subcommand of `tests`. Split grouped tests into independent buckets so they can run in parallel.
+
+*Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `index`
+| Index of node.
+
+| `total`
+| Number of nodes.
+
+| `split-by`
+| How to weight the split, allowed values are `name`, `filesize`, and `timings`.
+
+| `timings-type`
+| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose `classname` or `filename`) (default `autodetect`).
+
+| `show-counts`
+| Print test file or test class counts to stderr (default `false`).
+
+| `time-default`
+| Override default time value of test timing data when timing is not found (default 0s).
+
+| `timings-file`
+| JSON file containing historical timing data.
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of split
+            circleci tests split [flags] [FILENAME]
+----
+
+==== Glob
+
+A subcommand of `Tests`. Glob Print files matching the glob pattern.
+
+*Flags*
+
+NOTE: The available flag for the `glob` subcommand is a pattern, and supports the
+following symbols:
+
+[cols="2,3"]
+|===
+| Symbol | Description
+
+| `*`
+| Matches any sequence of non-path-separators.
+
+| `**`
+| Matches any sequence of characters, including path separators.
+
+| `?`
+| Matches any single non-path-separator character.
+
+| `[...]`
+| Matches any character in the set. May use '-' for a range.
+
+| `{...}`
+| Matches a sequence of characters, if any of the alternatives in braces matches.
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of glob
+            circleci tests glob [flags] PATTERN
+----
+
+==== Run
+
+A subcommand of `tests`. The `run` command splits and runs tests.
+
+*Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `command`
+| Script to run for a list of tests.
+
+| `index`
+| Index of node.
+
+| `total`
+| Number of nodes.
+
+| `split-by`
+| How to weight the split, allowed values are `name`, `filesize`, and `timings`.
+
+| `timings-type`
+| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose classname or filename) (default `autodetect`).
+
+| `show-counts`
+| Print test file or test class counts to stderr (default `false`).
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run
+            circleci tests run [flags]
+----
+
+*More information on using the `tests` command*:
+
+* xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[Guide to Test splitting and parallelism]
+* xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+
+=== Version
+
+Output version information.
+
+*Flags*
+
+* `short`: print only the version string.
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            circleci --version [flag]
+----
 
 == Global flags
 

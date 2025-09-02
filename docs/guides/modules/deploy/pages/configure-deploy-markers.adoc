@@ -27,7 +27,7 @@ To create a deployment marker, you will update your CircleCI configuration file.
 
 You will add commands to plan a deploy and then update its status based on the outcome of your deployment script.
 
-NOTE: The `circleci run release` commands are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands.
+NOTE: The `circleci run release` commands are part of the CircleCI task agent CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:task-agent-cli-usage-guide.adoc[Task agent CLI usage guide].
 
 === 1.1. Plan a deploy
 

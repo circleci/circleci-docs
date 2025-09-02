@@ -155,7 +155,7 @@
 *** xref:test:testing-ios.adoc[Testing iOS applications]
 *** xref:test:testing-macos.adoc[Testing macOS applications]
 ** How-to guides
-*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the task agent CLI to split tests]
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 ** Reference
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
