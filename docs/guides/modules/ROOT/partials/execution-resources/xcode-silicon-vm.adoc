@@ -8,12 +8,12 @@
 | Release Notes
 
 | `26.0.0`
-| Xcode 26.0 Beta 6 (17A5305f)
-| 15.5
+| Xcode 26.0 Beta 7 (17A5305k)
+| 15.6
 a| `m4pro.medium` +
    `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15606/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-26-beta-6-available/[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15636/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-beta-7-available/[Release Notes]
 
 | `16.4.0`
 | Xcode 16.4 GA (16F6)
