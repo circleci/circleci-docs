@@ -105,21 +105,6 @@ To get started with CircleCI deploys right away, refer to the following guides:
 
 The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploys and the release agent.
 
-=== Component
-
-A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `circleci.com/component-name` label.
-
-=== Delivery
-
-_Delivery_ is the act of packaging code changes and making them available for Deployment. Continuous delivery is the prerequisite step for continuous deployment. With some variations on the technologies being used, the delivery process creates executables from code and then makes them available to be deployed to an environment at a subsequent time.
-
-=== Deployment
-
-_Deployment_ is the act of putting a new component version into an environment, regardless of whether users and other services interact with the new version or a previous one. Depending on the deployment type, a release may happen either:
-
-* As a later task, such as switching over traffic shaping rules for a blue/green deployment.
-* As a direct consequence of the deployment, such as a standard Kubernetes rolling update.
-
 === Command
 
 A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, similarly to how step output works for CI jobs.
@@ -135,6 +120,21 @@ A subset of commands are available for _progressive_ deployments (when using Arg
 * Retry deployment
 * Promote deployment
 * Cancel deployment
+
+=== Component
+
+A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `circleci.com/component-name` label.
+
+=== Delivery
+
+_Delivery_ is the act of packaging code changes and making them available for Deployment. Continuous delivery is the prerequisite step for continuous deployment. With some variations on the technologies being used, the delivery process creates executables from code and then makes them available to be deployed to an environment at a subsequent time.
+
+=== Deployment
+
+_Deployment_ is the act of putting a new component version into an environment, regardless of whether users and other services interact with the new version or a previous one. Depending on the deployment type, a release may happen either:
+
+* As a later task, such as switching over traffic shaping rules for a blue/green deployment.
+* As a direct consequence of the deployment, such as a standard Kubernetes rolling update.
 
 === Release
 
