@@ -29,7 +29,7 @@ NOTE: CircleCI server makes use of Persistent Volumes for data storage. To inclu
 
 Now that Velero is installed on your cluster, you are ready to create your first backup.
 
-NOTE: For best results, we recommend that the backup be taken during a time when your CircleCI server instance is not in use. This is to ensure the data is not being altered while the backup is being genereated which limits the possibility of lost or corrupted data. You may use the following command to scale down the application's services so that no jobs are running during the backup. No Data is lost in this process, but the application will be unreachable. Alternatively you may choose to schedule your backups to be done during a time when your CircleCI server instance is not in use.
+NOTE: For best results, we recommend that the backup be taken during a time when your CircleCI server instance is not in use. This is to ensure the data is not being altered while the backup is being generated, which limits the possibility of lost or corrupted data. You may use the following command to scale down the application's services so that no jobs are running during the backup. No data is lost in this process, but the application will be unreachable. Alternatively you may choose to schedule your backups to be done during a time when your CircleCI server instance is not in use.
 
 [source,bash]
 ----
