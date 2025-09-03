@@ -3,7 +3,7 @@
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the deploys dashboard.
 :experimental:
 
-The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app deploys set up process as described in the xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys] page.
+The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app deploys set up process as described in the xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent] page.
 
 [#introduction]
 == Introduction
@@ -23,7 +23,7 @@ To set up a component for your environment, you can do one of the following:
 
 Before following the steps below, ensure the following:
 
-* Set up your environment integration. Refer to the xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys] page.
+* Set up your environment integration. Refer to the xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent] page.
 * Install the CircleCI release agent into your Kubernetes cluster. Refer to the xref:set-up-the-release-agent.adoc[Set up the release agent] page.
 
 [#add-required-labels]

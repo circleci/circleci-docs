@@ -103,8 +103,7 @@ To get started with CircleCI deploys right away, refer to the following guides:
 
 == Concepts
 
-The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploys.
-
+The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploys and the release agent.
 
 === Component
 
@@ -171,10 +170,10 @@ The release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo R
 
 If you would like to install the release agent in your cluster, refer to the following guides:
 
-* xref:set-up-circleci-deploys.adoc[Set up CircleCI deploys environments]
+* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
 * xref:set-up-the-release-agent.adoc[Set up the release agent]
 * xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
-* xref:manage-deploys.adoc[How-to: Manage deploys]
+* xref:manage-releases.adoc[How-to: Manage releases]
 
 [#the-deploys-UI]
 == The deploys UI
