@@ -59,10 +59,12 @@ After setting up audit log streaming:
 
 Once configured, you can view and manage audit log streams.
 
-- **Pause Streaming**: Use the toggle switch to temporarily disable log streaming.
-- **Monitor Delivery**: Check the **Last delivery** field to verify recent successful deliveries.
-- **Delete Configuration**: Select the trash icon to completely remove the streaming setup.
-- **Restart Streaming**: Toggle the switch to resume paused streams.
+- Pause Streaming: Use the toggle switch to temporarily disable log streaming. **Status** will change to **Disabled**.
+- Monitor Delivery: Check the **Last delivery** field to verify recent successful deliveries.
+- Delete Configuration: Select the trash icon to completely remove the streaming setup.
+- Restart Streaming: Toggle the switch to resume paused streams.
++
+image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
 
 [#audit-event-coverage]
@@ -70,12 +72,12 @@ Once configured, you can view and manage audit log streams.
 
 All security-relevant events within CircleCI are captured and streamed, including:
 
-* **User Authentication Events**: Logins, failed attempts, password changes
-* **Authorization Changes**: Role assignments, permission updates
-* **Project Configuration**: Modifications to project settings and configurations
-* **Pipeline Execution**: Events related to pipeline runs and builds
-* **Secrets and Context**: Modifications to sensitive data and execution contexts
-* **Organization Management**: Team and organization-level administrative activities
+- User Authentication Events: Logins, failed attempts, password changes
+- Authorization Changes: Role assignments, permission updates
+- Project Configuration: Modifications to project settings and configurations
+- Pipeline Execution: Events related to pipeline runs and builds
+- Secrets and Context: Modifications to sensitive data and execution contexts
+- Organization Management: Team and organization-level administrative activities
 
 [#service-availability]
 == Service Availability
@@ -93,7 +95,5 @@ All security-relevant events within CircleCI are captured and streamed, includin
 == Support and Troubleshooting
 
 * **Configuration Issues**: Most problems are related to AWS IAM permissions or S3 bucket configuration.
-* **Connection Failures**: If streaming shows as **Disconnected**, verify AWS credentials and permissions before contacting support.
-+
-Use the toggle switch to restart streaming once issues are resolved.
+* **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming once issues are resolved.
 * **Missing Logs**: Ensure that your S3 bucket policies allow write access from CircleCI's service accounts.
