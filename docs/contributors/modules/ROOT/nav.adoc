@@ -13,3 +13,5 @@
 ** xref:templates:template-how-to.adoc[Template for a how-to page]
 ** xref:templates:template-tutorial.adoc[Template for a tutorial page]
 ** xref:templates:test-page-one.adoc[A test page to show all assets and styles]
+** xref:templates:test-page-simple-code-block.adoc[A test page to show a wide code block]
+** xref:templates:test-page-simple-code-block-narrow.adoc[A test page to show a narrow code block]
