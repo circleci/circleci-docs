@@ -50,7 +50,7 @@ RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
 velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" --labels "chart--rev=${CHART}--${REV}"
 ----
 
-NOTE: If you had chosen to scale down your application before initiating your backup, you can restore your application state by running `helm upgrade` which would restore the application to the state you have specified in your `values.yaml`.
+NOTE: If you scaled down your application before initiating your backup, you can now restore your application state by running `helm upgrade`. Running this command restores your application to the state you have specified in your `values.yaml`.
 
 [#restoring-backups]
 == Restoring backups
