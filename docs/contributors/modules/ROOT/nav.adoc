@@ -15,3 +15,4 @@
 ** xref:templates:test-page-one.adoc[A test page to show all assets and styles]
 ** xref:templates:test-page-simple-code-block.adoc[A test page to show a wide code block]
 ** xref:templates:test-page-simple-code-block-narrow.adoc[A test page to show a narrow code block]
+** xref:templates:test-page-wide-table.adoc[A test page to show a wide table]
