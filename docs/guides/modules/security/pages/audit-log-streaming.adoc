@@ -38,7 +38,7 @@ image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
 +
 image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 
-. When the connection to your S3 bucketis successfully validated, a  **Connection Successful** label with a green checkmark appears under **Status**.
+. When the connection to your S3 bucketis successfully validated, **Connected** with a green checkmark appears under **Status**.
 +
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
@@ -59,9 +59,9 @@ After setting up audit log streaming:
 
 Once configured, you can view and manage audit log streams.
 
-- Pause Streaming: Use the toggle switch to temporarily disable log streaming. **Status** will change to **Disabled**.
+- Pause Streaming: Use the toggle switch under **Actions** to temporarily disable log streaming. **Status** will change to **Disabled**.
 - Monitor Delivery: Check the **Last delivery** field to verify recent successful deliveries.
-- Delete Configuration: Select the trash icon to completely remove the streaming setup.
+- Delete Configuration: Select the trash icon under **Actions** to remove the streaming setup. A popup warning will appear, select btn:[Delete] to confirm.
 - Restart Streaming: Toggle the switch to resume paused streams.
 +
 image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
