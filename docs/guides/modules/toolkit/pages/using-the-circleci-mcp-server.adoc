@@ -237,6 +237,25 @@ The tool provides:
 * Configuration recommendations.
 * Best practices for CircleCI configuration.
 
+=== Rollback Tool (`run_rollback_pipeline`)
+
+This tool executes rollback operations for CircleCI projects, enabling you to revert
+deployments to previous versions by either running your configured rollback pipeline or rerunning your workflow.
+
+The tool provides:
+
+- Interactive rollback process with guided parameter collection.
+- Project resolution from either project slug or project ID.
+- Target environment selection.
+- Component version selection assistance.
+- Rollback pipeline execution or workflow rerun options.
+- Clear error handling and configuration guidance.
+
+Prerequisites:
+
+- In order to trigger the rollback using a Rollback pipeline, the pipeline must be configured in the project. See the xref:deploy:set-up-rollbacks.adoc[Set up rollbacks] page for help.
+- Deploy markers should be set up for version tracking. See the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page for help.
+
 == Real-world examples
 
 Here are common scenarios where the CircleCI MCP server can help you and your team:
@@ -267,6 +286,19 @@ Your team wastes time with unreliable tests:
 . The MCP server analyzes test history to identify problematic tests.
 . Your assistant explains the issues and suggests improvements to you.
 . You fix the tests and improve the reliability of your pipeline.
+
+=== Example 4: Emergency production rollback using rollback pipeline
+
+A critical bug is discovered in production after your latest deployment:
+
+. You tell your assistant: "I need to rollback the frontend component in production
+due to a critical bug"
+. The assistant lists your followed projects and you select the affected project.
+. The MCP server fetches available component versions and you choose the last known
+good version.
+. You provide the rollback reason: "Critical authentication bug affecting user login"
+. The assistant executes the rollback pipeline, reverting to the stable version
+within minutes.
 
 == Troubleshooting
 
