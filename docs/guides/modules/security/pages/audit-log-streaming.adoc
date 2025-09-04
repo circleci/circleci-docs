@@ -10,9 +10,9 @@ The CircleCI Audit Log Streaming feature provides organizations with a solution 
 [#prerequisites]
 == Prerequisites
 
-Before setting up audit log streaming, ensure you have:
+Before setting up audit log streaming, ensure you have the following:
 
-* CircleCI Enterprise/Scale plan (not available to Free or Performance customers)
+* CircleCI Enterprise or Scale plan (not available to Free or Performance customers)
 * AWS account with permissions to create and manage S3 buckets
 * IAM role or user with appropriate S3 write permissions
 * Network configuration to allow secure connections between CircleCI and AWS
@@ -114,7 +114,7 @@ image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
 +
 image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 
-. When the connection to your S3 bucketis successfully validated, **Connected** with a green checkmark appears under **Status**.
+. When the connection to your S3 bucket is successfully validated, **Connected** with a green checkmark appears under **Status**.
 +
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
@@ -164,6 +164,8 @@ All security-relevant events within CircleCI are captured and streamed, includin
 
 [#support-and-troubleshooting]
 == Support and Troubleshooting
+
+NOTE: xref:security:audit-logs[Manual audit log downloads] remain available as backup.
 
 * **Configuration Issues**: Most problems are related to AWS IAM permissions or S3 bucket configuration.
 * **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming once issues are resolved.
