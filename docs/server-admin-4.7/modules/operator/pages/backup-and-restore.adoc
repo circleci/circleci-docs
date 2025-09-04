@@ -32,6 +32,16 @@ NOTE: CircleCI server makes use of Persistent Volumes for data storage. To inclu
 
 Now that Velero is installed on your cluster, you are ready to create your first backup.
 
+NOTE: For best results, we recommend that the backup be taken during a time when your CircleCI server instance is not in use. This is to ensure the data is not being altered while the backup is being generated, which limits the possibility of lost or corrupted data. You may use the following command to scale down the application's services so that no jobs are running during the backup. No data is lost in this process, but the application will be unreachable. Alternatively you may choose to schedule your backups to be done during a time when your CircleCI server instance is not in use.
+
+[source,bash]
+----
+namespace=<your-server-namespace>
+kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
+----
+
+Once you are ready, you may use the following command to create a backup of your CircleCI server instance.
+
 [source,bash]
 
 ----
@@ -42,6 +52,8 @@ RANDOM_STR=$(cat /dev/urandom | env LC_ALL=C tr -dc 'a-z0-9' | head -c 8)
 
 velero backup create "${K8S_NS}-${RANDOM_STR}" --include-namespaces "${K8S_NS}" --labels "chart--rev=${CHART}--${REV}"
 ----
+
+NOTE: If you scaled down your application before initiating your backup, you can now restore your application state by running `helm upgrade`. Running this command restores your application to the state you have specified in your `values.yaml`.
 
 [#restoring-backups]
 == Restoring backups
