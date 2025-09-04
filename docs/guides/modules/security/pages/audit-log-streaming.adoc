@@ -7,6 +7,8 @@
 == Overview
 The CircleCI Audit Log Streaming feature provides organizations with a solution for streaming audit logs directly to their own AWS S3 buckets. This enables organizations to maintain comprehensive security visibility, meet compliance requirements, and integrate CircleCI audit data with their existing security monitoring infrastructure.
 
+NOTE: Even if you set up audit log streaming, you can still send xref:security:audit-logs.adoc[audit logs requests] to CircleCI.
+
 [#prerequisites]
 == Prerequisites
 
@@ -164,8 +166,6 @@ All security-relevant events within CircleCI are captured and streamed, includin
 
 [#support-and-troubleshooting]
 == Support and Troubleshooting
-
-NOTE: xref:security:audit-logs.adoc[Manual audit log downloads] remain available as backup.
 
 * **Configuration Issues**: Most problems are related to AWS IAM permissions or S3 bucket configuration.
 * **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming once issues are resolved.
