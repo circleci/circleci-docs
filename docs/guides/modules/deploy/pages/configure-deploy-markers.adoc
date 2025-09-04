@@ -29,6 +29,8 @@ You will add commands to plan a deploy and then update its status based on the o
 
 NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
 
+CAUTION: We recommend configuring `circleci run release plan` and `circleci run release update` in the same job. If you configure the these commands in _different_ jobs, you must ensure any reruns are made using the btn:[Rerun workflow from start] option, *not* btn:[Rerun workflow from failed]. This is because rerunning from _failed_ in this scenario will cause subsequent update operations to fail.
+
 === 1.1. Plan a deploy
 
 Add a `circleci run release plan` command to your deployment job. This tells CircleCI to plan a new deploy and show it in the link:https://app.circleci.com/deploys[Deploys UI] with `pending` status.
