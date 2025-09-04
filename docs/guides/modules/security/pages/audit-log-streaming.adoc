@@ -165,7 +165,7 @@ All security-relevant events within CircleCI are captured and streamed, includin
 [#support-and-troubleshooting]
 == Support and Troubleshooting
 
-NOTE: xref:security:audit-logs[Manual audit log downloads] remain available as backup.
+NOTE: xref:security:audit-logs.adoc[Manual audit log downloads] remain available as backup.
 
 * **Configuration Issues**: Most problems are related to AWS IAM permissions or S3 bucket configuration.
 * **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming once issues are resolved.
