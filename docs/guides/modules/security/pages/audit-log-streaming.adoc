@@ -5,7 +5,7 @@
 
 [#overview]
 == Overview
-The CircleCI Audit Log Streaming feature provides enterprise organizations with a solution for streaming audit logs directly to their own AWS S3 buckets. This enables organizations to maintain comprehensive security visibility, meet compliance requirements, and integrate CircleCI audit data with their existing security monitoring infrastructure.
+The CircleCI Audit Log Streaming feature provides organizations with a solution for streaming audit logs directly to their own AWS S3 buckets. This enables organizations to maintain comprehensive security visibility, meet compliance requirements, and integrate CircleCI audit data with their existing security monitoring infrastructure.
 
 [#prerequisites]
 == Prerequisites
@@ -16,6 +16,82 @@ Before setting up audit log streaming, ensure you have:
 * AWS account with permissions to create and manage S3 buckets
 * IAM role or user with appropriate S3 write permissions
 * Network configuration to allow secure connections between CircleCI and AWS
+
+[#set-up-aws-prerequisites]
+=== Set up AWS prerequisites
+
+. Create an S3 bucket in your AWS account to store the audit logs.
++
+You can also specify an optional folder or prefix (for example, `my-bucket/audit-logs`).
++
+Take note of the AWS region where you created the S3 bucket (for example,`us-east-1`).
+. Create an IAM role that CircleCI can assume. This role requires two key policies:
+.. Trust policy
++
+This policy allows CircleCI's service to assume the role. The principal ARN in this policy is a template that you must configure with your specific AWS account and CircleCI organization IDs.
++
+The complete template for the trust relationship is the following:
++
+[source,json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::<aws-account-id>:oidc-provider/oidc.circleci.com/org/<org-id>"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "oidc.circleci.com/org/<org-id>:aud": "<org-id>"
+                }
+            }
+        }
+    ]
+}
+----
++
+Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique CircleCI organization ID (found on the menu:Organization Settings[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
+
+.. Permissions policy
++
+This policy grants the role permission to write objects to your S3 bucket (and any specified prefix).
++
+The minimum required access policy for the role is as follows:
++
+[source,json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<bucket-name>/*",
+                "arn:aws:s3:::<bucket-name>"
+            ]
+        }
+    ]
+}
+----
++
+Replace `<bucket-name>` with the name of your S3 bucket.
+
+. Set up an OIDC identity provider to allow CircleCI's OIDC tokens to be used for authentication.
+.. Navigate to the IAM Console in AWS.
+.. In the left navigation menu, select *Identity Providers*.
+.. Select *Add provider*.
+.. Choose *OpenID Connect* as the provider type.
+.. In the *Provider URL* field, specify `\https://oidc.circleci.com/org/<org-id>` (replace `<org-id>` with your CircleCI organization ID).
+.. In the *Audience* field, enter your organization ID.
+
 
 [#configure-audit-log-streaming]
 == Configure Audit Log Streaming
@@ -32,7 +108,7 @@ image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
 . In the configuration dialog, specify the following fields:
 .. **Region**: The AWS region where your S3 bucket is located.
 .. **S3 Bucket Name**: The name of the S3 bucket where audit logs will be streamed.
-.. **ARN Role ID**: The Amazon Resource Name (ARN) for the IAM role that CircleCI will use to access your S3 bucket.
+.. **Role ARN**: The Amazon Resource Name (ARN) for the IAM role that CircleCI will use to access your S3 bucket.
 
 . Select btn:[Connect CircleCI to AWS].
 +
@@ -79,17 +155,12 @@ All security-relevant events within CircleCI are captured and streamed, includin
 - Secrets and Context: Modifications to sensitive data and execution contexts
 - Organization Management: Team and organization-level administrative activities
 
-[#service-availability]
-== Service Availability
+[#limitations]
+== Limitations
 
-* **Plan Restrictions**: Audit log streaming is only available to CircleCI Enterprise and Scale plan customers. Free and Performance plan customers do not have access to this feature.
+- Audit log streaming is only available to CircleCI Enterprise and Scale plan customers. Free and Performance plan customers do not have access to this feature.
 
-[#technical-limitations]
-== Technical Limitations
-
-* **Storage Platform**: Currently supports AWS S3 as the primary storage solution. Support for Google Cloud Storage and Azure Blob Storage is not available.
-* **Delivery Latency**: While the target is to deliver logs within 1 hour, delivery may take up to 3 hours under certain conditions.
-
+- Currently, streaming is supported for a single S3 bucket per organization.
 
 [#support-and-troubleshooting]
 == Support and Troubleshooting
