@@ -22,7 +22,9 @@ Set up deploy markers to track deployments in the CircleCI web app and rollback 
 
 The following list outlines the core components you need to get a deployment set up:
 
-* **Deployment job**: To deploy your application, add a xref:orchestrate:jobs-steps.adoc#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require. Use the how-to guides in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
+* **Deployment job**: To deploy your application, add a xref:orchestrate:jobs-steps.adoc#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
++
+TIP: Use the *how-to guides* in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
 
 * *Deploy markers*: Add deploy markers to log, view, and rollback your deployments. Deploy markers are configured as steps in your deployment job to **view a list of deployments** in the CircleCI web app. See the xref:configure-deploy-markers.adoc[Deployment markers] guide to learn more.
 
