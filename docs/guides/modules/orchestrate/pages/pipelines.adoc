@@ -245,3 +245,4 @@ include::ROOT:partial$faq/pipelines-faq-snip.adoc[]
 == Next steps
 
 Find out more about triggering pipelines in the xref:triggers-overview.adoc[Triggers Overview].
+ 
