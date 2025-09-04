@@ -1,9 +1,9 @@
-= CircleCI task agent CLI usage guide
+= CircleCI environment CLI usage guide
 :page-platform: Cloud, Server v4+
-:page-description: Using the CircleCI task agent CLI in your CI/CD pipeline
+:page-description: Using the CircleCI environment CLI in your CI/CD pipeline
 :experimental:
 
-This page provides reference documentation for the CircleCI task agent CLI, which is the CLI available in your CircleCI pipelines.
+This page provides reference documentation for the CircleCI environment CLI, which is the CLI available in your CircleCI pipelines.
 
 == Introduction
 
@@ -16,9 +16,9 @@ This reference guide covers some basic information about the CircleCI task-agent
 
 == CLI differentiation
 
-The task agent CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
+The environment CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
 
-The CircleCI task agent:: A specialized command-line interface. The task agent retrieves and configures a task before managing the execution of the job within a chosen compute environment. The task agent CLI is available for use in your CI/CD pipelines.
+The CircleCI environment CLI:: A specialized command-line interface. The environment CLI retrieves and configures a task before managing the execution of the job within a chosen compute environment. The environment CLI is available for use in your CI/CD pipelines.
 
 The Local CLI:: The development tool used on a local machine. It handles day-to-day development tasks, testing, and local workflow management.
 
@@ -245,7 +245,7 @@ circleci step halt
 
 === Tests
 
-Collect and split tests so they can run in parallel. For full details of splitting and running tests using the task agent CLI, see the xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests] page.
+Collect and split tests so they can run in parallel. For full details of splitting and running tests using the environment CLI, see the xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI environment CLI to split tests] page.
 
 ==== Split
 
