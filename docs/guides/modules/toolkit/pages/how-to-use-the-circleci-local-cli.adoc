@@ -789,6 +789,10 @@ circleci policy settings --owner-id <org-id> --enable <true|false>
 
 - `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
 
+- `--enable`is the flag to either enable or disable a policy evaluation. Set it to `true`to enable, `false`to disable.
+
+At the moment, the `settings` sub-command can only be used to read the settings and to xref:config-policies:create-and-manage-config-policies.adoc#config-policy-management-enablement[enable/disable a policy evaluation].
+
 For full details on the `settings` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_settings.html[CLI docs].
 
 === Test policies
