@@ -20,7 +20,7 @@ This page covers the installation and usage of the CircleCI local CLI. The expec
 
 The CircleCI local CLI:: The development tool used on your local machine for day-to-day development tasks. It handles testing and local workflow management.
 
-CircleCI task agent:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
+CircleCI environment CLI:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
 
 Both tools may share some conceptual similarities. However, they serve different purposes and operate in different contexts with different capabilities and permissions.
 
