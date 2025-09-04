@@ -20,11 +20,11 @@ Set up deploy markers to track deployments in the CircleCI web app and rollback 
 
 == The basics of deployment
 
-Here are the core concepts you need to get a deployment set up:
+The following list outlines the core components you need to get a deployment set up:
 
-* **Deployment job**: To deploy your application, add a xref:orchestrate:jobs-steps.adoc#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
-+
-TIP: Add a deployment log step to your deployment job to **view a log of deployments** in the CircleCI web app. See the xref:configure-deploy-markers.adoc[Deployment markers] guide to learn more.
+* **Deployment job**: To deploy your application, add a xref:orchestrate:jobs-steps.adoc#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require. Use the how-to guides in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
+
+* *Deploy markers*: Add deploy markers to log, view, and rollback your deployments. Deploy markers are configured as steps in your deployment job to **view a list of deployments** in the CircleCI web app. See the xref:configure-deploy-markers.adoc[Deployment markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
@@ -37,12 +37,15 @@ Environment variables can be:
 * **Manual approval**: If your deployment strategy requires a manual approval step, you can include a xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[hold/approve] job in your workflow.
 This job will create a manual approval button visible in the CircleCI web app workflows map.
 
-If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc[IP ranges] for your deployment job.
+* *IP-based restrictions*: If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc[IP ranges] for your deployment job.
 
 === Using orbs to simplify deployment
 
+Look in the link:https://circleci.com/developer/orbs[orbs registry] to find an orb for your deployment target. Orbs can help you simplify your configuration by using pre-configured jobs and commands.
+
 xref:orbs:use:orb-intro.adoc[Orbs] are packages of reusable configuration.
 For simpler deployment pipelines, you can use orbs to achieve the results you need with minimal configuration.
+
 Orbs are available for many common deployment targets.
 
 For example, the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb] has a pre-configured `deploy` job that you can include in your configuration with the single line: `aws-code-deploy/deploy`. Orb jobs can be used once the orb has been invoked by adding the orbs stanza:
@@ -81,29 +84,26 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 - link:https://circleci.com/developer/images/image/cimg/azure[`cimg/azure`]
 - link:https://circleci.com/developer/images/image/cimg/gcp[`cimg/gcp`]
 
-=== Handling common deployment scenarios
+== Deployment tracking and management
 
-Use the how-to guides in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
+Deploy markers provide a lightweight way to log your deployments. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them.
 
-Go to the link:https://circleci.com/developer/orbs[orbs registry] to simplify your configuration by using an orb for your deployment target.
+See the xref:configure-deploy-markers.adoc[Configure deploy markers] page for full setup details.
 
-== Deploys tracking and management
+To use deploy markers, you will add commands to your pipeline configuration to enable CircleCI to log and track deployment status in the CircleCI UI. Once deploy markers are set up, you can rollback to a previous version of a component from the CircleCI web app.
 
-CircleCI deploys gives you visibility into your deployments within the CircleCI web app.
-When setting up deploys with CircleCI you will add CLI commands to your pipeline config to enable markers to log and track deployment status in the CircleCI UI. You can also use rollbacks to rollback to a previous version of a component.
+If you are deploying to Kubernetes you can also use the CircleCI xref:release-agent-overview.adoc[Release Agent Overview], which you install in your cluster to enable you to manage your deployments through CircleCI.
 
-If you are deploying to Kubernetes you can choose to use the CircleCI <<release-agent-overview,release agent>>, which you install in your cluster to enable you to manage your deployments through CircleCI.
+== Deploy markers quickstart
 
-=== Quickstart
-
-To get started with CircleCI deploys right away, refer to the following guides:
+To get started with deploy markers right away, refer to the following guides:
 
 * xref:configure-deploy-markers.adoc[Tutorial 1: Configure CircleCI deploy markers]
 * xref:set-up-rollbacks.adoc[Tutorial 2: Set up rollbacks]
 
 == Concepts
 
-The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploys and the release agent.
+The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploy markers and the release agent.
 
 === Command
 
@@ -145,35 +145,6 @@ A release can happen when an existing component is updated or when the first ver
 In the deploys dashboard, deployments are tagged as **Progressive** if they refer to an Argo Rollout.
 
 A deployment starts when the component version is updated, and ends when the new version has reached 100% availability, and all associated validations have been completed. In the case of a progressive deployment, this happens when the Rollout completes. In the case of a Kubernetes Deployment, this happens when the Deployment replicas are all available and ready.
-
-== Release agent overview
-
-CircleCI integrates with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
-
-image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
-
-Configure environment integrations to install the CircleCI release agent into your Kubernetes clusters. Configure the release agent to only monitor the namespaces you require.
-
-Developers can monitor deployments in the CircleCI web app, and run commands to manage those deployments from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
-
-If you choose the release agent approach, you will have access to the following deploy management tools from CircleCI:
-
-* Restore version
-* Scale component
-* Restart component
-
-The release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported. Some further controls are available for projects that use Argo Rollouts:
-
-* Retry Rollout
-* Promote Rollout
-* Cancel Rollout
-
-If you would like to install the release agent in your cluster, refer to the following guides:
-
-* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
-* xref:set-up-the-release-agent.adoc[Set up the release agent]
-* xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
-* xref:manage-releases.adoc[How-to: Manage releases]
 
 [#the-deploys-UI]
 == The deploys UI
@@ -277,12 +248,6 @@ To view all commands run for a component, follow these steps:
 . Select your component by name. You can use the filter at the top of the page to help.
 . You are now on the component details page. Select the **Commands** tab to view a list of all commands run for your chosen component.
 
-== Deploy markers
-
-Deploy markers provide a lightweight way to log your deployments. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them.
-
-See the xref:configure-deploy-markers.adoc[Configure deploy markers] page for full setup details.
-
 [#release-status]
 == Deploy status
 
@@ -311,24 +276,3 @@ A deployment can be in one of the following states:
 |LOGGED
 |Deployment has been logged using a deploy marker and is available in the CircleCI deploys UI.
 |===
-
-[#known-limitations]
-== Known limitations
-
-* Restarting the release agent while a deployment is ongoing causes the release agent to lose track of the deployment status and fail to update the CircleCI services accordingly.
-* **In the CircleCI deploys UI it is currently possible for you to attempt to restore a version that does not exist**. All deployments are presented in the UI, including those outside of the scope of any version history limits you might have set. We do not currently filter out deployments for which there is no longer any data.
-+
-Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
-+
-If you have these limits set, you can't restore a version outside the limit. For example, if your limit is set to the last 10 deployments, you can not restore the 11th deployment back.
-+
-We are working on updates to:
-+
-** Indicate out-of-scope deployments.
-** Prevent you from attempting to restore unavailable deployments
-** Provide a manual way for you to mark deployments as unavailable
-
-[#troubleshooting]
-== Troubleshooting
-
-include::ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]

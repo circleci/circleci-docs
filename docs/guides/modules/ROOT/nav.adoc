@@ -166,6 +166,7 @@
 *** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 *** xref:deploy:set-up-rollbacks.adoc[Rollbacks]
 ** Release agent setup
+*** xref:deploy:release-agent-overview.adoc[Release agent overview]
 *** xref:deploy:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
 *** xref:deploy:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
 *** xref:deploy:update-the-kubernetes-release-agent.adoc[Update the Kubernetes release agent]
