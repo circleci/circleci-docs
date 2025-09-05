@@ -21,7 +21,7 @@ NOTE: All CircleCI organizations can request audit logs. You need to be an organ
 
 The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
 
-NOTE: In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
+NOTE: In some situations, the internal system may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
 Per link:https://circleci.com/privacy/#information[our data retention policy], audit logs can be retrieved for up to 12 months.
 
@@ -81,7 +81,7 @@ This functionality enables organizations to maintain comprehensive security visi
 ====
 Before setting up audit log streaming, ensure you have the following:
 
-* CircleCI Enterprise or Scale plan (not available to Free or Performance customers)
+* CircleCI Scale plan (not available to Free or Performance customers)
 * AWS account with permissions to create and manage S3 buckets
 * IAM role or user with appropriate S3 write permissions
 * Network configuration to allow secure connections between CircleCI and AWS
@@ -215,7 +215,7 @@ image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 [#limitations]
 === Limitations
 
-- Audit log streaming is only available to CircleCI Enterprise and Scale plan customers. Free and Performance plan customers do not have access to this feature.
+- Audit log streaming is only available to CircleCI Scale plan customers. Free and Performance plan customers do not have access to this feature.
 
 - Currently, streaming is supported for a single S3 bucket per organization.
 
