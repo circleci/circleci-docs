@@ -16,9 +16,9 @@ NOTE: All CircleCI organizations can request audit logs. You need to be an organ
 === Request audit logs from the CircleCI web app
 
 . Navigate to menu:Organization Settings[Security].
-. Scroll down to the **Audit Log** section and specify a date range.
-. Select the date range and select btn:[Request audit logs].
-+
+. Scroll down to the **Audit Log** section.
+. Select the date range and then select btn:[Request audit logs].
+
 image::guides:ROOT:request-audit-log.png[Request audit logs]
 
 The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
