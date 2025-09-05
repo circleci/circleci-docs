@@ -166,11 +166,11 @@
 *** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 *** xref:deploy:set-up-rollbacks.adoc[Rollbacks]
 ** Release agent setup
-*** xref:deploy:set-up-circleci-deploys.adoc[Set up CircleCI deploys]
-*** xref:deploy:set-up-the-release-agent.adoc[Set up the release agent]
+*** xref:deploy:release-agent-overview.adoc[Release agent overview]
+*** xref:deploy:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
 *** xref:deploy:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
 *** xref:deploy:update-the-kubernetes-release-agent.adoc[Update the Kubernetes release agent]
-*** xref:deploy:manage-deploys.adoc[Manage deploys]
+*** xref:deploy:manage-releases.adoc[Manage releases]
 ** How-to guides
 *** xref:deploy:deploy-android-applications.adoc[Deploy Android applications]
 *** xref:deploy:deploy-to-artifactory.adoc[Deploy to Artifactory]
