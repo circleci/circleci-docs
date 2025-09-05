@@ -237,7 +237,6 @@
 *** xref:security:contexts.adoc[Using contexts]
 *** xref:security:ip-ranges.adoc[IP ranges]
 *** xref:security:audit-logs.adoc[Audit logs]
-*** xref:security:audit-log-streaming.adoc[Audit log streaming]
 ** Security recommendations
 *** xref:security:security-overview.adoc[Security overview]
 *** xref:security:security-supply-chain.adoc[Protecting against supply chain attacks]
