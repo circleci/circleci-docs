@@ -1,0 +1,135 @@
+= Phase 4 - configure Nomad clients
+:page-noindex: true
+:page-platform: Server v4.3, Server Admin
+:page-description: How to configure Nomad clients to run with CircleCI server v4.3 in an air-gapped environment.
+:icons: font
+
+CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment.
+
+NOTE: In the following sections, replace any sections indicated by `< >` with your details.
+
+[#install-docker-and-nomad]
+== 1. Install Docker and Nomad
+Install the following two prerequisites on each instance designated as a Nomad client:
+
+- link:https://docs.docker.com/get-docker/[An installation of Docker]
+- link:https://developer.hashicorp.com/nomad/install[An installation of Nomad]
+
+
+[#create-nomad-directories]
+== 2. Create Nomad directories
+On each machine, create a config directory. If your installation uses mTLS, also create a nested SSL directory:
+
+[source, bash]
+----
+sudo mkdir /etc/nomad/
+sudo mkdir /etc/nomad/ssl/
+----
+
+[#create-ci-docker-network]
+== 3. Create the Docker ci-privileged network
+Create a Docker network named `ci-privileged` with the following command. Once complete, restart the Nomad service.
+
+[source, bash]
+----
+sudo docker network create --label keep --driver=bridge --opt com.docker.network.bridge.name=ci-privileged ci-privileged
+
+sudo service nomad restart
+----
+
+[#retrieve-mtls-certificates]
+== 4. (Optional) Retrieve mTLS certificates
+
+If Nomad mTLS is configured on your installation, you will need to provide three files to each Nomad client. If mTLS is not configured, you can skip this step.
+
+- `ca.pem`
+- `key.pem`
+- `cert.pem`
+
+These files can be retrieved from a secret in the namespace of the CircleCI server Helm installation (`nomad-rpc-mtls`) using the following command:
+
+[source, bash]
+----
+kubectl get secret -n <namespace> nomad-rpc-mtls -o yaml > secret.yaml
+----
+
+This command will output the `secret.yaml` file to stdout. Each required file (`ca.pem`, `key.pem`, `cert.pem`) is stored as a base64 encoded string within the secret. Each string must be copied, decoded, and placed in a file in each of your Nomad clients.
+
+[source, bash]
+----
+# For each of ca.pem, key.pem, cert.pem in the secret output
+echo -n "ca.pem-base64-encoded-string" | base64 --decode > ca.pem
+echo -n "cert.pem-base64-encoded-string" | base64 --decode > cert.pem
+echo -n "key.pem-base64-encoded-string" | base64 --decode > key.pem
+----
+
+== 5. (Optional) Copy mTLS keys to each Nomad client
+If using mTLS, the `ca.pem`, `key.pem`, and `cert.pem` keys must be copied to each client and placed in the locations listed below. If mTLS is not configured, you can skip this step.
+
+[source, text]
+----
+/etc/nomad/ssl/ca.pem
+/etc/nomad/ssl/cert.pem
+/etc/nomad/ssl/key.pem
+----
+
+== 6. Configure the Nomad conf.hcl file on each machine
+For each Nomad client, configure the following `conf.hcl` file at `/etc/nomad/conf.hcl`. Remember to replace all items displayed between `< >`.
+
+[source, hcl]
+----
+log_level = "DEBUG"
+name = "<instance-hostname>"
+data_dir = "/opt/nomad"
+datacenter = "default"
+advertise {
+  http = "<instance-internal-ip>"
+  rpc = "<instance-internal-ip>"
+  serf = "<instance-internal-ip>"
+}
+
+client {
+  enabled = true
+  server_join = {
+    retry_join = ["<kubernetes-cluster-internal-ip>:4647"]
+  }
+  node_class = "linux-64bit"
+  options = {"driver.raw_exec.enable" = "1"}
+}
+
+telemetry {
+  collection_interval = "1s"
+  disable_hostname = true
+  prometheus_metrics = true
+  publish_allocation_metrics = true
+  publish_node_metrics = true
+}
+
+----
+
+If mTLS is configured, the following block must also be added at the end of the `conf.hcl` file:
+
+[source, hcl]
+----
+tls {
+  http = false
+  rpc  = true
+  verify_server_hostname = true
+  ca_file       = "/etc/nomad/ssl/ca.pem"
+  cert_file = "/etc/nomad/ssl/cert.pem"
+  key_file      = "/etc/nomad/ssl/key.pem"
+}
+----
+
+== 7. Test connectivity
+Test connectivity between your clients and cluster by starting the Nomad agent and observing logs.
+
+[source, bash]
+----
+sudo nomad agent -config /etc/nomad/conf.hcl
+----
+
+[#next-steps]
+== Next steps
+
+Once the steps on this page are complete, go to the xref:phase-5-test-your-installation.adoc[Phase 5 - Test your installation] guide.
