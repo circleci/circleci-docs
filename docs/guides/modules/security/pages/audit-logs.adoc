@@ -46,7 +46,7 @@ Successful requests can be either of the following:
 - Active without any data (no download link).
 - Expired (no longer available to download).
 
-Once your request has been successfully processed, you can download the audit log file by selecting btn:[Download logs].
+Once your request is successfully processed, you can download the audit log as a CSVfile by selecting btn:[Download logs].
 
 Successful requests can be downloaded for 30 days.
 
