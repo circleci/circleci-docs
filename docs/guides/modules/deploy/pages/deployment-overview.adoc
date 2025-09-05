@@ -4,7 +4,7 @@
 :page-description: Learn the basics of deployment and deploys management with CircleCI.
 :experimental:
 
-With CircleCI you can deploy to any target and manage your deployments in the CircleCI web app. Track deployments using deploy markers and rollback deployments to a previous version.
+With CircleCI you can deploy to any target and manage your deployments in the CircleCI web app. Track deployments using deploy markers and use rollbacks to revert to a previous version
 
 == Introduction
 
@@ -26,7 +26,7 @@ The following list outlines the core components you need to get a deployment set
 +
 TIP: Use the *how-to guides* in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
 
-* *Deploy markers*: Add deploy markers to log, view, and rollback your deployments. Deploy markers are configured as steps in your deployment job to **view a list of deployments** in the CircleCI web app. See the xref:configure-deploy-markers.adoc[Deployment markers] guide to learn more.
+* *Deploy markers*: Add deploy markers to log, view, and rollback your deployments. Deploy markers are configured as steps in your deployment job to **view a list of deployments** in the CircleCI web app. See the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to learn more.
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
@@ -90,7 +90,7 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 
 Deploy markers provide a lightweight way to log your deployments. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them.
 
-See the xref:configure-deploy-markers.adoc[Configure deploy markers] page for full setup details.
+See the xref:configure-deploy-markers.adoc[Configure Deploy Markers] page for full setup details.
 
 To use deploy markers, you will add commands to your pipeline configuration to enable CircleCI to log and track deployment status in the CircleCI UI. Once deploy markers are set up, you can rollback to a previous version of a component from the CircleCI web app.
 

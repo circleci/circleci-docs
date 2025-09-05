@@ -3,27 +3,35 @@
 :page-description: Learn the basics of release management for your Kubernetes deployments with CircleCI.
 :experimental:
 
-CircleCI integrates with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
+Using the CircleCI release agent, you can integrate CircleCI with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
 
 image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
 
 == How it works
 
-Configure environment integrations to install the CircleCI release agent into your Kubernetes clusters. Configure the release agent to only monitor the namespaces you require.
+Configure an environment integration to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces you require.
 
 Developers can monitor deployments in the CircleCI web app, and run commands to manage those deployments from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
 
-If you choose the release agent approach, you will have access to the following deploy management tools from CircleCI:
+Using the release agent, you have access to the following deploy management tools from CircleCI:
 
 * Restore version
 * Scale component
 * Restart component
 
-The release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] for progressive delivery. Currently the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy] is supported. Some further controls are available for projects that use Argo Rollouts:
+For progressive delivery, the release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] using the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy]. Some further controls are available for projects that use Argo Rollouts:
 
 * Retry Rollout
 * Promote Rollout
 * Cancel Rollout
+
+== Getting started
+
+To get started with the release agent, refer to the following guides:
+
+* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
+* xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
+* xref:manage-releases.adoc[How-to: Manage releases]
 
 [#known-limitations]
 == Known limitations
@@ -45,11 +53,3 @@ We are working on updates to:
 == Troubleshooting
 
 include::ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]
-
-== Next steps
-
-If you would like to install the release agent in your cluster, refer to the following guides:
-
-* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
-* xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
-* xref:manage-releases.adoc[How-to: Manage releases]
