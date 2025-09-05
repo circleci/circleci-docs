@@ -51,7 +51,7 @@ Error: config compilation contains errors: config compilation contains errors:
 [#orb-development-kit]
 == Orb development kit
 
-The xref:orbs:author:orb-author.adoc#create-test-and-publish-an-orb[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. There are two commands in the CLI that are a part of the orb development kit:
+The xref:orbs:author:orb-author.adoc#create-test-and-publish-an-orb[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. The orb development kit has two commands:
 
 * The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[initializes a new orb project]:
 +
@@ -87,7 +87,7 @@ circleci orb validate <path-to-your-orb.yml>
 circleci config pack
 ----
 
-This CLI pack command (separate to `circleci orb pack` described above) allows you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. This is useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration.
+This CLI pack command (separate to `circleci orb pack` described above) allows you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. FYAML is useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration.
 
 How you **name** and **organize** your files when using the `pack` command will determine the final `orb.yml` output. Consider the following folder structure example:
 
@@ -153,7 +153,7 @@ bar:
 [#processing-a-config]
 == Processing a config
 
-Running the following command validates your config, but will also display expanded source configuration alongside your original configuration. This is particularly useful if you are using orbs:
+Running the following command validates your config, but will also display expanded source configuration alongside your original configuration:
 
 [,shell]
 ----
@@ -175,8 +175,9 @@ workflows:
         - node/test
 ----
 
-Processing this config file will output a YAML file like the example below. This is the expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed:
+Processing this config file will output a YAML file like the example below:
 
+.Expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed
 [,yml]
 ----
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
@@ -289,7 +290,7 @@ Although running jobs locally with `circleci` is helpful, there are some limitat
 [#executors]
 ==== Executors
 
-The CLI does not support running jobs that use a xref:execution-managed:executor-intro.adoc#linux-vm[machine] (`machine`) or xref:execution-managed:executor-intro.adoc#macos[macOS] (`macos`) executor locally. This is because these executors require running an additional virtual machine. Only jobs that use a xref:execution-managed:executor-intro.adoc#docker[Docker] (`docker`) executor can be run locally.
+The CLI does not support running jobs that use a xref:execution-managed:executor-intro.adoc#linux-vm[machine] (`machine`) or xref:execution-managed:executor-intro.adoc#macos[macOS] (`macos`) executor locally because these executors require running an additional virtual machine. Only jobs that use a xref:execution-managed:executor-intro.adoc#docker[Docker] (`docker`) executor can be run locally.
 
 [#add-ssh-keys]
 ==== Add SSH keys
@@ -554,7 +555,7 @@ circleci pipeline create <project-id> [flags]
 
 - `<project-id>` is the ID of the project for which you are creating the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
-The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags. For example:
 
 - `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
 
@@ -587,7 +588,7 @@ circleci pipeline run <org-id> <project-id> [flags]
 
 - `<project-id>` is the ID of the project associated with the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
-The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags. For example:
 
 - `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines].
 
@@ -610,7 +611,7 @@ Use the `create` sub-command to create a trigger for your project.
 circleci trigger create <project-id>  [flags]
 ----
 
-The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags.
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags.
 
 - `<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
