@@ -1,0 +1,55 @@
+= CircleCI release agent overview
+:page-platform: Cloud, Server v4+
+:page-description: Learn the basics of release management for your Kubernetes deployments with CircleCI.
+:experimental:
+
+Using the CircleCI release agent, you can integrate CircleCI with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
+
+image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
+
+== How it works
+
+Configure an environment integration to install the CircleCI release agent into your Kubernetes cluster. Configure the release agent to only monitor the namespaces you require.
+
+Developers can monitor deployments in the CircleCI web app, and run commands to manage those deployments from the UI. Commands are monitored by CircleCI and relayed to the release agent, which then runs the commands for you.
+
+Using the release agent, you have access to the following deploy management tools from CircleCI:
+
+* Restore version
+* Scale component
+* Restart component
+
+For progressive delivery, the release agent supports link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts] using the link:https://argo-rollouts.readthedocs.io/en/stable/concepts/#canary[canary deployment strategy]. Some further controls are available for projects that use Argo Rollouts:
+
+* Retry Rollout
+* Promote Rollout
+* Cancel Rollout
+
+== Getting started
+
+To get started with the release agent, refer to the following guides:
+
+* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
+* xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
+* xref:manage-releases.adoc[How-to: Manage releases]
+
+[#known-limitations]
+== Known limitations
+
+* Restarting the release agent while a deployment is ongoing causes the release agent to lose track of the deployment status and fail to update the CircleCI services accordingly.
+* **In the CircleCI deploys UI it is currently possible for you to attempt to restore a version that does not exist**. All deployments are presented in the UI, including those outside of the scope of any version history limits you might have set. We do not currently filter out deployments for which there is no longer any data.
++
+Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
++
+If you have these limits set, you can't restore a version outside the limit. For example, if your limit is set to the last 10 deployments, you can not restore the 11th deployment back.
++
+We are working on updates to:
++
+** Indicate out-of-scope deployments.
+** Prevent you from attempting to restore unavailable deployments
+** Provide a manual way for you to mark deployments as unavailable
+
+[#troubleshooting]
+== Troubleshooting
+
+include::ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]
