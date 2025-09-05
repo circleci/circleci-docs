@@ -1,6 +1,5 @@
 = Using code samples
 
-
 * Provide code examples to help with clarity, and to help the reader reproduce the subject matter.
 
 * CircleCI config should always be tested as valid before adding it to docs.
@@ -10,3 +9,47 @@
 * When using example code snippets, be mindful that people are likely to copy paste them. Always point out if any items or values need to be replaced with the reader’s own data, including whether they should replace the surrounding `< >` or `“ “`.
 
 * When a reader needs to substitute some of their own data into a snippet or command, use `< >` , for example, `<my-data>`.
+
+* When adding a code snippet supply the language to ensure correct syntax highlighting, for example:
++
+[source,adoc]
+----
+[source,yaml]
+----
+
+* When adding a runnable command, use the `console` language to ensure correct syntax highlighting, and use a dollar sign for the command, for example:
++
+[source,adoc]
+----
+[source,console]
+----
++
+[source,console]
+----
+$ circleci version
+----
++
+NOTE: Using the copy to clipboard icon will *not* copy the dollar sign if the language is set to `console`.
+
+* When adding a snippet of a CircleCI config, show the full job or workflow, not just the relevant lines.
+
+* Where possible add a title to the code snippet, and call out relevant points within the snippet using comments:
++
+.A title for the code snippet
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----

@@ -1,0 +1,22 @@
+= Release notes
+:page-platform: Server v4.8, Server Admin
+:page-description: Details of the new features included in each CircleCI server v4.8 release.
+:experimental:
+
+[#overview]
+== Overview
+
+The v4.8 release introduces further security improvements and support for the following features:
+
+* Flexible job dependencies
+* Expression-based job filters.
+
+[#upgrade]
+== Upgrade
+For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade server v4.8 guide].
+
+== Release 4.8.0
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-8-0[changelog].
