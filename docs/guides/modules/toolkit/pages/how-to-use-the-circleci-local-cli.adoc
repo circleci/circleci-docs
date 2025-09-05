@@ -325,11 +325,6 @@ If you have multiple environment variables, you must use the flag for each varia
 circleci build -e VAR1=FOO -e VAR2=BAR
 ----
 
-[#test-splitting]
-== Test splitting
-
-The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc[test splitting] for build time optimization.
-
 [#runner-management]
 == Runner management
 
@@ -425,7 +420,7 @@ circleci runner token create <namespace/resource-class> <nickname> [flags]
 - `<nickname>` refers to a human-readable name you assign to the token.
 
 For full details on the `resource-class token create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_create.html[CLI docs].
-  
+
 
 === List tokens for a resource class
 
@@ -488,7 +483,7 @@ For full details on the `create` sub-command, refer to the link:https://circleci
 Use the `secret create` sub-command to create an environment variable for a project:
 
 [,shell]
----- 
+----
 circleci project secret create <vcs-type> <org-id> <project-id> <env-name> [flags]
 ----
 
@@ -594,7 +589,7 @@ circleci pipeline run <org-id> <project-id> [flags]
 
 The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
 
-- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines]. 
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines].
 
 For full details on the `run` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_run.html[CLI docs].
 
