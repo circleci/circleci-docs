@@ -3,7 +3,7 @@
 :page-description: How to install the CircleCI local CLI
 :experimental:
 
-The https://circleci-public.github.io/circleci-cli/[CircleCI command line interface (CLI)] brings CircleCI's advanced and powerful tools to your terminal.
+The https://circleci-public.github.io/circleci-cli/[CircleCI local command line interface (CLI)] brings CircleCI's advanced and powerful tools to your terminal.
 
 Some of the things you can do with the CLI include:
 
@@ -14,7 +14,15 @@ Some of the things you can do with the CLI include:
 * xref:how-to-use-the-circleci-local-cli.adoc#context-management[Manage contexts]
 * xref:how-to-use-the-circleci-local-cli.adoc#test-splitting[Split your tests] to run across xref:optimize:parallelism-faster-jobs.adoc[parallel environments] to reduce pipeline duration
 
-This page covers the installation and usage of the CircleCI CLI. The expectation is you have basic knowledge of CI/CD, xref:about-circleci:concepts.adoc[CircleCI's concepts]. You should already have a CircleCI account, an account with a supported VCS, and have your terminal open and ready to go.
+This page covers the installation and usage of the CircleCI local CLI. The expectation is you have basic knowledge of CI/CD and xref:about-circleci:concepts.adoc[CircleCI's concepts]. You should already have a CircleCI account, an account with a supported VCS.
+
+== The CircleCI CLI and the task runner
+
+The CircleCI local CLI:: The development tool used on your local machine for day-to-day development tasks. It handles testing and local workflow management.
+
+CircleCI environment CLI:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
+
+Both tools may share some conceptual similarities. However, they serve different purposes and operate in different contexts with different capabilities and permissions.
 
 [#installation]
 == Installation

@@ -1,13 +1,13 @@
-= Use the CircleCI CLI to split tests
+= Use the CircleCI environment CLI to split tests
 :page-platform: Cloud, Server v4+
-:page-description: How-to guide for using the CLI to split tests across parallel compute environments in a pipeline.
+:page-description: How-to guide for using the environment CLI to split tests across parallel compute environments in a pipeline.
 :experimental:
 
-CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than `1`, CircleCI spins up the specified number of identical execution environments in which your job is run.
+CircleCI supports automatic test allocation across parallel compute environments. When the `parallelism` key in your CircleCI configuration is set to a value greater than `1`, CircleCI spins up the specified number of identical execution environments in which to run your job.
 
-Test splitting requires the CircleCI CLI together with parallelism. The CLI commands `circleci tests glob` and `circleci tests run` are used to define your test suite and allocate tests across multiple environments. The CLI is automatically injected into your job at run-time, so there is no further setup required to use the `circleci tests` commands.
+Test splitting requires the CircleCI environment CLI together with parallelism. The environment CLI commands `circleci tests glob` and `circleci tests run` are used to define your test suite and allocate tests across multiple environments. The environment CLI is automatically injected into your job at run-time, so there is no further setup required to use the `circleci tests` commands.
 
-NOTE: The `circleci tests` commands cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
+NOTE: The `circleci tests` commands are part of the environmentCLI as they require information that only exists within a CircleCI container. `circleci tests` commands are not available in the xref:toolkit:local-cli.adoc[CircleCI local CLI].
 
 NOTE: xref:execution-runner:runner-overview.adoc[Self-hosted runners] can invoke `circleci-agent` directly instead of using the CLI to split tests. This is because the xref:execution-runner:runner-overview.adoc#circleci-self-hosted-runner-operation[task-agent] already exists on the `$PATH`, removing an additional dependency when splitting tests.
 
@@ -30,7 +30,7 @@ Use `circleci tests glob` to define your test suite. To glob test files, pass on
 circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
 ```
 
-The CLI supports globbing test files using the following patterns:
+The environment CLI supports globbing test files using the following patterns:
 
 - `*` matches any sequence of characters (excluding path separators)
 - `**` matches any sequence of characters (including path separators)
@@ -70,7 +70,7 @@ Some notes on the examples below:
 
 * For a full list of options when using this command, see the xref:parallelism-faster-jobs.adoc#the-tests-run-command[test splitting overview] page.
 * Each example below includes a parallelism level of four, that is, four identical execution environments will be created to split your tests across. You can choose a parallelism level to suit your project.
-* Each example below shows configuing your tests to be split by timing data. This is the recommended way to split tests, but other options include splitting by name or by file size. Read more about these options in the xref:parallelism-faster-jobs.adoc#introduction[Test splitting and parallelism overview].
+* Each example below shows configuring your tests to be split by timing data. This is the recommended way to split tests, but other options include splitting by name or by file size. Read more about these options in the xref:parallelism-faster-jobs.adoc#introduction[Test splitting and parallelism overview].
 * On each successful run of a test suite, CircleCI saves timing data from the directory specified by the path in the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. This timing data consists of how long each test took to complete per file name or class name. The available timing data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible.
 * If no timing data is found, you will receive a message: `Error auto-detecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 * If you do not use `store_test_results`, there will be no timing data available to split your tests.
@@ -395,7 +395,13 @@ jobs:
 [#output-test-files-only]
 ===== Output test files only
 
-If your testing set-up on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can opt to use `circleci tests run` to receive the file names, output the file names, and save the file names to a temporary location.  You can then subsequently invoke your test runner using the outputted file names.
+If your testing set-up on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can opt to use `circleci tests run` to:
+
+* Receive the file names.
+* Output the file names.
+* Save the file names to a temporary location.
+
+You can then subsequently invoke your test runner using the outputted file names.
 
 Example:
 
@@ -438,7 +444,7 @@ Use `circleci tests glob` to define your test suite. To glob test files, pass on
 circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
 ```
 
-The CLI supports globbing test files using the following patterns:
+The environment CLI supports globbing test files using the following patterns:
 
 - `*` matches any sequence of characters (excluding path separators)
 - `**` matches any sequence of characters (including path separators)
@@ -477,7 +483,7 @@ The following test splitting options are available:
 [#split-by-name]
 ==== a. Split by name (default)
 
-By default, if you do not specify a method using the `--split-by` flag, `circleci tests run` expects a list of file names or class names and splits tests alphabetically by test name. There are a few ways to provide this list:
+By default, if you do not specify a method using the `--split-by` flag, `circleci tests run` expects a list of file names or class names and splits tests alphabetically by test name. You can provide this list in the following ways:
 
 * Pipe a glob of test files, as demonstrated in the above section.
 ```shell
@@ -516,7 +522,7 @@ NOTE: If no timing data is found, you will receive a message: `Error auto-detect
 [#set-the-timing-type]
 ===== Set the timing type
 
-The CLI attempts to auto detect the granularity of the test split (for example, whether to split by filename, or down to class name) based on the input to the `split` command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
+The environment CLI attempts to autodetect the granularity of the test split (for example, whether to split by filename, or down to class name) based on the input. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
 * `filename`
 * `classname`
@@ -544,7 +550,7 @@ If you need to manually store and retrieve timing data, add the xref:reference:R
 [#splitting-by-filesize]
 ==== c. Split by file size
 
-When provided with file paths, the CLI can also split by file size. Use the `--split-by` flag with the `filesize` split type:
+When provided with file paths, the environment CLI can also split by file size. Use the `--split-by` flag with the `filesize` split type:
 
 ```shell
 circleci tests glob "**/*.go" | circleci tests split --split-by=filesize

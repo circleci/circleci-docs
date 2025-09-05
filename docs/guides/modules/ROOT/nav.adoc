@@ -155,7 +155,7 @@
 *** xref:test:testing-ios.adoc[Testing iOS applications]
 *** xref:test:testing-macos.adoc[Testing macOS applications]
 ** How-to guides
-*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 ** Reference
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
@@ -292,6 +292,7 @@
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 ** CLI
+*** xref:toolkit:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
 *** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
 *** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
 ** APIs
