@@ -10,7 +10,7 @@ Use environment variables to set up various configuration options, and keep your
 
 See the xref:set-environment-variable.adoc[Set an environment variable] page for guidance on the different ways to set an environment variable.
 
-If you have existing environment variables (or contexts) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename organizations and repositories] guide. The recommended steps will ensure you do not lose access to environment variables or contexts in the process.
+If you have existing environment variables (or contexts) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename organizations and repositories] guide. The recommended steps ensure you do not lose access to environment variables or contexts in the process.
 
 [#built-in-environment-variables]
 == Built-in environment variables

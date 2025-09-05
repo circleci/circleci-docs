@@ -152,7 +152,7 @@ jobs:
             circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
 ----
 
-For more information on using the `circleci runrelease plan` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+For more information on using the `circleci run release plan` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
 
 ===== Update
 
@@ -408,7 +408,7 @@ Output version information.
 version: 2.1
 
 jobs:
-  my-job
+  my-job:
     docker:
       - image: cimg/base:current
     steps:
@@ -437,7 +437,7 @@ jobs:
 version: 2.1
 
 jobs:
-  my-job
+  my-job:
     docker:
       - image: cimg/base:current
     steps:
@@ -454,7 +454,7 @@ jobs:
 version: 2.1
 
 jobs:
-  my-job
+  my-job:
     docker:
       - image: cimg/base:current
     steps:

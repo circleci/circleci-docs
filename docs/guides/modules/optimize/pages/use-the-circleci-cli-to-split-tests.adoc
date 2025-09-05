@@ -1,4 +1,4 @@
-= Use the CircleCI environmentCLI to split tests
+= Use the CircleCI environment CLI to split tests
 :page-platform: Cloud, Server v4+
 :page-description: How-to guide for using the environment CLI to split tests across parallel compute environments in a pipeline.
 :experimental:
