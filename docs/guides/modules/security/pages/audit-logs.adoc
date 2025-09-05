@@ -15,9 +15,9 @@ NOTE: All CircleCI organizations can request audit logs. You need to be an organ
 [#request-audit-logs-from-the-circleci-web-app]
 === Request audit logs from the CircleCI web app
 
-. Navigate to menu:Organization Settings[Security]].
+. Navigate to menu:Organization Settings[Security].
 . Scroll down to the **Audit Log** section and specify a date range.
-. Select **Request audit logs** to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
+. Select btn:[Request audit logs] to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
 
 The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
 
