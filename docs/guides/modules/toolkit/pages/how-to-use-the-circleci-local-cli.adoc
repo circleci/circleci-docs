@@ -51,7 +51,7 @@ Error: config compilation contains errors: config compilation contains errors:
 [#orb-development-kit]
 == Orb development kit
 
-The xref:orbs:author:orb-author.adoc#create-test-and-publish-an-orb[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. There are two commands in the CLI that are a part of the orb development kit:
+The xref:orbs:author:orb-author.adoc#create-test-and-publish-an-orb[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. The orb development kit has two commands:
 
 * The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[initializes a new orb project]:
 +
@@ -87,7 +87,7 @@ circleci orb validate <path-to-your-orb.yml>
 circleci config pack
 ----
 
-This CLI pack command (separate to `circleci orb pack` described above) allows you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. This is useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration.
+This CLI pack command (separate to `circleci orb pack` described above) allows you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. FYAML is useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration.
 
 How you **name** and **organize** your files when using the `pack` command will determine the final `orb.yml` output. Consider the following folder structure example:
 
@@ -153,7 +153,7 @@ bar:
 [#processing-a-config]
 == Processing a config
 
-Running the following command validates your config, but will also display expanded source configuration alongside your original configuration. This is particularly useful if you are using orbs:
+Running the following command validates your config, but will also display expanded source configuration alongside your original configuration:
 
 [,shell]
 ----
@@ -175,8 +175,9 @@ workflows:
         - node/test
 ----
 
-Processing this config file will output a YAML file like the example below. This is the expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed:
+Processing this config file will output a YAML file like the example below:
 
+.Expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed
 [,yml]
 ----
 # Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
@@ -289,7 +290,7 @@ Although running jobs locally with `circleci` is helpful, there are some limitat
 [#executors]
 ==== Executors
 
-The CLI does not support running jobs that use a xref:execution-managed:executor-intro.adoc#linux-vm[machine] (`machine`) or xref:execution-managed:executor-intro.adoc#macos[macOS] (`macos`) executor locally. This is because these executors require running an additional virtual machine. Only jobs that use a xref:execution-managed:executor-intro.adoc#docker[Docker] (`docker`) executor can be run locally.
+The CLI does not support running jobs that use a xref:execution-managed:executor-intro.adoc#linux-vm[machine] (`machine`) or xref:execution-managed:executor-intro.adoc#macos[macOS] (`macos`) executor locally because these executors require running an additional virtual machine. Only jobs that use a xref:execution-managed:executor-intro.adoc#docker[Docker] (`docker`) executor can be run locally.
 
 [#add-ssh-keys]
 ==== Add SSH keys
@@ -324,11 +325,6 @@ If you have multiple environment variables, you must use the flag for each varia
 ----
 circleci build -e VAR1=FOO -e VAR2=BAR
 ----
-
-[#test-splitting]
-== Test splitting
-
-The CircleCI CLI is used for some advanced features during job runs, for example xref:optimize:use-the-circleci-cli-to-split-tests.adoc[test splitting] for build time optimization.
 
 [#runner-management]
 == Runner management
@@ -425,7 +421,7 @@ circleci runner token create <namespace/resource-class> <nickname> [flags]
 - `<nickname>` refers to a human-readable name you assign to the token.
 
 For full details on the `resource-class token create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_create.html[CLI docs].
-  
+
 
 === List tokens for a resource class
 
@@ -488,7 +484,7 @@ For full details on the `create` sub-command, refer to the link:https://circleci
 Use the `secret create` sub-command to create an environment variable for a project:
 
 [,shell]
----- 
+----
 circleci project secret create <vcs-type> <org-id> <project-id> <env-name> [flags]
 ----
 
@@ -559,7 +555,7 @@ circleci pipeline create <project-id> [flags]
 
 - `<project-id>` is the ID of the project for which you are creating the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
-The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags. For example:
 
 - `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
 
@@ -592,9 +588,9 @@ circleci pipeline run <org-id> <project-id> [flags]
 
 - `<project-id>` is the ID of the project associated with the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
-The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags. For example:
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags. For example:
 
-- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines]. 
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project settings[Pipelines].
 
 For full details on the `run` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_run.html[CLI docs].
 
@@ -615,7 +611,7 @@ Use the `create` sub-command to create a trigger for your project.
 circleci trigger create <project-id>  [flags]
 ----
 
-The above example shows the minimal usage. You will be prompted for required values if you do not intially provide them using the appropriate flags.
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags.
 
 - `<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under menu:Project Settings[Overview].
 
@@ -663,9 +659,151 @@ include::ROOT:partial$notes/find-organization-id.adoc[]
 [#config-policy-management]
 == Config policy management
 
-The CircleCI CLI can be used to manage config policies for your projects. Config policies allow you to enforce best practices and standards across your organization.
+You can use the CircleCI CLI to manage config policies for your projects.
 
-For full details on creating, testing, and managing config policies for your organization, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage config policies] section.
+For more information on config policies, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage config policies] section.
+
+=== Make a decision on a config policy
+
+Use the `decide` sub-command to make a decision on a config policy.
+
+[,shell]
+----
+circleci policy decide <policy-file-or-dir-path> --input <path-to-input-file>[flags]
+----
+
+- `<policy-file-or-dir-path>` is the path to either the policy file or the directory containing the policy file.
+- `<path-to-input-file>` is the path to the input file.
+
+For full details on the `decide` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_decide.html[CLI docs].
+
+=== Compare local and remote policy bundles
+
+Use the `diff` sub-command to get a diff between local and remote policy bundles.
+
+[,shell]
+----
+circleci policy diff <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `diff` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_diff.html[CLI docs].
+
+=== Evaluate locally
+
+Use the `eval` sub-command to perform a raw link:https://www.openpolicyagent.org/[OPA (Open Policy Agent)] evaluation locally.
+
+[,shell]
+----
+circleci policy eval <policy-dir-path> --input <path-to-input-file>[flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+- `<path-to-input-file>` is the path to the input file.
+
+For full details on the `eval` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_eval.html[CLI docs].
+
+=== Fetch policies
+
+Use the `fetch` sub-command to fetch a policy bundle or a single policy.
+
+[,shell]
+----
+circleci policy fetch <policy-name> --owner-id <org-id> [flags]
+----
+
+- `<policy-name>` is the name of the policy to fetch. It is not required. If you do not provide a policy name, the CLI will fetch all policies for the organization.
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+For full details on the `fetch` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_fetch.html[CLI docs].
+
+
+===  Get policy decision logs
+
+Use the `logs` sub-command to get decision logs for a policy bundle or single policy.
+
+[,shell]
+----
+circleci policy logs <policy-name> --owner-id <org-id> [flags]
+----
+
+- `<policy-name>` is the name of the policy to get decision logs for. It is not required. If you do not provide a policy name, the CLI will get decision logs for all policies in the organization.
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+Note that you can filter results using any combination of the following flags:
+
+[cols="1,3,2", options="header"]
+|===
+| Flag | Description | Example
+
+| `--after`
+| Only include logs after a specific date and time.
+| `--after 2025/03/14`
+
+| `--before`
+| Only include logs before a specific date and time.
+| `--before 2025/05/22`
+
+| `--branch`
+| Only include logs for a specific branch.
+| `--branch feature/fixes`
+|===
+
+For full details on the `logs` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_logs.html[CLI docs].
+
+=== Push a policy bundle
+
+Use the `push` sub-command to push a policy bundle.
+
+[,shell]
+----
+circleci policy push <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `push` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_push.html[CLI docs].
+
+=== Manage policy decision settings
+
+Use the `settings` sub-command to get or set policy decision settings.
+
+To read policy decision settings, run the command without any settings flags:
+
+[,shell]
+----
+circleci policy settings --owner-id <org-id>
+----
+
+To set policy decision settings, run the command with the appropriate settings flags:
+
+[,shell]
+----
+circleci policy settings --owner-id <org-id> --enable <true|false>
+----
+
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `--enable` is the flag to either enable or disable a policy evaluation. Set to `true` to enable, `false` to disable.
+
+The `settings` sub-command can only be used to read the settings and to xref:config-policies:create-and-manage-config-policies.adoc#config-policy-management-enablement[enable/disable policy evaluation for the organization].
+
+For full details on the `settings` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_settings.html[CLI docs].
+
+=== Test policies
+
+Use the `test` sub-command to run policy tests.
+
+[,shell]
+----
+circleci policy test <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `test` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_test.html[CLI docs].
+
 
 [#next-steps]
 == Next steps

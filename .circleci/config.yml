@@ -3,12 +3,12 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
-  go: circleci/go@3.0.2
+  go: circleci/go@3.0.3
 
 executors:
   node_executor:
     docker:
-      - image: cimg/node:22.18.0
+      - image: cimg/node:22.19.0
     working_directory: ~/project
 
   go_executor:
@@ -45,18 +45,6 @@ jobs:
     executor: node_executor
     steps:
       - checkout
-      - run:
-          name: Fetch branches matching server-4*
-          command: |
-            for branch in $(git ls-remote --heads origin | awk '{print $2}' | grep 'refs/heads/server-4' | sed 's|refs/heads/||'); do
-              echo "[INFO] Fetching branch: $branch"
-              git checkout "$branch"
-              git pull origin "$branch"
-            done
-            git checkout "${CIRCLE_BRANCH}"
-      - add_ssh_keys:
-          fingerprints:
-            - "SHA256:Plac654CPBty6yA26H7QMKCqM0yD1XWds7UwNqOYzJU"
       - run:
           name: Install Node Dependencies
           command: npm ci
