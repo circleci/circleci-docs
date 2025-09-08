@@ -56,6 +56,25 @@
   font-size: 16px;
 }
 
+/* Mobile heading sizes */
+@media screen and (max-width: 1023.5px) {
+  .doc h1 {
+    font-size: 24px;
+  }
+
+  .doc h2 {
+    font-size: 20px;
+  }
+
+  .doc h3 {
+    font-size: 18px;
+  }
+
+  .doc h4 {
+    font-size: 16px;
+  }
+}
+
 /* Special case: Page title gets extra top margin on larger screens */
 @media screen and (min-width: 768px) {
   .doc > h1.page:first-child {
