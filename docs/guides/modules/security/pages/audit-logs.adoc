@@ -3,7 +3,6 @@
 :page-description: "This page describes the ways CircleCI customers can request and stream audit logs."
 :experimental:
 
-== Overview
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics. CircleCI offers functionalities to request and stream audit logs.
 
 == Request audit logs
