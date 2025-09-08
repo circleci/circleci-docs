@@ -78,6 +78,8 @@ This configuration would yield a value with the following format `12345`.
 
 === 1.2. Update the deploy status to running
 
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
+
 After deploying your application, you can update the status of the deployment to `RUNNING` by running the `circleci run release update` command in a new step.
 
 [,yml]

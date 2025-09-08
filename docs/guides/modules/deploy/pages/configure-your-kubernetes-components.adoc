@@ -126,6 +126,8 @@ Substitute the placeholders above based on your application's details:
 +
 CAUTION: If you are using Argo Rollouts for a given component, be sure to set the `release-strategy` parameter to `progressive`.
 
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
+
 . Define a new job to monitor the release, referencing the `release plan` created above as part of the _deployment_ job:
 +
 [,yaml]
