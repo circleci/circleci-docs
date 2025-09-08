@@ -28,6 +28,7 @@
   hyphens: none;
   line-height: 1.3;
   margin: 1rem 0 0;
+  scroll-margin-top: calc(var(--navbar-height) + var(--toolbar-height) + 1rem); /* Account for sticky header height */
 }
 
 .doc > h1.page:first-child {
