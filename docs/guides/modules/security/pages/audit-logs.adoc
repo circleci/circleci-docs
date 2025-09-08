@@ -3,11 +3,9 @@
 :page-description: "This page describes the ways CircleCI customers can request and stream audit logs."
 :experimental:
 
-[#overview]
 == Overview
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics. CircleCI offers functionalities to request and stream audit logs.
 
-[#request-audit-logs]
 == Request audit logs
 
 All CircleCI organizations can request audit logs. You need to be an organization admin to access the **Request audit logs** feature from the link:https://app.circleci.com/[CircleCI web app].
@@ -69,7 +67,7 @@ If you hover over the disabled btn:[Request audit logs] button, a tooltip will a
 
 == Stream audit logs
 
-NOTE: Even if you set up audit log streaming, you can still send xref:#audit-log-requests[audit logs requests] to CircleCI.
+NOTE: Even if you set up audit log streaming, you can still send xref:#request-audit-logs[audit logs requests] to CircleCI.
 
 Set up audit log streaming direct to your own AWS S3 bucket.
 
