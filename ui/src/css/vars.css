@@ -134,7 +134,7 @@
   --nav-panel-menu-height: calc(100% - var(--drawer-height));
   --nav-panel-explore-height: calc(50% + var(--drawer-height));
   --nav-width: calc(270 / var(--rem-base) * 1rem);
---toc-top: calc(var(--spacing) * 35);
+--toc-top: calc(var(--spacing) * 35); /* Empirically determined position: navbar + toolbar + additional spacing (≈8.75rem vs logical 6rem) */
 --toc-height: calc(100vh - var(--toc-top) - 6.2rem);
   --toc-width: calc(265 / var(--rem-base) * 1rem);
   --toc-width--widescreen: calc(474 / var(--rem-base) * 1rem);
