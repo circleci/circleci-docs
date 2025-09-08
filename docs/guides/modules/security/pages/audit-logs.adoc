@@ -18,7 +18,7 @@ NOTE: All CircleCI organizations can request audit logs. You need to be an organ
 . Navigate to menu:Organization Settings[Security].
 . Scroll down to the **Audit Log** section.
 . Select the date range and then select btn:[Request audit logs].
-+
+
 image::guides:ROOT:request-audit-log.png[Request audit logs]
 
 The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
@@ -186,10 +186,10 @@ image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
 .. **S3 Bucket Name**: The name of the S3 bucket where audit logs will be streamed.
 .. **Role ARN**: The Amazon Resource Name (ARN) for the IAM role that CircleCI will use to access your S3 bucket.
 
-. Select btn:[Connect CircleCI to AWS].
 +
 image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 
+. Select btn:[Connect CircleCI to AWS].
 . When the connection to your S3 bucket is successfully validated, **Connected** with a green checkmark appears under **Status**.
 +
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
@@ -215,7 +215,7 @@ Once configured, you can view and manage audit log streams.
 - Monitor Delivery: Check the **Last delivery** field to verify recent successful deliveries.
 - Delete Configuration: Select the trash icon under **Actions** to remove the streaming setup. A popup warning will appear, select btn:[Delete] to confirm.
 - Restart Streaming: Toggle the switch to resume paused streams.
-+
+
 image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
 
