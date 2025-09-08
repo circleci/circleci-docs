@@ -135,7 +135,7 @@
   --nav-panel-explore-height: calc(50% + var(--drawer-height));
   --nav-width: calc(270 / var(--rem-base) * 1rem);
   --toc-top: calc(var(--body-top) + var(--toolbar-height));
-  --toc-height: calc(100vh - var(--toc-top) - 2.5rem);
+  --toc-height: calc(100vh - calc(var(--spacing) * 35) - 2.5rem - 3.7rem);
   --toc-width: calc(265 / var(--rem-base) * 1rem);
   --toc-width--widescreen: calc(474 / var(--rem-base) * 1rem);
   --doc-max-width: calc(720 / var(--rem-base) * 1rem);
