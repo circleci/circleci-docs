@@ -17,7 +17,7 @@ All CircleCI organizations can request audit logs. You need to be an organizatio
 
 image::guides:ROOT:request-audit-log.png[Request audit logs]
 
-The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
+The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested time frame.
 
 NOTE: In some situations, the internal system may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
@@ -29,7 +29,7 @@ NOTE: Submitted dates are in UTC. To avoid issues arising from potential time zo
 
 In the link:https://app.circleci.com/[CircleCI web app], a status will show the following information:
 
-- Timeframe requested.
+- Time frame requested.
 - User who made the request.
 - Date request was made.
 - Expiry date of the request.
@@ -81,7 +81,7 @@ Audit log streaming provides the following benefits to your organization:
 
 Before setting up audit log streaming, ensure you have the following:
 
-* CircleCI Scale plan (not available to Free or Performance customers)
+* CircleCI Scale Plan (not available to Free or Performance customers)
 * AWS account with permissions to create and manage S3 buckets
 * IAM role or user with appropriate S3 write permissions
 * Network configuration to allow secure connections between CircleCI and AWS
@@ -154,7 +154,7 @@ The minimum required access policy for the role is as follows:
 +
 Replace `<bucket-name>` with the name of your S3 bucket.
 
-. Set up an OIDC identity provider to allow CircleCI's OIDC tokens to be used for authentication.
+. Set up an OIDC Identity Provider to allow CircleCI's OIDC tokens to be used for authentication.
 .. Navigate to the IAM Console in AWS.
 .. In the left navigation menu, select *Identity Providers*.
 .. Select *Add provider*.
@@ -163,7 +163,7 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 .. In the *Audience* field, enter your organization ID.
 
 
-=== Configure Audit Log Streaming
+=== Configure audit log streaming
 
 . Navigate to menu:Organization Settings[Security].
 . Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
@@ -188,7 +188,7 @@ image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
 
-=== Verification and Testing
+=== Verification and testing
 
 After setting up audit log streaming follow these steps to validate the setup was successful:
 
@@ -198,7 +198,7 @@ After setting up audit log streaming follow these steps to validate the setup wa
 . Set up appropriate alerts for connection failures or delivery interruptions.
 
 
-=== Managing Active Streams
+=== Managing active streams
 
 Once configured, you can view and manage audit log streams. The following options are available to you in the CircleCI web app:
 
@@ -212,7 +212,7 @@ image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
 === Limitations
 
-- Audit log streaming is only available to CircleCI Scale plan customers. Free and Performance plan customers do not have access to this feature.
+- Audit log streaming is only available to CircleCI Scale Plan customers. Free and Performance Plan customers do not have access to this feature.
 
 - Currently, streaming is supported for a single S3 bucket per organization.
 
