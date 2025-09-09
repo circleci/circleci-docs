@@ -1,4 +1,4 @@
-= Trigger a pipeline
+= Trigger options
 :page-platform: Cloud, Server v4+
 :page-description: "A guide to the various ways to manage pipeline triggering in CircleCI"
 :experimental:
