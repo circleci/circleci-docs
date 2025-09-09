@@ -81,7 +81,7 @@
   --doc-margin: 0 auto;
   --doc-margin--desktop: 0 2rem;
   --heading-font-color: #161616;
-  --heading-font-weight: normal;
+  --heading-font-weight: 500;
   --alt-heading-font-weight: 500;
   --section-divider-color: var(--panel-border-color);
   --link-font-color: #2152E5;
