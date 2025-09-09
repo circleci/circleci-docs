@@ -63,7 +63,7 @@ The steps and options described in this section are for setting up a pipeline. C
 GitHub App::
 +
 --
-image::guides:ROOT:orchestrate-and-trigger/project-setup-pipeline.png[Add a pipeline]
+image::guides:ROOT:orchestrate-and-trigger/project-setup-pipelines.png[Add a pipeline]
 
 To add or edit a pipeline, follow these steps:
 
