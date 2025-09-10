@@ -5,7 +5,7 @@ If your code is stored in GitHub you can split your configuration into multiple 
 
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
-If your organization is currently integrated with GitHub only through OAuth, an admin can take the one-time action of installing the CircleCI GitHub App to enable this functionality. For more information, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
+If your organization is currently integrated with GitHub only through OAuth, an admin can take the one-time action of installing the CircleCI GitHub App to enable this functionality. For more information, see the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
 
 While splitting configuration files is only available for GitHub App integrations, CircleCI does support dynamic configuration, which allows you to create configuration files based on specific pipeline values or paths, and continue one pipeline to another. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic configuration] page for more information.
 
