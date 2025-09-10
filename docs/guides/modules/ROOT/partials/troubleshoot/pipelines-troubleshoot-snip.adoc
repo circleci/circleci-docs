@@ -10,8 +10,8 @@ config file .circleci/sample-filename.yml could not be located on branch sample-
 * Ensure that there is a CircleCI configuration file in the repository on the branch that uses the filename specified in the error message. If there is not one present, add a CircleCI configuration file.
 
 * If there is a config file present:
-.. Navigate to menu:Project Settings[Pipelines] in the CircleCI web app for the project where you are seeing this error message.
-.. Select the pencil icon for each pipeline listed and ensure that the "Config File Path" field matches the filepath of the config file that is in your repository. If you changed the name of the config file in your repository, the reference to that filepath must also be changed in the menu:Project Settings[Pipelines] section for any pipeline that uses that configuration file.
+.. Navigate to menu:Project Settings[Pipelines] or menu:Project Settings[Project Setup] in the CircleCI web app for the project where you are seeing this error message.
+.. Ensure that the "Config File Path" field matches the filepath of the config file that is in your repository. If you changed the name of the config file in your repository, the reference to that filepath must also be changed for any pipeline that uses that configuration file.
 
 [#why-is-my-scheduled-pipeline-not-running]
 === Why is my scheduled pipeline not running?

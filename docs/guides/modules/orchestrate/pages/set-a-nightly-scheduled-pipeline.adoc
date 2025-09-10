@@ -10,7 +10,7 @@ A common scenario you might want to set up is to trigger a pipeline overnight. T
 [#set-a-in-the-web-app]
 == Set a schedule in the web app
 
-In your desired project, navigate to **Project Settings > Triggers** to see the form for specifying a schedule for a trigger.
+In your desired project, navigate to menu:Project Settings[Triggers] or menu:Project Settings[Project Setup] to see the form for specifying a schedule for a trigger.
 
 image::guides:ROOT:pipelines-scheduled-trigger-form.png[Scheduled pipelines web app form]
 
