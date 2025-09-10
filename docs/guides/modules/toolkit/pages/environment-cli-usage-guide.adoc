@@ -156,6 +156,8 @@ For more information on using the `circleci run release plan` command, see the x
 
 ==== Update
 
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:deploy:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
+
 A subcommand of `release`. Use the `circleci run release update` command to update the status of the deployment.
 
 *Flags*
