@@ -5,15 +5,17 @@
   line-height: var(--doc-line-height);
   margin: var(--doc-margin);
   padding: 0 1rem 4rem;
+  min-width: 0; /* Allow flexbox shrinking */
 }
 
 @media screen and (min-width: 1024px) {
   .doc {
-    flex: auto;
+    flex: 1 1 0%;
     font-size: var(--doc-font-size--desktop);
     margin: var(--doc-margin--desktop);
     max-width: var(--doc-max-width--desktop);
     min-width: 0;
+    width: 0; /* Force flexbox to ignore content width */
   }
 }
 
@@ -960,6 +962,23 @@
   white-space: pre-wrap;
 }
 
+/* Fix flexbox shrinking issue with code blocks - maintain horizontal scroll */
+.doc .listingblock,
+.doc .literalblock {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.doc .listingblock pre,
+.doc .literalblock pre,
+.doc pre.highlight > code {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
 /* Styling for code blocks and listing blocks */
 .doc pre.highlight > code,
 .doc .listingblock pre:not(.highlight),
@@ -971,7 +990,9 @@
   border-radius: inherit;
   color: #FFFFFF;
   max-width: 100%;
+  width: 100%;
   box-sizing: border-box;
+  table-layout: fixed; /* Prevent table-like behavior from expanding */
 }
 
 /* Hide line numbers for code blocks with role="no-numbers" */
