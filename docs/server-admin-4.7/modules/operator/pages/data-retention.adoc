@@ -1,4 +1,4 @@
-= Data Retention in Server
+= Data retention in server
 :page-platform: Server v4.8, Server Admin
 :page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI server installation.
 :experimental:
@@ -6,10 +6,10 @@
 [#background]
 == Background
 
-You can set up retention policies for both Mongo and Postgres to clean up data older than *n* days. The following sections outline the step-by-step process for implementing these retention policies in your server environment.
+You can set up retention policies for both Mongo and PostgreSQL to clean up data older than *n* days. The following sections outline the step-by-step process for implementing these retention policies in your server environment.
 
 [#setting-postgres-retention]
-== Step 1: Setting a Retention Period for Postgres
+== Step 1: Setting a retention period for PostgreSQL
 
 . Connect to a REPL session in one of the frontend pods by running the following commands:
 +
@@ -65,7 +65,7 @@ kubectl exec postgresql-0 -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -U "postg
 ----
 
 [#setting-mongodb-retention]
-== Step 2: Setting a Retention Period for MongoDB (Action Logs)
+== Step 2: Setting a retention period for MongoDB (action logs)
 
 Retention limits for action logs can be configured in the same REPL session using the following commands:
 
@@ -76,12 +76,12 @@ Retention limits for action logs can be configured in the same REPL session usin
 ----
 
 [#setting-s3-lifecycle-policies]
-== Step 3: Set Up Lifecycle Policies for the S3 Bucket
+== Step 3: Set up lifecycle policies for the S3 Bucket
 
 After configuring retention limits for your MongoDB and PostgresDB objects, you can also apply object expiry policies to your S3 or GCS buckets. These policies typically expire objects at n+1 days, where n is the retention period set for your databases.
 
 NOTE: **Object Storage Paths** +
-If a retention policy of `n` days is configured for both MongoDB and Postgres data, you can set `n+1` for **all objects** in your S3/GCS buckets to expire at `n+1` days. This ensures alignment between database retention and object storage retention.
+If a retention policy of `n` days is configured for both MongoDB and PostgreSQL data, you can set `n+1` for **all objects** in your S3/GCS buckets to expire at `n+1` days. This ensures alignment between database retention and object storage retention.
 
 CAUTION: **Audit Logs** +
 Be sure to configure exceptions for critical paths, such as `audit-logs/*`, in accordance with your organization's compliance or audit requirements. Objects under these paths should not be expired by default.
