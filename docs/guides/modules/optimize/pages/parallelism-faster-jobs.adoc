@@ -27,9 +27,13 @@ It is also possible to use the CLI to <<manual-allocation,manually allocate test
 [#quickstart]
 == Quickstart
 
-The following how-to guide walks you through the steps required to glob your test files, split your tests evenly across parallel containers or VMs, and then run your tests in parallel:
+The following how-to guide walks you through the following:
 
-* *How-to*: xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+* Steps required to glob your test files.
+* Split your tests evenly across parallel containers or VMs.
+* Run your tests in parallel.
+
+*How-to*: xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
 
 [#specify-a-jobs-parallelism-level]
 == Specify parallel environments for a test job
@@ -59,7 +63,7 @@ image::guides:ROOT:executor_types_plus_parallelism.png[Parallelism]
 [#use-parallelism-with-self-hosted-runners]
 === Use parallelism with self-hosted runners
 
-To use the parallelism feature with jobs that use xref:execution-runner:runner-overview.adoc[self-hosted runners], ensure that you have at least two self-hosted machine runners associated with the runner resource class that your job will run on. If you set the parallelism value to be greater than the number of active self-hosted runners in a given resource class, the excess parallel tasks that do not have a self-hosted runner on which to execute will queue until a self-hosted runner is available.
+To use parallelism with jobs that use xref:execution-runner:runner-overview.adoc[self-hosted runners], ensure that you have at least two runners associated with the resource class that your job uses. If you set the parallelism value to be greater than the number of active runners, the excess parallel tasks will queue until a runner is available.
 
 If you are using parallelism on xref:execution-runner:container-runner.adoc[Container Runner], you will need to make sure that `agent.maxConcurrentTasks` and your Kubernetes cluster can accommodate the number of parallel tasks you want to run. If you do not have adequate resources, your parallel runs will be subject to queuing.
 
@@ -68,7 +72,14 @@ For more information, see the xref:reference:ROOT:configuration-reference.adoc#p
 [#how-test-splitting-works]
 == How test splitting works
 
-CircleCI's test splitting feature allows you to specify a number of identical execution environments for a job (parallelism), and then split your test suite into an equal number of portions so that the tests can be run in parallel to reduce the length of time taken for your test pipeline. You can split your tests up in a few different ways:
+CircleCI's intelligent test splitting allows you to:
+
+* Specify a number of identical execution environments for a job.
+* Split your test suite into buckets so that the tests can be run in parallel on your configured execution environments.
+
+Test splitting reduces the length of time taken for testing in your pipelines.
+
+You can split your tests up in a few different ways:
 
 * Alphabetically, by name. This is the default:
 +
@@ -114,7 +125,7 @@ jobs:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
 
-When using timing-based test splitting, the CLI attempts to auto detect the granularity of the test split (for example, whether to split by file name, or down to class name) based on the input to the split command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
+CircleCI attempts to detect the granularity of the test split (for example, to split by file name, or down to class name) based on the input to the split command. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
 * `name` - test name
 * `classname`  class name
@@ -123,7 +134,7 @@ When using timing-based test splitting, the CLI attempts to auto detect the gran
 [#example-using-timing-based-test-splitting]
 === Example using timing-based test splitting
 
-Using *timing-based* test splitting as an example, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments running in parallel. This delivers the lowest possible test time for the compute power in use.
+Using *timing-based* test splitting, timing data from the _previous_ test run is used to split a test suite as evenly as possible over a specified number of test environments. This delivers the lowest possible test time for the compute power in use.
 
 image::guides:ROOT:test_splitting.png[Test Splitting]
 
