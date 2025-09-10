@@ -8,9 +8,8 @@ IgnoreAltEmpty: true
 IgnoreInternalEmptyHash: true
 IgnoreURLs:
   - "[url]"
-#  - "[path]"
-#  - "/docs/"
-#  - "/docs/_/img/x-icon.svg"
+  - "/docs/_/.*"  # Ignore all UI assets from 404 page (uses absolute paths)
+  - "/docs/$"     # Ignore root docs links from 404 page
 IgnoreDirs:
   - "api"
 OutputDir: ".htmltest"
