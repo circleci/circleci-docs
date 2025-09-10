@@ -155,9 +155,6 @@ input.workflows     # an array of nested structures mirroring workflows in the C
 input.jobs          # an array of nested structures mirroring jobs in the CircleCI config
 ----
 
-[#define-a-rule]
-==== Define a rule
-
 In OPA, rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
 
 * String
@@ -168,7 +165,7 @@ This restriction is in place so that rule violations produce error messages that
 Helper rules that produce differently typed outputs can still be defined, but rules that will be considered when making CircleCI decisions must have the output types specified above. For more information see the <<#enablement>> section below.
 
 [#evaluation]
-===== Evaluation
+==== Evaluation
 
 Evaluation is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
 
@@ -217,7 +214,7 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 ----
 
 [#enforcement]
-===== Enforcement
+==== Enforcement
 
 The policy service allows rules to be enforced at different levels.
 
@@ -239,7 +236,7 @@ hard_fail["use_official_docker_image"]
 ----
 
 [#enablement]
-===== Enablement
+==== Enablement
 
 A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules.
 

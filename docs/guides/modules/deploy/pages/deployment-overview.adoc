@@ -187,14 +187,12 @@ Labels are composed of two values separated by a colon, for example, `team:my-te
 
 Once you have added labels to your components and environments, you can use them to filter your view in the deploys UI. In the timeline, environments, or components view, select a filter to reduce the content in the tab to only your selection. You can also use the label filter dropdown menu at the top of the page.
 
-==== Add or edit labels
-
 To add or edit labels follow the steps below.
 
 .Add and Edit environment and component labels
 image::guides:ROOT:releases/edit-labels.png[Screenshot showing the location of the add/edit labels button]
 
-===== Component labels
+==== Component labels
 
 To add or edit labels for a component, follow these steps:
 
@@ -204,7 +202,7 @@ To add or edit labels for a component, follow these steps:
 . You are now on the component settings page. Select the edit button image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] in the labels panel.
 . Enter or edit your label(s) and select btn:[Done].
 
-===== Environment labels
+==== Environment labels
 
 To add or edit labels for an environment, follow these steps:
 

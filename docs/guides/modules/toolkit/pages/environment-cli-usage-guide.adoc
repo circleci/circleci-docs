@@ -109,7 +109,7 @@ For more information, including an example, see the xref:permissions-authenticat
 
 A subcommand of `run`. The `circleci run release` commands allow you to manage your deployments.
 
-===== Plan
+==== Plan
 
 A subcommand of `release`. The `circleci run release plan` command is used to plan and identify a new deployment that will be referenced in the CircleCI UI. When a release is planned you can then update its status later in your pipeline to track progress of a deployment.
 
@@ -154,7 +154,7 @@ jobs:
 
 For more information on using the `circleci run release plan` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
 
-===== Update
+==== Update
 
 A subcommand of `release`. Use the `circleci run release update` command to update the status of the deployment.
 
@@ -185,7 +185,7 @@ jobs:
 
 For more information on using the `circleci run release update` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
 
-===== Log
+==== Log
 
 A subcommand of `release`. The `circleci run release log` command allows you to log your deployments without status updates
 
