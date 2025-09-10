@@ -5,12 +5,12 @@ CheckSelfReferencesAsInternal: true
 CheckInternalHash: true
 BaseURL: https://circleci.com/docs
 IgnoreAltEmpty: true
-#IgnoreInternalEmptyHash: true
-IgnoreURLs:
-  - "[url]"
-  - "[path]"
-  - "/docs/"
-  - "/docs/_/img/x-icon.svg"
+IgnoreInternalEmptyHash: true
+#IgnoreURLs:
+#  - "[url]"
+#  - "[path]"
+#  - "/docs/"
+#  - "/docs/_/img/x-icon.svg"
 IgnoreDirs:
   - "api"
 OutputDir: ".htmltest"
