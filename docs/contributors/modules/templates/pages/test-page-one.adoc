@@ -42,7 +42,11 @@ image::guides:ROOT:circleci-system-diagram.png[CircleCI process diagram]
 
 ==== This is a link
 
-link:https://circleci.com/developer/orbs[Orb registry].
+link:https://circleci.com/developer/orbbs[Orb registry].
+
+==== This is a cross reference
+
+xref::guides:getting-started:create-project.adoc[Create a project]
 
 ==== This is a set of numbered steps
 
