@@ -4,11 +4,11 @@ EnforceHTTPS: true
 CheckSelfReferencesAsInternal: true
 BaseURL: https://circleci.com/docs
 IgnoreAltEmpty: true
-IgnoreInternalEmptyHash: true
+#IgnoreInternalEmptyHash: true
 IgnoreURLs:
   - "[url]"
   - "[path]"
-  - "/docs/"
+#  - "/docs/"
   - "/docs/_/img/x-icon.svg"
 IgnoreDirs:
   - "api"
