@@ -2,6 +2,7 @@ DirectoryPath: "build"
 CheckExternal: false
 EnforceHTTPS: true
 CheckSelfReferencesAsInternal: true
+CheckInternalHash: true
 BaseURL: https://circleci.com/docs
 IgnoreAltEmpty: true
 #IgnoreInternalEmptyHash: true
