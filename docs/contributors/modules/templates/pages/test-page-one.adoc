@@ -46,7 +46,7 @@ link:https://circleci.com/developer/orbs[Orb registry].
 
 ==== This is a cross reference
 
-xref:guides:getting-started:create-project.adoc#create-aa-project[Create a project]
+xref:guides:getting-started:create-project.adoc#not-an-anchor[Create a project]
 
 ==== This is a set of numbered steps
 

@@ -8,7 +8,7 @@ IgnoreAltEmpty: true
 IgnoreURLs:
   - "[url]"
   - "[path]"
-#  - "/docs/"
+  - "/docs/"
   - "/docs/_/img/x-icon.svg"
 IgnoreDirs:
   - "api"
