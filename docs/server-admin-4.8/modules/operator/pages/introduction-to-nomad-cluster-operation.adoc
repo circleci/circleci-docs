@@ -106,7 +106,7 @@ kubectl run nomad-tunnel --rm -it --restart=Never --image=alpine/socat -n <serve
 kubectl port-forward pod/nomad-tunnel 4646:4646 -n <server-namespace>
 ----
 
-. Navigate to `http://localhost:4646/ui` in your browser to access the Nomad UI. For more information on utilizing the Nomad UI, refer to the link:https://developer.hashicorp.com/nomad/tutorials/web-ui[Nomad documentation].
+. Navigate to ++`http://localhost:4646/ui`++ in your browser to access the Nomad UI. For more information on utilizing the Nomad UI, refer to the link:https://developer.hashicorp.com/nomad/tutorials/web-ui[Nomad documentation].
 
 [#shutting-down-a-nomad-client]
 === Shutting down a Nomad client
