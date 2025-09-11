@@ -118,13 +118,12 @@ Config orchestration tools are available from within your pipelines are as follo
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 . Select btn:[GitHub trigger +] at the bottom of the pipeline box.
-. Choose "PR Opened" from the *Event* menu. this means that the pipeline will trigger on the `pull_request` GitHub event with the `opened` action (See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs webhooks page] for more information).
+. Choose "PR Opened" from the *Event* menu. This means that the pipeline will trigger on the `pull_request` GitHub event with the `opened` action (See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs webhooks page] for more information).
 +
 .Trigger options under Project settings
 image::guides:ROOT:triggers/select-when-to-run.png[Set a trigger option for a project trigger]
 .
 ** Select the *Event Source* repository from the dropdown. This defaults to the repository associated with the pipeline.
-+
 +
 TIP: You can change the event source to a different repository if you wish. If you do change the event source so that it does not match the pipeline's config/checkout source an option will appear to specify which branch in the config/checkout source repository you wish to use for the trigger.
 . Select btn:[Save].

@@ -32,6 +32,7 @@ image::guides:ROOT:triggers/add-trigger-github.png[Add a trigger]
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
+. Select *Project Setup* in the sidebar.
 . Select btn:[GitHub trigger +] at the bottom of the pipeline box.
 . Choose when top run the pipeline by selecting an option from the *Event* menu.
 +
