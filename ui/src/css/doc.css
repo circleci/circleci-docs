@@ -10,11 +10,18 @@
 
 @media screen and (min-width: 1024px) {
   .doc {
-    flex: 1 1 0%;
+    flex: auto;
     font-size: var(--doc-font-size--desktop);
     margin: var(--doc-margin--desktop);
     max-width: var(--doc-max-width--desktop);
     min-width: 0;
+  }
+}
+
+/* Apply aggressive flexbox fix only above 1200px where the original problem occurs */
+@media screen and (min-width: 1200px) {
+  .doc {
+    flex: 1 1 0%;
     width: 0; /* Force flexbox to ignore content width */
   }
 }
