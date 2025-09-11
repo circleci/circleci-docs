@@ -34,7 +34,7 @@ For the previous major version of Docker, we support a single tag following the 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image. These patches will not include major OS updates. Patches will contain only patch OS updates.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
