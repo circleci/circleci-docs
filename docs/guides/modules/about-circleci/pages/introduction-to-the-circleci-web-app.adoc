@@ -153,12 +153,7 @@ The following settings are available in the project settings page. If you do not
 
 **Groups**: Provides a list of user groups that have been granted project-specific permissions. For more information, see the xref:permissions-authentication:manage-groups.adoc[Manage groups] page.
 
-**Pipelines**: Provides a list of pipelines that have been set up for the project, or the option to begin setting up pipelines if none exist.
-
-**Triggers**: Depending on your integration type, the triggers page shows either:
-
-* A list of configured xref:orchestrate:set-up-triggers.adoc[triggers].
-* Set up UI for scheduled pipelines if available for your integration. To set up a xref:orchestrate:scheduled-pipelines.adoc[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+**Project Setup**: Provides a list of pipelines that have been set up for the project and their associated triggers. See xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup] for more information. This page includes the option to begin setting up pipelines if none exist. The setup UI for scheduled pipelines is located here (if available for your integration). To set up a xref:orchestrate:scheduled-pipelines.adoc[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met. Some integration types will see two pages in the sidebar for this section: *Pipelines* and *Triggers*.
 
 **Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy:deployment-overview.adoc[Deployment overview] page.
 
