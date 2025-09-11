@@ -969,22 +969,6 @@
   white-space: pre-wrap;
 }
 
-/* Fix flexbox shrinking issue with code blocks - maintain horizontal scroll */
-.doc .listingblock,
-.doc .literalblock {
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.doc .listingblock pre,
-.doc .literalblock pre,
-.doc pre.highlight > code {
-  min-width: 0;
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow-x: auto;
-}
 
 /* Styling for code blocks and listing blocks */
 .doc pre.highlight > code,
