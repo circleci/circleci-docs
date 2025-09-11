@@ -7,7 +7,7 @@ body.-toc aside.toc.sidebar {
     display: none;
   }
 
-  main .flex {
+  main > .content {
     overflow-x: auto;
     max-width: 100vw;
   }
@@ -17,6 +17,10 @@ body.-toc aside.toc.sidebar {
   main {
     flex: auto;
     min-width: 0; /* min-width: 0 required for flexbox to constrain overflowing elements */
+  }
+
+  main > .content {
+    display: flex;
   }
 
   aside.toc.embedded {
