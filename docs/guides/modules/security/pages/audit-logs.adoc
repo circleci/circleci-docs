@@ -12,7 +12,7 @@ All CircleCI organizations can request audit logs. You need to be an organizatio
 === How to request audit logs
 
 . Navigate to menu:Organization Settings[Security].
-. Scroll down to the **Audit Log** section.
+. Scroll down to the **Audit Logs** section.
 . Select the date range and then select btn:[Request audit logs].
 
 image::guides:ROOT:request-audit-log.png[Request audit logs]
@@ -52,8 +52,6 @@ image::guides:ROOT:audit-log-request.png[Audit log requests]
 
 === Frequency limits
 
-NOTE: CircleCI may update the quantity and request period in the future.
-
 Frequency limits for requests are as follows:
 
 - Free Plan: 1 request per day
@@ -66,7 +64,7 @@ If you hover over the disabled btn:[Request audit logs] button, a tooltip will a
 
 == Stream audit logs
 
-NOTE: Even if you set up audit log streaming, you can still send xref:#request-audit-logs[audit logs requests] to CircleCI.
+TIP: If you choose to set up audit log streaming, you can still <<request-audit-logs,request audit logs>>.
 
 Set up audit log streaming direct to your own AWS S3 bucket.
 
@@ -76,16 +74,19 @@ Audit log streaming provides the following benefits to your organization:
 * Meet compliance requirements.
 * Integrate CircleCI audit data with your existing security monitoring infrastructure.
 
-
-=== Set up AWS prerequisites
+=== Configure audit log streaming
 
 Before setting up audit log streaming, ensure you have the following:
 
-* CircleCI Scale Plan (not available to Free or Performance customers)
+* CircleCI Scale Plan (the feature is not available to Free or Performance customers)
 * AWS account with permissions to create and manage S3 buckets
 * IAM role or user with appropriate S3 write permissions
 * Network configuration to allow secure connections between CircleCI and AWS
 
+The following steps guide you through setting up your S3 bucket, AWS authentication, audit log configuration, and verification.
+
+
+==== 1. Set up AWS prerequisites
 
 The following steps describe how to set up AWS prerequisites:
 
@@ -163,8 +164,9 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 .. In the *Audience* field, enter your organization ID.
 
 
-=== Configure audit log streaming
+==== 2. Configure audit log streaming
 
+. Go to the link:https://app.circleci.com/[CircleCI web app].
 . Navigate to menu:Organization Settings[Security].
 . Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
 +
@@ -188,7 +190,7 @@ image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
 
-=== Verification and testing
+==== 3. Verification and testing
 
 After setting up audit log streaming follow these steps to validate the setup was successful:
 
@@ -198,7 +200,7 @@ After setting up audit log streaming follow these steps to validate the setup wa
 . Set up appropriate alerts for connection failures or delivery interruptions.
 
 
-=== Managing active streams
+=== Manage active streams
 
 Once configured, you can view and manage audit log streams. The following options are available to you in the CircleCI web app:
 
@@ -306,14 +308,18 @@ The following list shows common and important events found in the audit log. Thi
 
 == Audit log fields
 
-- **`action`:** The action taken that created the event. The format is ASCII lowercase words, separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
-- **`actor`:** The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **`target`:** The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **`payload`:** A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
-- **`occurred_at`:** When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
-- **`metadata`:** A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
-- **`id`:** A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-- **`version`:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
-- **`scope`:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **`success`:** A flag to indicate if the action was successful.
-- **`request`:** If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+[cols="1,4", options="header"]
+|===
+| Field | Description
+| `action` | The action taken that created the event. The format is ASCII lowercase words, separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
+| `actor` | The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `target` | The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `payload` | A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
+| `occurred_at` | When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
+| `metadata` | A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
+| `id` | A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
+| `version` | Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
+| `scope` | If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `success` | A flag to indicate if the action was successful.
+| `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+|===
