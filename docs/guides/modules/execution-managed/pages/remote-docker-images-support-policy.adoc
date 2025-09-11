@@ -65,9 +65,9 @@ Current Deprecation:
 
 Example: When Docker 28 is released:
 
-We have held off on upgrading to Docker 28 because early releases introduced networking changes that caused instability in some environments.
+We have delayed upgrading to Docker 28 because early releases introduced networking changes that caused instability in some environments.
 Rather than risk disruption for our customers, we chose to stay on the stable and supported 27.x line while monitoring the maturity of 28.
-With the release of 28.3.3, those issues appear to have been resolved.
+With the release of 28.3.3, the previous issues appear to have been resolved.
 We are now preparing to validate and roll out the upgrade to ensure a smooth transition.
 
 [cols="1,2", options="header"]
