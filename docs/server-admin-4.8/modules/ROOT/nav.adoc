@@ -34,6 +34,7 @@
 ** xref:operator:managing-orbs.adoc[Managing orbs]
 ** xref:operator:manage-virtual-machines-with-machine-provisioner.adoc[Manage virtual machines with machine provisioner]
 ** xref:operator:configuring-external-services.adoc[Configuring external services]
+** xref:operator:data-retention.adoc[Data retention in server]
 ** xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
 ** xref:operator:managing-load-balancers.adoc[Managing load balancers]
 ** xref:operator:user-authentication.adoc[User authentication]
