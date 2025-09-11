@@ -78,6 +78,9 @@ Retention limits for action logs can be configured in the same REPL session usin
 [#setting-s3-lifecycle-policies]
 == Step 3: Set up lifecycle policies for the S3 Bucket
 
+WARNING: **Risk of Irreversible Data Loss** +
+Incorrect lifecycle settings may result in data being removed earlier than expected and without recovery options. CircleCI bears no responsibility or liability for any data loss resulting from lifecycle configurations applied to your object storage buckets.
+
 After configuring retention limits for your MongoDB and PostgresDB objects, you can also apply object expiry policies to your S3 or GCS buckets. These policies typically expire objects at n+1 days, where n is the retention period set for your databases.
 
 NOTE: **Object Storage Paths** +
@@ -85,6 +88,3 @@ If a retention policy of `n` days is configured for both MongoDB and PostgreSQL 
 
 CAUTION: **Audit Logs** +
 Be sure to configure exceptions for critical paths, such as `audit-logs/*`, in accordance with your organization's compliance or audit requirements. Objects under these paths should not be expired by default.
-
-WARNING: **Risk of Irreversible Data Loss** +
-Incorrect lifecycle settings may result in data being removed earlier than expected and without recovery options. CircleCI bears no responsibility or liability for any data loss resulting from lifecycle configurations applied to your object storage buckets.
