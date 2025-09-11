@@ -1691,7 +1691,7 @@ NOTE: The `checkout` step will configure Git to skip automatic garbage collectio
 [NOTE]
 ====
 * `setup_remote_docker` is not compatible with the `machine` executor. See xref:guides:optimize:docker-layer-caching.adoc#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
-* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#x86-ami-list[here].
+* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#default-aws-ami-lists[here].
 ====
 
 Allows Docker commands to be run locally. See xref:guides:execution-managed:building-docker-images.adoc#[Running Docker commands] for details.
