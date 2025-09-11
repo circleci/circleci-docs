@@ -167,7 +167,7 @@ For a complete list of permissions, see the xref:permissions-authentication:role
 [#configuration]
 === Pipelines and triggers
 
-You can add or delete pipelines and triggers for your project. For details see the xref:orchestrate:pipelines.adoc#pipelines-and-triggers[pipelines overview].
+You can add or delete pipelines and triggers for your project. For details see the xref:orchestrate:pipelines.adoc[Pipelines Overview].
 
 [#project-settings-advanced]
 === Advanced
