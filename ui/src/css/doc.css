@@ -5,7 +5,6 @@
   line-height: var(--doc-line-height);
   margin: var(--doc-margin);
   padding: 0 1rem 4rem;
-  min-width: 0; /* Allow flexbox shrinking */
 }
 
 @media screen and (min-width: 1024px) {
