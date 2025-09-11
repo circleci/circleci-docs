@@ -180,7 +180,7 @@ The directories listed above represent orb components that can be included with 
 Each directory within `src` corresponds with a xref:reference:ROOT:reusing-config.adoc[reusable configuration] component type, which can be added or removed from the orb. If, for example, your orb does not require any `executors` or `jobs`, these directories can be deleted.
 
 [#orbyml]
-===== @orb.yml
+==== @orb.yml
 
 @orb.yml acts as the "root" to your orb project and contains the config version, the orb description, the display key, and imports any additional orbs if needed.
 
@@ -199,7 +199,7 @@ display:
 ----
 
 [#commands]
-===== Commands
+==== Commands
 
 Author and add xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Reusable Commands] to the `src/commands` directory. Each _YAML_ file within this directory will be treated as an orb command, with a name which matches its filename.
 
@@ -224,7 +224,7 @@ steps:
 ----
 
 [#examples]
-===== Examples
+==== Examples
 
 Author and add xref:orb-concepts.adoc#usage-examples[Usage Examples] to the `src/examples` directory. Usage examples are not for use directly by end users in their configs. They provide a way for you to share use-case specific examples for users to reference.
 
@@ -233,7 +233,7 @@ Each _YAML_ file within this directory will be treated as an orb usage example, 
 View a full example from the link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/examples[Orb Template].
 
 [#executors]
-===== Executors
+==== Executors
 
 Author and add xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Parameterized Executors] to the `src/executors` directory.
 
@@ -242,7 +242,7 @@ Each _YAML_ file within this directory will be treated as an orb executor, with 
 View a full example from the link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/executors[Orb Template].
 
 [#jobs]
-===== Jobs
+==== Jobs
 
 Author and add xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Parameterized Jobs] to the `src/jobs` directory.
 
@@ -316,7 +316,7 @@ steps:
 ====
 
 [#why-include-scripts]
-===== Why include scripts?
+==== Why include scripts?
 
 CircleCI configuration is written in `YAML`. Logical code such as `bash` can be encapsulated and executed on CircleCI through `YAML`, but, for developers, it is not convenient to write and test programmatic code within a non-executable format. Also, parameters can become cumbersome in more complex scripts as the `\<<parameter>>` syntax is a CircleCI native YAML enhancement, and not something that can be interpreted and executed locally.
 
@@ -327,7 +327,7 @@ Using the orb development kit and the `\<<include(file)>>` syntax, you can:
 * Utilize true testing frameworks for your code.
 
 [#using-parameters-with-scripts]
-===== Using parameters with scripts
+==== Using parameters with scripts
 
 To keep your scripts portable and locally executable, it is best practice to expect a set of environment variables within your scripts and set them at the config level. The `greet.sh` file, which was included with the special `\<<include(file)>>` syntax above in our `greet.yml` command file, looks like this:
 

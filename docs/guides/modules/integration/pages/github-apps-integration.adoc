@@ -6,7 +6,7 @@
 If your CircleCI organization is integrated with GitHub through the **CircleCI GitHub App**, the content on this page is for you.
 
 ****
-The **CircleCI GitHub App** is an add-on integration. All organizations that have `/github/` or `/circleci/` in the URL can install the GitHub App, including xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[those already integrated through the GitHub OAuth app].
+The **CircleCI GitHub App** is an add-on integration. All organizations that have `/github/` or `/circleci/` in the URL can install the GitHub App, including xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[those already integrated through the GitHub OAuth app].
 To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections].
 ****
 
@@ -119,7 +119,7 @@ A subset of built-in environment variables are not available in GitHub-based pro
 
 Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI’s GitHub App, consider the following:
 
-* If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[this guide].
+* If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[this guide].
 * If the motivation is to **completely remove the OAuth app integration** for security, compliance, or other reasons, follow the steps below.
 
 [#Steps-to-migrate-to-an-organization-without-default-GitHub-OAuth-integration]

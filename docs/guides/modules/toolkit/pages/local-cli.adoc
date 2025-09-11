@@ -12,7 +12,6 @@ Some of the things you can do with the CLI include:
 * Query CircleCI's API
 * xref:how-to-use-the-circleci-local-cli.adoc#orb-development-kit[Create, publish, view, and manage orbs]
 * xref:how-to-use-the-circleci-local-cli.adoc#context-management[Manage contexts]
-* xref:how-to-use-the-circleci-local-cli.adoc#test-splitting[Split your tests] to run across xref:optimize:parallelism-faster-jobs.adoc[parallel environments] to reduce pipeline duration
 
 This page covers the installation and usage of the CircleCI local CLI. The expectation is you have basic knowledge of CI/CD and xref:about-circleci:concepts.adoc[CircleCI's concepts]. You should already have a CircleCI account, an account with a supported VCS.
 
@@ -198,7 +197,6 @@ choco uninstall circleci-cli -y --remove dependencies
 * xref:how-to-use-the-circleci-local-cli.adoc#run-a-job-in-a-container-on-your-machine[How to run a job in a container on your local machine]
 * xref:how-to-use-the-circleci-local-cli.adoc#orb-development-kit[How to create, publish, view, and manage orbs]
 * xref:how-to-use-the-circleci-local-cli.adoc#context-management[How to manage contexts]
-* xref:how-to-use-the-circleci-local-cli.adoc#test-splitting[How to split your tests] to run across xref:optimize:parallelism-faster-jobs.adoc[parallel environments] to reduce pipeline duration
 
 '''
 

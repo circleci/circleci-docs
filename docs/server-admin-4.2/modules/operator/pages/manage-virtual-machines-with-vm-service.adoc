@@ -55,9 +55,11 @@ vm_service:
 
 The default AMIs for server v4.2 are based on Ubuntu 22.04.
 
-[#x86-ami-list]
-===== x86 AMI list
-
+[tabs]
+====
+x86 AMI list::
++
+--
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
@@ -115,10 +117,10 @@ The default AMIs for server v4.2 are based on Ubuntu 22.04.
 | `us-gov-west-1`
 | `ami-02abf947586cae56b`
 |===
-
-[#arm-ami-list]
-===== Arm AMI list
-
+--
+Arm AMI list::
++
+--
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
@@ -173,6 +175,8 @@ The default AMIs for server v4.2 are based on Ubuntu 22.04.
 |`us-gov-west-1`
 |`ami-0ab175883ff460b17`
 |===
+--
+====
 
 [#gcp]
 === GCP
