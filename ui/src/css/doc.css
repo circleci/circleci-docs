@@ -969,7 +969,6 @@
   white-space: pre-wrap;
 }
 
-
 /* Styling for code blocks and listing blocks */
 .doc pre.highlight > code,
 .doc .listingblock pre:not(.highlight),
