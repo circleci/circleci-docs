@@ -88,27 +88,42 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary. Platform-specific instructions for this are given below.
 
-[#stopping-the-machine-runner-on-linux]
-===== Stopping the machine runner on Linux
-
+[tabs]
+====
+Linux::
++
+--
 Run the following commands:
 
 ```shell
 sudo systemctl stop circleci.service
 sudo systemctl disable circleci.service
 ```
+--
+Mac::
++
+--
+Run the following command:
 
-[#stopping-the-machine-runner-on-mac]
-===== Stopping the machine runner on Mac
-
-Run the following commands:
 
 ```shell
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
+--
+Windows::
++
+--
+Run the following command:
+
+
+``` powershell
+Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
+--
+====
 
 [#stopping-the-machine-runner-on-windows]
-===== Stopping the machine runner on Windows
+==== Stopping the machine runner on Windows
 
 Run the following command:
 
@@ -121,9 +136,11 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 Platform-specific instructions are given below.
 
-[#starting-on-linux]
-===== Starting on Linux
-
+[tabs]
+====
+Linux::
++
+--
 Run the following commands:
 
 ```shell
@@ -131,24 +148,26 @@ sudo systemctl reload circleci.service
 sudo systemctl enable circleci.service
 sudo systemctl start circleci.service
 ```
-
-[#starting-on-mac]
-===== Starting on Mac
-
+--
+Mac::
++
+--
 Run the following command:
 
 ```shell
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
-
-[#starting-on-windows]
-===== Starting on Windows
-
-Run the following commands:
+--
+Windows::
++
+--
+Run the following command:
 
 ``` powershell
 Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
+--
+====
 
 [#additional-resources]
 === Additional resources
