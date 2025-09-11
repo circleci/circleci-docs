@@ -198,8 +198,8 @@ To add or edit labels for a component, follow these steps:
 
 . Select *Deploys* in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Components** tab.
-. Select the cog icon image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"] for your component. You can use the filter at the top of the page to help find the component you want.
-. You are now on the component settings page. Select the edit button image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] in the labels panel.
+. Select the component by name. You can use the filter at the top of the page to help find the component you want.
+. You are now on the component view page. Select the edit button image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] in the labels panel.
 . Enter or edit your label(s) and select btn:[Done].
 
 ==== Environment labels
