@@ -57,13 +57,13 @@ image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on proje
 
 === Install the GitHub App
 
-NOTE: The rollback by pipeline method requires that your organization is connected to the xref:integration:github-apps-integration[*CircleCI GitHub App*].
+NOTE: To set up rollback pipelines, you must connect your organization to the xref:integration:github-apps-integration[CircleCI GitHub App].
 
-If the GitHub App is not installed in your organization, the rollback setup process will prompt you to install it.
+- If the GitHub App is not installed in your organization, the guided setup process prompts you to install it.
 
 image::guides:ROOT:deploy/install-github-app.png[Install GitHub App]
 
-If the GitHub App is already installed in your organization, The **GitHub App Installation** step will automatically be marked as completed.
+- If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
 
 image::guides:ROOT:deploy/github-app-installed.png[GitHub App installed]
 
