@@ -74,7 +74,7 @@ Audit log streaming provides the following benefits to your organization:
 * Meet compliance requirements.
 * Integrate CircleCI audit data with your existing security monitoring infrastructure.
 
-=== Configure audit log streaming
+=== Set up audit log streaming
 
 Before setting up audit log streaming, ensure you have the following:
 
@@ -86,7 +86,7 @@ Before setting up audit log streaming, ensure you have the following:
 The following steps guide you through setting up your S3 bucket, AWS authentication, audit log configuration, and verification.
 
 
-==== 1. Set up AWS prerequisites
+==== 1. Implement AWS prerequisites
 
 The following steps describe how to set up AWS prerequisites:
 
@@ -190,7 +190,7 @@ image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
 
-==== 3. Verification and testing
+==== 3. Verify and test
 
 After setting up audit log streaming follow these steps to validate the setup was successful:
 
