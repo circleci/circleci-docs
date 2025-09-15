@@ -1,0 +1,90 @@
+= Data retention in server
+:page-platform: Server v4.8, Server Admin
+:page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI server installation.
+:experimental:
+
+[#background]
+== Background
+
+You can set up retention policies for both Mongo and PostgreSQL to clean up data older than *n* days. The following sections outline the step-by-step process for implementing these retention policies in your server environment.
+
+[#setting-postgres-retention]
+== Step 1: Setting a retention period for PostgreSQL
+
+. Connect to a REPL session in one of the frontend pods by running the following commands:
++
+[source,bash]
+----
+kubectl exec -it <frontend-xxx> -- /bin/bash
+----
++
+Then, connect to the REPL:
++
+[source,bash]
+----
+lein repl :connect 6005
+----
+
+. Once connected, the current setting can be verified using the following command:
++
+[source,clojure]
+----
+(circle.http.api.admin-commands/get-setting :wfc-workflow-deletion-retention-period)
+----
+
+. The retention period can be set as needed (the example below sets it to 90 days):
++
+[source,clojure]
+----
+(circle.http.api.admin-commands/set-setting :wfc-workflow-deletion-retention-period 90)
+----
+
+. The deletion interval can be verified by running:
++
+[source,clojure]
+----
+(circle.http.api.admin-commands/get-setting :wfc-workflow-deletion-interval)
+----
++
+By default, the interval is set to `0`. This value must be updated to a number greater than `0` for WFC deletion to run every *n* seconds. For example, the following command sets it to 1000 seconds:
++
+[source,clojure]
+----
+(circle.http.api.admin-commands/set-setting :wfc-workflow-deletion-interval 1000)
+----
+
+. In instances with significant data volumes, additional `workflows_conductor_event_consumer` replicas may be required to ensure deletion progresses smoothly until it aligns with the configured retention period.
+
+. The WFC event consumer pod logs can be checked to verify that deletion is progressing without errors.
+
+. The oldest `created_at` date for a job can be verified to ensure alignment with the retention period using the following command:
++
+[source,bash]
+----
+kubectl exec postgresql-0 -- sh -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -U "postgres" -d "conductor_production" -c "SELECT * FROM public.jobs ORDER BY created_at ASC LIMIT 2;"'
+----
+
+[#setting-mongodb-retention]
+== Step 2: Setting a retention period for MongoDB (action logs)
+
+Retention limits for action logs can be configured in the same REPL session using the following commands:
+
+[source,clojure]
+----
+(circle.http.api.admin-commands/set-setting :delete-old-builds.retention-limit-days 180)
+(circle.http.api.admin-commands/set-setting :delete-old-action-logs.enabled true)
+----
+
+[#setting-s3-lifecycle-policies]
+== Step 3: Set up lifecycle policies for the S3 Bucket
+
+WARNING: **Risk of Irreversible Data Loss** +
+Incorrect lifecycle settings may result in data being removed earlier than expected and without recovery options. CircleCI bears no responsibility or liability for any data loss resulting from lifecycle configurations applied to your object storage buckets.
+
+After configuring retention limits for your MongoDB and PostgresDB objects, you can also apply object expiry policies to your S3 or GCS buckets. These policies typically expire objects at n+1 days, where n is the retention period set for your databases.
+
+NOTE: **Object Storage Paths** +
+If a retention policy of `n` days is configured for both MongoDB and PostgreSQL data, you can set `n+1` for **all objects** in your S3/GCS buckets to expire at `n+1` days. This ensures alignment between database retention and object storage retention.
+
+CAUTION: **Audit Logs** +
+Be sure to configure exceptions for critical paths, such as `audit-logs/*`, in accordance with your organization's compliance or audit requirements. Objects under these paths should not be expired by default.
