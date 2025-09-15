@@ -33,10 +33,10 @@ body.-toc aside.toc.sidebar {
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1280px) { /* Use xl breakpoint to match existing xl:items-center */
   main {
     max-width: calc(var(--doc-max-width--desktop) + var(--toc-width)); /* Article + TOC */
-    margin: 0 auto; /* Center the entire main element */
+    /* Let parent xl:items-center handle the centering */
   }
 }
 
