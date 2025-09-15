@@ -65,7 +65,7 @@ image::guides:ROOT:orchestrate-and-trigger/project-setup-pipelines.png[Add a pip
 Next, create a trigger for each pipeline you have created for your project. Alternatively, you can trigger a pipeline manually xref:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[via the web app].
 
 . Following from the previous step, select btn:[GitHub trigger +] at the bottom of the pipeline box.
-. Choose when top run the pipeline by selecting an option from the *Event* menu.
+. Choose when to run the pipeline by selecting an option from the *Event* menu.
 +
 ****
 Using multiple pipelines and triggers, you can build different pipelines for different events, For example, you could have:
