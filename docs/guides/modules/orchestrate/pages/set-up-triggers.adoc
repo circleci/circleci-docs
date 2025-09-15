@@ -17,7 +17,11 @@ NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Se
 
 The pipeline and trigger options and features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
 
-Triggers may be from external services (custom webhooks), from commits or tags on a version control system, or set up to run on a schedule.
+There are broadly three types of triggers:
+
+* VCS triggers.
+* Custom webhooks used for triggering pipelines from external services.
+* Schedule triggers.
 
 To add a trigger for a pipeline, follow these steps:
 
