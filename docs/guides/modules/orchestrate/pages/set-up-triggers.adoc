@@ -30,7 +30,7 @@ To add a trigger for a pipeline, follow these steps:
 GitHub App::
 +
 --
-When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI listens for push and tag events. When a trigger is created CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
+When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI can listen for push and pull request events. When a trigger is created, CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
 
 image::guides:ROOT:triggers/add-trigger-github.png[Add a trigger]
 
