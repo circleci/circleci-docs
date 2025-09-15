@@ -32,7 +32,25 @@ Using SSO for authentication can result in improved security and user experience
 * Adding and deleting users.
 * Managing user permissions.
 
-**For a member of an organization using SSO for authentication:** The process of authentication to access applications is simplified. Rather than authenticating separately for each application, SAML SSO enables the user to confirm their identity _once_ with an IdP and that authentication is communicated to the applications (such as CircleCI) that the user has access to. The user may then access these applications for the duration of their session.
+**For a member of an organization using SSO for authentication:** The process of authentication to access applications is simplified. Rather than authenticating separately for each application, SAML SSO enables the user to confirm their identity _once_ with an IdP. This authentication is then communicated to all applications (such as CircleCI) that the user has access to. The user may then access these applications for the duration of their session.
+
+== Personal API tokens with SSO
+
+When your organization uses SSO, Personal API tokens require SSO authentication to access your organization's resources.
+
+To use Personal API tokens with SSO-protected resources:
+
+. Go to the link:https://app.circleci.com/home/[CircleCI web app].
+. Select your profile from the upper right corner, then select menu:User Settings[].
+. Select menu:Personal API Tokens[] from the sidebar.
+. For each token you want to use with your SSO-enabled organization, select the organization from the dropdown in the SSO column.
+. Once you select an organization, the token becomes SSO-authenticated and can access your organization's resources.
+
+**Important notes:**
+
+* The SSO authentication option for tokens is only available when you are actively signed in via SSO.
+* SSO authentication is only required for tokens you intend to use with SSO-enabled organization resources.
+* Tokens without SSO authentication still work with non-SSO protected resources.
 
 [#prerequisites-and-limitations]
 == Limitations
@@ -42,11 +60,6 @@ SSO for CircleCI currently has the following limitations:
 * SSO requires all users to log into CircleCI either with an email and password or using social logins like GitHub, Bitbucket prior to the SSO login. The email used to log in to CircleCI does *not* need to match the email used to authenticate with the IdP.
 * CircleCI supports SSO using one domain per organization.
 * When the user logs in using social logins like GitHub or Bitbucket, then they need to authorize SSO in the VCS org along with SSO setup in CircleCI.
-* Personal API tokens will not work against your organization after SSO is enabled. As a result **the following features are unavailable when using SSO**:
-** The CircleCI VS Code plugin will **not** work against your organization after SSO is enabled.
-** The CircleCI CLI will **not** work against your organization after SSO is enabled.
-** API v2 endpoints will **not** be accessible for your organization after SSO is enabled.
-** Config policies will **not** be usable/enforcable for your organization after SSO is enabled.
 
 
 [#next-steps]
