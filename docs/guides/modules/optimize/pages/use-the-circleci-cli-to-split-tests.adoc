@@ -62,7 +62,7 @@ Two commands are available for you to split your tests. We recommend using `circ
 Alternatively, you can see `circleci tests split` examples <<tests-split-examples,here>>
 
 [#tests-run-examples]
-==== Test framework examples using `circleci tests run`
+== Test framework examples using circleci tests run
 
 The following set of examples show how to use the `circelci tests run` command to split and run your tests across parallel execution environments. Using this command also allows you to use the xref:test:rerun-failed-tests.adoc[rerun failed tests] feature.
 
@@ -76,7 +76,7 @@ Some notes on the examples below:
 * If you do not use `store_test_results`, there will be no timing data available to split your tests.
 
 [#ruby-rspec-tests]
-===== Ruby (RSpec)
+=== Ruby (RSpec)
 
 . Add the following gem to your Gemfile:
 +
@@ -108,7 +108,7 @@ jobs:
 ** Update the `glob` command to match your use case. See the RSpec section in the xref:test:collect-test-data.adoc#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`.
 
 [#configure-a-job-running-ruby-cucumber-tests]
-===== Ruby (Cucumber)
+=== Ruby (Cucumber)
 
 Modify your CircleCI configuration file to specify parallelism, and update your test command to use `circleci tests run`:
 
@@ -133,7 +133,7 @@ jobs:
 * Update the `glob` command to match your use case. See the Cucumber section in the xref:test:collect-test-data.adoc#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`.
 
 [#cypress-tests]
-===== Cypress
+=== Cypress
 
 . Use the link:https://www.npmjs.com/package/cypress-circleci-reporter[`cypress-circleci-reporter`] (this is a 3rd party tool that is not maintained by CircleCI).  You can install the tool in your `.circleci/config.yml` or add to your `package.json`. Example for adding to `.circleci/config.yml`:
 +
@@ -178,7 +178,7 @@ jobs:
 ** Cypress may output a warning: `Warning: It looks like you're passing --spec a space-separated list of arguments:`.  This can be ignored, but it can be removed by following the guidance from our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/18[community forum].
 
 [#javascript-typescript-jest-tests]
-===== JavaScript/TypeScript (Jest)
+=== JavaScript/TypeScript (Jest)
 
 . Install the `jest-junit` dependency. You can add this step in your `.circleci/config.yml`:
 +
@@ -217,7 +217,7 @@ jobs:
 ** `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute="true"`.
 
 [#playwright-tests]
-===== Playwright
+=== Playwright
 
 Modify your CircleCI configuration file to specify parallelism, and update your test command to use `circleci tests run`:
 
@@ -246,7 +246,7 @@ jobs:
 * Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with this feature.
 
 [#kotlin-or-gradle-tests]
-===== Kotlin or Gradle
+=== Kotlin or Gradle
 
 . Modify your CircleCI configuration file to specify parallelism, and update your test command to use `circleci tests run`:
 +
@@ -280,7 +280,7 @@ jobs:
 . Update the `glob` command to match your use case.
 
 [#configure-a-job-running-go-tests]
-===== Go
+=== Go
 
 Modify your CircleCI configuration file to specify parallelism, and update your test command to use `circleci tests run`:
 
@@ -302,7 +302,7 @@ jobs:
 * Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
 [#elixir-tests]
-===== Elixir
+=== Elixir
 
 Modify your CircleCI configuration file to specify parallelism, and update your test command to use `circleci tests run`:
 
@@ -332,7 +332,7 @@ jobs:
 * Update the `glob` command to match your use case.
 
 [#configure-a-job-running-phpunit-tests]
-===== PHPUnit
+=== PHPUnit
 
 Modify your CircleCI configuration file to specify parallelism, and update your test command to use `circleci tests run`:
 
@@ -362,7 +362,7 @@ jobs:
 * Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk.
 
 [#configure-django-tests]
-===== Django
+=== Django
 
 Modify your CircleCI configuration file to specify parallelism, and update your test command to use `circleci tests run`. Also, Django takes as input test filenames with a format that uses dots ("."), however, it outputs JUnit XML in a format that uses slashes "/".  To account for this, get the list of test filenames first, change the filenames to be separated by dots "." instead of slashes "/", and pass the filenames into the test command.
 
@@ -393,7 +393,7 @@ jobs:
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
 [#output-test-files-only]
-===== Output test files only
+=== Output test files only
 
 If your testing set-up on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can opt to use `circleci tests run` to:
 
@@ -520,7 +520,7 @@ The available timing data will then be analyzed and your tests will be split acr
 NOTE: If no timing data is found, you will receive a message: `Error auto-detecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 
 [#set-the-timing-type]
-===== Set the timing type
+=== Set the timing type
 
 The environment CLI attempts to autodetect the granularity of the test split (for example, whether to split by filename, or down to class name) based on the input. You may need to choose a different timing type depending on how your test coverage output is formatted, using the `--timings-type` option. Valid timing types are:
 
@@ -534,7 +534,7 @@ cat my_java_test_classnames | circleci tests split --split-by=timings --timings-
 ```
 
 [#set-the-default-value-for-missing-timing-data]
-===== Set the default value for missing timing data
+=== Set the default value for missing timing data
 
 For partially found test results, any tests with missing data are assigned a random small value. You can override this default value with the `--time-default` flag:
 
@@ -543,7 +543,7 @@ circleci tests glob "**/*.rb" | circleci tests split --split-by=timings --time-d
 ```
 
 [#download-timing-data]
-===== Download timing data
+=== Download timing data
 
 If you need to manually store and retrieve timing data, add the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` step] to your job.
 
