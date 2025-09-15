@@ -217,7 +217,7 @@ The ability to xref:orchestrate:scheduled-pipelines.adoc[schedule pipelines] is 
 [#stop-building]
 === Stop building
 
-Bitbucket Data Center integrations do not currently support the **Stop Building** xref:security:stop-building-a-project-on-circleci.adoc#stop-building-a-project[option] that can normally be found in **Project settings**. As an alternative, you can xref:security:stop-building-a-project-on-circleci.adoc#remove-a-project-from-circleci[Delete a project].
+Bitbucket Data Center integrations do not currently support the **Stop Building** xref:security:stop-building-a-project-on-circleci.adoc#stop-building-a-project[option] that can normally be found in **Project settings**. As an alternative, you can xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a project].
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only

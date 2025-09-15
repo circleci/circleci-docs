@@ -145,7 +145,6 @@ Currently there is no pre-population of caches because this optimization has not
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
-* *https://github.com/facebook/flow/[Flow]* - Adds static typing to JavaScript to improve developer productivity and code quality.
 * *https://github.com/storybookjs/storybook[Storybook]* - Interactive UI component develop and test: React, React Native, Vue, Angular, Ember.
 * *https://github.com/apollographql[Apollo]* - A community building flexible open source tools for GraphQL.
 * *https://github.com/Automattic/wp-calypso[Calypso]* - The next generation web app powering WordPress.com.

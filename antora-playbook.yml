@@ -15,8 +15,19 @@ content:
   - url: .
     start_path: docs/orbs
   - url: .
-    start_path: docs/server-admin
-    branches: [server-4*]
+    start_path: docs/server-admin-4.8
+  - url: .
+    start_path: docs/server-admin-4.7
+  - url: .
+    start_path: docs/server-admin-4.6
+  - url: .
+    start_path: docs/server-admin-4.5
+  - url: .
+    start_path: docs/server-admin-4.4
+  - url: .
+    start_path: docs/server-admin-4.3
+  - url: .
+    start_path: docs/server-admin-4.2
   - url: .
     start_path: docs/contributors
 ui:
