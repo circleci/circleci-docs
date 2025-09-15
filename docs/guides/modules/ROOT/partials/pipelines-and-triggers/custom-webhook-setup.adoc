@@ -4,7 +4,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so at this point. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a detailed guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page. If you run into an issue when trying to install the CircleCI GitHub App (for example, the App looks installed on GitHub, but does not show up on CircleCI), please submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form]. 
 . Select btn:[Custom webhook +] at the bottom of the pipeline box.
-. Enter a descriptive name for the trigger (optional).
+. Enter a descriptive name for the webhook event.
 . Enter the name of the event source for the trigger. For example, if you are setting up a custom webhook to run pipelines on events from Datadog, enter "Datadog" here.
 . Enter the branch to use to fetch your config file and checkout your code when a Custom Webhook is received.
 +
