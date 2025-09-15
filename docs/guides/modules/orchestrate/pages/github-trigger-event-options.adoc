@@ -93,15 +93,13 @@ All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-even
 * `pipeline.event.github.pull_request.base.ref`: the name of the *base* (or target) branch of the PR - that is the branch that will receive the changes.
 * `pipeline.event.github.pull_request.head.ref`: the name of the *head* branch of the PR - that is the branch containing the changes to be merged.
 * `pipeline.event.github.pull_request.draft`: a boolean value indicating whether the pull request is a draft.
-  ** **Usage example**: if wanting to trigger a pipeline on *PR opened or pushed to, default branch and tag pushes* as well as on *PR marked ready for review*, but ensure that it never runs if the event is associateed with a PR that is marked as *draft*, use the following filter. The condition `pipeline.event.name == "api"` ensures that the workflow runs if triggered manually via the web-app, or via API. 
+  ** **Usage example**: To trigger a pipeline on _PR opened or pushed to, default branch and tag pushes__, but ensure that it never runs if the event is associated with a PR that is marked as draft, use the following filter. The condition pipeline.event.github.pull_request.draft == false excludes draft PRs from triggering the workflow. The condition pipeline.event.name == "api" ensures that the workflow runs when triggered manually via the web app or API.
 
-  ```
   workflows:
     my-workflow:
       when: pipeline.event.name == "api" or pipeline.event.name == 'push' or  (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false))
       jobs:
         - myjob
-  ```
 
 * `pipeline.event.github.pull_request.title`: the title of the pull request.
 * `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request.
