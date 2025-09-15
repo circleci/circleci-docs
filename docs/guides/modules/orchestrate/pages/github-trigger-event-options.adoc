@@ -93,6 +93,14 @@ All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-even
 * `pipeline.event.github.pull_request.base.ref`: the name of the *base* (or target) branch of the PR - that is the branch that will receive the changes.
 * `pipeline.event.github.pull_request.head.ref`: the name of the *head* branch of the PR - that is the branch containing the changes to be merged.
 * `pipeline.event.github.pull_request.draft`: a boolean value indicating whether the pull request is a draft.
+  ** Usage example:
+      ```
+      workflows:
+        my-workflow:
+          when: pipeline.event.name == "api" or pipeline.event.name == 'push' or  (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false))
+          jobs:
+            - myjob
+      ```
 * `pipeline.event.github.pull_request.title`: the title of the pull request.
 * `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request.
 
