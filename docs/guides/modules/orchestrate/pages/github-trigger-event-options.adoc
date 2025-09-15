@@ -124,9 +124,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 .Trigger options under Project settings
 image::guides:ROOT:triggers/select-when-to-run.png[Set a trigger option for a project trigger]
 .
-** Select the *Event Source* repository from the dropdown. This defaults to the repository associated with the pipeline.
-+
-TIP: You can change the event source to a different repository if you wish. If you do change the event source so that it does not match the pipeline's config/checkout source an option will appear to specify which branch in the config/checkout source repository you wish to use for the trigger.
+** Select the *Event Source* repository from the dropdown. This defaults to the config source repository. If you change it to a repository that does not match the pipeline's config or checkout source, you will be prompted to specify a fixed branch to be used respectively for fetching config and checking out code. 
 . Select btn:[Save].
 
 To verify your trigger is set up correctly, trigger an event (open a PR) from your repository.
