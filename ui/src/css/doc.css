@@ -22,6 +22,7 @@
   .doc {
     flex: 1 1 0%;
     width: 0; /* Force flexbox to ignore content width */
+    max-width: var(--doc-max-width--desktop); /* Restore max-width for centering */
   }
 }
 

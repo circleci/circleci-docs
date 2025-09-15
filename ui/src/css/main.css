@@ -7,7 +7,7 @@ body.-toc aside.toc.sidebar {
     display: none;
   }
 
-  main > .content {
+  main > div {
     overflow-x: auto;
     max-width: 100vw;
   }
@@ -19,7 +19,7 @@ body.-toc aside.toc.sidebar {
     min-width: 0; /* min-width: 0 required for flexbox to constrain overflowing elements */
   }
 
-  main > .content {
+  main > div {
     display: flex;
   }
 
@@ -33,8 +33,20 @@ body.-toc aside.toc.sidebar {
   }
 }
 
+@media screen and (min-width: 1200px) {
+  main {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width) + 4rem); /* Article + TOC + gap */
+    margin-left: auto; /* Center the entire main element */
+    margin-right: auto; /* Center the entire main element */
+  }
+}
+
 @media screen and (min-width: 1600px) {
   aside.toc.sidebar {
     flex-basis: var(--toc-width--widescreen);
+  }
+
+  main {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen) + 4rem); /* Article + wider TOC + gap */
   }
 }
