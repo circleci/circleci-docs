@@ -35,9 +35,8 @@ body.-toc aside.toc.sidebar {
 
 @media screen and (min-width: 1200px) {
   main {
-    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width) + 4rem); /* Article + TOC + gap */
-    margin-left: auto; /* Center the entire main element */
-    margin-right: auto; /* Center the entire main element */
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width)); /* Article + TOC */
+    margin: 0 auto; /* Center the entire main element */
   }
 }
 
@@ -47,6 +46,6 @@ body.-toc aside.toc.sidebar {
   }
 
   main {
-    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen) + 4rem); /* Article + wider TOC + gap */
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen)); /* Article + wider TOC */
   }
 }
