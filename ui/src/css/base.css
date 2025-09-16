@@ -148,7 +148,7 @@ object[type="image/svg+xml"]:not([width]) {
 
 /* Firefox-specific CSS to fix flexbox shrinking issue */
 @-moz-document url-prefix() {
-  main > .content .doc,
+  main > div .doc,
   article.doc {
     flex-shrink: 0; /* Prevent excessive shrinking in Firefox */
   }
