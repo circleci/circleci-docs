@@ -1568,7 +1568,26 @@ A job can exit without failing by using `run: circleci-agent step halt`. However
 
 ==== Automatic step reruns
 
-The `max_auto_reruns` and `auto_rerun_delay` attributes can be used to automatically rerun a step if it fails, and delay that rerun if required. Automatic reruns are useful for steps that are expected to fail intermittently, such as tests.
+The following attributes can be used to automatically rerun a step if it fails, and delay that rerun if required:
+
+[cols="2,1,1,2"]
+|===
+| Key | Required | Type | Description
+
+|`max_auto_reruns`
+| N
+| Integer
+| The maximum number of times to automatically rerun the step if it fails. Must be between `1` and `5`.
+
+| `auto_rerun_delay`
+| N
+| String
+| The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m". If you do not supply a delay, the rerun will start immediately after the step fails.
+|===
+
+Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
+
+You must configure the `command` key for the step, you cannot use the short form run step configuration, for example, the following is not supported for use with automatic reruns: `- run: echo "Hello, world!"`
 
 *Example:*
 

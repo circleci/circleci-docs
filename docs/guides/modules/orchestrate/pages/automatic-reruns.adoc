@@ -33,7 +33,7 @@ This section provides config examples to help you set up automatic reruns. The c
 
 To enable automatic reruns for a run step in a job, add the `max_auto_reruns` key to your step with a value between 1 and 5:
 
-NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
+NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. Also you must configure the `command` key for the step, you cannot use the short form run step configuration.
 
 .CircleCI config to automatically retry a step up to 3 times if it fails
 [source,yaml]
@@ -44,14 +44,14 @@ jobs:
   my-job:
     steps:
       - run: echo "Hello, world!"
-      - run: 
+      - run:
           command: echo "This step will automatically rerun up to 3 times if it fails"
           max_auto_reruns: 3
 ----
 
 You can add a delay between the step failing and the automatic rerun starting, as follows:
 
-NOTE: If you configure a delay for your automatic step rerun, the delay must be less than or equal to 10 minutes. The delay can be configured as a string with a unit suffix, using `m` (minutes) or `s` (seconds), for example, `auto_rerun_delay: 10s` or `auto_rerun_delay: 3m`.
+NOTE: If you configure a delay for your automatic step rerun, the delay must be less than or equal to 10 minutes. The delay can be configured as a string with a unit suffix, using `m` (minutes) or `s` (seconds), for example, `auto_rerun_delay: 10s` or `auto_rerun_delay: 3m`. If you do not supply a delay, the rerun will start immediately after the step fails.
 
 .CircleCI config to automatically retry a step up to 3 times if it fails with a 10 second delay between attempts
 [source,yaml]
@@ -62,7 +62,7 @@ jobs:
   my-job:
     steps:
       - run: echo "Hello, world!"
-      - run: 
+      - run:
           command: echo "This step will automatically rerun up to 3 times if it fails with a 10 second delay between attempts"
           max_auto_reruns: 3
           auto_rerun_delay: 10s
