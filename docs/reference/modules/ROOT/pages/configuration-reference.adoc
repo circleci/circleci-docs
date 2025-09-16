@@ -1568,7 +1568,7 @@ A job can exit without failing by using `run: circleci-agent step halt`. However
 
 ==== Automatic step reruns
 
-The `max_auto_reruns` and `auto_rerun_delay` attributes can be used to automatically rerun a step if it fails, and delay that rerun if required. This is useful for steps that are expected to fail intermittently, such as tests.
+The `max_auto_reruns` and `auto_rerun_delay` attributes can be used to automatically rerun a step if it fails, and delay that rerun if required. Automatic reruns are useful for steps that are expected to fail intermittently, such as tests.
 
 *Example:*
 
