@@ -44,7 +44,8 @@ jobs:
   my-job:
     steps:
       - run: echo "Hello, world!"
-      - run: echo "This step will automatically rerun up to 3 times if it fails"
+      - run: 
+          command: echo "This step will automatically rerun up to 3 times if it fails"
           max_auto_reruns: 3
 ----
 
