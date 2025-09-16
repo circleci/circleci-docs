@@ -17,6 +17,15 @@
   }
 }
 
+/* Apply aggressive flexbox fix only above 1200px where the original problem occurs */
+@media screen and (min-width: 1200px) {
+  .doc {
+    flex: 1 1 0%;
+    width: 0; /* Force flexbox to ignore content width */
+    max-width: var(--doc-max-width--desktop); /* Restore max-width for centering */
+  }
+}
+
 /* === HEADING STYLES === */
 .doc h1,
 .doc h2,
