@@ -1,0 +1,150 @@
+= Phase 1 - Prerequisites
+:page-platform: Server v4.8, Server Admin
+:experimental:
+:page-description: A guide to installing CircleCI server v4.8 in an air-gapped environment. Requirements, images and Helm charts.
+
+The guides in this section walk you through the steps required to install CircleCI server in an air-gapped environment.
+
+[#required-components]
+== Required components for air-gapped installation
+The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forward with the installation.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Component
+| Used for
+
+| Container registry
+| Hosting CircleCI server images for Kubernetes
+
+| A Kubernetes cluster
+| Running CircleCI server
+
+| An object storage system (MinIO)
+| Object and artifact storage
+
+| GitHub Enterprise
+| Source of code for CircleCI server to build
+
+| Nomad Virtual Machines
+| Machines for running Nomad
+
+|===
+
+[#copy-images]
+== 1. Copy images
+
+CircleCI server is deployed into a Kubernetes cluster using a Helm chart. You will need to copy the latest images and charts from CircleCI into your virtual environment. All images referenced in the CircleCI Helm chart must be accessible within your air-gapped environment.
+
+[#login-to-acr]
+=== a. Log in to CircleCI server container registry
+Access to the images you need for your installation requires you to use a username and token, which will be provided by CircleCI. Access the link:https://support.circleci.com/[CircleCI support portal] for more information.
+
+[,bash]
+----
+docker login cciserver.azurecr.io --username <your-circleci-provided-username> --password <your-circleci-provided-token>
+----
+
+=== b. Download all images required for this release
+Download all images required for the release of CircleCI server to your local machine. This list contains all required images for the Helm installation, the CircleCI Agent, and the Reality Check testing tool.
+
+[,bash]
+----
+SERVER_4_8_IMAGE_LIST=`cat <<EOF
+cciserver.azurecr.io/api-gateway:0.1.61921-e4a01bc
+cciserver.azurecr.io/api-service:0.1.21904-86fef64a
+cciserver.azurecr.io/approval-job-provider-migrator:1.0.23431-d070abe
+cciserver.azurecr.io/audit-log-service:0.1.2153-c94eb0f
+cciserver.azurecr.io/authentication-svc:0.1.45454-e22f36f
+cciserver.azurecr.io/authentication-svc-migrator:0.1.17533-7681416
+cciserver.azurecr.io/branch-service:0.1.8001-c4fda8e
+cciserver.azurecr.io/branch-service-migrator:0.1.8000-c4fda8e
+cciserver.azurecr.io/builds-service:1.0.7795-fb357b9
+cciserver.azurecr.io/builds-service-migrator:1.0.7795-fb357b9
+cciserver.azurecr.io/ciam:0.1.42389-d9b9756
+cciserver.azurecr.io/ciam-gateway:0.1.11398-bfc865d
+cciserver.azurecr.io/circle-www-api:0.1.711488-642e2d1832
+cciserver.azurecr.io/contexts-service:0.1.24798-a6b197a
+cciserver.azurecr.io/contexts-service-migrator:0.1.24797-a6b197a
+cciserver.azurecr.io/cron-service:0.1.5830-6ec2408
+cciserver.azurecr.io/cron-service-migrator:0.1.5831-6ec2408
+cciserver.azurecr.io/distributor:0.1.141342-97f6a50c
+cciserver.azurecr.io/distributor-migrator:0.1.141343-97f6a50c
+cciserver.azurecr.io/docker-provisioner:0.1.42238-2278cdc
+cciserver.azurecr.io/domain-service:0.1.18952-cb0f939
+cciserver.azurecr.io/domain-service-migrator:0.1.18951-cb0f939
+cciserver.azurecr.io/execution-gateway:0.1.25576-5a1b55e
+cciserver.azurecr.io/feature-flags:0.1.8767-2d3e16b
+cciserver.azurecr.io/init-known-hosts:1.0.72-cca8263
+cciserver.azurecr.io/insights-service:0.1.92656-9aba6041
+cciserver.azurecr.io/insights-service-migrator:0.1.92655-9aba6041
+cciserver.azurecr.io/machine-provisioner:0.1.92089-38be0c2
+cciserver.azurecr.io/machine-provisioner-migrator:0.1.92084-38be0c2
+cciserver.azurecr.io/orb-service:0.1.102697-5efbd597
+cciserver.azurecr.io/orb-service-analytics-migrator:0.1.102699-5efbd597
+cciserver.azurecr.io/orb-service-migrator:0.1.102697-5efbd597
+cciserver.azurecr.io/output:0.1.30932-9b859a8
+cciserver.azurecr.io/permissions-service:0.1.42391-d9b9756
+cciserver.azurecr.io/permissions-service-migrator:0.1.42390-d9b9756
+cciserver.azurecr.io/policy-service:0.1.9419-5d7da65
+cciserver.azurecr.io/public-api-service:0.1.38704-762b942
+cciserver.azurecr.io/runner-admin:0.1.27514-fb12e67
+cciserver.azurecr.io/runner-admin-migrator:0.1.27508-fb12e67
+cciserver.azurecr.io/server-license:1.0.90-16b88b3
+cciserver.azurecr.io/server-postgres:12.16.37-7629bfd
+cciserver.azurecr.io/server-postgres:12.22.445-4d84973
+cciserver.azurecr.io/server-rabbitmq:3.12.423-3363c50
+cciserver.azurecr.io/step:0.1.9950-a5e4a61
+cciserver.azurecr.io/vault-cci:0.4.196-1af3417
+cciserver.azurecr.io/webhook-service:0.1.12058-da092c4
+cciserver.azurecr.io/webhook-service-migrator:0.1.12059-da092c4
+cciserver.azurecr.io/web-ui:0.1.133999-ac8148f608
+cciserver.azurecr.io/web-ui-authentication:0.1.119922-bd2b764ed5
+cciserver.azurecr.io/web-ui-server-admin:0.1.127516-c8690d5814
+cciserver.azurecr.io/workflows-conductor:1.0.23431-d070abe
+cciserver.azurecr.io/workflows-conductor-migrator:1.0.23431-d070abe
+circleci/picard:1.0.275302-e49eabce
+docker.io/bitnami/mongodb:3.6.22-debian-9-r38
+docker.io/bitnami/redis:6.2.1-debian-10-r13
+docker.io/library/telegraf:1.34-alpine
+hashicorp/nomad:1.10.0
+hashicorp/nomad-autoscaler:0.4.6
+kong:3.4.2
+nginxinc/nginx-unprivileged:1.28.0
+quay.io/soketi/soketi:1.6-16-distroless
+EOF
+`
+----
+
+[source, bash]
+----
+echo $SERVER_4_8_IMAGE_LIST | while read -r image; do docker pull $image; done
+----
+
+[#copy-all-images]
+=== c. Copy all images to your air-gapped environment
+Copy all downloaded images to the container registry in your air-gapped environment.
+
+[#copy-charts]
+== 2. Copy charts
+Copy the CircleCI server Helm chart to your air-gapped environment.
+
+[#download-helm-chart]
+=== a. Download the latest CircleCI server Helm chart
+Download the latest CircleCI server Helm chart to the current directory.
+
+[,bash]
+----
+helm registry login cciserver.azurecr.io
+helm pull oci://cciserver.azurecr.io/circleci-server -d ./
+----
+
+[#upload-helm-chart]
+=== b. Copy the Helm chart to your air-gapped environment
+Copy the downloaded `.tgz` Helm chart to your air-gapped environment.
+
+[#next-steps]
+== Next steps
+
+Once the steps on this page are complete, go to the xref:phase-2-configure-object-storage.adoc[Phase 2 - Configure object storage] guide.

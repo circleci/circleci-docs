@@ -1,0 +1,5 @@
+= Install CircleCI server on GCP
+:page-description: Installation guide for installing CircleCI server on GCP.
+:page-layout: subsection
+
+The guides in this section provide instructions for installing CircleCI server on GCP. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase.

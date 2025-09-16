@@ -1,0 +1,466 @@
+= CircleCI environment CLI usage guide
+:page-platform: Cloud, Server v4+
+:page-description: Using the CircleCI environment CLI in your CI/CD pipeline
+:experimental:
+
+This page provides reference documentation for the CircleCI environment CLI, which is the CLI available in your CircleCI pipelines.
+
+== Introduction
+
+This reference guide covers some basic information about the CircleCI task-agent CLI, including:
+
+* Complete command reference - available commands and subcommands.
+* Flag documentation - Comprehensive flag options with descriptions.
+* Usage examples - Practical examples showing real-world usage patterns.
+* Command descriptions - Clear explanations of what each command does.
+
+== CLI differentiation
+
+The environment CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
+
+The CircleCI environment CLI:: A specialized command-line interface. The environment CLI retrieves and configures a task before managing the execution of the job within a chosen compute environment. The environment CLI is available for use in your CI/CD pipelines.
+
+The Local CLI:: The development tool used on a local machine. It handles day-to-day development tasks, testing, and local workflow management.
+
+These tools share some similarities. However, they serve different purposes and operate in different contexts with different capabilities and permissions.
+
+== Root command
+
+The CLI tool available in CircleCI pipelines. The root command is `circleci`.
+
+== Subcommands
+
+=== Environment variables
+
+Use `env` to manage environment variables
+
+==== Substitution
+
+`subst` is a subcommand for `env`. Use `circleci env subst` to substitute environment variables in a string.
+
+*Example usage:*
+
+Consider this scenario: In your repository there exists a file called `template.json`, with values replaced by environment variable strings, as follows:
+
+[source,json]
+----
+{
+  "foo": "$FOO",
+  "provider": "${PROVIDER}"
+}
+----
+
+The config example below shows the corresponding environment variables defined directly within a step in the config.
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  process-template:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: Process template file
+          environment:
+            FOO: bar
+            PROVIDER: circleci
+          command: |
+            ## circleci env subst [flags]
+            circleci env subst < template.json > deploy.json
+            cat deploy.json
+workflows:
+  env-subst-workflow:
+    jobs:
+      - process-template
+----
+
+In this example:
+
+* The `<` symbol redirects the contents of the `template.json` file as input to the `circleci env subst` command.
+* The `>` symbol redirects the output of the `env subst` command to the `deploy.json` file.
+
+Alternatively, you can pass input to the `circleci env subst` command as an argument: `circleci env subst "hello \$WORLD"`.
+
+Output:
+
+[source,json]
+----
+{
+  "foo": "bar",
+  "provider": "circleci"
+}
+----
+
+For more information on using the `env` command, see the xref:security:env-vars.adoc#environment-variable-substitution[Introduction to environment variables] page.
+
+=== Run
+
+Invokes a task-agent subcommand by name.
+
+==== OpenID Connect tokens
+
+A subcommand of `run`. The `circleci run oidc` command runs authentication using OIDC.
+
+For more information, including an example, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims] page.
+
+==== Release
+
+A subcommand of `run`. The `circleci run release` commands allow you to manage your deployments.
+
+==== Plan
+
+A subcommand of `release`. The `circleci run release plan` command is used to plan and identify a new deployment that will be referenced in the CircleCI UI. When a release is planned you can then update its status later in your pipeline to track progress of a deployment.
+
+A _planned_ deployment is displayed in the Deploys UI with `pending` status.
+
+*Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `deploy-name`
+| An arbitrary positional argument that is used to identify the deployment. This should be unique within the workflow.
+
+| `environment-name`
+| Sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
+
+| `component-name`
+| Sets the name that will be displayed in the UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
+
+| `target-version`
+| Should match the version being deployed.
+
+| `namespace`
+| Optional flag to use a namespace value other than default.
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+jobs:
+  deploy-my-service:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run release plan
+            circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
+----
+
+For more information on using the `circleci run release plan` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+
+==== Update
+
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:deploy:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
+
+A subcommand of `release`. Use the `circleci run release update` command to update the status of the deployment.
+
+*Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `status`
+| Update the deploy status (values can be `RUNNING`, `SUCCESS`, or `FAILED`).
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+jobs:
+  deploy-my-service:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run release update
+            circleci run release update <deploy-name> --status=running
+----
+
+For more information on using the `circleci run release update` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+
+==== Log
+
+A subcommand of `release`. The `circleci run release log` command allows you to log your deployments without status updates
+
+*Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `environment-name`
+| Sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
+
+| `component-name`
+| Sets the name to display in the UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
+
+| `target-version`
+| Should match the version you are deploying.
+
+| `namespace`
+| Optional flag to use a namespace value other than default.
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+jobs:
+  deploy-my-service:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run release log
+            circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
+----
+
+For more information on using the `circleci run release log` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+
+=== Task
+
+Manage tasks. You can also use the alias `step` instead of `task`.
+
+==== Halt
+
+Halt is the only available subcommand of `task`. This command stops the current task and treat it as successful.
+
+*Example usage:*
+
+.Equivalent commands to halt the current task and treat it as successful
+[source,yaml]
+----
+## These commands would be equivalent:
+circleci task halt
+circleci step halt
+----
+
+=== Tests
+
+Collect and split tests so they can run in parallel. For full details of splitting and running tests using the environment CLI, see the xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI environment CLI to split tests] page.
+
+==== Split
+
+A subcommand of `tests`. Use `circleci tests split` to split grouped tests into independent buckets so they can run in parallel.
+
+*Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `index`
+| Index of node.
+
+| `total`
+| Number of nodes.
+
+| `split-by`
+| How to weight the split, allowed values are `name`, `filesize`, and `timings`.
+
+| `timings-type`
+| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose `classname` or `filename`) (default `autodetect`).
+
+| `show-counts`
+| Print test file or test class counts to stderr (default `false`).
+
+| `time-default`
+| Override default time value of test timing data when timing is not found (default 0s).
+
+| `timings-file`
+| JSON file containing historical timing data.
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of split
+            circleci tests split [flags] [FILENAME]
+----
+
+==== Glob
+
+A subcommand of `Tests`. Use `circleci tests glob` to print files matching the glob pattern.
+
+*Flags*
+
+NOTE: The available flag for the `glob` subcommand is a pattern, and supports the
+following symbols:
+
+[cols="2,3"]
+|===
+| Symbol | Description
+
+| `*`
+| Matches any sequence of non-path-separators.
+
+| `**`
+| Matches any sequence of characters, including path separators.
+
+| `?`
+| Matches any single non-path-separator character.
+
+| `[...]`
+| Matches any character in the set. May use '-' for a range.
+
+| `{...}`
+| Matches a sequence of characters, if any of the alternatives in braces matches.
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of glob
+            circleci tests glob [flags] PATTERN
+----
+
+==== Run
+
+A subcommand of `tests`. The `circleci tests run` command splits and runs tests.
+
+*Flags*
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `command`
+| Script to run for a list of tests.
+
+| `index`
+| Index of node.
+
+| `total`
+| Number of nodes.
+
+| `split-by`
+| How to weight the split, allowed values are `name`, `filesize`, and `timings`.
+
+| `timings-type`
+| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose classname or filename) (default `autodetect`).
+
+| `show-counts`
+| Print test file or test class counts to stderr (default `false`).
+|===
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run
+            circleci tests run [flags]
+----
+
+*More information on using the `tests` command*:
+
+* xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[Guide to Test splitting and parallelism]
+* xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+
+=== Version
+
+Output version information.
+
+*Flags*
+
+* `--short` flag: print only the version string.
+
+*Example usage:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            circleci --version [flag]
+----
+
+== Global flags
+
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `--verbose`
+| Enable verbose logging output.
+
+| `--help`
+| Show help for a command.
+|===
+
+*Example usage for `--verbose`:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            circleci run [command] --verbose
+----
+
+
+*Example usage for `--help`:*
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            circleci run [command] --help
+----

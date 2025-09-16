@@ -65,7 +65,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 ** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
 
 [#get-api-v3-runner-request]
-===== Request
+==== Request
 
 [cols=5*, options="header"]
 |===
