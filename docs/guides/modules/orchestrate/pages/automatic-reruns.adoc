@@ -62,7 +62,8 @@ jobs:
   my-job:
     steps:
       - run: echo "Hello, world!"
-      - run: echo "This step will automatically rerun up to 3 times if it fails with a 10 second delay between attempts"
+      - run: 
+          command: echo "This step will automatically rerun up to 3 times if it fails with a 10 second delay between attempts"
           max_auto_reruns: 3
           auto_rerun_delay: 10s
 ----
