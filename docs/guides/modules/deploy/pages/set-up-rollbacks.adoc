@@ -46,7 +46,7 @@ The following steps guide you through setting up a custom rollback pipeline. Usi
 
 NOTE The following steps guide you through setting up a custom rollback pipeline. If you want details on how to *Rollback by workflow re-run*, see the <<rollback-by-workflow-re-run, Rollback by workflow re-run>> section at the end of this guide.
 
-=== Start the rollback pipeline guided setup
+=== Start the rollback pipeline setup
 
 . In the CircleCI dashboard, navigate to *Organization Home* from the sidebar.
 . Select the *Overview* link for your project.
@@ -55,7 +55,7 @@ NOTE The following steps guide you through setting up a custom rollback pipeline
 .Rollback options on project overview page
 image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on project overview page]
 
-=== Install the GitHub App
+=== Confirm GitHub App installation
 
 NOTE: To set up rollback pipelines, you must connect your organization to the xref:integration:github-apps-integration[CircleCI GitHub App].
 
