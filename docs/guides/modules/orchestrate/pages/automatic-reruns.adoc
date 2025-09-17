@@ -132,7 +132,6 @@ CircleCI monitors *step* completion status and automatically reruns a failed ste
 * The step status is "failed".
 * The `max_auto_reruns` value is specified for the step in the configuration.
 * The number of remaining rerun attempts is greater than zero, and less than or equal to the specified `max_auto_reruns` value.
-* The step is not part of a manual rerun.
 
 [#rerun-behavior]
 === Automatic workflow rerun behavior
