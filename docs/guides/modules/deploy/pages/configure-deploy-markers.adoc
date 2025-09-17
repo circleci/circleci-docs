@@ -41,7 +41,14 @@ jobs:
   deploy-my-service:
     executor: some-executor
     steps:
-      - run: circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
+      - run:
+          name: Plan deployment
+          command: |
+            circleci run release plan <deploy-name> \
+              --environment-name=<some-environment-name> \
+              --component-name=<some-component-name> \
+              --target-version=<some-version-name> \
+              --namespace=<some-namespace> 
 ----
 
 In this example, note the following flags and options:
@@ -205,7 +212,9 @@ jobs:
       - checkout
       - run:
           name: Plan deployment
-          command: circleci run release plan --target-version=<some-version-name>
+          command: |
+            circleci run release plan <deploy-name> \
+            --target-version=<some-version-name>
       - run:
           name: Perform deployment
           command: <your-deployment-logic>
@@ -278,7 +287,13 @@ jobs:
       ...
       (existing deployment commands)
       ...
-      - run: circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
+      - run: 
+          name: Log release
+          command: |
+            circleci run release log \
+              --environment-name=<some-environment-name> \
+              --component-name=<some-component-name> \
+              --target-version=<some-version-name>
 ----
 
 ** The `--environment-name` flag specifies the target environment. If the environment does not exist, it will be created.
