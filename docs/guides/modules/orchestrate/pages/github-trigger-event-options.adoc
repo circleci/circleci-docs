@@ -97,10 +97,6 @@ All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-even
 +
 **Usage example**: To trigger a pipeline on _PR opened or pushed to, default branch and tag pushes_, but ensure that it never runs if the event is associated with a PR that is marked as draft, use the following filter.
 +
-** The condition `pipeline.event.github.pull_request.draft == false` excludes draft PRs from triggering the workflow.
-** `pipeline.event.name == "api"` ensures that the workflow runs when triggered manually via the web app or API.
-** `pipeline.event.name == "push"` ensures that the workflow runs when triggered via push to the default branch.
-+
 [,yaml]
 ----
 workflows:
@@ -109,6 +105,11 @@ workflows:
       jobs:
         - myjob
 ----
++
+** The condition `pipeline.event.github.pull_request.draft == false` excludes draft PRs from triggering the workflow.
+** `pipeline.event.name == "api"` ensures that the workflow runs when triggered manually via the web app or API.
+** `pipeline.event.name == "push"` ensures that the workflow runs when triggered via push to the default branch.
+
 
 * `pipeline.event.github.pull_request.title`: the title of the pull request.
 * `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request.
