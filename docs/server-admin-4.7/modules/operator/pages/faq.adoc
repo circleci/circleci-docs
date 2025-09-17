@@ -8,7 +8,7 @@
 
 
 ## Does server v4.7 have a data retention policy?
-We do not currently support a defined data retention policy. Data is stored indefinitely on server.
+Data retention for MongoDB and PostgreSQL can be configured by following our guide xref:data-retention.adoc[Data Retention in Server]. 
 
 ## What control is granted over Nomad certificates?
 Full control of the certificates, all the way down to mTLS for Nomad.
