@@ -64,7 +64,7 @@ Break up large blocks of text where possible to help make it easier to consume. 
 
 === 1.2. Using tables
 
-This is the syntax for creating a table. This example has one heading row and one regular row. The table has three columns, and the third column is twice as wide as the first two columns. THe table has a title.
+This section shows how to create a table. This example has one heading row and one regular row. The table has three columns, and the third column is twice as wide as the first two columns. THe table has a title.
 
 .This is a table
 [cols="1,1,2"]
@@ -98,7 +98,7 @@ Whenever possible, the how-to guide should provide examples that cover link:http
 
 Use AsciiDoc source blocks for code examples, with a title where possible. Use comments in the code block to explain what is happening:
 
-.Add a line to exaplin what is in the code block
+.Add a line to explain what is in the code block
 [source,yaml]
 ----
 version: 2.1
@@ -137,7 +137,7 @@ Use a short section in bold at the start of the admonition to try to attract the
 If you need a longer admonition you can use a sidebar block:
 
 ****
-This is a longer admonition with an ordered list:
+This admonition is longer and includes an ordered list:
 
 . Step 1
 . Step 2
@@ -177,7 +177,7 @@ Content for Tab B
 --
 ====
 
-We often use tabs to show different options for a single task when there are multiple ways to achieve the same outcome, or, for example to show how to configure a thing in multiple execution environments.
+Use tabs to show options for a single task when there are multiple ways to achieve the same outcome, or to show how to configure a thing in multiple ways.
 
 == Conclusion
 

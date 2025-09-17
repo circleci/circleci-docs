@@ -4,7 +4,6 @@
 :experimental:
 
 ////
-Some notes on attributes:
 :page-platform: drives the platform badges that you see in the info bar under the page title.
 :page-description: is used for SEO and meta description. This should be a short description of the page content. Between 70 and 155 characters.
 :experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
@@ -34,7 +33,13 @@ image::guides:ROOT:arch.png[Diagram that includes flow from Repository and Apps 
 
 == Quickstart
 
-Some readers will want to read through a full overview page to get a deep understanding of how a feature works, the full set of options available to them, any gotchas or limitations that might apply to them, and to find troubleshooting information. Other readers will want to get started with the feature or task right away and then return to the docs as needed. For those that want to get stuck in right away, it is a good idea to provide a quickstart section to help get them up and running with the basics in just a few steps.
+Some readers will want to read through a full overview page to get a deep understanding of how a feature works, including:
+
+* The full set of options available to them.
+* Any gotchas or limitations that might apply to them.
+* Find troubleshooting information.
+
+Others will want to get started with the feature or task right away and then return to the docs as needed. For those that want to get stuck in right away, it is a good idea to provide a quickstart section.
 
 You have two options here:
 
@@ -52,7 +57,7 @@ You have two options here:
 
 Provide some detail on how the feature works 'under the hood' so readers can better conceptualise what they are doing. You might want to break this down into subsections.
 
-=== This is a subsection title
+=== Subsection title
 
 Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
 
@@ -62,7 +67,7 @@ Break up large blocks of text where possible to help make it easier to consume. 
 
 === Using tables
 
-This is the syntax for creating a table. This example has one heading row and one regular row. The table has three columns, and the third column is twice as wide as the first two columns. THe table has a title.
+This section shows how to create a table. This example has one heading row and one regular row. The table has three columns, and the third column is twice as wide as the first two columns. THe table has a title.
 
 .This is a table
 [cols="1,1,2"]
@@ -94,7 +99,7 @@ xref:guides:about-circleci:about-circleci.adoc#learn-more[About CircleCI]
 
 Use AsciiDoc source blocks for code examples, with a title where possible. Use comments in the code block to explain what is happening:
 
-.Add a line to exaplin what is in the code block
+.Add a line to explain what is in the code block
 [source,yaml]
 ----
 version: 2.1
@@ -133,7 +138,7 @@ Use a short section in bold at the start of the admonition to try to attract the
 If you need a longer admonition you can use a sidebar block:
 
 ****
-This is a longer admonition with an ordered list:
+This longer admonition includes an ordered list:
 
 . Step 1
 . Step 2
@@ -141,6 +146,26 @@ This is a longer admonition with an ordered list:
 ****
 
 For more information, see xref:docs-style:formatting.adoc#using-notes-tips-cautions-warnings[the CircleCI style guide].
+
+=== Use tabs to show different options
+
+Use tabs to show different options:
+
+[tabs]
+====
+Tab A::
++
+--
+Content for Tab A
+--
+Tab B::
++
+--
+Content for Tab B
+--
+====
+
+Use tabs to show options for a single task when there are multiple ways to achieve the same outcome, or to show how to configure a thing in multiple ways.
 
 == Limitations
 
