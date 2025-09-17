@@ -61,8 +61,6 @@ Custom webhook::
 --
 Setting up a custom webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make a cURL request can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Triggers overview] page.
 
-NOTE: Custom webhook triggers can only be associated with GitHub App pipelines. You can check if you have a GitHub App pipeline by going to menu:Project Settings[Project Setup] and checking if any of your pipelines have a `GitHub App` badge in the Config Source column. If needed, create a new pipeline by selecting btn:[Add pipeline].
-
 To add a custom webhook trigger, follow these steps:
 
 include::ROOT:partial$pipelines-and-triggers/custom-webhook-setup.adoc[]
