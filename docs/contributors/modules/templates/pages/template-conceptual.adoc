@@ -36,7 +36,7 @@ image::guides:ROOT:arch.png[Diagram that includes flow from Repository and Apps 
 Some readers will want to read through a full overview page to get a deep understanding of how a feature works, including:
 
 * The full set of options available to them.
-* Any gotchas or limitations that might apply to them.
+* Any limitations that might apply to them, or parts of the usage or setup process with the potential to catch them out.
 * Find troubleshooting information.
 
 Others will want to get started with the feature or task right away and then return to the docs as needed. For those that want to get stuck in right away, it is a good idea to provide a quickstart section.
@@ -51,7 +51,7 @@ You have two options here:
 . Provide some steps here.
 . To get started with this feature.
 . Include a step for every action.
-. Do not skip steps or assume readers will know, for example, which button to select
+. Do not skip steps or assume readers will know, for example, which button to select.
 
 == How the feature works
 
