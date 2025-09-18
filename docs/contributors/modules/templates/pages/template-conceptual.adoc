@@ -1,61 +1,63 @@
 = Page title
 :page-platform: Cloud, Server v4+
-:page-description: A short page description goes here
+:page-description: A short page description goes here max 155 characters.
 :experimental:
 
 ////
-Some notes on attributes
-
+:page-platform: drives the platform badges that you see in the info bar under the page title.
+:page-description: is used for SEO and meta description. This should be a short description of the page content. Between 70 and 155 characters.
 :experimental: allows access to asciidoc macros, more info here: https://docs.asciidoctor.org/asciidoc/latest/macros/ui-macros/
-
 ////
 
+****
 This template will help you create a new docs page to provide **conceptual** information about a feature or task in CircleCI. Content templates help you to:
 
 * Develop new content quickly
-* Ensure your page conforms to the style guide
+* Ensure your page conforms to the CircleCI docs style guide
 
-To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/templates/template-conceptual.adoc?plain=1[page template here]. There is additional detail in the comments.
+The file name for the new page should exactly match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/main/docs/contributors/modules/templates/pages/template-how-to.adoc[here].
+****
 
-The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
+The opening paragraph should be used to succinctly explain to the reader what value the concept or feature provides and what use cases it supports. If possible, display the use cases in a bullet list.
 
-Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.
-
-[#introduction]
 == Introduction
 
 Use the introduction to explain more about the feature/task, what it is for, why it is useful, and the wider context. Try to answer the following questions for the reader:
 
-* What’s in it for me?
-* How does this feature / task help me create more value?
+* Why should I be interested in this task?
+* How will this task help me create more value in my usage of CircleCI?
 
-You might want to include an image or diagram here to help illustrate the concept. The docs team can work with you to help create helpful image to support explanatory information:
+You might want to include an image or diagram here to help illustrate more complex concepts. The docs team can work with you to help create helpful image to support explanatory information:
 
 image::guides:ROOT:arch.png[Diagram that includes flow from Repository and Apps to CircleCI API, from CircleCI API to Orchestration, from Orchestration to Execution, and from Execution to Deployment.]
 
-[#quickstart]
 == Quickstart
 
-Some readers will want to read through a full overview page to get a deep understanding of how a feature works, the full set of options available to them, any gotchas or limitations that might apply to them, and to find troubleshooting information. Other readers will want to get started with the feature or task right away and then return to the docs as needed. For the latter it is a good idea to provide a quickstart section to help get the reader up and running with the basics in just a few steps.
+Some readers will want to read through a full overview page to get a deep understanding of how a feature works, including:
 
-Point readers to a how-to guide or tutorial in this quickstart section.
+* The full set of options available to them.
+* Any limitations that might apply to them, or parts of the usage or setup process with the potential to catch them out.
+* Find troubleshooting information.
 
-Alternatively, if a separate guide doesn't exist yet, provide some numbered steps here to get set up:
+Others will want to get started with the feature or task right away and then return to the docs as needed. For those that want to get stuck in right away, it is a good idea to provide a quickstart section.
+
+You have two options here:
+
+* Point readers to a how-to guide if available.
+* Provide minimal ordered steps to get set up:
 
 // The following will render as a numbered list
 
-. Provide some steps here
-. To get started with this feature
-. Inlcude a step for every action
-. Try not to skip steps or assume readers will know, for example, which button to click
+. Provide some steps here.
+. To get started with this feature.
+. Include a step for every action.
+. Do not skip steps or assume readers will know, for example, which button to select.
 
-[#how-the-feature-works]
 == How the feature works
 
-Consider providing some detail on how the feature works 'under the hood' so readers can better conceptualise what they are doing. You might want to break this down into subsections.
+Provide some detail on how the feature works 'under the hood' so readers can better conceptualise what they are doing. You might want to break this down into subsections.
 
-[#this-is-a-subsection-title]
-=== This is a subsection title
+=== Subsection title
 
 Break up large blocks of text where possible to help make it easier to consume. You can use bullet lists:
 
@@ -63,16 +65,14 @@ Break up large blocks of text where possible to help make it easier to consume. 
 * Item 2
 * Item 3
 
-[#using-tables]
 === Using tables
 
-This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
+This section shows how to create a table. This example has one heading row and one regular row. The table has three columns, and the third column is twice as wide as the first two columns. THe table has a title.
 
-[cols=3*, options="header"]
+.This is a table
+[cols="1,1,2"]
 |===
-|Header text column 1
-|Header text column 2
-|Header text column 3
+|Header text column 1 |Header text column 2 |Header text column 3
 
 |Text for row 1 column 1
 |Text for row 1 column 2
@@ -81,7 +81,6 @@ This is the syntax for creating a table. This example has one heading row and on
 
 For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
 
-[#links-and-cross-references]
 === Links and cross references
 
 To link out to content outside of the docs use a link:
@@ -92,24 +91,24 @@ To link to another page within the docs use a cross reference:
 
 xref:guides:about-circleci:about-circleci.adoc[About CircleCI]
 
-Notice the `#` at the end of the filename. You can place the subsection anchor there if you want to link to a subsection:
+You can place the subsection anchor using a hash symbol if you want to link to a subsection:
 
 xref:guides:about-circleci:about-circleci.adoc#learn-more[About CircleCI]
 
-[#code-examples]
 === Code examples
 
-Use asciidoc source blocks for code:
+Use AsciiDoc source blocks for code examples, with a title where possible. Use comments in the code block to explain what is happening:
 
+.Add a line to explain what is in the code block
 [source,yaml]
 ----
 version: 2.1
 jobs:
   build:
-    docker:
+    docker: # use a docker image to run the job
       - image: cimg/base:2021.04
     steps:
-      - checkout
+      - checkout # check out the code in the project directory
       - run:
           name: The First Step
           command: |
@@ -122,10 +121,11 @@ jobs:
             echo '^^^The files in your repo^^^'
 ----
 
-[#banners]
 === Banners
 
-In technical writing we use _admonitions_ to create blocks of content that stand out from the main flow of text. Outside the docs team we usually refer to these as _banners_. Currently we have the option to include notes, cautions, and warnings, as follows:
+Use _admonitions_ to create blocks of content that stand out from the main flow of text. Use admonitions sparingly as they can be distracting or lose emphasis if they appear too often. Currently we have the option to include tips notes, cautions, and warnings, as follows:
+
+TIP: **Need to add a tip?** This is how to do it
 
 NOTE: **Need to add a note?** This is how to do it
 
@@ -133,11 +133,60 @@ CAUTION: **Need to add a caution?** This is how to do it
 
 WARNING: **Need to add a warning?** This is how to do it
 
-We try to use a short section in bold at the start of the admonition to try to attract the readers attention.
+Use a short section in bold at the start of the admonition to try to attract the readers attention.
+
+If you need a longer admonition you can use a sidebar block:
+
+****
+This longer admonition includes an ordered list:
+
+. Step 1
+. Step 2
+. Step 3
+****
 
 For more information, see xref:docs-style:formatting.adoc#using-notes-tips-cautions-warnings[the CircleCI style guide].
 
-[#next-steps]
+=== Use tabs to show different options
+
+Use tabs to show different options:
+
+[tabs]
+====
+Tab A::
++
+--
+Content for Tab A
+--
+Tab B::
++
+--
+Content for Tab B
+--
+====
+
+Use tabs to show options for a single task when there are multiple ways to achieve the same outcome, or to show how to configure a thing in multiple ways.
+
+== Limitations
+
+If there are any limitations to the feature or task, list them here.
+
+== Troubleshooting
+
+If there is troubleshooting information for the feature or task, list it here. Use a question and answer format to make it easier to read. If a troubleshooting step applies to an error message, include the error message in the question to help people to find the solution.
+
+=== Error description
+
+Place the solution or debugging steps here after the error description.
+
+== Frequently asked questions
+
+If there are any frequently asked questions about the feature or task, list them here. Use a question and answer format to make it easier to read.
+
+=== Question?
+
+Place the answer here after the question.
+
 == Next steps
 
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
