@@ -1381,6 +1381,17 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | N
 | String
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+
+| `max_auto_reruns`
+| N
+| Integer
+| The maximum number of times to automatically rerun the step if it fails. Must be between `1` and `5`.
+
+| `auto_rerun_delay`
+| N
+| String
+| The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m".
+
 |===
 
 Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell.
@@ -1552,6 +1563,49 @@ A job can exit without failing by using `run: circleci-agent step halt`. However
         circleci-agent step halt
     fi
 ----
+
+'''
+
+==== Automatic step reruns
+
+The following attributes can be used to automatically rerun a step if it fails, and delay that rerun if required:
+
+[cols="2,1,1,2"]
+|===
+| Key | Required | Type | Description
+
+|`max_auto_reruns`
+| N
+| Integer
+| The maximum number of times to automatically rerun the step if it fails. Must be between `1` and `5`.
+
+| `auto_rerun_delay`
+| N
+| String
+| The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m". If you do not supply a delay, the rerun will start immediately after the step fails.
+|===
+
+Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
+
+You must configure the `command` key for the step, you cannot use the short form run step configuration, for example, the following is not supported for use with automatic reruns: `- run: echo "Hello, world!"`
+
+*Example:*
+
+.CircleCI job configured to automatically rerun a step up to 3 times if it fails with a 10 second delay between attempts
+[,yml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    steps:
+      - run:
+          command: echo "Hello, world!"
+          max_auto_reruns: 3
+          auto_rerun_delay: 10s
+----
+
+For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Automatic reruns] page.
 
 '''
 
