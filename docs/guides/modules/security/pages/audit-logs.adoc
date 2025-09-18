@@ -116,7 +116,8 @@ The complete template for the trust relationship is the following:
             "Action": "sts:AssumeRoleWithWebIdentity",
             "Condition": {
                 "StringEquals": {
-                    "oidc.circleci.com/org/<org-id>:aud": "<org-id>"
+                    "oidc.circleci.com/org/<org-id>:aud": "<org-id>",
+                    "oidc.circleci.com/org/<org-id>:sub": "org/<org-id>/file-streaming/audit-logs"
                 }
             }
         }
@@ -141,7 +142,6 @@ The minimum required access policy for the role is as follows:
             "Effect": "Allow",
             "Action": [
                 "s3:PutObject",
-                "s3:GetObject",
                 "s3:ListBucket"
             ],
             "Resource": [
