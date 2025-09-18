@@ -1,0 +1,130 @@
+= Agentic flaky test resolution
+:page-platform: Cloud
+:page-description: Learn about CircleCI agents and how they can automatically identify and fix flaky tests in your CI/CD pipelines.
+:experimental:
+
+CircleCI agents provide automated capabilities to identify and resolve common issues in your CI/CD pipelines. Agents can automatically detect flaky tests and generate fixes to help you ship code with confidence by reducing time spent debugging intermittent failures.
+
+== Introduction
+
+Flaky tests are one of the most frustrating challenges in continuous integration. These tests pass and fail inconsistently, creating uncertainty about code quality and slowing down development workflows. CircleCI agents address this problem by using artificial intelligence to analyze test patterns, identify root causes of flakiness, and propose validated solutions.
+
+The agent integrates seamlessly with your existing CircleCI workflows and GitHub repositories. When configured, it runs automatically on a schedule you define, continuously monitoring your test suite for signs of flakiness. When issues are detected, the agent generates potential fixes, validates them through multiple test runs, and creates pull requests with recommended changes.
+
+This automation helps development teams focus on building features rather than debugging test infrastructure, improving both productivity and confidence in your deployment pipeline.
+
+== Quickstart
+
+To get started with CircleCI agents for flaky test fixes, you need to complete several setup steps:
+
+. Obtain an API key from either Anthropic or OpenAI for the agent to process and generate fixes.
+. Ensure your CircleCI jobs store test results using the `store_test_results` step.
+. Navigate to the CircleCI web app and access your organization settings.
+. Install the CircleCI GitHub App in your GitHub organization.
+. Configure the agent with your preferred settings for run frequency and fix parameters.
+
+For a detailed walkthrough of each step, refer to the xref:guides:agents:setup-flaky-test-agent.adoc[Setting up CircleCI agents for flaky tests] guide.
+
+== How CircleCI agents work
+
+CircleCI agents operate through an automated analysis and remediation process that runs independently of your regular CI/CD workflows.
+
+=== Test analysis and detection
+
+The agent continuously monitors test results stored in CircleCI to identify patterns of flakiness. It analyzes historical test data to distinguish between genuine failures caused by code issues and intermittent failures that indicate flaky behavior. Tests are flagged as flaky when they show inconsistent pass/fail patterns across multiple runs with the same code.
+
+The detection process considers factors such as failure frequency, timing patterns, and error message consistency. This helps the agent focus on tests that genuinely exhibit flaky behavior rather than tests that fail consistently due to code problems.
+
+=== Solution generation
+
+When a flaky test is identified, the agent generates potential solutions based on common flaky test patterns and best practices. The agent can create multiple solution approaches for each test, allowing it to try different fixes if the first attempt does not resolve the issue.
+
+Solutions may include adding explicit waits, improving element selectors, handling race conditions, or stabilizing test data setup. The agent tailors its recommendations to the specific failure patterns observed in your test.
+
+=== Validation process
+
+Before proposing any changes, the agent validates potential solutions through multiple test runs in an isolated environment. This validation process ensures that proposed fixes actually resolve the flakiness without breaking existing functionality.
+
+The agent runs the modified test multiple times to confirm consistent passing behavior. Only solutions that demonstrate reliable improvement are included in pull requests. If validation fails or the agent lacks confidence in a solution, no pull request is created, but analysis logs remain available for review.
+
+=== Pull request creation
+
+When the agent successfully validates a solution, it automatically creates a pull request in your GitHub repository. Each pull request includes detailed information about the changes made and the reasoning behind them.
+
+Pull requests contain code diffs showing exactly what changes the agent recommends, along with logs that explain the agent's analysis and decision-making process. This transparency allows your team to understand and review the proposed fixes before merging.
+
+== Using tables
+
+The following table shows the configuration options available when setting up a CircleCI agent:
+
+.Agent configuration options
+[cols="1,2,1"]
+|===
+|Setting |Description |Default
+
+|Run frequency
+|How often the agent analyzes and fixes flaky tests
+|Weekly
+
+|Maximum tests to fix per run
+|Limits the number of tests the agent will attempt to fix in a single execution
+|5
+
+|Number of solutions to try per test
+|How many different fix approaches the agent will generate for each flaky test
+|3
+
+|Number of validation runs per test
+|How many times the agent runs a test to validate that a fix works consistently
+|10
+
+|Maximum concurrent open PRs
+|Limits the number of pull requests the agent can have open at one time
+|5
+|===
+
+== Limitations
+
+CircleCI agents have several current limitations that users should be aware of:
+
+**Configuration editing**: You cannot directly edit setup scripts or post-run commands once an agent task is created. To modify these settings, you must delete the existing agent task and create a new one.
+
+**OpenAI logs**: Agent logs are not currently available when using OpenAI as your model provider. This feature is available only when using Anthropic.
+
+**Platform support**: The agent currently runs only in Linux Machine VM environments with basic software installed by default.
+
+== Troubleshooting
+
+=== Unable to run verification tests
+
+If the agent cannot run verification tests, this typically indicates missing dependencies or environment configuration issues. The agent runs in a Linux Machine VM and may need additional software to execute your tests properly.
+
+Check the agent task logs in the CircleCI web app by expanding all log sections and searching for "attempt" to see what the agent tried to do. Use the setup script feature during agent configuration to install required dependencies or environment requirements.
+
+Consider adding a markdown file to your repository with instructions for running tests locally. The agent will automatically detect and use this information to better understand your test environment.
+
+=== Agent execution errors
+
+When the agent encounters execution errors, review the logs to understand what went wrong. Common issues include missing API keys, insufficient permissions, or problems accessing your repository.
+
+Verify that your API key is valid and has the necessary permissions for your chosen model provider. Ensure that the CircleCI GitHub App has been installed with appropriate access to your organization and repositories.
+
+== Frequently asked questions
+
+=== Does CircleCI use my data to train AI models?
+
+No, CircleCI does not store your source code or use it for training purposes. The agent processes your code temporarily to generate fixes but does not retain or share this information with model providers for training.
+
+=== How long are agent logs stored?
+
+Agent logs are stored in CircleCI and remain available for review through the web app. The specific retention period for these logs follows CircleCI's standard data retention policies.
+
+=== What if my OpenAI organization cannot be verified?
+
+If you cannot get your OpenAI organization verified, consider using Anthropic as your model provider instead. Alternatively, contact OpenAI support for assistance with the verification process, or reach out to CircleCI support for alternative options.
+
+== Next steps
+
+* xref:guides:agents:setup-flaky-test-agent.adoc[Set up CircleCI agents for flaky tests]
+* xref:guides:testing:collect-test-data.adoc[Learn about collecting test data]
+* xref:guides:insights:test-insights.adoc[Understanding test insights and flaky test detection]
