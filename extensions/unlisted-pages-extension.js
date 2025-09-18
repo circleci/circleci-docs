@@ -11,7 +11,7 @@ module.exports.register = function ({ config }) {
             .filter((page) => page.out)
             .reduce((collector, page) => {
               if ((page.pub.url in navEntriesByUrl) || page.pub.url === defaultUrl) return collector
-              logger.warn({ file: page.src, source: page.src.origin }, 'detected unlisted page')
+              logger.error({ file: page.src, source: page.src.origin }, 'detected unlisted page')
               return collector.concat(page)
             }, [])
           if (unlistedPages.length && addToNavigation) {
