@@ -1,10 +1,5 @@
 /* Simple DataTables integration with CircleCI theme */
 
-/* Simple DataTables wrapper styling */
-.dataTable-wrapper {
-  @apply mt-4 mb-6;
-}
-
 /* Add spacing above the top controls - this one we know works with lowercase */
 .datatable-top {
   @apply mt-6;
@@ -16,59 +11,6 @@
   @apply focus:outline-none focus:ring-2 focus:ring-vapor focus:border-transparent;
   @apply py-2 pl-3 pr-4 border border-vapor rounded-full text-sm;
   @apply w-64 max-w-xs;
-}
-
-/* Allow the browser's default search clear button */
-
-.dataTable-search input {
-  @apply px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm;
-  @apply w-full max-w-xs;
-}
-
-/* Length selector styling */
-.dataTable-dropdown {
-  @apply mb-4;
-}
-
-.dataTable-dropdown label {
-  @apply flex items-center gap-2 text-sm font-medium text-gray-700;
-}
-
-.dataTable-dropdown select {
-  @apply mx-2 px-2 py-1 border border-gray-300 rounded text-sm;
-}
-
-/* Info text styling */
-.dataTable-info {
-  @apply text-sm text-gray-600 py-2;
-}
-
-/* Pagination styling */
-.dataTable-pagination {
-  @apply py-2;
-}
-
-.dataTable-pagination ul {
-  @apply flex items-center gap-1;
-}
-
-.dataTable-pagination li {
-  @apply list-none;
-}
-
-.dataTable-pagination a {
-  @apply inline-block px-3 py-1 text-sm border border-gray-300 rounded cursor-pointer;
-  @apply hover:bg-gray-50 transition-colors no-underline;
-}
-
-.dataTable-pagination .active a {
-  @apply bg-blue-600 text-white border-blue-600;
-  @apply hover:bg-blue-700;
-}
-
-.dataTable-pagination .disabled a {
-  @apply opacity-50 cursor-not-allowed;
-  @apply hover:bg-transparent;
 }
 
 /* Table styling enhancements */
@@ -138,31 +80,3 @@ table.datatable tbody tr:hover {
   @apply bg-gray-50;
 }
 
-/* Responsive table styling */
-@media (max-width: 768px) {
-  .dataTable-wrapper .dataTable-search,
-  .dataTable-wrapper .dataTable-dropdown {
-    @apply text-center;
-  }
-
-  .dataTable-wrapper .dataTable-search input {
-    @apply w-full mt-2;
-  }
-}
-
-/* Loading state */
-.dataTable-loading {
-  @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
-  @apply bg-white border border-gray-300 rounded-lg px-4 py-2 shadow-lg;
-  @apply text-sm text-gray-600;
-}
-
-/* No data message */
-.dataTable-empty {
-  @apply text-center py-8 text-gray-500;
-}
-
-/* Integration with existing table styles */
-.table-scroll .dataTable-wrapper {
-  @apply overflow-x-auto;
-}
