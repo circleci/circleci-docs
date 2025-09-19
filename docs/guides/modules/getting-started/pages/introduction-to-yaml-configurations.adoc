@@ -209,32 +209,32 @@ Anchors and aliases work for scalar values, but to save maps or sequences, use `
 
 ```yaml
 default: &default
-  school: hogwarts
+  category: Tea
 
-harry:
+hojicha:
   <<: *default
-  house: gryffindor
+  price: 3.95
 
-draco:
+matcha_latte:
   <<: *default
-  house: slytherin
+  price: 5.95
 ```
 
 You can also merge multiple maps.
 
 ```yaml
-name: &harry_name
-  first_name: Harry
-  last_name: Potter
+name: &big_bird_alter_egos
+  ep_0246: Verybig Bird
+  ep_3161: Big Fish
 
-address: &harry_address
-  street: 4, Privet Drive
-  district: Little Whinging
-  county: Surrey
-  country: England
+address: &big_bird_address
+  street: 123½ Sesame Street
+  city: New York
+  state: New York
+  country: United States
 
-harry_data:
-  <<: [*harry_name, *harry_address]
+big_bird_data:
+  <<: [*big_bird_alter_egos, *big_bird_address]
 ```
 
 **Note**: As mentioned in https://github.com/yaml/yaml/issues/35[a YAML repository issue], it is possible to merge maps, but not sequences (also called arrays or lists). For a more complex example, see https://gist.github.com/bowsersenior/979804[this gist].

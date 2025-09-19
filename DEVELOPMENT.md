@@ -84,23 +84,11 @@ The site will be available at `http://localhost:3000` by default.
   npm run build:docs
   ```
 
-- **Fetch server branches** (for server admin docs). You will need to have local copies of all server-4* branches to be able to build the full docs site locally:
-  ```bash
-  npm run fetch-server-branches
-  ```
-
-- **Force fetch server branches** if you want to force all your server-4* branches to the state of the upstream "current" versions, use the --force flag. This is recommended if you have no local changes on any server-4* branch:
-
-  ```bash
-  npm run fetch-server-branches --force
-  ```
-
 
 ### Branch Strategy
 
 - `main` - Production-ready code
 - Feature branches - Named according to the feature being developed
-- Version branches - For version-specific documentation (e.g., `server-4.1`)
 
 ## Content Authoring
 
@@ -247,17 +235,6 @@ The UI uses Tailwind CSS for styling:
    Create new JavaScript files and import them in the main bundle
 
 ## Advanced Development Tasks
-
-## Updating server version branches
-
-When changes are made to the main branch to the build processes, the UI, or all components OTHER than server-administration, all server branches should be rebased once the changes are merged. The process for this is as follows:
-
-1. Update local main branch
-2. Checkout a server branch
-3. Run `git rebase main`
-4. Push those changes with `git push --force-with-lease origin server-4.1` - remember to use the correct server branch number.
-
-This should be done for every server-4* branch.
 
 ### Creating a New Component
 

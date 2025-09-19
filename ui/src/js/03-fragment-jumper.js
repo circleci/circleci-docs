@@ -3,7 +3,7 @@
 
   var article = document.querySelector('article.doc')
   if (!article) return
-  var toolbar = document.querySelector('.toolbar')
+  var toolbar = document.querySelector('header') || document.querySelector('.toolbar')
   var supportsScrollToOptions = 'scrollTo' in document.documentElement
 
   function decodeFragment (hash) {

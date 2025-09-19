@@ -28,7 +28,7 @@ If your CircleCI organization is integrated with GitHub only through the **GitHu
 .Trigger options during project creation
 image::guides:ROOT:triggers/create-project-run-on.png[Create a project trigger and access trigger options]
 
-If your CircleCI org is integrated via **GitHub OAuth** (see tip above), an org admin can install the CircleCI GitHub App to enable the full range of GitHub trigger events, as well as all other functionality enabled by the GitHub App. Installing the CircleCI GitHub App is a one-time action. For more information, see the xref:integration:github-integration.adoc#installing-github-app-alongside-github-oauth-app[GitHub OAuth integration overview].
+If your CircleCI org is integrated via **GitHub OAuth** (see tip above), an org admin can install the CircleCI GitHub App to enable the full range of GitHub trigger events, as well as all other functionality enabled by the GitHub App. Installing the CircleCI GitHub App is a one-time action. For more information, see the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
 
 == Supported trigger options
 
@@ -50,6 +50,7 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *PR opened or pushed to, default branch and tag pushes*: Trigger a pipeline on pushes to a branch for which there is an open Pull Request (PR), when a PR is opened, pushes to any tag, and pushes to the default branch. This applies also if the PR is re-opened after being closed.
 * *PR opened*: Trigger a pipeline when a PR is opened. This applies also if the PR has been opened in draft. It does not apply if the PR is closed and then re-opened. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=opened#pull_request[GitHub docs for the pull request opened event].
 * *PR merged*: Trigger a pipeline when a PR is merged only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request[GitHub docs for pull request closed].
+* *PR merged or closed*: Trigger a pipeline when a PR is merged or closed. When this option is selected, pipelines will run by default on the _base_ branch on the pull request, not on the _head_ branch.
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
 * *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
 * *Pushes to open non-draft PRs*: Trigger a pipeline when there is a push to a branch with an open PR that is not in draft mode.
@@ -93,8 +94,26 @@ All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-even
 * `pipeline.event.github.pull_request.base.ref`: the name of the *base* (or target) branch of the PR - that is the branch that will receive the changes.
 * `pipeline.event.github.pull_request.head.ref`: the name of the *head* branch of the PR - that is the branch containing the changes to be merged.
 * `pipeline.event.github.pull_request.draft`: a boolean value indicating whether the pull request is a draft.
++
+**Usage example**: To trigger a pipeline on _PR opened or pushed to, default branch and tag pushes_, but ensure that it never runs if the event is associated with a PR that is marked as draft, use the following filter.
++
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when: pipeline.event.name == "api" or pipeline.event.name == 'push' or  (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false))
+      jobs:
+        - myjob
+----
++
+** The condition `pipeline.event.github.pull_request.draft == false` excludes draft PRs from triggering the workflow.
+** `pipeline.event.name == "api"` ensures that the workflow runs when triggered manually via the web app or API.
+** `pipeline.event.name == "push"` ensures that the workflow runs when triggered via push to the default branch.
+
+
 * `pipeline.event.github.pull_request.title`: the title of the pull request.
 * `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request.
+* `pipeline.event.github.pull_request.merged`: a boolean that indicates whether the PR was merged or not. 
 
 These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[the GitHub docs].
 
