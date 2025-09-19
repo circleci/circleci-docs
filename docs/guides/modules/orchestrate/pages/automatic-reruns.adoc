@@ -122,6 +122,7 @@ When both automatic step reruns and automatic workflow reruns are configured tog
 === Automatic rerun criteria
 
 CircleCI monitors *workflow* completion status and automatically triggers a "rerun from failed" operation when the following criteria are met. This ensures that only failed jobs and their dependencies are rerun, while successful jobs from the original workflow are not repeated.
+
 * The workflow status is "failed".
 * The `max_auto_reruns` value is specified in the configuration.
 * The number of remaining rerun attempts is greater than zero, and less than or equal to the specified `max_auto_reruns` value.
@@ -129,6 +130,7 @@ CircleCI monitors *workflow* completion status and automatically triggers a "rer
 * The pipeline is not older than 90 days.
 
 CircleCI monitors *step* completion status and automatically reruns a failed step when the following criteria are met:
+
 * The step status is "failed".
 * The `max_auto_reruns` value is specified for the step in the configuration.
 * The number of remaining rerun attempts is greater than zero, and less than or equal to the specified `max_auto_reruns` value.
