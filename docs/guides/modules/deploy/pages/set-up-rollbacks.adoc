@@ -49,10 +49,9 @@ NOTE The following steps guide you through setting up a custom rollback pipeline
 === Start the rollback pipeline setup
 
 . In the CircleCI dashboard, navigate to *Organization Home* from the sidebar.
-. Select the *Overview* link for your project.
+. Select the menu:Overview[] link for your project.
 . In the menu that appears, select btn:[Create rollback pipeline].
-
-.Rollback options on project overview page
++
 image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on project overview page]
 
 === Confirm GitHub App installation
@@ -60,93 +59,64 @@ image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on proje
 NOTE: To set up rollback pipelines, you must connect your organization to the xref:integration:github-apps-integration[CircleCI GitHub App].
 
 - If the GitHub App is not installed in your organization, the guided setup process prompts you to install it.
-
++
 image::guides:ROOT:deploy/install-github-app.png[Install GitHub App]
 
 - If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
-
++
 image::guides:ROOT:deploy/github-app-installed.png[GitHub App installed]
 
 
 === Add the deploy markers
 
-. If it is not already expanded, expand the **Add deploy markers to exisiting pipeline** section.
+. Expand the **Add deploy markers to exisiting pipeline** section.
 . In the **Environment Name** dropdown, select or typethe xref:configure-deploy-markers#manage-environments[target environment].
 . In the **Component Name** dropdown, select or type the name of the component you want to rollback.
-
++
 image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
 
-[start=4]
 . The setup will auto-generate deploy marker commands based on your selections.
 . Copy the generated commands using the btn:[Copy] button and paste them into your existing config file where the deployment occurs.
-
++
 image::guides:ROOT:deploy/auto-generated-commands.png[Generated markers commands]
 
-[start=6]
-. Select btn:[I've updated my config] to proceed to the next step
-
+. Select btn:[I've updated my config] to proceed to the next step.
++
 image::guides:ROOT:deploy/config-updated-button.png[Copy markers commands]
 
-CircleCI creates a pipeline definition called `rollback-pipeline` and uses the selected repository to store your rollback configuration.
+=== Set Up Rollback Configuration
 
-
---------------------------------
-**Content updated up to here**
---------------------------------
-
-
-=== Review the generated configuration
-After creating the pipeline definition, the modal will display a pre-generated configuration file for performing rollbacks.
-
-. Review the generated YAML configuration template to ensure you understand the rollback pipeline.
-. Select btn:[Commit Config] to create this rollback configuration template in your repository. The configuration will be committed to a new branch called `rollback-pipeline-setup` in your selected repository.
-
-This config is a template rollback pipeline that includes the following:
-
-* *Parameters section*: Placeholder parameters that you can customize for your specific deployment needs
-* *Jobs section*: A basic rollback job structure with common rollback configuration setups included (but commented out)
-
-=== Create pull request
-After committing the configuration template, you can create a pull request from the CircleCI UI:
-
-. Select btn:[Create PR] to generate a pull request with your rollback configuration.
+. Select the repository you want to deploy from the "What repo are you deploying?" dropdown.
 +
-image::guides:ROOT:deploy/rollback-create-pr.png[Create PR for rollback pipeline]
-. Navigate to the pull request in your repository and modify the rollback configuration according to your specific deployment needs, for example, you can:
-** Set your own parameters and rollback logic.
-** Uncomment the included common rollback setups or write your own custom rollback implementation.
+image::guides:ROOT:deploy/select-deploy-repo.png[Select repository]
+
+. Review the example config file template. It shows how you will perform rollbacks and how to use deploy markers to track these rollbacks
+. Select btn:[Commit config & create Pull Request] to create this rollback configuration template in your repository. The setup will open a pull request in a new tab with the suggested changes.
++
+NOTE: The configuration will be committed to a new branch called `rollback-pipeline-setup` in the repository you selected .
++
+image::guides:ROOT:deploy/commit-config-button.png[Commit config button]
+
+. Alternatively, you can copy the suggested configuration into an existing or newly created rollback config file. Make sure the file is called `rollback.yml` and is located in the `.circleci` folder, for the system to detect and use this file. In this case,select btn:[I already have a rollback config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your rollback configuration.
++
+image::guides:ROOT:deploy/already-have-config-button.png[Already have config button]
+
+. You can manually navigate to the pull request by selecting btn:[View pull Request].
++
+image::guides:ROOT:deploy/view-pr-button.png[View pull request button]
+
+. In the pull request in your repository, modify the rollback configuration according to your specific deployment needs. For example: set your own parameters and rollback logic, uncomment the included common rollback setups or write your own custom rollback implementation.
 . Once you have customized the configuration, merge the pull request to complete the rollback setup.
 
-CAUTION: Until the pull request is merged, the rollback setup will not be complete and rollback functionality will not be available.
 
-==== Configuration tips
+=== Complete Rollback Setup
 
-When customizing your rollback configuration, you can use the following pipeline values to access rollback values:
+. After merging the pull request, return to the setup page in the CircleCI web app.
+. Select btn:[Setup rollback pipeline] to activate the rollback pipeline.
++
+image::guides:ROOT:deploy/setup-rollback-pipeline-button.png[Setup rollback pipeline button]
 
-* `pipeline.deploy.component_name`
-* `pipeline.deploy.environment_name`
-* `pipeline.deploy.target_version`
-* `pipeline.deploy.current_version`
-* `pipeline.deploy.namespace`
-* `pipeline.deploy.reason`
-
-==== Deploy markers for rollbacks
-You can use deploy markers with the `--rollback` flag to indicate rollback deployment:
-
-[source,bash]
-----
-circleci run release plan \
-          --environment-name=${ENVIRONMENT_NAME} \
-          --namespace=${NAMESPACE} \
-          --component-name=${COMPONENT_NAME} \
-          --target-version=${TARGET_VERSION} \
-          --rollback
-----
-
-You can also update the status of the rollback deployment as mentioned in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to reflect the state of the rollback accurately in the CircleCI UI.
-
-=== Access rollback functionality
-Once the pull request is merged, the rollback setup is complete. You can now use the rollback functionality in the CircleCI UI.
+You can now use the rollback functionality in the CircleCI UI.
 
 == Perform a rollback
 
@@ -170,7 +140,7 @@ The modal displays several configuration options with parameters auto-filled bas
 +
 The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific rollback operation.
 
-. *Execute*. Select btn:[Rollback] to trigger the rollback pipeline
+. Select btn:[Rollback] to trigger the rollback pipeline
 
 The rollback pipeline will now execute and perform the rollback operation according to your configuration.
 
@@ -187,16 +157,28 @@ To select a different pipeline for rollbacks, follow these steps:
 
 This process allows you to switch between different rollback pipeline configurations as needed for your project.
 
+== Configuration tips
+
+When customizing your rollback configuration, you can use the following pipeline values to access rollback values:
+
+* `pipeline.deploy.component_name`
+* `pipeline.deploy.environment_name`
+* `pipeline.deploy.target_version`
+* `pipeline.deploy.current_version`
+* `pipeline.deploy.namespace`
+* `pipeline.deploy.reason`
+
 == Example rollback pipeline configuration
 
 In this section you can find a full example of a rollback pipeline config. This example uses Helm to perform a rollback on AWS EKS and kubectl to validate its status.
 
-****
-*This template assumes the following:*
+[NOTE]
+====
+This template assumes the following:
 
 . Your deployment is annotated with a "version" label.
 . The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way
-****
+====
 
 .Example rollback pipeline configuration
 [source,yaml]
