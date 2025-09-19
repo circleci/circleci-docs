@@ -69,8 +69,8 @@ image::guides:ROOT:deploy/github-app-installed.png[GitHub App installed]
 
 === Add the deploy markers
 
-. Expand the **Add deploy markers to exisiting pipeline** section.
-. In the **Environment Name** dropdown, select or typethe xref:configure-deploy-markers#manage-environments[target environment].
+. Expand the **Add deploy markers to existing pipeline** section.
+. In the **Environment Name** dropdown, select or type the xref:configure-deploy-markers#manage-environments[target environment].
 . In the **Component Name** dropdown, select or type the name of the component you want to rollback.
 +
 image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
@@ -84,7 +84,7 @@ image::guides:ROOT:deploy/auto-generated-commands.png[Generated markers commands
 +
 image::guides:ROOT:deploy/config-updated-button.png[Copy markers commands]
 
-=== Set Up Rollback Configuration
+=== Set up rollback configuration
 
 . Select the repository you want to deploy from the "What repo are you deploying?" dropdown.
 +
@@ -109,7 +109,7 @@ image::guides:ROOT:deploy/view-pr-button.png[View pull request button]
 . Once you have customized the configuration, merge the pull request to complete the rollback setup.
 
 
-=== Complete Rollback Setup
+=== Complete rollback setup
 
 . After merging the pull request, return to the setup page in the CircleCI web app.
 . Select btn:[Setup rollback pipeline] to activate the rollback pipeline.
