@@ -1,123 +1,56 @@
 = Audit logs
-:page-platform: Cloud, Server v4+
-:page-description: "This document describes the ways CircleCI customers can access their audit logs."
+:page-platform: Cloud
+:page-description: "This page describes the ways CircleCI customers can request and stream audit logs."
+:experimental:
 
-[#overview]
-== Overview
-CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
+CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics. CircleCI offers functionalities to request and stream audit logs.
 
-If you have administrator permissions for your organization, you can access the audit log feature from the UI in the link:https://app.circleci.com/[web app]:
+== Request audit logs
 
-. Select **Organization Settings** in the web app sidebar.
-. Select **Security** from the menu.
-. Scroll down to the **Audit Log** section and specify a date range.
-. Select **Request audit logs** to download audit logs as a CSV file. Audit log fields with nested data contain JSON blobs.
+All CircleCI organizations can request audit logs. You need to be an organization admin to access the **Request audit logs** feature from the link:https://app.circleci.com/[CircleCI web app].
 
-NOTE: In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
+=== How to request audit logs
 
-Per link:https://circleci.com/privacy/#information[our data retention policy], audit logs can be retrieved for up to 12 months.
+. Navigate to menu:Organization Settings[Security].
+. Scroll down to the **Audit Logs** section.
+. Select the date range and then select btn:[Request audit logs].
 
-[#audit-log-events]
-== Audit log events
+image::guides:ROOT:request-audit-log.png[Request audit logs]
 
-The following list shows common and important events found in the audit log. This list is not comprehensive, and you may see additional action types logged that are not represented below. See `action` in the Field section below for the definition and format.
+The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested time frame.
 
-- ams.invitation.accepted
-- ams.invitation.created
-- ams.invitation.revoked
-- audit_log.download_url.generated
-- audit_log.requested
-- build.create
-- checkout-key.create
-- checkout-key.delete
-- checkout-key.delete-all
-- component.cancel_release
-- component.promote_release
-- context.create
-- context.delete
-- context.env_var.delete
-- context.env_var.store
-- context.group_add
-- context.group_remove
-- context.restriction.create
-- context.restriction.delete
-- context.secrets.accessed
-- deploy-keys.delete
-- group.delete
-- group.update
-- group_member.add
-- group_member.remove
-- orb.namespace.create
-- orb.orb.create
-- orb.publish.dev
-- orb.publish.release
-- orb.version.promote
-- org.contacts.updated
-- org.create
-- org.rename
-- org.workflows.deleted
-- org_member.remove
-- organization.settings.update
-- project.add
-- project.api_token.create
-- project.create
-- project.delete
-- project.env_var.copy
-- project.env_var.create
-- project.env_var.delete
-- project.follow
-- project.rollback
-- project.settings.update
-- project.setup
-- project.ssh_key.create
-- project.ssh_key.delete
-- project.stop_building
-- project.toggle-abusive
-- project.unfollow
-- project_group_role_grant.create
-- project_group_role_grant.update
-- release_integration.create
-- release_integration.delete
-- release_integration.token.create
-- release_integration.token.revoke
-- role_grant.delete
-- role_grant.update
-- schedule.create
-- schedule.delete
-- schedule.update
-- trigger.create
-- trigger.delete
-- trigger_event.create
-- webhook.create
-- webhook.delete
-- webhook.update
-- workflow.cancel
-- workflow.job.context.request
-- workflow.job.finish
-- workflow.job.scheduled
-- workflow.job.start
-- workflow.retry
-- workflow.schedule.start
-- workflow.start
+NOTE: In some situations, the internal system may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
-[#audit-log-fields]
-== Audit log fields
+Audit logs can be retrieved for up to 12 months. See link:https://circleci.com/privacy/#information[our data retention policy].
 
-- **`action`:** The action taken that created the event. The format is ASCII lowercase words, separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
-- **`actor`:** The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **`target`:** The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **`payload`:** A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
-- **`occurred_at`:** When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
-- **`metadata`:** A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
-- **`id`:** A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-- **`version`:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
-- **`scope`:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **`success`:** A flag to indicate if the action was successful.
-- **`request`:** If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+NOTE: Submitted dates are in UTC. To avoid issues arising from potential time zone differences, CircleCI adds extra time to the request. For example, if you request August 2 - August 5, the returned results will be in the range August 1 - August 6. The audit log request column is also displayed in UTC.
 
-== Request audit logs from the web app
+=== Request status
 
-All CircleCI customers can request audit logs from the web app. To have access to this feature, cloud customers must be organization admins.
+In the link:https://app.circleci.com/[CircleCI web app], a status will show the following information:
+
+- Time frame requested.
+- User who made the request.
+- Date request was made.
+- Expiry date of the request.
+- Request status.
+
+Statuses are updated once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
+
+Successful requests can be either of the following:
+
+- Active with a download link.
+- Active without any data (no download link).
+- Expired (no longer available to download).
+
+Once your request is successfully processed, select btn:[Download logs] to download the audit log as a CSV file. Successful requests are available to download for 30 days.
+
+NOTE: Audit log fields with nested data contain JSON blobs.
+
+image::guides:ROOT:audit-log-request.png[Audit log requests]
+
+
+=== Frequency limits
 
 Frequency limits for requests are as follows:
 
@@ -125,26 +58,268 @@ Frequency limits for requests are as follows:
 - All paid plans: 3 requests per day
 - Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year
 
-If your organization has reached the maximum amount of requests per 30 days, the audit log request feature will be disabled. If you hover over the disabled **Request audit logs** button, a tooltip will appear displaying the date when new requests can be made. Pending requests count toward the rate limit.
+If your organization has reached the maximum amount of requests per 30 days, the audit log request feature will be disabled.
 
-NOTE: CircleCI may update the quantity and request period in the future.
+If you hover over the disabled btn:[Request audit logs] button, a tooltip will appear displaying the date when new requests can be made. Pending requests count toward the rate limit.
 
-Navigate to **Organization Settings > Security** to view the Audit Log section. Select a date range from the dropdown, then click the **Request audit logs** button. The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested timeframe.
+== Stream audit logs
 
-NOTE: Submitted dates are in UTC. To avoid issues arising from potential time zone differences, CircleCI adds extra time to the request. For example, if you request August 2 - August 5, the returned results will be in the range August 1 - August 6. The audit log request column is also displayed in UTC.
+TIP: If you choose to set up audit log streaming, you can still <<request-audit-logs,request audit logs>>.
 
-=== Audit log status
+Set up audit log streaming direct to your own AWS S3 bucket.
 
-In the UI, a status request will show the following information:
+Audit log streaming provides the following benefits to your organization:
 
-- Timeframe requested
-- User who made the request
-- Date request was made
-- Expiry date of the request
-- Request status (success, failed, requested)
+* Maintain comprehensive security visibility.
+* Meet compliance requirements.
+* Integrate CircleCI audit data with your existing security monitoring infrastructure.
 
-Successful requests can be active with a download link, active without any data (no download link), or expired (no longer available to download). Successful requests can be downloaded for 30 days.
+=== Set up audit log streaming
 
-image::guides:ROOT:audit-log-request.png[Audit log requests]
+Before setting up audit log streaming, ensure you have the following:
 
-Statuses are updated once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
+* CircleCI Scale Plan (the feature is not available to Free or Performance customers)
+* AWS account with permissions to create and manage S3 buckets
+* IAM role or user with appropriate S3 write permissions
+* Network configuration to allow secure connections between CircleCI and AWS
+
+The following steps guide you through setting up your S3 bucket, AWS authentication, audit log configuration, and verification.
+
+
+==== 1. Implement AWS prerequisites
+
+The following steps describe how to set up AWS prerequisites:
+
+. Create an S3 bucket in your AWS account to store the audit logs.
++
+You can also specify an optional folder or prefix (for example, `my-bucket/audit-logs`).
++
+Take note of the AWS region where you created the S3 bucket (for example,`us-east-1`).
+
+. Create an IAM role that CircleCI can assume. This role requires two key policies:
+.. Trust policy
++
+This policy allows CircleCI's service to assume the role. The principal ARN in this policy is a template that you must configure with your specific AWS account and CircleCI organization IDs.
++
+The complete template for the trust relationship is the following:
++
+[source,json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::<aws-account-id>:oidc-provider/oidc.circleci.com/org/<org-id>"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "oidc.circleci.com/org/<org-id>:aud": "<org-id>",
+                    "oidc.circleci.com/org/<org-id>:sub": "org/<org-id>/file-streaming/audit-logs"
+                }
+            }
+        }
+    ]
+}
+----
++
+Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique CircleCI organization ID (found on the menu:Organization Settings[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
+
+.. Permissions policy
++
+This policy grants the role permission to write objects to your S3 bucket (and any specified prefix).
++
+The minimum required access policy for the role is as follows:
++
+[source,json]
+----
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:ListBucket"
+            ],
+            "Resource": [
+                "arn:aws:s3:::<bucket-name>/*",
+                "arn:aws:s3:::<bucket-name>"
+            ]
+        }
+    ]
+}
+----
++
+Replace `<bucket-name>` with the name of your S3 bucket.
+
+. Set up an OIDC Identity Provider to allow CircleCI's OIDC tokens to be used for authentication.
+.. Navigate to the IAM Console in AWS.
+.. In the left navigation menu, select *Identity Providers*.
+.. Select *Add provider*.
+.. Choose *OpenID Connect* as the provider type.
+.. In the *Provider URL* field, specify `\https://oidc.circleci.com/org/<org-id>` (replace `<org-id>` with your CircleCI organization ID).
+.. In the *Audience* field, enter your organization ID.
+
+
+==== 2. Configure audit log streaming
+
+. Go to the link:https://app.circleci.com/[CircleCI web app].
+. Navigate to menu:Organization Settings[Security].
+. Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
++
+image::guides:ROOT:stream-audit-logs.png[Stream audit logs section]
+
+. Confirm that you have completed the prerequisites by selecting btn:[Continue].
++
+image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
+
+. In the configuration dialog, specify the following fields:
+.. **Region**: The AWS region where your S3 bucket is located.
+.. **S3 Bucket Name**: The name of the S3 bucket where audit logs will be streamed.
+.. **Role ARN**: The Amazon Resource Name (ARN) for the IAM role that CircleCI will use to access your S3 bucket.
+
++
+image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
+
+. Select btn:[Connect CircleCI to AWS].
+. When the connection to your S3 bucket is successfully validated, image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected** appears under **Status**.
++
+image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
+
+
+==== 3. Verify and test
+
+After setting up audit log streaming follow these steps to validate the setup was successful:
+
+. Verify successful streaming by checking the **Last delivery** timestamp.
+. Confirm logs are appearing in your designated S3 bucket.
+. Test integrations with your Security Information and Event Management (SIEM) solution or security monitoring tools.
+. Set up appropriate alerts for connection failures or delivery interruptions.
+
+
+=== Manage active streams
+
+Once configured, you can view and manage audit log streams. The following options are available to you in the CircleCI web app:
+
+- Pause streaming: Use the toggle switch under **Actions** to temporarily disable log streaming. **Status** will change to **Disabled**.
+- Monitor delivery: Check the **Last delivery** field to verify recent successful deliveries.
+- Delete configuration: Select the trash icon under **Actions** to remove the streaming setup. In the popup warning, select btn:[Delete] to confirm.
+- Restart streaming: Toggle the switch to resume paused streams.
+
+image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
+
+
+=== Limitations
+
+- Audit log streaming is only available to CircleCI Scale Plan customers. Free and Performance Plan customers do not have access to this feature.
+
+- Currently, streaming is supported for a single S3 bucket per organization.
+
+=== Troubleshooting
+
+* **Configuration Issues**: Most problems are related to AWS IAM permissions or S3 bucket configuration.
+* **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming once issues are resolved.
+* **Missing Logs**: Ensure that your S3 bucket policies allow write access from CircleCI's service accounts.
+
+== Audit log events
+
+The following list shows common and important events found in the audit log. This list is not comprehensive, and you may see additional action types logged that are not represented below. See `action` in the Field section below for the definition and format.
+
+- `ams.invitation.accepted`
+- `ams.invitation.created`
+- `ams.invitation.revoked`
+- `audit_log.download_url.generated`
+- `audit_log.requested`
+- `build.create`
+- `checkout-key.create`
+- `checkout-key.delete`
+- `checkout-key.delete-all`
+- `component.cancel_release`
+- `component.promote_release`
+- `context.create`
+- `context.delete`
+- `context.env_var.delete`
+- `context.env_var.store`
+- `context.group_add`
+- `context.group_remove`
+- `context.restriction.create`
+- `context.restriction.delete`
+- `context.secrets.accessed`
+- `deploy-keys.delete`
+- `group.delete`
+- `group.update`
+- `group_member.add`
+- `group_member.remove`
+- `orb.namespace.create`
+- `orb.orb.create`
+- `orb.publish.dev`
+- `orb.publish.release`
+- `orb.version.promote`
+- `org.contacts.updated`
+- `org.create`
+- `org.rename`
+- `org.workflows.deleted`
+- `org_member.remove`
+- `organization.settings.update`
+- `project.add`
+- `project.api_token.create`
+- `project.create`
+- `project.delete`
+- `project.env_var.copy`
+- `project.env_var.create`
+- `project.env_var.delete`
+- `project.follow`
+- `project.rollback`
+- `project.settings.update`
+- `project.setup`
+- `project.ssh_key.create`
+- `project.ssh_key.delete`
+- `project.stop_building`
+- `project.toggle-abusive`
+- `project.unfollow`
+- `project_group_role_grant.create`
+- `project_group_role_grant-update`
+- `release_integration-create`
+- `release_integration-delete`
+- `release_integration-token-create`
+- `release_integration-token-revoke`
+- `role_grant-delete`
+- `role_grant-update`
+- `schedule-create`
+- `schedule-delete`
+- `schedule-update`
+- `trigger-create`
+- `trigger-delete`
+- `trigger_event-create`
+- `webhook-create`
+- `webhook-delete`
+- `webhook-update`
+- `workflow-cancel`
+- `workflow-job-context-request`
+- `workflow-job-finish`
+- `workflow-job-scheduled`
+- `workflow-job-start`
+- `workflow-retry`
+- `workflow-schedule-start`
+- `workflow-start`
+
+== Audit log fields
+
+[cols="1,4", options="header"]
+|===
+| Field | Description
+| `action` | The action taken that created the event. The format is ASCII lowercase words, separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
+| `actor` | The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `target` | The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `payload` | A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
+| `occurred_at` | When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
+| `metadata` | A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
+| `id` | A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
+| `version` | Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
+| `scope` | If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `success` | A flag to indicate if the action was successful.
+| `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+|===

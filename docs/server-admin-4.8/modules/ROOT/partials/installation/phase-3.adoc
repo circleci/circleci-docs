@@ -220,7 +220,7 @@ kubectl create secret generic nomad-autoscaler-secret \
 
 
 [#iam-policy-for-nomad-autoscaler]
-===== IAM policy for Nomad Autoscaler
+==== IAM policy for Nomad Autoscaler
 
 [source,json]
 ----
