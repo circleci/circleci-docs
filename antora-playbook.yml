@@ -65,6 +65,3 @@ urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
   html_extension_style: indexify
-antora:
-  extensions:
-  - ./extensions/unlisted-pages-extension.js

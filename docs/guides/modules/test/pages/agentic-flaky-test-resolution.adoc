@@ -23,8 +23,6 @@ To get started with CircleCI agents for flaky test fixes, you need to complete s
 . Install the CircleCI GitHub App in your GitHub organization.
 . Configure the agent with your preferred settings for run frequency and fix parameters.
 
-For a detailed walkthrough of each step, refer to the xref:guides:agents:setup-flaky-test-agent.adoc[Setting up CircleCI agents for flaky tests] guide.
-
 == How CircleCI agents work
 
 CircleCI agents operate through an automated analysis and remediation process that runs independently of your regular CI/CD workflows.
@@ -124,7 +122,3 @@ Agent logs are stored in CircleCI and remain available for review through the we
 If you cannot get your OpenAI organization verified, consider using Anthropic as your model provider instead. Alternatively, contact OpenAI support for assistance with the verification process, or reach out to CircleCI support for alternative options.
 
 == Next steps
-
-* xref:guides:agents:setup-flaky-test-agent.adoc[Set up CircleCI agents for flaky tests]
-* xref:guides:testing:collect-test-data.adoc[Learn about collecting test data]
-* xref:guides:insights:test-insights.adoc[Understanding test insights and flaky test detection]
