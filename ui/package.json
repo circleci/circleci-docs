@@ -74,6 +74,7 @@
     "@fontsource/ibm-plex-mono": "^5.2.5",
     "@fontsource/inter": "^5.2.5",
     "@tailwindcss/postcss": "^4.1.4",
+    "simple-datatables": "^9.2.2",
     "tailwindcss": "^4.1.4"
   }
 }

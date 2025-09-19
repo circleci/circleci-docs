@@ -1,4 +1,6 @@
-[cols="2,1,1,2,1,1", options="header"]
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
 | Source
@@ -471,3 +473,4 @@ a|  * GitLab: push, merge request
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 
 |===
+--

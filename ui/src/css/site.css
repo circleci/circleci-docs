@@ -10,6 +10,7 @@
 @import "highlight.css";
 @import "print.css";
 @import "tabs.css";
+@import "datatables.css";
 
 @source inline("translate-x-0");
 @source inline("h-dvh");
