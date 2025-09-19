@@ -116,7 +116,7 @@ Refer to the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api
 [#passing-parameters-when-triggering-pipelines-using-the-circleci-web-app]
 === Passing parameters when triggering pipelines using the CircleCI web app
 
-In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
+In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
 
 . Use the project filter to select the desired project.
 . Use the branch filter to select the branch on which you want to run the new pipeline.
@@ -140,7 +140,7 @@ The remaining configuration is processed, element parameters are resolved, type-
 [#the-scope-of-parameters-in-configuration]
 == The scope of parameters in configuration
 
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
+Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. Access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
 
 [#element-parameter-scope]
 === Element parameter scope
