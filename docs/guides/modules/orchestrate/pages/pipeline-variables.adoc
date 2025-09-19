@@ -174,10 +174,10 @@ workflows:
   my-workflow:
     jobs:
       - daily-message:
-         message: echo << parameters.message >>
+         message: << parameters.message >>
 ```
 
-Even though the `print` command is called from the `cat-file` job, the file parameter would not be in scope inside the print job. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known. Running this would throw a pipeline error of `Arguments referenced without declared parameters: message`.
+Even though the `print` command is called from the `daily-message` job, the `message` parameter would not be in scope inside `my-workflow`. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known. Running this would throw a pipeline error of `Arguments referenced without declared parameters: parameters.message`.
 
 [#pipeline-value-scope]
 === Pipeline value scope
