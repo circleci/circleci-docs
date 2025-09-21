@@ -4,3 +4,11 @@
   events:
   - type: PUSH
   fail_on_prepare_env_warning: true
+  actions:
+  - action: gradle build
+    type: BUILD
+    docker_image_name: library/gradle
+    docker_image_tag: 8.12
+    execute_commands:
+    - gradle build
+    shell: BASH
