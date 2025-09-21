@@ -11,7 +11,7 @@
     docker_image_tag: 8.12
     execute_commands:
     - gradle build
-    execute_every_command: true
+    shell: BASH
   - action: go build
     type: BUILD
     docker_image_name: library/golang
@@ -30,7 +30,8 @@
     - mvn clean install
     cached_dirs:
     - /root/.m2/repository
-    shell: BASH
+    unit_tests_suite: my_first_suite
+    unit_tests_path: /api-v1/
   - action: npm test
     type: BUILD
     docker_image_name: library/node
