@@ -31,3 +31,12 @@
     cached_dirs:
     - /root/.m2/repository
     shell: BASH
+  - action: npm test
+    type: BUILD
+    docker_image_name: library/node
+    docker_image_tag: 22
+    execute_commands:
+    - "# yarn install"
+    - npm install
+    - npm test
+    shell: BASH
