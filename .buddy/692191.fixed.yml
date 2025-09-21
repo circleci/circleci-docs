@@ -1,0 +1,4 @@
+- pipeline: 692191
+  refs:
+  - refs/heads/main
+  fail_on_prepare_env_warning: true
