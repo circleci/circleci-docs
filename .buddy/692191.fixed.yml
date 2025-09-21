@@ -12,3 +12,13 @@
     execute_commands:
     - gradle build
     shell: BASH
+  - action: go build
+    type: BUILD
+    docker_image_name: library/golang
+    docker_image_tag: 1.24
+    execute_commands:
+    - go test
+    - go build
+    volume_mappings:
+    - /:/src/github.com/Dustinturner44/circleci-docs
+    shell: BASH
