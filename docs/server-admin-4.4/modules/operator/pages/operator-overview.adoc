@@ -1,0 +1,78 @@
+= Operator overview
+:page-noindex: true
+:page-platform: Server v4.4, Server Admin
+:page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI server v4.4.
+:icons: font
+:toc: macro
+:toc-title:
+
+This guide contains information for CircleCI server operators, or those responsible for ensuring CircleCI server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the xref:overview:circleci-server-overview.adoc[CircleCI server v4.4 overview].
+
+CircleCI server schedules CI/CD jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. The Nomad Server (control plane) runs inside the Kubernetes cluster, while Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane and Kong.
+
+CircleCI server can run Docker jobs on the Nomad clients, and also in dedicated virtual machines for remote Docker jobs.
+
+Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
+
+Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
+
+[#execution-environment]
+== Execution environment
+
+CircleCI server v4.4 uses Nomad as the primary job scheduler. Refer to our xref:introduction-to-nomad-cluster-operation.adoc[Introduction to Nomad Cluster Operation] to learn more about the job scheduler and how to perform basic client and cluster operations.
+
+CircleCI Nomad clients automatically provision compute resources according to the executors configured for each job in a project’s `.circleci/config.yml` file.
+
+[#nomad-clients]
+=== Nomad clients
+Nomad Clients run without storing state, allowing you to increase or decrease the number of containers as needed.
+
+If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the xref:reference:ROOT:configuration-reference.adoc#resourceclass[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
+
+See the link:https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options for optimizing the resource usage of Nomad clients.
+
+NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to request use of larger machines for Nomad clients.
+
+For more information on Nomad port requirements, see the
+xref:installation:hardening-your-cluster.adoc[Hardening Your Cluster]
+guide.
+
+[#github]
+=== GitHub
+CircleCI uses GitHub or GitHub Enterprise as an Identity Provider. GitHub Enterprise can, in turn, use
+https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM] to manage users from an external Identity Provider.
+
+NOTE: CircleCI does not support changing the URL or backend GitHub instance after it has been set up.
+
+The following table describes the ports used on machines running GitHub to communicate with the services and Nomad client instances.
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Source
+| Ports
+| Use
+
+| Services
+| 22
+| Git access
+
+| Services
+| 80 or 443
+| API access
+
+| Nomad Client
+| 22
+| Git access
+
+| Nomad Client
+| 80 or 443
+| API access
+|===
+
+ifndef::pdf[]
+[#next-steps]
+== Next steps
+
+* Read the <<introduction-to-nomad-cluster-operation#,Introduction to Nomad Cluster Operation>>.
+endif::[]

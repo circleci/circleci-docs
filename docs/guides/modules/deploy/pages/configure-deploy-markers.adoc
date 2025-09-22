@@ -27,7 +27,9 @@ To create a deployment marker, you will update your CircleCI configuration file.
 
 You will add commands to plan a deploy and then update its status based on the outcome of your deployment script.
 
-NOTE: The `circleci run release` commands are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands.
+NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
+
+CAUTION: We recommend configuring `circleci run release plan` and `circleci run release update` in the same job. If you configure the these commands in _different_ jobs, you must ensure any reruns are made using the btn:[Rerun workflow from start] option, *not* btn:[Rerun workflow from failed]. This is because rerunning from _failed_ in this scenario will cause subsequent update operations to fail.
 
 === 1.1. Plan a deploy
 
@@ -39,7 +41,14 @@ jobs:
   deploy-my-service:
     executor: some-executor
     steps:
-      - run: circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
+      - run:
+          name: Plan deployment
+          command: |
+            circleci run release plan <deploy-name> \
+              --environment-name=<some-environment-name> \
+              --component-name=<some-component-name> \
+              --target-version=<some-version-name> \
+              --namespace=<some-namespace>
 ----
 
 In this example, note the following flags and options:
@@ -75,6 +84,8 @@ This configuration would yield a value with the following format `1.0.28853-ffdb
 This configuration would yield a value with the following format `12345`.
 
 === 1.2. Update the deploy status to running
+
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
 
 After deploying your application, you can update the status of the deployment to `RUNNING` by running the `circleci run release update` command in a new step.
 
@@ -201,7 +212,9 @@ jobs:
       - checkout
       - run:
           name: Plan deployment
-          command: circleci run release plan --target-version=<some-version-name>
+          command: |
+            circleci run release plan <deploy-name> \
+              --target-version=<some-version-name>
       - run:
           name: Perform deployment
           command: <your-deployment-logic>
@@ -274,7 +287,13 @@ jobs:
       ...
       (existing deployment commands)
       ...
-      - run: circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
+      - run:
+          name: Log release
+          command: |
+            circleci run release log \
+              --environment-name=<some-environment-name> \
+              --component-name=<some-component-name> \
+              --target-version=<some-version-name>
 ----
 
 ** The `--environment-name` flag specifies the target environment. If the environment does not exist, it will be created.

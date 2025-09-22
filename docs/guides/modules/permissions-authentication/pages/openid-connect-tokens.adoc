@@ -216,7 +216,7 @@ workflows:
 You can take advantage of the format of the claims in CircleCI's <<format-of-the-openid-connect-id-token,OIDC token>> to limit what your CircleCI jobs can do in AWS.
 
 [#limit-role-access-based-on-project]
-===== Limit role access based on project
+=== Limit role access based on project
 
 If certain projects should only be able to access certain AWS resources, you can restrict your IAM role so that only CircleCI jobs in a specific project can assume that role.
 
@@ -235,7 +235,7 @@ To do this, edit your IAM role's trust policy so that only an OIDC token from yo
 This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] to match the sub claim of CircleCI's OIDC token in your chosen project. Now, jobs in your other projects cannot assume this role.
 
 [#limit-role-access-based-on-branch]
-===== Limit role access based on branch
+=== Limit role access based on branch
 
 You can also restrict access to specific branches. The following is an example of a trust policy that restricts the `AssumeRoleWithWebIdentity` action to any project pipelines running only on the `main` branch in the `my-org` GitHub organization and the CircleCI organization with the ID: `organization_id`. Note that the `sub` claim uses the `$CIRCLE_OIDC_TOKEN_V2` format.
 

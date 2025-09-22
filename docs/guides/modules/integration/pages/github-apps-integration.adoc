@@ -3,18 +3,14 @@
 :page-description: Learn how to integrate CircleCI with GitHub using GitHub Apps.
 :experimental:
 
-If your CircleCI organization is authenticated with GitHub through the **GitHub App**, the content on this page is for you.
+If your CircleCI organization is integrated with GitHub through the **CircleCI GitHub App**, the content on this page is for you.
 
-include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+****
+The **CircleCI GitHub App** is an add-on integration. All organizations that have `/github/` or `/circleci/` in the URL can install the GitHub App, including xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[those already integrated through the GitHub OAuth app].
+To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections].
+****
 
-This page walks you through integrating a GitHub project with CircleCI. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
-
-The following limits are currently in place for GitHub App integrations:
-
-- Each user can create up to three organizations.
-- Each organization under a Free Plan can have up to 10 projects.
-
-If you need more organizations or projects, consider upgrading to a xref:plans-pricing:plan-overview.adoc[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team]. If you need to delete an organization, link:https://support.circleci.com/hc/en-us/articles/13006651761307-How-to-Delete-an-Organization[contact our Support team].
+This page walks you through integrating a GitHub project with CircleCI through the CircleCI GitHub App integration. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
 
 [#sign-up]
 == Steps to integrate GitHub projects with CircleCI
@@ -36,7 +32,7 @@ NOTE: If you are new to CircleCI, you may wish to get started with our xref:gett
 
 A GitHub org with the CircleCI GitHub App installed can only be integrated with one CircleCI organization.
 
-If you attempt to integrate a GitHub org with the CircleCI GitHub App installed with a second CircleCI organization, you will find yourself on a GitHub App integration settings page when attempting to create a project.
+In this scenario, attempting to integrate with a second CircleCI organization will redirect you to a GitHub App integration settings page when creating a project. If you are not sure what other CircleCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[here].
 
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
 
@@ -121,29 +117,33 @@ A subset of built-in environment variables are not available in GitHub-based pro
 [#Moving-from-github-oauth-app-to-github-app]
 == Moving from the GitHub OAuth app integration to the GitHub App integration
 
-CircleCI's GitHub App integration provides fine-grained permissions, uses short-lived tokens, and gives you more control over which repositories CircleCI has access to.  The CircleCI GitHub App also enables the following functions:
+Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI’s GitHub App, consider the following:
 
-* xref:orchestrate:custom-webhooks.adoc[Custom webhooks]
-* link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI's config suggestions bot]
-* The ability to use xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[multiple configuration files within one project]
+* If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[this guide].
+* If the motivation is to **completely remove the OAuth app integration** for security, compliance, or other reasons, follow the steps below.
 
-You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
+[#Steps-to-migrate-to-an-organization-without-default-GitHub-OAuth-integration]
+=== Steps to migrate to an organization without default GitHub OAuth integration
 
-Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI's GitHub App, consider the following:
+The following steps guide you through migrating you organization as follows:
 
-* If the motivation for moving is to leverage new functionality that is only available to the GitHub App integration, consider using your existing organization and installing the GitHub App alongside your OAuth app integration as described in our link:https://discuss.circleci.com/t/product-update-using-github-app-functionality-in-a-github-oauth-app-organization/52204[community forum].
-* If the motivation is to completely remove the OAuth app, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.  If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
+* *From* an organization integrated with GitHub through the OAuth integration by default (identifiable by `/github/` or `/gh/` in the URL).
+* *To* an organization that does not have a default OAuth integration with GitHub (identifiable by `/circleci/` in the URL).
 
-If you would like to switch from the OAuth app integration to the GitHub App integration, follow these steps:
-
-CAUTION: The following steps include creating a new org. If you need to transfer private orbs or self-hosted runner resource classes to your new org, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.
+[CAUTION]
+====
+* You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
+* Before proceeding, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.
+* The following steps include *creating a new org*. If you need to transfer private orbs or self-hosted runner resource classes to your new org, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.
+* If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
+====
 
 . From your existing CircleCI organization in the CircleCI web app, select the organization dropdown in the top-left corner.
 . At the bottom of the drop-down, select btn:[Create New Organization].
 . On the "Connect your code" page, select btn:[Connect] next to "GitHub".
 . You will be redirected to GitHub to install the CircleCI GitHub App into your GitHub organization.
 +
-NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration.
+NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration, as long as your original CirlceCI organization is not already connected to it.
 . Follow the instructions to create a project that is connected to one of your GitHub repositories.
 . If you are on a **paid** pricing plan:
 .. Navigate back to the organization that is connected to the GitHub OAuth app
@@ -169,11 +169,11 @@ NOTE: Data from xref:insights:insights.adoc[Insights] and historical pipeline ru
 
 If one of these pieces of functionality is especially critical to you, link:https://docs.google.com/forms/d/e/1FAIpQLSfnYhFLjmZ0OP8goemexAvgHDPJqgHyDF1QiIl2HdPktTKvlQ/viewform[tell us why].
 
-The following sections are features of CircleCI which are not currently supported. These features are planned for future releases.
+The following sections are features of CircleCI which are not yet supported when using the GitHub App integration. These features are planned for future releases.
 
 [#restrict-a-context-to-a-security-group]
 === Restrict a context to a security group
-The ability to xref:security:contexts.adoc#security-group-restrictions[restrict a context to a security group] is not supported for GitHub App projects.
+The ability to xref:security:contexts.adoc#security-group-restrictions[restrict a context to a security group] is not yet supported for GitHub App projects.
 
 [#in-app-config-editor]
 === In-app config editor
@@ -182,12 +182,12 @@ The in-app config editor is currently **only** available for GitHub App accounts
 [#account-integrations]
 === Account integrations
 
-You cannot currently manage the connection with GitHub outside of the project setup, trigger, and configuration settings. CircleCI is working on enabling users to manage their users' GitHub identity as part of their user profile's account integration settings.
+Viewing menu:User settings[Account integrations] does not currently show a GitHub App integration. This page only shows GitHub OAuth app integrations.
 
 [#scheduled-pipelines]
 === Scheduled pipelines
 
-The ability to xref:orchestrate:scheduled-pipelines.adoc[schedule pipelines] is not currently supported for GitHub App projects. This feature is planned for a future release. As an alternative, use a xref:orchestrate:custom-webhooks.adoc[custom webhook] or the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
+The ability to xref:orchestrate:scheduled-pipelines.adoc[schedule pipelines] is not yet supported for pipelines that use the GitHub App integration. This feature is planned for release by September 2025.  As an alternative, use a xref:orchestrate:custom-webhooks.adoc[custom webhook] or the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
 
 [#build-forked-pull-requests]
 === Build forked pull requests
@@ -202,12 +202,7 @@ Passing secrets to forked pull requests is not currently supported for GitHub Ap
 [#stop-building]
 === Stop building
 
-GitHub App integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**.
-
-The recommendation is to either:
-
-* Suspend your installation. This would stop sending all events to CircleCI, so all builds will stop. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option.
-* Stop a single project from sending events to CircleCI. This option is available in GitHub **Organization settings** under the **GitHub Apps** menu option. Under **Repository access**, select **Only select repositories** and deselect the repository you want to stop building.
+GitHub App integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**. However, the same functionality can be achieved by deleting (or disabling) all triggers associated with existing pipelines, from menu:Project Settings[Project setup].
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only
