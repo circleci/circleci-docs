@@ -1,16 +1,14 @@
-= Migrate scheduled workflows to scheduled pipelines
+= Migrate scheduled workflows to schedule triggers
 :page-platform: Cloud
-:page-description: Migrate scheduled workflows to scheduled pipelines
+:page-description: Migrate scheduled workflows to schedule triggers
 :experimental:
-
-NOTE: **The deprecation of the scheduled workflows feature has been postponed**. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work to do in order to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
 [#introduction]
 == Introduction
 
-Migrating to scheduled pipelines from scheduled workflows will eliminate the following limitations of scheduled workflows:
+Schedule workflows have some limitations that make them less convenient than schedule triggers:
 
 - Cannot control the actor (yourself, or the scheduling system), so scheduled workflows cannot use restricted contexts
 - Cannot control the interaction with auto-cancelling of pipelines
@@ -19,12 +17,12 @@ Migrating to scheduled pipelines from scheduled workflows will eliminate the fol
 - Cannot kick off test runs for scheduled workflows without changing the schedule
 - Cannot restrict scheduled workflows from PR branches if you want the workflow to run on webhooks
 
-In addition, scheduled pipelines allow for the consolidation of common schedules. With scheduled workflows, for example, if you had three workflows you wanted to run at midnight every day, you would need three separate schedules. However, with scheduled pipelines, you can set up a single schedule to run all three workflows at midnight every day.
+In addition, schedule triggers allow for the consolidation of common schedules. With scheduled workflows, for example, if you had three workflows you wanted to run at midnight every day, you would need three separate schedules. However, with schedule triggers, you can set up a single schedule to run all three workflows at midnight every day.
 
-[#find-your-scheduled-trigger]
-== 1. Find your scheduled trigger
+[#find-your-scheduled-workflow]
+== 1. Find your schedule workflow
 
-To migrate from scheduled workflows to scheduled pipelines, you will first need to find the scheduled trigger in your project's `.circleci/config.yml`.
+To migrate from scheduled workflows to schedule triggers, you will first need to find the schedule workflow in your project's `.circleci/config.yml`.
 
 For example, it might look like:
 
@@ -43,12 +41,14 @@ daily-run-workflow:
     - build
 ```
 
-[#create-the-new-schedule]
-== 2. Create the new schedule
+[#create-the-new-schedule-trigger]
+== 2. Create the new schedule trigger
 
 Before you can create a new schedule, you will need to interpret the frequency your trigger needs to run from the cron expression. Once you have done that, you will create a schedule using either the API or the project settings in the web app. Both methods are described below.
 
 [#use-the-api]
+
+// TODO: not available yet for github app schedules
 === a. Use the API
 
 Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
@@ -80,10 +80,10 @@ For additional information, refer to the **Schedule** section under the link:htt
 [#use-project-settings]
 === b. Use project settings in the web app
 
-. In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and select **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
-. Navigate to **Triggers**.
-. To create a new schedule, select **Add Trigger**.
-. Define the new schedule by filling out the form, then select **Save Trigger**.
+. In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and select **Project Settings**. You can also find the **Project Settings** button on each project's landing page. 
+If you are using GitHub, navigate to menu:Project Settings[Project Setup], identify the pipeline you want to schedule, and select "Schedule +". 
+If yuo are using Bitbucket Cloud, navigate to menu:Project Settings[Triggers] and select **Add Trigger**. 
+Define the new schedule by filling out the form, then save.
 
 The form also provides the option of adding xref:pipeline-variables.adoc[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
 
@@ -102,4 +102,4 @@ daily-run-workflow:
 [#next-steps]
 == Next steps
 - xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
-- xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]
+- xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly schedule trigger]
