@@ -3,7 +3,7 @@
 :page-description: Learn about schedule triggers for your CircleCI projects.
 :experimental:
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab or Bitbucket Data Center]
+NOTE: This feature is not supported for GitLab or Bitbucket Data Center pipelines.
 
 Schedule triggers allow you to trigger pipelines periodically based on a schedule. Schedule triggers retain all the features of pipelines:
 
