@@ -37,7 +37,12 @@ A few different external services and technology integration points touch Circle
 [#web-sockets]
 === Web sockets
 
-CircleCI uses link:https://pusher.com/[Pusher] client libraries for WebSocket communication between the server and the browser. For installs, CircleCI uses an internal server called Slanger, so Pusher servers have no access to your instance of CircleCI, nor your source control system. This is how CircleCI, for instance, updates the builds list dynamically, or show the output of a build line-by-line as it occurs. CircleCI sends build status and lines of your build output through the web socket server (which unless you have configured your installation to run without SSL is done using the same certs over SSL), so it is encrypted in transit.
+CircleCI uses link:https://pusher.com/[Pusher] client libraries for WebSocket communication between the server and the browser for jobs such as:
+
+* Updating builds lists dynamically.
+* Displaying the output of a build line-by-line as it occurs.
+
+For CircleCI server installations, we use an internal server called Slanger, so Pusher servers have no access to your instance of CircleCI, nor your source control system. CircleCI sends build status and build output through the web socket server. Unless you have configured your installation to run without SSL, this is done using the same certs over SSL, so it is encrypted in transit.
 
 [#source-control-systems]
 === Source control systems
