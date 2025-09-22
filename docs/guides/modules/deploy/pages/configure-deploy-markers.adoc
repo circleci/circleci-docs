@@ -1,4 +1,4 @@
-= Configure deploy markers
+= Configure deploy markers 
 :page-platform: Cloud
 :page-description: Tutorial outlining how to configure deploy markers in your workflow.
 :experimental:
