@@ -2578,7 +2578,7 @@ workflows:
 [#override-with]
 ==== *`override-with`*
 
-The `override-with` key is used to override the job configuration with a job from the referenced orb.
+The `override-with` key is used to override the job configuration with a job from the referenced orb. For more information, see the xref:guides:orchestrate:how-to-override-config.adoc#[How to override config] page.
 
 [cols="1,1,1,2", options="header"]
 |===
