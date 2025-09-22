@@ -113,6 +113,7 @@ workflows:
 
 * `pipeline.event.github.pull_request.title`: the title of the pull request.
 * `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request.
+* `pipeline.event.github.pull_request.merged`: a boolean that indicates whether the PR was merged or not. 
 
 These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[the GitHub docs].
 

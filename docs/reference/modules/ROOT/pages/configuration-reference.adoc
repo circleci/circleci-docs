@@ -1381,6 +1381,17 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | N
 | String
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+
+| `max_auto_reruns`
+| N
+| Integer
+| The maximum number of times to automatically rerun the step if it fails. Must be between `1` and `5`.
+
+| `auto_rerun_delay`
+| N
+| String
+| The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m".
+
 |===
 
 Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell.
@@ -1555,6 +1566,49 @@ A job can exit without failing by using `run: circleci-agent step halt`. However
 
 '''
 
+==== Automatic step reruns
+
+The following attributes can be used to automatically rerun a step if it fails, and delay that rerun if required:
+
+[cols="2,1,1,2"]
+|===
+| Key | Required | Type | Description
+
+|`max_auto_reruns`
+| N
+| Integer
+| The maximum number of times to automatically rerun the step if it fails. Must be between `1` and `5`.
+
+| `auto_rerun_delay`
+| N
+| String
+| The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m". If you do not supply a delay, the rerun will start immediately after the step fails.
+|===
+
+Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
+
+You must configure the `command` key for the step, you cannot use the short form run step configuration, for example, the following is not supported for use with automatic reruns: `- run: echo "Hello, world!"`
+
+*Example:*
+
+.CircleCI job configured to automatically rerun a step up to 3 times if it fails with a 10 second delay between attempts
+[,yml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    steps:
+      - run:
+          command: echo "Hello, world!"
+          max_auto_reruns: 3
+          auto_rerun_delay: 10s
+----
+
+For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Automatic reruns] page.
+
+'''
+
 [#the-when-step]
 === *The `when` step*
 
@@ -1613,32 +1667,16 @@ workflows:
 [#checkout]
 === *`checkout`*
 
-****
-*Blobless clones*
-
-A "blobless" strategy is being rolled out to help improve the performance of code checkouts from Git source code hosts.
-
-Blobless clones reduce the amount of data fetched from the remote, by asking the remote to filter out objects that are not attached to the current commit.
-
-While this improves performance in most cases, if a downstream step requires those objects to exist for scanning or comparisons, it can cause failures. To work around these potential problems, a fetch directly after a checkout will ensure the required data is available:
-
-[,yml]
-----
-jobs:
-  build:
-    docker:
-      - image: cimg/go:1.24.2
-    steps:
-      - checkout
-      - run: git fetch
-----
-****
-
 A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
+
+| `method`
+| N
+| String
+| Checkout method. Valid options include `blobless` and `full`. (default: `full`)
 
 | `path`
 | N
@@ -1666,6 +1704,39 @@ jobs:
 ----
 
 The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH. These keys are detailed further in the xref:guides:integration:github-integration.adoc#establish-the-authenticity-of-an-ssh-host[integration guide]. This guide is also helpful if you wish to implement a custom checkout command.
+
+You can specify a checkout strategy by using the `method` key. CircleCI supports full clones or blobless clones. Blobless clones reduce the amount of data fetched from the remote by asking the remote to filter out objects that are not attached to the current commit.
+
+*Example:*
+
+[,yml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24.2
+    steps:
+      - checkout:
+          method: blobless
+----
+
+[NOTE]
+====
+In certain cases, we will fall back to a full checkout even though blobless was specified. This will occur if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed which contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
+====
+
+If a downstream step requires those objects to exist for scanning or comparisons, a blobless clone can cause failures. In that case, you can specify a full checkout as shown in the following example:
+
+[,yml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24.2
+    steps:
+      - checkout:
+          method: full
+----
 
 CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
 
