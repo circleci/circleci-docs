@@ -34,6 +34,11 @@ You can find a basic how-to guide on the xref:set-a-nightly-scheduled-pipeline.a
 
 To get started with schedule triggers, you have the option of using the API, or using the CircleCI web app. Both methods are described below.
 
+// I think we need 3 tabs here
+// - Bitbucket Cloud using the web-app --> use the Triggers tab
+// - GitHub (OAuth and GitHub App) using the web-app --> use the Project Setup tab
+// - API (with caveat that it's not yet available for GitHub App) 
+
 [#use-project-settings]
 === Use project settings in the web app
 
