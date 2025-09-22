@@ -44,7 +44,10 @@ For CircleCI server installations, we use an internal server called Slanger, so 
 [#source-control-systems]
 === Source control systems
 
-To use CircleCI you will set up a direct connection with your instance of GitHub Enterprise or GitHub.com. When you set up CircleCI, you authorize the system to check out your private repositories. You may revoke this permission at any time through your GitHub application settings page and by removing Circle's Deploy Keys and Service Hooks from your repositories' Admin pages. While CircleCI allows you to selectively build your projects, GitHub's permissions model is "all or nothing" — CircleCI gets permission to access all of a user's repositories or none of them. Your instance of CircleCI will have access to anything hosted in those git repositories and will create webhooks for a variety of events (for example, when code is pushed, when a user is added, etc.) that will call back to CircleCI, triggering one or more git commands that will pull down code to your build fleet.
+To use CircleCI you will set up a direct connection with your instance of GitHub Enterprise or GitHub.com. When you set up CircleCI, you authorize the system to check out your private repositories. You may revoke this permission at any time through your GitHub application settings page and by removing CircleCI's Deploy Keys and Service Hooks from your repositories' Admin pages. CircleCI allows you to selectively build your projects but GitHub's permissions model is "all or nothing". That is, CircleCI gets permission to access all of a user's repositories or none of them. Your instance of CircleCI has access to anything hosted in your git repositories and will create webhooks for a variety of events. These webhooks call back to CircleCI, triggering one or more git commands that will pull down code to your build fleet. For example:
+
+* When code is pushed.
+* When a user is added.
 
 [#dependency-and-cource-caches]
 === Dependency and source caches
