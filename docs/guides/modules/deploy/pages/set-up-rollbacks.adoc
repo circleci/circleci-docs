@@ -37,7 +37,7 @@ a| * Simple systems
 
 - A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 - A CircleCI project with a workflow configured to deploy your code.
-- Deploy markers *must* be configured in your project. Follow the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up.
+- Deploy markers *must* be configured in your project to use CircleCI rollbacks. Follow the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up, or if you would rather your will be guided to set up deploy markers when following the <<set-up-a-rollback-pipeline>> guide.
 - Familiarity with CircleCI deploys concepts. Find full details in the xref:deployment-overview.adoc[CircleCI deploys overview] guide.
 
 == Set up a rollback pipeline
@@ -63,24 +63,24 @@ NOTE: To set up rollback pipelines, you must connect your organization to the xr
 image::guides:ROOT:deploy/install-github-app.png[Install GitHub App]
 
 - If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
-+
-image::guides:ROOT:deploy/github-app-installed.png[GitHub App installed]
-
 
 === 3. Add deploy markers
 
+Deploy markers *must* be configured in your project to use CircleCI rollbacks. Follow these steps orthe xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up. Or if you already have deploy markers set up, select btn:[I've updated my config] to proceed to the next step.
+
 . Expand the **Add deploy markers to existing pipeline** section.
-. In the **Environment Name** dropdown, select or type the xref:configure-deploy-markers#manage-environments[target environment].
-. In the **Component Name** dropdown, select or type the name of the component you want to rollback.
+. In the **Environment Name** dropdown, select or type the xref:configure-deploy-markers#manage-environments[target environment].  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
+
+. In the **Component Name** dropdown, select or type the name of the component you want to rollback. The component name sets the name that will be displayed in the Deploys UI.
 +
 image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
-
-. The setup will auto-generate deploy marker commands based on your selections.
-. Copy the generated commands using the btn:[Copy] button and paste them into your existing config file where the deployment occurs.
++
+The setup will auto-generate deploy marker commands based on your selections.
+. Copy the generated commands using the btn:[Copy] button and paste them into your existing config file where the deployment occurs. Ensure the `circleci run release plan` step comes before the deployment step, followed by the `circleci run release update` step.
 +
 image::guides:ROOT:deploy/auto-generated-commands.png[Generated markers commands]
 
-. Select btn:[I've updated my config] to proceed to the next step.
+. Once you have updated your config file, select btn:[I've updated my config] to proceed to the next step.
 +
 image::guides:ROOT:deploy/config-updated-button.png[Copy markers commands]
 
@@ -118,9 +118,9 @@ image::guides:ROOT:deploy/setup-rollback-pipeline-button.png[Setup rollback pipe
 
 You can now rollback deployments by running a rollback pipeline.
 
-== Perform a rollback
+== Rollback using a rollback pipeline
 
-To perform a rollback using the rollback pipeline you can select the btn:[Rollback] button on the project overview page or from the deploys UI. The following steps show how to perform a rollback from the project overview page:
+To perform a rollback using the rollback pipeline you can select the btn:[Rollback] button on the project overview page. The following steps show how to perform a rollback from the project overview page:
 
 . In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
@@ -137,6 +137,7 @@ The modal displays several configuration options with parameters auto-filled bas
 *Current Version*:: Once you choose the component name and environment name, this will display all possible current versions. More often than not there should be just one current version available. You could have two in case a new progressive release is ongoing. Choose the version you believe is the current version of your component. To help you out, the relevant commit information is also displayed alongside the version.
 *Target Version*:: Choose the version you wish to rollback to. To help you out, the relevant commit information is also displayed alongside the version.
 *Namespace*:: Optional. In case you use Kubernetes and do your deployments to a specific namespace, mention your namespace here, otherwise leave it empty.
+*Rollback reason*:: You can optionally provide a reason for the rollback.
 +
 The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific rollback operation.
 
@@ -167,6 +168,8 @@ When customizing your rollback configuration, you can use the following pipeline
 * `pipeline.deploy.current_version`
 * `pipeline.deploy.namespace`
 * `pipeline.deploy.reason`
+
+For a full list of pipeline values, see the xref:reference:ROOT:variables.adoc#pipeline-values.adoc[Pipeline Values] guide.
 
 == Example rollback pipeline configuration
 
@@ -538,6 +541,14 @@ This will open the workflow re-run modal with the following options:
 * *Confirm rollback*. Select btn:[Next], confirm rollback to proceed.
 
 The workflow that originally deployed the selected version will be re-run, effectively performing a rollback to that version.
+
+If you have a rollback pipeline set up for your project, workflow rollbacks are disabled from the project overview page. You can still access this option from the deploys timeline, as follows:
+
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Deploys** from the sidebar and locate your project from the list. You can use the filters and search to help.
+. Select the rollback icon image:guides:ROOT:icons/rebuild.svg[rollback icon, role="no-border"].
+. Select btn:[Rerun deploy workflow from start].
+. Type `ROLLBACK` when prompted to confirm and then select btn:[ROLLBACK].
 
 
 
