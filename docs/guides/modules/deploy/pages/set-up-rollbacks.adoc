@@ -169,7 +169,7 @@ When customizing your rollback configuration, you can use the following pipeline
 * `pipeline.deploy.namespace`
 * `pipeline.deploy.reason`
 
-For a full list of pipeline values, see the xref:reference:ROOT:variables.adoc#pipeline-values.adoc[Pipeline Values] guide.
+For a full list of pipeline values, see the xref:reference:ROOT:variables.adoc#pipeline-values[Pipeline Values] guide.
 
 == Example rollback pipeline configuration
 
