@@ -80,14 +80,14 @@
 | `pipeline.schedule.name`
 | GitHub OAuth, Bitbucket Cloud
 | String
-| The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
+| The name of the schedule trigger if the pipeline was triggered via schedule. The value will be empty string if the pipeline is triggered by other sources.
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 
 | `pipeline.schedule.id`
 | GitHub OAuth, Bitbucket Cloud
 | String
-| The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
+| The unique id of the schedule if the pipeline was triggered via schedule trigger. Value will be empty string if the pipeline is triggered by other sources.
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 

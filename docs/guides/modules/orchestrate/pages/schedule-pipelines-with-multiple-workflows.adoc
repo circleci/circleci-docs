@@ -1,43 +1,35 @@
-= Schedule pipelines with multiple workflows
+= Schedule triggers with multiple workflows
 :page-platform: Cloud
-:page-description: "Learn how to set conditionals for scheduled pipelines in multiple workflows."
+:page-description: "Learn how to set conditionals for schedule triggers in multiple workflows."
 :experimental:
 
-NOTE: Scheduled pipelines are not currently available for GitLab, Bitbucket Data Center or GitHub App projects. To find out if you authorized your GitHub account through the GitHub OAuth app, or the GitHub App, see the xref:integration:github-apps-integration.adoc[GitHub App integration page].
+NOTE: Schedule triggers are not currently available for GitLab and Bitbucket Data Center projects.
 
-Scheduled pipelines are simply triggered pipelines, and by default, for each trigger, every workflow that has been configured will run. You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a scheduled pipeline is triggered. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
+By default, when a pipeline is triggered via schedule trigger each of its workflows will run . You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a pipeline is triggered via schedule. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
 
 [#schedule-using-built-in-pipeline-values]
 ## Schedule using built-in pipeline values
 
-One way to implement workflows filtering is by using pipeline values. The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`, however, the value of `pipeline.schedule.name` can be whatever you would like when using scheduled pipelines.
+One way to implement workflows filtering is by using pipeline values. The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`, however, the value of `pipeline.schedule.name` can be whatever you would like when using schedule triggers.
 
 ```yaml
 version: 2.1
 ...
 daily-run-workflow:
 # run workflow only when the daily_build pipeline is triggered
-  when:
-    and:
-      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ daily_build, << pipeline.schedule.name >> ]
+  when: pipeline.trigger_source == "scheduled_pipeline" and pipeline.schedule.name == "daily_build" 
   jobs:
     - test
     - build
 
 nightly-run-workflow:
 # run workflow only when the nightly_build pipeline is triggered
-  when:
-    and:
-      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ nightly_build, << pipeline.schedule.name >> ]
+  when: pipeline.trigger_source == 'scheduled_pipeline' and pipeline.schedule.name == 'nightly_build'
   jobs:
     - build
     - deploy
 ...
 ```
-
-Note that in the above example, the second `equal` under `when` is not strictly necessary. The `pipeline.schedule.name` is an available pipeline value when the pipeline is triggered by a schedule.
 
 You may also add filtering for workflows that should *not* run when a schedule is triggered:
 
@@ -47,19 +39,14 @@ version: 2.1
 ...
 daily-run-workflow:
 # run workflow only when the daily_build pipeline is triggered
-  when:
-    and:
-      - equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
-      - equal: [ daily_build, << pipeline.schedule.name >> ]
+  when: pipeline.trigger_source == "scheduled_pipeline" and pipeline.schedule.name == "daily_build" 
   jobs:
     - test
     - build
 
 nightly-run-workflow:
-# do NOT run workflow if a scheduled pipeline is triggered
-  when:
-    not:
-      equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+# do NOT run workflow if a schedule trigger is triggered
+  when: pipeline.trigger_source != "scheduled_pipeline"
   jobs:
    - build
    - deploy
@@ -83,14 +70,13 @@ parameters:
     default: false
 
 workflows:
-  # do not run the scheduled pipeline if build-test-deploy
+  # do not run the schedule trigger if build-test-deploy
   build-test-deploy:
-    when:
-      not: << pipeline.parameters.run-schedule >>
+    when: pipeline.parameters.run-schedule == false
     jobs:
       - test
       - build
-  # run the scheduled pipeline if nightly-snapshot
+  # run the schedule trigger if nightly-snapshot
   nightly-snapshot:
     when: << pipeline.parameters.run-schedule >>
     jobs:
@@ -112,22 +98,19 @@ version: 2.1
 workflows:
 # run workflow only when the daily_build pipeline is triggered
   daily-run-workflow:
-    when:
-      equal: [ daily_build, << pipeline.schedule.name >> ]
+    when: pipeline.schedule.name == 'daily_build'
     jobs:
       - job-one
 
   nightly-run-workflow:
-  # run workflow only when the daily_build pipeline is triggered
-    when:
-      equal: [ daily_build, << pipeline.schedule.name >> ]
+  # run workflow only when the nightly_build pipeline is triggered
+    when: pipeline.schedule.name == 'nightly_build'
     jobs:
       - job-two
 
   weekly-run-workflow:
   # run workflow only when the weekly_build pipeline is triggered
-    when:
-      equal: [ weekly_build, << pipeline.schedule.name >> ]
+    when: pipeline.schedule.name == 'weekly_build'
     jobs:
       - job-three
 ...
@@ -136,5 +119,5 @@ workflows:
 [#next-steps]
 == Next steps
 
-- xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
+- xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly schedule trigger]
+- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to schedule triggers]
