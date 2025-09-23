@@ -11,7 +11,7 @@ config file .circleci/sample-filename.yml could not be located on branch sample-
 
 * If there is a config file present:
 .. Navigate to menu:Project Settings[Pipelines] or menu:Project Settings[Project Setup] in the CircleCI web app for the project where you are seeing this error message.
-.. Ensure that the "Config File Path" field matches the filepath of the config file that is in your repository. If you changed the name of the config file in your repository, the reference to that filepath must also be changed for any pipeline that uses that configuration file.
+.. Ensure that the "Config File Path" field matches the file path of the config file that is in your repository. If you changed the name of the config file in your repository, the reference to that file path must also be changed for any pipeline that uses that configuration file.
 
 [#why-is-my-scheduled-pipeline-not-running]
 === Why is my scheduled pipeline not running?
@@ -44,7 +44,7 @@ In order to keep the system stable for all CircleCI customers, we implement diff
 [#find-project-projects-dashboard]
 === Why can I not find my project on the Projects dashboard?
 
-If you are not seeing a project you would like to build, and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For instance, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available under *Projects*.  If you want to build the project `your-org/project`, you must switch your organization on the application's organization switcher menu to `your-org`.
+If you do not see a project you would like to build, check your org in the top left corner of the CircleCI application. For instance, if the top left shows your user `my-user`, only projects belonging to `my-user` will be available under *Projects*.  If you want to build the project `your-org/project`, you must switch your organization on the application's organization switcher menu to `your-org`.
 
 [#how-do-docker-image-names-work]
 === How do Docker image names work? Where do they come from?
