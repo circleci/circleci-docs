@@ -48,4 +48,4 @@ Not currently. Scheduled pipelines require highly deterministic inputs such as a
 
 === Why can I not see my pipeline in the scheduled pipeline to run menu?
 
-If you do not see your pipeline in the "Pipeline to run" dropdown menu, it may be that you are trying to access an unsupported pipeline type. Only OAuth pipelines are supported for scheduling, so GitHub App, GitLab, and Bitbucket Data Center pipelines will not appear in the list. You can see the pipeline type by looking at your pipeline list (menu:Project Settings[Pipelines]) and inspecting the pipeline labels.
+If you do not see your pipeline in the "Pipeline to run" dropdown menu, it may be that you are trying to access an unsupported pipeline type. Only OAuth pipelines are supported for scheduling, so GitHub App, GitLab, and Bitbucket Data Center pipelines will not appear in the list. You can see the pipeline type by looking at your pipeline list (menu:Project Settings[Pipelines] or menu:Project Settings[Project Setup]) and inspecting the pipeline labels.

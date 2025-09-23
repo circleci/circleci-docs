@@ -13,14 +13,11 @@ You may want to run a set of high credit-consuming tests only when a pull reques
 
 === Steps
 
-. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
-+
-.Add pipeline options for GitHub App
-image::guides:ROOT:add-pipeline.png[Add pipeline options for GitHub App]
-. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines.adoc#add-a-trigger[Pipelines and triggers overview] page.
+. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines overview] page.
+. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up triggers] page.
 +
 .Run on trigger options for GitHub App triggers
-image::guides:ROOT:triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
@@ -36,13 +33,11 @@ You may want to trigger a specific pipeline when a pull request is merged, for e
 
 === Steps
 . Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
-+
-.Add pipeline options for GitHub App
-image::guides:ROOT:add-pipeline.png[Add pipeline options for GitHub App]
-. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines.adoc#add-a-trigger[Pipelines and triggers overview] page.
+
+. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up triggers] page.
 +
 .Run on trigger options for GitHub App triggers
-image::guides:ROOT:triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
