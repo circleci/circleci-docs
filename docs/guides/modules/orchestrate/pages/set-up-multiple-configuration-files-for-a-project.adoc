@@ -49,7 +49,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 . Select btn:[Add Pipeline].
 +
-NOTE: If you have not installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page. If you run into an issue when installing the CircleCI GitHub App (for example, App looks installed on GitHub, but does not show up on CircleCI), submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form].
+NOTE: If you have not installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page. If you run into issues when installing the GitHub App, for example, App looks installed on GitHub, but does not show up on CircleCI, submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form].
 . Complete the required form fields:
 ** Give your pipeline a descriptive name.
 ** Under *Config Source* select the repository where the config file is stored. This can be the same repository as your code or a different repository.
