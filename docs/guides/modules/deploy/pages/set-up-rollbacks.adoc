@@ -66,7 +66,7 @@ image::guides:ROOT:deploy/install-github-app.png[Install GitHub App]
 
 === 3. Add deploy markers
 
-Deploy markers *must* be configured in your project to use CircleCI rollbacks. Follow these steps orthe xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up. Or if you already have deploy markers set up, select btn:[I've updated my config] to proceed to the next step.
+Deploy markers *must* be configured in your project to use CircleCI rollbacks. Follow these steps or the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up. Or if you already have deploy markers set up, select btn:[I've updated my config] to proceed to the next step.
 
 . Expand the **Add deploy markers to existing pipeline** section.
 . In the **Environment Name** dropdown, select or type the xref:configure-deploy-markers#manage-environments[target environment].  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
