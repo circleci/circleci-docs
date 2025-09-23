@@ -80,8 +80,6 @@ To add a trigger for a pipeline, follow these steps:
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
-+
-TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:integration:github-integration.adoc[GitHub OAuth] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Trigger].
 . Select the same location in the "Connect to" dropdown menu that you selected for your pipeline (for example, GitLab).
 . Select btn:[Next].

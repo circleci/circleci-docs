@@ -66,16 +66,6 @@ Next, create a trigger for each pipeline you have created for your project. Alte
 
 . Following from the previous step, select btn:[GitHub trigger +] at the bottom of the pipeline box.
 . Choose when to run the pipeline by selecting an option from the *Event* menu.
-+
-****
-Using multiple pipelines and triggers, you can build different pipelines for different events, For example, you could have:
-
-- A `build-test` pipeline that runs on every push. Select "All pushes".
-- A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
-- A `teardown-env` pipeline that runs when a PR is merged. Select "PR merged".
-
-For a full list, see the xref:github-trigger-event-options.adoc[GitHub trigger event options] page.
-****
 . Select the *Event Source* repository from the dropdown. This defaults to the config source repository. If you change it to a repository that does not match the pipeline's config or checkout source, you will be prompted to specify a fixed branch to be used for fetching config and checking out code.
 
 . Select btn:[Save]
