@@ -12,6 +12,7 @@
 
 * General
 ** xref:guides:about-circleci:concepts.adoc[Concepts]
+** xref:glossary.adoc[Glossary]
 ** xref:guides:insights:insights-glossary.adoc[Insights metrics glossary]
 ** xref:troubleshoot.adoc[Troubleshoot]
 ** xref:faq.adoc[FAQ]
