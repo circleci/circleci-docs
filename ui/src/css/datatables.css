@@ -10,7 +10,7 @@
 .datatable-input {
   @apply focus:outline-none focus:ring-2 focus:ring-vapor focus:border-transparent;
   @apply py-2 pl-3 pr-4 border border-vapor rounded-full text-sm;
-  @apply w-64 max-w-xs;
+  @apply w-64 max-w-xs ml-1 mr-1;
 }
 
 /* Table styling enhancements */
