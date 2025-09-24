@@ -16,6 +16,17 @@ WARNING: *Want to see a warning?* This is a warning.
 
 CAUTION: *Want to see a caution?* This is a caution.
 
+== Diagram
+
+[mermaid]
+....
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>Bob: Hello Bob, how are you?
+    Bob-->>Alice: Great!
+....
+
 Sometimes we have sections separated by horizontal lines, like this:
 
 ---
