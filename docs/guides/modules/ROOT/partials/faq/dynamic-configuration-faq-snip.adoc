@@ -11,8 +11,8 @@ Custom executors can be used, but require certain dependencies to be installed f
 [#what-is-the-continuation-orb]
 === What is the continuation orb?
 
-The `continuation` orb assists you in managing the pipeline continuation process. The
-`continuation` orb wraps an API call to link:https://circleci.com/docs/api/v2/#operation/continuePipeline[`continuePipeline`]. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation`] orb documentation for more information.
+The continuation orb assists you in managing the pipeline continuation process. The
+continuation orb wraps an API call to the link:https://circleci.com/docs/api/v2/#operation/continuePipeline[[Continue a pipeline\] API endpoint]. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] documentation for more information.
 
 [#possible-to-not-use-continuation-orb]
 === Is it possible to not use the continuation orb?
