@@ -55,7 +55,8 @@ Some constraints on continuing pipelines from a `setup: true` configuration are 
 - A pipeline can only be continued once. A pipeline cannot be continued with another setup configuration. Workflow reruns will fail as part of this restriction. Rather than rerun a setup workflow you can trigger a new pipeline.
 - A pipeline can only be continued within six hours of its creation.
 - Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.
-- Pipeline parameters declared in the `setup` configuration must also be declared in the continuation configuration. These parameters can be used at continuation time. For more information, see the xref:pipeline-variables.adoc#pipeline-parameters-and-dynamic-configuration[Pipeline values and parameters] page.
+- Pipeline parameters declared in the `setup` configuration and pipeline parameters declared in the `continuation` configuration are independent. If you declare a pipeline parameter with the same name and type in both the `setup` and `continuation` configuration files, but with different default values, the default values will apply respectively to each configuration.
+- When triggering a pipeline via the API, you cannot set a pipeline parameter to another value than the default one declared in the `setup` configuration if that pipeline parameter is also declared in the `continuation` configuration.
 
 [#how-dynamic-config-works]
 == How dynamic config works
