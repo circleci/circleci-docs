@@ -114,6 +114,31 @@ Once you have set up a pipeline you need to set up a trigger to connect it to. S
 --
 ====
 
+== Pipeline states
+
+[mermaid]
+----
+---
+title: Pipeline States
+---
+stateDiagram-v2
+    state "setup-pending" as setuppending
+
+    state type <<choice>>
+
+    [*] --> type
+    type --> setuppending : Dynamic config enabled and setup true in config
+    type --> pending : Dynamic config not enabled, or setup true not in config
+
+    setuppending --> setup
+    setup --> pending
+    pending --> created
+    pending --> errored
+    created --> [*]
+    errored --> [*]
+
+----
+
 == Pipeline parameters
 
 Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. Pipeline parameters can be referenced by value and used as a configuration variable under the scope `pipeline.parameters`.
