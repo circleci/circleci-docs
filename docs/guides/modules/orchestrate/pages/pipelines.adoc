@@ -2,6 +2,7 @@
 :page-platform: Cloud, Server v4+
 :page-description: This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.
 :experimental:
+:page-aliases: troubleshoot-pipelines.adoc
 
 CircleCI pipelines are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code. Each pipeline is defined by a configuration file stored in a repository (typically `.circleci/config.yml`).
 
