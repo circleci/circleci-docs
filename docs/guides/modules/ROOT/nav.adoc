@@ -35,7 +35,7 @@
 
 * Orchestrate
 ** Pipelines
-*** xref:orchestrate:pipelines.adoc[Pipeline and triggers overview]
+*** xref:orchestrate:pipelines.adoc[Pipeline overview and setup]
 *** xref:orchestrate:jobs-steps.adoc[Jobs and steps overview]
 *** xref:orchestrate:workflows.adoc[Workflow orchestration]
 *** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
@@ -45,7 +45,8 @@
 *** xref:orchestrate:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization]
 *** xref:orchestrate:pipeline-variables.adoc[Pipeline values and parameters]
 ** Triggers
-*** xref:orchestrate:triggers-overview.adoc[Triggers a pipeline]
+*** xref:orchestrate:triggers-overview.adoc[Trigger options]
+*** xref:orchestrate:set-up-triggers.adoc[Set up triggers]
 *** xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options]
 *** xref:orchestrate:gitlab-trigger-options.adoc[GitLab trigger options]
 *** xref:orchestrate:custom-webhooks.adoc[Custom webhooks]
@@ -53,6 +54,7 @@
 *** xref:orchestrate:scheduled-pipelines.adoc[Scheduled pipelines]
 ** How-to guides
 *** xref:orchestrate:orchestration-cookbook.adoc[Orchestration cookbook]
+*** xref:orchestrate:how-to-override-config.adoc[How to override config]
 *** xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
 *** xref:orchestrate:notify-a-slack-channel-of-a-paused-workflow.adoc[Notify a Slack channel of a paused workflow]
 *** xref:orchestrate:using-branch-filters.adoc[Using branch filters]
@@ -94,6 +96,7 @@
 *** xref:execution-managed:run-a-job-in-a-container.adoc[Run a job in a container on your machine with Docker]
 *** xref:execution-managed:docker-compose.adoc[Installing and using Docker Compose]
 *** xref:execution-managed:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
+*** xref:execution-managed:docker-to-machine.adoc[Migrating between the Docker machine executors]
 ** Image support policies
 *** xref:execution-managed:android-images-support-policy.adoc[Android images support policy]
 *** xref:execution-managed:convenience-images-support-policy.adoc[Convenience images support policy]
@@ -164,7 +167,7 @@
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
 ** Setup
 *** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
-*** xref:deploy:set-up-rollbacks.adoc[Rollbacks]
+*** xref:deploy:set-up-rollbacks.adoc[Rollback a deployment]
 ** Release agent setup
 *** xref:deploy:release-agent-overview.adoc[Release agent overview]
 *** xref:deploy:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
@@ -176,6 +179,7 @@
 *** xref:deploy:deploy-to-artifactory.adoc[Deploy to Artifactory]
 *** xref:deploy:deploy-to-aws.adoc[Deploy to AWS]
 *** xref:deploy:ecs-ecr.adoc[Push image to ECR and deploy to ECS]
+*** xref:deploy:deploy-service-update-to-aws-ecs.adoc[Deploy service update to AWS ECS]
 *** xref:deploy:deploy-to-azure-container-registry.adoc[Deploy to Azure Container Registry]
 *** xref:deploy:deploy-to-capistrano.adoc[Deploy to Capistrano]
 *** xref:deploy:deploy-to-cloud-foundry.adoc[Deploy to Cloud Foundry]

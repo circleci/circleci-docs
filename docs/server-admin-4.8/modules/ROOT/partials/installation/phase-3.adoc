@@ -776,21 +776,6 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
     },
     {
       "Action": [
-        "ec2:CreateTags",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
-        }
-      }
-    },
-    {
-      "Action": [
         "ec2:RunInstances",
         "ec2:StartInstances",
         "ec2:StopInstances",
@@ -804,6 +789,9 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
           ]
+        },
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     }
@@ -918,21 +906,6 @@ Create a `policy.json` file with the following content. You should fill in the I
     },
     {
       "Action": [
-        "ec2:CreateTags",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
-        }
-      }
-    },
-    {
-      "Action": [
         "ec2:RunInstances",
         "ec2:StartInstances",
         "ec2:StopInstances",
@@ -946,6 +919,9 @@ Create a `policy.json` file with the following content. You should fill in the I
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
           ]
+        },
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     }
