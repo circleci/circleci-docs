@@ -87,22 +87,30 @@ Some examples of using dynamic configuration in CircleCI include:
 * Share common configuration across projects by generating project-specific sections dynamically based on parameters.
 * _Continue_ a pipeline, or generate and run a configuration based on where code has changed.
 * Split up a configuration file into reusable fragments that can be dynamically assembled.
-* Generate full CircleCI configurations from small company-specifiic configurations. For example, if you have many repositories with similar CI/CD requirements, you can generate a full CircleCI YAML configuration dynamically from small template configuration written in any configuration language.
+* Generate full CircleCI configurations from small company-specifiic configurations. For example, if you have multiple repositories with similar CI/CD requirements, you can generate a full CircleCI YAML configuration dynamically from small template configuration written in any configuration language.
 * When working with a language or framework that has its own configuration language, you can generate CircleCI config dynamically from existing configuration files.
 
 === Use path filtering for monorepos
 
-Set up path filtering to set pipeline parameters and continuation configuration sources based on the location of changes in your repository.
+In a link:https://circleci.com/blog/monorepo-dev-practices/[monorepo] setup:
 
-In a monorepo (single repository) setup you can use path filtering to avoid all of your microservices/sub-projects being put through the entirety of your build, test, and deployment processes when any single update is introduced.
+* Set up path filtering to set pipeline parameters and continuation configuration sources based on the location of changes in your repository.
+* You can use path filtering to avoid all your microservices/sub-projects being put through the entirety of your build, test, and deployment processes when any single update occurs.
 
-For example, you may have multiple projects within your repository (`project_1`, `project_2`, `project_3`). You can use path filtering to only run tests and deployment for `project_1` if change happened in the `project_1` file set. The link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] is available to help simplify your configuration further. For a full example of path filtering, see the xref:using-dynamic-configuration.adoc#execute-specific-workflows-or-steps-based-on-which-files-are-modified[Dynamic configuration how-to guide].
+For example, you may have multiple projects within your repository (`project_1`, `project_2`, `project_3`). +
+You can use path filtering to only run tests and deployment for `project_1` if change happened in the `project_1` file set. The link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] is available to help simplify your configuration further.
+
+For a full example of path filtering, see the xref:using-dynamic-configuration.adoc#execute-specific-workflows-or-steps-based-on-which-files-are-modified[Dynamic configuration how-to guide].
 
 // #DIAGRAM OF PATH FILTERING FOR MONOREPO SETUP#
 
 === Use config splitting for microservices
 
-For projects that consist of multiple modules, you may require a separate job/workflow to run for each module when changes are introduced. You can split your configuration up and store the config for each module separately within the module's directory, keeping related code and config together. Module jobs/workflows can be stored in multiple files as _fragments_ of a configuration. Instead of using one full `.circleci/config.yml` file, you can use dynamic configuration to combine these individual fragments into a full configuration when a pipeline is triggered. This scenario can also be referred to as _config splitting_.
+For projects that consist of multiple modules, you may require a separate job/workflow to run for each module when changes are introduced. +
+You can split your configuration up and store the config for each module separately within the module's directory, keeping related code and config together. +
+Module jobs/workflows can be stored in multiple files as _fragments_ of a configuration. Instead of using one full `.circleci/config.yml` file, you can use dynamic configuration to combine these individual fragments into a full configuration when a pipeline is triggered.
+
+This scenario is also referred to as _config splitting_.
 
 // Diagram
 
