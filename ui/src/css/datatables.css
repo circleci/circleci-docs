@@ -1,0 +1,82 @@
+/* Simple DataTables integration with CircleCI theme */
+
+/* Add spacing above the top controls - this one we know works with lowercase */
+.datatable-top {
+  @apply mt-6;
+}
+
+/* Search box styling - matches header search exactly */
+.datatable-search input,
+.datatable-input {
+  @apply focus:outline-none focus:ring-2 focus:ring-vapor focus:border-transparent;
+  @apply py-2 pl-3 pr-4 border border-vapor rounded-full text-sm;
+  @apply w-64 max-w-xs ml-1 mr-1;
+}
+
+/* Table styling enhancements */
+table.datatable {
+  @apply w-full border-collapse;
+}
+
+table.datatable thead th {
+  @apply px-4 py-3 text-left border-b border-gray-200;
+}
+
+table.datatable thead th:hover {
+  @apply bg-gray-100;
+}
+
+/* Simple DataTables handles sorting indicators automatically */
+table.datatable thead th[data-sortable] {
+  @apply cursor-pointer select-none;
+  min-width: 80px; /* Minimum width to prevent overlap */
+}
+
+table.datatable thead th[data-sortable]:hover {
+  @apply bg-gray-100;
+}
+
+/* Style the datatable-sorter button with DataTables-style arrows */
+table.datatable thead th .datatable-sorter {
+  @apply w-full text-left bg-transparent border-0 p-0;
+  @apply hover:bg-transparent focus:outline-none cursor-pointer;
+  @apply pr-6 transition-colors; /* Add right padding to make room for sort arrows */
+  position: relative;
+}
+
+/* DataTables-style sorting indicators */
+table.datatable thead th[data-sortable="true"] .datatable-sorter::before {
+  content: '';
+  @apply absolute right-2;
+  top: calc(50% - 9px);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #d1d5db;
+}
+
+table.datatable thead th[data-sortable="true"] .datatable-sorter::after {
+  content: '';
+  @apply absolute right-2 top-1/2 transform -translate-y-1/2;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #d1d5db;
+}
+
+table.datatable thead th[data-sortable="true"]:hover .datatable-sorter::after,
+table.datatable thead th[data-sortable="true"]:hover .datatable-sorter::before {
+  border-top-color: #9ca3af;
+  border-bottom-color: #9ca3af;
+}
+
+table.datatable tbody td {
+  @apply px-4 py-3 border-b border-gray-200;
+}
+
+table.datatable tbody tr:hover {
+  @apply bg-gray-50;
+}
+
