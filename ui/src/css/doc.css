@@ -1440,3 +1440,18 @@
   color: #8F001C !important;
   font-weight: var(--heading-font-weight);
 }
+
+/* === MERMAID DIAGRAM STYLES === */
+
+/* Basic container styling */
+.doc .mermaid {
+  text-align: center;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+/* Responsive sizing */
+.doc .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
