@@ -144,7 +144,7 @@
 *** xref:test:test.adoc[Automated testing]
 *** xref:test:collect-test-data.adoc[Collecting test data]
 *** xref:insights:insights-tests.adoc[Test Insights]
-*** xref:test:agentic-flaky-test-resolution.adoc[Agentic flaky test resolution]
+*** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
