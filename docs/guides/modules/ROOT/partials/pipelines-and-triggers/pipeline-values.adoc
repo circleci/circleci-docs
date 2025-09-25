@@ -152,8 +152,9 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 |
-a|  * GitLab: push, merge request
-    * GitHub App: push
+d|  [.nowrap]#GitHub App: push# +
+[.nowrap]#GitLab: push, merge request# +
+
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
