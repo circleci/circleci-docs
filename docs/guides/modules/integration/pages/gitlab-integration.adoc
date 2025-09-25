@@ -8,7 +8,7 @@ This page walks you through integrating a GitLab project with CircleCI. The sect
 [#overview]
 == What is GitLab CI/CD?
 
-GitLab CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your projects each time a developer pushes a change to the codebase, and/or when a merge request is created. As an alternative, you can integrate with CircleCI to manage your CI/CD pipelines. If you use GitLab (SaaS or Self-managed) for version control and code storage, GitLab CI/CD is enabled for your project by default.
+GitLab CI/CD allows you to build, test and deploy your projects each time a developer pushes a change to the codebase, and/or when a merge request is created. As an alternative, you can integrate with CircleCI to manage your CI/CD pipelines. If you use GitLab (SaaS or Self-managed) for version control and code storage, GitLab CI/CD is enabled for your project by default.
 
 Integrate with CircleCI to access features for automated software delivery:
 
@@ -51,7 +51,7 @@ You can choose a sample `.circleci/config.yml` to best fit your project from a v
 
 The first two options (**Fastest** and **Faster**) automatically trigger a pipeline once you create the project.
 --
-GitLab Self-Managed::
+GitLab self-managed::
 +
 --
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
@@ -92,13 +92,13 @@ image::guides:ROOT:gl-sm-create-project.png[Create a new project in a self-manag
 
 . Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Select **Connect**.
 +
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab Self-Managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab Self-Managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 . Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name.
 
 . Finally, select **Create Project**. You will then be redirected to the newly-created project's Pipelines page.
 
-The express CircleCI configuration setup is not currently available for GitLab Self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repository to see your pipeline on the dashboard.
+The express CircleCI configuration setup is not currently available for GitLab self-managed projects. You will need to add a `.circleci/config.yml` file in your repository if it has not yet been set up. If the repository you selected already contains a `.circleci/config.yml`, you will need to save a commit in the repository to see your pipeline on the dashboard.
 --
 ====
 
@@ -127,7 +127,7 @@ When you create a new project using the **Fastest** (use an existing `config.yml
 
 If you use the **Fast** config setup, the pipeline is not triggered until you save the `.circleci/config.yml` by clicking the **Commit and Run** button in the web app.
 --
-GitLab Self-Managed::
+GitLab self-managed::
 +
 --
 If you have not already done so, add a `.circleci` directory to the root of the repository, then add a `config.yml` file in that directory.
@@ -167,7 +167,7 @@ For a complete list of permissions, see the xref:permissions-authentication:role
 [#configuration]
 === Pipelines and triggers
 
-You can add or delete pipelines and triggers for your project. For details see the xref:orchestrate:pipelines.adoc#pipelines-and-triggers[pipelines overview].
+You can add or delete pipelines and triggers for your project. For details see the xref:orchestrate:pipelines.adoc[Pipelines Overview].
 
 [#project-settings-advanced]
 === Advanced
@@ -226,7 +226,7 @@ Add or remove users, and manage user roles for the organization as well as user 
 [#organization-settings-integrations]
 === Integrations (GitLab self-managed only)
 
-For GitLab Self-managed organizations, you may connect additional self-managed instances to be integrated with your organization.
+For GitLab self-managed organizations, you may connect additional self-managed instances to be integrated with your organization.
 
 . Navigate to **Integrations** within **Organization Settings** to add a new instance.
 +
@@ -241,7 +241,7 @@ For GitLab.com, account integrations can be managed under your xref:#user-accoun
 [#establish the authenticity of an SSH host]
 ==== Establish the authenticity of an SSH host
 
-For GitLab self-managed instances, it is necessary to add the SSH host keys to a "known hosts" file (`~/.ssh/known_hosts`) so that CircleCI can verify that the host it is connecting to is authentic. The **known_hosts** input stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
+For GitLab self-managed instances, you need to add the SSH host keys to a "known hosts" file (`~/.ssh/known_hosts`). This enables CircleCI to verify that the host it is connecting to is authentic. The **known_hosts** input stores your instance's public host keys so CircleCI jobs can verify the remote host's identity when checking out code.
 
 SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for example, `ssh-keyscan test-gitlab.circleci.com`.
 

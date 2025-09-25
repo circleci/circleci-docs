@@ -52,7 +52,7 @@ image::guides:ROOT:create-project/choose-a-repo-github.png[Choose a repository w
 .Set up your CircleCI config file
 image::guides:ROOT:create-project/set-up-your-config.png[Screenshot showing options to set up your config file]
 
-. Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:orchestrate:pipelines.adoc#triggers[add more triggers] at this point too.
+. Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:orchestrate:set-up-triggers.adoc[add more triggers] at this point too.
 +
 .Set up triggers for your pipeline
 image::guides:ROOT:create-project/set-up-your-triggers.png[Screenshot showing options to set up your triggers]
@@ -163,7 +163,7 @@ image::guides:ROOT:create-project/authorize-bitbucket-data-center.png[Choose a r
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
 
-Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers at menu:Project settings[Triggers]. For more information, see the xref:orchestrate:pipelines.adoc#triggers[Pipelines overview].
+Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers at menu:Project settings[Project Setup] if your project integrates with GitHub, or at menu:Project settings[Triggers] if it integrates with GitLab or Bitbucket. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set up triggers] page.
 
 [#set-up-a-project]
 === Set up a project

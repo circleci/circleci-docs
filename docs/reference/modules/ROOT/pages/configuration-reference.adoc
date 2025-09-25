@@ -1667,32 +1667,16 @@ workflows:
 [#checkout]
 === *`checkout`*
 
-****
-*Blobless clones*
-
-A "blobless" strategy is being rolled out to help improve the performance of code checkouts from Git source code hosts.
-
-Blobless clones reduce the amount of data fetched from the remote, by asking the remote to filter out objects that are not attached to the current commit.
-
-While this improves performance in most cases, if a downstream step requires those objects to exist for scanning or comparisons, it can cause failures. To work around these potential problems, a fetch directly after a checkout will ensure the required data is available:
-
-[,yml]
-----
-jobs:
-  build:
-    docker:
-      - image: cimg/go:1.24.2
-    steps:
-      - checkout
-      - run: git fetch
-----
-****
-
 A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
+
+| `method`
+| N
+| String
+| Checkout method. Valid options include `blobless` and `full`. (default: `full`)
 
 | `path`
 | N
@@ -1720,6 +1704,39 @@ jobs:
 ----
 
 The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH. These keys are detailed further in the xref:guides:integration:github-integration.adoc#establish-the-authenticity-of-an-ssh-host[integration guide]. This guide is also helpful if you wish to implement a custom checkout command.
+
+You can specify a checkout strategy by using the `method` key. CircleCI supports full clones or blobless clones. Blobless clones reduce the amount of data fetched from the remote by asking the remote to filter out objects that are not attached to the current commit.
+
+*Example:*
+
+[,yml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24.2
+    steps:
+      - checkout:
+          method: blobless
+----
+
+[NOTE]
+====
+In certain cases, we will fall back to a full checkout even though blobless was specified. This will occur if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed which contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
+====
+
+If a downstream step requires those objects to exist for scanning or comparisons, a blobless clone can cause failures. In that case, you can specify a full checkout as shown in the following example:
+
+[,yml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.24.2
+    steps:
+      - checkout:
+          method: full
+----
 
 CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
 
@@ -2578,7 +2595,7 @@ workflows:
 [#override-with]
 ==== *`override-with`*
 
-The `override-with` key is used to override the job configuration with a job from the referenced orb.
+The `override-with` key is used to override the job configuration with a job from the referenced orb. For more information, see the xref:guides:orchestrate:how-to-override-config.adoc#[How to override config] page.
 
 [cols="1,1,1,2", options="header"]
 |===

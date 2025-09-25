@@ -116,7 +116,7 @@ Refer to the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api
 [#passing-parameters-when-triggering-pipelines-using-the-circleci-web-app]
 === Passing parameters when triggering pipelines using the CircleCI web app
 
-In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline from the web app, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
+In addition to using the API, you can also trigger a pipeline with parameters from the CircleCI web app. If you pass a parameter when triggering a pipeline, and the parameter has not been declared in the configuration file, the pipeline will fail with the error `Unexpected argument(s)`.
 
 . Use the project filter to select the desired project.
 . Use the branch filter to select the branch on which you want to run the new pipeline.
@@ -124,7 +124,7 @@ In addition to using the API, you can also trigger a pipeline with parameters fr
 . Use the *Add Parameters* dropdown to specify the type, name, and value of your desired parameters.
 . Select *Trigger Pipeline*.
 
-Parameters can also be called when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
+Parameters can also be passed when setting up a scheduled pipeline in the web app. The parameters are part of the trigger form in menu:Project Settings[Triggers] or menu:Project Settings[Project Setup]. Any parameter set up as a part of a scheduled pipeline will also need to be declared in the configuration file, otherwise the pipeline will fail with the error `Unexpected argument(s)`.
 
 [#configuration-processing-stages]
 == Configuration processing stages
@@ -140,7 +140,7 @@ The remaining configuration is processed, element parameters are resolved, type-
 [#the-scope-of-parameters-in-configuration]
 == The scope of parameters in configuration
 
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. This is because access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
+Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your `.circleci/config.yml` file. Access to pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling configuration. This would potentially create a surface area of vulnerability, increasing security risks.
 
 [#element-parameter-scope]
 === Element parameter scope
@@ -174,10 +174,10 @@ workflows:
   my-workflow:
     jobs:
       - daily-message:
-         message: echo << parameters.message >>
+         message: << parameters.message >>
 ```
 
-Even though the `print` command is called from the `cat-file` job, the file parameter would not be in scope inside the print job. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known. Running this would throw a pipeline error of `Arguments referenced without declared parameters: message`.
+Even though the `print` command is called from the `daily-message` job, the `message` parameter would not be in scope inside `my-workflow`. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known. Running this would throw a pipeline error of `Arguments referenced without declared parameters: parameters.message`.
 
 [#pipeline-value-scope]
 === Pipeline value scope
