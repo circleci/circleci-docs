@@ -116,19 +116,17 @@ Once you have set up a pipeline you need to set up a trigger to connect it to. S
 
 == Pipeline states
 
+.Pipeline states
 [mermaid]
 ----
----
-title: Pipeline States
----
 stateDiagram-v2
     state "setup-pending" as setuppending
 
     state type <<choice>>
 
     [*] --> type
-    type --> setuppending : Dynamic config enabled and setup true in config
-    type --> pending : Dynamic config not enabled, or setup true not in config
+    type --> setuppending : Dynamic config enabled<br/>and setup true in config
+    type --> pending : Dynamic config not enabled,<br/>or setup true not in config
 
     setuppending --> setup
     setup --> pending

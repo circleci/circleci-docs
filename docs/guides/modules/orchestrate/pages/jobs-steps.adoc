@@ -71,6 +71,44 @@ You can set the type of a job by adding the `type` key to the job configuration.
 
 See the xref:reference:ROOT:configuration-reference.adoc#job-type[Confirguration reference] page for more information on how to use the different job types.
 
+=== Job status transitions
+
+.Job status transitions
+[mermaid]
+----
+stateDiagram-v2
+    [*] --> blocked
+
+    blocked --> pending
+    blocked --> unauthorized : trying to use a context without permission
+
+    pending --> running: For build jobs, Mongo builds are created here
+
+    pending --> skipped : PRs only / ci-skip / no project found / abusive / sanctioned / etc.
+    pending --> blocked : retriable error
+    pending --> terminated
+
+    running --> canceled
+    pending --> canceled
+    blocked --> canceled
+
+
+    running --> failed
+    running --> success
+    running --> terminated
+
+    state "terminated-unknown" as terminated
+
+    skipped --> [*]
+    terminated --> [*]
+    success --> [*]
+    failed --> [*]
+    canceled --> [*]
+    unauthorized --> [*]
+
+----
+
+
 [#steps-overview]
 == Steps overview
 
