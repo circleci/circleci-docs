@@ -303,6 +303,7 @@
 *** xref:toolkit:api-intro.adoc[API v2 intro]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]
 *** xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
+** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
 ** IDE tools
 *** xref:toolkit:vs-code-extension-overview.adoc[VS Code extension overview]
 *** xref:toolkit:get-started-with-the-vs-code-extension.adoc[Get started with the VS Code extension]
