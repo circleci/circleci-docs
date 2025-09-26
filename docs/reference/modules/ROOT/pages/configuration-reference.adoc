@@ -2528,12 +2528,13 @@ NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` 
 
 You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements,logic statement>> to determine whether or not to run that workflow.
 
-The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
+The example configuration below uses a pipeline value, `pipeline.git.branch` to drive the `integration_tests` workflow.
 
+This example prevents the workflow `integration_tests` from running unless the pipeline is triggered on the `main` branch.
+
+.Use when to only run the workflow on the `main` branch
 [,yaml]
 ----
-version: 2.1
-
 workflows:
   integration_tests:
     when: pipeline.git.branch == "main"
@@ -2544,7 +2545,25 @@ jobs:
 ...
 ----
 
-This example prevents the workflow `integration_tests` from running unless the pipeline is triggered on the `main` branch.
+You might want to combine pipeline values to refine logic for when to run a workflow. In the following example the workflow will only run when:
+
+* The trigger is set to one of the GitHub PR triggers.
+* the branch has an open pull request that is _ready for review_, that is, not in _draft_.
+
+NOTE: These options are only available for GitHub App pipelines. For more information, see the xref:guides:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options] page.
+
+.Use when to only run the workflow when a PR is open and ready for review
+[,yaml]
+----
+workflows:
+  integration_tests:
+    when: pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false
+    jobs:
+      - mytestjob
+
+jobs:
+...
+----
 
 
 Refer to the xref:guides:orchestrate:workflows.adoc#[Workflows] for more examples and conceptual information.
