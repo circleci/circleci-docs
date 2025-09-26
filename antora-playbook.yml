@@ -51,7 +51,7 @@ asciidoc:
     serverversion48: 4.8.2
     serverversion: 3.4.8
     terraformversion: 0.15.4
-    kubernetesversions: 1.26 - 1.33
+    kubernetesversions: 1.31 - 1.33
     kubectlversion: 1.19
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
