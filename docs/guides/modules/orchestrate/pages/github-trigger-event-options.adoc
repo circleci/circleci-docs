@@ -103,7 +103,7 @@ workflows:
   my-workflow:
     when: pipeline.event.name == "api" or pipeline.event.name == "push" or  (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false)
     jobs:
-      - build
+      - myjob
 ----
 +
 ** The condition `pipeline.event.github.pull_request.draft == false` excludes draft PRs from triggering the workflow.
