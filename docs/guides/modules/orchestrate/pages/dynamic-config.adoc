@@ -54,7 +54,7 @@ Some constraints on continuing pipelines from a `setup: true` configuration are 
 ** Use logic conditions to ensure only one workflow is run for each pipeline.
 - A pipeline can only be continued once. A pipeline cannot be continued with another setup configuration. Workflow reruns will fail as part of this restriction. Rather than rerun a setup workflow you can trigger a new pipeline.
 - A pipeline can only be continued within six hours of its creation.
-- Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time. When xref:triggers-overview.adoc#run-a-pipeline-using-the-api[triggering a pipeline via the API], you cannot set a pipeline parameter to a value other than the default value declared in the setup configuration if that pipeline parameter is also declared in the continuation configuration.
+- When xref:triggers-overview.adoc#run-a-pipeline-using-the-api[triggering a pipeline via the API], you cannot set a pipeline parameter to a value other than the default value declared in the setup configuration if that pipeline parameter is also declared in the continuation configuration.
 - If you declare a pipeline parameter with the same name and type in both the setup and continuation configuration files, but with different default values, the default values apply respectively to each configuration.
 - You can set the value of a pipeline parameter declared in the continuation configuration to a value other than the default. To do so, specify the parameter's name and value when calling the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] using the `parameters` parameter.
 
