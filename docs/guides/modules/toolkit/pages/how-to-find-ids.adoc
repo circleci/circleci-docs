@@ -1,0 +1,33 @@
+= How to find IDs
+:page-platform: Cloud
+:page-description: "This page describes how customers can find IDs of various CircleCI elements."
+:experimental:
+
+In various cases you may need to find the ID of a specific CircleCI element, including:
+
+- Making a request to the CircleCI API.
+- Running a command from the local CircleCI CLI.
+- Identifying a CircleCI element in logs or webhook payload.
+
+== Find an organization ID
+
+The organization ID is a unique identifier for an organization. Follow these steps to find it in the CircleCI web app:
+
+- Navigate to menu:Organization Settings[Overview] in the CircleCI web app.
+- Select the btn:[Copy] icon next to the organization ID.
+
+== Find a pipeline ID
+
+The pipeline ID is a unique identifier for a pipeline that has been triggered. Follow these steps to find it in the CircleCI web app:
+
+- Navigate to the pipelines page of your project.
+- Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to any workflow run of the pipeline.
+- In the contextual menu, select btn:[Copy Pipeline ID].
+
+== Find a project ID
+
+The project ID is a unique identifier for a project. Follow these steps to find it in the CircleCI web app:
+
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. On the menu:Overview[] page, select the btn:[Copy] icon next to the project ID.
