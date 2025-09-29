@@ -29,7 +29,7 @@ Follow these steps to prevent unregistered users from triggering work that consu
 
 To disable this feature you can toggle this switch "Off" at any time.
 
-With this option enabled, any unregistered users, that is, users who do not have a CircleCI account, and who are not associated with your org, will see the following if they attempt to trigger a pipeline:
+Once enabled, any unregistered users, that is, users who do not have a CircleCI account, will see the following if they attempt to trigger a pipeline:
 
 * The pipeline will fail to start.
 * The `block-unregistered-user` error will be displayed in a banner on the dashboard
