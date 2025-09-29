@@ -27,9 +27,21 @@ You can choose to pay for premium features per active user, compute, and optiona
 [#run-out-of-credits]
 === What happens when I run out of credits?
 
-On the *Performance Plan*, when you reach 0 credits, you will be refilled approximately 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
+On the *Performance Plan*, when you reach 0 credits, you will be refilled approximately 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, if your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits when you reach 0 remaining credits. Credits are priced at $.0006 each, not including applicable taxes.
 
 If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app, then select menu:Plan[Plan Usage]. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
+
+On the *Scale/Custom Plan*, you have the option to agree to use Credit Auto-Refill (CAR). When your usage gets to 20% of credit purchase, you receive a notice that credit is getting low. If your credit gets to 10%, and you have not made another purchase, you receive a refill of either 25% (default) or 10% of your credit purchase.
+
+For example:
+
+. You buy 100M credits.
+. Get notice at 20M credits.
+. CAR at 10M credits.
+
+CAR can be interrupted with a supplemental purchase.
+
+You can decline CAR, but you will not get a notice at 20%, and if your credits deplete to 0, your service will be interrupted until you make another purchase.
 
 On the *Free Plan*, jobs will fail to run once you have run out of credits.
 
@@ -101,7 +113,7 @@ Yes, all prepaid billing customers still receive the benefit of 30,000 credits a
 
 Yes, log in to the CircleCI web app, then navigate to menu:Plan[Share & Transfer].
 
-On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
+On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with are listed on the Share & Transfer page. Child organizations will bill all credits and other usage to the parent org.
 
 On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the Free Plan.
 
@@ -195,11 +207,11 @@ CircleCI no longer offers discounts for open source customers on the Performance
 
 Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching] page). DLC costs 200 credits per job run.
 
-To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. There are cases where a job can be written once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
+To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. It is possible for a job to appear once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
 
 Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
 
 [#support-plan-info]
 === What does a paid support plan include?
 
-By purchasing a paid support plan with CircleCI, you can change the response time from our Support team to be as low as 30 minutes, with a 24 x 7 coverage plan, to ensure that any issues you have while using CircleCI are investigated as quickly as possible. For more information, link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[refer to this support article].
+By purchasing a 24 x 7 coverage support plan with CircleCI, you can change the response time from our Support team to be as low as 30 minutes. This ensures that any issues you have while using CircleCI are investigated as quickly as possible. For more information, link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response[refer to this support article].
