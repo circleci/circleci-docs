@@ -17,7 +17,7 @@ The Server Plan gives you access to a few additional upgrades over some of the o
 
 [#custom-user-seat-count]
 === Custom user seat count
-Customize the amount of active users based on your needs.
+Customize the number of active users based on your needs.
 
 [#custom-storage-retention]
 === Custom storage retention
