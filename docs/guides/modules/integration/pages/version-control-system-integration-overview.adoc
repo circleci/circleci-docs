@@ -116,7 +116,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref:orchestrate:scheduled-pipelines.adoc[Schedule triggers]
+| xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
 | [[.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#

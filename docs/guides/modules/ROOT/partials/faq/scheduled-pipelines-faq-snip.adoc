@@ -1,7 +1,7 @@
 [#can-i-migrate-existing-scheduled-workflows]
 === Can I migrate existing scheduled workflows to schedule triggers?
 
-Yes, visit the xref:guides:orchestrate:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Schedule triggers migration] guide for more information.
+Yes, visit the xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Schedule triggers migration] guide for more information.
 
 [#find-schedules-that-i-have-created]
 === How do I find the schedules that I have created?
@@ -15,7 +15,6 @@ curl --location --request GET "https://circleci.com/api/v2/project/<project-slug
 
 Refer to the xref:guides:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
-[#what-time-zone-is-used-for-scheduled-pipelines]
 === What time zone is used for schedule triggers?
 
 Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
@@ -23,16 +22,14 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 [#pipelines-scheduled-to-run-specific-time-of-day]
 === Can pipelines be scheduled to run at a specific time of day?
 
-Yes, you can set up xref:guides:orchestrate:scheduled-pipelines.adoc[Schedule triggers] through the xref:guides:orchestrate:scheduled-pipelines.adoc#use-project-settings[CircleCI web app], or with xref:guides:orchestrate:scheduled-pipelines.adoc#use-the-api[CircleCI API v2].
+Yes, you can set up xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers] through the xref:guides:orchestrate:schedule-triggers.adoc#use-project-settings[CircleCI web app], or with xref:guides:orchestrate:schedule-triggers.adoc#use-the-api[CircleCI API v2].
 
-If you are currently using xref:guides:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled workflows], see the xref:guides:orchestrate:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migration guide] to update your scheduled workflows to schedule triggers.
+If you are currently using xref:guides:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled workflows], see the xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration guide] to update your scheduled workflows to schedule triggers.
 
-[#scheduled-pipelines-guaranteed-to-run-time-scheduled]
 === Are schedule triggers guaranteed to run at precisely the time scheduled?
 
-CircleCI provides no guarantees about precision. A random delay of up to 10 minutes is applied to the scheduled time (this delay can be up to one hour for schedule triggers created before September 29 2025). After the first run, the delay will be constant for all subsequent runs. 
+CircleCI provides no guarantees about precision. A random delay of up to 10 minutes is applied to the scheduled time (this delay can be up to one hour for schedule triggers created before September 29 2025). After the first run, the delay will be constant for all subsequent runs.
 
-[#scheduled-pipeline-run-later]
 === Why did my schedule trigger run later than expected?
 
 Pipelines triggered via schedule are not guaranteed to run at exactly the specified time. For example, when you express the schedule as 1 per-hour for 08:00 UTC, the schedule trigger will run once within the 08:00 to 09:00 UTC window. Note that it means that it is unlikely to run at 08:00 UTC exactly.

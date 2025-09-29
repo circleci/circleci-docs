@@ -2,8 +2,9 @@
 :page-platform: Cloud
 :page-description: "Learn how to create schedule triggers on a specific timetable."
 :experimental:
+:page-aliases: set-a-nightly-scheduled-pipeline.adoc
 
-NOTE: Schedule triggers are not currently available for GitLab and Bitbucket Data Center projects. 
+NOTE: Schedule triggers are not currently available for GitLab and Bitbucket Data Center projects.
 
 A common scenario you might want to set up is to trigger a pipeline overnight. The examples below shows how to schedule a pipeline to be run at midnight every night. You can set a schedule right from the link:https://app.circleci.com/[CircleCI web app], or if you would prefer, you can set one using the link:https://circleci.com/docs/api/v2/index.html[API].
 
@@ -73,5 +74,5 @@ You can view the build scheduling of this link:https://github.com/zmarkan/Androi
 [#next-steps]
 == Next steps
 
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to schedule triggers]
+- xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate scheduled workflows to schedule triggers]
 - xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]

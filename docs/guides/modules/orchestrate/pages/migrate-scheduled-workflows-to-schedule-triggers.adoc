@@ -2,11 +2,9 @@
 :page-platform: Cloud
 :page-description: Migrate scheduled workflows to schedule triggers
 :experimental:
+:page-aliases: migrate-scheduled-workflows-to-scheduled-pipelines.adoc
 
-include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
-
-[#introduction]
-== Introduction
+NOTE: This feature is not supported for GitLab or Bitbucket Data Center pipelines.
 
 Schedule workflows have some limitations that make them less convenient than schedule triggers:
 
@@ -80,9 +78,9 @@ For additional information, refer to the **Schedule** section under the link:htt
 [#use-project-settings]
 === b. Use project settings in the web app
 
-. In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and select **Project Settings**. You can also find the **Project Settings** button on each project's landing page. 
-If you are using GitHub, navigate to menu:Project Settings[Project Setup], identify the pipeline you want to schedule, and select "Schedule +". 
-If yuo are using Bitbucket Cloud, navigate to menu:Project Settings[Triggers] and select **Add Trigger**. 
+. In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and select **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
+If you are using GitHub, navigate to menu:Project Settings[Project Setup], identify the pipeline you want to schedule, and select "Schedule +".
+If yuo are using Bitbucket Cloud, navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
 Define the new schedule by filling out the form, then save.
 
 The form also provides the option of adding xref:pipeline-variables.adoc[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
@@ -102,4 +100,4 @@ daily-run-workflow:
 [#next-steps]
 == Next steps
 - xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
-- xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly schedule trigger]
+- xref:set-a-nightly-scheduled-trigger.adoc[Set a nightly schedule trigger]

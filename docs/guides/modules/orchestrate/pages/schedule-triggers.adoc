@@ -2,6 +2,7 @@
 :page-platform: Cloud
 :page-description: Learn about schedule triggers for your CircleCI projects.
 :experimental:
+:page-aliases: scheduled-pipelines.adoc
 
 NOTE: This feature is not supported for GitLab or Bitbucket Data Center pipelines.
 
@@ -27,9 +28,11 @@ Pipeline parameters are typed pipeline variables in the form of a string, intege
 
 Schedule triggers are set to run by an "actor", either the CircleCI scheduling system, or a specific user (for example, yourself). The scheduling actor is important to consider if making use of restricted contexts in workflows. If the user (actor) running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
-You can find a basic how-to guide on the xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly schedule trigger] page, and more advanced examples on the xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows] pages.
+You can find a basic how-to guide on the xref:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger] page, and more advanced examples on the xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows] pages.
 
-[#get-started-with-scheduled-pipelines]
+NOTE: Schedule triggers were previously named "scheduled pipelines".
+
+[#get-started-with-schedule-triggers]
 == Get started with schedule triggers
 
 To get started with schedule triggers, you have the option of using the API, or using the CircleCI web app. Both methods are described below.
@@ -37,7 +40,7 @@ To get started with schedule triggers, you have the option of using the API, or 
 // I think we need 3 tabs here
 // - Bitbucket Cloud using the web-app --> use the Triggers tab
 // - GitHub (OAuth and GitHub App) using the web-app --> use the Project Setup tab
-// - API (with caveat that it's not yet available for GitHub App) 
+// - API (with caveat that it's not yet available for GitHub App)
 
 [#use-project-settings]
 === Use project settings in the web app
@@ -76,12 +79,10 @@ include::ROOT:partial$tips/find-project-slug.adoc[]
 
 For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 docs]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
 
-[#migrate-scheduled-workflows-to-scheduled-pipelines]
 == Migrate scheduled workflows to schedule triggers
 
-If you have existing scheduled workflows you need to migrate to schedule triggers, use the xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Schedule triggers migration] guide.
+If you have existing scheduled workflows you need to migrate to schedule triggers, use the xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Schedule triggers migration] guide.
 
-[#scheduled-pipelines-video-tutorial]
 == Schedule triggers video tutorial
 
 The video offers a short tutorial for the following scenarios:
@@ -108,6 +109,6 @@ include::ROOT:partial$faq/scheduled-pipelines-faq-snip.adoc[]
 [#next-steps]
 == Next steps
 
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to schedule triggers]
+- xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate scheduled workflows to schedule triggers]
 - xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
 - xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly schedule trigger]

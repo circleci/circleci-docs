@@ -2,6 +2,7 @@
 :page-platform: Cloud
 :page-description: "Learn how to set conditionals for schedule triggers in multiple workflows."
 :experimental:
+:page-aliases: schedule-pipelines-with-multiple-workflows.adoc
 
 NOTE: Schedule triggers are not currently available for GitLab and Bitbucket Data Center projects.
 
@@ -17,7 +18,7 @@ version: 2.1
 ...
 daily-run-workflow:
 # run workflow only when the daily_build pipeline is triggered
-  when: pipeline.trigger_source == "scheduled_pipeline" and pipeline.schedule.name == "daily_build" 
+  when: pipeline.trigger_source == "scheduled_pipeline" and pipeline.schedule.name == "daily_build"
   jobs:
     - test
     - build
@@ -39,7 +40,7 @@ version: 2.1
 ...
 daily-run-workflow:
 # run workflow only when the daily_build pipeline is triggered
-  when: pipeline.trigger_source == "scheduled_pipeline" and pipeline.schedule.name == "daily_build" 
+  when: pipeline.trigger_source == "scheduled_pipeline" and pipeline.schedule.name == "daily_build"
   jobs:
     - test
     - build
@@ -119,5 +120,5 @@ workflows:
 [#next-steps]
 == Next steps
 
-- xref:set-a-nightly-scheduled-pipeline.adoc[Set a nightly schedule trigger]
-- xref:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to schedule triggers]
+- xref:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger]
+- xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate scheduled workflows to schedule triggers]
