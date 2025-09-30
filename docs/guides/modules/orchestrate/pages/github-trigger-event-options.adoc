@@ -23,7 +23,7 @@ When you create or set up a project in CircleCI you will set up your first pipel
 
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
-If your CircleCI organization is integrated with GitHub only through the **GitHub App** (see tip above), you will see trigger options when creating a project in the CircleCI web app, and you have the option to change the trigger options for your first trigger. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Project Setup].
+If your CircleCI organization is integrated with GitHub only through the **GitHub App**, you will see trigger options when creating a project in the CircleCI web app. You have the option to change the trigger options for your first trigger when setting the project up. You can also set up additional triggers during project creation, or setup/edit later in your menu:Project settings[Project Setup].
 
 .Trigger options during project creation
 image::guides:ROOT:triggers/create-project-run-on.png[Create a project trigger and access trigger options]
@@ -95,15 +95,15 @@ All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-even
 * `pipeline.event.github.pull_request.head.ref`: the name of the *head* branch of the PR - that is the branch containing the changes to be merged.
 * `pipeline.event.github.pull_request.draft`: a boolean value indicating whether the pull request is a draft.
 +
-**Usage example**: To trigger a pipeline on _PR opened or pushed to, default branch and tag pushes_, but ensure that it never runs if the event is associated with a PR that is marked as draft, use the following filter.
+**Example**: To trigger a pipeline on `PR opened or pushed to, default branch and tag pushes`, and ensure that it never runs if the event is associated with a draft PR, use the following:
 +
 [,yaml]
 ----
 workflows:
   my-workflow:
-    when: pipeline.event.name == "api" or pipeline.event.name == 'push' or  (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false))
-      jobs:
-        - myjob
+    when: pipeline.event.name == "api" or pipeline.event.name == "push" or  (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false)
+    jobs:
+      - myjob
 ----
 +
 ** The condition `pipeline.event.github.pull_request.draft == false` excludes draft PRs from triggering the workflow.
@@ -113,7 +113,7 @@ workflows:
 
 * `pipeline.event.github.pull_request.title`: the title of the pull request.
 * `pipeline.event.github.pull_request.number`: the numeric identifier of the pull request.
-* `pipeline.event.github.pull_request.merged`: a boolean that indicates whether the PR was merged or not. 
+* `pipeline.event.github.pull_request.merged`: a boolean that indicates whether the PR was merged or not.
 
 These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[the GitHub docs].
 
@@ -142,7 +142,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 .Trigger options under Project settings
 image::guides:ROOT:triggers/select-when-to-run.png[Set a trigger option for a project trigger]
 .
-** Select the *Event Source* repository from the dropdown. This defaults to the config source repository. If you change it to a repository that does not match the pipeline's config or checkout source, you will be prompted to specify a fixed branch to be used respectively for fetching config and checking out code. 
+** Select the *Event Source* repository from the dropdown. This defaults to the config source repository. If you change it to a repository that does not match the pipeline's checkout source, you can specify a branch to be used for fetching config and code checkout.
 . Select btn:[Save].
 
 To verify your trigger is set up correctly, trigger an event (open a PR) from your repository.
@@ -153,7 +153,12 @@ To verify your trigger is set up correctly, trigger an event (open a PR) from yo
 
 No, different trigger event options cannot be combined in a single trigger. However, you can create multiple triggers for the same pipeline that listen for events from the same repository, with each trigger using a different trigger event option.
 
-For example, by having one trigger with the trigger option "PR opened" and a second trigger with the trigger option "PR merged", your pipeline will trigger whenever a PR is opened or merged.
+For example, by having the following:
+
+* One trigger with the trigger option "PR opened"
+* One trigger with the trigger option "PR merged"
+
+Your pipeline will trigger whenever a PR is opened or merged.
 
 == Next steps
 

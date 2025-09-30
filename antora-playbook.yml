@@ -46,9 +46,9 @@ asciidoc:
     serverversion43: 4.3.9
     serverversion44: 4.4.7
     serverversion45: 4.5.5
-    serverversion46: 4.6.2
-    serverversion47: 4.7.0
-    serverversion48: 4.8.0
+    serverversion46: 4.6.6
+    serverversion47: 4.7.9
+    serverversion48: 4.8.2
     serverversion: 3.4.8
     terraformversion: 0.15.4
     kubernetesversions: 1.26 - 1.31
@@ -65,3 +65,6 @@ urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
   html_extension_style: indexify
+antora:
+  extensions:
+  - ./extensions/unlisted-pages-extension.js

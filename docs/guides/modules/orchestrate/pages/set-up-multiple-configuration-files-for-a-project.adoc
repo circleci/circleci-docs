@@ -15,7 +15,7 @@ Using multiple pipelines and triggers, you can build different pipelines for dif
 - A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
 - A `teardown-env` pipeline that runs when a PR is merged. Select "PR merged".
 
-image::guides:ROOT:triggers/run-on-open.png[Triggers page with Run on menu open]
+image::guides:ROOT:triggers/select-when-to-run.png[Triggers page with Run on menu open]
 
 For a full list, see the xref:github-trigger-event-options.adoc[GitHub trigger event options] page.
 
@@ -49,7 +49,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 . Select btn:[Add Pipeline].
 +
-NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so at this point. Installing the GitHub App is a one-time step that can be done by an organization admin . Once installed, further GitHub App pipelines can be setup without this installation step. For a detailed guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page. If you run into an issue when trying to install the CircleCI GitHub App (for example, the App looks installed on GitHub, but doesn't show up on CircleCI), submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form].
+NOTE: If you have not installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page. If you run into issues when installing the GitHub App, for example, App looks installed on GitHub, but does not show up on CircleCI, submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form].
 . Complete the required form fields:
 ** Give your pipeline a descriptive name.
 ** Under *Config Source* select the repository where the config file is stored. This can be the same repository as your code or a different repository.
@@ -66,16 +66,6 @@ Next, create a trigger for each pipeline you have created for your project. Alte
 
 . Following from the previous step, select btn:[GitHub trigger +] at the bottom of the pipeline box.
 . Choose when to run the pipeline by selecting an option from the *Event* menu.
-+
-****
-Using multiple pipelines and triggers, you can build different pipelines for different events, For example, you could have:
-
-- A `build-test` pipeline that runs on every push. Select "All pushes".
-- A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
-- A `teardown-env` pipeline that runs when a PR is merged. Select "PR merged".
-
-For a full list, see the xref:github-trigger-event-options.adoc[GitHub trigger event options] page.
-****
 . Select the *Event Source* repository from the dropdown. This defaults to the config source repository. If you change it to a repository that does not match the pipeline's config or checkout source, you will be prompted to specify a fixed branch to be used for fetching config and checking out code.
 
 . Select btn:[Save]

@@ -155,7 +155,7 @@ The following settings are available in the project settings page. If you do not
 
 **Project Setup**: Provides a list of pipelines that have been set up for the project and their associated triggers. See xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup] for more information. This page includes the option to begin setting up pipelines if none exist. The setup UI for scheduled pipelines is located either here or in the *Triggers* section (if available for your integration). To set up a xref:orchestrate:schedule-triggers.adoc[schedule trigger] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
-*Pipelines* and *Triggers*: Some integration types will see two pages in the sidebar for setting up and managing pipelines and triggers. The options available in these pages are equivalent to those available in the *Project Setup* page.
+*Pipelines* and *Triggers*: These pages let you set up pipelines and triggers when using the GitLab, Bitbucket Cloud and Bitbucket Data Center integrations.
 
 **Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy:deployment-overview.adoc[Deployment overview] page.
 

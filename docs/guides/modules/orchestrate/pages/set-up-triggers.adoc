@@ -5,7 +5,7 @@
 
 Triggers are configurable rules that determine when to automatically run a pipeline based on specific events and conditions.
 
-A project can have one or more triggers, which are associated with events from a source of change. The most common type of trigger is a VCS event, for example, a push to a branch on a GitHub repository. Any system that can emit outbound webhooks can be set up as a trigger. A trigger can have only one pipeline but a pipeline can have multiple triggers.
+A pipeline can have one or more triggers, which are associated with events from a source of change. The most common type of trigger is a VCS event, for example, a push to a branch on a GitHub repository. Any system that can emit outbound webhooks can be set up as a trigger. A trigger can have only one pipeline but a pipeline can have multiple triggers.
 
 A trigger kicks off a pipeline to run the workflows defined in your connected config source.
 
@@ -17,7 +17,7 @@ NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Se
 
 The pipeline and trigger options and features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
 
-There are broadly three types of triggers:
+Triggers are available in the following types:
 
 * VCS triggers.
 * Custom webhooks used for triggering pipelines from external services.
@@ -49,9 +49,7 @@ Using multiple pipelines and triggers, you can build different pipelines for dif
 
 For a full list, see the xref:github-trigger-event-options.adoc[GitHub trigger event options] page.
 ****
-* The *Event Source* defaults to the repository associated with the pipeline.
-+
-TIP: You can change the event source to a different repository if you wish. If you do change the event source so that it does not match the pipeline's config/checkout source an option will appear to specify which branch in the config/checkout source repository you wish to use for the trigger.
+* The *Event Source* defaults to the repository associated with the pipeline. You can change the event source to a different repository if you wish. If you do change the event source so that it does not match the pipeline's config/checkout source an option will appear to specify which branch in the config/checkout source repository you wish to use for the trigger.
 . Select btn:[Save]
 
 To verify your trigger is set up correctly, trigger an event from your repository.
@@ -82,8 +80,6 @@ To add a trigger for a pipeline, follow these steps:
 . In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
 . Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
-+
-TIP: If you do not see **Triggers** in the sidebar, your project is integrated using either xref:integration:github-integration.adoc[GitHub OAuth] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud] and these steps do not apply.
 . Select btn:[Add Trigger].
 . Select the same location in the "Connect to" dropdown menu that you selected for your pipeline (for example, GitLab).
 . Select btn:[Next].

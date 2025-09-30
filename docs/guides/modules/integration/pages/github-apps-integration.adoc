@@ -75,8 +75,7 @@ Project roles give control over which users have access to which projects within
 
 For a complete list of permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview] page.
 
-[#pipelines-and-triggers]
-=== Pipelines and triggers
+=== Project setup
 
 You can add or delete pipelines for your project. For details see the xref:orchestrate:pipelines.adoc[Pipelines Overview].
 
