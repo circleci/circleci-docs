@@ -209,7 +209,6 @@ You can only manage your connections between CircleCI and Bitbucket Data Center 
 
 Passing secrets to forked pull requests is not a currently supported option for Bitbucket Data Center integrations.
 
-[#scheduled-pipelines]
 === Scheduled triggers
 
 The ability to xref:orchestrate:schedule-triggers.adoc[schedule triggers] is not currently supported for Bitbucket Data Center projects.

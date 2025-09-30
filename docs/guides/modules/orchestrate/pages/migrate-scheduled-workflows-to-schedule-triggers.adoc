@@ -100,4 +100,4 @@ daily-run-workflow:
 [#next-steps]
 == Next steps
 - xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
-- xref:set-a-nightly-scheduled-trigger.adoc[Set a nightly schedule trigger]
+- xref:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger]
