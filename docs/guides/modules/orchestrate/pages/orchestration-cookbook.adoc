@@ -211,11 +211,12 @@ In some cases, you may want to configure a workflow that will only run when a sc
 
 === Steps
 
-* Update your CircleCI config to use the `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[pipeline values].
+* Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[pipeline values].
 +
+.The nightly-run-workflow only runs when the trigger is a scheduled pipeline AND the name of that trigger is "nightly_build"
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+include::ROOT:example$logic-statement-examples/when-in-workflows/and-equal-dynamic.yml[]
 ----
 
 === Notes

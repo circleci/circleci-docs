@@ -105,9 +105,7 @@ For steps to add a trigger for a pipeline using Bitbucket Data Center, see the x
 Scheduled::
 +
 --
-include::ROOT:partial$notes/standalone-unsupported.adoc[Unsupported for GitHub App, GitLab, Bitbucket Data Center orgs]
-
-include::ROOT:partial$pipelines-and-triggers/scheduled-pipeline-setup.adoc[Setting up a scheduled pipeline using the CircleCI web app]
+For steps to add a schedule trigger, see the xref:schedule-triggers.adoc[Schedule Triggers] page.
 --
 ====
 
