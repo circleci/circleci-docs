@@ -57,6 +57,7 @@ a| `m4pro.medium` +
 a| `m4pro.medium` +
    `m4pro.large` +
    `m2pro.medium` +
+   _(M4 support deprecated Oct 7, 2025)_ +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
