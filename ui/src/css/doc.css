@@ -1440,3 +1440,14 @@
   color: #8F001C !important;
   font-weight: var(--heading-font-weight);
 }
+
+/* Prevent code text from wrapping in table cells */
+td .pre,
+td .code,
+td code,
+td pre,
+td .tableblock code,
+td p code,
+.tableblock code {
+  white-space: nowrap !important;
+}
