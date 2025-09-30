@@ -9,14 +9,32 @@ You may need to find the ID of a specific CircleCI element to perform various ac
 - Running a command from the local CircleCI CLI.
 - Identifying a CircleCI element in logs or webhook payload.
 
+== Get IDs from the built-in environment variables
+
+xref:reference:ROOT:variables.adoc#built-in-environment-variables[Buit-in environment variables] scoped at the job level, include the following IDs:
+
+- `CIRCLE_ORGANIZATION_ID`: The organization ID.
+- `CIRCLE_PROJECT_ID`: The project ID.
+- `CIRCLE_PIPELINE_ID`: The pipeline ID.
+- `CIRCLE_WORKFLOW_ID`: The workflow ID.
+- `CIRCLE_WORKFLOW_JOB_ID`: The job ID.
+
+To view all environment variables available at the job level, follow these steps:
+
+. Navigate to the pipelines page of your project.
+. Expand a workflow run.
+. Select a job from that workflow run.
+. On the job page, expand the menu:Preparing environment variables[] step.
+. Locate the relevant environment variable(s) and note the value(s).
+
+image::guides:ROOT:ids-from-env-vars.png[IDs available from built-in environment variables]
+
 == Find your user ID
 
 The user ID is a unique identifier for a user. Follow these steps to find it in the CircleCI web app:
 
-. Log in to the link:https://circleci.com/[CircleCI web app].
-. Select your user icon at the top right of the user area in the CircleCI web app.
-. Select menu:User Settings[] in the contextual menu.
-. Navigate to the menu:Account Integrations[] page.
+. In the CircleCI application, go to your link:https://app.circleci.com/settings/user[User settings].
+. On the menu:Account Integrations[] page, locate the **User ID** label.
 . Note the value or select the btn:[Copy] icon next to your user ID.
 
 
@@ -82,19 +100,38 @@ image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
 
 The workflow ID is a unique identifier for a workflow that has been triggered. Follow these steps to find it in the CircleCI web app:
 
+[tabs]
+====
+
+From the workflow URL::
++
 . Navigate to the pipelines page of your project.
-. Expand the workflow run you want to find the ID for.
+. Select the workflow run you want to find the ID for.
+. Check the URL of the page. The workflow ID is the last alphanumeric string of the URL, after the `/workflows/` string.
+
++
+image::guides:ROOT:workflow-id-from-workflow-url.png[Get workflow ID from workflow page URL]
+
+From the job URL::
++
+. Navigate to the pipelines page of your project.
+. Select the workflow run you want to find the ID for.
 . Select any job from that workflow run.
-. On the job page, expand the menu:Preparing environment variables[] step.
-. Locate the `CIRCLE_WORKFLOW_ID` environment variable and note its value.
+. Check the URL of the page. The workflow ID is the alphanumeric string of the URL located between the `/workflows/` and the `/jobs/` strings.
 
++
+image::guides:ROOT:workflow-id-from-job-url.png[Get workflow ID from job page URL]
+====
 
-== Find a job ID
+== Find a pipeline definition ID
 
-The job ID is a unique identifier for a job that has been triggered. Follow these steps to find it in the CircleCI web app:
+The pipeline definition ID is a unique identifier for a pipeline definition. Follow these steps to find it in the CircleCI web app:
 
-. Navigate to the pipelines page of your project.
-. Expand the workflow run you want to find the ID for.
-. Select the job you want to find the ID for.
-. On the job page, expand the menu:Preparing environment variables[] step.
-. Locate the `CIRCLE_WORKFLOW_JOB_ID` environment variable and note its value.
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. Navigate to the menu:Project Setup[] page.
+. Locate the pipeline definition you want to find the ID for.
+. Note the value below the pipeline name or select the btn:[Copy] icon next to the pipeline definition ID.
+
+image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[Get pipeline definition ID]
+
