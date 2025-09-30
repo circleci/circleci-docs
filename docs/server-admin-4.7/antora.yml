@@ -2,5 +2,8 @@ name: server-admin
 title: Server
 version: server-4.7
 display_version: Server 4.7
+asciidoc:
+  attributes:
+    kubernetesversion: 1.31 - 1.33
 nav:
 - modules/ROOT/nav.adoc
