@@ -207,7 +207,7 @@ CircleCI no longer offers discounts for open source customers on the Performance
 
 Docker layer caching (DLC) reduces build times on pipelines where Docker images are built by only rebuilding Docker layers that have changed (read more on the xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching] page). DLC costs 200 credits per job run.
 
-To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. It is possible for a job to appear once in a config file but the job runs multiple times in a pipeline, for example, with parallelism enabled.
+To estimate your DLC cost, look at the jobs in your config file with Docker layer caching enabled, and the number of Docker images you are building in those jobs. In some cases, a job that appears only once in a config file can run multiple times in a pipeline. For example, with parallelism enabled.
 
 Note that the benefits of Docker layer caching are only apparent on pipelines that are building Docker images, and reduces image build times by reusing the unchanged layers of the application image built during your job. If your pipeline does not include a job where Docker images are built, Docker layer caching will provide no benefit.
 
