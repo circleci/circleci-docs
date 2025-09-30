@@ -57,8 +57,8 @@ image::guides:ROOT:pipeline-id.png[Copy pipeline ID from pipelines dashboard]
 From the workflow page::
 +
 . Navigate to the pipelines page of your project.
-. Select any workflow run of the pipeline.
-. On the workflow page, elect the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] at the top-right of the page (next to the btn:[Rerun] button).
+. Select any workflow run of the pipeline you want to find the ID for.
+. On the workflow page, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] at the top-right of the page (next to the btn:[Rerun] button).
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
@@ -67,10 +67,10 @@ image::guides:ROOT:pipeline-id-from-workflow.png[Copy pipeline ID from workflow 
 From the job page::
 +
 . Navigate to the pipelines page of your project.
-. Select any workflow run of the pipeline.
+. Select any workflow run from the pipeline you want to find the ID for.
 . Select any job from that workflow run.
-. On the job page, expand the menu:Preparing environment variables[] step.
-. Locate the `CIRCLE_PIPELINE_ID` environment variable and note its value.
+. On the job page, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] at the top-right of the page (next to the btn:[Rerun] button).
+. In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
 image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
