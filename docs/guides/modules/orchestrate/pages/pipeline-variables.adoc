@@ -195,7 +195,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 [#pipeline-parameters-and-dynamic-configuration]
 === Pipeline parameters and dynamic configuration
 
-All parameters that passed from the setup workflow, via the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] using the `parameters` parameter must be declared as pipeline parameters in the continuation configuration.
+Parameters can be passed from the setup to the continuation workflow using the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb]. To pass these parameters use the `parameters` parameter from the `continue` job/command. Any parameters passed in this way must be declared as pipeline parameters in the continuation configuration.
 
 When a pipeline parameter is declared in both the setup and the continuation configurations, the pipeline will error if both the following conditions are met:
 
