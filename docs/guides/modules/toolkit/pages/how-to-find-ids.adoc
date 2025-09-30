@@ -40,7 +40,7 @@ The user ID is a unique identifier for a user. Follow these steps to find it in 
 
 == Find an organization ID
 
-The organization ID is a unique identifier for an organization. The organization ID is populated in the `CIRCLE_ORGANIZATION_ID` xref:#_get_ids_from_the_built-in_environment_variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The organization ID is a unique identifier for an organization. The organization ID is available in the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 . Navigate to menu:Organization Settings[Overview] in the CircleCI web app.
 . Note the value or select the btn:[Copy] icon next to the organization ID.
@@ -48,7 +48,7 @@ The organization ID is a unique identifier for an organization. The organization
 
 == Find a project ID
 
-The project ID is a unique identifier for a project. The project ID is populated in the `CIRCLE_PROJECT_ID` xref:#_get_ids_from_the_built-in_environment_variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The project ID is a unique identifier for a project. The project ID is available in the `CIRCLE_PROJECT_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
@@ -57,7 +57,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 == Find a pipeline ID
 
-The pipeline ID is a unique identifier for a pipeline that has been triggered. The pipeline ID is populated in the `CIRCLE_PIPELINE_ID` xref:#_get_ids_from_the_built-in_environment_variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The pipeline ID is a unique identifier for a pipeline that has been triggered. The pipeline ID is available in the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 
 [tabs]
@@ -98,7 +98,7 @@ image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
 
 == Find a workflow ID
 
-The workflow ID is a unique identifier for a workflow that has been triggered. The workflow ID is populated in the `CIRCLE_WORKFLOW_ID` xref:#_get_ids_from_the_built-in_environment_variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The workflow ID is a unique identifier for a workflow that has been triggered. The workflow ID is available in the `CIRCLE_WORKFLOW_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 [tabs]
 ====
