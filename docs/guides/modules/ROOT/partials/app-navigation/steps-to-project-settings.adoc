@@ -1,3 +1,5 @@
 . In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 . Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to your project and select **Project Settings**.
++
+TIP: You can also access project settings from each project overview page using the btn:[Settings] button.

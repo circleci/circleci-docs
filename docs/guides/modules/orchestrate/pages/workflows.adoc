@@ -386,9 +386,9 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 
 NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
 
-NOTE: *The deprecation of the scheduled workflows feature is postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work for us to do to improve the existing scheduled pipelines experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
+NOTE: *The deprecation of the scheduled workflows feature is postponed*. Since the deprecation announcement went live, your feedback and feature requests have been monitored and it is clear there is more work for us to do to improve the existing schedule triggers experience, and also make migration easier for all. Updates on a new deprecation timeline will be announced here and on link:https://discuss.circleci.com/[CircleCI Discuss].
 
-CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc[Dynamic configuration]. If you use dynamic configuration you will need to use xref:scheduled-pipelines.adoc[Scheduled pipelines] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
+CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc[dynamic configuration]. If you use dynamic configuration you will need to use xref:schedule-triggers.adoc[schedule triggers] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
 
 By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
 
