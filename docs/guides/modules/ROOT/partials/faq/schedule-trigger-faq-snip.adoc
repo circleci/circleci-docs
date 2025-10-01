@@ -38,4 +38,4 @@ However, subsequent runs of the schedule trigger will always be run on the same 
 
 === Why can I not add a schedule trigger to my pipeline?
 
-Only GitHub OAuth, GitHub App and Bitbucket Cloud pipelines support schedule triggers. If you try to set up a schedule trigger through the menu:Project Settings[Triggers] menu and do not see your pipeline in the "Pipeline to run" dropdown menu, it may be that you are trying to access an unsupported pipeline type (Gitlab or Bitbucket Data Center).
+Only GitHub OAuth, GitHub App and Bitbucket Cloud pipelines support schedule triggers. GitLab and Bitbucket Data Center pipelines do not support schedule triggers. If you set up a schedule trigger through menu:Project Settings[Triggers] and do not see your pipeline in the "Pipeline to run" menu, check your pipeline type is supported .
