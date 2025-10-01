@@ -3,11 +3,11 @@
 :page-description: "This page describes how customers can find IDs of various CircleCI elements."
 :experimental:
 
-You may need to find the ID of a specific CircleCI element to perform various actions, including:
+You may need to find the ID of specific CircleCI elements to perform various actions, including:
 
 - Making a request to the CircleCI API.
 - Running a command from the local CircleCI CLI.
-- Identifying a CircleCI element in logs or webhook payload.
+- Identifying a CircleCI element in logs or webhook payloads.
 
 == Get IDs from the built-in environment variables
 
@@ -25,7 +25,7 @@ To view all environment variables available at the job level, follow these steps
 . Expand a workflow run.
 . Select a job from that workflow run.
 . On the job page, expand the menu:Preparing environment variables[] step.
-. Locate the relevant environment variable(s) and note the associatedvalue(s).
+. Locate the relevant environment variable(s) and note the associated value(s).
 
 image::guides:ROOT:ids-from-env-vars.png[IDs available from built-in environment variables]
 
@@ -40,7 +40,9 @@ The user ID is a unique identifier for a user. Follow these steps to find it in 
 
 == Find an organization ID
 
-The organization ID is a unique identifier for an organization. The organization ID is available in the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The organization ID is a unique identifier for an organization.
+
+The organization ID is available in the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 . Navigate to menu:Organization Settings[Overview] in the CircleCI web app.
 . Note the value or select the btn:[Copy] icon next to the organization ID.
@@ -48,7 +50,9 @@ The organization ID is a unique identifier for an organization. The organization
 
 == Find a project ID
 
-The project ID is a unique identifier for a project. The project ID is available in the `CIRCLE_PROJECT_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The project ID is a unique identifier for a project.
+
+The project ID is available in the `CIRCLE_PROJECT_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
@@ -57,7 +61,9 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 == Find a pipeline ID
 
-The pipeline ID is a unique identifier for a pipeline that has been triggered. The pipeline ID is available in the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The pipeline ID is a unique identifier for a pipeline that has been triggered.
+
+The pipeline ID is available in the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 
 [tabs]
@@ -98,7 +104,9 @@ image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
 
 == Find a workflow ID
 
-The workflow ID is a unique identifier for a workflow that has been triggered. The workflow ID is available in the `CIRCLE_WORKFLOW_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
+The workflow ID is a unique identifier for a workflow that has been triggered.
+
+The workflow ID is available in the `CIRCLE_WORKFLOW_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, you can follow these steps to find it in the CircleCI web app:
 
 [tabs]
 ====
