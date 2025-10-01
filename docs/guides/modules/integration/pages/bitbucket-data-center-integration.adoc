@@ -8,7 +8,7 @@ This page walks you through integrating a Bitbucket Data Center project with Cir
 [#overview]
 == CircleCI Bitbucket Data Center integration overview
 
-CircleCI CI/CD allows you to build, test (continuous integration) and deploy (continuous deployment, continuous delivery) your Bitbucket Data Center projects each time a developer pushes a change to the codebase, and when a pull request is merged.
+CircleCI CI/CD allows you to build, test and deploy your Bitbucket Data Center projects each time a developer pushes a change and when a pull request is merged.
 
 Integrate with CircleCI to access features for automated software delivery:
 
@@ -209,10 +209,9 @@ You can only manage your connections between CircleCI and Bitbucket Data Center 
 
 Passing secrets to forked pull requests is not a currently supported option for Bitbucket Data Center integrations.
 
-[#scheduled-pipelines]
-=== Scheduled pipelines
+=== Scheduled triggers
 
-The ability to xref:orchestrate:scheduled-pipelines.adoc[schedule pipelines] is not currently supported for Bitbucket Data Center projects. This feature is planned for a future release.
+The ability to xref:orchestrate:schedule-triggers.adoc[schedule triggers] is not currently supported for Bitbucket Data Center projects.
 
 [#stop-building]
 === Stop building

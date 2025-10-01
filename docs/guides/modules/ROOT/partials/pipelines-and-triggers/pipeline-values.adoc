@@ -120,7 +120,7 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The name of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
+| The name of the schedule trigger if the pipeline was triggered via schedule. The value will be empty string if the pipeline is triggered by other sources.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -128,7 +128,7 @@ d| [.nowrap]#GitHub OAuth# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The unique id of the schedule if it is a scheduled pipeline. Value will be empty string if the pipeline is triggered by other sources.
+| The unique ID of the schedule if the pipeline was triggered via schedule trigger. Value will be empty string if the pipeline is triggered by other sources.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
