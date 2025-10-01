@@ -69,38 +69,38 @@ There are four types of jobs:
 
 You can set the type of a job by adding the `type` key to the job configuration.
 
-See the xref:reference:ROOT:configuration-reference.adoc#job-type[Confirguration reference] page for more information on how to use the different job types.
+See the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration reference] page for more information on how to use the different job types.
 
 === Job status transitions
+
+The following diagram and table shows the possible job statuses and transitions.
 
 .Job status transitions
 [mermaid]
 ----
 stateDiagram-v2
+    direction TB
     [*] --> blocked
 
-    blocked --> pending
-    blocked --> unauthorized : trying to use a context without permission
+    state "blocked or not run" as pending
+    blocked --> pending : Job instructed to start but not yet started
+    blocked --> unauthorized : Trying to use a context without permission
+    blocked --> canceled
 
-    pending --> running: For build jobs, Mongo builds are created here
+    pending --> running
 
-    pending --> skipped : PRs only / ci-skip / no project found / abusive / sanctioned / etc.
-    pending --> blocked : retriable error
-    pending --> terminated
+    pending --> skipped : Only build PRs setting enabled<br/>ci-skip<br/>No project found<br/>Abusive<br/>Sanctioned
+    pending --> blocked : Rerun
 
     running --> canceled
     pending --> canceled
-    blocked --> canceled
+
 
 
     running --> failed
     running --> success
-    running --> terminated
-
-    state "terminated-unknown" as terminated
 
     skipped --> [*]
-    terminated --> [*]
     success --> [*]
     failed --> [*]
     canceled --> [*]
@@ -108,6 +108,27 @@ stateDiagram-v2
 
 ----
 
+[cols="1,2", options="header"]
+|===
+| Status | Description
+
+|Blocked/Not Running | All jobs start off in a blocked state. Jobs called `build` move on to a Not Running state before starting.
+
+|Running | Job is running.
+
+| On Hold | The job is running but requires manual approval.
+
+| Not Run | The job is skipped.
+
+| Success | The job succeeded.
+
+| Failed | The job failed or terminated for unknown reasons.
+
+| Canceled | The job was canceled. An actor might cancel a job, or cancel a workflow. A job may be cancelled due to auto-cancellation. Support engineers can force cancellation of a job.
+
+| Unauthorized | The job uses a restricted context and the actor that triggered the work does NOT have access to that context.
+
+|===
 
 [#steps-overview]
 == Steps overview
