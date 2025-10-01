@@ -141,12 +141,10 @@ The minimum required access policy for the role is as follows:
         {
             "Effect": "Allow",
             "Action": [
-                "s3:PutObject",
-                "s3:ListBucket"
+                "s3:PutObject"
             ],
             "Resource": [
-                "arn:aws:s3:::<bucket-name>/*",
-                "arn:aws:s3:::<bucket-name>"
+                "arn:aws:s3:::<bucket-name>/*"
             ]
         }
     ]
@@ -189,6 +187,7 @@ image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 +
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
+Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket. This verifies that the system has sufficient permissions to start the stream.
 
 ==== 3. Verify and test
 
