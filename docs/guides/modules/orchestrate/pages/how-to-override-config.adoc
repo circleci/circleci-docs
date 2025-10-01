@@ -329,8 +329,8 @@ While not strictly required, GitHub App integration provides the best experience
 === Can I use this with legacy GitHub OAuth projects?
 The override mechanism will work for GitHub OAuth projects, but there is no way to enforce a single config across multiple OAuth projects within the CircleCI platform. The "centralized" config would need to be duplicated in each project.
 
-=== Are scheduled pipelines supported?
-Scheduled pipelines are not supported for GitHub App/GitLab projects, so they cannot be triggered from a centralized config.
+=== Are schedule triggers supported?
+Schedule triggers are not supported for GitLab projects, so they cannot be triggered from a centralized config.
 
 === Can I override entire workflows?
 Config overrides only supports job overrides at this time.
