@@ -47,6 +47,8 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select **Project Setup** in the sidebar.
 Locate your pipeline and select btn:[Schedule +].
 . Complete the schedule trigger form:
++
+image::guides:ROOT:triggers/set-up-schedule-trigger.png[Schedule triggers web app form]
 ** Give your trigger a descriptive name.
 ** Select a branch to tell CircleCI which code to checkout and where to find your config file.
 ** Under Pipeline attribution, select the actor to initiate the trigger. You can choose yourself, one of your team, or the scheduling system if you want the trigger to be independent from individual users. If your project requires the use of environment variables stored in restricted contexts, you should assign someone who has access to those contexts.
