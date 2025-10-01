@@ -112,6 +112,7 @@ _Used to trigger pipelines from any external system that can send HTTP requests_
 
 *Schedules* +
 _Used to trigger pipelines on a schedule (nightly builds for example)_
+
 * Zero, one or many can be created per pipeline.
 
 *API / Manual* +
