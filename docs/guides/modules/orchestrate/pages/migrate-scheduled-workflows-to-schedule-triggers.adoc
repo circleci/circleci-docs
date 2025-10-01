@@ -42,12 +42,12 @@ daily-run-workflow:
 [#create-the-new-schedule-trigger]
 == 2. Create the new schedule trigger
 
-Before you can create a new schedule, you will need to interpret the frequency your trigger needs to run from the cron expression. Once you have done that, you will create a schedule using either the API or the project settings in the web app. Both methods are described below.
+Before you can create a new schedule, you should interpret the frequency your trigger needs to run from the `cron` expression. Once you have these details, create a schedule via either the API or project settings in the CircleCIweb app. Both methods are described below.
 
 [#use-the-api]
-
-// TODO: not available yet for github app schedules
 === a. Use the API
+
+NOTE: Setting up schedule trigger via the API is not yet available for GitHub App pipelines.
 
 Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
 
@@ -78,10 +78,12 @@ For additional information, refer to the **Schedule** section under the link:htt
 [#use-project-settings]
 === b. Use project settings in the web app
 
-. In the CircleCI web app, navigate to **Projects** in the sidebar, then select the ellipsis (...) next to your project and select **Project Settings**. You can also find the **Project Settings** button on each project's landing page.
-If you are using GitHub, navigate to menu:Project Settings[Project Setup], identify the pipeline you want to schedule, and select "Schedule +".
-If yuo are using Bitbucket Cloud, navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
-Define the new schedule by filling out the form, then save.
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. If you are using GitHub, navigate to menu:Project Settings[Project Setup], identify the pipeline you want to schedule, and select btn:[Schedule +].
++
+If you are using Bitbucket Cloud, navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
+. Define the new schedule by filling out the form, then select btn:[Save].
 
 The form also provides the option of adding xref:pipeline-variables.adoc[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
 

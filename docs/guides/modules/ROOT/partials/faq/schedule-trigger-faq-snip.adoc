@@ -22,7 +22,7 @@ Coordinated Universal Time (UTC) is the time zone in which schedules are interpr
 [#pipelines-scheduled-to-run-specific-time-of-day]
 === Can pipelines be scheduled to run at a specific time of day?
 
-Yes, you can set up xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers] through the xref:guides:orchestrate:schedule-triggers.adoc#use-project-settings[CircleCI web app], or with xref:guides:orchestrate:schedule-triggers.adoc#use-the-api[CircleCI API v2].
+Yes, you can set up xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers] through the xref:guides:orchestrate:schedule-triggers.adoc#get-started-with-schedule-triggers[CircleCI web app], or with xref:guides:orchestrate:schedule-triggers.adoc#use-the-api[CircleCI API v2].
 
 If you are currently using xref:guides:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled workflows], see the xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration guide] to update your scheduled workflows to schedule triggers.
 
