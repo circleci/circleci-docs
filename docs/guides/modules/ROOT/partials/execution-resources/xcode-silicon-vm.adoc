@@ -56,6 +56,7 @@ a| `m4pro.medium` +
 | 14.6.1
 a| `m4pro.medium` +
    `m4pro.large` +
+   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
    `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
@@ -68,6 +69,7 @@ a| `m4pro.medium` +
 | 14.6.1
 a| `m4pro.medium` +
    `m4pro.large` +
+   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
    `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
@@ -92,6 +94,7 @@ a| `m4pro.medium` +
 | 14.3.1
 a| `m4pro.medium` +
    `m4pro.large` +
+   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
    `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
@@ -104,6 +107,7 @@ a| `m4pro.medium` +
 | 14.1
 a| `m4pro.medium` +
    `m4pro.large` +
+   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
    `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
@@ -116,6 +120,7 @@ a| `m4pro.medium` +
 | 14.1
 a| `m4pro.medium` +
    `m4pro.large` +
+   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
    `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
@@ -180,6 +185,7 @@ a| `m2pro.medium` +
 | 12.6.1
 a| `m4pro.medium` +
    `m4pro.large` +
+   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
    `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
