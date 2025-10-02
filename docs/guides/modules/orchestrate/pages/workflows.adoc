@@ -191,7 +191,7 @@ In the following example, the dependent job will run once the upstream job attai
 [source,yaml]
 ----
 workflows:
-  build-and-deploy:
+  test-and-cleanup:
     jobs:
       - build
       - test:
