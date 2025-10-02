@@ -982,11 +982,6 @@
   box-sizing: border-box;
 }
 
-/* Hide line numbers for code blocks with role="no-numbers" */
-.doc .no-numbers .hljs-ln-numbers {
-  display: none !important;
-}
-
 /* Remove border from code block table cells when inside regular tables */
 .doc table.tableblock .hljs-ln td {
   border-bottom: none !important;
