@@ -1452,14 +1452,7 @@ td p code,
   white-space: nowrap !important;
 }
 
-/* Override nowrap for code blocks in tables to preserve formatting */
-.tableblock .listingblock pre,
-.tableblock .listingblock code,
-.tableblock .literalblock pre,
-.tableblock .literalblock code,
-td .listingblock pre,
-td .listingblock code,
-td .literalblock pre,
-td .literalblock code {
+/* Override nowrap for source code blocks in tables to preserve formatting */
+.tableblock .listingblock pre {
   white-space: pre !important;
 }
