@@ -18,8 +18,8 @@ config file .circleci/sample-filename.yml could not be located on branch sample-
 
 If your scheduled pipeline is not running, verify the following things:
 
-- Is the actor who is set for the scheduled pipelines still part of the organization? You can find this setting is under **Attribution** in the **Triggers** section of the web app.
-- Is the branch set for the schedule deleted?
+- Is the actor who is set for the schedule trigger still part of the organization? You can find this setting in the *Pipeline attribution* section for your trigger in the CircleCI web app.
+- Does the branch set for the trigger still exist?
 - Is your VCS organization using SAML protection? SAML tokens expire often, which can cause requests to fail.
 
 [#jobs-not-running-when-push-commits]

@@ -76,7 +76,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so at this point. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a detailed guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
-** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"]. #Can we remove this step? I think this is in the top bar of the app now?#
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Select a repository to be your config source.
 ** Enter your config file path. The field is automatically populated with the default path `.circleci/config.yml` but you can edit this if needed.
 ** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
