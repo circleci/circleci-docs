@@ -1,7 +1,7 @@
 [#pipeline-parameters-api]
 === I thought pipeline parameters could only be used with the API?
 
-Previously, this was true. With the dynamic configuration feature, you can now set pipeline parameters dynamically, before the pipeline is executed (triggered from either the API or a webhook—a push event to your VCS).
+Previously, this was true but you can now set pipeline parameters dynamically, before the pipeline is executed. The pipeline parameters for the continuation configuration can be set by using the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] in the setup configuration. The pipeline associated with the setup configuration can be triggered via either the API or an event in your VCS.
 
 [#can-i-use-a-custom-executor]
 === Can I use a custom executor?
@@ -11,8 +11,8 @@ Custom executors can be used, but require certain dependencies to be installed f
 [#what-is-the-continuation-orb]
 === What is the continuation orb?
 
-The `continuation` orb assists you in managing the pipeline continuation process. The
-`continuation` orb wraps an API call to link:https://circleci.com/docs/api/v2/#operation/continuePipeline[`continuePipeline`]. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation`] orb documentation for more information.
+The continuation orb assists you in managing the pipeline continuation process. The
+continuation orb wraps an API call to the link:https://circleci.com/docs/api/v2/#operation/continuePipeline[Continue a pipeline API endpoint]. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] documentation for more information.
 
 [#possible-to-not-use-continuation-orb]
 === Is it possible to not use the continuation orb?
