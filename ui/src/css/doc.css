@@ -964,7 +964,6 @@
 }
 
 /* NEEDS REVIEW prevent pre in table from causing article to exceed bounds */
-.doc table.tableblock pre,
 .doc .listingblock.wrap pre {
   white-space: pre-wrap;
 }
@@ -1441,18 +1440,18 @@
   font-weight: var(--heading-font-weight);
 }
 
-/* Prevent code text from wrapping in table cells */
+/* Prevent inline code text from wrapping in table cells */
 td .pre,
 td .code,
-td code,
-td pre,
-td .tableblock code,
-td p code,
-.tableblock code {
+td code:not(pre code),
+.tableblock code:not(pre code) {
   white-space: nowrap !important;
 }
 
-/* Override nowrap for source code blocks in tables to preserve formatting */
-.tableblock .listingblock pre {
+/* Ensure code blocks in tables preserve formatting */
+.doc .tableblock .listingblock pre,
+.doc .tableblock .listingblock code,
+.doc td .listingblock pre,
+.doc td .listingblock code {
   white-space: pre !important;
 }
