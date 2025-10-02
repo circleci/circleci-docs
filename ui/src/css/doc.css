@@ -1443,8 +1443,10 @@
 /* Prevent inline code text from wrapping in table cells */
 td .pre,
 td .code,
-td code:not(pre code),
-.tableblock code:not(pre code) {
+td p code,
+td li code,
+.tableblock p code,
+.tableblock li code {
   white-space: nowrap !important;
 }
 
