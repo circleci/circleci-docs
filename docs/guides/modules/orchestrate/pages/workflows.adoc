@@ -184,6 +184,30 @@ image::guides:ROOT:workflow-using-requires-example-1.png[Flexible Job Execution 
 image::guides:ROOT:workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
 
 
+In some cases, you may want to configure jobs dependencies that ignore the status/outcome of the upstream job.
+
+In the following example, the dependent job will run once the upstream job attains a terminal state, regardless of the status/outcome:
+
+[source,yaml]
+----
+workflows:
+  build-and-deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - cleanup:
+          requires:
+            - test:
+              - success
+              - failed
+              - canceled
+----
+
+* The `test` job waits for the `build` job, and only runs if the `build` job is successful.
+* The `cleanup` job waits for the `test` job, and runs regardless of whether the `test` job succeeds, fails, or is canceled.
+
 TIP: Refer to the xref:reference:ROOT:configuration-reference.adoc#requires[Requires] section of the configuration reference.
 
 [#holding-a-workflow-for-a-manual-approval]
