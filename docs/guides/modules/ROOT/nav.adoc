@@ -291,6 +291,7 @@
 *** xref:integration:authorize-google-cloud-sdk.adoc[Authorize Google Cloud SDK]
 
 * Developer toolkit
+** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
 ** AI features
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
