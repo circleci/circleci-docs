@@ -21,6 +21,9 @@ Once you have deploy markers configured, you will see a timeline of deployments 
 .Deploys timeline with failed deployment
 image::guides:ROOT:deploy/deploys-timeline-fail-banner.png[Deploy timeline with failed deployment]
 
+.Deploys timeline with no deployments requiring troubleshooting
+image::guides:ROOT:releases/dashboard.png[Deploys timeline with no deployments requiring troubleshooting]
+
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
