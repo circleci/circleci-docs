@@ -184,10 +184,11 @@ image::guides:ROOT:workflow-using-requires-example-1.png[Flexible Job Execution 
 image::guides:ROOT:workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
 
 
-In some cases, you may want to configure jobs dependencies that ignore the status/outcome of the upstream job.
+You may want to configure job dependencies that ignore the status/outcome of an upstream job.
 
 In the following example, the dependent job will run once the upstream job attains a terminal state, regardless of the status/outcome:
 
+.Use flexible requires to ignore outcome of a job
 [source,yaml]
 ----
 workflows:
