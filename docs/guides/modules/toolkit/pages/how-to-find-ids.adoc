@@ -9,6 +9,8 @@ You may need to find the ID of specific CircleCI elements to perform various act
 - Running a command from the local CircleCI CLI.
 - Identifying a CircleCI element in logs or webhook payloads.
 
+NOTE: This guide covers finding IDs in the CircleCI web app, or from environment variables. It is also possible to find IDs via the xref:reference:ROOT:api-homepage.adoc[CircleCI APIs].
+
 == Get IDs from the built-in environment variables
 
 xref:reference:ROOT:variables.adoc#built-in-environment-variables[Buit-in environment variables, window=_blank], scoped at the job level, include the following IDs:
