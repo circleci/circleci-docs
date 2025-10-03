@@ -284,6 +284,9 @@ jobs:
 ----
 
 This command supports the same optional parameters as the `release plan` command, but does not require a `deploy-name`.
+
+WARNING: If you are deploying to multiple environments from a single workflow, you need to specify the target environment using the `--environment-name` flag. If you are deploying multiple components from a single workflow, you need to specify the component name using the `--component-name` flag.
+
 You can see the command with all optional parameters in the following example:
 
 [,yml]
