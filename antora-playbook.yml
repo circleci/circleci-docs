@@ -68,19 +68,17 @@ antora:
   extensions:
   - ./extensions/unlisted-pages-extension.js
   - require: '@sntke/antora-mermaid-extension'
-    mermaid_library_url: https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs
-    script_stem: head-scripts
     mermaid_initialize_options:
       start_on_load: true
       theme: base
       security_level: loose
       theme_variables:
-        primary_color: '#00DB74'
+        primary_color: '#000000'
         primary_text_color: '#161616'
-        primary_border_color: '#00A657'
-        line_color: '#2152E5'
-        secondary_color: '#EDEDED'
-        tertiary_color: '#F7F7F7'
+        primary_border_color: '#90f2a9'
+        line_color: '#90a8f2'
+        secondary_color: '#f290d9'
+        tertiary_color: '#e8edfc'
         background: '#FFFFFF'
         main_bkg: '#EDEDED'
         text_color: '#161616'
