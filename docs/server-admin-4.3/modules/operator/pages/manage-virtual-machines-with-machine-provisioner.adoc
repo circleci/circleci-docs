@@ -219,8 +219,6 @@ CAUTION: When using preallocated instances be aware that a cron job is scheduled
 
 To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` examples:
 
-NOTE: For a full list of options, see the xref:installation:installation-reference.adoc#all-values-yaml-options[Installation Reference] page.
-
 [source,yaml]
 ----
 # -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
