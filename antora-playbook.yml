@@ -80,5 +80,5 @@ antora:
         secondary_color: '#f290d9'
         tertiary_color: '#e8edfc'
         background: '#FFFFFF'
-        main_bkg: '#EDEDED'
+        main_bkg: '#f290d9'
         text_color: '#161616'
