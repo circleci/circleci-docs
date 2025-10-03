@@ -50,8 +50,7 @@
 *** xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options]
 *** xref:orchestrate:gitlab-trigger-options.adoc[GitLab trigger options]
 *** xref:orchestrate:custom-webhooks.adoc[Custom webhooks]
-** Schedule
-*** xref:orchestrate:scheduled-pipelines.adoc[Scheduled pipelines]
+*** xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
 ** How-to guides
 *** xref:orchestrate:orchestration-cookbook.adoc[Orchestration cookbook]
 *** xref:orchestrate:how-to-override-config.adoc[How to override config]
@@ -59,9 +58,9 @@
 *** xref:orchestrate:notify-a-slack-channel-of-a-paused-workflow.adoc[Notify a Slack channel of a paused workflow]
 *** xref:orchestrate:using-branch-filters.adoc[Using branch filters]
 *** xref:orchestrate:selecting-a-workflow-to-run-using-pipeline-parameters.adoc[Select a workflow to run using pipeline parameters]
-*** xref:orchestrate:migrate-scheduled-workflows-to-scheduled-pipelines.adoc[Migrate scheduled workflows to scheduled pipelines]
-*** xref:orchestrate:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
-*** xref:orchestrate:set-a-nightly-scheduled-pipeline.adoc[Set a nightly scheduled pipeline]
+*** xref:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate scheduled workflows to schedule triggers]
+*** xref:orchestrate:schedule-triggers-with-multiple-workflows.adoc[Schedule triggers with multiple workflows]
+*** xref:orchestrate:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]
 *** xref:orchestrate:databases.adoc[Configure databases]
 *** xref:orchestrate:migrate-from-deploy-to-run.adoc[Migrate from deploy to run]
