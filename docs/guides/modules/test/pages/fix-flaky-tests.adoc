@@ -103,7 +103,7 @@ Once a fix is verified you can select the "PR opened" row to view the task overv
 
 #Screenshot#
 
-You also get a code diff of the proposed fix along with logs of the decision process presented as a conversation between "User" (Chunk) and "Assistant" (AI model provider) to help you understand Chunk's reasoning and analysis process.
+You also get a code diff of the proposed fix along with logs of the decision process presented as a conversation between "User" (Chunk) and "Assistant" (AI model provider). The diff and logs are designed to help you understand Chunk's reasoning and analysis process.
 
 == Flaky test fix configuration options
 
