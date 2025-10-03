@@ -97,3 +97,16 @@ docs/
                     └── settings.svg
 ----
 
+== Diagrams
+
+You can add mermaid diagrams to a page, as follows:
+
+.Example of a mermaid diagram
+[mermaid]
+....
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>Bob: Hello Bob, how are you?
+    Bob-->>Alice: Great!
+....
