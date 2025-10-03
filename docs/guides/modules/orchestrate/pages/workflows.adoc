@@ -889,7 +889,7 @@ stateDiagram-v2
 
     running --> on_hold
     on_hold --> canceled
-    on_hold --> running : approve job
+    on_hold --> running : approval job
     on_hold --> success
 
     running --> canceled
@@ -902,7 +902,7 @@ stateDiagram-v2
     running --> unauthorized
 
     running --> queued
-    queued --> running: acquired lock
+    queued --> running: queued as part of a serial group
 
     success --> [*]
     canceled --> [*]

@@ -82,7 +82,7 @@ stateDiagram-v2
     direction TB
     [*] --> blocked
 
-    state "blocked or not run" as pending
+    state "blocked or not running" as pending
     blocked --> pending : Job instructed to start but not yet started
     blocked --> unauthorized : Trying to use a context without permission
     blocked --> canceled
