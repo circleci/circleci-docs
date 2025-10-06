@@ -37,6 +37,8 @@ include::ROOT:partial$deploy/supported-versions.adoc[]
 
 The following table shows a complete list of labels and annotations either required or available for configuring your environment integration. You will be guided to set these up in the in-app setup process. These are not strictly a prerequisite but will be required for the release agent to work correctly.
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 |
@@ -104,6 +106,7 @@ The following table shows a complete list of labels and annotations either requi
 |`false`
 |No. Only set if you want to disable the cancel deployment feature for your component.
 |===
+--
 
 
 == Set up the CircleCI release agent
