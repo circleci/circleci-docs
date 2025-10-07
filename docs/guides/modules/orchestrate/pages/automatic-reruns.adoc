@@ -89,7 +89,7 @@ workflows:
             - test
 ----
 
-You can combine automatic reruns with workflow conditions. The following example shows how to configure automatic reruns for a workflow that is not triggered by a scheduled pipeline:
+You can combine automatic reruns with workflow conditions. The following example shows how to configure automatic reruns for a workflow that is not triggered by a schedule trigger:
 
 .Combining automatic reruns with workflow conditions
 [source,yaml]

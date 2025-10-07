@@ -153,7 +153,7 @@ The following settings are available in the project settings page. If you do not
 
 **Groups**: Provides a list of user groups that have been granted project-specific permissions. For more information, see the xref:permissions-authentication:manage-groups.adoc[Manage groups] page.
 
-**Project Setup**: Provides a list of GitHub pipelines that have been set up for the project and their associated triggers. See xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup] for more information. Pipelines integrated with VCS different from GitHub are shown in the **Pipelines** tab. This page includes the option to create a first pipeline if none exist. The setup UI for scheduled pipelines is located here for GitHub pipelines or in the *Triggers* section for Bitbucket pipelines. To set up a xref:orchestrate:scheduled-pipelines.adoc[scheduled pipeline] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+**Project Setup**: Provides a list of pipelines that have been set up for the project and their associated triggers. See xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup] for more information. This page includes the option to begin setting up pipelines if none exist. The setup UI for schedule triggers is located either here or in the *Triggers* section (if available for your integration). To set up a xref:orchestrate:schedule-triggers.adoc[schedule trigger] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
 
 *Pipelines* and *Triggers*: These pages let you set up pipelines and triggers when using the GitLab, Bitbucket Cloud and Bitbucket Data Center integrations.
 

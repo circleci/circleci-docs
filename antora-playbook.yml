@@ -4,6 +4,7 @@ site:
   robots: allow
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
+    google_analytics: 'GTM-W9HDVK'
 content:
   sources:
   - url: .
@@ -51,7 +52,6 @@ asciidoc:
     serverversion48: 4.8.2
     serverversion: 3.4.8
     terraformversion: 0.15.4
-    kubernetesversions: 1.26 - 1.31
     kubectlversion: 1.19
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
