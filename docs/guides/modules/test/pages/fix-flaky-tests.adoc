@@ -55,12 +55,43 @@ To set up a "Fix flaky tests" task follow these steps:
 . Choose a maximum for the number of solutions you want Chunk to try for each test, between one and three.
 . Choose a number of validation runs to allow per test between one and 20.
 . Choose a maximum number of concurrent open PRs for flaky test fixes. You can choose between one and 20, or the default, "Unlimited".
-. In the "Custom settings" section you can add a setup script for Chunk to run before each run. You can also add post-run commands to run after each run.
+. The "Chunk environment setup" section is there to guide you to set up a `cci-agent-setup.yml` if you would like to control the environment in which Chunk runs your tests. For more information see <<chunk-environment-setup>>. This step is optional.
+. The "Post-run commands" section gives you the option to add commands for Chunk to run after each test run. This step is optional.
 . Select btn:[Start task] to complete the setup.
 
-When you select btn:[Start task] Chunk will start running immediately and follow the schedule you set up.
+When you select btn:[Start task] Chunk starts running immediately and follows the schedule you set up.
 
 #insert screenshots#
+
+=== Chunk environment setup
+
+To improve verification success, create an "agent environment" CircleCI YAML file. Copy the environment setup parts of your existing CircleCI configuration into a dedicated file for Chunk.
+
+* Name the file `cci-agent-setup.yml` and save it to your `.circleci` directory on your default branch.
+* `cci-agent-setup.yml` needs to include a single workflow (the name of the workflow can be anything you want) with a single job named `cci-agent-setup`. The `cci-agent-setup` job needs to set up your environment for Chunk to use. You do not need to include any steps to run tests, this is purely for environment setup.
++
+.Example config file for cci-agent-setup.yml
+[source,yaml]
+----
+version: 2.1
+workflows:
+  main:
+    jobs:
+      - cci-agent-setup
+jobs:
+  cci-agent-setup:
+    docker:
+    - image: cimg/python:3.12
+    - image: cimg/postgres:15.3
+    steps:
+      - checkout
+      - run:
+          name: Hello World
+          command: |
+            echo "Hello, World!"
+      # insert more environment setup here
+----
+
 
 == How Chunk by CircleCI works
 
@@ -153,33 +184,7 @@ View attempts in the CircleCI web app as follows:
 . Select *Task logs*.
 . Select the btn:[Expand All] option, then search for `attempt`. This will take you to the section where Chunk is trying to run the tests.
 
-To improve verification success, create an "agent environment" CircleCI YAML file. Copy the environment setup parts of your existing CircleCI configuration into a dedicated file for Chunk.
-
-* Name the file `cci-agent-setup.yml` and save it to your `.circleci` directory on your default branch.
-* `cci-agent-setup.yml` needs to include a single workflow (the name of the workflow can be anything you want) with a single job named `cci-agent-setup`. The `cci-agent-setup` job needs to set up your environment for Chunk to use. You do not need to include any steps to run tests, this is purely for environment setup.
-+
-.Example config file for cci-agent-setup.yml
-[source,yaml]
-----
-version: 2.1
-workflows:
-  main:
-    jobs:
-      - cci-agent-setup
-jobs:
-  cci-agent-setup:
-    docker:
-    - image: cimg/python:3.12
-    - image: cimg/postgres:15.3
-    steps:
-      - checkout
-      - run:
-          name: Hello World
-          command: |
-            echo "Hello, World!"
-      # insert more environment setup here
-----
-
+Consider setting up a `cci-agent-setup.yml` file to control the environment in which Chunk runs your tests. For more information see <<chunk-environment-setup>>.
 
 Also consider including a markdown file, named `claude.md` or `agents.md` at the root of your repository with instructions for running tests. Chunk should pick this up automatically.
 
@@ -224,7 +229,7 @@ If you get the following error inside a Chunk task, this indicates that your Ope
 Action required - agent execution error
 The agent ran into an error while executing this task. See our community forum for how to solve this error.
 
-Contact link:https://support.circleci.com/hc/en-us/[CircleCI support] for assistance.
+Contact mailto:sebastian@circleci.com[sebastian@circleci.com] for assistance.
 
 == Frequently asked questions
 

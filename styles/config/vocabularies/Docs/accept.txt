@@ -77,7 +77,7 @@ Certbot
 cgroup
 Chocolatey
 chruby
-Chunk
+[Cc]hunk
 CircleCI\b
 \bCircleCI cloud\b
 \bCircleCI server\b
