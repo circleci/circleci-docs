@@ -102,6 +102,10 @@
   outline: none;
 }
 
+.toc.embedded .toc-menu a {
+  display: block;
+}
+
 .toc .toc-menu a:hover {
   color: var(--link-font-color);
 }
