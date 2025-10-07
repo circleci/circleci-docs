@@ -123,11 +123,11 @@ The following diagram outlines the various states a pipeline can be in.
 ----
 stateDiagram-v2
     direction TB
-    state "is this dynamic config?" as isdynamic
+    state "Is this dynamic config?" as isdynamic
     [*] --> isdynamic
     state "setup-pending" as setuppending
-    isdynamic --> setuppending : Dynamic config enabled<br/>and setup true in config
-    isdynamic --> pending : Dynamic config not enabled,<br/>or setup true not in config
+    isdynamic --> setuppending : Yes
+    isdynamic --> pending : No
 
     setuppending --> setup
     setup --> pending

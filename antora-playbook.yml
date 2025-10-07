@@ -73,12 +73,3 @@ antora:
       theme: base
       security_level: loose
       theme_variables:
-        primary_color: '#000000'
-        primary_text_color: '#161616'
-        primary_border_color: '#90f2a9'
-        line_color: '#90a8f2'
-        secondary_color: '#f290d9'
-        tertiary_color: '#e8edfc'
-        background: '#FFFFFF'
-        main_bkg: '#f290d9'
-        text_color: '#161616'
