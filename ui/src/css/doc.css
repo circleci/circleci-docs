@@ -4,7 +4,13 @@
   hyphens: auto;
   line-height: var(--doc-line-height);
   margin: var(--doc-margin);
-  padding: 0 1rem 4rem;
+  padding: 0 2rem 4rem;
+}
+
+@media screen and (max-width: 1023.5px) {
+  .doc {
+    padding: 0 2rem 4rem;
+  }
 }
 
 @media screen and (min-width: 1024px) {
@@ -73,10 +79,12 @@
 
   .doc h2 {
     font-size: 20px;
+    margin-bottom: 24px;
   }
 
   .doc h3 {
     font-size: 18px;
+    margin-top: 20px;
   }
 
   .doc h4 {

@@ -54,12 +54,12 @@
   menu.appendChild(title)
   menu.appendChild(list)
 
-  var startOfContent = !document.getElementById('toc') && article.querySelector('h1.page ~ :not(.is-before-toc)')
-  if (startOfContent) {
+  var pageTitle = article.querySelector('h1.page')
+  if (pageTitle) {
     var embeddedToc = document.createElement('aside')
     embeddedToc.className = 'toc embedded'
     embeddedToc.appendChild(menu.cloneNode(true))
-    startOfContent.parentNode.insertBefore(embeddedToc, startOfContent)
+    pageTitle.parentNode.insertBefore(embeddedToc, pageTitle)
   }
 
   window.addEventListener('load', function () {

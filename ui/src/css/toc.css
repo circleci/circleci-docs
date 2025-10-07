@@ -28,6 +28,12 @@
   margin-bottom: 1.2rem;
 }
 
+@media screen and (max-width: 1023.5px) {
+  .toc.embedded .toc-menu h3 {
+    margin-bottom: 1.25rem;
+  }
+}
+
 .toc .toc-menu ul {
   font-size: calc(15 / var(--rem-base) * 1rem);
   line-height: var(--toc-line-height);
