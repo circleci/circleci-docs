@@ -124,7 +124,7 @@ jobs:
 ----
 
 === 1.3. Update the deploy status to success or failure
-You can use the `when` attribute to add `on_success` and `on_failure` steps at the end of your deployment job, to handle the final status update of the deploy.
+You can use the `when` attribute to add `on_success` and `on_fail` steps at the end of your deployment job, to handle the final status update of the deploy.
 
 .Config file example showing deploy status update to success or failure
 [,yml]
