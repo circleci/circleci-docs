@@ -1,6 +1,5 @@
-* CircleCI server 4.6
-** xref:overview:circleci-server-overview.adoc[CircleCI server overview]
-** xref:overview:release-notes.adoc[Release notes]
+* xref:overview:circleci-server-overview.adoc[CircleCI server overview]
+* xref:overview:release-notes.adoc[Release notes]
 
 * Installing CircleCI server
 ** xref:installation:phase-1-prerequisites.adoc[Phase 1: Prerequisites]
