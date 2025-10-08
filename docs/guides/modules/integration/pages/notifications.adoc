@@ -1,4 +1,4 @@
-= Notifications overview
+= Notifications Overview
 :page-platform: Cloud
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
