@@ -6,7 +6,7 @@
 [#introduction]
 == Introduction
 
-CircleCI server is an on-premises CI/CD platform for enterprise customers who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center.
+CircleCI server is an on-premises CI/CD platform for enterprise customers. Server is suited for organizations who have compliance or security needs that require them to operate within their firewall, in a private cloud, or in a data center.
 
 CircleCI server provides the same features as CircleCI’s cloud offering, but operates within your Kubernetes cluster.
 
@@ -104,8 +104,7 @@ CircleCI server v4.8 consists of the following services. Find their descriptions
 
 [.table-scroll]
 --
-[.table.table-striped]
-[cols="4,1,3,3,3", options="header", stripes=even]
+[.datatable.cols="4,1,3,3,3"]
 |===
 | Service
 | Component
@@ -133,7 +132,7 @@ CircleCI server v4.8 consists of the following services. Find their descriptions
 
 | `builds-service`
 | App Core
-| Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service.
+| Ingests from `www-api` and sends to plans-service, workflows-conductor, and to orbs-service.
 |
 |
 
@@ -151,7 +150,7 @@ CircleCI server v4.8 consists of the following services. Find their descriptions
 
 | `circleci-rabbitmq`
 | Pipelines and Execution
-| Queuing for workflow messaging, test results, usage, crons, output, notifications, and scheduler.
+| Queuing for workflow messaging, test results, usage, cron tasks, output, notifications, and scheduler.
 |
 |
 
@@ -218,7 +217,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 
 | `frontend`
 | Frontend
-| CircleCI web app and www-api proxy.
+| CircleCI web app and `www-api` proxy.
 | The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK, but no updates will be seen.
 | Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests.
 
