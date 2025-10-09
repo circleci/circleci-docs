@@ -73,3 +73,5 @@ antora:
       theme: base
       security_level: loose
       theme_variables:
+        primary_color: '#E3F5E5'
+        background: '#E3F5E5'
