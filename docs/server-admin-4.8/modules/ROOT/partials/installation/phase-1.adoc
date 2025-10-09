@@ -961,6 +961,8 @@ ifndef::env-gcp[]
 
 == 8. Externalize RabbitMQ
 
+We use RabbitMQ for workflow messaging, test results, usage, crons, output, notifications, and scheduler.
+
 You can choose to disable the deployment of the internal RabbitMQ instance and instead use your own RabbitMQ instance or the link:https://aws.amazon.com/amazon-mq/[Amazon MQ message broker service].
 
 To choose this option make sure you have your RabbitMQ or Amazon MQ instance available for the next phase of the installation. In the next phase you can then update your `values.yaml` file to use your own RabbitMQ or Amazon MQ instance instead of the internal RabbitMQ instance. The relevant configuration in this case is the following:
