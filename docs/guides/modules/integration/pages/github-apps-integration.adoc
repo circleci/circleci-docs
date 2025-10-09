@@ -194,7 +194,7 @@ Passing secrets to forked pull requests is not currently supported for GitHub Ap
 [#stop-building]
 === Stop building
 
-Projecs in organizations with `/circleci/` in the URL do not have the **Stop Building** option that can normally be found in **Project settings**. However, the same functionality can be achieved by deleting (or disabling) all triggers associated with existing pipelines, from menu:Project Settings[Project setup].
+Projects in organizations with `/circleci/` in the URL do not have the **Stop Building** option that can normally be found in **Project settings**. However, the same functionality can be achieved by deleting (or disabling) all triggers associated with existing pipelines, from menu:Project Settings[Project setup].
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only
