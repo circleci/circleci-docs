@@ -1,5 +1,0 @@
-= CircleCI server administration v4.7
-:page-layout: subsection
-:page-description: Landing page for CircleCI server administration v4.7.
-
-CircleCI server is the on-premises CircleCI platform. In this section you will find the documentation for installing, configuring, and managing CircleCI server.

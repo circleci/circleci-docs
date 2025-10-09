@@ -57,12 +57,12 @@ db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )
 
 === 2. Upgrade from MongoDB 4.0 to 4.2
 
-. Change the tag to `4.2.17-debian-10-r99`:
+. Change the tag to `4.2.21-debian-10-r8`:
 +
 ```yaml
 mongodb:
   image:
-    tag: 4.2.17-debian-10-r99
+    tag: 4.2.21-debian-10-r8
 ```
 
 . Run `helm upgrade` to update your installation.
