@@ -106,11 +106,7 @@ CircleCI server v4.8 consists of the following services. Find their descriptions
 --
 [.datatable.cols="4,1,3,3,3"]
 |===
-| Service
-| Component
-| Description
-| What happens if it fails?
-| Notes
+| Service | Component | Description | What happens if it fails? | Notes
 
 | `api-service`
 | App Core
