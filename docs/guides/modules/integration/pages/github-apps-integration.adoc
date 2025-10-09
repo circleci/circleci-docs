@@ -176,7 +176,7 @@ The ability to xref:security:contexts.adoc#security-group-restrictions[restrict 
 
 [#in-app-config-editor]
 === In-app config editor
-The in-app config editor is not currently available for GitHub App pipelines, except during project creation.
+Config viewing is supported for GitHub App pipelines, however editing is not available (except during project creation).
 
 [#account-integrations]
 === Account integrations
