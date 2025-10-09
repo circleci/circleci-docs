@@ -64,14 +64,25 @@
 
   window.addEventListener('load', function () {
     onScroll()
-    window.addEventListener('scroll', onScroll)
+    // Listen to scroll on the content container instead of window
+    var scrollContainer = document.querySelector('body > div.flex > div.flex-col')
+    if (scrollContainer) {
+      scrollContainer.addEventListener('scroll', onScroll)
+    } else {
+      // Fallback to window scroll for mobile or if container not found
+      window.addEventListener('scroll', onScroll)
+    }
   })
 
   function onScroll () {
-    var scrolledBy = window.pageYOffset
+    // Get scroll position from container or window
+    var scrollContainer = document.querySelector('body > div.flex > div.flex-col')
+    var scrolledBy = scrollContainer ? scrollContainer.scrollTop : window.pageYOffset
     var buffer = getNumericStyleVal(document.documentElement, 'fontSize') * 1.15
     var ceil = article.offsetTop
-    if (scrolledBy && window.innerHeight + scrolledBy + 2 >= document.documentElement.scrollHeight) {
+    var scrollHeight = scrollContainer ? scrollContainer.scrollHeight : document.documentElement.scrollHeight
+    var clientHeight = scrollContainer ? scrollContainer.clientHeight : window.innerHeight
+    if (scrolledBy && clientHeight + scrolledBy + 2 >= scrollHeight) {
       lastActiveFragment = Array.isArray(lastActiveFragment) ? lastActiveFragment : Array(lastActiveFragment || 0)
       var activeFragments = []
       var lastIdx = headings.length - 1

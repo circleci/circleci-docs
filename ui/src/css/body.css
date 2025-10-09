@@ -1,5 +1,59 @@
 @media screen and (min-width: 1024px) {
-  .body {
+  /* Make body a fixed-height container */
+  body {
+    height: 100vh;
+    overflow: hidden;
     display: flex;
+    flex-direction: column;
+  }
+
+  /* Header stays at top */
+  body > header {
+    flex-shrink: 0;
+  }
+
+  /* Body container (the flex div wrapping nav and content) takes remaining space */
+  body > div.flex {
+    display: flex;
+    flex: 1;
+    min-height: 0; /* Important for flexbox scrolling */
+    overflow: hidden;
+  }
+
+  /* Fix navigation to have independent scrolling */
+  [data-page-navigation] {
+    /* Remove sticky, make it a flex item instead */
+    position: relative !important;
+    /* Fill the full height of body container */
+    height: 100% !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
+  }
+
+  [data-page-navigation] aside {
+    /* Make aside fill the container and scroll independently */
+    height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Make the main content area scrollable - the div.flex-col that contains main and footer */
+  body > div.flex > div.flex-col {
+    flex: 1;
+    min-width: 0; /* Important for flexbox */
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    height: 100%;
+  }
+
+  /* Fix TOC positioning to work with container scrolling */
+  .toc.sidebar .toc-menu {
+    /* Reset to original positioning - sticky at top of scroll container */
+    top: 2rem !important;
+  }
+
+  .toc.sidebar .toc-menu ul {
+    /* Adjust max-height for new scroll context */
+    max-height: calc(100vh - 12rem) !important;
   }
 }
