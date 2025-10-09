@@ -62,21 +62,18 @@
     pageTitle.parentNode.insertBefore(embeddedToc, pageTitle)
   }
 
+  var scrollContainer = document.querySelector('body > div.flex > div.flex-col')
+
   window.addEventListener('load', function () {
     onScroll()
-    // Listen to scroll on the content container instead of window
-    var scrollContainer = document.querySelector('body > div.flex > div.flex-col')
     if (scrollContainer) {
       scrollContainer.addEventListener('scroll', onScroll)
     } else {
-      // Fallback to window scroll for mobile or if container not found
       window.addEventListener('scroll', onScroll)
     }
   })
 
   function onScroll () {
-    // Get scroll position from container or window
-    var scrollContainer = document.querySelector('body > div.flex > div.flex-col')
     var scrolledBy = scrollContainer ? scrollContainer.scrollTop : window.pageYOffset
     var buffer = getNumericStyleVal(document.documentElement, 'fontSize') * 1.15
     var ceil = article.offsetTop
