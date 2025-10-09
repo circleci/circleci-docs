@@ -166,8 +166,6 @@ NOTE: Data from xref:insights:insights.adoc[Insights] and historical pipeline ru
 [#currently-not-supported]
 == Currently not supported
 
-If one of these pieces of functionality is especially critical to you, link:https://docs.google.com/forms/d/e/1FAIpQLSfnYhFLjmZ0OP8goemexAvgHDPJqgHyDF1QiIl2HdPktTKvlQ/viewform[tell us why].
-
 The following sections are features of CircleCI which are not yet supported when using the GitHub App integration. These features are planned for future releases.
 
 [#restrict-a-context-to-a-security-group]
