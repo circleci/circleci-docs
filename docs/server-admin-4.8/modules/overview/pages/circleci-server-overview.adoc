@@ -102,6 +102,8 @@ Job artifacts and outputs are sent directly from jobs in Nomad to object storage
 
 CircleCI server v4.8 consists of the following services. Find their descriptions and failure implications below:
 
+[.table-scroll]
+--
 [.table.table-striped]
 [cols="4,1,3,3,3", options="header", stripes=even]
 |===
@@ -348,6 +350,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 
 |===
+--
 
 [#supported-platforms]
 == Supported platforms
