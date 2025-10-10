@@ -1,5 +1,26 @@
-@media screen and (min-width: 1024px) {
-  .body {
-    display: flex;
+/* Apply fixed navigation at 1200px+ where desktop layout is stable */
+@media screen and (min-width: 1200px) {
+  /* Make navigation fixed instead of sticky for independent scrolling */
+  [data-page-navigation] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 33.333%; /* lg:w-2/6 */
+    max-width: 420px;
+    min-width: 360px;
+    z-index: 1; /* Keep below header */
+  }
+
+  /* Make aside scrollable and account for header height */
+  [data-page-navigation] aside {
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 180px; /* Add space for header */
+  }
+
+  /* Add padding to main content container to account for fixed nav */
+  body > div.flex > div.flex-col {
+    padding-left: clamp(360px, 33.333%, 420px);
   }
 }
