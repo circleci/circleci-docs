@@ -23,7 +23,7 @@
   [data-page-navigation] aside {
     height: 100%;
     overflow-y: auto;
-    padding-top: calc(var(--navbar-height) + var(--toolbar-height) + 4rem);
+    padding-top: calc(var(--navbar-height) + var(--toolbar-height) + 5rem);
   }
 
   /* Add padding to main content container to account for fixed nav */
