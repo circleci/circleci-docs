@@ -1,3 +1,9 @@
+@media screen and (min-width: 1024px) {
+  .body {
+    display: flex;
+  }
+}
+
 /* Apply fixed navigation at 1200px+ where desktop layout is stable */
 @media screen and (min-width: 1200px) {
   /* Make navigation fixed instead of sticky for independent scrolling */
