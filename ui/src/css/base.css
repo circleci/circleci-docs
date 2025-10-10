@@ -9,6 +9,7 @@ html {
   font-size: var(--body-font-size);
   height: 100%;
   scroll-behavior: smooth;
+  overscroll-behavior-y: none; /* Minimize rubber banding at page edges */
 }
 
 @media screen and (min-width: 1024px) {
