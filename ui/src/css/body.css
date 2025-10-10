@@ -19,10 +19,11 @@
   }
 
   /* Make aside scrollable and account for header height */
+  /* Header height calculation: navbar + component nav + padding (~10rem total) */
   [data-page-navigation] aside {
     height: 100%;
     overflow-y: auto;
-    padding-top: 180px; /* Add space for header */
+    padding-top: calc(var(--navbar-height) + var(--toolbar-height) + 4rem);
   }
 
   /* Add padding to main content container to account for fixed nav */
