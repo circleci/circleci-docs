@@ -1,0 +1,41 @@
+[#can-i-migrate-existing-scheduled-workflows]
+=== Can I migrate existing scheduled workflows to schedule triggers?
+
+Yes, visit the xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Schedule triggers migration] guide for more information.
+
+[#find-schedules-that-i-have-created]
+=== How do I find the schedules that I have created?
+
+As schedule triggers are stored directly in CircleCI, there is a UUID associated with each schedule. You can view schedules that you have created on the **Triggers** page of the project settings. You can also list all the schedules under a single project:
+
+```shell
+curl --location --request GET "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "circle-token: <PERSONAL_API_KEY>"
+```
+
+Refer to the xref:guides:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+
+=== What time zone is used for schedule triggers?
+
+Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
+
+[#pipelines-scheduled-to-run-specific-time-of-day]
+=== Can pipelines be scheduled to run at a specific time of day?
+
+Yes, you can set up xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers] through the xref:guides:orchestrate:schedule-triggers.adoc#get-started-with-schedule-triggers[CircleCI web app], or with xref:guides:orchestrate:schedule-triggers.adoc#use-the-api[CircleCI API v2].
+
+If you are currently using xref:guides:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled workflows], see the xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration guide] to update your scheduled workflows to schedule triggers.
+
+=== Are schedule triggers guaranteed to run at precisely the time scheduled?
+
+CircleCI provides no guarantees about precision. A random delay of up to 10 minutes is applied to the scheduled time (this delay can be up to one hour for schedule triggers created before September 29 2025). After the first run, the delay will be constant for all subsequent runs.
+
+=== Why did my schedule trigger run later than expected?
+
+Pipelines triggered via schedule are not guaranteed to run at exactly the specified time. For example, when you express the schedule as 1 per-hour for 08:00 UTC, the schedule trigger will run once within the 08:00 to 09:00 UTC window. Note that it means that it is unlikely to run at 08:00 UTC exactly.
+
+However, subsequent runs of the schedule trigger will always be run on the same time as its previous run. In other words, if a previous schedule trigger ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
+
+=== Why can I not add a schedule trigger to my pipeline?
+
+Only GitHub OAuth, GitHub App and Bitbucket Cloud pipelines support schedule triggers. GitLab and Bitbucket Data Center pipelines do not support schedule triggers. If you set up a schedule trigger through menu:Project Settings[Triggers] and do not see your pipeline in the "Pipeline to run" menu, check your pipeline type is supported .

@@ -74,7 +74,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 2+| Define a job that executes a single build step.
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   - job: job1
@@ -84,7 +84,7 @@ jobs:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   job1:
@@ -96,7 +96,7 @@ jobs:
 2+| Specify a Docker image to use for a job.
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   - job: job1
@@ -105,7 +105,7 @@ jobs:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   job1:
@@ -116,7 +116,7 @@ jobs:
 2+| Define a multi-stage build pipeline. Job1 and Job2 run in concurrently. Once they are done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
-[source, yaml,role="no-numbers"]
+[source, yaml]
 ----
 stages:
   - stage: build
@@ -140,7 +140,7 @@ stages:
 ----
 
 a|
-[source, yaml,role="no-numbers"]
+[source, yaml]
 ----
 version: 2.1
 jobs:
@@ -174,7 +174,7 @@ workflows:
 2+| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for Docker, Linux and macOS.
 
 a|
-[source, yaml,role="no-numbers"]
+[source, yaml]
 ----
 jobs:
   - job: ubuntuJob
@@ -192,7 +192,7 @@ jobs:
 ----
 
 a|
-[source, yaml,role="no-numbers"]
+[source, yaml]
 ----
 jobs:
   ubuntuJob:

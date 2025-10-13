@@ -203,19 +203,20 @@ include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
-== Run a workflow only for scheduled pipelines with a specific name
+== Run a workflow only on schedule triggers that have a specific name
 
 === Goal
 
-In some cases, you may want to configure a workflow that will only run when a scheduled pipeline has a specific name.
+In some cases, you may want to configure a workflow that will only run when a scheduled trigger has a specific name.
 
 === Steps
 
 * Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[pipeline values].
 +
+.The nightly-run-workflow only runs when the trigger is a schedule trigger AND the name of that trigger is `nightly_build`
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+include::ROOT:example$logic-statement-examples/when-in-workflows/and-equal-dynamic.yml[]
 ----
 
 === Notes

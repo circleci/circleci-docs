@@ -15,6 +15,73 @@ The v4.7 release introduces security improvements with the implementation of roo
 == Upgrade
 For upgrade steps see the xref:installation:upgrade-server.adoc[Upgrade server v4.7 guide].
 
+== Release 4.7.11
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-11[changelog].
+
+== Release 4.7.10
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-10[changelog].
+
+== Release 4.7.9
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-9[changelog].
+
+== Release 4.7.8
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-8[changelog].
+
+== Release 4.7.7
+Server 4.7.7 is broken, do not use this version
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-7[changelog].
+
+== Release 4.7.6
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-6[changelog].
+
+== Release 4.7.5
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-5[changelog].
+
+== Release 4.7.4
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-4[changelog].
+
+== Release 4.7.3
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-3[changelog].
+
+== Release 4.7.2
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-2[changelog].
+
+== Release 4.7.1
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-1[changelog].
+
 == Release 4.7.0
 
 === Changelog

@@ -166,27 +166,20 @@ NOTE: Data from xref:insights:insights.adoc[Insights] and historical pipeline ru
 [#currently-not-supported]
 == Currently not supported
 
-If one of these pieces of functionality is especially critical to you, link:https://docs.google.com/forms/d/e/1FAIpQLSfnYhFLjmZ0OP8goemexAvgHDPJqgHyDF1QiIl2HdPktTKvlQ/viewform[tell us why].
-
 The following sections are features of CircleCI which are not yet supported when using the GitHub App integration. These features are planned for future releases.
 
 [#restrict-a-context-to-a-security-group]
 === Restrict a context to a security group
-The ability to xref:security:contexts.adoc#security-group-restrictions[restrict a context to a security group] is not yet supported for GitHub App projects.
+The ability to xref:security:contexts.adoc#security-group-restrictions[restrict a context to a security group] is supported for GitHub App pipelines only for organizations that have `/github/` (or `/gh/`) in the URL, no matter the pipeline integration type. It is not yet supported for organizations that have `/circleci/` in the URL. You can follow development progress link:https://circleci.canny.io/cloud-feature-requests/p/ability-to-use-security-groups-for-contexts-used-by-github-app-type-pipelines[here].
 
 [#in-app-config-editor]
 === In-app config editor
-The in-app config editor is currently **only** available for GitHub App accounts during project creation.
+Config viewing is supported for GitHub App pipelines, however editing is not available (except during project creation).
 
 [#account-integrations]
 === Account integrations
 
-Viewing menu:User settings[Account integrations] does not currently show a GitHub App integration. This page only shows GitHub OAuth app integrations.
-
-[#scheduled-pipelines]
-=== Scheduled pipelines
-
-The ability to xref:orchestrate:scheduled-pipelines.adoc[schedule pipelines] is not yet supported for pipelines that use the GitHub App integration. This feature is planned for release by September 2025.  As an alternative, use a xref:orchestrate:custom-webhooks.adoc[custom webhook] or the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-using-the-api[V2 API to trigger a pipeline], which you can `curl` with a 3rd party scheduling tool.
+The page menu:User settings[Account integrations] does not currently list the GitHub App integration, even though your account may be correctly connected. This page only shows GitHub OAuth app integrations.
 
 [#build-forked-pull-requests]
 === Build forked pull requests
@@ -201,12 +194,12 @@ Passing secrets to forked pull requests is not currently supported for GitHub Ap
 [#stop-building]
 === Stop building
 
-GitHub App integrations do not currently support the **Stop Building** option that can normally be found in **Project settings**. However, the same functionality can be achieved by deleting (or disabling) all triggers associated with existing pipelines, from menu:Project Settings[Project setup].
+Projects in organizations with `/circleci/` in the URL do not have the **Stop Building** option that can normally be found in **Project settings**. However, the same functionality can be achieved by deleting (or disabling) all triggers associated with existing pipelines, from menu:Project Settings[Project setup].
 
 [#additional-ssh-keys-only]
 === Additional SSH keys only
 
-Deploy keys and user keys are not used by GitHub App integrations. All keys are stored in menu:Project Settings[ Additional SSH Keys]. If you are looking to set up an SSH key to check out code from additional repositories in GitHub, see xref:add-ssh-key.adoc#steps-to-add-additional-ssh-keys[Add additional SSH keys].
+Deploy keys and user keys are not used in projects with `/circleci/` in the URL. Instead, all keys are stored in menu:Project Settings[ Additional SSH Keys]. If you are looking to set up an SSH key to check out code from additional repositories in GitHub, see xref:add-ssh-key.adoc#steps-to-add-additional-ssh-keys[Add additional SSH keys].
 
 [#outbound-webhooks]
 === Outbound webhooks
@@ -215,7 +208,7 @@ While outbound webhooks *are* available for GitHub App pipelines, their payload 
 [#test-insights]
 === Test Insights
 
-xref:insights:insights-tests.adoc[Test Insights] is currently not supported for orgs authenticated with the CircleCI GitHub App. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
+xref:insights:insights-tests.adoc[Test Insights] is currently not supported for orgs with `/circleci/` in the URL. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
 
 [#next-steps]
 == Next steps
