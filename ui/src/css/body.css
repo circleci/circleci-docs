@@ -11,7 +11,6 @@
     position: sticky;
     top: calc(var(--navbar-height) + var(--toolbar-height));
     height: calc(100vh - var(--navbar-height) - var(--toolbar-height));
-    width: clamp(360px, 25%, 420px);
   }
 
   /* Make aside independently scrollable */
