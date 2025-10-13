@@ -184,9 +184,11 @@ image::guides:ROOT:mcp-server-cursor.png[CircleCI MCP server in Cursor IDE]
 
 == Supported tools
 
-The supported tools section outlines the abilities that the CircleCI MCP server currently supports. Each tool is described below along with usage examples.
+The supported tools section outlines the abilities that the CircleCI MCP server currently supports. Each tool is described below along with usage examples. You can find further help information for each tool at the point at which you installed the MCP server. For example, using Cursor IDE, under menu:Cursor settings[Tolls and MCP] you can hover over a tool name to view in-app help.
 
-=== Build failure logs (`get_build_failure_logs`)
+#insert screenshot here#
+
+=== Get build failure logs (`get_build_failure_logs`)
 
 This tool retrieves detailed failure logs from CircleCI builds and presents them in a structured format.
 
@@ -204,7 +206,7 @@ The tool returns formatted logs including:
 * Full command logs.
 * Exit codes and failure messages.
 
-=== Flaky test detection (`find_flaky_tests`)
+=== Find flaky tests (`find_flaky_tests`)
 
 This tool identifies unreliable tests in your CircleCI project by analyzing your test execution history. It leverages CircleCI's built-in flaky test detection to find patterns of instability.
 
@@ -223,6 +225,18 @@ The tool returns structured information including:
 * Failure messages and failure context.
 * Data to help understand and fix test reliability issues.
 
+=== Get latest pipeline status (`get_latest_pipeline_status`)
+
+This tool retrieves the status of the latest pipeline for a CircleCI project. It can be used to check pipeline status, get latest build status, or view current pipeline state.
+
+#Insert details here#
+
+=== Get job test results (`get_job_test_results`)
+
+This tool retrieves test metadata for a CircleCI job.
+
+#Insert details here#
+
 === Configuration Helper (`config_helper`)
 
 This tool assists with CircleCI configuration tasks and provides guidance for improving your setup.
@@ -236,6 +250,57 @@ The tool provides:
 * Detailed validation results.
 * Configuration recommendations.
 * Best practices for CircleCI configuration.
+
+=== Run pipeline (`run_pipeline`)
+
+This tool triggers a new CircleCI pipeline and returns the URL to monitor its progress.
+
+#Insert details here#
+
+=== List followed projects (`list_followed_projects`)
+
+This tool lists all projects that you are following on CircleCI.
+
+#Insert details here#
+
+=== Run evaluation tests (`run_evaluation_tests`)
+
+This tool allows the users to run evaluation tests on a circleci pipeline.
+They can be referred to as "Prompt Tests" or "Evaluation Tests".
+
+This tool triggers a new CircleCI pipeline and returns the URL to monitor its progress.
+The tool will generate an appropriate circleci configuration file and trigger a pipeline using this temporary configuration.
+The tool will return the project slug.
+
+#Insert details here#
+
+=== Rerun workflow (`rerun_workflow`)
+
+This tool is used to rerun a workflow from start or from the failed job.
+
+#Insert details here#
+
+=== Download usage API data (`download_usage_api_data`)
+
+Downloads usage data from the CircleCI Usage API for a given organization and date range.
+This tool both starts the export job and downloads the resulting CSV file when ready.
+Required parameters: orgId, startDate, endDate, outputDir.
+
+#Insert details here#
+
+=== Find underused resource classes (`find_underused_resource_classes`)
+
+Analyzes a CircleCI usage data CSV file to find jobs/resource classes with average or max CPU/RAM usage below a given threshold (default 40%).
+This helps identify underused resource classes that may be oversized for their workload.
+
+#Insert details here#
+
+=== Analyze diff (`analyze_diff`)
+
+This tool is used to analyze a git diff (unstaged, staged, or all changes) against IDE rules to identify rule violations.
+By default, the tool will use the staged changes, unless the user explicitly asks for unstaged or all changes.
+
+#Insert details here#
 
 === Rollback Tool (`run_rollback_pipeline`)
 
@@ -255,6 +320,12 @@ Prerequisites:
 
 - In order to trigger the rollback using a Rollback pipeline, the pipeline must be configured in the project. See the xref:deploy:set-up-rollbacks.adoc[Set up rollbacks] page for help.
 - Deploy markers should be set up for version tracking. See the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page for help.
+
+=== List component versions (`list_component_versions`)
+
+This tool lists all versions for a CircleCI component. It guides you through a multi-step process to gather the required information and provides lists of available options when parameters are missing.
+
+#Insert details here#
 
 == Real-world examples
 
