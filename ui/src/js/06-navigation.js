@@ -42,4 +42,13 @@
 
     prevWindowWidth = currentWidth
   })
+
+  // Scroll current page into view within the navigation aside
+  const currentPageItem = navigation?.querySelector('[data-current]')
+  if (currentPageItem) {
+    // Use setTimeout to ensure DOM is fully rendered
+    setTimeout(() => {
+      currentPageItem.scrollIntoView({ block: 'nearest', behavior: 'auto' })
+    }, 100)
+  }
 })()
