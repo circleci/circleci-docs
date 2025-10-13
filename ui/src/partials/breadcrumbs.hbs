@@ -3,7 +3,7 @@
   <ul>
     {{#if site.homeUrl}}
     <li class="inline after:text-[#959595] after:content-['/'] after:px-2">
-      <a class="text-[#343434] font-normal" href="{{{relativize site.homeUrl}}}">Home</a>
+      <a class="text-link-on-light font-normal" href="{{{relativize site.homeUrl}}}">Home</a>
     </li>
     {{/if}}
     {{#with page.componentVersion}}
@@ -17,7 +17,7 @@
       {{#if (and ./url (eq ./urlType 'internal'))}}
         <a class="text-[#343434] font-normal" href="{{{relativize ./url}}}">{{{./content}}}</a>
               {{else}}
-          <span class="text-[#343434] font-normal">{{{./content}}}</span>
+          <span class="text-[#343434] font-normal cursor-default">{{{./content}}}</span>
         {{/if}}
     </li>
     {{/unless}}

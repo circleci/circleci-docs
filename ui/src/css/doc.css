@@ -94,8 +94,9 @@
 
 /* Special case: Page title gets extra top margin on larger screens */
 @media screen and (min-width: 768px) {
-  .doc > h1.page:first-child {
-    margin-top: 2.5rem;
+  .doc h1.page {
+    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
+    margin-bottom: calc(32 / var(--rem-base) * 1rem); /* 32px */
   }
 }
 
