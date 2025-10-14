@@ -140,15 +140,16 @@ function buildApiV2(callback) {
     }
     console.log('✅ OpenAPI spec fetched')
 
-    // STEP 2: Bundle and dereference all $ref pointers
-    // This resolves ALL references so snippet generation can access parameter definitions
+    // STEP 2: Bundle, dereference, and optimize
+    // --dereferenced: Resolves ALL $ref pointers so snippet generation can access definitions
+    // --remove-unused-components: Removes unreferenced schemas to reduce file size
     console.log('📦 Bundling and dereferencing API spec...')
-    exec('npx @redocly/cli bundle build/temp-api-v2/openapi.json --dereferenced --output build/temp-api-v2/openapi-bundled.json', (err, stdout, stderr) => {
+    exec('npx @redocly/cli bundle build/temp-api-v2/openapi.json --dereferenced --remove-unused-components --output build/temp-api-v2/openapi-bundled.json', (err, stdout, stderr) => {
       if (err) {
         console.error('❌ Failed to bundle API docs:', err)
         return callback(err)
       }
-      console.log('✅ API docs bundled and all references resolved')
+      console.log('✅ API docs bundled, dereferenced, and optimized')
 
       // STEP 3: Add code samples using our custom script with Kong's httpsnippet
       // This runs AFTER bundling so all $ref pointers are resolved
