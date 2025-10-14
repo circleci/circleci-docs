@@ -15,6 +15,18 @@ The v4.7 release introduces security improvements with the implementation of roo
 == Upgrade
 For upgrade steps see the xref:installation:upgrade-server.adoc[Upgrade server v4.7 guide].
 
+== Release 4.7.11
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-11[changelog].
+
+== Release 4.7.10
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-7-10[changelog].
+
 == Release 4.7.9
 
 === Changelog

@@ -54,12 +54,20 @@
   menu.appendChild(title)
   menu.appendChild(list)
 
-  var startOfContent = !document.getElementById('toc') && article.querySelector('h1.page ~ :not(.is-before-toc)')
-  if (startOfContent) {
+  var pageTitle = article.querySelector('h1.page')
+  if (pageTitle) {
     var embeddedToc = document.createElement('aside')
     embeddedToc.className = 'toc embedded'
     embeddedToc.appendChild(menu.cloneNode(true))
-    startOfContent.parentNode.insertBefore(embeddedToc, startOfContent)
+    // Find the info bar (next sibling after the title, or the element after the title)
+    var infoBar = pageTitle.nextElementSibling
+    if (infoBar && infoBar.classList && infoBar.classList.contains('mt-5')) {
+      // Insert after the info bar
+      infoBar.parentNode.insertBefore(embeddedToc, infoBar.nextSibling)
+    } else {
+      // Fallback: insert after the title if no info bar found
+      pageTitle.parentNode.insertBefore(embeddedToc, pageTitle.nextSibling)
+    }
   }
 
   window.addEventListener('load', function () {

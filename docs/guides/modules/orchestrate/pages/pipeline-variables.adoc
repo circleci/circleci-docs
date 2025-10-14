@@ -195,11 +195,12 @@ Pipeline parameters which are defined in configuration are always in scope, with
 [#pipeline-parameters-and-dynamic-configuration]
 === Pipeline parameters and dynamic configuration
 
-When using setup workflows to pass control of the pipeline to a second configuration, all pipeline parameters that are declared in the setup workflow must also be declared, with the same defaults, in the second configuration.
+Parameters can be passed from the setup to the continuation workflow using the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb]. To pass these parameters use the `parameters` parameter from the `continue` job/command. Any parameters passed in this way must be declared as pipeline parameters in the continuation configuration.
 
-When the setup workflow passes control to a second configuration, the parameters passed _to_ the setup workflow will be merged in with any parameters specified _in_ the setup workflow, before being passed to the second configuration. When using dynamic configuration, the second configuration must tolerate receiving any parameters that the setup workflow's code passes, as well as any parameters that the setup workflow _could_ accept.
+When a pipeline parameter is declared in both the setup and the continuation configurations, the pipeline will error if both the following conditions are met:
 
-If there are name conflicts between pipeline parameters specified in a setup workflow and those specified in an API request when triggering a pipeline, the continuation process will fail, and the pipeline will error.
+. The pipeline is triggered via the API.
+. The pipeline parameter's value specified in the API request is different from the default value specified in the setup configuration.
 
 More information on setup workflows can be found in the xref:dynamic-config.adoc#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
 
