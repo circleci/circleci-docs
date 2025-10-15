@@ -3302,11 +3302,6 @@ includes:
 | is truthy
 | `true`/`42`/`"a string"`
 
-| YAML alias
-| None
-| resolves to a truthy value
-| *my-alias
-
 | xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
 | None
 | resolves to a truthy value
