@@ -2,7 +2,7 @@
 :page-platform: Cloud
 :page-description: Learn about schedule triggers for your CircleCI projects.
 :experimental:
-:page-aliases: scheduled-pipelines.adoc
+:page-aliases: scheduled-pipelines.adoc, scheduled-pipelines.html
 
 NOTE: This feature is not supported for GitLab or Bitbucket Data Center pipelines.
 
