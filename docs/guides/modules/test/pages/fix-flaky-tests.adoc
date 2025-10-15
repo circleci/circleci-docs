@@ -25,23 +25,23 @@ To get started with automating flaky test fixes, you need to fulfill the followi
 
 === Prerequisites
 
-* You will need an API key from either link:https://console.anthropic.com/settings/keys[Anthropic] or link:https://auth.openai.com/log-in[OpenAI] for Chunk to process and generate fixes. Your source code is not stored nor used for training purposes by CircleCI. If you are using OpenAI you should also check the following:
-** Make sure your organization link:https://help.openai.com/en/articles/10910291-api-organization-verification#h_c6efff0719[has gpt-5 model access].
-** Verify your organization. For guidance see the link:https://help.openai.com/en/articles/10910291-api-organization-verification[OpenAI help]. If you cannot get your OpenAI organization verified, see the troubleshooting item <<i-cannot-get-my-openai-organization-verified>>.
+* You will need an API key from either link:https://console.anthropic.com/settings/keys[Anthropic, window=_blank] or link:https://auth.openai.com/log-in[OpenAI, window=_blank] for Chunk to process and generate fixes. Your source code is not stored nor used for training purposes by CircleCI. If you are using OpenAI you should also check the following:
+** Make sure your organization link:https://help.openai.com/en/articles/10910291-api-organization-verification#h_c6efff0719[has gpt-5 model access, window=_blank].
+** Verify your organization. For guidance see the link:https://help.openai.com/en/articles/10910291-api-organization-verification[OpenAI help, window=_blank]. If you cannot get your OpenAI organization verified, see the troubleshooting item <<i-cannot-get-my-openai-organization-verified>>.
 * Ensure your CircleCI jobs store test results using the `store_test_results` step. Read more about this step in the xref:reference:ROOT:configuration-reference.adoc#storetestresults[configuration reference].
 * Ensure you have the CircleCI GitHub app installed in your GitHub organization. Check menu:Organization Settings[VCS Connections], where you can see if you have the App already installed, or select btn:[Install GitHub App]. Chunk needs the GitHub App to be installed to be able to recommend fixes and open pull requests.
 * Make sure you are following the projects you want Chunk to fix. CircleCI identifies flaky tests in your CI/CD pipelines on the *Tests* tab for workflows in the Insights dashboard (menu:Insights[Select project > Select workflow > Tests]).
 
 === Setup
 
-. In the link:https://app.circleci.com/home[CircleCI web app], select your organization and then select *Chunk Tasks* from the sidebar.
+. In the link:https://app.circleci.com/home[CircleCI web app, window=_blank], select your organization and then select *Chunk Tasks* from the sidebar.
 . Select btn:[Get started] and then btn:[Continue] when prompted.
 . If you followed the prerequisites, you should see a image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] to indicate you already have the GitHub App installed for your organization. If not use the btn:[Install CircleCI GitHub App] button to install it.
 . Select your AI Model provider (Anthropic or OpenAI).
 . Enter your API key for your chosen model provider.
 . Select btn:[Next] to complete the setup.
 
-#Screenshots#
+image::guides:ROOT:chunk/set-up-chunk.png[Chunk setup modal]
 
 === Assign a task
 
@@ -141,7 +141,7 @@ You also get a code diff of the proposed fix along with logs of the decision pro
 The following table shows the configuration options available when setting up Chunk:
 
 .Chunk configuration options
-[cols="1,2,1"]
+[cols=3*]
 |===
 |Setting |Description |Default
 
@@ -176,7 +176,7 @@ a|* Daily (Sunday through Thursday at 22:00 UTC )
 
 === Unable to run verification tests
 
-Chunk runs in a xref:execution-managed:using-linuxvm.adoc[Linux VM] with link:https://discuss.circleci.com/t/ubuntu-20-04-22-04-24-04-q4-edge-release/52429[basic software installed by default]. To verify that a proposed fix resolves flakiness, it re-runs the affected test several times. To do this, Chunk may install additional software needed to set up the test environment, using clues from your CircleCI configuration file  to determine how to run the tests.
+Chunk runs in a xref:execution-managed:using-linuxvm.adoc[Linux VM] with link:https://discuss.circleci.com/t/ubuntu-20-04-22-04-24-04-q4-edge-release/52429[basic software installed by default, window=_blank]. To verify that a proposed fix resolves flakiness, it re-runs the affected test several times. To do this, Chunk may install additional software needed to set up the test environment, using clues from your CircleCI configuration file  to determine how to run the tests.
 
 View attempts in the CircleCI web app as follows:
 
@@ -196,7 +196,7 @@ If you get the following error:
 [source,shell]
 Invalid OpenAI model specified. Please check the model name and ensure it is available for your account.
 
-You will need to make sure your organization has GPT-5 access. To verify this in link:https://platform.openai.com/settings/organization/general[OpenAI Platform], follow these steps:
+You will need to make sure your organization has GPT-5 access. To verify this in link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], follow these steps:
 
 . Switch to the project you want to check in the top left dropdown.
 . Go to menu:Settings[Limits] in the left-hand menu. This page shows the models and rate limits for your project. `gpt-5` will be listed if you have access.
@@ -219,7 +219,7 @@ If you get the following error inside a Chunk task, this indicates that your Ope
 [source,shell]
 OpenAI organization verification required. Please verify your organization at https://platform.openai.com/settings/organization/generaland see our community forum for more debugging help.
 
-To fix this issues, head to link:https://platform.openai.com/settings/organization/general[OpenAI Platform], navigate to menu:General[Organization Settings] and select btn:[Verify Organization]. Then follow the steps to get your organization verified.
+To fix this issues, head to link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], navigate to menu:General[Organization Settings] and select btn:[Verify Organization]. Then follow the steps to get your organization verified.
 
 === Action required error
 
@@ -239,4 +239,4 @@ No, CircleCI does not store your source code or use it for training purposes. Ch
 
 === How long are Chunk's logs stored?
 
-Chunks logs are stored by CircleCI for 90 days. 90 days is a fixed retention period that applies to all organizations, link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[regardless of your plan’s standard data retention policy]. After 90 days, logs are automatically deleted to keep your workspace at optimal performance.
+Chunks logs are stored by CircleCI for 90 days. 90 days is a fixed retention period that applies to all organizations, link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[regardless of your plan’s standard data retention policy, window=_blank]. After 90 days, logs are automatically deleted to keep your workspace at optimal performance.
