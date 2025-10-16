@@ -135,6 +135,23 @@ Redis also has a CLI available: `sudo apt-get install redis-tools ; while ! redi
 
 * Other services, such as web servers: `+dockerize -wait http://localhost:80 -timeout 1m+`
 
+=== Custom MySQL configuration
+
+If you are using the CircleCI MySQL Docker image, you can customize the configuration using the xref:reference:ROOT:configuration-reference.adoc#docker[`command` key]. For example:
+
+[,yml]
+----
+
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/go:1.25.3
+      - image: cimg/mysql:8.0
+        command: mysqld --performance-schema=OFF
+----
+
 [#see-also]
 == See also
 
