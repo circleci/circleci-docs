@@ -18,8 +18,8 @@
   "license": "",
   "type": "commonjs",
   "devDependencies": {
-    "@antora/cli": "3.1.12",
-    "@antora/site-generator": "3.1.12",
+    "@antora/cli": "3.1.14",
+    "@antora/site-generator": "3.1.14",
     "@dotenvx/dotenvx": "^1.40.0",
     "@redocly/cli": "^2.0.0",
     "@sntke/antora-mermaid-extension": "^0.0.8",

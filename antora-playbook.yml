@@ -47,8 +47,8 @@ asciidoc:
     serverversion44: 4.4.7
     serverversion45: 4.5.5
     serverversion46: 4.6.6
-    serverversion47: 4.7.9
-    serverversion48: 4.8.2
+    serverversion47: 4.7.11
+    serverversion48: 4.8.4
     serverversion: 3.4.8
     terraformversion: 0.15.4
     kubectlversion: 1.19

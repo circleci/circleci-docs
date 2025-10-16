@@ -7,7 +7,7 @@ This tutorial shows how to add a deploy marker step to your workflow config. Dep
 
 == Introduction
 
-Deploy markers provide a lightweight way to log your deployments without requiring a you to install the CircleCI release agent. If you install deploy markers, as described in this guide, you will also be able to use the xref:set-up-rollbacks.adoc[CircleCI rollback feature].
+Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the xref:set-up-rollbacks.adoc[CircleCI rollback feature].
 
 For a full guide to CircleCI's deploys features and functionality, refer to the xref:deployment-overview.adoc[Deployment and deploy management] guide.
 
@@ -15,6 +15,14 @@ You can configure deploy markers as follows:
 
 * To display updated statuses depending of the outcome of your deployments. Steps for this are provided in the <<deploy-markers-with-status-updates>> section.
 * Or, you can choose to configure deploy markers to log deployments without status updates. Steps for this are provided in the <<deploy-logs-without-status-updates>> section.
+
+Once you have deploy markers configured, you will see a timeline of deployments in the Deploys UI. From the timeline you can choose to rollback (image:guides:ROOT:icons/rebuild.svg[rollback icon, role="no-border"]) to a version, and you get notifications for failed deployments.
+
+.Deploys timeline with failed deployment
+image::guides:ROOT:deploy/deploys-timeline-fail-banner.png[Deploy timeline with failed deployment]
+
+.Deploys timeline with no deployments requiring troubleshooting
+image::guides:ROOT:releases/dashboard.png[Deploys timeline with no deployments requiring troubleshooting]
 
 == Prerequisites
 
@@ -116,7 +124,7 @@ jobs:
 ----
 
 === 1.3. Update the deploy status to success or failure
-You can use the `when` attribute to add `on_success` and `on_failure` steps at the end of your deployment job, to handle the final status update of the deploy.
+You can use the `when` attribute to add `on_success` and `on_fail` steps at the end of your deployment job, to handle the final status update of the deploy.
 
 .Config file example showing deploy status update to success or failure
 [,yml]
@@ -276,6 +284,9 @@ jobs:
 ----
 
 This command supports the same optional parameters as the `release plan` command, but does not require a `deploy-name`.
+
+WARNING: If you are deploying to multiple environments from a single workflow, you need to specify the target environment using the `--environment-name` flag. If you are deploying multiple components from a single workflow, you need to specify the component name using the `--component-name` flag.
+
 You can see the command with all optional parameters in the following example:
 
 [,yml]

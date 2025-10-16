@@ -163,10 +163,10 @@ nomad:
 pass:[<!-- vale off -->]
 [.table-scroll]
 --
-[.table.table-striped]
-[cols=4*, options="header"]
+[.datatable.cols=4*]
 |===
 |Key |Type |Default |Description
+
 |api_service.replicas |int |`+1+` |Number of replicas to deploy for the
 api-service deployment.
 

@@ -7,6 +7,12 @@
   padding: 0 1rem 4rem;
 }
 
+@media screen and (max-width: 1023.5px) {
+  .doc {
+    padding: 0 32px 4rem;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .doc {
     flex: auto;
@@ -73,10 +79,12 @@
 
   .doc h2 {
     font-size: 20px;
+    margin-bottom: 24px;
   }
 
   .doc h3 {
     font-size: 18px;
+    margin-top: 20px;
   }
 
   .doc h4 {
@@ -86,8 +94,16 @@
 
 /* Special case: Page title gets extra top margin on larger screens */
 @media screen and (min-width: 768px) {
-  .doc > h1.page:first-child {
-    margin-top: 2.5rem;
+  .doc h1.page {
+    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
+    margin-bottom: calc(32 / var(--rem-base) * 1rem); /* 32px */
+  }
+
+  /* Section headings should have 40px top margin */
+  .doc h2,
+  .doc h3,
+  .doc h4 {
+    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
   }
 }
 
