@@ -53,6 +53,17 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
+| `pipeline.trigger.received_at`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The timestamp of when the pipeline was triggered, in ISO 8601 format.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**Yes**#
+
 | `pipeline.git.tag`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
@@ -141,9 +152,10 @@ d| [.nowrap]#GitHub App# +
 | [.circle-red]#**No**#
 
 | `pipeline.trigger_parameters.circleci.event_time`
+  **DEPRECATED**. Please use `pipeline.trigger.received_at` instead. 
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
-|
+| String
 | Timestamp CircleCI received the event
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
