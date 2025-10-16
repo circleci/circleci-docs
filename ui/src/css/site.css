@@ -47,3 +47,8 @@ header [data-search-results-container] {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* Hide hamburger menu on landing page */
+.landing-page [data-page-navigation-toggle] {
+  display: none;
+}
