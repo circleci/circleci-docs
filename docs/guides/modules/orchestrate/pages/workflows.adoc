@@ -825,7 +825,7 @@ NOTE: If you rerun a workflow containing a job that was previously re-run with S
 
 The following state diagram shows the possible states and transitions of a workflow:
 
-.Workflow states
+.CircleCI cloud workflow states
 [mermaid]
 ----
 stateDiagram-v2
@@ -856,6 +856,42 @@ stateDiagram-v2
     failed --> [*]
     error --> [*]
     unauthorized --> [*]
+
+----
+
+.CircleCI server workflow states
+[mermaid]
+----
+stateDiagram-v2
+    [*] --> running
+
+    running --> success
+
+    running --> failing
+
+    running --> on_hold
+    on_hold --> canceled
+    on_hold --> running : approval job
+    on_hold --> success
+
+    running --> canceled
+    failing --> failed
+    failing --> canceled
+
+    running --> failed
+    running --> error
+    running --> not_run
+    running --> unauthorized
+
+    running --> queued
+    queued --> running: queued as part of a serial group
+
+    success --> [*]
+    canceled --> [*]
+    failed --> [*]
+    error --> [*]
+    unauthorized --> [*]
+    not_run --> [*]
 
 ----
 

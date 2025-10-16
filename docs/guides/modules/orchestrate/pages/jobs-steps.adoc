@@ -75,7 +75,7 @@ See the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration 
 
 The following diagram and table shows the possible job statuses and transitions.
 
-.Job status transitions
+.CircleCI cloud job status transitions
 [mermaid]
 ----
 stateDiagram-v2
@@ -86,20 +86,14 @@ stateDiagram-v2
     blocked --> pending : Job instructed to start but not yet started
     blocked --> unauthorized : Trying to use a context without permission
    
-
     pending --> running
-
     
     pending --> blocked : Rerun
     
-
     running --> canceled
     pending --> canceled
     blocked --> canceled
 
-
-
-    
     pending --> failed : Abusive / Sanctioned
     running --> failed
     running --> success
@@ -108,7 +102,36 @@ stateDiagram-v2
     success --> [*]
     canceled --> [*]
     unauthorized --> [*]
+----
 
+.CircleCI server job status transitions
+[mermaid]
+----
+stateDiagram-v2
+    direction TB
+    [*] --> blocked
+
+    state "blocked or not running" as pending
+    blocked --> pending : Job instructed to start but not yet started
+    blocked --> unauthorized : Trying to use a context without permission
+   
+    pending --> running
+
+    pending --> skipped : Only build PRs setting enabled<br/>ci-skip<br/>No project found<br/>Abusive<br/>Sanctioned
+    pending --> blocked : Rerun
+
+    running --> canceled
+    pending --> canceled
+    blocked --> canceled
+
+    running --> failed
+    running --> success
+
+    skipped --> [*]
+    success --> [*]
+    failed --> [*]
+    canceled --> [*]
+    unauthorized --> [*]
 ----
 
 [cols="1,2", options="header"]
