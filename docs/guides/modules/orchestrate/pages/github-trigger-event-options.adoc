@@ -91,6 +91,17 @@ a| * `opened`
 
 All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull request events] also have the following xref:reference:ROOT:variables.adoc#pipeline-values[pipeline values] populated:
 
+If your trigger is not restricted to only pull request events, any logical statement using the following pipeline values must also include a condition to ensure that the pipeline runs when the event is a pull request. For example:
+
+[,yaml]
+----
+workflows:
+  say-hello-workflow:
+    when: pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.number == 23
+    jobs:
+      - say-hello
+----
+
 [cols=".^1,1"]
 |===
 |Pipeline value |Description
