@@ -146,13 +146,13 @@ d| [.nowrap]#GitHub OAuth# +
 | `pipeline.trigger_parameters.circleci.trigger_type`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
-|
+| String
 | GitHub App, GitLab
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.trigger_parameters.circleci.event_time`
-  **DEPRECATED**. Please use `pipeline.trigger.received_at` instead. 
+  **DEPRECATED**. Use `pipeline.trigger.received_at` instead. 
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
@@ -163,7 +163,7 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.trigger_parameters.circleci.event_type`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
-|
+| String
 d|  [.nowrap]#GitHub App: push# +
 [.nowrap]#GitLab: push, merge request# +
 
@@ -172,7 +172,7 @@ d|  [.nowrap]#GitHub App: push# +
 
 | `pipeline.trigger_parameters.gitlab.type`
 d| [.nowrap]#GitLab#
-|
+| 
 | See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
