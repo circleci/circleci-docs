@@ -36,6 +36,18 @@
   --breakpoint-lg: 75rem;
 }
 
+/* Hide component-explorer-nav when search results are shown on desktop/tablet */
+header.h-dvh [data-component-explorer-nav] {
+  display: none;
+}
+
+/* Center search results container on the page */
+header [data-search-results-container] {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Hide hamburger menu on landing page */
 .landing-page [data-page-navigation-toggle] {
   display: none;
