@@ -184,7 +184,7 @@ image::guides:ROOT:mcp-server-cursor.png[CircleCI MCP server in Cursor IDE]
 
 == Supported tools
 
-This section outlines the abilities that the CircleCI MCP server currently supports. Several tools are described below along with usage examples. For full infomation on each tool see the link:https://github.com/CircleCI-Public/mcp-server-circleci/blob/main/README.md[README] file in the tool's repository.
+This section outlines the abilities that the CircleCI MCP server currently supports. Several tools are described below along with usage examples. For full information on each tool see the link:https://github.com/CircleCI-Public/mcp-server-circleci/blob/main/README.md[README] file in the tool's repository.
 
 You can find further help information for each tool at the point at which you installed the MCP server. For example, using Cursor IDE, under menu:Cursor settings[Tools and MCP] you can hover over a tool name to view in-app help.
 
