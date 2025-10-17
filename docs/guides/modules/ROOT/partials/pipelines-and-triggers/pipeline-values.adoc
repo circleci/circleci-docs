@@ -151,8 +151,8 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.circleci.event_time`
-  **DEPRECATED**. Use `pipeline.trigger.received_at` instead. 
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_time` +
+  *Deprecated*: Use `pipeline.trigger.received_at` instead.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
