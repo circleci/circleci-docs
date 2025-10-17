@@ -8,7 +8,7 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:22.19.0
+      - image: cimg/node:22.20.0
     working_directory: ~/project
 
   go_executor:
@@ -18,7 +18,7 @@ executors:
 
   ruby_executor:
     docker:
-      - image: cimg/ruby:3.4.6
+      - image: cimg/ruby:3.4.7
     working_directory: ~/project
 
 commands:
