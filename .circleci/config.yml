@@ -1,128 +1,31 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/reference/configuration-reference
 version: 2.1
 
-orbs:
-  aws-cli: circleci/aws-cli@5.4.1
-  vale: circleci/vale@1.2.0
-  go: circleci/go@3.0.3
-
-executors:
-  node_executor:
-    docker:
-      - image: cimg/node:22.20.0
-    working_directory: ~/project
-
-  go_executor:
-    docker:
-      - image: cimg/go:1.25
-    working_directory: ~/project
-
-  ruby_executor:
-    docker:
-      - image: cimg/ruby:3.4.7
-    working_directory: ~/project
-
-commands:
-  aws-setup:
-    steps:
-      - aws-cli/setup:
-          aws_access_key_id: ${AWS_ACCESS_KEY_ID}
-          aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
-          region: ${AWS_REGION}
-
-  notify_error:
-    parameters:
-      message:
-        type: string
-    steps:
-      - run:
-          name: Log Error
-          when: on_fail
-          command: |
-            echo "[ERROR] << parameters.message >>"
-
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#jobs-overview & https://circleci.com/docs/reference/configuration-reference/#jobs
 jobs:
-  build:
-    executor: node_executor
+  say-hello:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/guides/execution-managed/executor-intro/ & https://circleci.com/docs/reference/configuration-reference/#executor-job
+    docker:
+      # Specify the version you desire here
+      # See: https://circleci.com/developer/images/image/cimg/base
+      - image: cimg/base:current
+
+    # Add steps to the job
+    # See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#steps-overview & https://circleci.com/docs/reference/configuration-reference/#steps
     steps:
+      # Checkout the code as the first step.
       - checkout
       - run:
-          name: Install Node Dependencies
-          command: npm ci
-      - run:
-          name: Build the Documentation Site with Antora
-          command: |
-            set -e
-            echo "[INFO] Starting Antora build..."
-            npm run build:docs
-            echo "[INFO] Antora build completed."
-      - store_artifacts:
-          path: build
-      - persist_to_workspace:
-          root: .
-          paths:
-            - build
-      - notify_error:
-          message: "Build job failed for branch ${CIRCLE_BRANCH}"
+          name: "Say hello"
+          command: "echo Hello, World!"
 
-  validate:
-    executor: go_executor
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - go/with-cache:
-          golangci-lint: true
-          steps:
-            - run: task mod-download
-            - run: task ci:diff
-            - run: task ci:lint
-            - run: task validate-html
-      - notify_error:
-          message: "Validation job failed for branch ${CIRCLE_BRANCH}"
-
-  deploy-production:
-    executor: go_executor
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - aws-setup
-      - go/with-cache:
-          steps:
-            - run: task mod-download
-            - run: task deploy
-            - run: task deploy-redirects
-            - run: task validate-redirects
-      - notify_error:
-          message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
-
+# Orchestrate jobs using workflows
+# See: https://circleci.com/docs/guides/orchestrate/workflows/ & https://circleci.com/docs/reference/configuration-reference/#workflows
 workflows:
-  main:
+  say-hello-workflow: # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - vale/lint:
-          reference_branch: main
-          base_dir: docs
-          filters: pipeline.git.branch != "main"
-
-      - build:
-          filters: pipeline.git.branch == "main"
-          name: build-main
-          context:
-            - circleci-docs-static
-      - build:
-          filters: pipeline.git.branch != "main"
-
-      - validate:
-          requires:
-            - build-main
-            - build
-
-      - deploy-production:
-          requires:
-            - validate
-          filters: pipeline.git.branch == "main"
-          context:
-            - circleci-docs-static
-            - docs-platform-assets
-            - web-ui-npm
-            - web-ui-datadog
+      - say-hello
