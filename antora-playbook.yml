@@ -68,7 +68,7 @@ antora:
   extensions:
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
-      - 'test/adaptive-testing.adoc'
+      - 'test:adaptive-testing.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true
