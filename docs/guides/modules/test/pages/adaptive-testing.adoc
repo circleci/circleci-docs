@@ -1,3 +1,8 @@
+= Adaptive testing
+:page-platform: Cloud
+:page-description: This document describes the adaptive testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
+:experimental:
+
 == Introduction
 
 The adaptive testing feature enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes. This approach reduces test execution time while maintaining test confidence.
@@ -32,7 +37,7 @@ Test impact analysis identifies which tests need to run based on the files that 
 
 The analysis phase typically runs slower because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
 
- 
+
 
 
 == Getting Started
@@ -67,7 +72,7 @@ The existing test job will be needed as a reference point for populating a new #
 
 ....
 # .circleci/config.yml
-version: 2.1 
+version: 2.1
 jobs:
   test:
     executor: node-with-service
@@ -126,13 +131,13 @@ outputs:
  go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
 
 === Populating the #run# command
- 
-The #run# command executes the tests using a test runner, the command will run the tests discovered by the #discover# command. 
 
-There are two ways of running the discovered tests; using the template variable #<< test.atoms >># in the #run# command will be replaced with a space-separated list of tests to run. 
+The #run# command executes the tests using a test runner, the command will run the tests discovered by the #discover# command.
+
+There are two ways of running the discovered tests; using the template variable #<< test.atoms >># in the #run# command will be replaced with a space-separated list of tests to run.
 If the template variable is not found in the #run# command, each test will be newline-separated in stdin.
 
-When collecting test results, the template variable #<< outputs.junit >># in the run command should be used and the location of the test results should be defined in the #outputs# map. 
+When collecting test results, the template variable #<< outputs.junit >># in the run command should be used and the location of the test results should be defined in the #outputs# map.
 This ensures that each batch of tests do not override previous batches.
 
 *Action Items*
@@ -194,7 +199,7 @@ The #.circleci/test-suites.yml# is now set up to match the existing way of runni
 . The “Test” tab reports the number of tests passed/failed.
 
 ....
-version: 2.1 
+version: 2.1
 jobs:
   test:
     executor: node-with-service
@@ -207,16 +212,16 @@ jobs:
 
 === Troubleshooting
 
-*My tests run slower using the test-suite* 
+*My tests run slower using the test-suite*
 
-When using parallelism, confirm that the timing data is present for the tests. If the step output contains lines starting with #No timing found for#, the timing data is missing. 
+When using parallelism, confirm that the timing data is present for the tests. If the step output contains lines starting with #No timing found for#, the timing data is missing.
 
 The two most common causes for this:
 
 . The tests were run with a different job name, in this case, rerunning the job should find timing data.
 . The #<< outputs.junit >># template variable is not set up correctly, ensure that the run command uses the template variable and the store_test_results step provides a path to a directory so that all batches of << outputs.junit >> are stored.
 
-If the tests are still slower, the test runner being used might have initial start up time when running tests, this can cause significant slow down using the dynamic batching as each batch needs to do that initial start up. 
+If the tests are still slower, the test runner being used might have initial start up time when running tests, this can cause significant slow down using the dynamic batching as each batch needs to do that initial start up.
 
 Add the dynamic-batching: false option to .circleci/test-suites.yml to disable dynamic batching.
 
@@ -262,7 +267,7 @@ options:
 
 The analysis command runs each impacted test, instrumented with coverage data to find files impacting tests. This enables the #run# command to only run tests that are impacted by a change.
 
-There are two ways of analyzing the impacted tests; using the template variable #<< test.atoms >># in the #analysis# command will be replaced with a single test. 
+There are two ways of analyzing the impacted tests; using the template variable #<< test.atoms >># in the #analysis# command will be replaced with a single test.
 If the template variable is not found in the #analysis# command, the test will be passed in stdin.
 
 When collecting coverage data, the template variable in the #analysis# command should be used, this ensures that the coverage data can be parsed for each test analyzed.
@@ -328,7 +333,7 @@ If the tests outputted from the #discover# command are files (e.g, #src/foo.test
 
 The #file-mapper# command is a command that maps a test to a file, this is used during analysis and test selection to ensure that a test is impacted by itself.
 
-There are two ways of mapping files to tests; using the template variable #<< test.atoms >># in the #file-mapper# command will be replaced with a single test. 
+There are two ways of mapping files to tests; using the template variable #<< test.atoms >># in the #file-mapper# command will be replaced with a single test.
 If the template variable is not found in the #file-mapper# command, the test will be passed in stdin.
 
 ....
@@ -352,7 +357,7 @@ options:
 
 === Running analysis for the first time
 
-By default, analysis will run for impacted tests on branches named #main#, and will not run for all other branches. The first time analysis is run, all tests are impacted because no tests exist in the impact data. 
+By default, analysis will run for impacted tests on branches named #main#, and will not run for all other branches. The first time analysis is run, all tests are impacted because no tests exist in the impact data.
 
 This section will run analysis on a feature branch to seed the initial impact data.
 
@@ -369,7 +374,7 @@ This section will run analysis on a feature branch to seed the initial impact da
 . The step output finds files impacting a test (e.g. Found 12 files impacting test src/foo.test.ts).
 
 ....
-version: 2.1 
+version: 2.1
 jobs:
   test:
     executor: node-with-service
@@ -386,7 +391,7 @@ jobs:
 
 *Analysis is taking too long or my job is timing out*
 
-There might be some improvements that can be made to speed up coverage depending on test runner and project size. 
+There might be some improvements that can be made to speed up coverage depending on test runner and project size.
 
 If no further optimisations can be made, the test-analysis-duration option can be defined to timebox the analysis to a number of minutes.
 
@@ -487,7 +492,7 @@ No changes required, this is the default setting.
 
 ....
 # .circleci/config.yml
-version: 2.1 
+version: 2.1
 jobs:
   test:
     executor: node-with-service
@@ -503,7 +508,7 @@ jobs:
 
 ....
 # .circleci/config.yml
-version: 2.1 
+version: 2.1
 jobs:
   test:
     executor: node-with-service
@@ -519,7 +524,7 @@ jobs:
 
 ....
 # .circleci/config.yml
-version: 2.1 
+version: 2.1
 parameters:
   run-scheduled-analysis:
     type: boolean
@@ -615,7 +620,7 @@ The adaptive testing feature has some current limitations to consider:
 ....
 # .circleci/test-suites.yml
 outputs:
-  junit: test-reports/tests.xml 
+  junit: test-reports/tests.xml
 # Skipped tests written to test-reports/tests-skipped.xml
 # Batched tests written to incrementing test-reports/tests-1.xml
 # .circleci/config.yml
@@ -704,7 +709,7 @@ You can also compare:
 . Number of tests run on feature branches vs. full test suite
 . Wall time reduction across parallel nodes
 
-=== Can I run analysis on branches other than main? 
+=== Can I run analysis on branches other than main?
 
 *Answer:* Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on main by default, you can configure it to run on:
 

@@ -1,6 +1,7 @@
 module.exports.register = function ({ config }) {
-  const { addToNavigation, unlistedPagesHeading = 'Unlisted Pages', allowedUnlistedPages = [] } = config
+  const { addToNavigation, unlistedPagesHeading = 'Unlisted Pages', allowedUnlistedPages = [] } = config || {}
   const logger = this.getLogger('unlisted-pages-extension')
+  logger.info(`Allowed unlisted pages config: ${JSON.stringify(allowedUnlistedPages)}`)
   this
     .on('navigationBuilt', ({ contentCatalog }) => {
       contentCatalog.getComponents().forEach(({ versions }) => {
