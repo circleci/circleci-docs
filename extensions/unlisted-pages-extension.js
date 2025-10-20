@@ -28,8 +28,9 @@ module.exports.register = function (context = {}) {
           ext.require?.includes('unlisted-pages-extension')
         )
         console.log('Found extension config:', JSON.stringify(extensionConfig))
-        if (extensionConfig?.allowedUnlistedPages) {
-          finalAllowedPages = extensionConfig.allowedUnlistedPages
+        // Antora converts camelCase keys to lowercase, so check for 'allowedunlistedpages'
+        if (extensionConfig?.allowedunlistedpages) {
+          finalAllowedPages = extensionConfig.allowedunlistedpages
           console.log('Found config in playbook:', JSON.stringify(finalAllowedPages))
         }
       }
