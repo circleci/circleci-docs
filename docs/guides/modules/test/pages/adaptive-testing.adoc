@@ -3,9 +3,7 @@
 :page-description: This document describes the adaptive testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
 :experimental:
 
-== Introduction
-
-The adaptive testing feature enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes. This approach reduces test execution time while maintaining test confidence.
+Use adaptive testing to only run tests that are impacted by code changes and evenly distribute tests across parallel execution nodes. Adaptive testing reduces test execution time while maintaining test confidence.
 
 == Key benefits:
 
@@ -37,18 +35,15 @@ Test impact analysis identifies which tests need to run based on the files that 
 
 The analysis phase typically runs slower because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
 
-
-
-
-== Getting Started
+== Getting started
 Goals of this section:
 
-* Tests are run with the testsuite command.
-* Test results are uploaded and visible in the UI.
+* Tests are run with the `testsuite` command.
+* Test results are uploaded and visible in the CircleCI web app.
 * Test timings match the existing test job.
 
-=== Create #.circleci/test-suites.yml#
-Create a stubbed file in your project root, the values will be populated in the next step.
+=== Create test-suites.yml
+Create a stubbed file in your project root, you will populate the values in the next step.
 
 *Action Items*
 Create a stubbed #.circleci/test-suites.yml# file in the project root, the values will be populated in the next step.
