@@ -12,11 +12,22 @@ module.exports.register = function (context = {}) {
     .on('navigationBuilt', ({ contentCatalog, playbook }) => {
       // Try to get config from playbook if not in context
       let finalAllowedPages = allowedUnlistedPages
+
+      console.log('=== NAVIGATION BUILT EVENT DEBUG ===')
+      console.log('playbook exists:', !!playbook)
+      console.log('playbook.antora exists:', !!playbook?.antora)
+      console.log('playbook.antora.extensions exists:', !!playbook?.antora?.extensions)
+      if (playbook?.antora?.extensions) {
+        console.log('Extensions in playbook:', JSON.stringify(playbook.antora.extensions, null, 2))
+      }
+      console.log('=== END EVENT DEBUG ===')
+
       if (finalAllowedPages.length === 0 && playbook?.antora?.extensions) {
         const extensionConfig = playbook.antora.extensions.find(ext =>
           ext.require === './extensions/unlisted-pages-extension.js' ||
           ext.require?.includes('unlisted-pages-extension')
         )
+        console.log('Found extension config:', JSON.stringify(extensionConfig))
         if (extensionConfig?.allowedUnlistedPages) {
           finalAllowedPages = extensionConfig.allowedUnlistedPages
           console.log('Found config in playbook:', JSON.stringify(finalAllowedPages))
