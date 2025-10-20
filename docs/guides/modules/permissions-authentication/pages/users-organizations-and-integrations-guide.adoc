@@ -1,0 +1,39 @@
+= Users, organizations, and integrations guide
+:page-platform: Cloud
+:page-description: A guide to understanding user accounts, organizations and integrations with version control systems in CircleCI.
+:experimental:
+
+The guide defines the concepts of user, organization and integration in CircleCI. After these concepts are covered you will find out about the features available to you depending on you organization and pipeline type.
+
+== User account
+
+When you log in to CircleCI you are logging in to your user account.
+
+#user settings#
+
+As a CircleCI _user_ you can have access to zero, one or many _organizations_.
+
+There are two ways to log in to CircleCI:
+
+* Email and password
+* Social login (GitHub, Bitbucket)
+
+== Organizations
+
+An organization in CircleCI is a workspace that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s), such as GitHub, GitLab, or Bitbucket.
+
+Creating an organization allows you to manage the following:
+
+* Multiple projects under a single entity.
+* Configure and manage CI/CD pipelines specific to your team or company needs.
+* Invite team members.
+* Assign roles (`circleci` orgs only).
+
+Each organization has its own settings, including security, integrations, and resource management, making it easier to coordinate and control your CI/CD processes across multiple projects and users.
+
+A CircleCI _organization_ can be one of three types:
+
+A CircleCI `circleci` organization:: You can create a `circleci` organization from your user homepage. #create guide to making a new org and link to it - retire support article?#
+* A CircleCI `github` organization:: #do we want to cover setting up one of these?#
+* A CircleCI `bitbucket` organization
+
