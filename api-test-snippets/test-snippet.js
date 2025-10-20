@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
 const url = 'https://circleci.com/api/v2/pipeline?org-slug=gh/rosieyohannan&mine=true';
-const options = {method: 'GET', headers: {'Circle-Token': 'xxxxx'}};
+const options = {method: 'GET', headers: {'Circle-Token': 'CIRCLE_TOKEN'}};
 
 (async () => {
   try {

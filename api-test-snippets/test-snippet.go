@@ -12,7 +12,7 @@ func main() {
 
     req, _ := http.NewRequest("GET", url, nil)
 
-    req.Header.Add("Circle-Token", "xxxxxx")
+    req.Header.Add("Circle-Token", "$CIRCLE_TOKEN")
 
     res, _ := http.DefaultClient.Do(req)
 

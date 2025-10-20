@@ -7,7 +7,7 @@ http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 
 request = Net::HTTP::Get.new(url)
-request["Circle-Token"] = 'xxxxxx'
+request["Circle-Token"] = 'CIRCLE_TOKEN'
 
 response = http.request(request)
 puts response.read_body
