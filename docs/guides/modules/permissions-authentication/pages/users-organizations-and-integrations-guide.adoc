@@ -37,3 +37,19 @@ A CircleCI `circleci` organization:: You can create a `circleci` organization fr
 * A CircleCI `github` organization:: #do we want to cover setting up one of these?#
 * A CircleCI `bitbucket` organization
 
+== Integration options
+
+The integration options available to you depend on your organization type, as follows:
+
+[cols=7*, options="header"]
+|===
+| Organization type |Github App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab self managed | GitLab SaaS
+
+| `circleci`
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+| [.circle-green]#Yes#
+|===
