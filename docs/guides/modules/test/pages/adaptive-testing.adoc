@@ -46,26 +46,28 @@ Goals of this section:
 Create a stubbed file in your project root, you will populate the values in the next step.
 
 *Action Items*
-Create a stubbed #.circleci/test-suites.yml# file in the project root, the values will be populated in the next step.
+Create a stubbed `.circleci/test-suites.yml` file in the project root. You will populate the values in the next step.
 
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: ci tests
 discover: ##
 run: ##
 outputs:
   junit: ##
-....
+----
 
 === Locate the existing test job
-The existing test job will be needed as a reference point for populating a new #.circleci/test-suites.yml# file.
+The existing test job is needed as a reference point for populating a new `.circleci/test-suites.yml` file.
 
 *Action Items*
 
-. Find the .circleci/config.yml test job. For example, line 9 in the below config.
-. (optional) If the step calls a custom script (e.g. task run-tests), find the script.
+. Find the `.circleci/config.yml` test job. For example, line 9 in the below config.
+. (optional) If the step calls a custom script (for example, `task run-tests`), find the script.
 
-....
+[source,yaml]
+----
 # .circleci/config.yml
 version: 2.1
 jobs:
@@ -76,7 +78,7 @@ jobs:
       - run: JEST_JUNIT_OUTPUT_FILE="test-reports/tests.xml" jest --runInBand --reporters=jest-junit --bail --testPathPattern=src/
       - store_test_results:
           path: test-reports
-....
+----
 
 === Populating the discover command
 

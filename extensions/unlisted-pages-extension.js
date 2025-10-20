@@ -1,16 +1,27 @@
 module.exports.register = function (context = {}) {
   const logger = this.getLogger('unlisted-pages-extension')
 
-  console.log('=== UNLISTED PAGES EXTENSION DEBUG ===')
-  console.log('Context keys:', Object.keys(context))
-  console.log('Full context:', JSON.stringify(context, null, 2))
+  // Configuration is passed directly as properties in the context when loaded from playbook
+  const { addToNavigation, unlistedPagesHeading = 'Unlisted Pages', allowedUnlistedPages = [] } = context
 
-  const { addToNavigation, unlistedPagesHeading = 'Unlisted Pages', allowedUnlistedPages = [] } = context.config || context
-  console.log('Allowed unlisted pages:', JSON.stringify(allowedUnlistedPages))
+  console.log('=== UNLISTED PAGES EXTENSION DEBUG ===')
+  console.log('Allowed unlisted pages from context:', JSON.stringify(allowedUnlistedPages))
   console.log('=== END DEBUG ===')
 
   this
-    .on('navigationBuilt', ({ contentCatalog }) => {
+    .on('navigationBuilt', ({ contentCatalog, playbook }) => {
+      // Try to get config from playbook if not in context
+      let finalAllowedPages = allowedUnlistedPages
+      if (finalAllowedPages.length === 0 && playbook?.antora?.extensions) {
+        const extensionConfig = playbook.antora.extensions.find(ext =>
+          ext.require === './extensions/unlisted-pages-extension.js' ||
+          ext.require?.includes('unlisted-pages-extension')
+        )
+        if (extensionConfig?.allowedUnlistedPages) {
+          finalAllowedPages = extensionConfig.allowedUnlistedPages
+          console.log('Found config in playbook:', JSON.stringify(finalAllowedPages))
+        }
+      }
       contentCatalog.getComponents().forEach(({ versions }) => {
         versions.forEach(({ name: component, version, navigation: nav, url: defaultUrl }) => {
           const navEntriesByUrl = getNavEntriesByUrl(nav)
@@ -21,8 +32,8 @@ module.exports.register = function (context = {}) {
               if ((page.pub.url in navEntriesByUrl) || page.pub.url === defaultUrl) return collector
               // Check if this page is in the allowed unlisted pages list
               const pageIdentifier = (page.src.module === 'ROOT' ? '' : page.src.module + ':') + page.src.relative
-              if (allowedUnlistedPages.includes(pageIdentifier) || allowedUnlistedPages.includes(page.src.relative)) {
-                logger.info(`Skipping allowed unlisted page: ${pageIdentifier}`)
+              if (finalAllowedPages.includes(pageIdentifier) || finalAllowedPages.includes(page.src.relative)) {
+                console.log(`Skipping allowed unlisted page: ${pageIdentifier}`)
                 return collector
               }
               logger.error({ file: page.src, source: page.src.origin }, `detected unlisted page (identifier: ${pageIdentifier}, relative: ${page.src.relative})`)
