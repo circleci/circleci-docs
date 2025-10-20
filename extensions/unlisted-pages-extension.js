@@ -14,9 +14,10 @@ module.exports.register = function ({ config }) {
               // Check if this page is in the allowed unlisted pages list
               const pageIdentifier = (page.src.module === 'ROOT' ? '' : page.src.module + ':') + page.src.relative
               if (allowedUnlistedPages.includes(pageIdentifier) || allowedUnlistedPages.includes(page.src.relative)) {
+                logger.info(`Skipping allowed unlisted page: ${pageIdentifier}`)
                 return collector
               }
-              logger.error({ file: page.src, source: page.src.origin }, 'detected unlisted page')
+              logger.error({ file: page.src, source: page.src.origin }, `detected unlisted page (identifier: ${pageIdentifier}, relative: ${page.src.relative})`)
               return collector.concat(page)
             }, [])
           if (unlistedPages.length && addToNavigation) {
