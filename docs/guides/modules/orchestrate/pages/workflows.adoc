@@ -846,7 +846,79 @@ image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[
 NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
 
 [#states]
-=== Workflow states
+== Workflow states
+
+The following state diagram shows the possible states and transitions of a workflow:
+
+.CircleCI cloud workflow states
+[mermaid]
+----
+stateDiagram-v2
+    [*] --> running
+
+    running --> success
+
+    running --> failing
+
+    running --> on_hold
+    on_hold --> canceled
+    on_hold --> running : approval job
+    on_hold --> success
+
+    running --> canceled
+    failing --> failed
+    failing --> canceled
+
+    running --> failed
+    running --> error
+    running --> unauthorized
+
+    running --> queued
+    queued --> running: queued as part of a serial group
+
+    success --> [*]
+    canceled --> [*]
+    failed --> [*]
+    error --> [*]
+    unauthorized --> [*]
+
+----
+
+.CircleCI server workflow states
+[mermaid]
+----
+stateDiagram-v2
+    [*] --> running
+
+    running --> success
+
+    running --> failing
+
+    running --> on_hold
+    on_hold --> canceled
+    on_hold --> running : approval job
+    on_hold --> success
+
+    running --> canceled
+    failing --> failed
+    failing --> canceled
+
+    running --> failed
+    running --> error
+    running --> not_run
+    running --> unauthorized
+
+    running --> queued
+    queued --> running: queued as part of a serial group
+
+    success --> [*]
+    canceled --> [*]
+    failed --> [*]
+    error --> [*]
+    unauthorized --> [*]
+    not_run --> [*]
+
+----
 
 Workflows may have one of the following states:
 
@@ -857,10 +929,6 @@ Workflows may have one of the following states:
 | RUNNING
 | Workflow is in progress
 | No
-
-| NOT RUN
-| Workflow never started
-| Yes
 
 | CANCELED
 | Workflow canceled before it finished
@@ -889,9 +957,15 @@ Workflows may have one of the following states:
 | UNAUTHORIZED
 | One or more of the jobs terminated with a `unauthorized` job status. The user who triggered the pipeline or approved an approval job does not have access to a required restricted context.
 | Yes
+
+| QUEUED
+| The workflow is queued due to being part of a serial group. For more information, see the xref:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization] page.
+| No
+
 |===
 
 NOTE: After 90 days non-terminal workflows are automatically cancelled by CircleCI.
+
 
 [#troubleshooting]
 == Troubleshooting
