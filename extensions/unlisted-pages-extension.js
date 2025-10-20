@@ -1,5 +1,5 @@
 module.exports.register = function ({ config }) {
-  const { addToNavigation, unlistedPagesHeading = 'Unlisted Pages' } = config
+  const { addToNavigation, unlistedPagesHeading = 'Unlisted Pages', allowedUnlistedPages = [] } = config
   const logger = this.getLogger('unlisted-pages-extension')
   this
     .on('navigationBuilt', ({ contentCatalog }) => {
@@ -11,6 +11,11 @@ module.exports.register = function ({ config }) {
             .filter((page) => page.out)
             .reduce((collector, page) => {
               if ((page.pub.url in navEntriesByUrl) || page.pub.url === defaultUrl) return collector
+              // Check if this page is in the allowed unlisted pages list
+              const pageIdentifier = (page.src.module === 'ROOT' ? '' : page.src.module + ':') + page.src.relative
+              if (allowedUnlistedPages.includes(pageIdentifier) || allowedUnlistedPages.includes(page.src.relative)) {
+                return collector
+              }
               logger.error({ file: page.src, source: page.src.origin }, 'detected unlisted page')
               return collector.concat(page)
             }, [])
