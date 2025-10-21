@@ -3,6 +3,10 @@
 :page-description: This document describes the adaptive testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
 :experimental:
 
+CAUTION: *Adaptive testing* is available as a closed preview. When the feature is made generally available there will be a cost associated with access and usage.
+
+NOTE: This page is currently in development and will be updated as the feature is developed.
+
 Use adaptive testing to run only tests that are impacted by code changes and evenly distribute tests across parallel execution nodes. Adaptive testing reduces test execution time while maintaining test confidence.
 
 == Key benefits:
@@ -141,7 +145,7 @@ outputs:
 |*Vitest*
 |`vitest list --filesOnly`
 
-|*Pytest*
+|*pytest*
 |`pytest --collect-only -qq \| sed 's/:.*//' \| sort -u`
 
 |*Go*
@@ -154,7 +158,7 @@ outputs:
 
 The `run` command executes the tests discovered by the `discover` command using a test runner.
 
-There are two ways of running the discovered tests:
+"Discovered" tests can be run in one of two ways:
 
 * Use the template variable `<< test.atoms >>` in the `run` command. This will be replaced with a space-separated list of tests to run.
 * If the template variable is not found in the `run` command, each test will be newline-separated in stdin.
@@ -195,13 +199,13 @@ outputs:
 |*Vitest*
 |`vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail << test.atoms >>`
 
-|*Pytest*
+|*pytest*
 |`pytest --disable-pytest-warnings --no-header --quiet --tb=short --junit-xml="<< outputs.junit >>" << test.atoms >>`
 
 |*Go*
 |`go test -race -count=1 << test.atoms >>`
 
-|*Gotestsum*
+|*gotestsum*
 |`go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>`
 |===
 --
@@ -210,7 +214,7 @@ outputs:
 
 Your `.circleci/test-suites.yml` file is now set up to match your existing way of running tests. You now need to update your CircleCI configuration to use your `test-suites.yml` file.
 
-. Update the .circleci/config.yml to use the `circleci run testsuite “ci tests”` command.
+. Update the your CircleCI configuration file (`.circleci/config.yml`) to use the `circleci run testsuite “ci tests”` command.
 . Push a change and observe the step output of the test job.
 
 [source,yaml]
@@ -258,7 +262,7 @@ options:
   dynamic-batching: false
 ----
 
-If tests are still slower, share the pipeline link in the closed beta slack channel. #Do we want to update this or keep for beta?#
+If tests are still slower, share the pipeline link in the closed beta slack channel.
 
 == 2. Enable adaptive testing
 
@@ -290,9 +294,10 @@ options:
 
 The analysis command runs each impacted test, instrumented with coverage data to find files impacting tests. This enables the `run` command to only run tests that are impacted by a change.
 
-There are two ways of analyzing the impacted tests; using the template variable `<< test.atoms >>` in the `analysis` command will be replaced with a single test.
+"Impacted" tests can be analysed in one of two ways:
 
-If the template variable is not found in the `analysis` command, the test will be passed in stdin.
+* Using the template variable `<< test.atoms >>` in the `analysis` command will be replaced with a single test.
+* If the template variable is not found in the `analysis` command, the test will be passed in stdin.
 
 When collecting coverage data, the template variable in the `analysis` command should be used, this ensures that the coverage data can be parsed for each test analyzed.
 
@@ -341,13 +346,13 @@ options:
 |*Vitest*
 |`vitest run --coverage --coverage.reporter=lcov --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" --silent --bail << test.atoms >> && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>`
 
-|*Pytest*
+|*pytest*
 |`pytest --disable-pytest-warnings --no-header --quiet --tb=short --cov --cov-report=lcov:<< outputs.lcov >> << test.atoms >>`
 
 |*Go*
 |`go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>`
 
-|*Gotestsum*
+|*gotestsum*
 |`go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>`
 
 |===
@@ -359,8 +364,10 @@ NOTE: If the tests outputted from the `discover` command are files (for example,
 
 The `file-mapper` command is a command that maps a test to a file, this is used during analysis and test selection to ensure that a test is impacted by itself.
 
-There are two ways of mapping files to tests; using the template variable `<< test.atoms >>` in the `file-mapper` command will be replaced with a single test.
-If the template variable is not found in the `file-mapper` command, the test will be passed in stdin.
+Files can be mapped to tests in one of two ways:
+
+* Using the template variable `<< test.atoms >>` in the `file-mapper` command will be replaced with a single test.
+* If the template variable is not found in the `file-mapper` command, the test will be passed in stdin.
 
 [source,yaml]
 ----
@@ -460,13 +467,13 @@ The following options are available to be defined in the options map in config:
 
 | `full-test-run-paths`
 a|
-* .circleci/*
-* go.mod
-* go.sum
-* package-lock.json
-* package.json
-* project.clj
-* yarn.lock
+* `.circleci/*`
+* `go.mod`
+* `go.sum`
+* `package-lock.json`
+* `package.json`
+* `project.clj`
+* `yarn.lock`
 |A List of paths that might have an indirect impact on tests and should run the full test suite if a change is detected.
 To disable this option, provide an empty array. +
 `full-test-run-paths: []`
@@ -491,7 +498,7 @@ The following flags are available to be defined on the `circleci run testsuite` 
 |`--test-analysis=all\|impacted\|none`
 |On branch `main`, impacted. +
 On all other branches, `none`
-a| * `all` analyzes all discovered tests, used to overrite any existing impact data. +
+a| * `all` analyzes all discovered tests, used to override any existing impact data. +
 * `impacted` analyzes only tests impacted by a change, used to refresh impact data. +
 * `none` skips analysis.
 
@@ -509,7 +516,7 @@ Now the test suite is set up, test selection is working and the test analysis is
 
 *Action Items*
 
-. Remove the temporary changes from the “Running analysis for the first time” section.
+. Remove the temporary changes from the "Running analysis for the first time" section.
 
 *Checklist*
 
