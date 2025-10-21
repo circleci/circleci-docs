@@ -1,6 +1,6 @@
 = Deployment and deploy management overview
 :page-aliases: deploys-overview.adoc, deploy:deploy-to-amazon-sagemaker.adoc
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud
 :page-description: Learn the basics of deployment and deploys management with CircleCI.
 :experimental:
 
