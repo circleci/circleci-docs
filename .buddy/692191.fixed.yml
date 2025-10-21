@@ -4,6 +4,7 @@
   events:
   - type: PUSH
   - type: WEBHOOK
+    totp: true
   fail_on_prepare_env_warning: true
   actions:
   - action: gradle build
