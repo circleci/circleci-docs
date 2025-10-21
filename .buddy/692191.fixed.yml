@@ -3,6 +3,7 @@
   - refs/heads/DOCSS-1818-deploys-updates
   events:
   - type: PUSH
+  - type: WEBHOOK
   fail_on_prepare_env_warning: true
   actions:
   - action: gradle build
