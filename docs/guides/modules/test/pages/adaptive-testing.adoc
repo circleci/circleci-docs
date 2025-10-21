@@ -92,7 +92,8 @@ outputs:
 
 Your existing test job will be a reference point for populating a new `.circleci/test-suites.yml` file.
 
-. Find your test job in your CircleCI configuration file (`.circleci/config.yml`). For example, line 9 in the config below.
+. Find your test job in your CircleCI configuration file (`.circleci/config.yml`).
+//For example, line 9 in the config below.
 . If the step calls a custom script (for example, `task run-tests`), find the script.
 
 [source,yaml]
@@ -215,7 +216,7 @@ outputs:
 
 Your `.circleci/test-suites.yml` file is now set up to match your existing way of running tests. You now need to update your CircleCI configuration to use your `test-suites.yml` file.
 
-. Update the your CircleCI configuration file (`.circleci/config.yml`) to use the `circleci run testsuite “ci tests”` command.
+. Update the your CircleCI configuration file (`.circleci/config.yml`) to use the `circleci run testsuite "ci tests"` command.
 . Push a change and observe the step output of the test job.
 
 [source,yaml]
