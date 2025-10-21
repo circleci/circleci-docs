@@ -1,5 +1,5 @@
 = CircleCI release agent overview
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud
 :page-description: Learn the basics of release management for your Kubernetes deployments with CircleCI.
 :experimental:
 
