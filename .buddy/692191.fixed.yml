@@ -1,6 +1,6 @@
 - pipeline: 692191
   refs:
-  - refs/heads/main
+  - refs/heads/DOCSS-1818-deploys-updates
   events:
   - type: PUSH
   fail_on_prepare_env_warning: true
@@ -40,4 +40,6 @@
     - "# yarn install"
     - npm install
     - npm test
+    volume_mappings:
+    - /api-v1/:/buddy/circleci-docs-2
     shell: BASH
