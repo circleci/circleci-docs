@@ -1,16 +1,16 @@
-= Adaptive testing
+= Adaptive testing - Closed preview
 :page-platform: Cloud
 :page-description: This document describes the adaptive testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
 :experimental:
 
-Use adaptive testing to only run tests that are impacted by code changes and evenly distribute tests across parallel execution nodes. Adaptive testing reduces test execution time while maintaining test confidence.
+Use adaptive testing to run only tests that are impacted by code changes and evenly distribute tests across parallel execution nodes. Adaptive testing reduces test execution time while maintaining test confidence.
 
 == Key benefits:
 
-* Faster CI/CD pipelines through intelligent test selection
-* Optimized resource usage and cost efficiency
-* Maintains fast feedback loops for development teams
-* Scales efficiently as test suites grow
+* Faster CI/CD pipelines through intelligent test selection.
+* Optimized resource usage and cost efficiency.
+* Maintain fast feedback loops for development teams.
+* Scale efficiently as test suites grow.
 
 == How it works
 The adaptive testing feature operates through two main components that work together to optimize your test execution:
@@ -20,8 +20,8 @@ Dynamic test splitting distributes your tests across parallel execution nodes. T
 
 When you configure parallelism in your job, adaptive testing automatically:
 
-* Retrieves timing data from previous test runs
-* Calculates optimal test distribution across your specified number of parallel nodes
+* Retrieves timing data from previous test runs.
+* Calculates optimal test distribution across your specified number of parallel nodes.
 * Ensures each node receives approximately the same amount of work based on execution time.
 
 This approach prevents situations where one node finishes quickly while another node runs a few slow tests, maximizing the efficiency of your parallel execution.
@@ -29,23 +29,47 @@ This approach prevents situations where one node finishes quickly while another 
 === Test impact analysis
 Test impact analysis identifies which tests need to run based on the files that changed in your checked out code, stored as impact data for future test runs. The system works in two phases:
 
-*Analysis phase:* Builds a mapping between your tests and the code they exercise. Each test runs individually with code coverage enabled to determine which files it covers. By default, this runs on your main branch, but you can configure it to run on any branch or on a scheduled basis through your CircleCI configuration.
+*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test runs individually with code coverage enabled to determine which files it covers. By default, this runs on your main branch, but you can configure it to run on any branch or on a scheduled basis through your CircleCI configuration.
 
-*Selection phase:* Compares changed files against the test impact data and selects only tests that exercise modified code. By default, this runs on feature branches, but you can customize which branches use selection mode through your CircleCI configuration.
+*Selection phase*:: Compares changed files against the test impact data and selects only tests that exercise modified code. By default, this runs on feature branches, but you can customize which branches use selection mode through your CircleCI configuration.
 
 The analysis phase typically runs slower because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
 
-== Getting started
+[mermaid]
+----
+graph TD
+    A[Code Changes] --> B[circleci run testsuite]
+    B --> C{
+      Test Selection/
+      Test Analysis}
+    C --> G[Dynamic Test Splitting]
+
+    G --> H[
+      Node 1
+      A........,
+      B..., C...
+      ..........]
+    G --> I[
+      Node 2
+      D.........
+      ..........
+      ..........]
+    G --> J[
+      Node 3
+      E....., F..
+      ......, G..
+      .., H......]
+----
+
+== 1. Getting started
 Goals of this section:
 
 * Tests are run with the `testsuite` command.
 * Test results are uploaded and visible in the CircleCI web app.
 * Test timings match the existing test job.
 
-=== Create test-suites.yml
-Create a stubbed file in your project root, you will populate the values in the next step.
+=== 1.1 Create test-suites.yml
 
-*Action Items*
 Create a stubbed `.circleci/test-suites.yml` file in the project root. You will populate the values in the next step.
 
 [source,yaml]
@@ -58,13 +82,12 @@ outputs:
   junit: ##
 ----
 
-=== Locate the existing test job
-The existing test job is needed as a reference point for populating a new `.circleci/test-suites.yml` file.
+=== 1.2 Locate your existing test job
 
-*Action Items*
+Your existing test job will be a reference point for populating a new `.circleci/test-suites.yml` file.
 
-. Find the `.circleci/config.yml` test job. For example, line 9 in the below config.
-. (optional) If the step calls a custom script (for example, `task run-tests`), find the script.
+. Find your test job in your CircleCI configuration file (`.circleci/config.yml`). For example, line 9 in the config below.
+. If the step calls a custom script (for example, `task run-tests`), find the script.
 
 [source,yaml]
 ----
@@ -80,122 +103,117 @@ jobs:
           path: test-reports
 ----
 
-=== Populating the discover command
+=== 1.3 Populate the discover command
 
-The #discover# command finds all tests for a given test-suite, the stdout of this command should be a space-separated or newline-separated list of tests that will be later passed into the run command.
+The `discover` command finds all tests for a given test suite. The stdout of this command should be a space-separated or newline-separated list of tests that will be passed into the run command.
 
-The #discover# command should not execute the tests.
+The `discover` command should not execute the tests.
 
-All output will be used as tests, any tool that prints metadata in the stdout, will need to be omitted.
+All output will be used as tests, any tool that prints metadata in the stdout will need to be omitted.
 
-*Action Items*
+. Update the `.circleci/test-suites.yml` file with the discover command.
 
-. Update the #.circleci/test-suites.yml# with the discover command.
-
-*Checklist*
-
-. The output of the discover command only includes tests.
-
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: ci tests
 discover: jest --listTests --testPathPattern=src/
 run: ##
 outputs:
   junit: ##
-....
+----
 
-*Examples of #discover# commands*
+*Examples for the `discover` command*
 
-*Jest*
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Test Framework| Command
 
- jest --listTests
+|*Jest*
+|`jest --listTests`
 
-*Yarn Jest*
+|*Yarn Jest*
+|`yarn --silent test --listTests --testPathPattern=src/`
 
- yarn --silent test --listTests --testPathPattern=src/
+|*Vitest*
+|`vitest list --filesOnly`
 
-*Vitest*
+|*Pytest*
+|`pytest --collect-only -qq \| sed 's/:.*//' \| sort -u`
 
- vitest list --filesOnly
+|*Go*
+|`++go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...++`
 
-*Pytest*
+|===
+--
 
- pytest --collect-only -qq | sed 's/:.*//' | sort -u
+=== 1.4 Populate the run command
 
-*Go*
+The `run` command executes the tests discovered by the `discover` command using a test runner.
 
- go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
+There are two ways of running the discovered tests:
 
-=== Populating the #run# command
+* Use the template variable `<< test.atoms >>` in the `run` command. This will be replaced with a space-separated list of tests to run.
+* If the template variable is not found in the `run` command, each test will be newline-separated in stdin.
 
-The #run# command executes the tests using a test runner, the command will run the tests discovered by the #discover# command.
+When collecting test results, the template variable `<< outputs.junit >>` in the run command should be used and the location of the test results should be defined in the `outputs` map. This ensures that each batch of tests do not override previous batches.
 
-There are two ways of running the discovered tests; using the template variable #<< test.atoms >># in the #run# command will be replaced with a space-separated list of tests to run.
-If the template variable is not found in the #run# command, each test will be newline-separated in stdin.
-
-When collecting test results, the template variable #<< outputs.junit >># in the run command should be used and the location of the test results should be defined in the #outputs# map.
-This ensures that each batch of tests do not override previous batches.
-
-*Action Items*
-
-. Update the #.circleci/test-suites.yml# with the run command.
+. Update the `.circleci/test-suites.yml` with the run command.
 
 *Checklist*
 
-. The run command defines << test.atoms >> to pass in tests, or passes in stdin.
-. The run command defines << outputs.junit >> to write test results.
+* The run command defines `<< test.atoms >>` to pass in tests, or passes in stdin.
+* The run command defines `<< outputs.junit >>` to write test results.
 
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: ci tests
 discover: jest --listTests --testPathPattern=src/
 run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
-....
+----
 
-*Examples of #run# commands*
+*Examples of `run` commands*
 
-*Jest*
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Test Framework| Command
 
- JEST_JUNIT_OUTPUT_FILE=<< outputs.junit >> jest --runInBand --reporters=jest-junit --bail << test.atoms >>
+|*Jest*
+|`JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>`
 
-*Yarn Jest*
+|*Yarn Jest*
+|`JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" yarn test --runInBand --reporters=jest-junit --bail << test.atoms >>`
 
- JEST_JUNIT_OUTPUT_FILE=<< outputs.junit >> yarn test --runInBand --reporters=jest-junit --bail << test.atoms >>
+|*Vitest*
+|`vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail << test.atoms >>`
 
-*Vitest*
+|*Pytest*
+|`pytest --disable-pytest-warnings --no-header --quiet --tb=short --junit-xml="<< outputs.junit >>" << test.atoms >>`
 
- vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail << test.atoms >>
+|*Go*
+|`go test -race -count=1 << test.atoms >>`
 
-*Pytest*
+|*Gotestsum*
+|`go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>`
+|===
+--
 
- pytest --disable-pytest-warnings --no-header --quiet --tb=short --junit-xml=<< outputs.junit >> << test.atoms >>
+=== 1.5 Update your CircleCI configuration to use the test suite
 
-*Go*
+Your `.circleci/test-suites.yml` file is now set up to match your existing way of running tests. You now need to update your CircleCI configuration to use your `test-suites.yml` file.
 
- go test -race -count=1 << test.atoms >>
-
-*Gotestsum*
-
- go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
-
-=== Update the #.circleci/config.yml# to use the test suite
-
-The #.circleci/test-suites.yml# is now set up to match the existing way of running tests.
-
-*Action Items*
-
-. Update the .circleci/config.yml to use the circleci run testsuite “ci tests” command.
+. Update the .circleci/config.yml to use the `circleci run testsuite “ci tests”` command.
 . Push a change and observe the step output of the test job.
 
-*Checklist*
-
-. The step output runs the tests.
-. The “Test” tab reports the number of tests passed/failed.
-
-....
+[source,yaml]
+----
 version: 2.1
 jobs:
   test:
@@ -205,24 +223,30 @@ jobs:
       - run: circleci run testsuite "ci tests"
       - store_test_results:
           path: test-reports
-....
+----
+
+*Checklist*
+
+* The step output runs the tests.
+* The "Test" tab reports the number of tests passed/failed.
 
 === Troubleshooting
 
 *My tests run slower using the test-suite*
 
-When using parallelism, confirm that the timing data is present for the tests. If the step output contains lines starting with #No timing found for#, the timing data is missing.
+When using parallelism, confirm that the timing data is present for the tests. If the step output contains lines starting with `No timing found for`, the timing data is missing.
 
 The two most common causes for this:
 
-. The tests were run with a different job name, in this case, rerunning the job should find timing data.
-. The #<< outputs.junit >># template variable is not set up correctly, ensure that the run command uses the template variable and the store_test_results step provides a path to a directory so that all batches of << outputs.junit >> are stored.
+* The tests were run with a different job name, in this case, rerunning the job should find timing data.
+* The `<< outputs.junit >>` template variable is not set up correctly. Ensure that the run command uses the template variable and the `store_test_results` step provides a path to a directory so that all batches of `<< outputs.junit >>` are stored.
 
 If the tests are still slower, the test runner being used might have initial start up time when running tests, this can cause significant slow down using the dynamic batching as each batch needs to do that initial start up.
 
-Add the dynamic-batching: false option to .circleci/test-suites.yml to disable dynamic batching.
+Add the `dynamic-batching: false` option to `.circleci/test-suites.yml` to disable dynamic batching.
 
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: ci tests
 discover: jest --listTests --testPathPattern=src/
@@ -231,24 +255,25 @@ outputs:
   junit: test-reports/tests.xml
 options:
   dynamic-batching: false
-....
+----
 
-If tests are still slower, share the pipeline link in the closed beta slack channel.
+If tests are still slower, share the pipeline link in the closed beta slack channel. #Do we want to update this or keep for beta?#
 
-== Enabling adaptive testing
+== 2. Enable adaptive testing
 
-It is recommend to follow the steps in “Getting Started” first before enabling the adaptive testing feature to ensure the #discover# and #run# commands are set up correctly.
+We recommend following the steps in <<getting-started>> first before enabling the adaptive testing feature to ensure the `discover` and `run` commands are set up correctly.
 
-=== Update the #.circleci/test-suites.yml#
+The goal of this section is to enable adaptive testing for your test suite.
 
-When using adaptive testing for test impact analysis, the #discover# command discovers all tests in a test suite, the #run# command runs only impacted tests and a new command, the #analysis# command analyzes each test impacted.
+=== 2.1 Update the test suites file
 
-*Action Items*
+When using adaptive testing for test impact analysis, the `discover` command discovers all tests in a test suite, the `run` command runs only impacted tests and a new command, the `analysis` command, analyzes each test impacted.
 
-. Update the #.circleci/test-suites.yml# to include a stubbed analysis command.
-. Update the #.circleci/test-suites.yml# to include the option adaptive-testing: true.
+. Update the `.circleci/test-suites.yml` file to include a stubbed analysis command.
+. Update the `.circleci/test-suites.yml` file to include the option `adaptive-testing: true`.
 
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: ci tests
 discover: jest --listTests --testPathPattern=src/
@@ -258,35 +283,30 @@ outputs:
   junit: test-reports/tests.xml
 options:
   adaptive-testing: true
-....
+----
 
-=== Populating the analysis command
+=== 2.2 Populate the analysis command
 
-The analysis command runs each impacted test, instrumented with coverage data to find files impacting tests. This enables the #run# command to only run tests that are impacted by a change.
+The analysis command runs each impacted test, instrumented with coverage data to find files impacting tests. This enables the `run` command to only run tests that are impacted by a change.
 
-There are two ways of analyzing the impacted tests; using the template variable #<< test.atoms >># in the #analysis# command will be replaced with a single test.
-If the template variable is not found in the #analysis# command, the test will be passed in stdin.
+There are two ways of analyzing the impacted tests; using the template variable `<< test.atoms >>` in the `analysis` command will be replaced with a single test.
 
-When collecting coverage data, the template variable in the #analysis# command should be used, this ensures that the coverage data can be parsed for each test analyzed.
+If the template variable is not found in the `analysis` command, the test will be passed in stdin.
+
+When collecting coverage data, the template variable in the `analysis` command should be used, this ensures that the coverage data can be parsed for each test analyzed.
 
 Supported coverage template variables:
 
-* #<< outputs.lcov >># - Coverage data in LCOV format.
-* #<< outputs.go-coverage >># - Coverage data in Go coverage format.
-* #<< outputs.gcov >># - Coverage data in Gcov coverage format.
+* `<< outputs.lcov >>`: Coverage data in LCOV format.
+* `<< outputs.go-coverage >>`: Coverage data in Go coverage format.
+* `<< outputs.gcov >>`: Coverage data in `gcov` coverage format.
 
 The coverage location does not need to be set in the outputs map, a temporary file will be created and used during analysis with the template variable from the analysis command.
 
-*Action Items*
+. Update your `.circleci/test-suites.yml` file with the analysis command.
 
-. Update the #.circleci/test-suites.yml$ with the analysis command.
-
-*Checklist*
-
-. The #analysis# command defines #<< test.atoms >># to pass in the test, or passes in stdin.
-. The #analysis# command defines #<< outputs.lcov|go-coverage|gcov >># to write coverage data.
-
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: ci tests
 discover: jest --listTests --testPathPattern=src/
@@ -296,44 +316,53 @@ outputs:
   junit: test-reports/tests.xml
 options:
   adaptive-testing: true
-....
+----
 
-*Examples of #analysis# commands*
+*Checklist*
 
-*Jest*
+. The `analysis` command defines `<< test.atoms >>` to pass in the test, or passes in stdin.
+. The `analysis` command defines `<< outputs.lcov|go-coverage|gcov >>` to write coverage data.
 
- jest --runInBand --silent --bail --coverage --coverageProvider=v8 --coverage-directory="$(dirname << outputs.lcov >>)" << test.atoms >> --coverageReporters=lcovonly && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+*Examples of `analysis` commands*
 
-*Yarn Jest*
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Test Framework| Command
 
- yarn test --runInBand --silent --bail --coverage --coverageProvider=v8 --coverage-directory="$(dirname << outputs.lcov >>)" << test.atoms >> --coverageReporters=lcovonly && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+|*Jest*
+|`jest --runInBand --silent --bail --coverage --coverageProvider=v8 --coverage-directory="$(dirname << outputs.lcov >>)" << test.atoms >> --coverageReporters=lcovonly && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>`
 
-*Vitest*
+|*Yarn Jest*
+|`yarn test --runInBand --silent --bail --coverage --coverageProvider=v8 --coverage-directory="$(dirname << outputs.lcov >>)" << test.atoms >> --coverageReporters=lcovonly && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>`
 
- vitest run --coverage --coverage.reporter=lcov --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" --silent --bail << test.atoms >> && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+|*Vitest*
+|`vitest run --coverage --coverage.reporter=lcov --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" --silent --bail << test.atoms >> && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>`
 
-*Pytest*
+|*Pytest*
+|`pytest --disable-pytest-warnings --no-header --quiet --tb=short --cov --cov-report=lcov:<< outputs.lcov >> << test.atoms >>`
 
- pytest --disable-pytest-warnings --no-header --quiet --tb=short --cov --cov-report=lcov:<< outputs.lcov >> << test.atoms >>
+|*Go*
+|`go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>`
 
-*Go*
+|*Gotestsum*
+|`go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>`
 
- go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+|===
+--
 
-*Gotestsum*
+=== 2.3 (Optional) Populate the file-mapper command
 
- go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+NOTE: If the tests outputted from the `discover` command are files (for example, `src/foo.test.ts`), this section can be skipped.
 
-== (Optional) Populating the #file-mapper# command
+The `file-mapper` command is a command that maps a test to a file, this is used during analysis and test selection to ensure that a test is impacted by itself.
 
-If the tests outputted from the #discover# command are files (e.g, #src/foo.test.ts#), this section can be skipped.
+There are two ways of mapping files to tests; using the template variable `<< test.atoms >>` in the `file-mapper` command will be replaced with a single test.
+If the template variable is not found in the `file-mapper` command, the test will be passed in stdin.
 
-The #file-mapper# command is a command that maps a test to a file, this is used during analysis and test selection to ensure that a test is impacted by itself.
-
-There are two ways of mapping files to tests; using the template variable #<< test.atoms >># in the #file-mapper# command will be replaced with a single test.
-If the template variable is not found in the #file-mapper# command, the test will be passed in stdin.
-
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: ci tests
 discover:
@@ -344,33 +373,41 @@ outputs:
   junit: test-reports/tests.xml
 options:
   adaptive-testing: true
-....
+----
 
-*Examples of #file-mapper# commands*
+*Examples of `file-mapper` commands*
 
-*Go*
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Test Framework| Command
 
- go list -f '{{range .TestGoFiles}}{{$.Dir}}/{{.}}{{"\n"}}{{end}}{{range .XTestGoFiles}}{{$.Dir}}/{{.}}{{"\n"}}{{end}}' << test.atoms >>
+|*Go*
+|+`go list -f '{{range .TestGoFiles}}{{$.Dir}}/{{.}}{{"\n"}}{{end}}{{range .XTestGoFiles}}{{$.Dir}}/{{.}}{{"\n"}}{{end}}' << test.atoms >>`+
+|===
+--
 
-=== Running analysis for the first time
+=== 2.4 Running analysis for the first time
 
-By default, analysis will run for impacted tests on branches named #main#, and will not run for all other branches. The first time analysis is run, all tests are impacted because no tests exist in the impact data.
+By default, analysis will run for impacted tests on branches named `main`, and will not run for all other branches. The first time analysis is run, all tests are impacted because no tests exist in the impact data.
 
 This section will run analysis on a feature branch to seed the initial impact data.
 
 *Action Items*
 
-. Update #.circleci/config.yml# to include the #--test-analysis=impacted# CLI flag.
+. Update `.circleci/config.yml` to include the `--test-analysis=impacted` CLI flag.
 . (Recommended) Make use of parallelism to run the first analysis quicker, each test will be analyzed and depending on test runner and number of tests, this can take a long time.
-. (Optional) Include the #--test-selection=none# to skip past the #run# command running tests and go straight to the analysis command, this can be useful during the initial setup if running tests take a long time to run.
+. (Optional) Include the `--test-selection=none` to skip past the `run` command running tests and go straight to the analysis command, this can be useful during the initial setup if running tests take a long time to run.
 . Push a change and observe the step output.
 
 *Checklist*
 
 . The step output includes prefix Running impact analysis.
-. The step output finds files impacting a test (e.g. Found 12 files impacting test src/foo.test.ts).
+. The step output finds files impacting a test (for example, found 12 files impacting test `src/foo.test.ts`).
 
-....
+[source,yaml]
+----
 version: 2.1
 jobs:
   test:
@@ -382,7 +419,7 @@ jobs:
       - run: circleci run testsuite "ci tests" --test-analysis=impacted --test-selection=none
       - store_test_results:
           path: test-reports
-....
+----
 
 === Troubleshooting
 
@@ -392,35 +429,36 @@ There might be some improvements that can be made to speed up coverage depending
 
 If no further optimisations can be made, the test-analysis-duration option can be defined to timebox the analysis to a number of minutes.
 
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 options:
   adaptive-testing: true
   test-analysis-duration: 60 # 60 minutes.
-....
+----
 
 *The analysis found 0 files impacting tests*
 
 Check the analysis command is creating a coverage file formatted correctly by running the command locally.
 
-== (Optional) configure the test suite
+=== Test suite configuration options
 
-The following options are availble to be defined in the options map in config:
+The following options are available to be defined in the options map in config:
 
+[cols=3*, options="header"]
 |===
+|Options Field|Default|Description
 
-|Options Field|Default|Descripition
+| `timeout`
+| 60
+| The time in minutes a step will wait for tests to become available when running in parallel.
 
-| timeout, row 1
-| 60, row 1
-| The time in minutes a step will wait for tests to become available when running in parralel., row 1
-
-|adaptive-testing
+| `adaptive-testing`
 |false
 |Enables the adaptive testing features, such as test impact analysis.
 
-|full-test-run-paths
-|
+| `full-test-run-paths`
+a|
 * .circleci/*
 * go.mod
 * go.sum
@@ -429,45 +467,44 @@ The following options are availble to be defined in the options map in config:
 * project.clj
 * yarn.lock
 |A List of paths that might have an indirect impact on tests and should run the full test suite if a change is detected.
-To disable this option, provide an empty array.
- full-test-run-paths: []
+To disable this option, provide an empty array. +
+`full-test-run-paths: []`
 
-|test-analysis-duration
+|`test-analysis-duration`
 |null
-|The maximum duration test analysis will run for in minutes.
+|The maximum duration test analysis will run for in minutes. +
 Any remaining tests will be analysed the next time test analysis is run.
 
-|dynamic-batching
+|`dynamic-batching`
 |true
-|Wether the tests should be distributed across a shared queue and fetched across multiple dynamic batches.
+|Whether the tests should be distributed across a shared queue and fetched across multiple dynamic batches. +
 If a test runner has slow start up time per batch, disabling this can speed up tests.
 |===
 
-The following flags are available to be defined on the #circleci run testsuite# command.
+The following flags are available to be defined on the `circleci run testsuite` command.
 
+[cols=3*, options="header"]
+|===
+|Flag|Default|Description
+
+|`--test-analysis=all\|impacted\|none`
+|On branch `main`, impacted. +
+On all other branches, `none`
+a| * `all` analyzes all discovered tests, used to overrite any existing impact data. +
+* `impacted` analyzes only tests impacted by a change, used to refresh impact data. +
+* `none` skips analysis.
+
+|`--test-selection=all\|impacted\|none`
+|On branch `main`, `all`. +
+On all other branches, `impacted`
+a| * `all` selects and runs all discovered tests, used to run the full test suite. +
+* `impacted` selects and runs only the tests impacted by a change. +
+* `none` skips running tests, used to skip straight to analysis.
 |===
 
-|Flag|Default|Descripition
+== 3. Start using adaptive testing
 
-|--test-analysis=all\|impacted\|none
-|On branches main, impacted.
-On all other branches, none
-|all analyzes all discovered tests, used to overrite any existing impact data.
-impacted analyzes only tests impacted by a change, used to refresh impact data.
-none skips analysis.
-
-|--test-selection=all|impacted|none
-|On branches main, all.
-On all other branches, impacted
-|all selects and runs all discovered tests, used to run the full test suite.
-impacted selects and runs only the tests impacted by a change.
-none skips running tests, used to skip straight to analysis.
-
-|===
-
-== Start using adaptive testing
-
-Now the testsuite is set up, test selection is working and the test analysis is up to date with the latest changes from the feature branch that ran the first test analysis.
+Now the test suite is set up, test selection is working and the test analysis is up to date with the latest changes from the feature branch that ran the first test analysis.
 
 *Action Items*
 
@@ -475,19 +512,20 @@ Now the testsuite is set up, test selection is working and the test analysis is 
 
 *Checklist*
 
-. The #.circleci/config.yml# is set up to run analysis on the default branch.
-. The #.circleci/config.yml# is set up to run selection on non-default branch.
-. The #.circleci/config.yml# is set up to use high parralelism on the analysis branch.
+. The `.circleci/config.yml` is set up to run analysis on the default branch.
+. The `.circleci/config.yml` is set up to run selection on non-default branch.
+. The `.circleci/config.yml` is set up to use high parallelism on the analysis branch.
 
-*Examples*
+=== Examples
 
-*Running analysis on a branch named #main# and selection on all other branches*
+*Running analysis on a branch named `main` and selection on all other branches*
 
 No changes required, this is the default setting.
 
-*Running analysis on a branch named #master# and selection on all other branches*
+*Running analysis on a branch named `master` and selection on all other branches*
 
-....
+[source,yaml]
+----
 # .circleci/config.yml
 version: 2.1
 jobs:
@@ -499,11 +537,12 @@ jobs:
       - run: circleci run testsuite "ci tests" --test-analysis=<< pipeline.git.branch == "master" and "impacted" or "none" >>
       - store_test_results:
           path: test-reports
-....
+----
 
 *Running higher parallelism on the analysis branch*
 
-....
+[source,yaml]
+----
 # .circleci/config.yml
 version: 2.1
 jobs:
@@ -515,11 +554,12 @@ jobs:
       - run: circleci run testsuite "ci tests"
       - store_test_results:
           path: test-reports
-....
+----
 
 *Running analysis on a scheduled pipeline and timeboxing some analysis on main*
 
-....
+[source,yaml]
+----
 # .circleci/config.yml
 version: 2.1
 parameters:
@@ -548,9 +588,10 @@ workflows:
     when: << pipeline.parameters.run-scheduled-analysis == false >>
     jobs:
       - test
-....
+----
 
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 name: "main tests"
 # rest of test suite config.
@@ -562,25 +603,25 @@ name: "scheduled tests"
 # rest of test suite config.
 options:
   adaptive-testing: true
-....
+----
 
 == Limitations
 
-The adaptive testing feature has some current limitations to consider:
+The adaptive testing feature has some limitations to consider:
 
-*Initial setup period:* Test impact analysis requires an initial analysis run on all tests before intelligent selection can begin. This first analysis run will be slower than normal test execution.
+*Initial setup period*:: Test impact analysis requires an initial analysis run on all tests before intelligent selection can begin. This first analysis run will be slower than normal test execution.
 
-*Analysis phase performance:* The analysis phase can be significantly slower than normal test runs because tests execute individually with coverage instrumentation. Plan for this when setting up analysis on your configured branches.
+*Analysis phase performance*:: The analysis phase can be significantly slower than normal test runs because tests execute individually with coverage instrumentation. Plan for this when setting up analysis on your configured branches.
 
-*Coverage instrumentation overhead:* Running tests with coverage enabled adds execution time. The trade-off is faster builds through intelligent test selection on branches using selection mode.
+*Coverage instrumentation overhead*:: Running tests with coverage enabled adds execution time. The trade-off is faster builds through intelligent test selection on branches using selection mode.
 
-*No analysis data fallback:* When no impact data exists or cannot be determined, the system runs all tests as a safety measure. This ensures you never skip tests incorrectly but may result in longer execution times until impact data is built.
+*No analysis data fallback*:: When no impact data exists or cannot be determined, the system runs all tests as a safety measure. This ensures you never skip tests incorrectly but may result in longer execution times until impact data is built.
 
 == Troubleshooting
 
-=== Tests Not Being Split Correctly Across Nodes*
+=== Tests not being split correctly across nodes
 
-*Symptoms:* Some parallel nodes finish much faster than others, or tests aren't distributed evenly.
+*Symptoms:* Some parallel nodes finish much faster than others, or tests are not distributed evenly.
 
 *Solution:* Verify that your test suite configuration includes historical timing data and that all test files are being detected. Check the step output for the "Sorted X tests" message to confirm sorting by timing.
 
@@ -589,13 +630,13 @@ The adaptive testing feature has some current limitations to consider:
 . Check that all test files are discovered with the discover command
 . Verify parallelism is set correctly in your config.yml
 . Look for timing data in previous test runs
-. Ensure test results are being stored with store_test_results
+. Ensure test results are being stored with `store_test_results`.
 
-=== Test Impact Analysis Not Selecting Expected Tests
+=== Test impact analysis not selecting expected tests
 
 *Symptoms:* More tests run than expected, or tests you expect to run are skipped.
 
-*Solution:* Ensure that your analysis phase has completed successfully on the branch(es) you've configured to run analysis. Test selection depends on coverage data from previous analysis runs. If analysis data is incomplete or outdated, the system may run more tests than expected or fall back to running all tests.
+*Solution:* Ensure that your analysis phase has completed successfully on the branch(es) you have configured to run analysis. Test selection depends on coverage data from previous analysis runs. If analysis data is incomplete or outdated, the system may run more tests than expected or fall back to running all tests.
 
 *Debugging steps:*
 
@@ -606,15 +647,16 @@ The adaptive testing feature has some current limitations to consider:
 
 *When all tests run:* If no impact data exists or all tests are determined to be affected, the system runs all tests as a safety measure.
 
-=== Skipped Test Results Not Appearing in the UI
+=== Skipped test results not appearing in the UI
 
-*Symptoms:* Tests that were skipped by selection don't appear in the CircleCI UI.
+*Symptoms:* Tests that were skipped by selection do not appear in the CircleCI UI.
 
-*Solution:* Confirm that your outputs.junit configuration points to the correct location and that the store_test_results step is defined, pointing to that directory. Skipped test results are written to a separate file with a -skipped suffix in the same test results directory.
+*Solution:* Confirm that your `outputs.junit` configuration points to the correct location and that the `store_test_results` step is defined, pointing to that directory. Skipped test results are written to a separate file with a `-skipped` suffix in the same test results directory.
 
 *Example:*
 
-....
+[source,yaml]
+----
 # .circleci/test-suites.yml
 outputs:
   junit: test-reports/tests.xml
@@ -629,25 +671,25 @@ jobs:
       - run: circleci run testsuite "ci tests"
       - store_test_results:
           path: test-reports
-....
+----
 
-== Frequently Asked Questions
+== Frequently asked questions
 
 === How often should I run the analysis phase?
 
-*Answer:* The frequency depends on your test execution speed and development pace:
+The frequency depends on your test execution speed and development pace:
 
 *For fast test suites (coverage analysis runs quickly):*
 
-. Run analysis on every main branch build
-. This keeps impact data continuously up-to-date
-. Ensures the most accurate test selection on other branches
+* Run analysis on every main branch build.
+* This keeps impact data continuously up-to-date.
+* Ensures the most accurate test selection on other branches.
 
 *For slower test suites (coverage analysis is expensive):*
 
-. Run analysis on a scheduled pipeline targeting your main branch
-. Schedule frequency based on your development pace (e.g., nightly or after significant changes)
-. Balance freshness of impact data against CI/CD resource costs
+* Run analysis on a scheduled pipeline targeting your main branch.
+* Schedule frequency based on your development pace (for example, nightly or after significant changes).
+* Balance freshness of impact data against CI/CD resource costs.
 
 *Consider re-running analysis:*
 
@@ -659,74 +701,74 @@ jobs:
 
 === Can I customize the test-suites.yml commands?
 
-*Answer:* Yes, you can fully customize commands by defining #discover#, #run#, and #analysis# commands in your test suite configuration. This allows you to:
+Yes, you can fully customize commands by defining `discover`, `run`, and `analysis` commands in your test suite configuration. This allows you to:
 
-. Use test runners not included in the defaults
-. Override default runner behavior
-. Add custom flags or options
-. Specify different output formats or locations
+* Use test runners not included in the defaults.
+* Override default runner behavior.
+* Add custom flags or options.
+* Specify different output formats or locations.
 
 *Requirements when customizing:*
 
 . Ensure your commands properly handle test execution
 . Generate valid coverage data for the analysis phase
-. Use the correct template variables (#<< test.atoms >>#, #<< outputs.junit >>#, #<< outputs.lcov >>#)
+. Use the correct template variables (`<< test.atoms >>`, `<< outputs.junit >>`, `<< outputs.lcov >>`)
 . Output test results in a format CircleCI can parse (typically JUnit XML)
 
 See the "Custom Configuration" section for detailed examples.
 
 === What happens if no tests are impacted by a change?
 
-*Answer:* When test selection determines that no existing tests are affected by your changes, the system will run all tests as a safety measure. This ensures:
+When test selection determines that no existing tests are affected by your changes, the system will run all tests as a safety measure. This ensures:
 
-. You never skip tests that should run
-. Changes without test coverage are still validated
-. New functionality that doesn't match existing impact data is tested
+* You never skip tests that should run.
+* Changes without test coverage are still validated.
+* New functionality that does not match existing impact data is tested.
 
 *This typically happens when:*
 
-. You modify files that aren't covered by any tests
-. Impact data is outdated or incomplete
-. Changes affect infrastructure or configuration files not tracked by impact analysis
+* You modify files that are not covered by any tests.
+* Impact data is outdated or incomplete.
+* Changes affect infrastructure or configuration files not tracked by impact analysis.
 
-*Best practice:* Include relevant paths in #full-test-run-paths# to explicitly trigger full test runs for infrastructure changes.
+*Best practice:* Include relevant paths in `full-test-run-paths` to explicitly trigger full test runs for infrastructure changes.
 
 === How do I know if adaptive testing is working?
 
-*Answer:* Look for these indicators in your CircleCI build output:
+Look for these indicators in your CircleCI build output:
 
-. "Sorted X tests" message showing test distribution
-. Reduced test execution time on branches using selection mode compared to branches running analysis
-. "Skipped tests" output showing which tests were not selected
-. Test results showing only relevant tests executed
+* "Sorted X tests" message showing test distribution.
+* Reduced test execution time on branches using selection mode compared to branches running analysis.
+* "Skipped tests" output showing which tests were not selected.
+* Test results showing only relevant tests executed.
 
 You can also compare:
 
-. Feature branch test execution time vs. main branch (if main runs analysis)
-. Number of tests run on feature branches vs. full test suite
-. Wall time reduction across parallel nodes
+* Feature branch test execution time vs. main branch (if main runs analysis).
+* Number of tests run on feature branches vs. full test suite.
+* Wall time reduction across parallel nodes.
 
 === Can I run analysis on branches other than main?
 
-*Answer:* Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on main by default, you can configure it to run on:
+Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on `main` by default, you can configure it to run on:
 
-. Any specific branch (e.g., #develop#, #staging#)
-. Multiple branches simultaneously
-. Feature branches if needed for testing
-. Scheduled pipelines independent of branch
+. Any specific branch (for example, `develop` or `staging`).
+. Multiple branches simultaneously.
+. Feature branches if needed for testing.
+. Scheduled pipelines independent of branch.
 
 See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
 
 === What test frameworks are supported?
 
-*Answer:* Adaptive testing is runner-agnostic. We provide default configurations for:
+Adaptive testing is runner-agnostic. We provide default configurations for the following test frameworks:
 
 * Jest (JavaScript/TypeScript)
-* Gotestsum (Go)
+* gotestsum (Go)
 * Go test (Go)
-* Pytest (Python)
+* pytest (Python)
 * Mocha (JavaScript)
 * Cypress (E2E testing)
 * Vitest
 
-The key requirement is that your test runner can generate coverage data in a parseable format (typically LCOV or similar).
+The key requirement is that your test runner can generate coverage data in a parsable format (typically LCOV or similar).
