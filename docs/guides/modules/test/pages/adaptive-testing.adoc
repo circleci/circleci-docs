@@ -61,6 +61,7 @@ graph TD
       .., H......]
 ----
 
+[#getting-started]
 == 1. Getting started
 Goals of this section:
 
