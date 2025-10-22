@@ -3,39 +3,43 @@
 :page-description: A guide to understanding user accounts, organizations and integrations with version control systems in CircleCI.
 :experimental:
 
-The guide defines the concepts of user, organization and integration in CircleCI. After these concepts are covered you will find out about the features available to you depending on you organization and pipeline type.
+This guide defines the concepts of user, organization and integration in CircleCI. After these concepts are covered you will find out about the features available to you depending on you organization and pipeline type.
 
 == User account
 
-When you log in to CircleCI you are logging in to your user account.
+When you log in to CircleCI you are logging in to your _user account_.
 
 #user settings#
 
-As a CircleCI _user_ you can have access to zero, one or many _organizations_.
+As a CircleCI _user_ you can access _organizations_. You can have access to zero, one or many organizations.
 
 There are two ways to log in to CircleCI:
 
 * Email and password
 * Social login (GitHub, Bitbucket)
 
+#INSTRUCTION FOR DELETING A USERT ACCOUNT?#
+
 == Organizations
 
-An organization in CircleCI is a workspace that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s), such as GitHub, GitLab, or Bitbucket.
+An organization in CircleCI is a workspace that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, or Bitbucket).
 
-Creating an organization allows you to manage the following:
+Create an organization allows you to manage the following:
 
 * Multiple projects under a single entity.
-* Configure and manage CI/CD pipelines specific to your team or company needs.
-* Invite team members.
-* Assign roles (`circleci` orgs only).
+* CI/CD pipelines specific to your team or company needs.
+* Invites for team members.
+* Assignment of roles (`circleci` orgs only, roles for `github` and `bitbucket` orgs are managed through the VCS provider).
 
 Each organization has its own settings, including security, integrations, and resource management, making it easier to coordinate and control your CI/CD processes across multiple projects and users.
 
 A CircleCI _organization_ can be one of three types:
 
-A CircleCI `circleci` organization:: You can create a `circleci` organization from your user homepage. #create guide to making a new org and link to it - retire support article?#
-* A CircleCI `github` organization:: #do we want to cover setting up one of these?#
-* A CircleCI `bitbucket` organization
+A CircleCI `circleci` organization:: You can create a `circleci` organization from your user homepage via the btn:[Create organization] button. #create guide to making a new org and link to it - retire support article?#
+A CircleCI `github` organization:: A `github` organization used an OAuth app connection and is created when you log in to CircleCI using your GitHub account, rather than using your email/password or by connecting to GitHub Oauth app via menu:User Settings[Application Integrations].  #do we want to cover setting up one of these?#
+A CircleCI `bitbucket` organization:: A `bitbucket` organization is created when you log in to CircleCI using your Bitbucket account, rather than using your email/password or by connecting to Bitbucket OAuth app via menu:User Settings[Application Integrations].#do we want to cover setting up one of these?#
+
+For a guide to creating an organization, see #Add link when ready#
 
 == Integration options
 
@@ -43,13 +47,80 @@ The integration options available to you depend on your organization type, as fo
 
 [cols=7*, options="header"]
 |===
-| Organization type |Github App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab self managed | GitLab SaaS
+| Organization type |GitHub App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab self managed | GitLab SaaS
 
 | `circleci`
 | [.circle-green]#Yes#
+| [.circle-red]#No#
+| [.circle-red]#No#
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
+
+|`github`
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
+| [.circle-red]#No#
+| [.circle-red]#No#
+| [.circle-red]#No#
+| [.circle-red]#No#
+
+|`bitbucket`
+| [.circle-red]#No#
+| [.circle-red]#No#
+| [.circle-green]#Yes#
+| [.circle-red]#No#
+| [.circle-red]#No#
+| [.circle-red]#No#
+
 |===
+
+== View and manage integrations
+
+You can view and manage integrations in two places depending on your organization type. The following sections describe your options for each integration type.
+
+=== Manage a GitHub App integration
+
+A GitHub App integration is available for `circleci` and `github` organizations. The CircleCI GitHub App is installed in an organization. To see your integration navigate to menu:Organization Settings[Account Integrations]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
+
+If you would like to uninstall the GitHub App, select the trash/bin button and follow the instructions.
+
+=== Manage a GitHub OAuth app integration
+
+A GitHub OAuth app integration is built into a `github` type organization.
+
+You can _disconnect_ your GitHub OAuth app integration. Doing so will remove your `github` organization from CircleCI. To disconnect your GitHub OAuth app integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your GitHub integration and follow the instructions.
+
+=== Manage a Bitbucket Cloud integration
+
+A Bitbucket Cloud integration is built into a `bitbucket` type organization.
+
+You can _disconnect_ your Bitbucket Cloud integration. Doing so will remove your `bitbucket` type organization from CircleCI. To disconnect your Bitbucket Cloud integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your Bitbucket Cloud integration and follow the instructions.
+
+##GITLAB BBDC REMOVAL INSTRUCTIONS?#
+
+== Invite your team to your organization
+
+#Add instructions for inviting for each org type#
+
+== Organization user permissions
+
+For `github` and `bitbucket` type organizations user permissions are inherited from the VCS provider.
+
+For `circleci` type organizations user permissions are managed through CircleCI. You can find information on managing organization and project roles and permissions starting with the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions] page. You can manage roles and permissions at an organization and project level. You can manage roles and permissions individually for each user or add users to groups and manage group roles and permissions.
+
+== Projects
+
+== Pipelines
+
+== Rename an organization or project
+
+For full instructions on renaming organizations and projects, see the xref:security:rename-organizations-and-repositories.adoc[Rename organizations and projects] page.
+
+== Delete and organization or project
+
+For full instructions on deleting organizations and projects, see the xref:security:delete-organizations-and-projects.adoc[Delete organizations and repositories] page.
+
+== Feature support
+
+
