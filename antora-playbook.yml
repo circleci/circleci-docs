@@ -5,8 +5,6 @@ site:
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
     google_analytics: 'GTM-W9HDVK'
-
-
 content:
   sources:
   - url: .
