@@ -199,6 +199,63 @@ After setting up audit log streaming follow these steps to validate the setup wa
 . Set up appropriate alerts for connection failures or delivery interruptions.
 
 
+=== Stream to S3-compatible storage
+
+TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint such as MinIO.
+
+
+The setup steps vary by provider. At a high level you will:
+
+==== 1. Prepare your S3-compatible destination
+
+. Create a bucket for audit logs in your S3-compatible service.
+. Create or identify a role/principal that CircleCI can assume using OIDC. The exact process and identifier format depend on your provider. Examples include an AWS-style ARN (for example, `arn:aws:iam::...:role/...`) or a provider-specific role identifier (for example, MinIO `arn:minio:iam:::role/...`).
+. Grant the role/principal permission to write objects to your bucket (minimum required: `s3:PutObject` on `<your-bucket>/*`). For example:
++
+[source,json]
+----
+// minio S3 example policy
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:minio:s3:::<bucket-name>/*"
+      ]
+    }
+  ]
+}
+----
++
+
+
+==== 2. Configure CircleCI to stream to your S3-compatible service
+
+. Go to the link:https://app.circleci.com/[CircleCI web app] and navigate to menu:Organization Settings[Security].
+. In menu:Audit Logs[Streaming audit logs], select btn:[Stream audit logs].
+. Choose btn:[Other S3-compatible service].
+. Confirm that you have completed the prerequisites by selecting btn:[Continue].
++
+image::guides:ROOT:setup-s3-compatible-audit-logs.png[Set up S3-compatible storage for streaming]
+. Fill out the fields as follows:
+.. **Region**: Optional. Many s3-compatible providers default to `us-east-1` if not set.
+.. **S3 Bucket Name**: The exact name of the bucket you created.
+.. **Role ARN**: The role identifier recognized by your provider (for example, a provider-specific role ID/ARN).
+.. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `https://s3.<region>.<provider-domain>` or your custom host and port).
+. The configuration form appears as follows:
++
+image::guides:ROOT:form-s3-compatible-audit-logs.png[Connect CircleCI to S3-compatible storage]
+. Select btn:[Connect CircleCI to S3-compatible service].
+
+When the connection is validated, the **Status** will show image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected**. Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket to verify permissions.
+
+NOTE: Ensure your endpoint is reachable from CircleCI and that your provider accepts and validates CircleCI OIDC tokens for the configured role/principal. Network policies, firewalls, TLS, and trust configuration must allow secure access from CircleCI to your endpoint.
+
+
 === Manage active streams
 
 Once configured, you can view and manage audit log streams. The following options are available to you in the CircleCI web app:
