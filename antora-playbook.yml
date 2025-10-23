@@ -66,4 +66,17 @@ urls:
   html_extension_style: indexify
 antora:
   extensions:
-  - ./extensions/unlisted-pages-extension.js
+  - require: ./extensions/unlisted-pages-extension.js
+    allowedUnlistedPages:
+      - 'test:adaptive-testing.adoc'
+  - require: '@sntke/antora-mermaid-extension'
+    mermaid_initialize_options:
+      start_on_load: true
+      theme: base
+      security_level: loose
+      theme_variables:
+        primary_color: '#E3F5E5'
+        background: '#E3F5E5'
+        line_color: '#B4B8C6'
+        primary_border_color: '#008542'
+        primary_text_color: '#00381A'

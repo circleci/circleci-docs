@@ -1468,3 +1468,37 @@ td li code,
 .doc td .listingblock code {
   white-space: pre !important;
 }
+
+/* === MERMAID DIAGRAM STYLES === */
+
+/* Basic container styling */
+.doc .mermaid {
+  text-align: center;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+/* Responsive sizing */
+.doc .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  cursor: default; /* Prevent zoom cursor on hover */
+}
+
+/* Prevent zoom cursor on mermaid diagrams */
+.doc .mermaid,
+.doc .mermaid *,
+.doc .imageblock .mermaid,
+.doc .imageblock .mermaid *,
+.doc .imageblock .content .mermaid,
+.doc .imageblock .content .mermaid * {
+  cursor: default !important;
+}
+
+/* Specifically override the imageblock content zoom cursor when it contains mermaid */
+.doc .imageblock .content .mermaid ~ *,
+.doc .imageblock .content .mermaid + * {
+  cursor: default !important;
+}
+
+
