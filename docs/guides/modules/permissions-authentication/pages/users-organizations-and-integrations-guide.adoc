@@ -109,9 +109,17 @@ For `github` and `bitbucket` type organizations user permissions are inherited f
 
 For `circleci` type organizations user permissions are managed through CircleCI. You can find information on managing organization and project roles and permissions starting with the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions] page. You can manage roles and permissions at an organization and project level. You can manage roles and permissions individually for each user or add users to groups and manage group roles and permissions.
 
-== Projects
+== Projects and pipelines
 
-== Pipelines
+For `github` and `bitbucket` type organizations projects are synonymous with repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
+
+* Set up new repositories as CircleCI projects, which involves committing a CircleCI `config.yml` file to the repository to define your pipeline. THis creates a GitHub OAuth  or Bitbucket Cloud pipeline for you, which you can view in menu:Project Settings[Project Setup] or menu:Project Settings[Pipelines] .
+* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+
+For `circleci` type organizations, projects are created separately to code repositories directly in CIrcleCI via the web app, API or CLI. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your projects. From here you have the option to:
+
+* Create a new project, including setting up a pipeline, at which point you connect your code repository to your project.
+* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
 
 == Rename an organization or project
 
@@ -121,13 +129,55 @@ For full instructions on renaming organizations and projects, see the xref:secur
 
 For full instructions on deleting organizations and projects, see the xref:security:delete-organizations-and-projects.adoc[Delete organizations and repositories] page.
 
+== Triggers
+
+The trigger options available to you depend on your pipeline type. These options are described in the following table:
+
+[options="header",cols="1,1,1,1,1,1,1,1"]
+|===
+|Pipeline type
+^|GitHub OAuth trigger
+^|Bitbucket CloudOAuth trigger
+^|GitLab trigger
+^|Schedule trigger
+^|GitHub App trigger
+^|Custom Webhook
+^|API / Manual triggering
+
+|GitHub OAuth image:guides:ROOT:icons/github-oauth.svg[OAuth pipeline badge, role="no-border"]
+^|Zero or one
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|Zero, one, many
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|[.circle-green]#*Yes*#
+
+|GitHub App image:guides:ROOT:icons/github-app.svg[GitHub App pipeline badge, role="no-border"]
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|Zero, one, many
+^|Zero, one, many
+^|Zero, one, many
+^|[.circle-green]#*Yes*#
+|===
+
 == How CircleCI checks out your code
 
-The way your code is checked out when a pipeline is triggered depends on the pipeline type you have set up. The different methods are described below.
+The way your code is checked out when a pipeline triggers depends on the pipeline type you have set up. The different methods are described below. Select the tab for your pipeline type to view information relevant to you.
 
-=== GitHub OAuth and Bibucket Cloud pipelines
-
-When you set up a new project with a GitHub OAuth or Bitbucket Cloud pipelines, CircleCI creates a deployment key on the VCS provider for your project. A deploy key is an SSH key-pair, one public, one private. The VCS provider stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+[tabs]
+====
+GitHub App::
++
+--
+#TBC#
+--
+GitHub OAuth::
++
+--
+When you set up a new project with a GitHub OAuth pipeline, CircleCI creates a deployment key on the VCS provider for your project. A deploy key is an SSH key-pair, one public, one private. The VCS provider stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
 For code in GitHub, to set up a CircleCI project, you might find you need to enable the creation of deploy keys in your GitHub organization. To do so follow these steps:
 
@@ -150,53 +200,6 @@ If your deploy keys or user keys appear to have been removed, it may be due to o
 * When you delete a CircleCI project, CircleCI will remove its associated keys.
 ****
 
-[#create-a-github-user-key]
-=== Create a GitHub user key
-
-To create a GitHub user key, follow these steps:
-
-include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
-
-. In the sidebar menu, select *SSH Keys*.
-. Under the **User Key** section, select btn:[Authorize With GitHub]. The page will refresh while the authorization takes place and you will be redirected back to the project settings overview page.
-. Navigate back to **SSH keys** and go to the **User Key** section.
-. Select btn:[Add User Key], then btn:[Confirm User]. You will now see your user key displayed on the page.
-
-[#create-additional-github-ssh-keys]
-=== Create additional GitHub SSH keys
-
-If you need additional SSH keys to access other services, you can create additional keys by following the steps below.
-
-In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://app.circleci.com/pipelines/github/you/test-repo`.
-
-. Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
-+
-```shell
-  ssh-keygen -t ed25519 -C "your_email@example.com"
-```
-
-. Go to `https://github.com/you/test-repo/settings/keys`, and select **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then select **Add key**.
-
-. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "hostname" field, enter `github.com` and add the private key you created in step 1. Then select **Add SSH Key**.
-
-. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
-+
-```yaml
-  version: 2.1
-
-  jobs:
-    deploy-job:
-      steps:
-        - add_ssh_keys:
-            fingerprints:
-              - "SO:ME:FIN:G:ER:PR:IN:T"
-```
-
-When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
-
-[#how-are-private-keys-used]
-=== How are private keys used?
-
 When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
 - Checking out the main project
@@ -205,6 +208,80 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Automatic git merging/tagging/etc
 
 Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
+--
+Bitbucket Cloud::
++
+--
+When you set up a new project with a Bitbucket Cloud pipeline, CircleCI creates a deployment key on the VCS provider for your project. A deploy key is an SSH key-pair, one public, one private. The VCS provider stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+
+If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
+
+****
+If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
+
+* GitHub will remove inactive keys if they are unused for over a year.
+* If CircleCI creates keys through a user's OAuth integration with GitHub, and the user revokes or removes the integration, GitHub will also remove the associated keys.
+* In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
+* If your CircleCI project has no xref:about-circleci:introduction-to-the-circleci-web-app.adoc#projects[followers], CircleCI will consider it disabled and remove the associated keys.
+* When you delete a CircleCI project, CircleCI will remove its associated keys.
+****
+
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
+
+- Checking out the main project
+- Checking out any Bitbucket-hosted submodules
+- Checking out any Bitbucket-hosted private dependencies
+- Automatic git merging/tagging/etc
+
+Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
+--
+GitLab::
++
+--
+#TBC#
+--
+Bitbucket Data Center::
++
+--
+#TBC#
+--
+====
+
+[#create-a-github-user-key]
+== Create a GitHub user key - GitHub OAuth and Bitbucket Cloud pipelines only
+
+Create a GitHub user key in CircleCI when you need write access to your GitHub repositories during your CI/CD pipeline, or when you need to access multiple repositories that your user account has access to.
+
+Some example tasks where you might need a GitHub user key:
+
+* Pushing commits back to your repository. If your pipeline needs to commit and push changes back to GitHub (like updating a changelog, bumping version numbers, generating documentation, or creating automated pull requests) you need write permissions that a user key provides.
+* Accessing multiple private repositories. When your build depends on multiple private repos (beyond just the one being built), a user key gives your pipeline access to all repos your GitHub user can access. This is useful for:
+** Pulling private dependencies from other repos your organization owns.
+** Checking out submodules from private repositories.
+** Running scripts that interact with multiple repos.
+
+As described above, CircleCI automatically provides a deploy key for the repository being built, but deploy keys have some limitations:
+
+* Read-only by default.
+* Limited to a single repository.
+* Can not be reused across multiple repositories.
+
+A user key bypasses these limitations.
+
+The trade-off with chosing a user key is that user keys grant broad access based on your GitHub account's permissions, so they are a bigger security risk if compromised.
+
+We recommend creating a dedicated "machine user" GitHub/Bitbucket account with minimal necessary permissions, then adding that account's user key to CircleCI, rather than using your personal GitHub/Bitbucket account's key.
+
+To create a GitHub user key, follow these steps:
+
+NOTE: To use the recommended approach of creating a machine user, you will need to create a new GitHub/Bitbucket account with minimal necessary permissions and then follow these steps logged in as that machine user account.
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. In the sidebar menu, select *SSH Keys*.
+. Under the **User Key** section, select btn:[Authorize With GitHub]. The page will refresh while the authorization takes place and you will be redirected back to the project settings overview page.
+. Navigate back to **SSH keys** and go to the **User Key** section.
+. Select btn:[Add User Key], then btn:[Confirm User]. You will now see your user key displayed on the page.
 
 [#user-key-security]
 === User key security
@@ -232,6 +309,48 @@ ERROR: Repository not found.
 Permission denied (publickey).
 ```
 
+
+[#create-additional-ssh-keys]
+== Create additional SSH keys - All pipeline types
+
+You may need to add additional SSH keys to your pipelines. Some examples of when you might need to add additional SSH keys are as follows:
+
+* Secure authentication to remote systems. SSH keys allow your pipeline to authenticate to servers, repositories, or services without storing plaintext passwords. This is crucial when you need to deploy code to production servers, pull from private repositories, or interact with remote infrastructure.
+* Git operations with private repositories. Many projects depend on private packages or modules hosted in private Git repositories. SSH keys enable your CI/CD pipeline to clone these dependencies during the build process.
+* Automated deployments. When deploying applications, pipelines often need to SSH into servers to transfer files, restart services, or run deployment scripts. SSH keys make this automation possible without manual intervention or exposing credentials.
+* Third-party service integration. Some services and tools require SSH authentication for secure communication. For example, interacting with certain package registries, backup systems, or specialized deployment tools may require SSH key authentication.
+
+If you need additional SSH keys in your builds, follow these steps:
+
+In this example you will create a deploy key with write access to a GitHub repository. The GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://app.circleci.com/pipelines/github/you/test-repo`.
+
+. Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
++
+[source,console]
+----
+$ ssh-keygen -t ed25519 -C "your_email@example.com"
+----
+
+. Go to `https://github.com/you/test-repo/settings/keys`, and select **Add Deploy Key**. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Allow write access**, then select **Add key**.
+
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "hostname" field, enter `github.com` and add the private key you created in step 1. Then select **Add SSH Key**.
+
+. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
+
+For a guide to additional SSH keys for CircleCI pipelines, see the xref:integration:add-ssh-key.adoc[Add SSH keys] page.
+
+
 == Feature support
-
-
