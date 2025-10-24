@@ -217,6 +217,7 @@
 ** xref:insights:insights-glossary.adoc[Insights glossary]
 
 * Manage roles, permissions, and authentication
+** xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide]
 ** Roles and permissions
 *** xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]
 *** xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions]
