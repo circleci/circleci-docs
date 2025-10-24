@@ -342,7 +342,7 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | Options for the <<macos,macOS executor>>
 
 | `executor`
-| N ^(1)^
+| Y ^(1)^
 | String
 | Name of a declared <<executors,reusable executor>>
 
