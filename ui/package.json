@@ -22,7 +22,7 @@
     "browser-pack-flat": "~3.5.0",
     "browserify": "~17.0.0",
     "cssnano": "~7.1.0",
-    "eslint": "~9.37.0",
+    "eslint": "~9.38.0",
     "eslint-plugin-import": "~2.32.0",
     "eslint-plugin-n": "~17.23.0",
     "eslint-plugin-promise": "~7.2.0",
@@ -55,7 +55,7 @@
   },
   "overrides": {
     "eslint-plugin-node": {
-      "eslint": "~9.37.0"
+      "eslint": "~9.38.0"
     },
     "gulp-stylelint": {
       "stylelint": "~16.25.0"
