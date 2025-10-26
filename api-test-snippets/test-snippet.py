@@ -5,7 +5,7 @@ conn = http.client.HTTPSConnection("circleci.com")
 payload = "{\n  \"definition_id\": \"e50fa3c8-8121-5c8d-b7f1-f435bba4d92e\",\n  \"config\": {\n    \"branch\": \"circleci-project-setup\"\n  },\n  \"checkout\": {\n    \"branch\": \"circleci-project-setup\"\n  }\n}"
 
 headers = {
-    'Circle-Token': "YOUR_CIRCLE_TOKEN",
+    'Circle-Token': "CIRCLE_TOKEN",
     'Content-Type': "application/json"
 }
 

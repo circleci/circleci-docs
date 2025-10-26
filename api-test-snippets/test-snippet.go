@@ -15,7 +15,7 @@ func main() {
 
 	req, _ := http.NewRequest("POST", url, payload)
 
-	req.Header.Add("Circle-Token", "YOUR_CIRCLE_TOKEN")
+	req.Header.Add("Circle-Token", "CIRCLE_TOKEN")
 	req.Header.Add("Content-Type", "application/json")
 
 	res, _ := http.DefaultClient.Do(req)
