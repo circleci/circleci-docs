@@ -1,9 +1,12 @@
 const fetch = require('node-fetch');
 
-const url = 'https://circleci.com/api/v2/pipeline?org-slug=gh/rosieyohannan&mine=true';
-const options = {method: 'GET', headers: {'Circle-Token': 'CIRCLE_TOKEN'}};
-
-(async () => {
+async function run() {
+  const url = 'https://circleci.com/api/v2/project/github/rosieyohannan/rosie-yohannan-profile/pipeline/run';
+  const options = {
+    method: 'POST',
+    headers: {'Circle-Token': 'YOUR_CIRCLE_TOKEN', 'Content-Type': 'application/json'},
+    body: '{"definition_id":"e50fa3c8-8121-5c8d-b7f1-f435bba4d92e","config":{"branch":"circleci-project-setup"},"checkout":{"branch":"circleci-project-setup"}}'
+  };
   try {
     const response = await fetch(url, options);
     const data = await response.json();
@@ -11,4 +14,6 @@ const options = {method: 'GET', headers: {'Circle-Token': 'CIRCLE_TOKEN'}};
   } catch (error) {
     console.error(error);
   }
-})();
+}
+
+run();

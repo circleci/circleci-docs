@@ -2,13 +2,13 @@
 
 /**
  * CircleCI API Code Snippet Generator
- * 
+ *
  * Generates code samples from OpenAPI spec and injects them as x-code-samples.
  * Uses Kong's httpsnippet library under the hood with CircleCI-specific conventions.
- * 
+ *
  * Usage:
  *   node generate-api-snippets.js <input-spec.json> <output-spec.json>
- * 
+ *
  * Example:
  *   node generate-api-snippets.js openapi.json openapi-with-examples.json
  */
@@ -20,7 +20,7 @@ class CircleCISnippetGenerator {
   constructor(openApiSpec, options = {}) {
     this.spec = openApiSpec;
     this.baseUrl = this.spec.servers?.[0]?.url || 'https://circleci.com/api/v2';
-    
+
     // Default options
     this.options = {
       languages: options.languages || [
@@ -72,7 +72,7 @@ class CircleCISnippetGenerator {
    */
   buildUrl(path, operation) {
     let url = `${this.baseUrl}${path}`;
-    
+
     // Replace path parameters with example values
     const pathParams = (operation.parameters || []).filter(p => p.in === 'path');
     pathParams.forEach(param => {
@@ -153,13 +153,13 @@ class CircleCISnippetGenerator {
   getSecurityScheme(operation) {
     // Check operation-level security first, fall back to global
     const security = operation.security || this.spec.security || [];
-    
+
     // Find the preferred auth method
-    const preferredSecurity = security.find(s => 
+    const preferredSecurity = security.find(s =>
       Object.keys(s).includes(this.options.preferredAuth)
     );
 
-    const schemeName = preferredSecurity 
+    const schemeName = preferredSecurity
       ? Object.keys(preferredSecurity)[0]
       : Object.keys(security[0] || {})[0];
 
@@ -264,13 +264,56 @@ class CircleCISnippetGenerator {
       const snippet = new HTTPSnippet(request);
 
       // Convert to target language using Kong's httpsnippet converters
-      const code = snippet.convert(language.target, language.client);
+      let code = snippet.convert(language.target, language.client);
+
+      // Post-process node/fetch to wrap in async function for CommonJS compatibility
+      if (language.target === 'node' && language.client === 'fetch') {
+        code = this.wrapNodeFetchInAsyncFunction(code);
+      }
 
       return code;
     } catch (error) {
       console.error(`Error generating snippet for ${method.toUpperCase()} ${path} (${language.label}):`, error.message);
       return null;
     }
+  }
+
+  /**
+   * Wrap node-fetch code in an async function to support CommonJS
+   * Matches the pattern used by Harness API docs
+   */
+  wrapNodeFetchInAsyncFunction(code) {
+    // If already wrapped, return as-is
+    if (code.includes('async function run()') || code.includes('(async () => {')) {
+      return code;
+    }
+
+    // Extract the import/require statement
+    const lines = code.split('\n');
+    const imports = [];
+    const body = [];
+
+    lines.forEach(line => {
+      if (line.trim().startsWith('import ') ||
+          (line.trim().startsWith('const ') && line.includes('require('))) {
+        imports.push(line);
+      } else if (line.trim()) {
+        body.push(line);
+      }
+    });
+
+    // Wrap in async function
+    const wrappedCode = [
+      ...imports,
+      '',
+      'async function run() {',
+      ...body.map(line => '  ' + line),
+      '}',
+      '',
+      'run();'
+    ].join('\n');
+
+    return wrappedCode;
   }
 
   /**
@@ -453,7 +496,7 @@ class CircleCISnippetGenerator {
 // CLI execution
 function main() {
   const args = process.argv.slice(2);
-  
+
   if (args.length < 2) {
     console.error('Usage: node generate-api-snippets.js <input-spec.json> <output-spec.json>');
     console.error('');
