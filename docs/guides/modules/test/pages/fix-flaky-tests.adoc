@@ -1,7 +1,9 @@
-= Fix flaky tests
+= Fix flaky tests - Private beta
 :page-platform: Cloud
 :page-description: Learn about Chunk by CircleCI and how it can automatically identify and fix flaky tests in your CI/CD pipelines.
 :experimental:
+
+NOTE: Chunk by CircleCI is currently in private beta. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses credits and your AI provider token. Chunk tasks will be a paid feature after the beta.
 
 Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
 
@@ -13,7 +15,7 @@ TIP: Chunk by CircleCI is an AI agent that you can choose to set up in your orga
 
 Flaky tests are tests that pass and fail inconsistently. Flaky tests create uncertainty about code quality and slow down development workflows. Chunk can help address the problem of flaky tests by using artificial intelligence to analyze test patterns, identify root causes of flakiness, and propose validated solutions.
 
-Chunk integrates with your existing CircleCI workflows and GitHub repositories. When configured, Chunk tasks run automatically on a schedule you define, to monitor your test suite for signs of flakiness. When issues are detected, Chunk will go through the following steps:
+Chunk integrates with your existing CircleCI workflows and GitHub repositories. When configured, Chunk tasks run automatically on a schedule you define to monitor your test suite for signs of flakiness. When issues are detected, Chunk goes through the following steps:
 
 * Generate potential fixes.
 * Validate fixes through multiple test runs in an isolated environment.
@@ -61,7 +63,7 @@ To set up a "Fix flaky tests" task follow these steps:
 
 When you select btn:[Start task] Chunk starts running immediately and follows the schedule you set up.
 
-#insert screenshots#
+image::guides:ROOT:chunk/assign-task.png[Chunk assign task modal]
 
 === Chunk environment setup
 
@@ -97,6 +99,56 @@ jobs:
 
 Chunk operates through an automated analysis and remediation process that runs independently of your regular CI/CD workflows.
 
+[mermaid]
+----
+flowchart TD
+    Start([Chunk Task Runs on Schedule]) --> Monitor[Monitor Test Results in CircleCI]
+    Monitor --> Analyze[Analyze Historical Test Data]
+    Analyze --> Detect{Detect Flaky<br/>Test Patterns?}
+
+    Detect -->|No flaky tests found| End1([Task Complete])
+    Detect -->|Flaky tests identified| Select[Select Tests to Fix<br/>Based on Task Config]
+
+    Select --> Generate[Generate Potential Solutions<br/>Based on Failure Patterns]
+    Generate --> Solutions{Multiple<br/>Solutions<br/>Configured?}
+
+    Solutions -->|Yes| CreateMultiple[Create Multiple Fix Approaches]
+    Solutions -->|No| CreateSingle[Create Single Fix Approach]
+
+    CreateMultiple --> TrySolution[Try Solution Approach]
+    CreateSingle --> TrySolution
+
+    TrySolution --> Validate[Validate Fix in Isolated Environment]
+    Validate --> RunTests[Run Test Multiple Times<br/>Per Validation Config]
+
+    RunTests --> CheckValidation{Validation<br/>Successful?}
+
+    CheckValidation -->|No| MoreSolutions{More Solutions<br/>to Try?}
+    MoreSolutions -->|Yes| TrySolution
+    MoreSolutions -->|No| CreatePRFailed[Create PR with<br/>Failed Validation Status]
+    CreatePRFailed --> CheckMore{More Tests<br/>to Fix?}
+
+    CheckValidation -->|Yes| CheckPRLimit{Under PR<br/>Limit?}
+    CheckPRLimit -->|No| Queue[Queue Fix for Later]
+    CheckPRLimit -->|Yes| CreatePR[Create Pull Request<br/>with Validated Fix]
+
+    CreatePR --> AddDetails[Include Code Diff,<br/>Analysis & Logs]
+    AddDetails --> CheckMore
+    Queue --> CheckMore
+
+    CheckMore -->|Yes| Select
+    CheckMore -->|No| End2([Task Complete])
+
+    style Start fill:#e1f5ff
+    style End1 fill:#d4edda
+    style End2 fill:#d4edda
+    style Detect fill:#fff3cd
+    style CheckValidation fill:#fff3cd
+    style CheckPRLimit fill:#fff3cd
+    style CreatePR fill:#d4edda
+    style CreatePRFailed fill:#f8d7da
+----
+
 === Test analysis and detection
 
 Chunk continuously monitors test results stored in CircleCI to identify patterns of flakiness. It analyzes historical test data to distinguish between genuine failures caused by code issues and intermittent failures that indicate flaky behavior. Tests are flagged as flaky when they show inconsistent pass/fail patterns across multiple runs with the same code.
@@ -121,18 +173,16 @@ Pull requests contain code diffs showing what changes Chunk recommends, along wi
 
 == The Chunk tasks dashboard
 
-Once Chunk tasks are set up you can view an activity timeline in the Chunk tasks dashboard.
+Once you have set up some Chunk tasks, you can view an activity timeline on the Chunk tasks dashboard.
 
-#screenshot#
+image::guides:ROOT:chunk/chunk-tasks-dashboard.png[Chunk tasks dashboard]
 
-Once a fix is verified you can select the "PR opened" row to view the task overview, which includes the following information:
+Once a fix is available the row is marked as "PR opened". Select a row to view the task overview. This includes the following information:
 
 * Summary of the fix
 * Root cause of the flakiness
 * Details of the proposed fix
 * Details of the level of verification achieved
-
-#Screenshot#
 
 You also get a code diff of the proposed fix along with logs of the decision process presented as a conversation between "User" (Chunk) and "Assistant" (AI model provider). The diff and logs are designed to help you understand Chunk's reasoning and analysis process.
 
