@@ -4,6 +4,7 @@
 :experimental:
 :concurrency:
 :orbs:
+:server:
 
 This document describes the Server Plan available to developers.
 

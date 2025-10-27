@@ -22,7 +22,11 @@ To see some common upgrade path options, see link:https://support.circleci.com/h
 [#recommendations]
 == Recommendations
 
-We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink on your v4.3.x installation before backing up your server installation in preparation for upgrading to v4.7. Customers that do not perform this step may have issues restoring Vault from backup in v4.7.
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets.
+
+If you are using Vault, you should complete the migration to Tink on your current installation. Complete this migration before backing up your server in preparation for upgrading to 4.7.
+
+Customers that do not perform this step may have issues restoring Vault from backup in 4.7.
 
 [#prerequisites]
 == Prerequisites
@@ -42,6 +46,8 @@ We have moved away from Vault to Tink for encryption. The process for migration 
 +
 [source,shell,subs=attributes+]
 helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+. Upgrade your Nomad clients Terraform module to the link:https://github.com/CircleCI-Public/server-terraform/releases/tag/4.7.0[4.7 release]. Follow the documentation to plan and apply the Terraform changes for your xref:phase-3-aws-execution-environments.adoc#create-your-cluster-with-terraform[AWS] or xref:phase-3-gcp-execution-environments.adoc#create-your-cluster-with-terraform[GCP] environment.
 
 . Perform the upgrade:
 +
