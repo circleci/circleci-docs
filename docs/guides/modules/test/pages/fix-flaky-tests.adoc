@@ -3,7 +3,7 @@
 :page-description: Learn about Chunk by CircleCI and how it can automatically identify and fix flaky tests in your CI/CD pipelines.
 :experimental:
 
-NOTE: Chunk by CircleCI is currently in private beta. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses credits and your AI provider token. Chunk tasks will be a paid feature after the beta.
+NOTE: Chunk by CircleCI is currently in private beta. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
 
 Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
 
@@ -25,9 +25,9 @@ Chunk integrates with your existing CircleCI workflows and GitHub repositories. 
 [mermaid]
 ----
 flowchart TD
-    Start([Flaky Test Detected]) --> Generate[Generate Potential Fixes]
-    Generate --> Validate[Validate Fixes Through<br/>Multiple Test Runs in<br/>Isolated Environment]
-    Validate --> CreatePR[Create Pull Requests with<br/>Recommended Changes After<br/>Successful Validation]
+    Start([Flaky test detected]) --> Generate[Generate potential fixes]
+    Generate --> Validate[Validate fixes through<br/>multiple test runs in<br/>isolated environment]
+    Validate --> CreatePR[Create pull requests with<br/>recommended changes after<br/>successful validation]
     CreatePR --> End([Complete])
 ----
 
