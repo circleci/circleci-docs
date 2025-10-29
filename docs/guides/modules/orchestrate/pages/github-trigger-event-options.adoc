@@ -93,17 +93,10 @@ All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-even
 
 [NOTE]
 ====
-<<<<<<< Updated upstream
-If your config contains a logical statement referencing any of the following pipeline values, you must either:
-
-* Ensure your triggers only allow pull request related events.
-* Include a condition to ensure that the pipeline runs for pull request related events: `pipeline.event.name == "pull_request"`.
-=======
-If your config contains a logical statement referencing any of the pipeline values listed in the table below, you must do one of the following to prevent the pipeline creation from failing:
+If your config contains a logical statement referencing any of the pipeline values listed below, you must do one of the following to prevent the pipeline creation from failing:
 
 * Ensure your triggers only allow pull request related events.
 * Include a condition to ensure that the pipeline only runs for pull request related events: `pipeline.event.name == "pull_request"`.
->>>>>>> Stashed changes
 ====
 
 [cols=".^1,1"]
