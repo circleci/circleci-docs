@@ -53,7 +53,7 @@ For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:orchestrate:triggers-o
 `"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
 
 | `aud`
-| The audience. Currently, this is a fixed value `"ORGANIZATION_ID"`, a string containing a UUID that identifies the job's project's organization.
+| The audience. By default, this is `"ORGANIZATION_ID"`, a string containing a UUID that identifies the job's project's organization. To customize the aud, you can generate an OIDC token with a custom audience. See xref:oidc-tokens-with-custom-claims.adoc[OIDC tokens with custom claims] for more information.
 
 | `iat`
 | The time of issuance. This is the time the token was created, which is shortly before the job starts.
