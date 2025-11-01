@@ -134,7 +134,7 @@ include::ROOT:partial$notes/find-organization-id.adoc[]
 [#adding-aws-to-the-circleci-configuration-file]
 ==== Adding AWS to the CircleCI configuration file
 
-Now that you have set up your trusted Identity Provider and IAM role, you are ready to write a CircleCI job that authenticates with AWS using OIDC. This is accomplished using CircleCI’s link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC.
+Now that you have set up your trusted Identity Provider and IAM role, you are ready to write a CircleCI job that authenticates with AWS using OIDC. Use CircleCI’s link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC.
 
 TIP: Orbs are reusable packages of YAML configuration that condense repeated pieces of configuration into a single line of code. In this case, the AWS CLI orb enables you to generate a temporary session token, AWS Access Key ID, and AWS secret access key with a single command in your configuration.
 
