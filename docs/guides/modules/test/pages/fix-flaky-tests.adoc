@@ -1,4 +1,5 @@
-= Fix flaky tests - Private beta
+= Fix flaky tests
+:page-badge: PREVIEW
 :page-platform: Cloud
 :page-description: Learn about Chunk by CircleCI and how it can automatically identify and fix flaky tests in your CI/CD pipelines.
 :experimental:
