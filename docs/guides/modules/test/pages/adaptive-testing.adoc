@@ -490,6 +490,12 @@ Any remaining tests will be analysed the next time test analysis is run.
 |true
 |Whether the tests should be distributed across a shared queue and fetched across multiple dynamic batches. +
 If a test runner has slow start up time per batch, disabling this can speed up tests.
+
+| `coverage-baseline`
+|.circleci/example-baseline.info
+|Path to a baseline coverage file to subtract from test coverage during analysis. +
+Use this to exclude shared setup or initialization code from test impact data. +
+The baseline file should be in the same format as your test coverage output (e.g., LCOV format for `<< outputs.lcov >>`).
 |===
 
 The following flags are available to be defined on the `circleci run testsuite` command.
@@ -769,6 +775,37 @@ Yes! The branch behavior is fully customizable through your CircleCI configurati
 . Scheduled pipelines independent of branch.
 
 See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
+
+=== Can I run analysis on branches other than main?
+
+Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on `main` by default, you can configure it to run on:
+
+. Any specific branch (for example, `develop` or `staging`).
+. Multiple branches simultaneously.
+. Feature branches if needed for testing.
+. Scheduled pipelines independent of branch.
+
+See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
+
+=== Why are there so many files impact a test?
+
+If you see many files impacting each test during analysis (e.g., "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
+
+*Solution: Use a coverage baseline to exclude setup code*
+
+. Create a minimal test that only does imports/setup (no test logic)
+. Generate coverage from that test and save it to `.circleci/example-baseline.info` (you can name the file however you'd like)
+. Reference it in your test suite:
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+options:
+  adaptive-testing: true
+  coverage-baseline: .circleci/example-baseline.info
+----
+
+The coverage data in the baseline file will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test. Note that the baseline file should be in the same format as your test coverage output (e.g., LCOV format for << outputs.lcov >>).
 
 === What test frameworks are supported?
 
