@@ -79,7 +79,7 @@ NOTE: During the installation process, you may use the following command to gene
 [#api-token]
 === a. API token
 
-The application requires a Kubernetes Secret containing an API token. This API token is used to facilitate internal API communication to api-service. Use a random string and store it securely. CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
+The application requires a Kubernetes Secret containing an API token. This API token is used to facilitate internal API communication to `api-service`. Use a random string and store it securely. CircleCI will not be able to recover this value if lost. You have two options depending on whether you want to create the Kubernetes Secret yourself, or if you want CircleCI to create it for you.
 
 [tabs]
 ====
@@ -107,7 +107,7 @@ CircleCI creates Secret::
 --
 **Option 2:** CircleCI creates the Kubernetes Secret for you.
 
-CircleCI will create the Kubernetes Secret "api-token" automatically.
+CircleCI will create the Kubernetes Secret `api-token` automatically.
 
 --
 ====
@@ -115,7 +115,7 @@ CircleCI will create the Kubernetes Secret "api-token" automatically.
 [#session-cookie]
 === b. Session cookie
 
-The application requires a session cookie key Kubernetes Secret, which CircleCI uses to sign session cookies. The Secret must be exactly 16 characters long. Use a random string and store it securely. CircleCI will not be able to recover this value if lost. There are two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
+The application requires a session cookie key Kubernetes Secret, which CircleCI uses to sign session cookies. The Secret must be exactly 16 characters long. Use a random string and store it securely. CircleCI will not be able to recover this value if lost. You have two options depending on whether you want to create the Kubernetes Secret, or if you want CircleCI to create it for you.
 
 [tabs]
 ====
@@ -188,7 +188,7 @@ keyset:
 
 [#postgres-credentials]
 ==== i. Credentials
-The application requires a Kubernetes Secret containing PostgreSQL credentials.  This is true when using either the internal (default) or an externally hosted instance of PostgreSQL. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
+The application requires a Kubernetes Secret containing PostgreSQL credentials.  This Secret is required when using either the internal (default) or an externally hosted instance of PostgreSQL. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
 [tabs]
 ====
@@ -264,7 +264,7 @@ postgresql:
 
 === e. MongoDB credentials
 
-The application requires a Kubernetes Secret containing MongoDB credentials. This is true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
+The application requires a Kubernetes Secret containing MongoDB credentials. This Secret is required when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
 
 [tabs]
 ====
@@ -479,7 +479,7 @@ Lets Encrypt::
 --
 *Let's Encrypt*
 
-https://letsencrypt.org/[Let's Encrypt] will request and manage certificates for you.  This is a good option when the load balancer is publicly accessible. The following snippet (using your own email) can be added to `values.yaml`:
+https://letsencrypt.org/[Let's Encrypt] will request and manage certificates for you.  Let's Encrypt is a good option when the load balancer is publicly accessible. The following snippet (using your own email) can be added to `values.yaml`:
 
 [source,yaml]
 ----

@@ -106,7 +106,7 @@ kubectl run nomad-tunnel --rm -it --restart=Never --image=alpine/socat -n <serve
 kubectl port-forward pod/nomad-tunnel 4646:4646 -n <server-namespace>
 ----
 
-. Navigate to ++`http://localhost:4646/ui`++ in your browser to access the Nomad UI. For more information on utilizing the Nomad UI, refer to the link:https://developer.hashicorp.com/nomad/tutorials/web-ui[Nomad documentation].
+. Navigate to `++http://localhost:4646/ui++` in your browser to access the Nomad UI. For more information on utilizing the Nomad UI, refer to the link:https://developer.hashicorp.com/nomad/tutorials/web-ui[Nomad documentation].
 
 [#shutting-down-a-nomad-client]
 === Shutting down a Nomad client
@@ -145,8 +145,8 @@ The script should use the commands in the section above to do the following:
 . Terminate the instance.
 
 [#externalize-servers]
-== Externalize your Nomad Servers
-From server version 4.8, Nomad Servers may now be deployed externally to your Kubernetes cluster that hosts your installation of CircleCI server. Externalization of Nomad Servers is optional. Externalization of Nomad Servers can improve their stability. If you already have a CircleCI server instance with _internal_ Nomad Servers, the process to switch to external Nomad Servers is as follows:
+== Externalize your Nomad servers
+From server version 4.8, Nomad servers may now be deployed externally to your Kubernetes cluster that hosts your installation of CircleCI server. Externalization of Nomad servers is optional. Externalization of Nomad Servers can improve their stability. If you already have a CircleCI server instance with _internal_ Nomad Servers, the process to switch to external Nomad servers is as follows:
 
 . Stop all builds on your CircleCI server instance.
 . Follow our installation instructions for deploying Nomad Servers on either xref:installation:phase-3-aws-execution-environments.adoc#nomad-servers[AWS] or xref:installation:phase-3-gcp-execution-environments.adoc#nomad-servers[GCP].
