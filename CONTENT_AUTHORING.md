@@ -84,6 +84,64 @@ Document attributes control various aspects of rendering:
 :icons: font           # Uses font icons
 ```
 
+### Page Title Badges
+
+Add visual badges next to page titles to indicate content status (e.g., Preview, Beta, Deprecated):
+
+#### Basic Usage
+
+```asciidoc
+= Page Title
+:page-badge: Preview
+```
+
+This displays a simple badge with default styling (black text, border, no background).
+
+#### Custom Styling with Tailwind Classes
+
+```asciidoc
+= Page Title
+:page-badge: Preview
+:page-badge-classes: text-white bg-orange-500 border border-orange-600
+```
+
+#### Custom Colors with Hex Values
+
+```asciidoc
+= Page Title
+:page-badge: Preview
+:page-badge-bg: #FF6B35
+:page-badge-border: #C44D2C
+:page-badge-classes: text-white
+```
+
+#### Common Badge Styles
+
+**Preview (Orange):**
+```asciidoc
+:page-badge: Preview
+:page-badge-classes: text-white bg-orange-500 border border-orange-600
+```
+
+**New (Green):**
+```asciidoc
+:page-badge: New
+:page-badge-classes: text-white bg-green-500 border border-green-600
+```
+
+**Deprecated (Red):**
+```asciidoc
+:page-badge: Deprecated
+:page-badge-classes: text-white bg-red-500 border border-red-600
+```
+
+#### Badge Attributes Reference
+
+- **`:page-badge:`** - The text to display in the badge (required)
+- **`:page-badge-classes:`** - Tailwind CSS classes for styling (optional, defaults to `text-terminal-black border`)
+- **`:page-badge-bg:`** - Hex color code for background (optional, overrides classes)
+- **`:page-badge-border:`** - Hex color code for border (optional, requires `page-badge-bg`)
+
 ### Admonitions
 
 Use admonitions to call attention to important information:

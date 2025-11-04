@@ -1,9 +1,11 @@
-= Fix flaky tests - Private beta
+= Fix flaky tests
+:page-badge: Preview
 :page-platform: Cloud
 :page-description: Learn about Chunk by CircleCI and how it can automatically identify and fix flaky tests in your CI/CD pipelines.
 :experimental:
+:page-noindex: true
 
-NOTE: Chunk by CircleCI is currently in private beta. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+NOTE: Chunk by CircleCI is currently in closed preview. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
 
 Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
 
