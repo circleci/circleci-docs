@@ -31,6 +31,8 @@ NOTE: It is possible to use CircleCI's OIDC tokens with multiple cloud services.
 
 The OIDC tokens contain the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Claims
@@ -61,10 +63,13 @@ For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:orchestrate:triggers-o
 | `exp`
 | The expiration time. Its value is one hour after the time of issuance.
 |===
+--
 
 
 The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-connect-core-1_0.html#AdditionalClaims[additional claims] with extra metadata about the job:
 
+[.table-scroll]
+--
 [cols="2,2", options="header"]
 |===
 | Additional claims
@@ -85,6 +90,7 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | `oidc.circleci.com/ssh-rerun`
 | A boolean indicating if the CI job is started using the SSH rerun feature.
 |===
+--
 
 [#oidc-in-open-source-projects]
 == OIDC in open source projects
