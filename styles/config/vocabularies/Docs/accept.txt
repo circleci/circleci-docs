@@ -128,6 +128,7 @@ Docker\sHub
 Dockerfiles?
 dockerize
 [Dd]otfiles?
+ECMAscript
 [Ee]nablement
 EKS
 Elixir
@@ -269,7 +270,7 @@ PowerShell
 [Pp]roxied
 [Pp]roxying
 Pusher
-PVC
+PVCs?
 Python
 pytest
 RAM
