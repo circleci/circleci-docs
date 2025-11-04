@@ -1,4 +1,5 @@
 = Data retention in server
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI server installation.
 :experimental:

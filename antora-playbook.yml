@@ -15,6 +15,8 @@ content:
   - url: .
     start_path: docs/orbs
   - url: .
+    start_path: docs/server-admin-4.9
+  - url: .
     start_path: docs/server-admin-4.8
   - url: .
     start_path: docs/server-admin-4.7
