@@ -233,7 +233,33 @@ The setup steps vary by provider. At a high level you will:
 +
 
 
-==== 2. Configure CircleCI to stream to your S3-compatible service
+==== 2. Authentication and authorization considerations
+
+**Key OIDC configuration details**:
+
+When setting up the OIDC Identity Provider to trust CircleCI, use these parameters:
+
+* **OpenID Configuration URL (Issuer URL):**
+    `https://oidc.circleci.com/org/**<ORG_ID>/**.well-known/openid-configuration`
+    *(Remember to substitute your actual CircleCI Organization ID.)*
+
+* **OpenID Client ID (Audience):**
+    Your **CircleCI Organization ID** (the `<ORG_ID>` value).
+
+* **Scope:**
+    Use the standard required scope: `openid`.
+
+**Validation and network requirements**:
+
+* **Server Endpoint Connectivity:**
+    The **AWS S3 compatible server**, acting as the token validator, **must be able to reach** the CircleCI OIDC Provider endpoint to fetch the public keys required to **validate the token's cryptographic signature**.
+
+* **Provider Validation:**
+    Your OIDC provider configuration must be set up to accept and successfully validate CircleCI's OIDC tokens for the configured **role or principal** you intend to grant access to within your storage solution.
+
+NOTE: Ensure your **AWS S3 compatible server's** network configuration allows necessary outgoing connections to the internet, specifically to `oidc.circleci.com`, for token validation to succeed.
+
+==== 3. Configure CircleCI to stream to your S3-compatible service
 
 . Go to the link:https://app.circleci.com/[CircleCI web app] and navigate to menu:Organization Settings[Security].
 . In menu:Audit Logs[Streaming audit logs], select btn:[Stream audit logs].
@@ -242,7 +268,7 @@ The setup steps vary by provider. At a high level you will:
 +
 image::guides:ROOT:setup-s3-compatible-audit-logs.png[Set up S3-compatible storage for streaming]
 . Fill out the fields as follows:
-.. **Region**: Optional. Many s3-compatible providers default to `us-east-1` if not set.
+.. **Region**: Optional. Many S3-compatible providers default to `us-east-1` if not set.
 .. **S3 Bucket Name**: The exact name of the bucket you created.
 .. **Role ARN**: The role identifier recognized by your provider (for example, a provider-specific role ID/ARN).
 .. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `https://s3.<region>.<provider-domain>` or your custom host and port).
@@ -252,9 +278,6 @@ image::guides:ROOT:form-s3-compatible-audit-logs.png[Connect CircleCI to S3-comp
 . Select btn:[Connect CircleCI to S3-compatible service].
 
 When the connection is validated, the **Status** will show image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected**. Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket to verify permissions.
-
-NOTE: Ensure your endpoint is reachable from CircleCI and that your provider accepts and validates CircleCI OIDC tokens for the configured role/principal. Network policies, firewalls, TLS, and trust configuration must allow secure access from CircleCI to your endpoint.
-
 
 === Manage active streams
 
