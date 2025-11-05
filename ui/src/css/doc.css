@@ -369,6 +369,7 @@
 .doc table.tableblock td {
   padding: 0.5rem;
   border-bottom: 1px solid #D4D4D4;
+  min-width: 90px;
 }
 
 .doc table.tableblock,
