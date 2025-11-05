@@ -3,35 +3,67 @@
 :page-description: A guide to understanding user accounts, organizations and integrations with version control systems in CircleCI.
 :experimental:
 
-This guide defines the concepts of user, organization and integration in CircleCI. After these concepts are covered you will find out about the features available to you depending on you organization and pipeline type.
+This guide explains the concepts of user, organization, and integration in CircleCI. After these concepts are covered, you can find out about the features available to you depending on your organization and pipeline type.
 
 == User account
 
 When you log in to CircleCI you are logging in to your _user account_.
 
-#user settings#
+As a CircleCI _user_ you can access _organizations_. You can access zero, one or many organizations. You can create new organizations and/or join an existing organization.
 
-As a CircleCI _user_ you can access _organizations_. You can have access to zero, one or many organizations.
-
-There are two ways to log in to CircleCI:
+You can log in to CircleCI using one of the following methods:
 
 * Email and password
 * Social login (GitHub, Bitbucket)
 
-#INSTRUCTION FOR DELETING A USERT ACCOUNT?#
+Select your icon in the top bar and select **User settings** to access the following sections:
+
+.User settings
+[cols="1,2", options="header"]
+|===
+| User settings section | What you will find here
+
+| Account Integrations
+| Displays your user ID as well as account integrations with VCS providers. You will find a list of which GitHub or Bitbucket organizations you are connected with. You can disconnect your OAuth connections with GitHub or Bitbucket here.
+
+| Notifications
+| Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser.
+
+| Accessibility
+| Toggle switch for accessible step output. Switch this on if you use a screen reader.
+
+| Privacy & Security
+| Disable third-party tracking. You may opt in or opt out of third party tracking pixels.
+
+| Sessions
+| A list of systems that have logged into your account. Revoke any sessions that you do not recognize.
+
+| Personal API tokens
+| View and create personal API tokens, used to access the CircleCI API.
+
+| Organization Plans
+| See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
+
+| Job SSH keys
+| Set up an SSH key to access your job containers. For more information on this feature see the xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH] page.
+
+| Beta Program
+| Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+
+|===
 
 == Organizations
 
 An organization in CircleCI is a workspace that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, or Bitbucket).
 
-Create an organization allows you to manage the following:
+Create an organization to manage the following:
 
 * Multiple projects under a single entity.
 * CI/CD pipelines specific to your team or company needs.
 * Invites for team members.
-* Assignment of roles (`circleci` orgs only, roles for `github` and `bitbucket` orgs are managed through the VCS provider).
+* Assignment of roles (`circleci` orgs only, roles for `github` and `bitbucket` orgs are inherited and managed through the VCS provider).
 
-Each organization has its own settings, including security, integrations, and resource management, making it easier to coordinate and control your CI/CD processes across multiple projects and users.
+Each organization has its own settings, including security, integrations, and resource management, allowing you to coordinate and control your CI/CD processes across multiple projects and users.
 
 A CircleCI _organization_ can be one of three types:
 
@@ -75,9 +107,71 @@ The integration options available to you depend on your organization type, as fo
 
 |===
 
+== Disconnect a GitHub OAuth or Bitbucket Cloud account from your user account
+
+Follow these steps to disconnect your CircleCI account from GitHub.
+
+****
+When disconnecting a VCS connection using the method described here, any existing personal API keys will be invalidated. Any SSH keys, or deploy keys may also be invalidated. Disconnecting the VCS connection is intended to be used when issues arise, for example:
+
+* You joined the wrong organization
+* You connected with the wrong GitHub/Bitbucket user account
+* Changes to the organization name in your VCS
+****
+
+. From the link:https://app.circleci.com/[CircleCI web app], navigate to your **User Settings** by clicking on your user icon in the top bar.
+. Select **Account Integrations**.
+. You will see a list of connections along with the GitHub or Bitbucket organizations they are associated with. Select btn:[Disconnect] next to the GitHub/Bitbucket connection you wish to disconnect.
+
+Once disconnected, you will be redirected to the CircleCI login page. To reconnect your account, log in to CircleCI using your GitHub or Bitbucket social login credentials.
+
+== Projects
+
+[tabs]
+====
+`github` and `bitbucket` organizations::
++
+--
+For `github` and `bitbucket` type organizations projects are synonymous with repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
+
+* Set up new repositories as CircleCI projects, which involves committing a CircleCI `config.yml` file to the repository to define your pipeline. THis creates a GitHub OAuth  or Bitbucket Cloud pipeline for you, which you can view in menu:Project Settings[Project Setup] or menu:Project Settings[Pipelines] .
+* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+
+When you set up a project to build with CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+
+- A deploy key that is used to check out your project from GitHub.
+- A service hook (or "push hook") that is used to notify CircleCI when you push to GitHub.
+
+CircleCI builds push hooks by default. Builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
+
+Some additional, less common cases where CircleCI uses hooks are as follows:
+
+- CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app. If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
+- If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repositories.
+
+These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
+
+The ability to override the **Only build pull requests** setting is supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).  Details on how to enable can be found on our link:https://discuss.circleci.com/t/product-launch-override-only-build-prs-setting/47807[community forum].
+
+It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build.
+
+Refer to the link:https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
+
+Refer to the CircleCI documentation on xref:orchestrate:workflows.adoc#using-filters-in-your-workflows[Workflow filters] for information on how to build tag pushes.
+--
+`circleci` organizations::
++
+--
+For `circleci` type organizations, projects are created directly in CircleCI via the web app, API or CLI. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your projects. From here you have the option to:
+
+* Create a new project, including setting up a pipeline, at which point you connect your code repository to your project.
+* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+--
+====
+
 == Quickstart
 
-The followin links take you to the sections you need to get set up with CircleCI:
+The following links take you to the sections you need to get set up with CircleCI:
 
 * xref:getting-started:first-steps.adoc[Sign up and create an organization]
 * xref:getting-started:invite-your-team.adoc[Join a team or invite your team]
@@ -129,17 +223,65 @@ For `github` and `bitbucket` type organizations user permissions are inherited f
 
 For `circleci` type organizations user permissions are managed through CircleCI. You can find information on managing organization and project roles and permissions starting with the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions] page. You can manage roles and permissions at an organization and project level. You can manage roles and permissions individually for each user or add users to groups and manage group roles and permissions.
 
-== Projects
+=== OAuth permissions
 
-For `github` and `bitbucket` type organizations projects are synonymous with repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
+[tabs]
+====
+GitHub OAuth::
++
+--
+CircleCI requests the following permissions from GitHub, defined in the link:https://developer.github.com/v3/oauth/#scopes[GitHub permissions model].
 
-* Set up new repositories as CircleCI projects, which involves committing a CircleCI `config.yml` file to the repository to define your pipeline. THis creates a GitHub OAuth  or Bitbucket Cloud pipeline for you, which you can view in menu:Project Settings[Project Setup] or menu:Project Settings[Pipelines] .
-* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+**Read Permission**
 
-For `circleci` type organizations, projects are created separately to code repositories directly in CIrcleCI via the web app, API or CLI. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your projects. From here you have the option to:
+- Get a user's email address
 
-* Create a new project, including setting up a pipeline, at which point you connect your code repository to your project.
-* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+**Write Permissions**
+
+- Get a list of a user's repositories
+- Add an SSH key to a user's account
+
+**Admin Permissions**, needed for setting up a project
+
+- Add deploy keys to a repository
+- Add service hooks to a repository
+
+NOTE: CircleCI only asks for permissions that are absolutely necessary. However, as a GitHub OAuth app, CircleCI is constrained by the specific permissions available via GitHub’s OAuth scopes. For example, getting a full list of a user’s repository, public and private, from GitHub, requires the link:https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes[`repo` scope], which is write-level access. GitHub does not provide a read-only OAuth scope for listing all of a user’s repositories.
+--
+Bitbucket Cloud OAuth::
++
+--
+CircleCI requests the following permissions from Bitbucket Cloud, as defined in the link:https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes[Bitbucket Cloud permissions model].
+
+**Read Permission**
+
+- Get a user's email address
+
+**Write Permissions**
+
+- Get a list of a user's repositories
+- Add an SSH key to a user's account
+
+**Admin Permissions**, needed for setting up a project
+
+- Add deploy keys to a repository
+- Add service hooks to a repository
+
+NOTE: CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions Bitbucket Cloud chooses to supply.
+
+If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting Bitbucket to communicate your concerns.
+--
+====
+
+=== GitHub OAuth SAML SSO
+
+Enabling SAML protection on a GitHub org can cause changes to CircleCI’s settings related to GitHub Checks and GitHub status updates. Ensure these settings are configured for their desired state after enabling SAML for your organization. You can find these settings at:
+
+* GitHub Checks, from the GitHub website, select menu:Organization Settings[VCS > GitHub Checks]
+* GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
+
+For more information on GitHub Checks and GitHub status updates, see the xref:integration:enable-checks.adoc#github-check-and-github-status-updates[Enabling GitHub Checks].
+
 
 == Rename an organization or project
 
@@ -420,6 +562,10 @@ When you push to your GitHub repository from a job, CircleCI will use the SSH ke
 
 For a guide to additional SSH keys for CircleCI pipelines, see the xref:integration:add-ssh-key.adoc[Add SSH keys] page.
 
+== Built-in environment variables and pipeline values
+
+The built-in environment variables available in a project depend on the pipeline type. For a full list see the xref:reference:ROOT:variables.adoc[Project values and variables] page.
+
 [#Moving-from-github-oauth-app-to-github-app]
 == Moving from the GitHub OAuth app integration to the GitHub App integration
 
@@ -477,3 +623,26 @@ The built-in environment variables and pipeline values available to you depend o
 == Feature support
 
 Some organization and project combinations affect the features that are available to you. For a full list, see the xref:integration:version-control-system-integration-overview.adoc[Version Control System Integration Overview] page.
+
+== Troubleshooting
+
+=== GitHub third party application restrictions for OAuth integrations
+
+GitHub provides the ability to approve third party application access on a link:https://help.github.com/articles/about-third-party-application-restrictions/[per-organization level].
+
+Before GitHub added this option the following was true:
+
+* Any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account).
+* The application could use that OAuth token to act on behalf of the user via the API, with whatever permissions were granted during the OAuth flow.
+
+OAuth tokens will now, by default, _not_ have access to organization data when third party access restrictions are enabled. You must specifically request access on a per organization basis, either during the OAuth process or later, and an organization admin must approve the request.
+
+If you are a GitHub organization owner or admin, you can enable third party access restrictions. For steps see the link:https://docs.github.com/en/organizations/managing-oauth-access-to-your-organizations-data/enabling-oauth-app-access-restrictions-for-your-organization[GitHub docs]
+
+NOTE: If you enable these restrictions on an organization for which CircleCI has been running builds, CircleCI will stop receiving push event hooks from GitHub, and will not build new pushes. API calls will also be denied, causing, for instance, re-builds of old builds to fail the source checkout. To get CircleCI working again, you will need to grant access to the CircleCI application.
+
+== Frequently asked questions
+
+=== How do I delete my user account?
+
+For guidance on deleting your user account link:https://support.circleci.com/hc/en-us/articles/360037058873-How-Do-I-Delete-My-User-Account#h_01JMMX9C1BAM445WCFZF56QMEE[see this support article].
