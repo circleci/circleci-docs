@@ -1,10 +1,11 @@
-= Adaptive testing - Closed preview
+= Adaptive testing
+:page-badge: Preview
 :page-platform: Cloud
 :page-description: This document describes the adaptive testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
 :experimental:
 :page-noindex: true
 
-CAUTION: *Adaptive testing* is available as a closed preview. When the feature is made generally available there will be a cost associated with access and usage.
+CAUTION: *Adaptive testing* is available in closed preview. When the feature is made generally available there will be a cost associated with access and usage.
 
 NOTE: This page is currently in development and will be updated as the feature is developed.
 
