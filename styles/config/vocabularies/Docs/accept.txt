@@ -77,6 +77,7 @@ Certbot
 cgroup
 Chocolatey
 chruby
+[Cc]hunk
 CircleCI\b
 \bCircleCI cloud\b
 \bCircleCI server\b
@@ -161,6 +162,7 @@ GKE
 \bGoogle Cloud Storage\b
 \bGoogle Container Registry\b
 \bGoogle Play Store\b
+gotestsum
 GPU
 Gradle
 Grafana
@@ -241,6 +243,7 @@ orgs?
 [Pp]ackagecloud
 [Pp]arameterization
 [Pp]arameterizable
+[Pp]arsable
 [Pp]assphraseless
 \bPerformance Plan\b
 PHP
@@ -336,6 +339,8 @@ Telegraf
 Terraform
 TestFairy
 \btime windows\b
+[Tt]imebox
+[Tt]imeboxing
 Tink
 Tinkey
 TLS
@@ -370,6 +375,7 @@ VCS
 Velero
 Viget
 [Vv]irtualized
+Vitest
 VMs?
 VPC
 \bVisual Studio\b

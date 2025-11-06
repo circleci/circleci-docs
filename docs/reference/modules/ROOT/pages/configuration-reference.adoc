@@ -341,6 +341,11 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | Map
 | Options for the <<macos,macOS executor>>
 
+| `executor`
+| Y ^(1)^
+| String
+| Name of a declared <<executors,reusable executor>>
+
 | `shell`
 | N
 | String
@@ -1676,7 +1681,7 @@ A special step used to check out source code to the configured `path` (defaults 
 | `method`
 | N
 | String
-| Checkout method. Valid options include `blobless` and `full`. (default: `full`)
+| Checkout method. Valid options include `blobless` and `full`. (default: `blobless`)
 
 | `path`
 | N
@@ -3301,11 +3306,6 @@ includes:
 | None
 | is truthy
 | `true`/`42`/`"a string"`
-
-| YAML alias
-| None
-| resolves to a truthy value
-| *my-alias
 
 | xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
 | None
