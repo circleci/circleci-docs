@@ -17,7 +17,9 @@ Inside the application, you will find the features including the following:
 
 This page is not an exhaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
-NOTE: Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for xref:integration:github-apps-integration.adoc[GitHub App], xref:integration:gitlab-integration.adoc[GitLab] and xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] projects. For an overview of feature availability for each integration type, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
+Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for `circleci` type organizations. For an overview of feature availability for each organization/integration type, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 == User homepage
 

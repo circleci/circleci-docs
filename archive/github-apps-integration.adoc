@@ -2,6 +2,7 @@
 :page-platform: Cloud
 :page-description: Learn how to integrate CircleCI with GitHub using GitHub Apps.
 :experimental:
+:page-alias: guides:integration:github-apps-integration.adoc
 
 If your CircleCI organization is integrated with GitHub through the **CircleCI GitHub App**, the content on this page is for you.
 

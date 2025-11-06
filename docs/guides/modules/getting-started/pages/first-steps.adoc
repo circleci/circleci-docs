@@ -76,13 +76,7 @@ If you are signing up using an invite from your team, you will be _joining_ an e
 
 NOTE: If you are setting up a project for the first time, you may need to authenticate with your VCS provider. Once you have completed a one-time authentication, you will be able to set up subsequent projects in CircleCI more quickly. Refer to the xref:create-project.adoc[Creating a Project] guide for more information.
 
-Guides for integrating GitHub, Bitbucket, or GitLab projects are available as follows:
-
-- xref:integration:github-apps-integration.adoc[GitHub App integration]
-- xref:integration:github-integration.adoc[GitHub OAuth app integration]
-- xref:integration:bitbucket-integration.adoc[Bitbucket Cloud integration]
-- xref:integration:gitlab-integration.adoc[GitLab integration]
-- xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center integration]
+For a guide to integrating your code with CircleCI, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
 
 [#terms]
 == Terms

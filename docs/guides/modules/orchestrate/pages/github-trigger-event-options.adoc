@@ -129,7 +129,7 @@ Config orchestration tools are available from within your pipelines are as follo
 === Prerequisites
 
 * A CircleCI account. You can sign up for free at link:https://circleci.com/signup/[circleci.com].
-* Your CircleCI account must be linked to a GitHub account, either via xref:integration:github-integration.adoc[GitHub OAuth] or via the xref:integration:github-apps-integration.adoc[CircleCI GitHub App].
+* Your CircleCI account must be linked to a GitHub account, either via GitHub OAuth or via the CircleCI GitHub App.
 * A GitHub App pipeline that you want to trigger when a PR is opened. You can find steps on the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines overview and setup] page.
 
 === Steps

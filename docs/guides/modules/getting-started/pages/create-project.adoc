@@ -25,7 +25,9 @@ NOTE: Using CircleCI server? Use the <<set-up-a-project>> steps below. Rather th
 [#create-a-project]
 === Create a project
 
-NOTE: If you have integrated your code with the xref:integration:github-apps-integration.adoc[CircleCI GitHub App], xref:integration:gitlab-integration.adoc[GitLab], or xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center], the steps in this section apply to you.
+If you are using a `circleci` type organization, the steps in this section apply to you.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 Choose steps to follow below, depending on where your code is stored:
 
