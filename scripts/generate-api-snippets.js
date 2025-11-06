@@ -171,11 +171,11 @@ class CircleCISnippetGenerator {
    */
   getAuthTokenPlaceholder(headerName) {
     const placeholders = {
-      'Circle-Token': 'CIRCLE_TOKEN',
-      'circle-token': 'CIRCLE_TOKEN',
-      'Authorization': 'YOUR_API_TOKEN'
+      'Circle-Token': '$CIRCLE_TOKEN',
+      'circle-token': '$CIRCLE_TOKEN',
+      'Authorization': '$YOUR_API_TOKEN'
     };
-    return placeholders[headerName] || 'YOUR_TOKEN';
+    return placeholders[headerName] || '$YOUR_TOKEN';
   }
 
   /**
@@ -266,6 +266,11 @@ class CircleCISnippetGenerator {
       // Convert to target language using Kong's httpsnippet converters
       let code = snippet.convert(language.target, language.client);
 
+      // Post-process cURL to use double quotes for variable expansion
+      if (language.target === 'shell' && language.client === 'curl') {
+        code = this.fixCurlQuotes(code);
+      }
+
       // Post-process node/fetch to wrap in async function for CommonJS compatibility
       if (language.target === 'node' && language.client === 'fetch') {
         code = this.wrapNodeFetchInAsyncFunction(code);
@@ -314,6 +319,28 @@ class CircleCISnippetGenerator {
     ].join('\n');
 
     return wrappedCode;
+  }
+
+  /**
+   * Fix cURL commands to use double quotes instead of single quotes
+   * This allows shell variable expansion (e.g., $CIRCLE_TOKEN)
+   *
+   * Kong's httpsnippet uses single quotes by default which prevents variable expansion.
+   * We convert single quotes to double quotes and escape special characters.
+   */
+  fixCurlQuotes(code) {
+    // Replace single-quoted strings with double-quoted strings
+    // We need to handle the escaping properly for special characters in double quotes
+    return code.replace(/'([^']*)'/g, (match, content) => {
+      // In double quotes, we need to escape: $ ` " \ and newlines
+      // But we WANT to keep $ unescaped for variable expansion
+      let escaped = content
+        .replace(/\\/g, '\\\\')  // Escape backslashes first
+        .replace(/"/g, '\\"')     // Escape double quotes
+        .replace(/`/g, '\\`');    // Escape backticks
+
+      return `"${escaped}"`;
+    });
   }
 
   /**
