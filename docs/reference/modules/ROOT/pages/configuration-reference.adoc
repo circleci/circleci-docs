@@ -1681,7 +1681,7 @@ A special step used to check out source code to the configured `path` (defaults 
 | `method`
 | N
 | String
-| Checkout method. Valid options include `blobless` and `full`. (default: `full`)
+| Checkout method. Valid options include `blobless` and `full`. (default: `blobless`)
 
 | `path`
 | N
