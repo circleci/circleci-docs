@@ -152,22 +152,38 @@ async function main() {
     ]
   });
 
-  const page = await browser.newPage();
-
-  // Set viewport to desktop size
-  await page.setViewport({ width: 1200, height: 800 });
-
   const allOverflows = [];
-  let checkedCount = 0;
 
-  for (const file of filesWithTables) {
-    checkedCount++;
-    if (checkedCount % 20 === 0) {
-      console.log(`Progress: ${checkedCount}/${filesWithTables.length} files checked...`);
-    }
+  // Process files in parallel batches for speed
+  const PARALLEL_PAGES = 5; // Check 5 pages at once
+  const batches = [];
+  for (let i = 0; i < filesWithTables.length; i += PARALLEL_PAGES) {
+    batches.push(filesWithTables.slice(i, i + PARALLEL_PAGES));
+  }
 
-    const overflows = await checkPage(page, file);
-    allOverflows.push(...overflows);
+  console.log(`Processing ${batches.length} batches of up to ${PARALLEL_PAGES} files in parallel...\n`);
+
+  for (let i = 0; i < batches.length; i++) {
+    const batch = batches[i];
+
+    // Create multiple pages and check them in parallel
+    const batchResults = await Promise.all(
+      batch.map(async (file) => {
+        const page = await browser.newPage();
+        // Set viewport to wide desktop (1600px) so doc container gets full width
+        await page.setViewport({ width: 1600, height: 800 });
+        const result = await checkPage(page, file);
+        await page.close();
+        return result;
+      })
+    );
+
+    // Flatten results
+    batchResults.forEach(result => allOverflows.push(...result));
+
+    // Progress update
+    const checkedCount = Math.min((i + 1) * PARALLEL_PAGES, filesWithTables.length);
+    console.log(`Progress: ${checkedCount}/${filesWithTables.length} files checked...`);
   }
 
   await browser.close();
