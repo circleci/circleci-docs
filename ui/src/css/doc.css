@@ -385,6 +385,19 @@
   border-bottom: 1px solid #D4D4D4;
 }
 
+/* Default: All tables get scroll behavior */
+.doc table.tableblock {
+  display: block;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+/* Opt-out class for narrow tables that don't need scroll */
+.doc .table-no-scroll table.tableblock {
+  overflow-x: visible;
+}
+
+/* Legacy .table-scroll wrapper support (keep for backwards compatibility) */
 .doc .table-scroll {
   overflow-x: auto;
   margin: 1.5rem 0;
@@ -393,6 +406,7 @@
 .doc .table-scroll table.tableblock {
   min-width: 100%;
   width: auto;
+  margin: 0; /* Reset margin since wrapper has it */
 }
 
 .doc table.grid-all > * > tr > * {

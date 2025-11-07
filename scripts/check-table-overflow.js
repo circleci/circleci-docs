@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Check for tables that overflow their container width
+ * Find narrow tables that don't need .table-scroll wrappers
  * Requires: puppeteer
  * Usage: node scripts/check-table-overflow.js [build-dir]
  */
@@ -65,10 +65,10 @@ async function checkPage(page, filePath) {
     return [];
   }
 
-  // Extract table overflow data
+  // Extract table data - looking for narrow tables with scroll wrappers
   const results = await page.evaluate(() => {
     const tables = document.querySelectorAll('.doc table');
-    const overflows = [];
+    const narrowTables = [];
 
     tables.forEach((table, index) => {
       // Get the containing article or .doc container
@@ -91,33 +91,37 @@ async function checkPage(page, filePath) {
       // Check if in scrollable wrapper
       let parent = table.parentElement;
       let hasScrollWrapper = false;
+      let scrollWrapperClass = '';
       while (parent && parent !== container) {
         const overflow = window.getComputedStyle(parent).overflowX;
         if (overflow === 'auto' || overflow === 'scroll') {
           hasScrollWrapper = true;
+          scrollWrapperClass = parent.className;
           break;
         }
         parent = parent.parentElement;
       }
 
-      const isOverflowing = tableWidth > containerWidth;
+      // Table is narrow enough that it doesn't need scroll wrapper
+      const widthPercent = Math.round((tableWidth / containerWidth) * 100);
+      const isNarrow = tableWidth < containerWidth * 0.95; // Less than 95% of container
 
-      if (isOverflowing) {
-        overflows.push({
+      // Flag narrow tables that have unnecessary scroll wrappers
+      if (isNarrow && hasScrollWrapper) {
+        narrowTables.push({
           tableIndex: index + 1,
           pageTitle,
           tableWidth: Math.round(tableWidth),
           containerWidth: Math.round(containerWidth),
-          overflow: Math.round(tableWidth - containerWidth),
-          overflowPercent: Math.round(((tableWidth - containerWidth) / containerWidth) * 100),
+          widthPercent,
           columnCount,
-          hasScrollWrapper,
+          scrollWrapperClass,
           tableClasses: table.className
         });
       }
     });
 
-    return overflows;
+    return narrowTables;
   });
 
   return results.map(r => ({
@@ -152,7 +156,7 @@ async function main() {
     ]
   });
 
-  const allOverflows = [];
+  const allNarrowTables = [];
 
   // Process files in parallel batches for speed
   const PARALLEL_PAGES = 5; // Check 5 pages at once
@@ -170,8 +174,8 @@ async function main() {
     const batchResults = await Promise.all(
       batch.map(async (file) => {
         const page = await browser.newPage();
-        // Set viewport to wide desktop (1600px) so doc container gets full width
-        await page.setViewport({ width: 1600, height: 800 });
+        // Set viewport to desktop size (1200px)
+        await page.setViewport({ width: 1200, height: 800 });
         const result = await checkPage(page, file);
         await page.close();
         return result;
@@ -179,7 +183,7 @@ async function main() {
     );
 
     // Flatten results
-    batchResults.forEach(result => allOverflows.push(...result));
+    batchResults.forEach(result => allNarrowTables.push(...result));
 
     // Progress update
     const checkedCount = Math.min((i + 1) * PARALLEL_PAGES, filesWithTables.length);
@@ -190,64 +194,51 @@ async function main() {
 
   console.log(`\n✅ Checked ${filesWithTables.length} files with tables\n`);
 
-  if (allOverflows.length === 0) {
-    console.log('🎉 No overflowing tables found!\n');
+  if (allNarrowTables.length === 0) {
+    console.log('🎉 All tables are either wide (need scroll) or already unwrapped!\n');
     return;
   }
 
-  // Sort by overflow amount (worst first)
-  allOverflows.sort((a, b) => b.overflow - a.overflow);
+  // Sort by width percent (narrowest first - most obvious candidates)
+  allNarrowTables.sort((a, b) => a.widthPercent - b.widthPercent);
 
-  console.log(`❌ Found ${allOverflows.length} overflowing tables:\n`);
+  console.log(`📋 Found ${allNarrowTables.length} narrow tables with scroll wrappers:\n`);
   console.log('═'.repeat(80) + '\n');
+  console.log('These tables are narrow enough that the .table-scroll wrapper can be removed.\n');
 
   // Group by file
   const byFile = {};
-  allOverflows.forEach(item => {
+  allNarrowTables.forEach(item => {
     if (!byFile[item.file]) {
       byFile[item.file] = [];
     }
     byFile[item.file].push(item);
   });
 
-  Object.keys(byFile).forEach(file => {
+  Object.keys(byFile).sort().forEach(file => {
     console.log(`📄 ${file}`);
     console.log(`   Page: ${byFile[file][0].pageTitle}\n`);
 
     byFile[file].forEach(item => {
       console.log(`   Table ${item.tableIndex}:`);
-      console.log(`   • Columns: ${item.columnCount}`);
-      console.log(`   • Table width: ${item.tableWidth}px`);
+      console.log(`   • Table width: ${item.tableWidth}px (${item.widthPercent}% of container)`);
       console.log(`   • Container width: ${item.containerWidth}px`);
-      console.log(`   • Overflow: ${item.overflow}px (${item.overflowPercent}% too wide)`);
-      console.log(`   • Has scroll wrapper: ${item.hasScrollWrapper ? '✓ YES' : '✗ NO'}`);
-      if (!item.hasScrollWrapper) {
-        console.log(`   ⚠️  FIX NEEDED: Wrap in .table-scroll div`);
-      }
+      console.log(`   • Columns: ${item.columnCount}`);
+      console.log(`   • Scroll wrapper: ${item.scrollWrapperClass}`);
+      console.log(`   💡 SAFE TO REMOVE: Table is only ${item.widthPercent}% of container width`);
       console.log();
     });
     console.log('─'.repeat(80) + '\n');
   });
 
   // Summary
-  const withoutScroll = allOverflows.filter(t => !t.hasScrollWrapper);
-  const maxOverflow = Math.max(...allOverflows.map(t => t.overflow));
+  const veryNarrow = allNarrowTables.filter(t => t.widthPercent < 80);
 
   console.log('📊 Summary:');
-  console.log(`   Total overflowing tables: ${allOverflows.length}`);
-  console.log(`   Without scroll wrapper: ${withoutScroll.length}`);
-  console.log(`   Maximum overflow: ${maxOverflow}px`);
+  console.log(`   Tables with unnecessary scroll wrappers: ${allNarrowTables.length}`);
+  console.log(`   Very narrow (<80% width): ${veryNarrow.length} (definitely safe to remove)`);
   console.log();
-
-  if (withoutScroll.length > 0) {
-    console.log('⚠️  ACTION REQUIRED:');
-    console.log(`   ${withoutScroll.length} table(s) need to be wrapped in a .table-scroll container\n`);
-
-    // Exit with error if tables overflow without scroll wrapper
-    process.exit(1);
-  }
-
-  console.log('✅ All overflowing tables have scroll wrappers\n');
+  console.log('💡 These scroll wrappers can be removed to improve appearance.\n');
 }
 
 main().catch(err => {

@@ -64,23 +64,6 @@ jobs:
       - notify_error:
           message: "Build job failed for branch ${CIRCLE_BRANCH}"
 
-  check-table-overflow:
-    docker:
-      - image: cimg/node:22.20.0-browsers
-    working_directory: ~/project
-    steps:
-      - checkout
-      - attach_workspace:
-          at: .
-      - run:
-          name: Install Node Dependencies
-          command: npm ci
-      - run:
-          name: Check for overflowing tables
-          command: npm run check-tables
-      - notify_error:
-          message: "Table overflow check failed for branch ${CIRCLE_BRANCH}"
-
   validate:
     executor: go_executor
     steps:
@@ -127,11 +110,6 @@ workflows:
           context:
             - circleci-docs-static
       - build:
-          filters: pipeline.git.branch != "main"
-
-      - check-table-overflow:
-          requires:
-            - build
           filters: pipeline.git.branch != "main"
 
       - validate:
