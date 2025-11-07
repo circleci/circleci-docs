@@ -65,7 +65,9 @@ jobs:
           message: "Build job failed for branch ${CIRCLE_BRANCH}"
 
   check-table-overflow:
-    executor: node_executor
+    docker:
+      - image: cimg/node:22.20.0-browsers
+    working_directory: ~/project
     steps:
       - checkout
       - attach_workspace:
