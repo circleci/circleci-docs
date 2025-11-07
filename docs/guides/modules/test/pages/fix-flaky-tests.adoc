@@ -435,4 +435,4 @@ No, CircleCI does not store your source code or use it for training purposes. Ch
 
 === How long are Chunk's logs stored?
 
-Chunks logs are stored by CircleCI for 90 days. 90 days is a fixed retention period that applies to all organizations, link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[regardless of your plan’s standard data retention policy, window=_blank]. After 90 days, logs are automatically deleted to keep your workspace at optimal performance.
+Chunk's logs are stored by CircleCI for 90 days. 90 days is a fixed retention period that applies to all organizations, link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[regardless of your plan’s standard data retention policy, window=_blank]. After 90 days, logs are automatically deleted to keep your workspace at optimal performance.
