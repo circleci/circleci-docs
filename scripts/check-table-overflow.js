@@ -44,6 +44,15 @@ function findHtmlFiles(dir) {
 }
 
 /**
+ * Quick check if file contains tables (without parsing)
+ */
+function hasTables(filePath) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  // Quick string check - much faster than parsing
+  return content.includes('<table') && content.includes('class="doc');
+}
+
+/**
  * Check a single page for overflowing tables
  */
 async function checkPage(page, filePath) {
@@ -120,8 +129,18 @@ async function checkPage(page, filePath) {
 async function main() {
   console.log('🔍 Starting table overflow check with Puppeteer...\n');
 
-  const htmlFiles = findHtmlFiles(buildDir);
-  console.log(`Found ${htmlFiles.length} HTML files to check\n`);
+  const allHtmlFiles = findHtmlFiles(buildDir);
+  console.log(`Found ${allHtmlFiles.length} HTML files total`);
+
+  // Pre-filter to only files with tables (fast)
+  console.log('Filtering for files with tables...');
+  const filesWithTables = allHtmlFiles.filter(hasTables);
+  console.log(`Found ${filesWithTables.length} files with tables (checking only these)\n`);
+
+  if (filesWithTables.length === 0) {
+    console.log('✅ No tables found in build\n');
+    return;
+  }
 
   // Launch browser
   const browser = await puppeteer.launch({
@@ -141,10 +160,10 @@ async function main() {
   const allOverflows = [];
   let checkedCount = 0;
 
-  for (const file of htmlFiles) {
+  for (const file of filesWithTables) {
     checkedCount++;
-    if (checkedCount % 50 === 0) {
-      console.log(`Progress: ${checkedCount}/${htmlFiles.length} files checked...`);
+    if (checkedCount % 20 === 0) {
+      console.log(`Progress: ${checkedCount}/${filesWithTables.length} files checked...`);
     }
 
     const overflows = await checkPage(page, file);
@@ -153,7 +172,7 @@ async function main() {
 
   await browser.close();
 
-  console.log(`\n✅ Checked ${htmlFiles.length} files\n`);
+  console.log(`\n✅ Checked ${filesWithTables.length} files with tables\n`);
 
   if (allOverflows.length === 0) {
     console.log('🎉 No overflowing tables found!\n');
