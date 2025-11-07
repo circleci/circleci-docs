@@ -9,7 +9,8 @@
     "build:ui": "gulp build:ui",
     "build:api-docs": "gulp build:api-docs",
     "build:docs": "npm run build:ui && gulp build:docs",
-    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh"
+    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh",
+    "check-tables": "node scripts/check-table-overflow.js build"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,8 @@
     "@sntke/antora-mermaid-extension": "^0.0.8",
     "browser-sync": "^3.0.4",
     "gulp": "^5.0.0",
-    "httpsnippet": "^3.0.9"
+    "httpsnippet": "^3.0.9",
+    "puppeteer": "^23.0.0"
   },
   "dependencies": {
     "@asciidoctor/tabs": "^1.0.0-beta.6",
