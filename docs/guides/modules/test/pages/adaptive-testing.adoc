@@ -20,10 +20,10 @@ Use adaptive testing to run only tests that are impacted by code changes and eve
 
 *Why coverage matters*: In codebases with sparse test coverage, adaptive testing cannot accurately determine which tests cover changed code. This causes the system to default to running all tests, negating the benefits of intelligent test selection.
 
-=== Current Constraints
-* Distributed test architectures where tests run against external services, separate containers, or multiple isolated contexts
+=== Current Friction points
+* Cases where it is difficult to instrument and get coverage from the code you want to test
 * Limited coverage tooling for test frameworks that don't provide native instrumentation or coverage reporting
-* Complex test configurations with non-standard test discovery, custom test runners, or unconventional project structures
+* Complex test configurations
 * End-to-end tests that span multiple repositories or services, making it difficult to map code changes to specific tests
 
 
