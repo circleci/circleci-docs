@@ -61,6 +61,8 @@ image::guides:ROOT:workspaces.png[workflow illustration]
 
 Note the following distinctions between artifacts, caches and workspaces:
 
+[.table-scroll]
+--
 [cols="1,1,2,3", options="header"]
 |===
 | Type | Lifetime | Use | Example
@@ -80,6 +82,7 @@ Note the following distinctions between artifacts, caches and workspaces:
 | Attach the workspace in a downstream container with the `attach_workspace:` step.
 | The `attach_workspace` copies and recreates the entire workspace content when it runs.
 |===
+--
 
 [#artifacts]
 === Artifacts

@@ -319,6 +319,8 @@ does *not* control which tags are used. These tags are chosen and maintained
 by upstream projects. Do not assume that a given tag has the same meaning across
 images.
 
+[.table-scroll]
+--
 [cols="1,1,2,1", options="header"]
 |===
 |Image name |Resources |Usage |Tags
@@ -413,6 +415,7 @@ images.
 |`- image: circleci/rust:[TAG]`
 |https://hub.docker.com/r/circleci/rust/tags?ordering=last_updated[Tags]
 |===
+--
 
 [#next-steps]
 == Next steps

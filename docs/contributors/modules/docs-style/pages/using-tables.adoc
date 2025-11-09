@@ -5,6 +5,9 @@ Use the following format for tables:
 
 [source,adoc]
 ----
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Key
@@ -17,10 +20,13 @@ Use the following format for tables:
 | String
 | Should currently be `2`
 |===
+--
 ----
 
 Looks like:
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Key
@@ -33,6 +39,7 @@ Looks like:
 | String
 | Should currently be `2`
 |===
+--
 
 == Extra wide tables
 

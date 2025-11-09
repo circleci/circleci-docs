@@ -117,6 +117,8 @@ A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 
 *Flags*
 
+[.table-scroll]
+--
 [cols="2,3"]
 |===
 | Flag | Description
@@ -136,6 +138,7 @@ A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 | `namespace`
 | Optional flag to use a namespace value other than default.
 |===
+--
 
 *Example usage:*
 
@@ -162,6 +165,8 @@ A subcommand of `release`. Use the `circleci run release update` command to upda
 
 *Flags*
 
+[.table-scroll]
+--
 [cols="2,3"]
 |===
 | Flag | Description
@@ -169,6 +174,7 @@ A subcommand of `release`. Use the `circleci run release update` command to upda
 | `status`
 | Update the deploy status (values can be `RUNNING`, `SUCCESS`, or `FAILED`).
 |===
+--
 
 *Example usage:*
 
@@ -193,6 +199,8 @@ A subcommand of `release`. The `circleci run release log` command allows you to 
 
 *Flags*
 
+[.table-scroll]
+--
 [cols="2,3"]
 |===
 | Flag | Description
@@ -209,6 +217,7 @@ A subcommand of `release`. The `circleci run release log` command allows you to 
 | `namespace`
 | Optional flag to use a namespace value other than default.
 |===
+--
 
 *Example usage:*
 
@@ -255,6 +264,8 @@ A subcommand of `tests`. Use `circleci tests split` to split grouped tests into 
 
 *Flags*
 
+[.table-scroll]
+--
 [cols="2,3"]
 |===
 | Flag | Description
@@ -280,6 +291,7 @@ A subcommand of `tests`. Use `circleci tests split` to split grouped tests into 
 | `timings-file`
 | JSON file containing historical timing data.
 |===
+--
 
 *Example usage:*
 
@@ -307,6 +319,8 @@ A subcommand of `Tests`. Use `circleci tests glob` to print files matching the g
 NOTE: The available flag for the `glob` subcommand is a pattern, and supports the
 following symbols:
 
+[.table-scroll]
+--
 [cols="2,3"]
 |===
 | Symbol | Description
@@ -326,6 +340,7 @@ following symbols:
 | `{...}`
 | Matches a sequence of characters, if any of the alternatives in braces matches.
 |===
+--
 
 *Example usage:*
 
@@ -350,6 +365,8 @@ A subcommand of `tests`. The `circleci tests run` command splits and runs tests.
 
 *Flags*
 
+[.table-scroll]
+--
 [cols="2,3"]
 |===
 | Flag | Description
@@ -372,6 +389,7 @@ A subcommand of `tests`. The `circleci tests run` command splits and runs tests.
 | `show-counts`
 | Print test file or test class counts to stderr (default `false`).
 |===
+--
 
 *Example usage:*
 
@@ -421,6 +439,8 @@ jobs:
 
 == Global flags
 
+[.table-scroll]
+--
 [cols="2,3"]
 |===
 | Flag | Description
@@ -431,6 +451,7 @@ jobs:
 | `--help`
 | Show help for a command.
 |===
+--
 
 *Example usage for `--verbose`:*
 

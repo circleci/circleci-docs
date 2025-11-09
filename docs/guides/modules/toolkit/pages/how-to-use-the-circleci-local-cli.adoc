@@ -733,6 +733,8 @@ circleci policy logs <policy-name> --owner-id <org-id> [flags]
 
 Note that you can filter results using any combination of the following flags:
 
+[.table-scroll]
+--
 [cols="1,3,2", options="header"]
 |===
 | Flag | Description | Example
@@ -749,6 +751,7 @@ Note that you can filter results using any combination of the following flags:
 | Only include logs for a specific branch.
 | `--branch feature/fixes`
 |===
+--
 
 For full details on the `logs` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_logs.html[CLI docs].
 

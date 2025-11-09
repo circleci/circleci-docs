@@ -62,6 +62,8 @@ To begin creating orbs, you will need to xref:guides:toolkit:local-cli.adoc#inst
 
 Orb CLI commands are scoped to different user permission levels, set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Orb Command | Permission Scope
@@ -81,6 +83,7 @@ Orb CLI commands are scoped to different user permission levels, set by your VCS
 | `circleci orb publish` production version
 | Owner
 |===
+--
 
 [#register-a-namespace]
 === Register a namespace
@@ -123,6 +126,9 @@ $ git branch
 If you have run the `circleci orb init` command, you will automatically be in the `alpha` branch and have a repository with `.circleci` and `src` directories.
 
 .Orb Project Structure
+
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | type | name
@@ -145,6 +151,7 @@ If you have run the `circleci orb init` command, you will automatically be in th
 | File
 | link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[`README.md`]
 |===
+--
 
 [#orb-source]
 ==== Orb source
@@ -152,6 +159,9 @@ If you have run the `circleci orb init` command, you will automatically be in th
 Navigate to the `src` directory to look at the included sections.
 
 .Orb Project `src` Directory
+
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | type | name
@@ -174,6 +184,7 @@ Navigate to the `src` directory to look at the included sections.
 | File
 | link:https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml[`@orb.yml`]
 |===
+--
 
 The directories listed above represent orb components that can be included with your orb. @orb.yml acts as the root of your orb. In addition to the directories representing your orb's YAML components, you will also see a <<scripts,`scripts`>> directory where we can store code we want to inject into our components.
 

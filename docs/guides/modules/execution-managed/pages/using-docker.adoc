@@ -112,6 +112,8 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 
 The table below shows tradeoffs between using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container:
 
+[.table-scroll]
+--
 [cols="2,1,1", options="header"]
 |===
 | Capability | `docker` | `machine`
@@ -164,6 +166,7 @@ The table below shows tradeoffs between using a `docker` image versus an Ubuntu-
 | Yes
 | Yes
 |===
+--
 
 ^(1)^ Some less commonly used execution environments may see up to 90 seconds of start time.
 

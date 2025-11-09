@@ -55,6 +55,8 @@ Once a new major version of CUDA is released, we will begin the deprecation proc
 
 A major version release -- CUDA 12.0:
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Version
@@ -69,9 +71,12 @@ A major version release -- CUDA 12.0:
 | CUDA 10
 | `linux-cuda-10` image deprecated
 |===
+--
 
 A minor version release -- CUDA 11.8:
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Version
@@ -89,6 +94,7 @@ A minor version release -- CUDA 11.8:
 | CUDA 11.2
 | Removed from `linux-cuda-11`
 |===
+--
 
 Once a new even numbered minor version is released, that version will be added and the oldest existing version will be removed, provided that more than 3 minor versions exist.
 

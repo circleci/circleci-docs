@@ -175,6 +175,8 @@ In Semantic versioning, release versions are represented by three integers separ
 [Major].[Minor].[Patch]
 ----
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | SemVer | Description
@@ -188,9 +190,12 @@ In Semantic versioning, release versions are represented by three integers separ
 | Patch
 | Bug fixes.
 |===
+--
 
 When you import an orb, you can pin it to a particular SemVer component.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Imported Version | Description
@@ -207,6 +212,7 @@ When you import an orb, you can pin it to a particular SemVer component.
 | volatile
 | *Not Recommended* Will pull the last published version of the orb, may be useful in testing. Not a part of SemVer versioning.
 |===
+--
 
 To avoid negatively impacting a user's CI process, orb authors should strictly adhere to SemVer versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
 
@@ -295,6 +301,9 @@ All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, f
 NOTE: If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the link:https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack[orb-tools/pack] job.
 
 .Orb Project Structure
+
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | type | name
@@ -314,6 +323,7 @@ NOTE: If you are using the orb development kit, orb packing is handled automatic
 | File
 | link:https://github.com/CircleCI-Public/Orb-Template/blob/main/src/%40orb.yml[@orb.yml]
 |===
+--
 
 In order to _pack_ an orb, an xref:orb-author.adoc#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[commands], xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[jobs], xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[executors], and <<usage-examples,examples>>. Any additional files or folders will be safely ignored.
 

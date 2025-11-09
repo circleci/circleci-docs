@@ -1,3 +1,5 @@
+[.table-scroll]
+--
 [cols=9*, options="header"]
 |===
 | Class | vCPUs | RAM | GPUs | GPU model | GPU Memory (GiB) | Disk Size (GiB)| Cloud | Server
@@ -12,3 +14,4 @@
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 |===
+--

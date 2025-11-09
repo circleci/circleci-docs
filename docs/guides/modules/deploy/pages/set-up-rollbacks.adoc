@@ -9,6 +9,8 @@ Rollbacks allow you to quickly revert your application to a previous stable vers
 
 CircleCI rollbacks support two methods: Rollback by running a custom rollback pipeline or Rollback by workflow re-run. Each method has appropriate use cases, advantages and disadvantages, as follows:
 
+[.table-scroll]
+--
 [options="header", cols="1,1,1,1"]
 |===
 |
@@ -32,6 +34,7 @@ a| * Limited control over rollback process
 a| * Simple systems
 * Need immediate rollback
 |===
+--
 
 == Prerequisites
 

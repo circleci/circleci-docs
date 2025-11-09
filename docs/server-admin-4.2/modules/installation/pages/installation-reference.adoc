@@ -152,7 +152,9 @@ nomad:
 == All Helm `values.yaml` options
 
 pass:[<!-- vale off -->]
-[.table.table-striped]
+
+[.table-scroll]
+--
 [cols="4,1,1,2", options="header"]
 |===
 |Key |Type |Default |Description
@@ -913,4 +915,5 @@ deployment.
 |`workflows_conductor_grpc.replicas` |int |`+1+` |Number of replicas to
 deploy for the workflows-conductor-grpc deployment.
 |===
+--
 pass:[<!-- vale on -->]

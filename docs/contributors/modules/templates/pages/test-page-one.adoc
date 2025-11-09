@@ -61,6 +61,8 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 ==== This is a table
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Header text column 1
@@ -75,6 +77,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 |Text for row 2 column 2
 |Text for row 2 column 3
 |===
+--
 
 ==== This is a code block
 
