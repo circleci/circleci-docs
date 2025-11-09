@@ -9,8 +9,7 @@
     "build:ui": "gulp build:ui",
     "build:api-docs": "gulp build:api-docs",
     "build:docs": "npm run build:ui && gulp build:docs",
-    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh",
-    "check-tables": "node scripts/check-table-overflow.js build"
+    "fetch-server-branches": "chmod +x scripts/fetch-server-branches.sh && ./scripts/fetch-server-branches.sh"
   },
   "repository": {
     "type": "git",
