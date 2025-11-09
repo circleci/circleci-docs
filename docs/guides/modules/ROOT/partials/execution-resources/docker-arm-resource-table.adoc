@@ -2,7 +2,7 @@
 ****
 *Arm on Docker* For credit and access information see the link:https://circleci.com/product/features/resource-classes/[Resource classes page]. Resource class access is dependent on your xref:guides:plans-pricing:plan-overview.adoc[Plan]
 
-To find out which CircleCI Docker convenience images support Arm resource classes, you can refer to link:https://hub.docker.com/u/cimg[Docker hub]:
+To find out which CircleCI Docker convenience images support Arm resource classes, you can refer to link:https://hub.docker.com/u/cimg[Docker Hub]:
 
 . Select the image (for example, `cimg/python`).
 . Select the **tags** tab.
