@@ -78,6 +78,12 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | `oidc.circleci.com/project-id`
 | The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
 
+| `oidc.circleci.com/pipeline-id`
+| The unique identifier for the pipeline that triggered this job. Its value is a string containing a UUID identifying the CircleCI pipeline.
+
+| `oidc.circleci.com/org-id`
+| The unique identifier for the organization. Its value is a string containing a UUID identifying the CircleCI organization.
+
 | `oidc.circleci.com/vcs-origin`
 | The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by custom webhooks.
 
