@@ -425,7 +425,7 @@ If you get the following error inside a Chunk task, this indicates that your Ope
 Action required - agent execution error
 The agent ran into an error while executing this task. See our community forum for how to solve this error.
 
-Have feedback or feature requests? Submit them on our [Canny board](https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai) where you can also see what others in the community are requesting.
+Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board] where you can also see what others in the community are requesting.
 
 == Frequently asked questions
 
