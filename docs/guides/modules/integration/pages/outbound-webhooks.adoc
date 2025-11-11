@@ -40,6 +40,8 @@ To configure webhooks within the CircleCI app:
 +
 NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[sample webhook payloads] section of the webhooks reference.
 
+[.table-scroll]
+--
 [cols="2,1,2", options="header"]
 |===
 | Field | Required? | Intent
@@ -64,6 +66,7 @@ NOTE: The test ping event has an abbreviated payload for ease of testing. See fu
 | Y
 | You must select at least one event that will trigger a webhook
 |===
+--
 
 [#communication-protocol]
 == Communication protocol for outbound webhooks
@@ -83,6 +86,8 @@ If you have feedback about timeouts and retries, link:https://circleci.canny.io/
 
 A number of HTTP headers are set on webhooks, as detailed in the table below.
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Header name | Value
@@ -99,6 +104,7 @@ A number of HTTP headers are set on webhooks, as detailed in the table below.
 | `circleci-signature`
 | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.
 |===
+--
 
 [#validate-webhooks]
 == Validate outbound webhooks
@@ -118,6 +124,8 @@ The v1 signature is the HMAC-SHA256 digest of the request body, using the config
 
 Here are some example signatures for given request bodies:
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 | Body | Secret Key | Signature
@@ -134,6 +142,7 @@ Here are some example signatures for given request bodies:
 | `hunter123`
 | `9be2242094a9a8c00c64306f382a7f9d691de910b4a266f67bd314ef18ac49fa`
 |===
+--
 
 The following is an example of how you might validate signatures in Python:
 
@@ -179,6 +188,8 @@ verify_signature(
 
 CircleCI currently offers outbound webhooks for the following events:
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Event type | Description | Potential status | Included sub-entities
@@ -200,6 +211,7 @@ a| * "success"
 * "unauthorized"
 | project, organization, workflow, pipeline, job
 |===
+--
 
 [#next-steps]
 == Next steps

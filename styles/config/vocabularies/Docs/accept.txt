@@ -77,6 +77,7 @@ Certbot
 cgroup
 Chocolatey
 chruby
+[Cc]hunk
 CircleCI\b
 \bCircleCI cloud\b
 \bCircleCI server\b
@@ -162,7 +163,7 @@ GKE
 \bGoogle Container Registry\b
 \bGoogle Play Store\b
 gotestsum
-GPU
+GPUs?
 Gradle
 Grafana
 Gzip
@@ -370,6 +371,7 @@ URLEncoder
 UUID
 UUIDs?
 [Vv]alidator
+vCPUs?
 VCS
 Velero
 Viget

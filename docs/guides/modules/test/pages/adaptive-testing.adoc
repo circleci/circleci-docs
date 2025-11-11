@@ -1,10 +1,11 @@
-= Adaptive testing - Closed preview
+= Adaptive testing
+:page-badge: Preview
 :page-platform: Cloud
 :page-description: This document describes the adaptive testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
 :experimental:
 :page-noindex: true
 
-CAUTION: *Adaptive testing* is available as a closed preview. When the feature is made generally available there will be a cost associated with access and usage.
+CAUTION: *Adaptive testing* is available in closed preview. When the feature is made generally available there will be a cost associated with access and usage.
 
 NOTE: This page is currently in development and will be updated as the feature is developed.
 
@@ -455,6 +456,8 @@ Check the analysis command is creating a coverage file formatted correctly by ru
 
 The following options are available to be defined in the options map in config:
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Options Field|Default|Description
@@ -490,9 +493,12 @@ Any remaining tests will be analysed the next time test analysis is run.
 |Whether the tests should be distributed across a shared queue and fetched across multiple dynamic batches. +
 If a test runner has slow start up time per batch, disabling this can speed up tests.
 |===
+--
 
 The following flags are available to be defined on the `circleci run testsuite` command.
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Flag|Default|Description
@@ -511,6 +517,7 @@ a| * `all` selects and runs all discovered tests, used to run the full test suit
 * `impacted` selects and runs only the tests impacted by a change. +
 * `none` skips running tests, used to skip straight to analysis.
 |===
+--
 
 == 3. Start using adaptive testing
 
