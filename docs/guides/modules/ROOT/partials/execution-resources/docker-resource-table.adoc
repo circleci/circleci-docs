@@ -1,5 +1,7 @@
 NOTE: For credit and access information, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page]. Resource class access is dependent on your xref:guides:plans-pricing:plan-overview.adoc[Plan].
 
+[.table-scroll]
+--
 [cols=5*, options="header"]
 |===
 | Class | vCPUs | RAM | Cloud | Server
@@ -46,3 +48,4 @@ NOTE: For credit and access information, see the link:https://circleci.com/produ
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 |===
+--

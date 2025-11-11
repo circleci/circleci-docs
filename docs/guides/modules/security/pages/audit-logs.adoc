@@ -387,6 +387,8 @@ The following list shows common and important events found in the audit log. Thi
 
 == Audit log fields
 
+[.table-scroll]
+--
 [cols="1,4", options="header"]
 |===
 | Field | Description
@@ -402,3 +404,4 @@ The following list shows common and important events found in the audit log. Thi
 | `success` | A flag to indicate if the action was successful.
 | `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 |===
+--

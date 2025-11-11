@@ -1,6 +1,7 @@
 = Style and voice
 :experimental:
 
+pass:[<!-- vale off -->]
 == Talk confidently and directly
 Use an active voice, talk directly to the reader using simple, direct, clear and confident language. Using active voice helps us to keep instructions as short as possible, and is, in most cases, the quickest way to convey meaning to the reader
 
@@ -18,6 +19,8 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 * Avoid contractions, for example "don't", "you're". They make the content harder for non-native english speakers to read.
 * Do not use time-sentitive language like, "new" or "soon" or "in preview" in main prose. These can get missed when changes are needed. If this language is needed it should be in a banner (admonition) that is clearly there to indicate the time-sensitive nature of the content.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Avoid
@@ -38,6 +41,7 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 | Guys
 | Folks, y’all, people, humans, teammates
 |===
+--
 
 == Talking about CircleCI
 * The CircleCI is referred to as the "web app".
@@ -70,3 +74,4 @@ Assume technical competence but explain concepts clearly and simply. Some concep
 ** Read the setup guide …
 ** Set up your account …
 * **Do use** open source, **not** opensource, or open-source
+pass:[<!-- vale on -->]

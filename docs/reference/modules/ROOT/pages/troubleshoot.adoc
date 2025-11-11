@@ -6,6 +6,9 @@
 This page offers troubleshooting suggestions for the following aspects of CircleCI:
 
 [.table]
+
+[.table-scroll]
+--
 [cols=2*]
 |===
 | <<orbs>>
@@ -15,6 +18,7 @@ This page offers troubleshooting suggestions for the following aspects of Circle
 | <<machine-runner>>
 
 |===
+--
 
 == Orbs
 
