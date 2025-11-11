@@ -5,7 +5,9 @@
 :experimental:
 :page-noindex: true
 
-NOTE: Chunk by CircleCI is currently in closed preview. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+NOTE: Chunk by CircleCI is currently in *closed preview*. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+
+NOTE: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board] where you can also see existing feature requests and vote on them.
 
 Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
 
@@ -336,11 +338,10 @@ You also get a code diff of the proposed fix along with logs of the decision pro
 
 The following table shows the configuration options available when setting up Chunk:
 
-.Chunk configuration options
-
 [.table-scroll]
 --
-[cols=3*]
+.Chunk configuration options
+[cols="1,2,3", options="header"]
 |===
 |Setting |Description |Default
 
@@ -428,8 +429,6 @@ If you get the following error inside a Chunk task, this indicates that your Ope
 [source,shell]
 Action required - agent execution error
 The agent ran into an error while executing this task. See our community forum for how to solve this error.
-
-Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board] where you can also see what others in the community are requesting.
 
 == Frequently asked questions
 
