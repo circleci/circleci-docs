@@ -3,6 +3,7 @@
 :page-description: A short page description goes here
 :experimental:
 
+pass:[<!-- vale off -->]
 ////
 Some notes on attributes
 
@@ -153,3 +154,5 @@ End the tutoral with a conclusion section that summarizes what was covered.
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
 * xref:guides:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 * xref:guides:about-circleci:concepts.adoc[CircleCI concepts]
+
+pass:[<!-- vale on -->]

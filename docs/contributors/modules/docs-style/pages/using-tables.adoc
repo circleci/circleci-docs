@@ -1,5 +1,6 @@
 = Using tables
 
+pass:[<!-- vale off -->]
 == Basic table syntax
 Use the following format for tables:
 
@@ -85,3 +86,4 @@ Looks like:
 == Advanced table options
 
 There are a lot of options for formatting tables, cell, rows, columns. For more information, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs]
+pass:[<!-- vale on -->]

@@ -3,6 +3,7 @@
 :page-description: A page with all components for testing the new docs site.
 :experimental:
 
+pass:[<!-- vale off -->]
 [#introduction]
 == Introduction
 
@@ -115,3 +116,5 @@ workflows:
 *Thing two*:: Definition of thing two.
 
 *Thing three*:: Definition of thing three.
+
+pass:[<!-- vale on -->]
