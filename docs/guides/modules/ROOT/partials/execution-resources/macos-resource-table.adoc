@@ -1,3 +1,5 @@
+[.table-scroll]
+--
 [cols=5*, options="header"]
 |===
 | Class | vCPUs | RAM | Cloud | Server
@@ -42,6 +44,7 @@
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 |===
+--
 
 ****
 *We have deprecated support for all Intel-based macOS resources.*

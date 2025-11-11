@@ -17,6 +17,8 @@ We support the three latest Xcode versions released. In addition, we will always
 
 For example, with Xcode 16 being the latest major version being released:
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Xcode Version | Action
@@ -33,9 +35,12 @@ For example, with Xcode 16 being the latest major version being released:
 | Xcode 13
 | We will retain the last major.minor version
 |===
+--
 
 Future example, when Xcode 26 is released:
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Xcode Version | Action
@@ -55,6 +60,7 @@ Future example, when Xcode 26 is released:
 | Xcode 13
 | Flagged for deprecation, removed entirely when Xcode 26 reaches GA
 |===
+--
 
 Betas of new major versions of Xcode are shipped by Apple during WWDC, which usually occurs in early-mid June each year.
 

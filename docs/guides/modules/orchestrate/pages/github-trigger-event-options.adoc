@@ -68,6 +68,8 @@ The following two pipeline values are available for all GitHub App pipelines. Us
 
 The available GitHub App options for these values are listed in the following table:
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Trigger type
@@ -88,6 +90,7 @@ a| * `opened`
 * `labeled`
 
 |===
+--
 
 All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull request events] also have the following xref:reference:ROOT:variables.adoc#pipeline-values[pipeline values] populated:
 

@@ -1,3 +1,5 @@
+[.table-scroll]
+--
 [cols="1,1,1,2,1,1", options="header"]
 |===
 | Config
@@ -201,3 +203,4 @@ a| `m4pro.medium` +
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11776/manifest.txt[Installed software]
 | link:https://discuss.circleci.com/t/announcing-m1-large-now-available-on-performance-plans/47797/22[Release Notes]
 |===
+--

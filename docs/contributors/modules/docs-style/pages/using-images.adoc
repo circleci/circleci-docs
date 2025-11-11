@@ -2,6 +2,7 @@
 :page-description: Guidelines for using images in CircleCI documentation.
 :experimental:
 
+pass:[<!-- vale off -->]
 This page provides guidelines for using images in CircleCI documentation.
 
 == Guidelines for all images
@@ -110,3 +111,4 @@ sequenceDiagram
     Alice->>Bob: Hello Bob, how are you?
     Bob-->>Alice: Great!
 ....
+pass:[<!-- vale on -->]

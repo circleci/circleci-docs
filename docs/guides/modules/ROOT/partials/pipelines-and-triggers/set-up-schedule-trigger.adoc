@@ -16,6 +16,9 @@ image::guides:ROOT:triggers/set-up-schedule-trigger.png[Schedule triggers web ap
 ** Enter any pipeline parameters that you would like to set when triggering the pipeline. If you enter any new pipeline parameters make sure to also add them to your config file. You can select btn:[Populate from config] to automatically populate the parameters fields from your config file.
 ** Select a trigger frequency and repeat options.
 +
+
+[.table-scroll]
+--
 [options="header",cols="1,2"]
 |===
 |Field |Options
@@ -46,6 +49,7 @@ a|* 1 (once per hour)
 * 11 (every 5.5 minutes)
 * 12 (every 5 minutes)
 |===
+--
 
 . Enable the trigger and select btn:[Save].
 --

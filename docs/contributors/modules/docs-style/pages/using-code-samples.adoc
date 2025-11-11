@@ -1,5 +1,6 @@
 = Using code samples
 
+pass:[<!-- vale off -->]
 * Provide code examples to help with clarity, and to help the reader reproduce the subject matter.
 
 * CircleCI config should always be tested as valid before adding it to docs.
@@ -53,3 +54,4 @@ workflows:
     jobs:
       - hello-job
 ----
+pass:[<!-- vale on -->]
