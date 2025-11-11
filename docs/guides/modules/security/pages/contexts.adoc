@@ -333,6 +333,8 @@ xref:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline values] can be
 
 Job-specific variables are also available to use in expressions, as follows:
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 | name | type | description
@@ -341,6 +343,7 @@ Job-specific variables are also available to use in expressions, as follows:
 | boolean
 | `true` if SSH is enabled for the job, `false` otherwise
 |===
+--
 
 If an expression references a variable that has no value set in the pipeline, the expression will _fail closed_ and prevent use of the context.
 
@@ -364,6 +367,8 @@ The following table shows operator precedence table, from weakest to strongest b
 
 NOTE: All operators are left associative. In practice, you should avoid operator chaining for anything other than `and` or `or`. This is because evaluation may cause type mismatches for other operators (see <<evaluation>>).
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Operator    | Associativity
@@ -386,6 +391,7 @@ NOTE: All operators are left associative. In practice, you should avoid operator
 | `not` `!`
 |
 |===
+--
 
 [#literals]
 === Literals

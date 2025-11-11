@@ -52,6 +52,8 @@ workflows:
 
 A parameter can have the following keys as immediate children:
 
+[.table-scroll]
+--
 [cols="1,2,1", options="header"]
 |===
 | Key Name | Description | Default value
@@ -68,6 +70,7 @@ A parameter can have the following keys as immediate children:
 | The default value for the parameter. Required for pipeline parameters. For all other parameters, if not present, the parameter is implied to be required.
 | N/A
 |===
+--
 
 [#parameter-types]
 === Parameter types
@@ -440,6 +443,8 @@ commands:
 
 A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -459,6 +464,7 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 | String
 | A string that describes the purpose of the command. Used for generating documentation.
 |===
+--
 
 [#invoking-reusable-commands]
 === Invoking reusable commands
@@ -638,6 +644,8 @@ jobs:
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
+[.table-scroll]
+--
 [cols="2,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -677,6 +685,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 | Map
 | A map of environment variable names and values.
 |===
+--
 
 Example:
 
@@ -1148,6 +1157,8 @@ workflows:
 
 Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a truthy value.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1162,12 +1173,15 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 | Sequence
 | A list of steps to execute when the condition is truthy.
 |===
+--
 
 [#the-unless-step]
 === *The `unless` step*
 
 Under the `unless` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a falsy value.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1182,6 +1196,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 | Sequence
 | A list of steps to execute when the condition is falsy.
 |===
+--
 
 [#writing-inline-orbs]
 == Writing inline orbs

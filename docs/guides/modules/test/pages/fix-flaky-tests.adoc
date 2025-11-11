@@ -337,6 +337,9 @@ You also get a code diff of the proposed fix along with logs of the decision pro
 The following table shows the configuration options available when setting up Chunk:
 
 .Chunk configuration options
+
+[.table-scroll]
+--
 [cols=3*]
 |===
 |Setting |Description |Default
@@ -363,6 +366,7 @@ a|* Daily (Sunday through Thursday at 22:00 UTC )
 |Limits the number of pull requests Chunk can have open at one time.
 |1-20 or "Unlimited" (default).
 |===
+--
 
 == Limitations
 
