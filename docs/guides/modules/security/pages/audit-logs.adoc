@@ -239,15 +239,12 @@ The setup steps vary by provider. At a high level you will:
 
 When setting up the OIDC Identity Provider to trust CircleCI, use these parameters:
 
-* **OpenID Configuration URL (Issuer URL):**  
-  `https://oidc.circleci.com/org/<ORG_ID>/.well-known/openid-configuration`  
-  *(Remember to substitute your actual CircleCI Organization ID.)*
+* **OpenID Configuration URL (Issuer URL):** `++https://oidc.circleci.com/org/<ORG_ID>/.well-known/openid-configuration++` +
+(Remember to substitute your actual CircleCI Organization ID.)
 
-* **OpenID Client ID (Audience):**
-    Your **CircleCI Organization ID** (the `<ORG_ID>` value).
+* **OpenID Client ID (Audience):** Your CircleCI Organization ID (the `<ORG_ID>` value).
 
-* **Scope:**
-    Use the standard required scope: `openid`.
+* **Scope:** Use the standard required scope: `openid`.
 
 **Validation and network requirements**:
 
