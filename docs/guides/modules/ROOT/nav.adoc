@@ -18,6 +18,7 @@
 *** xref:getting-started:language-javascript.adoc[Node.js quickstart]
 *** xref:getting-started:language-python.adoc[Python quickstart]
 *** xref:getting-started:language-go.adoc[Go quickstart]
+*** xref:getting-started:create-an-organization.adoc[Create an organization]
 ** Tutorials
 *** xref:getting-started:config-intro.adoc[Configuration intro]
 *** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]

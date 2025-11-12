@@ -10,15 +10,17 @@ This guide explains the concepts of user, organization, and integration in Circl
 
 When you log in to CircleCI you are logging in to your _user account_.
 
-As a CircleCI _user_ you can access _organizations_. You can access zero, one or many organizations. You can create new organizations and/or join an existing organization.
+As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
 
 You can log in to CircleCI using one of the following methods:
 
 * Email and password
 * Social login (GitHub, Bitbucket)
 
-Select your icon in the top bar and select **User settings** to access the following sections:
+Select your icon in the top bar and select **User settings** to access the following:
 
+[.table-scroll]
+--
 .User settings
 [cols="1,2", options="header"]
 |===
@@ -52,6 +54,7 @@ Select your icon in the top bar and select **User settings** to access the follo
 | Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
 
 |===
+--
 
 == Organizations
 
@@ -68,13 +71,61 @@ Each organization has its own settings, including security, integrations, and re
 
 A CircleCI _organization_ can be one of three types:
 
-A CircleCI `circleci` organization:: You can create a `circleci` organization from your user homepage via the btn:[Create organization] button. #create guide to making a new org and link to it - retire support article?#
-A CircleCI `github` organization:: A `github` organization used an OAuth app connection and is created when you log in to CircleCI using your GitHub account, rather than using your email/password or by connecting to GitHub OAuth app via menu:User Settings[Application Integrations].  #do we want to cover setting up one of these?#
-A CircleCI `bitbucket` organization:: A `bitbucket` organization is created when you log in to CircleCI using your Bitbucket account, rather than using your email/password or by connecting to Bitbucket OAuth app via menu:User Settings[Application Integrations].#do we want to cover setting up one of these?#
+A CircleCI `circleci` organization:: This organization type is created separately to any VCS connection between CircleCI and your code repositories. Within a `circleci` organization you create projects and then connect them to your code repositories.
+A CircleCI `github` organization:: A `github` organization uses an OAuth app connection and is created when you log in to CircleCI using your GitHub account. Your GitHub repositories appear as projects that can be set up in CircleCI.
+A CircleCI `bitbucket` organization:: A `bitbucket` organization is created when you log in to CircleCI using your Bitbucket account. Your Bitbucket repositories appear as projects that can be set up in CircleCI.
 
-For a guide to creating an organization, see #Add link when ready#
+For full details on creating organizations, see the xref:getting-started:create-an-organization.adoc[Create an organization] page.
 
-#Org settings table here with tabs for different org types#
+The following organization settings are available:
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Organization settings section | What you will find here
+
+| Overview
+| Org ID and slug, option to rename or delete the organization. Manage technical and security contacts.
+
+| People
+| For `circleci` organizations find a list of organization members and their roles. For all organizations you will find the option to invite new members to the organization.
+
+|Groups
+| `circleci` organizations only. Create and manage groups of org members. You can assign roles to groups to manage permissions.
+
+| Contexts
+| Create and manage contexts to store sensitive information. You can use contexts to store environment variables for your projects.
+
+| VCS Connections
+| View Apps you have installed for your organization: GitHub App and GitHub Checks App.
+
+| Security
+| Orb security settings, you can choose to allow just certified orbs, all orbs, and choose to allow private orbs. Request audit logs and/or set up audit log streaming.
+
+| Policies
+| Find a list of policis that have been created for your organization.
+
+| Advanced
+| Opt in/out of the following: intelligent summaries for build failures, image brownouts, triggering pipelines with unversioned config.
+
+| Orbs
+| For `circleci` organizations you will find your URL orb allow list. FOr `github` and `bitbucket` organizations you will find registry information for orbs that have been authored by your organization.
+
+| Self-hosted runners
+| Set up self-hosted runners for your organization, to build on your own infrastructure.
+
+| Deploys
+| Find information on setting up deploys and/or the release agent.
+
+| Integrations
+| `circleci` organizations only. Integration set up for GitLab self-managed and Bitbucket Data Center.
+
+| Singe sign-on
+| `circleci` organizations on Scale Planonly. Set up SSO for your organization.
+
+|===
+--
 
 == Projects
 
@@ -120,7 +171,63 @@ For `circleci` type organizations, projects are created directly in CircleCI via
 --
 ====
 
-#TODO Insert table of Project Settings for each org type#
+The following project settings are available:
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Project settings section | What you will find here
+
+| Overview
+| Project name, ID, and slug. Option to stop building or delete the project.
+
+| Project setup
+| `circleci` and `github` organizations only. Add and manage pipelines and their triggers. Projects for other organization types will have separate Pipelines and Triggers pages.
+
+| People
+| `circleci` organizations only. Assign project-level roles to your team.
+
+| Deploys
+| Set up deploy markers, rollback pipeline and find information about setting up the release agent for Kubernetes deployments.
+
+| Advanced
+a| Enable/disable various features for the project:
+* GitHub status updates
+* Build forked PRs
+* Pass secrets to forked PRs
+* Only build pull requests
+* Auto-cancel redundant workflows
+* Free and open source
+* Enable dynamic configuration
+* Disable SSH reruns.
+
+| Environment variables
+| Add project environment variables. Youc an add individually or import from another project. You will find a list of project environment variables on this page.
+
+| SSH keys
+| Add deploy and user keys for `github` and `bitbucket` organizations. Add additional SSH keys for your project for all organization types.
+
+| API permissions
+| Create project API tokens. The main use for these tokens is for status badges. Some API v1.1 endpoints support the use of project API tokens too.
+
+| LLMOps
+| Connect your project with an LLM evaluations provider.
+
+| Slack integration
+| Get information on setting up Slack notifications for your project.
+
+| Status badges
+| Generate a code snippet that will display your project's build status in a README or other document.
+
+| Webhooks
+| Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
+
+| Docker layer caching
+| Provides an option to delete your cache contents. If jobs that use DLC continuously fail, this may be due to a corrupted cache. Deleting the cache will force a fresh build and can solve the problem.
+
+|===
+--
 
 == Integration options
 
@@ -158,6 +265,15 @@ The integration options available to you depend on your organization type. By _i
 
 |===
 
+=== Limitations
+
+The following limits are currently in place:
+
+- Each user can create up to three `circleci` organizations.
+- Each `circleci` organization under a Free Plan can have up to 10 projects.
+
+If you need more organizations or projects, consider upgrading to a xref:plans-pricing:plan-overview.adoc[Paid plan], or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team].
+
 == Quickstart
 
 The following links take you to the sections you need to get set up with CircleCI:
@@ -190,7 +306,7 @@ A Bitbucket Cloud integration is built into a `bitbucket` type organization.
 
 You can _disconnect_ your Bitbucket Cloud integration. Doing so will remove your `bitbucket` type organization from CircleCI. To disconnect your Bitbucket Cloud integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your Bitbucket Cloud integration and follow the instructions.
 
-#TODO GITLAB BBDC REMOVAL INSTRUCTIONS?#
+#TODO GITLAB BBDC REMOVAL INSTRUCTIONS? We need equivalent instructions for GitLab SaaS, self-managed and BBDC here#
 
 === Can I integrate a GitHub org with multiple CircleCI orgs?
 
