@@ -511,7 +511,7 @@ If a test runner has slow start up time per batch, disabling this can speed up t
 |.circleci/example-baseline.info
 |Path to a baseline coverage file to subtract from test coverage during analysis. +
 Use this to exclude shared setup or initialization code from test impact data. +
-The baseline file can be in any supported coverage format. While it doesn't need to match your test coverage output format, using the same format (e.g., LCOV format for << outputs.lcov >>) is recommended for consistency.
+The baseline file can be in any supported coverage format. While it doesn't need to match your test coverage output format, using the same format (e.g., LCOV format for << outputs.lcov >>) is recommended for consistency. For more information, refer to "<<baseline-coverage>>".
 |===
 --
 
@@ -806,6 +806,7 @@ Yes! The branch behavior is fully customizable through your CircleCI configurati
 
 See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
 
+[#baseline-coverage]
 === Why are there so many files impact a test?
 
 If you see many files impacting each test during analysis (e.g., "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
