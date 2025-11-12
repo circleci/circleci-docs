@@ -18,7 +18,7 @@ Use adaptive testing to run only tests that are impacted by code changes and eve
 * Projects with comprehensive test coverage - The more thorough your tests, the more precisely adaptive testing can identify which tests are impacted by changes
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest) where generating coverage reports is straightforward
 
-*Why coverage matters*: In codebases with sparse test coverage, adaptive testing cannot accurately determine which tests cover changed code. This causes the system to default to running all tests, negating the benefits of intelligent test selection.
+*Why coverage matters*: In codebases with sparse test coverage, adaptive testing cannot accurately determine which tests cover changed code. This causes the system to run more tests, reducing the benefits of intelligent test selection.
 
 === Current Friction points
 * Cases where it is difficult to instrument and get coverage from the code you want to test
@@ -511,7 +511,7 @@ If a test runner has slow start up time per batch, disabling this can speed up t
 |.circleci/example-baseline.info
 |Path to a baseline coverage file to subtract from test coverage during analysis. +
 Use this to exclude shared setup or initialization code from test impact data. +
-The baseline file should be in the same format as your test coverage output (e.g., LCOV format for `<< outputs.lcov >>`).
+The baseline file can be in any supported coverage format. While it doesn't need to match your test coverage output format, using the same format (e.g., LCOV format for << outputs.lcov >>) is recommended for consistency.
 |===
 
 The following flags are available to be defined on the `circleci run testsuite` command.
@@ -792,14 +792,13 @@ Yes! The branch behavior is fully customizable through your CircleCI configurati
 
 See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
 
-=== Can I run analysis on branches other than main?
+=== Can I run test analysis and selection on any branch?
 
-Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on `main` by default, you can configure it to run on:
+Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis runs on main by default, you can configure it to run on:
 
 . Any specific branch (for example, `develop` or `staging`).
-. Multiple branches simultaneously.
 . Feature branches if needed for testing.
-. Scheduled pipelines independent of branch.
+. Scheduled pipelines.
 
 See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
 
@@ -835,4 +834,4 @@ Adaptive testing is runner-agnostic. We provide default configurations for the f
 * Cypress (E2E testing)
 * Vitest
 
-The key requirement is that your test runner can generate coverage data in a parsable format (typically LCOV or similar).
+The key requirement is that your test runner can generate coverage data in a parsable format (currently, we suppport LCOV and Go's "legacy coverage" format).
