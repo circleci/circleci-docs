@@ -189,6 +189,8 @@ CAUTION: In order to use uncertified registry orbs (partner or community), your 
 
 Orbs in the registry will appear with one of three different namespace designations:
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Designation | Description
@@ -202,6 +204,7 @@ Orbs in the registry will appear with one of three different namespace designati
 | Community
 | Written by the community
 |===
+--
 
 [#public-or-private]
 === Public or private

@@ -367,9 +367,17 @@
 
 .doc table.tableblock th,
 .doc table.tableblock td {
-  padding: 0.5rem;
+  padding: 1rem;
   border-bottom: 1px solid #D4D4D4;
-  min-width: 90px;
+  min-width: 100px;
+}
+
+.doc table.tableblock th {
+  font-size: 18px;
+}
+
+.doc table.tableblock td {
+  font-size: 16px;
 }
 
 .doc table.tableblock,
@@ -1379,7 +1387,7 @@
 .doc dl,
 .doc table {
   margin: 0 0 1rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* inline links pick up the new blue */

@@ -26,6 +26,8 @@ For a complete list of all API v2 endpoints, refer to the link:../../../api/v2/[
 
 With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Endpoint | Description
@@ -39,6 +41,7 @@ With API v2, several endpoints from v1 have been deprecated, which are listed in
 | `GET /recent-builds`
 | This endpoint enabled users to retrieve an array of recent builds.
 |===
+--
 
 [#next-steps]
 == Next steps

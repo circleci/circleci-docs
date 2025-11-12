@@ -470,6 +470,8 @@ Check the analysis command is creating a coverage file formatted correctly by ru
 
 The following options are available to be defined in the options map in config:
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Options Field|Default|Description
@@ -511,9 +513,12 @@ If a test runner has slow start up time per batch, disabling this can speed up t
 Use this to exclude shared setup or initialization code from test impact data. +
 The baseline file can be in any supported coverage format. While it doesn't need to match your test coverage output format, using the same format (e.g., LCOV format for << outputs.lcov >>) is recommended for consistency.
 |===
+--
 
 The following flags are available to be defined on the `circleci run testsuite` command.
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Flag|Default|Description
@@ -532,6 +537,7 @@ a| * `all` selects and runs all discovered tests, used to run the full test suit
 * `impacted` selects and runs only the tests impacted by a change. +
 * `none` skips running tests, used to skip straight to analysis.
 |===
+--
 
 == 3. Start using adaptive testing
 
