@@ -64,10 +64,7 @@ a| `m4pro.medium` +
 | `16.1.0`
 | Xcode 16.1 (16B40)
 | 14.6.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -77,10 +74,7 @@ a| `m4pro.medium` +
 | `16.0.0`
 | Xcode 16.0 (16A242d)
 | 14.6.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -102,10 +96,7 @@ a| `m4pro.medium` +
 | `15.3.0`
 | Xcode 15.3 (15E204a)
 | 14.3.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -115,10 +106,7 @@ a| `m4pro.medium` +
 | `15.2.0`
 | Xcode 15.2 (15C500b)
 | 14.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -128,10 +116,7 @@ a| `m4pro.medium` +
 | `15.1.0`
 | Xcode 15.1 (15C65)
 | 14.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -193,10 +178,7 @@ a| `m2pro.medium` +
 | `13.4.1`
 | Xcode 13.4.1 (13F100)
 | 12.6.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
