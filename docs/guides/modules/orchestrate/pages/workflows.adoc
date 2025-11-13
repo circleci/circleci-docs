@@ -922,6 +922,8 @@ stateDiagram-v2
 
 Workflows may have one of the following states:
 
+[.table-scroll]
+--
 [cols="2,2,1", options="header"]
 |===
 | State | Description | Terminal state
@@ -963,6 +965,7 @@ Workflows may have one of the following states:
 | No
 
 |===
+--
 
 NOTE: After 90 days non-terminal workflows are automatically cancelled by CircleCI.
 

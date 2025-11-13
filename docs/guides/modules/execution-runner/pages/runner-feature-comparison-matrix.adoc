@@ -8,6 +8,8 @@ This page offers a comparison of the features available for CircleCI machine run
 [#feature-comparison-matrix]
 == Comparison matrix
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 |Feature
@@ -65,6 +67,7 @@ This page offers a comparison of the features available for CircleCI machine run
 |Working directory cleanup
 |Container lifecycle
 |===
+--
 
 
 [#feature-highlights]
