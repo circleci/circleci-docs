@@ -808,7 +808,7 @@ See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing
 [#baseline-coverage]
 === Why are there so many files impacting a test?
 
-If you see many files impacting each test during analysis (e.g., "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
+If you see many files impacting each test during analysis (for example, "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
 
 *Solution: Use a coverage baseline to exclude setup code*
 
