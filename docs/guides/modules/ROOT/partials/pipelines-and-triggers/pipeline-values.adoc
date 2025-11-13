@@ -495,7 +495,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.sender.type`
 d| [.nowrap]#GitHub App#
 | String
-| The type of GitHub user who triggered the pipeline. Possible values are `User`, `Organization` and `Bot`.
+| The type of GitHub user that emitted the event triggering the pipeline. Possible values are `User`, `Organization`, and `Bot`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
