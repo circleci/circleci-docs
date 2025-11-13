@@ -80,7 +80,7 @@
 
 .tabpanel {
   background-color: #fff;
-  padding: 1.25em 0;
+  padding: 2.5em 0 1.25em 0;
 }
 
 .tabs.is-loading .tabpanel + .tabpanel,

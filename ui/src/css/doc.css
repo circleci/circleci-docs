@@ -313,6 +313,14 @@
   margin: 1rem 0 0;
 }
 
+.doc .openblock.tabs {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
+.doc .imageblock {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
 .doc > table.tableblock,
 .doc > table.tableblock + *,
 .doc .tablecontainer,
