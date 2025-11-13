@@ -24,6 +24,7 @@ TIP: In codebases with sparse test coverage, adaptive testing cannot accurately 
 * Generating code coverage data is essential for determining how tests are related to code. If tests are run in a way that makes generating and accessing code coverage data tricky then adaptive testing may not be a good fit.
 * Adaptive testing needs to be configured with commands to discover all available tests and run a subset of those tests. If you cannot run commands to discover tests and run a subset of tests on the CLI then adaptive testing may not be a good fit.
 * Adaptive testing works best when testing a single deployable unit. A monorepo which performs integration tests across many packages at once may not be a good fit.
+
 == Key benefits:
 
 * Faster CI/CD pipelines through intelligent test selection.
