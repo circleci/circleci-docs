@@ -33,6 +33,8 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 
 === Code checkout and repository integration
 
+[.table-scroll]
+--
 [cols="3,1,1,1,1,1,1,1", options="header"]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
@@ -91,6 +93,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 |===
+--
 
 ^1^ _Possible using xref:orchestrate:dynamic-config.adoc[dynamic configuration]._
 
@@ -103,6 +106,8 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 
 === Pipeline triggers and integrations
 
+[.table-scroll]
+--
 [cols="3,1,1,1,1,1,1,1", options="header"]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
@@ -116,8 +121,8 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref:orchestrate:scheduled-pipelines.adoc[Scheduled pipelines]
-| [.circle-red]#**No** ^1^#
+| xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
+| [[.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
@@ -161,6 +166,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 |===
+--
 
 ^1^ _One alternative is to use a xref:orchestrate:custom-webhooks.adoc[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
 
@@ -172,6 +178,8 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 
 === Core capabilities
 
+[.table-scroll]
+--
 [cols="3,1,1,1,1,1,1,1", options="header"]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
@@ -284,9 +292,12 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-green]#**Yes**#
 
 |===
+--
 
 === Security and permissions
 
+[.table-scroll]
+--
 [cols="3,1,1,1,1,1,1,1", options="header"]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
@@ -335,9 +346,12 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 |===
+--
 
 === Open source support
 
+[.table-scroll]
+--
 [cols="3,1,1,1,1,1,1,1", options="header"]
 |===
 | Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
@@ -369,3 +383,4 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-green]#**Yes**#
 
 |===
+--

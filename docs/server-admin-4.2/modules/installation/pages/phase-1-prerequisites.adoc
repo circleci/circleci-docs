@@ -16,8 +16,9 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 == 1. Install required software
 Download and install the following software before continuing:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=4*, options="header"]
 |===
 | Tool
 | Version
@@ -44,6 +45,7 @@ Download and install the following software before continuing:
 | Helping with `values.yaml` changes and updates
 | Optional, but may help with troubleshooting between releases
 |===
+--
 
 // Don't include this section in the GCP PDF.
 
@@ -78,8 +80,9 @@ endif::env-aws[]
 == 2. Create a Kubernetes cluster
 CircleCI server installs into an existing Kubernetes cluster. The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
 
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=5*, options="header"]
 |===
 | Number of daily active CircleCI users
 | Minimum Nodes
@@ -99,6 +102,7 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 | 240 GB
 | 10 Gbps
 |===
+--
 
 [#vpc-cluster-sizing-recommendations]
 === VPC and cluster sizing recommendations
@@ -116,8 +120,9 @@ For high availability, and to avoid potential outages, you should provision subn
 [#supported-kubernetes-versions]
 === Supported Kubernetes versions
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | CircleCI Version
 | Kubernetes Version
@@ -125,6 +130,7 @@ For high availability, and to avoid potential outages, you should provision subn
 | 4.2.x
 | 1.22 - 1.28
 |===
+--
 
 [#minimum-permissions-requirments]
 === Minimum permissions requirements

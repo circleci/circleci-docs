@@ -46,12 +46,11 @@ asciidoc:
     serverversion43: 4.3.9
     serverversion44: 4.4.7
     serverversion45: 4.5.5
-    serverversion46: 4.6.2
-    serverversion47: 4.7.0
-    serverversion48: 4.8.0
+    serverversion46: 4.6.6
+    serverversion47: 4.7.11
+    serverversion48: 4.8.4
     serverversion: 3.4.8
     terraformversion: 0.15.4
-    kubernetesversions: 1.26 - 1.31
     kubectlversion: 1.19
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
@@ -65,3 +64,20 @@ urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
   html_extension_style: indexify
+antora:
+  extensions:
+  - require: ./extensions/unlisted-pages-extension.js
+    allowedUnlistedPages:
+      - 'test:adaptive-testing.adoc'
+      - 'test:fix-flaky-tests.adoc'
+  - require: '@sntke/antora-mermaid-extension'
+    mermaid_initialize_options:
+      start_on_load: true
+      theme: base
+      security_level: loose
+      theme_variables:
+        primary_color: '#E3F5E5'
+        background: '#E3F5E5'
+        line_color: '#B4B8C6'
+        primary_border_color: '#008542'
+        primary_text_color: '#00381A'

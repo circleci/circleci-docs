@@ -13,7 +13,7 @@
 .toc .toc-menu h3 {
   color: var(--toc-heading-font-color);
   font-size: large;
-  font-weight: 400;
+  font-weight: 500;
   font-family: 'Inter', sans-serif;
   line-height: 1.3;
   margin: 0 -0.5px;
@@ -26,6 +26,12 @@
   height: 2.5rem;
   justify-content: flex-end;
   margin-bottom: 1.2rem;
+}
+
+@media screen and (max-width: 1023.5px) {
+  .toc.embedded .toc-menu h3 {
+    margin-bottom: 1.25rem;
+  }
 }
 
 .toc .toc-menu ul {
@@ -76,7 +82,7 @@
 .toc .toc-menu a {
   font-family: 'Inter', sans-serif;
   font-size: medium;
-  font-weight: 300;
+  font-weight: 400;
   color: inherit;
   border-left: 1px solid var(--toc-border-color);
   display: inline-block;
@@ -94,6 +100,10 @@
 .sidebar.toc .toc-menu a {
   display: block;
   outline: none;
+}
+
+.toc.embedded .toc-menu a {
+  display: block;
 }
 
 .toc .toc-menu a:hover {

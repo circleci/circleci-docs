@@ -7,6 +7,11 @@ body.-toc aside.toc.sidebar {
     display: none;
   }
 
+  aside.toc.embedded {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
   main > div {
     overflow-x: auto;
     max-width: 100vw;
@@ -22,7 +27,23 @@ body.-toc aside.toc.sidebar {
   main > div {
     display: flex;
   }
+}
 
+/* Tablet view (1024px - 1199px): Show embedded TOC, hide sidebar TOC */
+@media screen and (min-width: 1024px) and (max-width: 1199.5px) {
+  aside.toc.sidebar {
+    display: none;
+  }
+
+  aside.toc.embedded {
+    display: block;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Desktop view (1200px+): Show sidebar TOC, hide embedded TOC */
+@media screen and (min-width: 1200px) {
   aside.toc.embedded {
     display: none;
   }

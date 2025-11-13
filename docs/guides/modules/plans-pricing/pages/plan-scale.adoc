@@ -25,11 +25,11 @@ For more information about these resources, refer to the xref:execution-managed:
 
 [#custom-concurrency]
 === Custom concurrency
-Customize the amount of jobs you need to run concurrently. This customization is available on all build configurations and execution environments. See <<#concurrency,Concurrency>> below for more information.
+Customize the number of jobs you need to run concurrently. This customization is available on all build configurations and execution environments. See <<#concurrency,Concurrency>> below for more information.
 
 [#custom-user-seat-count]
 === Custom user seat count
-Customize the amount of active users based on your needs.
+Customize the number of active users based on your needs.
 
 [#unlimited-self-hosted-runners]
 === Unlimited self-hosted runners

@@ -1,6 +1,6 @@
 = Deployment and deploy management overview
 :page-aliases: deploys-overview.adoc, deploy:deploy-to-amazon-sagemaker.adoc
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud
 :page-description: Learn the basics of deployment and deploys management with CircleCI.
 :experimental:
 
@@ -253,6 +253,8 @@ To view all commands run for a component, follow these steps:
 
 A deployment can be in one of the following states:
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 |Status
@@ -276,3 +278,4 @@ A deployment can be in one of the following states:
 |LOGGED
 |Deployment has been logged using a deploy marker and is available in the CircleCI deploys UI.
 |===
+--

@@ -7,6 +7,12 @@
   padding: 0 1rem 4rem;
 }
 
+@media screen and (max-width: 1023.5px) {
+  .doc {
+    padding: 0 32px 4rem;
+  }
+}
+
 @media screen and (min-width: 1024px) {
   .doc {
     flex: auto;
@@ -73,10 +79,12 @@
 
   .doc h2 {
     font-size: 20px;
+    margin-bottom: 24px;
   }
 
   .doc h3 {
     font-size: 18px;
+    margin-top: 20px;
   }
 
   .doc h4 {
@@ -86,8 +94,16 @@
 
 /* Special case: Page title gets extra top margin on larger screens */
 @media screen and (min-width: 768px) {
-  .doc > h1.page:first-child {
-    margin-top: 2.5rem;
+  .doc h1.page {
+    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
+    margin-bottom: calc(32 / var(--rem-base) * 1rem); /* 32px */
+  }
+
+  /* Section headings should have 40px top margin */
+  .doc h2,
+  .doc h3,
+  .doc h4 {
+    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
   }
 }
 
@@ -351,8 +367,17 @@
 
 .doc table.tableblock th,
 .doc table.tableblock td {
-  padding: 0.5rem;
+  padding: 1rem;
   border-bottom: 1px solid #D4D4D4;
+  min-width: 100px;
+}
+
+.doc table.tableblock th {
+  font-size: 18px;
+}
+
+.doc table.tableblock td {
+  font-size: 16px;
 }
 
 .doc table.tableblock,
@@ -964,7 +989,6 @@
 }
 
 /* NEEDS REVIEW prevent pre in table from causing article to exceed bounds */
-.doc table.tableblock pre,
 .doc .listingblock.wrap pre {
   white-space: pre-wrap;
 }
@@ -981,11 +1005,6 @@
   color: #FFFFFF;
   max-width: 100%;
   box-sizing: border-box;
-}
-
-/* Hide line numbers for code blocks with role="no-numbers" */
-.doc .no-numbers .hljs-ln-numbers {
-  display: none !important;
 }
 
 /* Remove border from code block table cells when inside regular tables */
@@ -1368,7 +1387,7 @@
 .doc dl,
 .doc table {
   margin: 0 0 1rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* inline links pick up the new blue */
@@ -1440,3 +1459,55 @@
   color: #8F001C !important;
   font-weight: var(--heading-font-weight);
 }
+
+/* Prevent inline code text from wrapping in table cells */
+td .pre,
+td .code,
+td p code,
+td li code,
+.tableblock p code,
+.tableblock li code {
+  white-space: nowrap !important;
+}
+
+/* Ensure code blocks in tables preserve formatting */
+.doc .tableblock .listingblock pre,
+.doc .tableblock .listingblock code,
+.doc td .listingblock pre,
+.doc td .listingblock code {
+  white-space: pre !important;
+}
+
+/* === MERMAID DIAGRAM STYLES === */
+
+/* Basic container styling */
+.doc .mermaid {
+  text-align: center;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+/* Responsive sizing */
+.doc .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  cursor: default; /* Prevent zoom cursor on hover */
+}
+
+/* Prevent zoom cursor on mermaid diagrams */
+.doc .mermaid,
+.doc .mermaid *,
+.doc .imageblock .mermaid,
+.doc .imageblock .mermaid *,
+.doc .imageblock .content .mermaid,
+.doc .imageblock .content .mermaid * {
+  cursor: default !important;
+}
+
+/* Specifically override the imageblock content zoom cursor when it contains mermaid */
+.doc .imageblock .content .mermaid ~ *,
+.doc .imageblock .content .mermaid + * {
+  cursor: default !important;
+}
+
+

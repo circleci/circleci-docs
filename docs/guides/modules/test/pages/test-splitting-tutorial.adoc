@@ -82,7 +82,7 @@ To get started, you need to get the sample app building as a project on CircleCI
 
 [tabs]
 ====
-GitHub Oauth app::
+GitHub OAuth app::
 +
 --
 . link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[Fork the repository] on GitHub.
@@ -192,7 +192,7 @@ steps:
     command: yarn test
 ----
 
-. After you've made these changes, go ahead and select btn:[Commit and Run]. This will commit the changes in a new feature branch called `circleci-project-setup` and trigger a new pipeline. Select **Dashboard** from the web app side bar, and use the filters to find your project to watch your pipeline run.
+. After you have made these changes, go ahead and select btn:[Commit and Run]. This will commit the changes in a new feature branch called `circleci-project-setup` and trigger a new pipeline. Select **Dashboard** from the web app side bar, and use the filters to find your project to watch your pipeline run.
 +
 image::guides:ROOT:test-splitting-first-pipeline.png[Successful pipeline run]
 +
@@ -330,7 +330,7 @@ Requested weighting by historical based timing, but they are not present. Fallin
 +
 CircleCI defaults to splitting tests by name. As this is the first time you are storing test data from the pipeline, CircleCI does not yet have timing data to work with.
 // Check if this applies to GitLab
-
++
 On subsequent runs, you'll see an additional step labelled **Downloading previous test results**:
 +
 image::guides:ROOT:downloading-previous-test-results-step.png[Downloading previous test results step]

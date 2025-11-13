@@ -1,24 +1,16 @@
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar.
-. Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"], select **Project Settings**, and select **Pipelines** in the sidebar.
-. If there is already a GitHub App pipeline set up and it uses the desired YAML configuration file, proceed to the **Triggers** step below (step 5).  If not, select **Set up pipeline**. If there is a **Connect** button, select it and follow the steps to install the CircleCI GitHub App into your GitHub organization (this step is compatible with orgs that integrate with xref:integration:github-integration.adoc#using-github-app-functionality[CircleCI's GitHub OAuth app]).
-. Name the new pipeline and select the repository where the CircleCI YAML configuration file is stored. Enter the file path (including the `.circleci` directory). The file path can be different than `.circleci/config.yml` (for example, `.circleci/webhook.yml`).  Save the pipeline.
-. Select **Triggers** in the sidebar.
-. Select btn:[Add Trigger].
-. Select **Custom Webhook** from the dropdown menu.
-. Select btn:[Next].
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+. Select **Project Setup** in the sidebar.
+. If there is already a GitHub App pipeline set up that you want to trigger with your custom webhook, proceed to the **Triggers** step below (step 5).  If not, select btn:[Add Pipeline]. You can find guidance on setting up a pipeline in the xref:orchestrate:pipelines.adoc#add-or-edit-a-pipeline[Pipelines overview and setup] page.
++
+NOTE: If you have not installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be set up without this installation step. For a detailed guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page. If you run into issues when installing the GitHub App, for example, App looks installed on GitHub, but does not show up on CircleCI, submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form].
+. Select btn:[Custom webhook +] at the bottom of the pipeline box.
+. Enter a descriptive name for the webhook event.
+. Enter the name of the event source for the trigger. For example, if you are setting up a custom webhook to run pipelines on events from Datadog, enter "Datadog" here.
+. Enter the branch to use to fetch your config file and checkout your code when a Custom Webhook is received.
 +
 image::guides:ROOT:triggers/custom-webhooks-add-trigger.png[screenshot showing adding a custom webhook trigger]
-
-. Complete the form fields and options:
-** Enter a descriptive name for the trigger. For example, if you are setting up a custom webhook to run pipelines on events from Datadog, enter "Datadog" here.
-** (Optional) Add a description.
-** In the field "Pipeline to run", at the bottom of the page, select the pipeline that you created in the step above.
-// The field "Pipeline to run" should be above "config branch", because it needs to be selected before entering config branch and checkout branch. This change will be made soon, Benny will update the docs as soon as the change is shipped.
-** Enter the branch to use to fetch your config file when a Custom Webhook is received.
-** Enter the branch to use to check out your code when using the link:https://circleci.com/docs/configuration-reference/#checkout[checkout step] in config. If your config is stored in the same repository as your code, then your **Config branch** and your **Checkout branch** should be the same.
++
 . Select btn:[Save].
 . You will see a webhook endpoint URL and secret. You can use these to set up your webhook trigger from your external source. Copy the Webhook URL and use it in your trigger source appended with the secret.
 +
 CAUTION: The secret will not be shown again so be sure to copy the URL before clicking **Done**.
-+
-image::guides:ROOT:triggers/custom-webhooks-secret-url.png[screenshot showing a custom webhook trigger secret and URL]

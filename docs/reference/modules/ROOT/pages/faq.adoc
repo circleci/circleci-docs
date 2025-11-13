@@ -6,6 +6,9 @@
 This page answers frequently asked questions about the following CircleCI topics:
 
 [.table]
+
+[.table-scroll]
+--
 [cols=2*]
 |===
 | <<general>>
@@ -15,7 +18,7 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<pipelines>>
 
 | <<host-circleci>>
-| <<scheduled-pipelines>>
+| <<schedule-triggers>>
 
 | <<architecture>>
 | <<workflows>>
@@ -29,6 +32,7 @@ This page answers frequently asked questions about the following CircleCI topics
 | <<cancel-performance-plan>>
 |
 |===
+--
 
 [#general]
 == General
@@ -70,10 +74,9 @@ include::guides:ROOT:partial$faq/self-hosted-runner-faq-snip.adoc[]
 
 include::guides:ROOT:partial$faq/pipelines-faq-snip.adoc[]
 
-[#scheduled-pipelines]
-== Scheduled pipelines
+== Schedule triggers
 
-include::guides:ROOT:partial$faq/scheduled-pipelines-faq-snip.adoc[]
+include::guides:ROOT:partial$faq/schedule-trigger-faq-snip.adoc[]
 
 [#workflows]
 == Workflows

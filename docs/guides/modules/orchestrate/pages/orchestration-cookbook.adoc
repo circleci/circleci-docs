@@ -13,14 +13,11 @@ You may want to run a set of high credit-consuming tests only when a pull reques
 
 === Steps
 
-. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
-+
-.Add pipeline options for GitHub App
-image::guides:ROOT:add-pipeline.png[Add pipeline options for GitHub App]
-. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines.adoc#add-a-trigger[Pipelines and triggers overview] page.
+. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines overview] page.
+. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up triggers] page.
 +
 .Run on trigger options for GitHub App triggers
-image::guides:ROOT:triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
@@ -36,13 +33,11 @@ You may want to trigger a specific pipeline when a pull request is merged, for e
 
 === Steps
 . Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
-+
-.Add pipeline options for GitHub App
-image::guides:ROOT:add-pipeline.png[Add pipeline options for GitHub App]
-. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:pipelines.adoc#add-a-trigger[Pipelines and triggers overview] page.
+
+. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up triggers] page.
 +
 .Run on trigger options for GitHub App triggers
-image::guides:ROOT:triggers/run-on-open.png[Run on trigger options for GitHub App triggers]
+image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
@@ -208,19 +203,20 @@ include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
-== Run a workflow only for scheduled pipelines with a specific name
+== Run a workflow only on schedule triggers that have a specific name
 
 === Goal
 
-In some cases, you may want to configure a workflow that will only run when a scheduled pipeline has a specific name.
+In some cases, you may want to configure a workflow that will only run when a scheduled trigger has a specific name.
 
 === Steps
 
 * Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[pipeline values].
 +
+.The nightly-run-workflow only runs when the trigger is a schedule trigger AND the name of that trigger is `nightly_build`
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+include::ROOT:example$logic-statement-examples/when-in-workflows/and-equal-dynamic.yml[]
 ----
 
 === Notes

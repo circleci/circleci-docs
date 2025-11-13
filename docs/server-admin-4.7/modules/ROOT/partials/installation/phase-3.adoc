@@ -507,9 +507,11 @@ git push
 
 Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions refer to the link:https://github.com/circleci/realitycheck#prerequisites-1[repository README].
 
+
+[.table-scroll]
+--
 .Environmental Variables
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 |Name
 |Value
@@ -523,10 +525,12 @@ Once you have successfully cloned the repository, you can follow it from within 
 |CIRCLE_CLOUD_PROVIDER
 |< `aws`, `gcp`, or `other` >
 |===
+--
 
+[.table-scroll]
+--
 .Contexts
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 |Name
 |Environmental Variable Key
@@ -540,6 +544,7 @@ Once you have successfully cloned the repository, you can follow it from within 
 |MULTI_CONTEXT_END_TO_END_VAR
 |Leave blank
 |===
+--
 
 Once you have configured the environmental variables and contexts, rerun the Reality Check tests. You should see the features and resource jobs complete successfully. Your test results should look something like the following:
 
@@ -742,21 +747,6 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
     },
     {
       "Action": [
-        "ec2:CreateTags",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
-        }
-      }
-    },
-    {
-      "Action": [
         "ec2:RunInstances",
         "ec2:StartInstances",
         "ec2:StopInstances",
@@ -770,6 +760,9 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
           ]
+        },
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     }
@@ -884,21 +877,6 @@ Create a `policy.json` file with the following content. You should fill in the I
     },
     {
       "Action": [
-        "ec2:CreateTags",
-        "ec2:StartInstances",
-        "ec2:StopInstances",
-        "ec2:TerminateInstances"
-      ],
-      "Effect": "Allow",
-      "Resource": "arn:aws:ec2:*:*:*/*",
-      "Condition": {
-        "StringEquals": {
-          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
-        }
-      }
-    },
-    {
-      "Action": [
         "ec2:RunInstances",
         "ec2:StartInstances",
         "ec2:StopInstances",
@@ -912,6 +890,9 @@ Create a `policy.json` file with the following content. You should fill in the I
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_1>",
             "arn:aws:ec2:*:*:subnet/<SUBNET_ID_2>"
           ]
+        },
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "circleci-machine-provisioner"
         }
       }
     }

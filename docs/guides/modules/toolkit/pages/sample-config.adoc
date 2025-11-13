@@ -2,6 +2,7 @@
 :page-platform: Cloud, Server v4+
 :description: Sample config.yml File
 :experimental:
+:page-aliases: example-configs.adoc
 
 This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
 

@@ -1,4 +1,4 @@
-<div class="mt-5 lg:mt-0 w-full md:w-fit max-w-full md:px-4 flex flex-col md:flex-row border border-vapor rounded-xl items-stretch justify-between {{#if class}}{{class}}{{/if}}">
+<div class="mt-5 mb-10 lg:mt-0 w-full md:w-fit max-w-full md:px-4 flex flex-col md:flex-row border border-vapor rounded-xl items-stretch justify-between {{#if class}}{{class}}{{/if}}">
   {{#with (get-page-meta page)}}
     
     <div class="flex items-center pl-3 md:pl-0 pr-3 py-2">
@@ -23,7 +23,7 @@
   {{#if page.attributes.platform}}
     <div class="flex items-center min-w-fit space-x-1 px-3 py-2 md:py-0 border-t md:border-t-0 md:border-l border-inherit">
       {{#each (split page.attributes.platform ',')}}
-        <span class=" text-[10px] text-terminal-black border rounded-full py-1 px-1.5">{{this}}</span>
+        <span class="text-[10px] text-terminal-black border rounded-full py-1 px-1.5" style="font-family: 'Roboto', sans-serif; font-weight: 700;">{{this}}</span>
       {{/each}}
     </div>
   {{/if}}
