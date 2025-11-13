@@ -510,7 +510,7 @@ If a test runner has slow start up time per batch, disabling this can speed up t
 |.circleci/example-baseline.info
 |Path to a baseline coverage file to subtract from test coverage during analysis. +
 Use this to exclude shared setup or initialization code from test impact data. +
-The baseline file can be in any supported coverage format. While it doesn't need to match your test coverage output format, using the same format (e.g., LCOV format for << outputs.lcov >>) is recommended for consistency. For more information, refer to "<<baseline-coverage>>".
+The baseline file can be in any supported coverage format. While it does not need to match your test coverage output format, using the same format (for example, LCOV format for `<< outputs.lcov >>`) is recommended for consistency. For more information, refer to the <<baseline-coverage>> section.
 |===
 --
 
