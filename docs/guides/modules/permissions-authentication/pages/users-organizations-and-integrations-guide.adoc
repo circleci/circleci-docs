@@ -725,6 +725,11 @@ You may need to add additional SSH keys to your pipelines. Some examples of when
 
 If you need additional SSH keys in your builds, follow these steps:
 
+[tabs]
+====
+GitHub::
++
+--
 In this example you will create a deploy key with write access to a GitHub repository. The GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://app.circleci.com/pipelines/github/you/test-repo`.
 
 . Create an SSH key-pair by following the link:https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/[GitHub instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
@@ -752,6 +757,69 @@ $ ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
 When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
+--
+Bitbucket::
++
+--
+In this example, the Bitbucket Cloud repository is `https://bitbucket.org/you/test-repo/src/main/`, and the CircleCI project is `https://app.circleci.com/pipelines/bitbucket/you/test-repo`.
+
+. Create an SSH key-pair by following the link:https://support.atlassian.com/bitbucket-cloud/docs/configure-ssh-and-two-step-verification/[Bitbucket instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+. Go to `https://bitbucket.org/you/test-repo/admin/access-keys/`, and select **Add key**. Enter a label in the "Label" field, then copy and paste the public key you created in step 1. Select **Add SSH key**.
+
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `bitbucket.com` and add the private key you created in step 1. Then select **Add SSH Key**.
+
+. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+When you push to your Bitbucket Cloud repository from a job, CircleCI will use the SSH key you added.
+--
+GitLab::
++
+--
+When creating a GitLab-based project in CircleCI, an SSH key is created, which is used to check out code from your repository. Each configuration you create generates a new SSH key to access the code in the repository associated with that configuration. At this time, only **Additional SSH Keys** are applicable to GitLab projects.
+
+. Create an SSH key-pair by following the link:https://docs.gitlab.com/ee/user/ssh.html[GitLab instructions]. When prompted to enter a passphrase, do **not** enter one (below is one example command to generate a key on macOS):
++
+```shell
+  ssh-keygen -t ed25519 -C "your_email@example.com"
+```
+
+. Go to your project on link:https://gitlab.com/[GitLab] and navigate to **Settings > Repository**, and expand the **Deploy keys** section. Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check **Grant write permissions to this key** box, then select **Add key**.
+
+. Go to your project settings in the CircleCI app, select **SSH Keys**, and **Add SSH key**. In the "Hostname" field, enter `gitlab.com` and add the private key you created in step 1. Then select **Add SSH Key**.
+
+. In your `.circleci/config.yml` file, add the fingerprint to a job using the `add_ssh_keys` key:
++
+```yaml
+  version: 2.1
+
+  jobs:
+    deploy-job:
+      steps:
+        - add_ssh_keys:
+            fingerprints:
+              - "SO:ME:FIN:G:ER:PR:IN:T"
+```
+
+When you push to your GitLab repository from a job, CircleCI will use the SSH key you added.
+
+--
+====
 
 For a guide to additional SSH keys for CircleCI pipelines, see the xref:integration:add-ssh-key.adoc[Add SSH keys] page.
 
