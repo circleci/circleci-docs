@@ -124,9 +124,6 @@ If your config contains a logical statement referencing any of the pipeline valu
 
 |`pipeline.event.github.pull_request.merged`
 |A boolean that indicates whether the PR was merged or not.
-
-|`pipeline.event.github.comment.body`
-|The pull request comment body, if a pipeline was triggered through the preset "PR comment is exactly 'run-ci'". For pipelines triggered in other ways, this value is undefined.
 |===
 
 These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[the GitHub docs].
