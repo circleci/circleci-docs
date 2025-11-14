@@ -10,11 +10,11 @@
           </button>
         {{/if}}
         {{#if (and ./url (not (eq ./url @root.page.url)))}}
-          <a class="nav-link hover:text-link-on-light {{#if (has-active-child ./items)}}font-medium text-inherit {{/if}}" href="
+          <a class="nav-link hover:text-link-on-light {{#if (has-active-child ./items)}}font-semibold text-inherit {{/if}}" href="
             {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
             {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
           {{else}}
-          <span class="{{#if (has-active-child ./items)}}text-accent-green font-medium text-inherit{{/if}}">{{{./content}}}</span>
+          <span class="{{#if (has-active-child ./items)}}text-accent-green font-semibold text-inherit{{/if}}">{{{./content}}}</span>
         {{/if}}
       </div>
     {{/if}}
