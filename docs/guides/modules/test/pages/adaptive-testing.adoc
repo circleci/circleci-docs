@@ -268,7 +268,7 @@ The two most common causes for this:
 * The tests were run with a different job name, in this case, rerunning the job should find timing data.
 * The `<< outputs.junit >>` template variable is not set up correctly. Ensure that the run command uses the template variable and the `store_test_results` step provides a path to a directory so that all batches of `<< outputs.junit >>` are stored.
 
-If the tests are still slower, the test runner being used might have initial start up time when running tests, this can cause significant slow down using the dynamic batching as each batch needs to do that initial start up.
+If the tests are still slower, the test runner being used might have initial start up time when running tests. Test runner start up time can cause significant slow down using the dynamic batching as each batch needs to do that initial start up.
 
 Add the `dynamic-batching: false` option to `.circleci/test-suites.yml` to disable dynamic batching.
 
@@ -294,7 +294,11 @@ The goal of this section is to enable adaptive testing for your test suite.
 
 === 2.1 Update the test suites file
 
-When using adaptive testing for test impact analysis, the `discover` command discovers all tests in a test suite, the `run` command runs only impacted tests and a new command, the `analysis` command, analyzes each test impacted.
+When using adaptive testing for test impact analysis the following commands are used:
+
+* The `discover` command discovers all tests in a test suite.
+* The `run` command runs only impacted tests and a new command.
+* The `analysis` command analyzes each test impacted.
 
 . Update the `.circleci/test-suites.yml` file to include a stubbed analysis command.
 . Update the `.circleci/test-suites.yml` file to include the option `adaptive-testing: true`.
@@ -328,7 +332,7 @@ Supported coverage template variables:
 * `<< outputs.lcov >>`: Coverage data in LCOV format.
 * `<< outputs.go-coverage >>`: Coverage data in Go coverage format.
 
-The coverage location does not need to be set in the outputs map, a temporary file will be created and used during analysis with the template variable from the analysis command.
+The coverage location does not need to be set in the outputs map. A temporary file will be created and used during analysis with the template variable from the analysis command.
 
 . Update your `.circleci/test-suites.yml` file with the analysis command.
 
@@ -859,4 +863,4 @@ Adaptive testing is runner-agnostic. We provide default configurations for the f
 * Cypress (E2E testing)
 * Vitest
 
-The key requirement is that your test runner can generate coverage data in a parsable format (currently, we suppport LCOV and Go's "legacy coverage" format).
+The key requirement is that your test runner can generate coverage data in a parsable format (currently, we support LCOV and Go's "legacy coverage" format).
