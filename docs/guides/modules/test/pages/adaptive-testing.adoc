@@ -9,7 +9,12 @@ CAUTION: *Adaptive testing* is available in closed preview. When the feature is 
 
 NOTE: This page is currently in development and will be updated as the feature is developed.
 
-Use adaptive testing to run only tests that are impacted by code changes and evenly distribute tests across parallel execution nodes. Adaptive testing reduces test execution time while maintaining test confidence.
+Use adaptive testing to optimize test runs as follows:
+
+* Run only tests that are impacted by code changes.
+* Evenly distribute tests across parallel execution nodes.
+
+Adaptive testing reduces test execution time while maintaining test confidence.
 
 == Use cases for adaptive testing
 
@@ -25,7 +30,7 @@ TIP: In codebases with sparse test coverage, adaptive testing cannot accurately 
 * Adaptive testing needs to be configured with commands to discover all available tests and run a subset of those tests. If you cannot run commands to discover tests and run a subset of tests on the CLI then adaptive testing may not be a good fit.
 * Adaptive testing works best when testing a single deployable unit. A monorepo which performs integration tests across many packages at once may not be a good fit.
 
-== Key benefits:
+== Key benefits
 
 * Faster CI/CD pipelines through intelligent test selection.
 * Optimized resource usage and cost efficiency.
@@ -342,8 +347,8 @@ options:
 
 *Checklist*
 
-. The `analysis` command defines `<< test.atoms >>` to pass in the test, or passes in stdin.
-. The `analysis` command defines `<< outputs.lcov|go-coverage|gcov >>` to write coverage data.
+* The `analysis` command defines `<< test.atoms >>` to pass in the test, or passes in stdin.
+* The `analysis` command defines `<< outputs.lcov|go-coverage|gcov >>` to write coverage data.
 
 *Examples of `analysis` commands*
 
@@ -427,8 +432,8 @@ This section will run analysis on a feature branch to seed the initial impact da
 
 *Checklist*
 
-. The step output includes prefix Running impact analysis.
-. The step output finds files impacting a test (for example, found 12 files impacting test `src/foo.test.ts`).
+* The step output includes prefix Running impact analysis.
+* The step output finds files impacting a test (for example, found 12 files impacting test `src/foo.test.ts`).
 
 [source,yaml]
 ----
@@ -542,18 +547,19 @@ Now the test suite is set up, test selection is working and the test analysis is
 
 *Checklist*
 
-. The `.circleci/config.yml` is set up to run analysis on the default branch.
-. The `.circleci/config.yml` is set up to run selection on non-default branch.
-. The `.circleci/config.yml` is set up to use high parallelism on the analysis branch.
+* The `.circleci/config.yml` is set up to run analysis on the default branch.
+* The `.circleci/config.yml` is set up to run selection on non-default branch.
+* The `.circleci/config.yml` is set up to use high parallelism on the analysis branch.
 
 === Examples
 
-*Running analysis on a branch named `main` and selection on all other branches*
+==== Run analysis on a branch named `main` and selection on all other branches
 
 No changes required, this is the default setting.
 
-*Running analysis on a branch named `master` and selection on all other branches*
+==== Run analysis on a branch named `master` and selection on all other branches
 
+.CircleCI configuration for running analysis on a branch named `master` and selection on all other branches
 [source,yaml]
 ----
 # .circleci/config.yml
@@ -569,8 +575,9 @@ jobs:
           path: test-reports
 ----
 
-*Running higher parallelism on the analysis branch*
+==== Run higher parallelism on the analysis branch
 
+.CircleCI configuration for running parallelism of 10 on the main branch and 2 on all other branches
 [source,yaml]
 ----
 # .circleci/config.yml
@@ -586,8 +593,10 @@ jobs:
           path: test-reports
 ----
 
-*Running analysis on a scheduled pipeline and timeboxing some analysis on main*
+[#run-analysis-on-scheduled-pipeline]
+==== Run analysis on a scheduled pipeline and timeboxing some analysis on main
 
+.CircleCI configuration for running analysis only on scheduled pipelines
 [source,yaml]
 ----
 # .circleci/config.yml
@@ -620,6 +629,7 @@ workflows:
       - test
 ----
 
+.Test suite config. Set time limit of 10 minutes for the analysis on the main branch
 [source,yaml]
 ----
 # .circleci/test-suites.yml
@@ -787,7 +797,7 @@ Yes! The branch behavior is fully customizable through your CircleCI configurati
 . Feature branches if needed for testing.
 . Scheduled pipelines independent of branch.
 
-See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
+See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism on the analysis branch>> example for an example of customizing branch behavior.
 
 === Can I run test analysis and selection on any branch?
 
@@ -797,7 +807,7 @@ Yes! The branch behavior is fully customizable through your CircleCI configurati
 . Feature branches if needed for testing.
 . Scheduled pipelines.
 
-See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
+See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism on the analysis branch>> example for an example of customizing branch behavior.
 
 [#baseline-coverage]
 === Why are there so many files impacting a test?
