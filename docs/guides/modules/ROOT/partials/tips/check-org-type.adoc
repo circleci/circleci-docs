@@ -1,0 +1,10 @@
+****
+To check your organization type, check your organization slug at menu:Organization settings[Overview]. `github` and `bitbucket` type organizations are OAuth authenticated orgs and the organization slug is structured as follows:
+
+* `github/<your-org-name>` or `gh/<your-org-name>`
+* `bitbucket/<your-org-name>` or `bb/<your-org-name>`
+
+An organization slug for a `circleci` type organization is in the following format:
+
+* `circleci/<UID>`
+****

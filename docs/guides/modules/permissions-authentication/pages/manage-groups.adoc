@@ -3,7 +3,9 @@
 :page-description: How-to guides for setting up and assigning groups in CircleCI to manage roles and permissions across projects.
 :experimental:
 
-NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc[GitHub App], the content on this page applies to you.
+If you have a `circleci` type organization, the content on this page applies to you.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 Use groups to manage access to projects and features. By creating groups based on teams or roles within your organization, you can, for example, add a user to a group to give them access to all required projects (for example, mobile projects, DevOps projects). For more information about the roles available, and their associated permissions, see the xref:roles-and-permissions-overview.adoc[Roles and permissions] overview page.
 
