@@ -2,7 +2,7 @@
 :page-platform: Cloud
 :page-description: A guide to understanding user accounts, organizations and integrations with version control systems in CircleCI.
 :experimental:
-:page-aliases: guides:integration:github-apps-integration.adoc, guides:integration:github-integration.adoc, guides:integration:bitbucket-integration.adoc
+:page-aliases: guides:integration:github-apps-integration.adoc, guides:integration:github-integration.adoc, guides:integration:bitbucket-integration.adoc, guides:integration:gitlab-integration.adoc
 
 This guide explains the concepts of user, organization, and integration in CircleCI. After these concepts are covered, you can find out about the features available to you depending on your organization and pipeline type.
 
@@ -552,6 +552,8 @@ If you have a `bitbucket` organization you can have Bitbucket Cloud pipelines.
 
 The trigger options available to you depend on your pipeline type. These options are described in the following table:
 
+[.table-scroll]
+--
 [options="header",cols="9*"]
 |===
 |Pipeline type
@@ -614,6 +616,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|[.circle-green]#*Yes*#
 |===
+--
 
 == How CircleCI checks out your code
 
