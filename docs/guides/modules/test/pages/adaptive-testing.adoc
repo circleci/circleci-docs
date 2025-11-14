@@ -322,7 +322,6 @@ Supported coverage template variables:
 
 * `<< outputs.lcov >>`: Coverage data in LCOV format.
 * `<< outputs.go-coverage >>`: Coverage data in Go coverage format.
-* `<< outputs.gcov >>`: Coverage data in `gcov` coverage format.
 
 The coverage location does not need to be set in the outputs map, a temporary file will be created and used during analysis with the template variable from the analysis command.
 
@@ -506,12 +505,6 @@ Any remaining tests will be analysed the next time test analysis is run.
 |true
 |Whether the tests should be distributed across a shared queue and fetched across multiple dynamic batches. +
 If a test runner has slow start up time per batch, disabling this can speed up tests.
-
-| `coverage-baseline`
-|.circleci/example-baseline.info
-|Path to a baseline coverage file to subtract from test coverage during analysis. +
-Use this to exclude shared setup or initialization code from test impact data. +
-The baseline file can be in any supported coverage format. While it does not need to match your test coverage output format, using the same format (for example, LCOV format for `<< outputs.lcov >>`) is recommended for consistency. For more information, refer to the <<baseline-coverage>> section.
 |===
 --
 
@@ -811,21 +804,38 @@ See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing
 
 If you see many files impacting each test during analysis (for example, "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
 
-*Solution: Use a coverage baseline to exclude setup code*
+This extraneous coverage can be excluded by providing an `analysis-baseline` command to compute the code covered during startup that isn't directly exercised by test code. We call this "baseline coverage data".
 
-. Create a minimal test that only does imports/setup (no test logic)
-. Generate coverage from that test and save it to `.circleci/example-baseline.info` (you can name the file however you'd like)
-. Reference it in your test suite:
+The `analysis-baseline` command must produce coverage output written a coverage template variable. The baseline coverage data can be in any supported coverage format. While it does not need to match your test coverage output format, using the same format (for example, LCOV format for `<< outputs.lcov >>`) is recommended for consistency.
+
+. Create a minimal test that only does imports/setup (no test logic), in the example below this is called `src/baseline/noop.test.ts`.
+. Add an `analysis-baseline` command to your test suite. This command will be broadly similar to your `analysis` command, except that it should only run the minimal test.
 
 [source,yaml]
 ----
 # .circleci/test-suites.yml
+name: ci tests
+discover: jest --listTests --testPathPattern=src/
+run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
+analysis: |
+  jest --runInBand --silent --bail --coverage --coverageProvider=v8 \
+       --coverage-directory="$(dirname << outputs.lcov >>)" \
+       --coverageReporters=lcovonly \
+       << test.atoms >> \
+       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+analysis-baseline: |
+  jest --runInBand --silent --bail --coverage --coverageProvider=v8 \
+       --coverageReporters=lcovonly \
+       --coverage-directory="$(dirname << outputs.lcov >>)" \
+       "src/baseline/noop.test.ts" \
+       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
 options:
   adaptive-testing: true
-  coverage-baseline: .circleci/example-baseline.info
 ----
 
-The coverage data in the baseline file will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test. Note that the baseline file should be in the same format as your test coverage output (e.g., LCOV format for << outputs.lcov >>).
+The `analysis-baseline` command will be run just before running analysis. The coverage data produced by the `analysis-baseline` command will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test.
 
 === What test frameworks are supported?
 
