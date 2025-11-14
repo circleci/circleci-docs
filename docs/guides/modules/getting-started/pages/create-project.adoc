@@ -69,6 +69,9 @@ Once your project is created you will land on your pipelines page.
 GitLab Cloud::
 +
 --
+
+NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
+
 Follow these steps to create a new project in CircleCI:
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
@@ -107,6 +110,9 @@ image::guides:ROOT:create-project/download-config-file.png[Modal showing options
 GitLab self-managed::
 +
 --
+
+NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
+
 Follow these steps to create a new project in CircleCI:
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
@@ -127,7 +133,7 @@ image::guides:ROOT:create-project/create-new-gitlab-self-managed-project.png[Cre
 ****
 If this is your first GitLab self-managed project you will now set up your integration:
 
-* Verify your GitLab URL
+* Verify your GitLab URL. The field will automatically append `/api/v4`, so the URL that CircleCI uses to connect to your account looks something like `https://test-gitlab.circleci.com/api/v4`.
 * Generate an add a personal access token
 * Add your known hosts, following the instructions in the app
 ****
