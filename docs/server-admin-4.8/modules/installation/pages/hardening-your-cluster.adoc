@@ -1,4 +1,5 @@
 = Hardening your cluster
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.8.
 :experimental:
