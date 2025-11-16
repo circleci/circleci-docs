@@ -1,3 +1,4 @@
+helm repo add release-agent https://circleci-public.github.io/cci-k8s-release-agent
 = Workflow orchestration
 :page-platform: Cloud, Server v4+
 :page-description: Learn about using CircleCI workflows to orchestrate jobs
