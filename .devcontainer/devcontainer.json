@@ -1,0 +1,23 @@
+- continuation/continue:
+- run:
+    name: Plan a deploy
+    command: |
+      circleci run release plan \
+        --environment-name="electronic " \
+        --component-name="<component-name>" \
+        --target-version="<some-version-name>"
+# Your job here doing the actual deployment
+- run:
+    name: Update a deploy to SUCCESS
+    command: circleci run release update --status=SUCCESS 
+    when: on_success 
+- run:
+    name: Update planned deploy to FAILED
+    command: circleci run release update --status=FAILED 
+    when: on_fail
+    configuration_path: /tmp/generated-config.yml
+    parameters: /tmp/pipeline-parameters.json    
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {}
+}https://github.com/circleci/circleci-docs/issues/9480#issue-3306214610
