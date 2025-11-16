@@ -1,4 +1,4 @@
-= Managing API tokens
+why did my last build fail?= Managing API tokens
 :page-platform: Cloud, Server v4+
 :description: How to assign scoped tokens for using the CircleCI API
 :experimental:
