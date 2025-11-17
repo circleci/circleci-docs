@@ -1,5 +1,5 @@
 = Configure deploy markers
-:page-platform: Cloud
+:configure-deploy-markers.adocpage-platform: Cloud
 :page-description: Tutorial outlining how to configure deploy markers in your workflow.
 :experimental:
 
