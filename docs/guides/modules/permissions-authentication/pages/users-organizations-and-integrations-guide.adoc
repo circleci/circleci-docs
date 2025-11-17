@@ -799,14 +799,14 @@ This section describes best practices for using SSH keys in your CircleCI pipeli
 * You must rotate the Deploy or User key as part of revoking user access to that repository. See the xref:security:rotate-project-ssh-keys.adoc[Rotate project SSH keys] page for steps to rotate your keys.
 * Ensure no developer has access to a build in a repository with a User Key that requires more access than they have.
 
-[#create-a-github-user-key]
-== Create a GitHub user key
+[#create-a-user-key]
+== Create a user key
 
-NOTE: If your organization is a `github` or `bitbucket` type organization, you can create a GitHub user key.
+NOTE: If your organization is a `github` or `bitbucket` type organization, you can create a user key for your project.
 
-Create a GitHub user key in CircleCI when you need write access to your GitHub repositories during your CI/CD pipeline, or when you need to access multiple repositories that your user account has access to.
+Create a user key in CircleCI when you need write access to your GitHub or Bitbucket repositories during your CI/CD pipeline, or when you need to access multiple repositories that your user account has access to.
 
-Some example tasks where you might need a GitHub user key:
+Some example tasks where you might need a user key:
 
 * Pushing commits back to your repository. If your pipeline needs to commit and push changes back to GitHub (like updating a changelog, bumping version numbers, generating documentation, or creating automated pull requests) you need write permissions that a user key provides.
 * Accessing multiple private repositories. When your build depends on multiple private repos (beyond just the one being built), a user key gives your pipeline access to all repos your GitHub user can access. This is useful for:
@@ -826,16 +826,16 @@ The trade-off with chosing a user key is that user keys grant broad access based
 
 We recommend creating a dedicated "machine user" GitHub/Bitbucket account with minimal necessary permissions, then adding that account's user key to CircleCI, rather than using your personal GitHub/Bitbucket account's key.
 
-To create a GitHub user key, follow these steps:
+To create a user key, follow these steps:
 
 NOTE: To use the recommended approach of creating a machine user, you will need to create a new GitHub/Bitbucket account with minimal necessary permissions and then follow these steps logged in as that machine user account.
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 . In the sidebar menu, select *SSH Keys*.
-. Under the **User Key** section, select btn:[Authorize With GitHub]. The page will refresh while the authorization takes place and you will be redirected back to the project settings overview page.
-. Navigate back to **SSH keys** and go to the **User Key** section.
-. Select btn:[Add User Key], then btn:[Confirm User]. You will now see your user key displayed on the page.
+. Under the **User Key** section, select btn:[Add User Key].
+. You will see a warning that you should use a machine user. Select btn:[Confirm User].
+. You will now see your user key displayed on the page.
 
 [#user-key-security]
 === User key security
@@ -1126,3 +1126,11 @@ For guidance on deleting your user account link:https://support.circleci.com/hc/
 See the xref:security:delete-organizations-and-projects.adoc[Delete organizations and projects] page for full instructions.
 
 #TO DO explain the different between deleting an OAuth org and disconnecting from user settings#
+
+[#enable-project-to-check-out-additional-private-repositories]
+=== How can I enable my project to check out additional private repositories?
+
+For `github` and `bitbucket` organizations, you can enable your project to check out additional private repositories by adding a _user_ key or additional SSH key to your project. See the <<create-a-user-key>> section of this page for instructions.
+
+For `circleci`, `github` and `bitbucket` organizations, you can enable your project to check out additional private repositories by adding an _additional_ SSH key to your project. See the <<create-additional-ssh-keys>> section of this page for instructions.
+

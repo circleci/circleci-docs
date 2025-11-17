@@ -552,7 +552,7 @@ See the xref:orchestrate:jobs-steps.adoc[Jobs and steps] page for more informati
 [#user-types]
 == User roles
 
-CircleCI roles are set up differently depending on your xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-type[organization type].
+CircleCI roles are set up differently depending on your xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[organization type].
 
 include::ROOT:partial$tips/check-org-type.adoc[]
 
