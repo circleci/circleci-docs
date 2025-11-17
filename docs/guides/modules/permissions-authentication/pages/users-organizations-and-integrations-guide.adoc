@@ -71,9 +71,9 @@ Each organization has its own settings, including security, integrations, and re
 
 A CircleCI _organization_ can be one of three types:
 
-A CircleCI `circleci` organization:: This organization type is created separately to any VCS connection between CircleCI and your code repositories. Within a `circleci` organization you create projects and then connect them to your code repositories.
-A CircleCI `github` organization:: A `github` organization uses an OAuth app connection and is created when you log in to CircleCI using your GitHub account. Your GitHub repositories appear as projects that can be set up in CircleCI.
-A CircleCI `bitbucket` organization:: A `bitbucket` organization is created when you log in to CircleCI using your Bitbucket account. Your Bitbucket repositories appear as projects that can be set up in CircleCI.
+* `circleci`: This organization type is created separately to any VCS connection between CircleCI and your code repositories. Within a `circleci` organization you create projects and then connect them to your code repositories.
+* `github`: A `github` organization uses an OAuth app connection and is created when you log in to CircleCI using your GitHub account. Your GitHub repositories appear as projects that can be set up in CircleCI.
+* `bitbucket`: A `bitbucket` organization is created when you log in to CircleCI using your Bitbucket account. Your Bitbucket repositories appear as projects that can be set up in CircleCI.
 
 For full details on creating organizations, see the xref:getting-started:create-an-organization.adoc[Create an organization] page.
 
@@ -81,6 +81,7 @@ The following organization settings are available:
 
 [.table-scroll]
 --
+.Organization settings
 [cols="1,2", options="header"]
 |===
 | Organization settings section | What you will find here
@@ -104,7 +105,7 @@ The following organization settings are available:
 | Orb security settings, you can choose to allow just certified orbs, all orbs, and choose to allow private orbs. Request audit logs and/or set up audit log streaming.
 
 | Policies
-| Find a list of policis that have been created for your organization.
+| Find a list of policies that have been created for your organization.
 
 | Advanced
 | Opt in/out of the following: intelligent summaries for build failures, image brownouts, triggering pipelines with unversioned config.
@@ -122,7 +123,7 @@ The following organization settings are available:
 | `circleci` organizations only. Integration set up for GitLab self-managed and Bitbucket Data Center.
 
 | Singe sign-on
-| `circleci` organizations on Scale Planonly. Set up SSO for your organization.
+| `circleci` organizations on Scale Plan only. Set up SSO for your organization.
 
 |===
 --
@@ -136,7 +137,7 @@ The following organization settings are available:
 --
 For `github` and `bitbucket` type organizations projects are synonymous with repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
 
-* Set up new repositories as CircleCI projects, which involves committing a CircleCI `config.yml` file to the repository to define your pipeline. THis creates a GitHub OAuth  or Bitbucket Cloud pipeline for you, which you can view in menu:Project Settings[Project Setup] or menu:Project Settings[Pipelines] .
+* Set up new repositories as CircleCI projects. Commit a CircleCI `config.yml` file to the repository to define your pipeline. This creates a GitHub OAuth or Bitbucket Cloud pipeline for you, which you can view in menu:Project Settings[Project Setup] (GitHub) or menu:Project Settings[Pipelines] (Bitbucket).
 * Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
 
 When you set up a project to build with CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
@@ -144,12 +145,13 @@ When you set up a project to build with CircleCI, the following settings are add
 - A deploy key that is used to check out your project from GitHub.
 - A service hook (or "push hook") that is used to notify CircleCI when you push to GitHub.
 
-CircleCI builds push hooks by default. Builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
+CircleCI builds push hooks by default. Builds are triggered for all push hooks for the repository and push is the most common case of triggering a build.
 
 Some additional, less common cases where CircleCI uses hooks are as follows:
 
-- CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app. If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
-- If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repositories.
+* CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app.
+* If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
+* If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repositories.
 
 These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
 
@@ -175,6 +177,7 @@ The following project settings are available:
 
 [.table-scroll]
 --
+.Project settings
 [cols="1,2", options="header"]
 |===
 | Project settings section | What you will find here
@@ -203,7 +206,7 @@ a| Enable/disable various features for the project:
 * Disable SSH reruns.
 
 | Environment variables
-| Add project environment variables. Youc an add individually or import from another project. You will find a list of project environment variables on this page.
+| Add project environment variables. You can add individually or import from another project. You will find a list of project environment variables on this page.
 
 | SSH keys
 | Add deploy and user keys for `github` and `bitbucket` organizations. Add additional SSH keys for your project for all organization types.
@@ -231,7 +234,7 @@ a| Enable/disable various features for the project:
 
 == Integration options
 
-The integration options available to you depend on your organization type. By _integration type_ we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
+The integration options available to you depend on your organization type. By _integration_ we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
 
 #TODO would it be right to say that if you can integrate with GL SaaS you can with self managed? Then we can simplify this to "GitLab" and then say that integration type is the same as pipeline type?#
 
