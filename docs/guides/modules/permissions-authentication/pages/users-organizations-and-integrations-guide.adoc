@@ -19,6 +19,7 @@ You can log in to CircleCI using one of the following methods:
 
 Select your icon in the top bar and select **User settings** to access the following:
 
+[#user-settings]
 [.table-scroll]
 --
 .User settings
@@ -311,11 +312,11 @@ Once you have integrated your CircleCI organization with your GitLab self-manage
 +
 image::guides:ROOT:gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
 
-. You will need to enter the instance URL, as described in the xref:#sign-up[Sign up] section above.
+. You will need to enter the instance URL.
 
 NOTE: The ability to edit or delete existing integrations is not currently supported.
 
-For GitLab.com, account integrations can be managed under your xref:#user-account-integrations[user settings].
+For GitLab.com, account integrations can be managed under your <<user-settings,User settings>>.
 
 NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
@@ -665,7 +666,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Checking out any GitHub-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
+Private keys are also used to enable your project to check out additional private repositories.
 --
 Bitbucket Cloud::
 +
@@ -691,7 +692,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Checking out any Bitbucket-hosted private dependencies
 - Automatic git merging/tagging/etc
 
-Private keys are also used to enable your project to <<#enable-your-project-to-check-out-additional-private-repositories,check out additional private repositories>>.
+Private keys are also used to enable your project to check out additional private repositories.
 --
 GitLab::
 +
@@ -1021,7 +1022,7 @@ The following steps guide you through migrating you organization as follows:
 [CAUTION]
 ====
 * You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
-* Before proceeding, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.
+* Before proceeding, confirm that you do not immediately need any of the functionality that is currently unsupported for GitHub App pipelines. For a matrix of feature support see the xref:integration:version-control-system-integration-overview.adoc[Version Control System Integration Overview] page.
 * The following steps include *creating a new org*. If you need to transfer private orbs or self-hosted runner resource classes to your new org, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.
 * If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
 ====

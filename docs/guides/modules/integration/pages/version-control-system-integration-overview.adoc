@@ -97,7 +97,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 
 ^1^ _Possible using xref:orchestrate:dynamic-config.adoc[dynamic configuration]._
 
-^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration.adoc#using-github-app-functionality[here]._
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:using-the-github-app-in-an-oauth-org.adoc[here]._
 
 ^3^ _When GitHub Checks are enabled we automatically disable GitHub status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
 
@@ -170,7 +170,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 
 ^1^ _One alternative is to use a xref:orchestrate:custom-webhooks.adoc[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
 
-^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:github-integration.adoc#using-github-app-functionality[here]._
+^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:using-the-github-app-in-an-oauth-org.adoc[here]._
 
 ^3^ _For GitLab Cloud and GitLab self-managed projects, you can choose to trigger pipelines upon the creation of merge requests, by selecting the *Only Build Merge Requests* trigger filter._
 
