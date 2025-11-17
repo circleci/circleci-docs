@@ -16,7 +16,9 @@ Use adaptive testing to optimize test runs as follows:
 
 Adaptive testing reduces test execution time while maintaining test confidence.
 
-== Use cases for adaptive testing
+== Is my project a good fit for adaptive testing?
+
+The following list shows some examples of where adaptive testing can be most beneficial:
 
 * Unit and integration tests that exercise code within the same repository.
 * Projects with comprehensive test coverage. The more thorough your tests, the more precisely adaptive testing can identify which tests are impacted by changes.
@@ -38,7 +40,12 @@ TIP: In codebases with sparse test coverage, adaptive testing cannot accurately 
 * Scale efficiently as test suites grow.
 
 == How it works
-The adaptive testing feature operates through two main components that work together to optimize your test execution:
+Adaptive testing operates through two main components that work together to optimize your test execution:
+
+* Dynamic test splitting
+* Test impact analysis
+
+Each component is described in more detail below.
 
 === Dynamic test splitting
 Dynamic test splitting distributes your tests across parallel execution nodes. The system maintains a shared queue that each node pulls from to create a balanced workload.
@@ -737,11 +744,11 @@ The frequency depends on your test execution speed and development pace:
 
 *Consider re-running analysis:*
 
-. After major refactoring or code restructuring
-. When test selection seems inaccurate or outdated
-. After adding significant new code or tests
+* After major refactoring or code restructuring
+* When test selection seems inaccurate or outdated
+* After adding significant new code or tests
 
-*Remember:* You can customize which branches run analysis through your CircleCI configuration - it doesn't have to be limited to the main branch.
+*Remember:* You can customize which branches run analysis through your CircleCI configuration - it does not have to be limited to the main branch.
 
 === Can I customize the test-suites.yml commands?
 
@@ -754,10 +761,10 @@ Yes, you can fully customize commands by defining `discover`, `run`, and `analys
 
 *Requirements when customizing:*
 
-. Ensure your commands properly handle test execution
-. Generate valid coverage data for the analysis phase
-. Use the correct template variables (`<< test.atoms >>`, `<< outputs.junit >>`, `<< outputs.lcov >>`)
-. Output test results in a format CircleCI can parse (typically JUnit XML)
+* Ensure your commands properly handle test execution.
+*  Generate valid coverage data for the analysis phase.
+* Use the correct template variables (`<< test.atoms >>`, `<< outputs.junit >>`, `<< outputs.lcov >>`).
+* Output test results in a format CircleCI can parse (typically JUnit XML).
 
 === What happens if no tests are impacted by a change?
 
@@ -792,12 +799,12 @@ You can also compare:
 
 === Can I run analysis on branches other than main?
 
-Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on `main` by default, you can configure it to run on:
+Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on `main` by default, you can configure it to run on any of the following:
 
-. Any specific branch (for example, `develop` or `staging`).
-. Multiple branches simultaneously.
-. Feature branches if needed for testing.
-. Scheduled pipelines independent of branch.
+* Any specific branch (for example, `develop` or `staging`).
+* Multiple branches simultaneously.
+* Feature branches if needed for testing.
+* Scheduled pipelines independent of branch.
 
 See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism on the analysis branch>> example for an example of customizing branch behavior.
 
@@ -805,9 +812,9 @@ See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism o
 
 Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis runs on main by default, you can configure it to run on:
 
-. Any specific branch (for example, `develop` or `staging`).
-. Feature branches if needed for testing.
-. Scheduled pipelines.
+* Any specific branch (for example, `develop` or `staging`).
+* Feature branches if needed for testing.
+* Scheduled pipelines.
 
 See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism on the analysis branch>> example for an example of customizing branch behavior.
 
