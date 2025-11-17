@@ -759,8 +759,6 @@ Yes, you can fully customize commands by defining `discover`, `run`, and `analys
 . Use the correct template variables (`<< test.atoms >>`, `<< outputs.junit >>`, `<< outputs.lcov >>`)
 . Output test results in a format CircleCI can parse (typically JUnit XML)
 
-See the "Custom Configuration" section for detailed examples.
-
 === What happens if no tests are impacted by a change?
 
 When test selection determines that no existing tests are affected by your changes, the system will run all tests as a safety measure. This ensures:
