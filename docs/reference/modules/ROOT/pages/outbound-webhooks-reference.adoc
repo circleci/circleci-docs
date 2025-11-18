@@ -231,7 +231,7 @@ The following data about the trigger associated with the webhook event is provid
 [#trigger-parameters]
 === Trigger parameters
 
-NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Bitbucket Data Center. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
+NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Bitbucket Data Center. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. Check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines] to see your pipeline type.
 
 [.table-scroll]
 --
@@ -287,7 +287,7 @@ NOTE: Data associated to the pipeline. Present for pipelines associated with Git
 [#vcs]
 === VCS
 
-NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud projects, but not for GitLab, GitHub App or Bitbucket Data Center projects. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App or Bitbucket Data Center parameters.  To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
+NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud pipelines, but not for GitLab, GitHub App or Bitbucket Data Center pipelines. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App or Bitbucket Data Center parameters.  To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
 
 [.table-scroll]
 --
@@ -354,7 +354,7 @@ NOTE: The VCS map and its contents are always present for GitHub OAuth app and B
 [#sample-webhook-payloads]
 == Sample webhook payloads
 
-NOTE: To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
+NOTE: To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
 
 [#workflow-completed-for-github-and-bitbucket]
 === `workflow-completed` for GitHub OAuth and Bitbucket Cloud
