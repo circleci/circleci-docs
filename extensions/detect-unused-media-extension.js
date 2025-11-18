@@ -70,13 +70,13 @@ function extractMediaReferences(contentCatalog, logger) {
             file.contents.toString().match(/(image|video)::?(\S+?)(?:\[|$)/gm) || [];
           mediaMatches.forEach((match) => {
             let imagePath = match.replace(/(image|video)::?/g, "").replace(/\[.*$/, "").trim();
-            
+
             // Skip if this looks like a Docker image reference (contains / or ends with version tag)
             // Docker images are typically like: "cimg/base:2021.04" or "python:3.6.3"
             if (imagePath.match(/^[a-z0-9-]+\/[a-z0-9-]+:|^[a-z0-9-]+:[0-9]/)) {
               return; // Skip Docker images
             }
-            
+
             mediaReferences.add(imagePath);
           });
         }
@@ -129,15 +129,15 @@ function findUnusedMedia(
       const relativePathWithoutImagesDir = relativePath.replace(/^images\//, '');
       const moduleQualifiedPathWithoutImagesDir = img.src.module + ":" + relativePathWithoutImagesDir;
       const componentQualifiedPathWithoutImagesDir = img.src.component + ":" + img.src.module + ":" + relativePathWithoutImagesDir;
-      
-      const isUsed = 
+
+      const isUsed =
         mediaReferences.has(relativePath) ||
         mediaReferences.has(moduleQualifiedPath) ||
         mediaReferences.has(componentQualifiedPath) ||
         mediaReferences.has(relativePathWithoutImagesDir) ||
         mediaReferences.has(moduleQualifiedPathWithoutImagesDir) ||
         mediaReferences.has(componentQualifiedPathWithoutImagesDir);
-      
+
       if (!isUsed) {
         unusedMedia.add(img);
         logger.warn(
