@@ -112,6 +112,23 @@ NOTE: For GitLab self-managed, you can input any instance that you have previous
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is described in the following section.
 --
+Bitbucket Data Center::
++
+--
+To add or edit a pipeline, follow these steps:
+
+. In the CircleCI web app, select **Projects** in the sidebar.
+. Select the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and choose **Project Settings**.
+. Select **Pipelines** in the sidebar.
+. Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
+. Complete the form fields and options:
+** Give your pipeline a descriptive name, for example `Run tests and deploy`.
+** Under Integration select the platform that matches where your project is set up (for example, Bitbucket Data Center).
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
+** Define where the config file for this pipeline is stored:
+*** Select a repository from the dropdown.
+*** Enter the path to the config file.
+--
 ====
 
 == Pipeline states
