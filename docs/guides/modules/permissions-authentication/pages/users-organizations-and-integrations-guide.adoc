@@ -2,7 +2,7 @@
 :page-platform: Cloud
 :page-description: A guide to understanding user accounts, organizations and integrations with version control systems in CircleCI.
 :experimental:
-:page-aliases: guides:integration:github-apps-integration.adoc, guides:integration:github-integration.adoc, guides:integration:bitbucket-integration.adoc, guides:integration:gitlab-integration.adoc
+:page-aliases: guides:integration:github-apps-integration.adoc, guides:integration:github-integration.adoc, guides:integration:bitbucket-integration.adoc, guides:integration:gitlab-integration.adoc, guides:integration:bitbucket-data-center-integration.adoc
 
 This guide explains the concepts of user, organization, and integration in CircleCI. After these concepts are covered, you can find out about the features available to you depending on your organization and pipeline type.
 
@@ -16,6 +16,8 @@ You can log in to CircleCI using one of the following methods:
 
 * Email and password
 * Social login (GitHub, Bitbucket)
+
+To view your user account integrations, navigate to menu:User Settings[Account Integrations].
 
 Select your icon in the top bar and select **User settings** to access the following:
 
@@ -379,9 +381,11 @@ You can view and manage integrations in two places depending on your organizatio
 
 === Manage a GitHub App integration
 
-A GitHub App integration is available for `circleci` and `github` organizations. The CircleCI GitHub App is installed in an organization. To see your integration navigate to menu:Organization Settings[Account Integrations]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
+A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization.
 
-If you would like to uninstall the GitHub App, select the trash/bin button and follow the instructions.
+To *view* a GitHub App integration, navigate to menu:Organization Settings[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
+
+To *uninstall* the GitHub App from your organization, select the trash/bin button and follow the instructions.
 
 === Manage a GitHub OAuth app integration
 
@@ -653,13 +657,13 @@ GitLab::
 Bitbucket Data Center::
 +
 --
-#TBC#
+When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
 --
 ====
 
 === Custom checkout commands
 
-CircleCI provides a `checkout` step that is used to check out your source code. You find find more information about the special `checkout` step in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference] page.
+CircleCI provides a `checkout` step that is used to check out your source code. You find more information about the special `checkout` step in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference] page.
 
 If you would rather use a custom checkout command you should follow the steps below to ensure the authenticity of the host you are connecting to.
 
