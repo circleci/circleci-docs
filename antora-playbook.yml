@@ -81,3 +81,4 @@ antora:
         line_color: '#B4B8C6'
         primary_border_color: '#008542'
         primary_text_color: '#00381A'
+  - require: ./extensions/detect-unused-media-extension.js
