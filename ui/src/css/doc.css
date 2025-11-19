@@ -209,6 +209,13 @@
   white-space: nowrap;
 }
 
+/* Allow inline code to wrap in admonition blocks to prevent overflow */
+.doc .admonitionblock td.content code:not(.hljs) {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
 .doc code,
 .doc pre {
   hyphens: none;
@@ -1454,11 +1461,11 @@
   font-weight: var(--heading-font-weight);
 }
 
-/* Prevent inline code text from wrapping in table cells */
-td .pre,
-td .code,
-td p code,
-td li code,
+/* Prevent inline code text from wrapping in table cells (but not in admonition blocks) */
+.tableblock td .pre,
+.tableblock td .code,
+.tableblock td p code,
+.tableblock td li code,
 .tableblock p code,
 .tableblock li code {
   white-space: nowrap !important;
