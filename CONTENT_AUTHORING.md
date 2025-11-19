@@ -1,4 +1,4 @@
-# CircleCI Docs Static Site: Content Authoring Guide
+# CircleCI docs content authoring guide
 
 This guide provides comprehensive information for authors contributing content to the CircleCI Docs Static Site.
 
@@ -47,14 +47,13 @@ component/
 
 ## AsciiDoc Essentials
 
-The CircleCI Docs Static Site uses [AsciiDoc](https://asciidoc.org/) for content authoring. Here's how to use it effectively:
+The CircleCI docs site uses [AsciiDoc](https://asciidoc.org/) for content authoring. Here's how to use it effectively:
 
 ### Basic Syntax
 
 ```asciidoc
 = Page Title
-:description: A brief description of the page content
-:page-toclevels: 3
+:page-description: A brief description of the page content
 
 == Section Heading
 This is a paragraph of text.
@@ -71,22 +70,27 @@ Another paragraph with *bold text* and _italic text_.
 .. Nested numbered item
 ```
 
+For a more complete example, see the [template pages](https://github.com/circleci/circleci-docs/tree/main/docs/contributors/modules/templates/pages).
+
 ### Document Attributes
 
 Document attributes control various aspects of rendering:
 
 ```asciidoc
 = Page Title
-:description: Used for SEO and meta description
-:page-toclevels: 3     # Controls table of contents depth
-:page-layout: default  # Page layout template
-:experimental:         # Enables experimental features
-:icons: font           # Uses font icons
+:page-platform: Cloud, Server     # Displays platform badges in the page info bar
+:page-description: Used for SEO and meta description
+:experimental:                    # Enables macro features for menu and button macros
+:page-aliases: some-old-page.adoc # redirects archived pages
+
 ```
 
 ### Page Title Badges
 
-Add visual badges next to page titles to indicate content status (e.g., Preview, Beta, Deprecated):
+Add visual badges next to page titles to indicate content status. Currently we are using a `Preview` badge to indicate when a page is for a feature in open or closed preview.
+
+A page is closed preview will display the `Preview` badge and **will not be** listed in the navigation.
+A page in open preview will display the `Preview` badge and **will be** listed in the navigation.
 
 #### Basic Usage
 
@@ -117,23 +121,12 @@ This displays a simple badge with default styling (black text, border, no backgr
 
 #### Common Badge Styles
 
-**Preview (Orange):**
+**Preview:**
 ```asciidoc
 :page-badge: Preview
-:page-badge-classes: text-white bg-orange-500 border border-orange-600
 ```
 
-**New (Green):**
-```asciidoc
-:page-badge: New
-:page-badge-classes: text-white bg-green-500 border border-green-600
-```
-
-**Deprecated (Red):**
-```asciidoc
-:page-badge: Deprecated
-:page-badge-classes: text-white bg-red-500 border border-red-600
-```
+Currently we are not adding styling to these badges but this may change in future.
 
 #### Badge Attributes Reference
 
@@ -162,31 +155,8 @@ CAUTION: This requires special attention.
 
 ### Page Structure Template
 
-Use this template as a starting point for new pages:
+Use the [template pages](https://github.com/circleci/circleci-docs/tree/main/docs/contributors/modules/templates/pages) as a starting point for new content.
 
-```asciidoc
-= Page Title
-:description: Concise description of the page content
-:page-toclevels: 3
-
-[abstract]
---
-A brief introduction to what this page covers and why it's important.
---
-
-== First Major Section
-Introduction to this section.
-
-=== Subsection
-Content for the subsection.
-
-== Second Major Section
-Content for the second major section.
-
-== Related Information
-* xref:related-page.adoc[Related Page]
-* xref:another-related-page.adoc[Another Related Page]
-```
 
 ### Headings
 
@@ -197,7 +167,6 @@ Use hierarchical headings to structure your content:
 == Level 1
 === Level 2
 ==== Level 3
-===== Level 4
 ```
 
 Avoid skipping levels, and don't go deeper than level 4 unless absolutely necessary.
@@ -209,6 +178,7 @@ Avoid skipping levels, and don't go deeper than level 4 unless absolutely necess
 For code blocks with syntax highlighting:
 
 ```asciidoc
+.Title for code block, explain what it is and what it does
 [source,yaml]
 ----
 version: 2.1
@@ -225,9 +195,11 @@ jobs:
 
 ### Tables
 
-Create formatted tables:
+Create formatted tables that can scroll horizontally as needed:
 
 ```asciidoc
+[.table-scroll]
+--
 .Table Title
 [cols="1,1,2", options="header"]
 |===
@@ -241,6 +213,7 @@ Create formatted tables:
 |Row 2, Cell 2
 |Row 2, Cell 3
 |===
+--
 ```
 
 ### Tabs
@@ -265,6 +238,8 @@ Content for Tab B
 
 ### Collapsible Sections
 
+**We do not currently use collapsible sections.**
+
 For long content that might be hidden initially:
 
 ```asciidoc
@@ -285,10 +260,16 @@ Link to other pages within the documentation:
 xref:page-name.adoc[Link Text]
 ```
 
+To link to a page in another module in the same component:
+
+```asciidoc
+xref:module-name:page-name.adoc[Link Text]
+```
+
 To link to another component:
 
 ```asciidoc
-xref:component-name:page-name.adoc[Link Text]
+xref:component-name:module-name:page-name.adoc[Link Text]
 ```
 
 To link to a specific section:
@@ -304,6 +285,8 @@ Link to external resources:
 ```asciidoc
 link:https://circleci.com[CircleCI Website]
 ```
+
+The `link:` is not strictly necessary but makes it easier to find when editing or making bulk changes.
 
 ### Navigation Files
 
@@ -324,6 +307,7 @@ The `nav.adoc` file defines the sidebar navigation structure:
 Include images with optional attributes:
 
 ```asciidoc
+.Image title
 image::filename.png[Alt Text,width=500,role=center]
 ```
 
@@ -340,9 +324,19 @@ video::video-id[youtube,width=640,height=360]
 
 ### Diagrams
 
-For complex diagrams, use image files created with diagramming software.
+You can add mermaid diagrams to a page, as follows:
 
-For simple diagrams, you can use AsciiDoc's built-in diagramming through extensions like Asciidoctor Diagram.
+```asciidoc
+.Example of a mermaid diagram
+[mermaid]
+....
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>Bob: Hello Bob, how are you?
+    Bob-->>Alice: Great!
+....
+```
 
 ## Semantic Guidelines
 
@@ -365,11 +359,11 @@ Structure your content based on its purpose:
 
 ### Versioning Content
 
-For version-specific content, use conditional statements:
+For version-specific content, use negative conditional statements ([ifndef directive](https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/)) :
 
 ```asciidoc
-ifeval::["{serverversion}" == "4.0"]
-This content is only visible for server version 4.0.
+ifndef::aws
+This content is only visible for non-AWS pages and sections
 endif::[]
 ```
 
@@ -391,18 +385,8 @@ Before submitting content for review, check that:
 
 All content should go through peer review:
 
-1. Create a pull request with your changes
-2. Request review from subject matter experts
-3. Address any feedback or suggestions
-4. Update based on technical accuracy review
-5. Final editorial review for consistency and style
-
-### Common Feedback Points
-
-- Technical accuracy and completeness
-- Structure and organization
-- Language clarity
-- Cross-referencing correctness
-- Code sample functionality
-- Image quality and relevance
-- Navigation placement
+1. Create a pull request with your changes. Code ownders will be pinged for review automatically (docs team and PM team).
+2. Request review from subject matter experts, for most changes we will want a review from an engineer in the relevant team or the PM for the feature. The docs team can manage this process for you.
+3. Address any feedback or suggestions.
+4. Update based on technical accuracy review.
+5. Final editorial review for consistency and style.
