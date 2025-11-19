@@ -20,7 +20,7 @@ Adaptive testing reduces test execution time while maintaining test confidence.
 
 The following list shows some examples of where adaptive testing can be most beneficial:
 
-* Unit and integration tests that exercise code within the same repository.
+* Tests that exercise code within the same repository.
 * Projects with comprehensive test coverage. The more thorough your tests, the more precisely adaptive testing can identify which tests are impacted by changes.
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest) where generating coverage reports is straightforward.
 +
@@ -29,8 +29,8 @@ TIP: In codebases with sparse test coverage, adaptive testing cannot accurately 
 == Limitations
 
 * Generating code coverage data is essential for determining how tests are related to code. If tests are run in a way that makes generating and accessing code coverage data tricky then adaptive testing may not be a good fit.
+* Adaptive testing works best when testing a single deployable artifact. For example, a monorepo with integration tests that span multiple packages/services—especially when services run in separate container—makes coverage generation and consolidation difficult.
 * Adaptive testing needs to be configured with commands to discover all available tests and run a subset of those tests. If you cannot run commands to discover tests and run a subset of tests on the CLI then adaptive testing may not be a good fit.
-* Adaptive testing works best when testing a single deployable unit. A monorepo which performs integration tests across many packages at once may not be a good fit.
 
 == Key benefits
 
