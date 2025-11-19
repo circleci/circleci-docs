@@ -54,6 +54,7 @@ asciidoc:
     serverversion49: 4.9.0
     serverversion: 3.4.8
     terraformversion: 0.15.4
+    dockerversion: v28
     kubectlversion: 1.19
     helmversion: 3.9.2
     helmdiffversion: 3.5.0

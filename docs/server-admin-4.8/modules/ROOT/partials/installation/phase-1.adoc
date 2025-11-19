@@ -53,6 +53,11 @@ endif::env-aws[]
 | TBC
 | Required for installations outside AWS and GCP, for example, local installation.
 
+| link:https://docs.docker.com/engine/install/[Docker]
+| {dockerversion}
+| Running containerized workloads on nomad clients
+| At this time docker v29 is not supported
+
 |===
 
 [#create-a-vpc]
