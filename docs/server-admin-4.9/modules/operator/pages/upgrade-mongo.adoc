@@ -1,13 +1,16 @@
 = Upgrade MongoDB
 :page-platform: Server 4.9, Server Admin
-:page-description: Learn how to upgrade MongoDB up to v4.4.15 in an installation of CircleCI server 4.9.
+:page-description: Learn how to upgrade MongoDB up to v7.0.15 in an installation of CircleCI server 4.9.
 :experimental:
 
-MongoDB is a database service used by CircleCI server. This page describes how to upgrade MongoDB to version `4.4.15`.
+MongoDB is a database service used by CircleCI server. This page describes how to upgrade MongoDB from version `3.6.22` to `7.0.15`.
 
 MongoDB `3.6.22` is shipped with CircleCI server 4.9.
 
-[#prerequisites]
+[#upgrade-mongodb-to-4.4]
+== Upgrade MongoDB to 4.4
+
+[#prerequisites-4.4]
 == Prerequisites
 
 * Ensure backups have been taken. You will need a backup of MongoDB to restore to in case anything goes wrong during the upgrade progress
@@ -15,12 +18,12 @@ MongoDB `3.6.22` is shipped with CircleCI server 4.9.
 * `helm upgrade` will work from your system to upgrade the cluster
 * MongoDB root password is available
 
-[#script-upgrade]
+[#script-upgrade-4.4]
 == Scripted upgrade
 We have created a shell script which may be used to upgrade your cluster's MongoDB instance link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-mongo-to-4.4[here].
 If you wish, you may use the following instructions to manually upgrade your cluster's MongoDB
 
-[#manual-upgrade]
+[#manual-upgrade-4.4]
 == Manual upgrade
 
 === 1. Upgrade from MongoDB 3.6 to 4.0
@@ -93,3 +96,121 @@ db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
 ```
 
 . Once you receive `{ "ok" : 1 }`, you have successfully upgraded your MongoDB to 4.4.15.
+
+[#upgrade-mongodb-to-7.0]
+== Upgrade MongoDB to 7.0
+
+[#prerequisites-7.0]
+== Prerequisites
+
+* You have completed the `4.4.15` upgrade above.
+* Ensure backups have been taken. You will need a backup of MongoDB to restore to in case anything goes wrong during the upgrade progress
+* You are prepared to modify the `values.yaml`
+* `helm upgrade` will work from your system to upgrade the cluster
+* MongoDB root password is available
+
+[#script-upgrade-7.0]
+== Scripted upgrade
+We have created a shell script which may be used to upgrade your cluster's MongoDB instance link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-mongo-to-7.0[here].
+If you wish, you may use the following instructions to manually upgrade your cluster's MongoDB
+
+[#manual-upgrade-7.0]
+== Manual upgrade
+
+=== 1. Upgrade from MongoDB 4.4 to 5.0
+
+. Your `values.yaml` should contain the following snippet:
++
+```yaml
+mongodb:
+  image:
+    tag: 4.4.15-debian-10-r8
+```
++
+To begin the upgrade process, change the tag to `5.0.24-debian-11-r20` and update the probes to use `mongosh`:
++
+```yaml
+mongodb:
+  image:
+    tag: 5.0.24-debian-11-r20
+  livenessProbe:
+    enabled: false
+  readinessProbe:
+    enabled: false
+  customLivenessProbe:
+    exec:
+      command:
+        - mongosh
+        - --eval
+        - "db.adminCommand('ping')"
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 6
+  customReadinessProbe:
+    exec:
+      command:
+        - bash
+        - -ec
+        - |
+          mongosh --eval 'db.hello().isWritablePrimary || db.hello().secondary' | grep -q 'true'
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 6
+```
+
+. Run `helm upgrade` to update your installation.
+
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Note that MongoDB 5.0+ uses `mongosh` instead of `mongo`. (Be sure to replace `<password>` with your MongoDB root password.)
++
+```bash
+kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
+db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
+```
+
+. You should get an `ok: 1` response from MongoDB. Exit out of the MongoDB shell and pod.
+
+=== 2. Upgrade from MongoDB 5.0 to 6.0
+
+. Change the tag to `6.0.13-debian-11-r21` while being sure to keep the new `customLivenessProbe` and `customReadinessProbe` parameters.:
++
+```yaml
+mongodb:
+  image:
+    tag: 6.0.13-debian-11-r21
+```
+
+. Run `helm upgrade` to update your installation.
+
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
++
+```bash
+kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
+db.adminCommand( { setFeatureCompatibilityVersion: "6.0" } )
+```
+
+. You should get `ok: 1` again. Exit out of the shell and pod.
+
+=== 3. Upgrade from MongoDB 6.0 to 7.0
+
+. Change the tag to `7.0.15-debian-12-r2`:
++
+```yaml
+mongodb:
+  image:
+    tag: 7.0.15-debian-12-r2
+```
+
+. Run `helm upgrade` to update your installation.
+
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. **Important: MongoDB 7.0+ upgrade is one-way and cannot be downgraded.** Note that MongoDB 7.0+ requires the `confirm: true` parameter. (Be sure to replace `<password>` with your MongoDB root password.)
++
+```bash
+kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
+db.adminCommand( { setFeatureCompatibilityVersion: "7.0", confirm: true } )
+```
+
+. Once you receive `ok: 1`, you have successfully upgraded your MongoDB to 7.0.15.
