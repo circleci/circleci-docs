@@ -9,9 +9,30 @@ CAUTION: *Adaptive testing* is available in closed preview. When the feature is 
 
 NOTE: This page is currently in development and will be updated as the feature is developed.
 
-Use adaptive testing to run only tests that are impacted by code changes and evenly distribute tests across parallel execution nodes. Adaptive testing reduces test execution time while maintaining test confidence.
+Use adaptive testing to optimize test runs as follows:
 
-== Key benefits:
+* Run only tests that are impacted by code changes.
+* Evenly distribute tests across parallel execution nodes.
+
+Adaptive testing reduces test execution time while maintaining test confidence.
+
+== Is my project a good fit for adaptive testing?
+
+The following list shows some examples of where adaptive testing can be most beneficial:
+
+* Unit and integration tests that exercise code within the same repository.
+* Projects with comprehensive test coverage. The more thorough your tests, the more precisely adaptive testing can identify which tests are impacted by changes.
+* Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest) where generating coverage reports is straightforward.
++
+TIP: In codebases with sparse test coverage, adaptive testing cannot accurately determine which tests cover changed code. This causes the system to run more tests, reducing the benefits of intelligent test selection.
+
+== Limitations
+
+* Generating code coverage data is essential for determining how tests are related to code. If tests are run in a way that makes generating and accessing code coverage data tricky then adaptive testing may not be a good fit.
+* Adaptive testing needs to be configured with commands to discover all available tests and run a subset of those tests. If you cannot run commands to discover tests and run a subset of tests on the CLI then adaptive testing may not be a good fit.
+* Adaptive testing works best when testing a single deployable unit. A monorepo which performs integration tests across many packages at once may not be a good fit.
+
+== Key benefits
 
 * Faster CI/CD pipelines through intelligent test selection.
 * Optimized resource usage and cost efficiency.
@@ -19,7 +40,12 @@ Use adaptive testing to run only tests that are impacted by code changes and eve
 * Scale efficiently as test suites grow.
 
 == How it works
-The adaptive testing feature operates through two main components that work together to optimize your test execution:
+Adaptive testing operates through two main components that work together to optimize your test execution:
+
+* Dynamic test splitting
+* Test impact analysis
+
+Each component is described in more detail below.
 
 === Dynamic test splitting
 Dynamic test splitting distributes your tests across parallel execution nodes. The system maintains a shared queue that each node pulls from to create a balanced workload.
@@ -249,7 +275,7 @@ The two most common causes for this:
 * The tests were run with a different job name, in this case, rerunning the job should find timing data.
 * The `<< outputs.junit >>` template variable is not set up correctly. Ensure that the run command uses the template variable and the `store_test_results` step provides a path to a directory so that all batches of `<< outputs.junit >>` are stored.
 
-If the tests are still slower, the test runner being used might have initial start up time when running tests, this can cause significant slow down using the dynamic batching as each batch needs to do that initial start up.
+If the tests are still slower, the test runner being used might have initial start up time when running tests. Test runner start up time can cause significant slow down using the dynamic batching as each batch needs to do that initial start up.
 
 Add the `dynamic-batching: false` option to `.circleci/test-suites.yml` to disable dynamic batching.
 
@@ -275,7 +301,11 @@ The goal of this section is to enable adaptive testing for your test suite.
 
 === 2.1 Update the test suites file
 
-When using adaptive testing for test impact analysis, the `discover` command discovers all tests in a test suite, the `run` command runs only impacted tests and a new command, the `analysis` command, analyzes each test impacted.
+When using adaptive testing for test impact analysis the following commands are used:
+
+* The `discover` command discovers all tests in a test suite.
+* The `run` command runs only impacted tests and a new command.
+* The `analysis` command analyzes each test impacted.
 
 . Update the `.circleci/test-suites.yml` file to include a stubbed analysis command.
 . Update the `.circleci/test-suites.yml` file to include the option `adaptive-testing: true`.
@@ -308,9 +338,8 @@ Supported coverage template variables:
 
 * `<< outputs.lcov >>`: Coverage data in LCOV format.
 * `<< outputs.go-coverage >>`: Coverage data in Go coverage format.
-* `<< outputs.gcov >>`: Coverage data in `gcov` coverage format.
 
-The coverage location does not need to be set in the outputs map, a temporary file will be created and used during analysis with the template variable from the analysis command.
+The coverage location does not need to be set in the outputs map. A temporary file will be created and used during analysis with the template variable from the analysis command.
 
 . Update your `.circleci/test-suites.yml` file with the analysis command.
 
@@ -329,8 +358,8 @@ options:
 
 *Checklist*
 
-. The `analysis` command defines `<< test.atoms >>` to pass in the test, or passes in stdin.
-. The `analysis` command defines `<< outputs.lcov|go-coverage|gcov >>` to write coverage data.
+* The `analysis` command defines `<< test.atoms >>` to pass in the test, or passes in stdin.
+* The `analysis` command defines `<< outputs.lcov|go-coverage|gcov >>` to write coverage data.
 
 *Examples of `analysis` commands*
 
@@ -414,8 +443,8 @@ This section will run analysis on a feature branch to seed the initial impact da
 
 *Checklist*
 
-. The step output includes prefix Running impact analysis.
-. The step output finds files impacting a test (for example, found 12 files impacting test `src/foo.test.ts`).
+* The step output includes prefix Running impact analysis.
+* The step output finds files impacting a test (for example, found 12 files impacting test `src/foo.test.ts`).
 
 [source,yaml]
 ----
@@ -456,6 +485,8 @@ Check the analysis command is creating a coverage file formatted correctly by ru
 
 The following options are available to be defined in the options map in config:
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Options Field|Default|Description
@@ -491,9 +522,12 @@ Any remaining tests will be analysed the next time test analysis is run.
 |Whether the tests should be distributed across a shared queue and fetched across multiple dynamic batches. +
 If a test runner has slow start up time per batch, disabling this can speed up tests.
 |===
+--
 
 The following flags are available to be defined on the `circleci run testsuite` command.
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Flag|Default|Description
@@ -512,6 +546,7 @@ a| * `all` selects and runs all discovered tests, used to run the full test suit
 * `impacted` selects and runs only the tests impacted by a change. +
 * `none` skips running tests, used to skip straight to analysis.
 |===
+--
 
 == 3. Start using adaptive testing
 
@@ -523,18 +558,19 @@ Now the test suite is set up, test selection is working and the test analysis is
 
 *Checklist*
 
-. The `.circleci/config.yml` is set up to run analysis on the default branch.
-. The `.circleci/config.yml` is set up to run selection on non-default branch.
-. The `.circleci/config.yml` is set up to use high parallelism on the analysis branch.
+* The `.circleci/config.yml` is set up to run analysis on the default branch.
+* The `.circleci/config.yml` is set up to run selection on non-default branch.
+* The `.circleci/config.yml` is set up to use high parallelism on the analysis branch.
 
 === Examples
 
-*Running analysis on a branch named `main` and selection on all other branches*
+==== Run analysis on a branch named `main` and selection on all other branches
 
 No changes required, this is the default setting.
 
-*Running analysis on a branch named `master` and selection on all other branches*
+==== Run analysis on a branch named `master` and selection on all other branches
 
+.CircleCI configuration for running analysis on a branch named `master` and selection on all other branches
 [source,yaml]
 ----
 # .circleci/config.yml
@@ -550,8 +586,9 @@ jobs:
           path: test-reports
 ----
 
-*Running higher parallelism on the analysis branch*
+==== Run higher parallelism on the analysis branch
 
+.CircleCI configuration for running parallelism of 10 on the main branch and 2 on all other branches
 [source,yaml]
 ----
 # .circleci/config.yml
@@ -567,8 +604,10 @@ jobs:
           path: test-reports
 ----
 
-*Running analysis on a scheduled pipeline and timeboxing some analysis on main*
+[#run-analysis-on-scheduled-pipeline]
+==== Run analysis on a scheduled pipeline and timeboxing some analysis on main
 
+.CircleCI configuration for running analysis only on scheduled pipelines
 [source,yaml]
 ----
 # .circleci/config.yml
@@ -601,6 +640,7 @@ workflows:
       - test
 ----
 
+.Test suite config. Set time limit of 10 minutes for the analysis on the main branch
 [source,yaml]
 ----
 # .circleci/test-suites.yml
@@ -704,11 +744,11 @@ The frequency depends on your test execution speed and development pace:
 
 *Consider re-running analysis:*
 
-. After major refactoring or code restructuring
-. When test selection seems inaccurate or outdated
-. After adding significant new code or tests
+* After major refactoring or code restructuring
+* When test selection seems inaccurate or outdated
+* After adding significant new code or tests
 
-*Remember:* You can customize which branches run analysis through your CircleCI configuration - it doesn't have to be limited to the main branch.
+*Remember:* You can customize which branches run analysis through your CircleCI configuration - it does not have to be limited to the main branch.
 
 === Can I customize the test-suites.yml commands?
 
@@ -721,12 +761,10 @@ Yes, you can fully customize commands by defining `discover`, `run`, and `analys
 
 *Requirements when customizing:*
 
-. Ensure your commands properly handle test execution
-. Generate valid coverage data for the analysis phase
-. Use the correct template variables (`<< test.atoms >>`, `<< outputs.junit >>`, `<< outputs.lcov >>`)
-. Output test results in a format CircleCI can parse (typically JUnit XML)
-
-See the "Custom Configuration" section for detailed examples.
+* Ensure your commands properly handle test execution.
+*  Generate valid coverage data for the analysis phase.
+* Use the correct template variables (`<< test.atoms >>`, `<< outputs.junit >>`, `<< outputs.lcov >>`).
+* Output test results in a format CircleCI can parse (typically JUnit XML).
 
 === What happens if no tests are impacted by a change?
 
@@ -761,14 +799,62 @@ You can also compare:
 
 === Can I run analysis on branches other than main?
 
-Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on `main` by default, you can configure it to run on:
+Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis typically runs on `main` by default, you can configure it to run on any of the following:
 
-. Any specific branch (for example, `develop` or `staging`).
-. Multiple branches simultaneously.
-. Feature branches if needed for testing.
-. Scheduled pipelines independent of branch.
+* Any specific branch (for example, `develop` or `staging`).
+* Multiple branches simultaneously.
+* Feature branches if needed for testing.
+* Scheduled pipelines independent of branch.
 
-See Scenario 3 in the "Flag Usage Scenarios" section for examples of customizing branch behavior.
+See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism on the analysis branch>> example for an example of customizing branch behavior.
+
+=== Can I run test analysis and selection on any branch?
+
+Yes! The branch behavior is fully customizable through your CircleCI configuration. While analysis runs on main by default, you can configure it to run on:
+
+* Any specific branch (for example, `develop` or `staging`).
+* Feature branches if needed for testing.
+* Scheduled pipelines.
+
+See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism on the analysis branch>> example for an example of customizing branch behavior.
+
+[#baseline-coverage]
+=== Why are there so many files impacting a test?
+
+If you see many files impacting each test during analysis (for example, "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
+
+This extraneous coverage can be excluded by providing an `analysis-baseline` command to compute the code covered during startup that isn't directly exercised by test code. We call this "baseline coverage data".
+
+The `analysis-baseline` command must produce coverage output written a coverage template variable. The baseline coverage data can be in any supported coverage format. While it does not need to match your test coverage output format, using the same format (for example, LCOV format for `<< outputs.lcov >>`) is recommended for consistency.
+
+. Create a minimal test that only does imports/setup (no test logic), in the example below this is called `src/baseline/noop.test.ts`.
+. Add an `analysis-baseline` command to your test suite. This command will be broadly similar to your `analysis` command, except that it should only run the minimal test.
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+name: ci tests
+discover: jest --listTests --testPathPattern=src/
+run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
+analysis: |
+  jest --runInBand --silent --bail --coverage --coverageProvider=v8 \
+       --coverage-directory="$(dirname << outputs.lcov >>)" \
+       --coverageReporters=lcovonly \
+       << test.atoms >> \
+       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+analysis-baseline: |
+  jest --runInBand --silent --bail --coverage --coverageProvider=v8 \
+       --coverageReporters=lcovonly \
+       --coverage-directory="$(dirname << outputs.lcov >>)" \
+       "src/baseline/noop.test.ts" \
+       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  adaptive-testing: true
+----
+
+The `analysis-baseline` command will be run just before running analysis. The coverage data produced by the `analysis-baseline` command will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test.
 
 === What test frameworks are supported?
 
@@ -782,4 +868,4 @@ Adaptive testing is runner-agnostic. We provide default configurations for the f
 * Cypress (E2E testing)
 * Vitest
 
-The key requirement is that your test runner can generate coverage data in a parsable format (typically LCOV or similar).
+The key requirement is that your test runner can generate coverage data in a parsable format (currently, we support LCOV and Go's "legacy coverage" format).

@@ -134,6 +134,8 @@ stateDiagram-v2
     unauthorized --> [*]
 ----
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Status | Description
@@ -155,6 +157,7 @@ stateDiagram-v2
 | Unauthorized | The job uses a restricted context and the actor that triggered the work does NOT have access to that context.
 
 |===
+--
 
 [#steps-overview]
 == Steps overview

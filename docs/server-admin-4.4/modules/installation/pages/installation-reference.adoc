@@ -165,7 +165,6 @@ nomad:
 pass:[<!-- vale off -->]
 [.table-scroll]
 --
-[.table.table-striped]
 [cols=4*, options="header"]
 |===
 |Key |Type |Default |Description

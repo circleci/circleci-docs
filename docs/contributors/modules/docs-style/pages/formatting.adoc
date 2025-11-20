@@ -2,6 +2,8 @@
 :page-noindex: true
 :experimental:
 
+pass:[<!-- vale off -->]
+
 [#styling-text]
 == Styling text
 
@@ -94,3 +96,5 @@ This is a longer admonition with an ordered list:
 . Step 2
 . Step 3
 ****
+
+pass:[<!-- vale on -->]

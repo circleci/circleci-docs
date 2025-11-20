@@ -239,15 +239,12 @@ The setup steps vary by provider. At a high level you will:
 
 When setting up the OIDC Identity Provider to trust CircleCI, use these parameters:
 
-* **OpenID Configuration URL (Issuer URL):**
-    `https://oidc.circleci.com/org/**<ORG_ID>/**.well-known/openid-configuration`
-    *(Remember to substitute your actual CircleCI Organization ID.)*
+* **OpenID Configuration URL (Issuer URL):** `++https://oidc.circleci.com/org/<ORG_ID>/.well-known/openid-configuration++` +
+(Remember to substitute your actual CircleCI Organization ID.)
 
-* **OpenID Client ID (Audience):**
-    Your **CircleCI Organization ID** (the `<ORG_ID>` value).
+* **OpenID Client ID (Audience):** Your CircleCI Organization ID (the `<ORG_ID>` value).
 
-* **Scope:**
-    Use the standard required scope: `openid`.
+* **Scope:** Use the standard required scope: `openid`.
 
 **Validation and network requirements**:
 
@@ -387,6 +384,8 @@ The following list shows common and important events found in the audit log. Thi
 
 == Audit log fields
 
+[.table-scroll]
+--
 [cols="1,4", options="header"]
 |===
 | Field | Description
@@ -402,3 +401,4 @@ The following list shows common and important events found in the audit log. Thi
 | `success` | A flag to indicate if the action was successful.
 | `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 |===
+--

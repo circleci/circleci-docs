@@ -181,6 +181,8 @@ Use the `circleci tests run` command to run your tests, split your tests across 
 
 The following table show a full list of option flags available when using `circleci tests run`.
 
+[.table-scroll]
+--
 |===
 | Flag | Type | Description | Required?
 
@@ -214,6 +216,7 @@ The following table show a full list of option flags available when using `circl
 | enable verbose logging output.
 | No
 |===
+--
 
 [#the-tests-split-command]
 === The tests split command
