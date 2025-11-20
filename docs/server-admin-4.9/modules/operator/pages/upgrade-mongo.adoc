@@ -183,7 +183,7 @@ $ kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
 ----
 
-. You should get an `ok: 1` response from MongoDB. Exit out of the MongoDB shell and pod.
+. You should get an `{ "ok" : 1 }` response from MongoDB. Exit out of the MongoDB shell and pod.
 
 ==== 2. Upgrade from MongoDB 5.0 to 6.0
 
@@ -206,7 +206,7 @@ $ kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "6.0" } )
 ----
 
-. You should get `ok: 1` again. Exit out of the shell and pod.
+. You should get `{ "ok" : 1 }`` again. Exit out of the shell and pod.
 
 ==== 3. Upgrade from MongoDB 6.0 to 7.0
 
@@ -233,4 +233,4 @@ $ kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "7.0", confirm: true } )
 ----
 
-. Once you receive `ok: 1`, you have successfully upgraded your MongoDB to 7.0.15.
+. Once you receive `{ "ok" : 1 }``, you have successfully upgraded your MongoDB to 7.0.15.
