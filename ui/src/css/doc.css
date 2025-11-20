@@ -320,6 +320,14 @@
   margin: 1rem 0 0;
 }
 
+.doc .openblock.tabs {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
+.doc .imageblock {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
 .doc > table.tableblock,
 .doc > table.tableblock + *,
 .doc .tablecontainer,
@@ -658,7 +666,7 @@
   vertical-align: middle;
   object-fit: contain;
   border: 1px solid #D4D4D4;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 /* Remove border for images with no-border class */
