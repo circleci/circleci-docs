@@ -51,6 +51,7 @@ asciidoc:
     serverversion48: 4.8.5
     serverversion: 3.4.8
     terraformversion: 0.15.4
+    dockerversion: v28
     kubectlversion: 1.19
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
@@ -81,3 +82,4 @@ antora:
         line_color: '#B4B8C6'
         primary_border_color: '#008542'
         primary_text_color: '#00381A'
+  - require: ./extensions/detect-unused-media-extension.js
