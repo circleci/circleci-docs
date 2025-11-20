@@ -1,4 +1,3 @@
----
 extends: existence
 message: "List items should end with a period (unless it's a single word or URL)."
 link: https://github.com/circleci/circleci-docs
