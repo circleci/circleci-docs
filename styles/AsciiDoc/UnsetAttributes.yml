@@ -1,0 +1,49 @@
+---
+extends: script
+level: suggestion
+message: "Set attribute directive does not have a corresponding unset attribute directive."
+link: https://docs.asciidoctor.org/asciidoc/latest/attributes/unset-attributes/#unset-a-document-attribute-in-the-body
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+
+  // trim extra whitespace
+  scope = text.trim_space(scope)
+  // add a newline, it might be missing
+  scope += "\n"
+  // clean out multi-line comments
+  scope = text.re_replace("(?s) *(\n////.*?////\n)", scope, "")
+
+  attr_regex := "^:[\\w-_]+:.*$"
+  context_mod_docs_regex := "^:context|_content-type|_mod-docs-content-type:.*$"
+  attr_name_regex := ":[\\w-_]+:"
+  attr_name := ""
+  unset_attr_pref := ""
+  unset_attr_suff := ""
+
+  for line in text.split(scope, "\n") {
+    if text.re_match(attr_regex, line) {
+      if !text.re_match(context_mod_docs_regex, line) {
+        start := text.index(scope, line)
+        matches = append(matches, {begin: start, end: start + len(line)})
+        // re_find returns an array holding all matches
+        attr_name = ((text.re_find(attr_name_regex, line))[0][0])["text"]
+        unset_attr_pref = `^:!` + text.trim_prefix(attr_name, `:`)
+        unset_attr_suff = `^` + text.trim_suffix(attr_name, `:`) + `!:`
+        // loop through lines for every attr found
+        for line in text.split(scope, "\n") {
+          if text.re_match(unset_attr_pref, line) {
+            if len(matches) > 0 {
+              // remove the most recently added match
+              matches = matches[:len(matches)-1]
+            } else if text.re_match(unset_attr_suff, line) {
+              if len(matches) > 0 {
+                matches = matches[:len(matches)-1]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
