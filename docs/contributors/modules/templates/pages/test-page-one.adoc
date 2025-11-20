@@ -118,8 +118,3 @@ workflows:
 *Thing three*:: Definition of thing three.
 
 pass:[<!-- vale on -->]
-
-* A list item with no full stop
-* A list item with a full stop.
-* Word
-* https://example.com

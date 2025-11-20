@@ -3,9 +3,6 @@
 :page-description: How to enable GitHub Checks for CircleCI
 :experimental:
 
-* A list item with no full stop
-* A list item with a full stop.
-
 [#introduction]
 == Introduction
 
