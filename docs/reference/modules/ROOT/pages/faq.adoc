@@ -1,6 +1,6 @@
 = FAQ
 :page-platform: Cloud, Server v4+
-:description: Frequently asked questions about CircleCI
+:page-description: Frequently asked questions about CircleCI
 :experimental:
 
 This page answers frequently asked questions about the following CircleCI topics:
