@@ -1,0 +1,59 @@
+---
+extends: script
+message: "Numbered callout does not follow sequentially."
+level: warning
+link: https://docs.asciidoctor.org/asciidoc/latest/verbatim/callouts/
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+
+  // clean out multi-line comments
+  scope = text.re_replace("(?s) *(\n////.*?////\n)", scope, "")
+  //add a newline, it might be missing
+  scope += "\n"
+
+  prev_num := 0
+  callout_regex := "^<(\\d+)>"
+  listingblock_delim_regex := "^-{4,}$"
+  if_regex := "^ifdef::|ifndef::"
+  endif_regex := "^endif::\\[\\]"
+  inside_if := false
+
+  for line in text.split(scope, "\n") {
+    // trim trailing whitespace
+    line = text.trim_space(line)
+
+    // check if we're entering a conditional block
+    if text.re_match(if_regex, line) {
+        inside_if = true
+    } else if text.re_match(endif_regex, line) {
+        inside_if = false
+    }
+
+    //reset count if we hit a listing block delimiter
+    if text.re_match(listingblock_delim_regex, line) {
+      prev_num = 0
+    }
+
+    //only count callouts where there are no ifdefs
+    if !inside_if {
+      if text.re_match(callout_regex, line) {
+        callout := text.re_find("<(\\d+)>", line)
+        for key, value in callout {
+          //trim angle brackets from string
+          trimmed := callout[key][0]["text"]
+          trimmed = text.trim_prefix(trimmed, "<")
+          trimmed = text.trim_suffix(trimmed, ">")
+          //cast string > int
+          num := text.atoi(trimmed)
+          //start counting
+          if num != prev_num+1 {
+            start := text.index(scope, line)
+            matches = append(matches, {begin: start, end: start + len(line)})
+          }
+          prev_num = num
+        }
+      }
+    }
+  }
