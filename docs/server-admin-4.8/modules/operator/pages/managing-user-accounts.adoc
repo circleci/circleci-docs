@@ -1,4 +1,5 @@
 = Managing user accounts
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: This section provides information to help CircleCI server v4.8 operators manage user accounts.
 :experimental:
@@ -59,5 +60,5 @@ When using GitHub.com, you can limit who can register with your CircleCI install
 
 . Navigate to your CircleCI Admin Settings page.
 . Select *System Settings* from the Admin Setting menu.
-. Scroll down to Required Org Membership List.
+. Scroll down to Required Organization Membership List.
 . Enter the organization(s) you wish to approve. If entering more than one organization, use a comma-delimited string.
