@@ -344,6 +344,27 @@ The coverage location does not need to be set in the outputs map. A temporary fi
 
 . Update your `.circleci/test-suites.yml` file with the analysis command.
 
+[NOTE]
+====
+*Multi-project/monorepo with the same filenames across sub-packages?*
+
+To prevent the files and tests conflicting with others in the same project (`service-1/index.test.ts`, `service-2/index.test.ts`), the `impact-key` option can be passed to group relevant impact data together when running analysis.
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+name: service-1 tests
+options:
+  adaptive-testing: true
+  impact-key: service-1
+---
+name: service-2 tests
+options:
+  adaptive-testing: true
+  impact-key: service-2
+----
+====
+
 [source,yaml]
 ----
 # .circleci/test-suites.yml
@@ -522,6 +543,10 @@ Any remaining tests will be analysed the next time test analysis is run.
 |true
 |Whether the tests should be distributed across a shared queue and fetched across multiple dynamic batches. +
 If a test runner has slow start up time per batch, disabling this can speed up tests.
+
+|`impact-key`
+|`default`
+|Group relevant impact data together using a matching key within the same project.
 |===
 --
 
