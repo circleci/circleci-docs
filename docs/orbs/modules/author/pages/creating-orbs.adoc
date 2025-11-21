@@ -1,6 +1,6 @@
 = Publishing orbs
 :page-platform: Cloud
-:description: Publishing Orbs to the Orb Registry
+:page-description: Publishing Orbs to the Orb Registry
 :experimental:
 
 This guide covers the steps required to publish an orb.
