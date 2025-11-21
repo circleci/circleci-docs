@@ -1,36 +1,37 @@
-= Adaptive testing
+= Smarter Testing
 :page-badge: Preview
 :page-platform: Cloud
-:page-description: This document describes the adaptive testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
+:page-description: This page describes CircleCI's Smarter Testing. Only run tests that are impacted by code changes and evenly distribute tests across parallel execution nodes.
 :experimental:
 :page-noindex: true
+:page-aliases: adaptive-testing.adoc
 
-CAUTION: *Adaptive testing* is available in closed preview. When the feature is made generally available there will be a cost associated with access and usage.
+CAUTION: *Smarter Testing* is available in closed preview. When the feature is made generally available there will be a cost associated with access and usage.
 
 NOTE: This page is currently in development and will be updated as the feature is developed.
 
-Use adaptive testing to optimize test runs as follows:
+Use Smarter Testing to optimize test runs as follows:
 
 * Run only tests that are impacted by code changes.
 * Evenly distribute tests across parallel execution nodes.
 
-Adaptive testing reduces test execution time while maintaining test confidence.
+Smarter Testing reduces test execution time while maintaining test confidence.
 
-== Is my project a good fit for adaptive testing?
+== Is my project a good fit for Smarter Testing?
 
-The following list shows some examples of where adaptive testing can be most beneficial:
+The following list shows some examples of where Smarter Testing can be most beneficial:
 
 * Tests that exercise code within the same repository.
-* Projects with comprehensive test coverage. The more thorough your tests, the more precisely adaptive testing can identify which tests are impacted by changes.
+* Projects with comprehensive test coverage. The more thorough your tests, the more precisely Smarter Testing can identify which tests are impacted by changes.
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest) where generating coverage reports is straightforward.
 +
-TIP: In codebases with sparse test coverage, adaptive testing cannot accurately determine which tests cover changed code. This causes the system to run more tests, reducing the benefits of intelligent test selection.
+TIP: In codebases with sparse test coverage, Smarter Testing cannot accurately determine which tests cover changed code. This causes the system to run more tests, reducing the benefits of intelligent test selection.
 
 == Limitations
 
-* Generating code coverage data is essential for determining how tests are related to code. If tests are run in a way that makes generating and accessing code coverage data tricky then adaptive testing may not be a good fit.
-* Adaptive testing works best when testing a single deployable artifact. For example, a monorepo with integration tests that span multiple packages/services, especially when services run in separate container, makes coverage generation and consolidation difficult.
-* Adaptive testing needs to be configured with commands to discover all available tests and run a subset of those tests. If you cannot run commands to discover tests and run a subset of tests on the CLI then adaptive testing may not be a good fit.
+* Generating code coverage data is essential for determining how tests are related to code. If tests are run in a way that makes generating and accessing code coverage data tricky then Smarter Testing may not be a good fit.
+* Smarter Testing works best when testing a single deployable artifact. For example, a monorepo with integration tests that span multiple packages/services, especially when services run in separate container, makes coverage generation and consolidation difficult.
+* Smarter Testing needs to be configured with commands to discover all available tests and run a subset of those tests. If you cannot run commands to discover tests and run a subset of tests on the CLI then Smarter Testing may not be a good fit.
 
 == Key benefits
 
@@ -40,17 +41,17 @@ TIP: In codebases with sparse test coverage, adaptive testing cannot accurately 
 * Scale efficiently as test suites grow.
 
 == How it works
-Adaptive testing operates through two main components that work together to optimize your test execution:
+Smarter Testing operates through two main components that work together to optimize your test execution:
 
-* Dynamic test splitting
-* Test impact analysis
+* Dynamic test splitting.
+* Test impact analysis.
 
 Each component is described in more detail below.
 
 === Dynamic test splitting
 Dynamic test splitting distributes your tests across parallel execution nodes. The system maintains a shared queue that each node pulls from to create a balanced workload.
 
-When you configure parallelism in your job, adaptive testing automatically:
+When you configure parallelism in your job, Smarter Testing automatically:
 
 * Retrieves timing data from previous test runs.
 * Calculates optimal test distribution across your specified number of parallel nodes.
@@ -293,15 +294,15 @@ options:
 
 If tests are still slower, share the pipeline link in the closed beta slack channel.
 
-== 2. Enable adaptive testing
+== 2. Enable Smarter Testing
 
-We recommend following the steps in <<getting-started>> first before enabling the adaptive testing feature to ensure the `discover` and `run` commands are set up correctly.
+We recommend following the steps in <<getting-started>> first before enabling the Smarter Testing feature to ensure the `discover` and `run` commands are set up correctly.
 
-The goal of this section is to enable adaptive testing for your test suite.
+The goal of this section is to enable Smarter Testing for your test suite.
 
 === 2.1 Update the test suites file
 
-When using adaptive testing for test impact analysis the following commands are used:
+When using Smarter Testing for test impact analysis the following commands are used:
 
 * The `discover` command discovers all tests in a test suite.
 * The `run` command runs only impacted tests and a new command.
@@ -518,7 +519,7 @@ The following options are available to be defined in the options map in config:
 
 | `adaptive-testing`
 |false
-|Enables the adaptive testing features, such as test impact analysis.
+|Enables the Smarter Testing features, such as test impact analysis.
 
 | `full-test-run-paths`
 a|
@@ -573,9 +574,12 @@ a| * `all` selects and runs all discovered tests, used to run the full test suit
 |===
 --
 
-== 3. Start using adaptive testing
+== 3. Start using Smarter Testing
 
-Now the test suite is set up, test selection is working and the test analysis is up to date with the latest changes from the feature branch that ran the first test analysis.
+Now the test suite is set up:
+
+* Test selection is working.
+* The test analysis is up to date with the latest changes from the feature branch that ran the first test analysis.
 
 *Action Items*
 
@@ -683,7 +687,7 @@ options:
 
 == Limitations
 
-The adaptive testing feature has some limitations to consider:
+The Smarter Testing feature has some limitations to consider:
 
 *Initial setup period*:: Test impact analysis requires an initial analysis run on all tests before intelligent selection can begin. This first analysis run will be slower than normal test execution.
 
@@ -703,9 +707,9 @@ The adaptive testing feature has some limitations to consider:
 
 *Debugging steps:*
 
-. Check that all test files are discovered with the discover command
-. Verify parallelism is set correctly in your config.yml
-. Look for timing data in previous test runs
+. Check that all test files are discovered with the discover command.
+. Verify parallelism is set correctly in your config.yml.
+. Look for timing data in previous test runs.
 . Ensure test results are being stored with `store_test_results`.
 
 === Test impact analysis not selecting expected tests
@@ -716,10 +720,10 @@ The adaptive testing feature has some limitations to consider:
 
 *Debugging steps:*
 
-. Verify analysis has run successfully on your configured branch(es)
-. Check that coverage data is being generated correctly
-. Review the full-test-run-paths configuration - changes to these paths trigger full test runs
-. Confirm the analysis command is producing valid LCOV output
+. Verify analysis has run successfully on your configured branch(es).
+. Check that coverage data is being generated correctly.
+. Review the full-test-run-paths configuration - changes to these paths trigger full test runs.
+. Confirm the analysis command is producing valid LCOV output.
 
 *When all tests run:* If no impact data exists or all tests are determined to be affected, the system runs all tests as a safety measure.
 
@@ -769,9 +773,9 @@ The frequency depends on your test execution speed and development pace:
 
 *Consider re-running analysis:*
 
-* After major refactoring or code restructuring
-* When test selection seems inaccurate or outdated
-* After adding significant new code or tests
+* After major refactoring or code restructuring.
+* When test selection seems inaccurate or outdated.
+* After adding significant new code or tests.
 
 *Remember:* You can customize which branches run analysis through your CircleCI configuration - it does not have to be limited to the main branch.
 
@@ -807,7 +811,7 @@ When test selection determines that no existing tests are affected by your chang
 
 *Best practice:* Include relevant paths in `full-test-run-paths` to explicitly trigger full test runs for infrastructure changes.
 
-=== How do I know if adaptive testing is working?
+=== How do I know if Smarter Testing is working?
 
 Look for these indicators in your CircleCI build output:
 
@@ -846,7 +850,7 @@ See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism o
 [#baseline-coverage]
 === Why are there so many files impacting a test?
 
-If you see many files impacting each test during analysis (for example, "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
+If you see many files impacting each test during analysis, for example, `...found 150 files impacting test...`, this may be caused by shared setup code like global imports or framework initialization being included in coverage.
 
 This extraneous coverage can be excluded by providing an `analysis-baseline` command to compute the code covered during startup that isn't directly exercised by test code. We call this "baseline coverage data".
 
@@ -883,7 +887,7 @@ The `analysis-baseline` command will be run just before running analysis. The co
 
 === What test frameworks are supported?
 
-Adaptive testing is runner-agnostic. We provide default configurations for the following test frameworks:
+Smarter Testing is runner-agnostic. We provide default configurations for the following test frameworks:
 
 * Jest (JavaScript/TypeScript)
 * gotestsum (Go)
