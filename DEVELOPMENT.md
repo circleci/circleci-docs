@@ -1,6 +1,6 @@
-# CircleCI Docs Static Site: Development Guide
+# CircleCI docs site: Development Guide
 
-This document provides comprehensive guidance for developers working on the CircleCI Docs Static Site.
+This document provides comprehensive guidance for developers working on the CircleCI docs site.
 
 ## Table of Contents
 - [Development Environment Setup](#development-environment-setup)
