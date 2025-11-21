@@ -1,7 +1,7 @@
 ---
 extends: script
 scope: raw
-level: warning
+level: error
 message: "Page description should not exceed 160 characters for SEO."
 link: https://github.com/circleci/circleci-docs
 script: |

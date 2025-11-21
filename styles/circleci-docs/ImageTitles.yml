@@ -1,7 +1,7 @@
 ---
 extends: script
 scope: raw
-level: warning
+level: error
 message: "Images should have a title (line starting with '.' before the image)."
 link: https://github.com/circleci/circleci-docs
 script: |

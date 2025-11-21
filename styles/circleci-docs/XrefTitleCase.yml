@@ -1,7 +1,7 @@
 ---
 extends: script
 scope: raw
-level: warning
+level: error
 message: "Use title case for xref link text."
 link: https://github.com/circleci/circleci-docs
 script: |
