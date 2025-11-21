@@ -1,6 +1,6 @@
 # CircleCI docs content authoring guide
 
-This guide provides comprehensive information for authors contributing content to the CircleCI Docs Static Site.
+This guide provides comprehensive information for authors contributing content to the CircleCI docs site.
 
 ## Table of Contents
 - [Content Organization](#content-organization)

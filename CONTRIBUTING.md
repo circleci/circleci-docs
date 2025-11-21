@@ -1,4 +1,4 @@
-# CircleCI Docs Static Site: Contributing Guide
+# CircleCI docs site: Contributing Guide
 
 This guide provides comprehensive information for contributors to the CircleCI docs project.
 
@@ -263,7 +263,7 @@ Once your PR is approved it will be merged by a maintainer. Your contribution wi
 
 ### Release Schedule
 
-The CircleCI Docs Static Site follows a continuous delivery model:
+The CircleCI docs site follows a continuous delivery model:
 
 - Documentation changes: Released as soon as they're approved
 - Technical changes: Released as and when ready
@@ -293,4 +293,4 @@ If you need help with your contribution:
 - **Discussions**: Use GitHub Discussions for questions
 - **Documentation**: Refer to the technical docs
 
-Thank you for contributing to the CircleCI Docs Static Site!
+Thank you for contributing to the CircleCI docs site!
