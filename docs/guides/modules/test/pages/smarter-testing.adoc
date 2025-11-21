@@ -1,7 +1,7 @@
 = Smarter Testing
 :page-badge: Preview
 :page-platform: Cloud
-:page-description: This document describes the Smarter Testing feature in CircleCI, which enables only running tests that are impacted by code changes and evenly distributes tests across parallel execution nodes.
+:page-description: This page describes CircleCI's Smarter Testing. Only run tests that are impacted by code changes and evenly distribute tests across parallel execution nodes.
 :experimental:
 :page-noindex: true
 :page-aliases: adaptive-testing.adoc
@@ -43,8 +43,8 @@ TIP: In codebases with sparse test coverage, Smarter Testing cannot accurately d
 == How it works
 Smarter Testing operates through two main components that work together to optimize your test execution:
 
-* Dynamic test splitting
-* Test impact analysis
+* Dynamic test splitting.
+* Test impact analysis.
 
 Each component is described in more detail below.
 
@@ -551,7 +551,10 @@ a| * `all` selects and runs all discovered tests, used to run the full test suit
 
 == 3. Start using Smarter Testing
 
-Now the test suite is set up, test selection is working and the test analysis is up to date with the latest changes from the feature branch that ran the first test analysis.
+Now the test suite is set up:
+
+* Test selection is working.
+* The test analysis is up to date with the latest changes from the feature branch that ran the first test analysis.
 
 *Action Items*
 
@@ -679,9 +682,9 @@ The Smarter Testing feature has some limitations to consider:
 
 *Debugging steps:*
 
-. Check that all test files are discovered with the discover command
-. Verify parallelism is set correctly in your config.yml
-. Look for timing data in previous test runs
+. Check that all test files are discovered with the discover command.
+. Verify parallelism is set correctly in your config.yml.
+. Look for timing data in previous test runs.
 . Ensure test results are being stored with `store_test_results`.
 
 === Test impact analysis not selecting expected tests
@@ -692,10 +695,10 @@ The Smarter Testing feature has some limitations to consider:
 
 *Debugging steps:*
 
-. Verify analysis has run successfully on your configured branch(es)
-. Check that coverage data is being generated correctly
-. Review the full-test-run-paths configuration - changes to these paths trigger full test runs
-. Confirm the analysis command is producing valid LCOV output
+. Verify analysis has run successfully on your configured branch(es).
+. Check that coverage data is being generated correctly.
+. Review the full-test-run-paths configuration - changes to these paths trigger full test runs.
+. Confirm the analysis command is producing valid LCOV output.
 
 *When all tests run:* If no impact data exists or all tests are determined to be affected, the system runs all tests as a safety measure.
 
@@ -745,9 +748,9 @@ The frequency depends on your test execution speed and development pace:
 
 *Consider re-running analysis:*
 
-* After major refactoring or code restructuring
-* When test selection seems inaccurate or outdated
-* After adding significant new code or tests
+* After major refactoring or code restructuring.
+* When test selection seems inaccurate or outdated.
+* After adding significant new code or tests.
 
 *Remember:* You can customize which branches run analysis through your CircleCI configuration - it does not have to be limited to the main branch.
 
@@ -822,7 +825,7 @@ See the <<run-higher-parallelism-on-the-analysis-branch,Run higher parallelism o
 [#baseline-coverage]
 === Why are there so many files impacting a test?
 
-If you see many files impacting each test during analysis (for example, "...found 150 files impacting test..."), this may be caused by shared setup code like global imports or framework initialization being included in coverage.
+If you see many files impacting each test during analysis, for example, `...found 150 files impacting test...`, this may be caused by shared setup code like global imports or framework initialization being included in coverage.
 
 This extraneous coverage can be excluded by providing an `analysis-baseline` command to compute the code covered during startup that isn't directly exercised by test code. We call this "baseline coverage data".
 
