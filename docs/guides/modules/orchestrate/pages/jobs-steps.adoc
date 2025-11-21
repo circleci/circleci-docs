@@ -85,6 +85,7 @@ stateDiagram-v2
     state "blocked or not running" as pending
     blocked --> pending : Job instructed to start but not yet started
     blocked --> unauthorized : Trying to use a context without permission
+    blocked --> not_run : Job's dependencies will never be satisfied
    
     pending --> running
     
@@ -102,6 +103,7 @@ stateDiagram-v2
     success --> [*]
     canceled --> [*]
     unauthorized --> [*]
+    not_run --> [*]
 ----
 
 .CircleCI server job status transitions
