@@ -1,6 +1,6 @@
 = Using credits
 :page-platform: Cloud
-:description: Learn about the CircleCI credits-based plan system.
+:page-description: Learn about the CircleCI credits-based plan system.
 :experimental:
 
 This document describes how to find the available resources regarding credits with CircleCI.

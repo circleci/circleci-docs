@@ -1,6 +1,6 @@
 = Migrate from Travis CI
 :page-platform: Cloud
-:description: An overview of how to migrate from Travis CI to CircleCI.
+:page-description: An overview of how to migrate from Travis CI to CircleCI.
 :experimental:
 
 This document provides an overview of how to migrate from Travis CI to CircleCI.
