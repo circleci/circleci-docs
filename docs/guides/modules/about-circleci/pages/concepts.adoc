@@ -1,6 +1,6 @@
 = Concepts
 :page-platform: Cloud, Server v4+
-:description: CircleCI concepts
+:page-description: CircleCI concepts
 :experimental:
 
 [#introduction]

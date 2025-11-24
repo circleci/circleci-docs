@@ -1,6 +1,6 @@
 = Migrating from Docker to Machine
 :page-platform: Cloud, Server v4+
-:description: Best practices and considerations when migrating your executor from Docker to machine
+:page-description: Best practices and considerations when migrating your executor from Docker to machine
 :experimental:
 
 This page contains some general guidelines and considerations to make when moving from the Docker executor to machine, or vice versa.
