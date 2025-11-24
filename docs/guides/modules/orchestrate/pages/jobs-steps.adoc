@@ -119,17 +119,18 @@ stateDiagram-v2
    
     pending --> running
 
-    pending --> skipped : Only build PRs setting enabled<br/>ci-skip<br/>No project found<br/>Abusive<br/>Sanctioned
+    pending --> not_run : Only build PRs setting enabled
     pending --> blocked : Rerun
 
     running --> canceled
     pending --> canceled
     blocked --> canceled
 
+    pending --> failed : Abusive / Sanctioned
     running --> failed
     running --> success
 
-    skipped --> [*]
+    not_run --> [*]
     success --> [*]
     failed --> [*]
     canceled --> [*]
