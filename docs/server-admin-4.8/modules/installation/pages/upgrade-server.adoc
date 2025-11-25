@@ -44,7 +44,7 @@ Customers that do not perform this step may have issues restoring Vault from bac
 [source,shell,subs=attributes+]
 helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
-. Upgrade your Nomad clients and servers (if externalized) Terraform modules to the link:https://github.com/CircleCI-Public/server-terraform/releases/tag/4.8.0[4.8 release]. Follow the documentation to plan and apply the Terraform changes for your xref:phase-3-aws-execution-environments.adoc#create-your-cluster-with-terraform[AWS] or xref:phase-3-gcp-execution-environments.adoc#create-your-cluster-with-terraform[GCP] environment.
+. Upgrade your Nomad clients and servers (if externalized) Terraform modules to the link:https://github.com/CircleCI-Public/server-terraform/releases/tag/{serverversion48}[4.8 release]. Follow the documentation to plan and apply the Terraform changes for your xref:phase-3-aws-execution-environments.adoc#create-your-cluster-with-terraform[AWS] or xref:phase-3-gcp-execution-environments.adoc#create-your-cluster-with-terraform[GCP] environment.
 
 . Perform the upgrade:
 +
