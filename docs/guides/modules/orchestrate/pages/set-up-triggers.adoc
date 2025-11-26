@@ -129,6 +129,11 @@ Scheduled::
 --
 For steps to add a schedule trigger, see the xref:schedule-triggers.adoc[Schedule Triggers] page.
 --
+GitHub OAuth::
++
+--
+GitHub OAuth triggers are set up automatically when a GitHub OAuth pipeline is set up. You can delete and re-add a trigger for a GitHub OAuth pipeline. If you do delete a GitHub OAuth trigger, you will see a line at the bottom of the pipeline section: "To re-add the default OAuth trigger click here". Select the link to re-add the default OAuth trigger.
+--
 ====
 
 [#next-steps]

@@ -1,6 +1,6 @@
 = Collect test data
 :page-platform: Cloud, Server v4+
-:description: A guide to collecting test data in your CircleCI projects.
+:page-description: A guide to collecting test data in your CircleCI projects.
 :experimental:
 
 [#introduction]

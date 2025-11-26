@@ -1,6 +1,6 @@
 = Version control system integration overview
 :page-platform: Cloud, Server
-:description: An overview guide to the version control systems you can integrate with CircleCI.
+:page-description: An overview guide to the version control systems you can integrate with CircleCI.
 :experimental:
 
 When you create a CircleCI project you will select a code repository to connect. The code in the repo you select is checked out when your pipelines trigger. CircleCI supports several code version control systems (VCS). This guide gives an overview of the features available to each VCS integration.

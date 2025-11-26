@@ -1,6 +1,6 @@
 = Sample config.yml Files
 :page-platform: Cloud, Server v4+
-:description: Sample config.yml File
+:page-description: Sample config.yml File
 :experimental:
 :page-aliases: example-configs.adoc
 

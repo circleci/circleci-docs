@@ -315,6 +315,7 @@ SLAs?
 Slanger
 [Ss]ignup
 SKUs?
+Smarter Testing
 [Ss]nap
 SSH
 statsd

@@ -1,6 +1,6 @@
 = Configure a Python application on CircleCI
 :page-platform: Cloud, Server v4+
-:description: Continuous integration with Python on CircleCI
+:page-description: Continuous integration with Python on CircleCI
 :experimental:
 
 This quickstart guide covers integrating a Python project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Python project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.

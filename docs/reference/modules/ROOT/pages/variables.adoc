@@ -1,6 +1,6 @@
 = Project values and variables
 :page-platform: Cloud, Server v4+
-:description: A list of all built-in variables for your CircleCI projects.
+:page-description: A list of all built-in variables for your CircleCI projects.
 :experimental:
 
 This page is a reference for all built-in values available for use in your CircleCI projects.
