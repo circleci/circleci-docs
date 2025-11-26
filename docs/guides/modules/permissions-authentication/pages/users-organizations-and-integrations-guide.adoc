@@ -12,10 +12,10 @@ When you log in to CircleCI you are logging in to your _user account_.
 
 As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
 
-You can log in to CircleCI using one of the following methods:
+You can log in to CircleCI using one of the following methods. These methods can not be used together, for example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
 
-* Email and password
-* Social login (GitHub, Bitbucket)
+* Email and password.
+* Social login (GitHub, Bitbucket).
 
 To view your user account integrations, navigate to menu:User Settings[Account Integrations].
 
@@ -30,7 +30,9 @@ Select your icon in the top bar and select **User settings** to access the follo
 | User settings section | What you will find here
 
 | Account Integrations
-| Displays your user ID as well as account integrations with VCS providers. You will find a list of which GitHub or Bitbucket organizations you are connected with. You can disconnect your OAuth connections with GitHub or Bitbucket here.
+| Displays your user ID as well as account integrations with VCS providers. You will find a list of which GitHub (OAuth app) or Bitbucket organizations you are connected with. You can disconnect your OAuth connections with GitHub or Bitbucket here.
+
+
 
 | Notifications
 | Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser.
@@ -51,10 +53,17 @@ Select your icon in the top bar and select **User settings** to access the follo
 | See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
 
 | Job SSH keys
-| Set up an SSH key to access your job containers. For more information on this feature see the xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH] page.
+| Set up an SSH key to access your job containers. For more information on this feature see the xref:execution-managed:ssh-access-jobs.adoc[Debug With SSH] page.
 
 | Beta Program
 | Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+
+| Email
+| View and change your email address for your CircleCI account.
+
+
+| Password & authentication
+| Change password, setup and manage multi-factor authentication (MFA).
 
 |===
 --
