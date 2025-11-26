@@ -1,6 +1,6 @@
-# CircleCI Docs Static Site: Contributing Guide
+# CircleCI docs site: Contributing Guide
 
-This guide provides comprehensive information for contributors to the CircleCI Docs Static Site project.
+This guide provides comprehensive information for contributors to the CircleCI docs project.
 
 ## Table of Contents
 - [Ways to Contribute](#ways-to-contribute)
@@ -14,19 +14,18 @@ This guide provides comprehensive information for contributors to the CircleCI D
 
 ## Ways to Contribute
 
-There are several ways to contribute to the CircleCI Docs Static Site:
+There are several ways to contribute to the CircleCI docs project:
 
 1. **Documentation content**: Add or improve documentation pages
 2. **Technical improvements**: Enhance the site's functionality
 3. **UI improvements**: Improve the user interface and experience
 4. **Bug fixes**: Fix issues with the site or content
-5. **Feature requests**: Suggest new features or improvements
+5. **Feature requests**: Suggest new features or improvements. You can do this by submitting a [GitHub issue](https://github.com/circleci/circleci-docs/issues) or using the feedback form on the docs site itself.
 
 ### Types of Contributions Needed
 
 - Writing tutorials and how-to guides
 - Improving API and reference documentation
-- Translating content
 - Fixing typos and clarifying explanations
 - Developing new UI components
 - Improving build performance
@@ -45,7 +44,7 @@ There are several ways to contribute to the CircleCI Docs Static Site:
 
 1. **Fork the repository**:
    - Visit [https://github.com/circleci/circleci-docs](https://github.com/circleci/circleci-docs)
-   - Click the "Fork" button to create your own copy
+   - Click the "Fork" button to create your own copy. If you are a CircleCI employee you can simply clone the repo rather than creating a fork.
 
 2. **Clone your fork**:
    ```bash
@@ -109,12 +108,12 @@ Example: `docs/add-kubernetes-guide` or `fix/broken-navigation`
    git commit -m "Your commit message"
    ```
 
-   Commit message format: 
+   Commit message format:
    ```
    type(scope): Brief description
-   
+
    Longer description if needed
-   
+
    Fixes #123
    ```
 
@@ -194,9 +193,10 @@ function performTask(input) {
 
 ### Types of Tests
 
-- **Content validation**: Ensuring documentation is accurate
-- **Link checking**: Verifying all links work correctly
-- **UI testing**: Checking for visual and interactive issues
+- **Content validation**: This is a manual text. As far as reasonably possible all docs changes and additions should be manually tested. A member of the CircleCI docs team (or other team) should run through the documented task following any steps outlined in the doc closely to check they are both correct and complete, no missing steps where users could get stuck. Changes to technical content should be reviewed by a member of the engineering team that owns the feature.
+- **Content style checking**: We use [Vale](https://vale.sh/) for content linting. We have vale rules set up to enforce style. You can take a look at these rules in the `/styles` folder. Vale runs in our CI/CD pipeline so you can check for error and warnings when pushing your changes to GitHub. You can also install vale locally on your machine and run vale on the file you are editing or even using an [extension in your IDE](https://marketplace.visualstudio.com/items?itemName=chrischinchilla.vale-vscode).
+- **Link checking**: Verifying all links work correctly. Links are checked as part of our CI build
+- **UI testing**: Checking for visual and interactive issues (we do not currently have any UI testing set up)
 - **Build testing**: Ensuring the site builds correctly
 
 ### Running Tests
@@ -208,7 +208,7 @@ function performTask(input) {
   Review the site locally for content issues.
 
 - **Link checking**:
-  The CI pipeline includes automatic link checking.
+  The CI pipeline includes automatic link checking. Check the outcome of the `Validate` job for issues.
 
 ## Documentation Guidelines
 
@@ -251,31 +251,29 @@ All contributions go through a review process:
 - Are there adequate tests?
 - Does it follow project conventions?
 
+During the review process further discussion might be needed. This will happen in comments in the PR. The docs team review might push changes to your branch to fix style and formatting issues but larger issues will be discussed first.
+
+The speed at which we can process changes will depend on the scope of the change and the existing workload that the docs team has at that time. We would try to respond to contributions within two days of submission.
+
 ### After Approval
 
-Once your PR is approved:
-
-1. It will be merged by a maintainer
-2. Your contribution will be included in the next release
-3. You'll be credited as a contributor
+Once your PR is approved it will be merged by a maintainer. Your contribution will be published immediately (well, around 4 minutes for the pipeline to build!)
 
 ## Release Process
 
 ### Release Schedule
 
-The CircleCI Docs Static Site follows a continuous delivery model:
+The CircleCI docs site follows a continuous delivery model:
 
 - Documentation changes: Released as soon as they're approved
-- Technical changes: Released on a scheduled basis
+- Technical changes: Released as and when ready
 - Emergency fixes: Released as needed
 
 ### Release Process
 
 1. Changes are merged to `main`
 2. CI pipeline builds and tests the site
-3. Automatic deployment to staging environment
-4. Review and testing in staging
-5. Deployment to production
+3. Deployment to production
 
 ### Versioning
 
@@ -295,12 +293,4 @@ If you need help with your contribution:
 - **Discussions**: Use GitHub Discussions for questions
 - **Documentation**: Refer to the technical docs
 
-## Recognition
-
-Contributors are recognized in several ways:
-
-- Attribution in commit history
-- Inclusion in the contributors list
-- Recognition in release notes for significant contributions
-
-Thank you for contributing to the CircleCI Docs Static Site!
+Thank you for contributing to the CircleCI docs site!
