@@ -178,12 +178,12 @@ jobs:
       - checkout
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
-          role-arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          aws-region: ${AWS_REGION}
+          role_arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
+          region: ${AWS_REGION}
           # optional parameters
-          profile-name: "OIDC-PROFILE"
-          role-session-name: "example-session"
-          session-duration: "1800"
+          profile_name: "OIDC-PROFILE"
+          role_session_name: "example-session"
+          session_duration: "1800"
 ----
 +
 You can optionally provide a `profile-name`, `role-session-name`, and `session-duration`. If you provide a `profile-name`, the temporary keys and token will be configured to that specific profile. You must use that same `profile-name` with the rest of your AWS commands. If a `profile-name` is not provided, the keys and token will be configured to the default profile.
