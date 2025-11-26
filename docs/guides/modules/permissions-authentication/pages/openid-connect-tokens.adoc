@@ -5,27 +5,45 @@
 
 CircleCI provides OpenID Connect ID (OIDC) tokens in environment variables. Jobs can be configured to use these OIDC tokens to access compatible cloud services without long-lived credentials being stored in CircleCI.
 
+Some advantages to using OIDC over using static credentials:
+
+* **Improved security**: By using OIDC authentication, storing credentials directly in your CircleCI configuration or environment variables is avoided, reducing the risk of exposure.
+
+* **Simplified credential management**: OIDC allows CircleCI to automatically manage the authentication process, eliminating the need to manually manage and rotate credentials.
+
+* **Fine-grained access control**: By associating a cloud provider role with OIDC authentication, exact permissions granted to CircleCI can be controlled, ensuring a least-privilege approach.
+
 [#openid-connect-id-token-availability]
-== OpenID Connect token availability
+== OpenID Connect tokens
 
 CircleCI OpenID Connect ID tokens are available in the following environment variables:
 
-* `$CIRCLE_OIDC_TOKEN`
-* `$CIRCLE_OIDC_TOKEN_V2` - Includes a different format for the `sub` claim, See <<format-of-the-openid-connect-id-token>> for full details.
+[.table-scroll]
+--
+.Explaining the available OIDC tokens available in environment variables
+[cols="1,2", options="header"]
+|===
+| Environment variable
+| Description
+
+| `$CIRCLE_OIDC_TOKEN`
+| The default OIDC token. See <<format-of-the-openid-connect-id-token>> for full details.
+
+| `$CIRCLE_OIDC_TOKEN_V2`
+| Includes a different format for the `sub` claim to include a reference to the repository and branch. See <<format-of-the-openid-connect-id-token>> for full details.
+|===
+--
 
 CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**. See <<oidc-in-open-source-projects>>.
 
-[#setting-up-your-cloud-service]
-== Setting up your cloud service
+[#authenticate-jobs-with-cloud-providers]
+== Set up cloud provider authentication
 
 Before your cloud service will accept CircleCI's OIDC tokens, you need to configure it to trust CircleCI as an identity provider. This tells your cloud service that tokens issued by CircleCI for your organization are legitimate and should be accepted.
 
 An identity provider is a configuration in your cloud service that defines a trusted source of authentication tokens.
 
 You can use CircleCI's OIDC tokens with multiple cloud services.
-
-[#authenticate-jobs-with-cloud-providers]
-== Set up cloud provider authentication
 
 The following sections describe how to configure CircleCI jobs to authenticate with a cloud provider. Follow steps for your cloud provider, either AWS or GCP.
 
@@ -38,10 +56,20 @@ The following instructions cover the following:
 
 NOTE: See the xref:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an Image From AWS ECR With OIDC] how-to guide after following this setup section.
 
-[#set-up-aws]
-=== Set up AWS
+=== Prerequisites
 
-You will need to allow your AWS account to trust CircleCI's OpenID Connect tokens. Follow the steps in this section to create an Identity and Access Management (IAM) identity provider, and an IAM role in AWS. Creating the identity provider is a one-time configuration to get set up, and then you can decide how to manage the associated role(s). You can update the role permissions, using policies, to fit your use cases, or you can create roles specific to each use.
+You will need to have the following to continue your AWS OIDC setup:
+
+* A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A project set up that you want to configure to use OIDC.
+* An AWS account with the necessary permissions to create an IAM identity provider and role.
+
+[#set-up-aws]
+=== 1. Set up identity provider in AWS
+
+In this step you will allow your AWS account to trust CircleCI's OpenID Connect tokens. Follow the steps in this section to create an Identity and Access Management (IAM) identity provider, and an IAM role in AWS.
+
+Creating the identity provider is a one-time configuration to get set up.
 
 To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider], which is unique to your organization. The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
 
@@ -49,18 +77,21 @@ TIP: You can find your CircleCI organization ID by navigating to **Organization 
 
 The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in <<format-of-the-openid-connect-id-token,the table below>>), which is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] page.
 
-. Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. There are multiple setup options including using the management console or CLI. You will need to provide the following:
+Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. There are multiple setup options including using the management console or CLI. You will need to provide the following:
 ** **OpenIDProvider URL**: Enter `\https://oidc.circleci.com/org/<your-organization-id>`, where `your-organization-id` is the ID of your CircleCI organization.
 ** **Audience**: Enter your organization ID.
 
-. Once your have created your identity provider, a banner appears at the top of the AWS console with the option to **Assign role**. Select this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
-+
+=== 2. Assign a role to your identity provider
+
+Now you have you identity provider set up you can assign roles to your identity provider and then you can decide how to manage the associated role(s). You can update the role permissions, using policies, to fit your use cases, or you can create roles specific to each use.
+
+Once your have created your identity provider, a banner appears at the top of the AWS console with the option to **Assign role**. Select this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
+
 ** The **identity provider** that you just created.
 ** For **Audience**, choose the only option, which is your organization ID that you entered when creating the identity provider.
 ** On the **Add Permissions** page you can specify what your CircleCI jobs _can_ and _cannot_ do. Choose only permissions that your job will need. This is an https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice]. You can also write your own policies to lock down permissions to exactly what you need for a specific use case.
 
-[#adding-aws-to-the-circleci-configuration-file]
-=== Adding AWS to your CircleCI configuration file
+=== 3. Add AWS to your CircleCI configuration file
 
 Now that you have set up your trusted identity provider and IAM role, you are ready to configure a CircleCI job that authenticates with AWS using OIDC. Use CircleCI's link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC.
 
@@ -127,7 +158,7 @@ jobs:
       # run the aws-cli/setup command from the orb
       - aws-cli/setup:
           role_arn: "arn:aws:iam::123456789012:role/OIDC-ROLE"
-          region: AWS_REGION
+          region: ${AWS_REGION}
           # optional parameters
           profile_name: "OIDC-PROFILE"
           role_session_name: "example-session"
@@ -156,15 +187,17 @@ If certain projects should only be able to access certain AWS resources, you can
 
 To do this, edit your IAM role's trust policy so that only an OIDC token from your chosen project can assume that role. The trust policy determines under what conditions the role can be assumed.
 
-. Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to **Project Settings > Overview** to find your Project ID.
+. Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to menu:Project Settings [Overview] to find your Project ID.
 
 . Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `organization_id` and your Project ID for `project_id`.
 +
-```yaml
+.Update trust policy to restrict access to specific project
+[source,yaml]
+----
 "StringLike": {
   "oidc.circleci.com/org/<organization_id>:sub": "org/<organization_id>/project/<project_id>/user/*"
 }
-```
+----
 +
 This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] to match the sub claim of CircleCI's OIDC token in your chosen project. Now, jobs in your other projects cannot assume this role.
 
@@ -203,17 +236,28 @@ The following instructions cover the following:
 
 TIP: The Google Cloud CLI reads your configuration file, which contains necessary information instructing Google Cloud to authenticate. You can read about external identity providers on https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Google Cloud's docs].
 
+=== Prerequisites
+
+You will need to have the following to continue your AWS OIDC setup:
+
+* A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A project set up that you want to configure to use OIDC.
+* A GCP account with the necessary permissions to create a Workload Identity pool and provider.
+
 [#setting-up-gcp]
-=== Setting up GCP
+=== 1. Set up GCP
 
-
-Refer to Google Cloud Platform's link:https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring Workload Identity federation] for steps to add an identity provider.
+The steps in this section are based on Google Cloud Platform's link:https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring Workload Identity federation] documentation.
 
 To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider], which is unique to your organization. The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
 
 TIP: You can find your CircleCI organization ID by navigating to **Organization Settings > Overview** in the https://app.circleci.com/[CircleCI web app].
 
 The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in <<format-of-the-openid-connect-id-token,the table below>>), which is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] page.
+
+=== 2. Configure GCP Workload Identity Federation
+
+GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. Using Workload Identity Federation allows applications outside Google Cloud to access Google Cloud resources without the need for storing service account credentials. Instead you can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
 
 In the GCP web UI, follow these steps to add CircleCI as an external identity provider:
 
@@ -226,7 +270,7 @@ In the GCP web UI, follow these steps to add CircleCI as an external identity pr
 ** The issuer is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your CircleCI organization ID.
 . Select **Continue** to configure provider attributes.
 +
-Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding". Use this mapping:
+Configuring the provider attributes provides an opportunity to map claims in CircleCI's oken to Google's "understanding". Use this mapping:
 +
 [.table-scroll]
 --
@@ -250,15 +294,60 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 . A modal will open and you will select the service account you created from the dropdown. This is the account that the token will impersonate, which grants all the associated permissions.
 . Under **Select principals**, you can add conditions, or leave the default.
 . Select **Save**. A pop-up will appear to ask you configure and **download** the configuration file. This file can also be downloaded later by navigating to **Connected Service Accounts**.
-. Save the downloaded configuration file in your repository. This file will be referenced in your CircleCI configuration.
 
-An example of the configuration file is shown below. Note, the `audience` has not been set up yet with the following:
+=== 3. Configure your CircleCI pipeline
 
-* `project_number` (the unique identifying number generated for your project)
-* `pool_id` (an ID that references the Workload Identity pool, for example `circleci_oidc`)
-* `provider_id` (an ID that references the Workload Identity pool provider, for example, `circleci`)
+You have two options for configuring your CircleCI pipeline to use the GCP configuration file. You can download the configuration file once and commit this to your repository, or you can generate the configuration file dynamically in your CircleCI pipeline.
 
-```yaml
+TIP: *Dynamic configuration* generation is more secure (no secrets in repo), but more complex to set up.
+Choosing the configuration *file download* option is simpler to set up, but the config file is in your repository and can be viewed by anyone with access to the repository.
+
+[tabs]
+====
+Dynamic::
++
+--
+If you choose to generate the configuration file dynamically in your pipeline you can use the GCP CLI. The following example is an excerpt from the full configuration file below:
+
+.Use CLI to generate the GCP configuration file dynamically
+[source,shell]
+----
+gcloud iam workload-identity-pools create-cred-config \
+  "${GCP_WORKLOAD_IDENTITY_POOL_AUDIENCE}" \
+  --output-file="${GCP_CREDENTIAL_CONFIGURATION_FILE}" \
+  --service-account="${GCP_SERVICE_ACCOUNT_EMAIL}" \
+  --credential-source-file="${GCP_CREDENTIAL_SOURCE_FILE}"
+----
+--
+Download::
++
+--
+If you choose to download the configuration file once and commit this to your repository, save the downloaded configuration file in your repository. There are no naming restrictions but best practice is to give it a descriptive name, for example, `gcp-config-dev.json`. You will reference this file in your CircleCI configuration.
+--
+====
+
+An example of the configuration file is shown below along with descriptions for some fields.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| **Placeholder**
+| **Description**
+
+| `project_number`
+| The unique identifying number generated for your project.
+
+| `pool_id`
+| An ID that references the Workload Identity pool, for example `circleci_oidc`.
+
+| `provider_id`
+| An ID that references the Workload Identity pool provider, for example, `circleci`.
+|===
+--
+
+[source,json]
+----
  {
   "type": "external_account",
   "audience": "//iam.googleapis.com/projects/<project_number>/locations/global/workloadIdentityPools/<pool_id>/providers/<provider_id>",
@@ -272,13 +361,14 @@ An example of the configuration file is shown below. Note, the `audience` has no
     }
   }
 }
-```
+----
 
-In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE` file, as noted in the (<<#openid-connect-id-token-availability,token availability>> section). The file name can be anything, as long as it matches the file name specified in `credential_source.file` in your downloaded configuration file.
+In this configuration, `credential_source` will attempt to find your identity token in the `CIRCLE_OIDC_TOKEN_FILE` file. The file name can be anything, as long as it matches the file name specified in `credential_source.file` in your downloaded configuration file.
 
 If your token comes from an API response, it might be useful to set up the configuration to read a JSON file. In this case, the `type` will need to be set to `json` and you will need to provide a valid `path`, for example, `response.id_token`.
 
-```yaml
+[source,json]
+----
   "credential_source": {
     "file": "CIRCLE_OIDC_TOKEN_FILE",
     "format": {
@@ -286,27 +376,17 @@ If your token comes from an API response, it might be useful to set up the confi
       "path": "response.id_token"
     }
   }
-```
+----
 
-NOTE: If needed, you can also attempt to generate the GCP configuration file by running the following script:
+You will need to write one of CircleCI's OIDC tokens to a file in your job. You can use either $CIRCLE_OIDC_TOKEN or $CIRCLE_OIDC_TOKEN_V2. The V2 token includes additional VCS information (repository and branch) which allows for more granular access control in GCP. See <<format-of-the-openid-connect-id-token>> for details on the differences. For example:
 
-```shell
-gcloud iam workload-identity-pools create-cred-config \
-  "${GCP_WORKLOAD_IDENTITY_POOL_AUDIENCE}" \
-  --output-file="${GCP_CREDENTIAL_CONFIGURATION_FILE}" \
-  --service-account="${GCP_SERVICE_ACCOUNT_EMAIL}" \
-  --credential-source-file="${GCP_CREDENTIAL_SOURCE_FILE}"
-```
-[#adding-gcp-to-the-circleci-configuration-file]
-=== Adding GCP to the CircleCI configuration file
-
-You will need to export the `$CIRCLE_OIDC_TOKEN` to the file named `CIRCLE_OIDC_TOKEN_FILE` by running the following:
-
-```bash
+.Write the OIDC token to a file
+[source,shell]
+----
 echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
-```
+----
 
-You will also need to add the following environment variables to a context. See the xref:security:contexts.adoc[Contexts] page for more information.
+Add the following environment variables to a context. You will use this context in your CircleCI configuration to give your pipeline access to securely access the environment variables. See the xref:security:contexts.adoc[Contexts] page for more information.
 
 [.table-scroll]
 --
@@ -336,7 +416,9 @@ You will also need to add the following environment variables to a context. See 
 
 Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[`circleci/gcp-cli` orb]. Note that you can enable the use of OIDC token when using `circleci/gcp-cli` orb version 3.0.0 or later.
 
-```yaml
+.Full example configuration using the `gcp-cli` orb for OIDC authentication
+[source,yaml]
+----
 version: 2.1
 
 orbs:
@@ -410,12 +492,12 @@ workflows:
           name: Generate Creds File and Authenticate
           context:
           - gcp-oidc-dev
-```
+----
 
 You have the ability to use multiple service accounts from the _same_ GCP project, or multiple service accounts from _multiple_ GCP projects. You can read about these methods and find an example in CircleCI's link:https://github.com/jtreutel/circleci-gcp-oidc-test#usage[example repository].
 
 [#format-of-the-openid-connect-id-token]
-== Format of OpenID Connect ID tokens
+== OpenID Connect ID tokens format
 
 CircleCI's OIDC tokens contain the following standard https://openid.net/specs/openid-connect-core-1_0.html#IDToken[claims]:
 
@@ -506,4 +588,4 @@ OIDC is supported from server v4.4+. However, OIDC is **not** supported if your 
 
 [#next-steps]
 == Next steps
-- xref:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims]
+- xref:oidc-tokens-with-custom-claims.adoc[OpenID Connect Tokens With Custom Claims]
