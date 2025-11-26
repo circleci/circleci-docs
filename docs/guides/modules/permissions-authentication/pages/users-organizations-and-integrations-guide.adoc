@@ -83,7 +83,7 @@ Each organization has its own settings, including security, integrations, and re
 
 A CircleCI _organization_ can be one of three types:
 
-* `circleci`: This organization type is created separately to any VCS connection between CircleCI and your code repositories. Within a `circleci` organization you create projects and then connect them to your code repositories.
+* `circleci`: This organization type exists independently of any VCS connection. Projects within a circleci organization are created in CircleCI first, then connected to your code repositories. 
 * `github`: A `github` organization uses an OAuth app connection and is created when you log in to CircleCI using your GitHub account. Your GitHub repositories appear as projects that can be set up in CircleCI.
 * `bitbucket`: A `bitbucket` organization is created when you log in to CircleCI using your Bitbucket account. Your Bitbucket repositories appear as projects that can be set up in CircleCI.
 
