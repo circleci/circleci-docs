@@ -322,7 +322,7 @@ gcloud iam workload-identity-pools create-cred-config \
 Download::
 +
 --
-If you choose to download the configuration file once and commit this to your repository, save the downloaded configuration file in your repository. There are no naming restrictions but best practice is to give it a descriptive name, for example, `gcp-config-dev.json`. You will reference this file in your CircleCI configuration.
+Download the configuration file once and commit this to your repository. You can name the file anything you like but best practice is to give it a descriptive name, for example, `gcp-config-dev.json`. You will reference this file in your CircleCI configuration.
 --
 ====
 

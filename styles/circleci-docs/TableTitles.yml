@@ -9,20 +9,19 @@ script: |
   matches := []
 
   lines := text.split(scope, "\n")
-  table_delimiter_count := 0
+  in_table := false
 
   for i, line in lines {
     trimmed := text.trim_space(line)
 
     // Check for table delimiter
     if trimmed == "|===" {
-      // Even count = opening delimiter, odd count = closing delimiter
-      is_opening := table_delimiter_count % 2 == 0
-
-      if is_opening {
-        // Look back for a title, skipping empty lines, attributes, and block delimiters
+      // Toggle table state
+      if !in_table {
+        // This is an opening delimiter
         has_title := false
 
+        // Look back for a title, skipping empty lines, attributes, and block delimiters
         for j := i - 1; j >= 0; j-- {
           prev_trimmed := text.trim_space(lines[j])
 
@@ -61,8 +60,11 @@ script: |
           start := text.index(scope, line)
           matches = append(matches, {begin: start, end: start + len(line)})
         }
-      }
 
-      table_delimiter_count = table_delimiter_count + 1
+        in_table = true
+      } else {
+        // This is a closing delimiter, just toggle state
+        in_table = false
+      }
     }
   }
