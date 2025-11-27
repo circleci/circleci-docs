@@ -1,9 +1,9 @@
 
 You may find that there are errors for the `vale/lint` job that are unrelated to your change.
-Our prose linter checks the whole file when a change is made so if there are existing issues on the page they will be flagged.
+Vale checks the whole file when a change is made so if there are existing issues on the page they will be flagged.
+
 You can just leave these errors and the CircleCI docs team will address them for you.
-Our prose linter is advisory to help all contributors create content that conforms to our style guide.
-The linter feedback is advisory only and will not prevent changes from being published.
+Vale logs are advisory to help all contributors create content that conforms to our style guide. The `vale/lint` job will not prevent changes from being published.
 
 # Description
 What did you change?
