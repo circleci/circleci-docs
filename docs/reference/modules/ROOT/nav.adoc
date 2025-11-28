@@ -13,6 +13,7 @@
 * General
 ** xref:guides:about-circleci:concepts.adoc[Concepts]
 ** xref:glossary.adoc[Glossary]
+** xref:guides:toolkit:environment-cli-usage-guide.adoc[Environment CLI usage guide]
 ** xref:guides:insights:insights-glossary.adoc[Insights metrics glossary]
 ** xref:troubleshoot.adoc[Troubleshoot]
 ** xref:faq.adoc[FAQ]
