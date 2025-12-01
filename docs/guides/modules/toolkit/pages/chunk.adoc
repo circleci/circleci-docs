@@ -1,0 +1,89 @@
+= Chunk setup and overview
+:page-badge: Preview
+:page-platform: Cloud
+:page-description: Learn how to set up Chunk by CircleCI and see what it can do.
+:experimental:
+
+NOTE: Chunk by CircleCI is currently in *open preview*. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+
+TIP: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
+
+Chunk by CircleCI is an AI agent that you can choose to set up in your organization to help with CI/CD related tasks:
+
+* Use the Chunk chat UI to get help with any aspect of your project.
+* Assign Chunk tasks to proactively manage your CI/CD processes. For an example see the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] guide.
+
+== Introduction
+
+TBC
+
+== How Chunk works
+
+== Set up Chunk
+The following sections guide you through the CHunk setup process. Once set up you can chat with Chunk for help with projects and assign Chunk tasks to proactively manage your CI/CD processes.
+
+=== Prerequisites
+
+Ensure you have the following prerequisites in place before you set up Chunk:
+
+* An API key from either link:https://console.anthropic.com/settings/keys[Anthropic, window=_blank] or link:https://auth.openai.com/log-in[OpenAI, window=_blank] for Chunk to process and generate fixes. Your source code is not stored nor used for training purposes by CircleCI. If you are using OpenAI you should also check the following:
+** Make sure your organization link:https://help.openai.com/en/articles/10910291-api-organization-verification#h_c6efff0719[has gpt-5 model access, window=_blank].
+** Verify your organization. For guidance see the link:https://help.openai.com/en/articles/10910291-api-organization-verification[OpenAI help, window=_blank]. If you cannot get your OpenAI organization verified, see the troubleshooting item <<i-cannot-get-my-openai-organization-verified>>.
+* Ensure you have the CircleCI GitHub App installed in your GitHub organization. Check menu:Organization Settings[VCS Connections]. Chunk needs the GitHub App to be installed in your organization to be able to recommend fixes and open pull requests.
+
+=== Setup
+
+Once you meet the prerequisites, you can set up Chunk by following these steps:
+
+. In the link:https://app.circleci.com/home[CircleCI web app, window=_blank], select your organization and then select *Chunk* from the bottom of the sidebar image:guides:ROOT:icons/chunk.svg[Chunk icon, role="no-border"].
+. Select btn:[Set up Chunk].
+. You should see a image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] to indicate you already have the GitHub App installed for your organization. If not, use the btn:[Install CircleCI GitHub App] button to install it now.
+. Select your AI Model provider (Anthropic or OpenAI).
+. Enter your API key for your chosen model provider.
+. Select btn:[Next] to complete the setup.
+
+image::guides:ROOT:chunk/set-up-chunk.png[Chunk setup modal]
+
+=== Tear down
+
+If you need to tear down Chunk for your organization, you can do so by deleting your AI model provider API key. Follow these steps:
+
+. In the link:https://app.circleci.com/home[CircleCI web app, window=_blank], select your organization and then select *Chunk* from the bottom of the sidebar image:guides:ROOT:icons/chunk.svg[Chunk icon, role="no-border"].
+. Select the btn:[Settings] button at the top of the window (the image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"] icon is a cog).
+. Under "Model Provider API Keys" select btn:[Edit in contexts]. You will be redirected to your organization's Contexts page.
+. Locate the `circleci-agents` context. Select it by name to open the context page and view the stored environment variables.
+. Locate your AI model provider API key environment variable and select it using the radio button.
+. Select btn:[Delete] to delete the environment variable. You will be promted to confirm the deletion.
+
+== Troubleshooting
+
+=== I cannot get my OpenAI organization verified
+
+If organization verification is not possible, you can bypass this requirement by adding an environment variable to your `circleci-agents` context, as follows:
+
+. In the CircleCI web app, go to menu:Organization Settings[Contexts].
+. Use the search to find the `circleci-agents` context. Select it by name to open configuration options.
+. Scroll down to the "Environment variables" section.
+. Select btn:[Add environment variable] to enter the variable name and value.
+** Under "Environment variable name", enter `CCI_AGENT_OPENAI_MODEL`.
+** Under "Value", enter `gtp-5-nano`.
+
+=== Invalid OpenAI modal specified
+
+If you get the following error:
+
+[source,shell]
+Invalid OpenAI model specified. Please check the model name and ensure it is available for your account.
+
+You will need to make sure your organization has GPT-5 access. To verify this in link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], follow these steps:
+
+. Switch to the project you want to check in the top left dropdown.
+. Go to menu:Settings[Limits] in the left-hand menu. This page shows the models and rate limits for your project. `gpt-5` will be listed if you have access.
+
+== Frequently asked questions
+
+include::guides:ROOT:partial$faq/chunk.adoc[]
+
+== Next steps
+
+Assign a Chunk task to proactively fix your flaky tests. See the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] guide for more information.

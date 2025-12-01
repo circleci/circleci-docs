@@ -5,9 +5,9 @@
 :experimental:
 :page-noindex: true
 
-NOTE: Chunk by CircleCI is currently in *closed preview*. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+NOTE: Chunk by CircleCI is currently in *open preview*. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
 
-NOTE: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board] where you can also see existing feature requests and vote on them.
+TIP: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
 
 Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
 
@@ -35,31 +35,15 @@ flowchart TD
     CreatePR --> End([Complete])
 ----
 
-== Set up Chunk and assign a task
+== Assign Chunk a "Fix flaky tests" task
 
-To get started with automating flaky test fixes, you need to fulfill the following prerequisites and complete several setup steps to get Chunk set up in your organization. You can then assign tasks for Chunk to run.
+To get started with automating flaky test fixes, you need to fulfill the following prerequisites. You can then assign tasks for Chunk to run.
 
 === Prerequisites
 
-* An API key from either link:https://console.anthropic.com/settings/keys[Anthropic, window=_blank] or link:https://auth.openai.com/log-in[OpenAI, window=_blank] for Chunk to process and generate fixes. Your source code is not stored nor used for training purposes by CircleCI. If you are using OpenAI you should also check the following:
-** Make sure your organization link:https://help.openai.com/en/articles/10910291-api-organization-verification#h_c6efff0719[has gpt-5 model access, window=_blank].
-** Verify your organization. For guidance see the link:https://help.openai.com/en/articles/10910291-api-organization-verification[OpenAI help, window=_blank]. If you cannot get your OpenAI organization verified, see the troubleshooting item <<i-cannot-get-my-openai-organization-verified>>.
-* Ensure your CircleCI jobs store test results using the `store_test_results` step. Read more about this step in the xref:reference:ROOT:configuration-reference.adoc#storetestresults[configuration reference].
-* Ensure you have the CircleCI GitHub app installed in your GitHub organization. Check menu:Organization Settings[VCS Connections], where you can see if you have the App already installed, or select btn:[Install GitHub App]. Chunk needs the GitHub App to be installed to be able to recommend fixes and open pull requests.
+* Ensure you have set up Chunk by following the steps in the xref:guides:toolkit:chunk.adoc[Chunk Setup and Overview] guide.
+* Ensure your CircleCI jobs store test results using the `store_test_results` step. Read more about this step in the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference].
 * Make sure you are following the projects you want Chunk to fix. CircleCI identifies flaky tests in your CI/CD pipelines on the *Tests* tab for workflows in the Insights dashboard (menu:Insights[Select project > Select workflow > Tests]).
-
-=== Setup
-
-Once you have the prerequisites, you can set up Chunk by following these steps:
-
-. In the link:https://app.circleci.com/home[CircleCI web app, window=_blank], select your organization and then select *Chunk Tasks* from the sidebar.
-. Select btn:[Get started] and then btn:[Continue] when prompted.
-. You should see a image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] to indicate you already have the GitHub App installed for your organization. If not, use the btn:[Install CircleCI GitHub App] button to install it now.
-. Select your AI Model provider (Anthropic or OpenAI).
-. Enter your API key for your chosen model provider.
-. Select btn:[Next] to complete the setup.
-
-image::guides:ROOT:chunk/set-up-chunk.png[Chunk setup modal]
 
 === Assign a task
 
@@ -67,6 +51,8 @@ Once you have Chunk set up for your organization you can start assigning tasks.
 
 To set up a "Fix flaky tests" task follow these steps:
 
+. In the link:https://app.circleci.com/home[CircleCI web app, window=_blank], select your organization and then select *Chunk* from the bottom of the sidebar image:guides:ROOT:icons/chunk.svg[Chunk icon, role="no-border"].
+. Select btn:[Schedule a Task].
 . Select the project you want to assign the task to.
 . Choose a run frequency (daily, weekly, monthly).
 . Choose the number of tests you want Chunk to try to fix per run, between one and three.
@@ -79,6 +65,7 @@ To set up a "Fix flaky tests" task follow these steps:
 
 When you select btn:[Start task] Chunk starts running immediately and follows the schedule you set up.
 
+.Chunk Assign Task modal
 image::guides:ROOT:chunk/assign-task.png[Chunk assign task modal]
 
 === Chunk environment setup
@@ -389,30 +376,6 @@ Consider setting up a `cci-agent-setup.yml` file to control the environment in w
 
 Also consider including a markdown file, named `claude.md` or `agents.md` at the root of your repository with instructions for running tests. Chunk should pick this up automatically.
 
-
-=== Invalid OpenAI modal specified
-
-If you get the following error:
-
-[source,shell]
-Invalid OpenAI model specified. Please check the model name and ensure it is available for your account.
-
-You will need to make sure your organization has GPT-5 access. To verify this in link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], follow these steps:
-
-. Switch to the project you want to check in the top left dropdown.
-. Go to menu:Settings[Limits] in the left-hand menu. This page shows the models and rate limits for your project. `gpt-5` will be listed if you have access.
-
-=== I cannot get my OpenAI organization verified
-
-If organization verification is not possible, you can bypass this requirement by adding an environment variable to your `circleci-agents` context, as follows:
-
-. In the CircleCI web app, go to menu:Organization Settings[Contexts].
-. Use the search to find the `circleci-agents` context. Select it by name to open configuration options.
-. Scroll down to the "Environment variables" section.
-. Select btn:[Add environment variable] to enter the variable name and value.
-** Under "Environment variable name", enter `CCI_AGENT_OPENAI_MODEL`.
-** Under "Value", enter `gtp-5-nano`.
-
 === Verification required error
 
 If you get the following error inside a Chunk task, this indicates that your Open AI organization verification is pending.
@@ -432,10 +395,4 @@ The agent ran into an error while executing this task. See our community forum f
 
 == Frequently asked questions
 
-=== Does CircleCI use my data to train AI models?
-
-No, CircleCI does not store your source code or use it for training purposes. Chunk processes your code temporarily to generate fixes but does not retain or share this information with model providers for training.
-
-=== How long are Chunk's logs stored?
-
-Chunk's logs are stored by CircleCI for 90 days. 90 days is a fixed retention period that applies to all organizations, link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[regardless of your plan’s standard data retention policy, window=_blank]. After 90 days, logs are automatically deleted to keep your workspace at optimal performance.
+include::guides:ROOT:partial$faq/chunk.adoc[]
