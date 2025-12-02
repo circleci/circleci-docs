@@ -97,7 +97,7 @@ Nomad provides a web UI for inspecting your Nomad cluster. If you are using an i
 $ export NOMAD_ADDR=$(kubectl get svc nomad-server -o jsonpath='{.spec.clusterIP}' -n <server-namespace>)
 ----
 
-. If using Externalized Nomad, Use Nomad Network Load Balancer or DNS address to port-forward to access webui.
+. If using Externalized Nomad, Use Nomad Network Load Balancer or DNS address to port-forward to access the web UI.
 
 . To port-forward to the Nomad service, set up a lightweight tunnelling mechanism within the cluster as follows:
 +
