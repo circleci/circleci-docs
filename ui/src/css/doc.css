@@ -32,6 +32,11 @@
   }
 }
 
+/* Fluid width mode - removes max-width constraint */
+.doc--fluid {
+  max-width: 100% !important;
+}
+
 /* === HEADING STYLES === */
 .doc h1,
 .doc h2,

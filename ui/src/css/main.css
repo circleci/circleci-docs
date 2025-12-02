@@ -70,3 +70,10 @@ body.-toc aside.toc.sidebar {
     max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen)); /* Article + wider TOC */
   }
 }
+
+/* Fluid width mode - remove main max-width constraints */
+@media screen and (min-width: 1280px) {
+  main:has(.doc--fluid) {
+    max-width: none;
+  }
+}
