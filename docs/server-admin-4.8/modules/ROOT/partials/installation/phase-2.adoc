@@ -962,7 +962,7 @@ USERNAME=<provided-username>
 PASSWORD=<token>
 namespace=<your-namespace>
 helm registry login cciserver.azurecr.io/circleci-server -u $USERNAME -p $PASSWORD
-helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml>
 ----
 
 [#create-dns-entry]
