@@ -101,9 +101,9 @@ export NOMAD_ADDR=$(kubectl get svc nomad-server -o jsonpath='{.spec.clusterIP}'
 
 . To port-forward to the Nomad service, set up a lightweight tunnelling mechanism within the cluster as follows:
 +
-[source,bash]
+[source,console]
 ----
-kubectl run nomad-tunnel --rm -it --restart=Never --image=alpine/socat -n <server-namespace> -- TCP-LISTEN:4646,fork,reuseaddr TCP:$NOMAD_ADDR:4646
+$ kubectl run nomad-tunnel --rm -it --restart=Never --image=alpine/socat -n <server-namespace> -- TCP-LISTEN:4646,fork,reuseaddr TCP:$NOMAD_ADDR:4646
 ----
 
 . In another terminal, run the following command to set up port forwarding:
