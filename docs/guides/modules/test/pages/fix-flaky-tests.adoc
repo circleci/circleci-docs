@@ -41,7 +41,8 @@ To get started with automating flaky test fixes, you need to fulfill the followi
 
 === Prerequisites
 
-* Ensure you have set up Chunk by following the steps in the xref:guides:toolkit:chunk.adoc[Chunk Setup and Overview] guide.
+* To use the "Fix Flaky Tests" task you must be working in a `/github/` type organization. To check this, select *Organization Settings* in the sidebar. `/github/` or `/gh/` will be listed in the URL, along with a human-readable organization name.
+* Ensure you have set up Chunk by following the steps in the xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview] guide.
 * Ensure your CircleCI jobs store test results using the `store_test_results` step. Read more about this step in the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference].
 * Make sure you are following the projects you want Chunk to fix. CircleCI identifies flaky tests in your CI/CD pipelines on the *Tests* tab for workflows in the Insights dashboard (menu:Insights[Select project > Select workflow > Tests]).
 
