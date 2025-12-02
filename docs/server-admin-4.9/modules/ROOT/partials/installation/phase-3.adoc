@@ -329,7 +329,8 @@ nomad:
   clients:
     mTLS:
       CACertificate: <base64 encoded CA Certificate from your terraform output>
-      certificate: <base64 encoded Certificate from your terraform output>
+      certificate: <base64 encoded Client Certificate from your terraform output>
+      privateKey: <base64 encoded Client Private Key from your terraform output>
 ----
 .. Note: If your externalizing your nomad servers then the folowing blocks; `nomad.server.replicas`, `nomad.server.gossip` and `nomad.server.rpc` should be removed from your values.yaml.
 .. Once the above is complete, you can skip ahead to <<nomad-autoscaler>>.
