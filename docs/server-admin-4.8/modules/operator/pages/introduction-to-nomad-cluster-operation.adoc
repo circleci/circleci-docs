@@ -90,7 +90,7 @@ Complete the following steps to get logs from the allocation of the specified jo
 
 Nomad provides a web UI for inspecting your Nomad cluster. If you are using an internalized Nomad deployment, which is the default setup with CircleCI server, follow the instructions in this section to temporarily access the UI for troubleshooting purposes. For a more permanent solution, consider externalizing Nomad and consult the official Nomad documentation for setting up routing.
 
-. When using Nomad in k8s, it binds to its Pod IP. Use below command to fetch the IP of the Nomad server:
+. When using Nomad in Kubernetes, it binds to its Pod IP address. Use the command below to fetch the IP address of the Nomad server:
 +
 [source,bash]
 ----
