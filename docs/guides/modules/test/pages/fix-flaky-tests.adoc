@@ -234,7 +234,7 @@ Merge the `cci-agent-setup.yml` file to your default branch when the results on 
 ==== Additional guidance for Chunk
 To improve Chunk's ability to run tests and produce fixes that are aligned with stylistic/architectural preferences, you can include instructions. Your instructions can be in a markdown file (`claude.md` or `agents.md`) in the root of your repository or in a custom `cci-agent-setup.yml` file. Chunk should pick this up automatically.
 
-== How Chunk by CircleCI works
+== How Chunk's flaky test fix process works
 
 Chunk operates through an automated analysis and remediation process that runs independently of your regular CI/CD workflows.
 

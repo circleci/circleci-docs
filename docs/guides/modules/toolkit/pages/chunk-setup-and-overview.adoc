@@ -1,10 +1,10 @@
 = Chunk setup and overview
-:page-badge: Preview
+:page-badge: Beta
 :page-platform: Cloud
 :page-description: Learn how to set up Chunk by CircleCI and see what it can do.
 :experimental:
 
-NOTE: Chunk by CircleCI is currently in *open preview*. There are no extra costs during open preview. Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the open preview.
+NOTE: Chunk by CircleCI is currently in *beta*. There are no extra costs during beta. Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature when generally available.
 
 TIP: *Feedback or feature requests?* Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
 
@@ -17,7 +17,7 @@ Chunk by CircleCI is an AI agent that you can set up in your organization to hel
 
 Chunk connects to your existing CircleCI pipelines and analyzes both your build history and repository code to understand how your tests, configurations, and dependencies behave.
 
-Chunk uses AI to proactively manage your CI/CD processes. Set Chunk tasks to monitor for issues. When issues occur, Chunk identifies root causes, proposes or applies validated fixes automatically, and learns from every build.
+Chunk uses AI to proactively manage your CI/CD processes. Set Chunk tasks to monitor for issues. When issues occur, Chunk identifies root causes, proposes or applies validated fixes automatically.
 
 Chunk uses your own OpenAI or Anthropic API key, so your data and credentials always stay fully under your control.
 
@@ -41,20 +41,20 @@ Once you meet the prerequisites, you can set up Chunk as follows:
 . Select *Chunk* from the bottom of the sidebar image:guides:ROOT:icons/chunk.svg[Chunk icon, role="no-border"].
 . Select btn:[Set up Chunk].
 +
-#INSERT SCREENSHOT HERE#
+.Set up Chunk for your organization
+image::guides:ROOT:chunk/set-up-chunk.png[Chunk setup modal]
 . You should see a image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] to indicate you already have the GitHub App installed for your organization. If not, use the btn:[Install CircleCI GitHub App] button to install it now.
 . Select your AI Model provider (Anthropic or OpenAI).
 . Enter your API key for your chosen model provider.
++
+.Set up your model provider API key
+image::guides:ROOT:chunk/chunk-setup-model-provider.png[Set up your model provider API key]
 . Select btn:[Next] to complete the setup.
 
-#UPDATE SCREENSHOT BELOW#
+.Chunk interface
+image::guides:ROOT:chunk/chunk-chat.png[Chunk chat interface]
 
-.Set up Chunk for your organization
-image::guides:ROOT:chunk/set-up-chunk.png[Chunk setup modal]
-
-Once Chunk is set up, use the chat interface start assigning tasks. Describe your task and tell Chunk which project/repository/branch to work within.
-
-#INSERT SCREENSHOT SHOWING CHAT INTERFACE#
+Once Chunk is set up, use the chat interface instruct Chunk to help you with your CI/CD tasks. Describe your task and tell Chunk which project/repository/branch to work within.
 
 For a guide to using built-in tasks, see the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] guide.
 
