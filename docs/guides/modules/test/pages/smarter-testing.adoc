@@ -6,9 +6,7 @@
 :page-noindex: true
 :page-aliases: adaptive-testing.adoc
 
-CAUTION: *Smarter Testing* is available in closed preview. When the feature is made generally available there will be a cost associated with access and usage.
-
-NOTE: This page is currently in development and will be updated as the feature is developed.
+CAUTION: *Smarter Testing* is available in preview. When the feature is made generally available there will be a cost associated with access and usage.
 
 Use Smarter Testing to optimize test runs as follows:
 
@@ -125,7 +123,7 @@ Prebuilt binaries are available from the CircleCI binary releases public bucket.
 
 [tabs]
 ====
-Mac ARM::
+Mac Arm::
 https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/darwin/arm64/circleci-testsuite.gz[Download]
 +
 Verify with:
@@ -155,7 +153,7 @@ Verify with:
 $ sha256sum -c <(echo "f189936b32bae5cde22a7522dc58bd4e988c1384f690801c4cc88dfebf90319c  ./circleci-testsuite.gz")
 ----
 
-Linux ARM::
+Linux Arm::
 https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/linux/arm/circleci-testsuite.gz[Download]
 +
 Verify with:
@@ -228,7 +226,7 @@ Every line of stdout will be interpreted as test atoms. Any tool that prints met
 Run the `discover` command in your shell to examine the output.
 
 . Create a `.circleci/test-suites.yml` file in the project root and populate the `discover` command:
-
++
 [tabs]
 ====
 Vitest::
@@ -305,7 +303,7 @@ run: |
 ====
 
 . Run the test suite and confirm that the `discover` command found the test atoms you expect:
-
++
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --local
@@ -536,7 +534,7 @@ $ vitest run --coverage.enabled \
              src/pages/dashboard/Dashboard.test.tsx
 ----
 
-The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run. Note that some test runners (including `vitest`) place coverage reports in a directory, there may be multiple reports and they need to be joined into a single file so that Smarter Testing can interpret the results.
+The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run. Some test runners (including `vitest`) place coverage reports in a directory, and there may be multiple reports. Reports need to be joined into a single file so that Smarter Testing can interpret the results.
 
 The test atom to analyze can be specified in one of two ways:
 
@@ -548,9 +546,10 @@ Different template variables are available for coverage output, depending on the
 *LCOV*:: `<< outputs.lcov >>`
 *Go's coverage format*:: `<< outputs.go-coverage >>`
 
-Your `analysis` command should use the output variable for the coverage format it produces
+Your `analysis` command should use the output variable for the coverage format it produces.
 
 Making these changes to the command above gives:
+
 [source,console]
 ----
 $ vitest run --coverage.enabled \
@@ -562,7 +561,8 @@ $ vitest run --coverage.enabled \
              << test.atoms >> \
              && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
 ----
-Note that we use the directory that the `<< outputs.lcov >>` file is stored in for the coverage report directory. We concatenate all coverage files before writing them to `<< outputs.lcov >>`.
+
+NOTE: We use the directory that the `<< outputs.lcov >>` file is stored in for the coverage report directory. We concatenate all coverage files before writing them to `<< outputs.lcov >>`.
 
 [tabs]
 ====
@@ -1194,7 +1194,7 @@ Dynamic Test Splitting uses a single queue for all parallel nodes, each node fet
 
 At the start of the queue, the batch size is large and becomes smaller as the queue empties.
 
-This allows all tests to be evenly distributed across nodes, ensuring that all nodes get evenly balanced work, even when some nodes have slow start up or take longer than expected to run tests.
+Batching from the queue allows all tests to be evenly distributed across nodes. This ensures that all nodes get evenly balanced work, even when some nodes have slow start up or take longer than expected to run tests.
 
 TIP: Some test runners and language runtimes can have a reasonably large overhead getting to the point where they can start running tests, this interacts poorly with queue-based Dynamic Test Splitting.
 
@@ -1303,17 +1303,6 @@ The test atom to map can be specified in one of two ways:
 
 * Use the template variable `<< test.atoms >>` in the `file-mapper` command. This will be replaced with the test atom to analyze.
 * If the template variable is not found in the `file-mapper` command, the test atom will be passed on stdin.
-
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
-run: go test -race -count=1 << test.atoms >>
-analysis: go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
-file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
-----
 
 [tabs]
 ====
@@ -1764,9 +1753,9 @@ Yes, the branch behavior is customizable in your `.circleci/config.yml` by passi
 
 The argument to <<cli-flags,`--test-analysis`>> can be a CircleCI configuration template expression, allowing you to vary behavior by branch name.
 
-E.g.:
+For example:
 
-* Any specific branch (for example `develop`).
+* Any specific branch (for example, `develop`).
 * Feature branches if needed for testing.
 
 See the <<run-analysis-on-non-default-branch,Run analysis on a non-default and selection on all other branches>> example for an example of customizing branch behavior.
