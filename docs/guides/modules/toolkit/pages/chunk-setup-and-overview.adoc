@@ -69,6 +69,186 @@ If you need to tear down Chunk for your organization, you can do so by deleting 
 . Locate your AI model provider API key environment variable and select it using the radio button.
 . Select btn:[Delete] to delete the environment variable. You will be promted to confirm the deletion.
 
+== Chunk environment setup
+
+To improve verification success, create an "agent environment" CircleCI YAML file. Copy the environment setup sections from your existing CircleCI configuration file into a dedicated file for Chunk.
+
+* Name the file `cci-agent-setup.yml` and save it to your `.circleci` directory on your default branch.
+* `cci-agent-setup.yml` needs to include a single workflow (the name of the workflow can be anything you want) with a single job named `cci-agent-setup`. The `cci-agent-setup` job needs to set up your environment for Chunk to use. You do not need to include any steps to run tests, this is purely for environment setup.
++
+.Example config file for cci-agent-setup.yml
+[source,yaml]
+----
+version: 2.1
+workflows:
+  main:
+    jobs:
+      - cci-agent-setup
+jobs:
+  cci-agent-setup:
+    docker:
+    - image: cimg/python:3.12
+    - image: cimg/postgres:15.3
+    steps:
+      - checkout
+      - run:
+          name: Hello World
+          command: |
+            echo "Hello, World!"
+      # insert more environment setup here
+----
+
+Chunk supports all standard CircleCI configuration options. This includes executors, resource classes, caching, contexts, environment variables, service containers, orbs, and everything else you would use in a standard CircleCI pipeline. If it works in your `.circleci/config.yml`, it works in `cci-agent-setup.yml`. For a complete reference of available configuration options, see the xref:reference:ROOT:configuration-reference.adoc[CircleCI Configuration Reference].
+
+=== Instruct Chunk to use your environment
+
+When scheduling a task, just store your `cci-agent-setup.yml` in your repo and Chunk will pick it up automatically.
+
+When using the chat interface, use the environment selection below the chat text field to set up your environment. You will also be able to add secrets (environment variables) to Chunk's environment here if needed. These secrets will be added to a context named `chunk-<your-environment-name>`.
+
+.Creating an environment for Chunk to use
+image::guides:ROOT:chunk/chunk-create-environment.png[Create an environment for Chunk to use]
+
+=== Example cci-agent-setup.yml files
+
+The following examples show how  to set up an environment for Chunk for a variety of use cases:
+
+[tabs]
+====
+Python::
++
+--
+[,yaml]
+----
+version: 2.1
+workflows:
+  cci-agent-setup:
+    jobs:
+      - cci-agent-setup
+jobs:
+  cci-agent-setup:
+    docker:
+      - image: cimg/python:3.12
+      - image: cimg/postgres:15.3
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+             pip install -r requirements.txt
+----
+--
+Caching & contexts::
++
+--
+[,yaml]
+----
+version: 2.1
+workflows:
+  cci-agent-setup:
+    jobs:
+      - cci-agent-setup:
+          context:
+            - my-team-context  # Includes any secrets/env vars from this context
+jobs:
+  cci-agent-setup:
+    docker:
+      - image: cimg/node:18.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
+----
+--
+Multiple services::
++
+--
+[,yaml]
+----
+version: 2.1
+workflows:
+  cci-agent-setup:
+    jobs:
+      - cci-agent-setup
+jobs:
+  cci-agent-setup:
+    docker:
+      - image: cimg/ruby:3.2
+      - image: cimg/postgres:15.3
+        environment:
+          POSTGRES_USER: circleci
+          POSTGRES_DB: test_db
+      - image: redis:7.0
+    steps:
+      - checkout
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Install dependencies
+          command: bundle install
+      - run:
+          name: Setup database
+          command: bundle exec rake db:setup
+----
+--
+Resource classes & machine::
++
+--
+[,yaml]
+----
+version: 2.1
+workflows:
+  cci-agent-setup:
+    jobs:
+      - cci-agent-setup
+jobs:
+  cci-agent-setup:
+    machine:
+      image: ubuntu-2204:2024.01.2
+    resource_class: large
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            sudo apt-get update
+            sudo apt-get install -y build-essential
+----
+--
+====
+
+=== Environment variables and contexts
+Project environment variables:: Chunk automatically has access to any environment variables you have configured at the project level in CircleCI. You do not need to recreate or reference these, they are already available.
+
+Contexts:: If you are using CircleCI contexts to manage secrets or environment variables, you must include the context in your `cci-agent-setup` job (as shown in the caching example above). Chunk will have access to all variables from that context, you do not need to manually recreate them.
+
+=== Configuring Chunk's environment when using the chat interface
+
+Using Chunk's chat interface to describe a task, you can tell Chunk which project, repository and branch you want to work on. You can also select and/or set up Chunk's environment here. Using the Environment selector you can set up your environment to give ch
+
+=== Testing your environment setup
+To build and iterate on Chunk's environment follow these steps:
+
+. Navigate to menu:Organization Settings[Chunk Tasks]
+. Identify your desired agent task.
+. Select the ellipsis icon (image:guides:ROOT:icons/more.svg[ellipsis icon, role="no-border"]) and select btn:[Chunk Environment].
+
+This page lets you run the contents of your cci-agent-setup.yml file on a specific branch and immediately see the results from those ad-hoc tasks. Use the btn:[Custom] button to submit a task to Chunk and see the results.
+
+Merge the `cci-agent-setup.yml` file to your default branch when the results on the environment setup page are satisfactory.
+
+=== Additional guidance for Chunk
+To improve Chunk's ability to run tests and produce fixes that are aligned with stylistic/architectural preferences, you can include instructions. Your instructions can be in a markdown file (`claude.md` or `agents.md`) in the root of your repository or in a custom `cci-agent-setup.yml` file. Chunk should pick this up automatically.
+
 == Troubleshooting
 
 === I cannot get my OpenAI organization verified

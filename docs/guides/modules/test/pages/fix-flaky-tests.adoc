@@ -1,11 +1,11 @@
 = Fix flaky tests
-:page-badge: Preview
+:page-badge: Beta
 :page-platform: Cloud
 :page-description: Learn about Chunk by CircleCI and how it can automatically identify and fix flaky tests in your CI/CD pipelines.
 :experimental:
 :page-noindex: true
 
-NOTE: Chunk by CircleCI is currently in *open preview*. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+NOTE: Chunk by CircleCI is currently in *beta*. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature when generally available.
 
 TIP: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
 
@@ -71,168 +71,7 @@ image::guides:ROOT:chunk/assign-task.png[Chunk assign task modal]
 
 === Chunk environment setup
 
-To improve verification success, create an "agent environment" CircleCI YAML file. Copy the environment setup parts of your existing CircleCI configuration into a dedicated file for Chunk.
-
-* Name the file `cci-agent-setup.yml` and save it to your `.circleci` directory on your default branch.
-* `cci-agent-setup.yml` needs to include a single workflow (the name of the workflow can be anything you want) with a single job named `cci-agent-setup`. The `cci-agent-setup` job needs to set up your environment for Chunk to use. You do not need to include any steps to run tests, this is purely for environment setup.
-+
-.Example config file for cci-agent-setup.yml
-[source,yaml]
-----
-version: 2.1
-workflows:
-  main:
-    jobs:
-      - cci-agent-setup
-jobs:
-  cci-agent-setup:
-    docker:
-    - image: cimg/python:3.12
-    - image: cimg/postgres:15.3
-    steps:
-      - checkout
-      - run:
-          name: Hello World
-          command: |
-            echo "Hello, World!"
-      # insert more environment setup here
-----
-
-Chunk supports all standard CircleCI configuration options. This includes executors, resource classes, caching, contexts, environment variables, service containers, orbs, and everything else you would use in a standard CircleCI pipeline. If it works in your `.circleci/config.yml`, it works in `cci-agent-setup.yml`. For a complete reference of available configuration options, see the xref:reference:ROOT:configuration-reference.adoc[CircleCI Configuration Reference].
-
-==== Example cci-agent-setup.yml files
-
-[tabs]
-====
-Python::
-+
---
-[,yaml]
-----
-version: 2.1
-workflows:
-  cci-agent-setup:
-    jobs:
-      - cci-agent-setup
-jobs:
-  cci-agent-setup:
-    docker:
-      - image: cimg/python:3.12
-      - image: cimg/postgres:15.3
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: |
-             pip install -r requirements.txt
-----
---
-Caching & contexts::
-+
---
-[,yaml]
-----
-version: 2.1
-workflows:
-  cci-agent-setup:
-    jobs:
-      - cci-agent-setup:
-          context:
-            - my-team-context  # Includes any secrets/env vars from this context
-jobs:
-  cci-agent-setup:
-    docker:
-      - image: cimg/node:18.0
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-      - run:
-          name: Install dependencies
-          command: npm install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package-lock.json" }}
-----
---
-Multiple services::
-+
---
-[,yaml]
-----
-version: 2.1
-workflows:
-  cci-agent-setup:
-    jobs:
-      - cci-agent-setup
-jobs:
-  cci-agent-setup:
-    docker:
-      - image: cimg/ruby:3.2
-      - image: cimg/postgres:15.3
-        environment:
-          POSTGRES_USER: circleci
-          POSTGRES_DB: test_db
-      - image: redis:7.0
-    steps:
-      - checkout
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Install dependencies
-          command: bundle install
-      - run:
-          name: Setup database
-          command: bundle exec rake db:setup
-----
---
-Resource classes & machine::
-+
---
-[,yaml]
-----
-version: 2.1
-workflows:
-  cci-agent-setup:
-    jobs:
-      - cci-agent-setup
-jobs:
-  cci-agent-setup:
-    machine:
-      image: ubuntu-2204:2024.01.2
-    resource_class: large
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -y build-essential
-----
---
-====
-
-==== Environment variables and contexts
-Project environment variables:: Chunk automatically has access to any environment variables you have configured at the project level in CircleCI. You do not need to recreate or reference these, they are already available.
-
-Contexts:: If you are using CircleCI contexts to manage secrets or environment variables, you must include the context in your `cci-agent-setup` job (as shown in the caching example above). Chunk will have access to all variables from that context, you do not need to manually recreate them.
-
-==== Testing your environment setup
-To build and iterate on Chunk's environment follow these steps:
-
-. Navigate to menu:Organization Settings[Chunk Tasks]
-. Identify your desired agent task.
-. Select the ellipsis icon (image:guides:ROOT:icons/more.svg[ellipsis icon, role="no-border"]) and select btn:[Chunk Environment].
-
-This page lets you run the contents of your cci-agent-setup.yml file on a specific branch and immediately see the results from those ad-hoc tasks. Use the btn:[Custom] button to submit a task to Chunk and see the results.
-
-Merge the `cci-agent-setup.yml` file to your default branch when the results on the environment setup page are satisfactory.
-
-==== Additional guidance for Chunk
-To improve Chunk's ability to run tests and produce fixes that are aligned with stylistic/architectural preferences, you can include instructions. Your instructions can be in a markdown file (`claude.md` or `agents.md`) in the root of your repository or in a custom `cci-agent-setup.yml` file. Chunk should pick this up automatically.
+To improve verification success, create an "agent environment" CircleCI YAML file to help Chunk set up the environment in which it runs your tests. See the xref:guides:toolkit:chunk-setup-and-overview.adoc#chunk-environment-setup[Chunk Environment Setup] section for more information.
 
 == How Chunk's flaky test fix process works
 
@@ -309,16 +148,17 @@ Pull requests contain code diffs showing what changes Chunk recommends, along wi
 
 == The Chunk tasks dashboard
 
-Once you have set up some Chunk tasks, you can view an activity timeline on the Chunk tasks dashboard.
+Once you have assigned Chunk some tasks, you can view an activity timeline on the Chunk dashboard. Tasks are available in a list view below the chat interface.
 
-image::guides:ROOT:chunk/chunk-tasks-dashboard.png[Chunk tasks dashboard]
+.See Chunk tasks listed below chat interface
+image::guides:ROOT:chunk/chunk-chat.png[Chunk tasks listed in chat view]
 
 Once a fix is available the row is marked as "PR opened". Select a row to view the task overview. This includes the following information:
 
-* Summary of the fix
-* Root cause of the flakiness
-* Details of the proposed fix
-* Details of the level of verification achieved
+* Summary of the fix.
+* The root cause of the flakiness.
+* The details of the proposed fix.
+* The details of the level of verification achieved.
 
 You also get a code diff of the proposed fix along with logs of the decision process presented as a conversation between "User" (Chunk) and "Assistant" (AI model provider). The diff and logs are designed to help you understand Chunk's reasoning and analysis process.
 
@@ -335,9 +175,9 @@ The following table shows the configuration options available when setting up Ch
 
 |Run frequency
 |How often Chunk analyzes and fixes flaky tests
-a|* Daily (Sunday through Thursday at 22:00 UTC )
-* Weekly every Sunday at 22:00 UTC (default)
-* Monthly on the first day of the month at 22:00 UTC
+a|* Daily (Sunday through Thursday at 22:00 UTC).
+* Weekly every Sunday at 22:00 UTC (default).
+* Monthly on the first day of the month at 22:00 UTC.
 
 |Maximum tests to fix per run
 |Limits the number of tests Chunk will attempt to fix in a single execution.
