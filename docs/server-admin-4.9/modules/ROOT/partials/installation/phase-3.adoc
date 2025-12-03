@@ -332,7 +332,7 @@ nomad:
       certificate: <base64 encoded Client Certificate from your terraform output>
       privateKey: <base64 encoded Client Private Key from your terraform output>
 ----
-.. Note: If your externalizing your nomad servers then the folowing blocks; `nomad.server.replicas`, `nomad.server.gossip` and `nomad.server.rpc` should be removed from your values.yaml.
+.. If you externalize your Nomad servers then the following blocks should be removed from your `values.yaml`: `nomad.server.replicas`, `nomad.server.gossip` and `nomad.server.rpc`.
 .. Once the above is complete, you can skip ahead to <<nomad-autoscaler>>.
 
 
