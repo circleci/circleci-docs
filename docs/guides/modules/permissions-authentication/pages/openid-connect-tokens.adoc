@@ -62,6 +62,7 @@ For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the xref:orchestrate:triggers-o
 
 | `exp`
 | The expiration time. Its value is one hour after the time of issuance.
+
 |===
 --
 
@@ -75,20 +76,29 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | Additional claims
 | Metadata
 
+| `oidc.circleci.com/context-ids`
+| An array of strings containing UUIDs that identify the context(s) used in the job.
+
+| `oidc.circleci.com/org-id`
+| The unique identifier for the organization. Its value is a string containing a UUID identifying the CircleCI organization.
+
+| `oidc.circleci.com/pipeline-definition-id`
+| The unique identifier for the pipeline definition that created the pipeline running the workflow. The value is a string containing a UUID identifying the CircleCI pipeline definition. Pipeline definitions are found in your project settings under Project Setup.
+
+| `oidc.circleci.com/pipeline-id`
+| The unique identifier for the pipeline that triggered this job. Its value is a string containing a UUID identifying the CircleCI pipeline.
+
 | `oidc.circleci.com/project-id`
 | The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
+
+| `oidc.circleci.com/ssh-rerun`
+| A boolean indicating if the CI job is started using the SSH rerun feature.
 
 | `oidc.circleci.com/vcs-origin`
 | The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/vcs-ref`
 | The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by custom webhooks.
-
-| `oidc.circleci.com/context-ids`
-| An array of strings containing UUIDs that identify the context(s) used in the job. Currently, just one context is supported.
-
-| `oidc.circleci.com/ssh-rerun`
-| A boolean indicating if the CI job is started using the SSH rerun feature.
 |===
 --
 
@@ -295,6 +305,9 @@ After navigating to the **Grant Access** section of the GCP web UI, follow these
 +
 Configuring the provider attributes provides an opportunity to map claims in CircleCI's Token to Google's "understanding". Use this mapping:
 +
+
+[.table-scroll]
+--
 [cols="1,2"]
 |===
 | `google.subject`
@@ -306,6 +319,7 @@ Configuring the provider attributes provides an opportunity to map claims in Cir
 | `attribute.project`
 | `assertion['oidc.circleci.com/project-id']`
 |===
+--
 +
 . Navigate to **Service Account** in the IAM & Admin Panel to create a service account, and give appropriate permission.
 . Navigate back to **Workload Identity Federation** and select the provider from the table.
@@ -371,6 +385,8 @@ echo $CIRCLE_OIDC_TOKEN >> CIRCLE_OIDC_TOKEN_FILE
 
 You will also need to add the following environment variables to a xref:security:contexts.adoc[context].
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 | **Context var name**
@@ -393,6 +409,7 @@ You will also need to add the following environment variables to a xref:security
 | `myserviceacct@myproject.iam.gserviceaccount.com`
 | https://cloud.google.com/iam/docs/service-accounts#user-managed[User-managed Service Accounts]
 |===
+--
 
 Below is a full example configuration adding GCP to a job and demonstrating that authentication works with the `gcp-oidc-authenticate` command. This example uses the link:https://circleci.com/developer/orbs/orb/circleci/gcp-cli[`circleci/gcp-cli` orb]. Note that you can enable the use of OIDC token when using `circleci/gcp-cli` orb version 3.0.0 or later.
 

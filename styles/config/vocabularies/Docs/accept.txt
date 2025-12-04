@@ -164,7 +164,7 @@ GKE
 \bGoogle Container Registry\b
 \bGoogle Play Store\b
 gotestsum
-GPU
+GPUs?
 Gradle
 Grafana
 Gzip
@@ -316,6 +316,7 @@ SLAs?
 Slanger
 [Ss]ignup
 SKUs?
+Smarter Testing
 [Ss]nap
 SSH
 statsd
@@ -372,6 +373,7 @@ URLEncoder
 UUID
 UUIDs?
 [Vv]alidator
+vCPUs?
 VCS
 Velero
 Viget

@@ -894,7 +894,10 @@ performed on the resource.
 Dockerhub is assumed to be the image registry unless otherwise specified
 eg: registry.example.com/organization/repository
 
-|nomad.clients |object |`+{}+` |
+|nomad.clients.mTLS
+|object
+|`{"CACertificate":"","certificate":""}`
+|Configure Nomad client mTLS when using external Nomad servers. Required when `nomad.server.internal: false`. Both `CACertificate` (base64 encoded CA cert to verify server) and `certificate` (base64 encoded client cert for authentication) must be provided.
 
 |nomad.server.gossip.encryption.enabled |bool |`+true+` |
 

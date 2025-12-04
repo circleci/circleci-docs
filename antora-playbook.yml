@@ -50,9 +50,8 @@ asciidoc:
     serverversion45: 4.5.5
     serverversion46: 4.6.6
     serverversion47: 4.7.11
-    serverversion48: 4.8.4
+    serverversion48: 4.8.5
     serverversion49: 4.9.0
-    serverversion: 3.4.8
     terraformversion: 0.15.4
     dockerversion: v28
     kubectlversion: 1.19
@@ -72,7 +71,8 @@ antora:
   extensions:
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
-      - 'test:adaptive-testing.adoc'
+      - 'test:smarter-testing.adoc'
+      - 'test:fix-flaky-tests.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true
@@ -84,3 +84,4 @@ antora:
         line_color: '#B4B8C6'
         primary_border_color: '#008542'
         primary_text_color: '#00381A'
+  - require: ./extensions/detect-unused-media-extension.js

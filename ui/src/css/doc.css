@@ -199,7 +199,7 @@
 .doc p code,
 .doc thead code,
 .doc .colist > table code,
-.doc .admonitionblock td.content code {
+.doc .admonitionblock td.content code:not(.hljs) {
   color: var(--code-font-color);
   background: #F7F7F7;
   border-radius: 4px;
@@ -207,6 +207,13 @@
   font-size: 0.95em;
   padding: 0.15em 0.4em;
   white-space: nowrap;
+}
+
+/* Allow inline code to wrap in admonition blocks to prevent overflow */
+.doc .admonitionblock td.content code:not(.hljs) {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .doc code,
@@ -313,6 +320,14 @@
   margin: 1rem 0 0;
 }
 
+.doc .openblock.tabs {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
+.doc .imageblock {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
 .doc > table.tableblock,
 .doc > table.tableblock + *,
 .doc .tablecontainer,
@@ -367,9 +382,17 @@
 
 .doc table.tableblock th,
 .doc table.tableblock td {
-  padding: 0.5rem;
+  padding: 1rem;
   border-bottom: 1px solid #D4D4D4;
-  min-width: 90px;
+  min-width: 100px;
+}
+
+.doc table.tableblock th {
+  font-size: 18px;
+}
+
+.doc table.tableblock td {
+  font-size: 16px;
 }
 
 .doc table.tableblock,
@@ -510,7 +533,7 @@
   display: flex !important;
   align-items: center;
   border: 2px solid transparent;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 1rem;
   box-sizing: border-box;
   padding: 1rem 1rem 0.75rem;
@@ -643,7 +666,7 @@
   vertical-align: middle;
   object-fit: contain;
   border: 1px solid #D4D4D4;
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 /* Remove border for images with no-border class */
@@ -942,7 +965,7 @@
   display: flex !important;
   align-items: center;
   border: 2px solid transparent;
-  border-radius: 8px;
+  border-radius: 12px;
   border-color: #1A66F7;
   padding: 1rem;
   box-sizing: border-box;
@@ -962,15 +985,9 @@
   margin-top: 0;
 }
 
-/* Fix wrapping issues inside sidebarblocks */
-.doc .sidebarblock code {
+/* Fix wrapping issues inside sidebarblocks - only for inline code, not code blocks */
+.doc .sidebarblock code:not(.hljs) {
   white-space: normal;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-
-.doc .sidebarblock .listingblock pre {
-  white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: break-word;
 }
@@ -1013,7 +1030,7 @@
 /* Style listing blocks with titles */
 .doc .listingblock > .title {
   background: var(--pre-title-background);
-  border-radius: 8px 8px 0 0;
+  border-radius: 12px 12px 0 0;
   padding: 0.5em 0.875em;
   margin-bottom: 0;
   position: relative;
@@ -1042,17 +1059,17 @@
 
 /* When title is collapsed, adjust the border radius */
 .doc .listingblock > .title.collapsed {
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 /* When a title is present, adjust the code block border radius */
 .doc .listingblock > .title + .content pre {
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 12px 12px;
 }
 
-/* When title is not present, use border-radius: 8px for code blocks */
+/* When title is not present, use border-radius: 12px for code blocks */
 .doc .listingblock > .content pre {
-  border-radius: 8px;
+  border-radius: 12px;
 }
 
 /* Keep existing position relative for the content */
@@ -1065,7 +1082,7 @@
   flex-direction: column;
   align-items: center;
   position: absolute;
-  top: 0.25rem;
+  top: 0.5rem;
   right: 0.5rem;
   color: var(--pre-annotation-font-color);
   font-family: var(--body-font-family);
@@ -1379,7 +1396,7 @@
 .doc dl,
 .doc table {
   margin: 0 0 1rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* inline links pick up the new blue */
@@ -1452,11 +1469,11 @@
   font-weight: var(--heading-font-weight);
 }
 
-/* Prevent inline code text from wrapping in table cells */
-td .pre,
-td .code,
-td p code,
-td li code,
+/* Prevent inline code text from wrapping in table cells (but not in admonition blocks) */
+.tableblock td .pre,
+.tableblock td .code,
+.tableblock td p code,
+.tableblock td li code,
 .tableblock p code,
 .tableblock li code {
   white-space: nowrap !important;

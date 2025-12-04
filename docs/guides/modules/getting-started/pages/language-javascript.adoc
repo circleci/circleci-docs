@@ -1,6 +1,6 @@
 = Configure a Node.js application on CircleCI
 :page-platform: Cloud, Server v4+
-:description: Building and Testing with JavaScript and Node.js on CircleCI
+:page-description: Building and Testing with JavaScript and Node.js on CircleCI
 :experimental:
 
 This quickstart guide covers integrating a Node.JS project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Node.JS project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.

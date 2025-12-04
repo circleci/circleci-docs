@@ -1,9 +1,13 @@
-= Fix flaky tests - Private beta
+= Fix flaky tests
+:page-badge: Preview
 :page-platform: Cloud
 :page-description: Learn about Chunk by CircleCI and how it can automatically identify and fix flaky tests in your CI/CD pipelines.
 :experimental:
+:page-noindex: true
 
-NOTE: Chunk by CircleCI is currently in private beta. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+NOTE: Chunk by CircleCI is currently in *closed preview*. If you would like to join the private beta, sign up link:https://www2.circleci.com/chunk-waitlist[here for the waiting list, window=_blank]. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider token. Chunk tasks will be a paid feature after the beta.
+
+NOTE: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board] where you can also see existing feature requests and vote on them.
 
 Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
 
@@ -240,7 +244,7 @@ This page lets you run the contents of your cci-agent-setup.yml file on a specif
 Merge the `cci-agent-setup.yml` file to your default branch when the results on the environment setup page are satisfactory.
 
 ==== Additional guidance for Chunk
-To improve Chunk's ability to run tests and produce fixes that are aligned with stylistic/architectural preferences, you can include a markdown file (`claude.md` or `agents.md`) in the root of your repository with instructions for running tests. Chunk should pick this up automatically.
+To improve Chunk's ability to run tests and produce fixes that are aligned with stylistic/architectural preferences, you can include instructions. Your instructions can be in a markdown file (`claude.md` or `agents.md`) in the root of your repository or in a custom `cci-agent-setup.yml` file. Chunk should pick this up automatically.
 
 == How Chunk by CircleCI works
 
@@ -334,8 +338,10 @@ You also get a code diff of the proposed fix along with logs of the decision pro
 
 The following table shows the configuration options available when setting up Chunk:
 
+[.table-scroll]
+--
 .Chunk configuration options
-[cols=3*]
+[cols="1,2,3", options="header"]
 |===
 |Setting |Description |Default
 
@@ -361,6 +367,7 @@ a|* Daily (Sunday through Thursday at 22:00 UTC )
 |Limits the number of pull requests Chunk can have open at one time.
 |1-20 or "Unlimited" (default).
 |===
+--
 
 == Limitations
 
@@ -423,8 +430,6 @@ If you get the following error inside a Chunk task, this indicates that your Ope
 Action required - agent execution error
 The agent ran into an error while executing this task. See our community forum for how to solve this error.
 
-Contact mailto:sebastian@circleci.com[sebastian@circleci.com] for assistance.
-
 == Frequently asked questions
 
 === Does CircleCI use my data to train AI models?
@@ -433,4 +438,4 @@ No, CircleCI does not store your source code or use it for training purposes. Ch
 
 === How long are Chunk's logs stored?
 
-Chunks logs are stored by CircleCI for 90 days. 90 days is a fixed retention period that applies to all organizations, link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[regardless of your plan’s standard data retention policy, window=_blank]. After 90 days, logs are automatically deleted to keep your workspace at optimal performance.
+Chunk's logs are stored by CircleCI for 90 days. 90 days is a fixed retention period that applies to all organizations, link:https://support.circleci.com/hc/en-us/articles/5645222646939-Cloud-Data-Retention-Policy-and-Settings[regardless of your plan’s standard data retention policy, window=_blank]. After 90 days, logs are automatically deleted to keep your workspace at optimal performance.

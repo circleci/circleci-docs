@@ -48,6 +48,8 @@ TIP: You can destroy most AWS resources by running `terraform destroy`. If any r
 
 In the CircleCI application, set the following xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[project environment variables].
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Variable | Description
@@ -70,6 +72,7 @@ In the CircleCI application, set the following xref:security:set-environment-var
 | AWS_ECR_REGISTRY_ID
 | The 12 digit AWS id associated with the ECR account.
 |===
+--
 
 [#configuration-walkthrough]
 == Configuration walkthrough
