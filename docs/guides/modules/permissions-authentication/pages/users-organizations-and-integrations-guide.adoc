@@ -60,10 +60,12 @@ Each organization has its own settings, including security, integrations, and re
 A CircleCI _organization_ can be one of three types:
 
 * `circleci`: This organization type is created separately to any VCS connection between CircleCI and your code repositories. Within a `circleci` organization you create projects and then connect them to your code repositories.
-* `github`: A `github` organization uses an OAuth app connection and is created when you log in to CircleCI using your GitHub account. Your GitHub repositories appear as projects that can be set up in CircleCI.
-* `bitbucket`: A `bitbucket` organization is created when you log in to CircleCI using your Bitbucket account. Your Bitbucket repositories appear as projects that can be set up in CircleCI.
+* `github`: This organization type is created automatically when you authorize CircleCI to access your GitHub account via OAuth app. This happens automatically when you sign in to CircleCI with your GitHub social login. Your GitHub repositories are imported as available projects in CircleCI. You cannot create projects that do not correspond to existing repositories in your GitHub personal account or organizations.
+* `bitbucket`: This organization type is created automatically when you authorize CircleCI to access your Bitbucket account via OAuth app. This happens automatically when you sign in to CircleCI with your Bitbucket social login. Your Bitbucket repositories are imported as available projects in CircleCI. You cannot create projects that do not correspond to existing repositories in your Bitbucket personal account or organizations.
 
-For full details on creating organizations, see the xref:getting-started:create-an-organization.adoc[Create an organization] page.
+You can check your organization type by navigating to menu:Organization Settings[Overview]. The start of the organization slug indicates the type of organization you have, for example `circleci`, `github`, or `bitbucket`.
+
+For full details on creating organizations, see the xref:getting-started:create-an-organization.adoc[Create an Organization] page.
 
 == Projects
 
