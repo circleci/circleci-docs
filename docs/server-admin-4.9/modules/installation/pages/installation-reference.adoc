@@ -164,6 +164,6 @@ pass:[<!-- vale off -->]
 [.table-scroll]
 --
 [.datatable.cols=4*]
-include::ROOT:partial$installation/values.adoc
+include::ROOT:partial$installation/values.adoc[]
 --
 pass:[<!-- vale on -->]
