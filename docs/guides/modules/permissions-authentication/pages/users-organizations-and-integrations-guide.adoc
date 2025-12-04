@@ -25,7 +25,7 @@ The following table describes user authorization for the different VCS providers
 
 [.table-scroll]
 --
-.Integration authorization types
+.User account integration authorization types
 [cols=4*, options="header"]
 |===
 | VCS provider | Authorization type | Authorization management | Notes
@@ -37,7 +37,7 @@ The following table describes user authorization for the different VCS providers
 
 |GitHub
 |GitHub App
-|menu:User Settings[Account Integration]. If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings].
+|If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings]. Not displayed in menu:User Settings[Account Integration].
 |Can exist alongside GitHub OAuth app authorization.
 
 |Bitbucket
@@ -47,10 +47,12 @@ The following table describes user authorization for the different VCS providers
 
 |GitLab
 |TBC
-|Not displayed in menu:User Settings[Account Integrations]. Managed in Gitlab at link:https://gitlab.com/-/user_settings/applications[GitLab settings].
+|Managed in Gitlab at link:https://gitlab.com/-/user_settings/applications[GitLab settings]. Not displayed in menu:User Settings[Account Integrations].
 |Mutually exclusive with other VCS authorizaitons except GitHub App.
 |===
 --
+
+#TODO need to add GitLab self-managed and BBDC to this table?#
 
 == Organizations
 
@@ -64,11 +66,11 @@ A CircleCI _organization_ can be one of three types:
 * `github`: This organization type is created automatically when you authorize CircleCI to access your GitHub account via OAuth app. This happens automatically when you sign in to CircleCI with your GitHub social login. Your GitHub repositories are imported as available projects in CircleCI. You cannot create projects that do not correspond to existing repositories in your GitHub personal account or organizations.
 * `bitbucket`: This organization type is created automatically when you authorize CircleCI to access your Bitbucket account via OAuth app. This happens automatically when you sign in to CircleCI with your Bitbucket social login. Your Bitbucket repositories are imported as available projects in CircleCI. You cannot create projects that do not correspond to existing repositories in your Bitbucket personal account or organizations.
 
-You can check your organization type by navigating to menu:Organization Settings[Overview]. The start of the organization slug indicates the type of organization you have, for example `circleci`, `github`, or `bitbucket`.
+include::ROOT:partial$tips/check-org-type.adoc[Check your organization type]
 
 For full details on creating organizations, see the xref:getting-started:create-an-organization.adoc[Create an Organization] page.
 
-== Projects
+=== Projects
 
 [tabs]
 ====
@@ -94,14 +96,6 @@ Some additional, less common cases where CircleCI uses hooks are as follows:
 * If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repositories.
 
 These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
-
-The ability to override the **Only build pull requests** setting is supported. Specifically, CircleCI will run validation on all commits from additional, non-default branches that are specified via regular expression (for example, `release.\*`).  Details on how to enable can be found on our link:https://discuss.circleci.com/t/product-launch-override-only-build-prs-setting/47807[community forum].
-
-It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build.
-
-Refer to the link:https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
-
-Refer to the CircleCI documentation on xref:orchestrate:workflows.adoc#using-filters-in-your-workflows[Using Filters in Your Workflow] for information on how to build tag pushes.
 --
 `circleci` organizations::
 +
@@ -113,9 +107,9 @@ For `circleci` type organizations, projects are created directly in CircleCI via
 --
 ====
 
-== Integration options
+== Organization integration
 
-The integration options available to you depend on your organization type. By _integration_ we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
+The organizaiton integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
 
 #TODO would it be right to say that if you can integrate with GL SaaS you can with self managed? Then we can simplify this to "GitLab" and then say that integration type is the same as pipeline type?#
 
@@ -251,7 +245,7 @@ The following links take you to the sections you need to get set up with CircleC
 * xref:orchestrate:pipelines.adoc[Set up a Pipeline].
 * xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
 
-== View and manage integrations
+== View and manage organization integrations
 
 You can view and manage integrations in two places depending on your organization type. The following sections describe your options for each integration type.
 
@@ -265,13 +259,17 @@ To *uninstall* the GitHub App from your organization, select the trash/bin butto
 
 === Manage a GitHub OAuth app integration
 
-A GitHub OAuth app integration is built into a `github` type organization.
+A GitHub OAuth app integration is installed into a `github` type organization.
+
+To *view* a GitHub OAuth app integration, navigate to menu:Organization Settings[VCS Connections]. If the GitHUb OAuth app is installed you will see this indicated in the OAuth app section.
 
 You can _disconnect_ your GitHub OAuth app integration. Doing so will remove your `github` organization from CircleCI. To disconnect your GitHub OAuth app integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your GitHub integration and follow the instructions.
 
 === Manage a Bitbucket Cloud integration
 
-A Bitbucket Cloud integration is built into a `bitbucket` type organization.
+A Bitbucket Cloud integration is installed into a `bitbucket` type organization.
+
+To *view* a Bitbucket Cloud integration, navigate to menu:Organization Settings[VCS Connections]. If the Bitbucket Cloud integration is installed you will see this indicated in the Bitbucket Cloud section.
 
 You can _disconnect_ your Bitbucket Cloud integration. Doing so will remove your `bitbucket` type organization from CircleCI. To disconnect your Bitbucket Cloud integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your Bitbucket Cloud integration and follow the instructions.
 
