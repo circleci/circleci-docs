@@ -19,6 +19,38 @@ You can log in to CircleCI using one of the following methods. These methods can
 
 To view your user account integrations, navigate to menu:User Settings[Account Integrations].
 
+A CircleCI user account can be integrated with VCS user accounts via _authorization_.
+
+The following table describes user authorization for the different VCS providers:
+
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| VCS provider | Authorization type | Authorization management | Notes
+
+|GitHub
+|GitHub OAuth app
+|Displayed in menu:User Settings[Account Integration], managed in GitHub at link:https://github.com/settings/applications[GitHub settings].
+|Can exist alongside GitHub App authorization.
+
+|GitHub
+|GitHub App
+|menu:User Settings[Account Integration]. If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings].
+|Can exist alongside GitHub OAuth app authorization.
+
+|Bitbucket
+|Bitbucket Cloud OAuth
+|Displayed in menu:User Settings[Account Integrations] , managed in Bitbucket at link:https://bitbucket.org/account/settings/app-authorizations/[Bitbucket settings].
+|Mutually exclusive with other VCS authorization
+
+|GitLab
+|TBC
+|Not displayed in menu:User Settings[Account Integrations]. Managed in Gitlab at link:https://gitlab.com/-/user_settings/applications[GitLab settings].
+|Mutually exclusive with other VCS authorizaitons except GitHub App.
+|===
+--
+
 == Organizations
 
 An organization in CircleCI is a workspace that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, or Bitbucket).
