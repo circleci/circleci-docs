@@ -1,4 +1,15 @@
-# API Documentation Integration
+{
+  "info": {
+    "description": "Custom description override"
+  },
+  "paths": {
+    "/custom-endpoint": {
+      "get": {
+        "summary": "Added custom endpoint"
+      }
+    }
+  }
+}# API Documentation Integration
 
 This project integrates API documentation with the Antora documentation site, providing two versions of API docs that are built during the main site build process and served alongside the main documentation.
 
