@@ -25,7 +25,7 @@ The following list shows some examples of where Smarter Testing can be most bene
 +
 TIP: Smarter Testing uses code coverage data to determine which tests to run when source files are modified. Tests that cover large amounts of the codebase will run more frequently since most source changes will impact those tests.
 
-== Limitations
+== Limitations (This section should be merged with the above)
 
 * Generating code coverage data is essential for determining how tests are related to code. If tests are run in a way that makes generating and accessing code coverage data tricky then Smarter Testing may not be a good fit.
 * Smarter Testing works best when testing a single deployable artifact. For example, a monorepo with integration tests that span multiple packages/services, especially when services run in separate containers, makes coverage generation and consolidation difficult.
