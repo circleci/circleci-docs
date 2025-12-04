@@ -8,37 +8,22 @@
 
 CAUTION: *Smarter Testing* is available in preview. When the feature is made generally available there will be a cost associated with access and usage.
 
-Use Smarter Testing to optimize test runs as follows:
+Smarter Testing reduces test execution time while maintaining test confidence by:
 
-* Run only tests that are impacted by code changes.
-* Evenly distribute tests across parallel execution nodes.
+* Running only tests that are impacted by code changes.
+* Evenly distributing tests across parallel execution nodes.
 
-Smarter Testing reduces test execution time while maintaining test confidence.
 
 == Is my project a good fit for Smarter Testing?
 
-The following list shows some examples of where Smarter Testing can be most beneficial:
+Here are some examples where Smarter Testing works well:
 
-* Tests that exercise code within the same repository.
-* Projects with comprehensive test coverage. The more thorough your tests, the more precisely Smarter Testing can identify which tests are impacted by changes.
-* Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest) where generating coverage reports is straightforward.
-+
-TIP: Smarter Testing uses code coverage data to determine which tests to run when source files are modified. Tests that cover large amounts of the codebase will run more frequently since most source changes will impact those tests.
-
-== Limitations (This section should be merged with the above)
-
-* Generating code coverage data is essential for determining how tests are related to code. If tests are run in a way that makes generating and accessing code coverage data tricky then Smarter Testing may not be a good fit.
-* Smarter Testing works best when testing a single deployable artifact. For example, a monorepo with integration tests that span multiple packages/services, especially when services run in separate containers, makes coverage generation and consolidation difficult.
-* Smarter Testing needs to be configured with commands to discover all available tests and run a subset of those tests. If you cannot run commands to discover tests and run a subset of tests on the CLI then Smarter Testing may not be a good fit.
-
-== Key benefits
-
-* Faster CI/CD pipelines through intelligent test selection.
-* Optimized resource usage and cost efficiency.
-* Maintain fast feedback loops for development teams.
-* Scale efficiently as test suites grow.
+* Straightforward coverage generation. Smarter Testing uses code coverage data to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data can't be easily collected.
+* Adequate test coverage across your codebase. Without coverage, Smarter Testing cannot determine which tests are impacted when those files change.
+* Focused test scope. Tests should target specific code areas rather than broad portions of the codebase, as broad tests run more frequently and reduce optimization benefits.
 
 == How it works
+
 Smarter Testing runs a test suite in three distinct phases:
 
 * Discovering tests.
