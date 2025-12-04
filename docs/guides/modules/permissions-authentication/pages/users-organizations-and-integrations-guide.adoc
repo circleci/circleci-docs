@@ -197,8 +197,6 @@ gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nO
 To create pipelines for your code in GitLab self-managed, you will need to generate a link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.
 
 You cannot currently edit or delete existing GitLab self-managed integrations.
-
-For GitLab.com, account integrations can be managed under your <<user-settings,User settings>>.
 --
 Bitbucket Data Center integration setup::
 +
