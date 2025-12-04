@@ -58,7 +58,7 @@ curl -fsSL https://raw.githubusercontent.com/CircleCI-Public/server-scripts/main
 
 . Fetch the Helm chart for inspection:
 +
-[,bash,subs="attributes"]
+[,bash,subs=attributes+]
 ----
 helm fetch oci://cciserver.azurecr.io/circleci-server --version {serverversion49} --untar
 ----
