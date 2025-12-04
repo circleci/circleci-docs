@@ -3,7 +3,9 @@
 :page-description: How-to guides for managing roles and permissions in CircleCI.
 :experimental:
 
-NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc[GitHub App], the content on this page applies to you.
+If you have a `circleci` type organization, the content on this page applies to you.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 Manage user access to organizations and projects with CircleCI roles and associated permissions. The guides on this page show how to add people to your organization, update permissions, and assign specific project roles to people in your organization. You can also manage roles for groups of users with xref:manage-groups.adoc[groups].For an overview of roles and permissions in CircleCI, see the xref:roles-and-permissions-overview.adoc[Roles and permissions overview] page.
 

@@ -53,11 +53,13 @@ NOTE: If you do not see the organization you would like to join listed, you will
 
 The steps in this section show how an org admin can invite teammates to join their organization.
 
-include::ROOT:partial$tips/check-github-type-org.adoc[]
+The steps are different depending on your organization type.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 [tabs]
 ====
-GitHub App GitLab Bitbucket Data Center::
+`circleci` type organization::
 +
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
@@ -67,7 +69,7 @@ GitHub App GitLab Bitbucket Data Center::
 
 image::guides:ROOT:invite-teammates-standalone.png[Navigate to Organization Settings, People, use the Invite form]
 --
-GitHub OAuth Bitbucket Cloud::
+`github` or `bitbucket` type organization::
 +
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
