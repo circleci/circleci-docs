@@ -2794,7 +2794,7 @@ Possible types of `requires` items:
 * Map of job name to status (a required job that must attain the specified status for the job to start) +
 * Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start)
 
-The possible *status* values are: `success`, `failed` and `canceled`.
+The possible *status* values are: `success`, `failed`, `canceled` and `not_run`.
 |===
 --
 
@@ -2819,6 +2819,7 @@ workflows:
             - deploy:
               - failed
               - canceled
+              - not_run
 
 ----
 
