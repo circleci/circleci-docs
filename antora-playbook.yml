@@ -15,6 +15,8 @@ content:
   - url: .
     start_path: docs/orbs
   - url: .
+    start_path: docs/server-admin-4.9
+  - url: .
     start_path: docs/server-admin-4.8
   - url: .
     start_path: docs/server-admin-4.7
@@ -49,7 +51,7 @@ asciidoc:
     serverversion46: 4.6.6
     serverversion47: 4.7.11
     serverversion48: 4.8.5
-    serverversion: 3.4.8
+    serverversion49: 4.9.0
     terraformversion: 0.15.4
     dockerversion: v28
     kubectlversion: 1.19

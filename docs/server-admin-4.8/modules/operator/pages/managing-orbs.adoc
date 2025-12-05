@@ -1,4 +1,5 @@
 = Managing orbs
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: Use this page to learn about orbs and how to manage them within CircleCI server v4.8.
 :experimental:
@@ -56,7 +57,7 @@ NOTE: `<orb-name>` and `<orb-version>` are optional. You can choose to only spec
 [using-orbs-behind-a-proxy]
 == Using orbs behind a proxy
 
-When importing orbs, the CLI must be able to talk to the server installation and to `circleci.com`. If you want to do this when using a server installation behind a proxy, the CLI needs to be configured to use the proxy to make those requests to `circleci.com`, rather than proxying requests to the server install. For example:
+When importing orbs, the CLI must be able to talk to the server installation and to `circleci.com`. To import orbs for a server installation behind a proxy, configure the CLI to use the proxy to make requests to `circleci.com`, rather than proxying requests to the server installation. For example:
 
 [source,bash]
 ----
