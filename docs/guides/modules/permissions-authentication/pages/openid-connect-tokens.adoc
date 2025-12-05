@@ -18,21 +18,12 @@ Some advantages to using OIDC over using static credentials:
 
 CircleCI OpenID Connect ID tokens are available in the following environment variables:
 
-[.table-scroll]
---
-.Explaining the available OIDC tokens available in environment variables
-[cols="1,2", options="header"]
-|===
-| Environment variable
-| Description
+* `$CIRCLE_OIDC_TOKEN`
 
-| `$CIRCLE_OIDC_TOKEN`
-| The default OIDC token. See <<format-of-the-openid-connect-id-token>> for full details.
+* `$CIRCLE_OIDC_TOKEN_V2` - This token includes a different `sub` claim format to include a reference to the source of the change that triggered the job.
 
-| `$CIRCLE_OIDC_TOKEN_V2`
-| Includes a different format for the `sub` claim to include a reference to the repository and branch. See <<format-of-the-openid-connect-id-token>> for full details.
-|===
---
+See <<format-of-the-openid-connect-id-token>> for full details on the Claims used in each token.
+
 
 CAUTION: **What about forks?** OIDC tokens will only be generated for forked builds if the **Pass secrets to builds from forked pull requests** setting is enabled. Find this option at **Project settings** > **Advanced**. See <<oidc-in-open-source-projects>>.
 
@@ -514,15 +505,27 @@ CircleCI's OIDC tokens contain the following standard https://openid.net/specs/o
 | `sub`
 a| The subject. This identifies who is running the CircleCI job and where. `$CIRCLE_OIDC_TOKEN_V2` also includes information about the source of change.
 
-For `$CIRCLE_OIDC_TOKEN` its value is: `"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+---
+
+For `$CIRCLE_OIDC_TOKEN` its value is:
+
+`"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+
+---
 
 For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the trigger type:
 
-* If the trigger is an xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook] then:
-`"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+*If the trigger is a* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook]:
 
-* Otherwise it will be:
-`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
+`"org/<organization_id>/project/<project_id>/user/<user_id>"`
+
+A string in which `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+
+*All other trigger types*:
+
+`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`
+
+A string in which `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
 
 | `aud`
 | The audience. By default, this is `ORGANIZATION_ID`, a string containing a UUID that identifies the job's project's organization. To customize the audience you can generate an OIDC token with a custom audience. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
