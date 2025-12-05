@@ -51,7 +51,7 @@
     "stylelint": "~16.26.0",
     "stylelint-config-standard": "~39.0.0",
     "tailwind-scrollbar": "^4.0.2",
-    "vinyl-fs": "~3.0"
+    "vinyl-fs": "~4.0.0"
   },
   "overrides": {
     "eslint-plugin-node": {
