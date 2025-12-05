@@ -7,9 +7,9 @@ This tutorial shows how to add a deploy marker step to your workflow config. Dep
 
 == Introduction
 
-Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the xref:set-up-rollbacks.adoc[CircleCI rollback feature].
+Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback feature. For more information on rollbacks, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
 
-For a full guide to CircleCI's deploys features and functionality, refer to the xref:deployment-overview.adoc[Deployment and deploy management] guide.
+For a full guide to CircleCI's deploys features and functionality, refer to the xref:deployment-overview.adoc[Deployment and Deploy Management] guide.
 
 You can configure deploy markers as follows:
 
@@ -43,6 +43,7 @@ CAUTION: We recommend configuring `circleci run release plan` and `circleci run 
 
 Add a `circleci run release plan` command to your deployment job. This tells CircleCI to plan a new deploy and show it in the link:https://app.circleci.com/deploys[Deploys UI] with `pending` status.
 
+.Plan your deployment
 [,yml]
 ----
 jobs:
@@ -73,8 +74,9 @@ Configuring `circleci run release plan` identifies the deployment you are planni
 
 This section provides some options for setting the `target-version` parameter.
 
-* One option is to use CircleCI's built-in environment variables. For example you could define the target version as follows:
+* One option is to use CircleCI's built-in environment variables. For example, define the target version as follows:
 +
+.Example of setting target version using CircleCI's built-in environment variables
 [,yml]
 ----
 --target-version="1.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}"
@@ -82,7 +84,7 @@ This section provides some options for setting the `target-version` parameter.
 +
 This configuration would yield a value with the following format `1.0.28853-ffdbeb1`.
 
-* Another option is to use pipeline values. For example you could define the target version as follows:
+* Another option is to use pipeline values. For example, define the target version as follows:
 +
 [,yml]
 ----
@@ -93,24 +95,13 @@ This configuration would yield a value with the following format `12345`.
 
 === 1.2. Update the deploy status to running
 
-WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI release agent for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you. See the xref:release-agent-overview.adoc[Release Agent Overview] page for more details.
 
 After deploying your application, you can update the status of the deployment to `RUNNING` by running the `circleci run release update` command in a new step.
 
-[,yml]
-----
-jobs:
-  deploy-my-service:
-    executor: some-executor
-    steps:
-      ...
-      (existing deployment commands)
-      ...
-      - run: circleci run release update --status=running
-----
+Remember to provide your deploy name when using the `update` commands. The deploy name value should match the value you provided when you planned the deploy. If you did not provide a deploy name when you planned the deploy, you can use the `default` value.
 
-If you are deploying multiple components or to multiple environments from a single workflow, you need to provide the command with a deployment name. The deploy name value should match the value you provided when you planned the deploy.
-
+.Update the deploy status to running
 [,yml]
 ----
 jobs:
@@ -139,7 +130,7 @@ jobs:
       - run:
           name: Update planned release to SUCCESS
           command: |
-            circleci run release update \
+            circleci run release update <deploy-name> \
               --status=SUCCESS
           when: on_success
       - run:
@@ -148,7 +139,7 @@ jobs:
             if [ -f failure_reason.env ]; then
               source failure_reason.env
             fi
-            circleci run release update \
+            circleci run release update <deploy-name> \
               --status=FAILED \
               --failure-reason="$FAILURE_REASON"
           when: on_fail
@@ -184,7 +175,7 @@ jobs:
       - run:
           name: Update planned release to CANCELED
           command: |
-            circleci run release update \
+            circleci run release update <deploy-name> \
               --status=CANCELED
 ----
 
@@ -228,14 +219,14 @@ jobs:
           command: <your-deployment-logic>
       - run:
           name: Update planned deployment to running
-          command: circleci run release update --status=running
+          command: circleci run release update <deploy-name> --status=running
       - run:
           name: Validate deployment
           command: <your-validation-logic>
       - run:
           name: Update planned deployment to SUCCESS
           command: |
-            circleci run release update \
+            circleci run release update <deploy-name> \
               --status=SUCCESS
           when: on_success
       - run:
@@ -244,7 +235,7 @@ jobs:
             if [ -f failure_reason.env ]; then
               source failure_reason.env
             fi
-            circleci run release update \
+            circleci run release update <deploy-name> \
               --status=FAILED \
               --failure-reason="$FAILURE_REASON"
           when: on_fail
@@ -254,7 +245,7 @@ jobs:
       - run:
           name: Update planned release to CANCELED
           command: |
-            circleci run release update \
+            circleci run release update <deploy-name> \
               --status=CANCELED
 workflows:
   deploy-workflow:
@@ -268,7 +259,7 @@ workflows:
 
 == Deploy logs without status updates
 
-Sometimes you might not want your deployment marker to have any specific status, but still want it to be logged in the deploys UI.
+Sometimes you might not want your deploy markers to have any specific status, but still want them to be logged in the deploys UI.
 In those cases you can use the `release log` command in place of `release plan` as shown in the example below.
 
 [,yml]
@@ -326,7 +317,7 @@ You can also create an environment integration manually in the CircleCI web app.
 . Select the **Environments** tab.
 . Select btn:[Create Environment Integration].
 . Enter a name for your environment, and a description if you would like.
-. Use the dropdown menu to choose your environment integration type. Choose the "Custom" option to follow along with this guide,. If you are deploying to your Kubernetes cluster you can or if you want to use the CircleCI release agent, then choose "Kubernetes Cluster" and head over to the xref:set-up-circleci-deploys.adoc[Release agent setup] page.
+. Use the dropdown menu to choose your environment integration type. Choose the "Custom" option to follow along with this guide,. If you are deploying to your Kubernetes cluster you can or if you want to use the CircleCI release agent, then choose "Kubernetes Cluster" and head over to the xref:set-up-circleci-deploys.adoc[Set up the CircleCI Release Agent] page.
 . Select btn:[Save and Continue].
 
 == Next steps
@@ -335,4 +326,4 @@ By following the steps in this guide, you have added a deploy marker to your Cir
 You can now track the status of your deployments across your configured environments in the CircleCI deploys UI and in the project home page.
 You can now:
 
-* xref:set-up-rollbacks.adoc[Set up rollbacks].
+* xref:set-up-rollbacks.adoc[Set up Rollbacks].
