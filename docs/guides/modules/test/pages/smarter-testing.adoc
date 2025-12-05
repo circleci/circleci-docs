@@ -51,11 +51,11 @@ This approach prevents slower nodes from extending the job runtime while other n
 === Test impact analysis
 Test impact analysis identifies which tests need to run based on the files that changed in your checked out code. Analysis results are stored as impact data for future test runs. The system works in two phases:
 
-*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. Analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
+*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
 
-*Selection phase*:: Compares changed files against the test impact data and selects only tests that exercise modified code. By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
+*Selection phase*:: Compares the current repository state against the most recent impact analysis data. Tests covering modified files are selected to run (for clarity, new or modified tests will also be selected). Additionally, the entire test suite runs if any `full-test-run-paths` files were modified since the last analysis (these file states are stored in impact data even if not covered by tests). See the <<test-suite-configuration-options>> for details. By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration. 
 
-Test selection works by comparing the current state of the repository against the most recent test impact analysis data. Any tests that cover modified files are selected to run. Additionally, the entire test suite is selected if any of the `full-test-run-paths` files are modified. See the <<test-suite-configuration-options>> for details.
+TIP: You can also select tests with Smarter Testing in your local test runs on your machine. See <<New section needed>> for details.
 
 The analysis phase typically runs slower than running the selected tests because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
 
