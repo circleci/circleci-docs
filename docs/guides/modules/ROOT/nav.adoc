@@ -146,6 +146,8 @@
 *** xref:test:test.adoc[Automated testing]
 *** xref:test:collect-test-data.adoc[Collecting test data]
 *** xref:insights:insights-tests.adoc[Test Insights]
+** Manage and optimize tests
+*** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
@@ -293,6 +295,7 @@
 * Developer toolkit
 ** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
 ** AI features
+*** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 ** CLI

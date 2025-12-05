@@ -70,7 +70,6 @@ antora:
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
       - 'test:smarter-testing.adoc'
-      - 'test:fix-flaky-tests.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true
