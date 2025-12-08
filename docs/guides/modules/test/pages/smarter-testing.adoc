@@ -707,8 +707,10 @@ options:
 ----
 ====
 
+When running the test suite locally, test selection is enabled by default but analysis is disabled. Run the test suite with `--test-selection=none` and `--test-analysis=impacted` to override the default behaviour. Confirm that the `analysis` command analyzes the test atoms you expect. Look for the output lines `Found N files impacting TEST` which show analysis discovering the source files covered by the test.
 
-Run the test suite with test-selection disabled, and analysis enabled, and confirm that the `analysis` command analyzes the test atoms you expect. Look for the output lines `Found N files impacting TEST` which show analysis discovering the source files covered by the test:
+The `--local` flag is required for analysis to run on your machine - without it, analysis is skipped locally. This is for validation during onboarding and setup only. Actual analysis should run in CI where impact data is stored by Smarter Testing, which can then be used to select tests in CI or locally.
+
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --local --test-selection=none --test-analysis=impacted
@@ -846,6 +848,8 @@ options:
   impact-key: service-2
 ----
 ====
+
+NOTE: When running with `--local`, you'll see `.circleci/impact.json` created - this stores the impact data used for test selection and can be deleted after validation.
 
 === 2.2 Validate test selection locally
 Test selection requires the test impact data from the analysis phase. Earlier we validated that the analysis command was running and producing coverage data in the correct location and format. But we limited the amount of time spent running analysis to 1 minute.
