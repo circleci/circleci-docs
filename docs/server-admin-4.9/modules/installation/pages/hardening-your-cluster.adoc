@@ -275,5 +275,5 @@ When hardening an installation where the machine provisioner uses public IP addr
 
 ifndef::pdf[]
 ## Next steps
-* xref:operator:operator-overview.adoc[server 4.9 Operator Overview]
+xref:operator:operator-overview.adoc[Server 4.9 Operator Overview]
 endif::[]
