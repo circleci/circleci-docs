@@ -849,7 +849,7 @@ options:
 ----
 ====
 
-NOTE: When running with `--local`, you'll see `.circleci/impact.json` created - this stores the impact data used for test selection and can be deleted after validation.
+NOTE: When running with `--local`, you'll see `.circleci/impact.json` created - this stores the impact data used for test selection. Keep this file for the next step to validate test selection. You can delete it afterwards.
 
 === 2.2 Validate test selection locally
 Test selection requires the test impact data from the analysis phase. Earlier we validated that the analysis command was running and producing coverage data in the correct location and format. But we limited the amount of time spent running analysis to 1 minute.
