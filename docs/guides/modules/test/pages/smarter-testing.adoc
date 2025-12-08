@@ -192,7 +192,6 @@ $ mv circleci-testsuite "${HOME}/bin/"
 
 
 === 1.2 Configure the discover command
-TIP: The `circleci run testsuite` CLI tooling must be run from your repository root directory. The commands run as part of the test suite will also be run from your repository root directory, and should not use `cd` to change the working directory.
 
 Smarter Testing operates on "test atoms".
 
@@ -286,6 +285,8 @@ run: |
   echo "running: <<test.atoms>>" | tr ' ' '\n'
 ----
 ====
+
+TIP: The `circleci run testsuite` CLI tooling must be run from your repository root directory. The commands run as part of the test suite will also be run from your repository root directory, and should not use `cd` to change the working directory.
 
 . Run the test suite and confirm that the `discover` command found the test atoms you expect:
 +
@@ -750,7 +751,8 @@ Discovered 2 tests in 29ms
 
 Selecting tests...
 Selecting all tests, no impact analysis available
-Selected 2 tests, Skipped 0 tests in 0s
+Selecting no tests, --test-selection set to 'none'
+Selected 0 tests, Skipped 6 tests in 0s
 
 Timing data is not present.
 Sorted tests in 0s
