@@ -292,7 +292,7 @@ TIP: The `circleci run testsuite` CLI tooling must be run from your repository r
 +
 [source,console]
 ----
-$ circleci run testsuite "ci tests" --local
+$ circleci run testsuite "ci tests" 
 Running test-suite-subcommand version "1.0.14935-630104a" built "2025-11-25T16:15:39Z"
 Testsuite timeout: 4h40m0s
 Running test suite 'ci tests'
@@ -335,7 +335,7 @@ Not updating test impact data, analysis not enabled
 
 The `run` command executes the test atoms discovered by the `discover` command using a test runner. The `run` command is the same command you use to launch your test runner locally.
 
-Make sure that the command stores JUnit results, and that it is passed a list of test atoms to run, for example:
+Start with your existing test command. For example, you might currently run:
 [source,console]
 ----
 $ vitest run --reporter=junit \
@@ -450,7 +450,7 @@ outputs:
 +
 [source,console]
 ----
-$ circleci run testsuite "ci tests" --local
+$ circleci run testsuite "ci tests" 
 Running test-suite-subcommand version "1.0.14935-630104a" built "2025-11-25T16:15:39Z"
 Testsuite timeout: 4h40m0s
 Running test suite 'ci tests'
@@ -493,6 +493,7 @@ Ran 2 tests in 527ms
 Analysis not configured
 Not updating test impact data, analysis not enabled
 ----
+NOTE: Running the test suite locally will create a test-reports/ folder that you can safely delete after validating your configuration.
 
 == 2. Enable Smarter Testing
 
@@ -508,7 +509,7 @@ Steps:
 
 The `analysis` command executes test atoms one at a time using a test runner. The `analysis` command is the same command you would use to launch your test runner locally with code coverage enabled.
 
-Make sure that the command stores code coverage results, and that it is passed a test atom to run for example:
+For example, with Vitest this would look like:
 [source,console]
 ----
 $ vitest run --coverage.enabled \
@@ -520,7 +521,7 @@ $ vitest run --coverage.enabled \
              src/pages/dashboard/Dashboard.test.tsx
 ----
 
-The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run. Some test runners (including `vitest`) place coverage reports in a directory, and there may be multiple reports. Reports need to be joined into a single file so that Smarter Testing can interpret the results.
+The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run. Some test runners (including `vitest` and `jest`) generate multiple coverage files that must be concatenated into a single file for Smarter Testing to parse.
 
 The test atom to analyze can be specified in one of two ways:
 
