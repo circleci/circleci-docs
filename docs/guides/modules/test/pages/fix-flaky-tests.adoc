@@ -152,7 +152,7 @@ Once you have assigned tasks to Chunk, you can view an activity timeline on the 
 
 Chunk tasks can be one of two types:
 
-*Manual tasks*:: Created by prompting Chunk from the chat interface. Manual tasks appear in the ist view immediately after first message to Chunk.
+*Manual tasks*:: Created by prompting Chunk from the chat interface. Manual tasks appear in the list view immediately after first message to Chunk.
 *Schedule tasks*:: Created via the btn:[Schedule a task] button. Schedule tasks appear once the task runs on the selected schedule and if Chunk was able to open a fixPR.
 
 .See Chunk tasks listed below chat interface

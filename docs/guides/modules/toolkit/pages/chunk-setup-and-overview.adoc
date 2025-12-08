@@ -68,7 +68,7 @@ If you need to tear down Chunk for your organization, you can do so by deleting 
 . Under "Model Provider API Keys" select btn:[Edit in contexts]. You will be redirected to your organization's Contexts page.
 . Locate the `circleci-agents` context. Select it by name to open the context page and view the stored environment variables.
 . Locate your AI model provider API key environment variable and select it using the radio button.
-. Select btn:[Delete] to delete the environment variable. You will be promted to confirm the deletion.
+. Select btn:[Delete] to delete the environment variable. You will be prompted to confirm the deletion.
 
 == Chunk environment setup
 
