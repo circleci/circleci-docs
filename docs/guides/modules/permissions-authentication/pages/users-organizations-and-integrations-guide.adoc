@@ -176,9 +176,9 @@ The organizaiton integration options available to you depend on your organizatio
 
 Integrations are set up as follows:
 
-* GitHub App and GitLab SaaS are set up when creating a project.
-* GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login.
-* GitLab self-managed and Bitbucket Data Center are set up from menu:Organization Settings[Integrations].
+* GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login. No additional action is required, but the installation can be viewed at menu:Organization Settings[VCS Connections].
+* GitHub App, GitLab self-managed and Bitbucket Data Center are managed from menu:Organization Settings[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
+* GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines])
 
 If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See he <<manage-organization-integrations>> section for more information.
 
@@ -328,11 +328,11 @@ To set up Bitbucket data center pipelines you will need to create a project HTTP
 --
 ====
 
-=== Can I integrate a GitHub org with multiple CircleCI orgs?
+=== Can multiple CircleCI organizations connect to the same GitHub organization?
 
-A GitHub org with the CircleCI GitHub App installed can only be integrated with one CircleCI organization.
+A GitHub organzization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
-In this scenario, attempting to integrate with a second CircleCI organization will redirect you to a GitHub App integration settings page when creating a project. If you are not sure what other CircleCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
+If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed (linked to a different CircleCI organization), you will be redirected to the GitHub App installation page and won't be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation—but this refers to the existing connection to a different CircleCI organization, not the one you just tried to create. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
 
 #TODO Benny can you help with this section?#
 
