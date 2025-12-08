@@ -3,15 +3,17 @@
 :page-description: Create a new organization in CircleCI.
 :experimental:
 
-This guide coverts creating a new organization in CircleCI.
+This guide covers creating a new organization in CircleCI.
 
 The following organization types are available in CircleCI:
 
-* `circleci` organizations
-* `github` organizations
-* `bitbucket` organizations
+* `circleci`
+* `github`
+* `bitbucket`
 
-== Create a `circleci` organization
+For a guide to organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+
+== Create a circleci organization
 
 To create a `circleci` organization, follow these steps:
 
@@ -21,10 +23,10 @@ To create a `circleci` organization, follow these steps:
 
 Once your new organization is created you can start creating projects and inviting team members:
 
-* xref:create-project.adoc#create-a-project[Create a project]
-* xref:invite-your-team.adoc#invite-teammates[Invite your team]
+* xref:create-project.adoc#create-a-project[Create a Project]
+* xref:invite-your-team.adoc#invite-teammates[Join Teammates on CircleCI]
 
-== Create a `github` organization
+== Create a github organization
 
 A `github` organization is created when you log in to CircleCI using your _social_ GitHub login. `github` organizations use an OAuth app connection with CircleCI. If you have logged in to CircleCI using a method other than your GitHub login, you can still create a `github` organization by following these steps:
 

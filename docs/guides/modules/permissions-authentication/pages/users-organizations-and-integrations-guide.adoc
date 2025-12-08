@@ -10,14 +10,12 @@ This guide explains the concepts of user, organization, and integration in Circl
 
 When you log in to CircleCI you are logging in to your _user account_.
 
-As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
-
 You can log in to CircleCI using one of the following methods. These methods can not be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
 
 * Email and password.
 * Social login (GitHub, Bitbucket).
 
-To view your user account integrations, navigate to menu:User Settings[Account Integrations].
+As a CircleCI _user_ you can create and access _organizations_. You can access zero, one, or many organizations. You can create new organizations and/or join an existing organization.
 
 A CircleCI user account can be integrated with VCS user accounts via _authorization_.
 
@@ -52,8 +50,6 @@ The following table describes user authorization for the different VCS providers
 |===
 --
 
-#TODO need to add GitLab self-managed and BBDC to this table?#
-
 == Organizations
 
 An organization in CircleCI is a workspace that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, or Bitbucket).
@@ -62,9 +58,33 @@ Each organization has its own settings, including security, integrations, and re
 
 A CircleCI _organization_ can be one of three types:
 
-* `circleci`: This organization type is created separately to any VCS connection between CircleCI and your code repositories. Within a `circleci` organization you create projects and then connect them to your code repositories.
-* `github`: This organization type is created automatically when you authorize CircleCI to access your GitHub account via OAuth app. This happens automatically when you sign in to CircleCI with your GitHub social login. Your GitHub repositories are imported as available projects in CircleCI. You cannot create projects that do not correspond to existing repositories in your GitHub personal account or organizations.
-* `bitbucket`: This organization type is created automatically when you authorize CircleCI to access your Bitbucket account via OAuth app. This happens automatically when you sign in to CircleCI with your Bitbucket social login. Your Bitbucket repositories are imported as available projects in CircleCI. You cannot create projects that do not correspond to existing repositories in your Bitbucket personal account or organizations.
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| Organization type | VCS integrations available | Projection creation process | Notes
+
+| `circleci`
+a| * GitHub App (add-on)
+* GitLab (add-on)
+* GitLab self-managed (add-on)
+* Bitbucket Data Center (add-on)
+| Created manually via web app or API
+| This organization type is created separately to any VCS connection between CircleCI and your code repositories.
+
+| `github`
+a| * GitHub App (add-on)
+* GitHub OAuth app (built-in)
+| Imported from VCS automatically.
+| Created automatically when you authorize CircleCI to access your GitHub account via OAuth app. This happens automatically when you sign in to CircleCI with your GitHub social login.
+
+| `bitbucket`
+a| * Bitbucket OAuth (built-in)
+| Imported from VCS automatically.
+| Created automatically when you authorize CircleCI to access your Bitbucket account via OAuth app. This happens automatically when you sign in to CircleCI with your Bitbucket social login.
+
+|===
+--
 
 include::ROOT:partial$tips/check-org-type.adoc[Check your organization type]
 
@@ -74,13 +94,34 @@ For full details on creating organizations, see the xref:getting-started:create-
 
 [tabs]
 ====
-`github` and `bitbucket` organizations::
+`github` organizations::
 +
 --
-For `github` and `bitbucket` type organizations projects are synonymous with repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
+For `github`  organizations projects are created automatically from your VCS repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
 
-* Set up new repositories as CircleCI projects. Commit a CircleCI `config.yml` file to the repository to define your pipeline. This creates a GitHub OAuth or Bitbucket Cloud pipeline for you, which you can view in menu:Project Settings[Project Setup] (GitHub) or menu:Project Settings[Pipelines] (Bitbucket).
+* Set up new repositories as CircleCI projects. Commit a CircleCI `config.yml` file to the repository to define your pipeline. This creates a GitHub OAuth pipeline for you, which you can view in menu:Project Settings[Project Setup].
 * Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+
+If you install the CircleCI GitHub App into your organization you can create new GitHub App pipelines and triggers alongside existing OAuth pipelines. GitHub App pipelines and triggers are not bound to the project repository. For example:
+
+* You could set up a trigger for your pipeline that runs not only when someone pushes to the repository itself, but also when there is a push to the default branch of a library your project depends on.
+* You could create a new pipeline within the project that uses a configuration file from a centrally managed repository but is triggered on events in the project repository.
+
+When you set up a project to build with CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
+
+- A deploy key that is used to check out your project from GitHub.
+- A webhook that is used to notify CircleCI when you push to GitHub.
+
+CircleCI builds push events by default. Builds are triggered for all pushes to the repository and push is the most common case of triggering a build.
+--
+`bitbucket` organizations::
++
+--
+For `bitbucket` organizations, projects are created automatically from your VCS repositories. Select "Projects" in the link:https://app.circleci.com/home[CircleCI web app] to view your repositories. From here you have the option to:
+
+* Set up new repositories as CircleCI projects. Commit a CircleCI `config.yml` file to the repository to define your pipeline. This creates a Bitbucket Cloud pipeline for you, which you can view in menu:Project Settings[Pipelines].
+* Follow/unfollow projects, to subscribe/unsubscribe from notifications for builds.
+
 
 When you set up a project to build with CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
 
@@ -88,14 +129,6 @@ When you set up a project to build with CircleCI, the following settings are add
 - A service hook (or "push hook") that is used to notify CircleCI when you push to GitHub.
 
 CircleCI builds push hooks by default. Builds are triggered for all push hooks for the repository and push is the most common case of triggering a build.
-
-Some additional, less common cases where CircleCI uses hooks are as follows:
-
-* CircleCI processes PR hooks (pull request hooks) to store PR information for the CircleCI app.
-* If the **Only build pull requests** setting is enabled within CircleCI, CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is enabled, CircleCI will always build all pushes to the project's default branch.
-* If the **Build forked pull requests** setting is enabled in CircleCI, CircleCI will trigger builds in response to PRs created from forked repositories.
-
-These settings can be found in each project's individual **Project Settings** section of the CircleCI web app.
 --
 `circleci` organizations::
 +
@@ -107,23 +140,20 @@ For `circleci` type organizations, projects are created directly in CircleCI via
 --
 ====
 
-== Organization integration
+=== Organization integration
 
 The organizaiton integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
 
-#TODO would it be right to say that if you can integrate with GL SaaS you can with self managed? Then we can simplify this to "GitLab" and then say that integration type is the same as pipeline type?#
-
 [.table-scroll]
 --
-[cols=7*, options="header"]
+[cols=6*, options="header"]
 |===
-| Organization type |GitHub App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab self managed | GitLab SaaS
+| Organization type |GitHub App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab
 
 | `circleci`
 | [.circle-green]#Yes#
 | [.circle-red]#No#
 | [.circle-red]#No#
-| [.circle-green]#Yes#
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
 
@@ -133,13 +163,11 @@ The organizaiton integration options available to you depend on your organizatio
 | [.circle-red]#No#
 | [.circle-red]#No#
 | [.circle-red]#No#
-| [.circle-red]#No#
 
 |`bitbucket`
 | [.circle-red]#No#
 | [.circle-red]#No#
 | [.circle-green]#Yes#
-| [.circle-red]#No#
 | [.circle-red]#No#
 | [.circle-red]#No#
 
@@ -152,16 +180,78 @@ Integrations are set up as follows:
 * GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login.
 * GitLab self-managed and Bitbucket Data Center are set up from menu:Organization Settings[Integrations].
 
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See he <<manage-organization-integrations>> section for more information.
 
-#TODO Add screenshots for these setup sections#
+== Limitations
+
+The following limits are currently in place for the Free Plan:
+
+- Each user can create up to three `circleci` organizations on the Free Plan.
+- Each `circleci` organization under a Free Plan can have up to 10 projects.
+
+If you need more organizations or projects, consider upgrading to a Paid Plan or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team]. See hte xref:plans-pricing:plan-overview.adoc[Plan Overview] page for more information.
+
+== Quickstart
+
+The following links take you to the sections you need to get set up with CircleCI:
+
+* xref:getting-started:first-steps.adoc[Sign up and Try].
+* xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI].
+* xref:getting-started:create-project.adoc[Create a Project].
+* xref:orchestrate:pipelines.adoc[Set up a Pipeline].
+* xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
+
+== Manage organization integrations
+
+The following sections describe your options for each integration type.
 
 [tabs]
 ====
-GitLab self-managed integration setup::
+GitHub App::
 +
 --
-Set up an integration with your GitLab self-managed instance from menu:Organization Settings[Integrations] as follows:
+*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization.
+
+*View*: To view a GitHub App integration, navigate to menu:Organization Settings[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
+
+*Disconnect*: To *uninstall* the GitHub App from your organization, select the trash/bin button and follow the instructions.
+--
+GitHub OAuth::
++
+--
+*Availability*: A GitHub OAuth app integration is installed into a `github` type organization.
+
+*View*: To *view* a GitHub OAuth app integration, navigate to menu:Organization Settings[VCS Connections]. If the GitHub OAuth app is installed you will see this indicated in the OAuth app section.
+
+*Disconnect*: You can _disconnect_ your GitHub OAuth app integration. Doing so will remove your `github` organization from CircleCI. To disconnect your GitHub OAuth app integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your GitHub integration and follow the instructions.
+--
+Bitbucket::
++
+--
+*Availability*: A Bitbucket Cloud integration is installed into a `bitbucket` type organization.
+
+*View*: To *view* a Bitbucket Cloud integration, navigate to menu:Organization Settings[VCS Connections]. If the Bitbucket Cloud integration is installed you will see this indicated in the Bitbucket Cloud section.
+
+*Disconnect*: You can _disconnect_ your Bitbucket Cloud integration. Doing so will remove your `bitbucket` type organization from CircleCI. To disconnect your Bitbucket Cloud integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your Bitbucket Cloud integration and follow the instructions.
+--
+GitLab::
++
+--
+*Availability*: A GitLab SaaS integration is installed into a `circleci` type organization.
+
+*View*: Currently, there is no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings.
+
+*Disconnect*: Currently, there is no method to disconnect GitLab from your organization. You can delete projects that are connected to GitLab. and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
+--
+GitLab self-managed::
++
+--
+
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+
+*Availability*: A GitLab self-managed integration is installed into a `circleci` type organization.
+
+*Configure*: Set up an integration with your GitLab self-managed instance from menu:Organization Settings[Integrations] as follows:
 
 . Select btn:[Set Up Integration] next to GitLab self-managed.
 . Enter your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
@@ -191,11 +281,19 @@ gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nO
 To create pipelines for your code in GitLab self-managed, you will need to generate a link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.
 
 You cannot currently edit or delete existing GitLab self-managed integrations.
+
+*View*: Currently, there is no method to manage the connection with GitLab self-managed outside of the project setup, trigger, and configuration settings.
+
+*Disconnect*: Currently, there is no method to disconnect GitLab self-managed from your organization. You can delete projects that are connected to GitLab self-managed and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
 --
-Bitbucket Data Center integration setup::
+Bitbucket Data Center::
 +
 --
-Set up an integration with your Bitbucket Data Center instance from menu:Organization Settings[Integrations] as follows:
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+
+*Availability*: A Bitbucket Data Center integration is installed into a `circleci` type organization.
+
+*Configure*: Set up an integration with your Bitbucket Data Center instance from menu:Organization Settings[Integrations] as follows:
 
 . Select btn:[Set up integration] next to Bitbucket Data Center.
 . In the modal enter your Bitbucket Data Center instance URL and your `known_hosts`:
@@ -223,57 +321,12 @@ Copy the full output from the `ssh-keyscan` command and enter it into the "known
 . Select btn:[Set Up Integration].
 
 To set up Bitbucket data center pipelines you will need to create a project HTTP access token with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
+
+*View*: Currently, there is no method to manage the connection with Bitbucket Data Center outside of the project setup, trigger, and configuration settings.
+
+*Disconnect*: Currently, there is no method to disconnect Bitbucket Data Center from your organization. You can delete projects that are connected to Bitbucket Data Center and delete the CircleCI webhooks in Bitbucket Data Center to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
 --
 ====
-
-== Limitations
-
-The following limits are currently in place for the Free Plan:
-
-- Each user can create up to three `circleci` organizations on the Free Plan.
-- Each `circleci` organization under a Free Plan can have up to 10 projects.
-
-If you need more organizations or projects, consider upgrading to a Paid Plan or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team]. See hte xref:plans-pricing:plan-overview.adoc[Plan Overview] page for more information.
-
-== Quickstart
-
-The following links take you to the sections you need to get set up with CircleCI:
-
-* xref:getting-started:first-steps.adoc[Sign up and Try].
-* xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI].
-* xref:getting-started:create-project.adoc[Create a Project].
-* xref:orchestrate:pipelines.adoc[Set up a Pipeline].
-* xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
-
-== View and manage organization integrations
-
-You can view and manage integrations in two places depending on your organization type. The following sections describe your options for each integration type.
-
-=== Manage a GitHub App integration
-
-A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization.
-
-To *view* a GitHub App integration, navigate to menu:Organization Settings[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
-
-To *uninstall* the GitHub App from your organization, select the trash/bin button and follow the instructions.
-
-=== Manage a GitHub OAuth app integration
-
-A GitHub OAuth app integration is installed into a `github` type organization.
-
-To *view* a GitHub OAuth app integration, navigate to menu:Organization Settings[VCS Connections]. If the GitHUb OAuth app is installed you will see this indicated in the OAuth app section.
-
-You can _disconnect_ your GitHub OAuth app integration. Doing so will remove your `github` organization from CircleCI. To disconnect your GitHub OAuth app integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your GitHub integration and follow the instructions.
-
-=== Manage a Bitbucket Cloud integration
-
-A Bitbucket Cloud integration is installed into a `bitbucket` type organization.
-
-To *view* a Bitbucket Cloud integration, navigate to menu:Organization Settings[VCS Connections]. If the Bitbucket Cloud integration is installed you will see this indicated in the Bitbucket Cloud section.
-
-You can _disconnect_ your Bitbucket Cloud integration. Doing so will remove your `bitbucket` type organization from CircleCI. To disconnect your Bitbucket Cloud integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your Bitbucket Cloud integration and follow the instructions.
-
-#TODO GITLAB BBDC REMOVAL INSTRUCTIONS? We need equivalent instructions for GitLab SaaS, self-managed and BBDC here#
 
 === Can I integrate a GitHub org with multiple CircleCI orgs?
 
