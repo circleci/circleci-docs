@@ -57,7 +57,8 @@ a| `m4pro.medium` +
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15328/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-16-3-available/[Release Notes]
 
-| `16.2.0`
+| `16.2.0` +
+  **link:https://circleci.com/changelog/deprecation-of-xcode-16-2/[EOL]: January 14, 2026**
 | Xcode 16.2 GA (16C5032a)
 | 14.6.1
 a| `m4pro.medium` +
