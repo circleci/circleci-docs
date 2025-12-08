@@ -8,7 +8,7 @@ NOTE: Chunk by CircleCI is currently in *beta*. There are no extra costs during 
 
 TIP: *Feedback or feature requests?* Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
 
-Chunk by CircleCI is an AI agent that you can set up in your organization to help with CI/CD related tasks:
+Chunk by CircleCI is an AI agent that you can set up in your organization to assist with CI/CD related tasks:
 
 * Use the Chunk chat UI to get help with any aspect of your project.
 * Assign Chunk tasks to proactively manage your CI/CD processes. For an example see the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] guide.
@@ -99,7 +99,17 @@ jobs:
       # insert more environment setup here
 ----
 
-Chunk supports all standard CircleCI configuration options. This includes executors, resource classes, caching, contexts, environment variables, service containers, orbs, and everything else you would use in a standard CircleCI pipeline. If it works in your `.circleci/config.yml`, it works in `cci-agent-setup.yml`. For a complete reference of available configuration options, see the xref:reference:ROOT:configuration-reference.adoc[CircleCI Configuration Reference].
+Chunk supports all standard CircleCI configuration options. This includes the following:
+
+* Executors.
+* Resource classes.
+* Caching.
+* Contexts.
+* Environment variables.
+* Service containers.
+* Orbs.
+
+And everything else you would use in a standard CircleCI pipeline. If it works in your `.circleci/config.yml`, it works in `cci-agent-setup.yml`. For a complete reference of available configuration options, see the xref:reference:ROOT:configuration-reference.adoc[CircleCI Configuration Reference].
 
 === Instruct Chunk to use your environment
 
@@ -236,7 +246,7 @@ Contexts:: If you are using CircleCI contexts to manage secrets or environment v
 
 === Configuring Chunk's environment when using the chat interface
 
-Using Chunk's chat interface to describe a task, you can tell Chunk which project, repository and branch you want to work on. You can also select and/or set up Chunk's environment here. Using the Environment selector you can set up your environment to give chunk access to any secrets needed or provide Chunk with the name of your agents `.yml` file if different from the default `cci-agent-setup.yml`.
+Using Chunk's chat interface to describe a task, you can tell Chunk which project, repository and branch you want to work on. You can also set up Chunk's environment. Using the "Environment" selector you can give chunk access to any secrets needed or provide Chunk with the name of your agents `.yml` file if different from the default `cci-agent-setup.yml`.
 
 === Testing your environment setup
 To build and iterate on Chunk's environment follow these steps:

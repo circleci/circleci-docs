@@ -148,9 +148,9 @@ Pull requests contain code diffs showing what changes Chunk recommends, along wi
 
 == The Chunk tasks dashboard
 
-Once you have assigned Chunk some tasks, you can view an activity timeline on the Chunk dashboard. Tasks are available in a list view below the chat interface.
+Once you have assigned tasks to Chunk, you can view an activity timeline on the Chunk dashboard. Tasks are available in a list view below the chat interface.
 
-There are two types of task, both are listed in the Chunk tasks dashboard.
+Chunk tasks can be one of two types:
 
 *Manual tasks*:: Created by prompting Chunk from the chat interface. Manual tasks appear in the ist view immediately after first message to Chunk.
 *Schedule tasks*:: Created via the btn:[Schedule a task] button. Schedule tasks appear once the task runs on the selected schedule and if Chunk was able to open a fixPR.
@@ -204,7 +204,7 @@ a|* Daily (Sunday through Thursday at 22:00 UTC).
 
 == Limitations
 
-*It is not possible to edit the Chunk task configurations*. You cannot directly edit setup scripts or post-run commands once a Chunk task is created. To modify these settings, you must delete the existing Chunk task and create a new one.
+*It is not possible to edit the Chunk task configurations*. You cannot directly edit setup scripts or post-run commands once a Chunk task is created. To change these settings, you must delete the existing Chunk task and create a new one.
 
 == Troubleshooting
 
