@@ -324,8 +324,15 @@ endif::env-gcp[]
 nomad:
   server:
     internal: false
-    serverHostname: <your nomad server domain or load-balancer>
+    serverHostname: <the domain or ip of your nomad server loadbalancer>
+
+  clients:
+    mTLS:
+      CACertificate: <base64 encoded CA Certificate from your terraform output>
+      certificate: <base64 encoded Certificate from your terraform output>
+      privateKey: <base64 encoded Client Private Key from your terraform output>
 ----
+.. If you externalize your Nomad servers then the following blocks should be removed from your `values.yaml`: `nomad.server.replicas`, `nomad.server.gossip` and `nomad.server.rpc`.
 .. Once the above is complete, you can skip ahead to <<nomad-autoscaler>>.
 
 
