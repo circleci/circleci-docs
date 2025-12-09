@@ -79,6 +79,9 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 | `oidc.circleci.com/context-ids`
 | An array of strings containing UUIDs that identify the context(s) used in the job.
 
+| `oidc.circleci.com/job-id`
+| The unique identifier for the job. Its value is a string containing a UUID identifying the CircleCI job.
+
 | `oidc.circleci.com/org-id`
 | The unique identifier for the organization. Its value is a string containing a UUID identifying the CircleCI organization.
 
@@ -99,6 +102,9 @@ The OpenID Connect ID tokens also contain some https://openid.net/specs/openid-c
 
 | `oidc.circleci.com/vcs-ref`
 | The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by custom webhooks.
+
+| `oidc.circleci.com/workflow-id`
+| The unique identifier for the workflow running the job. Its value is a string containing a UUID identifying the CircleCI workflow.
 |===
 --
 
