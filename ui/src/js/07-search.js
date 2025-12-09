@@ -105,7 +105,7 @@
 
     // ===== SEARCH FUNCTIONALITY =====
 
-    async function search (searchQuery, componentPath) {
+    async function search (searchQuery, componentPath, skipUrlUpdate) {
       // Reset to first page when component path changes
       if (componentPath && paginationData?.currentPath !== componentPath) {
         paginationData = { page: 0 }
@@ -137,6 +137,11 @@
       updatePathsList(componentPath ?? 'All')
       setResults(results.hits)
       console.log('Search results:', results)
+
+      // Update URL with search state (query, component, and pagination)
+      if (!skipUrlUpdate) {
+        updateUrlWithSearchState(searchQuery, paginationData.page, paginationData.currentPath)
+      }
     }
 
     // ===== DISPLAY FUNCTIONS =====
@@ -544,6 +549,109 @@
     }
 
     function handleClearSearch () {
+      // Clear the search UI
+      handleClearSearchUI()
+
+      // Clear URL parameters
+      updateUrlWithSearchState('', 0, null)
+    }
+
+    function handlePrevPage (e) {
+      if (paginationData && paginationData.page > 0) {
+        paginationData.page -= 1
+        search(query, paginationData.currentPath)
+      }
+    }
+
+    function handleNextPage (e) {
+      if (paginationData && paginationData.page < paginationData.totalPages - 1) {
+        paginationData.page += 1
+        search(query, paginationData.currentPath)
+      }
+    }
+
+    // ===== URL PARAMETER HANDLING =====
+
+    function updateUrlWithSearchState (searchQuery, page, componentPath) {
+      const url = new URL(window.location)
+
+      if (!searchQuery || searchQuery.length < MIN_QUERY_LENGTH) {
+        // Remove search parameters if query is cleared or too short
+        url.searchParams.delete('q')
+        url.searchParams.delete('page')
+        url.searchParams.delete('component')
+        window.history.pushState({}, '', url)
+        return
+      }
+
+      // Update URL with search query
+      url.searchParams.set('q', searchQuery)
+
+      // Add component parameter if not "All" (the default)
+      if (componentPath && componentPath !== 'All') {
+        url.searchParams.set('component', componentPath)
+      } else {
+        url.searchParams.delete('component')
+      }
+
+      // Add page parameter if not on first page
+      if (page && page > 0) {
+        url.searchParams.set('page', page + 1) // Display 1-based page numbers in URL
+      } else {
+        url.searchParams.delete('page') // Remove page param for first page
+      }
+
+      window.history.pushState({}, '', url)
+    }
+
+    async function readSearchStateFromUrl () {
+      const urlParams = new URLSearchParams(window.location.search)
+      const queryParam = urlParams.get('q')
+      const pageParam = urlParams.get('page')
+      const componentParam = urlParams.get('component')
+
+      if (queryParam && queryParam.length >= MIN_QUERY_LENGTH) {
+        // Set the query variable
+        query = queryParam
+
+        // Parse page number (convert from 1-based to 0-based)
+        const pageNumber = pageParam ? parseInt(pageParam, 10) - 1 : 0
+        if (pageNumber > 0) {
+          paginationData = { page: pageNumber }
+        }
+
+        // Populate both search inputs
+        elements.searchInput.value = queryParam
+        if (elements.mobileSearchInput) {
+          elements.mobileSearchInput.value = queryParam
+        }
+
+        // Show clear buttons
+        elements.clearButton.classList.remove('hidden')
+        elements.clearButton.classList.add('flex')
+        if (elements.mobileClearButton) {
+          elements.mobileClearButton.classList.remove('hidden')
+          elements.mobileClearButton.classList.add('flex')
+        }
+
+        // Perform search without updating URL (since we're loading from URL)
+        await search(queryParam, componentParam, true)
+
+        // Show search results in appropriate container
+        if (isMobileView) {
+          showMobileSearchResults()
+        } else {
+          elements.searchContainer.classList.remove('hidden')
+          elements.header.classList.add('h-dvh')
+        }
+      } else {
+        // No query in URL, make sure search UI is hidden
+        handleClearSearchUI()
+      }
+    }
+
+    function handleClearSearchUI () {
+      // Clear search inputs and state
       query = ''
       elements.searchInput.value = ''
       if (elements.mobileSearchInput) elements.mobileSearchInput.value = ''
@@ -564,55 +672,9 @@
       }
     }
 
-    function handlePrevPage (e) {
-      if (paginationData && paginationData.page > 0) {
-        paginationData.page -= 1
-        search(query, paginationData.currentPath)
-      }
-    }
-
-    function handleNextPage (e) {
-      if (paginationData && paginationData.page < paginationData.totalPages - 1) {
-        paginationData.page += 1
-        search(query, paginationData.currentPath)
-      }
-    }
-
-    // ===== URL PARAMETER HANDLING =====
-
-    function readQueryFromUrl () {
-      const urlParams = new URLSearchParams(window.location.search)
-      const queryParam = urlParams.get('q')
-
-      if (queryParam && queryParam.length >= MIN_QUERY_LENGTH) {
-        // Set the query variable
-        query = queryParam
-
-        // Populate both search inputs
-        elements.searchInput.value = queryParam
-        if (elements.mobileSearchInput) {
-          elements.mobileSearchInput.value = queryParam
-        }
-
-        // Show clear buttons
-        elements.clearButton.classList.remove('hidden')
-        elements.clearButton.classList.add('flex')
-        if (elements.mobileClearButton) {
-          elements.mobileClearButton.classList.remove('hidden')
-          elements.mobileClearButton.classList.add('flex')
-        }
-
-        // Trigger search with the URL parameter
-        search(queryParam, null).then(() => {
-          // Show search results in appropriate container
-          if (isMobileView) {
-            showMobileSearchResults()
-          } else {
-            elements.searchContainer.classList.remove('hidden')
-            elements.header.classList.add('h-dvh')
-          }
-        })
-      }
+    function handlePopState () {
+      // Browser back/forward button was clicked, re-read URL and update search
+      readSearchStateFromUrl()
     }
 
     // ===== INITIALIZATION =====
@@ -638,6 +700,9 @@
         elements.mobileNextButton.addEventListener('click', handleNextPage)
       }
 
+      // Listen for browser back/forward button navigation
+      window.addEventListener('popstate', handlePopState)
+
       // Listen for window resize to handle mobile/desktop transitions
       window.addEventListener('resize', updateSearchUIForScreenSize)
     }
@@ -645,7 +710,7 @@
     // Initialize everything
     initializeDomReferences()
     initializeEventListeners()
-    readQueryFromUrl() // Check for query parameter in URL and trigger search if present
+    readSearchStateFromUrl() // Check for query and page parameters in URL and trigger search if present
     console.log('Search input initialized')
   }
 
