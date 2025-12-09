@@ -589,7 +589,9 @@
 
       // Add component parameter if not "All" (the default)
       if (componentPath && componentPath !== 'All') {
-        url.searchParams.set('component', componentPath)
+        // Strip trailing colon for cleaner URLs (e.g., "Orbs" instead of "Orbs:")
+        const cleanComponentPath = componentPath.replace(/:$/, '')
+        url.searchParams.set('component', cleanComponentPath)
       } else {
         url.searchParams.delete('component')
       }
@@ -608,11 +610,22 @@
       const urlParams = new URLSearchParams(window.location.search)
       const queryParam = urlParams.get('q')
       const pageParam = urlParams.get('page')
-      const componentParam = urlParams.get('component')
+      let componentParam = urlParams.get('component')
 
       if (queryParam && queryParam.length >= MIN_QUERY_LENGTH) {
         // Set the query variable
         query = queryParam
+
+        // Normalize component parameter (handle both "Orbs" and "Orbs:" formats)
+        // Try with trailing colon first, then without, to match actual component paths
+        if (componentParam && componentParam !== 'All') {
+          // Component paths may have format "component:version" or "component:"
+          // URL has clean format "component" or "component:version"
+          // Add trailing colon if component has no version separator
+          if (!componentParam.includes(':')) {
+            componentParam = componentParam + ':'
+          }
+        }
 
         // Parse page number (convert from 1-based to 0-based)
         const pageNumber = pageParam ? parseInt(pageParam, 10) - 1 : 0
