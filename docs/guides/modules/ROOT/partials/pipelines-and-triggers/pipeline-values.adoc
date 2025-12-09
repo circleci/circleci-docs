@@ -487,7 +487,7 @@ d| [.nowrap]#GitHub App#
 
 | `pipeline.event.github.comment.body`
 d| [.nowrap]#GitHub App#
-| Boolean
+| String
 | The pull request comment body with leading/trailing whitespace removed, if a pipeline was triggered via PR comment. For pipelines triggered in other ways, this value is undefined.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
