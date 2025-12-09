@@ -578,6 +578,43 @@
       }
     }
 
+    // ===== URL PARAMETER HANDLING =====
+
+    function readQueryFromUrl () {
+      const urlParams = new URLSearchParams(window.location.search)
+      const queryParam = urlParams.get('q')
+
+      if (queryParam && queryParam.length >= MIN_QUERY_LENGTH) {
+        // Set the query variable
+        query = queryParam
+
+        // Populate both search inputs
+        elements.searchInput.value = queryParam
+        if (elements.mobileSearchInput) {
+          elements.mobileSearchInput.value = queryParam
+        }
+
+        // Show clear buttons
+        elements.clearButton.classList.remove('hidden')
+        elements.clearButton.classList.add('flex')
+        if (elements.mobileClearButton) {
+          elements.mobileClearButton.classList.remove('hidden')
+          elements.mobileClearButton.classList.add('flex')
+        }
+
+        // Trigger search with the URL parameter
+        search(queryParam, null).then(() => {
+          // Show search results in appropriate container
+          if (isMobileView) {
+            showMobileSearchResults()
+          } else {
+            elements.searchContainer.classList.remove('hidden')
+            elements.header.classList.add('h-dvh')
+          }
+        })
+      }
+    }
+
     // ===== INITIALIZATION =====
 
     function initializeEventListeners () {
@@ -608,6 +645,7 @@
     // Initialize everything
     initializeDomReferences()
     initializeEventListeners()
+    readQueryFromUrl() // Check for query parameter in URL and trigger search if present
     console.log('Search input initialized')
   }
 
