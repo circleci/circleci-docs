@@ -1254,9 +1254,10 @@ NOTE: Skip this step if the test atoms discovered by your test suite are file na
 
 TIP: One language that requires a `file-mapper` command is Go, since a test atom is a Go package which may be comprised of several test files.
 
-When your test atoms are something other than file names, Smarter Testing needs a way to determine which files store the implementation of each test atom.
+When test atoms are not file paths, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files. This way, 
 
-The `file-mapper` command is a command that maps a test atom to a file. The `file-mapper` command is used during analysis and test selection to ensure that a test is impacted by the test source code.
+* During **analysis**, Smarter Testing can associate test files with their test atoms in impact data.
+* During **selection**, Smarter Testing can determine which test atom to run when a test file is modified.
 
 It may be useful to run the `file-mapper` command in your shell to verify the output.
 
