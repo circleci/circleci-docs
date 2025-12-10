@@ -759,7 +759,7 @@ Discovered 2 tests in 29ms
 Selecting tests...
 Selecting all tests, no impact analysis available
 Selecting no tests, --test-selection set to 'none'
-Selected 0 tests, Skipped 6 tests in 0s
+Selected 0 tests, Skipped 2 tests in 0s
 
 Timing data is not present.
 Sorted tests in 0s
