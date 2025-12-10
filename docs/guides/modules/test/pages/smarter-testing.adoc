@@ -55,7 +55,7 @@ Test impact analysis identifies which tests need to run based on the files that 
 
 *Selection phase*:: Compares the current repository state against the most recent impact analysis data. Tests covering modified files are selected to run (including new or modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration. 
 
-TIP: You can also select tests with Smarter Testing in your local test runs on your machine. See <<local-run>> for details.
+TIP: You can also save time on your local test runs on your machine. See <<local-run>> for details.
 
 The analysis phase typically runs slower than running the selected tests because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
 
