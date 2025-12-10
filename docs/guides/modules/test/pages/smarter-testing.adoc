@@ -55,7 +55,7 @@ Test impact analysis identifies which tests need to run based on the files that 
 
 *Selection phase*:: Compares the current repository state against the most recent impact analysis data. Tests covering modified files are selected to run (including new or modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration. 
 
-TIP: You can also select tests with Smarter Testing in your local test runs on your machine. See <<New section needed>> for details.
+TIP: You can also select tests with Smarter Testing in your local test runs on your machine. See <<local-run>> for details.
 
 The analysis phase typically runs slower than running the selected tests because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
 
@@ -494,7 +494,8 @@ Ran 2 tests in 527ms
 Analysis not configured
 Not updating test impact data, analysis not enabled
 ----
-NOTE: Running the test suite locally will create a test-reports/ folder that you can safely delete after validating your configuration.
+
+NOTE: Running the test suite locally will create a reports folder (matching your `outputs.junit` directory) that you can safely remove.
 
 == 2. Enable Smarter Testing
 
@@ -712,6 +713,8 @@ options:
 
 Run the test suite with flags --test-selection="none" and --test-analysis="impacted", and confirm that the analysis command analyzes the test atoms you expect. Learn more in <<cli-flags>>. Look for the output lines `Found N files impacting TEST` which show analysis discovering the source files covered by the test.
 
+INFO: If the test atoms discovered by your test suite are not file names, you will need to utilize <<file-mapper>> command.
+
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --local --test-selection=none --test-analysis=impacted
@@ -850,7 +853,7 @@ options:
 ----
 ====
 
-NOTE: When running with `--local`, you'll see `.circleci/impact.json` created - this stores the impact data used for test selection. Keep this file for the next step to validate test selection. You can delete it afterwards.
+NOTE: When running with `--local`, you'll see `.circleci/impact.json` created - this stores the impact data used for test selection. This file will be used for the next step to validate test selection. 
 
 === 2.2 Validate test selection locally
 Test selection requires impact data from the analysis phase. Earlier, we validated that the analysis command produces coverage data correctly. You should also see `.circleci/impact.json` containing the impact data from your analysis run with the 5 minute duration limit.
@@ -923,7 +926,10 @@ At this point your test suite is set up correctly:
 . Test selection is driven from test impact analysis data.
 . The analysis phase is correctly analysing test impact.
 
-The next step is to run your test suite in CI. Also feel free to remove any files that got created from running the command locally (ex. impact.json, coverage files, JUnit results).
+The next step is to run your test suite in CI. Also feel free to:
+
+* Revert any file modifications you made to validate test selection 
+* Remove any files that got created from running the command locally (ex. impact.json, coverage files, JUnit results).
 
 === Troubleshooting
 
@@ -996,7 +1002,7 @@ Since there is no test impact analysis data stored in CircleCI for your test sui
 
 TIP: It can be easier to debug issues with your test suite configuration in CI if you initially run the job without parallelism.
 
-The analysis phase runs on the default branch, you can pre-populate the test impact analysis data before merging by temporarily adding the `--test-analysis=impacted` CLI flag to the test suite invocation:
+While the analysis phase runs on the default branch by default, you can run analysis phase from your feature branch by temporarily adding the `--test-analysis=impacted` CLI flag to the test suite invocation:
 [source,yaml]
 ----
 version: 2.1
@@ -1012,9 +1018,9 @@ jobs:
           path: test-reports
 ----
 
-Analysis will be limited to approximately 15 minutes due to `options.test-analysis-duration` in the test suite configuration. If analysis isn't completing within those 15 minutes, you can remove `options.test-analysis-duration` to allow the process to run for as long as it needs.
+Analysis will be limited to approximately 5 minutes due to `options.test-analysis-duration` in the test suite configuration. If you would like to run analysis past the 5 minutes, you can remove `options.test-analysis-duration` to allow the process to run for as long as it needs. Make a push to verify that analysis phase works as intended in CI.
 
-Once the analysis has been finished, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`.
+Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`.
 
 At this point:
 
@@ -1088,8 +1094,75 @@ options:
   dynamic-test-splitting: true
 ----
 
+[#local-run]
+== 4. Saving time on local test runs
+
+Use Smarter Testing locally to run only impacted tests. Running without `--local` leverages impact data stored in CircleCI, giving you the same test selection benefits as CI.
+
+=== Prerequisites
+
+Before running Smarter Testing locally with CI impact data, you need:
+
+. A CircleCI API token with read access to your project
+. Your CircleCI project ID
+
+=== Get your CircleCI API token
+
+. Navigate to https://app.circleci.com/settings/user/tokens[User Settings > Personal API Tokens]
+. Create a new token or use an existing one
+. Copy the token value
+
+You can provide the token in two ways:
+
+*Option 1: Set via CLI configuration (recommended)*
+
+[source,console]
+----
+$ circleci setup
+----
+
+Follow the prompts to configure your token. Learn more in the xref:toolkit:local-cli.adoc#configure-the-cli[Configure the CLI guide].
+
+*Option 2: Pass explicitly with each command*
+
+Use the `--circleci-token` flag when running the test suite (shown in examples below).
+
+=== Find your project ID
+
+Your project ID can be found in your CircleCI project URL:
+
+`https://app.circleci.com/pipelines/<vcs>/<org>/<project>`
+
+Or use the CircleCI API:
+
+[source,console]
+----
+$ circleci project list
+----
+
+=== Run selected tests using impact data stored in CircleCI
+
+Once configured, run your test suite **without** the `--local` flag to use impact data from CI:
+
+[source,console]
+----
+$ circleci run testsuite "ci tests" --project-id=<your-project-id>
+----
+
+Or if you haven't configured your token via `circleci setup`:
+
+[source,console]
+----
+$ circleci run testsuite "ci tests" \
+    --project-id=<your-project-id> \
+    --circleci-token=<your-token>
+----
+
+NOTE: Analysis is always disabled when running locally without the `--local` flag, regardless of the `--test-analysis` flag value. 
+
+
 [#test-suite-configuration-options]
-== 4. Test suite configuration options
+== 5. Test suite configuration options
 
 The following options are available to be defined in the options map in config:
 
@@ -1136,6 +1209,18 @@ Any remaining tests will be analysed the next time test analysis is run.
 |===
 --
 
+*Example: Customizing full-test-run-paths*
+
+[source,yaml]
+----
+options:
+  full-test-run-paths:
+    - .circleci/*.yml
+    - requirements.txt
+    - Dockerfile
+    - custom-config.json
+----
+
 The following flags are available to be defined on the `circleci run testsuite` command.
 
 [#cli-flags]
@@ -1147,23 +1232,23 @@ The following flags are available to be defined on the `circleci run testsuite` 
 
 |`--test-analysis=all\|impacted\|none`
 |On branch `main`, impacted. +
-On all other branches, `none`
+On all other branches, `none`. When run locally, `none`.
 a| * `all` analyzes all discovered tests, used to override any existing impact data. +
 * `impacted` analyzes only tests impacted by a change, used to refresh impact data. +
 * `none` skips analysis.
 
 |`--test-selection=all\|impacted\|none`
 |On branch `main`, `all`. +
-On all other branches, `impacted`
+On all other branches, `impacted`. When run locally, `impacted`. 
 a| * `all` selects and runs all discovered tests, used to run the full test suite. +
 * `impacted` selects and runs only the tests impacted by a change. +
 * `none` skips running tests, used to skip straight to analysis.
 |===
 --
 
-== 5. Optional configuration
-
-=== 5.1 Use the `file-mapper` command when test atoms are *not* file names
+== 6. Optional configuration
+[#file-mapper]
+=== 6.1 Use the `file-mapper` command when test atoms are *not* file names
 
 NOTE: Skip this step if the test atoms discovered by your test suite are file names. This step is only necessary when test atoms are something other than file names.
 
@@ -1210,7 +1295,7 @@ file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << 
 ====
 
 [#analysis-baseline-command]
-=== 5.2 Use the `analysis-baseline` when test atoms cover too many files
+=== 6.2 Use the `analysis-baseline` when test atoms cover too many files
 
 If you see many files impacting each test during analysis, for example, `Found 150 files impacting test...`, this may be caused by shared setup code like global imports or framework initialization being included in coverage.
 
@@ -1405,7 +1490,7 @@ options:
 
 The `analysis-baseline` command will be run just before running analysis. The coverage data produced by the `analysis-baseline` command will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test.
 
-=== 5.3 built-in commands
+=== 6.3 built-in commands
 
 Smarter Testing is runner-agnostic and can be configured to support most (if not all) languages/test runners. We provide some built-in configurations which can be used as the basis for your test suite.
 
@@ -1475,7 +1560,7 @@ runner: go
 discover: find . -type f -name '*_test.go' -exec dirname {} \; | sort -u
 ----
 
-== Examples
+== Common Set Up Examples
 
 === Run analysis on your default branch and selection on all other branches
 
