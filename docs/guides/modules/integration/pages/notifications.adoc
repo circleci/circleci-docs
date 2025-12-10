@@ -36,7 +36,7 @@ workflows:
 To set or change your default email address, visit the link:https://app.circleci.com/settings/user/notifications[Notifications] page of the CircleCI application. You can also configure your preferences here:
 
 * *All builds in my projects* - you receive an email for every build in your project, whether it succeeds or fails.
-* *My branches* - you receive an email when a build fails on a branch to which you have pushed changes.
+* *My builds* - Send me an email every time a build fails that I triggered, and when it is fixed. Additionally, for Github and Bitbucket projects, include any builds on branches I have pushed to before.
 * *My work (beta)* - you receive an email every time a build you triggered finishes.
 * *None* - you receive no emails, other than administrative messages relating to your account.
 
