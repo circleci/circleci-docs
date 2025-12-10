@@ -174,7 +174,7 @@ You can take advantage of the format of the claims in CircleCI's <<format-of-the
 [#limit-role-access-based-on-project]
 ==== Limit role access based on project
 
-If certain projects should only be able to access certain AWS resources, you can restrict your IAM role so that only CircleCI jobs in a specific project can assume that role.
+If a projects should only be able to access certain AWS resources, you can restrict your IAM role so that only CircleCI jobs in that project can assume that role.
 
 To do this, edit your IAM role's trust policy so that only an OIDC token from your chosen project can assume that role. The trust policy determines under what conditions the role can be assumed.
 
@@ -220,10 +220,10 @@ You can also restrict access to specific branches. The following is an example o
 [#google-cloud-platform]
 == Google Cloud Platform
 
-The following instructions cover the following:
+The following instructions cover:
 
-* A one-time configuration of your GCP settings to trust CircleCI's OIDC tokens
-* Running a job that uses the OIDC token to interact with GCP
+* A one-time configuration of your GCP settings to trust CircleCI's OIDC tokens.
+* Running a job that uses the OIDC token to interact with GCP.
 
 TIP: The Google Cloud CLI reads your configuration file, which contains necessary information instructing Google Cloud to authenticate. You can read about external identity providers on https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Google Cloud's docs].
 
@@ -250,7 +250,7 @@ The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (s
 
 GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. Using Workload Identity Federation allows applications outside Google Cloud to access Google Cloud resources without the need for storing service account credentials. Instead, you can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
 
-In the GCP web UI, follow these steps to add CircleCI as an external identity provider:
+In the GCP web UI, follow the steps to add CircleCI as an external identity provider:
 
 . Navigate to the **IAM & Admin panel**.
 . On the side panel, navigate to **Workload Identity Federation**.
