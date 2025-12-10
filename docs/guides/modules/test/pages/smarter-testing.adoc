@@ -750,7 +750,7 @@ outputs:
     lcov: /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov
 options:
     test-impact-analysis: true
-    test-analysis-duration: 1m0s
+    test-analysis-duration: 5m0s
 
 
 Discovering...
@@ -890,7 +890,7 @@ while skipping `testApp/Input.test.js` and `testApp/calculator.test.js`.
 
 **Intentionally modify a source file** that appears in the impact data. Look at the impact data to understand which tests should be skipped/selected.
 
-**Run the test suite** and verify that test selection is working. Since analysis only ran for 5 minutes, impact data is incomplete and more tests will be selected than necessary. However, you should see test atoms that were analyzed being correctly skipped or selected based on your changes:
+**Run the test suite** and verify that test selection is working. Since analysis only ran for 5 minutes, impact data is incomplete and any test atoms not in the impact data will be selected and run. However, you should see that the test atoms that are not impacted based on the impact data are correctly skipped.
 
 Look for the section starting `Selecting tests...` (some of the output from the command below has been elided):
 [source,console]
@@ -1018,9 +1018,11 @@ jobs:
           path: test-reports
 ----
 
-Analysis will be limited to approximately 5 minutes due to `options.test-analysis-duration` in the test suite configuration. If you would like to run analysis past the 5 minutes, you can remove `options.test-analysis-duration` to allow the process to run for as long as it needs. Make a push to verify that analysis phase works as intended in CI.
+Based on the previous step, analysis will be limited to approximately 5 minutes due to `options.test-analysis-duration` in the test suite configuration. If you would like to run analysis past the 5 minutes, you can remove `options.test-analysis-duration` to allow the process to run for as long as it needs. Make a push to verify that analysis phase works as intended in CI.
 
-Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`.
+INFO: The first time you run the analysis it may take a long time and could require multiple runs. This is because the full impact map is being generated for the first time. After this initial build, subsequent runs should be significantly faster.
+
+Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`. By default, analysis runs on main and selection runs on feature branches. To customize this behavior, see <<set-up-examples>>.
 
 At this point:
 
@@ -1255,7 +1257,7 @@ NOTE: Skip this step if the test atoms discovered by your test suite are file na
 
 TIP: One language that requires a `file-mapper` command is Go, since a test atom is a Go package which may be comprised of several test files.
 
-When test atoms are not file paths, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files. This way, 
+When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files. This way, 
 
 * During **analysis**, Smarter Testing can associate test files with their test atoms in impact data.
 * During **selection**, Smarter Testing can determine which test atom to run when a test file is modified.
@@ -1342,7 +1344,7 @@ outputs:
   junit: test-reports/tests.xml
 options:
   test-impact-analysis: true
-  test-analysis-duration: 15
+  test-analysis-duration: 5
 ----
 
 Jest::
@@ -1378,7 +1380,7 @@ outputs:
   junit: test-reports/tests.xml
 options:
   test-impact-analysis: true
-  test-analysis-duration: 15
+  test-analysis-duration: 5
 ----
 
 Yarn with Jest::
@@ -1412,7 +1414,7 @@ outputs:
   junit: test-reports/tests.xml
 options:
   test-impact-analysis: true
-  test-analysis-duration: 15
+  test-analysis-duration: 5
 ----
 
 pytest::
@@ -1450,7 +1452,7 @@ outputs:
   junit: test-reports/tests.xml
 options:
   test-impact-analysis: true
-  test-analysis-duration: 15
+  test-analysis-duration: 5
 ----
 
 Go::
@@ -1468,7 +1470,7 @@ outputs:
   junit: test-reports/tests.xml
 options:
   test-impact-analysis: true
-  test-analysis-duration: 15
+  test-analysis-duration: 5
 ----
 
 Go with gotestsum::
@@ -1486,7 +1488,7 @@ outputs:
   junit: test-reports/tests.xml
 options:
   test-impact-analysis: true
-  test-analysis-duration: 15
+  test-analysis-duration: 5
 ----
 ====
 
@@ -1562,6 +1564,7 @@ runner: go
 discover: find . -type f -name '*_test.go' -exec dirname {} \; | sort -u
 ----
 
+[#set-up-examples]
 == Common Set Up Examples
 
 === Run analysis on your default branch and selection on all other branches
