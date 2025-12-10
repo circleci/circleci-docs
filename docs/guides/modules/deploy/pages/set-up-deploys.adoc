@@ -1,0 +1,467 @@
+= Deploy a component
+:page-platform: Cloud
+:page-description:
+:experimental:
+
+Deploy pipelines allow you to deploy your components to a target environment. This guide covers how to configure your CircleCI pipeline to support manual deployment capabilities using a deploy pipeline.
+
+== Introduction
+
+CircleCI deploy pipelines allow you to deploy a specific version of your component to a target environment using a custom deploy pipeline. By deploying an already-built and tested version, you can skip the build process that would normally be part of a CircleCI pipeline and deploy right away. This provides fast execution and full control over the deployment process, making it ideal for complex systems and time-critical requirements.
+
+== Prerequisites
+
+- A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+- A CircleCI project with a workflow configured to deploy your code.
+- Deploy markers *must* be configured in your project to use CircleCI deploy pipelines. Follow the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up, or if you would rather be guided to set up deploy markers when following the <<set-up-a-deploy-pipeline>> guide.
+- Familiarity with CircleCI deploys concepts. Find full details in the xref:deployment-overview.adoc[CircleCI Deploys Overview] guide.
+
+== Set up a deploy pipeline
+
+The following steps guide you through setting up a custom deploy pipeline.
+
+=== 1. Start the deploy pipeline setup
+
+. In the CircleCI dashboard, navigate to *Organization Home* from the sidebar.
+. Select the menu:Overview[] link for your project.
+. Select the btn:[Deploy] button in the project Overview.
++
+.Deploy button on project overview page
+image::guides:ROOT:deploy/project-overview-rollback.png[Deploy button on project overview page]
+
+=== 2. Confirm GitHub App installation
+
+NOTE: To set up deploy pipelines, you must connect your organization to the xref:integration:github-apps-integration.adoc[CircleCI GitHub App].
+
+- If the GitHub App is not installed in your organization, the guided setup process prompts you to install it.
++
+.Install GitHub App
+image::guides:ROOT:deploy/install-github-app.png[Install GitHub App]
+
+- If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
+
+=== 3. Add deploy markers
+
+Deploy markers *must* be configured in your project to use CircleCI deploy pipelines. Follow these steps or the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up. Or if you already have deploy markers set up, select btn:[I've updated my config] to proceed to the next step.
+
+. Expand the **Add deploy markers to existing pipeline** section.
+. In the **Environment Name** dropdown, select or type the xref:configure-deploy-markers#manage-environments[Target Environment]. If you need to create a new environment, see the xref:configure-deploy-markers#create-an-environment-integration[How to Create an Environment].
+
+. In the **Component Name** dropdown, select or type the name of the component you want to deploy. The component name sets the name that will be displayed in the Deploys UI.
++
+.Select deploy markers values
+image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
++
+The setup will auto-generate deploy marker commands based on your selections.
+. Copy the generated commands using the btn:[Copy] button and paste them into your existing config file where the deployment occurs. Ensure the `circleci run release plan` step comes before the deployment step, followed by the `circleci run release update` step.
++
+.Generated markers commands
+image::guides:ROOT:deploy/auto-generated-commands.png[Generated markers commands]
+
+. Once you have updated your config file, select btn:[I've updated my config] to proceed to the next step.
++
+.Copy markers commands
+image::guides:ROOT:deploy/config-updated-button.png[Copy markers commands]
+
+=== 4. Set up deploy configuration
+
+. Select the repository you want to deploy from the "What repo are you deploying?" dropdown.
++
+.Select repository
+image::guides:ROOT:deploy/select-deploy-repo.png[Select repository]
+
+. Review the example config file template. It shows how you will perform deployments and how to use deploy markers to track these deployments.
+. Select btn:[Commit config & create Pull Request] to create this deploy configuration template in your repository. The setup will open a pull request in a new tab with the suggested changes.
++
+NOTE: The configuration will be committed to a new branch called `deploy-pipeline-setup` in the repository you selected.
++
+.Commit config button
+image::guides:ROOT:deploy/commit-config-button.png[Commit config button]
+
+. Alternatively, you can copy the suggested configuration into an existing or newly created deploy config file. Make sure the file is called `deploy.yml` and is located in the `.circleci` folder, for the system to detect and use this file. In this case, select btn:[I already have a deploy config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your deploy configuration.
++
+.Already have config button
+image::guides:ROOT:deploy/already-have-config-button.png[Already have config button]
+
+. You can manually navigate to the pull request by selecting btn:[View pull Request].
++
+.View pull request button
+image::guides:ROOT:deploy/view-pr-button.png[View pull request button]
+
+. In the pull request in your repository, modify the deploy configuration according to your specific deployment needs. For example: set your own parameters and deployment logic, uncomment the included common deployment setups or write your own custom deployment implementation.
+. Once you have customized the configuration, merge the pull request to complete the deploy setup.
+
+
+=== 5. Complete deploy setup
+
+. After merging the pull request, return to the setup page in the CircleCI web app.
+. Select btn:[Setup deploy pipeline] to activate the deploy pipeline.
++
+.Setup deploy pipeline button
+image::guides:ROOT:deploy/setup-rollback-pipeline-button.png[Setup deploy pipeline button]
+
+You can now deploy components by running a deploy pipeline.
+
+== Deploy using a deploy pipeline
+
+To deploy a component using the deploy pipeline you can select the btn:[Deploy] button on the project overview page. The following steps show how to deploy a component from the project overview page:
+
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the *Overview* link for your project.
+. Select btn:[Deploy]. This opens the deploy execution modal.
++
+.Deploy execution modal
+image::guides:ROOT:deploy/rollback-execution-modal.png[Deploy execution modal]
++
+The modal displays several configuration options with parameters auto-filled based on your deploy configuration. The following sections explain each required property:
++
+*Component Name*:: The name of the component you wish to deploy. If your project deploys multiple components, this helps you choose a specific component you want to deploy.
+*Target Environment*:: The environment to which you wish to deploy the version.
+*Namespace*:: Optional. In case you use Kubernetes and do your deployments to a specific namespace, mention your namespace here, otherwise leave it empty.
+*Deploy reason*:: You can optionally provide a reason for the deployment.
++
+The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific deployment operation.
+
+. Select btn:[Deploy] to trigger the deploy pipeline.
+
+The deploy pipeline will now execute and perform the deployment operation according to your configuration.
+
+== Change Deploy Pipeline
+
+If you have configured a new pipeline and want to trigger this pipeline when performing deployments, you can change which pipeline is used for deploy operations.
+
+To select a different pipeline for deployments, follow these steps:
+
+. Navigate to your project's Overview page.
+. Go to Settings.
+. Select the Deploys tab.
+. In the Deploy Pipeline section, choose the pipeline you want to be selected as the deploy pipeline from the dropdown.
+
+This process allows you to switch between different deploy pipeline configurations as needed for your project.
+
+== Configuration tips
+
+When customizing your deploy configuration, you can use the following pipeline values to access deploy values:
+
+* `pipeline.deploy.component_name`
+* `pipeline.deploy.target_environment_name`
+* `pipeline.deploy.current_version`
+* `pipeline.deploy.namespace`
+* `pipeline.deploy.reason`
+
+For a full list of pipeline values, see the xref:reference:ROOT:variables.adoc#pipeline-values[Pipeline Values] guide.
+
+== Example deploy pipeline configuration
+
+In this section you can find a full example of a deploy pipeline config. This example uses Helm to perform a deployment on AWS EKS and kubectl to validate its status.
+
+[NOTE]
+====
+This template assumes the following:
+
+. Your deployment is annotated with a "version" label.
+. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way
+====
+
+.Example deploy pipeline configuration
+[source,yaml]
+----
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@5.4.0
+  helm: circleci/helm@3.2.0
+commands:
+  # The following command is needed only for the specific logic in this example. Feel free to remove it if you don't need it.
+  install_yq:
+    steps:
+      - run:
+          name: install yq
+          command: |
+            wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /tmp/yq
+            wget https://github.com/mikefarah/yq/releases/latest/download/checksums
+            sha_file=$(sha256sum /tmp/yq | awk '{ print $1 }')
+            sha=$(awk '$1=="yq_linux_amd64"{print $19}' checksums)
+            if [ "$sha_file" != "$sha" ]; then
+                    echo "Checksum failed" >&2
+                    exit 1
+            fi
+            echo "The checksums match."
+            chmod +x /tmp/yq
+  verify_current_version:
+    description: "Verifies that the current version matches the expected value"
+    parameters:
+      resource_name:
+        type: string
+        description: "Name of the resource to deploy"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace (optional)"
+      current_version:
+        type: string
+        description: "Current version to verify"
+    steps:
+      - run:
+          name: Verify current version
+          command: |
+            RELEASE_NAME="<< parameters.resource_name >>"
+            if [ "<< parameters.current_version >>" == "" ]; then
+              echo "Current version not specified."
+              exit 0
+            fi
+            if [ -z "$RELEASE_NAME" ]; then
+              echo "Missing release name"
+              exit 1
+            fi
+            helm get manifest "<< parameters.resource_name >>" --namespace "<< parameters.namespace >>" > manifest.yaml
+            VERSION_LABEL=$(yq e '
+              select(.kind == "Deployment") |
+              .spec.template.metadata.labels.version
+            ' manifest.yaml)
+            if [ -z "$VERSION_LABEL" ] || [ "$VERSION_LABEL" == "null" ]; then
+              echo "Could not extract version label from manifest"
+              exit 1
+            fi
+            if [ "$VERSION_LABEL" == "<< parameters.current_version >>" ]; then
+              echo "Version matches current version << parameters.current_version >>"
+            else
+              echo "Version mismatch: expected << parameters.current_version >> but found $VERSION_LABEL"
+              exit 1
+            fi
+  retrieve_target_version:
+    description: "Retrieve the target version to deploy"
+    parameters:
+      target_version:
+        type: string
+        description: "Target version to deploy"
+    steps:
+      - run:
+          name: Set target version
+          command: |
+            TARGET_VERSION="<< parameters.target_version >>"
+            if [ -z "$TARGET_VERSION" ]; then
+              echo "TARGET_VERSION is required"
+              exit 1
+            fi
+            echo "export CONTAINER_VERSION=${TARGET_VERSION}" >> $BASH_ENV
+            source $BASH_ENV
+  perform_deployment:
+    description: "perform deployment"
+    parameters:
+      resource_name:
+        type: string
+        description: "Name of the resource to deploy"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace (optional)"
+      target_version:
+        type: string
+        description: "Target version to deploy"
+    steps:
+      - run:
+          name: Perform deployment
+          command: |
+            # This example deploys by upgrading the helm chart with the target version
+            # Adjust this command based on your specific deployment method
+            helm upgrade << parameters.resource_name >> ./chart-path \
+              --namespace << parameters.namespace >> \
+              --set image.tag=<< parameters.target_version >> \
+              --install \
+              --wait
+  # This command validates the deployment after deploying. The provided example uses kubectl to check the ready replicas and number of restarts
+  # of pods associated with the deployment and causes the job to fail if the deployment is not ready or has too many restarts by
+  # the end of the validation duration.
+  # Mind the fact that the example assumes you have an app label with value equal to the component name, in order to retrieve the pods.
+  # If that is not the case you will have to adapt the logic in the script.
+  validate_deployment:
+    description: "Validates the deployment after deploying"
+    parameters:
+      resource_name:
+        type: string
+        description: "Name of the resource that has been deployed"
+      namespace:
+        type: string
+        default: "default"
+        description: "Kubernetes namespace (optional)"
+      target_version:
+        type: string
+        description: "Target version"
+      max_restarts:
+        type: integer
+        default: 5
+        description: "Maximum number of allowed restarts"
+      duration:
+        type: integer
+        default: 600
+        description: "Duration of the validation in seconds"
+    steps:
+      - run:
+          name: Validate deployment
+          command: |
+            CHECK_DURATION=$((SECONDS+<< parameters.duration >>))  # 10 minutes duration
+            REPLICAS_OK=false
+
+            LABEL_SELECTOR="app=<< parameters.resource_name >>,version=<< parameters.target_version >>"
+            DEPLOYMENT_FOUND=false
+            echo "Starting validation of version: << parameters.target_version >>"
+            while [ $SECONDS -lt $CHECK_DURATION ]; do
+              DEPLOYMENT=$(kubectl get deployment << parameters.resource_name >>  -n << parameters.namespace >> --ignore-not-found -o json)
+
+              if [ -n "$DEPLOYMENT" ]; then
+                  DEPLOYMENT_FOUND=true
+                  DESIRED=$(echo "$DEPLOYMENT" | jq -r '.spec.replicas // 0')
+                  READY=$(echo "$DEPLOYMENT" | jq -r '.status.readyReplicas // 0')
+
+                  # Handle empty values
+                  DESIRED=${DESIRED:-0}
+                  READY=${READY:-0}
+
+                  echo "Current replicas $READY/$DESIRED"
+                  if [ "$DESIRED" -eq "$READY" ]; then
+                    REPLICAS_OK=true
+                  else
+                    REPLICAS_OK=false
+                  fi
+              else
+                  DEPLOYMENT_FOUND=false
+                  echo "Deployment not found"
+                  continue
+              fi
+              RESTARTS=$(kubectl get pods -l $LABEL_SELECTOR -n << parameters.namespace >> \
+                -o jsonpath='{.items[*].status.containerStatuses[*].restartCount}' 2>/dev/null | awk '{sum=0; for(i=1; i<=NF; i++) sum+=$i; print sum+0}')
+              # Handle potential errors
+              if [[ -z "$RESTARTS" || ! "$RESTARTS" =~ ^[0-9]+$ ]]; then
+                RESTARTS=0
+              fi
+              echo "Number of restarts $RESTARTS"
+              if [ $RESTARTS -gt << parameters.max_restarts >> ]; then
+                echo "FAILURE_REASON='Exceeded maximum number of restarts'" > failure_reason.env
+                exit 1
+              fi
+              sleep 10  # Check every 10 seconds
+            done
+            if [ $DEPLOYMENT_FOUND = false ]; then
+                echo "FAILURE_REASON='Deployment was not found'" > failure_reason.env
+                exit 1
+            fi
+            if [ $REPLICAS_OK = false ]; then
+                echo "FAILURE_REASON='Desired replicas doesn't match ready replica'" > failure_reason.env
+                exit 1
+            fi
+jobs:
+  deploy-component:
+    docker:
+      - image: cimg/aws:2023.03
+    environment:
+      COMPONENT_NAME: << pipeline.deploy.component_name >>
+      NAMESPACE: << pipeline.deploy.namespace >>
+      ENVIRONMENT_NAME: << pipeline.deploy.target_environment_name >>
+      CURRENT_VERSION: << pipeline.deploy.current_version >>
+      TARGET_VERSION: << pipeline.deploy.target_version >>
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      ### Uncomment this section if you are using AWS EKS, otherwise add the steps to authenticate with your platform
+      - aws-cli/setup:
+          role_arn: $AWS_OIDC_ROLE
+          region: $AWS_REGION
+          role_session_name: "example"
+          session_duration: "1800"
+      - run: aws sts get-caller-identity
+      - run: aws configure list
+      - run:
+          name: Update kubeconfig for EKS
+          command: |
+            aws eks update-kubeconfig --name "$EKS_CLUSTER_NAME"
+            aws sts get-caller-identity  # Verify credentials are still valid
+      - helm/install_helm_client
+      - install_yq
+      # This command is used to validate that the current version on your cluster matches the value that was specified when
+      # the pipeline was triggered. If that is not the case it is possible that the deployment has been updated in the meantime
+      # this check is optional and can be removed if you don't need it.
+      # Refer to the commands section above for details about the implementation of this command.
+      - verify_current_version:
+          resource_name: "<< pipeline.deploy.component_name >>"
+          namespace: "<< pipeline.deploy.namespace >>"
+          current_version: "<< pipeline.deploy.current_version >>"
+      # This step will create a new deploy with PENDING status that will show up in the deploys tab in the UI
+      - run:
+          name: Plan release for deployment
+          command: |
+            circleci run release plan  \
+              --environment-name=${ENVIRONMENT_NAME} \
+              --namespace=${NAMESPACE} \
+              --component-name=${COMPONENT_NAME} \
+              --target-version=${TARGET_VERSION}
+      # This command will perform the actual deployment, deploying the target version to the target environment
+      - perform_deployment:
+          resource_name: "<< pipeline.deploy.component_name >>"
+          namespace: "<< pipeline.deploy.namespace >>"
+          target_version: "<< pipeline.deploy.target_version >>"
+      # This step will update the PENDING deployment marker to RUNNING.
+      # If you are not going to perform any validation you can just remove this.
+      - run:
+          name: Update planned release to RUNNING
+          command: |
+            circleci run release update \
+              --status=RUNNING
+      # This step performs validation on the deployment status after the deployment and sets the failure reason if the validation fails.
+      # if you don't want to perform any validation you can just remove this.
+      - validate_deployment:
+          resource_name: "<< pipeline.deploy.component_name >>"
+          target_version: "<< pipeline.deploy.target_version >>"
+          namespace: "<< pipeline.deploy.namespace >>"
+      # These last two steps update the PENDING deployment marker to SUCCESS or FAILED, based on the outcome of the job.
+      - run:
+          name: Update planned release to SUCCESS
+          command: |
+            # if the deployment failed, we don't want to update the status to SUCCESS. This is unnecessary if there is no logic around
+            # validating the deployment status.
+            if [ -f failure_reason.env ]; then
+              exit 0
+            fi
+            circleci run release update \
+              --status=SUCCESS
+          when: on_success
+      - run:
+          name: Update planned release to FAILED
+          command: |
+            if [ -f failure_reason.env ]; then
+              source failure_reason.env
+            fi
+            FAILURE_REASON="${FAILURE_REASON:-}"
+            circleci run release update \
+             --status=FAILED \
+             --failure-reason="$FAILURE_REASON"
+          when: on_fail
+  # This job handles the cancellation of the deploy marker if the deploy job is canceled
+  cancel-deploy:
+    docker:
+      - image: cimg/aws:2023.03
+    steps:
+      - run:
+          name: Update planned release to CANCELED
+          command: |
+            circleci run release update \
+             --status=CANCELED
+workflows:
+  deploy:
+    jobs:
+      - deploy-component:
+          context:
+            # provide any required context
+      - cancel-deploy:
+          context:
+            # provide any required context
+          requires:
+            - deploy-component:
+              - canceled
+          filters:
+            branches:
+              only: main
+----
+
+

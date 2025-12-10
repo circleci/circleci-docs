@@ -102,6 +102,7 @@ To get started with deploy markers right away, refer to the following guides:
 
 * xref:configure-deploy-markers.adoc[Tutorial 1: Configure CircleCI deploy markers]
 * xref:set-up-rollbacks.adoc[Tutorial 2: Set up rollbacks]
+* xref:set-up-deploys.adoc[Tutorial 3: Set up deploys]
 
 == Concepts
 
