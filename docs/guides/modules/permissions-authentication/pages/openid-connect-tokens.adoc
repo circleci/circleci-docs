@@ -68,7 +68,7 @@ TIP: You can find your CircleCI organization ID by navigating to **Organization 
 
 The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in <<format-of-the-openid-connect-id-token,the table below>>), which is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] page.
 
-Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. There are multiple setup options including using the management console or CLI. You will need to provide the following:
+Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. Multiple setup options are available including using the management console or CLI. You will need to provide the following:
 ** **OpenIDProvider URL**: Enter `\https://oidc.circleci.com/org/<your-organization-id>`, where `your-organization-id` is the ID of your CircleCI organization.
 ** **Audience**: Enter your organization ID.
 
@@ -248,7 +248,7 @@ The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (s
 
 === 2. Configure GCP Workload Identity Federation
 
-GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. Using Workload Identity Federation allows applications outside Google Cloud to access Google Cloud resources without the need for storing service account credentials. Instead you can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
+GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. Using Workload Identity Federation allows applications outside Google Cloud to access Google Cloud resources without the need for storing service account credentials. Instead, you can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
 
 In the GCP web UI, follow these steps to add CircleCI as an external identity provider:
 
