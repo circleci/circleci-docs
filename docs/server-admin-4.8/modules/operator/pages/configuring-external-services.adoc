@@ -201,7 +201,7 @@ postgresql:
 ----
 --
 
-The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance, when you perform `helm upgrade` the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance, when you perform `helm upgrade` the scaled down application pods will be scaled back to their replica numbers as defined by your `values.yaml`.
 
 
 [#backing-up-postgresql]
