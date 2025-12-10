@@ -713,7 +713,7 @@ options:
 
 Run the test suite with flags --test-selection="none" and --test-analysis="impacted", and confirm that the analysis command analyzes the test atoms you expect. Learn more in <<cli-flags>>. Look for the output lines `Found N files impacting TEST` which show analysis discovering the source files covered by the test.
 
-INFO: If the test atoms discovered by your test suite are not file names, you will need to utilize <<file-mapper>> command.
+NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize `file-mapper` command. Learn more in <<file-mapper>>.
 
 [source,console]
 ----
@@ -1247,8 +1247,9 @@ a| * `all` selects and runs all discovered tests, used to run the full test suit
 --
 
 == 6. Optional configuration
+
 [#file-mapper]
-=== 6.1 Use the `file-mapper` command when test atoms are *not* file names
+=== 6.1 Using the `file-mapper` command
 
 NOTE: Skip this step if the test atoms discovered by your test suite are file names. This step is only necessary when test atoms are something other than file names.
 
