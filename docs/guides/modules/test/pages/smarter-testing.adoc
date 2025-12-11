@@ -495,7 +495,7 @@ Analysis not configured
 Not updating test impact data, analysis not enabled
 ----
 
-NOTE: Running the test suite locally will create a reports folder (matching your `outputs.junit` directory) that you can safely remove.
+NOTE: Running the test suite locally will create a reports folder (matching your `outputs.junit` directory). Feel free to safely remove if you wish to.
 
 == 2. Enable Smarter Testing
 
