@@ -1123,7 +1123,7 @@ Follow the prompts to configure your token. Learn more in the xref:toolkit:local
 $ circleci run testsuite "ci tests" 
 ----
 
-If you're working in a git repository, the project ID will be autodetected by CircleCI. If autodetection fails or you need to specify a different project, provide the `--project-id` flag:
+If we are unable to autodetect your project, which could happen for standalone projects, the --project-id flag can be set.
 
 [source,console]
 ----
