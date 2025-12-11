@@ -55,8 +55,8 @@ endif::env-aws[]
 
 | link:https://docs.docker.com/engine/install/[Docker]
 | {dockerversion}
-| Running containerized workloads on nomad clients
-| At this time docker v29 is not supported
+| Running containerized workloads on Nomad clients
+| At this time Docker v29 is not supported.
 
 |===
 
