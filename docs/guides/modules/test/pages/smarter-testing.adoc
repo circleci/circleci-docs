@@ -286,7 +286,7 @@ run: |
 ----
 ====
 
-TIP: The `circleci run testsuite` CLI tooling must be run from your repository root directory. The commands run as part of the test suite will also be run from your repository root directory, and should not use `cd` to change the working directory.
+TIP: The `circleci run testsuite` CLI tooling must be run from your root project directory. For monorepos, this can be the root of a subpackage, the testsuite will find the parent `.circleci/test-suites.yml`. The commands run relative to where the CLI is executed and should not use `cd` to change the working directory.
 
 . Run the test suite and confirm that the `discover` command found the test atoms you expect:
 +
@@ -1231,6 +1231,10 @@ The following flags are available to be defined on the `circleci run testsuite` 
 [cols=3*, options="header"]
 |===
 |Flag|Default|Description
+
+|`--verbose`
+|`false`
+a| Provides additional details in output.
 
 |`--test-analysis=all\|impacted\|none`
 |On branch `main`, impacted. +
