@@ -45,7 +45,7 @@ If your VS Code workspace contains one or more CircleCI projects, the extension 
 
 If no project is detected, open the extension's settings page (either through the VS Code command `CircleCI: Open Settings`, or by clicking on the settings icon image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"] at the top of the pipelines panel), and select your projects manually. Only projects you follow are listed for selection.
 
-NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for xref:integration:github-apps-integration.adoc[GitHub App] and xref:integration:gitlab-integration.adoc[GitLab] projects. Select your project manually from the settings page.
+NOTE: **GitHub App and GitLab projects:** The pipelines manager does not yet support automatic detection for projects in a `circleci` type organization. Select your project manually from the settings page. FOr more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
 
 image::guides:ROOT:vs_code_extension_pipelines_panel_zoomed.png[The pipelines panel displays pipelines you follow.]
 
@@ -85,7 +85,7 @@ Alternatively, you can configure SSH keys for the extension manually through the
 
 To open an SSH session in a dedicated VS Code remote window, you need to install the link:https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer[official Remote Explorer extension for VS Code].
 
-NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for xref:integration:github-apps-integration.adoc[GitHub App] and xref:integration:gitlab-integration.adoc[GitLab] projects.
+NOTE: **GitHub App and GitLab projects:** Re-run with SSH from VS Code is not yet available for projects in a `circleci` type organization. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
 
 image::guides:ROOT:vs_code_extension_ssh_remote_window.png[VS Code with remote development window]
 

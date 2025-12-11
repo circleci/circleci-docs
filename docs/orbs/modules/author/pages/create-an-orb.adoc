@@ -89,7 +89,7 @@ NOTE: If you would like a convenient way to download the link:https://github.com
 
 ==== GitHub App integration additional steps
 
-If your GitHub account is authorised with CircleCI using the GitHub App integration, you will need to follow some extra steps, as listed below. To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:guides:integration:github-apps-integration.adoc[GitHub App integration] page.
+If you have a `circleci` type organization you will need to follow some extra steps, as listed below. For more information on organization types, see the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
 
 * When prompted, `Are you using GitHub or Bitbucket or GitHub app (if GH App use circleci as the entry)?`, enter `circleci`.
 * When prompted, `Enter your circleci username or organization`, you will need to inspect the URL from the CircleCI web app and provide the org ID portion:

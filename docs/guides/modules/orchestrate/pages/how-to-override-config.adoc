@@ -30,7 +30,7 @@ Before following this how-to guide, ensure you have met the following prerequisi
 * A CircleCI account, xref:getting-started:first-steps.adoc#[you can sign up for free].
 * Familiarity with CircleCI configuration files. See the xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML Configurations] guide for more information.
 * Familiarity with the concepts of URL and registry orbs, and the URL orb allow-list. See the xref:orbs:use:orb-intro.adoc[Orbs intro] and the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL orb allow-lists] guide for more information.
-* xref:integration:github-apps-integration.adoc[GitHub App integration]. This is optional but recommended to get the best experience with centralized configs due to the ability to define pipelines in which the configuration files is stored outside the project repository.
+* A GitHub App integration. This is optional but recommended to get the best experience with centralized configs due to the ability to define pipelines in which the configuration files is stored outside the project repository. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
 
 == Simple config override example
 
@@ -273,7 +273,7 @@ This allows importing configurations from any repository in your GitHub organiza
 === 4. Set up pipeline definitions
 For each project using the centralized configuration the platform team needs to:
 
-* Configure the project to use GitHub App integration. The CircleCI GitHub App integration is required to use a config source outside the project repo. See the xref:integration:github-apps-integration#[GitHub App integration] guide for more information.
+* Ensure the organization has the CircleCI GitHub App installed. The CircleCI GitHub App integration is required to use a config source outside the project repo. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
 * Create a pipeline definition pointing to the central template configuration. This means setting up a pipeline in which the config source is outside the project repository. The config source will be the centralized, _template_ configuration managed by the platform team.
 
 [#transitioning-to-centralized-configs]
