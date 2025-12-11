@@ -364,7 +364,7 @@ $ vitest run --reporter=junit \
 
 Now update your test suite configuration:
 . Update the `.circleci/test-suites.yml` with the run command.
-. Define the JUnit output path in `outputs.junit` within `.circleci/test-suites.yml`. This path is used by `store_test_results` to upload test results in CI:
+. Define the JUnit output path in `outputs.junit` within `.circleci/test-suites.yml`. The `store_test_results` step should point to the directory containing this file:
 +
 [tabs]
 ====
