@@ -1,6 +1,6 @@
 = Application lifecycle
 :page-platform: Server 4.9, Server Admin
-:page-description: Learn about CircleCI server 4.9 semantic versioning and release schedules.
+:page-description: Learn about CircleCI Server 4.9 semantic versioning and release schedules.
 :experimental:
 
 CircleCI is committed to supporting two minor versions of the software. This means a minor version will be released twice yearly and receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation. Patch releases will continue to be monthly as needed.
@@ -9,8 +9,8 @@ CircleCI is committed to supporting two minor versions of the software. This mea
 == Semantic versioning
 Given a version number, MAJOR.MINOR.PATCH increment, use the:
 
-. MAJOR version when you make incompatible API changes,
-. MINOR version when you add functionality in a backwards-compatible manner, and
+. MAJOR version when you make incompatible API changes.
+. MINOR version when you add functionality in a backwards-compatible manner.
 . PATCH version when you make backwards compatible bug fixes.
 
 Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.

@@ -1,4 +1,4 @@
-Before you begin with the CircleCI server 4.9 post installation phase, ensure you have run through the following:
+Before you begin with the CircleCI Server 4.9 post installation phase, ensure you have run through the following:
 
 ifndef::env-aws[]
 * xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#[Phase 1 GCP – Prerequisites]
@@ -17,7 +17,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 [#backup-and-restore]
 == Backup and restore
 
-Backups of CircleCI server can be created through link:https://velero.io/[Velero] which is detailed in our xref:server-admin:operator:backup-and-restore.adoc#[Backup and Restore] documentation.
+Backups of CircleCI Server can be created through link:https://velero.io/[Velero] which is detailed in our xref:server-admin:operator:backup-and-restore.adoc#[Backup and Restore] documentation.
 
 [#email-notifications]
 == Email notifications
@@ -36,18 +36,18 @@ smtp:
 [#managing-orbs]
 == Managing orbs
 
-CircleCI server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
+CircleCI Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes:
 
 * Copying orbs from the public registry.
 * Updating orbs that may have been copied previously.
 * Registering your company's private orbs, if you have any.
 
-For more information and steps to complete these tasks, see the xref:server-admin:operator:managing-orbs.adoc#[Orbs on server guide].
+For more information and steps to complete these tasks, see the xref:server-admin:operator:managing-orbs.adoc#[Managing Orbs on Server] guide.
 
 ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:server-admin:installation:hardening-your-cluster.adoc#[Hardening Your Cluster]
-* xref:server-admin:operator:backup-and-restore.adoc#[Backup & Restore]
+* xref:server-admin:installation:hardening-your-cluster.adoc#[Hardening Your Cluster].
+* xref:server-admin:operator:backup-and-restore.adoc#[Backup and Restore].
 endif::[]

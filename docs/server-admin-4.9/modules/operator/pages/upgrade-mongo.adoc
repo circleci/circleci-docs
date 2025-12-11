@@ -1,11 +1,11 @@
 = Upgrade MongoDB
 :page-platform: Server 4.9, Server Admin
-:page-description: Learn how to upgrade MongoDB up to v7.0.15 in an installation of CircleCI server 4.9.
+:page-description: Learn how to upgrade MongoDB up to v7.0.15 in an installation of CircleCI Server 4.9.
 :experimental:
 
-MongoDB is a database service used by CircleCI server. This page describes how to upgrade MongoDB from version `3.6.22` to `7.0.15`.
+MongoDB is a database service used by CircleCI Server. This page describes how to upgrade MongoDB from version `3.6.22` to `7.0.15`.
 
-MongoDB `3.6.22` is shipped with CircleCI server 4.9.
+MongoDB `3.6.22` is shipped with CircleCI Server 4.9.
 
 [#upgrade-mongodb-to-4.4]
 == Upgrade MongoDB to 4.4
@@ -16,7 +16,7 @@ MongoDB `3.6.22` is shipped with CircleCI server 4.9.
 * Ensure backups have been taken. You need a backup of MongoDB to restore in case anything goes wrong during the upgrade progress.
 * You are able to modify your `values.yaml` file.
 * `helm upgrade` works from your system to upgrade the cluster.
-* Your MongoDB root password is available
+* Your MongoDB root password is available.
 
 [#script-upgrade-4.4]
 === Scripted upgrade

@@ -1,6 +1,6 @@
 = Release notes
 :page-platform: Server 4.9, Server Admin
-:page-description: Details of the new features included in each CircleCI server 4.9 release.
+:page-description: Details of the new features included in each CircleCI Server 4.9 release.
 :experimental:
 
 [#overview]
@@ -14,4 +14,4 @@ For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 
 
 == Release 4.9.0
 
-For full details of this release see the link:https://circleci.com/changelog/#server-release-4-9-0[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-4-9-0-released/[changelog].

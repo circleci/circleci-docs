@@ -1,10 +1,10 @@
 = User authentication
 :page-platform: Server 4.9, Server Admin
-:page-description: CircleCI server 4.9 supports OAuth through GitHub or GitHub Enterprise.
+:page-description: CircleCI Server 4.9 supports OAuth through GitHub or GitHub Enterprise.
 :experimental:
 
-CircleCI server currently supports OAuth through GitHub or GitHub Enterprise.
+CircleCI Server currently supports OAuth through GitHub or GitHub Enterprise.
 
-The default method for user account authentication in CircleCI server is through GitHub.com/GitHub Enterprise OAuth.
+The default method for user account authentication in CircleCI Server is through GitHub.com/GitHub Enterprise OAuth.
 
 Once your installation is up and running, provide users with a link to access the CircleCI application. For example, share `<your-circleci-hostname>.com`. Your users will be prompted to set up an account by running through the GitHub/GitHub Enterprise OAuth flow before being redirected to the CircleCI login screen.

@@ -1,6 +1,6 @@
 = Expanding internal database volumes
 :page-platform: Server 4.9, Server Admin
-:page-description: Expanding internal database volumes for CircleCI server 4.9.
+:page-description: Expanding internal database volumes for CircleCI Server 4.9.
 :experimental:
 
 [#overview]
@@ -16,7 +16,7 @@ NOTE: Expanding persistent volumes does not affect the size of the storage attac
 == Resizing persistent volume claims
 Below are the steps detailing how to resize the persistent volume claims for PostgreSQL and MongoDB. You will confirm the size of the claims and the disk space made available to your databases before and after this operation.
 
-NOTE: As a precaution, it is always a good idea to xref:backup-and-restore.adoc#[create a backup of your cluster] first.
+NOTE: As a precaution, it is always a good idea to create a backup of your cluster first. See the xref:backup-and-restore.adoc#[Backup and Restore] guide for more information.
 
 [#confirm-current-volume-size]
 === 1. Confirm current volume size
@@ -322,4 +322,4 @@ kubectl rollout restart sts mongodb
 kubectl rollout restart sts redis-master redis-slave
 ----
 
-NOTE: Running out of disk space for either MongoDB or PostgreSQL may result in failures in CircleCI server such as job failures. These jobs may become stuck as the disk space runs out and will need to be cancelled and rerun once the volumes have been expanded.
+NOTE: Running out of disk space for either MongoDB or PostgreSQL may result in failures in CircleCI Server such as job failures. These jobs may become stuck as the disk space runs out and will need to be cancelled and rerun once the volumes have been expanded.

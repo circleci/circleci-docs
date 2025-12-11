@@ -1,9 +1,9 @@
 = Phase 4 - Configure Nomad clients
 :page-platform: Server 4.9, Server Admin
-:page-description: How to configure Nomad clients to run with CircleCI server 4.9 in an air-gapped environment.
+:page-description: How to configure Nomad clients to run with CircleCI Server 4.9 in an air-gapped environment.
 :experimental:
 
-CircleCI server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI server Helm deployment. CircleCI server requires Nomad client images to use CGroupsV1 and is not compatible with CgroupsV2.
+CircleCI Server uses Nomad clients to perform container-based build actions. These machines will need to exist within the air-gapped environment to communicate with the CircleCI Server Helm deployment. CircleCI Server requires Nomad client images to use CGroupsV1 and is not compatible with CgroupsV2.
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -45,7 +45,7 @@ If Nomad mTLS is configured on your installation, you will need to provide three
 - `key.pem`
 - `cert.pem`
 
-These files can be retrieved from a secret in the namespace of the CircleCI server Helm installation (`nomad-rpc-mtls`) using the following command:
+These files can be retrieved from a secret in the namespace of the CircleCI Server Helm installation (`nomad-rpc-mtls`) using the following command:
 
 [source, bash]
 ----
@@ -131,4 +131,4 @@ sudo nomad agent -config /etc/nomad/conf.hcl
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:phase-5-test-your-installation.adoc[Phase 5 - Test your installation] guide.
+Once the steps on this page are complete, go to the xref:phase-5-test-your-installation.adoc[Phase 5 - Test Your Installation] guide.

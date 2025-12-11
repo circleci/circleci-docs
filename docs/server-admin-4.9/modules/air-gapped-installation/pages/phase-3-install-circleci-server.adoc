@@ -1,6 +1,6 @@
-= Phase 3 - install CircleCI server
+= Phase 3 - install CircleCI Server
 :page-platform: Server 4.9, Server Admin
-:page-description: How to install the CircleCI server 4.9 Helm deployment to an air-gapped environment.
+:page-description: How to install the CircleCI Server 4.9 Helm deployment to an air-gapped environment.
 :experimental:
 
 With prerequisites installed, and object storage configured, you can now copy over and install the CircleCI Helm deployment to the Kubernetes cluster in your air-gapped environment.
@@ -15,9 +15,9 @@ NOTE: For a full example of a `values.yaml` file for an air-gapped environment, 
 
 In the `global.container` section of your `values.yaml` file:
 
-* Set the `domainName` value to the internal domain name of the installation
-* Set `container.org` to `circleci`
-* Set `container.registry` to the internal registry hostname (and port if using a non-standard port) of your instance
+* Set the `domainName` value to the internal domain name of the installation.
+* Set `container.org` to `circleci`.
+* Set `container.registry` to the internal registry hostname (and port if using a non-standard port) of your instance.
 
 [source, yaml]
 ----
@@ -148,9 +148,9 @@ nginx:
 ----
 
 [#install-circleci-server-helm-airgap]
-== 2. Install CircleCI server
+== 2. Install CircleCI Server
 
-With your completed `values.yaml` file and the copied Helm chart, run the Helm install command in your air-gapped environment to install CircleCI server.
+With your completed `values.yaml` file and the copied Helm chart, run the Helm install command in your air-gapped environment to install CircleCI Server.
 
 We recommend first creating a namespace (`circleci-server`) and deploying the chart into that namespace.
 
@@ -166,4 +166,4 @@ After the Helm deployment, depending on your installation, it may be necessary t
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:phase-4-configure-nomad-clients.adoc[Phase 4 - Configure Nomad clients] guide.
+Once the steps on this page are complete, go to the xref:phase-4-configure-nomad-clients.adoc[Phase 4 - Configure Nomad Clients] guide.

@@ -1,17 +1,17 @@
 = Phase 5 - Test your installation
 :page-platform: Server 4.9, Server Admin
-:page-description: How to test your CircleCI server 4.9 installation in an air-gapped environment.
+:page-description: How to test your CircleCI Server 4.9 installation in an air-gapped environment.
 :experimental:
 
 Test your air-gapped installation using CircleCI's Reality Check project.
 
 [#copy-reality-check]
-== 1. Copy CircleCI server Reality Check
-Copy the link:https://github.com/circleci/realitycheck[CircleCI server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
+== 1. Copy CircleCI Server Reality Check
+Copy the link:https://github.com/circleci/realitycheck[CircleCI Server Reality Check repository] to your GitHub Enterprise installation in your air-gapped environment.
 
 [#setup-reality-check]
-== 2. Set up CircleCI server Reality Check
-Set up CircleCI server Reality Check using the link:https://github.com/circleci/realitycheck#installation[instructions in the README].
+== 2. Set up CircleCI Server Reality Check
+Set up CircleCI Server Reality Check using the link:https://github.com/circleci/realitycheck#installation[instructions in the README].
 
 CAUTION: Make sure to set the `CIRCLE_CLOUD_PROVIDER` environment variable to `other`.
 

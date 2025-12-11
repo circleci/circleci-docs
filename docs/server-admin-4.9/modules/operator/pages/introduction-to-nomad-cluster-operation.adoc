@@ -1,6 +1,6 @@
 = Introduction to Nomad cluster operation
 :page-platform: Server 4.9, Server Admin
-:page-description: Learn how to operate the Nomad Cluster in your CircleCI server 4.9 installation.
+:page-description: Learn how to operate the Nomad Cluster in your CircleCI Server 4.9 installation.
 :experimental:
 
 CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
@@ -11,7 +11,7 @@ CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job schedu
 .Nomad Cluster Management
 image::guides:ROOT:nomad-diagram-v2.png[Diagram of the Nomad cluster]
 <<<
-- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI server, a Nomad server runs as a service in your Kubernetes cluster.
+- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI Server, a Nomad server runs as a service in your Kubernetes cluster.
 
 - **Nomad client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) to take full advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
 
@@ -88,7 +88,7 @@ Complete the following steps to get logs from the allocation of the specified jo
 [#accessing-the-nomad-web-ui]
 === Accessing the Nomad Web UI
 
-Nomad provides a web UI for inspecting your Nomad cluster. If you are using an internalized Nomad deployment, which is the default setup with CircleCI server, follow the instructions in this section to temporarily access the UI for troubleshooting purposes. For a more permanent solution, consider externalizing Nomad and consult the official Nomad documentation for setting up routing.
+Nomad provides a web UI for inspecting your Nomad cluster. If you are using an internalized Nomad deployment, which is the default setup with CircleCI Server, follow the instructions in this section to temporarily access the UI for troubleshooting purposes. For a more permanent solution, consider externalizing Nomad and consult the official Nomad documentation for setting up routing.
 
 . When using Nomad in Kubernetes, it binds to its Pod IP address. Use the command below to fetch the IP address of the Nomad server:
 +
@@ -153,9 +153,9 @@ The script should use the commands in the section above to do the following:
 
 [#externalize-servers]
 == Externalize your Nomad servers
-From server version 4.8, Nomad servers may now be deployed externally to your Kubernetes cluster that hosts your installation of CircleCI server. Externalization of Nomad servers is optional. Externalization of Nomad Servers can improve their stability. If you already have a CircleCI server instance with _internal_ Nomad Servers, the process to switch to external Nomad servers is as follows:
+From server version 4.8, Nomad servers may now be deployed externally to your Kubernetes cluster that hosts your installation of CircleCI Server. Externalization of Nomad servers is optional. Externalization of Nomad Servers can improve their stability. If you already have a CircleCI Server instance with _internal_ Nomad Servers, the process to switch to external Nomad servers is as follows:
 
-. Stop all builds on your CircleCI server instance.
+. Stop all builds on your CircleCI Server instance.
 . Follow our installation instructions for deploying Nomad Servers on either xref:installation:phase-3-aws-execution-environments.adoc#nomad-servers[AWS] or xref:installation:phase-3-gcp-execution-environments.adoc#nomad-servers[GCP].
 
 ifndef::pdf[]

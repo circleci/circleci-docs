@@ -1,12 +1,12 @@
 = Phase 2 - Configure object storage
 :page-platform: Server 4.9, Server Admin
-:page-description: How to configure object storage through MinIO to run CircleCI server 4.9 in an air-gapped environment.
+:page-description: How to configure object storage through MinIO to run CircleCI Server 4.9 in an air-gapped environment.
 :experimental:
 
 pass:[<!-- vale off -->]
 [#create-buckets-in-minio]
 == 1. Create buckets in MinIO
-CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
+CircleCI Server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
 
 image::guides:ROOT:minio/minio_install_0.png[Create a bucket in MinIO]
 
@@ -34,7 +34,7 @@ Fetch the `circleci-server` Helm chart and extract the pinned agent version from
 
 [source,bash]
 ----
-# Fetch the Helm chart for inspection. Replace `<version>` with the full version of CircleCI server.
+# Fetch the Helm chart for inspection. Replace `<version>` with the full version of CircleCI Server.
 helm fetch oci://cciserver.azurecr.io/circleci-server --version <version> --untar
 
 # Set `$CIRCLE_AGENT_VERSION` to the value of `circleci/picard` in `images.yaml`.
@@ -194,4 +194,4 @@ Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
 [#next-steps]
 == Next steps
 
-Once the steps on this page are complete, go to the xref:phase-3-install-circleci-server.adoc[Phase 3 - Install CircleCI server] guide.
+Once the steps on this page are complete, go to the xref:phase-3-install-circleci-server.adoc[Phase 3 - Install CircleCI Server] guide.

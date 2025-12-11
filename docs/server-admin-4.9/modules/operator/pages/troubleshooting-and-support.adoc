@@ -1,9 +1,9 @@
 = Troubleshooting and support
 :page-platform: Server 4.9, Server Admin
-:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI server 4.9 installation.
+:page-description: Use this document to find troubleshooting steps if you are having problems with your CircleCI Server 4.9 installation.
 :experimental:
 
-This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI server 4.9 installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
+This document describes an initial set of troubleshooting steps to take if you are experiencing problems with your CircleCI Server 4.9 installation. If your issue is not addressed below, you can generate a support bundle or contact your CircleCI account team.
 
 toc::[]
 
@@ -14,7 +14,7 @@ A support bundle is used by CircleCI engineers to diagnose and fix any issues yo
 To generate a support bundle, follow the steps below.
 
 === Prerequisites
-. First, make sure CircleCI server is deployed and you have access to the cluster/namespace through kubectl.
+. First, make sure CircleCI Server is deployed and you have access to the cluster/namespace through kubectl.
 
 [source,bash]
 ----

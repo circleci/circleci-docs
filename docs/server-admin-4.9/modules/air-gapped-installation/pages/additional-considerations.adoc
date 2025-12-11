@@ -1,6 +1,6 @@
 = Additional considerations
 :page-platform: Server 4.9, Server Admin
-:page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server 4.9.
+:page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI Server 4.9.
 :experimental:
 
 [#non-tls-docker-registry-installations]
@@ -45,9 +45,9 @@ configs:
 [#service-type-load-balancers-k3s]
 == Service type load balancers in K3s
 
-CircleCI server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` Kubernetes resources to listen to traffic on multiple ports.
+CircleCI Server makes use of link:https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer[Service] `type: LoadBalancer` Kubernetes resources to listen to traffic on multiple ports.
 
-If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI server.
+If using a K3s installation, link:https://metallb.universe.tf/installation/[MetalLB] can be used to create a virtual load balancer on the K3s node, to allow ingress traffic to CircleCI Server.
 
 Once installed, the following steps need to be followed:
 
@@ -94,7 +94,7 @@ kubectl patch svc circleci-proxy  -p '{"spec": {"type": "LoadBalancer", "externa
 [#tls-importing]
 == Importing trusted TLS certificates
 
-When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI server can be configured to trust these certificates using two methods, as described below.
+When using a GitHub Enterprise instance with self-signed or custom certificate authority certificates, CircleCI Server can be configured to trust these certificates using two methods, as described below.
 
 NOTE: Values provided for either of these methods are supported for GitHub Enterprise certificates only. No other VCS application is supported at this time.
 
@@ -110,7 +110,7 @@ tls:
     - github.airgap.example.com:443
 ----
 
-For each `hostname:port` combination, CircleCI server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
+For each `hostname:port` combination, CircleCI Server will, during installation, retrieve the public certificate for the particular GitHub Enterprise instance and trust it to establish connections with that instance.
 
 
 [#configuring-the-tls-certificates-array]

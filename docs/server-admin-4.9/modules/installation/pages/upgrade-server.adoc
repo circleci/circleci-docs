@@ -1,9 +1,9 @@
 = Upgrade server
 :page-platform: Server 4.9, Server Admin
-:page-description: "This document lists the steps required to upgrade a CircleCI server 4.9 installation."
+:page-description: "This document lists the steps required to upgrade a CircleCI Server 4.9 installation."
 :experimental:
 
-This page describes the steps needed to upgrade your CircleCI server installation to 4.9.
+This page describes the steps needed to upgrade your CircleCI Server installation to 4.9.
 
 [#path]
 == Upgrade paths
@@ -53,4 +53,4 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
 
-. Migrate any existing machine runner instances from the launch agent to the machine runner 3.0 agent, see the xref:guides:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc#[migration guide]. The launch agent is not supported.
+. Migrate any existing machine runner instances from the launch agent to the machine runner 3.0 agent, see the xref:guides:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc#[Migration Guide]. The launch agent is not supported.

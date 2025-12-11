@@ -79,8 +79,8 @@ Chocolatey
 chruby
 [Cc]hunk
 CircleCI\b
-\bCircleCI cloud\b
-\bCircleCI server\b
+\bCircleCI Cloud\b
+\bCircleCI Server\b
 \bcircleci\.com\b
 CI/CD
 CIDRs?
@@ -373,6 +373,7 @@ URLEncoder
 UUID
 UUIDs?
 [Vv]alidator
+values.yaml
 vCPUs?
 VCS
 Velero

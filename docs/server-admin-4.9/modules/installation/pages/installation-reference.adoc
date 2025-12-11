@@ -1,6 +1,6 @@
 = Installation reference
 :page-platform: Server 4.9, Server Admin
-:page-description: Reference documentation for installing CircleCI server 4.9.
+:page-description: Reference documentation for installing CircleCI Server 4.9.
 :experimental:
 
 [#example-manifests]
@@ -9,7 +9,7 @@ The following are example manifests that contain the basic required parameters n
 
 [#aws]
 === AWS
-The snippet below is an example manifest of the necessary parameters for an installation of CircleCI server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
+The snippet below is an example manifest of the necessary parameters for an installation of CircleCI Server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
 
 [source,yaml]
 ----
@@ -85,7 +85,7 @@ rabbitmq:
 
 [#gcp]
 === GCP
-The below is an example manifest of the necessary parameters for an installation of CircleCI server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
+The below is an example manifest of the necessary parameters for an installation of CircleCI Server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
 
 [source,yaml]
 ----

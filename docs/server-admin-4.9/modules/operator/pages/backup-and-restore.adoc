@@ -1,14 +1,14 @@
 = Backup and restore
 :page-platform: Server 4.9, Server Admin
-:page-description: This document outlines recommendations for how to back up and restore your CircleCI server 4.9 instance data and state.
+:page-description: This document outlines recommendations for how to back up and restore your CircleCI Server 4.9 instance data and state.
 :experimental:
 
 [#overview-backup]
 == Overview
 
-When operating and administering CircleCI server, you will need to maintain backups and recover your installation if you need to migrate to another cluster or recover from a critical event.
+When operating and administering CircleCI Server, you will need to maintain backups and recover your installation if you need to migrate to another cluster or recover from a critical event.
 
-CircleCI recommends link:https://velero.io/[Velero] for backup and restore. The benefit of this approach is in restoring your application's data along with the state of the Kubernetes cluster and its resources at the time of the backup. CirleCI server supports backup and restore with Velero `1.12`. This document outlines recommendations for how to back up and restore your CircleCI server instance data and state using link:https://velero.io/[Velero].
+CircleCI recommends link:https://velero.io/[Velero] for backup and restore. The benefit of this approach is in restoring your application's data along with the state of the Kubernetes cluster and its resources at the time of the backup. CirleCI server supports backup and restore with Velero `1.12`. This document outlines recommendations for how to back up and restore your CircleCI Server instance data and state using link:https://velero.io/[Velero].
 
 NOTE: Backup and restore of the CircleCI services is dependent on Velero. If your cluster is lost, you will not be able to restore CircleCI until you have successfully started Velero in the cluster. From there you can recover the CircleCI services.
 
@@ -21,14 +21,14 @@ To use Velero, you must first install the link:https://velero.io/docs/v1.12/basi
 * link:https://github.com/vmware-tanzu/velero-plugin-for-gcp#overview[GCP GCS]
 * link:https://velero.io/docs/v1.12/contributions/minio/[S3 Compatible (MinIO)]
 
-NOTE: CircleCI server makes use of Persistent Volumes for data storage. To include these volumes in your backups you will need to add the node agent flag `--use-node-agent` to your Velero install command. link:https://velero.io/docs/v1.12/customize-installation/#enable-file-system-backup[Read here] for more information.
+NOTE: CircleCI Server makes use of Persistent Volumes for data storage. To include these volumes in your backups you will need to add the node agent flag `--use-node-agent` to your Velero install command. link:https://velero.io/docs/v1.12/customize-installation/#enable-file-system-backup[Read here] for more information.
 
 [#creating-backups]
 == Creating backups
 
 Now that Velero is installed on your cluster, you are ready to create your first backup.
 
-NOTE: For best results, we recommend that the backup be taken during a time when your CircleCI server instance is not in use. This is to ensure the data is not being altered while the backup is being generated, which limits the possibility of lost or corrupted data. You may use the following command to scale down the application's services so that no jobs are running during the backup. No data is lost in this process, but the application will be unreachable. Alternatively you may choose to schedule your backups to be done during a time when your CircleCI server instance is not in use.
+NOTE: For best results, we recommend that the backup be taken during a time when your CircleCI Server instance is not in use. This is to ensure the data is not being altered while the backup is being generated, which limits the possibility of lost or corrupted data. You may use the following command to scale down the application's services so that no jobs are running during the backup. No data is lost in this process, but the application will be unreachable. Alternatively you may choose to schedule your backups to be done during a time when your CircleCI Server instance is not in use.
 
 [source,bash]
 ----
@@ -36,7 +36,7 @@ namespace=<your-server-namespace>
 kubectl -n "$namespace" scale deploy -l "layer=application" --replicas="0"
 ----
 
-Once you are ready, you may use the following command to create a backup of your CircleCI server instance.
+Once you are ready, you may use the following command to create a backup of your CircleCI Server instance.
 
 [source,bash]
 
@@ -54,7 +54,7 @@ NOTE: If you scaled down your application before initiating your backup, you can
 [#restoring-backups]
 == Restoring backups
 
-Below are the instructions for how to restore your CircleCI server install using Velero.
+Below are the instructions for how to restore your CircleCI Server install using Velero.
 
 [source,bash]
 ----

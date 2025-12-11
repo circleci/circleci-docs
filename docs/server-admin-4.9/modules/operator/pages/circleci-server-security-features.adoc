@@ -1,6 +1,6 @@
-= CircleCI server security features
+= CircleCI Server security features
 :page-platform: Server 4.9, Server Admin
-:page-description: This document outlines security features built into CircleCI server 4.9 and related integrations.
+:page-description: This document outlines security features built into CircleCI Server 4.9 and related integrations.
 :experimental:
 
 This document outlines security features built into CircleCI and related integrations.
@@ -39,7 +39,7 @@ CircleCI uses link:https://pusher.com/[Pusher] client libraries for WebSocket co
 * Updating builds lists dynamically.
 * Displaying the output of a build line-by-line as it occurs.
 
-For CircleCI server installations, we use an internal server called Slanger, so Pusher servers have no access to your instance of CircleCI, nor your source control system. CircleCI sends build status and build output through the web socket server. Unless you have configured your installation to run without SSL, this is done using the same certs over SSL, so it is encrypted in transit.
+For CircleCI Server installations, we use an internal server called Slanger, so Pusher servers have no access to your instance of CircleCI, nor your source control system. CircleCI sends build status and build output through the web socket server. Unless you have configured your installation to run without SSL, this is done using the same certs over SSL, so it is encrypted in transit.
 
 [#source-control-systems]
 === Source control systems
@@ -150,7 +150,7 @@ If you are getting started with CircleCI, there are some points you can ask your
   ** Literally printing secrets in your codebase or in your shell with `echo`.
   ** Programs or debugging tools that print secrets on error.
 * Consult your VCS provider's permissions for your organization (if you are in an organization) and try to follow the link:https://en.wikipedia.org/wiki/Principle_of_least_privilege[Principle of Least Privilege].
-* Use Restricted Contexts with teams to share environment variables with a select security group. Read through the xref:guides:security:contexts.adoc#restrict-a-context[contexts] document to learn more.
+* Use Restricted Contexts with teams to share environment variables with a select security group. Read through the xref:guides:security:contexts.adoc#restrict-a-context[Contexts] document to learn more.
 * Ensure you regularly audit who has access to SSH keys in your organization.
 * Ensure that your team is using Two-Factor Authentication (2FA) with your VCS (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[GitHub 2FA], link:https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket]). If a user's GitHub or Bitbucket account is compromised, a nefarious actor could push code or potentially steal secrets.
 * If your project is open source and public, make note of whether you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repository_. This is **not enabled** by default. You can read more about these settings and open source security in our xref:guides:integration:oss.adoc#security[Open Source Projects Document].

@@ -1,6 +1,6 @@
 = Hardening your cluster
 :page-platform: Server 4.9, Server Admin
-:page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server 4.9.
+:page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI Server 4.9.
 :experimental:
 
 This section provides supplemental information on hardening your Kubernetes cluster.
@@ -9,7 +9,7 @@ This section provides supplemental information on hardening your Kubernetes clus
 == Network topology
 A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients, and external VMs.
 
-Best practice is to make as many of the resources as private as possible. If users will access your CircleCI server installation via VPN, there is no need to assign any public IP addresses,  as long as you have a NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
+Best practice is to make as many of the resources as private as possible. If users will access your CircleCI Server installation via VPN, there is no need to assign any public IP addresses,  as long as you have a NAT gateway setup. Otherwise, you will need at least one public subnet for the `circleci-proxy` load balancer.
 
 It is also recommended to place Nomad clients and VMs in a public subnet to enable users to SSH into jobs and scope access via networking rules.
 
@@ -29,7 +29,7 @@ The rules explained here are assumed to be stateful and for TCP connections only
 
 [#reverse-proxy-status]
 === Reverse proxy status
-You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
+You may wish to check the status of the services routing traffic in your CircleCI Server installation and alert if there are any issues. Since we use both nginx and Kong in CircleCI Server, we expose the status pages of both via port 80.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]

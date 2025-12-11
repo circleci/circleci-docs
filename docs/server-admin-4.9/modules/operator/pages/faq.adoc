@@ -1,6 +1,6 @@
-= CircleCI server 4.9 FAQ
+= CircleCI Server 4.9 FAQ
 :page-platform: Server 4.9, Server Admin
-:page-description: Find answers about the CircleCI server 4.9 data retention policy, what control is granted over Nomad certificates.
+:page-description: Find answers about the CircleCI Server 4.9 data retention policy, what control is granted over Nomad certificates.
 :experimental:
 
 ## Does server 4.9 have a data retention policy?

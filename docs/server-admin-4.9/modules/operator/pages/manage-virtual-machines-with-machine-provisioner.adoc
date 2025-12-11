@@ -1,6 +1,6 @@
 = Manage virtual machines with machine provisioner
 :page-platform: Server 4.9, Server Admin
-:page-description: CircleCI server 4.9 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
+:page-description: CircleCI Server 4.9 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :experimental:
 
 Machine provisioner controls how xref:reference:ROOT:configuration-reference.adoc#machine[`machine`] executor and xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs are run.
@@ -24,7 +24,7 @@ The information in this section describes post-installation configuration option
 [#windows-image-aws]
 ==== Windows image
 
-If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI server Windows image builder].
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows image builder].
 
 [source,yaml]
 ----
@@ -38,7 +38,7 @@ machine_provisioner:
 [#linux-image-aws]
 ==== Alternative Linux VM image
 
-If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI server Linux image builder].
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux image builder].
 
 [source,yaml]
 ----
@@ -186,7 +186,7 @@ The information in this section describes post-installation configuration option
 [#windows-image-gcp]
 ==== Windows image
 
-If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI server Windows image builder].
+If you require Windows executors, you can supply an AMI ID in your `values.yaml` file. To create a Windows image, use the link:https://github.com/CircleCI-Public/circleci-server-windows-image-builder[CircleCI Server Windows image builder].
 
 [source,yaml]
 ----
@@ -200,7 +200,7 @@ machine_provisioner:
 [#linux-image-gcp]
 ==== Alternative Linux VM image
 
-If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI server Linux image builder].
+If you wish to provide a custom AMI for Linux machine executors, you can supply an AMI ID in your `values.yaml` file. To create a Linux image, use the link:https://github.com/CircleCI-Public/circleci-server-linux-image-builder[CircleCI Server Linux image builder].
 
 [source,yaml]
 ----

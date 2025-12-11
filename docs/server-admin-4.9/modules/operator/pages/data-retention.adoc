@@ -1,6 +1,6 @@
 = Data retention in server
 :page-platform: Server 4.9, Server Admin
-:page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI server installation.
+:page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI Server installation.
 :experimental:
 
 [#background]

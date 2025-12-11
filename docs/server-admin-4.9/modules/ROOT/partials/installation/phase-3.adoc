@@ -1,4 +1,4 @@
-Before you begin with the CircleCI server 4.9 execution environment installation phase, ensure you have run through the following:
+Before you begin with the CircleCI Server 4.9 execution environment installation phase, ensure you have run through the following:
 
 ifndef::env-aws[]
 * xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#[Phase 1 GCP – Prerequisites]
@@ -14,7 +14,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 
 == Introduction
 
-Execution environments in CircleCI server are resourced in the following ways:
+Execution environments in CircleCI Server are resourced in the following ways:
 
 * HashiCorp Nomad is used for scheduling jobs and running Docker jobs.
 ** Nomad Servers can either be installed and configured within your Kubernetes cluster, or outside of your cluster within their own VMs. Nomad Servers are used for scheduling jobs.
@@ -31,7 +31,7 @@ Nomad is a workload orchestration tool that CircleCI uses to schedule (through N
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) can be installed within the cluster or externally. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
-NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, see the xref:server-admin:air-gapped-installation:phase-4-configure-nomad-clients.adoc#[Air-gapped] docs on setting up Nomad clients.
+NOTE: If you are installing CircleCI Server locally, rather than in AWS or GCP, see the xref:server-admin:air-gapped-installation:phase-4-configure-nomad-clients.adoc#[Air-gapped] docs on setting up Nomad clients.
 
 [#create-your-cluster-with-terraform]
 === a. Create your cluster with Terraform
@@ -102,7 +102,7 @@ terraform apply
 
 NOTE: The AMIs used in our Terraform are now based on Ubuntu 22.04 with CgroupsV1 enabled. CgroupsV2 is currently unsupported. These Nomad AMIs are built with automatic security updates enabled. You may use our AMIs as a base to build images with your own customizations or use the AWS image builder to create your own Nomad AMIs. Currently the only requirement is Ubuntu 22.04 with CgroupsV1 enabled.
 
-After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe. The apply process usually only takes a minute.
+After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI Server. Copy them somewhere safe. The apply process usually only takes a minute.
 
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
@@ -141,7 +141,7 @@ terraform plan
 terraform apply
 ----
 
-After Terraform is done spinning up the Nomad client(s), it outputs the certificates and key needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe.
+After Terraform is done spinning up the Nomad client(s), it outputs the certificates and key needed for configuring the Nomad control plane in CircleCI Server. Copy them somewhere safe.
 
 // Stop hiding from AWS page
 endif::env-aws[]
@@ -304,9 +304,9 @@ In the previous section you deployed your Nomad clients and have the IAM resourc
 [#where-to-deploy-nomad-servers]
 === a. Where to deploy Nomad servers
 
-Nomad Servers are by default deployed within your CircleCI server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the Terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
+Nomad Servers are by default deployed within your CircleCI Server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the Terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
 
-* If you wish to deploy your Nomad servers inside your CircleCI server cluster, continue to <<nomad-gossip-encryption-key>> below.
+* If you wish to deploy your Nomad servers inside your CircleCI Server cluster, continue to <<nomad-gossip-encryption-key>> below.
 * If you wish to deploy your Nomad servers externally, follow these steps:
 
 .. Update your Terraform by setting the variable `nomad_server_enabled` to `true`.
@@ -377,7 +377,7 @@ CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automat
 [#nomad-mtls]
 === c. Nomad mTLS
 
-The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
+The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI Server installation. The values must be base64 encoded.
 
 [tabs]
 ====
@@ -541,7 +541,7 @@ git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
-Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions refer to the link:https://github.com/circleci/realitycheck#prerequisites-1[repository README].
+Once you have successfully cloned the repository, you can follow it from within your CircleCI Server installation. You need to set the following variables. For full instructions refer to the link:https://github.com/circleci/realitycheck#prerequisites-1[repository README].
 
 .Environmental Variables
 [.table.table-striped]
@@ -1029,7 +1029,7 @@ We recommend you create a unique service account to be used exclusively by machi
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ----
 +
-NOTE: If you are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
+NOTE: If you are deploying CircleCI Server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
 
 . *Get the service account email address*
 +
@@ -1091,7 +1091,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 --
 ====
 
-. *Configure CircleCI server*
+. *Configure CircleCI Server*
 +
 When using service account keys for configuring access for the machine provisioner, there are two options.
 +
@@ -1156,7 +1156,7 @@ namespace=<your-namespace>
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
 ----
 
-Once you have configured and deployed CircleCI server, you should validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
+Once you have configured and deployed CircleCI Server, you should validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
 
 [#runner]
 == 4. Runner
@@ -1164,9 +1164,9 @@ Once you have configured and deployed CircleCI server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. CircleCI server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:guides:execution-runner:runner-overview.adoc#[runner documentation].
+CircleCI runner does not require any additional server configuration. CircleCI Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:guides:execution-runner:runner-overview.adoc#[runner documentation].
 
-NOTE: Runner requires a namespace per organization. CircleCI server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
+NOTE: Runner requires a namespace per organization. CircleCI Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
 ifndef::pdf[]
 
