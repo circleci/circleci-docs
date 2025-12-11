@@ -50,13 +50,13 @@ endif::env-aws[]
 
 | Install and configure link:https://min.io/docs/minio/linux/reference/minio-mc.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
 | TBC
-| TBC
-| Required for installations outside AWS and GCP, for example, local installation.
+| S3 compatible object storage
+| Required for installations outside AWS and GCP, for example, local installation
 
 | link:https://docs.docker.com/engine/install/[Docker]
 | {dockerversion}
 | Running containerized workloads on Nomad clients
-| At this time Docker v29 is not supported.
+| At this time Docker v29 is not supported
 
 |===
 
