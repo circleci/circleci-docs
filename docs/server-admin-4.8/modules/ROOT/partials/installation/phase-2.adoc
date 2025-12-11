@@ -265,7 +265,7 @@ postgresql:
 
 === e. MongoDB credentials
 
-The application requires a Kubernetes Secret containing MongoDB credentials. This Secret is required true when using either the internal (default) or an externally hosted instance of MongoDB. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
+The application requires a Kubernetes Secret containing MongoDB credentials. This Secret is required when using either the internal (default) or an externally hosted MongoDB instance. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets, there are two options:
 
 [tabs]
 ====
