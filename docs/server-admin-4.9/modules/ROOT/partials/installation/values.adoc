@@ -1161,7 +1161,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | nomad.clients.mTLS
 | object
 | `{"CACertificate":"","certificate":""}`
-| Configure Nomad clients mTLS only when using External Nomad Servers
+| Configure Nomad clients mTLS only when using External Nomad Servers. Required when `nomad.server.internal: false`. Both `CACertificate` (base64 encoded CA cert to verify server) and `certificate` (base64 encoded client cert for authentication) must be provided.
 
 | nomad.server.gossip.encryption.enabled
 | bool
