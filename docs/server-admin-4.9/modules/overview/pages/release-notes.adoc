@@ -1,0 +1,17 @@
+= Release notes
+:page-platform: Server 4.9, Server Admin
+:page-description: Details of the new features included in each CircleCI Server 4.9 release.
+:experimental:
+
+[#overview]
+== Overview
+
+The 4.9 release introduces xref:guides:orchestrate:controlling-serial-execution-across-your-organization.adoc#[Serial Groups] for job serialization, xref:guides:orchestrate:automatic-reruns.adoc#[Automatic Reruns] for workflows and steps, and improved caching with Zstd compression.
+
+[#upgrade]
+== Upgrade
+For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.9 Guide].
+
+== Release 4.9.0
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-9-0-released/[changelog].
