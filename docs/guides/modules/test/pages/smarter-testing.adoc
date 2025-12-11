@@ -1101,22 +1101,13 @@ options:
 
 Use Smarter Testing locally to run only impacted tests. Running without `--local` leverages impact data stored in CircleCI, giving you the same test selection benefits as CI.
 
-=== Prerequisites
-
-Before running Smarter Testing locally with CI impact data, you need:
-
-. A CircleCI API token with read access to your project
-. Your CircleCI project ID
-
-=== Get your CircleCI API token
+=== Get & set your CircleCI API token
 
 . Navigate to https://app.circleci.com/settings/user/tokens[User Settings > Personal API Tokens]
 . Create a new token or use an existing one
 . Copy the token value
 
-You can provide the token in two ways:
-
-*Option 1: Set via CLI configuration (recommended)*
+*Set via CLI configuration*
 
 [source,console]
 ----
@@ -1125,26 +1116,14 @@ $ circleci setup
 
 Follow the prompts to configure your token. Learn more in the xref:toolkit:local-cli.adoc#configure-the-cli[Configure the CLI guide].
 
-*Option 2: Pass explicitly with each command*
-
-Use the `--circleci-token` flag when running the test suite (shown in examples below).
-
-=== Find your project ID
-
-Your project ID can be found in your CircleCI project URL:
-
-`https://app.circleci.com/pipelines/<vcs>/<org>/<project>`
-
-Or use the CircleCI API:
+=== Select and run tests using impact data stored in CircleCI
 
 [source,console]
 ----
-$ circleci project list
+$ circleci run testsuite "ci tests" 
 ----
 
-=== Run selected tests using impact data stored in CircleCI
-
-Once configured, run your test suite **without** the `--local` flag to use impact data from CI:
+If you're working in a git repository, the project ID will be autodetected by CircleCI. If autodetection fails or you need to specify a different project, provide the `--project-id` flag:
 
 [source,console]
 ----
@@ -1161,7 +1140,6 @@ $ circleci run testsuite "ci tests" \
 ----
 
 NOTE: Analysis is always disabled when running locally without the `--local` flag, regardless of the `--test-analysis` flag value. 
-
 
 [#test-suite-configuration-options]
 == 5. Test suite configuration options
