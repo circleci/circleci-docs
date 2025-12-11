@@ -19,8 +19,8 @@ Smarter Testing reduces test execution time while maintaining test confidence by
 Here are some examples where Smarter Testing works well:
 
 * Straightforward coverage generation. Smarter Testing uses code coverage data to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data can't be easily collected and consolidated.
-* Adequate test coverage across your codebase. Without coverage, Smarter Testing cannot determine which tests are impacted when those files change.
-* Focused test scope. Tests should target specific code areas rather than broad portions of the codebase, as broad tests run more frequently and reduce optimization benefits.
+* Projects with comprehensive test coverage. The more thorough your tests, the more precisely Smarter Testing can identify which tests are impacted by changes.
+* Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
 
 == How it works
 
