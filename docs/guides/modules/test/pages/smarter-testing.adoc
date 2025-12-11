@@ -351,7 +351,7 @@ The test runner command needs to be modified to use placeholders for the JUnit o
 * Use the template variable `<< test.atoms >>` in the `run` command. This will be replaced with a space-separated list of test atoms to run.
 * If the template variable is not found in the `run` command, the command's stdin will be a newline-separated list of test atoms.
 
-The template variable `<< outputs.junit >>` is used in the `run` command so Smarter Testing can interpret test results.
+The template variable `<< outputs.junit >>` is used in the `run` command so Smarter Testing can find test results.
 
 Making these changes to the command above gives:
 [source,console]
