@@ -1004,7 +1004,7 @@ Since there is no test impact analysis data stored in CircleCI for your test sui
 
 TIP: It can be easier to debug issues with your test suite configuration in CI if you initially run the job without parallelism.
 
-While the analysis phase runs on the default branch by default, you can run analysis phase from your feature branch by temporarily adding the `--test-analysis=impacted` CLI flag to the test suite invocation:
+While the analysis phase runs on the default branch by default, you can run the analysis phase from your feature branch by temporarily adding the `--test-analysis=impacted` CLI flag to the test suite invocation:
 [source,yaml]
 ----
 version: 2.1
