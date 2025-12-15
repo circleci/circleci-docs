@@ -18,7 +18,7 @@ Smarter Testing reduces test execution time while maintaining test confidence by
 
 Here are some examples where Smarter Testing works well:
 
-* Straightforward coverage generation. Smarter Testing uses code coverage data to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data can't be easily collected and consolidated.
+* Straightforward coverage generation. Smarter Testing uses code coverage data to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data cannot be easily collected and consolidated.
 * Projects with comprehensive test coverage. The more thorough your tests, the more precisely Smarter Testing can identify which tests are impacted by changes.
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
 
@@ -53,7 +53,7 @@ Test impact analysis identifies which tests need to run based on the files that 
 
 *Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
 
-*Selection phase*:: Compares the current repository state against the most recent impact analysis data. Tests covering modified files are selected to run (including new or modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration. 
+*Selection phase*:: Compares the current repository state against the most recent impact analysis data. Tests covering modified files are selected to run (including new or modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
 
 TIP: You can also save time on your local test runs on your machine. See <<local-run>> for details.
 
@@ -284,7 +284,7 @@ run: |
   echo "running: <<test.atoms>>" | tr ' ' '\n'
 ----
 ====
-
++
 TIP: The `circleci run testsuite` CLI tooling must be run from your root project directory. For monorepos, this can be the root of a subpackage, the testsuite will find the parent `.circleci/test-suites.yml`. The commands run relative to where the CLI is executed and should not use `cd` to change the working directory.
 
 . Run the test suite and confirm that the `discover` command found the test atoms you expect:
@@ -525,7 +525,7 @@ $ vitest run --coverage.enabled \
              src/pages/dashboard/Dashboard.test.tsx
 ----
 
-The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run. 
+The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run.
 
 The coverage report output location can be specified with the template variable `<< outputs.lcov >>`. CircleCI replaces `<< outputs.lcov >>` with the file path specified in `outputs.lcov` in your test suite configuration. If not defined, a temporary path is created by Smarter Testing. Some test runners, such as Jest and Vitest, only let you choose a **directory** for coverage output and may write one or more coverage files into that directory. In these cases, your analysis command must **concatenate those files into the single path** given by `<< outputs.lcov >>`.
 
@@ -855,7 +855,7 @@ options:
 ----
 ====
 
-NOTE: When running with `--local`, you will see `.circleci/impact.json` created - this stores the impact data used for test selection. This file will be used for the next step to validate test selection. 
+NOTE: When running with `--local`, you will see `.circleci/impact.json` created - this stores the impact data used for test selection. This file will be used for the next step to validate test selection.
 
 === 2.2 Validate test selection locally
 Test selection requires impact data from the analysis phase. Earlier, we validated that the analysis command produces coverage data correctly. You should also see `.circleci/impact.json` containing the impact data from your analysis run with the 5 minute duration limit.
@@ -887,7 +887,7 @@ The impact data shows relationships between test atoms and source files. For exa
   }
 }
 ----
-In this example, modifying `src/components/Button.js` would select only `testApp/Button.test.js`, 
+In this example, modifying `src/components/Button.js` would select only `testApp/Button.test.js`,
 while skipping `testApp/Input.test.js` and `testApp/calculator.test.js`.
 
 **Intentionally modify a source file** that appears in the impact data. Look at the impact data to understand which tests should be skipped/selected.
@@ -930,7 +930,7 @@ At this point your test suite is set up correctly:
 
 The next step is to run your test suite in CI. Also feel free to:
 
-* Revert any file modifications you made to validate test selection 
+* Revert any file modifications you made to validate test selection.
 * Remove any files that got created from running the command locally (ex. impact.json, coverage files, JUnit results).
 
 === Troubleshooting
@@ -1005,6 +1005,7 @@ Since there is no test impact analysis data stored in CircleCI for your test sui
 TIP: It can be easier to debug issues with your test suite configuration in CI if you initially run the job without parallelism.
 
 While the analysis phase runs on the default branch by default, you can run the analysis phase from your feature branch by temporarily adding the `--test-analysis=impacted` CLI flag to the test suite invocation:
+
 [source,yaml]
 ----
 version: 2.1
@@ -1099,15 +1100,15 @@ options:
 ----
 
 [#local-run]
-== 4. Saving time on local test runs
+== Save time on local test runs
 
 Use Smarter Testing locally to run only impacted tests. Running without `--local` leverages impact data stored in CircleCI, giving you the same test selection benefits as CI.
 
 === Get and set your CircleCI API token
 
-. Navigate to https://app.circleci.com/settings/user/tokens[User Settings > Personal API Tokens]
-. Create a new token or use an existing one
-. Copy the token value
+. Navigate to https://app.circleci.com/settings/user/tokens[User Settings > Personal API Tokens].
+. Create a new token or use an existing one.
+. Copy the token value.
 
 *Set via CLI configuration*
 
@@ -1116,13 +1117,13 @@ Use Smarter Testing locally to run only impacted tests. Running without `--local
 $ circleci setup
 ----
 
-Follow the prompts to configure your token. Learn more in the xref:toolkit:local-cli.adoc#configure-the-cli[Configure the CLI guide].
+Follow the prompts to configure your token. Learn more in the xref:toolkit:local-cli.adoc#configure-the-cli[Configure the CLI Guide].
 
 === Select and run tests using impact data stored in CircleCI
 
 [source,console]
 ----
-$ circleci run testsuite "ci tests" 
+$ circleci run testsuite "ci tests"
 ----
 
 If we are unable to autodetect your project, which could happen for standalone projects, the --project-id flag can be set.
@@ -1141,10 +1142,10 @@ $ circleci run testsuite "ci tests" \
     --circleci-token=<your-token>
 ----
 
-NOTE: Analysis is always disabled when running locally without the `--local` flag, regardless of the `--test-analysis` flag value. 
+NOTE: Analysis is always disabled when running locally without the `--local` flag, regardless of the `--test-analysis` flag value.
 
 [#test-suite-configuration-options]
-== 5. Test suite configuration options
+== Test suite configuration options
 
 The following options are available to be defined in the options map in config:
 
@@ -1225,23 +1226,23 @@ a| * `all` analyzes all discovered tests, used to override any existing impact d
 
 |`--test-selection=all\|impacted\|none`
 |On branch `main`, `all`. +
-On all other branches, `impacted`. When run locally, `impacted`. 
+On all other branches, `impacted`. When run locally, `impacted`.
 a| * `all` selects and runs all discovered tests, used to run the full test suite. +
 * `impacted` selects and runs only the tests impacted by a change. +
 * `none` skips running tests, used to skip straight to analysis.
 |===
 --
 
-== 6. Optional configuration
+== Optional configuration
 
 [#file-mapper]
-=== 6.1 Using the `file-mapper` command
+=== Use the `file-mapper` command
 
 NOTE: Skip this step if the test atoms discovered by your test suite are file names. This step is only necessary when test atoms are something other than file names.
 
 TIP: One language that requires a `file-mapper` command is Go, since a test atom is a Go package which may be comprised of several test files.
 
-When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files. This way, 
+When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files. This way,
 
 * During **analysis**, Smarter Testing can associate test files with their test atoms in impact data.
 * During **selection**, Smarter Testing can determine which test atom to run when a test file is modified.
@@ -1283,7 +1284,7 @@ file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << 
 ====
 
 [#analysis-baseline-command]
-=== 6.2 Use the `analysis-baseline` when test atoms cover too many files
+=== Use the `analysis-baseline` when test atoms cover too many files
 
 If you see many files impacting each test during analysis, for example, `Found 150 files impacting test...`, this may be caused by shared setup code like global imports or framework initialization being included in coverage.
 
@@ -1478,7 +1479,7 @@ options:
 
 The `analysis-baseline` command will be run just before running analysis. The coverage data produced by the `analysis-baseline` command will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test.
 
-=== 6.3 built-in commands
+=== Built-in commands
 
 Smarter Testing is runner-agnostic and can be configured to support most (if not all) languages/test runners. We provide some built-in configurations which can be used as the basis for your test suite.
 
