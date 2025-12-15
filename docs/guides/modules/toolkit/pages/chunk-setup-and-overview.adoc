@@ -1,14 +1,14 @@
-= Chunk setup and overview
+= Chunk overview and setup
 :page-badge: Beta
 :page-platform: Cloud
-:page-description: Learn how to set up Chunk by CircleCI and see what it can do.
+:page-description: Learn about Chunk by CircleCI and how to set it up.
 :experimental:
 
 NOTE: Chunk by CircleCI is currently in *beta*. There are no extra costs during beta. Chunk uses CircleCI credits and your AI model provider tokens. Chunk tasks will be a paid feature when generally available.
 
 TIP: *Feedback or feature requests?* Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
 
-Chunk by CircleCI is an AI agent that you can set up in your organization to assist with CI/CD related tasks:
+Chunk by CircleCI assists with CI/CD related tasks through a natuaral language chat interface and task scheduling.
 
 * Use the Chunk chat UI to get help with any aspect of your project.
 * Assign Chunk tasks to proactively manage your CI/CD processes. For an example see the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] guide.
@@ -20,6 +20,8 @@ Chunk connects to your existing CircleCI pipelines and analyzes both your build 
 Chunk uses AI to proactively manage your CI/CD processes. Set Chunk tasks to monitor for issues. When issues occur, Chunk identifies root causes, proposes or applies validated fixes automatically.
 
 Chunk uses your own OpenAI or Anthropic API key, so your data and credentials always stay fully under your control.
+
+
 
 == Set up Chunk
 The following sections guide you through the Chunk setup process. Once your setup is complete you can chat with Chunk for help with projects and assign Chunk tasks to proactively manage your CI/CD processes.
