@@ -1547,7 +1547,7 @@ discover: find . -type f -name '*_test.go' -exec dirname {} \; | sort -u
 ----
 
 [#set-up-examples]
-== Common Set Up Examples
+== Common setup examples
 
 === Run analysis on your default branch and selection on all other branches
 
