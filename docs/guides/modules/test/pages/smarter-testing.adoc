@@ -507,6 +507,8 @@ Steps to enable Smarter Testing are as follows:
 . Analyze test impact.
 . Validate that only relevant test are selected when you modify source files.
 
+Each step is explained fully in the following sections.
+
 === 2.1 Configure the analysis command
 
 The `analysis` command executes test atoms one at a time using a test runner. The `analysis` command is the same command you would use to launch your test runner locally with code coverage enabled.
