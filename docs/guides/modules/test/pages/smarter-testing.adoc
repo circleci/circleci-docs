@@ -1101,7 +1101,7 @@ options:
 
 Use Smarter Testing locally to run only impacted tests. Running without `--local` leverages impact data stored in CircleCI, giving you the same test selection benefits as CI.
 
-=== Get & set your CircleCI API token
+=== Get and set your CircleCI API token
 
 . Navigate to https://app.circleci.com/settings/user/tokens[User Settings > Personal API Tokens]
 . Create a new token or use an existing one
