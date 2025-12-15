@@ -926,7 +926,7 @@ At this point your test suite is set up correctly:
 
 . Test atoms are discovered.
 . Test selection is driven from test impact analysis data.
-. The analysis phase is correctly analysing test impact.
+. The analysis phase is correctly analyzing test impact.
 
 The next step is to run your test suite in CI. Also feel free to:
 
