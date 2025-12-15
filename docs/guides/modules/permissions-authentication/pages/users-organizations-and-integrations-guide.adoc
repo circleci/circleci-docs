@@ -421,7 +421,7 @@ Pipelines are defined by two characteristics:
 - A configuration source, stored in a repository
 - A checkout source, which determines which repository will be checked out when running a [checkout step](https://circleci.com/docs/reference/configuration-reference/#checkout).
 
-The pipelines you can create and configure are derived from the integraiton types available to you. You can find this information in the <<organization-integrations>> section.
+The pipelines you can create and configure are derived from the integraiton types available to you. You can find this information in the <<organization-integration>> section.
 
 == Triggers
 
