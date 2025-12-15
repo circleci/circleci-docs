@@ -78,11 +78,13 @@ Test splitting is typically set up within a job. In this tutorial you will modif
 [#step-one-add-the-project]
 == 1. Add the project
 
-To get started, you need to get the sample app building as a project on CircleCI. If you are using GitHub the steps are slightly different depending on whether you have a GitHub OAuth app or CircleCI GitHub App integration. To find out which integration you have, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
+To get started, you need to get the sample app building as a project on CircleCI.
+
+The steps are a little different depemding on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
 
 [tabs]
 ====
-GitHub OAuth app::
+`github` type organization::
 +
 --
 . link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[Fork the repository] on GitHub.
@@ -122,7 +124,7 @@ Feel free to take a look at the steps run in the pipeline by expanding the green
 +
 image::guides:ROOT:test-splitting-first-setup-steps.png[Steps run successfully within the job]
 --
-Bitbucket Cloud::
+`bitbucket` type organization::
 +
 --
 . Import the project code into Bitbucket, using the repo URL: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
@@ -162,7 +164,7 @@ Feel free to take a look at the steps run in the pipeline by expanding the green
 +
 image::guides:ROOT:test-splitting-first-setup-steps.png[Steps run successfully within the job]
 --
-GitHub App, GitLab, Bitbucket Data Center::
+`circleci` type organization::
 +
 --
 . link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[Fork the repository] if you are using GitHub, or import to Bitbucket or GitLab using the repository URL: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`

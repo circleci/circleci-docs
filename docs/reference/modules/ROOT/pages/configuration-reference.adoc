@@ -2260,7 +2260,7 @@ NOTE: The lifetime of artifacts, workspaces, and caches can be customized on the
 [#add-ssh-keys]
 === *`add_ssh_keys`*
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:guides:integration:github-integration.adoc#create-additional-github-ssh-keys[Create additional GitHub SSH keys] page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:guides:integration:add-ssh-key.adoc[Add Additional SSH keys] page.
 
 CAUTION: *Using server?* only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 
