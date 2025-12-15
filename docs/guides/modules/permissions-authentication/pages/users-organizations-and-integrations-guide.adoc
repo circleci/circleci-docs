@@ -518,7 +518,7 @@ The way your code is checked out when a pipeline triggers depends on the pipelin
 GitHub App::
 +
 --
-#TBC#
+CircleCI uses HTTPS-based authentication to check out your code. No SSH keys or deploy keys are required.
 --
 GitHub OAuth::
 +
