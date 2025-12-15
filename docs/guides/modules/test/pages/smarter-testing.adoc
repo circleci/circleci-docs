@@ -963,7 +963,7 @@ In these cases you can set an <<analysis-baseline-command,analysis-baseline comm
 
 == 3. Run your test suite in your CircleCI job
 
-Now that your test suite configuration is set up correctly you can run your test suite in CircleCI job.
+Now that your test suite configuration is set up correctly you can run your test suite in a CircleCI job.
 
 . Make sure that `.circleci/test-suites.yml` is checked in to your repository.
 . Update your `.circleci/config.yml` to call the `circleci run testsuite "ci tests"` command instead of your regular test command.
