@@ -1024,7 +1024,7 @@ Based on the previous step, analysis will be limited to approximately 5 minutes 
 
 NOTE: The first time you run the analysis it may take a long time and could require multiple runs. This is because the full impact map is being generated for the first time. After this initial build, subsequent runs should be significantly faster.
 
-Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`. By default, analysis runs on main and selection runs on feature branches. To customize this behavior, see <<set-up-examples>>.
+Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`. By default, analysis runs on default branches and selection runs on feature branches. To customize this behavior, see <<set-up-examples>>.
 
 At this point:
 
@@ -1032,7 +1032,7 @@ At this point:
 . You have run test impact analysis on your test suite.
 . Your CircleCI config is updated to run your test suite.
 
-The final step is to prepare and merge a PR with the changes to `.circleci/config.yml` so that your test suite is run in your CircleCI job.
+The final step is to prepare and merge a PR with the changes to CircleCI configuration file so that your test suite is run in your CircleCI job.
 
 === Troubleshooting
 
