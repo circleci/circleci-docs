@@ -711,7 +711,7 @@ options:
 ----
 ====
 
-Run the test suite with flags --test-selection="none" and --test-analysis="impacted", and confirm that the analysis command analyzes the test atoms you expect. Learn more in <<cli-flags>>. Look for the output lines `Found N files impacting TEST` which show analysis discovering the source files covered by the test.
+Run the test suite with flags `--test-selection="none"` and `--test-analysis="impacted"`, and confirm that the analysis command analyzes the test atoms you expect. Learn more in <<cli-flags>>. Look for the output lines `Found N files impacting TEST`, which show analysis discovering the source files covered by the test.
 
 NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize `file-mapper` command. Learn more in <<file-mapper>>.
 
