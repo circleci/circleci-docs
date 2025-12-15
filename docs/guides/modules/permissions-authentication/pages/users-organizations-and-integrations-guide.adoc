@@ -415,7 +415,7 @@ For a guide to deleting organizations and projects, see the xref:security:delete
 
 == Pipelines
 
-Pipelines (also called pipeline definitions, in the API) are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code. 
+Pipelines (also called pipeline definitions, in the API) are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code.
 
 Pipelines are defined by two characteristics:
 - A configuration source, stored in a repository
@@ -461,7 +461,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|Zero, one, many
 ^|[.circle-green]#*Yes*#
 
-|Bitbucket Cloud #insert badge#
+|Bitbucket Cloud
 ^|[.circle-red]#*No*#
 ^| One
 ^|[.circle-red]#*No*#
@@ -471,7 +471,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|[.circle-green]#*Yes*#
 
-|GitLab #insert badge#
+|GitLab
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|Zero, one, many
@@ -481,7 +481,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|[.circle-green]#*Yes*#
 
-|Bitbucket Data Center #insert badge#
+|Bitbucket Data Center
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
@@ -564,11 +564,6 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Automatic git merging/tagging/etc.
 
 Private keys are also used to enable your project to check out additional private repositories.
---
-GitLab::
-+
---
-#TBC#
 --
 Bitbucket Data Center::
 +
@@ -656,8 +651,6 @@ SSH keys for remote servers can be fetched by running `ssh-keyscan <host>`, for 
 When retrieving the host keys, you can confirm that you have the correct key by checking its fingerprints. You can check the fingerprints found in the **Instance Configuration** section of your self-managed instance's Help pages (link:https://gitlab.com/help/instance_configuration#ssh-host-keys-fingerprints[this Instance Configuration page] shows an example).
 --
 ====
-
-#Do we need this step for people doing custom checkout for Bitbucket and GitLab.com?#
 
 == Best practices for SSH keys
 
@@ -859,8 +852,6 @@ For fine-grained access to multiple repositories, it is best practice to create 
 
 To use the SSH key of a machine user, follow the steps below.
 
-#TO DO need to check the implications and differences here for non- OAuth orgs - granting access in org settings > people for the machine user? Adding an additional SSH key?#
-
 NOTE: To perform these steps, the machine user must have admin access. When you have finished adding projects, you can revert the machine user to read-only access.
 
 . Create a machine user by following the link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[instructions on GitHub].
@@ -999,8 +990,6 @@ For guidance on deleting your user account link:https://support.circleci.com/hc/
 === How do I delete an organization from CircleCI?
 
 See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for full instructions.
-
-#TO DO explain the different between deleting an OAuth org and disconnecting from user settings#
 
 [#enable-project-to-check-out-additional-private-repositories]
 === How can I enable my project to check out additional private repositories?
