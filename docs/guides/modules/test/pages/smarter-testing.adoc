@@ -1080,7 +1080,7 @@ At the start of the queue, the batch size is large and becomes smaller as the qu
 
 Batching from the queue allows all tests to be evenly distributed across nodes. This ensures that all nodes get evenly balanced work, even when some nodes have slow start up or take longer than expected to run tests.
 
-TIP: Some test runners and language runtimes can have a reasonably large overhead getting to the point where they can start running tests, this interacts poorly with queue-based Dynamic Test Splitting.
+TIP: Some test runners and language runtimes can have a reasonably large overhead getting to the point where they can start running tests. This interacts poorly with queue-based Dynamic Test Splitting.
 
 Add `options.dynamic-test-splitting: true` to your test suite configuration:
 [source,yaml]
