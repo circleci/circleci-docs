@@ -501,7 +501,7 @@ NOTE: Running the test suite locally will create a reports folder (matching your
 
 We recommend following the steps in <<getting-started>> first before enabling the Smarter Testing feature to ensure the `discover` and `run` commands are set up correctly.
 
-Steps:
+Steps to enable Smarter Testing are as follows:
 
 . Configure test impact analysis in `test-suites.yml`.
 . Analyze test impact.
