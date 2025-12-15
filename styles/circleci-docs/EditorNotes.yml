@@ -1,0 +1,22 @@
+---
+extends: script
+scope: raw
+level: error
+message: "Remove editor note before publishing"
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  // Match notes like #TODO something# but not [.class]#text#
+  note_pattern := "#TODO[^#]+#|#NOTE[^#]+#|#FIXME[^#]+#|#REVIEW[^#]+#|#CHECKME[^#]+#|#VERIFY[^#]+#"
+
+  for line in text.split(scope, "\n") {
+    if text.re_match(note_pattern, line) {
+      // Make sure it's not preceded by ] (AsciiDoc inline styling)
+      if !text.re_match("\\]#(?:TODO|NOTE|FIXME|REVIEW|CHECKME|VERIFY)", line) {
+        start := text.index(scope, line)
+        matches = append(matches, {begin: start, end: start + len(line)})
+      }
+    }
+  }

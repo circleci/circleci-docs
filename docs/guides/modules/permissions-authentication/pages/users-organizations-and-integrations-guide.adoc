@@ -24,27 +24,23 @@ The following table describes user authorization for the different VCS providers
 [.table-scroll]
 --
 .User account integration authorization types
-[cols=4*, options="header"]
+[cols=3*, options="header"]
 |===
-| VCS provider | Authorization type | Authorization management | Notes
+| Integration type | Authorization management | Notes
 
-|GitHub
 |GitHub OAuth app
 |Displayed in menu:User Settings[Account Integration], managed in GitHub at link:https://github.com/settings/applications[GitHub settings].
 |Can exist alongside GitHub App authorization.
 
-|GitHub
 |GitHub App
 |If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings]. Not displayed in menu:User Settings[Account Integration].
 |Can exist alongside GitHub OAuth app authorization.
 
-|Bitbucket
 |Bitbucket Cloud OAuth
 |Displayed in menu:User Settings[Account Integrations] , managed in Bitbucket at link:https://bitbucket.org/account/settings/app-authorizations/[Bitbucket settings].
 |Mutually exclusive with other VCS authorization
 
 |GitLab
-|TBC
 |Managed in Gitlab at link:https://gitlab.com/-/user_settings/applications[GitLab settings]. Not displayed in menu:User Settings[Account Integrations].
 |Mutually exclusive with other VCS authorizaitons except GitHub App.
 |===
@@ -62,13 +58,13 @@ A CircleCI _organization_ can be one of three types:
 --
 [cols=4*, options="header"]
 |===
-| Organization type | VCS integrations available | Projection creation process | Notes
+| Organization type | VCS integrations available | Project create process | Notes
 
 | `circleci`
-a| * GitHub App (add-on)
-* GitLab (add-on)
-* GitLab self-managed (add-on)
-* Bitbucket Data Center (add-on)
+a| * GitHub App (add-on).
+* GitLab (add-on).
+* GitLab self-managed (add-on).
+* Bitbucket Data Center (add-on).
 | Created manually via web app or API
 | This organization type is created separately to any VCS connection between CircleCI and your code repositories.
 
@@ -85,6 +81,8 @@ a| * Bitbucket OAuth (built-in)
 
 |===
 --
+
+The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features availoable for each organization and integration type.
 
 include::ROOT:partial$tips/check-org-type.adoc[Check your organization type]
 
@@ -178,7 +176,7 @@ Integrations are set up as follows:
 
 * GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login. No additional action is required, but the installation can be viewed at menu:Organization Settings[VCS Connections].
 * GitHub App, GitLab self-managed and Bitbucket Data Center are managed from menu:Organization Settings[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
-* GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines])
+* GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines]).
 
 If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See he <<manage-organization-integrations>> section for more information.
 
@@ -332,9 +330,7 @@ To set up Bitbucket data center pipelines you will need to create a project HTTP
 
 A GitHub organzization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
-If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed (linked to a different CircleCI organization), you will be redirected to the GitHub App installation page and won't be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation—but this refers to the existing connection to a different CircleCI organization, not the one you just tried to create. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
-
-#TODO Benny can you help with this section?#
+If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. But, this successful installation refers to the existing connection to a different CircleCI organization, not the one you just tried to create. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
 
 .GitHub settings showing the CircleCI App integration settings page.
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
@@ -425,19 +421,7 @@ Pipelines are defined by two characteristics:
 - A configuration source, stored in a repository
 - A checkout source, which determines which repository will be checked out when running a [checkout step](https://circleci.com/docs/reference/configuration-reference/#checkout).
 
-The pipelines you can create and configure depend on your organization type and where your code is stored.
-
-#TODO there must be a better way to describe this#
-
-If you have a `circleci` organization:
-
-* If your code is stored in a GitHub repository you can have GitHub App pipelines.
-* If your code is stored in a GitLab repository you can have GitLab pipelines.
-* If your code is stored in a Bitbucket Data Center repository you can set up Bitbucket Data Center pipelines.
-
-If you have a `github` organization you can have GitHub App or GitHub OAuth pipelines.
-
-If you have a `bitbucket` organization you can have Bitbucket Cloud pipelines.
+The pipelines you can create and configure are derived from the integraiton types available to you. You can find this information in the <<organization-integrations>> section.
 
 == Triggers
 

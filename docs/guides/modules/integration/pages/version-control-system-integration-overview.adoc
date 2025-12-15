@@ -7,7 +7,7 @@ When you create a CircleCI project you will select a code repository to connect.
 
 == Which version control systems are supported?
 
-link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated with code repositories hosted on the following VCS providers:
+link:https://circleci.com/pricing/[CircleCI Cloud] projects can be integrated with code repositories hosted on the following VCS providers:
 
 * GitHub.com
 * GitHub Enterprise Cloud
@@ -16,7 +16,7 @@ link:https://circleci.com/pricing/[CircleCI cloud] projects can be integrated wi
 * Bitbucket Cloud
 * Bitbucket Data Center
 
-link:https://circleci.com/pricing/server/[CircleCI server] supports the following:
+link:https://circleci.com/pricing/server/[CircleCI Server] supports the following:
 
 * GitHub.com
 * GitHub Enterprise Cloud
@@ -24,7 +24,7 @@ link:https://circleci.com/pricing/server/[CircleCI server] supports the followin
 
 == Feature support for each integration type
 
-The following tables show feature support per VCS for **CircleCI cloud**, along with feature support for **CircleCI server**:
+The following tables show feature support per VCS for **CircleCI Cloud**, along with feature support for **CircleCI Server**:
 
 * Features that are supported for a VCS integration type are indicated with [.circle-green]#**Yes**#.
 * Features that are not supported are indicated with [.circle-red]#**No**#.
@@ -37,7 +37,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 --
 [cols="3,1,1,1,1,1,1,1", options="header"]
 |===
-| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI Server
 
 | link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
 | [.circle-green]#**Yes**#
@@ -66,7 +66,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
+| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Configuration Files for a Project]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No** ^1^#
 | [.circle-red]#**No** ^1^#
@@ -95,7 +95,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 |===
 --
 
-^1^ _Possible using xref:orchestrate:dynamic-config.adoc[dynamic configuration]._
+^1^ _Possible using xref:orchestrate:dynamic-config.adoc[Dynamic Configuration]._
 
 ^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:using-the-circleci-github-app-in-an-oauth-org.adoc[here]._
 
@@ -182,7 +182,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 --
 [cols="3,1,1,1,1,1,1,1", options="header"]
 |===
-| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI Server
 | xref:optimize:artifacts.adoc[Artifact storage]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -192,7 +192,7 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Test run config from VS Code]
+| xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Test Run Config From VS Code]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
