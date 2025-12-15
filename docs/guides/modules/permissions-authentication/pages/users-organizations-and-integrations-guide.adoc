@@ -419,7 +419,11 @@ For a guide to deleting organizations and projects, see the xref:security:delete
 
 == Pipelines
 
-Pipelines are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code. Each pipeline is defined by a configuration file stored in a repository (typically `.circleci/config.yml`).
+Pipelines (also called pipeline definitions, in the API) are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code. 
+
+Pipelines are defined by two characteristics:
+- A configuration source, stored in a repository
+- A checkout source, which determines which repository will be checked out when running a [checkout step](https://circleci.com/docs/reference/configuration-reference/#checkout).
 
 The pipelines you can create and configure depend on your organization type and where your code is stored.
 
