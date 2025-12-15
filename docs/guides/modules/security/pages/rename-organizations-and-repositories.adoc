@@ -44,7 +44,7 @@ This page details everything you need to know about renaming organizations and r
 |===
 --
 
-TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
+TIP: For a guide to organizations and integration types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
 
 [#github-app-or-gitlab]
 == GitHub App, GitLab, Bitbucket Data Center

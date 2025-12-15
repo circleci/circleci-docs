@@ -363,6 +363,7 @@
   box-sizing: border-box;
   white-space: normal;
   word-wrap: break-word;
+  hyphens: manual;
 }
 
 /* Allow wrapping of inline literal text in tables */

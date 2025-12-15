@@ -466,9 +466,9 @@ See the xref:orchestrate:pipelines.adoc[Pipelines overview] page for more inform
 [#projects]
 == Projects
 
-For xref:integration:github-integration.adoc[GitHub OAuth app] and xref:integration:bitbucket-integration.adoc[Bitbucket Cloud] accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
+For GitHub OAuth app and Bitbucket Cloud accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
 
-For xref:integration:github-apps-integration.adoc[GitHub App], xref:integration:gitlab-integration.adoc[GitLab SaaS and self-managed] and xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
+For GitHub App, GitLab SaaS and self-managed and Bitbucket Data Center users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
 
 ****
 **Project names** must meet the following requirements:
@@ -552,12 +552,12 @@ See the xref:orchestrate:jobs-steps.adoc[Jobs and steps] page for more informati
 [#user-types]
 == User roles
 
-CircleCI roles are set up differently depending on how you xref:integration:version-control-system-integration-overview.adoc[integrate your code].
+CircleCI roles are set up differently depending on your xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[organization type].
 
-TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 === GitHub App, GitLab and Bitbucket Data Center users
-Roles are set at the organization and project level and are separate to permissions and roles set in the version control system in which your code is stored. The available roles are:
+For `circleci` type organizations, roles are set at the organization and project level and are separate to permissions and roles set in the version control system in which your code is stored. The available roles are:
 
 * Admin
 * Contributor
