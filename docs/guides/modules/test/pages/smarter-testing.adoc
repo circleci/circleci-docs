@@ -952,7 +952,7 @@ If you would like assistance, share the coverage file in the preview Slack chann
 . Verify analysis has run successfully.
 . Check that coverage data is being generated correctly.
 . Review the `full-test-run-paths` option - changes to any of these paths trigger a full test run.
-. Confirm the analysis command is producing valid coverage output, and that your are using the appropriate `outputs` variable for the coverage format.
+. Confirm the analysis command is producing valid coverage output, and that you are using the appropriate `outputs` variable for the coverage format.
 
 ==== Test impact analysis finds many more files impacting a test than it should
 
