@@ -939,7 +939,7 @@ The next step is to run your test suite in CI. Also feel free to:
 
 Check the analysis command is creating a coverage file formatted correctly by running the command locally and examining the coverage data.
 
-If you would like assistance, share the coverage file in the closed beta Slack channel.
+If you would like assistance, share the coverage file in the preview Slack channel.
 
 ==== Test impact analysis not selecting expected tests
 
