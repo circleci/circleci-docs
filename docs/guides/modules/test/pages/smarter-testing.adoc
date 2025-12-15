@@ -204,7 +204,7 @@ A "test atom" is a single runnable unit that exercises one or more tests, depend
 The discover command finds all test atoms for a given test suite. The command's output is split on both newlines and whitespace to extract individual test atoms.
 The `discover` command should not execute any tests.
 
-Every line of stdout will be interpreted as test atoms. Any tool that prints metadata in the stdout will need to be suppressed.
+Every line of stdout will be interpreted as a test atom. Any tool that prints metadata in the stdout will need to be suppressed.
 
 Run the `discover` command in your shell to examine the output.
 
