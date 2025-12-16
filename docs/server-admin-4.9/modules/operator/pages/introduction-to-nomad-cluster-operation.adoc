@@ -163,7 +163,7 @@ Externalizing your Nomad servers means running them on dedicated virtual machine
 
 **Stability and reduced complexity::** Running your Nomad server on a VM provides a stable foundation. When a Nomad server runs in a Kubernetes pod, it creates a circular dependency where Kubernetes manages your scheduler, which could be managing Kubernetes itself. This adds operational complexity and potential failure modes.
 
-. **Resource Predictability:** VM instances provide dedicated, predictable resources for Nomad servers. In Kubernetes, pods can be evicted, rescheduled, or affected by noisy neighbors. For the control plane of an orchestration system, we want maximum stability and resource guarantees, which VM instances naturally provide.
+**Resource predictability::** VM instances provide dedicated, predictable resources for Nomad servers. In Kubernetes, pods can be evicted, rescheduled, or affected by noisy neighbors. For the control plane of an orchestration system, we want maximum stability and resource guarantees, which VM instances naturally provide.
 
 . **Direct communication::** Nomad servers and clients communicate directly over virtual private cloud (VPC) networking without crossing orchestration boundaries. This eliminates the need to manage Kubernetes services, ingress controllers, or service meshes for Nomad's internal communication (RPC, Gossip, Raft). This makes debugging, security group configuration, and network troubleshooting much simpler, especially when diagnosing cluster consensus or client connectivity issues.
 
