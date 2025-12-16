@@ -216,6 +216,14 @@
   overflow-wrap: break-word;
 }
 
+/* Allow inline code to wrap in ordered and unordered lists to prevent overflow */
+.doc .olist li code,
+.doc .ulist li code {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
 .doc code,
 .doc pre {
   hyphens: none;
