@@ -206,14 +206,6 @@
   border: 1px solid #D4D4D4;
   font-size: 0.95em;
   padding: 0.15em 0.4em;
-  white-space: nowrap;
-}
-
-/* Allow inline code to wrap in admonition blocks to prevent overflow */
-.doc .admonitionblock td.content code:not(.hljs) {
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: break-word;
 }
 
 .doc code,
@@ -364,13 +356,6 @@
   white-space: normal;
   word-wrap: break-word;
   hyphens: manual;
-}
-
-/* Allow wrapping of inline literal text in tables */
-.doc table.tableblock td code,
-.doc table.tableblock th code {
-  white-space: normal;
-  word-break: break-all;
 }
 
 .doc td.tableblock > .content {
@@ -986,13 +971,6 @@
   margin-top: 0;
 }
 
-/* Fix wrapping issues inside sidebarblocks - only for inline code, not code blocks */
-.doc .sidebarblock code:not(.hljs) {
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: break-word;
-}
-
 .doc .sidebarblock .listingblock {
   width: 100%;
   max-width: 100%;
@@ -1470,14 +1448,9 @@
   font-weight: var(--heading-font-weight);
 }
 
-/* Prevent inline code text from wrapping in table cells (but not in admonition blocks) */
-.tableblock td .pre,
-.tableblock td .code,
-.tableblock td p code,
-.tableblock td li code,
-.tableblock p code,
-.tableblock li code {
-  white-space: nowrap !important;
+/* Prevent inline code text from wrapping in table cells */
+.doc .tableblock code:not(.hljs) {
+  white-space: nowrap;
 }
 
 /* Ensure code blocks in tables preserve formatting */
