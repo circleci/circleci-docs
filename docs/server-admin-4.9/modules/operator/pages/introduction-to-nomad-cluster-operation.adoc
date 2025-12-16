@@ -170,7 +170,7 @@ benefits of externalizing Nomad servers -
 
 . **Clearer upgrade and rollback strategy::** With Nomad servers/clients running in VMs, you have clear separation between the Kubernetes orchestration layer and the Nomad control plane. You can upgrade Nomad independently of Kubernetes, avoiding version compatibility concerns between the two systems. VM-based deployments also provide more straightforward rollback mechanisms using AMIs, snapshots, or infrastructure-as-code versioning, compared to managing StatefulSets with persistent volumes in Kubernetes.
 
-. **Consistent Deployment Model:** - You can use the same deployment patterns, monitoring, logging, and configuration management across your entire Nomad cluster which provides better monitoring and reduces operational complexity.
+. **Consistent deployment model::** You can use the same deployment patterns, monitoring, logging, and configuration management across your entire Nomad cluster which provides better monitoring and reduces operational complexity.
 
 ifndef::pdf[]
 [#next-steps]
