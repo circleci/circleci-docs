@@ -160,7 +160,6 @@ From server version 4.8, Nomad servers may now be deployed externally to your Ku
 
 === Why externalize your Nomad servers?
 Externalizing your Nomad servers means running them on dedicated virtual machine (VM) instances outside of Kubernetes, rather than as pods within your K8s cluster. When both Nomad servers and clients reside in cloud VM instances, you can improve the stability and operational simplicity of your Nomad cluster. Here are the key benefits of externalizing Nomad servers:
-benefits of externalizing Nomad servers -
 
 **Stability and reduced complexity::** Running your Nomad server on a VM provides a stable foundation. When a Nomad server runs in a Kubernetes pod, it creates a circular dependency where Kubernetes manages your scheduler, which could be managing Kubernetes itself. This adds operational complexity and potential failure modes.
 
