@@ -168,7 +168,7 @@ benefits of externalizing Nomad servers -
 
 . **Direct communication::** Nomad servers and clients communicate directly over virtual private cloud (VPC) networking without crossing orchestration boundaries. This eliminates the need to manage Kubernetes services, ingress controllers, or service meshes for Nomad's internal communication (RPC, Gossip, Raft). This makes debugging, security group configuration, and network troubleshooting much simpler, especially when diagnosing cluster consensus or client connectivity issues.
 
-. **Clearer Upgrade and Rollback Strategy:** With Nomad servers/clients running in VMs, you have clear separation between the K8s orchestration layer and the Nomad control plane. You can upgrade Nomad independently of Kubernetes, avoiding version compatibility concerns between the two systems. VM-based deployments also provide more straightforward rollback mechanisms using AMIs, snapshots, or infrastructure-as-code versioning, compared to managing StatefulSets with persistent volumes in K8s.
+. **Clearer upgrade and rollback strategy::** With Nomad servers/clients running in VMs, you have clear separation between the Kubernetes orchestration layer and the Nomad control plane. You can upgrade Nomad independently of Kubernetes, avoiding version compatibility concerns between the two systems. VM-based deployments also provide more straightforward rollback mechanisms using AMIs, snapshots, or infrastructure-as-code versioning, compared to managing StatefulSets with persistent volumes in Kubernetes.
 
 . **Consistent Deployment Model:** - You can use the same deployment patterns, monitoring, logging, and configuration management across your entire Nomad cluster which provides better monitoring and reduces operational complexity.
 
