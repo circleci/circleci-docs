@@ -1,7 +1,7 @@
 = Introduction to Nomad cluster operation
 :page-noindex: true
 :page-platform: Server v4.8, Server Admin
-:page-description: Learn how to operate the Nomad Cluster in your CircleCI server v4.8 installation.
+:page-description: Learn how to operate the Nomad Cluster in your CircleCI Server v4.8 installation.
 :experimental:
 
 CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job scheduler. This section provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI installation.
@@ -12,7 +12,7 @@ CircleCI uses link:https://www.nomadproject.io/[Nomad] as the primary job schedu
 .Nomad Cluster Management
 image::guides:ROOT:nomad-diagram-v2.png[Diagram of the Nomad cluster]
 <<<
-- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI server, a Nomad server runs as a service in your Kubernetes cluster.
+- **Nomad server:** Nomad servers are the brains of the cluster. They receive and allocate jobs to Nomad clients. In CircleCI Server, a Nomad server runs as a service in your Kubernetes cluster.
 
 - **Nomad client:** Nomad clients execute the jobs they are allocated by Nomad servers. Usually a Nomad client runs on a dedicated machine (often a VM) to take full advantage of machine power. You can have multiple Nomad clients to form a cluster and the Nomad server allocates jobs to the cluster with its scheduling algorithm.
 
@@ -89,7 +89,7 @@ Complete the following steps to get logs from the allocation of the specified jo
 [#accessing-the-nomad-web-ui]
 === Accessing the Nomad Web UI
 
-Nomad provides a web UI for inspecting your Nomad cluster. If you are using an internalized Nomad deployment, which is the default setup with CircleCI server, follow the instructions in this section to temporarily access the UI for troubleshooting purposes. For a more permanent solution, consider externalizing Nomad and consult the official Nomad documentation for setting up routing.
+Nomad provides a web UI for inspecting your Nomad cluster. If you are using an internalized Nomad deployment, which is the default setup with CircleCI Server, follow the instructions in this section to temporarily access the UI for troubleshooting purposes. For a more permanent solution, consider externalizing Nomad and consult the official Nomad documentation for setting up routing.
 
 . When using Nomad in Kubernetes, it binds to its Pod IP address. Use the command below to fetch the IP address of the Nomad server:
 +
@@ -154,23 +154,23 @@ The script should use the commands in the section above to do the following:
 
 [#externalize-servers]
 == Externalize your Nomad servers
-From server v4.8, Nomad Servers may now be deployed externally to your Kubernetes cluster that hosts your installation of CircleCI server. Externalization of Nomad Servers is optional. Externalization of Nomad Servers can improve their stability. If you already have a CircleCI server instance with _internal_ Nomad Servers, the process to switch to external Nomad Servers is as follows:
+From server v4.8, Nomad Servers may now be deployed externally to your Kubernetes cluster that hosts your installation of CircleCI Server. Externalization of Nomad Servers is optional. Externalization of Nomad Servers can improve their stability. If you already have a CircleCI Server instance with _internal_ Nomad Servers, the process to switch to external Nomad Servers is as follows:
 
-. Stop all builds on your CircleCI server instance.
+. Stop all builds on your CircleCI Server instance.
 . Follow our installation instructions for deploying Nomad Servers on either xref:installation:phase-3-aws-execution-environments.adoc#nomad-servers[AWS] or xref:installation:phase-3-gcp-execution-environments.adoc#nomad-servers[GCP].
 
 === Why externalize your Nomad servers?
 Externalizing your Nomad servers means running them on dedicated virtual machine (VM) instances outside of Kubernetes, rather than as pods within your K8s cluster. When both Nomad servers and clients reside in cloud VM instances, you can improve the stability and operational simplicity of your Nomad cluster. Here are the key benefits of externalizing Nomad servers:
 
-**Stability and reduced complexity::** Running your Nomad server on a VM provides a stable foundation. When a Nomad server runs in a Kubernetes pod, it creates a circular dependency where Kubernetes manages your scheduler, which could be managing Kubernetes itself. This adds operational complexity and potential failure modes.
+**Stability and reduced complexity**:: Running your Nomad server on a VM provides a stable foundation. When a Nomad server runs in a Kubernetes pod, it creates a circular dependency where Kubernetes manages your scheduler, which could be managing Kubernetes itself. This adds operational complexity and potential failure modes.
 
-**Resource predictability::** VM instances provide dedicated, predictable resources for Nomad servers. In Kubernetes, pods can be evicted, rescheduled, or affected by noisy neighbors. For the control plane of an orchestration system, we want maximum stability and resource guarantees, which VM instances naturally provide.
+**Resource predictability**:: VM instances provide dedicated, predictable resources for Nomad servers. In Kubernetes, pods can be evicted, rescheduled, or affected by noisy neighbors. For the control plane of an orchestration system, we want maximum stability and resource guarantees, which VM instances naturally provide.
 
-. **Direct communication::** Nomad servers and clients communicate directly over virtual private cloud (VPC) networking without crossing orchestration boundaries. This eliminates the need to manage Kubernetes services, ingress controllers, or service meshes for Nomad's internal communication (RPC, Gossip, Raft). This makes debugging, security group configuration, and network troubleshooting much simpler, especially when diagnosing cluster consensus or client connectivity issues.
+**Direct communication**:: Nomad servers and clients communicate directly over virtual private cloud (VPC) networking without crossing orchestration boundaries. This eliminates the need to manage Kubernetes services, ingress controllers, or service meshes for Nomad's internal communication (RPC, Gossip, Raft). This makes debugging, security group configuration, and network troubleshooting much simpler, especially when diagnosing cluster consensus or client connectivity issues.
 
-. **Clearer upgrade and rollback strategy::** With Nomad servers/clients running in VMs, you have clear separation between the Kubernetes orchestration layer and the Nomad control plane. You can upgrade Nomad independently of Kubernetes, avoiding version compatibility concerns between the two systems. VM-based deployments also provide more straightforward rollback mechanisms using AMIs, snapshots, or infrastructure-as-code versioning, compared to managing StatefulSets with persistent volumes in Kubernetes.
+**Clearer upgrade and rollback strategy**:: With Nomad servers/clients running in VMs, you have clear separation between the Kubernetes orchestration layer and the Nomad control plane. You can upgrade Nomad independently of Kubernetes, avoiding version compatibility concerns between the two systems. VM-based deployments also provide more straightforward rollback mechanisms using AMIs, snapshots, or infrastructure-as-code versioning, compared to managing StatefulSets with persistent volumes in Kubernetes.
 
-. **Consistent deployment model::** You can use the same deployment patterns, monitoring, logging, and configuration management across your entire Nomad cluster which provides better monitoring and reduces operational complexity.
+**Consistent deployment model**:: You can use the same deployment patterns, monitoring, logging, and configuration management across your entire Nomad cluster which provides better monitoring and reduces operational complexity.
 
 ifndef::pdf[]
 [#next-steps]
