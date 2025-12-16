@@ -605,6 +605,7 @@
 .doc .admonitionblock td.content {
   width: 100%;
   word-wrap: anywhere;
+  min-width: 0;
 }
 
 .doc .imageblock,
@@ -956,6 +957,11 @@
   padding: 1rem;
   box-sizing: border-box;
   padding: 1rem 1rem 0.75rem;
+}
+
+.doc .sidebarblock > .content {
+  min-width: 0;
+  width: 100%;
 }
 
 .doc .sidebarblock > .content > .title {
