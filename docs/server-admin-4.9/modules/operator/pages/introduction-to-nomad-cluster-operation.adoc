@@ -158,6 +158,20 @@ From server version 4.8, Nomad servers may now be deployed externally to your Ku
 . Stop all builds on your CircleCI Server instance.
 . Follow our installation instructions for deploying Nomad Servers on either xref:installation:phase-3-aws-execution-environments.adoc#nomad-servers[AWS] or xref:installation:phase-3-gcp-execution-environments.adoc#nomad-servers[GCP].
 
+=== Why externalize your Nomad servers?
+Externalizing your Nomad servers means running them on dedicated VM instances outside of Kubernetes, rather than as pods within your K8s cluster. When both Nomad servers and clients reside in Cloud VM instances, you can improve the stability and operational simplicity of your Nomad cluster. Here are the key 
+benefits of externalizing Nomad servers -
+
+. **Stability and Reduced Complexity:** Running Nomad servers on VM machines provides a more stable foundation since it avoids the orchestration-on-orchestration problem. When Nomad servers run in K8s pods, it create a circular dependency where Kubernetes manages your scheduler, which could be managing Kubernetes itself. This adds operational complexity and potential failure modes.
+
+. **Resource Predictability:** VM instances provide dedicated, predictable resources for Nomad servers. In Kubernetes, pods can be evicted, rescheduled, or affected by noisy neighbors. For the control plane of an orchestration system, we want maximum stability and resource guarantees, which VM instances naturally provide.
+
+. **Direct Communication:** Servers and clients communicate directly over VPC networking without crossing orchestration boundaries. This eliminates the need to manage Kubernetes services, ingress controllers, or service meshes for Nomad's internal communication (RPC, Gossip, Raft). This makes debugging, security group configuration, and network troubleshooting much simpler, especially when diagnosing cluster consensus or client connectivity issues.
+
+. **Clearer Upgrade and Rollback Strategy:** With Nomad servers/clients running in VMs, you have clear separation between the K8s orchestration layer and the Nomad control plane. You can upgrade Nomad independently of Kubernetes, avoiding version compatibility concerns between the two systems. VM-based deployments also provide more straightforward rollback mechanisms using AMIs, snapshots, or infrastructure-as-code versioning, compared to managing StatefulSets with persistent volumes in K8s.
+
+. **Consistent Deployment Model:** - You can use the same deployment patterns, monitoring, logging, and configuration management across your entire Nomad cluster which provides better monitoring and reduces operational complexity.
+
 ifndef::pdf[]
 [#next-steps]
 == Next steps
