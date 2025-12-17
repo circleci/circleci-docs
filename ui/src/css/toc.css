@@ -119,3 +119,61 @@
 .sidebar.toc .toc-menu a:focus {
   background: var(--panel-background);
 }
+
+/* TOC Collapse Button */
+.toc.sidebar .toc-collapse-btn {
+  position: sticky;
+  top: var(--toc-top);
+  left: -2.5rem;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 0 0 -2.1rem -2.5rem;
+  border: 1px solid var(--toc-border-color);
+  border-radius: 4px;
+  background: var(--panel-background);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+  transform: rotate(180deg);
+  transition: background-color 0.2s ease;
+}
+
+.toc.sidebar .toc-collapse-btn:hover {
+  background: var(--nav-background);
+}
+
+.toc.sidebar .toc-collapse-btn:focus {
+  outline: 2px solid var(--link-font-color);
+  outline-offset: 2px;
+}
+
+.toc.sidebar .toc-collapse-btn svg {
+  pointer-events: none;
+}
+
+/* Collapsed state */
+.toc.sidebar {
+  transition: flex-basis 0.3s ease;
+}
+
+.toc.sidebar.collapsed {
+  flex-basis: 50px !important;
+}
+
+.toc.sidebar.collapsed .toc-collapse-btn {
+  transform: rotate(0deg);
+}
+
+/* Hide TOC content when collapsed */
+.toc.sidebar .toc-menu {
+  transition: opacity 0.2s ease;
+}
+
+.toc.sidebar.collapsed .toc-menu {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
