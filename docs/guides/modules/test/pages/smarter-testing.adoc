@@ -1027,6 +1027,17 @@ NOTE: The first time you run the analysis it may take a long time and could requ
 
 Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`. By default, analysis runs on default branches and selection runs on feature branches. To customize this behavior, see <<set-up-examples>>.
 
+==== Viewing test results in the UI
+ 
+When running tests in CI and test results are uploaded correctly, you'll see a Test Overview widget in the Tests tab on your job page. This widget displays:
+ 
+* Total number of tests run
+* Test results breakdown (passed, failed, skipped)
+* Time saved from skipping tests with Smarter Testing
+
+.Test Overview widget showing Smarter Testing results
+image::guides:ROOT:test-optimization/smarter-testing-overview.png[Smarter Testing Test Overview]
+
 At this point:
 
 . Your test suite is configured.
@@ -1048,6 +1059,10 @@ The final step is to prepare and merge a PR with the changes to CircleCI configu
 . Check that all test atoms are discovered with the discover command.
 . Verify parallelism is set correctly in your `.circleci/config.yml`.
 . Ensure test results are being stored with `store_test_results`.
+
+==== Skipped & Time saved information not accurate or missing in Test Overview 
+
+TBD
 
 ==== Test results not appearing in the UI
 
