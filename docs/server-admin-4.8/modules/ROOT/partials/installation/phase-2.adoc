@@ -1,4 +1,4 @@
-Before you begin with the CircleCI server v4.8 core services installation phase, ensure all prerequisites are met, as described in the following page:
+Before you begin with the CircleCI Server v4.8 core services installation phase, ensure all prerequisites are met, as described in the following page:
 
 ifndef::env-gcp[]
 * xref:server-admin:installation:phase-1-aws-prerequisites.adoc#[Phase 1 - AWS Prerequisites]
@@ -501,8 +501,8 @@ nginx:
 ----
 
 ****
-If you have already deployed CircleCI server, enabling ACM is a destructive change to the load balancer. The service will have to be regenerated to allow the use of your ACM certificates and so the associated load balancer will also be regenerated.
-You will need to update your DNS records to the new load balancer once you have redeployed CircleCI server.
+If you have already deployed CircleCI Server, enabling ACM is a destructive change to the load balancer. The service will have to be regenerated to allow the use of your ACM certificates and so the associated load balancer will also be regenerated.
+You will need to update your DNS records to the new load balancer once you have redeployed CircleCI Server.
 ****
 --
 endif::env-gcp[]
@@ -712,7 +712,7 @@ kubectl -n <namespace> create secret generic object-storage-secret \
 --
 ====
 
-CircleCI server will use the credentials provided to authenticate to S3.
+CircleCI Server will use the credentials provided to authenticate to S3.
 
 
 // Stop hiding from GCP PDF:
@@ -779,7 +779,7 @@ kubectl -n <namespace> create secret generic object-storage-secret \
 endif::env-aws[]
 
 === l. Installing behind a proxy
-Depending on your security requirements, you might want to install CircleCI server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing Server Behind a Proxy] guide.
+Depending on your security requirements, you might want to install CircleCI Server behind a proxy. Installing behind a proxy gives you the power to monitor and control access between your installation and the broader Internet. For further information including limitations of installation behind a proxy, see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing Server Behind a Proxy] guide.
 
 The following fields need to be configured in your `values.yaml`:
 
@@ -843,7 +843,7 @@ WARNING: Tink or Vault must be set once during installation, and cannot be chang
 tinkey create-keyset --key-template XCHACHA20_POLY1305
 ----
 
-. CircleCI server will store your generated keyset in a Kubernetes Secret. You may generate this Secret in either of the following ways:
+. CircleCI Server will store your generated keyset in a Kubernetes Secret. You may generate this Secret in either of the following ways:
 +
 [tabs]
 ====
@@ -852,7 +852,7 @@ You create secret::
 --
 **Option 1:** Create the Kubernetes Secret yourself
 
-Following the example below, create a Kubernetes Secret with the name `tink` and a key `keyset`. Apply this Secret to the namespace of your CircleCI server installation.
+Following the example below, create a Kubernetes Secret with the name `tink` and a key `keyset`. Apply this Secret to the namespace of your CircleCI Server installation.
 
 [source,yaml]
 ----
@@ -868,7 +868,7 @@ data:
 CircleCI creates secret::
 +
 --
-**Option 2:** CircleCI server will create the Kubernetes Secret
+**Option 2:** CircleCI Server will create the Kubernetes Secret
 
 You may add the keyset to your `values.yaml` under `tink` as in the example below. CircleCI will generate the required Secret to store your keyset.
 
@@ -885,7 +885,7 @@ WARNING: If your Tink keyset is somehow lost, you will need to generate a new ke
 
 === n. Setting up OIDC (optional)
 
-CircleCI server optionally supports xref:guides:permissions-authentication:openid-connect-tokens.adoc#[Using OpenID Connect Tokens in Jobs] in jobs.
+CircleCI Server optionally supports xref:guides:permissions-authentication:openid-connect-tokens.adoc#[Using OpenID Connect Tokens in Jobs] in jobs.
 
 This feature is not enabled by default and requires a few additional steps to set up, as follows:
 
@@ -944,7 +944,7 @@ kubectl get service -l app=circleci-proxy
 [#validation]
 == 6. Validation
 
-You should now be able to navigate to your CircleCI server installation and log in to the application successfully.
+You should now be able to navigate to your CircleCI Server installation and log in to the application successfully.
 
 Now we will move on to build services. It may take a while for all your services to be up. You can periodically check by running the following command (you are looking for the `frontend` pod to show a status of `running` and **ready** should show `1/1`):
 

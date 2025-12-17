@@ -613,11 +613,11 @@ github:
 === k. Object storage
 
 ifndef::env-gcp[]
-Regardless of your storage provider, the bucket name you xref:server-admin:installation:phase-1-aws-prerequisites.adoc#object-storage-and-permissions[created during the prerequisites phase] will need to be included.
+Regardless of your storage provider, the bucket name you xref:server-admin:installation:phase-1-aws-prerequisites.adoc#object-storage-and-permissions[Created During the Prerequisites Phase] will need to be included.
 endif::env-gcp[]
 
 ifndef::env-aws[]
-Regardless of your storage provider, the bucket name you xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#object-storage-and-permissions[created during the prerequisites phase] will need to be included.
+Regardless of your storage provider, the bucket name you xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#object-storage-and-permissions[Created During the Prerequisites Phase] will need to be included.
 endif::env-aws[]
 
 [source,yaml]
@@ -683,7 +683,7 @@ object_storage:
 ----
 
 **Disable Presigned Mode (Optional)**
-If you wish to store artifacts larger than 5GB, you will need to xref:installation:phase-1-aws-prerequisites.adoc#s3-storage[update your trust policy for your IRSA role]. Then disable presigned mode by adding the following to the `object_storage.s3` section:
+If you wish to store artifacts larger than 5GB, you will need to xref:installation:phase-1-aws-prerequisites.adoc#s3-storage[Update Your Trust Policy for Your IRSA Role]. Then disable presigned mode by adding the following to the `object_storage.s3` section:
 
 [source,yaml]
 ----
@@ -884,7 +884,7 @@ WARNING: If your Tink keyset is somehow lost, you will need to generate a new ke
 
 === n. Setting up OIDC (optional)
 
-CircleCI Server optionally supports xref:guides:permissions-authentication:openid-connect-tokens.adoc#[OpenID Connect (OIDC) tokens] in jobs.
+CircleCI Server optionally supports xref:guides:permissions-authentication:openid-connect-tokens.adoc#[Using OpenID Connect Tokens in Jobs] in jobs.
 
 This feature is not enabled by default and requires a few additional steps to set up, as follows:
 
