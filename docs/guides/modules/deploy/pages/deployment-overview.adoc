@@ -22,7 +22,7 @@ Set up deploy markers to track deployments in the CircleCI web app and rollback 
 
 The following list outlines the core components you need to get a deployment set up:
 
-* **Deployment job**: To deploy your application, add a xref:orchestrate:jobs-steps.adoc#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
+* **Deployment job**: To deploy your application, add a job to your `.circleci/config.yml` file and configure the job to run the steps you require.
 +
 TIP: Use the *how-to guides* in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
 
@@ -88,20 +88,28 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 
 == Deployment tracking and management
 
-Deploy markers provide a lightweight way to log your deployments. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them.
+*Deploy markers* provide a lightweight way to log your deployments. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them.
+
+With deploy markers set up you can also use the *rollback* feature to rollback to a previous version of a component from the CircleCI web app. Set up a rollback pipeline to get back to a working version of your application quickly. More information is available in the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+
+.Rollback guided setup
+image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
 
 See the xref:configure-deploy-markers.adoc[Configure Deploy Markers] page for full setup details.
 
 To use deploy markers, you will add commands to your pipeline configuration to enable CircleCI to log and track deployment status in the CircleCI UI. Once deploy markers are set up, you can rollback to a previous version of a component from the CircleCI web app.
 
-If you are deploying to Kubernetes you can also use the CircleCI xref:release-agent-overview.adoc[Release Agent Overview], which you install in your cluster to enable you to manage your deployments through CircleCI.
+If you are deploying to Kubernetes you can also use the CircleCI *Release agent*, which you install in your cluster to enable you to manage your deployments through CircleCI. For more information see the xref:release-agent-overview.adoc[Release Agent Overview].
+
+.CircleCI release agent architecture
+image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
 
 == Deploy markers quickstart
 
 To get started with deploy markers right away, refer to the following guides:
 
-* xref:configure-deploy-markers.adoc[Tutorial 1: Configure CircleCI deploy markers]
-* xref:set-up-rollbacks.adoc[Tutorial 2: Set up rollbacks]
+* xref:configure-deploy-markers.adoc[Tutorial 1: Configure CircleCI Deploy Markers] (This is a manual setup guide for deploy markers)
+* xref:set-up-rollbacks.adoc[Tutorial 2: Set Up Rollbacks] (Set up a rollback pipeline and through that process you will be guided to set up deploy markers)
 
 == Concepts
 
