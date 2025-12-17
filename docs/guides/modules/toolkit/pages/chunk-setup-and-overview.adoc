@@ -17,11 +17,20 @@ Chunk by CircleCI assists with CI/CD related tasks through a natuaral language c
 
 Chunk connects to your existing CircleCI pipelines and analyzes both your build history and repository code to understand how your tests, configurations, and dependencies behave.
 
-Chunk uses AI to proactively manage your CI/CD processes. Set Chunk tasks to monitor for issues. When issues occur, Chunk identifies root causes, proposes or applies validated fixes automatically.
+Chunk uses AI to proactively manage your development workflow and maintain codebase health. Chunk monitors for issues across your CI/CD processes and codebase, identifies root causes when problems occur, and proposes or applies validated fixes automatically.
+
+Chunk is equipped with specialized skills to help you maintain and improve your software:
+
+*Fix flaky tests*:: Identify and resolve known flaky tests in your codebase.
+*Extend test coverage*:: Analyze your codebase and add new tests for untested or under-tested code.
+*Fix bugs*:: Detect and resolve bugs in your code.
+*Refactor code*:: Suggest improvements for better code maintainability.
+*Improve documentation*:: Add or enhance documentation for key functions and components.
+*Optimize build configs*:: Review and improve your CircleCI configuration for better performance and efficiency.
+
+When you provide Chunk with a task or question, it applies the appropriate specialized skill to deliver targeted solutions. As your codebase evolves—even as you write more code with AI assistance—Chunk helps ensure your software remains validated and your codebase stays healthy over time.
 
 Chunk uses your own OpenAI or Anthropic API key, so your data and credentials always stay fully under your control.
-
-
 
 == Set up Chunk
 The following sections guide you through the Chunk setup process. Once your setup is complete you can chat with Chunk for help with projects and assign Chunk tasks to proactively manage your CI/CD processes.
