@@ -90,8 +90,6 @@ nginx:
 
 # The below values require no special modifications for an air-gapped environment
 
-apiToken: "<<circleci-api-token>>"
-
 sessionCookieKey: "<<circleci-session-cookie-key>>"
 
 keyset:

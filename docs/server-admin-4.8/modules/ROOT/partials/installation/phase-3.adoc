@@ -554,9 +554,6 @@ Once you have successfully cloned the repository, you can follow it from within 
 |CIRCLE_HOSTNAME
 |<YOUR_CIRCLECI_INSTALLATION_URL>
 
-|CIRCLE_TOKEN
-|<YOUR_CIRCLECI_API_TOKEN>
-
 |CIRCLE_CLOUD_PROVIDER
 |< `aws`, `gcp`, or `other` >
 |===
