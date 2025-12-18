@@ -820,7 +820,7 @@ aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_AR
 +
 Configure machine provisioner by adding the following to `values.yaml`:
 +
-NOTE: If deploying in specific zone need to specify subnetwork for GCP
+NOTE: If deploying in specific zone need to specify subnetwork for AWS
 +
 [source,yaml]
 ----
