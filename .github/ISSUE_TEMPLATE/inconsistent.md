@@ -1,6 +1,10 @@
 ---
 name: Inconsistent
 about: Conflicting information
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 # Locations
