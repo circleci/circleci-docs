@@ -167,7 +167,7 @@
 
 * Deploy with CircleCI
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
-** Setup
+** Deploys and rollbacks
 *** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 *** xref:deploy:set-up-rollbacks.adoc[Rollback a deployment]
 ** Release agent setup
