@@ -1,3 +1,6 @@
+\bgithub organization\b
+\bcircleci organization\b
+\bbitbucket organization\b
 .circleci/config.yml
 [Aa]gentless
 [Aa]uditability
@@ -78,7 +81,7 @@ cgroup
 Chocolatey
 chruby
 [Cc]hunk
-CircleCI\b
+\bCircleCI\b
 \bCircleCI Cloud\b
 \bCircleCI Server\b
 \bcircleci\.com\b

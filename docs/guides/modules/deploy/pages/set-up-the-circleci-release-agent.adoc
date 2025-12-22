@@ -27,7 +27,9 @@ Before setting up your environment integration with CircleCI, run through the fo
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A Kubernetes cluster.
 * A project building on CircleCI that deploys to your Kubernetes cluster. See the xref:getting-started:create-project.adoc[Create a project] page for steps.
-* You must have write access to the project associated with the component being deployed. For full details of roles and permissions for GitLab and GitHub App integrations, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]. If your integration is through Bitbucket or the GitHub OAuth app, you will need to be an org admin in Bitbucket/GitHub respectively. To find out which GitHub integration you have, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
+* You must have write access to the project associated with the component being deployed. For full details of roles and permissions for `circleci` type organizations see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]. If you have a `github` or `bitbucket` type organization, you will need to be an org admin in Bitbucket/GitHub respectively.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 The following versions of Kubernetes, Helm, and Argo Rollouts have been tested and proven to work. Older versions may work but are not guaranteed:
 

@@ -234,7 +234,7 @@ Provide CircleCI with a GitHub user key in your project's **Project Settings** >
 [#establish-the-authenticity-of-an-ssh-host]
 == Establish the authenticity of an SSH host
 
-When using SSH keys to check out a repository, it may be necessary to add the fingerprints for GitHub to a "known hosts" file (`~/.ssh/known_hosts`). Using `known_hosts` allows the executor can verify that the host it is connecting to is authentic. The xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` job step] does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
+When using SSH keys to check out a repository, it may be necessary to add the fingerprints for GitHub to a "known hosts" file (`~/.ssh/known_hosts`). Using `known_hosts` allows the executor to verify that the host it is connecting to is authentic. The xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` job step] does this automatically, so you will need to run the following commands if you opt to use a custom checkout command:
 
 ```shell
 mkdir -p ~/.ssh
@@ -331,7 +331,7 @@ If you would like to rename your organization or repository, follow the xref:sec
 [#using-github-app-functionality]
 == Using GitHub App functionality alongside the GitHub OAuth App
 
-Some existing and future functionality on CircleCI can only be enabled through the more secure xref:github-apps-integration.adoc[CircleCI GitHub App integration].
+Some existing and future functionality on CircleCI can only be enabled through the more secure CircleCI GitHub App integration. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
 
 Until October 2024, the CircleCI GitHub App integration was available exclusively to organizations created after September 2023. **Now, all organizations can install the CircleCI GitHub App to access new functionality. This includes organizations that currently integrate with CircleCI GitHub OAuth app.**
 
