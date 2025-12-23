@@ -1189,6 +1189,11 @@
     "module": "execution-managed",
     "filename": "resource-class-overview.adoc"
   },
+  "set-up-deploys": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "set-up-deploys.adoc"
+  },
   "set-up-rollbacks": {
     "component": "guides",
     "module": "deploy",
