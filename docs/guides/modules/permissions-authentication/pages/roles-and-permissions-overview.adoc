@@ -1,4 +1,4 @@
-= Roles and permissions
+= Roles and permissionshttps://github.com/circleci/circleci-docs/tree/main/docs/guides/modules/permissions-authentication
 :page-platform: Cloud
 :page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
 :experimental:
