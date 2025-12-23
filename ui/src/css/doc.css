@@ -29,6 +29,20 @@
     flex: 1 1 0%;
     width: 0; /* Force flexbox to ignore content width */
     max-width: var(--doc-max-width--desktop); /* Restore max-width for centering */
+    transition: max-width 0.3s ease;
+  }
+}
+
+/* Article expansion when TOC collapses */
+@media screen and (min-width: 1200px) {
+  body.toc-collapsed .doc {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width) - 50px);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  body.toc-collapsed .doc {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen) - 50px);
   }
 }
 
