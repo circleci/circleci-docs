@@ -20,7 +20,6 @@ global:
     registry: cciserver.azurecr.io
     org:
 
-apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
 
 keyset:
@@ -96,7 +95,6 @@ global:
     registry: cciserver.azurecr.io
     org:
 
-apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
 
 keyset:
