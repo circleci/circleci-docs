@@ -88,7 +88,7 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 
 == Deployment tracking and management
 
-CircleCI provides deployment tracking and management features through two main features:
+CircleCI provides deployment tracking and management through two main features:
 
 [.table-scroll]
 --
@@ -102,8 +102,8 @@ CircleCI provides deployment tracking and management features through two main f
 |Deploy markers generate a log of all deployments in one place. This deploy log provides a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers enable rollback and deploy pipelines so you can deploy and rollback your projects from the CircleCI web app.
 |All CircleCI projects can use deploy markers. More information is available in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
-|CircleCI Release agent
-|The release agent is a tool that you install in your Kubernetes cluster to enable you to manage your deployments through CircleCI. The release agent supports Argo Rollouts for progressive delivery.
+|CircleCI release agent
+|The CircleCI release agent is a tool that you install in your Kubernetes cluster to enable you to manage your deployments through CircleCI. The release agent supports Argo Rollouts for progressive delivery.
 |Projects that are deploying to Kubernetes can use the release agent. More information is available in the xref:release-agent-overview.adoc[Release Agent Overview].
 |===
 --
