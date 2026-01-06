@@ -3,13 +3,16 @@
 :page-description:
 :experimental:
 
-Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to configure your CircleCI pipeline to support manual rollback capabilities.
+CircleCI rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to configure your CircleCI pipeline to support rollback operations.
 
 == Introduction
 
-CircleCI rollbacks support two methods, either rollback by running a defined rollback pipeline that you configure, or rollback by rerunning the workflow that originally deployed the version you want to rollback to. This guide covers setting up a rollback pipeline which is the recommended approach for most applications.
+CircleCI rollbacks support two methods of manually reverting to a previous version:
 
-The process of rolling back is described in detail in the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide, including a comparison of the two methods
+* Rollback by running a custom rollback pipeline.
+* Rollback by rerunning the workflow that originally deployed the version you want to revert to.
+
+This guide covers setting up a rollback pipeline, which is the recommended approach for most applications. The process of rolling back is described in detail in the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide, including a comparison of the two methods.
 
 == Prerequisites
 
