@@ -30,9 +30,9 @@ image::guides:ROOT:releases/dashboard.png[Deploys timeline with no deployments r
 
 == How to set up deploy markers
 
-This guide details how to set up deploy markers manually by editing your CircleCI configuration file.
+This guide details how to set up deploy markers *manually by editing your CircleCI configuration file*.
 
-Alternatively, you can head straight to set up a rollback pipeline and through that process you will be guided to set up deploy markers. See the xref:set-up-rollbacks.adoc[Set up rollbacks] guide for more details.
+Alternatively, you can begin by setting up a rollback pipeline. Through the rollback pipeline setup process you will be guided in the CircleCI web app to set up deploy markers. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide for more details.
 
 == Prerequisites
 
