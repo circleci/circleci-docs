@@ -12,11 +12,14 @@
     btn.setAttribute('aria-label', 'Collapse table of contents')
     btn.setAttribute('aria-expanded', 'true')
     btn.setAttribute('type', 'button')
-    btn.innerHTML = '<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.292893 5.29289C-0.0976311 5.68342 -0.0976311 6.31658 0.292893 6.70711L5.29289 11.7071C5.68342 12.0976 6.31658 12.0976 6.70711 11.7071C7.09763 11.3166 7.09763 10.6834 6.70711 10.2929L3.41421 7H15C15.5523 7 16 6.55228 16 6C16 5.44772 15.5523 5 15 5H3.41421L6.70711 1.70711C7.09763 1.31658 7.09763 0.683417 6.70711 0.292894C6.31658 -0.0976312 5.68342 -0.0976312 5.29289 0.292894L0.292893 5.29289Z" fill="currentColor"/></svg>'
+    btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.34319 7.70711L5.10055 11.9497M5.10055 11.9497L9.34319 16.1924M5.10055 11.9497H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 8V17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
 
-    // Insert button before toc-menu
+    // Insert button inside the h3 title
     var tocMenu = sidebar.querySelector('.toc-menu')
-    sidebar.insertBefore(btn, tocMenu)
+    var tocTitle = tocMenu.querySelector('h3')
+    if (tocTitle) {
+      tocTitle.appendChild(btn)
+    }
 
     // Click handler
     btn.addEventListener('click', function () {

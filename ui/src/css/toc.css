@@ -8,6 +8,8 @@
   margin-right: 0.75rem;
   position: sticky;
   top: var(--toc-top);
+  display: flex;
+  flex-direction: column;
 }
 
 .toc .toc-menu h3 {
@@ -22,9 +24,10 @@
 
 .toc.sidebar .toc-menu h3 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: flex-end;
   height: 2.5rem;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-bottom: 1.2rem;
 }
 
@@ -122,27 +125,24 @@
 
 /* TOC Collapse Button */
 .toc.sidebar .toc-collapse-btn {
-  position: sticky;
-  top: var(--toc-top);
-  left: -2.5rem;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   padding: 0;
-  margin: 0 0 -2.1rem -2.5rem;
-  border: 1px solid var(--toc-border-color);
-  border-radius: 4px;
-  background: var(--panel-background);
+  margin: 0;
+  border: none;
+  background: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 11;
   transform: rotate(180deg);
-  transition: background-color 0.2s ease;
+  transition: opacity 0.2s ease, position 0.3s ease;
+  flex-shrink: 0;
 }
 
+
 .toc.sidebar .toc-collapse-btn:hover {
-  background: var(--nav-background);
+  opacity: 0.7;
 }
 
 .toc.sidebar .toc-collapse-btn:focus {
@@ -167,13 +167,13 @@
   transform: rotate(0deg);
 }
 
-/* Hide TOC content when collapsed */
-.toc.sidebar .toc-menu {
-  transition: opacity 0.2s ease;
-}
-
-.toc.sidebar.collapsed .toc-menu {
+.toc.sidebar.collapsed .toc-menu ul {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
+}
+
+.toc.sidebar.collapsed .toc-menu h3 {
+  font-size: 0;
+  justify-content: center;
 }
