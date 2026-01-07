@@ -3,7 +3,7 @@
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
-CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[Workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
 [,yaml]
 ----
@@ -35,6 +35,7 @@ workflows:
 
 To set or change your default email address, visit the link:https://app.circleci.com/settings/user/notifications[Notifications] page of the CircleCI application. If you are a member of multiple organizations, you can specify a different email address for each organization using the dropdown for each org.
 
+.Default email
 image::guides:ROOT:email-notifications.png[Screenshot showing how to change default email address and choose notifications]
 
 You can also configure your preferences for different categories here:
@@ -44,19 +45,22 @@ You can also configure your preferences for different categories here:
 
 You can further filter the notifications you receive based on the status of the build as below:
 
-* On default branch (any status)
+* On default branch (any status).
 * Failed
 * Succeeded
 * Cancelled
 * Unauthorized
 * Error
 
+.Notification categories
 image::guides:ROOT:email-categories.png[Screenshot showing how to change which notifications to receive]
 
 Email notifications appear as follows:
 
+.Success email
 image::guides:ROOT:notification-email-success.png[Example success email notification]
 
+.Failure email
 image::guides:ROOT:notification-email-failure.png[Example failure email notification]
 
 [#notifications-with-orbs]
