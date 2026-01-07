@@ -29,6 +29,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 *Example:*
 
+.Version
 [,yaml]
 ----
 version: 2.1
@@ -56,7 +57,7 @@ The `setup` field enables you to conditionally trigger configurations from outsi
 
 *Example:*
 
-[,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 
@@ -2668,7 +2669,7 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
 A job name that exists in your `config.yml`.
 
-[,ym]
+[,yml]
 ----
 version: 2.1
 
