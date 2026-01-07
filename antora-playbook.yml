@@ -42,6 +42,7 @@ output:
   - provider: fs
 asciidoc:
   attributes:
+    source-highlighter: shiki
     serverversion4: 4.0.6
     serverversion41: 4.1.10
     serverversion42: 4.2.7
@@ -69,6 +70,35 @@ urls:
   html_extension_style: indexify
 antora:
   extensions:
+  - require: 'antora-shiki-extension'
+    theme: dracula
+    languages:
+      - asciidoc
+      - bash
+      - c
+      - clojure
+      - diff
+      - docker
+      - go
+      - groovy
+      - hcl
+      - java
+      - javascript
+      - json
+      - kotlin
+      - make
+      - markdown
+      - powershell
+      - python
+      - ruby
+      - rust
+      - shellscript
+      - shellsession
+      - sql
+      - typescript
+      - xml
+      - yaml
+      - rst
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
       - 'test:smarter-testing.adoc'
