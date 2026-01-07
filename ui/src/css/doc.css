@@ -206,14 +206,6 @@
   border: 1px solid #D4D4D4;
   font-size: 0.95em;
   padding: 0.15em 0.4em;
-  white-space: nowrap;
-}
-
-/* Allow inline code to wrap in admonition blocks to prevent overflow */
-.doc .admonitionblock td.content code:not(.hljs) {
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: break-word;
 }
 
 .doc code,
@@ -363,13 +355,7 @@
   box-sizing: border-box;
   white-space: normal;
   word-wrap: break-word;
-}
-
-/* Allow wrapping of inline literal text in tables */
-.doc table.tableblock td code,
-.doc table.tableblock th code {
-  white-space: normal;
-  word-break: break-all;
+  hyphens: manual;
 }
 
 .doc td.tableblock > .content {
@@ -619,6 +605,7 @@
 .doc .admonitionblock td.content {
   width: 100%;
   word-wrap: anywhere;
+  min-width: 0;
 }
 
 .doc .imageblock,
@@ -972,6 +959,11 @@
   padding: 1rem 1rem 0.75rem;
 }
 
+.doc .sidebarblock > .content {
+  min-width: 0;
+  width: 100%;
+}
+
 .doc .sidebarblock > .content > .title {
   font-size: calc(22.5 / var(--rem-base) * 1rem);
   font-weight: var(--alt-heading-font-weight);
@@ -983,13 +975,6 @@
 .doc .sidebarblock > .content > .title + *,
 .doc .sidebarblock > .content > :not(.title):first-child {
   margin-top: 0;
-}
-
-/* Fix wrapping issues inside sidebarblocks - only for inline code, not code blocks */
-.doc .sidebarblock code:not(.hljs) {
-  white-space: normal;
-  word-break: break-word;
-  overflow-wrap: break-word;
 }
 
 .doc .sidebarblock .listingblock {
@@ -1469,14 +1454,9 @@
   font-weight: var(--heading-font-weight);
 }
 
-/* Prevent inline code text from wrapping in table cells (but not in admonition blocks) */
-.tableblock td .pre,
-.tableblock td .code,
-.tableblock td p code,
-.tableblock td li code,
-.tableblock p code,
-.tableblock li code {
-  white-space: nowrap !important;
+/* Prevent inline code text from wrapping in table cells */
+.doc .tableblock code:not(.hljs) {
+  white-space: nowrap;
 }
 
 /* Ensure code blocks in tables preserve formatting */
