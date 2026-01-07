@@ -44,12 +44,14 @@ You can also configure your preferences for different categories here:
 
 You can further filter the notifications you receive based on the status of the build as below:
 
-* *On default branch (any status)*
-* *Failed*
-* *Succeeded*
-* *Cancelled*
-* *Unauthorized*
-* *Error*
+* On default branch (any status)
+* Failed
+* Succeeded
+* Cancelled
+* Unauthorized
+* Error
+
+image::guides:ROOT:email-categories.png[Screenshot showing how to change which notifications to receive]
 
 Email notifications appear as follows:
 
