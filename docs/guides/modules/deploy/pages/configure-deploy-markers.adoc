@@ -7,7 +7,10 @@ This tutorial shows how to add deploy markers to your CircleCI configuration fil
 
 Deploy markers enable you to log all new deployments in one place, update their status and link back to the CI/CD pipelines that triggered them.
 
-Adding deploy markers to your configuration is a prerequisite to using CircleCI rollbacks to rollback to a previous version of a component from the CircleCI web app.
+Adding deploy markers to your configuration is a prerequisite to using the following CircleCI features:
+
+* Rollback pipelines - manually revert to a previous version of a component from the CircleCI web app.
+* Deploy pipelines - Automatically deploy a new version of a component from the CircleCI web app.
 
 == Introduction
 

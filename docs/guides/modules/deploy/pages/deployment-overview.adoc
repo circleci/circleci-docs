@@ -126,7 +126,7 @@ To get set up see the following guides, you can choose manual configuration or a
 
 CAUTION: Do not use both CircleCI Deploys and the CircleCI release agent in the same project.
 
-If you are deploying to Kubernetes you can choose touse the CircleCI *release agent*. The release agent is installed in your cluster to enable you to manage your deployments through CircleCI.
+If you are deploying to Kubernetes you can choose to use the CircleCI *release agent*. The release agent is installed in your cluster to enable you to manage your deployments through CircleCI.
 
 .CircleCI release agent architecture
 image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
