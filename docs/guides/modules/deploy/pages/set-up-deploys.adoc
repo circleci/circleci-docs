@@ -26,8 +26,8 @@ The following steps guide you through setting up a custom deploy pipeline.
 . Select the menu:Overview[] link for your project.
 . Select the btn:[Deploy] button in the project Overview.
 +
-.Deploy button on project overview page
-image::guides:ROOT:deploy/project-overview-rollback.png[Deploy button on project overview page]
+#.Deploy button on project overview page#
+#image::guides:ROOT:deploy/project-overview-rollback.png[Deploy button on project overview page]#
 
 === 2. Confirm GitHub App installation
 
@@ -67,8 +67,8 @@ image::guides:ROOT:deploy/config-updated-button.png[Copy markers commands]
 
 . Select the repository you want to deploy from the "What repo are you deploying?" dropdown.
 +
-.Select repository
-image::guides:ROOT:deploy/select-deploy-repo.png[Select repository]
+#.Select repository#
+#image::guides:ROOT:deploy/select-deploy-repo.png[Select repository]#
 
 . Review the example config file template. It shows how you will perform deployments and how to use deploy markers to track these deployments.
 . Select btn:[Commit config & create Pull Request] to create this deploy configuration template in your repository. The setup will open a pull request in a new tab with the suggested changes.
@@ -97,8 +97,8 @@ image::guides:ROOT:deploy/view-pr-button.png[View pull request button]
 . After merging the pull request, return to the setup page in the CircleCI web app.
 . Select btn:[Setup deploy pipeline] to activate the deploy pipeline.
 +
-.Setup deploy pipeline button
-image::guides:ROOT:deploy/setup-rollback-pipeline-button.png[Setup deploy pipeline button]
+#.Setup deploy pipeline button#
+#image::guides:ROOT:deploy/setup-rollback-pipeline-button.png[Setup deploy pipeline button]#
 
 You can now deploy components by running a deploy pipeline.
 
@@ -111,8 +111,8 @@ To deploy a component using the deploy pipeline you can select the btn:[Deploy] 
 . Select the *Overview* link for your project.
 . Select btn:[Deploy]. This opens the deploy execution modal.
 +
-.Deploy execution modal
-image::guides:ROOT:deploy/rollback-execution-modal.png[Deploy execution modal]
+#.Deploy execution modal#
+#image::guides:ROOT:deploy/rollback-execution-modal.png[Deploy execution modal]#ß
 +
 The modal displays several configuration options with parameters auto-filled based on your deploy configuration. The following sections explain each required property:
 +
