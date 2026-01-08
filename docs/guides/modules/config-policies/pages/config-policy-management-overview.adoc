@@ -122,7 +122,7 @@ generated when your policies are evaluated. Therefore, policies must be written 
 
 All policies must belong to the `org` package and declare the policy name as the first rule. All policy Rego files should include:
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -149,7 +149,7 @@ NOTE: **Helpers** in the context of config policies are rules like any other, bu
 
 Policies all have access to config data through the `input` variable. The `input` is the project config being evaluated. Since the `input` matches the CircleCI config, you can write rules to enforce a desired state on any available config element, for example, `jobs` or `workflows`.
 
-[source,rego]
+[source,go]
 ----
 input.workflows     # an array of nested structures mirroring workflows in the CircleCI config
 input.jobs          # an array of nested structures mirroring jobs in the CircleCI config
@@ -169,7 +169,7 @@ Helper rules that produce differently typed outputs can still be defined, but ru
 
 Evaluation is how the decision engine determines if a config violates the given policy. The evaluation defines the name and ID of the rule, checks a condition, and returns a user-friendly string describing the violation. Rule evaluations include the **rule name** and an **optional rule ID**. The rule name will be used to enable and set the enforcement level for a rule.
 
-[source,rego]
+[source,go]
 ----
 RULE_NAME = reason {
   ... # some comparison
@@ -177,7 +177,7 @@ RULE_NAME = reason {
 }
 ----
 
-[source,rego]
+[source,go]
 ----
 RULE_NAME[RULE_ID] = reason {
   ... # some comparison
@@ -187,7 +187,7 @@ RULE_NAME[RULE_ID] = reason {
 
 Here is an example of a simple evaluation that checks that a config includes at least one workflow:
 
-[source,rego]
+[source,go]
 ----
 contains_workflows = reason {
     count(input.workflows) > 0
@@ -197,7 +197,7 @@ contains_workflows = reason {
 
 The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial Docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
 
-[source,rego]
+[source,go]
 ----
 use_official_docker_image[image] = reason {
   some image in docker_images   # docker_images are parsed below
@@ -218,7 +218,7 @@ docker_images := {image | walk(input, [path, value])  # walk the entire config t
 
 The policy service allows rules to be enforced at different levels.
 
-[source,rego]
+[source,go]
 ----
 ENFORCEMENT_STATUS["RULE_NAME"]
 ----
@@ -230,7 +230,7 @@ The two available enforcement levels are:
 
 An example of setting the `use_official_docker_image` rule to `hard_fail`:
 
-[source,rego]
+[source,go]
 ----
 hard_fail["use_official_docker_image"]
 ----
@@ -240,14 +240,14 @@ hard_fail["use_official_docker_image"]
 
 A rule must be enabled for it to be inspected for policy violations. Rules that are not enabled do not need to match CircleCI violation output formats, and can be used as helpers for other rules.
 
-[source,rego]
+[source,go]
 ----
 enable_rule["RULE_NAME"]
 ----
 
 To enable a rule, add the rule as a key in the `enable_rule` object. For example, to enable the rule `use_official_docker_image`, use the following:
 
-[source,rego]
+[source,go]
 ----
 enable_rule["use_official_docker_image"]
 ----
@@ -255,12 +255,12 @@ enable_rule["use_official_docker_image"]
 Use `enable_hard` to enable a rule and set its enforcement level to `hard` in a single statement.
 
 The following statements are equivalent:
-[source,rego]
+[source,go]
 ----
 enable_hard["use_official_docker_image"]
 ----
 
-[source,rego]
+[source,go]
 ----
 enable_rule["use_official_docker_image"]
 
@@ -287,7 +287,7 @@ This metadata can be used to activate/deactivate rules, modify enforcement statu
 
 The following is an example of a policy that only runs its rule for a single project and enforces it as `hard_fail` only on branch main.
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -306,7 +306,7 @@ hard_fail["custom_rule"] { data.meta.vcs.branch == "main" }
 
 The following is an example of a policy that blocks pull request builds from untrusted origins.
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -339,7 +339,7 @@ from_trusted_origin(origin) {
 
 The following is an example of a policy that blocks SSH reruns on configs where a job uses sensitive contexts.
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -373,7 +373,7 @@ To write highly effective policies, it is essential to reference the _compiled_ 
 Consider the following example policy and configuration:
 
 .Policy
-[source,rego]
+[source,go]
 ----
 import future.keywords
 
@@ -448,7 +448,7 @@ However, once the config is compiled, the job test will have a `resource_class =
 To resolve both of these issues, it is important to acknowledge that we want to apply the policy to all jobs, which is a configuration `version: 2.0` construct, and write the policy to target the compiled version accordingly, as follows:
 
 .Policy rule that inspects compiled configuration
-[source,rego]
+[source,go]
 ----
 # check all jobs in the compiled config and if any use a resource_class equal to "large" return a violation message.
 enforce_not_large_resource[reason] {
@@ -468,7 +468,7 @@ Writing policies against config version 2.1 constructs (orbs, executors, jobs, c
 Consider another example to illustrate this:
 
 .Policy to ban orbs from a specific namespace
-[source,rego]
+[source,go]
 ----
 import future.keywords
 
@@ -506,7 +506,7 @@ We cannot rely on `++input._compiled_++` because orbs are compiled away at that 
 The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly. To do this we can use the `is_parameterized_expression` xref:config-policy-reference.adoc#is_parameterized_expression[helper].
 
 .Policy to ban orbs from a specific namespace and detect parameterized orb references
-[source,rego]
+[source,go]
 ----
 import future.keywords
 import data.circleci.config
@@ -547,7 +547,7 @@ Consider an example to illustrate this:
 NOTE: This example is artificial and for illustration purposes only. The appropriate policy for enforcing job resource classes should target the compiled input (`++input._compiled_++`). This ensures proper validation against the resolved values.
 
 .Policy using an allowlist to restrict resource classes
-[source,rego]
+[source,go]
 ----
 import future.keywords
 
@@ -615,17 +615,17 @@ You can write config policies to govern projects that use dynamic configuration 
 
 If required for your project, you can encode rules to apply only to setup configs, or only to non-setup configs, as follows:
 
-[source,rego]
+[source,go]
 ----
 enable_hard["setup_rule"] { input.setup } # only applied to configs with `setup: true`
 ----
 
-[source,rego]
+[source,go]
 ----
 enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that do not have `setup: true`
 ----
 
-[source,rego]
+[source,go]
 ----
 enable_hard["some_rule"] # rule applied to all configs
 ----
@@ -641,7 +641,7 @@ in the config. It then sets the enforcement status of `use_official_docker_image
 
 This example also imports `future.keywords`, for more information see the link:https://www.openpolicyagent.org/docs/latest/policy-language/#future-keywords[OPA docs].
 
-[source,rego]
+[source,go]
 ----
 package org
 
