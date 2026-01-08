@@ -80,8 +80,8 @@ image::guides:ROOT:deploy/commit-config-button.png[Commit config button]
 
 . Alternatively, you can copy the suggested configuration into an existing or newly created deploy config file. Make sure the file is called `deploy.yml` and is located in the `.circleci` folder, for the system to detect and use this file. In this case, select btn:[I already have a deploy config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your deploy configuration.
 +
-.Already have config button
-image::guides:ROOT:deploy/already-have-config-button.png[Already have config button]
+#.Already have config button#
+#image::guides:ROOT:deploy/already-have-config-button.png[Already have config button]#
 
 . You can manually navigate to the pull request by selecting btn:[View pull Request].
 +
