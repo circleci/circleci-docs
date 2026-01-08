@@ -10,7 +10,7 @@
 == 1. Create buckets in MinIO
 CircleCI server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
 
-image::guides:ROOT:./minio/minio_install_0.png[Create a bucket in MinIO]
+image::guides:ROOT:minio/minio_install_0.png[Create a bucket in MinIO]
 
 [#create-circleci-data-bucket]
 === a. Create a `circleci-data` bucket.
@@ -18,13 +18,13 @@ Create a new bucket in MinIO named `circleci-data`.
 
 NOTE: This bucket can be given a different name, but references to it will need to be updated in the Helm `values.yaml` file.
 
-image::guides:ROOT:./minio/minio_created_buckets.png[Buckets created in MinIO]
+image::guides:ROOT:minio/minio_created_buckets.png[Buckets created in MinIO]
 
 [#configure-circleci-data-bucket]
 === b. Configure the `circleci-data` bucket.
 In the settings for the `circleci-data` bucket, change the access policy to `public`.
 
-image::guides:ROOT:./minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
+image::guides:ROOT:minio/minio_modify_access_policy.png[Setting circleci-data bucket access policy to public]
 
 [#copy-circleci-build-agent]
 == 2. Copy the CircleCI build agent
@@ -67,7 +67,7 @@ curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE
 === d. Create a release directory in the `circleci-data` bucket
 Using the version specified by `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In the following examples, a directory is created at the root of `circleci-data` in MinIO with the name `$CIRCLE_AGENT_VERSION`. Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
 
-image::guides:ROOT:./minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
+image::guides:ROOT:minio/minio_create_release_dir.png[Creating a directory in the circleci-data bucket]
 
 [#upload-checksums-file]
 === e. Upload the checksums.txt file to the newly created directory.
@@ -81,7 +81,7 @@ $CIRCLE_AGENT_VERSION/
 └── checksums.txt
 ----
 
-image::guides:ROOT:./minio/minio_upload_checksums.png[Uploading checksums.txt into the release directory]
+image::guides:ROOT:minio/minio_upload_checksums.png[Uploading checksums.txt into the release directory]
 
 [#create-new-subdirs]
 === f. Create two new subdirectories in the release directory
@@ -96,9 +96,9 @@ $CIRCLE_AGENT_VERSION/
     └── amd64/
 ----
 
-image::guides:ROOT:./minio/minio_create_linux_dir.png[Creating a Linux dir]
+image::guides:ROOT:minio/minio_create_linux_dir.png[Creating a Linux dir]
 
-image::guides:ROOT:./minio/minio_create_amd_dir.png[Creating an AMD dir]
+image::guides:ROOT:minio/minio_create_amd_dir.png[Creating an AMD dir]
 
 [#copy-build-agent-bin]
 === g. Copy the downloaded `circleci-agent` file
@@ -114,7 +114,7 @@ $CIRCLE_AGENT_VERSION/
         └── circleci-agent
 ----
 
-image::guides:ROOT:./minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
+image::guides:ROOT:minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
 
 [#next-steps]
 == Next steps

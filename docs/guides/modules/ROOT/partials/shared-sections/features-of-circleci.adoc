@@ -11,18 +11,22 @@ CircleCI runners allow you to use your own infrastructure for running jobs. Circ
 
 For more information about using CircleCI runners, see the xref:guides:execution-runner:runner-overview.adoc[CircleCI Runner Overview] page.
 
+ifndef::server[]
 === Flaky test detection
 The average failed workflow wastes approximately 30 minutes. Detecting flaky tests can save you significant amounts of time in your builds and workflows. Advanced insights are available to help you troubleshoot failed and flaky tests.
 
 For more detailed information about flaky tests, refer to the xref:guides:insights:insights-tests.adoc#flaky-tests[Test Insights] page.
+endif::server[]
 
 === Docker layer caching
 Reducing the time it takes to build a Docker image is an important consideration for developers who consistently use these images in their workflows. Consider using Docker Layer Caching (DLC) if building Docker images is a regular part of your CI/CD process. DLC saves image layers created within your jobs, rather than impact the actual container used to run your job. Efficiency features have been specifically designed to take advantage of Docker performance so you can build faster.
 
 For more information about Docker Layer Caching, refer to the xref:guides:optimize:docker-layer-caching.adoc[Enabling Docker Layer Caching] page.
 
+ifndef::server[]
 === Deploys
 
 Visualise and control your deployments with CircleCI deploys. Deployments to Kubernetes are supported.
 
 Start with the xref:guides:deploy:deployment-overview.adoc[Deploys overview] for more information.
+endif::server[]

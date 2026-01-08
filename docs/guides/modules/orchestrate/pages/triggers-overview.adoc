@@ -167,6 +167,12 @@ NOTE: Schedule triggers are not available for GitLab and Bitbucket Data Center p
 
 Schedule triggers allow you to trigger pipelines periodically based on a schedule. To get this set up for a project you can either use the CircleCI web app or use the link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[API v2]. For full details of both methods see the xref:schedule-triggers.adoc[Schedule Triggers] docs.
 
+== GitHub webhook settings
+
+It is possible to edit the webhooks in GitHub to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but does not change the types of hooks that trigger builds. CircleCI will always build push hooks, and build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings, CircleCI will not build.
+
+Refer to the link:https://developer.github.com/v3/repos/hooks/#edit-a-hook[GitHub Edit a Hook document] for details.
+
 [#next-steps]
 == Next steps
 

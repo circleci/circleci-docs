@@ -1,3 +1,5 @@
+[.table-scroll]
+--
 [cols="1,1,1,2,1,1", options="header"]
 |===
 | Config
@@ -7,13 +9,21 @@
 | VM Software Manifest
 | Release Notes
 
-| `26.1.0`
-| Xcode 26.1 Beta 2 (17B5035f)
+| `26.2.0`
+| Xcode 26.2.0 (17C5038g)
 | 15.6
 a| `m4pro.medium` +
    `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15768/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-26-1-beta-2-available/[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15910/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-2-beta-2-available[Release Notes]
+
+| `26.1.1`
+| Xcode 26.1.1 (17B100)
+| 15.6
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15895/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-1-1-available/[Release Notes]
 
 | `26.0.1`
 | Xcode 26.0.1 (17A400)
@@ -47,7 +57,8 @@ a| `m4pro.medium` +
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15328/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-16-3-available/[Release Notes]
 
-| `16.2.0`
+| `16.2.0` +
+  **link:https://circleci.com/changelog/deprecation-of-xcode-16-2/[EOL]: January 14, 2026**
 | Xcode 16.2 GA (16C5032a)
 | 14.6.1
 a| `m4pro.medium` +
@@ -62,10 +73,7 @@ a| `m4pro.medium` +
 | `16.1.0`
 | Xcode 16.1 (16B40)
 | 14.6.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -75,10 +83,7 @@ a| `m4pro.medium` +
 | `16.0.0`
 | Xcode 16.0 (16A242d)
 | 14.6.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -100,10 +105,7 @@ a| `m4pro.medium` +
 | `15.3.0`
 | Xcode 15.3 (15E204a)
 | 14.3.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -113,10 +115,7 @@ a| `m4pro.medium` +
 | `15.2.0`
 | Xcode 15.2 (15C500b)
 | 14.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -126,10 +125,7 @@ a| `m4pro.medium` +
 | `15.1.0`
 | Xcode 15.1 (15C65)
 | 14.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
@@ -191,13 +187,11 @@ a| `m2pro.medium` +
 | `13.4.1`
 | Xcode 13.4.1 (13F100)
 | 12.6.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   _(M4 support link:https://circleci.com/changelog/deprecation-of-eol-xcode-versions/[ends on] Nov 7, 2025)_ +
-   `m2pro.medium` +
+a| `m2pro.medium` +
    `m2pro.large` +
    `macos.m1.medium.gen1` +
    `macos.m1.large.gen1`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v11776/manifest.txt[Installed software]
 | link:https://discuss.circleci.com/t/announcing-m1-large-now-available-on-performance-plans/47797/22[Release Notes]
 |===
+--

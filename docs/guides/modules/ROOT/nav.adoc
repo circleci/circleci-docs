@@ -18,6 +18,7 @@
 *** xref:getting-started:language-javascript.adoc[Node.js quickstart]
 *** xref:getting-started:language-python.adoc[Python quickstart]
 *** xref:getting-started:language-go.adoc[Go quickstart]
+*** xref:getting-started:create-an-organization.adoc[Create an organization]
 ** Tutorials
 *** xref:getting-started:config-intro.adoc[Configuration intro]
 *** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
@@ -119,7 +120,7 @@
 *** xref:execution-runner:install-machine-runner-3-on-linux.adoc[Install machine runner 3 on Linux]
 *** xref:execution-runner:install-machine-runner-3-on-macos.adoc[Install machine runner 3 on macOS]
 *** xref:execution-runner:install-machine-runner-3-on-windows.adoc[Install machine runner 3 on Windows]
-*** xref:execution-runner:install-machine-runner-3-on-docker.adoc[Install on Docker]
+*** xref:execution-runner:install-machine-runner-3-on-docker.adoc[Install machine runner 3 on Docker]
 *** xref:execution-runner:machine-runner-3-manual-installation.adoc[Manual install on Linux and macOS]
 *** xref:execution-runner:machine-runner-3-manual-installation-on-windows.adoc[Manual install on Windows]
 *** xref:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc[Migrate from launch agent to machine runner 3 on Linux]
@@ -146,6 +147,8 @@
 *** xref:test:test.adoc[Automated testing]
 *** xref:test:collect-test-data.adoc[Collecting test data]
 *** xref:insights:insights-tests.adoc[Test Insights]
+** Manage and optimize tests
+*** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
@@ -217,6 +220,7 @@
 ** xref:insights:insights-glossary.adoc[Insights glossary]
 
 * Manage roles, permissions, and authentication
+** xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide]
 ** Roles and permissions
 *** xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]
 *** xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions]
@@ -270,12 +274,7 @@
 *** xref:integration:notifications.adoc[Notifications]
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS integration overview]
-*** xref:integration:github-apps-integration.adoc[GitHub App integration]
-*** xref:integration:github-integration.adoc[GitHub OAuth app integration]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
-*** xref:integration:gitlab-integration.adoc[GitLab integration]
-*** xref:integration:bitbucket-data-center-integration.adoc[Bitbucket data center integration]
-*** xref:integration:bitbucket-integration.adoc[Bitbucket Cloud integration]
 *** xref:integration:oss.adoc[Build open source projects]
 
 ** Third-party integrations
@@ -293,6 +292,7 @@
 * Developer toolkit
 ** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
 ** AI features
+*** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 ** CLI

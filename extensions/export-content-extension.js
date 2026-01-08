@@ -49,7 +49,8 @@ function collectPages(contentCatalog, siteUrl) {
     'server-4.4',
     'server-4.5',
     'server-4.6',
-    'server-4.7'
+    'server-4.7',
+    'server-4.8'
   ];
 
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {

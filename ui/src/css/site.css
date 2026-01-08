@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "typeface-inter.css";
 @import "typeface-ibm-plex-mono.css";
+@import "typeface-roboto.css";
 @import "vars.css";
 @import "base.css";
 @import "body.css";
@@ -8,6 +9,7 @@
 @import "toc.css";
 @import "doc.css";
 @import "highlight.css";
+@import "shiki.css";
 @import "print.css";
 @import "tabs.css";
 @import "datatables.css";

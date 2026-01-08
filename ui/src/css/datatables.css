@@ -19,7 +19,8 @@ table.datatable {
 }
 
 table.datatable thead th {
-  @apply px-4 py-3 text-left border-b border-gray-200;
+  @apply p-4 text-left border-b border-gray-200;
+  font-size: 18px;
 }
 
 table.datatable thead th:hover {
@@ -29,7 +30,7 @@ table.datatable thead th:hover {
 /* Simple DataTables handles sorting indicators automatically */
 table.datatable thead th[data-sortable] {
   @apply cursor-pointer select-none;
-  min-width: 80px; /* Minimum width to prevent overlap */
+  min-width: 100px; /* Minimum width to prevent overlap */
 }
 
 table.datatable thead th[data-sortable]:hover {
@@ -73,7 +74,8 @@ table.datatable thead th[data-sortable="true"]:hover .datatable-sorter::before {
 }
 
 table.datatable tbody td {
-  @apply px-4 py-3 border-b border-gray-200;
+  @apply p-4 border-b border-gray-200;
+  font-size: 16px;
 }
 
 table.datatable tbody tr:hover {

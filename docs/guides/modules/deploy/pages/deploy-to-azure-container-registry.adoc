@@ -59,4 +59,4 @@ workflows:
               only: main # Only deploys when the commit is on the `main` branch
 ```
 
-If pushing to your repository is required, see the "Deployment Keys" section of the xref:integration:github-integration.adoc#deploy-keys-and-user-keys[GitHub] or xref:integration:bitbucket-integration.adoc#deploy-keys-and-user-keys[Bitbucket Cloud] instructions. Then, configure the Azure Web App to use your production branch.
+If pushing to your repository is required, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#enable-project-to-check-out-additional-private-repositories[Users, Organizations, and Integrations Guide]. Then, configure the Azure Web App to use your production branch.

@@ -40,7 +40,7 @@ The following is a copy of the `.circleci/config.yml` template that you will *ed
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-[source,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 
@@ -78,11 +78,13 @@ Test splitting is typically set up within a job. In this tutorial you will modif
 [#step-one-add-the-project]
 == 1. Add the project
 
-To get started, you need to get the sample app building as a project on CircleCI. If you are using GitHub the steps are slightly different depending on whether you have a GitHub OAuth app or CircleCI GitHub App integration. To find out which integration you have, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
+To get started, you need to get the sample app building as a project on CircleCI.
+
+The steps are a little different depemding on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
 
 [tabs]
 ====
-GitHub Oauth app::
+`github` type organization::
 +
 --
 . link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[Fork the repository] on GitHub.
@@ -122,7 +124,7 @@ Feel free to take a look at the steps run in the pipeline by expanding the green
 +
 image::guides:ROOT:test-splitting-first-setup-steps.png[Steps run successfully within the job]
 --
-Bitbucket Cloud::
+`bitbucket` type organization::
 +
 --
 . Import the project code into Bitbucket, using the repo URL: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
@@ -162,7 +164,7 @@ Feel free to take a look at the steps run in the pipeline by expanding the green
 +
 image::guides:ROOT:test-splitting-first-setup-steps.png[Steps run successfully within the job]
 --
-GitHub App, GitLab, Bitbucket Data Center::
+`circleci` type organization::
 +
 --
 . link:https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial/fork[Fork the repository] if you are using GitHub, or import to Bitbucket or GitLab using the repository URL: `https://github.com/CircleCI-Public/circleci-react-test-splitting-tutorial`
@@ -192,7 +194,7 @@ steps:
     command: yarn test
 ----
 
-. After you've made these changes, go ahead and select btn:[Commit and Run]. This will commit the changes in a new feature branch called `circleci-project-setup` and trigger a new pipeline. Select **Dashboard** from the web app side bar, and use the filters to find your project to watch your pipeline run.
+. After you have made these changes, go ahead and select btn:[Commit and Run]. This will commit the changes in a new feature branch called `circleci-project-setup` and trigger a new pipeline. Select **Dashboard** from the web app side bar, and use the filters to find your project to watch your pipeline run.
 +
 image::guides:ROOT:test-splitting-first-pipeline.png[Successful pipeline run]
 +
@@ -330,7 +332,7 @@ Requested weighting by historical based timing, but they are not present. Fallin
 +
 CircleCI defaults to splitting tests by name. As this is the first time you are storing test data from the pipeline, CircleCI does not yet have timing data to work with.
 // Check if this applies to GitLab
-
++
 On subsequent runs, you'll see an additional step labelled **Downloading previous test results**:
 +
 image::guides:ROOT:downloading-previous-test-results-step.png[Downloading previous test results step]

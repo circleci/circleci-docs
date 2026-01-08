@@ -1,6 +1,6 @@
-# CircleCI Docs Static Site: Technical Reference
+# CircleCI docs site: Technical Reference
 
-This technical reference provides detailed information about the CircleCI Docs Static Site's components, configuration options, and integration points.
+This technical reference provides detailed information about the CircleCI docs site's components, configuration options, and integration points.
 
 ## Table of Contents
 - [Antora Configuration](#antora-configuration)

@@ -33,7 +33,7 @@ If you have not already done so, create a `.circleci` folder at the root of your
 
 The sample code below shows the basics you need to set up Slack notifications into your `config.yml` file. You can copy and paste the whole thing or take the individual elements and incorporate into your project `config.yml` file:
 
-[source,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 orbs:
@@ -74,7 +74,6 @@ The following commentary describes what occurs in the main elements of the sampl
 * *Lines 8-9:* This is a step which must be called `slack/notify` to work with the Slack orb.
 * *Lines 10-24:* This custom block includes a basic notification from the Slack Block Kit Builder. As you can see, it is in JSON format. In Part 3, you will use more sophisticated templates.
 * *Line 25:* The `event: always` parameter means this notification is triggered for _all_ event types. In Part 3, you will use different notifications for different events.
-* *Line 30:* This references a CircleCI context where you will save your Slack credentials in Step 2.
 
 Now you have a basic `config.yml` file set up, you can connect CircleCI with Slack.
 
@@ -225,7 +224,7 @@ The Slack orb includes several notification templates you can use to notify your
 
 To use these templates in your job, include the `event` and `template` parameters under `steps` in the `config.yml` file. For example:
 
-[source,yaml]
+[%linenums,yaml]
 ----
 jobs:
   notify:

@@ -2,6 +2,8 @@
 :page-noindex: true
 :experimental:
 
+pass:[<!-- vale off -->]
+
 [#styling-text]
 == Styling text
 
@@ -94,3 +96,42 @@ This is a longer admonition with an ordered list:
 . Step 2
 . Step 3
 ****
+
+== Using tabs
+
+Use tabs for showing different options:
+
+[source,adoc]
+----
+[tabs]
+====
+Tab A::
++
+--
+Content for Tab A
+--
+Tab B::
++
+--
+Content for Tab B
+--
+====
+----
+
+Looks like:
+
+[tabs]
+====
+Tab A::
++
+--
+Content for Tab A
+--
+Tab B::
++
+--
+Content for Tab B
+--
+====
+
+pass:[<!-- vale on -->]

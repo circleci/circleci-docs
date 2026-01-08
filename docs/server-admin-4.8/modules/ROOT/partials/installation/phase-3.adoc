@@ -1,4 +1,4 @@
-Before you begin with the CircleCI server v4.8 execution environment installation phase, ensure you have run through the following:
+Before you begin with the CircleCI Server v4.8 execution environment installation phase, ensure you have run through the following:
 
 ifndef::env-aws[]
 * xref:server-admin:installation:phase-1-gcp-prerequisites.adoc#[Phase 1 GCP – Prerequisites]
@@ -14,7 +14,7 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 
 == Introduction
 
-Execution environments in CircleCI server are resourced in the following ways:
+Execution environments in CircleCI Server are resourced in the following ways:
 
 * HashiCorp Nomad is used for scheduling jobs and running Docker jobs.
 ** Nomad Servers can either be installed and configured within your Kubernetes cluster, or outside of your cluster within their own VMs. Nomad Servers are used for scheduling jobs.
@@ -31,7 +31,7 @@ Nomad is a workload orchestration tool that CircleCI uses to schedule (through N
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad Server) can be installed within the cluster or externally. Communication between your Nomad Clients and the Nomad control plane is secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete installation of the Nomad Clients.
 
-NOTE: If you are installing CircleCI server locally, rather than in AWS or GCP, see the xref:server-admin:air-gapped-installation:phase-4-configure-nomad-clients.adoc#[Air-gapped] docs on setting up Nomad clients.
+NOTE: If you are installing CircleCI Server locally, rather than in AWS or GCP, see the xref:server-admin:air-gapped-installation:phase-4-configure-nomad-clients.adoc#[Air-gapped] docs on setting up Nomad clients.
 
 [#create-your-cluster-with-terraform]
 === a. Create your cluster with Terraform
@@ -102,7 +102,7 @@ terraform apply
 
 NOTE: The AMIs used in our Terraform are now based on Ubuntu 22.04 with CgroupsV1 enabled. CgroupsV2 is currently unsupported. These Nomad AMIs are built with automatic security updates enabled. You may use our AMIs as a base to build images with your own customizations or use the AWS image builder to create your own Nomad AMIs. Currently the only requirement is Ubuntu 22.04 with CgroupsV1 enabled.
 
-After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe. The apply process usually only takes a minute.
+After Terraform is done spinning up the Nomad client(s), it outputs the certificates and keys needed for configuring the Nomad control plane in CircleCI Server. Copy them somewhere safe. The apply process usually only takes a minute.
 
 // Stop hiding from GCP PDF:
 endif::env-gcp[]
@@ -115,12 +115,12 @@ ifndef::env-aws[]
 
 You need the following information:
 
-* The Domain name of the CircleCI application
-* The GCP Project you want to run Nomad clients in
-* The GCP Zone you want to run Nomad clients in
-* The GCP Region you want to run Nomad clients in
-* The GCP Network you want to run Nomad clients in
-* The GCP Subnetwork you want to run Nomad clients in
+* The Domain name of the CircleCI application.
+* The GCP Project you want to run Nomad clients in.
+* The GCP Zone you want to run Nomad clients in.
+* The GCP Region you want to run Nomad clients in.
+* The GCP Network you want to run Nomad clients in.
+* The GCP Subnetwork you want to run Nomad clients in.
 
 A full example, as well as a full list of variables, can be found in the link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[example GCP Terraform configuration].
 
@@ -141,7 +141,7 @@ terraform plan
 terraform apply
 ----
 
-After Terraform is done spinning up the Nomad client(s), it outputs the certificates and key needed for configuring the Nomad control plane in CircleCI server. Copy them somewhere safe.
+After Terraform is done spinning up the Nomad client(s), it outputs the certificates and key needed for configuring the Nomad control plane in CircleCI Server. Copy them somewhere safe.
 
 // Stop hiding from AWS page
 endif::env-aws[]
@@ -304,9 +304,9 @@ In the previous section you deployed your Nomad clients and have the IAM resourc
 [#where-to-deploy-nomad-servers]
 === a. Where to deploy Nomad servers
 
-Nomad Servers are by default deployed within your CircleCI server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the Terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
+Nomad Servers are by default deployed within your CircleCI Server cluster. However, Nomad Servers may be deployed externally. As with the Nomad clients, you can use the Terraform module CircleCI provides to deploy your Nomad Servers or as a guide for how such a deployment might look.
 
-* If you wish to deploy your Nomad servers inside your CircleCI server cluster, continue to <<nomad-gossip-encryption-key>> below.
+* If you wish to deploy your Nomad servers inside your CircleCI Server cluster, continue to <<nomad-gossip-encryption-key>> below.
 * If you wish to deploy your Nomad servers externally, follow these steps:
 
 .. Update your Terraform by setting the variable `nomad_server_enabled` to `true`.
@@ -324,8 +324,15 @@ endif::env-gcp[]
 nomad:
   server:
     internal: false
-    serverHostname: <your nomad server domain or load-balancer>
+    serverHostname: <the domain or ip of your nomad server loadbalancer>
+
+  clients:
+    mTLS:
+      CACertificate: <base64 encoded CA Certificate from your terraform output>
+      certificate: <base64 encoded Certificate from your terraform output>
+      privateKey: <base64 encoded Client Private Key from your terraform output>
 ----
+.. If you externalize your Nomad servers then the following blocks should be removed from your `values.yaml`: `nomad.server.replicas`, `nomad.server.gossip` and `nomad.server.rpc`.
 .. Once the above is complete, you can skip ahead to <<nomad-autoscaler>>.
 
 
@@ -370,7 +377,7 @@ CircleCI will create the Kubernetes Secret `nomad-gossip-encryption-key` automat
 [#nomad-mtls]
 === c. Nomad mTLS
 
-The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI server installation. The values must be base64 encoded.
+The `CACertificate`, `certificate` and `privateKey` can be found in the output of the Terraform module. You may either add the mTLS cert values to your `values.yaml` or you may create a secret named `nomad-mtls` in the same namespace as your CircleCI Server installation. The values must be base64 encoded.
 
 [tabs]
 ====
@@ -491,7 +498,7 @@ Apply the changes made to your `values.yaml` file:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml>
 ----
 
 [#nomad-clients-validation]
@@ -534,11 +541,12 @@ git remote set-url origin <YOUR_GH_REPO_URL>
 git push
 ----
 
-Once you have successfully cloned the repository, you can follow it from within your CircleCI server installation. You need to set the following variables. For full instructions refer to the link:https://github.com/circleci/realitycheck#prerequisites-1[repository README].
+Once you have successfully cloned the repository, you can follow it from within your CircleCI Server installation. You need to set the following variables. For full instructions refer to the link:https://github.com/circleci/realitycheck#prerequisites-1[repository README].
 
+[.table-scroll]
+--
 .Environmental Variables
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[cols=2*, options="header"]
 |===
 |Name
 |Value
@@ -546,16 +554,15 @@ Once you have successfully cloned the repository, you can follow it from within 
 |CIRCLE_HOSTNAME
 |<YOUR_CIRCLECI_INSTALLATION_URL>
 
-|CIRCLE_TOKEN
-|<YOUR_CIRCLECI_API_TOKEN>
-
 |CIRCLE_CLOUD_PROVIDER
 |< `aws`, `gcp`, or `other` >
 |===
+--
 
+[.table-scroll]
+--
 .Contexts
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[cols=3*, options="header"]
 |===
 |Name
 |Environmental Variable Key
@@ -569,9 +576,11 @@ Once you have successfully cloned the repository, you can follow it from within 
 |MULTI_CONTEXT_END_TO_END_VAR
 |Leave blank
 |===
+--
 
 Once you have configured the environmental variables and contexts, rerun the Reality Check tests. You should see the features and resource jobs complete successfully. Your test results should look something like the following:
 
+.Reality Check pipeline results
 image::guides:ROOT:realitycheck-pipeline.png[Screenshot showing the Reality Check project building in the CircleCI app]
 
 [#machine-provisioner]
@@ -579,16 +588,16 @@ image::guides:ROOT:realitycheck-pipeline.png[Screenshot showing the Reality Chec
 
 NOTE: Overriding scaling options is currently not supported, but will be supported in the future.
 
-Machine provisioner is used to configure virtual machines for jobs that run in Linux VM, Windows and Arm VM execution environments, and those that are configured to use xref:reference:ROOT:configuration-reference.adoc#setupremotedocker[remote Docker]. Machine provisioner is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
+Machine provisioner is used to configure virtual machines for jobs that run in Linux VM, Windows and Arm VM execution environments, and those that are configured to use xref:reference:ROOT:configuration-reference.adoc#setupremotedocker[Remote Docker]. Machine provisioner is unique to AWS and GCP installations because it relies on specific features of these cloud providers.
 
 Once you have completed the server installation process you can further configure machine provisioner, including the following:
 
 * Building and specifying a Windows image to give developers access to the Windows execution environment.
 * Specifying an alternative Linux machine image, and specifying a number of preallocated instances to remain spun up at all times.
 
-For more information, see the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Manage Virtual Machines with machine provisioner] page.
+For more information, see the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Manage Virtual Machines With Machine Provisioner] page.
 
-Before moving on to platform specific steps, create your firewall rules. External VMs need the networking rules described in xref:installation:hardening-your-cluster.adoc#external-vms[Hardening your Cluster]
+Before moving on to platform specific steps, create your firewall rules. External VMs need the networking rules described in xref:installation:hardening-your-cluster.adoc#external-vms[Hardening Your Cluster].
 
 ifndef::env-gcp[]
 
@@ -598,7 +607,7 @@ ifndef::env-gcp[]
 [#set-up-security-group]
 ==== Set up security group
 
-. *Get the information needed to create security groups*
+. *Get the information needed to create security groups.*
 +
 The following command returns your VPC ID (`vpcId`) and CIDR Block (`serviceIpv4Cidr`) which you need throughout this section:
 +
@@ -611,7 +620,7 @@ aws eks describe-cluster --name=<cluster-name> --query "cluster.resourcesVpcConf
 aws eks describe-cluster --name=<cluster-name> --query "cluster.kubernetesNetworkConfig.serviceIpv4Cidr" --region=<region> --output text | xargs
 ----
 
-. *Create a security group*
+. *Create a security group.*
 +
 Run the following commands to create a security group for machine provisioner:
 +
@@ -641,8 +650,8 @@ aws ec2 authorize-security-group-ingress --group-id "<VM_SECURITY_GROUP_ID>" --p
 
 Authenticate CircleCI with your cloud provider in one of two ways:
 
-* IAM Roles for Service Accounts (IRSA) - **recommended**
-* IAM access keys
+* IAM Roles for Service Accounts (IRSA) - **recommended**.
+* IAM access keys.
 
 [tabs]
 ====
@@ -651,7 +660,7 @@ IRSA::
 --
 The following is a summary of link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[AWS's Documentation on IRSA] that is sufficient for configuring machine provisioner in CircleCI.
 
-. *Create Identity Provider*
+. *Create Identity Provider.*
 +
 Create an IAM OIDC Identity Provider for your EKS Cluster:
 +
@@ -660,7 +669,7 @@ Create an IAM OIDC Identity Provider for your EKS Cluster:
 eksctl utils associate-iam-oidc-provider --cluster <CLUSTER_NAME> --approve
 ----
 
-. *Get ARN*
+. *Get ARN.*
 +
 Get the OIDC provider ARN with the following command, you will need it in later steps:
 +
@@ -669,7 +678,7 @@ Get the OIDC provider ARN with the following command, you will need it in later 
 aws iam list-open-id-connect-providers | grep $(aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | awk -F'/' '{print $NF}')
 ----
 
-. *Get URL*
+. *Get URL.*
 +
 Get your OIDC provider URL, you will need it in later steps
 +
@@ -678,7 +687,7 @@ Get your OIDC provider URL, you will need it in later steps
 aws eks describe-cluster --name <CLUSTER_NAME> --query "cluster.identity.oidc.issuer" --output text | sed -e "s/^https:\/\///"
 ----
 
-. *Create role*
+. *Create role.*
 +
 Create the role using the command and trust policy template below, you will need the Role ARN and name in later steps:
 +
@@ -709,7 +718,7 @@ aws iam create-role --role-name circleci-vm --assume-role-policy-document file:/
 }
 ----
 
-. *Create policy*
+. *Create policy.*
 +
 Create the policy using the command and template below.  Fill in the security group ID and the VPC ID:
 +
@@ -800,7 +809,7 @@ aws iam create-policy --policy-name circleci-vm --policy-document file://<POLICY
 
 ----
 
-. *Attach policy*
+. *Attach policy.*
 +
 Attach the policy to the role:
 +
@@ -809,7 +818,7 @@ Attach the policy to the role:
 aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_ARN>
 ----
 
-. *Configure machine provisioner*
+. *Configure machine provisioner.*
 +
 Configure machine provisioner by adding the following to `values.yaml`:
 +
@@ -832,7 +841,7 @@ machine_provisioner:
 IAM Access Keys::
 +
 --
-. *Create user*
+. *Create user.*
 +
 Create a new user with programmatic access:
 +
@@ -844,7 +853,7 @@ aws iam create-user --user-name circleci-machine-provisioner
 Optionally, machine provisioner does support the use of a link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[service account role] in place of AWS keys. If you would prefer to use a role, follow these link:https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html[instructions] using the policy in step 6 below.
 Once done, you may skip to step 9, enabling machine provisioner.
 +
-. *Create policy*
+. *Create policy.*
 +
 Create a `policy.json` file with the following content. You should fill in the ID of the machine provisioner security group created in step 2 (`MachineProvisionerSecurityGroupID`) and VPC ID (`vpcID`) below.
 +
@@ -929,7 +938,7 @@ Create a `policy.json` file with the following content. You should fill in the I
 }
 ----
 
-. *Attach policy to user*
+. *Attach policy to user.*
 +
 Once you have created the policy.json file, attach it to an IAM policy and created user:
 +
@@ -947,7 +956,7 @@ If you have not already created them, you will need an access key and secret for
 aws iam create-access-key --user-name circleci-machine-provisioner
 ----
 
-. *Configure server (there are two options)*
+. *Configure server (there are two options).*
 +
 * *Option 1 - Add the keys to `values.yaml`*
 Add the machine provisioner configuration to `values.yaml`.
@@ -1013,7 +1022,7 @@ databaseEncryption:
 …
 ----
 
-. *Create user*
+. *Create user.*
 +
 We recommend you create a unique service account to be used exclusively by machine provisioner. The Compute Instance Admin (Beta) role is broad enough to allow machine provisioner to operate. If you wish to make permissions more granular, you can use the Compute Instance Admin (beta) role link:https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[documentation] as reference.
 +
@@ -1022,16 +1031,16 @@ We recommend you create a unique service account to be used exclusively by machi
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ----
 +
-NOTE: If you are deploying CircleCI server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
+NOTE: If you are deploying CircleCI Server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
 
-. *Get the service account email address*
+. *Get the service account email address.*
 +
 [source,shell]
 ----
 gcloud iam service-accounts list --filter="displayName:circleci-server-vm service account" --format 'value(email)'
 ----
 
-. *Apply role to service account*
+. *Apply role to service account.*
 +
 Apply the Compute Instance Admin (beta) role to the service account:
 +
@@ -1084,7 +1093,7 @@ gcloud iam service-accounts keys create circleci-server-vm-keyfile --iam-account
 --
 ====
 
-. *Configure CircleCI server*
+. *Configure CircleCI Server*
 +
 When using service account keys for configuring access for the machine provisioner, there are two options.
 +
@@ -1146,10 +1155,10 @@ Apply they changes made to your `values.yaml` file.
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml>
 ----
 
-Once you have configured and deployed CircleCI server, you should validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
+Once you have configured and deployed CircleCI Server, you should validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
 
 [#runner]
 == 4. Runner
@@ -1157,9 +1166,9 @@ Once you have configured and deployed CircleCI server, you should validate that 
 [#overview]
 === Overview
 
-CircleCI runner does not require any additional server configuration. CircleCI server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:guides:execution-runner:runner-overview.adoc#[runner documentation].
+CircleCI runner does not require any additional server configuration. CircleCI Server ships ready to work with runner. However, you need to create a runner and configure the runner agent to be aware of your server installation. For complete instructions for setting up runner, see the xref:guides:execution-runner:runner-overview.adoc#[Runner Documentation].
 
-NOTE: Runner requires a namespace per organization. CircleCI server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
+NOTE: Runner requires a namespace per organization. CircleCI Server can have many organizations. If your company has multiple organizations within your CircleCI installation, you need to set up a runner namespace for each organization within your server installation.
 
 ifndef::pdf[]
 

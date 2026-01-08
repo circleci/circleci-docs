@@ -1,6 +1,6 @@
 = Project values and variables
 :page-platform: Cloud, Server v4+
-:description: A list of all built-in variables for your CircleCI projects.
+:page-description: A list of all built-in variables for your CircleCI projects.
 :experimental:
 
 This page is a reference for all built-in values available for use in your CircleCI projects.
@@ -258,7 +258,7 @@ build:
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
 
-NOTE: For GitHub users, refer to the xref:guides:integration:github-apps-integration.adoc[GitHub App integration] or xref:guides:integration:github-integration.adoc[GitHub OAuth app integration] guides to check which integration type applies to you.
+The pipeline values available to you depend on your pipeline/integration type, as shown in the "Source" column of the table below.
 
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 

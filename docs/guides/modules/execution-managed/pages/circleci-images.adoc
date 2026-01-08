@@ -62,8 +62,7 @@ next-generation convenience images are based on this image.
 
 *When to use it?*
 
-If you need a generic image to run on CircleCI, to use with orbs, or to use as a
-base for your own custom Docker image, this image is for you.
+If you need a generic image to use with orbs, or to use as a base for your own custom Docker image, this image is for you.
 
 *Resources*
 
@@ -84,9 +83,9 @@ This Go image is a direct replacement for the legacy CircleCI Go image (`circlec
 [#best-practices]
 == Best practices
 
-The next-gen convenience images in the following sections are based on the most recent Ubuntu LTS Docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
+The next-gen convenience images in the following sections are based on the most recent Ubuntu LTS Docker images. Next-gen images have base libraries for languages and/or services. It is best practice to use the most specific image possible to make your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
-That is, to prevent unintended changes that come from upstream, instead of using `cimg/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
+To prevent unintended changes from upstream, instead of using `cimg/ruby:2.4-node` use a more specific version of these containers. This ensures the image does not change with upstream changes until you change the tag.
 
 For example, pin down those images to a specific point version, like `cimg/ruby:2.4.10-node`. Specifying the version is possible for any of the CircleCI images.
 
@@ -274,13 +273,7 @@ All convenience images have been extended with additional tools, installed with 
 * `xvfb` (legacy images only)
 * `zip`
 
-The specific version of a particular package that gets installed in a particular
-CircleCI image variant depends on the default version included in the package
-directory for the Linux distribution/version installed in that variant's base
-image. The legacy CircleCI convenience images are https://packages.debian.org/jessie/[Debian Jessie]-
-or https://packages.debian.org/stretch/[Stretch]-based images,
-however the next-gen images, `cimg`, extend the official https://packages.ubuntu.com[Ubuntu] image.
-For details on the next-gen images, see the https://circleci.com/developer/images/[Developer Hub]. Each image is tracked in its own repository.
+The specific version of a package that gets installed in a CircleCI image variant depends on the default version included in the package directory for the Linux distribution/version installed in that variant's base image. The legacy CircleCI convenience images are link:https:/ packages.debian.org/jessie/[Debian Jessie]- or https://packages.debian.org/stretch/[Stretch]-based images, however the next-gen images, `cimg`, extend the official https://packages.ubuntu.com[Ubuntu] image. For details on the next-gen images, see the https://circleci.com/developer/images/[Developer Hub]. Each image is tracked in its own repository.
 
 The following packages are pre-installed in convenience images using `curl` or other means.
 
@@ -319,6 +312,8 @@ does *not* control which tags are used. These tags are chosen and maintained
 by upstream projects. Do not assume that a given tag has the same meaning across
 images.
 
+[.table-scroll]
+--
 [cols="1,1,2,1", options="header"]
 |===
 |Image name |Resources |Usage |Tags
@@ -413,6 +408,7 @@ images.
 |`- image: circleci/rust:[TAG]`
 |https://hub.docker.com/r/circleci/rust/tags?ordering=last_updated[Tags]
 |===
+--
 
 [#next-steps]
 == Next steps

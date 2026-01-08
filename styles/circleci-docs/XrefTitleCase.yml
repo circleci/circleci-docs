@@ -1,0 +1,87 @@
+---
+extends: script
+scope: raw
+level: error
+message: "Use title case for xref link text."
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  lines := text.split(scope, "\n")
+
+  // Words that should not be capitalized in title case (unless first/last word)
+  // Articles, coordinating conjunctions, and short prepositions only
+  lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
+                      "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
+
+  for i, line in lines {
+    // Find all xref patterns: xref:path[Link Text]
+    xref_pattern := "xref:[^\\[]+\\[([^\\]]+)\\]"
+    xref_matches := text.re_find(xref_pattern, line)
+
+    for match_group in xref_matches {
+      // match_group[0] is the full match, match_group[1] is the capture group (link text)
+      if len(match_group) > 1 {
+        link_text := match_group[1]["text"]
+
+        // Skip if empty or contains only special chars
+        if link_text == "" || text.trim_space(link_text) == "" {
+          continue
+        }
+
+        // Split into words
+        words := text.split(link_text, " ")
+        has_error := false
+
+        for word_idx, word in words {
+          // Skip empty words
+          if word == "" || text.trim_space(word) == "" {
+            continue
+          }
+
+          // Remove any trailing punctuation for checking
+          clean_word := text.trim_right(word, ".,;:!?")
+
+          // Skip if not alphabetic (numbers, etc.)
+          if !text.re_match("[a-zA-Z]", clean_word) {
+            continue
+          }
+
+          // Get first character
+          first_char := text.substr(clean_word, 0, 1)
+          is_capitalized := text.re_match("[A-Z]", first_char)
+
+          // Check if word should be lowercase (not first or last word)
+          is_first := word_idx == 0
+          is_last := word_idx == len(words) - 1
+          should_be_lowercase := false
+
+          if !is_first && !is_last {
+            lower_word := text.to_lower(clean_word)
+            for lw in lowercase_words {
+              if lower_word == lw {
+                should_be_lowercase = true
+                break
+              }
+            }
+          }
+
+          // Check for violations
+          if should_be_lowercase && is_capitalized {
+            has_error = true
+            break
+          } else if !should_be_lowercase && !is_capitalized {
+            has_error = true
+            break
+          }
+        }
+
+        if has_error {
+          start := text.index(scope, line)
+          matches = append(matches, {begin: start, end: start + len(line)})
+          break  // Only report once per line
+        }
+      }
+    }
+  }
