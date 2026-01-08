@@ -47,7 +47,7 @@ For example, if you want to use version 3.5 of the https://hub.docker.com/_/alpi
 
 In your `Dockerfile`, extend the base image by using the https://docs.docker.com/engine/reference/builder/#from[`FROM` instruction].
 
-[,Dockerfile]
+[,docker]
 ----
 FROM golang:1.8.0
 ----
@@ -57,7 +57,7 @@ FROM golang:1.8.0
 
 To install any additional tools or execute other commands, use the https://docs.docker.com/engine/reference/builder/#run[`RUN` instruction].
 
-[,Dockerfile]
+[,docker]
 ----
 RUN apt-get update && apt-get install -y netcat
 RUN go get github.com/jstemmer/go-junit-report
@@ -84,7 +84,7 @@ NOTE: If you do not install these tools with a package manager, you must use the
 
 To add files and directories that are not present in package managers, use the https://docs.docker.com/engine/reference/builder/#add[`ADD` instruction].
 
-[,Dockerfile]
+[,docker]
 ----
 ADD ./workdir/contacts /usr/bin/contacts
 ADD ./db/migrations /migrations
@@ -97,7 +97,7 @@ To run the container as an executable, use the https://docs.docker.com/engine/re
 By default, CircleCI will ignore the entrypoint for a job's primary container.
 To preserve the entrypoint even when the image is used for a primary container, use the https://docs.docker.com/engine/reference/builder/#label[`LABEL` instruction] as shown below.
 
-[,Dockerfile]
+[,docker]
 ----
 LABEL com.circleci.preserve-entrypoint=true
 
@@ -203,7 +203,7 @@ The example starts with the link:https://hub.docker.com/_/ruby/[Ruby 2.1] image.
 
 Notice the environment variables that are used to pull in the correct versions.
 
-[,dockerfile]
+[,docker]
 ----
 FROM buildpack-deps:jessie
 
@@ -281,7 +281,7 @@ CMD [ "irb" ]
 
 This will create a Ruby 2.1 image. Next, install node modules, `awscli`, and PostgreSQL 9.5 using the node:7.4 Dockerfile:
 
-[,dockerfile]
+[,docker]
 ----
 FROM buildpack-deps:jessie
 
@@ -323,7 +323,7 @@ Remove the associated files before committing the Docker image to install by usi
 
 The Ruby image comes with git pre-installed so there is no reason to reinstall it. Next, add `sudo`, `python2.7`, and `postgresql-9.5` to the list installation list. Then, install yarn with npm.
 
-[,dockerfile]
+[,docker]
 ----
 FROM buildpack-deps:jessie
 

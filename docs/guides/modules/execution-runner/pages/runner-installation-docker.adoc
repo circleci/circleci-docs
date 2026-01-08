@@ -56,7 +56,7 @@ include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 Create a `Dockerfile.runner.extended` file. In this example, Python 3 is installed on top of the base image.
 
-```dockerfile
+```docker
 FROM circleci/runner:launch-agent
 RUN sudo apt-get update; \
     sudo apt-get install --no-install-recommends -y \

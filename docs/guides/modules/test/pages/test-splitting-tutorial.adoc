@@ -40,7 +40,7 @@ The following is a copy of the `.circleci/config.yml` template that you will *ed
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-[source,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 
