@@ -143,5 +143,5 @@ Replace the values in brackets (`< >`) with your own details.
 
 == See also
 
-* xref:orbs:use:orb-intro.adoc[Orbs Introduction]
-* xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb]
+* xref:orbs:use:orb-intro.adoc[Orbs Introduction].
+* xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb].
