@@ -11,11 +11,13 @@
         <span class="text-xl px-2">&middot;</span>
       {{/if}}
       <!-- Read Time -->
-      {{#if readingTime}}
-        <span class="flex min-w-fit items-center">
-          {{readingTime}}
-        </span>
-      {{/if}}
+      {{#unless @root.page.attributes.hide-readtime}}
+        {{#if readingTime}}
+          <span class="flex min-w-fit items-center">
+            {{readingTime}}
+          </span>
+        {{/if}}
+      {{/unless}}
     </div>
   {{/with}}
   

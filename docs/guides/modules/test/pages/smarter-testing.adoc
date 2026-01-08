@@ -4,6 +4,7 @@
 :page-description: This page describes CircleCI's Smarter Testing. Only run tests that are impacted by code changes and evenly distribute tests across parallel execution nodes.
 :experimental:
 :page-noindex: true
+:page-hide-readtime: true
 :page-aliases: adaptive-testing.adoc
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
