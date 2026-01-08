@@ -181,6 +181,8 @@ Use the `circleci tests run` command to run your tests, split your tests across 
 
 The following table show a full list of option flags available when using `circleci tests run`.
 
+[.table-scroll]
+--
 |===
 | Flag | Type | Description | Required?
 
@@ -201,7 +203,7 @@ The following table show a full list of option flags available when using `circl
 
 | `--timings-type`
 | string
-| name of the field to use from historical test results when matching against the test names given to the command in order to determine their historical timings, previous status and flakiness. Available values: `classname`, `name`, `file` (default).
+| name of the field to use from historical test results when matching against the test names given to the command in order to determine their historical timings, previous status and flakiness. Available values: `autodetect`, `classname`, `testname`, `filename` (default).
 | No
 
 | `--total`
@@ -214,6 +216,7 @@ The following table show a full list of option flags available when using `circl
 | enable verbose logging output.
 | No
 |===
+--
 
 [#the-tests-split-command]
 === The tests split command
@@ -286,8 +289,6 @@ Refer to the xref:reference:ROOT:variables.adoc#built-in-environment-variables[P
 
 Some third party applications and libraries might help you to split your test
 suite. These applications are not developed or supported by CircleCI. Check with the owner if you have issues using it with CircleCI. If you are unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
-
-link:https://knapsackpro.com[Knapsack Pro]:: Enables allocating tests dynamically across parallel CI nodes, allowing your test suite execution to run faster. See link:https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress[CI build time graph examples].
 
 link:https://github.com/previousnext/phpunit-finder[PHPUnit Finder]:: A helper CLI tool that queries `phpunit.xml` files to get a list of test filenames and print them. PHPUnit Finder is useful if you want to split tests to run them in parallel based on timings on CI tools.
 

@@ -14,6 +14,8 @@ You can see a complete `config.yml` in our <<example-full-configuration,full exa
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -23,9 +25,11 @@ The `version` field is intended to be used in order to issue warnings for deprec
 | String
 | `2`, `2.0`, or `2.1` See the xref:reusing-config.adoc#[Reusable configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 |===
+--
 
 *Example:*
 
+.Version
 [,yaml]
 ----
 version: 2.1
@@ -38,6 +42,8 @@ version: 2.1
 
 The `setup` field enables you to conditionally trigger configurations from outside the primary `.circleci` parent directory, update pipeline parameters, or generate customized configurations.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -47,10 +53,11 @@ The `setup` field enables you to conditionally trigger configurations from outsi
 | Boolean
 | Designates the `config.yaml` for use of CircleCI's xref:guides:orchestrate:dynamic-config.adoc#[dynamic configuration] feature.
 |===
+--
 
 *Example:*
 
-[,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 
@@ -66,6 +73,8 @@ NOTE: The `orbs` key is supported in `version: 2.1` configuration
 
 Use the `orbs` key to reference or define reusable configuration blocks (orbs) for use in your configuration.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -85,6 +94,7 @@ Use the `orbs` key to reference or define reusable configuration blocks (orbs) f
 | Map
 | A map of command names to command definitions. See the <<commands>> section below.
 |===
+--
 
 The following example uses the `node` orb that exists in the certified `circleci` namespace. Refer to the Node orb page in the https://circleci.com/developer/orbs/orb/circleci/node[Orb Registry] for more examples and information.
 
@@ -129,6 +139,8 @@ NOTE: The `commands` key is supported in `version: 2.1` configuration
 
 A `command` defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs. For more information see the xref:reusing-config.adoc#[Reusable Config Reference Guide].
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -148,6 +160,7 @@ A `command` defines a sequence of steps as a map to be executed in a job, enabli
 | String
 | A string that describes the purpose of the command.
 |===
+--
 
 *Example:*
 
@@ -175,6 +188,8 @@ NOTE: The pipeline `parameters` key is supported in `version: 2.1` configuration
 
 Use the `parameters` key at the top level of your config to declare _pipeline parameters_ for use in the configuration. See xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters] for usage details.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -184,6 +199,7 @@ Use the `parameters` key at the top level of your config to declare _pipeline pa
 | Map
 | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See xref:reusing-config.adoc#parameter-syntax[Parameter Syntax] for details.
 |===
+--
 
 *Example:*
 
@@ -209,6 +225,8 @@ NOTE: The `executors` key is supported in `version: 2.1` configuration
 
 Executors define the execution environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -253,6 +271,7 @@ Executors define the execution environment in which the steps of a job will be r
 | Map
 | A map of environment variable names and values.
 |===
+--
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
 
@@ -317,6 +336,8 @@ jobs:
 
 Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -340,6 +361,11 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | Y ^(1)^
 | Map
 | Options for the <<macos,macOS executor>>
+
+| `executor`
+| Y ^(1)^
+| String
+| Name of a declared <<executors,reusable executor>>
 
 | `shell`
 | N
@@ -386,6 +412,7 @@ Each job consists of the job's name as a key and a map as a value. A name should
 | Map
 | Configure job retention periods for cache data (1-15 days, for example, "1d", "7d", "15d").  This reduces retention from the organization-level default, automatically removing cache data after the specified period.
 |===
+--
 
 ^(1)^ One executor type should be specified per job. If more than one is set you will receive an error.
 
@@ -645,6 +672,8 @@ Learn more about execution environments and executors in the xref:guides:executi
 
 Configure a job to use the Docker execution environment using the  `docker` key which takes a list of maps:
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -689,6 +718,7 @@ Configure a job to use the Docker execution environment using the  `docker` key 
 | Map
 | Authentication for AWS Elastic Container Registry (ECR)
 |===
+--
 
 For a xref:glossary.adoc#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. The primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 
@@ -814,6 +844,8 @@ NOTE: *Using CircleCI cloud?* The use of `machine: true` is deprecated. You must
 
 The machine executor is configured using the `machine` key, which takes a map:
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -828,6 +860,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 | Boolean
 | Set this to `true` to enable xref:guides:optimize:docker-layer-caching.adoc#[Docker layer caching].
 |===
+--
 
 *Example:*
 
@@ -966,6 +999,8 @@ jobs:
 
 CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS], to allow you to build, test, and deploy apps for macOS, link:https://developer.apple.com/ios/[iOS], link:https://developer.apple.com/tvos/[tvOS] and https://developer.apple.com/watchos/[watchOS]. To run a job on a macOS virtual machine, add the `macos` key to the top-level configuration for your job and specify the version of Xcode to use.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -975,6 +1010,7 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 | String
 | The version of Xcode that is installed on the virtual machine, see the xref:guides:execution-managed:using-macos.adoc#supported-xcode-versions[Supported Xcode Versions section of the Testing iOS] document for the complete list.
 |===
+--
 
 *Example:* Use a macOS virtual machine with Xcode version 14.2.0:
 
@@ -1317,6 +1353,8 @@ In this case, the `checkout` step will check out project source code into the jo
 
 In general all steps can be described as:
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1326,6 +1364,7 @@ In general all steps can be described as:
 | Map or String
 | A configuration map for the step or some string whose semantics are defined by the step.
 |===
+--
 
 Each built-in step is described in detail below.
 
@@ -1338,6 +1377,8 @@ The `run` step is used to invoke command-line programs. The `run` step takes eit
 
 NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate from deploy to run].
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1393,6 +1434,7 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m".
 
 |===
+--
 
 Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell.
 
@@ -1570,6 +1612,8 @@ A job can exit without failing by using `run: circleci-agent step halt`. However
 
 The following attributes can be used to automatically rerun a step if it fails, and delay that rerun if required:
 
+[.table-scroll]
+--
 [cols="2,1,1,2"]
 |===
 | Key | Required | Type | Description
@@ -1584,6 +1628,7 @@ The following attributes can be used to automatically rerun a step if it fails, 
 | String
 | The delay between reruns of the step if it fails. This delay can only be set along with `max_auto_reruns`. The string is a decimal with unit suffix using either seconds `s` or minutes `m` up to a maximum of 10 minutes, such as "10s", "2m". If you do not supply a delay, the rerun will start immediately after the step fails.
 |===
+--
 
 Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
 
@@ -1616,6 +1661,8 @@ NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuratio
 
 A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps section of the reusable configuration reference] for more details.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1630,6 +1677,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | Sequence
 | A list of steps to execute when the condition is true
 |===
+--
 
 *Example:*
 
@@ -1669,6 +1717,8 @@ workflows:
 
 A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1676,13 +1726,14 @@ A special step used to check out source code to the configured `path` (defaults 
 | `method`
 | N
 | String
-| Checkout method. Valid options include `blobless` and `full`. (default: `full`)
+| Checkout method. Valid options include `blobless` and `full`. (default: `blobless`)
 
 | `path`
 | N
 | String
 | Checkout directory. Will be interpreted relative to the <<jobs,`working_directory`>> of the job). (default: `.`)
 |===
+--
 
 If `path` already exists and is:
 
@@ -1767,6 +1818,8 @@ NOTE: The `checkout` step will configure Git to skip automatic garbage collectio
 
 Allows Docker commands to be run locally. See xref:guides:execution-managed:building-docker-images.adoc#[Running Docker commands] for details.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1781,6 +1834,7 @@ Allows Docker commands to be run locally. See xref:guides:execution-managed:buil
 | String
 | Version string of Docker you would like to use (default: `24.0.9`). View the list of supported Docker versions xref:guides:execution-managed:building-docker-images.adoc#docker-version[here].
 |===
+--
 
 *Example:*
 
@@ -1805,6 +1859,8 @@ Generates and stores a cache of a file or directory of files such as dependencie
 
 Cache retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1829,11 +1885,14 @@ Cache retention can be customized on the link:https://app.circleci.com/[CircleCI
 | String
 | <<the-when-attribute,Specify when to enable or disable the step>>. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 |===
+--
 
 The cache for a specific `key` is immutable and cannot be changed once written. If the cache for the given `key` already exists it will not be modified, and job execution will proceed to the next step.
 
 When storing a new cache, the `key` value may contain special, templated, values for your convenience:
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Template | Description
@@ -1862,6 +1921,7 @@ When storing a new cache, the `key` value may contain special, templated, values
 | `{{ arch }}`
 | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 |===
+--
 
 During step execution, the templates above will be replaced by runtime values and the resultant string is used as the `key`.
 
@@ -1909,6 +1969,8 @@ Wildcards are not currently supported in `save_cache` paths. Visit the link:http
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<savecache,`save_cache` step>>. Learn more in xref:guides:optimize:caching.adoc#[the caching documentation].
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -1928,6 +1990,7 @@ Restores a previously saved cache based on a `key`. Cache needs to have been sav
 | String
 | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
 |===
+--
 
 ^(1)^ at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
 
@@ -1997,6 +2060,8 @@ See <<run>> for current processes. If you have parallelism `> 1` in your job, se
 
 Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the xref:guides:optimize:artifacts.adoc#[Uploading Artifacts] page for more information.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2011,6 +2076,7 @@ Step to store artifacts (for example logs, binaries, etc) to be available in the
 | String
 | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`)
 |===
+--
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
 
@@ -2037,6 +2103,8 @@ Special step used to upload and store test results for a build. Test results are
 
 You can also store test results as build artifacts. For steps, refer to <<storeartifacts,the `store_artifacts` step>> section.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2046,6 +2114,7 @@ You can also store test results as build artifacts. For steps, refer to <<storea
 | String
 | Path (absolute, or relative to your `working_directory`) to directory containing `JUnit` XML test metadata files, or to a single test file.
 |===
+--
 
 *Example:*
 
@@ -2081,6 +2150,8 @@ Special step used to persist a temporary file to be used by another job in the w
 
 Workspace storage retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2095,6 +2166,7 @@ Workspace storage retention can be customized on the https://app.circleci.com/[C
 | List
 | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
 |===
+--
 
 The root key is a directory on the container which is taken to be the root directory of the workspace. The path values are all relative to the root.
 
@@ -2159,6 +2231,8 @@ NOTE: Everything must be relative to the work space root directory.
 
 Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using workspaces] page.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2168,6 +2242,7 @@ Special step used to attach the workflow's workspace to the current container. T
 | String
 | Directory to attach the workspace to.
 |===
+--
 
 Workspace storage retention can be customized on the https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
@@ -2186,10 +2261,12 @@ NOTE: The lifetime of artifacts, workspaces, and caches can be customized on the
 [#add-ssh-keys]
 === *`add_ssh_keys`*
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:guides:integration:github-integration.adoc#create-additional-github-ssh-keys[Create additional GitHub SSH keys] page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:guides:integration:add-ssh-key.adoc[Add Additional SSH keys] page.
 
 CAUTION: *Using server?* only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2199,6 +2276,7 @@ CAUTION: *Using server?* only MD5 fingerprints are supported. In CircleCI in men
 | List
 | List of fingerprints corresponding to the keys to be added (default: all keys added)
 |===
+--
 
 [,yaml]
 ----
@@ -2278,6 +2356,8 @@ NOTE: The workflows `version` key is *not* required for `version: 2.1` configura
 
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes.
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Key | Required | Type | Description
@@ -2287,6 +2367,7 @@ The Workflows `version` field is used to issue warnings for deprecation or break
 | String
 | Should currently be `2`
 |===
+--
 
 [,yml]
 ----
@@ -2345,6 +2426,8 @@ For more information, see the xref:guides:orchestrate:automatic-reruns.adoc[Auto
 
 Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2354,6 +2437,7 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 | Array
 | Should currently be `schedule`.
 |===
+--
 
 [,yml]
 ----
@@ -2405,6 +2489,8 @@ workflows:
 
 The `cron` key is defined using POSIX `crontab` syntax.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2414,6 +2500,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 | String
 | See the link:https://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html[`crontab` man page].
 |===
+--
 
 [,yml]
 ----
@@ -2438,6 +2525,8 @@ workflows:
 
 Trigger filters can have the key `branches`.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2447,6 +2536,7 @@ Trigger filters can have the key `branches`.
 | Map
 | A map defining rules for execution on specific branches
 |===
+--
 
 [,yml]
 ----
@@ -2497,6 +2587,8 @@ workflows:
       - coverage
 ----
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2516,6 +2608,7 @@ workflows:
 | String, or List of Strings
 | Either a single branch specifier, or a list of branch specifiers
 |===
+--
 
 ^1^: One of either `only` or `ignore` branch filters must be specified. If both are present, `only` is used.
 
@@ -2556,6 +2649,8 @@ Refer to the xref:guides:orchestrate:workflows.adoc#[Workflows] for more example
 
 A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2565,6 +2660,7 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 | List
 | A list of jobs to run with their dependencies
 |===
+--
 
 '''
 
@@ -2573,7 +2669,7 @@ A job can have the keys `requires`, `name`, `context`, `type`, and `filters`.
 
 A job name that exists in your `config.yml`.
 
-[,ym]
+[,yml]
 ----
 version: 2.1
 
@@ -2597,6 +2693,8 @@ workflows:
 
 The `override-with` key is used to override the job configuration with a job from the referenced orb. For more information, see the xref:guides:orchestrate:how-to-override-config.adoc#[How to override config] page.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2606,6 +2704,7 @@ The `override-with` key is used to override the job configuration with a job fro
 | String
 | The orb job name that will be used to override the existing job configuration. (Both URL-based and registry orbs are supported)
 |===
+--
 
 *Example:*
 
@@ -2650,6 +2749,8 @@ Jobs in a serial group follow an order protection mechanism, as follows:
 If there are no serial groups waiting/running, a pipeline with a lower number can start, such as restoring back to a previous pipeline via a rerun workflow.
 ====
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2659,6 +2760,7 @@ If there are no serial groups waiting/running, a pipeline with a lower number ca
 | String
 | A string that is used across an org to group jobs together to run one after another. Can include pipeline values and parameters. Use this same serial group across multiple pipelines to control the orchestration of jobs across an organization.
 |===
+--
 
 *Example:*
 
@@ -2676,6 +2778,8 @@ For more information, see the xref:guides:orchestrate:controlling-serial-executi
 
 Jobs are run concurrently by default, so you must explicitly require any dependencies by their job name if you need some jobs to run sequentially.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2693,6 +2797,7 @@ Possible types of `requires` items:
 
 The possible *status* values are: `success`, `failed` and `canceled`.
 |===
+--
 
 [,yml]
 ----
@@ -2725,6 +2830,8 @@ workflows:
 
 The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (for example, sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2734,6 +2841,7 @@ The `name` key can be used to invoke reusable jobs across any number of workflow
 | String
 | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times, and a job requires one of the duplicate jobs, this key is required. (2.1 only)
 |===
+--
 
 [,yml]
 ----
@@ -2751,6 +2859,8 @@ workflows:
 
 Jobs may be configured to use global environment variables set for an organization, see the xref:guides:security:contexts.adoc#[Contexts] document for adding a context in the application settings.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2760,6 +2870,7 @@ Jobs may be configured to use global environment variables set for an organizati
 | String/List
 | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
 |===
+--
 
 [,yml]
 ----
@@ -2826,6 +2937,8 @@ Job filters can have the keys `branches` or `tags`.
 
 NOTE: Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -2835,6 +2948,7 @@ NOTE: Workflows will ignore job-level branching. If you use job-level branching 
 | Map
 | A map or string to define rules for job execution. Branch and tag filters require a map. Expression-based filters require a string.
 |===
+--
 
 The following is an example of how the CircleCI documentation project uses a regular expression to filter running a job in a workflow only on a specific branch:
 
@@ -2981,6 +3095,8 @@ The branches filter can have the keys `only` and `ignore`, which map to a single
 * If neither `only` nor `ignore` are specified then all branches will run the job.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -3000,6 +3116,7 @@ The branches filter can have the keys `only` and `ignore`, which map to a single
 | String, or list of strings
 | Either a single branch specifier, or a list of branch specifiers.
 |===
+--
 
 [source,yaml]
 ----
@@ -3036,6 +3153,8 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 * If neither `only` nor `ignore` are specified then the job is skipped for all tags.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -3055,6 +3174,7 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 | String, or List of Strings
 | Either a single tag specifier, or a list of tag specifiers
 |===
+--
 
 For more information, see the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Executing workflows for a git tag] section of the Workflows page.
 
@@ -3081,6 +3201,8 @@ NOTE: The `matrix` key is supported in `version: 2.1` configuration
 
 The `matrix` stanza allows you to run a parameterized job multiple times with different arguments. For more information see the how-to guide on xref:guides:orchestrate:using-matrix-jobs.adoc#[Using Matrix Jobs]. In order to use the `matrix` stanza, you must use parameterized jobs.
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
@@ -3100,6 +3222,7 @@ The `matrix` stanza allows you to run a parameterized job multiple times with di
 | String
 | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 |===
+--
 
 *Example:*
 
@@ -3293,6 +3416,8 @@ Logic statements are evaluated to boolean values at configuration compilation
 time, that is, before the workflow is run. The group of logic statements
 includes:
 
+[.table-scroll]
+--
 [cols="1,1,1,2", options="header"]
 |===
 | Type | Arguments | `true` if | Example
@@ -3301,11 +3426,6 @@ includes:
 | None
 | is truthy
 | `true`/`42`/`"a string"`
-
-| YAML alias
-| None
-| resolves to a truthy value
-| *my-alias
 
 | xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
 | None
@@ -3342,6 +3462,7 @@ includes:
 | `value` matches the `pattern`
 | `+matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }+`
 |===
+--
 
 The following logic values are considered falsy:
 

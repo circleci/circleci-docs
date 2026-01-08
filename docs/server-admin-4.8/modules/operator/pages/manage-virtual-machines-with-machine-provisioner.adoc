@@ -1,4 +1,5 @@
 = Manage virtual machines with machine provisioner
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: CircleCI server v4.8 machine provisioner service controls how machine executor (Linux and Windows images) and Remote Docker jobs are run.
 :experimental:
@@ -54,13 +55,10 @@ machine_provisioner:
 
 The default AMIs for server v4.8 are based on Ubuntu 22.04.
 
-[tabs]
-====
-x86 AMI list::
-+
+[.table-scroll]
 --
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.x86 AMI list
+[cols=2*, options="header"]
 |===
 | Region
 | AMI
@@ -117,11 +115,11 @@ x86 AMI list::
 | `ami-0fdf4561a0d3b0346`
 |===
 --
-Arm AMI list::
-+
+
+[.table-scroll]
 --
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Arm AMI list
+[cols=2*, options="header"]
 |===
 | Region
 | AMI
@@ -175,7 +173,6 @@ Arm AMI list::
 |`ami-02268e2fe5572a88c`
 |===
 --
-====
 
 [#gcp]
 === GCP

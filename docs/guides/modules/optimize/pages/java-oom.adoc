@@ -72,6 +72,8 @@ The lower the number,
 the higher the precedence level,
 with 0 being the highest.
 
+[.table-scroll]
+--
 [cols="2,1,1,1,1,1", options="header"]
 |===
 | Java Environment Variable | Java | Gradle | Maven | Kotlin | Lein
@@ -132,6 +134,7 @@ with 0 being the highest.
 | no
 | no
 |===
+--
 
 The above environment variables are listed below,
 along with details on why to choose one over another.

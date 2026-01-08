@@ -1,0 +1,62 @@
+---
+extends: script
+message: "Corresponding callout not found."
+level: warning
+link: https://docs.asciidoctor.org/asciidoc/latest/verbatim/callouts/
+scope: raw
+script: |
+  text := import("text")
+  matches := []
+
+  // clean out multi-line comments
+  scope = text.re_replace("(?s) *(\n////.*?////\n)", scope, "")
+  //add a newline, it might be missing
+  scope += "\n"
+
+  codeblock_callout_regex := ".+(<\\d+>)+"
+  callout_regex := "^<(\\d+)>"
+  codeblock_callouts := []
+  inside := false
+  found := false
+  num_callouts := 0
+
+  num_lines := len(text.split(scope, "\n"))
+
+  for line in text.split(scope, "\n") {
+    // trim trailing whitespace
+    line = text.trim_space(line)
+    if text.re_match(codeblock_callout_regex, line) {
+      inside = true
+      //account for lines with multiple callouts
+      for i := 1; i < num_lines; i++ {
+        //text.contains must be str, not regex
+        str := "<" + i + ">"
+        if text.contains(line, str) {
+          codeblock_callouts = append(codeblock_callouts, i)
+        }
+      }
+    } else if text.re_match(callout_regex, line) {
+      inside = false
+      found = false
+      num_callouts = 1
+      for i in codeblock_callouts {
+        //cast int > string
+        j := text.itoa(i)
+        str := "<" + j + ">"
+        if text.contains(line, str) {
+          //setting found allows us to loop through the list of possible matches
+          found = true
+        }
+        num_callouts++
+      }
+      if !found {
+        start := text.index(scope, line)
+        matches = append(matches, {begin: start, end: start + len(line)})
+      }
+    } else if codeblock_callouts && inside == false {
+      //cycled through num_callouts, reset for next codeblock
+      if num_callouts == len(codeblock_callouts) {
+        codeblock_callouts = []
+      }
+    }
+  }

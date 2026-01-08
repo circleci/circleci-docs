@@ -1,4 +1,5 @@
 = Installation reference
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: Reference documentation for installing CircleCI server v4.8.
 :experimental:
@@ -9,7 +10,7 @@ The following are example manifests that contain the basic required parameters n
 
 [#aws]
 === AWS
-The snippet below is an example manifest of the necessary parameters for an installation of CircleCI server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
+The snippet below is an example manifest of the necessary parameters for an installation of CircleCI Server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
 
 [source,yaml]
 ----
@@ -20,7 +21,6 @@ global:
     registry: cciserver.azurecr.io
     org:
 
-apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
 
 keyset:
@@ -85,7 +85,7 @@ rabbitmq:
 
 [#gcp]
 === GCP
-The below is an example manifest of the necessary parameters for an installation of CircleCI server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
+The below is an example manifest of the necessary parameters for an installation of CircleCI Server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
 
 [source,yaml]
 ----
@@ -96,7 +96,6 @@ global:
     registry: cciserver.azurecr.io
     org:
 
-apiToken: "<circleci-api-token>"
 sessionCookieKey: "<session-cookie-key>"
 
 keyset:
@@ -893,7 +892,10 @@ performed on the resource.
 Dockerhub is assumed to be the image registry unless otherwise specified
 eg: registry.example.com/organization/repository
 
-|nomad.clients |object |`+{}+` |
+|nomad.clients.mTLS
+|object
+|`{"CACertificate":"","certificate":""}`
+|Configure Nomad client mTLS when using external Nomad servers. Required when `nomad.server.internal: false`. Both `CACertificate` (base64 encoded CA cert to verify server) and `certificate` (base64 encoded client cert for authentication) must be provided.
 
 |nomad.server.gossip.encryption.enabled |bool |`+true+` |
 

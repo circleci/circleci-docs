@@ -485,6 +485,20 @@ d| [.nowrap]#GitHub App#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
+| `pipeline.event.github.comment.body`
+d| [.nowrap]#GitHub App#
+| String
+| The pull request comment body with leading/trailing whitespace removed, if a pipeline was triggered via PR comment. For pipelines triggered in other ways, this value is undefined.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.sender.type`
+d| [.nowrap]#GitHub App#
+| String
+| The type of GitHub user that emitted the event triggering the pipeline. Possible values are `User`, `Organization`, and `Bot`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
 | `pipeline.deploy.component_name`
 d| [.nowrap]#GitHub App#
 | String

@@ -15,6 +15,8 @@ content:
   - url: .
     start_path: docs/orbs
   - url: .
+    start_path: docs/server-admin-4.9
+  - url: .
     start_path: docs/server-admin-4.8
   - url: .
     start_path: docs/server-admin-4.7
@@ -40,6 +42,7 @@ output:
   - provider: fs
 asciidoc:
   attributes:
+    source-highlighter: shiki
     serverversion4: 4.0.6
     serverversion41: 4.1.10
     serverversion42: 4.2.7
@@ -48,9 +51,10 @@ asciidoc:
     serverversion45: 4.5.5
     serverversion46: 4.6.6
     serverversion47: 4.7.11
-    serverversion48: 4.8.4
-    serverversion: 3.4.8
+    serverversion48: 4.8.6
+    serverversion49: 4.9.0
     terraformversion: 0.15.4
+    dockerversion: v28
     kubectlversion: 1.19
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
@@ -66,7 +70,38 @@ urls:
   html_extension_style: indexify
 antora:
   extensions:
-  - ./extensions/unlisted-pages-extension.js
+  - require: 'antora-shiki-extension'
+    theme: dracula
+    languages:
+      - asciidoc
+      - bash
+      - c
+      - clojure
+      - diff
+      - docker
+      - go
+      - groovy
+      - hcl
+      - java
+      - javascript
+      - json
+      - kotlin
+      - make
+      - markdown
+      - powershell
+      - python
+      - ruby
+      - rust
+      - shellscript
+      - shellsession
+      - sql
+      - typescript
+      - xml
+      - yaml
+      - rst
+  - require: ./extensions/unlisted-pages-extension.js
+    allowedUnlistedPages:
+      - 'test:smarter-testing.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true
@@ -78,3 +113,4 @@ antora:
         line_color: '#B4B8C6'
         primary_border_color: '#008542'
         primary_text_color: '#00381A'
+  - require: ./extensions/detect-unused-media-extension.js

@@ -1,3 +1,6 @@
+\bgithub organization\b
+\bcircleci organization\b
+\bbitbucket organization\b
 .circleci/config.yml
 [Aa]gentless
 [Aa]uditability
@@ -77,9 +80,10 @@ Certbot
 cgroup
 Chocolatey
 chruby
-CircleCI\b
-\bCircleCI cloud\b
-\bCircleCI server\b
+[Cc]hunk
+\bCircleCI\b
+\bCircleCI Cloud\b
+\bCircleCI Server\b
 \bcircleci\.com\b
 CI/CD
 CIDRs?
@@ -127,6 +131,7 @@ Docker\sHub
 Dockerfiles?
 dockerize
 [Dd]otfiles?
+ECMAscript
 [Ee]nablement
 EKS
 Elixir
@@ -161,7 +166,8 @@ GKE
 \bGoogle Cloud Storage\b
 \bGoogle Container Registry\b
 \bGoogle Play Store\b
-GPU
+gotestsum
+GPUs?
 Gradle
 Grafana
 Gzip
@@ -241,6 +247,7 @@ orgs?
 [Pp]ackagecloud
 [Pp]arameterization
 [Pp]arameterizable
+[Pp]arsable
 [Pp]assphraseless
 \bPerformance Plan\b
 PHP
@@ -266,7 +273,7 @@ PowerShell
 [Pp]roxied
 [Pp]roxying
 Pusher
-PVC
+PVCs?
 Python
 pytest
 RAM
@@ -312,6 +319,7 @@ SLAs?
 Slanger
 [Ss]ignup
 SKUs?
+Smarter Testing
 [Ss]nap
 SSH
 statsd
@@ -336,6 +344,8 @@ Telegraf
 Terraform
 TestFairy
 \btime windows\b
+[Tt]imebox
+[Tt]imeboxing
 Tink
 Tinkey
 TLS
@@ -366,10 +376,13 @@ URLEncoder
 UUID
 UUIDs?
 [Vv]alidator
+values.yaml
+vCPUs?
 VCS
 Velero
 Viget
 [Vv]irtualized
+Vitest
 VMs?
 VPC
 \bVisual Studio\b

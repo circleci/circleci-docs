@@ -25,11 +25,12 @@
     "@sntke/antora-mermaid-extension": "^0.0.8",
     "browser-sync": "^3.0.4",
     "gulp": "^5.0.0",
-    "snippet-enricher-cli": "0.0.8"
+    "httpsnippet": "^3.0.9"
   },
   "dependencies": {
     "@asciidoctor/tabs": "^1.0.0-beta.6",
     "algoliasearch": "^5.25.0",
+    "antora-shiki-extension": "^1.0.0",
     "node-html-parser": "^7.0.1",
     "reading-time": "^1.5.0"
   }

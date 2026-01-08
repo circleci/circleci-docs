@@ -1,6 +1,11 @@
 <article class="doc max-w-full overflow-x-hidden">
 {{#with page.title}}
-<h1 class="page">{{{this}}}</h1>
+<h1 class="page flex items-center gap-2">
+{{{this}}}
+{{#if @root.page.attributes.badge}}
+  <span class="text-[10px] rounded-full py-1 px-1.5 {{#if @root.page.attributes.badge-classes}}{{@root.page.attributes.badge-classes}}{{else}}text-terminal-black border{{/if}}" {{#if @root.page.attributes.badge-bg}}style="font-family: 'Roboto', sans-serif; font-weight: 700; background-color: {{@root.page.attributes.badge-bg}}; {{#if @root.page.attributes.badge-border}}border: 1px solid {{@root.page.attributes.badge-border}};{{/if}}"{{else}}style="font-family: 'Roboto', sans-serif; font-weight: 700;"{{/if}}>{{@root.page.attributes.badge}}</span>
+{{/if}}
+</h1>
 {{/with}}
 {{#if (ne page.layout 'subsection')}}
 {{> article-info-bar}}

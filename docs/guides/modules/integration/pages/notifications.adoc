@@ -3,7 +3,7 @@
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
-CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[Workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 
 [,yaml]
 ----
@@ -33,20 +33,34 @@ workflows:
 [#set-or-change-email-notifications]
 == Setting and changing email notifications
 
-To set or change your default email address, visit the link:https://app.circleci.com/settings/user/notifications[Notifications] page of the CircleCI application. You can also configure your preferences here:
+To set or change your default email address, visit the link:https://app.circleci.com/settings/user/notifications[Notifications] page of the CircleCI application. If you are a member of multiple organizations, you can specify a different email address for each organization using the dropdown for each org.
 
-* *All builds in my projects* - you receive an email for every build in your project, whether it succeeds or fails.
-* *My branches* - you receive an email when a build fails on a branch to which you have pushed changes.
-* *None* - you receive no emails, other than administrative messages relating to your account.
-
+.Default email
 image::guides:ROOT:email-notifications.png[Screenshot showing how to change default email address and choose notifications]
 
-If you are a member of multiple organizations, you can specify a different email address for each organization using the "Change email address" dropdown.
+You can also configure your preferences for different categories here:
+
+* *My work* - you receive an email every time a build you triggered finishes.
+* *Followed projects* - you receive emails for any build that has finished in a project that you have followed.
+
+You can further filter the notifications you receive based on the status of the build as below:
+
+* On default branch (any status).
+* Failed
+* Succeeded
+* Cancelled
+* Unauthorized
+* Error
+
+.Notification categories
+image::guides:ROOT:email-categories.png[Screenshot showing how to change which notifications to receive]
 
 Email notifications appear as follows:
 
+.Success email
 image::guides:ROOT:notification-email-success.png[Example success email notification]
 
+.Failure email
 image::guides:ROOT:notification-email-failure.png[Example failure email notification]
 
 [#notifications-with-orbs]
@@ -129,5 +143,5 @@ Replace the values in brackets (`< >`) with your own details.
 
 == See also
 
-* xref:orbs:use:orb-intro.adoc[Orbs Introduction]
-* xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb]
+* xref:orbs:use:orb-intro.adoc[Orbs Introduction].
+* xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb].

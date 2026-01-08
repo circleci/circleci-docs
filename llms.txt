@@ -1,0 +1,185 @@
+# CircleCI Documentation
+
+> Official technical documentation for CircleCI, a continuous integration and delivery platform
+
+## Site Information
+
+- URL: https://circleci.com/docs
+- Repository: https://github.com/circleci/circleci-docs
+- Generator: Antora (static site generator for technical documentation)
+- Markup: AsciiDoc
+
+## Documentation Structure
+
+This documentation is organized into the following Antora components:
+
+### Main Documentation Components
+
+- **Home (ROOT)**: Landing page and overview
+  - Start: https://circleci.com/docs/
+
+- **Guides**: Getting started guides and tutorials
+  - Start: https://circleci.com/docs/guides/getting-started/first-steps/
+  - Includes: Quick starts, tutorials, and step-by-step instructions
+
+- **Reference**: Technical reference documentation
+  - Start: https://circleci.com/docs/reference/configuration-reference/
+  - Includes: Configuration reference, API documentation, CLI commands
+
+- **Orbs**: CircleCI Orbs documentation
+  - Start: https://circleci.com/docs/orbs/
+  - Includes: Orb registry, development guides, and usage examples
+
+- **Server Admin**: Self-hosted CircleCI server administration guides
+  - Versions: 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9
+  - Start: https://circleci.com/docs/server-admin-4.9/
+  - Includes: Installation, configuration, maintenance, and operations
+
+- **Contributors**: Documentation for contributors to CircleCI docs
+  - Start: https://circleci.com/docs/contributors/
+  - Includes: Style guide, authoring guidelines, and contribution workflows
+
+### API Documentation
+
+The site includes integrated API documentation built with Redocly:
+- API v1: https://circleci.com/docs/api/v1/
+- API v2: https://circleci.com/docs/api/v2/
+
+## Content Format
+
+All documentation pages are written in AsciiDoc format and follow these conventions:
+- File extension: `.adoc`
+- Location: Within `modules/ROOT/pages/` in each component
+- Navigation: Defined in `modules/ROOT/nav.adoc` files
+
+## Key Documentation Areas
+
+### Getting Started
+- First steps with CircleCI
+- Configuration tutorials
+- Pipeline setup guides
+- Integration instructions
+
+### Configuration
+- `.circleci/config.yml` reference
+- Executors and images
+- Workflows and jobs
+- Contexts and environment variables
+
+### Platform Features
+- Docker and machine executors
+- Caching and workspaces
+- Artifacts and test results
+- Insights and performance optimization
+
+### Self-Hosted Server
+- Installation and upgrade guides
+- Architecture and requirements
+- Backup and disaster recovery
+- Monitoring and troubleshooting
+
+### Orbs
+- Using orbs in pipelines
+- Creating and publishing orbs
+- Orb development best practices
+- Orb registry and search
+
+## Project Documentation
+
+For contributors and developers working on the docs site itself:
+
+- README.md: Project overview and getting started
+- ARCHITECTURE.md: System design and technical architecture
+- DEVELOPMENT.md: Development setup and workflow
+- CONTENT_AUTHORING.md: Writing and formatting guidelines
+- TECHNICAL_REFERENCE.md: Detailed technical specifications
+- API_DOCS_INTEGRATION.md: API documentation integration guide
+- CONTRIBUTING.md: Contribution guidelines
+
+## Technical Stack
+
+- Static Site Generator: Antora 3.1.14
+- Markup Language: AsciiDoc
+- Extensions: @asciidoctor/tabs, Mermaid diagrams
+- UI: Custom Gulp-based UI bundle
+- API Docs: Redocly CLI
+- Search: Algolia
+- Build Tool: npm scripts with Gulp
+
+## Common URL Patterns
+
+- Guides: `/docs/guides/<topic>/`
+- Reference: `/docs/reference/<topic>/`
+- Orbs: `/docs/orbs/<topic>/`
+- Server Admin: `/docs/server-admin-<version>/<topic>/`
+- API: `/docs/api/<version>/`
+
+## Development Commands
+
+```bash
+# Install dependencies
+npm ci
+
+# Start development server
+npm run start:dev
+
+# Build documentation
+npm run build:docs
+
+# Build UI bundle
+npm run build:ui
+
+# Build API docs
+npm run build:api-docs
+```
+
+## Search and Discovery
+
+The site uses Algolia for search functionality, allowing users to quickly find:
+- Configuration examples
+- API endpoints
+- Troubleshooting guides
+- Feature documentation
+- Code samples
+
+## Content Categories
+
+Based on the actual documentation structure, content is organized into these main areas:
+
+### Guides Component
+
+- **About CircleCI**: Overview, benefits, concepts, and web app introduction
+- **Getting Started**: First steps, quickstarts (Node.js, Python, Go), tutorials, and how-to guides
+- **Migrate to CircleCI**: Migration guides from AWS, Azure DevOps, Buildkite, GitHub, GitLab, Jenkins, TeamCity, and Travis CI
+- **Orchestrate**: Pipelines, workflows, triggers (GitHub, GitLab, webhooks, scheduled), dynamic configuration, and orchestration cookbook
+- **Execute on Managed Compute**: Docker, Linux VM, macOS, Windows, Arm, GPU environments, plus image support policies
+- **Execute Jobs on Self-Hosted Runners**: Container runner, machine runner 3, machine runner, installation and configuration
+- **Testing on CircleCI**: Automated testing, test data collection, test insights, flaky tests, browser testing, code coverage, test splitting
+- **Deploy with CircleCI**: Deployment overview, deploy markers, rollbacks, release agent, platform-specific deployment guides
+- **Optimize**: Caching strategies, artifacts, concurrency, parallelism, Docker layer caching, dynamic configuration
+- **Insights**: Analytics, test insights, snapshot badges, and metrics glossary
+- **Manage Roles, Permissions, and Authentication**: User management, SSO, MFA, OIDC tokens, groups and permissions
+- **Manage Security and Secrets**: Environment variables, contexts, IP ranges, audit logs, security recommendations
+- **Manage Config Policies**: Policy management, testing, and enforcement
+- **Integration**: Outbound webhooks, notifications, VCS integration, third-party integrations (Jira, New Relic, Datadog, Sumo Logic)
+- **Developer Toolkit**: AI features, CLI tools, APIs, VS Code extension, Config SDK, orb development kit, example projects
+- **Plans and Pricing**: Free, Performance, Scale, and Server plan information
+
+### Reference Component
+
+- **Configuration**: Configuration reference, reusable config, variables, policy reference, optimization reference
+- **API**: API v1/v2 reference and runner API reference
+- **General**: Concepts, glossary, troubleshooting, FAQ
+
+### Orbs Component
+
+- **Use Orbs**: Introduction, orb registry, allow lists
+- **Author Orbs**: Development kit, creating and publishing orbs, testing, best practices
+- **Reference**: Orb concepts, authoring FAQ, reusing configuration
+
+## Updates and Versions
+
+- Server documentation is versioned (4.2 through 4.9)
+- Cloud documentation follows a continuous deployment model
+- Version attributes are defined in antora-playbook.yml
+- Latest version redirect strategy is enabled

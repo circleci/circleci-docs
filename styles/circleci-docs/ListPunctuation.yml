@@ -1,0 +1,8 @@
+extends: existence
+message: "List items should end with a period or colon (unless it's a single word or URL)."
+link: https://github.com/circleci/circleci-docs
+scope: list
+level: error
+raw:
+  # Match items with at least 2 words that don't end with period, colon, or URL
+  - '\S+\s+\S+.*[^.\s/:]\s*$'

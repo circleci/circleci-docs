@@ -6,8 +6,9 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 == 1. Install required software
 Download and install the following software before continuing:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=4*, options="header"]
 |===
 | Tool
 | Version
@@ -54,6 +55,7 @@ endif::env-aws[]
 | Required for installations outside AWS and GCP, for example, local installation.
 
 |===
+--
 
 [#create-a-vpc]
 == 2. Create a VPC
@@ -95,8 +97,9 @@ CircleCI server installs into an existing Kubernetes cluster. If you have not al
 ==== Compute resources
 The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
 
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=5*, options="header"]
 |===
 | Number of daily active CircleCI users
 | Minimum Nodes
@@ -116,12 +119,14 @@ The application uses a large number of resources. Depending on your usage, your 
 | 240 GB
 | 10 Gbps
 |===
+--
 
 [#supported-kubernetes-versions]
 ==== Supported Kubernetes versions
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | CircleCI Version
 | Kubernetes Version
@@ -129,6 +134,7 @@ The application uses a large number of resources. Depending on your usage, your 
 | 4.7.x
 | {kubernetesversions}
 |===
+--
 
 [#minimum-permissions-requirments]
 ==== Minimum permissions requirements
