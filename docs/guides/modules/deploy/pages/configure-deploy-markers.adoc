@@ -14,7 +14,8 @@ Adding deploy markers to your configuration is a prerequisite to using the follo
 
 == Introduction
 
-Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback feature. For more information on rollbacks, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback and the deploy features. For more information on rollbacks, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+For more information on deploys, see the xref:set-up-deploys.adoc[Set up Deploys] guide.
 
 For a full guide to CircleCI's deploys features and functionality, refer to the xref:deployment-overview.adoc[Deployment and Deploy Management] guide.
 
@@ -340,3 +341,5 @@ You can now track the status of your deployments across your configured environm
 You can now:
 
 * xref:set-up-rollbacks.adoc[Set up Rollbacks].
+
+* xref:set-up-deploys.adoc[Set up Deploys].
