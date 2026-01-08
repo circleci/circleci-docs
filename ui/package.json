@@ -60,7 +60,7 @@
     "gulp-stylelint": {
       "stylelint": "~16.26.0"
     },
-    "brace-expansion": "~1.1.12",
+    "brace-expansion": "~4.0.0",
     "cross-spawn": "~7.0.0",
     "got": "~14.6.0",
     "http-cache-semantics": "~4.2.0",
