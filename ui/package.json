@@ -73,7 +73,7 @@
   "dependencies": {
     "@fontsource/ibm-plex-mono": "^5.2.5",
     "@fontsource/inter": "^5.2.5",
-    "@tailwindcss/postcss": "^4.1.4",
+    "@tailwindcss/postcss": "^4.1.18",
     "simple-datatables": "^10.0.0",
     "tailwindcss": "^4.1.4"
   }
