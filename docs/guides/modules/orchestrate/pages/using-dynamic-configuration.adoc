@@ -23,7 +23,7 @@ The following is a basic example using CircleCI's dynamic configuration feature.
 
 In this example, we assume that a `generate-config` script already exists. The script outputs a new configuration YAML based on some type of work it performs, for example, inspecting `git` history or pipeline values that get passed to it, or anything else you might do from inside a xref:reference:ROOT:configuration-reference.adoc#jobs[`job`].
 
-[source,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 
@@ -133,7 +133,7 @@ workflows:
 
 In this example, `continue_config.yml` is the _continuation configuration_, which means it is run once the initial `config.yml` finishes executing the `path-filtering/filter` job. The continuation configuration takes the updated pipeline parameter values, which were modified based on the paths to any changes in a commit, and uses them to conditionally run workflows using the `when` key. For more information on using `when` in workflows, see the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[Configuration reference].
 
-[source,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 

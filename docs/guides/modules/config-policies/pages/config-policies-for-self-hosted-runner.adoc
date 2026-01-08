@@ -55,7 +55,7 @@ mkdir ./config-policies
 
 . Copy the following snippet into the `runner.rego` file you just made:
 +
-[source,rego]
+[source,go]
 ----
 package org
 import data.circleci.config
@@ -127,7 +127,7 @@ Once you have this runner restriction policy up and running, you can quickly add
 
 The following snippet shows two separate runner resource classes (`my-namespace/runner-test1` and `my-namespace/runner-test2`) with allowed projects, the first has two projects in its allowed list.
 
-[source,rego]
+[source,go]
 ----
 
 package org

@@ -633,7 +633,7 @@ Edit your `project.clj` to add the `lambdaisland/kaocha-junit-xml` plugin, or do
 
 Edit the kaocha config file `test.edn` to use this test reporter
 
-[,edn]
+[,clojure]
 ----
 #kaocha/v1
 {:plugins [:kaocha.plugin/junit-xml]
