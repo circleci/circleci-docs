@@ -502,42 +502,42 @@ d| [.nowrap]#GitHub App#
 | `pipeline.deploy.component_name`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The name of the component that was deployed.
+| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks] and xref:guides:deploy:set-up-deploys.adoc[deploys]. The name of the component that will be rolled back or deployed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.environment_name`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The name of the environment that was deployed to.
+| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks] and xref:guides:deploy:set-up-deploys.adoc[deploys]. The name of the environment in which the rollback or deploy will be performed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.target_version`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The version of the component that needs to be rolled back to.
+| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks] and xref:guides:deploy:set-up-deploys.adoc[deploys]. The version of the component that needs to be rolled back to or deployed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.current_version`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The current version of the component that was deployed.
+| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks] and xref:guides:deploy:set-up-deploys.adoc[deploys]. The current version of the component that is going to be rolled back or deployed. Can be used to verify that the status of the component matches expectations.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.namespace`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The namespace of the environment that was deployed to.
+| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks] and xref:guides:deploy:set-up-deploys.adoc[deploys]. The namespace of the environment that was deployed to.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.reason`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The reason for the deployment or rollback.
+| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks] and xref:guides:deploy:set-up-deploys.adoc[deploys]. The reason for the deployment or rollback.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
