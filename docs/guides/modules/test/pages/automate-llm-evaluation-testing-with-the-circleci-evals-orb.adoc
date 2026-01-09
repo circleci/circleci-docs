@@ -1,6 +1,6 @@
 = Automate LLM evaluation testing with the CircleCI Evals orb
 :page-platform: Cloud, Server v4+
-:description: How to use CircleCI Evals orb.
+:page-description: How to use CircleCI Evals orb.
 :experimental:
 
 CircleCI supports running automatic large language model (LLM) evaluations and evaluation testing using your preferred GenAI application evaluation framework. Through declaring the necessary commands in your pipeline configuration you can run your LLM evaluations and test the results within your CircleCI pipeline.

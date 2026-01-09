@@ -242,7 +242,7 @@ Ensure you are using `xargs` in your `circleci tests run` command to pass the li
 - run:
     name: Run tests
     command: |
-      circleci tests glob 'lib/**/*_test.exs'
+      circleci tests glob 'test/**/*_test.exs'
       | circleci tests run --command='xargs -n1 echo > test_file_paths.txt'
 
       mix ecto.setup --quiet

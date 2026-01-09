@@ -49,7 +49,8 @@ function collectPages(contentCatalog, siteUrl) {
     'server-4.4',
     'server-4.5',
     'server-4.6',
-    'server-4.7'
+    'server-4.7',
+    'server-4.8'
   ];
 
   contentCatalog.getComponents().forEach(({ name: comp, versions }) => {
@@ -255,7 +256,10 @@ async function indexToAlgolia(pages) {
     console.error('Error configuring index settings:', err);
   }
 
-  const response = await client.saveObjects({ indexName, objects: records });
+  const response = await client.replaceAllObjects({
+    indexName: indexName,
+    objects: records,
+  });
   console.log(`Indexed ${response[0]?.objectIDs.length} records to ${indexName}`);
 
   return response;

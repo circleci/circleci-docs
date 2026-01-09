@@ -198,7 +198,7 @@ Image match types govern how images are matched for container customization. The
 
 * *Default:* The `Default` match type applies when an image did not match any of the other image match types. It sets a single specification for all such service containers.
 
-===== Order of precedence
+==== Order of precedence
 
 Selectors follow the hierarchy: `Exact` -> `Prefix` -> `Pattern` -> `Default`. If a given image name does not match any rule in the hierarchy, it defaults to the `Default` rule.
 
@@ -237,7 +237,7 @@ agent:
             memory: "200Mi"
 ----
 
-===== Order of precedence
+==== Order of precedence
 
 The `Resource class` scope overrides any `Global` scope selection for a given match type. If a match is available in both scopes, the `Resource class` scope prevails.
 

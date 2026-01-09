@@ -1,6 +1,6 @@
 = Build open source projects
 :page-platform: Cloud
-:description: Best practices for building open source projects
+:page-description: Best practices for building open source projects
 :experimental:
 
 This document provides tips and best practices for building your open source project on CircleCI.
@@ -111,7 +111,7 @@ Running an unrestricted build in a parent repository can be dangerous. Projects 
 By default, CircleCI does not pass secrets to builds from forked PRs for open source projects and hides four types of configuration data:
 
 * <<private-environment-variables,Environment variables>> set through the application.
-* xref:github-integration.adoc#deploy-keys-and-user-keys[Deployment keys and user keys].
+* xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Deployment keys and user keys].
 * Passphraseless private SSH keys you have xref:add-ssh-key.adoc[added to CircleCI] to access arbitrary hosts during a build.
 * xref:deploy:deploy-to-aws.adoc[AWS permissions] and configuration files.
 
@@ -145,7 +145,6 @@ Currently there is no pre-population of caches because this optimization has not
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
-* *https://github.com/facebook/flow/[Flow]* - Adds static typing to JavaScript to improve developer productivity and code quality.
 * *https://github.com/storybookjs/storybook[Storybook]* - Interactive UI component develop and test: React, React Native, Vue, Angular, Ember.
 * *https://github.com/apollographql[Apollo]* - A community building flexible open source tools for GraphQL.
 * *https://github.com/Automattic/wp-calypso[Calypso]* - The next generation web app powering WordPress.com.

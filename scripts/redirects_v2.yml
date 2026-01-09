@@ -2,6 +2,9 @@
 # Format: old (Jekyll) -> new (Antora)
 # Total redirects: 502
 
+- old: /2.0/configuration-reference/
+  new: /reference/configuration-reference/
+
 - old: /about-circleci/
   new: /guides/about-circleci/about-circleci/
 
@@ -1270,9 +1273,6 @@
 
 - old: /style/style-and-voice/
   new: /contributors/docs-style/style-and-voice/
-
-- old: /style/style-guide-overview/
-  new: /contributors/docs-style/style-guide-overview/
 
 - old: /style/using-code-samples/
   new: /contributors/docs-style/using-code-samples/

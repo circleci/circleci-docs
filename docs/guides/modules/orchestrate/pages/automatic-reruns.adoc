@@ -1,9 +1,9 @@
-= Automatic workflow reruns
-:page-platform: Cloud
+= Automatic reruns
+:page-platform: Cloud, Server v4.9+
 :page-description: Configure automatic reruns for failed workflows to reduce manual intervention and improve pipeline reliability
 :experimental:
 
-Automatic reruns help reduce the impact of temporary failures in your CI/CD pipeline. When a workflow fails due to transient issues, CircleCI can automatically restart the failed workflow without manual intervention.
+Automatic reruns help reduce the impact of temporary failures in your CI/CD pipelines. When a workflow fails due to transient issues, CircleCI can automatically restart the failed step or workflow without manual intervention.
 
 Common use cases include:
 
@@ -12,22 +12,63 @@ Common use cases include:
 * Working with spot instances that may be terminated unexpectedly.
 * Preventing merge queue delays caused by transient failures.
 
-[#introduction]
 == Introduction
 
-Automatic reruns provide a safety net for your CI/CD pipelines by automatically retrying failed workflows. This feature helps teams maintain productivity by reducing the need for manual intervention when workflows fail due to temporary issues.
+Automatic reruns provide a safety net for your CI/CD pipelines by automatically retrying failed steps and/or workflows. Automatic reruns help teams maintain productivity by reducing the need for manual intervention when steps and workflows fail due to temporary issues.
 
-The feature works by monitoring workflow completion status and automatically triggering a "rerun from failed" operation when <<rerun-criteria,specific conditions are met>>. This ensures that only failed jobs and their dependencies are retried, while successful jobs from the original workflow are not repeated.
+When you configure automatic reruns, CircleCI monitors the status of your pipelines and reruns work as required.
 
-Benefits of automatic workflow reruns include:
+Benefits of automatic reruns include:
 
 * Reduced manual intervention for transient failures.
 * Improved pipeline reliability and developer productivity.
 * Cost-effective retry strategy that only reruns failed jobs.
 * Configurable retry limits to prevent infinite loops.
 
-[#quickstart]
 == Quickstart
+
+This section provides config examples to help you set up automatic reruns. The content following this quickstart section details how the feature works, along with some troubleshooting guidance and frequently asked questions.
+
+=== Automatic step reruns
+
+To enable automatic reruns for a run step in a job, add the `max_auto_reruns` key to your step with a value between 1 and 5:
+
+NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. Also you must configure the `command` key for the step, you cannot use the short form run step configuration.
+
+.CircleCI config to automatically retry a step up to 3 times if it fails
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    steps:
+      - run: echo "Hello, world!"
+      - run:
+          command: echo "This step will automatically rerun up to 3 times if it fails"
+          max_auto_reruns: 3
+----
+
+You can add a delay between the step failing and the automatic rerun starting, as follows:
+
+NOTE: If you configure a delay for your automatic step rerun, the delay must be less than or equal to 10 minutes. The delay can be configured as a string with a unit suffix, using `m` (minutes) or `s` (seconds), for example, `auto_rerun_delay: 10s` or `auto_rerun_delay: 3m`. If you do not supply a delay, the rerun will start immediately after the step fails.
+
+.CircleCI config to automatically retry a step up to 3 times if it fails with a 10 second delay between attempts
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  my-job:
+    steps:
+      - run: echo "Hello, world!"
+      - run:
+          command: echo "This step will automatically rerun up to 3 times if it fails with a 10 second delay between attempts"
+          max_auto_reruns: 3
+          auto_rerun_delay: 10s
+----
+
+=== Automatic workflow reruns
 
 To enable automatic reruns for a workflow, add the `max_auto_reruns` key to your workflow with a value between 1 and 5:
 
@@ -48,7 +89,7 @@ workflows:
             - test
 ----
 
-You can combine automatic reruns with workflow conditions. The following example shows how to configure automatic reruns for a workflow that is not triggered by a scheduled pipeline:
+You can combine automatic reruns with workflow conditions. The following example shows how to configure automatic reruns for a workflow that is not triggered by a schedule trigger:
 
 .Combining automatic reruns with workflow conditions
 [source,yaml]
@@ -69,12 +110,18 @@ workflows:
 [#how-automatic-reruns-work]
 == How automatic reruns work
 
-Automatic workflow reruns function similarly to manually clicking "Rerun workflow from failed" in the CircleCI interface. When a workflow fails, CircleCI evaluates whether the workflow qualifies for automatic rerun based on specific criteria, as described in the following section.
+Automatic step reruns rerun a full failed step.
 
-[#rerun-criteria]
-=== Rerun criteria
+Automatic workflow reruns function similarly to manually selecting btn:[Rerun workflow from failed] in the CircleCI web app. When a workflow fails, CircleCI evaluates whether the workflow qualifies for automatic rerun based on specific criteria, as described in the following section.
 
-For automatic reruns to trigger, all of the following conditions must be met:
+When both automatic step reruns and automatic workflow reruns are configured together for the same job, the following rules apply:
+
+* The automatic step rerun triggers first.
+* If the workflow still fails after all step rerun attempts, the automatic workflow rerun triggers.
+
+=== Automatic rerun criteria
+
+CircleCI monitors *workflow* completion status and automatically triggers a "rerun from failed" operation when the following criteria are met. This ensures that only failed jobs and their dependencies are rerun, while successful jobs from the original workflow are not repeated.
 
 * The workflow status is "failed".
 * The `max_auto_reruns` value is specified in the configuration.
@@ -82,10 +129,16 @@ For automatic reruns to trigger, all of the following conditions must be met:
 * The workflow is not a manual rerun.
 * The pipeline is not older than 90 days.
 
-[#rerun-behavior]
-=== Rerun behavior
+CircleCI monitors *step* completion status and automatically reruns a failed step when the following criteria are met:
 
-When an automatic rerun is triggered:
+* The step status is "failed".
+* The `max_auto_reruns` value is specified for the step in the configuration.
+* The number of remaining rerun attempts is greater than zero, and less than or equal to the specified `max_auto_reruns` value.
+
+[#rerun-behavior]
+=== Automatic workflow rerun behavior
+
+When an automatic *workflow* rerun is triggered:
 
 * Only failed jobs from the original workflow are retried. If the previous failure blocked dependent jobs from running, these jobs are also run.
 * Successfully completed jobs are not rerun.
@@ -99,15 +152,26 @@ CircleCI provides several ways to monitor and track automatic rerun activity.
 [#ui-indicators]
 === UI indicators
 
-Automatic reruns are indicated on the pipelines page in the CircleCI web app. In the Trigger event column you sill see *Auto-rerun* followed by the rerun attempt number, as shown in the following screenshot.
+Automatic workflow reruns are indicated on the pipelines page in the CircleCI web app. In the Trigger event column you sill see *Auto-rerun* followed by the rerun attempt number, as shown in the following screenshot.
 
 In this example the workflow is rerun twice out of a possible five attempts before it succeeds.
 
+.Automatic workflow reruns in the CircleCI web app
 image::guides:ROOT:orchestrate-and-trigger/automatic-rerun.png[Automatic reruns UI]
 
-=== Get details via the API
+Automatic step reruns are indicated on the job page in the CircleCI web app.
 
-You can retrieve information about automatic reruns using the link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[CircleCI API]:
+In this example the run tests step is configured to rerun up to 3 times if it fails with a delay of one minute between attempts.
+
+.Automatic step reruns in the CircleCI web app
+image::guides:ROOT:orchestrate-and-trigger/automatic-step-rerun.png[Automatic step reruns UI]
+
+=== Get details via the API
+You can get information about automatic reruns via the CircleCI APIs.
+
+==== Automatic workflow reruns
+
+You can retrieve information about *automatic workflow reruns* using the link:https://circleci.com/docs/api/v2/index.html#tag/Workflow/operation/getWorkflowById[CircleCI API v2]:
 
 [source,bash]
 ----
@@ -115,7 +179,21 @@ curl -X GET "https://circleci.com/api/v2/workflow/{workflow-id}" \
   -H "Circle-Token: YOUR_TOKEN"
 ----
 
-The API response includes additional fields for automatic reruns:
+The API response includes the following fields for automatic workflow reruns:
+
+* `auto_rerun_number`: The current rerun attempt number.
+* `max_auto_reruns`: The maximum number of reruns configured.
+
+==== Automatic step reruns
+
+You can retrieve information about automatic step reruns using the link:https://circleci.com/docs/api/v1/index.html#single-job[job information API endpoint from the CircleCI API v1.1].
+
+[source,bash]
+----
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num -H "Circle-Token: <circle-token>"
+----
+
+The API response includes the following fields for automatic step reruns:
 
 * `auto_rerun_number`: The current rerun attempt number.
 * `max_auto_reruns`: The maximum number of reruns configured.
@@ -125,10 +203,11 @@ The API response includes additional fields for automatic reruns:
 
 Be aware of these limitations when using automatic workflow reruns:
 
-* Maximum rerun attempts are capped at 5 per workflow.
+* Maximum rerun attempts are capped at 5 per step and 5 per workflow.
 * Only the original workflow triggers automatic reruns. Manual reruns do not trigger automatic reruns.
 * Automatic reruns are disabled if the pipeline is older than 90 days.
-* Only failed workflows trigger automatic reruns, not cancelled workflows.
+* Only _failed_ workflows trigger automatic reruns, not cancelled workflows.
+* Automatic step reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
 
 [#troubleshooting]
 == Troubleshooting
@@ -140,8 +219,8 @@ Common issues and solutions for automatic workflow reruns.
 
 If automatic reruns are not starting, check these conditions:
 
-* Verify `max_auto_reruns` is specified in your workflow configuration.
-* Ensure the workflow status is "failed" and not "cancelled".
+* Verify `max_auto_reruns` is specified in your configuration.
+* Ensure the step or workflow status is "failed" and not "cancelled".
 * Confirm the maximum rerun attempts have not been exceeded.
 * Check that the workflow was not manually rerun.
 * Verify the pipeline is less than 90 days old.
@@ -221,6 +300,4 @@ Automatic reruns start immediately after the workflow fails.
 [#faq-step-level]
 === Can I configure automatic reruns at the step level?
 
-NOTE: Step-level configuration for automatic reruns will be supported soon.
-
-Automatic reruns are configured at the workflow level.
+Yes, you can configure automatic reruns at the step or workflow level.

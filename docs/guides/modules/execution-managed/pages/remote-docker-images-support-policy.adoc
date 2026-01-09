@@ -11,7 +11,8 @@ This document outlines the xref:building-docker-images.adoc[CircleCI remote Dock
 [#release-policy]
 == Release policy
 
-The CircleCI remote Docker images are based on our Linux VM images with Docker installed for the purposes of providing a remote environment that can execute Docker commands within jobs on the Docker executor.
+The CircleCI remote Docker images are based on our Linux VM images with Docker installed.
+This setup enables the execution of Docker commands within jobs using the Docker executor in a remote environment.
 
 We aim to support the latest three versions of the Docker Engine that are classified as within Security Support status.
 
@@ -33,7 +34,7 @@ For the previous major version of Docker, we support a single tag following the 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image. These patches will not include major OS updates. Patches will contain only patch OS updates.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
@@ -47,6 +48,8 @@ Image lifespan will generally follow the support status of Docker Engine by Dock
 
 Current Deprecation:
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Version
@@ -61,9 +64,17 @@ Current Deprecation:
 | Docker 27
 | Set to `default` and `edge` tags. `docker27` tag is maintained for Docker 27 as default tag as well.
 |===
+--
 
 Example: When Docker 28 is released:
 
+We have delayed upgrading to Docker 28 because early releases introduced networking changes that caused instability in some environments.
+Rather than risk disruption for our customers, we chose to stay on the stable and supported 27.x line while monitoring the maturity of 28.
+With the release of 28.3.3, the previous issues appear to have been resolved.
+We are now preparing to validate and roll out the upgrade to ensure a smooth transition.
+
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Version
@@ -81,6 +92,7 @@ Example: When Docker 28 is released:
 | Docker 28
 | Set to `default` and `edge` tags. With `docker28` tag for pinning Docker version.
 |===
+--
 
 
 When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.

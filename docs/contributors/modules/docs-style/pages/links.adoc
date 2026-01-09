@@ -1,38 +1,30 @@
 = Cross references and links
 
+pass:[<!-- vale off -->]
+This page covers how to create links and cross references in CircleCI docs.
+
 [#cross-references]
 == Cross references
-* Cross references (links between docs pages) in **.adoc** should be made in the following form:
+* Make cross references (links between docs pages) by using the resource ID of the destination page and section, in the following form:
 +
 [source,adoc]
 ----
 xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User Keys and Deploy Keys]
 ----
-
-* The **.md** equivalent would be to use a link:
 +
-[source,md]
-----
-[User Keys and Deploy Keys](/github-integration#user-keys-and-deploy-keys)
-----
+See the link:https://docs.antora.org/antora/latest/page/resource-id-coordinates/[Resource ID coordinates] page in the Antora docs for more information.
 
 * Cross references should explicitly name the document or section to which they are linking.
-** **Good:** Refer to the https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document. +
-** **Bad:** See here for info on https://circleci.com/docs/set-environment-variable/#set-an-environment-variable-in-a-project[adding project-level environment variables].
+** **Good:** Refer to the xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Setting an environment variable in a project] section of the Environment Variables document.
+** **Bad:** For more information on adding project-level environment variables head xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[here].
 
 [#links]
 == Links
 
-* Links to third party sites should be in the following form in asciidoc content:
+* Links to third party sites should be in the following form in AsciiDoc content:
 +
 [source,adoc]
 ----
 link:https://circleci.com[CircleCI]
 ----
-
-* The markdown link syntax is as follows:
-+
-[source,md]
-----
-[CircleCI](https://circleci.com)
-----
+pass:[<!-- vale on -->]

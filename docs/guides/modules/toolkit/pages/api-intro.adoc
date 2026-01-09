@@ -1,6 +1,6 @@
 = API v2 introduction
 :page-platform: Cloud, Server v4+
-:description: Introduction to the CircleCI API
+:page-description: Introduction to the CircleCI API
 :experimental:
 
 The CircleCI API may be used to make API calls to interact with your pipelines, projects and orgs, including retrieving detailed information about users, jobs, workflows, and pipelines, as well as triggering pipelines. There are currently two supported API versions:
@@ -26,6 +26,8 @@ For a complete list of all API v2 endpoints, refer to the link:../../../api/v2/[
 
 With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Endpoint | Description
@@ -39,6 +41,7 @@ With API v2, several endpoints from v1 have been deprecated, which are listed in
 | `GET /recent-builds`
 | This endpoint enabled users to retrieve an array of recent builds.
 |===
+--
 
 [#next-steps]
 == Next steps

@@ -1,6 +1,6 @@
 = Migrate from Travis CI
 :page-platform: Cloud
-:description: An overview of how to migrate from Travis CI to CircleCI.
+:page-description: An overview of how to migrate from Travis CI to CircleCI.
 :experimental:
 
 This document provides an overview of how to migrate from Travis CI to CircleCI.
@@ -33,6 +33,8 @@ will live in `.circleci/config.yml` at the root of your repository.
 
 Below, you'll find a side-by-side comparison of different configuration declarations.
 
+[.table-scroll]
+--
 [cols="2,2,3", options="header"]
 |===
 | Travis CI | CircleCI | Description
@@ -90,6 +92,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | xref:reference:ROOT:configuration-reference.adoc#requires[`requires`]
 | Use the requires: element to define job dependencies and control concurrent jobs in workflows.
 |===
+--
 
 [#building-on-pushing-code]
 == Building on pushing code

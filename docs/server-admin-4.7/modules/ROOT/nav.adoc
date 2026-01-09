@@ -1,0 +1,47 @@
+* xref:overview:circleci-server-overview.adoc[CircleCI server Overview]
+* xref:overview:release-notes.adoc[Release notes]
+
+* Installing CircleCI server
+** Install on AWS
+*** xref:installation:phase-1-aws-prerequisites.adoc[Phase 1: AWS prerequisites]
+*** xref:installation:phase-2-aws-core-services.adoc[Phase 2: AWS Core services installation]
+*** xref:installation:phase-3-aws-execution-environments.adoc[Phase 3: AWS execution environments installation]
+*** xref:installation:phase-4-aws-post-installation.adoc[Phase 4: AWS post-installation]
+** Install on GCP
+*** xref:installation:phase-1-gcp-prerequisites.adoc[Phase 1: GCP prerequisites]
+*** xref:installation:phase-2-gcp-core-services.adoc[Phase 2: GCP Core services installation]
+*** xref:installation:phase-3-gcp-execution-environments.adoc[Phase 3: GCP execution environments installation]
+*** xref:installation:phase-4-gcp-post-installation.adoc[Phase 4: GCP post-installation]
+** xref:installation:hardening-your-cluster.adoc[Hardening your cluster]
+** xref:installation:installing-server-behind-a-proxy.adoc[Installing server behind a proxy]
+** xref:installation:upgrade-server.adoc[Upgrading server]
+** xref:installation:installation-reference.adoc[Installation reference]
+
+* Installing CircleCI server in an air-gapped environment
+** xref:air-gapped-installation:phase-1-prerequisites.adoc[Phase 1 - Prerequisites]
+** xref:air-gapped-installation:phase-2-configure-object-storage.adoc[Phase 2 - Configure object storage]
+** xref:air-gapped-installation:phase-3-install-circleci-server.adoc[Phase 3 - Install CircleCI server]
+** xref:air-gapped-installation:phase-4-configure-nomad-clients.adoc[Phase 4 - Configure Nomad clients]
+** xref:air-gapped-installation:phase-5-test-your-installation.adoc[Phase 5 - Test installation]
+** xref:air-gapped-installation:additional-considerations.adoc[Additional considerations]
+** xref:air-gapped-installation:example-values.adoc[Example Values YAML]
+
+* CircleCI server operator guide
+** xref:operator:operator-overview.adoc[Operator overview]
+** xref:operator:introduction-to-nomad-cluster-operation.adoc[Introduction to Nomad cluster operation]
+** xref:operator:managing-user-accounts.adoc[Managing user accounts]
+** xref:operator:managing-orbs.adoc[Managing orbs]
+** xref:operator:manage-virtual-machines-with-machine-provisioner.adoc[Manage virtual machines with machine provisioner]
+** xref:operator:configuring-external-services.adoc[Configuring external services]
+** xref:operator:data-retention.adoc[Data retention in server]
+** xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+** xref:operator:managing-load-balancers.adoc[Managing load balancers]
+** xref:operator:user-authentication.adoc[User authentication]
+** xref:operator:managing-build-artifacts.adoc[Managing build artifacts]
+** xref:operator:usage-data-collection.adoc[Usage data collection]
+** xref:operator:circleci-server-security-features.adoc[CircleCI server security features]
+** xref:operator:application-lifecycle.adoc[Application lifecycle]
+** xref:operator:troubleshooting-and-support.adoc[Troubleshooting and support]
+** xref:operator:backup-and-restore.adoc[Backup and restore]
+** xref:operator:upgrade-mongo.adoc[Upgrade MongoDB]
+** xref:operator:faq.adoc[FAQs]

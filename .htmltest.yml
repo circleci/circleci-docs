@@ -6,10 +6,8 @@ BaseURL: https://circleci.com/docs
 IgnoreAltEmpty: true
 IgnoreInternalEmptyHash: true
 IgnoreURLs:
-  - "[url]"
-  - "[path]"
-  - "/docs/"
-  - "/docs/_/img/x-icon.svg"
+  - "\\[url\\]"                          # Escaped literal [url] placeholder in search templates
+  - "^/docs/"                            # All absolute paths from 404 page (navigation + assets)
 IgnoreDirs:
   - "api"
 OutputDir: ".htmltest"

@@ -1,0 +1,7 @@
+name: server-admin
+title: Server
+version: server-4.3
+display_version: Server 4.3
+nav:
+- modules/ROOT/nav.adoc
+start_page: overview:circleci-server-overview.adoc

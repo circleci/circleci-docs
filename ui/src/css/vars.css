@@ -26,7 +26,7 @@
   --body-line-height: 1.6;
   --body-font-color: var(--color-body-dark);
   --body-font-family: "Inter", sans-serif;
-  --body-font-weight-bold: 600;
+  --body-font-weight-bold: 700;
   --monospace-font-family: "IBM Plex Mono", monospace;
   --monospace-font-weight-bold: 600;
   /* base */
@@ -81,7 +81,7 @@
   --doc-margin: 0 auto;
   --doc-margin--desktop: 0 2rem;
   --heading-font-color: #161616;
-  --heading-font-weight: normal;
+  --heading-font-weight: 500;
   --alt-heading-font-weight: 500;
   --section-divider-color: var(--panel-border-color);
   --link-font-color: #2152E5;
@@ -134,8 +134,8 @@
   --nav-panel-menu-height: calc(100% - var(--drawer-height));
   --nav-panel-explore-height: calc(50% + var(--drawer-height));
   --nav-width: calc(270 / var(--rem-base) * 1rem);
-  --toc-top: calc(var(--body-top) + var(--toolbar-height));
-  --toc-height: calc(100vh - var(--toc-top) - 2.5rem);
+--toc-top: calc(var(--spacing) * 35); /* Empirically determined position: navbar + toolbar + additional spacing (≈8.75rem vs logical 6rem) */
+--toc-height: calc(100vh - var(--toc-top) - 6.2rem);
   --toc-width: calc(265 / var(--rem-base) * 1rem);
   --toc-width--widescreen: calc(474 / var(--rem-base) * 1rem);
   --doc-max-width: calc(720 / var(--rem-base) * 1rem);

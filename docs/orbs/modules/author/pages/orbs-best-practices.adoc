@@ -12,6 +12,8 @@ This guide covers best practices for creating orbs.
 
 An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents, the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Proper Orb Slug | Bad Orb Slug
@@ -22,6 +24,7 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 | `company/orb`
 | `company/cci-plugin`
 |===
+--
 
 [#categorize-your-orb]
 === Categorize your orb
@@ -229,6 +232,8 @@ Orb xref:orb-concepts.adoc#usage-examples[Usage Examples] provide an excellent w
 
 Be sure to name your usage examples so they reflect the use-case they demonstrate.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Good Usage Example Names | Bad Usage Example Names
@@ -239,6 +244,7 @@ Be sure to name your usage examples so they reflect the use-case they demonstrat
 | `install-cli`
 | `demo`
 |===
+--
 
 [#all-public-orbs-should-contain-at-least-one-usage-example]
 ==== All public orbs should contain at least one usage example.
