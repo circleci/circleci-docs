@@ -169,9 +169,9 @@
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
 ** Deploys and rollbacks
 *** xref:deploy:set-up-rollbacks.adoc[Set up a rollback pipeline]
+*** xref:deploy:set-up-deploys.adoc[Set up a deploy pipeline]
 *** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
-*** xref:deploy:set-up-rollbacks.adoc[Rollback a deployment]
-*** xref:deploy:set-up-deploys.adoc[Deploy a component]
+*** xref:deploy:deploy-a-component.adoc[Deploy a component]
 *** xref:deploy:rollback-a-deployment.adoc[Rollback a deployment]
 ** Release agent setup
 *** xref:deploy:release-agent-overview.adoc[Release agent overview]

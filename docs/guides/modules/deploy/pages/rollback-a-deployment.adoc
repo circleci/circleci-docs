@@ -2,6 +2,7 @@
 :page-platform: Cloud
 :page-description:
 :experimental:
+:page-show-readtime: true
 
 Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers using the CircleCI rollback capability. To get rollbacks set up, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] page.
 
@@ -40,6 +41,10 @@ a| * Simple systems
 * Need immediate rollback
 |===
 --
+
+== Prerequisites
+
+To rollback via a rollback pipeline ensure you have set up deploy markers and a rollback pipeline, as described in the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
 
 == Rollback using a rollback pipeline
 

@@ -1,112 +1,18 @@
-= Set up a deploy pipeline
+= Deploy a component
 :page-platform: Cloud
 :page-description:
 :experimental:
+:page-show-readtime: true
 
-Deploy pipelines allow you to deploy your components to a target environment as fast as possible. This guide covers how to configure your CircleCI pipeline to support manual deployment capabilities using a deploy pipeline.
+Deploy pipelines allow you to deploy your components to a target environment. This guide covers how to configure your CircleCI pipeline to support manual deployment capabilities using a deploy pipeline.
 
 == Introduction
 
-CircleCI deploy pipelines allow you to deploy a specific version of your component to a target environment using a custom deploy pipeline. By deploying an already built and tested version, you can skip the build process that would normally be part of a CircleCI pipeline and deploy directly. This provides fast execution and full control over the deployment process, making it ideal for complex systems and time-critical requirements.
+CircleCI deploy pipelines allow you to deploy a specific version of your component to a target environment using a custom deploy pipeline. By deploying an already-built and tested version, you can skip the build process that would normally be part of a CircleCI pipeline and deploy right away. This provides fast execution and full control over the deployment process, making it ideal for complex systems and time-critical requirements.
 
 == Prerequisites
 
-- A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-- Your code must be stored in a *GitHub* repository to use the deploy pipeline feature. You will need to install the CircleCI GitHub App into your organization if you have not already done so.
-- A CircleCI project with a workflow configured to deploy your code.
-- Deploy markers *must* be configured in your project to use a deploy pipeline. You will be guided to configure deploy markers through the steps on this page or you can get set up manually by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
-- Familiarity with CircleCI deploys concepts. Find full details in the xref:deployment-overview.adoc[CircleCI Deploys Overview] guide.
-
-== Set up a deploy pipeline
-
-The following steps guide you through setting up a custom deploy pipeline.
-
-=== 1. Start the deploy pipeline setup
-
-. In the CircleCI dashboard, navigate to *Organization Home* from the sidebar.
-. Select the menu:Overview[] link for your project.
-. Select the btn:[Deploy] button in the project Overview.
-+
-.Deploy button on project overview page
-image::guides:ROOT:deploy/project-overview-deploy.png[Deploy button on project overview page]
-
-=== 2. Confirm GitHub App installation
-
-NOTE: To set up deploy pipelines you must install the CircleCI GitHub App into your organization. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
-
-. If the GitHub App is *not* installed in your organization, install it now by selecting btn:[Install the GitHub App]. If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
-+
-.Install the GitHub App
-image::guides:ROOT:deploy/install-github-app.png[Install GitHub App]
-
-=== 3. Create a pipeline definition
-
-. Select the repository that includes your project code. This is the repository that you want to deploy with this deploy pipeline.
-. Select btn:[Create pipeline definition]. This created a new pipeline definition for your rollback pipeline.
-
-=== 3. Add deploy markers
-
-Deploy markers *must* be configured in your project to use CircleCI rollbacks. If you already have deploy markers set up, select btn:[I've updated my config] to proceed to the next step.
-
-This in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the  xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
-
-. Expand the **Add deploy markers to configuration file** section.
-. You can select btn:[Generate config change with AI] to auto-generate a new configuration file with deploy markers and then create a pull request to update your config file.
-+
-Alternatively, select the "I'll make the config changes myself" checkbox and follow the next steps manually:
-+
-.. In the **Environment Name** dropdown, select or type the xref:configure-deploy-markers#manage-environments[Target Environment]. If you need to create a new environment, see the xref:configure-deploy-markers#create-an-environment-integration[How to Create an Environment].
-.. In the **Component Name** dropdown, select or type the name of the component you want to deploy. The component name sets the name that will be displayed in the Deploys UI.
-+
-.Select deploy markers values
-image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
-+
-The setup will auto-generate deploy marker commands based on your selections.
-.. Copy the generated commands using the btn:[Copy] button and paste them into your existing config file in your repository where the deployment occurs.
-+
-Ensure the `circleci run release plan` step comes before the deployment step, followed by the `circleci run release update` step.
-+
-.Generated markers commands
-image::guides:ROOT:deploy/auto-generated-commands.png[Generated markers commands]
-
-.. Once you have updated your config file, select btn:[I've updated my config] to proceed to the next step.
-+
-.Copy markers commands
-image::guides:ROOT:deploy/config-updated-button.png[Copy markers commands]
-
-=== 4. Set up deploy configuration
-
-. Review the example config file template. It shows how you will perform deployments and how to use deploy markers to track these deployments.
-. Select btn:[Commit config & create Pull Request] to create this deploy configuration template in your repository. The setup will open a pull request in a new tab with the suggested changes.
-+
-NOTE: The configuration will be committed to a new branch called `deploy-pipeline-setup` in the repository you selected.
-+
-.Commit config button
-image::guides:ROOT:deploy/commit-config-button.png[Commit config button]
-
-. Alternatively, you can copy the suggested configuration into an existing or newly created deploy config file. Make sure the file is called `deploy.yml` and is located in the `.circleci` folder, for the system to detect and use this file. In this case, select btn:[I already have a deploy config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your deploy configuration.
-+
-#.Already have config button#
-#image::guides:ROOT:deploy/already-have-config-button.png[Already have config button]#
-
-. You can manually navigate to the pull request by selecting btn:[View pull Request].
-+
-.View pull request button
-image::guides:ROOT:deploy/view-pr-button.png[View pull request button]
-
-. In the pull request in your repository, modify the deploy configuration according to your specific deployment needs. For example: set your own parameters and deployment logic, uncomment the included common deployment setups or write your own custom deployment implementation.
-. Once you have customized the configuration, merge the pull request to complete the deploy setup.
-
-
-=== 5. Complete deploy setup
-
-. After merging the pull request, return to the setup page in the CircleCI web app.
-. Select btn:[Setup deploy pipeline] to activate the deploy pipeline.
-+
-#.Setup deploy pipeline button#
-#image::guides:ROOT:deploy/setup-rollback-pipeline-button.png[Setup deploy pipeline button]#
-
-You can now deploy components by running a deploy pipeline.
+To deploy a component using a deploy pipeline ensure you have set up deploy markers and a deploy pipeline, as described in the xref:set-up-deploys.adoc[Set up a Deploy Pipeline] guide.
 
 == Deploy using a deploy pipeline
 
