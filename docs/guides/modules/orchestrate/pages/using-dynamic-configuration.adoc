@@ -29,7 +29,7 @@ This is typically useful if you want the execution of the continuation workflow 
 
 The following example shows how to pass a parameter when continuing to a continuation workflow.
 
-[source,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 
@@ -65,7 +65,7 @@ workflows:
 
 The continuation configuration receives the parameter passed from the setup configuration and uses conditional logic to determine whether to execute the workflow.
 
-[source,yaml]
+[%linenums,yaml]
 ----
 version: 2.1
 
