@@ -161,6 +161,68 @@ include::ROOT:example$logic-statement-examples/when-in-workflows/and-multiple-le
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
+== Combine pipeline parameters with event filters in workflow conditions
+
+=== Goal
+
+You may want to configure a workflow that runs when a specific event occurs (such as a push or pull request) or when a pipeline parameter is set to `true`. To combine pipeline parameters with event filters in a workflow `when` clause, you need to use filter expression syntax without template variables.
+
+=== Steps
+
+. Define your pipeline parameters in the `parameters` section of your config file. In this example, `deploy` is used as the parameter name, but you can use any parameter name you define:
++
+[,yaml]
+----
+version: 2.1
+
+parameters:
+  deploy:
+    type: boolean
+    default: false
+----
+
+. Update your workflow `when` clause to use pipeline parameters directly in filter expressions (without template variable syntax `<< >>`):
++
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when: pipeline.event.name == "push" or (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false) or pipeline.parameters.deploy
+    jobs:
+      - build
+----
+
+=== Notes
+
+* You must define your pipeline parameters in the `parameters` section before using them in workflow conditions. The parameter name `deploy` in this example is just an example—you can use any parameter name you define (for example, `run_tests`, `skip_validation`, or `enable_feature`).
+* When using pipeline parameters in filter expressions, use the parameter name directly (for example, `pipeline.parameters.deploy`) without template variable syntax (`<< >>`). Replace `deploy` with your own parameter name.
+* Do not mix template variable syntax with filter expressions. If a `when` clause contains template variables (`<< >>`), the entire clause is treated as a template replacement rather than a filter expression, which causes the workflow to always be created regardless of the actual condition.
++
+[source,yaml]
+----
+# Incorrect: This will not work as expected
+workflows:
+  my-workflow:
+    when: pipeline.event.name == "push" or << pipeline.parameters.deploy >>
+    jobs:
+      - build
+----
++
+* For simple parameter checks, you can use template variable syntax alone. Remember to replace `deploy` with your own parameter name:
++
+[source,yaml]
+----
+workflows:
+  my-workflow:
+    when: << pipeline.parameters.deploy >>
+    jobs:
+      - build
+----
++
+* For more details, see the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[Using `when` in workflows] section in the configuration reference.
+
+include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
+
 == Run a step depending on the output of a nested logic statement
 
 === Goal
