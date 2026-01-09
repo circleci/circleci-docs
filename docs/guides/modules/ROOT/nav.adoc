@@ -18,6 +18,7 @@
 *** xref:getting-started:language-javascript.adoc[Node.js quickstart]
 *** xref:getting-started:language-python.adoc[Python quickstart]
 *** xref:getting-started:language-go.adoc[Go quickstart]
+*** xref:getting-started:create-an-organization.adoc[Create an organization]
 ** Tutorials
 *** xref:getting-started:config-intro.adoc[Configuration intro]
 *** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
@@ -219,6 +220,7 @@
 ** xref:insights:insights-glossary.adoc[Insights glossary]
 
 * Manage roles, permissions, and authentication
+** xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide]
 ** Roles and permissions
 *** xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]
 *** xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions]
@@ -272,12 +274,7 @@
 *** xref:integration:notifications.adoc[Notifications]
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS integration overview]
-*** xref:integration:github-apps-integration.adoc[GitHub App integration]
-*** xref:integration:github-integration.adoc[GitHub OAuth app integration]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
-*** xref:integration:gitlab-integration.adoc[GitLab integration]
-*** xref:integration:bitbucket-data-center-integration.adoc[Bitbucket data center integration]
-*** xref:integration:bitbucket-integration.adoc[Bitbucket Cloud integration]
 *** xref:integration:oss.adoc[Build open source projects]
 
 ** Third-party integrations

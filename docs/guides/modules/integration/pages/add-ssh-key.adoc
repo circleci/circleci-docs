@@ -3,9 +3,9 @@
 :page-description: How to add additional SSH keys to CircleCI
 :experimental:
 
-Add additional SSH keys to your project for access to deploy other services or to write to, or checkout code from other repositories.
+Add additional SSH keys to your project for access to deploy to other services or to write to, or checkout code from other repositories.
 
-If you want to set up an SSH key in order to checkout code from additional repositories in GitHub (xref:github-integration.adoc[GitHub OAuth app only]) or Bitbucket Cloud within a job, refer to the xref:github-integration.adoc#enable-your-project-to-check-out-additional-private-repositories[GitHub OAuth app] or xref:bitbucket-integration.adoc#enable-your-project-to-check-out-additional-private-repositories[Bitbucket Cloud] integration pages.  If you need additional SSH keys to access other services and your org is set up to the use xref:github-integration.adoc[GitHub OAuth app] or Bitbucket Cloud, follow the steps below.
+TIP: If you want to set up an SSH key in order to checkout code from additional repositories in GitHub or Bitbucket Cloud and and you have a `github` or `bitbucket` organization, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-user-key[Users, Organizations, and Integrations Guide] for steps to add a user key. Alternatively follow steps on this page to add additional SSH keys to your project.
 
 You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
 
@@ -106,12 +106,3 @@ Example:
 ----
 ssh -i ~/.ssh/id_rsa_a3f982c51d479be68832a1bcf4297e15 -o "IdentitiesOnly=yes" user@hostname
 ----
-
-[#see-also]
-== See also
-
-* xref:github-integration.adoc[GitHub OAuth app integration]
-* xref:github-apps-integration.adoc[GitHub App integration]
-* xref:bitbucket-integration.adoc[Bitbucket integration]
-* xref:bitbucket-data-center-integration.adoc[Bitbucket Data Center integration]
-* xref:gitlab-integration.adoc[GitLab integration]
