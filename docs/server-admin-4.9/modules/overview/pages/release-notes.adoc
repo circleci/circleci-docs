@@ -10,6 +10,9 @@ The 4.9 release introduces xref:guides:orchestrate:controlling-serial-execution-
 
 [#upgrade]
 == Upgrade
+
+NOTE: Server 4.9 requires mongoDB 4.4 or higher. If your MongoDB instance is not externalized then please follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-4[Upgrade MongoDB to 4.4 guide] before upgrading to Server 4.9.0.
+
 For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.9 Guide].
 
 == Release 4.9.0
