@@ -183,7 +183,7 @@ mkdir ./config-policies
 
 . Add the following content to `version.rego`:
 +
-[source,rego]
+[source,go]
 ----
 # All policies start with the org package definition
 package org
@@ -255,7 +255,7 @@ To illustrate making a change to an existing policy, suppose you made an error w
 
 . Change the last check of your rule definition in your `version.rego` file to:
 +
-[source,rego]
+[source,go]
 ----
 {
     not input.version >= 2.0 # check that version is at least 2.0

@@ -6,7 +6,7 @@
 :page-noindex: true
 :page-aliases: adaptive-testing.adoc
 
-CAUTION: *Smarter Testing* is available in preview. When the feature is made generally available there will be a cost associated with access and usage.
+CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Smarter Testing reduces test execution time while maintaining test confidence by:
 
