@@ -99,7 +99,7 @@ WARNING: The `circleci run release update` command is only for use with deploy m
 
 After deploying your application, you can update the status of the deployment to `RUNNING` by running the `circleci run release update` command in a new step.
 
-Remember to provide your deploy name when using the `update` commands. The deploy name value should match the value you provided when you planned the deploy. If you did not provide a deploy name when you planned the deploy, your deploy name is set to `default` and you do not need to provide it when updating the status.
+If you specified a `deploy-name` when _planning_ your deploy, remember to provide your deploy name when using the `update` commands too. The deploy name value should match the value you provided when you planned the deploy. If you did not provide a deploy name when you planned the deploy, it will be set to `default` and you do not need to provide it when updating the status.
 
 .Update the deploy status to running
 [,yml]
