@@ -31,9 +31,13 @@
   {{/if}}
   <!-- Edit Page -->
   {{#if page.editUrl}}
-    <a class="flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light" href="{{page.editUrl}}">
+    <a class="flex items-center py-2 md:py-0 pl-3 pr-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light" href="{{page.editUrl}}">
       Contribute
       <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="ml-2 inline-block w-[13px] h-[13px]">
     </a>
   {{/if}}
+  <!-- Copy for LLM -->
+  <button class="flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light copy-markdown-link" data-markdown-url="{{page.url}}" type="button" style="background: none; cursor: pointer; font-weight: 500;">
+    Copy page
+  </button>
 </div>
