@@ -111,7 +111,8 @@ module.exports.register = function () {
 
     // Write to temp directory first, then copy to build later
     const tempDir = path.join(__dirname, '.temp', 'markdown')
-    const outputDir = playbook.output.dir
+    // Convert relative outputDir to absolute path to ensure it resolves correctly in CI
+    const outputDir = path.resolve(playbook.output.dir)
 
     // Clean and recreate temp markdown directory
     if (fs.existsSync(tempDir)) {
