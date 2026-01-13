@@ -20,6 +20,8 @@ To get a project up and running on CircleCI, see the following quickstart guides
 
 We have created demo applications in various languages so you can learn by example. Each language listed below has an associated guide and public repository on GitHub.
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 | Language Guide
@@ -46,6 +48,7 @@ We have created demo applications in various languages so you can learn by examp
 | Flask, Vue.js
 | link:https://github.com/CircleCI-Public/sample-monorepo-cfd[sample-monorepo-cfd]
 |===
+--
 
 
 
@@ -54,6 +57,8 @@ We have created demo applications in various languages so you can learn by examp
 
 Use the tutorial associated with your platform to learn about the customization that is possible in a xref:reference:ROOT:configuration-reference.adoc[`.circleci/config.yml`].
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Platform guide
@@ -68,6 +73,7 @@ Use the tutorial associated with your platform to learn about the customization 
 | xref:execution-managed:hello-world-windows.adoc#example-application[Windows Project Tutorial]
 | Full example of setting up a .NET project in CircleCI.
 |===
+--
 
 [#next-steps]
 == Next steps

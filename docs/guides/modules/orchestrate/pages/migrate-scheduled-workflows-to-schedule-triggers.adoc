@@ -1,0 +1,105 @@
+= Migrate scheduled workflows to schedule triggers
+:page-platform: Cloud
+:page-description: Migrate scheduled workflows to schedule triggers
+:experimental:
+:page-aliases: migrate-scheduled-workflows-to-scheduled-pipelines.adoc
+
+NOTE: This feature is not supported for GitLab or Bitbucket Data Center pipelines.
+
+Schedule workflows have some limitations that make them less convenient than schedule triggers:
+
+- Cannot control the actor (yourself, or the scheduling system), so scheduled workflows cannot use restricted contexts
+- Cannot control the interaction with auto-cancelling of pipelines
+- Cannot use scheduled workflows together with dynamic configuration without complex workarounds
+- Cannot change or cancel scheduled workflows on a branch without triggering a pipeline
+- Cannot kick off test runs for scheduled workflows without changing the schedule
+- Cannot restrict scheduled workflows from PR branches if you want the workflow to run on webhooks
+
+In addition, schedule triggers allow for the consolidation of common schedules. With scheduled workflows, for example, if you had three workflows you wanted to run at midnight every day, you would need three separate schedules. However, with schedule triggers, you can set up a single schedule to run all three workflows at midnight every day.
+
+[#find-your-scheduled-workflow]
+== 1. Find your schedule workflow
+
+To migrate from scheduled workflows to schedule triggers, you will first need to find the schedule workflow in your project's `.circleci/config.yml`.
+
+For example, it might look like:
+
+```yaml
+daily-run-workflow:
+  triggers:
+    - schedule:
+        # Every day, 0421Z.
+        cron: "21 4 * * *"
+        filters:
+          branches:
+            only:
+              - main
+  jobs:
+    - test
+    - build
+```
+
+[#create-the-new-schedule-trigger]
+== 2. Create the new schedule trigger
+
+Before you can create a new schedule, you should interpret the frequency your trigger needs to run from the `cron` expression. Once you have these details, create a schedule via either the API or project settings in the CircleCIweb app. Both methods are described below.
+
+[#use-the-api]
+=== a. Use the API
+
+NOTE: Setting up schedule trigger via the API is not yet available for GitHub App pipelines.
+
+Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
+
+```shell
+curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
+--header "Circle-Token: <PERSONAL_API_KEY>" \
+--header "Content-Type: application/json" \
+--data-raw '{
+    "name": "my schedule name",
+    "description": "some description",
+    "attribution-actor": "system",
+    "parameters": {
+      "branch": "main"
+      <additional pipeline parameters can be added here>
+    },
+    "timetable": {
+        "per-hour": 3,
+        "hours-of-day": [1,15],
+        "days-of-week": ["MON", "WED"]
+    }
+}'
+```
+
+include::ROOT:partial$tips/find-project-slug.adoc[]
+
+For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 docs]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+
+[#use-project-settings]
+=== b. Use project settings in the web app
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. If you are using GitHub, navigate to menu:Project Settings[Project Setup], identify the pipeline you want to schedule, and select btn:[Schedule +].
++
+If you are using Bitbucket Cloud, navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
+. Define the new schedule by filling out the form, then select btn:[Save].
+
+The form also provides the option of adding xref:pipeline-variables.adoc[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
+
+[#remove-triggers-section]
+== 3. Remove triggers section
+
+In the configuration file, remove the `triggers` section, so that it resembles a standard workflow.
+
+```yaml
+daily-run-workflow:
+  jobs:
+    - test
+    - build
+```
+
+[#next-steps]
+== Next steps
+- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
+- xref:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger]

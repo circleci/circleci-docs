@@ -3,6 +3,7 @@
 :page-description: A short page description goes here
 :experimental:
 
+pass:[<!-- vale off -->]
 ////
 Some notes on attributes
 
@@ -65,6 +66,8 @@ Break up large blocks of text where possible to help make it easier to consume. 
 
 This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Header text column 1
@@ -75,6 +78,7 @@ This is the syntax for creating a table. This example has one heading row and on
 |Text for row 1 column 2
 |Text for row 1 column 3
 |===
+--
 
 For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
 
@@ -150,3 +154,5 @@ End the tutoral with a conclusion section that summarizes what was covered.
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
 * xref:guides:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 * xref:guides:about-circleci:concepts.adoc[CircleCI concepts]
+
+pass:[<!-- vale on -->]

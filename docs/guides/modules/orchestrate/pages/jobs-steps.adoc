@@ -69,7 +69,95 @@ There are four types of jobs:
 
 You can set the type of a job by adding the `type` key to the job configuration.
 
-See the xref:reference:ROOT:configuration-reference.adoc#job-type[Confirguration reference] page for more information on how to use the different job types.
+See the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration reference] page for more information on how to use the different job types.
+
+=== Job status transitions
+
+The following diagram and table shows the possible job statuses and transitions.
+
+.CircleCI cloud job status transitions
+[mermaid]
+----
+stateDiagram-v2
+    direction TB
+    [*] --> blocked
+
+    state "blocked or not running" as pending
+    blocked --> pending : Job instructed to start but not yet started
+    blocked --> unauthorized : Trying to use a context without permission
+   
+    pending --> running
+    
+    pending --> blocked : Rerun
+    
+    running --> canceled
+    pending --> canceled
+    blocked --> canceled
+
+    pending --> failed : Abusive / Sanctioned
+    running --> failed
+    running --> success
+    
+    failed --> [*]
+    success --> [*]
+    canceled --> [*]
+    unauthorized --> [*]
+----
+
+.CircleCI server job status transitions
+[mermaid]
+----
+stateDiagram-v2
+    direction TB
+    [*] --> blocked
+
+    state "blocked or not running" as pending
+    blocked --> pending : Job instructed to start but not yet started
+    blocked --> unauthorized : Trying to use a context without permission
+   
+    pending --> running
+
+    pending --> skipped : Only build PRs setting enabled<br/>ci-skip<br/>No project found<br/>Abusive<br/>Sanctioned
+    pending --> blocked : Rerun
+
+    running --> canceled
+    pending --> canceled
+    blocked --> canceled
+
+    running --> failed
+    running --> success
+
+    skipped --> [*]
+    success --> [*]
+    failed --> [*]
+    canceled --> [*]
+    unauthorized --> [*]
+----
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Status | Description
+
+|Blocked/Not Running | All jobs start off in a blocked state. Jobs called `build` move on to a Not Running state before starting.
+
+|Running | Job is running.
+
+| On Hold | The job is running but requires manual approval.
+
+| Not Run | The job is skipped.
+
+| Success | The job succeeded.
+
+| Failed | The job failed or terminated for unknown reasons.
+
+| Canceled | The job was canceled. An actor might cancel a job, or cancel a workflow. A job may be cancelled due to auto-cancellation. Support engineers can force cancellation of a job.
+
+| Unauthorized | The job uses a restricted context and the actor that triggered the work does NOT have access to that context.
+
+|===
+--
 
 [#steps-overview]
 == Steps overview

@@ -42,4 +42,19 @@
 
     prevWindowWidth = currentWidth
   })
+
+  // Scroll current page into view within the navigation aside (not the whole page)
+  const currentPageItem = navigation?.querySelector('[data-current]')
+  const aside = navigation?.querySelector('aside')
+  if (currentPageItem && aside) {
+    // Use setTimeout to ensure DOM is fully rendered
+    setTimeout(() => {
+      // Manually scroll the aside container, not the page
+      const itemOffsetTop = currentPageItem.offsetTop
+      const asideHeight = aside.clientHeight
+      const itemHeight = currentPageItem.offsetHeight
+      // Scroll so item is near the top of the aside
+      aside.scrollTop = Math.max(0, itemOffsetTop - asideHeight / 3)
+    }, 100)
+  }
 })()

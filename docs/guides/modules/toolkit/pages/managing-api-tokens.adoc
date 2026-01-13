@@ -1,6 +1,6 @@
 = Managing API tokens
 :page-platform: Cloud, Server v4+
-:description: How to assign scoped tokens for using the CircleCI API
+:page-description: How to assign scoped tokens for using the CircleCI API
 :experimental:
 
 To use the CircleCI API or view details about your pipelines, you will need API tokens with the appropriate permissions. This document describes the types of API tokens available, as well as how to create and delete them.

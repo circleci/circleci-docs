@@ -24,7 +24,7 @@ CircleCI differs primarily in configuration syntax, setting up workflow and job 
 | GitHub | CircleCI
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 name: My GitHub Actions Workflow
 
@@ -43,7 +43,7 @@ jobs:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   job_1:
@@ -63,6 +63,7 @@ workflows:
           requires:
             - job_1
 ----
+
 |===
 --
 
@@ -99,7 +100,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 `docker` is its https://circleci.com/docs/configuration-reference/#docker-machine-macos-windows-executor[own class of executor] in CircleCI.
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 # Choosing an Operating System
 runs-on: ubuntu-latest # or windows, etc.
@@ -110,7 +111,7 @@ container:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 # Docker (container) Executor
 docker:
@@ -133,7 +134,7 @@ resource_class: windows.medium # can be medium, large, xlarge, 2xlarge
 2+| Specifying dependencies/services. All images specified after the first in CircleCI are treated https://circleci.com/docs/configuration-reference/#docker[as dependencies].
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   build:
@@ -154,7 +155,7 @@ jobs:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   build:
@@ -172,7 +173,7 @@ jobs:
 2+| Specifying steps to https://circleci.com/docs/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   build:
@@ -184,7 +185,7 @@ jobs:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   build:
@@ -200,7 +201,7 @@ jobs:
 and then https://circleci.com/docs/configuration-reference/#orbs[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   build:
@@ -218,7 +219,7 @@ jobs:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 orbs:
   slack-orb: circleci/slack@3.4.0
@@ -245,7 +246,7 @@ jobs:
 * Conditional, parameterized xref:orchestrate:workflows.adoc#use-conditional-logic-in-workflows[workflows].
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   build:
@@ -261,7 +262,7 @@ jobs:
 ----
 
 a|
-[source,yaml,role="no-numbers"]
+[source,yaml]
 ----
 jobs:
   build:

@@ -1,0 +1,244 @@
+= Fix flaky tests
+:page-badge: Beta
+:page-platform: Cloud
+:page-description: Learn about Chunk by CircleCI and how it can automatically identify and fix flaky tests in your CI/CD pipelines.
+:experimental:
+:page-noindex: true
+
+NOTE: Chunk by CircleCI is currently in *beta*. There are no extra costs during beta, Chunk uses CircleCI credits and your AI model provider tokens. Chunk tasks will be a paid feature when generally available.
+
+TIP: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
+
+Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
+
+Chunk provides automated capabilities to identify and resolve common issues in your CI/CD pipelines. Chunk can automatically detect flaky tests and generate fixes to help you reduce the time spent debugging intermittent failures.
+
+TIP: Chunk by CircleCI is an AI agent that you can choose to set up in your organization to help with CI/CD related tasks.
+
+== Introduction
+
+Flaky tests are tests that pass and fail inconsistently. Flaky tests create uncertainty about code quality and slow down development workflows. Chunk can help address the problem of flaky tests by using artificial intelligence to analyze test patterns, identify root causes of flakiness, and propose validated solutions.
+
+Chunk integrates with your existing CircleCI workflows and GitHub repositories. When configured, Chunk tasks run automatically on a schedule you define to monitor your test suite for signs of flakiness. When issues are detected, Chunk goes through the following steps:
+
+* Generate potential fixes.
+* Validate fixes through multiple test runs in an isolated environment.
+* Create pull requests with recommended changes after successful validation.
+
+.Simple flowchart showing fix generation, validation, generate PR process
+[mermaid]
+----
+flowchart TD
+    Start([Flaky test detected]) --> Generate[Generate potential fixes]
+    Generate --> Validate[Validate fixes through<br/>multiple test runs in<br/>isolated environment]
+    Validate --> CreatePR[Create pull requests with<br/>recommended changes after<br/>successful validation]
+    CreatePR --> End([Complete])
+----
+
+== Assign Chunk a "Fix flaky tests" task
+
+To get started with automating flaky test fixes, you need to fulfill the following prerequisites. You can then assign tasks for Chunk to run.
+
+=== Prerequisites
+
+* To use the "Fix Flaky Tests" task you must be working in a `/github/` type organization. To check this, select *Organization Settings* in the sidebar. `/github/` or `/gh/` will be listed in the URL, along with a human-readable organization name.
+* Ensure you have set up Chunk by following the steps in the xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview] guide.
+* Ensure your CircleCI jobs store test results using the `store_test_results` step. Read more about this step in the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference].
+* Make sure you are following the projects you want Chunk to fix. CircleCI identifies flaky tests in your CI/CD pipelines on the *Tests* tab for workflows in the Insights dashboard (menu:Insights[Select project > Select workflow > Tests]).
+
+=== Assign a task
+
+Once you have Chunk set up for your organization you can start assigning tasks.
+
+To set up a "Fix flaky tests" task follow these steps:
+
+. In the link:https://app.circleci.com/home[CircleCI web app, window=_blank], select your organization and then select *Chunk* from the bottom of the sidebar image:guides:ROOT:icons/chunk.svg[Chunk icon, role="no-border"].
+. Select btn:[Schedule a Task].
+. Select the project you want to assign the task to.
+. Choose a run frequency (daily, weekly, monthly).
+. Choose the number of tests you want Chunk to try to fix per run, between one and three.
+. Choose a maximum for the number of solutions you want Chunk to try for each test, between one and three.
+. Choose a number of validation runs to allow per test between one and 20.
+. Choose a maximum number of concurrent open PRs for flaky test fixes. You can choose between one and 20, or the default, "Unlimited".
+. The "Chunk environment setup" section guides you to set up a `cci-agent-setup.yml` file if you would like to control the environment in which Chunk runs your tests. For more information see <<chunk-environment-setup>>. This step is optional.
+. The "Post-run commands" section allows you to add commands for Chunk to run after each test run. This step is optional.
+. Select btn:[Start task] to complete the setup.
+
+When you select btn:[Start task] Chunk starts running immediately and follows the schedule you set up.
+
+.Chunk Assign Task modal
+image::guides:ROOT:chunk/assign-task.png[Chunk assign task modal]
+
+=== Chunk environment setup
+
+To improve verification success, create an "agent environment" CircleCI YAML file to help Chunk set up the environment in which it runs your tests. See the xref:guides:toolkit:chunk-setup-and-overview.adoc#chunk-environment-setup[Chunk Environment Setup] section for more information.
+
+== How Chunk's flaky test fix process works
+
+Chunk operates through an automated analysis and remediation process that runs independently of your regular CI/CD workflows.
+
+////
+[mermaid]
+----
+flowchart TD
+    Start([Chunk Task Runs on Schedule]) --> Detect{Detect Flaky<br/>Test Patterns?}
+
+    Detect -->|No flaky tests found| End1([Task Complete])
+    Detect -->|Flaky tests identified| Select[Select Tests to Fix<br/>Based on Task Config]
+
+    Select --> CheckPRLimit1{Under PR<br/>Limit?}
+    CheckPRLimit1 -->|No| End1
+    CheckPRLimit1 -->|Yes| Generate[Generate Potential Solutions<br/>Based on Failure Patterns]
+
+    Generate --> Solutions{Multiple<br/>Solutions<br/>Configured?}
+
+    Solutions -->|Yes| CreateMultiple[Create Multiple Fix Approaches]
+    Solutions -->|No| CreateSingle[Create Single Fix Approach]
+
+    CreateMultiple --> TrySolution[Try Solution Approach]
+    CreateSingle --> TrySolution
+
+    TrySolution --> Validate[Validate Fix in Isolated Environment]
+    Validate --> RunTests[Run Test Multiple Times<br/>Per Validation Config]
+
+    RunTests --> CheckValidation{Validation<br/>Successful?}
+
+    CheckValidation -->|No| MoreSolutions{More Solutions<br/>to Try?}
+    MoreSolutions -->|Yes| TrySolution
+    MoreSolutions -->|No| CheckPRLimit2{Under PR<br/>Limit?}
+
+    CheckPRLimit2 -->|Yes| CreatePRFailed[Create PR with<br/>Failed Validation Status]
+    CheckPRLimit2 -->|No| CheckMore{More Tests<br/>to Fix?}
+    CreatePRFailed --> CheckMore
+
+    CheckValidation -->|Yes| CheckPRLimit3{Under PR<br/>Limit?}
+    CheckPRLimit3 -->|No| Queue[Queue Fix for Later]
+    CheckPRLimit3 -->|Yes| CreatePR[Create Pull Request<br/>with Validated Fix]
+
+    CreatePR --> AddDetails[Include Code Diff,<br/>Analysis & Logs]
+    AddDetails --> CheckMore
+    Queue --> CheckMore
+
+    CheckMore -->|Yes| Select
+    CheckMore -->|No| End([Task Complete])
+----
+////
+
+=== Test analysis and detection
+
+Chunk continuously monitors test results stored in CircleCI to identify patterns of flakiness. It analyzes historical test data to distinguish between genuine failures caused by code issues and intermittent failures that indicate flaky behavior. Tests are flagged as flaky when they show inconsistent pass/fail patterns across multiple runs with the same code.
+
+The detection process considers factors such as failure frequency, timing patterns, and error message consistency. This helps Chunk focus on tests that genuinely exhibit flaky behavior rather than tests that fail consistently due to code problems.
+
+=== Solution generation
+
+When a flaky test is identified, Chunk generates potential solutions based on common flaky test patterns and best practices. Chunk can create multiple solution approaches for each test, allowing it to try different fixes if the first attempt does not resolve the issue.
+
+Solutions may include adding explicit waits, improving element selectors, handling race conditions, or stabilizing test data setup. Chunk tailors its recommendations to the specific failure patterns observed in your test.
+
+=== Validation process
+
+Before proposing any changes, Chunk validates potential solutions through multiple test runs in an isolated environment. This validation process ensures that proposed fixes actually resolve the flakiness without breaking existing functionality. Chunk runs the modified test multiple times to confirm consistent passing behavior.
+
+=== Pull request creation
+
+When Chunk has created a solution, it automatically creates a pull request in your GitHub repository. Each pull request includes detailed information about the changes made and the reasoning behind them. Pull requests will also include details of the validation process and the outcome of validation tests. If validation was not successful, this will be explicitly stated in the pull request to alert you to the need for manual validation.
+
+Pull requests contain code diffs showing what changes Chunk recommends, along with logs that explain Chunk's analysis and decision-making process. This transparency allows your team to understand and review the proposed fixes before merging.
+
+== The Chunk tasks dashboard
+
+Once you have assigned tasks to Chunk, you can view an activity timeline on the Chunk dashboard. Tasks are available in a list view below the chat interface.
+
+Chunk tasks can be one of two types:
+
+*Manual tasks*:: Created by prompting Chunk from the chat interface. Manual tasks appear in the list view immediately after first message to Chunk.
+*Schedule tasks*:: Created via the btn:[Schedule a task] button. Schedule tasks appear once the task runs on the selected schedule and if Chunk was able to open a fixPR.
+
+.See Chunk tasks listed below chat interface
+image::guides:ROOT:chunk/chunk-chat.png[Chunk tasks listed in chat view]
+
+Once a fix is available the row is marked as "PR opened". Select a row to view the task overview. This includes the following information:
+
+* Summary of the fix.
+* The root cause of the flakiness.
+* The details of the proposed fix.
+* The details of the level of verification achieved.
+
+You also get a code diff of the proposed fix along with logs of the decision process presented as a conversation between "User" (Chunk) and "Assistant" (AI model provider). The diff and logs are designed to help you understand Chunk's reasoning and analysis process.
+
+== Flaky test fix configuration options
+
+The following table shows the configuration options available when setting up Chunk:
+
+[.table-scroll]
+--
+.Chunk configuration options
+[cols="1,2,3", options="header"]
+|===
+|Setting |Description |Default
+
+|Run frequency
+|How often Chunk analyzes and fixes flaky tests
+a|* Daily (Sunday through Thursday at 22:00 UTC).
+* Weekly every Sunday at 22:00 UTC (default).
+* Monthly on the first day of the month at 22:00 UTC.
+
+|Maximum tests to fix per run
+|Limits the number of tests Chunk will attempt to fix in a single execution.
+| 1, 2, 3 (default)
+
+|Number of solutions to try per test
+|How many different fix approaches Chunk will generate for each flaky test.
+|1 (default), 2, 3
+
+|Number of validation runs per test
+|How many times Chunk runs a test to validate that a fix works consistently.
+|1-20. 10 is the default.
+
+|Maximum concurrent open PRs
+|Limits the number of pull requests Chunk can have open at one time.
+|1-20 or "Unlimited" (default).
+|===
+--
+
+== Limitations
+
+*It is not possible to edit the Chunk task configurations*. You cannot directly edit setup scripts or post-run commands once a Chunk task is created. To change these settings, you must delete the existing Chunk task and create a new one.
+
+== Troubleshooting
+
+=== Unable to run verification tests
+
+Chunk runs in a xref:execution-managed:using-linuxvm.adoc[Linux VM] with link:https://discuss.circleci.com/t/ubuntu-20-04-22-04-24-04-q4-edge-release/52429[basic software installed by default, window=_blank]. To verify that a proposed fix resolves flakiness, it re-runs the affected test several times. To do this, Chunk may install additional software needed to set up the test environment, using clues from your CircleCI configuration file  to determine how to run the tests.
+
+View attempts in the CircleCI web app as follows:
+
+. Open the Chunk task from the timeline.
+. Select *Task logs*.
+. Select the btn:[Expand All] option, then search for `attempt`. This will take you to the section where Chunk is trying to run the tests.
+
+Consider setting up a `cci-agent-setup.yml` file to control the environment in which Chunk runs your tests. For more information see <<chunk-environment-setup>>.
+
+Also consider including a markdown file, named `claude.md` or `agents.md` at the root of your repository with instructions for running tests. Chunk should pick this up automatically.
+
+=== Verification required error
+
+If you get the following error inside a Chunk task, this indicates that your Open AI organization verification is pending.
+
+[source,shell]
+OpenAI organization verification required. Please verify your organization at https://platform.openai.com/settings/organization/generaland see our community forum for more debugging help.
+
+To fix this issues, head to link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], navigate to menu:General[Organization Settings] and select btn:[Verify Organization]. Then follow the steps to get your organization verified.
+
+=== Action required error
+
+If you get the following error inside a Chunk task, this indicates that your Open AI organization verification is pending.
+
+[source,shell]
+Action required - agent execution error
+The agent ran into an error while executing this task. See our community forum for how to solve this error.
+
+== Frequently asked questions
+
+include::guides:ROOT:partial$faq/chunk.adoc[]

@@ -1,6 +1,8 @@
 = Quickstart guide
 :page-platform: Cloud
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
+:page-show-readtime: true
+:experimental:
 
 This quickstart provides a guided tour through setting up a project, collaborating, and tools to iterate on and debug your build configuration. The following sections cover the following:
 

@@ -7,6 +7,8 @@ This page details everything you need to know about deleting organizations and p
 
 If you only want to stop builds for a project and keep the complete build history, see the xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI] page.
 
+[.table-scroll]
+--
 [cols="1,^1,^1,2", options="header"]
 |===
 | VCS integration | Delete organization | Delete project | Notes
@@ -37,6 +39,7 @@ If you only want to stop builds for a project and keep the complete build histor
 | Deleting the organization removes all content from the organization. The organization will remain visible but without data underneath.
 
 |===
+--
 
 
 [#delete-an-organization]
@@ -85,7 +88,7 @@ NOTE: Only organization admins and project admins can delete projects.
 
 If you want to remove a project from your CircleCI account, follow the steps below.
 
-CAUTION: Deleting a project will remove the complete build history. 
+CAUTION: Deleting a project will remove the complete build history.
 
 [tabs]
 ====
