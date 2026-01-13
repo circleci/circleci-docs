@@ -7,24 +7,6 @@
     console.warn('Clipboard API not supported')
   }
 
-  // Set href for "View markdown" links
-  var viewLinks = document.querySelectorAll('.view-markdown-link')
-  viewLinks.forEach(function (link) {
-    var pageUrl = link.dataset.pageUrl
-    var markdownUrl
-
-    // Convert HTML URL to markdown URL
-    if (pageUrl.endsWith('/')) {
-      markdownUrl = pageUrl + 'index.md'
-    } else if (pageUrl.endsWith('.html')) {
-      markdownUrl = pageUrl.replace(/\.html$/, '.md')
-    } else {
-      markdownUrl = pageUrl + '.md'
-    }
-
-    link.href = markdownUrl
-  })
-
   // Handle "Copy markdown" button clicks (only if clipboard is supported)
   if (!supportsCopy) {
     return
@@ -36,20 +18,8 @@
     button.addEventListener('click', function (e) {
       e.preventDefault()
 
-      var pageUrl = this.dataset.markdownUrl
-      var markdownUrl
-
-      // Convert HTML URL to markdown URL
-      if (pageUrl.endsWith('/')) {
-        // Handle indexified URLs (e.g., /path/ -> /path/index.md)
-        markdownUrl = pageUrl + 'index.md'
-      } else if (pageUrl.endsWith('.html')) {
-        // Replace .html with .md
-        markdownUrl = pageUrl.replace(/\.html$/, '.md')
-      } else {
-        // Add .md extension
-        markdownUrl = pageUrl + '.md'
-      }
+      // Use relative path to the markdown file in the same directory
+      var markdownUrl = 'index.md'
 
       var button = this
       var originalContent = button.innerHTML
