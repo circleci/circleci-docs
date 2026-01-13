@@ -1620,7 +1620,7 @@ jobs:
     executor: node-with-service
     steps:
       - setup
-      - run: circleci run testsuite "scheduled tests"
+      - run: circleci run testsuite "scheduled tests" --test-selection="none"
   test:
     executor: node-with-service
     steps:
