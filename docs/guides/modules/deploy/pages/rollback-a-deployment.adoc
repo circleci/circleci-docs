@@ -6,6 +6,8 @@
 
 Rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers using the CircleCI rollback capability. To get rollbacks set up, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] page.
 
+If you are using Kubernetes, you can also enable rollback functionality by using the CircleCI release agent which includes a "Restore version" command. See the xref:release-agent-overview.adoc[Release Agent Overview] guide for more information.
+
 == Introduction
 
 CircleCI rollbacks support two methods:
