@@ -28,8 +28,9 @@ With each minor release, in accordance with our link:https://circleci.com/legal/
 
 CAUTION: Future dates listed here may change at any time.
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Version | Released | End of Support
 
@@ -57,3 +58,4 @@ CAUTION: Future dates listed here may change at any time.
 |7/28/2022
 |7/31/2023
 |===
+--

@@ -1,4 +1,4 @@
-CircleCI server {serverversion48} is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc#[CircleCI server v4.8 overview].
+CircleCI server {serverversion48} is installed as a Helm chart. The installation process is broken down into four phases with a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:server-admin:overview:circleci-server-overview.adoc#[CircleCI server v4.8 overview].
 
 NOTE: In the following sections, replace any sections indicated by `< >` with your details.
 
@@ -6,8 +6,9 @@ NOTE: In the following sections, replace any sections indicated by `< >` with yo
 == 1. Install required software
 Download and install the following software before continuing:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=4*, options="header"]
 |===
 | Tool
 | Version
@@ -53,7 +54,13 @@ endif::env-aws[]
 | TBC
 | Required for installations outside AWS and GCP, for example, local installation.
 
+| link:https://docs.docker.com/engine/install/[Docker]
+| {dockerversion}
+| Running containerized workloads on nomad clients
+| At this time docker v29 is not supported
+
 |===
+--
 
 [#create-a-vpc]
 == 2. Create a VPC
@@ -86,7 +93,7 @@ For high availability, and to avoid potential outages, you should provision subn
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
-CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. There are instructions for creating a cluster below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
+CircleCI server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. Instructions for creating a cluster are provided below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
 
 [#cluster-requirements]
 === Cluster requirements
@@ -95,8 +102,9 @@ CircleCI server installs into an existing Kubernetes cluster. If you have not al
 ==== Compute resources
 The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
 
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=5*, options="header"]
 |===
 | Number of daily active CircleCI users
 | Minimum Nodes
@@ -116,12 +124,14 @@ The application uses a large number of resources. Depending on your usage, your 
 | 240 GB
 | 10 Gbps
 |===
+--
 
 [#supported-kubernetes-versions]
 ==== Supported Kubernetes versions
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | CircleCI Version
 | Kubernetes Version
@@ -129,6 +139,7 @@ The application uses a large number of resources. Depending on your usage, your 
 | 4.8.x
 | {kubernetesversions}
 |===
+--
 
 [#minimum-permissions-requirments]
 ==== Minimum permissions requirements
@@ -260,7 +271,12 @@ endif::env-aws[]
 
 CAUTION: If GitHub Enterprise and CircleCI server are not on the same domain, then images and icons from GHE will fail to load in the CircleCI web app.
 
-Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information. The following steps apply for both GitHub.com and GitHub Enterprise.
+Registering and setting up a new GitHub OAuth app for CircleCI server allows for the following:
+
+* Authorization control to your server installation using GitHub OAuth .
+* Updates to GitHub projects/repos using build status information.
+
+The following steps apply for both GitHub.com and GitHub Enterprise.
 
 . In your browser, navigate to menu:Your-GitHub-instance[User Settings>Developer Settings>OAuth Apps] and select **New OAuth App**.
 +
@@ -329,7 +345,7 @@ By default, CircleCI server creates self-signed certificates to get you started.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
-Once you have created your certificates using one of the methods described below, you can use the following commands to retrieve the certificates later when you need them during this installation:
+Create your certificates using one of the methods described below. Then use the following commands to retrieve the certificates later when you need them during this installation:
 
 [source,console]
 ----
@@ -443,14 +459,14 @@ endif::env-gcp[]
 
 [#upstream-tls]
 === Upstream TLS termination
-You may have a requirement to terminate TLS for CircleCI server outside the application. This is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
+You may have a requirement to terminate TLS for CircleCI server outside the application. This termination option is an alternate method to using ACM or supplying the certificate chain during Helm deployment. An example would be a proxy running in front of the CircleCI installation providing TLS termination for your domain name. In this case the CircleCI application acts as the backend for your load balancer or proxy.
 
 CircleCI server listens on the following port numbers, which need to be configured depending how you are routing the traffic:
 
 * Frontend / API Gateway [TCP 80, 443]
 * Nomad server [TCP 4647]
 
-Depending on your requirements you may choose to terminate TLS for only the frontend/api-gateway or provide TLS for services listening on all the ports.
+Depending on your requirements you may choose to terminate TLS for only the `frontend/api-gateway` or provide TLS for services listening on all the ports.
 
 [#encryption-signing-keys]
 == 6. Encryption/signing keys
@@ -881,7 +897,7 @@ ifndef::env-aws[]
 
 [#create-a-gcp-bucket]
 ==== a. Create a GCP bucket
-If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
+If your server installation runs in a GKE cluster, ensure that your current IAM user is cluster admin. RBAC (role-based access control) objects need to be created so admin permissions are required. More information can be found in the link:https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control[GKE documentation].
 
 [source,console]
 ----
@@ -956,6 +972,23 @@ $ gcloud iam service-accounts keys create <KEY_FILE> \
 ====
 
 endif::env-aws[]
+
+ifndef::env-gcp[]
+
+== 8. Externalize RabbitMQ
+
+We use RabbitMQ for workflow messaging, test results, usage, cron tasks, output, notifications, and scheduler.
+
+You can choose to disable the deployment of the internal RabbitMQ instance and instead use your own RabbitMQ instance or the link:https://aws.amazon.com/amazon-mq/[Amazon MQ message broker service].
+
+To choose this option make sure you have your RabbitMQ or Amazon MQ instance available for the next phase of the installation. In the next phase you can then update your `values.yaml` file to use your own RabbitMQ or Amazon MQ instance instead of the internal RabbitMQ instance. The relevant configuration in this case is the following:
+
+[source,yaml]
+----
+rabbitmq.host: <your-host-connection-url>
+rabbitmq.internal: false
+----
+endif::env-gcp[]
 
 ifndef::pdf[]
 [#next-steps]

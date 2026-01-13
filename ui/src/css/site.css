@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "typeface-inter.css";
 @import "typeface-ibm-plex-mono.css";
+@import "typeface-roboto.css";
 @import "vars.css";
 @import "base.css";
 @import "body.css";
@@ -8,8 +9,10 @@
 @import "toc.css";
 @import "doc.css";
 @import "highlight.css";
+@import "shiki.css";
 @import "print.css";
 @import "tabs.css";
+@import "datatables.css";
 
 @source inline("translate-x-0");
 @source inline("h-dvh");
@@ -33,4 +36,21 @@
   --shadow-default: 0 0 6px 4px #1616161F;
 
   --breakpoint-lg: 75rem;
+}
+
+/* Hide component-explorer-nav when search results are shown on desktop/tablet */
+header.h-dvh [data-component-explorer-nav] {
+  display: none;
+}
+
+/* Center search results container on the page */
+header [data-search-results-container] {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hide hamburger menu on landing page */
+.landing-page [data-page-navigation-toggle] {
+  display: none;
 }

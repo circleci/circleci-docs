@@ -16,7 +16,7 @@ For GitHub users, your account has the "Owner" role in your GitHub organization.
 
 For Bitbucket Cloud users, your account has "Admin" permissions in your Bitbucket repository.
 
-For GitLab users, your account is listed as "Org Admin" in the CircleCI web app under xref:guides:integration:gitlab-integration.adoc#organization-settings-people[**Organization Settings > People**].
+For GitLab users, your account is listed as "Org Admin" in the CircleCI web app under menu:Organization Settings[People].
 
 [#what-happens-upon-cancelling-a-performance-plan-subscription]
 === What happens upon cancelling a Performance Plan subscription?

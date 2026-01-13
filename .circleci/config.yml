@@ -8,7 +8,7 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:22.19.0
+      - image: cimg/node:24.12.0
     working_directory: ~/project
 
   go_executor:
@@ -18,7 +18,7 @@ executors:
 
   ruby_executor:
     docker:
-      - image: cimg/ruby:3.4.5
+      - image: cimg/ruby:3.4.8
     working_directory: ~/project
 
 commands:
@@ -53,7 +53,7 @@ jobs:
           command: |
             set -e
             echo "[INFO] Starting Antora build..."
-            npm run build:docs
+            NODE_OPTIONS="--max-old-space-size=4096" npm run build:docs
             echo "[INFO] Antora build completed."
       - store_artifacts:
           path: build

@@ -1,0 +1,80 @@
+---
+extends: script
+scope: raw
+level: warning
+message: "Tables should have a title (line starting with '.' before the table)."
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  lines := text.split(scope, "\n")
+
+  for i, line in lines {
+    trimmed := text.trim_space(line)
+
+    // Check for table delimiter
+    if trimmed == "|===" {
+      // Count how many |=== delimiters appear before this one
+      preceding_count := 0
+      for k := 0; k < i; k++ {
+        if text.trim_space(lines[k]) == "|===" {
+          preceding_count = preceding_count + 1
+        }
+      }
+
+      // If preceding count is even, this is an opening delimiter
+      is_opening := preceding_count % 2 == 0
+
+      if is_opening {
+        // This is an opening delimiter - check for title
+        has_title := false
+        lookback_limit := 10  // Only look back max 10 lines
+
+        // Look back for a title, skipping empty lines, attributes, and block delimiters
+        for j := i - 1; j >= 0 && (i - j) <= lookback_limit; j-- {
+          prev_trimmed := text.trim_space(lines[j])
+
+          // Skip empty lines
+          if prev_trimmed == "" {
+            continue
+          }
+
+          // Skip attribute lines (start with [)
+          if text.has_prefix(prev_trimmed, "[") {
+            continue
+          }
+
+          // Skip block delimiters (only dashes or equals)
+          if text.re_match("^-+$", prev_trimmed) || text.re_match("^=+$", prev_trimmed) {
+            continue
+          }
+
+          // Skip comment lines (start with //)
+          if text.has_prefix(prev_trimmed, "//") {
+            continue
+          }
+
+          // Check if this line is a title (starts with a dot but not ..)
+          if text.has_prefix(prev_trimmed, ".") && !text.has_prefix(prev_trimmed, "..") {
+            has_title = true
+            break
+          }
+
+          // Found a non-skippable line that's not a title
+          // This means there's content between the table and any potential title
+          break
+        }
+
+        if !has_title {
+          // Calculate position by counting characters up to this line
+          pos := 0
+          for k := 0; k < i; k++ {
+            pos = pos + len(lines[k]) + 1  // +1 for newline
+          }
+          matches = append(matches, {begin: pos, end: pos + len(line)})
+        }
+      }
+      // Closing delimiters don't need any action
+    }
+  }

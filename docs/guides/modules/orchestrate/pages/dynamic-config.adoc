@@ -1,6 +1,6 @@
 = Dynamic configuration overview
 :page-platform: Cloud, Server v4+
-:description: A guide to using CircleCI's dynamic configuration features
+:page-description: A guide to using CircleCI's dynamic configuration features
 :experimental:
 
 Dynamic configuration in CircleCI is the process of describing a pipeline in which the work done is dynamically determined. Dynamic configuration is flexible. The features described in this guide allow you to create a configuration to match the requirements of your specific project.
@@ -33,7 +33,7 @@ These steps make dynamic configuration features available for your project, but 
 
 === Use dynamic configuration
 
-Add the key `setup: true` to the top level of your _parent_ configuration file to designate that `config.yml` as a `setup` configuration.
+Add the key `setup: true` to the top level of your _parent_ configuration file to designate that `config.yml` as a setup configuration.
 
 [,yaml]
 ----
@@ -48,14 +48,19 @@ For some basic examples of using dynamic configuration, see the xref:using-dynam
 
 Some constraints on continuing pipelines from a `setup: true` configuration are as follows:
 
-- The `setup` configuration must be `version: 2.1`.
-- The `setup` configuration must only allow one workflow to run in each pipeline. For example:
+- The setup configuration must be `version: 2.1`.
+- The setup configuration must only allow one workflow to run in each pipeline. For example:
 ** Have only one workflow configured.
 ** Use logic conditions to ensure only one workflow is run for each pipeline.
 - A pipeline can only be continued once. A pipeline cannot be continued with another setup configuration. Workflow reruns will fail as part of this restriction. Rather than rerun a setup workflow you can trigger a new pipeline.
 - A pipeline can only be continued within six hours of its creation.
-- Pipeline parameters submitted at continuation time cannot overlap with pipeline parameters submitted at trigger (setup) time.
-- Pipeline parameters declared in the `setup` configuration must also be declared in the continuation configuration. These parameters can be used at continuation time. For more information, see the xref:pipeline-variables.adoc#pipeline-parameters-and-dynamic-configuration[Pipeline values and parameters] page.
+- If you declare a pipeline parameter with the same name and type in both the setup and continuation configuration files, but with different default values, the default values apply respectively to each configuration.
+- You can set the value of a pipeline parameter declared in the continuation configuration to a value other than the default. To do so, specify the parameter's name and value when calling the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb] using the `parameters` parameter.
+- The `continue` job/command will fail with the error {"message":"Conflicting pipeline parameters."} when all three of these conditions occur:
+
+1. The same pipeline parameter is declared in both the setup and the continuation configurations.
+2. The `continue` job/command attempts to pass this pipeline parameter via the `parameters` parameter.
+3. The pipeline is triggered via the API or via the btn:[Trigger Pipeline] button, with a parameter value that differs from the default value specified in the setup configuration.
 
 [#how-dynamic-config-works]
 == How dynamic config works
@@ -86,22 +91,32 @@ Some examples of using dynamic configuration in CircleCI include:
 * Share common configuration across projects by generating project-specific sections dynamically based on parameters.
 * _Continue_ a pipeline, or generate and run a configuration based on where code has changed.
 * Split up a configuration file into reusable fragments that can be dynamically assembled.
-* Generate full CircleCI configurations from small company-specifiic configurations. For example, if you have many repositories with similar CI/CD requirements, you can generate a full CircleCI YAML configuration dynamically from small template configuration written in any configuration language.
+* Generate full CircleCI configurations from small company-specifiic configurations. For example, if you have multiple repositories with similar CI/CD requirements, you can generate a full CircleCI YAML configuration dynamically from small template configuration written in any configuration language.
 * When working with a language or framework that has its own configuration language, you can generate CircleCI config dynamically from existing configuration files.
 
 === Use path filtering for monorepos
 
-Set up path filtering to set pipeline parameters and continuation configuration sources based on the location of changes in your repository.
+In a link:https://circleci.com/blog/monorepo-dev-practices/[monorepo] setup:
 
-In a monorepo (single repository) setup you can use path filtering to avoid all of your microservices/sub-projects being put through the entirety of your build, test, and deployment processes when any single update is introduced.
+* Set up path filtering to set pipeline parameters and continuation configuration sources based on the location of changes in your repository.
+* You can use path filtering to avoid all your microservices/sub-projects being put through the entirety of your build, test, and deployment processes when any single update occurs.
 
-For example, you may have multiple projects within your repository (`project_1`, `project_2`, `project_3`). You can use path filtering to only run tests and deployment for `project_1` if change happened in the `project_1` file set. The link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] is available to help simplify your configuration further. For a full example of path filtering, see the xref:using-dynamic-configuration.adoc#execute-specific-workflows-or-steps-based-on-which-files-are-modified[Dynamic configuration how-to guide].
+For example, you may have multiple projects within your repository (`project_1`, `project_2`, `project_3`). +
+You can use path filtering to only run tests and deployment for `project_1` if a change is made in the `project_1` file set. The link:https://circleci.com/developer/orbs/orb/circleci/path-filtering[path filtering orb] is available to help simplify your configuration further.
+
+For a full example of path filtering, see the xref:using-dynamic-configuration.adoc#execute-specific-workflows-or-steps-based-on-which-files-are-modified[Dynamic configuration how-to guide].
 
 // #DIAGRAM OF PATH FILTERING FOR MONOREPO SETUP#
 
 === Use config splitting for microservices
 
-For projects that consist of multiple modules, you may require a separate job/workflow to run for each module when changes are introduced. You can split your configuration up and store the config for each module separately within the module's directory, keeping related code and config together. Module jobs/workflows can be stored in multiple files as _fragments_ of a configuration. Instead of using one full `.circleci/config.yml` file, you can use dynamic configuration to combine these individual fragments into a full configuration when a pipeline is triggered. This scenario can also be referred to as _config splitting_.
+For projects that consist of multiple modules, you may require a separate job/workflow to run for each module when changes are introduced.
+
+You can split your configuration up and store the config for each module separately within the module's directory, keeping related code and config together.
+
+Module jobs/workflows can be stored in multiple files as _fragments_ of a configuration. Instead of using one full `.circleci/config.yml` file, you can use dynamic configuration to combine these individual fragments into a full configuration when a pipeline is triggered.
+
+This scenario is also referred to as _config splitting_.
 
 // Diagram
 
@@ -154,5 +169,5 @@ include::ROOT:partial$faq/dynamic-configuration-faq-snip.adoc[]
 == Next steps
 
 - A how-to guide for xref:using-dynamic-configuration.adoc[Using dynamic configuration]
-- The link:https://circleci.com/developer/orbs/orb/circleci/continuation[`continuation` orb]
-- The link:https://circleci.com/docs/api/v2/#operation/continuePipeline[`continuePipeline` API call]
+- The link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb]
+- The link:https://circleci.com/docs/api/v2/#operation/continuePipeline[Continue a pipeline API endpoint]

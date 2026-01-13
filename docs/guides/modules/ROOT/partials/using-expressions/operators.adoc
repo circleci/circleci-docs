@@ -1,3 +1,5 @@
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Operator type | Operators | Description
@@ -27,3 +29,4 @@ Note that `not` has very high precedence and so binds very tightly. Use sub-expr
   * `not foo and bar` evaluates to `false`
   * `not (foo and bar)` evaluates to `true`
 |===
+--

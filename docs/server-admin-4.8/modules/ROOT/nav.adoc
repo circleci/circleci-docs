@@ -1,6 +1,5 @@
-* CircleCI server 4.8
-** xref:overview:circleci-server-overview.adoc[CircleCI server Overview]
-** xref:overview:release-notes.adoc[Release notes]
+* xref:overview:circleci-server-overview.adoc[CircleCI server Overview]
+* xref:overview:release-notes.adoc[Release notes]
 
 * Installing CircleCI server
 ** Install on AWS

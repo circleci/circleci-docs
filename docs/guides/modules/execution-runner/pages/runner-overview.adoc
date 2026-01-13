@@ -2,6 +2,7 @@
 :page-platform: Cloud, Server v4+
 :page-description: Learn how CircleCI's self-hosted runners enable you to use your own infrastructure for running jobs.
 :experimental:
+:page-aliases: runner-on-kubernetes.adoc
 
 Use CircleCI's self-hosted runner to run jobs on your own infrastructure. With runner, you can build and test on a wide variety of architectures, and gain additional control over the build environment.
 

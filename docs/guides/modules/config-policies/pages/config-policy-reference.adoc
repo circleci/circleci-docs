@@ -26,7 +26,7 @@ can be utilized by policies related to orbs.
 [#definition-orbs]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 orbs[string] = string
 ----
@@ -44,7 +44,7 @@ Example `orbs` object:
 [#usage-orbs]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -64,7 +64,7 @@ be included in the provided list of orbs.
 [#definition-ban-orbs]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 ban_orbs([string])
 returns { string: string }
@@ -73,7 +73,7 @@ returns { string: string }
 [#usage-ban-orbs]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -94,7 +94,7 @@ This function violates a policy if a config includes orbs based on the orb name 
 [#definition-ban-orbs-version]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 ban_orbs_version([string])
 returns { string: string }
@@ -103,7 +103,7 @@ returns { string: string }
 [#usage-ban-orbs-version]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -126,7 +126,7 @@ still be available for use by any project.
 [#definition-resource-class-by-project]
 ==== Definition
 
-```rego
+```go
 resource_class_by_project({
   "$RESOURCE_CLASS": {$PROJECT_IDS...},
   ...
@@ -137,7 +137,7 @@ returns { ...reasons: string }
 [#usage-resource-class-by-project]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -168,7 +168,7 @@ It prevents the usage of **any** context **not in** `ALLOWED_CONTEXTS` for **all
 [#definition-contexts-allowed-by-project-ids]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 contexts_allowed_by_project_ids(
   PROJECTS: string | Array<string> | Set<string>
@@ -180,7 +180,7 @@ returns reason <type string>
 [#usage-contexts-allowed-by-project-ids]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -212,7 +212,7 @@ It blocks the usage of **any** context **in** `BLOCKED_CONTEXTS` for **all** pro
 [#definition-contexts-blocked-by-project-ids]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 contexts_blocked_by_project_ids(
   PROJECTS: string | Array<string> | Set<string>
@@ -224,7 +224,7 @@ returns reason: string
 [#usage-contexts-blocked-by-project-ids]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -257,7 +257,7 @@ It blocks the usage of **any** context **in** `RESERVED_CONTEXTS` for **all** pr
 [#definition-contexts-reserved-by-project-ids]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 contexts_reserved_by_project_ids(
   PROJECTS: string | Array<string> | Set<string>
@@ -269,7 +269,7 @@ returns reason: string
 [#usage-contexts-reserved-by-project-ids]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -302,7 +302,7 @@ Branch names **not in** `BRANCHES` are **not** allowed to use the contexts **in*
 [#definition-contexts-reserved-by-branches]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 contexts_reserved_by_branches(
   BRANCHES: string | Array<string> | Set<string>
@@ -314,7 +314,7 @@ returns reason: string
 [#usage-contexts-reserved-by-branches]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -344,7 +344,7 @@ This function checks any value and returns true if it is a string that contains 
 [#definition-is-parameterized-expression]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 is_parameterized_expression(value)
 return boolean
@@ -353,7 +353,7 @@ return boolean
 [#usage-is-parameterized-expression]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 is_parameterized_expression("hello world")                      # false
 is_parameterized_expression(42)                                 # false
@@ -370,7 +370,7 @@ This function retrieves the name of an element in a config file. You can use it 
 [#definition-get-element-name]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 get_element_name(input.<config_key>)
 returns string
@@ -379,7 +379,7 @@ returns string
 [#usage-get-element-name]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -411,7 +411,7 @@ This function casts a value to an array. Array values are left as is and are **n
 [#definition-to-array]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 to_array(value)
 returns array
@@ -420,7 +420,7 @@ returns array
 [#usage-to-array]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 
@@ -440,7 +440,7 @@ This function casts a value to a set. Array values are cast to a set and dedupli
 [#definition-to-set]
 ==== Definition
 
-[source,rego]
+[source,go]
 ----
 to_set(value)
 returns set
@@ -449,7 +449,7 @@ returns set
 [#usage-to-set]
 ==== Usage
 
-[source,rego]
+[source,go]
 ----
 package org
 

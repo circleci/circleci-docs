@@ -1,0 +1,216 @@
+= GitHub App integration overview
+:page-platform: Cloud
+:page-description: Learn how to integrate CircleCI with GitHub using GitHub Apps.
+:experimental:
+
+If your CircleCI organization is integrated with GitHub through the **CircleCI GitHub App**, the content on this page is for you.
+
+****
+The **CircleCI GitHub App** is an add-on integration. All organizations that have `/github/` or `/circleci/` in the URL can install the GitHub App, including xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[those already integrated through the GitHub OAuth app].
+To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections].
+****
+
+This page walks you through integrating a GitHub project with CircleCI through the CircleCI GitHub App integration. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
+
+[#sign-up]
+== Steps to integrate GitHub projects with CircleCI
+
+Follow the steps on the xref:getting-started:first-steps.adoc[Sign up and try CircleCI] page to connect your GitHub account, which creates your CircleCI organization.
+
+When you create a new organization, you will be guided to start creating projects, as follows:
+
+. The first project you create will prompt you to install the CircleCI GitHub App in a GitHub organization.
+. After installing the GitHub App, you will select a repository to use for your project's first pipeline.
+. CircleCI will automatically generate a custom configuration file based on the programming languages and frameworks detected in your repository for this pipeline. If you already have a YAML configuration file on the default branch of the repository that you selected, CircleCI will use the configuration file that exists in the repository instead of generating a new one for your project's first pipeline.
+. You can then choose a trigger event option out of the dropdown list.
+. Finally, you can review your setup.
+. If CircleCI generated a custom configuration file for you, CircleCI will commit the generated configuration to a new branch (`circleci-project-setup`) when you click the btn:[Commit config and run] button.
+
+NOTE: If you are new to CircleCI, you may wish to get started with our xref:getting-started:getting-started.adoc[Quickstart guide], our xref:getting-started:hello-world.adoc[Hello world] examples, or take a look at some of our xref:toolkit:sample-config.adoc[sample configurations] that demonstrate different types of workflows. The xref:reference:ROOT:configuration-reference.adoc[Configuration reference] is a full reference to the keys used in a `.circleci/config.yml` file.
+
+=== Can I integrate a GitHub org with multiple CircleCI orgs?
+
+A GitHub org with the CircleCI GitHub App installed can only be integrated with one CircleCI organization.
+
+In this scenario, attempting to integrate with a second CircleCI organization will redirect you to a GitHub App integration settings page when creating a project. If you are not sure what other CircleCI organization may be connected to your GitHub organization, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[here].
+
+image::guides:ROOT:github-app-configuration-page.png[Create a project]
+
+[#trigger-pipeline]
+== Trigger a pipeline in CircleCI
+
+When you click btn:[Commit config and run], as described above, a pipeline is triggered. You will see the pipeline running when you are taken to the CircleCI dashboard.
+
+When the event you selected under the "Run on" menu occurs (see the xref:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[GitHub event trigger options] page, for a full list of options), a new pipeline is triggered. You will see the pipeline running in the CircleCI web app.
+
+image::guides:ROOT:gl-ga/gitlab-ga-successful-pipeline.png[Successful pipeline run]
+
+****
+Editing an existing CircleCI configuration within the web app is not currently available. All further changes to the configuration should be made in your GitHub repository. Committing further changes in your repository will automatically trigger a pipeline.
+
+If you would like to manually trigger a pipeline from the CircleCI web app, see the link:https://circleci.com/docs/triggers-overview/#run-a-pipeline-from-the-circleci-web-app[Triggers page].
+
+****
+
+[#project-settings]
+== Project settings
+
+Within CircleCI, a project can have one or more **Pipelines**. Each pipeline is defined by two key characteristics:
+
+* A configuration file, which is stored in a repository referred to as _config source_, at a path of your choosing. The default config source location is `.circleci/config.yml`, but any file path with extension `*.yml` can be used.
+* A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[checkout step]. This model allows your CircleCI config to be stored in a different repository from your code.
+
+Each pipeline can have zero or many **triggers**, which are events that cause a pipeline to run.
+
+The following settings are found by clicking the **Project Settings** button within your project.
+
+[#people]
+=== People
+
+Project roles give control over which users have access to which projects within an organization. This enables teams to have limited access to only their projects, while managers and others can have broader organizational access. The access options are:
+
+* Admin: Read and write access to the project and all settings and ability to manage other users' access.
+* Contributor: Read and write access to the project and some settings.
+* Viewer: Read only access to the project and some settings.
+
+For a complete list of permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview] page.
+
+=== Project setup
+
+You can add or delete pipelines for your project. For details see the xref:orchestrate:pipelines.adoc[Pipelines Overview].
+
+[#project-settings-advanced]
+=== Advanced
+
+- You can enable dynamic configuration using setup workflows in CircleCI. To learn about dynamic configuration, read the xref:orchestrate:dynamic-config.adoc[Dynamic configuration] guide.
+
+[#only-build-pull-requests]
+=== Only build pull requests
+
+In your trigger settings, select the "PR opened or pushed to, default branch and tag pushes" option under the "Run on" menu. For a full list of GitHub event trigger options, see the xref:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[GitHub trigger event options] page.
+
+image::guides:ROOT:triggers/run-on-open.png[Run on trigger menu options]
+
+[#organization-settings]
+== Organization settings
+
+For GitHub App integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
+
+To manage settings at the organization level, select btn:[Organization Settings] in the CircleCI web app sidebar.
+
+[#organization-settings-people]
+=== People
+
+Add or remove users, and manage user roles for the organization as well as user invites. See the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview] page for full details.
+
+[#roles-and-permissions]
+== Roles and permissions
+
+CircleCI users have different abilities depending on assigned roles in a particular organization. For a detailed list of CircleCI org and project roles and associated permissions, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions] page.
+
+[#deprecated-system-environment-variables]
+== Deprecated system environment variables
+
+A subset of built-in environment variables are not available in GitHub-based projects authorized through the GitHub App. VCS support for each environment variable is indicated in the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in environment variables] table on the Project values and variables page. If your pipelines need these environment variables, we recommend you use suitable replacements from the available xref:orchestrate:pipeline-variables.adoc[pipeline values].
+
+[#Moving-from-github-oauth-app-to-github-app]
+== Moving from the GitHub OAuth app integration to the GitHub App integration
+
+Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI’s GitHub App, consider the following:
+
+* If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[this guide].
+* If the motivation is to **completely remove the OAuth app integration** for security, compliance, or other reasons, follow the steps below.
+
+[#Steps-to-migrate-to-an-organization-without-default-GitHub-OAuth-integration]
+=== Steps to migrate to an organization without default GitHub OAuth integration
+
+The following steps guide you through migrating you organization as follows:
+
+* *From* an organization integrated with GitHub through the OAuth integration by default (identifiable by `/github/` or `/gh/` in the URL).
+* *To* an organization that does not have a default OAuth integration with GitHub (identifiable by `/circleci/` in the URL).
+
+[CAUTION]
+====
+* You can not currently automate migrating your organization from the GitHub OAuth app to CircleCI's GitHub App integration.
+* Before proceeding, confirm that you do not immediately need any of the functionality listed in the <<currently-not-supported>> section below.
+* The following steps include *creating a new org*. If you need to transfer private orbs or self-hosted runner resource classes to your new org, contact link:https://support.circleci.com/[Support at CircleCI] before following step 14.
+* If you have a dedicated account team at CircleCI, contact them first to discuss your migration.
+====
+
+. From your existing CircleCI organization in the CircleCI web app, select the organization dropdown in the top-left corner.
+. At the bottom of the drop-down, select btn:[Create New Organization].
+. On the "Connect your code" page, select btn:[Connect] next to "GitHub".
+. You will be redirected to GitHub to install the CircleCI GitHub App into your GitHub organization.
++
+NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration, as long as your original CirlceCI organization is not already connected to it.
+. Follow the instructions to create a project that is connected to one of your GitHub repositories.
+. If you are on a **paid** pricing plan:
+.. Navigate back to the organization that is connected to the GitHub OAuth app
+.. Select **Plan** in the CircleCI web app
+.. Select the "Share and Transfer" tab
+.. Select btn:[Add shared organization] and choose the new organization that you just created that integrates with CircleCI's GitHub App.
+. Navigate to the project that was created in step 4 in the "new" organization that is integrated with the GitHub App. Match any custom project settings that you had from your previous project to this new project on the **Project Settings** page.  This includes things like environment variables and outbound webhooks.
+. Perform a test push of code to your repository to ensure that a pipeline is triggered and is working as expected in your **new** CircleCI organization.
+. Assuming the repository you connected is also connected to your previous CircleCI organization, CircleCI will start pipelines when a push event happens to the repository in both the old and new organizations. If your test from step 8 above was successful, go to **Project Settings** in your organization connected to the GitHub OAuth App (your "old" org), scroll down and select btn:[Stop Building].  This will ensure that push events to your repository only trigger pipelines in the project connected to your GitHub App organization.
+. Repeat steps 6-9 by selecting menu:Projects[Create a Project] for each project that you had set up in your previous organization.
+. If you are using xref:security:contexts.adoc[contexts], you will need to recreate the contexts in your new organization.
+. Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on xref:getting-started:invite-your-team.adoc[this page].
+. If you are on a **paid** pricing plan and followed step 6:
+.. Navigate back to the "old" organization and select menu:Plan[Share and Transfer].
+.. Select the image:guides:ROOT:icons/cancel.svg[delete icon, role="no-border"] next to the "new" organization to remove the shared relationship between the "new" and "old" organizations.
+.. Select btn:[Transfer Plan] and follow the instructions to transfer the plan from the "old" organization to the "new" organization.
+. At this point, you will be left with a GitHub App-integrated organization that has the same payment plan and projects as your previous organization. If you get logged out, you can continue to use the "Login with GitHub" button on link:https://circleci.com/login[the CircleCI login page] as long as the old organization is not deleted.
+
+NOTE: Data from xref:insights:insights.adoc[Insights] and historical pipeline runs will not be present in your new organization. Contexts will not be present until you recreate them for your new org.
+
+[#currently-not-supported]
+== Currently not supported
+
+The following sections are features of CircleCI which are not yet supported when using the GitHub App integration. These features are planned for future releases.
+
+[#restrict-a-context-to-a-security-group]
+=== Restrict a context to a security group
+The ability to xref:security:contexts.adoc#security-group-restrictions[restrict a context to a security group] is supported for GitHub App pipelines only for organizations that have `/github/` (or `/gh/`) in the URL, no matter the pipeline integration type. It is not yet supported for organizations that have `/circleci/` in the URL. You can follow development progress link:https://circleci.canny.io/cloud-feature-requests/p/ability-to-use-security-groups-for-contexts-used-by-github-app-type-pipelines[here].
+
+[#in-app-config-editor]
+=== In-app config editor
+Config viewing is supported for GitHub App pipelines, however editing is not available (except during project creation).
+
+[#account-integrations]
+=== Account integrations
+
+The page menu:User settings[Account integrations] does not currently list the GitHub App integration, even though your account may be correctly connected. This page only shows GitHub OAuth app integrations.
+
+[#build-forked-pull-requests]
+=== Build forked pull requests
+
+The Build forked pull requests feature is not currently supported for GitHub App pipelines.
+
+[#passing-secrets-to-forked-pull-requests]
+=== Passing secrets to forked pull requests
+
+Passing secrets to forked pull requests is not currently supported for GitHub App pipelines.
+
+[#stop-building]
+=== Stop building
+
+Projects in organizations with `/circleci/` in the URL do not have the **Stop Building** option that can normally be found in **Project settings**. However, the same functionality can be achieved by deleting (or disabling) all triggers associated with existing pipelines, from menu:Project Settings[Project setup].
+
+[#additional-ssh-keys-only]
+=== Additional SSH keys only
+
+Deploy keys and user keys are not used in projects with `/circleci/` in the URL. Instead, all keys are stored in menu:Project Settings[ Additional SSH Keys]. If you are looking to set up an SSH key to check out code from additional repositories in GitHub, see xref:add-ssh-key.adoc#steps-to-add-additional-ssh-keys[Add additional SSH keys].
+
+[#outbound-webhooks]
+=== Outbound webhooks
+While outbound webhooks *are* available for GitHub App pipelines, their payload differs from that of GitHub OAuth pipelines. See the xref:reference:ROOT:outbound-webhooks-reference.adoc[outbound webhook reference] page for more details.
+
+[#test-insights]
+=== Test Insights
+
+xref:insights:insights-tests.adoc[Test Insights] is currently not supported for orgs with `/circleci/` in the URL. Test Insights is available for GitHub OAuth authenticated orgs that have GitHub App pipelines set up.
+
+[#next-steps]
+== Next steps
+- xref:getting-started:config-intro.adoc[Configuration tutorial]
+- xref:getting-started:hello-world.adoc[Hello world]
