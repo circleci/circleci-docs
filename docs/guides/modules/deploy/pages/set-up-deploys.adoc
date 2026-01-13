@@ -111,6 +111,10 @@ Alternatively, you can copy the suggested configuration into an existing or newl
 
 You can now deploy your component by selection btn:[Deploy] in your project overview and running your deploy pipeline. For detailed steps, see the xref:deploy-a-component.adoc[Deploy a Component] guide.
 
+== Run a deploy pipeline
+
+For steps to running a deploy pipeline, see the xref:deploy-a-component.adoc[Deploy a Component] guide.
+
 == Change Deploy Pipeline
 
 You can switch deploy pipelines for your project at any time. If you have configured a new pipeline and want to trigger this pipeline when performing deployments, you can change which pipeline is used for deploy operations.

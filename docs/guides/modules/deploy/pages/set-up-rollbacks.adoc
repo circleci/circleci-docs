@@ -118,6 +118,10 @@ Alternatively, you can copy the suggested configuration into an existing or newl
 
 You can now rollback deployments by running your rollback pipeline. More information is available in the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.
 
+== Run a rollback pipeline
+
+For steps to running a rollback pipeline, see the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.
+
 == Change rollback pipeline
 
 You can switch rollback pipelines for your project at any time. If you have configured a new pipeline and want to trigger this pipeline when performing rollbacks, you can change which pipeline is used for rollback operations.
