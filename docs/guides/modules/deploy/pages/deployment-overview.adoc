@@ -118,7 +118,10 @@ CircleCI provides deployment tracking and management through two main features a
 
 To configure deploy markers you will add steps to your pipeline configuration to log and track deployment status in the CircleCI UI.
 
-Once you have deploy markers configured you can set up and use *rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
+Once you have deploy markers configured you can set up and use the following features:
+
+* *Rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
+* *Deploy pipelines* to automatically deploy your application to a target environment directly from the CircleCI web app.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
