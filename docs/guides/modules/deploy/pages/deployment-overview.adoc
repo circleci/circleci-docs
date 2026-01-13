@@ -8,7 +8,7 @@ With CircleCI you can deploy to any target and manage your deployments in the Ci
 
 Track deployments using deploy markers. Deploy and rollback to a stable version using preconfigured deploy and rollback pipelines.
 
-Alternatively, if you are deploying to Kubernetes, you can also use the CircleCI release agent to manage your deployments.
+Alternatively, if you are deploying to Kubernetes, you can also use the CircleCI release agent to manage your deployments. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
 
 == Introduction
 
@@ -153,21 +153,9 @@ The sections below explain some key software delivery concepts. Understanding th
 
 === Command
 
+TIP: Commands are available when using the release agent. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
 A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component.
 
-[tabs]
-====
-Deploys commands::
-+
---
-With deploy markers set up you have access to the *rollback* command which allows you to trigger a specific rollback pipeline to get back to a working version of your application quickly.
-
-.Screenshot showing the rollback command option from project overview page
-image::guides:ROOT:deploy/project-overview-rollback.png[Screenshot showing the rollback command]
---
-Release agent commands::
-+
---
 Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, similarly to how step output works for CI jobs.
 
 Some commands are available for all components. These are:
@@ -181,8 +169,6 @@ A subset of commands are available for _progressive_ deployments (when using Arg
 * Retry deployment.
 * Promote deployment.
 * Cancel deployment.
---
-====
 
 === Component
 
