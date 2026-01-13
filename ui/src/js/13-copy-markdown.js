@@ -5,6 +5,28 @@
 
   if (!supportsCopy) {
     console.warn('Clipboard API not supported')
+  }
+
+  // Set href for "View markdown" links
+  var viewLinks = document.querySelectorAll('.view-markdown-link')
+  viewLinks.forEach(function (link) {
+    var pageUrl = link.dataset.pageUrl
+    var markdownUrl
+
+    // Convert HTML URL to markdown URL
+    if (pageUrl.endsWith('/')) {
+      markdownUrl = pageUrl + 'index.md'
+    } else if (pageUrl.endsWith('.html')) {
+      markdownUrl = pageUrl.replace(/\.html$/, '.md')
+    } else {
+      markdownUrl = pageUrl + '.md'
+    }
+
+    link.href = markdownUrl
+  })
+
+  // Handle "Copy markdown" button clicks (only if clipboard is supported)
+  if (!supportsCopy) {
     return
   }
 
