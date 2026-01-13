@@ -5,6 +5,7 @@
 
 This page covers some dynamic configuration examples. The following examples are provided below:
 
+- <<pass-parameters-to-continuation-workflow>>: In this example, a parameter is passed from the setup workflow to the continuation workflow using the continuation orb. The continuation workflow uses conditional logic to execute based on the parameter value.
 - <<a-basic-example>>: In this example, a script is used to generate a YAML configuration file. The continuation orb is used to continue the pipeline using the generated configuration.
 - <<execute-specific-workflows-or-steps-based-on-which-files-are-modified>>: In this example, two configuration files are used, a setup configuration and a continuation configuration. The path filtering orb is used to conditionally set pipeline parameters, and conditional workflow logic is used to generate and continue the pipeline based on the location of modified files.
 - <<generate-a-config-file-based-on-modified-files>>: In this example the continuation configuration is split into separate project-specific config files and a shared config file. Path filtering is used to generate a config file for continuation based on the location of modified files.
@@ -15,6 +16,111 @@ This page covers some dynamic configuration examples. The following examples are
 
 * The content on this page assumes you have already read the xref:dynamic-config.adoc[Dynamic Configuration] page.
 * If your project was created before December 1st 2023 you will need to enable dynamic configuration in your xref:dynamic-config.adoc#enable-dynamic-config[project settings].
+
+[#pass-parameters-to-continuation-workflow]
+== Pass parameters from setup to continuation workflow
+
+If you need to pass a parameter (and its associated value) from the setup workflow to the continuation workflow, you can leverage the `parameters` parameter of the continuation orb's `continue` command.
+
+This is typically useful if you want the execution of the continuation workflow to depend on logic statements.
+
+[#setup-config-params]
+=== Setup configuration: `config.yml`
+
+The following example shows how to pass a parameter when continuing to a continuation workflow.
+
+[%linenums,yaml]
+----
+version: 2.1
+
+# define this file as the setup phase of your dynamic configuration
+setup: true
+
+# invoke the continuation orb to make the continuation/continue command available
+orbs:
+  continuation: circleci/continuation@1.1.0
+
+jobs:
+  set-param:
+    docker:
+      - image: cimg/node:24.0.1
+    steps:
+      - continuation/continue:
+          parameters: '{ "further": true }'
+          configuration_path: ./config_continue.yml
+
+workflows:
+  use-my-orb:
+    jobs:
+      - set-param
+----
+
+* **Line 4**: Add the line `setup: true` to the top-level of the config, to designate it for use of CircleCI's dynamic configuration feature.
+* **Line 8**: Invoke the `continuation` orb so we can use it.
+* **Lines 11-18**: Define a job called `set-param` that uses the continuation orb's `continue` command to pass a parameter called `further` with a value of `true` to the continuation workflow.
+* **Line 16**: The `parameters` parameter accepts a JSON object as a string. Note the single quote encapsulating the full JSON object.
+
+[#continuation-config-params]
+=== Continuation configuration: `config_continue.yml`
+
+The continuation configuration receives the parameter passed from the setup configuration and uses conditional logic to determine whether to execute the workflow.
+
+[%linenums,yaml]
+----
+version: 2.1
+
+# define the parameter that will be passed from the setup workflow
+parameters:
+  further:
+    type: boolean
+    default: false
+
+jobs:
+  module-build:
+    docker:
+      - image: cimg/node:24.0.1
+    steps:
+      - run:
+          name: Check directory
+          command: pwd
+
+workflows:
+  module-workflow:
+    when: << pipeline.parameters.further >>
+    jobs:
+      - module-build
+----
+
+* **Lines 4-7**: Define a pipeline parameter called `further` with a type of `boolean` and a default value of `false`.
+* **Line 20**: Use the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[`when` key] in the workflow to conditionally execute the workflow based on the value of the `further` parameter.
+
+In the above scenario, the `module-workflow` will only execute if you specified `parameters: '{ "further": true }'` when invoking the `continuation/continue` command.
+
+[#additional-notes-params]
+=== Additional notes
+
+You can pass several parameters when invoking the `continuation/continue` command. However, they need to be part of the same JSON object. For example:
+
+[source,yaml]
+----
+steps:
+  - continuation/continue:
+      parameters: '{ "further": true, "other_param": "a_string" }'
+      configuration_path: ./config_continue.yml
+----
+
+NOTE: Notice the absence of double-quotes around the boolean's value.
+
+The `parameters` parameter accepts either a JSON object or a path to a file containing a JSON object. So the following is also valid:
+
+[source,yaml]
+----
+steps:
+  - run: echo '{ "further": true, "other_param": "a_string" }' > /home/circleci/parameters.json
+  - continuation/continue:
+      parameters: /home/circleci/parameters.json
+      configuration_path: ./config_continue.yml
+----
 
 [#a-basic-example]
 == Continue a pipeline with a dynamically generated configuration file
@@ -209,18 +315,18 @@ For this example, consider a project that includes:
 
 Each configuration file is explained in the following sections.
 
-[,shell]
+[source,shell]
 ----
 .
 ├── .circleci
-│   ├── code-config.yml
-│   ├── config.yml
-│   ├── docs-config.yml
-│   ├── no-updates.yml
-│   └── shared-config.yml
+│   ├── code-config.yml
+│   ├── config.yml
+│   ├── docs-config.yml
+│   ├── no-updates.yml
+│   └── shared-config.yml
 ├── README.md
 ├── docs
-│   └── my-docs.txt
+│   └── my-docs.txt
 └── src
     └── my-code.txt
 ----
@@ -236,7 +342,7 @@ Under the hood the following steps are taken when the pipeline is triggered:
 * A continuation configuration is generated using the relevant config files from the project, and the pipeline parameter values are set.
 * The pipeline is continued using the continuation configuration.
 
-[,yml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -266,7 +372,7 @@ In the event of changes to _any_ file in the repository (`.*`) the `shared-confi
 
 NOTE: `shared-config.yml` is designed to be used either on its own or along with other partial configurations. You can include anything that should _always_ run in the shared configuration.. `code-config.yml` or `docs-config.yml` include workflows that orchestrate the shared jobs defined in `shared-config.yml` and they can be combined together to create the required pipeline for a set of changes.
 
-[,yml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -315,7 +421,7 @@ The config files for building the separate directories, `src/` and `/docs`, cont
 
 
 .code-config.yml
-[,yaml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -335,7 +441,7 @@ workflows:
 ----
 
 .docs-config.yml
-[,yaml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -360,7 +466,7 @@ We have used the path filtering orb to map configuration files with file paths s
 
 One way to handle this scenario is to provide an alternative configuration using the `config-path` parameter (see line 27 <<setup-config-1,here>>). `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the path to modified files. In this example, we use a `no-updates.yml` configuration file. Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
 
-[,yml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -402,25 +508,25 @@ For this example, consider a project that includes:
 * A `shared/` configuration directory containing our shared jobs in separate YAML files. This is used to generate `shared-config.yml` using the xref:toolkit:how-to-use-the-circleci-local-cli.adoc#packing-a-config[CircleCI CLI command] `circleci config pack`
 * A `no-updates.yml` config file to be used in the event that there are no changes.
 
-[,shell]
+[source,shell]
 ----
 .
 ├── .circleci
-│   ├── code-config.yml
-│   ├── config.yml
-│   ├── docs-config.yml
-│   ├── no-updates.yml
-│   ├── shared
-│   │   └── jobs
-│   │       ├── any-change.yml
-│   │       ├── lint.yml
-│   │       └── test.yml
-│   │   └── workflows
-│   │       ├── run-on-any-change.yml
+│   ├── code-config.yml
+│   ├── config.yml
+│   ├── docs-config.yml
+│   ├── no-updates.yml
+│   ├── shared
+│   │   └── jobs
+│   │       ├── any-change.yml
+│   │       ├── lint.yml
+│   │       └── test.yml
+│   │   └── workflows
+│   │       ├── run-on-any-change.yml
 |   |       └── @shared.yml
 ├── README.md
 ├── docs
-│   └── my-docs.txt
+│   └── my-docs.txt
 └── src
     └── my-code.txt
 ----
@@ -440,7 +546,7 @@ The setup configuration had a single job, `setup`, which has the following steps
 * Validate the configuration file using the CLI
 * Continue the pipeline with the new configuration file using the continuation orb
 
-[,yaml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -520,14 +626,14 @@ TIP: When packing a config using `circleci config pack`, the component names are
 
 This workflow runs the job `any-change` on all pipelines triggered by a change in the repository, even if that change is outside of the `/src` or `/docs` directories.
 
-[,yml]
+[source,yaml]
 ----
 jobs:
   - any-change
 ----
 
 .shared/jobs/any-change.yml
-[,yml]
+[source,yaml]
 ----
 docker:
   - image: cimg/base:stable
@@ -536,7 +642,7 @@ steps:
 ----
 
 .shared/jobs/lint.yml
-[,yml]
+[source,yaml]
 ----
 docker:
   - image: cimg/base:stable
@@ -545,7 +651,7 @@ steps:
 ----
 
 .shared/jobs/test.yml
-[,yml]
+[source,yaml]
 ----
 docker:
   - image: cimg/base:stable
@@ -559,7 +665,7 @@ steps:
 The config files for building the separate directories, `src/` and `/docs`, contain build jobs for the content and workflows to orchestrate the build and shared jobs described above. The `lint` job is used for both, and the `test` job is only used when the code is built, not the docs.
 
 .code-config.yml
-[,yaml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -579,7 +685,7 @@ workflows:
 ----
 
 .docs-config.yml
-[,yaml]
+[source,yaml]
 ----
 version: 2.1
 
@@ -605,7 +711,7 @@ We have used the path filtering orb to map configuration files with file paths s
 One way to handle this scenario is to provide an alternative configuration using the `config-path` parameter (see line 27 <<setup-config-1,here>>). `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the path to modified files. In this example, we use a `no-updates.yml` configuration file. Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
 
 
-[,yml]
+[source,yaml]
 ----
 version: 2.1
 
