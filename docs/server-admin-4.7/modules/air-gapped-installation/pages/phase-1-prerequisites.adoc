@@ -13,8 +13,9 @@ The guides in this section walk you through the steps required to install Circle
 == Required components for air-gapped installation
 The following table shows an overview of the prerequisites required to run an air-gapped CircleCI server installation. These items must be present in your air-gapped environment in order to move forward with the installation.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | Component
 | Used for
@@ -35,6 +36,7 @@ The following table shows an overview of the prerequisites required to run an ai
 | Machines for running Nomad
 
 |===
+--
 
 [#copy-images]
 == 1. Copy images
@@ -57,78 +59,72 @@ Download all images required for the release of CircleCI server to your local ma
 ----
 SERVER_4_7_IMAGE_LIST=`cat <<EOF
 cciserver.azurecr.io/api-gateway:0.1.49191-1d80931
-cciserver.azurecr.io/api-service:0.1.19809-2c27b769
-cciserver.azurecr.io/approval-job-provider-migrator:1.0.22210-1e8ba07
+cciserver.azurecr.io/api-service:0.1.23611-0b28f56b
+cciserver.azurecr.io/approval-job-provider-migrator:1.0.24273-04e9d72
 cciserver.azurecr.io/audit-log-service:0.1.1767-a014907
-cciserver.azurecr.io/authentication-svc:0.1.31069-c3ff89c
+cciserver.azurecr.io/authentication-svc:0.1.59499-6e322a8
 cciserver.azurecr.io/authentication-svc-migrator:0.1.17533-7681416
-cciserver.azurecr.io/branch-service:0.1.5146-5123808
-cciserver.azurecr.io/branch-service-migrator:0.1.5145-5123808
-cciserver.azurecr.io/builds-service:1.0.7343-84779b5
-cciserver.azurecr.io/builds-service-migrator:1.0.7343-84779b5
-cciserver.azurecr.io/ciam:0.1.32056-480583e
-cciserver.azurecr.io/ciam-gateway:0.1.7603-883d322
-cciserver.azurecr.io/contexts-service:0.1.23652-7e97303
-cciserver.azurecr.io/contexts-service-migrator:0.1.23651-7e97303
-cciserver.azurecr.io/cron-service:0.1.5169-cbc93dd
-cciserver.azurecr.io/cron-service-migrator:0.1.5170-cbc93dd
-cciserver.azurecr.io/distributor:0.1.137585-444fb120
-cciserver.azurecr.io/distributor-migrator:0.1.137584-444fb120
-cciserver.azurecr.io/docker-provisioner:0.1.27473-7465c1c
-cciserver.azurecr.io/domain-service:0.1.18086-464027e
-cciserver.azurecr.io/domain-service-migrator:0.1.18085-464027e
-cciserver.azurecr.io/execution-gateway:0.1.22605-9cd2443
-cciserver.azurecr.io/feature-flags:0.1.7871-2143698
-cciserver.azurecr.io/frontend:0.2.37400-0682aca-snapshot
-cciserver.azurecr.io/init-known-hosts:1.0.15-4c88cf7
-cciserver.azurecr.io/insights-service:0.1.89109-a6fd61a5
-cciserver.azurecr.io/insights-service-migrator:0.1.89110-a6fd61a5
-cciserver.azurecr.io/machine-provisioner:0.1.84130-76afc75
-cciserver.azurecr.io/machine-provisioner-migrator:0.1.84123-76afc75
+cciserver.azurecr.io/branch-service:0.1.10715-8492c27
+cciserver.azurecr.io/branch-service-migrator:0.1.10716-8492c27
+cciserver.azurecr.io/builds-service:1.0.8060-f24e66b
+cciserver.azurecr.io/builds-service-migrator:1.0.8060-f24e66b
+cciserver.azurecr.io/ciam:0.1.50837-410023d
+cciserver.azurecr.io/ciam-gateway:0.1.15504-1eb2187
+cciserver.azurecr.io/circle-www-api:0.1.722415-42f79e68d8
+cciserver.azurecr.io/contexts-service:0.1.26661-3f76411
+cciserver.azurecr.io/contexts-service-migrator:0.1.26660-3f76411
+cciserver.azurecr.io/cron-service:0.1.7112-40e03c6
+cciserver.azurecr.io/cron-service-migrator:0.1.7112-40e03c6
+cciserver.azurecr.io/distributor:0.1.143939-9ac3705b
+cciserver.azurecr.io/distributor-migrator:0.1.143943-9ac3705b
+cciserver.azurecr.io/docker-provisioner:0.1.50789-183380b
+cciserver.azurecr.io/domain-service:0.1.20018-bbbe61b
+cciserver.azurecr.io/domain-service-migrator:0.1.20017-bbbe61b
+cciserver.azurecr.io/execution-gateway:0.1.26168-91480f3
+cciserver.azurecr.io/feature-flags:0.1.9683-f420b63
+cciserver.azurecr.io/init-known-hosts:1.0.331-b46edb0
+cciserver.azurecr.io/insights-service:0.1.96989-a7c9cdfd
+cciserver.azurecr.io/insights-service-migrator:0.1.96990-a7c9cdfd
+cciserver.azurecr.io/machine-provisioner:0.1.102168-68663184
+cciserver.azurecr.io/machine-provisioner-migrator:0.1.102166-68663184
 cciserver.azurecr.io/nomad:1.4.568-bfc9a6ec4-125-a748c37
-cciserver.azurecr.io/orb-service:0.1.89027-f8ec8ae
-cciserver.azurecr.io/orb-service-analytics-migrator:0.1.89028-f8ec8ae
-cciserver.azurecr.io/orb-service-migrator:0.1.89025-f8ec8ae
-cciserver.azurecr.io/output:0.1.28505-222a47e
-cciserver.azurecr.io/permissions-service:0.1.32058-480583e
-cciserver.azurecr.io/permissions-service-migrator:0.1.32057-480583e
-cciserver.azurecr.io/policy-service:0.1.6789-4e9d8f6
-cciserver.azurecr.io/runner-admin:0.1.22266-f606ca5
-cciserver.azurecr.io/runner-admin-migrator:0.1.22253-f606ca5
-cciserver.azurecr.io/server-license:1.0.14-9cb1f65
-cciserver.azurecr.io/server-postgres:12.16.135-34b4cfa
+cciserver.azurecr.io/orb-service:0.1.114737-e06bc085
+cciserver.azurecr.io/orb-service-analytics-migrator:0.1.114736-e06bc085
+cciserver.azurecr.io/orb-service-migrator:0.1.114738-e06bc085
+cciserver.azurecr.io/output:0.1.32451-d059dd2
+cciserver.azurecr.io/permissions-service:0.1.50836-410023d
+cciserver.azurecr.io/permissions-service-migrator:0.1.50835-410023d
+cciserver.azurecr.io/policy-service:0.1.10798-d2c6572
+cciserver.azurecr.io/runner-admin:0.1.30454-5cf82a5
+cciserver.azurecr.io/runner-admin-migrator:0.1.30437-5cf82a5
+cciserver.azurecr.io/server-license:1.0.111-9cb1f65
+cciserver.azurecr.io/server-mongodb:3.6.22-debian-9-r38
 cciserver.azurecr.io/server-postgres:12.16.37-7629bfd
-cciserver.azurecr.io/step:0.1.8536-cb55342
+cciserver.azurecr.io/server-postgres:12.22.1854-2122638
+cciserver.azurecr.io/server-rabbitmq:3.12.1790-cb47f20
+cciserver.azurecr.io/server-redis:6.2.2471-c0995cc
+cciserver.azurecr.io/step:0.1.10589-c0bffa3
 cciserver.azurecr.io/vault-cci:0.4.196-1af3417
-cciserver.azurecr.io/webhook-service:0.1.10044-e27a44a
-cciserver.azurecr.io/webhook-service-migrator:0.1.10042-e27a44a
-cciserver.azurecr.io/web-ui:0.1.65498-227ac7d06f
-cciserver.azurecr.io/web-ui-authentication:0.1.64589-37b6c819c1
-cciserver.azurecr.io/web-ui-insights:0.1.63994-b0c0ae8ea1
-cciserver.azurecr.io/web-ui-onboarding:0.1.65876-d922ac933b
-cciserver.azurecr.io/web-ui-org-settings:0.1.65496-227ac7d06f
+cciserver.azurecr.io/webhook-service:0.1.13214-e806f04
+cciserver.azurecr.io/webhook-service-migrator:0.1.13213-e806f04
+cciserver.azurecr.io/web-ui:0.1.400617-d6f3a48cd8
+cciserver.azurecr.io/web-ui-authentication:0.1.400579-d6f3a48cd8
+cciserver.azurecr.io/web-ui-insights:0.1.400584-d6f3a48cd8
+cciserver.azurecr.io/web-ui-onboarding:0.1.400602-d6f3a48cd8
+cciserver.azurecr.io/web-ui-org-settings:0.1.400609-d6f3a48cd8
 cciserver.azurecr.io/web-ui-project-settings:0.1.62023-b851e0d9bd
 cciserver.azurecr.io/web-ui-runners:0.1.64064-db6d5c6481
-cciserver.azurecr.io/web-ui-server-admin:0.1.3937-5250c09
-cciserver.azurecr.io/web-ui-user-settings:0.1.63989-b0c0ae8ea1
-cciserver.azurecr.io/workflows-conductor:1.0.22210-1e8ba07
-cciserver.azurecr.io/workflows-conductor-migrator:1.0.22210-1e8ba07
-circleci/picard:1.0.254724-7e8e2f9b
-docker.io/bitnami/mongodb:3.6.22-debian-9-r38
-docker.io/bitnami/rabbitmq:3.11.16-debian-11-r0
-docker.io/bitnami/redis:6.2.1-debian-10-r13
+cciserver.azurecr.io/web-ui-server-admin:0.1.4362-9c55138
+cciserver.azurecr.io/web-ui-user-settings:0.1.108914-2fd24aae3e
+cciserver.azurecr.io/workflows-conductor:1.0.24273-04e9d72
+cciserver.azurecr.io/workflows-conductor-migrator:1.0.24273-04e9d72
+circleci/picard:1.0.286008-server-4.7-ed1fd8de
+docker.io/library/telegraf:1.34-alpine
 hashicorp/nomad-autoscaler:0.3.7
-jimmidyson/configmap-reload:v0.5.0
-k8s.gcr.io/kube-state-metrics/kube-state-metrics:v2.3.0
 kong:3.3.1
 mongo:3.6
 nginxinc/nginx-unprivileged:1.27.0
-prom/pushgateway:v1.4.2
-quay.io/prometheus/alertmanager:v0.23.0
-quay.io/prometheus/node-exporter:v1.3.0
-quay.io/prometheus/prometheus:v2.31.1
 quay.io/soketi/soketi:1.6-16-distroless
-telegraf:1.24-alpine
 EOF
 `
 ----

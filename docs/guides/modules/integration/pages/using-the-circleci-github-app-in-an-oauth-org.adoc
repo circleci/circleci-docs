@@ -25,6 +25,8 @@ Compared to the GitHub OAuth app, the GitHub App offers increased control over t
 
 TIP: The majority of new CircleCI work triggering functionality will be made available through the GitHub App integration. We recommend installing the CircleCI GitHub App to ensure access to all new features.
 
+[.table-scroll]
+--
 [options="header",cols="1,1,1,1"]
 |===
 |Organization type identified by URL
@@ -47,6 +49,7 @@ TIP: The majority of new CircleCI work triggering functionality will be made ava
 |Not available
 |-
 |===
+--
 
 == Project types
 Projects are the same for all integration types.
@@ -56,6 +59,8 @@ When both GitHub integrations are installed in the same organization, different 
 
 TIP: All GitHub pipeline types can be managed through menu:Project settings[Project setup].
 
+[.table-scroll]
+--
 [options="header",cols="1,2,2"]
 |===
 |
@@ -118,10 +123,13 @@ _Used to trigger pipelines on a schedule (nightly builds for example)_
 *API / Manual* +
 GitHub App pipelines can be triggered via API and manually through the CircleCI web app.
 |===
+--
 
 === Summary of trigger availability by pipeline type
 The following table summarizes the trigger availability by pipeline type.
 
+[.table-scroll]
+--
 [options="header",cols="1,1,1,1,1,1"]
 |===
 |Pipeline type
@@ -145,6 +153,7 @@ The following table summarizes the trigger availability by pipeline type.
 ^|Zero, one, many
 ^|[.circle-green]#*Yes*#
 |===
+--
 
 
 

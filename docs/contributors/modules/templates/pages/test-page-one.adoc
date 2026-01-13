@@ -3,6 +3,7 @@
 :page-description: A page with all components for testing the new docs site.
 :experimental:
 
+pass:[<!-- vale off -->]
 [#introduction]
 == Introduction
 
@@ -15,6 +16,17 @@ TIP: *Want to see a tip?* This is a tip.
 WARNING: *Want to see a warning?* This is a warning.
 
 CAUTION: *Want to see a caution?* This is a caution.
+
+== Diagram
+
+[mermaid]
+....
+sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>Bob: Hello Bob, how are you?
+    Bob-->>Alice: Great!
+....
 
 Sometimes we have sections separated by horizontal lines, like this:
 
@@ -50,6 +62,8 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 ==== This is a table
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Header text column 1
@@ -64,6 +78,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 |Text for row 2 column 2
 |Text for row 2 column 3
 |===
+--
 
 ==== This is a code block
 
@@ -101,3 +116,5 @@ workflows:
 *Thing two*:: Definition of thing two.
 
 *Thing three*:: Definition of thing three.
+
+pass:[<!-- vale on -->]

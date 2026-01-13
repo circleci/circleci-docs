@@ -1,0 +1,53 @@
+= Create an organization
+:page-platform: Cloud
+:page-description: Create a new organization in CircleCI.
+:experimental:
+
+This guide covers creating a new organization in CircleCI.
+
+The following organization types are available in CircleCI:
+
+* `circleci`
+* `github`
+* `bitbucket`
+
+For a guide to organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+
+== Create a circleci organization
+
+To create a `circleci` organization, follow these steps:
+
+. Navigate to your user homepage in the link:https://app.circleci.com/home/[CircleCI web app].
+. Select the btn:[+ Create organization] button.
+. Give your organization a name and select btn:[Let's Go].
+
+Once your new organization is created you can start creating projects and inviting team members:
+
+* xref:create-project.adoc#create-a-project[Create a Project].
+* xref:invite-your-team.adoc#invite-teammates[Join Teammates on CircleCI].
+
+== Create a github organization
+
+A `github` organization is created when you log in to CircleCI using your _social_ GitHub login. `github` organizations use an OAuth app connection with CircleCI. If you have logged in to CircleCI using a method other than your GitHub login, you can still create a `github` organization by following these steps:
+
+. Navigate to your link:https://app.circleci.com/settings/user[User settings] page.
+. Select the **Account Integrations** from the sidebar.
+. At the bottom of the page, select the link that reads `Recieved instructions from the CircleCI Support team to authorize a GitHub OAuth app?`.
+. Follow the instructions to create a `github` organization.
+
+Once your `github` organization is created you can start setting up and following projects:
+
+* xref:create-project.adoc#set-up-a-project[Set up a Project].
+
+== Create a bitbucket organization
+
+A `bitbucket` organization is created when you log in to CircleCI using your _social_ Bitbucket login. `bitbucket` organizations use an OAuth app connection with CircleCI. If you have logged in to CircleCI using a method other than your Bitbucket login, you can still create a `bitbucket` organization by following these steps:
+
+. Navigate to your link:https://app.circleci.com/settings/user[User settings] page.
+. Select the **Account Integrations** from the sidebar.
+. Select btn:[Connect] next to Bitbucket.
+. Follow the instructions to authorize the Bitbucket OAuth app.
+
+Once your `bitbucket` organization is created you can start setting up and following projects:
+
+* xref:create-project.adoc#set-up-a-project[Set up a Project].

@@ -5,6 +5,8 @@
 
 This page details everything you need to know about renaming organizations and repositories connected to CircleCI. Renaming works differently depending on how your account is connected:
 
+[.table-scroll]
+--
 [cols="1,1,1,1,2", options="header"]
 |===
 | VCS integration | Rename organization | Rename repository | Rename project | Notes
@@ -40,8 +42,9 @@ This page details everything you need to know about renaming organizations and r
 | Org and repository names map directly to org and project names in CircleCI. Changing either by following <<rename-organizations-and-repositories,these steps>> will update the corresponding name in CircleCI.
 
 |===
+--
 
-TIP: To find out if you authorized through the GitHub OAuth app or the CircleCI GitHub App, see the xref:integration:github-apps-integration.adoc[GitHub App integration] page.
+TIP: For a guide to organizations and integration types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
 
 [#github-app-or-gitlab]
 == GitHub App, GitLab, Bitbucket Data Center

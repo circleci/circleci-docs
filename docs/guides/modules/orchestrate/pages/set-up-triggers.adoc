@@ -100,12 +100,39 @@ To verify your trigger is set up correctly, trigger an event from your repositor
 Bitbucket Data Center::
 +
 --
-For steps to add a trigger for a pipeline using Bitbucket Data Center, see the xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] page.
+To add a trigger for a pipeline, follow these steps:
+. In the CircleCI web app, select **Projects** in the sidebar.
+. Select the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and choose **Project Settings**.
+. Select **Triggers** in the sidebar.
+. Select btn:[Add Trigger].
+. Select the same location in the "Connect to" dropdown menu that you selected for your pipeline (for example, Bitbucket Data Center).
+. Select btn:[Next].
+. Complete the form fields and options:
+** Give your trigger a descriptive name.
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] (Not required for custom webhooks).
+** Provide the project HTTP access token you created above. Select btn:[Connect].
+** Select the Trigger source repository
+. If you have not already done so, **create a `.circleci` directory to the root of your repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
++
+****
+For help with creating a CircleCI `config.yml`, see the following pages:
+
+* xref:getting-started:hello-world.adoc[Hello world]
+* xref:toolkit:sample-config.adoc[Sample config]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
+****
+
+Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
 --
 Scheduled::
 +
 --
 For steps to add a schedule trigger, see the xref:schedule-triggers.adoc[Schedule Triggers] page.
+--
+GitHub OAuth::
++
+--
+GitHub OAuth triggers are set up automatically when a GitHub OAuth pipeline is set up. You can delete and re-add a trigger for a GitHub OAuth pipeline. If you do delete a GitHub OAuth trigger, you will see a line at the bottom of the pipeline section: "To re-add the default OAuth trigger click here". Select the link to re-add the default OAuth trigger.
 --
 ====
 

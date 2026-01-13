@@ -1,0 +1,54 @@
+/* Shiki syntax highlighter adaptations */
+
+/* Ensure Shiki code blocks get the same padding and display treatment */
+.doc pre.shiki.highlight {
+  background: var(--pre-background);
+  display: block;
+  overflow-x: auto;
+  padding: 0.875em;
+  border-radius: 12px;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Override background with Shiki's theme background */
+.doc pre.shiki.highlight[style*="--shiki-background-color"] {
+  background: var(--shiki-background-color) !important;
+}
+
+.doc pre.shiki.highlight > code {
+  display: block;
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Border radius for code blocks with titles */
+.doc .listingblock > .title + .content pre.shiki {
+  border-radius: 0 0 12px 12px;
+}
+
+/* Border radius for code blocks without titles */
+.doc .listingblock > .content pre.shiki {
+  border-radius: 12px;
+}
+
+/* Fix copy button positioning when there's a title */
+.doc .listingblock > .title + .content .source-toolbox {
+  top: 0.5rem;
+}
+
+/* Remove any conflicting styles from pre elements */
+.doc pre.shiki {
+  margin: 0;
+  font-weight: inherit;
+  line-height: 1.5;
+}
+
+/* Highlighted lines for documentation (using AsciiDoc highlight attribute) */
+.doc pre.shiki code .line.highlighted {
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: inset 3px 0 0 0 rgba(255, 255, 255, 0.4);
+}

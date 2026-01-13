@@ -53,6 +53,17 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
+| `pipeline.trigger.received_at`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The timestamp of when the pipeline was triggered, in ISO 8601 format.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**Yes**#
+
 | `pipeline.git.tag`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
@@ -135,15 +146,16 @@ d| [.nowrap]#GitHub OAuth# +
 | `pipeline.trigger_parameters.circleci.trigger_type`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
-|
+| String
 | GitHub App, GitLab
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.circleci.event_time`
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_time` +
+  *Deprecated*: Use `pipeline.trigger.received_at` instead.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
-|
+| String
 | Timestamp CircleCI received the event
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
@@ -151,7 +163,7 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.trigger_parameters.circleci.event_type`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
-|
+| String
 d|  [.nowrap]#GitHub App: push# +
 [.nowrap]#GitLab: push, merge request# +
 
@@ -160,7 +172,7 @@ d|  [.nowrap]#GitHub App: push# +
 
 | `pipeline.trigger_parameters.gitlab.type`
 d| [.nowrap]#GitLab#
-|
+| 
 | See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
@@ -470,6 +482,20 @@ d| [.nowrap]#GitHub App#
 d| [.nowrap]#GitHub App#
 | Boolean
 | A boolean value indicating whether the pull request is has been merged. Only populated for pipelines triggered xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`).
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.comment.body`
+d| [.nowrap]#GitHub App#
+| String
+| The pull request comment body with leading/trailing whitespace removed, if a pipeline was triggered via PR comment. For pipelines triggered in other ways, this value is undefined.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.sender.type`
+d| [.nowrap]#GitHub App#
+| String
+| The type of GitHub user that emitted the event triggering the pipeline. Possible values are `User`, `Organization`, and `Bot`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 

@@ -184,6 +184,31 @@ image::guides:ROOT:workflow-using-requires-example-1.png[Flexible Job Execution 
 image::guides:ROOT:workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
 
 
+You may want to configure job dependencies that ignore the status/outcome of an upstream job.
+
+In the following example, the dependent job will run once the upstream job attains a terminal state, regardless of the status/outcome:
+
+.Use flexible requires to ignore outcome of a job
+[source,yaml]
+----
+workflows:
+  test-and-cleanup:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - cleanup:
+          requires:
+            - test:
+              - success
+              - failed
+              - canceled
+----
+
+* The `test` job waits for the `build` job, and only runs if the `build` job is successful.
+* The `cleanup` job waits for the `test` job, and runs regardless of whether the `test` job succeeds, fails, or is canceled.
+
 TIP: Refer to the xref:reference:ROOT:configuration-reference.adoc#requires[Requires] section of the configuration reference.
 
 [#holding-a-workflow-for-a-manual-approval]
@@ -821,10 +846,84 @@ image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[
 NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
 
 [#states]
-=== Workflow states
+== Workflow states
+
+The following state diagram shows the possible states and transitions of a workflow:
+
+.CircleCI cloud workflow states
+[mermaid]
+----
+stateDiagram-v2
+    [*] --> running
+
+    running --> success
+
+    running --> failing
+
+    running --> on_hold
+    on_hold --> canceled
+    on_hold --> running : approval job
+    on_hold --> success
+
+    running --> canceled
+    failing --> failed
+    failing --> canceled
+
+    running --> failed
+    running --> error
+    running --> unauthorized
+
+    running --> queued
+    queued --> running: queued as part of a serial group
+
+    success --> [*]
+    canceled --> [*]
+    failed --> [*]
+    error --> [*]
+    unauthorized --> [*]
+
+----
+
+.CircleCI server workflow states
+[mermaid]
+----
+stateDiagram-v2
+    [*] --> running
+
+    running --> success
+
+    running --> failing
+
+    running --> on_hold
+    on_hold --> canceled
+    on_hold --> running : approval job
+    on_hold --> success
+
+    running --> canceled
+    failing --> failed
+    failing --> canceled
+
+    running --> failed
+    running --> error
+    running --> not_run
+    running --> unauthorized
+
+    running --> queued
+    queued --> running: queued as part of a serial group
+
+    success --> [*]
+    canceled --> [*]
+    failed --> [*]
+    error --> [*]
+    unauthorized --> [*]
+    not_run --> [*]
+
+----
 
 Workflows may have one of the following states:
 
+[.table-scroll]
+--
 [cols="2,2,1", options="header"]
 |===
 | State | Description | Terminal state
@@ -832,10 +931,6 @@ Workflows may have one of the following states:
 | RUNNING
 | Workflow is in progress
 | No
-
-| NOT RUN
-| Workflow never started
-| Yes
 
 | CANCELED
 | Workflow canceled before it finished
@@ -864,9 +959,16 @@ Workflows may have one of the following states:
 | UNAUTHORIZED
 | One or more of the jobs terminated with a `unauthorized` job status. The user who triggered the pipeline or approved an approval job does not have access to a required restricted context.
 | Yes
+
+| QUEUED
+| The workflow is queued due to being part of a serial group. For more information, see the xref:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization] page.
+| No
+
 |===
+--
 
 NOTE: After 90 days non-terminal workflows are automatically cancelled by CircleCI.
+
 
 [#troubleshooting]
 == Troubleshooting

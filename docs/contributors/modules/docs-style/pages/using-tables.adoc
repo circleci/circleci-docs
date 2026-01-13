@@ -1,10 +1,14 @@
 = Using tables
 
+pass:[<!-- vale off -->]
 == Basic table syntax
 Use the following format for tables:
 
 [source,adoc]
 ----
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Key
@@ -17,10 +21,13 @@ Use the following format for tables:
 | String
 | Should currently be `2`
 |===
+--
 ----
 
 Looks like:
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Key
@@ -33,6 +40,7 @@ Looks like:
 | String
 | Should currently be `2`
 |===
+--
 
 == Extra wide tables
 
@@ -78,3 +86,4 @@ Looks like:
 == Advanced table options
 
 There are a lot of options for formatting tables, cell, rows, columns. For more information, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs]
+pass:[<!-- vale on -->]

@@ -1,5 +1,6 @@
 = Headings
 
+pass:[<!-- vale off -->]
 * Write headings in a logical sequence. If you read section titles in order, the flow should present a good storyline for the doc.
 
 * Do not skip heading levels. For example, try not to jump from `h2` to `h4`, missing out `h3`.
@@ -21,3 +22,4 @@
 ** **Bad:** For more information, see the xref:guides:getting-started:hello-world.adoc["Hello world"] guide.
 
 * Do not use inline literal text in headings.
+pass:[<!-- vale on -->]

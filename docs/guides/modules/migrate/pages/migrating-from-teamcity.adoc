@@ -1,6 +1,6 @@
 = Migrate from TeamCity
 :page-platform: Cloud, Server v4+
-:description: An overview of how to migrate from TeamCity to CircleCI.
+:page-description: An overview of how to migrate from TeamCity to CircleCI.
 :source-highlighter: pygments.rb
 :experimental:
 
@@ -89,6 +89,7 @@ jobs:
       - checkout
       - run: echo "Hello World!"
 ----
+
 |===
 --
 
@@ -96,6 +97,7 @@ jobs:
 --
 [cols=2*, options="header"]
 |===
+
 | TeamCity _settings.kts_ | Equivalent CircleCI _config.yml_
 
 a|
@@ -141,6 +143,7 @@ jobs:
       - checkout
       - run: echo "Hello World!"
 ----
+
 |===
 --
 
@@ -195,6 +198,7 @@ workflows:
 
 # Job definitions assumed
 ----
+
 |===
 --
 
@@ -202,6 +206,7 @@ workflows:
 --
 [cols=2*, options="header"]
 |===
+
 | TeamCity Build Chain | Equivalent CircleCI Workflow
 
 a|
@@ -247,8 +252,10 @@ workflows:
 
 # Job definitions assumed
 ----
+
 |===
 --
+
 For more information on CircleCI Concepts, visit our https://circleci.com/docs/concepts/[Concepts] and https://circleci.com/docs/pipelines/#section=pipelines[Pipelines] documentation pages.
 
 == Configuration
@@ -280,9 +287,9 @@ Subsequently, this flexibility allows steps to be adapted to any language, frame
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-[.table.table-striped.table-migrating-page.table-no-background]
-[cols=2*, options="header,unbreakable,autowidth", stripes=even]
-[cols="5,5"]
+[.table-scroll]
+--
+[cols="5,5", options="header"]
 |===
 | TeamCity Steps | Equivalent CircleCI Steps
 
@@ -346,82 +353,10 @@ jobs:
           name: Clean and Package
           command: mvn clean package
 ----
+
 |===
+--
 
-[.table.table-striped.table-migrate-mobile]
-[cols=1*, options="header", stripes=even]
-[cols="100%"]
-|===
-| TeamCity Steps
-
-a|
-[source, kotlin]
-----
-project {
-  parallel {
-    build(Gradle) # Assume agent configured
-    build(Maven)  # Assume agent configured
-  }
-}
-
-object Gradle: BuildType({
-  name = "Gradle"
-
-  steps {
-    gradle {
-      tasks = "clean build"
-    }
-  }
-})
-
-object Maven: BuildType({
-  name = "Maven"
-
-  steps {
-    maven {
-      goals = "clean package"
-    }
-  }
-})
-----
-|===
-
-[.table.table-striped.table-migrate-mobile]
-[cols=1*, options="header", stripes=even]
-[cols="100%"]
-|===
-| Equivalent CircleCI Steps
-
-a|
-[source, yaml]
-----
-version: 2.1
-workflows:
-  parallel-workflow:
-    jobs:
-      - Gradle
-      - Maven
-
-jobs:
-  Gradle:
-    docker:
-      - image: cimg/openjdk:17.0.1
-    steps:
-      - checkout # Checks out source code
-      - run:
-          name: Clean and Build
-          command: ./gradlew clean build
-
-  Maven:
-    docker:
-      - image: cimg/openjdk:17.0.1
-    steps:
-      - checkout # Checks out source code
-      - run:
-          name: Clean and Package
-          command: mvn clean package
-----
-|===
 
 [#build-templates-meta-runners]
 === Build templates/meta-runners

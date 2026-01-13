@@ -1,3 +1,5 @@
+[.table-scroll]
+--
 [cols=5*, options="header"]
 |===
 | Class | vCPUs | RAM | Cloud | Server
@@ -14,30 +16,35 @@
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 
-| `m2pro.medium`
+| `m2pro.medium`  +
+   **link:https://circleci.com/changelog/deprecation-of-mac-m1-and-m2-resource-classes/[EOL]: February 16, 2026**
 | 4 @ 3.49 GHz
 | 8GB
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 
-| `m2pro.large`
+| `m2pro.large`  +
+   **link:https://circleci.com/changelog/deprecation-of-mac-m1-and-m2-resource-classes/[EOL]: February 16, 2026**
 | 8 @ 3.49 GHz
 | 16GB
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 
-| `macos.m1.medium.gen1`
+| `macos.m1.medium.gen1`  +
+   **link:https://circleci.com/changelog/deprecation-of-mac-m1-and-m2-resource-classes/[EOL]: February 16, 2026**
 | 4 @ 3.2 GHz
 | 6GB
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 
-| `macos.m1.large.gen1`
+| `macos.m1.large.gen1`  +
+   **link:https://circleci.com/changelog/deprecation-of-mac-m1-and-m2-resource-classes/[EOL]: February 16, 2026**
 | 8 @ 3.2 GHz
 | 12GB
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
 |===
+--
 
 ****
 *We have deprecated support for all Intel-based macOS resources.*

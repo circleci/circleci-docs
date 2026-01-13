@@ -9,6 +9,8 @@ Rollbacks allow you to quickly revert your application to a previous stable vers
 
 CircleCI rollbacks support two methods: Rollback by running a custom rollback pipeline or Rollback by workflow re-run. Each method has appropriate use cases, advantages and disadvantages, as follows:
 
+[.table-scroll]
+--
 [options="header", cols="1,1,1,1"]
 |===
 |
@@ -32,6 +34,7 @@ a| * Limited control over rollback process
 a| * Simple systems
 * Need immediate rollback
 |===
+--
 
 == Prerequisites
 
@@ -56,7 +59,7 @@ image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on proje
 
 === 2. Confirm GitHub App installation
 
-NOTE: To set up rollback pipelines, you must connect your organization to the xref:integration:github-apps-integration.adoc[CircleCI GitHub App].
+NOTE: To set up rollback pipelines, you must install the CircleCI GitHub App into your organization. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
 - If the GitHub App is not installed in your organization, the guided setup process prompts you to install it.
 +

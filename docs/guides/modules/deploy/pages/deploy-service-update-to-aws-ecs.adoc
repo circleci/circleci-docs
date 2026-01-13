@@ -1,6 +1,6 @@
 = Deploy service update to AWS ECS
 :page-platform: Cloud, Server v4+
-:description: A how to guide for deploying changes to AWS ECS using CircleCI orbs.
+:page-description: A how to guide for deploying changes to AWS ECS using CircleCI orbs.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to AWS ECS using CircleCI orbs.

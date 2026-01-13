@@ -1,6 +1,6 @@
 = Collect test data
 :page-platform: Cloud, Server v4+
-:description: A guide to collecting test data in your CircleCI projects.
+:page-description: A guide to collecting test data in your CircleCI projects.
 :experimental:
 
 [#introduction]
@@ -91,6 +91,8 @@ For detailed information on how to test your iOS applications, refer to the xref
 
 This section provides the following test runner examples:
 
+[.table-scroll]
+--
 [cols="1,1,2,2", options="header"]
 |===
 | Language | Test Runner | Formatter | Examples
@@ -200,6 +202,7 @@ This section provides the following test runner examples:
 | link:https://cmake.org/cmake/help/latest/manual/ctest.1.html#cmdoption-ctest-output-junit[CTest]
 | <<ctest-for-c-cxx-tests,example>>
 |===
+--
 
 [#jest]
 === Jest
@@ -630,7 +633,7 @@ Edit your `project.clj` to add the `lambdaisland/kaocha-junit-xml` plugin, or do
 
 Edit the kaocha config file `test.edn` to use this test reporter
 
-[,edn]
+[,clojure]
 ----
 #kaocha/v1
 {:plugins [:kaocha.plugin/junit-xml]

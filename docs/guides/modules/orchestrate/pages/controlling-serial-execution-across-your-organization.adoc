@@ -1,5 +1,5 @@
 = Controlling serial execution across your organization
-:page-platform: Cloud
+:page-platform: Cloud, Server v4.9+
 :page-description: An overview of controlloing serial execution accross a CircleCI org.
 :experimental:
 

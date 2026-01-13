@@ -1,4 +1,5 @@
 = Data retention in server
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: Learn how to configure data retention policies for MongoDB, PostgreSQL, and object storage buckets in your CircleCI server installation.
 :experimental:
@@ -15,14 +16,15 @@ You can set up retention policies for both Mongo and PostgreSQL to clean up data
 +
 [source,bash]
 ----
-kubectl exec -it <frontend-xxx> -- /bin/bash
+kubectl port-forward $(kubectl get pods -l app=frontend -o jsonpath='{.items[0].metadata.name}' -n <namespace>) -n <namespace> 16000:6005 &
 ----
 +
 Then, connect to the REPL:
 +
 [source,bash]
 ----
-lein repl :connect 6005
+docker run --rm -it clojure bash
+lein repl :connect host.docker.internal:16000
 ----
 
 . Once connected, the current setting can be verified using the following command:

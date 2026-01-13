@@ -1,4 +1,5 @@
 = Upgrade server
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: "This document lists the steps required to upgrade a CircleCI server v4.8 installation."
 :experimental:
@@ -19,7 +20,11 @@ To see some common upgrade path options, see link:https://support.circleci.com/h
 [#recommendations]
 == Recommendations
 
-We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink before backing up your server installation in preparation for upgrading to 4.8. Customers that do not perform this step may have issues restoring Vault from backup in 4.8.
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets.
+
+If you are using Vault, you should complete the migration to Tink on your current installation. Complete this migration before backing up your server in preparation for upgrading to 4.8.
+
+Customers that do not perform this step may have issues restoring Vault from backup in 4.8.
 
 [#prerequisites]
 == Prerequisites
@@ -40,6 +45,8 @@ We have moved away from Vault to Tink for encryption. The process for migration 
 [source,shell,subs=attributes+]
 helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion48} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
 
+. Upgrade your Nomad clients and servers (if externalized) Terraform modules to the link:https://github.com/CircleCI-Public/server-terraform/releases/tag/{serverversion48}[4.8 release]. Follow the documentation to plan and apply the Terraform changes for your xref:phase-3-aws-execution-environments.adoc#create-your-cluster-with-terraform[AWS] or xref:phase-3-gcp-execution-environments.adoc#create-your-cluster-with-terraform[GCP] environment.
+
 . Perform the upgrade:
 +
 [source,shell,subs=attributes+]
@@ -47,4 +54,4 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
 
-. Migrate any existing machine runner instances from the launch agent to the machine runner 3.0 agent, see the xref:guides:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc#[migration guide]. The launch agent is not supported.
+. Migrate any existing machine runner instances from the launch agent to the machine runner 3.0 agent, see the xref:guides:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc#[Migration Guide]. The launch agent is not supported.

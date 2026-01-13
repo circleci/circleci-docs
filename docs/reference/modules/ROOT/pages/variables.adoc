@@ -1,6 +1,6 @@
 = Project values and variables
 :page-platform: Cloud, Server v4+
-:description: A list of all built-in variables for your CircleCI projects.
+:page-description: A list of all built-in variables for your CircleCI projects.
 :experimental:
 
 This page is a reference for all built-in values available for use in your CircleCI projects.
@@ -14,6 +14,8 @@ Environment variables are scoped at the job level and can be used within the con
 
 NOTE: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step to export the new environment variables using `BASH_ENV`. For more details, see xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[Setting an Environment Variable in a Shell Command].
 
+[.table-scroll]
+--
 [cols="2,2,1,2,1,1", options="header"]
 |===
 | Variable
@@ -233,6 +235,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 | image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
 |===
+--
 
 If you must use the environment variables that are deprecated for GitLab SaaS in your GitLab pipelines, you can recreate this functionality using pipeline values in your configuration file. The following example shows how to set an environment variable `CIRCLE_PROJECT_REPONAME` using the xref:guides:security:env-vars.adoc#environment-variable-usage-options[`environment` key] and populating it with the `pipeline.trigger_parameters.gitlab.repo_name` value:
 
@@ -255,7 +258,7 @@ build:
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
 
-NOTE: For GitHub users, refer to the xref:guides:integration:github-apps-integration.adoc[GitHub App integration] or xref:guides:integration:github-integration.adoc[GitHub OAuth app integration] guides to check which integration type applies to you.
+The pipeline values available to you depend on your pipeline/integration type, as shown in the "Source" column of the table below.
 
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
