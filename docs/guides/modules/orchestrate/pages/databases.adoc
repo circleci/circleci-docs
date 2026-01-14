@@ -12,7 +12,7 @@ CircleCI provides pre-built images (Docker and VM) for languages and services, l
 
 When configuring a job, the first executor you select is the primary container. The primary container is where all execution occurs. You can add additional containers to the job, these are service, or secondary containers.
 
-The example in the next section shows a xref:reference:ROOT:configuration-reference.adoc[CircleCI configuration] file with the following:
+The example in the next section shows a CircleCI configuration file with the following:
 
 * One job named `build`.
 * Docker is selected for the execution environment.
@@ -74,7 +74,7 @@ In this example, the config installs the PostgreSQL client tools, `postgresql-cl
 
 Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
 
-NOTE: CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Project values and variables] document for details.
+NOTE: CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, `CIRCLE_NODE_INDEX` and `CIRCLE_NODE_TOTAL` are related to concurrent execution environments. See the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Project Values and Variables] document for details.
 
 When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
 
@@ -159,7 +159,7 @@ Redis also has a CLI available: `sudo apt-get install redis-tools ; while ! redi
 
 === Custom MySQL configuration
 
-If you are using the CircleCI MySQL Docker image, you can customize the configuration using the xref:reference:ROOT:configuration-reference.adoc#docker[`command` key]. For example:
+If you are using the CircleCI MySQL Docker image, you can customize the configuration using the `command` key (See more in the xref:reference:ROOT:configuration-reference.adoc#docker[Docker Executor Reference]). For example:
 
 [,yml]
 ----
