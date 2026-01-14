@@ -42,6 +42,8 @@ image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on proje
 
 To set up rollback pipelines you must install the CircleCI GitHub App into your organization. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
+NOTE: Only organization admins can install the GitHub App. If you are not an organization admin, you can ask an admin to install the GitHub App for you.
+
 If the GitHub App is *not* installed in your organization, install it now by selecting btn:[Install the GitHub App]. If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
 
 .Install the GitHub App
@@ -124,14 +126,15 @@ For steps to running a rollback pipeline, see the xref:rollback-a-deployment.ado
 
 == Change rollback pipeline
 
-You can switch rollback pipelines for your project at any time. If you have configured a new pipeline and want to trigger this pipeline when performing rollbacks, you can change which pipeline is used for rollback operations.
+You can switch rollback pipelines for your project at any time. If you have configured a new pipeline and want to trigger this pipeline when performing rollbacks, you can change the rollback pipeline as follows:
 
-To select a different pipeline for rollbacks, follow these steps:
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
-. In the CircleCI dashboard, navigate to *Home* or *Projects* from the sidebar.
-. Select the *Settings* link for your project.
-. Select the Deploys tab.
-. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown.
+. Select the *Deploys* tab.
+. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown. You can also choose the _unset_ the rollback pipeline at this point, which will enable you to use the guided setup again as described above.
+
+.Change rollback pipeline
+image::guides:ROOT:deploy/change-rollback-pipeline.png[Change rollback pipeline]
 
 == Configuration tips
 

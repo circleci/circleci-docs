@@ -34,6 +34,8 @@ image::guides:ROOT:deploy/project-overview-deploy.png[Deploy button on project o
 
 To set up deploy pipelines you must install the CircleCI GitHub App into your organization. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
+NOTE: Only organization admins can install the GitHub App. If you are not an organization admin, you can ask an admin to install the GitHub App for you.
+
 If the GitHub App is *not* installed in your organization, install it now by selecting btn:[Install the GitHub App]. If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
 
 .Install the GitHub App
@@ -121,10 +123,13 @@ You can switch deploy pipelines for your project at any time. If you have config
 
 To select a different pipeline for deployments, follow these steps:
 
-. In the CircleCI dashboard, navigate to *Home* or *Projects* from the sidebar.
-. Select the *Settings* link for your project.
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
 . Select the *Deploys* tab.
-. In the Deploy Pipeline section, choose the pipeline you want to be selected as the deploy pipeline from the dropdown. Youc an also choose the _unset_ the deploy pipeline at this point which will enable you to use the guided setup again as described above.
+. In the Deploy Pipeline section, choose the pipeline you want to be selected as the deploy pipeline from the dropdown. You can also choose to _unset_ the deploy pipeline at this point, which will enable you to use the guided setup again as described above.
+
+.Change deploy pipeline
+image::guides:ROOT:deploy/change-deploy-pipeline.png[Change deploy pipeline]
 
 == Configuration tips
 

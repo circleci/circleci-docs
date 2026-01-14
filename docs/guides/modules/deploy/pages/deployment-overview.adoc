@@ -34,16 +34,17 @@ TIP: Use the *how-to guides* in this section (select how-to guides from the left
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
-** Defined within your configuration
+** Defined within your configuration.
 ** Added to the project itself through the CircleCI web app:
-*** Add project-level xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[environment variables]
-***  Add project-level xref:integration:add-ssh-key.adoc[SSH keys].
-** Added at the organization level using xref:security:contexts.adoc[contexts].
+*** Add project-level xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Environment Variables].
+***  Add project-level xref:integration:add-ssh-key.adoc[SSH Keys].
+** Added at the organization level using xref:security:contexts.adoc[Contexts].
 
-* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[hold/approve] job in your workflow.
+* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a hold/approve job in your workflow. For more information, see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Workflow Orchestration] guide.
++
 This job will create a manual approval button visible in the CircleCI web app workflows map.
 
-* *IP-based restrictions*: If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc[IP ranges] for your deployment job.
+* *IP-based restrictions*: If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc[IP Ranges] for your deployment job.
 
 === Using orbs to simplify deployment
 
@@ -77,7 +78,7 @@ workflows:
 
 Under the hood, this orb creates, bundles, and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
-Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider xref:orbs:author:orb-author.adoc[authoring one]!
+Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[Orbs Registry]. If the orb you need has not been created yet, consider creating your own. See the xref:orbs:author:orb-author.adoc[Orb Author] guides for more information.
 
 === Using images to simplify deployment
 
@@ -130,7 +131,7 @@ To get set up see the following guides, you can choose manual configuration or a
 
 * xref:set-up-rollbacks.adoc[Set up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
 * xref:set-up-deploys.adoc[Set up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
-* xref:configure-deploy-markers.adoc[Configure CircleCI Deploy Markers] - This is a guide to configuing deploy markers manually which you can do at any time. This page is also useful as a reference when using the guided setup process defined in the guides linked above.
+* xref:configure-deploy-markers.adoc[Configure CircleCI Deploy Markers] - This guide covers configuing deploy markers manually which you can do at any time. This page is also useful as a reference when using the guided setup process defined in the guides linked above.
 
 === CircleCI release agent
 
@@ -158,17 +159,17 @@ A _command_ is a user-initiated action CircleCI performs on the user's behalf to
 
 Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, similarly to how step output works for CI jobs.
 
-Some commands are available for all components. These are:
+Some commands are available for all components:
 
-* Restore version.
-* Scale component.
-* Restart component.
+* Restore version
+* Scale component
+* Restart component
 
-A subset of commands are available for _progressive_ deployments (when using Argo Rollouts). These are:
+A subset of commands are available for _progressive_ deployments (when using Argo Rollouts):
 
-* Retry deployment.
-* Promote deployment.
-* Cancel deployment.
+* Retry deployment
+* Promote deployment
+* Cancel deployment
 
 === Component
 
@@ -203,6 +204,7 @@ The CircleCI deploys UI is a powerful tool for visualising, monitoring and manag
 [#dashboard]
 === The dashboard
 
+.The deploys dashboard
 image::guides:ROOT:releases/dashboard.png[Screenshot showing the deploys dashboard in the CircleCI web app]
 
 Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboard. The dashboard shows the following:
