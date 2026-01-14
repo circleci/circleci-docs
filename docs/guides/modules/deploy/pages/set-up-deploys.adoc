@@ -34,7 +34,7 @@ image::guides:ROOT:deploy/project-overview-deploy.png[Deploy button on project o
 
 To set up deploy pipelines you must install the CircleCI GitHub App into your organization. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
-NOTE: Only organization admins can install the GitHub App. If you are not an organization admin, you can ask an admin to install the GitHub App for you.
+NOTE: Only organization administrators can install the GitHub App. If you are not an organization administrator, you can ask an administrator to install the GitHub App for you.
 
 If the GitHub App is *not* installed in your organization, install it now by selecting btn:[Install the GitHub App]. If the GitHub App is already installed in your organization, the **GitHub App Installation** step is automatically marked as completed.
 
