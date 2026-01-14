@@ -131,7 +131,7 @@ To get set up see the following guides, you can choose manual configuration or a
 
 * xref:set-up-rollbacks.adoc[Set up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
 * xref:set-up-deploys.adoc[Set up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
-* xref:configure-deploy-markers.adoc[Configure CircleCI Deploy Markers] - This guide covers configuing deploy markers manually which you can do at any time. This page is also useful as a reference when using the guided setup process defined in the guides linked above.
+* xref:configure-deploy-markers.adoc[Configure CircleCI Deploy Markers] - This guide covers configuring deploy markers manually which you can do at any time. This page is also useful as a reference when using the guided setup process defined in the guides linked above.
 
 === CircleCI release agent
 

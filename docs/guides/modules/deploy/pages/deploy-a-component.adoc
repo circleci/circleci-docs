@@ -32,7 +32,11 @@ The modal displays several configuration options with parameters auto-filled bas
 *Version to deploy*:: The version of the component you wish to deploy.
 *Target Environment*:: The environment to which you wish to deploy the version.
 *Deploy reason*:: You can optionally provide a reason for the deployment.
-*Additional settings*:: At the bottom of the modal you can expand the "Additional settings" section in which you can set the following: The namespace for your deployment if your deployment target requires it. You can leave namespace empty, in which case the `default` value will be used. You can set the config and checkout sources for your deployment. The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific deployment.
+*Additional settings*:: At the bottom of the modal you can expand the "Additional settings" section in which you can access the following settings:
++
+* The namespace for your deployment if your deployment target requires it. You can leave namespace empty, in which case the `default` value will be used.
+* You can set the config and checkout sources for your deployment.
+* The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific deployment.
 
 . Select btn:[Deploy] to trigger the deploy pipeline.
 

@@ -56,7 +56,7 @@ Next, create a new pipeline definition for your rollback pipeline.
 A pipeline definition is a setting within CircleCI in your project to specify the different elements that make up a pipeline:
 
 * Config source
-* Config filepath
+* Config file path
 * Checkout source
 * Triggers
 
@@ -118,7 +118,7 @@ NOTE: The configuration will be committed to a new branch called `rollback-pipel
 .Commit config for rollback pipeline and open a PR
 image::guides:ROOT:deploy/rollback-commit-config-button.png[Commit config button]
 +
-Alternatively, you can copy the suggested configuration into an existing or newly created rollback config file. Call tje file `rollback.yml` and save it in your repository's `.circleci` folder, for the system to detect and use this file. If you choose this method, select btn:[I already have a rollback config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your rollback configuration.
+Alternatively, you can copy the suggested configuration into an existing or newly created rollback config file. Call the file `rollback.yml` and save it in your repository's `.circleci` folder, for the system to detect and use this file. If you choose this method, select btn:[I already have a rollback config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your rollback configuration.
 
 . Navigate to the pull request in your repository by selecting btn:[View pull Request] under the example config file.
 
