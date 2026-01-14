@@ -103,7 +103,7 @@ $ brew install circleci/tap/circleci-testsuite
 $ brew upgrade circleci circleci/tap/circleci-testsuite
 ----
 
-NOTE: If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, please reach out to the CircleCI team via the private Slack channel for preview customers or email minjun.seong@circleci.com.
+NOTE: If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, please reach out to the CircleCI team via the private Slack channel for preview customers or email mailto:minjun.seong@circleci.com[minjun.seong@circleci.com].
 
 ////
 ==== Install the testsuite plugin manually
@@ -1030,23 +1030,24 @@ Commit and push these changes to your feature branch. Analysis will be limited t
 === Step 3: Remove verification flags and merge
 
 Once you have verified analysis works in your feature branch:
-. Remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags from your `.circleci/config.yml`
-. Remove `options.test-analysis-duration` from your `.circleci/test-suites.yml`
-. Commit these changes to your feature branch
-. Merge your PR to the default branch
+
+. Remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags from your `.circleci/config.yml`.
+. Remove `options.test-analysis-duration` from your `.circleci/test-suites.yml`.
+. Commit these changes to your feature branch and push to your VCS.
+. Merge your PR to the default branch.
 
 This allows analysis to run on your default branch without time limits, building complete impact data for your entire test suite.
 
 NOTE: The first time you run the analysis it may take a long time and could require multiple runs. This is because the full impact map is being generated for the first time. After this initial build, subsequent runs should be significantly faster.
 
-If you want to limit analysis time on your default branch to avoid delays, see <<set-up-examples>>. For example, you can run analysis on a scheduled pipeline while timeboxing analysis on default branches. 
+If you want to limit analysis time on your default branch to avoid delays, see <<set-up-examples>>. For example, you can run analysis on a scheduled pipeline while timeboxing analysis on default branches.
 
 At this point:
 
-. Your test suite is configured properly
-. You have verified test impact analysis works on your test suite in a CircleCI job
-. Your changes are merged to the default branch
-. Test impact analysis is working as intended
+* Your test suite is configured properly.
+* You have verified test impact analysis works on your test suite in a CircleCI job.
+* Your changes are merged to the default branch.
+* Test impact analysis is working as intended.
 
 === Troubleshooting
 
