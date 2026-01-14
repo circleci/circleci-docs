@@ -103,6 +103,9 @@ $ brew install circleci/tap/circleci-testsuite
 $ brew upgrade circleci circleci/tap/circleci-testsuite
 ----
 
+NOTE: If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, please reach out to the CircleCI team via the private Slack channel for preview customers or email minjun.seong@circleci.com.
+
+////
 ==== Install the testsuite plugin manually
 Prebuilt binaries are available from the CircleCI binary releases public bucket.
 
@@ -189,7 +192,7 @@ $ chmod u+x circleci-testsuite
 ----
 $ mv circleci-testsuite "${HOME}/bin/"
 ----
-
+////
 
 === 1.2 Configure the discover command
 
