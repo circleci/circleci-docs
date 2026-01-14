@@ -45,7 +45,14 @@ image::guides:ROOT:deploy/install-github-app.png[Install GitHub App]
 
 Next, create a new pipeline definition for your deploy pipeline.
 
-A pipeline definition is a setting within CircleCI in your project to specify the different elements that make up a pipeline: Config source, config filepath, checkout source, and any triggers associated with the pipeline. No changes are being pushed to your repository at this point. GitHub pipelines are viewable at menu:Project settings[Project Setup].
+A pipeline definition is a setting within CircleCI in your project to specify the different elements that make up a pipeline:
+
+* Config source
+* Config filepath
+* Checkout source
+* Triggers
+
+No changes are being pushed to your repository at this point. GitHub pipelines are viewable at menu:Project settings[Project Setup].
 
 . Select the repository that includes your project code. This is the repository that you want to deploy with this deploy pipeline.
 . Select btn:[Create pipeline definition]. This creates a new pipeline definition for your deploy pipeline in your project.
