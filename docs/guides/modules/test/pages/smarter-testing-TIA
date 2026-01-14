@@ -1,0 +1,1020 @@
+= Test Impact Analysis
+:page-description: Run only the tests impacted by your code changes
+
+Test Impact Analysis intelligently selects which tests to run based on the files that changed in your code. This reduces test execution time while maintaining test confidence.
+
+== Is my project a good fit for Test Impact Analysis?
+
+Here are some examples where Smarter Testing works well:
+
+* Straightforward coverage generation. Smarter Testing uses code coverage data to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data cannot be easily collected and consolidated.
+* Projects with comprehensive test coverage. The more thorough your tests, the more precisely Smarter Testing can identify which tests are impacted by changes.
+* Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
+
+=== How it works
+Test impact analysis identifies which tests need to run based on the files that changed in your checked out code. Analysis results are stored as impact data for future test runs. The system works in two phases:
+
+*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
+
+*Selection phase*:: Compares the current repository state against the most recent impact analysis data. Tests covering modified files are selected to run (including tests impacting only itself, new or modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
+
+TIP: You can also save time on your local test runs on your machine. See <<local-run>> for details.
+
+The analysis phase typically runs slower than running the selected tests because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
+
+[mermaid]
+----
+flowchart LR
+    discover(Discover \n A B C D E F G H I J)
+    discover --> tia(Test Impact Analysis \n A B C D E)
+    tia --> split1(Node 1 \n A... B..\n.........)
+    tia --> split2(Node 2 \n C...... \n .......)
+    tia --> split3(Node 3 \n D...... \n .. E...)
+    subgraph "Dynamic Test Splitting"
+    split1
+    split2
+    split3
+    end
+----
+
+== Prerequisites
+
+Before enabling Test Impact Analysis, ensure you have completed the xref:getting-started.adoc[Getting Started] guide and have:
+
+* Installed the `testsuite` CLI plugin
+* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands
+* Verified your tests run successfully with the `testsuite` command
+
+Steps to enable Smarter Testing are as follows:
+
+. Configure test impact analysis in `test-suites.yml`.
+. Analyze test impact.
+. Validate that only relevant test are selected when you modify source files.
+
+Each step is explained fully in the following sections.
+
+== 1. Configure the analysis command
+
+The `analysis` command executes test atoms one at a time using a test runner with code coverage enabled. This is similar to your `run` command, but with coverage instrumentation enabled.
+
+Make sure that the command stores code coverage results, and that it is passed a test atom to run. For example:
+[source,console]
+----
+$ vitest run --coverage.enabled \
+             --coverage.all=false \
+             --coverage.reporter=lcov \
+             --coverage.provider=v8 \
+             --coverage.reportsDirectory="coverage/" \
+             --bail 0 \
+             src/pages/dashboard/Dashboard.test.tsx
+----
+
+The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run.
+
+The coverage report output location can be specified with the template variable `<< outputs.lcov >>`. CircleCI replaces `<< outputs.lcov >>` with the file path specified in `outputs.lcov` in your test suite configuration. If not defined, a temporary path is created by Smarter Testing. Some test runners, such as Jest and Vitest, only let you choose a **directory** for coverage output and may write one or more coverage files into that directory. In these cases, your analysis command must **concatenate those files into the single path** given by `<< outputs.lcov >>`.
+
+The test atom to analyze can be specified in one of two ways:
+
+* Use the template variable `<< test.atoms >>` in the `analysis` command. This will be replaced with the test atom to analyze.
+* If the template variable is not found in the `analysis` command, the test atom will be passed on stdin.
+
+Different template variables are available for coverage output, depending on the format of the coverage data:
+
+*LCOV*:: `<< outputs.lcov >>`
+*Go's coverage format*:: `<< outputs.go-coverage >>`
+
+Your `analysis` command should use the output variable for the coverage format it produces.
+
+Making these changes to the command above gives:
+
+[source,console]
+----
+$ vitest run --coverage.enabled \
+             --coverage.all=false \
+             --coverage.reporter=lcov \
+             --coverage.provider=v8 \
+             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
+             --bail 0 \
+             << test.atoms >> \
+             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+----
+
+Here is how the analysis command would look in your test-suite.yml:
+
+[tabs]
+====
+Vitest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: vitest list --filesOnly
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
+analysis: |
+  vitest run --coverage.enabled \
+             --coverage.all=false \
+             --coverage.reporter=lcov \
+             --coverage.provider=v8 \
+             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
+             --silent \
+             --bail 0 \
+             << test.atoms >> \
+             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
+
+Jest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: jest --listTests
+run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
+analysis: |
+  jest --runInBand \
+       --silent \
+       --coverage \
+       --coverageProvider=v8 \
+       --coverageReporters=lcovonly \
+       --coverage-directory="$(dirname << outputs.lcov >>)" \
+       --bail \
+       << test.atoms >> \
+       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
+
+Yarn with Jest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: yarn --silent test --listTests
+run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" yarn test --runInBand --reporters=jest-junit --bail << test.atoms >>
+analysis: |
+  yarn test --runInBand \
+            --coverage \
+            --coverageProvider=v8 \
+            --coverageReporters=lcovonly \
+            --coverage-directory="$(dirname << outputs.lcov >>)" \
+            --bail \
+            << test.atoms >> \
+            && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
+
+pytest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: find ./tests -type f -name 'test*.py'
+run: |
+  pytest --disable-pytest-warnings \
+         --no-header \
+         --quiet \
+         --tb=short \
+         --junit-xml="<< outputs.junit >>" \
+         << test.atoms >>
+analysis: |
+  pytest --disable-pytest-warnings \
+         --no-header \
+         --quiet \
+         --tb=short \
+         --cov \
+         --cov-report=lcov:<< outputs.lcov >> \
+         << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
+
+Go::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
+run: go test -race -count=1 << test.atoms >>
+analysis: go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
+
+Go with gotestsum::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
+run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
+analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
+====
+
+Run the test suite with flags `--test-selection="none"` and `--test-analysis="impacted"`, and confirm that the analysis command analyzes the test atoms you expect. Learn more in xref:configuration-options.adoc#cli-flags[CLI flags]. Look for the output lines `Found N files impacting TEST`, which show analysis discovering the source files covered by the test.
+
+NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize `file-mapper` command. Learn more in xref:#file-mapper[Use the file-mapper command].
+
+[source,console]
+----
+$ circleci run testsuite "ci tests" --local --test-selection=none --test-analysis=impacted
+Running test-suite-subcommand version "1.0.14935-630104a" built "2025-11-25T16:15:39Z"
+Testsuite timeout: 4h40m0s
+Running test suite 'ci tests'
+
+Suite Configuration:
+
+name: ci tests
+discover:
+    command: vitest list --filesOnly
+    shell: /bin/sh
+run:
+    command: vitest run --reporter=junit --outputFile="test-reports/tests.xml" --bail 0 << test.atoms >>
+    shell: /bin/sh
+analysis:
+    command: |
+        vitest run --coverage.enabled \
+                   --coverage.all=false \
+                   --coverage.reporter=lcov \
+                   --coverage.provider=v8 \
+                   --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
+                   --silent \
+                   --bail 0 \
+                   << test.atoms >> \
+                   && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+    shell: /bin/sh
+outputs:
+    junit: test-reports/tests.xml
+    lcov: /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov
+options:
+    test-impact-analysis: true
+    test-analysis-duration: 5m0s
+
+
+Discovering...
+Discovered 2 tests in 29ms
+
+Selecting tests...
+Selecting all tests, no impact analysis available
+Selecting no tests, --test-selection set to 'none'
+Selected 0 tests, Skipped 2 tests in 0s
+
+Timing data is not present.
+Sorted tests in 0s
+
+
+Waiting for tests...
+Ran 0 tests in 0ms
+
+Analyzing 2 tests
+Waiting for tests to analyze...
+Analysis duration: 1m0s
+Running impact analysis for src/pages/dashboard/Dashboard.test.tsx
+   vitest run --coverage.enabled \
+           --coverage.all=false \
+           --coverage.reporter=lcov \
+           --coverage.provider=v8 \
+           --coverage.reportsDirectory="$(dirname /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov)" \
+           --silent \
+           --bail 0 \
+           src/pages/dashboard/Dashboard.test.tsx \
+           && cat "$(dirname /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov)"/*.info > /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov
+
+
+ RUN  v4.0.8 /home/circleci/project
+      Coverage enabled with v8
+
+ ✓ src/pages/dashboard/Dashboard.test.tsx (1 test) 86ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  13:48:53
+   Duration  20.08s (transform 759ms, setup 522ms, collect 2.22s, tests 86ms, environment 367ms, prepare 44ms)
+
+Found 127 files impacting test src/pages/dashboard/Dashboard.test.tsx
+
+Running impact analysis for src/pages/dashboard/CreateProjectButton.test.tsx
+   vitest run --coverage.enabled \
+           --coverage.all=false \
+           --coverage.reporter=lcov \
+           --coverage.provider=v8 \
+           --coverage.reportsDirectory="$(dirname /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov)" \
+           --silent \
+           --bail 0 \
+           src/pages/dashboard/CreateProjectButton.test.tsx \
+           && cat "$(dirname /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov)"/*.info > /tmp/test-suite-outputs.lcov-3417803461/outputs.lcov
+
+
+ RUN  v4.0.8 /home/circleci/project
+      Coverage enabled with v8
+
+ ✓ src/pages/dashboard/CreateProjectButton.test.tsx (1 test) 43ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  13:48:54
+   Duration  13.02s (transform 708ms, setup 540ms, collect 1.4s, tests 43ms, environment 356ms, prepare 29ms)
+
+Found 127 files impacting test src/pages/dashboard/CreateProjectButton.test.tsx
+
+Analyzed 2 tests in 23.357s
+Updated test impact data in 23.501s
+----
+
+[NOTE]
+====
+*Using multiple test suites in a single repository*
+
+By default Smarter Testing uses per-repository test impact analysis data. If you have multiple test suites in a single repository, the impact analysis data for each test suite may conflict with each other.
+
+Set `options.impact-key` in the test suite configuration to group impact analysis data.
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: service-1 tests
+options:
+  test-impact-analysis: true
+  impact-key: service-1
+---
+name: service-2 tests
+options:
+  test-impact-analysis: true
+  impact-key: service-2
+----
+====
+
+NOTE: When running with `--local`, you will see `.circleci/impact.json` created - this stores the impact data used for test selection. This file will be used for the next step to validate test selection.
+
+== 2. Validate test selection locally
+
+Test selection requires impact data from the analysis phase. Earlier, we validated that the analysis command produces coverage data correctly. You should also see `.circleci/impact.json` containing the impact data from your analysis run with the 5 minute duration limit.
+
+To verify test selection works:
+
+*Inspect the impact data* to see which tests cover which files:
+[source,console]
+----
+$ cat .circleci/impact.json
+----
+The impact data shows relationships between test atoms and source files. For example:
+[source,json]
+----
+{
+  "version": 0,
+  "files": {
+    "1": { "Path": "src/components/Button.js", "Hash": "a1b2c3d4e5f6g7h8" },
+    "2": { "Path": "src/components/Input.js", "Hash": "b2c3d4e5f6g7h8i9" },
+    "3": { "Path": "src/utils/calculator.js", "Hash": "c3d4e5f6g7h8i9j0" },
+    "4": { "Path": "testApp/Button.test.js", "Hash": "d4e5f6g7h8i9j0k1" },
+    "5": { "Path": "testApp/Input.test.js", "Hash": "e5f6g7h8i9j0k1l2" },
+    "6": { "Path": "testApp/calculator.test.js", "Hash": "f6g7h8i9j0k1l2m3" }
+  },
+  "edges": {
+    "testApp/Button.test.js": ["1", "4"],
+    "testApp/Input.test.js": ["2", "5"],
+    "testApp/calculator.test.js": ["3", "6"]
+  }
+}
+----
+In this example, modifying `src/components/Button.js` would select only `testApp/Button.test.js`,
+while skipping `testApp/Input.test.js` and `testApp/calculator.test.js`.
+
+*Intentionally modify a source file* that appears in the impact data. Look at the impact data to understand which tests should be skipped/selected.
+
+*Run the test suite* and verify that test selection is working. Since analysis only ran for 5 minutes, impact data is incomplete and any test atoms not in the impact data will be selected and run. However, you should see that the test atoms that are not impacted based on the impact data are correctly skipped.
+
+Look for the section starting `Selecting tests...` (some of the output from the command below has been elided):
+[source,console]
+----
+# When running locally, --test-selection="impacted" and --test-analysis="none" by default
+$ circleci run testsuite "ci tests" --local
+Running test-suite-subcommand version "1.0.14935-630104a" built "2025-11-25T16:15:39Z"
+Testsuite timeout: 4h40m0s
+Running test suite 'ci tests'
+
+Suite Configuration:
+
+name: ci tests
+<... TEST SUITE CONFIGURATION ...>
+
+Discovering...
+Discovered 34 tests in 504ms
+
+Selecting tests...
+Found test impact version: 0
+Using `impact-key` `default`
+- 0 new tests
+- 0 tests impacted by new files
+- 30 tests impacted by modified files
+Selected 30 tests, Skipped 4 tests in 0s
+
+<... TEST RUN OUTPUT ...>
+----
+
+At this point your test suite is set up correctly:
+
+. Test atoms are discovered.
+. Test selection is driven from test impact analysis data.
+. The analysis phase is correctly analyzing test impact.
+
+The next step is to run your test suite in CI. Also feel free to:
+
+* Revert any file modifications you made to validate test selection.
+* Remove any files that got created from running the command locally (ex. impact.json, coverage files, JUnit results).
+
+== 3. Run your test suite in CircleCI
+
+Now that your test suite configuration is set up correctly you can run your test suite in a CircleCI job.
+
+. Make sure that `.circleci/test-suites.yml` is checked in to your repository.
+. Update your `.circleci/config.yml` to call the `circleci run testsuite "ci tests"` command instead of your regular test command.
+. Push the change to your VCS.
+
+For example, if your CircleCI test job was:
+[source,yaml]
+----
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      - run: vitest run --reporter=junit --outputFile="test-reports/tests.xml" --bail 0
+      - store_test_results:
+          path: test-reports
+----
+
+You would change it to:
+[source,yaml]
+----
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests"
+      - store_test_results:
+          # This directory must match the directory of `outputs.junit` in your
+          # test-suites.yml
+          path: test-reports
+----
+
+Since there is no test impact analysis data stored in CircleCI for your test suite, all the tests will be selected and run when you push to CI. Confirm that the tests execute as expected.
+
+TIP: It can be easier to debug issues with your test suite configuration in CI if you initially run the job without parallelism.
+
+While the analysis phase runs on the default branch by default, you can run the analysis phase from your feature branch by temporarily adding the `--test-analysis=impacted` CLI flag to the test suite invocation:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      # override test selection and analysis defaults to perform analysis on a
+      # feature branch
+      - run: circleci run testsuite "ci tests" --test-selection=none --test-analysis=impacted
+      - store_test_results:
+          path: test-reports
+----
+
+Based on the previous step, analysis will be limited to approximately 5 minutes due to `options.test-analysis-duration` in the test suite configuration. If you would like to run analysis past the 5 minutes, you can remove `options.test-analysis-duration` to allow the process to run for as long as it needs. Make a push to verify that the analysis phase works as intended in CI.
+
+NOTE: The first time you run the analysis it may take a long time and could require multiple runs. This is because the full impact map is being generated for the first time. After this initial build, subsequent runs should be significantly faster.
+
+Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`. By default, analysis runs on default branches and selection runs on feature branches. To customize this behavior, see xref:#common-setup-examples[Common setup examples].
+
+At this point:
+
+. Your test suite is configured with Test Impact Analysis.
+. You have run test impact analysis on your test suite.
+. Your CircleCI config is updated to run your test suite with test selection enabled.
+
+The final step is to prepare and merge a PR with the changes to your CircleCI configuration file so that your test suite benefits from intelligent test selection.
+
+== Common setup examples
+
+=== Run analysis on your default branch and selection on all other branches
+
+No changes required, this is the default setting.
+
+[#run-analysis-on-non-default-branch]
+=== Run analysis on a non-default branch and selection on all other branches
+
+.CircleCI configuration for running analysis on a branch named `develop` and selection on all other branches
+[source,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    parallelism: 4
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests" --test-analysis=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
+      - store_test_results:
+          path: test-reports
+----
+
+=== Run higher parallelism on the analysis branch
+
+.CircleCI configuration for running parallelism of 10 on the main branch and 2 on all other branches
+[source,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    parallelism: << pipeline.git.branch == "main" and 10 or 2 >>
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests"
+      - store_test_results:
+          path: test-reports
+----
+
+[#run-analysis-on-scheduled-pipeline]
+=== Run full analysis on a scheduled pipeline, and timeboxed analysis on main
+
+.CircleCI configuration for running analysis only on scheduled pipelines
+[source,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+parameters:
+  run-scheduled-analysis:
+    type: boolean
+    default: false
+jobs:
+  analysis:
+    executor: node-with-service
+    steps:
+      - setup
+      - run: circleci run testsuite "scheduled tests"
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      - run: circleci run testsuite "main tests"
+      - store_test_results:
+          path: test-reports
+workflows:
+  scheduled-analysis:
+    when: pipeline.parameters.run-scheduled-analysis
+    jobs:
+      - analysis
+  main:
+    when: not pipeline.parameters.run-scheduled-analysis
+    jobs:
+      - test
+----
+
+.Test suite config. Set time limit of 10 minutes for the analysis on the main branch
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: "main tests"
+# rest of test suite config.
+options:
+  test-impact-analysis: true
+  test-analysis-duration: 10 # Analyze the slowest tests first for a max of 10 minutes.
+---
+name: "scheduled tests"
+# rest of test suite config.
+options:
+  test-impact-analysis: true
+----
+
+== Troubleshooting
+
+=== The analysis found 0 files impacting tests
+
+Check the analysis command is creating a coverage file formatted correctly by running the command locally and examining the coverage data.
+
+If you would like assistance, share the coverage file in the preview Slack channel.
+
+=== Test impact analysis not selecting expected tests
+
+*Symptoms:* More tests run than expected, or tests you expect to run are skipped.
+
+*Solution:* Ensure that your analysis phase has completed successfully. Test selection depends on coverage data from previous analysis runs. If analysis data is incomplete or outdated, the system may run more tests than expected or fall back to running all tests.
+
+*Debugging steps:*
+
+. Verify analysis has run successfully.
+. Check that coverage data is being generated correctly.
+. Review the `full-test-run-paths` option - changes to any of these paths trigger a full test run.
+. Confirm the analysis command is producing valid coverage output, and that you are using the appropriate `outputs` variable for the coverage format.
+
+=== Test impact analysis finds many more files impacting a test than it should
+
+Analysis is based off the code covered by running an individual test atom. Sometimes the language runtime or test runner will eagerly load code as part of the test run setup. This behavior can lead to all the eagerly loaded code being considered covered by the test atom though it is only an artifact of running the test suite.
+
+In these cases you can set an xref:#analysis-baseline-command[analysis-baseline command] which can account for this code coverage.
+
+=== Tests not being split correctly across nodes
+
+*Symptoms:* Some parallel nodes finish much faster than others, or tests are not distributed evenly.
+
+*Solution:* Verify that your test suite configuration includes historical timing data and that all test files are being detected. Check the step output for the "Sorted X tests" message to confirm that test atoms are being sorted by timing.
+
+*Debugging steps:*
+
+. Check that all test atoms are discovered with the discover command.
+. Verify parallelism is set correctly in your `.circleci/config.yml`.
+. Ensure test results are being stored with `store_test_results`.
+
+=== Test results not appearing in the UI
+
+*Symptoms:* No tests results appear in the CircleCI UI, or tests that were skipped by selection do not appear in the CircleCI UI.
+
+*Solution:* Confirm that `outputs.junit` points to the correct location and that the `store_test_results` step is used in your CI job. The `path` argument for `store_test_results` should be the directory that the `outputs.junit` file is stored in. Output from test batches are written to files in this directory with numeric suffixes. Skipped test results are written to a separate file in this directory with a `-skipped` suffix.
+
+*Example:*
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+outputs:
+  junit: test-reports/tests.xml
+# Skipped tests written to test-reports/tests-skipped.xml
+# Batched tests written to incrementing test-reports/tests-1.xml
+# .circleci/config.yml
+jobs:
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests"
+      - store_test_results:
+          path: test-reports
+----
+
+== Optional configuration
+
+[#file-mapper]
+=== Use the `file-mapper` command
+
+NOTE: Skip this step if the test atoms discovered by your test suite are file names. This step is only necessary when test atoms are something other than file names.
+
+TIP: One language that requires a `file-mapper` command is Go, since a test atom is a Go package which may be comprised of several test files.
+
+When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files. This way,
+
+* During **analysis**, Smarter Testing can associate test files with their test atoms in impact data.
+* During **selection**, Smarter Testing can determine which test atom to run when a test file is modified.
+
+It may be useful to run the `file-mapper` command in your shell to verify the output.
+
+The test atom to map can be specified in one of two ways:
+
+* Use the template variable `<< test.atoms >>` in the `file-mapper` command. This will be replaced with the test atom to analyze.
+* If the template variable is not found in the `file-mapper` command, the test atom will be passed on stdin.
+
+[tabs]
+====
+Go::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
+run: go test -race -count=1 << test.atoms >>
+analysis: go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
+----
+
+Go with gotestsum::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
+run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
+analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
+----
+====
+
+[#analysis-baseline-command]
+=== Use the `analysis-baseline` when test atoms cover too many files
+
+If you see many files impacting each test during analysis, for example, `Found 150 files impacting test...`, this may be caused by shared setup code like global imports or framework initialization being included in coverage.
+
+This extraneous coverage can be excluded by providing an `analysis-baseline` command to compute the code covered during startup that isn't directly exercised by test code. We call this "baseline coverage data".
+
+The `analysis-baseline` command must produce coverage output written to a coverage template variable. The baseline coverage data can be in any supported coverage format. While it does not need to match your test coverage output format, using the same format (for example, LCOV format for `<< outputs.lcov >>`) is recommended for consistency.
+
+. Create a minimal test that only does imports/setup (no test logic), in the `vitest` example below this is called `src/baseline/noop.test.ts`.
+. Add an `analysis-baseline` command to your test suite. This command will be broadly similar to your `analysis` command, except that it should only run the minimal test.
+
+[tabs]
+====
+Vitest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: vitest list --filesOnly
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
+analysis: |
+  vitest run --coverage.enabled \
+             --coverage.all=false \
+             --coverage.reporter=lcov \
+             --coverage.provider=v8 \
+             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
+             --bail 0 \
+             << test.atoms >> \
+             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+analysis-baseline: |
+  vitest run --coverage.enabled \
+             --coverage.all=false \
+             --coverage.reporter=lcov \
+             --coverage.provider=v8 \
+             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
+             --bail 0 \
+             "src/baseline/noop.test.ts" \
+             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  test-impact-analysis: true
+  test-analysis-duration: 5
+----
+
+Jest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: jest --listTests
+run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
+analysis: |
+  jest --runInBand \
+       --silent \
+       --coverage \
+       --coverageProvider=v8 \
+       --coverageReporters=lcovonly \
+       --coverage-directory="$(dirname << outputs.lcov >>)" \
+       --bail \
+       << test.atoms >> \
+       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+analysis-baseline: |
+  jest --runInBand \
+       --silent \
+       --coverage \
+       --coverageProvider=v8 \
+       --coverageReporters=lcovonly \
+       --coverage-directory="$(dirname << outputs.lcov >>)" \
+       --bail \
+       "src/baseline/noop.test.ts" \
+       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  test-impact-analysis: true
+  test-analysis-duration: 5
+----
+
+Yarn with Jest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: yarn --silent test --listTests
+run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" yarn test --runInBand --reporters=jest-junit --bail << test.atoms >>
+analysis: |
+  yarn test --runInBand \
+            --coverage \
+            --coverageProvider=v8 \
+            --coverageReporters=lcovonly \
+            --coverage-directory="$(dirname << outputs.lcov >>)" \
+            --bail \
+            << test.atoms >> \
+            && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+analysis-baseline: |
+  yarn test --runInBand \
+            --coverage \
+            --coverageProvider=v8 \
+            --coverageReporters=lcovonly \
+            --coverage-directory="$(dirname << outputs.lcov >>)" \
+            --bail \
+            "src/baseline/noop.test.ts" \
+            && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  test-impact-analysis: true
+  test-analysis-duration: 5
+----
+
+pytest::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: find ./tests -type f -name 'test*.py'
+run: |
+  pytest --disable-pytest-warnings \
+         --no-header \
+         --quiet \
+         --tb=short \
+         --junit-xml="<< outputs.junit >>" \
+         << test.atoms >>
+analysis: |
+  pytest --disable-pytest-warnings \
+         --no-header \
+         --quiet \
+         --tb=short \
+         --cov \
+         --cov-report=lcov:<< outputs.lcov >> \
+         << test.atoms >>
+analysis-baseline: |
+  pytest --disable-pytest-warnings \
+         --no-header \
+         --quiet \
+         --tb=short \
+         --cov \
+         --cov-report=lcov:<< outputs.lcov >> \
+         "test/noop/noop_test.py"
+outputs:
+  junit: test-reports/tests.xml
+options:
+  test-impact-analysis: true
+  test-analysis-duration: 5
+----
+
+Go::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
+run: go test -race -count=1 << test.atoms >>
+analysis: go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+analysis-baseline: go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... ./noop_test
+outputs:
+  junit: test-reports/tests.xml
+options:
+  test-impact-analysis: true
+  test-analysis-duration: 5
+----
+
+Go with gotestsum::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
+run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
+analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+analysis-baseline: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... ./noop_test
+outputs:
+  junit: test-reports/tests.xml
+options:
+  test-impact-analysis: true
+  test-analysis-duration: 5
+----
+====
+
+The `analysis-baseline` command will be run just before running analysis. The coverage data produced by the `analysis-baseline` command will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test.
+
+== Frequently Asked Questions
+
+=== How often should I run the analysis phase?
+
+The frequency depends on your test execution speed and development pace:
+
+*For fast test suites (coverage analysis runs quickly):*
+
+Run analysis on every default branch build. This keeps impact data continuously up-to-date, and ensures the most accurate test selection on other branches.
+
+*For slower test suites (coverage analysis is expensive):*
+
+Balance the freshness of impact data against CI/CD resource costs:
+
+* Run analysis on a scheduled pipeline targeting your default branch. Use a frequency based on your development pace (for example: nightly or after significant changes).
+* Timebox analysis on every default branch build, for example allow 10 minutes of analysis. This helps keep the analysis data up to date for smaller incremental changes.
+
+TIP: You can customize which branches run analysis in your CircleCI configuration - analysis does not have to be limited to the default branch.
+
+=== What happens if no tests are impacted by a change?
+
+If test selection determines that no tests are affected by your changes then it won't run anything.
+
+This typically happens when:
+
+* You modify files that are not covered by any tests.
+* Changes affect configuration files not tracked by impact analysis.
+
+TIP: Include relevant paths in `full-test-run-paths` to explicitly trigger full test runs when configuration files change.
+
+=== How do I know if Test Impact Analysis is working?
+
+Look for these indicators in your CircleCI build output.
+
+Impact data is being found and used to select tests:
+[source,console]
+----
+Found test impact generated by: https://app.circleci.com/pipelines/...
+Using `impact-key` `default`
+- 2 new tests
+- 3 tests impacted by new files
+- 5 tests impacted by modified files
+Selected 10 tests, Skipped 19 tests in 1ms
+----
+
+=== Can I run analysis on branches other than the default branch?
+
+Yes, the branch behavior is customizable in your `.circleci/config.yml` by passing the xref:configuration-options.adoc#cli-flags[--test-analysis] flag to the `circleci run testsuite` command.
+
+The argument to xref:configuration-options.adoc#cli-flags[`--test-analysis`] can be a CircleCI configuration template expression, allowing you to vary behavior by branch name.
+
+For example:
+
+* Any specific branch (for example, `develop`).
+* Feature branches if needed for testing.
+
+See the xref:#run-analysis-on-non-default-branch[Run analysis on a non-default and selection on all other branches] example for an example of customizing branch behavior.
+
+=== Can I control test selection on any branch?
+
+Yes, the branch behavior is fully customizable through your CircleCI configuration. While test-selection runs on feature branches by default, you can override this behavior with the xref:configuration-options.adoc#cli-flags[--test-selection] flag.
+
+The argument to xref:configuration-options.adoc#cli-flags[--test-selection] can be a CircleCI configuration template expression, allowing you to vary behavior by branch name.
+
+* Any specific branch (for example, `develop` or `staging`).
+* Feature branches if needed for testing.
+* Scheduled pipelines.
+
+See the xref:#run-analysis-on-non-default-branch[Run analysis on a non-default and selection on all other branches] example for an example of customizing branch behavior.
