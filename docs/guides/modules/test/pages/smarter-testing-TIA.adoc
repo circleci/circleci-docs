@@ -1,8 +1,6 @@
 = Test Impact Analysis
 :page-description: Run only the tests impacted by your code changes
 
-Test Impact Analysis intelligently selects which tests to run based on the files that changed in your code. This reduces test execution time while maintaining test confidence.
-
 == Is my project a good fit for Test Impact Analysis?
 
 Here are some examples where Smarter Testing works well:
@@ -20,7 +18,7 @@ Test impact analysis identifies which tests need to run based on the files that 
 
 TIP: You can also save time on your local test runs on your machine. See <<local-run>> for details.
 
-The analysis phase typically runs slower than running the selected tests because it executes tests individually with coverage instrumentation. However, this one-time cost enables much faster test execution on branches using selection mode.
+The analysis phase typically runs slower than a normal test run because it executes tests individually with coverage instrumentation. However, this allows the selection phase to identify only necessary tests to run, which leads to much faster test execution.
 
 [mermaid]
 ----
@@ -45,19 +43,19 @@ Before enabling Test Impact Analysis, ensure you have completed the xref:getting
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands
 * Verified your tests run successfully with the `testsuite` command
 
-Steps to enable Smarter Testing are as follows:
+Steps to enable Test Impact Analysis are as follows:
 
-. Configure test impact analysis in `test-suites.yml`.
-. Analyze test impact.
-. Validate that only relevant test are selected when you modify source files.
+. Configure `analysis` command in `test-suites.yml`
+. Validate test selection locally
+. Run test suite in CircleCI with Test Impact Analysis enabled
 
 Each step is explained fully in the following sections.
 
-== 1. Configure the analysis command
+== 1. Configure the analysis command in `test-suites.yml`
 
 The `analysis` command executes test atoms one at a time using a test runner with code coverage enabled. This is similar to your `run` command, but with coverage instrumentation enabled.
 
-Make sure that the command stores code coverage results, and that it is passed a test atom to run. For example:
+Make sure that the command stores code coverage results, and that it is passed a test atom to run. For example, if your normal command to run a test with coverage is:
 [source,console]
 ----
 $ vitest run --coverage.enabled \
@@ -257,7 +255,7 @@ options:
 ----
 ====
 
-Run the test suite with flags `--test-selection="none"` and `--test-analysis="impacted"`, and confirm that the analysis command analyzes the test atoms you expect. Learn more in xref:configuration-options.adoc#cli-flags[CLI flags]. Look for the output lines `Found N files impacting TEST`, which show analysis discovering the source files covered by the test.
+Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"`, and confirm that the analysis command analyzes the test atoms you expect (learn more about the flags in xref:configuration-options.adoc#cli-flags[CLI flags]). Look for the output lines `Found N files impacting TEST`, which show analysis discovering the source files covered by the test.
 
 NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize `file-mapper` command. Learn more in xref:#file-mapper[Use the file-mapper command].
 
@@ -434,7 +432,7 @@ while skipping `testApp/Input.test.js` and `testApp/calculator.test.js`.
 Look for the section starting `Selecting tests...` (some of the output from the command below has been elided):
 [source,console]
 ----
-# When running locally, --test-selection="impacted" and --test-analysis="none" by default
+# When running locally, --test-selection is set to "impacted" and --test-analysis is set to "none" by default
 $ circleci run testsuite "ci tests" --local
 Running test-suite-subcommand version "1.0.14935-630104a" built "2025-11-25T16:15:39Z"
 Testsuite timeout: 4h40m0s
@@ -470,9 +468,9 @@ The next step is to run your test suite in CI. Also feel free to:
 * Revert any file modifications you made to validate test selection.
 * Remove any files that got created from running the command locally (ex. impact.json, coverage files, JUnit results).
 
-== 3. Run your test suite in CircleCI
+== 3. Run your test suite with test impact analysis enabled in CircleCI
 
-Now that your test suite configuration is set up correctly you can run your test suite in a CircleCI job.
+Now that your test impact analysis is set up correctly you can run your test suite in a CircleCI job.
 
 . Make sure that `.circleci/test-suites.yml` is checked in to your repository.
 . Update your `.circleci/config.yml` to call the `circleci run testsuite "ci tests"` command instead of your regular test command.
