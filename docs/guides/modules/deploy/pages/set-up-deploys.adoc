@@ -48,7 +48,7 @@ Next, create a new pipeline definition for your deploy pipeline.
 A pipeline definition is a setting within CircleCI in your project to specify the different elements that make up a pipeline:
 
 * Config source
-* Config filepath
+* Config file path
 * Checkout source
 * Triggers
 
