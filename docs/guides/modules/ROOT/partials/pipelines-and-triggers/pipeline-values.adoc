@@ -172,7 +172,7 @@ d|  [.nowrap]#GitHub App: push# +
 
 | `pipeline.trigger_parameters.gitlab.type`
 d| [.nowrap]#GitLab#
-| 
+|
 | See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
@@ -418,7 +418,7 @@ d| [.nowrap]#GitLab#
 | `pipeline.trigger_parameters.webhook.body`
 d| [.nowrap]#Custom webhook#
 | String
-| The body of the payload that was sent with a xref:guides:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[custom webhook].
+| The body of the payload that was sent with a xref:guides:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
