@@ -240,19 +240,6 @@ No, Dynamic Test Splitting works independently:
 * **With Test Impact Analysis**: Distributes the selected subset of tests
 * **Without Test Impact Analysis**: Distributes all discovered tests
 
-=== How do I know if Test Splitting is working?
-
-Look for these indicators in your CircleCI build output:
-
-Historical timing data is being found and used to order test execution:
-
-* `Autodetected filename timings for N tests`
-* `Autodetected classname timings for N tests`
-* `Autodetected testname timings for N tests`
-* `Sorted tests in Xms`
-
-You should also see relatively even test execution times across all parallel nodes in the CircleCI UI.
-
 ==== Tests not being split correctly across nodes
 
 *Symptoms:* Some parallel nodes finish much faster than others, or tests are not distributed evenly.
