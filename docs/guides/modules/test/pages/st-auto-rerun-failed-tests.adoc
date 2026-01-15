@@ -1,0 +1,20 @@
+= Auto rerun failed tests
+:page-description: Automatically rerun failing tests
+
+== How it works
+
+== Auto rerun failed tests configuration options
+
+The following options control test distribution behavior:
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
+|===
+|Options Field|Default|Description
+
+|`max-auto-rerun`
+|0
+|The maximum number of times tests will be rerun if they fail. `max-auto-rerun` can be set in the range 0 to 10 inclusive.
+|===
+--
