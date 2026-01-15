@@ -127,7 +127,7 @@ NOTE: Dynamic test splitting pulls multiple batches from the queue, requiring th
 
 == Dynamic Test Splitting configuration options
 
-The following options control test distribution behavior:
+The following options are available to be defined in the options map in test-suites.yml config:
 
 [.table-scroll]
 --
