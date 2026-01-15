@@ -17,8 +17,7 @@ Smarter Testing reduces test execution time while maintaining test confidence by
 == Table of Contents
 
 * xref:getting-started.adoc[Getting Started]
-* xref:test-impact-analysis.adoc[Test Impact Analysis]
-* xref:test-impact-analysis-local.adoc[Test Impact Analysis (Using it Locally)]
-* xref:dynamic-test-distribution.adoc[Dynamic Test Distribution]
-* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
-* xref:configuration-options.adoc[Configuration Options]
+* xref:st-test-impact-analysis.adoc[Test Impact Analysis]
+* xref:st-local.adoc[Test Impact Analysis (Using it for local development)]
+* xref:st-dynamic-test-splitting.adoc[Dynamic Test Splitting]
+* xref:st-auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
