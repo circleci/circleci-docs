@@ -13,6 +13,7 @@ When you configure auto rerun:
 * Both failed and flaky test details are available under the Test tab on the job page
 
 This eliminates the need to:
+
 * Manually identify which jobs failed
 * Manually click "rerun failed tests" workflow
 
