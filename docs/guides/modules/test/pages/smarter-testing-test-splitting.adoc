@@ -233,45 +233,14 @@ jobs:
 
 == Frequently Asked Questions
 
-=== How many parallel nodes should I use?
+=== Does Dynamic Test Splitting require Test Impact Analysis?
 
-The optimal number depends on several factors:
-
-* **Total test suite duration**: More parallelism helps longer test suites
-* **Number of tests**: Diminishing returns when nodes > test count
-* **CI plan limits**: Check your CircleCI plan for parallelism limits
-* **Cost vs. speed tradeoff**: More nodes = faster but higher cost
-
-A good starting point is to divide your total test duration by your target duration:
-- Test suite takes 20 minutes, target 5 minutes → try 4 nodes
-- Test suite takes 60 minutes, target 10 minutes → try 6 nodes
-
-Start conservative and increase parallelism if needed.
-
-=== How does Dynamic Test Distribution work with Test Impact Analysis?
-
-They work together seamlessly:
-
-1. **Test Impact Analysis** first selects which tests should run based on code changes
-2. **Dynamic Test Distribution** then splits those selected tests across parallel nodes
-
-For example:
-- You have 100 total tests across 4 nodes
-- Test Impact Analysis selects 30 tests based on your changes
-- Dynamic Test Distribution splits those 30 tests across the 4 nodes (~7-8 per node)
-
-This combination gives you both intelligent test selection and optimal distribution.
-
-=== Does Dynamic Test Distribution require Test Impact Analysis?
-
-No, Dynamic Test Distribution works independently:
+No, Dynamic Test Splitting works independently:
 
 * **With Test Impact Analysis**: Distributes the selected subset of tests
 * **Without Test Impact Analysis**: Distributes all discovered tests
 
-You can enable Dynamic Test Distribution by simply using the `testsuite` command with parallelism, regardless of whether Test Impact Analysis is configured.
-
-=== How do I know if Dynamic Test Distribution is working?
+=== How do I know if Test Splitting is working?
 
 Look for these indicators in your CircleCI build output:
 
@@ -284,26 +253,15 @@ Historical timing data is being found and used to order test execution:
 
 You should also see relatively even test execution times across all parallel nodes in the CircleCI UI.
 
-=== Why is the first run slower than expected?
+==== Tests not being split correctly across nodes
 
-The first run has no historical timing data, so tests are distributed in discovery order rather than by duration. This may lead to uneven distribution.
+*Symptoms:* Some parallel nodes finish much faster than others, or tests are not distributed evenly.
 
-After the first run:
-1. Timing data is collected from JUnit XML files
-2. Subsequent runs use this data to optimize distribution
-3. Distribution improves as more timing data accumulates
+*Solution:* Verify that your test suite configuration includes historical timing data and that all test files are being detected. Check the step output for the "Sorted X tests" message to confirm that test atoms are being sorted by timing.
 
-=== Can I use Dynamic Test Distribution locally?
+*Debugging steps:*
 
-Yes! When you run `circleci run testsuite "ci tests" --local`, the system uses any available timing data from previous local runs or from CircleCI.
+. Check that all test atoms are discovered with the discover command.
+. Verify parallelism is set correctly in your `.circleci/config.yml`.
+. Ensure test results are being stored with `store_test_results`.
 
-However, parallelism is a CircleCI feature that requires multiple execution nodes, so local runs execute tests sequentially. Dynamic Test Distribution will still sort tests by duration locally, but won't split them across multiple nodes.
-
-=== What happens if a node fails or times out?
-
-When a node fails:
-* Other nodes continue processing tests from the queue
-* The failed node's incomplete tests are not automatically retried on other nodes
-* The job will be marked as failed
-
-To handle flaky tests that cause node failures, consider enabling xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests].
