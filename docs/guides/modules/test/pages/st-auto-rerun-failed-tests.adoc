@@ -19,7 +19,7 @@ This eliminates the need to:
 
 == Auto rerun failed tests configuration options
 
-The following options control test distribution behavior:
+The following options are available to be defined in the options map in test-suites.yml config:
 
 [.table-scroll]
 --
