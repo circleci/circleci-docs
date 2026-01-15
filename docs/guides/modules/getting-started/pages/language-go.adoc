@@ -38,7 +38,7 @@ To add the orb to your config, insert:
 [,yaml]
 ----
 orbs:
-  go: circleci/go@1.7.3
+  go: circleci/go@3.0.2
 ----
 
 NOTE: When using an orb, it is a good idea to check the link:https://circleci.com/developer/orbs[Orb Registry] to ensure you are using the most recent version, or the version that fits best with your specific project.
@@ -53,7 +53,7 @@ A common ask from developers who are getting started with CircleCI is to perform
 [#build-and-test-the-app]
 ==== a. Build and test the app
 
-For this step, we use commands that come preconfigured in the Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb]. Go modules are downloaded and cached and tests are run.
+For this step, we use commands that come preconfigured in the Go link:https://circleci.com/developer/orbs/orb/circleci/go[orb]. The `go/mod-download` command downloads Go modules and caches them automatically. Tests are run using the `go/test` command.
 
 [,yaml]
 ----
@@ -61,12 +61,10 @@ jobs:
   build_and_test: # this can be any name you choose
     executor:
       name: go/default # Use the default executor from the orb
-      tag: '1.19.2' # Specify a version tag
+      tag: '1.22' # Specify a version tag
     steps:
       - checkout # checkout source code
-      - go/load-cache # Load cached Go modules.
-      - go/mod-download # Run 'go mod download'.
-      - go/save-cache # Save Go modules to cache.
+      - go/mod-download # Download and cache Go modules
       - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
           covermode: atomic
           failfast: true
@@ -84,8 +82,8 @@ In this quickstart guide, we will deploy to link:https://www.heroku.com/[Heroku]
 [,yaml]
 ----
 orbs:
-  go: circleci/go@1.7.3
-  heroku: circleci/heroku@1.2.6
+  go: circleci/go@3.0.2
+  heroku: circleci/heroku@2.0.0
 ----
 
 We then need to add a job to our list to take care of the deploy step:
@@ -149,19 +147,17 @@ NOTE: *Deploy options?* For alternative deployment targets, search the link:http
 ----
 version: 2.1
 orbs:
-  go: circleci/go@1.7.3
-  heroku: circleci/heroku@1.2.6
+  go: circleci/go@3.0.2
+  heroku: circleci/heroku@2.0.0
 
 jobs:
   build_and_test: # this can be any name you choose
     executor:
       name: go/default # Use the default executor from the orb
-      tag: '1.19.2' # Specify a version tag
+      tag: '1.22' # Specify a version tag
     steps:
       - checkout # checkout source code
-      - go/load-cache # Load cached Go modules.
-      - go/mod-download # Run 'go mod download'.
-      - go/save-cache # Save Go modules to cache.
+      - go/mod-download # Download and cache Go modules
       - go/test: # Runs 'go test ./...' but includes extensive parameterization for finer tuning.
           covermode: atomic
           failfast: true
@@ -179,7 +175,7 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 
 workflows:
-  test_my_app:
+  build_test_deploy:
     jobs:
       - build_and_test
       - deploy:
