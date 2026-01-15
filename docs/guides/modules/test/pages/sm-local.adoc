@@ -1,0 +1,53 @@
+= Using Test Impact Analysis Locally
+:page-description: Run Smarter Testing features on your local machine
+
+You can use Smarter Testing locally to benefit from test impact analysis before pushing to CI. This helps you iterate faster during development.
+
+== Prerequisites
+
+Before using Smarter Testing locally, ensure you have:
+
+* Completed the xref:getting-started.adoc[Getting Started] guide
+* Installed the `testsuite` CLI plugin
+* Configured your `.circleci/test-suites.yml`
+* Enabled xref:test-impact-analysis.adoc[Test Impact Analysis] in your configuration
+
+=== Get and set your CircleCI API token
+
+. Navigate to https://app.circleci.com/settings/user/tokens[User Settings > Personal API Tokens].
+. Create a new token or use an existing one.
+. Copy the token value.
+
+*Set via CLI configuration*
+
+[source,console]
+----
+$ circleci setup
+----
+
+Follow the prompts to configure your token. Learn more in the xref:toolkit:local-cli.adoc#configure-the-cli[Configure the CLI Guide].
+
+=== Select and run tests using impact data stored in CircleCI
+
+[source,console]
+----
+$ circleci run testsuite "ci tests"
+----
+
+If we are unable to autodetect your project, which could happen for standalone projects, the --project-id flag can be set.
+
+[source,console]
+----
+$ circleci run testsuite "ci tests" --project-id=<your-project-id>
+----
+
+Or if you haven't configured your token via `circleci setup`:
+
+[source,console]
+----
+$ circleci run testsuite "ci tests" \
+    --project-id=<your-project-id> \
+    --circleci-token=<your-token>
+----
+
+NOTE: Analysis is always disabled when running locally without the `--local` flag, regardless of the `--test-analysis` flag value.
