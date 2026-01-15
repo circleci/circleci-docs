@@ -1,0 +1,155 @@
+= Dynamic Test Splitting
+:page-description: Evenly distribute tests across parallel execution nodes
+
+== How it works
+Dynamic test splitting distributes your tests across parallel execution nodes. The system maintains a shared queue that each node pulls from to create a balanced workload.
+
+When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing automatically:
+
+* Sorts tests by duration by retrieving timing data from previous runs, with longer tests prioritized first
+* Creates a shared queue containing all tests to be run
+* Enables nodes to pull dynamically - each parallel node continuously pulls test batches from the queue
+* Adjusts batch sizes - larger batches at the start, smaller batches as the queue empties to ensure even distribution
+
+This prevents any single slow node from becoming a bottleneck. Even if some nodes start late or run slower than expected, the dynamic batching ensures work stays balanced across all available nodes.
+
+[mermaid]
+----
+flowchart LR
+    discover(Discover \n A B C D E F G H I J)
+    discover --> split1(Node 1 \n A... B..\n.........)
+    discover --> split2(Node 2 \n C...... \n .......)
+    discover --> split3(Node 3 \n D...... \n .. E...)
+    subgraph "Dynamic Test Distribution"
+    split1
+    split2
+    split3 
+    end
+----
+
+== Prerequisites
+
+Before enabling Dynamic Test Distribution, ensure you have completed the xref:getting-started.adoc[Getting Started] guide and have:
+
+* Installed the `testsuite` CLI plugin
+* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands
+* Verified your tests run successfully with the `testsuite` command
+
+== Enable Dynamic Test Splitting
+
+=== 1. Configure parallelism in your CircleCI job
+
+Update your `.circleci/config.yml` to add parallelism to your test job:
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    parallelism: 4  # Run tests across 4 parallel nodes
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps-{{ checksum "package-lock.json" }}
+      - run: npm ci
+      - run: circleci run testsuite "ci tests"
+      - store_test_results:
+          path: test-reports
+----
+
+Without dynamic test splitting enabled, Smarter Testing will default to use a static test splitting approach, which pre-distributes tests to nodes at the start of the job based on timing data.
+
+=== 2. Store test results
+
+Test distribution (both static and dynamic) uses timing data from JUnit XML files to optimize how tests are distributed. Make sure you're storing test results:
+
+[source,yaml]
+----
+# .circleci/config.yml
+jobs:
+  test:
+    steps:
+      - run: circleci run testsuite "ci tests"
+      - store_test_results:
+          path: test-reports  # Must match outputs.junit directory
+----
+
+And that your test suite configuration specifies the JUnit output location:
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: vitest list --filesOnly
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+----
+
+=== 3. Enable dynamic test splitting
+
+To enable dynamic test splitting instead of the default static approach, set `dynamic-test-splitting: true` in your test suite configuration:
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: vitest list --filesOnly
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  dynamic-test-splitting: true
+----
+
+With dynamic test splitting enabled, tests are distributed via a shared queue that nodes pull from continuously, rather than being pre-assigned at the start.
+
+NOTE: Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch. If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
+
+== Troubleshooting
+
+=== Tests not being split evenly across nodes
+
+*Symptoms:* Some parallel nodes finish much faster than others, or tests are not distributed evenly.
+
+*Solution:* Verify that your test suite configuration includes historical timing data and that all test files are being detected. Check the step output for the "Sorted X tests" or "Autodetected timing" messages to confirm that test atoms are being sorted by timing.
+
+*Debugging steps:*
+
+1. Check that all test atoms are discovered with the discover command.
+2. Verify parallelism is set correctly in your `.circleci/config.yml`.
+3. Ensure test results are being stored with `store_test_results` - this is how timing data is collected.
+4. Run the job multiple times to allow timing data to accumulate.
+
+== Dynamic Test Splitting configuration options
+
+The following options control test distribution behavior:
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
+|===
+|Options Field|Default|Description
+
+|`dynamic-test-splitting`
+|`false`
+|Whether tests should be distributed across a shared queue with dynamic batching. When `false` (default), tests are distributed statically at the start. Enable dynamic splitting when you want automatic load rebalancing and your test runner has low startup costs.
+
+|`timeout`
+|`10`
+|The time in minutes a node will wait for tests to become available from the queue when running in parallel. 
+|===
+--
+
+== Frequently Asked Questions
+
+=== Does Dynamic Test Splitting require Test Impact Analysis?
+
+No, Dynamic Test Splitting works independently:
+
+* **With Test Impact Analysis**: Distributes the selected subset of tests
+* **Without Test Impact Analysis**: Distributes all discovered tests
