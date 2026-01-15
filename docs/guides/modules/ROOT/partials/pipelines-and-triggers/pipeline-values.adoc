@@ -172,7 +172,7 @@ d|  [.nowrap]#GitHub App: push# +
 
 | `pipeline.trigger_parameters.gitlab.type`
 d| [.nowrap]#GitLab#
-| 
+|
 | See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
@@ -418,7 +418,7 @@ d| [.nowrap]#GitLab#
 | `pipeline.trigger_parameters.webhook.body`
 d| [.nowrap]#Custom webhook#
 | String
-| The body of the payload that was sent with a xref:guides:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[custom webhook].
+| The body of the payload that was sent with a xref:guides:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -432,7 +432,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.action`
 d| [.nowrap]#GitHub App#
 | String
-| The action associated with the event. This value is always the same as `pipeline.event.name`, except for link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub events] that have an `action` property, for example link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[`pull_request`]. Possible values: `custom_webhook`, `api`, `push`, `opened`, `synchronize`, `reopened`, `closed`, `ready_for_review`, `labeled`. xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Read more about trigger event options].
+| The action associated with the event. This value is always the same as `pipeline.event.name`, except for link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub Events] that have an `action` property, for example link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[`pull_request`]. Possible values: `custom_webhook`, `api`, `push`, `opened`, `synchronize`, `reopened`, `closed`, `ready_for_review`, `labeled`. Read more about xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[GitHub Trigger Event Options].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -446,42 +446,42 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.pull_request.base.ref`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the *base* (or target) branch of the PR - that is the branch that will receive the changes. Only populated for pipelines triggered xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[by pull request events] (`pipeline.event.name = 'pull_request'`).
+| The name of the *base* (or target) branch of the PR - that is the branch that will receive the changes. Only populated for pipelines triggered by pull request events (`pipeline.event.name = 'pull_request'`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.head.ref`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the *head* branch of the PR - that is the branch containing the changes to be merged. Only populated for pipelines triggered xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`).
+| The name of the *head* branch of the PR - that is the branch containing the changes to be merged. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.draft`
 d| [.nowrap]#GitHub App#
 | Boolean
-| A boolean value indicating whether the pull request is a draft. Only populated for pipelines triggered xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`).
+| A boolean value indicating whether the pull request is a draft. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.title`
 d| [.nowrap]#GitHub App#
 | String
-| The title of the pull request. Only populated for pipelines triggered xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`).
+| The title of the pull request. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.number`
 d| [.nowrap]#GitHub App#
 | Integer
-| The numeric identifier of the pull request. Only populated for pipelines triggered xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`).
+| The numeric identifier of the pull request. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.merged`
 d| [.nowrap]#GitHub App#
 | Boolean
-| A boolean value indicating whether the pull request is has been merged. Only populated for pipelines triggered xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[by pull request events] (`pipeline.event.name = "pull_request"`).
+| A boolean value indicating whether the pull request is has been merged. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -502,42 +502,42 @@ d| [.nowrap]#GitHub App#
 | `pipeline.deploy.component_name`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The name of the component that was deployed.
+| The name of the component that will be rolled back or deployed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.environment_name`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The name of the environment that was deployed to.
+| The name of the environment in which the rollback or deploy will be performed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.target_version`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The version of the component that needs to be rolled back to.
+| The version of the component that needs to be rolled back to or deployed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.current_version`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The current version of the component that was deployed.
+| The current version of the component that is going to be rolled back or deployed. Can be used to verify that the status of the component matches expectations. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.namespace`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The namespace of the environment that was deployed to.
+| The namespace of the environment that was deployed to. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.reason`
 d| [.nowrap]#GitHub App#
 | String
-| Only for use with xref:guides:deploy:set-up-rollbacks.adoc[rollbacks]. The reason for the deployment or rollback.
+| The reason for the deployment or rollback. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
