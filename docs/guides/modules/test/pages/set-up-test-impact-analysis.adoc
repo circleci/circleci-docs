@@ -7,7 +7,7 @@
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-#TODO Introduction - what is it and why use it?#
+Test Impact Analysis runs only the tests impacted by your code changes, reducing test execution time while maintaining code quality.
 
 == Is my project a good fit for Test Impact Analysis?
 
@@ -18,13 +18,11 @@ Here are some examples where Smarter Testing works well:
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
 
 == How it works
-Test impact analysis identifies which tests need to run based on the files that changed in your checked out code. Analysis results are stored as impact data for future test runs. The system works in two phases:
+Test impact analysis identifies which tests need to run based on the files that changed in your checked out code. The system works in two phases:
 
-*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
+*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. Analysis results are stored as impact data for future test runs. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
 
-*Selection phase*:: Compares the current repository state against the most recent impact analysis data. Tests covering modified files are selected to run (including tests impacting only itself, new or modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
-
-TIP: You can also save time on your local test runs on your machine. See <<local-run>> for details.
+*Selection phase*:: Compares the current repository state against the most recent impact data. Tests covering modified files are selected to run (including tests impacting only itself, new and modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
 
 The analysis phase typically runs slower than a normal test run because it executes tests individually with coverage instrumentation. However, this allows the selection phase to identify only necessary tests to run, which leads to much faster test execution.
 
@@ -56,8 +54,6 @@ Steps to enable test impact analysis are as follows:
 . Configure the `analysis` command in `test-suites.yml`.
 . Validate test selection locally.
 . Run test suite in CircleCI with test impact analysis enabled.
-
-Each step is explained fully in the following sections.
 
 == 1. Configure the analysis command in `test-suites.yml`
 
@@ -507,6 +503,8 @@ In these cases you can set an <<analysis-baseline-command,analysis-baseline comm
 
 == 3. Run your test suite in your CircleCI job
 
+TIP: When adding the testsuite command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers. 
+
 Now that your test suite configuration is set up correctly you can run your test suite in a CircleCI job.
 
 === Step 1: Verify the test suite command works
@@ -583,12 +581,13 @@ NOTE: The first time you run the analysis it may take a long time and could requ
 
 If you want to limit analysis time on your default branch to avoid delays, see <<set-up-examples>>. For example, you can run analysis on a scheduled pipeline while timeboxing analysis on default branches.
 
-At this point:
+At this point, you've successfully set up Test Impact Analysis! Next up, enable other features of Smarter Testing: 
 
-* Your test suite is configured properly.
-* You have verified test impact analysis works on your test suite in a CircleCI job.
-* Your changes are merged to the default branch.
-* Test impact analysis is working as intended.
+* xref:use-test-impact-analysis-for-local-development.adoc[Use Test Impact Analysis for Local Development] for faster development feedback
+* xref:use-dynamic-test-splitting.adoc[Enable Dynamic Test Splitting] to parallelize test execution
+* xref:auto-rerun-failed-tests.adoc[Enable Auto Rerun] to handle flaky tests
+
+Or continue learning more about Test Impact Analysis below.
 
 === Troubleshooting
 
@@ -652,71 +651,6 @@ outputs:
   junit: test-reports/tests.xml
 options:
   dynamic-test-splitting: true
-----
-
-== Troubleshooting
-
-=== The analysis found 0 files impacting tests
-
-Check the analysis command is creating a coverage file formatted correctly by running the command locally and examining the coverage data.
-
-If you would like assistance, share the coverage file in the preview Slack channel.
-
-=== Test impact analysis not selecting expected tests
-
-*Symptoms:* More tests run than expected, or tests you expect to run are skipped.
-
-*Solution:* Ensure that your analysis phase has completed successfully. Test selection depends on coverage data from previous analysis runs. If analysis data is incomplete or outdated, the system may run more tests than expected or fall back to running all tests.
-
-*Debugging steps:*
-
-. Verify analysis has run successfully.
-. Check that coverage data is being generated correctly.
-. Review the `full-test-run-paths` option - changes to any of these paths trigger a full test run.
-. Confirm the analysis command is producing valid coverage output, and that you are using the appropriate `outputs` variable for the coverage format.
-
-=== Test impact analysis finds many more files impacting a test than it should
-
-Analysis is based off the code covered by running an individual test atom. Sometimes the language runtime or test runner will eagerly load code as part of the test run setup. This behavior can lead to all the eagerly loaded code being considered covered by the test atom though it is only an artifact of running the test suite.
-
-In these cases you can set an xref:#analysis-baseline-command[analysis-baseline command] which can account for this code coverage.
-
-=== Tests not being split correctly across nodes
-
-*Symptoms:* Some parallel nodes finish much faster than others, or tests are not distributed evenly.
-
-*Solution:* Verify that your test suite configuration includes historical timing data and that all test files are being detected. Check the step output for the "Sorted X tests" message to confirm that test atoms are being sorted by timing.
-
-*Debugging steps:*
-
-. Check that all test atoms are discovered with the discover command.
-. Verify parallelism is set correctly in your `.circleci/config.yml`.
-. Ensure test results are being stored with `store_test_results`.
-
-=== Test results not appearing in the UI
-
-*Symptoms:* No tests results appear in the CircleCI UI, or tests that were skipped by selection do not appear in the CircleCI UI.
-
-*Solution:* Confirm that `outputs.junit` points to the correct location and that the `store_test_results` step is used in your CI job. The `path` argument for `store_test_results` should be the directory that the `outputs.junit` file is stored in. Output from test batches are written to files in this directory with numeric suffixes. Skipped test results are written to a separate file in this directory with a `-skipped` suffix.
-
-*Example:*
-
-[source,yaml]
-----
-# .circleci/test-suites.yml
-outputs:
-  junit: test-reports/tests.xml
-# Skipped tests written to test-reports/tests-skipped.xml
-# Batched tests written to incrementing test-reports/tests-1.xml
-# .circleci/config.yml
-jobs:
-  test:
-    executor: node-with-service
-    steps:
-      - setup
-      - run: circleci run testsuite "ci tests"
-      - store_test_results:
-          path: test-reports
 ----
 
 [#test-suite-configuration-options]
