@@ -70,6 +70,7 @@
 * Execute on managed compute
 ** xref:execution-managed:executor-intro.adoc[Execution environments overview]
 ** xref:execution-managed:resource-class-overview.adoc[Resource class overview]
+** xref:execution-managed:resource-class-lifecycle.adoc[Resource class lifecycle]
 ** Docker
 *** xref:execution-managed:using-docker.adoc[Using Docker]
 *** xref:execution-managed:circleci-images.adoc[Convenience images]
