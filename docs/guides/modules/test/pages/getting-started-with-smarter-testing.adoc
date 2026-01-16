@@ -12,42 +12,35 @@ To use the CircleCI's Smarter Testing, you first need to set up a couple of comp
 * Use the `testsuite` command for running your tests.
 * Create a `.circleci/test-suites.yml` configuration file to discover and run your tests.
 
-This guide walks you through installing the Smarter Testing tooling and configuring your test suite.
-
 By the end of this guide you will have done the following:
 
 * Installed the Smarter Testing tooling locally.
 * Configured your `.circleci/test-suites.yml` to discover and run your tests.
-* Run your tests using the new `testsuite` command.
+* Run your tests using the new `testsuite` command locally
 
 == Prerequisites
 
-#Insert here - onboarded to closed preview? Plan? VCS? Org type?#
+Smarter Testing is available to all cloud customers selected to be part of the Smarter Testing preview.
 
 == 1. Install the testsuite plugin locally
 
-TIP: The `testsuite` CLI plugin is already available in CircleCI Docker containers, so there's no need to install it in your jobs.
+The `testsuite` plugin can be used both locally and in CI. Get started locally to validate your commands work immediately, rather than waiting for them to run in CI.
 
-The `testsuite` plugin can be used both locally and in CI. We recommend getting started locally for faster feedback during onboarding.
-
-#Should we offer the option to not get started locally at this point? If not we should just say to do it rather than just "recommend" it#
-
-. Install the latest CircleCI CLI. For instructions, see the xref:toolkit:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
-. Install the latest `testsuite` CLI plugin. Steps to install via Homebrew are below. If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, reach out to the CircleCI team via the private Slack channel for preview customers or email mailto:minjun.seong@circleci.com[minjun.seong@circleci.com].
-
-=== Install with Homebrew
-
-The `testsuite` CLI plugin is distributed through a Homebrew tap.
-
+. Install the latest CircleCI CLI. For more information on the CircleCI CLI, see the xref:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
++
 [source,console]
 ----
 $ brew install circleci
-$ brew install circleci/tap/circleci-testsuite
-
-# or
-
-$ brew upgrade circleci circleci/tap/circleci-testsuite
 ----
+
+. Install the latest `testsuite` CLI plugin. The `testsuite` CLI plugin is distributed through a Homebrew tap.
++
+[source,console]
+----
+$ brew install circleci/tap/circleci-testsuite
+----
+
+If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, reach out to the CircleCI team via the private Slack channel for preview customers or email mailto:minjun.seong@circleci.com[minjun.seong@circleci.com].
 
 ////
 === Install manually
@@ -140,8 +133,6 @@ $ mv circleci-testsuite "${HOME}/bin/"
 ////
 
 == 2. Configure the discover command
-
-#TODO insert here: What is the discover command? What does it do? Why are we using it? How does it work?#
 
 Smarter Testing operates on "test atoms".
 
@@ -281,9 +272,9 @@ Not updating test impact data, analysis not enabled
 
 == 3. Configure the run command
 
-The `run` command executes the test atoms discovered by the `discover` command using a test runner. The `run` command is the same command you use to launch your test runner locally.
+The run command executes the test atoms discovered by the discover command using your test runner. Start with the same command you would use to launch your test runner locally.
 
-Make sure that the command stores JUnit results, and that it is passed a list of test atoms to run, for example:
+For example:
 [source,console]
 ----
 $ vitest run --reporter=junit \
@@ -292,14 +283,16 @@ $ vitest run --reporter=junit \
              src/pages/dashboard/Dashboard.test.tsx src/pages/dashboard/CreateProjectButton.test.tsx
 ----
 
-The test runner command needs to be modified to use placeholders for the JUnit output location, and the test atoms that should be run.
+This command needs to be modified to use placeholders:
 
-"Discovered" test atoms can be specified in one of two ways:
+**For test atoms:**
 
-* Use the template variable `<< test.atoms >>` in the `run` command. This will be replaced with a space-separated list of test atoms to run.
-* If the template variable is not found in the `run` command, the command's stdin will be a newline-separated list of test atoms.
+* Use the template variable `<< test.atoms >>` in your `run` command - this will be replaced with a space-separated list of test atoms to run.
+* Alternatively, if the template variable is not found, the command's stdin will receive a newline-separated list of test atoms.
 
-The template variable `<< outputs.junit >>` is used in the `run` command so Smarter Testing can find test results.
+**For JUnit output:**
+
+* Use the template variable `<< outputs.junit >>` so Smarter Testing can locate your test results.
 
 Making these changes to the command above gives:
 [source,console]
@@ -446,7 +439,7 @@ Not updating test impact data, analysis not enabled
 
 NOTE: Running the test suite locally will create a reports folder (matching your `outputs.junit` directory). Feel free to safely remove if you wish to.
 
-At this point, you are running your tests using the new `testsuite` command. Now you can adopt the Smarter Testing features to optimize your test execution:
+At this stage, your tests ran locally using the testsuite command without optimizations. In the coming sections, you will build on these components to enable the various features of Smarter Testing and add the `testsuite` command to your CircleCI jobs.
 
 * xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
 * Enable xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting] to evenly split tests across parallel nodes.
