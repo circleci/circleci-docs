@@ -9,14 +9,16 @@ CAUTION: *Smarter Testing* is available in preview. This means the product is in
 
 Smarter Testing reduces test execution time while maintaining test confidence by:
 
-* Running only tests that are impacted by code changes
-* Evenly distributing tests across parallel execution nodes
-* Automatically rerunning failed tests
+* Running only tests that are impacted by code changes.
+* Evenly distributing tests across parallel execution nodes.
+* Automatically rerunning failed tests.
 
-== Table of Contents
+== Smarter Testing guides
 
-* xref:st-getting-started.adoc[Getting Started]
-* xref:st-test-impact-analysis.adoc[Test Impact Analysis]
-* xref:st-local.adoc[Test Impact Analysis (Using it for local development)]
-* xref:st-dynamic-test-splitting.adoc[Dynamic Test Splitting]
-* xref:st-auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
+The following guides are available to help you get started with Smarter Testing:
+
+* xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis]
+* xref:use-test-impact-analysis-for-local-development.adoc[Use Test Impact Analysis for Local Development]
+* xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
+* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]

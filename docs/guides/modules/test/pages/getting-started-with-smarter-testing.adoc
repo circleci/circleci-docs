@@ -1,24 +1,39 @@
-= Getting Started with Smarter Testing
+= Getting started with Smarter Testing
 :page-description: Install and configure Smarter Testing for your project
+:page-badge: Preview
+:page-platform: Cloud
+:experimental:
+:page-noindex: true
 
-To utilize the features of Smarter Testing, you need to use the new `testsuite` command and create a `.circleci/test-suites.yml` configuration file.
+CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+To use the CircleCI's Smarter Testing, you first need to set up a couple of components:
+
+* Use the `testsuite` command for running your tests.
+* Create a `.circleci/test-suites.yml` configuration file to discover and run your tests.
 
 This guide walks you through installing the Smarter Testing tooling and configuring your test suite.
 
-By the end of this guide you will have:
+By the end of this guide you will have done the following:
 
-* Installed the Smarter Testing tooling locally
-* Configured your `.circleci/test-suites.yml` to discover and run your tests
-* Run your tests using the new `testsuite` command
+* Installed the Smarter Testing tooling locally.
+* Configured your `.circleci/test-suites.yml` to discover and run your tests.
+* Run your tests using the new `testsuite` command.
+
+== Prerequisites
+
+#Insert here - onboarded to closed preview? Plan? VCS? Org type?#
 
 == 1. Install the testsuite plugin locally
 
+TIP: The `testsuite` CLI plugin is already available in CircleCI Docker containers, so there's no need to install it in your jobs.
+
 The `testsuite` plugin can be used both locally and in CI. We recommend getting started locally for faster feedback during onboarding.
 
-. Install the latest CircleCI CLI. For instructions, see the xref:toolkit:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
-. Install the latest `testsuite` CLI plugin using one of the methods below.
+#Should we offer the option to not get started locally at this point? If not we should just say to do it rather than just "recommend" it#
 
-TIP: The `testsuite` CLI plugin is already available in CircleCI Docker containers, so there's no need to install it in your jobs.
+. Install the latest CircleCI CLI. For instructions, see the xref:toolkit:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
+. Install the latest `testsuite` CLI plugin. Steps to install via Homebrew are below. If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, reach out to the CircleCI team via the private Slack channel for preview customers or email mailto:minjun.seong@circleci.com[minjun.seong@circleci.com].
 
 === Install with Homebrew
 
@@ -124,9 +139,9 @@ $ mv circleci-testsuite "${HOME}/bin/"
 ----
 ////
 
-NOTE: If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, please reach out to the CircleCI team via the private Slack channel for preview customers or email minjun.seong@circleci.com.
-
 == 2. Configure the discover command
+
+#TODO insert here: What is the discover command? What does it do? Why are we using it? How does it work?#
 
 Smarter Testing operates on "test atoms".
 
@@ -431,11 +446,11 @@ Not updating test impact data, analysis not enabled
 
 NOTE: Running the test suite locally will create a reports folder (matching your `outputs.junit` directory). Feel free to safely remove if you wish to.
 
-At this point, you're running your tests normally using the new `testsuite` command. Now you can adopt the Smarter Testing features to optimize your test execution:
+At this point, you are running your tests using the new `testsuite` command. Now you can adopt the Smarter Testing features to optimize your test execution:
 
-* xref:test-impact-analysis.adoc[Enable Test Impact Analysis] to run only impacted tests based on code changes
-* xref:dynamic-test-distribution.adoc[Enable Dynamic Test Distribution] to evenly split tests across parallel nodes
-* xref:auto-rerun-failed-tests.adoc[Enable Auto Rerun Failed Tests] to automatically retry flaky tests
+* xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
+* Enable xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting] to evenly split tests across parallel nodes.
+* Enable xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 
 Each feature can be enabled independently, allowing you to adopt them incrementally based on your needs.
-   
+

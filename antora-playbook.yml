@@ -102,6 +102,11 @@ antora:
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
       - 'test:smarter-testing.adoc'
+      - 'test:getting-started-with-smarter-testing.adoc'
+      - 'test:use-test-impact-analysis-for-local-development.adoc'
+      - 'test:set-up-test-impact-analysis.adoc'
+      - 'test:use-dynamic-test-splitting.adoc'
+      - 'test:auto-rerun-failed-tests.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true

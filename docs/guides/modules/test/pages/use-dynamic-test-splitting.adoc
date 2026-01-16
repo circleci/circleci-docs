@@ -1,5 +1,13 @@
-= Dynamic Test Splitting
+= Use dynamic test splitting
+:page-badge: Preview
+:page-platform: Cloud
+:experimental:
+:page-noindex: true
 :page-description: Evenly distribute tests across parallel execution nodes
+
+CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+#Short intro, what is it and why use it?#
 
 == How it works
 Dynamic test splitting distributes your tests across parallel execution nodes. The system maintains a shared queue that each node pulls from to create a balanced workload.
@@ -23,13 +31,13 @@ flowchart LR
     subgraph "Dynamic Test Distribution"
     split1
     split2
-    split3 
+    split3
     end
 ----
 
 == Prerequisites
 
-Before enabling Dynamic Test Distribution, ensure you have completed the xref:getting-started.adoc[Getting Started] guide and have:
+Before enabling Dynamic Test Distribution, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
 * Installed the `testsuite` CLI plugin
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands
@@ -141,15 +149,15 @@ The following options are available to be defined in the options map in test-sui
 
 |`timeout`
 |`10`
-|The time in minutes a node will wait for tests to become available from the queue when running in parallel. 
+|The time in minutes a node will wait for tests to become available from the queue when running in parallel.
 |===
 --
 
-== Frequently Asked Questions
+== Frequently asked questions
 
-=== Does Dynamic Test Splitting require Test Impact Analysis?
+=== Does dynamic test splitting require test impact analysis?
 
-No, Dynamic Test Splitting works independently:
+No, dynamic test splitting works independently:
 
-* **With Test Impact Analysis**: Distributes the selected subset of tests
-* **Without Test Impact Analysis**: Distributes all discovered tests
+* **With test impact analysis**: Distributes the selected subset of tests.
+* **Without test impact analysis**: Distributes all discovered tests.

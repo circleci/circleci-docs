@@ -1,7 +1,15 @@
-= Test Impact Analysis
+= Set up test impact analysis
 :page-description: Run only the tests impacted by your code changes
+:page-badge: Preview
+:page-platform: Cloud
+:experimental:
+:page-noindex: true
 
-=== Is my project a good fit for Test Impact Analysis?
+CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+#TODO Introduction - what is it and why use it?#
+
+== Is my project a good fit for Test Impact Analysis?
 
 Here are some examples where Smarter Testing works well:
 
@@ -9,7 +17,7 @@ Here are some examples where Smarter Testing works well:
 * Projects with comprehensive test coverage. The more thorough your tests, the more precisely Smarter Testing can identify which tests are impacted by changes.
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
 
-=== How it works
+== How it works
 Test impact analysis identifies which tests need to run based on the files that changed in your checked out code. Analysis results are stored as impact data for future test runs. The system works in two phases:
 
 *Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
@@ -37,17 +45,17 @@ flowchart LR
 
 == Prerequisites
 
-Before enabling Test Impact Analysis, ensure you have completed the xref:smarter-testing-getting-started.adoc[Getting Started] guide and have:
+Before enabling Test Impact Analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started with Smarter Testing] guide and have:
 
-* Installed the `testsuite` CLI plugin
-* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands
-* Verified your tests run successfully with the `testsuite` command
+* Installed the `testsuite` CLI plugin.
+* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
+* Verified your tests run successfully with the `testsuite` command.
 
-Steps to enable Test Impact Analysis are as follows:
+Steps to enable test impact analysis are as follows:
 
-. Configure `analysis` command in `test-suites.yml`
-. Validate test selection locally
-. Run test suite in CircleCI with Test Impact Analysis enabled
+. Configure the `analysis` command in `test-suites.yml`.
+. Validate test selection locally.
+. Run test suite in CircleCI with test impact analysis enabled.
 
 Each step is explained fully in the following sections.
 
@@ -255,7 +263,7 @@ options:
 ----
 ====
 
-Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"`, and confirm that the analysis command analyzes the test atoms you expect (learn more about the flags in xref:configuration-options.adoc#cli-flags[CLI flags]). Look for the output lines `Found N files impacting TEST`, which show analysis discovering the source files covered by the test.
+Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"`. Confirm that the analysis command analyzes the test atoms you expect (learn more about the flags in the <<cli-flags,test suite flag options>> section). Look for the output lines `Found N files impacting TEST`, which show analysis discovering the source files covered by the test.
 
 NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize `file-mapper` command. Learn more in <<file-mapper>>.
 
@@ -644,102 +652,6 @@ outputs:
   junit: test-reports/tests.xml
 options:
   dynamic-test-splitting: true
-----
-
-== Common setup examples
-
-=== Run analysis on your default branch and selection on all other branches
-
-No changes required, this is the default setting.
-
-[#run-analysis-on-non-default-branch]
-=== Run analysis on a non-default branch and selection on all other branches
-
-.CircleCI configuration for running analysis on a branch named `develop` and selection on all other branches
-[source,yaml]
-----
-# .circleci/config.yml
-version: 2.1
-jobs:
-  test:
-    executor: node-with-service
-    parallelism: 4
-    steps:
-      - setup
-      - run: circleci run testsuite "ci tests" --test-analysis=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
-      - store_test_results:
-          path: test-reports
-----
-
-=== Run higher parallelism on the analysis branch
-
-.CircleCI configuration for running parallelism of 10 on the main branch and 2 on all other branches
-[source,yaml]
-----
-# .circleci/config.yml
-version: 2.1
-jobs:
-  test:
-    executor: node-with-service
-    parallelism: << pipeline.git.branch == "main" and 10 or 2 >>
-    steps:
-      - setup
-      - run: circleci run testsuite "ci tests"
-      - store_test_results:
-          path: test-reports
-----
-
-[#run-analysis-on-scheduled-pipeline]
-=== Run full analysis on a scheduled pipeline, and timeboxed analysis on main
-
-.CircleCI configuration for running analysis only on scheduled pipelines
-[source,yaml]
-----
-# .circleci/config.yml
-version: 2.1
-parameters:
-  run-scheduled-analysis:
-    type: boolean
-    default: false
-jobs:
-  analysis:
-    executor: node-with-service
-    steps:
-      - setup
-      - run: circleci run testsuite "scheduled tests"
-  test:
-    executor: node-with-service
-    steps:
-      - setup
-      - run: circleci run testsuite "main tests"
-      - store_test_results:
-          path: test-reports
-workflows:
-  scheduled-analysis:
-    when: pipeline.parameters.run-scheduled-analysis
-    jobs:
-      - analysis
-  main:
-    when: not pipeline.parameters.run-scheduled-analysis
-    jobs:
-      - test
-----
-
-.Test suite config. Set time limit of 10 minutes for the analysis on the main branch
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: "main tests"
-# rest of test suite config.
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 10 # Analyze the slowest tests first for a max of 10 minutes.
----
-name: "scheduled tests"
-# rest of test suite config.
-options:
-  test-impact-analysis: true
 ----
 
 == Troubleshooting
