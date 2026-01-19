@@ -117,6 +117,14 @@ With dynamic test splitting enabled, tests are distributed via a shared queue th
 
 NOTE: Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch. If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
 
+At this point, you've successfully set up Dynamic Test Splitting! Next up, enable other features of Smarter Testing: 
+
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis]
+* xref:auto-rerun-failed-tests.adoc[Enable Auto Rerun] to handle flaky tests
+* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
+
+Or continue learning more about Dynamic Test Splitting below.
+
 == Troubleshooting
 
 === Tests not being split evenly across nodes
