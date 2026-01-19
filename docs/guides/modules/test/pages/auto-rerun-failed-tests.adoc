@@ -48,6 +48,14 @@ The following options are available to be defined in the options map in your `.c
 |===
 --
 
+At this point, you've successfully set up Auto-Rerun Failed Tests! Next up, enable other features of Smarter Testing: 
+
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis]
+* xref:use-dynamic-test-splitting.adoc[Enable Dynamic Test Splitting] to parallelize test execution
+* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
+
+Or continue learning more about Auto-Rerun Failed Tests below.
+
 == Frequently asked questions
 
 #To be filled. Do we also need a Troubleshooting section?#
