@@ -719,7 +719,7 @@ a| Provides additional details in output.
 |`--test-analysis=all\|impacted\|none`
 |On branch `main`, impacted. +
 On all other branches, `none`. When run locally, `none`.
-a| * `all` analyzes all discovered tests, used to override any existing impact data. +
+a| * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to discard all existing impact data and rebuild from scratch. +
 * `impacted` analyzes only tests impacted by a change, used to refresh impact data. +
 * `none` skips analysis.
 
