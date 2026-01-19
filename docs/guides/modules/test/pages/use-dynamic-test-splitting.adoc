@@ -7,10 +7,9 @@
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-#Short intro, what is it and why use it?#
+Dynamic Test Splitting distributes tests across parallel nodes to minimize node idle time. Unlike static splitting which divides tests evenly upfront, dynamic splitting uses a shared queue that nodes pull from continuously—ensuring balanced workloads even when some nodes start late or run slower than expected.
 
 == How it works
-Dynamic test splitting distributes your tests across parallel execution nodes. The system maintains a shared queue that each node pulls from to create a balanced workload.
 
 When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing automatically:
 
