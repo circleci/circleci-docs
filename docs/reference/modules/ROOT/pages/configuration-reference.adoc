@@ -3574,6 +3574,34 @@ To use a pipeline parameter in an expression, the parameter name must follow the
 If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
 ====
 
+=== Direct expressions and templated strings
+
+Use direct expressions in job filters and using `when` or `unless` in your workflows. For example:
+
+.Direct expression in a job filter
+[,yaml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
+----
+
+.Workflow `when` expression
+[,yaml]
+----
+workflows:
+  deploy-workflow:
+    when: pipeline.git.tag starts-with "v" and pipeline.trigger_source == "webhook"
+    jobs:
+      - deploy
+----
+
+For all other expressions, you must use the `<< >>` delimiters to mark the expression as an expression, as shown in other examples in this section.
+
 [#logic-statement-examples]
 === Logic statement and expression examples
 
