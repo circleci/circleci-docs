@@ -7,23 +7,20 @@
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-#TODO Introduction - what is it and why use it?#
+Auto rerun failed tests automatically detects and retries test failures during your test run. This allows you to quickly recover from flaky test failures without rerunning your entire test suite. Compared with the existing xref:rerun-failed-tests.adoc[Rerun failed tests], this elimiates the need to:
+
+* Manually identify which jobs failed.
+* Manually select the btn:[rerun failed tests] option in the CircleCI web app.
 
 == How it works
 
-Auto rerun failed tests automatically detects and retries test failures during your CI run.
+#TODO - maybe more information is needed here?#
 
 When you configure auto rerun:
 
 * If a test fails, Smarter Testing automatically retries it.
 * Re-run happens within the same job.
 * The test is retried up to the configured maximum number of attempts.
-* Both failed and flaky test details are available under the Test tab on the job page.
-
-This eliminates the need to:
-
-* Manually identify which jobs failed.
-* Manually select the btn:[rerun failed tests] option in the CircleCI web app.
 
 == Auto rerun failed tests configuration options
 
