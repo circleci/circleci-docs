@@ -134,14 +134,14 @@ kubectl patch rollout my-rollout -n my-namespace --type='json' -p='[{"op": "repl
 kubectl rollout restart deployment/<deployment-name> -n <namespace>
 ----
 
-== Retry version
+== Retry rollout
 
 NOTE: You can use this action if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
-Use the btn:[Retry Version] action to retry a Rollout that has failed. For more information about this action, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
+Use the btn:[Retry Rollout] action to retry a Rollout that has failed. For more information about this action, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
 
-.Retry version button
-image::guides:ROOT:releases/retry-release.png[Screenshot showing the retry version button]
+.Retry Rollout button
+image::guides:ROOT:releases/retry-rollout.png[Screenshot showing the retry rollout button]
 
 [#retry-steps]
 === Steps
