@@ -54,6 +54,7 @@
     "vinyl-fs": "~3.0"
   },
   "overrides": {
+    "qs": "^6.14.1",
     "eslint-plugin-node": {
       "eslint": "~9.39.0"
     },

@@ -33,5 +33,9 @@
     "antora-shiki-extension": "^1.0.0",
     "node-html-parser": "^7.0.1",
     "reading-time": "^1.5.0"
+  },
+  "overrides": {
+    "form-data": "^4.0.4",
+    "qs": "^6.14.1"
   }
 }

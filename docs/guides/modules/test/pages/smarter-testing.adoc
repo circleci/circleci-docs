@@ -103,6 +103,9 @@ $ brew install circleci/tap/circleci-testsuite
 $ brew upgrade circleci circleci/tap/circleci-testsuite
 ----
 
+NOTE: If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, please reach out to the CircleCI team via the private Slack channel for preview customers or email mailto:minjun.seong@circleci.com[minjun.seong@circleci.com].
+
+////
 ==== Install the testsuite plugin manually
 Prebuilt binaries are available from the CircleCI binary releases public bucket.
 
@@ -189,7 +192,7 @@ $ chmod u+x circleci-testsuite
 ----
 $ mv circleci-testsuite "${HOME}/bin/"
 ----
-
+////
 
 === 1.2 Configure the discover command
 
@@ -965,9 +968,9 @@ In these cases you can set an <<analysis-baseline-command,analysis-baseline comm
 
 Now that your test suite configuration is set up correctly you can run your test suite in a CircleCI job.
 
-. Make sure that `.circleci/test-suites.yml` is checked in to your repository.
-. Update your `.circleci/config.yml` to call the `circleci run testsuite "ci tests"` command instead of your regular test command.
-. Push the change to your VCS.
+=== Step 1: Verify the test suite command works
+
+First, update your `.circleci/config.yml` to call the `circleci run testsuite "ci tests"` command instead of your regular test command.
 
 For example, if your CircleCI test job was:
 [source,yaml]
@@ -999,12 +1002,13 @@ jobs:
           path: test-reports
 ----
 
-
-Since there is no test impact analysis data stored in CircleCI for your test suite, all the tests will be selected and run when you push to CI. Confirm that the tests execute as expected.
+Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your feature branch and push to your VCS. Since there is no test impact analysis data stored in CircleCI for your test suite yet, all tests will be selected and run. Confirm that the tests execute as expected.
 
 TIP: It can be easier to debug issues with your test suite configuration in CI if you initially run the job without parallelism.
 
-While the analysis phase runs on the default branch by default, you can run the analysis phase from your feature branch by temporarily adding the `--test-analysis=impacted` CLI flag to the test suite invocation:
+=== Step 2: Verify analysis works on your feature branch
+
+While the analysis phase runs on the default branch by default, you can run the analysis phase from your feature branch to verify it works correctly before merging. Add the `--test-analysis=impacted` and `--test-selection=none` CLI flags:
 
 [source,yaml]
 ----
@@ -1021,19 +1025,29 @@ jobs:
           path: test-reports
 ----
 
-Based on the previous step, analysis will be limited to approximately 5 minutes due to `options.test-analysis-duration` in the test suite configuration. If you would like to run analysis past the 5 minutes, you can remove `options.test-analysis-duration` to allow the process to run for as long as it needs. Make a push to verify that the analysis phase works as intended in CI.
+Commit and push these changes to your feature branch. Analysis will be limited to approximately 5 minutes due to `options.test-analysis-duration` set in the previous step. No tests will run due to `--test-selection=none`, which is sufficient to verify that the analysis command works correctly in CI.
+
+=== Step 3: Remove verification flags and merge
+
+Once you have verified analysis works in your feature branch:
+
+. Remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags from your `.circleci/config.yml`.
+. Remove `options.test-analysis-duration` from your `.circleci/test-suites.yml`.
+. Commit these changes to your feature branch and push to your VCS.
+. Merge your PR to the default branch.
+
+This allows analysis to run on your default branch without time limits, building complete impact data for your entire test suite.
 
 NOTE: The first time you run the analysis it may take a long time and could require multiple runs. This is because the full impact map is being generated for the first time. After this initial build, subsequent runs should be significantly faster.
 
-Once you have verified analysis in your feature branch, remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags. You can also remove or tune `options.test-analysis-duration` in your `.circleci/test-suites.yml`. By default, analysis runs on default branches and selection runs on feature branches. To customize this behavior, see <<set-up-examples>>.
+If you want to limit analysis time on your default branch to avoid delays, see <<set-up-examples>>. For example, you can run analysis on a scheduled pipeline while timeboxing analysis on default branches.
 
 At this point:
 
-. Your test suite is configured.
-. You have run test impact analysis on your test suite.
-. Your CircleCI config is updated to run your test suite.
-
-The final step is to prepare and merge a PR with the changes to CircleCI configuration file so that your test suite is run in your CircleCI job.
+* Your test suite is configured properly.
+* You have verified test impact analysis works on your test suite in a CircleCI job.
+* Your changes are merged to the default branch.
+* Test impact analysis is working as intended.
 
 === Troubleshooting
 
@@ -1610,7 +1624,7 @@ jobs:
     executor: node-with-service
     steps:
       - setup
-      - run: circleci run testsuite "scheduled tests"
+      - run: circleci run testsuite "scheduled tests" --test-selection="none"
   test:
     executor: node-with-service
     steps:

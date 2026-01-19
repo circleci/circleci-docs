@@ -12,7 +12,7 @@ CircleCI provides pre-built images (Docker and VM) for languages and services, l
 
 When configuring a job, the first executor you select is the primary container. The primary container is where all execution occurs. You can add additional containers to the job, these are service, or secondary containers.
 
-The example in the next section shows a xref:reference:ROOT:configuration-reference.adoc[CircleCI configuration] file with the following:
+The example in the next section shows a CircleCI configuration file with the following:
 
 * One job named `build`.
 * Docker is selected for the execution environment.
@@ -74,7 +74,7 @@ In this example, the config installs the PostgreSQL client tools, `postgresql-cl
 
 Two commands follow the `postgresql-client` installation that interact with the database service. These are SQL commands that create a table called test and insert a value into that table. After committing changes and pushing them, the build is automatically triggered on CircleCI and spins up the primary container.
 
-NOTE: CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent execution environments. See the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Project values and variables] document for details.
+NOTE: CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, `CIRCLE_NODE_INDEX` and `CIRCLE_NODE_TOTAL` are related to concurrent execution environments. See the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Project Values and Variables] document for details.
 
 When the database service spins up, it automatically creates the database `circle_test` and the `postgres` role that you can use to log in and run your tests. Then the database tests run to create a table and insert a value into it.
 
@@ -86,14 +86,36 @@ This section describes additional optional configuration for further customizing
 [#using-binaries]
 === Using binaries
 
-To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
+To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. The PostgreSQL client tools installed in the primary container must match the PostgreSQL server version running in the service container.
+
+For example, if you are using `cimg/postgres:15.0` as your service container, but your primary container only has PostgreSQL 14 client tools, you will see an error like:
+
+[,shell]
+----
+pg_dump: error: server version: 15.0; pg_dump version: 14.x
+pg_dump: error: aborting because of server version mismatch
+----
+
+To fix this, install the matching PostgreSQL client version from the official PostgreSQL APT repository. Add the following to your `config.yml` file (replacing `15` with your PostgreSQL server version):
 
 [,yml]
 ----
     steps:
-    # Add the Postgres 12.0 binaries to the path.
-       - run: echo 'export PATH=/usr/lib/postgresql/1bin/:"$PATH"' >> "$BASH_ENV"
+      - run:
+          name: Install matching PostgreSQL client tools
+          command: |
+            # Add PostgreSQL APT repository
+            sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+            wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+            sudo apt-get update
+            # Install the PostgreSQL client version that matches your server
+            sudo apt-get install -y postgresql-client-15
+      - run:
+          name: Add PostgreSQL binaries to PATH
+          command: echo 'export PATH=/usr/lib/postgresql/15/bin:"$PATH"' >> "$BASH_ENV"
 ----
+
+NOTE: Replace `15` in both `postgresql-client-15` and `/usr/lib/postgresql/15/bin` with the major version number of your PostgreSQL service container (for example, `14`, `15`, or `16`).
 
 [#using-dockerize-to-wait-for-dependencies]
 === Using dockerize to wait for dependencies
@@ -137,7 +159,7 @@ Redis also has a CLI available: `sudo apt-get install redis-tools ; while ! redi
 
 === Custom MySQL configuration
 
-If you are using the CircleCI MySQL Docker image, you can customize the configuration using the xref:reference:ROOT:configuration-reference.adoc#docker[`command` key]. For example:
+If you are using the CircleCI MySQL Docker image, you can customize the configuration using the `command` key (See more in the xref:reference:ROOT:configuration-reference.adoc#docker[Docker Executor Reference]). For example:
 
 [,yml]
 ----
