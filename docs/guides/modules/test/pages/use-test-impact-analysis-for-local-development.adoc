@@ -1,4 +1,4 @@
-= Use test impact analysis for local development
+= Use Smarter Testing to get faster feedback on local test runs
 :page-description: Run Smarter Testing features on your local machine
 :page-badge: Preview
 :page-platform: Cloud
