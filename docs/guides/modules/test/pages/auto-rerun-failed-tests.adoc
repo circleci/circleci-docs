@@ -32,7 +32,7 @@ Before enabling Auto-rerun Failed Tests, ensure you have completed the xref:gett
 
 == Auto rerun failed tests configuration options
 
-#Is this the only thing people need to do to enable auto rerun? If so we can reframe this as a short how-to#
+#Is this the only thing people need to do to enable auto rerun?#
 
 The following options are available to be defined in the options map in your `.circleci/test-suites.yml` configuration file:
 
@@ -50,4 +50,4 @@ The following options are available to be defined in the options map in your `.c
 
 == Frequently asked questions
 
-#To be filled#
+#To be filled. Do we also need a Troubleshooting section?#
