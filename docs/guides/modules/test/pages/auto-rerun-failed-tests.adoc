@@ -3,7 +3,7 @@
 :page-platform: Cloud
 :experimental:
 :page-noindex: true
-:page-description: Automatically retry flaky tests to improve build reliability
+:page-description: Automatically retry failed tests to improve build reliability
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
