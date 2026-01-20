@@ -404,10 +404,8 @@ name: ci tests
 discover:
     command: vitest list --filesOnly
     shell: /bin/sh
-run:
-    command: |-
-        echo 'running: <<test.atoms>>' | tr ' ' '
-        '
+run: 
+    command: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
     shell: /bin/sh
 outputs:
     junit: test-reports/tests.xml
@@ -437,7 +435,7 @@ Analysis not configured
 Not updating test impact data, analysis not enabled
 ----
 
-NOTE: Running the test suite locally will create a reports folder (matching your `outputs.junit` directory). Feel free to safely remove if you wish to.
+TIP: Running the test suite locally will create a reports folder (matching your outputs.junit directory). Consider adding this directory to .gitignore to avoid committing test reports to your repository.
 
 At this stage, your tests ran locally using the testsuite command without optimizations. In the coming sections, you will build on these components to enable the various features of Smarter Testing and add the `testsuite` command to your CircleCI jobs.
 
