@@ -57,19 +57,6 @@ a| `m4pro.medium` +
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15328/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-16-3-available/[Release Notes]
 
-| `16.2.0` +
-  **link:https://circleci.com/changelog/deprecation-of-xcode-16-2/[EOL]: January 14, 2026**
-| Xcode 16.2 GA (16C5032a)
-| 14.6.1
-a| `m4pro.medium` +
-   `m4pro.large` +
-   `m2pro.medium` +
-   `m2pro.large` +
-   `macos.m1.medium.gen1` +
-   `macos.m1.large.gen1`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15180/manifest.txt[Installed software]
-| link:https://discuss.circleci.com/t/xcode-16-2-ga-released/52486[Release Notes]
-
 | `16.1.0`
 | Xcode 16.1 (16B40)
 | 14.6.1
