@@ -33,11 +33,11 @@ If your CircleCI org is integrated via **GitHub OAuth** (see tip above), you can
 == Supported trigger options
 
 ****
-Regardless of your chosen trigger option, CircleCI will **never** trigger a pipeline for the following:
+Regardless of your chosen trigger option and pipeline type (GitHub OAuth, GitHub App), CircleCI will **never** trigger a pipeline for the following:
 
 * On branch or tag deletion push events.
 
-GitHub App pipelines are also never triggered on the following:
+GitHub App pipelines are also never triggered:
 
 * When a new branch is created if there are no new commits on the branch.
 ****
