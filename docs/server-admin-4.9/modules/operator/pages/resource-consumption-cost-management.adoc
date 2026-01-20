@@ -3,7 +3,7 @@
 :page-description: Learn how CircleCI Server consumes cloud resources and how to monitor costs.
 :experimental:
 
-Understanding how CircleCI Server consumes cloud resources helps you plan capacity, set appropriate budgets, and detect cost anomalies early.
+Understanding how CircleCI Server consumes cloud resources helps you plan capacity, set appropriate budgets, and detect cost anomalies.
 
 [#resource-cost-drivers]
 == Resource cost drivers
@@ -13,6 +13,7 @@ CircleCI Server consumes cloud resources across several categories:
 [#compute-resources]
 === Compute resources
 
+.Compute resources overview
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
@@ -34,7 +35,7 @@ CircleCI Server consumes cloud resources across several categories:
 | Kubernetes nodes
 | Control plane
 | EKS/GKE nodes running CircleCI services
-| Medium - relatively stable
+| Medium - stable
 |===
 
 [#nomad-workers]
@@ -44,12 +45,12 @@ Nomad workers are the primary compute cost driver. They scale up when jobs are q
 
 Cost factors include:
 
-* Instance type configured in your Terraform module
-* Number of concurrent jobs
-* Job duration
-* Autoscaler configuration (`min`, `max`, `cooldown`)
+* Instance type configured in your Terraform module.
+* Number of concurrent jobs.
+* Job duration.
+* Autoscaler configuration (`min`, `max`, `cooldown`).
 
-NOTE: If the Nomad Autoscaler fails to scale down (for example, due to nodes stuck in draining state), compute costs can increase significantly. Monitor autoscaler logs and ASG/MIG instance counts.
+NOTE: If the Nomad Autoscaler fails to scale down (for example, due to nodes stuck in draining state), compute costs can increase. Monitor autoscaler logs and ASG/MIG instance counts.
 
 [#machine-executor-jobs]
 ==== Machine executor jobs
@@ -58,13 +59,14 @@ Machine Provisioner creates on-demand instances for jobs using the `machine` exe
 
 Cost factors include:
 
-* Number of `machine` executor jobs
-* Job duration
-* Instance type configured in `values.yaml`
+* Number of `machine` executor jobs.
+* Job duration.
+* Instance type configured in `values.yaml`.
 
 [#storage-resources]
 === Storage resources
 
+.Storage resources overview
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
@@ -83,15 +85,15 @@ Cost factors include:
 
 CircleCI uses object storage for:
 
-* **Build artifacts** - Files uploaded via `store_artifacts`
-* **Test results** - JUnit XML files from `store_test_results`
-* **Caches** - Dependency caches from `save_cache`/`restore_cache`
-* **Workspaces** - Data shared between jobs via `persist_to_workspace`/`attach_workspace`
-* **Action logs** - Step output logs displayed in the UI
-* **Workflow configuration** - Pipeline and workflow definition data
-* **Audit logs** - System audit events
+* **Build artifacts** - Files uploaded via `store_artifacts`.
+* **Test results** - JUnit XML files from `store_test_results`.
+* **Caches** - Dependency caches from `save_cache`/`restore_cache`.
+* **Workspaces** - Data shared between jobs via `persist_to_workspace`/`attach_workspace`.
+* **Action logs** - Step output logs displayed in the UI.
+* **Workflow configuration** - Pipeline and workflow definition data.
+* **Audit logs** - System audit events.
 
-TIP: Configure lifecycle policies for your object storage bucket to automatically expire old objects and control storage costs. See xref:data-retention.adoc[Data retention in server] for details on configuring retention periods and S3 lifecycle policies.
+TIP: Configure lifecycle policies for your object storage bucket to automatically expire old objects and control storage costs. See xref:data-retention.adoc[Data Retention in Server] for details on configuring retention periods and S3 lifecycle policies.
 
 [#resource-tagging]
 == Resource tagging
@@ -103,6 +105,7 @@ Proper resource tagging enables accurate cost attribution in your cloud provider
 
 CircleCI automatically tags certain resources:
 
+.Auto-tagged resources
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
@@ -128,7 +131,7 @@ CircleCI automatically tags certain resources:
 
 | Nomad workers (AWS)
 | `nomad-environment`
-| Your configured basename
+| Your configured base name
 
 | Nomad workers (GCP)
 | Network tag
