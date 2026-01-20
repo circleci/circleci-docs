@@ -3533,9 +3533,7 @@ workflows:
   my-workflow:
     jobs:
       - build:
-          filters:
-            branches:
-              only: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
+          filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
 ----
 
 .Workflow `when` expression
