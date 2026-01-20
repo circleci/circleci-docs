@@ -134,7 +134,7 @@ kubectl patch rollout my-rollout -n my-namespace --type='json' -p='[{"op": "repl
 kubectl rollout restart deployment/<deployment-name> -n <namespace>
 ----
 
-== Retry rollout
+== Retry Rollout
 
 NOTE: You can use this action if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
@@ -172,8 +172,9 @@ Use the btn:[Promote] or btn:[Promote All] action to progress a deployment that 
 * Skip the step.
 * btn:[Promote All] to skip all steps and complete the deployment.
 
-The btn:[Promote] and btn:[Promote All] options are visible in the step view on the deployment details page, which you can access by selecting a version number in the deploys UI.
+The btn:[Promote] a step and btn:[Promote All] options are visible in the step view on the deployment details page, which you can access by selecting a version number in the deploys UI.
 
+.Promote options
 image::guides:ROOT:releases/promote-options.png[Screenshot showing the promote deploy step options]
 
 For more information on the Rollouts Promote commands see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_promote/[Argo Rollouts docs for Rollouts Promote].
@@ -204,13 +205,14 @@ kubectl argo rollouts promote <rollout-name>
 kubectl argo rollouts promote --full <rollout-name>
 ----
 
-== Cancel deployment
+== Cancel Rollout
 
-Use the btn:[Cancel Deployment] action to stop a deployment from progressing, and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
+Use the btn:[Cancel Rollout] action to stop a deployment from progressing, and revert all steps. For more information see the link:https://argo-rollouts.readthedocs.io/en/stable/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_abort/[Argo Rollouts docs for Rollouts Abort].
 
 NOTE: You can use this action if you are using link:https://argoproj.github.io/argo-rollouts/[Argo Rollouts]
 
-image::guides:ROOT:releases/cancel-release.png[Screenshot showing the cancel deployment button]
+.Cancel Rollout
+image::guides:ROOT:releases/promote-options.png[Screenshot showing the cancel Rollout button]
 
 [#cancel-steps]
 === Steps
@@ -218,12 +220,12 @@ image::guides:ROOT:releases/cancel-release.png[Screenshot showing the cancel dep
 . Select btn:[Deploys] in the CircleCI web app sidebar.
 . You are now in the timeline view. Find your component in the timeline list, you can use the search bar to filter the list.
 . Scroll to locate the running deployment you want to cancel. Select the version number to enter the deployment details page.
-. Select btn:[Cancel Deployment].
+. Select btn:[Cancel Rollout].
 
 [#cancel-notes]
 === Notes
 
-Selecting the btn:[Cancel Deployment] action is the equivalent to running:
+Selecting the btn:[Cancel Rollout] action is the equivalent to running:
 
 [,yml]
 ----
