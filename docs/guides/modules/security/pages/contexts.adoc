@@ -156,6 +156,8 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 [#security-group-restrictions]
 == Security group restrictions
 
+NOTE: A context security setting is available for GitHub OAuth app organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Organization Settings[Security].
+
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
