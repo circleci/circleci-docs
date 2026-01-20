@@ -71,7 +71,7 @@ image::guides:ROOT:releases/scale-component.png[Screenshot showing the scale com
 
 . Select btn:[Deploys] in the CircleCI web app sidebar.
 . Select the **Components** tab.
-. Scroll or searchto find and select your component to enter the component view.
+. Scroll or search to find and select your component to enter the component view.
 . Select the "Active Versions" tab.
 . Find the active version that you would like to scale and select the "Scale Component" icon.
 . Read through the notes associated with this action in the popup and to proceed type `SCALE` and select btn:[Scale].
