@@ -259,7 +259,7 @@ options:
 ----
 ====
 
-Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"`. Confirm that the analysis command analyzes the test atoms you expect (learn more about the flags in the <<cli-flags,test suite flag options>> section). Look for the output lines `Found N files impacting TEST`, which show analysis discovering the source files covered by the test.
+Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"` (learn more about the flags in the <<cli-flags,test suite flag options>> section). Confirm that the analysis command analyzes the test atoms you expect. Look for the output lines `Found N files impacting TEST`, which show that analysis is discovering the source files covered by the test.
 
 NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize `file-mapper` command. Learn more in <<file-mapper>>.
 
@@ -499,8 +499,6 @@ Analysis is based off the code covered by running an individual test atom. Somet
 
 In these cases you can set an <<analysis-baseline-command,analysis-baseline command>> which can account for this code coverage.
 
-. Make sure that `.circleci/test-suites.yml` is checked in to your repository.
-
 == 3. Run your test suite in your CircleCI job
 
 TIP: When adding the testsuite command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers. 
@@ -577,9 +575,13 @@ Once you have verified analysis works in your feature branch:
 
 This allows analysis to run on your default branch without time limits, building complete impact data for your entire test suite.
 
-NOTE: The first time you run the analysis it may take a long time and could require multiple runs. This is because the full impact map is being generated for the first time. After this initial build, subsequent runs should be significantly faster.
+[TIP]
+====
+The first time you run analysis, it may take a long time as the full impact map is being generated. To avoid delays on your default branch, consider one of these approaches:
 
-If you want to limit analysis time on your default branch to avoid delays, see <<set-up-examples>>. For example, you can run analysis on a scheduled pipeline while timeboxing analysis on default branches.
+* Run full analysis on your feature branch first (by removing `options.test-analysis-duration`). This builds the complete impact data before merging. Subsequent analysis runs will be significantly faster.
+* Set up a scheduled pipeline to handle most of the analysis work. See <<set-up-examples>> for configuration examples, such as running comprehensive analysis on a schedule while timeboxing analysis on default branch builds.
+====
 
 At this point, you've successfully set up Test Impact Analysis! Next up, enable other features of Smarter Testing: 
 
