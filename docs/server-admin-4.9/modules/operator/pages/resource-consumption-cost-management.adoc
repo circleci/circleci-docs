@@ -1,0 +1,200 @@
+= Resource consumption and cost management
+:page-platform: Server 4.9, Server Admin
+:page-description: Learn how CircleCI Server consumes cloud resources and how to monitor costs.
+:experimental:
+
+Understanding how CircleCI Server consumes cloud resources helps you plan capacity, set appropriate budgets, and detect cost anomalies early.
+
+[#resource-cost-drivers]
+== Resource cost drivers
+
+CircleCI Server consumes cloud resources across several categories:
+
+[#compute-resources]
+=== Compute resources
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Resource
+| Component
+| Description
+| Cost impact
+
+| Nomad worker nodes (ASG/MIG)
+| Execution environment
+| EC2/GCE instances that run Docker executor jobs
+| Highest - scales with job volume
+
+| Machine executor jobs
+| Machine Provisioner
+| On-demand instances for `machine` executor jobs
+| High - billed per job duration
+
+| Kubernetes nodes
+| Control plane
+| EKS/GKE nodes running CircleCI services
+| Medium - relatively stable
+|===
+
+[#nomad-workers]
+==== Nomad workers
+
+Nomad workers are the primary compute cost driver. They scale up when jobs are queued and scale down when idle, controlled by the Nomad Autoscaler.
+
+Cost factors include:
+
+* Instance type configured in your Terraform module
+* Number of concurrent jobs
+* Job duration
+* Autoscaler configuration (`min`, `max`, `cooldown`)
+
+NOTE: If the Nomad Autoscaler fails to scale down (for example, due to nodes stuck in draining state), compute costs can increase significantly. Monitor autoscaler logs and ASG/MIG instance counts.
+
+[#machine-executor-jobs]
+==== Machine executor jobs
+
+Machine Provisioner creates on-demand instances for jobs using the `machine` executor. Each job spawns a dedicated instance that is terminated after job completion.
+
+Cost factors include:
+
+* Number of `machine` executor jobs
+* Job duration
+* Instance type configured in `values.yaml`
+
+[#storage-resources]
+=== Storage resources
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Resource
+| Description
+| Cost impact
+
+| Object storage (S3/GCS)
+| Build artifacts, caches, workspaces
+| Medium - grows over time
+
+| Block storage (EBS/Persistent Disk)
+| Root volumes for Nomad workers, database storage
+| Low to medium
+|===
+
+CircleCI uses object storage for:
+
+* **Build artifacts** - Files uploaded via `store_artifacts`
+* **Test results** - JUnit XML files from `store_test_results`
+* **Caches** - Dependency caches from `save_cache`/`restore_cache`
+* **Workspaces** - Data shared between jobs via `persist_to_workspace`/`attach_workspace`
+* **Action logs** - Step output logs displayed in the UI
+* **Workflow configuration** - Pipeline and workflow definition data
+* **Audit logs** - System audit events
+
+TIP: Configure lifecycle policies for your object storage bucket to automatically expire old objects and control storage costs. See xref:data-retention.adoc[Data retention in server] for details on configuring retention periods and S3 lifecycle policies.
+
+[#resource-tagging]
+== Resource tagging
+
+Proper resource tagging enables accurate cost attribution in your cloud provider's cost management tools.
+
+[#auto-tagged-resources]
+=== Auto-tagged resources
+
+CircleCI automatically tags certain resources:
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Resource
+| Tag/Label
+| Value
+
+| Machine executor instances (AWS)
+| `ManagedBy`
+| `circleci-machine-provisioner`
+
+| Machine executor instances (AWS)
+| `ResourceClass`
+| For example, `medium`, `large`
+
+| Machine executor instances (GCP)
+| `managed-by`
+| `circleci-machine-provisioner`
+
+| Nomad workers (AWS)
+| `vendor`
+| `circleci`
+
+| Nomad workers (AWS)
+| `nomad-environment`
+| Your configured basename
+
+| Nomad workers (GCP)
+| Network tag
+| `<name>-circleci-nomad-clients`
+|===
+
+[#configurable-tags]
+=== Configurable tags
+
+[#machine-executor-tags]
+==== Machine executor tags (AWS)
+
+You can add custom tags to machine executor instances via `values.yaml`:
+
+[source,yaml]
+----
+machine_provisioner:
+  providers:
+    ec2:
+      tags:
+        key1: "value1"
+        key2: "value2"
+----
+
+[#nomad-worker-tags]
+==== Nomad worker tags
+
+Nomad worker tags are configured in the Terraform module via the `instance_tags` variable:
+
+[source,hcl]
+----
+instance_tags = {
+  "vendor"      = "circleci"
+  "environment" = "production"
+  "team"        = "platform"
+}
+----
+
+[#cost-monitoring]
+== Cost monitoring
+
+We recommend using your cloud provider's native cost management tools to monitor CircleCI Server resource consumption.
+
+[#aws-cost-tools]
+=== AWS
+
+* **AWS Budgets** - Set spending limits and receive alerts when costs approach thresholds. See link:https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html[AWS Budgets documentation].
+
+* **AWS Cost Anomaly Detection** - ML-powered detection of unexpected spending patterns with automated alerts. See link:https://aws.amazon.com/aws-cost-management/aws-cost-anomaly-detection/[AWS Cost Anomaly Detection].
+
+TIP: Filter by tag `ManagedBy: circleci-machine-provisioner` to track machine executor costs separately. Filter by tag `vendor: circleci` for Nomad worker costs.
+
+[#gcp-cost-tools]
+=== GCP
+
+* **GCP Budgets** - Set spending limits with email or Pub/Sub alerts. See link:https://cloud.google.com/billing/docs/how-to/budgets[GCP Budgets documentation].
+
+* **GCP Cost Management** - Analyze costs and get optimization recommendations. See link:https://cloud.google.com/cost-management[GCP Cost Management].
+
+[#common-cost-issues]
+== Common cost issues
+
+The following issues can lead to unexpected costs:
+
+* **Autoscaler not scaling down** - Nodes stuck in draining state or autoscaler errors can prevent scale-in, leaving instances running idle.
+
+* **Orphaned machine executor instances** - If Machine Provisioner cannot terminate instances after jobs complete, they continue to incur costs.
+
+* **Storage growth** - Build artifacts and caches can grow over time if retention policies are not configured.
