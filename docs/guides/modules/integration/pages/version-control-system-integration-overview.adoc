@@ -92,35 +92,61 @@ For an overview of users, orgs, and pipeline types, see the xref:permissions-aut
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI config suggestions bot]
+| View your configuration file in the CircleCI web app
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| [.circle-green]#**Yes** ^2^#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
+| Edit your configuration file in the CircleCI web app
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | xref:enable-checks.adoc#github-check-and-github-status-updates[Status Updates]
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes** ^4^#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref:enable-checks.adoc[GitHub Checks] ^3^
+| xref:enable-checks.adoc[GitHub Checks]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref:orchestrate:custom-webhooks.adoc[Custom _inbound_ webhook triggers]
+| xref:outbound-webhooks.adoc[Outbound webhooks]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| xref:orchestrate:custom-webhooks.adoc[Custom webhook triggers]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+
+| link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI config suggestions bot]
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -191,15 +217,6 @@ For an overview of users, orgs, and pipeline types, see the xref:permissions-aut
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-
-| xref:outbound-webhooks.adoc[Outbound webhooks]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
 
 | xref:optimize:artifacts.adoc[Artifact storage]
 | [.circle-green]#**Yes**#
