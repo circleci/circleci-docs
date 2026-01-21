@@ -79,6 +79,8 @@ At this point, you've successfully set up Auto-Rerun Failed Tests! Next up, enab
 * xref:use-dynamic-test-splitting.adoc[Enable Dynamic Test Splitting] to parallelize test execution
 * xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
 
+////
+
 Or continue learning more about Auto-Rerun Failed Tests below.
 
 == Frequently asked questions
@@ -88,3 +90,4 @@ Or continue learning more about Auto-Rerun Failed Tests below.
 === The JUnit XML output does not include my discovered test
 
 #TODO Refer to the test runner docs? e.g. vitest supports `classnameTemplate` https://vitest.dev/guide/reporters.html#junit-reporter#
+////
