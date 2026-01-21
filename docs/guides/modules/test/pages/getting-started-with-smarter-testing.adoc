@@ -26,7 +26,7 @@ Smarter Testing is available to all cloud customers selected to be part of the S
 
 The `testsuite` plugin can be used both locally and in CI. Get started locally to validate your commands work immediately, rather than waiting for them to run in CI.
 
-. Install the latest CircleCI CLI. For more information on the CircleCI CLI, see the xref:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
+. Install the latest CircleCI CLI. For more information on the CircleCI CLI, see the xref:toolkit:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
 +
 [source,console]
 ----
@@ -404,7 +404,7 @@ name: ci tests
 discover:
     command: vitest list --filesOnly
     shell: /bin/sh
-run: 
+run:
     command: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
     shell: /bin/sh
 outputs:
