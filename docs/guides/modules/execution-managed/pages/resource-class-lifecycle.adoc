@@ -1,0 +1,108 @@
+= Resource class lifecycle process
+
+CircleCI periodically introduces new compute as "resource classes," consisting of new underlying compute infrastructure. As older compute infrastructure ages, CircleCI deprecates and retires it from the fleet.
+
+CircleCI announces resource class deprecations via the link:https://circleci.com/changelog/[changelog] and email. Announcements include the list of affected resource classes, scheduled brownout dates and durations, and end-of-life (EOL) date. 
+
+Scheduled brownout dates are also listed on the link:https://status.circleci.com/[CircleCI status page].
+
+== Resource class brownouts
+
+A CircleCI resource class brownout is a temporary, planned period during which deprecated resource classes are intentionally made unavailable on the CircleCI platform. 
+
+During a brownout, CI/CD jobs that attempt to use deprecated resource classes fail, giving users advance notice of upcoming permanent removals.
+
+Resource class brownouts serve several critical functions:
+
+*Warning Mechanism*:: They act as a highly visible alert that certain resource classes are approaching end-of-life.
+
+*Dependency Discovery*:: They assist teams in identifying hidden dependencies on deprecated resource classes, especially through orbs or inherited configurations.
+
+*Preventing Major Service Disruption*:: A short, planned brownout allows teams to update configurations before permanent removal causes extended workflow failures.
+
+During a brownout, jobs that use deprecated resource classes fail with the message: "This job was rejected because the resource class is unavailable".
+
+== Responding to a brownout
+
+When a brownout occurs, you have two options:
+
+=== Option 1: Update your configuration (recommended)
+
+Update your link:/guides/execution-managed/resource-class-overview/[CircleCI config file] to use supported resource classes:
+
+*For Docker executor:*
+
+[source,yaml]
+----
+# Change this:
+docker:
+  - image: cimg/node:lts
+    resource_class: old.medium       # Deprecated resource class
+
+# To this:
+docker:
+  - image: cimg/node:lts
+    resource_class: new.medium      # Supported resource class
+----
+
+*For machine executor:*
+
+[source,yaml]
+----
+# Change this:
+machine:
+  image: ubuntu-2204:current
+  resource_class: old.medium        # Deprecated resource class
+
+# To this:
+machine:
+  image: ubuntu-2204:current
+  resource_class: new.medium         # Supported resource class
+----
+
+=== Option 2: Temporarily disable brownouts
+
+If you need immediate relief to restore workflows during an active brownout, you can temporarily disable brownouts. 
+
+Navigate to *Organization Settings > Advanced > Enable resource class brownouts* and toggle the setting off.
+
+[IMPORTANT]
+====
+Disabling brownouts is only a temporary solution. Access to deprecated resource classes ends by the final EOL date regardless of brownout settings. 
+
+You must update your configurations before the EOL date.
+====
+
+== Tips to minimize brownout impact
+
+*Review resource class usage*:: Audit your resource class specifications to ensure you use actively supported options. Consider whether your workloads might benefit from link:/guides/execution-managed/resource-class-overview/[newer, more efficient resource classes].
+
+*Update orbs*:: If you use CircleCI orbs, ensure you update them to current versions. Outdated orbs may specify deprecated resource classes internally.
+
+*Check hidden dependencies*:: Inspect all workflows, including those triggered by external events or scheduled runs, to identify all resource class usage.
+
+*Subscribe to deprecation notices*:: Follow the CircleCI changelog for deprecation announcements.
+
+*Test before EOL*:: Create a test branch with updated resource classes to validate performance and compatibility before the brownout period.
+
+== FAQ
+
+*Q: How long do brownouts typically last?*::
+A: Most brownouts last from 10 minutes to 24 hours, depending on the resource class and its usage across the platform.
+
+*Q: Does CircleCI notify me before a resource class brownout occurs?*::
+A: Yes, CircleCI sends email notifications to organizations whose projects use deprecated resource classes and posts announcements on the changelog.
+
+*Q: What happens if I don't update my configuration before the EOL date?*::
+A: After the EOL date, deprecated resource classes are permanently removed. Any jobs attempting to use them fail until you update configurations.
+
+*Q: How can I test my workflows with new resource classes before a brownout?*::
+A: Create a branch with updated configuration files, then push and test this branch before merging changes to your main branch.
+
+*Q: Are there any costs associated with updating to different resource classes?*::
+A: Different resource classes have different pricing, so switching resource classes may affect your compute costs. Review the link:https://circleci.com/pricing/price-list/[pricing documentation] and test thoroughly to understand the impact on both cost and performance.
+
+*Q: How do I know which resource class to migrate to?*::
+A: Deprecation announcements include recommended migration paths. 
++
+Generally, you should choose a resource class that matches or exceeds the compute capacity of your deprecated class.
