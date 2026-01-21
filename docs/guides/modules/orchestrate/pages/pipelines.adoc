@@ -31,7 +31,7 @@ Each pipeline also has a _Definition ID_, which is a UUID for the pipeline, whic
 
 image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[Project setup page]
 
-== Set up pipelines
+== Set up pipelines 
 
 NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available. CircleCI server pipelines are set up when a project is set up and cannot be edited. CircleCI server requires CircleCI configuration files to be stored in the same repository as your code at `.circleci/config.yml`.
 
