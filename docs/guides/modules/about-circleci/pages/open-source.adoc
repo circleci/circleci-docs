@@ -24,7 +24,7 @@ The following 3rd-party open source components are used in the CircleCI General 
 
 [cols=2*, options="header", format=csv]
 |===
-include::guides:ROOT:attachment$runner-init.csv[]
+include::https://raw.githubusercontent.com/circleci/runner-init/refs/heads/main/go-project-licenses.csv[]
 |===
 --
 CircleCI runner::
