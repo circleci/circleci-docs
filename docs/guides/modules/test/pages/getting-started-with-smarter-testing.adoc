@@ -4,6 +4,7 @@
 :page-platform: Cloud
 :experimental:
 :page-noindex: true
+:page-show-readtime: true
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
@@ -439,7 +440,7 @@ Not updating test impact data, analysis not enabled
 
 TIP: Running the test suite locally creates a reports folder (matching your `outputs.junit` directory). Consider adding this directory to `.gitignore` to avoid committing test reports to your repository.
 
-At this stage, your tests ran locally using the `testsuite` command without optimizations. In the coming sections, you will build on these components to enable the various features of Smarter Testing and add the `testsuite` command to your CircleCI jobs.
+At this stage, your tests ran locally using the `testsuite` command without optimizations. In the following sections, you will build on these components to enable the various features of Smarter Testing and add the `testsuite` command to your CircleCI jobs.
 
 * xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
 * Enable xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting] to evenly split tests across parallel nodes.

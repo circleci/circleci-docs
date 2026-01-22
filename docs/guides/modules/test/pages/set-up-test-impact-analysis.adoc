@@ -4,16 +4,17 @@
 :page-platform: Cloud
 :experimental:
 :page-noindex: true
+:page-show-readtime: true
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-Test Impact Analysis runs only the tests impacted by your code changes, reducing test execution time while maintaining code quality.
+Test impact analysis runs only the tests impacted by your code changes, reducing test execution time while maintaining code quality.
 
-== Is my project a good fit for Test Impact Analysis?
+== Is my project a good fit for test impact analysis?
 
 Here are some examples where Smarter Testing works well:
 
-* Straightforward coverage generation. Smarter Testing uses code coverage data to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data cannot be easily collected and consolidated.
+* Straightforward coverage generation. Smarter Testing uses code coverage data to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data cannot be collected and consolidated easily.
 * Projects with comprehensive test coverage. The more thorough your tests, the more precisely Smarter Testing can identify which tests are impacted by changes.
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
 
@@ -43,7 +44,7 @@ flowchart LR
 
 == Prerequisites
 
-Before enabling Test Impact Analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started with Smarter Testing] guide and have:
+Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
 * Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
@@ -55,11 +56,13 @@ Steps to enable test impact analysis are as follows:
 . Validate test selection locally.
 . Run test suite in CircleCI with test impact analysis enabled.
 
-== 1. Configure the analysis command in `test-suites.yml`
+== 1. Configure the analysis command in test-suites.yml
 
 The `analysis` command executes test atoms one at a time using a test runner with code coverage enabled. This is similar to your `run` command, but with coverage instrumentation enabled.
 
 Make sure that the command stores code coverage results, and that it is passed a test atom to run. For example, if your normal command to run a test with coverage is:
+
+.Example test command using Vitest with coverage enabled
 [source,console]
 ----
 $ vitest run --coverage.enabled \
@@ -89,6 +92,7 @@ Your `analysis` command should use the output variable for the coverage format i
 
 Making these changes to the command above gives:
 
+.Example analysis command using Vitest with coverage enabled with placeholders
 [source,console]
 ----
 $ vitest run --coverage.enabled \
@@ -101,8 +105,8 @@ $ vitest run --coverage.enabled \
              && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
 ----
 
-Here is how the analysis command would look in your test-suite.yml:
-
+. Update your `test-suite.yml` with the analysis command:
++
 [tabs]
 ====
 Vitest::
@@ -259,10 +263,9 @@ options:
 ----
 ====
 
-Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"` (learn more about the flags in the <<cli-flags,test suite flag options>> section). Confirm that the analysis command analyzes the test atoms you expect. Look for the output lines `Found N files impacting TEST`, which show that analysis is discovering the source files covered by the test.
-
-NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize `file-mapper` command. Learn more in <<file-mapper>>.
-
+. Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"` (learn more about the flags in the <<cli-flags,test suite flag options>> section).
++
+.Example output from running the testsuite command with flags
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --local --test-selection=none --test-analysis=impacted
@@ -368,9 +371,14 @@ Found 127 files impacting test src/pages/dashboard/CreateProjectButton.test.tsx
 Analyzed 2 tests in 23.357s
 Updated test impact data in 23.501s
 ----
+. Confirm that the analysis command analyzes the test atoms you expect. Look for the output lines `Found N files impacting TEST`, which show that analysis is discovering the source files covered by the test.
++
+NOTE: If the test atoms discovered by your test suite are not file names, you will need to utilize the `file-mapper` command. Learn more in <<file-mapper>>.
++
+NOTE: When running with `--local`, you will see `.circleci/impact.json` created - this stores the impact data used for test selection. This file will be used for the next step to validate test selection.
 
-[NOTE]
-====
+
+****
 *Using multiple test suites in a single repository*
 
 By default Smarter Testing uses per-repository test impact analysis data. If you have multiple test suites in a single repository, the impact analysis data for each test suite may conflict with each other.
@@ -391,17 +399,16 @@ options:
   test-impact-analysis: true
   impact-key: service-2
 ----
-====
-
-NOTE: When running with `--local`, you will see `.circleci/impact.json` created - this stores the impact data used for test selection. This file will be used for the next step to validate test selection.
+****
 
 == 2. Validate test selection locally
 
 Test selection requires impact data from the analysis phase. Earlier, we validated that the analysis command produces coverage data correctly. You should also see `.circleci/impact.json` containing the impact data from your analysis run with the 5 minute duration limit.
 
-To verify test selection works:
+To verify test selection works, follow these steps:
 
-*Inspect the impact data* to see which tests cover which files:
+. *Inspect the impact data* to see which tests cover which files:
++
 [source,console]
 ----
 $ cat .circleci/impact.json
@@ -426,14 +433,18 @@ The impact data shows relationships between test atoms and source files. For exa
   }
 }
 ----
-In this example, modifying `src/components/Button.js` would select only `testApp/Button.test.js`,
-while skipping `testApp/Input.test.js` and `testApp/calculator.test.js`.
++
+In this example:
++
+* Modifying `src/components/Button.js` would select only `testApp/Button.test.js`.
+* Skipping `testApp/Input.test.js` and `testApp/calculator.test.js`.
 
-*Intentionally modify a source file* that appears in the impact data. Look at the impact data to understand which tests should be skipped/selected.
+. *Intentionally modify a source file* that appears in the impact data. Look at the impact data to understand which tests should be skipped/selected.
 
-*Run the test suite* and verify that test selection is working. Since analysis only ran for 5 minutes, impact data is incomplete and any test atoms not in the impact data will be selected and run. However, you should see that the test atoms that are not impacted based on the impact data are correctly skipped.
-
+. *Run the test suite* and verify that test selection is working. Since analysis only ran for 5 minutes, impact data is incomplete and any test atoms not in the impact data will be selected and run. However, you should see that the test atoms that are not impacted based on the impact data are correctly skipped.
++
 Look for the section starting `Selecting tests...` (some of the output from the command below has been elided):
++
 [source,console]
 ----
 # When running locally, --test-selection is set to "impacted" and --test-analysis is set to "none" by default
@@ -463,16 +474,16 @@ Selected 30 tests, Skipped 4 tests in 0s
 
 At this point your test suite is set up correctly:
 
-. Test atoms are discovered.
-. Test selection is driven from test impact analysis data.
-. The analysis phase is correctly analyzing test impact.
+* Test atoms are discovered.
+* Test selection is driven from test impact analysis data.
+* The analysis phase is correctly analyzing test impact.
 
-The next step is to run your test suite in CI. Also feel free to:
+The next step in this guide is to run your test suite in CI. You can also:
 
 * Revert any file modifications you made to validate test selection.
 * Remove any files that got created from running the command locally (ex. impact.json, coverage files, JUnit results).
 
-=== Troubleshooting
+=== Troubleshooting the analysis phase
 
 ==== The analysis found 0 files impacting tests
 
@@ -501,15 +512,17 @@ In these cases you can set an <<analysis-baseline-command,analysis-baseline comm
 
 == 3. Run your test suite in your CircleCI job
 
-TIP: When adding the testsuite command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers. 
+TIP: When adding the testsuite command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers.
 
 Now that your test suite configuration is set up correctly you can run your test suite in a CircleCI job.
 
-=== Step 1: Verify the test suite command works
+=== 3.1. Verify the test suite command works
 
 First, update your `.circleci/config.yml` to call the `circleci run testsuite "ci tests"` command instead of your regular test command.
 
 For example, if your CircleCI test job was:
+
+.Example CircleCI test job configuration
 [source,yaml]
 ----
 version: 2.1
@@ -524,6 +537,8 @@ jobs:
 ----
 
 You would change it to:
+
+.Example CircleCI test job configuration with testsuite command
 [source,yaml]
 ----
 version: 2.1
@@ -541,9 +556,9 @@ jobs:
 
 Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your feature branch and push to your VCS. Since there is no test impact analysis data stored in CircleCI for your test suite yet, all tests will be selected and run. Confirm that the tests execute as expected.
 
-TIP: It can be easier to debug issues with your test suite configuration in CI if you initially run the job without parallelism.
+TIP: Notice we did not specify parallelism in the job configuration. It can be easier to debug issues with your test suite configuration in CI if you initially run the job without parallelism.
 
-=== Step 2: Verify analysis works on your feature branch
+=== 3.2. Verify analysis works on your feature branch
 
 While the analysis phase runs on the default branch by default, you can run the analysis phase from your feature branch to verify it works correctly before merging. Add the `--test-analysis=impacted` and `--test-selection=none` CLI flags:
 
@@ -564,7 +579,7 @@ jobs:
 
 Commit and push these changes to your feature branch. Analysis will be limited to approximately 5 minutes due to `options.test-analysis-duration` set in the previous step. No tests will run due to `--test-selection=none`, which is sufficient to verify that the analysis command works correctly in CI.
 
-=== Step 3: Remove verification flags and merge
+=== 3.3. Remove verification flags and merge
 
 Once you have verified analysis works in your feature branch:
 
@@ -583,15 +598,15 @@ The first time you run analysis, it may take a long time as the full impact map 
 * Set up a scheduled pipeline to handle most of the analysis work. See <<set-up-examples>> for configuration examples, such as running comprehensive analysis on a schedule while timeboxing analysis on default branch builds.
 ====
 
-At this point, you've successfully set up Test Impact Analysis! Next up, enable other features of Smarter Testing: 
+At this point, you have successfully set up test impact analysis. Next, enable other features of Smarter Testing:
 
-* xref:use-dynamic-test-splitting.adoc[Enable Dynamic Test Splitting] to parallelize test execution
-* xref:auto-rerun-failed-tests.adoc[Enable Auto Rerun] to handle flaky tests
-* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
+* xref:use-dynamic-test-splitting.adoc[Enable Dynamic Test Splitting] to parallelize test execution.
+* xref:auto-rerun-failed-tests.adoc[Enable Auto Rerun] to handle flaky tests.
+* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development].
 
-Or continue learning more about Test Impact Analysis below.
+Or continue learning more about test impact analysis below.
 
-=== Troubleshooting
+=== Troubleshooting test impact analysis in CI
 
 ==== Tests not being split correctly across nodes
 
@@ -737,7 +752,7 @@ a| * `all` selects and runs all discovered tests, used to run the full test suit
 == Optional configuration
 
 [#file-mapper]
-=== Use the `file-mapper` command
+=== Use the file-mapper command
 
 NOTE: Skip this step if the test atoms discovered by your test suite are file names. This step is only necessary when test atoms are something other than file names.
 
@@ -785,7 +800,7 @@ file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << 
 ====
 
 [#analysis-baseline-command]
-=== Use the `analysis-baseline` when test atoms cover too many files
+=== Use the analysis-baseline command when test atoms cover too many files
 
 If you see many files impacting each test during analysis, for example, `Found 150 files impacting test...`, this may be caused by shared setup code like global imports or framework initialization being included in coverage.
 
