@@ -7,18 +7,18 @@
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-Dynamic Test Splitting distributes tests across parallel nodes to minimize node idle time. Unlike static splitting which divides tests evenly upfront, dynamic splitting uses a shared queue that nodes pull from continuously—ensuring balanced workloads even when some nodes start late or run slower than expected.
+Dynamic test splitting distributes tests across parallel nodes to minimize node idle time. Unlike static splitting, which divides tests evenly upfront, dynamic splitting uses a shared queue that nodes pull from continuously. This ensures balanced workloads even when some nodes start late or run slower than expected.
 
 == How it works
 
 When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing automatically:
 
-* Sorts tests by duration by retrieving timing data from previous runs, with longer tests prioritized first
-* Creates a shared queue containing all tests to be run
-* Enables nodes to pull dynamically - each parallel node continuously pulls test batches from the queue
-* Adjusts batch sizes - larger batches at the start, smaller batches as the queue empties to ensure even distribution
+* Sorts tests by duration by retrieving timing data from previous runs, with longer tests prioritized first.
+* Creates a shared queue containing all tests to be run.
+* Enables nodes to pull dynamically. Each parallel node continuously pulls test batches from the queue.
+* Adjusts batch sizes. Larger batches at the start, smaller batches as the queue empties to ensure even distribution.
 
-This prevents any single slow node from becoming a bottleneck. Even if some nodes start late or run slower than expected, the dynamic batching ensures work stays balanced across all available nodes.
+Dynamic test splitting prevents any single slow node from becoming a bottleneck. Even if some nodes start late or run slower than expected, this dynamic batching ensures work stays balanced across all available nodes.
 
 [mermaid]
 ----
@@ -36,13 +36,13 @@ flowchart LR
 
 == Prerequisites
 
-Before enabling Dynamic Test Distribution, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
+Before enabling dynamic test splitting, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
 * Installed the `testsuite` CLI plugin
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands
 * Verified your tests run successfully with the `testsuite` command
 
-== Enable Dynamic Test Splitting
+== Configure dynamic test splitting
 
 === 1. Configure parallelism in your CircleCI job
 
@@ -70,7 +70,7 @@ Without dynamic test splitting enabled, Smarter Testing will default to use a st
 
 === 2. Store test results
 
-Test distribution (both static and dynamic) uses timing data from JUnit XML files to optimize how tests are distributed. Make sure you're storing test results:
+Test distribution (both static and dynamic) uses timing data from JUnit XML files to optimize how tests are distributed. Make sure you are storing test results by running the following steps:
 
 [source,yaml]
 ----
@@ -117,13 +117,13 @@ With dynamic test splitting enabled, tests are distributed via a shared queue th
 
 NOTE: Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch. If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
 
-At this point, you've successfully set up Dynamic Test Splitting! Next up, enable other features of Smarter Testing: 
+At this point, you have successfully set up dynamic test splitting. Next, you can enable other features of Smarter Testing:
 
-* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis]
-* xref:auto-rerun-failed-tests.adoc[Enable Auto Rerun] to handle flaky tests
-* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
+* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis].
+* xref:auto-rerun-failed-tests.adoc[Enable Auto Rerun] to handle flaky tests.
+* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development].
 
-Or continue learning more about Dynamic Test Splitting below.
+Or continue learning more about dynamic test splitting below.
 
 == Troubleshooting
 
@@ -140,7 +140,7 @@ Or continue learning more about Dynamic Test Splitting below.
 3. Ensure test results are being stored with `store_test_results` - this is how timing data is collected.
 4. Run the job multiple times to allow timing data to accumulate.
 
-== Dynamic Test Splitting configuration options
+== Dynamic test splitting configuration options
 
 The following options are available to be defined in the options map in test-suites.yml config:
 
