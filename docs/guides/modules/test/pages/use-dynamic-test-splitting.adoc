@@ -117,8 +117,6 @@ With dynamic test splitting enabled, tests are distributed via a shared queue th
 
 Commit and push this change to verify dynamic test splitting is working in CI.
 
-NOTE: Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch. If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
-
 At this point, you have successfully set up dynamic test splitting. Next, you can enable other features of Smarter Testing:
 
 * xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis].
@@ -128,6 +126,10 @@ At this point, you have successfully set up dynamic test splitting. Next, you ca
 Or continue learning more about dynamic test splitting below.
 
 == Troubleshooting
+
+=== Tests are running slower with dynamic test splitting enabled
+
+Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch. If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
 
 === Tests not being split evenly across nodes
 
