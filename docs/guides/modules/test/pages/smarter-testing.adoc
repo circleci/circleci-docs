@@ -13,6 +13,8 @@ Smarter Testing reduces test execution time while maintaining test confidence by
 * Evenly distributing tests across parallel execution nodes.
 * Automatically rerunning failed tests.
 
+These features can be used independently or combined.
+
 == Smarter Testing guides
 
 The following guides are available to help you get started with Smarter Testing:
