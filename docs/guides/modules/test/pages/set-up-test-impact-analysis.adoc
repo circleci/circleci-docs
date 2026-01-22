@@ -23,7 +23,7 @@ Test impact analysis identifies which tests need to run based on the files that 
 
 *Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. Analysis results are stored as impact data for future test runs. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
 
-*Selection phase*:: Compares the current repository state against the most recent impact data. Tests covering modified files are selected to run (including tests impacting only itself, new and modified tests). By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
+*Selection phase*:: Compares the current repository state against the most recent impact data. Tests covering modified files are selected to run. This includes new tests, modified tests, and tests that don't exercise any source code. By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
 
 The analysis phase typically runs slower than a normal test run because it executes tests individually with coverage instrumentation. However, this allows the selection phase to identify only necessary tests to run, which leads to much faster test execution.
 
