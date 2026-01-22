@@ -13,9 +13,9 @@ Use Smarter Testing locally during development (test impact analysis and auto-re
 
 Before using Smarter Testing locally, ensure you have:
 
-* Completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide
-* Enabled xref:set-up-test-impact-analysis.adoc[Test Impact Analysis] in your test-suite.yml
-* And/or enabled xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] in your test-suite.yml
+* Completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide.
+* Enabled xref:set-up-test-impact-analysis.adoc[Test Impact Analysis] in your test-suite.yml.
+* And/or enabled xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] in your test-suite.yml.
 
 == Using Test Impact Analysis locally
 
@@ -41,14 +41,14 @@ Follow the prompts to configure your token. Learn more in the xref:toolkit:local
 $ circleci run testsuite "ci tests"
 ----
 
-If we are unable to autodetect your project, which could happen for standalone projects, the --project-id flag can be set.
+If we are unable to autodetect your project, which could happen if you have a `circleci` type organization (more information on organization types in the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide]), the `--project-id` flag can be set.
 
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --project-id=<your-project-id>
 ----
 
-Or if you haven't configured your token via `circleci setup`:
+Or if you have not configured your token via `circleci setup`:
 
 [source,console]
 ----
