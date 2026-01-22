@@ -139,9 +139,9 @@ Smarter Testing operates on _test atoms_.
 
 A _test atom_ is a single runnable unit that exercises one or more tests, depending on the specific test runner being used. For example:
 
-* `go test pkg/foo`
-* `jest index.test.ts`
-* `./gradlew test --tests "TestMethod"`
+* `go test pkg/foo` is a package level test atom
+* `jest index.test.ts` is a file level test atom
+* `pytest test_file.py::TestClass::test_method`is a test case level test atom
 
 The `discover` command finds all test atoms for a given test suite. The command's output is split on both newlines and whitespace to extract individual test atoms. The `discover` command should not execute any tests.
 
@@ -306,10 +306,10 @@ $ vitest run --reporter=junit \
              << test.atoms >>
 ----
 
-Now update your test suite configuration:
+Now update `.circleci/test-suites.yml`:
 
-. Update the `.circleci/test-suites.yml` with the run command.
-. Define the JUnit output path in `outputs.junit` within `.circleci/test-suites.yml`. The `store_test_results` step should point to the directory containing this file:
+. Add the `run` command.
+. Define the JUnit output path in `outputs.junit`. This path determines where JUnit results are written. Later on, when you configure your CI job to run `circleci run testsuite`, `store_test_results` should point to the directory of this path.
 +
 [tabs]
 ====
