@@ -4,28 +4,29 @@
 :experimental:
 :page-noindex: true
 :page-description: Automatically retry failed tests to improve build reliability
+:page-show-readtime: true
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-Auto rerun failed tests automatically detects and retries test failures during your test run. This allows you to quickly recover from flaky test failures without rerunning your entire test suite. Compared with the existing xref:rerun-failed-tests.adoc[Rerun failed tests], this elimiates the need to:
+Auto rerun failed tests automatically detects and retries test failures during your test run. This allows you to quickly recover from flaky test failures without rerunning your entire test suite. Compared with the existing xref:rerun-failed-tests.adoc[Rerun Failed Tests] feature that CircleCI provides, Auto rerun failed tests eliminates the need to:
 
 * Manually identify which jobs failed.
-* Manually select the btn:[rerun failed tests] option in the CircleCI web app.
+* Manually select the btn:[Rerun failed tests] option in the CircleCI web app.
 
 == How it works
 
 All tests are run as normal with the `discover` and `run` command.
 
-When automatic test rerunning is enabled:
+When auto rerun failed tests is enabled:
 
 * Any test results that failed in the JUnit XML output are rerun.
-* The process is repeated until all tests are successful, or the maximum number of rerun attempts is reached.
-* If all tests are successful, the errors will be suppressed and the job will succeed.
-* If the maximum number of reruns is reached and there are still test failures, the job will fail.
+* The process repeats until all tests are successful, or the maximum number of rerun attempts is reached.
+* If all tests are successful, the errors are suppressed and the job succeeds.
+* If the maximum number of reruns is reached and there are still test failures, the job fails.
 
 == Prerequisites
 
-Before enabling Auto-rerun Failed Tests, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started with Smarter Testing] guide and have:
+Before enabling auto rerun failed tests, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
 * Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
@@ -35,19 +36,23 @@ Before enabling Auto-rerun Failed Tests, ensure you have completed the xref:gett
 == Configure JUnit XML output
 
 To determine which test have failed, the test atoms from the `discover` command must match one the JUnit XML output
-fields; `testname`, `classname` or `filename`.
+fields:
 
-For example; `vitest src/feature.test.ts`, `src/feature.test.ts` must exist in the JUnit XML output to determine if
+* `testname`
+* `classname`
+* `filename`
+
+For example: `vitest src/feature.test.ts`, `src/feature.test.ts` must exist in the JUnit XML output to determine if
 it failed.
 
-If a test cannot be matched with a result, the following warning will be output and the tests will not be rerun.
+If a test cannot be matched with a result, the following warning is output and the tests are not rerun.
 
 [source,console]
 ----
 failed to match test atom with test result
 ----
 
-See xref:getting-started-with-smarter-testing.adoc#3-configure-the-run-command[Configure the run command] to set up JUnit XML output.
+See xref:getting-started-with-smarter-testing.adoc#3-configure-the-run-command[Configure the Run Command] in the Getting Started with Smarter Testing guide to set up JUnit XML output.
 
 == Auto rerun failed tests configuration options
 
@@ -67,17 +72,17 @@ When `auto-rerun-duration` is set, tests will rerun until one of the two conditi
 
 |`auto-rerun-duration`
 |null
-|The duration or percentage of total runtime tests will be rerun if they fail. e.g. `5m`, `1h`, `20%`.
+|The duration or percentage of total runtime tests will be rerun if they fail, for example, `5m`, `1h`, `20%`.
 
 When `max-auto-rerun` is set, tests will rerun until one of the two conditions.
 |===
 --
 
-At this point, you've successfully set up Auto-Rerun Failed Tests! Next up, enable other features of Smarter Testing: 
+At this point, you have successfully set up auto rerun failed tests. Next, you can enable other features of Smarter Testing:
 
-* xref:set-up-test-impact-analysis.adoc[Set Up Test Impact Analysis]
-* xref:use-dynamic-test-splitting.adoc[Enable Dynamic Test Splitting] to parallelize test execution
-* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
+* xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis].
+* xref:use-dynamic-test-splitting.adoc[Enable Dynamic Test Splitting] to parallelize test execution.
+* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development].
 
 ////
 
