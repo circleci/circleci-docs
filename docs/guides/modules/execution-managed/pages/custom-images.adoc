@@ -77,6 +77,19 @@ In order to be used as a primary container on CircleCI, a custom Docker image mu
 
 Without these tools, some CircleCI services may not work.
 
+[#tool-version-recommendations]
+=== Tool version recommendations
+
+We recommend using the latest stable versions of all required tools. Older versions may contain bugs that cause unexpected failures with CircleCI features.
+
+Package managers install versions available in your base image's repositories. Older base images (for example, Alpine 3.11 or Ubuntu 18.04) may only have outdated tool versions available.
+
+If you experience unexpected failures during checkout, xref:optimize:caching.adoc[caching], or xref:optimize:artifacts.adoc[artifact] operations, you may need to:
+
+* Use a more recent base image.
+* Add updated package repositories.
+* Install tools from source or official release binaries.
+
 NOTE: If you do not install these tools with a package manager, you must use the `ADD` instruction instead of `RUN` (see below).
 
 [#adding-other-files-and-directories]
