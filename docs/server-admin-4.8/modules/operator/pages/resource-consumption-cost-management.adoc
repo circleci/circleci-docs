@@ -1,5 +1,5 @@
 = Resource consumption and cost management
-:page-platform: Server 4.9, Server Admin
+:page-platform: Server 4.8, Server Admin
 :page-description: Learn how CircleCI Server consumes cloud resources and how to monitor costs.
 :experimental:
 
