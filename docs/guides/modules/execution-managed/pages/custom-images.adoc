@@ -9,11 +9,11 @@ This page describes how to create and use custom Docker images with CircleCI.
 == Overview
 
 CircleCI supports Docker, providing you with a powerful way to specify dependencies for your projects.
-If the xref:circleci-images.adoc[CircleCI convenience images] do not suit your needs, consider creating a custom Docker image for your jobs.
-There are two major benefits:
+If the xref:circleci-images.adoc[convenience images] do not suit your needs, consider creating a custom Docker image for your jobs.
+This approach provides two major benefits:
 
 * *Faster job execution:* Packaging your required tools into a custom image removes the need to install them for every job.
-* *Cleaner configuration:* Adding lengthy installation scripts to a custom image reduces the number of lines in your xref:reference:ROOT:configuration-reference.adoc[`config.yml` file].
+* *Cleaner configuration:* Adding lengthy installation scripts to a custom image reduces the number of lines in your xref:reference:ROOT:configuration-reference.adoc[configuration reference] file.
 
 NOTE: When building Docker images, CircleCI does not preserve entrypoints by default.
 See <<adding-an-entrypoint,Adding an Entrypoint>> for more details.
@@ -66,9 +66,9 @@ RUN go get github.com/jstemmer/go-junit-report
 [#required-tools-for-primary-containers]
 ==== Required tools for primary containers
 
-In order to be used as a primary container on CircleCI, a custom Docker image must have the following tools installed:
+To use a custom Docker image as a primary container on CircleCI, install the following tools:
 
-* Bash (most likely already installed or available via your package manager)
+* Bash (usually already installed or available via your package manager)
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[git]
 * https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation[SSH]
 * https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar[tar]
@@ -84,7 +84,7 @@ We recommend using the latest stable versions of all required tools. Older versi
 
 Package managers install versions available in your base image's repositories. Older base images (for example, Alpine 3.11 or Ubuntu 18.04) may only have outdated tool versions available.
 
-If you experience unexpected failures during checkout, xref:optimize:caching.adoc[Caching dependencies], or xref:optimize:artifacts.adoc[Storing build artifacts] operations, you may need to:
+If you experience unexpected failures during checkout, xref:optimize:caching.adoc[caching dependencies], or xref:optimize:artifacts.adoc[storing build artifacts] operations, you may need to:
 
 * Use a more recent base image.
 * Add updated package repositories.
@@ -170,9 +170,9 @@ docker build -t circleci/cci-demo-docker-primary:0.0.1 <path-to-dockerfile>
 +
 The `-t` key specifies the name and tag of the new image:
 +
-** `circleci` - our account in Docker Hub
-** `cci-demo-docker-primary` - repository name
-** `0.0.1` - tag (version) of the image. Always update the tag if you change something in a `Dockerfile` otherwise you might have unpredictable results.
+** `circleci` - our account in Docker Hub.
+** `cci-demo-docker-primary` - repository name.
+** `0.0.1` - tag (version) of the image. Always update the tag if you change something in a `Dockerfile` otherwise you may have unpredictable results.
 
 [#pushing-the-image-to-the-registry]
 === 9. Push the image to the registry
@@ -487,4 +487,4 @@ It is worth it to commit your Dockerfile using a gist and link to it from Docker
 [#caching-docker-images]
 == Caching Docker images
 
-For information on how Docker image caching, see xref:using-docker.adoc#caching-docker-images[Caching Docker images].
+For information on Docker image caching, see xref:using-docker.adoc#caching-docker-images[Caching Docker images].
