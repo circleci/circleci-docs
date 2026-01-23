@@ -1,0 +1,40 @@
+= Configuration Review Service
+:page-platform: Advanced Support, Premium Support, Advisory Services
+:page-description: Configuration Review Service
+
+The configuration review service is an engagement through which your field engineer carries out an evaluation of a single CircleCI project, then delivers a report of their findings. After delivering the report your field engineer will assist with implementing any provided recommendations.
+
+Findings will typically include:
+
+* Optimization recommendations.
+* Feature implementation.
+* Right-fitting execution environments.
+* DRY (Don't Repeat Yourself) recommendations.
+* Solutions specific to your project's use case.
+* How your field engineer used the data CircleCI provides to analyze the project.
+
+== Benefits
+
+Teams who engage in a configuration review benefit from:
+
+* A more optimized CI/CD pipeline, in terms of cost and/or workflow duration, maximizing the efficiency of their spend and engineering resources for the project reviewed.
+* Knowledge and understanding of best practices as they pertain to the project's use case.
+* Increased self-service and ability to implement improvements across current and future projects faster.
+* The proactive identification of knowledge gaps, future training, or service requirements.
+* Faster onboarding of the user's teammates to the reviewed project.
+* Understanding the data CircleCI provides and how to effectively use it.
+
+== Intended Audience
+
+Configuration reviews are most useful for projects that:
+
+* Were recently onboarded onto CircleCI.
+* Have made a recent major change to their configuration.
+* Have a heavy throughput.
+* Contain complex pipelines.
+* Are used as a template for other projects.
+* Are showing concerning metric trends.
+
+Anyone responsible for writing or maintaining the CircleCI configuration for the project being reviewed should be involved.
+
+Developers that work in the project can benefit from being involved by gaining a better understanding of what CircleCI is doing under the hood.

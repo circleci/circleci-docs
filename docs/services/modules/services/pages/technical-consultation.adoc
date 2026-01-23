@@ -1,0 +1,17 @@
+= Technical Consultation Service
+:page-platform: Advanced Support, Premium Support, Advisory Services
+:page-description: Technical Consultation Service
+
+The technical consultation service is an engagement where your field engineer will focus on a single challenge your team is facing. Some examples are implementing config policies, configuring self-hosted runners, or setting up a data integration. This service will provide an in-depth explanation of features related to the challenge, enriched with proven solutions.
+
+== Benefits
+
+A team engaging with us in a technical consultation will benefit from:
+
+* A platform to articulate your goals or the challenges your are facing, allowing your field engineer to understand your requirements in depth.
+* Tested insights, recommendations, and potential solutions from your field engineer.
+* A clear, customized action plan to solve challenges important to your team, saving time and resources.
+
+== Intended Audience
+
+This service is intended for any team that has a challenge on CircleCI and would like to bring their field engineer in to consult on the CircleCI aspects of that challenge.

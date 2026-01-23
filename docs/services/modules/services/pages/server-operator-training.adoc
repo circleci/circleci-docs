@@ -1,0 +1,20 @@
+= Server Operator Training
+:page-platform: Advanced Support, Premium Support, Advisory Services
+:page-description: Server Operator Training
+
+== Overview
+
+The server operator training is a one hour session led by your field engineer designed to provide a deep understanding of CircleCI server's functionality, the necessary resources for setting up a cluster, and effective instance management. 
+
+== Benefits
+
+Teams that attend a server operator training:
+
+* Learn how CircleCI Server is running in their organization.
+* Understand how to troubleshoot basic issues.
+* Understand how CircleCI Server operates from the administrative perspective and during execution.
+* Know the best practices and advanced techniques to enhance the management of their CircleCI installations.
+
+== Intended Audience
+
+This service in intended to train server administrators on their instance of CircleCI Server and the best practices that apply to their specific use case.
