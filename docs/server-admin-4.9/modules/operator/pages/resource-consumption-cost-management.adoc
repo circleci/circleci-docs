@@ -196,7 +196,7 @@ TIP: Filter by tag `ManagedBy: circleci-machine-provisioner` to track machine ex
 
 The following scenarios can lead to unexpected costs:
 
-* **Instances not scaling down** - Cloud provider API timeouts, rate limiting, or transient errors can occasionally prevent scale-in operations from completing, leaving instances running longer than expected.
+* **Instances not scaling down** - Cloud provider API timeouts, rate limiting, or transient errors can prevent scale-in operations from completing, leaving instances running longer than expected.
 
 * **Orphaned compute instances** - Cloud provider API failures during instance termination can result in instances that continue running after their associated jobs complete.
 

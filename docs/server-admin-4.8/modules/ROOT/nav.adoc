@@ -1,7 +1,7 @@
-* xref:overview:circleci-server-overview.adoc[CircleCI server Overview]
+* xref:overview:circleci-server-overview.adoc[CircleCI Server Overview]
 * xref:overview:release-notes.adoc[Release notes]
 
-* Installing CircleCI server
+* Installing CircleCI Server
 ** Install on AWS
 *** xref:installation:phase-1-aws-prerequisites.adoc[Phase 1: AWS prerequisites]
 *** xref:installation:phase-2-aws-core-services.adoc[Phase 2: AWS Core services installation]
@@ -15,18 +15,18 @@
 ** Install in an air-gapped environment
 *** xref:air-gapped-installation:phase-1-prerequisites.adoc[Phase 1 - Prerequisites]
 *** xref:air-gapped-installation:phase-2-configure-object-storage.adoc[Phase 2 - Configure object storage]
-*** xref:air-gapped-installation:phase-3-install-circleci-server.adoc[Phase 3 - Install CircleCI server]
+*** xref:air-gapped-installation:phase-3-install-circleci-server.adoc[Phase 3 - Install CircleCI Server]
 *** xref:air-gapped-installation:phase-4-configure-nomad-clients.adoc[Phase 4 - Configure Nomad clients]
 *** xref:air-gapped-installation:phase-5-test-your-installation.adoc[Phase 5 - Test installation]
 *** xref:air-gapped-installation:additional-considerations.adoc[Additional considerations]
-*** xref:air-gapped-installation:example-values.adoc[Example Values YAML]
+*** xref:air-gapped-installation:example-values.adoc[Example values.yaml]
 ** xref:installation:hardening-your-cluster.adoc[Hardening your cluster]
 ** xref:installation:installing-server-behind-a-proxy.adoc[Installing server behind a proxy]
 ** xref:installation:upgrade-server.adoc[Upgrading server]
 ** xref:installation:installation-reference.adoc[Installation reference]
 
 
-* CircleCI server operator guide
+* CircleCI Server operator guide
 ** xref:operator:operator-overview.adoc[Operator overview]
 ** xref:operator:introduction-to-nomad-cluster-operation.adoc[Introduction to Nomad cluster operation]
 ** xref:operator:resource-consumption-cost-management.adoc[Resource consumption and cost management]
@@ -40,7 +40,7 @@
 ** xref:operator:user-authentication.adoc[User authentication]
 ** xref:operator:managing-build-artifacts.adoc[Managing build artifacts]
 ** xref:operator:usage-data-collection.adoc[Usage data collection]
-** xref:operator:circleci-server-security-features.adoc[CircleCI server security features]
+** xref:operator:circleci-server-security-features.adoc[CircleCI Server security features]
 ** xref:operator:application-lifecycle.adoc[Application lifecycle]
 ** xref:operator:troubleshooting-and-support.adoc[Troubleshooting and support]
 ** xref:operator:backup-and-restore.adoc[Backup and restore]
