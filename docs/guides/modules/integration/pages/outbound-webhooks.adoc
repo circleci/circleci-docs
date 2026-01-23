@@ -22,7 +22,7 @@ The following sections detail CircleCI outbound webhook structure and protocols.
 
 == Quickstart
 
-NOTE: Projects are limited to 5 outbound webhooks.
+NOTE: Projects are limited to 5 outbound webhooks. Organization admin permission is required to add,update and delete outbound webhooks
 
 Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
 
