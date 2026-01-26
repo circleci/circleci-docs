@@ -8,7 +8,7 @@ This page provides an overview of CircleCI jobs and steps.
 [#jobs-overview]
 == Jobs overview
 
-A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using xref:workflows.adoc[workflows].
+A CircleCI job is a collection of steps. All of the steps in the job are executed in a single unit, either within a fresh container, or a virtual machine. Jobs are orchestrated using workflows. Read more on the xref:workflows.adoc[Workflow Orchestration] page.
 
 The following diagram illustrates how data flows between jobs:
 
@@ -16,6 +16,7 @@ The following diagram illustrates how data flows between jobs:
 * Caching persists data between the same job in different workflows runs.
 * Artifacts persist data after a workflow has finished.
 
+.Jobs overview
 image::guides:ROOT:jobs-overview.png[Jobs overview]
 
 Jobs can be run in Docker containers, using the Docker executor, or in virtual machines using the `machine` executor, with Linux, macOS, or Windows images. Secondary containers or VMs can be configured to attach services, such as databases, to run alongside your jobs.
@@ -26,8 +27,9 @@ See the xref:execution-managed:executor-intro.adoc[Introduction to Execution Env
 
 === Job naming
 
-When you configure a job you will give it a name. This is its job property name:
+When you configure a job you will give it a name, which is its job property name:
 
+.Job property name
 [,yml]
 ----
 version: 2.1
@@ -42,8 +44,9 @@ The job property name can be anything you like with the following restrictions:
 * Only ASCII alphabet characters, underscores, and dashes.
 * No spaces.
 
-When you configure a job in a workflow you have the option to give it an xref:reference:ROOT:configuration-reference.adoc#name[alternative name]. This alternative name can be useful if you want to call a job more than once in a workflow.
+When you configure a job in a workflow you have the option to give it an alternative name. This alternative name can be useful if you want to call a job more than once in a workflow. Read more in the xref:reference:ROOT:configuration-reference.adoc#name[Configuration Reference].
 
+.Give your job an alternative name when configuring it in a workflow
 [,yml]
 ----
 workflows:
@@ -56,7 +59,7 @@ The job name within the workflow can be anything you like _including_ spaces and
 
 === Job types
 
-There are four types of jobs:
+Four job types are available as follows:
 
 - `release`: Jobs with this type are used to connect your pipeline configuration to a deployment in the CircleCI deploys UI.
 
@@ -69,7 +72,7 @@ There are four types of jobs:
 
 You can set the type of a job by adding the `type` key to the job configuration.
 
-See the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration reference] page for more information on how to use the different job types.
+See the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration Reference] page for more information on how to use the different job types.
 
 === Job status transitions
 
@@ -85,11 +88,12 @@ stateDiagram-v2
     state "blocked or not running" as pending
     blocked --> pending : Job instructed to start but not yet started
     blocked --> unauthorized : Trying to use a context without permission
-   
+    blocked --> not_run : Job's dependencies will never be satisfied
+
     pending --> running
-    
+
     pending --> blocked : Rerun
-    
+
     running --> canceled
     pending --> canceled
     blocked --> canceled
@@ -97,11 +101,12 @@ stateDiagram-v2
     pending --> failed : Abusive / Sanctioned
     running --> failed
     running --> success
-    
+
     failed --> [*]
     success --> [*]
     canceled --> [*]
     unauthorized --> [*]
+    not_run --> [*]
 ----
 
 .CircleCI server job status transitions
@@ -114,20 +119,21 @@ stateDiagram-v2
     state "blocked or not running" as pending
     blocked --> pending : Job instructed to start but not yet started
     blocked --> unauthorized : Trying to use a context without permission
-   
+
     pending --> running
 
-    pending --> skipped : Only build PRs setting enabled<br/>ci-skip<br/>No project found<br/>Abusive<br/>Sanctioned
+    pending --> not_run : Only build PRs setting enabled
     pending --> blocked : Rerun
 
     running --> canceled
     pending --> canceled
     blocked --> canceled
 
+    pending --> failed : Abusive / Sanctioned
     running --> failed
     running --> success
 
-    skipped --> [*]
+    not_run --> [*]
     success --> [*]
     failed --> [*]
     canceled --> [*]
@@ -166,7 +172,7 @@ Steps are collections of executable commands, which are run during a job.
 
 The `checkout` key is required under `steps` to checkout your code. The `run` key enables addition of arbitrary, multi-line shell command scripting.
 
-In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under steps. For a full list of step options see the xref:reference:ROOT:configuration-reference.adoc#steps[Steps key] section of the Configuration Reference.
+In addition to the `run` key, keys for `save_cache`, `restore_cache`, `store_artifacts`, `store_test_results`, and `add_ssh_keys` are nested under steps. For a full list of step options see the steps key section of the xref:reference:ROOT:configuration-reference.adoc#steps[Configuration Reference].
 
 == Access jobs and steps in the CircleCI app
 
@@ -174,12 +180,13 @@ A pipeline is composed of workflows, which are composed of jobs. By navigating f
 
 The output of each job can be opened in a new tab (in either raw or formatted styling) with a unique link, making it shareable between team members. You can also use the search functionality to find specific lines of output (2).
 
+.Viewing a job in the CircleCI web app
 image::guides:ROOT:pipelines-job-step-test-artifact.png[Job tab options in the CircleCI web app]
 
 [#passing-parameters-to-jobs]
 == Passing parameters to jobs
 
-Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is xref:reference:ROOT:configuration-reference.adoc#matrix[matrix jobs]. Below is a basic example of passing a parameter to a job when it is run.
+Using parameters allows you to run a single job multiple times for different scenarios, such as different package versions or execution environments. An extension of this functionality is matrix jobs (see the matrix jobs section of the xref:reference:ROOT:configuration-reference.adoc#matrix[Configuration Reference]). Below is a basic example of passing a parameter to a job when it is run.
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
@@ -276,4 +283,4 @@ workflows:
 == Next steps
 
 * Read more about orchestrating jobs in the xref:workflows.adoc[Using Workflows to Schedule Jobs] page.
-* Read more about passing data between jobs in the xref:workspaces.adoc[Using Workspaces to Share Data between Jobs] page.
+* Read more about passing data between jobs in the xref:workspaces.adoc[Using Workspaces to Share Data Between Jobs] page.
