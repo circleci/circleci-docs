@@ -85,7 +85,6 @@ github.com/rollbar/rollbar-go,MIT
 github.com/shirou/gopsutil,BSD-3-Clause
 github.com/spf13/cobra,Apache-2.0
 github.com/spf13/pflag,BSD-3-Clause
-github.com/tklauser/go-sysconf,BSD-3-Clause
 github.com/ugorji/go/codec,MIT
 github.com/vmihailenco/go-tinylfu,MIT
 github.com/x448/float16,MIT
