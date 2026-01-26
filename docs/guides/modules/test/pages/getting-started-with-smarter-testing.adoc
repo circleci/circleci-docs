@@ -226,7 +226,12 @@ run: |
 ----
 ====
 +
-TIP: The `circleci run testsuite` CLI tooling must be run from your root project directory. For monorepos, this can be the root of a subpackage. The testsuite will find the parent `.circleci/test-suites.yml`. The commands run relative to where the CLI is executed and should not use `cd` to change the working directory.
+[TIP]
+====
+The circleci run testsuite CLI tooling should be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (e.g., cd my-service && circleci run testsuite "my-tests").
+
+The testsuite will automatically find the .circleci/test-suites.yml configuration file by walking up the directory tree. All commands (discover, run, analysis) execute relative to where you run the CLI, so avoid using cd or --directory flags within your commands.
+====
 
 . Run the test suite and confirm that the `discover` command finds the test atoms you expect:
 +
