@@ -254,7 +254,7 @@ An IAM role can be associated with the service account used for the container ru
 
 ==== What if I want to run my CI job within a container, but do not want to use Kubernetes?
 
-If you would like to run your CI job within a container, but do not want to use Kubernetes, you can use a xref:guides:execution-runner:runner-installation-docker.adoc[machine runner] with Docker installed.
+If you would like to run your CI job within a container, but do not want to use Kubernetes, you can use a xref:guides:execution-runner:install-machine-runner-3-on-docker.adoc[machine runner] with Docker installed.
 
 [#machine-runner-specific-faqs]
 === Machine runner specific FAQs
