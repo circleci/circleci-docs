@@ -124,6 +124,9 @@
 *** xref:execution-runner:install-machine-runner-3-on-docker.adoc[Install machine runner 3 on Docker]
 *** xref:execution-runner:machine-runner-3-manual-installation.adoc[Manual install on Linux and macOS]
 *** xref:execution-runner:machine-runner-3-manual-installation-on-windows.adoc[Manual install on Windows]
+*** xref:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc[Migrate from launch agent to machine runner 3 on Linux]
+*** xref:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-macos.adoc[Migrate from launch agent to machine runner 3 on macOS]
+*** xref:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-windows.adoc[Migrate from launch agent to machine runner 3 on Windows]
 *** xref:execution-runner:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
 
 ** Self-hosted runner reference
