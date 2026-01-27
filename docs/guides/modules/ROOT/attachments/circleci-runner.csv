@@ -85,7 +85,6 @@ github.com/rollbar/rollbar-go,MIT
 github.com/shirou/gopsutil,BSD-3-Clause
 github.com/spf13/cobra,Apache-2.0
 github.com/spf13/pflag,BSD-3-Clause
-github.com/tklauser/go-sysconf,BSD-3-Clause
 github.com/ugorji/go/codec,MIT
 github.com/vmihailenco/go-tinylfu,MIT
 github.com/x448/float16,MIT
@@ -109,6 +108,7 @@ go.opentelemetry.io/proto/otlp,Apache-2.0
 go.yaml.in/yaml/v2,Apache-2.0
 go.yaml.in/yaml/v3,MIT
 golang.org/x/crypto,BSD-3-Clause
+golang.org/x/mod/semver,BSD-3-Clause
 golang.org/x/net,BSD-3-Clause
 golang.org/x/oauth2,BSD-3-Clause
 golang.org/x/sync,BSD-3-Clause

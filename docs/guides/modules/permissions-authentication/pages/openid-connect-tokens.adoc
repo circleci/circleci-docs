@@ -500,7 +500,7 @@ CircleCI's OIDC tokens contain the following standard https://openid.net/specs/o
 | Description
 
 | `iss`
-| The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/<organization_id>"`, a string, where `organization_id` is a UUID identifying the current job's project's organization.
+| The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/<organization_id>"`, a string, where `organization_id` is a UUID identifying the current job's project's organization. It is possible to generate a token manually with a root issuer using the `--root-issuer` flag. See xref:oidc-tokens-with-custom-claims.adoc[OIDC tokens with custom claims] for more information.
 
 | `sub`
 a| The subject. This identifies who is running the CircleCI job and where. `$CIRCLE_OIDC_TOKEN_V2` also includes information about the source of change.
