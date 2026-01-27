@@ -46,6 +46,7 @@ You can also configure your preferences for different categories here:
 You can further filter the notifications you receive based on the status of the build as below:
 
 * On default branch (any status).
+* On default branch (failed, error, unauthorized)
 * Failed
 * Succeeded
 * Cancelled
