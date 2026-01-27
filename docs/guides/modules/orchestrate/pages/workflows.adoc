@@ -845,6 +845,11 @@ image::guides:ROOT:orchestrate-and-trigger/rerun-from-failed-workflows-page.png[
 
 NOTE: If you rerun a workflow containing a job that was previously re-run with SSH, the new workflow runs with SSH enabled for that job, even after SSH capability is disabled at the project level.
 
+[#rerun-limit]
+=== Rerun limit
+
+There is a hard limit of 100 reruns for individual workflows in a pipeline. This limit includes reruns of reruns. If you reach this limit for a workflow in a pipeline you will have to trigger a new pipeline in order to rerun the workflow.
+
 [#states]
 == Workflow states
 
