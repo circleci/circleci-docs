@@ -1187,8 +1187,7 @@ jobs:
       - run: circleci run testsuite "integration-tests"
 ----
 
-*Recommended approach - use separate jobs:*
-
+.Recommended approach - use separate jobs
 [source,yaml]
 ----
 workflows:
