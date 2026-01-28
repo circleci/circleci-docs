@@ -1,0 +1,20 @@
+= Slack Channel
+:page-platform: Premium Support, Advisory Services
+:page-description: Slack Channel
+
+A Slack channel, hosted by CircleCI, provides faster response to technical questions, or service issues, and a direct line to your CircleCI account team. 
+
+== Benefits
+
+Teams that join a Slack channel with their account team:
+
+* Have a faster feedback loop for product feedback and technical questions.
+* Gain access to information on upcoming features and feature previews.
+* Are able to easily schedule touch points, both commercial and technical.
+* Have a central place for CircleCI questions and information.
+
+== Intended Audience
+
+The channel is intended to facilitate communication with your CircleCI account team. Anyone interacting with CircleCI at your organization is welcome.
+
+NOTE: The channel is not intended to replace the Support ticketing system for break/fix issues.

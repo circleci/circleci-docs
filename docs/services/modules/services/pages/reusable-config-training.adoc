@@ -1,0 +1,18 @@
+= Reusable Configuration Training
+:page-platform: Advanced Support, Premium Support, Advisory Services
+:page-description: Reusable Configuration Training
+
+The reusable configuration training is a one hour session led by your field engineer designed to teach teams how to create configuration files that use YAML stored in centralized locations. The training includes information on centralized configuration management, orbs, and other reusable configuration features.
+
+== Benefits
+
+Teams who attend a reusable configuration training:
+
+* Create easily readable configuration files.
+* Provide their development teams with a library of pre-written configuration.
+* Reduce the maintenance overhead of managing configuration files in multiple repositories.
+* Ease the onboarding process of new projects.
+
+== Target Audience
+
+This training is intended to educate teams on the paths available when writing and maintaining configuration files for multiple repositories. Users who are responsible for their organization's CI configuration will benefit the most.

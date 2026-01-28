@@ -1,0 +1,22 @@
+= General Developer Training
+:page-platform: Advanced Support, Premium Support, Advisory Services
+:page-description: General Developer Training Service
+
+The general developer training consists of two one hour sessions led by your field engineer designed to teach the basics of CircleCI including configuration, secrets management, debugging failed builds, and much more.
+
+Organizations that have a premium support plan have the added benefit of being able to customize the training. For example, this could be additional topics or training on your specific pipelines.
+
+== Benefits
+
+Teams who attend a general developer training:
+
+* Feel more confident using CircleCI.
+* Understand what an optimized pipeline looks like.
+* Understand how to troubleshoot their failed builds.
+* Understand how to onboard new projects.
+* Are taught by a CircleCI expert.
+
+
+== Intended Audience
+
+This training is intended to educate users that are new to CircleCI, have a technical role, and use CircleCI regularly.
