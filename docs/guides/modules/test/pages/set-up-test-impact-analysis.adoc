@@ -1172,7 +1172,7 @@ See the <<run-analysis-on-non-default-branch,Run analysis on a non-default and s
 
 No, this is not recommended and may produce unreliable results.
 
-When running multiple `testsuite` commands as sequential steps in a single parallelized job, parallel nodes executing at different speeds can cause tests from one test suite (e.g., "integration-tests") to run with another test suite's configuration (e.g., "unit-tests"). 
+When running multiple `testsuite` commands as sequential steps in a single parallelized job, parallel nodes executing at different speeds can cause tests from one test suite (for example, "integration-tests") to run with another test suite's configuration (for example, "unit-tests"). 
 
 While this issue only occurs when parallelism is enabled, we recommend always using separate jobs for each test suite as a best practice.
 
