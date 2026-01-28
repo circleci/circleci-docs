@@ -2937,7 +2937,7 @@ workflows:
   my-workflow:
     jobs:
       - my-job:
-          context: << pipeline.git.branch == "main" and org-global or project-global >>
+          context: << pipeline.git.branch == "main" and "org-global" or "project-global" >>
 ----
 
 '''
