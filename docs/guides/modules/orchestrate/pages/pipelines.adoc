@@ -100,9 +100,9 @@ To add or edit a pipeline, follow these steps:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
 ** Under Integration select the platform that matches where your project is set up (for example, GitHub App).
 +
-NOTE: If you integrate with xref:integration:github-integration.adoc[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:integration:github-integration.adoc#using-github-app-functionality[improved security and new features]. This is a one-time step, which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be setup without this installation step.
+NOTE: If you integrate with xref:integration:github-integration.adoc[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[improved security and new features]. This is a one-time step, which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be setup without this installation step.
 +
-NOTE: For GitLab self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:integration:gitlab-integration.adoc#organization-settings-integrations[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
+NOTE: For GitLab self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[menu:Organization Settings[Integrations]]. In either case, you will also need to enter your personal access token again to authorize this connection.
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
@@ -111,6 +111,23 @@ NOTE: For GitLab self-managed, you can input any instance that you have previous
 . Select btn:[Save].
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is described in the following section.
+--
+Bitbucket Data Center::
++
+--
+To add or edit a pipeline, follow these steps:
+
+. In the CircleCI web app, select **Projects** in the sidebar.
+. Select the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and choose **Project Settings**.
+. Select **Pipelines** in the sidebar.
+. Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
+. Complete the form fields and options:
+** Give your pipeline a descriptive name, for example `Run tests and deploy`.
+** Under Integration select the platform that matches where your project is set up (for example, Bitbucket Data Center).
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
+** Define where the config file for this pipeline is stored:
+*** Select a repository from the dropdown.
+*** Enter the path to the config file.
 --
 ====
 

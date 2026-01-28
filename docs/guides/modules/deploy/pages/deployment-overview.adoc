@@ -4,7 +4,11 @@
 :page-description: Learn the basics of deployment and deploys management with CircleCI.
 :experimental:
 
-With CircleCI you can deploy to any target and manage your deployments in the CircleCI web app. Track deployments using deploy markers and use rollbacks to revert to a previous version
+With CircleCI you can deploy to any target and manage your deployments in the CircleCI web app.
+
+Track deployments using deploy markers. Deploy and rollback to a stable version using preconfigured deploy and rollback pipelines.
+
+Alternatively, if you are deploying to Kubernetes, you can also use the CircleCI release agent to manage your deployments. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
 
 == Introduction
 
@@ -22,7 +26,7 @@ Set up deploy markers to track deployments in the CircleCI web app and rollback 
 
 The following list outlines the core components you need to get a deployment set up:
 
-* **Deployment job**: To deploy your application, add a xref:orchestrate:jobs-steps.adoc#jobs-overview[job] to your `.circleci/config.yml` file and configure the job to run the steps you require.
+* **Deployment job**: To deploy your application, add a job to your `.circleci/config.yml` file and configure the job to run the steps you require.
 +
 TIP: Use the *how-to guides* in this section (select how-to guides from the left-hand navigation) to manage common deployment use cases.
 
@@ -30,16 +34,17 @@ TIP: Use the *how-to guides* in this section (select how-to guides from the left
 
 * **Deployment parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 Environment variables can be:
-** Defined within your configuration
+** Defined within your configuration.
 ** Added to the project itself through the CircleCI web app:
-*** Add project-level xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[environment variables]
-***  Add project-level xref:integration:add-ssh-key.adoc[SSH keys].
-** Added at the organization level using xref:security:contexts.adoc[contexts].
+*** Add project-level xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Environment Variables].
+***  Add project-level xref:integration:add-ssh-key.adoc[SSH Keys].
+** Added at the organization level using xref:security:contexts.adoc[Contexts].
 
-* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[hold/approve] job in your workflow.
+* **Manual approval**: If your deployment strategy requires a manual approval step, you can include a hold/approve job in your workflow. For more information, see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Workflow Orchestration] guide.
++
 This job will create a manual approval button visible in the CircleCI web app workflows map.
 
-* *IP-based restrictions*: If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc[IP ranges] for your deployment job.
+* *IP-based restrictions*: If you need to restrict connections, consider enabling xref:security:ip-ranges.adoc[IP Ranges] for your deployment job.
 
 === Using orbs to simplify deployment
 
@@ -73,7 +78,7 @@ workflows:
 
 Under the hood, this orb creates, bundles, and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
-Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[orbs registry]. If the orb you need has not been created yet, consider xref:orbs:author:orb-author.adoc[authoring one]!
+Check out the full range of available orbs in the link:https://circleci.com/developer/orbs[Orbs Registry]. If the orb you need has not been created yet, consider creating your own. See the xref:orbs:author:orb-author.adoc[Orb Author] guides for more information.
 
 === Using images to simplify deployment
 
@@ -88,20 +93,60 @@ Visit the link:https://circleci.com/developer/images?imageType=docker[CircleCI D
 
 == Deployment tracking and management
 
-Deploy markers provide a lightweight way to log your deployments. Deploy markers generate a log of all deployments in one place, for a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers log all new deployments in one place and link back to the CI/CD pipelines that caused them.
+CircleCI provides deployment tracking and management through two main features as outlined in the following table and described in more detail in the sections below:
 
-See the xref:configure-deploy-markers.adoc[Configure Deploy Markers] page for full setup details.
+[.table-scroll]
+--
+[cols=3*, options="header"]
+|===
+|Feature
+|Description
+|Use cases
 
-To use deploy markers, you will add commands to your pipeline configuration to enable CircleCI to log and track deployment status in the CircleCI UI. Once deploy markers are set up, you can rollback to a previous version of a component from the CircleCI web app.
+|CircleCI deploys and rollbacks
+|CircleCI deploy markers generate a log of all deployments in one place. This deploy log provides a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers enable rollback and deploy pipelines so you can deploy and rollback your projects from the CircleCI web app.
+|All CircleCI projects can use the deploy and rollback features. More information is available in the following guides: xref:set-up-rollbacks.adoc[Set up Rollbacks], xref:configure-deploy-markers.adoc[Configure Deploy Markers].
 
-If you are deploying to Kubernetes you can also use the CircleCI xref:release-agent-overview.adoc[Release Agent Overview], which you install in your cluster to enable you to manage your deployments through CircleCI.
+|CircleCI release agent
+|The CircleCI release agent is a tool that you install in your Kubernetes cluster to enable you to manage your deployments through CircleCI. The release agent supports Argo Rollouts for progressive delivery.
+|Projects that are deploying to Kubernetes can use the release agent. More information is available in the xref:release-agent-overview.adoc[Release Agent Overview].
+|===
+--
 
-== Deploy markers quickstart
+=== CircleCI deploys and rollbacks
 
-To get started with deploy markers right away, refer to the following guides:
+*Deploy markers* provide a lightweight way to generate a log of all deployments in one place, with links back to the CI/CD pipelines that triggered them. Deploy markers give you a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers are configured as steps in your pipeline configuration.
 
-* xref:configure-deploy-markers.adoc[Tutorial 1: Configure CircleCI deploy markers]
-* xref:set-up-rollbacks.adoc[Tutorial 2: Set up rollbacks]
+To configure deploy markers you will add steps to your pipeline configuration to log and track deployment status in the CircleCI UI.
+
+Once you have deploy markers configured you can set up and use the following features:
+
+* *Rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
+* *Deploy pipelines* to automatically deploy your application to a target environment directly from the CircleCI web app.
+
+.Rollback guided setup
+image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
+
+To get set up see the following guides, you can choose manual configuration or a guided setup option:
+
+* xref:set-up-rollbacks.adoc[Set up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
+* xref:set-up-deploys.adoc[Set up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
+* xref:configure-deploy-markers.adoc[Configure CircleCI Deploy Markers] - This guide covers configuring deploy markers manually which you can do at any time. This page is also useful as a reference when using the guided setup process defined in the guides linked above.
+
+=== CircleCI release agent
+
+CAUTION: Do not use both CircleCI Deploys and the CircleCI release agent in the same project.
+
+If you are deploying to Kubernetes you can choose to use the CircleCI *release agent*. The release agent is installed in your cluster to enable you to manage your deployments through CircleCI.
+
+.CircleCI release agent architecture
+image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
+
+To get started with the release agent see the following guides:
+
+* The xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent] guide.
+* The xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components] guide.
+* The xref:manage-releases.adoc[Manage Releases] guide.
 
 == Concepts
 
@@ -109,15 +154,18 @@ The sections below explain some key software delivery concepts. Understanding th
 
 === Command
 
-A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, similarly to how step output works for CI jobs.
+TIP: Commands are available when using the release agent. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
+A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component.
 
-Some commands are available for all components. These are:
+Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, similarly to how step output works for CI jobs.
+
+Some commands are available for all components:
 
 * Restore version
 * Scale component
 * Restart component
 
-A subset of commands are available for _progressive_ deployments (when using Argo Rollouts). These are:
+A subset of commands are available for _progressive_ deployments (when using Argo Rollouts):
 
 * Retry deployment
 * Promote deployment
@@ -156,6 +204,7 @@ The CircleCI deploys UI is a powerful tool for visualising, monitoring and manag
 [#dashboard]
 === The dashboard
 
+.The deploys dashboard
 image::guides:ROOT:releases/dashboard.png[Screenshot showing the deploys dashboard in the CircleCI web app]
 
 Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboard. The dashboard shows the following:

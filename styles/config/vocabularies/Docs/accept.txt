@@ -1,3 +1,6 @@
+\bgithub organization\b
+\bcircleci organization\b
+\bbitbucket organization\b
 .circleci/config.yml
 [Aa]gentless
 [Aa]uditability
@@ -78,9 +81,9 @@ cgroup
 Chocolatey
 chruby
 [Cc]hunk
-CircleCI\b
-\bCircleCI cloud\b
-\bCircleCI server\b
+\bCircleCI\b
+\bCircleCI Cloud\b
+\bCircleCI Server\b
 \bcircleci\.com\b
 CI/CD
 CIDRs?
@@ -128,6 +131,7 @@ Docker\sHub
 Dockerfiles?
 dockerize
 [Dd]otfiles?
+ECMAscript
 [Ee]nablement
 EKS
 Elixir
@@ -269,7 +273,7 @@ PowerShell
 [Pp]roxied
 [Pp]roxying
 Pusher
-PVC
+PVCs?
 Python
 pytest
 RAM
@@ -282,6 +286,7 @@ ReplicaSet
 [Rr]epos?
 [Rr]eprovision
 [Rr]eprovisioned
+[Rr]etrigger
 [Rr]eusability
 Restic
 RHEL
@@ -372,6 +377,7 @@ URLEncoder
 UUID
 UUIDs?
 [Vv]alidator
+values.yaml
 vCPUs?
 VCS
 Velero
