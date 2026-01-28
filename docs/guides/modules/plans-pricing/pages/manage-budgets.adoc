@@ -39,7 +39,7 @@ To use Budget Controls, you need:
 
 == Setting up budget controls
 
-Thw following steps show you how to set up budget controls for your organization and projects.
+The following steps show you how to set up budget controls for your organization and projects.
 
 === Create an organization budget
 
