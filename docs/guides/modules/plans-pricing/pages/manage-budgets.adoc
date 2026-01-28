@@ -1,55 +1,60 @@
-## Overview
+= Manage budgets
+:page-platform: Cloud
+:page-description: Learn how to manage and monitor your CircleCI credit usage by setting spending limits at the organization and project level.
+:experimental:
 
-Budget Controls help you manage and monitor your CircleCI credit usage by setting spending limits at the organization and project level. With real-time tracking and automated notifications, you can ensure your CI/CD costs stay within expected ranges while maintaining visibility across your team.
+NOTE: Budget controls are available for Scale Plan customers.
 
-Budget Controls are available for Scale plan customers.
+Budget controls help you manage and monitor your CircleCI credit usage by setting spending limits at the organization and project level. With real-time tracking and automated notifications, you can ensure your CI/CD costs stay within expected ranges while maintaining visibility across your team.
 
-## What are Budget Controls?
+== What are budget controls?
 
-Budget Controls allow you to:
+Budget controls allow you to:
 
-* **Set weekly budget limits** for your entire organization or individual projects  
-* **Track credit consumption** in real-time as a percentage of your budget  
-* **Receive automated notifications** when you approach or reach budget thresholds
+* **Set weekly budget limits** for your entire organization or individual projects.
+* **Track credit consumption** in real-time as a percentage of your budget.
+* **Receive automated notifications** when you approach or reach budget thresholds.
 
 Budgets run on weekly cycles from Monday 00:00 UTC through Sunday 23:59:59 UTC and reset automatically each week.
 
-## Prerequisites
+== What counts towards budgets?
 
-To use Budget Controls, you need:
-
-* A CircleCI Scale plan  
-* Organization Admin permissions to create, edit, or delete budgets  
-* Access to the Plans page to view budget status
-
-## What counts towards budgets?
+NOTE: User seat charges are excluded from budget limits, as these are fixed organizational costs rather than consumption-based project work.
 
 Your budget limits track credits consumed across:
 
-* **Compute usage** \- All execution environments (Docker, machine, macOS, Windows, GPU, Arm)  
-* **Docker Layer Caching (DLC)** \- Caching for Docker image layers  
-* **Storage costs** \- Artifact and workspace storage  
-* **IP ranges** \- Static IP address usage  
-* **Network usage** \- Data transfer costs
+* **Compute usage** for all execution environments (Docker, machine, macOS, Windows, GPU, Arm).
+* **Docker Layer Caching (DLC)** usage.
+* **Storage costs** for artifact and workspace storage.
+* **IP ranges** usage, to restrict traffic to specific IP ranges.
+* **Network usage**, data transfer costs.
 
-**Note:** User seat charges are excluded from budget limits, as these are fixed organizational costs rather than consumption-based project work.
+== Prerequisites
 
-## Setting up Budget Controls
+To use Budget Controls, you need:
 
-### Create an organization budget
+* A CircleCI Scale Plan.
+* Organization administrator permissions to create, edit, or delete budgets.
+* Access to the Plans page to view budget status.
 
-1. Navigate to **Plan** \> **Plan Usage** in the CircleCI web app  
-2. Click **Manage Budget** in the Budget Controls section  
-3. Toggle **Enable organization budget** to on  
-4. Enter your weekly credit limit in the **Organization budget limit** field  
-5. Click **Save**
+== Setting up budget controls
+
+Thw following steps show you how to set up budget controls for your organization and projects.
+
+=== Create an organization budget
+
+. Navigate to menu:Plan[Plan Usage] in the CircleCI web app sidebar.
+. Select **Manage Budget** in the Budget Controls section.
+. Toggle **Enable organization budget** to on.
+. Enter your weekly credit limit in the **Organization budget limit** field.
+. Select btn:[Save].
 
 ### Create a project budget
 
-1. Navigate to the project you want to set a budget for  
-2. Click **Project Settings**  
-3. Select **Budget** from the left sidebar  
-4. Toggle **Enable project budget** to on  
-5. Enter your weekly credit limit in the **Project budget limit** field  
-6. Click **Save**
+. In the link:https://app.circleci.com[CircleCI web app] select *Projects* in the sidebar and find the project you want to set a budget for.
+. Select btn:[Overview] and then btn:[Settings] to enter the project settings page.
+. Select **Budget** from the left sidebar.
+. Toggle **Enable project budget** to on.
+. Enter your weekly credit limit in the **Project budget limit** field.
+. Select btn:[Save].
 
