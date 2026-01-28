@@ -1176,8 +1176,7 @@ When running multiple `testsuite` commands as sequential steps in a single paral
 
 While this issue only occurs when parallelism is enabled, we recommend always using separate jobs for each test suite as a best practice.
 
-*Problematic configuration:*
-
+.Problematic configuration
 [source,yaml]
 ----
 jobs:
