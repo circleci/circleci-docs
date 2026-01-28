@@ -3592,7 +3592,7 @@ workflows:
       - deploy
 ----
 
-For all other expressions, you must use the `<< >>` delimiters to mark the expression as an expression, as shown in other examples in this section.
+For all other configuration fields, you must use the `<< >>` delimiters to mark the expression as an expression, as shown in other examples in this section.
 
 [#expressions-in-strings]
 === Expressions within strings
