@@ -594,8 +594,11 @@ You can use the CircleCI CLI to split your test suite across parallel containers
 * Refer to the xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to split tests] how-to guide.
 * Follow the xref:guides:test:test-splitting-tutorial.adoc#[Test splitting tutorial].
 
-*Example:*
-
+[tabs]
+====
+Use an integer::
++
+--
 [,yaml]
 ----
 jobs:
@@ -610,7 +613,26 @@ jobs:
     steps:
       - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
 ----
-
+--
+Use an expression::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.12
+    environment:
+      FOO: bar
+    parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go list ./... | circleci tests run --command "xargs gotestsum --junitfile junit.xml --format testname --" --split-by=timings --timings-type=name
+----
+--
+====
 '''
 
 [#parameters-job]
@@ -641,7 +663,7 @@ jobs:
       my-parameter:
         type: integer
         default: 1
-    parallelism: << parameters.p >>
+    parallelism: << parameters.my-parameter >>
     docker:
       - image: cimg/base:2023.11
     steps:
@@ -853,7 +875,7 @@ The machine executor is configured using the `machine` key, which takes a map:
 | `image`
 | Y
 | String
-| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Machine provisioner documentation].
+| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI Server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Machine provisioner documentation].
 
 | `docker_layer_caching`
 | N
@@ -913,7 +935,7 @@ The machine executor supports xref:guides:optimize:docker-layer-caching.adoc#[Do
 [#available-linux-machine-images-server]
 ==== Linux `machine` images on server
 
-If you are using CircleCI server, contact your system administrator for details of available Linux machine images.
+If you are using CircleCI Server, contact your system administrator for details of available Linux machine images.
 
 '''
 
@@ -969,7 +991,7 @@ Alternatively, use the link:https://circleci.com/developer/orbs/orb/circleci/win
 [#available-windows-machine-images-server]
 ==== Windows `machine` images on server
 
-If you are using CircleCI server, contact your system administrator for details of available Windows machine images.
+If you are using CircleCI Server, contact your system administrator for details of available Windows machine images.
 
 '''
 
@@ -1066,8 +1088,7 @@ jobs:
 [#docker-execution-environment]
 === Docker execution environment
 
-*Example:*
-
+.Set a resource class for a Docker job
 [,yaml]
 ----
 jobs:
@@ -1075,6 +1096,18 @@ jobs:
     docker:
       - image: cimg/base:2024.12
     resource_class: xlarge
+    steps:
+      ... // other config
+----
+
+.Set a resource class for a Docker job using an expression
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: << pipeline.git.branch == "main" and xlarge or medium >>
     steps:
       ... // other config
 ----
@@ -1154,7 +1187,7 @@ jobs:
 [#macos-server]
 ==== macOS execution environment on server
 
-If you are working on CircleCI server you can access the macOS execution environment using xref:guides:execution-runner:runner-overview.adoc#[self-hosted runner].
+If you are working on CircleCI Server you can access the macOS execution environment using xref:guides:execution-runner:runner-overview.adoc#[self-hosted runner].
 
 '''
 
@@ -1813,7 +1846,7 @@ NOTE: The `checkout` step will configure Git to skip automatic garbage collectio
 [NOTE]
 ====
 * `setup_remote_docker` is not compatible with the `machine` executor. See xref:guides:optimize:docker-layer-caching.adoc#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
-* The `version` key is not currently supported on CircleCI server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#default-aws-ami-lists[here].
+* The `version` key is not currently supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#default-aws-ami-lists[here].
 ====
 
 Allows Docker commands to be run locally. See xref:guides:execution-managed:building-docker-images.adoc#[Running Docker commands] for details.
@@ -2868,10 +2901,11 @@ Jobs may be configured to use global environment variables set for an organizati
 | `context`
 | N
 | String/List
-| The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
+| The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI Server, only a single context per workflow is supported. *Note:* A maximum of 100 unique contexts across all workflows is allowed.
 |===
 --
 
+.Use a context for a job
 [,yml]
 ----
 workflows:
@@ -2892,6 +2926,18 @@ workflows:
           context:
             - org-global
             - project-global
+----
+
+You can also use an expression to determine the contexts for a job:
+
+.Use an expression to determine the contexts for a job
+[,yml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - my-job:
+          context: << pipeline.git.branch == "main" and "org-global" or "project-global" >>
 ----
 
 '''
@@ -3498,8 +3544,109 @@ workflows:
         - equal: [ staging, << pipeline.git.branch >> ]
 ----
 
+== Using expressions in your configuration
+
+CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, literals, and operators such as `and`, `or`, and comparison operators.
+
+[#expressions-in-config-fields]
+=== Expressions in configuration fields
+
+Configuration fields accept expressions either directly or as string values. When you provide a string value, you can use `<< >>` delimiters to mark a section of the string that should be interpreted as an expression.
+
+You can write the expression in a configuration field as shown in the following example:
+
+.Use expression to determin parallelism for a job
+[,yaml]
+----
+jobs:
+  test:
+    docker:
+      - image: cimg/base:current
+    parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+    steps:
+      - checkout
+      - run: run_tests
+----
+
+In this example, `parallelism` is set to `10` when running on the `main` branch, and `1` on all other branches.
+
+Use direct expressions in job filters and using `when` or `unless` in your workflows. For example:
+
+.Direct expression in a job filter
+[,yaml]
+----
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "release/"
+----
+
+.Workflow `when` expression
+[,yaml]
+----
+workflows:
+  deploy-workflow:
+    when: pipeline.git.tag starts-with "v" and pipeline.trigger_source == "webhook"
+    jobs:
+      - deploy
+----
+
+For all other configuration fields, you must use the `<< >>` delimiters to mark the expression as an expression, as shown in other examples in this section.
+
+[#expressions-in-strings]
+=== Expressions within strings
+
+When you need to include an expression within a larger string value, use `<< >>` delimiters to mark the expression:
+
+[,yaml]
+----
+- run:
+    name: Print branch info
+    command: |
+      echo "Running on << pipeline.git.branch or "unknown branch" >>"
+----
+
+In this example, the `<< >>` delimiters mark `pipeline.git.branch or "unknown branch"` as an expression. If `pipeline.git.branch` is null (for example, when the pipeline is triggered for a tag rather than a branch), the `or` operator provides the fallback value "unknown branch".
+
+[#conditional-logic-example]
+=== Conditional logic example
+
+You can combine `and` and `or` to implement if-then-else style logic:
+
+[,yaml]
+----
+parallelism: << pipeline.git.branch == "main" and 10 or 1 >>
+----
+
+* If the condition `pipeline.git.branch == "main"` is true, the `and` expression evaluates to its second operand `10`.
+* If the condition is false, the `and` expression evaluates to false, and the `or` expression returns the fallback value `1`.
+
+[#expression-operators]
+=== Expression operators
+
+The operators you can use for expressions are described in the following table. You can also group sub-expressions with parentheses `(`, `)`.
+
+include::guides:ROOT:partial$using-expressions/operators.adoc[]
+
+[#valid-parameter-names]
+=== Valid parameter names
+
+To use a pipeline parameter in an expression, the parameter name must follow these rules:
+
+* Start with a letter.
+* Can contain upper-case letters (`A`-`Z`) and lower-case letters (`a`-`z`).
+* Can contain digits (`0`-`9`).
+* Can contain hyphens (`-`), underscores (`_`), and periods (`.`).
+* Cannot contain consecutive periods (`..`).
+
+[NOTE]
+====
+If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
+====
+
 [#logic-statement-examples]
-=== Logic statement examples
+=== Logic statement and expression examples
 
 You can find usage examples on the xref:guides:orchestrate:orchestration-cookbook.adoc#["Orchestration cookbook"] page.
 
