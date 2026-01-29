@@ -77,7 +77,7 @@ The following steps show you how to set up budget controls for your organization
 . Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
 . Scroll down to the *Credit Budget* section.
 . Locate the budget you want to edit (organization or project).
-. Select the corresponding budget trash bin icon.
+. Select the corresponding budget trash bin icon image:guides:ROOT:icons/delete.svg[trash icon, role="no-border"].
 . Confirm the deletion by selecting btn:[Delete budget].
 
 NOTE: Deleting a budget immediately stops budget tracking and removes all budget notifications for that organization or project. Budget consumption data from previous cycles is not deleted.
