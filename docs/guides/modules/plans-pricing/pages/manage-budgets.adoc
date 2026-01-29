@@ -28,6 +28,7 @@ Your budget limits track credits consumed across:
 * **Storage costs** for artifact and workspace storage.
 * **IP ranges** usage, to restrict traffic to specific IP ranges.
 * **Network usage**, data transfer costs.
+* **AI agents** usage.
 
 == Prerequisites
 
@@ -43,18 +44,40 @@ The following steps show you how to set up budget controls for your organization
 
 === Create an organization budget
 
-. Navigate to menu:Plan[Plan Usage] in the CircleCI web app sidebar.
-. Select **Manage Budget** in the Budget Controls section.
-. Toggle **Enable organization budget** to on.
-. Enter your weekly credit limit in the **Organization budget limit** field.
+. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
+. Scroll down to the *Credit Budget* section.
+. Select btn:[Add organization budget] to open the add organization budget modal.
+. Enter your weekly credit limit in the text field.
 . Select btn:[Save].
 
-### Create a project budget
+=== Create a project budget
 
-. In the link:https://app.circleci.com[CircleCI web app] select *Projects* in the sidebar and find the project you want to set a budget for.
-. Select btn:[Overview] and then btn:[Settings] to enter the project settings page.
-. Select **Budget** from the left sidebar.
-. Toggle **Enable project budget** to on.
-. Enter your weekly credit limit in the **Project budget limit** field.
+. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
+. Scroll down to the *Credit Budget* section.
+. Select btn:[Add project budget] to open the add project budget modal.
+. Search for your project by name.
+. Enter your weekly credit limit in the text field.
 . Select btn:[Save].
 
+=== Edit a budget
+
+. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
+. Scroll down to the *Credit Budget* section.
+. Locate the budget you want to edit (organization or project).
+. Selectthe corresponding budget edit icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
+. Update the credit budget limit in the text field.
+. Select btn:[Save].
+
+=== Delete a budget
+
+. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
+. Scroll down to the *Credit Budget* section.
+. Locate the budget you want to edit (organization or project).
+. Select the corresponding budget trash bin icon.
+. Confirm the deletion by selecting btn:[Delete budget].
+
+NOTE: Deleting a budget immediately stops budget tracking and removes all budget notifications for that organization or project. Budget consumption data from previous cycles is not deleted.
