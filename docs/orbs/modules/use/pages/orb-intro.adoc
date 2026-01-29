@@ -14,18 +14,24 @@ Use orbs to:
 == Introduction
 
 Orbs are reusable packages of parameterizable configuration that can be used in any project. They are made up of reusable configuration elements, for example:
-* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[jobs]
-* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[commands]
-* xref:reference:ROOT:reusing-config.adoc#executor[executors].
+
+* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs].
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands].
+* xref:reference:ROOT:reusing-config.adoc#executors[Executors].
 
 CircleCI supports two types of orbs:
 
-*Registry orbs*:: Orbs that are developed and published using the orb publishing process. SemVer-based versioning is used to manage the versions of registry orbs. Registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry]
-*URL orbs*:: Orbs that are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry. URL orbs do not follow semantic versioning, and can be accessed directly using an `https` URL. An org-level allow list is used to manage the addresses of URL orbs that can be used in a project in that organization. Manage the allow list at menu:Organization Settings[Orbs]. See the xref:managing-url-orbs-allow-lists.adoc[Managing URL orb allow-lists] guide for more information on scoping allowed URL orbs for your organization.
+*Registry orbs*:: Registry orbs are developed and published using the "orb publishing process", which is described in the xref:author:creating-orbs.adoc[Publishing Orbs] guide. Semantic versioning is used to manage the versions of registry orbs. Registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry]
++
+Registry orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
++
+If you would like to author your own registry orb, read more on the xref:author:orb-author.adoc[Introduction to Authoring Orbs] page.
 
-Orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
-
-If you would like to author your own orb, read more on the xref:author:orb-author.adoc[Introduction to Authoring Orbs] page.
+*URL orbs*:: URL orbs are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry.
++
+URL orbs do not follow semantic versioning, and can be accessed directly using an `https` URL. An org-level allow list is used to manage the addresses of URL orbs that can be used in a project in that organization. Manage the allow list at menu:Organization Settings[Orbs].
++
+See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
 
 [#quickstart]
 == Quickstart
@@ -37,11 +43,11 @@ If you would like to author your own orb, read more on the xref:author:orb-autho
 [#use-an-orb]
 == Use a registry orb
 
-A registry orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed by an `@` symbol and a xref:author:orb-concepts.adoc#semantic-versioning[semantic version] string, identifying which version of the orb is being used. For example: `<namespace>/<orb-name>@1.2.3`.
+A registry orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name is followed by an `@` symbol and a xref:author:orb-concepts.adoc#semantic-versioning[Semantic Version] string, to identify which version of the orb to used. For example: `<namespace>/<orb-name>@1.2.3`.
 
-Each orb within the link:https://circleci.com/developer/orbs[registry] provides a link:https://circleci.com/developer/orbs/orb/circleci/node#quick-start[quickstart guide], which contains a sample code snippet for importing that specific orb, with its most recent version, into your `.circleci/config.yml`.
+Each orb within the link:https://circleci.com/developer/orbs[Registry] provides a link:https://circleci.com/developer/orbs/orb/circleci/node#quick-start[Quickstart Guide], which contains a sample code snippet for importing that specific orb, with its most recent version, into your CircleCI configuration file.
 
-The example below shows how to import any orb into your CircleCI configuration file. Use the tabs to switch between a generic layout for importing any orb, and a specific example of importing the Node.JS orb:
+The example below shows how to import any orb into your CircleCI configuration file. Use the tabs to switch between a generic layout for importing any orb, and a specific example of importing the Node orb:
 
 [tabs]
 ====
@@ -71,15 +77,22 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors. The parameters available for each element are listed in the orb registry in a table under each element.
 
-Most orbs will also include usage examples detailing common functionality, to further simplify the process of incorporating them into your projects. If you would like to contribute to an existing orb, or file an issue on the orb's repository, many orb authors will include the git repository link.
+Most orbs include usage examples detailing common functionality. If you would like to contribute to an existing orb, or file an issue on the orb's repository, most orb authors include the git repository link.
 
-Orb elements can be used in the same way as xref:reference:ROOT:reusing-config.adoc[reusable configuration] elements. The Node example below shows how to use an orb's default executor, and an orb command.
+Orb elements can be used in the same way as xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] elements. The Node example below shows how to use an orb's default executor, and an orb command.
 
 [#node-example]
 === Node example
 
-The Node orb provides a command, link:https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages[`install-packages`], to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's xref:reference:ROOT:configuration-reference.adoc#steps[steps].
+The Node orb provides a command, link:https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages[`install-packages`]. This command includes steps to:
 
+* Install your node packages.
+* Automatically enable caching.
+* Provide additional options through the use of parameters.
+
+To use the `install-packages` command, reference it in a step as follows:.
+
+.Using the `install-packages` command in a steps
 [,yaml]
 ----
 version: 2.1
@@ -123,7 +136,7 @@ Orbs let you pull in pre-defined, parameterized configuration elements into your
 
 [tabs]
 ====
-With Orbs::
+With the orb::
 +
 --
 [,yaml]
@@ -140,7 +153,7 @@ workflows:
           version: <node-version> # replace node version
 ----
 --
-Without orbs::
+Without the orb::
 +
 --
 [,yaml]
@@ -178,8 +191,9 @@ workflows:
 [#the-orb-registry]
 == The orb registry
 
-The link:https://circleci.com/developer/orbs[Orb Registry] is an open repository of all published orbs. Find the orb for your stack or consider developing and xref:author:orb-author.adoc[publishing your own orb].
+The link:https://circleci.com/developer/orbs[Orb Registry] is an open repository of all published registry orbs. Find the orb for your stack or consider developing and publishing your own orb. Find more information on xref:author:orb-author.adoc[Authoring Orbs].
 
+.The Orb Registry
 image::guides:ROOT:orbs-registry.png[Orb Registry]
 
 [#orb-designation]
@@ -209,28 +223,28 @@ Orbs in the registry will appear with one of three different namespace designati
 [#public-or-private]
 === Public or private
 
-Orbs can be published in one of two ways:
+Registry orbs can be published in one of two ways:
 
-* *Public*: Searchable in the orb registry, and available for anyone to use
-* *Private*: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated
+*Public registry orbs*:: Searchable in the orb registry, and available for anyone to use.
+*Private registry orbs*:: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated.
 
-To understand these concepts further, read the xref:author:orb-concepts.adoc#private-orbs-vs-public-orbs[Public Orbs vs Private Orbs] section of the Orb Concepts page.
+To understand these concepts further, read the xref:author:orb-concepts.adoc#private-orbs-vs-public-orbs[Public Orbs Vs Private Orbs] section of the orb concepts page.
 
 [#orbs-view]
 == Orbs page in the CircleCI app
 
-NOTE: The orbs page in the CircleCI web app is not currently available on CircleCI server.
+NOTE: The orbs page in the CircleCI web app is *not available* on CircleCI Server.
 
-NOTE: Private orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
+NOTE: Private registry orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
 
 To access the orbs page in the web app, navigate to *Organization Settings* and select *Orbs* from the sidebar.
 
 The orbs page lists orbs created within your organization. You can view:
 
-* Orb type (public or private)
-* Orb usage (how many times the orb is used across all configurations)
-* Latest version
-* Description
+* Orb type (public or private registry orb).
+* Orb usage (how many times the orb is used across all configurations).
+* Latest version.
+* Description.
 
 Full orb details, including orb source, are accessible by clicking on the orb name. The orb details page is similar to the CircleCI orb registry in that the details page provides the orb's contents, commands, and usage examples.
 
