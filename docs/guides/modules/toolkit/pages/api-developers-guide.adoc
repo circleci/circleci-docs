@@ -241,7 +241,7 @@ You will likely receive a long string of unformatted JSON. After formatting, it 
 
 . One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet triggers a pipeline via `curl` without any body parameters:
 +
-CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+CAUTION: For GitHub App, GitLab or Bitbucket Data Center pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 +
 [,shell]
 ----
