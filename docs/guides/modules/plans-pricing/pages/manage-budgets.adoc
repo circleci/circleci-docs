@@ -67,7 +67,7 @@ The following steps show you how to set up budget controls for your organization
 . Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
 . Scroll down to the *Credit Budget* section.
 . Locate the budget you want to edit (organization or project).
-. Selectthe corresponding budget edit icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
+. Select the corresponding budget edit icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
 . Update the credit budget limit in the text field.
 . Select btn:[Save].
 
