@@ -51,7 +51,7 @@ Error: config compilation contains errors: config compilation contains errors:
 [#orb-development-kit]
 == Orb development kit
 
-The xref:orbs:author:orb-author.adoc#create-test-and-publish-an-orb[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. The orb development kit has two commands:
+The xref:orbs:author:orb-author.adoc#orb-development-kit[Orb Development Kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[registry orb] development process, with automatic testing and deployment on CircleCI. The orb development kit has two commands:
 
 * The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[initializes a new orb project]:
 +

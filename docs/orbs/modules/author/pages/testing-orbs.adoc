@@ -1,4 +1,4 @@
-= Orb testing methodologies
+= Registry orb testing methodologies
 :page-platform: Cloud, Server v4+
 :page-description: Starting point for Testing CircleCI Orbs
 :experimental:
