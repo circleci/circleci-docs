@@ -10,7 +10,7 @@ Teams who take advantage of a configuration translation service save time by:
 
 * Having your field engineer write your CircleCI configuration.
 * Having example configuration for other migrating projects that has been written by CircleCI experts.
-* Not having to exhaustively research CircleCI features and how they fit into your use case.
+* Can lean on their field engineer to research how to implement CircleCI for their use case.
 * Adding your field engineer to your migration team who can consult on the CircleCI aspects of the migration process.
 
 == Intended Audience

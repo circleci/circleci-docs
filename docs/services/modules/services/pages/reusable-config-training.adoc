@@ -13,6 +13,6 @@ Teams who attend a reusable configuration training:
 * Reduce the maintenance overhead of managing configuration files in multiple repositories.
 * Ease the onboarding process of new projects.
 
-== Target Audience
+== Intended Audience
 
 This training is intended to educate teams on the paths available when writing and maintaining configuration files for multiple repositories. Users who are responsible for their organization's CI configuration will benefit the most.

@@ -8,9 +8,9 @@ The cost optimization analysis service is an engagement through which your field
 
 Teams who take advantage of a cost optimization analysis save credits by:
 
-* Having your field engineer provide a report of jobs across all projects that could benefit from right-sizing their resource classes.
-* Having your field engineer recommend features and caching strategies for jobs across projects.
-* Not having to exhaustively analyze your own jobs across your organization.
+* Receiving a report of jobs across all projects that could benefit from right-sizing their resource classes.
+* Having  features and caching strategies recommended for jobs across your organization.
+* Leaning on their field engineer analyze your own jobs across your organization.
 * Learning how your field engineer uses the data provided by CircleCI to analyze your organization.
 
 == Intended Audience
