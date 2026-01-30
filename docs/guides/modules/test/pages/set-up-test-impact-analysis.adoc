@@ -1167,3 +1167,45 @@ The argument to <<cli-flags,--test-selection>> can be a CircleCI configuration t
 * Scheduled pipelines.
 
 See the <<run-analysis-on-non-default-branch,Run analysis on a non-default and selection on all other branches>> example for an example of customizing branch behavior.
+
+=== Can I run multiple test suites in the same job?
+
+No, this is not recommended and may produce unreliable results.
+
+When running multiple `testsuite` commands as sequential steps in a single parallelized job, parallel nodes executing at different speeds can cause tests from one test suite (for example, "integration-tests") to run with another test suite's configuration (for example, "unit-tests"). 
+
+While this issue only occurs when parallelism is enabled, we recommend always using separate jobs for each test suite as a best practice.
+
+.Problematic configuration
+[source,yaml]
+----
+jobs:
+  test-all:
+    parallelism: 2
+    steps:
+      - run: circleci run testsuite "unit-tests"
+      - run: circleci run testsuite "integration-tests"
+----
+
+.Recommended approach - use separate jobs
+[source,yaml]
+----
+workflows:
+  test:
+    jobs:
+      - test-unit
+      - test-integration
+
+jobs:
+  test-unit:
+    parallelism: 2
+    steps:
+      - run: circleci run testsuite "unit-tests"
+  
+  test-integration:
+    parallelism: 2
+    steps:
+      - run: circleci run testsuite "integration-tests"
+----
+
+

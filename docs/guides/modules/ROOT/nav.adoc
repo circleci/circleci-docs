@@ -129,14 +129,6 @@
 *** xref:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-windows.adoc[Migrate from launch agent to machine runner 3 on Windows]
 *** xref:execution-runner:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
 
-** Machine runner
-*** xref:execution-runner:runner-installation-linux.adoc[Linux installation]
-*** xref:execution-runner:runner-installation-windows.adoc[Windows installation]
-*** xref:execution-runner:runner-installation-mac.adoc[macOS installation]
-*** xref:execution-runner:runner-installation-docker.adoc[Docker installation]
-*** xref:execution-runner:runner-config-reference.adoc[Machine runner configuration reference]
-*** xref:execution-runner:runner-upgrading-on-server.adoc[Upgrade machine runner on server]
-
 ** Self-hosted runner reference
 *** xref:execution-runner:runner-api.adoc[Self-hosted runner API]
 *** xref:execution-runner:runner-faqs.adoc[Self-hosted runner FAQ]
