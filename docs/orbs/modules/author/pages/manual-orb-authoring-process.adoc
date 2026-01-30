@@ -4,7 +4,7 @@
 :experimental:
 :page-aliases: orb-author-validate-publish
 
-This guide covers the steps required to create a simple registry xref:use:orb-intro.adoc[orb], manually, without using the orb development kit. We recommend the xref:orb-development-kit.adoc[orb development kit] for most orb projects.
+This guide covers the steps required to create a simple registry xref:use:orb-intro.adoc[orb], manually, without using the orb development kit. We recommend the xref:orb-author.adoc#orb-development-kit[Orb Development Kit] for most registry orb projects.
 
 [#create-a-namespace]
 == 1. Create a namespace

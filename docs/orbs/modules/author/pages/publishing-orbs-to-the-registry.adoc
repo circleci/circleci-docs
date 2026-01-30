@@ -16,7 +16,7 @@ CAUTION: If your orb is private, it will not be searchable on the Orb Registry. 
 .Flow diagram of the orb registry publishing process.
 image::guides:ROOT:orb-publishing-process.png[Orb Publishing Process]
 
-If you are publishing your orb using the xref:orb-development-kit.adoc[orb development kit], rather than xref:manual-orb-authoring-process.adoc[manually], semantic releases are straight-forward using the steps set out in this section. You can find a simplified version of the publishing process in the link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[README.md] file that the `circleci orb init` command generates at the start of the authoring process.
+If you are publishing your orb using the xref:orb-author.adoc#orb-development-kit[orb development kit], rather than xref:manual-orb-authoring-process.adoc[manually], semantic releases are straight-forward using the steps set out in this section. You can find a simplified version of the publishing process in the link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[README.md] file that the `circleci orb init` command generates at the start of the authoring process.
 
 [#issue-a-new-release-with-the-orb-development-kit]
 == Issue a new release with the orb development kit
