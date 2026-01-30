@@ -33,13 +33,6 @@ URL orbs do not follow semantic versioning, and can be accessed directly using a
 +
 See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
 
-[#quickstart]
-== Quickstart
-
-* Follow our xref:guides:getting-started:language-javascript.adoc[Node.js project quickstart guide].
-* Follow our xref:guides:getting-started:language-python.adoc[Python project quickstart guide].
-* Set up notifications using the xref:guides:getting-started:slack-orb-tutorial.adoc[Slack orb].
-
 [#use-an-orb]
 == Use a registry orb
 
@@ -81,9 +74,6 @@ Most orbs include usage examples detailing common functionality. If you would li
 
 Orb elements can be used in the same way as xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] elements. The Node example below shows how to use an orb's default executor, and an orb command.
 
-[#node-example]
-=== Node example
-
 The Node orb provides a command, link:https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages[`install-packages`]. This command includes steps to:
 
 * Install your node packages.
@@ -124,7 +114,7 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors.
 
-If you would like to author your own URL orb, see the xref:author:authoring-url-orbs.adoc[Authoring URL orbs] guide.
+If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs] guide.
 
 [#benefits-of-using-orbs]
 == Benefits of using orbs
@@ -189,6 +179,21 @@ workflows:
 ----
 --
 ====
+
+== URL vs registry orbs
+
+Choose a registry orb when:
+
+* You want to share your orb with the community.
+* You want to use a versioned orb.
+* You want to use an orb that is published to the CircleCI Orb Registry.
+
+Choose a URL orb when:
+
+* You want to use centralized configuration for your organization.
+* You need to share configuration within your organization.
+* You need to direct control over updates and distribution.
+* You need to use proprietary or confidential configurations.
 
 [#the-orb-registry]
 == The orb registry

@@ -290,7 +290,7 @@ By choosing to use a private orb instead of a public orb, you also need to under
 
 Both public and private orbs can be authored in two ways:
 
-* Using the xref:orb-author-validate-publish.adoc[manual Orb Authoring Process]
+* Using the xref:manual-orb-authoring-process.adoc[manual Orb Authoring Process]
 * Using the xref:orb-development-kit.adoc[orb development kit] (recommended)
 
 [#orb-packing]

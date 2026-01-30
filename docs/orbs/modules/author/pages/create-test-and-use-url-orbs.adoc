@@ -1,4 +1,4 @@
-= Authoring URL orbs
+= Create, test, and use URL orbs
 :page-platform: Cloud
 :page-description: How to author URL orbs for your organization
 :experimental:

@@ -1,9 +1,10 @@
-= Manual orb authoring process
+= Manual registry orb authoring process
 :page-platform: Cloud, Server v4+
 :page-description: Authoring simple orbs manually without the orb development kit.
 :experimental:
+:page-aliases: orb-author-validate-publish
 
-This guide covers the steps required to create a simple xref:use:orb-intro.adoc[orb], manually, without using the orb development kit. We recommend the xref:orb-development-kit.adoc[orb development kit] for most orb projects.
+This guide covers the steps required to create a simple registry xref:use:orb-intro.adoc[orb], manually, without using the orb development kit. We recommend the xref:orb-development-kit.adoc[orb development kit] for most orb projects.
 
 [#create-a-namespace]
 == 1. Create a namespace

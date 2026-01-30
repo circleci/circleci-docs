@@ -1,4 +1,4 @@
-= Orbs authoring best practices
+= Registry orb authoring best practices
 :page-platform: Cloud, Server v4+
 :page-description: A reference guide to best practices for developing orbs.
 :experimental:

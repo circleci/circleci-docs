@@ -1,20 +1,22 @@
-= Publishing orbs
+= Publishing orbs to the orb registry
 :page-platform: Cloud
 :page-description: Publishing Orbs to the Orb Registry
 :experimental:
+:page-aliases: creating-orbs
 
-This guide covers the steps required to publish an orb.
+This guide covers the steps required to publish a registry orb to the link:https://circleci.com/developer/orbs[orb registry].
 
 [#introduction]
 == Introduction
 
-After authoring your orb, you can publish it with a xref:orb-concepts.adoc#semantic-versioning[semantically versioned] tag, and the orb will appear on the link:https://circleci.com/developer/orbs[Orb Registry].
+After authoring your orb, you can publish it with a xref:orb-concepts.adoc#semantic-versioning[semantically versioned] tag, and the orb will appear on the link:https://circleci.com/developer/orbs[orb registry].
 
 CAUTION: If your orb is private, it will not be searchable on the Orb Registry. However, the URL will be accessible to authenticated users of the orb.
 
+.Flow diagram of the orb registry publishing process.
 image::guides:ROOT:orb-publishing-process.png[Orb Publishing Process]
 
-If you are publishing your orb using the xref:orb-development-kit.adoc[orb development kit], rather than xref:orb-author-validate-publish.adoc[manually], semantic releases are straight-forward using the steps set out in this section. You can find a simplified version of the publishing process in the link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[README.md] file that the `circleci orb init` command generates at the start of the authoring process.
+If you are publishing your orb using the xref:orb-development-kit.adoc[orb development kit], rather than xref:manual-orb-authoring-process.adoc[manually], semantic releases are straight-forward using the steps set out in this section. You can find a simplified version of the publishing process in the link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[README.md] file that the `circleci orb init` command generates at the start of the authoring process.
 
 [#issue-a-new-release-with-the-orb-development-kit]
 == Issue a new release with the orb development kit
