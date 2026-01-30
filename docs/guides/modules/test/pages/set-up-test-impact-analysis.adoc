@@ -87,6 +87,7 @@ Different template variables are available for coverage output, depending on the
 
 *LCOV*:: `<< outputs.lcov >>`
 *Go's coverage format*:: `<< outputs.go-coverage >>`
+*CircleCI coverage format*:: `<< outputs.circleci-coverage >>`
 
 Your `analysis` command should use the output variable for the coverage format it produces.
 
@@ -193,6 +194,9 @@ options:
 ----
 
 pytest::
+
+Add the link:https://github.com/circleci/pytest-circleci-coverage[pytest-circleci-coverage] plugin as a dev dependency.
+
 +
 [source,yaml]
 ----
@@ -212,8 +216,9 @@ analysis: |
          --no-header \
          --quiet \
          --tb=short \
-         --cov \
-         --cov-report=lcov:<< outputs.lcov >> \
+         --cov=myproj \
+         --cov-context=test \
+         --circleci-coverage=<< outputs.circleci-coverage >> \
          << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
@@ -504,12 +509,6 @@ If you would like assistance, share the coverage file in the preview Slack chann
 . Review the `full-test-run-paths` option - changes to any of these paths trigger a full test run.
 . Confirm the analysis command is producing valid coverage output, and that you are using the appropriate `outputs` variable for the coverage format.
 
-==== Test impact analysis finds many more files impacting a test than it should
-
-Analysis is based off the code covered by running an individual test atom. Sometimes the language runtime or test runner will eagerly load code as part of the test run setup. This behavior can lead to all the eagerly loaded code being considered covered by the test atom though it is only an artifact of running the test suite.
-
-In these cases you can set an <<analysis-baseline-command,analysis-baseline command>> which can account for this code coverage.
-
 == 3. Run your test suite in your CircleCI job
 
 TIP: When adding the testsuite command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers.
@@ -798,202 +797,6 @@ analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover 
 file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
 ----
 ====
-
-[#analysis-baseline-command]
-=== Use the analysis-baseline command when test atoms cover too many files
-
-If you see many files impacting each test during analysis, for example, `Found 150 files impacting test...`, this may be caused by shared setup code like global imports or framework initialization being included in coverage.
-
-This extraneous coverage can be excluded by providing an `analysis-baseline` command to compute the code covered during startup that isn't directly exercised by test code. We call this "baseline coverage data".
-
-The `analysis-baseline` command must produce coverage output written to a coverage template variable. The baseline coverage data can be in any supported coverage format. While it does not need to match your test coverage output format, using the same format (for example, LCOV format for `<< outputs.lcov >>`) is recommended for consistency.
-
-. Create a minimal test that only does imports/setup (no test logic), in the `vitest` example below this is called `src/baseline/noop.test.ts`.
-. Add an `analysis-baseline` command to your test suite. This command will be broadly similar to your `analysis` command, except that it should only run the minimal test.
-
-
-[tabs]
-====
-Vitest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: vitest list --filesOnly
-run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
-analysis: |
-  vitest run --coverage.enabled \
-             --coverage.all=false \
-             --coverage.reporter=lcov \
-             --coverage.provider=v8 \
-             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
-             --bail 0 \
-             << test.atoms >> \
-             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
-analysis-baseline: |
-  vitest run --coverage.enabled \
-             --coverage.all=false \
-             --coverage.reporter=lcov \
-             --coverage.provider=v8 \
-             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
-             --bail 0 \
-             "src/baseline/noop.test.ts" \
-             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
-outputs:
-  junit: test-reports/tests.xml
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 5
-----
-
-Jest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: jest --listTests
-run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
-analysis: |
-  jest --runInBand \
-       --silent \
-       --coverage \
-       --coverageProvider=v8 \
-       --coverageReporters=lcovonly \
-       --coverage-directory="$(dirname << outputs.lcov >>)" \
-       --bail \
-       << test.atoms >> \
-       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
-analysis-baseline: |
-  jest --runInBand \
-       --silent \
-       --coverage \
-       --coverageProvider=v8 \
-       --coverageReporters=lcovonly \
-       --coverage-directory="$(dirname << outputs.lcov >>)" \
-       --bail \
-       "src/baseline/noop.test.ts" \
-       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
-outputs:
-  junit: test-reports/tests.xml
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 5
-----
-
-Yarn with Jest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: yarn --silent test --listTests
-run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" yarn test --runInBand --reporters=jest-junit --bail << test.atoms >>
-analysis: |
-  yarn test --runInBand \
-            --coverage \
-            --coverageProvider=v8 \
-            --coverageReporters=lcovonly \
-            --coverage-directory="$(dirname << outputs.lcov >>)" \
-            --bail \
-            << test.atoms >> \
-            && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
-analysis-baseline: |
-  yarn test --runInBand \
-            --coverage \
-            --coverageProvider=v8 \
-            --coverageReporters=lcovonly \
-            --coverage-directory="$(dirname << outputs.lcov >>)" \
-            --bail \
-            "src/baseline/noop.test.ts" \
-            && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
-outputs:
-  junit: test-reports/tests.xml
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 5
-----
-
-pytest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: find ./tests -type f -name 'test*.py'
-run: |
-  pytest --disable-pytest-warnings \
-         --no-header \
-         --quiet \
-         --tb=short \
-         --junit-xml="<< outputs.junit >>" \
-         << test.atoms >>
-analysis: |
-  pytest --disable-pytest-warnings \
-         --no-header \
-         --quiet \
-         --tb=short \
-         --cov \
-         --cov-report=lcov:<< outputs.lcov >> \
-         << test.atoms >>
-analysis-baseline: |
-  pytest --disable-pytest-warnings \
-         --no-header \
-         --quiet \
-         --tb=short \
-         --cov \
-         --cov-report=lcov:<< outputs.lcov >> \
-         "test/noop/noop_test.py"
-outputs:
-  junit: test-reports/tests.xml
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 5
-----
-
-Go::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
-run: go test -race -count=1 << test.atoms >>
-analysis: go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
-analysis-baseline: go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... ./noop_test
-outputs:
-  junit: test-reports/tests.xml
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 5
-----
-
-Go with gotestsum::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
-run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
-analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
-analysis-baseline: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... ./noop_test
-outputs:
-  junit: test-reports/tests.xml
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 5
-----
-====
-
-The `analysis-baseline` command will be run just before running analysis. The coverage data produced by the `analysis-baseline` command will be subtracted from each test's coverage during analysis. Rerun analysis and you should see fewer impacting files per test.
 
 [#set-up-examples]
 == Common setup examples
