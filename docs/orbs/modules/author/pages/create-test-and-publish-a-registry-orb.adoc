@@ -30,7 +30,7 @@ circleci update
 
 circleci version
 ```
-* xref:orb-author.adoc#register-a-namespace[Register a namespace] for your GitHub organization. Every organization registered on CircleCI is able to claim *one* unique xref:orb-concepts.adoc#namespaces[namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
+* Register a namespace for your GitHub organization. Every organization registered on CircleCI is able to claim *one* unique xref:orb-concepts.adoc#namespaces[namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
 +
 Enter the following command to claim your namespace, if you have not yet claimed one:
 +
@@ -147,7 +147,7 @@ You will be provided with a link to the project building on CircleCI where you c
 
 === 8. Develop your orb
 
-From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to fit your requirements. On each _push_, your orb will be automatically built and tested. More information on developing your orb can be found on the xref:orb-author.adoc#writing-your-orb[Orb authoring process] page.
+From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to fit your requirements. On each _push_, your orb will be automatically built and tested. More information on developing your orb can be found in the next section.
 
 Be sure to view the `.circleci/test-deploy` link:https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml[file] to view how your orb components are being tested. You can modify your tests as you change your orb. Learn more about testing your orb on the xref:testing-orbs.adoc[Orb testing methodologies] page.
 

@@ -325,7 +325,7 @@ NOTE: If you are using the orb development kit, orb packing is handled automatic
 |===
 --
 
-In order to _pack_ an orb, an xref:orb-author.adoc#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[commands], xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[jobs], xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[executors], and <<usage-examples,examples>>. Any additional files or folders will be safely ignored.
+In order to _pack_ an orb, an xref:create-test-and-publish-a-registry-orb.adoc#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[commands], xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[jobs], xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[executors], and <<usage-examples,examples>>. Any additional files or folders will be safely ignored.
 
 Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the xref:orb-concepts.adoc#file-include-syntax[file include syntax] (`\<<include(file)>>`).
 
@@ -390,7 +390,7 @@ steps:
 
 File inclusion is especially useful for separating your configuration's Bash logic from your YAML. Including Bash scripts will allow you to develop and test your Bash outside of your orb.
 
-View more about including Bash scripts in the xref:orb-author.adoc#scripts[Orb Author] guide.
+View more about including Bash scripts in the xref:create-test-and-publish-a-registry-orb.adoc#scripts[Orb Author] guide.
 
 == Using orbs within your orb and register-time resolution
 
