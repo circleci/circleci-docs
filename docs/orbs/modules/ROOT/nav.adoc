@@ -3,6 +3,7 @@
 ** xref:use:managing-url-orbs-allow-lists.adoc[Managing URL orbs allow lists]
 * Author Orbs
 ** xref:author:orb-author.adoc[Introduction to authoring orbs]
+** xref:author:authoring-url-orbs.adoc[Authoring URL orbs]
 ** xref:author:orb-development-kit.adoc[Orb development kit]
 ** xref:author:create-an-orb.adoc[Create an orb with the development kit]
 ** xref:author:testing-orbs.adoc[Testing orbs]

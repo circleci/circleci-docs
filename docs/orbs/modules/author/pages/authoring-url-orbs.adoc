@@ -1,0 +1,462 @@
+= Authoring URL orbs
+:page-platform: Cloud
+:page-description: How to author URL orbs for your organization
+:experimental:
+:page-show-readtime: true
+
+This guide covers how to create URL orbs, URL orbs are reusable CircleCI configuration stored in an accessible location like a Git repository.
+
+== Introduction
+
+URL orbs are reusable packages of CircleCI configuration that can be stored in any accessible location (such as a Git repository or object storage) and referenced directly via URL in your CircleCI configuration files.
+
+URL orbs contain the same reusable configuration elements as registry orbs:
+
+* xref:orb-concepts.adoc#commands[Commands]
+* xref:orb-concepts.adoc#jobs[Jobs]
+* xref:orb-concepts.adoc#executors[Executors]
+
+The key difference from registry orbs is that URL orbs are not published to the link:https://circleci.com/developer/orbs[CircleCI Orb Registry]. Instead, they are stored in a location accessible to your organization and referenced directly by URL.
+
+[NOTE]
+====
+This guide covers **URL orbs**. For information on creating orbs that are published to the CircleCI Orb Registry, see xref:orb-author.adoc[Orb authoring process].
+====
+
+== When to use URL orbs
+
+Use URL orbs when:
+
+* You want to use centralized configuration for your organization.
+* You need to share configuration within your organization.
+* You need to direct control over updates and distribution.
+* You need to use proprietary or confidential configurations.
+
+== Prerequisites
+
+Before creating a URL orb:
+
+* Ensure your organization has configured the URL orb allow-list. See xref:use:managing-url-orbs-allow-lists.adoc[Managing URL orbs allow-lists].
+* Have access to a hosting location for your orb files (GitHub repository, S3 bucket, etc.).
+* Be familiar with xref:reference:ROOT:reusing-config.adoc[reusable configuration] concepts.
+
+== URL orb structure
+
+URL orbs are YAML files that follow the CircleCI orbs specification. Here is a basic structure:
+
+[,yaml]
+----
+version: 2.1
+
+description: >
+  A description of what your orb does.
+
+commands:
+  # Your reusable commands
+
+jobs:
+  # Your reusable jobs
+
+executors:
+  # Your reusable executors
+----
+
+[#creating-a-url-orb]
+== Creating a URL orb
+
+[#step-1-create-the-orb-file]
+=== Step 1: Create the orb file
+
+Create a YAML file with your orb configuration. For example, create a file named `platform-tools.yml`:
+
+.Example platform-tools.yml file to be used as a URL orb
+[,yaml]
+----
+version: 2.1
+
+description: >
+  Platform tools and utilities for our organization.
+
+commands:
+  install-cli:
+    description: Install our platform CLI tool
+    parameters:
+      version:
+        type: string
+        default: "latest"
+        description: Version of the CLI to install
+    steps:
+      - run:
+          name: Install Platform CLI
+          command: |
+            echo "Installing platform CLI version << parameters.version >>"
+            # Add your installation commands here
+
+  deploy:
+    description: Deploy application to our platform
+    parameters:
+      environment:
+        type: string
+        description: Target environment (staging, production)
+      api-key:
+        type: env_var_name
+        default: PLATFORM_API_KEY
+        description: Environment variable containing API key
+    steps:
+      - run:
+          name: Deploy to << parameters.environment >>
+          command: |
+            # Add your deployment commands here
+            echo "Deploying to << parameters.environment >>"
+
+jobs:
+  deploy-app:
+    description: Complete deployment job
+    executor: default
+    parameters:
+      environment:
+        type: string
+        description: Target environment
+    steps:
+      - checkout
+      - install-cli
+      - deploy:
+          environment: << parameters.environment >>
+
+executors:
+  default:
+    description: Default executor for platform jobs
+    docker:
+      - image: cimg/base:2026.01
+----
+
+[#step-2-store-the-orb]
+=== Step 2: Store the orb in an accessible location
+
+Store your orb file in a location accessible via HTTPS. Common options include:
+
+[#github-repository]
+==== GitHub repository
+
+Store your orb in a GitHub repository:
+
+.Example GitHub repository structure for storing URL orbs
+[,shell]
+----
+my-org-orbs/
+├── README.md
+├── platform-tools.yml
+└── security-scanner.yml
+----
+
+The raw URL will be:
+
+.Example raw URL for a URL orb in a GitHub repository
+[,shell]
+----
+https://raw.githubusercontent.com/<org>/<repo>/<branch>/platform-tools.yml
+----
+
+[#other-hosting-options]
+==== Other hosting options
+
+* **GitLab**: `https://gitlab.com/<org>/<repo>/-/raw/<branch>/<file>.yml`
+* **Bitbucket**: `https://bitbucket.org/<org>/<repo>/raw/<branch>/<file>.yml`
+* **AWS S3**: `https://s3.amazonaws.com/<bucket>/<path>/<file>.yml`
+* **Other object storage**: Any HTTPS-accessible location.
+
+[#step-3-configure-allow-list]
+=== Step 3: Configure the allow-list
+
+Your organization administrator must add the URL prefix to the allow-list before the orb can be used.
+
+For example, if your orb is at:
+
+.Example URL for a URL orb in a GitHub repository
+[,shell]
+----
+https://raw.githubusercontent.com/my-org/orbs/main/platform-tools.yml
+----
+
+
+The allow-list entry should include the prefix:
+
+.Example URL prefix for a URL orb in a GitHub repository
+[,shell]
+----
+https://raw.githubusercontent.com/my-org/orbs/
+----
+
+See xref:use:managing-url-orbs-allow-lists.adoc#adding-a-url-orb-allow-list-entry[Adding a URL orb allow-list entry] for detailed instructions.
+
+[#step-4-use-the-orb]
+=== Step 4: Use the orb in your configuration
+
+Reference your URL orb in a CircleCI configuration file:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/main/platform-tools.yml
+
+workflows:
+  deploy:
+    jobs:
+      - platform/deploy-app:
+          environment: staging
+----
+
+[#orb-components]
+== Orb components
+
+URL orbs support the same components as registry orbs:
+
+*Commands* contain one or more steps and can accept parameters. See xref:orb-concepts.adoc#commands[Commands] for details.
+
+.Example command
+[,yaml]
+----
+commands:
+  greet:
+    description: Greet someone with a message
+    parameters:
+      to:
+        type: string
+        default: "World"
+        description: To whom to greet
+    steps:
+      - run:
+          name: Greeting
+          command: echo "Hello << parameters.to >>"
+----
+
+*Jobs* define a collection of steps to run within an executor. See xref:orb-concepts.adoc#jobs[Jobs] for details.
+
+.Example job
+[,yaml]
+----
+jobs:
+  test:
+    description: Run tests for the application
+    docker:
+      - image: cimg/node:current
+    parameters:
+      test-command:
+        type: string
+        default: "npm test"
+        description: Command to run tests
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run tests
+          command: << parameters.test-command >>
+----
+
+*Executors* define the environment in which jobs run. See xref:orb-concepts.adoc#executors[Executors] for details.
+
+.Example executor
+[,yaml]
+----
+executors:
+  node:
+    description: Node.js execution environment
+    parameters:
+      tag:
+        type: string
+        default: "lts"
+        description: Node.js version tag
+    docker:
+      - image: cimg/node:<< parameters.tag >>
+----
+
+[#testing-your-url-orb]
+== Testing your URL orb
+
+[#validate-yaml]
+=== Validate YAML
+
+Before using your orb, validate the YAML syntax:
+
+TIP: If you do not have the CircleCI CLI installed, first see the xref:guides:toolkit:local-cli.adoc[Installing the local CLI] page.
+
+[,shell]
+----
+circleci orb validate platform-tools.yml
+----
+
+[#test-in-a-pipeline]
+=== Test in a pipeline
+
+Create a test configuration to verify your orb works correctly:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/main/platform-tools.yml
+
+workflows:
+  test-orb:
+    jobs:
+      - test-commands
+
+jobs:
+  test-commands:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - platform/install-cli:
+          version: "1.0.0"
+      - run:
+          name: Verify installation
+          command: |
+            # Add verification commands
+            echo "CLI installed successfully"
+----
+
+[#updating-url-orbs]
+== Updating URL orbs
+
+To update a URL orb:
+
+. Make changes to your orb YAML file
+. Commit and push the changes to your repository
+. The updated orb will be available at the same URL
+
+[NOTE]
+====
+URL orbs are cached for 5 minutes after being fetched. Changes may not be immediately visible in running pipelines.
+====
+
+[#versioning-url-orbs]
+== Versioning URL orbs
+
+URL orbs do not use semantic versioning. You can implement your own versioning strategy using Git features:
+
+[#using-branches]
+=== Using branches
+
+Use different branches for different versions:
+
+[,yaml]
+----
+# Production
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/main/platform-tools.yml
+
+# Development
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/develop/platform-tools.yml
+----
+
+[#using-tags]
+=== Using tags
+
+Create Git tags for stable versions:
+
+[,yaml]
+----
+# Specific version
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/v1.0/platform-tools.yml
+----
+
+[#using-commit-shas]
+=== Using commit SHAs
+
+Reference specific commits for immutability:
+
+[,yaml]
+----
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/abc123def456/platform-tools.yml
+----
+
+[#best-practices]
+== Best practices
+
+Add descriptions to all components:
+
+.Example command with description
+[,yaml]
+----
+commands:
+  deploy:
+    description: Deploy application to the platform
+    parameters:
+      environment:
+        type: string
+        description: Target environment (staging or production)
+    steps:
+      # ...
+----
+
+Make your orb components flexible with parameters:
+
+.Example command with parameters. A parameter is used to pass the version of the tool to install.
+[,yaml]
+----
+commands:
+  install-tool:
+    parameters:
+      version:
+        type: string
+        default: "latest"
+      install-path:
+        type: string
+        default: "/usr/local/bin"
+    steps:
+      # Installation steps using parameters
+----
+
+Never hardcode secrets. Use the `env_var_name` parameter type:
+
+.Example command with secrets. The API key is stored in an environment variable.
+[,yaml]
+----
+commands:
+  authenticate:
+    parameters:
+      api-key:
+        type: env_var_name
+        default: API_KEY
+        description: Environment variable containing the API key
+    steps:
+      - run:
+          name: Authenticate
+          command: |
+            # Use ${!parameter} to get the value from the environment variable
+            API_KEY_VALUE=${!<< parameters.api-key >>}
+            # Use API_KEY_VALUE in your commands
+----
+
+Include documentation in your repository, for example:
+
+* Add a README explaining what the orb does and how to use it.
+* Include usage examples.
+* Document all parameters and their effects.
+* Keep a changelog of updates.
+
+[#limitations]
+== Limitations
+
+URL orbs have the following limitations:
+
+* Limited to 50 URL orbs per configuration file
+* Maximum nesting depth of 5 for URL orb hierarchies.
+* Cached for 5 minutes after fetching.
+
+For full details, see xref:use:managing-url-orbs-allow-lists.adoc#limitations-and-caveats[URL orb limitations].
+
+[#see-also]
+== See also
+
+* xref:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow Lists]
+* xref:orb-concepts.adoc[Orb Concepts].
+* xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference]

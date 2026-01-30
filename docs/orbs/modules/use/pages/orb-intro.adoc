@@ -124,6 +124,8 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors.
 
+If you would like to author your own URL orb, see the xref:author:authoring-url-orbs.adoc[Authoring URL orbs] guide.
+
 [#benefits-of-using-orbs]
 == Benefits of using orbs
 
