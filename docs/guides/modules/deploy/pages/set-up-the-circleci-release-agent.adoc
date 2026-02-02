@@ -209,3 +209,25 @@ In this tutorial you have integrated your Kubernetes cluster with CircleCI. You 
 
 * xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components].
 * Learn how to xref:update-the-kubernetes-release-agent.adoc[Update the Kubernetes Release Agent].
+workflows:
+  build_accept_deploy:
+    jobs:
+      - build
+      - acceptance_test_1:
+          requires:
+            - build
+      - acceptance_test_2:
+          requires:
+            - build
+      - acceptance_test_3:
+          requires:
+            - build
+      - acceptance_test_4:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - acceptance_test_1
+            - acceptance_test_2
+            - acceptance_test_3
+            - acceptance_test_4
