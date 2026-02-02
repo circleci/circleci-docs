@@ -583,18 +583,25 @@ Commit and push these changes to your feature branch. Analysis will be limited t
 Once you have verified analysis works in your feature branch:
 
 . Remove the `--test-selection=none` and `--test-analysis=impacted` CLI flags from your `.circleci/config.yml`.
-. Remove `options.test-analysis-duration` from your `.circleci/test-suites.yml`.
+. Remove `options.test-analysis-duration` from your `.circleci/test-suites.yml`. This allows analysis to run on without time limits.
 . Commit these changes to your feature branch and push to your VCS.
 . Merge your PR to the default branch.
 
-This allows analysis to run on your default branch without time limits, building complete impact data for your entire test suite.
+This configures your test suite with the default behavior:
+
+* **Feature branches**: Test selection based on impact analysis (only impacted tests run), no analysis performed
+* **Default branch**: All tests run, with analysis performed on impacted tests to keep impact data up to date
 
 [TIP]
 ====
-The first time you run analysis, it may take a long time as the full impact map is being generated. To avoid delays on your default branch, consider one of these approaches:
+Analysis can be time-consuming, especially during the initial run when the complete impact data is being built. To prevent analysis from delaying critical parts of your default branch workflow (such as deployment), consider one of these approaches:
 
-* Run full analysis on your feature branch first (by removing `options.test-analysis-duration`). This builds the complete impact data before merging. Subsequent analysis runs will be significantly faster.
-* Set up a scheduled pipeline to handle most of the analysis work. See <<set-up-examples>> for configuration examples, such as running comprehensive analysis on a schedule while timeboxing analysis on default branch builds.
+* Run analysis as a separate non-blocking job in the same workflow
+* Run analysis in a separate workflow in the same pipeline
+
+See <<set-up-examples>> for configuration examples of each approach. Although not listed as an example, you can even run analysis in a separate pipeline triggered on pushes to your default branch.
+
+It's important to ensure analysis runs on every change to your default branch so that impact data stays up to date for accurate test selection.
 ====
 
 At this point, you have successfully set up test impact analysis. Next, enable other features of Smarter Testing:
@@ -805,6 +812,99 @@ file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << 
 
 No changes required, this is the default setting.
 
+### Run analysis as a non-blocking job in the same workflow
+
+.CircleCI configuration with separate analysis job
+[source,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    executor: my-executor
+    parallelism: 4
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests" --test-analysis="none"
+      - store_test_results:
+          path: test-reports
+  
+  analysis:
+    executor: my-executor
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests" --test-selection="none" --test-analysis="impacted"
+
+  deploy:
+    executor: my-executor
+    steps:
+      - setup
+      - run: ./deploy.sh
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - test
+      - analysis:
+          filters:
+            branches:
+              only: main
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
+----
+
+### Run analysis in a separate workflow in the same pipeline
+
+.CircleCI configuration with separate workflows
+[source,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    executor: my-executor
+    parallelism: 4
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests" --test-analysis="none"
+      - store_test_results:
+          path: test-reports
+
+  analysis:
+    executor: my-executor
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests" --test-selection="none" --test-analysis="impacted"
+
+  deploy:
+    executor: my-executor
+    steps:
+      - setup
+      - run: ./deploy.sh
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
+
+  analysis-workflow:
+    jobs:
+      - analysis:
+          filters:
+            branches:
+              only: main
+----
+
 [#run-analysis-on-non-default-branch]
 === Run analysis on a non-default and selection on all other branches
 
@@ -840,59 +940,6 @@ jobs:
       - run: circleci run testsuite "ci tests"
       - store_test_results:
           path: test-reports
-----
-
-[#run-analysis-on-scheduled-pipeline]
-=== Run full analysis on a scheduled pipeline, and timeboxed analysis on main
-
-.CircleCI configuration for running analysis only on scheduled pipelines
-[source,yaml]
-----
-# .circleci/config.yml
-version: 2.1
-parameters:
-  run-scheduled-analysis:
-    type: boolean
-    default: false
-jobs:
-  analysis:
-    executor: node-with-service
-    steps:
-      - setup
-      - run: circleci run testsuite "scheduled tests" --test-selection="none"
-  test:
-    executor: node-with-service
-    steps:
-      - setup
-      - run: circleci run testsuite "main tests"
-      - store_test_results:
-          path: test-reports
-workflows:
-  scheduled-analysis:
-    when: pipeline.parameters.run-scheduled-analysis
-    jobs:
-      - analysis
-  main:
-    when: not pipeline.parameters.run-scheduled-analysis
-    jobs:
-      - test
-----
-
-.Test suite config. Set time limit of 10 minutes for the analysis on the main branch
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: "main tests"
-# rest of test suite config.
-options:
-  test-impact-analysis: true
-  test-analysis-duration: 10 # Analyze the slowest tests first for a max of 10 minutes.
----
-name: "scheduled tests"
-# rest of test suite config.
-options:
-  test-impact-analysis: true
 ----
 
 == Frequently asked questions
