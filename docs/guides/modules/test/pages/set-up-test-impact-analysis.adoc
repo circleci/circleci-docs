@@ -599,7 +599,7 @@ Analysis can be time-consuming, especially during the initial run when the compl
 * Run analysis as a separate non-blocking job in the same workflow
 * Run analysis in a separate workflow in the same pipeline
 
-See <<set-up-examples>> for configuration examples of each approach. Although not listed as an example, you can even run analysis in a separate pipeline triggered on pushes to your default branch.
+See <<set-up-examples>> for configuration examples of each approach. 
 
 It's important to ensure analysis runs on every change to your default branch so that impact data stays up to date for accurate test selection.
 ====
