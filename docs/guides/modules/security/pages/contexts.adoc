@@ -5,7 +5,7 @@
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
 
-If you have existing contexts (or environment variables) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. mFollowing these steps will ensureyou do not lose access to contexts or environment variables in the process.
+If you have existing contexts (or environment variables) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. Following these steps will ensure you do not lose access to contexts or environment variables in the process.
 
 [#overview]
 == Overview
