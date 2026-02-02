@@ -30,7 +30,7 @@ circleci update
 
 circleci version
 ```
-* Register a namespace for your GitHub organization. Every organization registered on CircleCI is able to claim *one* unique xref:orb-concepts.adoc#namespaces[namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
+* Register a namespace for your GitHub organization. Every organization registered on CircleCI is able to claim *one* unique xref:use:orb-concepts.adoc#namespaces[namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
 +
 Enter the following command to claim your namespace, if you have not yet claimed one:
 +
@@ -114,7 +114,7 @@ If you have a `circleci` type organization you will need to follow some extra st
 
 In the background, the `orb init` command copies and customizes the link:https://github.com/CircleCI-Public/Orb-Template[orb template] based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will be asked for the remote git repository URL that you obtained back in step 1.
 
-The link:https://github.com/CircleCI-Public/Orb-Template[orb template] contains a full CI/CD pipeline (described in xref:creating-orbs.adoc[orb publishing process]), which automatically xref:orb-concepts.adoc#orb-packing[packs], xref:testing-orbs.adoc[tests], and xref:creating-orbs.adoc[publishes] your orb.
+The link:https://github.com/CircleCI-Public/Orb-Template[orb template] contains a full CI/CD pipeline (described in xref:creating-orbs.adoc[orb publishing process]), which automatically xref:use:orb-concepts.adoc#orb-packing[packs], xref:testing-orbs.adoc[tests], and xref:creating-orbs.adoc[publishes] your orb.
 
 In the setup process you will be asked if you would like to save your xref:guides:toolkit:managing-api-tokens.adoc[personal API Token] into an `orb-publishing` xref:guides:security:contexts.adoc[context]. Saving this token is necessary for publishing development and production versions of your orb. If you have already made an orb in the past, you can skip this step, as the context will already exist.
 
@@ -283,7 +283,7 @@ steps:
 [#examples]
 ==== Examples
 
-Author and add xref:orb-concepts.adoc#usage-examples[Usage Examples] to the `src/examples` directory. Usage examples are not for use directly by end users in their configs. They provide a way for you to share use-case specific examples for users to reference.
+Author and add xref:use:orb-concepts.adoc#usage-examples[Usage Examples] to the `src/examples` directory. Usage examples are not for use directly by end users in their configs. They provide a way for you to share use-case specific examples for users to reference.
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 
@@ -330,7 +330,7 @@ steps:
 [#scripts]
 ==== Scripts
 
-One of the major benefits of the orb development kit is a xref:orb-concepts.adoc#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `++<<include(file)>>++` within your orb config code to include the file contents directly in the orb.
+One of the major benefits of the orb development kit is a xref:use:orb-concepts.adoc#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `++<<include(file)>>++` within your orb config code to include the file contents directly in the orb.
 
 Script inclusion is especially useful when writing complex orb commands, which might contain a lot of _Bash_ code, _(although you could use Python too!)_.
 

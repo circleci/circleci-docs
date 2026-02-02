@@ -67,7 +67,7 @@ circleci orb init
 circleci orb pack
 ----
 
-For more information on orb packing, see the xref:orbs:author:orb-concepts.adoc#orb-packing[Orbs Concepts] page.
+For more information on orb packing, see the xref:orbs:use:orb-concepts.adoc#orb-packing[Orbs Concepts] page.
 
 [#validate-an-orb-in-your-configuration-file]
 == Validate an orb in your configuration file

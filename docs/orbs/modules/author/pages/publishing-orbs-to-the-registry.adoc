@@ -9,7 +9,7 @@ This guide covers the steps required to publish a registry orb to the link:https
 [#introduction]
 == Introduction
 
-After authoring your orb, you can publish it with a xref:orb-concepts.adoc#semantic-versioning[semantically versioned] tag, and the orb will appear on the link:https://circleci.com/developer/orbs[orb registry].
+After authoring your orb, you can publish it with a xref:use:orb-concepts.adoc#semantic-versioning[semantically versioned] tag, and the orb will appear on the link:https://circleci.com/developer/orbs[orb registry].
 
 CAUTION: If your orb is private, it will not be searchable on the Orb Registry. However, the URL will be accessible to authenticated users of the orb.
 

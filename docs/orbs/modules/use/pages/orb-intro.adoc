@@ -36,7 +36,7 @@ See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] gu
 [#use-an-orb]
 == Use a registry orb
 
-A registry orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name is followed by an `@` symbol and a xref:author:orb-concepts.adoc#semantic-versioning[Semantic Version] string, to identify which version of the orb to used. For example: `<namespace>/<orb-name>@1.2.3`.
+A registry orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name is followed by an `@` symbol and a xref:use:orb-concepts.adoc#semantic-versioning[Semantic Version] string, to identify which version of the orb to used. For example: `<namespace>/<orb-name>@1.2.3`.
 
 Each orb within the link:https://circleci.com/developer/orbs[Registry] provides a link:https://circleci.com/developer/orbs/orb/circleci/node#quick-start[Quickstart Guide], which contains a sample code snippet for importing that specific orb, with its most recent version, into your CircleCI configuration file.
 
@@ -235,7 +235,7 @@ Registry orbs can be published in one of two ways:
 *Public registry orbs*:: Searchable in the orb registry, and available for anyone to use.
 *Private registry orbs*:: Only available to use within your organization, and only findable in the registry with a direct URL and when authenticated.
 
-To understand these concepts further, read the xref:author:orb-concepts.adoc#private-orbs-vs-public-orbs[Public Orbs Vs Private Orbs] section of the orb concepts page.
+To understand these concepts further, read the xref:use:orb-concepts.adoc#private-orbs-vs-public-orbs[Public Orbs Vs Private Orbs] section of the orb concepts page.
 
 [#orbs-view]
 == Orbs page in the CircleCI app
@@ -260,7 +260,7 @@ The orbs page also includes your org's allow list URLs for URL orbs.
 [#see-also]
 == See also
 
-* Refer to xref:author:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
+* Refer to xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
 * Refer to xref:orbs-faq.adoc[Orbs FAQ] for information on known issues and questions that have been addressed when using CircleCI orbs.
 * Refer to xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference] for examples of reusable orbs, commands, parameters, and executors.
 * Refer to xref:author:testing-orbs.adoc[Orb Testing Methodologies] for information on how to test orbs you have created.

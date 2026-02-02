@@ -12,9 +12,9 @@ URL orbs are reusable packages of CircleCI configuration that can be stored in a
 
 URL orbs contain the same reusable configuration elements as registry orbs:
 
-* xref:orb-concepts.adoc#commands[Commands]
-* xref:orb-concepts.adoc#jobs[Jobs]
-* xref:orb-concepts.adoc#executors[Executors]
+* xref:use:orb-concepts.adoc#commands[Commands]
+* xref:use:orb-concepts.adoc#jobs[Jobs]
+* xref:use:orb-concepts.adoc#executors[Executors]
 
 The key difference from registry orbs is that URL orbs are not published to the link:https://circleci.com/developer/orbs[CircleCI Orb Registry]. Instead, they are stored in a location accessible to your organization and referenced directly by URL.
 
@@ -213,7 +213,7 @@ workflows:
 
 URL orbs support the same components as registry orbs:
 
-*Commands* contain one or more steps and can accept parameters. See xref:orb-concepts.adoc#commands[Commands] for details.
+*Commands* contain one or more steps and can accept parameters. See xref:use:orb-concepts.adoc#commands[Commands] for details.
 
 .Example command
 [,yaml]
@@ -232,7 +232,7 @@ commands:
           command: echo "Hello << parameters.to >>"
 ----
 
-*Jobs* define a collection of steps to run within an executor. See xref:orb-concepts.adoc#jobs[Jobs] for details.
+*Jobs* define a collection of steps to run within an executor. See xref:use:orb-concepts.adoc#jobs[Jobs] for details.
 
 .Example job
 [,yaml]
@@ -257,7 +257,7 @@ jobs:
           command: << parameters.test-command >>
 ----
 
-*Executors* define the environment in which jobs run. See xref:orb-concepts.adoc#executors[Executors] for details.
+*Executors* define the environment in which jobs run. See xref:use:orb-concepts.adoc#executors[Executors] for details.
 
 .Example executor
 [,yaml]
@@ -458,5 +458,5 @@ For full details, see xref:use:managing-url-orbs-allow-lists.adoc#limitations-an
 == See also
 
 * xref:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow Lists]
-* xref:orb-concepts.adoc[Orb Concepts].
+* xref:use:orb-concepts.adoc[Orb Concepts].
 * xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference]
