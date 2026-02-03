@@ -19,13 +19,16 @@ Here are some examples where Smarter Testing works well:
 * Test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
 
 == How it works
+
 Test impact analysis identifies which tests need to run based on the files that changed in your checked out code. The system works in two phases:
 
-*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Each test is run individually with code coverage enabled to determine which files it covers. Analysis results are stored as impact data for future test runs. By default, analysis runs on your default branch, but you can configure it to run on any branch with any trigger (webhook, API, or scheduled pipeline).
+*Analysis phase*:: Builds a mapping between your tests and the code they exercise. Tests are run with code coverage enabled to determine which files they cover. Analysis results are stored as impact data for future test runs.
 
-*Selection phase*:: Compares the current repository state against the most recent impact data. Tests covering modified files are selected to run. This includes new tests, modified tests, and tests that don't exercise any source code. By default, test selection is applied on feature branches and all tests are run on your default branch. You can customize this behavior in your CircleCI configuration.
+*Selection phase*:: Compares the current repository state against the most recent impact data. Tests covering modified files are selected to run. This includes new tests, modified tests, and tests that do not exercise any source code.
 
-The analysis phase typically runs slower than a normal test run because it executes tests individually with coverage instrumentation. However, this allows the selection phase to identify only necessary tests to run, which leads to much faster test execution.
+The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this allows the selection phase to identify only necessary tests to run, which leads to much faster test execution.
+
+The behavior of the analysis and selection phases varies by branch and can be configured using command line flags. Learn more in the <<cli-flags,test suite flag options>> section.
 
 [mermaid]
 ----
@@ -195,7 +198,7 @@ options:
 
 pytest::
 
-Add the link:https://github.com/circleci/pytest-circleci-coverage[pytest-circleci-coverage] plugin as a dev dependency.
+IMPORTANT: You must install the link:https://github.com/circleci/pytest-circleci-coverage[pytest-circleci-coverage] plugin as a dev dependency before configuring the analysis command. Without this plugin, analysis will not work correctly.
 
 +
 [source,yaml]
@@ -726,9 +729,8 @@ options:
     - custom-config.json
 ----
 
-The following flags are available to be defined on the `circleci run testsuite` command.
+The following flags are available to be defined on the `circleci run testsuite` command:
 
-[#cli-flags]
 [.table-scroll]
 --
 [cols=3*, options="header"]
@@ -740,18 +742,18 @@ The following flags are available to be defined on the `circleci run testsuite` 
 a| Provides additional details in output.
 
 |`--test-analysis=all\|impacted\|none`
-|On branch `main`, impacted. +
+|On `default` branch, `impacted`. +
 On all other branches, `none`. When run locally, `none`.
-a| * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to discard all existing impact data and rebuild from scratch. +
-* `impacted` analyzes only tests impacted by a change, used to refresh impact data. +
+a| * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
+* `impacted` analyzes only tests impacted by a change. +
 * `none` skips analysis.
 
 |`--test-selection=all\|impacted\|none`
-|On branch `main`, `all`. +
+|On `default` branch, `all`. +
 On all other branches, `impacted`. When run locally, `impacted`.
 a| * `all` selects and runs all discovered tests, used to run the full test suite. +
 * `impacted` selects and runs only the tests impacted by a change. +
-* `none` skips running tests, used to skip straight to analysis.
+* `none` skips running tests.
 |===
 --
 
