@@ -16,6 +16,9 @@ module.exports = (src, dest, bundleName, onFinish) => () => {
     return Promise.reject(new Error(`Source directory does not exist: ${src}`))
   }
 
+  // Ensure the destination directory exists
+  fs.ensureDirSync(dest)
+
   const vfs = require('vinyl-fs')
   return vfs
     .src('**/*', { base: src, cwd: src, dot: true })
