@@ -62,6 +62,9 @@ module.exports = (src, dest, preview) => () => {
       : postcssPseudoElementFixer,
   ]
 
+  // Ensure destination directory exists
+  fs.ensureDirSync(dest)
+
   return merge(
     vfs.src('ui.yml', { ...opts, allowEmpty: true }),
     vfs
