@@ -76,7 +76,11 @@ $ vitest run --coverage.enabled \
 
 The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run.
 
-The coverage report output location can be specified with the template variable `<< outputs.lcov >>`. CircleCI replaces `<< outputs.lcov >>` with the file path specified in `outputs.lcov` in your test suite configuration. If not defined, a temporary path is created by Smarter Testing. Some test runners, such as Jest and Vitest, only let you choose a **directory** for coverage output and may write one or more coverage files into that directory. In these cases, your analysis command must **concatenate those files into the single path** given by `<< outputs.lcov >>`.
+The coverage report output location can be specified with the template variable `<< outputs.lcov >>`. CircleCI replaces `<< outputs.lcov >>` with the file path specified in `outputs.lcov` in your test suite configuration. 
+
+NOTE: You do not need to define `outputs.lcov` in your configuration. If not defined, Smarter Testing automatically creates a temporary path in your directory to store coverage data during analysis. The coverage data is used only during the analysis phase and does not need to be uploaded or persisted.
+
+Some test runners, such as Jest and Vitest, only let you choose a **directory** for coverage output and may write one or more coverage files into that directory. In these cases, your analysis command must **concatenate those files into the single path** given by `<< outputs.lcov >>`.
 
 The test atom to analyze can be specified in one of two ways:
 
