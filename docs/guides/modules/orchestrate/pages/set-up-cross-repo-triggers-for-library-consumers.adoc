@@ -1,4 +1,4 @@
-= Set up cross-repo triggers for library consumers
+= Set up a cross-repo trigger
 :page-platform: Cloud
 :page-description: Learn how to trigger consumer repository pipelines when changes are made to an internal library or package.
 :experimental:
@@ -7,127 +7,122 @@ This guide shows you how to set up cross-repo triggers so that changes to an int
 
 Cross-repo triggers enable you to validate that library changes work correctly with dependent applications before merging or releasing. This helps catch integration issues early in the development cycle.
 
-TIP: For background information on pipelines and triggers, refer to the xref:guides:orchestrate:pipelines.adoc[Pipelines overview and setup] and xref:guides:orchestrate:triggers-overview.adoc[Triggers overview] pages.
+TIP: For background information on pipelines and triggers, refer to the xref:guides:orchestrate:pipelines.adoc[Pipelines overview and setup] and xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] pages.
 
 == Prerequisites
 
 Before setting up cross-repo triggers, ensure you have the following:
 
 * A CircleCI account connected to GitHub using the GitHub App integration.
+* A "library" repository and a "consumer" repository. These repositories must be in the same GitHub organization.
 * Admin access to both the library repository and the consumer repository in GitHub.
-* Both repositories must be in the same GitHub organization.
+* You will need projects set up for a "library" and a "consumer" repository. These projects should be building on CircleCI. See the xref:guides:getting-started:create-project.adoc[Create a Project in CircleCI] page for steps to get your project set up in CircleCI.
 * The consumer repository must have a `.circleci/config.yml` file that defines the tests or validation steps you want to run.
 
-== 1. Decide on your configuration approach
+=== Decide on your configuration approach
 
 You have two options for structuring your cross-repo trigger setup. Each approach has different benefits depending on your workflow.
 
-=== 1.a. Option 1: Config in consumer repository
+[.table-scroll]
+--
+[cols="1,1,1",options="header"]
+|===
+| |Option 1: Config in consumer repository |Option 2: Centralized config repository
 
-In this approach, the pipeline configuration file lives in the same repository as the consumer code.
+|**Description**
+|The pipeline configuration file lives in the same repository as the consumer code.
+|The pipeline configuration file lives in a separate repository dedicated to CI/CD configurations.
 
-* **Config source**: Consumer repository
-* **Checkout source**: Consumer repository
-* **Trigger source**: Library repository
+|**Config source**
+|Consumer repository
+|Central config repository
 
-Use this option when each consumer has unique test requirements or when you want teams to maintain their own CI/CD configurations.
+|**Checkout source**
+|Consumer repository
+|Consumer repository
 
-.Example repository structure
+|**Trigger source**
+|Library repository
+|Library repository
+
+|**When to use**
+|Use this option when each consumer has unique test requirements or when you want teams to maintain their own CI/CD configurations.
+|Use this option when you want a platform team to maintain consistent test configurations across multiple consumers, or when you want to reuse the same configuration file for multiple consumer repositories.
+
+|**Repository structure**
+a|
+[source,shell]
 ----
-my-library/          (library repository - triggers events)
-my-consumer-app/     (consumer repository - contains config and code)
+my-library/
+my-consumer-app/
   ├── .circleci/
   │   └── config.yml
   └── src/
 ----
-
-=== 1.b. Option 2: Centralized config repository
-
-In this approach, the pipeline configuration file lives in a separate repository dedicated to CI/CD configurations.
-
-* **Config source**: Central config repository
-* **Checkout source**: Consumer repository
-* **Trigger source**: Library repository
-
-Use this option when you want a platform team to maintain consistent test configurations across multiple consumers, or when you want to reuse the same configuration file for multiple consumer repositories.
-
-.Example repository structure
+a|
+[source,shell]
 ----
-my-library/            (library repository - triggers events)
-my-consumer-app/       (consumer repository - code only)
+my-library/
+my-consumer-app/
   └── src/
-circleci-configs/      (config repository - contains all pipeline configs)
+circleci-configs/
   ├── .circleci/
-  │   ├── consumer-app-config.yml
-  │   └── other-app-config.yml
+  │   ├── consumer-config.yml
+  │   └── other-config.yml
 ----
 
-Benefits of centralized configuration:
-
+|**Benefits**
+|Teams maintain their own configurations
+a|
 * **Consistency**: Ensure all consumers test library changes using the same validation approach.
 * **Maintenance**: Update test procedures across all consumers by modifying a single configuration file.
 * **Governance**: Platform teams can enforce testing standards and best practices.
 * **Reusability**: Share configuration logic across multiple consumer repositories.
 
-NOTE: This guide demonstrates both approaches. Follow the steps in section 2 for Option 1, or the steps in section 2 (Alternative) for Option 2.
+|===
+--
 
-== 2. Set up the consumer pipeline
+NOTE: This guide demonstrates both approaches. The steps below use tabs to show the differences between Option 1 and Option 2.
 
-The consumer pipeline defines what should run when the library changes. You will configure this pipeline to use the consumer repository for both configuration and code checkout.
+== 1. Set up the consumer pipeline
 
-=== 2.a. Navigate to project settings
+The consumer pipeline defines what should run when the library changes.
 
-. In the link:https://app.circleci.com[CircleCI web app], select your organization from the org cards on your homepage.
-. Select **Projects** from the sidebar and locate your consumer repository. You can use the search to help.
-. Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to the consumer project and select **Project Settings**.
-
-=== 2.b. Add a pipeline for cross-repo triggers
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 . Select **Project Setup** in the sidebar.
-. Select **Add Pipeline** at the bottom of the pipelines section.
+. Select **Add Pipeline** at the top of the pipelines section.
 . Give your pipeline a descriptive name, for example `Library integration tests`.
-. Under **Integration**, select **GitHub App**.
-. Authorize your connection if it does not already show a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
-. For **Config source**, select your consumer repository from the dropdown menu. Select the branch where your `.circleci/config.yml` file is located (typically `main`).
-. For **Checkout source**, select your consumer repository from the dropdown menu.
+. Configure the pipeline sources and config file based on your chosen approach:
++
+[tabs]
+====
+Option 1: Config in consumer repository::
++
+--
+.. For **Config source**, select your consumer repository from the dropdown menu.
+.. In the **Config filepath** field, you can either leave the default if you want to run your existing `circleci/config.yml` file, or enter the path to the specific configuration file for this pipeline if you want to run a different build on changes to the library, for example `.circleci/library-integration-tests-config.yml`.
+.. For **Checkout source**, select your consumer repository from the dropdown menu.
 +
 NOTE: Because the config source and checkout source are the same repository, you do not need to specify additional branches in the trigger configuration later.
 
-. Select **Save**.
+.. Select btn:[Save].
 
 You now have a pipeline configured for your consumer repository. The next step is to add a trigger that watches for events in your library repository.
+--
 
-== 2. (Alternative) Set up the consumer pipeline with centralized config
-
-If you are using a centralized config repository (Option 2 from section 1), follow these steps instead of section 2 above.
-
-=== 2.a. Navigate to project settings
-
-. In the link:https://app.circleci.com[CircleCI web app], select your organization from the org cards on your homepage.
-. Select **Projects** from the sidebar and locate your consumer repository. You can use the search to help.
-. Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to the consumer project and select **Project Settings**.
-
-=== 2.b. Add a pipeline with centralized configuration
-
-. Select **Project Setup** in the sidebar.
-. Select **Add Pipeline** at the bottom of the pipelines section.
-. Give your pipeline a descriptive name, for example `Library integration tests`.
-. Under **Integration**, select **GitHub App**.
-. Authorize your connection if it does not already show a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
-. For **Config source**, select your central config repository from the dropdown menu (not the consumer repository). Select the branch where your configuration files are stored (typically `main`).
-. In the **Config path** field, enter the path to the specific configuration file for this consumer, for example `.circleci/consumer-app-config.yml`.
+Option 2: Centralized config repository::
++
+--
+.. For **Config source**, select your central config repository from the dropdown menu (not the consumer repository). Select the branch where your configuration files are stored (typically `main`).
+.. In the **Config path** field, enter the path to the specific configuration file for this consumer, for example `.circleci/consumer-app-config.yml`.
 +
 TIP: If your central config repository contains configurations for multiple projects, use descriptive file names like `.circleci/consumer-app-integration-tests.yml` or organize them in subdirectories like `.circleci/consumers/my-app/config.yml`.
 
-. For **Checkout source**, select your consumer repository from the dropdown menu (this is the repository whose code will be tested).
-. Select **Save**.
-
-Your pipeline is now configured to fetch its configuration from the central repository while checking out code from the consumer repository.
-
-=== 2.c. Configure your centralized config file
-
-In your central config repository, create or update the configuration file at the path you specified. The configuration should reference the consumer repository code that will be checked out:
-
+.. For **Checkout source**, select your consumer repository from the dropdown menu (this is the repository whose code will be tested).
+.. Select **Save**.
+.. In your central config repository, create or update the configuration file at the path you specified. The configuration should reference the consumer repository code that will be checked out:
++
 [source,yaml]
 ----
 version: 2.1
@@ -163,22 +158,20 @@ workflows:
     jobs:
       - test-consumer-integration
 ----
-
++
 NOTE: When using centralized configuration, the `checkout` step will check out code from the consumer repository (the checkout source), not from the central config repository. This allows you to maintain configurations separately from application code.
+
+Your pipeline is now configured to fetch its configuration from the central repository while checking out code from the consumer repository.
+--
+====
 
 == 3. Add a trigger for library events
 
 The trigger tells CircleCI to run the consumer pipeline when specific events occur in your library repository.
 
-=== 3.a. Create the trigger
-
 . In the consumer project settings, find the pipeline you created in the previous step.
 . Select **GitHub trigger +** at the bottom of the pipeline box.
-. Give your trigger a descriptive name, for example `On library release`.
-
-=== 3.b. Configure the trigger event
-
-. From the **Event** dropdown menu, select when the pipeline should run:
+. From the **Event** dropdown menu, select when the pipeline should run. You have a few options:
 +
 * **Tag created**: Triggers when a new tag is created in the library repository. Use this for testing against official library releases.
 * **PR merged**: Triggers when a pull request is merged in the library repository. Use this for testing integration immediately after library changes are merged.
@@ -190,56 +183,69 @@ For most library validation scenarios, **Tag created** is the recommended option
 +
 NOTE: Changing the event source is what enables the cross-repo trigger. The trigger now watches for events in the library repository rather than the consumer repository.
 
-. Because the event source differs from the config source, you will see a field labeled **Config branch**. Enter the branch name where your consumer pipeline configuration is stored (typically `main`).
+. Because the event source differs from the config source, you will see a field labeled **Config branch**. Enter the branch name where your consumer pipeline configuration and your code to build the consumer application is stored (typically `main`).
 +
-This tells CircleCI which branch to use when fetching the `.circleci/config.yml` file from the consumer repository.
+This tells CircleCI which branch to use when fetching the consumer pipeline configuration and the code to build the consumer application from the consumer repository.
 
-. Select **Save**.
+. Select btn:[Save].
 
 Your cross-repo trigger is now configured. When the specified event occurs in your library repository, CircleCI will trigger the consumer pipeline.
 
-== 4. Pass library information to the consumer pipeline
+== 4. Use library information in the consumer pipeline
 
-When the library triggers the consumer pipeline, you need to pass information about which version of the library to test against. CircleCI provides built-in pipeline values that capture details about the trigger event.
+When a change to your library triggers your consumer pipeline, you need to know which _version_ of the library initiated the trigger so you can test against that specific version. CircleCI provides built-in pipeline values that capture details about the trigger event, including the tag name, branch name, commit SHA, and repository name.
 
-=== 4.a. Access pipeline values in your config
+CircleCI automatically populates the following pipeline values in each job:
 
-CircleCI automatically provides pipeline values that contain information about the event that triggered the pipeline. You can use these values in your configuration file.
+* `<< pipeline.git.tag >>`: The tag name that was created (for tag triggers). Empty string if not triggered by a tag.
+* `<< pipeline.git.branch >>`: The branch name where the event occurred in the library repository.
+* `<< pipeline.git.revision >>`: The specific commit SHA from the library repository.
+* `<< pipeline.trigger_parameters.github_app.repo_name >>`: The name of the library repository that triggered the pipeline.
 
-Add parameters to the top of your consumer repository `.circleci/config.yml` file:
+You can use these values directly in your configuration without declaring them as parameters.
 
+Here is an example consumer repository `.circleci/config.yml` that uses the built-in pipeline values:
+
+.Example consumer repository `.circleci/config.yml` file using built-in pipeline values
 [source,yaml]
 ----
 version: 2.1
 
-parameters:
-  library_version:
-    type: string
-    default: ""
-  library_commit:
-    type: string
-    default: ""
-
 jobs:
   test-with-library:
     docker:
-      - image: cimg/node:18.0 # use the appropriate image for your stack
+      - image: cimg/node:18.0
     steps:
       - checkout # checks out the consumer repository code
+
       - run:
           name: Display library information
           command: |
-            echo "Testing against library version: << pipeline.parameters.library_version >>"
-            echo "Library commit: << pipeline.parameters.library_commit >>"
+            echo "Library repository: << pipeline.trigger_parameters.github_app.repo_name >>"
+            echo "Library tag: << pipeline.git.tag >>"
+            echo "Library branch: << pipeline.git.branch >>"
+            echo "Library commit: << pipeline.git.revision >>"
+
+      - run:
+          name: Install dependencies
+          command: npm install
+
       - run:
           name: Install specific library version
           command: |
-            # Example for npm packages
-            npm install @myorg/my-library@<< pipeline.parameters.library_version >>
+            # Install the library version that triggered this pipeline
+            # For tag triggers, use the tag name as the version
+            if [ -n "<< pipeline.git.tag >>" ]; then
+              echo "Installing library version << pipeline.git.tag >>"
+              npm install @myorg/my-library@<< pipeline.git.tag >>
+            else
+              echo "Installing library from commit << pipeline.git.revision >>"
+              npm install @myorg/my-library@<< pipeline.git.revision >>
+            fi
+
       - run:
           name: Run integration tests
-          command: |
-            npm test
+          command: npm test
 
 workflows:
   validate-library-integration:
@@ -247,31 +253,20 @@ workflows:
       - test-with-library
 ----
 
-=== 4.b. Built-in pipeline values for cross-repo triggers
+In this example:
 
-CircleCI provides the following built-in values that are automatically populated when a cross-repo trigger fires:
+* When a tag like `v1.2.3` is created in the library repository, `<< pipeline.git.tag >>` will contain `v1.2.3`.
+* The configuration installs that specific version using `npm install @myorg/my-library@v1.2.3`.
+* If triggered by a push (not a tag), it falls back to using the commit SHA.
+* The consumer tests then run against the exact library version that triggered the pipeline.
 
-* `<< pipeline.trigger_parameters.github.tag_name >>`: The tag name that was created (for tag triggers).
-* `<< pipeline.trigger_parameters.github.branch >>`: The branch name where the event occurred.
-* `<< pipeline.trigger_parameters.github.commit_sha >>`: The specific commit hash from the library repository.
-* `<< pipeline.trigger_parameters.github.repo_name >>`: The name of the library repository that triggered the pipeline.
-
-You can use these values directly in your configuration without declaring them as parameters:
-
-[source,yaml]
-----
-- run:
-    name: Install library from specific commit
-    command: |
-      echo "Installing library from commit << pipeline.trigger_parameters.github.commit_sha >>"
-      npm install @myorg/my-library@<< pipeline.trigger_parameters.github.tag_name >>
-----
+Update your pipeline configuration to use the built-in pipeline values.
 
 == 5. Configure branch filtering for development workflows
 
-You can configure triggers to only fire for specific branches in your library repository. This is useful when you want different validation strategies for different branches.
+You can configure triggers to only fire for specific branches in your library repository. Branch filtering is useful when you want different validation strategies for different branches, or when you want to test library changes on specific branches before merging them into main.
 
-To add branch filtering:
+To add branch filtering to your trigger, follow these steps:
 
 . Navigate back to your trigger configuration in **Project Settings** > **Project Setup**.
 . Select the pencil image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] icon next to your trigger.
