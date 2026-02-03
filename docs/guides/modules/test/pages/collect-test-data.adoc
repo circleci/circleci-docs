@@ -6,7 +6,7 @@
 [#introduction]
 == Introduction
 
-When you run tests in CircleCI there are two ways to store your test results. You can either use xref:optimize:artifacts.adoc[artifacts] or the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
+When you run tests in CircleCI there are two ways to store your test results. You can either use xref:optimize:artifacts.adoc[Artifacts] or the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
 
 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
@@ -18,20 +18,21 @@ Using the *`store_test_results` step* gives you access to:
 
 You can also store test results as *artifacts*, which means you can look at the raw XML. Using artifacts can be useful when debugging issues with setting up your project's test results handling, for example, finding incorrectly uploaded files.
 
-To see test results as build artifacts, upload them using the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` step]. Storing artifacts has associated costs due to the use of storage. See the xref:optimize:persist-data.adoc#custom-storage-usage[Persisting data] page for information on how to customize storage retention periods for objects like artifacts.
+To see test results as build artifacts, upload them using the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts` Step]. Storing artifacts has associated costs due to the use of storage. See the xref:optimize:persist-data.adoc#custom-storage-usage[Persisting Data] page for information on how to customize storage retention periods for objects like artifacts.
 
 TIP: You can choose to upload your test results using both `store_test_results` and `store_artifacts`.
 
-Using the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step] allows you to do the following:
+Using the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` Step] allows you to do the following:
 
 * Upload and store test results.
 * Get a view of your passing/failing tests in the CircleCI web app.
 
 Access test results from the *Tests tab* when viewing a job, as shown below.
 
+.Test summary view
 image::guides:ROOT:test-summary.png[store-test-results-view]
 
-Below is an example of using the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` key] in your `.circleci/config.yml`.
+Below is an example of using the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` Key] in your `.circleci/config.yml`.
 
 [,yml]
 ----
@@ -44,14 +45,14 @@ steps:
     path: test-results
 ----
 
-The `path` key is an absolute or relative path to your `working_directory` containing JUnit XML test metadata files (either directly in the directory or in subdirectories), or the path of a single file containing all test results.
+The `path` key is an absolute or relative path to your `working_directory`. It can contain JUnit XML test metadata files directly in the directory, in subdirectories, or point to a single file containing all test results.
 
 CAUTION: Make sure that your `path` value is not a hidden folder. For example, `.my_hidden_directory` would be an invalid format.
 
 [#viewing-storage-usage]
 == Viewing storage usage
 
-For information on viewing your storage usage, and calculating your monthly storage overage costs, see the xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Persisting data] guide.
+For information on viewing your storage usage, and calculating your monthly storage overage costs, see the xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] guide.
 
 [#test-insights]
 == Test Insights
@@ -84,7 +85,7 @@ gem 'minitest-ci'
 
 * Django should be configured using the link:https://github.com/django-nose/django-nose[`django-nose`] test runner.
 
-For detailed information on how to test your iOS applications, refer to the xref:testing-ios.adoc[Testing iOS applications] page.
+For detailed information on how to test your iOS applications, refer to the xref:testing-ios.adoc[Testing iOS Applications] page.
 
 [#test-runner-examples-by-language]
 == Test runner examples by language
