@@ -64,6 +64,9 @@ module.exports = (src, dest, preview) => () => {
 
   // Ensure destination directory exists
   fs.ensureDirSync(dest)
+  // Ensure subdirectories exist
+  fs.ensureDirSync(ospath.join(dest, 'font'))
+  fs.ensureDirSync(ospath.join(dest, 'layouts'))
 
   return merge(
     vfs.src('ui.yml', { ...opts, allowEmpty: true }),
