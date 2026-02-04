@@ -1,6 +1,6 @@
 //== Command line installation: pre-steps
 
-// Display the following step for machine runner installation only as container runner is not yet avaiable on server
+// Display the following step for machine runner installation only as container runner is not yet available on server
 ifdef::machine[]
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 endif::[]
