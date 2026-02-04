@@ -182,7 +182,7 @@ To access a job's build environment for troubleshooting, rerun the job with SSH 
 image:guides:ROOT:getting-started-guide-exp/validate-config.png[float=right]
 [%hardbreaks]
 *VS Code extension*
-Using the xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code extention], validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.
+Using the xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code extension], validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.
 
 {empty} +
 

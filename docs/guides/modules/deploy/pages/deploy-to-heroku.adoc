@@ -81,7 +81,7 @@ jobs:
       - image: <docker-image-name-tag>
     steps:
       - checkout
-      # Additional steps ommitted for brevity
+      # Additional steps omitted for brevity
   deploy:
     docker:
       - image: <docker-image-name-tag>
