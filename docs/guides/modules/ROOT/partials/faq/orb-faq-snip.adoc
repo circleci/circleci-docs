@@ -32,19 +32,6 @@ Choose **registry orbs** when:
 
 See the xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an orb type] section for more guidance.
 
-[#can-i-convert-inline-orb-to-url-or-registry]
-=== Can I convert an inline orb to a URL orb or registry orb?
-
-Yes. Inline orbs can be converted to URL orbs or registry orbs if you need to share them:
-
-* **To convert to a URL orb**: Extract the orb content to a separate YAML file, host it at an accessible URL, and add the URL prefix to your organization's allow-list. See xref:orbs:author:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs].
-* **To convert to a registry orb**: Package your orb content following the registry orb structure and publish it using the CircleCI CLI. See xref:orbs:author:orb-author.adoc[Introduction to authoring orbs].
-
-[#do-i-need-cli-for-inline-orbs]
-=== Do I need the CircleCI CLI for inline orbs?
-
-No. Inline orbs are defined directly in your config file and do not require the CircleCI CLI for creation or use. However, you can use the CLI to validate your inline orb syntax with `circleci config validate`.
-
 [#can-orbs-be-private]
 === Can registry orbs be made private?
 
