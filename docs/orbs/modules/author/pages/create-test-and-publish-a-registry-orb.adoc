@@ -4,15 +4,26 @@
 :experimental:
 :page-aliases: create-an-orb
 
-This tutorial guides you through creating a new orb using the orb development kit. The starting point is creating a new repository on link:https://github.com[GitHub.com].
+This tutorial guides you through creating a new registry orb using the orb development kit. The starting point is creating a new repository on link:https://github.com[GitHub.com].
+
+[NOTE]
+====
+This guide covers **registry orbs**. CircleCI supports three types of orbs:
+
+* **Inline orbs**: Project-specific orbs defined in your config file. See xref:create-an-inline-orb.adoc[Create an inline orb].
+* **URL orbs**: Organization-wide orbs hosted at a URL. See xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs].
+* **Registry orbs**: Publicly or privately published orbs with semantic versioning (this guide).
+
+Choose registry orbs when you need semantic versioning, public discoverability, or want to share with the CircleCI community. For a comparison, see xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison].
+====
 
 Following this tutorial you will:
 
-* Create a GitHub repository for your orb.
+* Create a GitHub repository for your registry orb.
 * Add template orb configuration, based on your requirements.
 * Set up a CI/CD pipeline for orb development, and put restrictions on who can contribute.
 
-At the end of the tutorial you will be ready to configure your orb.
+At the end of the tutorial you will be ready to configure your registry orb.
 
 These steps are also outlined in the following video:
 

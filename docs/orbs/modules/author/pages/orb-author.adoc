@@ -4,19 +4,19 @@
 :experimental:
 :page-aliases: orb-development-kit
 
-CircleCI orbs are packages of xref:use:orb-concepts.adoc#orb-configuration-elements[Reusable Configuration] that you can import into you CircleCI configuration files. Orbs come in two types:
+CircleCI orbs are packages of xref:use:orb-concepts.adoc#orb-configuration-elements[Reusable Configuration] that you can import into your CircleCI configuration files. Orbs come in three types:
 
-*Registry orbs*:: Packaged and, if public, published to the link:https://circleci.com/developer/orbs[orb registry]. Registry orbs can be imported into configuration files either within an organization if private or by anyone if public.
+*Inline orbs*:: Defined directly within a project's configuration file. Inline orbs are project-specific and ideal for learning, testing, or when reusable configuration does not need to be shared beyond a single project.
 
 *URL orbs*:: Stored anywhere accessible by your CircleCI project. URL orbs are referenced by a URL to import into your configuration files. Access is managed at the organization level using an allow list.
 
-If you manage multiple, similar projects, consider abstracting out your config with orbs.
+*Registry orbs*:: Packaged and, if public, published to the link:https://circleci.com/developer/orbs[orb registry]. Registry orbs can be imported into configuration files either within an organization if private or by anyone if public.
 
-The majority of these guides focus on authoring, testing and publishing *registry orbs*. *URL orbs* can contain the same reusable config component mentioned in this guide but are not restricted by the publishing process and versioning rules.
+If you manage multiple, similar projects, consider abstracting out your config with orbs.
 
 == Prerequisites
 
-Before authoring an orb, it is recommended that you become familiar with the xref:guides:getting-started:config-intro.adoc[CircleCI config] and authoring xref:reference:ROOT:reusing-config.adoc[parameterized reusable config elements] pages.
+Before authoring an orb, we recommend that you become familiar with the xref:guides:getting-started:config-intro.adoc[CircleCI config] and authoring xref:reference:ROOT:reusing-config.adoc[parameterized reusable config elements] pages.
 
 Orbs consist of three main elements:
 
@@ -24,11 +24,19 @@ Orbs consist of three main elements:
 * xref:use:orb-concepts.adoc#jobs[Jobs]
 * xref:use:orb-concepts.adoc#executors[Executors]
 
-Practice with xref:reference:ROOT:reusing-config.adoc#writing-inline-orbs[inline orbs]. Inline orbs can be defined within a single config file for testing.
+== Getting started with inline orbs
 
-NOTE: Registry orb authors automatically agree to the CircleCI link:https://circleci.com/legal/code-sharing-terms/[Code Sharing Terms of Service]. All publicly published orbs are made available on the Orb Registry under the link:https://opensource.org/licenses/MIT[MIT License agreement]. For more information, see link:https://circleci.com/developer/orbs/licensing[Orb Licensing].
+Inline orbs are the simplest way to create reusable configuration within a single project. They require no setup, publishing, or external hosting.
 
-CAUTION: Once a registry orb is created it cannot be deleted. Registry orbs are link:https://semver.org/[SemVer compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+To create an inline orb, define it directly in your `.circleci/config.yml` file using the `orbs` stanza. For a complete guide and examples, see the xref:create-an-inline-orb.adoc[Create an inline orb] guide.
+
+Inline orbs are particularly useful for:
+
+* Learning orb concepts and syntax.
+* Testing reusable configuration before converting to a URL orb or registry orb.
+* Project-specific helper commands and jobs that don't need to be shared.
+
+NOTE: If you find your inline orb would benefit other projects in your organization, you can convert it to a URL orb. If you want to share it publicly, consider converting it to a registry orb.
 
 == Getting started with URL orbs
 
@@ -36,14 +44,23 @@ See the xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs] g
 
 == Getting started with registry orbs
 
+[CAUTION]
+====
+Registry orb authors *automatically agree* to the CircleCI link:https://circleci.com/legal/code-sharing-terms/[Code Sharing Terms of Service]. All publicly published orbs are made available on the Orb Registry under the link:https://opensource.org/licenses/MIT[MIT License agreement]. For more information, see link:https://circleci.com/developer/orbs/licensing[Orb Licensing].
+
+*Once a registry orb is created it cannot be deleted*. Registry orbs are link:https://semver.org/[SemVer compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
+====
+
 Whether you are writing your first orb or getting ready for production level, we recommend using our <<orb-development-kit>> to get started. A fuill guide is available in the xref:create-test-and-publish-a-registry-orb.adoc[Create, test, and publish a registry orb] guide.
 
 Alternatively, as orbs are packages of xref:reference:ROOT:reusing-config.adoc[reusable configuration], they can be written manually too, as singular `yaml` files, and published using our xref:guides:toolkit:local-cli.adoc#installation[CircleCI orb CLI]. For a guide, see the  xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] page.
 
-== Orb development tools
+== Orb development tools (registry orbs only)
+
+NOTE: The tools in this section apply to *registry orbs only*.
 
 [#orb-development-kit]
-=== Orb development kit
+=== Orb development kit (registry orbs only)
 
 The orb development kit refers to a suite of tools that work together to simplify the registry orb development process, with automatic testing and deployment on CircleCI. The `orb init` command is the key to using the orb development kit. This command initiates a new orb project based on a template, and that template uses the other tools in the kit to automatically test and deploy your orb.
 
@@ -67,9 +84,9 @@ The *orb tools orb* is an orb for creating orbs.
 To begin creating orbs, you will need to xref:guides:toolkit:local-cli.adoc#installation[set up the CircleCI CLI] on your local machine, with a link:https://app.circleci.com/settings/user/tokens[personal access token]. For a full list of orb-related commands inside the CircleCI CLI, visit link:https://circleci-public.github.io/circleci-cli/circleci_orb.html[CircleCI CLI help].
 
 [#permissions-matrix]
-=== Permissions matrix
+=== Permissions matrix (registry orbs only)
 
-Orb CLI commands are scoped to different user permission levels, set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
+Orb CLI commands are scoped to different user permission levels, set by your VCS. You are the owner of your own organization. If you are authoring or publishing registry orbs for a namespace owned by another organization, you may require assistance from your organization admin:
 
 [.table-scroll]
 --

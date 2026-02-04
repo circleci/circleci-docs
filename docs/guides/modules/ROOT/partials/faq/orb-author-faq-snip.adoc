@@ -1,7 +1,54 @@
-[#possible-to-delete-orb]
-=== Is it possible to delete an orb I've created?
+[#which-orb-type-should-i-author]
+=== Which orb type should I author?
 
-No. Orbs are public by default and immutable, once a version of an orb is published it can not be changed. This is done so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
+The type of orb you should author depends on your sharing needs:
+
+* **Inline orbs**: Best for project-specific reusable configuration. No publishing required, defined directly in your config file.
+* **URL orbs**: Best for sharing across your organization. Requires hosting and organization allow-list management.
+* **Registry orbs**: Best for public sharing or when you need semantic versioning. Requires CircleCI CLI and publishing process.
+
+See xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an orb type] for detailed guidance.
+
+[#can-i-convert-inline-orb-to-url-orb]
+=== How do I convert an inline orb to a URL orb?
+
+To convert an inline orb to a URL orb:
+
+1. Extract the orb content from your config file into a separate YAML file (e.g., `my-orb.yml`)
+2. Host the file at an accessible URL (GitHub, GitLab, S3, etc.)
+3. Add the URL prefix to your organization's allow-list at menu:Organization Settings[Orbs]
+4. Reference the URL orb in your config using the URL instead of the inline definition
+
+See xref:orbs:author:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs] for a complete guide.
+
+[#can-i-convert-inline-orb-to-registry-orb]
+=== How do I convert an inline orb to a registry orb?
+
+To convert an inline orb to a registry orb:
+
+1. Set up the CircleCI CLI with a personal access token
+2. Create a namespace for your organization
+3. Use the orb development kit (`circleci orb init`) or manual authoring process
+4. Structure your inline orb content following the registry orb structure (with separate files for commands, jobs, executors)
+5. Publish your orb using the CircleCI CLI
+
+See xref:orbs:author:orb-author.adoc[Introduction to authoring orbs] for detailed steps.
+
+[#does-orb-development-kit-work-for-url-orbs]
+=== Can I use the orb development kit for URL orbs?
+
+The orb development kit is designed for registry orbs and includes automated CI/CD pipelines for testing and publishing to the registry. For URL orbs, you can manually use some components like:
+
+* `circleci orb pack` to combine multiple YAML files
+* `circleci orb validate` to validate your orb syntax
+* File include syntax (`<<include(file)>>`) for script injection
+
+However, the full automated pipeline (orb template, test-deploy workflow) is specific to registry orbs.
+
+[#possible-to-delete-orb]
+=== Is it possible to delete a registry orb I've created?
+
+No. Registry orbs are public by default and immutable, once a version of a registry orb is published it can not be changed. This is done so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
 
 Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs[Orb registry]. Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
 

@@ -1201,36 +1201,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 [#writing-inline-orbs]
 == Writing inline orbs
 
-When defining reusable configuration elements directly within your config, you can also wrap those elements within an inline orb. You may find inline orbs useful for development or for name-spacing elements that share names in a local config.
-
-To write an inline orb, place the orb elements under that orb's key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another inline orb, the config could look like the example shown below, in which the inline orb `my-orb` imports the `node` orb:
-
-[,yaml]
-----
-version: 2.1
-
-orbs:
-  my-orb:
-    orbs:
-      node: circleci/node@3.0
-    commands:
-      my_command:
-        steps:
-          - run: echo "Run my tests"
-    jobs:
-      my_job:
-        executor: node/default # Node orb executor
-        steps:
-          - checkout
-          - my_command
-          - store_test_results:
-              path: test-results
-
-workflows:
-  main:
-    jobs:
-      - my-orb/my_job
-----
+For a guide to creating inline orbs, see the xref:orbs:author:create-an-inline-orb.adoc[Create an inline orb] guide.
 
 [#see-also]
 == See also

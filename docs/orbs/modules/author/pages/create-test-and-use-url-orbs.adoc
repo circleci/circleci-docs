@@ -10,27 +10,37 @@ This guide covers how to create URL orbs, URL orbs are reusable CircleCI configu
 
 URL orbs are reusable packages of CircleCI configuration that can be stored in any accessible location (such as a Git repository or object storage) and referenced directly via URL in your CircleCI configuration files.
 
-URL orbs contain the same reusable configuration elements as registry orbs:
+URL orbs contain the same reusable configuration elements as inline orbs and registry orbs:
 
 * xref:use:orb-concepts.adoc#commands[Commands]
 * xref:use:orb-concepts.adoc#jobs[Jobs]
 * xref:use:orb-concepts.adoc#executors[Executors]
 
-The key difference from registry orbs is that URL orbs are not published to the link:https://circleci.com/developer/orbs[CircleCI Orb Registry]. Instead, they are stored in a location accessible to your organization and referenced directly by URL.
+The key differences:
+
+* Unlike *inline orbs* (defined in a single project's config), URL orbs can be shared across your organization.
+* Unlike *registry orbs* (published to the Orb Registry), URL orbs are not published and are controlled by your organization's allow-list.
 
 [NOTE]
 ====
-This guide covers **URL orbs**. For information on creating orbs that are published to the CircleCI Orb Registry, see xref:orb-author.adoc[Orb authoring process].
+This guide covers **URL orbs**. For information on creating inline orbs, see xref:create-an-inline-orb.adoc[Create an inline orb]. For information on creating registry orbs, see xref:orb-author.adoc[Orb authoring process].
 ====
 
 == When to use URL orbs
 
-Use URL orbs when:
+Use URL orbs instead of inline orbs when:
 
-* You want to use centralized configuration for your organization.
-* You need to share configuration within your organization.
-* You need to direct control over updates and distribution.
+* You need to share configuration across multiple projects in your organization.
+* You want centralized configuration management.
+
+Use URL orbs instead of registry orbs when:
+
 * You need to use proprietary or confidential configurations.
+* You need direct control over updates and distribution.
+* You don't need public discoverability or community sharing.
+* You want to bypass the orb publishing process and semantic versioning.
+
+For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] section.
 
 == Prerequisites
 
@@ -458,5 +468,8 @@ For full details, see xref:use:managing-url-orbs-allow-lists.adoc#limitations-an
 == See also
 
 * xref:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow Lists]
-* xref:use:orb-concepts.adoc[Orb Concepts].
-* xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference]
+* xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] for comparing URL orbs with inline and registry orbs
+* xref:author:create-an-inline-orb.adoc[Create an inline orb] if you're considering starting with inline orbs
+* xref:orb-author.adoc[Introduction to authoring orbs] for general orb authoring guidance
+* xref:use:orb-concepts.adoc[Orb Concepts] for understanding orb configuration elements
+* xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference] for examples of reusable configuration

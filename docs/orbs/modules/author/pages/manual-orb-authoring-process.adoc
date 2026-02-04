@@ -6,6 +6,11 @@
 
 This guide covers the steps required to create a simple registry xref:use:orb-intro.adoc[orb], manually, without using the orb development kit. We recommend the xref:orb-author.adoc#orb-development-kit[Orb Development Kit] for most registry orb projects.
 
+[NOTE]
+====
+This guide applies to **registry orbs only**. For inline orbs, see xref:create-an-inline-orb.adoc[Create an inline orb]. For URL orbs, see xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs].
+====
+
 [#create-a-namespace]
 == 1. Create a namespace
 
