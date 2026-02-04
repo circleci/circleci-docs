@@ -163,7 +163,7 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 [#security-group-restrictions]
 == Security group restrictions
 
-NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. Form more infomation on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
 
 A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Organization Settings[Security].
 
