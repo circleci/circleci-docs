@@ -4,7 +4,7 @@
 :experimental:
 :page-show-readtime: true
 
-This guide covers how to create URL orbs, URL orbs are reusable CircleCI configuration stored in an accessible location like a Git repository.
+This guide covers how to create URL orbs. URL orbs are reusable CircleCI configuration stored in an accessible location like a Git repository. You can use URL orbs to share configuration across your organization.
 
 == Introduction
 
@@ -46,8 +46,8 @@ For a complete comparison of all three orb types, see the xref:use:orb-concepts.
 
 Before creating a URL orb:
 
-* Ensure your organization has configured the URL orb allow-list. See xref:use:managing-url-orbs-allow-lists.adoc[Managing URL orbs allow-lists].
-* Have access to a hosting location for your orb files (GitHub repository, S3 bucket, etc.).
+* Ensure your organization has configured the URL orb allow-list. See xref:use:managing-url-orbs-allow-lists.adoc[Managing URL orbs allow-lists] for steps.
+* Ensure you have access to a hosting location for your orb files (GitHub repository, S3 bucket, etc.).
 * Be familiar with xref:reference:ROOT:reusing-config.adoc[reusable configuration] concepts.
 
 == URL orb structure
@@ -218,72 +218,6 @@ workflows:
           environment: staging
 ----
 
-[#orb-components]
-== Orb components
-
-URL orbs support the same components as registry orbs:
-
-*Commands* contain one or more steps and can accept parameters. See xref:use:orb-concepts.adoc#commands[Commands] for details.
-
-.Example command
-[,yaml]
-----
-commands:
-  greet:
-    description: Greet someone with a message
-    parameters:
-      to:
-        type: string
-        default: "World"
-        description: To whom to greet
-    steps:
-      - run:
-          name: Greeting
-          command: echo "Hello << parameters.to >>"
-----
-
-*Jobs* define a collection of steps to run within an executor. See xref:use:orb-concepts.adoc#jobs[Jobs] for details.
-
-.Example job
-[,yaml]
-----
-jobs:
-  test:
-    description: Run tests for the application
-    docker:
-      - image: cimg/node:current
-    parameters:
-      test-command:
-        type: string
-        default: "npm test"
-        description: Command to run tests
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Run tests
-          command: << parameters.test-command >>
-----
-
-*Executors* define the environment in which jobs run. See xref:use:orb-concepts.adoc#executors[Executors] for details.
-
-.Example executor
-[,yaml]
-----
-executors:
-  node:
-    description: Node.js execution environment
-    parameters:
-      tag:
-        type: string
-        default: "lts"
-        description: Node.js version tag
-    docker:
-      - image: cimg/node:<< parameters.tag >>
-----
-
 [#testing-your-url-orb]
 == Testing your URL orb
 
@@ -329,6 +263,8 @@ jobs:
             # Add verification commands
             echo "CLI installed successfully"
 ----
+
+Trigger a pipeline (via push, API, or web app) to test your orb, observe the results in the CircleCI web app.
 
 [#updating-url-orbs]
 == Updating URL orbs

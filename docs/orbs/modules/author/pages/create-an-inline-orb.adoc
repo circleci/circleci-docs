@@ -297,11 +297,11 @@ TIP: If you do not have the CircleCI CLI installed, see the xref:guides:toolkit:
 [#testing-inline-orb]
 == Testing your inline orb
 
-Since inline orbs are defined within your config, you can test them immediately by:
+As inline orbs are defined within your config, you can test them immediately by:
 
-1. Committing your config changes to your repository
-2. Triggering a pipeline in CircleCI (via push, API, or web app)
-3. Observing the results in the CircleCI web app
+. Committing your config changes to your repository.
+. Triggering a pipeline in CircleCI (via push, API, or web app).
+. Observing the results in the CircleCI web app.
 
 Any changes to your inline orb take effect immediately in the next pipeline run.
 
