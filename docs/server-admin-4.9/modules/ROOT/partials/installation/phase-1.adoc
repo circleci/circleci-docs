@@ -135,7 +135,7 @@ The application uses a large number of resources. Depending on your usage, your 
 | {kubernetesversions}
 |===
 
-[#minimum-permissions-requirments]
+[#minimum-permissions-requirements]
 ==== Minimum permissions requirements
 
 The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.

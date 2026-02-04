@@ -30,7 +30,7 @@ The pod will have a status of `OOMKilled` when viewed in Kubernetes with kubectl
 [#pod-host-node-is-out-of-disk-space]
 === Pod host node is out of disk space
 
-If the node is full it will have a `node.kuberenetes.io/disk-pressure` taint, which will prevent new task pods from being scheduled. If all valid nodes for the pod have the same taint, or other conditions that prevent scheduling, the task pod will sit in a pending state until an untainted valid node becomes available. This will show the job as stuck in the **Preparing Environment** step in the UI.
+If the node is full it will have a `node.kubernetes.io/disk-pressure` taint, which will prevent new task pods from being scheduled. If all valid nodes for the pod have the same taint, or other conditions that prevent scheduling, the task pod will sit in a pending state until an untainted valid node becomes available. This will show the job as stuck in the **Preparing Environment** step in the UI.
 
 You need to scale your cluster more effectively to avoid this state.
 
