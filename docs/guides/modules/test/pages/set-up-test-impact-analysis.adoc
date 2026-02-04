@@ -731,6 +731,7 @@ options:
 
 The following flags are available to be defined on the `circleci run testsuite` command:
 
+[#cli-flags]
 [.table-scroll]
 --
 [cols=3*, options="header"]
