@@ -592,19 +592,19 @@ Once you have verified analysis works in your feature branch:
 
 This configures your test suite with the default behavior:
 
-* **Feature branches**: Test selection based on impact analysis (only impacted tests run), no analysis performed
-* **Default branch**: All tests run, with analysis performed on impacted tests to keep impact data up to date
+* **Feature branches**: Test selection based on impact analysis (only impacted tests run), no analysis performed.
+* **Default branch**: All tests run, with analysis performed on impacted tests to keep impact data up to date.
 
 [TIP]
 ====
 Analysis can be time-consuming, especially during the initial run when the complete impact data is being built. To prevent analysis from delaying critical parts of your default branch workflow (such as deployment), consider one of these approaches:
 
-* Run analysis as a separate non-blocking job in the same workflow
-* Run analysis in a separate workflow in the same pipeline
+* Run analysis as a separate non-blocking job in the same workflow.
+* Run analysis in a separate workflow in the same pipeline.
 
 See <<set-up-examples>> for configuration examples of each approach. 
 
-It's important to ensure analysis runs on every change to your default branch so that impact data stays up to date for accurate test selection.
+It is important to ensure analysis runs on every change to your default branch so that impact data stays up to date for accurate test selection.
 ====
 
 At this point, you have successfully set up test impact analysis. Next, enable other features of Smarter Testing:
@@ -859,7 +859,7 @@ workflows:
               only: main
 ----
 
-### Run analysis in a separate workflow in the same pipeline
+=== Run analysis in a separate workflow in the same pipeline
 
 .CircleCI configuration with separate workflows
 [source,yaml]
