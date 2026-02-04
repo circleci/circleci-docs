@@ -815,7 +815,7 @@ file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << 
 
 No changes required, this is the default setting.
 
-### Run analysis as a non-blocking job in the same workflow
+=== Run analysis as a non-blocking job in the same workflow
 
 .CircleCI configuration with separate analysis job
 [source,yaml]
