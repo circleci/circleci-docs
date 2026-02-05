@@ -12,10 +12,10 @@ include::guides:ROOT:partial$faq/orb-author-faq-snip.adoc[]
 
 [#see-also]
 == See also
-- xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] for understanding inline, URL, and registry orbs.
-- xref:use:orb-intro.adoc#choosing-an-orb-type[Choosing an orb type] for guidance on which orb type to author.
-- xref:orbs-best-practices.adoc[Orbs best practices] for suggestions on creating production-ready registry orbs.
-- xref:use:orb-concepts.adoc[Orbs concepts] for high-level information about CircleCI orbs.
-- xref:creating-orbs.adoc[Orb publishing process] for information about publishing registry orbs.
-- xref:reference:ROOT:reusing-config.adoc[Orbs reference] for examples of reusable orbs, commands, parameters, and executors.
-- xref:testing-orbs.adoc[Orb testing methodologies] for information on how to test orbs you have created.
+- xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] for understanding inline, URL, and registry orbs.
+- xref:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] for guidance on which orb type to author.
+- xref:orbs-best-practices.adoc[Orbs Best Practices] for suggestions on creating production-ready registry orbs.
+- xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
+- xref:creating-orbs.adoc[Orb Publishing Process] for information about publishing registry orbs.
+- xref:reference:ROOT:reusing-config.adoc[Orbs Reference] for examples of reusable orbs, commands, parameters, and executors.
+- xref:testing-orbs.adoc[Orb Testing Methodologies] for information on how to test orbs you have created.

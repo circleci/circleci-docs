@@ -26,7 +26,7 @@ CircleCI supports three types of orbs:
 +
 Inline orbs do not require publishing, versioning, or external hosting. They exist only within your `.circleci/config.yml` file.
 +
-See the xref:author:create-an-inline-orb.adoc[Create an inline orb] guide for more information on creating inline orbs.
+See the xref:author:create-an-inline-orb.adoc[Create an Inline Orb] guide for more information on creating inline orbs.
 
 *URL orbs*:: URL orbs are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry.
 +
@@ -34,7 +34,7 @@ URL orbs do not follow semantic versioning, and can be accessed directly using a
 +
 See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
 +
-If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs] guide.
+If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
 
 *Registry orbs*:: Registry orbs can be developed using the orb dev kit (there is also a manual process), and published following the process described in the xref:author:creating-orbs.adoc[Publishing Orbs] guide. Registry orbs follow strict semantic versioning. Public registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry] and so can be used by anyone.
 +
@@ -136,7 +136,7 @@ workflows:
 
 Once defined, inline orb elements are available as `<orb-name>/<element>` within the same configuration file. Inline orbs support the same configuration elements as URL orbs and registry orbs: commands, jobs, and executors.
 
-For more details on authoring inline orbs, see the xref:author:create-an-inline-orb.adoc[Create an inline orb] guide.
+For more details on authoring inline orbs, see the xref:author:create-an-inline-orb.adoc[Create an Inline Orb] guide.
 
 NOTE: Inline orbs can be converted to URL orbs or registry orbs later if you need to share them beyond a single project.
 
@@ -158,7 +158,7 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors.
 
-If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs] guide.
+If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
 
 See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
 
@@ -353,5 +353,5 @@ The orbs page also includes your org's allow list URLs for URL orbs.
 == See also
 
 * Refer to xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
-* Refer to xref:author:orb-author.adoc[Introduction to authoring orbs] for guidance on creating your own orbs.
+* Refer to xref:author:orb-author.adoc[Introduction to Authoring Orbs] for guidance on creating your own orbs.
 * Refer to xref:orbs-faq.adoc[Orbs FAQ] for information on known issues and questions that have been addressed when using CircleCI orbs.

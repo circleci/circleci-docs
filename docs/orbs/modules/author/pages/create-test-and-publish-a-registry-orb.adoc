@@ -34,7 +34,7 @@ video::5ta4RUwqOBI[youtube]
 [#prerequisites]
 == Prerequisites
 
-* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign up and Try] page for steps to get set up.
+* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign Up and Try] page for steps to get set up.
 * xref:guides:toolkit:local-cli.adoc#installation[Set Up the CircleCI CLI] on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
 +
 ```shell
@@ -42,7 +42,7 @@ circleci update
 
 circleci version
 ```
-* Register a namespace for your GitHub organization. Every organization registered on CircleCI is able to claim *one* unique xref:use:orb-concepts.adoc#namespaces[namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
+* Register a namespace for your GitHub organization. Every organization registered on CircleCI is able to claim *one* unique xref:use:orb-concepts.adoc#namespaces[Namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
 +
 Enter the following command to claim your namespace, if you have not yet claimed one:
 +
@@ -79,15 +79,15 @@ Open a terminal and initialize your new orb project using the `orb init` CLI com
 
 WARNING: Once an orb is initialized, it **cannot be switched from public to private or vice versa**. Ensure you add the `--private` flag if you intend to create a private orb.
 
-NOTE: The `--private` flag is not currently supported on CircleCI server. Orbs created within a server installation will only be visible to authenticated users.
+NOTE: The `--private` flag is not currently supported on CircleCI Server. Orbs created within a server installation will only be visible to authenticated users.
 
-* To initialize a xref:use:orb-intro.adoc#public-or-private[public] orb:
+* To initialize a xref:use:orb-intro.adoc#public-or-private[Public] orb:
 +
 ```shell
 circleci orb init </path/to/myProject-orb>
 ```
 
-* To initialize a xref:use:orb-intro.adoc#public-or-private[private] orb:
+* To initialize a xref:use:orb-intro.adoc#public-or-private[Private] orb:
 +
 ```shell
 circleci orb init </path/to/myProject-orb> --private
@@ -105,19 +105,19 @@ Choose `Yes, walk me through the process.` when prompted.
 
 When choosing the fully automated option, the link:https://github.com/CircleCI-Public/Orb-Template[orb template] is downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included.
 
-For more information on the included CI/CD pipeline, see the xref:creating-orbs.adoc[Orb publishing process] page.
+For more information on the included CI/CD pipeline, see the xref:creating-orbs.adoc[Orb Publishing Process] page.
 
-NOTE: If you would like a convenient way to download the link:https://github.com/CircleCI-Public/Orb-Template[orb template] you can opt to handle everything yourself. When choosing the manual option, see xref:manual-orb-authoring-process.adoc[Manual orb authoring process] for instructions on how to author and publish your orb.
+NOTE: If you would like a convenient way to download the link:https://github.com/CircleCI-Public/Orb-Template[orb template] you can opt to handle everything yourself. When choosing the manual option, see xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] for instructions on how to author and publish your orb.
 
 ==== GitHub App integration additional steps
 
-If you have a `circleci` type organization you will need to follow some extra steps, as listed below. For more information on organization types, see the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
+If you have a `circleci` type organization you will need to follow some extra steps, as listed below. For more information on organization types, see the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
 * When prompted, `Are you using GitHub or Bitbucket or GitHub app (if GH App use circleci as the entry)?`, enter `circleci`.
 * When prompted, `Enter your circleci username or organization`, you will need to inspect the URL from the CircleCI web app and provide the org ID portion:
 .. Navigate to the link:https://app.circleci.com[CircleCI web app]
 .. The URL will be in the form: `\https://app.circleci.com/pipelines/circleci/<org-ID-string>`. The last string is the org ID that you need.
-* At the end of the automated set up process you will receive an error: `Error: Could not follow project`. At this point you need to push your project up to GitHub, and set it up in a new CircleCI project. Steps for creating a new project can be found on the xref:guides:getting-started:create-project.adoc[Create a project] page.
+* At the end of the automated set up process you will receive an error: `Error: Could not follow project`. At this point you need to push your project up to GitHub, and set it up in a new CircleCI project. Steps for creating a new project can be found on the xref:guides:getting-started:create-project.adoc[Create a Project] page.
 * Once you have your orb pushed up to GitHub and your project set up, you will need to make a few manual updates:
 ** In `config.yml` and `test-deploy-yml`, update `vcs_type: << pipeline.project.type >>` to be `vcs_type: github`.
 ** In `src/@orb.yml` update `source_url: <orb URL>` to be `source_url: "https://github.com/<your-github-user-or-org-name>/<your-orb-repo-name>"`.
@@ -126,13 +126,13 @@ If you have a `circleci` type organization you will need to follow some extra st
 
 In the background, the `orb init` command copies and customizes the link:https://github.com/CircleCI-Public/Orb-Template[orb template] based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will be asked for the remote git repository URL that you obtained back in step 1.
 
-The link:https://github.com/CircleCI-Public/Orb-Template[orb template] contains a full CI/CD pipeline (described in xref:creating-orbs.adoc[orb publishing process]), which automatically xref:use:orb-concepts.adoc#orb-packing[packs], xref:testing-orbs.adoc[tests], and xref:creating-orbs.adoc[publishes] your orb.
+The link:https://github.com/CircleCI-Public/Orb-Template[orb template] contains a full CI/CD pipeline (described in xref:creating-orbs.adoc[Orb Publishing Process]), which automatically xref:use:orb-concepts.adoc#orb-packing[Packs], xref:testing-orbs.adoc[Tests], and xref:creating-orbs.adoc[Publishes] your orb.
 
-In the setup process you will be asked if you would like to save your xref:guides:toolkit:managing-api-tokens.adoc[personal API Token] into an `orb-publishing` xref:guides:security:contexts.adoc[context]. Saving this token is necessary for publishing development and production versions of your orb. If you have already made an orb in the past, you can skip this step, as the context will already exist.
+In the setup process you will be asked if you would like to save your xref:guides:toolkit:managing-api-tokens.adoc[Personal API Token] into an `orb-publishing` xref:guides:security:contexts.adoc[Context]. Saving this token is necessary for publishing development and production versions of your orb. If you have already made an orb in the past, you can skip this step, as the context will already exist.
 
 === 5. Restrict who can trigger jobs for the orb
 
-Use xref:guides:security:contexts.adoc#restrict-a-context-to-a-security-group-or-groups[security groups] to limit access to users that are allowed to trigger jobs. Only these users will have access to the private xref:guides:toolkit:managing-api-tokens.adoc[personal API token].
+Use xref:guides:security:contexts.adoc#restrict-a-context-to-a-security-group-or-groups[Security Groups] to limit access to users that are allowed to trigger jobs. Only these users will have access to the private xref:guides:toolkit:managing-api-tokens.adoc[Personal API Token].
 
 xref:guides:security:contexts.adoc#restrict-a-context[Contexts] can be located by navigating to **Organization Settings > Contexts** in the web app. After creating your orb, you will have a new context called `orb-publishing`. Click into `orb-publishing` and add a **Security Group**.
 
@@ -161,9 +161,9 @@ You will be provided with a link to the project building on CircleCI where you c
 
 From a non-default branch (you will be moved to the `alpha` branch automatically at setup), begin modifying the sample orb code to fit your requirements. On each _push_, your orb will be automatically built and tested. More information on developing your orb can be found in the next section.
 
-Be sure to view the `.circleci/test-deploy` link:https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml[file] to view how your orb components are being tested. You can modify your tests as you change your orb. Learn more about testing your orb on the xref:testing-orbs.adoc[Orb testing methodologies] page.
+Be sure to view the `.circleci/test-deploy` link:https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/test-deploy.yml[file] to view how your orb components are being tested. You can modify your tests as you change your orb. Learn more about testing your orb on the xref:testing-orbs.adoc[Orb Testing Methodologies] page.
 
-When you are ready to deploy the first production version of your orb, head to the xref:creating-orbs.adoc[Orb publishing process] page.
+When you are ready to deploy the first production version of your orb, head to the xref:creating-orbs.adoc[Orb Publishing Process] page.
 
 .Build and test an orb
 video::kTeRJrwxShI[youtube]
@@ -241,7 +241,7 @@ Navigate to the `src` directory to look at the included sections.
 
 The directories listed above represent orb components that can be included with your orb. @orb.yml acts as the root of your orb. In addition to the directories representing your orb's YAML components, you will also see a <<scripts,`scripts`>> directory where we can store code we want to inject into our components.
 
-Each directory within `src` corresponds with a xref:reference:ROOT:reusing-config.adoc[reusable configuration] component type, which can be added or removed from the orb. If, for example, your orb does not require any `executors` or `jobs`, these directories can be deleted.
+Each directory within `src` corresponds with a xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] component type, which can be added or removed from the orb. If, for example, your orb does not require any `executors` or `jobs`, these directories can be deleted.
 
 [#orbyml]
 ==== @orb.yml
@@ -337,7 +337,7 @@ steps:
 [#scripts]
 ==== Scripts
 
-One of the major benefits of the orb development kit is a xref:use:orb-concepts.adoc#file-include-syntax[script inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `++<<include(file)>>++` within your orb config code to include the file contents directly in the orb.
+One of the major benefits of the orb development kit is a xref:use:orb-concepts.adoc#file-include-syntax[Script Inclusion] feature. When using the `circleci orb pack` command (automated with the orb development kit), you can use `++<<include(file)>>++` within your orb config code to include the file contents directly in the orb.
 
 Script inclusion is especially useful when writing complex orb commands, which might contain a lot of _Bash_ code, _(although you could use Python too!)_.
 
@@ -416,14 +416,14 @@ Read our full xref:testing-orbs.adoc[Orb Testing Methodologies] documentation.
 
 With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
-After authoring your orb, you can publish it with a xref:use:orb-concepts.adoc#semantic-versioning[semantically versioned] tag, and the orb will appear on the link:https://circleci.com/developer/orbs[orb registry].
+After authoring your orb, you can publish it with a xref:use:orb-concepts.adoc#semantic-versioning[Semantically Versioned] tag, and the orb will appear on the link:https://circleci.com/developer/orbs[orb registry].
 
 CAUTION: If your orb is private, it will not be searchable on the Orb Registry. However, the URL will be accessible to authenticated users of the orb.
 
 .Flow diagram of the orb registry publishing process.
 image::guides:ROOT:orb-publishing-process.png[Orb Publishing Process]
 
-If you are publishing your orb using the xref:orb-author.adoc#orb-development-kit[orb development kit], rather than xref:manual-orb-authoring-process.adoc[manually], semantic releases are straight-forward using the steps set out in this section. You can find a simplified version of the publishing process in the link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[README.md] file that the `circleci orb init` command generates at the start of the authoring process.
+If you are publishing your orb using the xref:orb-author.adoc#orb-development-kit[Orb Development Kit], rather than xref:manual-orb-authoring-process.adoc[Manually], semantic releases are straight-forward using the steps set out in this section. You can find a simplified version of the publishing process in the link:https://github.com/CircleCI-Public/Orb-Template/blob/main/README.md[README.md] file that the `circleci orb init` command generates at the start of the authoring process.
 
 video::ujpEwDJJQ7I[youtube]
 
@@ -437,7 +437,7 @@ Next, follow these steps to create a new release from your changes.
 
 . *Open a new Pull Request to the default branch.*
 +
-The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory automatically xref:testing-orbs.adoc#yaml-lint[lint], xref:testing-orbs.adoc#shellcheck[ShellCheck], xref:testing-orbs.adoc#review[review], and xref:testing-orbs.adoc#integration-testing[test] your orb changes in the CircleCI web app.
+The included `config.yml` and `test-deploy.yml` files in the `./circleci` directory automatically xref:testing-orbs.adoc#yaml-lint[Lint], xref:testing-orbs.adoc#shellcheck[ShellCheck], xref:testing-orbs.adoc#review[Review], and xref:testing-orbs.adoc#integration-testing[Test] your orb changes in the CircleCI web app.
 . *Ensure all tests pass.*
 +
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app.

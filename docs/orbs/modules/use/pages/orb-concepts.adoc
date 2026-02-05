@@ -132,7 +132,7 @@ The following table provides a detailed comparison of the three orb types:
 
 | *Best for*
 | Learning, testing, project-specific config
-| Org-wide sharing, proprietary config
+| Organization-wide sharing, proprietary config
 | Community sharing, public packages
 |===
 --

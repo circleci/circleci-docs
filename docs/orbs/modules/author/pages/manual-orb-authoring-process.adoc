@@ -4,11 +4,11 @@
 :experimental:
 :page-aliases: orb-author-validate-publish
 
-This guide covers the steps required to create a simple registry xref:use:orb-intro.adoc[orb], manually, without using the orb development kit. We recommend the xref:orb-author.adoc#orb-development-kit[Orb Development Kit] for most registry orb projects.
+This guide covers the steps required to create a simple registry xref:use:orb-intro.adoc[Orb], manually, without using the orb development kit. We recommend the xref:orb-author.adoc#orb-development-kit[Orb Development Kit] for most registry orb projects.
 
 [NOTE]
 ====
-This guide applies to **registry orbs only**. For inline orbs, see xref:create-an-inline-orb.adoc[Create an inline orb]. For URL orbs, see xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs].
+This guide applies to **registry orbs only**. For inline orbs, see xref:create-an-inline-orb.adoc[Create an Inline Orb]. For URL orbs, see xref:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs].
 ====
 
 [#create-a-namespace]
@@ -26,21 +26,21 @@ circleci namespace create <name> --org-id <your-organization-id>
 
 Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published.
 
-To create a xref:use:orb-intro.adoc#public-or-private[public] orb:
+To create a xref:use:orb-intro.adoc#public-or-private[Public] orb:
 
 [,shell]
 ----
 circleci orb create <my-namespace>/<my-orb-name>
 ----
 
-To create a xref:use:orb-intro.adoc#public-or-private[private] orb:
+To create a xref:use:orb-intro.adoc#public-or-private[Private] orb:
 
 [,shell]
 ----
 circleci orb create <my-namespace>/<my-orb-name> --private
 ----
 
-NOTE: The `--private` flag is not currently supported on CircleCI server. Orbs created within a server installation will only be visible to authenticated users.
+NOTE: The `--private` flag is not currently supported on CircleCI Server. Orbs created within a server installation will only be visible to authenticated users.
 
 Next, create the content of your orb in a YAML file. Here is a simple example to get you started:
 
@@ -278,14 +278,14 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 List your available orbs using the CLI:
 
-To list xref:use:orb-intro.adoc#public-or-private[public] orbs:
+To list xref:use:orb-intro.adoc#public-or-private[Public] orbs:
 
 [,shell]
 ----
 circleci orb list <my-namespace>
 ----
 
-To list xref:use:orb-intro.adoc#public-or-private[private] orbs:
+To list xref:use:orb-intro.adoc#public-or-private[Private] orbs:
 
 [,shell]
 ----

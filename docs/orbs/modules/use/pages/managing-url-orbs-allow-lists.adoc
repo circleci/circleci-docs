@@ -11,8 +11,8 @@ This guide explains how to add, view, or delete allow-lists in the CircleCI Web 
 
 Each allow-list entry contains three components:
 
-* *Name* - A descriptive identifier for the entry
-* *URL prefix* - The approved URL pattern that orb references must match (must use HTTPS and end with /)
+* *Name* - A descriptive identifier for the entry.
+* *URL prefix* - The approved URL pattern that orb references must match (must use HTTPS and end with /).
 * *Auth* - The authentication method to use.
 ** In the CircleCI Web App, the available values are: `None`, `GitHub OAuth`, `GitHub App`, or `Bitbucket OAuth`.
 ** In the API, the available values are: `none`, `github-oauth`, `github-app`, or `bitbucket-oauth`.
@@ -40,7 +40,7 @@ API::
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
-. Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . Send a *POST* request to the link:https://circleci.com/docs/api/v2/#tag/Organization/operation/createURLOrbAllowListEntry[Create a new URL orb allow-list entry] endpoint to add an allow-list entry, with a JSON map containing name, prefix, and auth keys, as the request body.
 
 Example:
@@ -84,7 +84,7 @@ API::
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
-. Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . Send a *GET* request to the link:https://circleci.com/docs/api/v2/#tag/Organization/operation/listURLOrbAllowListEntries[List the entries in the org's URL Orb allow-list] endpoint to view the organization's URL orb allow-lists.
 
 Example:
@@ -132,7 +132,7 @@ API::
 --
 include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 
-. Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . Send a *DELETE* request to the link:https://circleci.com/docs/api/v2/#tag/Organization/operation/removeURLOrbAllowListEntry[Remove an entry from the org's URL orb allow-list] endpoint to delete the allow-list entry.
 
 Example:

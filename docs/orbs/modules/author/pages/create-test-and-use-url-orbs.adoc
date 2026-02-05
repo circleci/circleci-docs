@@ -10,7 +10,7 @@ This guide covers how to create URL orbs. URL orbs are reusable CircleCI configu
 
 == Introduction
 
-URL orbs are reusable packages of CircleCI configuration that can be stored in any accessible location (such as a Git repository or object storage) and referenced directly via URL in your CircleCI configuration files.
+URL orbs are reusable packages of CircleCI configuration. They can be stored in any accessible location (such as a Git repository or object storage) and referenced directly via URL in your CircleCI configuration files.
 
 URL orbs contain the same reusable configuration elements as inline orbs and registry orbs:
 
@@ -25,18 +25,18 @@ The key differences:
 
 [NOTE]
 ====
-This guide covers **URL orbs**. For information on creating inline orbs, see xref:create-an-inline-orb.adoc[Create an inline orb]. For information on creating registry orbs, see xref:orb-author.adoc[Orb authoring process].
+This guide covers **URL orbs**. For information on creating inline orbs, see xref:create-an-inline-orb.adoc[Create an Inline Orb]. For information on creating registry orbs, see xref:orb-author.adoc[Orb Authoring Process].
 ====
 
-For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] section.
+For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] section.
 
 == Prerequisites
 
 Before creating a URL orb:
 
-* Ensure you are in a position to configure your organization's URL orb allow-list. See xref:use:managing-url-orbs-allow-lists.adoc[Managing URL orbs allow-lists] for steps.
+* Ensure you are in a position to configure your organization's URL orb allow-list. See xref:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow-Lists] for steps.
 * Ensure you have access to a hosting location for your orb files (GitHub repository, S3 bucket, etc.).
-* Be familiar with xref:reference:ROOT:reusing-config.adoc[reusable configuration] concepts.
+* Be familiar with xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] concepts.
 
 == URL orb structure
 
@@ -133,11 +133,11 @@ executors:
 
 Store your orb file in a location accessible via HTTPS. Common options include:
 
-* GitHub repository
-* GitLab repository
-* Bitbucket repository
-* AWS S3 bucket
-* Other object storage
+* GitHub repository.
+* GitLab repository.
+* Bitbucket repository.
+* AWS S3 bucket.
+* Other object storage.
 
 For the purposes of this guide, we will use a GitHub repository.
 
@@ -189,7 +189,7 @@ The allow-list entry should include the prefix:
 https://raw.githubusercontent.com/my-org/orbs/
 ----
 
-See xref:use:managing-url-orbs-allow-lists.adoc#adding-a-url-orb-allow-list-entry[Adding a URL orb allow-list entry] for detailed instructions.
+See xref:use:managing-url-orbs-allow-lists.adoc#adding-a-url-orb-allow-list-entry[Adding a URL Orb Allow-List Entry] for detailed instructions.
 
 [#step-4-use-the-orb]
 === Step 4: Use the orb in your configuration
@@ -218,7 +218,7 @@ workflows:
 
 Before using your orb, validate the YAML syntax:
 
-TIP: If you do not have the CircleCI CLI installed, first see the xref:guides:toolkit:local-cli.adoc[Installing the local CLI] page.
+TIP: If you do not have the CircleCI CLI installed, first see the xref:guides:toolkit:local-cli.adoc[Installing the Local CLI] page.
 
 [,shell]
 ----
@@ -263,9 +263,9 @@ Trigger a pipeline (via push, API, or web app) to test your orb, observe the res
 
 To update a URL orb:
 
-. Make changes to your orb YAML file
-. Commit and push the changes to your repository
-. The updated orb will be available at the same URL
+. Make changes to your orb YAML file.
+. Commit and push the changes to your repository.
+. The updated orb will be available at the same URL.
 
 [NOTE]
 ====
@@ -306,7 +306,7 @@ orbs:
 ----
 
 [#using-commit-shas]
-=== Using commit SHAs
+=== Using commit hashes
 
 Reference specific commits for immutability:
 
@@ -353,7 +353,7 @@ commands:
       # Installation steps using parameters
 ----
 
-Never hardcode secrets. Use the `env_var_name` parameter type:
+Never hard-code secrets. Use the `env_var_name` parameter type:
 
 .Example command with secrets. The API key is stored in an environment variable.
 [,yaml]
@@ -386,18 +386,18 @@ Include documentation in your repository, for example:
 
 URL orbs have the following limitations:
 
-* Limited to 50 URL orbs per configuration file
+* Limited to 50 URL orbs per configuration file.
 * Maximum nesting depth of 5 for URL orb hierarchies.
 * Cached for 5 minutes after fetching.
 
-For full details, see xref:use:managing-url-orbs-allow-lists.adoc#limitations-and-caveats[URL orb limitations].
+For full details, see xref:use:managing-url-orbs-allow-lists.adoc#limitations-and-caveats[URL Orb Limitations].
 
 [#see-also]
 == See also
 
-* xref:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow Lists]
-* xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] for comparing URL orbs with inline and registry orbs
-* xref:author:create-an-inline-orb.adoc[Create an inline orb] if you're considering starting with inline orbs
-* xref:orb-author.adoc[Introduction to authoring orbs] for general orb authoring guidance
-* xref:use:orb-concepts.adoc[Orb Concepts] for understanding orb configuration elements
-* xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference] for examples of reusable configuration
+* xref:use:managing-url-orbs-allow-lists.adoc[Managing URL Orbs Allow Lists].
+* xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] for comparing URL orbs with inline and registry orbs.
+* xref:author:create-an-inline-orb.adoc[Create an Inline Orb] if you're considering starting with inline orbs.
+* xref:orb-author.adoc[Introduction to Authoring Orbs] for general orb authoring guidance.
+* xref:use:orb-concepts.adoc[Orb Concepts] for understanding orb configuration elements.
+* xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference] for examples of reusable configuration.
