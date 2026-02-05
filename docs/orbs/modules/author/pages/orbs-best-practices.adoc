@@ -5,7 +5,7 @@
 
 [#general]
 == General
-This guide covers best practices for creating orbs.
+This guide covers best practices for creating registryorbs.
 
 [#give-your-orb-a-descriptive-name]
 === Give your orb a descriptive name

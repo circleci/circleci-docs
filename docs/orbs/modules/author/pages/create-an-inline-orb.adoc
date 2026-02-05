@@ -27,6 +27,8 @@ The key difference is that inline orbs exist only within your configuration file
 This guide covers **inline orbs**. For information on creating orbs that can be shared across your organization, see xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs]. For publicly shareable orbs, see xref:create-test-and-publish-a-registry-orb.adoc[Create, test, and publish a registry orb].
 ====
 
+For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] section.
+
 == Prerequisites
 
 Before creating an inline orb, you should be familiar with:
@@ -65,7 +67,7 @@ For detailed information on each element, see xref:use:orb-concepts.adoc#orb-con
 [#creating-an-inline-orb]
 == Creating an inline orb
 
-To create an inline orb, place the orb elements under a custom orb key in the `orbs` declaration section of your configuration. Here are some examples:
+To create an inline orb, place the orb elements under a custom orb key in the `orbs` declaration section of your configuration. Use the examples below to help you configure your inline orb.
 
 [#basic-example]
 === Example: Basic inline orb with commands and jobs

@@ -16,9 +16,9 @@ Orbs are reusable packages of parameterizable configuration that can be used in 
 
 Orbs are reusable packages of parameterizable configuration made up of reusable configuration elements, for example:
 
-* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs].
-* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands].
-* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Executors].
+* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs]
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Executors]
 
 CircleCI supports three types of orbs:
 
@@ -57,6 +57,11 @@ The following table provides a high-level comparison of the three orb types to h
 | Single project only
 | Organization-wide
 | Public or private across organizations
+
+| *VCS support*
+| GitHub, GitLab, Bitbucket
+| GitHub, Bitbucket
+| Rgistry orbs are hosted in GitHub only but can be used by all
 
 | *Versioning*
 | None

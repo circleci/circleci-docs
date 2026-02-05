@@ -3,6 +3,7 @@
 :page-description: Tutorial showing how to create an orb using the orb development kit.
 :experimental:
 :page-aliases: create-an-orb
+:page-show-readtime: true
 
 This tutorial guides you through creating a new registry orb using the orb development kit. The starting point is creating a new repository on link:https://github.com[GitHub.com].
 
