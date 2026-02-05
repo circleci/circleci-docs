@@ -1,86 +1,28 @@
-= Orb testing methodologies
+= Registry orb testing methodologies
 :page-platform: Cloud, Server v4+
 :page-description: Starting point for Testing CircleCI Orbs
 :experimental:
 
-This guide covers various best practices for testing orbs.
+This guide covers various best practices for testing registry orbs.
 
 [#introduction]
 == Introduction
 
-Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. As with any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language.
-
-[#testing-by-orb-type]
-=== Testing approaches by orb type
-
-The testing methods available depend on which type of orb you are authoring:
-
-[.table-scroll]
---
-[cols="2,1,1,1", options="header"]
-|===
-| Testing Method | Inline Orbs | URL Orbs | Registry Orbs
-
-| YAML linting
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| Config validation
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| ShellCheck (for scripts)
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| Orb review checks
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| Unit testing (BATS)
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| Integration testing
-| [.circle-green]#**Yes**# ^1^
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| Automated CI/CD pipeline
-| [.circle-red]#**No**#
-| Optional
-| [.circle-green]#**Yes**# ^2^
-|===
---
-
-^1^ _Inline orbs are tested directly in the config where they are defined._
-
-^2^ _Available via the orb development kit._
-
-NOTE: The majority of this guide focuses on **registry orb** testing using the orb development kit. For inline orbs, validation and integration testing are the primary methods. For URL orbs, most testing methods apply except for the automated orb development kit pipeline.
-
-For registry orbs, the orb development kit provides a simple path to implementing a full range of robust tests.
+Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. As with any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language. With the orb development kit, there is a simple path to implementing a full range of robust tests for your registryorb.
 
 video::kTeRJrwxShI[youtube]
 
 [#orb-tools-pipeline-overview]
-== Orb-tools pipeline overview (registry orbs only)
+== Orb-tools pipeline overview
 
-NOTE: This section applies to **registry orbs** created with the orb development kit. Inline orbs and URL orbs do not use this automated pipeline.
-
-If you are following this guide and have created your registry orb using the orb development kit, your orb project will follow the same structure as the link:https://github.com/CircleCI-Public/Orb-Template[Orb Template]. If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
+If you are following this guide and have created your registryorb using the orb development kit, your orb project will follow the same structure as the link:https://github.com/CircleCI-Public/Orb-Template[Orb Template]. If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
 
 [#configyml]
 === config.yml
 
-The first config file is responsible for publishing a development version of our orb, so that you may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, you can not test the orb _directly_, but in this stage you can still lint, validate, review, and potentially even run unit tests against your scripts.
+The first config file is responsible for publishing a development version of our registryorb, so that you may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, you can not test the orb _directly_, but in this stage you can still lint, validate, review, and potentially even run unit tests against your scripts.
 
-After the development version of the orb has been published, the final `orb-tools/continue` job will trigger the second workflow, `test-deploy`.
+After the development version of the registry orb has been published, the final `orb-tools/continue` job will trigger the second workflow, `test-deploy`.
 
 See the full link:https://github.com/CircleCI-Public/Orb-Template/blob/main/.circleci/config.yml[config.yml template here].
 
@@ -94,11 +36,7 @@ See the full link:https://github.com/CircleCI-Public/Orb-Template/blob/main/.cir
 [#validation]
 == Validation
 
-NOTE: Validation applies to **all orb types** (inline, URL, and registry orbs). However, the automated pipeline is only available for registry orbs using the orb development kit.
-
-The most basic forms of testing for orbs are configuration validation and code linting. All orbs must be both valid YAML and valid CircleCI syntax.
-
-For registry orbs, these checks are automatically applied when using the orb development kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. For inline orbs and URL orbs, validation can be performed manually using the CircleCI CLI.
+The most basic forms of testing for orbs are configuration validation and code linting. When an orb is packed and published it must be both valid YAML, and valid CircleCI syntax. Both of these checks are automatically applied when using the orb development kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. Config validation and code linting can also be performed manually, locally.
 
 [,yaml]
 ----
@@ -167,8 +105,6 @@ circleci local execute orb-tools/pack
 [#shellcheck]
 === ShellCheck
 
-NOTE: ShellCheck applies to **URL orbs** and **registry orbs** that use the xref:use:orb-concepts.adoc#file-include-syntax[file include syntax] to import external scripts. Inline orbs typically don't use external scripts, so ShellCheck is less relevant.
-
 One of the major benefits of using the orb development kit is the ability to xref:use:orb-concepts.adoc#file-include-syntax[import external Bash scripts] into your final orb. Because you can keep your Bash scripts in the link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts[src/scripts] directory, you can run additional tests against your scripts.
 
 The most basic tests to run against Bash scripts are a form of validation: "shellchecking". Shellchecking is similar to a linter for Bash. Find out more at https://www.shellcheck.net/[shellcheck.net].
@@ -194,8 +130,6 @@ circleci local execute shellcheck/check
 
 [#review]
 === Review
-
-NOTE: The review job is available for **URL orbs** and **registry orbs**. It can be used manually for URL orbs or automatically via the orb development kit for registry orbs.
 
 The orb-tools orb includes a job `orb-tools/review` which will run a suite of tests against your orb designed to find opportunities to implement best practices and improve the quality of the orb. The "review" job was modeled closely after _ShellCheck_, and operates based on a list of rules called "RC" Review Checks. Each "RC" code corresponds to a specific rule, which can optionally be ignored using the `exclude` parameter in your `config.yaml` file.
 
@@ -224,9 +158,7 @@ CAUTION: The `orb-tools/review` job currently can not be run locally due to the 
 [#unit-testing]
 == Unit testing
 
-NOTE: Unit testing applies to **URL orbs** and **registry orbs** that use external scripts with the xref:use:orb-concepts.adoc#file-include-syntax[file include syntax]. Inline orbs typically don't use external scripts, so unit testing is less relevant.
-
-If you are taking advantage of the orb development kit's xref:use:orb-concepts.adoc#file-include-syntax[`<<include(file)>>` file inclusion] feature and `src/scripts` directory to store and source your Bash files, you can write true unit tests for your scripts.
+If you are taking advantage of the orb development kit's xref:use:orb-concepts.adoc#file-include-syntax[`<<include(file)>>` file inclusion] feature and `src/scripts` directory to store and source your Bash files, you can write true integration tests for your scripts.
 
 image::guides:ROOT:bats_tests_example.png[Unit testing Bash with BATS-Core]
 
@@ -270,15 +202,7 @@ Want to see how CircleCI writes unit tests for Bash? Check out our link:https://
 [#integration-testing]
 == Integration testing
 
-NOTE: Integration testing applies to **all orb types** (inline, URL, and registry orbs). The approach differs slightly: inline orbs are tested directly in the config where they're defined, URL orbs are tested by referencing them via URL, and registry orbs are tested using development versions in automated pipelines.
-
-After validating, linting, shellchecking, and any other testing that you can perform on the source code is complete, you must test your orb's functionality in a real CircleCI config.
-
-For **registry orbs**, in the second config file (`test-deploy.yml`), you can access the development version of the orb you published in the first config, and attempt to execute your orbs commands and jobs.
-
-For **URL orbs**, you can create a test project that references your URL orb and validates its functionality.
-
-For **inline orbs**, integration testing happens naturally as the orb is used within the same config file where it's defined.
+After validating, linting, shellchecking, and any other testing that you can perform on the source code is complete, you must test your orb's functionality in a real CircleCI config. In the second config file (`test-deploy.yml`), you can access the development version of the orb you published in the first config, and attempt to execute your orbs commands and jobs.
 
 [#testing-orb-commands]
 === Testing orb commands
@@ -375,7 +299,6 @@ Once you have added new orb features, and created tests that pass your CI, it is
 [#see-also]
 == See also
 
-* Refer to xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] for understanding the differences between inline, URL, and registry orbs.
 * Refer to xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
-* Refer to xref:creating-orbs.adoc[Orb Publishing Process] for information about publishing registry orbs.
+* Refer to xref:creating-orbs.adoc[Orb Publishing Process] for information about orbs that you may use in your workflows and jobs.
 * Refer to xref:reference:ROOT:reusing-config.adoc[Orbs Reference] for examples of reusable orbs, commands, parameters, and executors.
