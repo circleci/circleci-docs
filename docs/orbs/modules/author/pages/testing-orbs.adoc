@@ -8,19 +8,19 @@ This guide covers various best practices for testing registry orbs.
 [#introduction]
 == Introduction
 
-Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. As with any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language. With the orb development kit, there is a simple path to implementing a full range of robust tests for your registryorb.
+Orbs are a critical component of a pipeline on CircleCI, responsible for installing tooling, executing tests, deploying applications, and more. As with any software, it is important to implement tests to protect the orb from breaking with new changes. Because orbs are developed in YAML, the testing process is a little different than for a programming language. With the orb development kit, there is a simple path to implementing a full range of robust tests for your registry orb.
 
 video::kTeRJrwxShI[youtube]
 
 [#orb-tools-pipeline-overview]
 == Orb-tools pipeline overview
 
-If you are following this guide and have created your registryorb using the orb development kit, your orb project will follow the same structure as the link:https://github.com/CircleCI-Public/Orb-Template[Orb Template]. If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
+If you are following this guide and have created your registry orb using the orb development kit, your orb project will follow the same structure as the link:https://github.com/CircleCI-Public/Orb-Template[Orb Template]. If you look inside your `.circleci/` directory, you will find two config files, `config.yml` and `test-deploy.yml`, each of which contains a set of tests to run.
 
 [#configyml]
 === config.yml
 
-The first config file is responsible for publishing a development version of our registryorb, so that you may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, you can not test the orb _directly_, but in this stage you can still lint, validate, review, and potentially even run unit tests against your scripts.
+The first config file is responsible for publishing a development version of our registry orb, so that you may run integration tests against it in the second workflow, `test-deploy`. At this point in the pipeline, because the orb is not yet published, you can not test the orb _directly_, but in this stage you can still lint, validate, review, and potentially even run unit tests against your scripts.
 
 After the development version of the registry orb has been published, the final `orb-tools/continue` job will trigger the second workflow, `test-deploy`.
 
