@@ -56,7 +56,7 @@ The `action` parameter will default to `build` on pushes to the project. Below i
 
 In this example, the workflow named `report` would run. Remember to substitute xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[`project-slug`] with your values.
 
-CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+CAUTION: For GitHub App, GitLab or Bitbucket Data Center pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 
 [source,shell]
 ----
