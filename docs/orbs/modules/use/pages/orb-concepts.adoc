@@ -481,7 +481,7 @@ NOTE: Included files are always referenced from the relative location of the `@o
 
 [tabs]
 ====
-Command-yaml::
+Command-YAML::
 +
 --
 [,yaml]
@@ -502,7 +502,7 @@ file-sh::
 echo "Hello World"
 ----
 --
-Packed Command-yaml::
+Packed Command-YAML::
 +
 --
 [,yaml]

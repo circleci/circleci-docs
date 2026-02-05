@@ -24,18 +24,18 @@ The key difference is that inline orbs exist only within your configuration file
 
 [NOTE]
 ====
-This guide covers **inline orbs**. For information on creating orbs that can be shared across your organization, see xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs]. For publicly shareable orbs, see xref:create-test-and-publish-a-registry-orb.adoc[Create, test, and publish a registry orb].
+This guide covers **inline orbs**. For information on creating orbs that can be shared across your organization, see xref:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs]. For publicly shareable orbs, see xref:create-test-and-publish-a-registry-orb.adoc[Create, Test, and Publish a Registry Orb].
 ====
 
-For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] section.
+For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] section.
 
 == Prerequisites
 
 Before creating an inline orb, you should be familiar with:
 
-* xref:guides:getting-started:config-intro.adoc[CircleCI configuration basics]
-* xref:reference:ROOT:reusing-config.adoc[Reusable configuration elements] (commands, jobs, executors)
-* YAML syntax
+* xref:guides:getting-started:config-intro.adoc[CircleCI Configuration Basics].
+* xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Elements] (commands, jobs, executors).
+* YAML syntax.
 
 == Inline orb structure
 
@@ -62,7 +62,7 @@ workflows:
 
 Once defined, inline orb elements are available as `<orb-name>/<element>` within the same configuration file.
 
-For detailed information on each element, see xref:use:orb-concepts.adoc#orb-configuration-elements[Orb configuration elements].
+For detailed information on each element, see xref:use:orb-concepts.adoc#orb-configuration-elements[Orb Configuration Elements].
 
 [#creating-an-inline-orb]
 == Creating an inline orb
@@ -289,12 +289,12 @@ circleci config validate
 
 This command validates your entire `.circleci/config.yml` file, including any inline orbs. The validation checks:
 
-* YAML syntax correctness
-* CircleCI configuration schema compliance
-* Parameter types and usage
-* Orb element references
+* YAML syntax correctness.
+* CircleCI configuration schema compliance.
+* Parameter types and usage.
+* Orb element references.
 
-TIP: If you do not have the CircleCI CLI installed, see the xref:guides:toolkit:local-cli.adoc[Installing the local CLI] page.
+TIP: If you do not have the CircleCI CLI installed, see the xref:guides:toolkit:local-cli.adoc[Installing the Local CLI] page for instructions.
 
 [#testing-inline-orb]
 == Testing your inline orb
@@ -310,5 +310,5 @@ Any changes to your inline orb take effect immediately in the next pipeline run.
 [#see-also]
 == See also
 
-* xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison] for comparing inline orbs with URL and registry orbs
-* xref:use:orbs-faq.adoc[Orbs FAQ] for common questions about orbs
+* xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] for comparing inline orbs with URL and registry orbs.
+* xref:use:orbs-faq.adoc[Orbs FAQ] for common questions about orbs.

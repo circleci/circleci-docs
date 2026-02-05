@@ -11,11 +11,11 @@ This tutorial guides you through creating a new registry orb using the orb devel
 ====
 This guide covers **registry orbs**. CircleCI supports three types of orbs:
 
-* **Inline orbs**: Project-specific orbs defined in your config file. See xref:create-an-inline-orb.adoc[Create an inline orb].
-* **URL orbs**: Organization-wide orbs hosted at a URL. See xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs].
+* **Inline orbs**: Project-specific orbs defined in your config file. See xref:create-an-inline-orb.adoc[Create an Inline Orb].
+* **URL orbs**: Organization-wide orbs hosted at a URL. See xref:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs].
 * **Registry orbs**: Publicly or privately published orbs with semantic versioning (this guide).
 
-Choose registry orbs when you need semantic versioning, public discoverability, or want to share with the CircleCI community. For a comparison, see xref:use:orb-concepts.adoc#orb-types-comparison[Orb types comparison].
+Choose registry orbs when you need semantic versioning, public discoverability, or want to share with the CircleCI community. For a comparison, see xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison].
 ====
 
 Following this tutorial you will:
@@ -34,8 +34,8 @@ video::5ta4RUwqOBI[youtube]
 [#prerequisites]
 == Prerequisites
 
-* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign up and try] page for steps to get set up.
-* xref:guides:toolkit:local-cli.adoc#installation[Set up the CircleCI CLI] on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
+* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign up and Try] page for steps to get set up.
+* xref:guides:toolkit:local-cli.adoc#installation[Set Up the CircleCI CLI] on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
 +
 ```shell
 circleci update
@@ -443,6 +443,7 @@ The included `config.yml` and `test-deploy.yml` files in the `./circleci` direct
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app.
 Notice there are two workflows, `lint-pack` will run first and contains our linting, ShellCheck, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready.
 +
+.Orb test results as reported by GitHub Checks API on pull request
 image::guides:ROOT:orbtools-11-checks.png[Orb test results as reported by GitHub Checks API on pull request]
 . *"Squash" Merge.*
 +
@@ -452,7 +453,7 @@ Examples:
 ** `fix: x-command parameter from string to integer`
 ** `feat: added new x parameter to y command`
 
-. *Tag and Release!*
+. *Tag and Release:*
 +
 Your changes have now been merged to the default branch, but if you check the link:https://circleci.com/developer/orbs[Orb Registry], you will see no new versions have been published.
 
@@ -463,11 +464,11 @@ Using GitHub's Releases feature will allows you to publish "Release Notes", whic
 Follow the GitHub docs to create a new release.
 
 . When asked to select a tag, specify the new tag that will be published with this release. Double check the current orb version in the link:https://circleci.com/developer/orbs[Orb Registry]. If you are unsure of what type of change you are making, we will have an opportunity to correct this in a moment. Ensure your tag fits the format `vX.Y.Z`
-. Click the `+ Auto-generate release notes` button. A summary of changes will be generated for you, containing any pull requests which have been merged since the last release. If you have used link:https://www.conventionalcommits.org/[Conventional Commit messages], it should be easy to determine the semantic increment change based on the commit message. For instance, if we had two commits prefixed with "fix:", we would expect the semantic version to increment by a "patch" level.
+. Select the `+ Auto-generate release notes` button. A summary of changes is generated, containing any pull requests which have been merged since the last release. If you have used link:https://www.conventionalcommits.org/[Conventional Commit messages], you will be able to determine the semantic increment change based on the commit message. For instance, if we had two commits prefixed with "fix:", you would expect the semantic version to increment by a "patch" level.
 . Add your title, and publish the release.
 . Complete!
 
-After the release is published, a tag is created and a CircleCI pipeline will trigger for a final time. This final pipeline will perform all of the same steps as before with one additional final job, which will create the new orb version and publish it to the Orb Registry.
+After the release is published, a tag is created and a CircleCI pipeline will trigger for a final time. This final pipeline performs all the same steps as before with one additional final job, which creates the new orb version and publishes it to the Orb Registry.
 
 If you view the final `orb-tools/publish` job, in the "Publishing Orb Release" step, you will see a message like the following:
 

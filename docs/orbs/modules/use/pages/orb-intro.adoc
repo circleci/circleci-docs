@@ -61,7 +61,7 @@ The following table provides a high-level comparison of the three orb types to h
 | *VCS support*
 | GitHub, GitLab, Bitbucket
 | GitHub, Bitbucket
-| Rgistry orbs are hosted in GitHub only but can be used by all
+| Registry orbs are hosted in GitHub only but can be used by all
 
 | *Versioning*
 | None
@@ -229,7 +229,7 @@ jobs:
 [#benefits-of-using-orbs]
 == Benefits of using orbs
 
-Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows the a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the link:https://circleci.com/developer/orbs/orb/circleci/node[`circleci/node`] orb). In teh second tab is the configuration required when not using the orb (defining a job with the required steps for testing the application).
+Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows the a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the link:https://circleci.com/developer/orbs/orb/circleci/node[`circleci/node`] orb). In the second tab is the configuration required when not using the orb (defining a job with the required steps for testing the application).
 
 Orbs let you pull in predefined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
 
