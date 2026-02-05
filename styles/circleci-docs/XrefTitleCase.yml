@@ -14,7 +14,8 @@ script: |
   // Articles, coordinating conjunctions, and short prepositions only
   lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
                       "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
-
+  // Words with intentional capitalization that should be ignored by title case rules
+  exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS"]
   for i, line in lines {
     // Find all xref patterns: xref:path[Link Text]
     xref_pattern := "xref:[^\\[]+\\[([^\\]]+)\\]"
@@ -47,7 +48,17 @@ script: |
           if !text.re_match("[a-zA-Z]", clean_word) {
             continue
           }
-
+          // Skip exception words entirely
+          is_exception := false
+          for exception in exception_words {
+            if clean_word == exception {
+              is_exception = true
+              break
+            }
+          }
+          if is_exception {
+            continue
+          }
           // Get first character
           first_char := text.substr(clean_word, 0, 1)
           is_capitalized := text.re_match("[A-Z]", first_char)

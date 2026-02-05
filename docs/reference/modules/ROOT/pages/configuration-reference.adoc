@@ -23,7 +23,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 | `version`
 | Y
 | String
-| `2`, `2.0`, or `2.1` See the xref:reusing-config.adoc#[Reusable configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+| `2`, `2.0`, or `2.1` See the xref:reusing-config.adoc#[Reusable Configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 |===
 --
 
@@ -51,7 +51,7 @@ The `setup` field enables you to conditionally trigger configurations from outsi
 | `setup`
 | N
 | Boolean
-| Designates the `config.yaml` for use of CircleCI's xref:guides:orchestrate:dynamic-config.adoc#[dynamic configuration] feature.
+| Designates the `config.yaml` for use of CircleCI's xref:guides:orchestrate:dynamic-config.adoc#[Dynamic Configuration] feature.
 |===
 --
 
@@ -125,7 +125,7 @@ workflows:
 
 Documentation is available for orbs in the following sections:
 
-* xref:orbs:use:orb-intro.adoc#[Using Orbs]
+* xref:orbs:use:orb-intro.adoc#[Using Orbs].
 * xref:orbs:author:orb-author.adoc#[Authoring Orbs].
 
 Public orbs are listed in the https://circleci.com/developer/orbs[Orb Registry].
@@ -292,26 +292,26 @@ jobs:
       - run: echo "Hello executor!"
 ----
 
-See the xref:reusing-config.adoc#using-parameters-in-executors[Using Parameters in Executors] section of the xref:reusing-config.adoc#[Reusing config] page for examples of parameterized executors.
+See the xref:reusing-config.adoc#using-parameters-in-executors[Using Parameters in Executors] section of the xref:reusing-config.adoc#[Reusing Config] page for examples of parameterized executors.
 
 '''
 
 [#jobs]
 == *`jobs`*
 
-A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see xref:guides:toolkit:sample-config.adoc#[Sample config.yml] for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
+A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see xref:guides:toolkit:sample-config.adoc#[Sample Config.yml] for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 Jobs have a maximum runtime based on pricing plan, as follows:
 
-* 1 hour (Free)
-* 3 hours (Performance)
-* 5 hours (Scale)
+* 1 hour (Free).
+* 3 hours (Performance).
+* 5 hours (Scale).
 
 If your jobs are timing out, consider the following:
 
 * A larger <<resourceclass>>.
-* Using xref:guides:optimize:parallelism-faster-jobs.adoc#[parallelism].
-* Run some of your jobs concurrently using xref:guides:orchestrate:workflows.adoc#[workflows].
+* Using xref:guides:optimize:parallelism-faster-jobs.adoc#[Parallelism].
+* Run some of your jobs concurrently using xref:guides:orchestrate:workflows.adoc#[Workflows].
 * You can upgrade your pricing plan.
 
 *Example:*
@@ -448,7 +448,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[connect your pipeline configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys overview] page.
+Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[Connect Your Pipeline Configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys Overview] page.
 
 **Example** of a job with a `release` type:
 
@@ -460,7 +460,7 @@ jobs:
     plan_name: <my-service-release>
 ----
 
-The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using no-op jobs,  see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration cookbook]
+The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using no-op jobs,  see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook]
 
 **Example** of a job with a `no-op` type:
 
@@ -498,7 +498,7 @@ workflows:
 [#environment]
 ==== `environment`
 
-A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the xref:guides:security:env-vars.adoc#[Environment variables] page.
+A map of environment variable names and values. For more information on defining and using environment variables, and the order of precedence governing the various ways they can be set, see the xref:guides:security:env-vars.adoc#[Environment Variables] page.
 
 *Example* to show setting an environment variable named `FOO` with a value of `bar` for use in a job.
 
@@ -539,7 +539,7 @@ jobs:
       - run: npm test
 ----
 
-For more information on cache retention, see the xref:guides:optimize:persist-data.adoc#custom-storage-usage[Persisting data overview] page.
+For more information on cache retention, see the xref:guides:optimize:persist-data.adoc#custom-storage-usage[Persisting Data Overview] page.
 
 [#retention-errors]
 ==== Common errors
@@ -590,9 +590,9 @@ This feature is used to optimize test steps. If `parallelism` is set to N > 1, t
 
 You can use the CircleCI CLI to split your test suite across parallel containers so the job completes in a shorter time.
 
-* Read more about splitting tests across parallel execution environments on the xref:guides:optimize:parallelism-faster-jobs.adoc#[Parallelism and test splitting] page.
-* Refer to the xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to split tests] how-to guide.
-* Follow the xref:guides:test:test-splitting-tutorial.adoc#[Test splitting tutorial].
+* Read more about splitting tests across parallel execution environments on the xref:guides:optimize:parallelism-faster-jobs.adoc#[Parallelism and Test Splitting] page.
+* Refer to the xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to Split Tests] how-to guide.
+* Follow the xref:guides:test:test-splitting-tutorial.adoc#[Test Splitting Tutorial].
 
 [tabs]
 ====
@@ -742,9 +742,9 @@ Configure a job to use the Docker execution environment using the  `docker` key 
 |===
 --
 
-For a xref:glossary.adoc#primary-container[primary container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. The primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
+For a xref:glossary.adoc#primary-container[Primary Container], (the first container in the list) if neither `command` nor `entrypoint` is specified in the configuration, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. The primary container is typically only used for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely.
 
-A xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[custom image] may disable this behavior and force the `ENTRYPOINT` to run.
+A xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Custom Image] may disable this behavior and force the `ENTRYPOINT` to run.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about specifying images on the xref:guides:execution-managed:using-docker.adoc#[Using the Docker Execution Environment] page.
 
@@ -837,7 +837,7 @@ jobs:
           oidc_role_arn: <your-iam-role-arn>
 ----
 
-For steps to get set up with OIDC to pull images from AWS ECR, see the xref:guides:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc#[Pull and image from AWS ECR with OIDC] page.
+For steps to get set up with OIDC to pull images from AWS ECR, see the xref:guides:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc#[Pull an Image From AWS ECR With OIDC] page.
 
 [#env-vars]
 ==== Use environment variables
@@ -862,7 +862,7 @@ jobs:
 [#machine]
 === *`machine`*
 
-NOTE: *Using CircleCI cloud?* The use of `machine: true` is deprecated. You must specify an image to use.
+NOTE: *Using CircleCI Cloud?* The use of `machine: true` is deprecated. You must specify an image to use.
 
 The machine executor is configured using the `machine` key, which takes a map:
 
@@ -875,12 +875,12 @@ The machine executor is configured using the `machine` key, which takes a map:
 | `image`
 | Y
 | String
-| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI Server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Machine provisioner documentation].
+| The virtual machine image to use. View https://circleci.com/developer/images?imageType=machine[available images]. *Note:* This key is *not* supported for Linux VMs on installations of CircleCI Server. For information about customizing `machine` executor images on CircleCI installed on your servers, see our xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#[Machine Provisioner Documentation].
 
 | `docker_layer_caching`
 | N
 | Boolean
-| Set this to `true` to enable xref:guides:optimize:docker-layer-caching.adoc#[Docker layer caching].
+| Set this to `true` to enable xref:guides:optimize:docker-layer-caching.adoc#[Docker Layer Caching].
 |===
 --
 
@@ -942,10 +942,10 @@ If you are using CircleCI Server, contact your system administrator for details 
 [#available-linux-gpu-images]
 ==== Linux GPU `machine` images
 
-When using the Linux xref:guides:execution-managed:using-gpu.adoc#[GPU executor], the available images are:
+When using the Linux xref:guides:execution-managed:using-gpu.adoc#[GPU Executor], the available images are:
 
-* `linux-cuda-11:default` v11.4, v11.6, v11.8 (default), Docker v20.10.24
-* `linux-cuda-12:default` v12.0, v12.1 (default), Docker v20.10.24
+* `linux-cuda-11:default` v11.4, v11.6, v11.8 (default), Docker v20.10.24.
+* `linux-cuda-12:default` v12.0, v12.1 (default), Docker v20.10.24.
 
 '''
 
@@ -968,7 +968,7 @@ jobs:
 
 The Android image can also be accessed using the link:https://circleci.com/developer/orbs/orb/circleci/android[Android orb].
 
-For examples, refer to the xref:guides:execution-managed:android-machine-image.adoc#[Using Android Images with the Machine Executor] page.
+For examples, refer to the xref:guides:execution-managed:android-machine-image.adoc#[Using Android Images With the Machine Executor] page.
 
 '''
 
@@ -998,7 +998,7 @@ If you are using CircleCI Server, contact your system administrator for details 
 [#available-windows-gpu-image]
 ==== Windows GPU `machine` image
 
-When using the Windows xref:guides:execution-managed:using-gpu.adoc#[GPU executor], the available image is:
+When using the Windows xref:guides:execution-managed:using-gpu.adoc#[GPU Executor], the available image is:
 
 * link:https://circleci.com/developer/machine/image/windows-server-2019-cuda[`windows-server-2019-cuda`]
 
@@ -1030,7 +1030,7 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 | `xcode`
 | Y
 | String
-| The version of Xcode that is installed on the virtual machine, see the xref:guides:execution-managed:using-macos.adoc#supported-xcode-versions[Supported Xcode Versions section of the Testing iOS] document for the complete list.
+| The version of Xcode that is installed on the virtual machine, see the xref:guides:execution-managed:using-macos.adoc#supported-xcode-versions[Supported Xcode Versions Section of the Testing iOS] document for the complete list.
 |===
 --
 
@@ -1071,7 +1071,7 @@ NOTE: If you want to confirm how much memory you have been allocated, you can ch
 [#self-hosted-runner]
 === Self-hosted runner
 
-Use the `resource_class` key to configure a xref:guides:execution-runner:runner-overview.adoc#[self-hosted runner instance].
+Use the `resource_class` key to configure a xref:guides:execution-runner:runner-overview.adoc#[Self-hosted Runner Instance].
 
 For example:
 
@@ -1187,7 +1187,7 @@ jobs:
 [#macos-server]
 ==== macOS execution environment on server
 
-If you are working on CircleCI Server you can access the macOS execution environment using xref:guides:execution-runner:runner-overview.adoc#[self-hosted runner].
+If you are working on CircleCI Server you can access the macOS execution environment using xref:guides:execution-runner:runner-overview.adoc#[Self-hosted Runner].
 
 '''
 
@@ -1408,7 +1408,7 @@ Each built-in step is described in detail below.
 
 The `run` step is used to invoke command-line programs. The `run` step takes either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any `dotfiles` as part of the command.
 
-NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate from deploy to run].
+NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate From Deploy to Run].
 
 [.table-scroll]
 --
@@ -1683,7 +1683,7 @@ jobs:
           auto_rerun_delay: 10s
 ----
 
-For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Automatic reruns] page.
+For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Automatic Reruns] page.
 
 '''
 
@@ -1692,7 +1692,7 @@ For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Aut
 
 NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuration
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps section of the reusable configuration reference] for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps Section of the Reusable Configuration Reference] for more details.
 
 [.table-scroll]
 --
@@ -1703,7 +1703,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | `condition`
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A logic statement]
+| xref:configuration-reference.adoc#logic-statements[A Logic Statement]
 
 | `steps`
 | Y
@@ -1770,7 +1770,7 @@ A special step used to check out source code to the configured `path` (defaults 
 
 If `path` already exists and is:
 
-* A git repository - step will not clone whole repository, instead will fetch origin
+* A git repository - step will not clone whole repository, instead will fetch origin.
 * NOT a git repository - step will fail.
 
 In the case of `checkout`, the step type is just a string with no additional attributes.
@@ -1787,7 +1787,7 @@ jobs:
       - checkout
 ----
 
-The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH. These keys are detailed further in the xref:guides:integration:github-integration.adoc#establish-the-authenticity-of-an-ssh-host[integration guide]. This guide is also helpful if you wish to implement a custom checkout command.
+The checkout command automatically adds the required authenticity keys for interacting with GitHub and Bitbucket over SSH. These keys are detailed further in the xref:guides:integration:github-integration.adoc#establish-the-authenticity-of-an-ssh-host[Integration Guide]. This guide is also helpful if you wish to implement a custom checkout command.
 
 You can specify a checkout strategy by using the `method` key. CircleCI supports full clones or blobless clones. Blobless clones reduce the amount of data fetched from the remote by asking the remote to filter out objects that are not attached to the current commit.
 
@@ -1846,10 +1846,10 @@ NOTE: The `checkout` step will configure Git to skip automatic garbage collectio
 [NOTE]
 ====
 * `setup_remote_docker` is not compatible with the `machine` executor. See xref:guides:optimize:docker-layer-caching.adoc#machine-executor[Docker Layer Caching in Machine Executor] for information on how to enable DLC with the `machine` executor.
-* The `version` key is not currently supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, you can find the default AWS AMI xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#default-aws-ami-lists[here].
+* The `version` key is not currently supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment. If you are on server 4.x, find the xref:server-admin:operator:manage-virtual-machines-with-machine-provisioner.adoc#default-aws-ami-lists[Default AWS AMI Lists].
 ====
 
-Allows Docker commands to be run locally. See xref:guides:execution-managed:building-docker-images.adoc#[Running Docker commands] for details.
+Allows Docker commands to be run locally. See xref:guides:execution-managed:building-docker-images.adoc#[Running Docker Commands] for details.
 
 [.table-scroll]
 --
@@ -1865,7 +1865,7 @@ Allows Docker commands to be run locally. See xref:guides:execution-managed:buil
 | `version`
 | N
 | String
-| Version string of Docker you would like to use (default: `24.0.9`). View the list of supported Docker versions xref:guides:execution-managed:building-docker-images.adoc#docker-version[here].
+| Version string of Docker you would like to use (default: `24.0.9`). View the list of xref:guides:execution-managed:building-docker-images.adoc#docker-version[Supported Docker Versions].
 |===
 --
 
@@ -1888,7 +1888,7 @@ jobs:
 [#savecache]
 === *`save_cache`*
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code. Caches are stored in CircleCI's object storage. Later jobs can <<restorecache,restore this cache>>. Learn more on the xref:guides:optimize:caching.adoc#[Caching dependencies] page.
+Generates and stores a cache of a file or directory of files such as dependencies or source code. Caches are stored in CircleCI's object storage. Later jobs can <<restorecache,restore this cache>>. Learn more on the xref:guides:optimize:caching.adoc#[Caching Dependencies] page.
 
 Cache retention can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
@@ -1943,7 +1943,7 @@ When storing a new cache, the `key` value may contain special, templated, values
 | The SSH key used to checkout the repository.
 
 | `{{ .Environment.variableName }}`
-| The environment variable `variableName` (supports any environment variable xref:guides:security:env-vars.adoc#[exported by CircleCI] or added to a specific xref:guides:security:contexts.adoc#[context]--not any arbitrary environment variable).
+| The environment variable `variableName` (supports any environment variable xref:guides:security:env-vars.adoc#[Exported by CircleCI] or added to a specific xref:guides:security:contexts.adoc#[context]--not any arbitrary environment variable).
 
 | `{{ checksum "filename" }}`
 | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repository and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It is important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
@@ -2000,7 +2000,7 @@ Wildcards are not currently supported in `save_cache` paths. Visit the link:http
 [#restorecache]
 === *`restore_cache`*
 
-Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<savecache,`save_cache` step>>. Learn more in xref:guides:optimize:caching.adoc#[the caching documentation].
+Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using the <<savecache,`save_cache` step>>. Learn more in xref:guides:optimize:caching.adoc#[The Caching Documentation].
 
 [.table-scroll]
 --
@@ -2084,7 +2084,7 @@ A path is not required here because the cache will be restored to the location f
 [#deploy-deprecated]
 === *`deploy` - DEPRECATED*
 
-See <<run>> for current processes. If you have parallelism `> 1` in your job, see the xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate from deploy to run] guide.
+See <<run>> for current processes. If you have parallelism `> 1` in your job, see the xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate From Deploy to Run] guide.
 
 '''
 
@@ -2262,7 +2262,7 @@ NOTE: Everything must be relative to the work space root directory.
 [#attachworkspace]
 === *`attach_workspace`*
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using workspaces] page.
+Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at. For more information on using workspaces, see the xref:guides:orchestrate:workspaces.adoc#[Using Workspaces] page.
 
 [.table-scroll]
 --
@@ -2294,7 +2294,7 @@ NOTE: The lifetime of artifacts, workspaces, and caches can be customized on the
 [#add-ssh-keys]
 === *`add_ssh_keys`*
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:guides:integration:add-ssh-key.adoc[Add Additional SSH keys] page.
+Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys. For more information on SSH keys see the xref:guides:integration:add-ssh-key.adoc[Add Additional SSH Keys] page.
 
 CAUTION: *Using server?* only MD5 fingerprints are supported. In CircleCI in menu:Project Settings[SSH keys > Additional SSH keys] the MD5 fingerprint will be visible. SHA256 support is planned for an upcoming server release.
 
@@ -2327,7 +2327,7 @@ NOTE: Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you *mus
 [#using-pipeline-values]
 === Using `pipeline` values
 
-Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the xref:guides:orchestrate:pipeline-variables.adoc#[Pipeline values and parameters] page.
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. For a list of pipeline values, see the xref:guides:orchestrate:pipeline-variables.adoc#[Pipeline Values and Parameters] page.
 
 *Example:*
 
@@ -2352,7 +2352,7 @@ jobs:
 
 NOTE: A paid account on a https://circleci.com/pricing/[Performance or Scale Plan] is required to access IP ranges.
 
-Enables jobs to go through a set of well-defined IP address ranges. See xref:guides:security:ip-ranges.adoc#[IP ranges] for details.
+Enables jobs to go through a set of well-defined IP address ranges. See xref:guides:security:ip-ranges.adoc#[IP Ranges] for details.
 
 *Example:*
 
@@ -2495,7 +2495,7 @@ workflows:
 
 NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
 
-NOTE: Using *schedule triggers* rather than scheduled workflows offers several benefits. Visit the schedule triggers xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[migration guide] to find out how to migrate existing scheduled workflows to schedule triggers. If you would like to set up schedule triggers from scratch, visit the xref:guides:orchestrate:schedule-triggers.adoc[Schedule triggers] page.
+NOTE: Using *schedule triggers* rather than scheduled workflows offers several benefits. Visit the schedule triggers xref:guides:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to find out how to migrate existing scheduled workflows to schedule triggers. If you would like to set up schedule triggers from scratch, visit the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
 
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
@@ -2592,7 +2592,7 @@ workflows:
 [#schedule-branches]
 ==== *`branches`*
 
-The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a xref:guides:orchestrate:workflows.adoc#using-filters-in-your-workflows[workflow] for the `main` branch.
+The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a workflow using xref:guides:orchestrate:workflows.adoc#using-filters-in-your-workflows[Filters in Your Workflows] for the `main` branch.
 
 Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the *entire* string.
 
@@ -2724,7 +2724,7 @@ workflows:
 [#override-with]
 ==== *`override-with`*
 
-The `override-with` key is used to override the job configuration with a job from the referenced orb. For more information, see the xref:guides:orchestrate:how-to-override-config.adoc#[How to override config] page.
+The `override-with` key is used to override the job configuration with a job from the referenced orb. For more information, see the xref:guides:orchestrate:how-to-override-config.adoc#[How to Override Config] page.
 
 [.table-scroll]
 --
@@ -2802,7 +2802,7 @@ If there are no serial groups waiting/running, a pipeline with a lower number ca
 include::guides:ROOT:example$orchestration-examples/serial-group.yml[]
 ----
 
-For more information, see the xref:guides:orchestrate:controlling-serial-execution-across-your-organization.adoc#[Controlling serial execution across your organization] page.
+For more information, see the xref:guides:orchestrate:controlling-serial-execution-across-your-organization.adoc#[Controlling Serial Execution Across Your Organization] page.
 
 '''
 
@@ -2824,9 +2824,9 @@ a| A list of jobs that must succeed or attain a specified status for the job to 
 
 Possible types of `requires` items:
 
-* Job name (a required job that must succeed for the job to start) +
-* Map of job name to status (a required job that must attain the specified status for the job to start) +
-* Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start)
+* Job name (a required job that must succeed for the job to start).
+* Map of job name to status (a required job that must attain the specified status for the job to start).
+* Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start).
 
 The possible *status* values are: `success`, `failed` and `canceled`.
 |===
@@ -2945,7 +2945,7 @@ workflows:
 [#type]
 ==== *`type`*
 
-A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Using workflows to orchestrate jobs] page.
+A job may have a `type` of `approval` indicating it must be manually approved before downstream jobs may proceed. For more information see the xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Using Workflows to Orchestrate Jobs] page.
 
 Jobs run in the dependency order until the workflow processes a job with the `type: approval` key followed by a job on which it depends, for example:
 
@@ -3011,15 +3011,15 @@ workflows:
               only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
 ----
 
-You can read more about using regular expressions in your config in the xref:guides:orchestrate:workflows.adoc#using-regular-expressions-to-filter-tags-and-branches[Using workflows to schedule jobs] page.
+You can read more about using regular expressions in your config in the xref:guides:orchestrate:workflows.adoc#using-regular-expressions-to-filter-tags-and-branches[Using Workflows to Schedule Jobs] page.
 
 '''
 
 ==== Expression-based job filters
 Expression-based job filters allow you to conditionally run jobs based on the following:
 
-* xref:variables.adoc#pipeline-values[Pipeline values]
-* xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline parameters]
+* xref:variables.adoc#pipeline-values[Pipeline Values]
+* xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters]
 
 An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run.
 
@@ -3072,7 +3072,7 @@ Only run the job on the project's `main` branch, or branches starting with `inte
 filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-Only run the job on the `main` branch, and disallow use with pipelines xref:guides:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
+Only run the job on the `main` branch, and disallow use with pipelines xref:guides:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Triggered With Unversioned Configuration]:
 
 [source,yml]
 ----
@@ -3222,7 +3222,7 @@ Tags can have the keys `only` and `ignore`. You may also use regular expressions
 |===
 --
 
-For more information, see the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Executing workflows for a git tag] section of the Workflows page.
+For more information, see the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Executing Workflows for a Git Tag] section of the Workflows page.
 
 [source,yaml]
 ----
@@ -3512,12 +3512,12 @@ includes:
 
 The following logic values are considered falsy:
 
-* false
-* null
+* false.
+* null.
 * 0
 * NaN
-* empty strings ("")
-* statements with no arguments
+* empty strings ("").
+* statements with no arguments.
 
 All other values are truthy. Also note that using logic with an empty list will cause a validation error.
 
@@ -3555,7 +3555,7 @@ Configuration fields accept expressions either directly or as string values. Whe
 
 You can write the expression in a configuration field as shown in the following example:
 
-.Use expression to determin parallelism for a job
+.Use expression to determine parallelism for a job
 [,yaml]
 ----
 jobs:
@@ -3648,7 +3648,7 @@ If a pipeline parameter has a name that does not follow these rules, CircleCI pe
 [#logic-statement-examples]
 === Logic statement and expression examples
 
-You can find usage examples on the xref:guides:orchestrate:orchestration-cookbook.adoc#["Orchestration cookbook"] page.
+You can find usage examples on the xref:guides:orchestrate:orchestration-cookbook.adoc#[Orchestration Cookbook] page.
 
 [#example-full-configuration]
 == Example full configuration
