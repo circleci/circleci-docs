@@ -1,17 +1,17 @@
-= Usage API Training
+= Usage API training
 :page-platform: Advanced Support, Premium Support, Advisory Services
-:page-description: Usage API Training
+:page-description: Usage API training
 
-The usage API training is a one hour session conducted by your field engineer designed to teach how field engineers at CircleCI use the data provided by the Usage API to help optimize pipelines.
+The usage API training is a one-hour session led by your field engineer. It teaches how field engineers at CircleCI use Usage API data to optimize pipelines.
 
 == Benefits
 
 Teams who attend a usage API training: 
 
-* Have a clear understanding of the structure and definitions of the data provided by the usage API.
+* Understand the structure and definitions of the data provided by the usage API.
 * Can analyze their own data to discover optimization opportunities.
-* Can monitor CircleCI data for concerning trends.
+* Can monitor CircleCI data for trends.
 
-== Intended Audience
+== Intended audience
 
-This training is intended to educate operators and managers of CircleCI on the data provided. Data teams who are setting up data integrations for CircleCI can also benefit from this training.
+This training is for operators and managers of CircleCI. Data teams setting up CircleCI data integrations can also benefit.

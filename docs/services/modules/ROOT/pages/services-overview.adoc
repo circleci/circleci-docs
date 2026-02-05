@@ -1,21 +1,21 @@
-= Field Engineering Services Overview
-:page-description: Field Engineering Services Overview
+= Field engineering services overview
+:page-description: Field engineering services overview
 
-== Field Engineering Team
+== Field engineering team
 
-The field engineering team at CircleCI is a group of customer engineers, experienced in DevOps and Systems Administration, dedicated to making pipelines as efficient as possible. Field engineers work with CircleCI's largest and most complex customers on their hardest CI/CD challenges.
+The field engineering team at CircleCI includes customer engineers with DevOps and systems administration experience. They focus on making pipelines as efficient as possible. Field engineers work with CircleCI's largest and most complex customers to solve their challenges.
 
-== Field Engineering Services
+== Field engineering services
 
-Field engineering services are a variety of engagements, lead by your field engineer, ranging from consultation to training. More information on individual services can be found throughout this section.
+Field engineering services include engagements led by your field engineer, from consultation to training. You can find details on each service in this section.
 
-Some services are restricted to higher tiers of support plans. Each service will show which support plan has access to it at the top of its documentation.
+Some services are restricted to higher tiers of support plans. Each service lists the support plan that has access at the top of its documentation.
 
 == Support plans
 
-We offer support plans that vary from self-serve to white glove. Refer to our link:https://circleci.com/support/plans[support plan page] for more information.
+We offer support plans from self-serve to white glove. Refer to our link:https://circleci.com/support/plans[support plan page] for details.
 
 To see your current support plan tier, CircleCI admins can:
 
-. In the link:https://app.circleci.com/home/[CircleCI web app] select your organization
-. Select **Plan** in the sidebar (you may need to select **More** to see **Plan**)
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Plan** in the sidebar (you may need to select **More** to see **Plan**).
