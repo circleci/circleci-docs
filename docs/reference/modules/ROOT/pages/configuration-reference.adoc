@@ -3091,7 +3091,7 @@ parameters:
     default: false
 
 ...
-# jobs configuration ommitted for brevity
+# jobs configuration omitted for brevity
 
 workflows:
   build:
