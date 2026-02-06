@@ -114,4 +114,4 @@ A xref:orbs:use:orb-concepts.adoc#jobs[Job] defines a collection of steps and co
 * Install a CLI.
 * Run a deployment command.
 
-All with little to no additional configuration required from the user.
+All without requiring any additional configuration from the user.

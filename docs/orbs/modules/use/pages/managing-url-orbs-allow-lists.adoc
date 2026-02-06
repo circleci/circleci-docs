@@ -43,9 +43,8 @@ include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 . Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . Send a *POST* request to the link:https://circleci.com/docs/api/v2/#tag/Organization/operation/createURLOrbAllowListEntry[Create a new URL orb allow-list entry] endpoint to add an allow-list entry, with a JSON map containing name, prefix, and auth keys, as the request body.
 
-Example:
-
-[source, shell]
+.Example
+[source,shell]
 ----
 curl -X POST https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list \
   --header "Circle-Token: ${CIRCLE_TOKEN}" \
@@ -53,9 +52,8 @@ curl -X POST https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xx
   --data '{"name": "Private URL Orbs", "prefix": "https://raw.githubusercontent.com/my-org/private-orbs/", "auth": "github-app"}'
 ----
 
-Example response:
-
-[source, shell]
+.Example response
+[,json]
 ----
 {
   "id":"6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx",
@@ -95,9 +93,8 @@ curl -X GET https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx
   --header "Circle-Token: ${CIRCLE_TOKEN}"
 ----
 
-Example response:
-
-[source, shell]
+.Example response
+[,json]
 ----
 {
   "items": [
@@ -135,17 +132,15 @@ include::guides:ROOT:partial$notes/server-api-examples.adoc[]
 . Set up your API authentication. Steps are available in the xref:guides:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . Send a *DELETE* request to the link:https://circleci.com/docs/api/v2/#tag/Organization/operation/removeURLOrbAllowListEntry[Remove an entry from the org's URL orb allow-list] endpoint to delete the allow-list entry.
 
-Example:
-
-[source, shell]
+.Example
+[source,shell]
 ----
 curl -X DELETE https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx-b468-7e552408ee32/url-orb-allow-list/6a7e25f1-6da7-xxxx-9fb0-69e7b92f6xxx \
   --header "Circle-Token: ${CIRCLE_TOKEN}"
 ----
 
-Example response:
-
-[source, shell]
+.Example response
+[,json]
 ----
 {
   "id": "6a7e25f1-6da7-461b-9fb0-69e7b92f6xxx",
@@ -165,22 +160,18 @@ The authentication type you select depends on whether the orb repository is publ
 
 Use **None** when:
 
-* Your orb is hosted in a public GitHub repository
-* Your orb is hosted in a public GitLab repository
-* Your orb is hosted in a public Bitbucket repository
+* Your orb is hosted in a public repository.
 * Your orb is hosted in a publicly accessible location (for example, AWS S3 with public read access)
 
 Use **GitHub App** when:
 
-* Your orb is hosted in a private GitHub repository
-* You have the CircleCI GitHub App installed for your organization
+* Your orb is hosted in a private GitHub repository and you have the CircleCI GitHub App installed for your organization.
 
 The GitHub App authentication type is the preferred method for private GitHub repositories because it provides more reliable access control and does not depend on individual user permissions.
 
 Use **GitHub OAuth** when:
 
-* Your orb is hosted in a private GitHub repository
-* You do not have the CircleCI GitHub App set up
+* Your orb is hosted in a private GitHub repository and you do not have the CircleCI GitHub App set up.
 
 Use **Bitbucket OAuth** when:
 
@@ -197,13 +188,13 @@ GitHub::
 --
 For a file located at `orbs/my-orb.yaml` in a repository called `my-org/my-orbs-repo`:
 
-.Using a branch reference:
+.Using a branch reference
 [source,shell]
 ----
 https://raw.githubusercontent.com/my-org/my-orbs-repo/refs/heads/main/orbs/my-orb.yaml
 ----
 
-.Using a specific commit SHA:
+.Using a specific commit SHA
 [source,shell]
 ----
 https://raw.githubusercontent.com/my-org/my-orbs-repo/abc123def456/orbs/my-orb.yaml
@@ -217,7 +208,7 @@ To find the correct URL for a file in GitHub:
 
 When you configure your allow-list entry, use the URL prefix that matches all orbs you want to reference. For example, to allow all orbs in the `orbs/` directory of your repository, use:
 
-.Allow-list entry for all orbs in the `orbs/` directory:
+.Allow-list entry for all orbs in the `orbs/` directory
 [source,shell]
 ----
 https://raw.githubusercontent.com/my-org/my-orbs-repo/refs/heads/main/orbs/
@@ -234,13 +225,15 @@ GitLab::
 --
 For a file located at `orbs/my-orb.yml` in a GitLab repository called `my-org/my-orbs-repo`:
 
-.Using a branch reference:
+Using a branch reference:
+
 [source,shell]
 ----
 https://gitlab.com/my-org/my-orbs-repo/-/raw/main/orbs/my-orb.yml
 ----
 
-.Using a specific commit SHA:
+Using a specific commit SHA:
+
 [source,shell]
 ----
 https://gitlab.com/my-org/my-orbs-repo/-/raw/abc123def456/orbs/my-orb.yml
@@ -266,13 +259,15 @@ Bitbucket::
 
 For a file located at `orbs/my-orb.yml` in a Bitbucket repository called `my-org/my-orbs-repo`:
 
-.Using a branch reference:
+Using a branch reference:
+
 [source,shell]
 ----
 https://bitbucket.org/my-org/my-orbs-repo/raw/main/orbs/my-orb.yml
 ----
 
-.Using a specific commit SHA:
+Using a specific commit SHA:
+
 [source,shell]
 ----
 https://bitbucket.org/my-org/my-orbs-repo/raw/abc123def456/orbs/my-orb.yml
@@ -296,7 +291,8 @@ AWS S3 and other object storage::
 
 For orbs hosted in AWS S3 or other object storage systems:
 
-.Using a specific bucket and object name:
+Using a specific bucket and object name:
+
 [source,shell]
 ----
 https://s3.amazonaws.com/my-bucket/orbs/my-orb.yml
