@@ -229,7 +229,7 @@ TIP: The Google Cloud CLI reads your configuration file, which contains necessar
 
 === Prerequisites
 
-You will need to have the following to continue your AWS OIDC setup:
+You will need to have the following to continue your GCP OIDC setup:
 
 * A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
 * A project set up that you want to configure to use OIDC.
