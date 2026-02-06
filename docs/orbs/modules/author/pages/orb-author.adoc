@@ -151,6 +151,7 @@ You can categorize your orb for better discoverability in the link:https://circl
 [#listing-categories]
 ==== Listing categories
 
+.Example of showing listing categories using the CLI
 image::guides:ROOT:orb-categories-list-categories.png[Example of showing listing categories using the CLI]
 
 You can select up to two categories for your orb. These are the available categories:
@@ -171,28 +172,31 @@ You can select up to two categories for your orb. These are the available catego
 * Security
 * Testing
 
-The list of categories can also be obtained by running the `circleci orb list-categories` CLI command. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html[here].
+The list of categories can also be obtained by running the `circleci orb list-categories` CLI command. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html[in the CLI documentation].
 
 [#add-an-orb-to-a-category]
 ==== Add an orb to a category
 
+.Adding an orb category
 image::guides:ROOT:orb-categories-add-to-category.png[Adding an orb category]
 
-Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html[here].
+Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html[in the CLI documentation].
 
 [#remove-an-orb-from-a-category]
 ==== Remove an orb from a category
 
+.Removing an orb from a category
 image::guides:ROOT:orb-categories-remove-from-category.png[Removing an orb from a category]
 
-Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html[here].
+Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html[in the CLI documentation].
 
 [#viewing-an-orbs-categorizations]
 ==== Viewing an orb's categorizations
 
+.Show which categorizations have been added to an orb
 image::guides:ROOT:orb-categories-orb-info.png[Show which categorizations have been added to an orb]
 
-To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_info.html[here].
+To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_info.html[in the CLI documentation].
 
 
 

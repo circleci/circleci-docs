@@ -34,7 +34,7 @@ video::5ta4RUwqOBI[youtube]
 [#prerequisites]
 == Prerequisites
 
-* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign Up and Try CircleCI] page for steps to get set up.
+* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI] page for steps to get set up.
 * Follow the CircleCI CLI xref:guides:toolkit:local-cli.adoc#installation[Installation] guide on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
 +
 ```shell
@@ -65,10 +65,12 @@ Create a new, empty, link:https://github.com/new[GitHub repository]. The name of
 
 CAUTION: Ensure that the repository is completely empty. Uncheck any options such as "Add a README.md" or "Choose a license".
 
+.New GitHub repository
 image::guides:ROOT:new_orb_repo_gh.png[New GitHub repository]
 
 Once complete, you should see the generated git URL. Note it down, you will need it in step 4. You can select SSH or HTTPS, whichever you can authenticate with.
 
+.Orb registry
 image::guides:ROOT:github_new_quick_setup.png[Orb registry]
 
 CAUTION: Do not pull down the orb repository at this point. This will be completed when you run `orb init` in the next step. Pulling the repository before this can cause issues.
@@ -124,7 +126,7 @@ If you have a `circleci` type organization you will need to follow some extra st
 
 === 4. Follow the prompts to set up your orb
 
-In the background, the `orb init` command copies and customizes the link:https://github.com/CircleCI-Public/Orb-Template[orb template] based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will be asked for the remote git repository URL that you obtained back in step 1.
+In the background, the `orb init` command copies and customizes the link:https://github.com/CircleCI-Public/Orb-Template[orb template] based on your inputs. Detailed `README.md` files exist within each directory that contain helpful information specific to the contents of each directory. You will be asked for the remote git repository URL that you obtained back in step 1.
 
 The link:https://github.com/CircleCI-Public/Orb-Template[orb template] contains a full CI/CD pipeline (described in xref:creating-orbs.adoc[Orb Publishing Process]), which automatically xref:use:orb-concepts.adoc#orb-packing[Packs], xref:testing-orbs.adoc[Tests], and xref:creating-orbs.adoc[Publishes] your orb.
 
@@ -134,7 +136,7 @@ In the setup process you will be asked if you would like to save your xref:guide
 
 Use xref:guides:security:contexts.adoc#restrict-a-context-to-a-security-group-or-groups[Security Groups] to limit access to users that are allowed to trigger jobs. Only these users will have access to the private xref:guides:toolkit:managing-api-tokens.adoc[Personal API Token].
 
-xref:guides:security:contexts.adoc#restrict-a-context[Contexts] can be located by navigating to **Organization Settings > Contexts** in the web app. After creating your orb, you will have a new context called `orb-publishing`. Click into `orb-publishing` and add a **Security Group**.
+xref:guides:security:contexts.adoc#restrict-a-context[Contexts] can be located by navigating to menu:Organization Settings[Contexts] in the web app. After creating your orb, you will have a new context called `orb-publishing`. Select `orb-publishing` and add a **Security Group**.
 
 .Secure contexts
 video::ImPE969yv08[youtube]

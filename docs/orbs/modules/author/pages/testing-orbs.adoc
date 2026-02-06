@@ -149,6 +149,7 @@ workflows:
 
 Review Checks output to JUnit XML format and are automatically uploaded to CircleCI to be displayed natively in the UI.
 
+.orb-tools review check RC008
 image::guides:ROOT:orbtools-rc008.png[orb-tools review check RC008]
 
 When you click into the error you will receive more information such as what file and at what line in the code the error was found. You will also see suggestions for resolution.
@@ -160,6 +161,7 @@ CAUTION: The `orb-tools/review` job currently can not be run locally due to the 
 
 The orb development kit provides a xref:use:orb-concepts.adoc#file-include-syntax[File Include Syntax] feature and `src/scripts` directory to store and source your Bash files. If you are using these features, you can write true integration tests for your scripts.
 
+.Unit testing Bash with BATS-Core
 image::guides:ROOT:bats_tests_example.png[Unit testing Bash with BATS-Core]
 
 If you have an orb with sufficiently complex internal scripts, you may want to implement unit tests for better code quality and easier local development testing.

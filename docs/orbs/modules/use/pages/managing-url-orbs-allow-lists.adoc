@@ -12,7 +12,7 @@ This guide explains how to add, view, or delete allow-lists in the CircleCI Web 
 Each allow-list entry contains three components:
 
 * *Name* - A descriptive identifier for the entry.
-* *URL prefix* - The approved URL pattern that orb references must match (must use HTTPS and end with /).
+* *URL prefix* - The approved URL pattern that orb references must match (must use HTTPS and end with `/`).
 * *Auth* - The authentication method to use.
 ** In the CircleCI Web App, the available values are: `None`, `GitHub OAuth`, `GitHub App`, or `Bitbucket OAuth`.
 ** In the API, the available values are: `none`, `github-oauth`, `github-app`, or `bitbucket-oauth`.

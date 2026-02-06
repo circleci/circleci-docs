@@ -455,7 +455,14 @@ NOTE: If you are using the orb development kit, orb packing is handled automatic
 |===
 --
 
-In order to _pack_ an orb, an xref:author:create-test-and-publish-a-registry-orb.adoc#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Authoring Reusable Commands], xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Authoring Parameterized Jobs], xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Authoring Reusable Executors], and <<usage-examples,Usage Examples>>. Any additional files or folders will be safely ignored.
+In order to _pack_ an orb, an `@orb.yml` file must be present. The `@` signifies the _root_ of our orb project. See the xref:author:create-test-and-publish-a-registry-orb.adoc#orb-yml[Create, Test, and Publish a Registry Orb] guide for more information. Within the same directory, you can include additional directories for each orb component's type, such as:
+
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Reusable Commands].
+* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Parameterized Jobs].
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Reusable Executors].
+* xref:use:orb-concepts.adoc#usage-examples[Usage Examples].
+
+Any additional files or folders will be safely ignored.
 
 Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the <<file-include-syntax>> (`\<<include(file)>>`).
 
