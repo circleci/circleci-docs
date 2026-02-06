@@ -1164,6 +1164,46 @@ jobs:
 
 '''
 
+[#linuxvm-gen2-execution-environment]
+==== LinuxVM (gen2) execution environment
+
+include::guides:ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
+
+*Example:*
+
+[tabs]
+====
+Cloud::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    machine:
+      image: ubuntu-2404:current # recommended linux image
+    resource_class: large.gen2
+    steps:
+      ... // other config
+----
+--
+Server::
++
+--
+[,yaml]
+----
+jobs:
+  build:
+    machine: true
+    resource_class: large.gen2
+    steps:
+      ... // other config
+----
+--
+====
+
+'''
+
 [#macos-execution-environment]
 ==== macOS execution environment
 
