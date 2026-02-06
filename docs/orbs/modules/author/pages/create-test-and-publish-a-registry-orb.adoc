@@ -34,8 +34,8 @@ video::5ta4RUwqOBI[youtube]
 [#prerequisites]
 == Prerequisites
 
-* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign Up and Try] page for steps to get set up.
-* xref:guides:toolkit:local-cli.adoc#installation[Set Up the CircleCI CLI] on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
+* A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign Up and Try CircleCI] page for steps to get set up.
+* Follow the CircleCI CLI xref:guides:toolkit:local-cli.adoc#installation[Installation] guide on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
 +
 ```shell
 circleci update

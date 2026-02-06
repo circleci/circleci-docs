@@ -28,7 +28,7 @@ Orbs consist of three main elements. You can follow the links for each to learn 
 
 Inline orbs are the simplest way to create reusable configuration within a single project. They require no setup, publishing, or external hosting.
 
-To create an inline orb, define it directly in your `.circleci/config.yml` file using the `orbs` stanza. For a complete guide and examples, see the xref:create-an-inline-orb.adoc[Create an inline orb] guide.
+To create an inline orb, define it directly in your `.circleci/config.yml` file using the `orbs` stanza. For a complete guide and examples, see the xref:create-an-inline-orb.adoc[Create an Inline Orb] guide.
 
 Inline orbs are particularly useful for:
 
@@ -40,7 +40,7 @@ Inline orbs are particularly useful for:
 
 URL orbs are reusable CircleCI configuration stored in an accessible location like a Git repository.
 
-See the xref:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs] guide for steps to create and use a URL orb.
+See the xref:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide for steps to create and use a URL orb.
 
 URL orbs are particularly useful for:
 
@@ -58,9 +58,9 @@ Registry orb authors *automatically agree* to the CircleCI link:https://circleci
 *Once a registry orb is created it cannot be deleted*. Registry orbs are link:https://semver.org/[SemVer compliant], and each published version is immutable. Publicly released orbs are potential dependencies for other projects. Therefore, allowing orb deletion would make users susceptible to unexpected loss of functionality.
 ====
 
-We recommend using our <<orb-development-kit>> to create a registry orb. A full guide is available in the xref:create-test-and-publish-a-registry-orb.adoc[Create, test, and publish a registry orb] guide.
+We recommend using our <<orb-development-kit>> to create a registry orb. A full guide is available in the xref:create-test-and-publish-a-registry-orb.adoc[Create, Test, and Publish a Registry Orb] guide.
 
-Alternatively, as orbs are packages of xref:reference:ROOT:reusing-config.adoc[reusable configuration], they can be written manually too, as singular `yaml` files, and published using our xref:guides:toolkit:local-cli.adoc#installation[CircleCI orb CLI]. For a guide, see the  xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] page.
+Alternatively, as orbs are packages of xref:reference:ROOT:reusing-config.adoc[Reusable Configuration], they can be written manually too, as singular `yaml` files, and published using our xref:guides:toolkit:local-cli.adoc#installation[CircleCI Orb CLI]. For a guide, see the  xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] page.
 
 == Orb development tools (registry orbs only)
 
@@ -73,11 +73,11 @@ The orb development kit refers to a suite of tools that work together to simplif
 
 The orb development kit is made up of the following components:
 
-* link:https://github.com/CircleCI-Public/Orb-Template[Orb Template]
-* link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI]
-** link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[Orb Pack Command]
-** link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[Orb Init Command]
-* link:https://circleci.com/developer/orbs/orb/circleci/orb-tools[Orb Tools Orb]
+* link:https://github.com/CircleCI-Public/Orb-Template[Orb Template].
+* link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI].
+** link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[Orb Pack Command].
+** link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[Orb Init Command].
+* link:https://circleci.com/developer/orbs/orb/circleci/orb-tools[Orb Tools Orb].
 
 The *orb template* is a repository with CircleCI's orb project template, which is automatically ingested and modified by the `orb init` command.
 
@@ -88,7 +88,7 @@ The *orb tools orb* is an orb for creating orbs.
 [#orb-cli]
 === Orb CLI
 
-To begin creating orbs, you will need to xref:guides:toolkit:local-cli.adoc#installation[set up the CircleCI CLI] on your local machine, with a link:https://app.circleci.com/settings/user/tokens[personal access token]. For a full list of orb-related commands inside the CircleCI CLI, visit link:https://circleci-public.github.io/circleci-cli/circleci_orb.html[CircleCI CLI help].
+To begin creating orbs, follow the CircleCI CLI xref:guides:toolkit:local-cli.adoc#installation[Installation] guide on your local machine, with a link:https://app.circleci.com/settings/user/tokens[personal access token]. For a full list of orb-related commands inside the CircleCI CLI, visit link:https://circleci-public.github.io/circleci-cli/circleci_orb.html[CircleCI CLI help].
 
 [#permissions-matrix]
 === Permissions matrix
@@ -125,14 +125,14 @@ Orb CLI commands are scoped to different user permission levels, set by your VCS
 
 List your available orbs using the CLI:
 
-To list xref:use:orb-intro.adoc#public-or-private[public] orbs:
+To list xref:use:orb-intro.adoc#public-or-private[Public] orbs:
 
 [,shell]
 ----
 circleci orb list <my-namespace>
 ----
 
-To list xref:use:orb-intro.adoc#public-or-private[private] orbs:
+To list xref:use:orb-intro.adoc#public-or-private[Private] orbs:
 
 [,shell]
 ----
@@ -144,7 +144,7 @@ For more information on how to use the `circleci orb` command, see the CLI link:
 [#categorizing-your-orb]
 === Categorizing your orb
 
-NOTE: Orb categorization is *not* available on installations of CircleCI server.
+NOTE: Orb categorization is *not* available on installations of CircleCI Server.
 
 You can categorize your orb for better discoverability in the link:https://circleci.com/developer/orbs[Orb Registry]. Categorized orbs are searchable by category in the link:https://circleci.com/developer/orbs[Orb Registry]. CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 

@@ -59,7 +59,7 @@ workflows:
           environment: staging
 ----
 
-For more information on authoring inline orbs, see xref:author:create-an-inline-orb.adoc[Create an inline orb].
+For more information on authoring inline orbs, see xref:author:create-an-inline-orb.adoc[Create an Inline Orb].
 
 === URL orbs
 
@@ -69,7 +69,7 @@ URL orbs do not follow semantic versioning, and can be accessed directly using a
 
 See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
 
-If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs] guide.
+If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
 
 === Registry orbs
 
@@ -177,7 +177,7 @@ See the link:https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands[AW
 [#executors]
 === Executors
 
-Executors are parameterized execution environments in which xref:use:orb-concepts.adoc#jobs[jobs] can be run. CircleCI provides multiple xref:reference:ROOT:configuration-reference.adoc#executor-job[executor options]:
+Executors are parameterized execution environments in which xref:use:orb-concepts.adoc#jobs[Jobs] can be run. CircleCI provides multiple xref:reference:ROOT:configuration-reference.adoc#executor-job[executor options]:
 
 * Docker
 * macOS
@@ -355,8 +355,8 @@ NOTE: This section applies to *registry orbs only*. Inline orbs and URL orbs do 
 
 Registry orbs can be published in two states:
 
-* Production (immutable, semantic versioned)
-* Development (mutable, temporary)
+* Production (immutable, semantic versioned).
+* Development (mutable, temporary).
 
 [#production-orbs]
 === Production registry orbs
@@ -419,10 +419,10 @@ By choosing to use a private registry orb instead of a public registry orb, you 
 
 Both public and private registry orbs can be authored in two ways:
 
-* Using the xref:author:manual-orb-authoring-process.adoc[manual Orb Authoring Process]
-* Using the xref:author:orb-author.adoc#orb-development-kit[Orb Development Kit] (recommended)
+* Using the xref:author:manual-orb-authoring-process.adoc[Manual Orb Authoring Process].
+* Using the xref:author:orb-author.adoc#orb-development-kit[Orb Development Kit] (recommended).
 
-For authoring URL orbs, see xref:author:create-test-and-use-url-orbs.adoc[Create, test, and use URL orbs]. For authoring inline orbs, see xref:author:create-an-inline-orb.adoc[Create an inline orb].
+For authoring URL orbs, see xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs]. For authoring inline orbs, see xref:author:create-an-inline-orb.adoc[Create an Inline Orb].
 
 [#orb-packing]
 == Orb packing (registry orbs only)
@@ -455,7 +455,7 @@ NOTE: If you are using the orb development kit, orb packing is handled automatic
 |===
 --
 
-In order to _pack_ an orb, an xref:author:create-test-and-publish-a-registry-orb.adoc#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[commands], xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[jobs], xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[executors], and <<usage-examples,examples>>. Any additional files or folders will be safely ignored.
+In order to _pack_ an orb, an xref:author:create-test-and-publish-a-registry-orb.adoc#orbyml[@orb.yml] file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Authoring Reusable Commands], xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Authoring Parameterized Jobs], xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Authoring Reusable Executors], and <<usage-examples,Usage Examples>>. Any additional files or folders will be safely ignored.
 
 Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the <<file-include-syntax>> (`\<<include(file)>>`).
 
@@ -473,7 +473,7 @@ For orb development kit users, this step is handled automatically.
 
 CAUTION: The `\<<include(dir/file)>>` syntax is a special key for use with the <<orb-packing,`circleci orb pack` command>> and _will not_ work more widely on CircleCI.
 
-The file include syntax (`++<<include(dir/file)>>++`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
+The file include syntax (`++<<include(dir/file)>>++`) is a special config enhancement. It allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file.
 
 When `circleci orb pack <dir> > orb.yml` is run against a directory containing an `@orb.yml` file, the pack command begins to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `\<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
 
@@ -554,5 +554,5 @@ jobs:
 == See also
 
 * Refer to xref:use:orb-intro.adoc[Orb Introduction] for a high-level overview of CircleCI orbs.
-* Refer to xref:author:orb-author.adoc[Introduction to authoring orbs] for creating registry orbs.
+* Refer to xref:author:orb-author.adoc[Introduction to Authoring Orbs] for creating registry orbs.
 * Refer to xref:use:orbs-faq.adoc[Orbs FAQs] for information on frequent issues encountered when using orbs.
