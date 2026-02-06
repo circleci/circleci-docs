@@ -3,7 +3,7 @@
 :experimental:
 :page-platform: Cloud
 
-The URL orballow-list is a security mechanism that restricts orb URL references to only approved URL prefixes, providing security and access control for organizations using private or external orbs.
+The URL orb allow-list is a security mechanism that restricts orb URL references to only approved URL prefixes, providing security and access control for organizations using private or external orbs.
 
 This guide explains how to add, view, or delete allow-lists in the CircleCI Web App and via the API.
 
@@ -154,6 +154,138 @@ Example response:
 ----
 --
 ====
+
+== Configure allow-lists for common scenarios
+
+This section provides guidance on setting up URL orb allow-lists for different use cases.
+
+=== Choose the right authentication type
+
+The authentication type you select depends on whether the orb repository is public or private, and which version control system you use.
+
+Use **None** when:
+
+* Your orb is hosted in a public GitHub repository
+* Your orb is hosted in a public GitLab repository
+* Your orb is hosted in a public Bitbucket repository
+* Your orb is hosted in a publicly accessible location (for example, AWS S3 with public read access)
+
+Use **GitHub App** when:
+
+* Your orb is hosted in a private GitHub repository
+* You have the CircleCI GitHub App installed for your organization
+
+The GitHub App authentication type is the preferred method for private GitHub repositories because it provides more reliable access control and does not depend on individual user permissions.
+
+Use **GitHub OAuth** when:
+
+* Your orb is hosted in a private GitHub repository
+* You do not have the CircleCI GitHub App set up
+
+Use **Bitbucket OAuth** when:
+
+* Your orb is hosted in a private Bitbucket repository
+
+=== Construct URLs for orb repositories
+
+The URL prefix you configure must match the beginning of your orb's full URL. The following examples show how to construct URLs for different hosting platforms.
+
+==== GitHub
+
+For a file located at `orbs/my-orb.yaml` in a repository called `my-org/my-orbs-repo`:
+
+**Using a branch reference:**
+[source,text]
+----
+https://raw.githubusercontent.com/my-org/my-orbs-repo/refs/heads/main/orbs/my-orb.yaml
+----
+
+**Using a specific commit SHA:**
+[source,text]
+----
+https://raw.githubusercontent.com/my-org/my-orbs-repo/abc123def456/orbs/my-orb.yaml
+----
+
+To find the correct URL for a file in GitHub:
+
+. Navigate to the file in your GitHub repository.
+. Select the **Raw** button.
+. Copy the URL from your browser's address bar.
+
+When you configure your allow-list entry, use the URL prefix that matches all orbs you want to reference. For example, to allow all orbs in the `orbs/` directory of your repository, use:
+
+[source,text]
+----
+https://raw.githubusercontent.com/my-org/my-orbs-repo/refs/heads/main/orbs/
+----
+
+**Branch references versus commit SHAs**
+
+* Use branch references (for example, `refs/heads/main`) when you want orb updates to automatically take effect in your pipelines.
+* Use commit SHAs when you want to pin to a specific version of the orb content.
+* Remember that CircleCI caches fetched orbs for five minutes, so changes to branch-referenced orbs may not appear immediately.
+
+==== GitLab
+
+For a file located at `orbs/my-orb.yml` in a GitLab repository called `my-org/my-orbs-repo`:
+
+[source,text]
+----
+https://gitlab.com/my-org/my-orbs-repo/-/raw/main/orbs/my-orb.yml
+----
+
+To use a specific commit SHA:
+
+[source,text]
+----
+https://gitlab.com/my-org/my-orbs-repo/-/raw/abc123def456/orbs/my-orb.yml
+----
+
+NOTE: GitLab authentication is not currently supported. Only use public GitLab repositories with the **None** auth type.
+
+==== Bitbucket
+
+For a file located at `orbs/my-orb.yml` in a Bitbucket repository called `my-org/my-orbs-repo`:
+
+[source,text]
+----
+https://bitbucket.org/my-org/my-orbs-repo/raw/main/orbs/my-orb.yml
+----
+
+To use a specific commit SHA:
+
+[source,text]
+----
+https://bitbucket.org/my-org/my-orbs-repo/raw/abc123def456/orbs/my-orb.yml
+----
+
+==== AWS S3 and other object storage
+
+For orbs hosted in AWS S3 or other object storage systems:
+
+[source,text]
+----
+https://s3.amazonaws.com/my-bucket/orbs/my-orb.yml
+----
+
+Ensure your bucket and objects have the appropriate permissions to allow CircleCI to fetch the content. Use the **None** auth type for publicly accessible URLs.
+
+=== Use orbs from both public and private repositories
+
+Organizations that want to use URL orbs from both public and private repositories in the same version control system need to create multiple allow-list entries with the same URL prefix but different authentication types.
+
+For example, to use orbs from both public and private GitHub repositories in the `my-org` organization:
+
+. Create an allow-list entry with:
+** **Name**: Public GitHub orbs
+** **URL Prefix**: `https://raw.githubusercontent.com/my-org/`
+** **Auth**: None
+. Create a second allow-list entry with:
+** **Name**: Private GitHub orbs
+** **URL Prefix**: `https://raw.githubusercontent.com/my-org/`
+** **Auth**: GitHub App (or GitHub OAuth)
+
+When CircleCI encounters a URL orb reference, it tries each matching allow-list entry until it successfully fetches the orb content. This approach lets you use orbs from both public and private repositories in the same organization.
 
 === Limitations and caveats
 
