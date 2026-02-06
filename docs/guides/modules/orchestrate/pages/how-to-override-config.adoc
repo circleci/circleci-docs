@@ -22,15 +22,15 @@ When you use the `override-with` key in a workflow, the following processes occu
 * If the job referenced under `override-with` exists, the job definition from the referenced orb replaces your original job configuration.
 * If the referenced orb job does not exist, your original job definition is used as a fallback.
 
-See the xref:reference:ROOT:configuration-reference.adoc#override-with[`override-with` key reference] for more information.
+See the `override-with` key entry in the xref:reference:ROOT:configuration-reference.adoc#override-with[Configuration Reference] for more information.
 
 == Prerequisites
 Before following this how-to guide, ensure you have met the following prerequisites:
 
-* A CircleCI account, xref:getting-started:first-steps.adoc#[you can sign up for free].
+* A CircleCI account, you can xref:getting-started:first-steps.adoc#[Sign Up For Free].
 * Familiarity with CircleCI configuration files. See the xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML Configurations] guide for more information.
-* Familiarity with the concepts of URL and registry orbs, and the URL orb allow-list. See the xref:orbs:use:orb-intro.adoc[Orbs intro] and the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL orb allow-lists] guide for more information.
-* A GitHub App integration. This is optional but recommended to get the best experience with centralized configs due to the ability to define pipelines in which the configuration files is stored outside the project repository. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
+* Familiarity with the concepts of URL and registry orbs, and the URL orb allow-list. See the xref:orbs:use:orb-intro.adoc[Orbs Intro] and the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow-lists] guide for more information.
+* A GitHub App integration. This is optional but recommended to get the best experience with centralized configs due to the ability to define pipelines in which the configuration files is stored outside the project repository. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for more information.
 
 == Simple config override example
 
@@ -97,7 +97,7 @@ Notice that this file:
 
 === 3. Add your URL orb prefix to your allow-list
 
-See the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL orb allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
+See the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
 
 === 4. Override a job using the orb
 
@@ -262,7 +262,7 @@ Notice that this file:
 === 3. Configure your URL allow list
 To use URL-based orbs for team configurations, configure your organization's allow-list settings to include the URL prefix to match the orb file:
 
-See the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL orb allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
+See the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow-lists] guide for a guide to adding your URL orb prefix to your allow-list.
 
 [source,text]
 ----
@@ -273,7 +273,7 @@ This allows importing configurations from any repository in your GitHub organiza
 === 4. Set up pipeline definitions
 For each project using the centralized configuration the platform team needs to:
 
-* Ensure the organization has the CircleCI GitHub App installed. The CircleCI GitHub App integration is required to use a config source outside the project repo. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
+* Ensure the organization has the CircleCI GitHub App installed. The CircleCI GitHub App integration is required to use a config source outside the project repo. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for more information.
 * Create a pipeline definition pointing to the central template configuration. This means setting up a pipeline in which the config source is outside the project repository. The config source will be the centralized, _template_ configuration managed by the platform team.
 
 [#transitioning-to-centralized-configs]
@@ -346,6 +346,6 @@ This approach significantly reduces configuration duplication, improves security
 [#next-steps]
 == Next steps
 
-* xref:config-policies:config-policy-management-overview.adoc[Learn about config policy management]
-* xref:reference:ROOT:reusing-config.adoc[Explore other configuration reuse patterns]
-* xref:orbs:use:orb-concepts.adoc[Understand orbs concepts and design]
+* Learn about xref:config-policies:config-policy-management-overview.adoc[Config Policy Management].
+* Explore other configuration reuse patterns in the xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference].
+* Understand xref:orbs:use:orb-concepts.adoc[Orbs Concepts] and design.

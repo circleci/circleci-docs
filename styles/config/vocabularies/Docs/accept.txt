@@ -6,8 +6,6 @@
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
-\b[Cc]onfig policies\b
-\b[Cc]onfig policy\b
 [Cc]ron
 [Ee]nterprise
 [Gg]it
