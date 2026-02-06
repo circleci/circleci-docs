@@ -48,7 +48,7 @@
     "prettier-eslint": "~16.4.1",
     "require-directory": "~2.1",
     "require-from-string": "~2.0",
-    "stylelint": "~16.26.0",
+    "stylelint": "~17.1.0",
     "stylelint-config-standard": "~39.0.0",
     "tailwind-scrollbar": "^4.0.2",
     "vinyl-fs": "~3.0"
@@ -59,7 +59,7 @@
       "eslint": "~9.39.0"
     },
     "gulp-stylelint": {
-      "stylelint": "~16.26.0"
+      "stylelint": "~17.1.0"
     },
     "brace-expansion": "~1.1.12",
     "cross-spawn": "~7.0.0",
