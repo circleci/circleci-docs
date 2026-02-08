@@ -13,7 +13,7 @@ script: |
   // Words that should not be capitalized in title case (unless first/last word)
   // Articles, coordinating conjunctions, and short prepositions only
   lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
-                      "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
+                      "at", "by", "in", "of", "on", "to", "as", "via", "per", "macos"]
   // Words with intentional capitalization that should be ignored by title case rules
   exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS"]
   for i, line in lines {
