@@ -98,6 +98,7 @@ _Used to trigger pipelines on push events from GitHub_
 _Used to trigger pipelines on a schedule (nightly builds for example)_
 
 * Zero, one or many can be created per pipeline.
+* Uses proprietary "timetable" interface (Repeats, Start time, Repeats per hour, ...)
 
 *API / Manual* +
 OAuth pipelines can be triggered via API and manually through the CircleCI web app.
@@ -119,6 +120,7 @@ _Used to trigger pipelines from any external system that can send HTTP requests_
 _Used to trigger pipelines on a schedule (nightly builds for example)_
 
 * Zero, one or many can be created per pipeline.
+* Uses cron syntax
 
 *API / Manual* +
 GitHub App pipelines can be triggered via API and manually through the CircleCI web app.
