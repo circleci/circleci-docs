@@ -1,16 +1,16 @@
 [#which-orb-type-should-i-author]
 === Which orb type should I author?
 
-The type of orb you should author depends on your sharing needs:
+The type of orb you should author depends on what you need it for and how you want to share it.
 
-* **Registry orbs**: Best for public sharing or when you need semantic versioning. Requires CircleCI CLI and publishing process.
-* **URL orbs**: Best for sharing across your organization. Requires hosting and organization allow-list management.
+* **Registry orbs**: Best for public sharing or when you need semantic versioning.
+* **URL orbs**: Best for sharing across your organization but not externally. Requires hosting and administrative allow-list management.
 * **Inline orbs**: Best for project-specific reusable configuration and testing before extracting config into a URL or registry orb. No publishing required, defined directly in your config file.
 
 See xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] for detailed guidance.
 
 [#possible-to-delete-orb]
-=== Is it possible to delete a registry orb I've created?
+=== Is it possible to delete a registry orb that I have created?
 
 No. Registry orbs are public by default and immutable, once a version of a registry orb is published it can not be changed. Registry orbs are immutable by design so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
 
@@ -20,7 +20,7 @@ Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs
 circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
 
-WARNING: **Use caution when using private orbs.** Currently the `orb source` CircleCI CLI command does not work for _any_ private orbs, regardless if they are listed or unlisted. Unless the private orb name is documented before it is unlisted, you will not be able to find the orb through the orb registry or the CircleCI CLI. If you believe this happened to you, you can create a link:https://support.circleci.com/hc/en-us[Support Ticket].
+WARNING: **Use caution when using private orbs.** Currently the `orb source` CircleCI CLI command does not work for _any_ private orbs, regardless if they are listed or unlisted. Unless the private orb name is documented before it is unlisted, you will not be able to find the orb through the orb registry or the CircleCI CLI. If you believe this happened to you, you can create a link:https://support.circleci.com/hc/en-us[support ticket].
 
 [#protect-users-api-tokens]
 === How do I protect a user's API tokens and other sensitive information?
