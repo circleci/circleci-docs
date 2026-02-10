@@ -1,30 +1,30 @@
 ---
-  extends: script
-  scope: raw
-  level: error
-  message: "Use title case for xref link text."
-  link: https://github.com/circleci/circleci-docs
-  script: |
-    text := import("text")
-    matches := []
+extends: script
+scope: raw
+level: error
+message: "Use title case for xref link text."
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
 
-    lines := text.split(scope, "\n")
+  lines := text.split(scope, "\n")
 
-    // Words that should not be capitalized in title case (unless first/last word)
-    // Articles, coordinating conjunctions, and short prepositions only
-    lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
-                        "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
-    // Words with intentional capitalization that should be ignored by title case rules
-    exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS"]
-    for i, line in lines {
-      // Find all xref patterns: xref:path[Link Text]
-      xref_pattern := "xref:[^\\[]+\\[([^\\]]+)\\]"
-      xref_matches := text.re_find(xref_pattern, line)
+  // Words that should not be capitalized in title case (unless first/last word)
+  // Articles, coordinating conjunctions, and short prepositions only
+  lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
+                      "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
+  // Words with intentional capitalization that should be ignored by title case rules
+  exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS"]
+  for i, line in lines {
+    // Find all xref patterns: xref:path[Link Text]
+    xref_pattern := "xref:[^\\[]+\\[([^\\]]+)\\]"
+    xref_matches := text.re_find(xref_pattern, line)
 
-      for match_group in xref_matches {
-        // match_group[0] is the full match, match_group[1] is the capture group (link text)
-        if len(match_group) > 1 {
-          link_text := match_group[1]["text"]
+    for match_group in xref_matches {
+      // match_group[0] is the full match, match_group[1] is the capture group (link text)
+      if len(match_group) > 1 {
+        link_text := match_group[1]["text"]
 
         // Skip if empty or contains only special chars
         if link_text == "" || text.trim_space(link_text) == "" {
