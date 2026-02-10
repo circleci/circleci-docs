@@ -132,8 +132,9 @@ If you are missing specific projects from the pipelines dashboard, you can selec
 
 Your pipelines appear on the **Pipelines** dashboard of the CircleCI web app as they are triggered. You can view workflows or single jobs by expanding a pipeline and clicking on any workflow or job descriptor.
 
-When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
+When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow, pipeline, branch, or project.
 
+.Navigate pipelines using breadcrumbs
 image::guides:ROOT:pipeline-navigation.png[Pipeline navigation]
 
 [#organization-switching]
