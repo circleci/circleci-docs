@@ -3,7 +3,7 @@
 :page-description: Starting point for using CircleCI orbs
 :experimental:
 
-Orbs are reusable packages of parameterizable configuration that can be used in any project. Use orbs to:
+Orbs are reusable packages of parameterizable configuration. Use orbs to:
 
 * Simplify your CI/CD configuration.
 * Automate repeated CI/CD processes.
@@ -14,19 +14,19 @@ Orbs are reusable packages of parameterizable configuration that can be used in 
 [#introduction]
 == Introduction
 
-Orbs are reusable packages of parameterizable configuration made up of reusable configuration elements, for example:
+CircleCI orbs are packages of parameterizable configuration made up of reusable configuration elements, for example:
 
-* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs]
-* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]
-* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Executors]
+* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs]. A CircleCI job is a collection of steps that run commands or scripts inside a specified executor (like a Docker container or virtual machine).
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]. A CircleCI command is a reusable block of configuration that can be called multiple times in your configuration.
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Executors]. A CircleCI executor is a specified environment in which to run a job.
 
-CircleCI supports three types of orbs:
+Three types of orbs are available:
 
-*Inline orbs*:: Inline orbs are defined directly within your project's configuration file. They are project-specific and not published or shared externally. Inline orbs are ideal for reusable configuration within a single project, and are also useful for learning orb concepts and testing configurations.
+*Registry orbs*:: Registry orbs can be developed using the orb dev kit (there is also a manual process), and published following the process described in the xref:author:creating-orbs.adoc[Publishing Orbs] guide. Registry orbs follow strict semantic versioning. Public registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry] and so can be used by anyone.
 +
-Inline orbs do not require publishing, versioning, or external hosting. They exist only within your `.circleci/config.yml` file.
+Registry orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
 +
-See the xref:author:create-an-inline-orb.adoc[Create an Inline Orb] guide for more information on creating inline orbs.
+If you would like to author your own registry orb, read more on the xref:author:orb-author.adoc[Introduction to Authoring Orbs] page.
 
 *URL orbs*:: URL orbs are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry.
 +
@@ -36,11 +36,11 @@ See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] gu
 +
 If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
 
-*Registry orbs*:: Registry orbs can be developed using the orb dev kit (there is also a manual process), and published following the process described in the xref:author:creating-orbs.adoc[Publishing Orbs] guide. Registry orbs follow strict semantic versioning. Public registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry] and so can be used by anyone.
+*Inline orbs*:: Inline orbs are defined directly within your project's configuration file. They are project-specific and not published or shared externally. Inline orbs are ideal for reusable configuration within a single project, and are also useful for learning orb concepts and testing configurations.
 +
-Registry orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
+Inline orbs do not require publishing, versioning, or external hosting. They exist only within your `.circleci/config.yml` file.
 +
-If you would like to author your own registry orb, read more on the xref:author:orb-author.adoc[Introduction to Authoring Orbs] page.
+See the xref:author:create-an-inline-orb.adoc[Create an Inline Orb] guide for more information on creating inline orbs.
 
 [#choosing-an-orb-type]
 == Choosing an orb type
@@ -51,116 +51,54 @@ The following table provides a high-level comparison of the three orb types to h
 --
 [cols=4*, options="header"]
 |===
-| Feature | Inline Orbs | URL Orbs | Registry Orbs
+| Feature | Registry Orbs | URL Orbs | Inline Orbs
 
 | *Sharing scope*
-| Single project only
-| Organization-wide
 | Public or private across organizations
+| Organization-wide
+| Single project only
 
 | *VCS support*
-| GitHub, GitLab, Bitbucket
-| GitHub, Bitbucket
 | Registry orbs are hosted in GitHub only but can be used by all
+| GitHub, Bitbucket
+| GitHub, GitLab, Bitbucket
 
 | *Versioning*
-| None
-| Manual/optional (via Git branches/tags/commits)
 | Semantic versioning
+| Manual/optional (via Git branches/tags/commits)
+| None
 
 | *Publishing method*
-| Defined in config file
+| Published to CircleCI orb registry
 | Hosted on accessible URL (GitHub, S3, etc.)
-| Published to CircleCI Orb Registry
+| Defined in config file
 
 | *Primary use case*
-| Project-specific reusable config, learning, testing
-| Organization-wide shared config, proprietary logic
 | Community sharing, public packages, certified orbs
+| Organization-wide shared config, proprietary logic
+| Project-specific reusable config, learning, testing
 
 | *Updates*
-| Edit config file directly
-| Update hosted file (5-minute cache)
 | Publish new semantic version (immutable)
+| Update hosted file (5-minute cache)
+| Edit config file directly
 
 | *Choose this type when:*
-a| * Configuration is specific to a single project.
-* You want zero publishing or hosting overhead.
-* You're learning about orbs and want to experiment.
-* You need immediate changes without any publishing delay.
-a| * You want to use centralized configuration for your organization.
-* You need to share configuration within your organization.
-* You need direct control over updates and distribution.
-* You need to use proprietary or confidential configurations.
 a| * You want to share your orb with the community.
 * You want to use semantic versioning for your orb.
 * You want your orb to be discoverable in the CircleCI Orb Registry.
 * You want to leverage the orb development kit and automated CI/CD pipeline.
+a| * You want to use centralized configuration for your organization.
+* You need to share configuration within your organization.
+* You need direct control over updates and distribution.
+* You need to use proprietary or confidential configurations.
+a| * Configuration is specific to a single project.
+* You want zero publishing or hosting overhead.
+* You're learning about orbs and want to experiment.
+* You need immediate changes without any publishing delay.
 
 |===
 --
-
-[#use-an-orb]
-== Use an inline orb
-
-Inline orbs are defined directly in your CircleCI configuration file using the `orbs` stanza. Inline orbs group together commands, jobs and executors that are specific to a single project. The following example shows how to define an inline orb:
-
-.Example showing the use of an inline orb names my-orb
-[,yaml]
-----
-version: 2.1
-
-orbs:
-  my-orb:
-    commands:
-      greet: # define a command named greet
-        parameters: # define a parameter named to
-          to:
-            type: string
-            default: "World" # set the default value to "World"
-        steps: # define the steps to execute when the command is called
-          - run: echo "Hello << parameters.to >>" # print the value of the to parameter
-    jobs:
-      hello-job: # define a job named hello-job
-        docker:
-          - image: cimg/base:current
-        steps:
-          - greet:
-              to: "from my inline orb"
-
-workflows:
-  my-workflow:
-    jobs:
-      - my-orb/hello-job # use the hello-job from the my-orb orb
-----
-
-Once defined, inline orb elements are available as `<orb-name>/<element>` within the same configuration file. Inline orbs support the same configuration elements as URL orbs and registry orbs: commands, jobs, and executors.
-
-For more details on authoring inline orbs, see the xref:author:create-an-inline-orb.adoc[Create an Inline Orb] guide.
-
-NOTE: Inline orbs can be converted to URL orbs or registry orbs later if you need to share them beyond a single project.
-
-== Use a URL orb
-
-A URL orb is a single YAML file that contains the shared configuration you need. Store the file somewhere accessible via HTTPS, for example a GitHub repository.
-
-To use a URL orb in your configuration, add the orb to the `orbs` section of your configuration file using the `https` URL of the orb repository. The URL must point to a repository that is accessible to CircleCI and must be allowed by the organization's allow list.
-
-The following example shows how to import a URL orb named `platform` into your configuration file. To use this orb, the `https://raw.githubusercontent.com/my-org/` prefix must exist in your org's allow list.
-
-[,yaml]
-----
-version: 2.1
-
-orbs:
-  platform: https://raw.githubusercontent.com/my-org/orbs/refs/heads/main/platform-team.yaml
-----
-
-After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors.
-
-If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
-
-See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
 
 == Use a registry orb
 
@@ -225,6 +163,68 @@ jobs:
       - checkout
       - node/install-packages # Use a command from the orb in a job's steps
 ----
+
+== Use a URL orb
+
+A URL orb is a single YAML file that contains the shared configuration you need. Store the file somewhere accessible via HTTPS, for example a GitHub repository.
+
+To use a URL orb in your configuration, add the orb to the `orbs` section of your configuration file using the `https` URL of the orb repository. The URL must point to a repository that is accessible to CircleCI and must be allowed by the organization's allow list.
+
+The following example shows how to import a URL orb named `platform` into your configuration file. To use this orb, the `https://raw.githubusercontent.com/my-org/` prefix must exist in your org's allow list.
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  platform: https://raw.githubusercontent.com/my-org/orbs/refs/heads/main/platform-team.yaml
+----
+
+After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors.
+
+If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
+
+See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
+
+[#use-an-orb]
+== Use an inline orb
+
+Inline orbs are defined directly in your CircleCI configuration file using the `orbs` stanza. Inline orbs group together commands, jobs and executors that are specific to a single project. The following example shows how to define an inline orb:
+
+.Example showing the use of an inline orb names my-orb
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  my-orb:
+    commands:
+      greet: # define a command named greet
+        parameters: # define a parameter named to
+          to:
+            type: string
+            default: "World" # set the default value to "World"
+        steps: # define the steps to execute when the command is called
+          - run: echo "Hello << parameters.to >>" # print the value of the to parameter
+    jobs:
+      hello-job: # define a job named hello-job
+        docker:
+          - image: cimg/base:current
+        steps:
+          - greet:
+              to: "from my inline orb"
+
+workflows:
+  my-workflow:
+    jobs:
+      - my-orb/hello-job # use the hello-job from the my-orb orb
+----
+
+Once defined, inline orb elements are available as `<orb-name>/<element>` within the same configuration file. Inline orbs support the same configuration elements as URL orbs and registry orbs: commands, jobs, and executors.
+
+For more details on authoring inline orbs, see the xref:author:create-an-inline-orb.adoc[Create an Inline Orb] guide.
+
+NOTE: Inline orbs can be converted to URL orbs or registry orbs later if you need to share them beyond a single project.
 
 [#benefits-of-using-orbs]
 == Benefits of using orbs
