@@ -1,16 +1,16 @@
-= Registry orb authoring best practices
+= Orbs authoring best practices
 :page-platform: Cloud, Server v4+
 :page-description: A reference guide to best practices for developing orbs.
 :experimental:
 
 [#general]
 == General
-This guide covers best practices for creating registry orbs.
+This guide covers best practices for creating orbs.
 
 [#give-your-orb-a-descriptive-name]
 === Give your orb a descriptive name
 
-An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents the individual, company, or organization that owns and maintains the orb. The orb name itself should describe the product, service, or action provided by the individual orb.
+An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents, the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
 
 [.table-scroll]
 --
@@ -58,17 +58,17 @@ If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to 
 [#orbyml]
 === @orb.yml
 
-The `@orb.yml` file acts as the "root" of our project. It contains much of the meta-data for our orb, which will appear on the Orb Registry as well as the CLI.
+The `@orb.yml` file acts as the "root" of our project and contains much of the meta-data for our orb, which will appear on the Orb Registry as well as the CLI.
 
 [#all-orbs-should-include-a-description]
 ==== All orbs should include a description
 
-When orbs are published to the Orb Registry they are searchable by their name and description. Good descriptions give your users a better idea of the purpose and functionality of your orb. They are also important for search optimization.
+When orbs are published to the Orb Registry they are searchable by their name and description. Besides giving your users a better idea of the purpose and functionality of your orb, good descriptions are important for search optimization.
 
 [#include-display-links]
 ==== Include display links
 
-Orbs utilize a special config key `display` that can hold a `source_url` for linking to your Git repository. This repository holds the orb source code. The `home_url` links to the product or service home page if applicable.
+Orbs utilize a special config key xref:orb-author.adoc#orbyml[`display`] that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
 
 [,yaml]
 ----
@@ -198,7 +198,7 @@ parameters:
 --
 ====
 
-As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. To enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job and pass it to our other orb components.
+As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
 
 [#a-docker-image-parameter-might-be-preferable-to-an-executor]
 ==== A Docker image parameter might be preferable to an executor
@@ -221,14 +221,14 @@ See the following:
 [#orbs-do-not-always-require-an-executor]
 ==== Orbs do not always require an executor
 
-In orb development, executors are often used to provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment. You can use a single xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Authoring Reusable Executors] for both jobs.
+In orb development, executors are often used to either provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Reusable Executor] to be used for both jobs.
 
 Executors are especially useful outside of orbs, as a way to create link:https://circleci.com/blog/circleci-matrix-jobs/[matrix tests] for custom jobs.
 
 [#examples]
 === Examples
 
-Orb xref:use:orb-concepts.adoc#usage-examples[Usage Examples] provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
+Orb xref:orb-concepts.adoc#usage-examples[Usage Examples] provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
 
 Be sure to name your usage examples so they reflect the use-case they demonstrate.
 
@@ -259,7 +259,7 @@ Each included usage example should be named for a specific use-case to instruct 
 [#show-correct-orb-version]
 ==== Show correct orb version
 
-Each usage example must present a full example including showing the orb being imported. The version number displayed in the usage-example should match the currently published orb. For example, if your orb is currently on version `0.1.0` and you open a pull request to publish version `1.0.0`, update your usage examples to reflect the new version.
+Each usage example must present a full example including showing the orb being imported. The version number displayed in the usage-example should match the currently published orb. If your orb is currently on version `0.1.0`, and you were to open a pull request to publish version `1.0.0`, your usage examples should be updated to reflect version `1.0.0` of the orb in use.
 
 [#parameters]
 === Parameters
@@ -267,7 +267,7 @@ Each usage example must present a full example including showing the orb being i
 [#secrets-should-never-be-directly-entered]
 ==== Secrets should _never_ be directly entered
 
-Any information that could be considered "secret" such as API keys, auth tokens, and passwords, should never be entered directly as a parameter value. Instead, use the xref:reference:ROOT:reusing-config.adoc#environment-variable-name[Environment Variable Name] parameter type, which expects the string value of the name of the environment variable that contains the secret information. The `env_var_name` parameter type will fail validation if the parameter value is not a POSIX-compliant environment variable name. This validation rule is designed to assist in preventing users from accidentally entering the secret value directly as a string.
+Any information that could be considered "secret" such as API keys, auth tokens, and passwords, should never be entered directly as a parameter value. Instead, use the xref:reference:ROOT:reusing-config.adoc#environment-variable-name[`env_var_name` parameter] type, which expects the string value of the name of the environment variable that contains the secret information. The `env_var_name` parameter type will fail validation if the parameter value is not a POSIX-compliant environment variable name. This validation rule is designed to assist in preventing users from accidentally entering the secret value directly as a string.
 
 If your orb requires an "API key", you should create a parameter named `api_key` of type `env_var_name`. The developer using your orb would then pass the name of the environment variable containing the API key as the value of the `api_key` parameter.
 
@@ -300,9 +300,9 @@ steps:
 [#accepting-parameters-as-strings-or-environment-variables]
 ==== Accepting parameters as strings or environment variables
 
-When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually enter a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, for example, if you were using a xref:guides:security:contexts.adoc[Context] to store your AWS metadata for multiple projects.
+When creating a parameter that accepts a non-secret string value, it is often useful to also accept an environment variable that could be reused in multiple places. For example, setting your `AWS_REGION` is likely not a secret in the traditional sense, you may want to manually enter a region, or override a default value directly. It may also be easier to reference an environment variable that contains the region, for example, if you were using a xref:guides:security:contexts.adoc[context] to store your AWS metadata for multiple projects.
 
-CircleCI ships with the xref:guides:security:env-vars.adoc#environment-variable-substitution[Environment Variable Substitution] CLI (`envsubst`) built in, which allows us to evaluate environment variables in strings.
+CircleCI ships with the xref:guides:security:env-vars.adoc#environment-variable-substitution[`envsubst`] CLI built in, which allows us to evaluate environment variables in strings.
 
 [,yaml]
 ----
@@ -318,7 +318,7 @@ steps:
       command: <<include(script/your_script.sh)>>
 ----
 
-When building orbs, it is typical to xref:use:orb-concepts.adoc#file-include-syntax[File Include Syntax] to avoid some of the pitfalls of YAML. This also gives you access to syntax highlighting and other features in your IDE. In this example, we are including a script named `your_script.sh` which contains the following code:
+When building orbs, it is typical to xref:orb-concepts.adoc#file-include-syntax[write your code in a separate file] to avoid some of the pitfalls of YAML, as well as gaining access to syntax highlighting and other features in your IDE. In this example, we are including a script named `your_script.sh` which contains the following code:
 
 [,bash]
 ----
@@ -339,7 +339,7 @@ When installing any binary into a potentially unknown user-defined Docker image,
 [discrete#always-follow-strict-semantic-versioning]
 ==== Always follow strict semantic versioning
 
-Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood xref:use:orb-concepts.adoc#semantic-versioning[Semantic Versioning].
+Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood xref:orb-concepts.adoc#semantic-versioning[semantic versioning].
 
 [#keep-a-changelog]
 === Keep a changelog

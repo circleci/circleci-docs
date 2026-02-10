@@ -50,7 +50,7 @@ xref:guides:orchestrate:jobs-steps.adoc[Jobs] are collections of steps, which ru
 [#orbs]
 == Orbs
 
-xref:orbs:use:orb-concepts.adoc[Orbs] are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
+xref:orbs:author:orb-concepts.adoc[Orbs] are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
 
 [#owner]
 == Owner

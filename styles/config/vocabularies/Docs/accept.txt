@@ -1,4 +1,4 @@
-\b[Gg]it[Hh]ub organization\b
+\bgithub organization\b
 \bcircleci organization\b
 \bbitbucket organization\b
 .circleci/config.yml
@@ -6,6 +6,8 @@
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
+\b[Cc]onfig policies\b
+\b[Cc]onfig policy\b
 [Cc]ron
 [Ee]nterprise
 [Gg]it

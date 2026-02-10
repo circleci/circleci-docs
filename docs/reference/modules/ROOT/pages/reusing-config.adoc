@@ -17,7 +17,7 @@ include::guides:ROOT:partial$notes/docker-auth.adoc[]
 [#using-the-parameters-declaration]
 == Using the `parameters` declaration
 
-Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters Guide] for more information.
+Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters guide] for more information.
 
 The immediate children of the `parameters` key are a set of keys in a map.
 
@@ -85,7 +85,7 @@ The parameter types supported by orbs are:
 * `enum`
 * `executor`
 * `steps`
-* `env_var_name`
+* environment variable name
 
 The parameter types supported by pipeline parameters are:
 
@@ -113,12 +113,7 @@ commands:
       - run: cp *.md << parameters.destination >>
 ----
 
-Strings must be enclosed in quotes:
-
-* If they would otherwise represent another type (such as boolean or number).
-* If they contain characters that have special meaning in YAML, particularly for the colon character.
-
-In all other instances, quotes are optional.
+Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional.
 
 Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
@@ -151,8 +146,8 @@ commands:
 
 Boolean parameter evaluation is based on the link:https://yaml.org/type/bool.html[values specified in YAML 1.1]:
 
-* True: `yes` `true` `on`.
-* False: `no` `false` `off`.
+* True: `yes` `true` `on`
+* False: `no` `false` `off`
 
 Capitalized and uppercase versions of the above values are also valid.
 
@@ -232,8 +227,8 @@ The following example uses parameters:
 * The `executor` parameter to allow the invoker of a job to decide which executor to use to run the job: `ubuntu`, `xenial`, `bionic`.
 * For the `ubuntu` executor:
  ** A string parameter is used to set the image to use.
- ** A boolean parameter is used to enable/disable xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching].
- ** An enum parameter is used to choose a xref:configuration-reference.adoc#linuxvm-execution-environment[Resource Class].
+ ** A boolean parameter is used to enable/disable xref:guides:optimize:docker-layer-caching.adoc[Docker layer caching].
+ ** An enum parameter is used to choose a xref:configuration-reference.adoc#linuxvm-execution-environment[resource class].
 * For the `xenial` executor:
  ** A string parameter is used to set an environment variable.
 
@@ -509,7 +504,7 @@ Commands can use other commands in the scope of execution. For instance, if a co
 [#special-keys]
 === Special keys
 
-CircleCI has several special keys available to all link:https://circleci.com[circleci.com] customers and available by default in CircleCI Server installations. Examples of these keys are:
+CircleCI has several special keys available to all link:https://circleci.com[circleci.com] customers and available by default in CircleCI server installations. Examples of these keys are:
 
 * `checkout`
 * `setup_remote_docker`
@@ -622,9 +617,7 @@ Executor declarations outside of `jobs` can be used by all jobs in the scope of 
 
 An executor definition includes one or more of the following keys:
 
-* `docker`
-* `machine`
-* `macos`
+* `docker` or `machine` or `macos`
 * `environment`
 * `working_directory`
 * `shell`
@@ -738,7 +731,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job in the `matrix-tests` workflow, xref:configuration-reference.adoc#matrix[Matrix Jobs] are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
+When calling the `test` job in the `matrix-tests` workflow, xref:configuration-reference.adoc#matrix[matrix jobs] are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
 
 [,yaml]
 ----
@@ -832,7 +825,7 @@ NOTE: The `foo-orb/bar` and `baz-orb/bar` are different executors. They both hav
 
 When invoking an executor in a `job`, any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the xref:guides:security:env-vars.adoc#order-of-precedence[Environment Variables Guide] for more information.
+The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the xref:guides:security:env-vars.adoc#order-of-precedence[Environment Variables guide] for more information.
 
 [,yaml]
 ----
@@ -966,7 +959,7 @@ workflows:
 [#using-parameters-in-executors]
 === Using parameters in executors
 
-To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration. Each key has the value of the parameter to pass in.
+To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
 
 Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
 
@@ -1118,7 +1111,7 @@ workflows:
 [#defining-conditional-steps]
 == Defining conditional steps
 
-Conditional steps run only if a condition is met at config-compile time, before a workflow runs. You cannot use a condition to check an environment variable, as they are not injected until your steps are running in the shell of your execution environment.
+Conditional steps run only if a condition is met at config-compile time, before a workflow runs. This means, for example, that you may not use a condition to check an environment variable, as those are not injected until your steps are running in the shell of your execution environment.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs.
 
@@ -1173,7 +1166,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 | condition
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A Logic Statement]
+| xref:configuration-reference.adoc#logic-statements[A logic statement]
 
 | steps
 | Y
@@ -1196,7 +1189,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 | condition
 | Y
 | Logic
-| xref:reference:ROOT:configuration-reference.adoc#logic-statements[A Logic Statement]
+| xref:reference:ROOT:configuration-reference.adoc#logic-statements[A logic statement]
 
 | steps
 | Y
@@ -1208,7 +1201,36 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 [#writing-inline-orbs]
 == Writing inline orbs
 
-For a guide to creating inline orbs, see the xref:orbs:author:create-an-inline-orb.adoc[Create an Inline Orb] guide.
+When defining reusable configuration elements directly within your config, you can also wrap those elements within an inline orb. You may find inline orbs useful for development or for name-spacing elements that share names in a local config.
+
+To write an inline orb, place the orb elements under that orb's key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another inline orb, the config could look like the example shown below, in which the inline orb `my-orb` imports the `node` orb:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  my-orb:
+    orbs:
+      node: circleci/node@3.0
+    commands:
+      my_command:
+        steps:
+          - run: echo "Run my tests"
+    jobs:
+      my_job:
+        executor: node/default # Node orb executor
+        steps:
+          - checkout
+          - my_command
+          - store_test_results:
+              path: test-results
+
+workflows:
+  main:
+    jobs:
+      - my-orb/my_job
+----
 
 [#see-also]
 == See also
