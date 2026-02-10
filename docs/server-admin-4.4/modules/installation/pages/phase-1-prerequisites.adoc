@@ -6,7 +6,7 @@
 :toc: macro
 :toc-title:
 
-// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatability with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
+// This doc uses ifdef and ifndef directives to display or hide content specific to Google Cloud Storage (env-gcp) and AWS (env-aws). Currently, this affects only the generated PDFs. To ensure compatibility with the Jekyll version, the directives test for logical opposites. For example, if the attribute is NOT env-aws, display this content. For more information, see https://docs.asciidoctor.org/asciidoc/latest/directives/ifdef-ifndef/.
 
 CircleCI server v4.4 is installed as a Helm chart. The installation process is broken down into four phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may include multiple steps. This installation guide assumes you have already read the xref:overview:circleci-server-overview.adoc[CircleCI server v4.4 overview].
 
@@ -145,7 +145,7 @@ The application uses a large number of resources. Depending on your usage, your 
 |===
 --
 
-[#minimum-permissions-requirments]
+[#minimum-permissions-requirements]
 ==== Minimum permissions requirements
 
 The installing user must have **at least** admin permissions for the namespace into which CircleCI is to be installed.
