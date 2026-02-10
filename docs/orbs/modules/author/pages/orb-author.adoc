@@ -4,13 +4,9 @@
 :experimental:
 :page-aliases: orb-development-kit
 
-CircleCI orbs are packages of xref:use:orb-concepts.adoc#orb-configuration-elements[Reusable Configuration] that you can import into your CircleCI configuration files. Orbs come in three types:
+CircleCI orbs are packages of xref:use:orb-concepts.adoc#orb-configuration-elements[Reusable Configuration] that you can import into your CircleCI configuration files. Orbs are available in three types:
 
-*Inline orbs*:: Defined directly within a project's configuration file. Inline orbs are project-specific and ideal for learning, testing, or when reusable configuration does not need to be shared beyond a single project.
-
-*URL orbs*:: Stored anywhere accessible by your CircleCI project. URL orbs are referenced by a URL to import into your configuration files. Access is managed at the organization level using an allow list.
-
-*Registry orbs*:: Packaged and, if public, published to the link:https://circleci.com/developer/orbs[orb registry]. Registry orbs can be imported into configuration files either within an organization if private or by anyone if public.
+include::guides:ROOT:partial$orbs/orb-types.adoc[]
 
 If you manage multiple, similar projects, consider abstracting out your config with orbs.
 

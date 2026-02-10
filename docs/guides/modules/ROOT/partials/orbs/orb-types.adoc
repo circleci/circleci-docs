@@ -1,0 +1,19 @@
+*Registry orbs*:: Registry orbs can be developed using the orb dev kit (there is also a manual process) and published for use by anyone (public) or within your organization (private). Registry orbs follow strict semantic versioning. Public registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry].
++
+Registry orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
++
+If you would like to author your own registry orb, read more on the xref:author:create-test-and-publish-a-registry-orb.adoc[Create a registry orb] page.
+
+*URL orbs*:: URL orbs are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry.
++
+URL orbs do not follow semantic versioning, and can be accessed directly using an `https` URL. An org-level allow list is used to manage the addresses of URL orbs that can be used in a project in that organization. Organization admins can manage the allow list at menu:Organization Settings[Orbs].
++
+See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
++
+If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
+
+*Inline orbs*:: Inline orbs are defined directly within your project's configuration file. They are project-specific and not published or shared externally. Inline orbs are ideal for reusable configuration within a single project, and are also useful for learning orb concepts and testing configurations prior to extracting to a URL or registry orb.
++
+Inline orbs do not require publishing, versioning, or external hosting. They exist only within your `.circleci/config.yml` file.
++
+See the xref:author:create-an-inline-orb.adoc[Create an Inline Orb] guide for more information on creating inline orbs.
