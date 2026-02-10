@@ -20,12 +20,12 @@ URL orbs contain the same reusable configuration elements as inline orbs and reg
 
 The key differences:
 
-* Unlike *inline orbs* (defined in a single project's config), URL orbs can be shared across your organization.
 * Unlike *registry orbs* (published to the Orb Registry), URL orbs are not published and are controlled by your organization's allow-list.
+* Unlike *inline orbs* (defined in a single project's config), URL orbs can be shared across your organization.
 
 [NOTE]
 ====
-This guide covers **URL orbs**. For information on creating inline orbs, see xref:create-an-inline-orb.adoc[Create an Inline Orb]. For information on creating registry orbs, see xref:orb-author.adoc[Orb Authoring Process].
+This guide covers **URL orbs**. For information on creating registry orbs, see xref:create-test-and-publish-a-registry-orb.adoc[Create, Test, and Publish a Registry Orb]. For information on creating inline orbs, see xref:create-an-inline-orb.adoc[Create an Inline Orb].
 ====
 
 For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] section.

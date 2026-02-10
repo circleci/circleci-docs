@@ -3,9 +3,9 @@
 
 The type of orb you should author depends on your sharing needs:
 
-* **Inline orbs**: Best for project-specific reusable configuration. No publishing required, defined directly in your config file.
-* **URL orbs**: Best for sharing across your organization. Requires hosting and organization allow-list management.
 * **Registry orbs**: Best for public sharing or when you need semantic versioning. Requires CircleCI CLI and publishing process.
+* **URL orbs**: Best for sharing across your organization. Requires hosting and organization allow-list management.
+* **Inline orbs**: Best for project-specific reusable configuration and testing before extracting config into a URL or registry orb. No publishing required, defined directly in your config file.
 
 See xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] for detailed guidance.
 

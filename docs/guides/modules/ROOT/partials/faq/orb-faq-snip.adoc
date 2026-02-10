@@ -3,20 +3,18 @@
 
 CircleCI supports three types of orbs:
 
-* **Inline orbs**: Defined directly in your project's `.circleci/config.yml` file. They are project-specific and ideal for reusable configuration within a single project.
-* **URL orbs**: Stored at an accessible URL (like GitHub or S3) and shared across your organization using an allow-list.
-* **Registry orbs**: Published to the CircleCI Orb Registry with semantic versioning, available publicly or privately.
+include::guides:ROOT:partial$orbs/orb-types.adoc[]
 
 For a detailed comparison, see the xref:orbs:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] section.
 
 [#which-orb-type-should-i-use]
 === Which orb type should I use?
 
-Choose **inline orbs** when:
+Choose **registry orbs** when:
 
-* Configuration is specific to one project.
-* You want zero publishing overhead.
-* You're learning about orbs.
+* You want to share with the community.
+* You need semantic versioning.
+* You want discoverability in the Orb Registry.
 
 Choose **URL orbs** when:
 
@@ -24,11 +22,12 @@ Choose **URL orbs** when:
 * You need direct control over updates.
 * Configuration contains proprietary logic.
 
-Choose **registry orbs** when:
+Choose **inline orbs** when:
 
-* You want to share with the community.
-* You need semantic versioning.
-* You want discoverability in the Orb Registry.
+* Configuration is specific to one project.
+* You want zero publishing overhead.
+* You are learning about orbs and want to experiment.
+* You want to test out packaging some configuration before extracting it to a URL or registry orb.
 
 See the xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] section for more guidance.
 

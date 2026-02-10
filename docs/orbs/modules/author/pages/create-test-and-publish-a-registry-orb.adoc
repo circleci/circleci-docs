@@ -9,11 +9,7 @@ This tutorial guides you through creating a new registry orb using the orb devel
 
 [NOTE]
 ====
-This guide covers **registry orbs**. CircleCI supports three types of orbs:
-
-* **Inline orbs**: Project-specific orbs defined in your config file. See xref:create-an-inline-orb.adoc[Create an Inline Orb].
-* **URL orbs**: Organization-wide orbs hosted at a URL. See xref:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs].
-* **Registry orbs**: Publicly or privately published orbs with semantic versioning (this guide).
+This guide covers **registry orbs**. CircleCI supports three types of orbs. Read about them in the xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] section.
 
 Choose registry orbs when you need semantic versioning, public discoverability, or want to share with the CircleCI community. For a comparison, see xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison].
 ====
