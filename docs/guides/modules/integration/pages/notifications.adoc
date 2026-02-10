@@ -53,6 +53,8 @@ You can further filter the notifications you receive based on the status of the 
 * Unauthorized
 * Error
 
+NOTE: The "On default branch (any status)" setting overrides individual status filters. For example, if you have "Cancelled" notifications disabled but "On default branch (any status)" enabled under either "My Work" or "Followed Projects," you will still receive notifications for canceled workflows. This includes workflows that are automatically canceled when approval jobs expire after 90 days.
+
 .Notification categories
 image::guides:ROOT:email-categories.png[Screenshot showing how to change which notifications to receive]
 
