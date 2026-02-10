@@ -1,4 +1,4 @@
-= Manual registry orb authoring process
+= Registry orb authoring process (manual)
 :page-platform: Cloud, Server v4+
 :page-description: Authoring simple orbs manually without the orb development kit.
 :experimental:
