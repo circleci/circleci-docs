@@ -1,4 +1,4 @@
-= Skip CI, auto-cancel, and blocking new pipelines
+= Skip CI, auto-cancel, and block new pipelines
 :page-platform: Cloud, Server v4+
 :page-description: Skip CI builds, auto-cancel redundant workflows, and block new work for your CircleCI organization or project.
 :experimental:
@@ -114,7 +114,7 @@ NOTE: For both organization and project level settings, **in-progress workflows 
 [#enable-block-new-work-for-an-organization]
 === Enable block new work for an organization
 
-. In the CircleCI web app, select **Organization Settings** from the sidebar.
+. In the CircleCI web app, select **Org** from the sidebar to enter your organization settings.
 . Select **Advanced**.
 . Toggle the **Block all new work from starting for this organization** switch to the on position.
 
@@ -122,7 +122,7 @@ NOTE: For both organization and project level settings, **in-progress workflows 
 === Enable block new work for a project
 
 . In the CircleCI web app, select **Projects** from the sidebar.
-. Select the ellipsis (&#8230;&#8203;) next to your project and select **Project Settings**.
+. Select the ellipsis (image:guides:ROOT:icons/more.svg[more icon, role="no-border"]) next to your project and select **Project Settings**.
 . Select **Advanced**.
 . Toggle the **Block all new work from starting for this project** switch to the on position.
 
