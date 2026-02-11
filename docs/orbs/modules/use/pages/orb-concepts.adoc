@@ -5,9 +5,9 @@
 
 CircleCI orbs are shareable packages of configuration elements, including the following:
 
-* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs]
-* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]
-* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Executors].
+* xref:reference:ROOT:reusing-config.adoc#authoring-parameterized-jobs[Jobs]. A CircleCI job is a collection of steps that run commands or scripts inside a specified executor (like a Docker container or virtual machine).
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]. A CircleCI command is a reusable block of configuration that can be called multiple times in your configuration.
+* xref:reference:ROOT:reusing-config.adoc#authoring-reusable-executors[Executors]. A CircleCI executor is a specified environment in which to run a job.
 
 Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference].
 
@@ -15,128 +15,14 @@ Orbs make writing and customizing CircleCI config simple. The reusable configura
 
 CircleCI supports three types of orbs:
 
-=== Inline orbs
-
-Inline orbs are defined directly within a project's configuration file and are not published or shared externally. They are project-specific and ideal for reusable configuration within a single project, learning orb concepts, and testing configurations before publishing.
-
-Inline orbs do not require publishing, versioning, or external hosting. They exist only within your `.circleci/config.yml` file.
-
-.Example of configuring and using an inline orb
-[,yaml]
-----
-version: 2.1
-
-orbs:
-  my-tools:
-    commands:
-      setup:
-        steps:
-          - run: echo "Setting up environment"
-          - run: npm install
-      deploy:
-        parameters:
-          environment:
-            type: string
-        steps:
-          - run: echo "Deploying to << parameters.environment >>"
-    jobs:
-      build-and-deploy:
-        docker:
-          - image: cimg/node:lts
-        parameters:
-          environment:
-            type: string
-        steps:
-          - checkout
-          - setup
-          - deploy:
-              environment: << parameters.environment >>
-
-workflows:
-  main:
-    jobs:
-      - my-tools/build-and-deploy:
-          environment: staging
-----
-
-For more information on authoring inline orbs, see xref:author:create-an-inline-orb.adoc[Create an Inline Orb].
-
-=== URL orbs
-
-URL orbs are stored in a publicly accessible location (for example, a git repository or a public S3 object) and are not published to the orbs registry.
-
-URL orbs do not follow semantic versioning, and can be accessed directly using an `https` URL. An org-level allow list is used to manage the addresses of URL orbs that can be used in a project in that organization. Manage the allow list at menu:Organization Settings[Orbs].
-
-See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] guide for more information on scoping allowed URL orbs for your organization.
-
-If you would like to author your own URL orb, see the xref:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
-
-=== Registry orbs
-
-Registry orbs are developed and published using the "orb publishing process", which is described in the xref:author:creating-orbs.adoc[Publishing Orbs] guide. Semantic versioning is used to manage the versions of registry orbs. Registry orbs are available from the link:https://circleci.com/developer/orbs[Orbs Registry] and so can be used by anyone.
-
-Registry orbs are available for many languages, platforms, services, and tools. Visit the link:https://circleci.com/developer/orbs[Orbs Registry] to search for orbs to help simplify your configuration.
-
-If you would like to author your own registry orb, read more on the xref:author:orb-author.adoc[Introduction to Authoring Orbs] page.
+include::guides:ROOT:partial$orbs/orb-types.adoc[]
 
 [#orb-types-comparison]
 == Orb types comparison
 
 The following table provides a detailed comparison of the three orb types:
 
-[.table-scroll]
---
-[cols="2,2,2,2", options="header"]
-|===
-| Feature | Inline Orbs | URL Orbs | Registry Orbs
-
-| *Location*
-| Defined in config file
-| Hosted at accessible URL
-| Published to Orb Registry
-
-| *Sharing scope*
-| Project-specific only
-| Organization-wide (with allow-list)
-| Public or private across organizations
-
-| *Versioning*
-| None
-| Manual (Git branches, tags, commits)
-| Semantic versioning (SemVer)
-
-| *Publishing*
-| Not published
-| Not published (hosted)
-| Published with CI/CD pipeline
-
-| *Mutability*
-| Mutable (edit config directly)
-| Mutable
-| Immutable
-
-| *Access control*
-| Repository access only
-| Organization allow-list
-| Namespace permissions
-
-| *Discoverability*
-| Not discoverable
-| Not discoverable (private URL)
-| Searchable in Orb Registry (if public)
-
-| *CLI required*
-| No
-| Optional (for validation)
-| Yes (for publishing)
-
-| *Best for*
-| Learning, testing, project-specific config
-| Organization-wide sharing, proprietary config
-| Community sharing, public packages
-|===
---
-
+include::guides:ROOT:partial$orbs/orb-type-comparison.adoc[]
 
 [#orb-configuration-elements]
 == Orb configuration elements

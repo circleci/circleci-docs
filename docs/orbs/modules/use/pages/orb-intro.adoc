@@ -29,58 +29,7 @@ include::guides:ROOT:partial$orbs/orb-types.adoc[]
 
 The following table provides a high-level comparison of the three orb types to help you choose the right one for your needs:
 
-[.table-scroll]
---
-[cols=4*, options="header"]
-|===
-| Feature | Registry Orbs | URL Orbs | Inline Orbs
-
-| *Sharing scope*
-| Public or private across organizations
-| Organization-wide
-| Single project only
-
-| *VCS support*
-| Registry orbs are hosted in GitHub only but can be used by all
-| GitHub, Bitbucket
-| GitHub, GitLab, Bitbucket
-
-| *Versioning*
-| Semantic versioning
-| Manual/optional (via Git branches/tags/commits)
-| None
-
-| *Publishing method*
-| Published to CircleCI orb registry
-| Hosted on accessible URL (GitHub, S3, etc.)
-| Defined in config file
-
-| *Primary use case*
-| Community sharing, public packages, certified orbs
-| Organization-wide shared config, proprietary logic
-| Project-specific reusable config, learning, testing
-
-| *Updates*
-| Publish new semantic version (immutable)
-| Update hosted file (5-minute cache)
-| Edit config file directly
-
-| *Choose this type when:*
-a| * You want to share your orb with the community.
-* You want to use semantic versioning for your orb.
-* You want your orb to be discoverable in the CircleCI Orb Registry.
-* You want to leverage the orb development kit and automated CI/CD pipeline.
-a| * You want to use centralized configuration for your organization.
-* You need to share configuration within your organization.
-* You need direct control over updates and distribution.
-* You need to use proprietary or confidential configurations.
-a| * Configuration is specific to a single project.
-* You want zero publishing or hosting overhead.
-* You're learning about orbs and want to experiment.
-* You need immediate changes without any publishing delay.
-
-|===
---
+include::guides:ROOT:partial$orbs/orb-type-comparison.adoc[]
 
 == Use a registry orb
 
