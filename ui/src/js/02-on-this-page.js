@@ -52,6 +52,37 @@
   var title = document.createElement('h3')
   title.textContent = sidebar.dataset.title || 'On This Page'
   menu.appendChild(title)
+
+  // Add markdown buttons container
+  var markdownButtons = document.createElement('div')
+  markdownButtons.className = 'markdown-buttons'
+
+  // SVG icon markup
+  var copyIconSVG = '<svg class="markdown-button-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M4 16C2.9 16 2 15.1 2 14V4C2 2.9 2.9 2 4 2H14C15.1 2 16 2.9 16 4M10 8H20C21.1046 8 22 8.89543 22 10V20C22 21.1046 21.1046 22 20 22H10C8.89543 22 8 21.1046 8 20V10C8 8.89543 8.89543 8 10 8Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg>'
+
+  var eyeIconSVG = '<svg class="markdown-button-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<path d="M2.06202 12.348C1.97868 12.1235 1.97868 11.8765 2.06202 11.652C2.87372 9.68385 4.25153 8.00103 6.02079 6.81689C7.79004 5.63275 9.87106 5.00061 12 5.00061C14.129 5.00061 16.21 5.63275 17.9792 6.81689C19.7485 8.00103 21.1263 9.68385 21.938 11.652C22.0214 11.8765 22.0214 12.1235 21.938 12.348C21.1263 14.3161 19.7485 15.999 17.9792 17.1831C16.21 18.3672 14.129 18.9994 12 18.9994C9.87106 18.9994 7.79004 18.3672 6.02079 17.1831C4.25153 15.999 2.87372 14.3161 2.06202 12.348Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '<path d="M12 15C13.6569 15 15 13.6568 15 12C15 10.3431 13.6569 8.99999 12 8.99999C10.3432 8.99999 9.00002 10.3431 9.00002 12C9.00002 13.6568 10.3432 15 12 15Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg>'
+
+  // Create copy markdown button
+  var copyButton = document.createElement('button')
+  copyButton.className = 'markdown-button copy-markdown-link'
+  copyButton.type = 'button'
+  copyButton.innerHTML = copyIconSVG + '<span>Copy markdown</span>'
+
+  // Create view markdown link
+  var viewLink = document.createElement('a')
+  viewLink.className = 'markdown-button view-markdown-link'
+  viewLink.href = 'index.md'
+  viewLink.innerHTML = eyeIconSVG + '<span>View markdown</span>'
+
+  markdownButtons.appendChild(copyButton)
+  markdownButtons.appendChild(viewLink)
+  menu.appendChild(markdownButtons)
+
   menu.appendChild(list)
 
   var pageTitle = article.querySelector('h1.page')
