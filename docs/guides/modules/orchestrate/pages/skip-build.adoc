@@ -1,4 +1,4 @@
-= Skip CI and stop work from running
+= Skip CI, auto-cancel, and blocking new pipelines
 :page-platform: Cloud, Server v4+
 :page-description: Skip CI builds, auto-cancel redundant workflows, and block new work for your CircleCI organization or project.
 :experimental:
