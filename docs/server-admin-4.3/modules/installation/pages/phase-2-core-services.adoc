@@ -868,7 +868,7 @@ tink:
 +
 When `tink.enabled` is true, Vault will not be deployed.
 +
-WARNING: Tink or Vault must be set once during installation, and cannot be changed after deployment.
+Tink keys can be rotated after deployment. See link:https://support.circleci.com/hc/en-us/articles/39931197265691-Rotating-Tink-keys-in-CircleCI-Server[Rotating Tink keys in CircleCI Server] for the procedure. To migrate from Vault to Tink (Vault is deprecated), see link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[server-scripts vault-to-tink].
 
 . Generate a link:https://developers.google.com/tink/design/keysets[keyset], which Tink uses to manage key rotation. The easiest way to do this is to use Google's link:https://developers.google.com/tink/tinkey-overview[Tinkey] CLI utility. Once https://developers.google.com/tink/install-tinkey[installed], use the following command:
 +
