@@ -3,20 +3,32 @@
 :page-description: Tutorial outlining how to configure deploy markers in your workflow.
 :experimental:
 
-This tutorial shows how to add a deploy marker step to your workflow config. Deploy markers allow you to log all new deployments in one place, update their status and link back to the CI/CD pipelines that triggered them.
+This tutorial shows how to add deploy markers to your CircleCI configuration file.
+
+Deploy markers enable you to log all new deployments in one place, update their status and link back to the CI/CD pipelines that triggered them.
+
+Adding deploy markers to your configuration is a prerequisite to using the following CircleCI features:
+
+* Rollback pipelines - manually revert to a previous version of a component from the CircleCI web app.
+* Deploy pipelines - Automatically deploy a new version of a component from the CircleCI web app.
 
 == Introduction
 
-Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback feature. For more information on rollbacks, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback and the deploy features. For more information on rollbacks, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
+For more information on deploys, see the xref:set-up-deploys.adoc[Set up Deploys] guide.
 
 For a full guide to CircleCI's deploys features and functionality, refer to the xref:deployment-overview.adoc[Deployment and Deploy Management] guide.
 
-You can configure deploy markers as follows:
+Configure deploy markers with or without status updates as follows:
 
-* To display updated statuses depending of the outcome of your deployments. Steps for this are provided in the <<deploy-markers-with-status-updates>> section.
-* Or, you can choose to configure deploy markers to log deployments without status updates. Steps for this are provided in the <<deploy-logs-without-status-updates>> section.
+* To display updated statuses depending of the outcome of your deployments. Steps for this are provided in the <<set-up-deploy-markers-with-status-updates>> section.
+* Or, you can choose to configure deploy markers to log deployments without status updates. Steps for this are provided in the <<set-up-deploy-marker-logs-without-status-updates>> section.
 
-Once you have deploy markers configured, you will see a timeline of deployments in the Deploys UI. From the timeline you can choose to rollback (image:guides:ROOT:icons/rebuild.svg[rollback icon, role="no-border"]) to a version, and you get notifications for failed deployments.
+Once you have deploy markers configured, you will see a timeline of deployments in the Deploys UI. From the timeline you have the following options:
+
+* You can choose to rollback (image:guides:ROOT:icons/rebuild.svg[rollback icon, role="no-border"]) to a version.
+* You can promote (deploy) a version (image:guides:ROOT:icons/promote.svg[promote icon, role="no-border"]), once you also have a deploy pipeline set up. For more information on deploys, see the xref:set-up-deploys.adoc[Set up Deploys] guide.
+* You will also get notifications for failed deployments.
 
 .Deploys timeline with failed deployment
 image::guides:ROOT:deploy/deploys-timeline-fail-banner.png[Deploy timeline with failed deployment]
@@ -24,12 +36,18 @@ image::guides:ROOT:deploy/deploys-timeline-fail-banner.png[Deploy timeline with 
 .Deploys timeline with no deployments requiring troubleshooting
 image::guides:ROOT:releases/dashboard.png[Deploys timeline with no deployments requiring troubleshooting]
 
+== How to set up deploy markers
+
+This guide details how to set up deploy markers *manually by editing your CircleCI configuration file*.
+
+Alternatively, you can begin by setting up a rollback pipeline. Through the rollback pipeline setup process you will be guided in the CircleCI web app to set up deploy markers. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide for more details.
+
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
 
-== Deploy markers with status updates
+== Set up deploy markers with status updates
 
 To create a deployment marker, you will update your CircleCI configuration file.
 
@@ -99,7 +117,7 @@ WARNING: The `circleci run release update` command is only for use with deploy m
 
 After deploying your application, you can update the status of the deployment to `RUNNING` by running the `circleci run release update` command in a new step.
 
-Remember to provide your deploy name when using the `update` commands. The deploy name value should match the value you provided when you planned the deploy. If you did not provide a deploy name when you planned the deploy, you can use the `default` value.
+If you specified a `deploy-name` when _planning_ your deploy, remember to provide your deploy name when using the `update` commands too. The deploy name value should match the value you provided when you planned the deploy. If you did not provide a deploy name when you planned the deploy, it will be set to `default` and you do not need to provide it when updating the status.
 
 .Update the deploy status to running
 [,yml]
@@ -257,7 +275,7 @@ workflows:
               - canceled
 ----
 
-== Deploy logs without status updates
+== Set up deploy marker logs without status updates
 
 Sometimes you might not want your deploy markers to have any specific status, but still want them to be logged in the deploys UI.
 In those cases you can use the `release log` command in place of `release plan` as shown in the example below.
@@ -327,3 +345,5 @@ You can now track the status of your deployments across your configured environm
 You can now:
 
 * xref:set-up-rollbacks.adoc[Set up Rollbacks].
+
+* xref:set-up-deploys.adoc[Set up Deploys].

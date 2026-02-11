@@ -560,35 +560,17 @@
 - old: /runner-concepts/
   new: /guides/execution-runner/runner-concepts/
 
-- old: /runner-config-reference/
-  new: /guides/execution-runner/runner-config-reference/
-
 - old: /runner-faqs/
   new: /guides/execution-runner/runner-faqs/
 
 - old: /runner-feature-comparison-matrix/
   new: /guides/execution-runner/runner-feature-comparison-matrix/
 
-- old: /runner-installation-docker/
-  new: /guides/execution-runner/runner-installation-docker/
-
-- old: /runner-installation-linux/
-  new: /guides/execution-runner/runner-installation-linux/
-
-- old: /runner-installation-mac/
-  new: /guides/execution-runner/runner-installation-mac/
-
-- old: /runner-installation-windows/
-  new: /guides/execution-runner/runner-installation-windows/
-
 - old: /runner-overview/
   new: /guides/execution-runner/runner-overview/
 
 - old: /runner-scaling/
   new: /guides/execution-runner/runner-scaling/
-
-- old: /runner-upgrading-on-server/
-  new: /guides/execution-runner/runner-upgrading-on-server/
 
 - old: /sample-config/
   new: /guides/toolkit/sample-config/

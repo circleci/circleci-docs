@@ -2,6 +2,7 @@
 :experimental:
 
 pass:[<!-- vale off -->]
+
 == Talk confidently and directly
 Use an active voice, talk directly to the reader using simple, direct, clear and confident language. Using active voice helps us to keep instructions as short as possible, and is, in most cases, the quickest way to convey meaning to the reader
 
