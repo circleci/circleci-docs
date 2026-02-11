@@ -103,6 +103,8 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 [#block-all-new-work]
 == Block all new work
 
+NOTE: **Cloud only.** This feature is not yet available for server customers.
+
 Use this setting to immediately stop all new work from starting during an incident or emergency. When enabled, new pipelines are not created and users cannot rerun workflows. In-progress workflows continue to run until completion.
 
 This setting is designed for situations where you need to quickly halt all CI/CD activity across an organization or for a specific project. It is available in the **Advanced** section of both **Organization Settings** and **Project Settings**. An organization-level block prevents all new work across every project in the organization. A project-level block only affects the specific project.
