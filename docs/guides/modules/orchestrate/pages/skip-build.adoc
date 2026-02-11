@@ -124,7 +124,7 @@ This setting is designed for situations where you need to quickly halt all CI/CD
 . Select **Advanced**.
 . Toggle the **Block all new work from starting for this project** switch to the on position.
 
-NOTE: **In-progress workflows are not affected.** Workflows that are already running when you enable this setting continue until they complete, fail, or are cancelled.
+NOTE: For both organization and project level settings, **in-progress workflows are not affected.** Workflows that are already running when you enable this setting continue until they complete, fail, or are cancelled.
 
 
 
