@@ -29,7 +29,7 @@ NOTE: Context names must be unique for each VCS organization. The default name f
 Be aware that organization members can create contexts, but only organization administrators can restrict them using security groups. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
 +
 .Organization settings contexts page
-image::guides:ROOT:org-settings-contexts-v2.png[Contexts]
+image::guides:ROOT:org-settings-contexts.png[Contexts]
 
 . Select btn:[Create Context], add a unique name for your context and select btn:[Create Context] in the modal to finalize. The new context will appear in a list with security set to `All members` to show that anyone in your organization can access this context at runtime.
 . You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add Environment Variable] to enter the variable name and value. Select btn:[Add Environment Variable] in the modal to finalize.
