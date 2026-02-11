@@ -1,4 +1,4 @@
-= Sign up and try CircleCI
+= Sign up and os_aplet try CircleCI
 :page-platform: Cloud
 :page-description: First step for using CircleCI.
 :experimental:
