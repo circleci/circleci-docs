@@ -1,5 +1,5 @@
 site:
-  title: CircleCI Documentation
+  title: CircleCI Docs
   url: https://circleci.com/docs
   robots: allow
   keys:
