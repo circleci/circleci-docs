@@ -9,6 +9,7 @@ html {
   font-size: var(--body-font-size);
   height: 100%;
   scroll-behavior: smooth;
+  color-scheme: light; /* Explicitly declare light mode support; prepares for future dark mode */
 }
 
 @media screen and (min-width: 1024px) {

@@ -49,6 +49,6 @@
 
 /* Highlighted lines for documentation (using AsciiDoc highlight attribute) */
 .doc pre.shiki code .line.highlighted {
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: inset 3px 0 0 0 rgba(255, 255, 255, 0.4);
+  background-color: var(--syntax-highlighted-line-bg);
+  box-shadow: inset 3px 0 0 0 var(--syntax-highlighted-line-border);
 }
