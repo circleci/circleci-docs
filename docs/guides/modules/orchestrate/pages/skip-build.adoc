@@ -103,7 +103,7 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 [#block-all-new-work]
 == Block all new work
 
-NOTE: For server customers, this feature is available in Server 4.10+.
+NOTE: For server customers, this feature will be available in Server 4.10+.
 
 Use this setting to immediately stop all new work from starting during an incident or emergency. When enabled, new pipelines are not created and users cannot rerun workflows. In-progress workflows continue to run until completion.
 
