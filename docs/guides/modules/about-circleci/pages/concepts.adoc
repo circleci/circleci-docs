@@ -468,7 +468,7 @@ See the xref:orchestrate:pipelines.adoc[Pipelines overview] page for more inform
 
 For GitHub OAuth app and Bitbucket Cloud accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
 
-For GitHub App, GitLab SaaS and self-managed and Bitbucket Data Center users, a _project_ in CircleCI is standalone. You name your project and then connect your code (in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
+For GitHub App, GitLab SaaS and self-managed and Bitbucket Data Center users, a _project_ in CircleCI is standalone. You create and a project and then connect your code (stored in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
 
 ****
 **Project names** must meet the following requirements:
@@ -486,9 +486,15 @@ A standalone project can have:
 Select *Projects* in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow any project you have access to.
 
 * _Set Up_ or _Create_ any project that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:integration:notifications.adoc[email notifications] for the project's status.
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to xref:integration:notifications.adoc[Email Notifications] for the project's status.
 
-image::guides:ROOT:CircleCI-2.0-setup-project-circle101_cloud.png[Project dashboard]
+.The projects dashboard in the CircleCI web app for a circleci organization
+image::guides:ROOT:projects-dashboard-circleci-org.png[Projects dashboard for a circleci organization]
+
+If you do not see the btn:[Create project] button you are in a `github` or `bitbucket` organization. You can use the btn:[Set up] button to start building your project on CircleCI. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations] page.
+
+.The projects dashboard in the CircleCI web app for a github or bitbucket organization
+image::guides:ROOT:projects-dashboard-set-up.png[Projects dashboard for a github or bitbucket organization]
 
 [#resource-class]
 == Resource class
