@@ -1,35 +1,37 @@
 ;(function () {
   'use strict'
 
-  var supportsCopy = window.navigator.clipboard
-
-  if (!supportsCopy) {
+  // Early return if clipboard API is not supported
+  if (!window.navigator.clipboard) {
     console.warn('Clipboard API not supported')
-  }
-
-  // Handle "Copy markdown" button clicks (only if clipboard is supported)
-  if (!supportsCopy) {
     return
   }
 
   var copyButtons = document.querySelectorAll('.copy-markdown-link')
 
+  // Helper function to update button text
+  function setButtonText(button, textSpan, text) {
+    if (textSpan) {
+      textSpan.textContent = text
+    } else {
+      button.innerHTML = text
+    }
+  }
+
   copyButtons.forEach(function (button) {
     button.addEventListener('click', function (e) {
       e.preventDefault()
 
-      // Use relative path to the markdown file in the same directory
-      var markdownUrl = 'index.md'
-
       var button = this
-      var originalContent = button.innerHTML
+      var textSpan = button.querySelector('span')
+      var originalText = textSpan ? textSpan.textContent : button.innerHTML
 
       // Show loading state
-      button.innerHTML = 'Loading...'
+      setButtonText(button, textSpan, 'Loading...')
       button.disabled = true
 
-      // Fetch the markdown file
-      fetch(markdownUrl)
+      // Fetch and copy markdown file
+      fetch('index.md')
         .then(function (response) {
           if (!response.ok) {
             throw new Error('Failed to fetch markdown file')
@@ -37,28 +39,27 @@
           return response.text()
         })
         .then(function (markdown) {
-          // Copy to clipboard
           return window.navigator.clipboard.writeText(markdown)
         })
         .then(function () {
           // Show success state
-          button.innerHTML = 'Copied!'
+          setButtonText(button, textSpan, 'Copied!')
           button.classList.add('clicked')
 
           // Reset after 2 seconds
           setTimeout(function () {
-            button.innerHTML = originalContent
+            setButtonText(button, textSpan, originalText)
             button.disabled = false
             button.classList.remove('clicked')
           }, 2000)
         })
         .catch(function (error) {
           console.error('Error copying markdown:', error)
-          button.innerHTML = 'Error - Try Again'
+          setButtonText(button, textSpan, 'Error - Try Again')
 
           // Reset after 3 seconds
           setTimeout(function () {
-            button.innerHTML = originalContent
+            setButtonText(button, textSpan, originalText)
             button.disabled = false
           }, 3000)
         })

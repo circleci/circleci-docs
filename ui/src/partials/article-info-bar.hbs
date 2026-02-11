@@ -1,7 +1,7 @@
 <div class="mt-5 mb-10 lg:mt-0 w-full md:w-fit max-w-full md:px-4 flex flex-col md:flex-row border border-vapor rounded-xl items-stretch justify-between {{#if class}}{{class}}{{/if}}">
   {{#with (get-page-meta page)}}
 
-    <div class="flex items-center pl-3 md:pl-0 pr-3 py-2 text-[12px]">
+    <div class="flex items-center pl-3 md:pl-0 pr-3 py-2">
       <!-- Article Last Updated -->
       {{#if lastUpdate}}
         <a href="{{commitUrl}}" class="flex min-w-fit items-center text-link-on-light">
@@ -31,17 +31,9 @@
   {{/if}}
   <!-- Edit Page -->
   {{#if page.editUrl}}
-    <a class="flex items-center py-2 md:py-0 pl-3 pr-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light text-[12px]" href="{{page.editUrl}}">
+    <a class="flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light" href="{{page.editUrl}}">
       Contribute
-      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="ml-2 inline-block w-[10px] h-[10px]">
+      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="ml-2 inline-block w-[13px] h-[13px]">
     </a>
   {{/if}}
-  <!-- Copy for LLM -->
-  <button class="flex items-center py-2 md:py-0 pl-3 pr-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light text-[12px] copy-markdown-link" type="button" style="background: none; cursor: pointer; font-weight: 500; font-size: 12px;">
-    Copy markdown
-  </button>
-  <!-- View Markdown -->
-  <a class="flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light text-[12px] view-markdown-link" href="index.md">
-    View markdown
-  </a>
 </div>
