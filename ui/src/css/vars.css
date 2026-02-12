@@ -52,15 +52,15 @@
 
   /* Visual effects */
   --shadow-default: 0 0 6px 4px #1616161F;
-  --shadow-image: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --overlay-modal: rgba(0, 0, 0, 0.85);
+  --shadow-image: 0 2px 8px rgb(0 0 0 / 10%);
+  --overlay-modal: rgb(0 0 0 / 85%);
 
   /* Syntax highlighting colors (for code blocks) */
   --syntax-comment: #959595;
   --syntax-keyword: #A9B7C6;
   --syntax-number: #B5CEA8;
   --syntax-attr: #FFF176;
-  --syntax-string: #FFFFFF;
+  --syntax-string: #FFF;
   --syntax-title: #F78C6C;
   --syntax-type: #89DDFF;
   --syntax-tag: #7986CB;
@@ -71,8 +71,8 @@
   --syntax-deletion-bg: #643434;
   --syntax-addition-bg: #345F34;
   --syntax-line-number: #bbb;
-  --syntax-highlighted-line-bg: rgba(255, 255, 255, 0.1);
-  --syntax-highlighted-line-border: rgba(255, 255, 255, 0.4);
+  --syntax-highlighted-line-bg: rgb(255 255 255 / 10%);
+  --syntax-highlighted-line-border: rgb(255 255 255 / 40%);
 
   /* ============================================
      SEMANTIC TOKENS - Light Theme
@@ -88,8 +88,8 @@
 
   /* Links */
   --link-font-color: var(--color-link-blue);
-  --link_hover-font-color: var(--color-link-hover-blue);
-  --link_unresolved-font-color: var(--color-important-red);
+  --link-hover-font-color: var(--color-link-hover-blue);
+  --link-unresolved-font-color: var(--color-important-red);
   --link-success-color: var(--color-success-green);
   --link-error-color: var(--color-error-red);
 
@@ -99,7 +99,7 @@
   --panel-border-color: var(--color-smoke-90);
   --scrollbar-track-color: var(--color-smoke-30);
   --scrollbar-thumb-color: var(--color-gray-10);
-  --scrollbar_hover-thumb-color: var(--color-gray-30);
+  --scrollbar-hover-thumb-color: var(--color-gray-30);
 
   /* Code blocks */
   --inline-code-background: var(--color-inline-grey);
@@ -152,14 +152,14 @@
   /* Navbar */
   --navbar-background: var(--color-jet-80);
   --navbar-font-color: var(--color-white);
-  --navbar_hover-background: var(--color-black);
+  --navbar-hover-background: var(--color-black);
   --navbar-button-background: var(--color-white);
   --navbar-button-border-color: var(--panel-border-color);
   --navbar-button-font-color: var(--body-font-color);
   --navbar-menu-border-color: var(--panel-border-color);
   --navbar-menu-background: var(--color-white);
   --navbar-menu-font-color: var(--body-font-color);
-  --navbar-menu_hover-background: var(--color-smoke-50);
+  --navbar-menu-hover-background: var(--color-smoke-50);
 
   /* Toolbar */
   --toolbar-background: var(--panel-background);

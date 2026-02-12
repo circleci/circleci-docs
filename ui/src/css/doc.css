@@ -184,7 +184,7 @@
 }
 
 .doc a:hover {
-  color: var(--link_hover-font-color);
+  color: var(--link-hover-font-color);
 }
 
 .doc a.bare {
@@ -192,7 +192,7 @@
 }
 
 .doc a.unresolved {
-  color: var(--link_unresolved-font-color);
+  color: var(--link-unresolved-font-color);
 }
 
 .doc i.fa {
@@ -368,12 +368,12 @@
 .doc table.tableblock th {
   box-sizing: border-box;
   white-space: normal;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   hyphens: manual;
 }
 
 .doc td.tableblock > .content {
-  word-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
+  overflow-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
 }
 
 .doc td.tableblock > .content > :first-child {
@@ -618,7 +618,7 @@
 
 .doc .admonitionblock td.content {
   width: 100%;
-  word-wrap: anywhere;
+  overflow-wrap: anywhere;
   min-width: 0;
 }
 
@@ -1348,7 +1348,7 @@
 
 .doc .nobreak {
   hyphens: none;
-  word-wrap: normal;
+  overflow-wrap: normal;
 }
 
 .doc :not(pre).pre-wrap {
