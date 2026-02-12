@@ -295,9 +295,9 @@ If you are using a centralized config repository, you will also need to enter a 
 
 The trigger is now configured in CircleCI, but you also need to update your configuration file for your integration tests to run workflows for tags.
 
-IMPORTANT: By default, CircleCI does not run workflows for tags unless you explicitly specify tag filters.
+By default, *CircleCI does not run workflows for tags unless you explicitly specify tag filters*.
 
-In the configuration file for your consumer pipeline, add tag filters to your workflow. Here is an example:
+In the configuration file for your consumer pipeline, add tag filters to your workflow if they are not already present. Here is an example:
 
 .Example of a workflow with tag filters
 [source,yaml]
