@@ -2,7 +2,14 @@
 :page-platform: Advanced Support, Premium Support, Advisory Services
 :page-description: Technical consultation service
 
-The technical consultation service is an engagement where your field engineer focuses on a single challenge your team faces. Examples include implementing config policies, configuring self-hosted runners, or setting up a data integration. The service provides an in-depth explanation of related features and proven solutions.
+The technical consultation service is an engagement where your field engineer focuses on a single challenge your team faces. The service provides an in-depth explanation of related features and proven solutions.
+
+Technical consultation challenges the Field Engineering team have assisted with include:
+
+* Implementing config policies to satisfy security requirements.
+* Configuring self-hosted runners for specific use case.
+* Setting up an integration to injest CircleCI's data.
+* Many other challenges.
 
 == Benefits
 

@@ -7,9 +7,25 @@ The field engineering team at CircleCI includes customer engineers with DevOps a
 
 == Field engineering services
 
-Field engineering services include engagements led by your field engineer, from consultation to training. You can find details on each service in this section.
+Field engineering services include engagements led by your field engineer, from consultation to training. Some services are restricted to higher tiers of support plans. Each service lists the support plan that has access at the top of its documentation.
 
-Some services are restricted to higher tiers of support plans. Each service lists the support plan that has access at the top of its documentation.
+The following services are provided by the Field Engineering team:
+
+* xref:services:migration-assistance.adoc[Migration assistance]
+* xref:services:onboarding-assistance.adoc[Onboarding assistance]
+* xref:services:cost-optimization.adoc[Cost optimization]
+* xref:services:config-translation.adoc[Configuration translation]
+* xref:services:config-review.adoc[Configuration review]
+* xref:services:optimization-assistance.adoc[Optimization assistance]
+* xref:services:general-developer-training.adoc[General developer training]
+* xref:services:reusable-config-training.adoc[Reusable configuration training]
+* xref:services:usage-api-training.adoc[Usage API training]
+* xref:services:technical-consultation.adoc[Technical consultation]
+* xref:services:custom-service.adoc[Custom service]
+* xref:services:server-installation.adoc[Server installation]
+* xref:services:server-migration.adoc[Server migration]
+* xref:services:server-operator-training.adoc[Server operator training]
+
 
 == Support plans
 
