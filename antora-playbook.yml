@@ -1,9 +1,10 @@
 site:
-  title: CircleCI Documentation
+  title: CircleCI Docs
   url: https://circleci.com/docs
   robots: allow
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
+    google_analytics: 'GTM-W9HDVK'
 runtime:
   log:
     format: pretty
