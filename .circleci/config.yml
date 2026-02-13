@@ -13,7 +13,7 @@ executors:
 
   go_executor:
     docker:
-      - image: cimg/go:1.25
+      - image: cimg/go:1.26
     working_directory: ~/project
 
   ruby_executor:
