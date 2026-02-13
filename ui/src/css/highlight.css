@@ -1,14 +1,14 @@
 /*! Adapted from the GitHub style by Vasily Polovnyov <vast@whiteants.net> */
 .hljs-comment,
 .hljs-quote {
-  color: #959595;
+  color: var(--syntax-comment);
   font-style: italic;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-subst {
-  color: #A9B7C6;
+  color: var(--syntax-keyword);
   font-weight: var(--monospace-font-weight-bold);
 }
 
@@ -17,22 +17,22 @@
 .hljs-variable,
 .hljs-template-variable,
 .hljs-tag .hljs-attr {
-  color: #B5CEA8;
+  color: var(--syntax-number);
 }
 
 .hljs-attr {
-  color: #FFF176;
+  color: var(--syntax-attr);
 }
 
 .hljs-string,
 .hljs-doctag {
-  color: #FFFFFF;
+  color: var(--syntax-string);
 }
 
 .hljs-title,
 .hljs-section,
 .hljs-selector-id {
-  color: #F78C6C;
+  color: var(--syntax-title);
   font-weight: var(--monospace-font-weight-bold);
 }
 
@@ -42,43 +42,43 @@
 
 .hljs-type,
 .hljs-class .hljs-title {
-  color: #89DDFF;
+  color: var(--syntax-type);
   font-weight: var(--monospace-font-weight-bold);
 }
 
 .hljs-tag,
 .hljs-name,
 .hljs-attribute {
-  color: #7986CB;
+  color: var(--syntax-tag);
   font-weight: normal;
 }
 
 .hljs-regexp,
 .hljs-link {
-  color: #C3E88D;
+  color: var(--syntax-regexp);
 }
 
 .hljs-symbol,
 .hljs-bullet {
-  color: #D4D4D4;
+  color: var(--syntax-symbol);
 }
 
 .hljs-built_in,
 .hljs-builtin-name {
-  color: #82AAFF;
+  color: var(--syntax-builtin);
 }
 
 .hljs-meta {
-  color: #C792EA;
+  color: var(--syntax-meta);
   font-weight: var(--monospace-font-weight-bold);
 }
 
 .hljs-deletion {
-  background: #643434;
+  background: var(--syntax-deletion-bg);
 }
 
 .hljs-addition {
-  background: #345F34;
+  background: var(--syntax-addition-bg);
 }
 
 .hljs-emphasis {
@@ -103,7 +103,7 @@
 .hljs-ln-numbers {
   user-select: none;
   text-align: right;
-  color: #bbb;
+  color: var(--syntax-line-number);
   vertical-align: top;
   padding-right: 0.5em;
   padding-left: 0.5em;
