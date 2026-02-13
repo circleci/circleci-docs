@@ -34,6 +34,8 @@ Your CircleCI GitHub App on GitHub Enterprise Server must be configured with the
 |===
 --
 
+All other repository permissions are not required.
+
 [#event-subscriptions]
 === Event subscriptions
 
@@ -60,30 +62,30 @@ Select **Permissions & events** from the left sidebar.
 [#permissions]
 === Permissions
 
-**Commit statuses (read and write)** Allows CircleCI to report build status directly on commits in your repository. This creates the green check or red X next to commits and on pull requests, indicating whether CI has passed or failed.
+* **Commit statuses (read and write)** Allows CircleCI to report build status directly on commits in your repository. This creates the green check or red X next to commits and on pull requests, indicating whether CI has passed or failed.
 
-**Contents (read and write)** Allows CircleCI to read your repository code to trigger pipelines, and to perform operations like blobless checkout. Write access enables features that push back to the repository, such as automated configuration updates.
+* **Contents (read and write)** Allows CircleCI to read your repository code to trigger pipelines, and to perform operations like blobless checkout. Write access enables features that push back to the repository, such as automated configuration updates.
 
-**Issues (read and write)** Required for CircleCI's AI agent Chunk to interact with issues, and for features that involve commenting on or reading issue context as part of CI workflows.
+* **Issues (read and write)** Required for CircleCI's AI agent Chunk to interact with issues, and for features that involve commenting on or reading issue context as part of CI workflows.
 
-**Pull requests (read and write)** Enables CircleCI to read pull request details for triggering pipelines on PR events, and to post comments or reviews on pull requests. For example, Chunk uses this permission to provide automated PR review feedback.
+* **Pull requests (read and write)** Enables CircleCI to read pull request details for triggering pipelines on PR events, and to post comments or reviews on pull requests. For example, Chunk uses this permission to provide automated PR review feedback.
 
 [#events]
 === Events
 
-**Delete** Notifies CircleCI when branches or tags are deleted, so that associated pipeline schedules and configurations can be cleaned up accordingly.
+* **Delete** Notifies CircleCI when branches or tags are deleted, so that associated pipeline schedules and configurations can be cleaned up accordingly.
 
-**Issue comment** Enables CircleCI to respond to comments on issues. Chunk uses this to receive commands and provide feedback directly within GitHub issue threads.
+* **Issue comment** Enables CircleCI to respond to comments on issues. Chunk uses this to receive commands and provide feedback directly within GitHub issue threads.
 
-**Meta** Notifies CircleCI when the App itself is modified or uninstalled, allowing CircleCI to keep its internal state in sync with your GitHub App configuration.
+* **Meta** Notifies CircleCI when the App itself is modified or uninstalled, allowing CircleCI to keep its internal state in sync with your GitHub App configuration.
 
-**Pull request** Triggers CircleCI pipelines when pull requests are opened, updated, or closed. This is a core event for CI/CD workflows that run on pull request activity.
+* **Pull request** Triggers CircleCI pipelines when pull requests are opened, updated, or closed. This is a core event for CI/CD workflows that run on pull request activity.
 
-**Pull request review** Allows CircleCI to react when reviews are submitted on pull requests, enabling features like re-running CI after an approval or triggering specific workflows based on review status.
+* **Pull request review** Allows CircleCI to react when reviews are submitted on pull requests, enabling features like re-running CI after an approval or triggering specific workflows based on review status.
 
-**Pull request review comment** Enables CircleCI to respond to inline review comments on pull requests. Chunk uses this for contextual code review interactions.
+* **Pull request review comment** Enables CircleCI to respond to inline review comments on pull requests. Chunk uses this for contextual code review interactions.
 
-**Push** The fundamental event for CI/CD. Triggers CircleCI pipelines whenever code is pushed to the repository, including commits to branches and tags.
+* **Push** The fundamental event for CI/CD. Triggers CircleCI pipelines whenever code is pushed to the repository, including commits to branches and tags.
 
 [#updating-permissions-and-events]
 == Update permissions and events
