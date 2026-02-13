@@ -47,6 +47,9 @@ All other repository permissions are not required.
 * Pull request review comment
 * Push
 
+.Required event subscriptions on the GitHub App settings page
+image::guides:ROOT:ghes-app-event-subscriptions.png[GitHub App settings page showing the required event subscriptions with Delete, Issue comment, Meta, Pull request, Pull request review, Pull request review comment, and Push selected]
+
 Verify your App's current configuration by visiting the App settings page on your GitHub Enterprise Server instance:
 
 [source,text]
@@ -91,6 +94,9 @@ Select **Permissions & events** from the left sidebar.
 == Update permissions and events
 
 If your App configuration does not match the requirements above, you may see a warning in CircleCI on your GitHub App Server card: **"Some CircleCI features require updated App permissions."**
+
+.Warning displayed when App permissions need updating
+image::guides:ROOT:ghes-app-permissions-warning.png[CircleCI warning banner showing that some features require updated App permissions with a Learn how to fix this link]
 
 This can happen for one of two reasons:
 
