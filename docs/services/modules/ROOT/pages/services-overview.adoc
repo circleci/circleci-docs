@@ -7,7 +7,7 @@ The field engineering team at CircleCI includes customer engineers with DevOps a
 
 == Field engineering services
 
-Field engineering services include engagements led by your field engineer, from consultation to training. Some services are restricted to higher tiers of support plans. Each service lists the support plan that has access at the top of its documentation.
+Field engineering services include engagements led by your field engineer, from consultation to training. Services come bundled with your support plan. Organizations without a support plan can select services on an individual basis. For more information please contact our link:https://circleci.com/contact/[Sales team].
 
 The following services are provided by the Field Engineering team:
 
@@ -29,7 +29,7 @@ The following services are provided by the Field Engineering team:
 
 == Support plans
 
-We offer support plans from self-serve to white glove. Refer to our link:https://circleci.com/support/plans[support plan page] for details.
+We offer support plans from self-serve to fully managed. Refer to our link:https://circleci.com/support/plans[support plan page] for details.
 
 To see your current support plan tier, CircleCI admins can:
 

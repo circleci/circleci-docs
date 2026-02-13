@@ -6,9 +6,9 @@ The technical consultation service is an engagement where your field engineer fo
 
 Technical consultation challenges the Field Engineering team have assisted with include:
 
-* Implementing config policies to satisfy security requirements.
-* Configuring self-hosted runners for specific use case.
-* Setting up an integration to injest CircleCI's data.
+* Config Policies: Implementing config policies to satisfy security requirements.
+* Self-hosted Runners: Configuring self-hosted runners for specific use case.
+* Usage API: Setting up an integration to injest CircleCI's data.
 * Many other challenges.
 
 == Benefits
