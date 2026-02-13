@@ -9,25 +9,16 @@
 
   var copyButtons = document.querySelectorAll('.copy-markdown-link')
 
-  // Helper function to update button text
-  function setButtonText(button, textSpan, text) {
-    if (textSpan) {
-      textSpan.textContent = text
-    } else {
-      button.innerHTML = text
-    }
-  }
-
   copyButtons.forEach(function (button) {
     button.addEventListener('click', function (e) {
       e.preventDefault()
+      e.stopPropagation()
 
       var button = this
-      var textSpan = button.querySelector('span')
-      var originalText = textSpan ? textSpan.textContent : button.innerHTML
+      var originalText = button.textContent
 
       // Show loading state
-      setButtonText(button, textSpan, 'Loading...')
+      button.textContent = 'Loading...'
       button.disabled = true
 
       // Fetch and copy markdown file
@@ -43,23 +34,23 @@
         })
         .then(function () {
           // Show success state
-          setButtonText(button, textSpan, 'Copied!')
+          button.textContent = 'Copied!'
           button.classList.add('clicked')
 
           // Reset after 2 seconds
           setTimeout(function () {
-            setButtonText(button, textSpan, originalText)
+            button.textContent = originalText
             button.disabled = false
             button.classList.remove('clicked')
           }, 2000)
         })
         .catch(function (error) {
           console.error('Error copying markdown:', error)
-          setButtonText(button, textSpan, 'Error - Try Again')
+          button.textContent = 'Error - Try Again'
 
           // Reset after 3 seconds
           setTimeout(function () {
-            setButtonText(button, textSpan, originalText)
+            button.textContent = originalText
             button.disabled = false
           }, 3000)
         })
