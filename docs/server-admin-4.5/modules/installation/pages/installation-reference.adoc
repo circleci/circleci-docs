@@ -1305,8 +1305,7 @@ for the telegraf deployment.
 |tink |object |`+{"enabled":false,"keyset":""}+` |Tink Configuration
 +
  Tink is given precedence over vault. If tink.enabled is true,
-vault will not be deployed. Tink or vault must be set once at install
-and cannot be changed. +
+vault will not be deployed. Tink keys can be rotated (see link:https://support.circleci.com/hc/en-us/articles/39931197265691-Rotating-Tink-keys-in-CircleCI-Server[Rotating Tink keys in CircleCI Server]). To migrate from Vault to Tink, see link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[server-scripts vault-to-tink]. +
  *Option 1:* Leave this blank, and create
 the secret yourself. CircleCI will assume it exists. +
  The secret
