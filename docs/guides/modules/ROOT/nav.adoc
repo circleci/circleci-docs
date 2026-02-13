@@ -271,6 +271,7 @@
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS integration overview]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
+*** xref:integration:ghes-github-app-configuration.adoc[Configure the GitHub App for GHES]
 *** xref:integration:oss.adoc[Build open source projects]
 
 ** Third-party integrations
