@@ -1,4 +1,4 @@
-= Set up cross-repo triggers for library releases
+= Set up cross-repo triggers for library consumers
 :page-platform: Cloud
 :page-description: Learn how to automatically trigger consumer repository pipelines when you tag a new library release.
 :experimental:
@@ -8,7 +8,7 @@ In this guide you will learn how to set up cross-repo triggers. A cross-repo tri
 
 *For this how-to guide we have chosen the following scenario:*
 
-When you tag a new release of an internal library, CircleCI automatically runs tests in the repositories that consume that library. This validates that your library changes work correctly with dependent applications before you publish the release.
+When you tag a new release of an internal library, configure CircleCI to automatically run tests in the repositories that consume that library. Running integration tests validates that your library changes work correctly with dependent applications before you publish the release.
 
 *What you will set up:*
 
