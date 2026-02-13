@@ -3,7 +3,7 @@
 :page-description: Configure the CircleCI GitHub App on GitHub Enterprise Server with required permissions, events, and troubleshooting steps for updating your configuration.
 :experimental:
 
-This page covers the required permissions and event subscriptions for the CircleCI GitHub App on GitHub Enterprise Server (GHES), explains why each permission is needed, and provides steps to update your configuration.
+This page covers the required permissions and event subscriptions for the CircleCI GitHub App on GitHub Enterprise Server, explains why each permission is needed, and provides steps to update your configuration.
 
 [#required-permissions-and-events]
 == Required permissions and events
