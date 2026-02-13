@@ -204,10 +204,11 @@ workflows:
               - success
               - failed
               - canceled
+              - not_run
 ----
 
 * The `test` job waits for the `build` job, and only runs if the `build` job is successful.
-* The `cleanup` job waits for the `test` job, and runs regardless of whether the `test` job succeeds, fails, or is canceled.
+* The `cleanup` job waits for the `test` job, and runs regardless of whether the `test` job succeeds, fails, is canceled or is not run.
 
 TIP: Refer to the xref:reference:ROOT:configuration-reference.adoc#requires[Requires] section of the configuration reference.
 
