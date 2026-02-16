@@ -8,7 +8,7 @@ This page describes the expected GitHub App configuration for GitHub Enterprise 
 [#overview]
 == Overview
 
-When you connect a CircleCI organization to a GitHub Enterprise Server organization using the GitHub App integration for the first time, CircleCI creates and registers a GitHub App on your instance. This App (named "CircleCI App" by default) is configured with all required permissions and event subscriptions. No manual configuration is needed. Other organizations on the same instance do not need their own App. They install the same CircleCI App, which is owned and managed by the organization where it was originally registered.
+When you first connect an organization in CircleCI to one on your GitHub Enterprise Server instance using the GitHub App integration, CircleCI creates a GitHub App on your instance. This App (named "CircleCI App" by default) includes all required permissions and event subscriptions. No manual configuration is needed. Other organizations on the same instance do not need their own App. They install the same CircleCI App, which is owned and managed by the organization where it was originally registered.
 
 After creation, the admins of the App's host organization and GitHub Enterprise Server instance admins fully own the App configuration. It is their responsibility to ensure that the App configuration is not modified unexpectedly, as changes affect all organizations the App is installed on. CircleCI has no way to identify or rectify issues stemming from unexpected changes to App configuration on your GitHub Enterprise Server instance.
 
@@ -93,7 +93,7 @@ The steps below help you determine which situation applies and how to resolve it
 [#step-1-check-pending-permissions]
 === Step 1: Check if your organization has a pending permissions request
 
-This step requires admin access to the GitHub organization the App is installed on.
+This step requires admin access to the organization on GitHub where the App is installed.
 
 If the App settings have already been updated by the App owner, your organization will have a pending request to accept the new permissions.
 
@@ -126,7 +126,7 @@ NOTE: If the App is owned by a different organization than yours, you may not ha
 [#step-3-accept-new-permissions]
 === Step 3: Accept the new permissions on each organization
 
-Once the App settings have been updated, every GitHub organization that has the CircleCI App installed needs to accept the new permissions. Organization admins receive an email notification from GitHub prompting them to review and approve the changes.
+Once the App settings have been updated, every organization within the GitHub Enterprise Server instance with the CircleCI App installed needs to accept the new permissions. Organization admins receive an email notification from GitHub prompting them to review and approve the changes.
 
 To accept manually:
 
