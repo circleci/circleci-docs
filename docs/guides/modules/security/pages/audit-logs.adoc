@@ -398,7 +398,10 @@ The following list shows common and important events found in the audit log. Thi
 | `id` | A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
 | `version` | Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
 | `scope` | If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `organization` | The organization the action is associated with. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| `account` | The account the action is associated with. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
 | `success` | A flag to indicate if the action was successful.
-| `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+| `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing: `id` (the unique ID assigned to this request by CircleCI), `ip_address` (the originating IP address in IPv4 dotted notation, for example `127.0.0.1`), and `client_trace_id` (the value of the `X-Client-Trace-Id` HTTP header from the original request, if present).
+| `common_fields` | A set of fields mapped to commonly used names in SIEM providers. Contains: `outcome` (mapped from `success`, either `success` or `failure`), `source_ip` (mapped from `request.ip_address`), `status` (a placeholder value of `info`), and `timestamp` (mapped from `occurred_at`).
 |===
 --
