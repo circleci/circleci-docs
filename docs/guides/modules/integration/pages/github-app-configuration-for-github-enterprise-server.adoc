@@ -36,6 +36,7 @@ NOTE: These lists are updated as new CircleCI features are introduced that requi
 [#repository-permissions]
 === Repository permissions
 
+.Required repository permissions
 [.table-scroll]
 --
 [cols="1,1", options="header"]
@@ -78,7 +79,10 @@ image::guides:ROOT:ghes-app-event-subscriptions.png[GitHub App settings page sho
 [#updating-permissions-and-events]
 == Updating permissions and events
 
-If your App configuration does not match the requirements above, you will see one of the following warnings in CircleCI on your GitHub App Server card.
+If your App configuration does not match the requirements above, you will see one of the following warnings in CircleCI on your GitHub App Server card:
+
+* **"The CircleCI App on your GitHub Enterprise Server instance is missing required permissions or event subscriptions."** See <<app-missing-permissions,The App is missing required permissions or event subscriptions>>.
+* **"Your organization has not yet accepted updated permissions for the CircleCI App."** See <<org-not-accepted-permissions,Your organization has not accepted updated permissions>>.
 
 [#app-missing-permissions]
 === The App is missing required permissions or event subscriptions
@@ -95,7 +99,7 @@ This means the App settings themselves need to be updated. This must be performe
 
 From the CircleCI GitHub App Server card, select the **settings icon** to open the App installation configuration page. Then select the **App settings** link at the top of the page to access the App configuration page.
 
-NOTE: If the App is owned by a different organization than yours, you may not have access to this link. Contact an admin of that organization, or a GitHub Enterprise Server instance admin, to perform the following steps.
+NOTE: If the App is owned by a different organization than yours, you may not have access to this link. Contact an admin of that organization, or a GitHub Enterprise Server instance admin, to follow these steps.
 
 [#update-the-configuration]
 ==== Update the configuration
