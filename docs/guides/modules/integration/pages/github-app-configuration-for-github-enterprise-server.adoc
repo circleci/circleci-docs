@@ -81,13 +81,13 @@ image::guides:ROOT:ghes-app-event-subscriptions.png[GitHub App settings page sho
 
 If your App configuration does not match the requirements above, you will see one of the following warnings in CircleCI on your GitHub App Server card:
 
-* **"The CircleCI App on your GitHub Enterprise Server instance is missing required permissions or event subscriptions."** See <<app-missing-permissions,The App is missing required permissions or event subscriptions>>.
-* **"Your organization has not yet accepted updated permissions for the CircleCI App."** See <<org-not-accepted-permissions,Your organization has not accepted updated permissions>>.
+* _"The CircleCI App on your GitHub Enterprise Server instance is missing required permissions or event subscriptions."_ See <<app-missing-permissions,The App is missing required permissions or event subscriptions>>.
+* _"Your organization has not yet accepted updated permissions for the CircleCI App."_ See <<org-not-accepted-permissions,Your organization has not accepted updated permissions>>.
 
 [#app-missing-permissions]
 === The App is missing required permissions or event subscriptions
 
-If you see the warning: **"The CircleCI App on your GitHub Enterprise Server instance is missing required permissions or event subscriptions."**
+If you see the warning: _"The CircleCI App on your GitHub Enterprise Server instance is missing required permissions or event subscriptions."_
 
 .Warning displayed when the App is missing required permissions or event subscriptions
 image::guides:ROOT:ghes-app-missing-permissions-warning.png[CircleCI GitHub App Server card showing a warning that the App is missing required permissions or event subscriptions with a See how to update link]
@@ -113,7 +113,7 @@ Once saved, every organization with the App installed will need to accept the ne
 [#org-not-accepted-permissions]
 === Your organization has not accepted updated permissions
 
-If you see the warning: **"Your organization has not yet accepted updated permissions for the CircleCI App."**
+If you see the warning: _"Your organization has not yet accepted updated permissions for the CircleCI App."_
 
 .Warning displayed when your organization needs to accept new permissions
 image::guides:ROOT:ghes-app-accept-permissions-warning.png[CircleCI GitHub App Server card showing a warning that your organization has not yet accepted updated permissions for the CircleCI App with a See how to accept link]
