@@ -31,6 +31,12 @@ script: |
           continue
         }
 
+        // Skip if link text starts with a backtick (code references)
+        trimmed_link := text.trim_space(link_text)
+        if text.re_match("^`", trimmed_link) {
+          continue
+        }
+
         // Split into words
         words := text.split(link_text, " ")
         has_error := false
@@ -59,6 +65,12 @@ script: |
           if is_exception {
             continue
           }
+
+          // Skip iOS (capitalized) - only allow capitalized version
+          if clean_word == "iOS" {
+            continue
+          }
+
           // Get first character
           first_char := text.substr(clean_word, 0, 1)
           is_capitalized := text.re_match("[A-Z]", first_char)
