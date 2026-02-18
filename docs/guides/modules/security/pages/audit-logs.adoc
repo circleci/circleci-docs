@@ -17,25 +17,25 @@ All CircleCI organizations can request audit logs. You need to be an organizatio
 
 image::guides:ROOT:request-audit-log.png[Request audit logs]
 
-The earliest start date is one year ago from the current day, and the latest end date is the current day. The data available will depend on the data retention period set per organization, so the returned time period for the data could be less than the requested time frame.
+The earliest start date is one year ago from the current day, and the latest end date is the current day. The available data depends on the retention period set per organization, so the returned data range may be less than the requested time frame.
 
-NOTE: In some situations, the internal system may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
+NOTE: In some situations, the internal system may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and identifies duplicate entries.
 
-Audit logs can be retrieved for up to 12 months. See link:https://circleci.com/privacy/#information[our data retention policy].
+You can retrieve audit logs for up to 12 months. See link:https://circleci.com/privacy/#information[our data retention policy].
 
-NOTE: Submitted dates are in UTC. To avoid issues arising from potential time zone differences, CircleCI adds extra time to the request. For example, if you request August 2 - August 5, the returned results will be in the range August 1 - August 6. The audit log request column is also displayed in UTC.
+NOTE: Submitted dates are in UTC. To avoid issues arising from potential time zone differences, CircleCI adds extra time to the request. For example, if you request August 2 - August 5, the returned results are in the range August 1 - August 6. The audit log request column is also displayed in UTC.
 
 === Request status
 
-In the link:https://app.circleci.com/[CircleCI web app], a status will show the following information:
+In the link:https://app.circleci.com/[CircleCI web app], the status shows the following information:
 
 - Time frame requested.
 - User who made the request.
-- Date request was made.
+- Submission date.
 - Expiry date of the request.
 - Request status.
 
-Statuses are updated once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
+CircleCI updates statuses once per hour on the 30-minute mark (for example, 09:30, 10:30, 11:30).
 
 Successful requests can be either of the following:
 
@@ -47,6 +47,7 @@ Once your request is successfully processed, select btn:[Download logs] to downl
 
 NOTE: Audit log fields with nested data contain JSON blobs.
 
+.Audit log requests
 image::guides:ROOT:audit-log-request.png[Audit log requests]
 
 
@@ -54,13 +55,13 @@ image::guides:ROOT:audit-log-request.png[Audit log requests]
 
 Frequency limits for requests are as follows:
 
-- Free Plan: 1 request per day
-- All paid plans: 3 requests per day
-- Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year
+- Free Plan: 1 request per day.
+- All paid plans: 3 requests per day.
+- Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year.
 
-If your organization has reached the maximum amount of requests per 30 days, the audit log request feature will be disabled.
+If your organization reaches the maximum requests per 30 days, the system disables the audit log request feature.
 
-If you hover over the disabled btn:[Request audit logs] button, a tooltip will appear displaying the date when new requests can be made. Pending requests count toward the rate limit.
+If you hover over the disabled btn:[Request audit logs] button, a tooltip appears with the date when you can make new requests. Pending requests count toward the rate limit.
 
 == Stream audit logs
 
@@ -86,7 +87,7 @@ Before setting up audit log streaming, ensure you have the following:
 The following steps guide you through setting up your S3 bucket, AWS authentication, audit log configuration, and verification.
 
 
-==== 1. Implement AWS prerequisites
+==== 1. Set up AWS prerequisites
 
 The following steps describe how to set up AWS prerequisites:
 
@@ -99,7 +100,7 @@ Take note of the AWS region where you created the S3 bucket (for example,`us-eas
 . Create an IAM role that CircleCI can assume. This role requires two key policies:
 .. Trust policy
 +
-This policy allows CircleCI's service to assume the role. The principal ARN in this policy is a template that you must configure with your specific AWS account and CircleCI organization IDs.
+This policy allows CircleCI's service to assume the role. The principal ARN in this policy is a template that you must configure with your specific AWS account ID and organization ID.
 +
 The complete template for the trust relationship is the following:
 +
@@ -125,13 +126,13 @@ The complete template for the trust relationship is the following:
 }
 ----
 +
-Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique CircleCI organization ID (found on the menu:Organization Settings[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
+Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique organization ID (found on the menu:Organization Settings[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
 
 .. Permissions policy
 +
 This policy grants the role permission to write objects to your S3 bucket (and any specified prefix).
 +
-The minimum required access policy for the role is as follows:
+The required access policy for the role is as follows:
 +
 [source,json]
 ----
@@ -153,12 +154,12 @@ The minimum required access policy for the role is as follows:
 +
 Replace `<bucket-name>` with the name of your S3 bucket.
 
-. Set up an OIDC Identity Provider to allow CircleCI's OIDC tokens to be used for authentication.
+. Set up an OIDC Identity Provider so CircleCI's OIDC tokens can authenticate.
 .. Navigate to the IAM Console in AWS.
 .. In the left navigation menu, select *Identity Providers*.
 .. Select *Add provider*.
 .. Choose *OpenID Connect* as the provider type.
-.. In the *Provider URL* field, specify `\https://oidc.circleci.com/org/<org-id>` (replace `<org-id>` with your CircleCI organization ID).
+.. In the *Provider URL* field, specify `\https://oidc.circleci.com/org/<org-id>` (replace `<org-id>` with your organization ID).
 .. In the *Audience* field, enter your organization ID.
 
 
@@ -168,26 +169,30 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 . Navigate to menu:Organization Settings[Security].
 . Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
 +
+.Stream audit logs section
 image::guides:ROOT:stream-audit-logs.png[Stream audit logs section]
 
 . Confirm that you have completed the prerequisites by selecting btn:[Continue].
 +
+.Confirm prerequisites completion
 image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
 
 . In the configuration dialog, specify the following fields:
-.. **Region**: The AWS region where your S3 bucket is located.
-.. **S3 Bucket Name**: The name of the S3 bucket where audit logs will be streamed.
-.. **Role ARN**: The Amazon Resource Name (ARN) for the IAM role that CircleCI will use to access your S3 bucket.
+.. **Region**: The AWS region where you created your S3 bucket.
+.. **S3 Bucket Name**: The name of the S3 bucket to receive the streamed audit logs.
+.. **Role ARN**: The Amazon Resource Name (ARN) for the IAM role CircleCI uses to access your S3 bucket.
 
 +
+.Connect CircleCI to AWS
 image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 
 . Select btn:[Connect CircleCI to AWS].
 . When the connection to your S3 bucket is successfully validated, image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected** appears under **Status**.
 +
+.S3 connection successful
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
-Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket. This verifies that the system has sufficient permissions to start the stream.
+Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket. This verifies that the system has enough permissions to start the stream.
 
 ==== 3. Verify and test
 
@@ -204,13 +209,13 @@ After setting up audit log streaming follow these steps to validate the setup wa
 TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint such as MinIO.
 
 
-The setup steps vary by provider. At a high level you will:
+The setup steps vary by provider. Follow these high-level steps:
 
 ==== 1. Prepare your S3-compatible destination
 
 . Create a bucket for audit logs in your S3-compatible service.
 . Create or identify a role/principal that CircleCI can assume using OIDC. The exact process and identifier format depend on your provider. Examples include an AWS-style ARN (for example, `arn:aws:iam::...:role/...`) or a provider-specific role identifier (for example, MinIO `arn:minio:iam:::role/...`).
-. Grant the role/principal permission to write objects to your bucket (minimum required: `s3:PutObject` on `<your-bucket>/*`). For example:
+. Grant the role/principal permission to write objects to your bucket (required: `s3:PutObject` on `<your-bucket>/*`). For example:
 +
 [source,json]
 ----
@@ -240,9 +245,9 @@ The setup steps vary by provider. At a high level you will:
 When setting up the OIDC Identity Provider to trust CircleCI, use these parameters:
 
 * **OpenID Configuration URL (Issuer URL):** `++https://oidc.circleci.com/org/<ORG_ID>/.well-known/openid-configuration++` +
-(Remember to substitute your actual CircleCI Organization ID.)
+(Remember to substitute your actual organization ID.)
 
-* **OpenID Client ID (Audience):** Your CircleCI Organization ID (the `<ORG_ID>` value).
+* **OpenID Client ID (Audience):** Your organization ID (the `<ORG_ID>` value).
 
 * **Scope:** Use the standard required scope: `openid`.
 
@@ -252,7 +257,7 @@ When setting up the OIDC Identity Provider to trust CircleCI, use these paramete
     The **AWS S3 compatible server**, acting as the token validator, **must be able to reach** the CircleCI OIDC Provider endpoint to fetch the public keys required to **validate the token's cryptographic signature**.
 
 * **Provider Validation:**
-    Your OIDC provider configuration must be set up to accept and successfully validate CircleCI's OIDC tokens for the configured **role or principal** you intend to grant access to within your storage solution.
+    Set up your OIDC provider configuration to accept and validate CircleCI's OIDC tokens for the configured **role or principal** you intend to grant access to within your storage solution.
 
 NOTE: Ensure your **AWS S3 compatible server's** network configuration allows necessary outgoing connections to the internet, specifically to `oidc.circleci.com`, for token validation to succeed.
 
@@ -263,28 +268,31 @@ NOTE: Ensure your **AWS S3 compatible server's** network configuration allows ne
 . Choose btn:[Other S3-compatible service].
 . Confirm that you have completed the prerequisites by selecting btn:[Continue].
 +
+.Set up S3-compatible storage for streaming
 image::guides:ROOT:setup-s3-compatible-audit-logs.png[Set up S3-compatible storage for streaming]
 . Fill out the fields as follows:
-.. **Region**: Optional. Many S3-compatible providers default to `us-east-1` if not set.
+.. **Region**: Optional. S3-compatible providers often default to `us-east-1` if not set.
 .. **S3 Bucket Name**: The exact name of the bucket you created.
 .. **Role ARN**: The role identifier recognized by your provider (for example, a provider-specific role ID/ARN).
 .. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `https://s3.<region>.<provider-domain>` or your custom host and port).
 . The configuration form appears as follows:
 +
+.Connect CircleCI to S3-compatible storage
 image::guides:ROOT:form-s3-compatible-audit-logs.png[Connect CircleCI to S3-compatible storage]
 . Select btn:[Connect CircleCI to S3-compatible service].
 
-When the connection is validated, the **Status** will show image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected**. Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket to verify permissions.
+When CircleCI validates the connection, the **Status** shows image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected**. Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket to verify permissions.
 
 === Manage active streams
 
 Once configured, you can view and manage audit log streams. The following options are available to you in the CircleCI web app:
 
-- Pause streaming: Use the toggle switch under **Actions** to temporarily disable log streaming. **Status** will change to **Disabled**.
+- Pause streaming: Use the toggle switch under **Actions** to temporarily disable log streaming. **Status** changes to **Disabled**.
 - Monitor delivery: Check the **Last delivery** field to verify recent successful deliveries.
 - Delete configuration: Select the trash icon under **Actions** to remove the streaming setup. In the popup warning, select btn:[Delete] to confirm.
 - Restart streaming: Toggle the switch to resume paused streams.
 
+.Audit log stream actions
 image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
 
@@ -292,12 +300,12 @@ image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
 - Audit log streaming is only available to CircleCI Scale Plan customers. Free and Performance Plan customers do not have access to this feature.
 
-- Currently, streaming is supported for a single S3 bucket per organization.
+- CircleCI currently supports streaming for a single S3 bucket per organization.
 
 === Troubleshooting
 
-* **Configuration Issues**: Most problems are related to AWS IAM permissions or S3 bucket configuration.
-* **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming once issues are resolved.
+* **Configuration Issues**: Most problems relate to AWS IAM permissions or S3 bucket configuration.
+* **Connection Failures**: If **Status** shows **Disconnected**, verify AWS credentials and permissions before contacting support. Use the toggle switch to restart streaming after resolving issues.
 * **Missing Logs**: Ensure that your S3 bucket policies allow write access from CircleCI's service accounts.
 
 == Audit log events
@@ -384,24 +392,25 @@ The following list shows common and important events found in the audit log. Thi
 
 == Audit log fields
 
+.Audit log fields
 [.table-scroll]
 --
 [cols="1,4", options="header"]
 |===
 | Field | Description
-| `action` | The action taken that created the event. The format is ASCII lowercase words, separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
-| `actor` | The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-| `target` | The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-| `payload` | A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
+| `action` | The action taken that created the event. The format is ASCII lowercase words, separated by dots, with the entity acted upon first and the action taken last. In some cases entities nest, for example, `workflow.job.start`.
+| `actor` | The actor who performed this event. In most cases this is a CircleCI user. This data is a JSON blob that always contains `id` and `type` and usually contains `name`.
+| `target` | The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that always contains `id` and `type` and usually contains `name`.
+| `payload` | A JSON blob of action-specific information. The schema remains consistent for all events with the same `action` and `version`.
 | `occurred_at` | When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
-| `metadata` | A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
-| `id` | A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-| `version` | Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
-| `scope` | If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-| `organization` | The organization the action is associated with. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-| `account` | The account the action is associated with. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-| `success` | A flag to indicate if the action was successful.
-| `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing: `id` (the unique ID assigned to this request by CircleCI), `ip_address` (the originating IP address in IPv4 dotted notation, for example `127.0.0.1`), and `client_trace_id` (the value of the `X-Client-Trace-Id` HTTP header from the original request, if present).
+| `metadata` | A set of key/value pairs you can attach to any event. All keys and values are strings. Use this to add additional information to certain types of events.
+| `id` | A UUID that uniquely identifies this event. Consumers of events use this field to identify duplicate deliveries.
+| `version` | Version of the event schema. Currently the value is always 1. Later versions may have different values to accommodate schema changes.
+| `scope` | If an Account in the CircleCI domain model owns the target, the account field includes the Account name and ID. This data is a JSON blob that always contains `id` and `type` and usually contains `name`.
+| `organization` | The organization for this action. This data is a JSON blob that always contains `id` and `type` and usually contains `name`.
+| `account` | The account for this action. This data is a JSON blob that always contains `id` and `type` and usually contains `name`.
+| `success` | A flag that shows if the action was successful.
+| `request` | If an external request triggers this event, this field is populated and connects events that originate from the same external request. The format is a JSON blob containing: `id` (the unique ID CircleCI assigns to this request), `ip_address` (the originating IP address in IPv4 dotted notation, for example `127.0.0.1`), and `client_trace_id` (the value of the `X-Client-Trace-Id` HTTP header from the original request, if present).
 | `common_fields` | A set of fields mapped to commonly used names in SIEM providers. Contains: `outcome` (mapped from `success`, either `success` or `failure`), `source_ip` (mapped from `request.ip_address`), `status` (a placeholder value of `info`), and `timestamp` (mapped from `occurred_at`).
 |===
 --
