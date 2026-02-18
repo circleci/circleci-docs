@@ -56,7 +56,7 @@ image::guides:ROOT:user_settings.png[User settings]
 
 
 | Notifications
-| Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser.
+| Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. 
 
 | Accessibility
 | Toggle switch for accessible step output. Switch this on if you use a screen reader.
