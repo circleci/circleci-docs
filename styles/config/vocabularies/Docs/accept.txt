@@ -286,6 +286,7 @@ ReplicaSet
 [Rr]epos?
 [Rr]eprovision
 [Rr]eprovisioned
+[Rr]etrigger
 [Rr]eusability
 Restic
 RHEL

@@ -7,6 +7,11 @@ Use OpenID Connect (OIDC) tokens to connect your pipelines to compatible cloud s
 
 For more information on OIDC tokens, see the xref:openid-connect-tokens.adoc[OpenID Connect tokens] overview.
 
+[#create-oidc-token-with-root-iss]
+== Create OIDC token with root issuer
+
+Use the `--root-issuer` flag with the CircleCI environment CLI to generate an OIDC token with the issuer (`iss`) claim set to `https://oidc.circleci.com`.
+
 [#create-oidc-token-in-a-job-with-custom-claims]
 == Create OIDC token in a job with custom claims
 
