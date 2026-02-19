@@ -928,13 +928,13 @@ This feature is not enabled by default and requires a few additional steps to se
 . The JWK will need to be base64 encoded without line wrapping before using it on server:
 ** On Linux:
 +
-[source,shell]
+[source,console]
 ----
 $ base64 -w0 ~/oidc-service-jwk.json
 ----
 ** On macOS:
 +
-[source,shell]
+[source,console]
 ----
 $ base64 -b0 -i ~/oidc-service-jwk.json
 ----
