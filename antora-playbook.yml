@@ -54,8 +54,8 @@ asciidoc:
     serverversion44: 4.4.7
     serverversion45: 4.5.5
     serverversion46: 4.6.6
-    serverversion47: 4.7.13
-    serverversion48: 4.8.7
+    serverversion47: 4.7.15
+    serverversion48: 4.8.8
     serverversion49: 4.9.1
     terraformversion: 0.15.4
     dockerversion: v28
