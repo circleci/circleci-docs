@@ -82,3 +82,4 @@ Yes, most authenticator apps support multiple accounts. You should check the doc
 
 If your authenticator codes are not working, this can be an indicator that your authenticator app is out of sync. First check that the time on your device is up-to-date.
 If the authenticator app you are using does not automatically sync time, check whether there is a setting to re-sync it. If you continue to have issues and are unable to use the OTP to authenticate, you may use your recovery code to authenticate instead. You can then remove and re-add the MFA factor.
+
