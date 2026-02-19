@@ -352,7 +352,7 @@ For a guide to organization types, see the xref:permissions-authentication:users
 
 [.table-scroll]
 --
-[cols="h,3*", options="header"]
+[cols="4*", options="header"]
 |===
 | Feature | GitHub | Bitbucket | CircleCI
 
