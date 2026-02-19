@@ -13,6 +13,8 @@ include::guides:ROOT:partial$faq/orb-faq-snip.adoc[]
 [#see-also]
 == See also
 
-- xref:author:orb-concepts.adoc[Orbs concepts] for high-level information about CircleCI orbs.
-- xref:author:creating-orbs.adoc[Orb publishing process] for information about orbs that you may use in your workflows and jobs.
-- xref:reference:ROOT:reusing-config.adoc[Orbs reference] for examples of reusable orbs, commands, parameters, and executors.
+- xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] for understanding inline, URL, and registry orbs.
+- xref:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] for guidance on selecting the right orb type.
+- xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
+- xref:author:creating-orbs.adoc[Orb Publishing Process] for information about publishing registry orbs.
+- xref:reference:ROOT:reusing-config.adoc[Orbs Reference] for examples of reusable orbs, commands, parameters, and executors.

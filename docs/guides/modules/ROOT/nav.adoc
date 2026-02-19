@@ -42,7 +42,7 @@
 *** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
 *** xref:orchestrate:dynamic-config.adoc[Use dynamic configuration]
-*** xref:orchestrate:skip-build.adoc[Skip CI and cancel workflows]
+*** xref:orchestrate:skip-build.adoc[Skip CI, auto-cancel, and block new pipelines]
 *** xref:orchestrate:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization]
 *** xref:orchestrate:pipeline-variables.adoc[Pipeline values and parameters]
 ** Triggers
@@ -314,6 +314,7 @@
 * Plans and pricing
 ** xref:plans-pricing:plan-overview.adoc[CircleCI plans overview]
 ** xref:plans-pricing:credits.adoc[Credits overview]
+** xref:plans-pricing:manage-budgets.adoc[Manage budgets]
 ** xref:plans-pricing:plan-free.adoc[Free Plan overview]
 ** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]
 ** xref:plans-pricing:plan-scale.adoc[Scale Plan overview]

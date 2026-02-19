@@ -1,17 +1,15 @@
-* Use Orbs
+* Use orbs
 ** xref:use:orb-intro.adoc[Introduction to using orbs]
+** xref:use:orb-concepts.adoc[Orb concepts]
 ** xref:use:managing-url-orbs-allow-lists.adoc[Managing URL orbs allow lists]
-* Author Orbs
+** xref:use:orbs-faq.adoc[FAQ]
+* Author orbs
 ** xref:author:orb-author.adoc[Introduction to authoring orbs]
-** xref:author:orb-development-kit.adoc[Orb development kit]
-** xref:author:create-an-orb.adoc[Create an orb with the development kit]
-** xref:author:testing-orbs.adoc[Testing orbs]
-** xref:author:creating-orbs.adoc[Publishing orbs]
-** xref:author:orb-author-validate-publish.adoc[Manually create an orb]
-** xref:author:orbs-best-practices.adoc[Orb authoring best practices]
-* Reference
-** xref:author:orb-concepts.adoc[Orb concepts]
-** xref:author:orb-author-faq.adoc[Orb authoring FAQ]
-** xref:use:orbs-faq.adoc[Orbs FAQ]
-** xref:reference:ROOT:reusing-config.adoc[Reusing configuration]
+** xref:author:create-test-and-publish-a-registry-orb.adoc[Create a registry orb]
+** xref:author:create-test-and-use-url-orbs.adoc[Create a URL orb]
+** xref:author:create-an-inline-orb.adoc[Create an inline orb]
+** xref:author:testing-orbs.adoc[Registry orb testing methodologies]
+** xref:author:manual-orb-authoring-process.adoc[Registry orb authoring process (manual)]
+** xref:author:orbs-best-practices.adoc[Best practices]
+** xref:author:orb-author-faq.adoc[FAQ]
 
