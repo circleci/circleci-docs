@@ -22,7 +22,7 @@
     "@antora/site-generator": "3.1.14",
     "@dotenvx/dotenvx": "^1.40.0",
     "@redocly/cli": "^2.0.0",
-    "@sntke/antora-mermaid-extension": "^0.0.8",
+    "@sntke/antora-mermaid-extension": "^0.0.9",
     "browser-sync": "^3.0.4",
     "gulp": "^5.0.0",
     "httpsnippet": "^3.0.9"

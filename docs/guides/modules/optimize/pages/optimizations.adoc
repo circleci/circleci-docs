@@ -119,8 +119,8 @@ macOS::
 jobs:
   build:
     macos:
-      xcode: "15.4.0"
-    resource_class: m2pro.medium
+      xcode: 26.3.0
+    resource_class: m4pro.medium
     steps:
     #  ...  other config
 ----
@@ -173,7 +173,7 @@ NOTE: Open a link:https://support.circleci.com/hc/en-us/requests/new[Support tic
 
 * Read more about resource classes on the xref:execution-managed:resource-class-overview.adoc[resource class overview] page.
 
-[#configuraiton]
+[#configuration]
 == Optimize your configuration files
 
 [#dynamic-configuration]

@@ -8,7 +8,7 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.13.0
+      - image: cimg/node:24.13.1
     working_directory: ~/project
 
   go_executor:
@@ -45,9 +45,19 @@ jobs:
     executor: node_executor
     steps:
       - checkout
+      - restore_cache:
+          name: Restore npm cache
+          keys:
+            - npm-deps-{{ checksum "package-lock.json" }}
+            - npm-deps-
       - run:
           name: Install Node Dependencies
           command: npm ci
+      - save_cache:
+          name: Save npm cache
+          key: npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
       - run:
           name: Build the Documentation Site with Antora
           command: |
@@ -72,6 +82,7 @@ jobs:
           at: .
       - go/with-cache:
           golangci-lint: true
+          mod: true
           steps:
             - run: task mod-download
             - run: task ci:diff
@@ -88,6 +99,7 @@ jobs:
           at: .
       - aws-setup
       - go/with-cache:
+          mod: true
           steps:
             - run: task mod-download
             - run: task deploy
