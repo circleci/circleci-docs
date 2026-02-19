@@ -3,9 +3,17 @@
 :page-description: An overview guide to the version control systems you can integrate with CircleCI and the features available to each pipeline type and organization type.
 :experimental:
 
-When you create a CircleCI project you will select a code repository to connect. The code in the repo you select is checked out when your pipelines trigger. CircleCI supports various pipeline types which map to the way the version control systems (VCS) you use are integrated with CircleCI.
+CircleCI projects are connected to code repositories. CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI web app, and the opitons are as follows:
 
-This guide provides an overview of the VCS options supported by CircleCI and the features available to each pipeline type and organization type.
+* GitHub App
+* GitHub OAuth
+* GitHub OAuth on Server (for Server customers)
+* GitLab
+* GitLab Self-manages
+* Bitbucket
+* Bitbucket Data Center
+
+This guide provides an overview of the VCS options, organization types and pipeline types supported by CircleCI and the features available to each..
 
 == Which version control systems are supported?
 
@@ -307,22 +315,22 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | xref:oss.adoc#build-pull-requests-from-forked-repositories[Build pull requests from forked repositories]
 | Open source support
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | xref:oss.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass secrets to builds from forked pull requests]
 |Open source support
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | *Chunk, CircleCI's AI CI/CD agent. xref:toolkit:chunk-setup-and-overview.adoc[Learn more about Chunk]*
 | Agentic support
