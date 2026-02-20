@@ -72,8 +72,8 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 |===
 | Feature | Category | GitHub App | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center
 
-| *Checkout method*
-| #TBC#
+| *The method used to check out your code when using the `checkout` xref:reference:ROOT:configuration-reference.adoc#checkout[step] in your configuration file.*
+| Code checkout
 | HTTPS
 | SSH
 | SSH
@@ -81,6 +81,16 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | SSH
 | SSH
 | SSH
+
+| *Deploy key required for code checkout. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-deploy-key[Create a Deploy Key] guide for more information.*
+| Code checkout
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | *Fine-grained permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.*
 | Security
