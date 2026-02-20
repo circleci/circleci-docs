@@ -18,7 +18,7 @@ The example below triggers a pipeline with parameter values for `workingdir` and
 
 NOTE: In order to pass a parameter when triggering a pipeline via the API, the parameter must be xref:reference:ROOT:reusing-config.adoc#using-the-parameters-declaration[declared in the configuration file].
 
-CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:../../../api/v2/#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+CAUTION: For GitHub App, GitLab or Bitbucket Data Center pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
