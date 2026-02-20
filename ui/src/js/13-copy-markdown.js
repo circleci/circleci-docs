@@ -35,13 +35,11 @@
         .then(function () {
           // Show success state
           button.textContent = 'Copied!'
-          button.classList.add('clicked')
 
           // Reset after 2 seconds
           setTimeout(function () {
             button.textContent = originalText
             button.disabled = false
-            button.classList.remove('clicked')
           }, 2000)
         })
         .catch(function (error) {

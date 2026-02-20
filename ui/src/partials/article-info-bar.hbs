@@ -37,32 +37,34 @@
       aria-haspopup="true"
       aria-expanded="false"
     >
-      <span data-dropdown-selected>Markdown</span>
+      <span data-dropdown-selected class="text-[16px] font-medium">Markdown</span>
       <img src="{{{uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="ml-2 w-[8px] h-[8px]">
     </button>
 
     <!-- Dropdown Menu -->
     <ul
       data-dropdown-menu
-      class="absolute top-10 right-0 py-2 rounded-xl shadow-default bg-white min-w-[160px] z-50 hidden"
+      class="absolute top-10 left-0 !py-[9px] !px-0 m-[9px] rounded-xl shadow-default bg-white min-w-[160px] z-[5] hidden"
       role="listbox"
       tabindex="-1"
     >
       <li
         data-dropdown-option
-        class="ml-2 p-[8px] hover:bg-fog cursor-pointer rounded-lg"
+        data-label="Markdown"
+        class="p-[8px] hover:bg-fog cursor-pointer rounded-lg mx-[9px]"
         role="option"
       >
-        <a href="index.md" class="block text-link-on-light no-underline">
+        <a href="index.md" target="_blank" rel="noopener noreferrer" class="block text-link-on-light no-underline text-[16px] font-medium">
           View markdown
         </a>
       </li>
       <li
         data-dropdown-option
-        class="ml-2 p-[8px] hover:bg-fog cursor-pointer rounded-lg"
+        data-label="Markdown"
+        class="p-[8px] hover:bg-fog cursor-pointer rounded-lg mx-[9px]"
         role="option"
       >
-        <button class="copy-markdown-link block text-link-on-light text-left w-full bg-transparent border-none cursor-pointer p-0">
+        <button class="copy-markdown-link block text-link-on-light text-left w-full bg-transparent border-none cursor-pointer p-0 text-[16px] font-medium">
           Copy markdown
         </button>
       </li>
