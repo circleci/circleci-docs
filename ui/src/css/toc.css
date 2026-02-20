@@ -114,9 +114,9 @@
 }
 
 .toc .toc-menu a.is-active {
-  border-left-color: #00B25E;
+  border-left-color: var(--toc-active-border-color);
   border-left-width: 2px;
-  color: #161616;
+  color: var(--toc-active-text-color);
 }
 
 .sidebar.toc .toc-menu a:focus {

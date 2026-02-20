@@ -9,6 +9,7 @@ html {
   font-size: var(--body-font-size);
   height: 100%;
   scroll-behavior: smooth;
+  color-scheme: light; /* Explicitly declare light mode support; prepares for future dark mode */
 }
 
 @media screen and (min-width: 1024px) {
@@ -24,7 +25,7 @@ body {
   line-height: var(--body-line-height);
   margin: 0;
   tab-size: 4;
-  word-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
+  overflow-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
 }
 
 a {
@@ -95,7 +96,7 @@ summary {
 
 table {
   border-collapse: collapse;
-  word-wrap: normal; /* table widths aren't computed as expected when word-wrap is enabled */
+  overflow-wrap: normal; /* table widths aren't computed as expected when overflow-wrap is enabled */
 }
 
 object[type="image/svg+xml"]:not([width]) {
@@ -142,7 +143,7 @@ object[type="image/svg+xml"]:not([width]) {
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--scrollbar_hover-thumb-color);
+    background-color: var(--scrollbar-hover-thumb-color);
   }
 }
 

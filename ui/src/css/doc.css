@@ -184,7 +184,7 @@
 }
 
 .doc a:hover {
-  color: var(--link_hover-font-color);
+  color: var(--link-hover-font-color);
 }
 
 .doc a.bare {
@@ -192,7 +192,7 @@
 }
 
 .doc a.unresolved {
-  color: var(--link_unresolved-font-color);
+  color: var(--link-unresolved-font-color);
 }
 
 .doc i.fa {
@@ -215,9 +215,9 @@
 .doc .colist > table code,
 .doc .admonitionblock td.content code:not(.hljs) {
   color: var(--code-font-color);
-  background: #F7F7F7;
+  background: var(--inline-code-background);
   border-radius: 4px;
-  border: 1px solid #D4D4D4;
+  border: 1px solid var(--inline-code-border-color);
   font-size: 0.95em;
   padding: 0.15em 0.4em;
 }
@@ -248,7 +248,7 @@
   height: auto;
   margin: 0 0 1rem 1rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--image-shadow);
   overflow: hidden;
 }
 
@@ -350,7 +350,7 @@
   border-spacing: 0;
   display: table;
   margin-bottom: 1rem;
-  border: 1px solid #D4D4D4;
+  border: 1px solid var(--table-border-color);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -368,12 +368,12 @@
 .doc table.tableblock th {
   box-sizing: border-box;
   white-space: normal;
-  word-wrap: break-word;
+  overflow-wrap: break-word;
   hyphens: manual;
 }
 
 .doc td.tableblock > .content {
-  word-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
+  overflow-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
 }
 
 .doc td.tableblock > .content > :first-child {
@@ -383,7 +383,7 @@
 .doc table.tableblock th,
 .doc table.tableblock td {
   padding: 1rem;
-  border-bottom: 1px solid #D4D4D4;
+  border-bottom: 1px solid var(--table-border-color);
   min-width: 100px;
 }
 
@@ -397,7 +397,7 @@
 
 .doc table.tableblock,
 .doc table.tableblock > * > tr:last-child > * {
-  border-bottom: 1px solid #D4D4D4;
+  border-bottom: 1px solid var(--table-border-color);
 }
 
 .doc .table-scroll {
@@ -412,7 +412,7 @@
 
 .doc table.grid-all > * > tr > * {
   border-width: 0;
-  border-bottom: 1px solid #D4D4D4;
+  border-bottom: 1px solid var(--table-border-color);
 }
 
 .doc table.grid-cols > * > tr > * {
@@ -421,7 +421,7 @@
 
 .doc table.grid-rows > * > tr > * {
   border-width: 0;
-  border-bottom: 1px solid #D4D4D4;
+  border-bottom: 1px solid var(--table-border-color);
 }
 
 .doc table.grid-all > thead th,
@@ -479,11 +479,11 @@
 }
 
 .doc table.tableblock > tbody > tr:nth-of-type(odd) {
-  background: white;
+  background: var(--table-stripe-odd);
 }
 
 .doc table.tableblock > tbody > tr:nth-of-type(even) {
-  background: #FAFAFA;
+  background: var(--table-stripe-even);
 }
 
 .doc table.stripes-hover > tbody > tr:hover {
@@ -492,8 +492,8 @@
 
 .doc table.tableblock > thead > tr > th {
   font-weight: bold;
-  border-bottom: 2px solid #D4D4D4;
-  background-color: #FAFAFA;
+  border-bottom: 2px solid var(--table-border-color);
+  background-color: var(--table-header-background);
 }
 
 .doc table.tableblock > tfoot {
@@ -547,23 +547,23 @@
 }
 
 .doc .admonitionblock.note > table {
-  border-color: #1A66F7;
+  border-color: var(--note-color);
 }
 
 .doc .admonitionblock.tip > table {
-  border-color: #697387;
+  border-color: var(--tip-color);
 }
 
 .doc .admonitionblock.warning > table {
-  border-color: #BF8532;
+  border-color: var(--warning-color);
 }
 
 .doc .admonitionblock.important > table {
-  border-color: #CC4242;
+  border-color: var(--important-color);
 }
 
 .doc .admonitionblock.caution > table {
-  border-color: #CC4242;
+  border-color: var(--caution-color);
 }
 
 .doc .admonitionblock td.icon {
@@ -618,7 +618,7 @@
 
 .doc .admonitionblock td.content {
   width: 100%;
-  word-wrap: anywhere;
+  overflow-wrap: anywhere;
   min-width: 0;
 }
 
@@ -666,7 +666,7 @@
   width: auto;
   vertical-align: middle;
   object-fit: contain;
-  border: 1px solid #D4D4D4;
+  border: 1px solid var(--table-border-color);
   border-radius: 12px;
 }
 
@@ -967,7 +967,7 @@
   align-items: center;
   border: 2px solid transparent;
   border-radius: 12px;
-  border-color: #1A66F7;
+  border-color: var(--note-color);
   padding: 1rem;
   box-sizing: border-box;
   padding: 1rem 1rem 0.75rem;
@@ -1010,7 +1010,7 @@
   overflow-x: auto;
   padding: 0.875em;
   border-radius: inherit;
-  color: #FFFFFF;
+  color: var(--color-white);
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -1128,7 +1128,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #E8E8E8;
+  background-color: var(--code-comment-color);
   border: none;
   border-radius: 50%;
   color: inherit;
@@ -1348,7 +1348,7 @@
 
 .doc .nobreak {
   hyphens: none;
-  word-wrap: normal;
+  overflow-wrap: normal;
 }
 
 .doc :not(pre).pre-wrap {
@@ -1400,7 +1400,7 @@
 
 /* inline links pick up the new blue */
 .doc a {
-  color: #2152E5;
+  color: var(--link-font-color);
 }
 
 /* Image Modal Styles */
@@ -1411,7 +1411,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: var(--modal-overlay-background);
   z-index: 9999;
   overflow: auto;
   justify-content: center;
@@ -1436,7 +1436,7 @@
 }
 
 .image-modal-title {
-  color: #fff;
+  color: var(--color-white);
   margin-top: 1rem;
   font-size: 1rem;
   text-align: center;
@@ -1459,12 +1459,12 @@
 }
 
 .doc .circle-green {
-  color: #008542 !important;
+  color: var(--link-success-color) !important;
   font-weight: var(--heading-font-weight);
 }
 
 .doc .circle-red {
-  color: #8F001C !important;
+  color: var(--link-error-color) !important;
   font-weight: var(--heading-font-weight);
 }
 
