@@ -212,7 +212,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| *xref:orchestrate:workflows.adoc#scheduling-a-workflow.adoc[Scheduled workflows]. Schedules defined in the `config.yml` file.*
+| *xref:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled workflows]. Schedules defined in the `config.yml` file.*
 | Triggers
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
