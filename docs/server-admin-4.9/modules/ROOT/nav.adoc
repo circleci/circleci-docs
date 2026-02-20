@@ -19,7 +19,7 @@
 *** xref:air-gapped-installation:phase-4-configure-nomad-clients.adoc[Phase 4 - Configure Nomad clients]
 *** xref:air-gapped-installation:phase-5-test-your-installation.adoc[Phase 5 - Test installation]
 *** xref:air-gapped-installation:additional-considerations.adoc[Additional considerations]
-*** xref:air-gapped-installation:example-values.adoc[Example Values YAML]
+*** xref:air-gapped-installation:example-values.adoc[Example values.yaml]
 ** xref:installation:hardening-your-cluster.adoc[Hardening your cluster]
 ** xref:installation:installing-server-behind-a-proxy.adoc[Installing server behind a proxy]
 ** xref:installation:upgrade-server.adoc[Upgrading server]
@@ -29,6 +29,7 @@
 * CircleCI Server operator guide
 ** xref:operator:operator-overview.adoc[Operator overview]
 ** xref:operator:introduction-to-nomad-cluster-operation.adoc[Introduction to Nomad cluster operation]
+** xref:operator:resource-consumption-cost-management.adoc[Resource consumption and cost management]
 ** xref:operator:managing-user-accounts.adoc[Managing user accounts]
 ** xref:operator:managing-orbs.adoc[Managing orbs]
 ** xref:operator:manage-virtual-machines-with-machine-provisioner.adoc[Manage virtual machines with machine provisioner]

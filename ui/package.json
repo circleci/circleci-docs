@@ -42,7 +42,7 @@
     "js-yaml": "~4.1.0",
     "merge-stream": "~2.0",
     "postcss-calc": "~10.1.1",
-    "postcss-custom-properties": "~14.0.4",
+    "postcss-custom-properties": "~15.0.0",
     "postcss-import": "~16.1.0",
     "postcss-url": "~10.1.3",
     "prettier-eslint": "~16.4.1",
@@ -54,6 +54,7 @@
     "vinyl-fs": "~3.0"
   },
   "overrides": {
+    "qs": "^6.14.1",
     "eslint-plugin-node": {
       "eslint": "~9.39.0"
     },

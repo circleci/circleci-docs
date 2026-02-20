@@ -1,4 +1,4 @@
-= Orb testing methodologies
+= Registry orb testing methodologies
 :page-platform: Cloud, Server v4+
 :page-description: Starting point for Testing CircleCI Orbs
 :experimental:
@@ -73,7 +73,7 @@ circleci local execute orb-tools/lint
 [#orb-validation]
 === Orb Validation
 
-In addition to YAML Linting, we must validate the "packed" `orb.yml` file to ensure it properly conforms to orb schema. We first xref:orb-concepts.adoc#orb-packing[pack] the orb to combine the multiple source files into an `orb.yml`. Then we run the `circleci orb validate` command for schema checking.
+In addition to YAML Linting, we must validate the "packed" `orb.yml` file to ensure it properly conforms to orb schema. We first xref:use:orb-concepts.adoc#orb-packing[pack] the orb to combine the multiple source files into an `orb.yml`. Then we run the `circleci orb validate` command for schema checking.
 
 [,yaml]
 ----
@@ -105,7 +105,7 @@ circleci local execute orb-tools/pack
 [#shellcheck]
 === ShellCheck
 
-One of the major benefits of using the orb development kit is the ability to xref:orb-concepts.adoc#file-include-syntax[import external Bash scripts] into your final orb. Because you can keep your Bash scripts in the link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts[src/scripts] directory, you can run additional tests against your scripts.
+One of the major benefits of using the orb development kit is the ability to xref:use:orb-concepts.adoc#file-include-syntax[import external Bash scripts] into your final orb. Because you can keep your Bash scripts in the link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts[src/scripts] directory, you can run additional tests against your scripts.
 
 The most basic tests to run against Bash scripts are a form of validation: "shellchecking". Shellchecking is similar to a linter for Bash. Find out more at https://www.shellcheck.net/[shellcheck.net].
 
@@ -158,7 +158,7 @@ CAUTION: The `orb-tools/review` job currently can not be run locally due to the 
 [#unit-testing]
 == Unit testing
 
-If you are taking advantage of the orb development kit's xref:orb-concepts.adoc#file-include-syntax[`<<include(file)>>` file inclusion] feature and `src/scripts` directory to store and source your Bash files, you can write true integration tests for your scripts.
+If you are taking advantage of the orb development kit's xref:use:orb-concepts.adoc#file-include-syntax[`<<include(file)>>` file inclusion] feature and `src/scripts` directory to store and source your Bash files, you can write true integration tests for your scripts.
 
 image::guides:ROOT:bats_tests_example.png[Unit testing Bash with BATS-Core]
 
@@ -299,6 +299,6 @@ Once you have added new orb features, and created tests that pass your CI, it is
 [#see-also]
 == See also
 
-* Refer to xref:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
+* Refer to xref:use:orb-concepts.adoc[Orbs Concepts] for high-level information about CircleCI orbs.
 * Refer to xref:creating-orbs.adoc[Orb Publishing Process] for information about orbs that you may use in your workflows and jobs.
 * Refer to xref:reference:ROOT:reusing-config.adoc[Orbs Reference] for examples of reusable orbs, commands, parameters, and executors.

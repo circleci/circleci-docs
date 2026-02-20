@@ -1,9 +1,13 @@
 site:
-  title: CircleCI Documentation
+  title: CircleCI Docs
   url: https://circleci.com/docs
   robots: allow
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
+    google_analytics: 'GTM-W9HDVK'
+runtime:
+  log:
+    format: pretty
 content:
   sources:
   - url: .
@@ -52,9 +56,9 @@ asciidoc:
     serverversion44: 4.4.7
     serverversion45: 4.5.5
     serverversion46: 4.6.6
-    serverversion47: 4.7.11
-    serverversion48: 4.8.6
-    serverversion49: 4.9.0
+    serverversion47: 4.7.15
+    serverversion48: 4.8.8
+    serverversion49: 4.9.1
     terraformversion: 0.15.4
     dockerversion: v28
     kubectlversion: 1.19
@@ -104,6 +108,11 @@ antora:
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
       - 'test:smarter-testing.adoc'
+      - 'test:getting-started-with-smarter-testing.adoc'
+      - 'test:use-smarter-testing-for-local-development.adoc'
+      - 'test:set-up-test-impact-analysis.adoc'
+      - 'test:use-dynamic-test-splitting.adoc'
+      - 'test:auto-rerun-failed-tests.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true
