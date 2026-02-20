@@ -71,7 +71,8 @@ function collectPages(contentCatalog, siteUrl) {
           const html = `<article>${page.contents}</article>`;
           const text = parseHTML(html)
             .textContent.trim()
-            .replace(/\s+/g, ' ');
+            .replace(/<[^>]*>/g, '')  // Strip all HTML tags
+            .replace(/\s+/g, ' ');    // Normalize whitespace
           const pathSegments = [compVer.title];
           const nav = navMap[relUrl]?.path.map(item => item.content);
           if (nav) pathSegments.push(...nav);
