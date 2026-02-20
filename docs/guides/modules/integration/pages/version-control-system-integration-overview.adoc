@@ -82,7 +82,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | SSH
 | SSH
 
-| *Deploy key required for code checkout. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#create-a-deploy-key[Create a Deploy Key] guide for more information.*
+| *Deploy key required for code checkout. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#how-circleci-checks-out-your-code[Users, Organizations, and Integrations] guide for more information.*
 | Code checkout
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
