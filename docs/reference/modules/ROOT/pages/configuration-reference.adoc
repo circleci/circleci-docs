@@ -1171,11 +1171,6 @@ include::guides:ROOT:partial$execution-resources/machine-gen2-resource-table.ado
 
 *Example:*
 
-[tabs]
-====
-Cloud::
-+
---
 [,yaml]
 ----
 jobs:
@@ -1186,21 +1181,6 @@ jobs:
     steps:
       ... // other config
 ----
---
-Server::
-+
---
-[,yaml]
-----
-jobs:
-  build:
-    machine: true
-    resource_class: large.gen2
-    steps:
-      ... // other config
-----
---
-====
 
 '''
 
