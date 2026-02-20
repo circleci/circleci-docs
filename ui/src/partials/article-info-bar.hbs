@@ -29,11 +29,45 @@
       {{/each}}
     </div>
   {{/if}}
-  <!-- Edit Page -->
-  {{#if page.editUrl}}
-    <a class="flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light" href="{{page.editUrl}}">
-      Contribute
-      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="ml-2 inline-block w-[13px] h-[13px]">
-    </a>
-  {{/if}}
+  <!-- Markdown Dropdown -->
+  <div data-dropdown class="relative flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit">
+    <button
+      data-dropdown-button
+      class="text-link-on-light flex items-center focus:outline-none"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <span data-dropdown-selected class="text-[16px] font-medium">Markdown</span>
+      <img src="{{{uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="ml-2 w-[8px] h-[8px]">
+    </button>
+
+    <!-- Dropdown Menu -->
+    <ul
+      data-dropdown-menu
+      class="absolute top-10 left-0 !py-[9px] !px-0 m-[9px] rounded-xl shadow-default bg-white min-w-[160px] z-[5] hidden"
+      role="listbox"
+      tabindex="-1"
+    >
+      <li
+        data-dropdown-option
+        data-label="Markdown"
+        class="p-[8px] hover:bg-fog cursor-pointer rounded-lg mx-[9px]"
+        role="option"
+      >
+        <a href="index.md" target="_blank" rel="noopener noreferrer" class="block text-link-on-light no-underline text-[16px] font-medium">
+          View markdown
+        </a>
+      </li>
+      <li
+        data-dropdown-option
+        data-label="Markdown"
+        class="p-[8px] hover:bg-fog cursor-pointer rounded-lg mx-[9px]"
+        role="option"
+      >
+        <button class="copy-markdown-link block text-link-on-light text-left w-full bg-transparent border-none cursor-pointer p-0 text-[16px] font-medium">
+          Copy markdown
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>
