@@ -35,6 +35,8 @@ content:
   - url: .
     start_path: docs/server-admin-4.2
   - url: .
+    start_path: docs/services
+  - url: .
     start_path: docs/contributors
 ui:
   bundle:

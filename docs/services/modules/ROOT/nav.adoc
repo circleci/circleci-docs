@@ -1,0 +1,20 @@
+* xref:services-overview.adoc[Field engineering services overview]
+
+* Services
+** xref:services:optimization-assistance.adoc[Optimization assistance]
+** xref:services:onboarding-assistance.adoc[Onboarding assistance]
+** xref:services:migration-assistance.adoc[Migration assistance]
+** xref:services:config-review.adoc[Configuration review]
+** xref:services:config-translation.adoc[Configuration translation]
+** xref:services:cost-optimization.adoc[Cost optimization]
+** xref:services:technical-consultation.adoc[Technical consultation]
+** xref:services:custom-service.adoc[Custom service]
+** Server assistance
+*** xref:services:server-installation.adoc[Server installation]
+*** xref:services:server-migration.adoc[Server migration]
+*** xref:services:server-operator-training.adoc[Server operator training]
+
+* Training
+** xref:services:general-developer-training.adoc[General developer training]
+** xref:services:reusable-config-training.adoc[Reusable configuration training]
+** xref:services:usage-api-training.adoc[Usage API training]
