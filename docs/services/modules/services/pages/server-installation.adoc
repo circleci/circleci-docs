@@ -1,5 +1,4 @@
 = Server installation service
-:page-platform: Advanced Support, Premium Support, Advisory Services
 :page-description: Server installation service
 
 The server installation service is an engagement where your field engineer ensures an efficient process for installing a new instance of CircleCI Server. For teams starting with Server, the installation service streamlines setup and supports a smooth start. The service runs in phases, with multiple working sessions. 
@@ -17,3 +16,5 @@ Teams that engage with their field engineer to install Server gain:
 == Intended audience
 
 This training is for server administrators setting up a new instance of CircleCI Server.
+
+For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

@@ -1,5 +1,4 @@
 = Optimization assistance service
-:page-platform: Premium Support, Advisory Services
 :page-description: Optimization assistance service
 
 Optimization assistance is a collection of engagements where your field engineer helps your projects run optimally on CircleCI. Your field engineer works with your team on an optimization journey tailored to your goals. Over the course of this journey, your field engineer performs configuration reviews, trains your team, and ensures you have the data you need. 
@@ -16,3 +15,5 @@ Teams that work with their field engineer to optimize their projects:
 == Intended audience
 
 Teams that already use CircleCI and want expert assistance to plan and execute their DevOps optimization goals.
+
+For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

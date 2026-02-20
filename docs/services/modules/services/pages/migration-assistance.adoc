@@ -1,5 +1,4 @@
 = Migration assistance service
-:page-platform: Premium Support, Advisory Services
 :page-description: Migration assistance service
 
 Migration assistance is a collection of engagements where your field engineer helps migrate projects to CircleCI with minimal disruption. Your field engineer works with you on a customized migration journey that includes configuration translations, best practice adoption, developer training, and more.
@@ -16,3 +15,5 @@ Teams that work with their field engineer to migrate their projects:
 == Intended audience
 
 Teams that are new to CircleCI and want expert assistance to plan and execute their migration.
+
+For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

@@ -1,5 +1,4 @@
 = Technical consultation service
-:page-platform: Advanced Support, Premium Support, Advisory Services
 :page-description: Technical consultation service
 
 The technical consultation service is an engagement where your field engineer focuses on a single challenge your team faces. The service provides an in-depth explanation of related features and proven solutions.
@@ -22,3 +21,5 @@ A team engaging with us in a technical consultation benefits from:
 == Intended audience
 
 This training is for teams with a CircleCI challenge. Your field engineer consults on the CircleCI aspects of that challenge.
+
+For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

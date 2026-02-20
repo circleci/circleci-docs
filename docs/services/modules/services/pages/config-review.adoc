@@ -1,5 +1,4 @@
 = Configuration review service
-:page-platform: Advanced Support, Premium Support, Advisory Services
 :page-description: Configuration review service
 
 The configuration review service evaluates a single CircleCI project and delivers a findings report. Your field engineer meets with the team that manages the project to learn about the use case and goals. After a two-week analysis, depending on the size of the project, your field engineer delivers findings. If additional help is needed to implement requirements, additional consultative time is scheduled.
@@ -38,3 +37,5 @@ Configuration reviews are most useful for projects that:
 Anyone responsible for writing or maintaining the CircleCI configuration for the reviewed project should be involved.
 
 Developers who work on the project can gain a clearer understanding of what CircleCI does under the hood.
+
+For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

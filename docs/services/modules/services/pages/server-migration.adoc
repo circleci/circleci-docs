@@ -1,5 +1,4 @@
 = Server migration service
-:page-platform: Advanced Support, Premium Support, Advisory Services
 :page-description: Server migration service
 
 The server migration service is an engagement where your field engineer guides CircleCI Server migrations. It covers major or minor version upgrades, cloud provider migrations, and new installations.
@@ -18,3 +17,5 @@ Teams that engage in a server migration service receive:
 == Intended audience
 
 This training is for server administrators setting up a migrating instance of CircleCI Server.
+
+For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

@@ -1,5 +1,4 @@
 = Server operator training
-:page-platform: Advanced Support, Premium Support, Advisory Services
 :page-description: Server operator training
 
 == Overview
@@ -18,3 +17,5 @@ Teams that attend a server operator training:
 == Intended audience
 
 This training is for server administrators who manage CircleCI Server instances.
+
+For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
