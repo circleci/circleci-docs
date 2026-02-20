@@ -417,7 +417,7 @@ The illustration in the <<configuration,Configuration>> section showing an examp
 
 image::guides:ROOT:config-elements-orbs.png[Configuration using Maven orb]
 
-See xref:orbs:author:orb-concepts.adoc[Using orbs] for details on how to use orbs in your configuration and an introduction to orb design. Visit the link:https://circleci.com/developer/orbs[Orbs registry] to search for orbs to help simplify your configuration.
+See xref:orbs:use:orb-concepts.adoc[Using orbs] for details on how to use orbs in your configuration and an introduction to orb design. Visit the link:https://circleci.com/developer/orbs[Orbs registry] to search for orbs to help simplify your configuration.
 
 [#parallelism]
 == Parallelism
