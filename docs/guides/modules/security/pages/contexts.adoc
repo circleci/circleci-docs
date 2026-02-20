@@ -245,11 +245,11 @@ You must be an *organization admin* to remove projects from contexts though the 
 [#expression-restrictions]
 == Expression restrictions
 
-Restrict contexts by setting up _expression restrictions_. Expression restrictions are rules that xref:orchestrate:pipeline-variables.adoc#pipeline-values[pipeline values] must match. Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use. For example, you may have a context containing credentials that should only be used for deploying your code from your protected `main` branch:
+Restrict contexts by setting up _expression restrictions_. Expression restrictions are rules that xref:orchestrate:pipeline-variables.adoc#pipeline-values[pipeline values] must match. Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use. For example, you may have a context containing credentials that should only be used for deploying your code from your protected `main` branch. You also want to make sure that the config is from a protected `main` branch for any triggers that use a different checkout and config source:
 
 [source]
 ----
-pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")
+pipeline.git.branch == "main" and pipeline.config.ref == "refs/heads/main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")
 ----
 
 Tabs and new lines are considered whitespace so can be used to break long lines, but have no other significance. For example, the snippet above could also be written:
@@ -257,6 +257,7 @@ Tabs and new lines are considered whitespace so can be used to break long lines,
 [source]
 ----
 pipeline.git.branch == "main"
+and pipeline.config.ref == "refs/heads/main"
 and not job.ssh.enabled
 and not (pipeline.config_source starts-with "api")
 ----
