@@ -22,7 +22,7 @@ The following sections detail CircleCI outbound webhook structure and protocols.
 
 == Quickstart
 
-NOTE: Projects are limited to 5 outbound webhooks.
+NOTE: Projects are limited to 5 outbound webhooks. Organization admin permissions are required to add, update and delete outbound webhooks.
 
 Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
 
@@ -33,12 +33,12 @@ To configure webhooks within the CircleCI app:
 . In the link:https://app.circleci.com/[CircleCI web app] select your organization.
 . Select **Projects** in the sidebar.
 . Find your project in the list, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"], and select **Project Settings**.
-. In the sidebar select *Webhooks*
-. Select *Add Webhook*
-. Fill out the webhook form (the table below describes the fields and their intent)
+. In the sidebar select *Webhooks*.
+. Select *Add Webhook*.
+. Fill out the webhook form (the table below describes the fields and their intent).
 . If your receiving API or third party service is set up, select *Test Ping Event* to send a test event.
 +
-NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[sample webhook payloads] section of the webhooks reference.
+NOTE: The test ping event has an abbreviated payload for ease of testing. See full examples for xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[Sample Webhook Payloads] section of the webhooks reference.
 
 [.table-scroll]
 --
@@ -77,7 +77,7 @@ A webhook is sent using an HTTP POST to the URL that was registered when the web
 
 CircleCI expects the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, CircleCI will assume that delivery has failed, and will retry at a later time. The timeout period is currently 10 seconds.
 
-Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), use the xref:reference:ROOT:outbound-webhooks-reference.adoc#common-top-level-keys[`id` property] in the webhook payload for identification.
+Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), use the xref:reference:ROOT:outbound-webhooks-reference.adoc#common-top-level-keys[ID Property] in the webhook payload for identification.
 
 If you have feedback about timeouts and retries, link:https://circleci.canny.io/webhooks[get in touch] with our team.
 
@@ -216,5 +216,5 @@ a| * "success"
 [#next-steps]
 == Next steps
 
-* See the xref:reference:ROOT:outbound-webhooks-reference.adoc[Webhooks reference] page for key definitions and sample payloads.
-* Follow the xref:webhooks-airtable.adoc[Using webhooks with third party tools] tutorial.
+* See the xref:reference:ROOT:outbound-webhooks-reference.adoc[Webhooks Reference] page for key definitions and sample payloads.
+* Follow the xref:webhooks-airtable.adoc[Using Webhooks With Third Party Tools] tutorial.
