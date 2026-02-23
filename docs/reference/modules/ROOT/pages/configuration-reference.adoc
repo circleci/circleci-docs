@@ -1034,14 +1034,14 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 |===
 --
 
-*Example:* Use a macOS virtual machine with Xcode version 14.2.0:
+*Example:* Use a macOS virtual machine with Xcode version 26.3.0:
 
 [,yaml]
 ----
 jobs:
   build:
     macos:
-      xcode: "14.2.0"
+      xcode: 26.3.0
 ----
 
 '''
@@ -1216,8 +1216,8 @@ include::guides:ROOT:partial$execution-resources/macos-resource-table.adoc[]
 jobs:
   build:
     macos:
-      xcode: "15.4.0"
-    resource_class: m2pro.medium
+      xcode: 26.3.0
+    resource_class: m4pro.medium
     steps:
       ... // other config
 ----

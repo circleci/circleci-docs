@@ -1,0 +1,62 @@
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| Feature | Registry Orbs | URL Orbs | Inline Orbs
+
+| *Location*
+| Published to Orb Registry, stored in GitHub repository
+| Hosted at accessible URL (GitHub, S3, etc.)
+| Defined in config file
+
+| *Sharing scope*
+| Public or private across organizations
+| Organization-wide (with allow-list)
+| Project-specific only
+
+| *Versioning*
+| Semantic versioning
+| Manual (Git branches, tags, commits)
+| None
+
+| *VCS support*
+| Registry orbs are hosted in GitHub only but can be used by all CircleCI users if public
+| GitHub, Bitbucket
+| GitHub, GitLab, Bitbucket
+
+| *Mutability*
+| Immutable
+| Mutable
+| Mutable (edit config directly)
+
+| *Updates*
+| Publish new semantic version (immutable)
+| Update hosted file (5-minute cache)
+| Edit config file directly
+
+| *Access control*
+| Namespace permissions
+| Organization allow-list
+| Repository access only
+
+| *Best for*
+| Community sharing, public packages, certified orbs
+| Organization-wide shared config, overriding config, proprietary logic
+| Project-specific reusable config, learning, testing
+
+| *Choose this type when:*
+a| * You want to share your orb with the community.
+* You want to use semantic versioning for your orb.
+* You want your orb to be discoverable in the CircleCI Orb Registry.
+* You want to leverage the orb development kit and automated CI/CD pipeline.
+a| * You want to use centralized configuration for your organization.
+* You need to share configuration within your organization.
+* You need direct control over updates and distribution.
+* You need to use proprietary or confidential configurations.
+a| * Configuration is specific to a single project.
+* You want zero publishing or hosting overhead.
+* You're learning about orbs and want to experiment.
+* You need immediate changes without any publishing delay.
+
+|===
+--
