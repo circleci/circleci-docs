@@ -53,13 +53,13 @@ Understanding the difference between _compilation time_ and _runtime_ helps you 
 
 Compilation time (also called _config processing time_) is when CircleCI processes and validates your `.circleci/config.yml` file. This happens before any jobs run, when a pipeline is triggered. During compilation time, CircleCI performs the following actions:
 
-* Validates YAML syntax
-* Validates CircleCI configuration structure
-* Resolves and expands orbs into their full configuration
-* Evaluates pipeline parameters and values
-* Processes dynamic configuration logic
-* Plans workflow orchestration and job dependencies
-* Resolves configuration references (anchors, aliases)
+* Validates YAML syntax.
+* Validates CircleCI configuration structure.
+* Resolves and expands orbs into their full configuration.
+* Evaluates pipeline parameters and values.
+* Processes dynamic configuration logic.
+* Plans workflow orchestration and job dependencies.
+* Resolves configuration references (anchors, aliases).
 
 At compilation time, certain values are locked in and cannot change during job execution. For example, when you use pipeline parameters or values, they are evaluated once at compilation time and remain constant throughout the entire pipeline run.
 
@@ -95,13 +95,13 @@ In this example, the `image-tag` parameter is evaluated when the pipeline is tri
 
 Runtime is when your jobs actually execute in their designated execution environments. This is when the steps in your jobs run commands, execute tests, build applications, and perform deployments. During runtime, CircleCI performs the following actions:
 
-* Spins up execution environments (containers or virtual machines)
-* Evaluates environment variables
-* Runs job steps in sequence
-* Executes commands and scripts
-* Stores artifacts and test results
-* Caches dependencies
-* Persists data to workspaces
+* Spins up execution environments (containers or virtual machines).
+* Evaluates environment variables.
+* Runs job steps in sequence.
+* Executes commands and scripts.
+* Stores artifacts and test results.
+* Caches dependencies.
+* Persists data to workspaces.
 
 Unlike compilation-time values, environment variables are evaluated at runtime. This means each job can have different environment variable values, and they can be set dynamically based on the execution environment.
 
