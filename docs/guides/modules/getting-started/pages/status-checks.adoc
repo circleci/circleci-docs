@@ -1,0 +1,151 @@
+= Status checks overview
+:page-platform: Cloud
+:page-description: An overview of commit statuses and GitHub Checks in CircleCI, including how they appear in GitHub, Bitbucket, and GitLab.
+:experimental:
+
+CircleCI reports the status of your pipelines back to your version control system (VCS). This lets you see the progress and results of your CircleCI jobs and workflows without leaving your VCS.
+
+CircleCI provides two types of status reporting:
+
+* Commit statuses, which report job-level status and are available for GitHub, Bitbucket, and GitLab.
+* GitHub Checks, which report workflow-level status and are available for GitHub only.
+
+== Introduction
+
+When a pipeline runs in CircleCI, status information is sent back to your VCS. This status information appears in pull requests and next to individual commits.
+
+Understanding the difference between commit statuses and GitHub Checks helps you interpret the status information you see in your VCS and configure your branch protection rules correctly.
+
+The following diagram shows how CircleCI determines which type of status reporting applies to your project.
+
+[mermaid]
+....
+flowchart TD
+    A[Pipeline runs in CircleCI] --> B[Status sent to VCS]
+    B --> C{Using GitHub?}
+    C -->|No| D[Commit statuses only\nJob-level status\nAvailable for Bitbucket and GitLab]
+    C -->|Yes| E{GitHub Checks enabled?}
+    E -->|No| F[Commit statuses only\nJob-level status]
+    E -->|Yes| G[Commit statuses\nJob-level status in PR conversation view]
+    E -->|Yes| H[GitHub Checks\nWorkflow-level status in Checks tab]
+....
+
+== Commit statuses
+
+Commit statuses are the default way CircleCI reports pipeline status to your VCS. They are reported at the job level and are available for GitHub, Bitbucket, and GitLab.
+
+Each VCS provider uses slightly different terminology for this feature:
+
+* GitHub refers to these as status checks.
+* Bitbucket refers to these as build statuses or commit statuses.
+* GitLab refers to these as commit statuses.
+
+Commit statuses appear in the following locations in your VCS:
+
+* At the bottom of a pull request or merge request, updating live as jobs run.
+* Next to individual commits in your repository.
+
+#TO DO: Screenshot of commit statuses at the bottom of a GitHub PR, showing statuses updating live as jobs run.#
+
+The following diagram shows how CircleCI sends commit statuses to your VCS as a pipeline runs.
+
+[mermaid]
+....
+sequenceDiagram
+    participant C as CircleCI
+    participant V as VCS
+    participant D as Developer
+    C->>V: Pipeline starts, job status: pending
+    C->>V: Job 1 complete, status: success
+    C->>V: Job 2 complete, status: success
+    C->>V: Job 3 complete, status: failed
+    V->>D: Status updates visible in PR or next to commit
+....
+
+=== Commit status naming
+
+CircleCI displays commit statuses differently depending on the job type.
+
+Regular jobs display using the following format:
+
+* Format: `ci/circleci: <job_name>`
+* Example: `ci/circleci: build`
+* Example: `ci/circleci: rspec`
+
+Approval jobs and no-op jobs display using the following format:
+
+* Format: `ci/circleci: <workflow_name>/<job_name>`
+* Example: `ci/circleci: build_and_deploy/approval-deploy`
+* Example: `ci/circleci: build_and_deploy/no-op-job`
+
+The workflow name prefix for approval and no-op jobs provides additional context. These jobs typically require manual intervention or represent conditional workflow states. Regular jobs that run automatically do not require this additional context.
+
+#TO DO: Screenshot showing examples of regular job commit status names alongside approval and no-op job commit status names as they appear in GitHub.#
+
+NOTE: **Need to find the workflow for a regular job?** Click through to the CircleCI dashboard. The full workflow context is visible there.
+
+=== Enable and disable commit statuses
+
+Commit statuses are enabled by default for all projects. You can disable them in the CircleCI web app by navigating to **Project Settings** > **Advanced Settings** and setting **GitHub Status Updates** to `off`.
+
+NOTE: **Re-enabling commit statuses.** If you disable GitHub Checks for a project or organization, confirm that commit statuses are still enabled in **Project Settings** > **Advanced Settings**.
+
+== GitHub Checks
+
+GitHub Checks is an additional status reporting feature available for GitHub integrations only. It is not available on CircleCI server.
+
+GitHub Checks reports status at the workflow level. Status appears in the **Checks** tab of a pull request in GitHub. From the **Checks** tab you can also rerun workflows.
+
+#TO DO: Screenshot of the Checks tab in a GitHub PR showing workflow-level status from CircleCI.#
+
+NOTE: **Rerunning workflows from GitHub.** GitHub does not provide a granular way to rerun workflows. When you select **Re-run checks**, all checks are rerun regardless of whether you selected **Re-run failed checks** or **Re-run all checks**.
+
+If both commit statuses and GitHub Checks are enabled, you will see the following in a GitHub pull request:
+
+* The **Checks** tab shows workflow status.
+* The **Checks** section in the pull request conversation view shows job status.
+
+=== GitHub Checks naming
+
+GitHub Checks are named differently depending on your GitHub integration type. The following diagram shows how the naming is determined.
+
+[mermaid]
+....
+flowchart TD
+    A[GitHub Checks enabled] --> B{Integration type?}
+    B -->|GitHub OAuth| C[Check named using workflow name\nExample: build_and_deploy]
+    B -->|GitHub App| D[Check named using workflow name\nand first 8 characters of pipeline definition ID\nExample: build_and_deploy-a1b2c3d4]
+    D --> E[Pipeline definition ID available in\nProject Settings > Pipelines]
+....
+
+.GitHub Checks naming by integration type
+[cols="1,2,2"]
+|===
+|Integration type |Naming format |Example
+
+|GitHub OAuth
+|Workflow name
+|`build_and_deploy`
+
+|GitHub App
+|Workflow name and first eight characters of the pipeline definition ID
+|`build_and_deploy-a1b2c3d4`
+|===
+
+The pipeline definition ID is available in **Project Settings** > **Pipelines** in the CircleCI web app.
+
+NOTE: **Avoid duplicate GitHub Checks.** If multiple pipelines trigger for the same commit SHA with workflows that share the same name, only one GitHub Check appears for that workflow name. Use unique workflow names across pipelines to get distinct GitHub Checks.
+
+=== GitHub Checks and branch protection rules
+
+If you use branch protection rules in GitHub, take care when configuring required status checks. The `ci/circleci:build` status key refers to job-level commit status from CircleCI. Having this checkbox enabled can prevent status from showing as completed when using GitHub Checks, because CircleCI posts status at the workflow level rather than the job level.
+
+To resolve this, navigate to **Settings** > **Branches** in GitHub and deselect the `ci/circleci:build` status key from the protected branch settings.
+
+#TO DO: Screenshot of GitHub branch protection settings showing the ci/circleci:build checkbox that needs to be deselected.#
+
+== Next steps
+
+* xref:guides:integration:enable-checks.adoc[Enable GitHub Checks]
+* xref:guides:orchestrate:workflows.adoc[Workflows]
+* xref:guides:orchestrate:workflows.adoc#approval[Using approval jobs in workflows]
