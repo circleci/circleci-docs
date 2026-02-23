@@ -293,7 +293,7 @@ API::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. You need your workflow ID and the `approval_request_id` (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by recieving xref:integration:outbound-webhooks.adoc[Webhooks] or polling the API. To approve a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/approvePendingApprovalJobById[approve a job] endpoint, for example:
+. You need your workflow ID and the `approval_request_id` (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or polling the API. To approve a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/approvePendingApprovalJobById[approve a job] endpoint, for example:
 +
 [,shell]
 ----
@@ -323,7 +323,7 @@ API::
 +
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by recieving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API]
+. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API]
 +
 [,shell]
 ----
@@ -396,7 +396,7 @@ API::
 +
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by recieving xref:integration:outbound-webhooks.adoc[Webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
+. You need your job ID (which is the job ID for the job requiring approval) to make the API POST request. Depending on your use case, you might be configuring an approval job in a pipeline, or using an external service to approve a job. You can get the required parameters using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or polling the API. To cancel a job, use the link:https://circleci.com/docs/api/v2/index.html#operation/cancelJobByJobID[cancel a job] endpoint, for example:
 +
 [,shell]
 ----
