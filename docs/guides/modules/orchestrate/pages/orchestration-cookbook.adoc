@@ -165,7 +165,9 @@ include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
 === Goal
 
-You may want to configure a workflow that runs when a specific event occurs (such as a push or pull request) or when a pipeline parameter is set to `true`. To combine pipeline parameters with event filters in a workflow `when` clause, you need to use filter expression syntax without template variables.
+You may want to configure a workflow that runs when a specific event occurs (such as a push or pull request) or when a pipeline parameter is set to `true`. To combine pipeline parameters with event filters in a workflow `when` clause, write the condition as a direct expression without `<< >>` delimiters.
+
+The `when` clause accepts an expression as its argument. The expression is evaluated to a boolean value at configuration compilation time, before the workflow runs, so template replacement is not required. For more on using expressions in your configuration, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using expressions in your configuration].
 
 === Steps
 
@@ -181,7 +183,7 @@ parameters:
     default: false
 ----
 
-. Update your workflow `when` clause to use pipeline parameters directly in filter expressions (without template variable syntax `<< >>`):
+. Write your workflow `when` clause as a direct expression. Reference pipeline parameters using `pipeline.parameters.<name>` directly (without `<< >>` delimiters):
 +
 [,yaml]
 ----
@@ -195,12 +197,12 @@ workflows:
 === Notes
 
 * You must define your pipeline parameters in the `parameters` section before using them in workflow conditions. The parameter name `deploy` in this example is just an example—you can use any parameter name you define (for example, `run_tests`, `skip_validation`, or `enable_feature`).
-* When using pipeline parameters in filter expressions, use the parameter name directly (for example, `pipeline.parameters.deploy`) without template variable syntax (`<< >>`). Replace `deploy` with your own parameter name.
-* Do not mix template variable syntax with filter expressions. If a `when` clause contains template variables (`<< >>`), the entire clause is treated as a template replacement rather than a filter expression, which causes the workflow to always be created regardless of the actual condition.
+* The workflow `when` clause expects a direct expression. Use pipeline parameter names directly (for example, `pipeline.parameters.deploy`).
+* Do not mix `<< >>` delimiters with direct expressions. The `<< >>` syntax is used to mark expressions inside string values. If the `when` clause contains `<< >>` delimiters, the entire value is treated as a string with template replacement rather than as a direct expression. This causes the workflow to always be created regardless of the actual condition.
 +
 [source,yaml]
 ----
-# Incorrect: This will not work as expected
+# Incorrect: mixing direct expression with << >> delimiters
 workflows:
   my-workflow:
     when: pipeline.event.name == "push" or << pipeline.parameters.deploy >>
@@ -208,7 +210,7 @@ workflows:
       - build
 ----
 +
-* For simple parameter checks, you can use template variable syntax alone. Remember to replace `deploy` with your own parameter name:
+* For simple parameter checks, you can use `<< >>` syntax on its own, since the entire value is then a single expression. Remember to replace `deploy` with your own parameter name:
 +
 [source,yaml]
 ----
@@ -219,7 +221,7 @@ workflows:
       - build
 ----
 +
-* For more details, see the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[Using `when` in workflows] section in the configuration reference.
+* For more details, see the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[Using `when` in workflows] and xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using expressions in your configuration] sections in the configuration reference.
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
