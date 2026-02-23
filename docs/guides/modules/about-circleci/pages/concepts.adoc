@@ -43,6 +43,150 @@ image::guides:ROOT:config-elements.png[configuration elements]
 
 CircleCI configurations use YAML. See the xref:getting-started:introduction-to-yaml-configurations.adoc[Introduction to YAML configurations] page for basic guidance. For a full overview of what is possible in a configuration file, see the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
 
+[#compilation-and-runtime]
+== Compilation and runtime
+
+Understanding the difference between _compilation time_ and _runtime_ helps you understand how CircleCI processes your configuration and executes your pipelines.
+
+[#compilation-time]
+=== Compilation time
+
+Compilation time (also called _config processing time_) is when CircleCI processes and validates your `.circleci/config.yml` file. This happens before any jobs run, when a pipeline is triggered. During compilation time, CircleCI performs the following actions:
+
+* Validates YAML syntax
+* Validates CircleCI configuration structure
+* Resolves and expands orbs into their full configuration
+* Evaluates pipeline parameters and values
+* Processes dynamic configuration logic
+* Plans workflow orchestration and job dependencies
+* Resolves configuration references (anchors, aliases)
+
+At compilation time, certain values are locked in and cannot change during job execution. For example, when you use pipeline parameters or values, they are evaluated once at compilation time and remain constant throughout the entire pipeline run.
+
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  image-tag:
+    type: string
+    default: "latest"
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:<< parameters.image-tag >> # Evaluated at compilation time
+    steps:
+      - checkout
+      - run:
+          name: Show image tag
+          command: echo "Using image tag << parameters.image-tag >>" # Also evaluated at compilation time
+
+workflows:
+  my-workflow:
+    jobs:
+      - build
+----
+
+In this example, the `image-tag` parameter is evaluated when the pipeline is triggered. The same value is used throughout the entire pipeline execution.
+
+[#runtime]
+=== Runtime
+
+Runtime is when your jobs actually execute in their designated execution environments. This is when the steps in your jobs run commands, execute tests, build applications, and perform deployments. During runtime, CircleCI performs the following actions:
+
+* Spins up execution environments (containers or virtual machines)
+* Evaluates environment variables
+* Runs job steps in sequence
+* Executes commands and scripts
+* Stores artifacts and test results
+* Caches dependencies
+* Persists data to workspaces
+
+Unlike compilation-time values, environment variables are evaluated at runtime. This means each job can have different environment variable values, and they can be set dynamically based on the execution environment.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - run:
+          name: Show runtime information
+          # Environment variables are evaluated at runtime
+          command: |
+            echo "Current branch: $CIRCLE_BRANCH"
+            echo "Build number: $CIRCLE_BUILD_NUM"
+            echo "Job started at: $(date)"
+      - run:
+          name: Install dependencies
+          command: npm install # Executed at runtime
+      - run:
+          name: Run tests
+          command: npm test # Executed at runtime
+
+workflows:
+  my-workflow:
+    jobs:
+      - build
+----
+
+In this example, the environment variables like `CIRCLE_BRANCH` and `CIRCLE_BUILD_NUM` are evaluated when the job runs. The commands `npm install` and `npm test` execute at runtime in the job's execution environment.
+
+[#when-it-matters]
+=== When the distinction matters
+
+Understanding compilation time versus runtime is important in several scenarios:
+
+* *Pipeline parameters*: These are set at compilation time and cannot change during job execution. If you need dynamic values during job execution, use environment variables instead.
+* *Orb usage*: Orbs are expanded at compilation time. The resulting configuration is what runs at runtime.
+* *Dynamic configuration*: The setup workflow runs at runtime but generates a configuration that is compiled before continuation workflows run.
+* *Conditionals*: The `when` clause in workflows is evaluated at compilation time based on pipeline parameters. The `when` step attribute is evaluated at runtime within a job.
+* *Error messages*: Compilation errors appear before any jobs run. Runtime errors occur during job execution and are specific to that job.
+
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  run-integration-tests:
+    type: boolean
+    default: false
+
+jobs:
+  unit-tests:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - run: npm test
+
+  integration-tests:
+    docker:
+      - image: cimg/node:current
+    steps:
+      - checkout
+      - when: # Runtime conditional
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run: npm run test:integration
+
+workflows:
+  test-workflow:
+    jobs:
+      - unit-tests
+      - integration-tests:
+          # Compilation-time conditional
+          when: << pipeline.parameters.run-integration-tests >>
+----
+
+In this example, the workflow-level `when` clause is evaluated at compilation time and determines whether the `integration-tests` job is included in the workflow at all. The step-level `when` is evaluated at runtime within the job and determines whether that specific step executes.
+
 [#contexts]
 == Contexts
 
