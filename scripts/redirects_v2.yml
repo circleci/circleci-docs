@@ -462,7 +462,7 @@
   new: /orbs/author/orb-author-validate-publish/
 
 - old: /orb-concepts/
-  new: /orbs/author/orb-concepts/
+  new: /orbs/use/orb-concepts/
 
 - old: /orb-development-kit/
   new: /orbs/author/orb-development-kit/
