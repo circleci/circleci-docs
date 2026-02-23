@@ -279,11 +279,11 @@ To resolve this issue, choose one of the following options:
 . Navigate to menu:Project settings[Project Setup] (for GitHub App projects) or menu:Project settings[Pipelines] (for GitLab and Bitbucket projects).
 
 . Follow the prompts to complete the remaining setup steps:
-** Connect your repository if not already connected.
-** Add or commit a CircleCI configuration file to your repository.
-** Configure triggers for your pipeline.
+** Connect your code repository in the Checkout source field if not already connected.
+** Commit a CircleCI configuration file to your repository and update the config file path and config source fields.
+** Set up triggers for your pipeline.
 
-. Push a commit to your repository to trigger your first pipeline.
+. Push a commit to your repository or use the btn:[Trigger Pipeline] button to trigger your first pipeline.
 
 **Option 2: Delete the project and start over**
 
