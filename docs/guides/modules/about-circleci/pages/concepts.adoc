@@ -171,8 +171,7 @@ jobs:
     steps:
       - checkout
       - when: # Runtime conditional
-          condition:
-            equal: [ main, << pipeline.git.branch >> ]
+          condition: << pipeline.git.branch == "main" >>
           steps:
             - run: npm run test:integration
 
