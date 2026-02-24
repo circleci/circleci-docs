@@ -231,7 +231,7 @@ Per-user, per-project, per-branch and per-org permission checks are also respect
 
 [#config-policies]
 ==== Config policies
-link:https://circleci.com/docs/config-policy-management-overview/[Config policy rules] apply to unversioned configs as they do to VCS-provided configs. This means that an unversioned config that does not pass a policy rule will trigger a policy fail, just like a VCS-provided config. However, if config policies differ per branch, it could be possible exploit these differences to run an unversioned config on a GitHub-protected branch, without going through a code merge.
+link:https://circleci.com/docs/config-policy-management-overview/[Config policy rules] apply to unversioned configs as they do to VCS-provided configs. This means that an unversioned config that does not pass a policy rule will trigger a policy fail, just like a VCS-provided config. However, if config policies differ per branch, it could be possible to exploit these differences to run an unversioned config on a GitHub-protected branch, without going through a code merge.
 
 [#auditability]
 ==== Auditability
