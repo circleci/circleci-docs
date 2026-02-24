@@ -47,7 +47,7 @@ Enter the following command to claim your namespace, if you have not yet claimed
 circleci namespace create <name> --org-id <your-organization-id>
 ----
 +
-NOTE: Find your organization ID in the CircleCI web app by navigating to *Organization Settings* from the sidebar..
+NOTE: Find your organization ID in the CircleCI web app by navigating to *Organization Settings* from the sidebar.
 
 [#create-your-orb]
 == Create your orb
@@ -117,7 +117,7 @@ If you have a `circleci` type organization you will need to follow some extra st
 .. The URL will be in the form: `\https://app.circleci.com/pipelines/circleci/<org-ID-string>`. The last string is the org ID that you need.
 * At the end of the automated set up process you will receive an error: `Error: Could not follow project`. At this point you need to push your project up to GitHub, and set it up in a new CircleCI project. Steps for creating a new project can be found on the xref:guides:getting-started:create-project.adoc[Create a Project] page.
 * Once you have your orb pushed up to GitHub and your project set up, you will need to make a few manual updates:
-** In `config.yml` and `test-deploy-yml`, update `vcs_type: << pipeline.project.type >>` to be `vcs_type: github`.
+** In `config.yml` and `test-deploy.yml`, update `vcs_type: << pipeline.project.type >>` to be `vcs_type: github`.
 ** In `src/@orb.yml` update `source_url: <orb URL>` to be `source_url: "https://github.com/<your-github-user-or-org-name>/<your-orb-repo-name>"`.
 
 === 4. Follow the prompts to set up your orb
@@ -457,7 +457,7 @@ Your changes have now been merged to the default branch, but if you check the li
 
 To publish a new version of our orb, you need to tag your release. A tag can be created and pushed manually, however we recommend using link:https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release[GitHub.com's Releases feature].
 
-Using GitHub's Releases feature will allows you to publish "Release Notes", which will function as a changelog for your orb.
+Using GitHub's Releases feature will allow you to publish "Release Notes", which will function as a changelog for your orb.
 
 Follow the GitHub docs to create a new release.
 
