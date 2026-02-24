@@ -236,7 +236,7 @@ link:https://circleci.com/docs/config-policy-management-overview/[Config policy 
 [#auditability]
 ==== Auditability
 
-The audit log event `trigger-event.create` includes information that permit to distinguish pipelines that are run with unversioned config, in particular the following properties:
+The audit log event `trigger-event.create` includes information to distinguish pipelines that are run with unversioned config, in particular the following properties:
 
 - `trigger-source`: `api` | `api, vscode`
 - `config-source`: `vcs` | `api`
@@ -247,7 +247,7 @@ You will be able to use the information in the event payload to view the `config
 
 The following audit log events trace when organization and project level settings are changed for this feature:
 
-- `organzation.settings.update`: emitted when organization-level settings for this feature are changed
+- `organization.settings.update`: emitted when organization-level settings for this feature are changed
 - `project.settings.update`: emitted when project-level settings for this feature are changed
 
 Both the events above log:
