@@ -41,7 +41,7 @@ Yarn installation:
 yarn add @circleci/circleci-config-sdk
 ```
 
-Use in Node.js
+Use in Node.js:
 
 ```javascript
 import CircleCI from '@circleci/circleci-config-sdk';
