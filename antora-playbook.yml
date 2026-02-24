@@ -123,4 +123,3 @@ antora:
         primary_border_color: '#008542'
         primary_text_color: '#00381A'
   - require: ./extensions/detect-unused-media-extension.js
-  - require: ./extensions/markdown-export-extension.js
