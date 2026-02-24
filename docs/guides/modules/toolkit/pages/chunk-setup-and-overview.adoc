@@ -64,7 +64,7 @@ image::guides:ROOT:chunk/chunk-setup-model-provider.png[Set up your model provid
 .Chunk interface
 image::guides:ROOT:chunk/chunk-chat.png[Chunk chat interface]
 
-Once Chunk is set up, use the chat interface instruct Chunk to help you with your CI/CD tasks. Describe your task and tell Chunk which project/repository/branch to work within.
+Once Chunk is set up, use the chat interface to instruct Chunk to help you with your CI/CD tasks. Describe your task and tell Chunk which project/repository/branch to work within.
 
 For a guide to using built-in tasks, see the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] guide.
 
@@ -124,7 +124,7 @@ And everything else you would use in a standard CircleCI pipeline. If it works i
 
 When scheduling a task, just store your `cci-agent-setup.yml` in your repo and Chunk will pick it up automatically.
 
-When using the chat interface, use the environment selection below the chat text field to set up your environment. If you keep the `Default` environment selected, Chunk will look for a `cci-agent-setup.yml` file in the root of your repository. If you wish to name this file differently, create a custom environment and provide chunk with the name of the file.
+When using the chat interface, use the environment selection below the chat text field to set up your environment. If you keep the `Default` environment selected, Chunk will look for a `cci-agent-setup.yml` file in the root of your repository. If you wish to name this file differently, create a custom environment and provide Chunk with the name of the file.
 
 You can also add secrets (environment variables) to Chunk's environment here if needed. These secrets will be added to a context named `chunk-<your-environment-name>`.
 
@@ -289,9 +289,9 @@ If organization verification is not possible, you can bypass this requirement by
 . Scroll down to the "Environment variables" section.
 . Select btn:[Add environment variable] to enter the variable name and value.
 ** Under "Environment variable name", enter `CCI_AGENT_OPENAI_MODEL`.
-** Under "Value", enter `gtp-5-nano`.
+** Under "Value", enter `gpt-5-nano`.
 
-=== Invalid OpenAI modal specified
+=== Invalid OpenAI model specified
 
 If you get the following error:
 
