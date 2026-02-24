@@ -12,9 +12,9 @@ See xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] for 
 [#possible-to-delete-orb]
 === Is it possible to delete a registry orb that I have created?
 
-No. Registry orbs are public by default and immutable, once a version of a registry orb is published it can not be changed. Registry orbs are immutable by design so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
+No. Registry orbs are public by default and immutable, once a version of a registry orb is published it cannot be changed. Registry orbs are immutable by design so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
 
-Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs[Orb registry]. Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
+Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs[Orb registry]. Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if, for instance, an orb is no longer maintained.
 
 ```shell
 circleci orb unlist <namespace>/<orb> <true|false> [flags]
@@ -110,7 +110,7 @@ An orb xref:orbs:use:orb-concepts.adoc#commands[Command] can be utilized by the 
 A xref:orbs:use:orb-concepts.adoc#jobs[Job] defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may look something like this:
 
 * Select a certain execution platform that is known, such as _Python_.
-* Automatically checkout the users code.
+* Automatically checkout the user's code.
 * Install a CLI.
 * Run a deployment command.
 
