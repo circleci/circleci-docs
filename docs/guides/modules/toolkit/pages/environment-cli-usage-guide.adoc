@@ -195,7 +195,7 @@ For more information on using the `circleci run release update` command, see the
 
 ==== Log
 
-A subcommand of `release`. The `circleci run release log` command allows you to log your deployments without status updates
+A subcommand of `release`. The `circleci run release log` command allows you to log your deployments without status updates.
 
 *Flags*
 
@@ -242,7 +242,7 @@ Manage tasks. You can also use the alias `step` instead of `task`.
 
 ==== Halt
 
-Halt is the only available subcommand of `task`. This command stops the current task and treat it as successful.
+Halt is the only available subcommand of `task`. This command stops the current task and treats it as successful.
 
 *Example usage:*
 
@@ -312,7 +312,7 @@ jobs:
 
 ==== Glob
 
-A subcommand of `Tests`. Use `circleci tests glob` to print files matching the glob pattern.
+A subcommand of `tests`. Use `circleci tests glob` to print files matching the glob pattern.
 
 *Flags*
 
