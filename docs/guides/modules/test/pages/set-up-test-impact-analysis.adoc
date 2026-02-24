@@ -61,56 +61,48 @@ Steps to enable test impact analysis are as follows:
 
 == 1. Configure the analysis command in test-suites.yml
 
-The `analysis` command executes test atoms one at a time using a test runner with code coverage enabled. This is similar to your `run` command, but with coverage instrumentation enabled.
+The `analysis` command is similar to your `run` command, but with coverage instrumentation enabled. Analysis generates coverage data that tells Smarter Testing which source files were covered by each test atom.
 
-Make sure that the command stores code coverage results, and that it is passed a test atom to run. For example, if your normal command to run a test with coverage is:
+Analysis can run in two modes:
 
-.Example test command using Vitest with coverage enabled
+* *One test atom at a time*. This mode is compatible with most coverage tooling.
+* *All test atoms in a single pass*. This mode is much faster but requires specific support for the CircleCI coverage format from the coverage tooling.
+
+Make sure that the command produces code coverage results, and that it is passed a test atom to run. For example, if your normal command to run a test with coverage is:
+
+.Example test command using `go test` with coverage enabled
 [source,console]
 ----
-$ vitest run --coverage.enabled \
-             --coverage.all=false \
-             --coverage.reporter=lcov \
-             --coverage.provider=v8 \
-             --coverage.reportsDirectory="coverage/" \
-             --bail 0 \
-             src/pages/dashboard/Dashboard.test.tsx
+$ go test -coverprofile="cover.out" -cover -coverpkg ./... cmd/plugin
 ----
 
 The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run.
 
-The coverage report output location can be specified with the template variable `<< outputs.lcov >>`. CircleCI replaces `<< outputs.lcov >>` with the file path specified in `outputs.lcov` in your test suite configuration. 
+The coverage report output location can be specified with the template variable `<< outputs.go-coverage >>`. CircleCI replaces `<< outputs.go-coverage >>` with the file path specified in `outputs.go-coverage` in your test suite configuration.
 
-NOTE: You do not need to define `outputs.lcov` in your configuration. If not defined, Smarter Testing automatically creates a temporary path in your directory to store coverage data during analysis. The coverage data is used only during the analysis phase and does not need to be uploaded or persisted.
+NOTE: You do not need to define `outputs.go-coverage` in your configuration. If not defined, Smarter Testing automatically creates a temporary path in your directory to store coverage data during analysis. The coverage data is used only during the analysis phase and does not need to be uploaded or persisted.
 
-Some test runners, such as Jest and Vitest, only let you choose a _directory_ for coverage output and may write one or more coverage files into that directory. In these cases, your analysis command must **concatenate those files into the single path** given by `<< outputs.lcov >>`.
+Some test runners only let you specify a _directory_ for coverage output and may write one or more coverage files into that directory. In these cases, your analysis command must **concatenate those files into the single path** given by the template variable.
 
 The test atom to analyze can be specified in one of two ways:
 
 * Use the template variable `<< test.atoms >>` in the `analysis` command. This will be replaced with the test atom to analyze.
 * If the template variable is not found in the `analysis` command, the test atom will be passed on stdin.
 
-Different template variables are available for coverage output, depending on the format of the coverage data:
+Different template variables are available for coverage output, depending on the format of the coverage data produced by the test runner:
 
-*LCOV*:: `<< outputs.lcov >>`
-*Go's coverage format*:: `<< outputs.go-coverage >>`
-*CircleCI coverage format*:: `<< outputs.circleci-coverage >>`
+*LCOV*:: `<< outputs.lcov >>` - analyses one test atom at a time.
+*Go's coverage format*:: `<< outputs.go-coverage >>` - analyses one test atom at a time.
+*CircleCI coverage format*:: `<< outputs.circleci-coverage >>` - analyses all test atoms in a single pass.
 
 Your `analysis` command should use the output variable for the coverage format it produces.
 
 Making these changes to the command above gives:
 
-.Example analysis command using Vitest with coverage enabled with placeholders
+.Example analysis command using `go test` with coverage enabled with placeholders
 [source,console]
 ----
-$ vitest run --coverage.enabled \
-             --coverage.all=false \
-             --coverage.reporter=lcov \
-             --coverage.provider=v8 \
-             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
-             --bail 0 \
-             << test.atoms >> \
-             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+$ go test -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
 ----
 
 . Update your `test-suite.yml` with the analysis command:
@@ -119,6 +111,26 @@ $ vitest run --coverage.enabled \
 ====
 Vitest::
 +
+--
+Use the link:https://github.com/circleci/vitest-circleci-coverage[vitest-circleci-coverage] plugin as a dev dependency before configuring the analysis command. This plugin outputs the CircleCI coverage format and enables much faster analysis than using general code coverage tooling.
+[source,console]
+----
+$ pnpm add --dev jsr:@circleci/vitest-circleci-coverage
+----
+
+Add the custom runner and reporter to your `vitest.config.ts`
+[source,typescript]
+----
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    runner: '@circleci/vitest-circleci-coverage/runner',
+    reporters: ['@circleci/vitest-circleci-coverage/reporter'],
+  },
+});
+----
+
 [source,yaml]
 ----
 # .circleci/test-suites.yml
@@ -127,15 +139,10 @@ name: ci tests
 discover: vitest list --filesOnly
 run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
 analysis: |
-  vitest run --coverage.enabled \
-             --coverage.all=false \
-             --coverage.reporter=lcov \
-             --coverage.provider=v8 \
-             --coverage.reportsDirectory="$(dirname << outputs.lcov >>)" \
-             --silent \
+  CIRCLECI_COVERAGE=<< outputs.circleci-coverage >>
+  vitest run --silent \
              --bail 0 \
-             << test.atoms >> \
-             && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+             << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
 options:
@@ -144,9 +151,28 @@ options:
   # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
   test-analysis-duration: 5
 ----
+--
 
 Jest::
 +
+--
+Use the link:https://github.com/circleci/jest-circleci-coverage[jest-circleci-coverage] plugin as a dev dependency before configuring the analysis command. This plugin outputs the CircleCI coverage format and enables much faster analysis than using general code coverage tooling.
+[source,console]
+----
+$ pnpm add --dev jsr:@circleci/jest-circleci-coverage
+----
+
+Add the custom runner and reporter to your `jest.config.ts`
+[source,typescript]
+----
+const config = {
+  testEnvironment: '@circleci/jest-circleci-coverage/environment',
+  reporters: ['default', '@circleci/jest-circleci-coverage/reporter'],
+};
+
+export default config;
+----
+
 [source,yaml]
 ----
 # .circleci/test-suites.yml
@@ -155,15 +181,11 @@ name: ci tests
 discover: jest --listTests
 run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
 analysis: |
+  CIRCLECI_COVERAGE=<< outputs.circleci-coverage >>
   jest --runInBand \
        --silent \
-       --coverage \
-       --coverageProvider=v8 \
-       --coverageReporters=lcovonly \
-       --coverage-directory="$(dirname << outputs.lcov >>)" \
        --bail \
-       << test.atoms >> \
-       && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+       << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
 options:
@@ -172,25 +194,34 @@ options:
   # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
   test-analysis-duration: 5
 ----
+--
 
-Yarn with Jest::
+Mocha::
 +
+--
+Use the link:https://github.com/circleci/mocha-circleci-coverage[mocha-circleci-coverage] plugin as a dev dependency before configuring the analysis command. This plugin outputs the CircleCI coverage format and enables much faster analysis than using general code coverage tooling.
+[source,console]
+----
+$ pnpm add --dev jsr:@circleci/mocha-circleci-coverage
+----
+
+Add the custom hook to your `.mocharc.js`
+[source,javascript]
+----
+module.exports = {
+  require: ['@circleci/mocha-circleci-coverage'],
+};
+----
+
 [source,yaml]
 ----
 # .circleci/test-suites.yml
 ---
 name: ci tests
-discover: yarn --silent test --listTests
-run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" yarn test --runInBand --reporters=jest-junit --bail << test.atoms >>
+discover: jest --listTests
+run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
 analysis: |
-  yarn test --runInBand \
-            --coverage \
-            --coverageProvider=v8 \
-            --coverageReporters=lcovonly \
-            --coverage-directory="$(dirname << outputs.lcov >>)" \
-            --bail \
-            << test.atoms >> \
-            && cat "$(dirname << outputs.lcov >>)"/*.info > << outputs.lcov >>
+  CIRCLECI_COVERAGE=<< outputs.circleci-coverage >> mocha << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
 options:
@@ -199,12 +230,13 @@ options:
   # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
   test-analysis-duration: 5
 ----
+--
 
 pytest::
-
-IMPORTANT: You must install the link:https://github.com/circleci/pytest-circleci-coverage[pytest-circleci-coverage] plugin as a dev dependency before configuring the analysis command. Without this plugin, analysis will not work correctly.
-
 +
+--
+Use the link:https://github.com/circleci/pytest-circleci-coverage[pytest-circleci-coverage] plugin as a dev dependency before configuring the analysis command. This plugin outputs the CircleCI coverage format and enables fast analysis runs.
+
 [source,yaml]
 ----
 # .circleci/test-suites.yml
@@ -235,6 +267,7 @@ options:
   # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
   test-analysis-duration: 5
 ----
+--
 
 Go::
 +
@@ -276,6 +309,8 @@ options:
 ====
 
 . Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"` (learn more about the flags in the <<cli-flags,test suite flag options>> section).
++
+NOTE: Javascript/Typescript projects should use `pnpm`/`yarn`/`npm` to launch the command, for example, `pnpm circleci run testsuite "ci tests"`.
 +
 .Example output from running the testsuite command with flags
 [source,console]
