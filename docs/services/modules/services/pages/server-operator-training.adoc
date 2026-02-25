@@ -18,4 +18,4 @@ Teams that attend a server operator training:
 
 This training is for server administrators who manage CircleCI Server instances.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

@@ -20,4 +20,4 @@ Teams who attend a general developer training:
 
 This training is for users who are new to CircleCI, have a technical role, and use CircleCI routinely.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

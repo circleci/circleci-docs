@@ -38,4 +38,4 @@ Anyone responsible for writing or maintaining the CircleCI configuration for the
 
 Developers who work on the project can gain a clearer understanding of what CircleCI does under the hood.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

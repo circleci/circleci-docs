@@ -1,8 +1,48 @@
-extends: existence
-message: "List items should end with a period or colon (unless it's fewer than three words or a URL)."
-link: https://github.com/circleci/circleci-docs
-scope: list
+---
+extends: script
+scope: raw
 level: error
-raw:
-  # Match items with at least 3 words that don't end with period, colon, or URL
-  - '\S+\s+\S+\s+\S+.*[^.\s/:]\s*$'
+message: "List items should end with a period or colon (unless it's fewer than three words, a URL, or entirely wrapped in xref/link)."
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  lines := text.split(scope, "\n")
+
+  for i, line in lines {
+    trimmed := text.trim_space(line)
+
+    // Check if this is a list item (starts with * or .)
+    if !text.has_prefix(trimmed, "*") && !text.has_prefix(trimmed, ".") {
+      continue
+    }
+
+    // Remove the list marker
+    content := text.trim_space(text.trim_prefix(text.trim_prefix(trimmed, "*"), "."))
+
+    // Skip if line is ONLY an xref or link (navigation items)
+    // This means the content starts with xref: or link:
+    if text.has_prefix(content, "xref:") || text.has_prefix(content, "link:") {
+      continue
+    }
+
+    // Count words (split by whitespace)
+    words := text.fields(content)
+
+    // Only check items with 3 or more words
+    if len(words) < 3 {
+      continue
+    }
+
+    // Check if ends with period, colon, or forward slash
+    // Note: We don't allow ] or ) here because xref/link-only lines are already excluded above
+    last_char := content[len(content)-1]
+    if last_char == '.' || last_char == ':' || last_char == '/' {
+      continue
+    }
+
+    // It's a violation
+    start := text.index(scope, line)
+    matches = append(matches, {begin: start, end: start + len(line)})
+  }

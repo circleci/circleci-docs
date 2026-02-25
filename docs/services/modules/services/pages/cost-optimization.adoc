@@ -21,4 +21,4 @@ A cost optimization analysis is most useful for organizations that:
 * Have made a recent major change to their pipelines.
 * Want a top-down understanding of data in their highest-credit projects.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

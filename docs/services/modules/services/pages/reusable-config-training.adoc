@@ -16,4 +16,4 @@ Teams who attend a reusable configuration training:
 
 This training is for teams that write and maintain configuration files across multiple repositories. Users responsible for their organization's CI configuration benefit the most.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

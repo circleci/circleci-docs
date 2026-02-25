@@ -16,4 +16,4 @@ Teams that work with their field engineer to create a custom service:
 
 Teams with a DevOps goal that has requirements outside the bounds of other field engineering services.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

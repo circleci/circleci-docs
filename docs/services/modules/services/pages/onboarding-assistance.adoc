@@ -16,4 +16,4 @@ Teams that work with their field engineer to onboard their organization:
 
 Teams that are new to CircleCI or teams that are onboarding a large number of new projects.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

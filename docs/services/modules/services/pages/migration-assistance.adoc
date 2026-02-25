@@ -16,4 +16,4 @@ Teams that work with their field engineer to migrate their projects:
 
 Teams that are new to CircleCI and want expert assistance to plan and execute their migration.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

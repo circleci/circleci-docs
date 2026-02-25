@@ -18,4 +18,4 @@ Teams that engage in a server migration service receive:
 
 This training is for server administrators setting up a migrating instance of CircleCI Server.
 
-For more information please contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
