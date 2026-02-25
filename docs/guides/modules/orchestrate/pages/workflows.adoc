@@ -187,7 +187,7 @@ image::guides:ROOT:workflow-using-requires-example-2.png[Flexible Job Execution 
 
 You may want to configure job dependencies that ignore the status/outcome of an upstream job, for example running a job regardless of the status/outcome of an upstream job.
 
-In the following example, the dependent job will run once the upstream job attains a terminal state, regardless of the status/outcome:
+In the following example, the dependent job runs once the upstream job attains a terminal state, regardless of the status/outcome:
 
 .Use flexible requires to ignore outcome of a job
 [source,yaml]
@@ -213,7 +213,7 @@ workflows:
 
 ==== Run a command when the previous job is cancelled
 
-You can use flexible requires to run a specific job only when the previous job is cancelled. This is useful for notifications, cleanup tasks, or logging when a deployment or long-running job is manually cancelled.
+You can use flexible requires to run a specific job only when the previous job is cancelled. Running a command when a job is cancelled is useful for notifications, cleanup tasks, or logging when a deployment or long-running job is manually cancelled.
 
 In the following example, a notification job runs only when a deployment is cancelled:
 
@@ -351,7 +351,7 @@ API::
 +
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API]
+. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API].
 +
 [,shell]
 ----

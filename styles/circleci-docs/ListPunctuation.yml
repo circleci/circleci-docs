@@ -13,13 +13,22 @@ script: |
   for i, line in lines {
     trimmed := text.trim_space(line)
 
-    // Check if this is a list item (starts with * or .)
-    if !text.has_prefix(trimmed, "*") && !text.has_prefix(trimmed, ".") {
+    // Check if this is a list item (starts with * or ". ")
+    // Note: ". " (dot + space) is an ordered list, ".Title" is a block title
+    is_unordered := text.has_prefix(trimmed, "* ")
+    is_ordered := text.has_prefix(trimmed, ". ")
+
+    if !is_unordered && !is_ordered {
       continue
     }
 
     // Remove the list marker
-    content := text.trim_space(text.trim_prefix(text.trim_prefix(trimmed, "*"), "."))
+    content := ""
+    if is_unordered {
+      content = text.trim_space(text.trim_prefix(trimmed, "*"))
+    } else {
+      content = text.trim_space(text.trim_prefix(trimmed, "."))
+    }
 
     // Skip if line is ONLY an xref or link (navigation items)
     // This means the content starts with xref: or link:
