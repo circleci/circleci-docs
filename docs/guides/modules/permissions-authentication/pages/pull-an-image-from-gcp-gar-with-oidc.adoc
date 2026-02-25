@@ -1,0 +1,62 @@
+= Pull an image from GCP Artifact Registry with OIDC
+:page-platform: Cloud
+:page-description: Learn how to pull an image from GCP Artifact Registry using OIDC authentication
+:experimental:
+
+Follow this how-to guide to configure a `docker` job to pull an image from Google Cloud Artifact Registry (GAR) using OIDC authentication.
+
+[#introduction]
+== Introduction
+
+When you want to run jobs in the Docker execution environment, you can specify Docker images stored in GCP Artifact Registry. The recommended approach is to authenticate using OpenID Connect (OIDC) via GCP Workload Identity Federation, avoiding the need to store long-lived GCP credentials in CircleCI.
+
+For alternative methods, see the xref:execution-managed:private-images.adoc#gcp-artifact-registry[GCP Artifact Registry Section] of the Docker authenticated pulls page.
+
+Some advantages to using OIDC over using GCP credentials to pull images:
+
+* **Improved security**: OIDC authentication removes the need to store GCP service account keys in your CircleCI configuration or environment variables, reducing the risk of exposure.
+
+* **Simplified credential management**: OIDC allows CircleCI to automatically manage the authentication process, eliminating the need to manually manage and rotate GCP service account keys.
+
+* **Fine-grained access control**: By associating a service account with the OIDC authentication, you can control the exact permissions granted to CircleCI for pulling images, ensuring a least-privilege approach.
+
+[#prerequisites]
+== Prerequisites
+
+* A xref:getting-started:first-steps.adoc[CircleCI Account] integrated with a supported VCS.
+* A project `.circleci/config.yml` file containing a job that uses the xref:execution-managed:using-docker.adoc[Docker Execution Environment], for which you want to use a Docker image stored in GCP Artifact Registry.
+* Set up CircleCI as a trusted identity provider in GCP. Follow the xref:openid-connect-tokens.adoc#setting-up-gcp[Set up GCP Instructions]. During this setup, you create a Workload Identity pool, add CircleCI as an OIDC provider, and associate a service account.
+
+[#grant-artifact-registry-access]
+== 1. Grant Artifact Registry access to your service account
+
+In the https://console.cloud.google.com/iam-admin/iam[GCP IAM console], grant your service account the `roles/artifactregistry.reader` role on the Artifact Registry repository (or project) containing the image you want to pull.
+
+If you followed the xref:openid-connect-tokens.adoc#setting-up-gcp[Set up GCP Instructions], your service account is already bound to your Workload Identity pool. You need no additional binding.
+
+[#update-circleci-config-yml-to-pull-image]
+== 2. Update `.circleci/config.yml` to pull image
+
+. Identify a job in your `.circleci/config.yml` file where you want to use your image stored in GAR, and update the job as follows:
++
+[source,yaml]
+----
+jobs:
+  job_name:
+    docker:
+      - image: <region>-docker.pkg.dev/<project>/<repository>/<image>:<tag>
+        gcp_auth:
+          oidc_service_account: <service-account-email>
+          workload_identity_pool: projects/<project-number>/locations/global/workloadIdentityPools/<pool-id>
+          workload_identity_provider: <provider-id>
+----
+
+. Replace `<region>-docker.pkg.dev/<project>/<repository>/<image>:<tag>` with the URI of the image you want to pull.
+
+. Replace `<service-account-email>` with the email of the GCP service account (for example, `my-sa@my-project.iam.gserviceaccount.com`).
+
+. Replace the `workload_identity_pool` value with the full resource name of your Workload Identity pool. You can find this in the https://console.cloud.google.com/iam-admin/workload-identity-pools[GCP Workload Identity Federation console].
+
+. Replace `<provider-id>` with the ID of your Workload Identity provider.
+
+. Save the changes to your CircleCI configuration file. When the job runs, CircleCI exchanges its OIDC token for a short-lived GCP access token to authenticate and pull the image.
