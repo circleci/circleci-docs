@@ -7,7 +7,7 @@ Technical consultation challenges the Field Engineering team have assisted with 
 
 * Config policies: Implementing config policies to satisfy security requirements.
 * Self-hosted Runners: Configuring self-hosted runners for specific use case.
-* Usage API: Setting up an integration to injest CircleCI's data.
+* Usage API: Setting up an integration to ingest CircleCI's data.
 * Many other challenges.
 
 == Benefits
