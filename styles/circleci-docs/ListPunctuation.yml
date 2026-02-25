@@ -2,7 +2,7 @@
 extends: script
 scope: raw
 level: error
-message: "List items should end with a period or colon (unless it's fewer than three words, a URL, or entirely wrapped in xref/link)."
+message: "List items should end with a period or colon (unless it's fewer than three words, a URL, entirely wrapped in xref/link, or entirely wrapped in backticks)."
 link: https://github.com/circleci/circleci-docs
 script: |
   text := import("text")
@@ -33,6 +33,11 @@ script: |
     // Skip if line is ONLY an xref or link (navigation items)
     // This means the content starts with xref: or link:
     if text.has_prefix(content, "xref:") || text.has_prefix(content, "link:") {
+      continue
+    }
+
+    // Skip if content is entirely wrapped in backticks (code)
+    if text.has_prefix(content, "`") && text.has_suffix(content, "`") {
       continue
     }
 
