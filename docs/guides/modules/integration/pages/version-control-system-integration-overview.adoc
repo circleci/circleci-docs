@@ -242,7 +242,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| Pull request event triggers. See more in the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Triggers Overview]
+| *Pull request event triggers. See more in the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Triggers Overview]*
 | Triggers
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
@@ -252,7 +252,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide
+| *Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide*
 | Triggers
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
