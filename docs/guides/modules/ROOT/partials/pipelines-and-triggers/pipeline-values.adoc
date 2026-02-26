@@ -1,3 +1,8 @@
+[#pipeline-and-project-identity]
+=== Pipeline and project identity
+
+These values provide core identifiers for the pipeline itself and the project it belongs to. They are available across all pipeline types and integration methods.
+
 [.table-scroll]
 --
 [.datatable.no-sort-col-3,cols="6*", options="header"]
@@ -43,41 +48,6 @@ _(except schedule workflows)_
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| `pipeline.config.file_path`
-d| [.nowrap]#GitHub App#
-| String
-| The file path to the CircleCI configuration file used by the pipeline.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.ref`
-d| [.nowrap]#GitHub App#
-| String
-| The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.repository.name`
-d| [.nowrap]#GitHub App#
-| String
-| The name of the repository containing the CircleCI configuration file, in the format `owner/repo-name`.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.repository.url`
-d| [.nowrap]#GitHub App#
-| String
-| The URL of the repository containing the CircleCI configuration file.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.sha`
-d| [.nowrap]#GitHub App#
-| String
-| The long (40-character) git SHA of the commit used to fetch the CircleCI configuration file.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
 | `pipeline.project.git_url`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
@@ -100,16 +70,24 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| `pipeline.trigger.received_at`
-d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
-| String
-| The timestamp of when the pipeline was triggered, in ISO 8601 format.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**Yes**#
+|===
+--
+
+[#checkout-information]
+=== Checkout information
+
+Values prefixed with `pipeline.git.*` describe the git state of the code CircleCI checks out for the pipeline. These values reflect the code CircleCI checks out and builds, which may differ from the commit or branch that triggered the pipeline event.
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
 
 | `pipeline.git.tag`
 d| [.nowrap]#GitHub App# +
@@ -162,6 +140,94 @@ d| [.nowrap]#GitHub OAuth# +
 | The long (40-character) git SHA of the build prior to the one being built. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+
+|===
+--
+
+[#configuration-source]
+=== Configuration source
+
+Values prefixed with `pipeline.config.*` describe where the CircleCI configuration file was fetched from. These values are only available for GitHub App pipelines using standalone configuration, where the config file is stored in a separate repository from the one being built.
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
+
+| `pipeline.config.file_path`
+d| [.nowrap]#GitHub App#
+| String
+| The file path to the CircleCI configuration file used by the pipeline.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.ref`
+d| [.nowrap]#GitHub App#
+| String
+| The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.repository.name`
+d| [.nowrap]#GitHub App#
+| String
+| The name of the repository containing the CircleCI configuration file, in the format `owner/repo-name`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.repository.url`
+d| [.nowrap]#GitHub App#
+| String
+| The URL of the repository containing the CircleCI configuration file.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.sha`
+d| [.nowrap]#GitHub App#
+| String
+| The long (40-character) git SHA of the commit used to fetch the CircleCI configuration file.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+|===
+--
+
+[#trigger-and-event-information]
+=== Trigger and event information
+
+These values describe how and why the pipeline was triggered. They are organized into three groups:
+
+* *`pipeline.trigger.*`, `pipeline.trigger_source`, `pipeline.schedule.*`*: High-level trigger metadata available across pipeline types.
+* *`pipeline.trigger_parameters.*`*: Raw webhook event parameters passed directly from the VCS provider. The prefix reflects the source — for example, `pipeline.trigger_parameters.github_app.*` for GitHub App and `pipeline.trigger_parameters.gitlab.*` for GitLab.
+* *`pipeline.event.*`*: Normalized event values available for GitHub App pipelines only.
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
+
+| `pipeline.trigger.received_at`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The timestamp of when the pipeline was triggered, in ISO 8601 format.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**Yes**#
 
 | `pipeline.trigger_source`
 d| [.nowrap]#GitHub App# +
@@ -629,6 +695,25 @@ d| [.nowrap]#GitHub App#
 | The URL of the repository that triggered the event. Corresponds to the `repository.url` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+
+|===
+--
+
+[#deploy-information]
+=== Deploy information
+
+Values prefixed with `pipeline.deploy.*` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides for more information.
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
 
 | `pipeline.deploy.component_name`
 d| [.nowrap]#GitHub App#
