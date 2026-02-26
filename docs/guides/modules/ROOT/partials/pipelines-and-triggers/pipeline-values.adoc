@@ -160,20 +160,6 @@ Values prefixed with `pipeline.config.*` describe where the CircleCI configurati
 | Cloud
 | Server
 
-| `pipeline.config.file_path`
-d| [.nowrap]#GitHub App#
-| String
-| The file path to the CircleCI configuration file used by the pipeline.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.ref`
-d| [.nowrap]#GitHub App#
-| String
-| The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
 | `pipeline.config.repository.name`
 d| [.nowrap]#GitHub App#
 | String
@@ -185,6 +171,20 @@ d| [.nowrap]#GitHub App#
 d| [.nowrap]#GitHub App#
 | String
 | The URL of the repository containing the CircleCI configuration file.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.file_path`
+d| [.nowrap]#GitHub App#
+| String
+| The file path to the CircleCI configuration file used by the pipeline.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.ref`
+d| [.nowrap]#GitHub App#
+| String
+| The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
