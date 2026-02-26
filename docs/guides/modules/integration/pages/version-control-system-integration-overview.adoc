@@ -17,7 +17,7 @@ This guide provides an overview of the VCS options, organization types and pipel
 
 == Which version control systems are supported?
 
-link:https://circleci.com/pricing/[CircleCI Cloud] projects can be integrated with code repositories hosted on the following VCS providers:
+link:https://circleci.com/pricing/[CircleCI Cloud] pipelines can be integrated with code repositories hosted on the following VCS providers:
 
 * GitHub.com
 * GitHub Enterprise Cloud
