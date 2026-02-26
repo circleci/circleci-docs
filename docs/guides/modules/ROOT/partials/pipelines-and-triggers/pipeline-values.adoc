@@ -525,10 +525,24 @@ d| [.nowrap]#GitHub App#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
+| `pipeline.event.github.pull_request.base.sha`
+d| [.nowrap]#GitHub App#
+| String
+| The SHA of the base branch of the pull request. Corresponds to the `pull_request.base.sha` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
 | `pipeline.event.github.pull_request.head.ref`
 d| [.nowrap]#GitHub App#
 | String
 | The name of the head branch of the pull request. Corresponds to the `pull_request.head.ref` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.pull_request.head.sha`
+d| [.nowrap]#GitHub App#
+| String
+| The SHA of the head branch of the pull request. Corresponds to the `pull_request.head.sha` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -581,6 +595,20 @@ d| [.nowrap]#GitHub App#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
+| `pipeline.event.github.pull_request.url`
+d| [.nowrap]#GitHub App#
+| String
+| The URL of the pull request. Corresponds to the `pull_request.url` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.label.name`
+d| [.nowrap]#GitHub App#
+| String
+| The name of the label applied to the pull request. Corresponds to the `label.name` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events with the `labeled` action.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
 | `pipeline.event.github.comment.body`
 d| [.nowrap]#GitHub App#
 | String
@@ -592,6 +620,41 @@ d| [.nowrap]#GitHub App#
 d| [.nowrap]#GitHub App#
 | String
 | The type of GitHub user that triggered the event. Corresponds to the `sender.type` field on GitHub event payloads. Possible values are `User`, `Organization`, and `Bot`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.sender.avatar_url`
+d| [.nowrap]#GitHub App#
+| String
+| The avatar URL of the GitHub user who triggered the event. Corresponds to the `sender.avatar_url` field on GitHub event payloads.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.sender.login`
+d| [.nowrap]#GitHub App#
+| String
+| The login name of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.repository.name`
+d| [.nowrap]#GitHub App#
+| String
+| The name of the repository that triggered the event, without the owner prefix. Corresponds to the `repository.name` field on repository-related GitHub event payloads.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.repository.owner.login`
+d| [.nowrap]#GitHub App#
+| String
+| The login name of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.event.github.repository.url`
+d| [.nowrap]#GitHub App#
+| String
+| The URL of the repository that triggered the event. Corresponds to the `repository.url` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
