@@ -147,7 +147,7 @@ d| [.nowrap]#GitHub OAuth# +
 [#configuration-source]
 === Configuration source
 
-Values prefixed with `pipeline.config.*` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built.
+Values prefixed with `pipeline.config.*` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out — so use the corresponding `pipeline.git.*` values instead.
 
 [.table-scroll]
 --
