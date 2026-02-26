@@ -702,7 +702,7 @@ Values prefixed with `pipeline.deploy.*` are only available for deployment pipel
 
 [.table-scroll]
 --
-[.datatable.no-sort-col-3,cols="6*", options="header"]
+[.datatable.no-sort-col-3,cols="2,2,1,5,1,1", options="header"]
 |===
 | Variable
 | Source
