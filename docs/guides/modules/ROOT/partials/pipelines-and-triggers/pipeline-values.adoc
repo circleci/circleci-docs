@@ -76,7 +76,7 @@ d| [.nowrap]#GitHub App# +
 [#checkout-information]
 === Checkout information
 
-Values prefixed with `pipeline.git.*` describe the git state of the code CircleCI checks out for the pipeline. These values reflect the code CircleCI checks out and builds, which may differ from both the commit or branch that triggered the pipeline event and the commit or branch from which the configuration file was fetched.
+Values prefixed with `+pipeline.git.*+` describe the git state of the code CircleCI checks out for the pipeline. These values reflect the code CircleCI checks out and builds, which may differ from both the commit or branch that triggered the pipeline event and the commit or branch from which the configuration file was fetched.
 
 [.table-scroll]
 --
@@ -147,7 +147,7 @@ d| [.nowrap]#GitHub OAuth# +
 [#configuration-source]
 === Configuration source
 
-Values prefixed with `pipeline.config.*` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out — so use the corresponding `pipeline.git.*` values instead.
+Values prefixed with `+pipeline.config.*+` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out — so use the corresponding `+pipeline.git.*+` values instead.
 
 [.table-scroll]
 --
@@ -698,7 +698,7 @@ d| [.nowrap]#GitLab#
 [#deploy-information]
 === Deploy information
 
-Values prefixed with `pipeline.deploy.*` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides for more information.
+Values prefixed with `+pipeline.deploy.*+` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides for more information.
 
 [.table-scroll]
 --
