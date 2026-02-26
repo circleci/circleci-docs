@@ -60,7 +60,7 @@ If you are using CircleCI Server you are using a `github` type organization.
 The following table shows feature support for each pipeline type.
 
 * Features that are supported for a pipeline type are indicated with [.circle-green]#**Yes**#.
-* Features that are not supported are indicated with [.circle-red]#**No**#.
+* Features that are not supported for a pipeline type are indicated with [.circle-red]#**No**#.
 
 For an overview of users, orgs, and pipeline types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
@@ -131,16 +131,6 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-
-| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Pipelines and Configuration Files for a Project]
-| Configuration
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
 
 | *View your configuration file in the CircleCI web app*
 | Configuration
@@ -368,6 +358,11 @@ For a guide to organization types, see the xref:permissions-authentication:users
 
 | *Multiple projects to track a single monorepo.*
 | [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+
+| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Pipelines and Configuration Files for a Project]
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 |===
