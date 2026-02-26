@@ -110,8 +110,14 @@ If your config contains a logical statement referencing any of the pipeline valu
 |`pipeline.event.github.pull_request.base.ref`
 |The name of the *base* (or target) branch of the PR - that is the branch that will receive the changes.
 
+|`pipeline.event.github.pull_request.base.sha`
+|The SHA of the base branch of the pull request.
+
 |`pipeline.event.github.pull_request.head.ref`
 |The name of the *head* branch of the PR - that is the branch containing the changes to be merged.
+
+|`pipeline.event.github.pull_request.head.sha`
+|The SHA of the head branch of the pull request.
 
 |`pipeline.event.github.pull_request.draft`
 |A boolean value indicating whether the pull request is a draft.
@@ -124,6 +130,12 @@ If your config contains a logical statement referencing any of the pipeline valu
 
 |`pipeline.event.github.pull_request.merged`
 |A boolean that indicates whether the PR was merged or not.
+
+|`pipeline.event.github.pull_request.url`
+|The URL of the pull request.
+
+|`pipeline.event.github.label.name`
+|The name of the label applied to the pull request. Only populated for pull request events with the `labeled` action.
 |===
 
 These values are extracted directly from the GitHub event payload. The part after prefix `pipeline.event.github.*` matches the corresponding field in the pull request event structure described in link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[the GitHub docs].
