@@ -336,7 +336,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 
 == Feature support for each organization type
 
-The following table shows feature support for each organization type. This list deos not include all CircleCI features. Only features where the organization type is relevant are included.
+The following table shows feature support for each organization type. This list does not include all CircleCI features. Only features where the organization type is relevant are included.
 
 For a guide to organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
