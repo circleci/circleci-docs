@@ -714,42 +714,42 @@ Values prefixed with `pipeline.deploy.*` are only available for deployment pipel
 | `pipeline.deploy.component_name`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the component that will be rolled back or deployed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The name of the component that will be rolled back or deployed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.environment_name`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the environment in which the rollback or deploy will be performed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The name of the environment in which the rollback or deploy will be performed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.target_version`
 d| [.nowrap]#GitHub App#
 | String
-| The version of the component that needs to be rolled back to or deployed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The version of the component that needs to be rolled back to or deployed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.current_version`
 d| [.nowrap]#GitHub App#
 | String
-| The current version of the component that is going to be rolled back or deployed. Can be used to verify that the status of the component matches expectations. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The current version of the component that is going to be rolled back or deployed. Can be used to verify that the status of the component matches expectations.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.namespace`
 d| [.nowrap]#GitHub App#
 | String
-| The namespace of the environment that was deployed to. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The namespace of the environment that was deployed to.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.reason`
 d| [.nowrap]#GitHub App#
 | String
-| The reason for the deployment or rollback. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The reason for the deployment or rollback.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
