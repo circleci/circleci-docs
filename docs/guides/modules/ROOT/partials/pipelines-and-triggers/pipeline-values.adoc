@@ -514,7 +514,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.pull_request.base.ref`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the *base* (or target) branch of the PR - that is the branch that will receive the changes. Only populated for pipelines triggered by pull request events (`pipeline.event.name = 'pull_request'`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
+| The name of the base (or target) branch of the pull request. Corresponds to the `pull_request.base.ref` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -528,7 +528,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.pull_request.head.ref`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the *head* branch of the PR - that is the branch containing the changes to be merged. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
+| The name of the head branch of the pull request. Corresponds to the `pull_request.head.ref` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -542,28 +542,28 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.pull_request.draft`
 d| [.nowrap]#GitHub App#
 | Boolean
-| A boolean value indicating whether the pull request is a draft. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
+| A boolean value indicating whether the pull request is a draft. Corresponds to the `pull_request.draft` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.title`
 d| [.nowrap]#GitHub App#
 | String
-| The title of the pull request. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
+| The title of the pull request. Corresponds to the `pull_request.title` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.number`
 d| [.nowrap]#GitHub App#
 | Integer
-| The numeric identifier of the pull request. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
+| The numeric identifier of the pull request. Corresponds to the `pull_request.number` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.pull_request.merged`
 d| [.nowrap]#GitHub App#
 | Boolean
-| A boolean value indicating whether the pull request is has been merged. Only populated for pipelines triggered by pull request events (`pipeline.event.name = "pull_request"`). See xref:guides:orchestrate:github-trigger-event-options.adoc#supported-trigger-options[Supported Trigger Options].
+| A boolean value indicating whether the pull request has been merged. Corresponds to the `pull_request.merged` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[GitHub pull request event payload]. Only populated for pull request events.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -584,14 +584,14 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.comment.body`
 d| [.nowrap]#GitHub App#
 | String
-| The pull request comment body with leading/trailing whitespace removed, if a pipeline was triggered via PR comment. For pipelines triggered in other ways, this value is undefined.
+| The body of the comment that triggered the pipeline, with leading and trailing whitespace removed. Corresponds to the `comment.body` field on `issue_comment` and `pull_request_review_comment` GitHub event payloads. Only populated for pipelines triggered by a PR comment.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.event.github.sender.type`
 d| [.nowrap]#GitHub App#
 | String
-| The type of GitHub user that emitted the event triggering the pipeline. Possible values are `User`, `Organization`, and `Bot`.
+| The type of GitHub user that triggered the event. Corresponds to the `sender.type` field on GitHub event payloads. Possible values are `User`, `Organization`, and `Bot`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
