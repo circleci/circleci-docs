@@ -262,7 +262,7 @@ The pipeline values available to you depend on your pipeline/integration type, a
 
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
-For example:
+=== Usage example
 
 ```yaml
 version: 2.1
