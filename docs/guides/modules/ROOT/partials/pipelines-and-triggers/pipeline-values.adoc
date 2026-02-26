@@ -53,7 +53,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.config.ref`
 d| [.nowrap]#GitHub App#
 | String
-| The full Git ref from which the CircleCI configuration file was fetched, for example `refs/heads/main` or `refs/tags/v1.0`.
+| The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -74,7 +74,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.config.sha`
 d| [.nowrap]#GitHub App#
 | String
-| The long (40-character) git SHA of the commit from which the CircleCI configuration file was fetched.
+| The long (40-character) git SHA of the commit used to fetch the CircleCI configuration file.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
