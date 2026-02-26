@@ -76,7 +76,7 @@ d| [.nowrap]#GitHub App# +
 [#checkout-information]
 === Checkout information
 
-Values prefixed with `pipeline.git.*` describe the git state of the code CircleCI checks out for the pipeline. These values reflect the code CircleCI checks out and builds, which may differ from the commit or branch that triggered the pipeline event.
+Values prefixed with `pipeline.git.*` describe the git state of the code CircleCI checks out for the pipeline. These values reflect the code CircleCI checks out and builds, which may differ from both the commit or branch that triggered the pipeline event and the commit or branch from which the configuration file was fetched.
 
 [.table-scroll]
 --
