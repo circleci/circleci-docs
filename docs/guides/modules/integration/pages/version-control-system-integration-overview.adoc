@@ -250,7 +250,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
+| [.circle-green]#**No**#
 
 | *Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide*
 | Triggers
