@@ -94,6 +94,7 @@
 *** xref:execution-managed:using-gpu.adoc[Using the GPU execution environment]
 ** How-to guides
 *** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
+*** xref:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc[Pull an image from GCP Artifact Registry with OIDC]
 *** xref:execution-managed:run-a-job-in-a-container.adoc[Run a job in a container on your machine with Docker]
 *** xref:execution-managed:docker-compose.adoc[Installing and using Docker Compose]
 *** xref:execution-managed:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
