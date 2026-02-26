@@ -201,11 +201,7 @@ d| [.nowrap]#GitHub App#
 [#trigger-and-event-information]
 === Trigger and event information
 
-These values describe how and why the pipeline was triggered. They are organized into three groups:
-
-* *`pipeline.trigger.*`, `pipeline.trigger_source`, `pipeline.schedule.*`*: High-level trigger metadata available across pipeline types.
-* *`pipeline.event.*`*: Normalized event values available for GitHub App pipelines only.
-* *`pipeline.trigger_parameters.*`*: Raw webhook event parameters passed directly from the VCS provider. The prefix reflects the source — for example, `pipeline.trigger_parameters.github_app.*` for GitHub App and `pipeline.trigger_parameters.gitlab.*` for GitLab.
+These values describe how and why the pipeline was triggered, including the event source, timing, and any event-specific data passed by the VCS provider.
 
 [.table-scroll]
 --
