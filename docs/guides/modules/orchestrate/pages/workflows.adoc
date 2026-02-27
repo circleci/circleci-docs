@@ -441,7 +441,7 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 [#scheduling-a-workflow]
 == Scheduling a workflow
 
-NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
+NOTE: Scheduled workflows are not available for GitHub App, GitLab or Bitbucket Data Center pipelines.
 
 CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc[Dynamic Configuration]. If you use dynamic configuration you will need to use xref:schedule-triggers.adoc[Schedule Triggers] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
 
