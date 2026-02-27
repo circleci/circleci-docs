@@ -1,7 +1,18 @@
-[#possible-to-delete-orb]
-=== Is it possible to delete an orb I've created?
+[#which-orb-type-should-i-author]
+=== Which orb type should I author?
 
-No. Orbs are public by default and immutable, once a version of an orb is published it can not be changed. This is done so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
+The type of orb you should author depends on what you need it for and how you want to share it.
+
+* **Registry orbs**: Best for public sharing or when you need semantic versioning.
+* **URL orbs**: Best for sharing across your organization but not externally. Requires hosting and administrative allow-list management.
+* **Inline orbs**: Best for project-specific reusable configuration and testing before extracting config into a URL or registry orb. No publishing required, defined directly in your config file.
+
+See xref:orbs:use:orb-intro.adoc#choosing-an-orb-type[Choosing an Orb Type] for detailed guidance.
+
+[#possible-to-delete-orb]
+=== Is it possible to delete a registry orb that I have created?
+
+No. Registry orbs are public by default and immutable, once a version of a registry orb is published it can not be changed. Registry orbs are immutable by design so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
 
 Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs[Orb registry]. Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
 
@@ -9,41 +20,41 @@ Orbs can however be "Unlisted" from the link:https://circleci.com/developer/orbs
 circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
 
-WARNING: **Use caution when using private orbs.** Currently the `orb source` CircleCI CLI command does not work for _any_ private orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, you can create a link:https://support.circleci.com/hc/en-us[support ticket].
+WARNING: **Use caution when using private orbs.** Currently the `orb source` CircleCI CLI command does not work for _any_ private orbs, regardless if they are listed or unlisted. Unless the private orb name is documented before it is unlisted, you will not be able to find the orb through the orb registry or the CircleCI CLI. If you believe this happened to you, you can create a link:https://support.circleci.com/hc/en-us[support ticket].
 
 [#protect-users-api-tokens]
 === How do I protect a user's API tokens and other sensitive information?
 
 Use the `env_var_name` parameter type for the API key parameter. This parameter type will only accept valid POSIX environment variable name strings as input. In the parameter description, it is best practice to mention to the user to add this environment variable.
 
-If you are interested in reading more on this topic, visit the xref:reference:ROOT:reusing-config.adoc#environment-variable-name[Environment variable name] and xref:orbs:author:orbs-best-practices.adoc[Best practices] pages.
+If you are interested in reading more on this topic, visit the xref:reference:ROOT:reusing-config.adoc#environment-variable-name[Environment Variable Name] and xref:orbs:author:orbs-best-practices.adoc[Best Practices] pages.
 
 [#require-user-to-add-an-environment-variable]
 === How can I require a user to add an environment variable?
 
 Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. Either way, consider instructing the user on how they can obtain their API key.
 
-Consider validating required environment variables. See more in the xref:orbs:author:orbs-best-practices.adoc#commands[Orb author best practices] guide.
+Consider validating required environment variables. See more in the xref:orbs:author:orbs-best-practices.adoc#commands[Orb Author Best Practices] guide.
 
-If you are interested in reading more on this topic, visit the xref:reference:ROOT:reusing-config.adoc#environment-variable-name[Environment variable name] and xref:orbs:author:orbs-best-practices.adoc[Best practices] pages.
+If you are interested in reading more on this topic, visit the xref:reference:ROOT:reusing-config.adoc#environment-variable-name[Environment Variable Name] and xref:orbs:author:orbs-best-practices.adoc[Best Practices] pages.
 
 [#what-language-to-write-orb]
 === What language do I use to write an orb?
 
-Orbs are packages of xref:guides:getting-started:introduction-to-yaml-configurations.adoc[CircleCI YAML configuration].
+Orbs are packages of xref:guides:getting-started:introduction-to-yaml-configurations.adoc[CircleCI YAML Configuration].
 
-CircleCI orbs package xref:reference:ROOT:reusing-config.adoc[CircleCI reusable config], such as xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[commands], which can execute within a given xref:guides:execution-managed:executor-intro.adoc[executor] defined by either, the user if using a _command_ within a custom job, or by the orb author if using a xref:orbs:author:orb-concepts.adoc#jobs[reusable job]. The environment within which your logic is running may influence your language decisions.
+CircleCI orbs package xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Elements] like xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Commands]. These commands run within an xref:guides:execution-managed:executor-intro.adoc[Executor]—either one the user specifies in a custom job, or one the orb author defines in a xref:orbs:use:orb-concepts.adoc#jobs[Reusable Job]. This execution environment may influence your language decisions.
 
 [#what-programming-languages-command-logic]
 === What programming languages can I write my Command logic in?
 
-POSIX compliant bash is the most portable and universal language. This is the recommended option when you intend to share your orb. Orbs do, however, come with the flexibility and freedom to run other programming languages or tools.
+POSIX compliant Bash is the most portable and universal language. Bash is the recommended option when you intend to share your orb. Orbs do, however, come with the flexibility and freedom to run other programming languages or tools.
 
 ---
 
 **Bash**
 
-Bash is the preferred language as it is most commonly available among all available executors. Bash can (and should) be easily written directly using the native xref:reference:ROOT:configuration-reference.adoc#run[run] command. The default shell on MacOS and Linux will be bash.
+Bash is the preferred language as it is most commonly available among all available executors. Bash should be written directly using the native xref:reference:ROOT:configuration-reference.adoc#run[Run] command. The default shell on macOS and Linux will be Bash.
 
 **Ruby**
 
@@ -94,6 +105,13 @@ steps:
 
 The answer might be both, but it will heavily depend on the task you want to accomplish.
 
-An orb xref:orbs:author:orb-concepts.adoc#commands[command] can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
+An orb xref:orbs:use:orb-concepts.adoc#commands[Command] can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
 
-A xref:orbs:author:orb-concepts.adoc#jobs[job] defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
+A xref:orbs:use:orb-concepts.adoc#jobs[Job] defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may look something like this:
+
+* Select a certain execution platform that is known, such as _Python_.
+* Automatically checkout the users code.
+* Install a CLI.
+* Run a deployment command.
+
+All without requiring any additional configuration from the user.

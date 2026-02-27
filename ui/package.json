@@ -24,7 +24,7 @@
     "cssnano": "~7.1.0",
     "eslint": "~9.39.0",
     "eslint-plugin-import": "~2.32.0",
-    "eslint-plugin-n": "~17.23.0",
+    "eslint-plugin-n": "~17.24.0",
     "eslint-plugin-promise": "~7.2.0",
     "eslint-plugin-standard": "~5.0",
     "fancy-log": "~2.0.0",
