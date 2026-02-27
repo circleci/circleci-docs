@@ -3,7 +3,7 @@
 :page-description: An overview guide to the version control systems you can integrate with CircleCI and the features available to each pipeline type and organization type.
 :experimental:
 
-CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI web app, and the opitons are as follows:
+CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI web app, and the options are as follows:
 
 * GitHub App
 * GitHub OAuth
