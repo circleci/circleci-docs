@@ -258,11 +258,11 @@ build:
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
 
-The pipeline values available to you depend on your pipeline/integration type, as shown in the "Source" column of the table below.
+The pipeline values available to you depend on your pipeline/integration type, as shown in the "Source" column of each table below. The tables below group values by their purpose and namespace.
 
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
-For example:
+=== Usage example
 
 ```yaml
 version: 2.1

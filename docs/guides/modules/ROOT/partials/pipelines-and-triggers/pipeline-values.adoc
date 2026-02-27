@@ -1,3 +1,8 @@
+[#pipeline-and-project-identity]
+=== Pipeline and project identity
+
+These values provide core identifiers for the pipeline itself and the project it belongs to. They are available across all pipeline types and integration methods.
+
 [.table-scroll]
 --
 [.datatable.no-sort-col-3,cols="6*", options="header"]
@@ -43,41 +48,6 @@ _(except schedule workflows)_
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| `pipeline.config.file_path`
-d| [.nowrap]#GitHub App#
-| String
-| The file path to the CircleCI configuration file used by the pipeline.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.ref`
-d| [.nowrap]#GitHub App#
-| String
-| The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.repository.name`
-d| [.nowrap]#GitHub App#
-| String
-| The name of the repository containing the CircleCI configuration file, in the format `owner/repo-name`.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.repository.url`
-d| [.nowrap]#GitHub App#
-| String
-| The URL of the repository containing the CircleCI configuration file.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.config.sha`
-d| [.nowrap]#GitHub App#
-| String
-| The long (40-character) git SHA of the commit used to fetch the CircleCI configuration file.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
 | `pipeline.project.git_url`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
@@ -100,16 +70,24 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| `pipeline.trigger.received_at`
-d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud# +
-[.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
-| String
-| The timestamp of when the pipeline was triggered, in ISO 8601 format.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**Yes**#
+|===
+--
+
+[#checkout-information]
+=== Checkout information
+
+Values prefixed with `+pipeline.git.*+` describe the git state of the code CircleCI checks out for the pipeline. These values reflect the code CircleCI checks out and builds. For GitHub App pipelines, this may differ from both the commit or branch that triggered the event and the commit or branch used to fetch the configuration file.
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
 
 | `pipeline.git.tag`
 d| [.nowrap]#GitHub App# +
@@ -163,6 +141,95 @@ d| [.nowrap]#GitHub OAuth# +
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
+|===
+--
+
+[#configuration-source]
+=== Configuration source information
+
+Values prefixed with `+pipeline.config.*+` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out so you can use the corresponding `+pipeline.git.*+` values instead.
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
+
+| `pipeline.config.repository.name`
+d| [.nowrap]#GitHub App#
+| String
+| The name of the repository containing the CircleCI configuration file, in the format `owner/repo-name`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.repository.url`
+d| [.nowrap]#GitHub App#
+| String
+| The URL of the repository containing the CircleCI configuration file.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.file_path`
+d| [.nowrap]#GitHub App#
+| String
+| The file path to the CircleCI configuration file used by the pipeline.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.ref`
+d| [.nowrap]#GitHub App#
+| String
+| The full Git ref used to fetch the CircleCI configuration file, for example `refs/heads/main` or `refs/tags/v1.0`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.config.sha`
+d| [.nowrap]#GitHub App#
+| String
+| The long (40-character) git SHA of the commit used to fetch the CircleCI configuration file.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+|===
+--
+
+[#trigger-and-event-information]
+=== Trigger and event information
+
+These values describe how and why the pipeline was triggered, including the event source, timing, and any event-specific data passed by the VCS provider.
+
+[WARNING]
+====
+All `+pipeline.trigger_parameters.circleci.*+` and `+pipeline.trigger_parameters.github_app.*+` values are deprecated and their presence is not guaranteed after **2026-08-01**. Use the replacement values listed in the table below.
+====
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="6*", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
+
+| `pipeline.trigger.received_at`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The timestamp of when the pipeline was triggered, in ISO 8601 format.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**Yes**#
+
 | `pipeline.trigger_source`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
@@ -189,285 +256,6 @@ d| [.nowrap]#GitHub OAuth# +
 | The unique ID of the schedule if the pipeline was triggered via schedule trigger. Value will be empty string if the pipeline is triggered by other sources.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-
-| `pipeline.trigger_parameters.circleci.trigger_type`
-d| [.nowrap]#GitHub App# +
-[.nowrap]#GitLab#
-| String
-| GitHub App, GitLab
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_time` +
-  *Deprecated*: Use `pipeline.trigger.received_at` instead.
-d| [.nowrap]#GitHub App# +
-[.nowrap]#GitLab#
-| String
-| Timestamp CircleCI received the event
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.circleci.event_type`
-d| [.nowrap]#GitHub App# +
-[.nowrap]#GitLab#
-| String
-d|  [.nowrap]#GitHub App: push# +
-[.nowrap]#GitLab: push, merge request# +
-
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.type`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.ref`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.ref`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.checkout_sha`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.checkout_sha`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.user_id`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.user_id`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.user_name`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.user_name`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.user_username`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.user_username`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.user_avatar`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.user_avatar`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.repo_name`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.repo_name`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.repo_url`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.repo_url`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.web_url`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.web_url`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.commit_sha`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.commit_sha`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.commit_title`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.commit_title`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.commit_message`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.commit_message`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.commit_timestamp`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.commit_timestamp`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.commit_author_name`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.commit_author_name`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.commit_author_email`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.branch`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.github_app.branch`
-d| [.nowrap]#GitHub App#
-|
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.default_branch`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.gitlab.is_fork_merge_request`
-d| [.nowrap]#GitLab#
-|
-| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-
-| `pipeline.trigger_parameters.webhook.body`
-d| [.nowrap]#Custom webhook#
-| String
-| The body of the payload that was sent with a xref:guides:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook].
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
 
 | `pipeline.event.name`
 d| [.nowrap]#GitHub App#
@@ -630,45 +418,358 @@ d| [.nowrap]#GitHub App#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
+| `pipeline.trigger_parameters.webhook.body`
+d| [.nowrap]#Custom webhook#
+| String
+| The body of the payload that was sent with a xref:guides:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.trigger_type` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitLab#
+| String
+|Use `pipeline.trigger.type` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_time` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitLab#
+| String
+|Use `pipeline.trigger.received_at` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_type` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitLab#
+| String
+|Use `pipeline.event.name` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.ref` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.checkout_sha` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.git.revision` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_id` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|No direct replacement is available. If this value is critical to your workflows, contact CircleCI Support.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_name` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.event.github.sender.login` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_username` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.event.github.sender.login` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_avatar` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.event.github.sender.avatar_url` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.repo_name` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.event.github.repository.name` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.repo_url` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.event.github.repository.url` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.web_url` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.event.github.repository.url` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_sha` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.event.github.after` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_title` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|For the checkout commit subject, use `pipeline.git.commit.subject`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_message` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|For the checkout commit body, use `pipeline.git.commit.body`. For the commit subject, use `pipeline.git.commit.subject`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_timestamp` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|Use `pipeline.trigger.received_at` instead.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_author_name` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author.name`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.branch` +
+*Deprecated* - support ends on 2026-08-01.
+d| [.nowrap]#GitHub App#
+|
+|For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.type`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.ref`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.checkout_sha`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.user_id`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.user_name`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.user_username`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.user_avatar`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.repo_name`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.repo_url`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.web_url`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.commit_sha`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.commit_title`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.commit_message`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.commit_timestamp`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.commit_author_name`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.commit_author_email`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.branch`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.default_branch`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.x_gitlab_event_id`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger_parameters.gitlab.is_fork_merge_request`
+d| [.nowrap]#GitLab#
+|
+| See GitLab documentation for link:https://docs.gitlab.com/ee/user/project/integrations/webhooks.html[webhooks] and link:https://docs.gitlab.com/ee/user/project/integrations/webhook_events.html[webhook events].
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+|===
+--
+
+[#deploy-information]
+=== Deploy information
+
+Values prefixed with `+pipeline.deploy.*+` are only available for deployment pipelines. See the xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides for more information.
+
+[.table-scroll]
+--
+[.datatable.no-sort-col-3,cols="2,2,1,5,1,1", options="header"]
+|===
+| Variable
+| Source
+| Type
+| Value
+| Cloud
+| Server
+
 | `pipeline.deploy.component_name`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the component that will be rolled back or deployed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The name of the component that will be rolled back or deployed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.environment_name`
 d| [.nowrap]#GitHub App#
 | String
-| The name of the environment in which the rollback or deploy will be performed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The name of the environment in which the rollback or deploy will be performed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.target_version`
 d| [.nowrap]#GitHub App#
 | String
-| The version of the component that needs to be rolled back to or deployed. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The version of the component that needs to be rolled back to or deployed.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.current_version`
 d| [.nowrap]#GitHub App#
 | String
-| The current version of the component that is going to be rolled back or deployed. Can be used to verify that the status of the component matches expectations. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The current version of the component that is going to be rolled back or deployed. Can be used to verify that the status of the component matches expectations.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.namespace`
 d| [.nowrap]#GitHub App#
 | String
-| The namespace of the environment that was deployed to. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The namespace of the environment that was deployed to.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
 | `pipeline.deploy.reason`
 d| [.nowrap]#GitHub App#
 | String
-| The reason for the deployment or rollback. Only for use with rollbacks and deploys. See xref:guides:deploy:set-up-rollbacks.adoc[Set up a Rollback Pipeline] and xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] guides.
+| The reason for the deployment or rollback.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
