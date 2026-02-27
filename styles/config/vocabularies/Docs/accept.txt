@@ -3,6 +3,7 @@
 \bbitbucket organization\b
 .circleci/config.yml
 [Aa]gentless
+[Aa]gentic
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?

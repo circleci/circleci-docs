@@ -231,6 +231,25 @@ The minimum permissions required for your AWS account are as follows (you will n
 }
 ----
 
+[#gcp-artifact-registry]
+== GCP Artifact Registry
+
+CircleCI supports pulling private images from Google Cloud Artifact Registry (GAR) and Google Container Registry (GCR).
+
+The best practice approach is to pull from GAR/GCR using OpenID Connect (OIDC). See the xref:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc[Pull an Image From GCP Artifact Registry With OIDC] how-to guide for full details.
+
+Some advantages to using OIDC over using GCP service account keys:
+
+* **Improved security**: OIDC authentication removes the need to store GCP service account keys in your CircleCI configuration or environment variables, reducing the risk of exposure.
+
+* **Simplified credential management**: OIDC allows CircleCI to automatically manage the authentication process, eliminating the need to manually manage and rotate GCP service account keys.
+
+* **Fine-grained access control**: By associating a service account with the OIDC authentication, you can control the exact permissions granted to CircleCI for pulling images, ensuring a least-privilege approach.
+
+You can also authenticate using a GCP service account key stored as a CircleCI environment variable. Use it to configure Docker credentials before pulling the image in your job steps.
+
+NOTE: Public images hosted on GAR or GCR do not require authentication configuration. CircleCI pulls them without credentials.
+
 ifndef::pdf[]
 ## See also
 

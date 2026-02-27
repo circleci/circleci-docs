@@ -348,4 +348,4 @@ This approach significantly reduces configuration duplication, improves security
 
 * xref:config-policies:config-policy-management-overview.adoc[Learn about config policy management]
 * xref:reference:ROOT:reusing-config.adoc[Explore other configuration reuse patterns]
-* xref:orbs:author:orb-concepts.adoc[Understand orbs concepts and design]
+* xref:orbs:use:orb-concepts.adoc[Understand orbs concepts and design]
