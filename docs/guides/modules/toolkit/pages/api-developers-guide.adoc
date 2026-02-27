@@ -457,7 +457,7 @@ For a more detailed breakdown of each value returned in this request, refer to t
 [#download-artifacts]
 === Download artifacts
 
-The following section details the steps you need to follow to download artifacts that are generated when a job is run. First, you will return a list of artifacts for a job. Then, you will download the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline without needing to specify a job number, see the xref:optimize:artifacts.adoc#downloading-all-artifacts-for-a-build-on-circleci[Downloading All Artifacts for a Build on CircleCI] guide. Keep checking back here as this functionality will be added to API v2 in the future.
+The following section details the steps to download artifacts that are generated when a job is run. First, you will return a list of artifacts for a job. Then, you will download the full set of artifacts. If you want to download the _latest_ artifacts for a pipeline without specifying a job number, see the xref:optimize:artifacts.adoc#downloading-all-artifacts-for-a-build-on-circleci[Downloading All Artifacts for a Build on CircleCI] guide. Keep checking back here as this functionality will be added to API v2 in the future.
 
 [#download-artifacts-steps]
 ==== Steps
