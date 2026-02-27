@@ -430,8 +430,7 @@ d| [.nowrap]#Custom webhook#
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
-| [.line-through]#GitHub App, GitLab.# +
-Use `pipeline.trigger.type` instead.
+|Use `pipeline.trigger.type` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -440,8 +439,7 @@ Use `pipeline.trigger.type` instead.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
-| [.line-through]#Timestamp CircleCI received the event.# +
-Use `pipeline.trigger.received_at` instead.
+|Use `pipeline.trigger.received_at` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -450,8 +448,7 @@ Use `pipeline.trigger.received_at` instead.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
-| [.line-through]#GitHub App: push. GitLab: push, merge request.# +
-Use `pipeline.event.name` instead.
+|Use `pipeline.event.name` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -459,8 +456,7 @@ Use `pipeline.event.name` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
+|For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -468,8 +464,7 @@ For push events, use `pipeline.event.github.ref`. For pull request events, use `
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.git.revision` instead.
+|Use `pipeline.git.revision` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -477,8 +472,7 @@ Use `pipeline.git.revision` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-No direct replacement is available. If this value is critical to your workflows, contact CircleCI Support.
+|No direct replacement is available. If this value is critical to your workflows, contact CircleCI Support.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -486,8 +480,7 @@ No direct replacement is available. If this value is critical to your workflows,
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.event.github.sender.login` instead.
+|Use `pipeline.event.github.sender.login` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -495,8 +488,7 @@ Use `pipeline.event.github.sender.login` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.event.github.sender.login` instead.
+|Use `pipeline.event.github.sender.login` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -504,8 +496,7 @@ Use `pipeline.event.github.sender.login` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.event.github.sender.avatar_url` instead.
+|Use `pipeline.event.github.sender.avatar_url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -513,8 +504,7 @@ Use `pipeline.event.github.sender.avatar_url` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.event.github.repository.name` instead.
+|Use `pipeline.event.github.repository.name` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -522,8 +512,7 @@ Use `pipeline.event.github.repository.name` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.event.github.repository.url` instead.
+|Use `pipeline.event.github.repository.url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -531,8 +520,7 @@ Use `pipeline.event.github.repository.url` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.event.github.repository.url` instead.
+|Use `pipeline.event.github.repository.url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -540,8 +528,7 @@ Use `pipeline.event.github.repository.url` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.event.github.after` instead.
+|Use `pipeline.event.github.after` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -549,8 +536,7 @@ Use `pipeline.event.github.after` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-For the checkout commit subject, use `pipeline.git.commit.subject`.
+|For the checkout commit subject, use `pipeline.git.commit.subject`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -558,8 +544,7 @@ For the checkout commit subject, use `pipeline.git.commit.subject`.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-For the checkout commit body, use `pipeline.git.commit.body`. For the commit subject, use `pipeline.git.commit.subject`.
+|For the checkout commit body, use `pipeline.git.commit.body`. For the commit subject, use `pipeline.git.commit.subject`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -567,8 +552,7 @@ For the checkout commit body, use `pipeline.git.commit.body`. For the commit sub
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-Use `pipeline.trigger.received_at` instead.
+|Use `pipeline.trigger.received_at` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -576,8 +560,7 @@ Use `pipeline.trigger.received_at` instead.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author.name`.
+|For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author.name`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -585,8 +568,7 @@ For the user who triggered the push event, use `pipeline.event.github.sender.*`.
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
-For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
+|For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
