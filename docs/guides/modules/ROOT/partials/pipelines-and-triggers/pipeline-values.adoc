@@ -129,7 +129,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
+| The name of the git tag that was pushed to trigger the pipeline. Empty if the pipeline was not triggered by a tag.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -140,7 +140,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git branch that was pushed to trigger the pipeline.
+| The name of the git branch that was pushed to trigger the pipeline. Empty if the pipeline was triggered by a tag push.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -177,7 +177,7 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.git.repo_owner`
 d| [.nowrap]#GitHub App#
 | String
-| The login name of the repository owner.
+| The VCS username of the repository owner.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -235,7 +235,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The login name of the author of the checkout commit.
+| The VCS username of the author of the checkout commit.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
