@@ -147,7 +147,7 @@ d| [.nowrap]#GitHub OAuth# +
 [#configuration-source]
 === Configuration source information
 
-Values prefixed with `+pipeline.config.*+` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out — so use the corresponding `+pipeline.git.*+` values instead.
+Values prefixed with `+pipeline.config.*+` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out - so use the corresponding `+pipeline.git.*+` values instead.
 
 [.table-scroll]
 --
@@ -426,7 +426,7 @@ d| [.nowrap]#Custom webhook#
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.trigger_type` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
@@ -436,7 +436,7 @@ Use `pipeline.trigger.type` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_time` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
@@ -446,7 +446,7 @@ Use `pipeline.trigger.received_at` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_type` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
@@ -456,7 +456,7 @@ Use `pipeline.event.name` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.ref` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -465,7 +465,7 @@ For push events, use `pipeline.event.github.ref`. For pull request events, use `
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.checkout_sha` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -474,7 +474,7 @@ Use `pipeline.git.revision` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_id` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -483,7 +483,7 @@ No direct replacement is available. If this value is critical to your workflows,
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_name` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -492,7 +492,7 @@ Use `pipeline.event.github.sender.login` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_username` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -501,7 +501,7 @@ Use `pipeline.event.github.sender.login` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_avatar` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -510,7 +510,7 @@ Use `pipeline.event.github.sender.avatar_url` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.repo_name` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -519,7 +519,7 @@ Use `pipeline.event.github.repository.name` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.repo_url` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -528,7 +528,7 @@ Use `pipeline.event.github.repository.url` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.web_url` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -537,7 +537,7 @@ Use `pipeline.event.github.repository.url` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_sha` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -546,7 +546,7 @@ Use `pipeline.event.github.after` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_title` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -555,7 +555,7 @@ For the checkout commit subject, use `pipeline.git.commit.subject`.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_message` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -564,7 +564,7 @@ For the checkout commit body, use `pipeline.git.commit.body`. For the commit sub
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_timestamp` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -573,7 +573,7 @@ Use `pipeline.trigger.received_at` instead.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_author_name` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
@@ -582,7 +582,7 @@ For the user who triggered the push event, use `pipeline.event.github.sender.*`.
 | [.circle-red]#**No**#
 
 | image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.branch` +
-*Deprecated* — support ends on 2026-08-01.
+*Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 | [.line-through]#See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].# +
