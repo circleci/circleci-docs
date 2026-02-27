@@ -1,14 +1,15 @@
-= Skip CI and cancel workflows
+= Skip CI, auto-cancel, and block new pipelines
 :page-platform: Cloud, Server v4+
-:page-description: This document describes the options available to you for controlling when work is automatically carried out on your project, by skipping jobs or auto-cancelling workflows.
+:page-description: Skip CI builds, auto-cancel redundant workflows, and block new work for your CircleCI organization or project.
 :experimental:
 
-This page describes how to skip or cancel work when triggering pipelines, as follows:
+This page describes how to skip, cancel, or block work when triggering pipelines, as follows:
 
 * The CI processes can be skipped for a commit, on push to your repo.
 * Workflows can be cancelled using the auto-cancel feature.
+* All new work can be blocked for an organization or project during an incident or emergency.
 
-Both methods are described below.
+All methods are described below.
 
 [#skip-jobs]
 == Skip CI for a specific push
@@ -34,7 +35,7 @@ A few points to note regarding the scope of the `ci skip` feature:
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 * For GitHub OAuth and Bitbucket Cloud pipelines, this functionality applies also when the pipeline is triggered via API, manually via the web app, or via schedule.
-* GitHub App pipelines triggered via Custom webhook or via schedule are never skipped
+* GitHub App pipelines triggered via Custom webhook, schedule or API are never skipped
 
 === Example commit title
 
@@ -98,3 +99,35 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 
 * Scheduled workflows
 * Re-run workflows
+
+[#block-all-new-work]
+== Block all new work
+
+NOTE: For server customers, this feature will be available in Server 4.10+.
+
+Use this setting to immediately stop all new work from starting during an incident or emergency. When enabled, new pipelines are not created and users cannot rerun workflows. 
+
+This setting is designed for situations where you need to quickly halt all CI/CD activity across an organization or for a specific project. It is available in the **Advanced** section of both **Organization Settings** and **Project Settings**. An organization-level block prevents all new work across every project in the organization. A project-level block only affects the specific project.
+
+**In-progress workflows are not affected.** Workflows that are already running when you enable this setting continue until they complete, fail, or are cancelled.
+
+[#enable-block-new-work-for-an-organization]
+=== Enable block new work for an organization
+
+. In the CircleCI web app, select **Org** from the sidebar to enter your organization settings.
+. Select **Advanced**.
+. Toggle the **Block all new work from starting for this organization** switch to the on position.
+
+[#enable-block-new-work-for-a-project]
+=== Enable block new work for a project
+
+. In the CircleCI web app, select **Projects** from the sidebar.
+. Select the ellipsis (image:guides:ROOT:icons/more.svg[more icon, role="no-border"]) next to your project and select **Project Settings**.
+. Select **Advanced**.
+. Toggle the **Block all new work from starting for this project** switch to the on position.
+
+
+
+
+
+

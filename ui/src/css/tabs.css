@@ -14,7 +14,7 @@
 
 .tablist > ul li {
   align-items: center;
-  background-color: #fff;
+  background-color: var(--color-white);
   cursor: pointer;
   display: flex;
   font-weight: 400;
@@ -63,7 +63,7 @@
 }
 
 .tabs.is-loading .tablist li:first-child::after {
-  background-color: #fff;
+  background-color: var(--color-white);
 }
 
 /*
@@ -79,7 +79,7 @@
 }
 
 .tabpanel {
-  background-color: #fff;
+  background-color: var(--color-white);
   padding: calc(40 / var(--rem-base) * 1rem) 0 calc(20 / var(--rem-base) * 1rem) 0;
 }
 

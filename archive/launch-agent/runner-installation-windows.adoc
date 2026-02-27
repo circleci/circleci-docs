@@ -94,7 +94,7 @@ Uninstalling machine runners will prepare the system for installation again.
 [#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
 == Continuous mode vs. single task mode for Windows self-hosted runners
 
-By default, Windows machine runners run in <<runner-config-reference#runner-mode,single task mode>> in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. Single task mode is the **recommended mode** for Windows machine runners.
+By default, Windows machine runners run in <<machine-runner-3-configuration-reference#runner-mode,single task mode>> in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. Single task mode is the **recommended mode** for Windows machine runners.
 
 A Windows machine runner *can* be run in `continuous` mode, however, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected and failing.
 

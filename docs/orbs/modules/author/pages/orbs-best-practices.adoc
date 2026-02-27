@@ -68,7 +68,7 @@ When orbs are published to the Orb Registry they are searchable by their name an
 [#include-display-links]
 ==== Include display links
 
-Orbs utilize a special config key xref:orb-author.adoc#orbyml[`display`] that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
+Orbs utilize a special config key xref:author:create-test-and-publish-a-registry-orb.adoc#orbyml[`display`] that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
 
 [,yaml]
 ----
@@ -228,7 +228,7 @@ Executors are especially useful outside of orbs, as a way to create link:https:/
 [#examples]
 === Examples
 
-Orb xref:orb-concepts.adoc#usage-examples[Usage Examples] provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
+Orb xref:use:orb-concepts.adoc#usage-examples[Usage Examples] provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
 
 Be sure to name your usage examples so they reflect the use-case they demonstrate.
 
@@ -318,7 +318,7 @@ steps:
       command: <<include(script/your_script.sh)>>
 ----
 
-When building orbs, it is typical to xref:orb-concepts.adoc#file-include-syntax[write your code in a separate file] to avoid some of the pitfalls of YAML, as well as gaining access to syntax highlighting and other features in your IDE. In this example, we are including a script named `your_script.sh` which contains the following code:
+When building orbs, it is typical to xref:use:orb-concepts.adoc#file-include-syntax[write your code in a separate file] to avoid some of the pitfalls of YAML, as well as gaining access to syntax highlighting and other features in your IDE. In this example, we are including a script named `your_script.sh` which contains the following code:
 
 [,bash]
 ----
@@ -339,7 +339,7 @@ When installing any binary into a potentially unknown user-defined Docker image,
 [discrete#always-follow-strict-semantic-versioning]
 ==== Always follow strict semantic versioning
 
-Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood xref:orb-concepts.adoc#semantic-versioning[semantic versioning].
+Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood xref:use:orb-concepts.adoc#semantic-versioning[semantic versioning].
 
 [#keep-a-changelog]
 === Keep a changelog

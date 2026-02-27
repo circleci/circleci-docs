@@ -140,7 +140,7 @@ For `circleci` type organizations, projects are created directly in CircleCI via
 
 === Organization integration
 
-The organizaiton integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
+The organization integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
 
 [.table-scroll]
 --
@@ -187,7 +187,7 @@ The following limits are currently in place for the Free Plan:
 - Each user can create up to three `circleci` organizations on the Free Plan.
 - Each `circleci` organization under a Free Plan can have up to 10 projects.
 
-If you need more organizations or projects, consider upgrading to a Paid Plan or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team]. See hte xref:plans-pricing:plan-overview.adoc[Plan Overview] page for more information.
+If you need more organizations or projects, consider upgrading to a Paid Plan or link:https://support.circleci.com/hc/en-us/requests/new[contact our Support team]. See the xref:plans-pricing:plan-overview.adoc[Plan Overview] page for more information.
 
 == Quickstart
 

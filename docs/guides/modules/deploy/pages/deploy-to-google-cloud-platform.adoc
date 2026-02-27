@@ -45,7 +45,7 @@ In the following example, if the `build-job` passes and the current branch is `m
 version: 2.1
 
 jobs:
-  # build job ommitted for brevity
+  # build job omitted for brevity
   deploy-job:
     docker:
       - image: <docker-image-name-tag>

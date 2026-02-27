@@ -1,9 +1,10 @@
 site:
-  title: CircleCI Documentation
+  title: CircleCI Docs
   url: https://circleci.com/docs
   robots: allow
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
+    google_analytics: 'GTM-W9HDVK'
 runtime:
   log:
     format: pretty
@@ -34,6 +35,8 @@ content:
   - url: .
     start_path: docs/server-admin-4.2
   - url: .
+    start_path: docs/services
+  - url: .
     start_path: docs/contributors
 ui:
   bundle:
@@ -53,8 +56,8 @@ asciidoc:
     serverversion44: 4.4.7
     serverversion45: 4.5.5
     serverversion46: 4.6.6
-    serverversion47: 4.7.13
-    serverversion48: 4.8.7
+    serverversion47: 4.7.15
+    serverversion48: 4.8.8
     serverversion49: 4.9.1
     terraformversion: 0.15.4
     dockerversion: v28

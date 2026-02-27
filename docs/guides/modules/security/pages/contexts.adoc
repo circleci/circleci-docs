@@ -5,7 +5,7 @@
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
 
-If you have existing contexts (or environment variables) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. mFollowing these steps will ensureyou do not lose access to contexts or environment variables in the process.
+If you have existing contexts (or environment variables) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. Following these steps will ensure you do not lose access to contexts or environment variables in the process.
 
 [#overview]
 == Overview
@@ -29,7 +29,7 @@ NOTE: Context names must be unique for each VCS organization. The default name f
 Be aware that organization members can create contexts, but only organization administrators can restrict them using security groups. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
 +
 .Organization settings contexts page
-image::guides:ROOT:org-settings-contexts-v2.png[Contexts]
+image::guides:ROOT:org-settings-contexts.png[Contexts]
 
 . Select btn:[Create Context], add a unique name for your context and select btn:[Create Context] in the modal to finalize. The new context will appear in a list with security set to `All members` to show that anyone in your organization can access this context at runtime.
 . You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add Environment Variable] to enter the variable name and value. Select btn:[Add Environment Variable] in the modal to finalize.
@@ -163,7 +163,7 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 [#security-group-restrictions]
 == Security group restrictions
 
-NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. Form more infomation on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
+NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
 
 A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Organization Settings[Security].
 

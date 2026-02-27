@@ -14,7 +14,8 @@ script: |
   // Articles, coordinating conjunctions, and short prepositions only
   lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
                       "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
-
+  // Words with intentional capitalization that should be ignored by title case rules
+  exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS"]
   for i, line in lines {
     // Find all xref patterns: xref:path[Link Text]
     xref_pattern := "xref:[^\\[]+\\[([^\\]]+)\\]"
@@ -27,6 +28,12 @@ script: |
 
         // Skip if empty or contains only special chars
         if link_text == "" || text.trim_space(link_text) == "" {
+          continue
+        }
+
+        // Skip if link text starts with a backtick (code references)
+        trimmed_link := text.trim_space(link_text)
+        if text.re_match("^`", trimmed_link) {
           continue
         }
 
@@ -45,6 +52,22 @@ script: |
 
           // Skip if not alphabetic (numbers, etc.)
           if !text.re_match("[a-zA-Z]", clean_word) {
+            continue
+          }
+          // Skip exception words entirely
+          is_exception := false
+          for exception in exception_words {
+            if clean_word == exception {
+              is_exception = true
+              break
+            }
+          }
+          if is_exception {
+            continue
+          }
+
+          // Skip iOS (capitalized) - only allow capitalized version
+          if clean_word == "iOS" {
             continue
           }
 
