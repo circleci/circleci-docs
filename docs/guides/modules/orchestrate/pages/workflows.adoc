@@ -201,11 +201,7 @@ workflows:
             - build
       - cleanup:
           requires:
-            - test:
-              - success
-              - failed
-              - canceled
-              - not_run
+            - test: terminal
 ----
 
 * The `test` job waits for the `build` job, and only runs if the `build` job is successful.
