@@ -270,7 +270,7 @@
 *** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound webhooks reference]
 *** xref:integration:notifications.adoc[Notifications]
 ** VCS integration
-*** xref:integration:version-control-system-integration-overview.adoc[VCS integration overview]
+*** xref:integration:version-control-system-integration-overview.adoc[VCS, pipeline types, and feature support]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
 *** xref:integration:oss.adoc[Build open source projects]
 

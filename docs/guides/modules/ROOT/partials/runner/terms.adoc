@@ -7,26 +7,20 @@ Web app installation::
 +
 --
 
-Before you can install self-hosted runners through the web app, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To be able to gain access to the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app] or your CircleCI server app, an admin in your organization needs to navigate to menu:Organization Settings[Self-Hosted Runners], and agree to the terms.
+Before you can install self-hosted runners through the web app, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To access the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app] an organization admin must agree to the terms at menu:Organization Settings[Self-Hosted Runners].
 
+.Runner terms and conditions
 image::guides:ROOT:runnerui_terms.png[Runner terms and conditions]
 
 Once the terms have been accepted, **Self-Hosted Runners** will appear permanently in the side navigation.
 
 Your role within your org is determined differently depending on how you integrate with your code, as follows:
 
-* If your code is integrated with CircleCI via the GitHub OAuth App or Bitbucket Cloud, CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
+* If you have a `github` or `bitbucket` type organization, CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
 
-* If your code is integrated with CircleCI via the GitHub App, GitLab, or Bitbucket Data Center, you can check roles by navigating to menu:Organization Settings[People]. Full details on roles and permissions are available in the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview].
+* If you have a `circleci` type organization, you can check roles by navigating to menu:Organization Settings[People]. Full details on roles and permissions are available in the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview].
 
-****
-To find out which GitHub integration you are using, head to the link:https://app.circleci.com[CircleCI web app], select your org, select **Organization Home** from the sidebar, and inspect the URL in your browser:
-
-* This style of URL indicates you authenticated with the **GitHub App**: `https://app.circleci.com/organization/circleci/UTxCZDiJ9MLGLC8hR1ZDmg`
-* This style of URL indicates you authenticated with the **GitHub OAuth app**: `https://app.circleci.com/pipelines/github/<your GitHub username/organization name>`
-
-For more information about the differences, see the link:https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/differences-between-github-apps-and-oauth-apps[GitHub docs comparison page].
-****
+TIP: Find out about organization types in the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations and Integrations Guide].
 --
 CLI installation::
 +

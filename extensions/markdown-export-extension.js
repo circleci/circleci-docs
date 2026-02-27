@@ -89,25 +89,6 @@ module.exports.register = function () {
       }
     })
 
-    /**
-     * CUSTOM RULE: Remove Mermaid Diagrams
-     *
-     * Mermaid diagrams are rendered as SVG/canvas in HTML but don't
-     * export well to markdown. Remove them from the export.
-     */
-    turndownService.addRule('removeMermaid', {
-      filter: function (node) {
-        return (
-          node.nodeName === 'DIV' &&
-          (node.classList.contains('mermaid') ||
-           node.classList.contains('mermaidTooltip') ||
-           node.classList.contains('openblock'))
-        )
-      },
-      replacement: function () {
-        return '' // Replace diagrams with empty string
-      }
-    })
 
     /**
      * CUSTOM RULE: Clean Up Headings
@@ -256,6 +237,55 @@ module.exports.register = function () {
         // Remove toolbars and edit links
         const toolbars = article.querySelectorAll('.toolbar, .page-versions, .edit-this-page')
         toolbars.forEach(el => el.remove())
+
+        /**
+         * FLATTEN TABS
+         *
+         * Tabs are interactive UI that don't work in markdown. Convert them to
+         * sequential content with bold labels for each tab.
+         */
+        const tabBlocks = article.querySelectorAll('.openblock.tabs')
+        tabBlocks.forEach(tabBlock => {
+          // Get tab labels
+          const tabLabels = []
+          const tabItems = tabBlock.querySelectorAll('.tablist .tab')
+          tabItems.forEach(tab => {
+            tabLabels.push(tab.textContent.trim())
+          })
+
+          // Get tab panels and build replacement HTML
+          const tabPanels = tabBlock.querySelectorAll('.tabpanel')
+          let replacementHtml = '<div class="tabs-content">'
+
+          tabPanels.forEach((panel, index) => {
+            if (tabLabels[index]) {
+              replacementHtml += `<p><strong>${tabLabels[index]}:</strong></p>`
+            }
+            replacementHtml += panel.innerHTML
+          })
+
+          replacementHtml += '</div>'
+
+          // Replace the entire tab block with flattened content
+          tabBlock.replaceWith(replacementHtml)
+        })
+
+        /**
+         * CONVERT MERMAID TO CODE BLOCKS
+         *
+         * Extract mermaid diagrams and convert them to proper <pre><code> blocks
+         * so Turndown's code block rule handles them with proper whitespace preservation.
+         */
+        const mermaidDivs = article.querySelectorAll('.mermaid.content')
+        mermaidDivs.forEach(mermaidDiv => {
+          // Get raw text which preserves newlines in node-html-parser
+          const mermaidCode = mermaidDiv.rawText || mermaidDiv.textContent || ''
+
+          // Replace with a proper code block that Turndown knows how to handle
+          // Use <pre><code> structure so Turndown's code block rule processes it
+          const codeBlock = `<pre><code class="language-mermaid">${mermaidCode.trim()}</code></pre>`
+          mermaidDiv.replaceWith(codeBlock)
+        })
       }
 
       // Get the cleaned HTML content
