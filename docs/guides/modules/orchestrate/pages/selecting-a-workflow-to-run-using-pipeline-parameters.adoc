@@ -3,7 +3,7 @@
 :page-description: "A how-to guide for selecting a workflow to run using pipeline parameters."
 :experimental:
 
-You might find that you want to manually trigger a specific workflow to run using the API but still run a workflow on every push to your project. To achieve this, use xref:pipeline-variables.adoc#pipeline-parameters-in-configuration[pipeline parameters] to decide which workflow(s) to run.
+You might find that you want to manually trigger a specific workflow to run using the API but still run a workflow on every push to your project. To achieve this, use xref:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters] to decide which workflow(s) to run.
 
 [#config]
 == config.yml
@@ -56,7 +56,7 @@ The `action` parameter will default to `build` on pushes to the project. Below i
 
 In this example, the workflow named `report` would run. Remember to substitute xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[`project-slug`] with your values.
 
-CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+CAUTION: For GitHub App, GitLab or Bitbucket Data Center pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 
 [source,shell]
 ----
@@ -72,4 +72,4 @@ include::ROOT:partial$tips/find-project-slug.adoc[]
 [#next-steps]
 == Next steps
 
-For more information on using API v2 endpoints, see the link:https://circleci.com/docs/api/v2/[API Reference Documentation] and the xref:toolkit:api-developers-guide.adoc#example-end-to-end-api-request[API Developers Guide end-to-end example].
+For more information on using API v2 endpoints, see the link:https://circleci.com/docs/api/v2/[API Reference Documentation] and the xref:toolkit:api-developers-guide.adoc#example-end-to-end-api-request[API Developers Guide] end-to-end example.

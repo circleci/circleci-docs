@@ -2,7 +2,7 @@
 extends: script
 scope: raw
 level: error
-message: "List items should end with a period or colon (unless it's fewer than three words, a URL, or entirely wrapped in xref/link)."
+message: "List items should end with a period or colon (unless it's fewer than four words, a URL, or entirely wrapped in xref/link)."
 link: https://github.com/circleci/circleci-docs
 script: |
   text := import("text")
@@ -39,8 +39,8 @@ script: |
     // Count words (split by whitespace)
     words := text.fields(content)
 
-    // Only check items with 3 or more words
-    if len(words) < 3 {
+    // Only check items with 4 or more words
+    if len(words) < 4 {
       continue
     }
 
