@@ -21,7 +21,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+| A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique identifier] for the pipeline.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -32,7 +32,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | Integer
-| A project unique integer id for the pipeline.
+| A project-scoped integer identifier for the pipeline.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -129,7 +129,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git tag that was pushed to trigger the pipeline. Empty if the pipeline was not triggered by a tag.
+| The name of the git tag being checked out. Empty if checking out from a branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -140,7 +140,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git branch that was pushed to trigger the pipeline. Empty if the pipeline was triggered by a tag push.
+| The name of the git branch being checked out. Empty if checking out from a tag.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -151,7 +151,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | Boolean
-| Whether the branch the pipeline was triggered on is the default branch.
+| Whether the branch being checked out is the default branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**# (>= v4.7)
 
@@ -360,7 +360,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
+| The source that triggers the pipeline. Possible values: `webhook`, `api`, `scheduled_pipeline`.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -368,7 +368,7 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The name of the schedule trigger if the pipeline was triggered via schedule. The value will be empty string if the pipeline is triggered by other sources.
+| The name of the schedule trigger if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -376,7 +376,7 @@ d| [.nowrap]#GitHub OAuth# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The unique ID of the schedule if the pipeline was triggered via schedule trigger. Value will be empty string if the pipeline is triggered by other sources.
+| The unique ID of the schedule if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -516,7 +516,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.sender.login`
 d| [.nowrap]#GitHub App#
 | String
-| The login name of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
+| The VCS username of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -530,7 +530,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.repository.owner.login`
 d| [.nowrap]#GitHub App#
 | String
-| The login name of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
+| The VCS username of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -548,8 +548,8 @@ d| [.nowrap]#Custom webhook#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.trigger_type` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.circleci.trigger_type` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
@@ -557,8 +557,8 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_time` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.circleci.event_time` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
@@ -566,8 +566,8 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_type` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.circleci.event_type` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
@@ -575,120 +575,120 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.ref` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.ref` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.checkout_sha` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.checkout_sha` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.git.revision` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_id` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.user_id` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |No direct replacement is available. If this value is critical to your workflows, contact CircleCI Support.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_name` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.user_name` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.event.github.sender.login` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_username` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.user_username` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.event.github.sender.login` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.user_avatar` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.user_avatar` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.event.github.sender.avatar_url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.repo_name` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.repo_name` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.event.github.repository.name` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.repo_url` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.repo_url` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.event.github.repository.url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.web_url` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.web_url` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.event.github.repository.url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_sha` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.commit_sha` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.event.github.after` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_title` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.commit_title` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-|For the checkout commit subject, use `pipeline.git.commit.subject`.
+|Use `pipeline.git.commit.subject` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_message` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.commit_message` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-|For the checkout commit body, use `pipeline.git.commit.body`. For the commit subject, use `pipeline.git.commit.subject`.
+|Use `pipeline.git.commit.body` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_timestamp` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.commit_timestamp` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |Use `pipeline.trigger.received_at` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.commit_author_name` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.commit_author_name` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-|For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author.name`.
+|For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author_login`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.github_app.branch` +
-*Deprecated* - support ends on 2026-08-01.
+| `pipeline.trigger_parameters.github_app.branch` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
 |For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
