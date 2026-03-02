@@ -107,7 +107,7 @@ CircleCI automatically populates the following pipeline values when a cross-repo
 
 You can use these values directly in your configuration without declaring them as parameters.
 
-Here is an example consumer configuration file that uses the built-in pipeline values:
+Here is an example consumer configuration file that uses the built-in pipeline values. This configuration works for both Option 1 (config in consumer repository) and Option 2 (centralized config repository), as CircleCI automatically populates the pipeline values with trigger information regardless of where the config file is stored.
 
 .Example consumer configuration file using built-in pipeline values
 [source,yaml]
@@ -220,43 +220,7 @@ TIP: If your central config repository contains configurations for multiple proj
 
 .. For **Checkout source**, select your consumer repository from the dropdown menu (this is the repository whose code will be tested).
 .. Select **Save**.
-.. In your central config repository, create or update the configuration file at the path you specified. The configuration should reference the consumer repository code that will be checked out:
-+
-[source,yaml]
-----
-version: 2.1
-
-parameters:
-  library_version:
-    type: string
-    default: ""
-
-jobs:
-  test-consumer-integration:
-    docker:
-      - image: cimg/node:18.0
-    steps:
-      - checkout # this checks out code from the consumer repository
-      - run:
-          name: Display test context
-          command: |
-            echo "Testing consumer app against library version: << pipeline.parameters.library_version >>"
-            echo "Consumer repo: << pipeline.event.github.repository.name >>"
-      - run:
-          name: Install dependencies
-          command: npm install
-      - run:
-          name: Install specific library version
-          command: npm install @myorg/my-library@<< pipeline.parameters.library_version >>
-      - run:
-          name: Run integration tests
-          command: npm test
-
-workflows:
-  validate-integration:
-    jobs:
-      - test-consumer-integration
-----
+.. In your central config repository, create or update the configuration file at the path you specified using the example config from <<1-create-configuration-file-for-your-consumer-pipeline,step 1>>.
 +
 NOTE: When using centralized configuration, the `checkout` step will check out code from the consumer repository (the checkout source), not from the central config repository. This allows you to maintain configurations separately from application code.
 
