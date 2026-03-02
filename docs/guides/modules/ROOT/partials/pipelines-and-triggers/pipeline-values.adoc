@@ -129,7 +129,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git tag that was pushed to trigger the pipeline. Empty if the pipeline was not triggered by a tag.
+| The name of the git tag being checked out. Empty if checking out from a branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -140,7 +140,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git branch that was pushed to trigger the pipeline. Empty if the pipeline was triggered by a tag push.
+| The name of the git branch being checked out. Empty if checking out from a tag.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -151,7 +151,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | Boolean
-| Whether the branch the pipeline was triggered on is the default branch.
+| Whether the branch being checked out is the default branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**# (>= v4.7)
 
@@ -659,7 +659,7 @@ d| [.nowrap]#GitHub App#
 image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-|For the checkout commit subject, use `pipeline.git.commit.subject`.
+|Use `pipeline.git.commit.subject` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -667,7 +667,7 @@ d| [.nowrap]#GitHub App#
 image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-|For the checkout commit body, use `pipeline.git.commit.body`. For the commit subject, use `pipeline.git.commit.subject`.
+|Use `pipeline.git.commit.body` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
