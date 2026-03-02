@@ -20,7 +20,7 @@ On the **Organization Home** page, check which option you see:
 * If you see a btn:[Set up a project] button, follow steps to <<set-up-a-project>> below.
 * If you see a btn:[Create Project] button, follow steps to <<create-a-project>> below.
 
-NOTE: Using CircleCI server? Use the <<set-up-a-project>> steps below. Rather than Organization Home you will see Dashboard in the web app sidebar.
+NOTE: Using CircleCI Server? Use the <<set-up-a-project>> steps below. Rather than Organization Home you will see Dashboard in the web app sidebar.
 
 [#create-a-project]
 === Create a project
@@ -54,7 +54,7 @@ image::guides:ROOT:create-project/choose-a-repo-github.png[Choose a repository w
 .Set up your CircleCI config file
 image::guides:ROOT:create-project/set-up-your-config.png[Screenshot showing options to set up your config file]
 
-. Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:orchestrate:set-up-triggers.adoc[add more triggers] at this point too.
+. Set up triggers for your pipeline. A single GitHub App trigger is set up by default to build your project on every commit to your repo. You can xref:orchestrate:set-up-triggers.adoc[Add More Triggers] at this point too.
 +
 .Set up triggers for your pipeline
 image::guides:ROOT:create-project/set-up-your-triggers.png[Screenshot showing options to set up your triggers]
@@ -110,7 +110,7 @@ image::guides:ROOT:create-project/download-config-file.png[Modal showing options
 GitLab self-managed::
 +
 --
-CAUTION: Before creating a project that you want to integrate with code in a GitLab self-managed instance, you need to set up an integration with your GitLab self-managed instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[GitLab self-managed integration setup] page for more information.
+CAUTION: Before creating a project that you want to integrate with code in a GitLab self-managed instance, you need to set up an integration with your GitLab self-managed instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[Organization Integration Setup] page for more information.
 
 NOTE: **Remove GitLab CI/CD config** You should remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. There is an option to _disable_ GitLab CI/CD for a project in the GitLab UI but using this is **not recommended**.
 
@@ -134,7 +134,7 @@ image::guides:ROOT:create-project/authorize-gitlab-self-managed.png[Option to au
 image::guides:ROOT:create-project/create-new-gitlab-self-managed-project.png[Create new project window]
 +
 ****
-If you set up your GitLab self-managed instance you should see your instance URL and known_hosts. If not see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[integration instructions].
+If you set up your GitLab self-managed instance you should see your instance URL and known_hosts. If not see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[Integration Instructions].
 ****
 * Generate and add a personal access token with the `api` scope.
 
@@ -146,15 +146,15 @@ If you set up your GitLab self-managed instance you should see your instance URL
 ****
 For guidance on creating a `config.yml` file, see the following pages:
 
-* xref:config-intro.adoc[Configuration introduction]
-* xref:toolkit:sample-config.adoc[Sample config.yml files]
-* xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
+* xref:config-intro.adoc[Configuration Introduction]
+* xref:toolkit:sample-config.adoc[Sample Config.yml Files]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 ****
 --
 Bitbucket Data Center::
 +
 --
-CAUTION: Before creating a project that you want to integrate with code in a Bitbucket Data Center instance, you need to set up an integration with your Bitbucket Data Center instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[Bitbucket Data Center integration setup] page for more information.
+CAUTION: Before creating a project that you want to integrate with code in a Bitbucket Data Center instance, you need to set up an integration with your Bitbucket Data Center instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[Bitbucket Data Center Integration Setup] page for more information.
 
 Follow these steps to create a new project in CircleCI:
 
@@ -168,7 +168,7 @@ image::guides:ROOT:create-project/authorize-bitbucket-data-center.png[Choose a r
 . To set up your project you will need to create a project HTTP access token with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
 +
 ****
-If you set up your Bitbucket Data Center instance you should see your instance URL and known_hosts. If not see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[integration instructions].
+If you set up your Bitbucket Data Center instance you should see your instance URL and known_hosts. If not see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[Integration Instructions].
 ****
 
 ** Use the repository dropdown menu to tell CircleCI where your code is stored.
@@ -180,16 +180,16 @@ If you set up your Bitbucket Data Center instance you should see your instance U
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
 
-Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers at menu:Project settings[Project Setup] if your project integrates with GitHub, or at menu:Project settings[Triggers] if it integrates with GitLab or Bitbucket. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set up triggers] page.
+Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers at menu:Project settings[Project Setup] if your project integrates with GitHub, or at menu:Project settings[Triggers] if it integrates with GitLab or Bitbucket. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page.
 
 [#set-up-a-project]
 === Set up a project
 
-NOTE: If you authenticated CircleCI with either the xref:integration:github-integration.adoc[GitHub OAuth app] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud], or if you use CircleCI server, the steps in this section apply to you.
+NOTE: If you authenticated CircleCI with either the xref:integration:github-integration.adoc[GitHub OAuth App] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud], or if you use CircleCI Server, the steps in this section apply to you.
 
 Follow these steps to  set up a new project in CircleCI:
 
-. In the CircleCI web app, select **Organization Home** in the sidebar. The equivalent option in CircleCI server is **Dashboard**
+. In the CircleCI web app, select **Organization Home** in the sidebar. The equivalent option in CircleCI Server is **Dashboard**
 . Select btn:[Set up a project].
 +
 .Set up a project
@@ -221,10 +221,84 @@ To make changes to your pipeline, choose one of the following:
 .Access and edit a config file
 image::guides:ROOT:create-project/configuration-file.png[Edit Configuration File]
 
+[#troubleshooting]
+== Troubleshooting
+
+This section covers common issues you may encounter when creating a project in CircleCI.
+
+[#repository-not-visible]
+=== Repository not visible in the list
+
+If you do not see your repository when trying to connect it to a project, try the following:
+
+* If you are using the btn:[Set up project] flow, **Check your permissions**. Ensure you have admin access to the repository in your VCS provider. CircleCI requires admin permissions to set up projects.
+
+* If you are using the btn:[Create project] flow **re-authorize your VCS connection**. Select the btn:[Add] button and then select the btn:[Authorize] option for your VCS provider.
+
+* **Verify organization selection**: Select the CircleCI logo at the top of the web app to navigate to your user homepage and confirm you are in the correct organization.
+
+* **Check GitHub App installation**: If using GitHub App, verify the CircleCI app is installed on your github organization and has access to the repository. Go to your github organization settings, select **GitHub Apps**, and check the CircleCI app configuration.
+
+[#gitlab-cicd-conflicts]
+=== GitLab CI/CD running alongside CircleCI
+
+If you are experiencing duplicate builds or conflicts:
+
+. **Remove the GitLab CI/CD config file**: Delete the `.gitlab-ci.yml` file from your repository. This prevents GitLab from running its own CI/CD pipelines alongside CircleCI.
+
+. **Commit and push the change**: After removing the file, commit and push the change to your repository.
+
+CAUTION: Do not use the option to disable GitLab CI/CD in the GitLab UI. Remove the `.gitlab-ci.yml` file instead to prevent conflicts.
+
+[#self-managed-connection-problems]
+=== Self-managed instance connection problems
+
+For GitLab self-managed and Bitbucket Data Center integrations, if you encounter connection issues:
+
+. **Verify instance URL and known_hosts**: Ensure your self-managed instance URL and known_hosts are correctly configured. If these are not visible during project creation, complete the integration setup first. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[Integration Setup] page for more information.
+
+. **Check personal access token**: For GitLab self-managed, verify your personal access token has the `api` scope and has not expired. You may need to generate a new token in your GitLab instance.
+
+. **Check HTTP access token**: For Bitbucket Data Center, verify your HTTP access token has the project admin scope and has not expired. Generate tokens under Projects in your Bitbucket Data Center instance.
+
+. **Verify network connectivity**: Ensure CircleCI can reach your self-managed instance. Check firewall rules, network policies, and any VPN requirements that may block the connection.
+
+[#incomplete-project-setup]
+=== Incomplete project setup
+
+If you started creating a project but did not complete the guided setup process, you may have a project that is not fully configured. Symptoms include:
+
+* Project appears in your project list but has no pipelines.
+* Project has no triggers configured.
+* Project is not connected to a repository.
+
+To resolve this issue, choose one of the following options:
+
+**Option 1: Complete the setup process**
+
+. Navigate to menu:Project settings[Project Setup] (for GitHub App projects) or menu:Project settings[Pipelines] (for GitLab and Bitbucket projects).
+
+. Follow the prompts to complete the remaining setup steps:
+** Connect your code repository in the Checkout source field if not already connected.
+** Commit a CircleCI configuration file to your repository and update the config file path and config source fields.
+** Set up triggers for your pipeline.
+
+. Push a commit to your repository or use the btn:[Trigger Pipeline] button to trigger your first pipeline.
+
+**Option 2: Delete the project and start over**
+
+. Navigate to menu:Project settings[Overview].
+
+. Scroll to the bottom of the page and select btn:[Delete Project].
+
+. Confirm the deletion.
+
+. Follow the steps in the <<create-a-project>> or <<set-up-a-project>> section to create your project again, ensuring you complete all setup steps.
+
 [#see-also]
 == See also
 
 * xref:config-intro.adoc[Configuration Introduction]
-* xref:toolkit:sample-config.adoc[Sample config.yml files]
-* xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
+* xref:toolkit:sample-config.adoc[Sample Config.yml Files]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 * xref:config-editor.adoc[Using the CircleCI Configuration Editor]

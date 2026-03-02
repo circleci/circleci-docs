@@ -23,6 +23,7 @@ The CircleCI documentation is organized into logical components, each focusing o
 | `reference` | API and configuration references | `docs/reference/` |
 | `orbs` | CircleCI orbs documentation | `docs/orbs/` |
 | `server-admin` | Server administration guides | `docs/server-admin-4.*/` |
+| `services` | Field engineering service information | `docs/services` |
 | `contributors` | Contributor guidelines | `docs/contributors/` |
 
 ### File Organization
