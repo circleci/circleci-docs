@@ -19,8 +19,8 @@
   right: 0;
   margin-top: 0.5rem;
   width: 12rem;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-vapor);
+  background-color: var(--panel-background);
+  border: 1px solid var(--panel-border-color);
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
   z-index: 1000;
@@ -42,7 +42,7 @@
 
 .theme-menu-item:hover,
 .theme-menu-item:focus {
-  background-color: var(--color-smoke-50);
+  background-color: var(--body-background);
   outline: none;
 }
 
@@ -64,17 +64,4 @@
   display: block;
 }
 
-/* Dark mode styles for the dropdown */
-html[data-theme="dark"] .theme-menu {
-  background-color: var(--panel-background);
-  border-color: var(--panel-border-color);
-}
-
-html[data-theme="dark"] .theme-menu-item:hover,
-html[data-theme="dark"] .theme-menu-item:focus {
-  background-color: var(--body-background);
-}
-
-html[data-theme="dark"] #theme-toggle-button {
-  color: var(--color-white); /* White in dark mode for visibility */
-}
+/* Icon color is controlled by --color-terminal-black variable which changes in dark mode */

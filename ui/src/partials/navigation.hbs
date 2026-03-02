@@ -1,4 +1,4 @@
-<div data-page-navigation class="{{#if class}}{{class}}{{/if}} h-full border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-white" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
+<div data-page-navigation class="{{#if class}}{{class}}{{/if}} h-full border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-body-bg" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
   <aside class="relative h-full py-6 px-9 overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-thumb-fog scrollbar-track-vapor scrollbar-track-border">
     <div class="flex items-center justify-between lg:hidden text-terminal-black mb-10">
       <img data-page-navigation-back-button src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Arrow Back" class="invisible lg:hidden h-4 w-4">
@@ -10,7 +10,7 @@
     {{> component-explorer-nav class="hidden" options=(components-to-nav-list)}}
     <div class="flex flex-col space-between">
       {{> left-side-nav}}
-      <a href="https://app.circleci.com/" class="flex items-center mt-4 ml-2 gap-2 font-medium md:hidden bg-white" >
+      <a href="https://app.circleci.com/" class="flex items-center mt-4 ml-2 gap-2 font-medium md:hidden bg-body-bg" >
         Go to Application
         <div class="inline-flex h-[24px] w-[24px] rounded items-center justify-center bg-slime-green border border-accent-green text-dark-green">
           {{> arrow-back-icon class="rotate-180" width="13" height="13" ariaLabel="Go to Application"}}

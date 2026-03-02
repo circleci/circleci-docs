@@ -262,44 +262,55 @@
     /* PHASE 1: MINIMAL TEST COLORS (testing toggle mechanism) */
 
     /* Typography */
-    --body-font-color: #e1e1e1;
-    --heading-font-color: #ffffff;
+    --body-font-color: #D7DBE3;
+    --heading-font-color: #D7DBE3;
+    --doc-font-color: #D7DBE3;
 
     /* Surfaces */
-    --body-background: #1a1a1a;
+    --body-background: #0D1423;
     --panel-background: #2a2a2a;
     --panel-border-color: #404040;
+    --color-vapor: #1C273A;
 
     /* Links */
     --link-font-color: #6bb6ff;
     --link-hover-font-color: #8cc9ff;
 
-    /* NOTE: These are placeholder colors for testing.
-       Replace with Figma design values in Phase 3.
-       TODO: Add remaining 70+ semantic tokens */
+    /* Navigation */
+    --nav-heading-font-color: #A5AAB9;
+    --nav-muted-color: #A5AAB9;
+    --color-terminal-black: #A5AAB9;
+    --toc-font-color: #A5AAB9;
+    --toc-heading-font-color: #A5AAB9;
+
+    /* TODO: Add remaining semantic tokens */
   }
 }
 
 /* Manual dark theme - overrides system preference */
 html[data-theme="dark"] {
-  /* PHASE 1: MINIMAL TEST COLORS (testing toggle mechanism) */
-
   /* Typography */
-  --body-font-color: #e1e1e1;
-  --heading-font-color: #ffffff;
+  --body-font-color: #D7DBE3;
+  --heading-font-color: #D7DBE3;
 
   /* Surfaces */
-  --body-background: #1a1a1a;
+  --body-background: #0D1423;
   --panel-background: #2a2a2a;
   --panel-border-color: #404040;
+  --color-vapor: #1C273A;
 
   /* Links */
   --link-font-color: #6bb6ff;
   --link-hover-font-color: #8cc9ff;
 
-  /* NOTE: These are placeholder colors for testing.
-     Replace with Figma design values in Phase 3.
-     TODO: Add remaining 70+ semantic tokens */
+  /* Navigation */
+  --nav-heading-font-color: #A5AAB9;
+  --nav-muted-color: #A5AAB9;
+  --color-terminal-black: #A5AAB9;
+  --toc-font-color: #A5AAB9;
+  --toc-heading-font-color: #A5AAB9;
+
+  /* TODO: Add remaining semantic tokens */
 }
 
 /* Manual light theme - overrides system dark preference */

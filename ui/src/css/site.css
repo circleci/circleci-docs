@@ -32,6 +32,13 @@
   --color-disabled-element: var(--color-disabled-element);
   --shadow-default: var(--shadow-default);
 
+  /* Theme-aware semantic colors - these change with data-theme */
+  --color-body-bg: var(--body-background);
+  --color-panel-bg: var(--panel-background);
+  --color-body-text: var(--body-font-color);
+  --color-heading: var(--heading-font-color);
+  --color-panel-border: var(--panel-border-color);
+
   --breakpoint-lg: 75rem;
 }
 
