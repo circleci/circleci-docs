@@ -4,11 +4,11 @@
 :experimental:
 :page-show-readtime: true
 
-In this guide you will learn how to set up cross-repo triggers. A cross-repo trigger watches for events in a repository other than the one that contains the pipeline configuration. *Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository*.
+*Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository*. In this guide you will learn how to set up a cross-repo trigger. A cross-repo trigger watches for events in a repository other than the one that contains the pipeline configuration.
 
 *For this how-to guide we have chosen the following scenario:*
 
-When you tag a new release of an internal library, configure CircleCI to automatically run tests in the repositories that consume that library. Running integration tests validates that your library changes work correctly with dependent applications before you publish the release.
+When you tag a new release of an internal library, configure CircleCI to automatically run tests in the repositories that consume that library. Running integration tests validates that your library changes work with your dependent applications before you publish the release.
 
 *What you will set up:*
 
@@ -101,10 +101,9 @@ When a change to your library triggers your consumer pipeline, you need to know 
 
 CircleCI automatically populates the following pipeline values when a cross-repo trigger fires:
 
-* `pipeline.git.tag`: The tag name that was created (for tag triggers). Empty string if not triggered by a tag.
-* `pipeline.git.branch`: The branch name where the event occurred in the library repository.
-* `pipeline.git.revision`: The specific commit SHA from the library repository.
-* `pipeline.trigger_parameters.github_app.repo_name`: The name of the library repository that triggered the pipeline.
+* `pipeline.event.github.ref`: The full Git ref that was pushed, this will be a tag name for tag triggers.
+* `pipeline.event.github.after`: The SHA of the most recent commit on the branch after the push.
+* `pipeline.event.github.repository.name`: The name of the library repository that triggered the pipeline.
 
 You can use these values directly in your configuration without declaring them as parameters.
 
@@ -129,10 +128,9 @@ jobs:
           name: Display trigger information
           command: |
             echo "=== Cross-repo trigger information ==="
-            echo "Library version/tag: << pipeline.git.tag >>"
-            echo "Library branch: << pipeline.git.branch >>"
-            echo "Library commit: << pipeline.git.revision >>"
-            echo "Library repo: << pipeline.trigger_parameters.github_app.repo_name >>"
+            echo "Library version/tag: << pipeline.event.github.ref >>"
+            echo "Library commit: << pipeline.event.github.after >>"
+            echo "Library repo: << pipeline.event.github.repository.name >>"
 
       - run:
           name: Install consumer dependencies
@@ -145,12 +143,12 @@ jobs:
           name: Install library version from trigger
           command: |
             # In a real scenario, this would install from npm registry:
-            # npm install @myorg/my-library@<< pipeline.git.tag >>
+            # npm install @myorg/my-library@<< pipeline.event.github.ref >>
 
             echo "Installing library from trigger..."
-            LIBRARY_VERSION="<< pipeline.git.tag >>"
+            LIBRARY_VERSION="<< pipeline.event.github.ref >>"
             if [ -z "$LIBRARY_VERSION" ]; then
-              LIBRARY_VERSION="<< pipeline.git.revision >>"
+              LIBRARY_VERSION="<< pipeline.event.github.after >>"
             fi
             echo "Would install: @myorg/my-library@${LIBRARY_VERSION}"
             echo "Installation simulated successfully"
@@ -175,7 +173,7 @@ IMPORTANT: The `filters` section is required because CircleCI does not run workf
 
 In this example:
 
-* When a tag like `v1.2.3` is created in the library repository, `<< pipeline.git.tag >>` will contain `v1.2.3`.
+* When a tag like `v1.2.3` is created in the library repository, `<< pipeline.event.github.ref >>` will contain `v1.2.3`.
 * The workflow filter ensures the workflow runs for tag events.
 * The configuration installs that specific version using `npm install @myorg/my-library@v1.2.3`.
 * If triggered by a push (not a tag), it falls back to using the commit SHA.
@@ -243,7 +241,7 @@ jobs:
           name: Display test context
           command: |
             echo "Testing consumer app against library version: << pipeline.parameters.library_version >>"
-            echo "Consumer repo: << pipeline.trigger_parameters.github.repo_name >>"
+            echo "Consumer repo: << pipeline.event.github.repository.name >>"
       - run:
           name: Install dependencies
           command: npm install
@@ -295,7 +293,7 @@ If you are using a centralized config repository, you will also need to enter a 
 
 The trigger is now configured in CircleCI, but you also need to update your configuration file for your integration tests to run workflows for tags.
 
-By default, *CircleCI does not run workflows for tags unless you explicitly specify tag filters*.
+By default, *CircleCI does not run workflows for tags unless you explicitly specify tag filters*. For more information, see the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Executing Workflows for a Git Tag] section.
 
 In the configuration file for your consumer pipeline, add tag filters to your workflow if they are not already present. Here is an example:
 
