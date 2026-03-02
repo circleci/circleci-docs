@@ -1,5 +1,5 @@
 [#pipeline-and-project-identity]
-=== Pipeline and project identity
+=== Pipeline and project information
 
 These values provide core identifiers for the pipeline itself and the project it belongs to. They are available across all pipeline types and integration methods.
 
@@ -70,6 +70,39 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
+| `pipeline.project.slug`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The slug of the project the pipeline definition belongs to.
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `pipeline.name`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+_(except schedule workflows)_
+| String
+| The name of the pipeline definition.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.integration_source`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The pipeline type, determined by the VCS integration used to check out code. Possible values: `github_app`, `github`, `bitbucket`, `bitbucket_dc`, `gitlab`.
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
 |===
 --
 
@@ -96,7 +129,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
+| The name of the git tag that was pushed to trigger the pipeline. Empty if the pipeline was not triggered by a tag.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -107,7 +140,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git branch that was pushed to trigger the pipeline.
+| The name of the git branch that was pushed to trigger the pipeline. Empty if the pipeline was triggered by a tag push.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -132,6 +165,79 @@ d| [.nowrap]#GitHub App# +
 | The long (40-character) git SHA that is being built.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+
+| `pipeline.git.repo_url`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The URL of the repository.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.repo_owner`
+d| [.nowrap]#GitHub App#
+| String
+| The VCS username of the repository owner.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.repo_name`
+d| [.nowrap]#GitHub App#
+| String
+| The name of the repository, without the owner prefix.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.repo_id`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The unique identifier of the repository.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.commit.url`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab# +
+_(except schedule workflows)_
+| String
+| The URL of the checkout commit.
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `pipeline.git.commit.subject`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# _(push events only)_ +
+[.nowrap]#Bitbucket Cloud# _(push events only)_ +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The subject line of the checkout commit message.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.commit.body`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Cloud# _(push events only)_ +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The body of the checkout commit message.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.commit.author_login`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# _(push events only)_ +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The VCS username of the author of the checkout commit.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `pipeline.git.base_revision`
 d| [.nowrap]#GitHub OAuth# +
@@ -229,6 +335,23 @@ d| [.nowrap]#GitHub App# +
 | The timestamp of when the pipeline was triggered, in ISO 8601 format.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**Yes**#
+
+| `pipeline.trigger.id`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The unique ID of the trigger that initiated the pipeline.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger.type`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The type of trigger that initiated the pipeline. Possible values: `github_app`, `bitbucket_dc`, `schedule`, `webhook`, `api`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `pipeline.trigger_source`
 d| [.nowrap]#GitHub App# +
