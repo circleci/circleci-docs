@@ -1,4 +1,4 @@
-= Status checks overview
+= Status updates overview
 :page-platform: Cloud
 :page-description: An overview of commit statuses and GitHub Checks in CircleCI, including how they appear in GitHub, Bitbucket, and GitLab.
 :experimental:
@@ -7,38 +7,14 @@ CircleCI reports the status of your pipelines back to your version control syste
 
 CircleCI provides two types of status reporting:
 
-* Commit statuses, which report job-level status and are available for GitHub, Bitbucket, and GitLab.
-* GitHub Checks, which report workflow-level status and are available for GitHub only.
+*Status updates*:: CircleCI sends job level status information for every commit. Status updates are available for GitHub, Bitbucket, and GitLab. You can disable status updates in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **Status Updates** to `off`.
+*GitHub Checks*:: GitHub Checks reports workflow-level status and is available for GitHub only. You can enable GitHub Checks in the CircleCI web app by navigating to menu:Organization Settings[VCS Connections] and selecting **Manage GitHub Checks**. GitHub Checks is a GitHub App, and you will notice that from the GitHub UI the App is called **CircleCI Checks**. For information on setting up and using GitHub Checks, see the xref:guides:integration:enable-checks.adoc[Enable GitHub Checks] guide.
 
 == Introduction
 
-When a pipeline runs in CircleCI, status information is sent back to your VCS. This status information appears in pull requests and next to individual commits.
+When a pipeline runs in CircleCI, status information is sent back to your VCS. This status information appears in pull requests and next to individual commits and at the end of a pull/merge request.
 
-Understanding the difference between commit statuses and GitHub Checks helps you interpret the status information you see in your VCS and configure your branch protection rules correctly.
-
-The following diagram shows how CircleCI determines which type of status reporting applies to your project.
-
-[mermaid]
-....
-flowchart TD
-    A[Pipeline runs in CircleCI] --> B[Status sent to VCS]
-    B --> C{Using GitHub?}
-    C -->|No| D[Commit statuses only\nJob-level status\nAvailable for Bitbucket and GitLab]
-    C -->|Yes| E{GitHub Checks enabled?}
-    E -->|No| F[Commit statuses only\nJob-level status]
-    E -->|Yes| G[Commit statuses\nJob-level status in PR conversation view]
-    E -->|Yes| H[GitHub Checks\nWorkflow-level status in Checks tab]
-....
-
-== Commit statuses
-
-Commit statuses are the default way CircleCI reports pipeline status to your VCS. They are reported at the job level and are available for GitHub, Bitbucket, and GitLab.
-
-Each VCS provider uses slightly different terminology for this feature:
-
-* GitHub refers to these as status checks.
-* Bitbucket refers to these as build statuses or commit statuses.
-* GitLab refers to these as commit statuses.
+Status updates are the default way CircleCI reports pipeline status to your VCS. They are reported at the job level and are available for GitHub, Bitbucket, and GitLab.
 
 Commit statuses appear in the following locations in your VCS:
 
@@ -48,19 +24,6 @@ Commit statuses appear in the following locations in your VCS:
 #TO DO: Screenshot of commit statuses at the bottom of a GitHub PR, showing statuses updating live as jobs run.#
 
 The following diagram shows how CircleCI sends commit statuses to your VCS as a pipeline runs.
-
-[mermaid]
-....
-sequenceDiagram
-    participant C as CircleCI
-    participant V as VCS
-    participant D as Developer
-    C->>V: Pipeline starts, job status: pending
-    C->>V: Job 1 complete, status: success
-    C->>V: Job 2 complete, status: success
-    C->>V: Job 3 complete, status: failed
-    V->>D: Status updates visible in PR or next to commit
-....
 
 === Commit status naming
 
