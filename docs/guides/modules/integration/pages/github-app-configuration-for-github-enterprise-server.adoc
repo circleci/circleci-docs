@@ -44,6 +44,9 @@ NOTE: These lists are updated as new CircleCI features are introduced that requi
 | Permission
 | Access level
 
+| Metadata
+| Read
+
 | Commit statuses
 | Read and write
 
