@@ -21,7 +21,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+| A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique identifier] for the pipeline.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -32,7 +32,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | Integer
-| A project unique integer id for the pipeline.
+| A project-scoped integer identifier for the pipeline.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -360,7 +360,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
+| The source that triggers the pipeline. Possible values: `webhook`, `api`, `scheduled_pipeline`.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -368,7 +368,7 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The name of the schedule trigger if the pipeline was triggered via schedule. The value will be empty string if the pipeline is triggered by other sources.
+| The name of the schedule trigger if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -376,7 +376,7 @@ d| [.nowrap]#GitHub OAuth# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The unique ID of the schedule if the pipeline was triggered via schedule trigger. Value will be empty string if the pipeline is triggered by other sources.
+| The unique ID of the schedule if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -516,7 +516,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.sender.login`
 d| [.nowrap]#GitHub App#
 | String
-| The login name of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
+| The VCS username of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -530,7 +530,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.repository.owner.login`
 d| [.nowrap]#GitHub App#
 | String
-| The login name of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
+| The VCS username of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -683,7 +683,7 @@ d| [.nowrap]#GitHub App#
 *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-|For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author.name`.
+|For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author_login`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
