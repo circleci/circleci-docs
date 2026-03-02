@@ -250,3 +250,61 @@
   --z-index-page-version-menu: 3;
   --z-index-navbar: 4;
 }
+
+/* ============================================
+   DARK THEME OVERRIDES
+   Override semantic tokens for dark mode
+   ============================================ */
+
+/* System preference - applies if no manual override */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* PHASE 1: MINIMAL TEST COLORS (testing toggle mechanism) */
+
+    /* Typography */
+    --body-font-color: #e1e1e1;
+    --heading-font-color: #ffffff;
+
+    /* Surfaces */
+    --body-background: #1a1a1a;
+    --panel-background: #2a2a2a;
+    --panel-border-color: #404040;
+
+    /* Links */
+    --link-font-color: #6bb6ff;
+    --link-hover-font-color: #8cc9ff;
+
+    /* NOTE: These are placeholder colors for testing.
+       Replace with Figma design values in Phase 3.
+       TODO: Add remaining 70+ semantic tokens */
+  }
+}
+
+/* Manual dark theme - overrides system preference */
+html[data-theme="dark"] {
+  /* PHASE 1: MINIMAL TEST COLORS (testing toggle mechanism) */
+
+  /* Typography */
+  --body-font-color: #e1e1e1;
+  --heading-font-color: #ffffff;
+
+  /* Surfaces */
+  --body-background: #1a1a1a;
+  --panel-background: #2a2a2a;
+  --panel-border-color: #404040;
+
+  /* Links */
+  --link-font-color: #6bb6ff;
+  --link-hover-font-color: #8cc9ff;
+
+  /* NOTE: These are placeholder colors for testing.
+     Replace with Figma design values in Phase 3.
+     TODO: Add remaining 70+ semantic tokens */
+}
+
+/* Manual light theme - overrides system dark preference */
+html[data-theme="light"] {
+  /* Explicitly use light theme (already set in :root above) */
+  /* This selector has higher specificity than @media query */
+  /* No overrides needed - inherits from :root */
+}

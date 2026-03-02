@@ -1,2 +1,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script>
+// Theme initialization - runs before page render to prevent flash
+(function() {
+  function getTheme() {
+    // 1. Check localStorage for user preference
+    const stored = localStorage.getItem('theme');
+
+    // 2. If explicitly light or dark, use that
+    if (stored === 'light') return 'light';
+    if (stored === 'dark') return 'dark';
+
+    // 3. If auto or not set, check system preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+
+    // 4. Default to light
+    return 'light';
+  }
+
+  const theme = getTheme();
+  document.documentElement.setAttribute('data-theme', theme);
+  document.documentElement.style.colorScheme = theme;
+})();
+    </script>

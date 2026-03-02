@@ -13,6 +13,7 @@
 @import "print.css";
 @import "tabs.css";
 @import "datatables.css";
+@import "theme-toggle.css";
 
 @source inline("translate-x-0");
 @source inline("h-dvh");

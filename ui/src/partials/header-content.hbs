@@ -16,6 +16,79 @@
     <div class="flex items-center space-x-4 ml-2">
       <!--<img src="{{{uiRootPath}}}/img/language-icon.svg" alt="Language Icon" class="h-5 w-5">-->
       <img data-page-navigation-toggle src="{{{uiRootPath}}}/img/nav-menu.svg" alt="Navigation Menu Icon" class="h-5 w-5 lg:hidden">
+      <!-- Theme Toggle Dropdown (matches CircleCI app design) -->
+      <div class="theme-toggle-container relative">
+        <button
+          id="theme-toggle-button"
+          type="button"
+          class="flex items-center justify-center p-2 rounded-full hover:bg-smoke-50 transition-colors"
+          aria-label="Theme: auto. Click to change theme"
+          aria-expanded="false"
+          aria-haspopup="true"
+          tabindex="0"
+        >
+          <img
+            id="theme-toggle-icon"
+            src="{{{uiRootPath}}}/img/theme-toggle-icon.svg"
+            alt=""
+            class="h-5 w-5"
+            aria-hidden="true"
+          >
+        </button>
+
+        <!-- Theme Dropdown Menu -->
+        <div
+          id="theme-toggle-menu"
+          class="theme-menu absolute right-0 mt-2 w-48 bg-white border border-vapor rounded-lg shadow-lg hidden"
+          role="menu"
+          tabindex="-1"
+        >
+          <!-- Light Theme Option -->
+          <div
+            role="menuitemradio"
+            aria-checked="false"
+            data-theme-option="light"
+            class="theme-menu-item flex items-center justify-between px-4 py-3 hover:bg-smoke-50 cursor-pointer"
+            tabindex="0"
+          >
+            <div class="flex items-center gap-3">
+              <img src="{{{uiRootPath}}}/img/theme-light-icon.svg" alt="" class="h-5 w-5" aria-hidden="true">
+              <span>Light</span>
+            </div>
+            <img src="{{{uiRootPath}}}/img/theme-checkmark-icon.svg" alt="" class="theme-checkmark h-5 w-5 hidden" aria-hidden="true">
+          </div>
+
+          <!-- Dark Theme Option -->
+          <div
+            role="menuitemradio"
+            aria-checked="false"
+            data-theme-option="dark"
+            class="theme-menu-item flex items-center justify-between px-4 py-3 hover:bg-smoke-50 cursor-pointer"
+            tabindex="-1"
+          >
+            <div class="flex items-center gap-3">
+              <img src="{{{uiRootPath}}}/img/theme-dark-icon.svg" alt="" class="h-5 w-5" aria-hidden="true">
+              <span>Dark</span>
+            </div>
+            <img src="{{{uiRootPath}}}/img/theme-checkmark-icon.svg" alt="" class="theme-checkmark h-5 w-5 hidden" aria-hidden="true">
+          </div>
+
+          <!-- Auto Theme Option -->
+          <div
+            role="menuitemradio"
+            aria-checked="true"
+            data-theme-option="auto"
+            class="theme-menu-item flex items-center justify-between px-4 py-3 hover:bg-smoke-50 cursor-pointer"
+            tabindex="-1"
+          >
+            <div class="flex items-center gap-3">
+              <img src="{{{uiRootPath}}}/img/theme-toggle-icon.svg" alt="" class="h-5 w-5" aria-hidden="true">
+              <span>Auto</span>
+            </div>
+            <img src="{{{uiRootPath}}}/img/theme-checkmark-icon.svg" alt="" class="theme-checkmark h-5 w-5" aria-hidden="true">
+          </div>
+        </div>
+      </div>
       <a href="https://app.circleci.com/" class="hidden md:block bg-slime-green text-dark-green rounded-full px-[16px] border py-[8px] border-operational-green font-medium">
         Go to Application
       </a>
