@@ -150,7 +150,8 @@ FAQs?
 Fastfile
 Fastlane
 /bFastlane Match/b
-filename
+[Ff]ilename
+[Ff]ilepath
 framebuffer
 frameit
 \bFree Plan\b

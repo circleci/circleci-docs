@@ -23,7 +23,7 @@ TIP: **Why tag-based triggers?** Tags represent stable release points in your li
 Before following this guide, ensure you have the following:
 
 * A CircleCI account connected to GitHub using the GitHub App integration.
-* A "library" repository and a "consumer" repository. These repositories must be in the same GitHub organization. If you want to follow the centralized config options, you will need a third repositry for your centralized config store.
+* A "library" repository and a "consumer" repository. These repositories must be in the same GitHub organization. If you want to follow the centralized config options, you will need a third repository for your centralized config store.
 * Admin access to both the library repository and the consumer repository in GitHub.
 
 === Decide on your configuration approach
@@ -107,7 +107,7 @@ CircleCI automatically populates the following pipeline values when a cross-repo
 
 You can use these values directly in your configuration without declaring them as parameters.
 
-Here is an example consumer configuration file that uses the built-in pipeline values. This configuration works for both Option 1 (config in consumer repository) and Option 2 (centralized config repository), as CircleCI automatically populates the pipeline values with trigger information regardless of where the config file is stored.
+Here is an example consumer configuration file that uses the built-in pipeline values. This configuration works regardless of whether you store your configuration in the consumer repository or a centralized config repository. CircleCI automatically populates the pipeline values with trigger information regardless of where the config file is stored.
 
 .Example consumer configuration file using built-in pipeline values
 [source,yaml]
@@ -295,11 +295,12 @@ $ git tag v1.2.3
 $ git push origin v1.2.3
 ----
 
-. Open the link:https://app.circleci.com/[CircleCI web app, window="_blank"] in your browser and select your organizaiton.
+. Open the link:https://app.circleci.com/[CircleCI web app, window="_blank"] in your browser and select your organization.
 . You should see a new pipeline running with the name you configured in step 2.
 . Select the running pipeline to view the workflow and jobs.
 . Verify that the library information is passed to your jobs by checking the job output.
 +
+.Example of the job output for a cross-repo trigger
 image::guides:ROOT:cross-repo-check-job.png[Cross-repo trigger output]
 
 If your pipeline does not trigger:
