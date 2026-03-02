@@ -207,6 +207,9 @@ Option 1: Config in consumer repository::
 
 .. Select btn:[Save].
 
+.Example of a pipeline configured for a consumer repository
+image::guides:ROOT:cross-repo-pipeline-consumer.png[Pipeline configured for consumer repository]
+
 You now have a pipeline configured for your consumer repository. The next step is to add a trigger that watches for events in your library repository.
 --
 
@@ -220,9 +223,11 @@ TIP: If your central config repository contains configurations for multiple proj
 
 .. For **Checkout source**, select your consumer repository from the dropdown menu (this is the repository whose code will be tested).
 .. Select **Save**.
-.. In your central config repository, create or update the configuration file at the path you specified using the example config from <<1-create-configuration-file-for-your-consumer-pipeline,step 1>>.
 +
 NOTE: When using centralized configuration, the `checkout` step will check out code from the consumer repository (the checkout source), not from the central config repository. This allows you to maintain configurations separately from application code.
+
+.Example of a pipeline configured for a centralized config repository
+image::guides:ROOT:cross-repo-pipeline-central.png[Pipeline configured for centralized config repository]
 
 Your pipeline is now configured to fetch its configuration from the central repository while checking out code from the consumer repository.
 --
@@ -290,10 +295,12 @@ $ git tag v1.2.3
 $ git push origin v1.2.3
 ----
 
-. In the CircleCI web app, navigate to your consumer project.
-. Select the **Pipelines** view. You should see a new pipeline running with the name you configured in step 2.
+. Open the link:https://app.circleci.com/[CircleCI web app, window="_blank"] in your browser and select your organizaiton.
+. You should see a new pipeline running with the name you configured in step 2.
 . Select the running pipeline to view the workflow and jobs.
-. Verify that the library information is correctly passed to your jobs by checking the job output.
+. Verify that the library information is passed to your jobs by checking the job output.
++
+image::guides:ROOT:cross-repo-check-job.png[Cross-repo trigger output]
 
 If your pipeline does not trigger:
 
@@ -326,7 +333,7 @@ flowchart TD
 
 This setup helps you catch integration issues early and ensures that library releases do not break dependent applications. You now have confidence that when you publish a library release, it will work correctly with your consumers.
 
-TIP: *Multiple consumers for one library?* If you have multiple consumer repositories that depend on your library, repeat sections 1-2 for each consumer repository. Each consumer can have its own pipeline configuration and trigger settings based on its specific testing requirements.
+TIP: *Multiple consumers for one library?* If you have multiple consumer repositories that depend on your library, repeat the steps in this guide for each consumer repository. Each consumer can have its own pipeline configuration and trigger settings based on its specific testing requirements.
 
 == Next steps
 
