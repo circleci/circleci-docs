@@ -1,5 +1,5 @@
 [#pipeline-and-project-identity]
-=== Pipeline and project identity
+=== Pipeline and project information
 
 These values provide core identifiers for the pipeline itself and the project it belongs to. They are available across all pipeline types and integration methods.
 
@@ -21,7 +21,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique id] representing for the pipeline.
+| A link:https://en.wikipedia.org/wiki/Universally_unique_identifier[globally unique identifier] for the pipeline.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -32,7 +32,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | Integer
-| A project unique integer id for the pipeline.
+| A project-scoped integer identifier for the pipeline.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -70,6 +70,39 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
+| `pipeline.project.slug`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The slug of the project the pipeline definition belongs to.
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `pipeline.name`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+_(except schedule workflows)_
+| String
+| The name of the pipeline definition.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.integration_source`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The pipeline type, determined by the VCS integration used to check out code. Possible values: `github_app`, `github`, `bitbucket`, `bitbucket_dc`, `gitlab`.
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
 |===
 --
 
@@ -96,7 +129,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
+| The name of the git tag being checked out. Empty if checking out from a branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -107,7 +140,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git branch that was pushed to trigger the pipeline.
+| The name of the git branch being checked out. Empty if checking out from a tag.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -118,7 +151,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | Boolean
-| Whether the branch the pipeline was triggered on is the default branch.
+| Whether the branch being checked out is the default branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**# (>= v4.7)
 
@@ -132,6 +165,79 @@ d| [.nowrap]#GitHub App# +
 | The long (40-character) git SHA that is being built.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+
+| `pipeline.git.repo_url`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The URL of the repository.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.repo_owner`
+d| [.nowrap]#GitHub App#
+| String
+| The VCS username of the repository owner.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.repo_name`
+d| [.nowrap]#GitHub App#
+| String
+| The name of the repository, without the owner prefix.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.repo_id`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The unique identifier of the repository.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.commit.url`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab# +
+_(except schedule workflows)_
+| String
+| The URL of the checkout commit.
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `pipeline.git.commit.subject`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# _(push events only)_ +
+[.nowrap]#Bitbucket Cloud# _(push events only)_ +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The subject line of the checkout commit message.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.commit.body`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Cloud# _(push events only)_ +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The body of the checkout commit message.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.git.commit.author_login`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#GitHub OAuth# _(push events only)_ +
+[.nowrap]#Bitbucket Data Center# +
+[.nowrap]#GitLab#
+| String
+| The VCS username of the author of the checkout commit.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `pipeline.git.base_revision`
 d| [.nowrap]#GitHub OAuth# +
@@ -147,7 +253,7 @@ d| [.nowrap]#GitHub OAuth# +
 [#configuration-source]
 === Configuration source information
 
-Values prefixed with `+pipeline.config.*+` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out — so use the corresponding `+pipeline.git.*+` values instead.
+Values prefixed with `+pipeline.config.*+` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out so you can use the corresponding `+pipeline.git.*+` values instead.
 
 [.table-scroll]
 --
@@ -203,6 +309,11 @@ d| [.nowrap]#GitHub App#
 
 These values describe how and why the pipeline was triggered, including the event source, timing, and any event-specific data passed by the VCS provider.
 
+[WARNING]
+====
+All `+pipeline.trigger_parameters.circleci.*+` and `+pipeline.trigger_parameters.github_app.*+` values are deprecated and their presence is not guaranteed after **2026-08-01**. Use the replacement values listed in the table below.
+====
+
 [.table-scroll]
 --
 [.datatable.no-sort-col-3,cols="6*", options="header"]
@@ -225,6 +336,23 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-red]#**Yes**#
 
+| `pipeline.trigger.id`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The unique ID of the trigger that initiated the pipeline.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `pipeline.trigger.type`
+d| [.nowrap]#GitHub App# +
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Bitbucket Data Center#
+| String
+| The type of trigger that initiated the pipeline. Possible values: `github_app`, `bitbucket_dc`, `schedule`, `webhook`, `api`.
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
 | `pipeline.trigger_source`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
@@ -232,7 +360,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The source that triggers the pipeline, current values are `webhook`, `api`, `scheduled_pipeline`.
+| The source that triggers the pipeline. Possible values: `webhook`, `api`, `scheduled_pipeline`.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -240,7 +368,7 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The name of the schedule trigger if the pipeline was triggered via schedule. The value will be empty string if the pipeline is triggered by other sources.
+| The name of the schedule trigger if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -248,7 +376,7 @@ d| [.nowrap]#GitHub OAuth# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The unique ID of the schedule if the pipeline was triggered via schedule trigger. Value will be empty string if the pipeline is triggered by other sources.
+| The unique ID of the schedule if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -388,7 +516,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.sender.login`
 d| [.nowrap]#GitHub App#
 | String
-| The login name of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
+| The VCS username of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -402,7 +530,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.github.repository.owner.login`
 d| [.nowrap]#GitHub App#
 | String
-| The login name of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
+| The VCS username of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -420,135 +548,150 @@ d| [.nowrap]#Custom webhook#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.circleci.trigger_type`
+| `pipeline.trigger_parameters.circleci.trigger_type` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
-| GitHub App, GitLab
+|Use `pipeline.trigger.type` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] `pipeline.trigger_parameters.circleci.event_time` +
-  *Deprecated*: Use `pipeline.trigger.received_at` instead.
+| `pipeline.trigger_parameters.circleci.event_time` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
-| Timestamp CircleCI received the event
+|Use `pipeline.trigger.received_at` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.circleci.event_type`
+| `pipeline.trigger_parameters.circleci.event_type` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitLab#
 | String
-d|  [.nowrap]#GitHub App: push# +
-[.nowrap]#GitLab: push, merge request# +
-
+|Use `pipeline.event.name` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.ref`
+| `pipeline.trigger_parameters.github_app.ref` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.checkout_sha`
+| `pipeline.trigger_parameters.github_app.checkout_sha` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.git.revision` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.user_id`
+| `pipeline.trigger_parameters.github_app.user_id` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|No direct replacement is available. If this value is critical to your workflows, contact CircleCI Support.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.user_name`
+| `pipeline.trigger_parameters.github_app.user_name` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.event.github.sender.login` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.user_username`
+| `pipeline.trigger_parameters.github_app.user_username` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.event.github.sender.login` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.user_avatar`
+| `pipeline.trigger_parameters.github_app.user_avatar` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.event.github.sender.avatar_url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.repo_name`
+| `pipeline.trigger_parameters.github_app.repo_name` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.event.github.repository.name` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.repo_url`
+| `pipeline.trigger_parameters.github_app.repo_url` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.event.github.repository.url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.web_url`
+| `pipeline.trigger_parameters.github_app.web_url` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.event.github.repository.url` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.commit_sha`
+| `pipeline.trigger_parameters.github_app.commit_sha` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.event.github.after` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.commit_title`
+| `pipeline.trigger_parameters.github_app.commit_title` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.git.commit.subject` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.commit_message`
+| `pipeline.trigger_parameters.github_app.commit_message` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.git.commit.body` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.commit_timestamp`
+| `pipeline.trigger_parameters.github_app.commit_timestamp` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|Use `pipeline.trigger.received_at` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.commit_author_name`
+| `pipeline.trigger_parameters.github_app.commit_author_name` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|For the user who triggered the push event, use `pipeline.event.github.sender.*`. For the checkout commit author, use `pipeline.git.commit.author_login`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_parameters.github_app.branch`
+| `pipeline.trigger_parameters.github_app.branch` +
+image:guides:ROOT:icons/warning.svg[warning icon, role="no-border"] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App#
 |
-| See GitHub documentation for link:https://docs.github.com/en/webhooks-and-events/webhooks/webhook-events-and-payloads[webhook events and payloads].
+|For push events, use `pipeline.event.github.ref`. For pull request events, use `pipeline.event.github.pull_request.head.ref`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
