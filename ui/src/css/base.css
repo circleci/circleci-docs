@@ -154,3 +154,83 @@ object[type="image/svg+xml"]:not([width]) {
     flex-shrink: 0; /* Prevent excessive shrinking in Firefox */
   }
 }
+
+/* Logo theme switching */
+html[data-theme="dark"] .logo-light {
+  display: none;
+}
+
+html[data-theme="dark"] .logo-dark {
+  display: block;
+}
+
+html[data-theme="light"] .logo-light {
+  display: block;
+}
+
+html[data-theme="light"] .logo-dark {
+  display: none;
+}
+
+/* Search bar dark mode styling */
+html[data-theme="dark"] .search-input {
+  border-color: #D7DBE3;
+  color: #D7DBE3;
+}
+
+html[data-theme="dark"] .search-input::placeholder {
+  color: #D7DBE3;
+  opacity: 0.7;
+}
+
+html[data-theme="dark"] .search-input:focus {
+  ring-color: #D7DBE3;
+}
+
+html[data-theme="dark"] .search-icon {
+  color: #D7DBE3;
+}
+
+/* Admonition icon dark mode switching */
+html[data-theme="dark"] .doc .admonitionblock td.icon i.icon-note {
+  background: url('../img/note_icon-dark.svg') no-repeat center / contain;
+}
+
+html[data-theme="dark"] .doc .admonitionblock td.icon i.icon-tip {
+  background: url('../img/tip_icon-dark.svg') no-repeat center / contain;
+}
+
+/* Tabs dark mode styling */
+html[data-theme="dark"] .tablist > ul {
+  border-bottom-color: #1C273A;
+}
+
+html[data-theme="dark"] .tablist > ul li {
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .tabs.is-loading .tablist li:first-child::after {
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .tabpanel {
+  background-color: transparent;
+}
+
+/* Social icons dark mode color */
+html[data-theme="dark"] .social-icons {
+  color: #A5AAB9;
+}
+
+/* Dropdown menus dark mode styling */
+html[data-theme="dark"] [data-dropdown-menu],
+html[data-theme="dark"] .theme-menu {
+  background-color: #0D1423;
+  border-color: #1C273A;
+}
+
+html[data-theme="dark"] [data-dropdown-option]:hover,
+html[data-theme="dark"] .theme-menu-item:hover,
+html[data-theme="dark"] .theme-menu-item:focus {
+  background-color: #1C273A;
+}

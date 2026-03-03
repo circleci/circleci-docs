@@ -1,14 +1,17 @@
 <div class="{{#if class}}{{class}}{{/if}}">
   <div class="relative w-full max-w-[888px] mx-auto">
-    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-      <img class="w-4 h-4" src="{{uiRootPath}}/img/search.svg" alt="Search Icon">
+    <span class="absolute inset-y-0 left-0 flex items-center pl-3 search-icon">
+      <svg class="w-4 h-4" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7.65372" cy="7.15385" r="6.15385" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11.9614 12.0769L16.8845 17" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
     </span>
     <input
       type="text"
       id="search-text-input"
       data-search-input
       placeholder="Search Docs"
-      class="w-full py-2 pl-8 pr-4 border rounded-full border-vapor focus:outline-none focus:ring-2 focus:ring-vapor focus:border-transparent"
+      class="search-input w-full py-2 pl-8 pr-4 border rounded-full border-vapor focus:outline-none focus:ring-2 focus:ring-vapor focus:border-transparent"
     >
     <button data-search-clear class="absolute inset-y-0 right-5 flex items-center gap-2 pl-3 text-link-on-light">
       Clear

@@ -219,7 +219,7 @@
   border-radius: 4px;
   border: 1px solid var(--inline-code-border-color);
   font-size: 0.95em;
-  padding: 0.15em 0.4em;
+  padding: 2px 8px;
 }
 
 .doc code,

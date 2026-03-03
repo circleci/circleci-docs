@@ -42,18 +42,29 @@
   // Update button icon and menu checkmarks
   function updateUI(preference, resolvedTheme) {
     const button = document.getElementById('theme-toggle-button')
-    const buttonIcon = document.getElementById('theme-toggle-icon')
     const menu = document.getElementById('theme-toggle-menu')
+    const lightIcon = document.getElementById('theme-icon-light')
+    const darkIcon = document.getElementById('theme-icon-dark')
+    const autoIcon = document.getElementById('theme-icon-auto')
 
-    if (!button || !buttonIcon || !menu) return
+    if (!button || !menu) return
 
-    // Update button icon based on current preference
-    const iconMap = {
-      'light': 'theme-light-icon.svg',
-      'dark': 'theme-dark-icon.svg',
-      'auto': 'theme-toggle-icon.svg'
+    // Show the correct icon based on preference
+    if (lightIcon && darkIcon && autoIcon) {
+      lightIcon.classList.add('hidden')
+      darkIcon.classList.add('hidden')
+      autoIcon.classList.add('hidden')
+
+      if (preference === 'light') {
+        lightIcon.classList.remove('hidden')
+      } else if (preference === 'dark') {
+        darkIcon.classList.remove('hidden')
+      } else {
+        autoIcon.classList.remove('hidden')
+      }
     }
-    buttonIcon.src = buttonIcon.src.replace(/theme-[^/]+\.svg$/, iconMap[preference])
+
+    // Update button aria-label
     button.setAttribute('aria-label', `Theme: ${preference}. Click to change theme`)
 
     // Update checkmarks in menu

@@ -11,9 +11,9 @@
   box-sizing: border-box;
 }
 
-/* Override background with Shiki's theme background */
-.doc pre.shiki.highlight[style*="--shiki-background-color"] {
-  background: var(--shiki-background-color) !important;
+/* Override background to use consistent color for both light and dark mode */
+.doc pre.shiki.highlight {
+  background: #1C273A !important;
 }
 
 .doc pre.shiki.highlight > code {
