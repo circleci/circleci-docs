@@ -327,6 +327,9 @@ html[data-theme="dark"] {
   /* Admonitions */
   --note-color: var(--dark-link-color);
   --tip-color: var(--dark-text-primary);
+
+  /* Section dividers (hr elements) */
+  --section-divider-color: var(--dark-surface-tertiary);
 }
 
 /* Manual light theme - overrides system dark preference */
