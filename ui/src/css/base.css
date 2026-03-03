@@ -240,9 +240,16 @@ html[data-theme="dark"] .theme-menu-item {
   color: var(--dark-text-muted);
 }
 
-/* DataTables hover styling - disable background color change in dark mode */
+/* DataTables hover styling - maintain background colors on hover in dark mode */
 html[data-theme="dark"] table.datatable thead th:hover,
-html[data-theme="dark"] table.datatable thead th[data-sortable]:hover,
-html[data-theme="dark"] table.datatable tbody tr:hover {
-  background-color: transparent;
+html[data-theme="dark"] table.datatable thead th[data-sortable]:hover {
+  background-color: var(--table-header-background) !important;
+}
+
+html[data-theme="dark"] table.datatable tbody tr:nth-child(even):hover {
+  background-color: var(--table-stripe-even) !important;
+}
+
+html[data-theme="dark"] table.datatable tbody tr:nth-child(odd):hover {
+  background-color: var(--table-stripe-odd) !important;
 }
