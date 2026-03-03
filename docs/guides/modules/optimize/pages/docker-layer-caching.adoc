@@ -114,6 +114,41 @@ At the beginning of each job that uses DLC, there is a `DLC set-up` step. You ar
 
 DLC operates in the same way for jobs that use parallelism. If a `machine` job using DLC is configured with `parallelism: 2`, two jobs run in parallel. Each virtual machine in this case will have a separate DLC cache, and whichever is saved last will be used for the next build.
 
+[#purge-dlc]
+== Purge DLC
+
+If jobs that use DLC continuously fail, this may be due to a corrupted cache. Purging the DLC removes previously stored Docker image layers so that future builds do not reuse those cached layers. This forces CircleCI to rebuild Docker images from scratch, rather than leveraging layers from earlier builds to speed up the process.
+
+You can purge DLC using the CircleCI web app or the CLI.
+
+[#purge-dlc-web-app]
+=== Web app
+
+To purge DLC from the CircleCI web app:
+
+. Navigate to your project in the link:https://app.circleci.com[CircleCI web app].
+. Select **Project Settings**.
+. Select **Docker Layer Caching**.
+. Select btn:[Delete Cache Contents].
+
+[#purge-dlc-cli]
+=== CLI
+
+Use the xref:toolkit:how-to-use-the-circleci-local-cli.adoc[CircleCI CLI] `dlc purge` sub-command to purge DLC for a project:
+
+[,shell]
+----
+circleci dlc purge <vcs-type> <org-id> <project-id>
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI reference].
+
 [#deprecated-keys]
 == Deprecated keys
 
