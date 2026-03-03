@@ -261,76 +261,8 @@
    Override semantic tokens for dark mode
    ============================================ */
 
-/* System preference - applies if no manual override */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    /* Base dark mode colors */
-    --dark-text-primary: #D7DBE3;
-    --dark-text-muted: #A5AAB9;
-    --dark-text-secondary: #868C9E;
-    --dark-surface-primary: #0D1423;
-    --dark-surface-secondary: #2a2a2a;
-    --dark-surface-tertiary: #1C273A;
-    --dark-border-primary: #404040;
-    --dark-border-secondary: #3D4A5E;
-    --dark-link-color: #73B0FF;
-
-    /* Typography - all inherit from base text color */
-    --body-font-color: var(--dark-text-primary);
-    --heading-font-color: var(--dark-text-primary);
-    --doc-font-color: var(--dark-text-primary);
-
-    /* Surfaces */
-    --body-background: var(--dark-surface-primary);
-    --panel-background: var(--dark-surface-secondary);
-    --panel-border-color: var(--dark-border-primary);
-    --color-vapor: var(--dark-surface-tertiary);
-    --color-fog: #2E3C52;
-
-    /* Buttons */
-    --color-operational-green: #00F582;
-
-    /* Links */
-    --link-font-color: var(--dark-link-color);
-    --link-hover-font-color: #8cc9ff;
-    --color-link-on-light: var(--dark-link-color);
-
-    /* Breadcrumbs */
-    --breadcrumb-font-color: var(--dark-text-secondary);
-    --breadcrumb-link-color: var(--dark-link-color);
-    --breadcrumb-separator-color: var(--dark-text-secondary);
-
-    /* Navigation - all inherit from muted text color */
-    --nav-heading-font-color: var(--dark-text-muted);
-    --nav-muted-color: var(--dark-text-muted);
-    --color-terminal-black: var(--dark-text-muted);
-    --toc-font-color: var(--dark-text-muted);
-    --toc-heading-font-color: var(--dark-text-muted);
-
-    /* Code - reuses base colors */
-    --inline-code-background: var(--dark-surface-tertiary);
-    --inline-code-border-color: var(--dark-border-secondary);
-    --code-font-color: var(--dark-text-primary);
-
-    /* Tables */
-    --table-border-color: var(--dark-surface-tertiary);
-    --table-stripe-odd: transparent;
-    --table-stripe-even: var(--dark-surface-tertiary);
-    --table-header-background: var(--dark-surface-tertiary);
-    --table-footer-background: transparent;
-
-    /* Admonitions */
-    --note-color: var(--dark-link-color);
-    --tip-color: var(--dark-text-primary);
-    /* WARNING, IMPORTANT, and CAUTION remain the same in dark mode */
-
-    /* TODO: Add remaining semantic tokens */
-  }
-}
-
-/* Manual dark theme - overrides system preference */
-html[data-theme="dark"] {
-  /* Base dark mode colors */
+/* Define base dark mode color palette */
+:root {
   --dark-text-primary: #D7DBE3;
   --dark-text-muted: #A5AAB9;
   --dark-text-secondary: #868C9E;
@@ -340,8 +272,15 @@ html[data-theme="dark"] {
   --dark-border-primary: #404040;
   --dark-border-secondary: #3D4A5E;
   --dark-link-color: #73B0FF;
+}
 
-  /* Typography - all inherit from base text color */
+/* Apply dark mode when data-theme="dark"
+   JavaScript always sets data-theme attribute based on:
+   - User's explicit choice (light/dark/auto)
+   - System preference when in auto mode
+   This approach eliminates CSS duplication and provides a single source of truth */
+html[data-theme="dark"] {
+  /* Typography */
   --body-font-color: var(--dark-text-primary);
   --heading-font-color: var(--dark-text-primary);
   --doc-font-color: var(--dark-text-primary);
@@ -366,14 +305,14 @@ html[data-theme="dark"] {
   --breadcrumb-link-color: var(--dark-link-color);
   --breadcrumb-separator-color: var(--dark-text-secondary);
 
-  /* Navigation - all inherit from muted text color */
+  /* Navigation */
   --nav-heading-font-color: var(--dark-text-muted);
   --nav-muted-color: var(--dark-text-muted);
   --color-terminal-black: var(--dark-text-muted);
   --toc-font-color: var(--dark-text-muted);
   --toc-heading-font-color: var(--dark-text-muted);
 
-  /* Code - reuses base colors */
+  /* Code */
   --inline-code-background: var(--dark-surface-tertiary);
   --inline-code-border-color: var(--dark-border-secondary);
   --code-font-color: var(--dark-text-primary);
@@ -388,9 +327,6 @@ html[data-theme="dark"] {
   /* Admonitions */
   --note-color: var(--dark-link-color);
   --tip-color: var(--dark-text-primary);
-  /* WARNING, IMPORTANT, and CAUTION remain the same in dark mode */
-
-  /* TODO: Add remaining semantic tokens */
 }
 
 /* Manual light theme - overrides system dark preference */
