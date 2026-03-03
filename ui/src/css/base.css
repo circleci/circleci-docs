@@ -174,21 +174,21 @@ html[data-theme="light"] .logo-dark {
 
 /* Search bar dark mode styling */
 html[data-theme="dark"] .search-input {
-  border-color: #D7DBE3;
-  color: #D7DBE3;
+  border-color: var(--dark-text-primary);
+  color: var(--dark-text-primary);
 }
 
 html[data-theme="dark"] .search-input::placeholder {
-  color: #D7DBE3;
+  color: var(--dark-text-primary);
   opacity: 0.7;
 }
 
 html[data-theme="dark"] .search-input:focus {
-  ring-color: #D7DBE3;
+  ring-color: var(--dark-text-primary);
 }
 
 html[data-theme="dark"] .search-icon {
-  color: #D7DBE3;
+  color: var(--dark-text-primary);
 }
 
 /* Admonition icon dark mode switching */
@@ -202,7 +202,7 @@ html[data-theme="dark"] .doc .admonitionblock td.icon i.icon-tip {
 
 /* Tabs dark mode styling */
 html[data-theme="dark"] .tablist > ul {
-  border-bottom-color: #1C273A;
+  border-bottom-color: var(--dark-surface-tertiary);
 }
 
 html[data-theme="dark"] .tablist > ul li {
@@ -219,18 +219,18 @@ html[data-theme="dark"] .tabpanel {
 
 /* Social icons dark mode color */
 html[data-theme="dark"] .social-icons {
-  color: #A5AAB9;
+  color: var(--dark-text-muted);
 }
 
 /* Dropdown menus dark mode styling */
 html[data-theme="dark"] [data-dropdown-menu],
 html[data-theme="dark"] .theme-menu {
-  background-color: #0D1423;
-  border-color: #1C273A;
+  background-color: var(--dark-surface-primary);
+  border-color: var(--dark-surface-tertiary);
 }
 
 html[data-theme="dark"] [data-dropdown-option]:hover,
 html[data-theme="dark"] .theme-menu-item:hover,
 html[data-theme="dark"] .theme-menu-item:focus {
-  background-color: #1C273A;
+  background-color: var(--dark-surface-tertiary);
 }
