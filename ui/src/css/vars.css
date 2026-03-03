@@ -291,6 +291,7 @@ html[data-theme="dark"] {
   --panel-border-color: var(--dark-border-primary);
   --color-vapor: var(--dark-surface-tertiary);
   --color-fog: #2E3C52;
+  --color-inline-grey: var(--dark-surface-tertiary);
 
   /* Buttons */
   --color-operational-green: #00F582;

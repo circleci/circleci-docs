@@ -255,6 +255,23 @@ html[data-theme="dark"] .doc .source-toolbox .copy-button {
   color: var(--dark-text-muted);
 }
 
+/* Home page guide card icons - set color for inline SVGs to inherit */
+html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/getting-started/"] svg,
+html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/hello-world/"] svg,
+html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/slack-orb-tutorial/"] svg {
+  color: var(--dark-text-muted);
+}
+
+/* Home page featured resource icons - invert colors for dark mode */
+html[data-theme="dark"] .landing-page img[src*="/img/stack.svg"],
+html[data-theme="dark"] .landing-page img[src*="/img/pipeline.svg"],
+html[data-theme="dark"] .landing-page img[src*="/img/job.svg"],
+html[data-theme="dark"] .landing-page img[src*="/img/container.svg"],
+html[data-theme="dark"] .landing-page img[src*="/img/orbs.svg"],
+html[data-theme="dark"] .landing-page img[src*="/img/security.svg"] {
+  filter: invert(1);
+}
+
 /* DataTables hover styling - maintain background colors on hover in dark mode */
 html[data-theme="dark"] table.datatable thead th:hover,
 html[data-theme="dark"] table.datatable thead th[data-sortable]:hover {
