@@ -162,7 +162,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The long (40-character) git SHA that is being built.
+| The long (40-character) git SHA of the commit being checked out.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -334,7 +334,7 @@ d| [.nowrap]#GitHub App# +
 | String
 | The timestamp of when the pipeline was triggered, in ISO 8601 format.
 | [.circle-green]#**Yes**#
-| [.circle-red]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | `pipeline.trigger.id`
 d| [.nowrap]#GitHub App# +
@@ -418,7 +418,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.event.context.github.pr_url`
 d| [.nowrap]#GitHub App#
 | String
-| The URL of the associated GitHub pull request, if one exists. If there are multiple associated pull requests, one URL is randomly chosen. This value matches environment variable CIRCLE_PULL_REQUEST.
+| The URL of the associated GitHub pull request, if one exists. If there are multiple associated pull requests, one URL is randomly chosen. This value matches environment variable `CIRCLE_PULL_REQUEST`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
