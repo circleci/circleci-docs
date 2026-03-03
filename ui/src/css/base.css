@@ -239,3 +239,10 @@ html[data-theme="dark"] .theme-menu-item:focus {
 html[data-theme="dark"] .theme-menu-item {
   color: var(--dark-text-muted);
 }
+
+/* DataTables hover styling - disable background color change in dark mode */
+html[data-theme="dark"] table.datatable thead th:hover,
+html[data-theme="dark"] table.datatable thead th[data-sortable]:hover,
+html[data-theme="dark"] table.datatable tbody tr:hover {
+  background-color: transparent;
+}
