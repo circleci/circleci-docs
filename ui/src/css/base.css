@@ -255,6 +255,16 @@ html[data-theme="dark"] .doc .source-toolbox .copy-button {
   color: var(--dark-text-muted);
 }
 
+/* Copy toast styling for dark mode */
+html[data-theme="dark"] .doc .source-toolbox .copy-toast {
+  background-color: var(--dark-surface-tertiary);
+  color: var(--dark-text-primary);
+}
+
+html[data-theme="dark"] .doc .source-toolbox .copy-toast::after {
+  border-bottom-color: var(--dark-surface-tertiary);
+}
+
 /* Home page guide card icons - set color for inline SVGs to inherit */
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/getting-started/"] svg,
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/hello-world/"] svg,
