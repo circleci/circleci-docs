@@ -226,7 +226,7 @@ html[data-theme="dark"] .social-icons {
 html[data-theme="dark"] [data-dropdown-menu],
 html[data-theme="dark"] .theme-menu {
   background-color: var(--dark-surface-primary);
-  border-color: var(--dark-surface-tertiary);
+  border: 1px solid var(--dark-surface-tertiary);
 }
 
 html[data-theme="dark"] [data-dropdown-option]:hover,
