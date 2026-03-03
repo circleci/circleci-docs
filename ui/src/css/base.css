@@ -234,3 +234,8 @@ html[data-theme="dark"] .theme-menu-item:hover,
 html[data-theme="dark"] .theme-menu-item:focus {
   background-color: var(--dark-surface-tertiary);
 }
+
+/* Theme dropdown menu icons inherit color from parent */
+html[data-theme="dark"] .theme-menu-item {
+  color: var(--dark-text-muted);
+}
