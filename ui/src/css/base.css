@@ -265,6 +265,20 @@ html[data-theme="dark"] .doc .source-toolbox .copy-toast::after {
   border-bottom-color: var(--dark-surface-tertiary);
 }
 
+/* Mobile navigation toggle icons (hamburger and close) color */
+svg[data-page-navigation-toggle] {
+  color: var(--color-terminal-black);
+}
+
+html[data-theme="dark"] svg[data-page-navigation-toggle] {
+  color: var(--dark-text-primary);
+}
+
+/* Override text-terminal-black class in dark mode for navigation header */
+html[data-theme="dark"] [data-page-navigation] .text-terminal-black {
+  color: var(--dark-text-primary);
+}
+
 /* Home page guide card icons - set color for inline SVGs to inherit */
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/getting-started/"] svg,
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/hello-world/"] svg,
