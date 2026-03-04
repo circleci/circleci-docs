@@ -550,4 +550,4 @@ The token limit resets at 12:00 UTC each day. If you need more tokens, switch to
 
 == Next steps
 
-* xref:guides:test:fix-flaky-tests.adoc[Fix Flaky Tests].
+Assign a Chunk task to proactively fix your flaky tests. See the xref:test:fix-flaky-tests.adoc[Fix Flaky Tests] guide for more information.
