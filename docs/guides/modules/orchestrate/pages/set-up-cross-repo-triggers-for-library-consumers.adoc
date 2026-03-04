@@ -64,7 +64,7 @@ my-library/
 my-consumer-app/
   ├── .circleci/
   │   └── config.yml
-  │   └── on-library-update.yml  
+  │   └── on-library-update.yml
   └── src/
 ----
 a|
@@ -98,7 +98,7 @@ To follow this how-to guide you will need a CircleCI configuration file for your
 
 This section covers some elements you might want to include in your configuration file. If you just want to follow along you can use the example config file provided at the end of this section.
 
-When a change to your library triggers your consumer pipeline, you need to know which _version_ of the library initiated the trigger so you can test against that specific version. CircleCI provides built-in pipeline values that capture details about the trigger event, including the tag name, branch name, commit SHA, and repository name.
+When a change to your library triggers your consumer pipeline, you need to know which _version_ of the library initiated the trigger so you can test against that specific version. CircleCI provides built-in pipeline values that capture details about the trigger event, including the tag name, branch name, commit SHA, and repository name. FOr a full list of pipeline values, see the xref:guides:reference:ROOT:variables.adoc[Pipeline Values] guide.
 
 CircleCI automatically populates the following pipeline values when a cross-repo trigger fires:
 
