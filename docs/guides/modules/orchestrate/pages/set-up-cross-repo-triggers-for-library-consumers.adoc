@@ -149,8 +149,13 @@ jobs:
             # npm install @myorg/my-library@<< pipeline.event.github.ref >>
 
             echo "Installing library from trigger..."
-            LIBRARY_VERSION="<< pipeline.event.github.ref >>"
-            if [ -z "$LIBRARY_VERSION" ]; then
+            RAW_REF="<< pipeline.event.github.ref >>"
+
+            # Strip refs/tags/ or refs/heads/ prefix
+            LIBRARY_VERSION="${RAW_REF#refs/tags/}"
+
+            if [ -z "$LIBRARY_VERSION" ] || [ "$LIBRARY_VERSION" = "$RAW_REF" ]; then
+              # Fallback if ref wasn't a tag
               LIBRARY_VERSION="<< pipeline.event.github.after >>"
             fi
             echo "Would install: @myorg/my-library@${LIBRARY_VERSION}"
