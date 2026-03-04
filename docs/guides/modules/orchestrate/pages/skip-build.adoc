@@ -105,7 +105,7 @@ Projects which have auto-cancel enabled will have pipelines and workflows on non
 
 NOTE: For server customers, this feature will be available in Server 4.10+.
 
-Use this setting to immediately stop all new work from starting during an incident or emergency. When enabled, new pipelines are not created and users cannot rerun workflows. 
+Use this setting to immediately stop all new work from starting during an incident or emergency. When enabled, new pipelines are not created and users cannot rerun workflows.
 
 This setting is designed for situations where you need to quickly halt all CI/CD activity across an organization or for a specific project. It is available in the **Advanced** section of both **Organization Settings** and **Project Settings**. An organization-level block prevents all new work across every project in the organization. A project-level block only affects the specific project.
 
@@ -122,7 +122,7 @@ This setting is designed for situations where you need to quickly halt all CI/CD
 === Enable block new work for a project
 
 . In the CircleCI web app, select **Projects** from the sidebar.
-. Select the ellipsis (image:guides:ROOT:icons/more.svg[more icon, role="no-border"]) next to your project and select **Project Settings**.
+. Select the ellipsis (icon:more[Ellipsis menu icon]) next to your project and select **Project Settings**.
 . Select **Advanced**.
 . Toggle the **Block all new work from starting for this project** switch to the on position.
 

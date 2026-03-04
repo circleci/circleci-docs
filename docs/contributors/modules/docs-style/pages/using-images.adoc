@@ -62,25 +62,58 @@ Any text added to a screenshot should be no less than 18px, and can be larger if
 
 == Icons
 
-To add an icon to the flow of text we use the image macro as follows:
+To add an icon to the flow of text, use the `icon` inline macro. This automatically handles light and dark theme switching.
 
 .Example of using an icon in text
-[source,adoc]
+[source,adoc,subs="-macros"]
 ----
 Some text.
 Including an icon.
-Here is the icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
+Here is the icon icon:more[].
 ----
 
 Looks like this:
 
 Some text.
 Including an icon.
-Here is the icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
+Here is the icon icon:more[].
 
-NOTE: The `role="no-border"` attribute is used to remove the border around the icon.
+The icon macro automatically includes both light and dark versions of the icon. You can optionally provide custom alt text:
 
-You can find out which icons we have available by looking here:
+.Example with custom alt text
+[source,adoc,subs="-macros"]
+----
+Select the icon:more[More options icon] to see additional settings.
+----
+
+=== How icon theming works
+
+When you use pass:[icon:more[]], the extension automatically expands it to include both versions:
+
+* `more.svg` - Light theme version (dark icon on light background).
+* `more-dark.svg` - Dark theme version (light icon on dark background).
+
+The appropriate version is shown based on the user's theme preference.
+
+=== Creating dark mode icons
+
+When adding a new icon, create two versions:
+
+1. **Light theme version** (++`name.svg`++): Dark icon color (typically `#161616`)
+2. **Dark theme version** (++`name-dark.svg`++): Light icon color (typically `#D7DBE3`)
+
+Both files should be placed in:
+
+[,shell]
+----
+docs/guides/modules/ROOT/images/icons/
+├── more.svg          # Light theme (dark icon)
+└── more-dark.svg     # Dark theme (light icon)
+----
+
+=== Available icons
+
+You can find available icons by looking here:
 
 [,shell]
 ----
@@ -91,12 +124,20 @@ docs/
             └── images/
                 └── icons/
                     ├── cancel.svg
+                    ├── cancel-dark.svg
                     ├── check.svg
+                    ├── check-dark.svg
                     ├── edit-solid.svg
+                    ├── edit-solid-dark.svg
                     ├── more.svg
+                    ├── more-dark.svg
                     ├── passed.svg
-                    └── settings.svg
+                    ├── passed-dark.svg
+                    ├── settings.svg
+                    └── settings-dark.svg
 ----
+
+NOTE: If you use the older `image:` macro syntax (for example, pass:c[`image:guides:ROOT:icons/example.svg[alt text, role="no-border"]`]), it will not automatically switch themes. Use the pass:[icon:name[]] macro instead for theme-aware icons.
 
 == Diagrams
 

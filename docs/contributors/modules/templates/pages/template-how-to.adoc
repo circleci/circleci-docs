@@ -161,7 +161,7 @@ You may want to add an image, you can do this using a block image macro:
 .Image Title
 image::guides:ROOT:orchestrate-and-trigger/automatic-rerun.png[Alternative text to describe the image, including, if possible any text in the image itself]
 
-You can also use an inline icon in a paragraph of text, for example the edit icon image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"].
+You can also use an inline icon in a paragraph of text, for example the edit icon icon:edit-solid[Edit icon]
 
 === 2.3 Use tabs to show different options
 
