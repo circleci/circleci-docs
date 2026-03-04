@@ -1,13 +1,23 @@
-= Version control system integration overview
+= Version control systems, pipeline types, and feature support
 :page-platform: Cloud, Server
-:page-description: An overview guide to the version control systems you can integrate with CircleCI.
+:page-description: An overview guide to the version control systems you can integrate with CircleCI and the features available to each pipeline type and organization type.
 :experimental:
 
-When you create a CircleCI project you will select a code repository to connect. The code in the repo you select is checked out when your pipelines trigger. CircleCI supports several code version control systems (VCS). This guide gives an overview of the features available to each VCS integration.
+CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI web app, and the options are as follows:
+
+* GitHub App
+* GitHub OAuth
+* GitHub OAuth (Server)
+* GitLab
+* GitLab Self-manages
+* Bitbucket
+* Bitbucket Data Center
+
+This guide provides an overview of the VCS options, organization types and pipeline types supported by CircleCI and the features available to each..
 
 == Which version control systems are supported?
 
-link:https://circleci.com/pricing/[CircleCI Cloud] projects can be integrated with code repositories hosted on the following VCS providers:
+link:https://circleci.com/pricing/[CircleCI Cloud] pipelines can be integrated with code repositories hosted on the following VCS providers:
 
 * GitHub.com
 * GitHub Enterprise Cloud
@@ -22,222 +32,138 @@ link:https://circleci.com/pricing/server/[CircleCI Server] supports the followin
 * GitHub Enterprise Cloud
 * GitHub Enterprise Server
 
-== Feature support for each integration type
+== Which organization types support which VCS providers?
 
-The following tables show feature support per VCS for **CircleCI Cloud**, along with feature support for **CircleCI Server**:
+For a full guide to organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
-* Features that are supported for a VCS integration type are indicated with [.circle-green]#**Yes**#.
-* Features that are not supported are indicated with [.circle-red]#**No**#.
+`circleci` type organizations can be integrated with:
 
-include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
+* GitHub.com
+* GitHub Enterprise Cloud
+* GitLab
+* GitLab self-managed
+* Bitbucket Data Center
 
-=== Code checkout and repository integration
+`github` type organizations can be integrated with:
 
-[.table-scroll]
---
-[cols="3,1,1,1,1,1,1,1", options="header"]
-|===
-| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI Server
+* GitHub.com
+* GitHub Enterprise Cloud
 
-| link:https://circleci.com/changelog/changes-to-code-checkout-for-orgs-that-integrate-with-github-app/[Secure HTTPS checkout]
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes** ^2^#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
+`bitbucket` type organizations can be integrated with:
 
-| Reduced permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes** ^2^#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
+* Bitbucket Cloud
 
-| link:https://discuss.circleci.com/t/circleci-config-suggestions-bot/47918[CircleCI config suggestions bot]
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes** ^2^#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
+If you are using CircleCI Server you are using a `github` type organization.
 
-| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Configuration Files for a Project]
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No** ^1^#
-| [.circle-red]#**No** ^1^#
-| [.circle-green]#**Yes** ^1,2^#
-| [.circle-red]#**No** ^1^#
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No** ^1^#
+== Feature support for each pipeline type
 
-| xref:enable-checks.adoc#github-check-and-github-status-updates[Status Updates]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes** ^4^#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+The following table shows feature support for each pipeline type.
 
-| xref:enable-checks.adoc[GitHub Checks] ^3^
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-|===
---
+* Features that are supported for a pipeline type are indicated with [.circle-green]#**Yes**#.
+* Features that are not supported for a pipeline type are indicated with [.circle-red]#**No**#.
 
-^1^ _Possible using xref:orchestrate:dynamic-config.adoc[Dynamic Configuration]._
+For an overview of users, orgs, and pipeline types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
-^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:using-the-circleci-github-app-in-an-oauth-org.adoc[here]._
-
-^3^ _When GitHub Checks are enabled we automatically disable GitHub status updates to avoid duplication of statuses. You can manage GitHub status updates via project settings._
-
-^4^ _Bitbucket Cloud status updates can be enabled and disabled via project settings._
-
-
-=== Pipeline triggers and integrations
+NOTE: The table below is not a full list of CircleCI features. Only features where the pipeline type is relevant to support are included. If a feature is not in this table, it is supported for all pipeline types.
 
 [.table-scroll]
 --
-[cols="3,1,1,1,1,1,1,1", options="header"]
+[.datatable,cols="9*", options="header"]
 |===
-| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
+| Feature | Category | GitHub App | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center
 
-| xref:orchestrate:custom-webhooks.adoc[Custom _inbound_ webhook triggers]
+| *The method used to check out your code when using the `checkout` step in your configuration file. See more in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference].*
+| Code checkout
+| HTTPS
+| SSH
+| SSH
+| SSH
+| SSH
+| SSH
+| SSH
+
+| *Deploy key required for code checkout. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#how-circleci-checks-out-your-code[Users, Organizations, and Integrations] guide for more information.*
+| Code checkout
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| [.circle-green]#**Yes** ^2^#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
-| [[.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
+| *Fine-grained permissions when integrating with CircleCI. Select a subset of repositories to be used with CircleCI.*
+| Security
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-
-| link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[Trigger pipelines via API]
-| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[Trigger pipelines via web app]
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Trigger pipelines on non-push events]
+| *Custom configuration file path. If _No_ then CircleCI config is stored at `.circleci/config.yml` in the repository.*
+| Configuration
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes** ^3^#
-| [.circle-green]#**Yes** ^3^#
-| [.circle-green]#**Yes** ^4^#
-| [.circle-green]#**Yes** ^4^#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref:outbound-webhooks.adoc[Outbound webhooks]
+| *Centralized configuration management and job overrides. Read more in the xref:orchestrate:how-to-override-config.adoc[How to Override Config] guide.*
+| Configuration
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-|===
---
-
-^1^ _One alternative is to use a xref:orchestrate:custom-webhooks.adoc[custom webhook] to generate a URL that you `curl` with a 3rd party scheduling tool._
-
-^2^ _Enable by using the GitHub App integration alongside the OAuth app integration. More details xref:using-the-circleci-github-app-in-an-oauth-org.adoc[here]._
-
-^3^ _For GitLab Cloud and GitLab self-managed projects, you can choose to trigger pipelines upon the creation of merge requests, by selecting the *Only Build Merge Requests* trigger filter._
-
-^4^ _For GitHub OAuth and Bitbucket Cloud projects, you can choose to trigger pipelines upon the creation of pull requests, by enabling the *Only build pull requests* option on the menu:Project Settings[Advanced] page of your project._
-
-=== Core capabilities
-
-[.table-scroll]
---
-[cols="3,1,1,1,1,1,1,1", options="header"]
-|===
-| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI Server
-| xref:optimize:artifacts.adoc[Artifact storage]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
 | xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Test Run Config From VS Code]
+| Configuration
 | [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
 
-| xref:orchestrate:dynamic-config.adoc[Dynamic configuration]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| xref:test:rerun-failed-tests.adoc[Rerun failed tests]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| *View your configuration file in the CircleCI web app*
+| Configuration
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
-| xref:orbs:use:orb-intro.adoc[Orbs]
+| *Edit your configuration file in the CircleCI web app*
+| Configuration
+| [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
-| xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
+| *xref:enable-checks.adoc[GitHub Checks] to track the status of your pipeline in the GitHub UI*
+| Notifications
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 
-| xref:optimize:docker-layer-caching.adoc[Docker layer caching]
+| *xref:outbound-webhooks.adoc[Outbound Webhooks]. Send real-time information about your pipelines to external services. Payload varies depending on pipeline type.*
+| Notifications
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
@@ -246,141 +172,198 @@ include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration 
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH]
+| *Cross-repo pipeline and trigger setups*
+| Triggers
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+
+| *xref:orchestrate:custom-webhooks.adoc[Custom Webhook Triggers]. Trigger pipelines from external services.*
+| Triggers
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+
+| *xref:orchestrate:schedule-triggers.adoc[Schedule Triggers]. Trigger pipelines based on a schedule.*
+| Triggers
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| *xref:orchestrate:workflows.adoc#scheduling-a-workflow[Scheduled Workflows]. Schedules defined in the `config.yml` file.*
+| Triggers
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| *link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[API Triggers]. Trigger pipelines via the API.*
+| Triggers
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| *xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[UI Triggers]. Trigger pipelines via the CircleCI web app.*
+| Triggers
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| *Pull request event triggers. See more in the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Triggers Overview]*
+| Triggers
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**No**#
+
+| *Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide*
+| Triggers
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| xref:test:rerun-failed-tests.adoc[Rerun Failed Tests].
+| Testing
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| xref:orchestrate:skip-build.adoc#auto-cancel[Auto-cancel redundant workflows]
+| *Use link:https://circleci.com/changelog/release-markers-and-release-jobs/[Deploy Markers] to track deployments in the CircleCI web app*
+| Deployment
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
-| xref:getting-started:config-editor.adoc[In-app config viewing and editing]
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
+| *Set up xref:deploy:set-up-rollbacks.adoc[Rollback Pipelines] to manually revert your application to a previous stable version directly from the CircleCI web app*
+| Deployment
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-
-| xref:insights:insights-tests.adoc[Test insights]
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref:oss.adoc#only-build-pull-requests[Only build pull requests]
+| *Set up xref:deploy:set-up-deploys.adoc[Deploy Pipelines] to automatically deploy your application to a target environment directly from the CircleCI web app*
+| Deployment
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+
+| xref:oss.adoc#build-pull-requests-from-forked-repositories[Build Pull Requests From Forked Repositories]
+| Open source support
+| [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
+| xref:oss.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass Secrets to Builds From Forked Pull Requests]
+|Open source support
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| *Chunk, CircleCI's AI CI/CD agent. Learn more in the xref:toolkit:chunk-setup-and-overview.adoc[Chunk Setup Guide]*
+| Agentic support
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**# with GitHub App installed
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
+| [.circle-red]#**No**#
 |===
 --
 
-=== Security and permissions
+== Feature support for each organization type
+
+The following table shows feature support for each organization type. This list does not include all CircleCI features. Only features where the organization type is relevant are included.
+
+For a guide to organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
 [.table-scroll]
 --
-[cols="3,1,1,1,1,1,1,1", options="header"]
+[cols="4*", options="header"]
 |===
-| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | CircleCI server
-| xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect tokens]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| Feature | GitHub | Bitbucket | CircleCI
 
-| xref:config-policies:config-policy-management-overview.adoc[Config policies]
+| *xref:insights:insights-tests.adoc[Test Insights]. View insights into your test performance.*
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
-| xref:security:audit-logs.adoc[Audit logs]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| xref:security:contexts.adoc#security-group-restrictions[Security group context restriction]
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-
-| xref:security:contexts.adoc#expression-restrictions[Expression context restriction]
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-|===
---
-
-=== Open source support
-
-[.table-scroll]
---
-[cols="3,1,1,1,1,1,1,1", options="header"]
-|===
-| Feature | GitHub App | GitLab | GitLab self-managed | GitHub OAuth | Bitbucket | Bitbucket Data Center | CircleCI server
-| xref:oss.adoc[OSS support]
-| [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
+| *xref:security:contexts.adoc#security-group-restrictions[Security Group Context Restriction]. Restrict the use of contexts to specific users and groups.*
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
-| xref:oss.adoc#build-pull-requests-from-forked-repositories[Build pull requests from forked repositories]
+| *User management and permissions system within CircleCI including: Roles, Groups, SSO, MFA. See the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] for more information.*
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
-| xref:oss.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass secrets to builds from forked pull requests]
+| *Project creation process.*
+| Imported from VCS
+| Imported from VCS
+| Manual
+
+| *Multiple projects to track a single monorepo.*
 | [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-red]#**No**#
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 
+| xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up Multiple Pipelines and Configuration Files for a Project]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 |===
 --

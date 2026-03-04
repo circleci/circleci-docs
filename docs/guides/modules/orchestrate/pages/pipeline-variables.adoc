@@ -17,7 +17,7 @@ Pipeline values and parameters can be used to create reusable pipeline configura
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
-For a full list of values and built-in environment variables, see the xref:reference:ROOT:variables.adoc[Project values and variables] guide.
+For a full list of values and built-in environment variables, see the xref:reference:ROOT:variables.adoc[Project Values and Variables] guide.
 
 include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
@@ -40,7 +40,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[set the variable in a shell command].
+When using the above method to set the values in the `environment` key, note that if the pipeline variable is empty it will be set to `<nil>`. If you need an empty string instead, xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[Set the Variable in a Shell Command].
 
 [#pipeline-parameters-in-configuration]
 == Pipeline parameters
@@ -54,7 +54,7 @@ Pipeline parameters support the following types:
 - `integer`
 - `enum`
 
-See xref:reference:ROOT:reusing-config.adoc#parameter-syntax[Parameter syntax] for usage details.
+See xref:reference:ROOT:reusing-config.adoc#parameter-syntax[Parameter Syntax] for usage details.
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the configuration, and then subsequently referenced in the `build` job:
 
@@ -90,15 +90,15 @@ A pipeline can be triggered with specific `parameter` values using the API v2 en
 
 The API limits the number of parameters that can be passed:
 
-* 100 max entries
-* 128 maximum key length
-* 512 maximum value length
+* 100 max entries.
+* 128 maximum key length.
+* 512 maximum value length.
 
 The `parameters` key passed in this `POST` request is *NOT* secret.
 
 The example below triggers a pipeline with the parameters described in the above configuration example. If you run a command to trigger a pipeline, and the parameter has not been declared in the configuration file, you will receive an error response message, such as `Project not found`.
 
-CAUTION: If your project code is integrated with CircleCI via the GitHub App, GitLab or Bitbucket Data Center, you will need to use the new link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
+CAUTION: For GitHub App, GitLab or Bitbucket Data Center pipelines, use the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[Trigger a new pipeline endpoint] rather than the endpoint used in this example.
 
 ```shell
 curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -111,7 +111,7 @@ curl -u ${CIRCLE_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
 
 include::ROOT:partial$tips/find-project-slug.adoc[]
 
-Refer to the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+Refer to the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#passing-parameters-when-triggering-pipelines-using-the-circleci-web-app]
 === Passing parameters when triggering pipelines using the CircleCI web app
@@ -202,7 +202,7 @@ When a pipeline parameter is declared in both the setup and the continuation con
 . The pipeline is triggered via the API.
 . The pipeline parameter's value specified in the API request is different from the default value specified in the setup configuration.
 
-More information on setup workflows can be found in the xref:dynamic-config.adoc#how-dynamic-config-works[How dynamic config works] section of the Dynamic Configuration overview.
+More information on setup workflows can be found in the xref:dynamic-config.adoc#how-dynamic-config-works[How Dynamic Config Works] section of the Dynamic Configuration overview.
 
 [#conditional-workflows]
 == Pipeline parameters and conditional workflows

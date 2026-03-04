@@ -18,8 +18,6 @@ Content templates help you to:
 * Develop new content quickly
 * Ensure your page conforms to the style guide
 
-To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-tutorial.adoc?plain=1[here]. There is additional detail in the comments.
-
 The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
 
 Contributors from within CircleCI can also consider setting up a local development environment to preview changes before pushing. Ping one of the Developer Resources and Engineering team (DRE) for more information.

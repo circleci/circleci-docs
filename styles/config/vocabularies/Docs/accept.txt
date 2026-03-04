@@ -3,6 +3,7 @@
 \bbitbucket organization\b
 .circleci/config.yml
 [Aa]gentless
+[Aa]gentic
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
@@ -77,6 +78,7 @@ Buildx
 Bundler
 Capistrano
 Certbot
+Cest
 cgroup
 Chocolatey
 chruby
@@ -96,6 +98,7 @@ CLI
 Claude Code
 CMake
 CocoaPods
+Codeception
 Codecov
 CodeDeploy
 Coinbase

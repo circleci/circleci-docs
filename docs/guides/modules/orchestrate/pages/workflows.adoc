@@ -148,7 +148,7 @@ See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/tree/fan
 [#flexible-job-dependency]
 === Flexible job dependency
 
-Using `requires`, you can build complex dependency maps and fan in/out scenarios.
+Using flexible requires with the `requires` key, you can build complex dependency maps and fan in/out scenarios.
 
 The following example is a configuration snippet of a workflow with four sequential jobs. Each job waits until the "required" job attains a specified status:
 
@@ -177,18 +177,17 @@ A job must wait until all upstream jobs in the dependency graph have attained ei
 * The `release` job waits for the `deploy` job, and only runs if the `deploy` job is successful.
 * The `deploy` job waits for the `build` job, and only runs if the `build` job is successful.
 
-
-
 .Workflow execution when the `release` job is successful
 image::guides:ROOT:workflow-using-requires-example-1.png[Flexible Job Execution Workflow - Example 1]
 
 .Workflow execution when the `release` job fails:
 image::guides:ROOT:workflow-using-requires-example-2.png[Flexible Job Execution Workflow - Example 2]
 
+==== Ignore the outcome of an upstream job
 
-You may want to configure job dependencies that ignore the status/outcome of an upstream job.
+You may want to configure job dependencies that ignore the status/outcome of an upstream job, for example running a job regardless of the status/outcome of an upstream job.
 
-In the following example, the dependent job will run once the upstream job attains a terminal state, regardless of the status/outcome:
+In the following example, the dependent job runs once the upstream job attains a terminal state, regardless of the status/outcome:
 
 .Use flexible requires to ignore outcome of a job
 [source,yaml]
@@ -202,15 +201,40 @@ workflows:
             - build
       - cleanup:
           requires:
-            - test:
-              - success
-              - failed
-              - canceled
-              - not_run
+            - test: terminal
 ----
 
 * The `test` job waits for the `build` job, and only runs if the `build` job is successful.
 * The `cleanup` job waits for the `test` job, and runs regardless of whether the `test` job succeeds, fails, is canceled or is not run.
+
+==== Run a command when the previous job is cancelled
+
+You can use flexible requires to run a specific job only when the previous job is cancelled. Running a command when a job is cancelled is useful for notifications, cleanup tasks, or logging when a deployment or long-running job is manually cancelled.
+
+In the following example, a notification job runs only when a deployment is cancelled:
+
+.Run a job when the previous job is cancelled
+[source,yaml]
+----
+workflows:
+  deploy-with-notifications:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+      - notify-cancelled:
+          requires:
+            - deploy:
+              - canceled
+----
+
+In this example:
+
+* The `deploy` job waits for the `build` job, and only runs if the `build` job is successful.
+* The `notify-cancelled` job waits for the `deploy` job, and only runs if the `deploy` job is cancelled.
+
+This pattern is useful when you want to send alerts, clean up resources, or log information specifically when a job is manually cancelled by a team member.
 
 TIP: Refer to the xref:reference:ROOT:configuration-reference.adoc#requires[Requires] section of the configuration reference.
 
@@ -323,7 +347,7 @@ API::
 +
 --
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API]
+. You need the workflow ID so you can use the link:https://circleci.com/docs/api/v2/index.html#operation/listWorkflowJobs[get a workflow's jobs] endpoint to get the user ID. You can get the workflow ID using xref:reference:ROOT:variables.adoc[Pipeline Values or Environment Variables], or by receiving xref:integration:outbound-webhooks.adoc[Webhooks] or link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/listWorkflowsByPipelineId[polling the API].
 +
 [,shell]
 ----
@@ -413,7 +437,7 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 [#scheduling-a-workflow]
 == Scheduling a workflow
 
-NOTE: Scheduled workflows are not available for projects integrated through the GitHub App, GitLab or Bitbucket Data Center.
+NOTE: Scheduled workflows are not available for GitHub App, GitLab or Bitbucket Data Center pipelines.
 
 CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc[Dynamic Configuration]. If you use dynamic configuration you will need to use xref:schedule-triggers.adoc[Schedule Triggers] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
 

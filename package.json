@@ -33,7 +33,8 @@
     "antora-shiki-extension": "^1.0.0",
     "node-html-parser": "^7.0.1",
     "reading-time": "^1.5.0",
-    "turndown": "^7.2.0"
+    "turndown": "^7.2.0",
+    "turndown-plugin-gfm": "^1.0.2"
   },
   "overrides": {
     "form-data": "^4.0.4",
