@@ -177,7 +177,7 @@ In this example:
 * When a tag like `v1.2.3` is created in the library repository, `<< pipeline.event.github.ref >>` will contain `v1.2.3`.
 * The workflow filter ensures the workflow runs for tag events.
 * The configuration installs that specific version using `npm install @myorg/my-library@v1.2.3`.
-* If triggered by a push (not a tag), it falls back to using the commit SHA.
+* If triggered by a push to a branch (not a tag), it falls back to using the commit SHA.
 * The consumer tests then run against the exact library version that triggered the pipeline.
 
 Once you have created your config file, or decided to use our example, commit and push the config file to either your consumer repository or your centralized config repository. We recommend storing CircleCI configuration files in a `.circleci` directory in your repository but you can store them wherever you like as long as they have a `.yml` extension.
