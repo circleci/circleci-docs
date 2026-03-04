@@ -64,6 +64,7 @@ my-library/
 my-consumer-app/
   ├── .circleci/
   │   └── config.yml
+  │   └── on-library-update.yml  
   └── src/
 ----
 a|
