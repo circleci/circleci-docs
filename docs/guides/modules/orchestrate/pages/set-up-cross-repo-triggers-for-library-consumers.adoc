@@ -129,7 +129,9 @@ jobs:
           name: Display trigger information
           command: |
             echo "=== Cross-repo trigger information ==="
-            echo "Library version/tag: << pipeline.event.github.ref >>"
+            RAW_REF="<< pipeline.event.github.ref >>"
+            LIBRARY_VERSION="${RAW_REF#refs/tags/}"
+            echo "Library version/tag: ${LIBRARY_VERSION}"
             echo "Library commit: << pipeline.event.github.after >>"
             echo "Library repo: << pipeline.event.github.repository.name >>"
 
