@@ -274,9 +274,24 @@ html[data-theme="dark"] svg[data-page-navigation-toggle] {
   color: var(--dark-text-primary);
 }
 
-/* Override text-terminal-black class in dark mode for navigation header */
-html[data-theme="dark"] [data-page-navigation] .text-terminal-black {
+/* Override text-terminal-black class in dark mode for mobile navigation header only */
+html[data-theme="dark"] [data-page-navigation] > aside > div.text-terminal-black {
   color: var(--dark-text-primary);
+}
+
+/* Navigation label text color in dark mode */
+html[data-theme="dark"] [data-page-navigation] .nav-link,
+html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-content] span {
+  color: var(--dark-text-muted);
+}
+
+/* Navigation disclosure arrows color in dark mode */
+[data-page-navigation] [data-navigation-tree-toggle] button svg {
+  color: var(--color-terminal-black);
+}
+
+html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-toggle] button svg {
+  color: var(--dark-text-muted);
 }
 
 /* Home page guide card icons - set color for inline SVGs to inherit */
@@ -294,6 +309,15 @@ html[data-theme="dark"] .landing-page img[src*="/img/container.svg"],
 html[data-theme="dark"] .landing-page img[src*="/img/orbs.svg"],
 html[data-theme="dark"] .landing-page img[src*="/img/security.svg"] {
   filter: invert(1);
+}
+
+/* Inline icons theme switching - matches logo pattern */
+html[data-theme="light"] .doc .icon-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .doc .icon-light {
+  display: none;
 }
 
 /* DataTables hover styling - maintain background colors on hover in dark mode */

@@ -1036,6 +1036,7 @@
   padding-left: 2em; /* Add space for the SVG */
   cursor: pointer; /* Indicate clickable */
   transition: border-radius 0.3s ease;
+  font-style: normal; /* Override italic style from caption */
 }
 
 /* Add the arrow-down SVG after the title */

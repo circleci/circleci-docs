@@ -284,6 +284,7 @@ html[data-theme="dark"] {
   --body-font-color: var(--dark-text-primary);
   --heading-font-color: var(--dark-text-primary);
   --doc-font-color: var(--dark-text-primary);
+  --caption-font-color: var(--dark-text-muted);
 
   /* Surfaces */
   --body-background: var(--dark-surface-primary);

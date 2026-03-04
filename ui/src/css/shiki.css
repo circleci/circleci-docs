@@ -22,7 +22,6 @@
 .doc pre.shiki.highlight > code,
 .doc pre.shiki.highlight code,
 .doc pre.shiki.highlight span {
-  background-color: var(--dark-surface-tertiary) !important;
   background: var(--dark-surface-tertiary) !important;
 }
 
