@@ -6,6 +6,7 @@
 
 This page describes how to configure external services for use with a new CircleCI Server v4.8 installation. Migration to externalized PostgreSQL and MongoDB is also supported and described in this guide.
 
+
 [#postgresql]
 == PostgreSQL
 
@@ -16,9 +17,8 @@ NOTE: Your externalized PostgreSQL instance needs to be version 12 or higher. Th
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
-[.table-scroll]
---
-[cols=6*, options="header"]
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
 |===
 |# of Daily Active Users
 |# of PostgreSQL Replicas
@@ -62,7 +62,6 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 |1 TB
 |10 Gbps
 |===
---
 
 [#migrating-from-internal-postgres]
 === Migrating from an internal PostgreSQL to an externalized source
@@ -201,7 +200,7 @@ postgresql:
 ----
 --
 
-The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance, when you perform `helm upgrade` the scaled down application pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized PostgreSQL instance, when you perform `helm upgrade` the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
 
 
 [#backing-up-postgresql]
@@ -210,10 +209,10 @@ PostgreSQL provides official documentation for backing up and restoring your Pos
 
 We strongly recommend the following:
 
-* Take daily backups
-* Keep at least 30 days of backups
-* Use encrypted storage for backups as databases might contain sensitive information
-* Perform a backup before each upgrade of CircleCI Server
+* Take daily backups.
+* Keep at least 30 days of backups.
+* Use encrypted storage for backups as databases might contain sensitive information.
+* Perform a backup before each upgrade of CircleCI Server.
 
 [#mongodb]
 == MongoDB
@@ -362,4 +361,4 @@ mongodb:
 ----
 --
 
-The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized MongoDB instance, when you perform `helm upgrade` the scaled down application pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized MongoDB instance, when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
