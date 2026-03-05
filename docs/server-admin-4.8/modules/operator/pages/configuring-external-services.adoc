@@ -13,7 +13,7 @@ This page describes how to configure external services for use with a new Circle
 [#best-practices-for-your-postgresql]
 === Best practices for PostgreSQL
 
-NOTE: Your externalized PostgreSQL instance needs to be version 12 or higher. The current version we use for testing is 12.22, which is also the version we ship when using an internalized PostgreSQL. You can also use services that are fully compatible with PostgreSQL, such as Amazon RDS for PostgreSQL.
+NOTE: Your externalized PostgreSQL instance needs to be version 12. While you can use PostgreSQL 13 and 14, the version we use for testing is 12.22, which is also the version we ship when using an internalized PostgreSQL. You can also use services that are fully compatible with PostgreSQL, such as Amazon RDS for PostgreSQL.
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
