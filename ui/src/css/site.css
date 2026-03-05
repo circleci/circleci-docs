@@ -17,23 +17,19 @@
 @source inline("translate-x-0");
 @source inline("h-dvh");
 @theme {
-  --color-slime-green: #00DB74;
-  --color-operational-green: #00A657;
-  --color-dark-green: #005600;
-  --color-accent-green: #00B25E;
-
-  --color-terminal-black: #161616;
-  --color-body-dark: #343434;
-
-  --color-vapor: #D4D4D4;
-  --color-fog: #EDEDED;
-  --color-inline-grey: #F7F7F7;
-
-  --color-link-on-light: #2152E5;
-
-  --color-disabled-element: #959595;
-
-  --shadow-default: 0 0 6px 4px #1616161F;
+  /* Reference colors from vars.css instead of redefining */
+  --color-slime-green: var(--color-slime-green);
+  --color-operational-green: var(--color-operational-green);
+  --color-dark-green: var(--color-dark-green);
+  --color-accent-green: var(--color-accent-green);
+  --color-terminal-black: var(--color-terminal-black);
+  --color-body-dark: var(--color-body-dark);
+  --color-vapor: var(--color-vapor);
+  --color-fog: var(--color-fog);
+  --color-inline-grey: var(--color-inline-grey);
+  --color-link-on-light: var(--color-link-on-light);
+  --color-disabled-element: var(--color-disabled-element);
+  --shadow-default: var(--shadow-default);
 
   --breakpoint-lg: 75rem;
 }

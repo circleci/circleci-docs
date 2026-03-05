@@ -17,11 +17,11 @@ To follow the guides on this page you will need the following:
 [#validate-a-circleci-config]
 == Validate a CircleCI config
 
-TIP: *Using VS Code?* You can validate you CircleCI configuration using the VS Code extension. For full information about the features provided in the VS Code extension, see the xref:vs-code-extension-overview.adoc[VS Code extension overview] page.
+TIP: *Using VS Code?* You can validate your CircleCI configuration using the VS Code extension. For full information about the features provided in the VS Code extension, see the xref:vs-code-extension-overview.adoc[VS Code extension overview] page.
 
 You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally. Follow these steps:
 
-. Navigate to your project directory. You can  a directory with a `.circleci/config.yml` file
+. Navigate to your project directory with a `.circleci/config.yml` file
 . Run the following, providing the path to your `.circleci/config.yml`:
 +
 [,shell]

@@ -79,8 +79,8 @@ version: 2.1
 jobs:
   hello-job:
     macos:
-      xcode: 15.4.0
-    resource_class: m2pro.medium
+      xcode: 26.3.0
+    resource_class: m4pro.medium
     steps:
       - checkout # check out the code in the project directory
       - run: echo "hello world" # run the `echo` command

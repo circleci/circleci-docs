@@ -11,7 +11,7 @@ pass:[<!-- vale off -->]
 ** **Good:** CircleCI docs style guide +
 ** **Bad:** CircleCI Docs Style Guide
 
-* Jekyll automatically creates an `h1` heading from the document title, so only use `h2` and greater in the body of the doc.
+* Antora automatically creates an `h1` heading from the document title, so only use `h2` and greater in the body of the doc.
 
 * Where possible, headings should begin with a verb.
 ** **Good:** "Grooming cats" +

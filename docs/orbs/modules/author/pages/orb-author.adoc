@@ -193,7 +193,7 @@ Remove an orb from a category by running `circleci orb remove-from-category <nam
 .Show which categorizations have been added to an orb
 image::guides:ROOT:orb-categories-orb-info.png[Show which categorizations have been added to an orb]
 
-To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_info.html[in the CLI documentation].
+To see which categorizations have been applied to an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command link:https://circleci-public.github.io/circleci-cli/circleci_orb_info.html[in the CLI documentation].
 
 
 

@@ -16,6 +16,18 @@ The v4.8 release introduces further security improvements and support for the fo
 == Upgrade
 For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.8 Guide].
 
+== Release 4.8.8
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-8-8/[changelog].
+
+== Release 4.8.7
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-8-7/[changelog].
+
 == Release 4.8.6
 
 === Changelog
