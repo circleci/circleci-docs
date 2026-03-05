@@ -128,4 +128,4 @@ antora:
   - require: ./extensions/detect-unused-media-extension.js
     excludepatterns:
       - '*-dark.svg'
-      - 'icons/edit-solid.svg'
+      - 'icons/*.svg'

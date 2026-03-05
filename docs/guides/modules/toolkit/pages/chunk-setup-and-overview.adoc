@@ -258,7 +258,7 @@ Fix workflow (Beta)::
 --
 btn:[Fix workflow (Beta)] appears:
 
-* Next to a failed pipeline row in the pipeline list, to the left of the ellipsis icon (image:guides:ROOT:icons/more.svg[Ellipsis icon, role="no-border"]).
+* Next to a failed pipeline row in the pipeline list, to the left of the ellipsis icon (icon:more[Ellipsis icon]).
 +
 .Fix workflow (Beta) button in the pipeline list
 image::guides:ROOT:chunk/fix-workflow-pipeline-page.png[Fix workflow (Beta) button on the pipeline list]
@@ -467,7 +467,7 @@ To build and iterate on Chunk's environment, follow these steps:
 
 . Navigate to menu:Organization Settings[Chunk Tasks].
 . Identify your desired agent task.
-. Select the ellipsis icon (image:guides:ROOT:icons/more.svg[Ellipsis icon]) and select **Chunk Environment**.
+. Select the ellipsis icon (icon:more[Ellipsis icon]) and select **Chunk Environment**.
 
 This page lets you run the contents of your `cci-agent-setup.yml` file on a specific branch and immediately see the results. Use the **Custom** button to submit a task to Chunk and see the results.
 
