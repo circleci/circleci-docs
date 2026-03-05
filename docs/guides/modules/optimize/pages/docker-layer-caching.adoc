@@ -126,8 +126,7 @@ You can purge DLC using the CircleCI web app or the CLI.
 
 To purge DLC from the CircleCI web app:
 
-. Navigate to your project in the link:https://app.circleci.com[CircleCI web app].
-. Select **Project Settings**.
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select **Docker Layer Caching**.
 . Select btn:[Delete Cache Contents].
 
