@@ -107,11 +107,11 @@ To find your project slug, follow these steps:
 The `project_slug` is also included in the response payload when looking up a link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/getPipelineById[pipeline] or link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/getWorkflowById[workflow] by ID. The project slug can then be used to get information about the project.
 
 === GitHub OAuth and Bitbucket Cloud
-If your integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `vcs_type/org_name/repo_name` (VCS type can be `github`/`bitbucket` or `gh`/`bb`).
+If you integrate your code via the GitHub OAuth app or Bitbucket Cloud, your project slug is in a human readable format: `vcs_type/org_name/repo_name` (VCS type can be `github`/`bitbucket` or `gh`/`bb`).
 
 === GitHub App, GitLab and Bitbucket Data Center
 
-For GitHub App, GitLab and Bitbucket Data Center project, the project slug is made up org and project identifiers as opaque , for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. The project slug should not be parsed to retrieve the project or organization ID. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
+For GitHub App, GitLab and Bitbucket Data Center project, the project slug is made up of org and project identifiers as opaque, for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. The project slug should not be parsed to retrieve the project or organization ID. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
 
 [#rate-limits]
 == Rate limits

@@ -44,7 +44,7 @@ We have created demo applications in various languages so you can learn by examp
 | ASP.NET Core
 | link:https://github.com/CircleCI-Public/sample-dotnet-cfd[sample-dotnet-cfd]
 
-| link:https://github.com/CircleCI-Public/sample-monorepo-cfd/blob/master/README.md[Mono repo - Python backend and Node.js frontend]
+| link:https://github.com/CircleCI-Public/sample-monorepo-cfd/blob/master/README.md[Monorepo - Python backend and Node.js frontend]
 | Flask, Vue.js
 | link:https://github.com/CircleCI-Public/sample-monorepo-cfd[sample-monorepo-cfd]
 |===

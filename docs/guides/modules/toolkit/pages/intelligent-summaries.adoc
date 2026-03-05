@@ -31,7 +31,7 @@ If you see a banner stating that "Intelligent Build Failures are Disabled", an o
 
 == Privacy and security
 
-Intelligent summaries works by sending an error message along with build failure logs to a third-party LLM. Prior to submitting the error message and logs to the LLM, CircleCI passes the message through a filter to remove any sensitive information, such as, access keys and passwords.
+Intelligent summaries work by sending an error message along with build failure logs to a third-party LLM. Prior to submitting the error message and logs to the LLM, CircleCI passes the message through a filter to remove any sensitive information, such as, access keys and passwords.
 
 OpenAI is used as the LLM for this feature. If this changes, this page will be updated to reflect the change, and there will be an announcement on our link:https://discuss.circleci.com/[community forum].
 
