@@ -299,6 +299,11 @@ html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-content] sp
   color: var(--dark-text-muted);
 }
 
+/* Navigation link hover color in dark mode */
+html[data-theme="dark"] [data-page-navigation] .nav-link:hover {
+  color: var(--dark-link-color);
+}
+
 /* Current page navigation item text color and weight in dark mode */
 html[data-theme="dark"] [data-page-navigation] [data-current] span,
 html[data-theme="dark"] [data-page-navigation] .bg-fog span {
