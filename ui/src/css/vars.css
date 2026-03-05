@@ -272,6 +272,7 @@
   --dark-border-primary: #404040;
   --dark-border-secondary: #3D4A5E;
   --dark-link-color: #73B0FF;
+  --dark-accent-green: #94E5AB;
 }
 
 /* Apply dark mode when data-theme="dark"

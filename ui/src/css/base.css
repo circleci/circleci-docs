@@ -172,23 +172,28 @@ html[data-theme="light"] .logo-dark {
   display: none;
 }
 
+/* Search results container background in dark mode */
+html[data-theme="dark"] [data-search-results-container] {
+  background-color: var(--dark-surface-primary) !important;
+}
+
 /* Search bar dark mode styling */
 html[data-theme="dark"] .search-input {
-  border-color: var(--dark-text-primary);
-  color: var(--dark-text-primary);
+  border-color: var(--dark-text-secondary);
+  color: var(--dark-text-muted);
 }
 
 html[data-theme="dark"] .search-input::placeholder {
-  color: var(--dark-text-primary);
-  opacity: 0.7;
+  color: var(--dark-text-muted);
+  opacity: 1;
 }
 
 html[data-theme="dark"] .search-input:focus {
-  ring-color: var(--dark-text-primary);
+  ring-color: var(--dark-text-secondary);
 }
 
 html[data-theme="dark"] .search-icon {
-  color: var(--dark-text-primary);
+  color: var(--dark-text-muted);
 }
 
 /* Admonition icon dark mode switching */
@@ -285,6 +290,17 @@ html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-content] sp
   color: var(--dark-text-muted);
 }
 
+/* Current page navigation item text color in dark mode */
+html[data-theme="dark"] [data-page-navigation] [data-current] span,
+html[data-theme="dark"] [data-page-navigation] .bg-fog span {
+  color: var(--dark-text-primary) !important;
+}
+
+/* Active parent navigation item text color in dark mode */
+html[data-theme="dark"] [data-page-navigation] .text-accent-green {
+  color: var(--dark-text-primary) !important;
+}
+
 /* Navigation disclosure arrows color in dark mode */
 [data-page-navigation] [data-navigation-tree-toggle] button svg {
   color: var(--color-terminal-black);
@@ -331,6 +347,22 @@ html[data-theme="dark"] .doc .icon-light {
 /* Table body text color in dark mode (keep headers as primary color) */
 html[data-theme="dark"] .doc table.tableblock tbody td {
   color: var(--dark-text-muted);
+}
+
+/* Green accent highlights in dark mode */
+/* TOC (On this Page) active item border */
+html[data-theme="dark"] .toc .toc-menu a.is-active {
+  border-left-color: var(--dark-accent-green) !important;
+}
+
+/* Tabs selected tab border */
+html[data-theme="dark"] .tablist > ul li.is-selected {
+  border-bottom-color: var(--dark-accent-green) !important;
+}
+
+/* Component selector active item border */
+html[data-theme="dark"] .border-accent-green {
+  border-color: var(--dark-accent-green) !important;
 }
 
 /* DataTables hover styling - maintain background colors on hover in dark mode */
