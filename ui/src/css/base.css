@@ -294,6 +294,15 @@ html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-toggle] but
   color: var(--dark-text-muted);
 }
 
+/* Article info bar markdown dropdown arrow color in dark mode */
+[data-dropdown-button] svg {
+  color: var(--color-terminal-black);
+}
+
+html[data-theme="dark"] [data-dropdown-button] svg {
+  color: var(--dark-text-muted);
+}
+
 /* Home page guide card icons - set color for inline SVGs to inherit */
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/getting-started/"] svg,
 html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/hello-world/"] svg,
@@ -301,14 +310,13 @@ html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/slack-orb
   color: var(--dark-text-muted);
 }
 
-/* Home page featured resource icons - invert colors for dark mode */
-html[data-theme="dark"] .landing-page img[src*="/img/stack.svg"],
-html[data-theme="dark"] .landing-page img[src*="/img/pipeline.svg"],
-html[data-theme="dark"] .landing-page img[src*="/img/job.svg"],
-html[data-theme="dark"] .landing-page img[src*="/img/container.svg"],
-html[data-theme="dark"] .landing-page img[src*="/img/orbs.svg"],
-html[data-theme="dark"] .landing-page img[src*="/img/security.svg"] {
-  filter: invert(1);
+/* Home page featured resource icons - theme switching */
+html[data-theme="light"] .landing-page .icon-dark {
+  display: none;
+}
+
+html[data-theme="dark"] .landing-page .icon-light {
+  display: none;
 }
 
 /* Inline icons theme switching - matches logo pattern */
@@ -318,6 +326,11 @@ html[data-theme="light"] .doc .icon-dark {
 
 html[data-theme="dark"] .doc .icon-light {
   display: none;
+}
+
+/* Table body text color in dark mode (keep headers as primary color) */
+html[data-theme="dark"] .doc table.tableblock tbody td {
+  color: var(--dark-text-muted);
 }
 
 /* DataTables hover styling - maintain background colors on hover in dark mode */
