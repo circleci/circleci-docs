@@ -222,8 +222,14 @@ html[data-theme="dark"] .tabpanel {
   background-color: transparent;
 }
 
-/* Social icons dark mode color */
-html[data-theme="dark"] .social-icons {
+/* Footer content color in dark mode */
+html[data-theme="dark"] footer p,
+html[data-theme="dark"] footer a,
+html[data-theme="dark"] footer .social-icons {
+  color: var(--dark-text-muted) !important;
+}
+
+html[data-theme="dark"] footer svg {
   color: var(--dark-text-muted);
 }
 
@@ -290,15 +296,17 @@ html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-content] sp
   color: var(--dark-text-muted);
 }
 
-/* Current page navigation item text color in dark mode */
+/* Current page navigation item text color and weight in dark mode */
 html[data-theme="dark"] [data-page-navigation] [data-current] span,
 html[data-theme="dark"] [data-page-navigation] .bg-fog span {
   color: var(--dark-text-primary) !important;
+  font-weight: 400 !important;
 }
 
-/* Active parent navigation item text color in dark mode */
+/* Active parent navigation item (parent of current page) color and weight in dark mode */
 html[data-theme="dark"] [data-page-navigation] .text-accent-green {
-  color: var(--dark-text-primary) !important;
+  color: var(--dark-text-muted) !important;
+  font-weight: 600 !important;
 }
 
 /* Navigation disclosure arrows color in dark mode */
@@ -308,6 +316,11 @@ html[data-theme="dark"] [data-page-navigation] .text-accent-green {
 
 html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-toggle] button svg {
   color: var(--dark-text-muted);
+}
+
+/* Article info bar calendar icon color in dark mode */
+html[data-theme="dark"] .text-link-on-light svg {
+  color: var(--dark-text-primary);
 }
 
 /* Article info bar markdown dropdown arrow color in dark mode */
