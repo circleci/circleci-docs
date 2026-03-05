@@ -155,21 +155,22 @@ object[type="image/svg+xml"]:not([width]) {
   }
 }
 
-/* Logo theme switching */
-html[data-theme="dark"] .logo-light {
-  display: none;
+/* Global theme switching for all icons and images */
+/* Hide dark icons/images in light mode */
+html[data-theme="light"] .logo-dark,
+html[data-theme="light"] .icon-dark {
+  display: none !important;
 }
 
+/* Hide light icons/images in dark mode */
+html[data-theme="dark"] .logo-light,
+html[data-theme="dark"] .icon-light {
+  display: none !important;
+}
+
+/* Logo needs explicit display: block in dark mode */
 html[data-theme="dark"] .logo-dark {
   display: block;
-}
-
-html[data-theme="light"] .logo-light {
-  display: block;
-}
-
-html[data-theme="light"] .logo-dark {
-  display: none;
 }
 
 /* Search results container background in dark mode */
@@ -224,9 +225,9 @@ html[data-theme="dark"] .tabpanel {
 
 /* Footer content color in dark mode */
 html[data-theme="dark"] footer p,
-html[data-theme="dark"] footer a,
+html[data-theme="dark"] footer .footer-link,
 html[data-theme="dark"] footer .social-icons {
-  color: var(--dark-text-muted) !important;
+  color: var(--dark-text-muted);
 }
 
 html[data-theme="dark"] footer svg {
@@ -299,14 +300,15 @@ html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-content] sp
 /* Current page navigation item text color and weight in dark mode */
 html[data-theme="dark"] [data-page-navigation] [data-current] span,
 html[data-theme="dark"] [data-page-navigation] .bg-fog span {
-  color: var(--dark-text-primary) !important;
-  font-weight: 400 !important;
+  color: var(--dark-text-primary);
+  font-weight: 400;
 }
 
 /* Active parent navigation item (parent of current page) color and weight in dark mode */
-html[data-theme="dark"] [data-page-navigation] .text-accent-green {
-  color: var(--dark-text-muted) !important;
-  font-weight: 600 !important;
+html[data-theme="dark"] [data-page-navigation] [data-active-parent] a,
+html[data-theme="dark"] [data-page-navigation] [data-active-parent] span {
+  color: var(--dark-text-muted);
+  font-weight: 600;
 }
 
 /* Navigation disclosure arrows color in dark mode */
@@ -339,46 +341,21 @@ html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/slack-orb
   color: var(--dark-text-muted);
 }
 
-/* Home page featured resource icons - theme switching */
-html[data-theme="light"] .landing-page .icon-dark {
-  display: none;
-}
-
-html[data-theme="dark"] .landing-page .icon-light {
-  display: none;
-}
-
-/* Inline icons theme switching - matches logo pattern */
-html[data-theme="light"] .doc .icon-dark {
-  display: none;
-}
-
-html[data-theme="dark"] .doc .icon-light {
-  display: none;
-}
-
 /* Table body text color in dark mode (keep headers as primary color) */
 html[data-theme="dark"] .doc table.tableblock tbody td {
   color: var(--dark-text-muted);
 }
 
-/* Green accent highlights in dark mode */
-/* TOC (On this Page) active item border */
-html[data-theme="dark"] .toc .toc-menu a.is-active {
-  border-left-color: var(--dark-accent-green) !important;
+/* Inline code should inherit color from parent context (tables, lists, admonitions, etc.) */
+/* Excludes code blocks (pre code) which need their own syntax highlighting colors */
+html[data-theme="dark"] .doc code:not(pre code) {
+  color: inherit;
 }
 
-/* Tabs selected tab border */
-html[data-theme="dark"] .tablist > ul li.is-selected {
-  border-bottom-color: var(--dark-accent-green) !important;
-}
-
-/* Component selector active item border */
-html[data-theme="dark"] .border-accent-green {
-  border-color: var(--dark-accent-green) !important;
-}
+/* Note: Green accent highlights (TOC, tabs, components) now use CSS variable overrides in vars.css */
 
 /* DataTables hover styling - maintain background colors on hover in dark mode */
+/* Note: !important needed to override DataTables library styles */
 html[data-theme="dark"] table.datatable thead th:hover,
 html[data-theme="dark"] table.datatable thead th[data-sortable]:hover {
   background-color: var(--table-header-background) !important;

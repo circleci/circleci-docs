@@ -308,12 +308,16 @@ html[data-theme="dark"] {
   --breadcrumb-link-color: var(--dark-link-color);
   --breadcrumb-separator-color: var(--dark-text-secondary);
 
+  /* Accent colors */
+  --color-accent-green: var(--dark-accent-green);
+
   /* Navigation */
   --nav-heading-font-color: var(--dark-text-muted);
   --nav-muted-color: var(--dark-text-muted);
   --color-terminal-black: var(--dark-text-muted);
   --toc-font-color: var(--dark-text-muted);
   --toc-heading-font-color: var(--dark-text-muted);
+  --toc-active-border-color: var(--dark-accent-green);
 
   /* Code */
   --inline-code-background: var(--dark-surface-tertiary);
