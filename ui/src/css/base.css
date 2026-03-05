@@ -156,6 +156,7 @@ object[type="image/svg+xml"]:not([width]) {
 }
 
 /* Global theme switching for all icons and images */
+/* Note: !important needed to override Tailwind responsive utilities (e.g., "hidden md:block" on hero images) */
 /* Hide dark icons/images in light mode */
 html[data-theme="light"] .logo-dark,
 html[data-theme="light"] .icon-dark {
@@ -174,6 +175,7 @@ html[data-theme="dark"] .logo-dark {
 }
 
 /* Search results container background in dark mode */
+/* Note: !important needed to override Tailwind bg-panel-bg utility class */
 html[data-theme="dark"] [data-search-results-container] {
   background-color: var(--dark-surface-primary) !important;
 }

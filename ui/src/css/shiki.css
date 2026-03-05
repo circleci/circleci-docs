@@ -7,6 +7,7 @@
 }
 
 /* Ensure Shiki code blocks get the same padding and display treatment */
+/* Note: !important needed to override Shiki's inline styles from Dracula theme */
 .doc pre.shiki.highlight {
   background: var(--dark-surface-tertiary) !important;
   display: block;
@@ -18,6 +19,7 @@
 }
 
 /* Force all Shiki elements to use our background color, overriding Dracula theme */
+/* Note: !important needed to override Shiki's inline styles */
 .doc pre.shiki.highlight,
 .doc pre.shiki.highlight > code,
 .doc pre.shiki.highlight code,
