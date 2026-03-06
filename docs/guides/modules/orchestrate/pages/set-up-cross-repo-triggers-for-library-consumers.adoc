@@ -266,9 +266,6 @@ Option 1: Config in consumer repository::
 
 .. Select btn:[Save].
 
-.Example of a pipeline configured for a consumer repository
-image::guides:ROOT:cross-repo-pipeline-consumer.png[Pipeline configured for consumer repository]
-
 You now have a pipeline configured for your consumer repository. The next step is to add a trigger that watches for events in your library repository.
 --
 
@@ -284,9 +281,6 @@ TIP: If your central config repository contains configurations for multiple proj
 .. Select **Save**.
 +
 NOTE: When using centralized configuration, the `checkout` step will check out code from the consumer repository (the checkout source), not from the central config repository. This allows you to maintain configurations separately from application code.
-
-.Example of a pipeline configured for a centralized config repository
-image::guides:ROOT:cross-repo-pipeline-central.png[Pipeline configured for centralized config repository]
 
 Your pipeline is now configured to fetch its configuration from the central repository while checking out code from the consumer repository.
 --
@@ -316,6 +310,25 @@ This tells CircleCI which branch to use when fetching the configuration file fro
 If you are using a centralized config repository, you will also need to enter a branch name for the checkout source, typically `main`.
 
 . Select btn:[Save].
+
+[tabs]
+====
+Option 1: Config in consumer repository::
++
+--
+.Example of a pipeline configured for a consumer repository
+image::guides:ROOT:cross-repo-pipeline-consumer.png[Pipeline configured for consumer repository]
+
+--
+
+Option 2: Centralized config repository::
++
+--
+.Example of a pipeline configured for a centralized config repository
+image::guides:ROOT:cross-repo-pipeline-central.png[Pipeline configured for centralized config repository]
+
+--
+====
 
 === 4.b. Configure tag filters in your workflow
 
