@@ -47,7 +47,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 [start=4]
 . Your project ID is available to copy from the overview page
 +
-image::guides:ROOT:project-id.png[Screenshot showing where to find the project ID]
+image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project ID]
 ****
 
 For example:

@@ -140,13 +140,14 @@ Use the xref:toolkit:how-to-use-the-circleci-local-cli.adoc[CircleCI CLI] `dlc p
 circleci dlc purge <vcs-type> <org-id> <project-id>
 ----
 
-- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+The full `<vcs-type> <org-id> <project-id>` section of the subcommand is your project slug. You can find and copy the project slug from your project settings:
 
-- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Organization Settings[Overview].
-
-- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+.The project slug available in project settings
+image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project slug]
 
 For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI reference].
+
+
 
 [#deprecated-keys]
 == Deprecated keys
