@@ -92,14 +92,14 @@ NOTE: DLC has *no* effect on Docker images used as build containers. That is, co
 
 When using Buildx builder instances with DLC, it is important to link:https://docs.docker.com/engine/reference/commandline/buildx_create/#name[name your builders]. Doing so ensures CircleCI can detect and preserve the Docker volumes for subsequent job runs. If you do not name your builders, each time the job is run they will have different, randomly generated names, and the resulting volumes will be automatically cleaned up.
 
-If you store Docker build artifacts in a Docker volume, managed by the BuildKit inside Buildx builder instances, the DLC feature cannot _maintain_ these artifacts, but they can still be supported. DLC is not able to prune these images/build cache, but Buildx builders do have some in-built pruning. For more information, see the link:https://docs.docker.com/build/cache/garbage-collection/#default-policies[Docker docs].
+DLC cannot maintain Docker build artifacts stored in Docker volumes managed by BuildKit inside Buildx builder instances, but these artifacts can still be supported. DLC is not able to prune these images/build cache, but Buildx builders do have some in-built pruning. For more information, see the link:https://docs.docker.com/build/cache/garbage-collection/#default-policies[Docker docs].
 
 [#how-dlc-works]
 == How DLC works
 
 DLC caches your Docker image layers within the container/virtual machine used to run your job.
 
-If, for example, the first run of your job takes over two minutes to build a Docker image, and nothing changes in the Dockerfile before the second run, the Dockerfile build steps happen instantly.
+For example, if building a Docker image takes over two minutes on the first run, and the Dockerfile is unchanged, subsequent builds happen instantly.
 
 When none of the layers in the image change between job runs, DLC pulls the layers from the cache and reuses those instead of rebuilding the entire image.
 
