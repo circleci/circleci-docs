@@ -219,7 +219,7 @@
   border-radius: 4px;
   border: 1px solid var(--inline-code-border-color);
   font-size: 0.95em;
-  padding: 0.15em 0.4em;
+  padding: 2px 8px;
 }
 
 .doc code,
@@ -1036,6 +1036,7 @@
   padding-left: 2em; /* Add space for the SVG */
   cursor: pointer; /* Indicate clickable */
   transition: border-radius 0.3s ease;
+  font-style: normal; /* Override italic style from caption */
 }
 
 /* Add the arrow-down SVG after the title */

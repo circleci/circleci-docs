@@ -8,35 +8,35 @@
 | 2
 | 7.5 GB
 | 150GB
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | `large`
 | 4
 | 15 GB
 | 150GB
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | `xlarge`
 | 8
 | 32 GB
 | 150GB
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | `2xlarge`
 | 16
 | 64 GB
 | 150GB
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 
 | `2xlarge+`
 | 32
 | 64 GB
 | 150GB
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
 |===
 --

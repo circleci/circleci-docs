@@ -79,7 +79,7 @@ From the pipelines dashboard::
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 . Select the menu:Pipelines[] next to your project.
-. Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to any workflow run of the pipeline.
+. Select the ellipsis icon:more[Ellipsis menu icon] next to any workflow run of the pipeline.
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
@@ -91,7 +91,7 @@ From the workflow page::
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 . Select the menu:Pipelines[] next to your project.
 . Select any workflow run of the pipeline you want to find the ID for.
-. On the workflow page, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] at the top-right of the page (next to the btn:[Rerun] button).
+. On the workflow page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page (next to the btn:[Rerun] button).
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
@@ -104,7 +104,7 @@ From the job page::
 . Select the menu:Pipelines[] next to your project.
 . Select any workflow run from the pipeline you want to find the ID for.
 . Select any job from that workflow run.
-. On the job page, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] at the top-right of the page (next to the btn:[Rerun] button).
+. On the job page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page (next to the btn:[Rerun] button).
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
