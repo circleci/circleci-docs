@@ -306,6 +306,57 @@ options:
   # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
   test-analysis-duration: 5
 ----
+
+RSpec::
++
+--
+Use the link:https://github.com/circleci/rspec-circleci-coverage[rspec-circleci-coverage] plugin as a dev dependency before configuring the analysis command. This plugin outputs the CircleCI coverage format and enables much faster analysis than using general code coverage tooling.
+
+Add the plugin to your `Gemfile`
+
+[source,ruby]
+----
+source 'https://rubygems.org'
+
+...
+
+group :development, :test do
+  gem 'rspec', '~> 3.13'
+  gem 'rspec-circleci-coverage', :github => 'circleci/rspec-circleci-coverage'
+end
+----
+
+Install the plugin:
+
+[source,console]
+----
+$ bundle install
+----
+
+Add the plugin to your `spec_helper.rb`
+
+[source,ruby]
+----
+require "rspec-circleci-coverage"
+----
+
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: find spec -type f -name '*_spec.tb'
+run: bundle exec rspec --format RspecJunitFormatter --out << outputs.junit >> << test.atoms >>
+analysis: CIRCLECI_COVERAGE=<< outputs.circleci-coverage >> bundle exec rspec << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
+--
 ====
 
 . Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"` (learn more about the flags in the <<cli-flags,test suite flag options>> section).
