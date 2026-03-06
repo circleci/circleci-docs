@@ -4,11 +4,68 @@
 :experimental:
 :page-show-readtime: true
 
-*Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository*. In this guide you will learn how to set up a cross-repo trigger. A cross-repo trigger watches for events in a repository other than the one that contains the pipeline configuration.
+Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository. In this guide you will learn how to set up a cross-repo trigger.
 
 *For this how-to guide we have chosen the following scenario:*
 
-When you tag a new release of an internal library, configure CircleCI to automatically run tests in the repositories that consume that library. Running integration tests validates that your library changes work with your dependent applications before you publish the release.
+Configure CircleCI to automatically run tests for code that consumes a library when a new tag is created in the library repository. Running integration tests validates that your library changes work with your dependent applications before you publish the release.
+
+There will be two options for managing the configuration file for the consumer pipeline, you can either store the config in the consumer repository or in a centralized config repository:
+
+.Option 1: Config in consumer repository
+[mermaid]
+----
+flowchart TB
+    subgraph lib[Library Repository]
+        A[Tag v1.2.3]
+    end
+
+    subgraph consumer[Consumer Repository]
+        B[Config]
+        G[Code]
+    end
+
+    subgraph circleci[CircleCI]
+        C[Trigger]
+        F[Pipeline]
+        H[Tests]
+        C --> F
+        F --> H
+    end
+
+    A -->|Push event| C
+    B -.config.-> F
+    G -.checkout.-> F
+----
+
+.Option 2: Centralized config repository
+[mermaid]
+----
+flowchart TB
+    subgraph lib[Library Repository]
+        A[Tag v1.2.3]
+    end
+
+    subgraph consumer[Consumer Repository]
+        G[Code]
+    end
+
+    subgraph central[Config Repository]
+        B[Config]
+    end
+
+    subgraph circleci[CircleCI]
+        C[Trigger]
+        F[Pipeline]
+        H[Tests]
+        C --> F
+        F --> H
+    end
+
+    A -->|Push event| C
+    B -.config.-> F
+    G -.checkout.-> F
+----
 
 *What you will set up:*
 
@@ -94,7 +151,7 @@ NOTE: This guide demonstrates both approaches. The steps below use tabs to show 
 
 == 1. Create configuration file for your consumer pipeline
 
-To follow this how-to guide you will need a CircleCI configuration file for your consumer pipeline. This file will define the steps you want to run when the library changes.
+To follow this how-to guide you need a CircleCI configuration file for your consumer pipeline. This file defines the steps you want to run when the library changes.
 
 This section covers some elements you might want to include in your configuration file. If you just want to follow along you can use the example config file provided at the end of this section.
 
@@ -132,7 +189,6 @@ jobs:
             RAW_REF="<< pipeline.event.github.ref >>"
             LIBRARY_VERSION="${RAW_REF#refs/tags/}"
             echo "Library version/tag: ${LIBRARY_VERSION}"
-            echo "Library commit: << pipeline.event.github.after >>"
             echo "Library repo: << pipeline.event.github.repository.name >>"
 
       - run:
@@ -154,10 +210,6 @@ jobs:
             # Strip refs/tags/ or refs/heads/ prefix
             LIBRARY_VERSION="${RAW_REF#refs/tags/}"
 
-            if [ -z "$LIBRARY_VERSION" ] || [ "$LIBRARY_VERSION" = "$RAW_REF" ]; then
-              # Fallback if ref wasn't a tag
-              LIBRARY_VERSION="<< pipeline.event.github.after >>"
-            fi
             echo "Would install: @myorg/my-library@${LIBRARY_VERSION}"
             echo "Installation simulated successfully"
 
@@ -184,7 +236,6 @@ In this example:
 * When a tag like `v1.2.3` is created in the library repository, `<< pipeline.event.github.ref >>` will contain `v1.2.3`.
 * The workflow filter ensures the workflow runs for tag events.
 * The configuration installs that specific version using `npm install @myorg/my-library@v1.2.3`.
-* If triggered by a push to a branch (not a tag), it falls back to using the commit SHA.
 * The consumer tests then run against the exact library version that triggered the pipeline.
 
 Once you have created your config file, or decided to use our example, commit and push the config file to either your consumer repository or your centralized config repository. We recommend storing CircleCI configuration files in a `.circleci` directory in your repository but you can store them wherever you like as long as they have a `.yml` extension.
@@ -248,7 +299,7 @@ The trigger tells CircleCI to run the consumer pipeline when tags are created in
 === 4.a. Create the trigger in CircleCI
 
 . Select **GitHub trigger +** at the bottom of the pipeline box.
-. From the **Event** dropdown menu, select **Tag pushes**.
+. From the **Event** dropdown menu, select **Tag pushes**. Using this option means the pipeline will only be triggered when a new tag is created in the library repository.
 +
 NOTE: You can also configure triggers for other events like **PR merged** or **All pushes**. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] for more information.
 
