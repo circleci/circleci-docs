@@ -9,7 +9,7 @@ html {
   font-size: var(--body-font-size);
   height: 100%;
   scroll-behavior: smooth;
-  color-scheme: light; /* Explicitly declare light mode support; prepares for future dark mode */
+  color-scheme: light dark; /* Support both light and dark modes */
 }
 
 @media screen and (min-width: 1024px) {
@@ -153,4 +153,225 @@ object[type="image/svg+xml"]:not([width]) {
   article.doc {
     flex-shrink: 0; /* Prevent excessive shrinking in Firefox */
   }
+}
+
+/* Global theme switching for all icons and images */
+/* Note: !important needed to override Tailwind responsive utilities (e.g., "hidden md:block" on hero images) */
+/* Hide dark icons/images in light mode */
+html[data-theme="light"] .logo-dark,
+html[data-theme="light"] .icon-dark {
+  display: none !important;
+}
+
+/* Hide light icons/images in dark mode */
+html[data-theme="dark"] .logo-light,
+html[data-theme="dark"] .icon-light {
+  display: none !important;
+}
+
+/* Logo needs explicit display: block in dark mode */
+html[data-theme="dark"] .logo-dark {
+  display: block;
+}
+
+/* Search results container background in dark mode */
+/* Note: !important needed to override Tailwind bg-panel-bg utility class */
+html[data-theme="dark"] [data-search-results-container] {
+  background-color: var(--dark-surface-primary) !important;
+}
+
+/* Search bar dark mode styling */
+html[data-theme="dark"] .search-input {
+  border-color: var(--dark-text-secondary);
+  color: var(--dark-text-muted);
+}
+
+html[data-theme="dark"] .search-input::placeholder {
+  color: var(--dark-text-muted);
+  opacity: 1;
+}
+
+html[data-theme="dark"] .search-input:focus {
+  ring-color: var(--dark-text-secondary);
+}
+
+html[data-theme="dark"] .search-icon {
+  color: var(--dark-text-muted);
+}
+
+/* Admonition icon dark mode switching */
+html[data-theme="dark"] .doc .admonitionblock td.icon i.icon-note {
+  background: url('../img/note_icon-dark.svg') no-repeat center / contain;
+}
+
+html[data-theme="dark"] .doc .admonitionblock td.icon i.icon-tip {
+  background: url('../img/tip_icon-dark.svg') no-repeat center / contain;
+}
+
+/* Tabs dark mode styling */
+html[data-theme="dark"] .tablist > ul {
+  border-bottom-color: var(--dark-surface-tertiary);
+}
+
+html[data-theme="dark"] .tablist > ul li {
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .tabs.is-loading .tablist li:first-child::after {
+  background-color: transparent;
+}
+
+html[data-theme="dark"] .tabpanel {
+  background-color: transparent;
+}
+
+/* Footer content color in dark mode */
+html[data-theme="dark"] footer p,
+html[data-theme="dark"] footer .footer-link,
+html[data-theme="dark"] footer .social-icons {
+  color: var(--dark-text-muted);
+}
+
+html[data-theme="dark"] footer svg {
+  color: var(--dark-text-muted);
+}
+
+/* Dropdown menus dark mode styling */
+html[data-theme="dark"] [data-dropdown-menu],
+html[data-theme="dark"] .theme-menu {
+  background-color: var(--dark-surface-primary);
+  border: 1px solid var(--dark-surface-tertiary);
+}
+
+html[data-theme="dark"] [data-dropdown-option]:hover,
+html[data-theme="dark"] .theme-menu-item:hover,
+html[data-theme="dark"] .theme-menu-item:focus {
+  background-color: var(--dark-surface-tertiary);
+}
+
+/* Theme dropdown menu icons inherit color from parent */
+html[data-theme="dark"] .theme-menu-item {
+  color: var(--dark-text-muted);
+}
+
+/* Code block titles and accordion arrow dark mode */
+html[data-theme="dark"] .doc .listingblock > .title {
+  color: var(--dark-text-primary);
+}
+
+/* Inline SVG arrow with currentColor for dark mode */
+html[data-theme="dark"] .doc .listingblock > .title::after {
+  background: url('data:image/svg+xml;utf8,<svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.35355 3.85355C3.15829 4.04882 2.84171 4.04882 2.64645 3.85355L0.146447 1.35355C-0.0488155 1.15829 -0.0488155 0.841708 0.146447 0.646446C0.341709 0.451184 0.658292 0.451184 0.853554 0.646446L3 2.79289L5.14645 0.646447C5.34171 0.451184 5.65829 0.451184 5.85355 0.646447C6.04882 0.841709 6.04882 1.15829 5.85355 1.35355L3.35355 3.85355Z" fill="%23D7DBE3"/></svg>') no-repeat center / contain;
+}
+
+/* Copy code button icon color in dark mode */
+html[data-theme="dark"] .doc .source-toolbox .copy-button {
+  color: var(--dark-text-muted);
+}
+
+/* Copy toast styling for dark mode */
+html[data-theme="dark"] .doc .source-toolbox .copy-toast {
+  background-color: var(--dark-surface-tertiary);
+  color: var(--dark-text-primary);
+}
+
+html[data-theme="dark"] .doc .source-toolbox .copy-toast::after {
+  border-bottom-color: var(--dark-surface-tertiary);
+}
+
+/* Mobile navigation toggle icons (hamburger and close) color */
+svg[data-page-navigation-toggle] {
+  color: var(--color-terminal-black);
+}
+
+html[data-theme="dark"] svg[data-page-navigation-toggle] {
+  color: var(--dark-text-primary);
+}
+
+/* Override text-terminal-black class in dark mode for mobile navigation header only */
+html[data-theme="dark"] [data-page-navigation] > aside > div.text-terminal-black {
+  color: var(--dark-text-primary);
+}
+
+/* Navigation label text color in dark mode */
+html[data-theme="dark"] [data-page-navigation] .nav-link,
+html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-content] span {
+  color: var(--dark-text-muted);
+}
+
+/* Navigation link hover color in dark mode */
+html[data-theme="dark"] [data-page-navigation] .nav-link:hover {
+  color: var(--dark-link-color);
+}
+
+/* Current page navigation item text color and weight in dark mode */
+html[data-theme="dark"] [data-page-navigation] [data-current] span,
+html[data-theme="dark"] [data-page-navigation] .bg-fog span {
+  color: var(--dark-text-primary);
+  font-weight: 400;
+}
+
+/* Active parent navigation item (parent of current page) color and weight in dark mode */
+html[data-theme="dark"] [data-page-navigation] [data-active-parent] a,
+html[data-theme="dark"] [data-page-navigation] [data-active-parent] span {
+  color: var(--dark-text-muted);
+  font-weight: 600;
+}
+
+/* Navigation disclosure arrows color in dark mode */
+[data-page-navigation] [data-navigation-tree-toggle] button svg {
+  color: var(--color-terminal-black);
+}
+
+html[data-theme="dark"] [data-page-navigation] [data-navigation-tree-toggle] button svg {
+  color: var(--dark-text-muted);
+}
+
+/* Article info bar calendar icon color in dark mode */
+html[data-theme="dark"] .text-link-on-light svg {
+  color: var(--dark-text-primary);
+}
+
+/* Article info bar markdown dropdown arrow color in dark mode */
+[data-dropdown-button] svg {
+  color: var(--color-terminal-black);
+}
+
+html[data-theme="dark"] [data-dropdown-button] svg {
+  color: var(--dark-text-muted);
+}
+
+/* Home page guide card icons - set color for inline SVGs to inherit */
+html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/getting-started/"] svg,
+html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/hello-world/"] svg,
+html[data-theme="dark"] .landing-page a[href*="/guides/getting-started/slack-orb-tutorial/"] svg {
+  color: var(--dark-text-muted);
+}
+
+/* Table body text color in dark mode (keep headers as primary color) */
+html[data-theme="dark"] .doc table.tableblock tbody td {
+  color: var(--dark-text-muted);
+}
+
+/* Inline code should inherit color from parent context (tables, lists, admonitions, etc.) */
+/* Excludes code blocks (pre code) which need their own syntax highlighting colors */
+html[data-theme="dark"] .doc code:not(pre code) {
+  color: inherit;
+}
+
+/* Note: Green accent highlights (TOC, tabs, components) now use CSS variable overrides in vars.css */
+
+/* DataTables hover styling - maintain background colors on hover in dark mode */
+/* Note: !important needed to override DataTables library styles */
+html[data-theme="dark"] table.datatable thead th:hover,
+html[data-theme="dark"] table.datatable thead th[data-sortable]:hover {
+  background-color: var(--table-header-background) !important;
+}
+
+html[data-theme="dark"] table.datatable tbody tr:nth-child(even):hover {
+  background-color: var(--table-stripe-even) !important;
+}
+
+html[data-theme="dark"] table.datatable tbody tr:nth-child(odd):hover {
+  background-color: var(--table-stripe-odd) !important;
 }

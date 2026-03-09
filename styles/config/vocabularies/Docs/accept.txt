@@ -1,5 +1,5 @@
 \bgithub organization\b
-\bcircleci organization\b
+\b[Cc]ircle[cC][iI] organization\b
 \bbitbucket organization\b
 .circleci/config.yml
 [Aa]gentless

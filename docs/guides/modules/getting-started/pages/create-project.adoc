@@ -160,7 +160,7 @@ Follow these steps to create a new project in CircleCI:
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add]. Select btn:[Bitbucket Data Center] and then btn:[Authorize in Bitbucket Data Center]
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add]. Select btn:[Bitbucket Data Center] and then btn:[Authorize in Bitbucket Data Center].
 +
 .Access Bitbucket data center repos
 image::guides:ROOT:create-project/authorize-bitbucket-data-center.png[Choose a repository window with option to add another VCS]
@@ -189,7 +189,7 @@ NOTE: If you authenticated CircleCI with either the xref:integration:github-inte
 
 Follow these steps to  set up a new project in CircleCI:
 
-. In the CircleCI web app, select **Organization Home** in the sidebar. The equivalent option in CircleCI Server is **Dashboard**
+. In the CircleCI web app, select **Organization Home** in the sidebar. The equivalent option in CircleCI Server is **Dashboard**.
 . Select btn:[Set up a project].
 +
 .Set up a project
@@ -214,8 +214,8 @@ CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. Yo
 
 To make changes to your pipeline, choose one of the following:
 
-* Edit the config file in your repository,
-* Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
+* Edit the config file in your repository.
+* Select the ellipsis icon:more[Ellipsis menu icon] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
 * Access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
 
 .Access and edit a config file
