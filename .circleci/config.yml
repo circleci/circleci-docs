@@ -115,7 +115,7 @@ jobs:
           command: |
             set -e
             echo "[INFO] Starting Antora build..."
-            NODE_OPTIONS="--max-old-space-size=4096" gulp build:docs
+            NODE_OPTIONS="--max-old-space-size=4096" npx gulp build:docs
             echo "[INFO] Antora build completed."
       - store_artifacts:
           path: build
