@@ -137,7 +137,7 @@ docs/
                     └── settings-dark.svg
 ----
 
-NOTE: If you use the older `image:` macro syntax (for example, pass:c[`image:guides:ROOT:icons/example.svg[alt text, role="no-border"]`]), it will not automatically switch themes. Use the pass:[icon:name[]] macro instead for theme-aware icons.
+NOTE: If you use the older `image:` macro syntax (for example, pass:[`image:guides:ROOT:icons/example.svg[alt text, role="no-border"`]), it will not automatically switch themes. Use the pass:[icon:name[Icon alt text]] macro instead for theme-aware icons.
 
 == Diagrams
 

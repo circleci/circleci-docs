@@ -14,10 +14,11 @@ In this tutorial you will set up an integration between CircleCI and your Kubern
 * Restore version
 * Scale version
 * Restart version
-* Retry Rollout (when using Argo Rollouts)
-* Promote Rollout (when using Argo Rollouts)
-* Cancel Rollout (when using Argo Rollouts)
 
+When using Argo Rollouts, the following commands are also available:
+* Retry Rollout
+* Promote Rollout
+* Cancel Rollout
 
 [#prerequisites]
 == Prerequisites
@@ -37,7 +38,7 @@ include::ROOT:partial$deploy/supported-versions.adoc[]
 
 === Labels and annotations
 
-The following table shows a complete list of labels and annotations either required or available for configuring your environment integration. You will be guided to set these up in the in-app setup process. These are not strictly a prerequisite but will be required for the release agent to work correctly.
+The following table shows a complete list of labels and annotations either required or available for configuring your environment integration. You will be guided to set these up in the in-app setup process. These are not strictly a prerequisite but will be required for the release agent to work.
 
 [.table-scroll]
 --
@@ -141,7 +142,7 @@ image::guides:ROOT:releases/component-setup.png[Screenshot showing the component
 After completing all the setup steps in the app, you will have done the following:
 
 * Set up an environment integration.
-* Installed the release agent into your Kubernetes cluster
+* Installed the release agent into your Kubernetes cluster.
 * Configured your Kubernetes components.
 
 Alternatively, you can find manual set up instruction for your Kubernetes components in the xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components] page.
@@ -161,7 +162,7 @@ Use Helm to install the CircleCI release agent into your Kubernetes cluster
 helm repo add release-agent https://circleci-public.github.io/cci-k8s-release-agent
 ----
 
-. Then, update your local Helm chart repository cache
+. Then, update your local Helm chart repository cache:
 +
 [,shell]
 ----
@@ -176,7 +177,7 @@ You will need a `CCI_INTEGRATION_TOKEN` to install the CircleCI release agent in
 . Navigate to the **Environments** tab.
 . Select the gear icon icon:settings[Settings icon] corresponding to the environment you just created to enter the Environment Integration Settings page.
 . Select btn:[Create Integration Token] and then btn:[Create Token].
-. The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then select btn:[Done]
+. The new token will be displayed. Be sure to copy and save this somewhere for use in the next step. Then select btn:[Done].
 
 
 [#install-the-release-agent]
