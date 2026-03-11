@@ -218,13 +218,13 @@ Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboar
 
 * **Environments**: List of environment integrations set up for your organization. From here you can:
 ** Set up a new environment integration by selecting btn:[Create Environment Integration].
-** Access settings for each environment image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"].
+** Access settings for each environment icon:settings[Settings icon].
 ** Access the environment details view by selecting an environment name.
 
 * **Components**: A list of components and their associated projects. From here you can:
 ** Set up a new component by selecting btn:[Create Component]. From here you can select and environment that has a successful environment integration set up, and from there you can add a new component.
 ** Get straight to the component's project building on CircleCI by selecting the project name.
-** Access setting for each component image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"].
+** Access setting for each component icon:settings[Settings icon].
 
 === Filter and group components and environments with labels
 
@@ -248,7 +248,7 @@ To add or edit labels for a component, follow these steps:
 . Select *Deploys* in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Components** tab.
 . Select the component by name. You can use the filter at the top of the page to help find the component you want.
-. You are now on the component view page. Select the edit button image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] in the labels panel.
+. You are now on the component view page. Select the edit button icon:edit-solid[Edit icon] in the labels panel.
 . Enter or edit your label(s) and select btn:[Done].
 
 ==== Environment labels
@@ -257,8 +257,8 @@ To add or edit labels for an environment, follow these steps:
 
 . Select *Deploys* in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Environments** tab.
-. Select the cog icon image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"] for your environment.
-. You are now on the environment settings page. Select the edit button image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] in the labels panel.
+. Select the cog icon icon:settings[Settings icon] for your environment.
+. You are now on the environment settings page. Select the edit button icon:edit-solid[Edit icon] in the labels panel.
 . Enter or edit your label(s) and select btn:[Done].
 
 === View all deployments for an environment

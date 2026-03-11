@@ -70,6 +70,7 @@ asciidoc:
     idseparator: "-"
   extensions:
   - '@asciidoctor/tabs'
+  - ./extensions/theme-icon-extension.js
 urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
@@ -125,3 +126,6 @@ antora:
         primary_border_color: '#008542'
         primary_text_color: '#00381A'
   - require: ./extensions/detect-unused-media-extension.js
+    excludepatterns:
+      - '*-dark.svg'
+      - 'icons/*.svg'

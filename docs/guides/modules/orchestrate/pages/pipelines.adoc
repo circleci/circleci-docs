@@ -71,7 +71,7 @@ To add or edit a pipeline, follow these steps:
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 . Select *Project Setup* in the sidebar.
-. Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon (image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"]) to the right of the section you want to change.
+. Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon (icon:edit-solid[Edit icon]) to the right of the section you want to change.
 +
 NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so at this point. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a detailed guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
 . Complete the form fields and options:
@@ -92,7 +92,7 @@ image::guides:ROOT:add-pipeline.png[Add a pipeline]
 To add or edit a pipeline, follow these steps:
 
 . In the CircleCI web app, select **Projects** in the sidebar.
-. Select the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and choose **Project Settings**.
+. Select the ellipsis next to your project icon:more[Ellipsis menu icon] and choose **Project Settings**.
 . Select **Pipelines** in the sidebar.
 +
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
@@ -118,7 +118,7 @@ Bitbucket Data Center::
 To add or edit a pipeline, follow these steps:
 
 . In the CircleCI web app, select **Projects** in the sidebar.
-. Select the ellipsis next to your project image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and choose **Project Settings**.
+. Select the ellipsis next to your project icon:more[Ellipsis menu icon] and choose **Project Settings**.
 . Select **Pipelines** in the sidebar.
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon on the right.
 . Complete the form fields and options:

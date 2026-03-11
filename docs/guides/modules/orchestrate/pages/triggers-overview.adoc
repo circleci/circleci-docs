@@ -67,7 +67,7 @@ Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2
 . Find your project slug:
 .. Select **Projects** in the CircleCI web app sidebar.
 .. Find your project.
-.. Select the ellipsis menu image:guides:ROOT:icons/more.svg[more icon, role="no-border"] and choose **Project Settings**.
+.. Select the ellipsis menu icon:more[Ellipsis menu icon] and choose **Project Settings**.
 .. Copy your project slug. Save this somewhere, you will need it later.
 
 . Find your definition ID:
