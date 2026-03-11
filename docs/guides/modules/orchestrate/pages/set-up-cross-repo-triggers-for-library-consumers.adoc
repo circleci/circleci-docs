@@ -233,7 +233,7 @@ IMPORTANT: The `filters` section is required because CircleCI does not run workf
 
 In this example:
 
-* When a tag like `v1.2.3` is created in the library repository, `<< pipeline.event.github.ref >>` will contain `v1.2.3`.
+* When a tag like `v1.2.3` is created in the library repository, `<< pipeline.event.github.ref >>` will contain `refs/tags/v1.2.3`.
 * The workflow filter ensures the workflow runs for tag events.
 * The configuration installs that specific version using `npm install @myorg/my-library@v1.2.3`.
 * The consumer tests then run against the exact library version that triggered the pipeline.
