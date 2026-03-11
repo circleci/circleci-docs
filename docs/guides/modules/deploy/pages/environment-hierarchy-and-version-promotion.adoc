@@ -1,0 +1,183 @@
+= Environment hierarchy and version promotion
+:page-platform: Cloud
+:page-description:
+:experimental:
+
+Environment hierarchy and version promotion let you define an ordered promotion path for your environments (e.g. dev → staging → production) and visually promote a version through each stage from the CircleCI UI. Instead of manually tracking which version is deployed where, you get a single view of the entire release lifecycle with one-click promotion between environments.
+
+== Key concepts
+
+=== Environment hierarchy
+
+An environment hierarchy is an ordered sequence of integrations that defines a promotion path. For example, a hierarchy could be:
+
+* Dev
+* Staging
+* Production
+
+.Example environment hierarchy
+[mermaid]
+----
+graph LR
+    Dev[Development<br/>Environment] -->|Promote| Staging[Staging<br/>Environment]
+    Staging -->|Promote| Production[Production<br/>Environment]
+
+    style Dev fill:#e1f5ff
+    style Staging fill:#fff4e1
+    style Production fill:#ffe1e1
+----
+
+Hierarchies are configured at the organization level. Each level in the hierarchy maps to one environment.
+
+=== Version promotion
+
+Version promotion is the act of deploying a specific version to the next environment in the hierarchy by triggering a deploy pipeline. The version promotion page provides a visual pipeline of environment cards so you can see the current state of every environment at a glance and promote forward with a single click.
+
+== Prerequisites
+
+Before using environment hierarchy and version promotion you need:
+
+* Environment integrations. At least two integrations must exist for the organization (for example, a dev cluster and a production cluster). You can create environment integrations in the CircleCI web app. See the xref:guides:deploy:configure-deploy-markers.adoc#create-an-environment-integration[Create an Environment Integration] page for more details. You can also choose to just configure your environment when creating your deploy markers which will automatically create an environment integration for you if it doesn't exist already.
+
+* Deploy pipeline. The project must have a deploy pipeline configured. See the xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] page for more details.
+
+== Set up an environment hierarchy
+
+=== Creating a hierarchy
+
+. Navigate to menu:Organization Settings[Deploys] in the CircleCI web app.
+
+. In the Environment Hierarchy card, select btn:[Create hierarchy].
+
+. Enter a name and optional description.
+
+. Add levels by selecting from your existing environments. Each level maps to one environment.
+
+. Order the levels to define the promotion sequence. The first level is the earliest environment (for example, dev) and the last level is the final environment (for example, production).
+
+. You can set the hierarchy as the organization default. This step is optional.
+
+== Edit or delete a hierarchy
+
+From the same Organization Settings > Deploys page you can edit a hierarchy (reorder levels, add or remove integrations, update name/description) or delete it entirely.
+
+=== Assignment scopes
+
+A hierarchy can be assigned at three scopes:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Scope | Behavior
+
+| Organization
+| Default hierarchy for all projects and components in the org
+
+| Project (coming soon)
+| Overrides the org default for a specific project
+
+| Component (coming soon)
+|Overrides for a specific component
+|===
+--
+
+When the system resolves which hierarchy applies, it checks component first, then project, then organization. The most specific assignment wins.
+
+== Use version promotion
+
+. Open the Releases Dashboard or a Component page.
+
+. Find the release you want to promote in the release list.
+
+. Click the Deploy / Promote button on the release row.
+
+. If an environment hierarchy exists for the component, this navigates to the Version Promotion page.
+
+. If no hierarchy exists, the Deploy Pipeline Modal opens directly.
+
+
+
+=== The version promotion page
+
+The version promotion page shows the following:
+
+* Breadcrumbs — Releases Dashboard > Component Name > Version Promotion
+
+* Metadata bar — project, component, version, commit SHA, author & message, and the name of the active promotion hierarchy
+
+* Environment pipeline — a horizontal row of environment cards connected by action buttons (Promote, Retry, Promoting, Promoted)
+
+=== Promote to the next environment
+
+. Click the Promote button between two environment cards. This opens the Deploy Pipeline Modal pre-filled with:
+
+* The target environment (integration)
+
+* The component
+
+* The version being promoted
+
+. Review the values and click Deploy to trigger the deploy pipeline. A success toast confirms the pipeline was triggered, and the environment card updates to show the deployment in progress.
+
+=== Retry a failed deployment
+
+When a deployment fails:
+
+* The environment card shows a red border and "Deployment failed" subtitle.
+
+* A Retry button appears between the cards (or as an icon on the card itself).
+
+* A link to the failed job is displayed for debugging.
+
+Click Retry to re-trigger the deploy pipeline for that environment.
+
+=== Changing the hierarchy
+
+Click the Change environment hierarchy button at the top of the page to navigate to Organization Settings > Deploys where you can modify or reassign the hierarchy.
+
+== Environment card states
+
+Each environment card in the promotion pipeline shows a status that reflects the current state of the deployment:
+
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| Status | Card Subtitle | Connector state | Description
+
+| SUCCESS / LOGGED
+| Currently deployed
+| Promoted (checkmark)
+| Version is live in this environment
+
+| RUNNING / PENDING
+| Deploying
+| Promoting (spinner)
+| Deploy pipeline is currently executing
+
+| FAILED
+| Deployment failed
+| Retry (red button)
+| Deploy pipeline failed; retry or investigate
+
+|CANCELED
+| Not deployed
+| Retry (red button)
+| Deploy was canceled; can retry
+
+| Not deployed
+| Not deployed
+| Promote (blue button)
+| Version has not been deployed to this environment
+|===
+--
+
+Card details (visible when a release exists):
+
+* Version — the version name being deployed (labeled "Attempted Version" on failure)
+
+* Timestamp — "Deployed", "Started at", or "Failed at" depending on status
+
+* Failed job link — direct link to the failed job (only on failure)
+
