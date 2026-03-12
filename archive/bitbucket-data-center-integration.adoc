@@ -36,7 +36,7 @@ Integrate with CircleCI to access features for automated software delivery:
 .. Select btn:[Set Up Integration] next to Bitbucket Data Center.
 .. In the modal, enter your Bitbucket Data Center instance URL and your known_hosts. For guidance on generating known_hosts, see <<known-hosts>>.
 +
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[VCS Connections] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 .. Select btn:[Set Up Integration].
 .. Select the back arrow to exit **Org**.
@@ -109,7 +109,7 @@ The output will look something like the following:
 [bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
 ----
 
-Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[Integrations].
+Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[VCS Connections].
 
 == How it works
 
@@ -185,7 +185,7 @@ Add or remove users, and manage user roles for the organization as well as user 
 [#organization-settings-integrations]
 === Integrations
 
-The Integrations page under Org allows you to connect your organization with either Bitbucket Data Center or a GitLab self-managed instance. Steps to integrate with Bitbucket Data Center are described on the xref:getting-started:create-project.adoc[Create a project] page.
+The VCS Connections page under Org allows you to connect your organization with either Bitbucket Data Center or a GitLab self-managed instance. Steps to integrate with Bitbucket Data Center are described on the xref:getting-started:create-project.adoc[Create a project] page.
 
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables

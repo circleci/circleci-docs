@@ -245,11 +245,11 @@ GitLab self-managed::
 +
 --
 
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[VCS Connections] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 *Availability*: A GitLab self-managed integration is installed into a `circleci` type organization.
 
-*Configure*: Set up an integration with your GitLab self-managed instance from menu:Org[Integrations] as follows:
+*Configure*: Set up an integration with your GitLab self-managed instance from menu:Org[VCS Connections] as follows:
 
 . Select btn:[Set Up Integration] next to GitLab self-managed.
 . Enter your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
@@ -287,11 +287,11 @@ You cannot currently edit or delete existing GitLab self-managed integrations.
 Bitbucket Data Center::
 +
 --
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[VCS Connections] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 *Availability*: A Bitbucket Data Center integration is installed into a `circleci` type organization.
 
-*Configure*: Set up an integration with your Bitbucket Data Center instance from menu:Org[Integrations] as follows:
+*Configure*: Set up an integration with your Bitbucket Data Center instance from menu:Org[VCS Connections] as follows:
 
 . Select btn:[Set up integration] next to Bitbucket Data Center.
 . In the modal enter your Bitbucket Data Center instance URL and your `known_hosts`:
@@ -314,7 +314,7 @@ The output will look something like the following:
 [bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
 ----
 +
-Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[Integrations].
+Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[VCS Connections].
 
 . Select btn:[Set Up Integration].
 
