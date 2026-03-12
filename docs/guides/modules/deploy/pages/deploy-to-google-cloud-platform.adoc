@@ -75,3 +75,69 @@ workflows:
 ```
 
 For another example, see our link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud deployment example project].
+
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+After setting up your Google Cloud Platform deployment, you can add deploy markers to track and manage your deployments in the CircleCI web app. Deploy markers work with all GCP deployment types including GKE, Cloud Run, and App Engine.
+
+[#what-are-deploy-markers]
+=== What are deploy markers
+
+Deploy markers are a lightweight way to log your deployments in CircleCI. When you add deploy markers to your configuration, you can:
+
+* View a timeline of all deployments in the CircleCI web app
+* Track deployment status (pending, running, success, or failed)
+* Roll back to previous versions using rollback pipelines
+* Trigger deployments directly from the CircleCI web app using deploy pipelines
+
+[#add-deploy-markers-to-your-gcp-deployment]
+=== Add deploy markers to your GCP deployment
+
+To add deploy markers to your GCP deployment job, add the `circleci run release` commands to your deployment workflow. The following example shows a basic deployment marker setup for a GKE deployment:
+
+[source,yaml]
+----
+jobs:
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+    working_directory: /tmp/my-project
+    steps:
+      - run:
+          name: Plan deployment
+          command: |
+            circleci run release plan gke-deploy \
+              --target-version="${CIRCLE_SHA1:0:7}" \
+              --environment-name="production" \
+              --component-name="my-gcp-app"
+      - run:
+          name: Deploy Main to GKE
+          command: |
+            sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+            kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
+      - run:
+          name: Update deployment status
+          command: circleci run release update gke-deploy --status=running
+      - run:
+          name: Update deployment to SUCCESS
+          command: circleci run release update gke-deploy --status=SUCCESS
+          when: on_success
+      - run:
+          name: Update deployment to FAILED
+          command: circleci run release update gke-deploy --status=FAILED
+          when: on_fail
+----
+
+For complete instructions on configuring deploy markers, including status updates and advanced options, refer to the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+[#set-up-rollback-and-deploy-pipelines]
+=== Set up rollback and deploy pipelines
+
+Once you have deploy markers configured, you can set up rollback and deploy pipelines to manage your GCP deployments directly from the CircleCI web app:
+
+* xref:set-up-rollbacks.adoc[Set up a Rollback Pipeline] - Configure a pipeline to roll back to previous versions of your GCP application
+* xref:set-up-deploys.adoc[Set up a Deploy Pipeline] - Configure a pipeline to deploy new versions from the CircleCI web app
+
+These features provide additional control and visibility for your Google Cloud Platform deployments.

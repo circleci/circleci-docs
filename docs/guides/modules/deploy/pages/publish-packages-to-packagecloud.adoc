@@ -235,6 +235,74 @@ You can read more about publishing npm packages to packagecloud on the CircleCI 
 
 Packagecloud also provides a robust API to manage package repositories. You can read more about the link:https://packagecloud.io/docs/api[Packagecloud API] and how to upload, delete, and promote packages across repositories.
 
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+After setting up your Packagecloud deployment, you can add deploy markers to track and manage your package publications in the CircleCI web app. Deploy markers provide visibility into your deployment history and enable rollback capabilities.
+
+[#what-are-deploy-markers]
+=== What are deploy markers
+
+Deploy markers are a lightweight way to log your deployments in CircleCI. When you add deploy markers to your configuration, you can:
+
+* View a timeline of all deployments in the CircleCI web app
+* Track deployment status (pending, running, success, or failed)
+* Roll back to previous versions using rollback pipelines
+* Trigger deployments directly from the CircleCI web app using deploy pipelines
+
+[#add-deploy-markers-to-your-packagecloud-deployment]
+=== Add deploy markers to your Packagecloud deployment
+
+To add deploy markers to your Packagecloud deployment job, add the `circleci run release` commands to your deployment workflow. The following example shows a basic deployment marker setup:
+
+[source,yaml]
+----
+jobs:
+  deploy:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/ruby:3.1.2
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Plan deployment
+          command: |
+            circleci run release plan packagecloud-deploy \
+              --target-version="${CIRCLE_SHA1:0:7}" \
+              --environment-name="production" \
+              --component-name="my-package"
+      - run:
+          name: Install packagecloud CLI
+          command: gem install package_cloud
+      - run:
+          name: Push deb package
+          command: package_cloud push example-user/example-repo/debian/jessie debs/packagecloud-test_1.1-2_amd64.deb
+      - run:
+          name: Update deployment status
+          command: circleci run release update packagecloud-deploy --status=running
+      - run:
+          name: Update deployment to SUCCESS
+          command: circleci run release update packagecloud-deploy --status=SUCCESS
+          when: on_success
+      - run:
+          name: Update deployment to FAILED
+          command: circleci run release update packagecloud-deploy --status=FAILED
+          when: on_fail
+----
+
+For complete instructions on configuring deploy markers, including status updates and advanced options, refer to the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+[#set-up-rollback-and-deploy-pipelines]
+=== Set up rollback and deploy pipelines
+
+Once you have deploy markers configured, you can set up rollback and deploy pipelines to manage your Packagecloud deployments directly from the CircleCI web app:
+
+* xref:set-up-rollbacks.adoc[Set up a Rollback Pipeline] - Configure a pipeline to roll back to previous versions of your packages
+* xref:set-up-deploys.adoc[Set up a Deploy Pipeline] - Configure a pipeline to deploy new versions from the CircleCI web app
+
+These features provide additional control and visibility for your Packagecloud package publications.
+
 [#see-also]
 == See also
 

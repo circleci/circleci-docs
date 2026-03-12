@@ -211,6 +211,86 @@ workflows:
             - aws-ecs/deploy_service_update
 ----
 
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+After setting up your AWS ECS service updates, you can add deploy markers to track and manage your deployments in the CircleCI web app. Deploy markers provide visibility into your deployment history and enable rollback capabilities.
+
+[#what-are-deploy-markers]
+=== What are deploy markers
+
+Deploy markers are a lightweight way to log your deployments in CircleCI. When you add deploy markers to your configuration, you can:
+
+* View a timeline of all deployments in the CircleCI web app
+* Track deployment status (pending, running, success, or failed)
+* Roll back to previous versions using rollback pipelines
+* Trigger deployments directly from the CircleCI web app using deploy pipelines
+
+[#add-deploy-markers-to-your-ecs-deployment]
+=== Add deploy markers to your ECS deployment
+
+To add deploy markers to your AWS ECS deployment job, you can create a custom job that wraps the deploy_service_update orb job with deploy marker commands. The following example shows how to integrate deploy markers:
+
+[source,yaml]
+----
+jobs:
+  deploy-with-markers:
+    executor: aws-cli/default
+    steps:
+      - run:
+          name: Plan deployment
+          command: |
+            circleci run release plan ecs-service-deploy \
+              --target-version="${CIRCLE_SHA1}" \
+              --environment-name="production" \
+              --component-name="${MY_APP_PREFIX}-service"
+      - aws-cli/setup:
+          role_arn: arn:aws:iam::123456789012
+      - aws-ecs/deploy_service_update:
+          family: '${MY_APP_PREFIX}-service'
+          cluster: '${MY_APP_PREFIX}-cluster'
+          container_image_name_updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
+      - run:
+          name: Update deployment status
+          command: circleci run release update ecs-service-deploy --status=running
+      - run:
+          name: Update deployment to SUCCESS
+          command: circleci run release update ecs-service-deploy --status=SUCCESS
+          when: on_success
+      - run:
+          name: Update deployment to FAILED
+          command: circleci run release update ecs-service-deploy --status=FAILED
+          when: on_fail
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - aws-ecr/build_and_push_image:
+          repo: '${MY_APP_PREFIX}'
+          tag: '${CIRCLE_SHA1}'
+          auth:
+            - aws-cli/setup:
+                role_arn: arn:aws:iam::123456789012
+      - deploy-with-markers:
+          requires:
+            - aws-ecr/build_and_push_image
+      - verify-deployment:
+          requires:
+            - deploy-with-markers
+----
+
+For complete instructions on configuring deploy markers, including status updates and advanced options, refer to the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+[#set-up-rollback-and-deploy-pipelines]
+=== Set up rollback and deploy pipelines
+
+Once you have deploy markers configured, you can set up rollback and deploy pipelines to manage your AWS ECS deployments directly from the CircleCI web app:
+
+* xref:set-up-rollbacks.adoc[Set up a Rollback Pipeline] - Configure a pipeline to roll back to previous versions of your ECS service
+* xref:set-up-deploys.adoc[Set up a Deploy Pipeline] - Configure a pipeline to deploy new versions from the CircleCI web app
+
+These features provide additional control and visibility for your AWS ECS service deployments.
+
 [#next-steps]
 == Next steps
 
