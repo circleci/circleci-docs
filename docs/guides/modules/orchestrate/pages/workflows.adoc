@@ -892,29 +892,41 @@ The following state diagram shows the possible states and transitions of a workf
 stateDiagram-v2
     [*] --> running
 
+    state "Approval Required" as on_hold {
+        [*] --> waiting_approval
+        waiting_approval --> approved : approval job
+        approved --> [*]
+    }
+
+    state "Serial Queue" as queued {
+        [*] --> waiting_queue
+        waiting_queue --> ready : queued as part of a serial group
+        ready --> [*]
+    }
+
+    state "Failure Path" as failing {
+        [*] --> failing_state
+        failing_state --> failed
+        failing_state --> canceled
+    }
+
     running --> success
+    running --> on_hold
+    on_hold --> running
+    on_hold --> success
+    on_hold --> canceled
+
+    running --> queued
+    queued --> running
 
     running --> failing
-
-    running --> on_hold
-    on_hold --> canceled
-    on_hold --> running : approval job
-    on_hold --> success
-
     running --> canceled
-    failing --> failed
-    failing --> canceled
-
-    running --> failed
     running --> error
     running --> unauthorized
 
-    running --> queued
-    queued --> running: queued as part of a serial group
-
     success --> [*]
-    canceled --> [*]
     failed --> [*]
+    canceled --> [*]
     error --> [*]
     unauthorized --> [*]
 

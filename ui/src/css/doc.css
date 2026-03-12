@@ -859,6 +859,7 @@
 .doc .listingblock .title,
 .doc .openblock .title,
 .doc .videoblock .title,
+.doc .mermaid-diagram-container + .title,
 .doc table.tableblock caption {
   color: var(--caption-font-color);
   font-size: var(--doc-font-size);
@@ -881,9 +882,11 @@
 }
 
 .doc .imageblock .title,
-.doc .videoblock .title {
+.doc .videoblock .title,
+.doc .mermaid-diagram-container + .title {
   margin-top: 0.5rem;
   padding-bottom: 0;
+  text-align: center;
 }
 
 .doc details {
@@ -1484,34 +1487,42 @@
 
 /* === MERMAID DIAGRAM STYLES === */
 
-/* Basic container styling */
-.doc .mermaid {
-  text-align: center;
-  margin: 1rem 0;
+/* Container styling */
+.doc .mermaid-diagram-container {
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
   overflow-x: auto;
 }
 
-/* Responsive sizing */
-.doc .mermaid svg {
+/* Content styling */
+.doc .mermaid-content {
+  max-width: 100%;
+}
+
+.doc .mermaid-content svg {
   max-width: 100%;
   height: auto;
-  cursor: default; /* Prevent zoom cursor on hover */
+  cursor: default;
+  display: block;
+  margin: 0 auto;
 }
 
-/* Prevent zoom cursor on mermaid diagrams */
-.doc .mermaid,
-.doc .mermaid *,
-.doc .imageblock .mermaid,
-.doc .imageblock .mermaid *,
-.doc .imageblock .content .mermaid,
-.doc .imageblock .content .mermaid * {
-  cursor: default !important;
+/* Theme-aware visibility */
+.doc .mermaid-content.diagram-light {
+  display: block !important;
 }
 
-/* Specifically override the imageblock content zoom cursor when it contains mermaid */
-.doc .imageblock .content .mermaid ~ *,
-.doc .imageblock .content .mermaid + * {
-  cursor: default !important;
+.doc .mermaid-content.diagram-dark {
+  display: none !important;
+}
+
+html[data-theme="dark"] .doc .mermaid-content.diagram-light {
+  display: none !important;
+}
+
+html[data-theme="dark"] .doc .mermaid-content.diagram-dark {
+  display: block !important;
 }
 
 
