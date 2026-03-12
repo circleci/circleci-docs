@@ -26,8 +26,8 @@ Configure deploy markers with or without status updates as follows:
 
 Once you have deploy markers configured, you will see a timeline of deployments in the Deploys UI. From the timeline you have the following options:
 
-* You can choose to rollback (image:guides:ROOT:icons/rebuild.svg[rollback icon, role="no-border"]) to a version.
-* You can promote (deploy) a version (image:guides:ROOT:icons/promote.svg[promote icon, role="no-border"]), once you also have a deploy pipeline set up. For more information on deploys, see the xref:set-up-deploys.adoc[Set up Deploys] guide.
+* You can choose to rollback (icon:rebuild[rollback icon]) to a version.
+* You can promote (deploy) a version (icon:promote[promote icon]), once you also have a deploy pipeline set up. For more information on deploys, see the xref:set-up-deploys.adoc[Set up Deploys] guide.
 * You will also get notifications for failed deployments.
 
 .Deploys timeline with failed deployment
