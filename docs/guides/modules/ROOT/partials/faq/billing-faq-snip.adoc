@@ -45,6 +45,26 @@ You can decline CAR, but you will not get a notice at 20%, and if your credits d
 
 On the *Free Plan*, jobs will fail to run once you have run out of credits.
 
+[#fixed-date-credit-allocation]
+=== What is fixed-date Credit Allocation?
+
+Your Order may include credits that are scheduled to be added to your account at set intervals, for example, on a semi-annual basis. In this case, your Credit Purchase is divided equally between Credit Allocations and provisioned at the pre-assigned, regular intervals described on your Order.
+
+If your credit balance runs low before your next scheduled Credit Allocation interval date and you have Credit Auto-Refill (CAR) enabled, CAR will provide additional credits to keep your builds running until the next scheduled Credit Allocation arrives. When activated, CAR is billed separately from your Order's Credit Allocation schedule.
+
+If CAR is not enabled, your builds will be blocked when your credits are exhausted, and will remain blocked until the next scheduled Credit Allocation interval date.
+
+For example:
+
+. Your Order is for 2 years and includes 400M credits split across 4 semi-annual allocations of 100M credits each.
+. After nine months, you have used your available credits and your balance runs low before the next scheduled Credit Allocation interval date.
+. If CAR is enabled, CAR provides credits until your next 100M Credit Allocation is provisioned on its scheduled date.
+. If CAR is not enabled, builds are blocked until the next scheduled Credit Allocation interval date.
+
+Contact your account team if you have questions about how your Order is configured.
+
+You can view your Credit Allocation interval schedule and settings by logging in to the CircleCI web app, then select **Plan** > **Plan Overview**.
+
 [#do-credits-expire]
 === Do credits expire?
 
