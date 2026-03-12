@@ -175,6 +175,8 @@ NOTE: If your project is xref:guides:integration:oss.adoc[open-source] you will 
 
 To find a list of your active users, log in to the CircleCI web app, select menu:Plan[Plan Usage > Users].
 
+For more information about user types, including active users, registered users, and unregistered users, see xref:guides:plans-pricing:user-types-and-registration.adoc[User types and registration].
+
 [#charged-job-is-queued-or-preparing]
 === Am I charged if my job is "Queued" or "Preparing"?
 

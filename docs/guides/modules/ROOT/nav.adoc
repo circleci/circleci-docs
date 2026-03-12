@@ -315,6 +315,7 @@
 * Plans and pricing
 ** xref:plans-pricing:plan-overview.adoc[CircleCI plans overview]
 ** xref:plans-pricing:credits.adoc[Credits overview]
+** xref:plans-pricing:user-types-and-registration.adoc[User types and registration]
 ** xref:plans-pricing:manage-budgets.adoc[Manage budgets]
 ** xref:plans-pricing:plan-free.adoc[Free Plan overview]
 ** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]
