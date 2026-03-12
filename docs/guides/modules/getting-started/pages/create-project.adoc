@@ -15,12 +15,12 @@ This guide gets you started with creating a new project in CircleCI.
 
 The authorization method used to set up your CircleCI account determines the definition of "project" in CircleCI, as well as the permissions management processes available to you:
 
-On the **Organization Home** page, check which option you see:
+On the **Home** page, check which option you see:
 
 * If you see a btn:[Set up a project] button, follow steps to <<set-up-a-project>> below.
 * If you see a btn:[Create Project] button, follow steps to <<create-a-project>> below.
 
-NOTE: Using CircleCI Server? Use the <<set-up-a-project>> steps below. Rather than Organization Home you will see Dashboard in the web app sidebar.
+NOTE: Using CircleCI Server? Use the <<set-up-a-project>> steps below. Rather than Home you will see Dashboard in the web app sidebar.
 
 [#create-a-project]
 === Create a project
@@ -189,7 +189,7 @@ NOTE: If you authenticated CircleCI with either the xref:integration:github-inte
 
 Follow these steps to  set up a new project in CircleCI:
 
-. In the CircleCI web app, select **Organization Home** in the sidebar. The equivalent option in CircleCI Server is **Dashboard**.
+. In the CircleCI web app, select **Home** in the sidebar. The equivalent option in CircleCI Server is **Dashboard**.
 . Select btn:[Set up a project].
 +
 .Set up a project

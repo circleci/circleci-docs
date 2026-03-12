@@ -28,7 +28,7 @@ The allow-list applies organization-wide. Once configured, all projects within t
 CircleCI web app::
 +
 --
-. Navigate to the menu:Organization Settings[Orbs].
+. Navigate to the menu:Org[Orbs].
 . In the *Allowed URL Orb prefixes*  section, select btn:[Add].
 . Fill out the *Name*, *URL Prefix*, and *Auth* fields.
 . Select btn:[Add URL Prefix].
@@ -71,7 +71,7 @@ curl -X POST https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xx
 CircleCI web app::
 +
 --
-. Navigate to menu:Organization Settings[Orbs].
+. Navigate to menu:Org[Orbs].
 . Scroll to the *Allowed URL Orb prefixes* section.
 . Existing allow-list entries are displayed in the table.
 
@@ -118,7 +118,7 @@ curl -X GET https://circleci.com/docs/api/private/organization/ec1234ec-7d44-xxx
 CircleCI web app::
 +
 --
-. Navigate to menu:Organization Settings[Orbs].
+. Navigate to menu:Org[Orbs].
 . Scroll to the *Allowed URL Orb prefixes* section.
 . Select the btn:[Delete] icon next to the allow-list entry to delete.
 

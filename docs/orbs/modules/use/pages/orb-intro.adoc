@@ -229,7 +229,7 @@ image::guides:ROOT:orbs-registry.png[Orb Registry]
 [#orb-designation]
 === Registry orb designations
 
-CAUTION: In order to use uncertified registry orbs (partner or community), your organization's administrator must opt-in to allow uncertified orb usage on the menu:Organization Settings[Security] page for your org.
+CAUTION: In order to use uncertified registry orbs (partner or community), your organization's administrator must opt-in to allow uncertified orb usage on the menu:Org[Security] page for your org.
 
 Orbs in the registry will appear with one of three different namespace designations:
 
@@ -267,7 +267,7 @@ NOTE: The orbs page in the CircleCI web app is *not available* on CircleCI Serve
 
 NOTE: Private registry orb details pages may only be viewed by logged-in members of your organization. Unpublished orbs will not have linked details pages.
 
-To access the orbs page in the web app, navigate to *Organization Settings* and select *Orbs* from the sidebar.
+To access the orbs page in the web app, navigate to *Org* and select *Orbs* from the sidebar.
 
 The orbs page lists orbs created within your organization. You can view:
 

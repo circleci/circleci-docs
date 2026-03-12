@@ -34,7 +34,7 @@ image::guides:ROOT:authentication/sso-group-mapping-okta-setup.png[Screenshot of
 === 2. Configure CircleCI
 
 . In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
-. Select **Organization Settings** in the sidebar.
+. Select **Org** in the sidebar.
 . Select **Single sign-on (SSO)** from the sidebar.
 . Go to the Group Mappings section and click btn:[Add mapping]. This will open a form in a dropdown.
 . Enter the name of your Okta group under "SAML group name" and select the corresponding CircleCI group you want to map it to.
