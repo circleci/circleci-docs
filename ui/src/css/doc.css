@@ -1484,34 +1484,40 @@
 
 /* === MERMAID DIAGRAM STYLES === */
 
-/* Basic container styling */
-.doc .mermaid {
+/* Container styling */
+.doc .mermaid-diagram-container {
   text-align: center;
   margin: 1rem 0;
   overflow-x: auto;
 }
 
-/* Responsive sizing */
-.doc .mermaid svg {
+/* Content styling */
+.doc .mermaid-content {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.doc .mermaid-content svg {
   max-width: 100%;
   height: auto;
-  cursor: default; /* Prevent zoom cursor on hover */
+  cursor: default;
 }
 
-/* Prevent zoom cursor on mermaid diagrams */
-.doc .mermaid,
-.doc .mermaid *,
-.doc .imageblock .mermaid,
-.doc .imageblock .mermaid *,
-.doc .imageblock .content .mermaid,
-.doc .imageblock .content .mermaid * {
-  cursor: default !important;
+/* Theme-aware visibility */
+.doc .mermaid-content.diagram-light {
+  display: block !important;
 }
 
-/* Specifically override the imageblock content zoom cursor when it contains mermaid */
-.doc .imageblock .content .mermaid ~ *,
-.doc .imageblock .content .mermaid + * {
-  cursor: default !important;
+.doc .mermaid-content.diagram-dark {
+  display: none !important;
+}
+
+html[data-theme="dark"] .doc .mermaid-content.diagram-light {
+  display: none !important;
+}
+
+html[data-theme="dark"] .doc .mermaid-content.diagram-dark {
+  display: block !important;
 }
 
 

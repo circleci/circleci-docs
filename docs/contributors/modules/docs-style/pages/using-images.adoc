@@ -141,7 +141,7 @@ NOTE: If you use the older `image:` macro syntax (for example, pass:[`image:guid
 
 == Diagrams
 
-You can add mermaid diagrams to a page, as follows:
+You can add mermaid diagrams to a page using Beautiful Mermaid. The diagrams automatically adapt to light and dark themes.
 
 .Example of a mermaid diagram
 [mermaid]
@@ -152,4 +152,6 @@ sequenceDiagram
     Alice->>Bob: Hello Bob, how are you?
     Bob-->>Alice: Great!
 ....
+
+The diagram renders as SVG at build time and automatically switches between light and dark variants based on the user's theme preference. All standard mermaid syntax is supported, including flowcharts, state diagrams, sequence diagrams, class diagrams, ER diagrams, and XY charts.
 pass:[<!-- vale on -->]
