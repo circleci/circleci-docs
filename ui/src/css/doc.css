@@ -859,6 +859,7 @@
 .doc .listingblock .title,
 .doc .openblock .title,
 .doc .videoblock .title,
+.doc .mermaid-diagram-container + .title,
 .doc table.tableblock caption {
   color: var(--caption-font-color);
   font-size: var(--doc-font-size);
@@ -881,9 +882,11 @@
 }
 
 .doc .imageblock .title,
-.doc .videoblock .title {
+.doc .videoblock .title,
+.doc .mermaid-diagram-container + .title {
   margin-top: 0.5rem;
   padding-bottom: 0;
+  text-align: center;
 }
 
 .doc details {
@@ -1486,14 +1489,14 @@
 
 /* Container styling */
 .doc .mermaid-diagram-container {
-  text-align: center;
-  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
   overflow-x: auto;
 }
 
 /* Content styling */
 .doc .mermaid-content {
-  display: inline-block;
   max-width: 100%;
 }
 
@@ -1501,6 +1504,8 @@
   max-width: 100%;
   height: auto;
   cursor: default;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Theme-aware visibility */

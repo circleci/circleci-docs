@@ -94,10 +94,12 @@ module.exports.register = function register(registry, context = {}) {
   // CircleCI brand theme configurations
   // Light theme uses CircleCI green (#008542) as accent
   const lightTheme = {
-    bg: '#E3F5E5',
+    bg: '#ffffff',
     fg: '#00381A',
     accent: '#008542',
-    line: '#B4B8C6'
+    line: '#B4B8C6',
+    muted: '#E3F5E5B2',
+    border: '#008542'
   }
 
   // Dark theme uses lighter green for better contrast
@@ -105,7 +107,8 @@ module.exports.register = function register(registry, context = {}) {
     bg: '#0D1423',
     fg: '#D7DBE3',
     accent: '#94E5AB',
-    line: '#3D4A5E'
+    line: '#3D4A5E',
+    muted: '#565f89'
   }
 
   // Register the block processor for [mermaid] blocks
@@ -154,6 +157,11 @@ module.exports.register = function register(registry, context = {}) {
         html += `<div class="mermaid-content diagram-light">${lightSVG}</div>`
         html += `<div class="mermaid-content diagram-dark">${darkSVG}</div>`
         html += `</div>`
+
+        // Add title below diagram if present (matches image caption behavior)
+        if (attrs.title) {
+          html += `<div class="title">${attrs.title}</div>`
+        }
 
         // Create pass-through block with the rendered HTML
         return self.createBlock(parent, 'pass', html, attrs)
