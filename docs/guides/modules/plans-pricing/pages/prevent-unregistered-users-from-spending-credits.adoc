@@ -8,7 +8,7 @@ Unregistered users trigger pipelines, spend credits and count towards your plan 
 ****
 *Unregistered users* are how CircleCI track users who have triggered builds but have not signed up for a CircleCI account. Each unregistered user within an org is mapped to, and counts as, a single link:https://support.circleci.com/hc/en-us/articles/360034783154[active user]. Unregistered users count towards your plan usage.
 
-For more information about unregistered users, see this link:https://support.circleci.com/hc/en-us/articles/360037744473-What-is-an-Unregistered-User-[support article]
+For detailed information about user types, how to register, and why registration matters, see xref:user-types-and-registration.adoc[User types and registration]. For more information about unregistered users specifically, see this link:https://support.circleci.com/hc/en-us/articles/360037744473-What-is-an-Unregistered-User-[support article].
 ****
 
 [#prerequisites]
