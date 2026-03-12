@@ -285,7 +285,7 @@ Learn more and get started with self-hosted runners on the xref:execution-runner
 [#organization-settings]
 == Organization settings
 
-The following organization settings are available by selecting "Org" in the sidebar:
+The following organization settings are available by selecting *Org* from the sidebar:
 
 [.table-scroll]
 --

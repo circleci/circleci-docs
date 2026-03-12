@@ -163,7 +163,7 @@ Expand any step to view the build output. You can search, share or download the 
 image:guides:ROOT:getting-started-guide-exp/invite.png[float=right]
 [%hardbreaks]
 *Invite teammates*
-Invite teammates to collaborate on your projects. Navigate to *Org > People* to generate invites and get further instructions. Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
+Invite teammates to collaborate on your projects. Navigate to menu:Org[People] to generate invites and get further instructions. Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
 
 == 3. Debug and iterate
 

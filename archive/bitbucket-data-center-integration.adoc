@@ -175,7 +175,7 @@ For details see the xref:add-ssh-key.adoc[Additional SSH keys overview].
 
 For Bitbucket Data Center integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
-To manage settings at the organization level, select btn:[Org] in the CircleCI web app sidebar.
+To manage settings at the organization level, select *Org* in the CircleCI web app sidebar.
 
 [#organization-settings-people]
 === People

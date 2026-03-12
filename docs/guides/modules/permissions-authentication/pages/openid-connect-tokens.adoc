@@ -242,7 +242,7 @@ The steps in this section are based on Google Cloud Platform's link:https://clou
 
 To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider], which is unique to your organization. The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
 
-TIP: You can find your CircleCI organization ID by navigating to **Org > Overview** in the https://app.circleci.com/[CircleCI web app].
+TIP: You can find your CircleCI organization ID by navigating to menu:Org[Overview] in the link:https://app.circleci.com/[CircleCI web app].
 
 The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in <<format-of-the-openid-connect-id-token,the table below>>), which is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] page.
 

@@ -64,7 +64,7 @@ machine:
 
 If you need immediate relief to restore workflows during an active brownout, you can temporarily disable brownouts. 
 
-Navigate to *Org > Advanced > Enable resource class brownouts* and toggle the setting off.
+Navigate to menu:Org[Advanced > Enable resource class brownouts] and toggle the setting off.
 
 [IMPORTANT]
 ====
