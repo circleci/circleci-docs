@@ -229,7 +229,7 @@ If you get the following error inside a Chunk task, this indicates that your Ope
 [source,shell]
 OpenAI organization verification required. Please verify your organization at https://platform.openai.com/settings/organization/generaland see our community forum for more debugging help.
 
-To fix this issues, head to link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], navigate to menu:General[Organization Settings] and select btn:[Verify Organization]. Then follow the steps to get your organization verified.
+To fix this issues, head to link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], navigate to menu:General[Org Settings] and select btn:[Verify Organization]. Then follow the steps to get your organization verified.
 
 === Action required error
 

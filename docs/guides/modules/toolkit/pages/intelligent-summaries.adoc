@@ -12,7 +12,7 @@ The intelligent summaries feature is **disabled** by default. You can opt-in to 
 NOTE: Only organization administrators can enable or disable intelligent summaries.
 
 . From the link:https://app.circleci.com/home/[CircleCI web app] select your organization card.
-. Select **Organization Settings** from the sidebar.
+. Select **Org** from the sidebar.
 . Select **Advanced** from the menu.
 . Use the "Enable intelligent summaries of build failure messages" toggle to enable or disable the feature.
 

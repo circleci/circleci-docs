@@ -47,7 +47,7 @@ the status of the skipped builds will not be reported. The checks are still crea
 [#enable-github-checks]
 == Enable GitHub Checks
 
-. In the CircleCI app sidebar, select *Organization Settings*.
+. In the CircleCI app sidebar, select *Org*.
 . Select *VCS Connections*.
 . Select *Manage GitHub Checks*.
 +
@@ -68,9 +68,9 @@ NOTE: Your project will continue receiving job level status after GitHub Checks 
 [#disable-github-checks-for-a-project]
 == Disable GitHub Checks for a project
 
-To disable the GitHub Checks integration, navigate to the *Organization Settings* page in the CircleCI app, then remove the repositories using GitHub Checks, as follows:
+To disable the GitHub Checks integration, navigate to the *Org* page in the CircleCI app, then remove the repositories using GitHub Checks, as follows:
 
-. Select *Organization Settings* in the CircleCI sidebar.
+. Select *Org* in the CircleCI sidebar.
 . Select *VCS Connections*.
 . Select *Manage GitHub Checks*. The Update CircleCI Checks repository access page appears.
 +
@@ -83,7 +83,7 @@ image::guides:ROOT:github-status-updates.png[CircleCI VCS Settings Page]
 [#uninstall-checks-for-the-organization]
 == Uninstall Checks for the organization
 
-. Select *Organization Settings* in the CircleCI sidebar.
+. Select *Org* in the CircleCI sidebar.
 . Select *VCS Connections*.
 . Select *Manage GitHub Checks*.
 +

@@ -7,7 +7,7 @@ If your CircleCI organization is integrated with GitHub through the **CircleCI G
 
 ****
 The **CircleCI GitHub App** is an add-on integration. All organizations that have `/github/` or `/circleci/` in the URL can install the GitHub App, including xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[those already integrated through the GitHub OAuth app].
-To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Organization Settings[VCS Connections].
+To check whether you organization has the CircleCI GitHub App installed, navigate to menu:Org[VCS Connections].
 ****
 
 This page walks you through integrating a GitHub project with CircleCI through the CircleCI GitHub App integration. The sections below introduce you to concepts and ways to manage CI/CD (continuous integration and continuous delivery) pipelines for your GitHub project. CircleCI features that are in development for GitHub App projects are detailed in the <<currently-not-supported>> section.
@@ -96,7 +96,7 @@ image::guides:ROOT:triggers/run-on-open.png[Run on trigger menu options]
 
 For GitHub App integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
-To manage settings at the organization level, select btn:[Organization Settings] in the CircleCI web app sidebar.
+To manage settings at the organization level, select btn:[Org] in the CircleCI web app sidebar.
 
 [#organization-settings-people]
 === People

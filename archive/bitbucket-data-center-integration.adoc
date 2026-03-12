@@ -31,15 +31,15 @@ Integrate with CircleCI to access features for automated software delivery:
 === Integrate a project with CircleCI
 
 . **Set up your integration with Bitbucket Data Center if you have not already**:
-.. In the CircleCI web app, select **Organization Settings** in the sidebar.
+.. In the CircleCI web app, select **Org** in the sidebar.
 .. Select **Integrations** in the sidebar.
 .. Select btn:[Set Up Integration] next to Bitbucket Data Center.
 .. In the modal, enter your Bitbucket Data Center instance URL and your known_hosts. For guidance on generating known_hosts, see <<known-hosts>>.
 +
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 .. Select btn:[Set Up Integration].
-.. Select the back arrow to exit **Organization Settings**.
+.. Select the back arrow to exit **Org**.
 
 . For the next sections you will need to **create a project HTTP access token** with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
 
@@ -109,7 +109,7 @@ The output will look something like the following:
 [bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
 ----
 
-Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Organization Settings[Integrations].
+Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[Integrations].
 
 == How it works
 
@@ -175,7 +175,7 @@ For details see the xref:add-ssh-key.adoc[Additional SSH keys overview].
 
 For Bitbucket Data Center integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
-To manage settings at the organization level, select btn:[Organization Settings] in the CircleCI web app sidebar.
+To manage settings at the organization level, select btn:[Org] in the CircleCI web app sidebar.
 
 [#organization-settings-people]
 === People
@@ -185,7 +185,7 @@ Add or remove users, and manage user roles for the organization as well as user 
 [#organization-settings-integrations]
 === Integrations
 
-The Integrations page under Organization Settings allows you to connect your organization with either Bitbucket Data Center or a GitLab self-managed instance. Steps to integrate with Bitbucket Data Center are described on the xref:getting-started:create-project.adoc[Create a project] page.
+The Integrations page under Org allows you to connect your organization with either Bitbucket Data Center or a GitLab self-managed instance. Steps to integrate with Bitbucket Data Center are described on the xref:getting-started:create-project.adoc[Create a project] page.
 
 [#deprecated-system-environment-variables]
 == Deprecated system environment variables

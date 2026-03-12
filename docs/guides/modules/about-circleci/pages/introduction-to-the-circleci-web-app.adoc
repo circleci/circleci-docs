@@ -92,7 +92,7 @@ image::guides:ROOT:user_settings.png[User settings]
 
 == Organization homepage and navigation
 
-After selecting an organization you will find yourself on the Organization homepage, or Dashboard if you are using CircleCI Server. The organization homepage provides an overview of your org's projects, project health metrics, and compute and credit usage metrics for your org.
+After selecting an organization you will find yourself on the organization homepage (called **Home** in the sidebar), or Dashboard if you are using CircleCI Server. The organization homepage provides an overview of your org's projects, project health metrics, and compute and credit usage metrics for your org.
 
 .Organization Homepage
 image::guides:ROOT:org-homepage.png[Organization homepage]
@@ -109,9 +109,9 @@ From your organization home page you have access to org-level options. You can c
 
 **Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights:insights.adoc[Using Insights] page.
 
-**Self-Hosted Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc[Self-Hosted Runners Overview] page.
+**Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc[Self-Hosted Runners Overview] page.
 
-**Organization Settings**: Settings for your organization including org roles and groups, contexts, security, orbs and more. You can find your organization ID and organization slug on this page.
+**Org**: Settings for your organization including org roles and groups, contexts, security, orbs and more. You can find your organization ID and organization slug on this page.
 
 **Plan**: Displays your network and storage usage, as well as additional settings related to your plan.
 
@@ -285,7 +285,7 @@ Learn more and get started with self-hosted runners on the xref:execution-runner
 [#organization-settings]
 == Organization settings
 
-The following organization settings are available by selection "Organization Settings" in the sidebar:
+The following organization settings are available by selecting "Org" in the sidebar:
 
 [.table-scroll]
 --

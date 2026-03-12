@@ -92,7 +92,7 @@ image::guides:ROOT:gl-sm-create-project.png[Create a new project in a self-manag
 
 . Copy and paste the SSH host key from your self-managed instance into **known_hosts**. Select **Connect**.
 +
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 . Once your account is successfully authorized, select the repository for your CircleCI project, and enter a project name.
 
@@ -216,7 +216,7 @@ For more information on SSH keys, refer to the xref:add-ssh-key.adoc[Adding an S
 
 For GitLab integrations, organizations and users are managed independently from your VCS. Organizations and users are considered CircleCI organizations and users, with their own roles and permissions that do not rely on those defined in your VCS.
 
-To manage settings at the organization level, select btn:[Organization Settings] in the CircleCI web app sidebar.
+To manage settings at the organization level, select btn:[Org] in the CircleCI web app sidebar.
 
 [#organization-settings-people]
 === People
@@ -228,7 +228,7 @@ Add or remove users, and manage user roles for the organization as well as user 
 
 For GitLab self-managed organizations, you may connect additional self-managed instances to be integrated with your organization.
 
-. Navigate to **Integrations** within **Organization Settings** to add a new instance.
+. Navigate to **Integrations** within **Org** to add a new instance.
 +
 image::guides:ROOT:gl-sm-integrations.png[Add a new self-managed instance on the Integrations page]
 
