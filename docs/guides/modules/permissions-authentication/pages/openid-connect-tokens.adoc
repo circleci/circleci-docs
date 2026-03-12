@@ -180,13 +180,13 @@ To do this, edit your IAM role's trust policy so that only an OIDC token from yo
 
 . Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to menu:Project Settings [Overview] to find your Project ID.
 
-. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `organization_id` and your Project ID for `project_id`.
+. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `organization_id` and your Project ID for `project-id`.
 +
 .Update trust policy to restrict access to specific project
 [source,yaml]
 ----
 "StringLike": {
-  "oidc.circleci.com/org/<organization_id>:sub": "org/<organization_id>/project/<project_id>/user/*"
+  "oidc.circleci.com/org/<organization_id>:sub": "org/<organization_id>/project/<project-id>/user/*"
 }
 ----
 +
@@ -509,7 +509,7 @@ a| The subject. This identifies who is running the CircleCI job and where. `$CIR
 
 For `$CIRCLE_OIDC_TOKEN` its value is:
 
-`"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+`"org/<organization_id>/project/<project-id>/user/<user_id>"`, a string, where `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 ---
 
@@ -517,15 +517,15 @@ For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the trigger type:
 
 *If the trigger is a* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook]:
 
-`"org/<organization_id>/project/<project_id>/user/<user_id>"`
+`"org/<organization_id>/project/<project-id>/user/<user_id>"`
 
-A string in which `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 *All other trigger types*:
 
-`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`
+`"org/<organization_id>/project/<project-id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`
 
-A string in which `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
+A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
 
 | `aud`
 | The audience. By default, this is `ORGANIZATION_ID`, a string containing a UUID that identifies the job's project's organization. To customize the audience you can generate an OIDC token with a custom audience. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
