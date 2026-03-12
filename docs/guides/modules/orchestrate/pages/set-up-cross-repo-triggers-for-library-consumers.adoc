@@ -160,7 +160,6 @@ When a change to your library triggers your consumer pipeline, you need to know 
 CircleCI automatically populates the following pipeline values when a cross-repo trigger fires:
 
 * `pipeline.event.github.ref`: The full Git ref that was pushed, this will be a tag name for tag triggers.
-* `pipeline.event.github.after`: The SHA of the most recent commit on the branch after the push.
 * `pipeline.event.github.repository.name`: The name of the library repository that triggered the pipeline.
 
 You can use these values directly in your configuration without declaring them as parameters.
