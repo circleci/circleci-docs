@@ -1,4 +1,4 @@
-\bgithub organization\b
+\b[Gg]it[Hh]ub organization\b
 \b[Cc]ircle[cC][iI] organization\b
 \bbitbucket organization\b
 .circleci/config.yml
@@ -150,7 +150,8 @@ FAQs?
 Fastfile
 Fastlane
 /bFastlane Match/b
-filename
+[Ff]ilename
+[Ff]ilepath
 framebuffer
 frameit
 \bFree Plan\b
