@@ -284,12 +284,8 @@ module.exports.register = function () {
           if (mermaidCode) {
             // Replace with a proper code block that Turndown knows how to handle
             // Use <pre><code> structure so Turndown's code block rule processes it
-            const pre = article.createElement('pre')
-            const code = article.createElement('code')
-            code.className = 'language-mermaid'
-            code.textContent = mermaidCode.trim()
-            pre.appendChild(code)
-            container.replaceWith(pre)
+            const codeBlock = `<pre><code class="language-mermaid">${mermaidCode.trim()}</code></pre>`
+            container.replaceWith(codeBlock)
           }
         })
       }
