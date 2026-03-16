@@ -72,7 +72,7 @@ The following sections guide you through the Chunk setup process. Once setup is 
 Ensure you have the following in place before you get started:
 
 * The CircleCI GitHub App installed in your organization. Check **Org** > **VCS Connections**. Chunk needs the GitHub App to recommend fixes and open pull requests.
-* The **Allow Chunk tasks** option enabled for your organization. Navigate to **Org** > **Advanced** and toggle on **Allow Chunk tasks**.
+* The **Allow Chunk tasks** option enabled for your organization. Navigate to menu:Org[Advanced] and toggle on **Allow Chunk tasks**.
 * A model provider API key, if you are not using the default CircleCI (Powered by Anthropic) option. See the <<Model providers>> section for details on each provider.
 
 *If you are using OpenAI*, you also need to:
@@ -212,7 +212,7 @@ If you need to tear down Chunk for your organization, delete your model provider
 . Locate your model provider API key environment variable and select it using the radio button.
 . Select **Delete** to delete the environment variable. You will be prompted to confirm the deletion.
 
-NOTE: **CircleCI (Powered by Anthropic) users.** If you are using the CircleCI-managed provider, there is no API key stored in your context. To remove Chunk access, disable the **Allow Chunk tasks** toggle in **Org** > **Advanced**.
+NOTE: **CircleCI (Powered by Anthropic) users.** If you are using the CircleCI-managed provider, there is no API key stored in your context. To remove Chunk access, disable the **Allow Chunk tasks** toggle in menu:Org[Advanced].
 
 == Fix failed builds with Chunk
 
@@ -490,7 +490,7 @@ image::guides:ROOT:chunk/allow-chunk-tasks.png[Allow Chunk tasks]
 
 If organization verification is not possible, you can bypass this requirement by adding an environment variable to your `circleci-agents` context as follows:
 
-. In the CircleCI web app, go to **Org** > **Contexts**.
+. In the CircleCI web app, go to menu:Org[Contexts].
 . Use the search to find the `circleci-agents` context. Select it by name to open configuration options.
 . Scroll down to the "Environment variables" section.
 . Select **Add environment variable** and enter the following:
@@ -512,7 +512,7 @@ You need to make sure your organization has GPT-5 access. To verify this in the 
 
 === Amazon Bedrock authentication error or 401
 
-Your AWS bearer token is invalid or has expired. Regenerate the token in AWS IAM and update it in the `circleci-agents` context in **Org** > **Contexts**.
+Your AWS bearer token is invalid or has expired. Regenerate the token in AWS IAM and update it in the `circleci-agents` context in menu:Org[Contexts].
 
 === Amazon Bedrock access denied or 403 on model invocation
 
