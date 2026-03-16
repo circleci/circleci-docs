@@ -2,6 +2,8 @@
 
 > Official technical documentation for CircleCI, a continuous integration and delivery platform
 
+> Generated: 2026-03-12T23:19:58.165Z
+
 ## Site Information
 
 - URL: https://circleci.com/docs
@@ -9,110 +11,495 @@
 - Generator: Antora (static site generator for technical documentation)
 - Markup: AsciiDoc
 
+## Markdown Exports
+
+All documentation pages are available in markdown format for easier parsing and processing.
+Markdown links are provided inline with each page using the [md] notation.
+Example: https://circleci.com/docs/guides/getting-started/first-steps/ [md](https://circleci.com/docs/guides/getting-started/first-steps/index.md)
+
 ## Documentation Structure
 
 This documentation is organized into the following Antora components:
 
-### Main Documentation Components
+### Guides ()
+- About CircleCI
+  - CircleCI overview (https://circleci.com/docs/guides/about-circleci/about-circleci/) [md](https://circleci.com/docs/guides/about-circleci/about-circleci/index.md)
+  - Benefits of CircleCI (https://circleci.com/docs/guides/about-circleci/benefits-of-circleci/) [md](https://circleci.com/docs/guides/about-circleci/benefits-of-circleci/index.md)
+  - Concepts (https://circleci.com/docs/guides/about-circleci/concepts/) [md](https://circleci.com/docs/guides/about-circleci/concepts/index.md)
+  - Intro to the CircleCI web app (https://circleci.com/docs/guides/about-circleci/introduction-to-the-circleci-web-app/) [md](https://circleci.com/docs/guides/about-circleci/introduction-to-the-circleci-web-app/index.md)
+  - Open source acknowledgements (https://circleci.com/docs/guides/about-circleci/open-source/) [md](https://circleci.com/docs/guides/about-circleci/open-source/index.md)
+- Getting started
+  - First steps
+    - Sign up and try CircleCI (https://circleci.com/docs/guides/getting-started/first-steps/) [md](https://circleci.com/docs/guides/getting-started/first-steps/index.md)
+    - Join teammates on CircleCI (https://circleci.com/docs/guides/getting-started/invite-your-team/) [md](https://circleci.com/docs/guides/getting-started/invite-your-team/index.md)
+    - Create a project (https://circleci.com/docs/guides/getting-started/create-project/) [md](https://circleci.com/docs/guides/getting-started/create-project/index.md)
+    - Quickstart guide (https://circleci.com/docs/guides/getting-started/getting-started/) [md](https://circleci.com/docs/guides/getting-started/getting-started/index.md)
+  - How-to guides
+    - Hello World (https://circleci.com/docs/guides/getting-started/hello-world/) [md](https://circleci.com/docs/guides/getting-started/hello-world/index.md)
+    - Intro to YAML configuration (https://circleci.com/docs/guides/getting-started/introduction-to-yaml-configurations/) [md](https://circleci.com/docs/guides/getting-started/introduction-to-yaml-configurations/index.md)
+    - In-app config editor (https://circleci.com/docs/guides/getting-started/config-editor/) [md](https://circleci.com/docs/guides/getting-started/config-editor/index.md)
+    - Node.js quickstart (https://circleci.com/docs/guides/getting-started/language-javascript/) [md](https://circleci.com/docs/guides/getting-started/language-javascript/index.md)
+    - Python quickstart (https://circleci.com/docs/guides/getting-started/language-python/) [md](https://circleci.com/docs/guides/getting-started/language-python/index.md)
+    - Go quickstart (https://circleci.com/docs/guides/getting-started/language-go/) [md](https://circleci.com/docs/guides/getting-started/language-go/index.md)
+    - Create an organization (https://circleci.com/docs/guides/getting-started/create-an-organization/) [md](https://circleci.com/docs/guides/getting-started/create-an-organization/index.md)
+  - Tutorials
+    - Configuration intro (https://circleci.com/docs/guides/getting-started/config-intro/) [md](https://circleci.com/docs/guides/getting-started/config-intro/index.md)
+    - Use the Slack orb to set up notifications (https://circleci.com/docs/guides/getting-started/slack-orb-tutorial/) [md](https://circleci.com/docs/guides/getting-started/slack-orb-tutorial/index.md)
+- Migrate to CircleCI
+  - Migration intro (https://circleci.com/docs/guides/migrate/migration-intro/) [md](https://circleci.com/docs/guides/migrate/migration-intro/index.md)
+  - Migrate from AWS (https://circleci.com/docs/guides/migrate/migrating-from-aws/) [md](https://circleci.com/docs/guides/migrate/migrating-from-aws/index.md)
+  - Migrate from Azure DevOps (https://circleci.com/docs/guides/migrate/migrating-from-azuredevops/) [md](https://circleci.com/docs/guides/migrate/migrating-from-azuredevops/index.md)
+  - Migrate from Buildkite (https://circleci.com/docs/guides/migrate/migrating-from-buildkite/) [md](https://circleci.com/docs/guides/migrate/migrating-from-buildkite/index.md)
+  - Migrate from GitHub (https://circleci.com/docs/guides/migrate/migrating-from-github/) [md](https://circleci.com/docs/guides/migrate/migrating-from-github/index.md)
+  - Migrate from GitLab (https://circleci.com/docs/guides/migrate/migrating-from-gitlab/) [md](https://circleci.com/docs/guides/migrate/migrating-from-gitlab/index.md)
+  - Migrate from Jenkins (https://circleci.com/docs/guides/migrate/migrating-from-jenkins/) [md](https://circleci.com/docs/guides/migrate/migrating-from-jenkins/index.md)
+  - Migrate from TeamCity (https://circleci.com/docs/guides/migrate/migrating-from-teamcity/) [md](https://circleci.com/docs/guides/migrate/migrating-from-teamcity/index.md)
+  - Migrate from Travis CI (https://circleci.com/docs/guides/migrate/migrating-from-travis/) [md](https://circleci.com/docs/guides/migrate/migrating-from-travis/index.md)
+- Orchestrate
+  - Pipelines
+    - Pipeline overview and setup (https://circleci.com/docs/guides/orchestrate/pipelines/) [md](https://circleci.com/docs/guides/orchestrate/pipelines/index.md)
+    - Jobs and steps overview (https://circleci.com/docs/guides/orchestrate/jobs-steps/) [md](https://circleci.com/docs/guides/orchestrate/jobs-steps/index.md)
+    - Workflow orchestration (https://circleci.com/docs/guides/orchestrate/workflows/) [md](https://circleci.com/docs/guides/orchestrate/workflows/index.md)
+    - Automatic reruns (https://circleci.com/docs/guides/orchestrate/automatic-reruns/) [md](https://circleci.com/docs/guides/orchestrate/automatic-reruns/index.md)
+    - Use workspaces to share data between jobs (https://circleci.com/docs/guides/orchestrate/workspaces/) [md](https://circleci.com/docs/guides/orchestrate/workspaces/index.md)
+    - Use dynamic configuration (https://circleci.com/docs/guides/orchestrate/dynamic-config/) [md](https://circleci.com/docs/guides/orchestrate/dynamic-config/index.md)
+    - Skip CI, auto-cancel, and block new pipelines (https://circleci.com/docs/guides/orchestrate/skip-build/) [md](https://circleci.com/docs/guides/orchestrate/skip-build/index.md)
+    - Controlling serial execution across your organization (https://circleci.com/docs/guides/orchestrate/controlling-serial-execution-across-your-organization/) [md](https://circleci.com/docs/guides/orchestrate/controlling-serial-execution-across-your-organization/index.md)
+    - Pipeline values and parameters (https://circleci.com/docs/guides/orchestrate/pipeline-variables/) [md](https://circleci.com/docs/guides/orchestrate/pipeline-variables/index.md)
+  - Triggers
+    - Trigger options (https://circleci.com/docs/guides/orchestrate/triggers-overview/) [md](https://circleci.com/docs/guides/orchestrate/triggers-overview/index.md)
+    - Set up triggers (https://circleci.com/docs/guides/orchestrate/set-up-triggers/) [md](https://circleci.com/docs/guides/orchestrate/set-up-triggers/index.md)
+    - GitHub trigger event options (https://circleci.com/docs/guides/orchestrate/github-trigger-event-options/) [md](https://circleci.com/docs/guides/orchestrate/github-trigger-event-options/index.md)
+    - GitLab trigger options (https://circleci.com/docs/guides/orchestrate/gitlab-trigger-options/) [md](https://circleci.com/docs/guides/orchestrate/gitlab-trigger-options/index.md)
+    - Custom webhooks (https://circleci.com/docs/guides/orchestrate/custom-webhooks/) [md](https://circleci.com/docs/guides/orchestrate/custom-webhooks/index.md)
+    - Schedule triggers (https://circleci.com/docs/guides/orchestrate/schedule-triggers/) [md](https://circleci.com/docs/guides/orchestrate/schedule-triggers/index.md)
+  - How-to guides
+    - Orchestration cookbook (https://circleci.com/docs/guides/orchestrate/orchestration-cookbook/) [md](https://circleci.com/docs/guides/orchestrate/orchestration-cookbook/index.md)
+    - How to override config (https://circleci.com/docs/guides/orchestrate/how-to-override-config/) [md](https://circleci.com/docs/guides/orchestrate/how-to-override-config/index.md)
+    - Set up multiple configuration files for a project (https://circleci.com/docs/guides/orchestrate/set-up-multiple-configuration-files-for-a-project/) [md](https://circleci.com/docs/guides/orchestrate/set-up-multiple-configuration-files-for-a-project/index.md)
+    - Notify a Slack channel of a paused workflow (https://circleci.com/docs/guides/orchestrate/notify-a-slack-channel-of-a-paused-workflow/) [md](https://circleci.com/docs/guides/orchestrate/notify-a-slack-channel-of-a-paused-workflow/index.md)
+    - Using branch filters (https://circleci.com/docs/guides/orchestrate/using-branch-filters/) [md](https://circleci.com/docs/guides/orchestrate/using-branch-filters/index.md)
+    - Select a workflow to run using pipeline parameters (https://circleci.com/docs/guides/orchestrate/selecting-a-workflow-to-run-using-pipeline-parameters/) [md](https://circleci.com/docs/guides/orchestrate/selecting-a-workflow-to-run-using-pipeline-parameters/index.md)
+    - Migrate scheduled workflows to schedule triggers (https://circleci.com/docs/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/) [md](https://circleci.com/docs/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/index.md)
+    - Schedule triggers with multiple workflows (https://circleci.com/docs/guides/orchestrate/schedule-triggers-with-multiple-workflows/) [md](https://circleci.com/docs/guides/orchestrate/schedule-triggers-with-multiple-workflows/index.md)
+    - Set a nightly schedule trigger (https://circleci.com/docs/guides/orchestrate/set-a-nightly-schedule-trigger/) [md](https://circleci.com/docs/guides/orchestrate/set-a-nightly-schedule-trigger/index.md)
+    - Using dynamic configuration (https://circleci.com/docs/guides/orchestrate/using-dynamic-configuration/) [md](https://circleci.com/docs/guides/orchestrate/using-dynamic-configuration/index.md)
+    - Configure databases (https://circleci.com/docs/guides/orchestrate/databases/) [md](https://circleci.com/docs/guides/orchestrate/databases/index.md)
+    - Migrate from deploy to run (https://circleci.com/docs/guides/orchestrate/migrate-from-deploy-to-run/) [md](https://circleci.com/docs/guides/orchestrate/migrate-from-deploy-to-run/index.md)
+    - Using shell scripts (https://circleci.com/docs/guides/orchestrate/using-shell-scripts/) [md](https://circleci.com/docs/guides/orchestrate/using-shell-scripts/index.md)
+- Execute on managed compute
+  - Execution environments overview (https://circleci.com/docs/guides/execution-managed/executor-intro/) [md](https://circleci.com/docs/guides/execution-managed/executor-intro/index.md)
+  - Resource class overview (https://circleci.com/docs/guides/execution-managed/resource-class-overview/) [md](https://circleci.com/docs/guides/execution-managed/resource-class-overview/index.md)
+  - Resource class lifecycle (https://circleci.com/docs/guides/execution-managed/resource-class-lifecycle/) [md](https://circleci.com/docs/guides/execution-managed/resource-class-lifecycle/index.md)
+  - Docker
+    - Using Docker (https://circleci.com/docs/guides/execution-managed/using-docker/) [md](https://circleci.com/docs/guides/execution-managed/using-docker/index.md)
+    - Convenience images (https://circleci.com/docs/guides/execution-managed/circleci-images/) [md](https://circleci.com/docs/guides/execution-managed/circleci-images/index.md)
+    - Migrating to next-gen images (https://circleci.com/docs/guides/execution-managed/next-gen-migration-guide/) [md](https://circleci.com/docs/guides/execution-managed/next-gen-migration-guide/index.md)
+    - Using custom-built Docker images (https://circleci.com/docs/guides/execution-managed/custom-images/) [md](https://circleci.com/docs/guides/execution-managed/custom-images/index.md)
+    - Docker authenticated pulls (https://circleci.com/docs/guides/execution-managed/private-images/) [md](https://circleci.com/docs/guides/execution-managed/private-images/index.md)
+    - Running Docker commands (https://circleci.com/docs/guides/execution-managed/building-docker-images/) [md](https://circleci.com/docs/guides/execution-managed/building-docker-images/index.md)
+  - Linux VM
+    - Using the Linux VM execution environment (https://circleci.com/docs/guides/execution-managed/using-linuxvm/) [md](https://circleci.com/docs/guides/execution-managed/using-linuxvm/index.md)
+    - Using Android images with the machine executor (https://circleci.com/docs/guides/execution-managed/android-machine-image/) [md](https://circleci.com/docs/guides/execution-managed/android-machine-image/index.md)
+  - macOS
+    - Using the macOS execution environment (https://circleci.com/docs/guides/execution-managed/using-macos/) [md](https://circleci.com/docs/guides/execution-managed/using-macos/index.md)
+    - Configuring a macOS app (https://circleci.com/docs/guides/execution-managed/hello-world-macos/) [md](https://circleci.com/docs/guides/execution-managed/hello-world-macos/index.md)
+    - iOS code signing (https://circleci.com/docs/guides/execution-managed/ios-codesigning/) [md](https://circleci.com/docs/guides/execution-managed/ios-codesigning/index.md)
+  - Windows
+    - Using the Windows execution environment (https://circleci.com/docs/guides/execution-managed/using-windows/) [md](https://circleci.com/docs/guides/execution-managed/using-windows/index.md)
+    - Hello world Windows (https://circleci.com/docs/guides/execution-managed/hello-world-windows/) [md](https://circleci.com/docs/guides/execution-managed/hello-world-windows/index.md)
+  - Arm
+    - Using the Arm VM execution environment (https://circleci.com/docs/guides/execution-managed/using-arm/) [md](https://circleci.com/docs/guides/execution-managed/using-arm/index.md)
+  - GPU
+    - Using the GPU execution environment (https://circleci.com/docs/guides/execution-managed/using-gpu/) [md](https://circleci.com/docs/guides/execution-managed/using-gpu/index.md)
+  - How-to guides
+    - Pull an image from AWS ECR with OIDC (https://circleci.com/docs/guides/permissions-authentication/pull-an-image-from-aws-ecr-with-oidc/) [md](https://circleci.com/docs/guides/permissions-authentication/pull-an-image-from-aws-ecr-with-oidc/index.md)
+    - Pull an image from GCP Artifact Registry with OIDC (https://circleci.com/docs/guides/permissions-authentication/pull-an-image-from-gcp-gar-with-oidc/) [md](https://circleci.com/docs/guides/permissions-authentication/pull-an-image-from-gcp-gar-with-oidc/index.md)
+    - Run a job in a container on your machine with Docker (https://circleci.com/docs/guides/execution-managed/run-a-job-in-a-container/) [md](https://circleci.com/docs/guides/execution-managed/run-a-job-in-a-container/index.md)
+    - Installing and using Docker Compose (https://circleci.com/docs/guides/execution-managed/docker-compose/) [md](https://circleci.com/docs/guides/execution-managed/docker-compose/index.md)
+    - Debugging container ID cannot be mapped to host ID error (https://circleci.com/docs/guides/execution-managed/high-uid-error/) [md](https://circleci.com/docs/guides/execution-managed/high-uid-error/index.md)
+    - Migrating between the Docker machine executors (https://circleci.com/docs/guides/execution-managed/docker-to-machine/) [md](https://circleci.com/docs/guides/execution-managed/docker-to-machine/index.md)
+  - Image support policies
+    - Android images support policy (https://circleci.com/docs/guides/execution-managed/android-images-support-policy/) [md](https://circleci.com/docs/guides/execution-managed/android-images-support-policy/index.md)
+    - Convenience images support policy (https://circleci.com/docs/guides/execution-managed/convenience-images-support-policy/) [md](https://circleci.com/docs/guides/execution-managed/convenience-images-support-policy/index.md)
+    - Linux VM images support policy (https://circleci.com/docs/guides/execution-managed/linux-vm-support-policy/) [md](https://circleci.com/docs/guides/execution-managed/linux-vm-support-policy/index.md)
+    - Linux CUDA images support policy (https://circleci.com/docs/guides/execution-managed/linux-cuda-images-support-policy/) [md](https://circleci.com/docs/guides/execution-managed/linux-cuda-images-support-policy/index.md)
+    - Remote Docker images support policy (https://circleci.com/docs/guides/execution-managed/remote-docker-images-support-policy/) [md](https://circleci.com/docs/guides/execution-managed/remote-docker-images-support-policy/index.md)
+    - Windows images support policy (https://circleci.com/docs/guides/execution-managed/windows-images-support-policy/) [md](https://circleci.com/docs/guides/execution-managed/windows-images-support-policy/index.md)
+    - Xcode image policy (https://circleci.com/docs/guides/execution-managed/xcode-policy/) [md](https://circleci.com/docs/guides/execution-managed/xcode-policy/index.md)
+    - CircleCI image lifecycle: A complete guide (https://circleci.com/docs/guides/execution-managed/machine-convenience-image-lifecycle/) [md](https://circleci.com/docs/guides/execution-managed/machine-convenience-image-lifecycle/index.md)
+- Execute jobs on self-hosted runners
+  - Self-hosted runner overview (https://circleci.com/docs/guides/execution-runner/runner-overview/) [md](https://circleci.com/docs/guides/execution-runner/runner-overview/index.md)
+  - Self-hosted runner concepts (https://circleci.com/docs/guides/execution-runner/runner-concepts/) [md](https://circleci.com/docs/guides/execution-runner/runner-concepts/index.md)
+  - Runner feature comparison matrix (https://circleci.com/docs/guides/execution-runner/runner-feature-comparison-matrix/) [md](https://circleci.com/docs/guides/execution-runner/runner-feature-comparison-matrix/index.md)
+  - Container runner
+    - Container runner installation (https://circleci.com/docs/guides/execution-runner/container-runner-installation/) [md](https://circleci.com/docs/guides/execution-runner/container-runner-installation/index.md)
+    - Container runner performance benchmarks (https://circleci.com/docs/guides/execution-runner/container-runner-performance-benchmarks/) [md](https://circleci.com/docs/guides/execution-runner/container-runner-performance-benchmarks/index.md)
+    - Container runner reference (https://circleci.com/docs/guides/execution-runner/container-runner/) [md](https://circleci.com/docs/guides/execution-runner/container-runner/index.md)
+  - Machine runner 3
+    - Install machine runner 3 on Linux (https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/) [md](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-linux/index.md)
+    - Install machine runner 3 on macOS (https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-macos/) [md](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-macos/index.md)
+    - Install machine runner 3 on Windows (https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-windows/) [md](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-windows/index.md)
+    - Install machine runner 3 on Docker (https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-docker/) [md](https://circleci.com/docs/guides/execution-runner/install-machine-runner-3-on-docker/index.md)
+    - Manual install on Linux and macOS (https://circleci.com/docs/guides/execution-runner/machine-runner-3-manual-installation/) [md](https://circleci.com/docs/guides/execution-runner/machine-runner-3-manual-installation/index.md)
+    - Manual install on Windows (https://circleci.com/docs/guides/execution-runner/machine-runner-3-manual-installation-on-windows/) [md](https://circleci.com/docs/guides/execution-runner/machine-runner-3-manual-installation-on-windows/index.md)
+    - Migrate from launch agent to machine runner 3 on Linux (https://circleci.com/docs/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/) [md](https://circleci.com/docs/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-linux/index.md)
+    - Migrate from launch agent to machine runner 3 on macOS (https://circleci.com/docs/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-macos/) [md](https://circleci.com/docs/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-macos/index.md)
+    - Migrate from launch agent to machine runner 3 on Windows (https://circleci.com/docs/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-windows/) [md](https://circleci.com/docs/guides/execution-runner/migrate-from-launch-agent-to-machine-runner-3-on-windows/index.md)
+    - Machine runner 3 configuration reference (https://circleci.com/docs/guides/execution-runner/machine-runner-3-configuration-reference/) [md](https://circleci.com/docs/guides/execution-runner/machine-runner-3-configuration-reference/index.md)
+  - Self-hosted runner reference
+    - Self-hosted runner API (https://circleci.com/docs/guides/execution-runner/runner-api/) [md](https://circleci.com/docs/guides/execution-runner/runner-api/index.md)
+    - Self-hosted runner FAQ (https://circleci.com/docs/guides/execution-runner/runner-faqs/) [md](https://circleci.com/docs/guides/execution-runner/runner-faqs/index.md)
+    - Troubleshoot self-hosted runner (https://circleci.com/docs/guides/execution-runner/troubleshoot-self-hosted-runner/) [md](https://circleci.com/docs/guides/execution-runner/troubleshoot-self-hosted-runner/index.md)
+    - Scaling self-hosted runner (https://circleci.com/docs/guides/execution-runner/runner-scaling/) [md](https://circleci.com/docs/guides/execution-runner/runner-scaling/index.md)
+- Testing on CircleCI
+  - Run tests on CircleCI
+    - Automated testing (https://circleci.com/docs/guides/test/test/) [md](https://circleci.com/docs/guides/test/test/index.md)
+    - Collecting test data (https://circleci.com/docs/guides/test/collect-test-data/) [md](https://circleci.com/docs/guides/test/collect-test-data/index.md)
+    - Test Insights (https://circleci.com/docs/guides/insights/insights-tests/) [md](https://circleci.com/docs/guides/insights/insights-tests/index.md)
+  - Manage and optimize tests
+    - Fix flaky tests (https://circleci.com/docs/guides/test/fix-flaky-tests/) [md](https://circleci.com/docs/guides/test/fix-flaky-tests/index.md)
+  - Testing strategies
+    - Testing LLM-enabled applications through evaluations (https://circleci.com/docs/guides/test/testing-llm-enabled-applications-through-evaluations/) [md](https://circleci.com/docs/guides/test/testing-llm-enabled-applications-through-evaluations/index.md)
+    - Browser testing (https://circleci.com/docs/guides/test/browser-testing/) [md](https://circleci.com/docs/guides/test/browser-testing/index.md)
+    - Generate code coverage metrics (https://circleci.com/docs/guides/test/code-coverage/) [md](https://circleci.com/docs/guides/test/code-coverage/index.md)
+    - Re-run failed tests overview (https://circleci.com/docs/guides/test/rerun-failed-tests/) [md](https://circleci.com/docs/guides/test/rerun-failed-tests/index.md)
+    - Test splitting and parallelism (https://circleci.com/docs/guides/optimize/parallelism-faster-jobs/) [md](https://circleci.com/docs/guides/optimize/parallelism-faster-jobs/index.md)
+  - Tutorials
+    - Speed up pipelines with test splitting (https://circleci.com/docs/guides/test/test-splitting-tutorial/) [md](https://circleci.com/docs/guides/test/test-splitting-tutorial/index.md)
+    - Testing iOS applications (https://circleci.com/docs/guides/test/testing-ios/) [md](https://circleci.com/docs/guides/test/testing-ios/index.md)
+    - Testing macOS applications (https://circleci.com/docs/guides/test/testing-macos/) [md](https://circleci.com/docs/guides/test/testing-macos/index.md)
+  - How-to guides
+    - Use the environment CLI to split tests (https://circleci.com/docs/guides/optimize/use-the-circleci-cli-to-split-tests/) [md](https://circleci.com/docs/guides/optimize/use-the-circleci-cli-to-split-tests/index.md)
+    - Automate LLM evaluation testing with the CircleCI Evals orb (https://circleci.com/docs/guides/test/automate-llm-evaluation-testing-with-the-circleci-evals-orb/) [md](https://circleci.com/docs/guides/test/automate-llm-evaluation-testing-with-the-circleci-evals-orb/index.md)
+  - Reference
+    - Troubleshoot test splitting (https://circleci.com/docs/guides/test/troubleshoot-test-splitting/) [md](https://circleci.com/docs/guides/test/troubleshoot-test-splitting/index.md)
+- Deploy with CircleCI
+  - Deployment and deploy management (https://circleci.com/docs/guides/deploy/deployment-overview/) [md](https://circleci.com/docs/guides/deploy/deployment-overview/index.md)
+  - Deploys and rollbacks
+    - Set up a rollback pipeline (https://circleci.com/docs/guides/deploy/set-up-rollbacks/) [md](https://circleci.com/docs/guides/deploy/set-up-rollbacks/index.md)
+    - Set up a deploy pipeline (https://circleci.com/docs/guides/deploy/set-up-deploys/) [md](https://circleci.com/docs/guides/deploy/set-up-deploys/index.md)
+    - Deploy a component (https://circleci.com/docs/guides/deploy/deploy-a-component/) [md](https://circleci.com/docs/guides/deploy/deploy-a-component/index.md)
+    - Rollback a deployment (https://circleci.com/docs/guides/deploy/rollback-a-deployment/) [md](https://circleci.com/docs/guides/deploy/rollback-a-deployment/index.md)
+    - Configure deploy markers (https://circleci.com/docs/guides/deploy/configure-deploy-markers/) [md](https://circleci.com/docs/guides/deploy/configure-deploy-markers/index.md)
+  - Release agent setup
+    - Release agent overview (https://circleci.com/docs/guides/deploy/release-agent-overview/) [md](https://circleci.com/docs/guides/deploy/release-agent-overview/index.md)
+    - Set up the CircleCI release agent (https://circleci.com/docs/guides/deploy/set-up-the-circleci-release-agent/) [md](https://circleci.com/docs/guides/deploy/set-up-the-circleci-release-agent/index.md)
+    - Configure your Kubernetes components (https://circleci.com/docs/guides/deploy/configure-your-kubernetes-components/) [md](https://circleci.com/docs/guides/deploy/configure-your-kubernetes-components/index.md)
+    - Update the Kubernetes release agent (https://circleci.com/docs/guides/deploy/update-the-kubernetes-release-agent/) [md](https://circleci.com/docs/guides/deploy/update-the-kubernetes-release-agent/index.md)
+    - Manage releases (https://circleci.com/docs/guides/deploy/manage-releases/) [md](https://circleci.com/docs/guides/deploy/manage-releases/index.md)
+  - How-to guides
+    - Deploy Android applications (https://circleci.com/docs/guides/deploy/deploy-android-applications/) [md](https://circleci.com/docs/guides/deploy/deploy-android-applications/index.md)
+    - Deploy to Artifactory (https://circleci.com/docs/guides/deploy/deploy-to-artifactory/) [md](https://circleci.com/docs/guides/deploy/deploy-to-artifactory/index.md)
+    - Deploy to AWS (https://circleci.com/docs/guides/deploy/deploy-to-aws/) [md](https://circleci.com/docs/guides/deploy/deploy-to-aws/index.md)
+    - Push image to ECR and deploy to ECS (https://circleci.com/docs/guides/deploy/ecs-ecr/) [md](https://circleci.com/docs/guides/deploy/ecs-ecr/index.md)
+    - Deploy service update to AWS ECS (https://circleci.com/docs/guides/deploy/deploy-service-update-to-aws-ecs/) [md](https://circleci.com/docs/guides/deploy/deploy-service-update-to-aws-ecs/index.md)
+    - Deploy to Azure Container Registry (https://circleci.com/docs/guides/deploy/deploy-to-azure-container-registry/) [md](https://circleci.com/docs/guides/deploy/deploy-to-azure-container-registry/index.md)
+    - Deploy to Capistrano (https://circleci.com/docs/guides/deploy/deploy-to-capistrano/) [md](https://circleci.com/docs/guides/deploy/deploy-to-capistrano/index.md)
+    - Deploy to Cloud Foundry (https://circleci.com/docs/guides/deploy/deploy-to-cloud-foundry/) [md](https://circleci.com/docs/guides/deploy/deploy-to-cloud-foundry/index.md)
+    - Deploy to Firebase (https://circleci.com/docs/guides/deploy/deploy-to-firebase/) [md](https://circleci.com/docs/guides/deploy/deploy-to-firebase/index.md)
+    - Deploy to Google Cloud Platform (https://circleci.com/docs/guides/deploy/deploy-to-google-cloud-platform/) [md](https://circleci.com/docs/guides/deploy/deploy-to-google-cloud-platform/index.md)
+    - Deploy to Heroku (https://circleci.com/docs/guides/deploy/deploy-to-heroku/) [md](https://circleci.com/docs/guides/deploy/deploy-to-heroku/index.md)
+    - Deploy iOS applications (https://circleci.com/docs/guides/deploy/deploy-ios-applications/) [md](https://circleci.com/docs/guides/deploy/deploy-ios-applications/index.md)
+    - Deploy over SSH (https://circleci.com/docs/guides/deploy/deploy-over-ssh/) [md](https://circleci.com/docs/guides/deploy/deploy-over-ssh/index.md)
+    - Publish packages to Packagecloud (https://circleci.com/docs/guides/deploy/publish-packages-to-packagecloud/) [md](https://circleci.com/docs/guides/deploy/publish-packages-to-packagecloud/index.md)
+    - Deploy to npm registry (https://circleci.com/docs/guides/deploy/deploy-to-npm-registry/) [md](https://circleci.com/docs/guides/deploy/deploy-to-npm-registry/index.md)
+- Optimize
+  - Optimizations reference (https://circleci.com/docs/guides/optimize/optimizations/) [md](https://circleci.com/docs/guides/optimize/optimizations/index.md)
+  - Data
+    - Persisting data overview (https://circleci.com/docs/guides/optimize/persist-data/) [md](https://circleci.com/docs/guides/optimize/persist-data/index.md)
+    - Caching dependencies (https://circleci.com/docs/guides/optimize/caching/) [md](https://circleci.com/docs/guides/optimize/caching/index.md)
+    - Caching strategies (https://circleci.com/docs/guides/optimize/caching-strategy/) [md](https://circleci.com/docs/guides/optimize/caching-strategy/index.md)
+    - Store build artifacts (https://circleci.com/docs/guides/optimize/artifacts/) [md](https://circleci.com/docs/guides/optimize/artifacts/index.md)
+  - Speed
+    - Concurrency (https://circleci.com/docs/guides/optimize/concurrency/) [md](https://circleci.com/docs/guides/optimize/concurrency/index.md)
+    - Test splitting and parallelism (https://circleci.com/docs/guides/optimize/parallelism-faster-jobs/) [md](https://circleci.com/docs/guides/optimize/parallelism-faster-jobs/index.md)
+    - Docker layer caching overview (https://circleci.com/docs/guides/optimize/docker-layer-caching/) [md](https://circleci.com/docs/guides/optimize/docker-layer-caching/index.md)
+  - Config
+    - Dynamic configuration (https://circleci.com/docs/guides/orchestrate/dynamic-config/) [md](https://circleci.com/docs/guides/orchestrate/dynamic-config/index.md)
+  - Tutorials
+    - Speed up pipelines with test splitting (https://circleci.com/docs/guides/test/test-splitting-tutorial/) [md](https://circleci.com/docs/guides/test/test-splitting-tutorial/index.md)
+  - How-to guides
+    - Use matrix jobs (https://circleci.com/docs/guides/orchestrate/using-matrix-jobs/) [md](https://circleci.com/docs/guides/orchestrate/using-matrix-jobs/index.md)
+    - Using dynamic configuration (https://circleci.com/docs/guides/orchestrate/using-dynamic-configuration/) [md](https://circleci.com/docs/guides/orchestrate/using-dynamic-configuration/index.md)
+    - Avoid and debug Java memory errors (https://circleci.com/docs/guides/optimize/java-oom/) [md](https://circleci.com/docs/guides/optimize/java-oom/index.md)
+- Insights
+  - Use Insights (https://circleci.com/docs/guides/insights/insights/) [md](https://circleci.com/docs/guides/insights/insights/index.md)
+  - Test Insights (https://circleci.com/docs/guides/insights/insights-tests/) [md](https://circleci.com/docs/guides/insights/insights-tests/index.md)
+  - Generate an Insights snapshot badge (https://circleci.com/docs/guides/insights/insights-snapshot-badge/) [md](https://circleci.com/docs/guides/insights/insights-snapshot-badge/index.md)
+  - Insights glossary (https://circleci.com/docs/guides/insights/insights-glossary/) [md](https://circleci.com/docs/guides/insights/insights-glossary/index.md)
+- Manage roles, permissions, and authentication
+  - Users, organizations, and integrations guide (https://circleci.com/docs/guides/permissions-authentication/users-organizations-and-integrations-guide/) [md](https://circleci.com/docs/guides/permissions-authentication/users-organizations-and-integrations-guide/index.md)
+  - Roles and permissions
+    - Roles and permissions overview (https://circleci.com/docs/guides/permissions-authentication/roles-and-permissions-overview/) [md](https://circleci.com/docs/guides/permissions-authentication/roles-and-permissions-overview/index.md)
+    - Manage roles and permissions (https://circleci.com/docs/guides/permissions-authentication/manage-roles-and-permissions/) [md](https://circleci.com/docs/guides/permissions-authentication/manage-roles-and-permissions/index.md)
+    - Manage groups (https://circleci.com/docs/guides/permissions-authentication/manage-groups/) [md](https://circleci.com/docs/guides/permissions-authentication/manage-groups/index.md)
+    - Prevent unregistered users from spending credits (https://circleci.com/docs/guides/plans-pricing/prevent-unregistered-users-from-spending-credits/) [md](https://circleci.com/docs/guides/plans-pricing/prevent-unregistered-users-from-spending-credits/index.md)
+  - SSO authentication
+    - SSO overview (https://circleci.com/docs/guides/permissions-authentication/sso-overview/) [md](https://circleci.com/docs/guides/permissions-authentication/sso-overview/index.md)
+    - SSO setup (https://circleci.com/docs/guides/permissions-authentication/set-up-sso/) [md](https://circleci.com/docs/guides/permissions-authentication/set-up-sso/index.md)
+    - Set up SSO group mapping with Okta (https://circleci.com/docs/guides/permissions-authentication/sso-group-mapping/) [md](https://circleci.com/docs/guides/permissions-authentication/sso-group-mapping/index.md)
+    - Sign in to an SSO-enabled org (https://circleci.com/docs/guides/permissions-authentication/sign-in-to-an-sso-enabled-organization/) [md](https://circleci.com/docs/guides/permissions-authentication/sign-in-to-an-sso-enabled-organization/index.md)
+  - Multi-factor authentication (MFA)
+    - MFA overview (https://circleci.com/docs/guides/permissions-authentication/mfa/) [md](https://circleci.com/docs/guides/permissions-authentication/mfa/index.md)
+  - OIDC tokens
+    - Use OpenID Connect tokens in jobs (https://circleci.com/docs/guides/permissions-authentication/openid-connect-tokens/) [md](https://circleci.com/docs/guides/permissions-authentication/openid-connect-tokens/index.md)
+    - OIDC tokens with custom claims (https://circleci.com/docs/guides/permissions-authentication/oidc-tokens-with-custom-claims/) [md](https://circleci.com/docs/guides/permissions-authentication/oidc-tokens-with-custom-claims/index.md)
+- Manage security and secrets
+  - Security features
+    - How CircleCI handles security (https://circleci.com/docs/guides/security/security/) [md](https://circleci.com/docs/guides/security/security/index.md)
+    - Intro to environment variables (https://circleci.com/docs/guides/security/env-vars/) [md](https://circleci.com/docs/guides/security/env-vars/index.md)
+    - Using contexts (https://circleci.com/docs/guides/security/contexts/) [md](https://circleci.com/docs/guides/security/contexts/index.md)
+    - IP ranges (https://circleci.com/docs/guides/security/ip-ranges/) [md](https://circleci.com/docs/guides/security/ip-ranges/index.md)
+    - Audit logs (https://circleci.com/docs/guides/security/audit-logs/) [md](https://circleci.com/docs/guides/security/audit-logs/index.md)
+  - Security recommendations
+    - Security overview (https://circleci.com/docs/guides/security/security-overview/) [md](https://circleci.com/docs/guides/security/security-overview/index.md)
+    - Protecting against supply chain attacks (https://circleci.com/docs/guides/security/security-supply-chain/) [md](https://circleci.com/docs/guides/security/security-supply-chain/index.md)
+    - Secure secrets handling (https://circleci.com/docs/guides/security/security-recommendations/) [md](https://circleci.com/docs/guides/security/security-recommendations/index.md)
+  - How-to guides
+    - Set an environment variable (https://circleci.com/docs/guides/security/set-environment-variable/) [md](https://circleci.com/docs/guides/security/set-environment-variable/index.md)
+    - Inject environment variables with the API (https://circleci.com/docs/guides/security/inject-environment-variables-with-api/) [md](https://circleci.com/docs/guides/security/inject-environment-variables-with-api/index.md)
+    - Debug with SSH (https://circleci.com/docs/guides/execution-managed/ssh-access-jobs/) [md](https://circleci.com/docs/guides/execution-managed/ssh-access-jobs/index.md)
+    - Rotate project SSH keys (https://circleci.com/docs/guides/security/rotate-project-ssh-keys/) [md](https://circleci.com/docs/guides/security/rotate-project-ssh-keys/index.md)
+    - Stop building a project on CircleCI (https://circleci.com/docs/guides/security/stop-building-a-project-on-circleci/) [md](https://circleci.com/docs/guides/security/stop-building-a-project-on-circleci/index.md)
+    - Rename organizations and repositories (https://circleci.com/docs/guides/security/rename-organizations-and-repositories/) [md](https://circleci.com/docs/guides/security/rename-organizations-and-repositories/index.md)
+    - Delete organizations and projects (https://circleci.com/docs/guides/security/delete-organizations-and-projects/) [md](https://circleci.com/docs/guides/security/delete-organizations-and-projects/index.md)
+- Manage config policies
+  - Config policy management overview (https://circleci.com/docs/guides/config-policies/config-policy-management-overview/) [md](https://circleci.com/docs/guides/config-policies/config-policy-management-overview/index.md)
+  - Config policy reference (https://circleci.com/docs/guides/config-policies/config-policy-reference/) [md](https://circleci.com/docs/guides/config-policies/config-policy-reference/index.md)
+  - How-to guides
+    - Create and manage config policies (https://circleci.com/docs/guides/config-policies/create-and-manage-config-policies/) [md](https://circleci.com/docs/guides/config-policies/create-and-manage-config-policies/index.md)
+    - Test config policies (https://circleci.com/docs/guides/config-policies/test-config-policies/) [md](https://circleci.com/docs/guides/config-policies/test-config-policies/index.md)
+    - Use the CLI for config and policy development (https://circleci.com/docs/guides/config-policies/use-the-cli-for-config-and-policy-development/) [md](https://circleci.com/docs/guides/config-policies/use-the-cli-for-config-and-policy-development/index.md)
+    - Config policies for self-hosted runner (https://circleci.com/docs/guides/config-policies/config-policies-for-self-hosted-runner/) [md](https://circleci.com/docs/guides/config-policies/config-policies-for-self-hosted-runner/index.md)
+    - Manage contexts with config policies (https://circleci.com/docs/guides/config-policies/manage-contexts-with-config-policies/) [md](https://circleci.com/docs/guides/config-policies/manage-contexts-with-config-policies/index.md)
+- Integration
+  - Integration features
+    - Outbound webhooks (https://circleci.com/docs/guides/integration/outbound-webhooks/) [md](https://circleci.com/docs/guides/integration/outbound-webhooks/index.md)
+    - Outbound webhooks reference (https://circleci.com/docs/reference/outbound-webhooks-reference/) [md](https://circleci.com/docs/reference/outbound-webhooks-reference/index.md)
+    - Notifications (https://circleci.com/docs/guides/integration/notifications/) [md](https://circleci.com/docs/guides/integration/notifications/index.md)
+  - VCS integration
+    - VCS, pipeline types, and feature support (https://circleci.com/docs/guides/integration/version-control-system-integration-overview/) [md](https://circleci.com/docs/guides/integration/version-control-system-integration-overview/index.md)
+    - Using the CircleCI GitHub App in an OAuth org (https://circleci.com/docs/guides/integration/using-the-circleci-github-app-in-an-oauth-org/) [md](https://circleci.com/docs/guides/integration/using-the-circleci-github-app-in-an-oauth-org/index.md)
+    - Build open source projects (https://circleci.com/docs/guides/integration/oss/) [md](https://circleci.com/docs/guides/integration/oss/index.md)
+  - Third-party integrations
+    - Enable GitHub Checks (https://circleci.com/docs/guides/integration/enable-checks/) [md](https://circleci.com/docs/guides/integration/enable-checks/index.md)
+    - Connect with Jira (https://circleci.com/docs/guides/integration/jira-plugin/) [md](https://circleci.com/docs/guides/integration/jira-plugin/index.md)
+    - New Relic integration (https://circleci.com/docs/guides/integration/new-relic-integration/) [md](https://circleci.com/docs/guides/integration/new-relic-integration/index.md)
+    - Datadog integration (https://circleci.com/docs/guides/integration/datadog-integration/) [md](https://circleci.com/docs/guides/integration/datadog-integration/index.md)
+    - Sumo Logic integration (https://circleci.com/docs/guides/integration/sumo-logic-integration/) [md](https://circleci.com/docs/guides/integration/sumo-logic-integration/index.md)
+  - How-to guides
+    - Adding status badges (https://circleci.com/docs/guides/integration/status-badges/) [md](https://circleci.com/docs/guides/integration/status-badges/index.md)
+    - CircleCI webhooks with Airtable (https://circleci.com/docs/guides/integration/webhooks-airtable/) [md](https://circleci.com/docs/guides/integration/webhooks-airtable/index.md)
+    - Add additional SSH keys (https://circleci.com/docs/guides/integration/add-ssh-key/) [md](https://circleci.com/docs/guides/integration/add-ssh-key/index.md)
+    - Authorize Google Cloud SDK (https://circleci.com/docs/guides/integration/authorize-google-cloud-sdk/) [md](https://circleci.com/docs/guides/integration/authorize-google-cloud-sdk/index.md)
+- Developer toolkit
+  - How to find IDs (https://circleci.com/docs/guides/toolkit/how-to-find-ids/) [md](https://circleci.com/docs/guides/toolkit/how-to-find-ids/index.md)
+  - AI features
+    - Chunk Setup and Overview (https://circleci.com/docs/guides/toolkit/chunk-setup-and-overview/) [md](https://circleci.com/docs/guides/toolkit/chunk-setup-and-overview/index.md)
+    - Using the CircleCI MCP server (https://circleci.com/docs/guides/toolkit/using-the-circleci-mcp-server/) [md](https://circleci.com/docs/guides/toolkit/using-the-circleci-mcp-server/index.md)
+    - Intelligent summaries (https://circleci.com/docs/guides/toolkit/intelligent-summaries/) [md](https://circleci.com/docs/guides/toolkit/intelligent-summaries/index.md)
+  - CLI
+    - CircleCI environment CLI usage guide (https://circleci.com/docs/guides/toolkit/environment-cli-usage-guide/) [md](https://circleci.com/docs/guides/toolkit/environment-cli-usage-guide/index.md)
+    - Install and configure the CircleCI local CLI (https://circleci.com/docs/guides/toolkit/local-cli/) [md](https://circleci.com/docs/guides/toolkit/local-cli/index.md)
+    - How to use the CircleCI local CLI (https://circleci.com/docs/guides/toolkit/how-to-use-the-circleci-local-cli/) [md](https://circleci.com/docs/guides/toolkit/how-to-use-the-circleci-local-cli/index.md)
+  - APIs
+    - API v2 intro (https://circleci.com/docs/guides/toolkit/api-intro/) [md](https://circleci.com/docs/guides/toolkit/api-intro/index.md)
+    - API v2 developers guide (https://circleci.com/docs/guides/toolkit/api-developers-guide/) [md](https://circleci.com/docs/guides/toolkit/api-developers-guide/index.md)
+    - Managing API tokens (https://circleci.com/docs/guides/toolkit/managing-api-tokens/) [md](https://circleci.com/docs/guides/toolkit/managing-api-tokens/index.md)
+  - IDE tools
+    - VS Code extension overview (https://circleci.com/docs/guides/toolkit/vs-code-extension-overview/) [md](https://circleci.com/docs/guides/toolkit/vs-code-extension-overview/index.md)
+    - Get started with the VS Code extension (https://circleci.com/docs/guides/toolkit/get-started-with-the-vs-code-extension/) [md](https://circleci.com/docs/guides/toolkit/get-started-with-the-vs-code-extension/index.md)
+  - Config tools
+    - Config SDK (https://circleci.com/docs/guides/toolkit/circleci-config-sdk/) [md](https://circleci.com/docs/guides/toolkit/circleci-config-sdk/index.md)
+    - Orb development kit (https://circleci.com/docs/orbs/author/orb-author/) [md](https://circleci.com/docs/orbs/author/orb-author/index.md)
+    - Image Updater (https://circleci.com/docs/guides/toolkit/circleci-image-updater/) [md](https://circleci.com/docs/guides/toolkit/circleci-image-updater/index.md)
+  - Example projects and configs
+    - Examples and guides overview (https://circleci.com/docs/guides/toolkit/examples-and-guides-overview/) [md](https://circleci.com/docs/guides/toolkit/examples-and-guides-overview/index.md)
+    - Sample config.yml files (https://circleci.com/docs/guides/toolkit/sample-config/) [md](https://circleci.com/docs/guides/toolkit/sample-config/index.md)
+    - Database examples (https://circleci.com/docs/guides/toolkit/postgres-config/) [md](https://circleci.com/docs/guides/toolkit/postgres-config/index.md)
+- Plans and pricing
+  - CircleCI plans overview (https://circleci.com/docs/guides/plans-pricing/plan-overview/) [md](https://circleci.com/docs/guides/plans-pricing/plan-overview/index.md)
+  - Credits overview (https://circleci.com/docs/guides/plans-pricing/credits/) [md](https://circleci.com/docs/guides/plans-pricing/credits/index.md)
+  - Manage budgets (https://circleci.com/docs/guides/plans-pricing/manage-budgets/) [md](https://circleci.com/docs/guides/plans-pricing/manage-budgets/index.md)
+  - Free Plan overview (https://circleci.com/docs/guides/plans-pricing/plan-free/) [md](https://circleci.com/docs/guides/plans-pricing/plan-free/index.md)
+  - Performance Plan overview (https://circleci.com/docs/guides/plans-pricing/plan-performance/) [md](https://circleci.com/docs/guides/plans-pricing/plan-performance/index.md)
+  - Scale Plan overview (https://circleci.com/docs/guides/plans-pricing/plan-scale/) [md](https://circleci.com/docs/guides/plans-pricing/plan-scale/index.md)
+  - Server Plan overview (https://circleci.com/docs/guides/plans-pricing/plan-server/) [md](https://circleci.com/docs/guides/plans-pricing/plan-server/index.md)
 
-- **Home (ROOT)**: Landing page and overview
-  - Start: https://circleci.com/docs/
+### Reference ()
+- Configuration
+  - Configuration reference (https://circleci.com/docs/reference/configuration-reference/) [md](https://circleci.com/docs/reference/configuration-reference/index.md)
+  - Reusable configuration reference (https://circleci.com/docs/reference/reusing-config/) [md](https://circleci.com/docs/reference/reusing-config/index.md)
+  - Project values and variables (https://circleci.com/docs/reference/variables/) [md](https://circleci.com/docs/reference/variables/index.md)
+  - Config policy reference (https://circleci.com/docs/guides/config-policies/config-policy-reference/) [md](https://circleci.com/docs/guides/config-policies/config-policy-reference/index.md)
+  - Optimization reference (https://circleci.com/docs/guides/optimize/optimizations/) [md](https://circleci.com/docs/guides/optimize/optimizations/index.md)
+  - Outbound webhooks reference (https://circleci.com/docs/reference/outbound-webhooks-reference/) [md](https://circleci.com/docs/reference/outbound-webhooks-reference/index.md)
+- API
+  - API v1 and v2 reference (https://circleci.com/docs/reference/api-homepage/) [md](https://circleci.com/docs/reference/api-homepage/index.md)
+  - Runner API reference (https://circleci.com/docs/guides/execution-runner/runner-api/) [md](https://circleci.com/docs/guides/execution-runner/runner-api/index.md)
+- General
+  - Concepts (https://circleci.com/docs/guides/about-circleci/concepts/) [md](https://circleci.com/docs/guides/about-circleci/concepts/index.md)
+  - Glossary (https://circleci.com/docs/reference/glossary/) [md](https://circleci.com/docs/reference/glossary/index.md)
+  - Environment CLI usage guide (https://circleci.com/docs/guides/toolkit/environment-cli-usage-guide/) [md](https://circleci.com/docs/guides/toolkit/environment-cli-usage-guide/index.md)
+  - Insights metrics glossary (https://circleci.com/docs/guides/insights/insights-glossary/) [md](https://circleci.com/docs/guides/insights/insights-glossary/index.md)
+  - Troubleshoot (https://circleci.com/docs/reference/troubleshoot/) [md](https://circleci.com/docs/reference/troubleshoot/index.md)
+  - FAQ (https://circleci.com/docs/reference/faq/) [md](https://circleci.com/docs/reference/faq/index.md)
 
-- **Guides**: Getting started guides and tutorials
-  - Start: https://circleci.com/docs/guides/getting-started/first-steps/
-  - Includes: Quick starts, tutorials, and step-by-step instructions
+### Orbs ()
+- Use orbs
+  - Introduction to using orbs (https://circleci.com/docs/orbs/use/orb-intro/) [md](https://circleci.com/docs/orbs/use/orb-intro/index.md)
+  - Orb concepts (https://circleci.com/docs/orbs/use/orb-concepts/) [md](https://circleci.com/docs/orbs/use/orb-concepts/index.md)
+  - Managing URL orbs allow lists (https://circleci.com/docs/orbs/use/managing-url-orbs-allow-lists/) [md](https://circleci.com/docs/orbs/use/managing-url-orbs-allow-lists/index.md)
+  - FAQ (https://circleci.com/docs/orbs/use/orbs-faq/) [md](https://circleci.com/docs/orbs/use/orbs-faq/index.md)
+- Author orbs
+  - Introduction to authoring orbs (https://circleci.com/docs/orbs/author/orb-author/) [md](https://circleci.com/docs/orbs/author/orb-author/index.md)
+  - Create a registry orb (https://circleci.com/docs/orbs/author/create-test-and-publish-a-registry-orb/) [md](https://circleci.com/docs/orbs/author/create-test-and-publish-a-registry-orb/index.md)
+  - Create a URL orb (https://circleci.com/docs/orbs/author/create-test-and-use-url-orbs/) [md](https://circleci.com/docs/orbs/author/create-test-and-use-url-orbs/index.md)
+  - Create an inline orb (https://circleci.com/docs/orbs/author/create-an-inline-orb/) [md](https://circleci.com/docs/orbs/author/create-an-inline-orb/index.md)
+  - Registry orb testing methodologies (https://circleci.com/docs/orbs/author/testing-orbs/) [md](https://circleci.com/docs/orbs/author/testing-orbs/index.md)
+  - Registry orb authoring process (manual) (https://circleci.com/docs/orbs/author/manual-orb-authoring-process/) [md](https://circleci.com/docs/orbs/author/manual-orb-authoring-process/index.md)
+  - Best practices (https://circleci.com/docs/orbs/author/orbs-best-practices/) [md](https://circleci.com/docs/orbs/author/orbs-best-practices/index.md)
+  - FAQ (https://circleci.com/docs/orbs/author/orb-author-faq/) [md](https://circleci.com/docs/orbs/author/orb-author-faq/index.md)
 
-- **Reference**: Technical reference documentation
-  - Start: https://circleci.com/docs/reference/configuration-reference/
-  - Includes: Configuration reference, API documentation, CLI commands
+### Server
+- Versions: server-4.9, server-4.8, server-4.7, server-4.6, server-4.5, server-4.4, server-4.3, server-4.2
+- CircleCI Server Overview (https://circleci.com/docs/server-admin/latest/overview/circleci-server-overview/) [md](https://circleci.com/docs/server-admin/latest/overview/circleci-server-overview/index.md)
+- Release notes (https://circleci.com/docs/server-admin/latest/overview/release-notes/) [md](https://circleci.com/docs/server-admin/latest/overview/release-notes/index.md)
+- Installing CircleCI Server
+  - Install on AWS
+    - Phase 1: AWS prerequisites (https://circleci.com/docs/server-admin/latest/installation/phase-1-aws-prerequisites/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-1-aws-prerequisites/index.md)
+    - Phase 2: AWS Core services installation (https://circleci.com/docs/server-admin/latest/installation/phase-2-aws-core-services/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-2-aws-core-services/index.md)
+    - Phase 3: AWS execution environments installation (https://circleci.com/docs/server-admin/latest/installation/phase-3-aws-execution-environments/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-3-aws-execution-environments/index.md)
+    - Phase 4: AWS post-installation (https://circleci.com/docs/server-admin/latest/installation/phase-4-aws-post-installation/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-4-aws-post-installation/index.md)
+  - Install on GCP
+    - Phase 1: GCP prerequisites (https://circleci.com/docs/server-admin/latest/installation/phase-1-gcp-prerequisites/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-1-gcp-prerequisites/index.md)
+    - Phase 2: GCP Core services installation (https://circleci.com/docs/server-admin/latest/installation/phase-2-gcp-core-services/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-2-gcp-core-services/index.md)
+    - Phase 3: GCP execution environments installation (https://circleci.com/docs/server-admin/latest/installation/phase-3-gcp-execution-environments/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-3-gcp-execution-environments/index.md)
+    - Phase 4: GCP post-installation (https://circleci.com/docs/server-admin/latest/installation/phase-4-gcp-post-installation/) [md](https://circleci.com/docs/server-admin/latest/installation/phase-4-gcp-post-installation/index.md)
+  - Install in an air-gapped environment
+    - Phase 1 - Prerequisites (https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-1-prerequisites/) [md](https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-1-prerequisites/index.md)
+    - Phase 2 - Configure object storage (https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-2-configure-object-storage/) [md](https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-2-configure-object-storage/index.md)
+    - Phase 3 - Install CircleCI Server (https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-3-install-circleci-server/) [md](https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-3-install-circleci-server/index.md)
+    - Phase 4 - Configure Nomad clients (https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-4-configure-nomad-clients/) [md](https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-4-configure-nomad-clients/index.md)
+    - Phase 5 - Test installation (https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-5-test-your-installation/) [md](https://circleci.com/docs/server-admin/latest/air-gapped-installation/phase-5-test-your-installation/index.md)
+    - Additional considerations (https://circleci.com/docs/server-admin/latest/air-gapped-installation/additional-considerations/) [md](https://circleci.com/docs/server-admin/latest/air-gapped-installation/additional-considerations/index.md)
+    - Example values.yaml (https://circleci.com/docs/server-admin/latest/air-gapped-installation/example-values/) [md](https://circleci.com/docs/server-admin/latest/air-gapped-installation/example-values/index.md)
+  - Hardening your cluster (https://circleci.com/docs/server-admin/latest/installation/hardening-your-cluster/) [md](https://circleci.com/docs/server-admin/latest/installation/hardening-your-cluster/index.md)
+  - Installing server behind a proxy (https://circleci.com/docs/server-admin/latest/installation/installing-server-behind-a-proxy/) [md](https://circleci.com/docs/server-admin/latest/installation/installing-server-behind-a-proxy/index.md)
+  - Upgrading server (https://circleci.com/docs/server-admin/latest/installation/upgrade-server/) [md](https://circleci.com/docs/server-admin/latest/installation/upgrade-server/index.md)
+  - Installation reference (https://circleci.com/docs/server-admin/latest/installation/installation-reference/) [md](https://circleci.com/docs/server-admin/latest/installation/installation-reference/index.md)
+- CircleCI Server operator guide
+  - Operator overview (https://circleci.com/docs/server-admin/latest/operator/operator-overview/) [md](https://circleci.com/docs/server-admin/latest/operator/operator-overview/index.md)
+  - Introduction to Nomad cluster operation (https://circleci.com/docs/server-admin/latest/operator/introduction-to-nomad-cluster-operation/) [md](https://circleci.com/docs/server-admin/latest/operator/introduction-to-nomad-cluster-operation/index.md)
+  - Resource consumption and cost management (https://circleci.com/docs/server-admin/latest/operator/resource-consumption-cost-management/) [md](https://circleci.com/docs/server-admin/latest/operator/resource-consumption-cost-management/index.md)
+  - Managing user accounts (https://circleci.com/docs/server-admin/latest/operator/managing-user-accounts/) [md](https://circleci.com/docs/server-admin/latest/operator/managing-user-accounts/index.md)
+  - Managing orbs (https://circleci.com/docs/server-admin/latest/operator/managing-orbs/) [md](https://circleci.com/docs/server-admin/latest/operator/managing-orbs/index.md)
+  - Manage virtual machines with machine provisioner (https://circleci.com/docs/server-admin/latest/operator/manage-virtual-machines-with-machine-provisioner/) [md](https://circleci.com/docs/server-admin/latest/operator/manage-virtual-machines-with-machine-provisioner/index.md)
+  - Configuring external services (https://circleci.com/docs/server-admin/latest/operator/configuring-external-services/) [md](https://circleci.com/docs/server-admin/latest/operator/configuring-external-services/index.md)
+  - Data retention in server (https://circleci.com/docs/server-admin/latest/operator/data-retention/) [md](https://circleci.com/docs/server-admin/latest/operator/data-retention/index.md)
+  - Expanding internal database volumes (https://circleci.com/docs/server-admin/latest/operator/expanding-internal-database-volumes/) [md](https://circleci.com/docs/server-admin/latest/operator/expanding-internal-database-volumes/index.md)
+  - Managing load balancers (https://circleci.com/docs/server-admin/latest/operator/managing-load-balancers/) [md](https://circleci.com/docs/server-admin/latest/operator/managing-load-balancers/index.md)
+  - User authentication (https://circleci.com/docs/server-admin/latest/operator/user-authentication/) [md](https://circleci.com/docs/server-admin/latest/operator/user-authentication/index.md)
+  - Managing build artifacts (https://circleci.com/docs/server-admin/latest/operator/managing-build-artifacts/) [md](https://circleci.com/docs/server-admin/latest/operator/managing-build-artifacts/index.md)
+  - Usage data collection (https://circleci.com/docs/server-admin/latest/operator/usage-data-collection/) [md](https://circleci.com/docs/server-admin/latest/operator/usage-data-collection/index.md)
+  - CircleCI Server security features (https://circleci.com/docs/server-admin/latest/operator/circleci-server-security-features/) [md](https://circleci.com/docs/server-admin/latest/operator/circleci-server-security-features/index.md)
+  - Application lifecycle (https://circleci.com/docs/server-admin/latest/operator/application-lifecycle/) [md](https://circleci.com/docs/server-admin/latest/operator/application-lifecycle/index.md)
+  - Troubleshooting and support (https://circleci.com/docs/server-admin/latest/operator/troubleshooting-and-support/) [md](https://circleci.com/docs/server-admin/latest/operator/troubleshooting-and-support/index.md)
+  - Backup and restore (https://circleci.com/docs/server-admin/latest/operator/backup-and-restore/) [md](https://circleci.com/docs/server-admin/latest/operator/backup-and-restore/index.md)
+  - Upgrade MongoDB (https://circleci.com/docs/server-admin/latest/operator/upgrade-mongo/) [md](https://circleci.com/docs/server-admin/latest/operator/upgrade-mongo/index.md)
+  - Monitoring stack reference Helm chart (https://circleci.com/docs/server-admin/latest/operator/monitoring-stack-reference-helm-chart/) [md](https://circleci.com/docs/server-admin/latest/operator/monitoring-stack-reference-helm-chart/index.md)
+  - FAQs (https://circleci.com/docs/server-admin/latest/operator/faq/) [md](https://circleci.com/docs/server-admin/latest/operator/faq/index.md)
 
-- **Orbs**: CircleCI Orbs documentation
-  - Start: https://circleci.com/docs/orbs/
-  - Includes: Orb registry, development guides, and usage examples
+### Services ()
+- Field engineering services overview (https://circleci.com/docs/services/services-overview/) [md](https://circleci.com/docs/services/services-overview/index.md)
+- Services
+  - Optimization assistance (https://circleci.com/docs/services/services/optimization-assistance/) [md](https://circleci.com/docs/services/services/optimization-assistance/index.md)
+  - Onboarding assistance (https://circleci.com/docs/services/services/onboarding-assistance/) [md](https://circleci.com/docs/services/services/onboarding-assistance/index.md)
+  - Migration assistance (https://circleci.com/docs/services/services/migration-assistance/) [md](https://circleci.com/docs/services/services/migration-assistance/index.md)
+  - Configuration review (https://circleci.com/docs/services/services/config-review/) [md](https://circleci.com/docs/services/services/config-review/index.md)
+  - Configuration translation (https://circleci.com/docs/services/services/config-translation/) [md](https://circleci.com/docs/services/services/config-translation/index.md)
+  - Cost optimization (https://circleci.com/docs/services/services/cost-optimization/) [md](https://circleci.com/docs/services/services/cost-optimization/index.md)
+  - Technical consultation (https://circleci.com/docs/services/services/technical-consultation/) [md](https://circleci.com/docs/services/services/technical-consultation/index.md)
+  - Custom service (https://circleci.com/docs/services/services/custom-service/) [md](https://circleci.com/docs/services/services/custom-service/index.md)
+  - Server assistance
+    - Server installation (https://circleci.com/docs/services/services/server-installation/) [md](https://circleci.com/docs/services/services/server-installation/index.md)
+    - Server migration (https://circleci.com/docs/services/services/server-migration/) [md](https://circleci.com/docs/services/services/server-migration/index.md)
+    - Server operator training (https://circleci.com/docs/services/services/server-operator-training/) [md](https://circleci.com/docs/services/services/server-operator-training/index.md)
+- Training
+  - General developer training (https://circleci.com/docs/services/services/general-developer-training/) [md](https://circleci.com/docs/services/services/general-developer-training/index.md)
+  - Reusable configuration training (https://circleci.com/docs/services/services/reusable-config-training/) [md](https://circleci.com/docs/services/services/reusable-config-training/index.md)
+  - Usage API training (https://circleci.com/docs/services/services/usage-api-training/) [md](https://circleci.com/docs/services/services/usage-api-training/index.md)
 
-- **Server Admin**: Self-hosted CircleCI server administration guides
-  - Versions: 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9
-  - Start: https://circleci.com/docs/server-admin-4.9/
-  - Includes: Installation, configuration, maintenance, and operations
+### Contributors ()
+- Docs style guide
+  - Overview (https://circleci.com/docs/contributors/docs-style/) [md](https://circleci.com/docs/contributors/docs-style/index.md)
+  - Formatting (https://circleci.com/docs/contributors/docs-style/formatting/) [md](https://circleci.com/docs/contributors/docs-style/formatting/index.md)
+  - Style and voice (https://circleci.com/docs/contributors/docs-style/style-and-voice/) [md](https://circleci.com/docs/contributors/docs-style/style-and-voice/index.md)
+  - Headings (https://circleci.com/docs/contributors/docs-style/headings/) [md](https://circleci.com/docs/contributors/docs-style/headings/index.md)
+  - Using lists (https://circleci.com/docs/contributors/docs-style/using-lists/) [md](https://circleci.com/docs/contributors/docs-style/using-lists/index.md)
+  - Cross references and links (https://circleci.com/docs/contributors/docs-style/links/) [md](https://circleci.com/docs/contributors/docs-style/links/index.md)
+  - Using images (https://circleci.com/docs/contributors/docs-style/using-images/) [md](https://circleci.com/docs/contributors/docs-style/using-images/index.md)
+  - Using tables (https://circleci.com/docs/contributors/docs-style/using-tables/) [md](https://circleci.com/docs/contributors/docs-style/using-tables/index.md)
+  - Using code samples (https://circleci.com/docs/contributors/docs-style/using-code-samples/) [md](https://circleci.com/docs/contributors/docs-style/using-code-samples/index.md)
+  - Page title badges (https://circleci.com/docs/contributors/docs-style/title-badges/) [md](https://circleci.com/docs/contributors/docs-style/title-badges/index.md)
+- Content templates
+  - Template for a conceptual page (https://circleci.com/docs/contributors/templates/template-conceptual/) [md](https://circleci.com/docs/contributors/templates/template-conceptual/index.md)
+  - Template for a how-to page (https://circleci.com/docs/contributors/templates/template-how-to/) [md](https://circleci.com/docs/contributors/templates/template-how-to/index.md)
+  - Template for a tutorial page (https://circleci.com/docs/contributors/templates/template-tutorial/) [md](https://circleci.com/docs/contributors/templates/template-tutorial/index.md)
+  - A test page to show all assets and styles (https://circleci.com/docs/contributors/templates/test-page-one/) [md](https://circleci.com/docs/contributors/templates/test-page-one/index.md)
 
-- **Contributors**: Documentation for contributors to CircleCI docs
-  - Start: https://circleci.com/docs/contributors/
-  - Includes: Style guide, authoring guidelines, and contribution workflows
+### Home ()
 
-### API Documentation
+## Content Statistics
 
-The site includes integrated API documentation built with Redocly:
-- API v1: https://circleci.com/docs/api/v1/
-- API v2: https://circleci.com/docs/api/v2/
+- Total components: 7
+- Total pages: 579
 
-## Content Format
-
-All documentation pages are written in AsciiDoc format and follow these conventions:
-- File extension: `.adoc`
-- Location: Within `modules/ROOT/pages/` in each component
-- Navigation: Defined in `modules/ROOT/nav.adoc` files
-
-## Key Documentation Areas
-
-### Getting Started
-- First steps with CircleCI
-- Configuration tutorials
-- Pipeline setup guides
-- Integration instructions
-
-### Configuration
-- `.circleci/config.yml` reference
-- Executors and images
-- Workflows and jobs
-- Contexts and environment variables
-
-### Platform Features
-- Docker and machine executors
-- Caching and workspaces
-- Artifacts and test results
-- Insights and performance optimization
-
-### Self-Hosted Server
-- Installation and upgrade guides
-- Architecture and requirements
-- Backup and disaster recovery
-- Monitoring and troubleshooting
-
-### Orbs
-- Using orbs in pipelines
-- Creating and publishing orbs
-- Orb development best practices
-- Orb registry and search
-
-## Project Documentation
-
-For contributors and developers working on the docs site itself:
-
-- README.md: Project overview and getting started
-- ARCHITECTURE.md: System design and technical architecture
-- DEVELOPMENT.md: Development setup and workflow
-- CONTENT_AUTHORING.md: Writing and formatting guidelines
-- TECHNICAL_REFERENCE.md: Detailed technical specifications
-- API_DOCS_INTEGRATION.md: API documentation integration guide
-- CONTRIBUTING.md: Contribution guidelines
+Pages by component:
+  - Guides: 238
+  - server-admin (server-4.9): 41
+  - server-admin (server-4.8): 41
+  - server-admin (server-4.7): 39
+  - server-admin (server-4.6): 34
+  - server-admin (server-4.5): 34
+  - server-admin (server-4.4): 34
+  - server-admin (server-4.3): 34
+  - server-admin (server-4.2): 34
+  - Services: 15
+  - Contributors: 14
+  - Orbs: 12
+  - Reference: 8
+  - Home: 1
 
 ## Technical Stack
 
 - Static Site Generator: Antora 3.1.14
 - Markup Language: AsciiDoc
-- Extensions: @asciidoctor/tabs, Mermaid diagrams
-- UI: Custom Gulp-based UI bundle
-- API Docs: Redocly CLI
+- API Docs: Redocly CLI 2.0.0
 - Search: Algolia
 - Build Tool: npm scripts with Gulp
 
 ## Common URL Patterns
 
-- Guides: `/docs/guides/<topic>/`
-- Reference: `/docs/reference/<topic>/`
-- Orbs: `/docs/orbs/<topic>/`
-- Server Admin: `/docs/server-admin-<version>/<topic>/`
-- API: `/docs/api/<version>/`
+- Guides: https://circleci.com/docs/guides/<topic>/
+- Reference: https://circleci.com/docs/reference/<topic>/
+- Orbs: https://circleci.com/docs/orbs/<topic>/
+- Server Admin: https://circleci.com/docs/server-admin-<version>/<topic>/
+- API: https://circleci.com/docs/api/<version>/
+
+## Server Versions
+
+- Server 4.9: 4.9.1
+- Server 4.8: 4.8.8
+- Server 4.7: 4.7.15
+- Server 4.6: 4.6.6
+- Server 4.5: 4.5.5
+- Server 4.4: 4.4.7
+- Server 4.3: 4.3.9
+- Server 4.2: 4.2.7
+- Server 4.1: 4.1.10
+- Server 4.0: 4.0.6
 
 ## Development Commands
 
@@ -133,53 +520,15 @@ npm run build:ui
 npm run build:api-docs
 ```
 
-## Search and Discovery
+## Project Documentation Files
 
-The site uses Algolia for search functionality, allowing users to quickly find:
-- Configuration examples
-- API endpoints
-- Troubleshooting guides
-- Feature documentation
-- Code samples
+Documentation for contributors working on the docs site:
 
-## Content Categories
-
-Based on the actual documentation structure, content is organized into these main areas:
-
-### Guides Component
-
-- **About CircleCI**: Overview, benefits, concepts, and web app introduction
-- **Getting Started**: First steps, quickstarts (Node.js, Python, Go), tutorials, and how-to guides
-- **Migrate to CircleCI**: Migration guides from AWS, Azure DevOps, Buildkite, GitHub, GitLab, Jenkins, TeamCity, and Travis CI
-- **Orchestrate**: Pipelines, workflows, triggers (GitHub, GitLab, webhooks, scheduled), dynamic configuration, and orchestration cookbook
-- **Execute on Managed Compute**: Docker, Linux VM, macOS, Windows, Arm, GPU environments, plus image support policies
-- **Execute Jobs on Self-Hosted Runners**: Container runner, machine runner 3, machine runner, installation and configuration
-- **Testing on CircleCI**: Automated testing, test data collection, test insights, flaky tests, browser testing, code coverage, test splitting
-- **Deploy with CircleCI**: Deployment overview, deploy markers, rollbacks, release agent, platform-specific deployment guides
-- **Optimize**: Caching strategies, artifacts, concurrency, parallelism, Docker layer caching, dynamic configuration
-- **Insights**: Analytics, test insights, snapshot badges, and metrics glossary
-- **Manage Roles, Permissions, and Authentication**: User management, SSO, MFA, OIDC tokens, groups and permissions
-- **Manage Security and Secrets**: Environment variables, contexts, IP ranges, audit logs, security recommendations
-- **Manage Config Policies**: Policy management, testing, and enforcement
-- **Integration**: Outbound webhooks, notifications, VCS integration, third-party integrations (Jira, New Relic, Datadog, Sumo Logic)
-- **Developer Toolkit**: AI features, CLI tools, APIs, VS Code extension, Config SDK, orb development kit, example projects
-- **Plans and Pricing**: Free, Performance, Scale, and Server plan information
-
-### Reference Component
-
-- **Configuration**: Configuration reference, reusable config, variables, policy reference, optimization reference
-- **API**: API v1/v2 reference and runner API reference
-- **General**: Concepts, glossary, troubleshooting, FAQ
-
-### Orbs Component
-
-- **Use Orbs**: Introduction, orb registry, allow lists
-- **Author Orbs**: Development kit, creating and publishing orbs, testing, best practices
-- **Reference**: Orb concepts, authoring FAQ, reusing configuration
-
-## Updates and Versions
-
-- Server documentation is versioned (4.2 through 4.9)
-- Cloud documentation follows a continuous deployment model
-- Version attributes are defined in antora-playbook.yml
-- Latest version redirect strategy is enabled
+- README.md: Project overview and getting started
+- ARCHITECTURE.md: System design and technical architecture
+- DEVELOPMENT.md: Development setup and workflow
+- CONTENT_AUTHORING.md: Writing and formatting guidelines
+- TECHNICAL_REFERENCE.md: Detailed technical specifications
+- API_DOCS_INTEGRATION.md: API documentation integration guide
+- CONTRIBUTING.md: Contribution guidelines
+- CLAUDE.md: Documentation style guide for Claude Code

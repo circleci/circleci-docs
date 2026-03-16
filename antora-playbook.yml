@@ -129,3 +129,4 @@ antora:
     excludepatterns:
       - '*-dark.svg'
       - 'icons/*.svg'
+  - require: ./extensions/llms-txt-generator-extension.js
