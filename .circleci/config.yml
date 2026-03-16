@@ -65,6 +65,9 @@ jobs:
             echo "[INFO] Starting Antora build..."
             NODE_OPTIONS="--max-old-space-size=4096" npm run build:docs
             echo "[INFO] Antora build completed."
+      - add_ssh_keys:
+          fingerprints:
+            - "YOUR_SSH_KEY_FINGERPRINT_HERE"  # Replace with actual fingerprint from CircleCI SSH Keys settings
       - run:
           name: Commit and push updated llms.txt
           command: |
@@ -75,6 +78,10 @@ jobs:
               echo "[INFO] Not on main branch, skipping llms.txt commit"
               exit 0
             fi
+
+            # Add GitHub to known hosts to avoid SSH prompt
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
 
             # Configure git
             git config user.email "noreply@circleci.com"
