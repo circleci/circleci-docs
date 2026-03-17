@@ -4,12 +4,22 @@ const path = require('path');
 
 /**
  * An Antora extension that auto-generates llms.txt from the documentation structure.
- * Generates the file during navigationBuilt and writes to repository root.
+ * Only generates in CI on main branch to avoid local build artifacts.
  * The build task will copy it to the build directory.
  */
 module.exports.register = function () {
   this.once('navigationBuilt', async ({ playbook, contentCatalog }) => {
     try {
+      // Only generate llms.txt in CI on main branch
+      const isCI = process.env.CI === 'true';
+      const isMainBranch = process.env.CIRCLE_BRANCH === 'main';
+
+      if (!isCI || !isMainBranch) {
+        console.log(`Skipping llms.txt generation (CI: ${isCI}, Branch: ${process.env.CIRCLE_BRANCH || 'unknown'})`);
+        return;
+      }
+
+      console.log('Generating llms.txt for main branch deployment...');
       const llmsTxt = await generateLlmsTxt(playbook, contentCatalog);
 
       // Write to repository root (visible on GitHub)
