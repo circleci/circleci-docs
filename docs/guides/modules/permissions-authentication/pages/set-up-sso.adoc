@@ -15,7 +15,7 @@ To set up SAML SSO, you must have the _Organization Admin_ role. For information
 To begin setting up a SAML SSO connection in your CircleCI organization, follow these steps:
 
 . In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
-. Select **Organization Settings** in the sidebar.
+. Select **Org** in the sidebar.
 . Select **Single Sign-On (SSO)** from the sidebar.
 . On the SSO Settings page, select **Setup SSO**.
 . Copy the provided **Setup Parameters** and **Allowed iFrame Origin**. You will need these to configure your Identity Provider (IdP).
@@ -36,7 +36,7 @@ Next you will configure your IdP. The steps to do this will vary depending on yo
 To complete setting up a SAML SSO connection in your CircleCI organization:
 
 . In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
-. Select **Organization Settings** in the sidebar.
+. Select **Org** in the sidebar.
 . Select **Single Sign-On (SSO)** from the sidebar.
 . Enter the information provided by your IdP in the previous section. For the domain/realm, enter the email domain that your users will use for CircleCI SSO. When ready, select **Save credentials**.
 . Copy the provided TXT record and add it to your DNS. Your SSO Connection will be marked as **Pending** until this has been done. Adding the TXT record to your DNS allows CircleCI to validate that you are the owner of the domain on-which SSO is being enabled.
@@ -56,7 +56,7 @@ Your organization is now using SSO to grant and deny user access. You can manage
 SSO can be disabled for an organization. This will revert an organization to using email and password authentication.
 
 . In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
-. Select **Organization Settings** in the sidebar.
+. Select **Org** in the sidebar.
 . Select **Single Sign-On (SSO)** from the sidebar.
 . Toggle **Enforce SSO for all users** off to disable SSO enforcement.
 

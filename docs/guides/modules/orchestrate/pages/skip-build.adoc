@@ -107,7 +107,7 @@ NOTE: For server customers, this feature will be available in Server 4.10+.
 
 Use this setting to immediately stop all new work from starting during an incident or emergency. When enabled, new pipelines are not created and users cannot rerun workflows.
 
-This setting is designed for situations where you need to quickly halt all CI/CD activity across an organization or for a specific project. It is available in the **Advanced** section of both **Organization Settings** and **Project Settings**. An organization-level block prevents all new work across every project in the organization. A project-level block only affects the specific project.
+This setting is designed for situations where you need to quickly halt all CI/CD activity across an organization or for a specific project. It is available in the **Advanced** section of both **Org** and **Project Settings**. An organization-level block prevents all new work across every project in the organization. A project-level block only affects the specific project.
 
 **In-progress workflows are not affected.** Workflows that are already running when you enable this setting continue until they complete, fail, or are cancelled.
 

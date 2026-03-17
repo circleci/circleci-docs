@@ -47,7 +47,7 @@ Enter the following command to claim your namespace, if you have not yet claimed
 circleci namespace create <name> --org-id <your-organization-id>
 ----
 +
-NOTE: Find your organization ID in the CircleCI web app by navigating to *Organization Settings* from the sidebar.
+NOTE: Find your organization ID in the CircleCI web app by navigating to *Org* from the sidebar.
 
 [#create-your-orb]
 == Create your orb
@@ -132,7 +132,7 @@ In the setup process you will be asked if you would like to save your xref:guide
 
 Use xref:guides:security:contexts.adoc#restrict-a-context-to-a-security-group-or-groups[Security Groups] to limit access to users that are allowed to trigger jobs. Only these users will have access to the private xref:guides:toolkit:managing-api-tokens.adoc[Personal API Token].
 
-xref:guides:security:contexts.adoc#restrict-a-context[Contexts] can be located by navigating to menu:Organization Settings[Contexts] in the web app. After creating your orb, you will have a new context called `orb-publishing`. Select `orb-publishing` and add a **Security Group**.
+xref:guides:security:contexts.adoc#restrict-a-context[Contexts] can be located by navigating to menu:Org[Contexts] in the web app. After creating your orb, you will have a new context called `orb-publishing`. Select `orb-publishing` and add a **Security Group**.
 
 .Secure contexts
 video::ImPE969yv08[youtube]
