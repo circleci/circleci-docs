@@ -4,7 +4,7 @@ This guide provides style, voice, and formatting rules for creating and editing 
 
 ## Documentation Overview
 
-For a comprehensive overview of the CircleCI documentation structure, see `llms.txt` in the repository root. This auto-generated file provides:
+For a comprehensive overview of the CircleCI documentation structure, see the auto-generated `llms.txt` file on the live site at https://circleci.com/docs/llms.txt. This file provides:
 - Complete documentation structure with all components
 - Full navigation hierarchy
 - Content statistics and URL patterns
@@ -366,7 +366,7 @@ npm run build:api-docs # API docs only
 This file focuses on **how to write documentation**. When users ask questions **about using CircleCI** (not about writing docs), you should:
 
 ### Reference the llms.txt File
-The `llms.txt` file in the project root contains:
+The `llms.txt` file (available at https://circleci.com/docs/llms.txt) contains:
 - CircleCI product overview and features
 - Documentation structure and navigation
 - Content areas (Guides, Reference, Orbs, Server Admin)
