@@ -11,11 +11,7 @@ Environment hierarchy and version promotion let you define an ordered promotion 
 
 An environment hierarchy is an ordered sequence of integrations that defines a promotion path. For example, a hierarchy could be:
 
-* Development
-* Staging
-* Production
-
-.Example environment hierarchy
+.Example environment hierarchy dev → staging → production
 [mermaid]
 ----
 graph LR
@@ -23,15 +19,17 @@ graph LR
     Staging -->|Promote| Production[Production<br/>Environment]
 ----
 
-Hierarchies are configured at the organization level, with the option to override which hierarchy to use for a specific project or component. Each level in the hierarchy maps to one environment.
+Hierarchies are configured at the organization level, with the option to override for a specific project or component. Each level in the hierarchy maps to one environment.
 
-#screenshot showing the environment hierarchy example#
+.Example of the edit environment hierarchy modal
+image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy example]
 
 === Version promotion
 
 Version promotion is the act of deploying a specific version to the next environment in the hierarchy by triggering a deploy pipeline. The version promotion page provides a visual pipeline of environment cards so you can see the current state of every environment at a glance and promote forward with a single click.
 
-#Screenshot showing the version promotion page#
+.Example of the version promotion page with simple hierarchy
+image::guides:ROOT:deploy/version-promotion-page.png[Version promotion page]
 
 == Prerequisites
 
@@ -61,13 +59,20 @@ Environment hierarchies are configured at the organization level. You can set mu
 
 . You can set the hierarchy as the organization default. This step is optional.
 
+.Example of the edit environment hierarchy modal
+image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy example]
+
 === Promote a version
 
-. Select *Deploys* in the sidebar. you are now in your deployments timeline view. You can select a component to see a timeline for a specific component.
+. Select *Deploys* in the sidebar. you are now in your deployments timeline view. You can also refine this view by selecting a component to see a timeline for a specific component.
 
 . Find the version you want to promote in the timeline list.
 
-. Select the promote icon icon:promote[promote icon] to open the Version Promotion page if an environment hierarchy exists for the component. If no hierarchy exists, the Deploy Pipeline Modal opens directly.
+. Select the promote icon icon:promote[promote icon]. If an environment hierarchy exists for the component, the version promotion page opens. If no hierarchy exists, the Deploy Pipeline Modal opens so that you can get set up.
+
+On the version promotion page you have the option to promote to the next environment using the btn:[Promote] button and retry failed deployments.
+
+#Insert screenshot of the version promotion page with the version in dev and promote buttons for other environments.#
 
 == Manage hierarchies
 === Edit or delete a hierarchy
@@ -80,7 +85,7 @@ Environment hierarchies are configured at the organization level. You can set mu
 
 . Select btn:[Update] to save your changes.
 
-=== Assign a hierarchy to use for a project
+=== Override the organization default hierarchy for a project
 
 Ensure you have created the hierarchy you want to use for your project at the organization level.
 
@@ -92,11 +97,11 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select the hierarchy you want to use in the *Replace with:* menu.
 . Select btn:[Save].
 
-=== Assign a hierarchy to use for a component
+=== Override the project default hierarchy for a component
 
 . Select *Deploys* in the sidebar.
-. Find your component and select it by nae to enter the component view.
-. Use the Icon:edit-solid[Edit icon] next ti *Hierarchy Template*.
+. Find your component and select it by name to enter the component view.
+. Use the icon:edit-solid[Edit icon] next to *Hierarchy Template*.
 . Select the hierarchy you wish to use in the *Replace with:* menu.
 . Select btn:[Save].
 
@@ -126,18 +131,6 @@ A hierarchy can be assigned at three scopes:
 --
 
 When the system resolves which hierarchy applies, it checks component first, then project, then organization. The most specific assignment wins.
-
-== The version promotion page
-
-#screenshot showing the version promotion page#
-
-The version promotion page shows the following:
-
-* Breadcrumbs — Releases Dashboard > Component Name > Version Promotion
-
-* Metadata bar — project, component, version, commit SHA, author & message, and the name of the active promotion hierarchy
-
-* Environment pipeline — a horizontal row of environment cards connected by action buttons (Promote, Retry, Promoting, Promoted)
 
 === Promote to the next environment
 
