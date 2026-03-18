@@ -3,7 +3,7 @@
 :page-description:
 :experimental:
 
-Environment hierarchy and version promotion let you define an ordered promotion path when you have multiple environment, for example, development, staging and production, and visually promote a version through each stage from the CircleCI UI. Instead of manually tracking which version is deployed where, you get a single view of the entire release lifecycle with one-click promotion between environments.
+Environment hierarchy lets you define an ordered promotion path when you have multiple environments, for example, development, staging, and production. Version promotion allows you to visually promote a version through each stage from the CircleCI UI. Instead of manually tracking which version is deployed where, you get a single view of the entire release lifecycle with one-click promotion between environments.
 
 == Key concepts
 
@@ -26,7 +26,7 @@ image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy exam
 
 === Version promotion
 
-Version promotion is the act of deploying a specific version to the next environment in the hierarchy by triggering a deploy pipeline. The version promotion page provides a visual pipeline of environment cards so you can see the current state of every environment at a glance and promote forward with a single click.
+Version promotion is the act of deploying a specific version to the next environment in the hierarchy by triggering a deploy pipeline. The version promotion page provides a visual pipeline of environments so you can see the current state of every environment at a glance and promote forward with a single click.
 
 .Example of the version promotion page with simple hierarchy
 image::guides:ROOT:deploy/version-promotion-page.png[Version promotion page]
@@ -70,9 +70,9 @@ image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy exam
 
 . Select btn:[Promote] or btn:[Retry] to open the deploy pipeline modal pre-filled with the following values:
 +
-* Version to deploy and the named component
-* The target environment
-* An indication of the current version deployed to the target environment
+* Version to deploy and the component name.
+* The target environment.
+* An indication of the current version deployed to the target environment.
 +
 Review the values and click btn:[Deploy] to trigger the deploy pipeline.
 
@@ -148,51 +148,6 @@ When a deployment fails:
 
 * A link to the failed job is displayed for debugging.
 
-Click Retry to re-trigger the deploy pipeline for that environment.
+Select btn:[Retry] to re-trigger the deploy pipeline for that environment.
 
-
-=== Environment card states
-
-Each environment card in the promotion pipeline shows a status that reflects the current state of the deployment:
-
-[.table-scroll]
---
-[cols=4*, options="header"]
-|===
-| Status | Card Subtitle | Connector state | Description
-
-| SUCCESS / LOGGED
-| Currently deployed
-| Promoted (checkmark)
-| Version is live in this environment
-
-| RUNNING / PENDING
-| Deploying
-| Promoting (spinner)
-| Deploy pipeline is currently executing
-
-| FAILED
-| Deployment failed
-| Retry (red button)
-| Deploy pipeline failed; retry or investigate
-
-|CANCELED
-| Not deployed
-| Retry (red button)
-| Deploy was canceled; can retry
-
-| Not deployed
-| Not deployed
-| Promote (blue button)
-| Version has not been deployed to this environment
-|===
---
-
-Card details (visible when a release exists):
-
-* Version — the version name being deployed (labeled "Attempted Version" on failure)
-
-* Timestamp — "Deployed", "Started at", or "Failed at" depending on status
-
-* Failed job link — direct link to the failed job (only on failure)
 
