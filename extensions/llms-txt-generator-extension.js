@@ -63,9 +63,20 @@ async function generateLlmsTxt(playbook, contentCatalog) {
 
   // Markdown Exports
   sections.push('## Markdown Exports\n');
-  sections.push('All documentation pages are available in markdown format for easier parsing and processing.');
-  sections.push('Markdown links are provided inline with each page using the [md] notation.');
-  sections.push('Example: https://circleci.com/docs/guides/getting-started/first-steps/ [md](https://circleci.com/docs/guides/getting-started/first-steps/index.md)\n');
+  sections.push('All documentation pages are available in markdown format for easier parsing and processing.\n');
+  sections.push('### How to Access Markdown Versions\n');
+  sections.push('1. **Direct URL conversion**: Replace the HTML page URL with `/index.md`');
+  sections.push('   - HTML: https://circleci.com/docs/guides/getting-started/first-steps/');
+  sections.push('   - Markdown: https://circleci.com/docs/guides/getting-started/first-steps/index.md\n');
+  sections.push('2. **Inline links in this file**: Each page listing below includes a [md] link');
+  sections.push('   - Example: Page Title (https://circleci.com/docs/page/) [md](https://circleci.com/docs/page/index.md)\n');
+  sections.push('3. **HTML metadata**: Each page includes `<link rel="alternate" type="text/markdown" href="index.md">` in the HTML head\n');
+  sections.push('### About This File (llms.txt)\n');
+  sections.push('- **Location**: https://circleci.com/docs/llms.txt');
+  sections.push('- **Purpose**: Provides LLMs with complete site structure, navigation, and page descriptions');
+  sections.push('- **Updates**: Automatically regenerated on each deployment to main branch');
+  sections.push('- **Discovery**: Announced via `<link rel="alternate" type="text/plain" href="/docs/llms.txt">` in page headers');
+  sections.push('- **Format**: Plain text with markdown-style formatting for readability\n');
 
   // Documentation Structure
   sections.push('## Documentation Structure\n');
