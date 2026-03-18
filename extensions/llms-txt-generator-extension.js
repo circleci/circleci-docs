@@ -186,34 +186,6 @@ async function generateLlmsTxt(playbook, contentCatalog) {
     sections.push('');
   }
 
-  // Development Commands
-  sections.push('## Development Commands\n');
-  sections.push('```bash');
-  sections.push('# Install dependencies');
-  sections.push('npm ci');
-  sections.push('');
-  sections.push('# Start development server');
-  sections.push('npm run start:dev');
-  sections.push('');
-  sections.push('# Build documentation');
-  sections.push('npm run build:docs');
-  sections.push('');
-  sections.push('# Build UI bundle');
-  sections.push('npm run build:ui');
-  sections.push('');
-  sections.push('# Build API docs');
-  sections.push('npm run build:api-docs');
-  sections.push('```\n');
-
-  // Project Documentation Files
-  sections.push('## Project Documentation Files\n');
-  sections.push('Documentation for contributors working on the docs site:\n');
-  const projectDocs = await getProjectDocumentation();
-  for (const doc of projectDocs) {
-    sections.push(`- ${doc.file}: ${doc.description}`);
-  }
-  sections.push('');
-
   return sections.join('\n');
 }
 
@@ -394,31 +366,3 @@ function extractServerVersions(playbook) {
   return versions;
 }
 
-/**
- * Get project documentation files from repo root
- */
-async function getProjectDocumentation() {
-  const docs = [
-    { file: 'README.md', description: 'Project overview and getting started' },
-    { file: 'ARCHITECTURE.md', description: 'System design and technical architecture' },
-    { file: 'DEVELOPMENT.md', description: 'Development setup and workflow' },
-    { file: 'CONTENT_AUTHORING.md', description: 'Writing and formatting guidelines' },
-    { file: 'TECHNICAL_REFERENCE.md', description: 'Detailed technical specifications' },
-    { file: 'API_DOCS_INTEGRATION.md', description: 'API documentation integration guide' },
-    { file: 'CONTRIBUTING.md', description: 'Contribution guidelines' },
-    { file: 'CLAUDE.md', description: 'Documentation style guide for Claude Code' },
-  ];
-
-  // Filter to only existing files
-  const rootDir = path.join(__dirname, '..');
-  const existingDocs = [];
-
-  for (const doc of docs) {
-    const filePath = path.join(rootDir, doc.file);
-    if (fs.existsSync(filePath)) {
-      existingDocs.push(doc);
-    }
-  }
-
-  return existingDocs;
-}
