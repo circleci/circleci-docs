@@ -554,3 +554,260 @@ workflows:
 * When you add new checks, you only need to update the `requires` list for your `no-op` job.
 * The `no-op` job will succeed only if all its required jobs succeed.
 * This pattern helps keep GitHub and CircleCI configurations in sync without manual updates.
+
+== Prevent deployment conflicts with serial groups
+
+=== Goal
+
+You may want to prevent deployment conflicts when multiple teams or projects need to deploy to the same environment. Using serial groups ensures that only one deployment runs at a time across your entire organization, preventing race conditions and ensuring deployments complete in the order they were triggered.
+
+=== Steps
+
+. Add the `serial-group` key to your deployment job in your CircleCI configuration file. Use a meaningful name that represents the environment being deployed to:
++
+[,yml]
+----
+workflows:
+  deploy-workflow:
+    jobs:
+      - test
+      - build
+      - deploy-staging:
+          serial-group: staging-deployment
+          requires:
+            - test
+            - build
+----
+
+. For multiple projects deploying to the same environment, use the same serial group value across all project configurations. This ensures sequential execution across your organization:
++
+[,yml]
+----
+workflows:
+  deploy-workflow:
+    jobs:
+      - test
+      - build
+      - deploy-staging:
+          serial-group: << pipeline.project.slug >>/staging
+          requires:
+            - test
+            - build
+----
+
+. Monitor the sequential execution in the CircleCI web app. Jobs in a serial group will show a key icon in the workflow graph and display a "queued" status when waiting for another job to complete.
+
+=== Notes
+
+* Serial groups work across your entire organization, not just within a single project or workflow.
+* Jobs from newer pipelines (higher pipeline numbers) take priority over jobs from older pipelines.
+* If a job waits in the queue for more than five hours, it will be automatically canceled.
+* Using pipeline values like `<< pipeline.project.slug >>` in your serial group name allows you to create dynamic grouping patterns that can be shared across projects.
+* For more information, see xref:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization].
+
+== Ensure database migrations run in sequence
+
+=== Goal
+
+You may want to ensure that database migrations run in the correct sequence across multiple services or projects. Using serial groups prevents concurrent migrations that could cause conflicts or data corruption.
+
+=== Steps
+
+. Add the `serial-group` key to your migration job. Use a serial group name that identifies the specific database or environment:
++
+[,yml]
+----
+workflows:
+  migration-workflow:
+    jobs:
+      - test
+      - run-migration:
+          serial-group: production-db-migrations
+          requires:
+            - test
+----
+
+. For multiple services that share a database, use the same serial group value in each service's configuration. This ensures migrations run one at a time:
++
+[,yml]
+----
+workflows:
+  service-workflow:
+    jobs:
+      - build
+      - test
+      - migrate-database:
+          serial-group: shared-db/<< pipeline.git.branch >>
+          requires:
+            - test
+      - deploy:
+          requires:
+            - migrate-database
+----
+
+. Add environment-specific serial groups to prevent migrations from different environments from interfering with each other:
++
+[,yml]
+----
+workflows:
+  deploy-workflow:
+    jobs:
+      - test
+      - migrate-staging:
+          serial-group: staging-db-migrations
+          filters:
+            branches:
+              only: develop
+      - migrate-production:
+          serial-group: production-db-migrations
+          filters:
+            branches:
+              only: main
+----
+
+=== Notes
+
+* Each environment should have its own serial group to prevent cross-environment conflicts.
+* Include environment or database identifiers in your serial group name to avoid accidental grouping.
+* Serial groups maintain the lock even if a migration job fails, allowing the next migration in the queue to proceed.
+* Pipeline number priority ensures newer migrations run before older ones, preventing out-of-order migrations.
+* For more information, see xref:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization].
+
+== Control access to limited testing resources
+
+=== Goal
+
+You may want to control access to limited testing resources that can only handle one job at a time, such as physical devices, test environments with capacity constraints, or services with API rate limits. Using serial groups ensures only one job accesses the resource at any given time.
+
+=== Steps
+
+. Add the `serial-group` key to jobs that need access to the limited resource. Use a serial group name that identifies the specific resource:
++
+[,yml]
+----
+workflows:
+  test-workflow:
+    jobs:
+      - unit-tests
+      - integration-tests:
+          serial-group: test-environment-1
+          requires:
+            - unit-tests
+----
+
+. For multiple projects sharing the same resource, use the same serial group value across all configurations:
++
+[,yml]
+----
+workflows:
+  mobile-test-workflow:
+    jobs:
+      - build
+      - device-tests:
+          serial-group: physical-device-pool
+          requires:
+            - build
+----
+
+. Combine serial groups with workflow filters to control which branches access the limited resource:
++
+[,yml]
+----
+workflows:
+  test-workflow:
+    jobs:
+      - build
+      - e2e-tests:
+          serial-group: staging-environment
+          filters:
+            branches:
+              only:
+                - main
+                - develop
+          requires:
+            - build
+----
+
+=== Notes
+
+* Serial groups are scoped to your organization, ensuring resource protection across all projects.
+* Jobs will wait in the queue for up to five hours before being automatically canceled.
+* You can manually release a serial group from the CircleCI web app to allow the next job to start without canceling the current job.
+* Consider using descriptive serial group names that clearly identify the resource being protected.
+* For more information, see xref:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization].
+
+== Maintain version integrity with serial deployments
+
+=== Goal
+
+You may want to prevent older code from deploying after newer versions have already been deployed. Using serial groups with pipeline number priority ensures deployments happen in the correct order and automatically skips deployments from older pipelines.
+
+=== Steps
+
+. Add the `serial-group` key to your deployment job. The serial group should be specific to the deployment target:
++
+[,yml]
+----
+workflows:
+  deploy-workflow:
+    jobs:
+      - build
+      - test
+      - deploy-production:
+          serial-group: production-deployment
+          requires:
+            - build
+            - test
+          filters:
+            branches:
+              only: main
+----
+
+. Use pipeline values to create environment-specific serial groups that prevent cross-environment deployment conflicts:
++
+[,yml]
+----
+parameters:
+  environment:
+    type: string
+    default: staging
+
+workflows:
+  deploy-workflow:
+    jobs:
+      - build
+      - deploy:
+          serial-group: << pipeline.parameters.environment >>-deployment
+          requires:
+            - build
+----
+
+. For multi-stage deployments, use different serial groups for each stage to allow parallel deployments to different environments:
++
+[,yml]
+----
+workflows:
+  multi-stage-deploy:
+    jobs:
+      - build
+      - test
+      - deploy-staging:
+          serial-group: staging-deployment
+          requires:
+            - test
+      - deploy-production:
+          serial-group: production-deployment
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
+----
+
+=== Notes
+
+* Pipeline number priority automatically skips jobs from older pipelines if a newer pipeline is running or waiting in the same serial group.
+* This automatic skipping behavior helps maintain version integrity without manual intervention.
+* Serial groups do not prevent you from starting new pipelines; they only control when jobs execute.
+* You can view which pipelines are waiting in the queue by hovering over the serial group start block in the workflow graph.
+* For more information, see xref:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization].
