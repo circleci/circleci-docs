@@ -34,6 +34,25 @@ These files need splitting but already have proper metadata:
 
 114 files under 50,000 characters that need page-description attributes added. See CSV report filtered by `missing_page_description = YES` for complete list.
 
+### Distribution of Missing Descriptions by Directory
+
+| Directory | Files Missing Description |
+|-----------|---------------------------|
+| docs/guides | 69 files |
+| docs/contributors | 9 files |
+| docs/server-admin-4.7 | 7 files |
+| docs/server-admin-4.9 | 6 files |
+| docs/server-admin-4.8 | 5 files |
+| docs/server-admin-4.5 | 4 files |
+| docs/server-admin-4.4 | 4 files |
+| docs/server-admin-4.2 | 4 files |
+| docs/reference | 3 files |
+| docs/server-admin-4.3 | 2 files |
+| docs/server-admin-4.6 | 2 files |
+| Other directories | 13 files |
+
+**Key Insight:** The majority (69 of 118) of missing descriptions are in the `docs/guides` directory, suggesting this could be batch-processed efficiently.
+
 ## Recommended Splitting Strategies
 
 ### configuration-reference.adoc (106,595 chars - CRITICAL)
