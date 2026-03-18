@@ -107,7 +107,7 @@ async function generateLlmsTxt(playbook, contentCatalog) {
       }
 
       // Add navigation from the latest version
-      const nav = formatNavigation(latestVersion.navigation, playbook.site.url);
+      const nav = formatNavigation(latestVersion.navigation, playbook.site.url, contentCatalog);
       if (nav) {
         sections.push(nav);
       }
@@ -129,7 +129,7 @@ async function generateLlmsTxt(playbook, contentCatalog) {
         sections.push(`- Start: ${startPage}`);
       }
 
-      const nav = formatNavigation(version.navigation, playbook.site.url);
+      const nav = formatNavigation(version.navigation, playbook.site.url, contentCatalog);
       if (nav) {
         sections.push(nav);
       }
@@ -217,7 +217,7 @@ function getStartPage(version, siteUrl) {
 /**
  * Format navigation structure with proper indentation and markdown links
  */
-function formatNavigation(navigation, siteUrl, indent = 0) {
+function formatNavigation(navigation, siteUrl, contentCatalog, indent = 0) {
   if (!navigation || navigation.length === 0) return '';
 
   const lines = [];
@@ -241,18 +241,28 @@ function formatNavigation(navigation, siteUrl, indent = 0) {
         }
       }
 
-      lines.push(`${prefix}${bullet} ${item.content}${urlPart}`);
+      // Add page description if available
+      let descriptionPart = '';
+      if (item.urlType === 'internal' && item.url) {
+        const page = findPageByUrl(contentCatalog, item.url);
+        if (page && page.asciidoc && page.asciidoc.attributes && page.asciidoc.attributes['page-description']) {
+          const description = page.asciidoc.attributes['page-description'];
+          descriptionPart = `\n${prefix}  ${description}`;
+        }
+      }
+
+      lines.push(`${prefix}${bullet} ${item.content}${urlPart}${descriptionPart}`);
 
       // Recursively format child items
       if (item.items && item.items.length > 0) {
-        const childNav = formatNavigation(item.items, siteUrl, indent + 1);
+        const childNav = formatNavigation(item.items, siteUrl, contentCatalog, indent + 1);
         if (childNav) {
           lines.push(childNav);
         }
       }
     } else if (item.items && item.items.length > 0) {
       // Group without content - just process children
-      const childNav = formatNavigation(item.items, siteUrl, indent);
+      const childNav = formatNavigation(item.items, siteUrl, contentCatalog, indent);
       if (childNav) {
         lines.push(childNav);
       }
@@ -260,6 +270,23 @@ function formatNavigation(navigation, siteUrl, indent = 0) {
   }
 
   return lines.join('\n');
+}
+
+/**
+ * Find a page in the content catalog by its URL
+ */
+function findPageByUrl(contentCatalog, url) {
+  // Antora URLs are like /component/module/page.html or /component/module/path/
+  // We need to find the corresponding page in the catalog
+  const pages = contentCatalog.getPages();
+
+  for (const page of pages) {
+    if (page.pub && page.pub.url === url) {
+      return page;
+    }
+  }
+
+  return null;
 }
 
 /**
