@@ -190,7 +190,7 @@ _Deployment_ is the act of putting a new component version into an environment, 
 
 An environment integration is a named environment record in CircleCI's Deploys UI that represents a deployment target. An environment integration can be one of two types:
 
-* Custom. This can be used for any deployment target
+* Custom. This can be used for any deployment target.
 * Kubernetes cluster. Using this option you will be guided to set up the CircleCI release agent and configure your Kubernetes components.
 
 The environment integration is used to organize and track deployments in the CircleCI deploys UI.
