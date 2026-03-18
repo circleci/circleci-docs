@@ -49,7 +49,7 @@ The organization ID is a unique identifier for an organization.
 You can access the organization ID through the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, follow these steps to find it in the CircleCI web app:
 
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Navigate to menu:Organization Settings[Overview] in the CircleCI web app.
+. Navigate to menu:Org[Overview] in the CircleCI web app.
 . Note the value or select the btn:[Copy] icon next to the organization ID.
 
 

@@ -20,7 +20,7 @@ Manage user access to organizations and projects with CircleCI roles and associa
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, select **Organization Settings** in the sidebar.
+. In the CircleCI web app, select **Org** in the sidebar.
 . Select **People**.
 +
 TIP: If you have integrated your code with CircleCI using either xref:integration:github-integration.adoc[GitHub OAuth] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud] these steps do not apply. You can use the btn:[Copy Invite Link] button to copy the necessary information to email your teammates.
@@ -38,7 +38,7 @@ If they do not have a CircleCI account, they will need to sign up. If they alrea
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, select **Organization Settings** in the sidebar.
+. In the CircleCI web app, select **Org** in the sidebar.
 . Select **People**.
 . Scroll to locate the person you want to update permissions for.
 . Use the dropdown menu next to their name to select a new role.
@@ -50,7 +50,7 @@ NOTE: You must have at least one org administrator. If you try to remove the las
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, select **Organization Settings** in the sidebar.
+. In the CircleCI web app, select **Org** in the sidebar.
 . Select **People**.
 . Scroll to locate the person you want to remove.
 . Select the ellipsis (...) button next to their name and select btn:[Remove from organization].

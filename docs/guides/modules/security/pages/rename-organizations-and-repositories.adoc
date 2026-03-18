@@ -53,7 +53,7 @@ For CircleCI organizations integrated through the GitHub App, GitLab or Bitbucke
 
 You can rename your organization from the CircleCI web app:
 
-. Select **Organization Settings** in the sidebar.
+. Select **Org** in the sidebar.
 . Select btn:[Rename Organization] next to your org name.
 . Enter a new name for your org and select btn:[Save].
 
