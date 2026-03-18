@@ -66,7 +66,7 @@ agent:
       token: <your-resource_class_token>
 ```
 
-. **If you are using CircleCI server** you will need to provide the url for your install. You can do this by setting the runnerAPI in your `values.yml`:
+. **If you are using CircleCI Server** you will need to provide the URL for your install. You can do this by setting the runnerAPI in your `values.yml`:
 +
 ```yaml
 agent:
