@@ -1,15 +1,17 @@
 = Environment hierarchy and version promotion
 :page-platform: Cloud
-:page-description:
+:page-description: Learn how to use environment hierarchy and version promotion to manage your deployments through multiple environments.
 :experimental:
 
 Environment hierarchy lets you define an ordered promotion path when you have multiple environments, for example, development, staging, and production. Version promotion allows you to visually promote a version through each stage from the CircleCI UI. Instead of manually tracking which version is deployed where, you get a single view of the entire release lifecycle with one-click promotion between environments.
 
 == Key concepts
 
+This section defines the two core concepts: environment hierarchy and version promotion.
+
 === Environment hierarchy
 
-An environment hierarchy is an ordered sequence of integrations that defines a promotion path. For example, a hierarchy could be:
+An environment hierarchy is an ordered sequence of integrations that defines a promotion path. You can create multiple hierarchies to support different promotion workflows across your organization. For example, a hierarchy could be:
 
 .Example environment hierarchy dev → staging → production
 [mermaid]
@@ -35,7 +37,7 @@ image::guides:ROOT:deploy/version-promotion-page.png[Version promotion page]
 
 Before using environment hierarchy and version promotion you need:
 
-* *Environment integrations*. At least two integrations must exist for the organization (for example, a development environment and a production environment). You can create environment integrations in the CircleCI web app at menu:Deploys[Environments], select btn"[Create environment integration] and choose the custom option. See the xref:guides:deploy:configure-deploy-markers.adoc#create-an-environment-integration[Create an Environment Integration] page for more details. You can also choose to just configure your environment when creating your deploy markers which will automatically create an environment integration for you if it does not exist already.
+* *Environment integrations*. At least two integrations must exist for the organization (for example, a development environment and a production environment). You can create environment integrations in the CircleCI web app at menu:Deploys[Environments], select btn:[Create environment integration] and choose the custom option. See the xref:guides:deploy:configure-deploy-markers.adoc#create-an-environment-integration[Create an Environment Integration] page for more details. You can also choose to just configure your environment when creating your deploy markers which will automatically create an environment integration for you if it does not exist already.
 
 * *Deploy markers* must be configured in your project to use a deploy pipeline. See the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page for more details.
 
@@ -60,7 +62,7 @@ image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy exam
 
 == 2. Promote a version
 
-. Select *Deploys* in the sidebar. you are now in your deployments timeline view. You can also refine this view by selecting a component to see a timeline for a specific component.
+. Select *Deploys* in the sidebar. You are now in your deployments timeline view. You can also refine this view by selecting a component to see a timeline for a specific component.
 
 . Find the version you want to promote in the timeline list.
 
@@ -74,7 +76,7 @@ image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy exam
 * The target environment.
 * An indication of the current version deployed to the target environment.
 +
-Review the values and click btn:[Deploy] to trigger the deploy pipeline.
+Review the values and select btn:[Deploy] to trigger the deploy pipeline.
 
 .Example of the version promotion page showing deployment to dev and ready to promote to staging
 image::guides:ROOT:deploy/version-promotion-page-ready.png[Version promotion page showing deployment to dev and ready to promote to staging]
@@ -132,22 +134,5 @@ A hierarchy can be assigned at three scopes:
 --
 
 When the system resolves which hierarchy applies, it checks component first, then project, then organization. The most specific assignment wins.
-
-=== Promote to the next environment
-
-On the version promotion page, you can promote a version to the next environment in the hierarchy by clicking the Promote button between two environment cards.
-Review the values and click Deploy to trigger the deploy pipeline. A success toast confirms the pipeline was triggered, and the environment card updates to show the deployment in progress.
-
-=== Retry a failed deployment
-
-When a deployment fails:
-
-* The environment card shows a red border and "Deployment failed" subtitle.
-
-* A Retry button appears between the cards (or as an icon on the card itself).
-
-* A link to the failed job is displayed for debugging.
-
-Select btn:[Retry] to re-trigger the deploy pipeline for that environment.
 
 

@@ -123,6 +123,7 @@ Once you have deploy markers configured you can set up and use the following fea
 
 * *Rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
 * *Deploy pipelines* to automatically deploy your application to a target environment directly from the CircleCI web app.
+* *Environment hierarchy and version promotion* to define ordered promotion paths (for example, dev → staging → production) and promote versions through each stage with a single click. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
