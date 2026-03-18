@@ -80,7 +80,7 @@ NOTE: Integers longer than 6 digits will be converted to an exponential number. 
 [#set-an-environment-variable-in-a-context]
 == Set an environment variable in a context
 
-. On the CircleCI web app, go to **Organization Settings**.
+. In the CircleCI web app, select **Org** from the sidebar.
 +
 image::guides:ROOT:org-settings-contexts.png[Contexts]
 

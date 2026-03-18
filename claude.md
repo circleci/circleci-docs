@@ -82,7 +82,7 @@ Replace problematic terms with inclusive alternatives:
 
 ### Text Styling
 - **Use bold** for GUI menu options and button text:
-  - Select **Organization Settings** from the sidebar
+  - Select **Org** from the sidebar
   - Click **Set Up Project**
 - **Use italics** for commonly understood technical concepts (not CircleCI features):
   - _Continuous Integration_

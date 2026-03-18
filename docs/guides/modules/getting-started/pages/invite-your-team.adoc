@@ -63,11 +63,11 @@ include::ROOT:partial$tips/check-org-type.adoc[]
 +
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
-. Navigate to menu:Organization Settings[People], then select btn:[Invite].
+. Navigate to menu:Org[People], then select btn:[Invite].
 . To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
 . Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions] page for more details.
 
-image::guides:ROOT:invite-teammates-standalone.png[Navigate to Organization Settings, People, use the Invite form]
+image::guides:ROOT:invite-teammates-standalone.png[Navigate to Org, People, use the Invite form]
 --
 `github` or `bitbucket` type organization::
 +
@@ -77,7 +77,7 @@ image::guides:ROOT:invite-teammates-standalone.png[Navigate to Organization Sett
 . Select btn:[Copy Invite Link] -- an invite message is now copied to your clipboard.
 . Past the invite message to your teammates via email or whatever method you prefer.
 
-image::guides:ROOT:invite-teammates-classic.png[Navigate to Organization Settings, People, use the Copy Invite Link button]
+image::guides:ROOT:invite-teammates-classic.png[Navigate to Org, People, use the Copy Invite Link button]
 --
 ====
 
