@@ -24,7 +24,7 @@ graph LR
 Hierarchies are configured at the organization level, with the option to override for a specific project or component. Each level in the hierarchy maps to one environment.
 
 .Example of the edit environment hierarchy modal
-image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy example]
+image::guides:ROOT:deploy/version-promotion-page-ready.png[Version promotion page showing deployment to dev and ready to promote to staging]
 
 === Version promotion
 
@@ -62,13 +62,19 @@ image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy exam
 
 == 2. Promote a version
 
-. Select *Deploys* in the sidebar. You are now in your deployments timeline view. You can also refine this view by selecting a component to see a timeline for a specific component.
+. Select *Deploys* in the sidebar. You are now in your deployments timeline view. You can also refine this view by selecting a component to see a timeline for that specific component.
 
 . Find the version you want to promote in the timeline list.
 
-. Select the promote icon icon:promote[promote icon]. If an environment hierarchy exists for the component, the version promotion page opens. If no hierarchy exists, the Deploy Pipeline Modal opens so that you can get set up.
+. Select the promote icon icon:promote[promote icon]. If an environment hierarchy exists for the component, the version promotion page opens. If no hierarchy exists, the Deploy Pipeline Modal opens so that you can choose an environment and deploy directly.
 
-. On the version promotion page you have the option to promote to the next environment using the btn:[Promote] button and retry failed deployments.
+. On the version promotion page you have the option to promote to the next environment using the btn:[Promote] button and retry failed deployments using the btn:[Retry] button.
++
+.Example of the version promotion page showing deployment to dev and ready to promote to staging
+image::guides:ROOT:deploy/version-promotion-page-ready.png[Version promotion page showing deployment to dev and ready to promote to staging]
++
+.Example of the version promotion page with a retry button
+image::guides:ROOT:deploy/version-promotion-page.png[Version promotion page]
 
 . Select btn:[Promote] or btn:[Retry] to open the deploy pipeline modal pre-filled with the following values:
 +
@@ -77,9 +83,11 @@ image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy exam
 * An indication of the current version deployed to the target environment.
 +
 Review the values and select btn:[Deploy] to trigger the deploy pipeline.
++
+.Example of the promote modal for deploying to next environment
+image::guides:ROOT:deploy/promote-modal.png[Promote modal for deploying to next environment]
 
-.Example of the version promotion page showing deployment to dev and ready to promote to staging
-image::guides:ROOT:deploy/version-promotion-page-ready.png[Version promotion page showing deployment to dev and ready to promote to staging]
+
 
 == Manage hierarchies
 === Edit or delete a hierarchy
