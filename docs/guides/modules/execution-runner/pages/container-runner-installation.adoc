@@ -66,6 +66,16 @@ agent:
       token: <your-resource_class_token>
 ```
 
+. **If you are using CircleCI server** you will need to provide the url for your install. You can do this by setting the runnerAPI in your `values.yml`:
++
+```yaml
+agent:
+  runnerAPI: https://your.domain.here
+  resourceClasses:
+    <your-namespace>/<your-resource-class-name>:
+      token: <your-resource_class_token>
+```
+
 . Finally, run the following command:
 +
 [source,shell]
