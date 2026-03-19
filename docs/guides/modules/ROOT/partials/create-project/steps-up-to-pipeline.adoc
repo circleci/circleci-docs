@@ -1,4 +1,4 @@
-. In the link:https://app.circleci.com/home[CircleCI web app], select **Organization Home** in the sidebar.
+. In the link:https://app.circleci.com/home[CircleCI web app], select **Home** in the sidebar.
 . Select btn:[Create Project] at the top of the page, or anywhere in the btn:[Create a project] card if this is your first project.
 +
 .Create a project button

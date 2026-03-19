@@ -10,7 +10,7 @@ This guide covers best practices for creating orbs.
 [#give-your-orb-a-descriptive-name]
 === Give your orb a descriptive name
 
-An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents, the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
+An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
 
 [.table-scroll]
 --
@@ -34,7 +34,7 @@ Categorizing your orb allows it to be searchable on the link:https://circleci.co
 [#ensure-all-orb-components-include-descriptions]
 === Ensure all orb components include descriptions
 
-Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
+Commands, Jobs, Executors, Examples, and Parameters can all accept descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
 
 [,yaml]
 ----
@@ -331,7 +331,7 @@ Going through this substitution process allows us to accept a string value, or a
 [#parameterize-the-installation-path]
 ==== Parameterize the installation path
 
-When installing any binary into a potentially unknown user-defined Docker image, it is hard to know what permissions will be available. Create an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and install binaries to this location (if possible). This often avoids the issue of requiring "root" privileges in environments where that may not possible.
+When installing any binary into a potentially unknown user-defined Docker image, it is hard to know what permissions will be available. Create an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and install binaries to this location (if possible). This often avoids the issue of requiring "root" privileges in environments where that may not be possible.
 
 [#deployment]
 == Deployment

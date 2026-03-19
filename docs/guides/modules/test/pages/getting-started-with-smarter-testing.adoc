@@ -213,6 +213,19 @@ run: |
   echo "running: <<test.atoms>>" | tr ' ' '\n'
 ----
 
+RSpec::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: find spec -type f -name '*_spec.tb'
+run: |
+  echo "running: <<test.atoms>>" | tr ' ' '\n'
+----
+
+
 Shell commands::
 +
 [source,yaml]
@@ -395,6 +408,26 @@ run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << te
 outputs:
   junit: test-reports/tests.xml
 ----
+
+RSpec::
++
+--
+Install the RSpec JUnit Formatter to collect JUnit XML test reports.
+[source,console]
+----
+$ gem install rspec_junit_formatter
+----
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: find spec -type f -name '*_spec.rb'
+run: bundle exec rspec --format RspecJunitFormatter --out << outputs.junit >> << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+----
+--
 ====
 
 . Run the test suite and confirm that the `run` command runs the test atoms you expect. You can exit early (Ctrl+C) once verified:

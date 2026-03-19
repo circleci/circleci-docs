@@ -174,8 +174,8 @@ The organization integration options available to you depend on your organizatio
 
 Integrations are set up as follows:
 
-* GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login. No additional action is required, but the installation can be viewed at menu:Organization Settings[VCS Connections].
-* GitHub App, GitLab self-managed and Bitbucket Data Center are managed from menu:Organization Settings[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
+* GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login. No additional action is required, but the installation can be viewed at menu:Org[VCS Connections].
+* GitHub App, GitLab self-managed and Bitbucket Data Center are managed from menu:Org[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
 * GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines]).
 
 If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See he <<manage-organization-integrations>> section for more information.
@@ -210,7 +210,7 @@ GitHub App::
 --
 *Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization.
 
-*View*: To view a GitHub App integration, navigate to menu:Organization Settings[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
+*View*: To view a GitHub App integration, navigate to menu:Org[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
 
 *Disconnect*: To *uninstall* the GitHub App from your organization, select the trash/bin button and follow the instructions.
 --
@@ -219,7 +219,7 @@ GitHub OAuth::
 --
 *Availability*: A GitHub OAuth app integration is installed into a `github` type organization.
 
-*View*: To *view* a GitHub OAuth app integration, navigate to menu:Organization Settings[VCS Connections]. If the GitHub OAuth app is installed you will see this indicated in the OAuth app section.
+*View*: To *view* a GitHub OAuth app integration, navigate to menu:Org[VCS Connections]. If the GitHub OAuth app is installed you will see this indicated in the OAuth app section.
 
 *Disconnect*: You can _disconnect_ your GitHub OAuth app integration. Doing so will remove your `github` organization from CircleCI. To disconnect your GitHub OAuth app integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your GitHub integration and follow the instructions.
 --
@@ -228,7 +228,7 @@ Bitbucket::
 --
 *Availability*: A Bitbucket Cloud integration is installed into a `bitbucket` type organization.
 
-*View*: To *view* a Bitbucket Cloud integration, navigate to menu:Organization Settings[VCS Connections]. If the Bitbucket Cloud integration is installed you will see this indicated in the Bitbucket Cloud section.
+*View*: To *view* a Bitbucket Cloud integration, navigate to menu:Org[VCS Connections]. If the Bitbucket Cloud integration is installed you will see this indicated in the Bitbucket Cloud section.
 
 *Disconnect*: You can _disconnect_ your Bitbucket Cloud integration. Doing so will remove your `bitbucket` type organization from CircleCI. To disconnect your Bitbucket Cloud integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your Bitbucket Cloud integration and follow the instructions.
 --
@@ -245,11 +245,11 @@ GitLab self-managed::
 +
 --
 
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[VCS Connections] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 *Availability*: A GitLab self-managed integration is installed into a `circleci` type organization.
 
-*Configure*: Set up an integration with your GitLab self-managed instance from menu:Organization Settings[Integrations] as follows:
+*Configure*: Set up an integration with your GitLab self-managed instance from menu:Org[VCS Connections] as follows:
 
 . Select btn:[Set Up Integration] next to GitLab self-managed.
 . Enter your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
@@ -287,11 +287,11 @@ You cannot currently edit or delete existing GitLab self-managed integrations.
 Bitbucket Data Center::
 +
 --
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Organization Settings[Integrations] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[VCS Connections] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
 
 *Availability*: A Bitbucket Data Center integration is installed into a `circleci` type organization.
 
-*Configure*: Set up an integration with your Bitbucket Data Center instance from menu:Organization Settings[Integrations] as follows:
+*Configure*: Set up an integration with your Bitbucket Data Center instance from menu:Org[VCS Connections] as follows:
 
 . Select btn:[Set up integration] next to Bitbucket Data Center.
 . In the modal enter your Bitbucket Data Center instance URL and your `known_hosts`:
@@ -314,7 +314,7 @@ The output will look something like the following:
 [bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
 ----
 +
-Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Organization Settings[Integrations].
+Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[VCS Connections].
 
 . Select btn:[Set Up Integration].
 
@@ -328,7 +328,7 @@ To set up Bitbucket data center pipelines you will need to create a project HTTP
 
 === Can multiple CircleCI organizations connect to the same GitHub organization?
 
-A GitHub organzization can only be connected via CircleCI GitHub App to a single CircleCI organization.
+A GitHub organization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
 If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. But, this successful installation refers to the existing connection to a different CircleCI organization, not the one you just tried to create. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
 
@@ -399,7 +399,7 @@ If you feel strongly about reducing the number of permissions CircleCI uses, con
 
 Enabling SAML protection on a GitHub org can cause changes to CircleCI’s settings related to GitHub Checks and GitHub status updates. Ensure these settings are configured for their desired state after enabling SAML for your organization. You can find these settings at:
 
-* GitHub Checks, from the GitHub website, select menu:Organization Settings[VCS > GitHub Checks]
+* GitHub Checks, from the GitHub website, select menu:Org[VCS > GitHub Checks]
 * GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
 
 For more information on GitHub Checks and GitHub status updates, see the xref:integration:enable-checks.adoc#github-check-and-github-status-updates[Enabling GitHub Checks].
@@ -912,7 +912,7 @@ NOTE: You can install the CircleCI GitHub App into the same GitHub organization 
 . Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on  the xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI] page.
 . If you are on a **paid** pricing plan and followed step 6:
 .. Navigate back to the "old" organization and select menu:Plan[Share and Transfer].
-.. Select the image:guides:ROOT:icons/cancel.svg[delete icon, role="no-border"] next to the "new" organization to remove the shared relationship between the "new" and "old" organizations.
+.. Select the icon:cancel[Cancel icon] next to the "new" organization to remove the shared relationship between the "new" and "old" organizations.
 .. Select btn:[Transfer Plan] and follow the instructions to transfer the plan from the "old" organization to the "new" organization.
 . At this point, you will be left with a GitHub App-integrated organization that has the same payment plan and projects as your previous organization. If you get logged out, you can continue to use the "Login with GitHub" button on link:https://circleci.com/login[the CircleCI login page] as long as the old organization is not deleted.
 

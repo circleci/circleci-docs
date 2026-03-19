@@ -107,7 +107,7 @@ If you have a rollback pipeline set up for your project, workflow rollbacks are 
 
 . In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
 . Select **Deploys** from the sidebar and locate your project from the list. You can use the filters and search to help.
-. Select the rollback icon image:guides:ROOT:icons/rebuild.svg[rollback icon, role="no-border"].
+. Select the rollback icon icon:rebuild[rollback icon].
 . Select btn:[Rerun deploy workflow from start].
 . Type `ROLLBACK` when prompted to confirm and then select btn:[ROLLBACK].
 

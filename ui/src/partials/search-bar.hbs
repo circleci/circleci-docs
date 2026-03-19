@@ -1,18 +1,23 @@
 <div class="{{#if class}}{{class}}{{/if}}">
   <div class="relative w-full max-w-[888px] mx-auto">
-    <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-      <img class="w-4 h-4" src="{{uiRootPath}}/img/search.svg" alt="Search Icon">
+    <span class="absolute inset-y-0 left-0 flex items-center pl-3 search-icon">
+      <svg class="w-4 h-4" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="7.65372" cy="7.15385" r="6.15385" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M11.9614 12.0769L16.8845 17" stroke="currentColor" stroke-width="1.6"/>
+      </svg>
     </span>
     <input
       type="text"
       id="search-text-input"
       data-search-input
       placeholder="Search Docs"
-      class="w-full py-2 pl-8 pr-4 border rounded-full border-vapor focus:outline-none focus:ring-2 focus:ring-vapor focus:border-transparent"
+      class="search-input w-full py-2 pl-8 pr-4 border rounded-full border-vapor focus:outline-none focus:ring-2 focus:ring-vapor focus:border-transparent"
     >
     <button data-search-clear class="absolute inset-y-0 right-5 flex items-center gap-2 pl-3 text-link-on-light">
       Clear
-      <img class="w-3 h-3" src="{{uiRootPath}}/img/close.svg" alt="Search Icon">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" aria-hidden="true">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9864 2.45711C13.3769 2.06658 13.3769 1.43342 12.9864 1.04289C12.5959 0.652369 11.9627 0.652369 11.5722 1.04289L7.0293 5.58579L2.4864 1.04289C2.09588 0.652369 1.46271 0.652369 1.07219 1.04289C0.681666 1.43342 0.681666 2.06658 1.07219 2.45711L5.61508 7L1.07219 11.5429C0.681666 11.9334 0.681666 12.5666 1.07219 12.9571C1.46271 13.3476 2.09588 13.3476 2.4864 12.9571L7.0293 8.41421L11.5722 12.9571C11.9627 13.3476 12.5959 13.3476 12.9864 12.9571C13.3769 12.5666 13.3769 11.9334 12.9864 11.5429L8.44351 7L12.9864 2.45711Z" fill="currentColor"/>
+      </svg>
     </button>
   </div>
 </div>

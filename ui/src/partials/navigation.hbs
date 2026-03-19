@@ -1,16 +1,18 @@
-<div data-page-navigation class="{{#if class}}{{class}}{{/if}} h-full border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-white" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
+<div data-page-navigation class="{{#if class}}{{class}}{{/if}} h-full border-r border-vapor fixed lg:sticky inset-0 lg:top-0 lg:h-screen transform -translate-x-full lg:translate-x-0 transition-transform duration-300 z-50 lg:z-auto bg-body-bg" {{#if page.component}} data-tcomponent="{{page.component.name}}" data-tversion="{{page.version}}"{{/if}}>
   <aside class="relative h-full py-6 px-9 overflow-y-scroll scrollbar-thin scrollbar-thumb-rounded-xl scrollbar-thumb-fog scrollbar-track-vapor scrollbar-track-border">
     <div class="flex items-center justify-between lg:hidden text-terminal-black mb-10">
       <img data-page-navigation-back-button src="{{{uiRootPath}}}/img/arrow-back.svg" alt="Arrow Back" class="invisible lg:hidden h-4 w-4">
       <h3 class="font-medium"> {{page.component.title}}</h3>
-      <img data-page-navigation-toggle src="{{{uiRootPath}}}/img/close.svg" alt="Close Navigation" class="h-4 w-4">
+      <svg data-page-navigation-toggle width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" aria-label="Close Navigation">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9864 2.45711C13.3769 2.06658 13.3769 1.43342 12.9864 1.04289C12.5959 0.652369 11.9627 0.652369 11.5722 1.04289L7.0293 5.58579L2.4864 1.04289C2.09588 0.652369 1.46271 0.652369 1.07219 1.04289C0.681666 1.43342 0.681666 2.06658 1.07219 2.45711L5.61508 7L1.07219 11.5429C0.681666 11.9334 0.681666 12.5666 1.07219 12.9571C1.46271 13.3476 2.09588 13.3476 2.4864 12.9571L7.0293 8.41421L11.5722 12.9571C11.9627 13.3476 12.5959 13.3476 12.9864 12.9571C13.3769 12.5666 13.3769 11.9334 12.9864 11.5429L8.44351 7L12.9864 2.45711Z" fill="currentColor"/>
+      </svg>
     </div>
     {{> search-bar class="md:hidden mb-12" }}
     {{> search-results class="hidden"}}
     {{> component-explorer-nav class="hidden" options=(components-to-nav-list)}}
     <div class="flex flex-col space-between">
       {{> left-side-nav}}
-      <a href="https://app.circleci.com/" class="flex items-center mt-4 ml-2 gap-2 font-medium md:hidden bg-white" >
+      <a href="https://app.circleci.com/" class="flex items-center mt-4 ml-2 gap-2 font-medium md:hidden bg-body-bg" >
         Go to Application
         <div class="inline-flex h-[24px] w-[24px] rounded items-center justify-center bg-slime-green border border-accent-green text-dark-green">
           {{> arrow-back-icon class="rotate-180" width="13" height="13" ariaLabel="Go to Application"}}

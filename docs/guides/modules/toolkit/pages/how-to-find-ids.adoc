@@ -13,7 +13,7 @@ NOTE: This guide covers finding IDs in the CircleCI web app, or from environment
 
 == Get IDs from the built-in environment variables
 
-xref:reference:ROOT:variables.adoc#built-in-environment-variables[Buit-in environment variables, window=_blank], scoped at the job level, include the following IDs:
+xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in environment variables, window=_blank], scoped at the job level, include the following IDs:
 
 - `CIRCLE_ORGANIZATION_ID`: The organization ID.
 - `CIRCLE_PROJECT_ID`: The project ID.
@@ -49,7 +49,7 @@ The organization ID is a unique identifier for an organization.
 You can access the organization ID through the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, follow these steps to find it in the CircleCI web app:
 
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Navigate to menu:Organization Settings[Overview] in the CircleCI web app.
+. Navigate to menu:Org[Overview] in the CircleCI web app.
 . Note the value or select the btn:[Copy] icon next to the organization ID.
 
 
@@ -79,7 +79,7 @@ From the pipelines dashboard::
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 . Select the menu:Pipelines[] next to your project.
-. Select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] next to any workflow run of the pipeline.
+. Select the ellipsis icon:more[Ellipsis menu icon] next to any workflow run of the pipeline.
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
@@ -91,7 +91,7 @@ From the workflow page::
 . Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
 . Select the menu:Pipelines[] next to your project.
 . Select any workflow run of the pipeline you want to find the ID for.
-. On the workflow page, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] at the top-right of the page (next to the btn:[Rerun] button).
+. On the workflow page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page (next to the btn:[Rerun] button).
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
@@ -104,7 +104,7 @@ From the job page::
 . Select the menu:Pipelines[] next to your project.
 . Select any workflow run from the pipeline you want to find the ID for.
 . Select any job from that workflow run.
-. On the job page, select the ellipsis image:guides:ROOT:icons/more.svg[more icon, role="no-border"] at the top-right of the page (next to the btn:[Rerun] button).
+. On the job page, select the ellipsis icon:more[Ellipsis menu icon] at the top-right of the page (next to the btn:[Rerun] button).
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +

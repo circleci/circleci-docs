@@ -1,0 +1,19 @@
+= Custom service
+:page-description: Custom service
+
+The custom service is an engagement where your field engineer works with your team to build a service that supports your DevOps goals. Examples include a adding new tool, adding a security practice, or a CircleCI feature migration.
+
+== Benefits
+
+Teams that work with their field engineer to create a custom service:
+
+* Meet their DevOps goals faster with expert advice.
+* Work with their field engineer to research how to use CircleCI for their use case.
+* Are more agile when responding to changing priorities.
+* Help the CircleCI community by identifying areas where your field engineer can assist other teams.
+
+== Intended audience
+
+Teams with a DevOps goal that has requirements outside the bounds of other field engineering services.
+
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

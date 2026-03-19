@@ -123,6 +123,7 @@ Once you have deploy markers configured you can set up and use the following fea
 
 * *Rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
 * *Deploy pipelines* to automatically deploy your application to a target environment directly from the CircleCI web app.
+* *Environment hierarchy and version promotion* to define ordered promotion paths (for example, dev → staging → production) and promote versions through each stage with a single click. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
@@ -186,6 +187,15 @@ _Deployment_ is the act of putting a new component version into an environment, 
 * As a later task, such as switching over traffic shaping rules for a blue/green deployment.
 * As a direct consequence of the deployment, such as a standard Kubernetes rolling update.
 
+=== Environment integration
+
+An environment integration is a named environment record in CircleCI's Deploys UI that represents a deployment target. An environment integration can be one of two types:
+
+* Custom. This can be used for any deployment target.
+* Kubernetes cluster. Using this option you will be guided to set up the CircleCI release agent and configure your Kubernetes components.
+
+The environment integration is used to organize and track deployments in the CircleCI deploys UI.
+
 === Release
 
 A _release_ is the act of updating a component to a new version in a specific environment, causing it to become available to an audience of users and other services.
@@ -218,13 +228,13 @@ Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboar
 
 * **Environments**: List of environment integrations set up for your organization. From here you can:
 ** Set up a new environment integration by selecting btn:[Create Environment Integration].
-** Access settings for each environment image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"].
+** Access settings for each environment icon:settings[Settings icon].
 ** Access the environment details view by selecting an environment name.
 
 * **Components**: A list of components and their associated projects. From here you can:
 ** Set up a new component by selecting btn:[Create Component]. From here you can select and environment that has a successful environment integration set up, and from there you can add a new component.
 ** Get straight to the component's project building on CircleCI by selecting the project name.
-** Access setting for each component image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"].
+** Access setting for each component icon:settings[Settings icon].
 
 === Filter and group components and environments with labels
 
@@ -248,7 +258,7 @@ To add or edit labels for a component, follow these steps:
 . Select *Deploys* in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Components** tab.
 . Select the component by name. You can use the filter at the top of the page to help find the component you want.
-. You are now on the component view page. Select the edit button image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] in the labels panel.
+. You are now on the component view page. Select the edit button icon:edit-solid[Edit icon] in the labels panel.
 . Enter or edit your label(s) and select btn:[Done].
 
 ==== Environment labels
@@ -257,8 +267,8 @@ To add or edit labels for an environment, follow these steps:
 
 . Select *Deploys* in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Environments** tab.
-. Select the cog icon image:guides:ROOT:icons/settings.svg[settings icon, role="no-border"] for your environment.
-. You are now on the environment settings page. Select the edit button image:guides:ROOT:icons/edit-solid.svg[edit icon, role="no-border"] in the labels panel.
+. Select the cog icon icon:settings[Settings icon] for your environment.
+. You are now on the environment settings page. Select the edit button icon:edit-solid[Edit icon] in the labels panel.
 . Enter or edit your label(s) and select btn:[Done].
 
 === View all deployments for an environment
