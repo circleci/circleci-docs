@@ -867,7 +867,7 @@ jobs:
 [#gcp-authentication]
 ==== GCP authentication
 
-Using an image hosted on https://cloud.google.com/artifact-registry[GCP Artifact Registry] requires authentication using GCP credentials. The two configuration options are described in the following sections.
+Using an image hosted on link:https://cloud.google.com/artifact-registry[GCP Artifact Registry] requires authentication using GCP credentials, either via OIDC, or by setting environment variables. The two configuration options are described in the following sections:
 
 [#gcp-oidc]
 ==== Use OIDC
