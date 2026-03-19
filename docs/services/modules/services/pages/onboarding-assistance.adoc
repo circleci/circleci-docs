@@ -1,0 +1,19 @@
+= Onboarding assistance service
+:page-description: Onboarding assistance service
+
+Onboarding assistance is a collection of engagements where your field engineer helps your team use CircleCI comfortably and efficiently, with appropriate safeguards. Your field engineer works with you on a customized onboarding journey so CircleCI follows best practices for your use case.
+
+== Benefits
+
+Teams that work with their field engineer to onboard their organization:
+
+* Adopt CircleCI faster using their field engineer's expert consultation.
+* Start with a more centralized approach to managing CircleCI.
+* Have their team trained by a CircleCI expert.
+* Better understand how CircleCI works for their organization and the data it provides.
+
+== Intended audience
+
+Teams that are new to CircleCI or teams that are onboarding a large number of new projects.
+
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

@@ -894,8 +894,8 @@ eg: registry.example.com/organization/repository
 
 |nomad.clients.mTLS
 |object
-|`{"CACertificate":"","certificate":""}`
-|Configure Nomad client mTLS when using external Nomad servers. Required when `nomad.server.internal: false`. Both `CACertificate` (base64 encoded CA cert to verify server) and `certificate` (base64 encoded client cert for authentication) must be provided.
+| `{"CACertificate":"","certificate":"","privateKey":""}`
+| Configure Nomad clients mTLS only when using External Nomad Servers. Required when `nomad.server.internal: false`. All three fields must be provided: `CACertificate` (base64 encoded CA cert to verify server), `certificate` (base64 encoded client cert for authentication), and `privateKey` (base64 encoded private key).
 
 |nomad.server.gossip.encryption.enabled |bool |`+true+` |
 
@@ -1419,8 +1419,7 @@ for the telegraf deployment.
 |tink |object |`+{"enabled":false,"keyset":""}+` |Tink Configuration
 +
  Tink is given precedence over vault. If tink.enabled is true,
-vault will not be deployed. Tink or vault must be set once at install
-and cannot be changed. +
+vault will not be deployed. Tink keys can be rotated (see link:https://support.circleci.com/hc/en-us/articles/39931197265691-Rotating-Tink-keys-in-CircleCI-Server[Rotating Tink keys in CircleCI Server]). To migrate from Vault to Tink, see link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[server-scripts vault-to-tink]. +
  *Option 1:* Leave this blank, and create
 the secret yourself. CircleCI will assume it exists. +
  The secret

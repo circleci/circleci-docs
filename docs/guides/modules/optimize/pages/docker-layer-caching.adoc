@@ -10,9 +10,9 @@ Use Docker layer caching (DLC) to reduce Docker image build times on CircleCI. D
 
 Docker layer caching (DLC) is beneficial if building Docker images is a regular part of your CI/CD process. DLC saves Docker image layers created within your jobs, and caches them to be reused during future builds.
 
-DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent job runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the less time your image-building jobs will take to run.
+DLC caches the individual layers of any Docker images built during your CircleCI jobs. Unchanged image layers are reused on subsequent job runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the less time your image-building jobs will take to run.
 
-DLC can be used with both the `machine` executor and in a xref:execution-managed:building-docker-images.adoc[remote Docker environment] (`setup_remote_docker`).
+DLC can be used with both the `machine` executor and in a xref:execution-managed:building-docker-images.adoc[Remote Docker Environment] (`setup_remote_docker`).
 
 DLC is charged at 200 credits per job run. For more information about DLC charges, see the xref:plans-pricing:credits.adoc#charge-for-docker-layer-caching[FAQ].
 
@@ -92,18 +92,18 @@ NOTE: DLC has *no* effect on Docker images used as build containers. That is, co
 
 When using Buildx builder instances with DLC, it is important to link:https://docs.docker.com/engine/reference/commandline/buildx_create/#name[name your builders]. Doing so ensures CircleCI can detect and preserve the Docker volumes for subsequent job runs. If you do not name your builders, each time the job is run they will have different, randomly generated names, and the resulting volumes will be automatically cleaned up.
 
-If you store Docker build artifacts in a Docker volume, managed by the BuildKit inside Buildx builder instances, the DLC feature cannot _maintain_ these artifacts, but they can still be supported. DLC is not able to prune these images/build cache, but Buildx builders do have some in-built pruning. For more information, see the link:https://docs.docker.com/build/cache/garbage-collection/#default-policies[Docker docs].
+DLC cannot maintain Docker build artifacts stored in Docker volumes managed by BuildKit inside Buildx builder instances, but these artifacts can still be supported. DLC is not able to prune these images/build cache, but Buildx builders do have some in-built pruning. For more information, see the link:https://docs.docker.com/build/cache/garbage-collection/#default-policies[Docker docs].
 
 [#how-dlc-works]
 == How DLC works
 
 DLC caches your Docker image layers within the container/virtual machine used to run your job.
 
-If, for example, the first run of your job takes over two minutes to build a Docker image, and nothing changes in the Dockerfile before the second run, the Dockerfile build steps happen instantly, in zero seconds.
+For example, if building a Docker image takes over two minutes on the first run, and the Dockerfile is unchanged, subsequent builds happen instantly.
 
 When none of the layers in the image change between job runs, DLC pulls the layers from the cache and reuses those instead of rebuilding the entire image.
 
-If part of the Dockerfile changes (which changes part of the image), a subsequent run of the exact same job with the modified Dockerfile may still finish faster than rebuilding the entire image. This speed optimization happens because the cache can still be used for the first few steps that did not change in the Dockerfile. The steps that follow the change must be rerun because the Dockerfile change invalidates the cache for those layers.
+If part of the Dockerfile changes, a subsequent run of the exact same job with the modified Dockerfile may still finish faster than rebuilding the entire image. This speed optimization happens because the cache can still be used for the first few steps that did not change in the Dockerfile. The steps that follow the change must be rerun because the Dockerfile change invalidates the cache for those layers.
 
 If you change something in your Dockerfile, all of the later steps (from the point that the change was made) are invalidated and the layers have to be rebuilt. When some of the steps remain the same (the steps before the one you removed), those steps can be reused, therefore, it is still faster than rebuilding the entire image.
 
@@ -113,6 +113,41 @@ At the beginning of each job that uses DLC, there is a `DLC set-up` step. You ar
 === Parallelism and DLC
 
 DLC operates in the same way for jobs that use parallelism. If a `machine` job using DLC is configured with `parallelism: 2`, two jobs run in parallel. Each virtual machine in this case will have a separate DLC cache, and whichever is saved last will be used for the next build.
+
+[#purge-dlc]
+== Purge DLC
+
+If jobs that use DLC continuously fail, this may be due to a corrupted cache. Purging the DLC removes previously stored Docker image layers so that future builds do not reuse those cached layers. This forces CircleCI to rebuild Docker images from scratch, rather than leveraging layers from earlier builds to speed up the process.
+
+You can purge DLC using the CircleCI web app or the CLI.
+
+[#purge-dlc-web-app]
+=== Web app
+
+To purge DLC from the CircleCI web app:
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+. Select **Docker Layer Caching**.
+. Select btn:[Delete Cache Contents].
+
+[#purge-dlc-cli]
+=== CLI
+
+Use the xref:toolkit:how-to-use-the-circleci-local-cli.adoc[CircleCI CLI] `dlc purge` sub-command to purge DLC for a project:
+
+[,shell]
+----
+circleci dlc purge <vcs-type> <org-id> <project-id>
+----
+
+The full `<vcs-type> <org-id> <project-id>` section of the subcommand is your project slug. You can find and copy the project slug from your project settings:
+
+.The project slug available in project settings
+image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project slug]
+
+For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI reference].
+
+
 
 [#deprecated-keys]
 == Deprecated keys

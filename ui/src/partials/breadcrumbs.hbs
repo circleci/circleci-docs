@@ -2,22 +2,22 @@
   {{#if page.breadcrumbs}}
   <ul>
     {{#if site.homeUrl}}
-    <li class="inline after:text-[#959595] after:content-['/'] after:px-2">
-      <a class="text-link-on-light font-normal" href="{{{relativize site.homeUrl}}}">Home</a>
+    <li class="inline after:text-[var(--breadcrumb-separator-color)] after:content-['/'] after:px-2">
+      <a class="font-normal" style="color: var(--breadcrumb-link-color)" href="{{{relativize site.homeUrl}}}">Home</a>
     </li>
     {{/if}}
     {{#with page.componentVersion}}
     {{#if (and ./title (ne ./title @root.page.breadcrumbs.0.content))}}
-    <li class="inline after:text-[#959595] after:content-['/'] after:px-2"><a class="text-[#343434] font-normal" href="{{{relativize ./url}}}">{{{./title}}}</a></li>
+    <li class="inline after:text-[var(--breadcrumb-separator-color)] after:content-['/'] after:px-2"><a class="font-normal" style="color: var(--breadcrumb-link-color)" href="{{{relativize ./url}}}">{{{./title}}}</a></li>
     {{/if}}
     {{/with}}
     {{#each page.breadcrumbs}}
     {{#unless @last}}
-    <li class="inline after:text-[#959595] after:content-['/'] after:px-2">
+    <li class="inline after:text-[var(--breadcrumb-separator-color)] after:content-['/'] after:px-2">
       {{#if (and ./url (eq ./urlType 'internal'))}}
-        <a class="text-[#343434] font-normal" href="{{{relativize ./url}}}">{{{./content}}}</a>
+        <a class="font-normal" style="color: var(--breadcrumb-link-color)" href="{{{relativize ./url}}}">{{{./content}}}</a>
               {{else}}
-          <span class="text-[#343434] font-normal cursor-default">{{{./content}}}</span>
+          <span class="font-normal cursor-default" style="color: var(--breadcrumb-font-color)">{{{./content}}}</span>
         {{/if}}
     </li>
     {{/unless}}

@@ -51,7 +51,7 @@ Example output:
   "enabled": false
 }
 ----
-
++
 include::ROOT:partial$notes/find-organization-id.adoc[]
 
 [#manage-policies-with-your-vcs]

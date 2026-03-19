@@ -1,5 +1,5 @@
 ****
-To find your organization/user ID, select **Organization Settings** in the CircleCI web app side bar.
+To find your organization ID and organization slug, select **Org** in the CircleCI web app side bar to open your organization settings page.
 
 image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]
 ****

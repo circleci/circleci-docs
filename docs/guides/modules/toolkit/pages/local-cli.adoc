@@ -188,7 +188,7 @@ brew uninstall circleci
 choco uninstall circleci-cli -y --remove dependencies
 ----
 
-*Alternative curl uninstall*: Remove the `circleci` executable from `usr/local/bin`
+*Alternative curl uninstall*: Remove the `circleci` executable from `/usr/local/bin`
 
 [#next-steps]
 == Next steps
@@ -215,7 +215,7 @@ If you wish to suggest ways we could improve the CLI link:https://github.com/Cir
 * https://support.circleci.com/hc/en-us/articles/14027411555355-How-to-delete-a-projects-Docker-Layer-Cache[How to delete a project Docker Layer Cache with the CircleCI CLI?]
 * https://support.circleci.com/hc/en-us/articles/4407580027675-Docker-Layer-Caching-FAQ[Docker Layer Cache FAQ]
 * https://support.circleci.com/hc/en-us/articles/14031352897819-How-to-Rotate-your-Self-Hosted-Runner-Resource-Class-Tokens[How to rotate your self-hosted runner resource class tokens using the CircleCI CLI?]
-* https://support.circleci.com/hc/en-us/articles/360057144631-CircleCI-Runner-Error-Message-We-cannot-run-this-job-using-the-selected-resource-class-[How to use the CLI to verify namespaces and resource classes have been created correctly when installing the CircleCI runner ?]
+* https://support.circleci.com/hc/en-us/articles/360057144631-CircleCI-Runner-Error-Message-We-cannot-run-this-job-using-the-selected-resource-class-[How to use the CLI to verify namespaces and resource classes have been created correctly when installing the CircleCI runner?]
 * https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[How to use Reality Check to validate your CircleCI server installation for GitHub Enterprise via the CLI?]
 
 [#troubleshooting]
