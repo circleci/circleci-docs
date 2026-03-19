@@ -167,7 +167,7 @@ Organizations with `/github/` in their URL can leverage both GitHub integration 
 
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization. Only organization admins can take this action.
 
-. Navigate to menu:Organization Settings[VCS Connections].
+. Navigate to menu:Org[VCS Connections].
 . Select btn:[Install GitHub App].
 . Select repositories to grant access.
 . Create new GitHub App pipelines alongside existing OAuth pipelines. This can be achieved in the following ways:
@@ -217,7 +217,7 @@ Instead, if you want to stop building through the OAuth integration, duplicate t
 
 === Why can't I see GitHub App options?
 
-Ensure the GitHub App is installed via menu:Organization Settings[VCS Connections]. Then select btn:[Add pipeline] on the menu:Project Settings[Project setup] page to create a new GitHub App pipeline.
+Ensure the GitHub App is installed via menu:Org[VCS Connections]. Then select btn:[Add pipeline] on the menu:Project Settings[Project setup] page to create a new GitHub App pipeline.
 
 === How do I prevent duplicate builds?
 
