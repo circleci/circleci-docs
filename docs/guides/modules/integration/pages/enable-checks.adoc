@@ -6,7 +6,7 @@
 [#introduction]
 == Introduction
 
-NOTE: The GitHub Checks integration feature is not currently available on CircleCI server.
+NOTE: The GitHub Checks integration feature is not currently available on CircleCI Server.
 
 This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to the GitHub user interface.
 
@@ -14,6 +14,7 @@ GitHub Checks provides you with workflow status messages and gives the option to
 
 After GitHub Checks is enabled, CircleCI workflow status is reported under the checks tab on GitHub.
 
+.Example of the Checks tab on a GitHub PR view showing workflow status.
 image::guides:ROOT:checks_tab.png[CircleCI checks on GitHub]
 
 NOTE: GitHub does not currently provide a granular way for you to rerun workflows. When you select the Re-run checks button, all checks are rerun, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button.
@@ -23,11 +24,11 @@ NOTE: GitHub does not currently provide a granular way for you to rerun workflow
 
 GitHub Checks should not be confused with GitHub status updates:
 
-* GitHub Checks are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
+* *GitHub Checks* are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
 ** GitHub Checks from OAuth integrations have the same name as the associated workflow.
 ** GitHub Checks from GitHub App integrations are named using a combination of the workflow name and the first eight characters of the pipeline definition ID. The identifier is used to prevent naming collisions. The pipeline definition ID is available in the *Project Settings* > *Pipelines* page in the CircleCI web app.
 ** Each workflow in a pipeline generates a GitHub Check. If multiple pipelines trigger for the same commit SHA with workflows that share the same name, only one GitHub Check appears for that workflow name. Use unique workflow names across pipelines to get distinct GitHub Checks.
-* GitHub status updates are the default way status updates from your builds are reported in the GitHub UI, and they are reported per _job_.
+* GitHub *status updates* are the default way status updates from your builds are reported in the GitHub UI, and they are reported per _job_. FOr more information on status updates, see the xref:guides:getting-started:status-updates.adoc[Status updates overview] guide.
 
 If both these features are enabled you will see the following in a GitHub PR view:
 
