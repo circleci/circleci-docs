@@ -118,7 +118,9 @@ Alternatively, you can copy the suggested configuration into an existing or newl
 . Once you have customized the configuration, merge the pull request to complete the deploy setup.
 . After merging the pull request, return to the setup page in the CircleCI web app and select btn:[Setup deploy pipeline] to activate the deploy pipeline.
 
-You can now deploy your component by selection btn:[Deploy] in your project overview and running your deploy pipeline. For detailed steps, see the xref:deploy-a-component.adoc[Deploy a Component] guide.
+You can now deploy your component by selecting btn:[Deploy] in your project overview and running your deploy pipeline. For detailed steps, see the xref:deploy-a-component.adoc[Deploy a Component] guide.
+
+TIP: If you deploy to multiple environments (for example, dev, staging, production), you can set up an environment hierarchy to define your promotion path and use version promotion to move versions through each stage with one click. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
 
 == Run a deploy pipeline
 
@@ -159,7 +161,7 @@ In this section you can find a full example of a deploy pipeline config. This ex
 This template assumes the following:
 
 . Your deployment is annotated with a "version" label.
-. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way
+. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way.
 ====
 
 .Example deploy pipeline configuration
@@ -462,4 +464,7 @@ workflows:
               only: main
 ----
 
+== Next steps
 
+* Learn how to use environment hierarchy and version promotion to manage your deployments through multiple environments. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
+* Learn how to deploy to multiple environments using a deploy pipeline. See the xref:deploy-a-component.adoc[Deploy a Component] guide.
