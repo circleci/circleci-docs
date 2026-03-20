@@ -11,7 +11,6 @@
 *** xref:getting-started:invite-your-team.adoc[Join teammates on CircleCI]
 *** xref:getting-started:create-project.adoc[Create a project]
 *** xref:getting-started:getting-started.adoc[Quickstart guide]
-*** xref:getting-started:status-updates.adoc[Status updates]
 ** How-to guides
 *** xref:getting-started:hello-world.adoc[Hello World]
 *** xref:getting-started:introduction-to-yaml-configurations.adoc[Intro to YAML configuration]
@@ -274,10 +273,11 @@
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS, pipeline types, and feature support]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
+*** xref:integration:status-updates.adoc[Status updates overview]
+*** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:oss.adoc[Build open source projects]
 
 ** Third-party integrations
-*** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:jira-plugin.adoc[Connect with Jira]
 *** xref:integration:new-relic-integration.adoc[New Relic integration]
 *** xref:integration:datadog-integration.adoc[Datadog integration]

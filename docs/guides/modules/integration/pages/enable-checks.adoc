@@ -28,15 +28,14 @@ GitHub Checks should not be confused with GitHub status updates:
 ** GitHub Checks from OAuth integrations have the same name as the associated workflow.
 ** GitHub Checks from GitHub App integrations are named using a combination of the workflow name and the first eight characters of the pipeline definition ID. The identifier is used to prevent naming collisions. The pipeline definition ID is available in the *Project Settings* > *Pipelines* page in the CircleCI web app.
 ** Each workflow in a pipeline generates a GitHub Check. If multiple pipelines trigger for the same commit SHA with workflows that share the same name, only one GitHub Check appears for that workflow name. Use unique workflow names across pipelines to get distinct GitHub Checks.
-* GitHub *status updates* are the default way status updates from your builds are reported in the GitHub UI, and they are reported per _job_. FOr more information on status updates, see the xref:guides:getting-started:status-updates.adoc[Status updates overview] guide.
+* GitHub *status updates* are the default way status updates from your builds are reported in your VCS UI. Status updates are reported per _job_. For more information on status updates, see the xref:status-updates.adoc[Status Updates Overview] guide.
 
 If both these features are enabled you will see the following in a GitHub PR view:
 
 * The Checks tab will show *workflow status*.
 * The Checks section in the PR conversation view will show *job status*.
 
-If you are using GitHuck Checks or GitHub status updates with the xref:orchestrate:skip-build.adoc#skip-jobs[skip jobs feature],
-the status of the skipped builds will not be reported. The checks are still created in GitHub.
+If you are using GitHub Checks or GitHub status updates with the xref:orchestrate:skip-build.adoc#skip-jobs[Skip Jobs] feature, the status of the skipped builds are not reported. However, the GitHub Checks are still created in GitHub.
 
 [#prerequisites]
 == Prerequisites

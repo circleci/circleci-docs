@@ -5,12 +5,14 @@
 
 CircleCI reports the status of your pipelines back to your version control system (VCS). This lets you see the progress and results of your CircleCI jobs and workflows without leaving your VCS.
 
+== Introduction
+
 CircleCI provides two types of status reporting. This overview guide covers "status updates":
 
 *Status updates*:: CircleCI sends job level status information for every commit. Status updates are available for GitHub, Bitbucket, and GitLab. You can disable status updates in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **Status Updates** to `off`.
 *GitHub Checks*:: GitHub Checks reports workflow-level status and is available for GitHub only. You can enable GitHub Checks in the CircleCI web app by navigating to menu:Organization Settings[VCS Connections] and selecting **Manage GitHub Checks**. GitHub Checks is a GitHub App, and you will notice that from the GitHub UI the App is called **CircleCI Checks**. For information on setting up and using GitHub Checks, see the xref:guides:integration:enable-checks.adoc[Enable GitHub Checks] guide.
 
-== Introduction
+== Status update locations
 
 When a pipeline is triggered in CircleCI, status information is sent back to your VCS. Status updates appear in the following locations:
 
@@ -18,11 +20,29 @@ When a pipeline is triggered in CircleCI, status information is sent back to you
 * Next to individual commits in a pull/merge request conversation view.
 * At the end of a pull/merge request.
 
-Status updates are the default way CircleCI reports pipeline status to your VCS. They are reported at the job level and are available for GitHub, Bitbucket, and GitLab.
+Status updates are the default way CircleCI reports pipeline status to your VCS. They are reported at the job level and are available for GitHub, Bitbucket, and GitLab. The following images show where to find status updates in GitHub. Other VCS providers will have similar locations.
 
-#TO DO: Screenshot of commit statuses at the bottom of a GitHub PR, showing statuses updating live as jobs run.#
+[tabs]
+====
+Status updates in PR::
++
+--
+image::guides:ROOT:status-update-pr.png[Job status in PR]
+--
+Commit status::
++
+--
+image::guides:ROOT:status-update-commit.png[Status update for a commit in GitHub]
+--
+Commit status in PR::
++
+--
+image::guides:ROOT:status-update-commit-pr.png[Status update for a commit in PR conversation view]
+--
+====
 
-=== Status update naming
+
+== Status update naming
 
 CircleCI displays status updates differently depending on the job type.
 
@@ -40,18 +60,24 @@ Approval jobs and no-op jobs display using the following format:
 
 The workflow name prefix for approval and no-op jobs provides additional context. These jobs typically require manual intervention or represent conditional workflow states. Regular jobs that run automatically do not require this additional context.
 
-#TO DO: Screenshot showing examples of regular job commit status names alongside approval and no-op job commit status names as they appear in GitHub.#
-
 NOTE: **Need to find the workflow for a regular job?** Click through to the CircleCI dashboard. The full workflow context is visible there.
 
-=== Enable and disable commit statuses
+== Disable status updates
 
-Status updates are enabled by default for all projects. You can disable them in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **GitHub Status Updates** to `off`.
+If you use the GitHub Checks feature, you can disable status updates to avoid duplication of statuses.
 
-NOTE: **Re-enabling commit statuses.** If you disable GitHub Checks for a project or organization, confirm that commit statuses are still enabled in menu:Project Settings[Advanced Settings].
+To disable status updates in the CircleCI web app:
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+. Select **Advanced Settings**.
+. Set **VCS Status Updates** to `off`.
+
+You can re-enable status updates by setting **VCS Status Updates** to `on`.
+
+NOTE: The VCS status updates setting affects both GitHub and Bitbucket status updates.
 
 == Next steps
 
 * xref:guides:integration:enable-checks.adoc[Enable GitHub Checks]
 * xref:guides:orchestrate:workflows.adoc[Workflows]
-* xref:guides:orchestrate:workflows.adoc#approval[Using approval jobs in workflows]
+* xref:guides:orchestrate:workflows.adoc#approval[Using Approval Jobs in Workflows]
