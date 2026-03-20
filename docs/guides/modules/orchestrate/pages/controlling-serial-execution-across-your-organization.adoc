@@ -55,7 +55,7 @@ Jobs in a serial group move through several states:
 
 * First, the job enters a "queued" state.
 * Once a job starts (reaches its place in the queue) it transitions to a "running" state.
-* Upon completion (whether successfully, with failure, or by cancellation) the next job in the queue starts. The queue continues to process jobs even if some jobs fail.
+* Upon completion (whether successful, failed, canceled, unauthorized, or not run) the next job in the queue starts. The queue continues to process jobs even if some jobs fail.
 
 === Time limits
 
