@@ -234,6 +234,8 @@
 ** OIDC tokens
 *** xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs]
 *** xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OIDC tokens with custom claims]
+*** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
+*** xref:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc[Pull an image from GCP Artifact Registry with OIDC]
 
 * Manage security and secrets
 ** Security features
