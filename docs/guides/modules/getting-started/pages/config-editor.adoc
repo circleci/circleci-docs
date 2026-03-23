@@ -5,7 +5,7 @@
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
-With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+With the CircleCI configuration editor, you can modify your configuration files within the CircleCI web app.
 
 image::guides:ROOT:config-editor-main.png[Configuration Editor]
 
