@@ -1,7 +1,14 @@
 site:
   title: CircleCI Docs
   url: https://circleci.com/docs
-  robots: allow
+  robots: |
+    User-agent: *
+    Allow: /
+
+    Sitemap: https://circleci.com/docs/sitemap.xml
+
+    # llms.txt - Structured documentation for AI/LLM consumption
+    # See https://circleci.com/docs/llms.txt for machine-readable documentation
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
     google_analytics: 'GTM-W9HDVK'
@@ -129,3 +136,4 @@ antora:
     excludepatterns:
       - '*-dark.svg'
       - 'icons/*.svg'
+  - require: ./extensions/llms-txt-generator-extension.js

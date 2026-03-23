@@ -47,7 +47,7 @@ lein repl :connect host.docker.internal:16000
 (circle.http.api.admin-commands/get-setting :wfc-workflow-deletion-interval)
 ----
 +
-By default, the interval is set to `0`. This value must be updated to a number greater than `0` for WFC deletion to run every *n* seconds. For example, the following command sets it to 1000 seconds:
+By default, the interval is set to `0`. This value must be updated to a number greater than `0` for WFC deletion to run every *n* milliseconds. For example, the following command sets it to 1000 milliseconds or 1 second:
 +
 [source,clojure]
 ----
