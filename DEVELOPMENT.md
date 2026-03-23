@@ -84,6 +84,26 @@ The site will be available at `http://localhost:3000` by default.
   npm run build:docs
   ```
 
+#### Markdown Export
+
+The site includes a markdown export feature that generates downloadable `.md` versions of all documentation pages. This feature is optimized for different environments:
+
+- **Local development** (default): Markdown generation is **disabled** for faster rebuilds
+- **CI/production**: Markdown generation is **enabled automatically** when `CI=true` is set
+- **Manual override**: Set `ENABLE_MARKDOWN_EXPORT=true` to enable or disable explicitly
+
+**To preview markdown export locally**:
+```bash
+ENABLE_MARKDOWN_EXPORT=true npm run start:dev
+```
+
+**To build without markdown (faster local builds)**:
+```bash
+npm run build:docs
+```
+
+**Note**: Generating markdown files processes all 563+ pages and adds significant time to each rebuild. Keep it disabled during active development and enable only when you need to test the download functionality.
+
 
 ### Branch Strategy
 
@@ -294,6 +314,23 @@ To create a custom extension:
      - ./extensions/your-extension.js
    ```
 
+#### Existing Extensions
+
+The project includes several custom extensions:
+
+- **`page-metadata-extension.js`**: Adds metadata to pages (reading time, last updated, etc.)
+  - Registered in: `antora-playbook.yml` and command line
+- **`export-content-extension.js`**: Exports content for search indexing
+  - Registered in: command line only
+- **`markdown-export-extension.js`**: Generates downloadable markdown versions of all pages
+  - Converts HTML to markdown using Turndown
+  - Preserves code blocks with syntax highlighting
+  - Converts relative links to absolute URLs
+  - **Registered in: command line only** (conditionally based on environment)
+  - Enabled automatically in CI, disabled in local development by default
+  - See [Markdown Export](#markdown-export) section for configuration
+  - Processes 563+ pages, adding significant build time
+
 ## Testing
 
 ### Testing Content Changes
@@ -347,6 +384,23 @@ npm run build:ui
 - Restart the development server
 - Check for AsciiDoc syntax errors
 - Verify file path and structure
+
+### Slow Rebuilds During Development
+
+**Problem**: Development server takes 30-60+ seconds to rebuild after file changes
+**Solution**:
+- Check if markdown export is enabled (look for "Markdown export enabled" in console output)
+- Markdown generation processes 563+ pages and significantly slows down rebuilds
+- Ensure `ENABLE_MARKDOWN_EXPORT` is not set to `true` in your environment
+- Restart the development server without the environment variable:
+  ```bash
+  npm run start:dev
+  ```
+- Markdown export should be disabled by default for local development
+- Only enable it when testing the download functionality:
+  ```bash
+  ENABLE_MARKDOWN_EXPORT=true npm run start:dev
+  ```
 
 ### AsciiDoc Formatting Issues
 

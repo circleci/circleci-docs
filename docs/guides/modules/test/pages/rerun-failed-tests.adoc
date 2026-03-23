@@ -10,9 +10,10 @@ Use rerun failed tests to only rerun a subset of tests, instead of an entire tes
 
 If a transient test failure arises in a pipeline, select **Rerun failed tests** to rerun a subset of tests (your failed tests) instead of rerunning the entire test suite. Rerun failed tests runs a new workflow, which appears within your original pipeline. The rerun is created from the _same_ commit as the failed workflow, not from subsequent commits.
 
+.Screenshot of the Rerun menu with the Rerun failed tests option highlighted
 image::guides:ROOT:rerun-failed-tests-option.png[Option to rerun failed tests from Rerun menu]
 
-Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:orchestrate:workflows.adoc#rerunning-a-workflows-failed-jobs[rerun your workflow from failed]. Rerun from failed executes *all tests*, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
+Historically, when a testing job in a workflow had flaky tests, the only option to get to a successful workflow was to xref:orchestrate:workflows.adoc#rerunning-a-workflows-failed-jobs[Rerun Your Workflow From Failed]. Rerun from failed executes *all tests*, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily. Having the option to rerun only failed tests is a more efficient way to rerun your testing workflows.
 
 Set up your test jobs to use `circleci tests run` to make the rerun failed tests available.
 
@@ -21,24 +22,24 @@ Set up your test jobs to use `circleci tests run` to make the rerun failed tests
 
 In order to use the rerun failed tests feature, your job must meet the following requirements:
 
-* Your testing job must be configured to xref:collect-test-data.adoc[upload test results] to CircleCI using the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step].
+* Your testing job must be configured to upload test results to CircleCI using the `store_test_results` step. See the xref:collect-test-data.adoc[Collecting Test Data] page and the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference] for more details.
 
-* `file` or `classname` attributes **must be present** in the xref:optimize:use-the-circleci-cli-to-split-tests.adoc#tests-run-examples[JUnit XML output].
+* `file` or `classname` attributes **must be present** in the JUnit XML output. See the xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Parallelism and Test Splitting] page for more details.
 
 * The testing job must use `circleci tests run` to execute tests. The next sections provide instructions to get this set up followed by examples for popular test frameworks.
 +
-If your current job is using xref:test-splitting-tutorial.adoc[intelligent test splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag.
+If your current job is using xref:test-splitting-tutorial.adoc[Intelligent Test Splitting], you must *change* the `circleci tests split` command to `circleci tests run` combined with a `--split-by=` flag.
 
 [#quickstart]
 == Quickstart
 
 To use the rerun failed tests feature, run your tests using the `circleci tests run` command. The basic structure of your testing command should be:
 
-* Create a directory for your results
-* Glob your test files
-* Make your test files available as standard input (stdin)
+* Create a directory for your results.
+* Glob your test files.
+* Make your test files available as standard input (stdin).
 * Run tests with `circleci tests run`. Your tests should be run with the `--command` flag, using `xargs` to get the tests from stdin.
-* If you want to use intelligent test splitting, use the `--split-by=` flag as shown in the examples on the xref:optimize:parallelism-faster-jobs.adoc[Parallelism and test splitting page].
+* If you want to use intelligent test splitting, use the `--split-by=` flag as shown in the examples on the xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] page.
 
 [,yml]
 ----
@@ -57,14 +58,14 @@ jobs:
           path: test-results
 ----
 
-For a list of options for the `circleci tests run` command, see the xref:optimize:parallelism-faster-jobs.adoc#the-tests-run-command[parallelism and test splitting page]. You can also access the CLI help for `circleci tests run` by running `circleci tests run --help` in a CircleCI job.
+For a list of options for the `circleci tests run` command, see the xref:optimize:parallelism-faster-jobs.adoc#the-tests-run-command[Parallelism and Test Splitting] page. You can also access the CLI help for `circleci tests run` by running `circleci tests run --help` in a CircleCI job.
 
 The next section provides a more detailed example of migrating from `circleci tests split` to `circleci tests run` to access the rerun failed tests feature.
 
 == Migrate from `circleci tests split` to `circleci tests run`
 This section is intended to show how to configure your pipelines to enable the use of the rerun failed tests feature. The following two sections show a _before_ and _after_ version of a job configured to run pytest tests. This shows how to get from an existing configuration using `circleci tests split` to using `circleci tests run`, which is a requirement for using the rerun failed tests feature. Your starting point may be different, you might not already be using `circleci tests split`, in which case you can refer to the _after_ example to see how to configure your job to use `circleci tests run`.
 
-The example used in this section includes the use of xref:optimize:parallelism-faster-jobs.adoc[intelligent test splitting] to optimize testing time. Test splitting and parallelism are not required to use the rerun failed tests feature.
+The example used in this section includes the use of xref:optimize:parallelism-faster-jobs.adoc[Intelligent Test Splitting] to optimize testing time. Test splitting and parallelism are not required to use the rerun failed tests feature.
 
 [#example-config-file-before]
 === Before: example `.circleci/config.yml` file
@@ -90,7 +91,7 @@ jobs:
 This example snippet is from a CircleCI configuration file that runs the following:
 
 * Executes Python test files that end in `.py`.
-* Splits tests by previous timing results (you can follow xref:test-splitting-tutorial.adoc[this tutorial] on intelligent test splitting).
+* Splits tests by previous timing results (you can follow the xref:test-splitting-tutorial.adoc[Test Splitting Tutorial]).
 * Stores the test results in a new directory called `test-results`.
 * Uploads test results to CircleCI using `store_test_results`.
 
@@ -125,7 +126,7 @@ This example snippet, which has been altered to use `circleci tests run`, runs t
 
 * `TEST_FILES=$(circleci tests glob "**/test_*.py")`
 +
-Use CircleCI's xref:troubleshoot-test-splitting.adoc#video-troubleshooting-globbing[glob command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`. Ensure that the glob string is enclosed in quotes.
+Use CircleCI's xref:troubleshoot-test-splitting.adoc#video-troubleshooting-globbing[Glob Command] to put together a list of test files. In this case, we are looking for any test file that starts with `test_` and ends with `.py`. Ensure that the glob string is enclosed in quotes.
 
 * `echo "$TEST_FILES" |`
 +
@@ -198,7 +199,7 @@ The job should only rerun tests that are from a `classname` of `file` that had a
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `glob` command to match your specific use case.  **If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your specific use case.  **If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 Cypress may output a warning saying `Warning: It looks like you're passing --spec a space-separated list of arguments:`.  This can be ignored, but it can be removed by following the guidance from our link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only-circleci-tests-run/47775/18[community forum].
 
@@ -270,7 +271,7 @@ Ensure you are using `xargs` in your `circleci tests run` command to pass the li
 ```
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. **If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
+. **If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-javascript-typescript-jest-tests]
 === Configure a job running JavaScript/TypeScript (Jest) tests
@@ -299,7 +300,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data.adoc#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `npx jest --listTests` command to match your use case. See the Jest section in the xref:collect-test-data.adoc#jest[Collect Test Data] document for details on how to output test results in an acceptable format for `jest`. **If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 +
 `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` is added to ensure that the `file` attribute is present. `JEST_JUNIT_ADD_FILE_ATTRIBUTE=true` can also be added to your `jest.config.js` file instead of including it in `.circleci/config.yml`, by using the following attribute: `addFileAttribute="true"`.
 
@@ -335,7 +336,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
     path: build/test-results/test
 ```
 
-. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-phpunit-tests]
 === Configure a job running PHPUnit tests
@@ -360,7 +361,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted.
+. Note that this example uses a utility named link:https://github.com/previousnext/phpunit-finder[`phpunit-finder`] which is a third party tool that is not supported by CircleCI, use at your own risk. If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter. If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-playwright-tests]
 === Configure a job running Playwright tests
@@ -381,7 +382,7 @@ You can also add it to your `jest.config.js` file by following these link:https:
 
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.
+. Update the `glob` command to match your use case. **If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.**. If you are not using test splitting, `--split-by=timings` can be omitted. Note: you may also use link:https://playwright.dev/docs/test-reporters#junit-reporter[Playwright's built-in flag] (`PLAYWRIGHT_JUNIT_OUTPUT_NAME`) to specify the JUnit XML output directory.
 +
 NOTE: Ensure that you are using version 1.34.2 or later of Playwright. Earlier versions of Playwright may not output JUnit XML in a format that is compatible with this feature.
 
@@ -406,9 +407,9 @@ gem 'rspec_junit_formatter'
     path: ~/rspec
 ```
 
-. `--format RspecJunitFormater` must come after any other `--format` RSpec argument
+. `--format RspecJunitFormater` must come after any other `--format` RSpec argument.
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
-. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data.adoc#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case. See the RSpec section in the xref:collect-test-data.adoc#rspec[Collect Test Data] document for details on how to output test results in an acceptable format for `rspec`. **If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-ruby-rspec-tests-across-parallel-ci-nodes-with-knapsack-pro]
 === Configure a job running Ruby (RSpec) tests across parallel CI nodes with Knapsack Pro
@@ -466,7 +467,7 @@ gem 'rspec_junit_formatter'
 ```
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
-. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data.adoc#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial.adoc[CircleCI's intelligent test splitting], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
+. Update the `glob` command to match your use case. See the Cucumber section in the xref:collect-test-data.adoc#cucumber[Collect Test Data] document for details on how to output test results in an acceptable format for `Cucumber`. **If your current job is using xref:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines], you must change the `circleci tests split` command to `circleci tests run` with the `--split-by=timings` parameter.** If you are not using test splitting, `--split-by=timings` can be omitted.
 
 [#configure-a-job-running-ruby-minitest-tests-across-parallel-ci-nodes-with-knapsack-pro]
 === Configure a job running Ruby (minitest) tests across parallel CI nodes with Knapsack Pro
@@ -510,7 +511,7 @@ groups:
     circleci: tests/_output/circleci
 ----
 
-In your `.circleci/config.yml` file, we can use `circleci tests glob` to get the Cest files from the path we need. `circleci tests run` will then sift through the Cest files and put the necessary ones into `tests/_output/circleci` file. Before running the tests with the `circleci` group, we ensure the `tests/_output/circleci` file exists. The `--xml` option is required for the rerun tests feature to work. The `--html` option is optional, but useful for easy debugging through artifacts.
+In your `.circleci/config.yml` file, we can use `circleci tests glob` to get the Cest files from the path we need. `circleci tests run` will then sift through the Cest files and put the necessary ones into `tests/_output/circleci` file. Before running the tests with the `circleci` group, we ensure the `tests/_output/circleci` file exists. The `--xml` option is required for the rerun tests feature to work. The `--html` option is optional, but useful for debugging through artifacts.
 
 [,yml]
 ----
@@ -541,7 +542,7 @@ jobs:
 [#output-test-files-only]
 === Output test files only
 
-If your testing setup on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can opt to use `circleci tests run` to receive the file names, output the file names, and save the file names to a temporary location.  You can then subsequently invoke your test runner using the generated file names.
+If your testing setup on CircleCI is not compatible with invoking your test runner in the `circleci tests run` command, you can use an alternative approach. You can opt to use `circleci tests run` to receive the file names and save them to a temporary location. You can then invoke your test runner using the generated file names.
 
 Example:
 
@@ -581,7 +582,7 @@ For example, if parallelism is set to eight, there may only be enough tests afte
 +
 **In most cases, you can still observe substantial time and credit savings** despite spinning up containers/VMs that do not run tests.
 +
-If you would like to maximize credit savings, you can check for whether the parallel container/VM will execute tests as the first step in a job, and if there are no tests to run, terminate job execution.  With this approach, ensure that the logic to run tests happens in a subsequent step. For example:
+If you would like to maximize credit savings, check whether the parallel container/VM will execute tests as the first step in a job. If there are no tests to run, terminate job execution. With this approach, ensure that the logic to run tests happens in a subsequent step. For example:
 +
 ```yml
 steps:
@@ -611,10 +612,10 @@ NOTE: The `halt` command will execute the rest of the _current_ step, regardless
 
 * Orbs that run tests may not work with this new functionality at this time.
 * If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the <<output-test-files-only,section above>> to pipe the list of test files to be run to a `.txt` file and then pass the list of test file names to your shell script.
-* Jobs that are older than the xref:optimize:persist-data.adoc#custom-storage-usage[retention period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
+* Jobs that are older than the xref:optimize:persist-data.adoc#custom-storage-usage[Retention Period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
 * Jobs that upload code coverage reports:
 +
-To ensure that code coverage reports from the original job run are persisted to an artifact in addition to the report that is generated on a re-run, see the following example for a sample Go project:
+Code coverage reports from the original job run need to be persisted alongside reports from re-runs. See the following example for a sample Go project:
 +
 [source,yaml]
 ----
@@ -706,7 +707,7 @@ Ensure that you are passing a list of test filenames (or classnames) *via stdin*
 [#parallel-rerun-failure]
 === Parallel rerun failure
 
-If your job runs tests in parallel and persists files to a workspace, you may see a parallel run on a rerun that fails because the `persist_to_workspace` step could not find any contents in the directory that was specified. This may happen because the parallel run will not always execute tests on a rerun if there are not enough tests to be distributed across all parallel runs.
+If your job runs tests in parallel and persists files to a workspace, you may see a failure on a rerun. The failure occurs when the `persist_to_workspace` step cannot find contents in the specified directory. This happens because parallel runs do not always execute tests on a rerun when there are not enough tests to distribute.
 
 To avoid such a failure, add a `mkdir` command before you run any tests to set up the directory (or directories) that will be persisted to a workspace.
 
@@ -730,7 +731,7 @@ On a rerun, if the parallel run is running tests, `no_files_here` will be popula
 [#approval-jobs]
 === Approval jobs
 
-If your workflow has an approval job, and a failed job containing failed tests that you wish to rerun, you will not be able to select btn:[Rerun failed tests] until the workflow has terminated.  This means that you must cancel the approval job before you can select btn:[Rerun failed tests].
+If your workflow has an approval job and a failed job with failed tests, you cannot select btn:[Rerun failed tests] until the workflow terminates. You must cancel the approval job before you can select btn:[Rerun failed tests].
 
 [#Error-can-not-rerun-failed-tests-no-failed-tests-could-be-found]
 === Error: can not rerun failed tests: no failed tests could be found
@@ -763,7 +764,7 @@ To resolve this error, use "Rerun workflow from failed" to rerun all tests.  "Re
 
 **Question:** I don't see my test framework on this page, can I still use the functionality?
 
-**Answer:** Yes, as long as your job meets the xref:#prerequisites[prerequisites] outlined above. The rerun failed tests functionality is test runner and test framework-agnostic. You can use the methods described in the xref:collect-test-data.adoc[Collect test data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.
+**Answer:** Yes, as long as your job meets the xref:#prerequisites[Prerequisites] outlined above. The rerun failed tests functionality is test runner and test framework-agnostic. You can use the methods described in the xref:collect-test-data.adoc[Collect Test Data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.
 
 From there, follow the xref:#quickstart[Quickstart] section to edit your test command to use `circleci tests run`.
 
@@ -779,7 +780,7 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 **Question:** My maven surefire tests are failing when I try to set this feature up?
 
-**Answer:** You may need to add the `-DfailIfNoTests=false` flag to ensure the testing framework ignores skipped tests instead of reporting a failure when it sees a skipped test on a dependent module.
+**Answer:** You may need to add the `-DfailIfNoTests=false` flag. This flag ensures the testing framework ignores skipped tests instead of reporting a failure when it encounters a skipped test on a dependent module.
 
 ---
 
@@ -795,7 +796,7 @@ If you run into issues, comment on the https://discuss.circleci.com/t/product-la
 
 ---
 
-**Question:** I use Cypress and my job seems to be uploading test results just fine, but the failed test re-run is still running all of the tests instead of just the failed tests
+**Question:** I use Cypress and my job uploads test results, but the failed test re-run still runs all tests instead of just the failed tests
 
 **Answer:** It is possible that the JUnit XML files do not have the proper metadata for the failed tests rerun.  Try using the link:https://www.npmjs.com/package/cypress-circleci-reporter[`cypress-circleci-reporter` package] to ensure the test results being uploaded have the proper JUnit XML format.
 

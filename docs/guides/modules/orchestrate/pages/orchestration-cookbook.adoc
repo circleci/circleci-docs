@@ -161,6 +161,70 @@ include::ROOT:example$logic-statement-examples/when-in-workflows/and-multiple-le
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
+== Combine pipeline parameters with event filters in workflow conditions
+
+=== Goal
+
+You may want to configure a workflow that runs when a specific event occurs (such as a push or pull request) or when a pipeline parameter is set to `true`. To combine pipeline parameters with event filters in a workflow `when` clause, write the condition as a direct expression without `<< >>` delimiters.
+
+The `when` clause accepts an expression as its argument. The expression is evaluated to a boolean value at configuration compilation time, before the workflow runs, so template replacement is not required. For more on using expressions in your configuration, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using expressions in your configuration].
+
+=== Steps
+
+. Define your pipeline parameters in the `parameters` section of your config file. In this example, `deploy` is used as the parameter name, but you can use any parameter name you define:
++
+[,yaml]
+----
+version: 2.1
+
+parameters:
+  deploy:
+    type: boolean
+    default: false
+----
+
+. Write your workflow `when` clause as a direct expression. Reference pipeline parameters using `pipeline.parameters.<name>` directly (without `<< >>` delimiters):
++
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when: pipeline.event.name == "push" or (pipeline.event.name == "pull_request" and pipeline.event.github.pull_request.draft == false) or pipeline.parameters.deploy
+    jobs:
+      - build
+----
+
+=== Notes
+
+* You must define your pipeline parameters in the `parameters` section before using them in workflow conditions. The parameter name `deploy` in this example is just an example—you can use any parameter name you define (for example, `run_tests`, `skip_validation`, or `enable_feature`).
+* The workflow `when` clause expects a direct expression. Use pipeline parameter names directly (for example, `pipeline.parameters.deploy`).
+* Do not mix `<< >>` delimiters with direct expressions. The `<< >>` syntax is used to mark expressions inside string values. If the `when` clause contains `<< >>` delimiters, the entire value is treated as a string with template replacement rather than as a direct expression. This causes the workflow to always be created regardless of the actual condition.
++
+[source,yaml]
+----
+# Incorrect: mixing direct expression with << >> delimiters
+workflows:
+  my-workflow:
+    when: pipeline.event.name == "push" or << pipeline.parameters.deploy >>
+    jobs:
+      - build
+----
++
+* For simple parameter checks, you can use `<< >>` syntax on its own, since the entire value is then a single expression. Remember to replace `deploy` with your own parameter name:
++
+[source,yaml]
+----
+workflows:
+  my-workflow:
+    when: << pipeline.parameters.deploy >>
+    jobs:
+      - build
+----
++
+* For more details, see the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[Using `when` in workflows] and xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using expressions in your configuration] sections in the configuration reference.
+
+include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
+
 == Run a step depending on the output of a nested logic statement
 
 === Goal

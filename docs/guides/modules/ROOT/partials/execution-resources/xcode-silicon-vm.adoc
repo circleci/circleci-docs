@@ -10,12 +10,12 @@
 | Release Notes
 
 | `26.3.0`
-| Xcode 26.3.0 (17C519)
+| Xcode 26.3.0 (17C528)
 | 15.6
 a| `m4pro.medium` +
    `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v16191/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-26-2-beta-2-available[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v16221/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-3-0-rc-2-available[Release Notes]
 
 | `26.2.0`
 | Xcode 26.2.0 (17C52)

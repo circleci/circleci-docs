@@ -153,9 +153,9 @@ In CircleCI, contexts allow you to secure and share environment variables across
 
 In CircleCI:
 
-. Select the **Organization Settings** page.
+. Select the **Org** page.
 +
-image::guides:ROOT:slack-orb-organization-settings.png[Organization Settings]
+image::guides:ROOT:slack-orb-organization-settings.png[Org]
 
 . Under Context, select the blue *Create Context* button and add a unique name, such as `slack-secrets` (that is the name specified in the `config.yml` file above).
 +

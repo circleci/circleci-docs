@@ -4,6 +4,7 @@
  *
  * @param {Object} config - The configuration object.
  * @param {Array<string>} [config.excludeimageextension] - List of image extensions to exclude from detection.
+ * @param {Array<string>} [config.excludepatterns] - List of glob patterns to exclude from detection (e.g., '*-dark.svg').
  */
 module.exports.register = function ({ config }) {
   const logger = this.getLogger("detect-unused-media");
@@ -33,12 +34,22 @@ module.exports.register = function ({ config }) {
       Array.from(extensionToIgnore),
     );
 
+    // Get exclude patterns if provided
+    const excludePatterns = config.excludepatterns || [];
+    if (excludePatterns.length > 0) {
+      logger.info(
+        "Files matching these patterns will be ignored: %s",
+        excludePatterns.join(", "),
+      );
+    }
+
     const imageReferences = extractMediaReferences(contentCatalog, logger);
 
     const unusedMedia = findUnusedMedia(
       contentCatalog,
       imageReferences,
       extensionToIgnore,
+      excludePatterns,
       logger,
     );
 
@@ -99,6 +110,7 @@ function findUnusedMedia(
   contentCatalog,
   mediaReferences,
   extensionToIgnore,
+  excludePatterns,
   logger,
 ) {
   const unusedMedia = new Set();
@@ -109,6 +121,21 @@ function findUnusedMedia(
         file.src.family === "image" && !extensionToIgnore.has(file.src.extname),
     )
     .forEach((img) => {
+      // Check if the file matches any exclude pattern
+      const basename = img.src.basename;
+      const relativePath = img.src.relative.toString();
+      const shouldExclude = excludePatterns.some((pattern) => {
+        // Simple glob pattern matching (supports * wildcard)
+        const regexPattern = pattern
+          .replace(/\./g, '\\.')
+          .replace(/\*/g, '.*');
+        const regex = new RegExp(`^${regexPattern}$`);
+        return regex.test(basename) || regex.test(relativePath);
+      });
+
+      if (shouldExclude) {
+        return; // Skip this file
+      }
       // In AsciiDoc/Antora, images can be referenced with or without the "images/" directory prefix
       // because images/ is the implicit default directory for image family files.
       //
@@ -121,7 +148,7 @@ function findUnusedMedia(
       // 5. guides:ROOT:images/myImage.png (component-qualified with images/)
       // 6. guides:ROOT:myImage.png (component-qualified without images/)
 
-      const relativePath = img.src.relative.toString(); // e.g., "images/myImage.png"
+      // relativePath already declared above for pattern matching
       const moduleQualifiedPath = img.src.module + ":" + relativePath;
       const componentQualifiedPath = img.src.component + ":" + img.src.module + ":" + relativePath;
 

@@ -2,6 +2,16 @@
 
 This guide provides style, voice, and formatting rules for creating and editing CircleCI documentation. Follow these guidelines when working on AsciiDoc content in the docs directory.
 
+## Documentation Overview
+
+For a comprehensive overview of the CircleCI documentation structure, see the auto-generated `llms.txt` file on the live site at https://circleci.com/docs/llms.txt. This file provides:
+- Complete documentation structure with all components
+- Full navigation hierarchy
+- Content statistics and URL patterns
+- Technical stack information
+
+This guide (CLAUDE.md) focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**.
+
 ## Voice and Style
 
 ### Active Voice and Direct Language
@@ -72,7 +82,7 @@ Replace problematic terms with inclusive alternatives:
 
 ### Text Styling
 - **Use bold** for GUI menu options and button text:
-  - Select **Organization Settings** from the sidebar
+  - Select **Org** from the sidebar
   - Click **Set Up Project**
 - **Use italics** for commonly understood technical concepts (not CircleCI features):
   - _Continuous Integration_
@@ -260,12 +270,103 @@ Content for Tab B
 - Use valid table block syntax
 - Close ID quotes properly
 
+## Documentation Architecture
+
+### Component Structure
+
+The CircleCI docs use Antora's component-based architecture:
+
+**When to use each component:**
+
+- **Root**: Landing page and site home
+- **Guides**: Tutorial and how-to content for end users
+- **Reference**: Technical reference material (config, API, CLI)
+- **Orbs**: Orb-related documentation
+- **Server Admin**: Self-hosted server docs (versioned by release)
+- **Services**: Service-specific documentation
+- **Contributors**: Meta-documentation for contributors
+
+### Component Organization
+
+Each component follows this structure:
+```
+docs/component-name/
+├── antora.yml              # Component metadata
+└── modules/
+    └── ROOT/
+        ├── nav.adoc        # Navigation structure
+        └── pages/          # AsciiDoc content
+```
+
+### Navigation Structure (nav.adoc)
+
+Navigation uses AsciiDoc list syntax:
+
+```adoc
+* Top Level Category
+** xref:getting-started:first-steps.adoc[Page Title]
+** Subcategory
+*** xref:getting-started:tutorial.adoc[Tutorial]
+```
+
+Rules:
+- Every page should appear in navigation
+- Use `xref:` for internal cross-references
+- Format: `xref:module:filename.adoc[Link Text]`
+
+### Cross-Referencing Between Components
+
+Full coordinate system:
+```adoc
+xref:component:module:filename.adoc[Link Text]
+```
+
+Examples:
+```adoc
+xref:guides:getting-started:first-steps.adoc[First Steps]
+xref:reference:configuration-reference.adoc[Config Reference]
+```
+
+## Working with the Docs Site
+
+### Previewing Changes Locally
+
+```bash
+npm run start:dev
+```
+
+Opens http://localhost:5000 with live reload
+
+### Build Commands
+
+```bash
+npm run build:docs    # Full site build
+npm run build:ui      # UI bundle only
+npm run build:api-docs # API docs only
+```
+
+### Adding a New Page
+
+1. Create `.adoc` file in appropriate `pages/` directory
+2. Add entry to `nav.adoc`
+3. Write content following style guide
+4. Preview locally
+5. Commit both files
+
+### Troubleshooting
+
+**"Unlisted page" errors**: Page not in `nav.adoc` - add to navigation
+
+**"Unresolved page ID" errors**: Check xref coordinates and file exists
+
+**Navigation not updating**: Restart dev server after nav.adoc changes
+
 ## Answering User Questions About CircleCI
 
 This file focuses on **how to write documentation**. When users ask questions **about using CircleCI** (not about writing docs), you should:
 
 ### Reference the llms.txt File
-The `llms.txt` file in the project root contains:
+The `llms.txt` file (available at https://circleci.com/docs/llms.txt) contains:
 - CircleCI product overview and features
 - Documentation structure and navigation
 - Content areas (Guides, Reference, Orbs, Server Admin)

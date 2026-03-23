@@ -1,7 +1,14 @@
 site:
   title: CircleCI Docs
   url: https://circleci.com/docs
-  robots: allow
+  robots: |
+    User-agent: *
+    Allow: /
+
+    Sitemap: https://circleci.com/docs/sitemap.xml
+
+    # llms.txt - Structured documentation for AI/LLM consumption
+    # See https://circleci.com/docs/llms.txt for machine-readable documentation
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
     google_analytics: 'GTM-W9HDVK'
@@ -35,6 +42,8 @@ content:
   - url: .
     start_path: docs/server-admin-4.2
   - url: .
+    start_path: docs/services
+  - url: .
     start_path: docs/contributors
 ui:
   bundle:
@@ -54,8 +63,8 @@ asciidoc:
     serverversion44: 4.4.7
     serverversion45: 4.5.5
     serverversion46: 4.6.6
-    serverversion47: 4.7.13
-    serverversion48: 4.8.7
+    serverversion47: 4.7.15
+    serverversion48: 4.8.8
     serverversion49: 4.9.1
     terraformversion: 0.15.4
     dockerversion: v28
@@ -68,6 +77,7 @@ asciidoc:
     idseparator: "-"
   extensions:
   - '@asciidoctor/tabs'
+  - ./extensions/theme-icon-extension.js
 urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
@@ -123,3 +133,7 @@ antora:
         primary_border_color: '#008542'
         primary_text_color: '#00381A'
   - require: ./extensions/detect-unused-media-extension.js
+    excludepatterns:
+      - '*-dark.svg'
+      - 'icons/*.svg'
+  - require: ./extensions/llms-txt-generator-extension.js

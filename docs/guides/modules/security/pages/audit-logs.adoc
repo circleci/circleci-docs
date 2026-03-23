@@ -11,7 +11,7 @@ All CircleCI organizations can request audit logs. You need to be an organizatio
 
 === How to request audit logs
 
-. Navigate to menu:Organization Settings[Security].
+. Navigate to menu:Org[Security].
 . Scroll down to the **Audit Logs** section.
 . Select the date range and then select btn:[Request audit logs].
 
@@ -126,7 +126,7 @@ The complete template for the trust relationship is the following:
 }
 ----
 +
-Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique organization ID (found on the menu:Organization Settings[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
+Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique CircleCI organization ID (found on the menu:Org[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
 
 .. Permissions policy
 +
@@ -166,7 +166,7 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 ==== 2. Configure audit log streaming
 
 . Go to the link:https://app.circleci.com/[CircleCI web app].
-. Navigate to menu:Organization Settings[Security].
+. Navigate to menu:Org[Security].
 . Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
 +
 .Stream audit logs section
