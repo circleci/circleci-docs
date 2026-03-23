@@ -392,7 +392,6 @@ The following list shows common and important events found in the audit log. Thi
 
 == Audit log fields
 
-.Audit log fields
 [.table-scroll]
 --
 [cols="1,4", options="header"]
