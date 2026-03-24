@@ -112,7 +112,7 @@ image::guides:ROOT:deploy/auto-generated-commands.png[Generated markers commands
 
 In this step you will configure your new rollback pipeline. You can then use this to revert to a stable version of your application from the CircleCI web app.
 
-. Review the example config file template. It shows how you will perform rollbacks and how to use deploy markers to track these rollbacks
+. Review the example config file template. It shows how you will perform rollbacks and how to use deploy markers to track these rollbacks.
 . Select btn:[Commit config & create Pull Request] to create this rollback configuration template in your repository. The setup will open a pull request in a new tab with the suggested changes.
 +
 NOTE: The configuration will be committed to a new branch called `rollback-pipeline-setup` in the repository you selected earlier in this guided setup.
@@ -167,7 +167,7 @@ In this section you can find a full example of a rollback pipeline config. This 
 *This template assumes the following:*
 
 . Your deployment is annotated with a "version" label.
-. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way
+. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way.
 ====
 
 .Example rollback pipeline configuration
