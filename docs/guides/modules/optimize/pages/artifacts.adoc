@@ -12,6 +12,7 @@ Artifacts persist data after a job completes and store the outputs of your build
 
 For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available after the process has finished.
 
+.Artifacts data flow
 image::guides:ROOT:Diagram-v3-Artifact.png[Artifacts data flow]
 
 Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play.
@@ -20,6 +21,7 @@ If a job produces persistent artifacts such as screenshots, coverage reports, co
 
 Navigate to a pipeline's *Job* page on the link:https://app.circleci.com/[CircleCI web app] to find the *Artifacts* tab. Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects. Individual artifact files have a maximum size limit of 3GB.
 
+.Artifacts tab in job page
 image::guides:ROOT:artifacts.png[Artifacts tab screenshot]
 
 By default, artifact storage duration is set to 30 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 30 days is also the maximum storage duration you can set.
@@ -28,7 +30,7 @@ For information on managing network and storage usage, see the xref:persist-data
 
 NOTE: Uploaded artifact filenames are encoded using the link:https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html[Java URLEncoder]. Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
-If you need to restrict the connections allowed in your jobs, consider enabling xref:security:ip-ranges.adoc[IP ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
+If you need to restrict the connections allowed in your jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
 [#uploading-artifacts]
 == Uploading artifacts
@@ -127,6 +129,7 @@ The `ulimit -c unlimited` removes the file size limit on core dump files. With t
 
 Finally, the core dump files are stored to the artifacts service with `store_artifacts` in the `/tmp/core_dumps` directory.
 
+.Core dump file in Artifacts page
 image::guides:ROOT:core_dumps.png[Core dump file in Artifacts page]
 
 When CircleCI runs a job, a link to the core dump file appears in the *Artifacts* tab of the *Job* page.
@@ -138,7 +141,7 @@ include::ROOT:partial$notes/server-api-examples.adoc[]
 
 To download your artifacts with `curl`, follow the steps below.
 
-. xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a personal API token] and copy it to the clipboard.
+. xref:toolkit:managing-api-tokens.adoc#creating-a-personal-api-token[Create a Personal API Token] and copy it to the clipboard.
 . In a Terminal window, `cd` to a directory where you want to store the artifacts.
 . Run the commands below. Use the table beneath the commands to substitute actual values for all variables that start with `:`.
 
@@ -240,7 +243,7 @@ If your pipelines build a binary or uberJAR, consider whether these are necessar
 [discrete#only-upload-test-results-on-failure]
 ==== Only upload test results on failure
 
-xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[The `when` attribute] lets you filter what happens within a step in your configuration. The `when` attribute can be set to `on_success`, `on_fail` or `always`. To only upload artifacts when tests fail, add the `when: on_fail` attribute to the `store_artifacts` step:
+xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[The When Attribute] lets you filter what happens within a step in your configuration. The `when` attribute can be set to `on_success`, `on_fail` or `always`. To only upload artifacts when tests fail, add the `when: on_fail` attribute to the `store_artifacts` step:
 
 .Upload artifacts only on failure
 [,yaml]
@@ -263,8 +266,8 @@ jobs:
 [#next-steps]
 == Next steps
 
-* xref:persist-data.adoc[Persisting data]
-* xref:caching.adoc[Caching dependencies]
-* xref:caching-strategy.adoc[Caching strategies]
+* xref:persist-data.adoc[Persisting Data]
+* xref:caching.adoc[Caching Dependencies]
+* xref:caching-strategy.adoc[Caching Strategies]
 * xref:orchestrate:workspaces.adoc[Workspaces]
-* xref:optimizations.adoc[Optimizations overview]
+* xref:optimizations.adoc[Optimizations Overview]
