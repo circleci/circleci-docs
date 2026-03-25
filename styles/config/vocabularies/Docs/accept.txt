@@ -1,6 +1,6 @@
-\bgithub organization\b
+\b[Gg]it[Hh]ub organization\b
 \b[Cc]ircle[cC][iI] organization\b
-\bbitbucket organization\b
+\b[Bb]itbucket organization\b
 .circleci/config.yml
 [Aa]gentless
 [Aa]gentic

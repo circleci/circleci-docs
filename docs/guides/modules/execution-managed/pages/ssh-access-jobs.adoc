@@ -17,11 +17,11 @@ NOTE: Regular CircleCI pipelines execute each step in a non-interactive shell. S
 [#steps]
 == Steps to access a job with SSH
 
-NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine runner 3] or xref:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container runner] pages for steps.
+NOTE: **Using self-hosted runners?** To use SSH reruns with CircleCI runners you will first need to enable the SSH rerun feature. Refer to the xref:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner 3] or xref:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner] pages for steps.
 
 . If you have not already done so, add an SSH key to your link:https://app.circleci.com/settings/user/job-ssh-keys[User Settings]. This key will be used to connect to container or virtual machine (VM) that is running your job.
 +
-NOTE: If you are using a GitHub or Bitbucket organization, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer. For more on organizaiton types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide].
+NOTE: If you are using a GitHub or Bitbucket organization, you can add an SSH key to your VCS account (https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/[GitHub] or https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html[Bitbucket]) rather than in the CircleCI app under https://app.circleci.com/settings/user/job-ssh-keys[User Settings] if you prefer. For more on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
 . Navigate to the job view for the job you want to rerun.
 .. From the CircleCI web app link:https://app.circleci.com/pipelines/[pipelines page], find the pipeline that contains your job.
@@ -51,7 +51,7 @@ If your job has parallel steps, CircleCI launches more than one VM to perform th
 NOTE: If you rerun a workflow containing a job that was previously rerun with SSH, the new job run will have SSH enabled. The job will have SSH enabled even if the SSH capability is link:https://support.circleci.com/hc/en-us/articles/13936711308827-Disable-re-run-job-with-SSH-[disabled at the project level].
 
 [#debugging-permission-denied-publickey]
-== Debugging: "Permission denied (publickey)"
+== Debugging: "Permission denied"
 
 If you run into permission issues trying to SSH to your job, try the following in the sections below.
 
@@ -88,8 +88,8 @@ logged in as :username.
 
 . If you do not see this output, try troubleshooting with the following resources:
 +
-* https://help.github.com/articles/error-permission-denied-publickey[Troubleshooting your SSH keys with GitHub]
-* https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html[Troubleshooting your SSH keys with Bitbucket]
+* https://help.github.com/articles/error-permission-denied-publickey[Troubleshooting your SSH keys with GitHub].
+* https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html[Troubleshooting your SSH keys with Bitbucket].
 
 [#ensure-authenticating-as-the-correct-user]
 === Verify you are authenticating as the correct user
@@ -157,9 +157,3 @@ Or use `-vvv` for maximum verbosity:
 ----
 $ ssh -vvv git@github.com
 ----
-
-[#see-also]
-== See also
-
-* xref:integration:github-integration.adoc[GitHub integration]
-* xref:integration:bitbucket-integration.adoc[Bitbucket integration]
