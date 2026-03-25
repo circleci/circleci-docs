@@ -6,26 +6,27 @@ allowing you to understand and visualise the behavior of your pipelines.
 
 == Configure OpenTelemetry export via the API
 
-The API has the following endpoints, all of which require org admin privileges.
+The API has the following endpoints, all of which require organization admin privileges.
 
-* `GET /api/v2/otel/exporters?org_id=...` - List the exporter configurations for the given org ID.
+* `GET /api/v2/otel/exporters?org_id=...` - List the exporter configurations for the given organization ID.
 * `POST /api/v2/otel/exporters` - Add an exporter configuration.
 * `DELETE /api/v2/otel/exporters/:id` - Delete an exporter configuration.
 
-https://circleci.com/docs/api/v2/#tag/OTel[Full reference for the APIs.]
+link:https://circleci.com/docs/api/v2/#tag/OTel[Full reference for the APIs.]
 
 === Example setup for exporting to Honeycomb
 
 You need three things:
 
-* A CircleCI token belonging to an org admin.
-* The CircleCI ID of the org.
+* A CircleCI personal API token belonging to an organization admin.
+* The CircleCI organization ID.
 * A Honeycomb API token.
 
-Then run this command, substituting those three values.
+Then run this command, substituting your own values:
 
+[source,console]
 ----
-curl -sH "Circle-Token: <CircleCI Token>" -X POST -d '{"org_id": "<CircleCI org ID>", "endpoint": "api.honeycomb.io:443", "protocol": "grpc", "headers": {"x-honeycomb-team": "<Honeycomb API token>"}}' 'https://circleci.com/api/v2/otel/exporters'
+$ curl -sH "Circle-Token: <CircleCI Token>" -X POST -d '{"org_id": "<CircleCI org ID>", "endpoint": "api.honeycomb.io:443", "protocol": "grpc", "headers": {"x-honeycomb-team": "<Honeycomb API token>"}}' 'https://circleci.com/api/v2/otel/exporters'
 ----
 
 == Mapping of CircleCI primitives to OpenTelemetry spans
@@ -43,7 +44,9 @@ deviation from the OpenTelemetry semantic conventions which specifies
 
 The span attributes are as follows:
 
-[width="100%",cols="34%,33%,33%",options="header",]
+[.table-scroll]
+--
+[.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
 |`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
@@ -59,7 +62,7 @@ CircleCI pipeline ID.
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
-|https://app.circleci.com/pipeline/f74a9582-9dd4-4b89-8801-4357de39ca5f
+|pass:[https://app.circleci.com/pipeline/f74a9582-9dd4-4b89-8801-4357de39ca5f]
 |A URL which will redirect you to the page in the web UI for the
 pipeline.
 
@@ -109,9 +112,10 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |https://github.com/my-org/my-repo |The URL for
+|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
 the VCS repository.
 |===
+--
 
 === Workflow
 
@@ -125,7 +129,9 @@ the workflow ID and URL, not the pipeline ID.
 
 The span attributes are as follows:
 
-[width="100%",cols="34%,33%,33%",options="header",]
+[.table-scroll]
+--
+[.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
 |`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
@@ -145,7 +151,7 @@ CircleCI workflow ID.
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
-|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
+|pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
 |A URL which will redirect you to the page in the web UI for the
 workflow.
 
@@ -206,9 +212,10 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |https://github.com/my-org/my-repo |The URL for
+|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
 the VCS repository.
 |===
+--
 
 === Job
 
@@ -223,7 +230,9 @@ ID respectively.
 
 The span attributes are as follows:
 
-[width="100%",cols="34%,33%,33%",options="header",]
+[.table-scroll]
+--
+[.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
 |`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
@@ -244,7 +253,7 @@ CircleCI workflow ID.
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
-|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
+|pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
 |A URL which will redirect you to the page in the web UI for the
 workflow that contains this job.
 
@@ -259,7 +268,7 @@ to OpenTelemetry semantic conventions. Possible values are `success`,
 `com.circleci.job.status`.
 
 |`cicd.pipeline.task.run.url.full`
-|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35
+|pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35]
 |A URL which will redirect you to the page in the web UI for the job.
 
 |`cicd.pipeline.task.type` |build |The CircleCI job type, for example `build`,
@@ -335,9 +344,10 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |https://github.com/my-org/my-repo |The URL for
+|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
 the VCS repository.
 |===
+--
 
 === Task
 
@@ -359,7 +369,9 @@ and task index, not a first-class CircleCI identifier.
 
 The span attributes are as follows:
 
-[width="100%",cols="34%,33%,33%",options="header",]
+[.table-scroll]
+--
+[.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
 |`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
@@ -380,7 +392,7 @@ CircleCI workflow ID.
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
-|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
+|pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
 |A URL which will redirect you to the page in the web UI for the
 workflow that contains this task.
 
@@ -395,7 +407,7 @@ according to OpenTelemetry semantic conventions. Possible values are
 `success`, `failure`, `cancellation`, and `error`.
 
 |`cicd.pipeline.task.run.url.full`
-|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/3c4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f80
+|pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/3c4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f80]
 |A URL for the job page for the job containing this task.
 
 |`cicd.pipeline.task.type` |build |The CircleCI job type. This will always
@@ -494,9 +506,10 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |https://github.com/my-org/my-repo |The URL for
+|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
 the VCS repository.
 |===
+--
 
 === Step
 
@@ -515,7 +528,9 @@ step-specific identifier.
 
 The span attributes are as follows:
 
-[width="100%",cols="34%,33%,33%",options="header",]
+[.table-scroll]
+--
+[.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
 |`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
@@ -536,7 +551,7 @@ CircleCI workflow ID.
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
-|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
+|pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
 |A URL which will redirect you to the page in the web UI for the
 workflow that contains this step.
 
@@ -550,7 +565,7 @@ according to OpenTelemetry semantic conventions. Possible values are
 `success`, `failure`, `cancellation`, `timeout`, and `error`.
 
 |`cicd.pipeline.task.run.url.full`
-|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35
+|pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35]
 |A URL which will redirect you to the page in the web UI for the job
 containing this step.
 
@@ -656,6 +671,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |https://github.com/my-org/my-repo |The URL for
+|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
 the VCS repository.
 |===
+--
