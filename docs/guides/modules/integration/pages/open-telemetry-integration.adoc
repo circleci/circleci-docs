@@ -338,3 +338,324 @@ from the last path segment of the repository URL.
 |vcs.repository.url.full |https://github.com/my-org/my-repo |The URL for
 the VCS repository.
 |===
+
+=== Task
+
+A task is one parallel run within a job. For jobs with parallelism=1 there
+will be a single task with index 0.
+
+The name of the span will be `Task: ++{++job name} - ++{++task index}` (for
+example, `Task: build - 0`). This is a deviation from the OTel semantic
+conventions which specifies
+`++{++cicd.pipeline.action.name} ++{++cicd.pipeline.task.name}`.
+
+In OTel semantic conventions, the task maps to a "`pipeline task`" and the
+containing workflow maps to the "`pipeline run`". As a result,
+`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow name
+and ID respectively.
+
+The `cicd.pipeline.task.run.id` is a synthetic UUID derived from the job ID
+and task index, not a first-class CircleCI identifier.
+
+The span attributes are as follows:
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Trace Attribute |Example Value |Description
+|cicd.pipeline.action.name |RUN |This is for compatibility with the
+OpenTelemetry semantic conventions. It will always be `RUN`.
+
+|cicd.pipeline.name |build-and-test |The name of the workflow that
+contains this task.
+
+|cicd.pipeline.result |success |The result of the workflow according to
+OpenTelemetry semantic conventions. Possible values are `success`,
+`failure`, and `cancellation`. The actual workflow status is available
+in com.circleci.workflow.status.
+
+|cicd.pipeline.run.id |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
+CircleCI workflow ID.
+
+|cicd.pipeline.run.state |executing |This is for compatibility with the
+OpenTelemetry semantic conventions. It will always be `executing`.
+
+|cicd.pipeline.run.url.full
+|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
+|A URL which will redirect you to the page in the web UI for the
+workflow that contains this task.
+
+|cicd.pipeline.task.name |build - 0 |The name of the task, in the form
+`++{++job name} - ++{++task index}`.
+
+|cicd.pipeline.task.run.id |3c4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f80 |An
+ID for the task. Note this is not the internal CircleCI ID for the task.
+
+|cicd.pipeline.task.run.result |success |The result of the task
+according to OpenTelemetry semantic conventions. Possible values are
+`success`, `failure`, `cancellation`, and `error`.
+
+|cicd.pipeline.task.run.url.full
+|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/3c4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f80
+|A URL for the job page for the job containing this task.
+
+|cicd.pipeline.task.type |build |The CircleCI job type. This will always
+be `build` for a task as no other job types create tasks at this time.
+
+|com.circleci.job.id |cbf6a4ea-a078-4d72-8641-cb5ec149fc35 |The CircleCI
+job ID.
+
+|com.circleci.job.name |build |The name of the job.
+
+|com.circleci.job.number |123 |The CircleCI job number.
+
+|com.circleci.job.status |success |The status of the job in CircleCI.
+
+|com.circleci.job.type |build |The CircleCI job type. This will always be
+`build` for a task as no other job types create tasks at this time.
+
+|com.circleci.org.id |cb53b18d-7379-42ff-915f-29b6f3b86187 |The ID of
+the CircleCI organization in which this ran.
+
+|com.circleci.pipeline.id |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
+CircleCI pipeline ID.
+
+|com.circleci.project.id |96781ce1-9288-4d06-89e6-62fc620117db |The ID
+of the CircleCI project in which this ran.
+
+|com.circleci.resource.class |medium |The resource class used.
+
+|com.circleci.resource.cpu |2 |The number of vCPUs allocated.
+
+|com.circleci.resource.executor |docker |The executor type.
+
+|com.circleci.resource.image |cimg/base:2024.01 |The Docker image used,
+if applicable.
+
+|com.circleci.resource.name |Medium |The human-readable name of the
+resource class.
+
+|com.circleci.resource.ram |4096 |The amount of RAM allocated in MB.
+
+|com.circleci.task.index |0 |The zero-based index of this task within
+its parallel job.
+
+|com.circleci.task.result |SUCCEEDED |The raw result string from the
+task runner. Only present when the task has completed.
+
+|com.circleci.task.state |COMPLETED |The raw state string from the task
+runner.
+
+|com.circleci.workflow.id |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
+CircleCI workflow ID.
+
+|com.circleci.workflow.name |build-and-test |The name of the workflow
+that contains this task.
+
+|com.circleci.workflow.status |success |The status of the workflow in
+CircleCI.
+
+|error.type |FAILED |The task result when it represents an error
+condition. Only present for results that map to a `failure` or `error`
+result.
+
+|service.name |CircleCI Pipelines |This will always be
+`CircleCI Pipelines`.
+
+|vcs.change.id |42 |The GitHub pull request number. Only present for
+pipelines triggered by a pull request.
+
+|vcs.change.state |open |The state of the GitHub pull request. Only
+present for pipelines triggered by a pull request.
+
+|vcs.change.title |Fix the thing |The title of the GitHub pull request.
+Only present for pipelines triggered by a pull request.
+
+|vcs.provider.name |github |If the pipeline was generated in connection
+with a Git repo this shows the provider of the Git repo. Possible values
+are `bitbucket`, `github`, and `gitlab`.
+
+|vcs.ref.base.name |main |For PR pipelines this will be the name of the
+ref the PR is merging into. For branch pipelines this will be the branch
+name. For tag pipelines this will be the tag name.
+
+|vcs.ref.base.revision |14c29a1b2454ae4dd966f27e3b46aec7680d8c14 |The
+Git SHA for the base ref.
+
+|vcs.ref.head.name |my-feature-branch |For PR pipelines this will be the
+name of the ref the PR is merging from. For branch pipelines this will
+be the branch name. For tag pipelines this will be the tag name.
+
+|vcs.ref.head.revision |2fe3ff8ff80a45f9cbd8bcc14c774a1d3ac588e4 |The
+Git SHA for the head ref.
+
+|vcs.ref.type |branch |Either `branch` or `tag`, depending on the type
+of the ref. Only present when the pipeline is building a branch or tag.
+
+|vcs.repository.name |my-repo |The name of the VCS repository, derived
+from the last path segment of the repository URL.
+
+|vcs.repository.url.full |https://github.com/my-org/my-repo |The URL for
+the VCS repository.
+|===
+
+=== Step
+
+A step is one step within a task. Each task may contain multiple steps.
+
+The name of the span will be `Step: ++{++step name}` (for example,
+`Step: Checkout code`). This is a deviation from the OTel semantic
+conventions which specifies
+`++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
+
+In OTel semantic conventions, the step maps to a "`pipeline task`" and the
+containing workflow maps to the "`pipeline run`". As a result,
+`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow name
+and ID respectively. The `cicd.pipeline.task.run.id` is the job ID rather
+than a step-specific identifier.
+
+The span attributes are as follows:
+
+[width="100%",cols="34%,33%,33%",options="header",]
+|===
+|Trace Attribute |Example Value |Description
+|cicd.pipeline.action.name |RUN |This is for compatibility with the
+OpenTelemetry semantic conventions. It will always be `RUN`.
+
+|cicd.pipeline.name |build-and-test |The name of the workflow that
+contains this step.
+
+|cicd.pipeline.result |success |The result of the workflow according to
+OpenTelemetry semantic conventions. Possible values are `success`,
+`failure`, and `cancellation`. The actual workflow status is available
+in com.circleci.workflow.status.
+
+|cicd.pipeline.run.id |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
+CircleCI workflow ID.
+
+|cicd.pipeline.run.state |executing |This is for compatibility with the
+OpenTelemetry semantic conventions. It will always be `executing`.
+
+|cicd.pipeline.run.url.full
+|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
+|A URL which will redirect you to the page in the web UI for the
+workflow that contains this step.
+
+|cicd.pipeline.task.name |Checkout code |The name of the step.
+
+|cicd.pipeline.task.run.id |cbf6a4ea-a078-4d72-8641-cb5ec149fc35 |The
+CircleCI job ID.
+
+|cicd.pipeline.task.run.result |success |The result of the step
+according to OpenTelemetry semantic conventions. Possible values are
+`success`, `failure`, `cancellation`, `timeout`, and `error`.
+
+|cicd.pipeline.task.run.url.full
+|https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35
+|A URL which will redirect you to the page in the web UI for the job
+containing this step.
+
+|cicd.pipeline.task.type |checkout |The type of the step, for example
+`infrastructure`, `checkout`, `run`, etc.
+
+|com.circleci.job.id |cbf6a4ea-a078-4d72-8641-cb5ec149fc35 |The CircleCI
+job ID.
+
+|com.circleci.job.name |build |The name of the job that contains this
+step.
+
+|com.circleci.job.number |123 |The CircleCI job number.
+
+|com.circleci.job.status |success |The status of the job in CircleCI.
+
+|com.circleci.job.type |build |The CircleCI job type, for example
+`build`, `approval`, etc.
+
+|com.circleci.org.id |cb53b18d-7379-42ff-915f-29b6f3b86187 |The ID of
+the CircleCI organization in which this ran.
+
+|com.circleci.pipeline.id |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
+CircleCI pipeline ID.
+
+|com.circleci.project.id |96781ce1-9288-4d06-89e6-62fc620117db |The ID
+of the CircleCI project in which this ran.
+
+|com.circleci.resource.class |medium |The resource class used.
+
+|com.circleci.resource.cpu |2 |The number of vCPUs allocated.
+
+|com.circleci.resource.executor |docker |The executor type.
+
+|com.circleci.resource.image |cimg/base:2024.01 |The Docker image used,
+if applicable.
+
+|com.circleci.resource.name |Medium |The human-readable name of the
+resource class.
+
+|com.circleci.resource.ram |4096 |The amount of RAM allocated in MB.
+
+|com.circleci.step.command |echo hello |The command run by the step, if
+applicable.
+
+|com.circleci.step.exit_code |0 |The exit code of the step command.
+
+|com.circleci.task.index |0 |The zero-based index of the task this step
+belongs to.
+
+|com.circleci.task.result |SUCCEEDED |The raw result string of the
+containing task.
+
+|com.circleci.task.state |COMPLETED |The raw state string of the
+containing task.
+
+|com.circleci.workflow.id |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
+CircleCI workflow ID.
+
+|com.circleci.workflow.name |build-and-test |The name of the workflow
+that contains this step.
+
+|com.circleci.workflow.status |success |The status of the workflow in
+CircleCI.
+
+|error.type |FAILED |The task result when it represents an error
+condition. Only present for steps that have a result of `failed`,
+`timedout`, or `infrastructure_fail`.
+
+|service.name |CircleCI Pipelines |This will always be
+`CircleCI Pipelines`.
+
+|vcs.change.id |42 |The GitHub pull request number. Only present for
+pipelines triggered by a pull request.
+
+|vcs.change.state |open |The state of the GitHub pull request. Only
+present for pipelines triggered by a pull request.
+
+|vcs.change.title |Fix the thing |The title of the GitHub pull request.
+Only present for pipelines triggered by a pull request.
+
+|vcs.provider.name |github |If the pipeline was generated in connection
+with a Git repo this shows the provider of the Git repo. Possible values
+are `bitbucket`, `github`, and `gitlab`.
+
+|vcs.ref.base.name |main |For PR pipelines this will be the name of the
+ref the PR is merging into. For branch pipelines this will be the branch
+name. For tag pipelines this will be the tag name.
+
+|vcs.ref.base.revision |14c29a1b2454ae4dd966f27e3b46aec7680d8c14 |The
+Git SHA for the base ref.
+
+|vcs.ref.head.name |my-feature-branch |For PR pipelines this will be the
+name of the ref the PR is merging from. For branch pipelines this will
+be the branch name. For tag pipelines this will be the tag name.
+
+|vcs.ref.head.revision |2fe3ff8ff80a45f9cbd8bcc14c774a1d3ac588e4 |The
+Git SHA for the head ref.
+
+|vcs.ref.type |branch |Either `branch` or `tag`, depending on the type
+of the ref. Only present when the pipeline is building a branch or tag.
+
+|vcs.repository.name |my-repo |The name of the VCS repository, derived
+from the last path segment of the repository URL.
+
+|vcs.repository.url.full |https://github.com/my-org/my-repo |The URL for
+the VCS repository.
+|===
