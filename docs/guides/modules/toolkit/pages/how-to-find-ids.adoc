@@ -23,11 +23,7 @@ xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in envir
 
 To view all environment variables available at the job level, follow these steps:
 
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
-. Expand a workflow run.
-. Select a job from that workflow run.
+include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
 . On the job page, expand the menu:Preparing environment variables[] step.
 . Locate the relevant environment variable(s) and note the associated value(s).
 
