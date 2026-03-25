@@ -12,6 +12,8 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 
 While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by xref:env-vars.adoc#parameters-and-bash-environment[using `BASH_ENV`]. This approach is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
+IMPORTANT: To access environment variables in the same step where they are set, you **must** run `source "$BASH_ENV"` after writing to `$BASH_ENV`. This is because writing to `$BASH_ENV` only adds commands to a file, it does not execute them. The `source` command reads and executes the file's contents in the current shell, making the variables available immediately. Without sourcing, the variables will only be available in subsequent steps when CircleCI automatically sources `$BASH_ENV` at the start of each new step.
+
 ```yaml
 version: 2.1
 
@@ -22,11 +24,10 @@ jobs:
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
-          # Add source command to execute code and make variables
-          # available in current step.
           command: |
             echo 'export PATH=/path/to/foo/bin:"$PATH"' >> "$BASH_ENV"
             echo "export VERY_IMPORTANT=VALUE_CONTENT" >> "$BASH_ENV"
+            # Source BASH_ENV to make variables available in this step
             source "$BASH_ENV"
 ```
 
