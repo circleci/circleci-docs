@@ -51,7 +51,7 @@ If your job has parallel steps, CircleCI launches more than one VM to perform th
 NOTE: If you rerun a workflow containing a job that was previously rerun with SSH, the new job run will have SSH enabled. The job will have SSH enabled even if the SSH capability is link:https://support.circleci.com/hc/en-us/articles/13936711308827-Disable-re-run-job-with-SSH-[disabled at the project level].
 
 [#debugging-permission-denied-publickey]
-== Debugging: `permission denied (publickey)`
+== Debugging: "Permission denied (publickey)"
 
 If you run into permission issues trying to SSH to your job, try the following in the sections below.
 
@@ -94,11 +94,9 @@ logged in as :username.
 [#ensure-authenticating-as-the-correct-user]
 === Verify you are authenticating as the correct user
 
-You must authenticate as the user who triggered the rerun. Make sure your username is in the 'Enable SSH' step.
+You must authenticate as the user who triggered the rerun and who has access to the project. Verify your username appears in the 'Enable SSH' step.
 
-If you have multiple accounts, verify you are authenticated as the correct one. In order to SSH into a CircleCI build, the username must be one which has access to the project being built.
-
-If you are authenticating as the wrong user, you can try to resolve this by offering a different SSH key with `ssh -i`. See the next section for guidance on confirming which key is being offered.
+If you are authenticating as the wrong user, specify a different SSH key using `ssh -i`. See the next section for guidance on confirming which key is being offered.
 
 [#ensure-the-correct-key-is-offered-to-circleci]
 === Verify the correct key is offered to CircleCI
