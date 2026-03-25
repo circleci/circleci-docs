@@ -1,3 +1,33 @@
+= Open Telemetry for CI/CD
+
+CircleCI supports Open Telemetry for completed jobs. 
+
+== Manage Organization Settings via API
+
+The API has the following endpoints:
+
+* GET /api/v2/otel/exporters?org_id=... - List the exporter configurations for the given org ID.
+* POST /api/v2/otel/exporters - Add an exporter configuration.
+* DELETE /api/v2/otel/exporters/:id - Delete an exporter configuration.
+
+https://circleci.com/docs/api/v2/#tag/OTel[Full reference for the apis.] 
+
+All of the APIs require manage-org permission for the org in question.
+
+=== Honeycomb example
+
+You need three things:
+
+* A CircleCI token belonging to an org admin.
+* The CircleCI ID of the org.
+* A Honeycomb API token.
+
+Then run this command, substituting those three values.
+
+----
+curl -sH "Circle-Token: <CircleCI Token>" -X POST -d '{"org_id": "<CircleCI org ID>", "endpoint": "api.honeycomb.io:443", "protocol": "grpc", "headers": {"x-honeycomb-team": "<Honeycomb API token>"}}' 'https://circleci.com/api/v2/otel/exporters'
+----
+
 == Mapping of CircleCI primitives to OpenTelemetry spans
 
 The following is a description of the span data emitted for each of the
