@@ -1,16 +1,16 @@
 = Open Telemetry for CI/CD
 
-CircleCI supports Open Telemetry for completed jobs. 
+CircleCI supports Open Telemetry for completed jobs.
 
 == Manage Organization Settings via API
 
 The API has the following endpoints:
 
-* GET /api/v2/otel/exporters?org_id=... - List the exporter configurations for the given org ID.
-* POST /api/v2/otel/exporters - Add an exporter configuration.
-* DELETE /api/v2/otel/exporters/:id - Delete an exporter configuration.
+* `GET /api/v2/otel/exporters?org_id=...` - List the exporter configurations for the given org ID.
+* `POST /api/v2/otel/exporters` - Add an exporter configuration.
+* `DELETE /api/v2/otel/exporters/:id` - Delete an exporter configuration.
 
-https://circleci.com/docs/api/v2/#tag/OTel[Full reference for the apis.] 
+https://circleci.com/docs/api/v2/#tag/OTel[Full reference for the APIs.]
 
 All of the APIs require manage-org permission for the org in question.
 
@@ -37,8 +37,8 @@ always been possible.
 
 === Pipeline
 
-The name of the span will be `Pipeline: ++{++cicd.pipeline.name}`. This
-is a deviation from the OTel semantic conventions which specifies
+The name of the span will be `Pipeline: ++{++cicd.pipeline.name}` which is a
+deviation from the OpenTelemetry semantic conventions which specifies
 `++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
 
 The span attributes are as follows:
@@ -46,8 +46,8 @@ The span attributes are as follows:
 [width="100%",cols="34%,33%,33%",options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `RUN`.
+|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |Integration |The name of the pipeline. For GitHub
 OAuth pipelines this will be the name of the project.
@@ -55,8 +55,8 @@ OAuth pipelines this will be the name of the project.
 |`cicd.pipeline.run.id` |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
 CircleCI pipeline ID.
 
-|`cicd.pipeline.run.state` |executing |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `executing`.
+|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |https://app.circleci.com/pipeline/f74a9582-9dd4-4b89-8801-4357de39ca5f
@@ -68,7 +68,7 @@ the CircleCI organization in which this ran.
 
 |`com.circleci.pipeline.id` |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
 CircleCI pipeline ID. This is the same value as `cicd.pipeline.run.id`,
-which is present for OTel semantic convention compatibility.
+which is present for OpenTelemetry semantic convention compatibility.
 
 |`com.circleci.project.id` |96781ce1-9288-4d06-89e6-62fc620117db |The ID
 of the CircleCI project in which this ran.
@@ -85,7 +85,7 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |github |If the pipeline was generated in connection
+|`vcs.provider.name` | `github` |If the pipeline was generated in connection
 with a Git repo this shows the provider of the Git repo. Possible values
 are `bitbucket`, `github`, and `gitlab`.
 
@@ -115,34 +115,34 @@ the VCS repository.
 
 === Workflow
 
-The name of the span will be `Workflow: ++{++workflow name}`. This is a
-deviation from the OTel semantic conventions which specifies
+The name of the span will be `Workflow: ++{++workflow name}` which is a
+deviation from the OpenTelemetry semantic conventions which specifies
 `++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
 
-In OTel semantic conventions, the workflow maps to a "`pipeline run`".
-As a result, `cicd.pipeline.run.id` and `cicd.pipeline.run.url.full`
-contain the workflow ID and URL, not the pipeline ID.
+In OpenTelemetry semantic conventions, the workflow maps to a "`pipeline run`".
+As a result, `cicd.pipeline.run.id` and `cicd.pipeline.run.url.full` contain
+the workflow ID and URL, not the pipeline ID.
 
 The span attributes are as follows:
 
 [width="100%",cols="34%,33%,33%",options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `RUN`.
+|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow.
 
 |`cicd.pipeline.result` |success |The result of the workflow according to
 OpenTelemetry semantic conventions. Possible values are `success`,
 `failure`, and `cancellation`. The actual workflow status is available
-in com.circleci.workflow.status.
+in `com.circleci.workflow.status`.
 
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `executing`.
+|`cicd.pipeline.run.state` |executing |This will always be `executing` for
+compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
@@ -182,7 +182,7 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |github |If the pipeline was generated in connection
+|`vcs.provider.name` |`github` |If the pipeline was generated in connection
 with a Git repo this shows the provider of the Git repo. Possible values
 are `bitbucket`, `github`, and `gitlab`.
 
@@ -212,22 +212,22 @@ the VCS repository.
 
 === Job
 
-The name of the span will be `Job: ++{++job name}`. This is a deviation
-from the OTel semantic conventions which specifies
+The name of the span will be `Job: ++{++job name}` which is a deviation from
+the OpenTelemetry semantic conventions which specifies
 `++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
 
-In OTel semantic conventions, the job maps to a "`pipeline task`" and
+In OpenTelemetry semantic conventions, the job maps to a "`pipeline task`" and
 the containing workflow maps to the "`pipeline run`". As a result,
-`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow
-name and ID respectively.
+`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow name and
+ID respectively.
 
 The span attributes are as follows:
 
 [width="100%",cols="34%,33%,33%",options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `RUN`.
+|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow that
 contains this job.
@@ -235,13 +235,13 @@ contains this job.
 |`cicd.pipeline.result` |success |The result of the workflow according to
 OpenTelemetry semantic conventions. Possible values are `success`,
 `failure`, and `cancellation`. The actual workflow status is available
-in com.circleci.workflow.status.
+in `com.circleci.workflow.status`.
 
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `executing`.
+|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
@@ -256,13 +256,13 @@ CircleCI job ID.
 |`cicd.pipeline.task.run.result` |success |The result of the job according
 to OpenTelemetry semantic conventions. Possible values are `success`,
 `failure`, and `cancellation`. The CircleCI job status is available in
-com.circleci.job.status.
+`com.circleci.job.status`.
 
 |`cicd.pipeline.task.run.url.full`
 |https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35
 |A URL which will redirect you to the page in the web UI for the job.
 
-|`cicd.pipeline.task.type` |build |The CircleCI job type, e.g. `build`,
+|`cicd.pipeline.task.type` |build |The CircleCI job type, for example `build`,
 `approval`, etc.
 
 |`com.circleci.job.id` |cbf6a4ea-a078-4d72-8641-cb5ec149fc35 |The CircleCI
@@ -274,7 +274,7 @@ job ID.
 
 |`com.circleci.job.status` |success |The status of the job in CircleCI.
 
-|`com.circleci.job.type` |build |The CircleCI job type, e.g. `build`,
+|`com.circleci.job.type` |build |The CircleCI job type, for example `build`,
 `approval`, etc.
 
 |`com.circleci.org.id` |cb53b18d-7379-42ff-915f-29b6f3b86187 |The ID of
@@ -311,7 +311,7 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |github |If the pipeline was generated in connection
+|`vcs.provider.name` |`github` |If the pipeline was generated in connection
 with a Git repo this shows the provider of the Git repo. Possible values
 are `bitbucket`, `github`, and `gitlab`.
 
@@ -345,14 +345,14 @@ A task is one parallel run within a job. For jobs with parallelism=1 there
 will be a single task with index 0.
 
 The name of the span will be `Task: ++{++job name} - ++{++task index}` (for
-example, `Task: build - 0`). This is a deviation from the OTel semantic
-conventions which specifies
-`++{++cicd.pipeline.action.name} ++{++cicd.pipeline.task.name}`.
+example, `Task: build - 0`) which is a deviation from the OpenTelemetry
+semantic conventions which specifies `++{++cicd.pipeline.action.name}
+++{++cicd.pipeline.task.name}`.
 
-In OTel semantic conventions, the task maps to a "`pipeline task`" and the
-containing workflow maps to the "`pipeline run`". As a result,
-`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow name
-and ID respectively.
+In OpenTelemetry semantic conventions, the task maps to a "`pipeline task`" and
+the containing workflow maps to the "`pipeline run`". As a result,
+`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow name and
+ID respectively.
 
 The `cicd.pipeline.task.run.id` is a synthetic UUID derived from the job ID
 and task index, not a first-class CircleCI identifier.
@@ -362,8 +362,8 @@ The span attributes are as follows:
 [width="100%",cols="34%,33%,33%",options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `RUN`.
+|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow that
 contains this task.
@@ -371,13 +371,13 @@ contains this task.
 |`cicd.pipeline.result` |success |The result of the workflow according to
 OpenTelemetry semantic conventions. Possible values are `success`,
 `failure`, and `cancellation`. The actual workflow status is available
-in com.circleci.workflow.status.
+in `com.circleci.workflow.status`.
 
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `executing`.
+|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
@@ -426,9 +426,9 @@ of the CircleCI project in which this ran.
 
 |`com.circleci.resource.cpu` |2 |The number of vCPUs allocated.
 
-|`com.circleci.resource.executor` |docker |The executor type.
+|`com.circleci.resource.executor` |`docker` |The executor type.
 
-|`com.circleci.resource.image` |cimg/base:2024.01 |The Docker image used,
+|`com.circleci.resource.image` |`cimg/base:2024.01` |The Docker image used,
 if applicable.
 
 |`com.circleci.resource.name` |Medium |The human-readable name of the
@@ -470,7 +470,7 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |github |If the pipeline was generated in connection
+|`vcs.provider.name` |`github` |If the pipeline was generated in connection
 with a Git repo this shows the provider of the Git repo. Possible values
 are `bitbucket`, `github`, and `gitlab`.
 
@@ -502,24 +502,24 @@ the VCS repository.
 
 A step is one step within a task. Each task may contain multiple steps.
 
-The name of the span will be `Step: ++{++step name}` (for example,
-`Step: Checkout code`). This is a deviation from the OTel semantic
-conventions which specifies
-`++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
+The name of the span will be `Step: ++{++step name}` (for example, `Step:
+Checkout code`) which is a deviation from the OpenTelemetry semantic
+conventions which specifies `++{++cicd.pipeline.action.name}
+++{++cicd.pipeline.name}`.
 
-In OTel semantic conventions, the step maps to a "`pipeline task`" and the
-containing workflow maps to the "`pipeline run`". As a result,
-`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow name
-and ID respectively. The `cicd.pipeline.task.run.id` is the job ID rather
-than a step-specific identifier.
+In OpenTelemetry semantic conventions, the step maps to a "`pipeline task`" and
+the containing workflow maps to the "`pipeline run`". As a result,
+`cicd.pipeline.name` and `cicd.pipeline.run.id` contain the workflow name and
+ID respectively. The `cicd.pipeline.task.run.id` is the job ID rather than a
+step-specific identifier.
 
 The span attributes are as follows:
 
 [width="100%",cols="34%,33%,33%",options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `RUN`.
+|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow that
 contains this step.
@@ -527,13 +527,13 @@ contains this step.
 |`cicd.pipeline.result` |success |The result of the workflow according to
 OpenTelemetry semantic conventions. Possible values are `success`,
 `failure`, and `cancellation`. The actual workflow status is available
-in com.circleci.workflow.status.
+in `com.circleci.workflow.status`.
 
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |This is for compatibility with the
-OpenTelemetry semantic conventions. It will always be `executing`.
+|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f
@@ -583,7 +583,7 @@ of the CircleCI project in which this ran.
 
 |`com.circleci.resource.cpu` |2 |The number of vCPUs allocated.
 
-|`com.circleci.resource.executor` |docker |The executor type.
+|`com.circleci.resource.executor` |`docker` |The executor type.
 
 |`com.circleci.resource.image` |cimg/base:2024.01 |The Docker image used,
 if applicable.
@@ -632,7 +632,7 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |github |If the pipeline was generated in connection
+|`vcs.provider.name` |`github` |If the pipeline was generated in connection
 with a Git repo this shows the provider of the Git repo. Possible values
 are `bitbucket`, `github`, and `gitlab`.
 
