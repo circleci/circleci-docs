@@ -1,10 +1,12 @@
-= Open Telemetry for CI/CD
+= OpenTelemetry for CI/CD
 
-CircleCI supports Open Telemetry for completed jobs.
+CircleCI supports sending OpenTelemetry spans for your pipelines as they
+execute. Spans are emitted for pipelines, workflows, jobs, tasks, and steps
+allowing you to understand and visualise the behavior of your pipelines.
 
-== Manage Organization Settings via API
+== Configure OpenTelemetry export via the API
 
-The API has the following endpoints:
+The API has the following endpoints, all of which require org admin privileges.
 
 * `GET /api/v2/otel/exporters?org_id=...` - List the exporter configurations for the given org ID.
 * `POST /api/v2/otel/exporters` - Add an exporter configuration.
@@ -12,9 +14,7 @@ The API has the following endpoints:
 
 https://circleci.com/docs/api/v2/#tag/OTel[Full reference for the APIs.]
 
-All of the APIs require manage-org permission for the org in question.
-
-=== Honeycomb example
+=== Example setup for exporting to Honeycomb
 
 You need three things:
 
