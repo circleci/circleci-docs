@@ -251,7 +251,7 @@
 ** How-to guides
 *** xref:security:set-environment-variable.adoc[Set an environment variable]
 *** xref:security:inject-environment-variables-with-api.adoc[Inject environment variables with the API]
-*** xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH]
+*** xref:execution-managed:ssh-access-jobs.adoc[Debug jobs with SSH rerun]
 *** xref:security:rotate-project-ssh-keys.adoc[Rotate project SSH keys]
 *** xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
 *** xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories]
