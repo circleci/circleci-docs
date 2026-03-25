@@ -283,6 +283,7 @@
 *** xref:integration:new-relic-integration.adoc[New Relic integration]
 *** xref:integration:datadog-integration.adoc[Datadog integration]
 *** xref:integration:sumo-logic-integration.adoc[Sumo Logic integration]
+*** xref:integration:open-telemetry-integration.adoc[OpenTelemetry integration]
 ** How-to guides
 *** xref:integration:status-badges.adoc[Adding status badges]
 *** xref:integration:webhooks-airtable.adoc[CircleCI webhooks with Airtable]
