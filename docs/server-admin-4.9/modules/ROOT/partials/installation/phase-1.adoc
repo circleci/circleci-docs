@@ -494,9 +494,7 @@ CircleCI Server 4.9 hosts build artifacts, test results, and other state object 
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-* link:https://github.com/seaweedfs/seaweedfs[SeaweedFS]
-
-While any S3 compatible object storage may work, we test and support AWS S3 and SeaweedFS. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
+Any AWS S3 compatible object storage may work, Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
 
 If you are installing locally rather than in AWS or GCP, follow the instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped Installation] guide.
 
