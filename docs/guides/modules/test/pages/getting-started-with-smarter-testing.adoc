@@ -1,12 +1,12 @@
 = Getting started with Smarter Testing
 :page-description: Install and configure Smarter Testing for your project
-:page-badge: Preview
+:page-badge: Beta
 :page-platform: Cloud
 :experimental:
-:page-noindex: true
+:page-noindex: false
 :page-show-readtime: true
 
-CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
 To use the CircleCI's Smarter Testing, you first need to set up a couple of components:
 
@@ -21,7 +21,7 @@ By the end of this guide you will have done the following:
 
 == Prerequisites
 
-Smarter Testing is available to all CircleCI Cloud customers selected to be part of the Smarter Testing preview.
+Smarter Testing is in beta, available to all CircleCI Cloud customers.
 
 == 1. Install the testsuite plugin locally
 
@@ -40,8 +40,6 @@ $ brew install circleci
 ----
 $ brew install circleci/tap/circleci-testsuite
 ----
-
-NOTE: If you need to install the plugin on other platforms (Windows, Linux ARM, etc.) or prefer manual installation, reach out to the CircleCI team via the private Slack channel for preview customers or email mailto:minjun.seong@circleci.com[minjun.seong@circleci.com].
 
 ////
 === Install manually
