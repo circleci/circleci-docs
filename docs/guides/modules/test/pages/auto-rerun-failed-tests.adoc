@@ -1,12 +1,12 @@
 = Auto rerun failed tests
-:page-badge: Preview
+:page-badge: Beta
 :page-platform: Cloud
 :experimental:
 :page-noindex: true
 :page-description: Automatically retry failed tests to improve build reliability
 :page-show-readtime: true
 
-CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Auto rerun failed tests automatically detects and retries test failures during your test run. This allows you to quickly recover from flaky test failures without rerunning your entire test suite. Compared with the existing xref:rerun-failed-tests.adoc[Rerun Failed Tests] feature that CircleCI provides, Auto rerun failed tests eliminates the need to:
 
