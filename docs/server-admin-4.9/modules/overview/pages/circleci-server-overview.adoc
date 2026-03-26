@@ -377,11 +377,11 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Azure
 | Untested
-| Should work with MinIO and Runner.
+| Should work with SeaweedFS and Runner.
 
 | Digital Ocean
 | Untested
-| Should work with MinIO and Runner.
+| Should work with SeaweedFS and Runner.
 
 | OpenShift
 | Untested
@@ -389,7 +389,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Rancher
 | Untested
-| Should work with MinIO and Runner.
+| Should work with SeaweedFS and Runner.
 |===
 
 [#installation-options]

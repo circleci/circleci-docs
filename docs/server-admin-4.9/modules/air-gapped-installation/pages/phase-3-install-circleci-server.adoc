@@ -54,8 +54,8 @@ github:
   defaultToken: "<<github-enterprise-personal-application-token>>"
 ----
 
-[#configure-minio-storage]
-=== c. Configure MinIO object storage
+[#configure-seaweedfs-storage]
+=== c. Configure SeaweedFS object storage
 In the `object_storage` section of the `values.yaml` file, add the following configuration, modifying ports as necessary.
 
 [source, yaml]
@@ -65,26 +65,26 @@ object_storage:
   expireAfter: 0
   s3:
     enabled: true
-    endpoint: http://<minio-internal-hostname>:9000
-    accessKey: <minio-root-user>
-    secretKey: <minio-root-password>
+    endpoint: http://<s3-internal-hostname>:9000
+    accessKey: <s3-root-user>
+    secretKey: <s3-root-password>
 ----
 
-NOTE: Update the endpoint protocol to `http` or `https` depending on your MinIO installation.
+NOTE: Update the endpoint protocol to `http` or `https` depending on your SeaweedFS installation.
 
 
-=== d. Configure MinIO build agent
-In the distributor section of the `values.yaml` file, point `agent_base_url` to the `circleci-data` bucket you created in your MinIO installation.
+=== d. Configure SeaweedFS build agent
+In the distributor section of the `values.yaml` file, point `agent_base_url` to the `circleci-data` bucket you created in your SeaweedFS installation.
 
 [source, yaml]
 ----
 distributor:
-  agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/
+  agent_base_url: http://<s3-internal-hostname>:9000/circleci-data/
 ----
 
-NOTE: Port 9000 is referenced here as that is a default for MinIO. If your MinIO instance is configured differently, this port will need to be updated.
+NOTE: Port 9000 is referenced here as that is a default for SeaweedFS. If your SeaweedFS instance is configured differently, this port will need to be updated.
 
-NOTE: Update the protocol to `http` or `https` depending on your MinIO installation.
+NOTE: Update the protocol to `http` or `https` depending on your SeaweedFS installation.
 
 
 [#configure-build-agent-image]
@@ -114,23 +114,23 @@ machine_provisioner:
   enabled: false
 ----
 
-When following these instructions to simply re-host agents in a partially air-gapped environment, you can configure the machine provisioner for MinIO as follows:
+When following these instructions to simply re-host agents in a partially air-gapped environment, you can configure the machine provisioner for SeaweedFS as follows:
 
 [source, yaml]
 ----
 machine_provisioner:
-  agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/machine-provisioner
+  agent_base_url: http://<s3-internal-hostname>:9000/circleci-data/machine-provisioner
 ----
 
 [#configure-docker-provisioner]
 === g. Configure Docker provisioner
 
-Update the `docker_provisioner` section of the `values.yaml` file to point `agent_base_url` to the MinIO bucket:
+Update the `docker_provisioner` section of the `values.yaml` file to point `agent_base_url` to the SeaweedFS bucket:
 
 [source, yaml]
 ----
 docker_provisioner:
-  agent_base_url: http://<minio-internal-hostname>:9000/circleci-data/docker-provisioner
+  agent_base_url: http://<s3-internal-hostname>:9000/circleci-data/docker-provisioner
 ----
 
 

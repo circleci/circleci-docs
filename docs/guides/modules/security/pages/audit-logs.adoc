@@ -201,7 +201,7 @@ After setting up audit log streaming follow these steps to validate the setup wa
 
 === Stream to S3-compatible storage
 
-TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint such as MinIO.
+TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint such as SeaweedFS.
 
 
 The setup steps vary by provider. At a high level you will:
@@ -209,12 +209,12 @@ The setup steps vary by provider. At a high level you will:
 ==== 1. Prepare your S3-compatible destination
 
 . Create a bucket for audit logs in your S3-compatible service.
-. Create or identify a role/principal that CircleCI can assume using OIDC. The exact process and identifier format depend on your provider. Examples include an AWS-style ARN (for example, `arn:aws:iam::...:role/...`) or a provider-specific role identifier (for example, MinIO `arn:minio:iam:::role/...`).
+. Create or identify a role/principal that CircleCI can assume using OIDC. The exact process and identifier format depend on your provider. Examples include an AWS-style ARN (for example, `arn:aws:iam::...:role/...`) or a provider-specific role identifier if supported.
 . Grant the role/principal permission to write objects to your bucket (minimum required: `s3:PutObject` on `<your-bucket>/*`). For example:
 +
 [source,json]
 ----
-// minio S3 example policy
+// aws S3 example policy
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -224,7 +224,7 @@ The setup steps vary by provider. At a high level you will:
         "s3:PutObject"
       ],
       "Resource": [
-        "arn:minio:s3:::<bucket-name>/*"
+        "arn:aws:s3:::<bucket-name>/*"
       ]
     }
   ]
