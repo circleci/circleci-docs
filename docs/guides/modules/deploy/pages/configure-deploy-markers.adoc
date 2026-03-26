@@ -14,8 +14,10 @@ Adding deploy markers to your configuration is a prerequisite to using the follo
 
 == Introduction
 
-Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback and the deploy features. For more information on rollbacks, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
-For more information on deploys, see the xref:set-up-deploys.adoc[Set up Deploys] guide.
+Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback and deploy features. For more information, see the following guides:
+
+* xref:set-up-rollbacks.adoc[Set up Rollbacks]
+* xref:set-up-deploys.adoc[Set up Deploys]
 
 For a full guide to CircleCI's deploys features and functionality, refer to the xref:deployment-overview.adoc[Deployment and Deploy Management] guide.
 
@@ -35,13 +37,10 @@ image::guides:ROOT:releases/dashboard.png[Deploys timeline with no deployments r
 
 You can set up deploy markers in two ways:
 
-* <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once. With AI features enabled, CircleCI generates the configuration for you. Without AI features, or for standalone GitHub App organizations, you receive a configuration template to apply manually. You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
+* <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once.
+** With AI features enabled, CircleCI generates the configuration for you.
+** Without AI features, or for CircleCI type organizations, you receive a configuration template to apply manually. You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
 * <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
-
-== Prerequisites
-
-* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* A CircleCI project with a workflow configured to deploy your code.
 
 [#set-up-deploy-markers-for-multiple-projects]
 == Set up deploy markers from the web app
@@ -120,6 +119,11 @@ This section covers how to set up deploy markers by editing your CircleCI config
 * <<deploy-marker-logs-without-status-updates,Without status updates>>: Log deployments in the deploys UI without tracking their status.
 
 NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
+
+=== Prerequisites
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A CircleCI project with a workflow configured to deploy your code.
 
 [#deploy-markers-with-status-updates]
 === Deploy markers with status updates
