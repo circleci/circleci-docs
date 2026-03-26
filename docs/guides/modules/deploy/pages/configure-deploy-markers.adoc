@@ -45,50 +45,52 @@ You can set up deploy markers in two ways:
 [#set-up-deploy-markers-for-multiple-projects]
 == Set up deploy markers from the web app
 
-You can set up deploy markers for a single project or for multiple projects at once from the CircleCI web app. When AI features are enabled, CircleCI uses AI to analyze your existing pipeline configurations and generate the required deploy marker commands. AI-based generation is available for organizations using a GitHub integration and is not supported for standalone GitHub App setups.
+You can set up deploy markers for a single project or for multiple projects at once from the CircleCI web app. With AI features enabled, CircleCI uses AI to analyze your existing pipeline configurations and generate the required deploy marker commands. AI-based generation is available for organizations using a GitHub type organization and is not supported for CircleCI type organizations using the CircleCI GitHub App. See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps to enable AI features. For information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
 === Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
 * Organization admin permissions in CircleCI (required for multi-project setup).
-* A GitHub App installed for your organization. If you do not have one, the setup process prompts you to install it.
-* AI features enabled for your organization (required for AI-based generation). An organization admin can enable this by navigating to menu:Organization Settings[Advanced]. For more details, see the xref:toolkit:intelligent-summaries.adoc[Intelligent Summaries] page.
+* The GitHub App installed in your organization. If not installed, the setup process prompts you to install it.
+* AI features enabled for your organization (required for AI-based generation). See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps.
 
 NOTE: If AI features are not enabled, or if your organization uses a standalone GitHub App, you are presented with a configuration template instead of AI-generated configuration. You can copy the template and use it to update your configuration files manually.
 
 === 1. Start the setup
 
-You can start the deploy marker setup from one of the following places:
+You can start the deploy marker setup from one of the following places, depending on whether you are setting up deploy markers for a single project or multiple projects:
 
-==== Single project
-
-* Navigate to your project's settings. Select **Deploys** in the sidebar, then select btn:[Configure deploy markers] in the Deploy Markers card.
+[tabs]
+====
+Single project::
++
+--
+Navigate to your project's settings. Select **Deploys** in the sidebar, then select btn:[Configure deploy markers] in the Deploy Markers card.
 
 .Project Deploy Settings page with the option to configure deploy markers
 image::guides:ROOT:deploy/project-deploy-settings.png[Project Deploy Settings page showing the Deploy Markers card with Configure deploy markers button]
+--
+Multiple projects::
++
+--
 
-==== Multiple projects
-
-* Navigate to menu:Organization Settings[Deploy Settings] and select btn:[Configure Deploy Markers].
-* Navigate to **Deploys** in the sidebar. If your deploys timeline is empty (no deployments logged), select the option to configure deploy markers.
-
+* Navigate to menu:Org[Deploys] and select btn:[Configure Deploy Markers].
++
 .Organization Deploy Settings page with the option to configure deploy markers
 image::guides:ROOT:deploy/org-deploy-settings.png[Organization Deploy Settings page showing the Configure Deploy Markers button]
 
-=== 2. Select projects (multi-project setup only)
-
-NOTE: If you started the setup from project settings, skip to <<generate-and-commit-configuration,step 3>>. The project is already selected.
-
-For the multi-project setup, a modal displays a list of the projects you follow. Select the projects you want to add deploy markers to, or select the **Select all** checkbox to select all listed projects. Then select btn:[Continue].
-
+. A modal displays a list of the projects you follow. Select the projects you want to add deploy markers to, or select the **Select all** checkbox to select all listed projects. Then select btn:[Continue].
++
 .Select projects for deploy marker setup
 image::guides:ROOT:deploy/bulk-select-projects.png[Project selection modal showing a list of followed projects with checkboxes]
 
 NOTE: Only projects you follow are shown. To follow more projects, select the **Follow more projects** link at the top of the modal.
+--
+====
 
 [#generate-and-commit-configuration]
-=== 3. Generate and commit configuration
+=== 2. Generate and commit configuration
 
 On the next page, you see a table of your selected projects with their repository and branch information. CircleCI auto-detects the branch where possible. If a branch is not auto-detected, select one from the dropdown menu.
 
