@@ -66,6 +66,133 @@
         padding-top: 20px !important;
       }
     }
+
+    /* Inline download button styling */
+    .spec-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-left: 12px;
+      padding: 6px 12px;
+      background: #f0f0f0;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      color: #0066cc;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .spec-download-btn:hover {
+      background: #0066cc;
+      color: white;
+      border-color: #0066cc;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .spec-download-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Endpoint-level download button (smaller) */
+    .endpoint-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: 8px;
+      padding: 4px 8px;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 3px;
+      color: #666;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: 400;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .endpoint-download-btn:hover {
+      background: #e9ecef;
+      color: #0066cc;
+      border-color: #0066cc;
+    }
+
+    /* Download info banner at top */
+    .api-downloads-info {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 16px 20px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .api-downloads-info-text {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .api-downloads-info h4 {
+      margin: 0 0 4px 0;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .api-downloads-info p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .api-downloads-info-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .api-downloads-info-links a {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 4px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .api-downloads-info-links a:hover {
+      background: rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .spec-download-btn,
+      .endpoint-download-btn {
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+
+      .api-downloads-info {
+        text-align: center;
+        justify-content: center;
+      }
+
+      .api-downloads-info-text {
+        text-align: center;
+      }
+    }
   </style>
   {{{redocHead}}}
   {{#unless disableGoogleFont}}<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">{{/unless}}
@@ -80,6 +207,246 @@
   </div>
 
   {{{redocHTML}}}
+
+  <script>
+    // Wait for Redoc to finish rendering
+    function waitForRedoc(callback) {
+      let attempts = 0;
+      const checkInterval = setInterval(() => {
+        // Check if Redoc has rendered by looking for tag items in sidebar
+        const tagItems = document.querySelectorAll('[data-item-id^="tag/"]');
+        attempts++;
+
+        console.log(`Attempt ${attempts}: Found ${tagItems.length} tag items`);
+
+        if (tagItems.length > 0) {
+          clearInterval(checkInterval);
+          console.log('Redoc detected, waiting 2 seconds for full render...');
+          // Wait longer to ensure everything is rendered
+          setTimeout(callback, 2000);
+        }
+      }, 200);
+
+      // Timeout after 15 seconds
+      setTimeout(() => {
+        clearInterval(checkInterval);
+        console.log('Redoc load timeout - proceeding anyway');
+        callback();
+      }, 15000);
+    }
+
+    // Download icon SVG
+    const downloadIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+    </svg>`;
+
+    // Add download info banner at the top
+    function addDownloadBanner() {
+      const apiContent = document.querySelector('.api-content') || document.body;
+
+      const banner = document.createElement('div');
+      banner.className = 'api-downloads-info';
+      banner.innerHTML = `
+        <div class="api-downloads-info-text">
+          <h4>📥 LLM-Optimized API Specifications</h4>
+          <p>Download the full spec or individual sections (3-50KB each) optimized for LLM context windows</p>
+        </div>
+        <div class="api-downloads-info-links">
+          <a href="specs/manifest.json" download>📋 Manifest</a>
+          <a href="specs/openapi.json" download>📄 Full Spec</a>
+        </div>
+      `;
+
+      apiContent.insertBefore(banner, apiContent.firstChild);
+    }
+
+    // Inject download buttons next to tag headings in sidebar
+    function injectTagDownloads(manifest) {
+      // Build a map of tag names to their endpoints
+      const tagToEndpoints = {};
+      manifest.endpoints.forEach(ep => {
+        const tag = ep.category;
+        if (!tagToEndpoints[tag]) {
+          tagToEndpoints[tag] = [];
+        }
+        tagToEndpoints[tag].push(ep);
+      });
+
+      console.log('Found endpoint categories:', Object.keys(tagToEndpoints));
+
+      // Find all tag items in the Redoc sidebar navigation
+      let allTagItems = document.querySelectorAll('li[data-item-id^="tag/"]');
+      console.log(`Found ${allTagItems.length} total items with data-item-id starting with "tag/"`);
+
+      // Check what attributes the first few have
+      if (allTagItems.length > 0) {
+        const sample = allTagItems[0];
+        console.log('Sample item HTML:', sample.outerHTML.substring(0, 300));
+        console.log('Sample depth attribute:', sample.getAttribute('depth'));
+        console.log('Sample has aria-expanded:', sample.hasAttribute('aria-expanded'));
+      }
+
+      // Filter to only top-level tags (not individual operations)
+      // Top-level tags have depth="1" and don't have operation-type indicators
+      let tagItems = Array.from(allTagItems).filter(item => {
+        const itemId = item.getAttribute('data-item-id');
+        // Top level tags are like "tag/Context", not "tag/Context/operation/something"
+        const isTopLevel = itemId.split('/').length === 2;
+        return isTopLevel;
+      });
+
+      console.log(`Found ${tagItems.length} top-level tag navigation items`);
+      if (tagItems.length > 0) {
+        console.log('First tag:', tagItems[0].getAttribute('data-item-id'));
+      }
+
+      tagItems.forEach(tagItem => {
+        const dataItemId = tagItem.getAttribute('data-item-id');
+        const tagId = dataItemId.replace('tag/', '');
+
+        // Get the tag label element
+        const labelElement = tagItem.querySelector('label');
+        const spanElement = tagItem.querySelector('span[title]');
+        const tagName = spanElement ? spanElement.getAttribute('title') : '';
+
+        console.log(`Processing tag: ${tagName} (${tagId})`);
+
+        // Find matching endpoints (case-insensitive match)
+        const matchingTag = Object.keys(tagToEndpoints).find(tag =>
+          tag.toLowerCase() === tagName.toLowerCase() ||
+          tag.toLowerCase() === tagId.toLowerCase()
+        );
+
+        if (matchingTag && labelElement) {
+          const endpoints = tagToEndpoints[matchingTag];
+          const totalSize = endpoints.reduce((sum, ep) => sum + ep.sizeKB, 0).toFixed(1);
+
+          // Create download button (smaller, more subtle)
+          const downloadBtn = document.createElement('button');
+          downloadBtn.className = 'spec-download-btn';
+          downloadBtn.title = `Download all ${matchingTag} endpoints (${endpoints.length} files, ${totalSize}KB)`;
+          downloadBtn.innerHTML = `${downloadIcon}`;
+          downloadBtn.style.cssText = `
+            margin-left: 8px;
+            padding: 4px 6px;
+            background: transparent;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.2s ease;
+          `;
+
+          // Add hover effect
+          downloadBtn.addEventListener('mouseenter', () => {
+            downloadBtn.style.background = '#f0f0f0';
+            downloadBtn.style.borderColor = '#0066cc';
+          });
+          downloadBtn.addEventListener('mouseleave', () => {
+            downloadBtn.style.background = 'transparent';
+            downloadBtn.style.borderColor = '#ddd';
+          });
+
+          // Add click handler
+          downloadBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            showTagDownloadOptions(matchingTag, endpoints);
+          });
+
+          // Insert button after the tag name
+          labelElement.appendChild(downloadBtn);
+          console.log(`✓ Added download button for ${matchingTag}`);
+        } else {
+          console.log(`✗ No matching endpoints for ${tagName}`);
+        }
+      });
+    }
+
+    // Show download options for a specific tag
+    function showTagDownloadOptions(tagName, endpoints) {
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        padding: 20px;
+        max-width: 500px;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 10000;
+      `;
+
+      let html = `
+        <h3 style="margin: 0 0 12px 0; font-size: 16px;">Download ${tagName} endpoints</h3>
+        <p style="margin: 0 0 16px 0; font-size: 13px; color: #666;">
+          Choose individual endpoints to download:
+        </p>
+      `;
+
+      endpoints.forEach(ep => {
+        html += `
+          <a href="${ep.path}" download class="download-link" style="display: block; padding: 8px 12px; margin: 4px 0; background: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 4px; color: #0066cc; text-decoration: none; font-size: 13px;">
+            ${ep.endpoint} <span style="color: #999; float: right;">${ep.sizeKB}KB</span>
+          </a>
+        `;
+      });
+
+      html += `
+        <button onclick="this.parentElement.remove(); document.getElementById('modal-backdrop').remove();"
+                style="margin-top: 16px; padding: 8px 16px; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; width: 100%;">
+          Close
+        </button>
+      `;
+
+      modal.innerHTML = html;
+
+      // Add backdrop
+      const backdrop = document.createElement('div');
+      backdrop.id = 'modal-backdrop';
+      backdrop.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 9999;
+      `;
+      backdrop.addEventListener('click', () => {
+        modal.remove();
+        backdrop.remove();
+      });
+
+      document.body.appendChild(backdrop);
+      document.body.appendChild(modal);
+    }
+
+    // Initialize everything once Redoc is ready
+    waitForRedoc(() => {
+      console.log('Redoc loaded, injecting download buttons...');
+
+      // Add banner at top
+      addDownloadBanner();
+
+      // Load manifest and inject tag-level download buttons
+      fetch('specs/manifest.json')
+        .then(response => response.json())
+        .then(manifest => {
+          injectTagDownloads(manifest);
+          console.log('Download buttons injected successfully');
+        })
+        .catch(err => {
+          console.error('Could not load manifest for download buttons:', err);
+        });
+    });
+  </script>
 </body>
 
 </html>

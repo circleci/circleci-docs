@@ -208,20 +208,40 @@ function buildApiV2(callback) {
 
             console.log('✅ API v2 docs built successfully')
 
-            // STEP 7: Copy logo file for template
-            console.log('📋 Copying logo file...')
-            exec('cp logo.svg build/api/v2/', (err) => {
+            // STEP 7: Split spec into chunks for LLM consumption
+            // Creates separate files per tag/resource for easier context window usage
+            console.log('✂️  Splitting spec into chunks for LLM consumption...')
+            const specsDir = path.join('build', 'api', 'v2', 'specs')
+            if (!fs.existsSync(specsDir)) {
+              fs.mkdirSync(specsDir, { recursive: true })
+            }
+
+            exec('npx @redocly/cli split build/temp-api-v2/openapi-final.json --outDir build/api/v2/specs/', (err, stdout, stderr) => {
               if (err) {
-                console.warn('⚠️  Warning: Could not copy logo file:', err.message)
+                console.warn('⚠️  Warning: Could not split spec:', err.message)
+                if (stderr) console.warn(stderr)
               } else {
-                console.log('✅ Logo file copied successfully')
+                console.log('✅ Spec split into chunks successfully')
               }
 
-              // STEP 8: Cleanup temporary files
-              // Remove intermediate files to keep build directory clean
-              exec('rm -rf build/temp-api-v2', () => {
-                console.log('🎉 API v2 documentation build completed!')
-                callback()
+              // Generate manifest file listing all chunks
+              generateManifest(specsDir, () => {
+                // STEP 8: Copy logo file for template
+                console.log('📋 Copying logo file...')
+                exec('cp logo.svg build/api/v2/', (err) => {
+                  if (err) {
+                    console.warn('⚠️  Warning: Could not copy logo file:', err.message)
+                  } else {
+                    console.log('✅ Logo file copied successfully')
+                  }
+
+                  // STEP 9: Cleanup temporary files
+                  // Remove intermediate files to keep build directory clean
+                  exec('rm -rf build/temp-api-v2', () => {
+                    console.log('🎉 API v2 documentation build completed!')
+                    callback()
+                  })
+                })
               })
             })
           })
@@ -273,6 +293,127 @@ function applyJsonPatches(callback) {
 }
 
 /**
+ * Generate Manifest File for Split API Specs
+ *
+ * PURPOSE: Create an index of all split spec files for LLM consumption
+ *
+ * Creates manifest.json with:
+ * - List of all chunk files organized by category
+ * - File sizes
+ * - Generation timestamp
+ * - Metadata about each chunk
+ *
+ * This helps LLMs navigate and understand what's available in each chunk
+ */
+function generateManifest(specsDir, callback) {
+  console.log('📝 Generating manifest file...')
+
+  try {
+    // Recursively find all JSON/YAML files in subdirectories
+    const pathsDir = path.join(specsDir, 'paths')
+    const componentsDir = path.join(specsDir, 'components')
+
+    const manifest = {
+      description: 'Split OpenAPI specification chunks for LLM consumption. Each endpoint is in a separate file to fit within LLM context windows.',
+      generated: new Date().toISOString(),
+      structure: {
+        description: 'The OpenAPI spec is split into multiple files',
+        mainSpec: '/api/v2/specs/openapi.json',
+        paths: '/api/v2/specs/paths/',
+        components: '/api/v2/specs/components/',
+        codeSamples: '/api/v2/specs/code_samples/'
+      },
+      endpoints: [],
+      components: [],
+      statistics: {
+        totalEndpoints: 0,
+        totalComponents: 0,
+        totalSizeKB: 0
+      },
+      usage: 'To use these specs with an LLM: 1) Download the main openapi.json to understand the structure. 2) Download individual endpoint files from the paths/ directory as needed. 3) Reference shared components from the components/ directory.'
+    }
+
+    // Collect all path files
+    if (fs.existsSync(pathsDir)) {
+      const pathFiles = fs.readdirSync(pathsDir)
+        .filter(file => file.endsWith('.json') || file.endsWith('.yaml') || file.endsWith('.yml'))
+        .map(file => {
+          const filePath = path.join(pathsDir, file)
+          const stats = fs.statSync(filePath)
+          const sizeKB = parseFloat((stats.size / 1024).toFixed(2))
+
+          // Extract info from filename
+          const endpoint = file.replace(/\.(json|yaml|yml)$/, '')
+          const category = endpoint.split('_')[0] || 'other'
+
+          return {
+            endpoint: endpoint,
+            category: category,
+            file: file,
+            sizeKB: sizeKB,
+            path: `/api/v2/specs/paths/${file}`
+          }
+        })
+        .sort((a, b) => a.endpoint.localeCompare(b.endpoint))
+
+      manifest.endpoints = pathFiles
+      manifest.statistics.totalEndpoints = pathFiles.length
+      manifest.statistics.totalSizeKB += pathFiles.reduce((sum, f) => sum + f.sizeKB, 0)
+    }
+
+    // Collect component files
+    if (fs.existsSync(componentsDir)) {
+      const collectComponents = (dir, prefix = '') => {
+        let components = []
+        const items = fs.readdirSync(dir, { withFileTypes: true })
+
+        for (const item of items) {
+          const itemPath = path.join(dir, item.name)
+          if (item.isDirectory()) {
+            components = components.concat(collectComponents(itemPath, prefix + item.name + '/'))
+          } else if (item.name.endsWith('.json') || item.name.endsWith('.yaml') || item.name.endsWith('.yml')) {
+            const stats = fs.statSync(itemPath)
+            const sizeKB = parseFloat((stats.size / 1024).toFixed(2))
+            const relativePath = prefix + item.name
+
+            components.push({
+              component: relativePath.replace(/\.(json|yaml|yml)$/, ''),
+              file: relativePath,
+              sizeKB: sizeKB,
+              path: `/api/v2/specs/components/${relativePath}`
+            })
+          }
+        }
+        return components
+      }
+
+      manifest.components = collectComponents(componentsDir)
+      manifest.statistics.totalComponents = manifest.components.length
+      manifest.statistics.totalSizeKB += manifest.components.reduce((sum, f) => sum + f.sizeKB, 0)
+    }
+
+    // Add endpoint categories summary
+    const categories = {}
+    manifest.endpoints.forEach(ep => {
+      categories[ep.category] = (categories[ep.category] || 0) + 1
+    })
+    manifest.endpointCategories = Object.entries(categories)
+      .map(([name, count]) => ({ category: name, count }))
+      .sort((a, b) => b.count - a.count)
+
+    manifest.statistics.totalSizeKB = parseFloat(manifest.statistics.totalSizeKB.toFixed(2))
+
+    const manifestPath = path.join(specsDir, 'manifest.json')
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2))
+    console.log(`✅ Manifest generated: ${manifest.statistics.totalEndpoints} endpoints, ${manifest.statistics.totalComponents} components`)
+    callback()
+  } catch (err) {
+    console.warn('⚠️  Warning: Could not generate manifest:', err.message)
+    callback()
+  }
+}
+
+/**
  * USAGE NOTES:
  *
  * BUILD COMMANDS:
@@ -294,4 +435,9 @@ function applyJsonPatches(callback) {
  * - Modify v2 spec: Edit openapi-patch.json
  * - Add API versions: Create buildApiV3() function and update main build
  * - Change output paths: Modify directory constants at top of functions
+ *
+ * LLM-FRIENDLY API SPECS:
+ * - Split specs are generated in build/api/v2/specs/
+ * - manifest.json provides an index of all available chunks
+ * - Each chunk is sized to fit within typical LLM context windows
  */

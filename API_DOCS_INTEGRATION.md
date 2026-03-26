@@ -23,7 +23,9 @@ This project integrates API documentation with the Antora documentation site, pr
 
 - Source: Live CircleCI API (`https://circleci.com/api/v2/openapi.json`)
 - Build: Sophisticated pipeline with fetching, patching, bundling, and HTML generation
-- Output: `build/api/v2/index.html`
+- Output:
+  - `build/api/v2/index.html` (full interactive documentation)
+  - `build/api/v2/specs/` (split specifications for LLM consumption)
 - URL: `/api/v2/`
 
 ## File Structure
@@ -44,7 +46,12 @@ project-root/
     └── api/
         ├── v1/              # Complete static v1 site
         └── v2/              # Generated v2 documentation
-            └── index.html   # Single-page API docs (1.6MB)
+            ├── index.html   # Single-page API docs (1.6MB)
+            └── specs/       # Split API specs for LLM consumption
+                ├── manifest.json    # Index of all chunks
+                ├── paths/           # Endpoint definitions by tag
+                ├── components/      # Shared schemas and components
+                └── openapi.yaml     # Main spec with references
 ```
 
 ## Build Pipeline Details
@@ -58,12 +65,14 @@ project-root/
 ### API v2 Build (Sophisticated)
 
 1. **Fetch**: Download live OpenAPI spec from CircleCI API
-2. **Prepare**: Ready spec for processing (future code sample enrichment)
-3. **Patch**: Apply JSON patches from `openapi-patch.json`
-4. **Bundle**: Optimize spec and remove unused components
+2. **Bundle**: Resolve references and optimize spec
+3. **Code Samples**: Add code examples for multiple languages
+4. **Patch**: Apply JSON patches from `openapi-patch.json` (optional)
 5. **Lint**: Quality check the processed spec
-6. **Build**: Generate HTML documentation with Redocly CLI
-7. **Cleanup**: Remove temporary processing files
+6. **Build HTML**: Generate interactive documentation with Redocly CLI
+7. **Split**: Create LLM-friendly chunks by tag/resource
+8. **Manifest**: Generate index file for all chunks
+9. **Cleanup**: Remove temporary processing files
 
 ## Navigation Integration
 
@@ -212,3 +221,88 @@ The build integrates with existing CircleCI pipeline:
 - **Output sizes**: v1 maintains original assets, v2 generates 1.6MB HTML
 - **Caching**: v2 uses temporary files for efficient rebuilds
 - **Development**: Hot reload works for both versions
+
+## LLM-Friendly API Specifications
+
+The build pipeline automatically generates split API specifications optimized for LLM consumption.
+
+### Why Split Specifications?
+
+The complete CircleCI API specification is too large to fit in most LLM context windows. Splitting the spec into smaller chunks allows:
+
+- LLMs to process individual API resources without hitting context limits
+- Faster processing and more accurate responses
+- Better focus on specific API areas
+- Easier navigation for automated tools
+
+### What Gets Generated
+
+**Directory Structure:**
+```
+build/api/v2/specs/
+├── manifest.json           # Index of all chunks with metadata
+├── openapi.yaml           # Main spec file with $ref pointers
+├── paths/                 # Endpoint definitions organized by tag
+│   ├── context.yaml
+│   ├── pipeline.yaml
+│   ├── project.yaml
+│   └── ...
+└── components/            # Shared schemas and components
+    ├── schemas/
+    ├── parameters/
+    └── responses/
+```
+
+**Manifest File (`manifest.json`):**
+
+Contains metadata about all chunks:
+- List of all split files
+- File sizes in KB
+- Relative paths for downloading
+- Generation timestamp
+- Usage instructions
+
+Example manifest:
+```json
+{
+  "description": "Split OpenAPI specification chunks for LLM consumption",
+  "generated": "2026-03-26T10:30:00Z",
+  "totalChunks": 15,
+  "chunks": [
+    {
+      "name": "paths/context",
+      "file": "paths/context.yaml",
+      "sizeKB": 45.2,
+      "path": "/api/v2/specs/paths/context.yaml"
+    }
+  ],
+  "usage": "Each chunk contains a subset of the full API specification..."
+}
+```
+
+### Using Split Specifications
+
+**For LLMs:**
+1. Fetch `manifest.json` to see available chunks
+2. Download specific chunks relevant to the query
+3. Process individual chunks within context limits
+
+**For Developers:**
+- Chunks are served alongside the main API docs
+- Access via `/api/v2/specs/` URL path
+- Can be used with OpenAPI tools that support $ref resolution
+
+**For Documentation:**
+- Link to specific chunks from documentation pages
+- Provide targeted API references
+- Reduce download sizes for focused use cases
+
+### Customization
+
+The splitting behavior is controlled by Redocly CLI's `split` command:
+
+```bash
+npx @redocly/cli split openapi.json --outDir specs/
+```
+
+Options can be configured in `redocly.yaml` or via command-line flags in `gulp.d/tasks/build-api-docs.js`.
