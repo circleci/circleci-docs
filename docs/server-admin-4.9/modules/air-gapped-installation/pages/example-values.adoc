@@ -13,7 +13,7 @@ The chart assumes an environment with the following resources:
 - MetalLB pre-configued on the K3s cluster for ingress
 - A private Docker registry at `docker.internal.example.com` running on port 5000 with no TLS encryption
 - A Nomad instance with mTLS disabled
-- A SeaweedFS (S3 compatible storage) instance running at seaweedfs.internal.example.com, with its API listening on port 9000, and no TLS
+- A S3 compatible storage instance running at s3.internal.example.com, with its API listening on port 9000, and no TLS
 - A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
 
 For more information about specific values, see the standard installation documentation, starting with the following:
@@ -51,25 +51,25 @@ tls:
   certificate: "<<your-generated-tls-certificate>>"
   privateKey: "<<your-generated-tls-private-key>>"
 
-# Object storage with SeaweedFS
+# Object storage
 object_storage:
-  bucketName: "circleci-data" # Update to the name of the bucket created in SeaweedFS
+  bucketName: "circleci-data" # Update to the name of the bucket created in Object Store
   expireAfter: 0
   s3:
     enabled: true
-    endpoint: "http://seaweedfs.internal.example.com:8333"
-    accessKey: "<<seaweedfs-username>>"
-    secretKey: "<<seaweedfs-password>>"
+    endpoint: "http://s3.internal.example.com:<port>"
+    accessKey: "<<s3-username>>"
+    secretKey: "<<s3-password>>"
 
-# Distributor using CircleCI Agent in SeaweedFS
+# Distributor using CircleCI Agent Stored in Object Store
 distributor:
-  agent_base_url: http://seaweedfs.internal.example.com:8888/buckets/circleci-data
-  launch_agent_base_url: http://seaweedfs.internal.example.com:8888/buckets/circleci-data
+  agent_base_url: http://s3.internal.example.com:<port>/circleci-data
+  launch_agent_base_url: http://s3.internal.example.com:<port>/circleci-data
 
 
 # Nomad
 nomad:
-  buildAgentImage: "docker.internal.example.com:5000/circleci/picard" # Do not provide image version, only image name and registry
+  buildAgentImage: "docker.internal.example.com:<port>/circleci/picard" # Do not provide image version, only image name and registry
   server:
     gossip:
       encryption:
