@@ -377,11 +377,11 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Azure
 | Untested
-| Should work with SeaweedFS and Runner.
+| Should work with S3 compatible object store and Runner.
 
 | Digital Ocean
 | Untested
-| Should work with SeaweedFS and Runner.
+| Should work with S3 compatible object store and Runner.
 
 | OpenShift
 | Untested
@@ -389,7 +389,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Rancher
 | Untested
-| Should work with SeaweedFS and Runner.
+| Should work with S3 compatible object store and Runner.
 |===
 
 [#installation-options]

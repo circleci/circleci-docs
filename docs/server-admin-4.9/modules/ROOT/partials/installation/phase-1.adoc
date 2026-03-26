@@ -48,7 +48,7 @@ endif::env-aws[]
 | Infrastructure Management
 | Required for installations within GCP or AWS
 
-| Install and configure link:AWS CLI for your storage provider (SeaweedFS) if you choose not to use AWS or GCP object storage.
+| Install and configure link:AWS CLI for your S3 compatible object storage provider if you choose not to use AWS or GCP object storage.
 | TBC
 | S3 compatible object storage
 | Required for installations outside AWS and GCP, for example, local installation
@@ -498,7 +498,7 @@ CircleCI Server 4.9 hosts build artifacts, test results, and other state object 
 
 While any S3 compatible object storage may work, we test and support AWS S3 and SeaweedFS. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
 
-If you are installing locally rather than in AWS or GCP, follow the SeaweedFS instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped Installation] guide.
+If you are installing locally rather than in AWS or GCP, follow the instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped Installation] guide.
 
 NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing Server Behind a Proxy] guide.
 
