@@ -1,32 +1,26 @@
 = Phase 2 - Configure object storage
 :page-platform: Server 4.9, Server Admin
-:page-description: How to configure object storage through MinIO to run CircleCI Server 4.9 in an air-gapped environment.
+:page-description: How to configure object storage through SeaweedFS to run CircleCI Server 4.9 in an air-gapped environment.
 :experimental:
 
 pass:[<!-- vale off -->]
-[#create-buckets-in-minio]
-== 1. Create buckets in MinIO
-CircleCI Server supports link:https://min.io/[MinIO] for air-gapped object storage. MinIO is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped MinIO instance installed, complete the steps outlined in the next sections.
+[#create-buckets-in-seaweedfs]
+== 1. Create buckets in SeaweedFS
+CircleCI Server supports S3 compatible storage for air-gapped object storage. For our use-case we have used [SeaweedFS](https://github.com/seaweedfs/seaweedfs). SeaweedFS is used in the air-gapped environment as a replacement for cloud-based object storage, such as GCP GCS or AWS S3. With an air-gapped SeaweedFS instance installed, complete the steps outlined in the next sections.
 
-image::guides:ROOT:minio/minio_install_0.png[Create a bucket in MinIO]
+image::guides:ROOT:seaweedfs/seaweedfs_install_0.png[Create a bucket in SeaweedFS]
 
 [#creates-data-bucket]
 === a. Create a `circleci-data` bucket.
-Create a new bucket in MinIO named `circleci-data`.
+Create a new bucket in SeaweedFS named `circleci-data`.
 
 NOTE: This bucket can be given a different name, but references to it will need to be updated in the Helm `values.yaml` file.
 
-image::guides:ROOT:minio/minio_created_buckets.png[Buckets created in MinIO]
-
-[#configure-data-bucket]
-=== b. Configure the `circleci-data` bucket
-In the settings for the `circleci-data` bucket, change the access policy to `public`.
-
-image::guides:ROOT:minio/minio_modify_access_policy.png[Setting `circleci-data` bucket access policy to public]
+image::guides:ROOT:seaweedfs/seaweedfs_created_buckets.png[Buckets created in SeaweedFS]
 
 [#copy-build-agent]
 == 2. Copy the CircleCI build agent
-Follow the steps in this section to copy the pinned CircleCI build agent into MinIO within your air-gapped environment.
+Follow the steps in this section to copy the pinned CircleCI build agent into SeaweedFS within your air-gapped environment.
 
 [#retrieve-pinned-agent-version]
 === a. Extract the pinned agent version from the Helm chart
@@ -45,8 +39,8 @@ echo $CIRCLE_AGENT_VERSION
 ----
 
 [#copy-release-txt]
-=== b. Create a release.txt file and copy to MinIO
-Create a `release.txt` file with the value of `$CIRCLE_AGENT_VERSION`. Copy this file to your air-gapped environment and place it in the root of the `circleci-data` bucket in MinIO.
+=== b. Create a release.txt file and copy to SeaweedFS
+Create a `release.txt` file with the value of `$CIRCLE_AGENT_VERSION`. Copy this file to your air-gapped environment and place it in the root of the `circleci-data` bucket in SeaweedFS.
 
 [#retrieve-pinned-agent-bin]
 === c. Retrieve the pinned agent binary
@@ -63,13 +57,11 @@ curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/$CIRCLE
 
 [#create-release-dir]
 === d. Create a release directory in the `circleci-data` bucket
-Using the version specified by `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In the following examples, a directory is created at the root of `circleci-data` in MinIO with the name `$CIRCLE_AGENT_VERSION`. Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
-
-image::guides:ROOT:minio/minio_create_release_dir.png[Creating a directory in the `circleci-data` bucket]
+Using the version specified by `release.txt`, create a new directory in the root of the `circleci-data` bucket with the name of that release. In the following examples, a directory is created at the root of `circleci-data` in SeaweedFS with the name `$CIRCLE_AGENT_VERSION`. Note `$CIRCLE_AGENT_VERSION` is not a literal string, but the value of the environment variable we set earlier.
 
 [#upload-checksums-file]
 === e. Upload the checksums.txt file to the newly created directory.
-Copy the downloaded `checksums.txt` file (step c) to your virtual environment, and place it in MinIO nested under the newly created release directory (step d).
+Copy the downloaded `checksums.txt` file (step c) to your virtual environment, and place it in SeaweedFS nested under the newly created release directory (step d).
 
 [,shell]
 ----
@@ -79,7 +71,8 @@ $CIRCLE_AGENT_VERSION/
 └── checksums.txt
 ----
 
-image::guides:ROOT:minio/minio_upload_checksums.png[Uploading `checksums.txt` into the release directory]
+image::guides:ROOT:seaweedfs/seaweedfs_checksum.png[Uploading `checksums.txt` into the release directory]
+
 
 [#create-new-subdirs]
 === f. Create two new subdirectories in the release directory
@@ -94,9 +87,9 @@ $CIRCLE_AGENT_VERSION/
     └── amd64/
 ----
 
-image::guides:ROOT:minio/minio_create_linux_dir.png[Creating a Linux dir]
+image::guides:ROOT:seaweedfs/seaweedfs_create_linux_dir.png[Creating a Linux dir]
 
-image::guides:ROOT:minio/minio_create_amd_dir.png[Creating an AMD dir]
+image::guides:ROOT:seaweedfs/seaweedfs_create_amd_dir.png[Creating an AMD dir]
 
 [#copy-build-agent-bin]
 === g. Copy the downloaded `circleci-agent` file
@@ -112,7 +105,7 @@ CIRCLE_AGENT_VERSION/
         └── circleci-agent
 ----
 
-image::guides:ROOT:minio/minio_upload_cci_agent.png[Uploading the CircleCI agent]
+image::guides:ROOT:seaweedfs/seaweedfs_upload_cci_agent.png[Uploading the CircleCI agent]
 
 [#copy-other-agents]
 == 3. Copy other agents
@@ -174,10 +167,12 @@ machine-provisioner/
             └── agent
 ----
 
+image::guides:ROOT:seaweedfs/seaweedfs_provisioner_agent.png[Docker/Machine Agents]
+
 
 [#copy-other-miscellaneous-files]
 == 4. Copy other miscellaneous files
-Follow the steps in this section to copy the required files into MinIO within your air-gapped environment.
+Follow the steps in this section to copy the required files into SeaweedFS within your air-gapped environment.
 
 [#copy-canary-txt-file]
 === a. Copy canary.txt file
@@ -190,6 +185,15 @@ curl -O https://circleci-binary-releases.s3.amazonaws.com/circleci-agent/canary.
 ----
 
 Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
+
+
+image::guides:ROOT:seaweedfs/seaweedfs_canary.png[Docker/Machine Agents]
+
+== 5. S3 bucket data tree
+After uploading all required binaries and files, S3 bucket structure will be as below - 
+
+image::guides:ROOT:seaweedfs/seaweedfs_dir_tree.png[Docker/Machine Agents]
+
 
 [#next-steps]
 == Next steps

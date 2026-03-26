@@ -13,7 +13,7 @@ The chart assumes an environment with the following resources:
 - MetalLB pre-configued on the K3s cluster for ingress
 - A private Docker registry at `docker.internal.example.com` running on port 5000 with no TLS encryption
 - A Nomad instance with mTLS disabled
-- A MinIO instance running at minio.internal.example.com, with its API listening on port 9000, and no TLS
+- A SeaweedFS (S3 compatible storage) instance running at seaweedfs.internal.example.com, with its API listening on port 9000, and no TLS
 - A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
 
 For more information about specific values, see the standard installation documentation, starting with the following:
@@ -51,19 +51,21 @@ tls:
   certificate: "<<your-generated-tls-certificate>>"
   privateKey: "<<your-generated-tls-private-key>>"
 
-# Object storage with Minio
+# Object storage with SeaweedFS
 object_storage:
-  bucketName: "circleci-data" # Update to the name of the bucket created in MinIO
+  bucketName: "circleci-data" # Update to the name of the bucket created in SeaweedFS
   expireAfter: 0
   s3:
     enabled: true
-    endpoint: "http://minio.internal.example.com:9000"
-    accessKey: "<<minio-username>>"
-    secretKey: "<<minio-password>>"
+    endpoint: "http://seaweedfs.internal.example.com:8333"
+    accessKey: "<<seaweedfs-username>>"
+    secretKey: "<<seaweedfs-password>>"
 
-# Distributor using CircleCI Agent in Minio
+# Distributor using CircleCI Agent in SeaweedFS
 distributor:
-  agent_base_url: http://minio.internal.example.com:9000/circleci-data
+  agent_base_url: http://seaweedfs.internal.example.com:8888/buckets/circleci-data
+  launch_agent_base_url: http://seaweedfs.internal.example.com:8888/buckets/circleci-data
+
 
 # Nomad
 nomad:
@@ -81,6 +83,9 @@ nomad:
 machine_provisioner:
   enabled: false
 
+docker_provisioner:
+  enabled: false  
+
 # Additional nginx annotations
 nginx:
   annotations:
@@ -88,8 +93,6 @@ nginx:
     metallb.universe.tf/allow-shared-ip: default
 
 # The below values require no special modifications for an air-gapped environment
-
-sessionCookieKey: "<<circleci-session-cookie-key>>"
 
 keyset:
   signing: '<<circleci-signing-key>>'
@@ -111,8 +114,5 @@ rabbitmq:
   auth:
     password: "<<rabbitmq-password>>"
     erlangCookie: "<<rabbitmq-erlang-cookie>>"
-
-docker_provisioner:
-  enabled: false
 
 ----
