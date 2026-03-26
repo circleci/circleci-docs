@@ -201,7 +201,7 @@ After setting up audit log streaming follow these steps to validate the setup wa
 
 === Stream to S3-compatible storage
 
-TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint such as SeaweedFS.
+TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint.
 
 
 The setup steps vary by provider. At a high level you will:
