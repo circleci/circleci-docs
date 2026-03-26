@@ -2,7 +2,7 @@
 :page-badge: Beta
 :page-platform: Cloud
 :experimental:
-:page-noindex: true
+:page-noindex: false
 :page-description: Automatically retry failed tests to improve build reliability
 :page-show-readtime: true
 
