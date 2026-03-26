@@ -180,17 +180,49 @@ To do this, edit your IAM role's trust policy so that only an OIDC token from yo
 
 . Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to menu:Project Settings [Overview] to find your Project ID.
 
-. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `organization_id` and your Project ID for `project_id`.
+. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `organization_id` and your Project ID for `project-id`.
 +
+--
+*Option 1: Using the CircleCI project-id claim (recommended)*
+
+AWS STS now supports a dedicated condition key for CircleCI projects. This is the most secure and direct way to ensure an IAM role can only be assumed by a specific project within your organization.
+
+[source,yaml]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::123456789012:oidc-provider/oidc.circleci.com/org/<organization_id>"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.circleci.com/org/<organization_id>:aud": "sts.amazonaws.com",
+          "oidc.circleci.com/org/<organization_id>:oidc.circleci.com/project-id": "<project-id>"
+        }
+      }
+    }
+  ]
+}
+----
+
+NOTE: The `oidc.circleci.com/project-id` claim is used exclusively for trust policy evaluation during the initial authentication step and is not available as a session variable after the role is assumed.
+
+*Option 2: Using the sub claim*
+
 .Update trust policy to restrict access to specific project
 [source,yaml]
 ----
 "StringLike": {
-  "oidc.circleci.com/org/<organization_id>:sub": "org/<organization_id>/project/<project_id>/user/*"
+  "oidc.circleci.com/org/<organization_id>:sub": "org/<organization_id>/project/<project-id>/user/*"
 }
 ----
-+
-This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] to match the sub claim of CircleCI's OIDC token in your chosen project. Now, jobs in your other projects cannot assume this role.
+
+This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html#Conditions_String[StringLike] to match the `sub` claim of CircleCI's OIDC token in your chosen project. Now, jobs in your other projects cannot assume this role.
+--
 
 [#limit-role-access-based-on-branch]
 ==== Limit role access based on branch
@@ -509,7 +541,7 @@ a| The subject. This identifies who is running the CircleCI job and where. `$CIR
 
 For `$CIRCLE_OIDC_TOKEN` its value is:
 
-`"org/<organization_id>/project/<project_id>/user/<user_id>"`, a string, where `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+`"org/<organization_id>/project/<project-id>/user/<user_id>"`, a string, where `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 ---
 
@@ -517,15 +549,15 @@ For `$CIRCLE_OIDC_TOKEN_V2` its value depends on the trigger type:
 
 *If the trigger is a* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhook]:
 
-`"org/<organization_id>/project/<project_id>/user/<user_id>"`
+`"org/<organization_id>/project/<project-id>/user/<user_id>"`
 
-A string in which `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
+A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run.
 
 *All other trigger types*:
 
-`"org/<organization_id>/project/<project_id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`
+`"org/<organization_id>/project/<project-id>/user/<user_id>/vcs-origin/<vcs_origin>/vcs-ref/<vcs_ref>"`
 
-A string in which `organization_id`, `project_id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
+A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that identify the CircleCI organization, project, and user, respectively. The user is the CircleCI user that caused this job to run. `vcs_origin` and `vcs_ref` are strings that identify the repository URL and reference to the change that caused the job to run.
 
 | `aud`
 | The audience. By default, this is `ORGANIZATION_ID`, a string containing a UUID that identifies the job's project's organization. To customize the audience you can generate an OIDC token with a custom audience. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
