@@ -2,30 +2,19 @@
 :page-platform: Cloud
 :page-description: Tutorial outlining how to configure deploy markers in your workflow.
 :experimental:
+:tabs-sync-option:
 
 This tutorial shows how to add deploy markers to your CircleCI configuration file.
 
-Deploy markers enable you to log all new deployments in one place, update their status and link back to the CI/CD pipelines that triggered them.
-
-Adding deploy markers to your configuration is a prerequisite to using the following CircleCI features:
-
-* Rollback pipelines - manually revert to a previous version of a component from the CircleCI web app.
-* Deploy pipelines - Automatically deploy a new version of a component from the CircleCI web app.
+Deploy markers enable you to log all new deployments in one place, update their status and link back to the CI/CD pipelines that triggered them. You can also get set up to rollback and deploy from the CircleCI web app.
 
 == Introduction
 
-Deploy markers provide a lightweight way to log your deployments. If you install deploy markers, as described in this guide, you will also be able to use the rollback and deploy features. For more information, see the following guides:
+Deploy markers provide a lightweight way to log your deployments. Once you have deploy markers configured, you will see a timeline of deployments in the Deploys UI. From the timeline you have the following options:
 
-* xref:set-up-rollbacks.adoc[Set up Rollbacks]
-* xref:set-up-deploys.adoc[Set up Deploys]
-
-For a full guide to CircleCI's deploys features and functionality, refer to the xref:deployment-overview.adoc[Deployment and Deploy Management] guide.
-
-Once you have deploy markers configured, you will see a timeline of deployments in the Deploys UI. From the timeline you have the following options:
-
-* You can choose to rollback (icon:rebuild[rollback icon]) to a version.
-* You can promote (deploy) a version (icon:promote[promote icon]), once you also have a deploy pipeline set up. For more information on deploys, see the xref:set-up-deploys.adoc[Set up Deploys] guide.
-* You will also get notifications for failed deployments.
+* Rollback to a version (icon:rebuild[rollback icon]).
+* Promote (deploy) a version (icon:promote[promote icon]).
+* Get notifications for failed deployments.
 
 .Deploys timeline with failed deployment
 image::guides:ROOT:deploy/deploys-timeline-fail-banner.png[Deploy timeline with failed deployment]
@@ -33,14 +22,22 @@ image::guides:ROOT:deploy/deploys-timeline-fail-banner.png[Deploy timeline with 
 .Deploys timeline with no deployments requiring troubleshooting
 image::guides:ROOT:releases/dashboard.png[Deploys timeline with no deployments requiring troubleshooting]
 
-== How to set up deploy markers
+Deploy markers also enable you to use the rollback and deploy features:
+
+* Rollback pipelines: Manually revert to a previous version of a component from the CircleCI web app. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide for more details.
+* Deploy pipelines - Automatically deploy a new version of a component from the CircleCI web app. See the xref:set-up-deploys.adoc[Set up Deploys] for more details.
+
+
+== Choose your setup method
 
 You can set up deploy markers in two ways:
 
 * <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once.
 ** With AI features enabled, CircleCI generates the configuration for you.
-** Without AI features you receive a configuration template to apply manually. You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
+** Without AI features you receive a configuration template to apply manually.
 * <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
+
+You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
 
 [#set-up-deploy-markers-for-multiple-projects]
 == Set up deploy markers from the web app
@@ -49,24 +46,26 @@ You can set up deploy markers for a single project or for multiple projects at o
 
 === Prerequisites
 
+* Your code must be stored in a *GitHub* repository.
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
 * Organization admin permissions in CircleCI (required for multi-project setup).
 * The GitHub App installed in your organization. If not installed, the setup process prompts you to install it.
-* AI features enabled for your organization (required for AI-based generation). See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps.
-
-NOTE: If AI features are not enabled, you are presented with a configuration template instead of AI-generated configuration. You can copy the template and use it to update your configuration files manually.
+* AI features enabled for your organization (required for AI-based generation). See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps. If AI features are not enabled, you are presented with a configuration template instead of AI-generated configuration. You can copy the template and use it to update your configuration files manually.
 
 === 1. Start the setup
 
-You can start the deploy marker setup from one of the following places, depending on whether you are setting up deploy markers for a single project or multiple projects:
+You can start the deploy marker setup from project or organization settings, depending on whether you are setting up deploy markers for a single project or multiple projects:
 
 [tabs]
 ====
 Single project::
 +
 --
-Navigate to your project's settings. Select **Deploys** in the sidebar, then select btn:[Configure deploy markers] in the Deploy Markers card.
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. Select **Deploys** in the sidebar.
+. Select btn:[Add deploy markers] in the Deploy Markers card.
 
 .Project Deploy Settings page with the option to configure deploy markers
 image::guides:ROOT:deploy/project-deploy-settings.png[Project Deploy Settings page showing the Deploy Markers card with Configure deploy markers button]
@@ -74,13 +73,14 @@ image::guides:ROOT:deploy/project-deploy-settings.png[Project Deploy Settings pa
 Multiple projects::
 +
 --
-
-* Navigate to menu:Org[Deploys] and select btn:[Configure Deploy Markers].
+include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Select *Deploys*.
+. Select btn:[Configure Deploy Markers].
 +
 .Organization Deploy Settings page with the option to configure deploy markers
 image::guides:ROOT:deploy/org-deploy-settings.png[Organization Deploy Settings page showing the Configure Deploy Markers button]
 
-. A modal displays a list of the projects you follow. Select the projects you want to add deploy markers to, or select the **Select all** checkbox to select all listed projects. Then select btn:[Continue].
+. A modal displays a list of the projects you follow. Select the projects you want to add deploy markers to, or select the **Select all** checkbox, then select btn:[Continue].
 +
 .Select projects for deploy marker setup
 image::guides:ROOT:deploy/bulk-select-projects.png[Project selection modal showing a list of followed projects with checkboxes]
@@ -92,6 +92,16 @@ NOTE: Only projects you follow are shown. To follow more projects, select the **
 [#generate-and-commit-configuration]
 === 2. Generate and commit configuration
 
+[tabs]
+====
+Single project::
++
+--
+Follow the steps in-app to get set up. For more infomation on the process, see the xref:set-up-rollbacks.adoc#set-up-a-rollback-pipeline[Set up a rollback pipeline] guide which includes the same process.
+--
+Multiple projects::
++
+--
 On the next page, you see a table of your selected projects with their repository and branch information. CircleCI auto-detects the branch where possible. If a branch is not auto-detected, select one from the dropdown menu.
 
 .Generate deploy marker configuration for selected projects
@@ -101,6 +111,8 @@ You have two options for generating the configuration:
 
 * Select btn:[Generate] next to an individual project to generate the deploy marker configuration for that project only.
 * Select btn:[Generate all configs] at the bottom of the page to generate configurations for all selected projects at once.
+--
+====
 
 Once the configuration is generated, select btn:[Commit changes to GitHub] to commit the changes to a branch in your repository. After the commit is made, a **view** link appears so you can review the changes on GitHub.
 
@@ -109,7 +121,7 @@ Once the configuration is generated, select btn:[Commit changes to GitHub] to co
 Generation will fail for a project in the following cases:
 
 * The project already has deploy markers configured.
-* The project does not have a deploy job in its configuration.
+* The project does not have a deployment job in its configuration.
 ====
 
 [#set-up-deploy-markers-manually]
