@@ -22,7 +22,7 @@ The how-to guides on this page provide steps for some common group management ta
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, click on **Organization Settings** in the sidebar
+. In the CircleCI web app, click on **Org** in the sidebar
 . Select **Groups** from the sidebar
 . Click btn:[Create Group]
 . Enter a name and description (optional) for your group
@@ -35,7 +35,7 @@ View your new group in the groups list. Click on the group name to view details.
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, click on **Organization Settings** in the sidebar
+. In the CircleCI web app, click on **Org** in the sidebar
 . Select **Groups** from the sidebar
 . Click on the name of the group you want to add people to
 . On the group page, click btn:[Add members]
@@ -68,7 +68,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, click on **Organization Settings** in the sidebar
+. In the CircleCI web app, click on **Org** in the sidebar
 . Select **Groups** from the sidebar
 . Click on the name of the group in the list to view the group details page
 . Click btn:[Delete group]
@@ -78,7 +78,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 
 NOTE: To do this, you must have the _Organization Admin_ role.
 
-. In the CircleCI web app, click on **Organization Settings** in the sidebar
+. In the CircleCI web app, click on **Org** in the sidebar
 . Select **Groups** from the sidebar
 . Click on the name of the group in the list
 . Click on the checkbox next to the user you want to remove from the group, and click btn:[Remove Members]

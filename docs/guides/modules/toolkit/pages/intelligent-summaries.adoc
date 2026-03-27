@@ -12,7 +12,7 @@ The intelligent summaries feature is **disabled** by default. You can opt-in to 
 NOTE: Only organization administrators can enable or disable intelligent summaries.
 
 . From the link:https://app.circleci.com/home/[CircleCI web app] select your organization card.
-. Select **Organization Settings** from the sidebar.
+. Select **Org** from the sidebar.
 . Select **Advanced** from the menu.
 . Use the "Enable intelligent summaries of build failure messages" toggle to enable or disable the feature.
 
@@ -20,10 +20,7 @@ NOTE: Only organization administrators can enable or disable intelligent summari
 
 The btn:[Explain this error] button is available at the step output level in the CircleCI web app. You can locate the option by clicking through to the failed step from your link:https://app.circleci.com/home/[homepage], as follows:
 
-. Select your organization card from the homepage.
-. Select **Pipelines** from the sidebar.
-. Locate your pipeline that has a failure, and use the arrow in the **Status** column to expand the failed workflow.
-. Select the name of the failed job.
+include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
 . From the job view, with the **Steps** tab selected, you are viewing the step output. Locate a failed step and select btn:[Explain this error].
 . A panel appears on the right side of the screen with the intelligent summary, which includes a description of the error and steps to fix it.
 

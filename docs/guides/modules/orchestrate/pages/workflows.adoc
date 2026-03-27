@@ -205,7 +205,7 @@ workflows:
 ----
 
 * The `test` job waits for the `build` job, and only runs if the `build` job is successful.
-* The `cleanup` job waits for the `test` job, and runs regardless of whether the `test` job succeeds, fails, is canceled or is not run.
+* The `cleanup` job waits for the `test` job, and runs regardless of whether the `test` job succeeds, fails, is canceled, unauthorized, or is not run.
 
 ==== Run a command when the previous job is cancelled
 
