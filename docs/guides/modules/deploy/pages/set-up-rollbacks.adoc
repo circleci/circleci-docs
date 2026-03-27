@@ -76,7 +76,7 @@ The in-app setup process guides you to set up deploy markers now. Alternatively,
 Generate with AI::
 +
 --
-NOTE: The Generate with AI option requires AI features to be enabled for your organization. If AI features are not enabled, or if your organization uses a standalone GitHub App, you are presented with a configuration template that you can copy and use to update your configuration manually. An organization admin can enable AI features by navigating to menu:Organization Settings[Advanced]. For more details, see the xref:toolkit:intelligent-summaries.adoc[Intelligent Summaries] page.
+NOTE: The Generate with AI option requires AI features to be enabled for your organization. If AI features are not enabled, you are presented with a configuration template that you can copy and use to update your configuration manually. An organization admin can enable AI features by navigating to menu:Organization Settings[Advanced]. For more details, see the xref:toolkit:intelligent-summaries.adoc[Intelligent Summaries] page.
 
 . Select btn:[Generate config change with AI] to auto-generate a new configuration file, based on your project configuration, with deploy markers added.
 . Once the generation is complete, select btn:[Create pull request] to create a pull request with the changes.

@@ -39,13 +39,13 @@ You can set up deploy markers in two ways:
 
 * <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once.
 ** With AI features enabled, CircleCI generates the configuration for you.
-** Without AI features, or for CircleCI type organizations, you receive a configuration template to apply manually. You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
+** Without AI features you receive a configuration template to apply manually. You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
 * <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
 
 [#set-up-deploy-markers-for-multiple-projects]
 == Set up deploy markers from the web app
 
-You can set up deploy markers for a single project or for multiple projects at once from the CircleCI web app. With AI features enabled, CircleCI uses AI to analyze your existing pipeline configurations and generate the required deploy marker commands. AI-based generation is available for organizations using a GitHub type organization and is not supported for CircleCI type organizations using the CircleCI GitHub App. See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps to enable AI features. For information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+You can set up deploy markers for a single project or for multiple projects at once from the CircleCI web app. With AI features enabled, CircleCI uses AI to analyze your existing pipeline configurations and generate the required deploy marker commands. See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps to enable AI features.
 
 === Prerequisites
 
@@ -55,7 +55,7 @@ You can set up deploy markers for a single project or for multiple projects at o
 * The GitHub App installed in your organization. If not installed, the setup process prompts you to install it.
 * AI features enabled for your organization (required for AI-based generation). See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps.
 
-NOTE: If AI features are not enabled, or if your organization uses a standalone GitHub App, you are presented with a configuration template instead of AI-generated configuration. You can copy the template and use it to update your configuration files manually.
+NOTE: If AI features are not enabled, you are presented with a configuration template instead of AI-generated configuration. You can copy the template and use it to update your configuration files manually.
 
 === 1. Start the setup
 
