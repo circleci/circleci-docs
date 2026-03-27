@@ -4,6 +4,10 @@ CircleCI supports sending OpenTelemetry spans for your pipelines as they
 execute. Spans are emitted for pipelines, workflows, jobs, tasks, and steps
 allowing you to understand and visualise the behavior of your pipelines.
 
+NOTE: Spans are emitted from link:https://circleci.com/docs/guides/security/ip-ranges/[IP Ranges] 
+and you are are not charged for this traffic. So you can set firewall rules to allow inbound traffic 
+to your service endpoint. 
+
 == Configure OpenTelemetry export via the API
 
 The API has the following endpoints, all of which require organization admin privileges.
