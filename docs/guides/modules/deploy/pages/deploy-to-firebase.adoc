@@ -104,7 +104,7 @@ Deploy markers provide a way to track and manage your Firebase deployments in th
 
 You have two options for setting up deploy markers:
 
-* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub app installed, you can use AI to generate the deploy marker configuration automatically.
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
 
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
