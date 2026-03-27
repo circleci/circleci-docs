@@ -24,7 +24,7 @@ NOTE: Context names must be unique for each VCS organization. The default name f
 [#create-and-use-a-context]
 == Quickstart: Create and use a context
 
-. Using the CircleCI web app, select menu:Organization Settings[Contexts] on the left side navigation.
+. Using the CircleCI web app, select menu:Org[Contexts] on the left side navigation.
 +
 Be aware that organization members can create contexts, but only organization administrators can restrict them using security groups. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
 +
@@ -154,7 +154,7 @@ In this example, the jobs `test` and `deploy` are restricted, and `deploy` will 
 
 If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task. To delete a context, follow the steps below:
 
-. Navigate to the menu:Organization Settings[Contexts] in the CircleCI web app.
+. Navigate to the menu:Org[Contexts] in the CircleCI web app.
 . Select the *X* icon in the row of the context you want to delete. A confirmation dialog box will appear.
 . Type "DELETE" in the field and then select *Delete Context*. The context and all associated environment variables will be deleted.
 
@@ -165,19 +165,19 @@ NOTE: If a _deleted_ context is used in a job, the job will fail and show an err
 
 NOTE: Restricting the use of contexts using security groups is available for `github` type organizations only. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
 
-A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Organization Settings[Security].
+A context security setting is available for `github` type organizations to require all newly-created contexts in the organization to be group-restricted. Contexts can still be created, but an administrator must assign at least one security group before the context will be available for use in workflows. This setting can be found in menu:Org[Security].
 
 [#restrict-a-context-to-a-security-group-or-groups]
 === Restrict a context to a security group or groups
 
 CAUTION: To use security group context restrictions you must be an organization administrator, and your code must be integrated with CircleCI via the GitHub OAuth app.
 
-. Navigate to menu:Organization Settings[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
+. Navigate to menu:Org[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
 . Select *Create Context* if you wish to use a new context, or select the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
 . Select *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then select the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
 . Select *Add Environment Variables* to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then select the *Add Environment Variables* button to finalize. Use of the environment variables for this context is now limited to members of the security groups.
-. Navigate back to menu:Organization Settings[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
+. Navigate back to menu:Org[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
 
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
 
@@ -222,7 +222,7 @@ To invoke a workflow that uses a restricted context, the workflow must be part o
 
 You must be an *organization admin* to restrict a context though the method detailed below.
 
-. Navigate to the menu:Organization Settings[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
+. Navigate to the menu:Org[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
 
 . Select the name of an existing context, or select *Create Context* if you want to use a new context.
 . Select *Add Project Restriction* to view the dialog box.
@@ -237,7 +237,7 @@ Only workflows under the specified projects may now use the context and its envi
 
 You must be an *organization admin* to remove projects from contexts though the method detailed below.
 
-. Navigate to menu:Organization Settings[Contexts] page in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
+. Navigate to menu:Org[Contexts] page in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
 . Select the name of the existing context for which you would like to modify restrictions.
 . Select *X* next to the project restriction you would like to remove. The project restriction will be removed for the context.
 . If there are no longer any project restrictions for the context, the context and its environment variables are now effectively unrestricted.
@@ -261,7 +261,7 @@ and not job.ssh.enabled
 and not (pipeline.config_source starts-with "api")
 ----
 
-You can set up expression restrictions using the context restriction API, or via the Context page (menu:Organization Settings[Contexts>Expression Restrictions]) in the CircleCI web app.
+You can set up expression restrictions using the context restriction API, or via the Context page (menu:Org[Contexts>Expression Restrictions]) in the CircleCI web app.
 
 Rules are expressed in a small language that supports equality checks, numeric comparisons, and boolean `and`, `or`, and `not` operators.
 
@@ -288,7 +288,7 @@ API::
 include::ROOT:partial$notes/server-api-examples.adoc[]
 
 . Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
-. You are going to need your organization ID. In the link:https://app.circleci.com/[CircleCI web app] select **Organization Settings** in the sidebar and copy your "Organization ID" somewhere safe.
+. You are going to need your organization ID. In the link:https://app.circleci.com/[CircleCI web app] select **Org** in the sidebar and copy your "Organization ID" somewhere safe.
 . To get the ID for your context, list your contexts, as follows, substituting your organization ID:
 +
 [,shell]

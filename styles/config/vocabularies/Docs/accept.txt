@@ -1,6 +1,6 @@
 \b[Gg]it[Hh]ub organization\b
 \b[Cc]ircle[cC][iI] organization\b
-\bbitbucket organization\b
+\b[Bb]itbucket organization\b
 .circleci/config.yml
 [Aa]gentless
 [Aa]gentic
@@ -247,7 +247,7 @@ Okta
 OOM
 OPA
 \bOpenID Connect\b
-orgs?
+[Oo]rgs?
 [Pp]ackagecloud
 [Pp]arameterization
 [Pp]arameterizable
