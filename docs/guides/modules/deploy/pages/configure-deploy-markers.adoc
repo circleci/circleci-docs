@@ -97,7 +97,7 @@ NOTE: Only projects you follow are shown. To follow more projects, select the **
 Single project::
 +
 --
-Follow the steps in-app to get set up. For more infomation on the process, see the xref:set-up-rollbacks.adoc#set-up-a-rollback-pipeline[Set up a rollback pipeline] guide which includes the same process.
+Follow the steps in-app to get set up. For more information on the process, see the xref:set-up-rollbacks.adoc#set-up-a-rollback-pipeline[Set up a Rollback Pipeline] guide which includes the same process.
 --
 Multiple projects::
 +
