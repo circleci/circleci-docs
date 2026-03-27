@@ -2,6 +2,16 @@
 
 This guide provides style, voice, and formatting rules for creating and editing CircleCI documentation. Follow these guidelines when working on AsciiDoc content in the docs directory.
 
+## Documentation Overview
+
+For a comprehensive overview of the CircleCI documentation structure, see the auto-generated `llms.txt` file on the live site at https://circleci.com/docs/llms.txt. This file provides:
+- Complete documentation structure with all components
+- Full navigation hierarchy
+- Content statistics and URL patterns
+- Technical stack information
+
+This guide (CLAUDE.md) focuses on **how to write documentation**. The llms.txt file tells you **what documentation exists and where**.
+
 ## Voice and Style
 
 ### Active Voice and Direct Language
@@ -72,12 +82,46 @@ Replace problematic terms with inclusive alternatives:
 
 ### Text Styling
 - **Use bold** for GUI menu options and button text:
-  - Select **Organization Settings** from the sidebar
+  - Select **Org** from the sidebar
   - Click **Set Up Project**
 - **Use italics** for commonly understood technical concepts (not CircleCI features):
   - _Continuous Integration_
   - _Concurrency_
   - _Parallelism_
+
+### Icons
+CircleCI docs use a custom icon macro for UI icons that automatically switches between light and dark theme versions.
+
+**Syntax:**
+```adoc
+icon:icon-name[Alt text description]
+```
+
+**Available icons** (located in `docs/guides/modules/ROOT/images/icons/`):
+- `icon:more[Ellipsis menu icon]` - Three-dot menu (ellipsis)
+- `icon:edit-solid[Edit icon]` - Edit button
+- `icon:delete[Trash bin icon]` - Delete/trash button
+- `icon:settings[Settings icon]` - Settings button
+- `icon:cancel[Cancel icon]` - Cancel button
+- `icon:passed[Passed icon]` - Success/passed indicator
+- `icon:warning[Warning icon]` - Warning indicator
+- `icon:rebuild[Rebuild icon]` - Rebuild button
+- `icon:promote[Promote icon]` - Promote button
+- `icon:chunk[Chunk icon]` - Chunk feature icon
+- `icon:github-app[GitHub App icon]` - GitHub App integration
+- `icon:github-oauth[GitHub OAuth icon]` - GitHub OAuth integration
+
+**Usage examples:**
+```adoc
+Select the icon:more[Ellipsis menu icon] to open the menu.
+Click the icon:settings[Settings icon] to access project settings.
+```
+
+**Important notes:**
+- Always include descriptive alt text for accessibility
+- The macro automatically handles light/dark theme switching
+- Each icon has a light version (`name.svg`) and dark version (`name-dark.svg`)
+- Use this macro instead of the older `image:` syntax for theme-aware icons
 
 ### Headings
 - Write headings in **logical sequence** that tells a story
@@ -185,6 +229,122 @@ some code
 --
 ```
 
+### Reusable Partials
+
+CircleCI docs use reusable partials to maintain consistency and reduce duplication. Partials are AsciiDoc snippets that can be included in multiple pages.
+
+**When to use partials:**
+- Repeated instructions that appear across multiple pages (navigation steps, setup procedures)
+- Standard notes, tips, or warnings used in multiple locations
+- Content that needs to stay synchronized across pages (resource tables, FAQ entries)
+- Common troubleshooting steps
+
+**When NOT to use partials:**
+- Content that appears only once
+- Page-specific information that would not be reused
+- Content that needs different context on each page
+
+**Include syntax:**
+```adoc
+include::ROOT:partial$category/filename.adoc[]
+```
+
+**Include with custom text or comment:**
+```adoc
+include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+```
+
+**Partial categories and locations:**
+
+All partials are located in `docs/guides/modules/ROOT/partials/`
+
+- **app-navigation/** - Navigation instructions
+  - `steps-to-project-settings.adoc` - Steps to access project settings
+
+- **create-project/** - Project creation steps
+  - `steps-up-to-pipeline.adoc` - Steps from Create Project to pipeline setup
+
+- **execution-resources/** - Resource specifications
+  - `docker-resource-table.adoc` - Docker executor resource table
+  - `machine-resource-table.adoc` - Machine executor resource table
+  - `macos-resource-table.adoc` - macOS executor resource table
+  - `windows-resource-table.adoc` - Windows executor resource table
+  - And others for ARM, GPU, and resource class views
+
+- **faq/** - Frequently asked questions snippets
+  - `general-faq-snip.adoc` - General FAQ entries
+  - `orb-faq-snip.adoc` - Orb-related FAQs
+  - `workflows-faq-snip.adoc` - Workflow FAQs
+  - `billing-faq-snip.adoc` - Billing FAQs
+  - And others for specific topics
+
+- **notes/** - Reusable notes and warnings
+  - `docker-auth.adoc` - Docker authentication note
+  - `standalone-unsupported.adoc` - Feature support note (accepts custom text)
+  - `find-organization-id.adoc` - How to find organization ID
+  - `server-api-examples.adoc` - Server API examples note
+
+- **orbs/** - Orb-related content
+  - `orb-types.adoc` - Orb type definitions
+  - `orb-type-comparison.adoc` - Orb type comparison table
+
+- **pipelines-and-triggers/** - Pipeline setup content
+  - `set-up-schedule-trigger.adoc` - Schedule trigger setup steps
+  - `custom-webhook-setup.adoc` - Webhook configuration steps
+  - `pipeline-values.adoc` - Pipeline values reference
+
+- **runner/** - Self-hosted runner setup
+  - `install-with-web-app-steps.adoc` - Runner installation via web app
+  - `install-with-cli-steps.adoc` - Runner installation via CLI
+  - `container-runner-prereq.adoc` - Container runner prerequisites
+  - `terms.adoc` - Runner terminology
+
+- **tips/** - Helpful tips and guidance
+  - `check-org-type.adoc` - How to check organization type
+  - `find-project-slug.adoc` - How to find project slug
+  - `env-var-or-context.adoc` - When to use env vars vs contexts
+  - `trigger-pipeline-with-parameters.adoc` - Pipeline parameter triggering
+
+- **troubleshoot/** - Troubleshooting snippets
+  - `orb-troubleshoot-snip.adoc` - Orb troubleshooting
+  - `pipelines-troubleshoot-snip.adoc` - Pipeline troubleshooting
+  - `self-hosted-runner-troubleshoot-snip.adoc` - Runner troubleshooting
+
+- **using-expressions/** - Configuration expressions
+  - `operators.adoc` - Expression operators
+  - `env-vars-in-conditional-caveat.adoc` - Environment variable caveats
+
+**Example usage:**
+
+```adoc
+== Setting up your project
+
+include::ROOT:partial$tips/check-org-type.adoc[]
+
+Follow these steps:
+
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Steps to create project]
+
+include::ROOT:partial$notes/docker-auth.adoc[]
+```
+
+**Creating new partials:**
+
+When creating a new partial:
+1. Determine if the content will be used in 2+ places
+2. Choose the appropriate category directory
+3. Use a descriptive filename ending in `.adoc`
+4. For FAQ/troubleshooting snippets, use `-snip.adoc` suffix
+5. Consider if the partial should accept custom text parameters
+6. Test the partial in all intended locations
+
+**Best practices:**
+- Keep partials focused on a single concept or set of related steps
+- Write partials to work in multiple contexts without requiring modifications
+- Document partials that accept custom text parameters
+- Update all pages when modifying a partial (partials affect multiple pages)
+- Use meaningful filenames that describe the content
+
 ### Images
 - **Always include descriptive alt text**:
 ```adoc
@@ -260,12 +420,103 @@ Content for Tab B
 - Use valid table block syntax
 - Close ID quotes properly
 
+## Documentation Architecture
+
+### Component Structure
+
+The CircleCI docs use Antora's component-based architecture:
+
+**When to use each component:**
+
+- **Root**: Landing page and site home
+- **Guides**: Tutorial and how-to content for end users
+- **Reference**: Technical reference material (config, API, CLI)
+- **Orbs**: Orb-related documentation
+- **Server Admin**: Self-hosted server docs (versioned by release)
+- **Services**: Service-specific documentation
+- **Contributors**: Meta-documentation for contributors
+
+### Component Organization
+
+Each component follows this structure:
+```
+docs/component-name/
+├── antora.yml              # Component metadata
+└── modules/
+    └── ROOT/
+        ├── nav.adoc        # Navigation structure
+        └── pages/          # AsciiDoc content
+```
+
+### Navigation Structure (nav.adoc)
+
+Navigation uses AsciiDoc list syntax:
+
+```adoc
+* Top Level Category
+** xref:getting-started:first-steps.adoc[Page Title]
+** Subcategory
+*** xref:getting-started:tutorial.adoc[Tutorial]
+```
+
+Rules:
+- Every page should appear in navigation
+- Use `xref:` for internal cross-references
+- Format: `xref:module:filename.adoc[Link Text]`
+
+### Cross-Referencing Between Components
+
+Full coordinate system:
+```adoc
+xref:component:module:filename.adoc[Link Text]
+```
+
+Examples:
+```adoc
+xref:guides:getting-started:first-steps.adoc[First Steps]
+xref:reference:configuration-reference.adoc[Config Reference]
+```
+
+## Working with the Docs Site
+
+### Previewing Changes Locally
+
+```bash
+npm run start:dev
+```
+
+Opens http://localhost:5000 with live reload
+
+### Build Commands
+
+```bash
+npm run build:docs    # Full site build
+npm run build:ui      # UI bundle only
+npm run build:api-docs # API docs only
+```
+
+### Adding a New Page
+
+1. Create `.adoc` file in appropriate `pages/` directory
+2. Add entry to `nav.adoc`
+3. Write content following style guide
+4. Preview locally
+5. Commit both files
+
+### Troubleshooting
+
+**"Unlisted page" errors**: Page not in `nav.adoc` - add to navigation
+
+**"Unresolved page ID" errors**: Check xref coordinates and file exists
+
+**Navigation not updating**: Restart dev server after nav.adoc changes
+
 ## Answering User Questions About CircleCI
 
 This file focuses on **how to write documentation**. When users ask questions **about using CircleCI** (not about writing docs), you should:
 
 ### Reference the llms.txt File
-The `llms.txt` file in the project root contains:
+The `llms.txt` file (available at https://circleci.com/docs/llms.txt) contains:
 - CircleCI product overview and features
 - Documentation structure and navigation
 - Content areas (Guides, Reference, Orbs, Server Admin)

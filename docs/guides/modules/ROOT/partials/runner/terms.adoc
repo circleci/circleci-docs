@@ -7,18 +7,18 @@ Web app installation::
 +
 --
 
-Before you can install self-hosted runners through the web app, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To access the *Self-Hosted Runners* section of the https://app.circleci.com/[CircleCI web app] an organization admin must agree to the terms at menu:Organization Settings[Self-Hosted Runners].
+Before you can install self-hosted runners through the web app, you will need to agree to the https://circleci.com/legal/runner-terms/[CircleCI Runner Terms]. To access the *Runners* section of the https://app.circleci.com/[CircleCI web app] an organization admin must agree to the terms at menu:Org[Runners].
 
 .Runner terms and conditions
 image::guides:ROOT:runnerui_terms.png[Runner terms and conditions]
 
-Once the terms have been accepted, **Self-Hosted Runners** will appear permanently in the side navigation.
+Once the terms have been accepted, **Runners** will appear permanently in the side navigation.
 
 Your role within your org is determined differently depending on how you integrate with your code, as follows:
 
 * If you have a `github` or `bitbucket` type organization, CircleCI mirrors VCS permissions for organizations. If you are an admin on your organization's VCS, you are an admin on CircleCI. If you are unsure, https://support.circleci.com/hc/en-us/articles/360034990033-Am-I-an-Org-Admin[check the admin permissions] on your VCS.
 
-* If you have a `circleci` type organization, you can check roles by navigating to menu:Organization Settings[People]. Full details on roles and permissions are available in the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview].
+* If you have a `circleci` type organization, you can check roles by navigating to menu:Org[People]. Full details on roles and permissions are available in the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview].
 
 TIP: Find out about organization types in the xref:guides:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations and Integrations Guide].
 --

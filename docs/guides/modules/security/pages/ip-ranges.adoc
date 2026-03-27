@@ -200,4 +200,4 @@ curl -O https://circleci.com/docs/ip-ranges-list.json
 
 macOS builds are automatically restricted within the IP ranges listed here. In other words, you do not have to explicitly set `circleci_ip_ranges: true` for macOS builds.
 
-*macOS IP ranges are not included in the machine-consumable lists maintained in DNS.* Refer to the list above for the most up-to-date macOS IP addresses. Information about changes to macOS IP ranges will be included in the link:https://circleci.com/changelog/[changelog] and will be sent to the technical contact(s) listed under menu:Organization Settings[Overview].
+*macOS IP ranges are not included in the machine-consumable lists maintained in DNS.* Refer to the list above for the most up-to-date macOS IP addresses. Information about changes to macOS IP ranges will be included in the link:https://circleci.com/changelog/[changelog] and will be sent to the technical contact(s) listed under menu:Org[Overview].
