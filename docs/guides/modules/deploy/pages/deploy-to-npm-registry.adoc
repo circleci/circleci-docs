@@ -76,73 +76,12 @@ If tests passed, CircleCI will publish the package to npm automatically.
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
-After setting up your npm registry deployment, you can add deploy markers to track and manage your package publications in the CircleCI web app. Deploy markers provide visibility into your deployment history and enable rollback capabilities.
+Deploy markers provide a way to track and manage your npm package publications in the CircleCI web app. When you add deploy markers to your deployment job, you can view a timeline of all deployments, track their status, and enable rollback and deploy pipelines.
 
-[#what-are-deploy-markers]
-=== What are deploy markers
+You have two options for setting up deploy markers:
 
-Deploy markers are a lightweight way to log your deployments in CircleCI. When you add deploy markers to your configuration, you can:
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub app installed, you can use AI to generate the deploy marker configuration automatically.
 
-* View a timeline of all deployments in the CircleCI web app
-* Track deployment status (pending, running, success, or failed)
-* Roll back to previous versions using rollback pipelines
-* Trigger deployments directly from the CircleCI web app using deploy pipelines
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
-[#add-deploy-markers-to-your-npm-deployment]
-=== Add deploy markers to your npm deployment
-
-To add deploy markers to your npm deployment job, add the `circleci run release` commands to your deployment workflow. The following example shows a basic deployment marker setup:
-
-[source,yaml]
-----
-jobs:
-  publish:
-    docker:
-      - image: <docker-image-name-tag>
-    steps:
-      - checkout
-      - run:
-          name: Plan deployment
-          command: |
-            VERSION=$(node -p "require('./package.json').version")
-            circleci run release plan npm-deploy \
-              --target-version="$VERSION" \
-              --environment-name="production" \
-              --component-name="my-npm-package"
-      - run:
-          name: Publish to NPM
-          command: |
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-            npm publish
-      - run:
-          name: Update deployment status
-          command: circleci run release update npm-deploy --status=running
-      - run:
-          name: Update deployment to SUCCESS
-          command: circleci run release update npm-deploy --status=SUCCESS
-          when: on_success
-      - run:
-          name: Update deployment to FAILED
-          command: circleci run release update npm-deploy --status=FAILED
-          when: on_fail
-
-workflows:
-  tagged-build:
-    jobs:
-      - publish:
-          filters:
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*/
-----
-
-For complete instructions on configuring deploy markers, including status updates and advanced options, refer to the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
-
-[#set-up-rollback-and-deploy-pipelines]
-=== Set up rollback and deploy pipelines
-
-Once you have deploy markers configured, you can set up rollback and deploy pipelines to manage your npm registry deployments directly from the CircleCI web app:
-
-* xref:set-up-rollbacks.adoc[Set up a Rollback Pipeline] - Configure a pipeline to roll back to previous versions of your npm package
-* xref:set-up-deploys.adoc[Set up a Deploy Pipeline] - Configure a pipeline to deploy new versions from the CircleCI web app
-
-These features provide additional control and visibility for your npm package publications.
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.

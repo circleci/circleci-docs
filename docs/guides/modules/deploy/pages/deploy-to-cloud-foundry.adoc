@@ -102,76 +102,12 @@ workflows:
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
-After setting up your Cloud Foundry deployment, you can add deploy markers to track and manage your deployments in the CircleCI web app. Deploy markers provide visibility into your deployment history and enable rollback capabilities.
+Deploy markers provide a way to track and manage your Cloud Foundry deployments in the CircleCI web app. When you add deploy markers to your deployment job, you can view a timeline of all deployments, track their status, and enable rollback and deploy pipelines.
 
-[#what-are-deploy-markers]
-=== What are deploy markers
+You have two options for setting up deploy markers:
 
-Deploy markers are a lightweight way to log your deployments in CircleCI. When you add deploy markers to your configuration, you can:
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub app installed, you can use AI to generate the deploy marker configuration automatically.
 
-* View a timeline of all deployments in the CircleCI web app
-* Track deployment status (pending, running, success, or failed)
-* Roll back to previous versions using rollback pipelines
-* Trigger deployments directly from the CircleCI web app using deploy pipelines
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
-[#add-deploy-markers-to-your-cloud-foundry-deployment]
-=== Add deploy markers to your Cloud Foundry deployment
-
-To add deploy markers to your Cloud Foundry deployment job, add the `circleci run release` commands to your deployment workflow. The following example shows a basic deployment marker setup for a live deployment:
-
-[source,yaml]
-----
-jobs:
-  live-deploy:
-    docker:
-      - image: <docker-image-name-tag>
-    steps:
-      - checkout
-      - run:
-          name: Plan deployment
-          command: |
-            circleci run release plan cf-deploy \
-              --target-version="${CIRCLE_SHA1:0:7}" \
-              --environment-name="production" \
-              --component-name="my-cf-app"
-      - run:
-          name: Setup CF CLI
-          command: |
-            curl -v -L -o cf-cli_amd64.deb "https://cli.run.pivotal.io/stable?release=debian64&source=github"
-            sudo dpkg -i cf-cli_amd64.deb
-            cf -v
-            cf api https://api.run.pivotal.io
-            cf auth "$CF_USER" "$CF_PASSWORD"
-            cf target -o "$CF_ORG" -s "$CF_SPACE"
-      - run:
-          name: Re-route live Domain to latest
-          command: |
-            cf map-route app-name-dark example.com -n www
-            cf unmap-route app-name example.com -n www
-            cf stop app-name
-            cf delete app-name -f
-            cf rename app-name-dark app-name
-      - run:
-          name: Update deployment status
-          command: circleci run release update cf-deploy --status=running
-      - run:
-          name: Update deployment to SUCCESS
-          command: circleci run release update cf-deploy --status=SUCCESS
-          when: on_success
-      - run:
-          name: Update deployment to FAILED
-          command: circleci run release update cf-deploy --status=FAILED
-          when: on_fail
-----
-
-For complete instructions on configuring deploy markers, including status updates and advanced options, refer to the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
-
-[#set-up-rollback-and-deploy-pipelines]
-=== Set up rollback and deploy pipelines
-
-Once you have deploy markers configured, you can set up rollback and deploy pipelines to manage your Cloud Foundry deployments directly from the CircleCI web app:
-
-* xref:set-up-rollbacks.adoc[Set up a Rollback Pipeline] - Configure a pipeline to roll back to previous versions of your Cloud Foundry application
-* xref:set-up-deploys.adoc[Set up a Deploy Pipeline] - Configure a pipeline to deploy new versions from the CircleCI web app
-
-These features provide additional control and visibility for your Cloud Foundry deployments, including support for Blue-Green deployment strategies.
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.

@@ -142,86 +142,15 @@ workflows:
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
 
-After setting up your Artifactory deployment, you can add deploy markers to track and manage your artifact uploads in the CircleCI web app. Deploy markers provide visibility into your deployment history and enable rollback capabilities.
+Deploy markers provide a way to track and manage your Artifactory deployments in the CircleCI web app. When you add deploy markers to your deployment job, you can view a timeline of all artifact uploads, track their status, and enable rollback and deploy pipelines.
 
-[#what-are-deploy-markers]
-=== What are deploy markers
+You have two options for setting up deploy markers:
 
-Deploy markers are a lightweight way to log your deployments in CircleCI. When you add deploy markers to your configuration, you can:
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub app installed, you can use AI to generate the deploy marker configuration automatically.
 
-* View a timeline of all deployments in the CircleCI web app
-* Track deployment status (pending, running, success, or failed)
-* Roll back to previous versions using rollback pipelines
-* Trigger deployments directly from the CircleCI web app using deploy pipelines
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
-[#add-deploy-markers-to-your-artifactory-deployment]
-=== Add deploy markers to your Artifactory deployment
-
-To add deploy markers to your Artifactory deployment job, add the `circleci run release` commands to your deployment workflow. The following example shows a basic deployment marker setup:
-
-[source,yaml]
-----
-jobs:
-  create-build-package:
-    docker:
-      - image: cimg/openjdk:17.0.10
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Plan deployment
-          command: |
-            circleci run release plan artifactory-deploy \
-              --target-version="${CIRCLE_SHA1:0:7}" \
-              --environment-name="production" \
-              --component-name="my-artifact"
-      - run:
-          name: Install JFrog CLI
-          command: curl -fL https://getcli.jfrog.io/v2-jf | sh
-      - run:
-          name: Configure JFrog Creds
-          command: |
-            ./jf c add <server_id> \
-              --artifactory-url $ARTIFACTORY_URL \
-              --user $ARTIFACTORY_USER \
-              --password $ARTIFACTORY_APIKEY \
-              --interactive=false
-      - run:
-          name: Maven Build and Deploy
-          command: |
-            ./jf mvnc \
-              --server-id-resolve <server_id> \
-              --server-id-deploy <server_id> \
-              --repo-resolve-releases libs-release \
-              --repo-resolve-snapshots libs-snapshot \
-              --repo-deploy-releases release-candidates \
-              --repo-deploy-snapshots snapshots \
-              --include-patterns "*.jar, *.pom, *.xml"
-            ./jf mvn clean install
-      - run:
-          name: Update deployment status
-          command: circleci run release update artifactory-deploy --status=running
-      - run:
-          name: Update deployment to SUCCESS
-          command: circleci run release update artifactory-deploy --status=SUCCESS
-          when: on_success
-      - run:
-          name: Update deployment to FAILED
-          command: circleci run release update artifactory-deploy --status=FAILED
-          when: on_fail
-----
-
-For complete instructions on configuring deploy markers, including status updates and advanced options, refer to the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
-
-[#set-up-rollback-and-deploy-pipelines]
-=== Set up rollback and deploy pipelines
-
-Once you have deploy markers configured, you can set up rollback and deploy pipelines to manage your Artifactory deployments directly from the CircleCI web app:
-
-* xref:set-up-rollbacks.adoc[Set up a Rollback Pipeline] - Configure a pipeline to roll back to previous versions of your artifacts
-* xref:set-up-deploys.adoc[Set up a Deploy Pipeline] - Configure a pipeline to deploy new versions from the CircleCI web app
-
-These features provide additional control and visibility for your Artifactory deployments.
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
 
 [#see-also]
 == See also
