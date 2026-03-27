@@ -6,11 +6,12 @@
 
 Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository. In this guide you will learn how to set up a cross-repo trigger.
 
-*For this how-to guide we have chosen the following scenario:*
+== Introduction
+For this how-to guide we have chosen the following scenario:
 
-Configure CircleCI to automatically run tests for code that consumes a library when a new tag is created in the library repository. Running integration tests validates that your library changes work with your dependent applications before you publish the release.
+_Configure CircleCI to automatically run tests for a project that consumes a library when a new tag is created in the library repository. Run integration tests to validate that changes in the library work with dependent applications before publishing the release._
 
-There will be two options for managing the configuration file for the consumer pipeline, you can either store the config in the consumer repository or in a centralized config repository:
+There are two options in this how-to guide for managing the configuration file for the consumer pipeline. You can either store the config in the consumer repository or in a centralized config repository:
 
 .Option 1: Config in consumer repository
 [mermaid]
@@ -67,7 +68,7 @@ flowchart TB
     G -.checkout.-> F
 ----
 
-*What you will set up:*
+=== What you will set up
 
 * A trigger that watches for new tags in your library repository.
 * A consumer pipeline that runs automatically when those tags are created.
@@ -222,18 +223,12 @@ jobs:
 workflows:
   validate-library-integration:
     jobs:
-      - test-with-library:
-          filters:
-            tags:
-              only: /.*/
+      - test-with-library
 ----
-
-IMPORTANT: The `filters` section is required because CircleCI does not run workflows for tags unless you explicitly specify tag filters. The pattern `/.*/` matches all tags. Both lightweight and annotated tags are supported.
 
 In this example:
 
 * When a tag like `v1.2.3` is created in the library repository, `<< pipeline.event.github.ref >>` will contain `refs/tags/v1.2.3`.
-* The workflow filter ensures the workflow runs for tag events.
 * The configuration installs that specific version using `npm install @myorg/my-library@v1.2.3`.
 * The consumer tests then run against the exact library version that triggered the pipeline.
 
@@ -328,28 +323,6 @@ image::guides:ROOT:cross-repo-pipeline-central.png[Pipeline configured for centr
 
 --
 ====
-
-=== 4.b. Configure tag filters in your workflow
-
-The trigger is now configured in CircleCI, but you also need to update your configuration file for your integration tests to run workflows for tags.
-
-By default, *CircleCI does not run workflows for tags unless you explicitly specify tag filters*. For more information, see the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Executing Workflows for a Git Tag] section.
-
-In the configuration file for your consumer pipeline, add tag filters to your workflow if they are not already present. Here is an example:
-
-.Example of a workflow with tag filters
-[source,yaml]
-----
-workflows:
-  validate-library-integration:
-    jobs:
-      - your-job-name:
-          filters:
-            tags:
-              only: /.*/ # Matches all tags
-----
-
-The pattern `/.*/` matches all tags. Both lightweight and annotated tags are supported.
 
 Your cross-repo trigger is now fully configured. When a tag is created in your library repository, CircleCI will trigger the consumer pipeline and run your workflows.
 
