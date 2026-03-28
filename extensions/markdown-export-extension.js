@@ -276,15 +276,17 @@ module.exports.register = function () {
          * Extract mermaid diagrams and convert them to proper <pre><code> blocks
          * so Turndown's code block rule handles them with proper whitespace preservation.
          */
-        const mermaidDivs = article.querySelectorAll('.mermaid.content')
-        mermaidDivs.forEach(mermaidDiv => {
-          // Get raw text which preserves newlines in node-html-parser
-          const mermaidCode = mermaidDiv.rawText || mermaidDiv.textContent || ''
+        const mermaidContainers = article.querySelectorAll('.mermaid-diagram-container')
+        mermaidContainers.forEach(container => {
+          // Get the mermaid source from the data attribute
+          const mermaidCode = container.getAttribute('data-mermaid-source') || ''
 
-          // Replace with a proper code block that Turndown knows how to handle
-          // Use <pre><code> structure so Turndown's code block rule processes it
-          const codeBlock = `<pre><code class="language-mermaid">${mermaidCode.trim()}</code></pre>`
-          mermaidDiv.replaceWith(codeBlock)
+          if (mermaidCode) {
+            // Replace with a proper code block that Turndown knows how to handle
+            // Use <pre><code> structure so Turndown's code block rule processes it
+            const codeBlock = `<pre><code class="language-mermaid">${mermaidCode.trim()}</code></pre>`
+            container.replaceWith(codeBlock)
+          }
         })
       }
 

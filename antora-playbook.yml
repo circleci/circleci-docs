@@ -78,6 +78,7 @@ asciidoc:
   extensions:
   - '@asciidoctor/tabs'
   - ./extensions/theme-icon-extension.js
+  - ./extensions/beautiful-mermaid-extension.js
 urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
@@ -121,17 +122,6 @@ antora:
       - 'test:set-up-test-impact-analysis.adoc'
       - 'test:use-dynamic-test-splitting.adoc'
       - 'test:auto-rerun-failed-tests.adoc'
-  - require: '@sntke/antora-mermaid-extension'
-    mermaid_initialize_options:
-      start_on_load: true
-      theme: base
-      security_level: loose
-      theme_variables:
-        primary_color: '#E3F5E5'
-        background: '#E3F5E5'
-        line_color: '#B4B8C6'
-        primary_border_color: '#008542'
-        primary_text_color: '#00381A'
   - require: ./extensions/detect-unused-media-extension.js
     excludepatterns:
       - '*-dark.svg'
