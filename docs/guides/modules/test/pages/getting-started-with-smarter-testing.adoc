@@ -421,6 +421,19 @@ outputs:
   junit: test-reports/tests.xml
 ----
 --
+
+Other::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: my-test-runner --only-list-tests
+run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+----
 ====
 
 . Run the test suite and confirm that the `run` command runs the test atoms you expect. You can exit early (Ctrl+C) once verified:

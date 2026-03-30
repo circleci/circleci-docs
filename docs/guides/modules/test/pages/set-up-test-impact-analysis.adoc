@@ -349,6 +349,25 @@ options:
   test-analysis-duration: 5
 ----
 --
+
+Other::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: my-test-runner --only-list-tests
+run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
+analysis: my-test-runner --coverage=<< outputs.coverage >> --run << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
 ====
 
 . Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"` (learn more about the flags in the <<cli-flags,test suite flag options>> section).
@@ -887,6 +906,19 @@ discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .Imp
 run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
 analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
 file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
+----
+
+Other::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: my-test-runner --only-list-tests
+run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
+analysis: my-test-runner --coverage=<< outputs.coverage >> --run << test.atoms >>
+file-mapper: my-test-runner --list-files-for << test.atoms >>
 ----
 ====
 
