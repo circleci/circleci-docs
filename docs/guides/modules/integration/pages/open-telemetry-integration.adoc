@@ -8,7 +8,7 @@ allowing you to understand and visualise the behavior of your pipelines.
 
 The API has the following endpoints, all of which require organization admin privileges.
 
-* `GET /api/v2/otel/exporters?org_id=...` - List the exporter configurations for the given organization ID.
+* `GET /api/v2/otel/exporters?org-id=...` - List the exporter configurations for the given organization ID.
 * `POST /api/v2/otel/exporters` - Add an exporter configuration.
 * `DELETE /api/v2/otel/exporters/:id` - Delete an exporter configuration.
 

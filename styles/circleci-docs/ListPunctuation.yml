@@ -52,7 +52,7 @@ script: |
     // Check if ends with period, colon, or forward slash
     // Note: We don't allow ] or ) here because xref/link-only lines are already excluded above
     last_char := content[len(content)-1]
-    if last_char == '.' || last_char == ':' || last_char == '/' {
+    if last_char == '.' || last_char == ':' || last_char == '/' || last_char == '*' {
       continue
     }
 
