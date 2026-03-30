@@ -12,12 +12,12 @@ This page is outdated. CircleCI is working on a new updated sample project. The 
 
 This guide has two phases:
 
-* Building and pushing a Docker image to AWS ECR
-* Deploying the new Docker image to an existing AWS ECS service
+* Building and pushing a Docker image to AWS ECR.
+* Deploying the new Docker image to an existing AWS ECS service.
 
 // You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
 
-This project includes a simple link:https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile[Dockerfile]. Visit the xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[Creating a custom image manually] page for more information.
+This project includes a simple link:https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile[Dockerfile]. Visit the xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[Creating a Custom Image Manually] page for more information.
 
 [#prerequisites]
 == Prerequisites
@@ -46,7 +46,7 @@ TIP: You can destroy most AWS resources by running `terraform destroy`. If any r
 [#configure-circleci-environment-variables]
 === 2. Configure CircleCI environment variables
 
-In the CircleCI application, set the following xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[project environment variables].
+In the CircleCI application, set the following xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Environment Variables].
 
 [.table-scroll]
 --
@@ -110,7 +110,12 @@ workflows:
 [#deploy-the-new-docker-image-to-an-existing-aws-ecs-service]
 === 2. Deploy the new Docker image to an existing AWS ECS service
 
-The `deploy-service-update` job of the AWS-ECS orb creates a new task definition that is based on the current task definition, but with the new Docker image specified in the task definition's container definitions, and deploys the new task definition to the specified ECS service. If you would like more information about the CircleCI AWS-ECS orb, go to the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[CircleCI AWS-ECS orb] page on the developer hub.
+The `deploy-service-update` job of the AWS-ECS orb completes the following:
+
+* Creates a new task definition that is based on the current task definition, but with the new Docker image specified in the task definition's container definitions.
+* Deploys the new task definition to the specified ECS service.
+
+If you would like more information about the CircleCI AWS-ECS orb, go to the link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[CircleCI AWS-ECS orb] page on the developer hub.
 
 NOTE: The `deploy-service-update` job depends on `build-and-push-image` because of the `requires` key.
 
@@ -137,6 +142,19 @@ workflows:
 ----
 
 Note the use of Workflows to define job run order/concurrency. See the xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs] page for more information.
+
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+Deploy markers provide a way to track and manage your AWS ECR and ECS deployments in the CircleCI web app. When you add deploy markers to your deployment job, you can view a timeline of all deployments, track their status, and enable rollback and deploy pipelines.
+
+You have two options for setting up deploy markers:
+
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
 
 [#see-also]
 == See also
