@@ -1,6 +1,6 @@
 = Set up test impact analysis
 :page-description: Run only the tests impacted by your code changes
-:page-badge: Preview
+:page-badge: Beta
 :page-platform: Cloud
 :experimental:
 

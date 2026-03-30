@@ -1,4 +1,4 @@
-= Use Smarter Testing to get faster feedback on local test runs
+= Use Smarter Testing for local development
 :page-description: Run Smarter Testing features on your local machine
 :page-badge: Beta
 :page-platform: Cloud
