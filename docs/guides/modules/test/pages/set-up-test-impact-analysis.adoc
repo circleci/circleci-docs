@@ -1,13 +1,15 @@
 = Set up test impact analysis
 :page-description: Run only the tests impacted by your code changes
-:page-badge: Preview
+:page-badge: Beta
 :page-platform: Cloud
 :experimental:
-:page-noindex: true
-:page-show-readtime: true
 
-CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+[NOTE]
+====
+*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
+Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+====
 Test impact analysis runs only the tests impacted by your code changes, reducing test execution time while maintaining code quality.
 
 == Is my project a good fit for test impact analysis?
@@ -52,12 +54,6 @@ Before enabling test impact analysis, ensure you have completed the xref:getting
 * Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
-
-Steps to enable test impact analysis are as follows:
-
-. Configure the `analysis` command in `test-suites.yml`.
-. Validate test selection locally.
-. Run test suite in CircleCI with test impact analysis enabled.
 
 == 1. Configure the analysis command in test-suites.yml
 
@@ -357,6 +353,25 @@ options:
   test-analysis-duration: 5
 ----
 --
+
+Other::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: my-test-runner --only-list-tests
+run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
+analysis: my-test-runner --coverage=<< outputs.coverage >> --run << test.atoms >>
+outputs:
+  junit: test-reports/tests.xml
+options:
+  # Enable test impact analysis.
+  test-impact-analysis: true
+  # Limit analysis to about 5 minutes, in order to confirm the command is working correctly
+  test-analysis-duration: 5
+----
 ====
 
 . Next, run the testsuite command with flags `--test-selection="none"` and `--test-analysis="impacted"` (learn more about the flags in the <<cli-flags,test suite flag options>> section).
@@ -692,7 +707,7 @@ Analysis can be time-consuming, especially during the initial run when the compl
 * Run analysis as a separate non-blocking job in the same workflow.
 * Run analysis in a separate workflow in the same pipeline.
 
-See <<set-up-examples>> for configuration examples of each approach. 
+See <<set-up-examples>> for configuration examples of each approach.
 
 It is important to ensure analysis runs on every change to your default branch so that impact data stays up to date for accurate test selection.
 ====
@@ -896,6 +911,19 @@ run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << te
 analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
 file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
 ----
+
+Other::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: my-test-runner --only-list-tests
+run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
+analysis: my-test-runner --coverage=<< outputs.coverage >> --run << test.atoms >>
+file-mapper: my-test-runner --list-files-for << test.atoms >>
+----
 ====
 
 [#set-up-examples]
@@ -921,7 +949,7 @@ jobs:
       - run: circleci run testsuite "ci tests" --test-analysis="none"
       - store_test_results:
           path: test-reports
-  
+
   analysis:
     executor: my-executor
     steps:
@@ -1115,7 +1143,7 @@ See the <<run-analysis-on-non-default-branch,Run analysis on a non-default and s
 
 No, this is not recommended and may produce unreliable results.
 
-When running multiple `testsuite` commands as sequential steps in a single parallelized job, parallel nodes executing at different speeds can cause tests from one test suite (for example, "integration-tests") to run with another test suite's configuration (for example, "unit-tests"). 
+When running multiple `testsuite` commands as sequential steps in a single parallelized job, parallel nodes executing at different speeds can cause tests from one test suite (for example, "integration-tests") to run with another test suite's configuration (for example, "unit-tests").
 
 While this issue only occurs when parallelism is enabled, we recommend always using separate jobs for each test suite as a best practice.
 
@@ -1144,11 +1172,15 @@ jobs:
     parallelism: 2
     steps:
       - run: circleci run testsuite "unit-tests"
-  
+
   test-integration:
     parallelism: 2
     steps:
       - run: circleci run testsuite "integration-tests"
 ----
 
+== Next steps
+
+* xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
+* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 
