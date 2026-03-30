@@ -13,7 +13,7 @@ The chart assumes an environment with the following resources:
 - MetalLB pre-configued on the K3s cluster for ingress
 - A private Docker registry at `docker.internal.example.com` running on port 5000 with no TLS encryption
 - A Nomad instance with mTLS disabled
-- A S3 compatible storage instance running at s3.internal.example.com, with its API listening on port 9000, and no TLS
+- An S3 compatible storage instance running at s3.internal.example.com, with its API listening on port 9000, and no TLS
 - A TLS certificate issued for both domains `server.internal.example.com` and `*.server.internal.example.com``.
 
 For more information about specific values, see the standard installation documentation, starting with the following:

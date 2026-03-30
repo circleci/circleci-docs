@@ -11,7 +11,7 @@ The `values.yaml` file for installing CircleCI should be prepared according to t
 
 === a. Configure global values
 
-NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values.adoc[Example `values.yaml`] page.
+NOTE: For a full example of a `values.yaml` file for an air-gapped environment, see the xref:example-values.adoc[Example Values] page.
 
 In the `global.container` section of your `values.yaml` file:
 
