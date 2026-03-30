@@ -144,21 +144,25 @@
 *** xref:insights:insights-tests.adoc[Test Insights]
 ** Manage and optimize tests
 *** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
+*** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
+*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
+*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
+*** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
+*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
+** Smarter Testing
+*** xref:test:smarter-testing.adoc[Smarter Testing overview]
+*** xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
+*** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
+*** xref:test:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
+*** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
+*** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
 *** xref:test:code-coverage.adoc[Generate code coverage metrics]
 *** xref:test:rerun-failed-tests.adoc[Re-run failed tests overview]
-*** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
-** Tutorials
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 *** xref:test:testing-ios.adoc[Testing iOS applications]
 *** xref:test:testing-macos.adoc[Testing macOS applications]
-** How-to guides
-*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
-*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
-** Reference
-*** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 
 * Deploy with CircleCI
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]

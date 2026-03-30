@@ -3,8 +3,6 @@
 :page-badge: Beta
 :page-platform: Cloud
 :experimental:
-:page-noindex: false
-:page-show-readtime: true
 
 CAUTION: *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
@@ -15,8 +13,7 @@ Use Smarter Testing locally during development (test impact analysis and auto-re
 Before using Smarter Testing locally, ensure you have:
 
 * Completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide.
-* Enabled xref:set-up-test-impact-analysis.adoc[Test Impact Analysis] in your test-suite.yml.
-* And/or enabled xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] in your test-suite.yml.
+* Enabled xref:set-up-test-impact-analysis.adoc[Test Impact Analysis] and/or xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] in your `test-suite.yml`.
 
 == Using Test Impact Analysis locally
 

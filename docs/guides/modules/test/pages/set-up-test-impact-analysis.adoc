@@ -3,8 +3,6 @@
 :page-badge: Preview
 :page-platform: Cloud
 :experimental:
-:page-noindex: true
-:page-show-readtime: true
 
 CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
@@ -52,12 +50,6 @@ Before enabling test impact analysis, ensure you have completed the xref:getting
 * Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
-
-Steps to enable test impact analysis are as follows:
-
-. Configure the `analysis` command in `test-suites.yml`.
-. Validate test selection locally.
-. Run test suite in CircleCI with test impact analysis enabled.
 
 == 1. Configure the analysis command in test-suites.yml
 
@@ -692,7 +684,7 @@ Analysis can be time-consuming, especially during the initial run when the compl
 * Run analysis as a separate non-blocking job in the same workflow.
 * Run analysis in a separate workflow in the same pipeline.
 
-See <<set-up-examples>> for configuration examples of each approach. 
+See <<set-up-examples>> for configuration examples of each approach.
 
 It is important to ensure analysis runs on every change to your default branch so that impact data stays up to date for accurate test selection.
 ====
@@ -921,7 +913,7 @@ jobs:
       - run: circleci run testsuite "ci tests" --test-analysis="none"
       - store_test_results:
           path: test-reports
-  
+
   analysis:
     executor: my-executor
     steps:
@@ -1115,7 +1107,7 @@ See the <<run-analysis-on-non-default-branch,Run analysis on a non-default and s
 
 No, this is not recommended and may produce unreliable results.
 
-When running multiple `testsuite` commands as sequential steps in a single parallelized job, parallel nodes executing at different speeds can cause tests from one test suite (for example, "integration-tests") to run with another test suite's configuration (for example, "unit-tests"). 
+When running multiple `testsuite` commands as sequential steps in a single parallelized job, parallel nodes executing at different speeds can cause tests from one test suite (for example, "integration-tests") to run with another test suite's configuration (for example, "unit-tests").
 
 While this issue only occurs when parallelism is enabled, we recommend always using separate jobs for each test suite as a best practice.
 
@@ -1144,7 +1136,7 @@ jobs:
     parallelism: 2
     steps:
       - run: circleci run testsuite "unit-tests"
-  
+
   test-integration:
     parallelism: 2
     steps:
