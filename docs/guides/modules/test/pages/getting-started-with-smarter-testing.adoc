@@ -230,6 +230,18 @@ discover: find test/ -type f -name '*_test.ts'
 run: |
   echo "running: <<test.atoms>>" | tr ' ' '\n'
 ----
+
+Other::
++
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+discover: my-test-runner --only-list-tests
+run: |
+  echo "running: <<test.atoms>>" | tr ' ' '\n'
+----
 ====
 +
 [TIP]
