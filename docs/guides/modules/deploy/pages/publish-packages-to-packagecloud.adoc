@@ -41,14 +41,18 @@ The CLI will automatically use the `$PACKAGECLOUD_TOKEN` environment variable to
 [#use-dependency-caching]
 == 4. Use dependency caching
 
-If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for xref:optimize:caching.adoc[Caching dependencies].
+If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for xref:optimize:caching.adoc[Caching Dependencies].
 
 [#push-packages-with-the-packagecloud-cli]
 == 5. Push packages with the packagecloud CLI
 
 The build processes for package types will vary, but pushing them into a packagecloud repository is quite simple. To add packages to a repository from your CircleCI builds, add a step in your `deploy` configuration that uses the packagecloud CLI.
 
-The following is a full example `.circleci/config.yml` that will checkout a git repository, run a `make` task (this command can be anything configured to build your package), then deploy the package to a packagecloud repo.
+The following is a full example `.circleci/config.yml` that will:
+
+* Checkout a git repository.
+* Run a `make` task (this command can be anything configured to build your package).
+* Deploy the package to a packagecloud repo.
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
@@ -242,7 +246,7 @@ Deploy markers provide a way to track and manage your Packagecloud package publi
 
 You have two options for setting up deploy markers:
 
-* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
 
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
@@ -251,4 +255,4 @@ Both approaches will enable you to track deployment history and manage rollbacks
 [#see-also]
 == See also
 
-* xref:optimize:artifacts.adoc[Storing and accessing artifacts]
+* xref:optimize:artifacts.adoc[Storing and Accessing Artifacts]

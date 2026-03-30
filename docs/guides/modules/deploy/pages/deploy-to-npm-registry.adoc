@@ -23,7 +23,7 @@ In this case, the `authToken` is `00000000-0000-0000-0000-000000000000`.
 
 [#set-npm-token]
 == 2. Set npm token
-Go to your xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[project settings], and set the `NPM_TOKEN` variable to the obtained `authToken`.
+Go to your xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Settings], and set the `NPM_TOKEN` variable to the obtained `authToken`.
 
 [#configure-circleci]
 == 3. Configure CircleCI
@@ -80,7 +80,7 @@ Deploy markers provide a way to track and manage your npm package publications i
 
 You have two options for setting up deploy markers:
 
-* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
 
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 

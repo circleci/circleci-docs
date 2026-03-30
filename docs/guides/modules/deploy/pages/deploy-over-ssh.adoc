@@ -31,7 +31,7 @@ For additional context, see the xref:integration:add-ssh-key.adoc[Adding an SSH 
 [#ssh-username-and-hostname]
 == 2. Add the SSH username and hostname
 
-Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an environment variable in a project] page. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
+Add the SSH username and SSH hostname of your build VM as environment variables. For instructions, see the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project] page. In this example, these variables are defined as `SSH_USER` and `SSH_HOST`, respectively.
 
 [#create-deploy-job]
 == 3. Create a deploy job
@@ -72,7 +72,7 @@ Deploy markers provide a way to track and manage your SSH deployments in the Cir
 
 You have two options for setting up deploy markers:
 
-* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[rollback pipeline] or xref:set-up-deploys.adoc[deploy pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
 
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
