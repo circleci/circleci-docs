@@ -69,32 +69,7 @@ Having your team members register for CircleCI accounts provides several benefit
 [#how-to-register]
 == How to become a registered user
 
-If you or your team members are currently unregistered users (triggering builds without a CircleCI account), follow these steps to register:
-
-. Go to the link:https://circleci.com/signup/[CircleCI Sign Up page].
-. Choose your sign-up method:
-** **For GitHub, GitLab, or Bitbucket Data Center users**: Sign up with your email address to create an account
-** **For Bitbucket Cloud users**: Sign up with your Bitbucket account
-. Enter your email address and create a password (if signing up with email)
-. Answer a few questions about how you plan to use CircleCI
-. Join your existing organization:
-** If you received an email invite, follow the link in the email
-** If you didn't receive an invite, use the **Find Your Team** option to search for and join your organization
-** Contact your organization admin to request an invite if needed
-
-For detailed instructions, see the xref:guides:getting-started:first-steps.adoc[Sign up and try CircleCI] page.
-
-[#after-registration]
-=== After registration
-
-Once you've created your CircleCI account and joined your organization:
-
-. You will appear as a registered user in your organization
-. You can view all pipelines and projects you have access to
-. You can trigger builds, re-run jobs, and approve workflows
-. Your organization admin can assign you appropriate roles and permissions
-
-See the xref:guides:getting-started:invite-your-team.adoc[Join teammates on CircleCI] page for more information.
+If you or your team members are currently unregistered users (triggering builds without a CircleCI account), see the xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI] page for instructions.
 
 [#invite-team-members]
 == How to ensure your team is registered
@@ -104,35 +79,23 @@ As an organization admin, you can help ensure all team members who trigger build
 . **Identify unregistered users**:
 +
 Navigate to menu:Plan[Plan Usage > Users] in the CircleCI web app to view all active users. Unregistered users will be listed with limited information.
-+
+
 . **Send invites**:
 +
-Navigate to menu:Organization Settings[People] and use the btn:[Invite] button to send email invitations to team members. See the xref:guides:getting-started:invite-your-team.adoc#invite-teammates[Invite teammates] section for detailed steps.
-+
+Navigate to menu:Organization Settings[People] and use the btn:[Invite] button to send email invitations to team members. See the xref:guides:getting-started:invite-your-team.adoc#invite-teammates[Join Teammates] section for detailed steps.
+
 . **Enable unregistered user spend prevention** (Performance and Scale Plans only):
 +
-If you want to require registration before allowing builds, enable the "Prevent unregistered user spend" feature. See xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered users from spending credits] for instructions.
-+
+If you want to require registration before allowing builds, enable the "Prevent unregistered user spend" feature. See xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent Unregistered Users From Spending Credits] for instructions.
+
 . **Communicate with your team**:
 +
 Let your team know about the benefits of registering and provide them with instructions or invite links.
 
-[#checking-your-status]
-== How to check if you're registered
-
-If you're unsure whether you have a registered CircleCI account:
-
-* Try logging in at link:https://app.circleci.com/[app.circleci.com]
-* If you can successfully log in and view the CircleCI dashboard, you have a registered account
-* If you cannot log in, or have never created an account, you may be an unregistered user (if you're triggering builds through code commits)
-
 [#see-also]
 == See also
 
-* xref:guides:getting-started:first-steps.adoc[Sign up and try CircleCI]
-* xref:guides:getting-started:invite-your-team.adoc[Join teammates on CircleCI]
-* xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered users from spending credits]
-* xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]
-* xref:plan-overview.adoc[CircleCI plan overview]
-* link:https://support.circleci.com/hc/en-us/articles/360034783154[What is an Active User] (support article)
-* link:https://support.circleci.com/hc/en-us/articles/360037744473[What is an Unregistered User] (support article)
+* xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI]
+* xref:guides:getting-started:invite-your-team.adoc[Join Teammates on CircleCI]
+* xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent Unregistered Users From Spending Credits]
+* xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview]
