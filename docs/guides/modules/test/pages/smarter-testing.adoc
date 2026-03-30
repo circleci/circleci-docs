@@ -6,8 +6,6 @@
 
 CAUTION: *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-NOTE: Refer #TO DO: Link to discuss post# for more information about our beta launch.
-
 Smarter Testing reduces test execution time while maintaining test confidence by:
 
 * Running only tests that are impacted by code changes.
