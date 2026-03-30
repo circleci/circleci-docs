@@ -5,105 +5,82 @@
 
 This page explains the different user types in CircleCI and how to ensure all team members are properly registered to manage costs and access platform features.
 
-[#overview]
-== Overview
+== Introduction
 
 Understanding user types is important for managing your CircleCI organization effectively and controlling costs. CircleCI tracks three types of users:
 
-* **Registered users**: Users with a CircleCI account
-* **Active users**: Users who trigger builds and consume credits (for billing purposes)
-* **Unregistered users**: Users who trigger builds but do not have a CircleCI account
+**Registered users**:: Users with a CircleCI account.
+**Unregistered users**:: Users who trigger builds but do not have a CircleCI account.
+**Active users**:: Users who trigger builds and consume credits (for billing purposes).
 
-[#registered-users]
-== What is a registered user?
+== Registered users
 
-A **registered user** is anyone who has created a CircleCI account by signing up at link:https://circleci.com/signup/[circleci.com/signup]. Registered users have:
+A **registered user** is anyone who has created a CircleCI account by signing up at link:https://circleci.com/signup/[circleci.com/signup]. Registered users have the following capabilities:
 
-* Access to the CircleCI web application
-* The ability to view pipelines, jobs, and build history
-* Permission to trigger and re-run builds
-* Access to organization settings (depending on their role)
-* A user profile with their email and authentication credentials
+* Access to the CircleCI web app.
+* The ability to view pipelines, jobs, and build history.
+* The ability to trigger and re-run builds.
+* Access to organization settings, depending on their role.
+* A user profile with their email and authentication credentials.
 
-[#active-users]
-== What is an active user?
-
-An **active user** is any user (registered or unregistered) who triggers the use of compute resources on non-OSS projects during a billing period. This includes activities such as:
-
-* Commits from users that trigger builds, including PR merge commits
-* Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc[SSH debug]
-* Approving xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[manual jobs] (approver will be considered the actor of all downstream jobs)
-* Using scheduled workflows
-* Machine users
-
-NOTE: If your project is xref:guides:integration:oss.adoc[open-source] you will *not* be considered an active user.
-
-Active users are tracked for billing purposes. On the Free and Performance Plans, the first five active users are included. Additional active users beyond this limit are charged at 25,000 credits per user per month.
-
-To find a list of your active users, log in to the CircleCI web app and navigate to menu:Plan[Plan Usage > Users].
-
-For more information, see the link:https://support.circleci.com/hc/en-us/articles/360034783154[What is an Active User] support article.
-
-[#unregistered-users]
-== What is an unregistered user?
+== Unregistered users
 
 An **unregistered user** is someone who has triggered builds or pipelines in your CircleCI organization but has not signed up for a CircleCI account. Common scenarios include:
 
-* Developers who commit code to a repository connected to CircleCI but have never logged in to CircleCI
-* Contributors who create pull requests that trigger CI builds
-* Bot accounts or service accounts that push commits without having a CircleCI login
+* Developers who commit code to a repository connected to CircleCI but have never logged in to CircleCI.
+* Contributors who create pull requests that trigger CI builds.
+* Bot accounts or service accounts that push commits without having a CircleCI account.
 
 ****
 *Important billing information*
 
 Each unregistered user within an organization is mapped to, and counts as, a single link:https://support.circleci.com/hc/en-us/articles/360034783154[active user] for billing purposes. Unregistered users trigger pipelines, spend credits, and count towards your plan usage.
 
-Organizations on Performance or Scale Plans can control unregistered user spending. See xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent unregistered users from spending credits] for more information.
+Organizations on Performance or Scale Plans can control unregistered user spending. See xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent Unregistered Users From Spending Credits] for more information.
 ****
 
-For more information, see the link:https://support.circleci.com/hc/en-us/articles/360037744473[What is an Unregistered User] support article.
+== Active users
+
+An **active user** is any user (registered or unregistered) who triggers the use of compute resources on non-OSS projects during a billing period. This includes activities such as:
+
+* Commits from users that trigger builds, including PR merge commits.
+* Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc[SSH Debugging].
+* Approving xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[On-Hold Jobs]. The approver is considered the actor of all downstream jobs.
+* Using scheduled workflows.
+* Machine users.
+
+NOTE: If your project is open source you will *not* be considered an active user.
+
+Active users are tracked for billing purposes. On the Free and Performance Plans, the first five active users are included. Additional active users beyond this limit are charged at 25,000 credits per user per month.
+
+To find a list of your active users, log in to the CircleCI web app and navigate to menu:Plan[Plan Usage > Users].
 
 [#why-registration-matters]
 == Why user registration matters
 
 Having your team members register for CircleCI accounts provides several benefits:
 
-* **Better visibility**: Registered users can view build results, logs, and insights directly in the CircleCI web app
-* **Improved collaboration**: Team members can re-run failed builds, SSH into jobs for debugging, and approve manual workflows
-* **Cost management**: You can better track and manage who is consuming credits in your organization
-* **Access control**: Registered users can be assigned specific roles and permissions within your organization
-* **Audit trails**: Actions taken by registered users are properly attributed in audit logs
+* **Better visibility**: Registered users can view build results, logs, and insights directly in the CircleCI web app.
+* **Improved collaboration**: Team members can re-run failed builds, SSH into jobs for debugging, and approve manual workflows.
+* **Cost management**: You can track and manage who is consuming credits in your organization.
+* **Access control**: Registered users can be assigned roles and permissions within your organization.
+* **Audit trails**: Actions taken by registered users are correctly attributed in audit logs.
 
 [#how-to-register]
 == How to become a registered user
 
 If you or your team members are currently unregistered users (triggering builds without a CircleCI account), follow these steps to register:
 
-[#prerequisites]
-=== Prerequisites
-
-* An email address
-* Access to code repositories that build on CircleCI (optional, but recommended for full functionality)
-
-[#registration-steps]
-=== Registration steps
-
-. Go to the link:https://circleci.com/signup/[CircleCI Sign Up page]
-+
+. Go to the link:https://circleci.com/signup/[CircleCI Sign Up page].
 . Choose your sign-up method:
-+
-* **For GitHub, GitLab, or Bitbucket Data Center users**: Sign up with your email address to create an account
-* **For Bitbucket Cloud users**: Sign up with your Bitbucket account
-+
+** **For GitHub, GitLab, or Bitbucket Data Center users**: Sign up with your email address to create an account
+** **For Bitbucket Cloud users**: Sign up with your Bitbucket account
 . Enter your email address and create a password (if signing up with email)
-+
 . Answer a few questions about how you plan to use CircleCI
-+
 . Join your existing organization:
-+
-* If you received an email invite, follow the link in the email
-* If you didn't receive an invite, use the **Find Your Team** option to search for and join your organization
-* Contact your organization admin to request an invite if needed
+** If you received an email invite, follow the link in the email
+** If you didn't receive an invite, use the **Find Your Team** option to search for and join your organization
+** Contact your organization admin to request an invite if needed
 
 For detailed instructions, see the xref:guides:getting-started:first-steps.adoc[Sign up and try CircleCI] page.
 
@@ -124,7 +101,7 @@ See the xref:guides:getting-started:invite-your-team.adoc[Join teammates on Circ
 
 As an organization admin, you can help ensure all team members who trigger builds have CircleCI accounts:
 
-. **Identify unregistered users**: 
+. **Identify unregistered users**:
 +
 Navigate to menu:Plan[Plan Usage > Users] in the CircleCI web app to view all active users. Unregistered users will be listed with limited information.
 +
