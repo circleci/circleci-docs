@@ -47,7 +47,7 @@ image::guides:ROOT:jira_expand_app_details.png[Expand App Details]
 +
 [NOTE]
 ====
-Your CircleCI organization ID is only needed for the initial setup. You can find it by navigating to menu:Organization Settings[Overview] in the link:https://app.circleci.com/[CircleCI web app].
+Your CircleCI organization ID is only needed for the initial setup. You can find it by navigating to menu:Org[Overview] in the link:https://app.circleci.com/[CircleCI web app].
 
 This integration authenticates via xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect] (OIDC). By default, the organization ID provided is used for audience validation, but this can be modified, or more can be added.
 ====

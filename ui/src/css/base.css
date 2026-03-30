@@ -375,3 +375,16 @@ html[data-theme="dark"] table.datatable tbody tr:nth-child(even):hover {
 html[data-theme="dark"] table.datatable tbody tr:nth-child(odd):hover {
   background-color: var(--table-stripe-odd) !important;
 }
+
+/* Screen reader only - visually hidden but accessible to assistive tech and parsers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

@@ -1,6 +1,6 @@
-\bgithub organization\b
+\b[Gg]it[Hh]ub organization\b
 \b[Cc]ircle[cC][iI] organization\b
-\bbitbucket organization\b
+\b[Bb]itbucket organization\b
 .circleci/config.yml
 [Aa]gentless
 [Aa]gentic
@@ -150,7 +150,8 @@ FAQs?
 Fastfile
 Fastlane
 /bFastlane Match/b
-filename
+[Ff]ilename
+[Ff]ilepath
 framebuffer
 frameit
 \bFree Plan\b
@@ -246,7 +247,7 @@ Okta
 OOM
 OPA
 \bOpenID Connect\b
-orgs?
+[Oo]rgs?
 [Pp]ackagecloud
 [Pp]arameterization
 [Pp]arameterizable

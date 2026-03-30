@@ -179,7 +179,7 @@ image::guides:ROOT:vscode-ext-config-test-run-crop.png[Screenshot showing the ru
 
 * CircleCI VS Code extension v2.3.0 or higher
 * A CircleCI account integrated through the GitHub OAuth app, or Bitbucket Cloud. To find out which GitHub account type you have, see the xref:integration:github-integration.adoc[GitHub OAuth app integration] page
-* Your org must have opted-in to this feature through Organization Settings. You may need to ask your org admin to do so for you. See <<feature-controls>> for more details.
+* Your org must have opted-in to this feature through Org settings. You may need to ask your org admin to do so for you. See <<feature-controls>> for more details.
 * Your project must **not** make use of xref:orchestrate:dynamic-config.adoc[dynamic configuration]. This feature is disabled for projects that use dynamic configuration.
 
 NOTE: **Unversioned config** in CircleCI indicates that the `.circleci/config.yml` on the branch where the pipeline is running is ignored. Instead, the configuration file is overridden by a custom configuration file passed as a parameter. The term "unversioned" refers to the fact the config file is not versioned in the VCS. It is, however, stored in CircleCI along with the pipeline, and it is available at any time in the CircleCI web app.
@@ -206,7 +206,7 @@ The following steps show how to test run a pipeline from the VS Code extension:
 
 The ability to trigger pipelines from VS Code can be controlled **at the org level** and **at the project level**.
 
-* Organization level settings can be found under menu:Organization Settings[Advanced]. The setting default is **Off**. Toggle the "Trigger pipelines with unversioned config" option to **On** to opt-in. Organization level settings override project settings, and they can be changed only by organization admins.
+* Organization level settings can be found under menu:Org[Advanced]. The setting default is **Off**. Toggle the "Trigger pipelines with unversioned config" option to **On** to opt-in. Organization level settings override project settings, and they can be changed only by organization admins.
 
 * Project level settings can be found under menu:Project Settings[Advanced]. The setting default is **On**. Toggle the "Trigger pipelines with unversioned config" option to **Off** to opt-out.
 
