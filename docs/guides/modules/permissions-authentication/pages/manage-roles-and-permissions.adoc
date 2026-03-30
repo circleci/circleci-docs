@@ -9,6 +9,8 @@ include::ROOT:partial$tips/check-org-type.adoc[]
 
 Manage user access to organizations and projects with CircleCI roles and associated permissions. The guides on this page show how to add people to your organization, update permissions, and assign specific project roles to people in your organization. You can also manage roles for groups of users with xref:manage-groups.adoc[groups].For an overview of roles and permissions in CircleCI, see the xref:roles-and-permissions-overview.adoc[Roles and permissions overview] page.
 
+NOTE: When inviting people to your organization, it is important to ensure they register for CircleCI accounts. Unregistered users who trigger builds will count toward your active user billing. For more information about registered users, unregistered users, and active users, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
+
 [#prerequisites]
 == Prerequisites
 

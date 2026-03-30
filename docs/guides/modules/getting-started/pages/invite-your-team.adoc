@@ -3,7 +3,7 @@
 :page-description: Add your team to your CircleCI organization
 :experimental:
 
-After setting up an organization in CircleCI, ensure your whole team get access.
+After setting up an organization in CircleCI, ensure your whole team get access. Understanding the different user types (registered vs. unregistered) is important for managing costs and ensuring team members have proper access. For more information, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
 
 [#prerequisites]
 == Prerequisites

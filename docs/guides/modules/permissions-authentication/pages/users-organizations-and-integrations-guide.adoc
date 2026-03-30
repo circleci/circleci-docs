@@ -337,7 +337,7 @@ image::guides:ROOT:github-app-configuration-page.png[Create a project]
 
 == Invite your team to your organization
 
-For a guide to inviting you team see the xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI] page.
+For a guide to inviting your team, see the xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI] page. To understand the differences between registered users, unregistered users, and active users, and how they affect billing, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
 
 == Organization user permissions
 
