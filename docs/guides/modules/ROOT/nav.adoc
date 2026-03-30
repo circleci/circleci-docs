@@ -150,12 +150,11 @@
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
 ** Smarter Testing
-*** xref:test:smarter-testing.adoc[Smarter Testing overview]
 *** xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
 *** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
-*** xref:test:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
 *** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 *** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
+*** xref:test:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]

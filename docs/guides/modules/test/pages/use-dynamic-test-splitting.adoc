@@ -4,7 +4,12 @@
 :experimental:
 :page-description: Evenly distribute tests across parallel execution nodes
 
-CAUTION: *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+[NOTE]
+====
+*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+====
 
 Dynamic test splitting distributes tests across parallel nodes to minimize node idle time. Unlike static splitting, which divides tests evenly upfront, dynamic splitting uses a shared queue that nodes pull from continuously. This ensures balanced workloads even when some nodes start late or run slower than expected.
 
@@ -171,3 +176,7 @@ No, dynamic test splitting works independently:
 
 * **With test impact analysis**: Distributes the selected subset of tests.
 * **Without test impact analysis**: Distributes all discovered tests.
+
+== Next steps
+
+* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development].

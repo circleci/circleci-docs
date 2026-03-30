@@ -5,7 +5,20 @@
 :experimental:
 :page-show-readtime: true
 
-CAUTION: *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+[NOTE]
+====
+*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+====
+
+Smarter Testing reduces test execution time while maintaining test confidence by:
+
+* Running only tests that are impacted by code changes.
+* Evenly distributing tests across parallel execution nodes.
+* Automatically rerunning failed tests.
+
+These features can be used independently or combined.
 
 To use the CircleCI's Smarter Testing, you first need to set up a couple of components:
 
@@ -432,10 +445,11 @@ run: bundle exec rspec --format RspecJunitFormatter --out << outputs.junit >> <<
 outputs:
   junit: test-reports/tests.xml
 ----
---
 
+--
 Other::
 +
+--
 [source,yaml]
 ----
 # .circleci/test-suites.yml
@@ -446,6 +460,8 @@ run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
 ----
+
+--
 ====
 
 . Run the test suite and confirm that the `run` command runs the test atoms you expect. You can exit early (Ctrl+C) once verified:
@@ -503,4 +519,10 @@ At this stage, your tests ran locally using the `testsuite` command without opti
 * Enable xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 
 Each feature can be enabled independently, allowing you to adopt them incrementally based on your needs.
+
+== Next steps
+
+* xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
+* xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
+* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
 
