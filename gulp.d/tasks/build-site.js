@@ -46,6 +46,26 @@ function copyMarkdownFiles() {
   console.log(`✅ Copied ${metadata.fileCount} markdown files to ${outputDir}`)
 }
 
+function copyLlmsTxt() {
+  const metaPath = path.join(__dirname, '../../extensions/.temp/llms-meta.json')
+  if (!fs.existsSync(metaPath)) {
+    console.log('No llms.txt metadata found, skipping copy')
+    return
+  }
+
+  const metadata = JSON.parse(fs.readFileSync(metaPath, 'utf8'))
+  const { sourceFile, outputDir } = metadata
+
+  if (!fs.existsSync(sourceFile)) {
+    console.log('llms.txt source file not found, skipping')
+    return
+  }
+
+  const destPath = path.join(outputDir, 'llms.txt')
+  fs.copyFileSync(sourceFile, destPath)
+  console.log(`✅ Copied llms.txt to ${destPath}`)
+}
+
 module.exports = function buildSite(cb) {
   console.log('Starting Antora build...')
 
@@ -73,6 +93,9 @@ module.exports = function buildSite(cb) {
     if (enableMarkdown) {
       copyMarkdownFiles()
     }
+
+    // Copy llms.txt to build directory
+    copyLlmsTxt()
 
     // After Antora build succeeds, build API docs
     console.log('Antora build completed, now building API docs...')
