@@ -65,7 +65,7 @@ Single project::
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 . Select **Deploys** in the sidebar.
-. Select btn:[Add deploy markers] in the Deploy Markers card.
+. Select btn:[Configure deploy markers] in the Deploy Markers card.
 
 .Project Deploy Settings page with the option to configure deploy markers
 image::guides:ROOT:deploy/project-deploy-settings.png[Project Deploy Settings page showing the Deploy Markers card with Configure deploy markers button]
