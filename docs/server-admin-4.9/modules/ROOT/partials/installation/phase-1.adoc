@@ -48,7 +48,7 @@ endif::env-aws[]
 | Infrastructure Management
 | Required for installations within GCP or AWS
 
-| Install and configure link:AWS CLI for your S3 compatible object storage provider if you choose not to use AWS or GCP object storage.
+| Install and configure the CLI for your S3 compatible object storage provider if you choose not to use AWS or GCP object storage.
 | TBC
 | S3 compatible object storage
 | Required for installations outside AWS and GCP, for example, local installation
