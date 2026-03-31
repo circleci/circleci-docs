@@ -1,0 +1,29 @@
+= Enable AI-powered features
+:page-platform: Cloud
+:page-description: Enable AI features in CircleCI including natural language to cron translation, deploy markers, and AI pipeline editor
+:experimental:
+:page-show-readtime: true
+
+Enable AI-powered convenience features in your CircleCI organization to access tools like natural language to cron syntax translation, AI-generated deploy markers, and the AI pipeline editor.
+
+== Prerequisites
+
+You must have organization administrator permissions to enable AI-powered features.
+
+== Enable AI-powered features
+
+. In the CircleCI web app, select **Org Settings** in the sidebar.
+. Select **Advanced**.
+. In the **Enable minor AI-powered features** section, toggle the switch to enable.
+. The following features are now available in your organization:
+** Natural language to cron syntax translation when setting up GitHub App schedule triggers.
+** Deploy markers generated using AI.
+** AI pipeline editor.
+
+.Screenshot showing the Enable AI-powered features section in the Advanced settings page
+image::guides:ROOT:enable-ai-features.png[Enable AI-powered features in the UI]
+
+== Next steps
+
+* For information on setting up schedule triggers with natural language to cron translation, refer to the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
+* For information on setting up deploy markers, refer to the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page.
