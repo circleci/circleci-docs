@@ -27,16 +27,19 @@ Status updates are the default way CircleCI reports pipeline status to your VCS.
 Status updates in PR::
 +
 --
+.Job status in PR
 image::guides:ROOT:status-update-pr.png[Job status in PR]
 --
 Commit status::
 +
 --
+.Commit status in GitHub
 image::guides:ROOT:status-update-commit.png[Status update for a commit in GitHub]
 --
 Commit status in PR::
 +
 --
+.Commit status in PR conversation view
 image::guides:ROOT:status-update-commit-pr.png[Status update for a commit in PR conversation view]
 --
 ====
