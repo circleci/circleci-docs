@@ -7,15 +7,15 @@ If you have a `circleci` type organization, the content on this page applies to 
 
 include::ROOT:partial$tips/check-org-type.adoc[]
 
-Manage user access to organizations and projects with CircleCI roles and associated permissions. The guides on this page show how to add people to your organization, update permissions, and assign specific project roles to people in your organization. You can also manage roles for groups of users with xref:manage-groups.adoc[groups].For an overview of roles and permissions in CircleCI, see the xref:roles-and-permissions-overview.adoc[Roles and permissions overview] page.
+Manage user access to organizations and projects with CircleCI roles and associated permissions. The guides on this page show how to add people to your organization, update permissions, and assign specific project roles to people in your organization. You can also manage roles for groups of users with xref:manage-groups.adoc[Groups].For an overview of roles and permissions in CircleCI, see the xref:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
 
-NOTE: When inviting people to your organization, it is important to ensure they register for CircleCI accounts. Unregistered users who trigger builds will count toward your active user billing. For more information about registered users, unregistered users, and active users, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
+NOTE: When inviting people to your organization, it is important to ensure they register for CircleCI accounts. Unregistered users who trigger builds will count toward your active user billing. For more information about registered users, unregistered users, and active users, see xref:plans-pricing:user-types-and-registration.adoc[User Types and Registration].
 
 [#prerequisites]
 == Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* At least one project created in your organization. See the xref:getting-started:create-project.adoc[Create a project] page for instructions.
+* At least one project created in your organization. See the xref:getting-started:create-project.adoc[Create a Project] page for instructions.
 
 [#add-people-to-your-organization]
 == Add people to your organization
@@ -33,7 +33,9 @@ TIP: If you have integrated your code with CircleCI using either xref:integratio
 
 An invited user will receive an email notification (sent from `noreply@circleci.com`), containing a link to accept the invite.
 
-If they do not have a CircleCI account, they will need to sign up. If they already have a CircleCI account, they are added to the organization, and if they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
+* If they do not have a CircleCI account, they will need to sign up.
+* If they already have a CircleCI account, they are added to the organization.
+* If they are logged in, they will see the organization as an option in the organization switcher in the top left corner of the web app.
 
 [#change-org-level-permissions]
 == Change a person's org-level permissions
@@ -60,6 +62,7 @@ NOTE: To do this, you must have the _Organization Admin_ role.
 [#assign-a-project-role]
 == Assign a project role
 
+.Project roles setup page
 image::guides:ROOT:gl-ga/gitlab-project-settings-project-roles.png[Project roles setup page]
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
@@ -70,7 +73,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 TIP: If you do not see the **People** option, your project is integrated using either xref:integration:github-integration.adoc[GitHub OAuth] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud] and project roles are not supported.
 . Select btn:[Assign Project Roles].
 . Select the username of the person you want to assign a role to.
-. Use the **Project Role** dropdown menu to select the role you want to assign
+. Use the **Project Role** dropdown menu to select the role you want to assign.
 . Select btn:[Assign Role].
 
 [#change-a-persons-project-level-permissions]

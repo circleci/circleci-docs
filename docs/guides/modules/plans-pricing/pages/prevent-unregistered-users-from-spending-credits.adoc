@@ -3,12 +3,12 @@
 :page-description: A how to guide to configuring your org so that unregistered users will not be able to perform actions that spend credits
 :experimental:
 
-Unregistered users trigger pipelines, spend credits and count towards your plan usage. You can choose to use the **Prevent unregistered user spend** option to only allow registered (users with a CircleCI account) users the ability to trigger work that consumes credits. For a full breakdown of the various ways pipelines can be triggered, see the xref:orchestrate:triggers-overview.adoc[Triggers overview].
+Unregistered users trigger pipelines, spend credits and count towards your plan usage. You can choose to use the **Prevent unregistered user spend** option to only allow registered (users with a CircleCI account) users the ability to trigger work that consumes credits. For a full breakdown of the various ways pipelines can be triggered, see the xref:orchestrate:triggers-overview.adoc[Triggers Overview].
 
 ****
 *Unregistered users* are how CircleCI track users who have triggered builds but have not signed up for a CircleCI account. Each unregistered user within an org is mapped to, and counts as, a single link:https://support.circleci.com/hc/en-us/articles/360034783154[active user]. Unregistered users count towards your plan usage.
 
-For detailed information about user types, how to register, and why registration matters, see xref:user-types-and-registration.adoc[User types and registration]. For more information about unregistered users specifically, see this link:https://support.circleci.com/hc/en-us/articles/360037744473-What-is-an-Unregistered-User-[support article].
+For detailed information about user types, how to register, and why registration matters, see xref:user-types-and-registration.adoc[User Types and Registration].
 ****
 
 [#prerequisites]
@@ -32,4 +32,4 @@ To disable this feature you can toggle this switch "Off" at any time.
 Once enabled, any unregistered users, that is, users who do not have a CircleCI account, will see the following if they attempt to trigger a pipeline:
 
 * The pipeline will fail to start.
-* The `block-unregistered-user` error will be displayed in a banner on the dashboard
+* The `block-unregistered-user` error will be displayed in a banner on the dashboard.
