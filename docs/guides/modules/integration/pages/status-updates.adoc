@@ -80,4 +80,4 @@ NOTE: The VCS status updates setting affects both GitHub and Bitbucket status up
 
 * xref:guides:integration:enable-checks.adoc[Enable GitHub Checks]
 * xref:guides:orchestrate:workflows.adoc[Workflows]
-* xref:guides:orchestrate:workflows.adoc#approval[Using Approval Jobs in Workflows]
+* xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Using Approval Jobs in Workflows]
