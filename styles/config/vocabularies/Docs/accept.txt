@@ -257,6 +257,7 @@ OPA
 PHP
 PHPUnit
 Pipenv
+[Pp]laintext
 Playwright
 Podfile
 PostgreSQL
