@@ -41,8 +41,8 @@ The following table describes user authorization for the different VCS providers
 |Mutually exclusive with other VCS authorization
 
 |GitLab
-|Managed in Gitlab at link:https://gitlab.com/-/user_settings/applications[GitLab settings]. Not displayed in menu:User Settings[Account Integrations].
-|Mutually exclusive with other VCS authorizaitons except GitHub App.
+|Managed in GitLab at link:https://gitlab.com/-/user_settings/applications[GitLab settings]. Not displayed in menu:User Settings[Account Integrations].
+|Mutually exclusive with other VCS authorizations except GitHub App.
 |===
 --
 
@@ -70,7 +70,7 @@ a| * GitHub App (add-on).
 
 | `github`
 a| * GitHub App (add-on)
-* GitHub OAuth app (built-in)
+* GitHub OAuth app (built-in).
 | Imported from VCS automatically.
 | Created automatically when you authorize CircleCI to access your GitHub account via OAuth app. This happens automatically when you sign in to CircleCI with your GitHub social login.
 
@@ -82,7 +82,7 @@ a| * Bitbucket OAuth (built-in)
 |===
 --
 
-The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features availoable for each organization and integration type.
+The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features available for each organization and integration type.
 
 include::ROOT:partial$tips/check-org-type.adoc[Check your organization type]
 
@@ -337,7 +337,7 @@ image::guides:ROOT:github-app-configuration-page.png[Create a project]
 
 == Invite your team to your organization
 
-For a guide to inviting you team see the xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI] page.
+For a guide to inviting your team, see the xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI] page. To understand the differences between registered users, unregistered users, and active users, and how they affect billing, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
 
 == Organization user permissions
 
@@ -421,7 +421,7 @@ Pipelines are defined by two characteristics:
 - A configuration source, stored in a repository
 - A checkout source, which determines which repository will be checked out when running a [checkout step](https://circleci.com/docs/reference/configuration-reference/#checkout).
 
-The pipelines you can create and configure are derived from the integraiton types available to you. You can find this information in the <<organization-integration>> section.
+The pipelines you can create and configure are derived from the integration types available to you. You can find this information in the <<organization-integration>> section.
 
 == Triggers
 
@@ -690,7 +690,7 @@ As described above, CircleCI automatically provides a deploy key for the reposit
 
 A user key bypasses these limitations.
 
-The trade-off with chosing a user key is that user keys grant broad access based on your GitHub account's permissions. User keys are a bigger security risk if compromised.
+The trade-off with choosing a user key is that user keys grant broad access based on your GitHub account's permissions. User keys are a bigger security risk if compromised.
 
 We recommend creating a dedicated "machine user" GitHub/Bitbucket account with minimal necessary permissions. THen add that machine user's key to CircleCI, rather than using your personal GitHub/Bitbucket account's key.
 

@@ -70,9 +70,9 @@ Prepaid billing is a payment option for customers on the Performance Plan. Prepa
 
 All Performance Plan customers can choose to get on prepaid billing through the CircleCI web app. To access this option, follow these steps:
 
-. Select **Plan** in the web app
-. Select the **Manage** tab
-. Select to **Set up and switch** to get started switching to prepaid billing
+. Select **Plan** in the web app.
+. Select the **Manage** tab.
+. Select to **Set up and switch** to get started switching to prepaid billing.
 
 [#i-still-have-credits-from-my-monthly-subscription]
 === I still have credits from my Monthly subscription, what happens if I get on prepaid billing now?
@@ -99,9 +99,9 @@ Upon selecting prepaid billing, your credit card will be charged immediately. Su
 
 You can follow these steps:
 
-. Select **Plan* in the web app
-. Select the **Manage** tab
-. Select the pencil icon in the **Credits** section to edit your auto refill rate
+. Select **Plan* in the web app.
+. Select the **Manage** tab.
+. Select the pencil icon in the **Credits** section to edit your auto refill rate.
 
 [#do-i-still-get-bonus-credits-and-5-free-seats]
 === Do I still get 30,000 bonus credits and 5 free seats on prepaid billing?
@@ -135,7 +135,7 @@ To calculate monthly storage costs from your daily usage, select the *Storage* t
 [#network]
 ==== Network
 
-Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. Read more on the xref:guides:optimize:persist-data.adoc#overview-of-network-and-storage-transfer[Persisting data] page.
+Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. Read more on the xref:guides:optimize:persist-data.adoc#overview-of-network-and-storage-transfer[Persisting Data] page.
 
 Your network overage GB/TB can be multiplied by 420 credits to estimate the total monthly costs. Example: 2 GB-Months overage x 420 credits = 840 credits ($.50).
 
@@ -148,7 +148,7 @@ In addition to the *IP Ranges Usage* summary, you can navigate to the *IP Ranges
 
 This number includes the job's overall network transfer _and_ any other bytes that go in or out of the Docker container. Data used to pull in the Docker image to the container before the job starts executing will _not incur usage costs_ for jobs with IP ranges enabled.
 
-This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the *Resources* tab on the *Job Details* UI page. See xref:guides:security:ip-ranges.adoc#pricing[IP ranges pricing] for more information.
+This feature will consume 450 credits from your account for each GB of data used for jobs with IP ranges enabled. You can also view job-specific details of IP ranges usage in the *Resources* tab on the *Job Details* UI page. See xref:guides:security:ip-ranges.adoc#pricing[IP Ranges Pricing] for more information.
 
 [#predict-monthly-IP-ranges-cost-without-enabling-feature-first]
 === How do I predict my monthly IP ranges cost without enabling the feature first?
@@ -166,14 +166,16 @@ Credit usage covers access to compute. We prefer to keep usage costs as low as p
 An active user is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
 
 - Commits from users that trigger builds, including PR Merge commits
-- Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc[SSH debug]
-- Approving xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[manual jobs] (approver will be considered the actor of all downstream jobs).
+- Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc[SSH Debug]
+- Approving xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[On-Hold Jobs] (approver will be considered the actor of all downstream jobs).
 - Using scheduled workflows
 - Machine users
 
-NOTE: If your project is xref:guides:integration:oss.adoc[open-source] you will *not* be considered an active user.
+NOTE: If your project is xref:guides:integration:oss.adoc[Open Source] you will *not* be considered an active user.
 
 To find a list of your active users, log in to the CircleCI web app, select menu:Plan[Plan Usage > Users].
+
+For more information about user types, including active users, registered users, and unregistered users, see xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration].
 
 [#charged-job-is-queued-or-preparing]
 === Am I charged if my job is "Queued" or "Preparing"?
