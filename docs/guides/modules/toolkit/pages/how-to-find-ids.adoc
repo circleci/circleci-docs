@@ -13,7 +13,7 @@ NOTE: This guide covers finding IDs in the CircleCI web app, or from environment
 
 == Get IDs from the built-in environment variables
 
-xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in environment variables, window=_blank], scoped at the job level, include the following IDs:
+xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-In Environment Variables], scoped at the job level, include the following IDs:
 
 - `CIRCLE_ORGANIZATION_ID`: The organization ID.
 - `CIRCLE_PROJECT_ID`: The project ID.
@@ -23,11 +23,7 @@ xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in envir
 
 To view all environment variables available at the job level, follow these steps:
 
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
-. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
-. Select the menu:Pipelines[] next to your project.
-. Expand a workflow run.
-. Select a job from that workflow run.
+include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
 . On the job page, expand the menu:Preparing environment variables[] step.
 . Locate the relevant environment variable(s) and note the associated value(s).
 
@@ -46,7 +42,7 @@ The user ID is a unique identifier for a user. Follow these steps to find it in 
 
 The organization ID is a unique identifier for an organization.
 
-You can access the organization ID through the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the organization ID through the `CIRCLE_ORGANIZATION_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
 
 . In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
 . Navigate to menu:Org[Overview] in the CircleCI web app.
@@ -57,7 +53,7 @@ You can access the organization ID through the `CIRCLE_ORGANIZATION_ID` xref:get
 
 The project ID is a unique identifier for a project.
 
-You can access the project ID through the `CIRCLE_PROJECT_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the project ID through the `CIRCLE_PROJECT_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
@@ -68,7 +64,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 The pipeline ID is a unique identifier for a pipeline that has been triggered.
 
-You can access the pipeline ID through the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the pipeline ID through the `CIRCLE_PIPELINE_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
 
 
 [tabs]
@@ -83,6 +79,7 @@ From the pipelines dashboard::
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
+.Copy pipeline ID from pipelines dashboard
 image::guides:ROOT:pipeline-id.png[Copy pipeline ID from pipelines dashboard]
 
 From the workflow page::
@@ -95,6 +92,7 @@ From the workflow page::
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
+.Copy pipeline ID from workflow page
 image::guides:ROOT:pipeline-id-from-workflow.png[Copy pipeline ID from workflow page]
 
 From the job page::
@@ -108,6 +106,7 @@ From the job page::
 . In the contextual menu, select btn:[Copy Pipeline ID].
 
 +
+.Copy pipeline ID from job page
 image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
 ====
 
@@ -117,7 +116,7 @@ image::guides:ROOT:pipeline-id-from-job.png[Copy pipeline ID from job page]
 
 The workflow ID is a unique identifier for a workflow that has been triggered.
 
-You can access the workflow ID through the `CIRCLE_WORKFLOW_ID` xref:get-ids-from-the-built-in-environment-variables[built-in environment variable]. Alternatively, follow these steps to find it in the CircleCI web app:
+You can access the workflow ID through the `CIRCLE_WORKFLOW_ID` xref:get-ids-from-the-built-in-environment-variables[Built-In Environment Variable]. Alternatively, follow these steps to find it in the CircleCI web app:
 
 [tabs]
 ====
@@ -131,6 +130,7 @@ From the workflow URL::
 . Check the URL of the page. The workflow ID is the last alphanumeric string of the URL, after the `/workflows/` string.
 
 +
+.Workflow ID in workflow page URL
 image::guides:ROOT:workflow-id-from-workflow-url.png[Get workflow ID from workflow page URL]
 
 From the job URL::
@@ -143,6 +143,7 @@ From the job URL::
 . Check the URL of the page. The workflow ID is the alphanumeric string of the URL located between the `/workflows/` and the `/jobs/` strings.
 
 +
+.Workflow ID in job page URL
 image::guides:ROOT:workflow-id-from-job-url.png[Get workflow ID from job page URL]
 ====
 

@@ -1,7 +1,14 @@
 site:
   title: CircleCI Docs
   url: https://circleci.com/docs
-  robots: allow
+  robots: |
+    User-agent: *
+    Allow: /
+
+    Sitemap: https://circleci.com/docs/sitemap.xml
+
+    # llms.txt - Structured documentation for AI/LLM consumption
+    # See https://circleci.com/docs/llms.txt for machine-readable documentation
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
     google_analytics: 'GTM-W9HDVK'
@@ -107,13 +114,6 @@ antora:
       - yaml
       - rst
   - require: ./extensions/unlisted-pages-extension.js
-    allowedUnlistedPages:
-      - 'test:smarter-testing.adoc'
-      - 'test:getting-started-with-smarter-testing.adoc'
-      - 'test:use-smarter-testing-for-local-development.adoc'
-      - 'test:set-up-test-impact-analysis.adoc'
-      - 'test:use-dynamic-test-splitting.adoc'
-      - 'test:auto-rerun-failed-tests.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true

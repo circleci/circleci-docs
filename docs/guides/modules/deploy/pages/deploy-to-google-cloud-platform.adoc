@@ -15,7 +15,7 @@ In addition to the orbs described below, CircleCI has created an GCP convenience
 [#using-google-cloud-orbs]
 == Using Google Cloud orbs
 
-Several Google Cloud orbs are available in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry]. Use the orbs to simplify your deployments. For example, the link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) orb] has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
+Several Google Cloud orbs are available in the link:https://circleci.com/developer/orbs[CircleCI Orbs Registry]. Use the orbs to simplify your deployments. For example, the link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image[Google Kubernetes Engine (GKE) orb] has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster:
 
 include::ROOT:partial$tips/add-version-number.adoc[]
 
@@ -75,3 +75,16 @@ workflows:
 ```
 
 For another example, see our link:https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app[CircleCI Google Cloud deployment example project].
+
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+Deploy markers provide a way to track and manage your Google Cloud Platform deployments in the CircleCI web app. Deploy markers work with all GCP deployment types including GKE, Cloud Run, and App Engine. When you add deploy markers to your deployment job, you can view a timeline of all deployments, track their status, and enable rollback and deploy pipelines.
+
+You have two options for setting up deploy markers:
+
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
