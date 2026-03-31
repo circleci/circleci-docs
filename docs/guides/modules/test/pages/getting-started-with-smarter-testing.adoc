@@ -49,7 +49,6 @@ $ brew install circleci
 $ brew install circleci/tap/circleci-testsuite
 ----
 
-////
 === Install manually
 
 Prebuilt binaries are available from the CircleCI binary releases public bucket.
@@ -57,63 +56,63 @@ Prebuilt binaries are available from the CircleCI binary releases public bucket.
 [tabs]
 ====
 Mac Arm::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/darwin/arm64/circleci-testsuite.gz[Download]
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/darwin/arm64/circleci-testsuite.gz[Download]
 +
 Verify with:
 +
-[source,console]
+[source,console,subs="attributes+"]
 ----
-$ sha256sum -c <(echo "04f37e47a12b4677cda35b804357b10c5891ef42081f1674fe74d82f56baf3cb  ./circleci-testsuite.gz")
+$ sha256sum -c <(echo "{testsuite-sha-darwin-arm64}  ./circleci-testsuite.gz")
 ----
 
 Mac Intel::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/darwin/amd64/circleci-testsuite.gz[Download]
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/darwin/amd64/circleci-testsuite.gz[Download]
 +
 Verify with:
 +
-[source,console]
+[source,console,subs="attributes+"]
 ----
-$ sha256sum -c <(echo "8c933b3358d8659ea7cc228b2fbd83b4e605c472c0b60355b3b0f97d0952852b  ./circleci-testsuite.gz")
+$ sha256sum -c <(echo "{testsuite-sha-darwin-amd64}  ./circleci-testsuite.gz")
 ----
 
 Linux AMD64::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/linux/amd64/circleci-testsuite.gz[Download]
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/amd64/circleci-testsuite.gz[Download]
 +
 Verify with:
 +
-[source,console]
+[source,console,subs="attributes+"]
 ----
-$ sha256sum -c <(echo "f189936b32bae5cde22a7522dc58bd4e988c1384f690801c4cc88dfebf90319c  ./circleci-testsuite.gz")
+$ sha256sum -c <(echo "{testsuite-sha-linux-amd64}  ./circleci-testsuite.gz")
 ----
 
 Linux Arm::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/linux/arm/circleci-testsuite.gz[Download]
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/arm/circleci-testsuite.gz[Download]
 +
 Verify with:
 +
-[source,console]
+[source,console,subs="attributes+"]
 ----
-$ sha256sum -c <(echo "b84ccd76ddb4bad1e8226381e308f9a9d95e2314cd3676fcdaffcf234446fcd5  ./circleci-testsuite.gz")
+$ sha256sum -c <(echo "{testsuite-sha-linux-arm}  ./circleci-testsuite.gz")
 ----
 
 Linux ARM64::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/linux/arm64/circleci-testsuite.gz[Download]
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/arm64/circleci-testsuite.gz[Download]
 +
 Verify with:
 +
-[source,console]
+[source,console,subs="attributes+"]
 ----
-$ sha256sum -c <(echo "a5770f0c964b434df3560358836fa2401f526379e84aac2cd6c7946180ed1ce6  ./circleci-testsuite.gz")
+$ sha256sum -c <(echo "{testsuite-sha-linux-arm64}  ./circleci-testsuite.gz")
 ----
 
 Windows AMD64::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/1.0.15108-d839eb2/windows/amd64/circleci-testsuite.exe.gz[Download]
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/windows/amd64/circleci-testsuite.exe.gz[Download]
 +
 Verify with:
 +
-[source,console]
+[source,console,subs="attributes+"]
 ----
-$ sha256sum -c <(echo "ca0f395b1ffeca557428a30cc405ad193fe681792822cfae73c7c7c813687c0c  ./circleci-testsuite.exe.gz")
+$ sha256sum -c <(echo "{testsuite-sha-windows-amd64}  ./circleci-testsuite.exe.gz")
 ----
 ====
 
@@ -137,7 +136,6 @@ $ chmod u+x circleci-testsuite
 ----
 $ mv circleci-testsuite "${HOME}/bin/"
 ----
-////
 
 == 2. Configure the discover command
 
