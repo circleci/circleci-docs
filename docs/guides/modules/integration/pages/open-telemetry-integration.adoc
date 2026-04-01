@@ -29,6 +29,20 @@ Then run this command, substituting your own values:
 $ curl -sH "Circle-Token: <CircleCI Token>" -X POST -d '{"org_id": "<CircleCI org ID>", "endpoint": "api.honeycomb.io:443", "protocol": "grpc", "headers": {"x-honeycomb-team": "<Honeycomb API token>"}}' 'https://circleci.com/api/v2/otel/exporters'
 ----
 
+[NOTE]
+====
+*Enterprise and IP-restricted endpoints*
+
+If your OpenTelemetry ingress restricts access by IP (for example, Grafana, Prometheus, or other internally managed observability endpoints), you will need to allow-list CircleCI's core service IP ranges. OpenTelemetry spans are sent from CircleCI's core services, not from job executors, so you do not need to enable the `circleci_ip_ranges` job feature. The core service IP ranges can be queried via DNS:
+
+[source,console]
+----
+dig core.knownips.circleci.com A +short
+----
+
+See xref:security:ip-ranges.adoc[IP Ranges] for the full list and more details.
+====
+
 == Mapping of CircleCI primitives to OpenTelemetry spans
 
 The following is a description of the span data emitted for each of the
