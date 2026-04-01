@@ -85,15 +85,15 @@ The application exposes a number of external ports. These ports are used for var
 
 CircleCI Server schedules CI jobs using HashiCorp link:https://www.nomadproject.io/[Nomad]. Depending on the execution environment used for a job, the resources are provisioned through one of the following:
 
-* Nomad for the Docker executor
-* Machine provisioner for virtual machines (VMs), the `machine` executor
-* Runner, if used, for all executor types
+* Nomad for the Docker executor.
+* Machine provisioner for virtual machines (VMs), the `machine` executor.
+* Runner, if used, for all executor types.
 
 The Nomad control plane runs inside your Kubernetes cluster. Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster.
 
 CircleCI Server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
-For more information on Nomad architecture and use, see the xref:operator:introduction-to-nomad-cluster-operation.adoc#[Introduction to Nomad Cluster operation].
+For more information on Nomad architecture and use, see the xref:operator:introduction-to-nomad-cluster-operation.adoc#[Introduction to Nomad Cluster Operation].
 
 Job artifacts and outputs are sent directly from jobs in Nomad to object storage (S3, Google Cloud Storage, or other supported options). Audit logs and other items from the application are also stored in object storage, so both the Kubernetes cluster and the Nomad clients need access to object storage.
 
@@ -377,11 +377,11 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Azure
 | Untested
-| Should work with MinIO and Runner.
+| Should work with S3 compatible object store and Runner.
 
 | Digital Ocean
 | Untested
-| Should work with MinIO and Runner.
+| Should work with S3 compatible object store and Runner.
 
 | OpenShift
 | Untested
@@ -389,7 +389,7 @@ We do our best to support a wide range of platforms for installation. We use env
 
 | Rancher
 | Untested
-| Should work with MinIO and Runner.
+| Should work with S3 compatible object store and Runner.
 |===
 
 [#installation-options]
@@ -406,6 +406,6 @@ ifndef::pdf[]
 [#next-steps]
 == Next steps
 
-* xref:release-notes.adoc#[CircleCI Server 4.9 release notes].
+* xref:release-notes.adoc#[CircleCI Server 4.9 Release Notes].
 * server 4.9 installation prerequisites for xref:installation:phase-1-aws-prerequisites.adoc#[AWS] and xref:installation:phase-1-gcp-prerequisites.adoc#[GCP].
 endif::pdf[]
