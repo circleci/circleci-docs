@@ -69,13 +69,15 @@ No changes are pushed to your repository at this point. GitHub pipelines are vie
 
 Deploy markers *must* be configured in your project to use CircleCI rollback pipelines. If you already have deploy markers set up, select "I'll make the config changes myself" and then select btn:[I've updated my config] to proceed to the next step.
 
-The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the  xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. If you want to set up deploy markers across multiple projects at once, see the xref:configure-deploy-markers.adoc#set-up-deploy-markers-for-multiple-projects[Set up deploy markers for multiple projects] section.
 
 [tabs]
 ====
 Generate with AI::
 +
 --
+NOTE: The Generate with AI option requires AI features to be enabled for your organization. If AI features are not enabled, you are presented with a configuration template that you can copy and use to update your configuration manually. An organization admin can enable AI features by navigating to menu:Organization Settings[Advanced]. For more details, see the xref:toolkit:intelligent-summaries.adoc[Intelligent Summaries] page.
+
 . Select btn:[Generate config change with AI] to auto-generate a new configuration file, based on your project configuration, with deploy markers added.
 . Once the generation is complete, select btn:[Create pull request] to create a pull request with the changes.
 . View and check the pull request and merge when you are satisfied with the changes.
@@ -110,7 +112,7 @@ image::guides:ROOT:deploy/auto-generated-commands.png[Generated markers commands
 
 In this step you will configure your new rollback pipeline. You can then use this to revert to a stable version of your application from the CircleCI web app.
 
-. Review the example config file template. It shows how you will perform rollbacks and how to use deploy markers to track these rollbacks
+. Review the example config file template. It shows how you will perform rollbacks and how to use deploy markers to track these rollbacks.
 . Select btn:[Commit config & create Pull Request] to create this rollback configuration template in your repository. The setup will open a pull request in a new tab with the suggested changes.
 +
 NOTE: The configuration will be committed to a new branch called `rollback-pipeline-setup` in the repository you selected earlier in this guided setup.
@@ -165,7 +167,7 @@ In this section you can find a full example of a rollback pipeline config. This 
 *This template assumes the following:*
 
 . Your deployment is annotated with a "version" label.
-. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way
+. The name of your Helm chart is the same as the name of the component. If this is not the case, you can instead add a label to the deployment with the component name and retrieve it that way.
 ====
 
 .Example rollback pipeline configuration

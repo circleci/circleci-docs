@@ -279,10 +279,11 @@
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS, pipeline types, and feature support]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
+*** xref:integration:status-updates.adoc[Status updates overview]
+*** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:oss.adoc[Build open source projects]
 
 ** Third-party integrations
-*** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:jira-plugin.adoc[Connect with Jira]
 *** xref:integration:new-relic-integration.adoc[New Relic integration]
 *** xref:integration:datadog-integration.adoc[Datadog integration]
@@ -297,6 +298,7 @@
 * Developer toolkit
 ** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
 ** AI features
+*** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
 *** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
