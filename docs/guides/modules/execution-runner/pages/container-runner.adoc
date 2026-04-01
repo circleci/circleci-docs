@@ -549,7 +549,7 @@ docker:
 * Only Kubernetes container environments are supported at this time.
 * xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] as a command is not supported with container runner.  See <<building-container-images>>.
 * `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:reference:ROOT:configuration-reference.adoc#oidc[Configuration Reference].
-* Container agent runs as PID 1 in the primary task container and does not support custom init process.
+* Container agent runs as PID 1 in the primary task container and currently does not support custom init processes.
 
 [#faqs]
 == FAQs
