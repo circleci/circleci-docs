@@ -108,11 +108,11 @@ include::ROOT:example$expression-examples/workflow-when/or-equal-dynamic.yml[]
 
 include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 
-* Alternatively, you can use the classic/legacy syntax to achieve the same result:
+* Alternatively, you can use the logic statement syntax to achieve the same result:
 +
 [,yaml]
 ----
-include::ROOT:example$legacy-logic-statements/workflow-when/or-equal-legacy.yml[]
+include::ROOT:example$logic-statements/workflow-when/or-equal-legacy.yml[]
 ----
 
 
@@ -128,11 +128,11 @@ workflows:
       - build
 ----
 +
-Or using the legacy syntax:
+Or using the logic statement syntax:
 +
 [,yaml]
 ----
-include::ROOT:example$legacy-logic-statements/workflow-when/exclude-branch-legacy.yml[]
+include::ROOT:example$logic-statements/workflow-when/exclude-branch-legacy.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
@@ -176,11 +176,11 @@ workflows:
       - build
 ----
 +
-Or using the legacy syntax:
+Or using the logic statement syntax:
 +
 [,yaml]
 ----
-include::ROOT:example$legacy-logic-statements/workflow-when/and-multiple-legacy.yml[]
+include::ROOT:example$logic-statements/workflow-when/and-multiple-legacy.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
@@ -261,7 +261,7 @@ You may want to configure a step that will run depending on the output of a nest
 +
 [,yaml]
 ----
-include::ROOT:example$legacy-logic-statements/step-when/when-step-nested.yml[]
+include::ROOT:example$logic-statements/step-when/when-step-nested.yml[]
 ----
 
 === Notes

@@ -1771,7 +1771,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | `condition`
 | Y
 | Logic
-| xref:configuration-reference.adoc#legacy-logic-statements[A logic statement] (or use xref:configuration-reference.adoc#using-expressions-in-your-configuration[expressions] in workflow/job filters instead)
+| xref:configuration-reference.adoc#logic-statements[A logic statement] (or use xref:configuration-reference.adoc#using-expressions-in-your-configuration[expressions] in workflow/job filters instead)
 
 | `steps`
 | Y
@@ -3636,10 +3636,10 @@ You can find usage examples on the xref:guides:orchestrate:orchestration-cookboo
 
 '''
 
-[#legacy-logic-statements]
-== Legacy logic statement syntax
+[#logic-statements]
+== Logic statement syntax
 
-NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[expressions] for conditional logic in your configuration. The legacy logic statement syntax described in this section still works, but expressions provide a more intuitive and flexible approach.
+NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[expressions] for conditional logic in your configuration. The logic statement syntax described in this section still works, but expressions provide a more intuitive and flexible approach.
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is, before the workflow is run. The group of logic statements includes:
 
@@ -3708,8 +3708,8 @@ Logic statements always evaluate to a boolean value at the top level, and coerce
 
 NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
-[#legacy-logic-statement-example]
-=== Legacy logic statement example
+[#logic-statement-example]
+=== Logic statement example
 
 [,yaml]
 ----

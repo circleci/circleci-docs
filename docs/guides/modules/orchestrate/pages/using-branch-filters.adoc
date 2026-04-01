@@ -10,7 +10,7 @@ Branch filtering has previously only been available for workflows, but with comp
 
 The following example shows using the <<pipeline-variables#pipeline-values,pipeline value>> `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch.
 
-NOTE: Step-level `when` conditions use the xref:reference:ROOT:configuration-reference.adoc#legacy-logic-statements[legacy logic statement syntax]. For workflow-level filtering, you can use the modern xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[expression syntax] instead.
+NOTE: Step-level `when` conditions use the xref:reference:ROOT:configuration-reference.adoc#logic-statements[logic statement syntax]. For workflow-level filtering, you can use xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[expression syntax] instead.
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
