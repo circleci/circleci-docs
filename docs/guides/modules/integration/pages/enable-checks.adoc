@@ -6,7 +6,7 @@
 [#introduction]
 == Introduction
 
-NOTE: The GitHub Checks integration feature is not currently available on CircleCI server.
+NOTE: The GitHub Checks integration feature is not currently available on CircleCI Server.
 
 This document describes how to enable the GitHub Checks feature and authorize CircleCI to report workflow status to the GitHub user interface.
 
@@ -14,6 +14,7 @@ GitHub Checks provides you with workflow status messages and gives the option to
 
 After GitHub Checks is enabled, CircleCI workflow status is reported under the checks tab on GitHub.
 
+.Example of the Checks tab on a GitHub PR view showing workflow status.
 image::guides:ROOT:checks_tab.png[CircleCI checks on GitHub]
 
 NOTE: GitHub does not currently provide a granular way for you to rerun workflows. When you select the Re-run checks button, all checks are rerun, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button.
@@ -23,19 +24,18 @@ NOTE: GitHub does not currently provide a granular way for you to rerun workflow
 
 GitHub Checks should not be confused with GitHub status updates:
 
-* GitHub Checks are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
+* *GitHub Checks* are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
 ** GitHub Checks from OAuth integrations have the same name as the associated workflow.
 ** GitHub Checks from GitHub App integrations are named using a combination of the workflow name and the first eight characters of the pipeline definition ID. The identifier is used to prevent naming collisions. The pipeline definition ID is available in the *Project Settings* > *Pipelines* page in the CircleCI web app.
 ** Each workflow in a pipeline generates a GitHub Check. If multiple pipelines trigger for the same commit SHA with workflows that share the same name, only one GitHub Check appears for that workflow name. Use unique workflow names across pipelines to get distinct GitHub Checks.
-* GitHub status updates are the default way status updates from your builds are reported in the GitHub UI, and they are reported per _job_.
+* GitHub *status updates* are the default way status updates from your builds are reported in your VCS UI. Status updates are reported per _job_. For more information on status updates, see the xref:status-updates.adoc[Status Updates Overview] guide.
 
 If both these features are enabled you will see the following in a GitHub PR view:
 
 * The Checks tab will show *workflow status*.
 * The Checks section in the PR conversation view will show *job status*.
 
-If you are using GitHuck Checks or GitHub status updates with the xref:orchestrate:skip-build.adoc#skip-jobs[skip jobs feature],
-the status of the skipped builds will not be reported. The checks are still created in GitHub.
+If you are using GitHub Checks or GitHub status updates with the xref:orchestrate:skip-build.adoc#skip-jobs[Skip Jobs] feature, the status of the skipped builds are not reported. However, the GitHub Checks are still created in GitHub.
 
 [#prerequisites]
 == Prerequisites
@@ -51,6 +51,7 @@ the status of the skipped builds will not be reported. The checks are still crea
 . Select *VCS Connections*.
 . Select *Manage GitHub Checks*.
 +
+.CircleCI VCS Settings Page
 image::guides:ROOT:github-checks.png[CircleCI VCS Settings Page]
 . You are now in the GitHub CircleCI Checks App settings page. Select the repositories that should use checks and select *Save*.
 
@@ -74,10 +75,12 @@ To disable the GitHub Checks integration, navigate to the *Org* page in the Circ
 . Select *VCS Connections*.
 . Select *Manage GitHub Checks*. The Update CircleCI Checks repository access page appears.
 +
+.CircleCI VCS Settings Page
 image::guides:ROOT:github-checks.png[CircleCI VCS Settings Page]
 . Deselect the repository to uninstall the Checks integration. Select *Save*. If you are removing GitHub Checks from the only repo you have it installed on, you will need to either suspend or uninstall CircleCI Checks.
 . Confirm that GitHub status updates have been enabled on your project so you will see job level status within PRs in GitHub. To do this, go to the CircleCI app and navigate to *Project Settings* > *Advanced Settings* and confirm that the setting `GitHub Status Updates` is set to `on`.
 +
+.CircleCI VCS Settings Page
 image::guides:ROOT:github-status-updates.png[CircleCI VCS Settings Page]
 
 [#uninstall-checks-for-the-organization]
@@ -87,10 +90,12 @@ image::guides:ROOT:github-status-updates.png[CircleCI VCS Settings Page]
 . Select *VCS Connections*.
 . Select *Manage GitHub Checks*.
 +
+.CircleCI VCS Settings Page
 image::guides:ROOT:github-checks.png[CircleCI VCS Settings Page]
 . Scroll down and select the Uninstall button to uninstall the GitHub Checks app.
 . Confirm that GitHub status updates have been enabled on your projects so you will see job level status within PRs in GitHub. To do this, go to the CircleCI app and navigate to *Project Settings* > *Advanced Settings* and confirm that the setting `GitHub Status Updates` is set to `on`.
 +
+.CircleCI VCS Settings Page
 image::guides:ROOT:github-status-updates.png[CircleCI VCS Settings Page]
 
 NOTE: GitHub OAuth integrations will automatically re-enable job level status when the GitHub Checks integration is uninstalled. CircleCI GitHub App integrations will not disable or re-enable job level status automatically.
@@ -102,6 +107,7 @@ NOTE: GitHub OAuth integrations will automatically re-enable job level status wh
 
 If you have enabled GitHub Checks and the status check never completes on GitHub Checks tab, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci:build` status key as this check refers to the job status from CircleCI, as follows:
 
+.Uncheck GitHub Job Status Keys
 image::guides:ROOT:github_job_status.png[Uncheck GitHub Job Status Keys]
 
 Having the `ci/circleci:build` checkbox enabled prevents the status from showing as completed in GitHub when using a GitHub Check. CircleCI posts statuses to GitHub at a workflow level rather than a job level.
@@ -111,4 +117,4 @@ Go to menu:Settings[Branches] in GitHub and select the *Edit* button on the prot
 [#next-steps]
 == Next steps
 
-* xref:add-ssh-key.adoc[Add an SSH key to CircleCI]
+* xref:add-ssh-key.adoc[Add an SSH Key to CircleCI]
