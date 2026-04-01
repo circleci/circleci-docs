@@ -90,7 +90,7 @@ agent:
 [#customizable-service-containers]
 === Customizable service containers
 
-By default, xref:execution-managed:using-docker.adoc#using-multiple-docker-images[Service (or Secondary) Containers] inherit the same link:https://kubernetes.io/docs/tasks/configure-pod-container/[container configuration] as defined by the primary container. However, this behavior can be overridden using customizable service containers. Using the available overrides allows fine-tuned control over a service's resource usage on a per-image basis.
+By default, xref:execution-managed:using-docker.adoc#using-multiple-docker-images[Service Containers] inherit the same link:https://kubernetes.io/docs/tasks/configure-pod-container/[container configuration] as defined by the primary container. However, this behavior can be overridden using customizable service containers. Using the available overrides allows fine-tuned control over a service's resource usage on a per-image basis.
 
 [#customizable-service-containers-example]
 ==== Example
@@ -416,7 +416,7 @@ Container runner needs the following Kubernetes permissions:
 ** Get
 ** List
 
-If xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun Job with SSH] is enabled, the following permissions are also required:
+If xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun Job With SSH] is enabled, the following permissions are also required:
 
 * link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
 ** Get
