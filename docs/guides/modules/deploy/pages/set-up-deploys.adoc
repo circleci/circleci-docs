@@ -61,13 +61,15 @@ No changes are being pushed to your repository at this point. GitHub pipelines a
 
 Deploy markers *must* be configured in your project to use CircleCI deploy pipelines. If you already have deploy markers set up, select "I'll make the config changes myself" and then select btn:[I've updated my config] to proceed to the next step.
 
-The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the  xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+The in-app setup process guides you to set up deploy markers now. Alternatively, manual configuration steps are available in the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. If you want to set up deploy markers across multiple projects at once, see the xref:configure-deploy-markers.adoc#set-up-deploy-markers-for-multiple-projects[Set up deploy markers for multiple projects] section.
 
 [tabs]
 ====
 Generate with AI::
 +
 --
+NOTE: The Generate with AI option requires AI features to be enabled for your organization. If AI features are not enabled, you are presented with a configuration template that you can copy and use to update your configuration manually. An organization admin can enable AI features by navigating to menu:Organization Settings[Advanced]. For more details, see the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page.
+
 . Select btn:[Generate config change with AI] to auto-generate a new configuration file, based on your project configuration, with deploy markers added.
 . Once the generation is complete, select btn:[Create pull request] to create a pull request with the changes.
 . View and check the pull request and merge when you are satisfied with the changes.

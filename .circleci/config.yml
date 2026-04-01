@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
-  go: circleci/go@3.0.3
+  go: circleci/go@3.0.4
 
 executors:
   node_executor:
@@ -18,7 +18,7 @@ executors:
 
   ruby_executor:
     docker:
-      - image: cimg/ruby:4.0.1
+      - image: cimg/ruby:4.0.2
     working_directory: ~/project
 
 commands:

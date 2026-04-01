@@ -117,22 +117,22 @@ CircleCI provides deployment tracking and management through two main features a
 
 *Deploy markers* provide a lightweight way to generate a log of all deployments in one place, with links back to the CI/CD pipelines that triggered them. Deploy markers give you a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers are configured as steps in your pipeline configuration.
 
-To configure deploy markers you will add steps to your pipeline configuration to log and track deployment status in the CircleCI UI.
+To configure deploy markers, add steps to your pipeline configuration manually or use the multi-project setup in the CircleCI web app. For more information, see the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Once you have deploy markers configured you can set up and use the following features:
 
 * *Rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
 * *Deploy pipelines* to automatically deploy your application to a target environment directly from the CircleCI web app.
-* *Environment hierarchy and version promotion* to define ordered promotion paths (for example, dev → staging → production) and promote versions through each stage with a single click. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
+* *Environment hierarchy and version promotion* to define ordered promotion paths and promote versions through each stage. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
 
-To get set up see the following guides, you can choose manual configuration or a guided setup option:
+To get set up see the following guides, you can choose manual configuration, a guided setup option, or multi-project setup:
 
+* xref:configure-deploy-markers.adoc[Configure Deploy Markers]: Configure deploy markers manually, or use the multi-project setup to generate and commit deploy marker configuration for multiple projects at once.
 * xref:set-up-rollbacks.adoc[Set up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
 * xref:set-up-deploys.adoc[Set up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
-* xref:configure-deploy-markers.adoc[Configure CircleCI Deploy Markers] - This guide covers configuring deploy markers manually which you can do at any time. This page is also useful as a reference when using the guided setup process defined in the guides linked above.
 
 === CircleCI release agent
 

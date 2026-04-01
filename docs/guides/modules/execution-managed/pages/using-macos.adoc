@@ -17,7 +17,7 @@ jobs:
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 16.4.0 installed
+      # with Xcode 26.3.0 installed
       - run: xcodebuild -version
 ----
 
@@ -125,7 +125,7 @@ To pre-start the simulator, add the macOS orb (version `2.0.0` or higher) to you
 [source,yaml]
 ----
 orbs:
-  macos: circleci/macos@2
+  macos: circleci/macos@2.5.4
 ----
 
 Then call the `preboot-simulator` command, as shown in the example below:
@@ -134,9 +134,9 @@ Then call the `preboot-simulator` command, as shown in the example below:
 ----
 steps:
   - macos/preboot-simulator:
-      version: "18.5"
+      version: "26.2"
       platform: "iOS"
-      device: "iPhone 16 Pro Max"
+      device: "iPhone 17 Pro Max"
 ----
 
 It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
@@ -147,10 +147,10 @@ If you require an iPhone simulator that is paired with an Apple Watch simulator,
 ----
 steps:
   - macos/preboot-paired-simulator:
-      iphone-device: "iPhone 16"
-      iphone-version: "18.5"
-      watch-device: "Apple Watch Series 10 - 45mm"
-      watch-version: "11.5"
+      iphone-device: "iPhone 17"
+      iphone-version: "26.2"
+      watch-device: "Apple Watch Series 11 - 46mm"
+      watch-version: "26.2"
 ----
 
 NOTE: It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
@@ -176,7 +176,7 @@ By default, Fastlane Scan generates test output reports in `html` and `junit` fo
 [#optimizing-cocoapods]
 === Optimizing CocoaPods
 
-In addition to the basic setup steps, it is best practice to use CocoaPods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repository. This will allow you to install pods faster, reducing build times. If you are using CocoaPods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
+In addition to the steps above, it's best practice to use a current version of CocoaPods which supports the CDN, rather than having to clone the entire Specs repository. This will allow you to install pods faster, reducing build times. The current macOS image ships with CocoaPods `1.16.2`. If you are using CocoaPods 1.7 or older, upgrade to take advantage of CDN support and faster `pod install` execution.
 
 To enable this, ensure the first line in your Podfile is as follows:
 
@@ -271,7 +271,7 @@ jobs:
           name: Build and run tests
           command: fastlane scan
           environment:
-            SCAN_DEVICE: iPhone 8
+            SCAN_DEVICE: iPhone 17
             SCAN_SCHEME: WebTests
 
       - store_test_results:
@@ -281,7 +281,7 @@ jobs:
 
   deploy-snapshot:
     docker:
-      - image: cimg/deploy:2022.08
+      - image: cimg/deploy:2026.02
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -295,6 +295,8 @@ workflows:
       - deploy-snapshot
       - build-and-test
 ----
+
+NOTE: `cimg/deploy` is updated monthly. For the latest available tag, see link:https://hub.docker.com/r/cimg/deploy/tags[cimg/deploy on Docker Hub].
 
 [#next-steps]
 == Next steps
