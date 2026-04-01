@@ -101,7 +101,7 @@ You may want to configure a workflow that will only run when the pipeline is tri
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/or-equal-dynamic.yml[]
+include::ROOT:example$expression-examples/workflow-when/or-equal-dynamic.yml[]
 ----
 
 === Notes
@@ -112,15 +112,27 @@ include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/or-equal-legacy.yml[]
+include::ROOT:example$legacy-logic-statements/workflow-when/or-equal-legacy.yml[]
 ----
 
 
-* You can also choose to prevent the workflow from running for specific branches:
+* You can also choose to prevent the workflow from running for specific branches using the `not` operator with `matches` for pattern matching:
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/exclude-branch-legacy.yml[]
+workflows:
+  my-workflow:
+# The "my-workflow" workflow will NOT run when the branch name matches the pattern "feature-.*"
+    when: not (pipeline.git.branch matches "^feature-.*$")
+    jobs:
+      - build
+----
++
+Or using the legacy syntax:
++
+[,yaml]
+----
+include::ROOT:example$legacy-logic-statements/workflow-when/exclude-branch-legacy.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
@@ -138,7 +150,7 @@ You may want to configure a workflow that will only run when a boolean pipeline 
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/boolean-dynamic-syntax.yml[]
+include::ROOT:example$expression-examples/workflow-when/boolean-dynamic-syntax.yml[]
 ----
 
 === Notes
@@ -149,14 +161,26 @@ include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/boolean-short-syntax.yml[]
+include::ROOT:example$expression-examples/workflow-when/boolean-short-syntax.yml[]
 ----
 
-* You can create complex logic statements that involve multiple parameters:
+* You can create complex expressions that involve multiple parameters using `and`, `or`, and parentheses for grouping:
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/and-multiple-legacy.yml[]
+workflows:
+  my-workflow:
+# This workflow runs when: branch is "main" AND param1 is false AND (param1 OR param2 is true)
+    when: pipeline.git.branch == "main" and not pipeline.parameters.param1 and (pipeline.parameters.param1 or pipeline.parameters.param2)
+    jobs:
+      - build
+----
++
+Or using the legacy syntax:
++
+[,yaml]
+----
+include::ROOT:example$legacy-logic-statements/workflow-when/and-multiple-legacy.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
@@ -237,7 +261,7 @@ You may want to configure a step that will run depending on the output of a nest
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-unless-steps/when-step-nested.yml[]
+include::ROOT:example$legacy-logic-statements/step-when/when-step-nested.yml[]
 ----
 
 === Notes
@@ -258,7 +282,7 @@ You may want to configure a job that only runs on specific branches or when the 
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/expression-based-job-filters/multiple-or.yml[]
+include::ROOT:example$expression-examples/job-filters/multiple-or.yml[]
 ----
 
 === Notes
@@ -280,7 +304,7 @@ In some cases, you may want to configure a workflow that will only run when a sc
 .The nightly-run-workflow only runs when the trigger is a schedule trigger AND the name of that trigger is `nightly_build`
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/and-equal-dynamic.yml[]
+include::ROOT:example$expression-examples/workflow-when/and-equal-dynamic.yml[]
 ----
 
 === Notes
@@ -299,7 +323,7 @@ You may want to have a workflow run when a open pull requests are updated with n
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statement-examples/when-in-workflows/pr-synced-or-labeled.yml[]
+include::ROOT:example$expression-examples/workflow-when/pr-synced-or-labeled.yml[]
 ----
 
 === Notes

@@ -572,7 +572,7 @@ The `test1` and `test2` jobs have access to environment variables stored in the 
 
 == Use conditional logic in workflows
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a xref:reference:ROOT:configuration-reference.adoc#logic-statements[Logic Statements] to determine whether or not to run that workflow.
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[expressions] to determine whether or not to run that workflow.
 
 Workflows are always run unless there is a `when` or `unless` filter that prevents the workflow from being run. If you want a workflow to run in **every** pipeline, do **not** add a when or unless filter.
 

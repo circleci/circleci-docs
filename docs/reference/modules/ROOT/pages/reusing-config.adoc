@@ -1166,7 +1166,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 | condition
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A logic statement]
+| xref:configuration-reference.adoc#legacy-logic-statements[A logic statement]
 
 | steps
 | Y
@@ -1189,7 +1189,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 | condition
 | Y
 | Logic
-| xref:reference:ROOT:configuration-reference.adoc#logic-statements[A logic statement]
+| xref:reference:ROOT:configuration-reference.adoc#legacy-logic-statements[A logic statement]
 
 | steps
 | Y
