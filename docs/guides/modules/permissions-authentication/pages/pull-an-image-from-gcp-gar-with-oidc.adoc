@@ -83,11 +83,11 @@ The CircleCI OIDC V2 token's `sub` claim includes VCS information and can exceed
 org/<org_id>/project/<project_id>/user/<user_id>/vcs-origin/github.com/<org>/<repo>/vcs-ref/refs/heads/<branch>
 ----
 
-To resolve this, update the `google.subject` attribute mapping in your GCP Workload Identity pool to derive a shorter value. For more information on attribute mappings, see the https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds#mappings-and-conditions[GCP attribute mappings and conditions documentation]. The recommended mapping uses the last path segment of `sub` (the user UUID), prefixed with the org ID:
+To resolve this, update the `google.subject` attribute mapping in your GCP Workload Identity pool to derive a shorter value. For more information on attribute mappings, see the https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds#mappings-and-conditions[GCP attribute mappings and conditions documentation]. The recommended mapping extracts the user UUID from `sub` using the `extract` function, prefixed with the org ID:
 
 [source,plaintext]
 ----
-google.subject=assertion.org_id + "/" + assertion.sub.split("/")[assertion.sub.split("/").size() - 1]
+google.subject=assertion.org_id + "/" + assertion.sub.extract('/user/{user_id}/')
 ----
 
 This produces a value like `<org_uuid>/<user_uuid>` (73 bytes), which is well within the limit and works consistently across all trigger types.
