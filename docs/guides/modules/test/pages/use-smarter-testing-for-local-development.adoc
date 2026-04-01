@@ -1,12 +1,15 @@
-= Use Smarter Testing to get faster feedback on local test runs
+= Use Smarter Testing for local development
 :page-description: Run Smarter Testing features on your local machine
-:page-badge: Preview
+:page-badge: Beta
 :page-platform: Cloud
 :experimental:
-:page-noindex: true
-:page-show-readtime: true
 
-CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+[NOTE]
+====
+*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+====
 
 Use Smarter Testing locally during development (test impact analysis and auto-rerun failed tests) to speed up your test runs.
 
@@ -15,8 +18,7 @@ Use Smarter Testing locally during development (test impact analysis and auto-re
 Before using Smarter Testing locally, ensure you have:
 
 * Completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide.
-* Enabled xref:set-up-test-impact-analysis.adoc[Test Impact Analysis] in your test-suite.yml.
-* And/or enabled xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] in your test-suite.yml.
+* Enabled xref:set-up-test-impact-analysis.adoc[Test Impact Analysis] and/or xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] in your `test-suite.yml`.
 
 == Using Test Impact Analysis locally
 
@@ -72,3 +74,8 @@ Auto-rerun failed tests works automatically when running your test suite locally
 ----
 $ circleci run testsuite "ci tests" --local
 ----
+
+== Next steps
+
+* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development].
+

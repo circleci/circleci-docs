@@ -23,7 +23,7 @@ npm install --save-dev firebase-tools
 
 If you have not already done so, link:https://cloud.google.com/iam/docs/service-accounts-create[create a Google Cloud service account] with the appropriate access for the deploy job.
 
-Then, link:https://cloud.google.com/docs/authentication/provide-credentials-adc#wlif-key[create a service account key]. You may store the key file contents in your project's environment variables (in this guide, we name the project environment variable `$SA_KEY`). Refer to the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an environment variable in a project] guide for instructions. CircleCI will use this credential to authenticate with Firebase.
+Then, link:https://cloud.google.com/docs/authentication/provide-credentials-adc#wlif-key[create a service account key]. You may store the key file contents in your project's environment variables (in this guide, we name the project environment variable `$SA_KEY`). Refer to the xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Set an Environment Variable in a Project] guide for instructions. CircleCI will use this credential to authenticate with Firebase.
 
 include::ROOT:partial$tips/env-var-or-context.adoc[]
 
@@ -34,7 +34,7 @@ NOTE: Review the link:https://cloud.google.com/iam/docs/best-practices-for-manag
 
 . Inside a `run` step, output the value of the environment variable, that is, the contents of the service account key file, to a JSON file.
 
-. Set the JSON file path as the value of an environment variable `$GOOGLE_APPLICATION_CREDENTIALS` xref:security:env-vars.adoc#order-of-precedence[declared in the shell]. Then, run the Firebase deploy command.
+. Set the JSON file path as the value of an environment variable `$GOOGLE_APPLICATION_CREDENTIALS` declared in the shell (See xref:security:env-vars.adoc#order-of-precedence[Environment Variables Order of Precedence]) guide. Then, run the Firebase deploy command.
 
 [source,yaml]
 ----
@@ -50,7 +50,10 @@ To learn more about how Google finds application credentials, refer to the link:
 [#deploy-example]
 == Deploy example
 
-The following example shows how you can add a Firebase deploy job to your project's `.circleci/config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
+The following example shows how you can add a Firebase deploy job to your project's `.circleci/config.yml` file. The example includes the following:
+
+* A job to build your application (`build-job`).
+* A deployment workflow that only runs the deployment job once the build job has completed **and** you are on the main branch.
 
 [source,yaml]
 ----
@@ -90,9 +93,25 @@ workflows:
 [#google-cloud-functions]
 == Google Cloud Functions
 
-If you are using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `.circleci/config.yml`:
+If you are using Cloud Functions with Firebase, you should do the following:
 
+* Instruct CircleCI to navigate to the folder where the Cloud Functions are held (in this case 'functions') and run `npm install`.
+* Add the following to your `.circleci/config.yml` file:
++
 [source,yaml]
 ----
     - run: cd functions && npm install
 ----
+
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+Deploy markers provide a way to track and manage your Firebase deployments in the CircleCI web app. When you add deploy markers to your deployment job, you can view a timeline of all deployments, track their status, and enable rollback and deploy pipelines.
+
+You have two options for setting up deploy markers:
+
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
