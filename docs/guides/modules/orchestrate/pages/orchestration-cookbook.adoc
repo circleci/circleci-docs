@@ -249,24 +249,34 @@ workflows:
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
-== Run a step depending on the output of a nested logic statement
+== Run a step depending on the output of a nested expression or logic statement
 
 === Goal
 
-You may want to configure a step that will run depending on the output of a nested logic statement.
+You may want to configure a step that will run depending on the output of a nested expression or logic statement.
 
 === Steps
 
-* Update your CircleCI config to use xref:reference:ROOT:configuration-reference.adoc#the-when-step[the `when` step].
+* Update your CircleCI config to use xref:reference:ROOT:configuration-reference.adoc#the-when-step[the `when` step] with a nested expression.
++
+NOTE: When using expressions in the `condition` field of a step-level `when`, you must wrap the expression in `<< >>` delimiters.
++
+[,yaml]
+----
+include::ROOT:example$expression-examples/step-when/when-step-nested.yml[]
+----
+
+=== Notes
+
+* Expressions can be nested with parentheses to create complex conditional logic.
+* Alternatively, you can use the logic statement syntax to achieve the same result:
 +
 [,yaml]
 ----
 include::ROOT:example$logic-statements/step-when/when-step-nested.yml[]
 ----
-
-=== Notes
-
-* The logic statement can be nested to a maximum depth of 100 levels.
++
+* Logic statements can be nested to a maximum depth of 100 levels.
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
