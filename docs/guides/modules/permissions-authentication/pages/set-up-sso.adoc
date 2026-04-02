@@ -25,6 +25,8 @@ To begin setting up a SAML SSO connection in your CircleCI organization, follow 
 Next you will configure your IdP. The steps to do this will vary depending on your IdP. For example, if you are using Okta, refer to link:https://help.okta.com/[Okta's documentation].
 
 . Open your IdP and paste the required configuration details (**Setup Parameters** and **Allowed iFrame Origin**) retrieved from CircleCI in the previous section to configure your IdP.
++
+TIP: If your IdP requires a logo for the application (for example, Okta), you can download the CircleCI logo from our link:https://brand.circleci.com/613faff00/p/732047-logos[brand site].
 . Add `https://app.circleci.com` to your IdP's trusted origins for iframe embedding. This is required to validate a user's active SSO session when they are interacting with an SSO organization in CircleCI.
 . The IdP will generate the following information, which you will need to copy in order to complete the next section:
 ** SSO URL
