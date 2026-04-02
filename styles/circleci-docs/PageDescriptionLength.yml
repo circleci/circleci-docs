@@ -1,0 +1,27 @@
+---
+extends: script
+scope: raw
+level: error
+message: "Page description should not exceed 160 characters for SEO."
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  lines := text.split(scope, "\n")
+
+  for i, line in lines {
+    trimmed := text.trim_space(line)
+
+    // Check for :page-description: attribute
+    if text.has_prefix(trimmed, ":page-description:") {
+      // Extract the description text (everything after ":page-description:")
+      desc_text := text.trim_space(text.trim_prefix(trimmed, ":page-description:"))
+      desc_length := len(desc_text)
+
+      if desc_length > 160 {
+        start := text.index(scope, line)
+        matches = append(matches, {begin: start, end: start + len(line)})
+      }
+    }
+  }

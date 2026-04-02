@@ -1,20 +1,22 @@
 {{#if navigation.length}}
-<ul class="{{#if (and class (not (eq class "")))}}{{class}} {{/if}}text-terminal-black font-light">
+<ul class="{{#if (and class (not (eq class "")))}}{{class}} {{/if}}text-terminal-black font-normal">
   {{#each navigation}}
   <li data-navigation-tree-content class="my-1" data-depth="{{or ../level 0}}" {{#if (eq ./url @root.page.url)}} data-current{{/if}}>
     {{#if ./content}}
-      <div data-navigation-tree-toggle class="flex items-center py-[8px] px-[12px] space-x-2 max-w-fit {{#if (eq ./url @root.page.url)}} rounded-lg bg-fog{{/if}} {{#if (has-active-child ./items)}} border-none{{/if}}">
+      <div data-navigation-tree-toggle class="flex items-center py-[8px] px-[12px] space-x-2 max-w-fit {{#if (eq ./url @root.page.url)}} rounded-lg bg-fog{{/if}} {{#if (has-active-child ./items)}} border-none{{/if}}"{{#if (has-active-child ./items)}} data-active-parent{{/if}}>
         {{#if ./items.length }}
-          <button class="block -ml-[1.3rem] p-1 h-full">
-            <img src="{{{@root.uiRootPath}}}/img/arrow-down.svg" alt="Toggle" class="w-[6px] h-[6px] transform {{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url))) }}-rotate-90{{/if}}">
+          <button class="block -ml-[1.3rem] p-1 h-full flex-shrink-0">
+            <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[6px] h-[6px] transform {{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url))) }}-rotate-90{{/if}}" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M3.35355 3.85355C3.15829 4.04882 2.84171 4.04882 2.64645 3.85355L0.146447 1.35355C-0.0488155 1.15829 -0.0488155 0.841708 0.146447 0.646446C0.341709 0.451184 0.658292 0.451184 0.853554 0.646446L3 2.79289L5.14645 0.646447C5.34171 0.451184 5.65829 0.451184 5.85355 0.646447C6.04882 0.841709 6.04882 1.15829 5.85355 1.35355L3.35355 3.85355Z" fill="currentColor"/>
+            </svg>
           </button>
         {{/if}}
         {{#if (and ./url (not (eq ./url @root.page.url)))}}
-          <a class="nav-link hover:text-link-on-light {{#if (has-active-child ./items)}}font-medium text-inherit {{/if}}" href="
+          <a class="nav-link hover:text-link-on-light" href="
             {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
             {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
           {{else}}
-          <span class="{{#if (has-active-child ./items)}}text-accent-green font-medium text-inherit{{/if}}">{{{./content}}}</span>
+          <span>{{{./content}}}</span>
         {{/if}}
       </div>
     {{/if}}

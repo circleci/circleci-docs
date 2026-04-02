@@ -1,6 +1,6 @@
 = Protecting against supply chain attacks
 :page-platform: Cloud, Server v4+
-:description: Protecting against supply chain attacks on CircleCI
+:page-description: Protecting against supply chain attacks on CircleCI
 :experimental:
 
 [#overview]

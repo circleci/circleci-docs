@@ -206,7 +206,7 @@ jobs:
 ----
 
 [#example-mysql-project]
-== Example MYSQL project.
+== Example MYSQL project
 
 The following example sets up MYSQL as a secondary container alongside a PHP container.
 
@@ -251,12 +251,12 @@ workflows:
       - build
 ----
 
-While it is possible to make MySQL as your primary and only container, this example
+While it is possible to make MySQL your primary and only container, this example
 does not. As a more practical use case, the example uses a PHP Docker image as
 its primary container, and will wait until MySQL is up and running before performing any `run` commands
 involving the DB.
 
-Once the DB is up, we install the `mysql` client into the primary container so that we can run a command to connect and import the dummy data, presumably found at, `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
+Once the DB is up, we install the `mysql` client into the primary container so that we can run a command to connect and import the dummy data, presumably found at `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
 
 [,sql]
 ----

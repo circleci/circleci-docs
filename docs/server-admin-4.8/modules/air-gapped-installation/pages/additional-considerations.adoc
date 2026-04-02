@@ -1,4 +1,5 @@
 = Additional considerations
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: This page presents some items that should be considered when starting an air-gapped installation of CircleCI server v4.8.
 :experimental:

@@ -1,6 +1,6 @@
 = Authorize Google Cloud SDK
 :page-platform: Cloud, Server v4+
-:description: How to authorize the Google Cloud SDK
+:page-description: How to authorize the Google Cloud SDK
 :experimental:
 
 This tutorial explains how to install and authorize the link:https://cloud.google.com/sdk/[Google Cloud SDK] in your primary container.

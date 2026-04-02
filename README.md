@@ -1,8 +1,9 @@
-# CircleCI Docs Static Site: Technical Documentation
+# CircleCI docs site: technical documentation
 
-Welcome to the comprehensive technical documentation for the CircleCI Docs Static Site project. This documentation is designed to help developers, content authors, and contributors understand the project's architecture, workflow, and best practices.
+Welcome to the comprehensive technical documentation for the CircleCI docs project. This documentation is designed to help developers, content authors, and contributors understand the project's architecture, workflow, and best practices.
 
-## Table of Contents
+## Table of contents
+
 - [Overview](#overview)
 - [Documentation Files](#documentation-files)
 - [Getting Started](#getting-started)
@@ -10,7 +11,7 @@ Welcome to the comprehensive technical documentation for the CircleCI Docs Stati
 
 ## Overview
 
-The CircleCI Docs Static Site is a documentation platform built using [Antora](https://antora.org/), a static site generator designed for multi-repository documentation. This project combines:
+The CircleCI docs site is a documentation platform built using [Antora](https://antora.org/), a static site generator designed for technical documentation. This project combines:
 
 - **Component-based architecture**: Organized documentation into logical sections
 - **AsciiDoc content**: Powerful markup language for technical documentation
@@ -41,47 +42,25 @@ This technical documentation consists of several specialized files:
    cd circleci-docs
    npm ci
    ```
-2. **Make sure you've cloned server-4* branches (Server Administration Docs)**
 
-```bash
-   npm run fetch-server-branches
-   ```
-
-3. **Start the development server**:
+2. **Start the development server**:
    ```bash
    npm run start:dev
    ```
 
-4. **Test the setup** (optional):
-   ```bash
-   ./scripts/test-setup.sh
-   ```
-
 ### For API Documentation
 
-This project includes integrated API documentation built with Redocly:
+This project includes integrated API documentation built with Redocly. See [API_DOCS_INTEGRATION.md](API_DOCS_INTEGRATION.md) for details.
 
-1. **Test the integration**:
-   ```bash
-   ./scripts/test-setup.sh
-   ```
-
-2. **Build API docs**:
-   ```bash
-   npm run build:api-docs
-   ```
-
-3. **Customize API docs**:
-   - Replace `api-spec.yaml` with your OpenAPI specification
-   - Edit `redocly.yaml` for styling and configuration
-   - See [API_DOCS_INTEGRATION.md](API_DOCS_INTEGRATION.md) for details
+The API docs are built along with the docs site.
 
 ### Technical Reference
 
-3. **Review the architecture**:
-   - Read [ARCHITECTURE.md](ARCHITECTURE.md) for system design
-   - Review [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow
-   - Consult [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) for detailed specs
+You can review the CircleCI docs site architechture in the following documents:
+
+* [ARCHITECTURE.md](ARCHITECTURE.md) for system design
+* [DEVELOPMENT.md](DEVELOPMENT.md) for development workflow
+* [TECHNICAL_REFERENCE.md](TECHNICAL_REFERENCE.md) for detailed specs
 
 ### For Content Authors
 
@@ -94,9 +73,11 @@ This project includes integrated API documentation built with Redocly:
    - Start the development server to preview changes
 
 3. **Create or edit content**:
+   - Check whether the content you want to add or edit already exists. Consider whether you need to add a new page or edit existing material
+   - Check the CircleCI docs style guide and templates [here](https://circleci.com/docs/contributors/docs-style/)
    - Follow the AsciiDoc formatting guidelines
    - Use the appropriate component structure
-   - Test your content locally
+   - Test your content locally. You can also preview a change by checking the [CircleCI build assets](https://app.circleci.com/pipelines/github/circleci/circleci-docs)
 
 ## Contributing
 

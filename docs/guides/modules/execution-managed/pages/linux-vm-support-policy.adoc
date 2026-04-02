@@ -45,6 +45,8 @@ Image Lifespan will generally follow the support status of Ubuntu by Canonical. 
 
 Current Deprecation (Jan 2024):
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Version
@@ -54,10 +56,13 @@ Current Deprecation (Jan 2024):
 
 | Ubuntu 22.04 LTS
 |===
+--
 
 
 Example: When Ubuntu 24.04 LTS is released
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Version
@@ -72,6 +77,7 @@ Example: When Ubuntu 24.04 LTS is released
 | Ubuntu 24.04 LTS
 | `current` and `edge` tags retained
 |===
+--
 
 When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.
 

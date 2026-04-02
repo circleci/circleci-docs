@@ -3,6 +3,7 @@
 :page-description: A short page description goes here max 155 characters.
 :experimental:
 
+pass:[<!-- vale off -->]
 ////
 :page-platform: drives the platform badges that you see in the info bar under the page title.
 :page-description: is used for SEO and meta description. This should be a short description of the page content. Between 70 and 155 characters.
@@ -69,6 +70,8 @@ Break up large blocks of text where possible to help make it easier to consume. 
 
 This section shows how to create a table. This example has one heading row and one regular row. The table has three columns, and the third column is twice as wide as the first two columns. THe table has a title.
 
+[.table-scroll]
+--
 .This is a table
 [cols="1,1,2"]
 |===
@@ -78,6 +81,7 @@ This section shows how to create a table. This example has one heading row and o
 |Text for row 1 column 2
 |Text for row 1 column 3
 |===
+--
 
 For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
 
@@ -193,3 +197,4 @@ Place the answer here after the question.
 * xref:template-tutorial.adoc[Tutorial template]
 * xref:guides:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 * xref:guides:about-circleci:concepts.adoc[CircleCI concepts]
+pass:[<!-- vale on -->]

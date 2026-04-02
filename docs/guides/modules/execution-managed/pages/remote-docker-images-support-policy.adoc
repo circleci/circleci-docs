@@ -48,6 +48,8 @@ Image lifespan will generally follow the support status of Docker Engine by Dock
 
 Current Deprecation:
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Version
@@ -62,6 +64,7 @@ Current Deprecation:
 | Docker 27
 | Set to `default` and `edge` tags. `docker27` tag is maintained for Docker 27 as default tag as well.
 |===
+--
 
 Example: When Docker 28 is released:
 
@@ -70,6 +73,8 @@ Rather than risk disruption for our customers, we chose to stay on the stable an
 With the release of 28.3.3, the previous issues appear to have been resolved.
 We are now preparing to validate and roll out the upgrade to ensure a smooth transition.
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Version
@@ -87,6 +92,7 @@ We are now preparing to validate and roll out the upgrade to ensure a smooth tra
 | Docker 28
 | Set to `default` and `edge` tags. With `docker28` tag for pinning Docker version.
 |===
+--
 
 
 When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.

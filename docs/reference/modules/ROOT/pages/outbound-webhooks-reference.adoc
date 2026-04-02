@@ -7,6 +7,8 @@
 
 Each webhook will have some common data as part of the event:
 
+[.table-scroll]
+--
 [cols="1,2,1", options="header"]
 |===
 | Field
@@ -25,6 +27,7 @@ Each webhook will have some common data as part of the event:
 | A map of metadata representing the webhook that was triggered
 | Map
 |===
+--
 
 NOTE: The event payloads are open maps, meaning new fields may be added to maps in the webhook payload without considering it a breaking change.
 
@@ -40,6 +43,8 @@ Some common sub-entities that will appear across various webhooks are described 
 
 The following data about the project associated with the webhook event is provided:
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -58,12 +63,15 @@ The following data about the project associated with the webhook event is provid
 | yes
 | Name of the project (for example, `web-ui`)
 |===
+--
 
 [#organization]
 === Organization
 
 The following data about the organization associated with the webhook event is provided:
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -78,6 +86,7 @@ The following data about the organization associated with the webhook event is p
 | yes
 | Name of the organization (for example, `circleci`)
 |===
+--
 
 [#job]
 === Job
@@ -86,6 +95,8 @@ A xref:guides:orchestrate:jobs-steps.adoc[job] typically represents one phase in
 
 The following data about the job associated with the webhook event is provided:
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -116,12 +127,15 @@ The following data about the job associated with the webhook event is provided:
 | no
 | When the job reached a terminal state (if applicable)
 |===
+--
 
 [#workflow]
 === Workflow
 
 xref:guides:orchestrate:workflows.adoc[Workflows] orchestrate jobs. The following data about the workflow associated with the webhook event is provided:
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -152,6 +166,7 @@ xref:guides:orchestrate:workflows.adoc[Workflows] orchestrate jobs. The followin
 | Yes
 | URL to the workflow in CircleCI's UI
 |===
+--
 
 [#pipeline]
 === Pipeline
@@ -160,6 +175,8 @@ Pipelines are the most high-level unit of work, and contain zero or more workflo
 
 The following Data about the pipeline associated with the webhook event is provided:
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -190,12 +207,15 @@ The following Data about the pipeline associated with the webhook event is provi
 | No
 | A map of metadata about the git commit associated with this pipeline -- see below
 |===
+--
 
 [#trigger]
 === Trigger
 
 The following data about the trigger associated with the webhook event is provided:
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -206,12 +226,15 @@ The following data about the trigger associated with the webhook event is provid
 | yes
 | How this pipeline was triggered (for example, "webhook", "api", "schedule")
 |===
+--
 
 [#trigger-parameters]
 === Trigger parameters
 
-NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Bitbucket Data Center. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
+NOTE: Data associated to the pipeline. Present for pipelines associated with GitLab, GitHub App, or Bitbucket Data Center. For parameters available for GitHub OAuth app and Bitbucket Cloud integrations, see <<#vcs>> below. Check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines] to see your pipeline type.
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -230,10 +253,13 @@ NOTE: Data associated to the pipeline. Present for pipelines associated with Git
 | no
 | A map present when the pipeline is associated with a GitLab, GitHub App or Bitbucket Data Center trigger
 |===
+--
 
 [#circleci]
 ==== `circleci`
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -256,12 +282,15 @@ NOTE: Data associated to the pipeline. Present for pipelines associated with Git
 | no
 | CircleCI user id that the pipeline was attributed to
 |===
+--
 
 [#vcs]
 === VCS
 
-NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud projects, but not for GitLab, GitHub App or Bitbucket Data Center projects. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App or Bitbucket Data Center parameters.  To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
+NOTE: The VCS map and its contents are always present for GitHub OAuth app and Bitbucket Cloud pipelines, but not for GitLab, GitHub App or Bitbucket Data Center pipelines. See <<#trigger-parameters,trigger parameters>> above for GitLab, GitHub App or Bitbucket Data Center parameters.  To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
 
+[.table-scroll]
+--
 [cols="1,1,2", options="header"]
 |===
 | Field
@@ -320,11 +349,12 @@ NOTE: The VCS map and its contents are always present for GitHub OAuth app and B
 | no
 | Tag being built (mutually exclusive with "branch")
 |===
+--
 
 [#sample-webhook-payloads]
 == Sample webhook payloads
 
-NOTE: To find out which GitHub integration you have, see the xref:guides:integration:github-apps-integration.adoc[GitHub Apps integration] page.
+NOTE: To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
 
 [#workflow-completed-for-github-and-bitbucket]
 === `workflow-completed` for GitHub OAuth and Bitbucket Cloud

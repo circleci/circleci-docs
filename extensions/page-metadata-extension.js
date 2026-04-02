@@ -30,8 +30,8 @@ module.exports.register = function () {
         pages.forEach((page) => {
           let { abspath, origin, path } = page.src
           const { branch, startPath, webUrl } = origin
-          const index = abspath?.indexOf('docs/')
-          const pagePath = abspath ? (index > -1 ? abspath.substring(index) : abspath ) :  startPath + '/' + path
+          // Use startPath + path for the git path (relative to repo root)
+          const pagePath = startPath + '/' + path
 
           const key = `${component}:${version}:${page.path}`
 

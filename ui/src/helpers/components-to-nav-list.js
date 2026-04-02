@@ -19,6 +19,7 @@ module.exports = ({ data: { root } }) => {
     'reference',
     'server-admin',
     'orbs',
+    'services',
     'contributors',
   ]
 

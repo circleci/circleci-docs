@@ -15,6 +15,8 @@ The CircleCI's self-hosted runner API contains different authentication methods.
 
 This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Name
@@ -26,6 +28,7 @@ This authentication method is based on personal tokens and follows the same rule
 | HTTP Basic auth username
 | The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
 |===
+--
 
 [#browser-session-authentication]
 === Browser session authentication
@@ -40,6 +43,8 @@ This token is generated when creating a new resource class. This token is only d
 [#supported-methods]
 ==== Supported methods
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Name
@@ -48,6 +53,7 @@ This token is generated when creating a new resource class. This token is only d
 | HTTP Bearer auth
 | The token that should be provided using the Bearer scheme.
 |===
+--
 
 [#endpoints]
 == Endpoints
@@ -67,6 +73,8 @@ Lists the available self-hosted runners based on the specified parameters. It is
 [#get-api-v3-runner-request]
 ==== Request
 
+[.table-scroll]
+--
 [cols=5*, options="header"]
 |===
 | Name
@@ -87,6 +95,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 | false
 | filters the list of self-hosted runners by namespace.
 |===
+--
 
 [#get-api-v3-runner-examples]
 ==== Examples
@@ -104,6 +113,8 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 [#get-api-v3-runner-response]
 ==== Response
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 | Status
@@ -114,10 +125,13 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 |List of agents
 |JSON
 |===
+--
 
 [#get-api-v3-runner-response-schema]
 ==== Response schema
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Name
@@ -165,6 +179,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner?namespace=test-namespace \
 |true
 |version of the machine runner launch-agent running
 |===
+--
 
 [#get-api-v3-runner-example]
 ==== Example
@@ -202,6 +217,8 @@ Get the number of unclaimed tasks for a given resource class.
 [#get-api-v3-tasks-request]
 ==== Request
 
+[.table-scroll]
+--
 [cols=5*, options="header"]
 |===
 | Name
@@ -216,6 +233,7 @@ Get the number of unclaimed tasks for a given resource class.
 | true
 | filters tasks by specific resource class.
 |===
+--
 
 [#get-api-v3-tasks-examples]
 ==== Examples
@@ -228,6 +246,8 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 [#get-api-v3-tasks-response]
 ==== Response
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 | Status
@@ -238,10 +258,13 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 |Number of unclaimed tasks
 |JSON
 |===
+--
 
 [#get-api-v3-tasks-response-schema]
 ==== Response schema
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | Name
@@ -254,6 +277,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-
 |true
 |number of unclaimed tasks
 |===
+--
 
 [#get-api-v3-tasks-example]
 ==== Example
@@ -281,6 +305,8 @@ Get the number of running tasks for a given resource class.
 [#get-api-v3-tasks-running-request]
 ==== Request
 
+[.table-scroll]
+--
 [cols=5*, options="header"]
 |===
 | Name
@@ -295,6 +321,7 @@ Get the number of running tasks for a given resource class.
 | true
 | filters tasks by specific resource class.
 |===
+--
 
 [#get-api-v3-tasks-running-examples]
 ==== Examples
@@ -307,6 +334,8 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-cla
 [#get-api-v3-tasks-running-response]
 ==== Response
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 | Status
@@ -317,10 +346,13 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-cla
 |Number of running tasks
 |JSON
 |===
+--
 
 [#get-api-v3-tasks-running-response-schema]
 ==== Response schema
 
+[.table-scroll]
+--
 [cols="2,1,1,2", options="header"]
 |===
 | Name
@@ -333,6 +365,7 @@ curl -X GET https://runner.circleci.com/api/v3/runner/tasks/running?resource-cla
 |true
 |number of running tasks
 |===
+--
 
 [#get-api-v3-tasks-running-example]
 ==== Example

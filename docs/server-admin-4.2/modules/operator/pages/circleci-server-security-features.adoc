@@ -97,8 +97,9 @@ The following are the system events that are logged. See `action` in the <<audit
 [#audit-log-fields]
 === Audit log fields
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | Field | Description
 
@@ -135,6 +136,7 @@ The following are the system events that are logged. See `action` in the <<audit
 | `request`
 | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 |===
+--
 
 [#checklist-to-using-circleci-securely-as-a-customer]
 == Checklist to using CircleCI securely as a customer

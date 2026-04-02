@@ -3,7 +3,7 @@
 :page-description: Tutorial outlining how to configure your Kubernetes components for visibility and control on the deploys dashboard.
 :experimental:
 
-The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app deploys set up process as described in the xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent] page.
+The steps outlined on this page guide you to configure your Kubernetes resources for integration with your environment integration. This manual installation guides is an alternative to using the in-app deploys set up process as described in the xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent] page.
 
 [#introduction]
 == Introduction
@@ -21,33 +21,32 @@ To set up a component for your environment, you can do one of the following:
 [#prerequisites]
 == Prerequisites
 
-Before following the steps below, ensure the following:
+Before following the steps below, refer to the xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent] page and ensure you have completed the following:
 
-* Set up your environment integration. Refer to the xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent] page.
-* Install the CircleCI release agent into your Kubernetes cluster. Refer to the xref:set-up-the-release-agent.adoc[Set up the release agent] page.
+* Set up your environment integration.
+* Install the CircleCI release agent into your Kubernetes cluster.
 
 [#add-required-labels]
 == 1. Add required labels and annotation to your Deployment/Rollout
 
 To enable your deployment to show up on the deploys UI in the CircleCI web app, add the following labels and annotation to your Kubernetes Deployment or Argo Rollout:
 
-* Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Metadata.Labels`
-* Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Spec.Template.Metadata.Labels`
-* Add the `circleci.com/project-id` annotation with the value set to your project ID
+* Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Metadata.Labels`.
+* Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Spec.Template.Metadata.Labels`.
+* Add the `circleci.com/project-id` annotation with the value set to your project ID.
 +
 ****
 Specify your **project ID** in one of the following ways:
 
-*Built-in environment variable*: Use the `$CIRCLE_PROJECT_ID` xref:reference:ROOT:variables.adoc#built-in-environment-variables[built-in environment variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
+*Built-in environment variable*: Use the `$CIRCLE_PROJECT_ID` xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in Environment Variable] in a CircleCI pipeline. This way, you can use tools like `envsubst` to substitute the placeholder for the real value.
 
 *Copy from project settings*: Manually copy the value from the project settings page:
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
-
-[start=4]
-. Your project ID is available to copy from the overview page
+. Your project ID is available to copy from the overview page.
 +
-image::guides:ROOT:project-id.png[Screenshot showing where to find the project ID]
+.The project ID available in project settings
+image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project ID]
 ****
 
 For example:
@@ -126,7 +125,7 @@ Substitute the placeholders above based on your application's details:
 +
 CAUTION: If you are using Argo Rollouts for a given component, be sure to set the `release-strategy` parameter to `progressive`.
 
-WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:release-agent-overview.adoc[Release Agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
 
 . Define a new job to monitor the release, referencing the `release plan` created above as part of the _deployment_ job:
 +
@@ -218,14 +217,14 @@ All UI-based deploy management features are **enabled** by default, no action is
 
 To disable a deploy feature for a component, add the corresponding annotation (from the list below) with the value of `false` to the related Kubernetes Deployment or Argo Rollout. If an annotation is either not specified or is specified with any value _other_ than `false`, the associated feature is **enabled**.
 
-* `circleci.com/restore-version-enabled` toggles the restore version feature on the annotated Kubernetes Deployment or Argo Rollout
-* `circleci.com/scale-component-enabled` toggles the scale component feature on the annotated Kubernetes Deployment or Argo Rollout
-* `circleci.com/restart-component-enabled` toggles the restart component feature on the annotated Kubernetes Deployment or Argo Rollout
-* `circleci.com/retry-release-enabled` toggles the Retry Rollout feature on the annotated Argo Rollout
-* `circleci.com/promote-release-enabled` toggles the Promote Rollout feature on the annotated Argo Rollout
-* `circleci.com/cancel-release-enabled` toggles the Cancel Rollout feature on the annotated Argo Rollout
+* `circleci.com/restore-version-enabled` toggles the restore version feature on the annotated Kubernetes Deployment or Argo Rollout.
+* `circleci.com/scale-component-enabled` toggles the scale component feature on the annotated Kubernetes Deployment or Argo Rollout.
+* `circleci.com/restart-component-enabled` toggles the restart component feature on the annotated Kubernetes Deployment or Argo Rollout.
+* `circleci.com/retry-release-enabled` toggles the Retry Rollout feature on the annotated Argo Rollout.
+* `circleci.com/promote-release-enabled` toggles the Promote Rollout feature on the annotated Argo Rollout.
+* `circleci.com/cancel-release-enabled` toggles the Cancel Rollout feature on the annotated Argo Rollout.
 
-In the following example, all features are explicitly disabled for the annotated Deployment:
+In the following example, all features are explicitly disabled for the annotated Deployment.
 
 [,yaml]
 ----
@@ -285,4 +284,4 @@ spec:
 [#next-steps]
 == Next steps
 
-In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI deploys dashboard. Next, learn how to manage your deploys in the xref:manage-deploys.adoc[Manage deploys] how-to guide.
+In this tutorial you have configured your Kubernetes components for visibility and control from the CircleCI deploys dashboard. Next, learn how to manage your deploys in the xref:manage-releases.adoc[Manage Releases] guide.

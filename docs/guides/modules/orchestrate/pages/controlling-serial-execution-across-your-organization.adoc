@@ -1,6 +1,6 @@
 = Controlling serial execution across your organization
-:page-platform: Cloud
-:page-description: An overview of controlloing serial execution accross a CircleCI org.
+:page-platform: Cloud, Server v4.9+
+:page-description: An overview of controlling serial execution across a CircleCI org.
 :experimental:
 
 Serial groups enable controlled, sequential execution of CircleCI jobs across your organization to prevent conflicts when multiple jobs need to access shared resources or when operation order is critical.
@@ -55,7 +55,7 @@ Jobs in a serial group move through several states:
 
 * First, the job enters a "queued" state.
 * Once a job starts (reaches its place in the queue) it transitions to a "running" state.
-* Upon completion (whether successfully, with failure, or by cancellation) the next job in the queue starts. The queue continues to process jobs even if some jobs fail.
+* Upon completion (whether successful, failed, canceled, unauthorized, or not run) the next job in the queue starts. The queue continues to process jobs even if some jobs fail.
 
 === Time limits
 
@@ -115,7 +115,7 @@ You can cancel an entire workflow that contains serial group jobs. Cancelling a 
 
 . In the link:https://app.circleci.com/home[CircleCI web app], select your org.
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
-. Select the "Cancel Workflow" button to the right of the pipeline (image:guides:ROOT:icons/cancel.svg[cancel workflow, role="no-border"])
+. Select the "Cancel Workflow" button to the right of the pipeline (icon:cancel[Cancel icon])
 . Confirm the cancellation when prompted.
 
 == Troubleshooting serial groups

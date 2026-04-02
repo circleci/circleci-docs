@@ -67,7 +67,7 @@ Now that we have our workflow, `test-hold-deploy`, we can use it to orchestrate 
 
 We can add an `approval` job to pause the workflow until manual approval has been given. Notice that the jobs in this workflow are configured to run sequentially using the `requires` key.
 
-[source,yaml]
+[%linenums,yaml,highlight=5..8]
 ----
 workflows:
   test-hold-deploy:
@@ -86,7 +86,7 @@ workflows:
 
 The Slack orb has a built-in job, `on-hold`, which sends a notification to a Slack channel when a workflow is paused, awaiting approval. For details of the default notification templates, refer to the orb link:https://github.com/CircleCI-Public/slack-orb#templates[README]. For details of the various options when using this job, refer to the entry in the link:https://circleci.com/developer/orbs/orb/circleci/slack#jobs-on-hold[Orb Registry].
 
-[source,yaml,highlight=5..8]
+[%linenums,yaml,highlight=5..8]
 ----
 workflows:
   test-hold-deploy:
@@ -110,7 +110,7 @@ TIP: In this example, Slack credentials are stored in a context named `slack-sec
 
 == Full configuration file
 
-[source,yaml,highlight=5..8]
+[%linenums,yaml]
 ----
 version: 2.1
 

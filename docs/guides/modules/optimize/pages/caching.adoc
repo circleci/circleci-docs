@@ -312,6 +312,8 @@ The following are examples of caching strategies for different goals:
 
 During step execution, the templates above are replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Template | Description
@@ -337,6 +339,7 @@ During step execution, the templates above are replaced by runtime values and us
 | `{{ arch }}`
 | Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See xref:reference:ROOT:faq.adoc#cpu-architecture-circleci-support[supported CPU architectures].
 |===
+--
 
 [#further-notes-on-using-keys-and-templates]
 === Further notes on using keys and templates

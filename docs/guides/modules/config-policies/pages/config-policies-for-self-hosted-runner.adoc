@@ -55,7 +55,7 @@ mkdir ./config-policies
 
 . Copy the following snippet into the `runner.rego` file you just made:
 +
-[source,rego]
+[source,go]
 ----
 package org
 import data.circleci.config
@@ -73,7 +73,7 @@ In the following steps you will replace `namespace/resource_class` and `project_
 == 2. Update policy with your details
 
 . Replace `namespace/resource_class` with one of your runner resource classes:
-.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Self-Hosted Runners** in the sidebar. If you do not see this option, check that you have accepted the CircleCI Runner Terms and created a namespace and resource class, as outlined in the runner installation guides. Here you will see all your available self-hosted runner resource classes.
+.. In the CircleCI web app, go to your self-hosted runner's inventory page by selecting **Runners** in the sidebar. If you do not see this option, check that you have accepted the CircleCI Runner Terms and created a namespace and resource class, as outlined in the runner installation guides. Here you will see all your available self-hosted runner resource classes.
 .. Replace `namespace/resource_class` in the `runner.rego` file with the name of the resource class that you would like to restrict.
 
 . Replace `project_UUIDs` with a project ID:
@@ -127,7 +127,7 @@ Once you have this runner restriction policy up and running, you can quickly add
 
 The following snippet shows two separate runner resource classes (`my-namespace/runner-test1` and `my-namespace/runner-test2`) with allowed projects, the first has two projects in its allowed list.
 
-[source,rego]
+[source,go]
 ----
 
 package org

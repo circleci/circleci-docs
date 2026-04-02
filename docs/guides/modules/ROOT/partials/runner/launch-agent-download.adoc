@@ -9,6 +9,9 @@ Self-hosted runners on cloud auto-update to the latest supported versions. For s
 * If you are using **cloud**, use the table below to find your platform variable:
 +
 --
+
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Installation Target
@@ -38,6 +41,7 @@ ifdef::macos[]
 | `platform=darwin/arm64`
 endif::[]
 |===
+--
 
 
 ifdef::linux[]
@@ -69,6 +73,9 @@ endif::[]
 * For *server v4.x and up*, use the table below to find the compatible machine runner launch-agent version for the version of server you are running:
 +
 --
+
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Server version
@@ -80,6 +87,7 @@ endif::[]
 | 4.3-4.7
 | 1.1.73189-8792751
 |===
+--
 
 
 Substitute `<launch-agent-version>` with your launch-agent version for server and run the following:

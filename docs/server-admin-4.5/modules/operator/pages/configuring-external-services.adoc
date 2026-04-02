@@ -16,8 +16,9 @@ NOTE: Your externalized PostgreSQL instance needs to be version 12.1 or higher.
 
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
-[.table.table-striped]
-[cols=6*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=6*, options="header"]
 |===
 |# of Daily Active Users
 |# of PostgreSQL Replicas
@@ -61,6 +62,7 @@ Consider running at least two PostgreSQL replicas to allow recovery from primary
 |1 TB
 |10 Gbps
 |===
+--
 
 [#migrating-from-internal-postgres]
 === Migrating from an internal PostgreSQL to an externalized source

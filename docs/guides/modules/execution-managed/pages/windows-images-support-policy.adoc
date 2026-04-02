@@ -54,6 +54,8 @@ After the new version of Windows Server has been released, we will then move the
 
 Current deprecation:
 
+[.table-scroll]
+--
 [cols="1,2", options="header"]
 |===
 | Version
@@ -65,9 +67,12 @@ Current deprecation:
 | Windows Server 2022
 | `current` and `edge` tags retained
 |===
+--
 
 Example: When Windows Server 2025 is released
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Version
@@ -82,6 +87,7 @@ Example: When Windows Server 2025 is released
 | Windows Server 2025
 | `current` and `edge` tags retained
 |===
+--
 
 When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.
 

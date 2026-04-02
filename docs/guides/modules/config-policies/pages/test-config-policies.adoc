@@ -249,7 +249,7 @@ Next, add a second policy and test to your `config-policies` directory. The step
 . Inside your `config-policies` directory, create a Rego file for a new policy, call it: `docker.rego`.
 . Copy the following policy definition into `docker.rego`:
 +
-[source,rego]
+[source,go]
 ----
 # org level policy
 package org

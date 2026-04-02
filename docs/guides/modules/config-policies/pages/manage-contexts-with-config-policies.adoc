@@ -92,7 +92,7 @@ mkdir ./config-policies
 
 . Copy the following snippet into the `allow_contexts.rego` file you just made:
 +
-[source,rego]
+[source,go]
 ----
 # All policies start with the org package definition
 package org
@@ -192,21 +192,21 @@ In this example, you have hard coded your project IDs and context names into you
 +
 ** `project_id.rego`
 +
-[source,rego]
+[source,go]
 ----
 # Single application project IDs. Can be automated.
 my_project_id := “<project-ID>”
 ----
 ** `project_groups.rego`
 +
-[source,rego]
+[source,go]
 ----
 # sets can be used to group variables
 Front_end_applications := {my_project_id}
 ----
 ** `context_groups.rego`
 +
-[source,rego]
+[source,go]
 ----
 # sets can be used to group variables
 Front_end_application_contexts := {"<context-1>","<context-2>"}
@@ -214,7 +214,7 @@ Front_end_application_contexts := {"<context-1>","<context-2>"}
 
 . You can now rewrite your `allow_policy.rego` policy as follows:
 +
-[source,rego]
+[source,go]
 ----
 # All policies start with the org package definition
 package org
@@ -256,7 +256,7 @@ mkdir ./config-policies
 
 . Copy the following snippet into the `block_contexts.rego` file you just made:
 +
-[source,rego]
+[source,go]
 ----
 # All policies start with the org package definition
 package org
@@ -357,7 +357,7 @@ mkdir ./config-policies
 
 . Copy the following snippet into the `reserve_contexts.rego` file you just made:
 +
-[source,rego]
+[source,go]
 ----
 # All policies start with the org package definition
 package org
@@ -456,7 +456,7 @@ mkdir ./config-policies
 
 . Copy the following snippet into the `context_protection.rego` file you just made:
 +
-[source,rego]
+[source,go]
 ----
 # All policies start with the org package definition
 package org
@@ -485,7 +485,7 @@ NOTE: Notice the `contexts_reserved_by_branches` helper is accessed using the `c
 +
 `project_groups.rego`
 +
-[source,rego]
+[source,go]
 ----
 # sets can be used to group variables
 policy_restrict_context_access := <project-ID>

@@ -11,7 +11,7 @@ All CircleCI organizations can request audit logs. You need to be an organizatio
 
 === How to request audit logs
 
-. Navigate to menu:Organization Settings[Security].
+. Navigate to menu:Org[Security].
 . Scroll down to the **Audit Logs** section.
 . Select the date range and then select btn:[Request audit logs].
 
@@ -47,6 +47,7 @@ Once your request is successfully processed, select btn:[Download logs] to downl
 
 NOTE: Audit log fields with nested data contain JSON blobs.
 
+.Audit log requests
 image::guides:ROOT:audit-log-request.png[Audit log requests]
 
 
@@ -78,10 +79,10 @@ Audit log streaming provides the following benefits to your organization:
 
 Before setting up audit log streaming, ensure you have the following:
 
-* CircleCI Scale Plan (the feature is not available to Free or Performance customers)
-* AWS account with permissions to create and manage S3 buckets
-* IAM role or user with appropriate S3 write permissions
-* Network configuration to allow secure connections between CircleCI and AWS
+* CircleCI Scale Plan (the feature is not available to Free or Performance customers).
+* AWS account with permissions to create and manage S3 buckets.
+* IAM role or user with appropriate S3 write permissions.
+* Network configuration to allow secure connections between CircleCI and AWS.
 
 The following steps guide you through setting up your S3 bucket, AWS authentication, audit log configuration, and verification.
 
@@ -125,7 +126,7 @@ The complete template for the trust relationship is the following:
 }
 ----
 +
-Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique CircleCI organization ID (found on the menu:Organization Settings[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
+Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique CircleCI organization ID (found on the menu:Org[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
 
 .. Permissions policy
 +
@@ -165,13 +166,15 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 ==== 2. Configure audit log streaming
 
 . Go to the link:https://app.circleci.com/[CircleCI web app].
-. Navigate to menu:Organization Settings[Security].
+. Navigate to menu:Org[Security].
 . Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
 +
+.Stream audit logs section
 image::guides:ROOT:stream-audit-logs.png[Stream audit logs section]
 
 . Confirm that you have completed the prerequisites by selecting btn:[Continue].
 +
+.Confirm prerequisites completion
 image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
 
 . In the configuration dialog, specify the following fields:
@@ -180,11 +183,13 @@ image::guides:ROOT:confirm-prerequisites.png[Confirm prerequisites completion]
 .. **Role ARN**: The Amazon Resource Name (ARN) for the IAM role that CircleCI will use to access your S3 bucket.
 
 +
+.Connect CircleCI to AWS
 image::guides:ROOT:connect-circleci-aws.png[Connect CircleCI to AWS]
 
 . Select btn:[Connect CircleCI to AWS].
 . When the connection to your S3 bucket is successfully validated, image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected** appears under **Status**.
 +
+.S3 connection successful
 image::guides:ROOT:s3bucket-connected.png[S3 Connection successful]
 
 Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket. This verifies that the system has sufficient permissions to start the stream.
@@ -199,6 +204,84 @@ After setting up audit log streaming follow these steps to validate the setup wa
 . Set up appropriate alerts for connection failures or delivery interruptions.
 
 
+=== Stream to S3-compatible storage
+
+TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint.
+
+
+The setup steps vary by provider. At a high level you will:
+
+==== 1. Prepare your S3-compatible destination
+
+. Create a bucket for audit logs in your S3-compatible service.
+. Create or identify a role/principal that CircleCI can assume using OIDC. The exact process and identifier format depend on your provider. Examples include an AWS-style ARN (for example, `arn:aws:iam::...:role/...`) or a provider-specific role identifier if supported.
+. Grant the role/principal permission to write objects to your bucket (minimum required: `s3:PutObject` on `<your-bucket>/*`). For example:
++
+[source,json]
+----
+// aws S3 example policy
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:PutObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<bucket-name>/*"
+      ]
+    }
+  ]
+}
+----
++
+
+
+==== 2. Authentication and authorization considerations
+
+**Key OIDC configuration details**:
+
+When setting up the OIDC Identity Provider to trust CircleCI, use these parameters:
+
+* **OpenID Configuration URL (Issuer URL):** `++https://oidc.circleci.com/org/<ORG_ID>/.well-known/openid-configuration++` (substitute your actual CircleCI organization ID).
+
+* **OpenID Client ID (Audience):** Your CircleCI organization ID (the `<ORG_ID>` value).
+
+* **Scope:** Use the standard required scope: `openid`.
+
+**Validation and network requirements**:
+
+* **Server Endpoint Connectivity:**
+    The **AWS S3 compatible server**, acting as the token validator, **must be able to reach** the CircleCI OIDC Provider endpoint to fetch the public keys required to **validate the token's cryptographic signature**.
+
+* **Provider Validation:**
+    Your OIDC provider configuration must be set up to accept and successfully validate CircleCI's OIDC tokens for the configured **role or principal** you intend to grant access to within your storage solution.
+
+NOTE: Ensure your **AWS S3 compatible server's** network configuration allows necessary outgoing connections to the internet, specifically to `oidc.circleci.com`, for token validation to succeed.
+
+==== 3. Configure CircleCI to stream to your S3-compatible service
+
+. Go to the link:https://app.circleci.com/[CircleCI web app] and navigate to menu:Organization Settings[Security].
+. In menu:Audit Logs[Streaming audit logs], select btn:[Stream audit logs].
+. Choose btn:[Other S3-compatible service].
+. Confirm that you have completed the prerequisites by selecting btn:[Continue].
++
+.Set up S3-compatible storage for streaming
+image::guides:ROOT:setup-s3-compatible-audit-logs.png[Set up S3-compatible storage for streaming]
+. Fill out the fields as follows:
+.. **Region**: Optional. Many S3-compatible providers default to `us-east-1` if not set.
+.. **S3 Bucket Name**: The exact name of the bucket you created.
+.. **Role ARN**: The role identifier recognized by your provider (for example, a provider-specific role ID/ARN).
+.. **Endpoint**: The HTTPS endpoint of your S3-compatible API (for example, `https://s3.<region>.<provider-domain>` or your custom host and port).
+. The configuration form appears as follows:
++
+.Connect CircleCI to S3-compatible storage
+image::guides:ROOT:form-s3-compatible-audit-logs.png[Connect CircleCI to S3-compatible storage]
+. Select btn:[Connect CircleCI to S3-compatible service].
+
+When the connection is validated, the **Status** will show image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] **Connected**. Creating a streaming configuration pushes an empty file named `circleci_connectivity_test_<timestamp>` to the configured bucket to verify permissions.
+
 === Manage active streams
 
 Once configured, you can view and manage audit log streams. The following options are available to you in the CircleCI web app:
@@ -208,6 +291,7 @@ Once configured, you can view and manage audit log streams. The following option
 - Delete configuration: Select the trash icon under **Actions** to remove the streaming setup. In the popup warning, select btn:[Delete] to confirm.
 - Restart streaming: Toggle the switch to resume paused streams.
 
+.Audit log stream actions
 image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
 
@@ -307,6 +391,8 @@ The following list shows common and important events found in the audit log. Thi
 
 == Audit log fields
 
+[.table-scroll]
+--
 [cols="1,4", options="header"]
 |===
 | Field | Description
@@ -322,3 +408,4 @@ The following list shows common and important events found in the audit log. Thi
 | `success` | A flag to indicate if the action was successful.
 | `request` | If this event was triggered by an external request, this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 |===
+--

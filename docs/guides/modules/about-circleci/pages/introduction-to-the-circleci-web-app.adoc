@@ -17,12 +17,15 @@ Inside the application, you will find the features including the following:
 
 This page is not an exhaustive guide to the web app, but is an introduction to some of the information, options, and settings available.
 
-NOTE: Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for xref:integration:github-apps-integration.adoc[GitHub App], xref:integration:gitlab-integration.adoc[GitLab] and xref:integration:bitbucket-data-center-integration.adoc[Bitbucket Data Center] projects. For an overview of feature availability for each integration type, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
+Some settings and functionality described in on this page, including the in-app configuration editor, are currently not available for `circleci` type organizations. For an overview of feature availability for each organization/integration type, see the xref:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 == User homepage
 
 When you visit the link:https://app.circleci.com[CircleCI web application] you will land on your **user homepage**.
 
+.User Homepage
 image::guides:ROOT:user-homepage.png[User homepage]
 
 The user homepage gives your an overview of the organizations of which you are a member, along with options to create a new organization or join an existing organization.
@@ -38,24 +41,60 @@ Select an **org card** and take a look around. The following section describe th
 
 User settings can be found by selecting your user icon at the top right of the user area (dark blue top bar) in the web app at any time. Select your icon and then select ** User Settings**.
 
+.Opening your user settings
 image::guides:ROOT:user_settings.png[User settings]
 
-**Account Integrations**: Displays your user ID as well as account integrations such as your VCS provider.
+[.table-scroll]
+--
+.User settings
+[cols="1,2", options="header"]
+|===
+| User settings section | What you will find here
 
-**Notifications**: Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications. Web notifications will appear in your browser.
+| Account Integrations
+| Displays your user ID as well as account integrations with VCS providers. You will find a list of which GitHub (OAuth app) or Bitbucket organizations you are connected with. You can disconnect your OAuth connections with GitHub or Bitbucket here.
 
-**Privacy & Security**: Disable third-party tracking. You may opt in or opt out of third party tracking pixels.
 
-**Personal API tokens**: View and create personal API tokens, used to access the CircleCI API.
 
-**Organization Plans**: See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
+| Notifications
+| Set your individual email and web notification preferences. This includes preferences around builds, branches, and project notifications.
 
-**Beta Program**: Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+| Accessibility
+| Toggle switch for accessible step output. Switch this on if you use a screen reader.
+
+| Privacy & Security
+| Disable third-party tracking. You may opt in or opt out of third party tracking pixels.
+
+| Sessions
+| A list of systems that have logged into your account. Revoke any sessions that you do not recognize.
+
+| Personal API tokens
+| View and create personal API tokens, used to access the CircleCI API.
+
+| Organization Plans
+| See the list of organizations you are a part of. If you have administrative privileges, you may also view the plan each organization is on.
+
+| Job SSH keys
+| Set up an SSH key to access your job containers. For more information on this feature see the xref:execution-managed:ssh-access-jobs.adoc[Debug With SSH] page.
+
+| Beta Program
+| Opt in to CircleCI's beta program. Beta features you opt in to will be listed on this page.
+
+| Email
+| View and change your email address for your CircleCI account.
+
+
+| Password & authentication
+| Change password, setup and manage multi-factor authentication (MFA).
+
+|===
+--
 
 == Organization homepage and navigation
 
-After selecting an organization you will find yourself on the Organization homepage, or Dashboard if you are using CircleCI server. The organization homepage provides an overview of your org's projects, project health metrics, and compute and credit usage metrics for your org.
+After selecting an organization you will find yourself on the organization homepage (called **Home** in the sidebar), or Dashboard if you are using CircleCI Server. The organization homepage provides an overview of your org's projects, project health metrics, and compute and credit usage metrics for your org.
 
+.Organization Homepage
 image::guides:ROOT:org-homepage.png[Organization homepage]
 
 TIP: Once you have selected an org, you can select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time.
@@ -64,15 +103,15 @@ From your organization home page you have access to org-level options. You can c
 
 **Pipelines**: View all pipelines associated with your organization, You can expand each pipeline to view workflow status, job status, job details, the workflows map, and more. Each pipeline includes controls for cancelling or rerunning workflows, and accessing project settings. Multi-workflow pipelines display a grey bar to the left. You can see the status of each workflow and expand them individually to view the status of each job.
 
-**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:getting-started:create-project.adoc[create/set up new projects].
+**Projects**: Allows you to see all projects associated with your organization. Choose to follow or unfollow projects, as well as xref:getting-started:create-project.adoc[Create a Project].
 
-**Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy:deployment-overview.adoc[Deployment overview] page.
+**Deploys**: Set up environment integrations to manage deployments for your projects. For full details of the deployments feature, see the xref:deploy:deployment-overview.adoc[Deployment Overview] page.
 
 **Insights**: Provides you with time-series data overviews of credit usage, success rates, pipeline duration, and more. For full details of the Insights feature, see the xref:insights:insights.adoc[Using Insights] page.
 
-**Self-Hosted Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc[Self-hosted runners overview] page.
+**Runners**: Set up self-hosted runners to use your own infrastructure for running jobs. Once set up the self-hosted runners dashboard displays a list of your resource classes and self-hosted runners. For full details covering installation, setup, and usage, see the xref:execution-runner:runner-overview.adoc[Self-Hosted Runners Overview] page.
 
-**Organization Settings**: Settings for your organization including org roles and groups, contexts, security, orbs and more. You can find your organization ID on this page.
+**Org**: Settings for your organization including org roles and groups, contexts, security, orbs and more. You can find your organization ID and organization slug on this page.
 
 **Plan**: Displays your network and storage usage, as well as additional settings related to your plan.
 
@@ -95,8 +134,14 @@ If you are missing specific projects from the pipelines dashboard, you can selec
 
 Your pipelines appear on the **Pipelines** dashboard of the CircleCI web app as they are triggered. You can view workflows or single jobs by expanding a pipeline and clicking on any workflow or job descriptor.
 
-When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
+When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's: \\
 
+* Workflow
+* Pipeline
+* Branch
+* Project
+
+.Navigate pipelines using breadcrumbs
 image::guides:ROOT:pipeline-navigation.png[Pipeline navigation]
 
 [#organization-switching]
@@ -107,6 +152,7 @@ If you want to change which org you are working within, you have a few options:
 * Select the btn:[CircleCI] logo in the top bar to get back to your user homepage at any time (1). From the user home page you can select the org that you want to work in. You can also create a new organization from your user home page.
 * Once in an org view you can also use the org switcher at the top of the sidebar (2).
 
+.Switch organization using the user homepage or the org switcher
 image::guides:ROOT:org-switch.png[Switch organization using the user homepage or the org switcher]
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left displays your user `my-user`, only projects belonging to `my-user` will be available. If you want to add the project `your-org/project`, you must select `your-org` from the org switcher.
@@ -114,16 +160,16 @@ If you do not see your project and it is not currently building on CircleCI, che
 [#projects]
 == Projects
 
-TIP: The options available to you will be different depending on how you xref:integration:version-control-system-integration-overview.adoc[integrate your code] with CircleCI.
+TIP: The options available to you will be different depending on how you integrate your code with CircleCI. See the xref:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page for more information on which features you can use for your organization or pipeline type.
 
 Projects associated with your organization appear on the **Projects** page. You have the option to:
 
-* xref:getting-started:create-project.adoc#create-a-project[Create a project]
-* xref:getting-started:create-project.adoc#set-up-a-project[Set Up any project] that you are the owner of in your VCS.
-* _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:integration:notifications.adoc[email notifications] for the project's status.
+* xref:getting-started:create-project.adoc#create-a-project[Create a Project].
+* xref:getting-started:create-project.adoc#set-up-a-project[Set up a Project] that you are the owner of in your VCS.
+* _Follow_ any project in your organization to gain access to its pipelines on the pipelines page and to subscribe to xref:integration:notifications.adoc[Email Notifications] for the project's status.
 * _Unfollow_ a project to removes it from your Pipelines page and unsubscribe from notifications.
 
-Select the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon, role="no-border"] in a project row to access project assets, as follows:
+Select the ellipsis menu icon icon:more[Ellipsis menu icon] in a project row to access project assets, as follows:
 
 * Configuration file in the config editor.
 * Insights.
@@ -132,6 +178,7 @@ Select the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon, role="
 
 TIP: A **Project Settings** button is also available from the pipelines page when you have a project selected in the filter menu.
 
+.Projects Page in the CircleCI Web App
 image::guides:ROOT:web-ui-projects.png[Projects page in the CircleCI web app]
 
 [#project-settings]
@@ -140,53 +187,72 @@ image::guides:ROOT:web-ui-projects.png[Projects page in the CircleCI web app]
 Access project settings in one of the following ways:
 
 * From the pipelines dashboard when you have a project selected in the filter menu.
-* From a workflow or job page using the ellipsis menu image:guides:ROOT:icons/more.svg[more icon, role="no-border"].
-* From the projects page using the ellipsis menu icon image:guides:ROOT:icons/more.svg[more icon, role="no-border"] in a project row.
+* From a workflow or job page using the ellipsis menu icon:more[Ellipsis menu icon].
+* From the projects page using the ellipsis menu icon icon:more[Ellipsis menu icon] in a project row.
 
+.Find project settings
 image::guides:ROOT:find-project-settings.png[Where to find project settings page in the CircleCI web app]
 
-The following settings are available in the project settings page. If you do not see an option, this indicates it is not supported for your xref:integration:version-control-system-integration-overview.adoc[integration type]:
+The following settings are available on the project settings page. If you do not see an option, this indicates it is not supported for your organization, integration or pipeline type. See the xref:integration:version-control-system-integration-overview.adoc[Version Control System Integration Overview] page for more information.
 
-**Overview**: Displays your project ID, as well as links to docs on how to set up certain features available to projects. You may also find the option to **Stop Building** on the overview page. This option halts builds, and will automatically _unfollow_ from all dashboards.
+The following project settings are available:
 
-**People**: Provides a list of users who have been granted project-specific permissions. For more information, see the xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions] page.
+[.table-scroll]
+--
+.Project settings
+[cols="1,2", options="header"]
+|===
+| Project settings section | What you will find here
 
-**Groups**: Provides a list of user groups that have been granted project-specific permissions. For more information, see the xref:permissions-authentication:manage-groups.adoc[Manage groups] page.
+| Overview
+| Project name, ID, and slug. Option to stop building or delete the project.
 
-**Project Setup**: Provides a list of pipelines that have been set up for the project and their associated triggers. See xref:orchestrate:pipelines.adoc[Pipelines Overview and Setup] for more information. This page includes the option to begin setting up pipelines if none exist. The setup UI for schedule triggers is located either here or in the *Triggers* section (if available for your integration). To set up a xref:orchestrate:schedule-triggers.adoc[schedule trigger] you will define a timetable, parameter, and attribution to automatically run a pipeline when the criteria is met.
+| Project setup
+| `circleci` and `github` organizations only. Add and manage pipelines and their triggers. Projects for other organization types will have separate Pipelines and Triggers pages.
 
-*Pipelines* and *Triggers*: These pages let you set up pipelines and triggers when using the GitLab, Bitbucket Cloud and Bitbucket Data Center integrations.
+| People
+| `circleci` organizations only. Assign project-level roles to your team.
 
-**Deploys**: A UI for managing and viewing deployments. Setup and manage environment integrations, setup components. For full information on the deploys feature, start with the xref:deploy:deployment-overview.adoc[Deployment overview] page.
+| Deploys
+| Set up deploy markers, rollback pipeline and find information about setting up the release agent for Kubernetes deployments.
 
-**Advanced**: Toggle options on and off for:
+| Advanced
+a| Enable/disable various features for the project:
+* GitHub status updates.
+* Build forked PRs.
+* Pass secrets to forks.
+* Only build pull requests.
+* Auto-cancel redundant workflows.
+* Free and open source.
+* Enable dynamic configuration.
+* Disable SSH reruns.
 
-* VCS status updates
-* Build forked pull requests
-* Pass secrets to builds from forked pull requests
-* Only build pull requests
-* Auto-cancel redundant workflows
-* Free and open source
-* Enable dynamic config using setup workflows.
-* xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-vs-code-with-unversioned-config[Trigger a pipeline with unversioned config].
+| Environment variables
+| Add project environment variables. You can add individually or import from another project. You will find a list of project environment variables on this page.
 
-More information on these settings can be found on this page, as well as in our documentation.
+| SSH keys
+| Add deploy and user keys for `github` and `bitbucket` organizations. Add additional SSH keys for your project for all organization types.
 
-**Environment Variables**: Add or import environment variables to your jobs to keep sensitive data out of your repository.
+| API permissions
+| Create project API tokens. The main use for these tokens is for status badges. Some API v1.1 endpoints support the use of project API tokens too.
 
-**SSH Keys**: See information related to your SSH keys, or set up new or additional SSH keys. CircleCI uses deploy and user keys.
+| LLMOps
+| Connect your project with an LLM evaluations provider.
 
-**API Permissions**: Allows you to create API tokens, as well as revoke project-specific API tokens.
+| Slack integration
+| Get information on setting up Slack notifications for your project.
 
-**LLMOps**: Set up integrations with LLMOps providers to streamline the process of configuring pipelines to build and test LLM-enabled applications.
+| Status badges
+| Generate a code snippet that will display your project's build status in a README or other document.
 
-**Slack Integrations**: Authenticate Slack and set up the Slack orb in your config file to integrate Slack into your projects.
+| Webhooks
+| Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
 
-**Status Badges**: A tool that allows you to generate a code snippet that will display your project's build status in a README or other document.
+| Docker layer caching
+| Provides an option to delete your cache contents. If jobs that use DLC continuously fail, this may be due to a corrupted cache. Deleting the cache will force a fresh build and can solve the problem.
 
-**Webhooks**: Set up webhooks through CircleCI's Webhook API. This allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future events.
-
-**Docker layer caching**: Provides an option to delete your cache contents. If jobs that use DLC continuously fail, this may be due to a corrupted cache. Deleting the cache will force a fresh build and can solve the problem.
+|===
+--
 
 [#insights]
 == Insights
@@ -198,10 +264,12 @@ The Insights page displays metrics for all projects in your organization over a 
 * Credits consumed
 * Overall success rate
 
+.Insights page
 image::guides:ROOT:web_ui_insights_overview.png[Insights page]
 
 The Insights page gives you an overview of all projects. You can also select an individual project to get further insights into that project's workflows. Then you can select individual workflows to see insights on individual jobs and tests.
 
+.Insights
 image::guides:ROOT:web_ui_insights_runs.png[Details of insights]
 
 [#self-hosted-runners]
@@ -209,36 +277,64 @@ image::guides:ROOT:web_ui_insights_runs.png[Details of insights]
 
 The self-hosted runners page displays an inventory of your self-hosted runners and their associated resource classes. You can also create a new runner resource class from this page.
 
+.Runner inventory
 image::guides:ROOT:web_ui_runner.png[Runner inventory]
 
-Learn more and get started with self-hosted runners on the xref:execution-runner:runner-overview.adoc[CircleCI self-hosted runners overview].
+Learn more and get started with self-hosted runners on the xref:execution-runner:runner-overview.adoc[CircleCI Self-Hosted Runners Overview].
 
 [#organization-settings]
 == Organization settings
 
-**Overview**: Displays your organization ID and name. Manage technical and security contacts for your org.
+The following organization settings are available by selecting *Org* from the sidebar:
 
-**People**: Manage user roles and permissions within your organization, or generate org invites.
+[.table-scroll]
+--
+.Organization settings
+[cols="1,2", options="header"]
+|===
+| Organization settings section | What you will find here
 
-**Groups**: Manage group level permissions for users in your organization.
+| Overview
+| Organization ID and slug, option to rename or delete the organization. Manage technical and security contacts.
 
-**Contexts**: Set up a new context, view a list of existing contexts, or remove contexts. Contexts provide a mechanism for securing and sharing environment variables across projects.
+| People
+| For `circleci` organizations find a list of organization members and their roles. For all organizations you will find the option to invite new members to the organization.
 
-**VCS**: Menu will differ per VCS. For example, if your VCS is GitHub, you can manage GitHub Checks.
+|Groups
+| `circleci` organizations only. Create and manage groups of org members. You can assign roles to groups to manage permissions.
 
-**Security**: Allows you to set whether or not you want to allow the use of partner and community orbs, or private orbs. Depending on your plan, you can also set up a security contact to retrieve audit logs.
+| Contexts
+| Create and manage contexts to store sensitive information. You can use contexts to store environment variables for your projects.
 
-**Policies**: Provides a list of all policies that have been set up for your organization. For more information on config policies, see the xref:config-policies:config-policy-management-overview.adoc[Config policy management overview].
+| VCS Connections
+| View Apps you have installed for your organization: GitHub App and GitHub Checks App.
 
-**Advanced**: Enable/disable the use of xref:toolkit:intelligent-summaries.adoc[intelligent summaries] for contextual help with build failures. Some orgs have the option to allow xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-vs-code-with-unversioned-config[triggering pipelines with unversioned config] from VS Code.
+| Security
+| Orb security settings, you can choose to allow just certified orbs, all orbs, and choose to allow private orbs. Request audit logs and/or set up audit log streaming.
 
-**Orbs**: View a list of all the orbs authored by your organization.
+| Policies
+| Find a list of policies that have been created for your organization.
 
-**Self-Hosted Runners**: Accept the terms of use to enable self-hosted runners. Once accepted, you can visit the self-hosted runner section of the web application to create resource classes and set up runners.
+| Advanced
+| Opt in/out of the following: intelligent summaries for build failures, image brownouts, triggering pipelines with unversioned config.
 
-**Deploys**: Find links to set up deploy markers or deploy monitoring for your projects.
+| Orbs
+| For `circleci` organizations you will find your URL orb allow list. FOr `github` and `bitbucket` organizations you will find registry information for orbs that have been authored by your organization.
 
-**Integrations**: Set up integrations with self-hosted version control systems.
+| Self-hosted runners
+| Set up self-hosted runners for your organization, to build on your own infrastructure.
+
+| Deploys
+| Find information on setting up deploys and/or the release agent.
+
+| Integrations
+| `circleci` organizations only. Integration set up for GitLab self-managed and Bitbucket Data Center.
+
+| Singe sign-on
+| `circleci` organizations on Scale Plan only. Set up SSO for your organization.
+
+|===
+--
 
 [#plan]
 == Plan
@@ -252,22 +348,24 @@ If you are on a paid plan, you can choose to share your plan. This allows any or
 
 The plan usage section is a detailed overview of your usage by billing period. Here you can find usage information about projects, resource classes, users, network, storage and IP ranges. CircleCI uses a credits based system, and these overviews are meant to help you see how you are using credits, and what some potential cost saving measures could be.
 
-image::guides:ROOT:web_ui_plan_usage.png[Plan usage]
+.Plan Usage
+image::guides:ROOT:web_ui_plan_usage.png[Plan Usage]
 
-In terms of network and storage, usage can be tricky to understand, so it is suggested you familiarize yourself with these pages and how credits work. You can learn more about network and storage usage on the xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Persisting data] page.
+In terms of network and storage, usage can be tricky to understand, so it is suggested you familiarize yourself with these pages and how credits work. You can learn more about network and storage usage on the xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
 
-image::guides:ROOT:web_ui_plan_network.png[Network usage]
+.Network Usage
+image::guides:ROOT:web_ui_plan_network.png[Network Usage]
 
 You can learn more about billing in the billing section of the xref:reference:ROOT:faq.adoc#billing[FAQ] page.
 
-[#usage-controls]
 === Usage controls
 
 Depending on your plan, you will also have the option to manage the retention periods of artifacts, workspaces, and caches. These settings allow you to keep your workflows clean, but can also help reduce storage costs.
 
-image::guides:ROOT:web_ui_plan_controls.png[Usage controls]
+.Usage Controls
+image::guides:ROOT:web_ui_plan_controls.png[Usage Controls]
 
 == Next steps
 
-- xref:concepts.adoc[CircleCI concepts]
-- xref:getting-started:config-editor.adoc[Using the CircleCI in-app configuration editor]
+- xref:concepts.adoc[CircleCI Concepts]
+- xref:getting-started:config-editor.adoc[Using the CircleCI Configuration Editor]

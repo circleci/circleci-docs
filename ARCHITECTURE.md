@@ -1,6 +1,6 @@
-# CircleCI Docs Static Site: Architecture
+# CircleCI docs site: Architecture
 
-This document provides an in-depth look at the architecture of the CircleCI Docs Static Site project.
+This document provides an in-depth look at the architecture of the CircleCI docs site project.
 
 ## Table of Contents
 - [Overview](#overview)
@@ -12,7 +12,7 @@ This document provides an in-depth look at the architecture of the CircleCI Docs
 
 ## Overview
 
-The CircleCI Docs Static Site is built using [Antora](https://antora.org/), a multi-repository documentation site generator. The project is structured as a collection of components, each represented by a directory in the `docs/` folder.
+The CircleCI docs site is built using [Antora](https://antora.org/), a multi-repository documentation site generator. The project is structured as a collection of components, each represented by a directory in the `docs/` folder.
 
 ### Key Architectural Principles
 

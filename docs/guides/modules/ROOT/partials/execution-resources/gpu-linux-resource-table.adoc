@@ -1,3 +1,5 @@
+[.table-scroll]
+--
 [cols="3,1,1,1,1,1,1,1,1", options="header"]
 |===
 | Class | vCPUs | RAM | GPUs | GPU model | GPU Memory (GiB) | Disk Size (GiB) | Cloud | Server
@@ -9,8 +11,8 @@
 | NVIDIA Tesla P4
 | 16
 | 150
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `gpu.nvidia.small.gen2`
 | 4
@@ -19,8 +21,8 @@
 | NVIDIA A10G
 | 24
 | 150
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `gpu.nvidia.small.multi`
 | 4
@@ -29,8 +31,8 @@
 | NVIDIA Tesla T4
 | 16
 | 150
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `gpu.nvidia.medium.multi`
 | 8
@@ -39,8 +41,8 @@
 | NVIDIA Tesla T4
 | 16
 | 150
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `gpu.nvidia.medium`
 | 8
@@ -49,8 +51,8 @@
 | NVIDIA Tesla T4
 | 16
 | 150
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 
 | `gpu.nvidia.large`
 | 8
@@ -59,6 +61,7 @@
 | NVIDIA Tesla V100
 | 16
 | 150
-| image:guides:ROOT:icons/check.svg[check icon, role="no-border"]
-| image:guides:ROOT:icons/cancel.svg[cancel icon, role="no-border"]
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
 |===
+--

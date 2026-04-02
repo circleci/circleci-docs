@@ -1,0 +1,8 @@
+---
+extends: existence
+message: "Page title should not exceed 60 characters."
+link: https://github.com/circleci/circleci-docs
+scope: heading.h1
+level: error
+tokens:
+  - '.{61,}'

@@ -1,5 +1,6 @@
 = Cross references and links
 
+pass:[<!-- vale off -->]
 This page covers how to create links and cross references in CircleCI docs.
 
 [#cross-references]
@@ -26,3 +27,4 @@ See the link:https://docs.antora.org/antora/latest/page/resource-id-coordinates/
 ----
 link:https://circleci.com[CircleCI]
 ----
+pass:[<!-- vale on -->]

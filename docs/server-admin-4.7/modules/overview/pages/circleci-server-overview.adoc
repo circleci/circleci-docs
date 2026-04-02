@@ -26,8 +26,9 @@ image::guides:ROOT:server-4-architecture-diagram-2024.png[Server v4.7 services a
 
 The CircleCI server application exposes two services, `nginx` and `nomad-server`, using a single load balancer. If required, the load balancer can be made private, separating it from the public internet.
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Service
 | Ports
@@ -41,11 +42,13 @@ The CircleCI server application exposes two services, `nginx` and `nomad-server`
 | 4647
 | Exposes an RPC protocol for Nomad clients.
 |===
+--
 
 The application exposes a number of external ports. These ports are used for various functions as defined in the table below.
 
-[.table.table-striped]
-[cols=6*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=6*, options="header"]
 |===
 | Port number
 | Protocol
@@ -82,6 +85,7 @@ The application exposes a number of external ports. These ports are used for var
 | SSH into builds
 | Only required for the Nomad clients.
 |===
+--
 
 [#job-scheduling-and-artifact-storage]
 === Job scheduling and artifact storage
@@ -105,8 +109,9 @@ Job artifacts and outputs are sent directly from jobs in Nomad to object storage
 
 CircleCI server v4.7 consists of the following services. Find their descriptions and failure implications below:
 
-[.table.table-striped]
-[cols="4,1,3,3,3", options="header", stripes=even]
+[.table-scroll]
+--
+[cols="4,1,3,3,3", options="header"]
 |===
 | Service
 | Component
@@ -351,6 +356,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 |
 
 |===
+--
 
 [#supported-platforms]
 == Supported platforms
@@ -361,8 +367,9 @@ If installing outside of EKS or GKE, additional work is required to access some 
 
 We do our best to support a wide range of platforms for installation. We use environment-agnostic solutions wherever possible. However, we do not test all platforms and options. For that reason, we provide a list of tested environments, which we will continue to expand.
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Environment
 | Status
@@ -396,6 +403,7 @@ We do our best to support a wide range of platforms for installation. We use env
 | Untested
 | Should work with MinIO and Runner.
 |===
+--
 
 [#installation-options]
 == Installation options

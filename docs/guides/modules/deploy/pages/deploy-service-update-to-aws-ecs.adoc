@@ -1,6 +1,6 @@
 = Deploy service update to AWS ECS
 :page-platform: Cloud, Server v4+
-:description: A how to guide for deploying changes to AWS ECS using CircleCI orbs.
+:page-description: A how to guide for deploying changes to AWS ECS using CircleCI orbs.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to AWS ECS using CircleCI orbs.
@@ -8,12 +8,12 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to AWS 
 [#introduction]
 == Introduction
 
-The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. This guide shows you how to deploy software changes to Amazon ECS using CircleCI orbs.
+The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will not need to configure and install your own container orchestration software, ensuring you have a simple and optimized container deployment on the CircleCI platform. This guide shows you how to deploy software changes to Amazon ECS using CircleCI orbs.
 
 [#set-environment-variables]
 == 1. Set environment variables
 
-The following environment variables need to be set. For more information on how to set environment variables, refer to the xref:security:set-environment-variable.adoc[Set an environment variable] page. You can also use a xref:security:contexts.adoc[context]:
+The following environment variables need to be set. For more information on how to set environment variables, refer to the xref:security:set-environment-variable.adoc[Set an Environment Variable] page. You can also use a xref:security:contexts.adoc[Context]:
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
@@ -52,7 +52,7 @@ TIP: When using orbs, it is a good idea to check the link:https://circleci.com/d
 [#create-workflow]
 == 4. Create workflow
 
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:reference:ROOT:configuration-reference.adoc#workflows[workflow configuration].
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:reference:ROOT:configuration-reference.adoc#workflows[Workflow Configuration].
 
 [source,yaml]
 ----
@@ -65,8 +65,8 @@ workflows:
 
 To configure an link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS service update] to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible:
 
-* The `build_and_push_image` job from the ECR orb to build and push an updated image to ECR
-* The `deploy_service_update` from the ECS orb to deploy your service update
+* The `build_and_push_image` job from the ECR orb to build and push an updated image to ECR.
+* The `deploy_service_update` from the ECS orb to deploy your service update.
 
 [source,yaml]
 ----
@@ -122,7 +122,11 @@ jobs:
           task_definition_arn: '${TASK_DEFINITION_ARN}'
 ----
 
-This section illustrates how you can use the orb to install and configure the AWS CLI, retrieve the link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html[task definition] that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb.
+This section illustrates how you can:
+
+* Use the orb to install and configure the AWS CLI.
+* Retrieve the link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html[task definition] that was previously deployed.
+* Verify the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb.
 
 [#add-verification-job-to-the-workflow]
 == 7. Add verification job to the workflow
@@ -210,6 +214,19 @@ workflows:
           requires:
             - aws-ecs/deploy_service_update
 ----
+
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+Deploy markers provide a way to track and manage your AWS ECS service updates in the CircleCI web app. When you add deploy markers to your deployment job, you can view a timeline of all deployments, track their status, and enable rollback and deploy pipelines.
+
+You have two options for setting up deploy markers:
+
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
 
 [#next-steps]
 == Next steps

@@ -57,14 +57,10 @@ machine_provisioner:
 
 The default AMIs for server v4.4 are based on Ubuntu 22.04.
 
-[tabs]
-====
-x86 AMI list::
-+
+[.table-scroll]
 --
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.x86 AMI list
+[cols=2*, options="header"]
 |===
 | Region
 | AMI
@@ -121,11 +117,11 @@ x86 AMI list::
 | `ami-0fdf4561a0d3b0346`
 |===
 --
-Arm AMI list::
-+
+
+[.table-scroll]
 --
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+.Arm AMI list
+[cols=2*, options="header"]
 |===
 | Region
 | AMI
@@ -179,7 +175,6 @@ Arm AMI list::
 |`ami-02268e2fe5572a88c`
 |===
 --
-====
 
 [#gcp]
 === GCP

@@ -1,4 +1,5 @@
 = Managing build artifacts
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: Learn how CircleCI server v4.8 build artifacts persist data after a job is completed and how they can be used for longer-term storage of your build process outputs.
 :experimental:
@@ -9,8 +10,9 @@ Build artifacts persist data after a job is completed. They can be used for long
 == Safe and unsafe content types
 By default, only predefined artifact types are allowed to be rendered. This protects users from uploading, and potentially executing, malicious content. The 'allowed-list' is as follows:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | Category
 | Safe Type
@@ -60,12 +62,14 @@ By default, only predefined artifact types are allowed to be rendered. This prot
 | Audio
 | WAV
 |===
+--
 <<<
 
 Also, by default, the following types will be rendered as plain text:
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | Category
 | Unsafe Type
@@ -80,17 +84,18 @@ Also, by default, the following types will be rendered as plain text:
 | JavaScript
 
 | Text
-| ecmascript
+| ECMAscript
 
 | Application
 | JavaScript
 
 | Application
-| ecmascript
+| ECMAscript
 
 | Text
 | XML
 |===
+--
 
 [#allow-unsafe-types]
 === Allow unsafe types

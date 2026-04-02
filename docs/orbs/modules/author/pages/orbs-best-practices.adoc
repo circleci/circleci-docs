@@ -10,8 +10,10 @@ This guide covers best practices for creating orbs.
 [#give-your-orb-a-descriptive-name]
 === Give your orb a descriptive name
 
-An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents, the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
+An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Proper Orb Slug | Bad Orb Slug
@@ -22,6 +24,7 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 | `company/orb`
 | `company/cci-plugin`
 |===
+--
 
 [#categorize-your-orb]
 === Categorize your orb
@@ -31,7 +34,7 @@ Categorizing your orb allows it to be searchable on the link:https://circleci.co
 [#ensure-all-orb-components-include-descriptions]
 === Ensure all orb components include descriptions
 
-Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
+Commands, Jobs, Executors, Examples, and Parameters can all accept descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
 
 [,yaml]
 ----
@@ -65,7 +68,7 @@ When orbs are published to the Orb Registry they are searchable by their name an
 [#include-display-links]
 ==== Include display links
 
-Orbs utilize a special config key xref:orb-author.adoc#orbyml[`display`] that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
+Orbs utilize a special config key xref:author:create-test-and-publish-a-registry-orb.adoc#orbyml[`display`] that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
 
 [,yaml]
 ----
@@ -225,10 +228,12 @@ Executors are especially useful outside of orbs, as a way to create link:https:/
 [#examples]
 === Examples
 
-Orb xref:orb-concepts.adoc#usage-examples[Usage Examples] provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
+Orb xref:use:orb-concepts.adoc#usage-examples[Usage Examples] provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
 
 Be sure to name your usage examples so they reflect the use-case they demonstrate.
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Good Usage Example Names | Bad Usage Example Names
@@ -239,6 +244,7 @@ Be sure to name your usage examples so they reflect the use-case they demonstrat
 | `install-cli`
 | `demo`
 |===
+--
 
 [#all-public-orbs-should-contain-at-least-one-usage-example]
 ==== All public orbs should contain at least one usage example.
@@ -312,7 +318,7 @@ steps:
       command: <<include(script/your_script.sh)>>
 ----
 
-When building orbs, it is typical to xref:orb-concepts.adoc#file-include-syntax[write your code in a separate file] to avoid some of the pitfalls of YAML, as well as gaining access to syntax highlighting and other features in your IDE. In this example, we are including a script named `your_script.sh` which contains the following code:
+When building orbs, it is typical to xref:use:orb-concepts.adoc#file-include-syntax[write your code in a separate file] to avoid some of the pitfalls of YAML, as well as gaining access to syntax highlighting and other features in your IDE. In this example, we are including a script named `your_script.sh` which contains the following code:
 
 [,bash]
 ----
@@ -325,7 +331,7 @@ Going through this substitution process allows us to accept a string value, or a
 [#parameterize-the-installation-path]
 ==== Parameterize the installation path
 
-When installing any binary into a potentially unknown user-defined Docker image, it is hard to know what permissions will be available. Create an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and install binaries to this location (if possible). This often avoids the issue of requiring "root" privileges in environments where that may not possible.
+When installing any binary into a potentially unknown user-defined Docker image, it is hard to know what permissions will be available. Create an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and install binaries to this location (if possible). This often avoids the issue of requiring "root" privileges in environments where that may not be possible.
 
 [#deployment]
 == Deployment
@@ -333,7 +339,7 @@ When installing any binary into a potentially unknown user-defined Docker image,
 [discrete#always-follow-strict-semantic-versioning]
 ==== Always follow strict semantic versioning
 
-Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood xref:orb-concepts.adoc#semantic-versioning[semantic versioning].
+Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood xref:use:orb-concepts.adoc#semantic-versioning[semantic versioning].
 
 [#keep-a-changelog]
 === Keep a changelog

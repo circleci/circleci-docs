@@ -1,6 +1,6 @@
 = Sample config.yml Files
 :page-platform: Cloud, Server v4+
-:description: Sample config.yml File
+:page-description: Sample config.yml File
 :experimental:
 :page-aliases: example-configs.adoc
 
@@ -160,7 +160,7 @@ The workflow runs as follows:
 . `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app
 . Once `hold` job is approved the `deploy` job runs
 
-An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration devise.
+An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration device.
 
 The image below shows the workflow view for the following configuration example. This image has three parts to show:
 
@@ -570,7 +570,7 @@ jobs:
             make install
             # Postruns
             cd $IPERF3_MAKE_PREFIX/bin
-            # Copy linked OpenSSL libraris to the current directory
+            # Copy linked OpenSSL libraries to the current directory
             # and tell the linker to refer to them
             otool -L iperf3 | grep openssl | awk '{ print $1 }' | while read dylib
             do

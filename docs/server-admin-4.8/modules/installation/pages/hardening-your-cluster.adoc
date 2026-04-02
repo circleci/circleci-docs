@@ -1,4 +1,5 @@
 = Hardening your cluster
+:page-noindex: true
 :page-platform: Server v4.8, Server Admin
 :page-description: This section provides supplemental information on hardening your Kubernetes cluster for CircleCI server v4.8.
 :experimental:
@@ -31,8 +32,9 @@ The rules explained here are assumed to be stateful and for TCP connections only
 === Reverse proxy status
 You may wish to check the status of the services routing traffic in your CircleCI server installation and alert if there are any issues. Since we use both nginx and Kong in CircleCI server, we expose the status pages of both via port 80.
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=2*, options="header"]
 |===
 | Service
 | Endpoint
@@ -43,6 +45,7 @@ You may wish to check the status of the services routing traffic in your CircleC
 | Kong
 | `/kong_status`
 |===
+--
 
 [#kubernetes-load-balancers]
 ## Kubernetes load balancers
@@ -52,8 +55,9 @@ Depending on your setup, your load balancers might be transparent (that is, they
 === Ingress
 If the traffic rules for your load balancers have not been created automatically, here are their respective ports:
 
-[.table.table-striped]
-[cols=4*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=4*, options="header"]
 |===
 | Name
 | Port
@@ -85,6 +89,7 @@ If the traffic rules for your load balancers have not been created automatically
 | Nomad clients
 | Communication with Nomad clients
 |===
+--
 
 [#egress-load-balancers]
 === Egress
@@ -124,8 +129,9 @@ If you are using a managed service, you can check the rules created for the traf
 [#egress-kubernetes]
 === Egress
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Port
 | Destination
@@ -139,6 +145,7 @@ If you are using a managed service, you can check the rules created for the traf
 | other nodes
 | Allow intra-cluster traffic
 |===
+--
 
 [#nomad-clients-ingress-egress]
 == Nomad clients
@@ -146,8 +153,10 @@ Nomad clients do not need to communicate with each other. You can block traffic 
 
 [#ingress-nomad]
 === Ingress
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Port
 | Source
@@ -161,11 +170,14 @@ Nomad clients do not need to communicate with each other. You can block traffic 
 | External
 | Rerun jobs with SSH functionality
 |===
+--
 
 [#egress-nomad]
 === Egress
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Port
 | Destination
@@ -179,6 +191,7 @@ Nomad clients do not need to communicate with each other. You can block traffic 
 | Nomad Load Balancer
 | Internal communication
 |===
+--
 
 [#external-vms]
 == External VMs
@@ -186,8 +199,10 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 
 [#ingress-external]
 === Ingress
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Port
 | Source
@@ -213,6 +228,7 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | External
 | Rerun jobs with SSH functionality
 |===
+--
 
 [#egress-external]
 === Egress
@@ -240,8 +256,9 @@ When the `assignPublicIP` option is set to false, restricting traffic with secur
 
 Within the ingress rules of the VM security group, the following rules can be created to harden your installation:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Port
 | Origin
@@ -252,6 +269,7 @@ Within the ingress rules of the VM security group, the following rules can be cr
 | Allows users to SSH into failed virtual machine based jobs and to retry and debug
 
 |===
+--
 
 [#using-public-ips]
 === Using public IP addresses
@@ -260,8 +278,9 @@ When the `assignPublicIP` option is set to true, all EC2 instances created by ma
 
 When hardening an installation where the machine provisioner uses public IP addresses, the following rules can be created:
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
+[.table-scroll]
+--
+[cols=3*, options="header"]
 |===
 | Port
 | Origin
@@ -272,6 +291,7 @@ When hardening an installation where the machine provisioner uses public IP addr
 | Allows users to SSH into failed virtual machine based jobs to retry and debug.
 
 |===
+--
 
 ifndef::pdf[]
 ## Next steps

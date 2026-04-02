@@ -1,6 +1,6 @@
 = Using the Linux VM execution environment
 :page-platform: Cloud, Server v4+
-:description: Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor.
+:page-description: Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor.
 :experimental:
 
 You can run your jobs in the Linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.

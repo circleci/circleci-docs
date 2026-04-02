@@ -102,22 +102,23 @@ function buildApiV1(callback) {
 /**
  * Build API v2 Documentation
  *
- * STRATEGY: Sophisticated pipeline matching original CircleCI build process
+ * STRATEGY: Sophisticated pipeline for generating API documentation with code samples
  *
  * PIPELINE STEPS:
  * 1. Fetch live OpenAPI spec from CircleCI API
- * 2. Prepare spec (placeholder for future code sample enrichment)
- * 3. Apply JSON patches (customizations/corrections)
- * 4. Bundle and optimize (remove unused components)
+ * 2. Bundle and resolve all $ref pointers (using Redocly)
+ * 3. Generate code samples with httpsnippet (for cURL, Node.js, Python, Go, Ruby)
+ * 4. Apply JSON patches - CURRENTLY DISABLED for simplicity
  * 5. Lint for quality assurance
  * 6. Generate final HTML with Redocly
- * 7. Cleanup temporary files
+ * 7. Copy logo assets
+ * 8. Cleanup temporary files
  *
- * WHY COMPLEX:
+ * WHY THIS ORDER:
+ * - Bundling first resolves $ref pointers, making parameters accessible
+ * - Code samples need resolved parameters to generate valid snippets
+ * - Linting catches issues before final HTML generation
  * - Live API ensures docs are always current
- * - Patches allow customization without modifying source
- * - Bundling optimizes file size and structure
- * - Linting catches issues before publication
  */
 function buildApiV2(callback) {
   console.log('Building API v2 documentation with full pipeline...')
@@ -139,94 +140,88 @@ function buildApiV2(callback) {
     }
     console.log('✅ OpenAPI spec fetched')
 
-    // STEP 2: Prepare spec for processing
-    // Add code samples using snippet-enricher-cli
-    console.log('📝 Adding code samples to OpenAPI spec...')
-    exec('cd build/temp-api-v2 && ../../node_modules/.bin/snippet-enricher-cli --targets="node_request,python_python3,go_native,shell_curl" --input=openapi.json > openapi-with-examples.json', (err, stdout, stderr) => {
+    // STEP 2: Bundle, dereference, and optimize
+    // --dereferenced: Resolves ALL $ref pointers so snippet generation can access definitions
+    // --remove-unused-components: Removes unreferenced schemas to reduce file size
+    console.log('📦 Bundling and dereferencing API spec...')
+    exec('npx @redocly/cli bundle build/temp-api-v2/openapi.json --dereferenced --remove-unused-components --output build/temp-api-v2/openapi-bundled.json', (err, stdout, stderr) => {
       if (err) {
-        console.error('❌ Failed to add code samples:', err)
-        console.log('ℹ️  Falling back to unprocessed spec...')
-        // Fallback: copy unprocessed file if snippet enricher fails
-        fs.copyFileSync('build/temp-api-v2/openapi.json', 'build/temp-api-v2/openapi-with-examples.json')
-      } else {
-        console.log('✅ Code samples added to OpenAPI spec')
+        console.error('❌ Failed to bundle API docs:', err)
+        return callback(err)
       }
+      console.log('✅ API docs bundled, dereferenced, and optimized')
 
-      // STEP 3: Apply JSON patches
-      // Allows customizing the API spec without modifying the source
-      // Patches can fix errors, add descriptions, or customize for documentation
-      console.log('🔧 Applying JSON patches...')
-      applyJsonPatches(() => {
+      // STEP 3: Add code samples using our custom script with Kong's httpsnippet
+      // This runs AFTER bundling so all $ref pointers are resolved
+      console.log('📝 Adding code samples to OpenAPI spec...')
+      exec('node scripts/generate-api-snippets.js build/temp-api-v2/openapi-bundled.json build/temp-api-v2/openapi-with-examples.json', (err, stdout, stderr) => {
+        if (err) {
+          console.error('❌ Failed to add code samples:', err)
+          if (stderr) console.error(stderr)
+          console.log('ℹ️  Falling back to bundled spec without examples...')
+          // Fallback: copy bundled file if snippet generation fails
+          fs.copyFileSync('build/temp-api-v2/openapi-bundled.json', 'build/temp-api-v2/openapi-with-examples.json')
+        } else {
+          console.log('✅ Code samples added to OpenAPI spec')
+          if (stdout) console.log(stdout)
+        }
 
-        // STEP 4: Bundle and remove unused components
-        // Optimizes the spec by removing unreferenced schemas, reducing file size
-        console.log('📦 Bundling API docs and removing unused components...')
-        exec('npx @redocly/cli bundle build/temp-api-v2/openapi-patched.json --remove-unused-components --output build/temp-api-v2/openapi-final.json', (err, stdout, stderr) => {
+        // STEP 4: Apply JSON patches (COMMENTED OUT - keeping simple for now)
+        // Allows customizing the API spec without modifying the source
+        // Uncomment this section when you need to apply custom patches
+        // console.log('🔧 Applying JSON patches...')
+        // applyJsonPatches(() => {
+
+        // For now, skip patching and use the spec with examples as final
+        console.log('ℹ️  Skipping JSON patches (disabled for simplicity)')
+        fs.copyFileSync('build/temp-api-v2/openapi-with-examples.json', 'build/temp-api-v2/openapi-final.json')
+
+        // STEP 5: Lint API docs
+        // Quality check to catch issues before generating final docs
+        console.log('🔍 Linting API docs...')
+        exec('npx @redocly/cli lint build/temp-api-v2/openapi-final.json', (err, stdout, stderr) => {
           if (err) {
-            console.error('❌ Failed to bundle API docs:', err)
-            return callback(err)
+            console.warn('⚠️  Linting warnings found, but continuing build...')
+            console.log(stdout)
+          } else {
+            console.log('✅ API docs linting passed')
           }
-          console.log('✅ API docs bundled')
 
-          // STEP 5: Lint API docs
-          // Quality check to catch issues before generating final docs
-          // Warnings don't stop the build, but errors would
-          console.log('🔍 Linting API docs...')
-          exec('npx @redocly/cli lint build/temp-api-v2/openapi-final.json', (err, stdout, stderr) => {
+          // STEP 6: Build final HTML documentation
+          // Redocly transforms the OpenAPI spec into beautiful, interactive docs
+          console.log('🏗️  Building docs with Redocly CLI...')
+
+          const buildCommand = [
+            'npx @redocly/cli build-docs build/temp-api-v2/openapi-final.json',
+            '--output build/api/v2/index.html',
+            '--config redocly.yaml',
+            '--template custom-template.hbs',
+            '--title "CircleCI API v2 Documentation"',
+            '--disableGoogleFont=false',
+          ].join(' ')
+
+          exec(buildCommand, (err, stdout, stderr) => {
             if (err) {
-              console.warn('⚠️  Linting warnings found, but continuing build...')
-              console.log(stdout)
-            } else {
-              console.log('✅ API docs linting passed')
+              console.error('❌ Failed to build API docs:', err)
+              return callback(err)
             }
 
-            // STEP 6: Build final HTML documentation
-            // Redocly transforms the OpenAPI spec into beautiful, interactive docs
-            console.log('🏗️  Building docs with Redocly CLI...')
+            console.log('✅ API v2 docs built successfully')
 
-            // Build options for enhanced customization (all free options):
-            // --title: Custom page title
-            // --theme.openapi.disableSearch: Disable search (if needed)
-            // --theme.openapi.hideDownloadButton: Hide download button
-            // --template: Custom template (requires template file)
-            // --options.maxDisplayedEnumValues: Limit enum display
-
-            const buildCommand = [
-              'npx @redocly/cli build-docs build/temp-api-v2/openapi-final.json',
-              '--output build/api/v2/index.html',
-              '--config redocly.yaml',
-              '--template custom-template.hbs',
-              '--title "CircleCI API v2 Documentation"',
-              '--disableGoogleFont=false',
-              // Additional options for free version:
-              // '--theme.openapi.hideDownloadButton=true',
-              // '--theme.openapi.disableSearch=true',
-              // '--theme.openapi.nativeScrollbars=true'
-            ].join(' ')
-
-            exec(buildCommand, (err, stdout, stderr) => {
+            // STEP 7: Copy logo file for template
+            console.log('📋 Copying logo file...')
+            exec('cp logo.svg build/api/v2/', (err) => {
               if (err) {
-                console.error('❌ Failed to build API docs:', err)
-                return callback(err)
+                console.warn('⚠️  Warning: Could not copy logo file:', err.message)
+              } else {
+                console.log('✅ Logo file copied successfully')
               }
 
-              console.log('✅ API v2 docs built successfully')
-
-              // STEP 7: Copy logo file for template
-              console.log('📋 Copying logo file...')
-              exec('cp logo.svg build/api/v2/', (err) => {
-                if (err) {
-                  console.warn('⚠️  Warning: Could not copy logo file:', err.message)
-                } else {
-                  console.log('✅ Logo file copied successfully')
-                }
-
-                // STEP 8: Cleanup temporary files
-                // Remove intermediate files to keep build directory clean
-                exec('rm -rf build/temp-api-v2', () => {
-                  console.log('🎉 API v2 documentation build completed!')
-                  callback()
-                })
+              // STEP 8: Cleanup temporary files
+              // Remove intermediate files to keep build directory clean
+              exec('rm -rf build/temp-api-v2', () => {
+                console.log('🎉 API v2 documentation build completed!')
+                callback()
               })
             })
           })

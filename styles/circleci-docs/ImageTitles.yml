@@ -1,0 +1,44 @@
+---
+extends: script
+scope: raw
+level: error
+message: "Images should have a title (line starting with '.' before the image)."
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  lines := text.split(scope, "\n")
+
+  for i, line in lines {
+    trimmed := text.trim_space(line)
+
+    // Check for image
+    if text.has_prefix(trimmed, "image::") {
+      // Look back for a title, skipping empty lines and attributes
+      has_title := false
+
+      for j := i - 1; j >= 0; j-- {
+        prev_trimmed := text.trim_space(lines[j])
+
+        // Skip empty lines and attribute lines
+        if prev_trimmed == "" || text.has_prefix(prev_trimmed, "[") {
+          continue
+        }
+
+        // Check if this line is a title
+        if text.has_prefix(prev_trimmed, ".") {
+          has_title = true
+          break
+        }
+
+        // Found a non-attribute, non-empty line that's not a title
+        break
+      }
+
+      if !has_title {
+        start := text.index(scope, line)
+        matches = append(matches, {begin: start, end: start + len(line)})
+      }
+    }
+  }

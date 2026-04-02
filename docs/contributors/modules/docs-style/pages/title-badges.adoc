@@ -1,0 +1,49 @@
+= Page title badges
+
+Add visual badges next to page titles to indicate content status. Currently we are using a `Preview` badge to indicate when a page is for a feature in open or closed preview.
+
+A page is closed preview will display the `Preview` badge and **will not be** listed in the navigation.
+A page in open preview will display the `Preview` badge and **will be** listed in the navigation.
+
+== Basic usage
+
+```asciidoc
+= Page Title
+:page-badge: Preview
+```
+
+This displays a simple badge with default styling (black text, border, no background).
+
+== Custom styling with Tailwind classes
+
+```asciidoc
+= Page Title
+:page-badge: Preview
+:page-badge-classes: text-white bg-orange-500 border border-orange-600
+```
+
+== Custom colors with hex values
+
+```asciidoc
+= Page Title
+:page-badge: Preview
+:page-badge-bg: #FF6B35
+:page-badge-border: #C44D2C
+:page-badge-classes: text-white
+```
+
+== Common badge styles
+
+**Preview:**
+```asciidoc
+:page-badge: Preview
+```
+
+Currently we are not adding styling to these badges but this may change in future.
+
+== Badge attributes reference
+
+- **`:page-badge:`** - The text to display in the badge (required)
+- **`:page-badge-classes:`** - Tailwind CSS classes for styling (optional, defaults to `text-terminal-black border`)
+- **`:page-badge-bg:`** - Hex color code for background (optional, overrides classes)
+- **`:page-badge-border:`** - Hex color code for border (optional, requires `page-badge-bg`)

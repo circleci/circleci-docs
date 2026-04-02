@@ -7,6 +7,8 @@ This guide gives an introductory overview of the various ways to persist and opt
 
 Note the following distinctions between artifacts, workspaces, and caches:
 
+[.table-scroll]
+--
 [cols="1,2,2", options="header"]
 |===
 | Type | Use | Example
@@ -23,6 +25,7 @@ Note the following distinctions between artifacts, workspaces, and caches:
 | Store non-vital data that may help the job run faster, for example npm or Gem packages.
 | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`.
 |===
+--
 
 [#caching]
 == Caching

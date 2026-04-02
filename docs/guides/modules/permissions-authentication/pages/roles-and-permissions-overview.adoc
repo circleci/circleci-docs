@@ -3,7 +3,9 @@
 :page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
 :experimental:
 
-NOTE: If you authenticated your CircleCI account with xref:integration:gitlab-integration.adoc[GitLab] or the CircleCI xref:integration:github-apps-integration.adoc[GitHub App], the content on this page applies to you.
+If you have a `circleci` type organization, the content on this page applies to you.
+
+include::ROOT:partial$tips/check-org-type.adoc[]
 
 Manage user access to organizations and projects with CircleCI roles and associated permissions. By default, users can access projects based on roles set at an organization level. For more granular control, you can assign roles at the project level. Manage roles for groups of users with xref:manage-groups.adoc[groups].
 
@@ -17,6 +19,8 @@ For instructions on managing roles and permissions, see the xref:manage-roles-an
 
 The table below shows the permissions associated with each CircleCI organization role:
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -112,7 +116,10 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
 |===
+--
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -127,8 +134,12 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-green]#**Yes**#
 ^| [.circle-green]#**Yes**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -148,10 +159,15 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| ORGANIZATION ROLES
 
@@ -174,8 +190,12 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -205,10 +225,15 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| ORGANIZATION ROLES
 
@@ -236,8 +261,12 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -267,10 +296,15 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| ORGANIZATION ROLES
 
@@ -288,10 +322,15 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| ORGANIZATION ROLES
 
@@ -314,10 +353,15 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| ORGANIZATION ROLES
 
@@ -335,8 +379,12 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -386,7 +434,9 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-green]#**Yes**#
 ^| [.circle-green]#**Yes**#
+
 |===
+--
 
 
 [#project-role-permissions-matrix]
@@ -394,8 +444,11 @@ The table below shows the permissions associated with each CircleCI organization
 
 The table below shows the permissions associated with each CircleCI project role:
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| PROJECT ROLES
 
@@ -428,10 +481,15 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| PROJECT ROLES
 
@@ -449,10 +507,15 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| PROJECT ROLES
 
@@ -470,8 +533,13 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -496,8 +564,12 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -529,9 +601,13 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 |===
+--
 
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
+
 | ACTIONS
 3+^| PROJECT ROLES
 
@@ -549,8 +625,12 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
-|===
 
+|===
+--
+
+[.table-scroll]
+--
 [cols=4*, options="header"]
 |===
 | ACTIONS
@@ -592,6 +672,7 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 
 |===
+--
 
 [#permissions-scope]
 == Permissions scope

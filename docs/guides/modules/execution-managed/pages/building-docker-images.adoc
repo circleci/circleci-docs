@@ -55,6 +55,8 @@ Arm-based Docker jobs use an equivalent **Arm machine** resource class for remot
 
 ==== x86 architecture
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Docker resource class
@@ -72,9 +74,12 @@ Arm-based Docker jobs use an equivalent **Arm machine** resource class for remot
 | `2xlarge`
 | `2xlarge` (Linux VM)
 |===
+--
 
 ==== Arm architecture
 
+[.table-scroll]
+--
 [cols=2*, options="header"]
 |===
 | Docker resource class
@@ -88,6 +93,7 @@ Arm-based Docker jobs use an equivalent **Arm machine** resource class for remot
 | `arm.2xlarge`
 | `arm.2xlarge` (Arm VM)
 |===
+--
 
 - Full list of resource classes: xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference].
 - Full specifications and pricing: link:https://circleci.com/pricing/price-list/[CircleCI Pricing]

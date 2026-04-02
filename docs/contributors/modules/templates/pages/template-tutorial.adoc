@@ -3,6 +3,7 @@
 :page-description: A short page description goes here
 :experimental:
 
+pass:[<!-- vale off -->]
 ////
 Some notes on attributes
 
@@ -16,8 +17,6 @@ Content templates help you to:
 
 * Develop new content quickly
 * Ensure your page conforms to the style guide
-
-To use this template make a copy and place it in the `_cci2` directory. The filename should match the page title. Look at the source file for this page template link:https://github.com/circleci/circleci-docs/blob/master/jekyll/_cci2/template/template-tutorial.adoc?plain=1[here]. There is additional detail in the comments.
 
 The opening paragraph should be used to succinctly explain to the reader what value the feature/task provides and what use cases it supports. If possible display the use cases in a bullet list.
 
@@ -65,6 +64,8 @@ Break up large blocks of text where possible to help make it easier to consume. 
 
 This is the syntax for creating a table. This example has one heading row and one normal row. The table has three columns
 
+[.table-scroll]
+--
 [cols=3*, options="header"]
 |===
 |Header text column 1
@@ -75,6 +76,7 @@ This is the syntax for creating a table. This example has one heading row and on
 |Text for row 1 column 2
 |Text for row 1 column 3
 |===
+--
 
 For a full description of the options available, including merging cells, and cell formatting, see the link:https://docs.asciidoctor.org/asciidoc/latest/tables/build-a-basic-table/[Asciidoctor docs].
 
@@ -150,3 +152,5 @@ End the tutoral with a conclusion section that summarizes what was covered.
 // Here you can inlude links to other pages in docs or the blog etc. where the reader should head next.
 * xref:guides:about-circleci:benefits-of-circleci.adoc[Benefits of CircleCI]
 * xref:guides:about-circleci:concepts.adoc[CircleCI concepts]
+
+pass:[<!-- vale on -->]

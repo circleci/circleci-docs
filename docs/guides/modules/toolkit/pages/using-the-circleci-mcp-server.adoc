@@ -53,7 +53,7 @@ Before installing the CircleCI MCP server, ensure you have the following:
 
 You can install the CircleCI MCP server via Smithery, which is a hub for MCP servers. For more information, see the link:https://smithery.ai/docs[Smithery docs].
 
-You might want to install via Smithery in the following circumstances:
+Consider installing via Smithery in the following circumstances:
 
 * To manage several MCP servers or prefer a centralized installation approach for all developers.
 * If you do not want to touch IDE settings, or for quick testing purposes.
@@ -184,9 +184,31 @@ image::guides:ROOT:mcp-server-cursor.png[CircleCI MCP server in Cursor IDE]
 
 == Supported tools
 
-The supported tools section outlines the abilities that the CircleCI MCP server currently supports. Each tool is described below along with usage examples.
+This section outlines the abilities that the CircleCI MCP server currently supports. Several tools are described below along with usage examples. For full information on each tool see the link:https://github.com/CircleCI-Public/mcp-server-circleci/blob/main/README.md[README] file in the tool's repository.
 
-=== Build failure logs (`get_build_failure_logs`)
+You can find further help information for each tool at the point at which you installed the MCP server. For example, using Cursor IDE, under menu:Cursor settings[Tools and MCP] you can hover over a tool name to view in-app help.
+
+.CircleCI MCP server tools in Cursor IDE
+image::guides:ROOT:mcp-tools-cursor.png[CircleCI MCP server tools in Cursor IDE]
+
+CircleCI MCP server tools include the following:
+
+* Get build failure logs (`get_build_failure_logs`)
+* Find flaky tests (`find_flaky_tests`)
+* Get latest pipeline status (`get_latest_pipeline_status`)
+* Get job test results (`get_job_test_results`)
+* Configuration Helper (`config_helper`)
+* Run pipeline (`run_pipeline`)
+* List followed projects (`list_followed_projects`)
+* Run evaluation tests (`run_evaluation_tests`)
+* Rerun workflow (`rerun_workflow`)
+* Download usage API data (`download_usage_api_data`)
+* Find underused resource classes (`find_underused_resource_classes`)
+* Analyze diff (`analyze_diff`)
+* Rollback Tool (`run_rollback_pipeline`)
+* List component versions (`list_component_versions`)
+
+=== Get build failure logs (`get_build_failure_logs`)
 
 This tool retrieves detailed failure logs from CircleCI builds and presents them in a structured format.
 
@@ -204,7 +226,7 @@ The tool returns formatted logs including:
 * Full command logs.
 * Exit codes and failure messages.
 
-=== Flaky test detection (`find_flaky_tests`)
+=== Find flaky tests (`find_flaky_tests`)
 
 This tool identifies unreliable tests in your CircleCI project by analyzing your test execution history. It leverages CircleCI's built-in flaky test detection to find patterns of instability.
 

@@ -74,7 +74,7 @@ Markdown::
 Textile::
 +
 --
-[,textile]
+[,md]
 ----
 # Template:
 !https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg!:<LINK>
@@ -89,7 +89,7 @@ Textile::
 Rdoc::
 +
 --
-[,rdoc]
+[,md]
 ----
 # Template:
 {<img src="https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg" alt="<ORG_NAME>" />}[https://circleci.com/gh/<ORG_NAME>/<PROJECT_NAME>]

@@ -1,37 +1,77 @@
 <div class="mt-5 mb-10 lg:mt-0 w-full md:w-fit max-w-full md:px-4 flex flex-col md:flex-row border border-vapor rounded-xl items-stretch justify-between {{#if class}}{{class}}{{/if}}">
   {{#with (get-page-meta page)}}
-    
+
     <div class="flex items-center pl-3 md:pl-0 pr-3 py-2">
       <!-- Article Last Updated -->
       {{#if lastUpdate}}
         <a href="{{commitUrl}}" class="flex min-w-fit items-center text-link-on-light">
-          <img src="{{{@root.uiRootPath}}}/img/calendar.svg" alt="Language Icon" class="inline-block h-5 w-5 mr-2">
+          <svg class="inline-block h-5 w-5 mr-2" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M4 0C4.55228 0 5 0.447715 5 1V2H13V1C13 0.447715 13.4477 0 14 0C14.5523 0 15 0.447715 15 1V2H16C17.1046 2 18 2.89543 18 4V18C18 19.1046 17.1046 20 16 20H2C0.895431 20 0 19.1046 0 18V4C0 2.89543 0.895431 2 2 2H3V1C3 0.447715 3.44772 0 4 0ZM2 7V18H16V7H2ZM5 9H8C8.55228 9 9 9.44772 9 10V13C9 13.5523 8.55228 14 8 14H5C4.44772 14 4 13.5523 4 13V10C4 9.44772 4.44772 9 5 9Z" fill="currentColor"/>
+          </svg>
           {{format-time-ago lastUpdate}}
         </a>
-        <span class="text-xl px-2">&middot;</span>
       {{/if}}
       <!-- Read Time -->
-      {{#if readingTime}}
-        <span class="flex min-w-fit items-center">
-          {{readingTime}}
-        </span>
+      {{#if @root.page.attributes.show-readtime}}
+        {{#if readingTime}}
+          <span class="text-xl px-2">&middot;</span>
+          <span class="flex min-w-fit items-center">
+            {{readingTime}}
+          </span>
+        {{/if}}
       {{/if}}
     </div>
   {{/with}}
-  
+
   <!-- Platform Tags -->
   {{#if page.attributes.platform}}
     <div class="flex items-center min-w-fit space-x-1 px-3 py-2 md:py-0 border-t md:border-t-0 md:border-l border-inherit">
       {{#each (split page.attributes.platform ',')}}
-        <span class=" text-[10px] text-terminal-black border rounded-full py-1 px-1.5">{{this}}</span>
+        <span class="text-[10px] text-terminal-black border rounded-full py-1 px-1.5" style="font-family: 'Roboto', sans-serif; font-weight: 700;">{{this}}</span>
       {{/each}}
     </div>
   {{/if}}
-  <!-- Edit Page -->
-  {{#if page.editUrl}}
-    <a class="flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit text-link-on-light" href="{{page.editUrl}}">
-      Contribute
-      <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to Code" class="ml-2 inline-block w-[13px] h-[13px]">
-    </a>
-  {{/if}}
+  <!-- Markdown Dropdown -->
+  <div data-dropdown class="relative flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit">
+    <button
+      data-dropdown-button
+      class="text-link-on-light flex items-center focus:outline-none"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <span data-dropdown-selected class="text-[16px] font-medium">Markdown</span>
+      <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-2 w-[8px] h-[8px]" aria-hidden="true">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M3.35355 3.85355C3.15829 4.04882 2.84171 4.04882 2.64645 3.85355L0.146447 1.35355C-0.0488155 1.15829 -0.0488155 0.841708 0.146447 0.646446C0.341709 0.451184 0.658292 0.451184 0.853554 0.646446L3 2.79289L5.14645 0.646447C5.34171 0.451184 5.65829 0.451184 5.85355 0.646447C6.04882 0.841709 6.04882 1.15829 5.85355 1.35355L3.35355 3.85355Z" fill="currentColor"/>
+      </svg>
+    </button>
+
+    <!-- Dropdown Menu -->
+    <ul
+      data-dropdown-menu
+      class="absolute top-10 left-0 !py-[9px] !px-0 m-[9px] rounded-xl shadow-default bg-panel-bg min-w-[180px] z-[5] hidden"
+      role="listbox"
+      tabindex="-1"
+    >
+      <li
+        data-dropdown-option
+        data-label="Markdown"
+        class="p-[8px] hover:bg-fog cursor-pointer rounded-lg mx-[9px]"
+        role="option"
+      >
+        <a href="index.md" target="_blank" rel="noopener noreferrer" class="block text-link-on-light no-underline text-[16px] font-medium">
+          View markdown
+        </a>
+      </li>
+      <li
+        data-dropdown-option
+        data-label="Markdown"
+        class="p-[8px] hover:bg-fog cursor-pointer rounded-lg mx-[9px]"
+        role="option"
+      >
+        <button class="copy-markdown-link block text-link-on-light text-left w-full bg-transparent border-none cursor-pointer p-0 text-[16px] font-medium">
+          Copy markdown
+        </button>
+      </li>
+    </ul>
+  </div>
 </div>

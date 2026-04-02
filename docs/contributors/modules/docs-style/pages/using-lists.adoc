@@ -1,5 +1,6 @@
 = Using lists
 
+pass:[<!-- vale off -->]
 * To generate numbered steps (an ordered list) use the following syntax:
 +
 [source,adoc]
@@ -28,3 +29,4 @@
 * Capitalize the first word of each item in a list.
 
 * If the text in the bullet is a full sentence or completes the intro stem use a period at the end.
+pass:[<!-- vale on -->]

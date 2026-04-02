@@ -1,0 +1,19 @@
+= Reusable configuration training
+:page-description: Reusable configuration training
+
+Reusable configuration training is a one-hour session led by your field engineer. It teaches teams how to create configuration files that use YAML stored in centralized locations. The training covers centralized configuration management, orbs, and other reusable configuration features.
+
+== Benefits
+
+Teams who attend a reusable configuration training:
+
+* Create clear, unified configuration files.
+* Provide their development teams with a library of pre-written configuration.
+* Reduce the maintenance overhead of managing configuration files in multiple repositories.
+* Ease the onboarding process of new projects.
+
+== Intended audience
+
+This training is for teams that write and maintain configuration files across multiple repositories. Users responsible for their organization's CI configuration benefit the most.
+
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

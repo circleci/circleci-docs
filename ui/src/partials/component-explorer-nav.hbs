@@ -1,9 +1,9 @@
-<nav data-component-explorer-nav class="flex flex-col md:flex-row md:items-center justify-between text-terminal-black font-medium md:font-light {{#if class}}{{class}}{{/if}} overflow-x-auto whitespace-nowrap gap-3">
+<nav data-component-explorer-nav class="flex flex-col md:flex-row md:items-center justify-between text-terminal-black font-medium md:font-normal {{#if class}}{{class}}{{/if}} overflow-x-auto whitespace-nowrap gap-3">
 
   <ul class="flex flex-col md:flex-row md:space-x-8">
     {{#each options.navList}}
       <li class="flex items-center mr-2">
-        <a href="{{{relativize ./url}}}" class="inline-block px-2 py-2 md:py-3 {{#if (eq ./name @root.page.component.name)}} text-accent-green md:text-inherit border-l-2 md:border-l-0 md:border-b-2 border-accent-green font-medium {{/if}} ">
+        <a href="{{{relativize ./url}}}" class="inline-block px-2 py-2 md:py-3 {{#if (eq ./name @root.page.component.name)}} text-accent-green md:text-inherit border-l-2 md:border-l-0 md:border-b-2 border-accent-green font-semibold {{/if}} ">
           {{{./label}}}
         </a>
       </li>

@@ -2,11 +2,13 @@
 :page-noindex: true
 :experimental:
 
+pass:[<!-- vale off -->]
+
 [#styling-text]
 == Styling text
 
 * Use **bold** for GUI menu options and button text. For example:
-** Select **Organization Settings** from the sidebar
+** Select **Org** from the sidebar
 ** Select **VCS** in the **Project Settings** window
 ** Select **Projects** from the sidebar and click **Set Up Project** for the project you want to follow
 
@@ -94,3 +96,42 @@ This is a longer admonition with an ordered list:
 . Step 2
 . Step 3
 ****
+
+== Using tabs
+
+Use tabs for showing different options:
+
+[source,adoc]
+----
+[tabs]
+====
+Tab A::
++
+--
+Content for Tab A
+--
+Tab B::
++
+--
+Content for Tab B
+--
+====
+----
+
+Looks like:
+
+[tabs]
+====
+Tab A::
++
+--
+Content for Tab A
+--
+Tab B::
++
+--
+Content for Tab B
+--
+====
+
+pass:[<!-- vale on -->]

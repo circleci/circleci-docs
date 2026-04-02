@@ -3,9 +3,7 @@
 :page-description: MFA Overview
 :experimental:
 
-NOTE:  MFA is currently optional. Starting December 1, 2025 MFA will be required if you log in to CircleCI with email and password.
-
-Multi-factor authentication (MFA) for CircleCI is available if you sign in to your CircleCI account using email and password. If you use a social login method to access your CircleCI account (such as GitHub or Bitbucket), you can use your login provider's MFA offering.
+Multi-factor authentication (MFA) for CircleCI is now required if you sign in to your CircleCI account using email and password. If you use a social login method to access your CircleCI account (such as GitHub or Bitbucket), you can use your login provider's MFA offering.
 
 [#introduction]
 == Introduction

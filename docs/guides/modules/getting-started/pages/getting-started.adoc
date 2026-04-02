@@ -1,6 +1,8 @@
 = Quickstart guide
 :page-platform: Cloud
 :page-description: A quickstart guide for adding a project to CircleCI and exploring some features
+:page-show-readtime: true
+:experimental:
 
 This quickstart provides a guided tour through setting up a project, collaborating, and tools to iterate on and debug your build configuration. The following sections cover the following:
 
@@ -161,7 +163,7 @@ Expand any step to view the build output. You can search, share or download the 
 image:guides:ROOT:getting-started-guide-exp/invite.png[float=right]
 [%hardbreaks]
 *Invite teammates*
-Invite teammates to collaborate on your projects. Navigate to *Organization Settings > People* to generate invites and get further instructions. Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
+Invite teammates to collaborate on your projects. Navigate to menu:Org[People] to generate invites and get further instructions. Collaborators can view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
 
 == 3. Debug and iterate
 
@@ -180,7 +182,7 @@ To access a job's build environment for troubleshooting, rerun the job with SSH 
 image:guides:ROOT:getting-started-guide-exp/validate-config.png[float=right]
 [%hardbreaks]
 *VS Code extension*
-Using the xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code extention], validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.
+Using the xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code extension], validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.
 
 {empty} +
 

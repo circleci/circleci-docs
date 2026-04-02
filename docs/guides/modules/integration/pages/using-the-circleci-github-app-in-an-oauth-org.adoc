@@ -25,6 +25,8 @@ Compared to the GitHub OAuth app, the GitHub App offers increased control over t
 
 TIP: The majority of new CircleCI work triggering functionality will be made available through the GitHub App integration. We recommend installing the CircleCI GitHub App to ensure access to all new features.
 
+[.table-scroll]
+--
 [options="header",cols="1,1,1,1"]
 |===
 |Organization type identified by URL
@@ -47,6 +49,7 @@ TIP: The majority of new CircleCI work triggering functionality will be made ava
 |Not available
 |-
 |===
+--
 
 == Project types
 Projects are the same for all integration types.
@@ -56,6 +59,8 @@ When both GitHub integrations are installed in the same organization, different 
 
 TIP: All GitHub pipeline types can be managed through menu:Project settings[Project setup].
 
+[.table-scroll]
+--
 [options="header",cols="1,2,2"]
 |===
 |
@@ -93,6 +98,7 @@ _Used to trigger pipelines on push events from GitHub_
 _Used to trigger pipelines on a schedule (nightly builds for example)_
 
 * Zero, one or many can be created per pipeline.
+* Uses proprietary "timetable" interface (Repeats, Start time, Repeats per hour, ...)
 
 *API / Manual* +
 OAuth pipelines can be triggered via API and manually through the CircleCI web app.
@@ -114,14 +120,18 @@ _Used to trigger pipelines from any external system that can send HTTP requests_
 _Used to trigger pipelines on a schedule (nightly builds for example)_
 
 * Zero, one or many can be created per pipeline.
+* Uses cron syntax
 
 *API / Manual* +
 GitHub App pipelines can be triggered via API and manually through the CircleCI web app.
 |===
+--
 
 === Summary of trigger availability by pipeline type
 The following table summarizes the trigger availability by pipeline type.
 
+[.table-scroll]
+--
 [options="header",cols="1,1,1,1,1,1"]
 |===
 |Pipeline type
@@ -145,6 +155,7 @@ The following table summarizes the trigger availability by pipeline type.
 ^|Zero, one, many
 ^|[.circle-green]#*Yes*#
 |===
+--
 
 
 
@@ -156,7 +167,7 @@ Organizations with `/github/` in their URL can leverage both GitHub integration 
 
 Installing the CircleCI GitHub App is a one-time action that enables all new features across the entire organization. Only organization admins can take this action.
 
-. Navigate to menu:Organization Settings[VCS Connections].
+. Navigate to menu:Org[VCS Connections].
 . Select btn:[Install GitHub App].
 . Select repositories to grant access.
 . Create new GitHub App pipelines alongside existing OAuth pipelines. This can be achieved in the following ways:
@@ -206,7 +217,7 @@ Instead, if you want to stop building through the OAuth integration, duplicate t
 
 === Why can't I see GitHub App options?
 
-Ensure the GitHub App is installed via menu:Organization Settings[VCS Connections]. Then select btn:[Add pipeline] on the menu:Project Settings[Project setup] page to create a new GitHub App pipeline.
+Ensure the GitHub App is installed via menu:Org[VCS Connections]. Then select btn:[Add pipeline] on the menu:Project Settings[Project setup] page to create a new GitHub App pipeline.
 
 === How do I prevent duplicate builds?
 

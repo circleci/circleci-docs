@@ -1,10 +1,20 @@
 site:
-  title: CircleCI Documentation
+  title: CircleCI Docs
   url: https://circleci.com/docs
-  robots: allow
+  robots: |
+    User-agent: *
+    Allow: /
+
+    Sitemap: https://circleci.com/docs/sitemap.xml
+
+    # llms.txt - Structured documentation for AI/LLM consumption
+    # See https://circleci.com/docs/llms.txt for machine-readable documentation
   keys:
     cookiebot: a28b71f3-4d2e-4eac-93bc-34929948dd7d
     google_analytics: 'GTM-W9HDVK'
+runtime:
+  log:
+    format: pretty
 content:
   sources:
   - url: .
@@ -15,6 +25,8 @@ content:
     start_path: docs/reference
   - url: .
     start_path: docs/orbs
+  - url: .
+    start_path: docs/server-admin-4.9
   - url: .
     start_path: docs/server-admin-4.8
   - url: .
@@ -30,6 +42,8 @@ content:
   - url: .
     start_path: docs/server-admin-4.2
   - url: .
+    start_path: docs/services
+  - url: .
     start_path: docs/contributors
 ui:
   bundle:
@@ -41,6 +55,7 @@ output:
   - provider: fs
 asciidoc:
   attributes:
+    source-highlighter: shiki
     serverversion4: 4.0.6
     serverversion41: 4.1.10
     serverversion42: 4.2.7
@@ -48,10 +63,11 @@ asciidoc:
     serverversion44: 4.4.7
     serverversion45: 4.5.5
     serverversion46: 4.6.6
-    serverversion47: 4.7.11
-    serverversion48: 4.8.4
-    serverversion: 3.4.8
+    serverversion47: 4.7.15
+    serverversion48: 4.8.8
+    serverversion49: 4.9.1
     terraformversion: 0.15.4
+    dockerversion: v28
     kubectlversion: 1.19
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
@@ -59,12 +75,66 @@ asciidoc:
     page-toclevels: 6
     idprefix: ""
     idseparator: "-"
+    # Smarter Testing testsuite subcommand attributes.
+    testsuite-version: 1.0.29638-d34fb36
+    testsuite-sha-darwin-arm64: 118c19fb77725c629d18de099b1d37a6c7d1a7695397f8e8732cf30e18d91f1b
+    testsuite-sha-darwin-amd64: c62d62879862785bf812a56c94cd95b3f3a6979d30971e2ed8ae679ddea01182
+    testsuite-sha-linux-amd64: 2e367d0afb8d5f8e1606dbfed2ec9e5bf60989a08501616abdda94bbcc9618ef
+    testsuite-sha-linux-arm: d749c9236bdbe0bf1ecc43040c06eebccec5ce493e884910b90a8e6f7489973c
+    testsuite-sha-linux-arm64: d3fcc1d3b6286ae27f61dce4cec1c81131805b86dd39f1ee2ac722da4fcbe65d
+    testsuite-sha-windows-amd64: e906027399899856088cb3b00c7b9eec0268fd643984bc50123d01637a8dd994
   extensions:
   - '@asciidoctor/tabs'
+  - ./extensions/theme-icon-extension.js
 urls:
   latest_version_segment: latest
   latest_version_segment_strategy: redirect:to
   html_extension_style: indexify
 antora:
   extensions:
-  - ./extensions/unlisted-pages-extension.js
+  - require: 'antora-shiki-extension'
+    theme: dracula
+    languages:
+      - asciidoc
+      - bash
+      - c
+      - clojure
+      - diff
+      - docker
+      - go
+      - groovy
+      - hcl
+      - java
+      - javascript
+      - json
+      - kotlin
+      - make
+      - markdown
+      - powershell
+      - python
+      - ruby
+      - rust
+      - shellscript
+      - shellsession
+      - sql
+      - typescript
+      - xml
+      - yaml
+      - rst
+  - require: ./extensions/unlisted-pages-extension.js
+  - require: '@sntke/antora-mermaid-extension'
+    mermaid_initialize_options:
+      start_on_load: true
+      theme: base
+      security_level: loose
+      theme_variables:
+        primary_color: '#E3F5E5'
+        background: '#E3F5E5'
+        line_color: '#B4B8C6'
+        primary_border_color: '#008542'
+        primary_text_color: '#00381A'
+  - require: ./extensions/detect-unused-media-extension.js
+    excludepatterns:
+      - '*-dark.svg'
+      - 'icons/*.svg'
+  - require: ./extensions/llms-txt-generator-extension.js
