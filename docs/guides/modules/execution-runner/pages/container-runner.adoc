@@ -8,7 +8,7 @@ This document is a comprehensive guide to operating and configuring jobs with th
 [#running-your-first-job]
 == Running your first job with container runner
 
-Follow the instructions outlined on the xref:container-runner-installation.adoc[Container runner installation] page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
+Follow the instructions outlined on the xref:container-runner-installation.adoc[Container Runner Installation] page to download the container runner and run your first job. You can also use the link:https://app.circleci.com/[CircleCI web app] to get started with self-hosted runners.
 
 [#sample-configuration-container-agent]
 == Container runner sample configuration
@@ -90,7 +90,7 @@ agent:
 [#customizable-service-containers]
 === Customizable service containers
 
-By default, xref:execution-managed:using-docker.adoc#using-multiple-docker-images[service (or secondary) containers] inherit the same link:https://kubernetes.io/docs/tasks/configure-pod-container/[container configuration] as defined by the primary container. However, this behavior can be overridden using customizable service containers. Using the available overrides allows fine-tuned control over a service's resource usage on a per-image basis.
+By default, xref:execution-managed:using-docker.adoc#using-multiple-docker-images[Service Containers] inherit the same link:https://kubernetes.io/docs/tasks/configure-pod-container/[container configuration] as defined by the primary container. However, this behavior can be overridden using customizable service containers. Using the available overrides allows fine-tuned control over a service's resource usage on a per-image basis.
 
 [#customizable-service-containers-example]
 ==== Example
@@ -416,7 +416,7 @@ Container runner needs the following Kubernetes permissions:
 ** Get
 ** List
 
-If xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun job with SSH] is enabled, the following permissions are also required:
+If xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun Job With SSH] is enabled, the following permissions are also required:
 
 * link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
 ** Get
@@ -436,7 +436,7 @@ It is assumed that the container runner is running in a Kubernetes namespace wit
 [#garbage-collection]
 == Garbage collection
 
-Each container runner has a garbage collector. The garbage collector ensures the removal of any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` that are left dangling in the cluster. By default, the garbage collector removes all jobs older than five hours and five minutes. This time limit can be shortened or lengthened via the `agent.gc.threshold` parameter. However, if you do shorten the garbage collection  frequency, you must also shorten the maximum task run time via the `agent.maxRunTime` parameter to be a value smaller than the new garbage collection frequency.
+Each container runner has a garbage collector. The garbage collector ensures the removal of any pods and secrets with the label `app.kubernetes.io/managed-by=circleci-container-agent` that are left dangling in the cluster. By default, the garbage collector removes all jobs older than five hours and five minutes. This time limit can be shortened or lengthened via the `agent.gc.threshold` parameter. If you shorten the garbage collection frequency, you must also shorten the maximum task run time via the `agent.maxRunTime` parameter. Set `agent.maxRunTime` to a value smaller than the new garbage collection frequency.
 
 CAUTION: If you change the garbage collection threshold but do **not** keep the max task run time lower than the garbage collection frequency, a running task pod could be removed by the garbage collector.
 
@@ -497,7 +497,7 @@ The first resource class has a node selector to ensure it is scheduled to nodes 
 [#cost-and-availability]
 == Cost and availability
 
-Container runner jobs are eligible for xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Runner Network Egress]. These charges are in line with the existing pricing model for self-hosted runners, and will happen with close adherence to the rest of CircleCI’s network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
+Container runner jobs are eligible for xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Runner Network Egress]. These charges follow the existing pricing model for self-hosted runners. They align with CircleCI's network and storage billing roll-out. If there are questions, reach out to your point of contact at CircleCI.
 
 The same plan-based offerings for self-hosted runner link:https://circleci.com/pricing/#comparison-table[concurrency limits] apply to the container runner. Final pricing and plan availability will be announced closer to the general availability of the offering.
 
@@ -508,13 +508,13 @@ link:https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-in-
 
 To build container images in a container-agent job, a user may use:
 
-* A third-party tool like Sysbox or kaniko
-* Machine runner installed with Docker installed on it
-* CircleCI-hosted compute
+* A third-party tool like Sysbox or kaniko.
+* Machine runner with Docker installed.
+* CircleCI-hosted compute.
 
 Note: Third-party tools should be used at your own discretion.
 
-While jobs that run with container-agent cannot use CircleCI's xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] feature, it is possible to use a third-party tool to build Docker images in your container-agent job without using the Docker daemon.
+Jobs that run with container-agent cannot use CircleCI's xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] feature. You can use a third-party tool to build Docker images in your container-agent job without the Docker daemon.
 
 You can see an example link:https://discuss.circleci.com/t/setup-remote-docker-on-container-runner/45629/11?u=sebastian-lerner[on our community forum] of how some users have successfully used kaniko to build a container image.
 
@@ -545,10 +545,11 @@ docker:
 [#limitations]
 == Limitations
 
-* Any known xref:runner-overview.adoc#limitations[limitation] for the existing self-hosted runner will continue to be a limitation of container agent.
+* Any known xref:runner-overview.adoc#limitations[Limitation] for the existing self-hosted runner will continue to be a limitation of container agent.
 * Only Kubernetes container environments are supported at this time.
 * xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] as a command is not supported with container runner.  See <<building-container-images>>.
 * `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:reference:ROOT:configuration-reference.adoc#oidc[Configuration Reference].
+* Container agent runs as PID 1 in the primary task container and currently does not support custom init processes.
 
 [#faqs]
 == FAQs
