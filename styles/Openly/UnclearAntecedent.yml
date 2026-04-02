@@ -1,6 +1,6 @@
 ---
 extends: existence
-message: "'%s' is an unclear antecedent"
+message: "'%s' is an unclear antecedent. Clarify what 'this' refers to."
 ignorecase: true
 level: error
 raw:
