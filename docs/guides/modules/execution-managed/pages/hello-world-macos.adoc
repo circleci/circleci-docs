@@ -56,7 +56,7 @@ version: 2.1
 jobs: # a basic unit of work in a run
   test: # your job name
     macos:
-      xcode: 26.3.0 # indicate your selected version of Xcode
+      xcode: 26.4.0 # indicate your selected version of Xcode
     resource_class: m4pro.medium # specify a resource class (e.g. m4pro.medium or m4pro.large)
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
@@ -66,7 +66,7 @@ jobs: # a basic unit of work in a run
 
   build:
     macos:
-      xcode: 26.3.0 # indicate your selected version of Xcode
+      xcode: 26.4.0 # indicate your selected version of Xcode
     resource_class: m4pro.medium # specify a resource class (e.g. m4pro.medium or m4pro.large)
     steps:
       - checkout
