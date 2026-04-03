@@ -31,7 +31,7 @@ By the end of this guide you will have done the following:
 * Configured your `.circleci/test-suites.yml` to discover and run your tests.
 * Run your tests using the `testsuite` command locally.
 
-== 1. Install the testsuite plugin locally
+== 1. Install the `testsuite` plugin locally
 
 The `testsuite` plugin can be used both locally and in CI. Get started locally to validate your commands work immediately, rather than waiting for them to run in CI.
 
