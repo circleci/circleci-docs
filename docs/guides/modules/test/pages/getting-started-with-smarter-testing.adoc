@@ -145,7 +145,7 @@ A _test atom_ is a single runnable unit that exercises one or more tests, depend
 
 * `go test pkg/foo` is a package level test atom
 * `jest index.test.ts` is a file level test atom
-* `pytest test_file.py::TestClass::test_method`is a test case level test atom
+* `pytest test_file.py::TestClass::test_method` is a test case level test atom
 
 The `discover` command finds all test atoms for a given test suite. The command's output is split on both newlines and whitespace to extract individual test atoms. The `discover` command should not execute any tests.
 
