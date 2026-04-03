@@ -79,7 +79,7 @@ version: 2.1
 jobs:
   hello-job:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
     resource_class: m4pro.medium
     steps:
       - checkout # check out the code in the project directory
