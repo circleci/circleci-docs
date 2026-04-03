@@ -1,0 +1,60 @@
+= GitHub Enterprise Server integration
+:page-platform: Cloud
+:page-description: Connect your self-hosted GitHub Enterprise Server instance to CircleCI Cloud.
+:experimental:
+:icons: font
+
+NOTE: The GitHub Enterprise Server integration is currently in **Preview**. Access is provided on request and involves hands-on support from the CircleCI team. Some features are not yet available during Preview. To learn more or request access, contact your account team.
+
+[#overview]
+== Overview
+
+CircleCI Cloud supports GitHub Enterprise Server as an add-on VCS integration. If your organization uses a self-hosted GitHub instance, you can connect it to CircleCI Cloud. You get the same CI/CD experience available to GitHub Cloud users, without needing to run CircleCI Server.
+
+The GitHub Enterprise Server integration is designed to provide the same functionality as CircleCI's existing xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[GitHub App Integration] for GitHub Cloud. This includes pipeline triggering, project setup, commit status reporting, and all supported trigger event types.
+
+[#supported-functionality]
+== Supported functionality
+
+The following functionality is available during Preview:
+
+* **Pipeline triggering from GitHub events** including push, pull request, and all other xref:orchestrate:github-trigger-event-options.adoc[Supported Trigger Event Options].
+* **Custom webhook triggers**.
+* **API triggers**.
+* **Scheduled pipelines**.
+* **Commit status reporting** to your GitHub Enterprise Server pull requests.
+* **Pipeline definitions and triggers** viewable and manageable in the Project Setup page.
+* **HTTPS code checkout** (same as GitHub App for GitHub Cloud).
+* **Custom configuration file paths** and cross-repo pipeline/trigger setups.
+
+[#not-yet-available]
+== Not yet available in Preview
+
+The following features are not yet available for the GitHub Enterprise Server integration. These are planned for future releases:
+
+* Self-serve onboarding (currently, onboarding is assisted by the CircleCI team).
+* GitHub Checks.
+* Chunk.
+* Rollback functionality.
+
+[#organization-type]
+== Organization type
+
+The GitHub Enterprise Server integration is available to both `circleci` and `github` type organizations. We recommend using a `circleci` type organization. For details on how organization types work, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+
+[#connectivity]
+== Connectivity
+
+Your GitHub Enterprise Server instance must be accessible over HTTPS for CircleCI Cloud to connect to it.
+
+If your instance is behind a firewall or not accessible over the public internet, contact your account team to discuss private connectivity options.
+
+[#pipeline-values]
+== Pipeline values
+
+GitHub Enterprise Server pipelines use `github_server` as the value for `pipeline.integration_source`. All other pipeline values available to GitHub App pipelines are also available to GitHub Enterprise Server pipelines. For a full reference, see xref:reference:ROOT:variables.adoc[Project Values and Variables].
+
+[#getting-started]
+== Getting started
+
+During Preview, access to the GitHub Enterprise Server integration is provided on request. Contact your account team to learn more or get set up.

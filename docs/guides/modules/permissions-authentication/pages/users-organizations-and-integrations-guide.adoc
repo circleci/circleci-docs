@@ -61,7 +61,7 @@ A CircleCI _organization_ can be one of three types:
 | Organization type | VCS integrations available | Project create process | Notes
 
 | `circleci`
-a| * GitHub App (add-on).
+a| * GitHub App (add-on, available for GitHub Cloud and GitHub Enterprise Server).
 * GitLab (add-on).
 * GitLab self-managed (add-on).
 * Bitbucket Data Center (add-on).
@@ -69,7 +69,7 @@ a| * GitHub App (add-on).
 | This organization type is created separately to any VCS connection between CircleCI and your code repositories.
 
 | `github`
-a| * GitHub App (add-on)
+a| * GitHub App (add-on, available for GitHub Cloud and GitHub Enterprise Server)
 * GitHub OAuth app (built-in).
 | Imported from VCS automatically.
 | Created automatically when you authorize CircleCI to access your GitHub account via OAuth app. This happens automatically when you sign in to CircleCI with your GitHub social login.
@@ -81,6 +81,8 @@ a| * Bitbucket OAuth (built-in)
 
 |===
 --
+
+NOTE: The GitHub App integration for GitHub Enterprise Server is currently in Preview. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
 
 The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features available for each organization and integration type.
 
@@ -208,7 +210,7 @@ The following sections describe your options for each integration type.
 GitHub App::
 +
 --
-*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization.
+*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization. The GitHub App integration supports both GitHub Cloud and GitHub Enterprise Server. GitHub Enterprise Server support is currently in Preview. See the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page for more information.
 
 *View*: To view a GitHub App integration, navigate to menu:Org[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
 
@@ -502,7 +504,7 @@ The way your code is checked out when a pipeline triggers depends on the pipelin
 GitHub App::
 +
 --
-CircleCI uses HTTPS-based authentication to check out your code. No SSH keys or deploy keys are required.
+CircleCI uses HTTPS-based authentication to check out your code for both GitHub Cloud and GitHub Enterprise Server. No SSH keys or deploy keys are required.
 --
 GitHub OAuth::
 +

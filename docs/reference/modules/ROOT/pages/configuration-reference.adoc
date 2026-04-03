@@ -1816,7 +1816,7 @@ workflows:
 [#checkout]
 === *`checkout`*
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. For GitHub OAuth, GitLab, and Bitbucket pipelines, `checkout` configures git to check out over SSH. For GitHub App pipelines (GitHub Cloud and GitHub Enterprise Server), `checkout` uses HTTPS.
 
 [.table-scroll]
 --

@@ -82,6 +82,8 @@ NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub org
 ** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
 . Select btn:[Save].
 
+The GitHub App pipeline model also applies to GitHub Enterprise Server. GitHub Enterprise Server pipelines support the same configuration source and checkout source flexibility as GitHub App pipelines for GitHub Cloud, including custom config file paths and cross-repo setups. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
+
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covering in the xref:set-up-triggers.adoc[Set up triggers] page.
 --
 GitLab::
