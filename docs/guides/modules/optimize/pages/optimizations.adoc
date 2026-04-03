@@ -119,7 +119,7 @@ macOS::
 jobs:
   build:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
     resource_class: m4pro.medium
     steps:
     #  ...  other config
