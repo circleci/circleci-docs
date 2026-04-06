@@ -503,6 +503,9 @@ For the full list of IP addresses and information on credit usage, see the xref:
 . In the CircleCI web app, select **Organization Settings** from the sidebar.
 . Select **Chunk** from the left menu.
 . Scroll to the bottom of the page and enable the **Enable IP Ranges in Chunk Tasks** toggle.
++
+.Enable IP Ranges in Chunk Tasks toggle
+image::guides:ROOT:chunk/chunk-ip-ranges-toggle.png[Enable IP Ranges in Chunk Tasks toggle]
 
 Once enabled, the setup stage (stage 1) will automatically route traffic through CircleCI's known IP addresses.
 
