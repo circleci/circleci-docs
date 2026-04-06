@@ -477,6 +477,86 @@ Merge the `cci-agent-setup.yml` file to your default branch when the results are
 
 To improve Chunk's ability to run tests and produce fixes aligned with your stylistic and architectural preferences, you can include instructions in a markdown file. Name the file `claude.md` or `agents.md` and place it in the root of your repository. Chunk picks this up automatically.
 
+[#ip-ranges]
+== Enable IP ranges in Chunk tasks
+
+By default, outbound traffic from Chunk tasks does not use a fixed set of IP addresses.
+If your infrastructure uses IP-based access controls, for example a GitHub IP allowlist, you can route Chunk task traffic through CircleCI's known static IP addresses.
+
+NOTE: **Performance or Scale plan required.** IP ranges are not available on the Free plan.
+See the xref:guides:plans-pricing:plan-overview.adoc[CircleCI Plans Overview] page for more information.
+
+[#how-ip-ranges-work-with-chunk]
+=== How IP ranges work with Chunk
+
+Chunk tasks run in two stages:
+
+. **Setup stage** -- CircleCI runs a pipeline that checks out your code, sets up artifacts and the environment, and runs `merge-and-continue`.
+. **Chunk task stage** -- CircleCI runs the merged config from `cci-agent-setup.yml` and the agent config.
+
+When IP ranges are enabled, both stages route outbound traffic through CircleCI's known static IP addresses.
+For the full list of IP addresses and information on credit usage, see the xref:guides:security:ip-ranges.adoc[IP Ranges] page.
+
+[#enable-ip-ranges-chunk-org-setting]
+=== 1. Enable the org-level setting
+
+. In the CircleCI web app, select **Organization Settings** from the sidebar.
+. Select **Chunk** from the left menu.
+. Scroll to the bottom of the page and enable the **Enable IP Ranges in Chunk Tasks** toggle.
+
+Once enabled, the setup stage (stage 1) will automatically route traffic through CircleCI's known IP addresses.
+
+[#configure-cci-agent-setup-yml]
+=== 2. Configure the `cci-agent-setup.yml` file
+
+To enable IP ranges for the Chunk task stage (stage 2), you must add a `.circleci/cci-agent-setup.yml` file to your repository's default branch.
+
+The file must meet the following two requirements:
+
+* Set `circleci_ip_ranges: true` at the job level.
+* Use a Docker executor. The default Chunk executor is `machine` (Ubuntu), which is not compatible with IP ranges.
+
+The following is a minimal working example:
+
+.`.circleci/cci-agent-setup.yml` with IP ranges enabled
+[source,yaml]
+----
+jobs:
+  cci-agent-setup:
+    circleci_ip_ranges: true # must be set at job level
+    docker:
+      - image: cimg/base:current # Docker executor is required for IP ranges
+    steps:
+      - checkout
+----
+
+CAUTION: **Docker executor is required.** The default Chunk executor is `machine` (Ubuntu), which does not support IP ranges.
+You must use a Docker executor in your `cci-agent-setup.yml` file.
+
+[#verify-ip-ranges-chunk]
+=== 3. Verify the setup
+
+To confirm that IP ranges are active, add a step to your `cci-agent-setup.yml` that prints the public IP address of the job.
+The printed address should match one of the addresses in the xref:guides:security:ip-ranges.adoc#list-of-ip-address-ranges[List of IP Address Ranges].
+
+.`.circleci/cci-agent-setup.yml` with IP verification step
+[source,yaml]
+----
+jobs:
+  cci-agent-setup:
+    circleci_ip_ranges: true
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          name: Verify IP ranges
+          command: curl -s ifconfig.me && echo # prints the public IP of the job
+      - checkout
+----
+
+NOTE: **Startup time.** Enabling IP ranges may slightly increase job startup time.
+This is because traffic is routed through CircleCI's static IP infrastructure.
+
 == Troubleshooting
 
 === I cannot see the Chunk option in the sidebar
