@@ -97,7 +97,7 @@ Once you meet the prerequisites, set up Chunk as follows:
 +
 .Set up Chunk for your organization
 image::guides:ROOT:chunk/set-up-chunk.png[Chunk setup modal]
-. You should see a checkmark to confirm the GitHub App is installed for your organization. If not, select **Install CircleCI GitHub App** to install it now.
+. A checkmark confirms the GitHub App is installed for your organization. If the checkmark is missing, select **Install CircleCI GitHub App** to install it now.
 . Select your AI model provider from the **Select your AI Model** dropdown. The available options are:
 * **CircleCI (Powered by Anthropic)**: No API key required. This is the default option.
 * **Anthropic**: Requires your own Anthropic API key.
@@ -483,7 +483,7 @@ To improve Chunk's ability to run tests and produce fixes aligned with your styl
 By default, outbound traffic from Chunk tasks does not use a fixed set of IP addresses.
 If your infrastructure uses IP-based access controls, for example a GitHub IP allowlist, you can route Chunk task traffic through CircleCI's known static IP addresses.
 
-NOTE: **Performance or Scale plan required.** IP ranges are not available on the Free plan.
+NOTE: **Performance or Scale Plan required.** IP ranges are not available on the Free Plan.
 See the xref:guides:plans-pricing:plan-overview.adoc[CircleCI Plans Overview] page for more information.
 
 [#how-ip-ranges-work-with-chunk]
@@ -510,7 +510,7 @@ image::guides:ROOT:chunk/chunk-ip-ranges-toggle.png[Enable IP Ranges in Chunk Ta
 Once enabled, the setup stage (stage 1) will automatically route traffic through CircleCI's known IP addresses.
 
 [#configure-cci-agent-setup-yml]
-=== 2. Configure the `cci-agent-setup.yml` file
+=== 2. Configure the cci-agent-setup.yml file
 
 To enable IP ranges for the Chunk task stage (stage 2), you must add a `.circleci/cci-agent-setup.yml` file to your repository's default branch.
 
@@ -540,7 +540,7 @@ You must use a Docker executor in your `cci-agent-setup.yml` file.
 === 3. Verify the setup
 
 To confirm that IP ranges are active, add a step to your `cci-agent-setup.yml` that prints the public IP address of the job.
-The printed address should match one of the addresses in the xref:guides:security:ip-ranges.adoc#list-of-ip-address-ranges[List of IP Address Ranges].
+The printed address must match one of the addresses in the xref:guides:security:ip-ranges.adoc#list-of-ip-address-ranges[List of IP Address Ranges].
 
 .`.circleci/cci-agent-setup.yml` with IP verification step
 [source,yaml]
@@ -599,7 +599,7 @@ Your AWS bearer token is invalid or has expired. Regenerate the token in AWS IAM
 
 === Amazon Bedrock access denied or 403 on model invocation
 
-You have not requested access to the Anthropic Claude model in the Bedrock console, or access has not yet been granted. Navigate to the AWS Management Console, go to **Amazon Bedrock** > **Model access**, and confirm the model is enabled.
+You have not requested access to the Anthropic Claude model in the Bedrock console, or access is still pending. Navigate to the AWS Management Console, go to **Amazon Bedrock** > **Model access**, and confirm the model is enabled.
 
 === Amazon Bedrock model not found or 404
 
