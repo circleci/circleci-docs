@@ -8,7 +8,7 @@ These values provide core identifiers for the pipeline itself and the project it
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -116,7 +116,7 @@ Values prefixed with `+pipeline.git.*+` describe the git state of the code Circl
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -260,7 +260,7 @@ Values prefixed with `+pipeline.config.*+` describe where the CircleCI configura
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -319,7 +319,7 @@ All `+pipeline.trigger_parameters.circleci.*+` and `+pipeline.trigger_parameters
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -848,7 +848,7 @@ Values prefixed with `+pipeline.deploy.*+` are only available for deployment pip
 [.datatable.no-sort-col-3,cols="2,2,1,5,1,1", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
