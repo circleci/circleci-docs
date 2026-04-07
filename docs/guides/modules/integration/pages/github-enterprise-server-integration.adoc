@@ -52,7 +52,7 @@ If your instance is behind a firewall or not accessible over the public internet
 [#pipeline-values]
 == Pipeline values
 
-GitHub Enterprise Server pipelines use `github_server` as the value for `pipeline.integration_source`. All other pipeline values available to GitHub App pipelines are also available to GitHub Enterprise Server pipelines. For a full reference, see xref:reference:ROOT:variables.adoc[Project Values and Variables].
+GitHub App Server pipelines use `github_server` as the value for `pipeline.integration_source`. All other pipeline values available to GitHub App pipelines are also available to GitHub App Server pipelines. For a full reference, see xref:reference:ROOT:variables.adoc[Project Values and Variables].
 
 [#getting-started]
 == Getting started

@@ -6,7 +6,7 @@
 CircleCI supports various pipeline types which map directly to the version control system (VCS) in which your code is stored, and the method used by CircleCI to get your code. Pipeline types are indicated with badges in the CircleCI web app, and the options are as follows:
 
 * GitHub App
-* GitHub Enterprise Server
+* GitHub App Server
 * GitHub OAuth
 * GitHub OAuth (Server)
 * GitLab
@@ -74,7 +74,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 --
 [.datatable,cols="10*", options="header"]
 |===
-| Feature | Category | GitHub App | GitHub Enterprise Server (Preview) | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center
+| Feature | Category | GitHub App | GitHub App Server (Preview) | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center
 
 | *The method used to check out your code when using the `checkout` step in your configuration file. See more in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference].*
 | Code checkout
