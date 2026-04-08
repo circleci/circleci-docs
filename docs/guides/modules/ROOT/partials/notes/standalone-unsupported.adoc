@@ -1,12 +1,10 @@
 ****
-This feature **is supported** for orgs that use OAuth authentication.
-
-Check your Organization slug at menu:Organization settings[Overview]. OAuth authenticated orgs are structured as follows:
+This feature **is supported** for GitHub and Bitbucket organizations. Check your Organization slug at menu:Organization settings[Overview]. Supported organization slugs are:
 
 * `github/<your-org-name>` or `gh/<your-org-name>`
 * `bitbucket/<your-org-name>` or `bb/<your-org-name>`
 
-This feature is **not supported** if your organization slug is in the following format:
+This feature is **not supported** for CircleCI organizations with an organization slug in the following format:
 
 * `circleci/<UID>`.
 

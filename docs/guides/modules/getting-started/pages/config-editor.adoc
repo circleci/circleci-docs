@@ -1,11 +1,11 @@
 = Using the CircleCI in-app configuration editor
 :page-platform: Cloud, Server v4+
-:page-description: Docs page on In-app configuration editor use and features
+:page-description: Learn how to use the CircleCI in-app configuration editor to modify your configuration files.
 :experimental:
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
-With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+With the CircleCI configuration editor, you can modify your configuration files within the CircleCI web app.
 
 image::guides:ROOT:config-editor-main.png[Configuration Editor]
 
@@ -19,13 +19,15 @@ The benefits of using the CircleCI configuration editor include:
 [#getting-started-with-the-circleci-configuration-editor]
 == Getting started with the CircleCI configuration editor
 
-In the link:https://app.circleci.com/[CircleCI web UI], select a pipeline in the *Dashboard's All Pipelines* view.
+To access the CircleCI configuration editor:
 
-To access the CircleCI configuration editor, select your desired branch from the *All Branches* drop-down menu near the top of the screen. Once you select a branch, the btn:[Edit Config] button will become enabled, and you can access the configuration editor.
+. In the link:https://app.circleci.com/[CircleCI web app], select *Pipelines* from the sidebar
+. In the *Pipelines* view, select the ellipsis menu icon:more[Ellipsis menu icon] on any pipeline row
+. Select *Configuration File* from the menu
+
+The configuration editor will open. If you did not select a specific branch before opening the editor, you can use the branch picker at the top of the editor window to select the branch you want to edit.
 
 image::guides:ROOT:config-editor-all-branches.png[Configuration Editor Access]
-
-In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
 
 [#auto-completion]
 == Auto-completion
@@ -35,17 +37,29 @@ The CircleCI configuration editor provides auto-complete suggestions as you type
 image::guides:ROOT:config-editor-auto-complete.png[Auto-completion]
 
 [#configuration-menu]
-== Configuration tab options
+== Configuration editor features
 
-At the bottom of the editor, you will see tabs for *Linter*, *Docs*, and the name of your workflow (in this case *Sample*).
+[#source-and-compiled-config-views]
+=== Source and compiled config views
 
-The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
+At the top of the editor window, you can switch between viewing your source configuration and the compiled configuration. The compiled view shows your configuration with all version 2.1 elements compiled to version 2.0, including expanded orbs and resolved reusable configuration elements.
 
-The docs tab will link out to some helpful documentation relating to configuration files.
+You can also toggle between YAML and JSON format using the format switcher.
 
-The workflow tab will show you all the jobs in the workflow, and link out to the individual job's *Job* view in the web UI.
+[#linter-and-validation]
+=== Linter and validation
+
+At the bottom of the editor, the *Linter* section validates your configuration after every change and displays any errors or issues. A green or red bar is visible across the bottom of the page to indicate whether your configuration is valid (green) or has errors (red).
+
+[#workflow-visualization]
+=== Workflow visualization
+
+At the bottom of the editor, you will find a tab displaying your workflows. This tab shows all the jobs in your workflow and provides links to the individual job pages in the web app, where you can view job execution details.
 
 image::guides:ROOT:config-editor-docs.png[Suggested Docs]
+
+[#configuration-tooltips]
+=== Configuration tooltips
 
 When hovering over a key-value pair in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
 
