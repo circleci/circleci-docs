@@ -7,9 +7,9 @@ CircleCI supports the two most recent versions of CircleCI Server at any time, w
 
 New versions are released approximately every six months, though the exact timing may vary.
 
-Each version is supported for up to 12 months, but a new release takes precedence: when a new version ships, the older of the two currently supported versions reaches end of life, regardless of how long it has been available.
+CircleCI supports each version for up to 12 months. A new release takes precedence: when a new version ships, the older of the two currently supported versions reaches end of life.
 
-For example: if 4.8 and 4.9 are the two supported versions and 4.10 is released ten months after 4.8, then 4.8 reaches end of life when 4.10 is released. The new supported pair becomes 4.9 and 4.10.
+For example: if 4.8 and 4.9 are the supported pair and 4.10 ships ten months after 4.8, then 4.8 immediately reaches end of life. The new supported pair becomes 4.9 and 4.10.
 
 We use semantic versioning to identify releases and communicate the impact on your installation. Patch releases are published monthly as needed for bugs and security fixes.
 
