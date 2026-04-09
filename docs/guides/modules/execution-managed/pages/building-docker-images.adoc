@@ -169,15 +169,19 @@ For *x86* and *Arm* architecture, the following tags are available:
 * `edge`
 * `previous`
 
-The above tags resolve to the latest supported Docker version, which is Docker 24.
+The above tags resolve to Docker 28.
 
-To use Docker 23, the previous Docker release, use the following tag:
+To use Docker 29, use the following tag:
 
-* `docker23`
+* `docker29`
 
-To use Docker 24, patch updates will occur until Docker 25 is released, use the following tag:
+To use Docker 27, use the following tag:
 
-* `docker24`
+* `docker27`
+
+To use Docker 24, use the following tag:
+
+* `docker26`
 
 To use the current deprecated version, Docker 20, use `20.10.24`
 

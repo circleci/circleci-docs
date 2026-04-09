@@ -55,23 +55,24 @@ Current Deprecation:
 | Version
 | Support
 
-| Docker 25
-| `docker25` tag is maintained for Docker 25 support
-
 | Docker 26
 | `docker26` tag is maintained for Docker 26 support
 
 | Docker 27
-| Set to `default` and `edge` tags. `docker27` tag is maintained for Docker 27 as default tag as well.
+| `docker27` tag is maintained for Docker 27 support
+
+| Docker 28
+| Set to `default` and `edge` tags. `docker28` tag is maintained for Docker 28 as default tag as well.
+
+| Docker 29
+| `docker29` tag is maintained for Docker 29 support
 |===
 --
 
-Example: When Docker 28 is released:
+Example: When Docker 29 is made default:
 
-We have delayed upgrading to Docker 28 because early releases introduced networking changes that caused instability in some environments.
-Rather than risk disruption for our customers, we chose to stay on the stable and supported 27.x line while monitoring the maturity of 28.
-With the release of 28.3.3, the previous issues appear to have been resolved.
-We are now preparing to validate and roll out the upgrade to ensure a smooth transition.
+When we previously attempted to set Docker 29 as the default, we found that some convenience images (cimgs) experienced compatibility issues the Docker 29 daemon. Jobs using these images with Docker 29 would fail.
+Docker 28 passes all our tests including with those cimgs, so it is the safe choice for an interim default. We are working on updated cimgs that will be compatible with Docker 29, and once those are available we will move the default to Docker 29
 
 [.table-scroll]
 --
@@ -80,17 +81,17 @@ We are now preparing to validate and roll out the upgrade to ensure a smooth tra
 | Version
 | Support
 
-| Docker 25
+| Docker 26
 | Deprecated and removed
 
-| Docker 26
-| `docker26` tag kept until next cycle
-
 | Docker 27
-| Moved from `default` and `edge` tags to `docker27` tag only
+| `docker27` tag kept until next cycle
 
 | Docker 28
-| Set to `default` and `edge` tags. With `docker28` tag for pinning Docker version.
+| Moved from `default` and `edge` tags to `docker28` tag only
+
+| Docker 29
+| Set to `default` and `edge` tags. With `docker29` tag for pinning Docker version.
 |===
 --
 
