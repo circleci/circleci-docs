@@ -5,11 +5,9 @@
 
 CircleCI supports the two most recent versions of CircleCI Server at any time, whether the release is a minor or major version bump. For example, if 4.9 is the current release and 5.0 ships next, then 5.0 and 4.9 become the supported pair.
 
-CircleCI targets a six-month release cadence, though the exact timing varies.
+CircleCI targets a six-month release cadence, though the exact timing varies. When a version ships, the older of the two currently supported versions reaches end of life.
 
-CircleCI supports each version for up to 12 months. A release takes precedence: when a version ships, the older of the two currently supported versions reaches end of life.
-
-For example: if 4.8 and 4.9 are the supported pair and 4.10 ships ten months after 4.8, then 4.8 reaches end of life. The supported pair becomes 4.9 and 4.10.
+For example: if 4.8 and 4.9 are the supported pair and 4.10 ships, then 4.8 reaches end of life. The supported pair becomes 4.9 and 4.10.
 
 We use semantic versioning to identify releases and communicate the impact on your installation. We publish patch releases each month as needed for bugs and security fixes.
 
