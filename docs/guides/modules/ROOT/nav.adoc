@@ -268,6 +268,7 @@
 *** xref:integration:outbound-webhooks.adoc[Outbound webhooks]
 *** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound webhooks reference]
 *** xref:integration:notifications.adoc[Notifications]
+*** xref:integration:slack-app-notifications.adoc[Slack integration]
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS integration overview]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
