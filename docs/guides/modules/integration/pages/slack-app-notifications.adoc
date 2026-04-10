@@ -16,10 +16,10 @@ This guide explains how to:
 
 To install the CircleCI Slack app, you need:
 
-* CircleCI Organization Admin permissions. For OAuth-based VCS integrations (GitHub or Bitbucket), you must also be an admin in that GitHub or Bitbucket organization.
+* Organization Admin permissions in your circleci organization. For OAuth-based VCS integrations (GitHub or Bitbucket), you must also be an admin in that GitHub or bitbucket organization.
 * Slack Workspace Admin permissions to authorize the app in your workspace.
 
-After the app is installed, any CircleCI organization member with write permissions to a project can:
+After the app is installed, any circleci organization member with write permissions to a project can:
 
 * Link that project to a Slack channel.
 * Update or remove the channel configuration.
@@ -111,5 +111,5 @@ NOTE: This setting is enabled by default when a channel is first configured. Cha
 
 == Next steps
 
-* xref:guides:integration:notifications.adoc[Notifications overview]
-* xref:guides:integration:outbound-webhooks.adoc[Using webhooks]
+* xref:guides:integration:notifications.adoc[Notifications Overview]
+* xref:guides:integration:outbound-webhooks.adoc[Using Webhooks]
