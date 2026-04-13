@@ -138,9 +138,9 @@ For `circleci` type organizations, projects are created directly in CircleCI via
 --
 ====
 
-=== Organization integration
+=== VCS integration
 
-The organization integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
+The VCS integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
 
 [.table-scroll]
 --
@@ -199,7 +199,7 @@ The following links take you to the sections you need to get set up with CircleC
 * xref:orchestrate:pipelines.adoc[Set up a Pipeline].
 * xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
 
-== Manage organization integrations
+== Manage VCS integrations
 
 The following sections describe your options for each integration type.
 
