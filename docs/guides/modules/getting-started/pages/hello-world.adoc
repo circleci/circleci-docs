@@ -17,7 +17,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 [#echo-hello-world-cloud]
 == Echo hello world
 
-These examples adds a job called `hello-job` that prints `hello world` to the console.
+These examples add a job called `hello-job` that prints `hello world` to the console.
 
 [tabs]
 ====
@@ -47,7 +47,7 @@ workflows:
 Linux VM::
 +
 --
-The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.
+The job `hello-job` spins up a Linux virtual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.
 
 [source,yaml]
 ----
