@@ -35,7 +35,7 @@ The Slack app is installed once at the organization level and is then available 
 
 . In the CircleCI web app, open **Organization Settings** > **Slack Integration**.
 . Select **Install CircleCI Slack app**. You are redirected to Slack to authorize the app.
-. In Slack, select the workspace you want to connect and click **Allow**.
+. In Slack, select the workspace you want to connect and select **Allow**.
 +
 [NOTE]
 ====
@@ -111,5 +111,5 @@ NOTE: This setting is enabled by default when a channel is first configured. Cha
 
 == Next steps
 
-* xref:guides:integration:notifications.adoc[Notifications overview]
-* xref:guides:integration:outbound-webhooks.adoc[Using webhooks]
+* xref:guides:integration:notifications.adoc[Notifications Overview]
+* xref:guides:integration:outbound-webhooks.adoc[Using Webhooks]
