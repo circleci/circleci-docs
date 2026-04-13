@@ -36,7 +36,7 @@ TIP: If you want to collaborate on an existing org you can create an account and
 If you want to primarily build **Bitbucket Cloud** projects, sign up with your Bitbucket account. After you connect your Bitbucket account you can go ahead and start setting up projects, following the xref:create-project.adoc#set-up-a-project[Create a project in CircleCI] page. Your org in CircleCI maps directly to your Bitbucket workspace.
 
 . Select btn:[Sign Up With Bitbucket].
-. Log in to your Bitbucket Cloud account
+. Log in to your Bitbucket Cloud account.
 . Enter your email address and create a password.
 
 . Choose between creating an organization or joining your teammates in an existing org:
@@ -88,6 +88,6 @@ By signing up, you are agreeing to our link:https://circleci.com/terms-of-servic
 
 - Read the xref:invite-your-team.adoc[Join your teammates] page for steps on adding team members to your CircleCI org.
 - Go to the xref:hello-world.adoc[Hello World] page to learn the basics of setting up a CircleCI configuration file.
-- Read the xref:about-circleci:concepts.adoc[Concepts] page for an overview of foundational CircleCI concepts such as pipelines, executors.
+- Read the xref:about-circleci:concepts.adoc[Concepts] page for an overview of foundational CircleCI concepts such as pipelines and executors.
 - Refer to the full xref:reference:ROOT:configuration-reference.adoc[CircleCI configuration reference] for creating a `.circleci/config.yml` file, which determines your execution environment and automates your tests.
  
