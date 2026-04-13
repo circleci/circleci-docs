@@ -14,7 +14,7 @@ The benefits of using the CircleCI configuration editor include:
 * Automatic validation and error checking
 * Auto-complete suggestions
 * Configuration tooltips specific to CircleCI configuration syntax
-* Education of CircleCI concepts
+* Education on CircleCI concepts
 
 [#getting-started-with-the-circleci-configuration-editor]
 == Getting started with the CircleCI configuration editor
@@ -25,7 +25,7 @@ To access the CircleCI configuration editor, select your desired branch from the
 
 image::guides:ROOT:config-editor-all-branches.png[Configuration Editor Access]
 
-In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
+In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three-dots menu (meatball menu). Clicking this menu will allow you to open the configuration file.
 
 [#auto-completion]
 == Auto-completion
@@ -39,7 +39,7 @@ image::guides:ROOT:config-editor-auto-complete.png[Auto-completion]
 
 At the bottom of the editor, you will see tabs for *Linter*, *Docs*, and the name of your workflow (in this case *Sample*).
 
-The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
+The built-in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
 
 The docs tab will link out to some helpful documentation relating to configuration files.
 
