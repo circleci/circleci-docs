@@ -353,14 +353,15 @@ d| [.nowrap]#GitHub App# +
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| `pipeline.trigger_source`
+| `pipeline.trigger_source` +
+icon:warning[Warning icon] *Deprecated* - support ends on 2026-08-01.
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The source that triggers the pipeline. Possible values: `webhook`, `api`, `scheduled_pipeline`.
+| Use `pipeline.trigger.type` instead.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
