@@ -30,44 +30,15 @@ All pages require standard attributes (`:page-platform:`, `:page-description:`, 
 - **Bad**: When you click the **Go** button your project should complete.
 
 ### Accessibility
-- Write for anyone and everyone
+- Write for a general audience
 - Assume technical competence but explain concepts clearly and simply
 - Complex concepts should be accessible to non-technical readers
-
-### Word Choices to Avoid
-- **Do not** make assumptions about complexity: Avoid "easy", "easily", "simply"
-- **Avoid** using "please"
-- **Avoid** ambiguous language like "should" and "should be". If something is optional, say so. If not, make it clear it's essential
-- Use "using" instead of "via" (easier for non-English speakers)
-- **Avoid contractions**: Don't use "don't", "you're", "can't", etc. (harder for non-native English speakers)
-- **Avoid time-sensitive language** in main prose: "new", "soon", "in preview". Use admonitions/banners instead
-
-### Inclusive Language
-Replace problematic terms with inclusive alternatives:
-
-| Avoid | Use Instead |
-|-------|-------------|
-| Blacklist / Whitelist | Blocklist / Safelist |
-| Master / Slave | Leader / Follower or Primary / Replica |
-| Insane / Sane / Crazy | Unreasonable / Reasonable |
-| Killer | Very successful |
-| Guys | Folks, y'all, people, humans, teammates |
 
 ### CircleCI-Specific Terminology
 - The CircleCI web interface is the "web app"
 - Use "CI/CD" to describe what we do
 - Pipelines are **triggered**, not "run"
 - Feature names are rarely capitalized (exceptions: Insights)
-
-## Abbreviations
-- **Do not use** "e.g." or "i.e."
-- **Use instead**: "for example" and "that is"
-
-## Punctuation
-- **Avoid semicolons and dashes** (en or em) to split sentences. Use new sentences or commas and periods
-- **Do not use ampersands (&)** as a substitute for "and" (reserved for logical AND operator)
-- **No period at end** if sentence ends with URL, code sample, or command (prevents copy-paste errors)
-- **Use the Oxford comma**: "Please bring me a pencil, eraser, and notebook."
 
 ## Numbers
 - **Write out** numbers one through nine
@@ -85,7 +56,6 @@ Replace problematic terms with inclusive alternatives:
   - Log in to your account …
   - Read the setup guide …
   - Set up your account …
-- Use "open source" (not "opensource" or "open-source")
 
 ## AsciiDoc Formatting
 
@@ -136,14 +106,9 @@ Click the icon:settings[Settings icon] to access project settings.
 - Write headings in **logical sequence** that tells a story
 - **Do not skip heading levels** (e.g., h2 to h4)
 - Include at least an intro paragraph before subheadings
-- **Use sentence case**: Only capitalize first word and proper nouns
-  - **Good**: CircleCI docs style guide
-  - **Bad**: CircleCI Docs Style Guide
 - **Start headings with verbs** where possible:
   - **Good**: "Grooming cats"
   - **Bad**: "Cats"
-- **No punctuation at end of headings** (no periods or colons)
-- **Do not use inline literal text** (backticks) in headings
 - When referencing headings in prose, use full heading with no quotes and title case
 
 ### Cross-References
@@ -157,10 +122,7 @@ xref:guides:integration:github-integration.adoc#user-keys-and-deploy-keys[User K
 - **Use title case for link text** (Vale enforced):
   - **Good**: `xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers]`
   - **Bad**: `xref:guides:orchestrate:schedule-triggers.adoc[schedule triggers]`
-  - Capitalize all major words in the link text (nouns, verbs, adjectives, adverbs)
-  - Keep articles (a, an, the), conjunctions (and, but, or), and short prepositions (in, on, at) lowercase unless they're the first word
-
-**IMPORTANT: Always verify xrefs before using them**
+- Always verify xrefs before using them. Check that the page you are referencing exists in the location you are using to create the resource ID
 
 Before adding any xref to a document, you must verify the target file exists and the path is correct:
 
@@ -458,8 +420,6 @@ Content for Tab B
 
 ## AsciiDoc Validation Rules
 - Close all attribute blocks properly
-- Use matching callouts in code blocks
-- Ensure sequential numbered callouts
 - Use valid admonition block syntax
 - Use valid code block syntax
 - Use valid table block syntax
@@ -472,28 +432,6 @@ The CircleCI docs use automated linting to enforce style rules and catch common 
 ### Vale Linter
 
 Vale is a syntax-aware linter that enforces style rules defined in the `styles/` directory. It checks for grammar, style violations, and CircleCI-specific conventions.
-
-**Key automated rules:**
-
-- **Character limits**:
-  - `:page-description:` must be 70-160 characters
-  - Sentences should not exceed 25 words (readability)
-  - Headings have length limits
-
-- **Capitalization**:
-  - Link text in xrefs must use title case (e.g., "Schedule Triggers" not "schedule triggers")
-  - Headings must use sentence case (only first word and proper nouns capitalized)
-
-- **Forbidden/problematic terms**:
-  - Avoid "master/slave" → use "primary/replica" or "leader/follower"
-  - Avoid "blacklist/whitelist" → use "blocklist/safelist"
-  - Avoid "easy", "easily", "simply", "just" (assumes complexity)
-  - No contractions (don't, can't, won't, etc.)
-
-- **Style violations**:
-  - More than 3 commas in a sentence
-  - Passive voice constructions
-  - Missing periods on full sentences in lists
 
 **Running Vale locally:**
 
@@ -512,16 +450,6 @@ git diff --cached --name-only | grep '.adoc$' | xargs vale
 - Main config: `.vale.ini`
 - Style rules: `styles/` directory
 - Custom CircleCI rules: `styles/CircleCI/`
-
-**Common Vale errors and fixes:**
-
-| Error | Fix |
-|-------|-----|
-| `CircleCI.TitleCase` | Use title case in link text: "Schedule Triggers" |
-| `CircleCI.SentenceLength` | Break long sentences (25+ words) into shorter ones |
-| `CircleCI.Description` | Shorten `:page-description:` to 160 characters or less |
-| `Vale.Spelling` | Check spelling or add to custom dictionary |
-| `CircleCI.Contractions` | Expand contractions: "don't" → "do not" |
 
 ### AsciiDoc Validation
 
@@ -565,8 +493,8 @@ The CircleCI docs use Antora's component-based architecture:
 - **Reference**: Technical reference material (config, API, CLI)
 - **Orbs**: Orb-related documentation
 - **Server Admin**: Self-hosted server docs (versioned by release)
-- **Services**: Service-specific documentation
-- **Contributors**: Meta-documentation for contributors
+- **Services**: Field engineering service docs
+- **Contributors**: Documentation for contributors including the style guide and page templates
 
 ### Component Organization
 
@@ -686,54 +614,6 @@ head -10 docs/guides/modules/toolkit/pages/existing-page.adoc
 **"Unresolved page ID" errors**: Check xref coordinates and file exists
 
 **Navigation not updating**: Restart dev server after nav.adoc changes
-
-## Answering User Questions About CircleCI
-
-This file focuses on **how to write documentation**. When users ask questions **about using CircleCI** (not about writing docs), you should:
-
-### Reference the llms.txt File
-The `llms.txt` file (available at https://circleci.com/docs/llms.txt) contains:
-- CircleCI product overview and features
-- Documentation structure and navigation
-- Content areas (Guides, Reference, Orbs, Server Admin)
-- Common URL patterns and documentation locations
-
-### Two Different Use Cases
-
-**Use Case 1: User asks about CircleCI features**
-- Example: "How do I cache dependencies in CircleCI?"
-- Example: "What executors does CircleCI support?"
-- Example: "How do I set up GitHub integration?"
-- **Action**: Reference `llms.txt` to understand documentation structure, then locate and explain relevant content
-- **Voice**: Use the same active, direct, accessible voice described in this guide
-
-**Use Case 2: User asks to create/edit documentation**
-- Example: "Add a new guide about Docker caching"
-- Example: "Update the environment variables page"
-- Example: "Fix the formatting in this AsciiDoc file"
-- **Action**: Use this file (`claude.md`) for writing style, voice, and formatting rules
-- Also reference `llms.txt` to understand where content fits in the overall structure
-
-### Explaining CircleCI Concepts
-When answering questions about CircleCI features:
-- Apply the same voice and style rules from this guide (active voice, direct language, no jargon)
-- Break down complex concepts into simple explanations
-- Provide practical, actionable guidance
-- Link to relevant documentation sections using the URL patterns in `llms.txt`
-- Use correct CircleCI terminology (pipelines are "triggered", web interface is "web app", etc.)
-
-### Example Scenarios
-
-**Question**: "How do I cache npm dependencies?"
-- Reference `llms.txt` to find caching is in the Guides > Optimize section
-- Explain the concept using active voice and clear language
-- Point to: https://circleci.com/docs/guides/optimize/caching-strategies/
-- Provide practical code examples if helpful
-
-**Question**: "Add a troubleshooting section about cache misses"
-- Use `claude.md` (this file) for writing style
-- Use `llms.txt` to determine this fits in Reference > General > Troubleshooting
-- Follow all formatting, voice, and style guidelines when creating content
 
 ## When Editing Existing Documentation
 - Follow these guidelines for new content
