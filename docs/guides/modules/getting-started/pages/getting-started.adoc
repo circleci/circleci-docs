@@ -4,6 +4,9 @@
 :page-show-readtime: true
 :experimental:
 
+// TODO [BETA]: Include GHES in the quickstart flow.
+// Determine whether GHES needs its own section or a note within the GitHub App section.
+
 This quickstart provides a guided tour through setting up a project, collaborating, and tools to iterate on and debug your build configuration. The following sections cover the following:
 
 * Create a project, connecting some existing code to CircleCI.

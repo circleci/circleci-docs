@@ -82,7 +82,11 @@ a| * Bitbucket OAuth (built-in)
 |===
 --
 
-NOTE: The GitHub App integration for GitHub Enterprise Server is currently in Preview. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
+// TODO [BETA]: Replace this note with a reference to the self-serve setup flow
+// on the GitHub Enterprise Server integration overview page.
+// Also add:
+// - A note about GHES authorization state being visible in User Settings (if shipped)
+// - A note or screenshot showing GHES installation details in VCS Connections (if shipped)
 
 The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features available for each organization and integration type.
 
@@ -210,7 +214,7 @@ The following sections describe your options for each integration type.
 GitHub App::
 +
 --
-*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization. The GitHub App integration supports both GitHub Cloud and GitHub Enterprise Server. GitHub Enterprise Server support is currently in Preview. See the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page for more information.
+*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization. The GitHub App integration supports both GitHub Cloud and GitHub Enterprise Server. See the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page for more information.
 
 *View*: To view a GitHub App integration, navigate to menu:Org[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
 

@@ -1,46 +1,55 @@
 = GitHub Enterprise Server integration
-:page-platform: Cloud
 :page-description: Connect your self-hosted GitHub Enterprise Server instance to CircleCI Cloud.
 :experimental:
 :icons: font
 
-NOTE: The GitHub Enterprise Server integration is currently in **Preview**. Access is provided on request and involves hands-on support from the CircleCI team. Some features are not yet available during Preview. To learn more or request access, contact your account team.
+NOTE: The GitHub Enterprise Server integration is currently in **Beta**. Some features may not yet be available. For the latest information, check this page or contact your account team.
 
 [#overview]
 == Overview
 
 CircleCI Cloud supports GitHub Enterprise Server as an add-on VCS integration. If your organization uses a self-hosted GitHub instance, you can connect it to CircleCI Cloud. You get the same CI/CD experience available to GitHub Cloud users, without needing to run CircleCI Server.
 
-The GitHub Enterprise Server integration is designed to provide the same functionality as CircleCI's existing xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[GitHub App Integration] for GitHub Cloud. This includes pipeline triggering, project setup, commit status reporting, and all supported trigger event types.
+The integration uses the same GitHub App model as CircleCI's existing integration with GitHub Cloud. This includes pipeline triggering, project setup, commit status reporting, and all supported trigger event types.
 
 [#supported-functionality]
 == Supported functionality
 
-The following functionality is available during Preview:
-
-* **Pipeline triggering from GitHub events** including push, pull request, and all other xref:orchestrate:github-trigger-event-options.adoc[Supported Trigger Event Options].
-* **Custom webhook triggers**.
-* **API triggers**.
-* **Scheduled pipelines**.
-* **Commit status reporting** to your GitHub Enterprise Server pull requests.
-* **Pipeline definitions and triggers** viewable and manageable in the Project Setup page.
-* **HTTPS code checkout** (same as GitHub App for GitHub Cloud).
-* **Custom configuration file paths** and cross-repo pipeline/trigger setups.
+* Pipeline triggering from GitHub events including push, pull request, and all other link:/docs/guides/orchestrate/github-trigger-event-options/[supported trigger event options].
+* Custom webhook triggers.
+* API triggers.
+* Scheduled pipelines.
+* Commit status reporting to your GitHub Enterprise Server pull requests.
+* Pipeline definitions and triggers manageable via the CircleCI web app and API.
+* HTTPS code checkout.
+* Custom configuration file paths and cross-repo pipeline/trigger setups.
+* Chunk, CircleCI's AI CI/CD agent.
+* Rollback functionality.
 
 [#not-yet-available]
-== Not yet available in Preview
+== Not yet available
 
-The following features are not yet available for the GitHub Enterprise Server integration. These are planned for future releases:
+The following features are not yet available for the GitHub Enterprise Server integration:
 
-* Self-serve onboarding (currently, onboarding is assisted by the CircleCI team).
-* GitHub Checks.
-* Chunk.
-* Rollback functionality.
+* GitHub Checks
+
+[#prerequisites]
+== Prerequisites
+
+Before starting, make sure you have:
+
+* A GitHub Enterprise Server instance accessible over HTTPS.
+* A CircleCI organization already set up (you do not need to create a new one).
+* Admin access to at least one GitHub organization within your GitHub Enterprise Server instance.
+
+// TODO [BETA]: Add supported GHES version requirements here once finalized.
+// At Beta, the plan is to document a minimum supported version range.
+// At GA, this will be enforced programmatically via the /api/v3/meta endpoint.
 
 [#organization-type]
 == Organization type
 
-The GitHub Enterprise Server integration is available to both `circleci` and `github` type organizations. We recommend using a `circleci` type organization. For details on how organization types work, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+The GitHub Enterprise Server integration is available to both `circleci` and `github` type organizations. We recommend using a `circleci` type organization. For details on how organization types work, see the link:/docs/guides/permissions-authentication/users-organizations-and-integrations-guide/[Users, organizations, and integrations guide].
 
 [#connectivity]
 == Connectivity
@@ -49,12 +58,75 @@ Your GitHub Enterprise Server instance must be accessible over HTTPS for CircleC
 
 If your instance is behind a firewall or not accessible over the public internet, contact your account team to discuss private connectivity options.
 
+[#set-up-the-integration]
+== Step 1: Register and install the CircleCI GitHub App
+
+CircleCI connects to your GitHub Enterprise Server instance through a GitHub App. Setting up this connection involves registering a CircleCI App on your instance and then installing it on one or more GitHub organizations.
+
+// TODO [BETA]: The self-serve onboarding UI is currently mocked in Figma but not yet implemented.
+// When the UI is built, document the step-by-step flow here including:
+// - Where to find the setup option in the CircleCI web app (likely Organization Settings or VCS Connections)
+// - Entering the GitHub Enterprise Server URL
+// - Entering the host organization slug (or leaving blank if App already registered)
+// - Confirming the App name on GitHub
+// - Selecting which GitHub organization to install the App on
+// - Add screenshots from the final UI
+//
+// Key concepts to include (these are stable and known):
+// - Registration is a one-time step per GHES instance. One CircleCI App serves the whole instance.
+// - The "host organization" owns and manages the App. Choose a stable org that won't be deleted.
+// - IMPORTANT: Deleting the host organization removes the CircleCI App after 90 days,
+//   causing all organizations using the App to lose pipeline definitions and triggers.
+// - Each GitHub org that wants to use CircleCI installs the same App separately.
+// - Each GitHub org can only be connected to a single CircleCI org, and vice versa.
+// - If "Configure" appears next to an org name, the App is already installed there.
+//
+// After documenting the setup flow, link to the App configuration page:
+// "The App is configured with all required permissions and event subscriptions. For details, see the
+// xref:integration:github-app-configuration-for-github-enterprise-server.adoc[GitHub App configuration
+// for GitHub Enterprise Server] page."
+
+[#create-a-project]
+== Step 2: Create a project
+
+// TODO [BETA]: Document the project creation flow for GHES.
+// If the flow is the same as for GitHub App Cloud projects (which is likely), write the steps:
+// 1. In the CircleCI web app, go to Projects > Create Project
+// 2. Select "Build, test, and deploy your software application"
+// 3. Assign a project name and select Next
+// 4. Follow the pipeline and trigger setup wizard
+//
+// If there is a GHES-specific path in the wizard, document the difference.
+// Alternatively, if the flow is identical to the standard flow, you could link to the
+// Create a Project guide and add a note: "These steps apply to projects using GitHub Cloud
+// or GitHub Enterprise Server."
+//
+// Also note that projects can be created via the Create Project API endpoint.
+
+[#set-up-pipelines-and-triggers]
+== Step 3: Set up pipelines and triggers
+
+GitHub App Server pipelines support the same configuration source and checkout source flexibility as GitHub App pipelines for GitHub Cloud, including custom config file paths and cross-repo setups.
+
+You can create and manage pipeline definitions and triggers through the CircleCI web app at **Project Settings > Project Setup**.
+
+For details on trigger event options, see the link:/docs/guides/orchestrate/github-trigger-event-options/[GitHub trigger event options] page.
+
+// TODO [BETA]: If there are any GHES-specific setup steps that differ from the standard
+// GitHub App pipeline setup flow, document them here. Otherwise this section may just
+// link to the existing pipeline overview and setup page.
+
+[#managing-installations]
+== Managing installations
+
+// TODO [BETA]: Document the UI for uninstalling and managing GHES installations once available.
+// Expected content:
+// - How to view GHES installation details in VCS Connections
+// - How to uninstall the CircleCI App from a GitHub organization
+// - What happens when you uninstall (pipeline definitions and triggers are removed)
+// - Link to the App configuration page for managing the App itself
+
 [#pipeline-values]
 == Pipeline values
 
-GitHub App Server pipelines use `github_server` as the value for `pipeline.integration_source`. All other pipeline values available to GitHub App pipelines are also available to GitHub App Server pipelines. For a full reference, see xref:reference:ROOT:variables.adoc[Project Values and Variables].
-
-[#getting-started]
-== Getting started
-
-During Preview, access to the GitHub Enterprise Server integration is provided on request. Contact your account team to learn more or get set up.
+GitHub App Server pipelines use `github_server` as the value for `pipeline.integration_source`. All other pipeline values available to GitHub App pipelines are also available to GitHub App Server pipelines. For a full reference, see link:/docs/variables/[Project values and variables].

@@ -74,7 +74,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 --
 [.datatable,cols="10*", options="header"]
 |===
-| Feature | Category | GitHub App | GitHub App Server (Preview) | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center
+| Feature | Category | GitHub App | GitHub App Server | GitHub OAuth | GitHub OAuth on Server | GitLab.com | GitLab self-managed | Bitbucket Cloud | Bitbucket Data Center
 
 | *The method used to check out your code when using the `checkout` step in your configuration file. See more in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference].*
 | Code checkout
@@ -299,7 +299,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | *Set up xref:deploy:set-up-rollbacks.adoc[Rollback Pipelines] to manually revert your application to a previous stable version directly from the CircleCI web app*
 | Deployment
 | [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -307,6 +307,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 
+// TODO [BETA]: Verify with D&R team whether Deploy Pipelines works for GHES. If yes, change to Yes.
 | *Set up xref:deploy:set-up-deploys.adoc[Deploy Pipelines] to automatically deploy your application to a target environment directly from the CircleCI web app*
 | Deployment
 | [.circle-green]#**Yes**#
@@ -343,7 +344,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | *Chunk, CircleCI's AI CI/CD agent. Learn more in the xref:toolkit:chunk-setup-and-overview.adoc[Chunk Setup Guide]*
 | Agentic support
 | [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**# with GitHub App installed
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#

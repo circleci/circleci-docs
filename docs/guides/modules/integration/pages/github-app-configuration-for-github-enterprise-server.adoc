@@ -1,0 +1,127 @@
+= GitHub App configuration for GitHub Enterprise Server
+:page-platform: Cloud, Server
+:page-description: Required permissions and event subscriptions for the CircleCI GitHub App on GitHub Enterprise Server, with steps to verify and update your configuration.
+:experimental:
+
+This page describes the expected GitHub App configuration for GitHub Enterprise Server instances and provides steps to verify and update your configuration.
+
+[#overview]
+== Overview
+
+When you first connect an organization in CircleCI to one on your GitHub Enterprise Server instance using the GitHub App integration, CircleCI creates a GitHub App on your instance. This App (named "CircleCI App" by default) includes all required permissions and event subscriptions. No manual configuration is needed. Other organizations on the same instance do not need their own App. They install the same CircleCI App, which is owned and managed by the organization where it was originally registered.
+
+After creation, the admins of the App's host organization and GitHub Enterprise Server instance admins fully own the App configuration. It is their responsibility to ensure that the App configuration is not modified unexpectedly, as changes affect all organizations the App is installed on. CircleCI has no way to identify or rectify issues stemming from unexpected changes to App configuration on your GitHub Enterprise Server instance.
+
+Occasionally, CircleCI may introduce new features that require additional permissions or event subscriptions. When this happens, admins will need to update the App configuration following the steps described on this page.
+
+[#verifying-your-app-configuration]
+== Verifying your App configuration
+
+You can check your App's current configuration by visiting the App settings page on your GitHub Enterprise Server instance:
+
+[source,text]
+----
+https://<your-ghe-instance>/organizations/<HOST_ORG_NAME>/settings/apps/circleci-app
+----
+
+Use the left sidebar to browse through the different sections of the App configuration.
+
+[#required-permissions-and-events]
+== Required permissions and events
+
+Under **Permissions & events** in your App settings, your CircleCI GitHub App must have the following permissions and event subscriptions. If any are missing, some CircleCI features will not work as expected.
+
+NOTE: These lists are updated as new CircleCI features are introduced that require additional permissions or events.
+
+[#repository-permissions]
+=== Repository permissions
+
+.Required repository permissions
+[.table-scroll]
+--
+[cols="1,1", options="header"]
+|===
+| Permission
+| Access level
+
+| Commit statuses
+| Read and write
+
+| Contents
+| Read and write
+
+| Issues
+| Read and write
+
+| Pull requests
+| Read and write
+|===
+--
+
+No additional permissions beyond those listed above are currently required.
+
+[#event-subscriptions]
+=== Event subscriptions
+
+* Delete
+* Issue comment
+* Meta
+* Pull request
+* Pull request review
+* Pull request review comment
+* Push
+
+No additional event subscriptions beyond those listed above are currently required.
+
+.Required event subscriptions on the GitHub App settings page
+image::guides:ROOT:ghes-app-event-subscriptions.png[GitHub App settings page showing the required event subscriptions with Delete, Issue comment, Meta, Pull request, Pull request review, Pull request review comment, and Push selected]
+
+[#updating-permissions-and-events]
+== Updating permissions and events
+
+If your App configuration does not match the requirements above, you will see one of the following warnings in CircleCI on your GitHub App Server card:
+
+* _"The CircleCI App on your GitHub Enterprise Server instance is missing required permissions or event subscriptions."_ See <<app-missing-permissions,The App is missing required permissions or event subscriptions>>.
+* _"Your organization has not yet accepted updated permissions for the CircleCI App."_ See <<org-not-accepted-permissions,Your organization has not accepted updated permissions>>.
+
+[#app-missing-permissions]
+=== The App is missing required permissions or event subscriptions
+
+If you see the warning: _"The CircleCI App on your GitHub Enterprise Server instance is missing required permissions or event subscriptions."_
+
+.Warning displayed when the App is missing required permissions or event subscriptions
+image::guides:ROOT:ghes-app-missing-permissions-warning.png[CircleCI GitHub App Server card showing a warning that the App is missing required permissions or event subscriptions with a See how to update link]
+
+This means the App settings themselves need to be updated. This must be performed by an admin of the organization that _owns_ the CircleCI App, or by a GitHub Enterprise Server instance admin.
+
+[#find-the-app-owner]
+==== Find the App owner
+
+From the CircleCI GitHub App Server card, select the **settings icon** to open the App installation configuration page. Then select the **App settings** link at the top of the page to access the App configuration page.
+
+NOTE: If the App is owned by a different organization than yours, you may not have access to this link. Contact an admin of that organization, or a GitHub Enterprise Server instance admin, to follow these steps.
+
+[#update-the-configuration]
+==== Update the configuration
+
+. On the App settings page, select **Permissions & events** from the left sidebar.
+. Update the repository permissions and event subscriptions to match the tables in the <<required-permissions-and-events>> section above.
+. Select **Save changes**.
+
+Once saved, every organization with the App installed will need to accept the new permissions. See the next section.
+
+[#org-not-accepted-permissions]
+=== Your organization has not accepted updated permissions
+
+If you see the warning: _"Your organization has not yet accepted updated permissions for the CircleCI App."_
+
+.Warning displayed when your organization needs to accept new permissions
+image::guides:ROOT:ghes-app-accept-permissions-warning.png[CircleCI GitHub App Server card showing a warning that your organization has not yet accepted updated permissions for the CircleCI App with a See how to accept link]
+
+This means the App settings have already been updated, but your organization still needs to approve the changes. This requires admin access to the organization on GitHub where the App is installed.
+
+. Navigate to your organization's App installation configuration page. You can get there by navigating to CircleCI > Organization Settings > VCS Connections, and selecting the **settings icon** on the GitHub App Server card.
+. Look for a notice about new permissions being requested.
+. Review and accept the new permissions.
+
+The updated permissions take effect for your organization immediately after acceptance.
