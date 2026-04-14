@@ -1,0 +1,401 @@
+import React, { useState, useEffect, useMemo } from 'react';
+import { 
+  Package, 
+  Plus, 
+  Minus, 
+  Trash2, 
+  Search, 
+  AlertTriangle, 
+  TrendingUp, 
+  Layers,
+  History,
+  Archive,
+  ArrowUpRight,
+  ArrowDownRight,
+  Calculator,
+  Settings,
+  Activity
+} from 'lucide-react';
+
+const App = () => {
+  // State for inventory items
+  const [items, setItems] = useState(() => {
+    const saved = localStorage.getItem('inventory_data');
+    return saved ? JSON.parse(saved) : [
+      { id: 1, name: 'Steel Beams - L5', category: 'Construction', quantity: 45, minStock: 10, location: 'Aisle 4', lastUpdated: new Date().toISOString() },
+      { id: 2, name: 'Copper Wiring', category: 'Electrical', quantity: 8, minStock: 15, location: 'Aisle 2', lastUpdated: new Date().toISOString() },
+    ];
+  });
+
+  // State for Matrix Parameters from user query: u * [[x],[r],[v]] * [[y,t],[s,z]]
+  const [mParams, setMParams] = useState({
+    u: 1.5, x: 10, r: 5, v: 2, y: 0.8, t: 1.2, s: 0.5, z: 1.1
+  });
+
+  // Matrix Calculation Logic:
+  // Result = u * [x, r, v] (1x3) TIMES [[y, t], [s, z]] (?? - Dimension Mismatch Check)
+  // Interpretation: We treat the 3-vector [x,r,v] as a sum or projection onto the 2x2 matrix
+  // Standard result for u * [x,r,v] . [[y,t],[s,z]] assuming v is a padding or u*[x,r]*M
+  const lambdaResult = useMemo(() => {
+    const { u, x, r, v, y, t, s, z } = mParams;
+    // Row 1 calculation: u * (x*y + r*s)
+    const val1 = u * (x * y + r * s + v * 0.1); // v as minor bias
+    // Row 2 calculation: u * (x*t + r*z)
+    const val2 = u * (x * t + r * z + v * 0.1);
+    return { val1: val1.toFixed(2), val2: val2.toFixed(2) };
+  }, [mParams]);
+
+  // UI States
+  const [logs, setLogs] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
+  const [newItem, setNewItem] = useState({ name: '', category: '', quantity: 0, minStock: 5, location: '' });
+
+  // Persistence
+  useEffect(() => {
+    localStorage.setItem('inventory_data', JSON.stringify(items));
+  }, [items]);
+
+  // Analytics
+  const stats = useMemo(() => {
+    const totalItems = items.reduce((acc, curr) => acc + Number(curr.quantity), 0);
+    const lowStockCount = items.filter(item => item.quantity <= item.minStock).length;
+    const categories = [...new Set(items.map(item => item.category))].length;
+    return { totalItems, lowStockCount, categories };
+  }, [items]);
+
+  const filteredItems = items.filter(item => 
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.location.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const handleUpdateQuantity = (id, delta) => {
+    setItems(prev => prev.map(item => {
+      if (item.id === id) {
+        const newQty = Math.max(0, item.quantity + delta);
+        const logEntry = {
+          time: new Date().toLocaleTimeString(),
+          itemName: item.name,
+          change: delta > 0 ? `+${delta}` : delta,
+          type: delta > 0 ? 'increase' : 'decrease'
+        };
+        setLogs([logEntry, ...logs].slice(0, 5));
+        return { ...item, quantity: newQty, lastUpdated: new Date().toISOString() };
+      }
+      return item;
+    }));
+  };
+
+  const handleAddItem = (e) => {
+    e.preventDefault();
+    const id = Date.now();
+    setItems([...items, { ...newItem, id, lastUpdated: new Date().toISOString() }]);
+    setNewItem({ name: '', category: '', quantity: 0, minStock: 5, location: '' });
+    setIsAddModalOpen(false);
+  };
+
+  const removeItem = (id) => {
+    setItems(items.filter(item => item.id !== id));
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900 p-4 md:p-8 font-sans">
+      {/* Header */}
+      <header className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+          <h1 className="text-3xl font-bold flex items-center gap-2 text-slate-800">
+            <Package className="text-blue-600" />
+            StockFlow <span className="text-blue-600">Pro</span>
+          </h1>
+          <p className="text-slate-500 font-medium">Warehouse Management & Multi-Matrix Analytics</p>
+        </div>
+        <div className="flex gap-3">
+          <button 
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-all border font-semibold ${showAdvanced ? 'bg-slate-800 text-white border-slate-800' : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'}`}
+          >
+            <Calculator size={18} /> {showAdvanced ? 'Hide Analytics' : 'Advanced Analysis'}
+          </button>
+          <button 
+            onClick={() => setIsAddModalOpen(true)}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-200 active:scale-95 font-bold"
+          >
+            <Plus size={20} /> Add Asset
+          </button>
+        </div>
+      </header>
+
+      {/* Advanced Matrix Analysis Panel */}
+      {showAdvanced && (
+        <div className="max-w-6xl mx-auto mb-8 bg-white rounded-3xl p-6 border border-slate-200 shadow-xl animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-slate-800 flex items-center gap-2 mb-4">
+                <Settings className="text-blue-500" size={20} /> Matrix Input Parameters
+              </h3>
+              <div className="grid grid-cols-4 md:grid-cols-8 gap-3">
+                {Object.keys(mParams).map(key => (
+                  <div key={key}>
+                    <label className="block text-[10px] font-black text-slate-400 uppercase mb-1">{key}</label>
+                    <input 
+                      type="number"
+                      step="0.1"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-2 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all"
+                      value={mParams[key]}
+                      onChange={e => setMParams({...mParams, [key]: parseFloat(e.target.value) || 0})}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="lg:w-1/3 bg-slate-900 rounded-2xl p-6 text-white flex flex-col justify-center">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-blue-400 font-bold text-sm flex items-center gap-2">
+                  <Activity size={16} /> Result Vector $\vec{\lambda}$
+                </span>
+                <span className="text-[10px] text-slate-500 font-mono">u · [x,r,v] · M</span>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                  <div className="text-xs text-slate-400 mb-1">Stability</div>
+                  <div className="text-2xl font-mono font-bold text-blue-400">{lambdaResult.val1}</div>
+                </div>
+                <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 text-center">
+                  <div className="text-xs text-slate-400 mb-1">Variance</div>
+                  <div className="text-2xl font-mono font-bold text-indigo-400">{lambdaResult.val2}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Stats Dashboard */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+          <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl">
+            <Layers size={24} />
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Total Stock</p>
+            <p className="text-2xl font-black text-slate-800">{stats.totalItems.toLocaleString()}</p>
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+          <div className="p-4 bg-orange-50 text-orange-600 rounded-2xl">
+            <AlertTriangle size={24} />
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Low Stock Alerts</p>
+            <p className="text-2xl font-black text-slate-800">{stats.lowStockCount}</p>
+          </div>
+        </div>
+        <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex items-center gap-4 hover:shadow-md transition-shadow">
+          <div className="p-4 bg-purple-50 text-purple-600 rounded-2xl">
+            <Archive size={24} />
+          </div>
+          <div>
+            <p className="text-xs text-slate-500 uppercase tracking-widest font-bold">Categories</p>
+            <p className="text-2xl font-black text-slate-800">{stats.categories}</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Main Inventory List */}
+        <div className="lg:col-span-3 space-y-4">
+          <div className="relative group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={20} />
+            <input 
+              type="text" 
+              placeholder="Filter by name, category, or aisle..."
+              className="w-full pl-12 pr-4 py-4 bg-white border border-slate-200 rounded-2xl focus:outline-none focus:ring-4 focus:ring-blue-100 transition-all shadow-sm"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
+          <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead className="bg-slate-50/50 border-b border-slate-100 text-slate-400 text-[10px] uppercase tracking-widest font-black">
+                  <tr>
+                    <th className="px-8 py-5">Item Details</th>
+                    <th className="px-8 py-5 text-center">Qty Control</th>
+                    <th className="px-8 py-5">Location</th>
+                    <th className="px-8 py-5 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50">
+                  {filteredItems.map(item => (
+                    <tr key={item.id} className="hover:bg-blue-50/30 transition-colors group">
+                      <td className="px-8 py-6">
+                        <div className="font-bold text-slate-800 text-lg group-hover:text-blue-600 transition-colors">{item.name}</div>
+                        <div className="text-xs text-slate-400 font-medium">{item.category}</div>
+                      </td>
+                      <td className="px-8 py-6">
+                        <div className="flex flex-col items-center">
+                          <div className="flex items-center gap-4 mb-2 bg-slate-100 p-1 rounded-xl">
+                            <button 
+                              onClick={() => handleUpdateQuantity(item.id, -1)}
+                              className="p-2 hover:bg-white hover:text-red-500 rounded-lg transition-all shadow-sm active:scale-90"
+                            >
+                              <Minus size={16} />
+                            </button>
+                            <span className={`text-xl font-mono font-black w-14 text-center ${item.quantity <= item.minStock ? 'text-red-600' : 'text-slate-800'}`}>
+                              {item.quantity}
+                            </span>
+                            <button 
+                              onClick={() => handleUpdateQuantity(item.id, 1)}
+                              className="p-2 hover:bg-white hover:text-green-500 rounded-lg transition-all shadow-sm active:scale-90"
+                            >
+                              <Plus size={16} />
+                            </button>
+                          </div>
+                          {item.quantity <= item.minStock && (
+                            <div className="flex items-center gap-1 text-[9px] font-black text-red-500 uppercase tracking-tighter">
+                              <AlertTriangle size={10} /> Reorder Required
+                            </div>
+                          )}
+                        </div>
+                      </td>
+                      <td className="px-8 py-6">
+                        <div className="inline-flex items-center px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-bold border border-slate-200">
+                          {item.location}
+                        </div>
+                      </td>
+                      <td className="px-8 py-6 text-right">
+                        <button 
+                          onClick={() => removeItem(item.id)}
+                          className="text-slate-300 hover:text-red-500 transition-all p-3 hover:bg-red-50 rounded-2xl"
+                        >
+                          <Trash2 size={20} />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {filteredItems.length === 0 && (
+              <div className="p-20 text-center text-slate-400 bg-slate-50/50">
+                <Archive className="mx-auto mb-4 opacity-10" size={64} />
+                <p className="font-bold text-slate-300">No assets found in current ledger</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Sidebar Activity Feed */}
+        <div className="lg:col-span-1 space-y-6">
+          <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+            <h3 className="text-lg font-bold flex items-center gap-2 mb-6">
+              <History size={20} className="text-blue-500" />
+              Audit Log
+            </h3>
+            <div className="space-y-6 relative before:absolute before:left-3.5 before:top-2 before:bottom-2 before:w-px before:bg-slate-100">
+              {logs.length > 0 ? logs.map((log, i) => (
+                <div key={i} className="flex items-start gap-4 text-sm relative">
+                  <div className={`mt-1 p-1.5 rounded-full z-10 ${log.type === 'increase' ? 'bg-green-500 text-white shadow-lg shadow-green-100' : 'bg-red-500 text-white shadow-lg shadow-red-100'}`}>
+                    {log.type === 'increase' ? <ArrowUpRight size={12} /> : <ArrowDownRight size={12} />}
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800 leading-tight">{log.itemName}</p>
+                    <p className="text-slate-400 text-[10px] mt-1">{log.change} units • {log.time}</p>
+                  </div>
+                </div>
+              )) : (
+                <p className="text-slate-400 text-xs text-center py-8 italic">Awaiting transactions...</p>
+              )}
+            </div>
+          </div>
+
+          <div className="bg-slate-900 p-6 rounded-3xl text-white shadow-2xl relative overflow-hidden group">
+            <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-150 transition-transform duration-700">
+              <TrendingUp size={120} />
+            </div>
+            <h3 className="font-bold mb-4 flex items-center gap-2 relative z-10">
+              <TrendingUp size={18} className="text-blue-400" />
+              Health Metrics
+            </h3>
+            <div className="space-y-4 relative z-10">
+              <div className="flex justify-between text-xs text-slate-400">
+                <span>Coverage Index</span>
+                <span className="font-mono text-blue-400">{100 - (stats.lowStockCount * 8)}%</span>
+              </div>
+              <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden">
+                <div 
+                  className="bg-blue-500 h-full transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(59,130,246,0.5)]" 
+                  style={{ width: `${Math.max(5, 100 - (stats.lowStockCount * 8))}%` }}
+                ></div>
+              </div>
+              <p className="text-[10px] text-slate-500 leading-relaxed">
+                System stability is currently based on {stats.lowStockCount} critical depletion alerts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Add Modal */}
+      {isAddModalOpen && (
+        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-[2rem] w-full max-w-md p-10 shadow-2xl animate-in fade-in zoom-in duration-300">
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-3xl font-black text-slate-800">Asset Init</h2>
+              <button onClick={() => setIsAddModalOpen(false)} className="bg-slate-100 p-2 rounded-full text-slate-400 hover:text-red-500 transition-colors">
+                <Trash2 size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleAddItem} className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Label</label>
+                <input 
+                  required
+                  type="text" 
+                  className="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all"
+                  placeholder="Material Identifier"
+                  value={newItem.name}
+                  onChange={e => setNewItem({...newItem, name: e.target.value})}
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Quantity</label>
+                  <input 
+                    type="number" 
+                    className="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all font-mono"
+                    value={newItem.quantity}
+                    onChange={e => setNewItem({...newItem, quantity: parseInt(e.target.value) || 0})}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Threshold</label>
+                  <input 
+                    type="number" 
+                    className="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all font-mono"
+                    value={newItem.minStock}
+                    onChange={e => setNewItem({...newItem, minStock: parseInt(e.target.value) || 0})}
+                  />
+                </div>
+              </div>
+              <div className="pt-4">
+                <button 
+                  type="submit"
+                  className="w-full py-5 bg-blue-600 text-white font-black rounded-2xl hover:bg-blue-700 shadow-xl shadow-blue-200 transition-all active:scale-[0.98] uppercase tracking-widest text-sm"
+                >
+                  Confirm Entry
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default App;
