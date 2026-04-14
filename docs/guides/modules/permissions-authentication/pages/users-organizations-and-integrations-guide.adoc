@@ -178,7 +178,7 @@ Integrations are set up as follows:
 * GitHub App, GitLab self-managed and Bitbucket Data Center are managed from menu:Org[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
 * GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines]).
 
-If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See the <<vcs-integrations>> section for more information.
+If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See the <<manage-vcs-integrations>> section for more information.
 
 == Limitations
 
