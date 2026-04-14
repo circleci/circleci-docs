@@ -258,7 +258,7 @@ Your self-managed instance must already contain at least one GitLab project. The
 
 . Enter your instance's SSH public host keys. You can retrieve this from your instance by running `ssh-keyscan <instance_url>`, for example, `ssh-keyscan test-gitlab.circleci.com`, and copying the command's output.
 +
-The output should look something like:
+The output looks something like:
 +
 [,shell]
 ----
@@ -576,7 +576,7 @@ When you connect a repository with your CircleCI project, behind the scenes, Cir
 
 CircleCI provides a `checkout` step that is used to check out your source code. You find more information about the special `checkout` step in the xref:reference:ROOT:configuration-reference.adoc#checkout[Configuration Reference] page.
 
-If you would rather use a custom checkout command you should follow the steps below to ensure the authenticity of the host you are connecting to.
+If you would rather use a custom checkout command, follow the steps below to ensure the authenticity of the host you are connecting to.
 
 ==== Establish the authenticity of an SSH host
 
@@ -660,7 +660,7 @@ This section describes best practices for using SSH keys in your CircleCI pipeli
 
 * Use Deploy Keys whenever possible.
 * When Deploy Keys cannot be used, <<#controlling-access-via-a-machine-user,Machine user keys>> must be used, and have their access restricted to the most limited set of repository and permissions necessary.
-* Never use non-Machine user keys (keys should be associated with the build, not with a specific person).
+* Never use non-machine user keys. It is best practice for keys to be associated with the build, not with a specific person.
 * You must rotate the Deploy or User key as part of revoking user access to that repository. See the xref:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys] page for steps to rotate your keys.
 * Ensure no developer has access to a build in a repository with a User Key that requires more access than they have.
 
@@ -702,7 +702,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 . In the sidebar menu, select *SSH Keys*.
 . Under the **User Key** section, select btn:[Add User Key].
-. You will see a warning that you should use a machine user. Select btn:[Confirm User].
+. You will see a warning to use a machine user. Select btn:[Confirm User].
 . You will now see your user key displayed on the page.
 
 [#user-key-security]
@@ -712,7 +712,7 @@ CircleCI will never make your SSH keys public.
 
 The private keys of the checkout key-pairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
 
-Remember that SSH keys should be shared only with trusted users. GitHub collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
+Remember that SSH keys must be shared only with trusted users. GitHub collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
 
 [#user-key-access-related-error-messages]
 === User key access-related error messages
@@ -935,7 +935,7 @@ GitHub provides the ability to approve third party application access on a link:
 Before GitHub added this option the following was true:
 
 * Any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account).
-* The application could use that OAuth token to act on behalf of the user via the API, with whatever permissions were granted during the OAuth flow.
+* The application could use that OAuth token to act on behalf of the user via the API, with whatever permissions granted during the OAuth flow.
 
 OAuth tokens will now, by default, _not_ have access to organization data when third party access restrictions are enabled. You must specifically request access on a per organization basis, either during the OAuth process or later, and an organization admin must approve the request.
 
@@ -961,9 +961,9 @@ This section describes how to re-enable CircleCI after enabling third-party appl
 
 - If you are an owner of your organization (an admin), you may grant access to CircleCI by clicking on the **Grant** button.
 - You may be asked to confirm your password in order to authorize our app.
-- Once you’ve approved CircleCI, you will see a checkmark next to your organization’s name.
+- Once you have approved CircleCI, you will see a checkmark next to your organization's name.
 
-After access is granted, CircleCI should behave normally again.
+After access is granted, CircleCI will behave normally again.
 
 === Disconnect a GitHub OAuth or Bitbucket Cloud account from your user account
 
