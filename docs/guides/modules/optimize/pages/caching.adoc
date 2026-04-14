@@ -32,7 +32,7 @@ For information about caching and reuse of unchanged layers of a Docker image, s
 
 A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but, in the case of a cache miss or zero cache restore, the job still runs successfully. For example, you might cache npm package directories (known as `node_modules`). The first time your job runs, it downloads all your dependencies and caches them. On subsequent runs, a valid cache speeds up your job.
 
-Caching is about achieving a balance between reliability and getting maximum performance. Prioritize reliability over speed, as a corrupted build or out-of-date dependencies cost more time than a fast build save.
+Caching is about achieving a balance between reliability and getting maximum performance. Prioritize reliability over speed, as a corrupted build or out-of-date dependencies cost more time than a fast build saves.
 
 [#basic-example-of-dependency-caching]
 == Basic example of dependency caching
