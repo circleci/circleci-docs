@@ -255,6 +255,8 @@ $ mv circleci-testsuite "${HOME}/bin/"
 
 == 2. Add a `.circleci/test-suites.yml` file at your project root
 
+Some starter configs are shown below. Choose the one for your test runner and copy/paste into `.circleci/test-suites.yml`.
+
 [tabs]
 ====
 Vitest::
@@ -353,7 +355,10 @@ Smarter Testing is test runner agnostic, replace the below `discover` and `run` 
 ----
 ---
 name: ci tests
+# Replace with the command that lists your tests
 discover: my-test-runner --only-list-tests
+# Replace with the command that runs your tests, be sure to enable JUnit and
+# send the JUnit output to the '<< outputs.junit >>' template variable.
 run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
@@ -394,7 +399,7 @@ TIP: When adding the testsuite command to your CircleCI jobs, there is no need t
 
 Use the same command you used locally to run tests in your `.circleci/config.yml`.
 
-Find the previous test command and replace it with the `circleci run testsutie`, keeping all steps the same.
+In your `.circleci/config.yml`, replace your existing test command with `circleci run testsuite` - the same command you used locally. Keep all other steps the same.
 
 Check that `store_test_results` is storing the directory where the JUnit files are stored from the `test-suites.yml` file.
 

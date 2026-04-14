@@ -55,7 +55,7 @@ name: backend tests
 [#discover]
 == *`discover`*
 
-The `discover` command finds all test atoms for a given test suite. The command’s output is split on both newlines and whitespace to extract individual test atoms.
+The `discover` command finds all test atoms for a given test suite. The command’s output is split on newlines to extract individual test atoms (the command may instead output a single line of space-separated test atoms).
 
 The `discover` command should not execute any tests.
 
