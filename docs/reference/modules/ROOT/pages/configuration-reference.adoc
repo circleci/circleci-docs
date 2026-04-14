@@ -739,6 +739,11 @@ Configure a job to use the Docker execution environment using the  `docker` key 
 | N
 | Map
 | Authentication for AWS Elastic Container Registry (ECR)
+
+| `gcp_auth`
+| N
+| Map
+| Authentication for GCP Artifact Registry using OIDC
 |===
 --
 
@@ -855,6 +860,49 @@ jobs:
         aws_auth:
           aws_access_key_id: AKIAQWERVA  # can specify string literal values
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
+----
+
+'''
+
+[#gcp-authentication]
+==== GCP authentication
+
+Using an image hosted on link:https://cloud.google.com/artifact-registry[GCP Artifact Registry] requires authentication using GCP credentials, either via OIDC, or by setting environment variables. The two configuration options are described in the following sections:
+
+[#gcp-oidc]
+==== Use OIDC
+
+Authenticate using OpenID Connect (OIDC) using the `gcp_auth` field, as follows:
+
+*Example:*
+
+[,yaml]
+----
+jobs:
+  job_name:
+    docker:
+      - image: <region>-docker.pkg.dev/<project>/<repository>/<image>:<tag>
+        gcp_auth:
+          oidc_service_account: <service-account-email>
+          workload_identity_pool: projects/<project-number>/locations/global/workloadIdentityPools/<pool-id>
+          workload_identity_provider: <provider-id>
+----
+
+For steps to get set up with OIDC to pull images from GCP Artifact Registry, see the xref:guides:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc#[Pull an Image From GCP Artifact Registry With OIDC] page.
+
+[#gcp-env-vars]
+==== Use environment variables
+
+By default, CircleCI uses the GCP credentials you provide by setting the `GCP_OIDC_SERVICE_ACCOUNT`, `GCP_WORKLOAD_IDENTITY_POOL`, and `GCP_WORKLOAD_IDENTITY_PROVIDER` project environment variables or context environment variables. When these are set and the image is hosted on GCP Artifact Registry, CircleCI automatically authenticates without requiring a `gcp_auth` field in your configuration:
+
+*Example:*
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: us-docker.pkg.dev/my-project/my-repo/my-image:latest
 ----
 
 '''
@@ -1034,14 +1082,14 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 |===
 --
 
-*Example:* Use a macOS virtual machine with Xcode version 26.3.0:
+*Example:* Use a macOS virtual machine with Xcode version 26.4.0:
 
 [,yaml]
 ----
 jobs:
   build:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
 ----
 
 '''
@@ -1107,7 +1155,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:2024.12
-    resource_class: << pipeline.git.branch == "main" and xlarge or medium >>
+    resource_class: << pipeline.git.branch == "main" and "xlarge" or "medium" >>
     steps:
       ... // other config
 ----
@@ -1171,11 +1219,6 @@ include::guides:ROOT:partial$execution-resources/machine-gen2-resource-table.ado
 
 *Example:*
 
-[tabs]
-====
-Cloud::
-+
---
 [,yaml]
 ----
 jobs:
@@ -1186,21 +1229,6 @@ jobs:
     steps:
       ... // other config
 ----
---
-Server::
-+
---
-[,yaml]
-----
-jobs:
-  build:
-    machine: true
-    resource_class: large.gen2
-    steps:
-      ... // other config
-----
---
-====
 
 '''
 
@@ -1216,7 +1244,7 @@ include::guides:ROOT:partial$execution-resources/macos-resource-table.adoc[]
 jobs:
   build:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
     resource_class: m4pro.medium
     steps:
       ... // other config
@@ -2868,7 +2896,7 @@ Possible types of `requires` items:
 * Map of job name to status (a required job that must attain the specified status for the job to start).
 * Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start).
 
-The possible *status* values are: `success`, `failed` and `canceled`.
+The possible *status* values are: `success`, `failed`, `canceled`, `unauthorized`, `not_run`, and `terminal`.
 |===
 --
 
@@ -2891,8 +2919,14 @@ workflows:
       - cleanup:
           requires:
             - deploy:
+              - success
               - failed
               - canceled
+              - unauthorized
+              - not_run
+      - cleanup-shorthand:
+          requires:
+            - deploy: terminal  # equivalent to [success, failed, canceled, unauthorized, not_run]
 
 ----
 

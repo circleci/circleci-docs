@@ -1,8 +1,9 @@
-\bgithub organization\b
-\bcircleci organization\b
-\bbitbucket organization\b
+\b[Gg]it[Hh]ub organization\b
+\b[Cc]ircle[cC][iI] organization\b
+\b[Bb]itbucket organization\b
 .circleci/config.yml
 [Aa]gentless
+[Aa]gentic
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
@@ -77,6 +78,7 @@ Buildx
 Bundler
 Capistrano
 Certbot
+Cest
 cgroup
 Chocolatey
 chruby
@@ -96,6 +98,7 @@ CLI
 Claude Code
 CMake
 CocoaPods
+Codeception
 Codecov
 CodeDeploy
 Coinbase
@@ -147,7 +150,8 @@ FAQs?
 Fastfile
 Fastlane
 /bFastlane Match/b
-filename
+[Ff]ilename
+[Ff]ilepath
 framebuffer
 frameit
 \bFree Plan\b
@@ -243,7 +247,7 @@ Okta
 OOM
 OPA
 \bOpenID Connect\b
-orgs?
+[Oo]rgs?
 [Pp]ackagecloud
 [Pp]arameterization
 [Pp]arameterizable
@@ -253,6 +257,7 @@ orgs?
 PHP
 PHPUnit
 Pipenv
+[Pp]laintext
 Playwright
 Podfile
 PostgreSQL

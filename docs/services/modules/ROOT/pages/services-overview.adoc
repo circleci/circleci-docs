@@ -1,0 +1,37 @@
+= Field engineering services overview
+:page-description: Field engineering services overview
+
+== Field engineering team
+
+The field engineering team at CircleCI includes customer engineers with DevOps and systems administration experience. They focus on making pipelines as efficient as possible. Field engineers work with CircleCI's largest and most complex customers to solve their challenges.
+
+== Field engineering services
+
+Field engineering services include engagements led by your field engineer, from consultation to training. Services come bundled with your support plan. Organizations without a support plan can select services on an individual basis. For more information, contact our link:https://circleci.com/contact/[Sales team].
+
+The following services are provided by the Field Engineering team:
+
+* xref:services:migration-assistance.adoc[Migration Assistance]
+* xref:services:onboarding-assistance.adoc[Onboarding Assistance]
+* xref:services:cost-optimization.adoc[Cost Optimization]
+* xref:services:config-translation.adoc[Configuration Translation]
+* xref:services:config-review.adoc[Configuration Review]
+* xref:services:optimization-assistance.adoc[Optimization Assistance]
+* xref:services:general-developer-training.adoc[General Developer Training]
+* xref:services:reusable-config-training.adoc[Reusable Configuration Training]
+* xref:services:usage-api-training.adoc[Usage API Training]
+* xref:services:technical-consultation.adoc[Technical Consultation]
+* xref:services:custom-service.adoc[Custom Service]
+* xref:services:server-installation.adoc[Server Installation]
+* xref:services:server-migration.adoc[Server Migration]
+* xref:services:server-operator-training.adoc[Server Operator Training]
+
+
+== Support plans
+
+We offer support plans from self-serve to fully managed. Refer to our link:https://circleci.com/support/plans[support plan page] for details.
+
+To see your current support plan tier, CircleCI admins can:
+
+. In the link:https://app.circleci.com/home/[CircleCI web app], select your organization.
+. Select **Plan** in the sidebar (you may need to select **More** to see **Plan**).

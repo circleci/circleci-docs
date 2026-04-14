@@ -11,7 +11,7 @@ All CircleCI organizations can request audit logs. You need to be an organizatio
 
 === How to request audit logs
 
-. Navigate to menu:Organization Settings[Security].
+. Navigate to menu:Org[Security].
 . Scroll down to the **Audit Logs** section.
 . Select the date range and then select btn:[Request audit logs].
 
@@ -79,10 +79,10 @@ Audit log streaming provides the following benefits to your organization:
 
 Before setting up audit log streaming, ensure you have the following:
 
-* CircleCI Scale Plan (the feature is not available to Free or Performance customers)
-* AWS account with permissions to create and manage S3 buckets
-* IAM role or user with appropriate S3 write permissions
-* Network configuration to allow secure connections between CircleCI and AWS
+* CircleCI Scale Plan (the feature is not available to Free or Performance customers).
+* AWS account with permissions to create and manage S3 buckets.
+* IAM role or user with appropriate S3 write permissions.
+* Network configuration to allow secure connections between CircleCI and AWS.
 
 The following steps guide you through setting up your S3 bucket, AWS authentication, audit log configuration, and verification.
 
@@ -126,7 +126,8 @@ The complete template for the trust relationship is the following:
 }
 ----
 +
-Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique organization ID (found on the menu:Organization Settings[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
+
+Replace `<aws-account-id>` with your 12-digit AWS account ID and `<org-id>` with your unique CircleCI organization ID (found on the menu:Org[Overview] page in the link:https://app.circleci.com/[CircleCI web app]).
 
 .. Permissions policy
 +
@@ -166,7 +167,7 @@ Replace `<bucket-name>` with the name of your S3 bucket.
 ==== 2. Configure audit log streaming
 
 . Go to the link:https://app.circleci.com/[CircleCI web app].
-. Navigate to menu:Organization Settings[Security].
+. Navigate to menu:Org[Security].
 . Scroll down to the menu:Audit Logs[Streaming audit logs] section and select btn:[Stream audit logs].
 +
 .Stream audit logs section
@@ -206,7 +207,7 @@ After setting up audit log streaming follow these steps to validate the setup wa
 
 === Stream to S3-compatible storage
 
-TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint such as MinIO.
+TIP: Select btn:[Other S3-compatible service] in the streaming dialog to connect to an S3-compatible endpoint.
 
 
 The setup steps vary by provider. Follow these high-level steps:
@@ -214,12 +215,12 @@ The setup steps vary by provider. Follow these high-level steps:
 ==== 1. Prepare your S3-compatible destination
 
 . Create a bucket for audit logs in your S3-compatible service.
-. Create or identify a role/principal that CircleCI can assume using OIDC. The exact process and identifier format depend on your provider. Examples include an AWS-style ARN (for example, `arn:aws:iam::...:role/...`) or a provider-specific role identifier (for example, MinIO `arn:minio:iam:::role/...`).
-. Grant the role/principal permission to write objects to your bucket (required: `s3:PutObject` on `<your-bucket>/*`). For example:
+. Create or identify a role/principal that CircleCI can assume using OIDC. The exact process and identifier format depend on your provider. Examples include an AWS-style ARN (for example, `arn:aws:iam::...:role/...`) or a provider-specific role identifier if supported.
+. Grant the role/principal permission to write objects to your bucket (minimum required: `s3:PutObject` on `<your-bucket>/*`). For example:
 +
 [source,json]
 ----
-// minio S3 example policy
+// aws S3 example policy
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -229,7 +230,7 @@ The setup steps vary by provider. Follow these high-level steps:
         "s3:PutObject"
       ],
       "Resource": [
-        "arn:minio:s3:::<bucket-name>/*"
+        "arn:aws:s3:::<bucket-name>/*"
       ]
     }
   ]
@@ -244,10 +245,9 @@ The setup steps vary by provider. Follow these high-level steps:
 
 When setting up the OIDC Identity Provider to trust CircleCI, use these parameters:
 
-* **OpenID Configuration URL (Issuer URL):** `++https://oidc.circleci.com/org/<ORG_ID>/.well-known/openid-configuration++` +
-(Remember to substitute your actual organization ID.)
+* **OpenID Configuration URL (Issuer URL):** `++https://oidc.circleci.com/org/<ORG_ID>/.well-known/openid-configuration++` (substitute your actual CircleCI organization ID).
 
-* **OpenID Client ID (Audience):** Your organization ID (the `<ORG_ID>` value).
+* **OpenID Client ID (Audience):** Your CircleCI organization ID (the `<ORG_ID>` value).
 
 * **Scope:** Use the standard required scope: `openid`.
 

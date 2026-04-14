@@ -1,9 +1,10 @@
-<header class="flex flex-col max-w-full px-[32px] md:px-9 pt-6 border-b border-vapor bg-white sticky top-0 z-10">
+<header class="flex flex-col max-w-full px-[32px] md:px-9 pt-6 border-b border-vapor bg-body-bg sticky top-0 z-10">
   <div class="flex items-center justify-between mb-7">
     <!-- Logo + Title -->
     <div class="flex items-center space-x-2">
       <a href="{{{relativize '/'}}}">
-        <img src="{{{uiRootPath}}}/img/logo.svg" alt="CircleCI Logo" class="h-[44px]">
+        <img src="{{{uiRootPath}}}/img/logo.svg" alt="CircleCI Logo" class="h-[44px] logo-light">
+        <img src="{{{uiRootPath}}}/img/logo-dark.svg" alt="CircleCI Logo" class="h-[44px] logo-dark hidden">
       </a>
     </div>
 
@@ -15,7 +16,146 @@
 
     <div class="flex items-center space-x-4 ml-2">
       <!--<img src="{{{uiRootPath}}}/img/language-icon.svg" alt="Language Icon" class="h-5 w-5">-->
-      <img data-page-navigation-toggle src="{{{uiRootPath}}}/img/nav-menu.svg" alt="Navigation Menu Icon" class="h-5 w-5 lg:hidden">
+      <!-- Theme Toggle Dropdown (matches CircleCI app design) -->
+      <div class="theme-toggle-container relative">
+        <button
+          id="theme-toggle-button"
+          type="button"
+          class="flex items-center justify-center p-2 rounded-full hover:bg-smoke-50 transition-colors"
+          aria-label="Theme: auto. Click to change theme"
+          aria-expanded="false"
+          aria-haspopup="true"
+          tabindex="0"
+        >
+          <!-- Light theme icon -->
+          <svg
+            id="theme-icon-light"
+            role="img"
+            focusable="false"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 hidden"
+            aria-hidden="true"
+          >
+            <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M4.92993 4.92999L6.33993 6.33999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M17.6599 17.66L19.0699 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M6.33993 17.66L4.92993 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M19.0699 4.92999L17.6599 6.33999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <!-- Dark theme icon -->
+          <svg
+            id="theme-icon-dark"
+            role="img"
+            focusable="false"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 hidden"
+            aria-hidden="true"
+          >
+            <path d="M12 3C10.8065 4.19347 10.136 5.81217 10.136 7.5C10.136 9.18783 10.8065 10.8065 12 12C13.1935 13.1935 14.8122 13.864 16.5 13.864C18.1878 13.864 19.8065 13.1935 21 12C21 13.78 20.4722 15.5201 19.4832 17.0001C18.4943 18.4802 17.0887 19.6337 15.4442 20.3149C13.7996 20.9961 11.99 21.1743 10.2442 20.8271C8.49836 20.4798 6.89472 19.6226 5.63604 18.364C4.37737 17.1053 3.5202 15.5016 3.17294 13.7558C2.82567 12.01 3.0039 10.2004 3.68509 8.55585C4.36628 6.91131 5.51983 5.50571 6.99987 4.51677C8.47991 3.52784 10.22 3 12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <!-- Auto theme icon (half and half) -->
+          <svg
+            id="theme-icon-auto"
+            role="img"
+            focusable="false"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="9" transform="rotate(90 12 12)" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M17 12C17 14.4183 15.282 16.4366 13 16.8994L13 7.10059C15.282 7.5634 17 9.58165 17 12Z" fill="currentColor" stroke="currentColor" stroke-width="2"></path>
+          </svg>
+        </button>
+
+        <!-- Theme Dropdown Menu -->
+        <div
+          id="theme-toggle-menu"
+          class="theme-menu absolute right-0 mt-2 w-48 bg-panel-bg border border-vapor rounded-lg shadow-lg hidden"
+          role="menu"
+          tabindex="-1"
+        >
+          <!-- Light Theme Option -->
+          <div
+            role="menuitemradio"
+            aria-checked="false"
+            data-theme-option="light"
+            class="theme-menu-item flex items-center justify-between px-4 py-3 hover:bg-smoke-50 cursor-pointer"
+            tabindex="0"
+          >
+            <div class="flex items-center gap-3">
+              <svg role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" aria-hidden="true">
+                <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M4.92993 4.92999L6.33993 6.33999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M17.6599 17.66L19.0699 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M2 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M20 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M6.33993 17.66L4.92993 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                <path d="M19.0699 4.92999L17.6599 6.33999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>Light</span>
+            </div>
+            <svg role="img" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="theme-checkmark h-5 w-5 hidden" aria-hidden="true">
+              <path d="M21.6885 5.2748C22.0891 5.65507 22.1055 6.28803 21.7252 6.68854L9.38234 19.6885C9.19354 19.8874 8.93136 20 8.65715 20C8.38293 20 8.12075 19.8874 7.93195 19.6885L2.2748 13.7302C1.89453 13.3297 1.91095 12.6967 2.31146 12.3165C2.71198 11.9362 3.34493 11.9526 3.7252 12.3531L8.65715 17.5477L20.2748 5.31146C20.6551 4.91095 21.288 4.89453 21.6885 5.2748Z"></path>
+            </svg>
+          </div>
+
+          <!-- Dark Theme Option -->
+          <div
+            role="menuitemradio"
+            aria-checked="false"
+            data-theme-option="dark"
+            class="theme-menu-item flex items-center justify-between px-4 py-3 hover:bg-smoke-50 cursor-pointer"
+            tabindex="-1"
+          >
+            <div class="flex items-center gap-3">
+              <svg role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" aria-hidden="true">
+                <path d="M12 3C10.8065 4.19347 10.136 5.81217 10.136 7.5C10.136 9.18783 10.8065 10.8065 12 12C13.1935 13.1935 14.8122 13.864 16.5 13.864C18.1878 13.864 19.8065 13.1935 21 12C21 13.78 20.4722 15.5201 19.4832 17.0001C18.4943 18.4802 17.0887 19.6337 15.4442 20.3149C13.7996 20.9961 11.99 21.1743 10.2442 20.8271C8.49836 20.4798 6.89472 19.6226 5.63604 18.364C4.37737 17.1053 3.5202 15.5016 3.17294 13.7558C2.82567 12.01 3.0039 10.2004 3.68509 8.55585C4.36628 6.91131 5.51983 5.50571 6.99987 4.51677C8.47991 3.52784 10.22 3 12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>Dark</span>
+            </div>
+            <svg role="img" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="theme-checkmark h-5 w-5 hidden" aria-hidden="true">
+              <path d="M21.6885 5.2748C22.0891 5.65507 22.1055 6.28803 21.7252 6.68854L9.38234 19.6885C9.19354 19.8874 8.93136 20 8.65715 20C8.38293 20 8.12075 19.8874 7.93195 19.6885L2.2748 13.7302C1.89453 13.3297 1.91095 12.6967 2.31146 12.3165C2.71198 11.9362 3.34493 11.9526 3.7252 12.3531L8.65715 17.5477L20.2748 5.31146C20.6551 4.91095 21.288 4.89453 21.6885 5.2748Z"></path>
+            </svg>
+          </div>
+
+          <!-- Auto Theme Option -->
+          <div
+            role="menuitemradio"
+            aria-checked="true"
+            data-theme-option="auto"
+            class="theme-menu-item flex items-center justify-between px-4 py-3 hover:bg-smoke-50 cursor-pointer"
+            tabindex="-1"
+          >
+            <div class="flex items-center gap-3">
+              <svg role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" transform="rotate(90 12 12)" stroke="currentColor" stroke-width="2"></circle>
+                <path d="M17 12C17 14.4183 15.282 16.4366 13 16.8994L13 7.10059C15.282 7.5634 17 9.58165 17 12Z" fill="currentColor" stroke="currentColor" stroke-width="2"></path>
+              </svg>
+              <span>Auto</span>
+            </div>
+            <svg role="img" focusable="false" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="theme-checkmark h-5 w-5" aria-hidden="true">
+              <path d="M21.6885 5.2748C22.0891 5.65507 22.1055 6.28803 21.7252 6.68854L9.38234 19.6885C9.19354 19.8874 8.93136 20 8.65715 20C8.38293 20 8.12075 19.8874 7.93195 19.6885L2.2748 13.7302C1.89453 13.3297 1.91095 12.6967 2.31146 12.3165C2.71198 11.9362 3.34493 11.9526 3.7252 12.3531L8.65715 17.5477L20.2748 5.31146C20.6551 4.91095 21.288 4.89453 21.6885 5.2748Z"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <svg data-page-navigation-toggle width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 lg:hidden" aria-label="Navigation Menu">
+        <path d="M1.45455 15H20.1959" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+        <path d="M1.45455 8H20.1959" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+        <path d="M1.45455 1H20.1959" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+      </svg>
       <a href="https://app.circleci.com/" class="hidden md:block bg-slime-green text-dark-green rounded-full px-[16px] border py-[8px] border-operational-green font-medium">
         Go to Application
       </a>
@@ -26,6 +166,6 @@
 
   {{> component-explorer-nav class='hidden md:flex' options=(components-to-nav-list)}}
 
-  {{> search-results class="hidden flex-1 pt-6 overflow-auto bg-white"}}
+  {{> search-results class="hidden flex-1 pt-6 overflow-auto bg-panel-bg"}}
 
 </header>

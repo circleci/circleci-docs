@@ -192,7 +192,7 @@ https://raw.githubusercontent.com/my-org/orbs/
 See xref:use:managing-url-orbs-allow-lists.adoc#adding-a-url-orb-allow-list-entry[Adding a URL Orb Allow-List Entry] for detailed instructions.
 
 [#step-4-use-the-orb]
-=== Step 4: Use the orb in your configuration
+=== 4. Use the orb in your configuration
 
 Reference your URL orb in a CircleCI configuration file:
 
@@ -256,7 +256,7 @@ jobs:
             echo "CLI installed successfully"
 ----
 
-Trigger a pipeline (via push, API, or web app) to test your orb, observe the results in the CircleCI web app.
+Trigger a pipeline (via push, API, or web app) to test your orb and observe the results in the CircleCI web app.
 
 [#updating-url-orbs]
 == Updating URL orbs

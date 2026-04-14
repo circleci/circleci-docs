@@ -243,7 +243,7 @@
   new: /guides/execution-managed/executor-intro/
 
 - old: /faq/
-  new: /server-admin/server-4.6/operator/faq/
+  new: /reference/faq/
 
 - old: /first-steps/
   new: /guides/getting-started/first-steps/
@@ -462,7 +462,7 @@
   new: /orbs/author/orb-author-validate-publish/
 
 - old: /orb-concepts/
-  new: /orbs/author/orb-concepts/
+  new: /orbs/use/orb-concepts/
 
 - old: /orb-development-kit/
   new: /orbs/author/orb-development-kit/

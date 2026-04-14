@@ -30,7 +30,7 @@ The pod will have a status of `OOMKilled` when viewed in Kubernetes with kubectl
 [#pod-host-node-is-out-of-disk-space]
 === Pod host node is out of disk space
 
-If the node is full it will have a `node.kubernetes.io/disk-pressure` taint, which will prevent new task pods from being scheduled. If all valid nodes for the pod have the same taint, or other conditions that prevent scheduling, the task pod will sit in a pending state until an untainted valid node becomes available. This will show the job as stuck in the **Preparing Environment** step in the UI.
+If the node is full it will have a `node.kubernetes.io/disk-pressure` taint, which will prevent new task pods from being scheduled. If all valid nodes for the pod have the same taint, or other conditions that prevent scheduling, the task pod will wait in a pending state. It will remain there until an untainted valid node becomes available. This will show the job as stuck in the **Preparing Environment** step in the UI.
 
 You need to scale your cluster more effectively to avoid this state.
 
@@ -51,12 +51,12 @@ If the entrypoint specified for the image is invalid, the task will fail with an
 could not run task: launch circleci-agent on "container-0" failed: command terminated with exit code 139.
 ```
 
-Container runner and CircleCI cloud set the entrypoint of the xref:reference:ROOT:glossary.adoc#primary-container[primary container] in different ways. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an entrypoint]). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
+Container runner and CircleCI Cloud set the entrypoint of the xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] in different ways. On cloud, the entrypoint of the primary container is ignored unless it is preserved using the `com.circleci.preserve-entrypoint=true LABEL` instruction (see: xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an Entrypoint]). In contrast, container runner will always default to a shell (`/bin/sh`), or the entrypoint specified in the job configuration, if set.
 
 NOTE: Entrypoints should be commands that run forever without failing. If the entrypoint fails or terminates in the middle of a build, the build will also terminate. If you need to access logs or build status, consider using a background step instead of an entrypoint.
 
-Specify an entrypoint using the xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an entrypoint] documentation to mitigate this error.
-You can set the entrypoint explicitly as described in xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Using custom built Docker images].
+Specify an entrypoint using the xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an Entrypoint] documentation to mitigate this error.
+You can set the entrypoint explicitly as described in xref:guides:execution-managed:custom-images.adoc#adding-an-entrypoint[Using Custom Built Docker Images].
 
 [#image-is-for-a-different-architecture]
 === Image is for a different architecture
@@ -77,12 +77,12 @@ You should correct the underlying architecture used for nodes with jobs to match
 [#bad-task-pod-configuration]
 === Bad task pod configuration
 
-If the task pod for a resource class is misconfigured, the task will fail once claimed. In the UI the error will be in a `Runner Instance Failure` step with a message resembling:
+If the task pod for a resource class is incorrectly configured, the task will fail once claimed. In the UI the error will be in a `Runner Instance Failure` step with a message resembling:
 
 ```bash
 could not start task containers: error creating task pod: Pod "ccita-62ea7dff36e977580a329a9d-0-uzz1y8xi" is invalid: [spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.limits[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource type or fully qualified, spec.containers[0].resources.requests[eppemeral-storage]: Invalid value: "eppemeral-storage": must be a standard resource for containers]
 ```
-No pod has been created in the Kubernetes cluster. You will need to correct the task pod configuration as described on the xref:guides:execution-runner:container-runner.adoc#resource-class-configuration-custom-pod[Container runner] page.
+No pod has been created in the Kubernetes cluster. You will need to correct the task pod configuration as described on the xref:guides:execution-runner:container-runner.adoc#resource-class-configuration-custom-pod[Container Runner] page.
 
 [#bash-missing]
 === Bash missing
@@ -96,7 +96,11 @@ xref:guides:execution-managed:custom-images.adoc#required-tools-for-primary-cont
 [#oops-there-was-an-issue-with-your-infrastructure]
 === Oops, there was an issue with your infrastructure
 
-If you see the message "Oops, there was an issue with your infrastructure. Verify your self-hosted runner infrastructure is operating and try re-running the job. If the issue persist, see our troubleshooting guide" on the job’s page, or if there is no content in the task lifecycle step (as shown), you should consider the potential causes described below:
+If you see the following message on the job’s page, or if there is no content in the task lifecycle step (as shown), consider the potential causes described below:
+
+----
+Oops, there was an issue with your infrastructure. Verify your self-hosted runner infrastructure is operating and try re-running the job. If the issue persist, see our troubleshooting guide
+----
 
 .Task lifecycle with no content
 image::guides:ROOT:task-lifecycle.png[Image showing the task lifecycle with no content message]
@@ -108,9 +112,9 @@ You can check the logs for any of the previous runs using the command `kubectl l
 
 - **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.
 
-We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the connection to the links on our FAQ includes a section about the xref:guides:execution-runner:runner-faqs.adoc#what-connectivity-is-required[connectivity required for CircleCI’s self-hosted runners].
+We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the connection to the links on our FAQ includes a section about the xref:guides:execution-runner:runner-faqs.adoc#what-connectivity-is-required[Connectivity Required for CircleCI’s Self-Hosted Runners].
 
-- **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[your `values.yaml`] or within xref:guides:execution-runner:container-runner.adoc#resource-class-configuration-custom-pod[your `config.yaml`].
+- **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[Your `values.yaml`] or within xref:guides:execution-runner:container-runner.adoc#resource-class-configuration-custom-pod[Resource Class Configuration].
 
 Refer to the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-usage-monitoring/[Kubernetes documentation] for details of external resource monitoring tools.
 
@@ -119,9 +123,9 @@ Refer to the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-
 
 The task pod may fail with an `Task agent appears not running: /bin/sh: 1: kill: No such process` error due a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe].
 
-The liveness probe on the task pod checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output its PID to a file used by the liveness probe to confirm task agent is running. This probe may fail if the task agent process fails to start, no longer exists or takes longer to initiate than the liveness probe's default timeouts. You may adjust the liveness probe defaults in link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L196-L218[the `values.yaml`] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runners's Helm chart].
+The liveness probe on the task pod checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output its PID to a file used by the liveness probe to confirm task agent is running. This probe may fail if the task agent process fails to start, no longer exists or takes longer to initiate than the liveness probe's default timeouts. You may adjust the liveness probe defaults in link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L196-L218[the `values.yaml`] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runner's Helm chart].
 
-In the example below we have set the liveness probe to allow a 2.5 minute startup time before probing(`initialDelaySecond`) and 2.5 minutes of failures before the liveness probe fails (the probe will wait 30 seconds between each probe and allow for 5 failure responses before failing the probe) and the task pod is terminated.
+In the example below, we set the liveness probe to allow a 2.5 minute startup time before probing (`initialDelaySecond`) and 2.5 minutes of failures. The probe waits 30 seconds between each check and allows 5 failure responses before failing, at which point the task pod is terminated.
 
 ```yaml
 agent:
@@ -136,7 +140,7 @@ agent:
               successThreshold: 1
               failureThreshold: 5
 ```
-In the event that the liveness probe fails or the task pod terminates, there is a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[prestop hook], which attempts to kill any existing task agent by its provided PID. This is to ensure there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`.
+If the liveness probe fails or the task pod terminates, a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[pre-stop hook] attempts to kill any existing task agent by its provided PID. The hook ensures there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`.
 
 [#view-the-log-of-a-failed-task-pod]
 === View the logs of a failed task pod
@@ -151,7 +155,14 @@ agent:
     KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP: true
 ```
 
-NOTE: When `KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP` is set to true, then task pods may dangle until they are manually cleaned or until garbage collection deletes these pods. By default, garbage collection removes resources after they have lived for 5 hours and 5 mins. You may tweak these settings in your link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L161-L175[container-agent `values.yaml`].
+NOTE: When `KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP` is set to true, then task pods may dangle until they are manually cleaned or until garbage collection deletes these pods. By default, garbage collection removes resources after they have lived for 5 hours and 5 minutes. You may tweak these settings in your link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L161-L175[container-agent `values.yaml`].
+
+[#inter-container-communication]
+=== Inter-container communication fails
+
+Unlike the link:https://circleci.com/docs/reference/configuration-reference/#docker[Docker executor], container runner uses `localhost` for inter-container communication rather than container host names. See xref:guides:execution-runner:runner-faqs.adoc#how-do-containers-communicate-on-container-runner[How Do Containers Within a Job Communicate With Each Other?] for details.
+
+If your job references a service container by name (for example, `postgres` or `redis`), update those connections to use `localhost` instead.
 
 [#machine-runner]
 == Machine runner
@@ -172,11 +183,11 @@ Cancel the job and rerun it. If your job is still not running, file a link:https
 [#debugging-with-ssh]
 === Debugging with SSH
 
-CircleCI's machine runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at xref:guides:execution-managed:ssh-access-jobs.adoc[Debugging with SSH].
+CircleCI's machine runners support rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at xref:guides:execution-managed:ssh-access-jobs.adoc[Debugging With SSH].
 
-NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see the xref:guides:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[machine runner configuration reference] or the xref:guides:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[container runner installation guide].
+NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this feature, see the xref:guides:execution-runner:machine-runner-3-configuration-reference.adoc#runner-ssh-advertise-addr[Machine Runner Configuration Reference] or the xref:guides:execution-runner:container-runner-installation.adoc#enable-rerun-job-with-ssh[Container Runner Installation Guide].
 
 [#oidc-tokens-missing]
 === OIDC tokens missing from jobs
 
-If you experience that link:https://circleci.com/docs/openid-connect-tokens/[OIDC token] environment variables (`$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`) are missing from jobs, a common cause can be that the default temporary directory (for example, `/tmp`) is not writable or is mounted as `noexec`. The system's temporary directory needs to be writable and allow execution for the OIDC plugin to be downloaded and executed from it.
+If the link:https://circleci.com/docs/openid-connect-tokens/[OIDC token] environment variables (`$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`) are missing from jobs, check the default temporary directory. A common cause is that it (for example, `/tmp`) is not writable or is mounted as `noexec`. The system's temporary directory needs to be writable and allow execution for the OIDC plugin to be downloaded and executed from it.

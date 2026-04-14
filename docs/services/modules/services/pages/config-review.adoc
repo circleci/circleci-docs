@@ -1,0 +1,41 @@
+= Configuration review service
+:page-description: Configuration review service
+
+The configuration review service evaluates a single CircleCI project and delivers a findings report. Your field engineer meets with the team that manages the project to learn about the use case and goals. After a two-week analysis, depending on the size of the project, your field engineer delivers findings. If additional help is needed to implement requirements, additional consultative time is scheduled.
+
+Findings typically include:
+
+* Optimization recommendations tied to your goals, such as cost savings or performance.
+* Feature options for your use case.
+* Right-fitting execution environments.
+* DRY (Don't Repeat Yourself) recommendations.
+* Solutions specific to your project's use case.
+* How your field engineer uses CircleCI data to analyze the project.
+
+== Benefits
+
+Teams who engage in a configuration review benefit from:
+
+* A more optimized CI/CD pipeline that improves spend and engineering efficiency for the reviewed project.
+* Best practices tailored to the project's use case.
+* More self-service to apply improvements across current and future projects.
+* Proactive identification of knowledge gaps, training needs, or service requirements.
+* Faster user onboarding in the reviewed project.
+* A clearer understanding of CircleCI data and how to use it.
+
+== Intended audience
+
+Configuration reviews are most useful for projects that:
+
+* Started using CircleCI in the last six months.
+* Have made a recent major change to their configuration.
+* Have a heavy throughput.
+* Contain complex pipelines.
+* Are used as a template for other projects.
+* Are showing negative metric trends.
+
+Anyone responsible for writing or maintaining the CircleCI configuration for the reviewed project should be involved.
+
+Developers who work on the project can gain a clearer understanding of what CircleCI does under the hood.
+
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].
