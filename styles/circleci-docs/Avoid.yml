@@ -2,12 +2,12 @@ extends: existence
 message: "Try to avoid using '%s'."
 ignorecase: true
 level: error
+# Note: "been" and "being" removed from errors - natural in reference docs
+# The Passive.yml and E-Prime.yml rules will still flag passive voice as suggestions
 tokens:
   - please
   - am
   - aren't
-  - been
-  - being
   - he's
   - here's
   - here's
