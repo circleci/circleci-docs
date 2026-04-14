@@ -12,13 +12,11 @@
 Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
 ====
 
-Smarter Testing reduces test execution time while maintaining test confidence by:
+Smarter Testing provides independent features that can be enabled to reduce test execution time while maintaining test confidence by:
 
 * Running only tests that are impacted by code changes.
 * Evenly distributing tests across parallel execution nodes.
 * Automatically rerunning failed tests.
-
-These features can be used independently or combined.
 
 To use the CircleCI's Smarter Testing, you first need to set up a couple of components:
 
@@ -33,88 +31,36 @@ By the end of this guide you will have done the following:
 
 == 1. Install the `testsuite` plugin locally
 
-The `testsuite` plugin can be used both locally and in CI. Get started locally to validate your commands work immediately, rather than waiting for them to run in CI.
+=== Install CircleCI CLI
 
-. Install the latest CircleCI CLI. For more information on the CircleCI CLI, see the xref:toolkit:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
-+
-[source,console]
-----
-$ brew install circleci
-----
+Install the latest CircleCI CLI. For more information on the CircleCI CLI, see the xref:toolkit:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
 
-. Install the latest `testsuite` CLI plugin. The `testsuite` CLI plugin is distributed through a Homebrew tap.
+=== Install testsuite plugin
+
+The `testsuite` plugin can be used both locally and in CI. Install locally to validate your commands work immediately, without waiting for them to run in CI.
+
+[tabs]
+====
+Homebrew::
 +
+--
 [source,console]
 ----
 $ brew install circleci/tap/circleci-testsuite
 ----
+--
 
-=== Install manually
-
-Prebuilt binaries are available from the CircleCI binary releases public bucket.
-
-[tabs]
-====
 Mac Arm::
++
+--
 https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/darwin/arm64/circleci-testsuite.gz[Download]
-+
+
 Verify with:
-+
+
 [source,console,subs="attributes+"]
 ----
 $ sha256sum -c <(echo "{testsuite-sha-darwin-arm64}  ./circleci-testsuite.gz")
 ----
-
-Mac Intel::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/darwin/amd64/circleci-testsuite.gz[Download]
-+
-Verify with:
-+
-[source,console,subs="attributes+"]
-----
-$ sha256sum -c <(echo "{testsuite-sha-darwin-amd64}  ./circleci-testsuite.gz")
-----
-
-Linux AMD64::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/amd64/circleci-testsuite.gz[Download]
-+
-Verify with:
-+
-[source,console,subs="attributes+"]
-----
-$ sha256sum -c <(echo "{testsuite-sha-linux-amd64}  ./circleci-testsuite.gz")
-----
-
-Linux Arm::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/arm/circleci-testsuite.gz[Download]
-+
-Verify with:
-+
-[source,console,subs="attributes+"]
-----
-$ sha256sum -c <(echo "{testsuite-sha-linux-arm}  ./circleci-testsuite.gz")
-----
-
-Linux ARM64::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/arm64/circleci-testsuite.gz[Download]
-+
-Verify with:
-+
-[source,console,subs="attributes+"]
-----
-$ sha256sum -c <(echo "{testsuite-sha-linux-arm64}  ./circleci-testsuite.gz")
-----
-
-Windows AMD64::
-https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/windows/amd64/circleci-testsuite.exe.gz[Download]
-+
-Verify with:
-+
-[source,console,subs="attributes+"]
-----
-$ sha256sum -c <(echo "{testsuite-sha-windows-amd64}  ./circleci-testsuite.exe.gz")
-----
-====
 
 After downloading the plugin and verifying the checksum, complete the following steps:
 
@@ -136,222 +82,186 @@ $ chmod u+x circleci-testsuite
 ----
 $ mv circleci-testsuite "${HOME}/bin/"
 ----
+--
 
-== 2. Configure the discover command
-
-Smarter Testing operates on _test atoms_.
-
-A _test atom_ is a single runnable unit that exercises one or more tests, depending on the specific test runner being used. For example:
-
-* `go test pkg/foo` is a package level test atom
-* `jest index.test.ts` is a file level test atom
-* `pytest test_file.py::TestClass::test_method` is a test case level test atom
-
-The `discover` command finds all test atoms for a given test suite. The command's output is split on both newlines and whitespace to extract individual test atoms. The `discover` command should not execute any tests.
-
-Every line of stdout is interpreted as a test atom. Any tool that prints metadata in the stdout must be suppressed.
-
-Follow these steps to run the `discover` command in your shell to examine the output.
-
-. Create a `.circleci/test-suites.yml` file in the project root and populate the `discover` command:
+Mac Intel::
 +
+--
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/darwin/amd64/circleci-testsuite.gz[Download]
+
+Verify with:
+
+[source,console,subs="attributes+"]
+----
+$ sha256sum -c <(echo "{testsuite-sha-darwin-amd64}  ./circleci-testsuite.gz")
+----
+
+After downloading the plugin and verifying the checksum, complete the following steps:
+
+. Decompress the binary.
++
+[source,console]
+----
+$ gunzip circleci-testsuite.gz
+----
+. Set the execute bit.
++
+[source,console]
+----
+$ chmod u+x circleci-testsuite
+----
+. Move it to a directory on your shell's `$PATH`.
++
+[source,console]
+----
+$ mv circleci-testsuite "${HOME}/bin/"
+----
+--
+
+Linux AMD64::
++
+--
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/amd64/circleci-testsuite.gz[Download]
+
+Verify with:
+
+[source,console,subs="attributes+"]
+----
+$ sha256sum -c <(echo "{testsuite-sha-linux-amd64}  ./circleci-testsuite.gz")
+----
+After downloading the plugin and verifying the checksum, complete the following steps:
+
+. Decompress the binary.
++
+[source,console]
+----
+$ gunzip circleci-testsuite.gz
+----
+. Set the execute bit.
++
+[source,console]
+----
+$ chmod u+x circleci-testsuite
+----
+. Move it to a directory on your shell's `$PATH`.
++
+[source,console]
+----
+$ mv circleci-testsuite "${HOME}/bin/"
+----
+--
+
+Linux Arm::
++
+--
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/arm/circleci-testsuite.gz[Download]
+
+Verify with:
+
+[source,console,subs="attributes+"]
+----
+$ sha256sum -c <(echo "{testsuite-sha-linux-arm}  ./circleci-testsuite.gz")
+----
+After downloading the plugin and verifying the checksum, complete the following steps:
+
+. Decompress the binary.
++
+[source,console]
+----
+$ gunzip circleci-testsuite.gz
+----
+. Set the execute bit.
++
+[source,console]
+----
+$ chmod u+x circleci-testsuite
+----
+. Move it to a directory on your shell's `$PATH`.
++
+[source,console]
+----
+$ mv circleci-testsuite "${HOME}/bin/"
+----
+--
+
+Linux ARM64::
++
+--
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/linux/arm64/circleci-testsuite.gz[Download]
+
+Verify with:
+
+[source,console,subs="attributes+"]
+----
+$ sha256sum -c <(echo "{testsuite-sha-linux-arm64}  ./circleci-testsuite.gz")
+----
+
+After downloading the plugin and verifying the checksum, complete the following steps:
+
+. Decompress the binary.
++
+[source,console]
+----
+$ gunzip circleci-testsuite.gz
+----
+. Set the execute bit.
++
+[source,console]
+----
+$ chmod u+x circleci-testsuite
+----
+. Move it to a directory on your shell's `$PATH`.
++
+[source,console]
+----
+$ mv circleci-testsuite "${HOME}/bin/"
+----
+--
+
+Windows AMD64::
++
+--
+https://circleci-binary-releases.s3.amazonaws.com/circleci-cli-plugins/circleci-testsuite/{testsuite-version}/windows/amd64/circleci-testsuite.exe.gz[Download]
+
+Verify with:
+
+[source,console,subs="attributes+"]
+----
+$ sha256sum -c <(echo "{testsuite-sha-windows-amd64}  ./circleci-testsuite.exe.gz")
+----
+
+After downloading the plugin and verifying the checksum, complete the following steps:
+
+. Decompress the binary.
++
+[source,console]
+----
+$ gunzip circleci-testsuite.gz
+----
+. Set the execute bit.
++
+[source,console]
+----
+$ chmod u+x circleci-testsuite
+----
+. Move it to a directory on your shell's `$PATH`.
++
+[source,console]
+----
+$ mv circleci-testsuite "${HOME}/bin/"
+----
+--
+====
+
+== 2. Add a `.circleci/test-suites.yml` file at your project root
+
 [tabs]
 ====
 Vitest::
 +
+--
 [source,yaml]
 ----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: vitest list --filesOnly
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-
-Jest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: jest --listTests
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-
-Yarn with Jest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: yarn --silent test --listTests
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-
-pytest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: find ./tests -type f -name 'test*.py'
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-
-Go::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-
-RSpec::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: find spec -type f -name '*_spec.tb'
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-
-
-Shell commands::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: find test/ -type f -name '*_test.ts'
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-
-Other::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: my-test-runner --only-list-tests
-run: |
-  echo "running: <<test.atoms>>" | tr ' ' '\n'
-----
-====
-+
-[TIP]
-====
-The `circleci run testsuite` CLI tooling should be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd my-service && circleci run testsuite "my-tests"`).
-
-The testsuite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
-====
-
-. Run the test suite and confirm that the `discover` command finds the test atoms you expect:
-+
-[source,console]
-----
-$ circleci run testsuite "ci tests" --local
-Running test-suite-subcommand version "1.0.14935-630104a" built "2025-11-25T16:15:39Z"
-Testsuite timeout: 4h40m0s
-Running test suite 'ci tests'
-
-Suite Configuration:
-
-name: ci tests
-discover:
-    command: vitest list --filesOnly
-    shell: /bin/sh
-run:
-    command: |-
-        echo 'running: <<test.atoms>>' | tr ' ' '
-        '
-    shell: /bin/sh
-
-
-Discovering...
-Discovered 2 tests in 29ms
-
-Selecting tests...
-Selecting all tests, no impact analysis available
-Selected 2 tests, Skipped 0 tests in 0s
-
-Timing data is not present.
-Sorted tests in 0s
-
-Running 2 tests
-   echo 'running: src/pages/dashboard/Dashboard.test.tsx src/pages/dashboard/CreateProjectButton.test.tsx' | tr ' ' '\n'
-running:
-src/pages/dashboard/Dashboard.test.tsx
-src/pages/dashboard/CreateProjectButton.test.tsx
-Ran 2 tests in 34ms
-
-Analysis not configured
-Not updating test impact data, analysis not enabled
-----
-
-== 3. Configure the run command
-
-The `run` command executes the test atoms discovered by the discover command using your test runner. Start with the same command you would use to launch your test runner locally, for example:
-
-.Example test command using Vitest
-[source,console]
-----
-$ vitest run --reporter=junit \
-             --outputFile="test-reports/tests.xml" \
-             --bail 0 \
-             src/pages/dashboard/Dashboard.test.tsx src/pages/dashboard/CreateProjectButton.test.tsx
-----
-
-Your test command needs to be modified to use placeholders:
-
-**For test atoms:**
-
-* Use the template variable `<< test.atoms >>` in your `run` command - this will be replaced with a space-separated list of test atoms to run.
-* If the template variable is not found, the command's stdin will receive a newline-separated list of test atoms.
-
-**For JUnit output:**
-
-* Use the template variable `<< outputs.junit >>` so Smarter Testing can locate your test results.
-
-Making these changes to the command above gives:
-
-.Example test command using Vitest with placeholders
-[source,console]
-----
-$ vitest run --reporter=junit \
-             --outputFile="<< outputs.junit >>" \
-             --bail 0 \
-             << test.atoms >>
-----
-
-Now update `.circleci/test-suites.yml`:
-
-. Add the `run` command.
-. Define the JUnit output path in `outputs.junit`. This path determines where JUnit results are written. Later on, when you configure your CI job to run `circleci run testsuite`, `store_test_results` should point to the directory of this path.
-+
-[tabs]
-====
-Vitest::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
 ---
 name: ci tests
 discover: vitest list --filesOnly
@@ -359,12 +269,13 @@ run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << 
 outputs:
   junit: test-reports/tests.xml
 ----
+--
 
 Jest::
 +
+--
 [source,yaml]
 ----
-# .circleci/test-suites.yml
 ---
 name: ci tests
 discover: jest --listTests
@@ -372,25 +283,27 @@ run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=j
 outputs:
   junit: test-reports/tests.xml
 ----
+--
 
-Yarn with Jest::
+Mocha::
 +
+--
 [source,yaml]
 ----
-# .circleci/test-suites.yml
 ---
 name: ci tests
-discover: yarn --silent test --listTests
-run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" yarn test --runInBand --reporters=jest-junit --bail << test.atoms >>
+discover: find ./tests -type f -name '*_test.js'
+run: mocha --reporter xunit --reporter-options output="<< outputs.junit >>",showRelativePaths << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
 ----
+--
 
 pytest::
 +
+--
 [source,yaml]
 ----
-# .circleci/test-suites.yml
 ---
 name: ci tests
 discover: find ./tests -type f -name 'test*.py'
@@ -398,25 +311,12 @@ run: pytest --disable-pytest-warnings --no-header --quiet --tb=short --junit-xml
 outputs:
   junit: test-reports/tests.xml
 ----
-
-Go::
-+
-[source,yaml]
-----
-# .circleci/test-suites.yml
----
-name: ci tests
-discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
-run: go test -race -count=1 << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
+--
 
 Go with gotestsum::
 +
 [source,yaml]
 ----
-# .circleci/test-suites.yml
 ---
 name: ci tests
 discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
@@ -433,24 +333,24 @@ Install the RSpec JUnit Formatter to collect JUnit XML test reports.
 ----
 $ gem install rspec_junit_formatter
 ----
+
 [source,yaml]
 ----
-# .circleci/test-suites.yml
 ---
 name: ci tests
 discover: find spec -type f -name '*_spec.rb'
-run: bundle exec rspec --format RspecJunitFormatter --out << outputs.junit >> << test.atoms >>
+run: bundle exec rspec --format RspecJunitFormatter --out "<< outputs.junit >>" << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
 ----
-
 --
+
 Other::
 +
 --
+Smarter Testing is test runner agnostic, replace the below `discover` and `run` examples with your test runner, the next step will verify the commands are set up correctly.
 [source,yaml]
 ----
-# .circleci/test-suites.yml
 ---
 name: ci tests
 discover: my-test-runner --only-list-tests
@@ -458,69 +358,73 @@ run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
 outputs:
   junit: test-reports/tests.xml
 ----
-
 --
 ====
 
-. Run the test suite and confirm that the `run` command runs the test atoms you expect. You can exit early (Ctrl+C) once verified:
-+
+== 3. Run locally
+
+Use `--doctor` locally to validate the `test-suites.yml` is set up correctly.
+
+The CLI will run through checks, running tests and validating the output, if any results look incorrect an action
+item is provided to resolve it. Follow the steps until all checks pass.
+
+
 [source,console]
 ----
-$ circleci run testsuite "ci tests" --local
-Running test-suite-subcommand version "1.0.14935-630104a" built "2025-11-25T16:15:39Z"
-Testsuite timeout: 4h40m0s
-Running test suite 'ci tests'
-
-Suite Configuration:
-
-name: ci tests
-discover:
-    command: vitest list --filesOnly
-    shell: /bin/sh
-run:
-    command: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
-    shell: /bin/sh
-outputs:
-    junit: test-reports/tests.xml
-
-
-Discovering...
-Discovered 2 tests in 29ms
-
-Selecting tests...
-Selecting all tests, no impact analysis available
-Selected 2 tests, Skipped 0 tests in 0s
-
-Timing data is not present.
-Sorted tests in 0s
-
-
-Waiting for tests...
-Running 1 tests
-   vitest run --reporter=junit --outputFile="test-reports/tests-1.xml" --bail 0 src/pages/dashboard/Dashboard.test.tsx
-JUNIT report written to /home/circleci/project/test-reports/tests-1.xml
-Running 1 tests
-   vitest run --reporter=junit --outputFile="test-reports/tests-2.xml" --bail 0 src/pages/dashboard/CreateProjectButton.test.tsx
-JUNIT report written to /home/circleci/project/test-reports/tests-2.xml
-Ran 2 tests in 527ms
-
-Analysis not configured
-Not updating test impact data, analysis not enabled
+$ circleci run testsuite "ci tests" --doctor
 ----
 
-TIP: Running the test suite locally creates a reports folder (matching your `outputs.junit` directory). Consider adding this directory to `.gitignore` to avoid committing test reports to your repository.
+[TIP]
+====
+The `circleci run testsuite` CLI tooling should be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
 
-At this stage, your tests ran locally using the `testsuite` command without optimizations. In the following sections, you will build on these components to enable the various features of Smarter Testing and add the `testsuite` command to your CircleCI jobs.
+The testsuite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
+====
 
-* xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
-* Enable xref:use-dynamic-test-splitting.adoc[Dynamic Test Splitting] to evenly split tests across parallel nodes.
-* Enable xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
+Once all checks pass, you can run all tests locally by removing the `--doctor` flag.
 
-Each feature can be enabled independently, allowing you to adopt them incrementally based on your needs.
+[source,console]
+----
+$ circleci run testsuite "ci tests"
+----
+
+== 4. Run in CI
+
+TIP: When adding the testsuite command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers.
+
+Use the same command you used locally to run tests in your `.circleci/config.yml`.
+
+Find the previous test command and replace it with the `circleci run testsutie`, keeping all steps the same.
+
+Check that `store_test_results` is storing the directory where the JUnit files are stored from the `test-suites.yml` file.
+
+.Example CircleCI test job configuration with testsuite command
+[source,yaml]
+----
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      # Replace previous tests command e.g. vitest run --reporter=junit ...
+      - run: circleci run testsuite "ci tests"
+      - store_test_results:
+          # This directory must match the directory of `outputs.junit` in your
+          # test-suites.yml
+          path: test-reports
+----
+
+Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your feature branch and push to your VCS.
 
 == Next steps
+
+At this stage, all of your tests should successfully run locally and in CI using the `testsuite` command.
+
+Next, you will build on these components to enable the various features of Smarter Testing.
+
+Each feature can be enabled independently, allowing you to adopt them incrementally based on your needs.
 
 * xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
-

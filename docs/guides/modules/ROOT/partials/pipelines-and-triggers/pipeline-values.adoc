@@ -8,7 +8,7 @@ These values provide core identifiers for the pipeline itself and the project it
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -116,7 +116,7 @@ Values prefixed with `+pipeline.git.*+` describe the git state of the code Circl
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -129,7 +129,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git tag being checked out. Empty if checking out from a branch.
+| The name of the git tag that CircleCI checks out. Empty if the pipeline checks out from a branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -140,7 +140,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The name of the git branch being checked out. Empty if checking out from a tag.
+| The name of the git branch that CircleCI checks out. Empty if the pipeline checks out from a tag.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -151,7 +151,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | Boolean
-| Whether the branch being checked out is the default branch.
+| Whether CircleCI checks out the default branch.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**# (>= v4.7)
 
@@ -162,7 +162,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The long (40-character) git SHA of the commit being checked out.
+| The long (40-character) git SHA of the commit that CircleCI checks out.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -243,7 +243,7 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The long (40-character) git SHA of the build prior to the one being built. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
+| The long (40-character) git SHA of the build that ran before the current build. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build runs first for a branch, the variable will not appear. In addition, if you trigger the build via the API, the variable will not appear.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -253,14 +253,14 @@ d| [.nowrap]#GitHub OAuth# +
 [#configuration-source]
 === Configuration source information
 
-Values prefixed with `+pipeline.config.*+` describe where the CircleCI configuration file was fetched from. These values are currently only available for GitHub App pipelines where the configuration file can be stored in a separate repository from the one being built. For all other pipeline types, the configuration file always lives in the same repository as the code being checked out so you can use the corresponding `+pipeline.git.*+` values instead.
+Values prefixed with `+pipeline.config.*+` describe where CircleCI fetched the configuration file from. These values currently only apply to GitHub App pipelines where the configuration file can reside in a separate repository from the one CircleCI builds. For all other pipeline types, the configuration file always lives in the same repository as the code CircleCI checks out, so you can use the corresponding `+pipeline.git.*+` values instead.
 
 [.table-scroll]
 --
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -319,7 +319,7 @@ All `+pipeline.trigger_parameters.circleci.*+` and `+pipeline.trigger_parameters
 [.datatable.no-sort-col-3,cols="6*", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -848,7 +848,7 @@ Values prefixed with `+pipeline.deploy.*+` are only available for deployment pip
 [.datatable.no-sort-col-3,cols="2,2,1,5,1,1", options="header"]
 |===
 | Variable
-| Source
+| Pipeline type
 | Type
 | Value
 | Cloud
@@ -878,7 +878,7 @@ d| [.nowrap]#GitHub App#
 | `pipeline.deploy.current_version`
 d| [.nowrap]#GitHub App#
 | String
-| The current version of the component that is going to be rolled back or deployed. Can be used to verify that the status of the component matches expectations.
+| The current version of the component that CircleCI will roll back or deploy. Can verify that the component status matches expectations.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
