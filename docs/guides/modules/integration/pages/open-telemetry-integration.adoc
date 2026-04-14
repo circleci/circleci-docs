@@ -112,6 +112,8 @@ the CircleCI organization in which this ran.
 |`com.circleci.pipeline.id` |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
 CircleCI pipeline ID. This is the same value as `cicd.pipeline.run.id`.
 
+|`com.circleci.pipeline.number` |42 |The CircleCI pipeline number.
+
 |`com.circleci.project.id` |96781ce1-9288-4d06-89e6-62fc620117db |The ID
 of the CircleCI project in which this ran.
 
@@ -205,6 +207,14 @@ of the CircleCI project in which this ran.
 
 |`com.circleci.workflow.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
+
+|`com.circleci.workflow.rerun` |false |Whether this workflow is a rerun of a
+previous workflow. True for auto-reruns and manual reruns.
+
+|`com.circleci.workflow.rerun.type` |auto-rerun |The reason for a rerun. Only
+present when `com.circleci.workflow.rerun` is true.
+
+|`com.circleci.workflow.setup` |false |Whether this is a setup workflow.
 
 |`com.circleci.workflow.status` |success |The status of the workflow in
 CircleCI.
@@ -636,10 +646,29 @@ resource class.
 
 |`com.circleci.resource.ram` |4096 |The amount of RAM allocated in MB.
 
+|`com.circleci.step.auto_rerun_delay_seconds` |0 |The number of seconds to
+wait before auto-rerunning this step. Zero if auto-rerun is not configured.
+
+|`com.circleci.step.auto_rerun_number` |0 |The current auto-rerun attempt
+number for this step. Zero if auto-rerun is not configured for this step.
+
+|`com.circleci.step.background` |false |Whether this step runs in the
+background. For example, this is true for steps used to spin up secondary
+service containers.
+
 |`com.circleci.step.command` |echo hello |The command run by the step, if
 applicable.
 
 |`com.circleci.step.exit_code` |0 |The exit code of the step command.
+
+|`com.circleci.step.insignificant` |false |Steps marked as insignificant do not
+affect the success of the job.
+
+|`com.circleci.step.max_auto_reruns` |0 |The maximum number of auto-reruns
+configured for this step. Zero if auto-rerun is not configured.
+
+|`com.circleci.step.parallel` |false |Whether this step runs in parallel
+with other steps in the job.
 
 |`com.circleci.task.index` |0 |The zero-based index of the task this step
 belongs to.
