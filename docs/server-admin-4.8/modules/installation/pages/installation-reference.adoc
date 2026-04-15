@@ -757,7 +757,7 @@ externalized MongoDB instance.
 
 |mongodb.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
 
 |mongodb.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"datadir"+` |
@@ -1127,7 +1127,7 @@ values are not used by the PostgreSQL chart.
 
 |postgresql.primary.persistence.existingClaim |string |`+""+` |To
 increase PVC size, follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
 
 |postgresql.primary.persistence.size |string |`+"8Gi"+` |
 
@@ -1209,7 +1209,7 @@ this value is '`15672`' else port of external rabbitmq instance
 
 |rabbitmq.persistence.existingClaim |string |`+""+` |To increase PVC
 size, follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
 
 |rabbitmq.persistence.size |string |`+"8Gi"+` |
 
@@ -1245,7 +1245,7 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
 
 |redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1260,7 +1260,7 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
 
 |redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
