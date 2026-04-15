@@ -118,7 +118,3 @@ Organization administrators can manage the Slack integration from menu:Org[Slack
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
 
-== Next steps
-
-* xref:guides:integration:notifications.adoc[Notifications Overview]
-* xref:guides:integration:outbound-webhooks.adoc[Using Webhooks]
