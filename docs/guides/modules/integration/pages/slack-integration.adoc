@@ -5,7 +5,7 @@
 :experimental:
 :noindex: true
 
-CAUTION: The CircleCI Slack integration is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features.
+CAUTION: The CircleCI Slack integration is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have any feedback on the feature you can add it to our link:https://circleci.canny.io/cloud-feature-requests/p/deeper-integration-with-slack[Ideas board].
 
 Use the CircleCI Slack app to receive workflow notifications in Slack. The app is installed once at the organization level and can then be configured for individual projects.
 
