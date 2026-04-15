@@ -154,7 +154,7 @@
 *** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
 *** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 *** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
-*** xref:test:testsuite-configuration-reference.adoc[Testsuite Config Reference]
+*** xref:test:testsuite-configuration-reference.adoc[Test suite Config Reference]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
