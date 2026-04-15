@@ -3,6 +3,9 @@
 :page-badge: Preview
 :page-description: Install the CircleCI Slack app and configure project-level Slack notifications for workflow status updates.
 :experimental:
+:noindex: true
+
+CAUTION: The CircleCI Slack integration is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features.
 
 Use the CircleCI Slack app to receive workflow notifications in Slack. The app is installed once at the organization level and can then be configured for individual projects.
 
@@ -51,7 +54,7 @@ image::guides:ROOT:slack-integration/org-settings-slack-integration.png[Screensh
 
 == 2. Link a project to a Slack channel
 
-After the Slack app is installed, configure each project to send notifications to a Slack channel.
+After the Slack app is installed, configure each project to send notifications to a Slack channel of your choice.
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select *Slack Notifications* from the sidebar.
