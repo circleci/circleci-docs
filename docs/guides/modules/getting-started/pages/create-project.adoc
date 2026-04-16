@@ -3,6 +3,11 @@
 :page-description: "Learn how to create a project in CircleCI."
 :experimental:
 
+// TODO [BETA]: Add GHES to the project creation flow.
+// If the flow is identical to GitHub App Cloud, add a note:
+// "These steps apply to projects using GitHub Cloud or GitHub Enterprise Server."
+// If there is a GHES-specific path, document the difference.
+
 This guide gets you started with creating a new project in CircleCI.
 
 [#prerequisites]
