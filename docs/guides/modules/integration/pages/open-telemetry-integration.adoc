@@ -490,6 +490,49 @@ resource class.
 
 |`com.circleci.resource.ram` |4096 |The amount of RAM allocated in MB.
 
+|`com.circleci.resource.usage.cpu.mean` |0.42 |Mean CPU usage for the task. The
+values are in the range `0.0` to `1.0` with the latter meaning 100% usage
+across all cores. Only present for `build` jobs when usage data is available.
+
+|`com.circleci.resource.usage.cpu.min` |0.01 |The lowest CPU usage observed
+during the task. The values are in the range `0.0` to `1.0` with the latter
+meaning 100% usage across all cores. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.cpu.max` |0.98 |The highest CPU usage observed
+during the task. The values are in the range `0.0` to `1.0` with the latter
+meaning 100% usage across all cores. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.cpu.p90` |0.98 |The 90th percentile of the CPU
+usage observed during the task. The values are in the range `0.0` to `1.0` with
+the latter meaning 100% usage across all cores. Only present for `build` jobs
+when usage data is available.
+
+|`com.circleci.resource.usage.memory.mean` |1073741824 |Mean memory usage
+in bytes across the task. Only present for `build` jobs when usage data is
+available.
+
+|`com.circleci.resource.usage.memory.min` |536870912 |The lowest memory usage
+in bytes observed during the task. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.memory.max` |2147483648 |The highest memory usage
+in bytes observed during the task. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.memory.p90` |1932735283 |The 90th percentile of
+the memory usage in bytes during the task. Only present for `build` jobs when
+usage data is available.
+
+|`com.circleci.resource.usage.network.bytes_received` |10485760 |Total bytes
+received over the network during the task. Only present for `build` jobs when
+usage data is available and the value is greater than zero.
+
+|`com.circleci.resource.usage.network.bytes_sent` |5242880 |Total bytes sent
+over the network during the task. Only present for `build` jobs when usage
+data is available and the value is greater than zero.
+
 |`com.circleci.task.index` |0 |The zero-based index of this task within
 its parallel job.
 
