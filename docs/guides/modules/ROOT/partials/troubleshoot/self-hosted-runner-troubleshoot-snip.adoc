@@ -193,7 +193,7 @@ NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this fe
 If the link:https://circleci.com/docs/openid-connect-tokens/[OIDC token] environment variables (`$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`) are missing from jobs, check the default temporary directory. A common cause is that it (for example, `/tmp`) is not writable or is mounted as `noexec`. The system's temporary directory needs to be writable and allow execution for the OIDC plugin to be downloaded and executed from it.
 
 [#runners-queueing]
-=== Runner Tasks Queueing despite idle Runners
+=== Runner tasks queueing despite idle runners
 
 The runner inventory page only displays actively running tasks. Queued tasks are not visible.
 This can make it appear that runners are idle when concurrency is fully consumed by queued jobs.
