@@ -13,29 +13,32 @@ Pipelines can be triggered in the following ways:
 
 Pipelines provide a flexible framework for creating conditional workflows for you to customize your CI/CD process to fit your project's needs, using the following orchestration options:
 
-* xref:workflows.adoc#using-filters-in-your-workflows[Workflow filters].
-* xref:workflows.adoc#workflows-configuration-examples[Job requirements].
-* xref:selecting-a-workflow-to-run-using-pipeline-parameters.adoc[Pipeline parameters].
+* xref:workflows.adoc#using-filters-in-your-workflows[Workflow Filters].
+* xref:workflows.adoc#workflows-configuration-examples[Job Requirements].
+* xref:selecting-a-workflow-to-run-using-pipeline-parameters.adoc[Pipeline Parameters].
 
 [#pipelines-dashboard]
 == View pipelines in the CircleCI web app
-Your pipelines dashboard displays recently-triggered pipelines for your organization. Use the various filters to find the pipelines you need. Select workflow and job names to xref:jobs-steps.adoc#access-jobs-and-steps-in-the-circleci-app[view workflow maps and individual job steps]. Use the quick controls on the right of the screen to rerun and cancel workflows.
+Your pipelines dashboard displays pipelines for your organization. Use the various filters to find the pipelines you need. Select workflow and job names to view workflow maps and individual job steps. Use the quick controls on the right of the screen to rerun and cancel workflows.
 
+.Pipelines dashboard in the CircleCI web app
 image::guides:ROOT:pipelines-dashboard.png[Screenshot of the pipelines dashboard in the CircleCI app]
 
 From the pipelines dashboard you can find the _pipeline ID_. The pipeline ID is a unique ID for a pipeline that has been triggered. You can use the pipeline ID to access pipeline information via the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/getPipelineValuesById[API].
 
+.Location of the pipeline ID in the CircleCI web app
 image::guides:ROOT:pipeline-id.png[Screenshot showing the location on the pipeline ID]
 
-Each pipeline also has a _Definition ID_, which is a UUID for the pipeline, which can be used to refer to a specific pipeline when triggering it xref:triggers-overview.adoc#run-a-pipeline-using-the-api[via the API].
+Each pipeline also has a _Definition ID_, which is a UUID for the pipeline, which can be used to refer to a specific pipeline when triggering it xref:triggers-overview.adoc#run-a-pipeline-using-the-api[Via the API].
 
+.Project setup page
 image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[Project setup page]
 
 == Set up pipelines
 
-NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available. CircleCI server pipelines are set up when a project is set up and cannot be edited. CircleCI server requires CircleCI configuration files to be stored in the same repository as your code at `.circleci/config.yml`.
+NOTE: **Using CircleCI Server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available. CircleCI Server pipelines are set up when a project is set up and cannot be edited. CircleCI Server requires CircleCI configuration files to be stored in the same repository as your code at `.circleci/config.yml`.
 
-The pipeline and trigger options and features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
+The pipeline and trigger options and features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page.
 
 A pipeline defines a unit of work that can be run within your project. Each pipeline is defined by two key characteristics:
 
@@ -43,7 +46,7 @@ A pipeline defines a unit of work that can be run within your project. Each pipe
 ** For GitHub App and Bitbucket Data Center pipelines you can choose any file path (with extension `*.yml`) in any repository to be your config source.
 ** GitHub OAuth pipelines require config files to be stored in the repository that gives the project its name, at `.circleci/config.yml`.
 
-* A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[checkout step].
+* A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step].
 ** For GitHub App and Bitbucket Data Center pipelines you can choose any of your repositories as your checkout source.This model allows your CircleCI config to be stored in a different repository from your code.
 ** GitHub OAuth and GitLab pipelines require the same project repository for your config source and checkout source.
 
@@ -64,6 +67,7 @@ The steps and options described in this section are for setting up a pipeline. C
 GitHub App::
 +
 --
+.Add a pipeline
 image::guides:ROOT:orchestrate-and-trigger/project-setup-pipelines.png[Add a pipeline]
 
 To add or edit a pipeline, follow these steps:
@@ -73,22 +77,23 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select *Project Setup* in the sidebar.
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon (icon:edit-solid[Edit icon]) to the right of the section you want to change.
 +
-NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so at this point. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a detailed guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
+NOTE: If you have not yet installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so at this point. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a detailed guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Select a repository to be your config source.
 ** Enter your config file path. The field is automatically populated with the default path `.circleci/config.yml` but you can edit this if needed.
-** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
+** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
 . Select btn:[Save].
 
 The GitHub App pipeline model also applies to GitHub Enterprise Server. GitHub App Server pipelines support the same configuration source and checkout source flexibility as GitHub App pipelines for GitHub Cloud, including custom config file paths and cross-repo setups. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
 
-Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covering in the xref:set-up-triggers.adoc[Set up triggers] page.
+Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covering in the xref:set-up-triggers.adoc[Set up Triggers] page.
 --
 GitLab::
 +
 --
+.Add a pipeline
 image::guides:ROOT:add-pipeline.png[Add a pipeline]
 
 To add or edit a pipeline, follow these steps:
@@ -104,12 +109,12 @@ To add or edit a pipeline, follow these steps:
 +
 NOTE: If you integrate with xref:integration:github-integration.adoc[CircleCI's GitHub OAuth App] you can select GitHub App here to install the App into your org and access xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[improved security and new features]. This is a one-time step, which can be done by an organization admin or a user who has admin access to at least one repository in the organization. Once installed, further GitHub App pipelines can be setup without this installation step.
 +
-NOTE: For GitLab self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organization-integration[menu:Org[VCS Connections]]. In either case, you will also need to enter your personal access token again to authorize this connection.
+NOTE: For GitLab self-managed, you can input any instance that you have previously set up in CircleCI. If you wish to set a different feature branch or repository from a self-managed instance as a new pipeline, you will first need to add a new connection via your menu:Org[VCS Connections]. In either case, you will also need to enter your personal access token again to authorize this connection.
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file.
-** Under Build Assets, select a Checkout Source for this pipeline. This is the repository that will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[checkout step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the Config Source.
+** Under Build Assets, select a Checkout Source for this pipeline. This is the repository that will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the Config Source.
 . Select btn:[Save].
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is described in the following section.
@@ -188,12 +193,12 @@ jobs:
 
 A pipeline can be triggered with specific `parameter` values using the API v2 or via the CircleCI web app.
 
-See the xref:pipeline-variables.adoc[Pipeline values and parameters] page for more information.
+See the xref:pipeline-variables.adoc[Pipeline Values and Parameters] page for more information.
 
 [#visual-studio-code-extension]
 == VS Code extension
 
-If you use Visual Studio Code, you can also monitor and interact with your pipelines directly from VS Code with the xref:toolkit:vs-code-extension-overview.adoc[official CircleCI extension]. The extension allows you access to:
+If you use Visual Studio Code, you can also monitor and interact with your pipelines directly from VS Code with the official xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code Extension]. The extension allows you access to:
 
 * Customize which projects and pipelines you want to follow.
 * View job logs and test results.
@@ -201,6 +206,7 @@ If you use Visual Studio Code, you can also monitor and interact with your pipel
 * Approve, re-run, and debug jobs with SSH.
 * Get notified when your workflows fail or need approval.
 
+.VS Code extension job details
 image::guides:ROOT:vs_code_extension_job-details.png[Screenshot showing the detailed view of a failed test]
 
 The CircleCI VS Code extension is available to download on the link:https://marketplace.visualstudio.com/items?itemName=circleci.circleci[VS Code marketplace.]
