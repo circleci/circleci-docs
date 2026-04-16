@@ -73,6 +73,10 @@ Some starter configs are shown below. Choose the one for your test runner and co
 Vitest::
 +
 --
+Follow the instructions to add the link:https://github.com/circleci/vitest-circleci-coverage[vitest-circleci-coverage] plugin as a dev dependency.
+
+Add the `analysis` command to your `.circleci/test-suites.yml`.
+
 [source,yaml]
 ----
 ---
@@ -87,6 +91,10 @@ options:
 Jest::
 +
 --
+Follow the instructions to add the link:https://github.com/circleci/jest-circleci-coverage[jest-circleci-coverage] plugin as a dev dependency.
+
+Add the `analysis` command to your `.circleci/test-suites.yml`.
+
 [source,yaml]
 ----
 ---
@@ -101,6 +109,10 @@ options:
 Mocha::
 +
 --
+Follow the instructions to add the link:https://github.com/circleci/mocha-circleci-coverage[mocha-circleci-coverage] plugin as a dev dependency.
+
+Add the `analysis` command to your `.circleci/test-suites.yml`.
+
 [source,yaml]
 ----
 ---
@@ -115,6 +127,10 @@ options:
 pytest::
 +
 --
+Follow the instructions to add the link:https://github.com/circleci/pytest-circleci-coverage[pytest-circleci-coverage] plugin as a dev dependency.
+
+Add the `analysis` command to your `.circleci/test-suites.yml`.
+
 [source,yaml]
 ----
 ---
@@ -142,6 +158,10 @@ options:
 RSpec::
 +
 --
+Follow the instructions to add the link:https://github.com/circleci/rspec-circleci-coverage[rspec-circleci-coverage] plugin as a dev dependency.
+
+Add the `analysis` command to your `.circleci/test-suites.yml`.
+
 [source,yaml]
 ----
 ---
