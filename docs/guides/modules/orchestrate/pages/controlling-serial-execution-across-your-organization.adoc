@@ -119,6 +119,63 @@ You can cancel an entire workflow that contains serial group jobs. Cancelling a 
 . Select the "Cancel Workflow" button to the right of the pipeline (icon:cancel[Cancel icon]).
 . Confirm the cancellation when prompted.
 
+== Job groups
+
+Job groups let you define a named set of jobs and their internal dependencies under the top-level `job-groups` key. You can invoke a job group in a workflow just like a regular job, and optionally apply a `serial-group` to the invocation to serialize the entire group as an atomic unit.
+
+=== Define a job group
+
+Add a `job-groups` key at the top level of your config. Each group has a name and a `jobs` list that follows the same format as workflow job entries, including internal `requires` dependencies:
+
+[source,yaml]
+----
+job-groups:
+  migrate-and-verify:
+    jobs:
+      - migrate
+      - verify:
+          requires:
+            - migrate
+----
+
+=== Use a job group in a workflow
+
+Reference the group by name in a workflow's `jobs` list, just like a regular job. Jobs downstream of the group can depend on it using `requires`:
+
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/job-group.yml[]
+----
+
+When invoked without `serial-group`, the compiler expands the group inline and wraps it with no-op boundary jobs.
+
+=== Use serial-group with a job group
+
+Add the `serial-group` key to a group invocation to serialize the entire group as an atomic unit. No other serial group with the same `serial-group` key across your organization can start until all jobs in the group complete:
+
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/job-group-with-serial-group.yml[]
+----
+
+=== Invoke a job group multiple times
+
+You can invoke the same job group more than once in a workflow by adding a `name:` attribute to each invocation. Each `name:` value must be unique within the workflow and is used as a prefix for the expanded job names:
+
+[,yaml]
+----
+include::ROOT:example$orchestration-examples/job-group-multiple-invocations.yml[]
+----
+
+=== How job group expansion works
+
+When CircleCI processes a job group invocation, it inlines all jobs from the group definition and adds synthetic boundary jobs at each end:
+
+* *Entry job*: Inserted before the root jobs (jobs in the group with no internal `requires` dependencies). With `serial-group`, this is a serial group start job. Without it, this is a no-op group-start job.
+* *Exit job*: Inserted after the leaf jobs (jobs in the group that no other group job depends on). With `serial-group`, this is a serial group end job. Without it, this is a no-op group-end job.
+
+The group invocation's `requires` and branch/tag filters are applied to the entry job. Jobs in the workflow that depend on the group invocation using `requires` are rewired to depend on the exit job.
+
 == Troubleshooting serial groups
 
 === Job skipped unexpectedly?
@@ -154,6 +211,24 @@ If you are experiencing deployment order problems, check the following:
 . Check the pipeline numbers of recent deployments to understand execution order.
 . Consider using more specific serial group naming conventions that include branch or environment information.
 
+=== Job group compile errors
+
+If your pipeline fails to compile after adding a job group, check for the following configuration errors:
+
+* A name appears in both `jobs` and `job-groups`.
+* A job inside a `job-groups` definition references another job group. Nesting is not supported.
+* A job group invocation includes `matrix`, `override-with`, `context`, `pre-steps`, or `post-steps` attributes.
+* A job group definition includes a `parameters` key.
+* A job group is invoked more than once in a workflow without distinct `name:` values.
+* A workflow job uses `requires` to depend on an individual job inside a group, rather than on the group invocation.
+* A job inside a group uses `requires` to depend on a job that belongs to a different group.
+
+=== Failure-handling job not triggering for a job group?
+
+If a downstream job configured to run on failure does not trigger after a job group fails, it may be waiting on the group's exit job rather than the individual job that failed. Downstream jobs that depend on a job group invocation observe the exit job's status, not the status of individual jobs inside the group.
+
+To react to a failure inside the group, add a failure-handling job inside the group definition itself.
+
 === Still experiencing resource conflicts?
 
 If you are still experiencing resource conflicts despite using serial groups, check the following:
@@ -168,7 +243,7 @@ Serial groups provide powerful orchestration capabilities, but they do have limi
 
 === No workflow-level configuration
 
-Serial groups can only be applied at the job level. You cannot configure an entire workflow to run as a serial group. Each job that needs serialization must have the `serial-group` key individually specified. This means you cannot wrap a collection of jobs with a single serial group declaration.
+Serial groups can be applied at the job or job group invocation level. You cannot configure an entire workflow to run as a serial group. To serialize a collection of jobs as an atomic unit using a single `serial-group` declaration, see <<job-groups,Job groups>>.
 
 === No multiple keys in a single workflow
 
