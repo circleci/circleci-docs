@@ -73,9 +73,9 @@ We never automatically redirect requests for specific Xcode images to a differen
 [#xcode-patches]
 == Xcode patches
 
-We retain the latest patch version of each Xcode `major.minor` version we support. Once Apple releases a new patch version, we deprecate the previous patch version and automatically redirect all requests to the new patch of the same `major.minor` version.
+We retain the latest patch version of each Xcode `major.minor` version we support. Once Apple releases a patch version, we deprecate the previous patch version and automatically redirect all requests to the updated patch of the same `major.minor` version.
 
-Patches are generally backwards compatible, so we put redirects in place within 24 hours of a new patch release. If we discover any major issues, we retain the ability to issue a rollback and make both versions temporarily available.
+Patches are generally backwards compatible, so we put redirects in place within 24 hours of a patch release. If we discover any major issues, we retain the ability to issue a rollback and make both versions temporarily available.
 
 *Example:*
 
@@ -84,18 +84,42 @@ When Apple released Xcode `13.2.1`, we removed the previous patch version, `13.2
 [#beta-image-support]
 == Beta image support
 
-We aim to make beta Xcode versions available on the macOS executor as soon as we can. This allows developers to test their apps ahead of the next stable Xcode release.
+We aim to make beta Xcode versions available on the macOS executor at the earliest opportunity. This allows developers to test their apps ahead of the next stable Xcode release.
 
-Unlike our stable images (which we freeze once released), when we release a new beta image it overwrites the previous beta image until we release an RC/Stable image. At that point we freeze the image and no longer update it. If you request an image using an Xcode version currently in beta, it changes when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling which are beyond our control. We do not recommend beta images for production pipelines.
+Unlike our stable images (which we freeze once released), when we release a beta image it overwrites the previous beta image until we release an RC/Stable image. At that point we freeze the image and no longer update it. If you request an image using an Xcode version currently in beta, it changes when Apple releases a subsequent Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling which are beyond our control. We do not recommend beta images for production pipelines.
 
 To read about our customer support policy for beta images, check out this link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
 
 [#xcode-image-releases]
 == Xcode image releases
 
-We track and monitor Apple's Xcode releases and aim to release new images as soon as possible. We typically aim to support a new Xcode image within a couple of days, but note that this is not an SLA. We do not provide an official SLA turnaround time for new Xcode images.
+CircleCI is committed to providing Xcode image updates within *2 business days* of Apple's official GA release, as announced on link:https://developer.apple.com/news/releases/rss/releases.rss[Apple's official RSS feed]. This commitment applies to stable, generally available Xcode releases only.
 
-We always announce new images on our link:https://circleci.com/changelog/[changelog] along with release notes. We also add them to the table of xref:using-macos.adoc#supported-xcode-versions[Xcode Versions in the Documentation].
+We announce all images on our link:https://circleci.com/changelog/[changelog] along with release notes. We also add them to the table of xref:using-macos.adoc#supported-xcode-versions[Xcode Versions in the Documentation].
+
+[#xcode-release-exceptions]
+=== Exceptions to the release window
+
+[#pre-release-builds]
+==== Pre-release builds
+
+Beta releases and release candidates are not subject to the 2 business day commitment. Beta and RC images are published on a best-effort basis with no guaranteed timeline. See xref:#beta-image-support[Beta Image Support] for more detail.
+
+[#macos-upgrade-required]
+==== macOS upgrade required
+
+For major Xcode releases that require a corresponding macOS upgrade on our fleet, the standard 2 business day window does not apply. We aim to publish a projected availability date within *5 business days* of Apple's GA release. A notice is posted on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum] and link:https://circleci.com/changelog/[changelog] when the image goes live.
+
+[#image-quality-hold]
+==== Image quality hold
+
+In rare cases, CircleCI's validation process may identify critical issues with a newly released Xcode image. Examples include:
+ 
+* Toolchain regressions
+* Simulator instability
+* Build system defects introduced by Apple.
+ 
+When this occurs, availability may be delayed beyond the standard window. We aim to post a notice on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum] within the original 2 business day window. The notice states that the release is under a quality hold and whether the issue is attributable to Apple or CircleCI. A projected timeline is provided once the scope of the fix is known.
 
 [#macos-versions]
 == macOS versions
