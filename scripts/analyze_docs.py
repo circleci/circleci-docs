@@ -36,17 +36,21 @@ def has_page_description(file_path):
         return False
 
 def main():
-    docs_dir = Path('/workspace/docs')
+    # Get the repository root (parent of scripts folder)
+    script_dir = Path(__file__).parent
+    repo_root = script_dir.parent
+    docs_dir = repo_root / 'docs'
+
     adoc_files = list(docs_dir.glob('**/*.adoc'))
-    
+
     print(f"Found {len(adoc_files)} .adoc files")
-    
+
     results = []
-    
+
     for adoc_file in adoc_files:
         char_count = count_characters(adoc_file)
         has_description = has_page_description(adoc_file)
-        relative_path = adoc_file.relative_to('/workspace')
+        relative_path = adoc_file.relative_to(repo_root)
         filename = adoc_file.name
         
         flagged_size = "YES" if char_count > 50000 else "NO"
@@ -62,9 +66,9 @@ def main():
     
     # Sort by character count descending
     results.sort(key=lambda x: x['character_count'], reverse=True)
-    
-    # Write to CSV
-    output_file = '/workspace/docs_character_audit.csv'
+
+    # Write to CSV in scripts folder
+    output_file = script_dir / 'docs_character_audit.csv'
     with open(output_file, 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['filename', 'path', 'character_count', 'flagged_over_50k', 'missing_page_description']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
