@@ -6,17 +6,17 @@
 [#overview]
 == Overview
 
-The Android machine image is accessed through the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Linux machine executor], like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. It also comes with the Android SDK pre-installed.
+The Android machine image is accessed through the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Linux Machine Executor], like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. It also comes with the Android SDK pre-installed.
 
 [#using-the-android-machine-image]
 == Using the Android machine image
 
-It is possible to configure the use of the Android image in your configuration with xref:orbs:use:orb-intro.adoc[orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Refer to the <<examples>> section below for more details.
+It is possible to configure the use of the Android image in your configuration with xref:orbs:use:orb-intro.adoc[Orbs], as well as manually. The Android orb will simplify your configuration. More complex and custom configurations may benefit from manually configuring your usage instead of using the orb. This document will cover both use cases. Refer to the <<examples>> section below for more details.
 
 [#pre-installed-software]
 == Pre-installed software
 
-View the quarterly update announcement on our link:https://discuss.circleci.com/t/android-machine-executor-images-2022-january-q1-update/42842/1[Discuss] page for a list of current pre-installed software.
+View the quarterly update announcement on our link:https://discuss.circleci.com/c/ecosystem/circleci-images/[Discuss] page for a list of current pre-installed software.
 
 [#examples]
 == Examples
@@ -182,7 +182,7 @@ workflows:
 
 NOTE: Android machine images are only available on server installations on Google Cloud Platform (GCP) at this time.
 
-From CircleCI server 3.4+, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
+From CircleCI Server 3.4+, Android machine images are supported for installations on GCP. To use the Android image in your projects set the `image` key to `android-default` in your jobs.
 
 ```yaml
 version: 2.1
@@ -195,7 +195,7 @@ jobs:
     # job steps here
 ```
 
-It is also possible to use the Android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server-admin:operator:managing-orbs.adoc[CircleCI server orbs] page for instructions on importing orbs.
+It is also possible to use the Android orb, as shown above, for cloud. Your server administrator will need to import the orb first. Also, you will need to define the `android-default` image for the machine executor, as shown in the example below, rather than using the default executor built into the orb. View the xref:server-admin:operator:managing-orbs.adoc[CircleCI Server Orbs] page for instructions on importing orbs.
 
 This example shows how you can use granular orb commands to achieve what the link:https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests[start-emulator-and-run-tests] command does.
 

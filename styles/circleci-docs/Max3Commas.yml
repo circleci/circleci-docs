@@ -1,5 +1,5 @@
 extends: occurrence
-message: "More than 3 commas!"
+message: "More than 3 commas! Sometimes it is okay to use more than three commas but it is good to check if the sentence should be split up using a list."
 level: warning
 # Here, we're counting the number of times a comma appears
 # in a sentence.

@@ -1,12 +1,37 @@
 = OpenTelemetry for CI/CD
 
 CircleCI supports sending OpenTelemetry spans for your pipelines as they
-execute. Spans are emitted for pipelines, workflows, jobs, tasks, and steps
+execute. CircleCI emits spans for pipelines, workflows, jobs, tasks, and steps
 allowing you to understand and visualise the behavior of your pipelines.
+
+== Configure OpenTelemetry export via the UI
+
+Complete the following steps to configure CircleCI to send OpenTelemetry spans
+to the collector of your choice.
+
+. Log in to the link:https://app.circleci.com/home[CircleCI web app]
+
+. Select your organization.
+
+. Open **Org** from the sidebar.
+
+. In the organization settings sidebar, click **OpenTelemetry Configuration**
+
+. Select **Add exporter**
+
+. Complete the fields.
+** **Endpoint**: The hostname and port for your OTLP collector, for example `otel.example.com:4317`.
+** **Protocol**: Either `grpc` or `http`.
+** **Use insecure connection**: Only enable this switch if your collector is incapable of TLS.
+** **Additional Headers**: If your collector needs additional headers with each
+   request add it here. For example, for Honeycomb you must add an
+   `x-honeycomb-team` header with your Honeycomb API key as the value.
+
+. Select **Add exporter** to save the new exporter.
 
 == Configure OpenTelemetry export via the API
 
-The API has the following endpoints, all of which require organization admin privileges.
+The API has the following endpoints. All endpoints require organization admin privileges.
 
 * `GET /api/v2/otel/exporters?org-id=...` - List the exporter configurations for the given organization ID.
 * `POST /api/v2/otel/exporters` - Add an exporter configuration.
@@ -29,17 +54,33 @@ Then run this command, substituting your own values:
 $ curl -sH "Circle-Token: <CircleCI Token>" -X POST -d '{"org_id": "<CircleCI org ID>", "endpoint": "api.honeycomb.io:443", "protocol": "grpc", "headers": {"x-honeycomb-team": "<Honeycomb API token>"}}' 'https://circleci.com/api/v2/otel/exporters'
 ----
 
+[NOTE]
+====
+*Enterprise and IP-restricted endpoints*
+
+If your OpenTelemetry endpoint restricts IP access (Grafana and Prometheus are
+common examples), you need to allow-list CircleCI's core service IP ranges.
+CircleCI sends spans from its core services, not from job executors, so you do
+not need to enable the `circleci_ip_ranges` job feature. Query the core service
+IP ranges via DNS:
+
+[source,console]
+----
+dig core.knownips.circleci.com A +short
+----
+
+See xref:security:ip-ranges.adoc[IP Ranges] for the full list and more details.
+====
+
 == Mapping of CircleCI primitives to OpenTelemetry spans
 
-The following is a description of the span data emitted for each of the
-following CircleCI primitives. Where possible we have tried to make this
-compatible with the OpenTelemetry semantic conventions but this has not
-always been possible.
+The following describes the span data emitted for each CircleCI primitive. Span
+data follows OpenTelemetry semantic conventions where possible.
 
 === Pipeline
 
-The name of the span will be `Pipeline: ++{++cicd.pipeline.name}` which is a
-deviation from the OpenTelemetry semantic conventions which specifies
+The span name is `Pipeline: ++{++cicd.pipeline.name}`. This deviates from the
+OpenTelemetry semantic conventions that specify
 `++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
 
 The span attributes are as follows:
@@ -49,35 +90,34 @@ The span attributes are as follows:
 [.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+|`cicd.pipeline.action.name` |RUN |The value is always `RUN` for compatibility
 with the OpenTelemetry semantic conventions.
 
-|`cicd.pipeline.name` |Integration |The name of the pipeline. For GitHub
-OAuth pipelines this will be the name of the project.
+|`cicd.pipeline.name` |Integration |The name of the pipeline. GitHub OAuth
+pipelines use the project name.
 
 |`cicd.pipeline.run.id` |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
 CircleCI pipeline ID.
 
-|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+|`cicd.pipeline.run.state` |executing |The value is always `executing` for
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |pass:[https://app.circleci.com/pipeline/f74a9582-9dd4-4b89-8801-4357de39ca5f]
-|A URL which will redirect you to the page in the web UI for the
-pipeline.
+|A URL that redirects to the pipeline page in the web UI.
 
 |`com.circleci.org.id` |cb53b18d-7379-42ff-915f-29b6f3b86187 |The ID of
 the CircleCI organization in which this ran.
 
 |`com.circleci.pipeline.id` |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
-CircleCI pipeline ID. This is the same value as `cicd.pipeline.run.id`,
-which is present for OpenTelemetry semantic convention compatibility.
+CircleCI pipeline ID. This is the same value as `cicd.pipeline.run.id`.
+
+|`com.circleci.pipeline.number` |42 |The CircleCI pipeline number.
 
 |`com.circleci.project.id` |96781ce1-9288-4d06-89e6-62fc620117db |The ID
 of the CircleCI project in which this ran.
 
-|`service.name` |CircleCI Pipelines |This will always be
-`CircleCI Pipelines`.
+|`service.name` |CircleCI Pipelines |Always `CircleCI Pipelines`.
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
@@ -88,20 +128,20 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` | `github` |If the pipeline was generated in connection
-with a Git repo this shows the provider of the Git repo. Possible values
-are `bitbucket`, `github`, and `gitlab`.
+|`vcs.provider.name` | `github` |This shows the Git repo provider in cases
+where the pipeline relates to a Git event. Possible values are `bitbucket`,
+`github`, and `gitlab`.
 
-|`vcs.ref.base.name` |main |For PR pipelines this will be the name of the
-ref the PR is merging into. For branch pipelines this will be the branch
-name. For tag pipelines this will be the tag name.
+|`vcs.ref.base.name` |main |For PR pipelines, this is the name of the ref the
+PR is merging into. For branch pipelines, this is the branch name. For tag
+pipelines, this is the tag name.
 
 |`vcs.ref.base.revision` |14c29a1b2454ae4dd966f27e3b46aec7680d8c14 |The
 Git SHA for the base ref.
 
-|`vcs.ref.head.name` |my-feature-branch |For PR pipelines this will be the
-name of the ref the PR is merging from. For branch pipelines this will
-be the branch name. For tag pipelines this will be the tag name.
+|`vcs.ref.head.name` |my-feature-branch |For PR pipelines, this is the name of
+the ref the PR is merging from. For branch pipelines, this is the branch name.
+For tag pipelines, this is the tag name.
 
 |`vcs.ref.head.revision` |2fe3ff8ff80a45f9cbd8bcc14c774a1d3ac588e4 |The
 Git SHA for the head ref.
@@ -112,15 +152,15 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
+|`vcs.repository.url.full` |`https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
 
 === Workflow
 
-The name of the span will be `Workflow: ++{++workflow name}` which is a
-deviation from the OpenTelemetry semantic conventions which specifies
+The span name is `Workflow: ++{++workflow name}`, deviating from the
+OpenTelemetry semantic conventions that specify
 `++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
 
 In OpenTelemetry semantic conventions, the workflow maps to a "`pipeline run`".
@@ -134,7 +174,7 @@ The span attributes are as follows:
 [.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+|`cicd.pipeline.action.name` |RUN |The value is always `RUN` for compatibility
 with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow.
@@ -147,13 +187,12 @@ in `com.circleci.workflow.status`.
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |This will always be `executing` for
+|`cicd.pipeline.run.state` |executing |The value is always `executing` for
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
-|A URL which will redirect you to the page in the web UI for the
-workflow.
+|A URL that redirects to the workflow page in the web UI.
 
 |`com.circleci.org.id` |cb53b18d-7379-42ff-915f-29b6f3b86187 |The ID of
 the CircleCI organization in which this ran.
@@ -169,6 +208,14 @@ of the CircleCI project in which this ran.
 |`com.circleci.workflow.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
+|`com.circleci.workflow.rerun` |false |Whether this workflow is a rerun of a
+previous workflow. True for auto-reruns and manual reruns.
+
+|`com.circleci.workflow.rerun.type` |auto-rerun |The reason for a rerun. Only
+present when `com.circleci.workflow.rerun` is true.
+
+|`com.circleci.workflow.setup` |false |Whether this is a setup workflow.
+
 |`com.circleci.workflow.status` |success |The status of the workflow in
 CircleCI.
 
@@ -176,8 +223,7 @@ CircleCI.
 condition. Only present for statuses that map to a `failure` result
 (`unauthorized`, `error`, `failed`, `failing`).
 
-|`service.name` |CircleCI Pipelines |This will always be
-`CircleCI Pipelines`.
+|`service.name` |CircleCI Pipelines |Always `CircleCI Pipelines`.
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
@@ -188,20 +234,20 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |`github` |If the pipeline was generated in connection
-with a Git repo this shows the provider of the Git repo. Possible values
-are `bitbucket`, `github`, and `gitlab`.
+|`vcs.provider.name` | `github` |This shows the Git repo provider in cases
+where the pipeline relates to a Git event. Possible values are `bitbucket`,
+`github`, and `gitlab`.
 
-|`vcs.ref.base.name` |main |For PR pipelines this will be the name of the
-ref the PR is merging into. For branch pipelines this will be the branch
-name. For tag pipelines this will be the tag name.
+|`vcs.ref.base.name` |main |For PR pipelines, this is the name of the ref the
+PR is merging into. For branch pipelines, this is the branch name. For tag
+pipelines, this is the tag name.
 
 |`vcs.ref.base.revision` |14c29a1b2454ae4dd966f27e3b46aec7680d8c14 |The
 Git SHA for the base ref.
 
-|`vcs.ref.head.name` |my-feature-branch |For PR pipelines this will be the
-name of the ref the PR is merging from. For branch pipelines this will
-be the branch name. For tag pipelines this will be the tag name.
+|`vcs.ref.head.name` |my-feature-branch |For PR pipelines, this is the name of
+the ref the PR is merging from. For branch pipelines, this is the branch name.
+For tag pipelines, this is the tag name.
 
 |`vcs.ref.head.revision` |2fe3ff8ff80a45f9cbd8bcc14c774a1d3ac588e4 |The
 Git SHA for the head ref.
@@ -212,16 +258,16 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
+|`vcs.repository.url.full` |`https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
 
 === Job
 
-The name of the span will be `Job: ++{++job name}` which is a deviation from
-the OpenTelemetry semantic conventions which specifies
-`++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
+The span name is `Job: ++{++job name}`, deviating from the OpenTelemetry
+semantic conventions that specify `++{++cicd.pipeline.action.name}
+++{++cicd.pipeline.name}`.
 
 In OpenTelemetry semantic conventions, the job maps to a "`pipeline task`" and
 the containing workflow maps to the "`pipeline run`". As a result,
@@ -235,7 +281,7 @@ The span attributes are as follows:
 [.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+|`cicd.pipeline.action.name` |RUN |The value is always `RUN` for compatibility
 with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow that
@@ -249,13 +295,12 @@ in `com.circleci.workflow.status`.
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+|`cicd.pipeline.run.state` |executing |The value is always `executing` for
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
-|A URL which will redirect you to the page in the web UI for the
-workflow that contains this job.
+|A URL that redirects to the workflow page in the web UI.
 
 |`cicd.pipeline.task.name` |build |The name of the job.
 
@@ -269,7 +314,7 @@ to OpenTelemetry semantic conventions. Possible values are `success`,
 
 |`cicd.pipeline.task.run.url.full`
 |pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35]
-|A URL which will redirect you to the page in the web UI for the job.
+|A URL that redirects to the job page in the web UI.
 
 |`cicd.pipeline.task.type` |build |The CircleCI job type, for example `build`,
 `approval`, etc.
@@ -308,8 +353,7 @@ CircleCI.
 condition. Only present for statuses that map to a `failure` result
 (`failed`, `terminated-unknown`, `unauthorized`).
 
-|`service.name` |CircleCI Pipelines |This will always be
-`CircleCI Pipelines`.
+|`service.name` |CircleCI Pipelines |Always `CircleCI Pipelines`.
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
@@ -320,20 +364,20 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |`github` |If the pipeline was generated in connection
-with a Git repo this shows the provider of the Git repo. Possible values
-are `bitbucket`, `github`, and `gitlab`.
+|`vcs.provider.name` | `github` |This shows the Git repo provider in cases
+where the pipeline relates to a Git event. Possible values are `bitbucket`,
+`github`, and `gitlab`.
 
-|`vcs.ref.base.name` |main |For PR pipelines this will be the name of the
-ref the PR is merging into. For branch pipelines this will be the branch
-name. For tag pipelines this will be the tag name.
+|`vcs.ref.base.name` |main |For PR pipelines, this is the name of the ref the
+PR is merging into. For branch pipelines, this is the branch name. For tag
+pipelines, this is the tag name.
 
 |`vcs.ref.base.revision` |14c29a1b2454ae4dd966f27e3b46aec7680d8c14 |The
 Git SHA for the base ref.
 
-|`vcs.ref.head.name` |my-feature-branch |For PR pipelines this will be the
-name of the ref the PR is merging from. For branch pipelines this will
-be the branch name. For tag pipelines this will be the tag name.
+|`vcs.ref.head.name` |my-feature-branch |For PR pipelines, this is the name of
+the ref the PR is merging from. For branch pipelines, this is the branch name.
+For tag pipelines, this is the tag name.
 
 |`vcs.ref.head.revision` |2fe3ff8ff80a45f9cbd8bcc14c774a1d3ac588e4 |The
 Git SHA for the head ref.
@@ -344,20 +388,19 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
+|`vcs.repository.url.full` |`https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
 
 === Task
 
-A task is one parallel run within a job. For jobs with parallelism=1 there
-will be a single task with index 0.
+A task is one parallel run within a job. For jobs with parallelism=1, there is
+a single task with index 0.
 
-The name of the span will be `Task: ++{++job name} - ++{++task index}` (for
-example, `Task: build - 0`) which is a deviation from the OpenTelemetry
-semantic conventions which specifies `++{++cicd.pipeline.action.name}
-++{++cicd.pipeline.task.name}`.
+The span name is `Task: ++{++job name} - ++{++task index}` (for example, `Task:
+build - 0`), deviating from the OpenTelemetry semantic conventions that specify
+`++{++cicd.pipeline.action.name} ++{++cicd.pipeline.task.name}`.
 
 In OpenTelemetry semantic conventions, the task maps to a "`pipeline task`" and
 the containing workflow maps to the "`pipeline run`". As a result,
@@ -374,7 +417,7 @@ The span attributes are as follows:
 [.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+|`cicd.pipeline.action.name` |RUN |The value is always `RUN` for compatibility
 with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow that
@@ -388,13 +431,12 @@ in `com.circleci.workflow.status`.
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+|`cicd.pipeline.run.state` |executing |The value is always `executing` for
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
-|A URL which will redirect you to the page in the web UI for the
-workflow that contains this task.
+|A URL that redirects to the workflow page in the web UI.
 
 |`cicd.pipeline.task.name` |build - 0 |The name of the task, in the form
 `++{++job name} - ++{++task index}`.
@@ -410,8 +452,8 @@ according to OpenTelemetry semantic conventions. Possible values are
 |pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/3c4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f80]
 |A URL for the job page for the job containing this task.
 
-|`cicd.pipeline.task.type` |build |The CircleCI job type. This will always
-be `build` for a task as no other job types create tasks at this time.
+|`cicd.pipeline.task.type` |build |The CircleCI job type. For tasks, this is
+always `build` as no other job types create tasks.
 
 |`com.circleci.job.id` |cbf6a4ea-a078-4d72-8641-cb5ec149fc35 |The CircleCI
 job ID.
@@ -422,8 +464,8 @@ job ID.
 
 |`com.circleci.job.status` |success |The status of the job in CircleCI.
 
-|`com.circleci.job.type` |build |The CircleCI job type. This will always be
-`build` for a task as no other job types create tasks at this time.
+|`com.circleci.job.type` |build |The CircleCI job type. For tasks, this is
+always `build` as no other job types create tasks.
 
 |`com.circleci.org.id` |cb53b18d-7379-42ff-915f-29b6f3b86187 |The ID of
 the CircleCI organization in which this ran.
@@ -448,6 +490,49 @@ resource class.
 
 |`com.circleci.resource.ram` |4096 |The amount of RAM allocated in MB.
 
+|`com.circleci.resource.usage.cpu.mean` |0.42 |Mean CPU usage for the task. The
+values are in the range `0.0` to `1.0` with the latter meaning 100% usage
+across all cores. Only present for `build` jobs when usage data is available.
+
+|`com.circleci.resource.usage.cpu.min` |0.01 |The lowest CPU usage observed
+during the task. The values are in the range `0.0` to `1.0` with the latter
+meaning 100% usage across all cores. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.cpu.max` |0.98 |The highest CPU usage observed
+during the task. The values are in the range `0.0` to `1.0` with the latter
+meaning 100% usage across all cores. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.cpu.p90` |0.98 |The 90th percentile of the CPU
+usage observed during the task. The values are in the range `0.0` to `1.0` with
+the latter meaning 100% usage across all cores. Only present for `build` jobs
+when usage data is available.
+
+|`com.circleci.resource.usage.memory.mean` |1073741824 |Mean memory usage
+in bytes across the task. Only present for `build` jobs when usage data is
+available.
+
+|`com.circleci.resource.usage.memory.min` |536870912 |The lowest memory usage
+in bytes observed during the task. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.memory.max` |2147483648 |The highest memory usage
+in bytes observed during the task. Only present for `build` jobs when usage
+data is available.
+
+|`com.circleci.resource.usage.memory.p90` |1932735283 |The 90th percentile of
+the memory usage in bytes during the task. Only present for `build` jobs when
+usage data is available.
+
+|`com.circleci.resource.usage.network.bytes_received` |10485760 |Total bytes
+received over the network during the task. Only present for `build` jobs when
+usage data is available and the value is greater than zero.
+
+|`com.circleci.resource.usage.network.bytes_sent` |5242880 |Total bytes sent
+over the network during the task. Only present for `build` jobs when usage
+data is available and the value is greater than zero.
+
 |`com.circleci.task.index` |0 |The zero-based index of this task within
 its parallel job.
 
@@ -470,8 +555,7 @@ CircleCI.
 condition. Only present for results that map to a `failure` or `error`
 result.
 
-|`service.name` |CircleCI Pipelines |This will always be
-`CircleCI Pipelines`.
+|`service.name` |CircleCI Pipelines |Always `CircleCI Pipelines`.
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
@@ -482,20 +566,20 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |`github` |If the pipeline was generated in connection
-with a Git repo this shows the provider of the Git repo. Possible values
-are `bitbucket`, `github`, and `gitlab`.
+|`vcs.provider.name` | `github` |This shows the Git repo provider in cases
+where the pipeline relates to a Git event. Possible values are `bitbucket`,
+`github`, and `gitlab`.
 
-|`vcs.ref.base.name` |main |For PR pipelines this will be the name of the
-ref the PR is merging into. For branch pipelines this will be the branch
-name. For tag pipelines this will be the tag name.
+|`vcs.ref.base.name` |main |For PR pipelines, this is the name of the ref the
+PR is merging into. For branch pipelines, this is the branch name. For tag
+pipelines, this is the tag name.
 
 |`vcs.ref.base.revision` |14c29a1b2454ae4dd966f27e3b46aec7680d8c14 |The
 Git SHA for the base ref.
 
-|`vcs.ref.head.name` |my-feature-branch |For PR pipelines this will be the
-name of the ref the PR is merging from. For branch pipelines this will
-be the branch name. For tag pipelines this will be the tag name.
+|`vcs.ref.head.name` |my-feature-branch |For PR pipelines, this is the name of
+the ref the PR is merging from. For branch pipelines, this is the branch name.
+For tag pipelines, this is the tag name.
 
 |`vcs.ref.head.revision` |2fe3ff8ff80a45f9cbd8bcc14c774a1d3ac588e4 |The
 Git SHA for the head ref.
@@ -506,7 +590,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
+|`vcs.repository.url.full` |`https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
@@ -515,10 +599,9 @@ the VCS repository.
 
 A step is one step within a task. Each task may contain multiple steps.
 
-The name of the span will be `Step: ++{++step name}` (for example, `Step:
-Checkout code`) which is a deviation from the OpenTelemetry semantic
-conventions which specifies `++{++cicd.pipeline.action.name}
-++{++cicd.pipeline.name}`.
+The span name is `Step: ++{++step name}` (for example, `Step: Checkout code`),
+deviating from the OpenTelemetry semantic conventions that specify
+`++{++cicd.pipeline.action.name} ++{++cicd.pipeline.name}`.
 
 In OpenTelemetry semantic conventions, the step maps to a "`pipeline task`" and
 the containing workflow maps to the "`pipeline run`". As a result,
@@ -533,7 +616,7 @@ The span attributes are as follows:
 [.datatable,cols=3*,options="header",]
 |===
 |Trace Attribute |Example Value |Description
-|`cicd.pipeline.action.name` |RUN |It will always be `RUN` for compatibility
+|`cicd.pipeline.action.name` |RUN |The value is always `RUN` for compatibility
 with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.name` |build-and-test |The name of the workflow that
@@ -547,13 +630,12 @@ in `com.circleci.workflow.status`.
 |`cicd.pipeline.run.id` |ff87d6e9-6f8c-40d8-aa37-4be96218709f |The
 CircleCI workflow ID.
 
-|`cicd.pipeline.run.state` |executing |It will always be `executing` for
+|`cicd.pipeline.run.state` |executing |The value is always `executing` for
 compatibility with the OpenTelemetry semantic conventions.
 
 |`cicd.pipeline.run.url.full`
 |pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f]
-|A URL which will redirect you to the page in the web UI for the
-workflow that contains this step.
+|A URL that redirects to the workflow page in the web UI.
 
 |`cicd.pipeline.task.name` |Checkout code |The name of the step.
 
@@ -566,10 +648,9 @@ according to OpenTelemetry semantic conventions. Possible values are
 
 |`cicd.pipeline.task.run.url.full`
 |pass:[https://app.circleci.com/workflow/ff87d6e9-6f8c-40d8-aa37-4be96218709f/job/cbf6a4ea-a078-4d72-8641-cb5ec149fc35]
-|A URL which will redirect you to the page in the web UI for the job
-containing this step.
+|A URL that redirects to the job page in the web UI.
 
-|`cicd.pipeline.task.type` |checkout |The type of the step, for example
+|`cicd.pipeline.task.type` |checkout |The step type, for example
 `infrastructure`, `checkout`, `run`, etc.
 
 |`com.circleci.job.id` |cbf6a4ea-a078-4d72-8641-cb5ec149fc35 |The CircleCI
@@ -608,10 +689,29 @@ resource class.
 
 |`com.circleci.resource.ram` |4096 |The amount of RAM allocated in MB.
 
+|`com.circleci.step.auto_rerun_delay_seconds` |0 |The number of seconds to
+wait before auto-rerunning this step. Zero if auto-rerun is not configured.
+
+|`com.circleci.step.auto_rerun_number` |0 |The current auto-rerun attempt
+number for this step. Zero if auto-rerun is not configured for this step.
+
+|`com.circleci.step.background` |false |Whether this step runs in the
+background. For example, this is true for steps used to spin up secondary
+service containers.
+
 |`com.circleci.step.command` |echo hello |The command run by the step, if
 applicable.
 
 |`com.circleci.step.exit_code` |0 |The exit code of the step command.
+
+|`com.circleci.step.insignificant` |false |Steps marked as insignificant do not
+affect the success of the job.
+
+|`com.circleci.step.max_auto_reruns` |0 |The maximum number of auto-reruns
+configured for this step. Zero if auto-rerun is not configured.
+
+|`com.circleci.step.parallel` |false |Whether this step runs in parallel
+with other steps in the job.
 
 |`com.circleci.task.index` |0 |The zero-based index of the task this step
 belongs to.
@@ -635,8 +735,7 @@ CircleCI.
 condition. Only present for steps that have a result of `failed`,
 `timedout`, or `infrastructure_fail`.
 
-|`service.name` |CircleCI Pipelines |This will always be
-`CircleCI Pipelines`.
+|`service.name` |CircleCI Pipelines |Always `CircleCI Pipelines`.
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
@@ -647,20 +746,20 @@ present for pipelines triggered by a pull request.
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
-|`vcs.provider.name` |`github` |If the pipeline was generated in connection
-with a Git repo this shows the provider of the Git repo. Possible values
-are `bitbucket`, `github`, and `gitlab`.
+|`vcs.provider.name` | `github` |This shows the Git repo provider in cases
+where the pipeline relates to a Git event. Possible values are `bitbucket`,
+`github`, and `gitlab`.
 
-|`vcs.ref.base.name` |main |For PR pipelines this will be the name of the
-ref the PR is merging into. For branch pipelines this will be the branch
-name. For tag pipelines this will be the tag name.
+|`vcs.ref.base.name` |main |For PR pipelines, this is the name of the ref the
+PR is merging into. For branch pipelines, this is the branch name. For tag
+pipelines, this is the tag name.
 
 |`vcs.ref.base.revision` |14c29a1b2454ae4dd966f27e3b46aec7680d8c14 |The
 Git SHA for the base ref.
 
-|`vcs.ref.head.name` |my-feature-branch |For PR pipelines this will be the
-name of the ref the PR is merging from. For branch pipelines this will
-be the branch name. For tag pipelines this will be the tag name.
+|`vcs.ref.head.name` |my-feature-branch |For PR pipelines, this is the name of
+the ref the PR is merging from. For branch pipelines, this is the branch name.
+For tag pipelines, this is the tag name.
 
 |`vcs.ref.head.revision` |2fe3ff8ff80a45f9cbd8bcc14c774a1d3ac588e4 |The
 Git SHA for the head ref.
@@ -671,7 +770,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |pass:[https://github.com/my-org/my-repo] |The URL for
+|`vcs.repository.url.full` |`https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
