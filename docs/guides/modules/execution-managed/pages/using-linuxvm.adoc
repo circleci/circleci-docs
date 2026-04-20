@@ -53,6 +53,7 @@ You can view the list of available images xref:reference:ROOT:configuration-refe
 == Available LinuxVM resource classes
 
 include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
+include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
 
 [#view-resource-usage]
 === View resource usage
