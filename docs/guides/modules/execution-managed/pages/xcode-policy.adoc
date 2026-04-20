@@ -103,7 +103,7 @@ We announce all images on our link:https://circleci.com/changelog/[changelog] al
 [#pre-release-builds]
 ==== Pre-release builds
 
-Beta releases and release candidates are not subject to the 2 business day commitment. Beta and RC images are published on a best-effort basis with no guaranteed timeline. See xref:#beta-image-support[Beta Image Support] for more detail.
+Beta releases and release candidates are not subject to the 2 business day commitment. Beta and RC images are published on a best-effort basis with no guaranteed timeline. See <<beta-image-support>> for more detail.
 
 [#macos-upgrade-required]
 ==== macOS upgrade required
