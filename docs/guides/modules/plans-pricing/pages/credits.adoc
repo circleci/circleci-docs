@@ -31,6 +31,8 @@ Take a look at the CircleCI link:https://circleci.com/pricing/[Pricing] page, an
 
 Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc[Persisting data] page.
 
+For detailed cost tracking and analysis, you can xref:integrate-with-vantage-for-cost-management.adoc[integrate CircleCI with Vantage] to monitor CI/CD spending alongside your cloud infrastructure and SaaS tools.
+
 [#open-source-credit-usage]
 == Open source credit usage
 

@@ -328,6 +328,7 @@
 ** xref:plans-pricing:credits.adoc[Credits overview]
 ** xref:plans-pricing:user-types-and-registration.adoc[User types and registration]
 ** xref:plans-pricing:manage-budgets.adoc[Manage budgets]
+** xref:plans-pricing:integrate-with-vantage-for-cost-management.adoc[Integrate With Vantage for Cost Management]
 ** xref:plans-pricing:plan-free.adoc[Free Plan overview]
 ** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]
 ** xref:plans-pricing:plan-scale.adoc[Scale Plan overview]

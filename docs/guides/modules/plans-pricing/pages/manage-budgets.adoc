@@ -81,3 +81,11 @@ The following steps show you how to set up budget controls for your organization
 . Confirm the deletion by selecting btn:[Delete budget].
 
 NOTE: Deleting a budget immediately stops budget tracking and removes all budget notifications for that organization or project. Budget consumption data from previous cycles is not deleted.
+
+== Advanced cost tracking
+
+For detailed cost analysis across multiple platforms, consider xref:integrate-with-vantage-for-cost-management.adoc[integrating with Vantage]. Vantage provides unified cost tracking for CircleCI alongside your cloud infrastructure and SaaS providers, with features including:
+
+* Cost allocation by team, department, or business unit.
+* Historical cost trends and anomaly detection.
+* Cross-platform cost correlation and reporting.

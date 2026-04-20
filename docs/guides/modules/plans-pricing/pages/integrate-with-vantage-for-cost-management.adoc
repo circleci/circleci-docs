@@ -1,0 +1,189 @@
+= Integrate with Vantage for cost management
+:page-platform: Cloud
+:page-description: Connect CircleCI to Vantage to track CI/CD costs alongside your cloud infrastructure and SaaS providers.
+:experimental:
+
+Vantage provides cost tracking and usage reporting for CircleCI, allowing you to monitor CI/CD spending alongside your cloud infrastructure and SaaS tools in a centralized platform. The integration automatically imports your CircleCI usage data and converts credits into USD-based cost reports.
+
+[#overview]
+== Overview
+
+The Vantage integration enables you to:
+
+* Track CircleCI credit consumption and costs in a unified cost management platform.
+* Filter and group costs by organization, project, resource class, and job name.
+* Allocate CI/CD expenses to teams using Virtual Tags.
+* Identify usage anomalies and spending trends.
+* Correlate CircleCI cost changes with related infrastructure shifts.
+
+Vantage automatically imports up to six months of historical data when you first connect, with ongoing imports following your configured retention settings.
+
+[#integration-flow]
+=== How the integration works
+
+The following diagram illustrates how CircleCI usage data flows into Vantage for cost analysis:
+
+[mermaid]
+----
+flowchart TD
+    A[CircleCI Pipelines] -->|Generate| B[Usage Events]
+    B --> C{Usage Type}
+    C -->|Compute| D[Resource Classes<br/>Docker, Machine, macOS]
+    C -->|Storage| E[Artifacts & Caching]
+    C -->|Network| F[Data Transfer]
+    C -->|Other| G[IP Ranges, DLC, Users]
+
+    D --> H[Vantage Platform]
+    E --> H
+    F --> H
+    G --> H
+
+    H -->|Convert Credits| I[USD Cost Data]
+    I --> J[Cost Reports & Dashboards]
+
+    J -->|Filter by| K[Organization<br/>Project<br/>Job Name<br/>Build Status]
+    J -->|Group by| L[Team<br/>Department<br/>Business Unit]
+
+    K --> M[Cost Analysis]
+    L --> M
+
+    M -->|Identify| N[Spending Trends]
+    M -->|Detect| O[Usage Anomalies]
+    M -->|Track| P[Team Budgets]
+
+    style H fill:#f9f,stroke:#333,stroke-width:2px
+    style J fill:#bbf,stroke:#333,stroke-width:2px
+    style M fill:#bfb,stroke:#333,stroke-width:2px
+----
+
+[#prerequisites]
+== Prerequisites
+
+Before setting up the Vantage integration, ensure you have:
+
+* **CircleCI Org Admin role** to generate a personal API token.
+* **Vantage account** with Organization Owner or Integration Owner role.
+* Your CircleCI **organization ID** (UUID format).
+
+NOTE: CircleCI personal API tokens do not currently support fine-grained permission scoping. The token you create will have full access to your organization's data.
+
+[#connect-vantage]
+== 1. Generate a CircleCI personal API token
+
+To connect Vantage to CircleCI, you need to create a personal API token.
+
+. Log in to the CircleCI web app.
+. Select **User Settings** from the sidebar.
+. Navigate to **Personal API Tokens**.
+. Select **Create New Token**.
+. Provide a descriptive name for the token (for example, "Vantage Integration").
+. Select **Add API Token**.
+. Copy the token right away, as you cannot view it again.
+
+// ############################################################################
+// # TODO: Add screenshot showing the Personal API Tokens page in CircleCI
+// # Screenshot should show: User Settings menu with Personal API Tokens selected,
+// # the Create New Token button, and the token creation form
+// ############################################################################
+// .Personal API Tokens page in CircleCI
+// image::guides:ROOT:plans-pricing/vantage-circleci-api-token.png[Screenshot of the Personal API Tokens page in CircleCI User Settings, showing the Create New Token button and token management interface]
+
+[#find-organization-id]
+== 2. Retrieve your organization ID
+
+You need your CircleCI organization UUID to complete the integration.
+
+. In the CircleCI web app, select **Organization Settings** from the sidebar.
+. Copy your organization ID from the settings page.
+
+The organization ID is in UUID format (for example, `a1b2c3d4-e5f6-7890-abcd-ef1234567890`).
+
+// ############################################################################
+// # TODO: Add screenshot showing Organization Settings page with organization ID
+// # Screenshot should highlight the organization ID field clearly
+// ############################################################################
+// .Organization ID in CircleCI organization settings
+// image::guides:ROOT:plans-pricing/vantage-circleci-org-id.png[Screenshot of CircleCI organization settings page highlighting the organization ID in UUID format]
+
+[#configure-integration]
+== 3. Configure the integration in Vantage
+
+Connect your CircleCI organization to Vantage using the token and organization ID.
+
+. Log in to your Vantage account.
+. Navigate to **Settings**, then select **Integrations**.
+. Locate and select **CircleCI** from the available integrations.
+. Complete the integration form with the following information:
++
+* **Personal API token**: Paste the token you created in step 1.
+* **Organization UUID**: Enter the organization ID from step 2.
+* **Connection description**: Provide a name to identify this connection (optional).
+* **Price per credit in USD**: Enter your organization's credit rate to convert CircleCI credits into dollar amounts.
+
+. Select **Connect Account**.
+. Monitor the import status on the integrations page.
+
+Vantage begins importing your CircleCI usage data. The initial import includes up to six months of historical data, depending on your Vantage retention settings.
+
+// ############################################################################
+// # TODO: Add screenshot showing the Vantage CircleCI integration form
+// # Screenshot should show all form fields: Personal API token, Organization UUID,
+// # Connection description, and Price per credit fields
+// ############################################################################
+// .Vantage CircleCI integration form
+// image::guides:ROOT:plans-pricing/vantage-integration-form.png[Screenshot of the Vantage integration form for CircleCI showing input fields for Personal API token, Organization UUID, Connection description, and Price per credit in USD]
+
+[#reporting-capabilities]
+== 4. View cost reports
+
+After the integration completes, you can create cost reports to analyze your CircleCI spending.
+
+Cost reports in Vantage support filtering and grouping by:
+
+* **Billing Account**: Your CircleCI organization name.
+* **Account**: CircleCI project name.
+* **Service type**: Compute, Storage, Users, Network, DLC, Lease, or IP Ranges.
+* **Category and Subcategory**: Resource class information.
+* **Resource**: Job name.
+
+Vantage automatically creates provider metadata tags for more granular filtering, including:
+
+* Organization ID.
+* Project ID.
+* VCS details (branch, repository name, repository URL).
+* Pipeline ID.
+* Build status.
+
+You can use these dimensions to allocate costs to specific teams, track spending by project, or identify optimization opportunities.
+
+// TODO: Add screenshot showing a Vantage cost report with CircleCI data
+// Screenshot should demonstrate filtering/grouping options and sample cost data
+//.CircleCI cost report in Vantage
+//image::guides:ROOT:plans-pricing/vantage-circleci-cost-report.png[Screenshot of a Vantage cost report displaying CircleCI spending data with filters for organization, project, and resource class, showing cost trends over time]
+
+[#use-virtual-tags]
+== 5. Allocate costs with Virtual Tags
+
+Use Vantage Virtual Tags to allocate CircleCI expenses to teams and detect usage anomalies.
+
+Virtual Tags allow you to:
+
+* Create custom cost allocation rules based on CircleCI metadata.
+* Group costs by team, department, or business unit.
+* Track spending across multiple projects and organizations.
+* Set up alerts for unusual spending patterns.
+
+Refer to the link:https://docs.vantage.sh/virtual_tags[Vantage Virtual Tags documentation] for detailed configuration instructions.
+
+[#conclusion]
+== Conclusion
+
+You have successfully connected CircleCI to Vantage. Your CircleCI costs are now tracked alongside your other cloud and SaaS expenses, giving you a unified view of your infrastructure spending.
+
+[#next-steps]
+== Next steps
+
+* xref:plans-pricing:credits.adoc[Learn About CircleCI Credits]
+* xref:plans-pricing:manage-budgets.adoc[Manage Budgets in CircleCI]
+* link:https://docs.vantage.sh/cost_reports[Create cost reports in Vantage]
+* link:https://www.vantage.sh/blog/circle-ci-cost-management[Read the Vantage CircleCI cost management announcement]
