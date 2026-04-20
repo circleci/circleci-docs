@@ -21,7 +21,7 @@ The following table shows an overview of the prerequisites required to run an ai
 | A Kubernetes cluster
 | Running CircleCI Server
 
-| An object storage system (MinIO)
+| An S3 compatible object storage system
 | Object and artifact storage
 
 | GitHub Enterprise

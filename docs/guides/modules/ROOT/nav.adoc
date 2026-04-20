@@ -54,6 +54,7 @@
 *** xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
 ** How-to guides
 *** xref:orchestrate:orchestration-cookbook.adoc[Orchestration cookbook]
+*** xref:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up cross-repo triggers for library consumers]
 *** xref:orchestrate:how-to-override-config.adoc[How to override config]
 *** xref:orchestrate:set-up-multiple-configuration-files-for-a-project.adoc[Set up multiple configuration files for a project]
 *** xref:orchestrate:notify-a-slack-channel-of-a-paused-workflow.adoc[Notify a Slack channel of a paused workflow]
@@ -143,21 +144,24 @@
 *** xref:insights:insights-tests.adoc[Test Insights]
 ** Manage and optimize tests
 *** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
+*** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
+*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
+*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
+*** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
+*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
+** Smarter Testing
+*** xref:test:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
+*** xref:test:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
+*** xref:test:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
+*** xref:test:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]
+*** xref:test:testsuite-configuration-reference.adoc[Test suite Config Reference]
 ** Testing strategies
 *** xref:test:testing-llm-enabled-applications-through-evaluations.adoc[Testing LLM-enabled applications through evaluations]
 *** xref:test:browser-testing.adoc[Browser testing]
 *** xref:test:code-coverage.adoc[Generate code coverage metrics]
 *** xref:test:rerun-failed-tests.adoc[Re-run failed tests overview]
-*** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
-** Tutorials
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 *** xref:test:testing-ios.adoc[Testing iOS applications]
 *** xref:test:testing-macos.adoc[Testing macOS applications]
-** How-to guides
-*** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
-*** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
-** Reference
-*** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 
 * Deploy with CircleCI
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
@@ -167,6 +171,7 @@
 *** xref:deploy:deploy-a-component.adoc[Deploy a component]
 *** xref:deploy:rollback-a-deployment.adoc[Rollback a deployment]
 *** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
+*** xref:deploy:environment-hierarchy-and-version-promotion.adoc[Environment hierarchy and version promotion]
 ** Release agent setup
 *** xref:deploy:release-agent-overview.adoc[Release agent overview]
 *** xref:deploy:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
@@ -233,6 +238,8 @@
 ** OIDC tokens
 *** xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs]
 *** xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OIDC tokens with custom claims]
+*** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
+*** xref:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc[Pull an image from GCP Artifact Registry with OIDC]
 
 * Manage security and secrets
 ** Security features
@@ -248,7 +255,7 @@
 ** How-to guides
 *** xref:security:set-environment-variable.adoc[Set an environment variable]
 *** xref:security:inject-environment-variables-with-api.adoc[Inject environment variables with the API]
-*** xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH]
+*** xref:execution-managed:ssh-access-jobs.adoc[Debug jobs with SSH rerun]
 *** xref:security:rotate-project-ssh-keys.adoc[Rotate project SSH keys]
 *** xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
 *** xref:security:rename-organizations-and-repositories.adoc[Rename organizations and repositories]
@@ -269,17 +276,20 @@
 *** xref:integration:outbound-webhooks.adoc[Outbound webhooks]
 *** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound webhooks reference]
 *** xref:integration:notifications.adoc[Notifications]
+//*** xref:integration:slack-integration.adoc[Slack integration]
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS, pipeline types, and feature support]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
+*** xref:integration:status-updates.adoc[Status updates overview]
+*** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:oss.adoc[Build open source projects]
 
 ** Third-party integrations
-*** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:jira-plugin.adoc[Connect with Jira]
 *** xref:integration:new-relic-integration.adoc[New Relic integration]
 *** xref:integration:datadog-integration.adoc[Datadog integration]
 *** xref:integration:sumo-logic-integration.adoc[Sumo Logic integration]
+*** xref:integration:open-telemetry-integration.adoc[OpenTelemetry integration]
 ** How-to guides
 *** xref:integration:status-badges.adoc[Adding status badges]
 *** xref:integration:webhooks-airtable.adoc[CircleCI webhooks with Airtable]
@@ -289,6 +299,7 @@
 * Developer toolkit
 ** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
 ** AI features
+*** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
 *** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
@@ -315,6 +326,7 @@
 * Plans and pricing
 ** xref:plans-pricing:plan-overview.adoc[CircleCI plans overview]
 ** xref:plans-pricing:credits.adoc[Credits overview]
+** xref:plans-pricing:user-types-and-registration.adoc[User types and registration]
 ** xref:plans-pricing:manage-budgets.adoc[Manage budgets]
 ** xref:plans-pricing:plan-free.adoc[Free Plan overview]
 ** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]

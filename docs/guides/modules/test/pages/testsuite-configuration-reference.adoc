@@ -1,0 +1,596 @@
+= Testsuite configuration reference
+:page-badge: Beta
+:page-platform: Cloud
+:experimental:
+:page-description: Reference for .circleci/test-suites.yml
+:page-show-readtime: true
+
+[NOTE]
+====
+*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+====
+
+This document is a reference for the CircleCI Smarter Testing testsuite configuration keys that are used in the `.circleci/test-suites.yml` file.
+
+'''
+
+[#name]
+== *`name`*
+
+The `name` field is used to run a testsuite with the local plugin and CI subcommand.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `name`
+| Y
+| String
+| Name of the testsuite to run with the CLI.
+|===
+--
+
+*Example:*
+
+[source,console]
+----
+$ circleci run testsuite "frontend tests"
+$ circleci run testsuite "backend tests"
+----
+
+[%linenums,yaml]
+----
+---
+name: frontend tests
+---
+name: backend tests
+----
+
+'''
+
+[#discover]
+== *`discover`*
+
+The `discover` command finds all test atoms for a given test suite. The command’s output is split on newlines to extract individual test atoms (the command may instead output a single line of space-separated test atoms).
+
+The `discover` command should not execute any tests.
+
+Every line of stdout is interpreted as a test atom. Any tool that prints metadata in the stdout must be suppressed.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `discover`
+| Y
+| String
+| An executable command that can list tests for a test runner, without running them.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+---
+name: vitest tests
+discover: vitest list --filesOnly
+---
+name: rspec tests
+discover: find spec -type f -name '*_spec.rb'
+---
+name: go tests
+discover: go list ./...
+----
+
+'''
+
+[#run]
+== *`run`*
+
+The `run` command executes the test atoms discovered by the `discover` command using your test runner.
+
+The command needs to be modified to use placeholders:
+
+For test atoms:
+
+* Use the template variable `<< test.atoms >>` in your run command – this will be replaced with a space-separated list of test atoms to run.
+* If the template variable is not found, the command’s stdin will receive a newline-separated list of test atoms.
+
+For JUnit output:
+
+* Use the template variable `<< outputs.junit >>` so Smarter Testing can locate your test results.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `run`
+| Y
+| String
+| A command that executed tests.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+---
+name: vitest tests
+run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --silent --bail 0 << test.atoms >>
+---
+name: rspec tests
+run: bundle exec rspec --format RspecJunitFormatter --out "<< outputs.junit >>" << test.atoms >>
+---
+name: go tests
+run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
+----
+
+'''
+
+[#file-mapper]
+== *`file-mapper`*
+
+When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files.
+
+* During analysis, Smarter Testing can associate test files with their test atoms in impact data.
+* During selection, Smarter Testing can determine which test atom to run when a test file is modified.
+
+The test atom to map can be specified in one of two ways:
+
+* Use the template variable `<< test.atoms >>` in the `file-mapper` command.
+* If the template variable is not found in the `file-mapper` command, the test atom will be passed on stdin.
+
+File mapper can run in two modes:
+
+* *One test atom at a time.* This mode expects a list of files back for a passed in `<< test.atom >>`.
+* *All test atoms in a single pass.* This mode supports `<< outputs.go-list-json >>` to map all go test files to go packages.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `file-mapper`
+| N
+| String
+| A command that determines which test files contain the code for a test atom.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+---
+name: go tests
+file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
+----
+
+'''
+
+[#analysis]
+== *`analysis`*
+
+The `analysis` command is similar to your `run` command, but with coverage instrumentation enabled. Analysis generates coverage data that tells Smarter Testing which source files were covered by each test atom.
+
+Analysis can run in two modes:
+
+* *One test atom at a time.* This mode is compatible with most coverage tooling.
+* *All test atoms in a single pass.* This mode is much faster but requires specific support for the CircleCI coverage format from the coverage tooling.
+
+The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run.
+
+The test atom to analyze can be specified in one of two ways:
+
+* Use the template variable `<< test.atoms >>` in the `analysis` command. This will be replaced with the test atom to analyze.
+* If the template variable is not found in the `analysis` command, the test atom will be passed on stdin.
+
+Different template variables are available for coverage output, depending on the format of the coverage data produced by the test runner:
+
+* *LCOV* `<< outputs.lcov >>` - analyses one test atom at a time.
+* *Go’s coverage format* `<< outputs.go-coverage >>` - analyses one test atom at a time.
+* *CircleCI coverage format* `<< outputs.circleci-coverage >>` - analyses all test atoms in a single pass.
+
+Your `analysis` command should use the output variable for the coverage format it produces.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `analysis`
+| N
+| String
+| A command that executes a test with coverage instrumentation.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+---
+name: go tests
+analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
+----
+
+'''
+
+[#outputs]
+== *`outputs`*
+
+A map of output fields that can be set to write command variables to known file paths.
+
+When no output field is set and the variable is used in a command, a temporary file is created.
+
+'''
+
+[#junit]
+=== *`junit`*
+
+The `junit` output is the path to write JUnit XML test results, used in the `run` command with `<< outputs.junit >>` template variable.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `junit`
+| N
+| String
+| File path to write JUnit XML test result reports.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+jobs:
+  test:
+    executor: node-with-service
+    steps:
+      - setup
+      - run: circleci run testsuite "ci tests"
+      - store_test_results:
+          path: test-reports
+----
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+outputs:
+  junit: test-reports/junit.xml
+----
+
+'''
+
+[#options]
+== *`options`*
+
+A map of option fields that can be set to configure how the testsuite is run.
+
+'''
+
+[#test-impact-analysis]
+=== *`test-impact-analysis`*
+
+To enable test impact analysis and only run test atoms relevant to your changes.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `test-impact-analysis`
+| N
+| Boolean
+| Set `true` to enable test impact analysis.
+|===
+--
+
+*Example:*
+
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  test-impact-analysis: true
+----
+
+'''
+
+[#test-analysis-duration]
+=== *`test-analysis-duration`*
+
+Set a target for the amount of time spent running analysis. Analysis may run slightly longer than the target in order to complete the current batch of work.
+
+`test-analysis-duration` has no effect when running analysis in a single pass.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `test-analysis-duration`
+| N
+| Integer (maximum 300 minutes)
+| The target number of minutes to spend running analysis.
+|===
+--
+
+*Example:*
+
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  test-analysis-duration: 15
+----
+
+'''
+
+[#impact-key]
+=== *`impact-key`*
+
+Set a unique key for storing impact data.
+
+Each independent testsuite should use a different impact key to avoid overwriting each other's data.
+
+There is no need to set this option if you only have a single test suite in `.circleci/test-suites.yml`.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `impact-key`
+| N
+| String
+| Unique key to use for storing this testsuite's impact data
+|===
+--
+
+*Example:*
+
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  impact-key: production-ci-tests
+----
+
+'''
+
+[#dynamic-test-splitting]
+=== *`dynamic-test-splitting`*
+
+To enable dynamic test splitting and run test atoms from  shared queue , reducing the impact of slow parallel nodes.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `dynamic-test-splitting`
+| N
+| Boolean
+| Set `true` to enable dynamic test splitting.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  dynamic-test-splitting: true
+----
+
+'''
+
+[#full-test-run-paths]
+=== *`full-test-run-paths`*
+
+When test selection is enabled, changes to these file paths cause all test atoms to be selected and run.
+
+Project files that affect the running system without directly referencing tests should be listed here. For example project dependency files, or database migration files.
+
+The `\*` and `**` globs can be used to match files and directories.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `full-test-run-paths`
+| N
+| List of strings
+|
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  full-test-run-paths:
+    - go.mod
+    - .circleci/*.yml
+    - database-migrations/**/*.sql
+----
+
+'''
+
+[#test-selection-rules]
+=== *`test-selection-rules`*
+
+Use test selection rules to extend the test selection mechanism to cover non-source files.
+
+Each rule lists a test atom, and what should cause that test atom to be selected in addition to the usual selection algorithm.
+
+The `\*` and `**` globs can be used to match files and directories.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `test-selection-rules`
+| N
+| List of link:#test-selection-rule[test-selection-rule]
+|
+|===
+--
+
+[#test-selection-rule]
+=== *`test-selection-rule`*
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `test-atom`
+| Y
+| String
+| Name of the test atom covered by this rule.
+
+| `include`
+| Y
+| Boolean, or list of file paths (limited to 100 globs/paths).
+| When to include the test atom in test selection. If `true` the test atom is always selected. If a list of file paths, then the test atom is selected when there are changes to any of those file paths.
+|===
+--
+
+*Examples:*
+
+Run DB integration tests if any database migrations change, or new migrations are added.
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  test-selection-rules:
+    - test-atom: db/integration_test.ts
+      include: database-migrations/**/*.sql
+----
+
+Always run acceptance tests.
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  test-selection-rules:
+    - test-atom: acceptance/test.ts
+      include: true
+----
+
+'''
+
+[#max-auto-rerun]
+=== *`max-auto-rerun`*
+
+Set `max-auto-rerun` to automatically rerun failed test atoms up to a maximum number of attempts. Test atoms will run once initially, then up to a further `max-auto-rerun` times.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `max-auto-rerun`
+| N
+| Integer (min 0, max 10)
+| The maximum number of times test atoms will be rerun if they fail.
+
+When `auto-rerun-duration` is set, test atoms will rerun until one of the two conditions is reached.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  max-auto-rerun: 3
+----
+
+'''
+
+[#auto-rerun-duration]
+=== *`auto-rerun-duration`*
+
+Set `auto-rerun-duration` to automatically rerun failed test atoms until either they all pass, or the rerun duration is reached.
+
+NOTE: Test atoms will rerun a maximum of 10 times even if the rerun duration is not reached.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+| `auto-rerun-duration`
+| N
+| Duration or percentage
+| The duration or percentage of total runtime that will be spent rerunning test atoms if they fail, for example, `5m`, `1h`, `20%`.
+
+When `max-auto-rerun` is set, test atoms will rerun until one of the two conditions is reached.
+|===
+--
+
+*Example:*
+
+[%linenums,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+options:
+  auto-rerun-duration: 5m
+----

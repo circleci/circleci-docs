@@ -1,11 +1,10 @@
-= Smarter Testing
-:page-badge: Preview
+= Smarter Testing overview
+:page-badge: Beta
 :page-platform: Cloud
 :page-description: This page describes CircleCI's Smarter Testing, which reduces test execution time while maintaining test confidence.
 :experimental:
-:page-noindex: true
 
-CAUTION: *Smarter Testing* is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Smarter Testing reduces test execution time while maintaining test confidence by:
 
@@ -21,6 +20,5 @@ The following guides are available to help you get started with Smarter Testing:
 
 * xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing]
 * xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis]
-* xref:use-smarter-testing-for-local-development.adoc[Use Smarter Testing for Local Development]
 * xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting]
 * xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests]

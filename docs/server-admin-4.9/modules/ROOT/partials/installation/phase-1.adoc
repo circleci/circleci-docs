@@ -48,7 +48,7 @@ endif::env-aws[]
 | Infrastructure Management
 | Required for installations within GCP or AWS
 
-| Install and configure link:https://min.io/docs/minio/linux/reference/minio-mc.html[MinIO CLI] for your storage provider if you choose not to use AWS or GCP object storage.
+| Install and configure the CLI for your S3 compatible object storage provider if you choose not to use AWS or GCP object storage.
 | TBC
 | S3 compatible object storage
 | Required for installations outside AWS and GCP, for example, local installation
@@ -457,8 +457,8 @@ You may have a requirement to terminate TLS for CircleCI Server outside the appl
 
 CircleCI Server listens on the following port numbers, which need to be configured depending how you are routing the traffic:
 
-* Frontend / API Gateway [TCP 80, 443]
-* Nomad server [TCP 4647]
+* Frontend / API Gateway [TCP 80, 443].
+* Nomad server [TCP 4647].
 
 Depending on your requirements you may choose to terminate TLS for only the `frontend/api-gateway` or provide TLS for services listening on all the ports.
 
@@ -494,11 +494,9 @@ CircleCI Server 4.9 hosts build artifacts, test results, and other state object 
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-* link:https://min.io/[MinIO]
+Any AWS S3 compatible object storage should work. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
 
-While any S3 compatible object storage may work, we test and support AWS S3 and MinIO. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
-
-If you are installing locally rather than in AWS or GCP, follow the MinIO instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped Installation] guide.
+If you are installing locally rather than in AWS or GCP, follow the instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped Installation] guide.
 
 NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing Server Behind a Proxy] guide.
 

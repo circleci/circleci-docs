@@ -60,3 +60,41 @@ jobs:
 . Replace `<provider-id>` with the ID of your Workload Identity provider.
 
 . Save the changes to your CircleCI configuration file. When the job runs, CircleCI exchanges its OIDC token for a short-lived GCP access token to authenticate and pull the image.
+
+[#troubleshooting]
+== Troubleshooting
+
+[#google-subject-too-long]
+=== Error: google.subject exceeds 127 bytes
+
+If you see an error like:
+
+[source,plaintext]
+----
+The size of mapped attribute google.subject exceeds the 127 bytes limit.
+Either modify your attribute mapping or the incoming assertion to produce
+a mapped attribute that is less than 127 bytes.
+----
+
+The CircleCI OIDC V2 token's `sub` claim includes VCS information and can exceed GCP's 127-byte limit for `google.subject`. For example:
+
+[source,plaintext]
+----
+org/<org_id>/project/<project_id>/user/<user_id>/vcs-origin/github.com/<org>/<repo>/vcs-ref/refs/heads/<branch>
+----
+
+To resolve this, update the `google.subject` attribute mapping in your GCP Workload Identity pool to derive a shorter value. For more information on attribute mappings, see the https://docs.cloud.google.com/iam/docs/workload-identity-federation-with-other-clouds#mappings-and-conditions[GCP attribute mappings and conditions documentation]. The recommended mapping extracts the user UUID from `sub` using the `extract` function, prefixed with the org ID:
+
+[source,plaintext]
+----
+google.subject=assertion.org_id + "/" + assertion.sub.extract('/user/{user_id}/')
+----
+
+This produces a value like `<org_uuid>/<user_uuid>` (73 bytes), which is well within the limit and works consistently across all trigger types.
+
+If your IAM conditions reference `google.subject`, update them to match the new format. To preserve the full `sub` for use in conditions, add it as a custom attribute:
+
+[source,plaintext]
+----
+attribute.sub=assertion.sub
+----
