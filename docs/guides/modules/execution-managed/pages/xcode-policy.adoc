@@ -115,8 +115,8 @@ For major Xcode releases that require a corresponding macOS upgrade on our fleet
 
 In rare cases, CircleCI's validation process may identify critical issues with a newly released Xcode image. Examples include:
  
-* Toolchain regressions
-* Simulator instability
+* Toolchain regressions.
+* Simulator instability.
 * Build system defects introduced by Apple.
  
 When this occurs, availability may be delayed beyond the standard window. We aim to post a notice on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum] within the original 2 business day window. The notice states that the release is under a quality hold and whether the issue is attributable to Apple or CircleCI. A projected timeline is provided once the scope of the fix is known.
