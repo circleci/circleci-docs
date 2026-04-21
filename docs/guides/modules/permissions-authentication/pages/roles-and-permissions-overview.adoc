@@ -221,9 +221,19 @@ The table below shows the permissions associated with each CircleCI organization
 ^| [.circle-green]#**Yes**#
 ^| [.circle-red]#**No**#
 
-| Manage contexts
+| Create contexts
 ^| [.circle-green]#**Yes**#
 ^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+| Delete contexts
+^| [.circle-green]#**Yes**#
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
+
+| Apply context restrictions (project and expression)
+^| [.circle-green]#**Yes**#
+^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
 
 |===
@@ -595,7 +605,17 @@ The table below shows the permissions associated with each CircleCI project role
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
 
-| Manage contexts
+| Create contexts
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| Delete contexts
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+^| [.circle-red]#**No**#
+
+| Apply context restrictions (project and expression)
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
 ^| [.circle-red]#**No**#
