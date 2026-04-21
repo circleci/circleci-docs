@@ -107,12 +107,12 @@ OUT_DIR="circleci-output/$WORKFLOW_ID"
 JOBS_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
   "$CIRCLE_HOST/api/v2/workflow/$WORKFLOW_ID/job")
 
-for JOB_NUM in $(echo "$JOBS_JSON" | jq -r '.items[].job_number'); do
-  JOB_NAME=$(echo "$JOBS_JSON" | jq -r ".items[] | select(.job_number == $JOB_NUM) | .name")
+for JOB_NUM in $(printf '%s' "$JOBS_JSON" | jq -r '.items[].job_number'); do
+  JOB_NAME=$(printf '%s' "$JOBS_JSON" | jq -r ".items[] | select(.job_number == $JOB_NUM) | .name")
   JOB_DIR="$OUT_DIR/job-$JOB_NUM"
   mkdir -p "$JOB_DIR"
 
-  echo "$JOBS_JSON" \
+  printf '%s' "$JOBS_JSON" \
     | jq ".items[] | select(.job_number == $JOB_NUM) | {name, status, started_at, stopped_at}" \
     > "$JOB_DIR/job-info.json"
 
@@ -120,30 +120,30 @@ for JOB_NUM in $(echo "$JOBS_JSON" | jq -r '.items[].job_number'); do
   BUILD_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
     "$CIRCLE_HOST/api/v1.1/project/$VCS_SLUG/$JOB_NUM")
 
-  echo "$BUILD_JSON" \
+  printf '%s' "$BUILD_JSON" \
     | jq '[.steps[]?.actions[]? | {step, index, name, bash_command, start_time, end_time, exit_code, status, run_time_millis, background, parallel}]' \
     > "$JOB_DIR/step-info.json"
 
   # Download console output using output_url from each step action
-  STEP_COUNT=0
-  echo "$BUILD_JSON" \
+  printf '%s' "$BUILD_JSON" \
     | jq -r '.steps[]?.actions[]? | select(.has_output == true) | "\(.step)\t\(.output_url)"' \
     | while IFS=$'\t' read -r STEP_IDX OUTPUT_URL; do
         [ -z "$OUTPUT_URL" ] && continue
         curl -s "$OUTPUT_URL" | jq -r '.[].message' \
           > "$JOB_DIR/step-$STEP_IDX.txt"
-        STEP_COUNT=$((STEP_COUNT + 1))
       done
 
   echo "Saved steps for job $JOB_NUM ($JOB_NAME)"
 done
 
-chmod -R a-x "$OUT_DIR"
+find "$OUT_DIR" -type f -exec chmod a-x {} +
 echo "Done. Output saved to $OUT_DIR/"
 echo "Search with: grep -r 'search-term' $OUT_DIR/"
 ----
 
-The `chmod -R a-x` removes execute permissions from every downloaded file so nothing can be run accidentally. The files are plain text and JSON -- treat them as untrusted data.
+`find ... -exec chmod a-x` removes execute permissions from **files only** (directories keep traverse bits). The files are plain text and JSON -- treat them as untrusted data.
+
+NOTE: Use `printf '%s' "$VAR"` when piping JSON to `jq`, not `echo "$VAR"`. On macOS, `echo` can interpret backslash sequences inside JSON strings and corrupt the stream.
 
 This produces a folder structure you can browse and search locally:
 
@@ -187,22 +187,22 @@ for PIPELINE_ID in $(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
     JOBS_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
       "$CIRCLE_HOST/api/v2/workflow/$WORKFLOW_ID/job")
 
-    for JOB_NUM in $(echo "$JOBS_JSON" | jq -r '.items[].job_number'); do
+    for JOB_NUM in $(printf '%s' "$JOBS_JSON" | jq -r '.items[].job_number'); do
       JOB_DIR="$OUT_DIR/$WORKFLOW_ID/job-$JOB_NUM"
       mkdir -p "$JOB_DIR"
 
-      echo "$JOBS_JSON" \
+      printf '%s' "$JOBS_JSON" \
         | jq ".items[] | select(.job_number == $JOB_NUM) | {name, status, started_at, stopped_at}" \
         > "$JOB_DIR/job-info.json"
 
       BUILD_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
         "$CIRCLE_HOST/api/v1.1/project/$VCS_SLUG/$JOB_NUM")
 
-      echo "$BUILD_JSON" \
+      printf '%s' "$BUILD_JSON" \
         | jq '[.steps[]?.actions[]? | {step, index, name, bash_command, start_time, end_time, exit_code, status, run_time_millis, background, parallel}]' \
         > "$JOB_DIR/step-info.json"
 
-      echo "$BUILD_JSON" \
+      printf '%s' "$BUILD_JSON" \
         | jq -r '.steps[]?.actions[]? | select(.has_output == true) | "\(.step)\t\(.output_url)"' \
         | while IFS=$'\t' read -r STEP_IDX OUTPUT_URL; do
             [ -z "$OUTPUT_URL" ] && continue
@@ -214,14 +214,14 @@ for PIPELINE_ID in $(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
   done
 done
 
-chmod -R a-x "$OUT_DIR"
+find "$OUT_DIR" -type f -exec chmod a-x {} +
 echo "Done. Output saved to $OUT_DIR/"
 echo "Search with: grep -r 'search-term' $OUT_DIR/"
 ----
 
 TIP: The pipeline listing returns results in reverse chronological order. Use `jq` with `select(.created_at >= ...)` to filter to your investigation window. Follow `next_page_token` for older pipelines.
 
-NOTE: These scripts only download text and JSON -- nothing is executed. All content is piped through `jq` (a data parser) and written to files; no downloaded content is ever evaluated by the shell. The `chmod -R a-x` at the end strips execute permissions as an extra safeguard. Treat downloaded files as untrusted data. See <<limitations>> for what step output and audit logs can and cannot tell you.
+NOTE: These scripts only download text and JSON -- nothing is executed. All content is piped through `jq` (a data parser) and written to files; no downloaded content is ever evaluated by the shell. `find ... chmod a-x` strips execute bits from downloaded **files** only. Treat downloaded files as untrusted data. See <<limitations>> for what step output and audit logs can and cannot tell you.
 
 [#download-artifacts]
 == Download artifacts
