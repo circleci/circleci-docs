@@ -1,7 +1,7 @@
 ---
 extends: existence
 scope: raw
-level: warning
+level: error
 ignorecase: true
 nonword: true
 link: https://redhat-documentation.github.io/supplementary-style-guide/#cloud-services-links-hypertext
