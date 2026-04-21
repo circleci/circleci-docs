@@ -12,7 +12,7 @@ For how this option fits with **Block all new work**, cancelling running workflo
 [#stop-building-a-project]
 == Stop building a project
 
-CAUTION: The **Stop Building** option does not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI, see the xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a project] documentation.
+CAUTION: The **Stop Building** option does not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI, see the xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a Project] documentation.
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
