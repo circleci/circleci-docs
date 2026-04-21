@@ -23,8 +23,8 @@ The table below shows the permissions associated with each CircleCI organization
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Organization*
 ^| *Admin*
@@ -122,8 +122,8 @@ The table below shows the permissions associated with each CircleCI organization
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Insights*
 ^| *Admin*
@@ -142,8 +142,8 @@ The table below shows the permissions associated with each CircleCI organization
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Runner*
 ^| *Admin*
@@ -168,8 +168,8 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Projects*
 ^| *Admin*
@@ -198,8 +198,8 @@ The table below shows the permissions associated with each CircleCI organization
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Contexts*
 ^| *Admin*
@@ -244,8 +244,8 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Orbs*
 ^| *Admin*
@@ -279,8 +279,8 @@ The table below shows the permissions associated with each CircleCI organization
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Webhooks*
 ^| *Admin*
@@ -315,8 +315,8 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 | *Schedule*
 ^| *Admin*
@@ -341,8 +341,8 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 |*Triggers*
 ^| *Admin*
@@ -372,8 +372,8 @@ The table below shows the permissions associated with each CircleCI organization
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 |*Pipelines*
 ^| *Admin*
@@ -397,8 +397,8 @@ The table below shows the permissions associated with each CircleCI organization
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| ORGANIZATION ROLES
+| Actions
+3+^| Organization roles
 
 |*Releases*
 ^| *Admin*
@@ -459,8 +459,8 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| PROJECT ROLES
+| Actions
+3+^| Project roles
 
 | *Projects*
 ^| *Admin*
@@ -500,8 +500,8 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| PROJECT ROLES
+| Actions
+3+^| Project roles
 
 | *Webhooks*
 ^| *Admin*
@@ -526,8 +526,8 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| PROJECT ROLES
+| Actions
+3+^| Project roles
 
 | *Schedule*
 ^| *Admin*
@@ -552,8 +552,8 @@ The table below shows the permissions associated with each CircleCI project role
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| PROJECT ROLES
+| Actions
+3+^| Project roles
 
 | *Triggers*
 ^| *Admin*
@@ -582,8 +582,8 @@ The table below shows the permissions associated with each CircleCI project role
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| PROJECT ROLES
+| Actions
+3+^| Project roles
 
 | *Contexts*
 ^| *Admin*
@@ -628,8 +628,8 @@ The table below shows the permissions associated with each CircleCI project role
 [cols=4*, options="header"]
 |===
 
-| ACTIONS
-3+^| PROJECT ROLES
+| Actions
+3+^| Project roles
 
 | *Pipelines*
 ^| *Admin*
@@ -653,8 +653,8 @@ The table below shows the permissions associated with each CircleCI project role
 --
 [cols=4*, options="header"]
 |===
-| ACTIONS
-3+^| PROJECT ROLES
+| Actions
+3+^| Project roles
 
 | *Releases*
 ^| *Admin*

@@ -18,20 +18,20 @@ script: |
   ifeval_regex := "^ifeval::\\[.+\\]"
   endif_regex := "^endif::.*\\[\\]"
 
+  pos := 0
   for line in text.split(scope, "\n") {
     // trim trailing whitespace
-    line = text.trim_space(line)
-    if text.re_match(if_regex, line) || text.re_match(ifn_regex, line) || text.re_match(ifeval_regex, line) {
-      start := text.index(scope, line)
-      matches = append(matches, {begin: start, end: start + len(line)})
-    } else if text.re_match(endif_regex, line) {
+    trimmed := text.trim_space(line)
+    if text.re_match(if_regex, trimmed) || text.re_match(ifn_regex, trimmed) || text.re_match(ifeval_regex, trimmed) {
+      matches = append(matches, {begin: pos, end: pos + len(line)})
+    } else if text.re_match(endif_regex, trimmed) {
       if len(matches) > 0 {
         //remove the most recently added open ifdef match
         matches = matches[:len(matches)-1]
       } else if len(matches) == 0 {
         //add orphan endif::[] statements
-        start := text.index(scope, line)
-        matches = append(matches, {begin: start, end: start + len(line)})
+        matches = append(matches, {begin: pos, end: pos + len(line)})
       }
     }
+    pos += len(line) + 1
   }
