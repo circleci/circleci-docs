@@ -79,7 +79,7 @@ jobs:
             fi
 
             # Check for dependency file changes (forces full UI rebuild)
-            DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json .circleci/config.yml"
+            DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json .circleci/config.yml gulpfile.js"
             DEPENDENCY_CHANGED=false
 
             for file in $DEPENDENCY_FILES; do
@@ -88,6 +88,12 @@ jobs:
                 DEPENDENCY_CHANGED=true
               fi
             done
+
+            # Check for changes to build task files
+            if ! git diff --quiet $BASE_REF HEAD -- gulp.d/ 2>/dev/null; then
+              echo "[INFO] Build task files changed in gulp.d/"
+              DEPENDENCY_CHANGED=true
+            fi
 
             if [ "$DEPENDENCY_CHANGED" = true ]; then
               echo "[INFO] Dependency changes detected, forcing UI rebuild"
