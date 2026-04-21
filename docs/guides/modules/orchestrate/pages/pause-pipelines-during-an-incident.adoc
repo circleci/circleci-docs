@@ -82,12 +82,12 @@ To inventory variable names across multiple projects, use the open source link:h
 
 Environment variables are stored in **contexts** (shared across projects) and **project settings** (scoped to one project). Both store secrets as masked values. You rotate them differently depending on where they live and how your project connects to CircleCI.
 
-**Context variables** — use the CLI or API:
+**Context variables.** Use the CLI or API:
 
 * xref:security:contexts.adoc#rotating-environment-variables[Rotate Environment Variables With the CLI or API]
 * xref:security:contexts.adoc#deleting-environment-variables[Remove an Environment Variable From a Context]
 
-**Project variables** — the method depends on your integration type:
+**Project variables.** The method depends on your integration type:
 
 * **GitHub App / GitLab projects:** Use `circleci project secret` commands. See xref:toolkit:how-to-use-the-circleci-local-cli.adoc#project-management[Project Management] in the CLI guide.
 * **GitHub OAuth / Bitbucket Cloud projects:** Use the link:https://circleci.com/docs/api/v2/#tag/Project[Project API].
@@ -108,10 +108,12 @@ Environment variables are stored in **contexts** (shared across projects) and **
 
 After a security incident, **regenerate** deploy keys and webhooks by reconnecting the project in CircleCI (or repeating the GitHub webhook setup) to invalidate old endpoints and secrets.
 
-[#other-token-types]
-=== Other token types
+[#api-tokens-and-user-keys]
+=== API tokens and user keys
 
-For a high-level checklist of token types to review without copy-paste scripts, see link:https://support.circleci.com/hc/en-us/articles/11816211460891[Steps for secret rotation]. Prefer the specific procedures above and in the suspected-leak article for actionable steps.
+* **Personal API tokens:** Regenerate from **User Settings > Personal API Tokens** in the web app. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens].
+* **Project API tokens:** Regenerate from **Project Settings > API Permissions**. These are deprecated but still in use on some projects.
+* **User keys (checkout keys):** Manage from **Project Settings > SSH Keys**. Remove compromised keys and add replacements.
 
 [#other-options]
 == Other options (depending on your situation)
