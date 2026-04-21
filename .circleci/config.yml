@@ -79,7 +79,7 @@ jobs:
             fi
 
             # Check for dependency file changes (forces full UI rebuild)
-            DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json"
+            DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json .circleci/config.yml"
             DEPENDENCY_CHANGED=false
 
             for file in $DEPENDENCY_FILES; do
