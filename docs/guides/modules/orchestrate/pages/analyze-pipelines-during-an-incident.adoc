@@ -1,25 +1,30 @@
 = Analyze pipelines and job steps during an incident
 :page-platform: Cloud, Server v4+
-:page-description: Investigate which pipelines ran, inspect step output, review audit logs, and assess credential exposure after containing a CI/CD incident.
+:page-description: Investigate pipelines and step output then review audit logs and assess credential exposure after a CI/CD incident.
 :experimental:
 
 Once you have stopped or paused your pipelines, use this guide to investigate what happened. If you have not already done so, start with xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or Stop Pipelines During an Incident]. This page supplements your organization's incident response process with CircleCI-specific API calls, audit log queries, and ready-to-run download scripts.
 
 Common scenarios that lead to this page:
 
-* **A secret may have been exposed.** An API key, token, or credential leaked through job output, artifacts, or a compromised dependency.
+* **A secret may have leaked.** An API key, token, or credential leaked through job output, artifacts, or a compromised dependency.
 * **Unexpected code ran in a pipeline.** A pull request, merged commit, or modified configuration triggered jobs that ran unauthorized commands.
-* **A dependency or orb may be compromised.** A third-party Docker image, orb, or package used in your pipelines is affected by a known vulnerability.
-* **A team member's account may be compromised.** Someone used their access to trigger pipelines, modify project settings, or read context secrets.
+* **A dependency or orb is under suspicion.** A third-party Docker image, orb, or package in your pipelines has a known vulnerability.
+* **A team member's account is under suspicion.** Someone used their access to trigger pipelines, change project settings, or read context secrets.
 
-For each scenario, the investigation follows the same steps: identify which pipelines ran (<<identify-what-ran>>), inspect step output (<<inspect-step-output>>), review audit logs (<<review-audit-logs>>), and assess credential exposure (<<assess-credential-exposure>>).
+For each scenario, the investigation follows the same steps:
+
+. Identify which pipelines ran (<<identify-what-ran>>).
+. Inspect step output (<<inspect-step-output>>).
+. Review audit logs (<<review-audit-logs>>).
+. Assess credential exposure (<<assess-credential-exposure>>).
 
 The examples on this page use `curl` and `jq`. Replace `$CIRCLE_TOKEN` with a xref:toolkit:managing-api-tokens.adoc[Personal API Token] and `$CIRCLE_HOST` with your CircleCI hostname (`https://circleci.com` for Cloud, or your Server domain).
 
 [#identify-what-ran]
 == Identify what ran
 
-Use the v2 API to list the pipelines, workflows, and jobs that executed during the time window you are investigating. All endpoints are paginated; follow `next_page_token` to retrieve additional results.
+Use the v2 API to list the pipelines, workflows, and jobs that executed during the time window you are investigating. All endpoints paginate results; follow `next_page_token` to retrieve additional results.
 
 === List pipelines for a project
 
@@ -76,7 +81,7 @@ Step output is what each step printed to the console, the same content you see i
 
 === Get step metadata for a job
 
-The v1.1 build endpoint returns an array of steps and their metadata, including the `bash_command` that was executed:
+The v1.1 build endpoint returns an array of steps and their metadata, including the `bash_command` that ran:
 
 [,shell]
 ----
@@ -105,7 +110,7 @@ curl -s "<output_url from above>" | jq -r '.[].message'
 
 === Download step output for a workflow
 
-The following script downloads step metadata and console output from every job in a workflow. Nothing is executed. Metadata is saved as JSON and each step's output is saved as plain text.
+The following script downloads step metadata and console output from every job in a workflow. Nothing runs. The script saves metadata as JSON and each step's output as plain text.
 
 [,shell]
 ----
@@ -172,7 +177,7 @@ circleci-output/
       step-1.txt
 ----
 
-The `step-info.json` file contains an array of step actions. Each entry includes the `bash_command` that was executed, the step `name`, `exit_code`, `start_time`, `end_time`, `run_time_millis`, and whether the step ran in `background` or `parallel` mode.
+The `step-info.json` file contains an array of step actions. Each entry includes the `bash_command` that ran, the step `name`, `exit_code`, `start_time`, `end_time`, `run_time_millis`, and whether the step ran in `background` or `parallel` mode.
 
 === Download step output for a project in a time range
 
@@ -230,7 +235,7 @@ echo "Search with: grep -r 'search-term' $OUT_DIR/"
 
 TIP: The pipeline listing returns results in reverse chronological order. Use `jq` with `select(.created_at >= ...)` to filter to your investigation window. Follow `next_page_token` for older pipelines.
 
-NOTE: These scripts only download text and JSON. Nothing is executed. All content is piped through `jq` (a data parser) and written to files. No downloaded content is ever evaluated by the shell. `find ... chmod a-x` strips execute bits from downloaded **files** only. Treat downloaded files as untrusted data. See <<limitations>> for what step output and audit logs can and cannot tell you.
+NOTE: These scripts only download text and JSON. Nothing runs. The scripts pipe all content through `jq` (a data parser) and write to files. No downloaded content is ever evaluated by the shell. `find ... chmod a-x` strips execute bits from downloaded **files** only. Treat downloaded files as untrusted data. See <<limitations>> for what step output and audit logs can and cannot tell you.
 
 [#download-artifacts]
 == Download artifacts
@@ -273,7 +278,7 @@ See xref:security:audit-logs.adoc[Audit Logs] for the full event list and instru
 [#assess-credential-exposure]
 == Assess credential exposure
 
-After identifying what ran, determine which secrets and credentials jobs could reach.
+After identifying what ran, determine which secrets and credentials jobs had access to.
 
 === Inventory environment variable names
 
@@ -297,7 +302,7 @@ curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
   | jq '.items[] | {name, value}'
 ----
 
-Values are **masked** (last four characters visible). You cannot export plaintext values from the API.
+The API and CLI return names and masked values (last four characters visible). You cannot export plaintext values from the API.
 
 === Identify which contexts jobs used
 
@@ -311,8 +316,8 @@ For rotation steps, see xref:orchestrate:pause-pipelines-during-an-incident.adoc
 Be aware of these boundaries when investigating:
 
 * **Audit logs are control-plane only.** They record who changed settings and which contexts a job accessed, not what happened at runtime inside a job.
-* **Step output is stdout/stderr only.** If malicious code ran silently without printing, it will not appear in step output.
-* **Environment variable values are masked.** The API and CLI return names and masked values. You cannot diff against known-good plaintext. You can only identify what was *reachable* and rotate accordingly.
+* **Step output is stdout/stderr only.** If malicious code ran without printing, it does not appear in step output.
+* **Environment variable values are masked.** You cannot diff against known-good plaintext. You can only identify what was *reachable* and rotate accordingly.
 
 [#see-also]
 == See also
@@ -324,6 +329,6 @@ Be aware of these boundaries when investigating:
 * xref:security:security-supply-chain.adoc[Protecting Against Supply Chain Attacks]
 * xref:security:security-recommendations.adoc[Security Recommendations]
 * xref:security:ip-ranges.adoc[IP Ranges]
-* xref:config-policies:config-policy-management-overview.adoc[Config Policy Management Overview]
+* xref:config-policies:config-policy-management-overview.adoc[Policy Management Overview]
 * xref:security:contexts.adoc[Using Contexts]
 * xref:toolkit:managing-api-tokens.adoc[Managing API Tokens]
