@@ -16,7 +16,7 @@ CAUTION: The **Stop Building** option does not automatically remove all project 
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
-NOTE: To stop new pipelines without removing your VCS integration (webhook and deploy key), you can enable **Block all new work** in xref:orchestrate:skip-build.adoc#enable-block-new-work-for-a-project[Advanced project settings] instead. In-progress workflows are not cancelled automatically; cancel them from the UI if needed.
+NOTE: **Stop Building** unfollows all project followers, cancels all running workflows in the background, and removes VCS integration (webhook and deploy key). If you only want to prevent **new** pipelines while keeping the project connected and letting in-progress workflows finish, use xref:orchestrate:skip-build.adoc#enable-block-new-work-for-a-project[Block all new work] in Advanced project settings instead.
 
 If you are using the GitHub OAuth App or Bitbucket Cloud, to stop building one of your projects on CircleCI, follow these steps:
 

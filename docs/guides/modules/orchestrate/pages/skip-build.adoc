@@ -9,7 +9,7 @@ This page describes how to skip, cancel, or block work when triggering pipelines
 * Workflows can be cancelled using the auto-cancel feature.
 * All new work can be blocked for an organization or project during an incident or emergency.
 
-For a concise order of operations during an incident (cancel running work, block new pipelines, stop building, and coordinating followers), see xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or stop pipelines during an incident].
+For a step-by-step order of operations during an incident (block new pipelines, stop building to cancel running work, and coordinating followers), see xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or stop pipelines during an incident].
 
 All methods are described below.
 
@@ -128,9 +128,5 @@ This setting is designed for situations where you need to quickly halt all CI/CD
 . Select **Advanced**.
 . Toggle the **Block all new work from starting for this project** switch to the on position.
 
-NOTE: **Block all new work** prevents new pipelines (and reruns) at CircleCI while your VCS integration remains. If you need to fully disconnect a **GitHub OAuth** or **Bitbucket Cloud** project—removing the webhook and deploy key from the repository—see xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI].
-
-
-
-
+NOTE: **Block all new work** prevents new pipelines (and reruns) but does **not** cancel workflows that are already running. If you also need to **cancel running workflows** and fully disconnect a **GitHub OAuth** or **Bitbucket Cloud** project (removing the webhook and deploy key), use xref:security:stop-building-a-project-on-circleci.adoc[Stop Building] instead.
 
