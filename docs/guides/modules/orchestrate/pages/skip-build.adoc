@@ -9,7 +9,7 @@ This page describes how to skip, cancel, or block work when triggering pipelines
 * Workflows can be cancelled using the auto-cancel feature.
 * All new work can be blocked for an organization or project during an incident or emergency.
 
-For a step-by-step order of operations during an incident (block new pipelines, stop building to cancel running work, and coordinating followers), see xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or stop pipelines during an incident].
+For a step-by-step incident playbook, see xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or Stop Pipelines During an Incident].
 
 All methods are described below.
 
