@@ -191,3 +191,27 @@ NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this fe
 === OIDC tokens missing from jobs
 
 If the link:https://circleci.com/docs/openid-connect-tokens/[OIDC token] environment variables (`$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`) are missing from jobs, check the default temporary directory. A common cause is that it (for example, `/tmp`) is not writable or is mounted as `noexec`. The system's temporary directory needs to be writable and allow execution for the OIDC plugin to be downloaded and executed from it.
+
+[#runners-queueing]
+=== Runner tasks queueing despite idle runners
+
+The runner inventory page only displays actively running tasks. Queued tasks are not visible.
+This can make it appear that runners are idle when concurrency is fully consumed by queued jobs.
+ 
+Concurrency is calculated across all tasks for a resource class, including those waiting in queue.
+For example, if your concurrency limit is 20 and you submit 20 jobs to resource class `X`, those jobs fill the available concurrency even while they wait to run one at a time.
+Any jobs targeting resource classes `Y` or `Z` will also queue, even if those runners have no active tasks, because the shared concurrency limit is already reached.
+ 
+To check for queued tasks that are consuming concurrency, use the link:https://circleci.com/docs/guides/execution-runner/runner-api/#get-api-v3-tasks[CircleCI Runner API]:
+
+[source,shell]
+----
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
+----
+
+NOTE: Jobs assigned to a resource class that exists but has no runners attached will queue indefinitely.
+Verify that all resource class names in your `.circleci/config.yml` match what is configured in the runner inventory, and that each resource class has at least one runner assigned.
+ 
+ 
+If `unclaimed_task_count` is greater than `0`, cancel those tasks to free up concurrency for other resource classes.
