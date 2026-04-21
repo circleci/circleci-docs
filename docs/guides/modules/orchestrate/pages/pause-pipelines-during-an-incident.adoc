@@ -5,6 +5,8 @@
 
 During an outage, security response, or other emergency, you may need to **stop pipelines that are already running** and **prevent new pipelines from starting**. CircleCI offers several levers; they do not all do the same thing. This page gives a practical order of operations and points to the detailed guides for each option.
 
+Once you have contained the incident, see xref:orchestrate:analyze-pipelines-during-an-incident.adoc[Analyze pipelines and job steps during an incident] to investigate what ran and what was exposed.
+
 NOTE: For server customers, **Block all new work** is available in Server 4.10+. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block all new work] for details.
 
 [#recommended-order]
@@ -83,6 +85,7 @@ After you have xref:orchestrate:skip-build.adoc#block-all-new-work[blocked new w
 [#see-also]
 == See also
 
+* xref:orchestrate:analyze-pipelines-during-an-incident.adoc[Analyze pipelines and job steps during an incident]
 * xref:orchestrate:skip-build.adoc[Skip CI, auto-cancel, and block new pipelines]
 * xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
 * xref:orchestrate:pipelines.adoc[Pipelines overview and setup]

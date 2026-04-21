@@ -1,0 +1,321 @@
+= Analyze pipelines and job steps during an incident
+:page-platform: Cloud, Server v4+
+:page-description: Investigate which pipelines ran, inspect step output, review audit logs, and assess credential exposure after containing a CI/CD incident.
+:experimental:
+
+After you have xref:orchestrate:pause-pipelines-during-an-incident.adoc[contained an incident] (blocked new work, stopped building, coordinated followers), the next step is to **understand what ran and what was exposed**. This page walks through the CircleCI API and audit log tools you can use to investigate.
+
+The examples on this page use `curl` and `jq`. Replace `$CIRCLE_TOKEN` with a xref:toolkit:managing-api-tokens.adoc[personal API token] and `$CIRCLE_HOST` with your CircleCI hostname (`https://circleci.com` for Cloud, or your Server domain).
+
+[#identify-what-ran]
+== Identify what ran
+
+Use the v2 API to list the pipelines, workflows, and jobs that executed during the time window you are investigating. All endpoints are paginated; follow `next_page_token` to retrieve additional results.
+
+=== List pipelines for a project
+
+[,shell]
+----
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/project/{project-slug}/pipeline" \
+  | jq '.items[] | {id, number, created_at, trigger}'
+----
+
+See link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/listPipelinesForProject[List pipelines for a project] in the API reference.
+
+=== List workflows in a pipeline
+
+[,shell]
+----
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/pipeline/{pipeline-id}/workflow" \
+  | jq '.items[] | {id, name, status, created_at, stopped_at}'
+----
+
+See link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/listWorkflowsByPipelineId[List workflows by pipeline ID].
+
+=== List jobs in a workflow
+
+[,shell]
+----
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/workflow/{workflow-id}/job" \
+  | jq '.items[] | {job_number, name, status, started_at, stopped_at}'
+----
+
+See link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/listWorkflowJobs[List jobs for a workflow].
+
+=== Get job details
+
+Returns executor type, resource class, and timing for a single job.
+
+[,shell]
+----
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/project/{project-slug}/job/{job-number}" \
+  | jq '{name, status, executor, started_at, stopped_at, duration}'
+----
+
+See link:https://circleci.com/docs/api/v2/#tag/Job/operation/getJobDetails[Get job details].
+
+For more on project slugs and pagination, see xref:toolkit:api-developers-guide.adoc[API developers guide].
+
+[#inspect-step-output]
+== Inspect step output
+
+Step output is what each step printed to the console -- the same content you see in the job view in the CircleCI web app. The v1.1 API also returns **step metadata** (the command that ran, exit code, timing) alongside the output.
+
+=== Get step metadata for a job
+
+The v1.1 build endpoint returns an array of steps and their metadata, including the `bash_command` that was executed:
+
+[,shell]
+----
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v1.1/project/{vcs}/{org}/{project}/{build_num}" \
+  | jq '[.steps[]?.actions[]? | {step, name, bash_command, exit_code, status, start_time, end_time, run_time_millis}]'
+----
+
+=== Get step output for a single step
+
+Each action in the build details response includes an `output_url` -- a presigned URL that returns the console output (stdout/stderr) for that step. Follow it with a simple GET:
+
+[,shell]
+----
+# 1. Fetch build details to get the output_url for each step
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v1.1/project/{vcs}/{org}/{project}/{build_num}" \
+  | jq -r '.steps[2].actions[0].output_url'
+
+# 2. Follow the output_url (no auth header needed -- the URL is presigned)
+curl -s "<output_url from above>" | jq -r '.[].message'
+----
+
+* Steps are zero-indexed. `steps[0]` is typically **Spin up environment**, `steps[1]` is **Checkout code**, and so on.
+* `actions[0]` is the first parallel run. For non-parallelized jobs there is only one action per step.
+
+=== Download step output for a workflow
+
+The following script downloads step metadata and console output from every job in a workflow. Nothing is executed -- metadata is saved as JSON and each step's output is saved as plain text.
+
+[,shell]
+----
+WORKFLOW_ID="your-workflow-id"
+VCS_SLUG="github/your-org/your-repo"
+OUT_DIR="circleci-output/$WORKFLOW_ID"
+
+JOBS_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/workflow/$WORKFLOW_ID/job")
+
+for JOB_NUM in $(echo "$JOBS_JSON" | jq -r '.items[].job_number'); do
+  JOB_NAME=$(echo "$JOBS_JSON" | jq -r ".items[] | select(.job_number == $JOB_NUM) | .name")
+  JOB_DIR="$OUT_DIR/job-$JOB_NUM"
+  mkdir -p "$JOB_DIR"
+
+  echo "$JOBS_JSON" \
+    | jq ".items[] | select(.job_number == $JOB_NUM) | {name, status, started_at, stopped_at}" \
+    > "$JOB_DIR/job-info.json"
+
+  # Fetch v1.1 build details: step metadata + output_url per step
+  BUILD_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+    "$CIRCLE_HOST/api/v1.1/project/$VCS_SLUG/$JOB_NUM")
+
+  echo "$BUILD_JSON" \
+    | jq '[.steps[]?.actions[]? | {step, index, name, bash_command, start_time, end_time, exit_code, status, run_time_millis, background, parallel}]' \
+    > "$JOB_DIR/step-info.json"
+
+  # Download console output using output_url from each step action
+  STEP_COUNT=0
+  echo "$BUILD_JSON" \
+    | jq -r '.steps[]?.actions[]? | select(.has_output == true) | "\(.step)\t\(.output_url)"' \
+    | while IFS=$'\t' read -r STEP_IDX OUTPUT_URL; do
+        [ -z "$OUTPUT_URL" ] && continue
+        curl -s "$OUTPUT_URL" | jq -r '.[].message' \
+          > "$JOB_DIR/step-$STEP_IDX.txt"
+        STEP_COUNT=$((STEP_COUNT + 1))
+      done
+
+  echo "Saved steps for job $JOB_NUM ($JOB_NAME)"
+done
+
+chmod -R a-x "$OUT_DIR"
+echo "Done. Output saved to $OUT_DIR/"
+echo "Search with: grep -r 'search-term' $OUT_DIR/"
+----
+
+The `chmod -R a-x` removes execute permissions from every downloaded file so nothing can be run accidentally. The files are plain text and JSON -- treat them as untrusted data.
+
+This produces a folder structure you can browse and search locally:
+
+----
+circleci-output/
+  bd0f7dfb-134c-4aab-93f4-ab23a1f31c15/
+    job-1/
+      job-info.json        <-- job name, status, timing (from v2 API)
+      step-info.json       <-- per-step name, bash_command, exit_code, timing
+      step-0.txt           <-- console output (stdout/stderr)
+      step-1.txt
+      step-2.txt
+    job-2/
+      job-info.json
+      step-info.json
+      step-0.txt
+      step-1.txt
+----
+
+The `step-info.json` file contains an array of step actions. Each entry includes the `bash_command` that was executed, the step `name`, `exit_code`, `start_time`, `end_time`, `run_time_millis`, and whether the step ran in `background` or `parallel` mode.
+
+=== Download step output for a project in a time range
+
+To download step metadata and output across all recent pipelines for a project:
+
+[,shell]
+----
+PROJECT_SLUG="gh/your-org/your-repo"
+VCS_SLUG="github/your-org/your-repo"
+AFTER="2026-04-20T00:00:00Z"
+OUT_DIR="circleci-output"
+
+for PIPELINE_ID in $(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/project/$PROJECT_SLUG/pipeline" \
+  | jq -r --arg after "$AFTER" '.items[] | select(.created_at >= $after) | .id'); do
+
+  for WORKFLOW_ID in $(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+    "$CIRCLE_HOST/api/v2/pipeline/$PIPELINE_ID/workflow" \
+    | jq -r '.items[].id'); do
+
+    JOBS_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+      "$CIRCLE_HOST/api/v2/workflow/$WORKFLOW_ID/job")
+
+    for JOB_NUM in $(echo "$JOBS_JSON" | jq -r '.items[].job_number'); do
+      JOB_DIR="$OUT_DIR/$WORKFLOW_ID/job-$JOB_NUM"
+      mkdir -p "$JOB_DIR"
+
+      echo "$JOBS_JSON" \
+        | jq ".items[] | select(.job_number == $JOB_NUM) | {name, status, started_at, stopped_at}" \
+        > "$JOB_DIR/job-info.json"
+
+      BUILD_JSON=$(curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+        "$CIRCLE_HOST/api/v1.1/project/$VCS_SLUG/$JOB_NUM")
+
+      echo "$BUILD_JSON" \
+        | jq '[.steps[]?.actions[]? | {step, index, name, bash_command, start_time, end_time, exit_code, status, run_time_millis, background, parallel}]' \
+        > "$JOB_DIR/step-info.json"
+
+      echo "$BUILD_JSON" \
+        | jq -r '.steps[]?.actions[]? | select(.has_output == true) | "\(.step)\t\(.output_url)"' \
+        | while IFS=$'\t' read -r STEP_IDX OUTPUT_URL; do
+            [ -z "$OUTPUT_URL" ] && continue
+            curl -s "$OUTPUT_URL" | jq -r '.[].message' \
+              > "$JOB_DIR/step-$STEP_IDX.txt"
+          done
+    done
+
+  done
+done
+
+chmod -R a-x "$OUT_DIR"
+echo "Done. Output saved to $OUT_DIR/"
+echo "Search with: grep -r 'search-term' $OUT_DIR/"
+----
+
+TIP: The pipeline listing returns results in reverse chronological order. Use `jq` with `select(.created_at >= ...)` to filter to your investigation window. Follow `next_page_token` for older pipelines.
+
+NOTE: These scripts only download text and JSON -- nothing is executed. All content is piped through `jq` (a data parser) and written to files; no downloaded content is ever evaluated by the shell. The `chmod -R a-x` at the end strips execute permissions as an extra safeguard. Treat downloaded files as untrusted data. See <<limitations>> for what step output and audit logs can and cannot tell you.
+
+[#download-artifacts]
+== Download artifacts
+
+Jobs may store files as artifacts. To download all artifacts for a job:
+
+[,shell]
+----
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/project/{project-slug}/{job-number}/artifacts" \
+  | jq -r '.items[].url' \
+  | xargs -I {} curl -s -H "Circle-Token: $CIRCLE_TOKEN" -L -O "{}"
+----
+
+See xref:optimize:artifacts.adoc[Storing build artifacts] and the link:https://circleci.com/docs/api/v2/#tag/Job/operation/getJobArtifacts[Get job artifacts] API reference.
+
+[#review-audit-logs]
+== Review audit logs
+
+Audit logs record **control-plane events** -- changes to projects, contexts, orbs, webhooks, and settings. They help answer questions like "who changed what" and "which contexts were accessed."
+
+=== What audit logs capture
+
+* `context.secrets.accessed` -- a job used secrets from a context
+* `context.env_var.created` / `deleted` -- a context variable was added or removed
+* `project.settings.update` -- project settings changed
+* `checkout-key.create` / `delete` -- deploy key or user key changes
+* `config_source.create` / `update` / `delete` -- config source modifications
+* `workflow.job.start` / `finish` -- job lifecycle events
+* `project.stop_building` -- Stop Building was used
+
+See xref:security:audit-logs.adoc[Audit logs] for the full event list and instructions on requesting or streaming logs.
+
+=== How to access audit logs
+
+**All plans:** Request audit logs from **Org Settings > Security > Audit Logs** in the web app. Available for the past 12 months.
+
+**Scale plan:** Stream audit logs to your own storage (S3) for bulk analysis. See xref:security:audit-logs.adoc#stream-audit-logs[Stream audit logs].
+
+[#assess-credential-exposure]
+== Assess credential exposure
+
+After identifying what ran, determine which secrets and credentials were reachable.
+
+=== Inventory environment variable names
+
+The open-source link:https://github.com/CircleCI-Public/CircleCI-Env-Inspector[CircleCI Env Inspector] generates an inventory of environment variable **names** across your projects and contexts. Run it with a xref:toolkit:managing-api-tokens.adoc[personal API token] and treat the output as sensitive.
+
+=== List context secrets
+
+[,shell]
+----
+circleci context show {vcs-type} {org-name} {context-name}
+----
+
+This returns secret **names** and creation dates, not values.
+
+=== List project variables
+
+[,shell]
+----
+curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
+  "$CIRCLE_HOST/api/v2/project/{project-slug}/envvar" \
+  | jq '.items[] | {name, value}'
+----
+
+Values are **masked** (last four characters visible). You cannot export plaintext values from the API.
+
+=== Identify which contexts were used
+
+If you have audit logs, filter for `context.secrets.accessed` events in your investigation time window. This tells you which contexts were injected into which jobs.
+
+For rotation steps, see xref:orchestrate:pause-pipelines-during-an-incident.adoc#secrets-and-credentials[Secrets and credentials] in the containment guide.
+
+[#limitations]
+== Limitations
+
+Be aware of these boundaries when investigating:
+
+* **No per-job network logs.** CircleCI does not capture outbound connections, DNS queries, or packet data from job execution environments. For network-level forensics, rely on your own infrastructure (VPC flow logs, proxy logs, DNS query logging).
+* **Audit logs are control-plane only.** They record who changed settings and which contexts were accessed -- not what happened at runtime inside a job.
+* **Step output is stdout/stderr only.** If malicious code ran silently without printing, it will not appear in step output.
+* **Environment variable values are masked.** The API and CLI return names and masked values. You cannot diff against known-good plaintext -- you can only identify what was *reachable* and rotate accordingly.
+
+[#see-also]
+== See also
+
+* xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or stop pipelines during an incident]
+* xref:security:audit-logs.adoc[Audit logs]
+* xref:toolkit:api-developers-guide.adoc[API developers guide]
+* xref:optimize:artifacts.adoc[Storing build artifacts]
+* xref:security:security-supply-chain.adoc[Protecting against supply chain attacks]
+* xref:security:security-recommendations.adoc[Security recommendations]
+* xref:security:ip-ranges.adoc[IP ranges]
+* xref:config-policies:config-policy-management-overview.adoc[Config policy management overview]
+* xref:security:contexts.adoc[Using contexts]
+* xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
