@@ -310,7 +310,6 @@ For rotation steps, see xref:orchestrate:pause-pipelines-during-an-incident.adoc
 
 Be aware of these boundaries when investigating:
 
-* **No per-job network logs.** CircleCI does not capture outbound connections, DNS queries, or packet data from job execution environments. For network-level forensics, rely on your own infrastructure (VPC flow logs, proxy logs, DNS query logging).
 * **Audit logs are control-plane only.** They record who changed settings and which contexts a job accessed, not what happened at runtime inside a job.
 * **Step output is stdout/stderr only.** If malicious code ran silently without printing, it will not appear in step output.
 * **Environment variable values are masked.** The API and CLI return names and masked values. You cannot diff against known-good plaintext. You can only identify what was *reachable* and rotate accordingly.

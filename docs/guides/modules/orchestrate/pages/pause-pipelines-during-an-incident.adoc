@@ -67,11 +67,7 @@ image::guides:ROOT:incident-stop-building-project-setting.png[Project overview s
 
 After you have blocked new work (see xref:orchestrate:skip-build.adoc#block-all-new-work[Block All New Work]) or stopped building (see xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI]), rotate or remove **secrets** (context and project variables, API tokens, SSH keys, runner tokens) that may be exposed. The public API and CLI return **masked** values for project variables by design. You work from **names** and **last-updated** metadata, not bulk plaintext export.
 
-**Checklist-style rotation (Help Center).** Covers OAuth, personal and project API tokens, project and context variables, user tokens, SSH keys, deploy keys, and runner tokens:
-
-* link:https://support.circleci.com/hc/en-us/articles/11816211460891[Steps for Secret Rotation]
-
-**Suspected leak or forensic review.** Triage steps and audit log use:
+**Suspected leak or forensic review.** Start here for triage and audit log use:
 
 * link:https://support.circleci.com/hc/en-us/articles/31307485547419[What to do if you suspect you have a secret leaked from CircleCI]
 * xref:security:audit-logs.adoc[Audit Logs]
@@ -85,9 +81,17 @@ After you have blocked new work (see xref:orchestrate:skip-build.adoc#block-all-
 
 **Project variables: CLI and API.** GitHub App / GitLab projects use `circleci project secret` commands; classic project slugs use the link:https://circleci.com/docs/api/v2/#tag/Project[Project API]. See xref:toolkit:how-to-use-the-circleci-local-cli.adoc#project-management[Project Management] in the CLI guide and xref:security:set-environment-variable.adoc[Set an Environment Variable] for the web app.
 
-**SSH keys and self-hosted runners.** Project SSH keys: xref:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys]. Runner token commands are in xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to Use the CircleCI Local CLI] (runner token sections) and in the Help Center rotation article above.
+**SSH keys and self-hosted runners.** Project SSH keys: xref:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys]. Runner token commands are in xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to Use the CircleCI Local CLI] (runner token sections).
 
-**Webhooks and deploy keys on GitHub.** For supported integrations, xref:security:stop-building-a-project-on-circleci.adoc[Stop Building] removes the CircleCI webhook and deploy key from the repo. If you need the same outcome **without** using that button (for example the web app is unavailable), use link:https://support.circleci.com/hc/en-us/articles/360021666393[How to Stop Building by Manually Removing the CircleCI Webhook and Deploy Key From Your GitHub Repository]. After a security incident, **regenerate** deploy keys and webhooks by reconnecting the project in CircleCI. This ensures old endpoints are invalidated.
+**GitHub OAuth webhooks and deploy keys.**
+
+* **Rotate the GitHub webhook secret** (GitHub OAuth project triggers). Follow GitHub’s documented flow with CircleCI-specific notes, including commands you can run from your machine: link:https://support.circleci.com/hc/en-us/articles/49131607657243[Rotating the GitHub webhook secret for CircleCI GitHub OAuth project triggers].
+* **Disconnect without the CircleCI app** (for example the UI is unavailable). Manually remove the CircleCI webhook and deploy key from the repository: link:https://support.circleci.com/hc/en-us/articles/360021666393[How to stop building by manually removing the CircleCI webhook and deploy key from your GitHub repository]. This stops delivery of new events; it is not a substitute for rotating the webhook secret if that credential was exposed.
+* **Use Stop Building in the app** when you can: xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI] removes the webhook and deploy key for supported integrations and cancels running workflows.
+
+After a security incident, **regenerate** deploy keys and webhooks by reconnecting the project in CircleCI (or repeating the GitHub webhook setup) so old endpoints and secrets are invalidated.
+
+**Other token types (checklist only).** For a high-level list of categories to review (OAuth, API tokens, variables, keys) without copy-paste scripts for every case, see link:https://support.circleci.com/hc/en-us/articles/11816211460891[Steps for secret rotation]. Prefer the specific procedures above and in the suspected-leak article for actionable steps.
 
 [#other-options]
 == Other options (depending on your situation)
