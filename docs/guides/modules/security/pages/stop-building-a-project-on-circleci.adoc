@@ -7,12 +7,16 @@
 == Introduction
 This page outlines how to stop builds for a project on CircleCI.
 
+For how this option fits together with **Block all new work**, cancelling running workflows, and follower behavior during an incident, see xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or stop pipelines during an incident].
+
 [#stop-building-a-project]
 == Stop building a project
 
 CAUTION: The **Stop Building** option does not automatically remove all project data from the CircleCI databases. To remove all project data from CircleCI, see the xref:security:delete-organizations-and-projects.adoc#delete-a-project[Delete a project] documentation.
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
+
+NOTE: To stop new pipelines without removing your VCS integration (webhook and deploy key), you can enable **Block all new work** in xref:orchestrate:skip-build.adoc#enable-block-new-work-for-a-project[Advanced project settings] instead. In-progress workflows are not cancelled automatically; cancel them from the UI if needed.
 
 If you are using the GitHub OAuth App or Bitbucket Cloud, to stop building one of your projects on CircleCI, follow these steps:
 

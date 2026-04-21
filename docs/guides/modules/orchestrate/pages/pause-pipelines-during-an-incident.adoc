@@ -1,0 +1,95 @@
+= Pause or stop pipelines during an incident
+:page-platform: Cloud, Server v4+
+:page-description: Decide when to cancel running work, block new pipelines, stop building, coordinate followers, or rotate and remove secrets during an incident or emergency.
+:experimental:
+
+During an outage, security response, or other emergency, you may need to **stop pipelines that are already running** and **prevent new pipelines from starting**. CircleCI offers several levers; they do not all do the same thing. This page gives a practical order of operations and points to the detailed guides for each option.
+
+NOTE: For server customers, **Block all new work** is available in Server 4.10+. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block all new work] for details.
+
+[#recommended-order]
+== Recommended order of operations
+
+. **Address work that is already running.** Open the xref:orchestrate:pipelines.adoc#pipelines-dashboard[Pipelines dashboard], locate running workflows, and **cancel** what you need to stop. Neither **Block all new work** nor **Stop Building** is a substitute for cancelling in-flight workflows when you need them to stop immediately.
+. **Prevent new pipelines at CircleCI** with **Block all new work** at **organization** or **project** scope. This rejects new pipeline creation and reruns while the block is on; your VCS integration stays in place. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block all new work].
+. **If you use GitHub OAuth or Bitbucket Cloud** and you need to **disconnect** the repository from CircleCI (remove webhook and deploy key), use **Stop Building** on the project **Overview** tab instead of, or after, coordinating with your team. See xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]. This option is **not** available for all integration types; see the same page for support and limitations.
+. **Coordinate who follows the project.** The **Projects** list controls whether a user follows a project for their dashboard. For some integrations, **following** a project can restore GitHub-side resources (such as webhook and deploy key) after a stop-build flow, which can look like “nothing happened” if another teammate follows the project during an incident. Align with your team so that stopping or blocking work is not unintentionally undone. See xref:about-circleci:introduction-to-the-circleci-web-app.adoc#projects[Projects in the web app].
+. **Rotate or remove secrets** that might be exposed, or generate an inventory for your security team. APIs and CLIs return **masked** values for project variables by design; you cannot bulk-export plaintext secrets to compare them. Use the CLI/API to **list names**, **remove** bad variables, and **store** replacements. See <<#secrets-and-credentials,Secrets and credentials>>.
+
+[#when-to-use-block-vs-stop-building]
+== Block all new work vs Stop Building
+
+[cols="1,2,2",options="header"]
+|===
+| | **Block all new work** | **Stop Building**
+
+| **What it does**
+| Stops **new** pipelines and reruns at CircleCI. VCS integration remains.
+| For supported integrations, removes the project’s CircleCI connection to the repo (for example webhook and deploy key for GitHub OAuth). You use **Set Up Project** to connect again later.
+
+| **Running workflows**
+| Already-running workflows **continue** until they finish, fail, or are cancelled.
+| Does not replace cancelling running workflows if you need them stopped now.
+
+| **Typical use**
+| Fast “circuit breaker” during an incident while you keep the project connected.
+| You want pushes to the repo to stop reaching CircleCI for that project until you explicitly reconnect.
+
+| **Where**
+| **Org** or **Project Settings** → **Advanced**
+| **Project Settings** → **Overview** (bottom of page)
+
+| **Details**
+| xref:orchestrate:skip-build.adoc#enable-block-new-work-for-a-project[Skip CI, auto-cancel, and block new pipelines]
+| xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
+|===
+
+[#secrets-and-credentials]
+== Secrets and credentials
+
+After you have xref:orchestrate:skip-build.adoc#block-all-new-work[blocked new work] or xref:security:stop-building-a-project-on-circleci.adoc[stopped building], rotate or remove **secrets** (context and project variables, API tokens, SSH keys, runner tokens) that may be exposed. The public API and CLI return **masked** values for project variables by design—you work from **names** and **last-updated** metadata, not bulk plaintext export.
+
+**Checklist-style rotation (Help Center)** — OAuth, personal and project API tokens, project and context variables, user tokens, SSH keys, deploy keys, runner tokens:
+
+* link:https://support.circleci.com/hc/en-us/articles/11816211460891[Steps for Secret Rotation]
+
+**Suspected leak or forensic review** — triage steps and audit log use:
+
+* link:https://support.circleci.com/hc/en-us/articles/31307485547419[What to do if you suspect you have a secret leaked from CircleCI]
+* xref:security:audit-logs.adoc[Audit logs]
+
+**Inventory across many projects** — open-source link:https://github.com/CircleCI-Public/CircleCI-Env-Inspector[CircleCI Env Inspector] (run with a xref:toolkit:managing-api-tokens.adoc[personal API token]; treat output as sensitive).
+
+**Contexts: CLI and API** — rotate or delete secrets in contexts:
+
+* xref:security:contexts.adoc#rotating-environment-variables[Rotate environment variables with the CLI or API]
+* xref:security:contexts.adoc#deleting-environment-variables[Remove an environment variable from a context]
+
+**Project variables: CLI and API** — GitHub App / GitLab projects use `circleci project secret` commands; classic project slugs use the link:https://circleci.com/docs/api/v2/#tag/Project[Project API]. See xref:toolkit:how-to-use-the-circleci-local-cli.adoc#project-management[Project management] in the CLI guide and xref:security:set-environment-variable.adoc[Set an environment variable] for the web app.
+
+**SSH keys and self-hosted runners** — project SSH keys: xref:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys]; runner token commands are in xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI] (runner token sections) and in the Help Center rotation article above.
+
+**Webhooks and deploy keys on GitHub** — For supported integrations, xref:security:stop-building-a-project-on-circleci.adoc[Stop building] removes the CircleCI webhook and deploy key from the repo. If you need the same outcome **without** using that button (for example the web app is unavailable), use link:https://support.circleci.com/hc/en-us/articles/360021666393[How to stop building by manually removing the CircleCI webhook and deploy key from your GitHub repository]. After a security incident, **regenerate** deploy keys and webhooks by reconnecting the project in CircleCI or redoing GitHub integration steps so old endpoints are invalidated.
+
+[#other-options]
+== Other options (depending on your situation)
+
+* **Skip the next push only:** Add `[ci skip]` or `[skip ci]` to the latest commit (see xref:orchestrate:skip-build.adoc#skip-jobs[Skip CI for a specific push]). This does not stop work that is already queued or running across the org.
+* **Feature availability:** Triggers, **Stop Building**, and **Block** vary by how your org is connected to your VCS. See the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] for what applies to GitHub OAuth, GitHub App, GitLab, and Bitbucket.
+* **Scale plan — optional policy-based pause:** **Block all new work** at **organization** scope is usually enough to stop new pipelines org-wide. On **Scale**, you can *additionally* use **config policy** to fail pipelines with a **custom message** and **exempt** specific projects (for example a repo used only to publish policies). See xref:config-policies:config-policy-management-overview.adoc[Config policy management overview] and the Help Center sample link:https://support.circleci.com/hc/en-us/articles/42043259044379[Blocking builds org-wide through config policies].
+* **Bulk “unfollow” or scripted stop (GitHub OAuth–style projects):** Some teams use a scripted loop against the link:https://circleci.com/docs/api/v1/[API v1] to unfollow many repositories at once. That pattern operates **per user** who runs it and can require **Set Up Project** again later—read link:https://support.circleci.com/hc/en-us/articles/360019776413[How to mass unfollow projects from CircleCI] carefully before using it in an emergency.
+
+[#see-also]
+== See also
+
+* xref:orchestrate:skip-build.adoc[Skip CI, auto-cancel, and block new pipelines]
+* xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI]
+* xref:orchestrate:pipelines.adoc[Pipelines overview and setup]
+* xref:config-policies:config-policy-management-overview.adoc[Config policy management overview]
+* xref:security:contexts.adoc[Using contexts]
+* xref:security:env-vars.adoc[Introduction to environment variables]
+* xref:security:audit-logs.adoc[Audit logs]
+* xref:security:set-environment-variable.adoc[Set an environment variable]
+* xref:toolkit:managing-api-tokens.adoc[Managing API tokens]
+* xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
+* xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
