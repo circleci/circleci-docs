@@ -590,7 +590,10 @@ Workflows orchestrate jobs. A workflow defines a list of jobs and their run orde
 
 image::guides:ROOT:workflow_detail_newui.png[Workflows illustration cloud]
 
-The following configuration example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
+The following configuration example shows two workflows with modern features:
+
+* `build_and_test` runs on every commit with concurrent job execution
+* `deploy` is a conditional workflow that includes manual approval and flexible job dependencies
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
@@ -598,51 +601,99 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 ----
 version: 2.1
 
+parameters:
+  run_deploy_workflow:
+    type: boolean
+    default: false
+
 jobs:
-  build1:
+  build:
     docker:
-      - image: cimg/ruby:2.4-node
-      - image: cimg/postgres:9.4.12
+      - image: cimg/base:current
     steps:
       - checkout
-      - save_cache: # Caches dependencies with a cache key
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows
+      - run:
+          name: Build application
+          command: echo "Building application..."
 
-  build2:
+  lint:
     docker:
-      - image: cimg/ruby:2.4-node
-      - image: cimg/postgres:9.4.12
+      - image: cimg/base:current
     steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - checkout
       - run:
-          name: Running tests
-          command: make test
-  build3:
+          name: Run linter
+          command: echo "Running linter checks..."
+
+  test:
     docker:
-      - image: cimg/ruby:2.4-node
-      - image: cimg/postgres:9.4.12
+      - image: cimg/base:current
     steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - checkout
       - run:
-          name: Precompile assets
-          command: bundle exec rake assets:precompile
-#...
+          name: Run tests
+          command: echo "Running test suite..."
+
+  deploy:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - checkout
+      - run:
+          name: Deploy application
+          command: echo "Deploying to production..."
+
+  cleanup:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          name: Cleanup resources
+          command: echo "Cleaning up resources..."
+
+  notify-failure:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          name: Send failure notification
+          command: echo "Deploy failed - sending notification..."
+
 workflows:
-  build_and_test: # name of your workflow
+  # This workflow runs on every commit
+  build_and_test:
     jobs:
-      - build1
-      - build2:
+      - build
+      - lint:
           requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # see circleci.com/docs/workflows/ for more examples.
-      - build3:
+            - build
+      - test:
           requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 concurrently to save time.
+            - build
+
+  # This workflow only runs when the parameter is true
+  deploy:
+    when: << pipeline.parameters.run_deploy_workflow >>
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - test
+      - deploy:
+          requires:
+            - hold
+      - cleanup:
+          requires:
+            - deploy: terminal
+      - notify-failure:
+          requires:
+            - deploy:
+              - failed
+              - canceled
 ----
 
 See the xref:orchestrate:workflows.adoc[Using workflows] page for more information.
