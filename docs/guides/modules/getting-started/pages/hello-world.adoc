@@ -24,7 +24,7 @@ These examples adds a job called `hello-job` that prints `hello world` to the co
 Docker::
 +
 --
-The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker execution environment] page for more information.
+The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -47,7 +47,7 @@ workflows:
 Linux VM::
 +
 --
-The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -70,7 +70,7 @@ workflows:
 macOS::
 +
 --
-The job `hello-job` spins up a macOS virtual machine running the specified Xcode version. Refer to xref:execution-managed:using-macos.adoc[Using the macOS execution environment] page for more information.
+The job `hello-job` spins up a macOS virtual machine running the specified Xcode version. Refer to xref:execution-managed:using-macos.adoc[Using the macOS Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -94,7 +94,7 @@ workflows:
 Windows::
 +
 --
-The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows execution environment] page for more information.
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -125,7 +125,7 @@ GPU::
 --
 NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] Plan.
 
-The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for xref:reference:ROOT:configuration-reference.adoc#available-windows-gpu-image[Windows] and xref:reference:ROOT:configuration-reference.adoc#available-linux-gpu-images[Linux]. Refer to xref:execution-managed:using-gpu.adoc[Using the GPU execution environment] page for more information.
+The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for xref:reference:ROOT:configuration-reference.adoc#available-windows-gpu-image[Windows] and xref:reference:ROOT:configuration-reference.adoc#available-linux-gpu-images[Linux]. Refer to xref:execution-managed:using-gpu.adoc[Using the GPU Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -149,7 +149,7 @@ workflows:
 Arm VM::
 +
 --
-The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM execution environment] page for more information.
+The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -172,12 +172,13 @@ workflows:
 --
 ====
 
+.Hello world job output
 image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
 [#echo-hello-world-server]
-== Echo hello world on CircleCI server
+== Echo hello world on CircleCI Server
 
 NOTE: To build in a macOS execution environment on server use xref:execution-runner:runner-overview.adoc[Self-Hosted Runner].
 
@@ -188,7 +189,7 @@ These examples add a job called `hello-job` that prints `hello world` to the con
 Docker::
 +
 --
-The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker execution environment] page for more information.
+The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -211,7 +212,7 @@ workflows:
 Linux VM::
 +
 --
-The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM execution environment] page for more information.
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -233,7 +234,7 @@ workflows:
 Windows::
 +
 --
-The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows execution environment] page for more information.
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -258,7 +259,7 @@ workflows:
 Arm::
 +
 --
-The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM execution environment] page for more information.
+The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment] page for more information.
 
 [source,yaml]
 ----
@@ -281,6 +282,7 @@ workflows:
 --
 ====
 
+.Hello world job output
 image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
