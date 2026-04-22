@@ -3,7 +3,7 @@
 :page-description: Learn about developing your config policies using the CLI.
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.
 
 CAUTION: Ensure you have authenticated your version of the CLI with a token, and updated the CLI, before attempting to use the CLI with config policies. See the xref:toolkit:local-cli.adoc[Installing the Local CLI] page for more information.
 
@@ -47,17 +47,16 @@ Example CircleCI decision:
 [#develop-policies]
 == Develop policies
 
-The CLI provides a language-agnostic way of evaluating local policies against arbitrary config inputs. This is the recommended
-way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
+The CLI provides a language-agnostic way of evaluating local policies against arbitrary config inputs. Using the CLI is the recommended way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
 
-The policy files (*.rego) present in the given policy directory (searched recursively) will form the policy bundle.
+The policy files (*.Rego) present in the given policy directory (searched recursively) will form the policy bundle.
 
 [source,shell]
 ----
 circleci policy decide --input $PATH_TO_CONFIG $PATH_TO_POLICY_DIR
 ----
 
-Policies that use `data.meta...` values like `vcs.branch` or `project_id` should also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
+Policies that use `data.meta...` values like `vcs.branch` or `project_id` must also provide a JSON file mocking those values with `--metafile $PATH_TO_JSON`
 
 It is recommended that you build a test suite of policy/config combinations and run them locally, or in CI, before pushing them to your organization's active policies.
 
