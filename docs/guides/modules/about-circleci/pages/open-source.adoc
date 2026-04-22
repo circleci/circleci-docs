@@ -20,7 +20,7 @@ include::guides:ROOT:attachment$release-agent.csv[]
 GOAT::
 +
 --
-The following 3rd-party open source components are used in the CircleCI General Orchestration Agent (GOAT). GOAT is an agent used by self-hosted container runners for managing the container environment. For more information, see the xref:execution-runner:container-runner.adoc[Container Runner Docs].
+The following 3rd-party open source components are used in the CircleCI General Orchestration Agent (GOAT). GOAT is an agent used by self-hosted container runners for managing the container environment. For more information, see the xref:execution-runner:container-runner.adoc[Container Runner] guides.
 
 [cols=2*, options="header", format=csv]
 |===
@@ -30,7 +30,7 @@ include::guides:ROOT:attachment$runner-init.csv[]
 CircleCI runner::
 +
 --
-The following 3rd-party open source components are used in the CircleCI self-hosted runner. The CircleCI runner is a utility used to run CirlceCI jobs on self-hosted infrastructure. For more information, see the xref:execution-runner:runner-overview.adoc[Self-Hosted Runner Overview Docs].
+The following 3rd-party open source components are used in the CircleCI self-hosted runner. The CircleCI runner is a utility used to run CirlceCI jobs on self-hosted infrastructure. For more information, see the xref:execution-runner:runner-overview.adoc[Self-Hosted Runner Overview] guides.
 
 [cols=2*, options="header", format=csv]
 |===
