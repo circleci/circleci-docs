@@ -49,7 +49,7 @@ Example CircleCI decision:
 
 The CLI provides a language-agnostic way of evaluating local policies against arbitrary config inputs. Using the CLI is the recommended way of developing and testing policies. It is similar to the previous command except that it provides a path to the local policies directory.
 
-The policy files (*.Rego) present in the given policy directory (searched recursively) will form the policy bundle.
+The policy files (`*.rego`) present in the given policy directory (searched recursively) will form the policy bundle.
 
 [source,shell]
 ----
