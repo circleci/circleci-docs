@@ -5,7 +5,7 @@
 
 include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supported for GitLab, GitHub App or Bitbucket Data Center]
 
-With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor. Using the CircleCI configuration editor gives you the ability to modify your CI/CD processes quickly, and in a unified fashion.
+With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor.
 
 .Configuration Editor
 image::guides:ROOT:config-editor-main.png[Configuration Editor]
@@ -42,11 +42,11 @@ image::guides:ROOT:config-editor-auto-complete.png[Auto-completion]
 
 At the bottom of the editor, you will see tabs for *Linter*, *Docs*, and the name of your workflow (in this case *Sample*).
 
-The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
+The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). Toggle the switch to view the YAML as JSON within the validation bar.
 
-The docs tab will link out to some helpful documentation relating to configuration files.
+The docs tab links out to helpful documentation relating to configuration files.
 
-The workflow tab will show you all the jobs in the workflow, and link out to the individual job's *Job* view in the web UI.
+The workflow tab shows all the jobs in the workflow, and links out to the individual job's *Job* view in the web UI.
 
 .Suggested Docs
 image::guides:ROOT:config-editor-docs.png[Suggested Docs]
