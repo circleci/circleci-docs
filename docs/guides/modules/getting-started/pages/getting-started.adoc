@@ -46,7 +46,7 @@ image:guides:ROOT:getting-started-guide-exp/setup-pipeline.png[float=right]
 *Set up a pipeline*
 Follow the in-app instructions to set up your pipelinem including connecting your code, preparing a config file and reviewing triggers.
 
-For a more detailed look at this process see the xref:create-project.adoc[Create a Project Guide].
+For a more detailed look at this process see the xref:create-project.adoc[Create a Project] guide.
 {empty} +
 {empty} +
 {empty} +
