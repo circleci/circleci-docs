@@ -19,7 +19,7 @@ Follow the steps on the xref:getting-started:first-steps.adoc#github-gitlab-bitb
 
 If you are using xref:integration:gitlab-integration.adoc[GitLab's CI/CD], you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
-First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/config-intro/[here] to learn how to configure the `.config.yml` file.
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/config-intro/[here] to learn how to configure the `config.yml` file.
 
 The GitLab and CircleCI configurations will be different. It may be helpful to have both GitLab and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
@@ -134,7 +134,7 @@ workflows:
 ----
 
 
-2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/executor-intro/#section=configuration[execution environments documentation] for more information.
+2+| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must be explicitly set in config. See our https://circleci.com/docs/executor-intro/#section=configuration[execution environments documentation] for more information.
 
 a|
 [source,yaml]
