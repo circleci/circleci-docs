@@ -83,7 +83,7 @@ gem 'rspec_junit_formatter'
 gem 'minitest-ci'
 ----
 
-* Django should be configured using the link:https://github.com/django-nose/django-nose[`django-nose`] test runner.
+* Configure Django using the link:https://github.com/django-nose/django-nose[`django-nose`] test runner.
 
 For detailed information on how to test your iOS applications, refer to the xref:testing-ios.adoc[Testing iOS Applications] page.
 
@@ -481,7 +481,7 @@ See the link:https://github.com/circleci/minitest-ci#readme[minitest-ci README] 
 [#cucumber]
 === Cucumber
 
-For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory. Following is an example of the addition to your `.circleci/config.yml` file:
+For custom Cucumber steps, generate a file using the JUnit formatter and write it to the `cucumber` directory. Following is an example of the addition to your `.circleci/config.yml` file:
 
 [,yml]
 ----
@@ -577,7 +577,7 @@ If you are building a Java or Groovy based project with link:https://gradle.org/
 [#phpunit]
 === PHPUnit
 
-For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
+For PHPUnit tests, generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
 [,yml]
 ----
