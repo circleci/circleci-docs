@@ -64,7 +64,7 @@ asciidoc:
     serverversion45: 4.5.5
     serverversion46: 4.6.6
     serverversion47: 4.7.15
-    serverversion48: 4.8.8
+    serverversion48: 4.8.10
     serverversion49: 4.9.1
     terraformversion: 0.15.4
     dockerversion: v28
@@ -122,6 +122,8 @@ antora:
       - yaml
       - rst
   - require: ./extensions/unlisted-pages-extension.js
+    allowedUnlistedPages:
+      - 'integration:slack-integration.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true

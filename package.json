@@ -1,5 +1,5 @@
 {
-  "name": "circleci-docs",
+  "name": "@circleci/circleci-docs",
   "version": "1.0.0",
   "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
   "scripts": {
@@ -39,6 +39,7 @@
   "overrides": {
     "form-data": "^4.0.4",
     "minimatch": "^10.2.3",
-    "qs": "^6.14.1"
+    "qs": "^6.14.1",
+    "handlebars": "^4.7.9"
   }
 }
