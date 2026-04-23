@@ -1,5 +1,11 @@
 version: 2.1
 
+parameters:
+  force-ui-rebuild:
+    type: boolean
+    default: false
+    description: "Force UI bundle rebuild regardless of changes detected"
+
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
@@ -8,7 +14,7 @@ orbs:
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.13.1
+      - image: cimg/node:24.15.0
     working_directory: ~/project
 
   go_executor:
@@ -63,35 +69,57 @@ jobs:
           keys:
             - ui-bundle-v1-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
             - ui-bundle-v1-{{ checksum "ui/package-lock.json" }}
-            - ui-bundle-v1-
       - run:
           name: Check if UI rebuild needed
           command: |
             set -e
             echo "[INFO] Checking if UI rebuild is necessary..."
 
-            # Check if UI bundle exists from cache
-            if [ -f "ui-bundle.zip" ]; then
-              echo "[INFO] UI bundle found in cache"
+            # Check if force rebuild parameter is set
+            if [ "<< pipeline.parameters.force-ui-rebuild >>" = "true" ]; then
+              echo "[INFO] Force UI rebuild parameter enabled, rebuilding UI bundle"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+              exit 0
+            fi
 
-              # Determine base branch for comparison
-              if [ "${CIRCLE_BRANCH}" = "main" ]; then
-                BASE_REF="HEAD~1"
-                echo "[INFO] On main branch, comparing against HEAD~1"
-              else
-                BASE_REF="origin/main"
-                echo "[INFO] On feature branch, comparing against origin/main"
-              fi
-
-              # Check if ui/ directory has changes
-              if git diff --quiet $BASE_REF HEAD -- ui/; then
-                echo "[INFO] No UI changes detected, skipping UI rebuild"
-                echo "export SKIP_UI_BUILD=true" >> $BASH_ENV
-              else
-                echo "[INFO] UI changes detected, will rebuild UI bundle"
-              fi
+            # Determine base branch for comparison
+            if [ "${CIRCLE_BRANCH}" = "main" ]; then
+              BASE_REF="HEAD~1"
+              echo "[INFO] On main branch, comparing against HEAD~1"
             else
+              BASE_REF="origin/main"
+              echo "[INFO] On feature branch, comparing against origin/main"
+            fi
+
+            # Check for dependency file changes (forces full UI rebuild)
+            DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json .circleci/config.yml gulpfile.js"
+            DEPENDENCY_CHANGED=false
+
+            for file in $DEPENDENCY_FILES; do
+              if ! git diff --quiet $BASE_REF HEAD -- "$file" 2>/dev/null; then
+                echo "[INFO] Dependency file changed: $file"
+                DEPENDENCY_CHANGED=true
+              fi
+            done
+
+            # Check for changes to build task files
+            if ! git diff --quiet $BASE_REF HEAD -- gulp.d/ 2>/dev/null; then
+              echo "[INFO] Build task files changed in gulp.d/"
+              DEPENDENCY_CHANGED=true
+            fi
+
+            if [ "$DEPENDENCY_CHANGED" = true ]; then
+              echo "[INFO] Dependency changes detected, forcing UI rebuild"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+            elif [ ! -f "ui-bundle.zip" ]; then
               echo "[INFO] No cached UI bundle found, will build UI"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+            elif git diff --quiet $BASE_REF HEAD -- ui/; then
+              echo "[INFO] No UI changes detected, skipping UI rebuild"
+              echo "export SKIP_UI_BUILD=true" >> $BASH_ENV
+            else
+              echo "[INFO] UI changes detected, will rebuild UI bundle"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
             fi
       - run:
           name: Build UI bundle (conditional)

@@ -1,5 +1,5 @@
 {
-  "name": "circleci-docs",
+  "name": "@circleci/circleci-docs",
   "version": "1.0.0",
   "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
   "scripts": {
