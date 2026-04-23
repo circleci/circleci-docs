@@ -45,7 +45,7 @@ git push enterprise --mirror
 
 If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on link:https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
-Once you have imported your code into GitHub, Bitbucket, or GitLab, you can start creating a project in CircleCI using the xref:getting-started:getting-started.adoc[Getting Started guide].
+Once you have imported your code into GitHub, Bitbucket, or GitLab, you can start creating a project in CircleCI using the xref:getting-started:getting-started.adoc[Getting Started Guide].
 
 [#build-configuration]
 == Build configuration
@@ -216,7 +216,7 @@ jobs:
 
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
-. Execution of shell scripts and Docker compose files
+. Execution of shell scripts and Docker compose files.
 . https://circleci.com/docs/workflows/[Workflows]
 . https://circleci.com/docs/artifacts/[Artifacts]
 . https://circleci.com/docs/caching/[Caching]
