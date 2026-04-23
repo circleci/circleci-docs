@@ -1,5 +1,11 @@
 version: 2.1
 
+parameters:
+  force-ui-rebuild:
+    type: boolean
+    default: false
+    description: "Force UI bundle rebuild regardless of changes detected"
+
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
@@ -69,16 +75,21 @@ jobs:
             set -e
             echo "[INFO] Checking if UI rebuild is necessary..."
 
-            # Always rebuild UI on main branch
-            if [ "${CIRCLE_BRANCH}" = "main" ]; then
-              echo "[INFO] On main branch, forcing UI rebuild"
+            # Check if force rebuild parameter is set
+            if [ "<< pipeline.parameters.force-ui-rebuild >>" = "true" ]; then
+              echo "[INFO] Force UI rebuild parameter enabled, rebuilding UI bundle"
               echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
               exit 0
             fi
 
-            # For feature branches, determine if rebuild is needed
-            BASE_REF="origin/main"
-            echo "[INFO] On feature branch, comparing against origin/main"
+            # Determine base branch for comparison
+            if [ "${CIRCLE_BRANCH}" = "main" ]; then
+              BASE_REF="HEAD~1"
+              echo "[INFO] On main branch, comparing against HEAD~1"
+            else
+              BASE_REF="origin/main"
+              echo "[INFO] On feature branch, comparing against origin/main"
+            fi
 
             # Check for dependency file changes (forces full UI rebuild)
             DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json .circleci/config.yml gulpfile.js"
