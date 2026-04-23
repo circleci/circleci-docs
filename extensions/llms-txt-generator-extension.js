@@ -187,6 +187,10 @@ async function generateLlmsTxt(playbook, contentCatalog) {
   sections.push(`- API: ${playbook.site.url}/api/<version>/`);
   sections.push('');
 
+  // API Reference - Split Specifications (fetch dynamically)
+  const apiSection = await generateApiSection(playbook.site.url);
+  sections.push(apiSection);
+
   // Server Versions
   const serverVersions = extractServerVersions(playbook);
   if (Object.keys(serverVersions).length > 0) {
@@ -375,5 +379,111 @@ function extractServerVersions(playbook) {
   }
 
   return versions;
+}
+
+/**
+ * Generate API Reference section by fetching live OpenAPI spec
+ * This ensures the section stays up-to-date automatically when the API changes
+ */
+async function generateApiSection(siteUrl) {
+  const sections = [];
+
+  try {
+    // Fetch the live OpenAPI spec
+    const https = require('https');
+    const apiSpec = await new Promise((resolve, reject) => {
+      https.get('https://circleci.com/api/v2/openapi.json', (res) => {
+        let data = '';
+        res.on('data', chunk => data += chunk);
+        res.on('end', () => {
+          try {
+            resolve(JSON.parse(data));
+          } catch (err) {
+            reject(err);
+          }
+        });
+      }).on('error', reject);
+    });
+
+    // Extract tags with descriptions
+    const tags = apiSpec.tags || [];
+    const pathCount = Object.keys(apiSpec.paths || {}).length;
+
+    sections.push('## API Reference - Split Specifications\n');
+    sections.push('The CircleCI API v2 OpenAPI specification is available in split format optimized for LLM consumption.');
+    sections.push('The complete API spec (~1.6MB) has been split into individual endpoint files (3-50KB each) to fit within LLM context windows.\n');
+
+    sections.push('### API Documentation Formats\n');
+    sections.push('**Interactive HTML Documentation**');
+    sections.push(`- URL: ${siteUrl}/api/v2/`);
+    sections.push('- Format: Single-page interactive documentation with search and examples');
+    sections.push('- Best for: Human browsing and exploration\n');
+
+    sections.push('**Split OpenAPI Specifications (LLM-Optimized)**');
+    sections.push(`- Manifest: ${siteUrl}/api/v2/specs/manifest.json`);
+    sections.push(`- Endpoints: ${siteUrl}/api/v2/specs/paths/<endpoint>.json`);
+    sections.push(`- Components: ${siteUrl}/api/v2/specs/components/<component>.json`);
+    sections.push('- Format: Individual JSON files per endpoint');
+    sections.push('- Best for: LLM processing, specific endpoint queries\n');
+
+    sections.push('### How to Use Split Specs with LLMs\n');
+    sections.push('1. **Discover available endpoints**: Fetch the manifest file to see all available API endpoints');
+    sections.push(`   - GET ${siteUrl}/api/v2/specs/manifest.json`);
+    sections.push(`   - Returns: Index with ~${pathCount} endpoints organized by category, file sizes, and paths\n`);
+
+    sections.push('2. **Fetch specific endpoints**: Download individual endpoint files as needed');
+    sections.push(`   - Example: ${siteUrl}/api/v2/specs/paths/context.json`);
+    sections.push(`   - Example: ${siteUrl}/api/v2/specs/paths/pipeline.json`);
+    sections.push(`   - Example: ${siteUrl}/api/v2/specs/paths/project_{project-slug}.json\n`);
+
+    sections.push('3. **Reference shared components**: If needed, fetch reusable schemas');
+    sections.push(`   - Schemas: ${siteUrl}/api/v2/specs/components/schemas/<name>.json`);
+    sections.push(`   - Parameters: ${siteUrl}/api/v2/specs/components/parameters/<name>.json\n`);
+
+    // Dynamically list all tags with descriptions
+    if (tags.length > 0) {
+      sections.push('### API Endpoint Categories\n');
+      sections.push(`The CircleCI API v2 is organized into the following ${tags.length} tags/categories:`);
+      for (const tag of tags) {
+        const description = tag.description || 'No description available';
+        // Clean up description - remove markdown links and extra whitespace
+        const cleanDesc = description.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1').replace(/\s+/g, ' ').trim();
+        sections.push(`- **${tag.name}** - ${cleanDesc}`);
+      }
+      sections.push('');
+    }
+
+    sections.push('### File Size Distribution\n');
+    sections.push('All endpoint files are optimized for LLM context windows:');
+    sections.push('- Majority of files are under 20KB');
+    sections.push('- Individual endpoints are sized to fit within typical LLM context limits');
+    sections.push('- See manifest.json for detailed file sizes and complete listing\n');
+
+    sections.push('### Example Usage\n');
+    sections.push('To answer a question about CircleCI API contexts:');
+    sections.push('1. Fetch manifest to find context-related endpoints');
+    sections.push('2. Download /api/v2/specs/paths/context.json (contains POST /context)');
+    sections.push('3. Download /api/v2/specs/paths/context_{context_id}.json (contains GET/DELETE)');
+    sections.push('4. Process the endpoint definitions within your context window');
+    sections.push('5. Provide accurate API guidance based on the official specification\n');
+    sections.push('');
+
+    console.log(`✅ Generated API section with ${tags.length} tags and ~${pathCount} endpoints`);
+  } catch (err) {
+    console.warn('⚠️  Could not fetch API spec for llms.txt, using fallback');
+    console.error(err.message);
+
+    // Fallback: Basic section without dynamic data
+    sections.push('## API Reference - Split Specifications\n');
+    sections.push('The CircleCI API v2 OpenAPI specification is available in split format optimized for LLM consumption.\n');
+    sections.push('### API Documentation\n');
+    sections.push(`- Interactive Docs: ${siteUrl}/api/v2/`);
+    sections.push(`- Split Specs Manifest: ${siteUrl}/api/v2/specs/manifest.json`);
+    sections.push(`- Individual Endpoints: ${siteUrl}/api/v2/specs/paths/<endpoint>.json\n`);
+    sections.push('See the manifest.json file for a complete list of available endpoints and categories.\n');
+    sections.push('');
+  }
+
+  return sections.join('\n');
 }
 
