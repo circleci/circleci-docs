@@ -62,7 +62,7 @@ As mentioned in the note above the sample code, you may optionally supply your D
 +
 * *Line 6:* The `steps` collection is a list of `run` directives.
 * *Line 7:* Each `run` directive is executed in the order in which it is declared.
-* *Line 8:* The `name` attribute provides useful information when returning warnings, errors, and output. The `name` must be meaningful to you as an action within your build process.
+* *Line 8:* The `name` attribute provides useful information when returning warnings, errors, and output. It is helpful if the `name` is meaningful to you as an action within your build process.
 * *Line 9:* The `command` attribute is a list of shell commands that you want to execute. The initial pipe, `|`, indicates there will be multiple lines of shell commands.
 * *Line 10:* Prints `Hello World!` in your build shell.
 * *Line 11:* Prints `This is the delivery pipeline`.
