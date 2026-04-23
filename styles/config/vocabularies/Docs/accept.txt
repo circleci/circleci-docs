@@ -162,6 +162,7 @@ geckodriver
 Gemfile
 GitHub
 \bGitHub Checks\b
+GitLab
 \bGitLab self-managed\b
 GKE
 \bGoogle Cloud\b

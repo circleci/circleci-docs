@@ -62,7 +62,7 @@ As mentioned in the note above the sample code, you may optionally supply your D
 +
 * *Line 6:* The `steps` collection is a list of `run` directives.
 * *Line 7:* Each `run` directive is executed in the order in which it is declared.
-* *Line 8:* The `name` attribute provides useful information when returning warnings, errors, and output. The `name` should be meaningful to you as an action within your build process.
+* *Line 8:* The `name` attribute provides useful information when returning warnings, errors, and output. It is helpful if the `name` is meaningful to you as an action within your build process.
 * *Line 9:* The `command` attribute is a list of shell commands that you want to execute. The initial pipe, `|`, indicates there will be multiple lines of shell commands.
 * *Line 10:* Prints `Hello World!` in your build shell.
 * *Line 11:* Prints `This is the delivery pipeline`.
@@ -74,7 +74,7 @@ As mentioned in the note above the sample code, you may optionally supply your D
 .Successful build job
 image::guides:ROOT:config-intro-part1-job.png[Successful build job]
 +
-You should see your step - The First Step - with the output of the commands:
+You can see your step - The First Step - with the output of the commands:
 +
 .Successful step within job
 image::guides:ROOT:config-first-step.png[Successful step within job]
@@ -125,7 +125,7 @@ These two small changes have significantly increased the functionality of your c
 
 As before, commit and push your updated `config.yml` file.
 
-You should now see some additional steps on the CircleCI dashboard:
+You can now see some additional steps on the CircleCI dashboard:
 
 * *Checkout code* has cloned the code from your git repository.
 * *The Second Step* has listed the files found in your git repository.
@@ -214,7 +214,7 @@ In CircleCI, your pipeline will look different. Your workflow is now called _Exa
 .Running multiple jobs
 image::guides:ROOT:config-intro-part3.png[Running multiple jobs]
 
-If you click on the _Using-Node_ job and then the _Running the Node Container_ step, you should see that the command `node -v` has printed the version of Node.
+If you click on the _Using-Node_ job and then the _Running the Node Container_ step, you can see that the command `node -v` has printed the version of Node.
 
 .Running Node job
 image::guides:ROOT:config-node-job.png[Running Node job]
@@ -231,7 +231,7 @@ TIP: To increase your understanding, experiment with other xref:execution-manage
 [#part-4-adding-a-manual-approval]
 == Part 4: Adding a manual approval
 
-The CircleCI workflow model is based on the orchestration of preceding jobs. As you saw in Part 3, the `requires` statement specifies that a job should run only if the previous job has been successfully executed.
+The CircleCI workflow model is based on the orchestration of preceding jobs. As you saw in Part 3, the `requires` statement specifies that a job runs only if the previous job has been successfully executed.
 
 In Part 3, an event triggering the pipeline caused the `Hello-World` job to run immediately. The remaining jobs ran automatically, once `Hello-World` had completed successfully.
 
@@ -316,9 +316,9 @@ image::guides:ROOT:config-on-hold.png[Job requires approval]
 
 To approve the job, click the thumbs up icon to the right of the _Hold-for-Approval_ job in the _Actions_ column. In the pop-up message, click the blue btn:[Approve] button.
 
-Now you will see a tick in the Actions column and your jobs should complete.
+Now you will see a tick in the Actions column and your jobs will complete.
 
-Select the _Now-Complete_ job, then the _Approval Complete_ step. You should see the output of your command: `The work is now complete`.
+Select the _Now-Complete_ job, then the _Approval Complete_ step. You can see the output of your command: `The work is now complete`.
 
 .Approval complete
 image::guides:ROOT:config-approval-complete.png[Approval complete]

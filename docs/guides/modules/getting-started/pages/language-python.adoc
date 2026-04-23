@@ -8,8 +8,8 @@ This quickstart guide covers integrating a Python project with CircleCI. This gu
 [#prerequisites]
 == Prerequisites
 
-* xref:first-steps.adoc[A CircleCI account]
-* A Python project located in a supported VCS
+* xref:first-steps.adoc[A CircleCI Account]
+* A Python project located in a supported VCS.
 
 [#configuration-walkthrough-new]
 == Configuration walkthrough
@@ -31,7 +31,7 @@ version: 2.1
 [#use-the-python-orb]
 === 2. Use the Python orb
 
-The Python link:https://circleci.com/developer/orbs/orb/circleci/python[orb] contains a set of prepackaged CircleCI configurations you can use to do common CircleCI tasks for the Python programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about xref:orbs:use:orb-intro.adoc[orbs].
+The Python link:https://circleci.com/developer/orbs/orb/circleci/python[orb] contains a set of prepackaged CircleCI configurations you can use to do common CircleCI tasks for the Python programming language. It supports Linux x86_64, macOS x86_64, and Arm64. Learn more about xref:orbs:use:orb-intro.adoc[Orbs].
 
 To add the orb to your config, insert:
 
@@ -100,12 +100,12 @@ jobs:
           force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
 ----
 
-NOTE: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[environment variables].
+NOTE: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Environment Variables].
 
 [#create-a-workflow]
 === 4. Create a workflow
 
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:reference:ROOT:configuration-reference.adoc#workflows[workflow configuration].
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:reference:ROOT:configuration-reference.adoc#workflows[Workflow Configuration].
 
 [,yaml]
 ----
@@ -135,7 +135,7 @@ workflows:
 [#conclusion]
 === 6. Conclusion
 
-You just set up a Python app to build on CircleCI. Check out your project's xref:orchestrate:pipelines.adoc[pipeline page] to see how this looks when building on CircleCI.
+You just set up a Python app to build on CircleCI. Check out your project's xref:orchestrate:pipelines.adoc[Pipeline Page] to see how this looks when building on CircleCI.
 
 NOTE: *Deploy options?* For alternative deployment targets, search the link:https://circleci.com/developer/orbs[orb registry], where you will find integrations such as link:https://circleci.com/developer/orbs/orb/circleci/kubernetes[Kubernetes], link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS], link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke[GCP GKE], and more.
 
@@ -190,4 +190,4 @@ workflows:
 * link:https://support.circleci.com/hc/en-us/articles/360048786831-Use-test-splitting-with-Python-Django-tests[Use test splitting with Python Django tests]
 * link:https://circleci.com/blog/testing-flask-framework-with-pytest/[Testing Flask framework with pytest]
 * link:https://support.circleci.com/hc/en-us/articles/115012795327-How-do-I-use-Django-on-CircleCI-[How do I use Django on CircleCI?]
-* Tutorial: xref:test:test-splitting-tutorial.adoc[Test splitting to speed up your pipelines]
+* xref:test:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines]

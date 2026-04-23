@@ -10,7 +10,7 @@ The most basic configuration file will need a CircleCI version, an execution env
 [#circleci-version]
 == CircleCI version
 
-Your `.circleci/config.yml` will start off with the version of CircleCI you wish to use. CircleCI cloud and newer server versions should be using CircleCI `2.1`.
+Your `.circleci/config.yml` will start off with the version of CircleCI you wish to use. CircleCI Cloud and newer server versions use CircleCI `2.1`.
 
 ```yaml
 # CircleCI configuration file
@@ -49,7 +49,7 @@ jobs:
 
 `jobs` is a collection of steps which are executed as a unit, either within a fresh container, or a virtual machine. In this example, `jobs` is being built within a Docker container, which is set up in the configuration using nested key-pairs. `docker` is calling a pre-built CircleCI Docker image, `cimg/base`, an Ubuntu Docker image. The image in this example contains the minimum tools required to operate a build on CircleCI, as well as Docker.
 
-Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment. If we used macOS as an execution environment, we could use a **machine image** instead, which would spin up a dedicated virtual machine with Xcode preinstalled, as in the example below.
+Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment. If we used macOS as an execution environment, we could use a **machine image** instead. This would spin up a dedicated virtual machine with Xcode preinstalled, as in the example below.
 
 ```yaml
 # CircleCI configuration file
@@ -117,15 +117,16 @@ If you have a CircleCI account, you can create a new project and add these examp
 
 YAML can be quite picky about indentations. You can use a https://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
 
-If you would like a more complex configuration tutorial, visit the xref:config-intro.adoc[Configuration Tutorial] page. Before starting this tutorial, you should already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the xref:toolkit:sample-config.adoc[Sample Configuration] page.
+If you would like a more complex configuration tutorial, visit the xref:config-intro.adoc[Configuration Tutorial] page. Before starting this tutorial, you must already have a CircleCI account set up, as you will follow along in the CircleCI web UI. You can also find a variety of configuration examples on the xref:toolkit:sample-config.adoc[Sample Configuration] page.
 
 [#visual-studio-code-extension]
 ## VS Code extension
 
-If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc[CircleCI extension] useful when writing, editing, navigating and troubleshooting your YAML config files.
+If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc[CircleCI Extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
 
 The extension provides real-time syntax highlighting and validation, improved navigation through go-to-definition and go-to-reference commands, usage hints and autocomplete suggestions.
 
+.VS Code extension showing definition on hover
 image::guides:ROOT:vs_code_extension_config_helper_go-to-definition-optimised.gif[Screenshot showing the definition available on hover]
 
 Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from VS Code, and be notified of workflow status changes.
