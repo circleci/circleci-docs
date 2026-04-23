@@ -909,6 +909,10 @@ against this specific version tag; edit this value at your own risk.
 |nomad.server.internal |bool |`+true+` |Disables deploying this chart’s
 Internal Nomad servers
 
+|nomad.server.limits.http_max_conns_per_client |string |`""` |Maximum number of concurrent HTTP connections per client IP. When not set, Nomad applies its default of 100.
+
+|nomad.server.limits.rpc_max_conns_per_client |string |`""` |Maximum number of concurrent RPC connections per client IP. When not set, Nomad applies its default of 100. Increase for large clusters with many Nomad clients.
+
 |nomad.server.pdb.enabled |bool |`+true+` |
 
 |nomad.server.pdb.minAvailable |int |`+2+` |
@@ -916,6 +920,14 @@ Internal Nomad servers
 |nomad.server.port |int |`+4646+` |
 
 |nomad.server.replicas |int |`+5+` |
+
+|nomad.server.resources.limits.cpu |int |`1` |CPU limit configuration for the Nomad Server deployment.
+
+|nomad.server.resources.limits.memory |string |`"1G"` |Memory limit configuration for the Nomad Server deployment.
+
+|nomad.server.resources.requests.cpu |string |`"50m"` |CPU request configuration for the Nomad Server deployment.
+
+|nomad.server.resources.requests.memory |string |`"100M"` |Memory request configuration for the Nomad Server deployment.
 
 |nomad.server.rpc.mTLS |object
 |`+{"CACertificate":"","certificate":"","privateKey":""}+` |Nomad mTLS
@@ -1207,6 +1219,12 @@ RabbitMQ instance
 |rabbitmq.management_gui_port |int |`+15672+` |When `+internal: true+`,
 this value is '`15672`' else port of external rabbitmq instance
 
+|rabbitmq.memoryHighWatermark.enabled |bool |`true` |
+
+|rabbitmq.memoryHighWatermark.type |string |`"relative"` |
+
+|rabbitmq.memoryHighWatermark.value |float |`0.4` |
+
 |rabbitmq.persistence.existingClaim |string |`+""+` |To increase PVC
 size, follow this guide:
 https://circleci.com/docs/server/operator/expanding-internal-database-volumes
@@ -1224,6 +1242,15 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 '`5672`' else port of external rabbitmq instance
 
 |rabbitmq.replicaCount |int |`+1+` |
+
+|rabbitmq.resources.limits.cpu |string |`"2"` |
+
+|rabbitmq.resources.limits.memory |string |`"2Gi"` |
+
+|rabbitmq.resources.requests.cpu |string |`"500m"` |
+
+|rabbitmq.resources.requests.memory |string |`"1Gi"` |
+
 
 |rabbitmq.secure_amqp |bool |`+false+` |When set to true, amqps is used.
 
