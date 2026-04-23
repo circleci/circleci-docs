@@ -41,7 +41,7 @@
 ** xref:operator:managing-build-artifacts.adoc[Managing build artifacts]
 ** xref:operator:usage-data-collection.adoc[Usage data collection]
 ** xref:operator:circleci-server-security-features.adoc[CircleCI Server security features]
-** xref:operator:application-lifecycle.adoc[Application lifecycle]
+** xref:operator:application-lifecycle.adoc[Release cycle]
 ** xref:operator:troubleshooting-and-support.adoc[Troubleshooting and support]
 ** xref:operator:backup-and-restore.adoc[Backup and restore]
 ** xref:operator:upgrade-mongo.adoc[Upgrade MongoDB]
