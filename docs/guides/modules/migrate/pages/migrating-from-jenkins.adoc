@@ -48,7 +48,7 @@ If you install CircleCI on your own hardware, the divide between the host OS (at
 
 You have to use plugins to do almost anything with Jenkins, including checking out a Git repository. Like Jenkins itself, its plugins are Java-based, and a bit complicated. They interface with any of several hundred possible extension points in Jenkins and can generate web views using JSP-style tags and views.
 
-All core CI functionality is built into CircleCI. Features such as checking out source from a VCS, running builds and tests with your favorite tools, parsing test output, and storing artifacts are plugin-free. When you do need to add custom functionality to your builds and deployments, you can do so with a couple snippets of Bash in appropriate places.
+All core CI functionality is built into CircleCI. Features such as checking out source from a VCS, running builds and tests with your favorite tools, parsing test output, and storing artifacts are plugin-free. When you do need to add custom functionality to your builds and deployments, you can do so with a couple of snippets of Bash in appropriate places.
 
 [#distributed-builds]
 == Distributed builds
