@@ -1,5 +1,11 @@
 version: 2.1
 
+parameters:
+  force-ui-rebuild:
+    type: boolean
+    default: false
+    description: "Force UI bundle rebuild regardless of changes detected"
+
 orbs:
   aws-cli: circleci/aws-cli@5.4.1
   vale: circleci/vale@1.2.0
@@ -68,6 +74,13 @@ jobs:
           command: |
             set -e
             echo "[INFO] Checking if UI rebuild is necessary..."
+
+            # Check if force rebuild parameter is set
+            if [ "<< pipeline.parameters.force-ui-rebuild >>" = "true" ]; then
+              echo "[INFO] Force UI rebuild parameter enabled, rebuilding UI bundle"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+              exit 0
+            fi
 
             # Determine base branch for comparison
             if [ "${CIRCLE_BRANCH}" = "main" ]; then
