@@ -69,14 +69,16 @@ jobs:
             set -e
             echo "[INFO] Checking if UI rebuild is necessary..."
 
-            # Determine base branch for comparison
+            # Always rebuild UI on main branch
             if [ "${CIRCLE_BRANCH}" = "main" ]; then
-              BASE_REF="HEAD~1"
-              echo "[INFO] On main branch, comparing against HEAD~1"
-            else
-              BASE_REF="origin/main"
-              echo "[INFO] On feature branch, comparing against origin/main"
+              echo "[INFO] On main branch, forcing UI rebuild"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+              exit 0
             fi
+
+            # For feature branches, determine if rebuild is needed
+            BASE_REF="origin/main"
+            echo "[INFO] On feature branch, comparing against origin/main"
 
             # Check for dependency file changes (forces full UI rebuild)
             DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json .circleci/config.yml gulpfile.js"
