@@ -38,7 +38,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ```
 
-Once you have imported your code into GitHub, Bitbucket or GitLab, you can start creating a project in CircleCI using the xref:getting-started:getting-started.adoc[Getting Started Guide].
+Once you have imported your code into GitHub, Bitbucket or GitLab, you can start creating a project in CircleCI using the xref:getting-started:getting-started.adoc[Getting Started] guide.
 
 [#build-configuration]
 == Build configuration
