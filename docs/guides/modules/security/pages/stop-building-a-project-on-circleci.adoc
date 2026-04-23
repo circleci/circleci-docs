@@ -23,4 +23,7 @@ If you are using the GitHub OAuth App or Bitbucket Cloud, to stop building one o
 . Go to the **Project Settings** page in the CircleCI web app for the project you want to stop.
 . Scroll to the bottom of the Overview page and select **Stop Building**. You will need to reconfirm your choice in the popup.
 
+.Stop Building button in Project settings > Overview
+image::guides:ROOT:stop-building.png[Stop building button in Project settings > Overview]
+
 NOTE: If you want to start building this project again, just go to the **Projects** page in the web app and select **Set Up Project** and follow the set up steps.
