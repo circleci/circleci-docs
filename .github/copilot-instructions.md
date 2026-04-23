@@ -1,6 +1,6 @@
-# CircleCI Documentation Instructions for Claude Code
+# CircleCI Documentation Instructions for GitHub Copilot
 
-**IMPORTANT**: Read the complete style guide and documentation rules in `AGENTS.md`.
+**IMPORTANT**: Read the complete style guide and documentation rules in `AGENTS.md` at the root of this repository.
 
 This file serves as a pointer to the main documentation style guide. All CircleCI documentation guidelines, AsciiDoc formatting rules, voice and style requirements, and best practices are documented in `AGENTS.md`.
 

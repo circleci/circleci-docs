@@ -3,7 +3,7 @@
 :page-description: Open preview of config policies for CircleCI. Reference page for function helpers.
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2. You must be an organization admin in order to create and manage config policies.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2. You must be an organization admin in order to create and manage config policies.
 
 This reference page lists a selection of _helpers_, or CircleCI-specific functions that are likely to be useful for you when you are writing your policies. These helpers will lead to _cleaner_ policies with less boilerplate.
 
@@ -58,8 +58,7 @@ my_orbs := config.orbs
 [#ban-orbs]
 === `ban_orbs`
 
-This function violates a policy if a config includes orbs based on the orb name. Versions should not
-be included in the provided list of orbs.
+This function violates a policy if a config includes orbs based on the orb name. Versions must not be included in the provided list of orbs.
 
 [#definition-ban-orbs]
 ==== Definition
