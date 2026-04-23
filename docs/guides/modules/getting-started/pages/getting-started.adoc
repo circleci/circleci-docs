@@ -54,7 +54,7 @@ For a more detailed look at this process see the xref:create-project.adoc[Create
 image:guides:ROOT:getting-started-guide-exp/commit-and-run.png[float=right]
 [%hardbreaks]
 *Commit and run*
-Once you have gone through the pipeline setup process in the app, you have everything you need to commit your config and build. Note that if you already have a config in your repo, you do not need to commit a new one.
+Once you have gone through the pipeline setup process in the app, you have everything you need to commit your config and build. If you already have a config in your repo, you do not need to commit a new one.
 
 Review your project details and select *Commit config and run*.
 {empty} +
