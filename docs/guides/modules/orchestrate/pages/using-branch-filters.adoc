@@ -1,18 +1,334 @@
 = Using branch filters
 :page-platform: Cloud, Server v4+
-:page-description: A how to guide for using branch fileters at the job level to simplify your CircleCI configuration.
+:page-description: Learn how to configure your CircleCI pipelines to run workflows, jobs, or steps only on specific branches using filters.
 :experimental:
 
-[#branch-filtering-for-job-steps]
-== Branch-filtering to control when job steps will run
+This guide shows you how to configure your CircleCI pipelines to run on specific branches. You can apply branch filtering at different levels: workflows, jobs, or individual steps.
 
-Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
+Branch filtering helps you optimize your pipelines by running work only when needed. For example, you might run expensive integration tests only on your main branch, or run deployment jobs only on release branches.
 
-The following example shows using the <<pipeline-variables#pipeline-values,pipeline value>> `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on main"` only runs when the commit is on the main branch:
+TIP: For background information on workflows and pipeline orchestration, see the xref:workflows.adoc[Workflow Orchestration] page.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI account with at least one project building.
+* A basic understanding of CircleCI configuration files.
+* Familiarity with xref:pipeline-variables.adoc[Pipeline Variables and Values].
+
+[#choose-your-filtering-method]
+== Choose your filtering method
+
+CircleCI offers several ways to filter by branch, each suited to different use cases:
+
+[.table-scroll]
+--
+[cols="2,3,2"]
+|===
+|Method |Best for |Configuration level
+
+|Branch filters for workflows
+|Simple branch-based job execution with regex support
+|Workflow level
+
+|Expression-based job filters
+|Complex conditions combining branches, tags, and parameters
+|Job level
+
+|Conditional workflows with `when`
+|Running entire workflows based on branch conditions
+|Workflow level
+
+|Branch filtering for job steps
+|Controlling individual steps within a job
+|Step level
+
+|Schedule triggers with branch filters
+|Scheduled workflows that run only on specific branches
+|Trigger level
+|===
+--
+
+[#branch-filters-for-workflows]
+== 1. Use branch filters for workflows
+
+Branch filters at the workflow level control which jobs run based on the current branch. This is the most common method for branch-specific execution.
+
+=== 1.a. Run a job only on specific branches
+
+Use the `filters` key with `branches` and `only` to run jobs on specific branches.
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-```yaml
+.Run a job only on the main branch
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2023.06
+    steps:
+      - checkout
+      - run: echo "Building on main"
+
+workflows:
+  main-only:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: main
+----
+
+=== 1.b. Run a job on multiple branches
+
+Specify multiple branches as a list to run jobs on several branches.
+
+.Run a job on main and develop branches
+[source,yaml]
+----
+workflows:
+  build-test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+                - develop
+----
+
+=== 1.c. Use regex patterns for branch names
+
+Use regular expressions to match branch name patterns. Enclose regex patterns in forward slashes.
+
+.Run a job on all feature branches
+[source,yaml]
+----
+workflows:
+  feature-workflow:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: /feature-.*/  # Matches feature-login, feature-api, etc.
+----
+
+NOTE: Regular expressions must match the entire branch name. For more details, see the xref:workflows.adoc#using-regular-expressions-to-filter-tags-and-branches[Using Regular Expressions to Filter Tags and Branches] section.
+
+=== 1.d. Exclude specific branches
+
+Use `ignore` to prevent jobs from running on certain branches.
+
+.Run a job on all branches except main
+[source,yaml]
+----
+workflows:
+  non-production:
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: main
+----
+
+You can combine `only` and `ignore`. CircleCI evaluates `only` first, then applies `ignore`.
+
+.Run on release branches but not on release-draft branches
+[source,yaml]
+----
+workflows:
+  release-workflow:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: /release\/.*/
+              ignore: /release\/.*-draft/
+----
+
+=== 1.e. Handle sequential jobs with filters
+
+When using sequential jobs with dependencies, apply filters to all jobs in the dependency chain.
+
+.Sequential jobs with branch filters
+[source,yaml]
+----
+workflows:
+  build-test-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: main
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
+----
+
+IMPORTANT: If a required job has branch filters, dependent jobs must also specify compatible filters. Otherwise, the dependent job will not run because its requirements are not met.
+
+[#expression-based-job-filters]
+== 2. Use expression-based job filters
+
+Expression-based filters provide more flexibility than traditional branch filters. You can combine multiple conditions using pipeline values and parameters.
+
+=== 2.a. Run a job only on the main branch
+
+Use a simple equality expression to filter by branch.
+
+.Expression-based filter for main branch
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  deploy:
+    jobs:
+      - publish-service:
+          filters: pipeline.git.branch == "main"
+----
+
+=== 2.b. Combine multiple branch conditions
+
+Use logical operators to create complex conditions.
+
+.Run on main or integration test branches
+[source,yaml]
+----
+workflows:
+  build:
+    jobs:
+      - test:
+          filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
+----
+
+=== 2.c. Combine branches and tags
+
+Expression-based filters can check both branches and tags in a single condition.
+
+.Run on main branch or release tags
+[source,yaml]
+----
+workflows:
+  deploy:
+    jobs:
+      - publish-service:
+          filters: pipeline.git.branch == "main" or pipeline.git.tag starts-with "release"
+----
+
+=== 2.d. Use pipeline parameters with branch filters
+
+Combine branch conditions with pipeline parameters for flexible triggering.
+
+.Run on specific branches or when triggered via API
+[source,yaml]
+----
+version: 2.1
+
+parameters:
+  run-storybook-tests:
+    type: boolean
+    default: false
+
+workflows:
+  build:
+    jobs:
+      - storybook-tests:
+          filters: |
+            pipeline.parameters.run-storybook-tests
+            or pipeline.git.branch == "main"
+            or pipeline.git.branch starts-with "deploy"
+----
+
+=== 2.e. Available operators
+
+Expression-based filters support the following operators:
+
+include::ROOT:partial$using-expressions/operators.adoc[]
+
+For complete details, see the xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[Expression-Based Job Filters] section in the configuration reference.
+
+[#conditional-workflows]
+== 3. Use conditional workflows with `when`
+
+Control whether entire workflows run based on branch conditions using the `when` clause.
+
+=== 3.a. Run a workflow only on specific branches
+
+Use the `when` clause with a branch condition to control workflow execution.
+
+.Workflow that runs only on main or develop
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  integration_tests:
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ develop, << pipeline.git.branch >> ]
+    jobs:
+      - test
+      - integration-test
+----
+
+=== 3.b. Use direct expressions in workflow conditions
+
+For simpler syntax, use direct expressions without template syntax.
+
+.Direct expression in workflow when clause
+[source,yaml]
+----
+workflows:
+  integration_tests:
+    when: pipeline.git.branch == "main"
+    jobs:
+      - mytestjob
+----
+
+=== 3.c. Exclude branches from workflows
+
+Use `unless` to prevent workflows from running on specific branches.
+
+.Workflow that runs on all branches except main
+[source,yaml]
+----
+workflows:
+  development:
+    unless:
+      equal: [ main, << pipeline.git.branch >> ]
+    jobs:
+      - build
+      - test
+----
+
+NOTE: Workflows run by default unless a `when` or `unless` clause prevents execution. If you want a workflow to run on every pipeline, do not add a `when` or `unless` filter.
+
+[#branch-filtering-for-job-steps]
+== 4. Use branch filtering for job steps
+
+Control individual steps within a job using the `when` step with branch conditions.
+
+=== 4.a. Run a step only on specific branches
+
+Use the `when` step with a condition to control step execution.
+
+.Run a step only on the main branch
+[source,yaml]
+----
 version: 2.1
 
 jobs:
@@ -26,9 +342,330 @@ jobs:
             equal: [ main, << pipeline.git.branch >> ]
           steps:
             - run: echo "I am on main"
+      - run: echo "This runs on all branches"
 
 workflows:
   my-workflow:
     jobs:
       - my-job
-```
+----
+
+=== 4.b. Run different steps for different branches
+
+Combine `when` and `unless` steps to run different logic based on the branch.
+
+.Different steps for production and non-production branches
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  deploy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Deploy to production
+                command: ./scripts/deploy-prod.sh
+      - unless:
+          condition:
+            equal: [ main, << pipeline.git.branch >> ]
+          steps:
+            - run:
+                name: Deploy to staging
+                command: ./scripts/deploy-staging.sh
+
+workflows:
+  deploy-workflow:
+    jobs:
+      - deploy
+----
+
+=== 4.c. Use complex conditions in steps
+
+Combine multiple conditions for more sophisticated step control.
+
+.Run a step on multiple branches
+[source,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - when:
+          condition:
+            or:
+              - equal: [ main, << pipeline.git.branch >> ]
+              - equal: [ staging, << pipeline.git.branch >> ]
+          steps:
+            - run: npm run build:production
+----
+
+[#schedule-triggers-with-branch-filters]
+== 5. Use schedule triggers with branch filters
+
+When using schedule triggers, you can specify which branches the scheduled workflow runs on.
+
+=== 5.a. Schedule a workflow for specific branches
+
+Configure schedule triggers to run only on designated branches.
+
+.Nightly workflow on main and release branches
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
+                - /release\/.*/
+    jobs:
+      - test
+      - coverage
+----
+
+NOTE: The `branches` filter in schedule triggers is required. For more information, see the xref:schedule-triggers.adoc[Schedule Triggers] page.
+
+=== 5.b. Combine scheduled and push-triggered workflows
+
+You can have separate workflows for scheduled and push-triggered pipelines.
+
+.Separate scheduled and push workflows
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  commit:
+    jobs:
+      - build
+      - test
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only: main
+    jobs:
+      - build
+      - test
+      - coverage
+      - performance-test
+----
+
+In this example, the `commit` workflow runs on every push, while the `nightly` workflow runs only on the scheduled cron job for the main branch.
+
+[#dynamic-configuration]
+== 6. Use dynamic configuration for advanced branch logic
+
+For complex branch-based logic, use dynamic configuration to determine which jobs to run.
+
+.Dynamic configuration based on branch
+[source,yaml]
+----
+version: 2.1
+
+setup: true
+
+orbs:
+  continuation: circleci/continuation@1.0.0
+
+jobs:
+  setup:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Generate config
+          command: |
+            if [[ "main" == "<< pipeline.git.branch >>" ]]; then
+              echo '{"is_main_branch": true}' >> parameters.json
+            else
+              echo '{"is_main_branch": false}' >> parameters.json
+            fi
+      - continuation/continue:
+          configuration_path: .circleci/continue_config.yml
+          parameters: parameters.json
+
+workflows:
+  setup-workflow:
+    jobs:
+      - setup
+----
+
+For more information, see the xref:dynamic-config.adoc[Dynamic Configuration] page.
+
+[#best-practices]
+== Best practices
+
+Follow these best practices when using branch filters:
+
+* **Use expression-based filters for complex conditions**: Expression-based filters are more flexible and easier to read than nested logic statements.
+* **Apply filters consistently in sequential workflows**: When jobs depend on each other, ensure all jobs in the chain have compatible filters.
+* **Prefer workflow-level filtering**: Filter at the workflow level when possible. This prevents unnecessary job creation and reduces pipeline overhead.
+* **Use regex carefully**: Test regex patterns to ensure they match the intended branches. Remember that regex must match the entire branch name.
+* **Consider schedule trigger actors**: When using scheduled workflows with restricted contexts, ensure the scheduling actor has appropriate permissions.
+* **Combine with pipeline parameters**: Use pipeline parameters with branch filters for flexible manual triggering via the API.
+
+[#common-patterns]
+== Common patterns
+
+=== Run tests on all branches, deploy only on main
+
+.Test everywhere, deploy on main
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: main
+----
+
+=== Different workflows for different branch types
+
+.Separate workflows for feature, staging, and production
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  feature-workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: /feature\/.*/
+      - test:
+          requires:
+            - build
+
+  staging-workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: staging
+      - test:
+          requires:
+            - build
+      - deploy-staging:
+          requires:
+            - test
+
+  production-workflow:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: main
+      - test:
+          requires:
+            - build
+      - deploy-production:
+          requires:
+            - test
+          context: production-context
+----
+
+=== Run expensive tests only on main and release branches
+
+.Expensive tests on important branches only
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  build-test:
+    jobs:
+      - build
+      - unit-test:
+          requires:
+            - build
+      - integration-test:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main
+                - /release\/.*/
+      - performance-test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: main
+----
+
+[#troubleshooting]
+== Troubleshooting
+
+=== Job not running on expected branch
+
+**Problem**: A job does not run even though you are on the expected branch.
+
+**Solutions**:
+
+* Verify the branch name matches exactly. Branch filters are case-sensitive.
+* Check regex patterns match the entire branch name.
+* For sequential jobs, ensure all required jobs have compatible filters.
+* Review the workflow in the CircleCI web app to see which jobs were skipped and why.
+
+=== Sequential jobs not running
+
+**Problem**: Dependent jobs do not run even though required jobs completed successfully.
+
+**Solution**: When a job has a `requires` key and the required job has branch filters, the dependent job must also have compatible branch filters. Add the same filters to all jobs in the dependency chain.
+
+=== Workflow not running on any branch
+
+**Problem**: A workflow with a `when` clause never runs.
+
+**Solutions**:
+
+* Verify the condition syntax is correct.
+* Check that pipeline values are available for your integration type. Some values like `pipeline.event.name` are only available for GitHub App pipelines.
+* Test the condition logic by temporarily simplifying it to isolate the issue.
+
+=== Schedule trigger not running on expected branch
+
+**Problem**: A scheduled workflow does not run on the expected branch.
+
+**Solution**: Verify the schedule trigger is configured for the correct branch in the CircleCI web app under menu:Project Settings[Triggers]. A schedule trigger can only be configured for one branch at a time.
+
+[#next-steps]
+== Next steps
+
+* xref:workflows.adoc[Workflow Orchestration]
+* xref:pipeline-variables.adoc[Pipeline Variables and Values]
+* xref:schedule-triggers.adoc[Schedule Triggers]
+* xref:dynamic-config.adoc[Dynamic Configuration]
+* xref:orchestration-cookbook.adoc[Orchestration Cookbook]
+* xref:reference:ROOT:configuration-reference.adoc#filters[Configuration Reference: Filters]
