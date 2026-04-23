@@ -302,6 +302,8 @@ html[data-theme="dark"] {
   --link-font-color: var(--dark-link-color);
   --link-hover-font-color: #8cc9ff;
   --color-link-on-light: var(--dark-link-color);
+  --link-success-color: var(--dark-accent-green); /* #94E5AB for circle-green */
+  --link-error-color: #ED9187; /* Light red for circle-red */
 
   /* Breadcrumbs */
   --breadcrumb-font-color: var(--dark-text-secondary);
