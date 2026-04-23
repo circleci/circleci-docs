@@ -9,7 +9,7 @@ NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
 == Source control setup
-First you will need to ensure your source code is located in either GitHub, Bitbucket or GitLab. See the following for details on how to import your code:
+First, you will need to ensure your source code is located in either GitHub, Bitbucket or GitLab. See the following for details on how to import your code:
 
 * link:https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * link:https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository[Bitbucket]
