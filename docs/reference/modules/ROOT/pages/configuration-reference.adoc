@@ -1771,7 +1771,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | `condition`
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A Logic Statement]
+| xref:configuration-reference.adoc#logic-statements[A logic statement] (or use xref:configuration-reference.adoc#using-expressions-in-your-configuration[expressions] in workflow/job filters instead)
 
 | `steps`
 | Y
@@ -3528,96 +3528,6 @@ workflows:
 
 '''
 
-[#logic-statements]
-== Logic statements
-
-Certain dynamic configuration features accept logic statements as arguments.
-Logic statements are evaluated to boolean values at configuration compilation
-time, that is, before the workflow is run. The group of logic statements
-includes:
-
-[.table-scroll]
---
-[cols="1,1,1,2", options="header"]
-|===
-| Type | Arguments | `true` if | Example
-
-| YAML literal
-| None
-| is truthy
-| `true`/`42`/`"a string"`
-
-| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
-| None
-| resolves to a truthy value
-| `<< pipeline.git.branch >>`
-
-| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameter]
-| None
-| resolves to a truthy value
-| `<< pipeline.parameters.my-parameter >>`
-
-| `and`
-| N logic statements
-| all arguments are truthy
-| `and: [ true, true, false ]`
-
-| `or`
-| N logic statements
-| any argument is truthy
-| `or: [ false, true, false ]`
-
-| `not`
-| 1 logic statement
-| the argument is not truthy
-| `not: true`
-
-| `equal`
-| N values
-| all arguments evaluate to equal values
-| `equal: [ 42, << pipeline.number >>]`
-
-| `matches`
-| `pattern` and `value`
-| `value` matches the `pattern`
-| `+matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }+`
-|===
---
-
-The following logic values are considered falsy:
-
-* false.
-* null.
-* 0
-* NaN
-* empty strings ("").
-* statements with no arguments.
-
-All other values are truthy. Also note that using logic with an empty list will cause a validation error.
-
-Logic statements always evaluate to a boolean value at the top level, and coerce
-as necessary. They can be nested in an arbitrary fashion, according to their
-argument specifications, and to a maximum depth of 100 levels.
-
-`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular
-expressions]
-for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and
-`$` to avoid accidental partial matches.
-
-NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
-
-*Example:*
-
-[,yaml]
-----
-workflows:
-  my-workflow:
-    when:
-      or:
-        - equal: [ main, << pipeline.git.branch >> ]
-        - equal: [ staging, << pipeline.git.branch >> ]
-----
-
 == Using expressions in your configuration
 
 CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, literals, and operators such as `and`, `or`, and comparison operators.
@@ -3719,10 +3629,106 @@ To use a pipeline parameter in an expression, the parameter name must follow the
 If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
 ====
 
-[#logic-statement-examples]
-=== Logic statement and expression examples
+[#expression-examples]
+=== Expression examples
 
 You can find usage examples on the xref:guides:orchestrate:orchestration-cookbook.adoc#[Orchestration Cookbook] page.
+
+'''
+
+[#logic-statements]
+== Logic statement syntax
+
+NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[expressions] for conditional logic in your configuration. The logic statement syntax described in this section still works, but expressions provide a more intuitive and flexible approach.
+
+Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is, before the workflow is run. The group of logic statements includes:
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Type | Arguments | `true` if | Example
+
+| YAML literal
+| None
+| is truthy
+| `true`/`42`/`"a string"`
+
+| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
+| None
+| resolves to a truthy value
+| `<< pipeline.git.branch >>`
+
+| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameter]
+| None
+| resolves to a truthy value
+| `<< pipeline.parameters.my-parameter >>`
+
+| `and`
+| N logic statements
+| all arguments are truthy
+| `and: [ true, true, false ]`
+
+| `or`
+| N logic statements
+| any argument is truthy
+| `or: [ false, true, false ]`
+
+| `not`
+| 1 logic statement
+| the argument is not truthy
+| `not: true`
+
+| `equal`
+| N values
+| all arguments evaluate to equal values
+| `equal: [ 42, << pipeline.number >>]`
+
+| `matches`
+| `pattern` and `value`
+| `value` matches the `pattern`
+| `+matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }+`
+|===
+--
+
+The following logic values are considered falsy:
+
+* false.
+* null.
+* 0
+* NaN
+* empty strings ("").
+* statements with no arguments.
+
+All other values are truthy. Also note that using logic with an empty list will cause a validation error.
+
+Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
+
+`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
+
+NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
+
+[#logic-statement-example]
+=== Logic statement example
+
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ staging, << pipeline.git.branch >> ]
+----
+
+Compare this with the expression syntax equivalent:
+
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when: pipeline.git.branch == "main" or pipeline.git.branch == "staging"
+----
 
 [#example-full-configuration]
 == Example full configuration

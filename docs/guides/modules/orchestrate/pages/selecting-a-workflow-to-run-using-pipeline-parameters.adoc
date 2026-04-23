@@ -37,14 +37,12 @@ jobs:
 
 workflows:
   build:
-    when:
-      equal: [ build, << pipeline.parameters.action >> ]
+    when: pipeline.parameters.action == "build"
     jobs:
       - build
 
   report:
-    when:
-      equal: [ report, << pipeline.parameters.action >> ]
+    when: pipeline.parameters.action == "report"
     jobs:
       - report
 ----

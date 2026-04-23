@@ -1,0 +1,28 @@
+version: 2.1
+
+parameters:
+  param1:
+    type: boolean
+    default: false
+  param2:
+    type: boolean
+    default: false
+  param3:
+    type: boolean
+    default: false
+  param4:
+    type: boolean
+    default: true
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:19.0.1
+    steps:
+      - checkout
+      - when:
+# This nested expression demonstrates complex conditional logic with multiple parameters and pipeline values
+# It evaluates to true when: ((branch is "main" AND param1 is false) OR param3 is false) AND (param3 is false OR (param1 OR param2))
+          condition: << ((pipeline.git.branch == "main" and not pipeline.parameters.param1) or not pipeline.parameters.param3) and (not pipeline.parameters.param3 or (pipeline.parameters.param1 or pipeline.parameters.param2)) >>
+          steps:
+            - run: echo "The condition evaluated as true"

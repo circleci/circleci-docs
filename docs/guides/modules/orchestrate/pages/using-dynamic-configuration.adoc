@@ -281,11 +281,10 @@ workflows:
   # when pipeline parameter, run-build-service-1-job OR
   # run-build-service-2-job is true, run-integration-tests job is
   # triggered. see:
-  # https://circleci.com/docs/configuration-reference/#logic-statements
+  # https://circleci.com/docs/configuration-reference/#using-expressions-in-your-configuration
   # for more information.
   run-integration-tests:
-    when:
-      or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
+    when: pipeline.parameters.run-build-service-1-job or pipeline.parameters.run-build-service-2-job
     jobs:
       - maven/test:
           name: run-integration-tests

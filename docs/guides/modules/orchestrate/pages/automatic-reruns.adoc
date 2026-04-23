@@ -98,9 +98,7 @@ version: 2.1
 
 workflows:
   test-workflow:
-    when:
-      not:
-        equal: [ scheduled_pipeline, << pipeline.trigger_source >> ]
+    when: pipeline.trigger_source != "scheduled_pipeline"
     max_auto_reruns: 4
     jobs:
       - build
