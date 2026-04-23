@@ -3,39 +3,95 @@
 :page-description: Decide when to cancel running work, block new pipelines, stop building, coordinate followers, or rotate and remove secrets during an incident.
 :experimental:
 
-During an incident you may need to **stop pipelines that are already running** and **prevent additional pipelines from starting**. This page gives a practical order of operations for common scenarios:
+During an incident you may need to **stop pipelines that are already running** and **prevent additional pipelines from starting**. This page gives a practical order of operations for some common scenarios.
 
-* **Compromised secret or credential.** Prevent new pipelines with **Block all new work**, cancel running work, and rotate the affected secrets before any more jobs can use them.
-* **Suspicious or unauthorized code.** Stop pipelines that are executing untrusted code, then investigate what ran.
-* **Suspicious dependency, orb, or image.** Halt work that could continue to use a compromised third-party component, then investigate where it ran.
-* **Compromised account or insider threat.** Halt all work, review audit logs, and rotate credentials the account had access to.
-* **Operational incident or release issue.** Pause new work while your team verifies configuration, dependencies, or external systems.
+== Introduction
 
-CircleCI provides several controls and they work differently. The sections below explain each option and when to use it.
+During an incident you will need to take steps to pause or stop work in CircleCI. This guide provides information on the controls available in CircleCI to help you safely manage builds during and incident. First we will look at some common scenarios you may encounter during an incident. Then a guide to recommended actions to take is provided as a quick reference to follow during an active incident.
 
-After you have paused or stopped pipelines, see xref:orchestrate:analyze-pipelines-during-an-incident.adoc[Analyze Pipelines and Job Steps During an Incident] to investigate what ran and what the incident exposed.
+== Incident scenarios
+
+The following are some common scenarios you may encounter during an incident along with the remediation steps to take:
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| **Scenario**
+| **Remediation Steps**
+
+| **Compromised secret or credential** | Prevent new pipelines with **Block all new work**, cancel running work, and rotate the affected secrets before any more jobs can use them.
+
+| **Suspicious or unauthorized code** | Stop pipelines that are executing untrusted code, then investigate what ran.
+
+| **Suspicious dependency, orb, or image** | Stop work that could continue to use a compromised third-party component, then investigate where it ran.
+
+| **Compromised account or insider threat** | Stop all work, review audit logs, and rotate credentials the account had access to.
+
+| **Operational incident or release issue** | Pause new work while your team verifies configuration, dependencies, or external systems.
+|===
+--
+
+CircleCI provides several controls to help you pause or stop pipelines during an incident. The sections below explain each option and when to use it.
+
+After you have paused or stopped work in CircleCI, see xref:orchestrate:analyze-pipelines-during-an-incident.adoc[Analyze Pipelines and Job Steps During an Incident] to investigate what ran and what the incident exposed.
 
 NOTE: For server customers, **Block all new work** is available in Server 4.10+. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block All New Work] for details.
 
 NOTE: Before you begin, confirm which controls your org supports based on integration type (and Server version if applicable). If **Block all new work** is unavailable, cancel running workflows from the xref:orchestrate:pipelines.adoc#pipelines-dashboard[Pipelines Dashboard] and use **Stop Building** where supported.
 
-[#recommended-order]
-== Recommended order of operations
+== Recommended steps to take during an incident
 
-. **Prevent new pipelines first** with **Block all new work** at **organization** or **project** scope. This is a single toggle and is the fastest way to stop the bleeding: CircleCI rejects incoming pipelines and users cannot rerun workflows. Your VCS integration stays in place. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block All New Work].
+=== 1. Prevent new pipelines
+
+First use the **Block all new work** option at the **organization** or **project** level.
+
+**Block all new work** is a single toggle and is the fastest way to contain the incident. Once this option is enabled, CircleCI rejects incoming pipelines and users cannot rerun workflows. Your VCS integration stays in place. See xref:orchestrate:skip-build.adoc#block-all-new-work[Block All New Work].
+
+.Block all new work for an organization or project
+image::guides:ROOT:block-all-new-work-org.png[Organization settings > Advanced > Block all new work from starting for this organization toggle]
+
+=== 2. Cancel running work and disconnect the project
+
+The method for cancelling running work is different for different organization types. There are three organization types: `github`, `bitbucket`, and `circleci`. Check the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] to see which organization type you have.
+
+[tabs]
+====
+`github` or `bitbucket` org::
 +
-.Block all new work (Advanced project settings)
-image::guides:ROOT:incident-block-all-new-work-project-setting.png[Advanced project settings showing the Block all new work from starting for this project toggle]
-. **Cancel running work and disconnect the project** with **Stop Building** (GitHub OAuth and Bitbucket Cloud). Stop Building removes all project followers, **cancels all running workflows asynchronously**, and removes the webhook and deploy key from the repository. Cancellation happens in the background. The UI responds before all workflows have finished stopping. Use **Set Up Project** to reconnect later. See xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI]. This option is **not** available for all integration types; see the same page for support and limitations.
-+
+--
+If you have an organization of type `github` or `bitbucket`, use the **Stop Building** option.
+
+Use the **Stop Building** to:
+
+* Remove all project followers.
+* Cancel all running workflows.
+* Remove the webhook and deploy key from the repository.
+
+Once the incident is resolved, you can set up the project again.
+
+See xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI].
+
 .Stop Building (Project overview)
 image::guides:ROOT:incident-stop-building-project-setting.png[Project overview showing the Stop Building section]
+--
+`circleci` org::
 +
-NOTE: **Block all new work** does **not** cancel workflows that are already running. It only prevents incoming pipelines and reruns. If you need to stop in-flight work and your integration supports it, **Stop Building** is the action that cancels running workflows. For integrations without Stop Building (GitHub App, GitLab, Bitbucket Data Center), cancel workflows individually from the xref:orchestrate:pipelines.adoc#pipelines-dashboard[Pipelines Dashboard].
-. **Coordinate who follows the project.** The **Projects** list controls whether a user follows a project for their dashboard. For some integrations, **following** a project can restore GitHub-side resources (such as webhook and deploy key) after a stop-build flow, which can look like "nothing happened" if another teammate follows the project during an incident. Align with your team so that stopping or blocking work is not unintentionally undone. See xref:about-circleci:introduction-to-the-circleci-web-app.adoc#projects[Projects in the Web App].
-. **Rotate or remove secrets** the incident may have exposed, or generate an inventory for your security team. The API and CLI return **masked** values for project variables by design; you cannot bulk-export plaintext secrets to compare them. Use the CLI or API to **list names**, **remove** bad variables, and **store** replacements. See <<#secrets-and-credentials,Secrets and credentials>>.
+--
+If you have an organization of type `circleci`, you can cancel all running workflows from the Pipelines Dashboard.
 
-[#block-vs-stop-building]
+
+--
+====
+
+=== 3. Coordinate who follows the project
+
+The **Projects** list controls whether a user follows a project for their dashboard. For some integrations, **following** a project can restore GitHub-side resources (such as webhook and deploy key) after a stop-build flow, which can look like "nothing happened" if another teammate follows the project during an incident. Align with your team so that stopping or blocking work is not unintentionally undone. See xref:about-circleci:introduction-to-the-circleci-web-app.adoc#projects[Projects in the Web App].
+
+=== 4. Rotate or remove secrets
+
+The incident may have exposed, or generate an inventory for your security team. The API and CLI return **masked** values for project variables by design; you cannot bulk-export plaintext secrets to compare them. Use the CLI or API to **list names**, **remove** bad variables, and **store** replacements. See <<#secrets-and-credentials,Secrets and credentials>>.
+
 == Block all new work vs Stop Building
 
 The table below compares the two controls.
@@ -65,7 +121,6 @@ The table below compares the two controls.
 | xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI]
 |===
 
-[#secrets-and-credentials]
 == Secrets and credentials
 
 After you have blocked new work or stopped building, rotate or remove secrets that the incident may have exposed. This includes context variables, project variables, API tokens, SSH keys, and runner tokens. The public API and CLI return **masked** values by design. Inventory secret **names** and **last-updated** metadata first, then replace or remove the affected values.
