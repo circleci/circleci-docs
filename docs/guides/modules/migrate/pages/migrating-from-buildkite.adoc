@@ -9,7 +9,7 @@ NOTE: **Tips provided by ImagineX Consulting**
 
 [#source-control-setup]
 == Source control setup
-First you will need to ensure your source code is located in either to GitHub, Bitbucket or GitLab. See the following for details on how to import your code:
+First you will need to ensure your source code is located in either GitHub, Bitbucket or GitLab. See the following for details on how to import your code:
 
 * link:https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * link:https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository[Bitbucket]
@@ -45,7 +45,7 @@ Once you have imported your code into GitHub, Bitbucket or GitLab, you can start
 
 Next, you will need to migrate your build configuration. On Buildkite, the build configuration is either defined in the web interface or in a file called `.pipeline.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
-First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named config.yml. Next, follow the CircleCI documentation https://circleci.com/docs/guides/getting-started/config-intro/[here] to learn how to configure the config.yml file.
 
 The Buildkite and CircleCI configurations will be different. It may be helpful to have both Buildkite and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
