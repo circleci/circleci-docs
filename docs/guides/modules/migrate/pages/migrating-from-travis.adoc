@@ -154,7 +154,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: install-npm-wee
+          name: install-npm
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -245,4 +245,4 @@ More advanced configuration on Travis might make use of a _Build Matrix_
 jobs rely on the success of previous jobs.)
 
 With CircleCI you can use xref:orchestrate:workflows.adoc[workflows] in your `.circleci/config.yml` to define a collection of jobs and their
-run order, whether leveraging concurrency, fan-in or fan-out builds, or sequentially-dependant builds. Workflows allow complex and fine-grained control over your build configuration.
+run order, whether leveraging concurrency, fan-in or fan-out builds, or sequentially-dependent builds. Workflows allow complex and fine-grained control over your build configuration.
