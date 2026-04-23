@@ -7,6 +7,8 @@
 *This page is relevant if your CircleCI organization has `/github/` or `/gh/` in the URL.* Throughout this guide we will refer to org types by the appearance of `/github/` or other strings in the URL.
 ****
 
+TIP: Looking for information about connecting a self-hosted GitHub instance? See the xref:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
+
 This guide explains the two different ways your CircleCI organization can integrate with GitHub and how they affect the following:
 
 * The type of pipeline you can set up .

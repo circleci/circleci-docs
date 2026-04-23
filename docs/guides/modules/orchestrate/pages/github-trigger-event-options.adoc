@@ -5,6 +5,8 @@
 
 When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties. Using GitHub App trigger options you can trigger pipeline on non-push events.
 
+TIP: The trigger event options described on this page apply to both GitHub App pipelines for GitHub Cloud and GitHub Enterprise Server.
+
 == Introduction
 
 CircleCI projects have pipelines and triggers.
