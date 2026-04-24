@@ -286,17 +286,17 @@ a| Provides additional details in output.
 |`false`
 a| Run test selection and analysis using locally stored impact data in the `.circleci/` directory, instead of fetching from the CircleCI API.
 
-|`--analyze-tests=all\|impacted\|none`
-|`false`
-a| * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
-* `impacted` analyzes only impacted tests that need analyzing. +
-* `none` skips analysis.
+|`--analyze-tests=impacted\|none\|all`
+|`none`
+a| * `impacted` analyzes only tests whose impact data needs updating — either the test changed, or the files it covers changed.  This is the recommended default. +
+* `none` skips analysis. +
+* `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
 
-|`--select-tests=all\|impacted\|none`
+|`--select-tests=impacted\|none\|all`
 |`impacted`
-a| * `all` selects and runs all discovered tests, used to run the full test suite. +
-* `impacted` selects and runs only the tests impacted by a change. +
-* `none` skips running tests.
+a| * `impacted` selects and runs only the tests impacted by a change. +
+* `none` skips running tests. +
+* `all` selects and runs all discovered tests, used to run the full test suite. 
 |===
 --
 
@@ -338,19 +338,19 @@ IMPORTANT: Analysis should only run on the default branch, once verified, remove
 |`false`
 a| Provides additional details in output.
 
-|`--analyze-tests=all\|impacted\|none`
+|`--analyze-tests=impacted\|none\|all`
 |On `default` branch, `impacted`. +
 On all other branches, `none`.
-a| * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
-* `impacted` analyzes only tests impacted by a change. +
-* `none` skips analysis.
+a| * `impacted` analyzes only tests whose impact data needs updating — either the test changed, or the files it covers changed.  This is the recommended default. +
+* `none` skips analysis. +
+* `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
 
-|`--select-tests=all\|impacted\|none`
+|`--select-tests=impacted\|none\|all`
 |On `default` branch, `all`. +
 On all other branches, `impacted`.
-a| * `all` selects and runs all discovered tests, used to run the full test suite. +
-* `impacted` selects and runs only the tests impacted by a change. +
-* `none` skips running tests.
+a| * `impacted` selects and runs only the tests impacted by a change. +
+* `none` skips running tests. +
+* `all` selects and runs all discovered tests, used to run the full test suite. 
 |===
 --
 
