@@ -95,6 +95,6 @@ jobs:
       TZ: "America/Los_Angeles"
 ----
 
-In this example, the timezone is set for both the primary image and an additional mySQL image.
+In this example, the timezone is set for both the primary image and an additional MySQL image.
 
 A full list of available timezone options is link:https://en.wikipedia.org/wiki/List_of_tz_database_time_zones[available on Wikipedia].
