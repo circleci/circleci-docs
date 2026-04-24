@@ -32,7 +32,7 @@ nightly-run-workflow:
 ...
 ```
 
-You may also add filtering for workflows that should *not* run when a schedule is triggered:
+You may also add filtering for workflows that do *not* run when a schedule is triggered:
 
 [,yaml]
 ----
@@ -54,12 +54,12 @@ nightly-run-workflow:
 ...
 ----
 
-For a full list of pipeline values, visit the xref:reference:ROOT:variables.adoc#pipeline-values[Pipeline values and parameters] page.
+For a full list of pipeline values, visit the xref:reference:ROOT:variables.adoc#pipeline-values[Pipeline Values and Parameters] page.
 
 [#schedule-using-pipeline-parameters]
 ## Schedule using pipeline parameters
 
-In the example below, a parameter is created called `run-schedule`, which is set as `type: boolean` and `default: false`. This allows the workflows section to use `when` to specify conditionals about when the pipeline should run. If you use the `when` conditional, you will also need to set a `when: not:`, like in the example below.
+In the example below, a parameter is created called `run-schedule`, which is set as `type: boolean` and `default: false`. This allows the workflows section to use `when` to specify conditionals about when the pipeline runs. If you use the `when` conditional, you will also need to set a `when: not:`, like in the example below.
 
 ```yaml
 version: 2.1
@@ -86,7 +86,7 @@ workflows:
 ...
 ```
 
-For the full configuration sample, visit the link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[sample project] on GitHub. For a full list of pipeline parameters, see the xref:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline values and parameters] page.
+For the full configuration sample, visit the link:https://github.com/zmarkan/Android-Espresso-ScrollableScroll/blob/main/.circleci/config.yml[sample project] on GitHub. For a full list of pipeline parameters, see the xref:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters] page.
 
 [#set-up-multiple-workflows-with-multiple-schedules]
 == Set up multiple workflows with multiple schedules
@@ -120,5 +120,5 @@ workflows:
 [#next-steps]
 == Next steps
 
-- xref:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger]
-- xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate scheduled workflows to schedule triggers]
+- xref:set-a-nightly-schedule-trigger.adoc[Set a Nightly Schedule Trigger]
+- xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate Scheduled Workflows to Schedule Triggers]
