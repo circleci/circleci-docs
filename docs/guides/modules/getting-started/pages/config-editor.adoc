@@ -43,11 +43,7 @@ image::guides:ROOT:config-editor-auto-complete.png[Auto-completion]
 
 At the bottom of the editor, you will see tabs for *Linter*, *Docs*, and the name of your workflow (in this case *Sample*).
 
-<<<<<<< ben/typos-getting-started-section
-The built-in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). There is also a toggle switch to view the YAML as JSON within the validation bar.
-=======
 The built in linter will validate your YAML after every change and show you errors if there is a problem. A green or red bar is always visible across the bottom of the page, and will indicate if your YAML is valid (green) or has an error (red). Toggle the switch to view the YAML as JSON within the validation bar.
->>>>>>> main
 
 The docs tab links out to helpful documentation relating to configuration files.
 
