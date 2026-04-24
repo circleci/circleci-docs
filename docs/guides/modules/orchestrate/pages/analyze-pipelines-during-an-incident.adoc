@@ -3,9 +3,13 @@
 :page-description: Investigate pipelines and step output, then review audit logs and assess credential exposure after an incident.
 :experimental:
 
-After you have paused or stopped pipelines, use this guide to investigate what happened. If you have not already done so, start with xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or Stop Pipelines During an Incident]. This page supplements your organization's incident response process with CircleCI-specific API calls, audit log queries, and ready-to-run download scripts.
+In an incident situation, use this guide to investigate what happened after you have paused or stopped pipelines. If you have not already done so, start with xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or Stop Pipelines During an Incident]. The tasks outlined on this page supplement your organization's incident response process with CircleCI-specific API calls, audit log queries, and ready-to-run download scripts.
 
-Common scenarios that lead to this page:
+== Introduction
+
+When an incident occurs, you may need to investigate what happened in your pipelines. This guide provides a step-by-step process to help you investigate what ran and what the incident exposed.
+
+Some common incident scenarios that include the following:
 
 * **A secret may have leaked.** An API key, token, or credential leaked through job output, artifacts, or a compromised dependency.
 * **Unexpected code ran in a pipeline.** A pull request, merged commit, or modified configuration triggered jobs that ran unauthorized commands.
@@ -13,21 +17,28 @@ Common scenarios that lead to this page:
 * **A team member's account is under suspicion.** Someone used their access to trigger pipelines, change project settings, or read context secrets.
 * **A broader operational incident affected CI/CD behavior.** Pipelines started, failed, or reran in ways your team did not expect.
 
-For each scenario, the investigation follows the same steps:
+The investigation process follows the same steps for each scenario:
 
-. Identify which pipelines ran (<<identify-what-ran>>).
-. Inspect step output (<<inspect-step-output>>).
-. Review audit logs (<<review-audit-logs>>).
-. Assess credential exposure (<<assess-credential-exposure>>).
+. <<identify-what-ran>>
+. <<inspect-step-output>>
+. <<download-artifacts>>
+. <<review-audit-logs>>
+. <<assess-credential-exposure>>
 
-The examples on this page use `curl` and `jq`. Replace `$CIRCLE_TOKEN` with a xref:toolkit:managing-api-tokens.adoc[Personal API Token] and `$CIRCLE_HOST` with your CircleCI hostname (`https://circleci.com` for Cloud, or your Server domain).
+The examples on this page use `curl` and `jq`.
+
+[TIP]
+====
+Replace `$CIRCLE_TOKEN` with a xref:toolkit:managing-api-tokens.adoc[Personal API Token].
+Replace `$CIRCLE_HOST` with your CircleCI hostname (`https://circleci.com` for Cloud, or your Server domain name).
+====
 
 [#identify-what-ran]
-== Identify what ran
+== 1. Identify what ran
 
-Use the v2 API to list the pipelines, workflows, and jobs that executed during the time window you are investigating. All endpoints paginate results; follow `next_page_token` to retrieve additional results.
+Use the CircleCI v2 API to list the pipelines, workflows, and jobs that executed during the time window you are investigating. All endpoints paginate results. Follow the `next_page_token` to retrieve additional results.
 
-=== List pipelines for a project
+=== 1.1 List pipelines for a project
 
 [,shell]
 ----
@@ -38,7 +49,7 @@ curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
 
 See link:https://circleci.com/docs/api/v2/#tag/Pipeline/operation/listPipelinesForProject[List pipelines for a project] in the API reference.
 
-=== List workflows in a pipeline
+=== 1.2 List workflows in a pipeline
 
 [,shell]
 ----
@@ -49,7 +60,7 @@ curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
 
 See link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/listWorkflowsByPipelineId[List workflows by pipeline ID].
 
-=== List jobs in a workflow
+=== 1.3 List jobs in a workflow
 
 [,shell]
 ----
@@ -60,7 +71,7 @@ curl -s -H "Circle-Token: $CIRCLE_TOKEN" \
 
 See link:https://circleci.com/docs/api/v2/#tag/Workflow/operation/listWorkflowJobs[List jobs for a workflow].
 
-=== Get job details
+=== 1.4 Get job details
 
 Returns executor type, resource class, and timing for a single job.
 

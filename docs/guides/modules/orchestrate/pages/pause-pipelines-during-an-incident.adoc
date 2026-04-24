@@ -94,7 +94,7 @@ The API and CLI return **masked** values for project variables by design. You ca
 
 Use the CLI or API to **list names**, **remove** bad variables, and **store** replacements.
 
-==== 4a. Triage and audit logs
+==== 4.1 Triage and audit logs
 
 Start here if you suspect a leak:
 
@@ -103,7 +103,7 @@ Start here if you suspect a leak:
 
 To inventory variable names across multiple projects, use the open source link:https://github.com/CircleCI-Public/CircleCI-Env-Inspector[CircleCI Environment Inspector] (run with a xref:toolkit:managing-api-tokens.adoc[Personal API Token]; treat output as sensitive).
 
-==== 4b. Environment variables
+==== 4.2 Environment variables
 
 Environment variables are stored in **contexts** (shared across projects) and **project settings** (scoped to one project). Both store secrets as masked values. You rotate them differently depending on where they live and how your project connects to CircleCI.
 
@@ -118,12 +118,12 @@ Environment variables are stored in **contexts** (shared across projects) and **
 * **GitHub OAuth / Bitbucket Cloud projects:** Use the link:https://circleci.com/docs/api/v2/#tag/Project[Project API].
 * **Web app (all integration types):** See xref:security:set-environment-variable.adoc[Set an Environment Variable].
 
-==== 4c. SSH keys and self-hosted runners
+==== 4.3 SSH keys and self-hosted runners
 
 * **Project SSH keys:** xref:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys].
 * **Runner tokens:** See the runner token sections in xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to Use the CircleCI Local CLI].
 
-==== 4d. GitHub OAuth webhooks and deploy keys
+==== 4.4 GitHub OAuth webhooks and deploy keys
 
 * **Rotate the GitHub webhook secret** (GitHub OAuth project triggers). See link:https://support.circleci.com/hc/en-us/articles/49131607657243[Rotating the GitHub webhook secret for CircleCI GitHub OAuth project triggers] for the documented flow with CircleCI-specific notes.
 * **Disconnect without the CircleCI app** (for example the UI is unavailable). Manually remove the CircleCI webhook and deploy key from the repository: link:https://support.circleci.com/hc/en-us/articles/360021666393[How to stop building by manually removing the CircleCI webhook and deploy key from your GitHub repository]. This stops delivery of events; it is not a substitute for rotating the webhook secret if that credential leaked.
@@ -131,7 +131,7 @@ Environment variables are stored in **contexts** (shared across projects) and **
 
 After a security incident, **regenerate** deploy keys and webhooks by reconnecting the project in CircleCI (or repeating the GitHub webhook setup) to invalidate old endpoints and secrets.
 
-==== 4e. API tokens and user keys
+==== 4.5 API tokens and user keys
 
 * **Personal API tokens:** Regenerate from menu:User Settings[Personal API Tokens] in the web app. See xref:toolkit:managing-api-tokens.adoc[Managing API Tokens].
 * **Project API tokens:** Regenerate from menu:Project Settings[API Permissions]. These are deprecated but still in use on some projects.
