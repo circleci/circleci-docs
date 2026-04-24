@@ -12,17 +12,16 @@ The example build configurations referenced throughout this article are based on
 
 This document assumes that:
 
-* You have an account with CircleCI that is linked to a repository. If you do not have an account,
-consider reading our xref:getting-started:getting-started.adoc[Getting Started Guide].
+* You have an account with CircleCI that is linked to a repository. If you do not have an account, consider reading our xref:getting-started:getting-started.adoc[Getting Started Guide].
 * You understand the xref:about-circleci:concepts.adoc[Basic Concepts] in CircleCI.
 
 [#why-migrate-to-circleci]
 == Why migrate to CircleCI?
 
 * *Scaling Concurrency*: You can run up to 80 concurrent jobs on our monthly Performance Plan or even more on a link:https://circleci.com/pricing/[Custom Plan]. Travis CI has capped concurrencies of 1, 2, 5, and 10 on each of their plans.
-* *Resource Classes*: xref:reference:ROOT:configuration-reference.adoc#resourceclass[vCPU & RAM] are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
-* *Parallelization by Timing*: On top of running many jobs concurrently, CircleCI offers built-in xref:optimize:parallelism-faster-jobs.adoc[test splitting] across multiple environments by timing. This dramatically reduces wall clock time for large test suites to finish. You must implement this manually in Travis CI.
-* *Orbs*: Rather than proprietary integrations, CircleCI offers xref:orbs:use:orb-intro.adoc[orbs], which are reusable, templated configuration. On top of connecting to services and tools, orbs can be used to standardize and templatize configuration for your team and organization as well. link:https://circleci.com/developer/orbs[Visit the registry].
+* *Resource Classes*: xref:reference:ROOT:configuration-reference.adoc#resourceclass[vCPU and RAM] are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
+* *Parallelization by Timing*: On top of running many jobs concurrently, CircleCI offers built-in xref:optimize:parallelism-faster-jobs.adoc[Test Splitting] across multiple environments by timing. This dramatically reduces wall clock time for large test suites to finish. You must implement this manually in Travis CI.
+* *Orbs*: Rather than proprietary integrations, CircleCI offers xref:orbs:use:orb-intro.adoc[Orbs], which are reusable, templated configuration. On top of connecting to services and tools, orbs can be used to standardize and templatize configuration for your team and organization as well. link:https://circleci.com/developer/orbs[Visit the registry].
 
 [#configuration-files]
 == Configuration files
@@ -45,8 +44,8 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 | CircleCI doesn't assume dependencies or commands based on a language; instead, choose an executor and use `run:` steps as shown below to execute commands you require (for example, install, build, test).
 
 | `dist:`
-| xref:reference:ROOT:configuration-reference.adoc#machine[machine]
-| Our Linux VM executor is a Ubuntu VM. You can specify xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[versions] in the config.
+| xref:reference:ROOT:configuration-reference.adoc#machine[Machine]
+| Our Linux VM executor is a Ubuntu VM. You can specify xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Versions] in the config.
 
 | `cache:`
 | xref:reference:ROOT:configuration-reference.adoc#restorecache[`restore_cache`], xref:reference:ROOT:configuration-reference.adoc#restorecache[`save_cache`]
@@ -54,11 +53,11 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 
 | `before_cache`
 | xref:reference:ROOT:configuration-reference.adoc#run[`run`]
-| If you want to run any commands before you cache, simply place a run: step before your cache step(s) in CircleCI.
+| If you want to run any commands before you cache, place a run: step before your cache step(s) in CircleCI.
 
 | `before_install:`
 | xref:reference:ROOT:configuration-reference.adoc#run[`run`]
-| CircleCI doesn't separate commands into stages or types. Use `run:` steps to specify any commands and order them per your needs. See xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[documentation] for usage of conditional steps.
+| CircleCI doesn't separate commands into stages or types. Use `run:` steps to specify any commands and order them per your needs. See xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[Documentation] for usage of conditional steps.
 
 | `install:`
 | xref:reference:ROOT:configuration-reference.adoc#run[`run`]
@@ -78,7 +77,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 
 | `deploy:`
 | xref:reference:ROOT:configuration-reference.adoc#run[`run`]
-| Use a `run` step to run needed commands for deployment. See our xref:deploy:deployment-overview.adoc[Deployment overview page] for links to examples.
+| Use a `run` step to run needed commands for deployment. See our xref:deploy:deployment-overview.adoc[Deployment Overview Page] for links to examples.
 
 | `env:`
 | xref:reference:ROOT:configuration-reference.adoc#environment[`environment`]
@@ -97,9 +96,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 [#building-on-pushing-code]
 == Building on pushing code
 
-The example repository linked above is a basic application for creating, reading, updating, and deleting articles. The
-app is built with the `MERN` stack and there are tests present on the client as
-well as the REST API that should run whenever code is pushed.
+The example repository linked above is a basic application for creating, reading, updating, and deleting articles. The app is built with the `MERN` stack. Tests are present on the client as well as the REST API that run whenever code is pushed.
 
 To get tests running for this example repository, the beginnings of a simple
 Travis Configuration might look like the following example:
@@ -115,11 +112,7 @@ node_js:
 cache: npm
 ----
 
-For basic builds, a Travis CI configuration will leverage a language's best known
-dependency and build tools and will abstract them away as default commands
-(which can be overridden) in link:https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle[a job lifecycle]. In this
-case, when the build runs, Travis CI will automatically run `npm install` for the
-`install` step, and run `npm start` for the `script` step.
+For basic builds, a Travis CI configuration will leverage a language's best known dependency and build tools. It will abstract them away as default commands (which can be overridden) in link:https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle[a job lifecycle]. In this case, when the build runs, Travis CI will automatically run `npm install` for the `install` step, and run `npm start` for the `script` step.
 
 If a user needs more control with their CI environment, Travis CI uses _hooks_
 to run commands before/after the `install` and `script` steps. In the example
@@ -202,9 +195,9 @@ you'll be comfortable setting your environment variables in CircleCI's project
 settings page. Read the docs for setting environment variable in a xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[single
 project].
 
-With CircleCI, it is also possible to securely set environment variables across _all_ projects using xref:security:contexts.adoc[contexts].
+With CircleCI, it is also possible to securely set environment variables across _all_ projects using xref:security:contexts.adoc[Contexts].
 
-In addition, CircleCI has several xref:reference:ROOT:variables.adoc#built-in-environment-variables[built-in environment variables].
+In addition, CircleCI has several xref:reference:ROOT:variables.adoc#built-in-environment-variables[Built-in Environment Variables].
 
 [#artifacts-uploading]
 == Artifacts uploading
@@ -232,17 +225,11 @@ On CircleCI, artifact uploading occurs in a step in your config:
           path: test-results.xml
 ----
 
-After an artifact is successfully uploaded, you can view it in the Artifacts tab
-of the Job page in your browser, or access them through the CircleCI API. Read the
-documentation on xref:optimize:artifacts.adoc[artifact uploading] to learn more.
+After an artifact is successfully uploaded, you can view it in the Artifacts tab of the Job page in your browser, or access them through the CircleCI API. Read the documentation on xref:optimize:artifacts.adoc[Artifact Uploading] to learn more.
 
 [#advanced-tooling]
 == Advanced tooling
 
-More advanced configuration on Travis might make use of a _Build Matrix_
-(a configuration that specifies running multiple concurrent jobs) or _Build Stages_
-(grouping jobs into stages that can run concurrently as well as having sequential
-jobs rely on the success of previous jobs.)
+More advanced configuration on Travis might make use of a _Build Matrix_ (a configuration that specifies running multiple concurrent jobs). It might also use _Build Stages_ (grouping jobs into stages that can run concurrently or sequentially based on previous job success).
 
-With CircleCI you can use xref:orchestrate:workflows.adoc[workflows] in your `.circleci/config.yml` to define a collection of jobs and their
-run order, whether leveraging concurrency, fan-in or fan-out builds, or sequentially-dependent builds. Workflows allow complex and fine-grained control over your build configuration.
+With CircleCI you can use xref:orchestrate:workflows.adoc[Workflows] in your `.circleci/config.yml` to define a collection of jobs and their run order. This includes leveraging concurrency, fan-in or fan-out builds, or sequentially-dependant builds. Workflows allow complex and fine-grained control over your build configuration.

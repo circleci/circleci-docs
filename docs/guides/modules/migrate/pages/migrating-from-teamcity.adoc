@@ -260,7 +260,7 @@ CircleCI's equivalent of Meta-Runners and Build Templates is orbs, which are tem
 
 For larger and more complex builds, we recommend moving over in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
-. Execution of shell scripts and Docker compose files
+. Execution of shell scripts and Docker compose files.
 . https://circleci.com/docs/workflows/[Workflows]
 . https://circleci.com/docs/artifacts/[Artifacts]
 . https://circleci.com/docs/caching/[Caching]
