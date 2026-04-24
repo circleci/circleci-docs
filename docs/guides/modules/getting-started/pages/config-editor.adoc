@@ -12,17 +12,11 @@ image::guides:ROOT:config-editor-main.png[Configuration Editor]
 
 The benefits of using the CircleCI configuration editor include:
 
-<<<<<<< ben/typos-getting-started-section
-* Automatic validation and error checking
-* Auto-complete suggestions
-* Configuration tooltips specific to CircleCI configuration syntax
-* Education on CircleCI concepts
-=======
 * Automatic validation and error checking.
 * Auto-complete suggestions.
 * Configuration tooltips specific to CircleCI configuration syntax.
 * Education of CircleCI concepts.
->>>>>>> main
+
 
 [#getting-started-with-the-circleci-configuration-editor]
 == Getting started with the CircleCI configuration editor
