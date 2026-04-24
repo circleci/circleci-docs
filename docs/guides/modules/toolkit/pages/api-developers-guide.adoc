@@ -54,7 +54,7 @@ export CIRCLE_TOKEN={your_api_token}
 curl https://circleci.com/api/v2/me --header "Circle-Token: $CIRCLE_TOKEN"
 ----
 
-. You should see a JSON response similar to the example shown below.
+. You will see a JSON response similar to the example shown below.
 +
 [,json]
 ----
@@ -111,18 +111,18 @@ If you integrate your code via the GitHub OAuth app or Bitbucket Cloud, your pro
 
 === GitHub App, GitLab and Bitbucket Data Center
 
-For GitHub App, GitLab and Bitbucket Data Center project, the project slug is made up of org and project identifiers as opaque, for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. The project slug should not be parsed to retrieve the project or organization ID. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
+For GitHub App, GitLab and Bitbucket Data Center project, the project slug is made up of org and project identifiers as opaque, for example: `circleci/43G3kM5RtfFE7v5sa4nWAU/44n9pujWcTnVZ2b5S8Fnat`. A project slug must be treated as an opaque string. To retrieve project and organization IDs or names, use the entire slug to fetch <<get-project-details,project details>> or organization details. The IDs and names are included in the payload.
 
 [#rate-limits]
 == Rate limits
 
 The CircleCI API is protected by rate limiting measures to ensure the stability of the system. CircleCI reserves the right to throttle the requests made by an individual user or to individual resources. This ensures a fair level of service to all of our users.
 
-As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure. Different protections and limits are in place for different parts of the API. In particular, we protect our API against *sudden large bursts of traffic* and *sustained high volumes* of requests, for example, frequent polling.
+As the author of an API integration with CircleCI, your integration needs to expect to be throttled and be able to gracefully handle failure. Different protections and limits are in place for different parts of the API. In particular, we protect our API against *sudden large bursts of traffic* and *sustained high volumes* of requests, for example, frequent polling.
 
-For HTTP APIs, when a request is throttled, you will receive link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429[HTTP status code 429]. If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
+For HTTP APIs, when a request is throttled, you will receive link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429[HTTP status code 429]. If your integration requires that a throttled request is completed, then you need to retry these requests after a delay, using an exponential backoff.
 
-In most cases, the HTTP 429 response code will be accompanied by the link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After[Retry-After HTTP header]. When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
+In most cases, the HTTP 429 response code will be accompanied by the link:https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After[Retry-After HTTP header]. When this header is present, your integration needs to wait for the period of time specified by the header value before retrying a request.
 
 To understand the current limit, you can inspect other headers that describe the API limits. These will vary slightly depending on the API call you are making, as different services will impose different limits. The following headers are possible:
 
@@ -159,8 +159,8 @@ All paginated endpoints return responses in this format:
 }
 ----
 
-* `items` - An array containing the current page of results
-* `next_page_token` - A token to use for retrieving the next page, or `null` if you have reached the final page
+* `items` - An array containing the current page of results.
+* `next_page_token` - A token to use for retrieving the next page, or `null` if you have reached the final page.
 
 [#paginating-through-results]
 === Paginating through results
@@ -219,10 +219,10 @@ Continue making requests with the updated `page-token` until the response contai
 
 The following API v2 endpoints support pagination:
 
-* Insights endpoints (workflow metrics, job timeseries, workflow runs)
-* Pipeline list endpoints
-* Project pipeline endpoints
-* Workflow job endpoints
+* Insights endpoints (workflow metrics, job time series, workflow runs).
+* Pipeline list endpoints.
+* Project pipeline endpoints.
+* Workflow job endpoints.
 
 Refer to the link:https://circleci.com/docs/api/v2/[API v2 Reference documentation] for the complete list of paginated endpoints and their specific parameters.
 
@@ -246,7 +246,7 @@ You will get a list of pipelines for your project using link:https://circleci.co
 . In your VCS, create a repository (or use an existing one if you prefer). The repository for this how-to guide will be called `hello-world`. Create a README for your repository so that it is not empty.
 . Set up your new project on the link:https://app.circleci.com/[CircleCI web app]. Refer to the xref:getting-started:create-project.adoc[Create a Project] guide for steps.
 +
-After completing the steps for setting up your project, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. Something like the following:
+After completing the steps for setting up your project, you will have a valid `config.yml` file in a `.circleci` folder at the root of your repository. Something like the following:
 +
 [,yaml]
 ----
@@ -295,7 +295,7 @@ curl -X GET https://circleci.com/api/v2/project/{project-slug}/pipeline
   --header "Circle-Token: $CIRCLE_TOKEN" \
 ----
 +
-You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
+You will likely receive a long string of unformatted JSON. After formatting, it will look similar to the following example:
 +
 [,json]
 ----
@@ -438,7 +438,7 @@ curl -X GET https://circleci.com/api/v2/project/{project-slug} \
   --header "Circle-Token: $CIRCLE_TOKEN" \
 ----
 
-. You will receive unformatted JSON. Once formatted it should look similar to the example shown below:
+. You will receive unformatted JSON. Once formatted it will look similar to the example shown below:
 +
 [,json]
 ----
@@ -461,7 +461,7 @@ Notice in the example above that you will receive very specific information abou
 
 Much like the Get a project API request described in the previous example, the link:https://circleci.com/docs/api/v2/index.html#operation/getJobDetails[Get job details] API request enables you to return specific job information. You can retrieve this information from the CircleCI API by making a single API request.
 
-Retrieving job information can be very useful when you want information about how your job performed. You can learn what resources were used (for example, pipeline, executor type) and the time it took for the job to finish.
+Retrieving job information can be useful when you want information about how your job performed, for example, resources used and the time it took for the job to finish.
 
 [#get-job-details-steps]
 ==== Steps
@@ -575,7 +575,7 @@ curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/arti
 --header "Circle-Token: $CIRCLE_TOKEN"
 ----
 +
-You should get a list of artifacts back if the job you selected has artifacts associated with it. Below is an extract from the output when requesting artifacts for a job that builds these docs:
+You will get a list of artifacts back if the job you selected has artifacts associated with it. Below is an extract from the output when requesting artifacts for a job that builds these docs:
 +
 [,json]
 ----
@@ -712,7 +712,7 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 * `success_rate` - The ratio of successful runs (only those with a "success" status) over the total number of runs (any status) in the aggregation window.
 * `total_runs` - The total number of runs performed.
 * `failed_runs` - The number of runs that failed.
-* `successful_runs` - The number of runs that were successful.
+* `successful_runs` - The number of successful runs.
 * `throughput` - The average number of builds per day.
 * `mttr` - The Mean Time to Recovery (MTTR). This is the average time it takes to get a failed CI build back to a "success" status.
 * `duration_metrics` - A collection of specific metrics and measurements that provide the duration of the workflow. This includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`.
