@@ -8,13 +8,8 @@ This quickstart guide covers integrating a Node.js project with CircleCI. This g
 [#prerequisites]
 == Prerequisites
 
-<<<<<<< ben/typos-getting-started-section
 * xref:first-steps.adoc[A CircleCI account]
 * A Node.js project located in a supported VCS
-=======
-* xref:first-steps.adoc[A CircleCI Account].
-* A Node.JS project located in a supported VCS.
->>>>>>> main
 
 [#configuration-walkthrough]
 == Configuration walkthrough
