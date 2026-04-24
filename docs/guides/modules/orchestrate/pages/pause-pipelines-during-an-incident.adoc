@@ -46,6 +46,8 @@ image::guides:ROOT:block-all-new-work-org.png[Organization settings > Advanced >
 
 === 2. Cancel running work and disconnect the project
 
+TIP: If you already know a credential was compromised, begin rotating it now (step 4) **in parallel** with this step rather than waiting. Early rotation limits the window an attacker can use a leaked secret.
+
 The method for cancelling running work is different for different organization types. The three organization types are: `github`, `bitbucket`, and `circleci`. Check the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] to see which organization type you have.
 
 [tabs]
@@ -86,6 +88,7 @@ Align with your team so that stopping or blocking work is not unintentionally un
 
 For some integrations, _following_ a project can restore GitHub-side resources (such as webhook and deploy key) after the *Stop Building* option has been used. In this scenario there is no clear feedback in the CircleCI web app to show notify others if a teammate follows the project during an incident.
 
+[#secrets-and-credentials]
 === 4. Rotate or remove secrets
 
 Rotate or remove secrets that might have been exposed during the incident. This includes context variables, project variables, API tokens, SSH keys, and runner tokens.
