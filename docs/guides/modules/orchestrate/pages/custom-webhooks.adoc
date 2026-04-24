@@ -7,7 +7,7 @@ Setting up an inbound webhook (as a **custom webhook** trigger) on CircleCI enab
 
 == Introduction
 
-NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI server.
+NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI Server.
 
 Use **custom webhooks** to trigger a pipeline from anywhere that can emit a webhook or run a curl command.
 
