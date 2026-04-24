@@ -174,10 +174,10 @@ image::guides:ROOT:getting-started-guide-exp/quick-start-third-step.svg[section 
 
 *Discover CircleCI features to help debug and configure your builds.*
 
-image:guides:ROOT:getting-started-guide-exp/SSH-rerun.png[float=right]
+image:guides:ROOT:getting-started-guide-exp/ssh-rerun.png[float=right]
 [%hardbreaks]
 *Rerun with SSH*
-To access a job's build environment for troubleshooting, rerun the job with SSH access. The VM remains active for 10 minutes after the pipeline finishes. For full details, see the xref:execution-managed:SSH-access-jobs.adoc[Debug With SSH] page.
+To access a job's build environment for troubleshooting, rerun the job with SSH access. The VM remains active for 10 minutes after the pipeline finishes. For full details, see the xref:execution-managed:ssh-access-jobs.adoc[Debug With SSH] page.
 
 {empty} +
 {empty} +
