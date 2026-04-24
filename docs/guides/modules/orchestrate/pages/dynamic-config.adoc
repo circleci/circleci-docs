@@ -119,7 +119,7 @@ This scenario is also referred to as _config splitting_.
 
 // Diagram
 
-For an example of config splitting, see the xref:using-dynamic-configuration.adoc#pack-generate-validate[Dynamic Configuration How-To Guide].
+For an example of config splitting, see the xref:using-dynamic-configuration.adoc#pack-generate-validate[Dynamic Configuration] how-to guide.
 
 == Using dynamic configuration on CircleCI server
 
