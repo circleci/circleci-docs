@@ -3,5 +3,6 @@ To find your organization ID and organization slug, select **Org** in the Circle
 
 The organization ID is available to copy from the org settings overview page.
 
+.Organization ID available in organization settings
 image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]
 ****

@@ -84,7 +84,7 @@ NOTE: Deleting a budget immediately stops budget tracking and removes all budget
 
 == Advanced cost tracking
 
-For detailed cost analysis across multiple platforms, consider xref:integrate-with-vantage-for-cost-management.adoc[integrating with Vantage]. Vantage provides unified cost tracking for CircleCI alongside your cloud infrastructure and SaaS providers, with features including:
+For detailed cost analysis across multiple platforms, consider xref:integrate-with-vantage-for-cost-management.adoc[Integrating With Vantage]. Vantage provides unified cost tracking for CircleCI alongside your cloud infrastructure and SaaS providers, with features including:
 
 * Cost allocation by team, department, or business unit.
 * Historical cost trends and anomaly detection.
