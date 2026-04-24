@@ -135,6 +135,97 @@ Similarly, there are `RateLimit-Reset` and `X-RateLimit-Reset` headers that will
 
 NOTE: As we transition some APIs from one rate limit system to another, a different limit may appear in the `RateLimit` header compared to the `X-RateLimit` header. In these cases, the lower limit will be enforced.
 
+[#pagination]
+== Pagination
+
+Many CircleCI API v2 endpoints return paginated results to efficiently handle large datasets. Understanding how pagination works helps you retrieve complete result sets without overwhelming the API server.
+
+[#how-pagination-works]
+=== How pagination works
+
+The CircleCI API uses token-based pagination. When an API response contains more results than can be returned in a single request, the response includes a `next_page_token` field. Use this token in your next request to retrieve the following page of results.
+
+**Response structure:**
+
+All paginated endpoints return responses in this format:
+
+[,json]
+----
+{
+  "items": [
+    // Array of results
+  ],
+  "next_page_token": "string or null"
+}
+----
+
+* `items` - An array containing the current page of results
+* `next_page_token` - A token to use for retrieving the next page, or `null` if you have reached the final page
+
+[#paginating-through-results]
+=== Paginating through results
+
+To retrieve all pages of results, follow these steps:
+
+. Make your initial API request without a page token parameter.
+. Check the response for a `next_page_token` value.
+. If `next_page_token` is not `null`, make another request with the token as a query parameter.
+. Repeat until `next_page_token` is `null`.
+
+**Example: Paginating through workflow metrics**
+
+The following example demonstrates how to retrieve all pages of workflow metrics for a project. Start with an initial request:
+
+[,shell]
+----
+curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
+
+The response returns the first page of results:
+
+[,json]
+----
+{
+  "next_page_token": "abc123def456",
+  "items": [
+    {
+      "name": "build",
+      "metrics": {
+        "success_rate": 0.95,
+        "total_runs": 100
+      }
+    }
+  ]
+}
+----
+
+To retrieve the next page, add the `page-token` query parameter with the value from `next_page_token`:
+
+[,shell]
+----
+curl -X GET "https://circleci.com/api/v2/insights/{project-slug}/workflows?page-token=abc123def456" \
+  --header "Content-Type: application/json" \
+  --header "Accept: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
+
+Continue making requests with the updated `page-token` until the response contains `"next_page_token": null`, indicating you have reached the final page.
+
+[#endpoints-with-pagination]
+=== Endpoints with pagination
+
+The following API v2 endpoints support pagination:
+
+* Insights endpoints (workflow metrics, job timeseries, workflow runs)
+* Pipeline list endpoints
+* Project pipeline endpoints
+* Workflow job endpoints
+
+Refer to the link:https://circleci.com/docs/api/v2/[API v2 Reference documentation] for the complete list of paginated endpoints and their specific parameters.
+
 [#example-end-to-end-api-request]
 == Example end-to-end API request
 
