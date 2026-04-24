@@ -19,7 +19,7 @@ This document assumes that:
 == Why migrate to CircleCI?
 
 * *Scaling Concurrency*: You can run up to 80 concurrent jobs on our monthly Performance Plan or even more on a link:https://circleci.com/pricing/[Custom Plan]. Travis CI has capped concurrencies of 1, 2, 5, and 10 on each of their plans.
-* *Resource Classes*: xref:reference:ROOT:configuration-reference.adoc#resourceclass[VCPU and RAM] are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
+* *Resource Classes*: xref:reference:ROOT:configuration-reference.adoc#resourceclass[vCPU and RAM] are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
 * *Parallelization by Timing*: On top of running many jobs concurrently, CircleCI offers built-in xref:optimize:parallelism-faster-jobs.adoc[Test Splitting] across multiple environments by timing. This dramatically reduces wall clock time for large test suites to finish. You must implement this manually in Travis CI.
 * *Orbs*: Rather than proprietary integrations, CircleCI offers xref:orbs:use:orb-intro.adoc[Orbs], which are reusable, templated configuration. On top of connecting to services and tools, orbs can be used to standardize and templatize configuration for your team and organization as well. link:https://circleci.com/developer/orbs[Visit the registry].
 
@@ -96,7 +96,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 [#building-on-pushing-code]
 == Building on pushing code
 
-The example repository linked above is a basic application for creating, reading, updating, and deleting articles. The app is built with the `MERN` stack. There are tests present on the client as well as the REST API that run whenever code is pushed.
+The example repository linked above is a basic application for creating, reading, updating, and deleting articles. The app is built with the `MERN` stack. Tests are present on the client as well as the REST API that run whenever code is pushed.
 
 To get tests running for this example repository, the beginnings of a simple
 Travis Configuration might look like the following example:
