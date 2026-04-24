@@ -8,7 +8,7 @@ Pipelines are triggered in response to actions or scheduled to run at specific t
 [#run-a-pipeline-on-commit-to-your-code-repository]
 == Trigger a pipeline on a repo event
 
-Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:set-up-triggers.adoc[Set up triggers] page.
+Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:set-up-triggers.adoc[Set up Triggers] page.
 
 Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Pipelines** from the left hand sidebar in the CircleCI web app. This option is called *Dashboard* if you are using CircleCI server.
 
@@ -24,12 +24,14 @@ NOTE: This feature is not available for GitLab integrations.
 
 . Select btn:[Trigger Pipeline].
 +
+.Screenshot showing the trigger pipeline button in the CircleCI web app
 image::guides:ROOT:trigger-pipeline-app.png[Screenshot showing location on trigger pipeline button in the CircleCI web app]
 
 . Select the pipeline you want to trigger from the dropdown menu.
 
 . Select your config source branch. This tells CircleCI where (repo and branch) to find your pipeline config.
 +
+.Screenshot showing the trigger pipeline modal
 image::guides:ROOT:trigger-pipeline-app-modal.png[Trigger a pipeline modal in the CircleCI web app]
 
 . If your code is integrated via the **GitHub App or Bitbucket Data Center**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` step].
@@ -71,9 +73,10 @@ Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2
 .. Copy your project slug. Save this somewhere, you will need it later.
 
 . Find your definition ID:
-.. You should be in project settings if you are following these steps in sequence. If not see previous steps to get there. Select **Pipelines** in the sidebar.
+.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select **Pipelines** in the sidebar.
 .. In the column **Definition ID**, select btn:[Copy] for the correct pipeline. Save this somewhere, you will need it in the next step.
 +
+.Screenshot showing the pipeline definition ID copy button
 image::guides:ROOT:triggers/copy-pipeline-definition-id.png[screenshot showing location of pipeline definition ID copy button]
 
 . To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details. The key `parameters` is optional:
@@ -107,7 +110,7 @@ CircleCI server::
 
 . To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details, VCS can be `gh` or `bb`:
 +
-NOTE: If you are using CircleCI cloud, `<your-circleci-hostname>` should be `circleci.com`.
+NOTE: If you are using CircleCI cloud, `<your-circleci-hostname>` is `circleci.com`.
 +
 [source,shell]
 ----
@@ -141,10 +144,10 @@ NOTE: When triggering via `curl`, you must use a `POST` request with `content-ty
 curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
 ----
 
-For more information on using custom and outbound webhooks, see the xref:custom-webhooks.adoc[Custom webhooks] and xref:integration:outbound-webhooks.adoc[Outbound webhooks] pages. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
+For more information on using custom and outbound webhooks, see the xref:custom-webhooks.adoc[Custom Webhooks] and xref:integration:outbound-webhooks.adoc[Outbound Webhooks] pages. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
 
 ****
-When handling custom webhook requests, we use the "config branch" and "checkout branch" fields (`config_ref` and `checkout_ref` in the API) to determine which commits should be used for config and code checkout. This information is retrieved from link:https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit[GitHub's API].
+When handling custom webhook requests, we use the "config branch" and "checkout branch" fields (`config_ref` and `checkout_ref` in the API) to determine which commits are used for config and code checkout. This information is retrieved from link:https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit[GitHub's API].
 
 GitHub does not provide documented consistency guarantees for their API responses. There can be a brief delay (typically seconds) between when a commit is pushed and when the API returns the updated reference, especially with larger repositories. As a result, when fetching a branch reference, you may receive a slightly outdated commit rather than the most recent one.
 ****
@@ -156,8 +159,9 @@ NOTE: The ability to trigger a pipeline from VS Code with an _unversioned_ confi
 
 Trigger pipelines from VS Code to iterate on your CircleCI config without committing your trial and error changes to your version control system. Run and validate your full pipeline, or select jobs and workflows to validate individually. View the results of your test runs in the extension pipelines panel or in the CircleCI web app, just the same as any other pipeline.
 
-For full details, see the xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[VS Code extension overview].
+For full details, see the xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[VS Code Extension Overview].
 
+.Screenshot showing the VS Code extension run panel
 image::guides:ROOT:vscode-ext-config-test-run-crop.png[Screenshot showing the run panel]
 
 [#schedule-a-pipeline]
