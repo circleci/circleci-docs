@@ -28,6 +28,7 @@ Some notes about workspaces:
 
 By default, on CircleCI cloud, workspace storage duration is set to 15 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. Currently, 15 days is also the maximum storage duration you can set.
 
+.Diagram showing workspaces data flow
 image::guides:ROOT:workspaces.png[workspaces data flow]
 
 [#workspace-configuration]
