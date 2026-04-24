@@ -42,7 +42,7 @@ flowchart TD
     O --> P
 ----
 
-The integration works by having Vantage call the CircleCI Usage Export API to retrieve your usage data in credits. CircleCI tracks all usage by type (compute, storage, network, and other services), and the API provides structured reports broken down by organization, project, resource class, job name, and build status. Vantage converts your credit usage to USD based on the price per credit you configure, then displays the data in cost reports and dashboards where you can filter, group, and analyze spending trends.
+The integration works by having Vantage call the CircleCI Usage Export API to retrieve your usage data in credits. CircleCI tracks all usage by type (compute, storage, network, and other services), and the API provides structured reports broken down by organization, project, resource class, job name, and build status. Vantage converts your credit usage to USD based on the price per credit you configure. Vantage then displays the data in cost reports and dashboards where you can filter, group, and analyze spending trends.
 
 [#prerequisites]
 == Prerequisites
@@ -51,7 +51,6 @@ Before setting up the Vantage integration, ensure you meet the following require
 
 include::ROOT:partial$prerequisites/organization-admin.adoc[]
 * **Vantage account** with Organization Owner or Integration Owner role.
-* Your CircleCI **organization ID**. To find your organization ID select **Org** in the CircleCI web app sidebar.
 
 [#connect-vantage]
 == 1. Generate a CircleCI personal API token
@@ -68,8 +67,21 @@ To connect Vantage to CircleCI, you need to create a personal API token.
 . Select **Add API Token**.
 . Copy the token right away, as you cannot view it again.
 
+.Personal API tokens available in user settings
+image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your personal API token settings]
+
+== 2. Copy your organization ID
+
+The organization ID is a unique identifier for an organization. Follow these steps to find it in the CircleCI web app:
+
+include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Note the value or select the btn:[Copy] icon next to the organization ID.
+
+.Organization ID available in organization settings
+image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]
+
 [#configure-integration]
-== 2. Configure the integration in Vantage
+== 3. Configure the integration in Vantage
 
 Connect your CircleCI organization to Vantage using your personal API token and organization ID.
 
@@ -88,6 +100,9 @@ Connect your CircleCI organization to Vantage using your personal API token and 
 . Monitor the import status on the integrations page.
 
 Vantage begins importing your CircleCI usage data. The initial import includes up to six months of historical data, depending on your Vantage retention settings.
+
+.Vantage CircleCI integration settings
+image::guides:ROOT:vantage-integration.png[screenshot showing the Vantage CircleCI integration settings]
 
 [#reporting-capabilities]
 == 4. View cost reports

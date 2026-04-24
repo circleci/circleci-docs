@@ -29,6 +29,9 @@ NOTE: API tokens cannot be modified after they have been created. The only way t
 . After the token appears, copy and paste it to another location. You will
 not be able to view the token again.
 
+.Personal API tokens available in user settings
+image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your personal API token settings]
+
 To delete a personal API token, click the X in the *Remove* column and confirm
 your deletion in the dialog window.
 
