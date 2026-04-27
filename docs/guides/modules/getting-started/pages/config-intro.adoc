@@ -233,7 +233,7 @@ TIP: To increase your understanding, experiment with other xref:execution-manage
 
 The CircleCI workflow model is based on the orchestration of preceding jobs. As you saw in Part 3, the `requires` statement specifies that a job runs only if the previous job has been successfully executed.
 
-In Part 3, an event triggering the pipeline caused the `Hello-World` job to run immediately. The remaining jobs ran automatically, once `Hello-World` had completely successfully.
+In Part 3, an event triggering the pipeline caused the `Hello-World` job to run immediately. The remaining jobs ran automatically, once `Hello-World` had completed successfully.
 
 In this part, you will create a manual approval stage. This means subsequent jobs are executed only after you have approved the next step in the CircleCI app.
 
@@ -305,11 +305,11 @@ workflows:
 Most of this code will look familiar to you, with a couple of important points:
 
 * *Lines  52-56*: This creates a new job called _Hold-for-Approval_. The `type` specifies this is an _approval_, so you are required to manually approve this job in CircleCI. This is useful if you want to see whether the previous jobs have been executed as expected. For example, you can check that a website looks correct on a test server before making it live. Or you might want a human to perform checks before you execute any expensive jobs.
-* *Lines 57-59*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so will execute only once you have approved that previous job in CircleCI.
+* *Lines 57-59*: This final job - _Now-Complete_ - `requires` the successful completion of _Hold-for-Approval_, so it will execute only once you have approved that previous job in CircleCI.
 
 As before, commit and push your updated `config.yml` file.
 
-If you look at your pipeline in CircleCI, you will see the a purple status badge of *Needs Approval*.
+If you look at your pipeline in CircleCI, you will see a purple status badge of *Needs Approval*.
 
 .Job requires approval
 image::guides:ROOT:config-on-hold.png[Job requires approval]
@@ -335,7 +335,7 @@ Using what you have learned above, you are ready to create some powerful pipelin
 [#visual-studio-code-extension]
 ## VS Code extension
 
-If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc[CircleCI Extension] useful when writing, editing, navigating and troubleshooting your YAML Config files.
+If you use VS Code, you might find the official xref:toolkit:vs-code-extension-overview.adoc[CircleCI Extension] useful when writing, editing, navigating and troubleshooting your YAML config files.
 
 The extension provides real-time syntax highlighting and validation, assisted navigation through go-to-definition and go-to-reference commands, usage hints, and autocomplete suggestions.
 
