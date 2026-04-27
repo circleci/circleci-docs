@@ -10,7 +10,7 @@ Pipelines are triggered in response to actions or scheduled to run at specific t
 
 Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:set-up-triggers.adoc[Set up triggers] page.
 
-Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Pipelines** from the left hand sidebar in the CircleCI web app. This option is called *Dashboard* if you are using CircleCI server.
+Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Pipelines** from the left-hand sidebar in the CircleCI web app. This option is called *Dashboard* if you are using CircleCI server.
 
 .Pipeline running and visible on the dashboard
 image::guides:ROOT:pipelines-dashboard.png[Screenshot showing running pipelines in the CircleCI dashboard.]
@@ -141,7 +141,7 @@ NOTE: When triggering via `curl`, you must use a `POST` request with `content-ty
 curl -X POST -H "content-type: application/json" 'https://internal.circleci.com/private/soc/e/<your-URL>?secret=<your-secret>'
 ----
 
-For more information on using custom and outbound webhooks, see the xref:custom-webhooks.adoc[Custom webhooks] and xref:integration:outbound-webhooks.adoc[Outbound webhooks] pages. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details or how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[3rd party service like DockerHub].
+For more information on using custom and outbound webhooks, see the xref:custom-webhooks.adoc[Custom webhooks] and xref:integration:outbound-webhooks.adoc[Outbound webhooks] pages. Also, see our link:https://discuss.circleci.com/t/trigger-pipelines-from-anywhere-inbound-webhooks-now-in-preview/49864[community forum] for more details on how to use this functionality with a link:https://discuss.circleci.com/t/re-build-automatically-when-new-image-is-available-on-dockerhub/50350[third party service like DockerHub].
 
 ****
 When handling custom webhook requests, we use the "config branch" and "checkout branch" fields (`config_ref` and `checkout_ref` in the API) to determine which commits should be used for config and code checkout. This information is retrieved from link:https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#get-a-commit[GitHub's API].
