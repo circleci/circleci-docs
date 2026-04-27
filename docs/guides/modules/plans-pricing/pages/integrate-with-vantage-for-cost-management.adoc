@@ -79,6 +79,8 @@ Vantage begins importing your CircleCI usage data. The initial import includes t
 .Vantage CircleCI integration settings
 image::guides:ROOT:vantage-integration.png[screenshot showing the Vantage CircleCI integration settings]
 
+If you encounter any issues getting set up, see Vantage's link:https://docs.vantage.sh/vantage_account#integration-status[integration configuration docs for troubleshooting steps].
+
 [#reporting-capabilities]
 == 4. View cost reports
 
