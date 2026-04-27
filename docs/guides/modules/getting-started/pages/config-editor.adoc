@@ -17,6 +17,7 @@ The benefits of using the CircleCI configuration editor include:
 * Configuration tooltips specific to CircleCI configuration syntax.
 * Education of CircleCI concepts.
 
+
 [#getting-started-with-the-circleci-configuration-editor]
 == Getting started with the CircleCI configuration editor
 
@@ -27,7 +28,7 @@ To access the CircleCI configuration editor, select your desired branch from the
 .Configuration Editor Access
 image::guides:ROOT:config-editor-all-branches.png[Configuration Editor Access]
 
-In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three dot menu (meatball menu). Clicking this menu will allow you to open the configuration file.
+In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three-dots menu (meatball menu). Clicking this menu will allow you to open the configuration file.
 
 [#auto-completion]
 == Auto-completion
