@@ -4,7 +4,7 @@
 :experimental:
 :page-show-readtime: true
 
-Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository. In this guide you will learn how to set up a cross-repo trigger.
+Cross-repo triggers allow you to run a pipeline to build code from one repository when an event occurs in another repository. In this guide, you will learn how to set up a cross-repo trigger.
 
 == Introduction
 For this how-to guide we have chosen the following scenario:
@@ -233,13 +233,13 @@ workflows:
       - test-with-library
 ----
 
-In this example:
+ example:
 
 * When a tag like `v1.2.3` is created in the library repository, `<< pipeline.event.github.ref >>` will contain `refs/tags/v1.2.3`.
 * The configuration installs that specific version using `npm install @myorg/my-library@v1.2.3`.
 * The consumer tests then run against the exact library version that triggered the pipeline.
 
-Once you have created your config file, or decided to use our example, commit and push the config file to either your consumer repository or your centralized config repository. We recommend storing CircleCI configuration files in a `.circleci` directory in your repository but you can store them wherever you like as long as they have a `.yml` extension.
+Once you have created your config file, or decided to use our example, commit and push the config file to either your consumer repository or your centralized config repository. We recommend storing CircleCI configuration files in a `.circleci` directory in your repository, but you can store them wherever you like as long as they have a `.yml` extension.
 
 == 2. Set up your consumer project in CircleCI
 
@@ -347,7 +347,7 @@ $ git push origin v1.2.3
 ----
 
 . Open the link:https://app.circleci.com/[CircleCI web app, window="_blank"] in your browser and select your organization.
-. You should see a new pipeline running with the name you configured in step 2.
+. You should see a new pipeline running with the name you configured in step 3.
 . Select the running pipeline to view the workflow and jobs.
 . Verify that the library information is passed to your jobs by checking the job output.
 +
