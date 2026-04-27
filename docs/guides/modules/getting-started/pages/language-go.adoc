@@ -3,7 +3,7 @@
 :page-description: Learn how to set up a Go project with CircleCI.
 :experimental:
 
-This quickstart guide covers integrating a Go project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test, and deploy your Go project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
+This quickstart guide covers integrating a Go project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test, and deploy your Go project. After completing this quickstart, you can edit and optimize the config to fit the requirements of your project.
 
 [#prerequisites]
 == Prerequisites
@@ -136,7 +136,7 @@ workflows:
 [#conclusion]
 === 6. Conclusion
 
-You just set up a Go app to build on CircleCI, and deploy to Heroku. Check out your project's xref:orchestrate:pipelines.adoc[Pipeline Page] to see how this looks when building on CircleCI.
+You just set up a Go app to build on CircleCI and deploy to Heroku. Check out your project's xref:orchestrate:pipelines.adoc[pipeline page] to see how this looks when building on CircleCI.
 
 NOTE: *Deploy options?* For alternative deployment targets, search the link:https://circleci.com/developer/orbs[orb registry], where you will find integrations such as link:https://circleci.com/developer/orbs/orb/circleci/kubernetes[Kubernetes], link:https://circleci.com/developer/orbs/orb/circleci/aws-ecs[AWS ECS], link:https://circleci.com/developer/orbs/orb/circleci/gcp-gke[GCP GKE], and more.
 

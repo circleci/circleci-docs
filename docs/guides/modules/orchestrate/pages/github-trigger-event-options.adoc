@@ -12,7 +12,7 @@ CircleCI projects have pipelines and triggers.
 * Pipelines define the various CI/CD 'units' of work that make up your project.
 * Triggers define when and how to initiate a pipeline.
 
-Configure triggers under menu:Project settings[Project Setup]. You can configure triggers to initiate pipelines on a variety of events. This page focuses on events from GitHub, but you can find the full list of events that can trigger a pipeline on the xref:triggers-overview.adoc[Trigger a pipeline] page.
+Configure triggers under menu:Project settings[Project Setup]. You can configure triggers to initiate pipelines on a variety of events. This page focuses on events from GitHub, but you can find the full list of events that can trigger a pipeline on the xref:triggers-overview.adoc[Trigger a Pipeline] page.
 
 For a full list of GitHub trigger event options, see <<supported-trigger-options>>.
 
@@ -95,7 +95,7 @@ a| * `opened`
 |===
 --
 
-All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull request events] also have the following xref:reference:ROOT:variables.adoc#pipeline-values[pipeline values] populated:
+All pipelines triggered by link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request[pull request events] also have the following xref:reference:ROOT:variables.adoc#pipeline-values[Pipeline Values] populated:
 
 [NOTE]
 ====
@@ -173,10 +173,10 @@ workflows:
 
 Config orchestration tools are available from within your pipelines are as follows:
 
-* Use filters to control xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[when a workflow will run].
-* Use filters to control xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[when a job will run].
-* Use requires to control xref:reference:ROOT:configuration-reference.adoc#requires[job dependencies within workflows].
-* Use filters in steps to control what xref:reference:ROOT:configuration-reference.adoc#the-when-step[work is done within a job].
+* Use filters to control xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[When a Workflow Will Run].
+* Use filters to control xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[When a Job Will Run].
+* Use requires to control xref:reference:ROOT:configuration-reference.adoc#requires[Job Dependencies Within Workflows].
+* Use filters in steps to control what xref:reference:ROOT:configuration-reference.adoc#the-when-step[Work Is Done Within a Job].
 
 == Quickstart: Create a trigger to initiate a pipeline when a PR is opened
 
@@ -184,7 +184,7 @@ Config orchestration tools are available from within your pipelines are as follo
 
 * A CircleCI account. You can sign up for free at link:https://circleci.com/signup/[circleci.com].
 * Your CircleCI account must be linked to a GitHub account, either via GitHub OAuth or via the CircleCI GitHub App.
-* A GitHub App pipeline that you want to trigger when a PR is opened. You can find steps on the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines overview and setup] page.
+* A GitHub App pipeline that you want to trigger when a PR is opened. You can find steps on the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines Overview and Setup] page.
 
 === Steps
 
@@ -209,11 +209,11 @@ No, different trigger event options cannot be combined in a single trigger. Howe
 
 For example, by having the following:
 
-* One trigger with the trigger option "PR opened"
-* One trigger with the trigger option "PR merged"
+* One trigger with the trigger option "PR opened".
+* One trigger with the trigger option "PR merged".
 
 Your pipeline will trigger whenever a PR is opened or merged.
 
 == Next steps
 
-For more examples of using GitHub App trigger options, see the xref:orchestration-cookbook.adoc[Orchestration cookbook].
+For more examples of using GitHub App trigger options, see the xref:orchestration-cookbook.adoc[Orchestration Cookbook].
