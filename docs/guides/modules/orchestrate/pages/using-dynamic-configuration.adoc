@@ -160,7 +160,7 @@ workflows:
 
 * **Line 4**: Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
 * **Line 8**: Invoke the `continuation` orb so we can use it.
-* **Lines 11-20**: Define a job called `setup` that uses the default xref:execution-managed:executor-intro.adoc[`executor`] provided by the `continuation` orb as an . This job:
+* **Lines 11-20**: Define a job called `setup` that uses the default xref:execution-managed:executor-intro.adoc[`executor`] provided by the `continuation` orb. This job:
 ** Calls the xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout`] step to checkout code from the configured repository.
 ** Calls the xref:reference:ROOT:configuration-reference.adoc#run[`run`] step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
 ** Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
@@ -293,11 +293,11 @@ workflows:
           app_src_directory: 'tests'
 ----
 
-* **Line 4**: Invoke the Maven orb so we can use it's preconfigured jobs
+* **Line 4**: Invoke the Maven orb so we can use its preconfigured jobs
 * **Lines 8-14**: Define our two boolean pipeline parameters, the same parameters we have defined in the setup phase: `run-build-service-1-job` and `run-build-service-2-job`
 * Define three separate workflows to be conditionally executed based on the pipeline parameter values:
-** **Lines 22-28**: The `service-1` workflow triggers the `maven/test` job on the `service-1` directory, when the pipeline parameter value mapped to run-build-service-1-job is set to `true`. This will only happen if a change was made in the `serivce-1` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
-** **Lines 31-37**: The `service-2` workflow triggers the `maven/test` job on the `service-2` directory, when the pipeline parameter value mapped to run-build-service-2-job is set to `true`. This will only happen if a change was made in the `serivce-2` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
+** **Lines 22-28**: The `service-1` workflow triggers the `maven/test` job on the `service-1` directory, when the pipeline parameter value mapped to run-build-service-1-job is set to `true`. This will only happen if a change was made in the `service-1` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
+** **Lines 31-37**: The `service-2` workflow triggers the `maven/test` job on the `service-2` directory, when the pipeline parameter value mapped to run-build-service-2-job is set to `true`. This will only happen if a change was made in the `service-2` directory in the commit, as determined based on the path filtering in the setup phase (`config.yml`).
 ** **Lines 43-50**: The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the path filtering. This runs the `maven/test` job on the `tests` directory to run integration tests against the built services.
 
 [#generate-a-config-file-based-on-modified-files]
@@ -536,7 +536,7 @@ NOTE: `@shared.yml` exists to provide the required `version` key for the config 
 [#setup-config-2]
 === Setup configuration
 
-The setup configuration had a single job, `setup`, which has the following steps:
+The setup configuration has a single job, `setup`, which has the following steps:
 
 * Checkout code
 * Install the CircleCI CLI
@@ -708,8 +708,7 @@ workflows:
 
 We have used the path filtering orb to map configuration files with file paths so we know which configuration will be used when a change is made in a specific location. If a pipeline is triggered with no changes in any of our defined paths, CircleCI needs to know what to do next.
 
-One way to handle this scenario is to provide an alternative configuration using the `config-path` parameter (see line 27 <<setup-config-1,here>>). `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the path to modified files. In this example, we use a `no-updates.yml` configuration file. Another option would be to configure a step using the `finish` command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation#commands-finish[continuation orb].
-
+One way to handle this scenario is to provide an alternative configuration using the `config-path` parameter (see line 27 <<setup-config-1,here>>). `config-path` is ignored if a mapping is in place, but will be used if no mapping matches the path to modified files. In this example, we use a `no-updates.yml` configuration file. 
 
 [source,yaml]
 ----
