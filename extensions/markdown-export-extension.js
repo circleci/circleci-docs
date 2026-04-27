@@ -369,6 +369,16 @@ module.exports.register = function () {
       markdown = markdown.replace(/\n{3,}/g, '\n\n')
 
       /**
+       * ADD LLMS.TXT DIRECTIVE
+       *
+       * Add a blockquote at the top of each markdown file pointing agents
+       * to the llms.txt documentation index. This helps AI agents discover
+       * the complete documentation structure.
+       */
+      const llmsTxtDirective = `> For the complete documentation index, see [llms.txt](${siteUrl}/llms.txt)\n\n`
+      markdown = llmsTxtDirective + markdown
+
+      /**
        * CONSTRUCT OUTPUT PATH
        *
        * Create markdown file path matching the HTML structure.
