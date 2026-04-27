@@ -7,7 +7,7 @@ Vantage provides cost tracking and usage reporting for CircleCI, allowing you to
 
 == Introduction
 
-The Vantage integration enables you to:
+Vantage obtains your CircleCI usage data through the CircleCI Usage Export API. The Vantage integration enables you to:
 
 * Track CircleCI credit consumption and costs in a unified cost management platform.
 * Filter and group costs by organization, project, resource class, and job name.
@@ -17,32 +17,7 @@ The Vantage integration enables you to:
 
 Vantage automatically imports up to six months of historical data when you first connect, with ongoing imports following your configured retention settings.
 
-This guide provides instructions for connecting CircleCI to Vantage and configuring cost tracking and allocation.
-
-=== How the integration works
-
-The following diagram illustrates how Vantage pulls CircleCI usage data through the API for cost analysis:
-
-[mermaid]
-----
-flowchart TD
-    A[CircleCI pipelines consume credits to run jobs] --> D[CircleCI usage data<br/>tracked by usage type:<br/>Compute, Storage,<br/>Network, IP Ranges, DLC]
-
-    E[Vantage Platform] -->|Call| G[CircleCI Usage Export API<br/>createUsageExport]
-
-    D -.->|Available via API| G
-
-    G -->|Return structured data| I[Usage report in credits broken down by:<br/>Organization, Project,<br/>Resource Class, Job Name,<br/>Build Status, VCS info]
-
-    I --> J[Vantage<br/>Cost Reports & Dashboards]
-
-    J -->|Filter and group by| N[Organization<br/>Project<br/>Job Name<br/>Resource Class<br/>Build Status]
-    J -->|Allocate with| O[Virtual Tags<br/>Team, Department,<br/>Business Unit]
-    N --> P[Cost analysis to generate insights into:<br/>Spending Trends<br/>Usage Anomalies<br/>Budget Tracking]
-    O --> P
-----
-
-The integration works by having Vantage call the CircleCI Usage Export API to retrieve your usage data in credits. CircleCI tracks all usage by type (compute, storage, network, and other services), and the API provides structured reports broken down by organization, project, resource class, job name, and build status. Vantage converts your credit usage to USD based on the price per credit you configure. Vantage then displays the data in cost reports and dashboards where you can filter, group, and analyze spending trends.
+This guide provides instructions for connecting CircleCI to Vantage and configuring cost tracking and allocation. You can also read Vantage's docs on link:https://www.vantage.sh/blog/circle-ci-cost-management[connecting Vantage toCircleCI].
 
 [#prerequisites]
 == Prerequisites
@@ -94,12 +69,12 @@ Connect your CircleCI organization to Vantage using your personal API token and 
 * **CircleCI API token**: Paste the token you created in step 1.
 * **Organization ID**: Enter your organization ID.
 * **Description**: Provide a name to identify this connection (optional).
-* **Price per credit in USD**: Enter your organization's credit rate to convert CircleCI credits into US dollars. The standard rate is $.0006 per credit.
+* **Price per credit in USD**: Enter $0.0006, which is the standard price you pay (in US dollars) to purchase a credit. Customers with alternative pricing should alter this value to reflect their contracted rate.
 
 . Select **Connect Account**.
 . Monitor the import status on the integrations page.
 
-Vantage begins importing your CircleCI usage data. The initial import includes up to six months of historical data, depending on your Vantage retention settings.
+Vantage begins importing your CircleCI usage data. The initial import includes the last six months of historical data.
 
 .Vantage CircleCI integration settings
 image::guides:ROOT:vantage-integration.png[screenshot showing the Vantage CircleCI integration settings]
@@ -107,9 +82,9 @@ image::guides:ROOT:vantage-integration.png[screenshot showing the Vantage Circle
 [#reporting-capabilities]
 == 4. View cost reports
 
-After the integration completes, you can create cost reports to analyze your CircleCI spending.
+Once you have connected your CircleCI organization to Vantage, you can create cost reports to analyze your CircleCI spending.
 
-Cost reports in Vantage support filtering and grouping by:
+Cost reports in Vantage support filtering and grouping CircleCI costs by:
 
 * **Billing Account**: Your CircleCI organization name.
 * **Account**: CircleCI project name.
@@ -117,7 +92,7 @@ Cost reports in Vantage support filtering and grouping by:
 * **Category and Subcategory**: Resource class information.
 * **Resource**: Job name.
 
-Vantage automatically creates provider metadata tags for more granular filtering, including:
+Vantage automatically applies tags to costs for more granular filtering, including:
 
 * Organization ID.
 * Project ID.
@@ -139,14 +114,8 @@ Virtual Tags allow you to:
 * Create custom cost allocation rules based on CircleCI metadata.
 * Group costs by team, department, or business unit.
 * Track spending across multiple projects and organizations.
-* Set up alerts for unusual spending patterns.
 
 Refer to the link:https://docs.vantage.sh/virtual_tags[Vantage Virtual Tags documentation] for detailed configuration instructions.
-
-[#conclusion]
-== Conclusion
-
-You have successfully connected CircleCI to Vantage. Your CircleCI costs are now tracked alongside your other cloud and SaaS expenses, giving you a unified view of your infrastructure spending.
 
 [#next-steps]
 == Next steps
@@ -155,4 +124,3 @@ You have successfully connected CircleCI to Vantage. Your CircleCI costs are now
 * xref:plans-pricing:manage-budgets.adoc[Manage Budgets in CircleCI]
 * link:https://docs.vantage.sh/connecting_circle_ci[Connecting CircleCI to Vantage]
 * link:https://docs.vantage.sh/cost_reports[Create cost reports in Vantage]
-* link:https://www.vantage.sh/blog/circle-ci-cost-management[Read the Vantage CircleCI cost management announcement]
