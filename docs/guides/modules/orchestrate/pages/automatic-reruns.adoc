@@ -33,7 +33,7 @@ This section provides config examples to help you set up automatic reruns. The c
 
 To enable automatic reruns for a run step in a job, add the `max_auto_reruns` key to your step with a value between 1 and 5:
 
-NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. Also you must configure the `command` key for the step, you cannot use the short form run step configuration.
+NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. Also, you must configure the `command` key for the step; you cannot use the short form run step configuration.
 
 .CircleCI config to automatically retry a step up to 3 times if it fails
 [source,yaml]
@@ -152,7 +152,7 @@ CircleCI provides several ways to monitor and track automatic rerun activity.
 [#ui-indicators]
 === UI indicators
 
-Automatic workflow reruns are indicated on the pipelines page in the CircleCI web app. In the Trigger event column you sill see *Auto-rerun* followed by the rerun attempt number, as shown in the following screenshot.
+Automatic workflow reruns are indicated on the pipelines page in the CircleCI web app. In the Trigger event column you will see *Auto-rerun* followed by the rerun attempt number, as shown in the following screenshot.
 
 In this example the workflow is rerun twice out of a possible five attempts before it succeeds.
 
