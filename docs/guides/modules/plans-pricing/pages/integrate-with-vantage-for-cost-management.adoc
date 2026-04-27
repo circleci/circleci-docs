@@ -69,7 +69,7 @@ Connect your CircleCI organization to Vantage using your personal API token and 
 * **CircleCI API token**: Paste the token you created in step 1.
 * **Organization ID**: Enter your organization ID.
 * **Description**: Provide a name to identify this connection (optional).
-* **Price per credit in USD**: Enter $0.0006, which is the standard price you pay (in US dollars) to purchase a credit. Customers with alternative pricing should alter this value to reflect their contracted rate.
+* **Price per credit in USD**: Enter $0.0006, which is the standard price you pay (in US dollars) to purchase a credit. If you have an alternative pricing agreement, alter this value to reflect your contracted rate.
 
 . Select **Connect Account**.
 . Monitor the import status on the integrations page.
