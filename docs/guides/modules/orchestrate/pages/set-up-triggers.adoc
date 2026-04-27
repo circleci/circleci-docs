@@ -38,10 +38,10 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 . Select *Project Setup* in the sidebar.
 . Select btn:[GitHub trigger +] at the bottom of the pipeline box.
-. Choose when top run the pipeline by selecting an option from the *Event* menu.
+. Choose when to run the pipeline by selecting an option from the *Event* menu.
 +
 ****
-Using multiple pipelines and triggers, you can build different pipelines for different events, For example, you could have:
+Using multiple pipelines and triggers, you can build different pipelines for different events, for example, you could have:
 
 - A `build-test` pipeline that runs on every push. Select "All pushes".
 - A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
@@ -63,7 +63,7 @@ To add a custom webhook trigger, follow these steps:
 
 include::ROOT:partial$pipelines-and-triggers/custom-webhook-setup.adoc[]
 
-To verify your trigger is set up correctly, trigger an event from your third party system.
+To verify your trigger is set up correctly, trigger an event from your third-party system.
 --
 GitLab::
 +
