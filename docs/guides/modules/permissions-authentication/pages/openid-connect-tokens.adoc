@@ -121,7 +121,7 @@ jobs:
           region: ${AWS_REGION}
           # optional parameters
           profile_name: "OIDC-PROFILE"
-          role_session_name: "example-session"
+          role_session_name: ${CIRCLE_JOB}
           session_duration: "1800"
 ----
 +
@@ -152,7 +152,7 @@ jobs:
           region: ${AWS_REGION}
           # optional parameters
           profile_name: "OIDC-PROFILE"
-          role_session_name: "example-session"
+          role_session_name: ${CIRCLE_JOB}
           session_duration: "1800"
       - run:
         name: Log-into-AWS-ECR
