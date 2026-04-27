@@ -287,7 +287,8 @@ a| Provides additional details in output.
 a| Run test selection and analysis using locally stored impact data in the `.circleci/` directory, instead of fetching from the CircleCI API.
 
 |`--analyze-tests=impacted\|none\|all`
-|`none`
+|On `default` branch, `impacted`. +
+On all other branches, `none`.
 a| * `impacted` analyzes only tests whose impact data needs updating — either the test changed, or the files it covers changed.  This is the recommended value on your default branch. +
 * `none` skips analysis. +
 * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
