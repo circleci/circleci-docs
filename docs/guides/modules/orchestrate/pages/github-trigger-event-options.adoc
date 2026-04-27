@@ -3,7 +3,7 @@
 :page-description: A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
 :experimental:
 
-When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties. Using GitHub App trigger options you can trigger pipeline on non-push events.
+When you create a trigger for a GitHub App pipeline, you can choose from a set of trigger options that are based on link:https://docs.github.com/en/webhooks/webhook-events-and-payloads[GitHub App events] and their properties. Using GitHub App trigger options you can trigger a pipeline on non-push events.
 
 == Introduction
 
@@ -54,7 +54,7 @@ GitHub App triggers allow you to define the work to do (pipeline) when an event 
 * *PR merged*: Trigger a pipeline when a PR is merged only. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=closed#pull_request[GitHub docs for pull request closed].
 * *PR merged or closed*: Trigger a pipeline when a PR is merged or closed. When this option is selected, pipelines will run by default on the _base_ branch on the pull request, not on the _head_ branch.
 * *PR marked ready for review*: Trigger a pipeline when a PR is taken out of draft mode and marked ready for review. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=review_requested#pull_request[GitHub docs for pull request review requested].
-* *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labelled].
+* *"run-ci" label added to PR*: Trigger a pipeline when a label "run-ci" is added to a PR. See the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads?actionType=labeled#pull_request[GitHub docs for pull request labeled].
 * *Pushes to open non-draft PRs*: Trigger a pipeline when there is a push to a branch with an open PR that is not in draft mode.
 * *PR comment is exactly "run-ci"*: Trigger a pipeline when the comment "run-ci" is added to a pull request. This works for general PR comments (link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#issue_comment[`issue_comment` events]) and inline code comments (link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request_review_comment[`pull_request_review_comment` events]). It does *not* work for comments added in the top-level comment field when submitting a review (link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#pull_request_review[`pull_request_review` events]).
 
@@ -171,7 +171,7 @@ workflows:
 * `pipeline.event.name == "api"` ensures that the workflow runs when triggered manually via the web app or API.
 * `pipeline.event.name == "push"` ensures that the workflow runs when triggered via push to the default branch.
 
-Config orchestration tools are available from within your pipelines are as follows:
+The following config orchestration tools are available within your pipelines:
 
 * Use filters to control xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[When a Workflow Will Run].
 * Use filters to control xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[When a Job Will Run].
@@ -195,7 +195,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 .Trigger options under Project settings
 image::guides:ROOT:triggers/select-when-to-run.png[Set a trigger option for a project trigger]
-.
+
 ** Select the *Event Source* repository from the dropdown. This defaults to the config source repository. If you change it to a repository that does not match the pipeline's checkout source, you can specify a branch to be used for fetching config and code checkout.
 . Select btn:[Save].
 
