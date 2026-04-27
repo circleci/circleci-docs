@@ -242,6 +242,8 @@
 *** xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OIDC tokens with custom claims]
 *** xref:permissions-authentication:pull-an-image-from-aws-ecr-with-oidc.adoc[Pull an image from AWS ECR with OIDC]
 *** xref:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc[Pull an image from GCP Artifact Registry with OIDC]
+** Cloud provider authentication
+*** xref:integration:authorize-google-cloud-sdk.adoc[Authorize Google Cloud SDK]
 
 * Manage security and secrets
 ** Security features
@@ -274,11 +276,7 @@
 *** xref:config-policies:manage-contexts-with-config-policies.adoc[Manage contexts with config policies]
 
 * Integration
-** Integration features
-*** xref:integration:outbound-webhooks.adoc[Outbound webhooks]
-*** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound webhooks reference]
-*** xref:integration:notifications.adoc[Notifications]
-//*** xref:integration:slack-integration.adoc[Slack integration]
+** xref:integration:add-ssh-key.adoc[Add SSH Keys]
 ** VCS integration
 *** xref:integration:version-control-system-integration-overview.adoc[VCS, pipeline types, and feature support]
 *** xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth org]
@@ -286,17 +284,24 @@
 *** xref:integration:enable-checks.adoc[Enable GitHub Checks]
 *** xref:integration:oss.adoc[Build open source projects]
 
-** Third-party integrations
-*** xref:integration:jira-plugin.adoc[Connect with Jira]
-*** xref:integration:new-relic-integration.adoc[New Relic integration]
-*** xref:integration:datadog-integration.adoc[Datadog integration]
-*** xref:integration:sumo-logic-integration.adoc[Sumo Logic integration]
-*** xref:integration:open-telemetry-integration.adoc[OpenTelemetry integration]
-** How-to guides
-*** xref:integration:status-badges.adoc[Adding status badges]
-*** xref:integration:webhooks-airtable.adoc[CircleCI webhooks with Airtable]
-*** xref:integration:add-ssh-key.adoc[Add additional SSH keys]
-*** xref:integration:authorize-google-cloud-sdk.adoc[Authorize Google Cloud SDK]
+** Webhooks and events
+*** xref:integration:outbound-webhooks.adoc[Outbound Webhooks]
+*** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound Webhooks Reference]
+*** xref:integration:webhooks-airtable.adoc[Webhooks With Airtable]
+** Notifications and status
+*** xref:integration:notifications.adoc[Notifications]
+*** xref:integration:status-badges.adoc[Status Badges]
+
+
+** Monitoring and observability
+*** xref:integration:datadog-integration.adoc[Datadog Integration]
+*** xref:integration:new-relic-integration.adoc[New Relic Integration]
+*** xref:integration:sumo-logic-integration.adoc[Sumo Logic Integration]
+*** xref:integration:open-telemetry-integration.adoc[OpenTelemetry Integration]
+** Cost management
+*** xref:plans-pricing:integrate-with-vantage-for-cost-management.adoc[Vantage Integration]
+** Project management
+*** xref:integration:jira-plugin.adoc[Connect With Jira]
 
 * Developer toolkit
 ** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
