@@ -42,12 +42,12 @@ daily-run-workflow:
 [#create-the-new-schedule-trigger]
 == 2. Create the new schedule trigger
 
-Before you can create a new schedule, interpret the frequency your trigger needs to run from the `cron` expression. Once you have these details, create a schedule via either the API or project settings in the CircleCIweb app. Both methods are described below.
+Before you can create a new schedule, interpret the frequency your trigger needs to run from the `cron` expression. Once you have these details, create a schedule via either the API or project settings in the CircleCI web app. Both methods are described below.
 
 [#use-the-api]
 === a. Use the API
 
-NOTE: Setting up schedule trigger via the API is not yet available for GitHub App pipelines.
+NOTE: Setting up schedule triggers via the API is not yet available for GitHub App pipelines.
 
 Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
 
