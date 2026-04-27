@@ -7,7 +7,7 @@ Workflows each have an associated `workspace`. Workspaces are used to transfer d
 
 Use workspaces to pass along data that is unique to a workflow and is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by subsequent test jobs.
 
-For example, a project with a `build` job that builds a `.jar` file and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace.
+For example, consider a project with a `build` job that builds a `.jar` file and saves it to a workspace. The `build` job fans-out into concurrently running test jobs: `integration-test`, `unit-test`, and `code-coverage`, each of which can have access to the jar by attaching the workspace.
 
 [#overview]
 == Overview
@@ -22,7 +22,7 @@ Some notes about workspaces:
 * Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step.
 * The workspace is additive only: jobs may add files to the workspace but cannot delete files from the workspace.
 * Each job can only see content added to the workspace by the jobs that are upstream of it.
-* When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined.
+* When attaching a workspace, the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently, the order in which their layers are applied is undefined.
 * If multiple concurrent jobs persist the same filename, then attaching the workspace will error.
 * If a workflow is re-run, it inherits the same workspace as the original workflow. When re-running failed jobs, only the re-run jobs will see the same workspace content as the jobs in the original workflow.
 
@@ -97,7 +97,7 @@ For a live example of using workspaces to pass data between build and deploy job
 
 When using self-hosted runners, there is a network and storage usage limit included in your plan. There are certain actions related to workspaces that will accrue network and storage usage. Once your usage exceeds your limit, charges will apply.
 
-Retaining a workspace for a long period of time will have storage cost implications, therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
+Retaining a workspace for a long period of time will have storage cost implications; therefore, it is best to determine why you are retaining workspaces. In most projects, the benefit of retaining a workspace is that you can re-run your build from fail. Once the build passes, the workspace is likely not needed. Setting a low storage retention for workspaces is recommended if this suits your needs.
 
 You can customize storage usage retention periods for workspaces on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. For information on managing network and storage usage, see the xref:optimize:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
 
