@@ -3,13 +3,13 @@
 :page-description: Building and Testing with JavaScript and Node.js on CircleCI
 :experimental:
 
-This quickstart guide covers integrating a Node.JS project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Node.JS project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
+This quickstart guide covers integrating a Node.js project with CircleCI. This guide is designed to help you create a basic CircleCI configuration file to build, test and deploy your Node.js project. After completing this quickstart you can edit and optimize the config to fit the requirements of your project.
 
 [#prerequisites]
 == Prerequisites
 
-* xref:first-steps.adoc[A CircleCI Account].
-* A Node.JS project located in a supported VCS.
+* xref:first-steps.adoc[A CircleCI account]
+* A Node.js project located in a supported VCS
 
 [#configuration-walkthrough]
 == Configuration walkthrough
@@ -130,7 +130,7 @@ jobs:
 NOTE: Environment variables containing the necessary secrets such as `HEROKU_API_KEY` and `HEROKU_APP_NAME` can be set up in the CircleCI web app. Learn more about xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Environment Variables].
 
 [#create-a-workflow]
-=== 3. Create a workflow
+=== 4. Create a workflow
 
 A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:reference:ROOT:configuration-reference.adoc#workflows[Workflow Configuration].
 
@@ -141,7 +141,7 @@ workflows:
 ----
 
 [#add-jobs-to-the-workflow]
-=== 4. Add jobs to the workflow
+=== 5. Add jobs to the workflow
 
 Now that we have our workflow, `build_test_deploy`, we can use it to orchestrate the running of our `build_and_test` and `deploy` jobs. Refer to the xref:orchestrate:workflows.adoc[Using Workflows to Orchestrate Jobs] page for more details about orchestrating jobs with concurrent, sequential, and manual approval workflows.
 
@@ -160,7 +160,7 @@ workflows:
 ----
 
 [#conclusion]
-=== 5. Conclusion
+=== 6. Conclusion
 
 You just set up a Node.js app to build on CircleCI. Check out your project's xref:orchestrate:pipelines.adoc[Pipeline Page] to see how this looks when building on CircleCI.
 
