@@ -18,7 +18,7 @@ If you would rather jump to a full list of CircleCI `config.yml` options, see th
 * A CircleCI account. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 
-NOTE: This guide assumes you have xref:first-steps.adoc[Signed Up] and connected to GitHub, Bitbucket or GitLab
+NOTE: This guide assumes you have xref:first-steps.adoc[Signed up] and connected to GitHub, Bitbucket or GitLab
 
 include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
@@ -78,7 +78,7 @@ image:guides:ROOT:getting-started-guide-exp/create-project.png[float=right]
 *Create a project*
 In the CircleCI web app, select link:https://app.circleci.com/projects[Projects] from the sidebar. Select *Create project*, then select the repository you would like to connect from the dropdown.
 
-If you do not see the org selector in the top left corner to find the correct organization.
+If you do not see the org selector in the top left corner, navigate back to your user homepage to find the correct organization
 
 image:guides:ROOT:getting-started-guide-exp/select-config-gitlab.png[float=right]
 [%hardbreaks]
