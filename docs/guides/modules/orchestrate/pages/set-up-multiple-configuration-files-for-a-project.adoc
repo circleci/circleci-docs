@@ -15,17 +15,18 @@ Using multiple pipelines and triggers, you can build different pipelines for dif
 - A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
 - A `teardown-env` pipeline that runs when a PR is merged. Select "PR merged".
 
+.Screenshot showing trigger event options in the CircleCI web app
 image::guides:ROOT:triggers/select-when-to-run.png[Triggers page with Run on menu open]
 
-For a full list, see the xref:github-trigger-event-options.adoc[GitHub trigger event options] page.
+For a full list, see the xref:github-trigger-event-options.adoc[GitHub Trigger Event Options] page.
 
 [#prerequisites]
 == Prerequisites
 
 To use multiple pipelines and configs for a project in CircleCI, you will need to meet the following prerequisites:
 
-* A CircleCI account connected to your code in GitHub. You can link:https://circleci.com/signup/[sign up for free]. Using GitHub you can integrate your code through the CircleCI GitHub App or the GitHub OAuth app. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
-* A project set up in CircleCI that you want to configure with multiple, distinct pipelines defined with different configuration files. See the xref:getting-started:create-project.adoc[Create a project in CircleCI] page for steps to get your project set up in CircleCI.
+* A CircleCI account connected to your code in GitHub. You can link:https://circleci.com/signup/[sign up for free]. Using GitHub you can integrate your code through the CircleCI GitHub App or the GitHub OAuth app. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for more information.
+* A project set up in CircleCI that you want to configure with multiple, distinct pipelines defined with different configuration files. See the xref:getting-started:create-project.adoc[Create a Project in CircleCI] page for steps to get your project set up in CircleCI.
 
 [#add-additional-config-file]
 == 1. Add additional configuration files to your project repository
@@ -36,7 +37,7 @@ In this first step, create the configs you need to build your project. Config fi
 
 If your project is already set up in CircleCI, a configuration file will likely exist already. If you do not see a `.circleci` directory containing a YAML config, check which branch you are on. You may have set this up on a non-default branch during the set up process.
 
-Each of your configuration files represents the full set of commands necessary for a pipeline to execute so it should be complete with all necessary elements, for example, `version`, `jobs`, `workflows`, `commands`, `executors`, `orbs` etc.
+Each of your configuration files represents the full set of commands necessary for a pipeline to execute so it must be complete with all necessary elements, for example, `version`, `jobs`, `workflows`, `commands`, `executors`, `orbs` etc.
 
 NOTE: **Splitting up an existing configuration?** If you are following these steps because you have an existing project building on CircleCI and you want to split your configuration into multiple files, you can create the config files you need and move over parts of your existing configuration file to your new YAML files.
 
@@ -49,7 +50,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 . Select btn:[Add Pipeline].
 +
-NOTE: If you have not installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page. If you run into issues when installing the GitHub App, for example, App looks installed on GitHub, but does not show up on CircleCI, submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form].
+NOTE: If you have not installed the CircleCI GitHub App into your GitHub organization you will be prompted to do so. Installing the GitHub App is a one-time step that can be done by an organization admin. Once installed, further GitHub App pipelines can be setup without this installation step. For a guide to using both OAuth and GitHub App integrations, see the xref:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page. If you run into issues when installing the GitHub App, for example, App looks installed on GitHub, but does not show up on CircleCI, submit a request through link:https://forms.gle/aaVERZNNvzsDLJJ46[this form].
 . Complete the required form fields:
 ** Give your pipeline a descriptive name.
 ** Under *Config Source* select the repository where the config file is stored. This can be the same repository as your code or a different repository.
@@ -57,12 +58,13 @@ NOTE: If you have not installed the CircleCI GitHub App into your GitHub organiz
 ** Select your code source under **Checkout Source** -- this is the code that will be checked out when using the xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` step] in your config file.
 . Select btn:[Save]
 +
+.Screenshot showing the add pipeline form
 image::guides:ROOT:orchestrate-and-trigger/project-setup-pipelines.png[Add a pipeline]
 
 [#create-a-new-trigger]
 == 3. Create a new trigger
 
-Next, create a trigger for each pipeline you have created for your project. Alternatively, you can trigger a pipeline manually xref:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[via the web app].
+Next, create a trigger for each pipeline you have created for your project. Alternatively, you can trigger a pipeline manually xref:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[Via the Web App].
 
 . Following from the previous step, select btn:[GitHub trigger +] at the bottom of the pipeline box.
 . Choose when to run the pipeline by selecting an option from the *Event* menu.
@@ -70,9 +72,10 @@ Next, create a trigger for each pipeline you have created for your project. Alte
 
 . Select btn:[Save]
 +
+.Screenshot showing trigger event selection menu
 image::guides:ROOT:triggers/select-when-to-run.png[Triggers page with Run on menu open]
 
 [#conclusion]
 == Conclusion
 
-You should now have more than one CircleCI config file for your project, each config connected to a separate pipeline, and each pipeline connected to a trigger, as required.
+You now have more than one CircleCI config file for your project, each config connected to a separate pipeline, and each pipeline connected to a trigger, as required.
