@@ -2448,16 +2448,16 @@ workflows:
 
 The `job-groups` key lets you define named sets of jobs at the top level of your config. A job group can be invoked in a workflow just like a regular job, and optionally serialized as an atomic unit by adding `serial-group` to the invocation.
 
+[#group-name]
+=== *<``group-name``>*
+
+Each job group consists of the group's name as a key and a map as a value. The value map has the following attributes:
+
 [.table-scroll]
 --
 [cols="1,1,1,2", options="header"]
 |===
 | Key | Required | Type | Description
-
-| `<group-name>`
-| N
-| Map
-| A named group definition containing a `jobs` key.
 
 | `jobs`
 | Y
