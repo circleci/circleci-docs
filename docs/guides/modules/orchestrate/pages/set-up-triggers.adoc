@@ -11,11 +11,11 @@ A trigger kicks off a pipeline to run the workflows defined in your connected co
 
 == Add a trigger
 
-NOTE: Bitbucket Cloud triggers are created automatically when setting up a project and they cannot be edited. The only additional trigger types available for Bitbucket Cloud pipelines are xref:schedule-triggers.adoc[schedule triggers].
+NOTE: Bitbucket Cloud triggers are created automatically when setting up a project and they cannot be edited. The only additional trigger types available for Bitbucket Cloud pipelines are xref:schedule-triggers.adoc[Schedule Triggers].
 
-NOTE: **Using CircleCI server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available. CircleCI server pipelines are set up when a project is set up and cannot be edited. CircleCI server requires CircleCI configuration files to be stored in the same repository as your code at `.circleci/config.yml`.
+NOTE: **Using CircleCI Server?** The Pipeline and Trigger pages under Project Settings and pipeline and trigger add/edit functionality is **not** available. CircleCI Server pipelines are set up when a project is set up and cannot be edited. CircleCI Server requires CircleCI configuration files to be stored in the same repository as your code at `.circleci/config.yml`.
 
-The pipeline and trigger options and features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:integration:version-control-system-integration-overview.adoc[VCS integration overview] page.
+The pipeline and trigger options and features available to you depend on how your code is integrated and where it is stored. For a feature availability overview, see the xref:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page.
 
 Triggers are available in the following types:
 
@@ -30,8 +30,9 @@ To add a trigger for a pipeline, follow these steps:
 GitHub App::
 +
 --
-When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI can listen for push and pull request events. When a trigger is created, CircleCI has enough information to use the event data to determine if a pipeline should be triggered.
+When the CircleCI GitHub App is installed for your organization, GitHub starts to send events for the repositories you have granted access to. CircleCI can listen for push and pull request events. When a trigger is created, CircleCI has enough information to use the event data to determine if a pipeline is triggered.
 
+.Screenshot showing the add trigger form for GitHub App
 image::guides:ROOT:triggers/add-trigger-github.png[Add a trigger]
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
@@ -47,7 +48,7 @@ Using multiple pipelines and triggers, you can build different pipelines for dif
 - A `e2e-tests` pipeline, longer and more costly, that runs once when the PR is taken out of draft. Select "PR marked ready for review".
 - A `teardown-env` pipeline that runs when a PR is merged. Select "PR merged".
 
-For a full list, see the xref:github-trigger-event-options.adoc[GitHub trigger event options] page.
+For a full list, see the xref:github-trigger-event-options.adoc[GitHub Trigger Event Options] page.
 ****
 * The *Event Source* defaults to the repository associated with the pipeline. You can change the event source to a different repository if you wish. If you do change the event source so that it does not match the pipeline's config/checkout source an option will appear to specify which branch in the config/checkout source repository you wish to use for the trigger.
 . Select btn:[Save]
@@ -57,7 +58,7 @@ To verify your trigger is set up correctly, trigger an event from your repositor
 Custom webhook::
 +
 --
-Setting up a custom webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make a cURL request can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Triggers overview] page.
+Setting up a custom webhook trigger allows you to trigger pipelines from external services. Any service that can emit a webhook or make a cURL request can be set up in this way to trigger a pipeline. For more information, see the xref:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Triggers Overview] page.
 
 To add a custom webhook trigger, follow these steps:
 
@@ -69,15 +70,16 @@ GitLab::
 +
 --
 
-When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline should run, and if so, _which_ pipeline should be run.
+When a trigger is created, CircleCI registers a webhook with GitLab. Push events from GitLab are sent to CircleCI. CircleCI then uses the event data to determine _if_ a pipeline runs, and if so, _which_ pipeline runs.
 
 In addition to a pipeline, each trigger includes the webhook URL, and in this scenario, a CircleCI-created GitLab token. The webhook URL and GitLab token are used to securely register the webhook within GitLab in order to receive push events from your GitLab repository. You can view webhooks for a project in GitLab at menu:Settings[Webhooks].
 
+.Screenshot showing the add trigger form
 image::guides:ROOT:add-trigger.png[Add a trigger]
 
 To add a trigger for a pipeline, follow these steps:
 
-. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar
+. In the link:https://app.circleci.com/[CircleCI web app] select **Projects** in the sidebar.
 . Find your project in the list, select the ellipsis icon:more[Ellipsis menu icon] next to it and choose **Project Settings**.
 . Select **Triggers** in the sidebar.
 . Select btn:[Add Trigger].
@@ -88,9 +90,9 @@ To add a trigger for a pipeline, follow these steps:
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] (Not required for custom webhooks).
 +
 NOTE: For GitLab self-managed you can enter the URL for an instance you have previously set up with CircleCI. You will need to enter the relevant personal access token again here to authorize the connection.
-** Select your repository from the dropdown menu. This should match the repository your pipeline is connected to (not required for custom webhooks).
+** Select your repository from the dropdown menu. This must match the repository your pipeline is connected to (not required for custom webhooks).
 ** Choose your pipeline from the "Choose config to run" menu.
-** (Optional) You can configure trigger filters to configure the event types that will trigger the pipeline. For more information, see the xref:gitlab-trigger-options.adoc[GitLab trigger options] page.
+** (Optional) You can configure trigger filters to configure the event types that will trigger the pipeline. For more information, see the xref:gitlab-trigger-options.adoc[GitLab Trigger Options] page.
 . Select btn:[Save]
 +
 CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** requesting that you set up a webhook in GitLab. **You do not need to take action**. The webhook is set up automatically by CircleCI. This is a known issue and will be fixed.
@@ -112,17 +114,17 @@ To add a trigger for a pipeline, follow these steps:
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"] (Not required for custom webhooks).
 ** Provide the project HTTP access token you created above. Select btn:[Connect].
 ** Select the Trigger source repository
-. If you have not already done so, **create a `.circleci` directory to the root of your repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you should see the pipeline trigger for the first time on the CircleCI dashboard.
+. If you have not already done so, **create a `.circleci` directory to the root of your repository, then add a `config.yml` file in that directory**. When you commit this change in your repository, you will see the pipeline trigger for the first time on the CircleCI dashboard.
 +
 ****
 For help with creating a CircleCI `config.yml`, see the following pages:
 
-* xref:getting-started:hello-world.adoc[Hello world]
-* xref:toolkit:sample-config.adoc[Sample config]
-* xref:reference:ROOT:configuration-reference.adoc[Configuration reference]
+* xref:getting-started:hello-world.adoc[Hello World]
+* xref:toolkit:sample-config.adoc[Sample Config]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 ****
 
-Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you should see it running for the project within the CircleCI web app.
+Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you will see it running for the project within the CircleCI web app.
 --
 Scheduled::
 +
