@@ -24,7 +24,7 @@ Once you have identified jobs that need to run sequentially across your organiza
 
 . Choose a meaningful name for your serial group that represents the resource or process being controlled. Use pipeline values in your serial group name to create dynamic grouping patterns if needed.
 
-. Add the `serial-group` key to each job across your organization that should run in sequence, using the same value for all related jobs:
+. Add the `serial-group` key to each job across your organization that runs in sequence, using the same value for all related jobs:
 +
 [,yml]
 ----
@@ -107,6 +107,7 @@ You can manually release a serial group from the CircleCI web app to allow queui
 . Select the workflow name to view the workflow graph.
 . Select the serial group start block (with the key icon). A modal appears with information on the consequences of releasing the group. If you are happy to release the group, select btn:[Release serial group].
 +
+.Screenshot showing the serial group release modal
 image::guides:ROOT:serial-groups/serial-group-release-modal.png[Serial group release modal]
 
 ==== Cancel a workflow with a serial group job
@@ -115,7 +116,7 @@ You can cancel an entire workflow that contains serial group jobs. Cancelling a 
 
 . In the link:https://app.circleci.com/home[CircleCI web app], select your org.
 . Select *Pipelines* in the sidebar and locate your pipeline with a serial group in action.
-. Select the "Cancel Workflow" button to the right of the pipeline (icon:cancel[Cancel icon])
+. Select the "Cancel Workflow" button to the right of the pipeline (icon:cancel[Cancel icon]).
 . Confirm the cancellation when prompted.
 
 == Troubleshooting serial groups
@@ -124,7 +125,7 @@ You can cancel an entire workflow that contains serial group jobs. Cancelling a 
 
 If your job is skipped with a "not run" status, check the following:
 
-* Is another job from a newer pipeline (higher pipeline number) currently running or waiting in the same serial group?
+* Check if another job from a newer pipeline (higher pipeline number) is currently running or waiting in the same serial group.
 * Verify your pipeline number is not lower than a currently active pipeline using the same serial group.
 * Remember that the order protection mechanism automatically skips jobs from older pipelines to maintain queue integrity.
 
@@ -141,7 +142,7 @@ If jobs are running concurrently when you expected them to run in sequence, chec
 
 If your jobs are being canceled after waiting in the queue, check the following:
 
-. Are any of your jobs exceeding the five-hour maximum wait time?
+. Check if any of your jobs are exceeding the five-hour maximum wait time.
 . Investigate if upstream dependencies in your workflow are failing or taking too long.
 . Look for deadlock situations where jobs are waiting for each other to complete.
 
@@ -171,7 +172,7 @@ Serial groups can only be applied at the job level. You cannot configure an enti
 
 === No multiple keys in a single workflow
 
-Using identical serial group values multiple times within the same workflow can result in unexpected behaviour due to the way the jobs join the queue. Each serial group key within a workflow should be unique to prevent conflicts in the execution order.
+Using identical serial group values multiple times within the same workflow can result in unexpected behaviour due to the way the jobs join the queue. Each serial group key within a workflow must be unique to prevent conflicts in the execution order.
 
 === No selective lock release
 
