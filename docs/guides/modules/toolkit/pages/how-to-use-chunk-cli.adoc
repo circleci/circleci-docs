@@ -1,0 +1,259 @@
+= How to use the chunk CLI
+:page-platform: Cloud
+:page-description: How to use the chunk CLI to generate AI review prompts, run validations, manage cloud sidecars, and install AI agent skills.
+:experimental:
+
+This page describes how to use the main features of the chunk CLI.
+
+[#prerequisites]
+== Prerequisites
+
+* An installed and configured chunk CLI. See the xref:chunk-cli.adoc[Install and Configure the Chunk CLI] page.
+* A project initialized with `chunk init`, or a `.chunk/config.json` file with commands configured.
+
+[#generate-a-review-prompt]
+== Generate a team review prompt
+
+The `chunk build-prompt` command mines your GitHub pull request review history and uses Claude to generate a team-specific review prompt. The prompt captures your reviewers' patterns and preferences so that AI coding agents apply your team's standards when reviewing code.
+
+The generated prompt is saved to `.chunk/context/review-prompt.md` and is automatically used by the `chunk-review` skill.
+
+Run the following from your project directory:
+
+[source,console]
+----
+$ chunk build-prompt
+----
+
+By default, `chunk build-prompt`:
+
+* Targets the GitHub organization detected from your git remote
+* Analyzes the top five most active reviewers
+* Looks back three months from the current date
+
+You can customize this behavior with the following flags:
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
+|===
+|Flag |Example |Description
+
+|`--org`
+|`--org my-org`
+|Override the auto-detected GitHub organization.
+
+|`--repos`
+|`--repos api,web`
+|Comma-separated list of repositories to analyze. Defaults to all repositories in the organization.
+
+|`--top`
+|`--top 10`
+|Number of top reviewers to include. Default is five.
+
+|`--since`
+|`--since 2024-01-01`
+|Start date for the analysis window in `YYYY-MM-DD` format. Default is three months ago.
+
+|`--output`
+|`--output .chunk/context/review-prompt.md`
+|Path where the generated prompt is saved.
+|===
+--
+
+[#run-validation]
+== Run validation commands
+
+The `chunk validate` command runs the commands configured in your project's `.chunk/config.json`. Use it to verify your changes pass all quality checks before pushing.
+
+[source,console]
+----
+$ chunk validate
+----
+
+`chunk validate` caches results by file content hash. Unchanged files skip re-execution on subsequent runs.
+
+To run a specific named command:
+
+[source,console]
+----
+$ chunk validate <name>
+----
+
+Replace `<name>` with the name of the command as defined in `.chunk/config.json`.
+
+The following flags are available:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--list`
+|List all configured commands and their status.
+
+|`--dry-run`
+|Print what would run without executing.
+
+|`--force-run`
+|Ignore the cache and run all commands regardless of file changes.
+
+|`--sidecar-id <id>`
+|Run validation remotely in the specified cloud sidecar.
+|===
+--
+
+[#run-validation-in-a-sidecar]
+=== Run validation in a cloud sidecar
+
+To run validation in a CircleCI cloud environment instead of locally, pass a sidecar ID:
+
+[source,console]
+----
+$ chunk validate --sidecar-id <sidecar-id>
+----
+
+See the <<manage-sidecars,Manage cloud sidecars>> section for how to create and manage sidecars.
+
+[#manage-sidecars]
+== Manage cloud sidecars
+
+Cloud sidecars are CircleCI cloud environments where chunk runs your validation commands remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
+
+[#create-a-sidecar]
+=== Create a sidecar
+
+[source,console]
+----
+$ chunk sidecar create
+----
+
+chunk auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment on CircleCI.
+
+[#list-sidecars]
+=== List sidecars
+
+[source,console]
+----
+$ chunk sidecar list
+----
+
+[#ssh-into-sidecar]
+=== SSH into a sidecar
+
+[source,console]
+----
+$ chunk sidecar ssh
+----
+
+[#sync-files-to-sidecar]
+=== Sync local files to a sidecar
+
+[source,console]
+----
+$ chunk sidecar sync
+----
+
+[#exec-in-sidecar]
+=== Execute a command in a sidecar
+
+[source,console]
+----
+$ chunk sidecar exec <command>
+----
+
+[#install-skills]
+== Install AI agent skills
+
+The `chunk skill install` command installs chunk's skills into your AI coding agent (Claude Code, Cursor, or VS Code Copilot).
+
+[source,console]
+----
+$ chunk skill install
+----
+
+To see available skills and their current installation status:
+
+[source,console]
+----
+$ chunk skill list
+----
+
+The following skills are available:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Skill |Description
+
+|`chunk-review`
+|Reviews pull requests and diffs using your team's review standards from `.chunk/context/review-prompt.md`.
+
+|`chunk-sidecar`
+|Creates and manages cloud sidecar environments.
+
+|`chunk-testing-gaps`
+|Runs mutation testing to identify gaps in test coverage.
+
+|`debug-ci-failures`
+|Debugs CircleCI pipeline failures and identifies flaky tests.
+|===
+--
+
+After installation, you can invoke these skills directly in your AI coding agent. For example, in Claude Code, type `/chunk-review` to start a code review.
+
+[#configure-hooks]
+== Configure validation hooks
+
+Running `chunk init` adds hooks to `.claude/settings.json` that trigger `chunk validate` automatically at key points:
+
+* **PreToolUse hook**: Blocks `git commit` if validation fails, preventing bad code from being committed.
+* **Stop hook**: Runs validation when your Claude Code session ends, catching uncommitted changes.
+
+To add or update hooks without re-running the full initialization:
+
+[source,console]
+----
+$ chunk init --skip-validate
+----
+
+[#view-config]
+== View and set configuration
+
+To display the fully resolved chunk configuration for your project:
+
+[source,console]
+----
+$ chunk config show
+----
+
+To set a configuration value:
+
+[source,console]
+----
+$ chunk config set <key> <value>
+----
+
+Supported keys:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Key |Description
+
+|`model`
+|The default Claude model to use for `chunk build-prompt`.
+
+|`apiKey`
+|Your Anthropic API key. You can also set this with `chunk auth set anthropic`.
+|===
+--
+
+[#next-steps]
+== Next steps
+
+* xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI web app]
+* xref:chunk-cli.adoc[Install and Configure the Chunk CLI]

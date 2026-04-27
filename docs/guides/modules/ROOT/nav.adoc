@@ -314,6 +314,8 @@
 *** xref:toolkit:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
 *** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
 *** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
+*** xref:toolkit:chunk-cli.adoc[Install and configure the chunk CLI]
+*** xref:toolkit:how-to-use-chunk-cli.adoc[How to use the chunk CLI]
 ** APIs
 *** xref:toolkit:api-intro.adoc[API v2 intro]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]
