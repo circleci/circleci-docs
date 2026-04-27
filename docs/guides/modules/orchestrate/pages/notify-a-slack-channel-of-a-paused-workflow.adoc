@@ -19,7 +19,7 @@ Every CircleCI project requires a configuration file called xref:getting-started
 [#specify-a-version]
 === 1. Specify a version
 
-Every CircleCI `config.yml`` starts with the version key. This key is used to issue warnings about breaking changes.
+Every CircleCI `config.yml` starts with the version key. This key is used to issue warnings about breaking changes.
 
 [source,yaml]
 ----
@@ -46,9 +46,9 @@ TIP: When using an orb, it is a good idea to check the https://circleci.com/deve
 [#create-jobs]
 === 3. Create jobs
 
-Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or Virtual Machine. Learn more about jobs on the xref:orchestrate:jobs-steps.adoc[Jobs and Steps] page.
+Jobs are the building blocks of your config. Jobs are collections of steps, which run commands/scripts as required. All of the steps in the job are executed in a single unit, either within a fresh container or virtual machine. Learn more about jobs on the xref:orchestrate:jobs-steps.adoc[Jobs and Steps] page.
 
-This guide assumes you have jobs for testing and deploying your project. In the following sections these jobs are `test` and `deploy`.
+This guide assumes you have jobs for testing and deploying your project. In the following sections, these jobs are `test` and `deploy`.
 
 [#create-workflow]
 === 4. Create workflow
