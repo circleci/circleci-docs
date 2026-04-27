@@ -6,12 +6,12 @@
 
 NOTE: Schedule triggers are not currently available for GitLab and Bitbucket Data Center projects.
 
-By default, when a pipeline is triggered via schedule trigger each of its workflows will run . You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a pipeline is triggered via schedule. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
+By default, when a pipeline is triggered via schedule trigger each of its workflows will run. You can filter workflows in your `.circleci/config.yml` file with conditionals. The conditionals you set will control which workflows will run when a pipeline is triggered via schedule. These conditions can be set with built-in pipeline values, or through custom pipeline parameters. The examples below demonstrate various ways to set conditionals in your `.circleci/config.yml` file.
 
 [#schedule-using-built-in-pipeline-values]
 ## Schedule using built-in pipeline values
 
-One way to implement workflows filtering is by using pipeline values. The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`, however, the value of `pipeline.schedule.name` can be whatever you would like when using schedule triggers.
+One way to implement workflows filtering is by using pipeline values. The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`; however, the value of `pipeline.schedule.name` can be whatever you would like when using schedule triggers.
 
 ```yaml
 version: 2.1
@@ -91,7 +91,7 @@ For the full configuration sample, visit the link:https://github.com/zmarkan/And
 [#set-up-multiple-workflows-with-multiple-schedules]
 == Set up multiple workflows with multiple schedules
 
-The example below demonstrates three workflows scheduled with pipeline values. Two workflows will run on the same schedule (`daily_build`), and one will run on a different schedule (`weekly_build`).
+The example below demonstrates three workflows each scheduled with a different pipeline value: `daily_build`, `nightly_build`, and `weekly_build`:
 
 ```yaml
 version: 2.1
