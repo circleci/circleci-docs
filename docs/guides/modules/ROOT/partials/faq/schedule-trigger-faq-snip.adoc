@@ -32,10 +32,10 @@ CircleCI provides no guarantees about precision. A random delay of up to 10 minu
 
 === Why did my schedule trigger run later than expected?
 
-Pipelines triggered via schedule are not guaranteed to run at exactly the specified time. For example, when you express the schedule as 1 per-hour for 08:00 UTC, the schedule trigger will run once within the 08:00 to 09:00 UTC window. Note that it means that it is unlikely to run at 08:00 UTC exactly.
+Pipelines triggered via schedule are not guaranteed to run at exactly the specified time. For example, when you express the schedule as 1 per-hour for 08:00 UTC, the schedule trigger will run once within the 08:00 to 09:00 UTC window. Note that this means it is unlikely to run at 08:00 UTC exactly.
 
 However, subsequent runs of the schedule trigger will always be run on the same time as its previous run. In other words, if a previous schedule trigger ran at 08:11 UTC, the next runs should also be at 08:11 UTC.
 
 === Why can I not add a schedule trigger to my pipeline?
 
-Only GitHub OAuth, GitHub App and Bitbucket Cloud pipelines support schedule triggers. GitLab and Bitbucket Data Center pipelines do not support schedule triggers. If you set up a schedule trigger through menu:Project Settings[Triggers] and do not see your pipeline in the "Pipeline to run" menu, check your pipeline type is supported .
+Only GitHub OAuth, GitHub App and Bitbucket Cloud pipelines support schedule triggers. GitLab and Bitbucket Data Center pipelines do not support schedule triggers. If you set up a schedule trigger through menu:Project Settings[Triggers] and do not see your pipeline in the "Pipeline to run" menu, check your pipeline type is supported.
