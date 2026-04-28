@@ -334,7 +334,7 @@ jobs:
 [#job-name]
 === *<``job_name``>*
 
-Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
+Each job consists of the job's name as a key and a map as a value. A name must be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
 [.table-scroll]
 --
@@ -968,11 +968,10 @@ jobs:
 
 [#available-linux-machine-images-cloud]
 ==== Linux `machine` images
-
 *Specifying an image in your configuration file is strongly recommended.* CircleCI supports multiple Linux machine images that can be specified in the `image` field. For a full list of supported image tags, refer to the following pages in the Developer Hub:
 
-* https://circleci.com/developer/machine/image/ubuntu-2004[Ubuntu-2004]
 * https://circleci.com/developer/machine/image/ubuntu-2204[Ubuntu-2204]
+* https://circleci.com/developer/machine/image/ubuntu-2404[Ubuntu-2404]
 
 More information on the software available in each image can be found in our https://discuss.circleci.com/tag/machine-images[Discuss forum].
 
@@ -1110,7 +1109,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 If you do not specify a resource class, CircleCI uses a default value that can change. Specify a resource class instead of relying on a default.
 
-CAUTION: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+CAUTION: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue must pin their CPU count to their guaranteed CPU resources.
 
 NOTE: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
@@ -1405,7 +1404,7 @@ jobs:
 [#steps]
 == *`steps`*
 
-The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
+The `steps` setting in a job is a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
 [,yaml]
 ----
@@ -1507,7 +1506,7 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | `background`
 | N
 | Boolean
-| Whether or not this step should run in the background (default: false)
+| Whether or not this step run in the background (default: false)
 
 | `working_directory`
 | N
@@ -1611,13 +1610,13 @@ If `pipefail` is enabled, the pipeline's return status is the value of the last 
 - run: make test | tee test-output.log
 ----
 
-If `make test` fails, the `-o pipefail` option will cause the whole step to fail. Without `-o pipefail`, the step will always run successfully because the result of the whole pipeline is determined by the last command (`tee test-output.log`), which will always return a zero status.
+If `make test` fails, the `-o pipefail` option causes the whole step to fail. Without `-o pipefail`, the step always runs successfully because the result of the whole pipeline is determined by the last command (`tee test-output.log`), which always returns a zero status.
 
-NOTE: If `make test` fails the rest of pipeline will be executed.
+NOTE: If `make test` fails the rest of pipeline is executed.
 
 If you want to avoid this behaviour, you can specify `set +o pipefail` in the command or override the whole `shell` (see example above).
 
-In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
+We recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
 For more information, see the xref:guides:orchestrate:using-shell-scripts.adoc#[Using Shell Scripts] document.
 
@@ -1678,7 +1677,7 @@ The `when` attribute accepts the following values:
 
 `on_fail`:: The step runs only if one of the preceding steps failed (returns a non-zero exit code). Common uses of `on_fail` include storing diagnostic data to debug test failures, or running custom notifications about the failure, such as sending emails or triggering alerts.
 
-NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a *step has failed* (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
+NOTE: Some steps, such as `store_artifacts` and `store_test_results`, always run, even if a *step has failed* (returned a non-zero exit code) previously. However, `store_artifacts`, `store_test_results`, and the `when` attribute are not run if the job has been *killed* by a cancel request or has reached the runtime timeout limit.
 
 *Example:*
 
@@ -1695,7 +1694,7 @@ NOTE: Some steps, such as `store_artifacts` and `store_test_results` will always
 [#ending-a-job-from-within-a-step]
 ==== Ending a job from within a `step`
 
-A job can exit without failing by using `run: circleci-agent step halt`. However, if a step within the job is already failing then the job will continue to fail. This can be useful in situations where jobs need to conditionally execute.
+A job can exit without failing by using `run: circleci-agent step halt`. However, if a step within the job is already failing, the job continues to fail. This can be useful in situations where jobs need to conditionally execute.
 
 *Example:* `halt` is used to avoid running a job on the `develop` branch:
 
@@ -1816,7 +1815,7 @@ workflows:
 [#checkout]
 === *`checkout`*
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS you should not use this step as it configures git to checkout over SSH.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS, do not use this step as it configures git to checkout over SSH.
 
 [.table-scroll]
 --
@@ -1874,7 +1873,7 @@ jobs:
 
 [NOTE]
 ====
-In certain cases, we will fall back to a full checkout even though blobless was specified. This will occur if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed which contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
+In certain cases, CircleCI falls back to a full checkout even though blobless was specified. This occurs if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed, which contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
 ====
 
 If a downstream step requires those objects to exist for scanning or comparisons, a blobless clone can cause failures. In that case, you can specify a full checkout as shown in the following example:
@@ -1969,7 +1968,7 @@ Cache retention can be customized on the link:https://app.circleci.com/[CircleCI
 | `paths`
 | Y
 | List
-| List of directories which should be added to the cache
+| List of directories to add to the cache
 
 | `key`
 | Y
@@ -2036,7 +2035,7 @@ While choosing suitable templates for your cache `key`, keep in mind the followi
 
 * Cache saving is not a free operation. See the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
 * It takes time to upload the cache.
-* Best practice is to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every time a job is run.
+* Best practice is to have a `key` that generates a cache only if something actually changed, and avoid regenerating it every time a job is run.
 * Because caches are immutable, start all your cache keys with a version prefix `+v1-...+`. This lets you regenerate all your caches by incrementing the version in this prefix.
 
 *Examples:*
@@ -2120,13 +2119,13 @@ steps:
       key: v1-myapp-cache
 ----
 
-In this case, CircleCI restores cache `v1-myapp-cache-new` because it's the most recent match with the `v1-myapp-cache` prefix, even though the first key (`v1-myapp-cache`) matches exactly.
+In this case, CircleCI restores cache `v1-myapp-cache-new` because this is the most recent match with the `v1-myapp-cache` prefix, even though the first key (`v1-myapp-cache`) is an exact match.
 
 For more information on key formatting, see the `key` section of <<savecache,`save_cache` step>>.
 
 When CircleCI encounters a list of `keys`, it restores the cache from the first key that matches an existing cache. We recommend you use a more specific key first (for example, cache for exact version of `package-lock.json`) and more generic keys after (for example, any cache for this project). If no key matches an existing cache, CircleCI skips the step with a warning.
 
-You don't need to specify a path here because CircleCI restores the cache to the location where it originally saved it.
+A path does not need to be specified here because CircleCI restores the cache to the location where it originally saved it.
 
 *Example:*
 
@@ -2480,7 +2479,7 @@ For more information, see the xref:guides:orchestrate:controlling-serial-executi
 [#workflows]
 == *`workflows`*
 
-Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the xref:guides:orchestrate:workflows.adoc#[Using Workflows to Orchestrate Jobs] page.
+Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name must be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`. For more information, see the xref:guides:orchestrate:workflows.adoc#[Using Workflows to Orchestrate Jobs] page.
 
 '''
 
@@ -2500,7 +2499,7 @@ The Workflows `version` field is used to issue warnings for deprecation or break
 | `version`
 | Y if config version is `2`
 | String
-| Should currently be `2`
+| Must be `2`
 |===
 --
 
@@ -2570,7 +2569,7 @@ Specifies which triggers will cause this workflow to be executed. Default behavi
 | `triggers`
 | N
 | Array
-| Should currently be `schedule`.
+| Must be `schedule`.
 |===
 --
 
@@ -2694,7 +2693,7 @@ workflows:
 [#schedule-branches]
 ==== *`branches`*
 
-The `branches` key controls whether the _current_ branch should have a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch will only schedule a workflow using xref:guides:orchestrate:workflows.adoc#using-filters-in-your-workflows[Filters in Your Workflows] for the `main` branch.
+The `branches` key controls whether the _current_ branch has a schedule trigger created for it, where _current_ branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `main` branch only schedules a workflow using xref:guides:orchestrate:workflows.adoc#using-filters-in-your-workflows[Filters in Your Workflows] for the `main` branch.
 
 Branches can have the keys `only` and `ignore` which each map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the *entire* string.
 
@@ -2862,7 +2861,7 @@ The `serial-group` key is configurable per job, or at the job group invocation l
 
 The value of the `serial-group` key is a string that is used to group jobs together to run one after another. The key must meet the following requirements:
 
-* Must be less than or equal to (≤) 512 characters, once compiled.
+* Must be 512 characters or fewer when compiled.
 * Must not be blank.
 * Must consist of alphanumeric characters plus, `.`, `-`, `_`, `/`.
 
@@ -2922,7 +2921,7 @@ Jobs are run concurrently by default, so you must explicitly require any depende
 | `requires`
 | N
 | List
-a| A list of jobs that must succeed a specified status before the job starts. *Note*: When jobs you list as dependencies don't execute (due to filters, for example), CircleCI ignores them as dependencies for other jobs. However, if all dependencies of a job are filtered, that job doesn't execute either.
+a| A list of jobs that must succeed a specified status before the job starts. *Note*: When jobs you list as dependencies do not execute (due to filters, for example), CircleCI ignores them as dependencies for other jobs. However, if all dependencies of a job are filtered, that job doesn't execute either.
 
 Possible types of `requires` items:
 
@@ -3075,7 +3074,7 @@ workflows:
             - hold
 ----
 
-An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration devise.
+An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job must not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration device.
 
 '''
 
@@ -3129,7 +3128,7 @@ Expression-based job filters allow you to conditionally run jobs based on the fo
 * xref:variables.adoc#pipeline-values[Pipeline Values]
 * xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters]
 
-An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job should run.
+An expression-based job filter is a rule that is evaluated against pipeline values and parameters to decide whether a job runs.
 
 Using expression-based job filters is one way to optimize your pipelines. Optimizations include the following:
 
@@ -3244,8 +3243,8 @@ include::guides:ROOT:partial$using-expressions/operators.adoc[]
 
 The branches filter can have the keys `only` and `ignore`, which map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
 
-* Any branches that match `only` will run the job.
-* Any branches that match `ignore` will not run the job.
+* Any branches that match `only` run the job.
+* Any branches that match `ignore` do not run the job.
 * If you specify neither `only` nor `ignore`, the job runs on all branches.
 * If you specify both `only` and `ignore`, CircleCI checks `only` before `ignore`.
 
@@ -3364,12 +3363,12 @@ The `matrix` stanza allows you to run a parameterized job multiple times with di
 | `parameters`
 | Y
 | Map
-| A map of parameter names to every value the job should be called with
+| A map of parameter names to every value the job is called with
 
 | `exclude`
 | N
 | List
-| A list of argument maps that should be excluded from the matrix
+| A list of argument maps to exclude from the matrix
 
 | `alias`
 | N
@@ -3659,7 +3658,7 @@ CircleCI configuration supports expressions for dynamic value evaluation. Expres
 [#expressions-in-config-fields]
 === Expressions in configuration fields
 
-Configuration fields accept expressions either directly or as string values. When you provide a string value, you can use `<< >>` delimiters to mark a section of the string that should be interpreted as an expression.
+Configuration fields accept expressions either directly or as string values. When you provide a string value, you can use `<< >>` delimiters to mark a section of the string to be interpreted as an expression.
 
 You can write the expression in a configuration field as shown in the following example:
 

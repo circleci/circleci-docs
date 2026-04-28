@@ -1,8 +1,7 @@
 = Using the Linux VM execution environment
 :page-platform: Cloud, Server v4+
-:page-description: Learn how to configure a your jobs to run in the Linux VM execution environment using the machine executor.
+:page-description: Learn how to configure your jobs to run in the Linux VM execution environment using the machine executor.
 :experimental:
-
 You can run your jobs in the Linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
 
 Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful when you need full access to the network stack. For example, you can listen on a network interface or modify the system with `sysctl` commands.
@@ -47,22 +46,51 @@ jobs:
 --
 ====
 
-You can view the list of available images xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[In the Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI Server, the syntax is slightly different. The available Linux images are managed by your system administrator.
+You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI Server, the syntax is slightly different. The available Linux images are managed by your system administrator.
 
 [#available-linuxvm-resource-classes]
 == Available LinuxVM resource classes
 
 include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
+include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
+
 [#view-resource-usage]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+[#linux-vm-gen2-benefits]
+== Linux VM gen2
+
+Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
+
+[#performance-improvements]
+=== Performance improvements
+
+Using more modern compute, gen2 instances deliver up to 180% faster multi-threaded CPU performance compared to gen1 equivalents.
+
+These improvements are most noticeable in workloads that saturate multiple cores simultaneously — for example, parallel test runs, compilation steps, and image builds. On a per-resource-class basis, gen2 can be priced either higher or lower than its gen1 equivalent; see our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+
+[#using-gen2]
+=== Using gen2
+
+To use a gen2 resource class, specify a `large.gen2` or equivalent class in your job configuration:
+
+[,yaml]
+----
+version: 2.1
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2404:current
+    resource_class: large.gen2
+----
+
 [#pre-installed-software]
 == Pre-installed software
 
-The most up to date list of pre-installed software can be found on the link:https://discuss.circleci.com/tag/machine-images[Discuss] page.
+The most up-to-date list of pre-installed software can be found on the link:https://discuss.circleci.com/tag/machine-images[Discuss] page.
 
 If you are already using an image, you can verify all the packages that come pre-installed. Run the `apt list --installed` command as a step, like in the example below:
 
