@@ -126,7 +126,7 @@ The following are the system events that are logged. See `action` in the <<audit
 | Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
 
 | `scope`
-| If the target is owned by an account in the CircleCI domain model, the account field should be filled in with the account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
+| If the target is owned by an account in the CircleCI domain model, the account field is filled in with the account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
 
 | `success`
 | A flag to indicate if the action was successful.

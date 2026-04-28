@@ -102,7 +102,7 @@ kubectl exec -it -n "$namespace" "$PG_POD" -- bash
 psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port>
 ----
 
-You should be able to connect to your external PostgreSQL at this point. If not, resolve any issues before proceeding.
+You will be able to connect to your external PostgreSQL at this point. If not, resolve any issues before proceeding.
 
 TIP: You may use `helm upgrade ...` to restore your CircleCI Server instance to a running state.
 
