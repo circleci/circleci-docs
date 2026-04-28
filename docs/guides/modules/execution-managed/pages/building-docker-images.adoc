@@ -48,9 +48,15 @@ A remote Docker environment uses a **Linux VM machine** resource class that corr
 * `small` maps to `medium` (Linux VM).
 * `medium+` maps to `large` (Linux VM).
 
+Gen2 resource classes are also available for remote Docker (for example, `medium.gen2`). The `small.gen2` resource class is not supported for remote Docker; the smallest available size is `medium.gen2`.
+
+NOTE: Gen2 does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
+
 === Arm architecture
 
 Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
+
+NOTE: Gen2 resource classes are not currently available for Arm-based remote Docker.
 
 === Docker executor to Remote Docker (Linux/Arm Machine) mapping
 
@@ -74,6 +80,27 @@ Arm-based Docker jobs use an equivalent **Arm machine** resource class for remot
 | `xlarge` (Linux VM)
 | `2xlarge`
 | `2xlarge` (Linux VM)
+|===
+--
+
+==== x86 gen2 architecture
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Docker resource class
+| Remote Docker (Linux Machine) resource class
+| `medium.gen2`
+| `medium.gen2` (Linux VM)
+| `large.gen2`
+| `large.gen2` (Linux VM)
+| `xlarge.gen2`
+| `xlarge.gen2` (Linux VM)
+| `2xlarge.gen2`
+| `2xlarge.gen2` (Linux VM)
+| `2xlarge+.gen2`
+| `2xlarge+.gen2` (Linux VM)
 |===
 --
 
