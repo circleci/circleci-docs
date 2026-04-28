@@ -16,7 +16,7 @@ Test impact analysis runs only the tests impacted by your code changes, reducing
 
 Test impact analysis works well on test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
 
-Code coverage data is used to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because the coverage data cannot be collected and consolidated easily.
+Code coverage data is used to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because it is not straightforward to collect and consolidate the coverage data.
 
 == How it works
 
@@ -64,7 +64,7 @@ Before enabling test impact analysis, ensure you have completed the xref:getting
 
 == 1. Enable test impact analysis option in your `.circleci/test-suites.yml` file
 
-Update the testsuite from the getting started to include an `analysis` command and `test-impact-analysis` option, keep the `discover` and `run` commands in the config.
+Update the test suite from the getting started to include an `analysis` command and `test-impact-analysis` option, keep the `discover` and `run` commands in the config.
 
 Some starter configs are shown below. Choose the one for your test runner and copy/paste the `analysis: ...` line into `.circleci/test-suites.yml`.
 
@@ -73,7 +73,7 @@ Some starter configs are shown below. Choose the one for your test runner and co
 Vitest::
 +
 --
-Follow the instructions to add the link:https://github.com/circleci/vitest-circleci-coverage[vitest-circleci-coverage] plugin as a dev dependency.
+Follow the instructions to add the link:https://github.com/circleci/vitest-circleci-coverage[Vitest CircleCI Coverage] plugin as a dev dependency.
 
 Add the `analysis` command to your `.circleci/test-suites.yml`.
 
@@ -91,7 +91,7 @@ options:
 Jest::
 +
 --
-Follow the instructions to add the link:https://github.com/circleci/jest-circleci-coverage[jest-circleci-coverage] plugin as a dev dependency.
+Follow the instructions to add the link:https://github.com/circleci/jest-circleci-coverage[Jest CircleCI Coverage] plugin as a dev dependency.
 
 Add the `analysis` command to your `.circleci/test-suites.yml`.
 
@@ -109,7 +109,7 @@ options:
 Mocha::
 +
 --
-Follow the instructions to add the link:https://github.com/circleci/mocha-circleci-coverage[mocha-circleci-coverage] plugin as a dev dependency.
+Follow the instructions to add the link:https://github.com/circleci/mocha-circleci-coverage[Mocha CircleCI Coverage] plugin as a dev dependency.
 
 Add the `analysis` command to your `.circleci/test-suites.yml`.
 
@@ -127,7 +127,7 @@ options:
 pytest::
 +
 --
-Follow the instructions to add the link:https://github.com/circleci/pytest-circleci-coverage[pytest-circleci-coverage] plugin as a dev dependency.
+Follow the instructions to add the link:https://github.com/circleci/pytest-circleci-coverage[pytest CircleCI Coverage] plugin as a dev dependency.
 
 Add the `analysis` command to your `.circleci/test-suites.yml`.
 
@@ -158,7 +158,7 @@ options:
 RSpec::
 +
 --
-Follow the instructions to add the link:https://github.com/circleci/rspec-circleci-coverage[rspec-circleci-coverage] plugin as a dev dependency.
+Follow the instructions to add the link:https://github.com/circleci/rspec-circleci-coverage[RSpec CircleCI Coverage] plugin as a dev dependency.
 
 Add the `analysis` command to your `.circleci/test-suites.yml`.
 
@@ -204,9 +204,9 @@ $ circleci run testsuite "ci tests" --doctor
 
 [TIP]
 ====
-The `circleci run testsuite` CLI tooling should be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
+The `circleci run testsuite` CLI tooling is designed to be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
 
-The testsuite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
+The test suite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
 ====
 
 Once all checks pass, you can verify test impact analysis locally by inspecting the locally stored impact data in the `.circleci/` directory.
@@ -220,7 +220,8 @@ Remove the `--doctor` flag and add the following flags: `--local --select-tests=
 $ circleci run testsuite "ci tests" --verbose --local --select-tests=none --analyze-tests=impacted
 ----
 
-Then inspect the locally stored impact data in `.circleci/ci tests-impact.json` to see the mapping between tests and files. This is a JSON file with a form like:
+Then inspect the locally stored impact data in `.circleci/ci tests-impact.json` to see the mapping between tests and files. The impact data is a JSON file with a form like the following example:
+
 [source,json]
 ----
 {
@@ -286,27 +287,28 @@ a| Provides additional details in output.
 |`false`
 a| Run test selection and analysis using locally stored impact data in the `.circleci/` directory, instead of fetching from the CircleCI API.
 
-|`--analyze-tests=all\|impacted\|none`
-|`false`
-a| * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
-* `impacted` analyzes only impacted tests that need analyzing. +
+|`--analyze-tests=impacted\|none\|all`
+|On `default` branch, `impacted`. +
+On all other branches, `none`.
+a| * `impacted` analyzes only tests whose impact data needs updating — either the test changed, or the files it covers changed.  This is the recommended value on your default branch.
 * `none` skips analysis.
+* `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch.
 
-|`--select-tests=all\|impacted\|none`
+|`--select-tests=impacted\|none\|all`
 |`impacted`
-a| * `all` selects and runs all discovered tests, used to run the full test suite. +
-* `impacted` selects and runs only the tests impacted by a change. +
+a| * `impacted` selects and runs only the tests impacted by a change.
 * `none` skips running tests.
+* `all` selects and runs all discovered tests, used to run the full test suite.
 |===
 --
 
 == 4. Run in CI
 
-TIP: When adding the testsuite command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers.
+TIP: When adding the `testsuite` command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers.
 
 Use the `--select-tests` and `--analyze-tests` flags you used locally to verify analysis on your feature branch before merging into the default branch.
 
-.Example CircleCI test job configuration with testsuite command running analysis on a feature branch.
+.Example CircleCI test job configuration with `testsuite` command running analysis on a feature branch.
 [source,yaml]
 ----
 version: 2.1
@@ -323,7 +325,7 @@ jobs:
           path: test-reports
 ----
 
-IMPORTANT: Analysis should only run on the default branch, once verified, remove the flags to use the defaults or see <<set-up-examples>> to dynamically change flags.
+IMPORTANT: Analysis must only run on the default branch. Once verified, remove the flags to use the defaults or see the <<set-up-examples,Common setup examples>> section to dynamically change flags.
 
 === CI flags
 
@@ -338,19 +340,19 @@ IMPORTANT: Analysis should only run on the default branch, once verified, remove
 |`false`
 a| Provides additional details in output.
 
-|`--analyze-tests=all\|impacted\|none`
+|`--analyze-tests=impacted\|none\|all`
 |On `default` branch, `impacted`. +
 On all other branches, `none`.
-a| * `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch. +
-* `impacted` analyzes only tests impacted by a change. +
+a| * `impacted` analyzes only tests whose impact data needs updating — either the test changed, or the files it covers changed.  This is the recommended value on your default branch.
 * `none` skips analysis.
+* `all` analyzes ALL discovered tests. **Rarely needed** - only use when you want to rebuild impact data from scratch.
 
-|`--select-tests=all\|impacted\|none`
+|`--select-tests=impacted\|none\|all`
 |On `default` branch, `all`. +
 On all other branches, `impacted`.
-a| * `all` selects and runs all discovered tests, used to run the full test suite. +
-* `impacted` selects and runs only the tests impacted by a change. +
+a| * `impacted` selects and runs only the tests impacted by a change.
 * `none` skips running tests.
+* `all` selects and runs all discovered tests, used to run the full test suite.
 |===
 --
 
@@ -360,7 +362,7 @@ TIP: Depending on the test runner, the first run of analysis can take a long tim
 
 Once analysis has completed on the feature branch, restore the `.circleci/config.yml` back to its original state without the CLI flags and parallelism changes.
 
-.Example CircleCI test job configuration with testsuite command.
+.Example CircleCI test job configuration with `testsuite` command.
 [source,yaml]
 ----
 version: 2.1
@@ -378,7 +380,7 @@ jobs:
 
 Commit the restored `.circleci/config.yml` to your feature branch and push to your VCS. Follow your usual process to merge to your default branch.
 
-NOTE: The local impact JSON files generated from running the local CLI should not be checked in to VCS.
+NOTE: The local impact JSON files generated from running the local CLI must not be checked in to your VCS.
 
 === Verify in CI
 
@@ -386,11 +388,11 @@ After analysis completes on your feature branch, verify test impact analysis is 
 
 . In the CircleCI web app, navigate to your pipeline and open the test job.
 . Check the job was successful and analyzed all tests. A successful analysis run will output "Found n files impacting tests" for each test atom.
-. Modify a source file that appears in the impact data, then push. Only the tests that cover the modified file should be selected to run. Look for the "Selecting tests..." output in the job to confirm the correct tests were selected and the reason for selection.
+. Modify a source file that appears in the impact data, then push. Only the tests that cover the modified file are selected to run. Look for the "Selecting tests..." output in the job to confirm the correct tests are selected and the reason for selection.
 
 *Test impact analysis is now set up for your test suite*. Feature branches will run the tests impacted by code changes, and your default branch will first run all tests and then analyze the tests impacted by code changes.
 
-There are xref:#set-up-examples[other options] available if these defaults don't suit your project.
+Other options are available if these defaults do not suit your project. See the <<set-up-examples,Common setup examples>> section for more information.
 
 == Next steps
 
@@ -452,9 +454,9 @@ workflows:
 
 === Analyze impacted tests in a separate workflow in the same pipeline
 
-This approach runs analysis concurrently with your main workflow. This is useful if you need to avoid any possible additional latency on your main workflow.
+This approach runs analysis concurrently with your main workflow, which is useful if you need to avoid any possible additional latency on your main workflow.
 
-Only use this approach if analyzing impacted tests in a non-blocking job isn't sufficient.
+Only use this approach if analyzing impacted tests in a non-blocking job is not sufficient.
 
 .CircleCI configuration with separate workflows
 [source,yaml]
