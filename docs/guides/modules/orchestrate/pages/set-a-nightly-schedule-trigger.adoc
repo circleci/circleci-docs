@@ -71,5 +71,5 @@ You can view the build scheduling of this link:https://github.com/zmarkan/Androi
 [#next-steps]
 == Next steps
 
-- xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate scheduled workflows to schedule triggers]
-- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
+- xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate Scheduled Workflows to Schedule Triggers]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule Pipelines With Multiple Workflows]
