@@ -8,7 +8,7 @@ include::ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]
 [#overview]
 == Overview
 
-This document outlines the xref:using-gpu.adoc#linux-gpu[CircleCI Linux CUDA image] release, update, and deprecation policy and applies to our Linux CUDA images.
+This document outlines the xref:using-gpu.adoc#linux-gpu[CircleCI Linux CUDA Image] release, update, and deprecation policy and applies to our Linux CUDA images.
 
 [#release-policy]
 == Release policy
