@@ -1,0 +1,21 @@
+# Use job-groups to define a reusable set of jobs.
+# The group is expanded inline in the workflow without serialization.
+
+job-groups:
+  deploy-and-release:
+    jobs:
+      - deploy
+      - release:
+          requires:
+            - deploy
+
+workflows:
+  main-workflow:
+    jobs:
+      - build
+      - deploy-and-release:
+          requires:
+            - build
+      - notify:
+          requires:
+            - deploy-and-release

@@ -1,0 +1,5 @@
+* CircleCI organization administrator permissions:
+** If you have an organization of type `circleci` permissions are controlled through CircleCI, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page for more information.
+** If you have an organization of type `github` or `bitbucket` you must be an administrator in the connected GitHub or Bitbucket organization.
++
+include::ROOT:partial$tips/check-org-type.adoc[]
