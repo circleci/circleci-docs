@@ -86,7 +86,7 @@ Cost factors include:
 CircleCI uses object storage for:
 
 * **Build artifacts** - Files uploaded via `store_artifacts`.
-* **Test results** - JUnit XML files from `store_test_results`.
+* **Test results** - junit XML files from `store_test_results`.
 * **Caches** - Dependency caches from `save_cache`/`restore_cache`.
 * **Workspaces** - Data shared between jobs via `persist_to_workspace`/`attach_workspace`.
 * **Action logs** - Step output logs displayed in the UI.
