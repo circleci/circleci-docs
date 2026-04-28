@@ -54,7 +54,7 @@ To get a list of your Nomad clients, run the following command:
 $ kubectl exec -it <nomad-server-pod-ID> -- nomad node-status
 ----
 
-NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that were taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
+NOTE: `nomad node-status` reports both Nomad clients that are currently serving (status `active`) and Nomad clients that have been taken out of the cluster (status `down`). Therefore, you need to count the number of `active` Nomad clients to know the current capacity of your cluster.
 
 To get more information about a specific client, run the following command from that client:
 
@@ -145,7 +145,7 @@ $ nomad node-drain -enable -yes <node-id>
 
 To set up a mechanism for clients to shutdown, first enter `drain` mode, then wait for all jobs to be finished before terminating the client. You can also configure an link:https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html[ASG Lifecycle Hook] that triggers a script for scaling down instances.
 
-The script should use the commands in the section above to do the following:
+The script must use the commands in the section above to do the following:
 
 . Put the instance in drain mode.
 . Monitor running jobs on the instance and wait for them to finish.
