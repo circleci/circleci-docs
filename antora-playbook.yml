@@ -75,14 +75,7 @@ asciidoc:
     page-toclevels: 6
     idprefix: ""
     idseparator: "-"
-    # Smarter Testing testsuite subcommand attributes.
-    testsuite-version: 1.0.29638-d34fb36
-    testsuite-sha-darwin-arm64: 118c19fb77725c629d18de099b1d37a6c7d1a7695397f8e8732cf30e18d91f1b
-    testsuite-sha-darwin-amd64: c62d62879862785bf812a56c94cd95b3f3a6979d30971e2ed8ae679ddea01182
-    testsuite-sha-linux-amd64: 2e367d0afb8d5f8e1606dbfed2ec9e5bf60989a08501616abdda94bbcc9618ef
-    testsuite-sha-linux-arm: d749c9236bdbe0bf1ecc43040c06eebccec5ce493e884910b90a8e6f7489973c
-    testsuite-sha-linux-arm64: d3fcc1d3b6286ae27f61dce4cec1c81131805b86dd39f1ee2ac722da4fcbe65d
-    testsuite-sha-windows-amd64: e906027399899856088cb3b00c7b9eec0268fd643984bc50123d01637a8dd994
+    # Smarter Testing testsuite subcommand attributes are set by smarter-testing-checksum-update-extension.
   extensions:
   - '@asciidoctor/tabs'
   - ./extensions/theme-icon-extension.js
@@ -140,3 +133,4 @@ antora:
       - '*-dark.svg'
       - 'icons/*.svg'
   - require: ./extensions/llms-txt-generator-extension.js
+  - require: ./extensions/smarter-testing-checksum-update-extension.js

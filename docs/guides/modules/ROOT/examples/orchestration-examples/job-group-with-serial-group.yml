@@ -1,0 +1,22 @@
+# Use job-groups with serial-group to serialize an entire set of jobs as an
+# atomic unit. Only one pipeline can execute the group at a time across your org.
+
+job-groups:
+  deploy-and-release:
+    jobs:
+      - deploy
+      - release:
+          requires:
+            - deploy
+
+workflows:
+  main-workflow:
+    jobs:
+      - build
+      - deploy-and-release:
+          serial-group: << pipeline.project.slug >>/deploy-group
+          requires:
+            - build
+      - notify:
+          requires:
+            - deploy-and-release
