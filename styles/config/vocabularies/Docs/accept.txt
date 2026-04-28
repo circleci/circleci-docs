@@ -407,3 +407,4 @@ XCTest
 XQuartz
 Xvfb
 YAML
+Zstd
