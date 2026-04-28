@@ -258,7 +258,7 @@ kubectl exec -it -n "$namespace" "$MONGO_POD" -- bash
 mongo --username <username> --password --authenticationDatabase admin --host <external-mongodb-host> --port <external-mongodb-port>
 ----
 
-You should be able to connect to your external MongoDB at this point. If not, resolve any issues before proceeding.
+You must be able to connect to your external MongoDB at this point. If not, resolve any issues before proceeding.
 
 TIP: You may use `helm upgrade ...` to restore your CircleCI Server instance to a running state.
 
