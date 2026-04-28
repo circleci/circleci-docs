@@ -16,9 +16,9 @@ This page describes how to use the main features of the chunk CLI.
 
 The `chunk build-prompt` command mines your GitHub pull request review history and uses Claude to generate a team-specific review prompt. The prompt captures your reviewers' patterns and preferences so that AI coding agents apply your team's standards when reviewing code.
 
-The generated prompt is saved to `.chunk/context/review-prompt.md` and is automatically used by the `chunk-review` skill.
+The command saves the generated prompt to `.chunk/context/review-prompt.md`, which the `chunk-review` skill uses automatically.
 
-Run the following from your project directory:
+From your project directory:
 
 [source,console]
 ----
@@ -27,9 +27,9 @@ $ chunk build-prompt
 
 By default, `chunk build-prompt`:
 
-* Targets the GitHub organization detected from your git remote
-* Analyzes the top five most active reviewers
-* Looks back three months from the current date
+* Targets the GitHub organization detected from your git remote.
+* Analyzes the top five most active reviewers.
+* Looks back three months from the current date.
 
 You can customize this behavior with the following flags:
 
@@ -57,12 +57,12 @@ You can customize this behavior with the following flags:
 
 |`--output`
 |`--output .chunk/context/review-prompt.md`
-|Path where the generated prompt is saved.
+|Path where the command saves the generated prompt.
 |===
 --
 
 [#run-validation]
-== Run validation commands
+== Validate your changes
 
 The `chunk validate` command runs the commands configured in your project's `.chunk/config.json`. Use it to verify your changes pass all quality checks before pushing.
 
@@ -94,20 +94,20 @@ The following flags are available:
 |List all configured commands and their status.
 
 |`--dry-run`
-|Print what would run without executing.
+|Show the commands that would run, without executing them.
 
 |`--force-run`
 |Ignore the cache and run all commands regardless of file changes.
 
 |`--sidecar-id <id>`
-|Run validation remotely in the specified cloud sidecar.
+|Validate commands remotely in the specified cloud sidecar.
 |===
 --
 
 [#run-validation-in-a-sidecar]
-=== Run validation in a cloud sidecar
+=== Validate in a cloud sidecar
 
-To run validation in a CircleCI cloud environment instead of locally, pass a sidecar ID:
+To validate in a CircleCI Cloud environment instead of locally, pass a sidecar ID:
 
 [source,console]
 ----
@@ -119,7 +119,7 @@ See the <<manage-sidecars,Manage cloud sidecars>> section for how to create and 
 [#manage-sidecars]
 == Manage cloud sidecars
 
-Cloud sidecars are CircleCI cloud environments where chunk runs your validation commands remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
+Cloud sidecars are CircleCI Cloud environments where chunk validates your changes remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
 
 [#create-a-sidecar]
 === Create a sidecar
@@ -195,7 +195,7 @@ The following skills are available:
 |Creates and manages cloud sidecar environments.
 
 |`chunk-testing-gaps`
-|Runs mutation testing to identify gaps in test coverage.
+|Identifies test coverage gaps through mutation testing.
 
 |`debug-ci-failures`
 |Debugs CircleCI pipeline failures and identifies flaky tests.
@@ -209,8 +209,8 @@ After installation, you can invoke these skills directly in your AI coding agent
 
 Running `chunk init` adds hooks to `.claude/settings.json` that trigger `chunk validate` automatically at key points:
 
-* **PreToolUse hook**: Blocks `git commit` if validation fails, preventing bad code from being committed.
-* **Stop hook**: Runs validation when your Claude Code session ends, catching uncommitted changes.
+* **PreToolUse hook**: Blocks `git commit` if validation fails, preventing bad code from entering the repository.
+* **Stop hook**: Validates your changes when your Claude Code session ends, catching uncommitted changes.
 
 To add or update hooks without re-running the full initialization:
 
@@ -255,5 +255,9 @@ Supported keys:
 [#next-steps]
 == Next steps
 
-* xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI web app]
+* xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI Web App]
 * xref:chunk-cli.adoc[Install and Configure the Chunk CLI]
+
+:!page-platform:
+:!page-description:
+:!experimental:

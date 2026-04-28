@@ -7,10 +7,10 @@ The link:https://github.com/CircleCI-Public/chunk-cli[chunk CLI] is a developer 
 
 Some of the things you can do with the chunk CLI include:
 
-* Mine your team's GitHub pull request history to generate a team-specific review prompt for AI agents using `chunk build-prompt`
-* Run validation commands locally or in CircleCI cloud environments using `chunk validate`
-* Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`
-* Set up pre-commit and session-end hooks that automatically run validation in Claude Code using `chunk init`
+* Mine your team's GitHub pull request history to generate a team-specific review prompt for AI agents using `chunk build-prompt`.
+* Validate commands locally or in CircleCI Cloud environments using `chunk validate`.
+* Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`.
+* Set up pre-commit and session-end hooks that automatically validate in Claude Code using `chunk init`.
 
 NOTE: **chunk CLI vs Chunk by CircleCI.** The chunk CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
 
@@ -35,7 +35,7 @@ $ brew install CircleCI-Public/circleci/chunk
 [#verify-installation]
 === Verify the installation
 
-Confirm the chunk CLI is installed and check the version:
+Confirm the chunk CLI is working and check the version:
 
 [source,console]
 ----
@@ -86,7 +86,7 @@ Enter a GitHub personal access token with `repo` scope when prompted.
 [#check-auth-status]
 === Check authentication status
 
-To see which credentials are configured:
+To see which credentials you have configured:
 
 [source,console]
 ----
@@ -115,11 +115,11 @@ Run `chunk init` in your project directory to configure chunk for that project:
 $ chunk init
 ----
 
-`chunk init` does the following:
+`chunk init` performs these actions:
 
-* Detects your build, test, lint, and format commands
-* Creates a `.chunk/config.json` file with the detected commands
-* Generates hook configuration in `.claude/settings.json` for Claude Code
+* Detects your build, test, lint, and format commands.
+* Creates a `.chunk/config.json` file with the detected commands.
+* Generates hook configuration in `.claude/settings.json` for Claude Code.
 
 After initialization, `chunk validate` runs the detected commands and `chunk build-prompt` mines your GitHub PR history.
 
@@ -171,6 +171,10 @@ $ brew uninstall chunk
 [#next-steps]
 == Next steps
 
-* xref:how-to-use-chunk-cli.adoc#generate-a-review-prompt[Generate a team review prompt from your GitHub PR history]
-* xref:how-to-use-chunk-cli.adoc#run-validation[Run validation commands]
-* xref:how-to-use-chunk-cli.adoc#install-skills[Install AI agent skills]
+* xref:how-to-use-chunk-cli.adoc#generate-a-review-prompt[Generate a Team Review Prompt From Your GitHub PR History]
+* xref:how-to-use-chunk-cli.adoc#run-validation[Validate Your Changes]
+* xref:how-to-use-chunk-cli.adoc#install-skills[Install AI Agent Skills]
+
+:!page-platform:
+:!page-description:
+:!experimental:

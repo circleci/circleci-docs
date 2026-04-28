@@ -50,13 +50,13 @@
 *** xref:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up cross-repo triggers for library consumers]
 *** xref:orchestrate:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migrate scheduled workflows to schedule triggers]
 *** xref:orchestrate:schedule-triggers-with-multiple-workflows.adoc[Schedule triggers with multiple workflows]
-*** xref:orchestrate:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger]
+*** xref:orchestrate:set-a-nightly-schedule-trigger.adoc[Set an overnight schedule trigger]
 ** Control workflow execution
 *** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
-*** xref:orchestrate:skip-build.adoc[Skip CI, auto-cancel, and block new pipelines]
+*** xref:orchestrate:skip-build.adoc[Skip CI, auto-cancel, and block pipelines]
 *** xref:orchestrate:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization]
 *** xref:orchestrate:using-branch-filters.adoc[Using branch filters]
-*** xref:orchestrate:selecting-a-workflow-to-run-using-pipeline-parameters.adoc[Select a workflow to run using pipeline parameters]
+*** xref:orchestrate:selecting-a-workflow-to-run-using-pipeline-parameters.adoc[Select a workflow using pipeline parameters]
 *** xref:orchestrate:notify-a-slack-channel-of-a-paused-workflow.adoc[Notify a Slack channel of a paused workflow]
 ** Share data
 *** xref:orchestrate:workspaces.adoc[Use workspaces to share data between jobs]
@@ -100,7 +100,7 @@
 *** xref:permissions-authentication:pull-an-image-from-gcp-gar-with-oidc.adoc[Pull an image from GCP Artifact Registry with OIDC]
 *** xref:execution-managed:run-a-job-in-a-container.adoc[Run a job in a container on your machine with Docker]
 *** xref:execution-managed:docker-compose.adoc[Installing and using Docker Compose]
-*** xref:execution-managed:high-uid-error.adoc[Debugging container ID cannot be mapped to host ID error]
+*** xref:execution-managed:high-uid-error.adoc[Debug container ID-to-host ID mapping errors]
 *** xref:execution-managed:docker-to-machine.adoc[Migrating between the Docker machine executors]
 ** Image support policies
 *** xref:execution-managed:android-images-support-policy.adoc[Android images support policy]
