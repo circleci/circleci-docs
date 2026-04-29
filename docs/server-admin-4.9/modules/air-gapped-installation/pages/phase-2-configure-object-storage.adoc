@@ -188,7 +188,7 @@ Copy this `canary.txt` file to the root directory of the `circleci-data` bucket.
 image::guides:ROOT:s3-object-store/canary.png[Docker/Machine Agents]
 
 == 5. S3 bucket data tree
-After uploading all required binaries and files, S3 bucket structure will be as below - 
+After uploading all required binaries and files, S3 bucket structure will be as below -
 
 image::guides:ROOT:s3-object-store/dir_tree.png[Docker/Machine Agents]
 

@@ -7,7 +7,7 @@ With prerequisites installed, and object storage configured, you can now copy ov
 
 [#prepare-values-yaml]
 == 1. Prepare `values.yaml`
-The `values.yaml` file for installing CircleCI should be prepared according to the Create Helm Values section of the regular installation guide (xref:installation:phase-2-aws-core-services.adoc#create-helm-values[AWS], xref:installation:phase-2-gcp-core-services.adoc#create-helm-values[GCP]). Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
+Configure your `values.yaml` file for installing CircleCI Server by following the Create Helm Values section of the regular installation guide (xref:installation:phase-2-aws-core-services.adoc#create-helm-values[AWS], xref:installation:phase-2-gcp-core-services.adoc#create-helm-values[GCP]). Once this is complete, you will modify the fields listed in the steps below for air-gapped installation compatibility.
 
 === a. Configure global values
 
@@ -34,11 +34,11 @@ NOTE: If you are using a non-TLS installation for your Docker registry, visit th
 === b. Configure GitHub Enterprise
 In the `github` section of your `values.yaml` file, configure settings for your GitHub Enterprise installation.
 
-The `hostname` value should be the internal hostname of your GitHub enterprise installation. The `enterprise` value should be set to true.
+Set the `hostname` value to the internal hostname of your GitHub enterprise installation. Set the `enterprise` value to true.
 
 If this instance is not using TLS or self-signed certificates, make sure to set the `unsafeDisableWebhookSSLVerification: true` and `selfSignedCert: true` values.
 
-Additionally, an OAuth application and a personal access token should be set in GitHub Enterprise and values provided as shown below. For more information about this process, see the documentation for creating a GitHub OAuth application. For details, see the xref:installation:phase-1-aws-prerequisites.adoc#create-a-new-github-oauth-app[AWS] or xref:installation:phase-1-gcp-prerequisites.adoc#create-a-new-github-oauth-app[GCP] installation guide.
+Set an OAuth application and a personal access token in GitHub Enterprise and values provided as shown below. For more information about this process, see the documentation for creating a GitHub OAuth application. For details, see the xref:installation:phase-1-aws-prerequisites.adoc#create-a-new-github-oauth-app[AWS] or xref:installation:phase-1-gcp-prerequisites.adoc#create-a-new-github-oauth-app[GCP] installation guide.
 
 [source, yaml]
 ----
@@ -112,7 +112,7 @@ machine_provisioner:
   enabled: false
 ----
 
-When following these instructions to simply re-host agents in a partially air-gapped environment, you can configure the machine provisioner for Object Store as follows:
+When following these instructions to re-host agents in a partially air-gapped environment, you can configure the machine provisioner for object Store as follows:
 
 [source, yaml]
 ----

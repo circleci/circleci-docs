@@ -63,7 +63,7 @@ endif::env-aws[]
 [#create-a-vpc]
 == 2. Create a VPC
 
-NOTE: **Installing server locally?** you can skip this step, but you should ensure you follow the resourcing recommendation of using /18 CIDR blocks to ensure you have adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
+NOTE: **Installing server locally?** You can skip this step, but ensure you follow the resourcing recommendation of using /18 CIDR blocks to ensure you have adequate capacity for both your Kubernetes Cluster and the provisioning of Nomad clients to run your jobs.
 
 If you are installing server in the cloud, either AWS or GCP, you will need to create a new virtual private cloud (VPC).
 
@@ -86,19 +86,19 @@ We recommend you create a new VPC specifically for CircleCI Server and its compo
 
 *  **Subnet Provisioning**
 +
-For high availability, and to avoid potential outages, you should provision subnets using /18 CIDR blocks across multiple Availability Zones.
+For high availability, and to avoid potential outages, provision subnets using /18 CIDR blocks across multiple Availability Zones.
 
 
 [#create-a-kubernetes-cluster]
 == 2. Create a Kubernetes cluster
-CircleCI Server installs into an existing Kubernetes cluster. If you have not already created a cluster, you should do so next. Instructions for creating a cluster are provided below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
+CircleCI Server installs into an existing Kubernetes cluster. If you have not already created a cluster, do so now. Instructions for creating a cluster are provided below, or if you are installing locally, first consider the sizing, version, and permissions requirements.
 
 [#cluster-requirements]
 === Cluster requirements
 
 [#compute-resources]
 ==== Compute resources
-The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements:
+The application uses a large number of resources. Depending on your usage, your Kubernetes cluster must meet the following requirements:
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -204,7 +204,7 @@ gcloud container clusters create circleci-server \
   --subnetwork <SUBNETWORK>
 ----
 +
-NOTE: Your kube-context should get updated with the new cluster credentials automatically.
+NOTE: Your kube-context will be updated with the new cluster credentials automatically.
 +
 If you need to update your kube-context manually, you can by running the following:
 +
@@ -335,7 +335,7 @@ endif::env-gcp[]
 
 [#frontend-tls-certificates]
 == 5. Frontend TLS certificates
-By default, CircleCI Server creates self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
+By default, CircleCI Server creates self-signed certificates to get you started. In production, you must supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[Let's Encrypt] certificate authority, for example, can issue a free certificate using their link:https://certbot.eff.org/[Certbot] tool. The sections below cover using Google Cloud DNS and AWS Route 53.
 
 CAUTION: It is important that your certificate contains both your domain and the `app.*` subdomain as subjects. For example, if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
@@ -494,11 +494,11 @@ CircleCI Server 4.9 hosts build artifacts, test results, and other state object 
 
 * link:https://cloud.google.com/storage/[Google Cloud Storage]
 
-Any AWS S3 compatible object storage should work. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
+Any AWS S3 compatible object storage will work. Follow the instructions below to create a bucket and access method for AWS S3 or GCS.
 
 If you are installing locally rather than in AWS or GCP, follow the instructions in the xref:server-admin:air-gapped-installation:phase-2-configure-object-storage.adoc#[Air-gapped Installation] guide.
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing Server Behind a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage must be behind this proxy also. Otherwise, proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the xref:server-admin:installation:installing-server-behind-a-proxy.adoc#[Installing Server Behind a Proxy] guide.
 
 // Do not include in GCP page.
 ifndef::env-gcp[]
@@ -862,7 +862,7 @@ NOTE: You will need this when you configure your server installation later.
 $ aws iam create-access-key --user-name circleci-server
 ----
 +
-The result should look like this:
+The result will look like this:
 +
 [source, json]
 ----
