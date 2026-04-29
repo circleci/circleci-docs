@@ -17,7 +17,7 @@ NOTE: An nginx reverse proxy is placed in front of link:https://github.com/Kong/
 
 CAUTION: When using Amazon Certificate Manager (ACM), the name of the nginx service will be `circleci-proxy-acm` instead of `circleci-proxy`. If you have switched from some other method of handling your TLS certificates to using ACM, this change will recreate the load balancer and you will have to reroute your associated DNS records for your `<domain>` and `app.<domain>`.
 
-CAUTION: When using Nomad, clients and servers should be configured to use MTLS for secure communication.
+CAUTION: When using Nomad, configure clients and servers to use MTLS for secure communication.
 
 [#network-traffic]
 == Network traffic
@@ -101,15 +101,15 @@ It is recommended to scope the rule as closely as possible to allowed source IP 
 
 [#egress-common]
 === Egress
-You most likely want all of your instances to access internet resources. This requires allowing egress for UDP and TCP on port 53 to the DNS server within your VPC, and TCP ports 80 and 443 for HTTP and HTTPS traffic.
-Instances building jobs (that is, the Nomad clients and external VMs) also will likely need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, and should be allowed for all instances with the destination of the VM subnet and your VCS.
+In most cases, you want all of your instances to access internet resources. This requires allowing egress for UDP and TCP on port 53 to the DNS server within your VPC, and TCP ports 80 and 443 for HTTP and HTTPS traffic.
+Instances building jobs (that is, the Nomad clients and external VMs) also will need to pull code from your VCS using SSH (TCP port 22). SSH is also used to communicate with external VMs, and must be allowed for all instances with the destination of the VM subnet and your VCS.
 
 [#kubernetes-nodes]
 == Kubernetes nodes
 
 [#intra-node-traffic]
 === Intra-node traffic
-By default, the traffic within your Kubernetes cluster is regulated by networking policies. This should be sufficient to regulate the traffic between pods. No additional requirement are needed to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
+By default, the traffic within your Kubernetes cluster is regulated by networking policies, which is sufficient to regulate the traffic between pods. No additional requirement are needed to reduce traffic between Kubernetes nodes any further (it is fine to allow all traffic between Kubernetes nodes).
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
 
@@ -119,7 +119,7 @@ To make use of networking policies within your cluster, you may need to take add
 
 [#ingress-kubernetes]
 === Ingress
-If you are using a managed service, you can check the rules created for the traffic coming from the load balancers and the allowed port range. The standard port range for Kubernetes load balancers (30000-32767) should be all that is needed here for ingress. If you are using transparent load balancers, you need to apply the ingress rules listed for load balancers above.
+If you are using a managed service, you can check the rules created for the traffic coming from the load balancers and the allowed port range. The standard port range for Kubernetes load balancers (30000-32767) is sufficient for ingress. If you are using transparent load balancers, you need to apply the ingress rules listed for load balancers above.
 
 [#egress-kubernetes]
 === Egress

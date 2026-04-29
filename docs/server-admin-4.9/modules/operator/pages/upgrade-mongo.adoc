@@ -29,7 +29,7 @@ Alternatively, you can use the following instructions to manually upgrade your c
 
 ==== 1. Upgrade from MongoDB 3.6 to 4.0
 
-. Your `values.yaml` should contain the following snippet:
+. Your `values.yaml` contains the following snippet:
 +
 [source,yaml]
 ----
@@ -49,7 +49,7 @@ mongodb:
 
 . Run `helm upgrade` to update your installation.
 
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Be sure to replace `<password>` with your MongoDB root password.
 +
 [source,console]
 ----
@@ -57,7 +57,7 @@ $ kubectl exec -it mongodb-0 -- mongo -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "4.0" } )
 ----
 
-. You should get a `{ "ok" : 1 }` response from Mongo. Exit out of the MongoDB shell and pod.
+. You will receive a `{ "ok" : 1 }` response from MongoDB. Exit out of the MongoDB shell and pod.
 
 ==== 2. Upgrade from MongoDB 4.0 to 4.2
 
@@ -72,7 +72,7 @@ mongodb:
 
 . Run `helm upgrade` to update your installation.
 
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Be sure to replace `<password>` with your MongoDB root password.
 +
 [source,console]
 ----
@@ -80,7 +80,7 @@ $ kubectl exec -it mongodb-0 -- mongo -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "4.2" } )
 ----
 
-. You should get `{ "ok" : 1 }` again. Exit out of the shell and pod.
+. You will receive a `{ "ok" : 1 }` response from MongoDB again. Exit out of the shell and pod.
 
 ==== 3. Upgrade from MongoDB 4.2 to 4.4
 
@@ -95,7 +95,7 @@ mongodb:
 
 . Run `helm upgrade` to update your installation.
 
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Be sure to replace `<password>` with your MongoDB root password.
 +
 [source,console]
 ----
@@ -128,7 +128,7 @@ Alternatively, you can use the following instructions to manually upgrade your c
 
 ==== 1. Upgrade from MongoDB 4.4 to 5.0
 
-. Your `values.yaml` should contain the following snippet:
+. Your `values.yaml` contains the following snippet:
 +
 [source,yaml]
 ----
@@ -175,7 +175,7 @@ mongodb:
 
 . Run `helm upgrade` to update your installation.
 
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Note that MongoDB 5.0+ uses `mongosh` instead of `mongo`. (Be sure to replace `<password>` with your MongoDB root password.)
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Note that MongoDB 5.0+ uses `mongosh` instead of `mongo`. Be sure to replace `<password>` with your MongoDB root password.
 +
 [source,console]
 ----
@@ -183,7 +183,7 @@ $ kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
 ----
 
-. You should get an `{ "ok" : 1 }` response from MongoDB. Exit out of the MongoDB shell and pod.
+. You will receive a `{ "ok" : 1 }` response from MongoDB. Exit out of the MongoDB shell and pod.
 
 ==== 2. Upgrade from MongoDB 5.0 to 6.0
 
@@ -198,7 +198,7 @@ mongodb:
 
 . Run `helm upgrade` to update your installation.
 
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. (Be sure to replace `<password>` with your MongoDB root password.)
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Be sure to replace `<password>` with your MongoDB root password.
 +
 [source,console]
 ----
@@ -206,7 +206,7 @@ $ kubectl exec -it mongodb-0 -- mongosh -u root -p <password>
 db.adminCommand( { setFeatureCompatibilityVersion: "6.0" } )
 ----
 
-. You should get `{ "ok" : 1 }`` again. Exit out of the shell and pod.
+. You will receive a `{ "ok" : 1 }` response from MongoDB again. Exit out of the shell and pod.
 
 ==== 3. Upgrade from MongoDB 6.0 to 7.0
 
@@ -221,7 +221,7 @@ mongodb:
 
 . Run `helm upgrade` to update your installation.
 
-. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version (be sure to replace `<password>` with your MongoDB root password.)
+. Once the `helm upgrade` has completed and MongoDB has rolled, you will need to `exec` into the pod (with the root password handy) to modify the compatibility version. Be sure to replace `<password>` with your MongoDB root password.
 +
 CAUTION: MongoDB 7.0+ upgrade is one-way and cannot be downgraded.
 +
