@@ -43,7 +43,8 @@ To connect Finout to CircleCI, you need to create a personal API token.
 . Select **Add API Token**.
 . Copy the token right away, as you cannot view it again.
 
-#TODO insert screenshot#
+.Personal API tokens available in user settings
+image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your personal API token settings]
 
 == 2. Copy your organization ID
 
@@ -72,66 +73,33 @@ Connect your CircleCI organization to Finout using your personal API token and o
 
 . Select **Next**.
 
-#TODO insert screenshot#
+.Finout CircleCI integration settings
+image::guides:ROOT:finout-integration.png[screenshot showing the Finout CircleCI integration settings]
 
 == 4. Configure credit pricing
 
-Configure your CircleCI credit pricing to ensure accurate cost calculations. Finout calculates costs based on your usage data and the configured price per credit.
+Configure your CircleCI credit pricing to ensure accurate cost calculations. Finout calculates costs based on your usage data and the configured price per credit. Configure ongoing and historical pricing, as follows:
 
-. Enter your current price per credit in USD.
-. Enter the effective start date for this pricing.
+* Ongoing pricing. This is for your current usage but you can backdate this to the start of your contract.
+* Historical pricing for backfilling. This is an optional section that you can use if you have had different contracted USD per credit agreements over the time you have used CircleCI.
+
+. In the "Ongoing pricing" section, enter $0.0006, which is the standard price you pay (in US dollars) to purchase a credit. If you have an alternative pricing agreement, alter this value to reflect your contracted rate.
+. Select a start date for usage at this rate .
 . Optionally, add historical pricing periods for backfilling historical cost data:
 +
-* Select **Add pricing period**.
-* Enter the **Effective From** date.
-* Enter the **Effective To** date (leave blank if this is your current pricing).
+* Select **Add historical pricing**.
 * Enter the **Price per Credit** in USD.
+* Enter the **Effective From** date.
+* Enter the **Effective Until** date (leave blank if this is your current pricing).
 * Repeat for each historical pricing period (up to 13 months is recommended for comprehensive historical analysis).
+. Select **Next**.
 
-. Review your pricing configuration summary.
-. Select **Complete setup**.
-
-The standard CircleCI credit price is $0.0006 USD per credit. If you have a custom pricing agreement with CircleCI, use your contracted rate instead.
-
-#TODO insert screenshot#
+image::guides:ROOT:finout-credit-pricing.png[screenshot showing the Finout credit pricing configuration]
 
 Finout begins importing your CircleCI usage data. You will receive an email notification when the data sync is complete. The initial import can include up to 13 months of historical data based on your configured pricing periods.
 
-[#reporting-capabilities]
-== 5. View cost reports
+Review your pricing configuration summary and select **Complete setup**.
 
-Once you have connected your CircleCI organization to Finout, you can create cost reports to analyze your CircleCI spending.
-
-Cost reports in Finout support filtering and grouping CircleCI costs by:
-
-* **Organization**: Your CircleCI organization name.
-* **Project**: CircleCI project name.
-* **Workflow**: Workflow name.
-* **Job**: Individual job name.
-
-You can use these dimensions to allocate costs to specific teams, track spending by project, or identify optimization opportunities.
-
-#TODO insert screenshot#
-
-Refer to the link:https://docs.finout.io/[Finout documentation] for detailed cost report configuration instructions.
-
-[#budget-monitoring]
-== 6. Monitor budgets and anomalies
-
-Finout provides budget monitoring and anomaly detection capabilities to help you control CircleCI spending.
-
-Use these features to:
-
-* Set spending budgets for CircleCI at the organization or project level.
-* Receive alerts when costs exceed configured thresholds.
-* Detect unusual spending patterns and usage anomalies.
-* Include CircleCI costs in showback and chargeback reporting.
-
-Refer to the link:https://docs.finout.io/[Finout documentation] for detailed budget and anomaly detection configuration instructions.
-
-[#next-steps]
 == Next steps
 
-* xref:plans-pricing:credits.adoc[Learn About CircleCI Credits]
-* xref:plans-pricing:manage-budgets.adoc[Manage Budgets in CircleCI]
-* link:https://docs.finout.io/billing-integrations/data-and-engineering-platforms/connect-to-circleci[Connecting CircleCI to Finout]
+Refer to the link:https://docs.finout.io/[Finout documentation] for detailed guides on setting up cost tracking and reporting capabilities.
