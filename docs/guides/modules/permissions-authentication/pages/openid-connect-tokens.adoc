@@ -92,7 +92,7 @@ Now that you have set up your trusted identity provider and IAM role, you are re
 ====
 When using OIDC authentication, you *do not need to manually create or store AWS credentials files* in CircleCI. The `aws-cli/setup` command automatically handles the credential generation and configuration using the OIDC token.
 
-Orbs are reusable packages of YAML configuration that condense repeated pieces of configuration into a single line of code. In this case, the AWS CLI orb enables you to generate a temporary session token, AWS Access Key ID, and AWS secret access key with a single command in your configuration.
+Orbs are reusable packages of YAML configuration that condense repeated pieces of configuration into a single line of code. The AWS CLI orb enables you to generate a temporary session token, AWS Access Key ID, and AWS secret access key with a single command in your configuration.
 ====
 
 . In your `.circleci/config`, import the `aws-cli` orb.
@@ -105,7 +105,7 @@ orbs:
   aws-cli: circleci/aws-cli@5.4.1
 ----
 
-. Configure your job to run the `aws-cli/setup` command before interacting with any AWS services. You will need to provide the `aws-cli/setup` command with the `role_arn` associated with the role you have created in the step above along with your `region`, which is your AWS region.
+. Configure your job to run the `aws-cli/setup` command before interacting with any AWS services. Provide the `aws-cli/setup` command with the `role_arn` associated with the role you have created in the step above along with your `region`, which is your AWS region.
 +
 [source,yaml]
 ----
@@ -211,7 +211,7 @@ AWS STS now supports a dedicated condition key for CircleCI projects. Using this
 }
 ----
 
-NOTE: The `oidc.circleci.com/project-id` claim is used exclusively for trust policy evaluation during the initial authentication step and is not available as a session variable after the role is assumed.
+NOTE: The `oidc.circleci.com/project-id` claim is used for trust policy evaluation during the initial authentication step and is not available as a session variable after the role is assumed.
 
 *Option 2: Using the sub claim*
 
@@ -229,7 +229,7 @@ This uses https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_el
 [#limit-role-access-based-on-branch]
 ==== Limit role access based on branch
 
-You can also restrict access to specific branches. The following is an example of a trust policy that restricts the `AssumeRoleWithWebIdentity` action to any project pipelines running only on the `main` branch in the `my-org` GitHub organization and the CircleCI organization with the ID: `organization_id`. Note that the `sub` claim uses the `$CIRCLE_OIDC_TOKEN_V2` format.
+You can also restrict access to specific branches. The following is an example of a trust policy with restrictions. The `AssumeRoleWithWebIdentity` action is restricted to pipelines running only on the `main` branch in the `my-org` GitHub organization and the CircleCI organization with the ID `organization_id`. Note that the `sub` claim uses the `$CIRCLE_OIDC_TOKEN_V2` format.
 
 ```json
 {
@@ -352,6 +352,7 @@ Download::
 +
 --
 Download the configuration file once and commit this to your repository. You can name the file anything you like but best practice is to give it a descriptive name, for example, `gcp-config-dev.json`. You will reference this file in your CircleCI configuration.
+
 --
 ====
 
