@@ -272,7 +272,9 @@ You will need to have the following to continue your GCP OIDC setup:
 
 The steps in this section are based on Google Cloud Platform's link:https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring Workload Identity federation] documentation.
 
-To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider]. This is unique to your organization. The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
+To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider], which is unique to your organization.
+
+The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
 
 TIP: You can find your CircleCI organization ID by navigating to menu:Org[Overview] in the link:https://app.circleci.com/[CircleCI web app].
 
