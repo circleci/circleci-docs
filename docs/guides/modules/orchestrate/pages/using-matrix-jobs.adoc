@@ -8,7 +8,7 @@ Matrix jobs provide a way to run a job multiple times with arguments. Arguments 
 [#use-matrix-jobs-to-run-multiple-os-tests]
 == Use matrix jobs to run multiple OS tests
 
-In the following example, the `test` job is run across a Linux Docker container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job, different parameters are passed to set both the OS and the Node.js version:
+In the following example, the `test` job runs across a Linux Docker container, Linux VM, and macOS environments. It uses two different versions of Node.js. On each run of the `test` job, different parameters are passed to set the OS and Node.js version:
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
