@@ -303,6 +303,7 @@
 *** xref:integration:open-telemetry-integration.adoc[OpenTelemetry Integration]
 ** Cost management
 *** xref:plans-pricing:integrate-with-vantage-for-cost-management.adoc[Vantage Integration]
+*** xref:plans-pricing:integrate-with-finout-for-cost-management.adoc[Finout Integration]
 ** Project management
 *** xref:integration:jira-plugin.adoc[Connect With Jira]
 
