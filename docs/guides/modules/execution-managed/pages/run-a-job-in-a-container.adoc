@@ -43,7 +43,7 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 **Machine executor**
 
-You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
+You cannot use the machine executor in local jobs. The machine executor requires an extra VM to run its jobs.
 
 **Add SSH keys**
 

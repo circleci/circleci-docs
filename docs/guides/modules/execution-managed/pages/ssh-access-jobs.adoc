@@ -29,7 +29,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
 The "Rerun job with SSH" feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
 +
 .Screenshot showing the "Rerun job with SSH" option in the "Rerun" dropdown menu
-image::guides:ROOT:rerun-job-with-ssh.png[Screenshot showing rerun job with SSH option]
+image::guides:ROOT:rerun-job-with-SSH.png[Screenshot showing rerun job with SSH option]
 
 . To see the connection details, expand the *Enable SSH* section in the job output where you will see the SSH command needed to connect. The details are displayed again in the *Wait for SSH* section at the end of the job.
 +
@@ -62,7 +62,7 @@ For GitHub, run:
 +
 [,console]
 ----
-$ ssh git@github.com
+$ SSH git@github.com
 ----
 +
 Or, for Bitbucket, run:
@@ -119,12 +119,12 @@ $ ssh -v git@bitbucket.com
 +
 [,shell]
 ----
-debug1: Offering public key: /Users/me/.ssh/id_ed25519_github
+debug1: Offering public key: /Users/me/.SSH/id_ed25519_github
 <...>
 debug1: Authentication succeeded (publickey).
 ----
 +
-This sequence indicates that the key `/Users/me/.ssh/id_ed25519_github` is the one which your VCS accepted.
+This sequence indicates that the key `/Users/me/.SSH/id_ed25519_github` is the one which your VCS accepted.
 
 . Run the SSH command for your CircleCI job, but add the `-v` flag. In the output, look for one or more lines like this:
 +
@@ -133,13 +133,13 @@ This sequence indicates that the key `/Users/me/.ssh/id_ed25519_github` is the o
 debug1: Offering public key: ...
 ----
 
-. Make sure that the key which your VCS accepted (in our example, `/Users/me/.ssh/id_ed25519_github`) was also offered to CircleCI.
+. Make sure that the key which your VCS accepted (in our example, `/Users/me/.SSH/id_ed25519_github`) was also offered to CircleCI.
 
 . If it was not offered, you can specify it using the `-i` command-line argument to SSH. For example:
 +
 [,console]
 ----
-$ ssh -i /Users/me/.ssh/id_ed25519_github -p 64784 54.224.97.243
+$ SSH -i /Users/me/.SSH/id_ed25519_github -p 64784 54.224.97.243
 ----
 
 You can increase the verbosity level to get more detailed debugging information by using multiple `-v` flags. For example, use `-vv` for more details:
