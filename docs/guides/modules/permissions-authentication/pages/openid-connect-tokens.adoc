@@ -74,7 +74,7 @@ Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_cr
 
 === 2. Assign a role to your identity provider
 
-Now you have your identity provider set up, you can assign roles to it and decide how to manage the associated role(s). You can update the role permissions using policies to fit your use cases, or you can create roles specific to each use.
+Now you have your identity provider set up, you can assign roles to it and decide how to manage the associated role(s). You can update the role permissions using policies to fit your use cases. You can also create roles specific to each use.
 
 Once you have created your identity provider, a banner appears at the top of the AWS console with the option to **Assign role**. Select this button to create a new role, or visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps there. You will need to select the following:
 
