@@ -6,7 +6,7 @@
 [#overview]
 == Overview
 
-This document outlines the xref:building-docker-images.adoc[CircleCI remote Docker image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (`setup_remote_docker`).
+This document outlines the xref:building-docker-images.adoc[CircleCI Remote Docker Image] release, update, and deprecation policy. This policy applies to all CircleCI remote Docker images built for the remote Docker feature (`setup_remote_docker`).
 
 [#release-policy]
 == Release policy
@@ -16,7 +16,7 @@ This setup enables the execution of Docker commands within jobs using the Docker
 
 We aim to support the latest three versions of the Docker Engine that are classified as within Security Support status.
 
-Remote Docker images will be updated when a patch version is released upstream. Tags will be redirected to the updated images automatically as described in the xref:#tagging[tagging] section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
+Remote Docker images will be updated when a patch version is released upstream. Tags will be redirected to the updated images automatically as described in the xref:#tagging[Tagging] section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
 
 [#tagging]
 == Tagging
