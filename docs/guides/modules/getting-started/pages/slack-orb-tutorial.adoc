@@ -31,7 +31,7 @@ To follow this tutorial, you need:
 
 If you have not already done so, create a `.circleci` folder at the root of your repo. Inside the `.circleci` folder, create a `config.yml` file.
 
-The sample code below shows the basics you need to set up Slack notifications into your `config.yml` file. You can copy and paste the whole thing or take the individual elements and incorporate into your project `config.yml` file:
+The sample code below shows the basics you need to set up Slack notifications in your `config.yml` file. You can copy and paste the whole thing or take the individual elements and incorporate them into your project `config.yml` file:
 
 [%linenums,yaml]
 ----
@@ -257,7 +257,7 @@ jobs:
 * *Line 7* specifies that the template on the next line is used for failed events.
 * *Line 8* specifies the template to be used, in this case `basic_fail_1`.
 * *Line 9* specifies that the template on the next line is used for pass events.
-* *Line 10* specifies the template to be used, in this case `basic_success_1`.
+* *Line 10* specifies the template to be used, in this case `success_tagged_deploy_1`.
 
 Whereas in Step 1 you used an all-purpose alert, now you have included different steps according to whether the job has passed or failed. The Slack orb triggers the appropriate step.
 

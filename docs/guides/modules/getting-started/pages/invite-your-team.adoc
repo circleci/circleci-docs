@@ -3,7 +3,7 @@
 :page-description: Add your team to your CircleCI organization
 :experimental:
 
-After setting up an organization in CircleCI, ensure your whole team get access. Understanding the different user types (registered vs. unregistered) is important for managing costs and ensuring team members have proper access. For more information, see xref:plans-pricing:user-types-and-registration.adoc[User Types and Registration].
+After setting up an organization in CircleCI, ensure your whole team gets access. Understanding the different user types (registered vs. unregistered) is important for managing costs and ensuring team members have proper access. For more information, see xref:plans-pricing:user-types-and-registration.adoc[User Types and Registration].
 
 [#prerequisites]
 == Prerequisites
@@ -74,9 +74,9 @@ image::guides:ROOT:invite-teammates-standalone.png[Navigate to Org, People, use 
 +
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
-. Select *Organization Setting* from the sidebar and select *People*.
+. Select *Organization Settings* from the sidebar and select *People*.
 . Select btn:[Copy Invite Link] -- an invite message is now copied to your clipboard.
-. Past the invite message to your teammates via email or whatever method you prefer.
+. Paste the invite message to your teammates via email or whatever method you prefer.
 
 image::guides:ROOT:invite-teammates-classic.png[Navigate to Org, People, use the Copy Invite Link button]
 --

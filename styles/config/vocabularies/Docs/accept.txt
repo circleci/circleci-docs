@@ -7,8 +7,6 @@
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
-\b[Cc]onfig policies\b
-\b[Cc]onfig policy\b
 [Cc]ron
 [Ee]nterprise
 [Gg]it
@@ -162,6 +160,7 @@ geckodriver
 Gemfile
 GitHub
 \bGitHub Checks\b
+GitLab
 \bGitLab self-managed\b
 GKE
 \bGoogle Cloud\b
@@ -337,6 +336,7 @@ stdin
 [Ss]ubcommands?
 [Ss]ubnets?
 [Ss]ubnetworks?
+[Ss]ubpackage
 superset
 Sysbox
 systemd
@@ -407,3 +407,4 @@ XCTest
 XQuartz
 Xvfb
 YAML
+Zstd
