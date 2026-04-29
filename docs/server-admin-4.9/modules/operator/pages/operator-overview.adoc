@@ -3,7 +3,7 @@
 :page-description: Learn about the various tasks and tools involved in administering an installation of CircleCI Server 4.9.
 :experimental:
 
-This guide contains information for CircleCI Server operators, or those responsible for ensuring CircleCI Server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the xref:overview:circleci-server-overview.adoc[CircleCI Server 4.9 overview].
+This guide contains information for CircleCI Server operators, or those responsible for ensuring CircleCI Server is running properly through maintenance and monitoring. Before reading this operator guide, ensure you have read the xref:overview:circleci-server-overview.adoc[CircleCI Server 4.9 Overview].
 
 CircleCI Server schedules CI/CD jobs using the link:https://www.nomadproject.io/[Nomad] scheduler. The Nomad Server (control plane) runs inside the Kubernetes cluster, while Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane and Kong.
 
@@ -24,7 +24,7 @@ CircleCI Nomad clients automatically provision compute resources according to th
 === Nomad clients
 Nomad Clients run without storing state, allowing you to increase or decrease the number of containers as needed.
 
-If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the xref:reference:ROOT:configuration-reference.adoc#resourceclass[available resource classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
+If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state. Choosing a smaller instance type for Nomad clients is a way to reduce cost, but limits the Docker resource classes CircleCI can use. Review the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Available Resource Classes] to decide what is best for you. The default instance type will run up to `xlarge` resource classes.
 
 See the link:https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options for optimizing the resource usage of Nomad clients.
 

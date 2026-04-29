@@ -256,6 +256,9 @@
 *** xref:security:security-overview.adoc[Security overview]
 *** xref:security:security-supply-chain.adoc[Protecting against supply chain attacks]
 *** xref:security:security-recommendations.adoc[Secure secrets handling]
+** Incident management
+*** xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or stop pipelines during an incident]
+*** xref:orchestrate:analyze-pipelines-during-an-incident.adoc[Analyze pipelines and job steps during an incident]
 ** How-to guides
 *** xref:security:set-environment-variable.adoc[Set an environment variable]
 *** xref:security:inject-environment-variables-with-api.adoc[Inject environment variables with the API]
