@@ -1,0 +1,180 @@
+= Install and configure the chunk CLI
+:page-platform: Cloud
+:page-description: How to install and configure the chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
+:experimental:
+
+The link:https://github.com/CircleCI-Public/chunk-cli[chunk CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. It works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+
+Some of the things you can do with the chunk CLI include:
+
+* Mine your team's GitHub pull request history to generate a team-specific review prompt for AI agents using `chunk build-prompt`.
+* Validate commands locally or in CircleCI Cloud environments using `chunk validate`.
+* Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`.
+* Set up pre-commit and session-end hooks that automatically validate in Claude Code using `chunk init`.
+
+NOTE: **chunk CLI vs Chunk by CircleCI.** The chunk CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
+
+[#supported-platforms]
+== Supported platforms
+
+The chunk CLI supports macOS and Linux on both arm64 and x86_64 architectures. Windows is not supported.
+
+[#installation]
+== Installation
+
+[#macos-install-with-homebrew]
+=== macOS and Linux install with Homebrew
+
+The recommended installation method for both macOS and Linux is Homebrew:
+
+[source,console]
+----
+$ brew install CircleCI-Public/circleci/chunk
+----
+
+[#verify-installation]
+=== Verify the installation
+
+Confirm the chunk CLI is working and check the version:
+
+[source,console]
+----
+$ chunk --version
+----
+
+[#authentication]
+== Authentication
+
+After installing the chunk CLI, set credentials for each service you plan to use.
+
+[#auth-circleci]
+=== CircleCI
+
+Required for `chunk sidecar` and `chunk task` commands.
+
+[source,console]
+----
+$ chunk auth set circleci
+----
+
+Enter your CircleCI personal API token when prompted. Generate one from the link:https://app.circleci.com/settings/user/tokens[Personal API Tokens tab, window=_blank].
+
+[#auth-anthropic]
+=== Anthropic
+
+Required for `chunk build-prompt`.
+
+[source,console]
+----
+$ chunk auth set anthropic
+----
+
+Enter your Anthropic API key when prompted. Generate one from the link:https://console.anthropic.com/settings/keys[Anthropic console, window=_blank].
+
+[#auth-github]
+=== GitHub
+
+Required for `chunk build-prompt`.
+
+[source,console]
+----
+$ chunk auth set github
+----
+
+Enter a GitHub personal access token with `repo` scope when prompted.
+
+[#check-auth-status]
+=== Check authentication status
+
+To see which credentials you have configured:
+
+[source,console]
+----
+$ chunk auth status
+----
+
+[#remove-credentials]
+=== Remove credentials
+
+To remove stored credentials for a provider:
+
+[source,console]
+----
+$ chunk auth remove <provider>
+----
+
+Replace `<provider>` with `circleci`, `anthropic`, or `github`.
+
+[#initialize-a-project]
+== Initialize a project
+
+Run `chunk init` in your project directory to configure chunk for that project:
+
+[source,console]
+----
+$ chunk init
+----
+
+`chunk init` performs these actions:
+
+* Detects your build, test, lint, and format commands.
+* Creates a `.chunk/config.json` file with the detected commands.
+* Generates hook configuration in `.claude/settings.json` for Claude Code.
+
+After initialization, `chunk validate` runs the detected commands and `chunk build-prompt` mines your GitHub PR history.
+
+The following flags are available:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--force`
+|Overwrite an existing `.chunk/config.json`.
+
+|`--skip-hooks`
+|Skip generating hook configuration in `.claude/settings.json`.
+
+|`--skip-validate`
+|Skip command detection. Creates the config file without running command auto-detection.
+
+|`--project-dir <path>`
+|Set the project directory. Defaults to the current directory.
+|===
+--
+
+[#updating-the-cli]
+== Update the chunk CLI
+
+[source,console]
+----
+$ chunk upgrade
+----
+
+Or, if you installed with Homebrew:
+
+[source,console]
+----
+$ brew upgrade chunk
+----
+
+[#uninstall]
+== Uninstall
+
+[source,console]
+----
+$ brew uninstall chunk
+----
+
+[#next-steps]
+== Next steps
+
+* xref:how-to-use-chunk-cli.adoc#generate-a-review-prompt[Generate a Team Review Prompt From Your GitHub PR History]
+* xref:how-to-use-chunk-cli.adoc#run-validation[Validate Your Changes]
+* xref:how-to-use-chunk-cli.adoc#install-skills[Install AI Agent Skills]
+
+:!page-platform:
+:!page-description:
+:!experimental:
