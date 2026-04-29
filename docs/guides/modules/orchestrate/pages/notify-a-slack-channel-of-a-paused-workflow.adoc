@@ -9,7 +9,7 @@ The https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb] e
 
 This page shows how to use a built-in job from the Slack orb to notify a Slack channel when there is a paused workflow awaiting approval. For more information on approval see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Using Workflows to Orchestrate Jobs] page.
 
-For a full tutorial to get you started with the Slack orb, see xref:getting-started:slack-orb-tutorial.adoc[Using The Slack Orb to Set Up Slack Notifications].
+For a full tutorial to get you started with the Slack orb, see xref:getting-started:slack-orb-tutorial.adoc[Use the Slack Orb to Set up Notifications].
 
 [#configuration-walkthrough]
 == Configuration walkthrough
@@ -53,7 +53,7 @@ This guide assumes you have jobs for testing and deploying your project. In the 
 [#create-workflow]
 === 4. Create workflow
 
-A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:reference:ROOT:configuration-reference.adoc#workflows[workflow configuration].
+A workflow is a set of rules for defining a collection of jobs and their run order. Workflows support complex job orchestration using a set of configuration keys to help you resolve failures sooner. Inside the workflow, you define the jobs you want to run. CircleCI will run this workflow on every commit. Learn more about xref:reference:ROOT:configuration-reference.adoc#workflows[Workflow Configuration].
 
 [source,yaml]
 ----
