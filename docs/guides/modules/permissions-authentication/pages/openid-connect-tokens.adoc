@@ -272,7 +272,7 @@ You will need to have the following to continue your GCP OIDC setup:
 
 The steps in this section are based on Google Cloud Platform's link:https://cloud.google.com/iam/docs/configuring-workload-identity-federation#oidc[Configuring Workload Identity federation] documentation.
 
-To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider], which is unique to your organization. The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
+To create your identity provider you will need to know your link:https://openid.net/specs/openid-connect-core-1_0.html#Terminology[OpenID Provider]. This is unique to your organization. The OpenID Provider URL is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your unique organization identifier.
 
 TIP: You can find your CircleCI organization ID by navigating to menu:Org[Overview] in the link:https://app.circleci.com/[CircleCI web app].
 
@@ -280,7 +280,7 @@ The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (s
 
 === 2. Configure GCP Workload Identity Federation
 
-GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. Using Workload Identity Federation allows applications outside Google Cloud to access Google Cloud resources without the need for storing service account credentials. Instead, you can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
+GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. Using Workload Identity Federation allows applications outside Google Cloud to access Google Cloud resources without storing service account credentials. Instead, you can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
 
 In the GCP web UI, follow the steps to add CircleCI as an external identity provider:
 
@@ -293,7 +293,7 @@ In the GCP web UI, follow the steps to add CircleCI as an external identity prov
 ** The issuer is `\https://oidc.circleci.com/org/<organization_id>`, where `organization_id` is your CircleCI organization ID.
 . Select **Continue** to configure provider attributes.
 +
-Configuring the provider attributes provides an opportunity to map claims in CircleCI's oken to Google's "understanding". Use this mapping:
+Configuring the provider attributes provides an opportunity to map claims in CircleCI's token to Google's "understanding". Use this mapping:
 +
 [.table-scroll]
 --
@@ -532,7 +532,7 @@ CircleCI's OIDC tokens contain the following standard https://openid.net/specs/o
 | Description
 
 | `iss`
-| The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/<organization_id>"`, a string, where `organization_id` is a UUID identifying the current job's project's organization. It is possible to generate a token manually with a root issuer using the `--root-issuer` flag. See xref:oidc-tokens-with-custom-claims.adoc[OIDC tokens with custom claims] for more information.
+| The issuer. The issuer is specific to the CircleCI organization in which the job is being run. Its value is `"https://oidc.circleci.com/org/<organization_id>"`, a string, where `organization_id` is a UUID identifying the current job's project's organization. It is possible to generate a token manually with a root issuer using the `--root-issuer` flag. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
 
 | `sub`
 a| The subject. This identifies who is running the CircleCI job and where. `$CIRCLE_OIDC_TOKEN_V2` also includes information about the source of change.
@@ -623,7 +623,7 @@ If you allow OIDC tokens to be generated for forks, you **must** check the `oidc
 For more information about building open source projects on CircleCI, see the xref:integration:oss.adoc[Build Open Source Projects] page.
 
 [#oidc-server]
-== OIDC on CircleCI server
+== OIDC on CircleCI Server
 
 OIDC is supported from server v4.4+. However, OIDC is **not** supported if your server installation is in an air-gapped environment.
 
