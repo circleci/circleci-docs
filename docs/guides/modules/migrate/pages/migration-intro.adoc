@@ -48,7 +48,7 @@ For complex projects with a large-scale test suite migration and large workflows
 
 Take stock of the current landscape, and understand the differences between CircleCI functionality and that of your current CI tool.
 
-Some things consider during this phase:
+Some things to consider during this phase:
 
 - xref:orbs:use:orb-intro.adoc[Orbs] as an alternative to, for example, Jenkins Plugins
 - CircleCI YAML xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
@@ -85,7 +85,7 @@ Document which steps are dependent on each other, and which have the potential t
 [#testing-phase]
 == Testing phase
 
-In this phase you will:
+In this phase, you will:
 
 * Do a test run and make sure everything is in order.
 * Figure out how long the migration will take.
