@@ -1,0 +1,20 @@
+= Release notes
+:page-platform: Server 4.10, Server Admin
+:page-description: Details of the new features included in each CircleCI Server 4.10 release.
+:experimental:
+
+[#overview]
+== Overview
+
+#TBC#
+
+[#upgrade]
+== Upgrade
+
+NOTE: Server 4.10 requires mongoDB 4.4 or higher. If your MongoDB instance is not externalized then follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-4[Upgrade MongoDB to 4.4 Guide] before upgrading to Server 4.10.0.
+
+For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.10 Guide].
+
+== Release 4.10.0
+
+For full details of this release see the link:https://circleci.com/changelog/server-4-10-0-released/[changelog].
