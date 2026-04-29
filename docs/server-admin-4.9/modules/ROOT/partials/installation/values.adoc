@@ -1,3 +1,4 @@
+pass:[<!-- vale off -->]
 |===
 | Key | Type | Default | Description
 
@@ -2275,3 +2276,4 @@ The secret must be named 'vault' and have the key; token. +
 | `"8Gi"`
 | Memory limit configuration for the workflows-conductor-grpc deployment.
 |===
+pass:[<!-- vale on -->]

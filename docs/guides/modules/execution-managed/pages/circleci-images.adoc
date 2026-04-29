@@ -3,7 +3,7 @@
 :page-description: Listing of available Docker images maintained by CircleCI
 :experimental:
 
-CAUTION: *Legacy images with the prefix `circleci/` were https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
+CAUTION: *Legacy images with the prefix `circleci/` https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[are deprecated]* as of December 31, 2021. For faster builds, upgrade your projects with https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
 
 This document provides information about convenience images (pre-built Docker images maintained by CircleCI) and a listing by language, service type, and tags.
 
@@ -31,7 +31,7 @@ Refer to the xref:toolkit:examples-and-guides-overview.adoc[Examples and Guides 
 [#next-generation-convenience-images]
 == Next-generation convenience images
 
-The next-generation convenience images in this section were built from the ground up with CI, efficiency, and determinism in mind. Here are some of the highlights:
+The next-generation convenience images in this section are built from the ground up with CI, efficiency, and determinism in mind. Here are some of the highlights:
 
 *Faster spin-up time* - In Docker terminology, these next-gen images will generally have fewer and smaller layers. Using these new images will lead to faster image downloads when a build starts, and a higher likelihood that the image is already cached on the host.
 
@@ -99,16 +99,9 @@ for as long as you would like before making any changes.
 
 * It is not recommended that you use the SHA for extended periods of time. If there is a major bug or security issue that requires a rebuild of the image, your pipeline's dependency on the image could inhibit you from acquiring the update that fixes that bug or patches a security issue.
 
-* If you are using a legacy image and you do not specify a tag, Docker
-applies the `latest` tag. The `latest` tag refers to the most recent stable
-release of an image. However, since this tag may change unexpectedly, it is best
-practice to add an explicit image tag.
+* If you are using a legacy image and you do not specify a tag, Docker applies the `latest` tag. The `latest` tag refers to the most recent stable release of an image. However, since this tag may change unexpectedly, it is best practice to add an explicit image tag.
 
-* For Node.js variant Docker images (tags that end in `-node`) the LTS
-release of Node.js is pre-installed. If you would like to include your own
-specific version of Node.js / npm you can set it up in a series of `run` steps
-in your `.circleci/config.yml`. Consider the example below, which installs a
-specific version of Node.js alongside the Ruby image.
+* For Node.js variant Docker images (tags that end in `-node`) the LTS release of Node.js is pre-installed. If you would like to include your own specific version of Node.js / npm you can set it up in a series of `run` steps in your `.circleci/config.yml`. Consider the example below, which installs a specific version of Node.js alongside the Ruby image.
 
 [,yaml]
 ----
@@ -161,7 +154,7 @@ All images add a `circleci` user as a system user. The sections below walk throu
 Next-gen language images are convenience images for common programming languages.
 These images include relevant language tools and <<pre-installed-tools,commonly-used tools>>.
 To use a language image, list it first under the `docker` key in your configuration,
-making it the xref:reference:ROOT:glossary.adoc#primary-container[primary container] during execution.
+making it the xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] during execution.
 
 See the link:https://circleci.com/developer/images?imageType=docker[Developer Hub] for a full list of next-gen images.
 
@@ -187,8 +180,8 @@ for details on which variants it supports.
 
 The legacy language images are convenience images for common programming languages.
 These images include both the relevant language and <<pre-installed-tools,commonly-used tools>>.
-A language image should be listed first under the `docker` key in your configuration,
-making it the xref:reference:ROOT:glossary.adoc#primary-container[primary container] during execution.
+A language image is listed first under the `docker` key in your configuration,
+making it the xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] during execution.
 
 CircleCI maintains legacy images for the languages below.
 
@@ -210,9 +203,9 @@ CircleCI maintains legacy images for the languages below.
 CircleCI maintains several variants for language images. To use these variants,
 add one of the following suffixes to the end of an image tag.
 
-* `-node` includes Node.js for polyglot applications
-* `-browsers` includes Chrome, Firefox, OpenJDK v11, and geckodriver
-* `-node-browsers` combines the `-node` and `-browsers` variants
+* `-node` includes Node.js for polyglot applications.
+* `-browsers` includes Chrome, Firefox, OpenJDK v11, and geckodriver.
+* `-node-browsers` combines the `-node` and `-browsers` variants.
 
 For example, if you want to add browsers to the `circleci/golang:1.9` image, use
 the `circleci/golang:1.9-browsers` image.
@@ -220,7 +213,7 @@ the `circleci/golang:1.9-browsers` image.
 [#next-gen-service-images]
 === Next-gen service images
 
-Service images are convenience images for services like databases. These images should be listed *after* language images so they become secondary service containers.
+Service images are convenience images for services like databases. These images are listed *after* language images so they become secondary service containers.
 
 * https://circleci.com/developer/images/image/cimg/postgres[PostgreSQL]
 * https://circleci.com/developer/images/image/cimg/mysql[MySQL]
@@ -273,7 +266,7 @@ All convenience images have been extended with additional tools, installed with 
 * `xvfb` (legacy images only)
 * `zip`
 
-The specific version of a package that gets installed in a CircleCI image variant depends on the default version included in the package directory for the Linux distribution/version installed in that variant's base image. The legacy CircleCI convenience images are link:https:/ packages.debian.org/jessie/[Debian Jessie]- or https://packages.debian.org/stretch/[Stretch]-based images, however the next-gen images, `cimg`, extend the official https://packages.ubuntu.com[Ubuntu] image. For details on the next-gen images, see the https://circleci.com/developer/images/[Developer Hub]. Each image is tracked in its own repository.
+The specific version of a package that gets installed in a CircleCI image variant depends on the default version in the package directory. This depends on the Linux distribution installed in that variant's base image. The legacy CircleCI convenience images are link:https://packages.debian.org/jessie/[Debian] Jessie- or https://packages.debian.org/stretch/[Stretch]-based. The next-gen images, `cimg`, extend the official https://packages.ubuntu.com[Ubuntu] image. For details on the next-gen images, see the https://circleci.com/developer/images/[Developer Hub].
 
 The following packages are pre-installed in convenience images using `curl` or other means.
 
@@ -285,18 +278,9 @@ The following packages are pre-installed in convenience images using `curl` or o
 [#out-of-scope]
 == Out of scope
 
-* If an image is not listed above, it is not available. As the convenience image
-program is revamped, proposals for new images are not currently being
-accepted.
-* Old versions of software will not be rebuilt. Once an upstream image stops
-building the tag for a specific release, say Node.js v8.1.0, then we stop
-building it too. This means other tools in that image, such as `npm` in this
-example, will no longer be updated either.
-* We do not support building preview, beta, or release candidate images tags. On
-occasion they will be available but these tags tend to cause our build system
-for convenience images to fail. If you need a non-stable release of a
-language, we suggest installing it via https://circleci.com/orbs/[an orb]
-or a custom Docker image instead.
+* If an image is not listed above, it is not available. As the convenience image program is revamped, proposals for new images are not currently being accepted.
+* Old versions of software will not be rebuilt. Once an upstream image stops building the tag for a specific release, say Node.js v8.1.0, then we stop building it too. This means other tools in that image, such as `npm` in this example, will no longer be updated either.
+* We do not support building preview, beta, or release candidate images tags. On occasion they will be available, but these tags tend to cause our build system for convenience images to fail. If you need a non-stable release of a language, we suggest installing it via https://circleci.com/orbs/[an orb] or a custom Docker image instead.
 
 [#legacy-image-tags-by-language]
 == Legacy image tags by language
