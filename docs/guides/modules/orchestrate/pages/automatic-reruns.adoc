@@ -33,7 +33,7 @@ This section provides config examples to help you set up automatic reruns. The c
 
 To enable automatic reruns for a run step in a job, add the `max_auto_reruns` key to your step with a value between 1 and 5:
 
-NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. Also, you must configure the `command` key for the step; you cannot use the short form run step configuration.
+NOTE: Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`. You must configure the `command` key for the step. You cannot use the short form run step configuration with automatic reruns.
 
 .CircleCI config to automatically retry a step up to 3 times if it fails
 [source,yaml]
