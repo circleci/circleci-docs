@@ -17,7 +17,7 @@ This document explains the problem and how to fix it.
 
 The user namespace (`userns`) is a feature of the Linux kernel that adds another security layer to Linux containers. The `userns` allows a host machine to run containers outside its UID/GID namespace. This means all containers can have a root account (UID 0) in their own namespace and run processes without receiving root privileges from the host machine.
 
-When a `userns` is created, the Linux kernel provides a mapping between the container and the host machine. For example, if you start a container and run a process with UID 0 inside of it, the Linux kernel maps the container's UID 0 to a non-privileged UID on the host machine. This allows the container to run a process as if it is the root user. The process is *actually* run by the non-root user on the host machine.
+When a `userns` is created, the Linux kernel provides a mapping between the container and the host machine. For example, if a container runs a process as UID 0, the Linux kernel maps it to a non-privileged UID on the host. This allows the container to run a process as if it is the root user. The process is *actually* run by the non-root user on the host machine.
 
 [#problem]
 == Problem
