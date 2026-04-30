@@ -93,7 +93,7 @@ A: Most brownouts last from 10 minutes to 24 hours, depending on the resource cl
 *Q: Does CircleCI notify me before a resource class brownout occurs?*::
 A: Yes, CircleCI sends email notifications to organizations whose projects use deprecated resource classes and posts announcements on the changelog.
 
-*Q: What happens if I don't update my configuration before the EOL date?*::
+*Q: What happens if I do not update my configuration before the EOL date?*::
 A: After the EOL date, deprecated resource classes are permanently removed. Any jobs attempting to use them fail until you update configurations.
 
 *Q: How can I test my workflows with new resource classes before a brownout?*::
@@ -105,4 +105,4 @@ A: Different resource classes have different pricing, so switching resource clas
 *Q: How do I know which resource class to migrate to?*::
 A: Deprecation announcements include recommended migration paths. 
 +
-Generally, you should choose a resource class that matches or exceeds the compute capacity of your deprecated class.
+Generally, you choose a resource class that matches or exceeds the compute capacity of your deprecated class.
