@@ -189,6 +189,53 @@ options:
 --
 ====
 
+=== Configure the test suite
+
+Code coverage cannot detect every relationship between source files and test atoms. The following options can be used to change how many test atoms are selected and run.
+
+For the full list of available options, see the xref:testsuite-configuration-reference.adoc#options[Options] section in the test suite configuration reference.
+
+==== Full test run paths
+
+Some project files affect the running system without being directly covered by tests. Examples include dependency manifests, database migration files, or CI configuration. Use `full-test-run-paths` to list files that cause all test atoms to be selected and run.
+
+.Example test suite with full test run paths configured
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+# ...
+options:
+  test-impact-analysis: true
+  full-test-run-paths:
+    - package.json
+    - go.mod
+    - .circleci/*.yml
+    - database-migrations/**/*.sql
+----
+
+==== Test selection rules
+
+Use `test-selection-rules` to extend test selection to cover non-source files, or to always run specific test atoms. For example, run integration tests when database migrations change, or always run acceptance tests regardless of which files changed.
+
+.Example test suite with test selection rules
+[source,yaml]
+----
+# .circleci/test-suites.yml
+---
+name: ci tests
+# ...
+options:
+  test-impact-analysis: true
+  test-selection-rules:
+    - test-atom: db/integration_test.ts
+      include: database-migrations/**/*.sql
+    - test-atom: acceptance/test.ts
+      include: true
+----
+
+
 == 2. Run locally
 
 
