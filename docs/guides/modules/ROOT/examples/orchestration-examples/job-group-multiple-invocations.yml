@@ -1,0 +1,25 @@
+# Invoke the same job group twice using distinct name: values.
+# Each invocation can have its own serial-group and requires.
+
+job-groups:
+  deploy:
+    jobs:
+      - deploy-service
+      - run-smoke-tests:
+          requires:
+            - deploy-service
+
+workflows:
+  main-workflow:
+    jobs:
+      - build
+      - deploy:
+          name: deploy-staging
+          serial-group: << pipeline.project.slug >>/staging-deploy
+          requires:
+            - build
+      - deploy:
+          name: deploy-production
+          serial-group: << pipeline.project.slug >>/production-deploy
+          requires:
+            - deploy-staging

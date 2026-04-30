@@ -2443,6 +2443,40 @@ workflows:
 
 '''
 
+[#job-groups]
+== *`job-groups`*
+
+The `job-groups` key lets you define named sets of jobs at the top level of your config. A job group can be invoked in a workflow just like a regular job, and optionally serialized as an atomic unit by adding `serial-group` to the invocation.
+
+[#group-name]
+=== *<``group-name``>*
+
+Each job group consists of the group's name as a key and a map as a value. The value map has the following attributes:
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `jobs`
+| Y
+| List
+| A list of job invocations for the group, following the same format as workflow job entries. Jobs within the group can use `requires` to declare internal dependencies on other jobs in the same group.
+|===
+--
+
+*Example:*
+
+[,yaml]
+----
+include::guides:ROOT:example$orchestration-examples/job-group.yml[]
+----
+
+For more information, see the xref:guides:orchestrate:controlling-serial-execution-across-your-organization.adoc#job-groups[Job groups] section of the Controlling Serial Execution Across Your Organization page.
+
+'''
+
 [#workflows]
 == *`workflows`*
 
@@ -2824,7 +2858,7 @@ If the `my-orb/my-test` job is not defined inside the orb, the `test` job will c
 
 The `serial-group` key is used to add a property to a job to allow a group of jobs to run in series, rather than concurrently, across an organization. Serial groups control the orchestration of jobs across an organization, not just within projects and pipelines.
 
-The `serial-group` key is configurable per job. It is not possible to configure the key for a group of jobs at this time.
+The `serial-group` key is configurable per job, or at the job group invocation level. To apply `serial-group` to an entire job group, see <<job-groups,`job-groups`>>.
 
 The value of the `serial-group` key is a string that is used to group jobs together to run one after another. The key must meet the following requirements:
 

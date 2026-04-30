@@ -207,7 +207,7 @@ More information on setup workflows can be found in the xref:dynamic-config.adoc
 [#conditional-workflows]
 == Pipeline parameters and conditional workflows
 
-Use the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[`when` clause] (or the inverse clause `unless`) under a workflow declaration, along with a xref:reference:ROOT:configuration-reference.adoc#logic-statements[logic statement], to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+Use the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[`when` clause] (or the inverse clause `unless`) under a workflow declaration, along with a xref:reference:ROOT:configuration-reference.adoc#logic-statements[logic statement], to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause must evaluate to a truthy or falsy value.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing a trigger to pass that parameter to determine which workflows to run. Below is an example configuration using the pipeline parameter `run_integration_tests` to set whether the workflow `integration_tests` will run.
 

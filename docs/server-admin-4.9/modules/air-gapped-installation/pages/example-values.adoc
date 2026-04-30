@@ -1,4 +1,4 @@
-= Example values.yaml
+= Example values file
 :page-platform: Server 4.9, Server Admin
 :page-description: This page presents an example values.yaml file to help with setting up an air-gapped installation of CircleCI Server 4.9.
 :experimental:
