@@ -1,0 +1,11 @@
+# Agent Accessibility Test Dependencies
+
+# Anthropic SDK for Claude API
+anthropic>=0.18.0
+
+# Optional: For token counting with OpenAI models
+# tiktoken>=0.5.0
+
+# Optional: For generating reports
+# pandas>=2.0.0
+# matplotlib>=3.7.0

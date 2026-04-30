@@ -1,0 +1,15 @@
+{
+  "name": "Single Page Accessibility Test (Example)",
+  "description": "Example config for testing a single documentation page",
+  "base_path": "docs/guides/modules/ROOT/pages",
+  "modes": {
+    "current": {
+      "description": "Current version of the page",
+      "content_mapping": {
+        "page": "execution-environments/docker.adoc"
+      }
+    }
+  },
+  "questions_file": "example-questions.json",
+  "rubrics_file": "example-rubrics.json"
+}

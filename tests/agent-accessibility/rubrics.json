@@ -1,0 +1,152 @@
+{
+  "1": {
+    "required_elements": ["2.1", "version"],
+    "optional_elements": ["orbs", "reusable", "commands", "executors", "2.0"],
+    "hallucination_checks": ["version 3", "version 2.2", "version 4"]
+  },
+  "2": {
+    "required_elements": ["setup", "dynamic"],
+    "optional_elements": ["configuration", "conditional", "pipeline", "parameters"],
+    "hallucination_checks": ["setup: version"]
+  },
+  "3": {
+    "required_elements": ["job-groups", "jobs"],
+    "optional_elements": ["serial-group", "group name", "list"],
+    "hallucination_checks": ["job_groups", "group-jobs"]
+  },
+  "4": {
+    "required_elements": ["2.1", "2.0", "reusable"],
+    "optional_elements": ["orbs", "commands", "executors", "parameters"],
+    "hallucination_checks": []
+  },
+  "5": {
+    "required_elements": ["no", "2.0", "2.1"],
+    "optional_elements": ["only"],
+    "hallucination_checks": ["version 3", "yes", "beta"]
+  },
+  "6": {
+    "required_elements": ["docker", "image"],
+    "optional_elements": ["auth", "example", "executor"],
+    "hallucination_checks": ["docker-executor", "dockerExecutor"]
+  },
+  "7": {
+    "required_elements": ["resource", "class"],
+    "optional_elements": ["small", "medium", "large", "xlarge", "cpu", "ram"],
+    "hallucination_checks": ["nano", "micro", "huge"]
+  },
+  "8": {
+    "required_elements": ["environment"],
+    "optional_elements": ["key", "value", "variable", "job"],
+    "hallucination_checks": ["env_vars", "setenv"]
+  },
+  "9": {
+    "required_elements": ["docker", "machine", "macos"],
+    "optional_elements": ["container", "vm", "ios", "use case"],
+    "hallucination_checks": ["windows executor", "linux executor"]
+  },
+  "10": {
+    "required_elements": ["circleci_ip_ranges", "true"],
+    "optional_elements": ["job", "paid", "plan", "performance", "scale"],
+    "hallucination_checks": ["top-level", "workflow"]
+  },
+  "11": {
+    "required_elements": ["parallelism"],
+    "optional_elements": ["test", "split", "CIRCLE_NODE", "parallel"],
+    "hallucination_checks": ["parallel: true", "parallelization"]
+  },
+  "12": {
+    "required_elements": ["retention", "days"],
+    "optional_elements": ["artifact", "storage"],
+    "hallucination_checks": ["retention: true", "keep_artifacts"]
+  },
+  "13": {
+    "required_elements": ["aws", "auth"],
+    "optional_elements": ["ecr", "oidc", "environment", "variables", "credential"],
+    "hallucination_checks": ["aws_key", "aws_secret_key"]
+  },
+  "14": {
+    "required_elements": ["save_cache", "restore_cache", "node_modules"],
+    "optional_elements": ["checksum", "package-lock", "key", "path"],
+    "hallucination_checks": ["cache_npm", "npm_cache"]
+  },
+  "15": {
+    "required_elements": ["save_cache", "restore_cache"],
+    "optional_elements": ["store", "retrieve", "key", "path"],
+    "hallucination_checks": ["cache_save", "cache_restore"]
+  },
+  "16": {
+    "required_elements": ["checksum"],
+    "optional_elements": ["package-lock", "key", "{{", "template"],
+    "hallucination_checks": ["hash", "md5"]
+  },
+  "17": {
+    "required_elements": ["continue", "no error"],
+    "optional_elements": ["cache miss", "fallback", "prefix"],
+    "hallucination_checks": ["fails", "error", "stops"]
+  },
+  "18": {
+    "required_elements": ["store_artifacts", "path"],
+    "optional_elements": ["destination", "retention"],
+    "hallucination_checks": ["save_artifacts", "artifact_store"]
+  },
+  "19": {
+    "required_elements": ["store_test_results", "path"],
+    "optional_elements": ["junit", "xml", "test summary"],
+    "hallucination_checks": ["save_test_results", "test_results"]
+  },
+  "20": {
+    "required_elements": ["run"],
+    "optional_elements": ["command", "name", "shorthand", "string", "background"],
+    "hallucination_checks": ["execute", "shell_command"]
+  },
+  "21": {
+    "required_elements": ["checkout"],
+    "optional_elements": ["source", "code", "git", "first", "step"],
+    "hallucination_checks": ["git_checkout", "clone"]
+  },
+  "22": {
+    "required_elements": ["when"],
+    "optional_elements": ["always", "on_success", "on_fail", "condition"],
+    "hallucination_checks": ["if", "conditional"]
+  },
+  "23": {
+    "required_elements": ["pipeline", "<<", ">>"],
+    "optional_elements": ["git", "branch", "parameter"],
+    "hallucination_checks": ["$pipeline", "${pipeline}"]
+  },
+  "24": {
+    "required_elements": ["schedule", "cron", "triggers"],
+    "optional_elements": ["filter", "time", "workflow"],
+    "hallucination_checks": ["scheduled", "timer"]
+  },
+  "25": {
+    "required_elements": ["requires"],
+    "optional_elements": ["dependency", "dependencies", "wait", "job"],
+    "hallucination_checks": ["depends_on", "needs"]
+  },
+  "26": {
+    "required_elements": ["matrix"],
+    "optional_elements": ["parameter", "multiple", "variant", "environment"],
+    "hallucination_checks": ["matrix_job", "job_matrix"]
+  },
+  "27": {
+    "required_elements": ["filters", "branches"],
+    "optional_elements": ["only", "ignore", "regex", "pattern"],
+    "hallucination_checks": ["branch_filter", "if_branch"]
+  },
+  "28": {
+    "required_elements": ["context"],
+    "optional_elements": ["environment", "variable", "secret", "organization"],
+    "hallucination_checks": ["contexts", "env_context"]
+  },
+  "29": {
+    "required_elements": ["pre-steps", "post-steps"],
+    "optional_elements": ["before", "after", "job", "modifier"],
+    "hallucination_checks": ["pre_steps", "post_steps", "presteps"]
+  },
+  "30": {
+    "required_elements": ["logic"],
+    "optional_elements": ["equal", "not", "and", "or", "condition", "parameter"],
+    "hallucination_checks": ["if statement", "conditional logic"]
+  }
+}

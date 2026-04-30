@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "category": "top-level",
+    "question": "What version should I use in my CircleCI config?",
+    "expected_answer": "Use version 2.1 for modern features including orbs, commands, executors, and parameters"
+  },
+  {
+    "id": 2,
+    "category": "top-level",
+    "question": "What is the setup key used for?",
+    "expected_answer": "Dynamic configuration, conditional triggering, and updating pipeline parameters"
+  },
+  {
+    "id": 3,
+    "category": "top-level",
+    "question": "How do I define job groups?",
+    "expected_answer": "Use job-groups key with group name and jobs list, can use serial-group option"
+  },
+  {
+    "id": 4,
+    "category": "top-level",
+    "question": "What's the difference between version 2.0 and 2.1?",
+    "expected_answer": "Version 2.1 adds reusable config features: orbs, commands, executors, and parameters"
+  },
+  {
+    "id": 5,
+    "category": "top-level",
+    "question": "Can I use version 3 in CircleCI?",
+    "expected_answer": "No, only version 2.0 and 2.1 are available"
+  },
+  {
+    "id": 6,
+    "category": "jobs",
+    "question": "How do I configure a Docker executor?",
+    "expected_answer": "Use docker key with image specification, optionally add auth configuration"
+  },
+  {
+    "id": 7,
+    "category": "jobs",
+    "question": "What resource classes are available for Docker jobs?",
+    "expected_answer": "small, medium, medium+, large, xlarge, 2xlarge, 2xlarge+ with varying CPU and RAM"
+  },
+  {
+    "id": 8,
+    "category": "jobs",
+    "question": "How do I set environment variables in a job?",
+    "expected_answer": "Use environment key with name-value pairs at job level"
+  },
+  {
+    "id": 9,
+    "category": "jobs",
+    "question": "What's the difference between docker, machine, and macos executors?",
+    "expected_answer": "Docker for containers, machine for VM with Docker, macOS for iOS/macOS builds"
+  },
+  {
+    "id": 10,
+    "category": "jobs",
+    "question": "How do I enable IP ranges for a job?",
+    "expected_answer": "Set circleci_ip_ranges: true at job level, requires paid plan"
+  },
+  {
+    "id": 11,
+    "category": "jobs",
+    "question": "What is parallelism and how do I use it?",
+    "expected_answer": "Parallel test splitting using parallelism key, use CIRCLE_NODE_INDEX for splitting"
+  },
+  {
+    "id": 12,
+    "category": "jobs",
+    "question": "How do I configure artifact retention?",
+    "expected_answer": "Use retention key with days value to control how long artifacts are kept"
+  },
+  {
+    "id": 13,
+    "category": "jobs",
+    "question": "How do I authenticate with AWS in Docker executor?",
+    "expected_answer": "Use aws_auth with aws-ecr or aws-ecr-cred, or use OIDC, or environment variables"
+  },
+  {
+    "id": 14,
+    "category": "steps-caching",
+    "question": "How do I cache npm dependencies?",
+    "expected_answer": "Use save_cache and restore_cache with node_modules path and checksum of package-lock.json in key"
+  },
+  {
+    "id": 15,
+    "category": "steps-caching",
+    "question": "What's the difference between save_cache and restore_cache?",
+    "expected_answer": "save_cache stores files to cache, restore_cache retrieves them using key patterns"
+  },
+  {
+    "id": 16,
+    "category": "steps-caching",
+    "question": "How do I create a cache key that updates when dependencies change?",
+    "expected_answer": "Use checksum syntax like {{ checksum \"package-lock.json\" }} in cache key"
+  },
+  {
+    "id": 17,
+    "category": "steps-caching",
+    "question": "What happens if no cache is found?",
+    "expected_answer": "restore_cache step continues without error, falls back to prefix matches if available"
+  },
+  {
+    "id": 18,
+    "category": "steps-caching",
+    "question": "How do I store build artifacts?",
+    "expected_answer": "Use store_artifacts step with path and optional destination"
+  },
+  {
+    "id": 19,
+    "category": "steps-caching",
+    "question": "How do I store test results?",
+    "expected_answer": "Use store_test_results step with path to JUnit XML files for test summary display"
+  },
+  {
+    "id": 20,
+    "category": "steps-basic",
+    "question": "How do I run a shell command in a step?",
+    "expected_answer": "Use run step with shorthand (string) or full syntax with command, name, and other options"
+  },
+  {
+    "id": 21,
+    "category": "steps-basic",
+    "question": "What is the checkout step?",
+    "expected_answer": "Checks out source code from version control, typically first step in a job"
+  },
+  {
+    "id": 22,
+    "category": "steps-basic",
+    "question": "How do I run a step conditionally?",
+    "expected_answer": "Use when attribute (always, on_success, on_fail) or when step with condition"
+  },
+  {
+    "id": 23,
+    "category": "steps-basic",
+    "question": "How do I use pipeline values in my config?",
+    "expected_answer": "Use << pipeline.* >> syntax like << pipeline.git.branch >>"
+  },
+  {
+    "id": 24,
+    "category": "workflows",
+    "question": "How do I schedule a workflow to run at specific times?",
+    "expected_answer": "Use triggers with schedule, specify cron expression and filters"
+  },
+  {
+    "id": 25,
+    "category": "workflows",
+    "question": "How do I make one job wait for another in a workflow?",
+    "expected_answer": "Use requires key in job invocation to specify dependencies"
+  },
+  {
+    "id": 26,
+    "category": "workflows",
+    "question": "What is a matrix job and when should I use it?",
+    "expected_answer": "matrix creates multiple job variants with different parameters, use for testing across environments"
+  },
+  {
+    "id": 27,
+    "category": "workflows",
+    "question": "How do I filter workflow jobs by branch?",
+    "expected_answer": "Use filters with branches (only/ignore) and regex patterns"
+  },
+  {
+    "id": 28,
+    "category": "workflows",
+    "question": "How do I use contexts in workflows?",
+    "expected_answer": "Use context key to access organization-level environment variables and secrets"
+  },
+  {
+    "id": 29,
+    "category": "workflows",
+    "question": "What are pre-steps and post-steps?",
+    "expected_answer": "Job invocation modifiers that run steps before or after the job's defined steps"
+  },
+  {
+    "id": 30,
+    "category": "workflows",
+    "question": "How do I use conditional logic in workflows?",
+    "expected_answer": "Use logic statements with equal, not, and, or operators with pipeline parameters"
+  }
+]

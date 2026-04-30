@@ -1325,7 +1325,416 @@ For each partial:
 
 ---
 
+## Future-Proofing for Schema Generation
+
+This section documents how the current implementation supports future schema-driven generation without requiring restructuring.
+
+### Overview
+
+The long-term goal is to generate configuration reference content from the CircleCI YAML Language Server schema (`https://github.com/CircleCI-Public/circleci-yaml-language-server/blob/main/schema.json`). The structure proposed in this PRD is designed to support this transition.
+
+---
+
+### Schema Structure vs. Documentation Structure
+
+**Schema Organization:**
+- Uses `definitions` (reusable components): `jobInvocation`, `step`, `orb`, `environment`, `logic`
+- Heavy use of `oneOf` / `anyOf` for multiple valid formats
+- Organized for validation, not user documentation
+
+**Documentation Organization:**
+- Organized by user-facing concepts: `jobs`, `steps`, `workflows`
+- Grouped by purpose and learning flow
+- Category-based pages group related concepts
+
+**Mitigation Strategy:**
+✅ The current partial structure already mirrors user concepts, not schema structure. When generating:
+- Schema `definitions.step` → Multiple partial files (run.adoc, save-cache.adoc, etc.)
+- Schema `definitions.jobInvocation` → Jobs category partials
+- Generator will map schema → doc structure, not force docs to match schema
+
+---
+
+### Dual-Partial Strategy: Generated vs. Enhanced Content
+
+**Problem:** Schema contains technical specifications but lacks narrative content (best practices, real-world examples, common pitfalls, migration guides).
+
+**Solution:** Separate generated content from manual enhancement content.
+
+#### Proposed Directory Structure
+
+```
+docs/reference/modules/ROOT/
+  partials/
+    config-content/              # GENERATED from schema (future)
+      version.adoc
+      jobs/
+        docker.adoc              # Technical spec from schema
+        save-cache.adoc
+    config-enhancements/         # MANUAL enhancement content
+      jobs/
+        docker-best-practices.adoc
+        docker-auth-guide.adoc
+        resource-class-selection-guide.adoc
+      steps/
+        caching-strategies.adoc
+        workspace-patterns.adoc
+      workflows/
+        matrix-examples.adoc
+        scheduling-best-practices.adoc
+    config-examples/             # MANUAL examples library
+      docker-multi-stage.yml
+      caching-node-modules.yml
+      matrix-deployment.yml
+```
+
+#### Category Page Integration
+
+Category pages combine both generated and enhanced content:
+
+```asciidoc
+= Jobs Configuration
+
+include::partial$config-content/jobs/docker.adoc[]
+
+include::partial$config-enhancements/jobs/docker-best-practices.adoc[]
+
+'''
+
+include::partial$config-content/jobs/resource-class.adoc[]
+
+include::partial$config-enhancements/jobs/resource-class-selection-guide.adoc[]
+```
+
+**Benefits:**
+- Generated content can be regenerated without losing manual work
+- Clear separation of responsibilities
+- Enhancement content survives schema regeneration
+- Can start with manual partials, replace with generated later
+
+---
+
+### Anchor ID Mapping Strategy
+
+**Problem:** Current docs use inconsistent anchor IDs that may not match schema keys.
+
+**Current Patterns:**
+- `[#savecache]` (no separators)
+- `[#save-cache]` (kebab-case)
+- `[#save_cache]` (snake_case from schema)
+
+**Schema Keys:**
+- `save_cache`, `restore_cache`, `store_artifacts` (snake_case)
+
+**Solution: Standardize + Redirect**
+
+1. **Primary anchor format:** Kebab-case (matches Antora conventions)
+   ```asciidoc
+   [#save-cache]
+   == save_cache
+   ```
+
+2. **Create page aliases for all variations** (in category pages):
+   ```asciidoc
+   = Steps: Caching & Artifacts
+
+   :page-aliases: configuration-reference.adoc#savecache, \
+                  configuration-reference.adoc#save-cache, \
+                  configuration-reference.adoc#save_cache
+   ```
+
+3. **Maintain mapping file** for generator:
+   ```yaml
+   # schema-to-anchor-mapping.yml
+   save_cache:
+     primary_anchor: save-cache
+     aliases:
+       - savecache
+       - save_cache
+     partial: steps-caching/save-cache.adoc
+     category_page: steps-caching-artifacts.adoc
+   ```
+
+**Implementation:**
+- Document anchor conventions in this PRD
+- Create mapping file during Phase 1 (Preparation)
+- Generator uses mapping to create correct anchors
+- All variations redirect properly
+
+---
+
+### Schema-to-Documentation Mapping
+
+**Schema `oneOf` Complexity:**
+
+Schema uses `oneOf` for multiple valid syntaxes:
+```json
+"run": {
+  "oneOf": [
+    {"type": "string"},           // Shorthand: run: "echo hello"
+    {"type": "object", ...}       // Longform: run: {command: "echo hello", name: "Greet"}
+  ]
+}
+```
+
+**Documentation Approach:**
+
+Show both forms clearly:
+```asciidoc
+[#run]
+== run
+
+The `run` step executes shell commands.
+
+=== Shorthand Syntax
+[source,yaml]
+----
+- run: echo "Hello World"
+----
+
+=== Full Syntax
+[source,yaml]
+----
+- run:
+    name: "Greeting"
+    command: echo "Hello World"
+    background: false
+----
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+| command | Y | String | Shell command to execute
+| name | N | String | Title for the step
+| background | N | Boolean | Run in background
+...
+```
+
+**Generator Logic:**
+- Detect `oneOf` patterns
+- Generate separate "Syntax Variations" sections
+- Create unified parameter table covering all variants
+
+---
+
+### Missing Information Inventory
+
+**What Schema Provides:**
+- ✅ Type information (string, boolean, object)
+- ✅ Required vs optional
+- ✅ Validation rules (patterns, enums)
+- ✅ Default values
+- ✅ Technical descriptions (`markdownDescription`)
+
+**What Schema Likely Missing:**
+- ❌ Best practices and recommendations
+- ❌ When to use (vs alternatives)
+- ❌ Real-world examples
+- ❌ Common pitfalls and troubleshooting
+- ❌ Performance considerations
+- ❌ Security implications
+- ❌ Migration guides (deprecated → current)
+- ❌ Integration patterns with other features
+- ❌ Cross-references to guides
+
+**Storage Strategy:**
+
+Create enhancement partials now with placeholders:
+
+```asciidoc
+// config-enhancements/jobs/docker-best-practices.adoc
+
+[#docker-best-practices]
+=== Best Practices
+
+* **Use specific image tags** - Avoid `latest` to ensure build reproducibility
+* **Minimize layers** - Combine RUN commands to reduce image size
+* **Leverage caching** - Order commands from least to most frequently changed
+
+[#docker-common-issues]
+=== Common Issues
+
+**Authentication failures:**
+If you see authentication errors, ensure you've configured docker-auth...
+
+[#docker-performance]
+=== Performance Considerations
+
+Docker executor spin-up time: ~5-10 seconds...
+```
+
+These enhancement partials:
+- Start as manual content
+- Can be refined over time
+- Survive schema regeneration
+- Provide value schema cannot
+
+---
+
+### Metadata Tracking
+
+**Create metadata file** to track information not in schema:
+
+```yaml
+# config-metadata.yml
+
+version:
+  introduced: "2.0"
+  deprecated: false
+  category: "top-level-keys"
+  common_use_cases:
+    - "Specify config version"
+  related_keys:
+    - setup
+    - orbs
+
+save_cache:
+  introduced: "2.0"
+  deprecated: false
+  category: "steps-caching"
+  common_use_cases:
+    - "Cache npm dependencies"
+    - "Cache pip packages"
+    - "Cache compiled assets"
+  related_keys:
+    - restore_cache
+  performance_notes: "Cache save time ~2-5 seconds per MB"
+  best_practice_partial: "config-enhancements/steps/caching-strategies.adoc"
+  examples:
+    - "config-examples/caching-node-modules.yml"
+    - "config-examples/caching-docker-layers.yml"
+```
+
+**Uses:**
+- Generator enriches content with metadata
+- Links to enhancement partials
+- Generates "Related" sections automatically
+- Tracks deprecations and migrations
+
+---
+
+### Generation Workflow Considerations
+
+**Phase 1: Manual Implementation (Current PRD)**
+1. Create partials manually from existing content
+2. Establish category page structure
+3. Document anchor ID conventions
+4. Create enhancement partial structure (even if empty initially)
+
+**Phase 2: Hybrid Approach (Transition)**
+1. Generate partials for simple keys (version, setup) from schema
+2. Keep complex sections manual (jobs, workflows)
+3. Validate generated content matches manual
+4. Build confidence in generator
+
+**Phase 3: Full Schema Generation (Future)**
+1. Generate all config-content partials from schema
+2. Enhancement partials remain manual
+3. Category pages include both (already structured for this)
+4. CI/CD regenerates on schema changes
+
+**Key Design Decisions Made Now:**
+✅ Granular partials (one per config key) - supports selective generation
+✅ Separate content from presentation (partials vs pages) - generator only touches partials
+✅ Enhancement partial structure - separates generated from manual
+✅ Metadata file - enriches schema with non-technical info
+✅ Anchor ID conventions - prevents redirect chaos
+
+---
+
+### Validation Strategy
+
+**When generator is built:**
+
+1. **Content Parity Check**
+   - Compare generated partial to current manual partial
+   - Flag missing information (examples, notes, tips)
+   - Ensure no content loss
+
+2. **Anchor Consistency**
+   - Validate all current anchors still work
+   - Generate redirect list
+   - Test common entry points
+
+3. **Build Validation**
+   - Ensure generated partials have valid AsciiDoc
+   - Check all includes resolve
+   - Validate cross-references
+
+4. **Manual Review Checklist**
+   - Does generated content match manual quality?
+   - Are examples comprehensive?
+   - Are descriptions user-friendly (not just technical)?
+   - Do enhancement partials fill gaps?
+
+---
+
+### Recommendations for Current Implementation
+
+**Do Now:**
+
+1. ✅ **Create enhancement partial directories** (even if empty):
+   ```bash
+   mkdir -p docs/reference/modules/ROOT/partials/config-enhancements/{jobs,steps,workflows}
+   mkdir -p docs/reference/modules/ROOT/partials/config-examples
+   ```
+
+2. ✅ **Document anchor ID conventions** clearly in migration docs
+
+3. ✅ **Create schema-to-anchor mapping file** during Phase 1:
+   - Maps schema keys → doc anchors
+   - Lists all redirect aliases
+   - Specifies partial paths
+   - Notes category page
+
+4. ✅ **Start metadata file** with high-value entries:
+   - Common use cases
+   - Related keys
+   - Best practice partial references
+   - Example file references
+
+5. ✅ **Reserve enhancement sections** in category pages:
+   ```asciidoc
+   include::partial$config-content/jobs/docker.adoc[]
+
+   // Enhancement section (initially empty, populated over time)
+   ifdef::config-enhancements[]
+   include::partial$config-enhancements/jobs/docker-best-practices.adoc[]
+   endif::[]
+   ```
+
+**Don't Do Yet:**
+
+- ❌ Don't build the generator (out of scope for this PRD)
+- ❌ Don't restructure partials to match schema (structure for users, not schema)
+- ❌ Don't wait for schema generation to start manual work
+
+**Future Work:**
+
+- Build schema-to-AsciiDoc generator
+- Automate partial generation in CI/CD
+- Set up schema change monitoring
+- Implement automated content parity testing
+
+---
+
+### Success Criteria for Schema-Ready Structure
+
+The implementation will be considered "schema-ready" when:
+
+1. ✅ Partial structure supports selective regeneration
+2. ✅ Enhancement partial directories exist with clear conventions
+3. ✅ Anchor ID mapping file documents all current anchors
+4. ✅ Metadata file tracks non-schema information
+5. ✅ Category pages can include both generated and enhanced content
+6. ✅ Build process supports conditional includes
+7. ✅ Documentation exists for future generator implementers
+
+---
+
 **Document Version:** 1.0
-**Last Updated:** 2026-04-28
+**Last Updated:** 2026-04-30
 **Author:** Documentation Team
 **Status:** Draft - Awaiting Approval

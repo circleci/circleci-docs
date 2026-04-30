@@ -1,0 +1,29 @@
+{
+  "name": "Configuration Reference Accessibility Test",
+  "description": "Tests agent accessibility of CircleCI configuration reference documentation",
+  "base_path": "docs/reference/modules/ROOT/pages",
+  "modes": {
+    "before": {
+      "description": "Monolithic single-page configuration reference",
+      "content_mapping": {
+        "top-level": "configuration-reference.adoc",
+        "jobs": "configuration-reference.adoc",
+        "steps-caching": "configuration-reference.adoc",
+        "steps-basic": "configuration-reference.adoc",
+        "workflows": "configuration-reference.adoc"
+      }
+    },
+    "after": {
+      "description": "Category-based multi-page configuration reference",
+      "content_mapping": {
+        "top-level": "config/top-level-keys.adoc",
+        "jobs": "config/jobs.adoc",
+        "steps-caching": "config/steps-caching-artifacts.adoc",
+        "steps-basic": "config/steps-basic.adoc",
+        "workflows": "config/workflows.adoc"
+      }
+    }
+  },
+  "questions_file": "questions.json",
+  "rubrics_file": "rubrics.json"
+}
