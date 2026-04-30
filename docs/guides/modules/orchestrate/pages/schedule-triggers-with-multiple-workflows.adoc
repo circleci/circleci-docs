@@ -11,7 +11,7 @@ By default, when a pipeline is triggered via schedule trigger each of its workfl
 [#schedule-using-built-in-pipeline-values]
 ## Schedule using built-in pipeline values
 
-One way to implement workflows filtering is by using pipeline values. The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`; however, the value of `pipeline.schedule.name` can be whatever you would like when using schedule triggers.
+One way to implement workflows filtering is by using pipeline values. The example below uses the built-in pipeline values `pipeline.trigger_source` and `pipeline.schedule.name`. The examples use `daily_build` and `nightly_build` as the `pipeline.schedule.name`. However, the value of `pipeline.schedule.name` can be whatever you would like when using schedule triggers.
 
 ```yaml
 version: 2.1
