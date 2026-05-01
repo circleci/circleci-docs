@@ -35,7 +35,7 @@ orbs:
   win: circleci/windows@4.1.1
 ----
 
-Next, we declare orbs that we will be using in our build. We will only use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to help us get started. This example uses the 2.4.0 version of the orb, but you may consider using a more recent version.
+Next, we declare orbs that we will be using in our build. We will only use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] to help us get started. This example uses the `4.1.1` version of the orb, but you may consider using a more recent version.
 
 [,yaml]
 ----
