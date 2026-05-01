@@ -1789,6 +1789,21 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `"data"`
 |
 
+| redis.auth.existingSecret
+| string
+| `""`
+| Name of an existing Kubernetes secret containing the Redis password. The secret must contain the key specified by `redis.auth.existingSecretKey`. Used when `redis.internal` is `false`.
+
+| redis.auth.existingSecretKey
+| string
+| `"redis-password"`
+| Key within `redis.auth.existingSecret` that holds the Redis password.
+
+| redis.auth.password
+| string
+| `""`
+| Redis password. Used when `redis.internal` is `false` and `redis.auth.existingSecret` is empty. CircleCI Server creates the secret from this value.
+
 | redis.cluster.enabled
 | bool
 | `true`
@@ -1804,6 +1819,11 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `"redis"`
 |
 
+| redis.host
+| string
+| `"redis-master"`
+| Redis primary host. Used when `redis.internal` is `false`.
+
 | redis.image.registry
 | string
 | `"cciserver.azurecr.io"`
@@ -1813,6 +1833,11 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | string
 | `"6.2.2471-c0995cc"`
 |
+
+| redis.internal
+| bool
+| `true`
+| Set to `false` to use an externalized Redis instance.
 
 | redis.master.extraEnvVars[0].name
 | string
@@ -1844,6 +1869,21 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `"data"`
 |
 
+| redis.port
+| int
+| `6379`
+| Redis primary port. Used when `redis.internal` is `false`.
+
+| redis.readerHost
+| string
+| `""`
+| Redis reader/replica host. Used when `redis.internal` is `false`. Defaults to `redis.host` if empty.
+
+| redis.readerPort
+| string
+| `""`
+| Redis reader/replica port. Used when `redis.internal` is `false`. Defaults to `redis.port` if empty.
+
 | redis.slave.extraEnvVars[0].name
 | string
 | `"REDIS_EXTRA_FLAGS"`
@@ -1863,6 +1903,16 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | string
 | `"redis-data"`
 |
+
+| redis.ssl
+| bool
+| `false`
+| Set to `true` if the Redis connection uses TLS/SSL. Used when `redis.internal` is `false`.
+
+| redis.sslSkipVerify
+| bool
+| `false`
+| Set to `true` to skip TLS certificate verification, for example when the Redis endpoint uses a self-signed certificate. Only applies when `redis.ssl` is `true`. Custom CA certificates are not supported.
 
 | redis.statefulset.labels.app
 | string
