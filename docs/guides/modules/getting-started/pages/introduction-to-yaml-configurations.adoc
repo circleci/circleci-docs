@@ -68,7 +68,7 @@ The developer hub also has a list of available CircleCI https://circleci.com/dev
 [#circleci-jobs]
 == CircleCI jobs and workflows
 
-The last thing we need for a basic CircleCI configuration is a job to actually run. Jobs are orchestrated using workflows, which is a set of rules defining a collection of jobs and their run order. Using the Docker configuration example, we can add steps to our job. Steps are a list of commands to run inside the Docker container.
+The last thing we need for a basic CircleCI configuration is a job to actually run. Jobs are orchestrated using workflows, which are a set of rules defining a collection of jobs and their run order. Using the Docker configuration example, we can add steps to our job. Steps are a list of commands to run inside the Docker container.
 
 ```yaml
 # CircleCI configuration file
@@ -113,7 +113,7 @@ workflows:
       - say_goodbye
 ```
 
-If you have a CircleCI account, you can create a new project and add these examples to a `.circleci/config.yaml` file. You can see the strings printed out in the job's build pipeline in the CircleCI web UI.
+If you have a CircleCI account, you can create a new project and add these examples to a `.circleci/config.yml` file. You can see the strings printed out in the job's build pipeline in the CircleCI web UI.
 
 YAML can be quite picky about indentations. You can use a https://yaml-online-parser.appspot.com/[YAML checker] to parse your YAML and make sure it is valid.
 

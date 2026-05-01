@@ -17,7 +17,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 [#echo-hello-world-cloud]
 == Echo hello world
 
-These examples adds a job called `hello-job` that prints `hello world` to the console.
+These examples add a job called `hello-job` that prints `hello world` to the console.
 
 [tabs]
 ====

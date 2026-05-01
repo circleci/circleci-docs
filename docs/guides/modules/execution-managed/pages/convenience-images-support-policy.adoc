@@ -6,7 +6,7 @@
 [#overview]
 == Overview
 
-This document outlines the xref:circleci-images.adoc[CircleCI Docker convenience images] release, update, and deprecation policy.
+This document outlines the xref:circleci-images.adoc[CircleCI Docker Convenience Images] release, update, and deprecation policy.
 
 This policy applies to all CircleCI convenience images we publish to the `cimg` namespace on Docker Hub.
 
@@ -17,9 +17,9 @@ Our Docker convenience images are all built upon our base image, `cimg/base`. Th
 
 We aim to build variants of this image for all LTS versions of Ubuntu that are being maintained in “Standard Support” status. We will stop building variants of `cimg/base` with Ubuntu LTS versions that drop out of support.
 
-When a new Ubuntu LTS version is released, the child CircleCI convenience images will have the underlying base image switched to this version around 6 months after the first release of the `cimg/base` variant.
+When a new Ubuntu LTS version is released, the child CircleCI convenience images will have the underlying base image switched to this version. This switch occurs around 6 months after the first release of the `cimg/base` variant.
 
-By building all of our convenience images on top of a common image, we increase the chance of the underlying base layers being cached by the execution environment, therefore increasing the spin up speed for the job.
+By building all of our convenience images on top of a common image, we increase the chance of the underlying base layers being cached by the execution environment. This increases the spin up speed for the job.
 
 We build a new base image each month. However, we only update the base image used in child convenience images once per quarter. These updates are not retroactively applied to existing images, but will apply to new releases of the image after the change has been made.
 
@@ -28,7 +28,7 @@ We encourage users who are building their own images for use on CircleCI to use 
 [#release-policy]
 == Release policy
 
-We track new releases of languages and aim to provide new convenience images that support these new releases within 48 hours. This is not an SLA (service level agreement). We can not, and do not, provide an official SLA turnaround time for new convenience images.
+We track new releases of languages and aim to provide new convenience images that support these new releases within 48 hours. Note that we do not provide an official SLA (service level agreement) turnaround time for new convenience images.
 
 For our deployment focused images, we provide a new image once per month.
 
@@ -41,12 +41,12 @@ Each image is tagged with the specific `major.minor.patch` version of the langua
 
 In special cases, we also provide additional tags, such as `lts` or `current`, which track releases as per the tagging scheme of the parent project.
 
-We do not provide a `latest`, or `current`, tag for any convenience images, other than special cases as mentioned above. This is by design, and is not something we have plans to implement in the future. We do this to ensure that jobs based on our images are more deterministic in nature, with minimal changes due to us pushing new tags that switch `current` to a new major version, for example. This helps lower the risk of breaking changes occurring when customers have not explicitly updated their configurations.
+We do not provide a `latest`, or `current`, tag for any convenience images, other than special cases as mentioned above. This approach is by design, and is not something we have plans to implement in the future. We do this to ensure that jobs based on our images are more deterministic in nature. This approach minimizes changes due to us pushing new tags that switch `current` to a new major version. It helps lower the risk of breaking changes occurring when customers have not explicitly updated their configurations.
 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed that affect the versions of the operating system or software stack in our convenience images, we will investigate the impact that this has on our images being used within CircleCI execution environments.
+When critical CVEs are disclosed that affect the versions of the operating system or software stack in our convenience images, we will investigate the impact. We assess the impact on our images being used within CircleCI execution environments.
 
 In most cases, due to the ephemeral and isolated nature of the containers in the environment, it is not necessary to patch these images. We will always communicate our stance on these disclosures on our link:https://discuss.circleci.com/[Discuss Forum].
 
@@ -64,7 +64,7 @@ While we make every effort to respond to issues and PRs in a timely manner, we d
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-We generally do not remove images from Docker Hub once published, however we encourage customers to follow the projects for the languages they use and update the images in their jobs once the project declares a version as EOL (end-of-life).
+We generally do not remove images from Docker Hub once published. However, we encourage customers to follow the projects for the languages they use and update the images in their jobs. Do this once the project declares a version as EOL (end-of-life).
 
 For versions that are EOL, we do not issue bug fixes or patches.
 
