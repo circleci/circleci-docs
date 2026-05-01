@@ -374,7 +374,7 @@ CircleCI Server uses Redis for ephemeral application state. You can run Redis ex
 ====
 The following limitations apply to external Redis support:
 
-* Redis Cluster mode is not supported. A single-shard configuration with replicas (for example, link:https://aws.amazon.com/elasticache/[Amazon ElastiCache] in *Cluster Mode Disabled*) is supported.
+* Redis Cluster mode is not supported. A single-shard configuration with replicas is supported.
 * Only password-based database authentication (`requirepass`) is supported. Redis 6 ACL-based authentication (username + password) is not supported.
 * Only TLS certificates signed by a publicly trusted certificate authority are supported. Private CAs and self-signed certificates are not supported.
 ====
@@ -404,7 +404,7 @@ redis:
 
 NOTE: Setting `redis.internal: false` removes any previously deployed internal Redis instance.
 
-If your Redis provider exposes a separate reader endpoint (for example, the ElastiCache reader endpoint), set `redis.readerHost` and `redis.readerPort` to that endpoint so read traffic is routed to the replica. If you do not set them, CircleCI Server uses `redis.host` and `redis.port` for both reads and writes.
+If your Redis provider exposes a separate reader endpoint, set `redis.readerHost` and `redis.readerPort` to that endpoint so read traffic is routed to the replica. If you do not set them, CircleCI Server uses `redis.host` and `redis.port` for both reads and writes.
 
 [#redis-tls]
 ==== TLS
@@ -422,8 +422,6 @@ redis:
 ----
 
 The Redis endpoint must present a certificate signed by a publicly trusted certificate authority. Private CAs and self-signed certificates are not supported. If your Redis endpoint cannot present a publicly trusted certificate, set `redis.ssl: false` and ensure the connection between CircleCI Server and Redis runs over a trusted private network.
-
-ElastiCache TLS endpoints use AWS-issued certificates that chain to a public CA, so they work without further configuration.
 
 [#redis-authentication]
 ==== Authentication
