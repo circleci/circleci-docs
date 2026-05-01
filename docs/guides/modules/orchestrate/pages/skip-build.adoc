@@ -6,7 +6,7 @@
 This page describes how to skip, cancel, or block work when triggering pipelines, as follows:
 
 * The CI processes can be skipped for a commit, on push to your repo.
-* Workflows can be cancelled using the auto-cancel feature.
+* Workflows can be canceled using the auto-cancel feature.
 * All new work can be blocked for an organization or project during an incident or emergency.
 
 For a step-by-step incident playbook, see xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or Stop Pipelines During an Incident].
