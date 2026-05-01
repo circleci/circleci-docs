@@ -9,12 +9,14 @@ This page describes how to skip, cancel, or block work when triggering pipelines
 * Workflows can be cancelled using the auto-cancel feature.
 * All new work can be blocked for an organization or project during an incident or emergency.
 
+For a step-by-step incident playbook, see xref:orchestrate:pause-pipelines-during-an-incident.adoc[Pause or Stop Pipelines During an Incident].
+
 All methods are described below.
 
 [#skip-jobs]
 == Skip CI for a specific push
 
-If you have a trigger configured to run a pipeline on push events to your repository, you can override this behavior by adding one of the following tags within the first 250 characters of the body or title of the **latest commit** you pushed:
+If you have a trigger configured to run a pipeline on push events, you can skip it. Add one of the following tags within the first 250 characters of the body or title of the **latest commit** you push:
 
 * `[ci skip]`
 * `[skip ci]`
@@ -35,7 +37,7 @@ A few points to note regarding the scope of the `ci skip` feature:
 * If you push multiple commits at once, and the latest commit includes a `[ci skip]` or `[skip ci]` tag, it will skip the pipeline execution for all commits in that push.
 * This feature is not supported for fork PRs. Scheduled workflows will run even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 * For GitHub OAuth and Bitbucket Cloud pipelines, this functionality applies also when the pipeline is triggered via API, manually via the web app, or via schedule.
-* GitHub App pipelines triggered via Custom webhook, schedule or API are never skipped
+* GitHub App pipelines triggered via Custom webhook, schedule or API are never skipped.
 
 === Example commit title
 
@@ -126,8 +128,5 @@ This setting is designed for situations where you need to quickly halt all CI/CD
 . Select **Advanced**.
 . Toggle the **Block all new work from starting for this project** switch to the on position.
 
-
-
-
-
+NOTE: **Block all new work** prevents new pipelines (and reruns) but does **not** cancel workflows that are already running. If you also need to **cancel running workflows** and fully disconnect a **GitHub OAuth** or **Bitbucket Cloud** project (removing the webhook and deploy key), use xref:security:stop-building-a-project-on-circleci.adoc[Stop Building] instead.
 

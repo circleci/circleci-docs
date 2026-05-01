@@ -6,7 +6,7 @@
 [#introduction]
 == Introduction
 
-A configuration file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not xref:optimize:parallelism-faster-jobs.adoc[parallelism] is used in the job.
+A configuration file that uses the deprecated `deploy` step _must_ be converted, and _all_ instances of the `deploy` step must be removed, regardless of whether or not xref:optimize:parallelism-faster-jobs.adoc[Parallelism] is used in the job.
 
 - *Does your job have parallelism of 1?* Swap out the `deploy` key for the xref:reference:ROOT:configuration-reference.adoc#run[`run`] key. Nothing more is needed to migrate.
 
@@ -96,7 +96,7 @@ workflows:
 [#using-workspaces]
 === Using workspaces
 
-If files are needed from `doing-things-job` in the `deploy-job`, use xref:workspaces.adoc[workspaces]. This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below.
+If files are needed from `doing-things-job` in the `deploy-job`, use xref:workspaces.adoc[Workspaces]. This enables sharing of files between two jobs so that the `deploy-job` can access them. See example below.
 
 ```yml
 version: 2.1
@@ -145,6 +145,6 @@ workflows:
             - doing-things-job
 ```
 
-The example above is effectively using a "fan-in" workflow which is described in detail on the xref:workflows.adoc#fan-outfan-in-workflow[workflows] page.
+The example above is effectively using a "fan-in" workflow which is described in detail on the xref:workflows.adoc#fan-outfan-in-workflow[Workflows] page.
 
 WARNING: Support for the deprecated `deploy` step will eventually be removed. Ample time will be given for customers to migrate their configuration.

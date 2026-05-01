@@ -13,7 +13,7 @@ A *workflow* is a set of rules for defining a collection of jobs and their run o
 With workflows, you can:
 
 * Run and troubleshoot jobs independently with real-time status feedback.
-* Schedule workflows for jobs that should only run periodically.
+* Schedule workflows for jobs that only run periodically.
 * Fan-out to run multiple jobs concurrently for efficient version testing.
 * Fan-in to deploy to multiple platforms.
 * Catch failures in real-time and rerun only failed jobs.
@@ -60,7 +60,7 @@ See the link:https://github.com/CircleCI-Public/circleci-demo-workflows/blob/par
 
 When using workflows, note the following best practices:
 
-* Move the quickest jobs up to the start of your workflow. For example, lint or syntax checking should happen before longer-running, more computationally expensive jobs.
+* Move the quickest jobs up to the start of your workflow. For example, lint or syntax checking happens before longer-running, more computationally expensive jobs.
 * Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
 
 TIP: Refer to the xref:optimize:optimizations.adoc[Optimization Reference] for tips to improve your configuration.
@@ -1026,7 +1026,7 @@ NOTE: You cannot rerun jobs and workflows that are >= 90 days.
 [#workflows-waiting-for-status-in-github]
 === Workflows waiting for status in GitHub
 
-If you have workflows configured on a protected branch and the status check never completes, check the `ci/circleci` status key. `ci/circleci` is related to a deprecated check and should be and deselected.
+If you have workflows configured on a protected branch and the status check never completes, check the `ci/circleci` status key. `ci/circleci` is related to a deprecated check and must be deselected.
 
 .Uncheck GitHub Status Keys
 image::guides:ROOT:github_branches_status.png[Uncheck GitHub Status Keys]

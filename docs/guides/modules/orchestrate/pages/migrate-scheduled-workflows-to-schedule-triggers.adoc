@@ -42,14 +42,14 @@ daily-run-workflow:
 [#create-the-new-schedule-trigger]
 == 2. Create the new schedule trigger
 
-Before you can create a new schedule, you should interpret the frequency your trigger needs to run from the `cron` expression. Once you have these details, create a schedule via either the API or project settings in the CircleCIweb app. Both methods are described below.
+Before you can create a new schedule, interpret the frequency your trigger needs to run from the `cron` expression. Once you have these details, create a schedule via either the API or project settings in the CircleCIweb app. Both methods are described below.
 
 [#use-the-api]
 === a. Use the API
 
 NOTE: Setting up schedule trigger via the API is not yet available for GitHub App pipelines.
 
-Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
+Have your CircleCI token ready, or create a new token by following the steps on the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page. Create a new schedule link:https://circleci.com/docs/api/v2/index.html#operation/createSchedule[using the API]. For example:
 
 ```shell
 curl --location --request POST "https://circleci.com/api/v2/project/<project-slug>/schedule" \
@@ -73,7 +73,7 @@ curl --location --request POST "https://circleci.com/api/v2/project/<project-slu
 
 include::ROOT:partial$tips/find-project-slug.adoc[]
 
-For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 docs]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting started with the API] section of the API Developer's Guide for more guidance on making requests.
+For additional information, refer to the **Schedule** section under the link:https://circleci.com/docs/api/v2/[API v2 docs]. Also see the xref:toolkit:api-developers-guide.adoc#getting-started-with-the-api[Getting Started With the API] section of the API Developer's Guide for more guidance on making requests.
 
 [#use-project-settings]
 === b. Use project settings in the web app
@@ -85,7 +85,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 If you are using Bitbucket Cloud, navigate to menu:Project Settings[Triggers] and select **Add Trigger**.
 . Define the new schedule by filling out the form, then select btn:[Save].
 
-The form also provides the option of adding xref:pipeline-variables.adoc[pipeline parameters], which are typed pipeline variables declared at the top level of a configuration.
+The form also provides the option of adding xref:pipeline-variables.adoc[Pipeline Parameters], which are typed pipeline variables declared at the top level of a configuration.
 
 [#remove-triggers-section]
 == 3. Remove triggers section
@@ -101,5 +101,5 @@ daily-run-workflow:
 
 [#next-steps]
 == Next steps
-- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule pipelines with multiple workflows]
-- xref:set-a-nightly-schedule-trigger.adoc[Set a nightly schedule trigger]
+- xref:schedule-pipelines-with-multiple-workflows.adoc[Schedule Pipelines With Multiple Workflows]
+- xref:set-a-nightly-schedule-trigger.adoc[Set a Nightly Schedule Trigger]

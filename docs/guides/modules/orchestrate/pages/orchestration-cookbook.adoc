@@ -13,15 +13,15 @@ You may want to run a set of high credit-consuming tests only when a pull reques
 
 === Steps
 
-. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines overview] page.
-. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up triggers] page.
+. Set up a GitHub App pipeline you want to trigger when a PR is marked ready for review. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines Overview] page.
+. Set up a trigger for your pipeline and select *PR marked ready for review* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up Triggers] page.
 +
 .Run on trigger options for GitHub App triggers
 image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
-* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 +
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
@@ -32,16 +32,16 @@ include::ROOT:partial$tips/check-github-type-org.adoc[]
 You may want to trigger a specific pipeline when a pull request is merged, for example, to run clean-up/teardown scripts. To do this, set up a trigger for a "clean-up" pipeline that is triggered when a pull request is merged.
 
 === Steps
-. Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines and triggers overview] page.
+. Set up a GitHub App pipeline you want to trigger when a PR is merged. Steps for setting up a pipeline are available in the xref:pipelines.adoc#add-or-edit-a-pipeline[Pipelines and Triggers Overview] page.
 
-. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up triggers] page.
+. Set up a trigger for your pipeline and select *PR merged* under the *Run on* menu. Steps for setting up a trigger are available in the xref:set-up-triggers.adoc[Set up Triggers] page.
 +
 .Run on trigger options for GitHub App triggers
 image::guides:ROOT:triggers/select-when-to-run.png[Run on trigger options for GitHub App triggers]
 
 === Notes
 
-* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
+* This option is only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 +
 include::ROOT:partial$tips/check-github-type-org.adoc[]
 
@@ -68,27 +68,9 @@ workflows:
 
 === Notes
 
-* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 +
 include::ROOT:partial$tips/check-github-type-org.adoc[]
-
-// == Trigger a pipeline when a branch has an open PR
-
-// You may want to only build your project when a pull request is open for the associated code changes. To do this, set up a trigger for your pipeline that is triggered when a pull request is open (this option will also build for any push to your default branch and any push to a tag), as follows:
-
-// #TODO steps to build when there is an open PR#
-
-// == Trigger a pipeline when a label is added to a PR
-
-// You may want to build your project when a specific label is added to a pull request. To do this, set up a trigger for your pipeline that is triggered when the "run-ci" label is added, as follows:
-
-// #ToDO add steps to set up a trigger when label added#
-
-// == Trigger a pipeline when a PR is opened
-
-// Opening a pull request is not a push event, and so using the default "All pushes" trigger no pipeline will be triggered when a PR is opened. If you would like to trigger a build when a PR is opened, you can set up a trigger for a pipeline that is triggered when a pull request is opened, as follows:
-
-// #TODO steps to trigger on a PR being opened#
 
 == Run a workflow only for specific branches
 
@@ -132,9 +114,9 @@ You may want to configure a workflow that will only run when a boolean pipeline 
 
 === Steps
 
-. Update config to declare a pipeline parameter with a default value of `false`
+. Update config to declare a pipeline parameter with a default value of `false`.
 
-. Update you workflow config to use a when statement so the workflow will only run when the pipeline parameter is true
+. Update you workflow config to use a when statement so the workflow will only run when the pipeline parameter is true.
 +
 [,yaml]
 ----
@@ -167,7 +149,7 @@ include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
 You may want to configure a workflow that runs when a specific event occurs (such as a push or pull request) or when a pipeline parameter is set to `true`. To combine pipeline parameters with event filters in a workflow `when` clause, write the condition as a direct expression without `<< >>` delimiters.
 
-The `when` clause accepts an expression as its argument. The expression is evaluated to a boolean value at configuration compilation time, before the workflow runs, so template replacement is not required. For more on using expressions in your configuration, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using expressions in your configuration].
+The `when` clause accepts an expression as its argument. The expression is evaluated to a boolean value at configuration compilation time, before the workflow runs, so template replacement is not required. For more on using expressions in your configuration, see xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration].
 
 === Steps
 
@@ -196,7 +178,7 @@ workflows:
 
 === Notes
 
-* You must define your pipeline parameters in the `parameters` section before using them in workflow conditions. The parameter name `deploy` in this example is just an example—you can use any parameter name you define (for example, `run_tests`, `skip_validation`, or `enable_feature`).
+* You must define your pipeline parameters in the `parameters` section before using them in workflow conditions. The parameter name `deploy` in this example is just an example. You can use any parameter name you define, for example, `run_tests`, `skip_validation`, or `enable_feature`.
 * The workflow `when` clause expects a direct expression. Use pipeline parameter names directly (for example, `pipeline.parameters.deploy`).
 * Do not mix `<< >>` delimiters with direct expressions. The `<< >>` syntax is used to mark expressions inside string values. If the `when` clause contains `<< >>` delimiters, the entire value is treated as a string with template replacement rather than as a direct expression. This causes the workflow to always be created regardless of the actual condition.
 +
@@ -221,7 +203,7 @@ workflows:
       - build
 ----
 +
-* For more details, see the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[Using `when` in workflows] and xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using expressions in your configuration] sections in the configuration reference.
+* For more details, see the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[Using When in Workflows] and xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Using Expressions in Your Configuration] sections in the configuration reference.
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
@@ -233,7 +215,7 @@ You may want to configure a step that will run depending on the output of a nest
 
 === Steps
 
-* Update your CircleCI config to use xref:reference:ROOT:configuration-reference.adoc#the-when-step[the `when` step].
+* Update your CircleCI config to use xref:reference:ROOT:configuration-reference.adoc#the-when-step[The When Step].
 +
 [,yaml]
 ----
@@ -254,7 +236,7 @@ You may want to configure a job that only runs on specific branches or when the 
 
 === Steps
 
-* Update your CircleCI config to include an xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[expression-based job filter].
+* Update your CircleCI config to include an xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[Expression-Based Job Filter].
 +
 [,yaml]
 ----
@@ -275,7 +257,7 @@ In some cases, you may want to configure a workflow that will only run when a sc
 
 === Steps
 
-* Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[pipeline values].
+* Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[Pipeline Values].
 +
 .The nightly-run-workflow only runs when the trigger is a schedule trigger AND the name of that trigger is `nightly_build`
 [,yaml]
@@ -295,7 +277,7 @@ You may want to have a workflow run when a open pull requests are updated with n
 
 === Steps
 
-* Update your CircleCI config to use the `pipeline.event.name` and `pipeline.event.action` xref:pipeline-variables.adoc#pipeline-values[pipeline values].
+* Update your CircleCI config to use the `pipeline.event.name` and `pipeline.event.action` xref:pipeline-variables.adoc#pipeline-values[Pipeline Values].
 +
 [,yaml]
 ----
@@ -304,7 +286,7 @@ include::ROOT:example$logic-statement-examples/when-in-workflows/pr-synced-or-la
 
 === Notes
 
-* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth organization] page.
+* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 
 include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 
@@ -381,6 +363,7 @@ Notice how the `deploy` job needs to explicitly list all three test jobs in its 
 
 Here is the workflow graph for this config:
 
+.Workflow graph before adding no-op job
 image::guides:ROOT:orchestrate-and-trigger/clean-graph-before.png[Workflow graph showing snippet without `no-op` job]
 
 === Steps
@@ -444,6 +427,7 @@ workflows:
 
 The workflow graph will now look like this:
 
+.Workflow graph after adding no-op job
 image::guides:ROOT:orchestrate-and-trigger/clean-graph-after.png[Workflow graph showing snippet with `no-op` job]
 
 === Notes
