@@ -79,7 +79,7 @@ It is also possible to build Apple silicon/universal binaries using Xcode `12.0.
 [#universal-binaries]
 === Universal binaries
 
-Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode `12.2`+, although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
+Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. Universal binary support is supported only under Xcode `12.2`+, although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
 
 [#extract-unwanted-architectures]
 === Extract unwanted architectures
