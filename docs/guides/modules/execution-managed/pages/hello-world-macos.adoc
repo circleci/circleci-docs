@@ -19,9 +19,9 @@ To follow along with this document you will need:
 == Overview of the macOS executor
 
 The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI.
-The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
+The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch, and Apple TV simulators.
 
-Before we get to setting up the macOS executor, we will need to setup our example application.
+Before we get to setting up the macOS executor, we will need to set up our example application.
 
 [#example-application]
 == Example application
@@ -78,7 +78,7 @@ jobs: # a basic unit of work in a run
           # compress Xcode's build output so that it can be stored as an artifact
           name: Compress app for storage
           command: zip -r app.zip build/Release/circleci-demo-macos.app
-      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/guides/optimize/artifacts/
           path: app.zip
           destination: app
 
