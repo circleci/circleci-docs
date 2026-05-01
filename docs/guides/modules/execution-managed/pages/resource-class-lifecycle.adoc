@@ -1,3 +1,4 @@
+:experimental:
 = Resource class lifecycle process
 
 CircleCI periodically introduces new compute as "resource classes," consisting of new underlying compute infrastructure. As older compute infrastructure ages, CircleCI deprecates and retires it from the fleet.
@@ -75,15 +76,15 @@ You must update your configurations before the EOL date.
 
 == Tips to minimize brownout impact
 
-*Review resource class usage*:: Audit your resource class specifications to ensure you use actively supported options. Consider whether your workloads might benefit from link:/guides/execution-managed/resource-class-overview/[newer, more efficient resource classes].
+*Review Resource Class Usage*:: Audit your resource class specifications to ensure you use actively supported options. Consider whether your workloads might benefit from link:/guides/execution-managed/resource-class-overview/[newer, more efficient resource classes].
 
-*Update orbs*:: If you use CircleCI orbs, ensure you update them to current versions. Outdated orbs may specify deprecated resource classes internally.
+*Update Orbs*:: If you use CircleCI orbs, ensure you update them to current versions. Outdated orbs may specify deprecated resource classes internally.
 
-*Check hidden dependencies*:: Inspect all workflows, including those triggered by external events or scheduled runs, to identify all resource class usage.
+*Check Hidden Dependencies*:: Inspect all workflows, including those triggered by external events or scheduled runs, to identify all resource class usage.
 
-*Subscribe to deprecation notices*:: Follow the CircleCI changelog for deprecation announcements.
+*Subscribe to Deprecation Notices*:: Follow the CircleCI changelog for deprecation announcements.
 
-*Test before EOL*:: Create a test branch with updated resource classes to validate performance and compatibility before the brownout period.
+*Test Before EOL*:: Create a test branch with updated resource classes to validate performance and compatibility before the brownout period.
 
 == FAQ
 
