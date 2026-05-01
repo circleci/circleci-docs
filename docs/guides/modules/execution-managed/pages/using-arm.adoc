@@ -44,7 +44,7 @@ jobs:
 [#available-resource-classes]
 == Available resource classes
 
-The following Arm resources are available part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
+The following Arm resources are available as part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
 
 include::ROOT:partial$execution-resources/arm-resource-table.adoc[]
 
@@ -100,7 +100,7 @@ For a full list of machine executor images, see the link:https://circleci.com/de
 [#m1-mac-support]
 === M1 Mac support
 
-Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The `spin up environment` job in your pipelines will give you a green tic, but you will see the following message in the response:
+Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The `spin up environment` job in your pipelines will give you a green tick, but you will see the following message in the response:
 
 [,shell]
 ----
