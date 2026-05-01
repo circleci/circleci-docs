@@ -95,7 +95,7 @@ A: There's no additional cost for using newer CircleCI images, though you should
 - xref:guides:execution-managed:android-images-support-policy.adoc[CircleCI Android Image Support Policy]
 - xref:guides:execution-managed:remote-docker-images-support-policy.adoc[CircleCI Remote Docker Image Support Policy]
 - xref:guides:execution-managed:windows-images-support-policy.adoc[CircleCI Windows Image Support Policy]
-- xref:guides:execution-managed:xcode-policy.adoc[CircleCI XCode Support Policy]
+- xref:guides:execution-managed:xcode-policy.adoc[CircleCI Xcode Support Policy]
 - link:https://github.com/CircleCI-Public/image-updater[CircleCI Image Updater Tool]
 - link:https://discuss.circleci.com/c/announcements/notices/113[CircleCI Discuss Forum - Notices Category]
 - link:https://support.circleci.com/hc/en-us[CircleCI Support Center]
