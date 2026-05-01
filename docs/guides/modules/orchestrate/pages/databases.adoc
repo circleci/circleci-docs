@@ -149,13 +149,13 @@ jobs:
 
 It is possible to apply the same principle for the following databases:
 
-* MySQL: `dockerize -wait tcp://localhost:3306 -timeout 1m`
+* MySQL: `dockerize -wait tcp://localhost:3306 -timeout 1m`.
 
-* Redis: `dockerize -wait tcp://localhost:6379 -timeout 1m`
+* Redis: `dockerize -wait tcp://localhost:6379 -timeout 1m`.
 +
 Redis also has a CLI available: `sudo apt-get install redis-tools ; while ! redis-cli ping 2>/dev/null ; do sleep 1 ; done`
 
-* Other services, such as web servers: `+dockerize -wait http://localhost:80 -timeout 1m+`
+* Other services, such as web servers: `+dockerize -wait http://localhost:80 -timeout 1m+`.
 
 === Custom MySQL configuration
 

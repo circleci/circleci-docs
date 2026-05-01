@@ -18,7 +18,10 @@ The right plan for you and your team will depend on several factors:
 
 Let us look at how a team might use credits. In this example, your team is divided into several groups working on different projects. Some projects are larger while others are smaller and need less resources from a CI/CD configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
 
-For example, your team might use a `large` `resource_class` (4 CPUs and 8 GB of memory) and make use of more credits/minute to speed up a build for a bigger project, while only using the `small` `resource_class` (1 CPU, 2 GB memory) with less credits/minute for a smaller project that may not ship code as frequently, or where build time is inconsequential.
+For example, your team might:
+
+* Use a `large` `resource_class` (4 CPUs and 8 GB of memory) and make use of more credits/minute to speed up a build for a bigger project.
+* Use a `small` `resource_class` (1 CPU, 2 GB memory) with less credits/minute for a smaller project that may not ship code as frequently, or where build time is inconsequential.
 
 The documents in this section cover what each plan offers developers for their CI/CD needs. Consider also taking a moment to look at the CircleCI link:https://circleci.com/pricing/[Pricing] page to learn about how credits are distributed across different machine types.
 
@@ -39,4 +42,6 @@ For details on cancelling a Performance Plan, refer to the xref:reference:ROOT:f
 
 [#managing-credit-usage]
 == Managing credit usage
-Optimizations can be implemented to help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc[Persisting data] page.
+Optimizations can be implemented to help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc[Persisting Data] page.
+
+For comprehensive cost tracking and analysis, you can xref:integrate-with-vantage-for-cost-management.adoc[Integrate CircleCI With Vantage] to monitor and manage your CI/CD costs alongside other infrastructure spending.

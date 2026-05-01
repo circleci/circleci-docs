@@ -91,7 +91,7 @@ NOTE: **First GitLab project?** If you are creating the first GitLab project for
 image::guides:ROOT:create-project/create-new-gitlab-project.png[Create new project window]
 +
 ** **Fastest:** Use a config file that already exists in your repository.
-** **Faster:** Let CircleCI pick a configuration file for you, and commit this to a new branch in you repository.
+** **Faster:** Let CircleCI pick a configuration file for you, and commit this to a new branch in your repository.
 ** **Fast:** View and edit a starter config file in the CircleCI web app and commit that to your repository yourself.
 
 . Select **Create Project** at the bottom of the window.
@@ -102,7 +102,7 @@ image::guides:ROOT:create-project/create-new-gitlab-project.png[Create new proje
 +
 .Use a generated config file
 image::guides:ROOT:create-project/generated-config-commit-and-run.png[Window showing generated config and options to commit and run or use an existing config]
-** Select btn:[Use Existing Config] for the option to download the generated config and instructions to commit this or another CircleCI configuration file to your repository directly. The select btn:[Start Building].
+** Select btn:[Use Existing Config] for the option to download the generated config and instructions to commit this or another CircleCI configuration file to your repository directly. Then select btn:[Start Building].
 +
 .Instructions for using an existing config file
 image::guides:ROOT:create-project/download-config-file.png[Modal showing options to download the generated config file, start building, and instructions on how to commit a CircleCI config file]
@@ -216,7 +216,7 @@ To make changes to your pipeline, choose one of the following:
 
 * Edit the config file in your repository.
 * Select the ellipsis icon:more[Ellipsis menu icon] next your project in the Pipelines or Projects dashboard and choose **Configuration File**. This opens the CircleCI configuration editor, from where you can edit and commit your `config.yml` file.
-* Access the configuration editor using the btn:[Edit Config] button from a the Pipelines page when you have a project and branch selected.
+* Access the configuration editor using the btn:[Edit Config] button from the Pipelines page when you have a project and branch selected.
 
 .Access and edit a config file
 image::guides:ROOT:create-project/configuration-file.png[Edit Configuration File]
