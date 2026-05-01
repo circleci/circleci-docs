@@ -13,6 +13,8 @@ Use this skill when the user:
 - Explicitly asks to "run vale" or "fix vale errors"
 - Requests to "lint documentation" or "check docs with vale"
 - Mentions vale linting in the context of documentation work
+- Says "fix the linter" or "make the linter happy"
+- Asks to "fix the lint job" or "fix vale"
 
 Do NOT trigger this skill automatically just because .adoc files are being edited.
 
