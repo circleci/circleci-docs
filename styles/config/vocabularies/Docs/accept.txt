@@ -58,6 +58,7 @@ AWS Certificate Manager
 AWS\sECR
 Azure
 Azure Container Registry
+[Bb]ackfilling
 backoff
 [Bb]anlist?
 Bash
@@ -150,6 +151,7 @@ Fastlane
 /bFastlane Match/b
 [Ff]ilename
 [Ff]ilepath
+Finout
 framebuffer
 frameit
 \bFree Plan\b
