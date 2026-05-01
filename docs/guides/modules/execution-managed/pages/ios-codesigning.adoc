@@ -11,7 +11,7 @@ for your iOS project on CircleCI.
 
 This document assumes that you already have an iOS project building
 correctly on CircleCI using our recommended best practices. It also assumes that you use Bundler and
-Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
+Fastlane, and have a `Gemfile`, `Appfile`, and `Fastfile` checked into
 your repository.
 
 If you have not yet configured your iOS project on CircleCI,
@@ -105,7 +105,7 @@ NOTE: This action will give the CircleCI project the
 same GitHub permissions as the user who will be clicking the _Authorize
 with GitHub_ button.
 
-In your `Matchfile`, the `git_url` should be an *SSH* URL ( in the `+git@github.com:...+` format), rather than a *HTTPS* URL. Otherwise you may see authentication errors when you attempt to use match. For example:
+In your `Matchfile`, the `git_url` should be an *SSH* URL (in the `+git@github.com:...+` format), rather than an *HTTPS* URL. Otherwise you may see authentication errors when you attempt to use match. For example:
 
 [,ruby]
 ----
@@ -177,7 +177,7 @@ The best practice configuration for setting up code signing for iOS projects is 
 
 [,ruby]
 ----
-# fastlane/fastfile
+# fastlane/Fastfile
 default_platform :ios
 
 platform :ios do
@@ -247,7 +247,7 @@ workflows:
             - build-and-test
 ----
 
-By setting the `FL_OUTPUT_DIR:` environment, that will tell Fastlane to output the Xcode and Fastlane logs to that directory, so they get uploaded as artifacts for ease in troubleshooting.
+By setting `FL_OUTPUT_DIR:`, that will tell Fastlane to output the Xcode and Fastlane logs to that directory, so they get uploaded as artifacts for ease in troubleshooting.
 
 [#example-application-on-github]
 == Example application on GitHub
