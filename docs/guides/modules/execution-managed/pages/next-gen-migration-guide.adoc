@@ -34,7 +34,7 @@ Several changes are being made to existing images. The following images will be 
 * `JRuby`
 * `DynamoDB`
 
-If you are using the `buildpack-deps` image, the suggestion is to use the new CircleCI Base image, `cimg/base`. For the other two images, you can install the software yourself in the base image or use a 3rd-party image instead.
+If you are using the `buildpack-deps` image, the suggestion is to use the new CircleCI Base image, `cimg/base`. For the other two images, you can install the software yourself in the base image or use a third-party image instead.
 
 Also, the following image will be renamed:
 
@@ -49,7 +49,7 @@ All Legacy to Next-Gen image changes are captured below in this table:
 | Legacy Image | Next-Gen Image
 
 | `circleci/buildpack-deps`
-| cimg/base
+| `cimg/base`
 
 | `circleci/jruby`
 | No suggested path
@@ -58,7 +58,7 @@ All Legacy to Next-Gen image changes are captured below in this table:
 | No suggested path
 
 | `circleci/golang`
-| cimg/go
+| `cimg/go`
 |===
 --
 
@@ -108,4 +108,4 @@ When migrating to a next-gen image, there might be some software issues. Common 
 sudo apt-get update && sudo apt-get install -y <the-package>
 ----
 
-Each image has its own GitHub repository. You can find them link:https://github.com/CircleCI-Public?q=cimg-&type=&language=&sort=[here]. These repositories are where you can learn more about an image, what makes up the image, open GitHub issues, and contribute PRs. If you are having an issue with an image, especially if it is a migration issue, you can open up a GitHub issue and ask questions. You can also link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket] or reach out on link:https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[CircleCI Discuss].
+Each image has its own GitHub repository. You can find them link:https://github.com/CircleCI-Public?q=cimg-&type=&language=&sort=[here]. These repositories are where you can learn more about an image, what makes up the image, open GitHub issues, and contribute PRs. If you are having an issue with an image, especially if it is a migration issue, you can open a GitHub issue and ask questions. You can also link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket] or reach out on link:https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[CircleCI Discuss].
