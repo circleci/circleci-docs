@@ -226,7 +226,9 @@ If your pipeline fails to compile after adding a job group, check for the follow
 === Failure-handling job not triggering for a job group?
 
 pass:[<!-- vale off -->]
+
 If a downstream job configured to run on failure does not trigger after a job group fails, it may be waiting on the group's exit job rather than the individual job that failed. Downstream jobs that depend on a job group invocation observe the exit job's status, not the status of individual jobs inside the group.
+
 pass:[<!-- vale on -->]
 
 To react to a failure inside the group, add a failure-handling job inside the group definition itself.
