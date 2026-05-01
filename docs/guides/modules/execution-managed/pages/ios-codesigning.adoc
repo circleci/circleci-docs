@@ -36,11 +36,11 @@ In this example configuration, we will set up and use a git repository for stora
 
 To set up Fastlane Match:
 
-. On your local machine, open Terminal and navigate to the root directory of your repository
-. Run `bundle exec fastlane match init`
-. Follow the instructions to configure the Match repository
+. On your local machine, open Terminal and navigate to the root directory of your repository.
+. Run `bundle exec fastlane match init`.
+. Follow the instructions to configure the Match repository.
 . After the above is complete, run `bundle exec fastlane match development` to generate and
-install the Development certificates and profiles
+install the Development certificates and profiles.
 . Then, run `bundle exec fastlane match adhoc` to generate and install the Ad-hoc distribution
 certificates and profiles.
 
