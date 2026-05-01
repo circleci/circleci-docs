@@ -100,7 +100,7 @@ You can then confirm the supported architecture of the extracted binary with the
 lipo -info circleci-demo-macos-x86_64
 ----
 
- Which will output the following:
+Which will output the following:
 
 [source,shell]
 ----
@@ -110,7 +110,7 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 [#cross-compiled-binaries]
 === Cross compiled binaries
 
-While universal binaries are only supported under Xcode `12.2`+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For `xcodebuild` the process is relatively straightforward. To build `ARM64` binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to `x86_64`.
+While universal binaries are only supported under Xcode `12.2`+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For `xcodebuild` the process is relatively straightforward. To build `ARM64` binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO`. For the `x86_64` architecture simply change `ARCHS` to `x86_64`.
 
 [#optimization-and-best-practices]
 == Optimization and best practices
@@ -158,7 +158,7 @@ NOTE: It may take a few minutes to boot a simulator, or longer if booting a pair
 [#collecting-ios-simulator-crash-reports]
 === Collecting iOS simulator crash reports
 
-Often if your `scan` step fails, for example, due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
+Often if your `scan` step fails, for example, due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash reports is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
 
 [source,yaml]
 ----
@@ -244,7 +244,7 @@ The following common test tools are known to work well on CircleCI:
 [#react-native-projects]
 === React Native projects
 
-React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, see link:https://github.com/CircleCI-Public/circleci-demo-react-native[our demo React Native application]
+React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, see link:https://github.com/CircleCI-Public/circleci-demo-react-native[our demo React Native application].
 
 [#using-multiple-executor-types-macos-docker]
 == Using multiple executor types (macOS + Docker)
