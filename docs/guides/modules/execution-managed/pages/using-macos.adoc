@@ -60,7 +60,7 @@ CircleCI will announce the availability of new macOS images, including Xcode bet
 
 CircleCI aims to make beta Xcode versions available on the macOS executor as soon as possible to allow developers to test their apps ahead of the next stable Xcode release.
 
-Unlike CircleCI's stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated.
+Unlike CircleCI's stable images, beta images are not frozen. Each new beta release overwrites the previous one until a GM (stable) image is released, at which point the image is frozen and no longer updated.
 
 If you are requesting an image using an Xcode version that is currently in beta, you should expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling, which are beyond CircleCI's control.
 
