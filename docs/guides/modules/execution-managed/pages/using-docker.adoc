@@ -107,6 +107,8 @@ include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 [#docker-gen2-benefits]
 == Docker gen2
 
+NOTE: Docker gen2 resource classes are available on paid plans only. See the xref:plans-pricing:plan-overview.adoc[Plans Overview] for details.
+
 Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
 
 [#docker-gen2-performance-improvements]
