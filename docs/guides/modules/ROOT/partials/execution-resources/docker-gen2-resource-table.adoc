@@ -1,0 +1,51 @@
+NOTE: For credit and access information, see the link:https://circleci.com/product/features/resource-classes/[Resource classes page]. Resource class access is dependent on your xref:guides:plans-pricing:plan-overview.adoc[Plan].
+
+[.table-scroll]
+--
+[cols=5*, options="header"]
+|===
+| Class | vCPUs | RAM | Cloud | Server
+
+| `small.gen2`
+| 1
+| 2GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `medium.gen2`
+| 2
+| 4GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `medium+.gen2`
+| 3
+| 6GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `large.gen2`
+| 4
+| 8GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `xlarge.gen2`
+| 8
+| 16GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `2xlarge.gen2`
+| 16
+| 32GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `2xlarge+.gen2`
+| 20
+| 40GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+|===
+--
