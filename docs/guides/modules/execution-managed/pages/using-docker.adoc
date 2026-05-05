@@ -114,7 +114,7 @@ Resource classes running on gen2 infrastructure offer significant performance an
 [#docker-gen2-performance-improvements]
 === Performance improvements
 
-Using more modern compute, gen2 instances are 3x faster than their gen1 equivalents.
+Using more modern compute, gen2 instances are nearly 1.4x faster than their gen1 equivalents.
 
 x86 gen2 resources have a higher cost in credits per minute than their gen1 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
