@@ -118,7 +118,7 @@ Using more modern compute, gen2 instances are 3x faster than their gen1 equivale
 
 x86 gen2 resources have a higher cost in credits per minute than their gen1 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
-NOTE: Gen2 does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
+NOTE: Gen2 does not currently support the use of xref:security:ip-ranges.adoc[IP Ranges].
 
 [#using-docker-gen2]
 === Using gen2
