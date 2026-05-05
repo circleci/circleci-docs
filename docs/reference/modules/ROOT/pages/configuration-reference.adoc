@@ -1164,6 +1164,35 @@ jobs:
 
 include::guides:ROOT:partial$execution-resources/docker-resource-table.adoc[]
 
+[#x86-gen2]
+==== x86 (gen2)
+
+include::guides:ROOT:partial$execution-resources/docker-gen2-resource-table.adoc[]
+
+.Set a resource class for a Docker job
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: xlarge.gen2
+    steps:
+      ... // other config
+----
+
+.Set a resource class for a Docker job using an expression
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.12
+    resource_class: << pipeline.git.branch == "main" and "xlarge.gen2" or "medium.gen2" >>
+    steps:
+      ... // other config
+----
+
 [#arm]
 ==== Arm
 
@@ -3874,5 +3903,3 @@ workflows:
             branches:
               only: main
 ----
-
-
