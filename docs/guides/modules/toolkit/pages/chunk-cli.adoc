@@ -3,7 +3,7 @@
 :page-description: How to install and configure the chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
 :experimental:
 
-The link:https://github.com/CircleCI-Public/chunk-cli[chunk CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. It works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. It works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
 
 Some of the things you can do with the chunk CLI include:
 
@@ -12,12 +12,12 @@ Some of the things you can do with the chunk CLI include:
 * Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`.
 * Set up pre-commit and session-end hooks that automatically validate in Claude Code using `chunk init`.
 
-NOTE: **chunk CLI vs Chunk by CircleCI.** The chunk CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
+NOTE: **chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
 
 [#supported-platforms]
 == Supported platforms
 
-The chunk CLI supports macOS and Linux on both arm64 and x86_64 architectures. Windows is not supported.
+The `chunk` CLI supports macOS and Linux on both arm64 and x86_64 architectures. Windows is not supported.
 
 [#installation]
 == Installation
@@ -45,7 +45,7 @@ $ chunk --version
 [#authentication]
 == Authentication
 
-After installing the chunk CLI, set credentials for each service you plan to use.
+After installing the `chunk` CLI, set credentials for each service you plan to use.
 
 [#auth-circleci]
 === CircleCI
@@ -57,7 +57,7 @@ Required for `chunk sidecar` and `chunk task` commands.
 $ chunk auth set circleci
 ----
 
-Enter your CircleCI personal API token when prompted. Generate one from the link:https://app.circleci.com/settings/user/tokens[Personal API Tokens tab, window=_blank].
+Enter your CircleCI personal API token when prompted. Generate a personal API token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
 
 [#auth-anthropic]
 === Anthropic
@@ -69,7 +69,7 @@ Required for `chunk build-prompt`.
 $ chunk auth set anthropic
 ----
 
-Enter your Anthropic API key when prompted. Generate one from the link:https://console.anthropic.com/settings/keys[Anthropic console, window=_blank].
+Enter your Anthropic API key when prompted. Generate an API key from the link:https://console.anthropic.com/settings/keys[Anthropic console, window=_blank].
 
 [#auth-github]
 === GitHub
@@ -150,13 +150,6 @@ The following flags are available:
 
 [source,console]
 ----
-$ chunk upgrade
-----
-
-Or, if you installed with Homebrew:
-
-[source,console]
-----
 $ brew upgrade chunk
 ----
 
@@ -174,7 +167,3 @@ $ brew uninstall chunk
 * xref:how-to-use-chunk-cli.adoc#generate-a-review-prompt[Generate a Team Review Prompt From Your GitHub PR History]
 * xref:how-to-use-chunk-cli.adoc#run-validation[Validate Your Changes]
 * xref:how-to-use-chunk-cli.adoc#install-skills[Install AI Agent Skills]
-
-:!page-platform:
-:!page-description:
-:!experimental:

@@ -100,7 +100,7 @@ The following flags are available:
 |Ignore the cache and run all commands regardless of file changes.
 
 |`--sidecar-id <id>`
-|Validate commands remotely in the specified cloud sidecar.
+|Validate commands remotely in the specified cloud sidecar. Get a sidecar ID from `chunk sidecar create` output or `chunk sidecar list`.
 |===
 --
 
@@ -114,7 +114,7 @@ To validate in a CircleCI Cloud environment instead of locally, pass a sidecar I
 $ chunk validate --sidecar-id <sidecar-id>
 ----
 
-See the <<manage-sidecars,Manage cloud sidecars>> section for how to create and manage sidecars.
+To get a sidecar ID, run `chunk sidecar create` and copy the ID printed when the environment is ready, or run `chunk sidecar list` to retrieve the ID of an existing sidecar. See the <<manage-sidecars,Manage cloud sidecars>> section for details.
 
 [#manage-sidecars]
 == Manage cloud sidecars
@@ -129,7 +129,7 @@ Cloud sidecars are CircleCI Cloud environments where chunk validates your change
 $ chunk sidecar create
 ----
 
-chunk auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment on CircleCI.
+chunk auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment on CircleCI. The command prints the sidecar ID when the environment is ready. Use this ID with `chunk validate --sidecar-id` to run validations in that environment.
 
 [#list-sidecars]
 === List sidecars
@@ -138,6 +138,8 @@ chunk auto-detects your tech stack, generates a Dockerfile, and provisions a clo
 ----
 $ chunk sidecar list
 ----
+
+Lists all your sidecars and their IDs. Use this to retrieve a sidecar ID if you need it after creation.
 
 [#ssh-into-sidecar]
 === SSH into a sidecar
@@ -256,8 +258,3 @@ Supported keys:
 == Next steps
 
 * xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI Web App]
-* xref:chunk-cli.adoc[Install and Configure the Chunk CLI]
-
-:!page-platform:
-:!page-description:
-:!experimental:
