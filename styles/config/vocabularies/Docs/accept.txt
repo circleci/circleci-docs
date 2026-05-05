@@ -7,8 +7,6 @@
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
-\b[Cc]onfig policies\b
-\b[Cc]onfig policy\b
 [Cc]ron
 [Ee]nterprise
 [Gg]it
@@ -60,6 +58,7 @@ AWS Certificate Manager
 AWS\sECR
 Azure
 Azure Container Registry
+[Bb]ackfilling
 backoff
 [Bb]anlist?
 Bash
@@ -152,6 +151,7 @@ Fastlane
 /bFastlane Match/b
 [Ff]ilename
 [Ff]ilepath
+Finout
 framebuffer
 frameit
 \bFree Plan\b
@@ -190,6 +190,7 @@ IAM
 IdP
 [Ii]njectable
 [Ii]nsights
+inlines
 invocated
 iOS
 IP
@@ -338,6 +339,7 @@ stdin
 [Ss]ubcommands?
 [Ss]ubnets?
 [Ss]ubnetworks?
+[Ss]ubpackage
 superset
 Sysbox
 systemd
@@ -408,3 +410,4 @@ XCTest
 XQuartz
 Xvfb
 YAML
+Zstd

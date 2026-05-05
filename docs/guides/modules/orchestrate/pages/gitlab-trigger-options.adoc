@@ -3,7 +3,7 @@
 :page-description: A guide to the options available for triggering GitLab pipelines
 :experimental:
 
-GitLab **Trigger filters** allow you to determine when a trigger should start a build based on the parameters provided by GitLab's webhook.
+GitLab **Trigger filters** allow you to determine when a trigger starts a build based on the parameters provided by GitLab's webhook.
 
 == Introduction
 

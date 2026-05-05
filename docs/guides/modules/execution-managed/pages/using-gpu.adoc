@@ -22,7 +22,7 @@ jobs:
       - run: nvidia-smi
 ----
 
-To use the Windows GPU execution environment, you can either choose to use the Windows orb and specify the built-in GPU executor, or use the machine executor and specify a Windows GPU-enabled image. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/windows[Orb Registry page] for full details, and the link:https://circleci.com/developer/images?imageType=machine[Developer Hub] for full details of available machine executor images.
+To use the Windows GPU execution environment, you can either choose to use the Windows orb and specify the built-in GPU executor. Alternatively, use the machine executor and specify a Windows GPU-enabled image. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/windows[Orb Registry page] for full details, and the link:https://circleci.com/developer/images?imageType=machine[Developer Hub] for full details of available machine executor images.
 
 [tabs]
 ====

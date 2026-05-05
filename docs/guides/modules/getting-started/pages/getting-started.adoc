@@ -11,23 +11,24 @@ This quickstart provides a guided tour through setting up a project, collaborati
 * Use the VS Code extension to debug and extend your config.
 * SSH into a build to debug your project.
 
-If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:reference:ROOT:configuration-reference.adoc[Configuration reference].
+If you would rather jump to a full list of CircleCI `config.yml` options, see the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
 
 == Prerequisites
 
 * A CircleCI account. You can link:https://circleci.com/signup/[sign up for free].
 * A code repository you want to build on CircleCI.
 
-NOTE: This guide assumes you have xref:first-steps.adoc[signed up] and connected to GitHub, Bitbucket or GitLab.
+NOTE: This guide assumes you have xref:first-steps.adoc[Signed Up] and connected to GitHub, Bitbucket or GitLab
 
 include::ROOT:partial$tips/check-github-type.adoc[Check your GitHub integration type]
 
 == 1. Connect your code
 
+.Connect your code
 image::guides:ROOT:getting-started-guide-exp/quick-start-first-step.svg[section one banner image]
 
 *Create a project, connect your new code repository, and commit a CircleCI configuration file. View your project build in the CircleCI app.*
-
+pass:[<!-- vale off -->]
 [tabs]
 ====
 GitHub App::
@@ -45,7 +46,7 @@ image:guides:ROOT:getting-started-guide-exp/setup-pipeline.png[float=right]
 *Set up a pipeline*
 Follow the in-app instructions to set up your pipeline including connecting your code, preparing a config file and reviewing triggers.
 
-For a more detailed look at this process see the xref:create-project.adoc[Create a project guide].
+For a more detailed look at this process see the xref:create-project.adoc[Create a Project] guide.
 {empty} +
 {empty} +
 {empty} +
@@ -53,7 +54,7 @@ For a more detailed look at this process see the xref:create-project.adoc[Create
 image:guides:ROOT:getting-started-guide-exp/commit-and-run.png[float=right]
 [%hardbreaks]
 *Commit and run*
-Once you have gone through the pipeline setup process in the app you have everything you need to commit your config (unless you have a config in your repo already) and build.
+Once you have gone through the pipeline setup process in the app, you have everything you need to commit your config and build. If you already have a config in your repo, you do not need to commit a new one.
 
 Review your project details and select *Commit config and run*.
 {empty} +
@@ -62,7 +63,7 @@ Review your project details and select *Commit config and run*.
 image:guides:ROOT:getting-started-guide-exp/pass-pipeline.png[float=right]
 [%hardbreaks]
 *Congratulations 🎉*
-You should soon have a passing pipeline.
+You will soon have a passing pipeline.
 
 In the next sections we will cover ways to modify and debug your config.
 {empty} +
@@ -75,14 +76,14 @@ GitLab & Bitbucket Data Center::
 image:guides:ROOT:getting-started-guide-exp/create-project.png[float=right]
 [%hardbreaks]
 *Create a project*
-In the CircleCI web app, select link:https://app.circleci.com/projects[Projects] from the sidebar. Click *Create project*, then select the repository you would like to connect from the dropdown.
+In the CircleCI web app, select link:https://app.circleci.com/projects[Projects] from the sidebar. Select *Create project*, then select the repository you would like to connect from the dropdown.
 
 If you do not see the org selector in the top left corner, navigate back to your user homepage to find the correct organization
 
 image:guides:ROOT:getting-started-guide-exp/select-config-gitlab.png[float=right]
 [%hardbreaks]
 *Select a config.yml*
-In the “Select your link:https://circleci.com/docs/config-start/[config.yml] file” modal, select *Fast*, then give your project a name, and select *Create Project*. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
+In the "Select your link:https://circleci.com/docs/config-start/[config.yml] file" modal, select *Fast*, then give your project a name, and select *Create Project*. If you are authenticated through the GitHub App, you also need to set up SSH access for your project at this point.
 
 {empty} +
 
@@ -97,7 +98,7 @@ You are now in the <a class="no-external-icon" link:https://circleci.com/docs/co
 image:guides:ROOT:getting-started-guide-exp/commit-run-gitlab.png[float=right]
 [%hardbreaks]
 *Commit your config*
-Click *Commit and Run*. This will create a `.circleci/config.yml` file at the root of your repository on a new branch called `update-circleci-config`.
+Select *Commit and Run*. This will create a `.circleci/config.yml` file at the root of your repository on a new branch called `update-circleci-config`.
 
 {empty} +
 {empty} +
@@ -105,7 +106,7 @@ Click *Commit and Run*. This will create a `.circleci/config.yml` file at the ro
 image:guides:ROOT:getting-started-guide-exp/pass-pipeline.png[float=right]
 [%hardbreaks]
 *Congratulations* 🎉
-You should soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.
+You will soon have a passing pipeline. If you are happy with this configuration, merge it into your main branch, or continue to make changes.
 
 {empty} +
 --
@@ -122,7 +123,7 @@ If you do not see these options, select the CircleCI logo in the top bar to get 
 image:guides:ROOT:getting-started-guide-exp/select-config.png[float=right]
 [%hardbreaks]
 *Select a config.yml*
-In the “Select your config.yml file” modal, select *Faster*, then click *Set Up Project*.
+In the "Select your config.yml file" modal, select *Faster*, then click *Set Up Project*.
 
 {empty} +
 {empty} +
@@ -132,7 +133,7 @@ In the “Select your config.yml file” modal, select *Faster*, then click *Set
 image:guides:ROOT:getting-started-guide-exp/pass-pipeline.png[float=right]
 [%hardbreaks]
 *Congratulations* 🎉
-You should soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.
+You will soon have a passing pipeline. In the next sections we will cover ways to modify and debug your config.
 
 {empty} +
 --
@@ -140,6 +141,7 @@ You should soon have a passing pipeline. In the next sections we will cover ways
 
 == 2. Dig into your first pipeline
 
+.Dig into your first pipeline
 image::guides:ROOT:getting-started-guide-exp/quick-start-second-step.svg[section two banner image]
 
 *Explore your passing pipeline and invite your teammates to join you, for free. By collaborating, you can troubleshoot, get pull requests approved, and build and test faster.*
@@ -155,7 +157,7 @@ Expand your workflow and select a job to view the steps that ran. Use the tabs a
 image:guides:ROOT:getting-started-guide-exp/expand-step.png[float=right]
 [%hardbreaks]
 *View step output*
-Expand any step to view the build output. You can search, share or download the output for collaboration and debugging. If a step fails, use the xref:toolkit:intelligent-summaries.adoc[Explain this error] button for help.
+Expand any step to view the build output. You can search, share or download the output for collaboration and debugging. If a step fails, use the xref:toolkit:intelligent-summaries.adoc[Explain This Error] button for help.
 
 {empty} +
 {empty} +
@@ -167,6 +169,7 @@ Invite teammates to collaborate on your projects. Navigate to menu:Org[People] t
 
 == 3. Debug and iterate
 
+.Debug and iterate
 image::guides:ROOT:getting-started-guide-exp/quick-start-third-step.svg[section three banner image]
 
 *Discover CircleCI features to help debug and configure your builds.*
@@ -174,7 +177,7 @@ image::guides:ROOT:getting-started-guide-exp/quick-start-third-step.svg[section 
 image:guides:ROOT:getting-started-guide-exp/ssh-rerun.png[float=right]
 [%hardbreaks]
 *Rerun with SSH*
-To access a job's build environment for troubleshooting, rerun the job with SSH access. The VM remains active for 10 minutes after the pipeline finishes. For full details, see the xref:execution-managed:ssh-access-jobs.adoc[Debug with SSH] page.
+To access a job's build environment for troubleshooting, rerun the job with SSH access. The VM remains active for 10 minutes after the pipeline finishes. For full details, see the xref:execution-managed:ssh-access-jobs.adoc[Debug With SSH] page.
 
 {empty} +
 {empty} +
@@ -182,14 +185,14 @@ To access a job's build environment for troubleshooting, rerun the job with SSH 
 image:guides:ROOT:getting-started-guide-exp/validate-config.png[float=right]
 [%hardbreaks]
 *VS Code extension*
-Using the xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code extension], validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.
+Using the xref:toolkit:vs-code-extension-overview.adoc[CircleCI VS Code Extension], validate your CircleCI config file. Get help with troubleshooting config updates and help keeping dependencies up to date.
 
 {empty} +
-
+pass:[<!-- vale on -->]
 [#next-steps]
 == Next steps
 
 * link:https://www.youtube.com/playlist?list=PL9GgS3TcDh8wqLRk-0mDz7purXh-sNu7r[CircleCI foundation videos]
-* xref:config-intro.adoc[Introduction to configuration]
-* xref:about-circleci:concepts.adoc[CircleCI concepts]
+* xref:config-intro.adoc[Introduction to Configuration]
+* xref:about-circleci:concepts.adoc[CircleCI Concepts]
 * xref:plans-pricing:plan-free.adoc[Benefits of CircleCI Free Plan]

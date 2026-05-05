@@ -9,11 +9,11 @@ This page describes how to create and use custom Docker images with CircleCI.
 == Overview
 
 CircleCI supports Docker, providing you with a powerful way to specify dependencies for your projects.
-If the xref:circleci-images.adoc[convenience images] do not suit your needs, consider creating a custom Docker image for your jobs.
+If the xref:circleci-images.adoc[Convenience Images] do not suit your needs, consider creating a custom Docker image for your jobs.
 This approach provides two major benefits:
 
 * *Faster job execution:* Packaging your required tools into a custom image removes the need to install them for every job.
-* *Cleaner configuration:* Adding lengthy installation scripts to a custom image reduces the number of lines in your xref:reference:ROOT:configuration-reference.adoc[configuration reference] file.
+* *Cleaner configuration:* Adding lengthy installation scripts to a custom image reduces the number of lines in your xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] file.
 
 NOTE: When building Docker images, CircleCI does not preserve entrypoints by default.
 See <<adding-an-entrypoint,Adding an Entrypoint>> for more details.
@@ -21,7 +21,7 @@ See <<adding-an-entrypoint,Adding an Entrypoint>> for more details.
 [#creating-a-custom-image-manually]
 == Create a custom image manually
 
-The following sections provide a walkthrough of how to create a custom image manually. In most cases you will want to have a custom image for your xref:reference:ROOT:glossary.adoc#primary-container[primary container] so that is the focus of this guide. You can also apply this knowledge to create images for secondary containers.
+The following sections provide a walkthrough of how to create a custom image manually. In most cases you will want to have a custom image for your xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] so that is the focus of this guide. You can also apply this knowledge to create images for secondary containers.
 
 [#prerequisites]
 === Prerequisites
@@ -32,7 +32,7 @@ The following sections provide a walkthrough of how to create a custom image man
 === 1. Create a `Dockerfile`
 
 To create a custom image, you must https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile[create a `Dockerfile`].
-This is a text document containing commands that Docker uses to assemble an image.
+A `Dockerfile` is a text document containing commands that Docker uses to assemble an image.
 Consider keeping your `Dockerfile` in your `.circleci/images` folder, as shown in https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary[this Docker demo project].
 
 [#choosing-and-setting-a-base-image]
@@ -68,7 +68,7 @@ RUN go get github.com/jstemmer/go-junit-report
 
 To use a custom Docker image as a primary container on CircleCI, install the following tools:
 
-* Bash (usually already installed or available via your package manager)
+* Bash (usually already installed or available via your package manager).
 * https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[git]
 * https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation[SSH]
 * https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar[tar]
@@ -84,7 +84,7 @@ We recommend using the latest stable versions of all required tools. Older versi
 
 Package managers install versions available in your base image's repositories. Older base images (for example, Alpine 3.11 or Ubuntu 18.04) may only have outdated tool versions available.
 
-If you experience unexpected failures during checkout, xref:optimize:caching.adoc[caching dependencies], or xref:optimize:artifacts.adoc[storing build artifacts] operations, you may need to:
+If you experience unexpected failures during checkout, xref:optimize:caching.adoc[Caching Dependencies], or xref:optimize:artifacts.adoc[Storing Build Artifacts] operations, you may need to:
 
 * Use a more recent base image.
 * Add updated package repositories.
@@ -117,7 +117,7 @@ LABEL com.circleci.preserve-entrypoint=true
 ENTRYPOINT contacts
 ----
 
-NOTE: Entrypoints should be commands that run forever without failing.
+NOTE: Entrypoints are commands that run forever without failing.
 If the entrypoint fails or terminates in the middle of a build, the build will also terminate.
 If you need to access logs or build status, consider using a background step instead of an entrypoint.
 
@@ -330,7 +330,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 CMD [ "node" ]
 ----
 
-Both Dockerfiles use the same base image `buildpack-deps:jessie`. This is excellent because you can combine them and install Python to get `awscli`.
+Both Dockerfiles use the same base image `buildpack-deps:jessie`. Using the same base image is excellent because you can combine them and install Python to get `awscli`.
 
 Remove the associated files before committing the Docker image to install by using `apt`. You can install everything and remove those files afterward, but do not run `apt-get update` more than once. Any custom repositories are added beforehand.
 
@@ -457,7 +457,7 @@ To build it, run the following command:
 docker build -t ruby-node:0.1 .
 ----
 
-When it completes, it should display the following:
+When it completes, it displays the following:
 
 [,shell]
 ----
@@ -487,4 +487,4 @@ It is worth it to commit your Dockerfile using a gist and link to it from Docker
 [#caching-docker-images]
 == Caching Docker images
 
-For information on Docker image caching, see xref:using-docker.adoc#caching-docker-images[Caching Docker images].
+For information on Docker image caching, see xref:using-docker.adoc#caching-docker-images[Caching Docker Images].

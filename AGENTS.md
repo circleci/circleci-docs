@@ -451,6 +451,15 @@ git diff --cached --name-only | grep '.adoc$' | xargs vale
 - Style rules: `styles/` directory
 - Custom CircleCI rules: `styles/CircleCI/`
 
+**Automated Vale error fixing:**
+
+When asked to fix Vale errors, use the vale-linter skill located at `skills/vale-linter/SKILL.md`. This skill automates the workflow of:
+- Running Vale to identify error-level issues (not warnings or suggestions)
+- Applying fixes while preserving AsciiDoc formatting
+- Creating individual pull requests per file for easier review
+
+To use: "Fix vale errors in [file or directory]" or "Run vale on [file] and create a PR"
+
 ### AsciiDoc Validation
 
 In addition to Vale, the build process validates AsciiDoc syntax:

@@ -251,8 +251,8 @@ Some things to keep in mind when using manual approval in a workflow:
 * All jobs that run _after_ a manual approval job **must** `require` the name of the `approval` job.
 * Jobs run in the order defined in the workflow.
 * When the workflow encounters a job with `type: approval`, the workflow pauses until action is taken to approve or cancel.
-* If approval is granted the workflow continues to process jobs in the order defined in the configuration file.
-* If cancel is granted the downstream jobs are not run.
+* If approval is granted, the workflow continues to process jobs in the order defined in the configuration file.
+* If cancel is granted, the downstream jobs are not run.
 * Jobs downstream of an `approval` job can be restricted by adding a xref:security:contexts.adoc#approve-jobs-that-use-restricted-contexts[Restricted Context] to those downstream jobs.
 
 The following screenshot demonstrates:
@@ -406,7 +406,7 @@ TIP: You can find detailed instructions in link:https://support.circleci.com/hc/
 
 === Cancel a job
 
-To Cancel a job follow these steps:
+To Cancel a job, follow these steps:
 
 [tabs]
 ====
@@ -1003,7 +1003,7 @@ Workflows may have one of the following states:
 |===
 --
 
-NOTE: After 90 days non-terminal workflows are automatically cancelled by CircleCI.
+NOTE: After 90 days non-terminal workflows are automatically canceled by CircleCI.
 
 
 [#troubleshooting]
@@ -1019,7 +1019,7 @@ If you do not see your workflows running, check for configuration errors that ma
 [#rerunning-workflows-fails]
 === Rerunning workflows fails
 
-Failures may happen before a workflow runs during pipeline processing. Re-running the in this case workflow will fail. Push a change to the project repository or use the trigger pipeline option to rerun the pipeline.
+Failures may happen before a workflow runs during pipeline processing. Re-running the workflow in this case will fail. Push a change to the project repository or use the trigger pipeline option to rerun the pipeline.
 
 NOTE: You cannot rerun jobs and workflows that are >= 90 days.
 
