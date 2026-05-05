@@ -110,6 +110,34 @@ You can manually release a serial group from the CircleCI web app to allow queui
 .Screenshot showing the serial group release modal
 image::guides:ROOT:serial-groups/serial-group-release-modal.png[Serial group release modal]
 
+****
+*New Pipelines View (Beta)*
+
+In the link:https://circleci.com/changelog/the-new-all-pipelines-page-is-now-available-in-beta/[new pipelines UI (beta)], you can release a serial group from the job side panel.
+
+To access the new pipeline view, select *Pipelines* in the sidebar and toggle *New Pipelines View* to *On*.
+
+. In the link:https://app.circleci.com/home[CircleCI web app], select your org.
+. Select *Pipelines* in the sidebar.
+. Locate the pipeline with a serial group job currently running and select it to open workflows in the sidebar.
+. Select the serial group job to open the job panel.
+. Select btn:[Release serial group].
++
+.Screenshot showing the "Release serial group" button in the new pipelines UI side panel
+image::guides:ROOT:serial-groups/serial-group-side-panel.png[Release serial group button in the new pipelines UI side panel]
+
+If you are not sure which job currently holds the serial group lock, you can find it via a queued lock job:
+
+. Select *Pipelines* in the sidebar.
+. Locate any pipeline with a job that is queued by the same serial group and select it to open its workflows in the sidebar.
+. Select the queued serial group job to open its side panel.
+. Select btn:[View job] to navigate directly to the job that is currently holding the lock.
++
+.Screenshot showing the "View job" button in the new pipelines UI side panel
+image::guides:ROOT:serial-groups/serial-group-view-job.png[View job button in the new pipelines UI side panel]
+. From that job's side panel, select btn:[Release serial group].
+****
+
 ==== Cancel a workflow with a serial group job
 
 You can cancel an entire workflow that contains serial group jobs. Canceling a workflow will cancel all of its jobs, and the next job in the serial group in the org will start:
