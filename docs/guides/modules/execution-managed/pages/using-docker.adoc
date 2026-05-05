@@ -19,7 +19,7 @@ jobs:
 
 A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job run. _Secondary_ containers can also be specified to run alongside the primary container for services such as databases.
 
-NOTE: For an introduction to Docker concepts, see the link:https://docs.docker.com/engine/docker-overview/[Docker Overview documentation].
+TIP: For an introduction to Docker concepts, see the link:https://docs.docker.com/engine/docker-overview/[Docker Overview documentation].
 
 CircleCI maintains convenience images on Docker Hub for popular languages. See link:https://circleci.com/developer/images[the CircleCI Developer Hub] for a complete list of image names and tags.
 
