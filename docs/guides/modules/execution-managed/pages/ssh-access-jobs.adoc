@@ -29,7 +29,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
 The "Rerun job with SSH" feature is intended for debugging purposes. These jobs will be created inside of the same pipeline as the original job.
 +
 .Screenshot showing the "Rerun job with SSH" option in the "Rerun" dropdown menu
-image::guides:ROOT:rerun-job-with-SSH.png[Screenshot showing rerun job with SSH option]
+image::guides:ROOT:rerun-job-with-ssh.png[Screenshot showing rerun job with SSH option]
 
 . To see the connection details, expand the *Enable SSH* section in the job output where you will see the SSH command needed to connect. The details are displayed again in the *Wait for SSH* section at the end of the job.
 +
