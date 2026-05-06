@@ -1,14 +1,14 @@
 = How to use the chunk CLI
 :page-platform: Cloud
-:page-description: How to use the chunk CLI to generate AI review prompts, run validations, manage cloud sidecars, and install AI agent skills.
+:page-description: How to use the chunk CLI to generate AI review prompts, run validations, manage Chunk sidecars, and install AI agent skills.
 :experimental:
 
-This page describes how to use the main features of the chunk CLI.
+This page describes how to use the main features of the `chunk` CLI.
 
 [#prerequisites]
 == Prerequisites
 
-* An installed and configured chunk CLI. See the xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI] page.
+* An installed and configured `chunk` CLI. See the xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI] page.
 * A project initialized with `chunk init`, or a `.chunk/config.json` file with commands configured.
 
 [#generate-a-review-prompt]
@@ -100,53 +100,53 @@ The following flags are available:
 |Ignore the cache and run all commands regardless of file changes.
 
 |`--sidecar-id <id>`
-|Validate commands remotely in the specified cloud sidecar. Get a sidecar ID from `chunk sidecar create` output or `chunk sidecar list`.
+|Validate commands remotely in the specified Chunk sidecar. Get a Chunk sidecar ID from `chunk sidecar create` output or `chunk sidecar list`.
 |===
 --
 
 [#run-validation-in-a-sidecar]
-=== Validate in a cloud sidecar
+=== Validate in a Chunk sidecar
 
-CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
-To validate in a CircleCI Cloud environment instead of locally, pass a sidecar ID:
+To validate in a CircleCI Cloud environment instead of locally, pass a Chunk sidecar ID:
 
 [source,console]
 ----
 $ chunk validate --sidecar-id <sidecar-id>
 ----
 
-To get a sidecar ID, run `chunk sidecar create` and copy the ID printed when the environment is ready, or run `chunk sidecar list` to retrieve the ID of an existing sidecar. See the <<manage-sidecars,Manage cloud sidecars>> section for details.
+To get a Chunk sidecar ID, run `chunk sidecar create` and copy the ID printed when the environment is ready, or run `chunk sidecar list` to retrieve the ID of an existing Chunk sidecar. See the <<manage-sidecars>> section for details.
 
 [#manage-sidecars]
-== Manage cloud sidecars
+== Manage Chunk sidecars
 
-CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
-Cloud sidecars are CircleCI Cloud environments where chunk validates your changes remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
+Chunk sidecars are CircleCI Cloud environments where the `chunk` CLI validates your changes remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
 
 [#create-a-sidecar]
-=== Create a sidecar
+=== Create a Chunk sidecar
 
 [source,console]
 ----
 $ chunk sidecar create
 ----
 
-chunk auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment on CircleCI. The command prints the sidecar ID when the environment is ready. Use this ID with `chunk validate --sidecar-id` to run validations in that environment.
+The `chunk` CLI auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment on CircleCI. The command prints the Chunk sidecar ID when the environment is ready. Use this ID with `chunk validate --sidecar-id` to run validations in that environment.
 
 [#list-sidecars]
-=== List sidecars
+=== List Chunk sidecars
 
 [source,console]
 ----
 $ chunk sidecar list
 ----
 
-Lists all your sidecars and their IDs. Use this to retrieve a sidecar ID if you need it after creation.
+Lists all your Chunk sidecars and their IDs. Use this to retrieve a Chunk sidecar ID if you need it after creation.
 
 [#ssh-into-sidecar]
-=== SSH into a sidecar
+=== SSH into a Chunk sidecar
 
 [source,console]
 ----
@@ -154,14 +154,14 @@ $ chunk sidecar ssh
 ----
 
 [#sync-files-to-sidecar]
-=== Sync local files to a sidecar
+=== Sync local files to a Chunk sidecar
 
 [source,console]
 ----
 $ chunk sidecar sync
 ----
 
-[#exec-in-sidecar]
+[#exec-in-chunk-sidecar]
 === Execute a command in a sidecar
 
 [source,console]
@@ -172,14 +172,14 @@ $ chunk sidecar exec <command>
 [#install-skills]
 == Install AI agent skills
 
-The `chunk skill install` command installs chunk's skills into your AI coding agent (Claude Code, Cursor, or VS Code Copilot).
+The `chunk skill install` command installs `chunk` CLI skills into your AI coding agent (Claude Code, Cursor, or VS Code Copilot).
 
 [source,console]
 ----
 $ chunk skill install
 ----
 
-To see available skills and their current installation status:
+To see available skills and their current installation status run the following:
 
 [source,console]
 ----
@@ -198,7 +198,7 @@ The following skills are available:
 |Reviews pull requests and diffs using your team's review standards from `.chunk/context/review-prompt.md`.
 
 |`chunk-sidecar`
-|Creates and manages cloud sidecar environments.
+|Creates and manages Chunk sidecar environments.
 
 |`chunk-testing-gaps`
 |Identifies test coverage gaps through mutation testing.
@@ -218,7 +218,7 @@ Running `chunk init` adds hooks to `.claude/settings.json` that trigger `chunk v
 * **PreToolUse hook**: Blocks `git commit` if validation fails, preventing bad code from entering the repository.
 * **Stop hook**: Validates your changes when your Claude Code session ends, catching uncommitted changes.
 
-To add or update hooks without re-running the full initialization:
+To add or update hooks without re-running the full initialization run the following:
 
 [source,console]
 ----
@@ -228,7 +228,7 @@ $ chunk init --skip-validate
 [#view-config]
 == View and set configuration
 
-To display the fully resolved chunk configuration for your project:
+To display the fully resolved `chunk` CLI configuration for your project run the following:
 
 [source,console]
 ----
