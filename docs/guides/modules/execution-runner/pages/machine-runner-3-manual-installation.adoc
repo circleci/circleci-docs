@@ -109,7 +109,7 @@ runner:
 api:
   auth_token: "your-auth-token"
 ----
-. If you are using CircleCI server you will need to provide the URL for your installation. You can do this by adding the URL to `$HOME/circleci-runner-config.yaml` using text editor of your choice.
+. If you are using CircleCI server you will need to provide the URL for your installation. You can do this by adding the URL to `$HOME/circleci-runner-config.yaml` using a text editor of your choice.
 +
 ```yaml
 api:
