@@ -11,7 +11,7 @@ This document outlines the CircleCI Linux VM (machine) image release, update, an
 [#release-policy]
 == Release policy
 
-The CircleCI Linux VM images are all based on Ubuntu; we support both ARM64 and AMD64 architectures.
+The CircleCI Linux VM images are all based on Ubuntu. We support both ARM64 and AMD64 architectures.
 
 We aim to maintain, support, and release the two most recent LTS versions of Ubuntu.
 
