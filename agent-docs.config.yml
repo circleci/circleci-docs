@@ -1,0 +1,65 @@
+# AF Docs Configuration
+# Documentation: https://afdocs.dev/ci-integration
+
+# Production documentation URL
+url: https://circleci.com/docs/
+
+# Optional: Specify which checks to run (uncomment to customize)
+# By default, all 23 checks will run
+# checks:
+#   - llms-txt-exists
+#   - llms-txt-valid
+#   - llms-txt-size
+#   - sitemap-exists
+#   - sitemap-valid
+#   - robots-txt-exists
+#   - meta-tags-present
+#   - structured-data
+#   - heading-hierarchy
+#   - link-text-quality
+#   - alt-text-present
+#   - code-snippets-clear
+#   - navigation-structure
+#   - search-functionality
+#   - mobile-responsive
+#   - page-load-time
+#   - content-readability
+#   - version-info
+#   - last-updated
+#   - breadcrumbs
+#   - table-of-contents
+#   - cross-references
+#   - api-documentation
+
+# Configure sampling and coverage options
+options:
+  # Sampling options
+  maxLinksToTest: 50
+  samplingStrategy: deterministic  # or 'random'
+
+  # Coverage thresholds for llms.txt coverage check
+  coveragePassThreshold: 95  # Minimum coverage % to pass (default: 95)
+  coverageWarnThreshold: 80  # Threshold between warnings and failures (default: 80)
+
+  # Exclude legacy server versions from coverage checks
+  # Only /latest/ server documentation should be included in llms.txt
+  coverageExclusions:
+    - '/server-admin/server-4.2/**'
+    - '/server-admin/server-4.3/**'
+    - '/server-admin/server-4.4/**'
+    - '/server-admin/server-4.5/**'
+    - '/server-admin/server-4.6/**'
+    - '/server-admin/server-4.7/**'
+    - '/server-admin/server-4.8/**'
+
+  # Exclude <img> tags from markdown-content-parity check
+  # Our markdown converter automatically strips out img tags
+  parityExclusions:
+    - img
+
+# Optional: Test specific pages with tags
+# pages:
+#   - url: https://circleci.com/docs/getting-started/
+#     tags: [onboarding]
+#   - url: https://circleci.com/docs/configuration-reference/
+#     tags: [reference, important]

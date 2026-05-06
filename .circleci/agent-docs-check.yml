@@ -1,0 +1,77 @@
+version: 2.1
+
+# Agent-Friendly Documentation Pipeline
+# Schedule this workflow via CircleCI Project Settings → Project Setup → Schedule +
+# Recommended: Weekly schedule (e.g., every Monday at 9:00 AM UTC)
+# Future enhancements: AI agent benchmarking with custom questions
+
+executors:
+  node_executor:
+    docker:
+      - image: cimg/node:24.15.0
+    working_directory: ~/project
+
+jobs:
+  agent-docs-check:
+    executor: node_executor
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore npm cache
+          keys:
+            - agent-docs-npm-{{ checksum "package-lock.json" }}
+            - agent-docs-npm-
+      - run:
+          name: Install Dependencies
+          command: |
+            echo "[INFO] Installing afdocs and vitest..."
+            npm install -D afdocs vitest
+      - save_cache:
+          name: Save npm cache
+          key: agent-docs-npm-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Run AF Docs Check
+          command: |
+            echo "[INFO] Running agent-friendliness checks..."
+            npx vitest run agent-docs.test.ts
+          no_output_timeout: 10m
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+      - run:
+          name: Log Check Summary
+          when: always
+          command: |
+            echo "[INFO] Agent-friendliness check completed"
+            echo "Results stored in artifacts"
+
+  # Placeholder for future AI agent benchmarking job
+  # agent-benchmarking:
+  #   executor: node_executor
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         name: Restore npm cache
+  #         keys:
+  #           - agent-docs-npm-{{ checksum "package-lock.json" }}
+  #     - run:
+  #         name: Install Dependencies
+  #         command: npm install
+  #     - run:
+  #         name: Run AI Agent Benchmarks
+  #         command: |
+  #           echo "[INFO] Running AI agent benchmarking questions..."
+  #           # Add benchmarking logic here
+  #           # Example: Test different AI agents with standard questions
+  #           # to measure documentation comprehension
+  #     - store_artifacts:
+  #         path: benchmark-results
+
+workflows:
+  agent-docs-workflow:
+    jobs:
+      - agent-docs-check
+      # Future: Add agent-benchmarking job here
