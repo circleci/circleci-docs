@@ -35,7 +35,8 @@ url: https://circleci.com/docs/
 options:
   # Use deterministic sampling for consistent weekly monitoring
   # Default is random, but deterministic allows better trend tracking
-  samplingStrategy: deterministic
+  # Use default for now but consider using deterministic for better trend tracking in future
+  # samplingStrategy: deterministic
 
   # Exclude legacy server versions from coverage checks
   # Only /latest/ server documentation should be included in llms.txt
