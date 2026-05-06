@@ -1,0 +1,105 @@
+= Integrate with Finout for cost management
+:page-platform: Cloud
+:page-description: Connect CircleCI to Finout to track CI/CD costs alongside your cloud infrastructure and optimize spending with detailed cost allocation.
+:experimental:
+
+Finout provides cost tracking and usage reporting for CircleCI, allowing you to monitor CI/CD spending alongside your cloud infrastructure and SaaS tools in a centralized platform. The integration automatically imports your CircleCI usage data and converts credits into USD-based cost reports.
+
+== Introduction
+
+Finout obtains your CircleCI usage data through the CircleCI Usage Export API. The Finout integration enables you to:
+
+* Track CircleCI credit consumption and costs in a unified cost management platform.
+* Filter and group costs by organization, project, workflow, and job name.
+* Allocate CI/CD expenses to teams using custom cost allocation.
+* Monitor budgets and detect usage anomalies.
+* Correlate CircleCI cost changes with related infrastructure shifts.
+
+Finout can import up to 13 months of historical data when you first connect, allowing for comprehensive historical analysis and cost trending.
+
+This guide provides instructions for connecting CircleCI to Finout and configuring cost tracking and allocation. You can also read Finout's docs on link:https://docs.finout.io/billing-integrations/data-and-engineering-platforms/connect-to-circleci[connecting Finout to CircleCI].
+
+[#prerequisites]
+== Prerequisites
+
+Before setting up the Finout integration, ensure you meet the following requirements:
+
+include::ROOT:partial$prerequisites/organization-admin.adoc[]
+* **Finout account** with permissions to create cost centers.
+* **Contracted credit price(s)** and effective date ranges for accurate cost calculation.
+
+[#connect-finout]
+== 1. Generate a CircleCI personal API token
+
+NOTE: CircleCI personal API tokens do not support fine-grained permission scoping. The token you create will have full access to your organization's data. The CircleCI API v2 requires a personal API token. Project tokens are not supported.
+
+To connect Finout to CircleCI, you need to create a personal API token.
+
+. Log in to the link:https://app.circleci.com[CircleCI web app].
+. Select your avatar at the top right of the screen and select **User Settings** from the menu.
+. Select **Personal API Tokens**.
+. Select btn:[Create new token].
+. Provide a descriptive name for the token (for example, "Finout Integration").
+. Select **Add API Token**.
+. Copy the token right away, as you cannot view it again.
+
+.Personal API tokens available in user settings
+image::guides:ROOT:personal-api-tokens.png[screenshot showing where to find your personal API token settings]
+
+== 2. Copy your organization ID
+
+The organization ID is a unique identifier for an organization. Follow these steps to find it in the CircleCI web app:
+
+include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Note the value or select the btn:[Copy] icon next to the organization ID.
+
+.Organization ID available in organization settings
+image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]
+
+[#configure-integration]
+== 3. Configure the integration in Finout
+
+Connect your CircleCI organization to Finout using your personal API token and organization ID.
+
+. Log in to your Finout account.
+. Navigate to **Settings**, then select **Cost Centers**.
+. Select **Add cost center**.
+. Locate and select **CircleCI** from the available integrations and select **Connect Now**.
+. Complete the integration form with the following information:
++
+* **Cost Center name**: Provide a name to identify this connection.
+* **Organization ID**: Enter your organization ID from step 2.
+* **API Token**: Paste the personal API token you created in step 1.
+
+. Select **Next**.
+
+.Finout CircleCI integration settings
+image::guides:ROOT:finout-integration.png[screenshot showing the Finout CircleCI integration settings]
+
+== 4. Configure credit pricing
+
+Configure your CircleCI credit pricing to ensure accurate cost calculations. Finout calculates costs based on your usage data and the configured price per credit. Configure ongoing and historical pricing, as follows:
+
+* Ongoing pricing. This is for your current usage but you can backdate this to the start of your contract.
+* Historical pricing for backfilling. This is an optional section that you can use if you have had different contracted USD per credit agreements over the time you have used CircleCI.
+
+. In the "Ongoing pricing" section, enter $0.0006, which is the standard price you pay (in US dollars) to purchase a credit. If you have an alternative pricing agreement, alter this value to reflect your contracted rate.
+. Select a start date for usage at this rate .
+. Optionally, add historical pricing periods for backfilling historical cost data:
++
+* Select **Add historical pricing**.
+* Enter the **Price per Credit** in USD.
+* Enter the **Effective From** date.
+* Enter the **Effective Until** date (leave blank if this is your current pricing).
+* Repeat for each historical pricing period (up to 13 months is recommended for comprehensive historical analysis).
+. Select **Next**.
+
+image::guides:ROOT:finout-credit-pricing.png[screenshot showing the Finout credit pricing configuration]
+
+Finout begins importing your CircleCI usage data. You will receive an email notification when the data sync is complete. The initial import can include up to 13 months of historical data based on your configured pricing periods.
+
+Review your pricing configuration summary and select **Complete setup**.
+
+== Next steps
+
+Refer to the link:https://docs.finout.io/[Finout documentation] for detailed guides on setting up cost tracking and reporting capabilities.

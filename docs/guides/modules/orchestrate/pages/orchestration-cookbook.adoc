@@ -116,7 +116,7 @@ You may want to configure a workflow that will only run when a boolean pipeline 
 
 . Update config to declare a pipeline parameter with a default value of `false`.
 
-. Update you workflow config to use a when statement so the workflow will only run when the pipeline parameter is true.
+. Update your workflow config to use a when statement so the workflow will only run when the pipeline parameter is true.
 +
 [,yaml]
 ----
@@ -273,7 +273,7 @@ include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 
 === Goal
 
-You may want to have a workflow run when a open pull requests are updated with new commits (synchronize) or labeled.
+You may want to have a workflow run when open pull requests are updated with new commits (synchronize) or labeled.
 
 === Steps
 
@@ -441,7 +441,7 @@ image::guides:ROOT:orchestrate-and-trigger/clean-graph-after.png[Workflow graph 
 
 === Goal
 
-You may want to simplify the management of GitHub required status checks for your branch protection rules. Use a single `no-op` job as a gatekeeper that depends on all your critical checks. This approach is means you only need to manage a single required status check rather than multiple status checks in GitHub.
+You may want to simplify the management of GitHub required status checks for your branch protection rules. Use a single `no-op` job as a gatekeeper that depends on all your critical checks. This approach means you only need to manage a single required status check rather than multiple status checks in GitHub.
 
 The following snippet shows how your workflow configuration might look without using a `no-op` job:
 
