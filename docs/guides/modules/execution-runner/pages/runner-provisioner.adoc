@@ -22,7 +22,7 @@ Once access is granted, you will receive credentials for the image registry refe
 [#feedback-and-support]
 == Feedback and support
 
-Runner Provisioner is available to invited preview participants only. As a preview customer, expect bugs and missing features — this is early-stage software and sharp edges are normal. Runner Provisioner is free during preview; pricing will be communicated before general availability.
+Runner Provisioner is available to invited preview participants only. As a preview customer, expect bugs and missing features — this is early-stage software and sharp edges are normal.
 
 In exchange, detailed feedback is expected. Your input directly shapes what gets built before GA. You have direct access to the CircleCI product and engineering team throughout the preview, and your account team will be in regular contact.
 
