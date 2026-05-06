@@ -24,7 +24,7 @@ Once access is granted, you will receive credentials for the image registry refe
 
 Runner Provisioner is available to invited preview participants only. As a preview customer, expect bugs and missing features — this is early-stage software and sharp edges are normal.
 
-In exchange, detailed feedback is expected. Your input directly shapes what gets built before GA. You have direct access to the CircleCI product and engineering team throughout the preview, and your account team will be in regular contact.
+In exchange, detailed feedback is expected. Your input directly shapes what gets built before GA. You have direct access to the CircleCI product and engineering team throughout the preview.
 
 For troubleshooting, escalate directly through your account team or the Slack channel below — do not open a support ticket. Issues are routed directly to the product team with a 24-hour internal response target.
 
