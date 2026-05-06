@@ -13,6 +13,7 @@ Self-hosted runner installation options are as follows:
 
 * Install in a Kubernetes cluster, using a **container runner**
 * Install in a machine execution environment using a **machine runner**
+* Automatically scale runner VMs in a Kubernetes cluster using **runner provisioner** (preview)
 
 The diagrams below illustrate how CircleCI's container and machine runners extend our existing systems.
 
@@ -86,6 +87,15 @@ Machine runner is installed either in a virtual machine, or natively, on a physi
 If you do not use Kubernetes but still want to run your CI job in a container on a self-hosted runner, you can install the machine runner in Docker.
 
 Machine runner is not compatible with CircleCI's convenience images or custom Docker images.
+
+[#runner-provisioner-use-case]
+=== Runner Provisioner (preview)
+
+Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using KubeVirt. Rather than running jobs in containers, each job runs inside a full virtual machine that is provisioned on demand and shut down after the job completes. This approach provides stronger isolation than container runner and is suited for workloads that require a full OS environment, hardware-level isolation, or privileged access that is impractical inside a container.
+
+Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand. A configurable `minReplicas` setting keeps a pre-warmed pool of VMs ready to claim jobs immediately.
+
+Runner Provisioner is currently in preview and available to invited participants only. Refer to the xref:runner-provisioner.adoc[Runner Provisioner] page for installation and configuration details.
 
 [#getting-started]
 == Getting started
