@@ -154,7 +154,7 @@ $ brew upgrade chunk
 ----
 
 [#uninstall]
-== Uninstall
+== Uninstall the chunk CLI
 
 [source,console]
 ----

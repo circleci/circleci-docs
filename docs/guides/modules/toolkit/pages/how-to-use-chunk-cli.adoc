@@ -8,7 +8,7 @@ This page describes how to use the main features of the chunk CLI.
 [#prerequisites]
 == Prerequisites
 
-* An installed and configured chunk CLI. See the xref:chunk-cli.adoc[Install and Configure the Chunk CLI] page.
+* An installed and configured chunk CLI. See the xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI] page.
 * A project initialized with `chunk init`, or a `.chunk/config.json` file with commands configured.
 
 [#generate-a-review-prompt]
@@ -107,6 +107,8 @@ The following flags are available:
 [#run-validation-in-a-sidecar]
 === Validate in a cloud sidecar
 
+CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+
 To validate in a CircleCI Cloud environment instead of locally, pass a sidecar ID:
 
 [source,console]
@@ -118,6 +120,8 @@ To get a sidecar ID, run `chunk sidecar create` and copy the ID printed when the
 
 [#manage-sidecars]
 == Manage cloud sidecars
+
+CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Cloud sidecars are CircleCI Cloud environments where chunk validates your changes remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
 
