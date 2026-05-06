@@ -32,7 +32,7 @@ Some advantages to using OIDC over using AWS credentials to pull images from ECR
 [#set-up-iam-role]
 == 1. Set up IAM role
 
-If you followed the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS instructions] guide, you will have created an IAM role associated with your CircleCI identity provider. You can now use that role, and update the permissions policy, or you can create a new IAM role for this task. Steps for creating a new IAM role are described here.
+If you followed the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS instructions], you will have created an IAM role associated with your CircleCI identity provider. You can now use that role, and update the permissions policy, or you can create a new IAM role for this task. Steps for creating a new IAM role are described here.
 
 . Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps. You will need to select the following:
 +
