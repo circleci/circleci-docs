@@ -1,14 +1,14 @@
 = CircleCI's self-hosted runner API
 :page-platform: Cloud, Server v4+
-:page-description: This document contains all the external facing endpoints for the CircleCI's self-hosted runner API.
+:page-description: This document contains all the external-facing endpoints for CircleCI's self-hosted runner API.
 :experimental:
 
-This document contains all the external facing endpoints for the CircleCI's self-hosted runner API. This API is separate from the main CircleCI v2 API and is used for the management and execution of self-hosted runner jobs. It is hosted at `runner.circleci.com`
+This document contains all the external-facing endpoints for CircleCI's self-hosted runner API. This API is separate from the main CircleCI v2 API and is used for the management and execution of self-hosted runner jobs. It is hosted at `runner.circleci.com`.
 
 [#authentication-methods]
 == Authentication methods
 
-The CircleCI's self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
+CircleCI's self-hosted runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also, one endpoint may accept multiple authentication methods.
 
 [#circle-token-personal-authentication]
 === Circle-Token (personal authentication)
@@ -33,7 +33,7 @@ This authentication method is based on personal tokens and follows the same rule
 [#browser-session-authentication]
 === Browser session authentication
 
-Ring-session sent through a cookie on the request. This authentication allows users that are already logged into CircleCI.com to access certain endpoints seamlessly.
+Ring-session is sent through a cookie on the request. This authentication allows users that are already logged into CircleCI.com to access certain endpoints seamlessly.
 
 [#resource-class-authentication-token]
 === Resource class token authentication
@@ -68,7 +68,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 
 * Circle-Token (personal authentication)
 * Browser session authentication
-** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com.
 
 [#get-api-v3-runner-request]
 ==== Request
@@ -212,7 +212,7 @@ Get the number of unclaimed tasks for a given resource class.
 
 * Circle-Token (personal authentication)
 * Browser session authentication
-** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com
+** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com.
 
 [#get-api-v3-tasks-request]
 ==== Request
