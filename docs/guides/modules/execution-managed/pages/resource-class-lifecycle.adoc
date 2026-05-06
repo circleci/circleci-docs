@@ -1,5 +1,8 @@
 :experimental:
 = Resource class lifecycle process
+:page-platform: Cloud, Server 4+
+:page-description: Learn about CircleCI resource class lifecycle management.
+:experimental:
 
 CircleCI periodically introduces new compute as "resource classes," consisting of new underlying compute infrastructure. As older compute infrastructure ages, CircleCI deprecates and retires it from the fleet.
 
