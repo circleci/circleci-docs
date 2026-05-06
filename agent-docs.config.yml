@@ -31,15 +31,11 @@ url: https://circleci.com/docs/
 #   - cross-references
 #   - api-documentation
 
-# Configure sampling and coverage options
+# Configuration options
 options:
-  # Sampling options
-  maxLinksToTest: 50
-  samplingStrategy: deterministic  # or 'random'
-
-  # Coverage thresholds for llms.txt coverage check
-  coveragePassThreshold: 95  # Minimum coverage % to pass (default: 95)
-  coverageWarnThreshold: 80  # Threshold between warnings and failures (default: 80)
+  # Use deterministic sampling for consistent weekly monitoring
+  # Default is random, but deterministic allows better trend tracking
+  samplingStrategy: deterministic
 
   # Exclude legacy server versions from coverage checks
   # Only /latest/ server documentation should be included in llms.txt

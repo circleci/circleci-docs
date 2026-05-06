@@ -29,7 +29,6 @@ jobs:
       - run:
           name: Run AF Docs Check
           command: npx vitest run agent-docs.test.ts
-          no_output_timeout: 10m
 
 workflows:
   agent-docs-workflow:
