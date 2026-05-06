@@ -1,4 +1,3 @@
-:experimental:
 = Resource class lifecycle process
 :page-platform: Cloud, Server 4+
 :page-description: Learn about CircleCI resource class lifecycle management.
@@ -79,15 +78,15 @@ You must update your configurations before the EOL date.
 
 == Tips to minimize brownout impact
 
-*Review Resource Class Usage*:: Audit your resource class specifications to ensure you use actively supported options. Consider whether your workloads might benefit from link:/guides/execution-managed/resource-class-overview/[newer, more efficient resource classes].
+*Review resource class usage*:: Audit your resource class specifications to ensure you use actively supported options. Consider whether your workloads might benefit from link:/guides/execution-managed/resource-class-overview/[newer, more efficient resource classes].
 
-*Update Orbs*:: If you use CircleCI orbs, ensure you update them to current versions. Outdated orbs may specify deprecated resource classes internally.
+*Update orbs*:: If you use CircleCI orbs, ensure you update them to current versions. Outdated orbs may specify deprecated resource classes internally.
 
-*Check Hidden Dependencies*:: Inspect all workflows, including those triggered by external events or scheduled runs, to identify all resource class usage.
+*Check hidden hependencies*:: Inspect all workflows, including those triggered by external events or scheduled runs, to identify all resource class usage.
 
-*Subscribe to Deprecation Notices*:: Follow the CircleCI changelog for deprecation announcements.
+*Subscribe to deprecation notices*:: Follow the CircleCI changelog for deprecation announcements.
 
-*Test Before EOL*:: Create a test branch with updated resource classes to validate performance and compatibility before the brownout period.
+*Test before EOL*:: Create a test branch with updated resource classes to validate performance and compatibility before the brownout period.
 
 == FAQ
 
