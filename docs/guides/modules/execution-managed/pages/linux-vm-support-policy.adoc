@@ -20,7 +20,7 @@ We aim to maintain, support, and release the two most recent LTS versions of Ubu
 
 Tags are configured when specifying the image you want to use in your CircleCI configuration file. Tags we support for this image are as follows:
 
-- `default` version is what you will receive if you do not specify an image.
+- `default`: You will receive this version if you do not specify an image tag.
 
 - `current` version of the image will receive updates approximately every three months.
 
