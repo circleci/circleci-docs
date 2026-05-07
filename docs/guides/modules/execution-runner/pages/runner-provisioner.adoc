@@ -809,7 +809,7 @@ If any of these are blocking your use case, post in the `#runner-provisioner-pre
 
 When a new VM needs to be provisioned from scratch, expect two to five minutes before a runner is ready to claim a job. This includes scheduling the VM, booting the OS, and running the cloud-init script that downloads and installs the runner agent.
 
-The primary mitigation is `minReplicas`: pre-warmed VMs have already completed startup and can claim jobs in seconds. Startup latency only affects jobs that arrive when demand exceeds the pre-warmed pool.
+The primary mitigation is `minReplicas`. Pre-warmed VMs have already completed startup and can claim jobs in seconds. Startup latency only affects jobs that arrive when demand exceeds the pre-warmed pool.
 
 Two factors can push latency toward the higher end or cause provisioning to fail silently:
 
