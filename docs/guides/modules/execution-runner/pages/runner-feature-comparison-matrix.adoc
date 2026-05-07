@@ -110,4 +110,4 @@ configuration patterns and improved controls.
 
 *Machine runner*: Choose for full system access, custom system dependencies, or when Kubernetes is not available.
 
-*Container runner*: Choose for cloud-native applications, teams using Kubernetes, and workloads that benefit from container orchestration.
+*Container runner*: Best for cloud-native applications, teams using Kubernetes, and workloads that benefit from container orchestration.
