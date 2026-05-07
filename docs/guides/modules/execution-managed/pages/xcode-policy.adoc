@@ -8,7 +8,7 @@
 
 This document outlines the CircleCI Xcode image release, update, and deprecation policy. A defined Xcode image policy allows us to continue releasing new images, including beta images.
 
-You can find the most up to date information on these images on the link:https://circleci.com/developer/machine/image/xcode[CircleCI Developer Hub] Xcode machine image page.
+You can find the most up-to-date information on these images on the link:https://circleci.com/developer/machine/image/xcode[CircleCI Developer Hub] Xcode machine image page.
 
 [#xcode-image-retention-and-deprecation]
 == Xcode image retention and deprecation

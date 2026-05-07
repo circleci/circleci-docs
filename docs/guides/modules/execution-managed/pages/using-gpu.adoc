@@ -85,7 +85,7 @@ include::ROOT:partial$execution-resources/gpu-linux-resource-table.adoc[]
 
 === Windows GPU
 
-For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
+For Windows there is currently one resource class option. This will be used by default, so you are not required to specify it in your configuration.
 
 include::ROOT:partial$execution-resources/gpu-windows-resource-table.adoc[]
 

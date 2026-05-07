@@ -21,7 +21,7 @@ If you would like to directly search for an image, you can browse CircleCI Docke
 * Visit the https://circleci.com/developer/images/[Developer Hub] for links to all the repositories for each next-gen image.
 * Find all CircleCI pre-built images available on https://hub.docker.com/u/cimg[Docker Hub].
 
-NOTE: CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes affect how images work in CircleCI jobs. Follow the https://discuss.circleci.com/tags/convenience-images[*convenience-images* tag on Discuss] to be notified in advance of scheduled maintenance._
+NOTE: CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes affect how images work in CircleCI jobs. Follow the https://discuss.circleci.com/tags/convenience-images[*convenience-images* tag on Discuss] to be notified in advance of scheduled maintenance.
 
 [#examples]
 === Examples
@@ -57,7 +57,7 @@ jobs:
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-`cimg/base:2021.04` is a Ubuntu-based image designed to install the bare minimum. The
+`cimg/base:2021.04` is an Ubuntu-based image designed to install the bare minimum. The
 next-generation convenience images are based on this image.
 
 *When to use it?*
@@ -89,7 +89,7 @@ To prevent unintended changes from upstream, instead of using `cimg/ruby:2.4-nod
 
 For example, pin down those images to a specific point version, like `cimg/ruby:2.4.10-node`. Specifying the version is possible for any of the CircleCI images.
 
-It is also possible to use the specific SHA of a image. For example, you can use
+It is also possible to use the specific SHA of an image. For example, you can use
 `cimg/ruby@sha256:e4aa60a0a47363eca3bbbb066620f0a5967370f6469f6831ad52231c87ca9390`
 instead of `cimg/ruby:2.4.10-node`. Doing so allows you to test specific images
 for as long as you would like before making any changes.
@@ -305,7 +305,7 @@ images.
 |Android
 |https://hub.docker.com/r/circleci/android[Docker Hub]
 |`- image: circleci/android:[TAG]`
-|https://hub.docker.com/r/circleci/mariadb/tags?ordering=last_updated[Tags]
+|https://hub.docker.com/r/circleci/android/tags?ordering=last_updated[Tags]
 
 |buildpack-deps
 |https://hub.docker.com/r/circleci/buildpack-deps[Docker Hub]
