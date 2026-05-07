@@ -5,7 +5,7 @@
 
 This document describes how to get started with CI/CD using a *macOS execution environment* on CircleCI.
 If you need to learn the basics of CircleCI, see the xref:getting-started:getting-started.adoc[Getting Started Guide].
-You may also want to visit the documentation for xref:test:testing-ios.adoc[Testing and Setting Up iOS Projects].
+You may also want to visit the documentation for xref:test:testing-ios.adoc[Testing and Setting up iOS Projects].
 
 [#prerequisites]
 == Prerequisites
@@ -110,4 +110,4 @@ are interested in building and/or testing iOS applications, consider checking
 out our following docs that further explore this topic:
 
 * xref:test:testing-ios.adoc[Testing iOS Applications on macOS]
-* xref:ios-codesigning.adoc[Setting Up Code Signing For iOS Projects]
+* xref:ios-codesigning.adoc[Setting up Code Signing for iOS Projects]
