@@ -75,7 +75,7 @@ If the file is absent, VMs cannot be scheduled on that node regardless of how Ku
 
 Running runner VMs on a dedicated node pool, separate from the nodes that run KubeVirt's own control plane components (`virt-operator`, `virt-api`, `virt-controller`), is recommended. This prevents VM workloads from competing with cluster infrastructure for resources.
 
-Nodes in this pool must have nested virtualization enabled (configured at node or instance creation time — it cannot be patched onto existing nodes). Details on how to enable nested virtualization for GCP, AKS, and AWS node pools are covered in the examples below.
+Nodes in this pool must have nested virtualization enabled. Nested virtualization but be configured at node or instance creation time and cannot be patched onto existing nodes. Details on how to enable nested virtualization for GCP, AKS, and AWS node pools are covered in the following sections.
 
 [#tainted-nodes]
 === Tainted nodes (optional)
