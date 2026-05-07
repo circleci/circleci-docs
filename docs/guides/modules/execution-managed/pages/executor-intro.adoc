@@ -18,7 +18,7 @@ Each job defined in your project configuration is run in a separate execution en
 
 For each job in your project config, you will specify an execution environment by assigning it an *executor*. An *executor* defines the underlying technology or environment in which to run a job, and which image to use to suit your job.
 
-It is possible to specify a different executor and image for each job in your xref:reference:ROOT:configuration-reference.adoc[configuration file].
+It is possible to specify a different executor and image for each job in your xref:reference:ROOT:configuration-reference.adoc[Configuration File].
 
 === Images, containers, and virtual machines
 
@@ -28,9 +28,9 @@ A _container_ or _virtual machine_ is the term used for a running instance of an
 
 For example:
 
-* Jobs that require Docker images (`docker`) may use an image for Node.js, Python, etc. The xref:circleci-images.adoc[pre-built CircleCI Docker image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
+* Jobs that require Docker images (`docker`) may use an image for Node.js, Python, etc. The xref:circleci-images.adoc[Pre-built CircleCI Docker Image] (convenience images) will help you get started. CircleCI convenience images are not a full operating system, so they generally make building your software more efficient.
 
-* Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[list of available machine images].
+* Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version supported by the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[List of Available Machine Images].
 
 * Jobs that require a macOS VM image (`macos`) may use an Xcode version. A full list is available on the xref:using-macos.adoc#supported-xcode-versions[Using macOS] page.
 
@@ -38,13 +38,13 @@ For example:
 
 When you configure an executor it is recommended that you also specify a resource class to specify compute resource size (CPU and RAM).
 
-* For an overview of resource classes, see the xref:resource-class-overview.adoc[Resource class overview] page.
+* For an overview of resource classes, see the xref:resource-class-overview.adoc[Resource Class Overview] page.
 * For an overview of available resource classes per Plan, see the link:https://circleci.com/pricing/[Pricing page].
 
 [#docker]
 == Docker
 
-CAUTION: *Legacy images with the prefix "circleci/" were https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
+CAUTION: *Legacy images with the prefix "CircleCI/" are https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
 
 To access the Docker execution environment, use the `docker` executor and specify an image. For a full list of convenience images, which are built by CircleCI, see the link:https://circleci.com/developer/images?imageType=docker[CircleCI Developer Hub].
 
@@ -64,7 +64,7 @@ Find out more about the Docker execution environment on the xref:using-docker.ad
 [#linux-vm]
 == Linux VM
 
-NOTE: *CircleCI cloud* The use of `machine: true` is deprecated. You must specify an image to use.
+NOTE: *CircleCI Cloud* The use of `machine: true` is deprecated. You must specify an image to use.
 
 To access the Linux VM execution environment, use the `machine` executor and specify a Linux image. For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
@@ -105,7 +105,7 @@ Find out more about the Linux VM execution environment on the xref:using-linuxvm
 
 To access the macOS execution environment, use the `macos` executor and specify an image using the `xcode` key. For a full list of macOS images, see the link:https://circleci.com/developer/machine/image/macos[CircleCI Developer Hub].
 
-NOTE: If you want to run a macOS build on CircleCI server, you will need to use xref:execution-runner:runner-overview.adoc[self-hosted runner].
+NOTE: If you want to run a macOS build on CircleCI Server, you will need to use xref:execution-runner:runner-overview.adoc[Self-hosted Runner].
 
 [,yml]
 ----
@@ -203,7 +203,7 @@ To access the GPU execution environment, use one of the following:
 
 For a full list of `machine` images, see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub].
 
-NOTE: It is not possible to run a GPU build on CircleCI server.
+NOTE: It is not possible to run a GPU build on CircleCI Server.
 
 [tabs]
 ====
@@ -340,15 +340,15 @@ Find out more about the Arm VM execution environment on the xref:using-arm.adoc[
 
 CircleCI provides the ability to have self-hosted runners:
 
-* xref:execution-runner:container-runner.adoc[Container runner] using Kubernetes.
-* xref:execution-runner:runner-overview.adoc#machine-runner-use-case[Machine runner] using Linux, Windows, and macOS virtual machines.
+* xref:execution-runner:container-runner.adoc[Container Runner] using Kubernetes.
+* xref:execution-runner:runner-overview.adoc#machine-runner-use-case[Machine Runner] using Linux, Windows, and macOS virtual machines.
 
 [#port-ranges]
 == Port ranges
 
-When using a machine executor, if a port range is hard coded, the range in `/proc/sys/net/ipv4/ip_local_reserved_ports` should be avoided. Port range 32768 - 60999 is used by the TCP stack to allocate ephemeral ports for connections. Ports in that range may have already been allocated by a previous connection, so collisions are possible.
+When using a machine executor, if a port range is hard coded, avoid the range in `/proc/sys/net/ipv4/ip_local_reserved_ports`. Port range 32768 - 60999 is used by the TCP stack to allocate ephemeral ports for connections. Ports in that range may have already been allocated by a previous connection, so collisions are possible.
 
 [#next-steps]
 == Next steps
 
-* Read more about xref:circleci-images.adoc[Pre-built CircleCI convenience images] for the Docker execution environment.
+* Read more about xref:circleci-images.adoc[Pre-built CircleCI Convenience Images] for the Docker execution environment.
