@@ -1,5 +1,6 @@
 = Runner Provisioner
 :page-platform: Cloud, Server v4+
+:page-badge: Preview
 :page-description: Learn how to install and configure Runner Provisioner to automatically scale CircleCI runner VMs using KubeVirt on Kubernetes.
 :experimental:
 
