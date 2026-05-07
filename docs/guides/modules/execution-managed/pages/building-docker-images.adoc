@@ -27,7 +27,7 @@ jobs:
       - setup_remote_docker
 ----
 
-Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that used to spin up the primary container.
+Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that is used to spin up the primary container.
 
 In the CircleCI web app, jobs that run in the remote Docker environment have the **Remote Docker** label, as follows:
 
@@ -158,7 +158,7 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ----
 
-Below is a break down of what is happening during this build's execution:
+Below is a breakdown of what is happening during this build's execution:
 
 * All commands execute in the xref:reference:ROOT:glossary.adoc#primary-container[Primary Container]. (line 5).
 * Once you call `setup_remote_docker`, all Docker-related commands execute locally. (line 12).
@@ -211,7 +211,7 @@ To use Docker 24, use the following tag:
 
 * `docker26`
 
-To use the current deprecated version, Docker 20, use `20.10.24`
+To use the current deprecated version, Docker 20, use `20.10.24`.
 
 NOTE: The `version` key is not supported on CircleCI Server. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
