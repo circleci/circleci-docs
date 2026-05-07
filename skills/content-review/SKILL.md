@@ -108,9 +108,9 @@ Evaluate the page across these 10 dimensions:
 - Reader (human or agent) should know immediately if this page is relevant
 - Flag if the opening is vague, overly technical, or doesn't answer "why read this"
 
-### Step 4: Generate the Report
+### Step 4: Generate and Save the Report
 
-Write a narrative-style report with this structure:
+Generate a narrative-style report with this structure:
 
 ```markdown
 # Content Review: [Page Title]
@@ -190,6 +190,23 @@ Write a narrative-style report with this structure:
 - Quote problematic text when helpful
 - Suggest concrete alternatives
 
+### Step 5: Save the Report
+
+After generating the report, save it to a file in the repository root directory:
+
+**File naming convention:**
+- Extract the page filename (without `.adoc` extension) from the path
+- Prepend with `content-review-`
+- Use `.md` extension
+- Example: `docs/guides/modules/test/pages/rerun-failed-tests.adoc` → `content-review-rerun-failed-tests.md`
+
+**File location:**
+- Save to `/Users/rosieyohannan/github/circleci-docs/` (the repository root)
+
+**After saving:**
+- Inform the user where the report has been saved
+- Provide the full file path for easy reference
+
 ## Example Usage
 
 User: "Review docs/guides/modules/getting-started/pages/hello-world.adoc"
@@ -202,6 +219,8 @@ You:
 5. Read those related pages
 6. Analyze all 10 dimensions
 7. Generate the narrative report with prioritized recommendations
+8. Save the report as `content-review-hello-world.md` in the repository root
+9. Inform the user where the report has been saved
 
 ## Important Notes
 
