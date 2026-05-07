@@ -3,9 +3,9 @@
 :page-description: First Windows project on CircleCI
 :experimental:
 
-This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started guide].
+This document describes how to get started with continuous integration on *Windows execution environments* on CircleCI. If this is your first time setting up CircleCI, we recommend checking out the xref:getting-started:getting-started.adoc[Getting Started Guide].
 
-A Windows Server 2022 image is available to CircleCI cloud customers, read more on link:https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198[Discuss].
+A Windows Server 2022 image is available to CircleCI Cloud customers, read more on link:https://discuss.circleci.com/t/march-2022-support-for-new-operating-system-for-windows-executors-windows-server-2022/43198[Discuss].
 
 [#prerequisites]
 == Prerequisites
@@ -77,7 +77,7 @@ In our first step, we run the xref:reference:ROOT:configuration-reference.adoc#c
             - C:\Users\circleci\.nuget\packages
 ----
 
-Next in the config, we make use of caching to restore cached dependencies from previous builds. The command `dotnet restore` will fetch any dependencies that are not already installed/restored from the cache. Learn more about caching in our xref:optimize:caching.adoc[caching document].
+Next in the config, we make use of caching to restore cached dependencies from previous builds. The command `dotnet restore` will fetch any dependencies that are not already installed/restored from the cache. Learn more about caching in our xref:optimize:caching.adoc[Caching Document].
 
 [,yaml]
 ----

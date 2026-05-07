@@ -6,7 +6,7 @@
 [#overview]
 == Overview
 
-In 2020, CircleCI introduced the next generation (next-gen) of convenience images. These new images are designed to replace the legacy convenience images that were released during the link:https://circleci.com/blog/say-hello-to-circleci-2-0/[announcement of CircleCI 2.0]. The next-gen CircleCI convenience images are designed from the ground up for a CI/CD environment. They are designed to be faster, more efficient, and most importantly, more reliable. You can learn more about all of the features link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[on our blog post]. As we begin to deprecate the legacy images, this document provides information on the migration process.
+In 2020, CircleCI introduced the next generation (next-gen) of convenience images. These new images are designed to replace the legacy convenience images released during the link:https://circleci.com/blog/say-hello-to-circleci-2-0/[announcement of CircleCI 2.0]. The next-gen CircleCI convenience images are designed from the ground up for a CI/CD environment. They are designed to be faster, more efficient, and most importantly, more reliable. You can learn more about all of the features link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[on our blog post]. As we begin to deprecate the legacy images, this document provides information on the migration process.
 
 Moving from a legacy to next-gen image requires a change to the namespace. All legacy images have a Docker namespace of `circleci`, while next-gen images have a Docker namespace of `cimg`. For example, migrating from the legacy Ruby or Python image to the respective next-gen image can be done as follows:
 
@@ -38,7 +38,7 @@ If you are using the `buildpack-deps` image, the suggestion is to use the new Ci
 
 Also, the following image will be renamed:
 
-* The Go image will be changed from `golang` to `go`
+* The Go image will be changed from `golang` to `go`.
 
 All Legacy to Next-Gen image changes are captured below in this table:
 
@@ -65,7 +65,7 @@ All Legacy to Next-Gen image changes are captured below in this table:
 [#browser-testing]
 === Browser testing
 
-With legacy images, there were 4 different variant tags you could use to get browser testing for a particular image. For example, if you were doing browser testing with the Python v3.7.0 image, you might have used Docker `image: circleci/python:3.7.0-browsers`. These 4 tags have now been consolidated into a single tag designed to be used together with the link:https://circleci.com/developer/orbs/orb/circleci/browser-tools[CircleCI Browser Tools orb].
+With legacy images, 4 different variant tags existed that you could use to get browser testing for a particular image. For example, if you did browser testing with the Python v3.7.0 image, you might have used Docker `image: circleci/python:3.7.0-browsers`. These 4 tags have now been consolidated into a single tag designed to be used together with the link:https://circleci.com/developer/orbs/orb/circleci/browser-tools[CircleCI Browser Tools orb].
 
 [.table-scroll]
 --
@@ -91,7 +91,7 @@ The new, single browsers variant tag includes Node.js, common utilities to use i
 
 ==== Using Ubuntu as the single base OS
 
-Legacy images had variant tags for several different base operating systems. Some images were versions of Debian and Ubuntu, while other images provided several different bases. For next-gen images, this is no longer the case. All CircleCI next-gen images are based on the latest LTS release of Ubuntu.
+Legacy images had variant tags for several different base operating systems. Some images used versions of Debian and Ubuntu, while other images provided several different bases. For next-gen images, this is no longer the case. All CircleCI next-gen images are based on the latest LTS release of Ubuntu.
 
 With the base image, at least two LTS releases and non-EOL'd standard releases will be supported.
 
@@ -100,8 +100,8 @@ With the base image, at least two LTS releases and non-EOL'd standard releases w
 
 When migrating to a next-gen image, there might be some software issues. Common issues include:
 
-* A library you were using now has a different version.
-* An apt package is no longer pre-installed. In this scenario simply install that package using:
+* A library you used previously now has a different version.
+* An apt package is no longer pre-installed. In this scenario, install that package using:
 
 [,shell]
 ----

@@ -62,7 +62,7 @@ jobs:
 [#the-windows-orb]
 === The Windows orb
 
-To keep your configuration simple and to ensure you are using the most up-to-date image, you can use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb], and then specify the default executor from the orb in your job configuration. CircleCI strongly encourages using the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] as it helps simplify your configuration.
+To keep your configuration simple and to ensure you are using the most up-to-date image, you can use the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb]. Then specify the default executor from the orb in your job configuration. CircleCI strongly encourages using the link:https://circleci.com/developer/orbs/orb/circleci/windows[Windows orb] as it helps simplify your configuration.
 
 [,yaml]
 ----
@@ -182,7 +182,7 @@ Details on the Windows Server 2022 image can be found on this link:https://discu
 
 The Windows images are updated approximately every 30 days. If a tag is not specified when using the Windows image, by default the latest stable version will be applied. The tagging scheme for the Windows image is as follows:
 
-* Current (formerly Stable): This image tag points to the latest production-ready Windows image. This image should be used by projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.
+* Current (formerly Stable): This image tag points to the latest production-ready Windows image. Use this image for projects that want a decent level of stability, but would like to get occasional software updates. It is typically updated once a month.
 
 NOTE: The `current` tag is available for Windows images. The `current` and `stable` tags are equivalent, and are currently both supported. Refer to the link:https://discuss.circleci.com/t/april-2022-windows-image-updates-available-for-stable-tags/43511[Discuss forum] for more information.
 
@@ -194,9 +194,9 @@ NOTE: The `current` tag is available for Windows images. The `current` and `stab
 
 You can use one of three shells to run job steps on Windows:
 
-* PowerShell (default in the Windows orb)
-* Bash
-* Command
+* PowerShell (default in the Windows orb).
+* Bash.
+* Command.
 
 You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, PowerShell, and CMD by adding a `shell:` argument to our `job` and `step` declarations:
 
@@ -369,6 +369,7 @@ NOTE: The steps described in this section apply to all CircleCI accounts. If you
 . To start a job with SSH enabled, select the *Rerun job with SSH* option from the "Rerun Workflow" dropdown menu.
 . To see the connection details, expand the "Enable SSH" section in the job output where you will see the SSH command needed to connect:
 +
+.SSH connection details
 image::guides:ROOT:ssh-windows-obf.png[SSH connection details]
 
 Ensure that you are passing the name of the shell you want to run when you SSH
@@ -380,7 +381,7 @@ The available options are:
 * `bash.exe`
 * `cmd.exe`
 
-You can read more about using SSH in your builds xref:ssh-access-jobs.adoc[here].
+You can read more about using SSH in your builds xref:ssh-access-jobs.adoc[Here].
 
 [#known-issues-and-limitations]
 == Known issues and limitations
