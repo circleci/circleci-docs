@@ -530,7 +530,7 @@ Desired replicas are calculated as unclaimed tasks plus running tasks, clamped t
 
 * The scaler polls CircleCI every one second.
 * `minReplicas` VMs are always kept running as a pre-warmed pool.
-* When demand drops, excess VMs drain naturally: they pick up no new jobs and shut down after completing their current job (or after `idleTimeout` if set).
+* When demand drops, excess VMs drain naturally. That is, they pick up no new jobs and shut down after completing their current job (or after `idleTimeout` if set).
 
 [#idle-timeout]
 === `idleTimeout`
