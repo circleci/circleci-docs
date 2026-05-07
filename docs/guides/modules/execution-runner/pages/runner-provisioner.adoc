@@ -9,7 +9,7 @@
 Runner Provisioner is currently in preview. The product, its configuration schema, and its APIs are subject to change before general availability. It is not recommended for production workloads. If you encounter issues or have feedback, see <<feedback-and-support,Feedback and Support>>.
 ====
 
-Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using KubeVirt. It polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand.
+Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using link:https://github.com/kubevirt/kubevirt[KubeVirt]. Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand.
 
 The current preview version is `0.1.0`.
 
