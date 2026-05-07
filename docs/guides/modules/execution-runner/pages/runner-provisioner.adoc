@@ -80,7 +80,7 @@ Nodes in this pool must have nested virtualization enabled. Nested virtualizatio
 [#tainted-nodes]
 === Tainted nodes (optional)
 
-Taint the nodes to prevent arbitrary workloads from landing on them while still allowing `virt-launcher` pods through.
+Taint the nodes to prevent arbitrary workloads from landing on them while still allowing `virt-launcher` pods through. For information on Taints and Tolerations, see the link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/[Kubernetes Documentation].
 
 Then patch the `virt-handler` so it can run on the tainted nodes. The KubeVirt operator manages the DaemonSet, so this must go through the KubeVirt CR rather than a direct patch. Replace the toleration key with the taint key you applied to your nodes:
 
