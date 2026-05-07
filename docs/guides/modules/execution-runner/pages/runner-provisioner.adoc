@@ -27,7 +27,7 @@ Runner Provisioner is available to invited preview participants only. As a previ
 
 In exchange, detailed feedback is expected. Your input directly shapes what gets built before GA. You have direct access to the CircleCI product and engineering team throughout the preview.
 
-For troubleshooting, escalate directly via the Slack channel below — do not open a support ticket. Issues are routed directly to the product team with a 24-hour internal response target.
+For troubleshooting, escalate directly via the `#runner-provisioner-preview` Slack channel. Do not open a support ticket for issues with Runner Provisioner. Issues are routed directly to the product team with a 24-hour internal response target.
 
 * *Bugs and feature requests*: Post in the `#runner-provisioner-preview` Slack channel.
 * *General questions*: Post in the `#runner-provisioner-preview` Slack channel (preview participants only).
