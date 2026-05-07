@@ -68,7 +68,7 @@ Defaulted container "virt-handler" out of: virt-handler, virt-launcher (init)
 /proc/1/root/dev/kvm
 ----
 
-If the file is absent, VMs cannot be scheduled on that node regardless of how KubeVirt is configured. On cloud providers, nested virtualization is typically disabled by default and must be explicitly enabled on the node pool or instance group before the nodes are created — it cannot be patched onto existing nodes.
+If the file is absent, VMs cannot be scheduled on that node regardless of how KubeVirt is configured. On cloud providers, nested virtualization is typically disabled by default and must be explicitly enabled on the node pool or instance group before the nodes are created. Nested virtualization cannot be patched onto existing nodes.
 
 [#dedicated-node-pool]
 === Dedicated node pool for VM workloads (optional)
