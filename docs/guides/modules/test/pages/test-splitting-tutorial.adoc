@@ -80,7 +80,7 @@ Test splitting is typically set up within a job. In this tutorial you will modif
 
 To get started, you need to get the sample app building as a project on CircleCI.
 
-The steps are a little different depemding on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
+The steps are a little different depending on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
 
 [tabs]
 ====
