@@ -463,7 +463,7 @@ gem 'rspec_junit_formatter'
     circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out ~/cucumber/junit.xml" --verbose --split-by=timings
 
 - store_test_results:
-    ~/cucumber
+    path: ~/cucumber
 ```
 . Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
 
