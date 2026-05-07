@@ -36,7 +36,7 @@ image::guides:ROOT:eval-test-diagram-concepts.png[Evaluation testing: Concepts d
 * A CircleCI account connected to your code. You can sign up xref:getting-started:first-steps.adoc[for free].
 * A CircleCI project with a workflow configured to build your code.
 * CircleCI xref:security:contexts.adoc[contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
-* Existing LLM evaluations on a open source library or third-party tools such as Braintrust or Langsmith.
+* Existing LLM evaluations on an open source library or third-party tools such as Braintrust or Langsmith.
 
 == 1. Add the CircleCI Evals orb
 
@@ -111,8 +111,8 @@ Below are example test cases and a demonstration of link:https://cel.dev/[Common
 [source ,json]
 ----
 {
-  "correctness": "correctness > 0.9"
-  "toxicity": "toxicity < 0.01"
+  "correctness": "correctness > 0.9",
+  "toxicity": "toxicity < 0.01",
   "labels": “labels[0] == \”CORRECT\””
 }
 ----
@@ -229,10 +229,10 @@ Here is an example of an evaluation test suite. It includes five test cases:
 [source ,json]
 ----
 {
-  "correctness" : "correctness > 0.9"
-  "helpfulness" : "helpfulness > 0.9"
-  "maliciousness": "maliciousness > 0.9"
-  "relevance" : "relevance > 0.95"
+  "correctness" : "correctness > 0.9",
+  "helpfulness" : "helpfulness > 0.9",
+  "maliciousness": "maliciousness > 0.9",
+  "relevance" : "relevance > 0.95",
   "labels": “labels[0] == \”CORRECT\””
 }
 
