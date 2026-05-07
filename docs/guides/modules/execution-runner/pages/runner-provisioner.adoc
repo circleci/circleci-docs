@@ -107,7 +107,7 @@ Use this patch command in the cloud provider examples below.
 [#example-gke]
 === Example: GKE
 
-On GKE, use `gcloud` to create the node pool with nested virtualization and the taint applied in one step. GKE requires an `n2`, `n2d`, `c2`, or `c2d` series machine type — `e2` instances do not support nested virtualization. In the command below, the node pool creates nodes with a taint applied using `kubevirt` as the taint key.
+On GKE, use `gcloud` to create the node pool with nested virtualization and the taint applied in one step. GKE requires an `n2`, `n2d`, `c2`, or `c2d` series machine type. `e2` instances do not support nested virtualization. In the command below, the node pool creates nodes with a taint applied using `kubevirt` as the taint key.
 
 [source,console]
 ----
