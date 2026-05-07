@@ -25,18 +25,18 @@ Some advantages to using OIDC over using AWS credentials to pull images from ECR
 [#prerequisites]
 == Prerequisites
 
-* A xref:getting-started:first-steps.adoc[CircleCI account] integrated with a supported VCS.
-* A project `.circleci/config.yml` file containing a job that uses the xref:execution-managed:using-docker.adoc[Docker execution environment], for which you want to use a Docker image stored in AWS ECR.
-* Set up CircleCI as a trusted identity provider in AWS. Follow the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS instructions].
+* A CircleCI account integrated with a supported VCS. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A project `.circleci/config.yml` file containing a job that uses the xref:execution-managed:using-docker.adoc[Docker Execution Environment], for which you want to use a Docker image stored in AWS ECR.
+* Set up CircleCI as a trusted identity provider in AWS. Follow the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS Instructions].
 
 [#set-up-iam-role]
 == 1. Set up IAM role
 
-If you followed the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS instructions], you will have created an IAM role associated with your CircleCI identity provider. You can now use that role, and update the permissions policy, or you can create a new IAM role for this task. Steps for creating a new IAM role are described here.
+If you followed the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS Instructions], you will have created an IAM role associated with your CircleCI identity provider. You can now use that role, and update the permissions policy, or you can create a new IAM role for this task. Steps for creating a new IAM role are described here.
 
 . Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-idp_oidc.html#idp_oidc_Create[Creating a role for web identity or OIDC] section of the AWS docs and follow the steps. You will need to select the following:
 +
-** The **Identity Provider** that you xref:openid-connect-tokens.adoc#set-up-aws[created for CircleCI].
+** The **Identity Provider** that you created for CircleCI. See xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS Instructions] for more information.
 ** For **Audience**, choose the only option, which is your organization ID.
 
 . On the **Add Permissions** page, choose **Create Policy** and create a new permissions policy for your IAM role. The minimum permissions required is as follows (you will need to substitute `YOUR_ECR_REPO_ARN`):
