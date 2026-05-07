@@ -1958,6 +1958,11 @@ Allows Docker commands to be run locally. See xref:guides:execution-managed:buil
 | boolean
 | Set this to `true` to enable xref:guides:optimize:docker-layer-caching.adoc#[Docker Layer Caching] in the Remote Docker Environment (default: `false`)
 
+| `prefer_same_region`
+| N
+| boolean
+| Set this to `true` to attempt pulling images from the same region as the VM on a best-effort basis, falling back to the image's original region if the pull fails (default: `false`)
+
 | `version`
 | N
 | String
