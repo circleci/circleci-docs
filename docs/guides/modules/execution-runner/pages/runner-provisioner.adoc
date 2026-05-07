@@ -652,7 +652,7 @@ The deployment pod annotation `checksum/config` is derived from the Secret conte
 
 Configuration changes (tokens, API address, VM spec) are injected into VMs at first boot via cloud-init and are not re-applied to running VMs. After a `helm upgrade`, existing VMs continue using their original config until they are recreated. Two rollout options are available:
 
-* *Graceful rollout — no job interruption*: Set `idleTimeout` in your values before upgrading. VMs will shut down on their own once they finish their current job and go idle. The pool recreates them with the updated config. This is the right choice when you cannot interrupt in-progress jobs, but rollout is slow — it completes only once every existing VM has either run a job to completion or timed out.
+* *Graceful rollout — no job interruption*: Set `idleTimeout` in your values before upgrading. VMs will shut down on their own once they finish their current job and go idle. The pool recreates the VMs with the updated config. This is the right choice when you cannot interrupt in-progress jobs, but rollout is slow and completes only once every existing VM has either run a job to completion or timed out.
 
 * *Immediate rollout — jobs will be interrupted*: Delete all VMs after upgrading. The pool recreates them immediately with the updated config. Any jobs running on deleted VMs will fail and must be rerun.
 +
