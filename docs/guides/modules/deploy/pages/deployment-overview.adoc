@@ -233,7 +233,7 @@ Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboar
 ** Access the environment details view by selecting an environment name.
 
 * **Components**: A list of components and their associated projects. From here you can:
-** Set up a new component by selecting btn:[Create Component]. From here you can select and environment that has a successful environment integration set up, and from there you can add a new component.
+** Set up a new component by selecting btn:[Create Component]. From here you can select an environment that has a successful environment integration set up, and from there you can add a new component.
 ** Get straight to the component's project building on CircleCI by selecting the project name.
 ** Access setting for each component icon:settings[Settings icon].
 
