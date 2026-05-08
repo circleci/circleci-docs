@@ -271,7 +271,7 @@ mongodb:
 --
 ====
 
-[#rabbinmq-configurations-and-auth-secrets]
+[#rabbitmq-configurations-and-auth-secrets]
 === e. RabbitMQ configurations and auth Secrets
 
 The RabbitMQ installation requires two random alphanumeric strings. CircleCI will not be able to recover the values if lost. Based on how you prefer to manage Kubernetes Secrets there are two options.
@@ -634,7 +634,7 @@ ifndef::env-gcp[]
 
 [#s3-compatible]
 ==== S3 compatible
-Add an `s3` section as a child of `object_storage`. The `endpoint` in the case of AWS S3 is the link:https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. Otherwise it is the API endpoint fo your object storage server.
+Add an `s3` section as a child of `object_storage`. The `endpoint` in the case of AWS S3 is the link:https://docs.aws.amazon.com/general/latest/gr/rande.html[regional endpoint], it is of the form `https://s3.<region>.amazonaws.com`. Otherwise it is the API endpoint for your object storage server.
 
 [source,yaml]
 ----
@@ -932,7 +932,7 @@ USERNAME=<provided-username>
 PASSWORD=<token>
 namespace=<your-namespace>
 helm registry login cciserver.azurecr.io/circleci-server -u $USERNAME -p $PASSWORD
-helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm install circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion410} -f <path-to-values.yaml>
 ----
 
 [#create-dns-entry]

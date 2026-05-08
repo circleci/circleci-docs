@@ -29,7 +29,7 @@ Add email notification support by adding the following to `values.yaml`:
 smtp:
   host: <hostname-of-submission-server>
   user: <username-for-submission-server>
-  password: <password-for-submission-server
+  password: <password-for-submission-server>
   port: <mail-port>
 ----
 
