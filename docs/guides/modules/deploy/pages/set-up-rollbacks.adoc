@@ -122,7 +122,7 @@ image::guides:ROOT:deploy/rollback-commit-config-button.png[Commit config button
 +
 Alternatively, you can copy the suggested configuration into an existing or newly created rollback config file. Call the file `rollback.yml` and save it in your repository's `.circleci` folder, for the system to detect and use this file. If you choose this method, select btn:[I already have a rollback config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your rollback configuration.
 
-. Navigate to the pull request in your repository by selecting btn:[View pull Request] under the example config file.
+. Navigate to the pull request in your repository by selecting btn:[View pull request] under the example config file.
 
 . In the pull request, modify the rollback configuration according to your specific deployment needs. For example, set your own parameters and rollback logic, uncomment the included common rollback setups or write your own custom rollback implementation.
 . Once you have customized the configuration, merge the pull request to complete the rollback setup. Head back to the CircleCI web app and select btn:[Setup rollback pipeline] to activate the rollback pipeline.
@@ -131,7 +131,7 @@ You can now rollback deployments by running your rollback pipeline. More informa
 
 == Run a rollback pipeline
 
-For steps to running a rollback pipeline, see the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.
+For steps to run a rollback pipeline, see the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.
 
 == Change rollback pipeline
 
