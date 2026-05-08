@@ -631,7 +631,7 @@ A healthy active state (jobs queued, scaler responding):
 
 If `desired_vms` is not changing in response to queued jobs, check the following:
 
-* `unclaimed_tasks` is always 0 — the `CIRCLE_TOKEN` may be invalid or pointing at the wrong resource class.
+* If `unclaimed_tasks` is always 0, the `CIRCLE_TOKEN` may be invalid or pointing at the wrong resource class.
 * `desired_vms` is not increasing past a fixed number — the scaler is hitting `maxReplicas`.
 
 Scaler errors appear as log entries with messages like `failed to get unclaimed tasks` or `failed to get running tasks`, indicating the provisioner cannot reach the CircleCI API.
