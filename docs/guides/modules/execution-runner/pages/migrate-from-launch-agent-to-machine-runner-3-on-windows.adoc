@@ -4,7 +4,7 @@
 :machine:
 :Windows:
 
-This page describes how to migrate an existing launch agent installation to machine runner 3. Machine runner 3 on Windows.
+This page describes how to migrate an existing launch agent installation to machine runner 3 on Windows.
 
 Migrating from launch agent to machine runner 3 is a straightforward process. The prerequisites remain the same. First, uninstall and remove launch agent, then, install the machine runner 3 agent. The configuration file is 1:1 compatible between the agents so no modifications are needed during the migration
 
@@ -48,7 +48,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ./Install-CircleCIRunner.ps1
 ----
 +
-The installation will be output into your PowerShell interface.
+The installation will be displayed in your PowerShell interface.
 
 . As part of the installation, the configuration file for the machine runner (`launch-agent-config.yaml`) will open in Notepad. Fill in the information from the previous configuration file copied in <<copy-current-runner-configuration,step 2>>. The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
