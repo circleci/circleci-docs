@@ -4,8 +4,8 @@
 :experimental:
 
 This document describes how to get started with CI/CD using a *macOS execution environment* on CircleCI.
-If you need to learn the basics of CircleCI, see the xref:getting-started:getting-started.adoc[getting started guide].
-You may also want to visit the documentation for xref:test:testing-ios.adoc[testing and setting up iOS projects].
+If you need to learn the basics of CircleCI, see the xref:getting-started:getting-started.adoc[Getting Started Guide].
+You may also want to visit the documentation for xref:test:testing-ios.adoc[Testing and Setting up iOS Projects].
 
 [#prerequisites]
 == Prerequisites
@@ -19,16 +19,16 @@ To follow along with this document you will need:
 == Overview of the macOS executor
 
 The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI.
-The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
+The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch, and Apple TV simulators.
 
-Before we get to setting up the macOS executor, we will need to setup our example application.
+Before we get to setting up the macOS executor, we will need to set up our example application.
 
 [#example-application]
 == Example application
 
 The example application is a simple macOS app. The app runs a 5 minute
 timer and contains a single unit test. Real-world applications
-will be far more complex. This app simply serves as an introduction to the macOS
+will be far more complex. This app serves as an introduction to the macOS
 execution environment.
 
 In this example app, CircleCI is configured to help with the following:
@@ -38,7 +38,7 @@ In this example app, CircleCI is configured to help with the following:
 
 You can check out the example application's repo on link:https://github.com/CircleCI-Public/circleci-demo-macos[GitHub].
 
-TIP: If you would like to test running the code in the example configuration file (below) yourself, you should either fork, or duplicate the example application from GitHub. The example configuration file is not guaranteed to work on any/all Xcode projects.
+TIP: If you would like to test running the code in the example configuration file (below) yourself, either fork or duplicate the example application from GitHub. The example configuration file is not guaranteed to work on any/all Xcode projects.
 
 [#example-configuration-file]
 == Example configuration file
@@ -47,7 +47,7 @@ Our application does not make use of any external tools or dependencies, so we
 have a fairly simple `.circleci/config.yml` file. Below, each line is commented
 to indicate what is happening at each step.
 
-For a full list of supported Xcode versions, see the xref:using-macos.adoc#supported-xcode-versions[using macOS] page.
+For a full list of supported Xcode versions, see the xref:using-macos.adoc#supported-xcode-versions[Using macOS] page.
 
 [,yaml]
 ----
@@ -78,7 +78,7 @@ jobs: # a basic unit of work in a run
           # compress Xcode's build output so that it can be stored as an artifact
           name: Compress app for storage
           command: zip -r app.zip build/Release/circleci-demo-macos.app
-      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/guides/optimize/artifacts/
           path: app.zip
           destination: app
 
@@ -110,4 +110,4 @@ are interested in building and/or testing iOS applications, consider checking
 out our following docs that further explore this topic:
 
 * xref:test:testing-ios.adoc[Testing iOS Applications on macOS]
-* xref:ios-codesigning.adoc[Setting Up Code Signing for iOS Projects]
+* xref:ios-codesigning.adoc[Setting up Code Signing for iOS Projects]

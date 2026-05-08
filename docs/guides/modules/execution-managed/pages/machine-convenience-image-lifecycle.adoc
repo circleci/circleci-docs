@@ -9,7 +9,7 @@ CircleCI prioritizes support for the most recent stable releases of the followin
 * Android
 * Windows
 * Remote Docker
-* MacOS
+* macOS
 * CUDA
 
 When a new major version of an image is available, CircleCI will begin the deprecation process of the oldest version supported.
@@ -65,7 +65,7 @@ machine:
 5. **Use the image updater tool**: CircleCI provides link:https://github.com/CircleCI-Public/image-updater[a tool] to help identify and update deprecated images.
 
 [#brownout-faq]
-== FAQ About CircleCI Brownouts
+== FAQ about CircleCI brownouts
 **Q: How long do brownouts typically last?**
 
 A: Most brownouts last from 10 minutes to 24 hours, depending on the image type and its usage across the platform.
@@ -74,7 +74,7 @@ A: Most brownouts last from 10 minutes to 24 hours, depending on the image type 
 
 A: Yes, CircleCI sends email notifications to organizations whose projects use deprecated images and posts announcements on their Discuss forum.
 
-**Q: What happens if I don't update my images before the EOL date?**
+**Q: What happens if I do not update my images before the EOL date?**
 
 A: After the EOL date, deprecated images will be permanently removed, and any jobs attempting to use them will fail until configurations are updated.
 
@@ -84,7 +84,7 @@ A: Create a branch with updated configuration files, then push and test this bra
 
 **Q: Are there any costs associated with updating to newer images?**
 
-A: There's no additional cost for using newer CircleCI images, though you should test thoroughly as newer images may have updated software versions that could affect your workflows.
+A: No additional cost is associated with using newer CircleCI images. Test thoroughly, as newer images may have updated software versions that could affect your workflows.
 
 [#additional-resources]
 == Additional resources
@@ -95,7 +95,7 @@ A: There's no additional cost for using newer CircleCI images, though you should
 - xref:guides:execution-managed:android-images-support-policy.adoc[CircleCI Android Image Support Policy]
 - xref:guides:execution-managed:remote-docker-images-support-policy.adoc[CircleCI Remote Docker Image Support Policy]
 - xref:guides:execution-managed:windows-images-support-policy.adoc[CircleCI Windows Image Support Policy]
-- xref:guides:execution-managed:xcode-policy.adoc[CircleCI XCode Support Policy]
+- xref:guides:execution-managed:xcode-policy.adoc[CircleCI Xcode Support Policy]
 - link:https://github.com/CircleCI-Public/image-updater[CircleCI Image Updater Tool]
 - link:https://discuss.circleci.com/c/announcements/notices/113[CircleCI Discuss Forum - Notices Category]
 - link:https://support.circleci.com/hc/en-us[CircleCI Support Center]
