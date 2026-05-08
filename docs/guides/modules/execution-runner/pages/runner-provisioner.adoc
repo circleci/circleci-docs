@@ -592,7 +592,7 @@ Logs are written to stderr in JSON format.
 [#confirming-scaler-polling]
 === Confirming the scaler is polling
 
-The scaler emits a log entry on every poll cycle (every one second) as part of a span named `worker loop scaler`. Each entry includes these fields:
+The scaler emits a log entry on every poll cycle (every one second) as part of a span named `worker loop scaler`. Each entry includes the following fields:
 
 [.table-scroll]
 --
