@@ -200,9 +200,9 @@ html[data-theme="dark"] .search-icon {
 }
 
 html[data-theme="dark"] [data-keyboard-shortcut] span {
-  background-color: #1f2937;
-  border-color: #374151;
-  color: #9ca3af;
+  background-color: var(--dark-surface-tertiary);
+  border-color: var(--dark-border-secondary);
+  color: var(--dark-text-muted);
 }
 
 /* Hide keyboard shortcut when clear button is visible (not hidden) */
