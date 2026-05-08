@@ -79,7 +79,7 @@ Make the changes yourself::
 +
 --
 . Select the "I'll make the config changes myself" checkbox.
-. In the **Environment Name** field, select or type your target environment name. More information in the  xref:configure-deploy-markers#manage-environments[Configure Deploy Markers] guide.  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
+. In the **Environment Name** field, select or type your target environment name. More information in the xref:configure-deploy-markers#manage-environments[Configure Deploy Markers] guide.  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
 . In the **Component Name** field, select or type the name of the component you want to deploy. The component name sets the name that will be displayed in the Deploys UI.
 +
 The setup will auto-generate deploy marker commands based on your selections.
