@@ -629,7 +629,7 @@ A healthy active state (jobs queued, scaler responding):
 {"loop_name":"scaler","unclaimed_tasks":4,"running_tasks":2,"desired_vms":6}
 ----
 
-If `desired_vms` is not changing in response to queued jobs, check:
+If `desired_vms` is not changing in response to queued jobs, check the following:
 
 * `unclaimed_tasks` is always 0 — the `CIRCLE_TOKEN` may be invalid or pointing at the wrong resource class.
 * `desired_vms` is not increasing past a fixed number — the scaler is hitting `maxReplicas`.
