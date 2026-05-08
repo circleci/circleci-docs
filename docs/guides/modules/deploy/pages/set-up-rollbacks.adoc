@@ -62,7 +62,7 @@ A pipeline definition is a setting within CircleCI in your project to specify th
 
 No changes are pushed to your repository at this point. GitHub pipelines are viewable at menu:Project settings[Project Setup].
 
-. Select the repository that includes your project code. This is the repository that you want to rollback with the pipeline you are setting up.
+. Select the repository that includes your project code. This is the repository that you want to roll back with the pipeline you are setting up.
 . Select btn:[Create pipeline definition]. This creates a new pipeline definition for your rollback pipeline in your project.
 
 === 4. Add deploy markers
@@ -87,8 +87,8 @@ Make the changes yourself::
 +
 --
 . Select the "I'll make the config changes myself" checkbox.
-. In the **Environment Name** field, select or type your target environment name. More information in the  xref:configure-deploy-markers#manage-environments[Configure Deploy Markers] guide.  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
-. In the **Component Name** field, select or type the name of the component you want to rollback. The component name sets the name that will be displayed in the Deploys UI.
+. In the **Environment Name** field, select or type your target environment name. More information in the xref:configure-deploy-markers#manage-environments[Configure Deploy Markers] guide.  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
+. In the **Component Name** field, select or type the name of the component you want to roll back. The component name sets the name that will be displayed in the Deploys UI.
 +
 The setup will auto-generate deploy marker commands based on your selections.
 +
@@ -140,7 +140,7 @@ You can switch rollback pipelines for your project at any time. If you have conf
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 . Select the *Deploys* tab.
-. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown. You can also choose the _unset_ the rollback pipeline at this point, which will enable you to use the guided setup again as described above.
+. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown. You can also choose _unset_ rollback pipeline at this point, which will enable you to use the guided setup again as described above.
 
 .Change rollback pipeline
 image::guides:ROOT:deploy/change-rollback-pipeline.png[Change rollback pipeline]
