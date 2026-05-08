@@ -199,6 +199,17 @@ html[data-theme="dark"] .search-icon {
   color: var(--dark-text-muted);
 }
 
+html[data-theme="dark"] [data-keyboard-shortcut] span {
+  background-color: #1f2937;
+  border-color: #374151;
+  color: #9ca3af;
+}
+
+/* Hide keyboard shortcut when clear button is visible (not hidden) */
+div:has([data-search-clear]:not(.hidden)) [data-keyboard-shortcut] {
+  display: none !important;
+}
+
 /* Admonition icon dark mode switching */
 html[data-theme="dark"] .doc .admonitionblock td.icon i.icon-note {
   background: url('../img/note_icon-dark.svg') no-repeat center / contain;
