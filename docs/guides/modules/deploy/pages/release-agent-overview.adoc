@@ -41,7 +41,7 @@ To get started with the release agent, refer to the following guides:
 +
 Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
 +
-If you have these limits set, you can't restore a version outside the limit. For example, if your limit is set to the last 10 deployments, you can not restore the 11th deployment back.
+If you have these limits set, you can't restore a version outside these limits. For example, if your limit is set to the last 10 deployments, you can not restore the 11th deployment back.
 +
 We are working on updates to:
 +
