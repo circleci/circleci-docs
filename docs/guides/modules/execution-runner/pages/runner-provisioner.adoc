@@ -13,14 +13,12 @@ Runner Provisioner is a Kubernetes controller that automatically scales CircleCI
 
 The current preview version is `0.1.0`.
 
-[#getting-access]
 == Getting access
 
 Runner Provisioner is available to invited preview participants only. To request access, fill out the link:https://forms.gle/7W8z12EBdjuiTQJWA[Runner Provisioner preview access request form].
 
 Once access is granted, you will receive credentials for the image registry referenced in the <<quick-start,Quick Start>>, and access to the Runner Provisioner preview Slack channel.
 
-[#feedback-and-support]
 == Feedback and support
 
 Runner Provisioner is available to invited preview participants only. As a preview customer, expect bugs and missing features — this is early-stage software and sharp edges are normal.
@@ -35,7 +33,6 @@ Escalate directly via the `#runner-provisioner-preview` Slack channel for:
 
 Do not open a support ticket for issues with Runner Provisioner. Issues are routed directly to the product team with a 24-hour internal response target.
 
-[#prerequisites]
 == Prerequisites
 
 * A Kubernetes cluster with KubeVirt installed. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
@@ -45,11 +42,9 @@ Do not open a support ticket for issues with Runner Provisioner. Issues are rout
 * A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access.
 * An image pull secret named `regcred` in the target namespace. The Helm chart references this by default.
 
-[#cluster-requirements]
-== Cluster requirements
+=== Cluster requirements
 
-[#nested-virtualization]
-=== Nested virtualization
+==== Nested virtualization
 
 KubeVirt runs VMs inside Kubernetes pods. Each node that will host runner VMs must expose `/dev/kvm` — the node itself must support hardware-accelerated virtualization (either bare metal, or a cloud VM with nested virtualization enabled).
 
@@ -74,14 +69,14 @@ Defaulted container "virt-handler" out of: virt-handler, virt-launcher (init)
 If the file is absent, VMs cannot be scheduled on that node regardless of how KubeVirt is configured. On cloud providers, nested virtualization is typically disabled by default and must be explicitly enabled on the node pool or instance group before the nodes are created. Nested virtualization cannot be patched onto existing nodes.
 
 [#dedicated-node-pool]
-=== Dedicated node pool for VM workloads (optional)
+==== Dedicated node pool for VM workloads (optional)
 
 Running runner VMs on a dedicated node pool, separate from the nodes that run KubeVirt's own control plane components (`virt-operator`, `virt-api`, `virt-controller`), is recommended. This prevents VM workloads from competing with cluster infrastructure for resources.
 
 Nodes in this pool must have nested virtualization enabled. Nested virtualization but be configured at node or instance creation time and cannot be patched onto existing nodes. Details on how to enable nested virtualization for GCP, AKS, and AWS node pools are covered in the following sections.
 
 [#tainted-nodes]
-=== Tainted nodes (optional)
+==== Tainted nodes (optional)
 
 Taint the nodes to prevent arbitrary workloads from landing on them while still allowing `virt-launcher` pods through. For information on Taints and Tolerations, see the link:https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/[Kubernetes Documentation].
 
@@ -108,7 +103,7 @@ $ kubectl patch kubevirt kubevirt -n kubevirt --type=merge -p='{
 Use this patch command in the cloud provider examples below.
 
 [#example-gke]
-=== Example: GKE
+==== Example: GKE
 
 On GKE, use `gcloud` to create the node pool with nested virtualization and the taint applied in one step. GKE requires an `n2`, `n2d`, `c2`, or `c2d` series machine type. `e2` instances do not support nested virtualization. In the command below, the node pool creates nodes with a taint applied using `kubevirt` as the taint key.
 
@@ -133,7 +128,7 @@ $ gcloud container node-pools create kubevirt-pool \
 Then install KubeVirt and apply the `virt-handler` patch from <<tainted-nodes,Tainted Nodes>> using `kubevirt` as the taint key.
 
 [#example-aks]
-=== Example: Azure Kubernetes service (AKS)
+==== Example: Azure Kubernetes service (AKS)
 
 On AKS, nested virtualization is determined by the VM SKU, not a flag. Use a `Standard_D*s_v3` or newer (v4, v5) series VM, which supports nested virtualization. `Standard_B` series and older `Standard_A` series do not. In the command below, the node pool creates nodes with a taint applied using `kubevirt` as the taint key.
 
@@ -156,7 +151,7 @@ $ az aks nodepool add \
 Then install KubeVirt and apply the `virt-handler` patch from <<tainted-nodes,Tainted Nodes>> using `kubevirt` as the taint key.
 
 [#example-eks]
-=== Example: AWS EKS
+==== Example: AWS EKS
 
 On EKS, KVM support requires bare metal instances — regular EC2 instances, even Nitro-based ones, do not expose `/dev/kvm` to pods. Use a `.metal` instance type (for example, `m5.metal` or `c5.metal`). An active request for nested virtualization support on EC2 instances remains open.
 
@@ -212,7 +207,7 @@ $ eksctl create nodegroup -f kubevirt-nodegroup.yaml
 Then install KubeVirt and apply the `virt-handler` patch from <<tainted-nodes,Tainted Nodes>> using `kubevirt` as the taint key.
 
 [#kubevirt-operator-scheduling]
-=== Configure KubeVirt operator scheduling
+==== Configure KubeVirt operator scheduling
 
 By default, KubeVirt's operator requires nodes with a `node-role.kubernetes.io/control-plane` label and uses a `requiredDuringSchedulingIgnoredDuringExecution` affinity. In clusters where this label is not present or the affinity is too restrictive, apply these two fixes after installing KubeVirt.
 
@@ -247,7 +242,6 @@ $ kubectl label nodes -l cloud.google.com/gke-nodepool=<pool-name> node-role.kub
 $ kubectl label nodes -l agentpool=<nodepool-name> node-role.kubernetes.io/control-plane=
 ----
 
-[#quick-start]
 == Quick start
 
 [#create-namespace]
@@ -357,12 +351,10 @@ provisioner:
 
 This value is injected into each VM's cloud-init script so the runner agent connects to your server instance rather than CircleCI Cloud. Without it, runners will fail to register.
 
-[#configuration-reference]
 == Configuration reference
 
 NOTE: Configuration field names and defaults may change before general availability. Pin your `my-values.yaml` to a specific chart version and review the changelog before upgrading.
 
-[#top-level-values]
 === Top-level values
 
 [.table-scroll]
@@ -510,7 +502,6 @@ provisioner:
   existingSecret: "my-secret"
 ----
 
-[#vm-specification-notes]
 === VM specification notes
 
 The `spec` field is a KubeVirt `VirtualMachineInstanceSpec`. The provisioner always appends a cloud-init disk and volume automatically — do not add one yourself.
@@ -526,7 +517,6 @@ The startup script performs the following steps on each VM:
 . Configures systemd to power off the VM after the runner process exits.
 . Starts the runner service.
 
-[#scaling-behavior]
 == Scaling behavior
 
 Desired replicas are calculated as unclaimed tasks plus running tasks, clamped to `[minReplicas, maxReplicas]`.
@@ -543,7 +533,6 @@ Without `idleTimeout`, a pre-warmed VM that never receives a job waits indefinit
 * Draining excess pre-scaled VMs when demand drops.
 * Cycling VMs after a spec or config update (old VMs will eventually time out and be replaced).
 
-[#rbac]
 == Role-based access control
 
 The Helm chart creates a `ServiceAccount`, `Role`, and `RoleBinding` scoped to the target namespace. The provisioner requires the following permissions:
@@ -569,7 +558,6 @@ The Helm chart creates a `ServiceAccount`, `Role`, and `RoleBinding` scoped to t
 |===
 --
 
-[#observability]
 == Observability
 
 [.table-scroll]
@@ -639,7 +627,6 @@ If `desired_vms` is not changing in response to queued jobs, check the following
 
 Scaler errors appear as log entries with messages like `failed to get unclaimed tasks` or `failed to get running tasks`, indicating the provisioner cannot reach the CircleCI API.
 
-[#upgrading]
 == Upgrading
 
 Update your `my-values.yaml` and run:
@@ -666,7 +653,6 @@ Configuration changes (tokens, API address, VM spec) are injected into VMs at fi
 $ kubectl delete vm -n runner-provisioner --all
 ----
 
-[#troubleshooting]
 == Troubleshooting
 
 [#provisioner-pod-not-starting]

@@ -117,7 +117,7 @@
 ** xref:execution-runner:runner-concepts.adoc[Self-hosted runner concepts]
 ** xref:execution-runner:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
 ** Runner Provisioner
-*** xref:execution-runner:runner-provisioner.adoc[Runner Provisioner overview]
+*** xref:execution-runner:runner-provisioner.adoc[Runner provisioner overview]
 
 ** Container runner
 *** xref:execution-runner:container-runner-installation.adoc[Container runner installation]
