@@ -1,0 +1,7 @@
+---
+message: "Write short sentences (less than 30 words)."
+extends: occurrence
+scope: sentence
+level: error
+max: 30
+token: \b(\w+)\b

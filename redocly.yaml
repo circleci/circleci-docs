@@ -1,0 +1,27 @@
+extends:
+  - recommended
+
+theme:
+  openapi:
+    theme:
+      colors:
+        primary:
+          main: '#2152E5'  # CircleCI blue
+        http:
+          get: '#61AFFE'
+          post: '#49CC90'
+          put: '#FCA130'
+          delete: '#F93E3E'
+        text:
+          primary: '#333333'
+      typography:
+        fontSize: '16px'
+        fontFamily: 'Inter, sans-serif'
+    # Additional options for free version
+    disableSearch: false
+    hideDownloadButton: false
+    hideLoading: false
+    nativeScrollbars: false
+
+# Title and description are set via the build command
+# Use --title "CircleCI API v2 Documentation" in the build command

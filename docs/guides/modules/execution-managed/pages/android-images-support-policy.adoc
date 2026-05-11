@@ -1,0 +1,53 @@
+= CircleCI Android images support policy
+:page-platform: Cloud
+:page-description: CircleCI Android images release, update, and deprecation policy
+:experimental:
+
+[#overview]
+== Overview
+
+This document outlines the CircleCI Android image release, update, and deprecation policy. This policy applies to all CircleCI Android images built for the machine executor.
+
+[#release-policy]
+== Release policy
+
+Android images are released once a quarter, with patch releases potentially made for security issues. These images are generally built on top of the latest version of our most recent stable base Ubuntu image with added packages for Android.
+
+- We install the most up-to-date versions of each tool/package in newly built images.
+- We aim to package 6 levels of the Android API within each image release.
+- As this image is not specifically designed for the Android Gradle Plugin (AGP), some updates may come later than desired. We aim to follow compatibility matrices for link:https://docs.gradle.org/current/userguide/compatibility.html[AGP] and link:https://developer.android.com/build/releases/gradle-plugin#updating-gradle[Gradle].
+
+Releases may be skipped if there are no material updates to core Android functionality, such as `sdkmanager`, `ndk` or platform versions.
+
+[#tagging]
+== Tagging
+
+Tags we support for this image (tag is what is specified in config when requesting an image):
+
+For the latest major version of Docker:
+
+- `default`: This image is the current stable version of the image and will receive updates approximately every 3 months.
+
+- `edge`: These tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the `current` image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability (generally an average of a week).
+
+[#critical-cve-patches]
+== Critical CVE patches
+
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), and this image will supersede the original image.
+
+[#bug-reports-issues-and-prs]
+== Bug reports, issues, and PRs
+
+File a link:https://support.circleci.com/hc/en-us/requests/new[Support Ticket with CircleCI Support] for any issues or bugs found with the Android VM (machine) images. Our Support Team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+
+[#image-lifespan-eol]
+== Image lifespan / EOL
+
+When a new API Level for Android is released we will release it to edge. We will give a 3 month warning before the default image will have oldest version no longer supported. We will create an announcement on our Discuss forum and along with additional outreach where possible.
+
+Generally we will aim to start EOL process within 3 months of a new version release.
+
+[#exceptions]
+== Exceptions
+
+​​At any time, we reserve the right to work outside of the information in this document if the circumstances require. In the event that we are required to make an exception to the policy, we will aim to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our Discuss Forum, along with additional outreach, such as an email notice, where possible.

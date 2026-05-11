@@ -1,0 +1,1 @@
+NOTE: Some Linux CUDA images have been deprecated. Refer to our link:https://discuss.circleci.com/t/linux-cuda-deprecation-and-image-policy/48568[Discuss post] for the list of affected images.

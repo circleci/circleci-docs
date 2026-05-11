@@ -1,0 +1,813 @@
+= How to use the CircleCI local CLI
+:page-platform: Cloud, Server v4+
+:page-description: How to use the CircleCI local CLI
+:experimental:
+
+This page describes how to use some features of the CircleCI CLI.
+
+[#prerequisites]
+== Prerequisites
+
+To follow the guides on this page you will need the following:
+
+* A CircleCI account (you can link:https://circleci.com/signup/[sign up for free])
+* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli.adoc[Installing the local CLI] page.
+* xref:local-cli.adoc#configure-the-cli[Set up and configure] the CircleCI CLI.
+
+[#validate-a-circleci-config]
+== Validate a CircleCI config
+
+TIP: *Using VS Code?* You can validate your CircleCI configuration using the VS Code extension. For full information about the features provided in the VS Code extension, see the xref:vs-code-extension-overview.adoc[VS Code extension overview] page.
+
+You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally. Follow these steps:
+
+. Navigate to your project directory with a `.circleci/config.yml` file
+. Run the following, providing the path to your `.circleci/config.yml`:
++
+[,shell]
+----
+circleci config validate <path-to-config.yml>
+----
+
+. If your configuration is valid, you should see the following:
++
+[,shell]
+----
+Config file at .circleci/config.yml is valid
+----
++
+Otherwise you will see errors, for example:
++
+[,shell]
+----
+Error: config compilation contains errors: config compilation contains errors:
+	- Unable to parse YAML
+	- mapping values are not allowed here
+	-  in 'string', line 20, column 22:
+	-               environment:
+	-                          ^
+----
+
+[#orb-development-kit]
+== Orb development kit
+
+The xref:orbs:author:orb-author.adoc#orb-development-kit[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. The orb development kit has two commands:
+
+* The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[initializes a new orb project]:
++
+[,shell]
+----
+circleci orb init
+----
+
+* The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html[packs an orb with local scripts]:
++
+[,shell]
+----
+circleci orb pack
+----
+
+For more information on orb packing, see the xref:orbs:use:orb-concepts.adoc#orb-packing[Orbs Concepts] page.
+
+[#validate-an-orb-in-your-configuration-file]
+== Validate an orb in your configuration file
+
+You can validate your orb with the following:
+
+[,shell]
+----
+circleci orb validate <path-to-your-orb.yml>
+----
+
+[#packing-a-config]
+== Packing a config
+
+[,shell]
+----
+circleci config pack
+----
+
+This CLI pack command (separate to `circleci orb pack` described above) allows you to create a single YAML file from several separate files (based on directory structure and file contents). The `pack` command implements link:https://github.com/CircleCI-Public/fyaml[FYAML], a scheme for breaking YAML documents across files in a directory tree. FYAML is useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration.
+
+How you **name** and **organize** your files when using the `pack` command will determine the final `orb.yml` output. Consider the following folder structure example:
+
+TIP: When packing a config using `circleci config pack`, the component names are not included in the configuration files, they are taken from the file names.
+
+[,shell]
+----
+$ tree
+.
+└── your-orb-source
+    ├── @orb.yml
+    ├── commands
+    │   └── foo.yml
+    └── jobs
+        └── bar.yml
+
+3 directories, 3 files
+----
+
+The UNIX `tree` command is great for printing out folder structures. In the example tree structure above, the `pack` command will map the folder names and file names to **YAML keys**, and map the file contents as the **values** to those keys.
+
+The following command will `pack` up the example folder from above:
+
+[,shell]
+----
+circleci config pack your-orb-source
+----
+
+And the output will be in your `.yml` file:
+
+[,yaml]
+----
+# Contents of @orb.yml appear here
+commands:
+  foo:
+    # contents of foo.yml appear here
+jobs:
+  bar:
+    # contents of bar.yml appear here
+----
+
+[#other-configuration-packing-capabilities]
+=== Other configuration packing capabilities
+
+A file beginning with `@` will have its contents merged into its parent folder level. This can be useful at the top level of an orb, when one might want generic `orb.yml` to contain metadata, but not to map into an `orb` key-value pair.
+
+For example, the following structure:
+
+[,shell]
+----
+cat foo/bar/@baz.yml
+\{baz: qux}
+----
+
+Maps to:
+
+[,yaml]
+----
+bar:
+  baz: qux
+----
+
+[#processing-a-config]
+== Processing a config
+
+Running the following command validates your config, but will also display expanded source configuration alongside your original configuration:
+
+[,shell]
+----
+circleci config process <path-to-config.yml>
+----
+
+Consider the following example configuration that uses the link:https://circleci.com/developer/orbs/orb/circleci/node[`node`] orb:
+
+[,yml]
+----
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7.0
+
+workflows:
+  example-workflow:
+      jobs:
+        - node/test
+----
+
+Processing this config file will output a YAML file like the example below:
+
+.Expanded source configuration using `version: 2` syntax. All `version: 2.1` elements are processed
+[,yml]
+----
+# Orb 'circleci/node@4.7.0' resolved to 'circleci/node@4.7.0'
+version: 2
+jobs:
+  node/test:
+    docker:
+    - image: cimg/node:13.11.0
+    steps:
+    - checkout
+    - run:
+        command: |
+          if [ ! -f "package.json" ]; then
+            echo
+            echo "---"
+            echo "Unable to find your package.json file. Did you forget to set the app-dir parameter?"
+            echo "---"
+            echo
+            echo "Current directory: $(pwd)"
+            echo
+            echo
+            echo "List directory: "
+            echo
+            ls
+            exit 1
+          fi
+        name: Checking for package.json
+        working_directory: ~/project
+    - run:
+        command: |
+          if [ -f "package-lock.json" ]; then
+            echo "Found package-lock.json file, assuming lockfile"
+            ln package-lock.json /tmp/node-project-lockfile
+          elif [ -f "npm-shrinkwrap.json" ]; then
+            echo "Found npm-shrinkwrap.json file, assuming lockfile"
+            ln npm-shrinkwrap.json /tmp/node-project-lockfile
+          elif [ -f "yarn.lock" ]; then
+            echo "Found yarn.lock file, assuming lockfile"
+            ln yarn.lock /tmp/node-project-lockfile
+          fi
+          ln package.json /tmp/node-project-package.json
+        name: Determine lockfile
+        working_directory: ~/project
+    - restore_cache:
+        keys:
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-
+        - node-deps-{{ arch }}-v1-{{ .Branch }}-
+    - run:
+        command: "if [[ ! -z \"\" ]]; then\n  echo \"Running override package installation command:\"\n  \nelse\n  npm ci\nfi\n"
+        name: Installing NPM packages
+        working_directory: ~/project
+    - save_cache:
+        key: node-deps-{{ arch }}-v1-{{ .Branch }}-{{ checksum "/tmp/node-project-package.json" }}-{{ checksum "/tmp/node-project-lockfile" }}
+        paths:
+        - ~/.npm
+    - run:
+        command: npm run test
+        name: Run NPM Tests
+        working_directory: ~/project
+workflows:
+  version: 2
+  example-workflow:
+    jobs:
+    - node/test
+----
+
+[#run-a-job-in-a-container-on-your-machine]
+== Run a job in a container on your machine
+
+The CircleCI CLI enables you to run a job from your configuration locally with Docker. This can be useful for the following:
+
+* To run tests before pushing configuration changes
+* Debugging your build process without impacting your build queue
+
+Only single jobs can be run locally, not workflows.
+
+[#run-job-prerequisites]
+=== Prerequisites
+
+You will need to have link:https://www.docker.com/products/docker-desktop[Docker] installed on your system, as well as the most recent version of the CLI. You will also need to have a project that includes a valid `.circleci/config.yml` file.
+
+[#running-a-job]
+=== Run a job
+
+. Navigate to the root of your project containing the `.circleci/config.yml` file.
+
+. Run the following command specifying the job you would like to run. If your CircleCI configuration is set to version 2.1, you must first export your configuration to `process.yml`, and specify it when executing with the following commands:
++
+[,shell]
+----
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml <job-name>
+----
++
+If you are using `version: 2` configuration, you can run:
++
+[,shell]
+----
+circleci local execute <job-name>
+----
+
+The commands above will run the job you specify by name. The CLI uses Docker to pull down the requirements for the build and then execute your CI steps locally.
+
+[#limitations-of-running-jobs-locally]
+=== Limitations of running jobs locally
+
+Although running jobs locally with `circleci` is helpful, there are some limitations.
+
+[#executors]
+==== Executors
+
+The CLI does not support running jobs that use a xref:execution-managed:executor-intro.adoc#linux-vm[machine] (`machine`) or xref:execution-managed:executor-intro.adoc#macos[macOS] (`macos`) executor locally because these executors require running an additional virtual machine. Only jobs that use a xref:execution-managed:executor-intro.adoc#docker[Docker] (`docker`) executor can be run locally.
+
+[#add-ssh-keys]
+==== Add SSH keys
+
+It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
+
+[#workflows]
+==== Workflows
+
+The CLI tool does not provide support for running workflows. By nature, workflows leverage running jobs concurrently on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single jobs (which make up parts of a workflow).
+
+[#caching-and-online-only-commands]
+==== Caching and online-only commands
+
+Caching is not currently supported in local jobs. When you have either a xref:reference:ROOT:configuration-reference.adoc#savecache[`save_cache`] or xref:reference:ROOT:configuration-reference.adoc#restorecache[`restore_cache`] step in your config, `circleci` will skip them and display a warning.
+
+Further, not all commands may work on your local machine as they do online. For example, the Golang build reference above runs a xref:reference:ROOT:configuration-reference.adoc#storeartifacts[`store_artifacts`] step, however, local builds will not upload artifacts. If a step is not available on a local build you will see an error in the console.
+
+[#environment-variables]
+==== Environment variables
+
+For security reasons, encrypted environment variables configured in the link:https://app.circleci.com/[web application] will not be imported into local builds. As an alternative, you can specify environment variables to the CLI with the `-e` flag. See the output of the following command for more information.
+
+[,shell]
+----
+circleci help build
+----
+
+If you have multiple environment variables, you must use the flag for each variable, for example:
+
+[,shell]
+----
+circleci build -e VAR1=FOO -e VAR2=BAR
+----
+
+[#runner-management]
+== Runner management
+
+You can operate on your self-hosted runners using the CLI.
+
+=== List runner instances
+
+Use the `runner instance list` sub-command to get a list of your runner instances.
+
+For your namespace:
+
+[,shell]
+----
+circleci runner instance list <namespace> [flags]
+----
+
+For a specific resource class:
+
+[,shell]
+----
+circleci runner instance list <namespace/resource-class> [flags]
+----
+
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Runners** in the sidebar.
+
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Runners** in the sidebar.
+
+To find out more on namespace and resource class, see the xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-hosted runner concepts] page.
+
+For full details on the `instance list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_instance_list.html[CLI docs].
+
+=== Create a resource class
+
+Use the `resource-class create` sub-command to add a new resource class.
+
+[,shell]
+----
+circleci runner instance create <namespace/resource-class> <description> [flags]
+----
+
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Runners** in the sidebar.
+
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Runners** in the sidebar.
+
+- `<description>` is the argument that allows you to provide a description for the resource class. It must be enclosed in double-quotes.
+
+For full details on the `resource-class create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_create.html[CLI docs].
+
+=== Delete a resource class
+
+Use the `resource-class delete` sub-command to delete an existing resource class.
+
+[,shell]
+----
+circleci runner resource-class delete <namespace/resource-class> [flags]
+----
+
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Runners** in the sidebar.
+
+- `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Runners** in the sidebar.
+
+For full details on the `resource-class delete` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_delete.html[CLI docs].
+
+=== List resource classes
+
+Use the `resource-class list` sub-command to list all resource classes for your namespace.
+
+[,shell]
+----
+circleci runner resource-class list <namespace> [flags]
+----
+
+Alternatively, you can use the shorthand `ls`, instead of `list`.
+
+
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Runners** in the sidebar.
+
+For full details on the `resource-class list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_resource-class_list.html[CLI docs].
+
+=== Create a token for a resource class
+
+Use the `token create` sub-command to create a token for a resource class.
+
+[,shell]
+----
+circleci runner token create <namespace/resource-class> <nickname> [flags]
+----
+
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Runners** in the sidebar.
+
+- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Runners** in the sidebar.
+
+- `<nickname>` refers to a human-readable name you assign to the token.
+
+For full details on the `resource-class token create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_create.html[CLI docs].
+
+
+=== List tokens for a resource class
+
+Use the `token list` sub-command to list all tokens for a resource class.
+
+[,shell]
+----
+circleci runner token list <namespace/resource-class> [flags]
+----
+
+Alternatively, you can use the shorthand `ls`, instead of `list`.
+
+- `<namespace>` is the namespace claimed for your organization. You can see your namespace on the self-hosted runners inventory page in the CircleCI web app, by selecting **Runners** in the sidebar.
+
+- `<resource-class>` is the name of the resource class for the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Runners** in the sidebar.
+
+For full details on the `token list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_list.html[CLI docs].
+
+=== Delete a token
+
+Use the `token delete` sub-command to delete a token for a resource class.
+
+[,shell]
+----
+circleci runner token delete <token-id> [flags]
+----
+
+- `<token-id>` is the ID of the token to delete. You can find the token ID by running the `token list` sub-command, described above.
+
+For full details on the `token delete` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_token_delete.html[CLI docs].
+
+
+[#project-management]
+== Project management
+
+The CircleCI CLI allows you to execute several project-oriented actions.
+
+=== Create a new project
+
+NOTE: This command only applies to GitLab or GitHub App organizations (Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Org[Overview]).
+
+Use the `create` sub-command to  create a new project.
+
+[,shell]
+----
+circleci project create <vcs-type> <org-id> [flags]
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. This command only supports the `circleci` VCS type.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Org[Overview].
+
+- `--name` is the flag that allows you to provide the project name. If not provided, you will be prompted to enter it.
+
+For full details on the `create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_create.html[CLI docs].
+
+
+=== Create an environment variable for a project
+
+Use the `secret create` sub-command to create an environment variable for a project:
+
+[,shell]
+----
+circleci project secret create <vcs-type> <org-id> <project-id> <env-name> [flags]
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Org[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+- `<env-name>` is the name of the environment variable to create.
+
+- `--env-value` is the flag that allows you to provide the value of the environment variable. If not provided, you will be prompted to enter it.
+
+For full details on the `secret create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_secret_create.html[CLI docs].
+
+=== List all environment variables for a project
+
+Use the `secret list` sub-command to list all environment variables for a project:
+
+[,shell]
+----
+circleci project secret list <vcs-type> <org-id> <project-id>
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Org[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `secret list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_secret_list.html[CLI docs].
+
+=== Purge Docker Layer Cache for a project
+
+Purging the xref:optimize:docker-layer-caching.adoc[Docker Layer Cache] means removing previously stored Docker image layers so that future builds will not reuse those cached layers. This forces CircleCI to rebuild Docker images from scratch, rather than leveraging layers from earlier builds to speed up the process.
+
+Use the `dlc purge` sub-command to purge Docker Layer Cache for a project:
+
+[,shell]
+----
+circleci dlc purge <vcs-type> <org-id> <project-id>
+----
+
+- `<vcs-type>` depends on the type of integration for your organization. For projects that use GitLab or GitHub App, use `circleci` as `vcs-type`.
+
+- `<org-id>` is the ID of the organization associated with the project. You can find it from the CircleCI web app under menu:Org[Overview].
+
+- `<project-id>` is the ID of the project associated with the project. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI docs].
+
+
+[#pipeline-management]
+== Pipeline management
+
+The CircleCI CLI allows you to operate on pipelines. You can use the CLI to create a new pipeline definition, list existing pipeline definitions, or run a specific pipeline.
+
+=== Create a new pipeline definition for a project
+
+Use the `create` sub-command to  create a new pipeline definition for your project.
+
+NOTE: The `create` sub-command of the `pipeline` command only applies to pipeline definitions created with the GitHub App provider Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Org[Overview]).
+
+[,shell]
+----
+circleci pipeline create <project-id> [flags]
+----
+
+- `<project-id>` is the ID of the project for which you are creating the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags. For example:
+
+- `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
+
+For full details on the `create` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_create.html[CLI docs].
+
+
+=== List pipeline definitions for a project
+
+Use the `list` sub-command to list all pipeline definitions for your project.
+
+[,shell]
+----
+circleci pipeline list <project-id> [flags]
+----
+
+- `<project-id>` is the ID of the project you wish to list the pipeline definitions for. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+For full details on the `list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_list.html[CLI docs].
+
+=== Run a pipeline
+
+Use the `run` sub-command to run a specific pipeline.
+
+[,shell]
+----
+circleci pipeline run <org-id> <project-id> [flags]
+----
+
+- `<org-id>` is the ID of the organization associated with the pipeline definition. You can find it from the CircleCI web app under menu:Org[Overview].
+
+- `<project-id>` is the ID of the project associated with the pipeline definition. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags. For example:
+
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project Settings[Project Setup] or menu:Project settings[Pipelines].
+
+For full details on the `run` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_pipeline_run.html[CLI docs].
+
+
+[#create-a-trigger]
+== Create a trigger
+
+You can use the CircleCI CLI to create triggers for your projects.
+
+NOTE: The `trigger` command and its `create` sub-command only apply to pipeline definitions created with the GitHub App provider (Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Org[Overview]).
+
+For full details on creating, testing, and managing triggers for your organization, see the xref:orchestrate:triggers-overview.adoc[Trigger a pipeline] page.
+
+Use the `create` sub-command to create a trigger for your project.
+
+[,shell]
+----
+circleci trigger create <project-id>  [flags]
+----
+
+The above example shows the minimal usage. You will be prompted for required values if you do not provide them using the appropriate flags.
+
+- `<project-id>` is the ID of the project associated with the trigger. You can find it from the CircleCI web app under menu:Project Settings[Overview].
+
+- `--pipeline-definition-id` is the flag that allows you to provide the ID of the pipeline definition to run. If not provided, you will be prompted to enter it. You can retrieve it from the CircleCI web app by selecting btn:[Copy] for the chosen pipeline, under menu:Project Settings[Project Setup] or menu:Project settings[Pipelines].
+
+- `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
+
+- `--event-preset` is the flag that allows you to specify xref:orchestrate:github-trigger-event-options.adoc[the name of the event preset] to use when filtering events for this trigger. The value can be any of:
+** `all-pushes`
+** `only-tags`
+** `default-branch-pushes`
+** `only-build-prs`
+** `only-open-prs`
+** `only-labeled-prs`
+** `only-merged-prs`
+** `only-ready-for-review-prs`
+** `only-branch-delete`
+** `only-build-pushes-to-non-draft-prs`
+
+For full details on this command and sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_trigger.html[CLI docs].
+
+[#context-management]
+== Context management
+
+xref:security:contexts.adoc[Contexts] provide a mechanism for securing and sharing environment variables across projects. While contexts have been traditionally managed on the CircleCI web application, the CircleCI CLI provides an alternative method for managing the usage of contexts in your projects. With the CLI, you can execute several context-oriented commands:
+
+- `create` - Create a new context
+- `delete` - Delete the named context
+- `list` - List all contexts
+- `remove-secret` - Remove an environment variable from the named context
+- `show` - Show a context
+- `store-secret` - Store a new environment variable in the named context
+
+The above list are "sub-commands" in the CLI, which are executed like so:
+
+[,shell]
+----
+circleci context create --org-id <org-id> <context-name> [flags]
+----
+
+Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
+
+include::ROOT:partial$notes/find-organization-id.adoc[]
+
+[#config-policy-management]
+== Config policy management
+
+You can use the CircleCI CLI to manage config policies for your projects.
+
+For more information on config policies, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage config policies] section.
+
+=== Make a decision on a config policy
+
+Use the `decide` sub-command to make a decision on a config policy.
+
+[,shell]
+----
+circleci policy decide <policy-file-or-dir-path> --input <path-to-input-file>[flags]
+----
+
+- `<policy-file-or-dir-path>` is the path to either the policy file or the directory containing the policy file.
+- `<path-to-input-file>` is the path to the input file.
+
+For full details on the `decide` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_decide.html[CLI docs].
+
+=== Compare local and remote policy bundles
+
+Use the `diff` sub-command to get a diff between local and remote policy bundles.
+
+[,shell]
+----
+circleci policy diff <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `diff` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_diff.html[CLI docs].
+
+=== Evaluate locally
+
+Use the `eval` sub-command to perform a raw link:https://www.openpolicyagent.org/[OPA (Open Policy Agent)] evaluation locally.
+
+[,shell]
+----
+circleci policy eval <policy-dir-path> --input <path-to-input-file>[flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+- `<path-to-input-file>` is the path to the input file.
+
+For full details on the `eval` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_eval.html[CLI docs].
+
+=== Fetch policies
+
+Use the `fetch` sub-command to fetch a policy bundle or a single policy.
+
+[,shell]
+----
+circleci policy fetch <policy-name> --owner-id <org-id> [flags]
+----
+
+- `<policy-name>` is the name of the policy to fetch. It is not required. If you do not provide a policy name, the CLI will fetch all policies for the organization.
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Org[Overview].
+
+For full details on the `fetch` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_fetch.html[CLI docs].
+
+
+===  Get policy decision logs
+
+Use the `logs` sub-command to get decision logs for a policy bundle or single policy.
+
+[,shell]
+----
+circleci policy logs <policy-name> --owner-id <org-id> [flags]
+----
+
+- `<policy-name>` is the name of the policy to get decision logs for. It is not required. If you do not provide a policy name, the CLI will get decision logs for all policies in the organization.
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Org[Overview].
+
+Note that you can filter results using any combination of the following flags:
+
+[.table-scroll]
+--
+[cols="1,3,2", options="header"]
+|===
+| Flag | Description | Example
+
+| `--after`
+| Only include logs after a specific date and time.
+| `--after 2025/03/14`
+
+| `--before`
+| Only include logs before a specific date and time.
+| `--before 2025/05/22`
+
+| `--branch`
+| Only include logs for a specific branch.
+| `--branch feature/fixes`
+|===
+--
+
+For full details on the `logs` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_logs.html[CLI docs].
+
+=== Push a policy bundle
+
+Use the `push` sub-command to push a policy bundle.
+
+[,shell]
+----
+circleci policy push <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `push` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_push.html[CLI docs].
+
+=== Manage policy decision settings
+
+Use the `settings` sub-command to get or set policy decision settings.
+
+To read policy decision settings, run the command without any settings flags:
+
+[,shell]
+----
+circleci policy settings --owner-id <org-id>
+----
+
+To set policy decision settings, run the command with the appropriate settings flags:
+
+[,shell]
+----
+circleci policy settings --owner-id <org-id> --enable <true|false>
+----
+
+- `<org-id>` is the ID of your organization that owns the policy. You can find it from the CircleCI web app under menu:Org[Overview].
+
+- `--enable` is the flag to either enable or disable a policy evaluation. Set to `true` to enable, `false` to disable.
+
+The `settings` sub-command can only be used to read the settings and to xref:config-policies:create-and-manage-config-policies.adoc#config-policy-management-enablement[enable/disable policy evaluation for the organization].
+
+For full details on the `settings` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_settings.html[CLI docs].
+
+=== Test policies
+
+Use the `test` sub-command to run policy tests.
+
+[,shell]
+----
+circleci policy test <policy-dir-path> [flags]
+----
+
+- `<policy-dir-path>` is the path to the directory containing the policy files.
+
+For full details on the `test` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_test.html[CLI docs].
+
+
+[#next-steps]
+== Next steps
+- xref:execution-managed:executor-intro.adoc[Introduction to Execution Environments]

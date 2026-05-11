@@ -1,0 +1,24 @@
+= CircleCI Image Updater
+:page-platform: Cloud
+:page-description: The CircleCI tool to help customers update images in config.
+:experimental:
+
+[#notice]
+== Notice
+
+This is currently in ALPHA, and we are looking into improving experience for customers.
+
+[#overview]
+== Overview
+
+A link:https://github.com/CircleCI-Public/image-updater[script] to determine which deprecated machine images need to be changed within repositories across an entire organization.
+
+Limitations:
+
+* Only supports GitHub lookups
+* Will not find orb specific changes without being pointed at that specific orb config
+
+[#contribute]
+== Contribute
+
+The CircleCI Image Updater is open source, and contributions are welcome.

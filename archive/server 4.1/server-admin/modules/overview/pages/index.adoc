@@ -1,0 +1,6 @@
+= CircleCI server 4.1 overview
+:page-noindex: true
+:page-description: Overview of CircleCI server 4.1.
+:page-layout: subsection
+
+This section contains overview information and release notes for CircleCI server 4.1.

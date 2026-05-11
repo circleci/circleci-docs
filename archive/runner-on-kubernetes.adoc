@@ -1,0 +1,14 @@
+= CircleCI's self-hosted runner installation on Kubernetes
+:page-platform: Cloud, Server v4+
+:page-description: Use this installation guide to set up CircleCI's self-hosted runners on your Kubernetes cluster.
+:experimental:
+
+[#strongly-recommended-method]
+== Strongly recommended method
+
+The <<container-runner#,container runner>> is the recommended approach for using self-hosted runners with Kubernetes.
+
+[#deprecated-method]
+== Deprecated method
+
+If you are not using a <<container-runner#,container runner>>, see this link:https://github.com/CircleCI-Public/circleci-runner-k8s[README] for documentation on the old method for using self-hosted runners with Kubernetes.

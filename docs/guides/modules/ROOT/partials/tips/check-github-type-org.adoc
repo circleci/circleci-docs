@@ -1,0 +1,10 @@
+****
+To find out which GitHub integration type you have, check your Organization slug at menu:Organization settings[Overview]. OAuth authenticated orgs are structured as follows:
+
+* `github/<your-org-name>` or `gh/<your-org-name>`
+* `bitbucket/<your-org-name>` or `bb/<your-org-name>`
+
+An organization slug for a GitHub App integration is in the following format:
+
+* `circleci/<UID>`
+****

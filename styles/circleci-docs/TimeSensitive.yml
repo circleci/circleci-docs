@@ -1,0 +1,10 @@
+extends: existence
+message: "Try to avoid using '%s' in main prose. Use admonitions (NOTE, TIP etc) instead."
+ignorecase: true
+level: warning
+tokens:
+  - soon
+  - new
+  - future
+  - upcoming
+  - preview

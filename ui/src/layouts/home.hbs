@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+{{> head defaultPageTitle='CircleCI Docs'}}
+  </head>
+  <body class="article landing-page{{#with (or page.attributes.role page.role)}} {{{this}}}{{/with}} tracking-normal leading-[1.6] text-[16px]">
+{{> header}}
+{{> navigation class="w-full lg:hidden flex-initial"}}
+{{> mobile-component-dropdown}}
+{{> landing}}
+  </body>
+</html>

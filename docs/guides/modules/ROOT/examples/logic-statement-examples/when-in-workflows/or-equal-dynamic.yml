@@ -1,0 +1,9 @@
+workflows:
+  nightly-run-workflow:
+# The "nightly-run-workflow" workflow only runs if the branch name is "main" OR "staging".
+    when: pipeline.git.branch == "main" or pipeline.git.branch == "staging"
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build

@@ -1,0 +1,57 @@
+= GitLab trigger options
+:page-platform: Cloud
+:page-description: A guide to the options available for triggering GitLab pipelines
+:experimental:
+
+GitLab **Trigger filters** allow you to determine when a trigger should start a build based on the parameters provided by GitLab's webhook.
+
+== Introduction
+
+CircleCI projects have pipelines and triggers.
+
+* Pipelines define the various CI/CD 'units' of work that make up your project.
+* Triggers define when and how to start a pipeline.
+
+
+For GitLab triggers, CircleCI provides some common options, for example, "only build on merge requests". You can also build your own rules using the custom filter option. For example, a custom filter could allow you to only build for a specific branch or user.
+
+== Trigger options
+
+Configure triggers under menu:Project settings[Triggers]. You can select one of the following filters:
+
+.Trigger options under Project settings
+image::guides:ROOT:triggers/gitlab-cloud-trigger-filter-only-mr.png[Trigger details]
+
+* **Build Push and Merge Requests**: Pipelines start when a commit is pushed to the repository, regardless of whether the branch you push to has an open merge request.
+* **Only Merge Requests**: Pipelines start **only** if you push commits to a branch that has an open merge request.
+* **Customize Trigger Filters**: Pipelines start when the event matches the custom filters.
+
+== Custom trigger filters
+
+.Custom Trigger Filters
+image::guides:ROOT:triggers/gitlab-trigger-customize-edit.png[Custom trigger filters]
+
+Each filter follows a specific format:
+
+* Parameter name.
+* Logical operator.
+* Parameter value.
+
+****
+Use the btn:[Add Filter] button to configure multiple filters. +
+Then specify the `and` or `or` relationship between all configured filters.
+****
+
+=== Available parameters
+
+* **EventType**: The type of event that occurred in GitLab. This can either be `Push`, `Merge Request`, or `Tag Push`.
+* **Branch**: The name of the branch or a regular expression to match against the branch name.
+* **Tag**: The name of the tag or a regular expression to match against the tag name.
+* **Is Fork Merge Request**: Whether the merge request is a fork merge request. The value can either be `true` or `false`.
+
+=== Available logical operators
+
+* `=` (equals)
+* `!=` (not equals)
+* `matches` (regex)
+* `not matches` (regex)

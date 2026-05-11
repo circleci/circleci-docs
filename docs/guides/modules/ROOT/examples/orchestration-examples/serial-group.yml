@@ -1,0 +1,13 @@
+# Creating multiple pipelines at the same time with the below config will results in
+# all pipelines running test and build but only a single pipeline will run deploy at a time.
+
+workflows:
+  main-workflow:
+    jobs:
+      - test
+      - build
+      - deploy:
+          serial-group: << pipeline.project.slug >>/deploy-group
+          requires:
+            - test
+            - build

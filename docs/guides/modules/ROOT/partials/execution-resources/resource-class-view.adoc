@@ -1,0 +1,9 @@
+To view the compute resource usage for the duration of a job in the CircleCI web app:
+
+include::guides:ROOT:partial$app-navigation/steps-to-job.adoc[]
+. Select the btn:[Resources] tab to view CPU and RAM usage for the duration of the job.
+
+You can use these insights to decide whether to make changes to the job's configured resource class.
+
+.Resources tab in web app for a job
+image::guides:ROOT:view-resource-usage.png[Resources tab]

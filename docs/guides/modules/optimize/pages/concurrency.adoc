@@ -1,0 +1,96 @@
+= Concurrency
+:page-platform: Cloud, Server v4+
+:page-description: This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
+:experimental:
+
+This page summarizes concurrency, and suggests ways to use concurrency to your advantage.
+
+In CircleCI, **concurrency** refers to utilizing multiple containers to run multiple jobs at the same time. This is different from CircleCI **parallelism**, which is test-splitting across multiple containers. If you would like information on parallelism, visit the xref:parallelism-faster-jobs.adoc[Running Tests in Parallel] page.
+
+Every plan with CircleCI includes the ability to run jobs concurrently. However, the number of jobs you can run concurrently differs between plans. Refer to the link:https://circleci.com/pricing/[pricing page] for up-to-date information on the number of concurrent job runs included in your plan.
+
+[#concurrency]
+== Concurrency
+Within CircleCI, concurrent jobs can be classified as one of two situations:
+
+* Multiple running jobs configured in a single workflow
+* Multiple workflows running by multiple members within the organization
+
+This page discusses the first point, and will provide examples of how to configure concurrent jobs in a single workflow. Configuring concurrency in a workflow allows multiple jobs to be run at the same time, in a single workflow, through the use of multiple containers.
+
+To keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the xref:reference:ROOT:configuration-reference.adoc#resourceclass[resource classes] for different executors.
+
+If jobs are queued, it is possible you are hitting these limits. Hitting your limit may depend on a few factors, such as how many people in your organization are running jobs at once, or if you have overlapping workflows.
+
+Customers on annual plans can request an increase to those limits at no extra charge by contacting link:https://support.circleci.com/hc/en-us/requests/new[CircleCI support].
+
+[#concurrency-in-workflows]
+=== Concurrency in workflows
+To run a set of concurrent jobs, you will need to add a `workflows` section to your existing `.circleci/config.yml` file.
+
+The simple example below shows the default workflow orchestration with two concurrent jobs. The `workflows` key needs to have a unique name. In this example, the unique name is `build_and_test`. The `jobs` key is nested under the uniquely named workflow, and contains the list of job names. Since the jobs have no dependencies, they will run concurrently.
+
+include::ROOT:partial$notes/docker-auth.adoc[]
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2024.02
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: cimg/base:2024.02
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+
+[#fan-out-fan-in-workflow-example]
+=== Fan-out/fan-in workflow example
+A more complex example of using concurrent workflows is running a common build job, fanning-out to run a set of acceptance test jobs concurrently, and then fanning-in to run a common deploy job. This flow is illustrated below.
+
+image::guides:ROOT:fan-out-in.png[Fan-out and Fan-in Workflow]
+
+The `.circleci/config.yml` snippet below is an example of a `workflows` section configured for fan-out/fan-in job execution. In this example, as soon as the `build` job finishes successfully, all four acceptance test `jobs` start. The `deploy` job must wait for all four acceptance test jobs to complete successfully before it starts.
+
+```yaml
+...
+workflows:
+  build_accept_deploy:
+    jobs:
+      - build
+      - acceptance_test_1:
+          requires:
+            - build
+      - acceptance_test_2:
+          requires:
+            - build
+      - acceptance_test_3:
+          requires:
+            - build
+      - acceptance_test_4:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - acceptance_test_1
+            - acceptance_test_2
+            - acceptance_test_3
+            - acceptance_test_4
+...
+```
+
+[#see-also]
+== See also
+- xref:orchestrate:workflows.adoc[Workflows]
+- xref:toolkit:sample-config.adoc[Sample config.yml Files]

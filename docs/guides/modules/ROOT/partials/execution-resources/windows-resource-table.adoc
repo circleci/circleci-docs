@@ -1,0 +1,37 @@
+[.table-scroll]
+--
+[cols=6*, options="header"]
+|===
+| Class | vCPUs | RAM | Disk Size | Cloud | Server
+
+|`windows.medium` (default)
+| 4
+| 15GB
+| 200 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `windows.large`
+| 8
+| 30GB
+| 200 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `windows.xlarge`
+| 16
+| 60GB
+| 200 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `windows.2xlarge`
+| 32
+| 128GB
+| 200 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+|===
+--
+
+NOTE: **Using server?** Check with your systems administrator whether you have access to the Windows execution environment.

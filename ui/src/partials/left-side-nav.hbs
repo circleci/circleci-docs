@@ -1,0 +1,7 @@
+<div data-left-side-nav-container>
+  <nav data-left-side-nav>
+    {{> component-version-switcher}}
+    {{!-- TODO: Refactor to prevent width class inheritance --}}
+    {{> navigation-tree class="" navigation=page.navigation}}
+  </nav>
+</div>

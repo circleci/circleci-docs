@@ -1,0 +1,297 @@
+= Hello world
+:page-platform: Cloud, Server v4+
+:page-description: Get started with CircleCI by printing Hello World in any execution environment.
+:experimental:
+
+This page provides configuration examples to get started with a basic pipeline using any execution environment.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A code repository you want to build on CircleCI.
+* Follow the xref:create-project.adoc[Create a Project] guide to connect your repository to CircleCI. You can then use the examples below to configure a basic pipeline using any execution environment.
+
+include::ROOT:partial$notes/docker-auth.adoc[]
+
+[#echo-hello-world-cloud]
+== Echo hello world
+
+These examples add a job called `hello-job` that prints `hello world` to the console.
+
+[tabs]
+====
+Docker::
++
+--
+The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+Linux VM::
++
+--
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2204:2022.07.1
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+macOS::
++
+--
+The job `hello-job` spins up a macOS virtual machine running the specified Xcode version. Refer to xref:execution-managed:using-macos.adoc[Using the macOS Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    macos:
+      xcode: 26.4.0
+    resource_class: m4pro.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+Windows::
++
+--
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+orbs:
+  win: circleci/windows@5.0.0 # The Windows orb gives you everything you need to start using the Windows executor.
+
+jobs:
+  hello-job:
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+GPU::
++
+--
+NOTE: The GPU execution environment is available on the link:https://circleci.com/pricing/[Scale] Plan.
+
+The job `hello-job` spins up a GPU-enabled virtual machine using the machine executor. GPU images are available for xref:reference:ROOT:configuration-reference.adoc#available-windows-gpu-image[Windows] and xref:reference:ROOT:configuration-reference.adoc#available-linux-gpu-images[Linux]. Refer to xref:execution-managed:using-gpu.adoc[Using the GPU Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: linux-cuda-12:default
+      resource_class: gpu.nvidia.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+Arm VM::
++
+--
+The job `hello-job` spins up an [Arm (Linux) virtual machine] using the machine executor. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+====
+
+.Hello world job output
+image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
+
+TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+
+[#echo-hello-world-server]
+== Echo hello world on CircleCI Server
+
+NOTE: To build in a macOS execution environment on server use xref:execution-runner:runner-overview.adoc[Self-Hosted Runner].
+
+These examples add a job called `hello-job` that prints `hello world` to the console.
+
+[tabs]
+====
+Docker::
++
+--
+The job `hello-job` spins up a container running a pre-built CircleCI Docker image for Node. Refer to xref:execution-managed:using-docker.adoc[Using the Docker Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+Linux VM::
++
+--
+The job `hello-job` spins up a Linux vir†ual machine running a link:https://circleci.com/developer/images?imageType=machine[Ubuntu machine image]. Refer to xref:execution-managed:using-linuxvm.adoc[Using the Linux VM Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine: true
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+Windows::
++
+--
+The job `hello-job` spins up a Windows virtual machine using the default executor specified by the link:https://circleci.com/developer/orbs/orb/circleci/windows#usage-run_default[Windows orb]. Refer to xref:execution-managed:using-windows.adoc[Using the Windows Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: windows-default
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+Arm::
++
+--
+The job `hello-job` spins up an Arm (Ubuntu 22.04) virtual machine. Refer to xref:execution-managed:using-arm.adoc[Using the Arm VM Execution Environment] page for more information.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  hello-job:
+    machine:
+      image: arm-default
+    resource_class: arm.medium
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job
+----
+--
+====
+
+.Hello world job output
+image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
+
+TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+
+[#next-steps]
+## Next steps
+
+* See the xref:about-circleci:concepts.adoc[Concepts] page for a summary of CircleCI-specific concepts.
+
+* Refer to the xref:orchestrate:workflows.adoc[Workflows] page for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
+
+* Find complete reference information for all keys and execution environments in the xref:reference:ROOT:configuration-reference.adoc[CircleCI Configuration Reference].

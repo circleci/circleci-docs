@@ -1,0 +1,16 @@
+* Docs style guide
+** xref:docs-style:index.adoc[Overview]
+** xref:docs-style:formatting.adoc[Formatting]
+** xref:docs-style:style-and-voice.adoc[Style and voice]
+** xref:docs-style:headings.adoc[Headings]
+** xref:docs-style:using-lists.adoc[Using lists]
+** xref:docs-style:links.adoc[Cross references and links]
+** xref:docs-style:using-images.adoc[Using images]
+** xref:docs-style:using-tables.adoc[Using tables]
+** xref:docs-style:using-code-samples.adoc[Using code samples]
+** xref:docs-style:title-badges.adoc[Page title badges]
+* Content templates
+** xref:templates:template-conceptual.adoc[Template for a conceptual page]
+** xref:templates:template-how-to.adoc[Template for a how-to page]
+** xref:templates:template-tutorial.adoc[Template for a tutorial page]
+** xref:templates:test-page-one.adoc[A test page to show all assets and styles]

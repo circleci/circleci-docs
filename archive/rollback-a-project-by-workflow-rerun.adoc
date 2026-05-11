@@ -1,0 +1,36 @@
+= Rollback a project by workflow rerun
+:page-platform: Cloud
+:page-description:
+:experimental:
+
+This guides covers how to rollback a project by workflow rerun.
+
+== Prerequisites
+
+Before performing a rollback by workflow rerun, ensure you have configured deploy markers in your CircleCI workflows. Deploy markers track when deployments occur and are essential for rollback functionality. Follow the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide to set this up. Autodetected deploy markers are *not* supported for use with rollbacks.
+
+== Performing a rollback by workflow rerun
+
+Workflow rerun rollbacks do not need any additional configuration beyond setting up deploy markers. To perform a rollback using workflow rerun:
+
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the *Overview* link for your project.
+. Select btn:[Rollback].
+. Select btn:[Rollback by workflow re-run].
+
+.Rollback options on project overview page
+image::guides:ROOT:deploy/project-overview-rollback.png[Rollback button on project overview page]
+
+This will open the workflow re-run modal with the following options:
+
+* *Choose a version*. Select the version you want to roll back to from the list of available versions.
+* *Confirm rollback*. Select btn:[Next], confirm rollback to proceed.
+
+The workflow that originally deployed the selected version will be re-run, effectively performing a rollback to that version.
+
+=== Important considerations
+
+* *Advantage*: No setup required. This rollback method works immediately after configuring deploy markers.
+* *Disadvantage*: The entire workflow will be re-run, which may not always be desirable depending on your workflow complexity and duration
+* For complete control over the rollback process and to avoid re-running entire workflows, consider using the custom rollback pipeline approach described in the Setting Up Rollbacks in CircleCI section.

@@ -1,0 +1,18 @@
+---
+extends: script
+scope: raw
+level: warning
+message: "Avoid using inline code in headings."
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  heading_with_backticks := "^=+\\s+.*`"
+
+  for line in text.split(scope, "\n") {
+    if text.re_match(heading_with_backticks, line) {
+      start := text.index(scope, line)
+      matches = append(matches, {begin: start, end: start + len(line)})
+    }
+  }

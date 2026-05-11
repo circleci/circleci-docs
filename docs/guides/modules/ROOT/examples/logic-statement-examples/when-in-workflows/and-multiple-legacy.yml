@@ -1,0 +1,8 @@
+workflows:
+  conditional-workflow:
+# The "conditional-workflow" workflow only runs if the branch is "main" AND the pipeline parameter "param1" is false AND either the pipeline parameter "param1" is true OR the pipeline parameter "param2" is true.
+    when:
+      and:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - not: << pipeline.parameters.param1 >>
+        - or: [ << pipeline.parameters.param1 >>, << pipeline.parameters.param2 >> ]

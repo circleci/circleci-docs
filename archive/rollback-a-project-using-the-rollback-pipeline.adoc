@@ -1,0 +1,49 @@
+= Rollback a project using the rollback pipeline
+:page-platform: Cloud
+:page-description:
+:experimental:
+
+This guide covers how to rollback a project using the rollback pipeline.
+
+== Prerequisites
+
+Before performing a rollback, ensure you have completed the rollback setup process and merged the rollback configuration pull request.
+
+== Performing a Rollback
+
+To perform a rollback using the rollback pipeline follow these steps::
+
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the *Overview* link for your project.
+. Select btn:[Rollback].
+. Select btn:[Rollback by running rollback pipeline]. This opens the rollback execution modal.
++
+image::guides:ROOT:deploy/rollback-execution-modal.png[Rollback execution modal]
++
+The modal displays several configuration options with parameters auto-filled based on your rollback configuration. The following sections explain each required property:
++
+* *Component Name*. This is the name of the component you wish to rollback. If your project deploys multiple components, this helps you choose a specific component you want to rollback.
+* *Environment Name*. This is the environment in which you wish to perform the rollback.
+* *Current Version*. Once you choose the component name and environment name, this will display all possible current versions. More often than not there should be just one current version available. You could have two in case a new progressive release is ongoing. Choose the version you believe is the current version of your component. To help you out, the relevant commit information is also displayed alongside the version.
+* *Target Version*. Choose the version you wish to rollback to. To help you out, the relevant commit information is also displayed alongside the version.
+* *Namespace*. This is optional. In case you use Kubernetes and do your deployments to a specific namespace, mention your namespace here, otherwise leave it empty.
++
+The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific rollback operation.
+
+. *Execute*. Select btn:[Rollback] to trigger the rollback pipeline
+
+The rollback pipeline will now execute and perform the rollback operation according to your configuration.
+
+== Change Rollback Pipeline
+
+If you have configured a new pipeline and want to trigger this pipeline when performing rollbacks, you can change which pipeline is used for rollback operations.
+
+To select a different pipeline for rollbacks, follow these steps:
+
+. Navigate to your project's Overview page.
+. Go to Settings.
+. Select the Deploys tab.
+. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown.
+
+This process allows you to switch between different rollback pipeline configurations as needed for your project.

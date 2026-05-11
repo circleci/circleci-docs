@@ -1,0 +1,4 @@
+<svg role="img" focusable="false" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Toggle theme" width="20" height="20">
+  <circle cx="12" cy="12" r="9" transform="rotate(90 12 12)" stroke="currentColor" stroke-width="2"></circle>
+  <path d="M17 12C17 14.4183 15.282 16.4366 13 16.8994L13 7.10059C15.282 7.5634 17 9.58165 17 12Z" fill="currentColor" stroke="currentColor" stroke-width="2"></path>
+</svg>

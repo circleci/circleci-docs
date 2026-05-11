@@ -1,0 +1,58 @@
+= CircleCI server v4.6 release notes
+:page-noindex: true
+:page-platform: Server v4.6, Server Admin
+:page-description: Details of the new features included in each CircleCI server v4.6 release.
+:icons: font
+:toc: macro
+:toc-title:
+
+[#overview]
+== Overview
+
+The v4.6 release includes enhancements to the CircleCI web app, and improved pipeline labelling to show when pipelines are rerun from start, fail or with SSH.
+
+[#upgrade]
+== Upgrade
+For upgrade steps see the xref:installation:upgrade-server.adoc[Upgrade server v4.6 guide].
+
+== Release 4.6.6
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-6[changelog].
+
+== Release 4.6.5
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-5[changelog].
+
+== Release 4.6.4
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-4[changelog].
+
+== Release 4.6.3
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-3[changelog].
+
+== Release 4.6.2
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-2[changelog].
+
+== Release 4.6.1
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-1[changelog].
+
+== Release 4.6.0
+
+=== Changelog
+
+For full details of this release see the link:https://circleci.com/changelog/#server-release-4-6-0[changelog].

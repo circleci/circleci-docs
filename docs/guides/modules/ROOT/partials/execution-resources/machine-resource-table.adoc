@@ -1,0 +1,42 @@
+[.table-scroll]
+--
+[cols=6*, options="header"]
+|===
+|Class | vCPUs | RAM | Disk Size | Cloud | Server
+
+| `medium`
+| 2
+| 7.5 GB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `large`
+| 4
+| 15 GB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `xlarge`
+| 8
+| 32 GB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `2xlarge`
+| 16
+| 64 GB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `2xlarge+`
+| 32
+| 64 GB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+|===
+--

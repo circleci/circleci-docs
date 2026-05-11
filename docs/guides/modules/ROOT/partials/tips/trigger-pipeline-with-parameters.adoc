@@ -1,0 +1,5 @@
+* To trigger a pipeline and pass custom values for your pipeline parameters, you can either:
+
+** xref:guides:orchestrate:triggers-overview.adoc#run-a-pipeline-using-the-api[Trigger a pipeline using the API]
+** xref:guides:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[Trigger a pipeline from the CircleCI web app]
+** xref:guides:orchestrate:triggers-overview.adoc#schedule-a-pipeline[Schedule a pipeline]

@@ -1,0 +1,21 @@
+= Server migration service
+:page-description: Server migration service
+
+The server migration service is an engagement where your field engineer guides CircleCI Server migrations. It covers major or minor version upgrades, cloud provider migrations, and new installations.
+
+== Benefits
+
+Teams that engage in a server migration service receive:
+
+* A thorough analysis of the current setup and requirements.
+* A customized migration plan to minimize downtime and potential disruptions.
+* Data backup and transfer to ensure data integrity and continuity.
+* Configuration of the new Server environment to match unique specifications.
+* Rigorous testing to validate the migration and identify any issues before launch.
+* Post-migration support and assistance to address any unforeseen challenges.
+
+== Intended audience
+
+This training is for server administrators setting up a migrating instance of CircleCI Server.
+
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

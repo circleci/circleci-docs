@@ -1,0 +1,68 @@
+= Single sign-on (SSO) overview
+:page-platform: Cloud
+:page-description: Introduction to CircleCI SAML SSO
+:experimental:
+
+NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
+for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
+
+Single sign-on (SSO) for CircleCI allows organization administrators to control access for their CircleCI organization using an Identity Provider (IdP).
+
+[#introduction]
+== Introduction
+
+Single sign-on (SSO) is a form of authentication, which enables users of an application to authenticate once using an Identity Provider (IdP). The IdP authenticates the user and, based on their permissions, allows them to access applications managed by the organization using a single session.
+
+SSO for CircleCI allows organization administrators to control access for their CircleCI organization using an IdP. CircleCI SSO makes use of the Security Assertion Markup Language (SAML) 2.0 protocol to perform authentication.
+
+== How SSO works at CircleCI
+
+When a CircleCI organization has SSO enabled, note the following:
+
+* Users need to authenticate using the IdP in order to access the organization's resources in CircleCI.
+* If a user tries to access the CircleCI org's resources _without_ authenticating using the IdP, they will be redirected to the IdP to authenticate.
+* When a user's session expires, they will no longer be able to access the organization's resources in CircleCI and will be prompted to re-authenticate.
+
+== Benefits of using SSO
+
+Using SSO for authentication can result in improved security and user experience.
+
+**For organization administrators and owners:** SSO with an IdP allows the standardization of user management for an organization, across controlled applications (such as CircleCI). Standardizing user management can simplify the process of managing users by centralising common tasks, for example:
+
+* Adding and deleting users.
+* Managing user permissions.
+
+**For a member of an organization using SSO for authentication:** The process of authentication to access applications is simplified. Rather than authenticating separately for each application, SAML SSO enables the user to confirm their identity _once_ with an IdP. This authentication is then communicated to all applications (such as CircleCI) that the user has access to. The user may then access these applications for the duration of their session.
+
+== Personal API tokens with SSO
+
+When your organization uses SSO, Personal API tokens require SSO authentication to access your organization's resources.
+
+To use Personal API tokens with SSO-protected resources:
+
+. Go to the link:https://app.circleci.com/home/[CircleCI web app].
+. Select your profile from the upper right corner, then select menu:User Settings[].
+. Select menu:Personal API Tokens[] from the sidebar.
+. For each token you want to use with your SSO-enabled organization, select the organization from the dropdown in the SSO column.
+. Once you select an organization, the token becomes SSO-authenticated and can access your organization's resources.
+
+**Important notes:**
+
+* The SSO authentication option for tokens is only available when you are actively signed in via SSO.
+* SSO authentication is only required for tokens you intend to use with SSO-enabled organization resources.
+* Tokens without SSO authentication still work with non-SSO protected resources.
+
+[#prerequisites-and-limitations]
+== Limitations
+
+SSO for CircleCI currently has the following limitations:
+
+* SSO requires all users to log into CircleCI either with an email and password or using social logins like GitHub, Bitbucket prior to the SSO login. The email used to log in to CircleCI does *not* need to match the email used to authenticate with the IdP.
+* CircleCI supports SSO using one domain per organization.
+* When the user logs in using social logins like GitHub or Bitbucket, then they need to authorize SSO in the VCS org along with SSO setup in CircleCI.
+
+
+[#next-steps]
+== Next steps
+* xref:set-up-sso.adoc[Setup SAML SSO]
+* xref:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-enabled organization]

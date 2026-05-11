@@ -1,0 +1,107 @@
+= Sumo Logic integration
+:page-platform: Cloud, Server v4+
+:page-description: This document describes how to track and visualize analytical data across all of your jobs on CircleCI with Sumo Logic.
+:experimental:
+
+This page describes how to connect Insights data with link:https://www.sumologic.com/[Sumo Logic].
+
+[#overview]
+== Overview
+
+The link:https://www.sumologic.com/application/circleci/[Sumo Logic CircleCI integration] allows you to visualize and analyze data about your CircleCI jobs within Sumo Logic.
+
+[#integration]
+== Integration
+
+The CircleCI app for Sumo Logic provides advanced views to track the performance and health of your continuous integration and deployment pipelines.
+
+[#the-circleci-dashboard-for-sumo-logic]
+== The CircleCI dashboard for Sumo Logic
+
+Use this dashboard to:
+
+* Monitor real-time CI performance, activity, and health, or track over time.
+* Identify opportunities for optimization.
+
+image::guides:ROOT:Sumologic_Demo.png[Sumo Logic CircleCI dashboard]
+
+Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
+
+- Total Jobs Ran
+- Job Health (% success)
+- Summary
+- Jobs Ran Per Project
+- Daily Performance
+- Jobs Per Day
+- 5 Most Recent Failed Jobs
+- 5 Most Recent Failed Workflows
+- Top 10 Longest Workflows (Averaged)
+- Top 10 Longest Running Jobs
+- Average Job Runtime Per Day
+
+Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
+
+image::guides:ROOT:sumologic_app_catalog.png[Sumo Logic App catalogue]
+
+NOTE: This dashboard receives data through the link:https://circleci.com/developer/orbs/orb/sumologic/sumologic[Sumo Logic orb] which must be included in your projects to be tracked.
+
+[#set-up-sumo-logic-metrics-using-circleci-webhooks]
+== Set up Sumo Logic metrics using CircleCI webhooks
+
+To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
+
+[#configure-webhooks]
+=== Configure webhooks
+
+[#step-1-configure-hosted-collector]
+==== 1. Configure hosted collector
+
+Follow the Sumo Logic documentation for link:https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector[Configuring a Hosted Collector].
+
+[#step-2-add-an-http-source]
+==== 2. Add an HTTP source
+
+To get the URL where the CircleCI webhooks will be sent and recorded to the collector, link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[add an HTTP Source].
+
+When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This URL will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
+
+[#step-3-configure-project-webhooks]
+==== 3. Configure project webhooks
+
+Complete the following steps to set up a CircleCI webhook to forward your logs to Sumo Logic.
+
+. Log in to the link:https://app.circleci.com/projects[CircleCI web app].
+
+. Access one of your CircleCI projects.
+
+. Open **Project settings**.
+
+. In the project settings sidebar, click **Webhooks**.
+
+. Select **Add webhook**.
+
+. Complete the following fields:
+** **Webhook name**: `Sumo Logic CI Visibility` or any other identifier name that you want to provide.
+** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section.
+** **Events**: Select **Workflow Completed** and **Job Completed**.
+** Enable the check: **Certificate verifications**.
+
+. Select **Add Webhook** to save the new webhook.
+
+[#install-the-circleci-app-for-sumo-logic]
+=== Install the CircleCI App for Sumo Logic
+
+Now that you have set up collection, install the Sumo Logic App for CircleCI to use pre-configured searches and dashboards that provide insight into your CI/CD pipeline.
+
+. Select *App Catalog*.
+. In the *Search Apps* field, run a search for your desired app, then select it.
+. Select *Install App*.
+. Select *Next* in the *Setup Data* section.
+. In the *Configure* section of your respective app, complete the following fields.
+.. *Field Name*. If you already have collectors and sources set up, select the configured metadata field name (for example, `_sourceCategory`) or specify other custom metadata (for example, `_collector`) along with its metadata *Field Value*.
+. Select *Next*. You will be redirected to the *Preview & Done* section.
+
+
+Once the app is installed, it will appear in your Installed Apps folder. Panels will start to fill automatically.
+
+NOTE: Each panel slowly fills with data matching the time range query and received since the panel was created. Results will not be available, but will update with full graphs and charts over time.

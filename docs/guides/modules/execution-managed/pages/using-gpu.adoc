@@ -1,0 +1,95 @@
+= Using the GPU execution environment
+:page-platform: Cloud
+:page-description: Learn how to configure a your jobs to run in the GPU execution environment.
+:experimental:
+
+include::ROOT:partial$execution-resources/linux-cuda-deprecation-notice.adoc[]
+
+You can run your jobs in the GPU execution environment, using either Windows or Linux virtual machines, for access to NVIDIA GPUs for specialized workloads.
+
+To use the Linux GPU execution environment, use the machine executor and specify a GPU-enabled image. For a full list of machine executor images see the link:https://circleci.com/developer/images?imageType=machine[CircleCI Developer Hub] or the xref:reference:ROOT:configuration-reference.adoc#available-linux-gpu-images[Configuration Reference].
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: linux-cuda-12:default
+      resource_class: gpu.nvidia.medium
+    steps:
+      - run: nvidia-smi
+----
+
+To use the Windows GPU execution environment, you can either choose to use the Windows orb and specify the built-in GPU executor, or use the machine executor and specify a Windows GPU-enabled image. Refer to the link:https://circleci.com/developer/orbs/orb/circleci/windows[Orb Registry page] for full details, and the link:https://circleci.com/developer/images?imageType=machine[Developer Hub] for full details of available machine executor images.
+
+[tabs]
+====
+Windows GPU with orb::
++
+--
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  win: circleci/windows@4.1.1
+
+jobs:
+  build:
+    executor: win/server-2019-cuda
+    steps:
+      - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
+----
+--
+Windows GPU with machine::
++
+--
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: windows-server-2019-nvidia:stable
+    steps:
+      - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
+----
+--
+====
+
+[#available-resource-classes]
+== Available resource classes
+
+Specify a resource class to fit your project and requirements. For further details on credit usage for these options, see the link:https://circleci.com/product/features/resource-classes/[Resource Class pricing and plans page].
+
+[#linux-gpu]
+=== Linux GPU
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      image: linux-cuda-12:default
+    resource_class: gpu.nvidia.medium
+    steps:
+      - run: nvidia-smi
+----
+
+include::ROOT:partial$execution-resources/gpu-linux-resource-table.adoc[]
+
+=== Windows GPU
+
+For Windows there is currently one resource class option. This will be used by default so you are not required to specify it in your configuration.
+
+include::ROOT:partial$execution-resources/gpu-windows-resource-table.adoc[]
+
+[#view-resource-usage]
+=== View resource usage
+
+include::ROOT:partial$execution-resources/resource-class-view.adoc[]

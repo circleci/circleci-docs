@@ -1,0 +1,67 @@
+/* Theme Toggle Dropdown Styles */
+
+.theme-toggle-container {
+  position: relative;
+}
+
+/* Button icon styling */
+#theme-toggle-button {
+  color: var(--color-terminal-black); /* #161616 in light mode */
+}
+
+#theme-toggle-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.theme-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 0.5rem;
+  width: 12rem;
+  background-color: var(--panel-background);
+  border: 1px solid var(--panel-border-color);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+  z-index: 1000;
+  display: none;
+}
+
+.theme-menu.show {
+  display: block;
+}
+
+.theme-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.theme-menu-item:hover,
+.theme-menu-item:focus {
+  background-color: var(--body-background);
+  outline: none;
+}
+
+.theme-menu-item:first-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.theme-menu-item:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.theme-menu-item .theme-checkmark {
+  display: none;
+}
+
+.theme-menu-item[aria-checked="true"] .theme-checkmark {
+  display: block;
+}
+
+/* Icon color is controlled by --color-terminal-black variable which changes in dark mode */

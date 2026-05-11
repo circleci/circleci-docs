@@ -1,0 +1,11 @@
+= CircleCI's self-hosted runner FAQs
+:page-platform: Cloud, Server v4+
+:page-description: This page answers the most frequently asked questions for the CircleCI's self-hosted runner product.
+:experimental:
+
+This page answers frequently asked questions for CircleCI's self-hosted container and machine runners.
+
+[#self-hosted-runner-faqs]
+== FAQs
+
+include::ROOT:partial$faq/self-hosted-runner-faq-snip.adoc[]

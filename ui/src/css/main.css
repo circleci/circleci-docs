@@ -1,0 +1,72 @@
+body.-toc aside.toc.sidebar {
+  display: none;
+}
+
+@media screen and (max-width: 1023.5px) {
+  aside.toc.sidebar {
+    display: none;
+  }
+
+  aside.toc.embedded {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  main > div {
+    overflow-x: auto;
+    max-width: 100vw;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  main {
+    flex: auto;
+    min-width: 0; /* min-width: 0 required for flexbox to constrain overflowing elements */
+  }
+
+  main > div {
+    display: flex;
+  }
+}
+
+/* Tablet view (1024px - 1199px): Show embedded TOC, hide sidebar TOC */
+@media screen and (min-width: 1024px) and (max-width: 1199.5px) {
+  aside.toc.sidebar {
+    display: none;
+  }
+
+  aside.toc.embedded {
+    display: block;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Desktop view (1200px+): Show sidebar TOC, hide embedded TOC */
+@media screen and (min-width: 1200px) {
+  aside.toc.embedded {
+    display: none;
+  }
+
+  aside.toc.sidebar {
+    flex: 0 0 var(--toc-width);
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 1280px) { /* Use xl breakpoint to match existing xl:items-center */
+  main {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width)); /* Article + TOC */
+    /* Let parent xl:items-center handle the centering */
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  aside.toc.sidebar {
+    flex-basis: var(--toc-width--widescreen);
+  }
+
+  main {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen)); /* Article + wider TOC */
+  }
+}

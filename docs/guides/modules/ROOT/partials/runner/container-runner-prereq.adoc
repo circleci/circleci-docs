@@ -1,0 +1,10 @@
+//[#container-runner-prerequisites]
+//== Container runner prerequisites
+
+To install container runners and run jobs, you will need to have root access, and have the following set up and installed:
+
+* link:https://kubernetes.io/[Kubernetes] 1.25+
+* link:https://helm.sh/[Helm] 3.x
+* A Kubernetes namespace without any other workloads
+* The checkout step configures Git to checkout over SSH - ensure that your cluster is configured to allow outbound connections over `port 22` if you wish to use it
+* The xref:guides:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line

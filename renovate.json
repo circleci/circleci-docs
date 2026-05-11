@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "timezone": "Europe/London",
+  "postUpdateOptions": [
+    "gomodTidy",
+    "gomodUpdateImportPaths"
+  ],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true,
+      "automergeStrategy": "squash",
+      "automergeSchedule": [
+        "after 9am and before 12pm on monday",
+        "after 9am and before 12pm on tuesday",
+        "after 9am and before 12pm on wednesday",
+        "after 9am and before 12pm on thursday"
+      ]
+    }
+  ]
+}

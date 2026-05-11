@@ -1,0 +1,51 @@
+= Upgrade server
+:page-noindex: true
+:page-platform: Server v4.6, Server Admin
+:page-description: "This document lists the steps required to upgrade a CircleCI server v4.6 installation."
+:icons: font
+:toc: macro
+:toc-title:
+
+This page describes the steps needed to upgrade your CircleCI server installation to v4.6.
+
+[#path]
+== Upgrade paths
+
+TIP: Our general recommendation is not to skip releases when upgrading. However, we validated that **you can seamlessly upgrade directly from server 4.6 to server 4.7**. While future version skips may not be tested by CircleCI, this ensures a clear path to adopt server 4.7 and stay on a newly supported version.
+
+We recommend that you **do not** skip releases when upgrading, however some patch releases can be skipped. Your upgrade path will depend on your current version, and the currently available version releases.
+
+When upgrading from one minor version to the next, ensure your upgrade path includes the last patch release for your current minor version.
+
+To see some common upgrade path options, see link:https://support.circleci.com/hc/en-us/articles/15819961443483-Server-4-x-Upgrade-Path[this support article].
+
+[#recommendations]
+== Recommendations
+
+We have moved away from Vault to Tink for encryption. The process for migration is link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[documented here]. The migration includes a convenience script to move existing secrets. If you are using Vault, you should complete the migration to Tink on your v4.3.x installation before backing up your server installation in preparation for upgrading to v4.6. Customers that do not perform this step may have issues restoring Vault from backup in v4.6.
+
+[#prerequisites]
+== Prerequisites
+
+* Ensure you have access to the Kubernetes cluster in which server is installed.
+* Ensure you have set up xref:operator:backup-and-restore.adoc[Backup and Restore].
+* Ensure there is a recent backup. For more information, see the xref:operator:backup-and-restore.adoc#creating-backups[Backup and Restore] guide.
+
+[#upgrade-steps]
+== Upgrade steps
+
+. Ensure your cluster is running a compatible Kubernetes version for this release ({kubernetesversions}).
+
+. Check the link:https://circleci.com/server/changelog/[changelog] and make sure there are no actions you need to take before deploying a new version.
+
+. Optionally, confirm what the update is going to do using link:https://github.com/databus23/helm-diff[Helm Diff]:
++
+[source,shell,subs=attributes+]
+helm diff upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion46} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+. Perform the upgrade:
++
+[source,shell,subs=attributes+]
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion46} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+
+. Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
