@@ -1,0 +1,179 @@
+= Upgrading the CircleCI's self-hosted runner on server
+:page-platform: Server v4.0 - v4.6
+:page-description: Learn how to upgrade CircleCI's self-hosted runner on server.
+:experimental:
+
+
+This page describes how to update the CircleCI's **machine runner** on CircleCI server installations.
+
+
+
+[#self-hosted-runner-for-server-compatibility]
+== Machine runner on server compatibility
+
+Refer to the individual installation pages for machine runner to find the runner version you need for your platform:
+
+- xref:runner-installation-linux.adoc#download-the-launch-agent-script[Linux]
+- xref:runner-installation-mac.adoc#download-the-launch-agent-script[macOS]
+- xref:runner-installation-windows.adoc#set-launch-agent-version[Windows]
+
+[#upgrading-self-hosted-runner-on-server]
+== Upgrading machine runner on server
+
+Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent`, and requires manual intervention. The following sections detail how to upgrade machine runners in your server installation across all environments.
+
+[#upgrading-self-hosted-runner-in-a-containerized-environment]
+=== Upgrading machine runner in a containerized environment
+
+This section details how to upgrade self-hosted runner in containerized environments: Kubernetes and Docker.
+
+[#upgrading-self-hosted-runner-for-kubernetes]
+==== Upgrading machine runner for Kubernetes
+
+Refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions].
+
+[#upgrading-self-hosted-runner-for-docker]
+==== Upgrading machine runner in Docker
+
+. Stop any currently running self-hosted runner containers:
++
+```shell
+docker stop <container-name>
+```
+. Remove the self-hosted runner containers:
++
+```shell
+docker stop <container-name>; docker rm <container-name>;
+```
+. Start a new machine runner Docker container:
++
+```shell
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
++
+NOTE: When starting the Docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+
+[#upgrading-self-hosted-runner-in-a-non-containerized-environment]
+=== Upgrading machine runner in a non-containerized environment
+
+The process for manually updating the `circleci-launch-agent` binary can be broken down into three steps for non containerized environments. These steps are expanded upon in the sections below.
+
+. Replace existing `circleci-launch-agent` binary with the new version.
+. Stop currently running `circleci-launch-agent` processes.
+. Start the new version of the `circleci-launch-agent` binary.
+
+[#replace-the-circleci-launch-agent-binary-with-the-new-version]
+==== 1. Replace the `circleci-launch-agent-binary` with the new version
+
+Following the same step as in the individual platform installations, update the launch agent version environment variable to the correct version, then save and run the script to download and replace the old binary with the newly updated version.
+
+- xref:runner-installation-linux.adoc#download-the-launch-agent-script[Linux]
+- xref:runner-installation-mac.adoc#download-the-launch-agent-script[macOS]
+
+```shell
+export agent_version="<launch-agent-version>" && sh ./download-launch-agent.sh
+```
+
+- xref:runner-installation-windows.adoc#installation-steps[Windows]
+```powershell
+$Env:agentVer = "<launch-agent-version>"
+```
+```powershell
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+./Install-CircleCIRunner.ps1
+```
+
+[#stop-the-currently-running-machine-runner]
+==== 2. Stop the currently running machine runner
+
+The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary. Platform-specific instructions for this are given below.
+
+[tabs]
+====
+Linux::
++
+--
+Run the following commands:
+
+```shell
+sudo systemctl stop circleci.service
+sudo systemctl disable circleci.service
+```
+--
+Mac::
++
+--
+Run the following command:
+
+
+```shell
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+--
+Windows::
++
+--
+Run the following command:
+
+
+``` powershell
+Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
+--
+====
+
+[#stopping-the-machine-runner-on-windows]
+==== Stopping the machine runner on Windows
+
+Run the following command:
+
+``` powershell
+Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
+
+[#start-the-new-machine-runner]
+==== 3. Start the new machine runner
+
+Platform-specific instructions are given below.
+
+[tabs]
+====
+Linux::
++
+--
+Run the following commands:
+
+```shell
+sudo systemctl reload circleci.service
+sudo systemctl enable circleci.service
+sudo systemctl start circleci.service
+```
+--
+Mac::
++
+--
+Run the following command:
+
+```shell
+sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+--
+Windows::
++
+--
+Run the following command:
+
+``` powershell
+Start-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
+--
+====
+
+[#additional-resources]
+=== Additional resources
+
+- xref:runner-installation-linux.adoc[Linux machine runner installation instructions]
+- xref:runner-installation-mac.adoc[macOS machine runner installation instructions]
+- xref:runner-installation-windows.adoc[Windows machine runner installation instructions]
+- xref:runner-on-kubernetes.adoc[Runner on Kubernetes installation instructions]
+- xref:runner-installation-docker.adoc[Machine runner installation instructions with the Docker executor]

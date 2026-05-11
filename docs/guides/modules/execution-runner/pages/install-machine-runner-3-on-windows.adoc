@@ -1,0 +1,109 @@
+= Install machine runner 3 on Windows
+:page-platform: Cloud, Server v4.4+
+:page-description: Instructions on how to install CircleCI's machine runner 3  on Windows.
+:experimental:
+:machine:
+:windows:
+
+This page describes how to install CircleCI's machine runner 3 on Windows. This has been tested for Windows Server 2016, 2019, and 2022 in Datacenter Edition. Other Server SKUs with Desktop Experience and Remote Desktop Services (RDS) should also work.
+
+This page walks you through installing a machine runner and its dependencies (for example, Chocolatey, Git, and Gzip) on your Windows Server.
+
+Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
+
+NOTE: The Windows Server needs to be a domain member when you set this up in domain environments. The self-hosted runner instance cannot run on a Windows Server operating as a domain controller.
+
+[#prerequisites]
+== Prerequisites
+
+To install machine runners and run jobs, you will need to have root access, and have the following dependencies installed on your system:
+
+* link:https://learn.microsoft.com/en-us/windows-server/get-started/install-options-server-core-desktop-experience[Desktop Experience]
+
+* link:https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/remote-desktop-services-overview[Remote Desktop Services (RDS)]
+
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
+
+NOTE: Additional utilities and tools, such as Chocolatey, Git, and Gzip are automatically installed as part of the <<#installation-steps,installation script>>.
+
+[#self-hosted-runner-terms-agreement]
+== Self-hosted runner terms agreement
+
+include::ROOT:partial$runner/terms.adoc[]
+
+[#create-namespace-and-resource-class]
+== 1. Create namespace and resource class
+
+[tabs]
+====
+Web app installation::
++
+--
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
+--
+CLI installation::
++
+--
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
+
+--
+====
+
+[#installation-steps]
+== 2. Machine runner installation on Windows
+
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Install-CircleCIRunner.ps1` script] from GitHub to an accessible location.
+
+. Open PowerShell as an administrator and navigate to the directory where you placed the script file.
+
+. Run the following in your PowerShell:
++
+[,powershell]
+----
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+./Install-CircleCIRunner.ps1
+----
++
+The installation will be output into your PowerShell interface.
+
+. As part of the installation, the configuration file for the machine runner (`runner-agent-config.yaml`) will open in Notepad. Fill in the requested information (see xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3.0 Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
+
+After your setup completes, the machine runner starts automatically and begins looking for jobs to process.
+
+include::ROOT:partial$runner/machine-runner-example.adoc[]
+
+[#uninstall-reinstall-steps]
+== Uninstall / reinstall steps
+
+Uninstalling machine runners will prepare the system for installation again.
+
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install/circleci-runner[`Uninstall-CircleCIRunner.ps1` script] from GitHub to an accessible location.
+. Open PowerShell as an administrator and navigate to the directory where you placed the script file.
+
+. Run the following in your PowerShell:
++
+[,powershell]
+----
+./Uninstall-CircleCIRunner.ps1
+----
+
+[#continuous-mode-vs.-single-task-mode-for-windows-self-hosted-runners]
+== Continuous mode vs. single task mode for Windows self-hosted runners
+
+By default, Windows machine runners run in xref:machine-runner-3-configuration-reference.adoc#runner-mode[single-task mode] in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. Single-task mode is the **recommended mode** for Windows machine runners.
+
+A Windows machine runner *can* be run in `continuous` mode. However, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected, and job failure.
+
+[#troubleshooting]
+== Troubleshooting
+
+Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machine Runner>> guide if you encounter issues installing or running machine runner on Windows.
+
+[#additional-resources]
+== Additional resources
+
+- xref:machine-runner-3-manual-installation-on-windows.adoc[Manual installation for machine runner 3 on Windows]
+- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3 macOS Homebrew installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]

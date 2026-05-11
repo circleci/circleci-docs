@@ -1,0 +1,67 @@
+[.table-scroll]
+--
+[cols="3,1,1,1,1,1,1,1,1", options="header"]
+|===
+| Class | vCPUs | RAM | GPUs | GPU model | GPU Memory (GiB) | Disk Size (GiB) | Cloud | Server
+
+| `gpu.nvidia.small`
+| 4
+| 16
+| 1
+| NVIDIA Tesla P4
+| 16
+| 150
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `gpu.nvidia.small.gen2`
+| 4
+| 16
+| 1
+| NVIDIA A10G
+| 24
+| 150
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `gpu.nvidia.small.multi`
+| 4
+| 15
+| 2
+| NVIDIA Tesla T4
+| 16
+| 150
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `gpu.nvidia.medium.multi`
+| 8
+| 30
+| 4
+| NVIDIA Tesla T4
+| 16
+| 150
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `gpu.nvidia.medium`
+| 8
+| 30
+| 1
+| NVIDIA Tesla T4
+| 16
+| 150
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `gpu.nvidia.large`
+| 8
+| 30
+| 1
+| NVIDIA Tesla V100
+| 16
+| 150
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+|===
+--

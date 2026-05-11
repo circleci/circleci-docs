@@ -1,0 +1,1633 @@
+.doc {
+  color: var(--doc-font-color);
+  font-size: var(--doc-font-size);
+  hyphens: auto;
+  line-height: var(--doc-line-height);
+  margin: var(--doc-margin);
+  padding: 0 1rem 4rem;
+}
+
+@media screen and (max-width: 1023.5px) {
+  .doc {
+    padding: 0 32px 4rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .doc {
+    flex: auto;
+    font-size: var(--doc-font-size--desktop);
+    margin: var(--doc-margin--desktop);
+    max-width: var(--doc-max-width--desktop);
+    min-width: 0;
+  }
+}
+
+/* Apply aggressive flexbox fix only above 1200px where the original problem occurs */
+@media screen and (min-width: 1200px) {
+  .doc {
+    flex: 1 1 0%;
+    width: 0; /* Force flexbox to ignore content width */
+    max-width: var(--doc-max-width--desktop); /* Restore max-width for centering */
+    transition: max-width 0.3s ease;
+  }
+}
+
+/* Article expansion when TOC collapses */
+@media screen and (min-width: 1200px) {
+  body.toc-collapsed .doc {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width) - 50px);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  body.toc-collapsed .doc {
+    max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen) - 50px);
+  }
+}
+
+/* === HEADING STYLES === */
+.doc h1,
+.doc h2,
+.doc h3,
+.doc h4,
+.doc h5,
+.doc h6 {
+  color: var(--heading-font-color);
+  font-family: var(--body-font-family);
+  font-weight: var(--heading-font-weight);
+  hyphens: none;
+  line-height: 1.3;
+  margin: 16px 0;
+  padding: 0;
+  text-align: left;
+  scroll-margin-top: calc(var(--navbar-height) + var(--toolbar-height) + 1rem);
+}
+
+.doc h1 {
+  font-size: 32px;
+}
+
+.doc h2 {
+  font-size: 24px;
+}
+
+.doc h3 {
+  font-size: 20px;
+}
+
+.doc h4 {
+  font-size: 18px;
+}
+
+.doc h5,
+.doc h6 {
+  font-size: 16px;
+}
+
+/* Mobile heading sizes */
+@media screen and (max-width: 1023.5px) {
+  .doc h1 {
+    font-size: 24px;
+  }
+
+  .doc h2 {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .doc h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+
+  .doc h4 {
+    font-size: 16px;
+  }
+}
+
+/* Special case: Page title gets extra top margin on larger screens */
+@media screen and (min-width: 768px) {
+  .doc h1.page {
+    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
+    margin-bottom: calc(32 / var(--rem-base) * 1rem); /* 32px */
+  }
+
+  /* Section headings should have 40px top margin */
+  .doc h2,
+  .doc h3,
+  .doc h4 {
+    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
+  }
+}
+
+/* Special case: Section spacing */
+.doc > h2#name + .sectionbody {
+  margin-top: 1rem;
+}
+
+#preamble + .sect1,
+.doc .sect1 + .sect1 {
+  margin-top: 2rem;
+}
+
+/* Special case: Abstract section header with background */
+.doc h1.sect0 {
+  background: var(--abstract-background);
+  font-size: 1.8em;
+  margin: 1.5rem -1rem 0;
+  padding: 0.5rem 1rem;
+}
+
+.doc h1 .anchor,
+.doc h2 .anchor,
+.doc h3 .anchor,
+.doc h4 .anchor,
+.doc h5 .anchor,
+.doc h6 .anchor {
+  position: absolute;
+  text-decoration: none;
+  width: 1.75ex;
+  margin-left: -1.5ex;
+  visibility: hidden;
+  font-size: 0.8em;
+  font-weight: normal;
+  padding-top: 0.05em;
+}
+
+.doc h1 .anchor::before,
+.doc h2 .anchor::before,
+.doc h3 .anchor::before,
+.doc h4 .anchor::before,
+.doc h5 .anchor::before,
+.doc h6 .anchor::before {
+  content: "\00a7";
+}
+
+.doc h1:hover .anchor,
+.doc h2:hover .anchor,
+.doc h3:hover .anchor,
+.doc h4:hover .anchor,
+.doc h5:hover .anchor,
+.doc h6:hover .anchor {
+  visibility: visible;
+}
+
+.doc p,
+.doc dl {
+  margin: 0;
+}
+
+.doc a {
+  color: var(--link-font-color);
+  font-weight: 500;
+}
+
+.doc a:hover {
+  color: var(--link-hover-font-color);
+}
+
+.doc a.bare {
+  hyphens: none;
+}
+
+.doc a.unresolved {
+  color: var(--link-unresolved-font-color);
+}
+
+.doc i.fa {
+  hyphens: none;
+  font-style: normal;
+}
+
+.doc .olist ol{
+  list-style-type: decimal;
+  list-style-position: outside;
+}
+
+.doc .ulist ul{
+  list-style-type: disc;
+  list-style-position: outside;
+}
+
+.doc p code,
+.doc thead code,
+.doc .colist > table code,
+.doc .admonitionblock td.content code:not(.hljs) {
+  color: var(--code-font-color);
+  background: var(--inline-code-background);
+  border-radius: 4px;
+  border: 1px solid var(--inline-code-border-color);
+  font-size: 0.95em;
+  padding: 2px 8px;
+}
+
+.doc code,
+.doc pre {
+  hyphens: none;
+}
+
+.doc pre {
+  font-size: var(--doc-font-size);
+  font-weight: inherit;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.doc blockquote {
+  margin: 0;
+}
+
+.doc .paragraph.lead > p {
+  font-size: calc(18 / var(--rem-base) * 1rem);
+}
+
+.doc .right {
+  float: right;
+  max-width: 50%;
+  height: auto;
+  margin: 0 0 1rem 1rem;
+  border-radius: 8px;
+  box-shadow: var(--image-shadow);
+  overflow: hidden;
+}
+
+.doc .left {
+  float: left;
+}
+
+.doc .float-gap.right {
+  margin: 0 1rem 1rem 0;
+}
+
+.doc .float-gap.left {
+  margin: 0 0 1rem 1rem;
+}
+
+.doc .float-group::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.doc .text-left {
+  text-align: left;
+}
+
+.doc .text-center {
+  text-align: center;
+}
+
+.doc .text-right {
+  text-align: right;
+}
+
+.doc .text-justify {
+  text-align: justify;
+}
+
+.doc .stretch {
+  width: 100%;
+}
+
+.doc .big {
+  font-size: larger;
+}
+
+.doc .small {
+  font-size: smaller;
+}
+
+.doc .underline {
+  text-decoration: underline;
+}
+
+.doc .line-through {
+  text-decoration: line-through;
+}
+
+.doc .paragraph,
+.doc .dlist,
+.doc .hdlist,
+.doc .olist,
+.doc .ulist,
+.doc .exampleblock,
+.doc .imageblock,
+.doc .listingblock,
+.doc .literalblock,
+.doc .tabs,
+.doc .sidebarblock,
+.doc .verseblock,
+.doc .videoblock,
+.doc .quoteblock,
+.doc .partintro,
+.doc details,
+.doc hr {
+  margin: 1rem 0 0;
+}
+
+.doc .openblock.tabs {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
+.doc .imageblock {
+  margin-top: calc(40 / var(--rem-base) * 1rem);
+}
+
+.doc > table.tableblock,
+.doc > table.tableblock + *,
+.doc .tablecontainer,
+.doc .tablecontainer + *,
+.doc :not(.tablecontainer) > table.tableblock,
+.doc :not(.tablecontainer) > table.tableblock + * {
+  margin-top: 1.5rem;
+}
+
+.doc table.tableblock {
+  font-size: calc(15 / var(--rem-base) * 1rem);
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  display: table;
+  margin-bottom: 1rem;
+  border: 1px solid var(--table-border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.doc p.tableblock + p.tableblock {
+  margin-top: 0.5rem;
+}
+
+.doc table.tableblock pre {
+  font-size: inherit;
+}
+
+/* Table cell styles */
+.doc table.tableblock td,
+.doc table.tableblock th {
+  box-sizing: border-box;
+  white-space: normal;
+  overflow-wrap: break-word;
+  hyphens: manual;
+}
+
+.doc td.tableblock > .content {
+  overflow-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
+}
+
+.doc td.tableblock > .content > :first-child {
+  margin-top: 0;
+}
+
+.doc table.tableblock th,
+.doc table.tableblock td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--table-border-color);
+  min-width: 100px;
+}
+
+.doc table.tableblock th {
+  font-size: 18px;
+}
+
+.doc table.tableblock td {
+  font-size: 16px;
+}
+
+.doc table.tableblock,
+.doc table.tableblock > * > tr:last-child > * {
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.doc .table-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.doc .table-scroll table.tableblock {
+  min-width: 100%;
+  width: auto;
+}
+
+.doc table.grid-all > * > tr > * {
+  border-width: 0;
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.doc table.grid-cols > * > tr > * {
+  border-width: 0;
+}
+
+.doc table.grid-rows > * > tr > * {
+  border-width: 0;
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.doc table.grid-all > thead th,
+.doc table.grid-rows > thead th {
+  border-bottom-width: 2px;
+}
+
+/* Handle border radius for tables */
+.doc table.tableblock > thead:first-child > tr:first-child > th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.doc table.tableblock > thead:first-child > tr:first-child > th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.doc table.tableblock > tbody:last-child > tr:last-child > td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.doc table.tableblock > tbody:last-child > tr:last-child > td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.doc table.frame-all {
+  border-width: 1px;
+}
+
+.doc table.frame-ends {
+  border-width: 1px 0;
+}
+
+.doc table.frame-sides {
+  border-width: 0 1px;
+}
+
+.doc table.frame-none > colgroup + * > :first-child > *,
+.doc table.frame-sides > colgroup + * > :first-child > * {
+  border-top-width: 0;
+}
+
+/* NOTE let the grid win in case of frame-none */
+.doc table.frame-sides > :last-child > :last-child > * {
+  border-bottom-width: 0;
+}
+
+.doc table.frame-none > * > tr > :first-child,
+.doc table.frame-ends > * > tr > :first-child {
+  border-left-width: 0;
+}
+
+.doc table.frame-none > * > tr > :last-child,
+.doc table.frame-ends > * > tr > :last-child {
+  border-right-width: 0;
+}
+
+.doc table.tableblock > tbody > tr:nth-of-type(odd) {
+  background: var(--table-stripe-odd);
+}
+
+.doc table.tableblock > tbody > tr:nth-of-type(even) {
+  background: var(--table-stripe-even);
+}
+
+.doc table.stripes-hover > tbody > tr:hover {
+  background: var(--table-stripe-background);
+}
+
+.doc table.tableblock > thead > tr > th {
+  font-weight: bold;
+  border-bottom: 2px solid var(--table-border-color);
+  background-color: var(--table-header-background);
+}
+
+.doc table.tableblock > tfoot {
+  background: var(--table-footer-background);
+}
+
+.doc .halign-left {
+  text-align: left;
+}
+
+.doc .halign-right {
+  text-align: right;
+}
+
+.doc .halign-center {
+  text-align: center;
+}
+
+.doc .valign-top {
+  vertical-align: top;
+}
+
+.doc .valign-bottom {
+  vertical-align: bottom;
+}
+
+.doc .valign-middle {
+  vertical-align: middle;
+}
+
+.doc .admonitionblock {
+  margin: 1.4rem 0 0;
+}
+
+.doc .admonitionblock > table {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 1rem;
+  box-sizing: border-box;
+  padding: 1rem 1rem 0.75rem;
+}
+
+.doc .admonitionblock > table > tbody > tr {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 1rem;
+}
+
+.doc .admonitionblock.note > table {
+  border-color: var(--note-color);
+}
+
+.doc .admonitionblock.tip > table {
+  border-color: var(--tip-color);
+}
+
+.doc .admonitionblock.warning > table {
+  border-color: var(--warning-color);
+}
+
+.doc .admonitionblock.important > table {
+  border-color: var(--important-color);
+}
+
+.doc .admonitionblock.caution > table {
+  border-color: var(--caution-color);
+}
+
+.doc .admonitionblock td.icon {
+  flex: 0 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.doc .admonitionblock td.icon i {
+  width: 24px;
+  height: 24px;
+  display: flex;
+}
+
+.doc .admonitionblock td.icon i.icon-caution {
+  background: url('../img/caution_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-important {
+  background: url('../img/caution_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-note {
+  background: url('../img/note_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-tip {
+  background: url('../img/tip_icon.svg') no-repeat center / contain;
+}
+
+.doc .admonitionblock td.icon i.icon-warning {
+  background: url('../img/alert_icon.svg') no-repeat center / contain;
+}
+
+
+.doc .admonitionblock p,
+.doc .admonitionblock td.content {
+  font-size: var(--doc-font-size);
+}
+
+.doc .admonitionblock td.content > :not(.title):first-child,
+.doc .admonitionblock td.content > .title + * {
+  margin-top: 0;
+}
+
+.doc .admonitionblock td.content pre {
+  font-size: var(--doc-font-size);
+}
+
+
+.doc .admonitionblock td.content {
+  width: 100%;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+
+.doc .imageblock,
+.doc .videoblock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.doc .imageblock .content {
+  align-self: stretch;
+  text-align: center;
+  position: relative; /* Add position relative to position the magnifier icon */
+  cursor: zoom-in; /* Add zoom-in cursor to indicate the image is clickable */
+}
+
+.doc .imageblock.text-left,
+.doc .videoblock.text-left {
+  align-items: flex-start;
+}
+
+.doc .imageblock.text-left .content {
+  text-align: left;
+}
+
+.doc .imageblock.text-right,
+.doc .videoblock.text-right {
+  align-items: flex-end;
+}
+
+.doc .imageblock.text-right .content {
+  text-align: right;
+}
+
+.doc .imageblock img,
+.doc .imageblock object,
+.doc .imageblock svg,
+.doc .image > img,
+.doc .image > object,
+.doc .image > svg {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  width: auto;
+  vertical-align: middle;
+  object-fit: contain;
+  border: 1px solid var(--table-border-color);
+  border-radius: 12px;
+}
+
+/* Remove border for images with no-border class */
+.doc .imageblock.no-border img,
+.doc .imageblock.no-border object,
+.doc .imageblock.no-border svg,
+.doc .image.no-border > img,
+.doc .image.no-border > object,
+.doc .image.no-border > svg {
+  border: none;
+}
+
+.doc .image:not(.left):not(.right) > img {
+  margin-top: -0.2em;
+}
+
+.doc .videoblock iframe,
+.doc .videoblock video {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+#preamble .abstract blockquote {
+  background: var(--abstract-background);
+  border-left: 5px solid var(--abstract-border-color);
+  color: var(--abstract-font-color);
+  font-size: var(--doc-font-size);
+  padding: 0.75em 1em;
+}
+
+.doc .quoteblock,
+.doc .verseblock {
+  background: var(--quote-background);
+  border-left: 5px solid var(--quote-border-color);
+  color: var(--quote-font-color);
+}
+
+.doc .quoteblock {
+  padding: 0.25rem 2rem 1.25rem;
+}
+
+.doc .quoteblock .attribution {
+  color: var(--quote-attribution-font-color);
+  font-size: var(--doc-font-size);
+  margin-top: 0.75rem;
+}
+
+.doc .quoteblock blockquote {
+  margin-top: 1rem;
+}
+
+.doc .quoteblock .paragraph {
+  font-style: italic;
+}
+
+.doc .quoteblock cite {
+  padding-left: 1em;
+}
+
+.doc .verseblock {
+  font-size: 1.15em;
+  padding: 1rem 2rem;
+}
+
+.doc .verseblock pre {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.doc ol,
+.doc ul {
+  margin: 0;
+  padding: 0 0 0 2rem;
+}
+
+.doc ul.checklist,
+.doc ul.none,
+.doc ol.none,
+.doc ul.no-bullet,
+.doc ol.unnumbered,
+.doc ul.unstyled,
+.doc ol.unstyled {
+  list-style-type: none;
+}
+
+.doc ul.no-bullet,
+.doc ol.unnumbered {
+  padding-left: 1.25rem;
+}
+
+.doc ul.unstyled,
+.doc ol.unstyled {
+  padding-left: 0;
+}
+
+.doc ul.circle {
+  list-style-type: circle;
+}
+
+.doc ul.disc {
+  list-style-type: disc;
+}
+
+.doc ul.square {
+  list-style-type: square;
+}
+
+.doc ul.circle ul:not([class]),
+.doc ul.disc ul:not([class]),
+.doc ul.square ul:not([class]) {
+  list-style: inherit;
+}
+
+.doc ol.arabic {
+  list-style-type: decimal;
+}
+
+.doc ol.decimal {
+  list-style-type: decimal-leading-zero;
+}
+
+.doc ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+
+.doc ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+
+.doc ol.lowerroman {
+  list-style-type: lower-roman;
+}
+
+.doc ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+.doc ol.lowergreek {
+  list-style-type: lower-greek;
+}
+
+.doc ul.checklist {
+  padding-left: 1.75rem;
+}
+
+.doc ul.checklist p > i.fa-check-square-o:first-child,
+.doc ul.checklist p > i.fa-square-o:first-child {
+  display: inline-flex;
+  justify-content: center;
+  width: 1.25rem;
+  margin-left: -1.25rem;
+}
+
+.doc ul.checklist i.fa-check-square-o::before {
+  content: "\2713";
+}
+
+.doc ul.checklist i.fa-square-o::before {
+  content: "\274f";
+}
+
+.doc .dlist .dlist,
+.doc .dlist .olist,
+.doc .dlist .ulist,
+.doc .olist .dlist,
+.doc .olist .olist,
+.doc .olist .ulist,
+.doc .ulist .dlist,
+.doc .ulist .olist,
+.doc .ulist .ulist {
+  margin-top: 0.5rem;
+}
+
+.doc .olist li + li,
+.doc .ulist li + li {
+  margin-top: 0.5rem;
+}
+
+.doc .ulist .listingblock,
+.doc .olist .listingblock,
+.doc .admonitionblock .listingblock {
+  padding: 0;
+}
+
+.doc .admonitionblock .title,
+.doc .exampleblock .title,
+.doc .imageblock .title,
+.doc .literalblock .title,
+.doc .listingblock .title,
+.doc .openblock .title,
+.doc .videoblock .title,
+.doc table.tableblock caption {
+  color: var(--caption-font-color);
+  font-size: var(--doc-font-size);
+  font-style: var(--caption-font-style);
+  font-weight: var(--caption-font-weight);
+  hyphens: none;
+  letter-spacing: 0.01em;
+  padding-bottom: 0.075rem;
+}
+
+.doc table.tableblock caption {
+  text-align: left;
+}
+
+.doc .olist .title,
+.doc .ulist .title {
+  font-style: var(--caption-font-style);
+  font-weight: var(--caption-font-weight);
+  margin-bottom: 0.25rem;
+}
+
+.doc .imageblock .title,
+.doc .videoblock .title {
+  margin-top: 0.5rem;
+  padding-bottom: 0;
+}
+
+.doc details {
+  margin-left: 1rem;
+}
+
+.doc details > summary {
+  display: block;
+  position: relative;
+  line-height: var(--doc-line-height);
+  margin-bottom: 0.5rem;
+}
+
+.doc details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.doc details > summary::before {
+  content: "";
+  border: solid transparent;
+  border-left-color: currentColor;
+  border-width: 0.3em 0 0.3em 0.5em;
+  position: absolute;
+  top: calc((var(--doc-line-height) * 0.5 - 0.3) * 1em);
+  left: -1rem;
+  transform: translateX(15%);
+}
+
+.doc details[open] > summary::before {
+  border-color: currentColor transparent transparent;
+  border-width: 0.5rem 0.3rem 0;
+  transform: translateY(15%);
+}
+
+.doc details > summary::after {
+  content: "";
+  width: 1rem;
+  height: 1em;
+  position: absolute;
+  top: calc((var(--doc-line-height) * 0.5 - 0.5) * 1em);
+  left: -1rem;
+}
+
+.doc details.result {
+  margin-top: 0.25rem;
+}
+
+.doc details.result > summary {
+  color: var(--caption-font-color);
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.doc details.result > .content {
+  margin-left: -1rem;
+}
+
+.doc .exampleblock > .content,
+.doc details.result > .content {
+  background: var(--example-background);
+  border: 0.25rem solid var(--example-border-color);
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.doc .exampleblock > .content::after,
+.doc details.result > .content::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.doc .exampleblock > .content > :first-child,
+.doc details > .content > :first-child {
+  margin-top: 0;
+}
+
+.doc .sidebarblock {
+  width: 100%;
+  display: flex !important;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  border-color: var(--note-color);
+  padding: 1rem;
+  box-sizing: border-box;
+  padding: 1rem 1rem 0.75rem;
+}
+
+.doc .sidebarblock > .content {
+  min-width: 0;
+  width: 100%;
+}
+
+.doc .sidebarblock > .content > .title {
+  font-size: calc(22.5 / var(--rem-base) * 1rem);
+  font-weight: var(--alt-heading-font-weight);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.doc .sidebarblock > .content > .title + *,
+.doc .sidebarblock > .content > :not(.title):first-child {
+  margin-top: 0;
+}
+
+.doc .sidebarblock .listingblock {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* NEEDS REVIEW prevent pre in table from causing article to exceed bounds */
+.doc .listingblock.wrap pre {
+  white-space: pre-wrap;
+}
+
+/* Styling for code blocks and listing blocks */
+.doc pre.highlight > code,
+.doc .listingblock pre:not(.highlight),
+.doc .literalblock pre {
+  background: var(--pre-background);
+  display: block;
+  overflow-x: auto;
+  padding: 0.875em;
+  border-radius: inherit;
+  color: var(--color-white);
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Remove border from code block table cells when inside regular tables */
+.doc table.tableblock .hljs-ln td {
+  border-bottom: none !important;
+}
+
+/* Preserve whitespace and indentation in code blocks */
+.doc .hljs-ln-code {
+  white-space: pre !important;
+  padding-left: 0 !important;
+}
+
+/* Style listing blocks with titles */
+.doc .listingblock > .title {
+  background: var(--pre-title-background);
+  border-radius: 12px 12px 0 0;
+  padding: 0.5em 0.875em;
+  margin-bottom: 0;
+  position: relative;
+  padding-left: 2em; /* Add space for the SVG */
+  cursor: pointer; /* Indicate clickable */
+  transition: border-radius 0.3s ease;
+  font-style: normal; /* Override italic style from caption */
+}
+
+/* Add the arrow-down SVG after the title */
+.doc .listingblock > .title::after {
+  content: "";
+  position: absolute;
+  left: 0.875em;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 4px;
+  background: url('../img/arrow-down.svg') no-repeat center / contain;
+  transition: transform 0.3s ease;
+}
+
+/* When title is collapsed, rotate the arrow */
+.doc .listingblock > .title.collapsed::after {
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+/* When title is collapsed, adjust the border radius */
+.doc .listingblock > .title.collapsed {
+  border-radius: 12px;
+}
+
+/* When a title is present, adjust the code block border radius */
+.doc .listingblock > .title + .content pre {
+  border-radius: 0 0 12px 12px;
+}
+
+/* When title is not present, use border-radius: 12px for code blocks */
+.doc .listingblock > .content pre {
+  border-radius: 12px;
+}
+
+/* Keep existing position relative for the content */
+.doc .listingblock > .content {
+  position: relative;
+}
+
+.doc .source-toolbox {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: var(--pre-annotation-font-color);
+  font-family: var(--body-font-family);
+  font-size: calc(13 / var(--rem-base) * 1rem);
+  line-height: 1;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  white-space: nowrap;
+  z-index: 1;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc .source-toolbox *:not(.copy-toast),
+.doc .source-toolbox *:not(.copy-toast)::before,
+.doc .source-toolbox *:not(.copy-toast)::after {
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
+}
+
+.doc .source-toolbox .copy-button {
+  pointer-events: auto !important;
+}
+
+.doc .listingblock:hover .source-toolbox {
+  display: flex;
+}
+
+.doc .source-toolbox .source-lang {
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  display: none;
+}
+
+.doc .source-toolbox .copy-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--code-comment-color);
+  border: none;
+  border-radius: 50%;
+  color: inherit;
+  outline: none;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+}
+
+.doc .source-toolbox .copy-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  display: block;
+  margin: auto;
+}
+
+.doc .source-toolbox img.copy-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.doc .source-toolbox .copy-toast {
+  flex: none;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  margin-top: 0.5em;
+  background-color: var(--doc-font-color);
+  border-radius: 0.25em;
+  padding: 0.5em;
+  color: var(--color-white);
+  cursor: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.5s;
+  bottom: -10px;
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
+}
+
+.doc .source-toolbox .copy-toast::after {
+  content: "";
+  position: absolute;
+  top: -0.5em;
+  width: 1em;
+  height: 1em;
+  border: 0.55em solid transparent;
+  border-bottom-color: var(--doc-font-color);
+  transform-origin: center;
+  user-select: none !important;
+  -moz-user-select: none !important;
+  -webkit-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: none !important;
+}
+
+.doc .source-toolbox .copy-button.clicked .copy-toast {
+  opacity: 1;
+  transition: none;
+}
+
+.doc .language-console .hljs-meta {
+  user-select: none;
+}
+
+.doc .dlist dt {
+  font-style: italic;
+}
+
+.doc .dlist dd {
+  margin: 0 0 0 1.5rem;
+}
+
+.doc .dlist dd + dt,
+.doc .dlist dd > p:first-child {
+  margin-top: 0.5rem;
+}
+
+.doc td.hdlist1,
+.doc td.hdlist2 {
+  padding: 0.5rem 0 0;
+  vertical-align: top;
+}
+
+.doc tr:first-child > .hdlist1,
+.doc tr:first-child > .hdlist2 {
+  padding-top: 0;
+}
+
+.doc td.hdlist1 {
+  font-weight: var(--body-font-weight-bold);
+  padding-right: 0.25rem;
+}
+
+.doc td.hdlist2 {
+  padding-left: 0.25rem;
+}
+
+.doc .colist {
+  font-size: var(--doc-font-size);
+  margin: 0.25rem 0 -0.25rem;
+}
+
+.doc .colist > table > tr > :first-child,
+.doc .colist > table > tbody > tr > :first-child {
+  padding: 0.25em 0.5rem 0;
+  vertical-align: top;
+}
+
+.doc .colist > table > tr > :last-child,
+.doc .colist > table > tbody > tr > :last-child {
+  padding: 0.25rem 0;
+}
+
+.doc .conum[data-value] {
+  border: 1px solid currentColor;
+  border-radius: 100%;
+  display: inline-block;
+  font-family: var(--body-font-family);
+  font-size: calc(13.5 / var(--rem-base) * 1rem);
+  font-style: normal;
+  line-height: 1.2;
+  text-align: center;
+  width: 1.25em;
+  height: 1.25em;
+  letter-spacing: -0.25ex;
+  text-indent: -0.25ex;
+}
+
+.doc .conum[data-value]::after {
+  content: attr(data-value);
+}
+
+.doc .conum[data-value] + b {
+  display: none;
+}
+
+.doc hr {
+  border: solid var(--section-divider-color);
+  border-width: 2px 0 0;
+  height: 0;
+}
+
+.doc b.button {
+  white-space: nowrap; /* effectively ignores hyphens setting */
+}
+
+.doc b.button::before {
+  content: "[";
+  padding-right: 0.25em;
+}
+
+.doc b.button::after {
+  content: "]";
+  padding-left: 0.25em;
+}
+
+.doc kbd {
+  display: inline-block;
+  font-size: calc(12 / var(--rem-base) * 1rem);
+  background: var(--kbd-background);
+  border: 1px solid var(--kbd-border-color);
+  border-radius: 0.25em;
+  box-shadow: 0 1px 0 var(--kbd-border-color), 0 0 0 0.1em var(--body-background) inset;
+  padding: 0.25em 0.5em;
+  vertical-align: text-bottom;
+  white-space: nowrap; /* effectively ignores hyphens setting */
+}
+
+.doc kbd,
+.doc .keyseq {
+  line-height: 1;
+}
+
+.doc .keyseq {
+  font-size: var(--doc-font-size);
+}
+
+.doc .keyseq kbd {
+  margin: 0 0.125em;
+}
+
+.doc .keyseq kbd:first-child {
+  margin-left: 0;
+}
+
+.doc .keyseq kbd:last-child {
+  margin-right: 0;
+}
+
+.doc .menuseq,
+.doc .path {
+  hyphens: none;
+}
+
+.doc .menuseq i.caret::before {
+  content: "\203a";
+  font-size: 1.1em;
+  font-weight: var(--body-font-weight-bold);
+  line-height: calc(1 / 1.1);
+}
+
+.doc :not(pre).nowrap {
+  white-space: nowrap;
+}
+
+.doc .nobreak {
+  hyphens: none;
+  overflow-wrap: normal;
+}
+
+.doc :not(pre).pre-wrap {
+  white-space: pre-wrap;
+}
+
+#footnotes {
+  font-size: 0.85em;
+  line-height: 1.5;
+  margin: 2rem -0.5rem 0;
+}
+
+.doc td.tableblock > .content #footnotes {
+  margin: 2rem 0 0;
+}
+
+#footnotes hr {
+  border-top-width: 1px;
+  margin-top: 0;
+  width: 20%;
+}
+
+#footnotes .footnote {
+  margin: 0.5em 0 0 1em;
+}
+
+#footnotes .footnote + .footnote {
+  margin-top: 0.25em;
+}
+
+#footnotes .footnote > a:first-of-type {
+  display: inline-block;
+  margin-left: -2em;
+  text-align: right;
+  width: 1.5em;
+}
+
+
+/* paragraphs, lists, tables, blockquotes all get 16px bottom spacing */
+.doc p,
+.doc blockquote,
+.doc ul,
+.doc ol,
+.doc dl,
+.doc table {
+  margin: 0 0 1rem;
+  font-weight: 400;
+}
+
+/* inline links pick up the new blue */
+.doc a {
+  color: var(--link-font-color);
+}
+
+/* Image Modal Styles */
+.image-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-overlay-background);
+  z-index: 9999;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.image-modal-container {
+  position: relative;
+  max-width: 90%;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-modal-container img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+}
+
+.image-modal-title {
+  color: var(--color-white);
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.image-modal-close {
+  position: absolute;
+  top: -4rem;
+  right: -2rem;
+  width: 30px;
+  height: 30px;
+  background: url('../img/close.svg') no-repeat center / contain;
+  border: none;
+  cursor: pointer;
+  filter: invert(1); /* Make the close icon white */
+}
+
+.image-modal-overlay.show {
+  display: flex;
+}
+
+.doc .circle-green {
+  color: var(--link-success-color) !important;
+  font-weight: var(--heading-font-weight);
+}
+
+.doc .circle-red {
+  color: var(--link-error-color) !important;
+  font-weight: var(--heading-font-weight);
+}
+
+/* Prevent inline code text from wrapping in table cells */
+.doc .tableblock code:not(.hljs) {
+  white-space: nowrap;
+}
+
+/* Ensure code blocks in tables preserve formatting */
+.doc .tableblock .listingblock pre,
+.doc .tableblock .listingblock code,
+.doc td .listingblock pre,
+.doc td .listingblock code {
+  white-space: pre !important;
+}
+
+/* === MERMAID DIAGRAM STYLES === */
+
+/* Basic container styling */
+.doc .mermaid {
+  text-align: center;
+  margin: 1rem 0;
+  overflow-x: auto;
+}
+
+/* Responsive sizing */
+.doc .mermaid svg {
+  max-width: 100%;
+  height: auto;
+  cursor: default; /* Prevent zoom cursor on hover */
+}
+
+/* Prevent zoom cursor on mermaid diagrams */
+.doc .mermaid,
+.doc .mermaid *,
+.doc .imageblock .mermaid,
+.doc .imageblock .mermaid *,
+.doc .imageblock .content .mermaid,
+.doc .imageblock .content .mermaid * {
+  cursor: default !important;
+}
+
+/* Specifically override the imageblock content zoom cursor when it contains mermaid */
+.doc .imageblock .content .mermaid ~ *,
+.doc .imageblock .content .mermaid + * {
+  cursor: default !important;
+}
+
+/* Platform Badge Tooltips - CircleCI Web App Style */
+:root {
+  --tooltip-max-width: 300;
+  --tooltip-bg-light: #293548;
+  --tooltip-text-light: #ffffff;
+  --tooltip-bg-dark: #E5E7EB;
+  --tooltip-text-dark: #293548;
+}
+
+.platform-badge {
+  position: relative;
+  cursor: default;
+}
+
+/* Light mode tooltip - dark background with white text */
+.platform-badge::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  background: var(--tooltip-bg-light);
+  color: var(--tooltip-text-light);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  white-space: normal;
+  max-width: calc(var(--tooltip-max-width) * 1px);
+  width: max-content;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease-in-out;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Left-aligned tooltip for left edge */
+.platform-badge[style*="--tooltip-align: left"]::before {
+  left: 0;
+  transform: translateX(0);
+}
+
+.platform-badge[style*="--tooltip-align: left"]::after {
+  left: 20px;
+  transform: translateX(0);
+}
+
+/* Right-aligned tooltip for right edge */
+.platform-badge[style*="--tooltip-align: right"]::before {
+  left: auto;
+  right: 0;
+  transform: translateX(0);
+}
+
+.platform-badge[style*="--tooltip-align: right"]::after {
+  left: auto;
+  right: 20px;
+  transform: translateX(0);
+}
+
+/* Ensure tooltip stays within viewport on mobile */
+@media (max-width: 640px) {
+  .platform-badge::before {
+    max-width: 250px;
+  }
+}
+
+/* Dark mode tooltip - light background with dark text (inverted) */
+[data-theme="dark"] .platform-badge::before {
+  background: var(--tooltip-bg-dark);
+  color: var(--tooltip-text-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Show tooltip only when visibility class is applied (after position calculated) */
+.platform-badge.tooltip-visible::before,
+.platform-badge.tooltip-visible::after {
+  opacity: 1;
+}
+
+/* Light mode arrow - dark color matching tooltip */
+.platform-badge::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 10px - 1px); /* Overlap with tooltip by 1px to hide gap */
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--tooltip-bg-light); /* Points down */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.05s ease-out; /* Faster than tooltip, appears first */
+  z-index: 999; /* Just below tooltip to render behind */
+}
+
+/* Dark mode arrow - light color matching inverted tooltip */
+[data-theme="dark"] .platform-badge::after {
+  border-top-color: var(--tooltip-bg-dark);
+}
+
+/* Focus outline for accessibility */
+.platform-badge:focus {
+  outline: 2px solid var(--tooltip-bg-light);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] .platform-badge:focus {
+  outline-color: var(--tooltip-bg-dark);
+}
+
+

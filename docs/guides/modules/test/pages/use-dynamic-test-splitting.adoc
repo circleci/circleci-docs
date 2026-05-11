@@ -1,0 +1,99 @@
+= Use dynamic test splitting
+:page-badge: Beta
+:page-platform: Cloud
+:experimental:
+:page-description: Evenly distribute tests across parallel execution nodes
+
+[NOTE]
+====
+*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+
+Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+====
+
+Dynamic test splitting distributes tests across parallel nodes to minimize node idle time. Unlike static splitting, which divides tests evenly upfront, dynamic splitting uses a shared queue that nodes pull from continuously. This ensures balanced workloads even when some nodes start late or run slower than expected.
+
+== Is my project a good fit for dynamic test splitting?
+
+Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch.
+
+If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
+
+== How it works
+
+When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing automatically:
+
+* Sorts tests by duration by retrieving timing data from previous runs, with longer tests prioritized first.
+* Creates a shared queue containing all tests to be run.
+* Enables nodes to pull dynamically. Each parallel node continuously pulls test batches from the queue.
+* Adjusts batch sizes dynamically as the test queue empties to ensure even distribution.
+
+Dynamic test splitting prevents any single slow node from becoming a bottleneck. Even if some nodes start late or run slower than expected, this dynamic batching ensures work stays balanced across all available nodes.
+
+[mermaid]
+----
+gantt
+      dateFormat X
+      axisFormat %s
+
+      section Node 0
+      Startup :n0s, 0, 2
+      Test A............... Test  B............. Test  C..... Test F........ :n0a, 2,  10
+
+      section Node 1
+      Startup :n2s, 0, 5
+      Test G ................... :n2a, 5, 10
+
+      section Node 2
+      Startup :n1s, 0, 3
+      Test D......................... Test E................ :n1a, 3, 10
+----
+
+== Prerequisites
+
+Before enabling dynamic test splitting, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
+
+* Installed the `testsuite` CLI plugin.
+* Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
+* Verified your tests run successfully with the `testsuite` command.
+
+== 1. Enable dynamic test splitting option in your `.circleci/test-suites.yml` file
+
+[source,yaml]
+----
+---
+name: ci tests
+# ...
+options:
+  dynamic-test-splitting: true
+----
+
+== 2. Run locally
+
+Use `--doctor` locally to validate the `test-suites.yml` is set up correctly.
+
+The CLI will run through additional checks when dynamic test splitting is enabled, if any results look incorrect an action
+item is provided to resolve it. Follow the steps until all checks pass.
+
+[source,console]
+----
+$ circleci run testsuite "ci tests" --doctor
+----
+
+[TIP]
+====
+The `circleci run testsuite` CLI tooling should be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
+
+The testsuite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
+====
+
+== 3. Run in CI
+
+Commit `.circleci/test-suites.yml` to your feature branch and push to your VCS.
+
+Verify dynamic test splitting is working as expected in CI by looking at the "timings" tab in the UI.
+
+== Next steps
+
+* xref:set-up-test-impact-analysis.adoc[Set up Test Impact Analysis] to run only impacted tests based on code changes.
+* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.

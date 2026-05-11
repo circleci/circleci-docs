@@ -1,0 +1,84 @@
+[.table-scroll]
+--
+[cols="1,1,1,2,1,1", options="header"]
+|===
+| Config
+| Xcode Version
+| macOS Version
+| Supported Resource Classes
+| VM Software Manifest
+| Release Notes
+
+| `26.4.1`
+| Xcode 26.4.1 (17E202)
+| 26.3
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v17723/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-4-1-available/[Release Notes]
+
+| `26.3.0`
+| Xcode 26.3.0 (17C529)
+| 15.6
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v16344/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-3-0-available/[Release Notes]
+
+| `26.2.0`
+| Xcode 26.2.0 (17C52)
+| 15.6
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15949/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-2-0-gm-available/[Release Notes]
+
+| `26.1.1`
+| Xcode 26.1.1 (17B100)
+| 15.6
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15895/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-1-1-available/[Release Notes]
+
+| `26.0.1`
+| Xcode 26.0.1 (17A400)
+| 15.6
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15738/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-0-1-released/[Release Notes]
+
+| `16.4.0`
+| Xcode 16.4 (16F6)
+| 15.3.2
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15338/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-16-4-ga-available/[Release Notes]
+
+| `16.3.0`
+| Xcode 16.3 (16E140)
+| 15.3.2
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15328/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-16-3-available/[Release Notes]
+
+| `15.4.0`
+| Xcode 15.4 (15F31d)
+| 14.3.1
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v14775/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-15-4-0-ga-released/50897[Release Notes]
+
+| `14.3.1`
+| Xcode 14.3.1 (14E300b)
+| 13.2.1
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v12128/manifest.txt[Installed software]
+| link:https://discuss.circleci.com/t/xcode-14-3-1-rc-released/48152[Release Notes]
+|===
+--

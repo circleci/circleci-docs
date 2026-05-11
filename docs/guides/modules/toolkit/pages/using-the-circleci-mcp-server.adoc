@@ -1,0 +1,346 @@
+= Using the CircleCI MCP server
+:page-platform: Cloud, Server v4+
+:page-description: A guide to using the CircleCI MCP server to diagnose build failures, fix issues, and manage CI pipelines through natural language commands.
+:experimental:
+
+The CircleCI MCP server enables you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
+
+== Introduction
+
+Model Context Protocol (MCP) is a standardized protocol that allows large language models (LLMs) to interact with external systems. The CircleCI MCP server connects your AI coding assistants directly to your CircleCI pipelines.
+
+This integration helps you diagnose and fix build failures faster. Your AI assistant can access logs, job metadata, and failure context without you needing to manually search through interfaces outside your development environment.
+
+The CircleCI MCP server provides the following benefits:
+
+* Diagnose build failures without leaving your IDE.
+* Receive structured information your AI assistant can understand.
+* Fix issues faster through natural language requests.
+* Identify and resolve flaky tests that slow down your team.
+* Improve your CI/CD pipeline without context switching.
+
+== How it works
+
+The CircleCI MCP server acts as a bridge between your AI assistant and CircleCI and works as follows:
+
+. You ask a question about your CircleCI builds in natural language.
+. The MCP server calls the appropriate CircleCI APIs.
+. The server transforms raw API responses into structured data.
+. Your AI assistant receives this data and provides you with useful insights.
+. You get answers without leaving your development environment.
+
+With the CircleCI MCP server, you can perform CircleCI tasks using natural language commands. For example:
+
+* "What failed on my last deploy?"
+* "Find the latest failed pipeline on my branch and help me fix it."
+* "Get logs from [pipeline URL] and help me fix it."
+* "Find flaky tests in my current project."
+* "Validate my CircleCI config."
+
+== Installation
+
+This section describes how to install the CircleCI MCP server in your development environment.
+
+=== Prerequisites
+
+Before installing the CircleCI MCP server, ensure you have the following:
+
+* `pnpm` package manager installed.
+* Node.js version 18.0.0 or higher.
+* A CircleCI personal API token. See the xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API tokens] page for steps.
+
+=== Automatic installation via Smithery
+
+You can install the CircleCI MCP server via Smithery, which is a hub for MCP servers. For more information, see the link:https://smithery.ai/docs[Smithery docs].
+
+Consider installing via Smithery in the following circumstances:
+
+* To manage several MCP servers or prefer a centralized installation approach for all developers.
+* If you do not want to touch IDE settings, or for quick testing purposes.
+* Install as part of a standard list of MCP servers with configuration managed locally via smithery across a team.
+
+To install via Smithery, use the following command:
+
+[source,bash]
+----
+npx -y @smithery/cli install @CircleCI-Public/mcp-server-circleci --client claude
+----
+
+=== Cursor IDE
+
+For guidance on setting up and using an MCP server in Cursor, see the link:https://docs.cursor.com/context/model-context-protocol[Cursor docs].
+
+Add this configuration to your Cursor MCP config file. You will need to supply your personal API token.
+
+NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "circleci-mcp-server": {
+      "command": "npx",
+      "args": ["-y", "@circleci/mcp-server-circleci"],
+      "env": {
+        "CIRCLECI_TOKEN": "your-circleci-token",
+        "CIRCLECI_BASE_URL": "https://circleci.com"
+      }
+    }
+  }
+}
+----
+
+=== Claude desktop
+
+For guidance on using an MCP server in Claude Desktop, see the link:https://modelcontextprotocol.io/quickstart/user[Model Context Protocol] docs.
+
+Add the following configuration to your `claude_desktop_config.json` file. You can access `claude_desktop_config.json` from Claude desktop at menu:Claude[Settings > Developer > Edit Config]. You will need to supply your personal API token.
+
+NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "circleci-mcp-server": {
+      "command": "npx",
+      "args": ["-y", "@circleci/mcp-server-circleci"],
+      "env": {
+        "CIRCLECI_TOKEN": "your-circleci-token",
+        "CIRCLECI_BASE_URL": "https://circleci.com"
+      }
+    }
+  }
+}
+----
+
+=== Claude Code
+
+For guidance on using an MCP server in Claude Code, see the link:https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/tutorials#set-up-model-context-protocol-mcp[Claude Code docs].
+
+After installing Claude Code, run the following command, substituting your CircleCI personal API token:
+
+[source,bash]
+----
+claude mcp add circleci-mcp-server -e CIRCLECI_TOKEN=your-circleci-token -e CIRCLECI_BASE_URL=https://circleci.com -- npx -y @circleci/mcp-server-circleci
+----
+
+NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+
+=== VS Code
+
+For guidance on setting up and using MCP servers in VS Code, see the link:https://code.visualstudio.com/docs/copilot/chat/mcp-servers[VS Code documentation].
+
+Add this configuration to your VS Code settings in the location specified in the VS Code documentation. You will need to supply your personal API token.
+
+NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+
+[source,json]
+----
+"circleci-mcp-server": {
+  "command": "npx",
+  "args": ["-y", "@circleci/mcp-server-circleci"],
+  "env": {
+    "CIRCLECI_TOKEN": "your-circleci-token",
+    "CIRCLECI_BASE_URL": "https://circleci.com"
+  }
+}
+----
+
+=== Windsurf
+
+For guidance on setting up and using an MCP server in Windsurf, see the link:https://docs.windsurf.com/windsurf/mcp#model-context-protocol-mcp[Windsurf docs].
+
+You will need to add the following configuration to your Windsurf `mcp_config.json` file. You will need to supply your personal API token.
+
+NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server:
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "circleci-mcp-server": {
+      "command": "npx",
+      "args": ["-y", "@circleci/mcp-server-circleci"],
+      "env": {
+        "CIRCLECI_TOKEN": "your-circleci-token",
+        "CIRCLECI_BASE_URL": "https://circleci.com"
+      }
+    }
+  }
+}
+----
+
+== Using the CircleCI MCP server
+
+Once you have installed the CircleCI MCP server, you can use it to diagnose build failures, fix issues, and manage CI pipelines through natural language commands.
+
+Your agent chat facility (which will be different for each AI coding assistant) will have access to the tools that the CircleCI MCP server supports. The supported tools are described in the next section.
+
+*Example*: Using Cursor IDE, once you have installed the CircleCI MCP server, you will see the new CircleCI-specific tools available to the AI assistant listed under menu:Cursor Settings[MCP]. The Cursor settings view is shown in the following screenshot:
+
+.CircleCI MCP server in Cursor IDE settings
+image::guides:ROOT:mcp-server-cursor.png[CircleCI MCP server in Cursor IDE]
+
+== Supported tools
+
+This section outlines the abilities that the CircleCI MCP server currently supports. Several tools are described below along with usage examples. For full information on each tool see the link:https://github.com/CircleCI-Public/mcp-server-circleci/blob/main/README.md[README] file in the tool's repository.
+
+You can find further help information for each tool at the point at which you installed the MCP server. For example, using Cursor IDE, under menu:Cursor settings[Tools and MCP] you can hover over a tool name to view in-app help.
+
+.CircleCI MCP server tools in Cursor IDE
+image::guides:ROOT:mcp-tools-cursor.png[CircleCI MCP server tools in Cursor IDE]
+
+CircleCI MCP server tools include the following:
+
+* Get build failure logs (`get_build_failure_logs`)
+* Find flaky tests (`find_flaky_tests`)
+* Get latest pipeline status (`get_latest_pipeline_status`)
+* Get job test results (`get_job_test_results`)
+* Configuration Helper (`config_helper`)
+* Run pipeline (`run_pipeline`)
+* List followed projects (`list_followed_projects`)
+* Run evaluation tests (`run_evaluation_tests`)
+* Rerun workflow (`rerun_workflow`)
+* Download usage API data (`download_usage_api_data`)
+* Find underused resource classes (`find_underused_resource_classes`)
+* Analyze diff (`analyze_diff`)
+* Rollback Tool (`run_rollback_pipeline`)
+* List component versions (`list_component_versions`)
+
+=== Get build failure logs (`get_build_failure_logs`)
+
+This tool retrieves detailed failure logs from CircleCI builds and presents them in a structured format.
+
+* *Using CircleCI URLs*
+** Provide a failed job or pipeline URL directly. For example: `Get logs from https://app.circleci.com/pipelines/github/org/repo/123`
+
+* *Using local project context*
+** Works from your local workspace without manual searching.
+** The server reads your Git remote and active branch automatically.
+** Example: "Find the latest failed pipeline on my current branch."
+
+The tool returns formatted logs including:
+
+* Job and step details.
+* Full command logs.
+* Exit codes and failure messages.
+
+=== Find flaky tests (`find_flaky_tests`)
+
+This tool identifies unreliable tests in your CircleCI project by analyzing your test execution history. It leverages CircleCI's built-in flaky test detection to find patterns of instability.
+
+* *Using CircleCI project URL*
+** Provide the project URL directly from CircleCI.
+** Example: `Find flaky tests in https://app.circleci.com/pipelines/vcs/org/repo`
+
+* *Using Local Project Context*
+** Works from your local workspace without manual searching.
+** The server reads your Git remote information automatically.
+** Example: `Find flaky tests in my current project`.
+
+The tool returns structured information including:
+
+* Test names and file locations.
+* Failure messages and failure context.
+* Data to help understand and fix test reliability issues.
+
+=== Configuration Helper (`config_helper`)
+
+This tool assists with CircleCI configuration tasks and provides guidance for improving your setup.
+
+* *Validate CircleCI Config:*
+** Checks your `.circleci/config.yml` for syntax and semantic errors.
+** Example: `Validate my CircleCI config`.
+
+The tool provides:
+
+* Detailed validation results.
+* Configuration recommendations.
+* Best practices for CircleCI configuration.
+
+=== Rollback Tool (`run_rollback_pipeline`)
+
+This tool executes rollback operations for CircleCI projects, enabling you to revert
+deployments to previous versions by either running your configured rollback pipeline or rerunning your workflow.
+
+The tool provides:
+
+- Interactive rollback process with guided parameter collection.
+- Project resolution from either project slug or project ID.
+- Target environment selection.
+- Component version selection assistance.
+- Rollback pipeline execution or workflow rerun options.
+- Clear error handling and configuration guidance.
+
+Prerequisites:
+
+- In order to trigger the rollback using a Rollback pipeline, the pipeline must be configured in the project. See the xref:deploy:set-up-rollbacks.adoc[Set up rollbacks] page for help.
+- Deploy markers should be set up for version tracking. See the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page for help.
+
+== Real-world examples
+
+Here are common scenarios where the CircleCI MCP server can help you and your team:
+
+=== Example 1: Fixing a failed PR build
+
+Your pull request build fails and blocks progress. Instead of switching to the CircleCI UI:
+
+. You ask your assistant: "Why did my PR build fail?"
+. The MCP server fetches structured logs from the failed job.
+. Your assistant identifies the issue and suggests a fix for you.
+. You apply the fix directly from your IDE and continue working.
+
+=== Example 2: Debugging a failed deployment
+
+Your deploy to staging fails right before a release:
+
+. You share the pipeline URL: `Get logs from https://app.circleci.com/pipeline/github/my-org/my-repo/789`
+. The MCP server returns structured logs from the failed job.
+. Your assistant identifies the issue and suggests a solution for you.
+. You apply the fix and complete your deployment.
+
+=== Example 3: Addressing flaky tests
+
+Your team wastes time with unreliable tests:
+
+. You ask: "Find flaky tests in my project"
+. The MCP server analyzes test history to identify problematic tests.
+. Your assistant explains the issues and suggests improvements to you.
+. You fix the tests and improve the reliability of your pipeline.
+
+=== Example 4: Emergency production rollback using rollback pipeline
+
+A critical bug is discovered in production after your latest deployment:
+
+. You tell your assistant: "I need to rollback the frontend component in production
+due to a critical bug"
+. The assistant lists your followed projects and you select the affected project.
+. The MCP server fetches available component versions and you choose the last known
+good version.
+. You provide the rollback reason: "Critical authentication bug affecting user login"
+. The assistant executes the rollback pipeline, reverting to the stable version
+within minutes.
+
+== Troubleshooting
+
+For general MCP server troubleshooting steps, see the link:https://modelcontextprotocol.io/docs/tools/debugging[Model Context Protocol docs].
+
+=== Installation issues
+If you experience issues installing the CircleCI MCP server, consider the following troubleshooting steps:
+
+* Ensure your personal API token is valid and has the necessary permissions.
+* If you are using CircleCI server, check that the CircleCI base URL is correct.
+
+=== Not seeing an up-to-date list of tools?
+
+After new tools are released, you may need to restart your MCP server to access them. Reload your IDE window to ensure the CircleCI MCP server loads the most recently released tools and capabilities.
+
+
+
+== Additional resources
+
+For more information about the CircleCI MCP server, you can visit the following links:
+
+* link:https://github.com/CircleCI-Public/mcp-server-circleci[GitHub Repository].
+* link:https://modelcontextprotocol.io[Model Context Protocol].

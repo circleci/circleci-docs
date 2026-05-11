@@ -1,0 +1,13 @@
+/node_modules/
+/build/
+**/.DS_Store
+/ui-bundle.zip
+/ui/build/
+/ui/node_modules/
+/ui/public/
+/ui/**/.DS_Store
+/extensions/.temp
+/.env
+/.vscode/
+/.htmltest
+/test-reports

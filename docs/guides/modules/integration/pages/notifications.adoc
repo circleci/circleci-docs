@@ -1,0 +1,150 @@
+= Notifications overview
+:page-platform: Cloud
+:page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
+:experimental:
+
+CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[Workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+
+[,yaml]
+----
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - checkout
+      - run: <command>
+workflows:
+  version: 2.1
+  build_and_test: # < Slack and email notifications are sent for workflows
+    jobs:
+    # IRC notifications are sent for each job.
+      - build
+      - test
+----
+
+[#set-or-change-email-notifications]
+== Setting and changing email notifications
+
+To set or change your default email address, visit the link:https://app.circleci.com/settings/user/notifications[Notifications] page of the CircleCI application. If you are a member of multiple organizations, you can specify a different email address for each organization using the dropdown for each org.
+
+.Default email
+image::guides:ROOT:email-notifications.png[Screenshot showing how to change default email address and choose notifications]
+
+You can also configure your preferences for different categories here:
+
+* *My work* - you receive an email every time a build you triggered finishes.
+* *Followed projects* - you receive emails for any build that has finished in a project that you have followed.
+
+You can further filter the notifications you receive based on the status of the build as below:
+
+* On default branch (any status).
+* On default branch (failed, error, unauthorized).
+* Failed
+* Succeeded
+* Cancelled
+* Unauthorized
+* Error
+
+NOTE: The "On default branch (any status)" setting overrides individual status filters. For example, if you have "Cancelled" notifications disabled but "On default branch (any status)" enabled under either "My Work" or "Followed Projects," you will still receive notifications for canceled workflows. This includes workflows that are automatically canceled when approval jobs expire after 90 days.
+
+.Notification categories
+image::guides:ROOT:email-categories.png[Screenshot showing how to change which notifications to receive]
+
+Email notifications appear as follows:
+
+.Success email
+image::guides:ROOT:notification-email-success.png[Example success email notification]
+
+.Failure email
+image::guides:ROOT:notification-email-failure.png[Example failure email notification]
+
+[#notifications-with-orbs]
+== Sending notifications with orbs
+
+You can use orbs to integrate notifications into your configuration. CircleCI offers a Slack orb and an IRC orb. Several third-party orbs are also available. Search the link:https://circleci.com/developer/orbs?query=notification&filterBy=all[orb registry] to see what other orbs are available.
+
+[#using-the-slack-orb]
+=== Using the Slack orb
+
+Using the link:https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb], you can integrate and customize Slack notifications directly from your `config.yml` file. The following config is an example of notifying a Slack channel with a custom message:
+
+[,yaml]
+----
+version: 2.1
+orbs:
+  slack: circleci/slack@4.9.3
+jobs:
+  notify:
+    docker:
+      - image: cimg/base:2021.04
+    steps:
+      - slack/notify:
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
+workflows:
+  send-notification:
+    jobs:
+      - notify:
+          context: slack-secrets
+----
+
+See xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb] for a full tutorial with examples.
+
+CircleCI's Slack orb can be used for other types of notification, including notifying a Slack channel of a pending approval. For more information and to view usage examples, see the link:https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb page].
+
+[#using-the-irc-orb]
+=== Using the IRC orb
+
+The link:https://circleci.com/developer/orbs/orb/circleci/irc[IRC orb] is similar to the Slack orb, but only has one main feature: sending custom IRC notifications from CircleCI. Consider this example configuration:
+
+[,yaml]
+----
+version: 2.1
+orbs:
+  irc: circleci/irc@0.2.0
+jobs:
+  build:
+    docker:
+      - image: <Docker image>
+    steps:
+      - checkout
+      - irc/notify:
+          server: <IRC-server-to-connect-to> # default: IRC_SERVER environment varible.
+          port: <6667> # default: 6667 if left blank.
+          channel: <the IRC server to post in> # required parameter
+          nick: <Your IRC nickname> # default: `circleci-bot`
+          message: <Build complete!> # default: "Your CircleCI Job has completed."
+workflows:
+  your-workflow:
+    jobs:
+      - build
+----
+
+Replace the values in brackets (`< >`) with your own details.
+
+== See also
+
+* xref:orbs:use:orb-intro.adoc[Orbs Introduction].
+* xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb].

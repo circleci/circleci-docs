@@ -1,0 +1,136 @@
+= CircleCI Xcode image release, update, and deprecation policy
+:page-platform: Cloud
+:page-description: CircleCI Xcode Image Release, Update and Deprecation Policy
+:experimental:
+
+[#overview]
+== Overview
+
+This document outlines the CircleCI Xcode image release, update, and deprecation policy. A defined Xcode image policy allows us to continue releasing new images, including beta images.
+
+You can find the most up to date information on these images on the link:https://circleci.com/developer/machine/image/xcode[CircleCI Developer Hub] Xcode machine image page.
+
+[#xcode-image-retention-and-deprecation]
+== Xcode image retention and deprecation
+
+We support the three latest Xcode versions released. We also support the latest minor release of the last four major Xcode versions.
+
+For example, if Xcode 26 is the latest major version:
+
+.Xcode retention policy example
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Xcode Version | Action
+
+| Xcode 26
+| We retain the three latest major.minor versions at the latest patch version
+
+| Xcode 16
+| We retain the last major.minor version
+
+| Xcode 15
+| We retain the last major.minor version
+
+| Xcode 14
+| We retain the last major.minor version
+|===
+--
+
+In the future when Xcode 27 releases:
+
+.Xcode retention policy future example
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Xcode Version | Action
+
+| Xcode 27
+| We support Xcode 27.0
+
+| Xcode 26
+| No change. We continue to support the latest 3 `major.minor` versions. We flag older images for deprecation and remove them as we release Xcode 27.1 and subsequent versions.
+
+| Xcode 16
+| No change. We continue to support the latest minor version release.
+
+| Xcode 15
+| No change. We continue to support the latest minor version release.
+
+| Xcode 14
+| We flag this version for deprecation and remove it entirely when Xcode 27 reaches GA
+|===
+--
+
+Apple ships betas of new major versions of Xcode during WWDC, which occurs in June each year.
+
+When we select an image for deprecation and removal, we create an announcement on our link:https://circleci.com/changelog/[changelog], along with additional outreach where possible. We aim to provide four weeks' notice where possible.
+
+We never automatically redirect requests for specific Xcode images to a different major or minor version. When we remove an image, jobs using that image fail if you have not updated the `.circleci/config.yml`.
+
+[#xcode-patches]
+== Xcode patches
+
+We retain the latest patch version of each Xcode `major.minor` version we support. Once Apple releases a patch version, we deprecate the previous patch version and automatically redirect all requests to the updated patch of the same `major.minor` version.
+
+Patches are generally backwards compatible, so we put redirects in place within 24 hours of a patch release. If we discover any major issues, we retain the ability to issue a rollback and make both versions temporarily available.
+
+*Example:*
+
+When Apple released Xcode `13.2.1`, we removed the previous patch version, `13.2.0`, and automatically redirected all requests for `13.2.0` to `13.2.1`.
+
+[#beta-image-support]
+== Beta image support
+
+We aim to make beta Xcode versions available on the macOS executor at the earliest opportunity. This allows developers to test their apps ahead of the next stable Xcode release.
+
+Unlike our stable images (which we freeze once released), when we release a beta image it overwrites the previous beta image until we release an RC/Stable image. At that point we freeze the image and no longer update it. If you request an image using an Xcode version currently in beta, it changes when Apple releases a subsequent Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling which are beyond our control. We do not recommend beta images for production pipelines.
+
+To read about our customer support policy for beta images, check out this link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
+
+[#xcode-image-releases]
+== Xcode image releases
+
+CircleCI is committed to providing Xcode image updates within *2 business days* of Apple's official GA release, as announced on link:https://developer.apple.com/news/releases/rss/releases.rss[Apple's official RSS feed]. This commitment applies to stable, generally available Xcode releases only.
+
+We announce all images on our link:https://circleci.com/changelog/[changelog] along with release notes. We also add them to the table of xref:using-macos.adoc#supported-xcode-versions[Xcode Versions in the Documentation].
+
+[#xcode-release-exceptions]
+=== Exceptions to the release window
+
+[#pre-release-builds]
+==== Pre-release builds
+
+Beta releases and release candidates are not subject to the 2 business day commitment. Beta and RC images are published on a best-effort basis with no guaranteed timeline. See <<beta-image-support>> for more detail.
+
+[#macos-upgrade-required]
+==== macOS upgrade required
+
+For major Xcode releases that require a corresponding macOS upgrade on our fleet, the standard 2 business day window does not apply. We aim to publish a projected availability date within *5 business days* of Apple's GA release. A notice is posted on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum] and link:https://circleci.com/changelog/[changelog] when the image goes live.
+
+[#image-quality-hold]
+==== Image quality hold
+
+In rare cases, CircleCI's validation process may identify critical issues with a newly released Xcode image. Examples include:
+ 
+* Toolchain regressions.
+* Simulator instability.
+* Build system defects introduced by Apple.
+ 
+When this occurs, availability may be delayed beyond the standard window. We aim to post a notice on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum] within the original 2 business day window. The notice states that the release is under a quality hold and whether the issue is attributable to Apple or CircleCI. A projected timeline is provided once the scope of the fix is known.
+
+[#macos-versions]
+== macOS versions
+
+We build each Xcode image on top of a clean macOS install. We aim to keep the macOS version reasonably up to date with the latest version available. Generally our images can be up to 2 minor/patch versions behind the latest stable version.
+
+We aim to keep the macOS version aligned across our different macOS executors. Note that this may not always be the case. Check the xref:test:testing-ios.adoc#supported-xcode-versions[Software Manifest] file for the image for the most accurate information.
+
+When Apple releases a new major version of macOS (ex: `27.0`), we start to use this version after at least two minor Xcode releases have passed.
+
+[#exceptions]
+== Exceptions
+
+At any time, we reserve the right to work outside of the information in this document if the circumstances require. When we need to make an exception to the policy, we aim to provide as much notice and clarity as possible. In these cases, we post an announcement on our link:https://discuss.circleci.com/c/announcements/39[Discuss forum], along with additional outreach, such as an email notice, where possible.

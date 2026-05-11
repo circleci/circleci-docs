@@ -1,0 +1,15 @@
+= Usage data collection
+:page-noindex: true
+:page-platform: Server v4.6, Server Admin
+:page-description: Learn about CircleCI server v4.6 usage data collection for the purpose of improving our product and services.
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI typically collects usage data, such as logs and other aggregated data, for the purpose of improving our products and services. We never collect personally identifiable information or information that is specific to your projects or accounts.
+
+[#current-data-collected]
+== Current data collected
+Server v4.6 does not include the data collection service.
+
+If this changes in any future release, we will communicate any data that will be collected.

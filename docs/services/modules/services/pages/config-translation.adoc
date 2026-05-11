@@ -1,0 +1,21 @@
+= Configuration translation service
+:page-description: Configuration translation service
+
+The configuration translation service is an engagement where your field engineer translates a project's configuration from another CI tool into CircleCI configuration. Each service translates one project configuration.
+
+== Benefits
+
+Teams who take advantage of a configuration translation service save time by:
+
+* Having their field engineer write their CircleCI configuration.
+* Getting example configurations for migrating projects written by CircleCI experts.
+* Working with their field engineer to research how to use CircleCI for their use case.
+* Adding their field engineer to the migration team for advice on CircleCI aspects of the migration.
+
+== Intended audience
+
+This training is for teams bringing a new project onto CircleCI.
+
+Direct contributors to the migration effort for the translated project should be involved.
+
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

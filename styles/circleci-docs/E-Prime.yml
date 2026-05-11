@@ -1,0 +1,27 @@
+---
+extends: existence
+message: 'Avoid using "%s"'
+ignorecase: true
+level: suggestion
+tokens:
+  - am
+  - aren't
+  - being
+  - he's
+  - here's
+  - here's
+  - how's
+  - i'm
+  - isn't
+  - she's
+  - that's
+  - there's
+  - they're
+  - wasn't
+  - we're
+  - weren't
+  - what's
+  - where's
+  - who's
+  - you're
+  - foobar

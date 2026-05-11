@@ -1,0 +1,14 @@
+<main class="article w-full max-w-screen">
+{{> article-toolbar}}
+  <div class="flex flex-col lg:flex-row w-full">
+{{#if (eq page.layout '404')}}
+{{> article-404}}
+{{else}}
+{{> article}}
+{{> toc}}
+{{/if}}
+  </div>
+  {{#if (and (ne page.layout '404') (ne page.layout 'subsection'))}}
+  {{> article-footer}}
+  {{/if}}
+</main>

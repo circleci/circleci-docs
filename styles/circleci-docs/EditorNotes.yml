@@ -1,0 +1,23 @@
+---
+extends: script
+scope: raw
+level: error
+message: "Remove editor note before publishing"
+link: https://github.com/circleci/circleci-docs
+script: |
+  text := import("text")
+  matches := []
+
+  // Match notes like #TBC#, #TODO something#, or #Do we need this?# but not [.class]#text#
+  // Two patterns: 1) specific keywords alone 2) any text with spaces
+  note_pattern := "#(?:TBC|TODO|FIXME|NOTE|REVIEW|CHECKME|VERIFY|HACK|XXX|TEMP)#|#\\w+\\s+[^#]+#"
+
+  for line in text.split(scope, "\n") {
+    if text.re_match(note_pattern, line) {
+      // Make sure it's not preceded by ] (AsciiDoc inline styling like [.class]#text#)
+      if !text.re_match("\\]#", line) {
+        start := text.index(scope, line)
+        matches = append(matches, {begin: start, end: start + len(line)})
+      }
+    }
+  }

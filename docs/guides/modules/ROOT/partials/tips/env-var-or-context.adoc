@@ -1,0 +1,1 @@
+TIP: To take advantage of xref:guides:security:contexts.adoc#secrets-masking[secrets masking], it is best practice to set environment variables at the xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[project level] or within a xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-context[context].

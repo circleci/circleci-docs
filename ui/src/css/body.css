@@ -1,0 +1,23 @@
+@media screen and (min-width: 1024px) {
+  .body {
+    display: flex;
+  }
+}
+
+/* Apply sticky navigation with independent scrolling at 1200px+ */
+@media screen and (min-width: 1200px) {
+  /* Keep navigation sticky so it participates in page overscroll */
+  [data-page-navigation] {
+    position: sticky;
+    top: calc(var(--navbar-height) + var(--toolbar-height));
+    height: calc(100vh - var(--navbar-height) - var(--toolbar-height));
+  }
+
+  /* Make aside independently scrollable */
+  [data-page-navigation] aside {
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 2.5rem; /* Space for component nav area */
+    padding-bottom: 3rem; /* Extra space at bottom for last nav item */
+  }
+}

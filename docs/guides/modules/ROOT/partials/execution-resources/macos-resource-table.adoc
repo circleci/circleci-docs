@@ -1,0 +1,19 @@
+[.table-scroll]
+--
+[cols=5*, options="header"]
+|===
+| Class | vCPUs | RAM | Cloud | Server
+
+| `m4pro.medium`
+| 6 @ 4.51 GHz
+| 28GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `m4pro.large`
+| 12 @ 4.51 GHz
+| 56GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+|===
+--

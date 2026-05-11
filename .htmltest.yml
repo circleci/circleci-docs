@@ -1,0 +1,14 @@
+DirectoryPath: "build"
+CheckExternal: false
+EnforceHTTPS: true
+CheckSelfReferencesAsInternal: true
+BaseURL: https://circleci.com/docs
+IgnoreAltEmpty: true
+IgnoreInternalEmptyHash: true
+IgnoreURLs:
+  - "\\[url\\]"                          # Escaped literal [url] placeholder in search templates
+  - "^/docs/"                            # All absolute paths from 404 page (navigation + assets)
+  - "llms\\.txt$"                        # llms.txt only generated on main branch, not PR builds
+IgnoreDirs:
+  - "api"
+OutputDir: ".htmltest"

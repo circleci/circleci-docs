@@ -1,0 +1,1542 @@
+{
+  "managing-url-orbs-allow-lists": {
+    "component": "orbs",
+    "module": "use",
+    "filename": "managing-url-orbs-allow-lists.adoc"
+  },
+  "how-to-override-config": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "how-to-override-config.adoc"
+  },
+  "gitlab-trigger-options": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "gitlab-trigger-options.adoc"
+  },
+  "github-trigger-event-options": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "github-trigger-event-options.adoc"
+  },
+  "roles-and-permissions-overview": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "roles-and-permissions-overview.adoc"
+  },
+  "migrate-from-launch-agent-to-machine-runner-3-on-linux": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc"
+  },
+  "persist-data": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "persist-data.adoc"
+  },
+  "migrating-from-github": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-github.adoc"
+  },
+  "publish-packages-to-packagecloud": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "publish-packages-to-packagecloud.adoc"
+  },
+  "next-gen-migration-guide": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "next-gen-migration-guide.adoc"
+  },
+  "machine-runner-3-manual-installation-on-windows": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "machine-runner-3-manual-installation-on-windows.adoc"
+  },
+  "bitbucket-data-center-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "bitbucket-data-center-integration.adoc"
+  },
+  "env-vars": {
+    "component": "guides",
+    "module": "security",
+    "filename": "env-vars.adoc"
+  },
+  "hello-world-macos": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "hello-world-macos.adoc"
+  },
+  "using-branch-filters": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "using-branch-filters.adoc"
+  },
+  "introduction-to-the-circleci-web-app": {
+    "component": "guides",
+    "module": "about-circleci",
+    "filename": "introduction-to-the-circleci-web-app.adoc"
+  },
+  "executor-intro": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "executor-intro.adoc"
+  },
+  "custom-images": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "custom-images.adoc"
+  },
+  "deploy-to-npm-registry": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-npm-registry.adoc"
+  },
+  "collect-test-data": {
+    "component": "guides",
+    "module": "test",
+    "filename": "collect-test-data.adoc"
+  },
+  "deploy-to-azure-container-registry": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-azure-container-registry.adoc"
+  },
+  "security-supply-chain": {
+    "component": "guides",
+    "module": "security",
+    "filename": "security-supply-chain.adoc"
+  },
+  "slack-orb-tutorial": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "slack-orb-tutorial.adoc"
+  },
+  "test-config-policies": {
+    "component": "guides",
+    "module": "config-policies",
+    "filename": "test-config-policies.adoc"
+  },
+  "install-machine-runner-3-on-macos": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "install-machine-runner-3-on-macos.adoc"
+  },
+  "runner-on-kubernetes": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-on-kubernetes.adoc"
+  },
+  "sumo-logic-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "sumo-logic-integration.adoc"
+  },
+  "faq": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "faq.adoc"
+  },
+  "configuration-reference": {
+    "component": "reference",
+    "module": "ROOT",
+    "filename": "configuration-reference.adoc"
+  },
+  "migrating-from-teamcity": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-teamcity.adoc"
+  },
+  "rotate-project-ssh-keys": {
+    "component": "guides",
+    "module": "security",
+    "filename": "rotate-project-ssh-keys.adoc"
+  },
+  "circleci-images": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "circleci-images.adoc"
+  },
+  "hello-world": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "hello-world.adoc"
+  },
+  "introduction-to-yaml-configurations": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "introduction-to-yaml-configurations.adoc"
+  },
+  "examples-and-guides-overview": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "examples-and-guides-overview.adoc"
+  },
+  "machine-runner-3-manual-installation": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "machine-runner-3-manual-installation.adoc"
+  },
+  "version-control-system-integration-overview": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "version-control-system-integration-overview.adoc"
+  },
+  "credits": {
+    "component": "guides",
+    "module": "plans-pricing",
+    "filename": "credits.adoc"
+  },
+  "insights": {
+    "component": "guides",
+    "module": "insights",
+    "filename": "insights.adoc"
+  },
+  "bitbucket-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "bitbucket-integration.adoc"
+  },
+  "migrate-scheduled-workflows-to-scheduled-pipelines": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "migrate-scheduled-workflows-to-scheduled-pipelines.adoc"
+  },
+  "rerun-failed-tests": {
+    "component": "guides",
+    "module": "test",
+    "filename": "rerun-failed-tests.adoc"
+  },
+  "runner-config-reference": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-config-reference.adoc"
+  },
+  "using-dynamic-configuration": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "using-dynamic-configuration.adoc"
+  },
+  "security-server": {
+    "component": "server-admin",
+    "module": "operator",
+    "filename": "security-server.adoc"
+  },
+  "api-developers-guide": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "api-developers-guide.adoc"
+  },
+  "optimizations": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "optimizations.adoc"
+  },
+  "inject-environment-variables-with-api": {
+    "component": "guides",
+    "module": "security",
+    "filename": "inject-environment-variables-with-api.adoc"
+  },
+  "migrating-from-azuredevops": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-azuredevops.adoc"
+  },
+  "deploy-to-firebase": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-firebase.adoc"
+  },
+  "orb-intro": {
+    "component": "orbs",
+    "module": "use",
+    "filename": "orb-intro.adoc"
+  },
+  "using-docker": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "using-docker.adoc"
+  },
+  "container-runner-installation": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "container-runner-installation.adoc"
+  },
+  "insights-snapshot-badge": {
+    "component": "guides",
+    "module": "insights",
+    "filename": "insights-snapshot-badge.adoc"
+  },
+  "use-the-cli-for-config-and-policy-development": {
+    "component": "guides",
+    "module": "config-policies",
+    "filename": "use-the-cli-for-config-and-policy-development.adoc"
+  },
+  "docker-compose": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "docker-compose.adoc"
+  },
+  "run-a-job-in-a-container": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "run-a-job-in-a-container.adoc"
+  },
+  "manage-groups": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "manage-groups.adoc"
+  },
+  "plan-free": {
+    "component": "guides",
+    "module": "plans-pricing",
+    "filename": "plan-free.adoc"
+  },
+  "android-machine-image": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "android-machine-image.adoc"
+  },
+  "convenience-images-support-policy": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "convenience-images-support-policy.adoc"
+  },
+  "custom-webhooks": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "custom-webhooks.adoc"
+  },
+  "windows-images-support-policy": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "windows-images-support-policy.adoc"
+  },
+  "deploy-android-applications": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-android-applications.adoc"
+  },
+  "concurrency": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "concurrency.adoc"
+  },
+  "config-intro": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "config-intro.adoc"
+  },
+  "config-editor": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "config-editor.adoc"
+  },
+  "stop-building-a-project-on-circleci": {
+    "component": "guides",
+    "module": "security",
+    "filename": "stop-building-a-project-on-circleci.adoc"
+  },
+  "android-images-support-policy": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "android-images-support-policy.adoc"
+  },
+  "java-oom": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "java-oom.adoc"
+  },
+  "use-the-circleci-cli-to-split-tests": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "use-the-circleci-cli-to-split-tests.adoc"
+  },
+  "plan-overview": {
+    "component": "guides",
+    "module": "plans-pricing",
+    "filename": "plan-overview.adoc"
+  },
+  "container-runner-performance-benchmarks": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "container-runner-performance-benchmarks.adoc"
+  },
+  "set-environment-variable": {
+    "component": "guides",
+    "module": "security",
+    "filename": "set-environment-variable.adoc"
+  },
+  "troubleshoot-test-splitting": {
+    "component": "guides",
+    "module": "test",
+    "filename": "troubleshoot-test-splitting.adoc"
+  },
+  "deploy-to-capistrano": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-capistrano.adoc"
+  },
+  "deploy-to-heroku": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-heroku.adoc"
+  },
+  "oidc-tokens-with-custom-claims": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "oidc-tokens-with-custom-claims.adoc"
+  },
+  "outbound-webhooks-reference": {
+    "component": "reference",
+    "module": "ROOT",
+    "filename": "outbound-webhooks-reference.adoc"
+  },
+  "linux-cuda-images-support-policy": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "linux-cuda-images-support-policy.adoc"
+  },
+  "deploy-to-aws": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-aws.adoc"
+  },
+  "gitlab-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "gitlab-integration.adoc"
+  },
+  "runner-scaling": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-scaling.adoc"
+  },
+  "set-up-multiple-configuration-files-for-a-project": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "set-up-multiple-configuration-files-for-a-project.adoc"
+  },
+  "workflows": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "workflows.adoc"
+  },
+  "selecting-a-workflow-to-run-using-pipeline-parameters": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "selecting-a-workflow-to-run-using-pipeline-parameters.adoc"
+  },
+  "circleci-config-sdk": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "circleci-config-sdk.adoc"
+  },
+  "reusing-config": {
+    "component": "reference",
+    "module": "ROOT",
+    "filename": "reusing-config.adoc"
+  },
+  "using-matrix-jobs": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "using-matrix-jobs.adoc"
+  },
+  "openid-connect-tokens": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "openid-connect-tokens.adoc"
+  },
+  "pipeline-variables": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "pipeline-variables.adoc"
+  },
+  "private-images": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "private-images.adoc"
+  },
+  "using-the-circleci-mcp-server": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "using-the-circleci-mcp-server.adoc"
+  },
+  "runner-overview": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-overview.adoc"
+  },
+  "deploy-to-cloud-foundry": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-cloud-foundry.adoc"
+  },
+  "config-policy-management-overview": {
+    "component": "guides",
+    "module": "config-policies",
+    "filename": "config-policy-management-overview.adoc"
+  },
+  "dynamic-config": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "dynamic-config.adoc"
+  },
+  "ip-ranges": {
+    "component": "guides",
+    "module": "security",
+    "filename": "ip-ranges.adoc"
+  },
+  "test": {
+    "component": "guides",
+    "module": "test",
+    "filename": "test.adoc"
+  },
+  "manage-contexts-with-config-policies": {
+    "component": "guides",
+    "module": "config-policies",
+    "filename": "manage-contexts-with-config-policies.adoc"
+  },
+  "benefits-of-circleci": {
+    "component": "guides",
+    "module": "about-circleci",
+    "filename": "benefits-of-circleci.adoc"
+  },
+  "pipelines": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "pipelines.adoc"
+  },
+  "language-javascript": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "language-javascript.adoc"
+  },
+  "deployment-overview": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deployment-overview.adoc"
+  },
+  "getting-started": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "getting-started.adoc"
+  },
+  "security": {
+    "component": "guides",
+    "module": "security",
+    "filename": "security.adoc"
+  },
+  "caching-strategy": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "caching-strategy.adoc"
+  },
+  "concepts": {
+    "component": "guides",
+    "module": "about-circleci",
+    "filename": "concepts.adoc"
+  },
+  "authorize-google-cloud-sdk": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "authorize-google-cloud-sdk.adoc"
+  },
+  "runner-installation-docker": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-installation-docker.adoc"
+  },
+  "github-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "github-integration.adoc"
+  },
+  "machine-runner-3-configuration-reference": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "machine-runner-3-configuration-reference.adoc"
+  },
+  "deploy-ios-applications": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-ios-applications.adoc"
+  },
+  "remote-docker-images-support-policy": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "remote-docker-images-support-policy.adoc"
+  },
+  "machine-convenience-image-lifecycle": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "machine-convenience-image-lifecycle.adoc"
+  },
+  "runner-faqs": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-faqs.adoc"
+  },
+  "invite-your-team": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "invite-your-team.adoc"
+  },
+  "example-configs": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "example-configs.adoc"
+  },
+  "status-badges": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "status-badges.adoc"
+  },
+  "migrating-from-travis": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-travis.adoc"
+  },
+  "migrating-from-jenkins": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-jenkins.adoc"
+  },
+  "workspaces": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "workspaces.adoc"
+  },
+  "runner-api": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-api.adoc"
+  },
+  "glossary": {
+    "component": "reference",
+    "module": "ROOT",
+    "filename": "glossary.adoc"
+  },
+  "insights-glossary": {
+    "component": "guides",
+    "module": "insights",
+    "filename": "insights-glossary.adoc"
+  },
+  "create-an-orb": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "create-an-orb.adoc"
+  },
+  "runner-feature-comparison-matrix": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-feature-comparison-matrix.adoc"
+  },
+  "orb-author-faq": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "orb-author-faq.adoc"
+  },
+  "install-machine-runner-3-on-linux": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "install-machine-runner-3-on-linux.adoc"
+  },
+  "managing-api-tokens": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "managing-api-tokens.adoc"
+  },
+  "create-and-manage-config-policies": {
+    "component": "guides",
+    "module": "config-policies",
+    "filename": "create-and-manage-config-policies.adoc"
+  },
+  "runner-concepts": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-concepts.adoc"
+  },
+  "language-python": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "language-python.adoc"
+  },
+  "testing-llm-enabled-applications-through-evaluations": {
+    "component": "guides",
+    "module": "test",
+    "filename": "testing-llm-enabled-applications-through-evaluations.adoc"
+  },
+  "troubleshoot-pipelines": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "troubleshoot-pipelines.adoc"
+  },
+  "api-intro": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "api-intro.adoc"
+  },
+  "creating-orbs": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "creating-orbs.adoc"
+  },
+  "troubleshoot-self-hosted-runner": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "troubleshoot-self-hosted-runner.adoc"
+  },
+  "deploy-to-google-cloud-platform": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-google-cloud-platform.adoc"
+  },
+  "triggers-overview": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "triggers-overview.adoc"
+  },
+  "migrate-from-launch-agent-to-machine-runner-3-on-macos": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "migrate-from-launch-agent-to-machine-runner-3-on-macos.adoc"
+  },
+  "install-machine-runner-3-on-docker": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "install-machine-runner-3-on-docker.adoc"
+  },
+  "using-gpu": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "using-gpu.adoc"
+  },
+  "migration-intro": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migration-intro.adoc"
+  },
+  "orb-concepts": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "orb-concepts.adoc"
+  },
+  "prevent-unregistered-users-from-spending-credits": {
+    "component": "guides",
+    "module": "plans-pricing",
+    "filename": "prevent-unregistered-users-from-spending-credits.adoc"
+  },
+  "get-started-with-the-vs-code-extension": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "get-started-with-the-vs-code-extension.adoc"
+  },
+  "local-cli": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "local-cli.adoc"
+  },
+  "how-to-use-the-circleci-local-cli": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "how-to-use-the-circleci-local-cli.adoc"
+  },
+  "contexts": {
+    "component": "guides",
+    "module": "security",
+    "filename": "contexts.adoc"
+  },
+  "migrating-from-buildkite": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-buildkite.adoc"
+  },
+  "sample-config": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "sample-config.adoc"
+  },
+  "plan-scale": {
+    "component": "guides",
+    "module": "plans-pricing",
+    "filename": "plan-scale.adoc"
+  },
+  "hello-world-windows": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "hello-world-windows.adoc"
+  },
+  "notify-a-slack-channel-of-a-paused-workflow": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "notify-a-slack-channel-of-a-paused-workflow.adoc"
+  },
+  "runner-installation-linux": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-installation-linux.adoc"
+  },
+  "using-linuxvm": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "using-linuxvm.adoc"
+  },
+  "notifications": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "notifications.adoc"
+  },
+  "troubleshoot": {
+    "component": "reference",
+    "module": "ROOT",
+    "filename": "troubleshoot.adoc"
+  },
+  "migrate-from-deploy-to-run": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "migrate-from-deploy-to-run.adoc"
+  },
+  "enable-checks": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "enable-checks.adoc"
+  },
+  "ios-codesigning": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "ios-codesigning.adoc"
+  },
+  "rename-organizations-and-repositories": {
+    "component": "guides",
+    "module": "security",
+    "filename": "rename-organizations-and-repositories.adoc"
+  },
+  "config-policies-for-self-hosted-runner": {
+    "component": "guides",
+    "module": "config-policies",
+    "filename": "config-policies-for-self-hosted-runner.adoc"
+  },
+  "databases": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "databases.adoc"
+  },
+  "vs-code-extension-overview": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "vs-code-extension-overview.adoc"
+  },
+  "deploy-service-update-to-aws-ecs": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-service-update-to-aws-ecs.adoc"
+  },
+  "orb-development-kit": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "orb-development-kit.adoc"
+  },
+  "intelligent-summaries": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "intelligent-summaries.adoc"
+  },
+  "testing-macos": {
+    "component": "guides",
+    "module": "test",
+    "filename": "testing-macos.adoc"
+  },
+  "oss": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "oss.adoc"
+  },
+  "container-runner": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "container-runner.adoc"
+  },
+  "outbound-webhooks": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "outbound-webhooks.adoc"
+  },
+  "controlling-serial-execution-across-your-organization": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "controlling-serial-execution-across-your-organization.adoc"
+  },
+  "runner-installation-mac": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-installation-mac.adoc"
+  },
+  "test-splitting-tutorial": {
+    "component": "guides",
+    "module": "test",
+    "filename": "test-splitting-tutorial.adoc"
+  },
+  "jira-plugin": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "jira-plugin.adoc"
+  },
+  "using-shell-scripts": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "using-shell-scripts.adoc"
+  },
+  "deploy-to-amazon-sagemaker": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-amazon-sagemaker.adoc"
+  },
+  "xcode-policy": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "xcode-policy.adoc"
+  },
+  "deploy-to-artifactory": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-to-artifactory.adoc"
+  },
+  "new-relic-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "new-relic-integration.adoc"
+  },
+  "orb-author": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "orb-author.adoc"
+  },
+  "code-coverage": {
+    "component": "guides",
+    "module": "test",
+    "filename": "code-coverage.adoc"
+  },
+  "browser-testing": {
+    "component": "guides",
+    "module": "test",
+    "filename": "browser-testing.adoc"
+  },
+  "variables": {
+    "component": "reference",
+    "module": "ROOT",
+    "filename": "variables.adoc"
+  },
+  "building-docker-images": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "building-docker-images.adoc"
+  },
+  "add-ssh-key": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "add-ssh-key.adoc"
+  },
+  "orbs-faq": {
+    "component": "orbs",
+    "module": "use",
+    "filename": "orbs-faq.adoc"
+  },
+  "manage-roles-and-permissions": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "manage-roles-and-permissions.adoc"
+  },
+  "about-circleci": {
+    "component": "guides",
+    "module": "about-circleci",
+    "filename": "about-circleci.adoc"
+  },
+  "orb-author-validate-publish": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "orb-author-validate-publish.adoc"
+  },
+  "jobs-steps": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "jobs-steps.adoc"
+  },
+  "postgres-config": {
+    "component": "guides",
+    "module": "toolkit",
+    "filename": "postgres-config.adoc"
+  },
+  "testing-orbs": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "testing-orbs.adoc"
+  },
+  "testing-ios": {
+    "component": "guides",
+    "module": "test",
+    "filename": "testing-ios.adoc"
+  },
+  "schedule-pipelines-with-multiple-workflows": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "schedule-pipelines-with-multiple-workflows.adoc"
+  },
+  "security-recommendations": {
+    "component": "guides",
+    "module": "security",
+    "filename": "security-recommendations.adoc"
+  },
+  "insights-tests": {
+    "component": "guides",
+    "module": "insights",
+    "filename": "insights-tests.adoc"
+  },
+  "runner-upgrading-on-server": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-upgrading-on-server.adoc"
+  },
+  "using-windows": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "using-windows.adoc"
+  },
+  "security-overview": {
+    "component": "guides",
+    "module": "security",
+    "filename": "security-overview.adoc"
+  },
+  "using-macos": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "using-macos.adoc"
+  },
+  "migrating-from-gitlab": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-gitlab.adoc"
+  },
+  "orbs-best-practices": {
+    "component": "orbs",
+    "module": "author",
+    "filename": "orbs-best-practices.adoc"
+  },
+  "migrate-from-launch-agent-to-machine-runner-3-on-windows": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "migrate-from-launch-agent-to-machine-runner-3-on-windows.adoc"
+  },
+  "orchestration-cookbook": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "orchestration-cookbook.adoc"
+  },
+  "parallelism-faster-jobs": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "parallelism-faster-jobs.adoc"
+  },
+  "plan-server": {
+    "component": "guides",
+    "module": "plans-pricing",
+    "filename": "plan-server.adoc"
+  },
+  "linux-vm-support-policy": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "linux-vm-support-policy.adoc"
+  },
+  "webhooks-airtable": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "webhooks-airtable.adoc"
+  },
+  "docker-to-machine": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "docker-to-machine.adoc"
+  },
+  "scheduled-pipelines": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "scheduled-pipelines.adoc"
+  },
+  "docker-layer-caching": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "docker-layer-caching.adoc"
+  },
+  "pull-an-image-from-aws-ecr-with-oidc": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "pull-an-image-from-aws-ecr-with-oidc.adoc"
+  },
+  "migrating-from-aws": {
+    "component": "guides",
+    "module": "migrate",
+    "filename": "migrating-from-aws.adoc"
+  },
+  "install-machine-runner-3-on-windows": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "install-machine-runner-3-on-windows.adoc"
+  },
+  "set-a-nightly-scheduled-pipeline": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "set-a-nightly-scheduled-pipeline.adoc"
+  },
+  "ecs-ecr": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "ecs-ecr.adoc"
+  },
+  "ssh-access-jobs": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "ssh-access-jobs.adoc"
+  },
+  "caching": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "caching.adoc"
+  },
+  "first-steps": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "first-steps.adoc"
+  },
+  "plan-performance": {
+    "component": "guides",
+    "module": "plans-pricing",
+    "filename": "plan-performance.adoc"
+  },
+  "skip-build": {
+    "component": "guides",
+    "module": "orchestrate",
+    "filename": "skip-build.adoc"
+  },
+  "open-source": {
+    "component": "guides",
+    "module": "about-circleci",
+    "filename": "open-source.adoc"
+  },
+  "using-arm": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "using-arm.adoc"
+  },
+  "language-go": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "language-go.adoc"
+  },
+  "config-policy-reference": {
+    "component": "guides",
+    "module": "config-policies",
+    "filename": "config-policy-reference.adoc"
+  },
+  "automate-llm-evaluation-testing-with-the-circleci-evals-orb": {
+    "component": "guides",
+    "module": "test",
+    "filename": "automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc"
+  },
+  "audit-logs": {
+    "component": "guides",
+    "module": "security",
+    "filename": "audit-logs.adoc"
+  },
+  "datadog-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "datadog-integration.adoc"
+  },
+  "github-apps-integration": {
+    "component": "guides",
+    "module": "integration",
+    "filename": "github-apps-integration.adoc"
+  },
+  "artifacts": {
+    "component": "guides",
+    "module": "optimize",
+    "filename": "artifacts.adoc"
+  },
+  "runner-installation-windows": {
+    "component": "guides",
+    "module": "execution-runner",
+    "filename": "runner-installation-windows.adoc"
+  },
+  "high-uid-error": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "high-uid-error.adoc"
+  },
+  "create-project": {
+    "component": "guides",
+    "module": "getting-started",
+    "filename": "create-project.adoc"
+  },
+  "deploy-over-ssh": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploy-over-ssh.adoc"
+  },
+  "resource-class-overview": {
+    "component": "guides",
+    "module": "execution-managed",
+    "filename": "resource-class-overview.adoc"
+  },
+  "set-up-deploys": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "set-up-deploys.adoc"
+  },
+  "set-up-rollbacks": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "set-up-rollbacks.adoc"
+  },
+  "configure-deploy-markers": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "configure-deploy-markers.adoc"
+  },
+  "deploys-overview": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "deploys-overview.adoc"
+  },
+  "rollback-a-project-by-workflow-rerun": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "rollback-a-project-by-workflow-rerun.adoc"
+  },
+  "update-the-kubernetes-release-agent": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "update-the-kubernetes-release-agent.adoc"
+  },
+  "rollback-a-project-using-the-rollback-pipeline": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "rollback-a-project-using-the-rollback-pipeline.adoc"
+  },
+  "configure-your-kubernetes-components": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "configure-your-kubernetes-components.adoc"
+  },
+  "set-up-circleci-deploys": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "set-up-circleci-deploys.adoc"
+  },
+  "set-up-the-release-agent": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "set-up-the-release-agent.adoc"
+  },
+  "manage-deploys": {
+    "component": "guides",
+    "module": "deploy",
+    "filename": "manage-deploys.adoc"
+  },
+  "hardening-your-cluster": {
+    "component": "server-admin-4.6",
+    "module": "installation",
+    "filename": "hardening-your-cluster.adoc"
+  },
+  "upgrade-server": {
+    "component": "server-admin-4.6",
+    "module": "installation",
+    "filename": "upgrade-server.adoc"
+  },
+  "phase-4-post-installation": {
+    "component": "server-admin-4.6",
+    "module": "installation",
+    "filename": "phase-4-post-installation.adoc"
+  },
+  "phase-3-execution-environments": {
+    "component": "server-admin-4.6",
+    "module": "installation",
+    "filename": "phase-3-execution-environments.adoc"
+  },
+  "installing-server-behind-a-proxy": {
+    "component": "server-admin-4.6",
+    "module": "installation",
+    "filename": "installing-server-behind-a-proxy.adoc"
+  },
+  "phase-2-core-services": {
+    "component": "server-admin-4.6",
+    "module": "installation",
+    "filename": "phase-2-core-services.adoc"
+  },
+  "installation-reference": {
+    "component": "server-admin-4.6",
+    "module": "installation",
+    "filename": "installation-reference.adoc"
+  },
+  "phase-1-prerequisites": {
+    "component": "server-admin-4.6",
+    "module": "air-gapped-installation",
+    "filename": "phase-1-prerequisites.adoc"
+  },
+  "circleci-server-overview": {
+    "component": "server-admin-4.6",
+    "module": "overview",
+    "filename": "circleci-server-overview.adoc"
+  },
+  "release-notes": {
+    "component": "server-admin-4.6",
+    "module": "overview",
+    "filename": "release-notes.adoc"
+  },
+  "additional-considerations": {
+    "component": "server-admin-4.6",
+    "module": "air-gapped-installation",
+    "filename": "additional-considerations.adoc"
+  },
+  "phase-3-install-circleci-server": {
+    "component": "server-admin-4.6",
+    "module": "air-gapped-installation",
+    "filename": "phase-3-install-circleci-server.adoc"
+  },
+  "phase-5-test-your-installation": {
+    "component": "server-admin-4.6",
+    "module": "air-gapped-installation",
+    "filename": "phase-5-test-your-installation.adoc"
+  },
+  "phase-2-configure-object-storage": {
+    "component": "server-admin-4.6",
+    "module": "air-gapped-installation",
+    "filename": "phase-2-configure-object-storage.adoc"
+  },
+  "phase-4-configure-nomad-clients": {
+    "component": "server-admin-4.6",
+    "module": "air-gapped-installation",
+    "filename": "phase-4-configure-nomad-clients.adoc"
+  },
+  "example-values": {
+    "component": "server-admin-4.6",
+    "module": "air-gapped-installation",
+    "filename": "example-values.adoc"
+  },
+  "upgrade-mongo": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "upgrade-mongo.adoc"
+  },
+  "usage-data-collection": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "usage-data-collection.adoc"
+  },
+  "application-lifecycle": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "application-lifecycle.adoc"
+  },
+  "managing-load-balancers": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "managing-load-balancers.adoc"
+  },
+  "managing-build-artifacts": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "managing-build-artifacts.adoc"
+  },
+  "user-authentication": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "user-authentication.adoc"
+  },
+  "manage-virtual-machines-with-machine-provisioner": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "manage-virtual-machines-with-machine-provisioner.adoc"
+  },
+  "backup-and-restore": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "backup-and-restore.adoc"
+  },
+  "troubleshooting-and-support": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "troubleshooting-and-support.adoc"
+  },
+  "expanding-internal-database-volumes": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "expanding-internal-database-volumes.adoc"
+  },
+  "configuring-external-services": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "configuring-external-services.adoc"
+  },
+  "managing-orbs": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "managing-orbs.adoc"
+  },
+  "introduction-to-nomad-cluster-operation": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "introduction-to-nomad-cluster-operation.adoc"
+  },
+  "managing-user-accounts": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "managing-user-accounts.adoc"
+  },
+  "operator-overview": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "operator-overview.adoc"
+  },
+  "circleci-server-security-features": {
+    "component": "server-admin-4.6",
+    "module": "operator",
+    "filename": "circleci-server-security-features.adoc"
+  },
+  "manage-virtual-machines-with-vm-service": {
+    "component": "server-admin-4.1",
+    "module": "operator",
+    "filename": "manage-virtual-machines-with-vm-service.adoc"
+  },
+  "phase-3-gcp-execution-environments": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-3-gcp-execution-environments.adoc"
+  },
+  "phase-4-gcp-post-installation": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-4-gcp-post-installation.adoc"
+  },
+  "phase-2-aws-core-services": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-2-aws-core-services.adoc"
+  },
+  "phase-1-aws-prerequisites": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-1-aws-prerequisites.adoc"
+  },
+  "phase-4-aws-post-installation": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-4-aws-post-installation.adoc"
+  },
+  "phase-1-gcp-prerequisites": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-1-gcp-prerequisites.adoc"
+  },
+  "phase-2-gcp-core-services": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-2-gcp-core-services.adoc"
+  },
+  "phase-3-aws-execution-environments": {
+    "component": "server-admin-latest",
+    "module": "installation",
+    "filename": "phase-3-aws-execution-environments.adoc"
+  },
+  "style-and-voice": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "style-and-voice.adoc"
+  },
+  "style-guide-overview": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "style-guide-overview.adoc"
+  },
+  "using-code-samples": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "using-code-samples.adoc"
+  },
+  "headings": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "headings.adoc"
+  },
+  "links": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "links.adoc"
+  },
+  "using-lists": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "using-lists.adoc"
+  },
+  "using-images": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "using-images.adoc"
+  },
+  "using-tables": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "using-tables.adoc"
+  },
+  "formatting": {
+    "component": "contributors",
+    "module": "docs-style",
+    "filename": "formatting.adoc"
+  },
+  "template-conceptual": {
+    "component": "contributors",
+    "module": "templates",
+    "filename": "template-conceptual.adoc"
+  },
+  "template-tutorial": {
+    "component": "contributors",
+    "module": "templates",
+    "filename": "template-tutorial.adoc"
+  },
+  "test-page-one": {
+    "component": "contributors",
+    "module": "templates",
+    "filename": "test-page-one.adoc"
+  },
+  "template-how-to": {
+    "component": "contributors",
+    "module": "templates",
+    "filename": "template-how-to.adoc"
+  },
+  "mfa": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "mfa.adoc"
+  },
+  "sso-overview": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "sso-overview.adoc"
+  },
+  "sign-in-to-an-sso-enabled-organization": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "sign-in-to-an-sso-enabled-organization.adoc"
+  },
+  "set-up-sso": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "set-up-sso.adoc"
+  },
+  "sso-group-mapping": {
+    "component": "guides",
+    "module": "permissions-authentication",
+    "filename": "sso-group-mapping.adoc"
+  }
+}

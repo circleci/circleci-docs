@@ -1,0 +1,220 @@
+version: 2.1
+
+parameters:
+  force-ui-rebuild:
+    type: boolean
+    default: false
+    description: "Force UI bundle rebuild regardless of changes detected"
+
+orbs:
+  aws-cli: circleci/aws-cli@5.4.1
+  vale: circleci/vale@1.2.1
+  go: circleci/go@3.0.4
+
+executors:
+  node_executor:
+    docker:
+      - image: cimg/node:24.15.0
+    working_directory: ~/project
+
+  go_executor:
+    docker:
+      - image: cimg/go:1.26
+    working_directory: ~/project
+
+  ruby_executor:
+    docker:
+      - image: cimg/ruby:4.0.2
+    working_directory: ~/project
+
+commands:
+  aws-setup:
+    steps:
+      - aws-cli/setup:
+          aws_access_key_id: ${AWS_ACCESS_KEY_ID}
+          aws_secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+          region: ${AWS_REGION}
+
+  notify_error:
+    parameters:
+      message:
+        type: string
+    steps:
+      - run:
+          name: Log Error
+          when: on_fail
+          command: |
+            echo "[ERROR] << parameters.message >>"
+
+jobs:
+  build:
+    executor: node_executor
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore npm cache
+          keys:
+            - npm-deps-{{ checksum "package-lock.json" }}
+            - npm-deps-
+      - run:
+          name: Install Node Dependencies
+          command: npm ci
+      - save_cache:
+          name: Save npm cache
+          key: npm-deps-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+      - restore_cache:
+          name: Restore UI bundle cache
+          keys:
+            - ui-bundle-v1-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+            - ui-bundle-v1-{{ checksum "ui/package-lock.json" }}
+      - run:
+          name: Check if UI rebuild needed
+          command: |
+            set -e
+            echo "[INFO] Checking if UI rebuild is necessary..."
+
+            # Check if force rebuild parameter is set
+            if [ "<< pipeline.parameters.force-ui-rebuild >>" = "true" ]; then
+              echo "[INFO] Force UI rebuild parameter enabled, rebuilding UI bundle"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+              exit 0
+            fi
+
+            # Determine base branch for comparison
+            if [ "${CIRCLE_BRANCH}" = "main" ]; then
+              BASE_REF="HEAD~1"
+              echo "[INFO] On main branch, comparing against HEAD~1"
+            else
+              BASE_REF="origin/main"
+              echo "[INFO] On feature branch, comparing against origin/main"
+            fi
+
+            # Check for dependency file changes (forces full UI rebuild)
+            DEPENDENCY_FILES="package.json package-lock.json ui/package.json ui/package-lock.json .circleci/config.yml gulpfile.js"
+            DEPENDENCY_CHANGED=false
+
+            for file in $DEPENDENCY_FILES; do
+              if ! git diff --quiet $BASE_REF HEAD -- "$file" 2>/dev/null; then
+                echo "[INFO] Dependency file changed: $file"
+                DEPENDENCY_CHANGED=true
+              fi
+            done
+
+            # Check for changes to build task files
+            if ! git diff --quiet $BASE_REF HEAD -- gulp.d/ 2>/dev/null; then
+              echo "[INFO] Build task files changed in gulp.d/"
+              DEPENDENCY_CHANGED=true
+            fi
+
+            if [ "$DEPENDENCY_CHANGED" = true ]; then
+              echo "[INFO] Dependency changes detected, forcing UI rebuild"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+            elif [ ! -f "ui-bundle.zip" ]; then
+              echo "[INFO] No cached UI bundle found, will build UI"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+            elif git diff --quiet $BASE_REF HEAD -- ui/; then
+              echo "[INFO] No UI changes detected, skipping UI rebuild"
+              echo "export SKIP_UI_BUILD=true" >> $BASH_ENV
+            else
+              echo "[INFO] UI changes detected, will rebuild UI bundle"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+            fi
+      - run:
+          name: Build UI bundle (conditional)
+          command: |
+            set -e
+            if [ "$SKIP_UI_BUILD" = "true" ]; then
+              echo "[INFO] Skipping UI build (using cached bundle)"
+            else
+              echo "[INFO] Building UI bundle..."
+              npm run build:ui
+              echo "[INFO] UI bundle built successfully"
+            fi
+      - save_cache:
+          name: Save UI bundle cache
+          key: ui-bundle-v1-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+          paths:
+            - ui-bundle.zip
+            - ui/node_modules
+      - run:
+          name: Build the Documentation Site with Antora
+          command: |
+            set -e
+            echo "[INFO] Starting Antora build..."
+            NODE_OPTIONS="--max-old-space-size=4096" npx gulp build:docs
+            echo "[INFO] Antora build completed."
+      - store_artifacts:
+          path: build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+      - notify_error:
+          message: "Build job failed for branch ${CIRCLE_BRANCH}"
+
+  validate:
+    executor: go_executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - go/with-cache:
+          golangci-lint: true
+          mod: true
+          steps:
+            - run: task mod-download
+            - run: task ci:diff
+            - run: task ci:lint
+            - run: task validate-html
+      - notify_error:
+          message: "Validation job failed for branch ${CIRCLE_BRANCH}"
+
+  deploy-production:
+    executor: go_executor
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - aws-setup
+      - go/with-cache:
+          mod: true
+          steps:
+            - run: task mod-download
+            - run: task deploy
+            - run: task deploy-redirects
+            - run: task validate-redirects
+      - notify_error:
+          message: "Production deployment job failed for branch ${CIRCLE_BRANCH}"
+
+workflows:
+  main:
+    jobs:
+      - vale/lint:
+          reference_branch: main
+          base_dir: docs
+          filters: pipeline.git.branch != "main"
+
+      - build:
+          filters: pipeline.git.branch == "main"
+          name: build-main
+          context:
+            - circleci-docs-static
+      - build:
+          filters: pipeline.git.branch != "main"
+
+      - validate:
+          requires:
+            - build-main
+            - build
+
+      - deploy-production:
+          requires:
+            - validate
+          filters: pipeline.git.branch == "main"
+          context:
+            - circleci-docs-static
+            - docs-platform-assets
+            - web-ui-npm
+            - web-ui-datadog

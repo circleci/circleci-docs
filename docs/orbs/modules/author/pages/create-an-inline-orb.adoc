@@ -1,0 +1,314 @@
+= Create an inline orb
+:page-platform: Cloud, Server v4+
+:page-description: How to author inline orbs for your projects
+:experimental:
+:page-show-readtime: true
+
+This guide covers how to create inline orbs for packaging reusable configuration elements within your project.
+
+== Introduction
+
+Inline orbs are reusable packages of CircleCI configuration defined directly within your project's `.circleci/config.yml` file. Unlike URL orbs or registry orbs, inline orbs are:
+
+* Project-specific and not shared externally.
+* Require no publishing, versioning, or external hosting.
+* Ideal for learning orb concepts, testing configurations, or organizing project-specific reusable elements.
+
+Inline orbs contain the same reusable configuration elements as URL orbs and registry orbs:
+
+* xref:use:orb-concepts.adoc#commands[Commands]
+* xref:use:orb-concepts.adoc#jobs[Jobs]
+* xref:use:orb-concepts.adoc#executors[Executors]
+
+The key difference is that inline orbs exist only within your configuration file and cannot be shared with other projects.
+
+[NOTE]
+====
+This guide covers **inline orbs**. For information on creating orbs that can be shared across your organization, see xref:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs]. For publicly shareable orbs, see xref:create-test-and-publish-a-registry-orb.adoc[Create, Test, and Publish a Registry Orb].
+====
+
+For a complete comparison of all three orb types, see the xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] section.
+
+== Prerequisites
+
+Before creating an inline orb, you should be familiar with:
+
+* xref:guides:getting-started:config-intro.adoc[CircleCI Configuration Basics].
+* xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Elements] (commands, jobs, executors).
+* YAML syntax.
+
+== Inline orb structure
+
+Inline orbs follow the same structure as URL orbs and registry orbs:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  my-inline-orb:
+    commands:
+      # Your reusable commands
+    jobs:
+      # Your reusable jobs
+    executors:
+      # Your reusable executors
+
+workflows:
+  my-workflow:
+    jobs:
+      - my-inline-orb/my-job
+----
+
+Once defined, inline orb elements are available as `<orb-name>/<element>` within the same configuration file.
+
+For detailed information on each element, see xref:use:orb-concepts.adoc#orb-configuration-elements[Orb Configuration Elements].
+
+[#creating-an-inline-orb]
+== Creating an inline orb
+
+To create an inline orb, place the orb elements under a custom orb key in the `orbs` declaration section of your configuration. Use the examples below to help you configure your inline orb.
+
+[#basic-example]
+=== Example: Basic inline orb with commands and jobs
+
+The following example shows a simple inline orb with a custom command and job for deployment:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  deploy-tools:
+    commands:
+      deploy:
+        description: Deploy application to specified environment
+        parameters:
+          environment:
+            type: string
+            description: Target environment (staging, production)
+        steps:
+          - run:
+              name: Deploy to << parameters.environment >>
+              command: |
+                echo "Deploying to << parameters.environment >>"
+                ./scripts/deploy.sh << parameters.environment >>
+
+    jobs:
+      deploy-to-staging:
+        docker:
+          - image: cimg/base:current
+        steps:
+          - checkout
+          - deploy:
+              environment: staging
+
+workflows:
+  deploy:
+    jobs:
+      - deploy-tools/deploy-to-staging
+----
+
+In this example:
+
+* The `deploy-tools` inline orb defines a `deploy` command that takes an environment parameter.
+* The `deploy-to-staging` job uses the `deploy` command to deploy to staging.
+* The workflow references the job as `deploy-tools/deploy-to-staging`.
+
+[#executor-example]
+=== Example: Inline orb with custom executor
+
+The following example shows an inline orb defining a reusable executor with parameters:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  my-tools:
+    executors:
+      python:
+        description: Python execution environment
+        parameters:
+          version:
+            type: string
+            default: "3.9"
+            description: Python version to use
+        docker:
+          - image: cimg/python:<< parameters.version >>
+
+    commands:
+      run-tests:
+        description: Run pytest tests
+        steps:
+          - run:
+              name: Run tests
+              command: pytest tests/
+
+    jobs:
+      test:
+        description: Run tests in Python environment
+        parameters:
+          python-version:
+            type: string
+            default: "3.9"
+            description: Python version for testing
+        executor:
+          name: python
+          version: << parameters.python-version >>
+        steps:
+          - checkout
+          - run: pip install -r requirements.txt
+          - run-tests
+
+workflows:
+  test:
+    jobs:
+      - my-tools/test:
+          python-version: "3.11"
+      - my-tools/test:
+          python-version: "3.9"
+----
+
+In this example:
+
+* The `python` executor is parameterized to support different Python versions.
+* The `test` job uses the executor and can be run with different Python versions.
+* The workflow runs tests on both Python 3.11 and 3.9.
+
+[#importing-orbs-example]
+=== Example: Inline orb importing other orbs
+
+You can import registry orbs or URL orbs within an inline orb. The following example shows an inline orb that imports the Node orb:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  my-orb:
+    orbs:
+      node: circleci/node@5.0
+    commands:
+      my-command:
+        description: Run custom tests
+        steps:
+          - run:
+              name: Run my tests
+              command: npm test
+    jobs:
+      my-job:
+        executor: node/default # Use Node orb executor
+        steps:
+          - checkout
+          - node/install-packages # Use Node orb command
+          - my-command # Use inline orb command
+          - store_test_results:
+              path: test-results
+
+workflows:
+  main:
+    jobs:
+      - my-orb/my-job
+----
+
+In this example:
+
+* The `my-orb` inline orb imports the `circleci/node` registry orb.
+* The `my-job` job uses the Node orb's executor and commands.
+* The inline orb adds custom functionality on top of the Node orb.
+
+[#namespace-example]
+=== Example: Using inline orbs for namespace organization
+
+You can use inline orbs to organize configuration elements that share names:
+
+[,yaml]
+----
+version: 2.1
+
+orbs:
+  backend:
+    jobs:
+      test:
+        docker:
+          - image: cimg/python:3.11
+        steps:
+          - checkout
+          - run: pytest backend/tests/
+
+      deploy:
+        docker:
+          - image: cimg/base:current
+        steps:
+          - run: echo "Deploying backend"
+
+  frontend:
+    jobs:
+      test:
+        docker:
+          - image: cimg/node:lts
+        steps:
+          - checkout
+          - run: npm test
+
+      deploy:
+        docker:
+          - image: cimg/base:current
+        steps:
+          - run: echo "Deploying frontend"
+
+workflows:
+  main:
+    jobs:
+      - backend/test
+      - backend/deploy:
+          requires:
+            - backend/test
+      - frontend/test
+      - frontend/deploy:
+          requires:
+            - frontend/test
+----
+
+In this example:
+
+* Both `backend` and `frontend` inline orbs define `test` and `deploy` jobs.
+* The namespace prevents naming conflicts.
+* Jobs are referenced as `backend/test` and `frontend/test`.
+
+[#validating-inline-orb]
+== Validating your inline orb
+
+You can validate your inline orb syntax using the CircleCI CLI:
+
+[,shell]
+----
+circleci config validate
+----
+
+This command validates your entire `.circleci/config.yml` file, including any inline orbs. The validation checks:
+
+* YAML syntax correctness.
+* CircleCI configuration schema compliance.
+* Parameter types and usage.
+* Orb element references.
+
+TIP: If you do not have the CircleCI CLI installed, see the xref:guides:toolkit:local-cli.adoc[Installing the Local CLI] page for instructions.
+
+[#testing-inline-orb]
+== Testing your inline orb
+
+As inline orbs are defined within your config, you can test them immediately by:
+
+. Committing your config changes to your repository.
+. Triggering a pipeline in CircleCI (via push, API, or web app).
+. Observing the results in the CircleCI web app.
+
+Any changes to your inline orb take effect immediately in the next pipeline run.
+
+[#see-also]
+== See also
+
+* xref:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] for comparing inline orbs with URL and registry orbs.
+* xref:use:orbs-faq.adoc[Orbs FAQ] for common questions about orbs.

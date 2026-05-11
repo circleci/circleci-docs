@@ -1,0 +1,10 @@
+name: server-admin
+title: Server
+version: server-4.4
+display_version: Server 4.4
+asciidoc:
+  attributes:
+    kubernetesversions: 1.26 - 1.31
+nav:
+- modules/ROOT/nav.adoc
+start_page: overview:circleci-server-overview.adoc

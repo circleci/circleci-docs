@@ -1,0 +1,43 @@
+= Deploy a component
+:page-platform: Cloud
+:page-description:
+:experimental:
+:page-show-readtime: true
+
+Deploy pipelines allow you to deploy your components to a target environment. This guide covers how to configure your CircleCI pipeline to support manual deployment capabilities using a deploy pipeline.
+
+== Introduction
+
+CircleCI deploy pipelines allow you to deploy a specific version of your component to a target environment using a custom deploy pipeline. By deploying an already-built and tested version, you can skip the build process that would normally be part of a CircleCI pipeline and deploy right away. This provides fast execution and full control over the deployment process, making it ideal for complex systems and time-critical requirements.
+
+== Prerequisites
+
+To deploy a component using a deploy pipeline ensure you have set up deploy markers and a deploy pipeline, as described in the xref:set-up-deploys.adoc[Set up a Deploy Pipeline] guide.
+
+== Deploy using a deploy pipeline
+
+To deploy a component using the deploy pipeline you can select the btn:[Deploy] button on the project overview page. The following steps show how to deploy a component from the project overview page:
+
+. In the link:https://app.circleci.com[CircleCI web app], select your org from the org cards on your user homepage.
+. Select **Projects** from the sidebar and locate your project from the list. You can use the search to help.
+. Select the *Overview* link for your project.
+. Select btn:[Deploy]. This opens the deploy execution modal.
++
+.Deploy execution modal
+image::guides:ROOT:deploy/deploy-execution-modal.png[Deploy execution modal]
++
+The modal displays several configuration options with parameters auto-filled based on your deploy configuration. The following sections explain each required property:
++
+*Component Name*:: The name of the component you wish to deploy. If your project deploys multiple components, this helps you choose a specific component you want to deploy.
+*Version to deploy*:: The version of the component you wish to deploy.
+*Target Environment*:: The environment to which you wish to deploy the version.
+*Deploy reason*:: You can optionally provide a reason for the deployment.
+*Additional settings*:: At the bottom of the modal you can expand the "Additional settings" section in which you can access the following settings:
++
+* The namespace for your deployment if your deployment target requires it. You can leave namespace empty, in which case the `default` value will be used.
+* You can set the config and checkout sources for your deployment.
+* The Parameters section shows the auto-filled parameters from your configuration file, which you can modify as needed for the specific deployment.
+
+. Select btn:[Deploy] to trigger the deploy pipeline.
+
+The deploy pipeline will execute and perform the deployment operation according to your configuration.

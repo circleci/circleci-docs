@@ -1,0 +1,25 @@
+version: 2.1
+
+orbs:
+  my-orb: << url-ref >>
+
+jobs:
+  build:
+    steps: 
+      - run: task build
+  test:
+    steps:
+      - run: task test
+  deploy:
+    steps:
+      - run: ccc deploy
+
+workflows:
+  - build-test-deploy:
+      jobs:
+        - build
+        - test:
+            override-with: my-orb/my-test
+            requires: build
+        - deploy:
+            requires: test

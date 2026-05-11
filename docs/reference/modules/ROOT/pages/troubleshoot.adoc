@@ -1,0 +1,36 @@
+= Troubleshoot
+:page-platform: Cloud, Server v4+
+:page-description: Troubleshoot CircleCI and various setups and integrations.
+:experimental:
+
+This page offers troubleshooting suggestions for the following aspects of CircleCI:
+
+[.table]
+
+[.table-scroll]
+--
+[cols=2*]
+|===
+| <<orbs>>
+| <<container-runner>>
+
+| <<pipelines>>
+| <<machine-runner>>
+
+|===
+--
+
+== Orbs
+
+include::guides:ROOT:partial$troubleshoot/orb-troubleshoot-snip.adoc[]
+
+== Pipelines
+
+include::guides:ROOT:partial$troubleshoot/pipelines-troubleshoot-snip.adoc[]
+
+// Self-hosted runner (H2s need to be in the snippet for now)
+include::guides:ROOT:partial$troubleshoot/self-hosted-runner-troubleshoot-snip.adoc[]
+
+== Releases
+
+include::guides:ROOT:partial$troubleshoot/releases-troubleshoot.adoc[]

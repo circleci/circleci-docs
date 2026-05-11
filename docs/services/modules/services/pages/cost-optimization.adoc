@@ -1,0 +1,24 @@
+= Cost optimization analysis service
+:page-description: Cost optimization service
+
+The cost optimization analysis service helps reduce credit spend for jobs with high usage. Your field engineer reviews jobs across projects and recommends optimizations using CircleCI data. The service highlights credit-saving opportunities and recommends best practices.
+
+== Benefits
+
+Teams who take advantage of a cost optimization analysis save credits by:
+
+* Receiving a report on jobs across projects that gain from right-sizing resource classes.
+* Getting feature and caching recommendations for jobs across your organization.
+* Working with their field engineer to analyze jobs across the organization.
+* Learning how your field engineer uses CircleCI data to analyze your organization.
+
+== Intended audience
+
+A cost optimization analysis is most useful for organizations that:
+
+* Are seeing unexpected increases in credit usage.
+* Do not have a single team responsible for DevOps management.
+* Have made a recent major change to their pipelines.
+* Want a top-down understanding of data in their highest-credit projects.
+
+For more information, contact your CircleCI Account Team or our link:https://circleci.com/contact/[Sales team].

@@ -1,0 +1,17 @@
+= CircleCI server v4.7 FAQ
+:page-noindex: true
+:page-platform: Server v4.7, Server Admin
+:page-description: Find answers about the CircleCI server v4.7 data retention policy, what control is granted over Nomad certificates.
+:icons: font
+:toc: macro
+:toc-title:
+
+
+## Does server v4.7 have a data retention policy?
+Data retention for MongoDB and PostgreSQL can be configured by following our guide xref:data-retention.adoc[Data Retention in Server]. 
+
+## What control is granted over Nomad certificates?
+Full control of the certificates, all the way down to mTLS for Nomad.
+
+## Is it possible to change or disable the polling time which checks for health status?
+No, this is not customizable.

@@ -1,0 +1,37 @@
+[.table-scroll]
+--
+[cols=6*, options="header"]
+|===
+| Class  | vCPUs | RAM | Disk Size | Cloud | Server
+
+| `arm.medium` (default)
+| 2
+| 8GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `arm.large`
+| 4
+| 16GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `arm.xlarge`
+| 8
+| 32GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+
+| `arm.2xlarge`
+| 16
+| 64GB
+| 100 GB
+| [.circle-green]#**Yes**#
+| [.circle-green]#**Yes**#
+|===
+--
+
+NOTE: **Using server?** Check with your systems administrator whether you have access to the Arm execution environment.

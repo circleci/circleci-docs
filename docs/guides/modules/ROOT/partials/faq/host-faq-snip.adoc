@@ -1,0 +1,10 @@
+[#differences-between-circleci-hosting-options]
+=== What are the differences between CircleCI's hosting options?
+
+- *Cloud* - CircleCI manages the setup, infrastructure, security and maintenance of your services. You get instant access to new feature releases and automatic upgrades, alleviating the need for manual work on an internal system.
+- *Server* - You install and manage CircleCI, through a service like AWS or GCP. Server installations are behind a firewall that your team sets up and maintains according to your data center policy. You have full administrative control for complete customization and management of upgrades as new versions are released.
+
+[#circleci-20-available-to-enterprise-customers]
+=== Is CircleCI available to enterprise customers?
+
+Yes, CircleCI server is available for installation on AWS or GCP. See the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI server v4.x overview] for details and links to installation instructions. link:https://circleci.com/pricing/server/[Contact us] to discuss your requirements.

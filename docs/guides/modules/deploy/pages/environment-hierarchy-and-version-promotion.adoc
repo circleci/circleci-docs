@@ -1,0 +1,146 @@
+= Environment hierarchy and version promotion
+:page-platform: Cloud
+:page-description: Learn how to use environment hierarchy and version promotion to manage your deployments through multiple environments.
+:experimental:
+
+Environment hierarchy lets you define an ordered promotion path when you have multiple environments, for example, development, staging, and production. Version promotion allows you to visually promote a version through each stage from the CircleCI UI. Instead of manually tracking which version is deployed where, you get a single view of the entire release lifecycle with one-click promotion between environments.
+
+== Key concepts
+
+This section defines the two core concepts: environment hierarchy and version promotion.
+
+=== Environment hierarchy
+
+An environment hierarchy is an ordered sequence of integrations that defines a promotion path. You can create multiple hierarchies to support different promotion workflows across your organization. For example, a hierarchy could be:
+
+.Example environment hierarchy dev → staging → production
+[mermaid]
+----
+graph LR
+    Dev[Development<br/>Environment] -->|Promote| Staging[Staging<br/>Environment]
+    Staging -->|Promote| Production[Production<br/>Environment]
+----
+
+Hierarchies are configured at the organization level, with the option to override for a specific project or component. Each level in the hierarchy maps to one environment.
+
+.Example of the edit environment hierarchy modal
+image::guides:ROOT:deploy/version-promotion-page-ready.png[Version promotion page showing deployment to dev and ready to promote to staging]
+
+=== Version promotion
+
+Version promotion is the act of deploying a specific version to the next environment in the hierarchy by triggering a deploy pipeline. The version promotion page provides a visual pipeline of environments so you can see the current state of every environment at a glance and promote forward with a single click.
+
+.Example of the version promotion page with simple hierarchy
+image::guides:ROOT:deploy/version-promotion-page.png[Version promotion page]
+
+== Prerequisites
+
+Before using environment hierarchy and version promotion you need:
+
+* *Environment integrations*. At least two integrations must exist for the organization (for example, a development environment and a production environment). You can create environment integrations in the CircleCI web app at menu:Deploys[Environments], select btn:[Create environment integration] and choose the custom option. See the xref:guides:deploy:configure-deploy-markers.adoc#create-an-environment-integration[Create an Environment Integration] page for more details. You can also choose to just configure your environment when creating your deploy markers which will automatically create an environment integration for you if it does not exist already.
+
+* *Deploy markers* must be configured in your project to use a deploy pipeline. See the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page for more details.
+
+* *Deploy pipeline*. The project must have a deploy pipeline configured. You can check this in menu:Project settings[Deploys], check the Deploy Pipeline section. See the xref:guides:deploy:set-up-deploys.adoc[Set up a Deploy Pipeline] page for more details.
+
+== 1. Create a hierarchy
+
+. Navigate to menu:Org[Deploys] in the CircleCI web app.
+
+. In the Environment Hierarchy card, select btn:[Create new hierarchy].
+
+. Enter a name and optional description.
+
+. Add levels by selecting from your existing environments. Each level maps to one environment.
+
+. Order the levels to define the promotion sequence. The first level is the earliest environment (for example, dev) and the last level is the final environment (for example, production).
+
+. You can set the hierarchy as the organization default. This step is optional.
+
+.Example of the edit environment hierarchy modal
+image::guides:ROOT:deploy/edit-hierarchy-template.png[Environment hierarchy example]
+
+== 2. Promote a version
+
+. Select *Deploys* in the sidebar. You are now in your deployments timeline view. You can also refine this view by selecting a component to see a timeline for that specific component.
+
+. Find the version you want to promote in the timeline list.
+
+. Select the promote icon icon:promote[promote icon]. If an environment hierarchy exists for the component, the version promotion page opens. If no hierarchy exists, the Deploy Pipeline Modal opens so that you can choose an environment and deploy directly.
+
+. On the version promotion page you have the option to promote to the next environment using the btn:[Promote] button and retry failed deployments using the btn:[Retry] button.
++
+.Example of the version promotion page showing deployment to dev and ready to promote to staging
+image::guides:ROOT:deploy/version-promotion-page-ready.png[Version promotion page showing deployment to dev and ready to promote to staging]
++
+.Example of the version promotion page with a retry button
+image::guides:ROOT:deploy/version-promotion-page.png[Version promotion page]
+
+. Select btn:[Promote] or btn:[Retry] to open the deploy pipeline modal pre-filled with the following values:
++
+* Version to deploy and the component name.
+* The target environment.
+* An indication of the current version deployed to the target environment.
++
+Review the values and select btn:[Deploy] to trigger the deploy pipeline.
++
+.Example of the promote modal for deploying to next environment
+image::guides:ROOT:deploy/promote-modal.png[Promote modal for deploying to next environment]
+
+
+
+== Manage hierarchies
+=== Edit or delete a hierarchy
+
+. Navigate to menu:Org[Deploys] in the CircleCI web app.
+
+. Select the edit icon icon:edit-solid[Edit icon] for the hierarchy you want to edit, or the trash icon icon:delete[Delete icon] to delete the hierarchy.
+
+. Edit the hierarchy by reordering levels, adding or removing integrations, updating the name or description.
+
+. Select btn:[Update] to save your changes.
+
+=== Override the organization default hierarchy for a project
+
+Ensure you have created the hierarchy you want to use for your project at the organization level.
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. Select Deploys in the sidebar.
+. Scroll down to find the Environment Hierarchy section.
+. Select btn:[Change hierarchy].
+. Select the hierarchy you want to use in the *Replace with:* menu.
+. Select btn:[Save].
+
+=== Override the default hierarchy for a component
+
+. Select *Deploys* in the sidebar.
+. Find your component and select it by name to enter the component view.
+. Use the icon:edit-solid[Edit icon] next to *Hierarchy Template*.
+. Select the hierarchy you wish to use in the *Replace with:* menu.
+. Select btn:[Save].
+
+=== Environment hierarchy assignment scopes
+
+A hierarchy can be assigned at three scopes:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Scope | Behavior
+
+| Organization
+| Default hierarchy for all projects and components in the org
+
+| Project
+| Overrides the organization default for a specific project
+
+| Component
+| Overrides the project default for a specific component
+|===
+--
+
+When the system resolves which hierarchy applies, it checks component first, then project, then organization. The most specific assignment wins.
+
+
