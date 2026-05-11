@@ -807,7 +807,7 @@ The following capabilities are not yet available and are planned before general 
 * Metrics endpoint (Prometheus-compatible).
 * Windows guest OS support for runner VMs (the cloud-init startup script is Linux-only).
 
-If any of these are blocking your use case, post in the `#runner-provisioner-preview` Slack channel or reach out via the preview Slack channel.
+If any of these are blocking your use case, post in the `#runner-provisioner-preview` Slack channel.
 
 [#vm-startup-latency]
 === VM startup latency
