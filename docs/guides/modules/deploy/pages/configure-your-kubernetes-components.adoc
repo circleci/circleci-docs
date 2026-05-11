@@ -29,7 +29,7 @@ Before following the steps below, refer to the xref:set-up-the-circleci-release-
 [#add-required-labels]
 == 1. Add required labels and annotations to your Deployment/Rollout
 
-To enable your deployment to show up on the deploys UI in the CircleCI web app, add the following labels and annotation to your Kubernetes Deployment or Argo Rollout:
+To enable your deployment to show up on the deploys UI in the CircleCI web app, add the following labels and annotations to your Kubernetes Deployment or Argo Rollout:
 
 * Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Metadata.Labels`.
 * Specify the `circleci.com/component-name` and `circleci.com/version` label in the Kubernetes object `Spec.Template.Metadata.Labels`.
