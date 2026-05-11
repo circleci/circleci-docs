@@ -239,7 +239,7 @@ NOTE: It is important that both of these files are checked into your git repo so
 [#generate-a-cli-token]
 === 2. Generate a CLI Token
 
-Firebase requires a token to used during authentication. To generate the token, use the Firebase CLI and a browser. As CircleCI is a headless environment, generate this token locally, rather than at runtime, then add it to CircleCI as an environment variable.
+Firebase requires a token to be used during authentication. To generate the token, use the Firebase CLI and a browser. As CircleCI is a headless environment, generate this token locally, rather than at runtime, then add it to CircleCI as an environment variable.
 
 . Download and install the Firebase CLI locally with the command `+curl -sL https://firebase.tools | bash+`.
 . Trigger a login by using the command `firebase login:ci`.
@@ -307,7 +307,7 @@ NOTE: The Firebase plugin may cause errors when run with the macOS system Ruby. 
 [#deploy-to-visual-studio-app-center]
 == Deploy to Visual Studio App Center
 
-link:https://appcenter.ms/[Visual Studio App Center] (formally HockeyApp), is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the link:https://github.com/microsoft/fastlane-plugin-appcenter[App Center plugin].
+link:https://appcenter.ms/[Visual Studio App Center] (formerly HockeyApp), is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the link:https://github.com/microsoft/fastlane-plugin-appcenter[App Center plugin].
 
 [#fastlane-plugin-setup-2]
 === 1. Fastlane plugin setup
@@ -362,7 +362,7 @@ desc "Upload to VS App Center"
     increment_build_number(
       build_number: "$CIRCLE_BUILD_NUM"
     )
-    # Set up Adhoc code signing and build  the app
+    # Set up Adhoc code signing and build the app
     match(type: "adhoc")
     gym(scheme: "HelloWorld")
     # Set up the required information to upload the
