@@ -46,8 +46,8 @@ If you have these limits set, you can't restore a version outside these limits. 
 We are working on updates to:
 +
 ** Indicate out-of-scope deployments.
-** Prevent you from attempting to restore unavailable deployments
-** Provide a manual way for you to mark deployments as unavailable
+** Prevent you from attempting to restore unavailable deployments.
+** Provide a manual way for you to mark deployments as unavailable.
 
 [#troubleshooting]
 == Troubleshooting
