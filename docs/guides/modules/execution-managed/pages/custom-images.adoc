@@ -131,7 +131,7 @@ After the required tools are specified in the `Dockerfile` you can build the ima
 docker build <path-to-dockerfile>
 ----
 
-You will see how all commands specified in you Dockerfile are executed. If there are any errors they will be displayed and you will need to fix them before continuing. If the build is successful you will have something like this at the end:
+You will see how all commands specified in your Dockerfile are executed. If there are any errors they will be displayed and you will need to fix them before continuing. If the build is successful you will have something like this at the end:
 
 [,shell]
 ----
@@ -190,7 +190,7 @@ NOTE: First, we use `docker login` to authenticate in Docker Hub. If you use a r
 [#using-your-image-on-circleci]
 === 10. Use your image on CircleCI
 
-After the image has been pushed, it is available for use it in your `.circleci/config.yml`:
+After the image has been pushed, it is available for use in your `.circleci/config.yml`:
 
 [,yml]
 ----
@@ -334,7 +334,7 @@ Both Dockerfiles use the same base image `buildpack-deps:jessie`. Using the same
 
 Remove the associated files before committing the Docker image to install by using `apt`. You can install everything and remove those files afterward, but do not run `apt-get update` more than once. Any custom repositories are added beforehand.
 
-The Ruby image comes with git pre-installed so there is no reason to reinstall it. Next, add `sudo`, `python2.7`, and `postgresql-9.5` to the list installation list. Then, install yarn with npm.
+The Ruby image comes with git pre-installed so there is no reason to reinstall it. Next, add `sudo`, `python2.7`, and `postgresql-9.5` to the installation list. Then, install yarn with npm.
 
 [,docker]
 ----

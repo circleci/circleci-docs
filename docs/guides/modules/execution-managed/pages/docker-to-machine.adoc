@@ -13,7 +13,7 @@ In some situations, the Docker executor is not the right fit for your builds. Fo
 [#pre-installed-software]
 == Pre-installed software
 
-The most up to date list of pre-installed software can be found on the link:https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh[image builder] page. You can also visit link:https://discuss.circleci.com/[the CircleCI community forum] for more information.
+The most up-to-date list of pre-installed software can be found on the link:https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh[image builder] page. You can also visit link:https://discuss.circleci.com/[the CircleCI community forum] for more information.
 
 Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
 
@@ -27,9 +27,9 @@ If you have Docker Layer Caching (DLC) enabled for your account, machine executo
 [#why-use-docker-executors-at-all]
 == Why use Docker executors at all?
 
-Machine executors offer double the memory and a more isolated environment for running builds. However, there is additional overhead regarding spin up time. Depending on the approach taken for running the application, there may be more time taken to install the required dependencies or pull your Docker image. The Docker executor will also cache as many layers as possible from your image during spin-up, as opposed to the machine executor, where DLC will need to be enabled.
+Machine executors offer double the memory and a more isolated environment for running builds. However, there is additional overhead regarding spin-up time. Depending on the approach taken for running the application, there may be more time taken to install the required dependencies or pull your Docker image. The Docker executor will also cache as many layers as possible from your image during spin-up, as opposed to the machine executor, where DLC will need to be enabled.
 
-All executors have their pros and cons, which have been laid out here to help decide which is right for your pipelines.
+All executors have their pros and cons, which have been laid out here to help you decide which is right for your pipelines.
 
 [#further-reading]
 == Further reading

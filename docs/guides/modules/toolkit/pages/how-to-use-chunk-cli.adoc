@@ -130,10 +130,19 @@ Chunk sidecars are CircleCI Cloud environments where the `chunk` CLI validates y
 
 [source,console]
 ----
-$ chunk sidecar create
+$ chunk sidecar create --name <name>
 ----
 
 The `chunk` CLI auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment on CircleCI. The command prints the Chunk sidecar ID when the environment is ready. Use this ID with `chunk validate --sidecar-id` to run validations in that environment.
+
+To launch a Chunk sidecar from an existing snapshot, pass the snapshot ID with `--image`:
+
+[source,console]
+----
+$ chunk sidecar create --name <name> --image <snapshot-id>
+----
+
+This skips environment detection and boots from the captured state. See <<snapshot-a-sidecar>> for how to produce a snapshot ID.
 
 [#list-sidecars]
 === List Chunk sidecars
@@ -144,6 +153,22 @@ $ chunk sidecar list
 ----
 
 Lists all your Chunk sidecars and their IDs. Use this to retrieve a Chunk sidecar ID if you need it after creation.
+
+[#snapshot-a-sidecar]
+=== Snapshot a Chunk sidecar
+
+After you have configured a Chunk sidecar and confirmed it works with `chunk validate`, capture its state as a snapshot so future sessions boot fast:
+
+[source,console]
+----
+$ chunk sidecar snapshot create --name <snapshot-name>
+----
+
+The command captures the configured state of the active Chunk sidecar and prints the snapshot ID. Pass `--sidecar-id <id>` to snapshot a specific Chunk sidecar instead of the active one. Snapshot names are limited to 255 characters.
+
+CAUTION: `chunk sidecar snapshot create` deletes the source Chunk sidecar after the snapshot is captured to avoid leaving the build instance running. If the deleted sidecar was the active one, local active-sidecar state is cleared. Launch a new Chunk sidecar from the snapshot with `chunk sidecar create --name <name> --image <snapshot-id>` to resume work.
+
+If the post-snapshot deletion fails, the command prints a warning but the snapshot itself still succeeds. Delete the source Chunk sidecar manually, or wait for it to expire.
 
 [#ssh-into-sidecar]
 === SSH into a Chunk sidecar
