@@ -21,7 +21,7 @@
 *** xref:getting-started:create-an-organization.adoc[Create an organization]
 ** Tutorials
 *** xref:getting-started:config-intro.adoc[Configuration intro]
-*** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
+
 
 * Migrate to CircleCI
 ** xref:migrate:migration-intro.adoc[Migration intro]
@@ -292,7 +292,9 @@
 *** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound Webhooks Reference]
 *** xref:integration:webhooks-airtable.adoc[Webhooks With Airtable]
 ** Notifications and status
-*** xref:integration:notifications.adoc[Notifications]
+*** xref:integration:notifications.adoc[Notifications overview]
+*** xref:integration:slack-integration.adoc[Slack integration - Preview]
+*** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
 *** xref:integration:status-badges.adoc[Status Badges]
 
 
