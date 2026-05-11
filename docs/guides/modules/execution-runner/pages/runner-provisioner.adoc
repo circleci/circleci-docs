@@ -17,7 +17,7 @@ The current preview version is `0.1.0`.
 
 Runner Provisioner is available to invited preview participants only. To request access, fill out the link:https://forms.gle/7W8z12EBdjuiTQJWA[Runner Provisioner preview access request form].
 
-Once access is granted, you will receive credentials for the image registry referenced in the <<quick-start,Quick Start>>, and access to the Runner Provisioner preview Slack channel.
+Once access is granted, you will receive credentials for the image registry referenced in the <<quickstart>>, and access to the Runner Provisioner preview Slack channel.
 
 == Feedback and support
 
@@ -242,7 +242,7 @@ $ kubectl label nodes -l cloud.google.com/gke-nodepool=<pool-name> node-role.kub
 $ kubectl label nodes -l agentpool=<nodepool-name> node-role.kubernetes.io/control-plane=
 ----
 
-== Quick start
+== Quickstart
 
 [#create-namespace]
 === 1. Create the namespace
