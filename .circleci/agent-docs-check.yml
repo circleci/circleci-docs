@@ -21,14 +21,14 @@ jobs:
             - agent-docs-npm-
       - run:
           name: Install Dependencies
-          command: npm install -D afdocs vitest
+          command: npm install -D afdocs
       - save_cache:
           key: agent-docs-npm-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - run:
           name: Run AF Docs Check
-          command: npx vitest run agent-docs.test.ts
+          command: npx afdocs check https://circleci.com/docs/ --verbose --fixes
 
 workflows:
   agent-docs-workflow:
