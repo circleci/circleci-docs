@@ -40,7 +40,7 @@ Choosing the right Docker image for your project can have huge impact on build t
 
 Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
-DLC is similar to _caching dependencies_, in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
+DLC is similar to _caching dependencies_ in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
 * Read more on the xref:docker-layer-caching.adoc[Docker Layer Caching] page.
 
@@ -54,14 +54,14 @@ Caching should be one of the first things you consider when trying to optimize y
 [#workflows]
 === Workflows
 
-Workflows provide a means to define a collection of jobs and their run order. If at any point in your configuration you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your CI/CD configuration. Read more about workflows on the xref:orchestrate:workflows.adoc[Workflow] page.
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your configuration you see a step where two jobs could happily run independently of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your CI/CD configuration. Read more about workflows on the xref:orchestrate:workflows.adoc[Workflow] page.
 
 * You can view examples of workflows in the link:https://github.com/CircleCI-Public/circleci-demo-workflows/[CircleCI demo workflows repository].
 
 [#parallelism]
 === Parallelism
 
-If your project has a large test suite, you can configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file-basis. You can also manually customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file basis. You can also manually customize how tests are allocated.
 
 * Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs.adoc[Parallelism and test splitting] page.
 * Refer to the xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests] how-to guide.
@@ -72,7 +72,7 @@ If your project has a large test suite, you can configure your build to use xref
 
 Use the rerun failed tests feature to only rerun a subset of tests when a transient test failure arises, rather than rerunning the entire test suite.
 
-* For more information see the xref:test:rerun-failed-tests.adoc[Rerun failed tests] page.
+* For more information, see the xref:test:rerun-failed-tests.adoc[Rerun failed tests] page.
 
 [#resource-class]
 === Resource class
