@@ -1,0 +1,410 @@
+
+From shaman
+from flask import Flask, redirect, url_for
+
+from authlib.integrations.flask_client import OAuth
+
+
+app = Flask(__name__)
+
+app.secret_key = 'CHANGE_THIS_TO_A_SECRET_GHOST_KEY'
+
+
+# The Blessed OAuth Setup
+
+oauth = OAuth(app)
+
+google = oauth.register(
+
+    name='google',
+
+    client_id='YOUR_CLIENT_ID.apps.googleusercontent.com',
+
+    client_secret='YOUR_CLIENT_SECRET',
+
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+
+    client_kwargs={'scope': 'openid email profile'}
+
+…
+
+No comma
+{
+
+  "issuer": "https://accounts.google.com",
+
+  "authorization_endpoint": "https://accounts.google.com/o/oauth2/v2/auth",
+
+  "device_authorization_endpoint": "https://oauth2.googleapis.com/device/code",
+
+  "token_endpoint": "https://oauth2.googleapis.com/token",
+
+  "userinfo_endpoint": "https://openidconnect.googleapis.com/v1/userinfo",
+
+  "revocation_endpoint": "https://oauth2.googleapis.com/revoke",
+
+  "jwks_uri": "https://www.googleapis.com/oauth2/v3/certs",
+
+  "response_types_supported": [
+
+    "code",
+
+    "token",
+
+    "id_token",
+
+    "code token",
+
+    "code id_token",
+
+…
+
+Call 
+""issuer": "https://accounts.google.com",
+
+ "authorization_endpoint": "https://accounts.google.com/o/oauth2/v2/auth",
+
+ "device_authorization_endpoint": "https://oauth2.googleapis.com/device/code",
+
+ "token_endpoint": "https://oauth2.googleapis.com/token",
+
+ "userinfo_endpoint": "https://openidconnect.googleapis.com/v1/userinfo",
+
+ "revocation_endpoint": "https://oauth2.googleapis.com/revoke",
+
+ "jwks_uri": "https://www.googleapis.com/oauth2/v3/certs",
+
+ "response_types_supported": [
+
+  "code",
+
+  "token",
+
+  "id_token",
+
+  "code token",
+
+  "code id_token",
+
+  "token id_token",YOUR_CLIENT_ID.apps.googleusercontent.comhttps://accounts.google.com/.well-known/openid-configurationhttps://accounts.google.comhttps://oauth2.googleapis.com/device/codehttps://accounts.google.com/o/oauth2/v2/authhttps://oauth2.googleapis.com/tokenhttps://openidconnect.googleapis.com/v1/userinfohttps://www.googleapis.com/oauth2/v3/certshttps://oauth2.googleapis.com/revoke# CircleCI Documentation
+
+> Official technical documentation for CircleCI, a continuous integration and delivery platform
+
+> Generated: 2026-05-12T17:29:18.732Z
+
+## Site Information
+
+- URL: https://circleci.com/docs
+- Repository: https://github.com/circleci/circleci-docs
+- Generator: Antora (static site generator for technical documentation)
+- Markup: AsciiDoc
+
+## Markdown Exports
+
+All documentation pages are available in markdown format for easier parsing and processing.
+
+### How to Access Markdown Versions
+
+1. **Direct URL conversion**: Replace the HTML page URL with `/index.md`
+   - HTML: https://circleci.com/docs/guides/getting-started/first-steps/
+   - Markdown: https://circleci.com/docs/guides/getting-started/first-steps/index.md
+
+2. **Inline links in this file**: Each page listing below includes a [md] link
+   - Example: Page Title (https://circleci.com/docs/page/) [md](https://circleci.com/docs/page/index.md)
+
+3. **HTML metadata**: Each page includes `<link rel="alternate" type="text/markdown" href="index.md">` in the HTML head
+
+### About This File (llms.txt)
+
+- **Location**: https://circleci.com/docs/llms.txt
+- **Purpose**: Provides LLMs with complete site structure, navigation, and page descriptions
+- **Updates**: Automatically regenerated on each deployment to main branch
+- **Discovery**: Announced via `<link rel="alternate" type="text/plain" href="/docs/llms.txt">` in page headers
+- **Format**: Plain text with markdown-style formatting for readability
+
+## Documentation Structure
+
+This documentation is organized into the following Antora components:
+
+### Guides ()
+- About CircleCI
+  - CircleCI overview (https://circleci.com/docs/guides/about-circleci/about-circleci/) [md](https://circleci.com/docs/guides/about-circleci/about-circleci/index.md)
+    An overview of CircleCI, continuous integration and continuous delivery
+  - Benefits of CircleCI (https://circleci.com/docs/guides/about-circleci/benefits-of-circleci/) [md](https://circleci.com/docs/guides/about-circleci/benefits-of-circleci/index.md)
+    Benefits of choosing CircleCI for CI/CD
+  - Concepts (https://circleci.com/docs/guides/about-circleci/concepts/) [md](https://circleci.com/docs/guides/about-circleci/concepts/index.md)
+    CircleCI concepts
+  - Intro to the CircleCI web app (https://circleci.com/docs/guides/about-circleci/introduction-to-the-circleci-web-app/) [md](https://circleci.com/docs/guides/about-circleci/introduction-to-the-circleci-web-app/index.md)
+    This document describes the basic features and settings available in the CircleCI web app.
+  - Open source acknowledgements (https://circleci.com/docs/guides/about-circleci/open-source/) [md](https://circleci.com/docs/guides/about-circleci/open-source/index.md)
+    List and acknowledgements for open-source projects and libraries that are used in CircleCI products and services.
+- Getting started
+  - First steps
+    - Sign up and try CircleCI (https://circleci.com/docs/guides/getting-started/first-steps/) [md](https://circleci.com/docs/guides/getting-started/first-steps/index.md)
+      First step for using CircleCI.
+    - Join teammates on CircleCI (https://circleci.com/docs/guides/getting-started/invite-your-team/) [md](https://circleci.com/docs/guides/getting-started/invite-your-team/index.md)
+      Add your team to your CircleCI organization
+    - Create a project (https://circleci.com/docs/guides/getting-started/create-project/) [md](https://circleci.com/docs/guides/getting-started/create-project/index.md)
+      "Learn how to create a project in CircleCI."
+    - Quickstart guide (https://circleci.com/docs/guides/getting-started/getting-started/) [md](https://circleci.com/docs/guides/getting-started/getting-started/index.md)
+      A quickstart guide for adding a project to CircleCI and exploring some features
+  - How-to guides
+    - Hello World (https://circleci.com/docs/guides/getting-started/hello-world/) [md](https://circleci.com/docs/guides/getting-started/hello-world/index.md)
+      Get started with CircleCI by printing Hello World in any execution environment.
+    - Intro to YAML configuration (https://circleci.com/docs/guides/getting-started/introduction-to-yaml-configurations/) [md](https://circleci.com/docs/guides/getting-started/introduction-to-yaml-configurations/index.md)
+      "Overview of CircleCI configuration written in YAML"
+    - In-app config editor (https://circleci.com/docs/guides/getting-started/config-editor/) [md](https://circleci.com/docs/guides/getting-started/config-editor/index.md)
+      Docs page on In-app configuration editor use and features
+    - Node.js quickstart (https://circleci.com/docs/guides/getting-started/language-javascript/) [md](https://circleci.com/docs/guides/getting-started/language-javascript/index.md)
+      Building and Testing with JavaScript and Node.js on CircleCI
+    - Python quickstart (https://circleci.com/docs/guides/getting-started/language-python/) [md](https://circleci.com/docs/guides/getting-started/language-python/index.md)
+      Continuous integration with Python on CircleCI
+    - Go quickstart (https://circleci.com/docs/guides/getting-started/language-go/) [md](https://circleci.com/docs/guides/getting-started/language-go/index.md)
+      Learn how to set up a Go project with CircleCI.
+    - Create an organization (https://circleci.com/docs/guides/getting-started/create-an-organization/) [md](https://circleci.com/docs/guides/getting-started/create-an-organization/index.md)
+      Create a new organization in CircleCI.
+  - Tutorials
+    - Configuration intro (https://circleci.com/docs/guides/getting-started/config-intro/) [md](https://circleci.com/docs/guides/getting-started/config-intro/index.md)
+      "Learn how to get started with the CircleCI config.yml file."
+    - Use the Slack orb to set up notifications (https://circleci.com/docs/guides/getting-started/slack-orb-tutorial/) [md](https://circleci.com/docs/guides/getting-started/slack-orb-tutorial/index.md)
+      "Learn how to get started with the CircleCI Slack orb"
+- Migrate to CircleCI
+  - Migration intro (https://circleci.com/docs/guides/migrate/migration-intro/) [md](https://circleci.com/docs/guides/migrate/migration-intro/index.md)
+    This document provides an overview of the stages required to migrate your CI/CD pipelines to CircleCI.
+  - Migrate from AWS (https://circleci.com/docs/guides/migrate/migrating-from-aws/) [md](https://circleci.com/docs/guides/migrate/migrating-from-aws/index.md)
+    This overview provides instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
+  - Migrate from Azure DevOps (https://circleci.com/docs/guides/migrate/migrating-from-azuredevops/) [md](https://circleci.com/docs/guides/migrate/migrating-from-azuredevops/index.md)
+    An overview of how to migrate from Azure DevOps to CircleCI.
+  - Migrate from Buildkite (https://circleci.com/docs/guides/migrate/migrating-from-buildkite/) [md](https://circleci.com/docs/guides/migrate/migrating-from-buildkite/index.md)
+    An overview of how to migrate from Buildkite to CircleCI.
+  - Migrate from GitHub (https://circleci.com/docs/guides/migrate/migrating-from-github/) [md](https://circleci.com/docs/guides/migrate/migrating-from-github/index.md)
+    An overview of how to migrate from GitHub Actions to CircleCI.
+  - Migrate from GitLab (https://circleci.com/docs/guides/migrate/migrating-from-gitlab/) [md](https://circleci.com/docs/guides/migrate/migrating-from-gitlab/index.md)
+    An overview of how to migrate from GitLab to CircleCI.
+  - Migrate from Jenkins (https://circleci.com/docs/guides/migrate/migrating-from-jenkins/) [md](https://circleci.com/docs/guides/migrate/migrating-from-jenkins/index.md)
+    Differences between CircleCI and Jenkins, with migration guide.
+  - Migrate from TeamCity (https://circleci.com/docs/guides/migrate/migrating-from-teamcity/) [md](https://circleci.com/docs/guides/migrate/migrating-from-teamcity/index.md)
+    An overview of how to migrate from TeamCity to CircleCI.
+  - Migrate from Travis CI (https://circleci.com/docs/guides/migrate/migrating-from-travis/) [md](https://circleci.com/docs/guides/migrate/migrating-from-travis/index.md)
+    An overview of how to migrate from Travis CI to CircleCI.
+- Orchestrate
+  - Set up pipelines and workflows
+    - Pipeline overview and setup (https://circleci.com/docs/guides/orchestrate/pipelines/) [md](https://circleci.com/docs/guides/orchestrate/pipelines/index.md)
+      This document introduces the concept of pipelines and shows how pipelines can be triggered and what they include.
+    - Jobs and steps overview (https://circleci.com/docs/guides/orchestrate/jobs-steps/) [md](https://circleci.com/docs/guides/orchestrate/jobs-steps/index.md)
+      Description of CircleCI jobs and steps.
+    - Workflow orchestration (https://circleci.com/docs/guides/orchestrate/workflows/) [md](https://circleci.com/docs/guides/orchestrate/workflows/index.md)
+      Learn about using CircleCI workflows to orchestrate jobs
+    - Pipeline values and parameters (https://circleci.com/docs/guides/orchestrate/pipeline-variables/) [md](https://circleci.com/docs/guides/orchestrate/pipeline-variables/index.md)
+      This document describes the Free Plan available to developers on CircleCI.
+  - Trigger and schedule pipelines
+    - Trigger options (https://circleci.com/docs/guides/orchestrate/triggers-overview/) [md](https://circleci.com/docs/guides/orchestrate/triggers-overview/index.md)
+      "A guide to the various ways to manage pipeline triggering in CircleCI"
+    - Set up triggers (https://circleci.com/docs/guides/orchestrate/set-up-triggers/) [md](https://circleci.com/docs/guides/orchestrate/set-up-triggers/index.md)
+      A guide to setting up triggers for your pipelines.
+    - GitHub trigger event options (https://circleci.com/docs/guides/orchestrate/github-trigger-event-options/) [md](https://circleci.com/docs/guides/orchestrate/github-trigger-event-options/index.md)
+      A guide to the options available for triggering GitHub App pipelines. Trigger pipelines on non-push events.
+    - GitLab trigger options (https://circleci.com/docs/guides/orchestrate/gitlab-trigger-options/) [md](https://circleci.com/docs/guides/orchestrate/gitlab-trigger-options/index.md)
+      A guide to the options available for triggering GitLab pipelines
+    - Custom webhooks (https://circleci.com/docs/guides/orchestrate/custom-webhooks/) [md](https://circleci.com/docs/guides/orchestrate/custom-webhooks/index.md)
+      Use webhooks to integrate with third-party services and subscribe to CircleCI events
+    - Schedule triggers (https://circleci.com/docs/guides/orchestrate/schedule-triggers/) [md](https://circleci.com/docs/guides/orchestrate/schedule-triggers/index.md)
+      Learn about schedule triggers for your CircleCI projects.
+    - Set up cross-repo triggers for library consumers (https://circleci.com/docs/guides/orchestrate/set-up-cross-repo-triggers-for-library-consumers/) [md](https://circleci.com/docs/guides/orchestrate/set-up-cross-repo-triggers-for-library-consumers/index.md)
+      Learn how to automatically trigger consumer repository pipelines when you tag a new library release.
+    - Migrate scheduled workflows to schedule triggers (https://circleci.com/docs/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/) [md](https://circleci.com/docs/guides/orchestrate/migrate-scheduled-workflows-to-schedule-triggers/index.md)
+      Migrate scheduled workflows to schedule triggers
+    - Schedule triggers with multiple workflows (https://circleci.com/docs/guides/orchestrate/schedule-triggers-with-multiple-workflows/) [md](https://circleci.com/docs/guides/orchestrate/schedule-triggers-with-multiple-workflows/index.md)
+      "Learn how to set conditionals for schedule triggers in multiple workflows."
+    - Set a nightly schedule trigger (https://circleci.com/docs/guides/orchestrate/set-a-nightly-schedule-trigger/) [md](https://circleci.com/docs/guides/orchestrate/set-a-nightly-schedule-trigger/index.md)
+      "Learn how to create schedule triggers on a specific timetable."
+  - Control workflow execution
+    - Automatic reruns (https://circleci.com/docs/guides/orchestrate/automatic-reruns/) [md](https://circleci.com/docs/guides/orchestrate/automatic-reruns/index.md)
+      Configure automatic reruns for failed workflows to reduce manual intervention and improve pipeline reliability
+    - Skip CI, auto-cancel, and block new pipelines (https://circleci.com/docs/guides/orchestrate/skip-build/) [md](https://circleci.com/docs/guides/orchestrate/skip-build/index.md)
+      Skip CI builds, auto-cancel redundant workflows, and block new work for your CircleCI organization or project.
+    - Controlling serial execution across your organization (https://circleci.com/docs/guides/orchestrate/controlling-serial-execution-across-your-organization/) [md](https://circleci.com/docs/guides/orchestrate/controlling-serial-execution-across-your-organization/index.md)
+      An overview of controlling serial execution across a CircleCI org.
+    - Using branch filters (https://circleci.com/docs/guides/orchestrate/using-branch-filters/) [md](https://circleci.com/docs/guides/orchestrate/using-branch-filters/index.md)
+      A how to guide for using branch fileters at the job level to simplify your CircleCI configuration.
+    - Select a workflow to run using pipeline parameters (https://circleci.com/docs/guides/orchestrate/selecting-a-workflow-to-run-using-pipeline-parameters/) [md](https://circleci.com/docs/guides/orchestrate/selecting-a-workflow-to-run-using-pipeline-parameters/index.md)
+      "A how-to guide for selecting a workflow to run using pipeline parameters."
+    - Notify a Slack channel of a paused workflow (https://circleci.com/docs/guides/orchestrate/notify-a-slack-channel-of-a-paused-workflow/) [md](https://circleci.com/docs/guides/orchestrate/notify-a-slack-channel-of-a-paused-workflow/index.md)
+      A how to guide for using the Slack orb to notify a Slack channel of a paused workflow.
+  - Share data
+    - Use workspaces to share data between jobs (https://circleci.com/docs/guides/orchestrate/workspaces/) [md](https://circleci.com/docs/guides/orchestrate/workspaces/index.md)
+      This document describes how to use workspaces to share data to downstream jobs in your workflows.
+  - Advanced configuration
+    - Orchestration cookbook (https://circleci.com/docs/guides/orchestrate/orchestration-cookbook/) [md](https://circleci.com/docs/guides/orchestrate/orchestration-cookbook/index.md)
+      A cookbook of common pipeline, workflow and job execution goals and patterns
+    - Dynamic configuration overview (https://circleci.com/docs/guides/orchestrate/dynamic-config/) [md](https://circleci.com/docs/guides/orchestrate/dynamic-config/index.md)
+      A guide to using CircleCI's dynamic configuration features
+    - Using dynamic configuration (https://circleci.com/docs/guides/orchestrate/using-dynamic-configuration/) [md](https://circleci.com/docs/guides/orchestrate/using-dynamic-configuration/index.md)
+      A how to guide for using CircleCI dynamic configuration.
+    - Override configuration (https://circleci.com/docs/guides/orchestrate/how-to-override-config/) [md](https://circleci.com/docs/guides/orchestrate/how-to-override-config/index.md)
+      Learn how to use the override-with key in CircleCI to standardize pipelines across your organization while maintaining team flexibility.
+    - Set up multiple configuration files for a project (https://circleci.com/docs/guides/orchestrate/set-up-multiple-configuration-files-for-a-project/) [md](https://circleci.com/docs/guides/orchestrate/set-up-multiple-configuration-files-for-a-project/index.md)
+      A step by step guide for setting up multiple pipelines, each defined in a separate configuration file, in a CircleCI project.
+    - Configure databases (https://circleci.com/docs/guides/orchestrate/databases/) [md](https://circleci.com/docs/guides/orchestrate/databases/index.md)
+      This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI.
+    - Migrate from deploy to run (https://circleci.com/docs/guides/orchestrate/migrate-from-deploy-to-run/) [md](https://circleci.com/docs/guides/orchestrate/migrate-from-deploy-to-run/index.md)
+      A how-to guide on how to migrage from the deprecated deploy step to run.
+    - Using shell scripts (https://circleci.com/docs/guides/orchestrate/using-shell-scripts/) [md](https://circleci.com/docs/guides/orchestrate/using-shell-scripts/index.md)
+      Best practices for using shell scripts for use in CircleCI configuration
+- Execute on managed compute
+  - Execution environments overview (https://circleci.com/docs/guides/execution-managed/executor-intro/) [md](https://circleci.com/docs/guides/execution-managed/executor-intro/index.md)
+    An overview of all CircleCI execution environments.
+  - Resource class overview (https://circleci.com/docs/guides/execution-managed/resource-class-overview/) [md](https://circleci.com/docs/guides/execution-managed/resource-class-overview/index.md)
+    An overview of resource classes in CircleCI
+  - Resource class lifecycle (https://circleci.com/docs/guides/execution-managed/resource-class-lifecycle/) [md](https://circleci.com/docs/guides/execution-managed/resource-class-lifecycle/index.md)
+    Learn about CircleCI resource class lifecycle management.
+  - Docker
+    - Using Docker (https://circleci.com/docs/guides/execution-managed/using-docker/) [md](https://circleci.com/docs/guides/execution-managed/using-docker/index.md)
+      Learn how to configure your jobs to run in the Docker execution environment
+    - Convenience images (https://circleci.com/docs/guides/execution-managed/circleci-images/) [md](https://circleci.com/docs/guides/execution-managed/circleci-images/index.md)
+      Listing of available Docker images maintained by CircleCI
+    - Migrating to next-gen images (https://circleci.com/docs/guides/execution-managed/next-gen-migration-guide/) [md](https://circleci.com/docs/guides/execution-managed/next-gen-migration-guide/index.md)
+      A guide for migrating from using legacy images to next-gen images.
+    - Using custom-built Docker images (https://circleci.com/docs/guides/execution-managed/custom-images/) [md](https://circleci.com/docs/guides/execution-managed/custom-images/index.md)
+      Why and how to create custom Docker images
+    - Docker authenticated pulls (https://circleci.com/docs/guides/execution-managed/private-images/) [md](https://circleci.com/docs/guides/execution-managed/private-images/index.md)
+      This document describes how to authenticate with your Docker registry provider to pull images.
+    - Running Docker commands (https://circleci.com/docs/guides/execution-managed/building-docker-images/) [md](https://circleci.com/docs/guides/execution-managed/building-docker-images/index.md)
+      How to build Docker images using the Docker execution environment
+  - Linux VM
+    - Using the Linux VM execution environment (https://circleci.com/docs/guides/execution-managed/using-linuxvm/) [md](https://circleci.com/docs/guides/execution-managed/using-linuxvm/index.md)
+      Learn how to configure your jobs to run in the Linux VM execution environment using the machine executor.
+    - Using Android images with the machine executor (https://circleci.com/docs/guides/execution-managed/android-machine-image/) [md](https://circleci.com/docs/guides/execution-managed/android-machine-image/index.md)
+      Using the Android image on the machine executor
+  - macOS
+    - Using the macOS execution environment (https://circleci.com/docs/guides/execution-managed/using-macos/) [md](https://circleci.com/docs/guides/execution-managed/using-macos/index.md)
+      "Learn how to configure a your jobs to run in the macOS execution environment."
+    - Configuring a macOS app (https://circleci.com/docs/guides/execution-managed/hello-world-macos/) [md](https://circleci.https://circleci.com/docshttps://github.com/circleci/circleci-docshttps://circleci.com/docs/guides/getting-started/first-steps/https://circleci.com/docs/guides/getting-started/first-steps/index.mdhttps://circleci.com/docs/llms.txtNode.jsconfig.ymlmachine:
+  image: ubuntu-2404:current
+  docker_layer_caching: true    # default - falseversion: 2.1
+...
+jobs:
+  whats-installed:
+    machine: # executor type
+      image: ubuntu-2404:current
+    steps:
+      - run: apt list --installed
+...> For the complete documentation index, see [llms.txt](https://circleci.com/docs/llms.txt)
+
+# Resource class overview
+
+Use resource classes to:
+
+*   Specify compute resource size (CPU and RAM) for running a job.
+    
+*   Configure [Self-Hosted Runners](https://circleci.com/docs/guides/execution-runner/runner-concepts/#namespaces-and-resource-classes) for use in your `.circleci/config.yml` file.
+    
+*   Specify an execution environment.
+    
+
+## Introduction
+
+The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution environment.
+
+The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
+
+`````````
+jobs:
+  my-job:
+    docker: # use the Docker executor
+      - image: cimg/base:2022.09 # specify a Docker image
+    resource_class: xlarge # specify a resource class
+    steps:
+      - run: echo "Hello World"
+`````````
+
+Executor resource classes are specified by size, for example, `small` or `medium`. Each size corresponds to specific CPU and RAM requirements.
+
+**For a full list of available resource class options,** see the [Configuration Reference](https://circleci.com/docs/reference/configuration-reference/#resourceclass). The [resource class product page](https://circleci.com/product/features/resource-classes) provides information on credit usage per resource class, and resource class availability for each plan type.
+
+When using CircleCI’s self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the [Runner Installation Process](https://circleci.com/docs/guides/execution-runner/runner-overview/#getting-started).
+
+`````````
+jobs:
+  my-job:
+    machine: true
+    resource_class: <my-namespace>/<my-runner>
+    steps:
+      - run: echo "Hello runner"
+`````````
+
+Another use of the `resource_class` key is to specify an execution environment. For example, [Arm](https://circleci.com/docs/guides/execution-managed/using-arm/) is a resource class option when using the `machine` executor.
+
+`````````
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2004:202101-01
+    resource_class: arm.medium
+    steps:
+      - run: uname -a
+      - run: echo "Hello, Arm!"
+`````````
+
+## Quickstart
+
+For config examples showing how to use the `resource_class` key to **specify CPU and RAM size** for an execution environment, see the following sections of the configuration reference page:
+
+*   [Docker Resource Classes](https://circleci.com/docs/reference/configuration-reference/#docker-execution-environment)
+    
+*   [Linux VM Resource Classes](https://circleci.com/docs/reference/configuration-reference/#linuxvm-execution-environment)
+    
+*   [macOS Resource Classes](https://circleci.com/docs/reference/configuration-reference/#macos-execution-environment)
+    
+*   [Windows Resource Classes](https://circleci.com/docs/reference/configuration-reference/#windows-execution-environment)
+    
+*   GPU resource classes:
+    
+    *   [Linux](https://circleci.com/docs/reference/configuration-reference/#gpu-execution-environment-linux)
+        
+    *   [Windows](https://circleci.com/docs/reference/configuration-reference/#gpu-execution-environment-windows)
+        
+    
+*   [Arm Resource Classes](https://circleci.com/docs/reference/configuration-reference/#arm-execution-environment-linux)
+    
+
+**To get started setting up a self-hosted runner**, see the [Getting Started](https://circleci.com/docs/guides/execution-runner/runner-overview/#getting-started) section of the Self-hosted runners overview.
+
+## Default resource class
+
+If a `resource_class` is not explicitly declared for a job, CircleCI will use a default resource class size. Defaults are subject to change. It is best practice to specify a resource class, rather than relying on a default.
+
+## Resource class usage tools
+
+Information about the resource classes used in your jobs can be found in the web app, or by using the API. See the sections below for details.
+
+### Find the resource class used for a job
+
+The job details page in the web app shows the resource class used for a job.
+
+Figure 1. Resource class identifier in web app
+
+Alternatively, use the "Get job details" endpoint to return information about a job, including the resource class used. For usage steps see the [Get Job Details](https://circleci.com/docs/guides/toolkit/api-developers-guide/#get-job-details) how-to guide.
+
+### View resource usage per job
+
+To view the compute resource usage for the duration of a job in the CircleCI web app:
+
+1.  In the [CircleCI web app](https://app.circleci.com), select your org from the org cards on your user homepage.
+    
+2.  Select **Pipelines** from the sidebar and locate your pipeline from the list. You can use the project, branch, date, and status search options to help.
+    
+3.  Select the job you want to access by selecting the job name.
+    
+4.  Select the **Resources** tab to view CPU and RAM usage for the duration of the job.
+    
+
+You can use these insights to decide whether to make changes to the job’s configured resource class.
+
+Figure 2. Resources tab in web app for a job
+
+## See also
+
+*   For a full list of available resource class options, see the [Configuration Reference](https://circleci.com/docs/reference/configuration-reference/#resourceclass).
+    
+*   For information on credit usage per resource class, and to find out resource class availability per plan type, see the [resource class product page](https://circleci.com/product/features/resource-classes).https://circleci.com/docs/guides/execution-runner/runner-concepts/#namespaces-and-resource-classeshttps://circleci.com/docs/reference/configuration-reference/#resourceclasshttps://circleci.com/product/features/resource-classeshttps://circleci.com/docs/guides/execution-runner/runner-overview/#getting-startedhttps://circleci.com/docs/guides/execution-managed/using-arm/https://circleci.com/docs/reference/configuration-reference/#linuxvm-execution-environmenthttps://circleci.com/docs/reference/configuration-reference/#macos-execution-environmenthttps://circleci.com/docs/reference/configuration-reference/#windows-execution-environmenthttps://circleci.com/docs/reference/configuration-reference/#gpu-execution-environment-linuxhttps://circleci.com/docs/reference/configuration-reference/#gpu-execution-environment-windowshttps://circleci.com/docs/reference/configuration-reference/#arm-execution-environment-linuxhttps://circleci.com/docs/guides/toolkit/api-developers-guide/#get-job-detailshttps://app.circleci.com
