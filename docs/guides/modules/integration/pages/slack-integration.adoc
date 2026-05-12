@@ -124,7 +124,7 @@ Organization administrators can manage the Slack integration from menu:Org[Slack
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
 
-.Integration stops working unexpectedly
+.*Integration stops working unexpectedly*
 [NOTE]
 ====
 If your Slack integration stops working, it may be because another organization has installed the CircleCI app into the same Slack workspace, which invalidates the existing token. To restore the connection, an org admin can reinstall the app from menu:Org[Slack Integration].
