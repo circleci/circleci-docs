@@ -1,11 +1,9 @@
 = Slack integration
 :page-platform: Cloud
-:page-badge: Preview
+:page-badge: Beta
 :page-description: Install the CircleCI Slack app and configure project-level Slack notifications for workflow status updates.
 :experimental:
 :noindex: true
-
-CAUTION: The CircleCI Slack integration is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have any feedback on the feature you can add it to our link:https://circleci.canny.io/cloud-feature-requests/p/deeper-integration-with-slack[Ideas board].
 
 Use the CircleCI Slack app to receive workflow notifications in Slack. The app is installed once at the organization level and can then be configured for individual projects.
 
@@ -117,4 +115,8 @@ Organization administrators can manage the Slack integration from menu:Org[Slack
 * **Delete** (trash icon). Remove the CircleCI Slack app from the workspace. Delete the integration to stop all Slack notifications for all projects in the organization.
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
+
+== Feedback
+
+If you have any feedback on the Slack integration, you can add it to our link:https://circleci.canny.io/cloud-feature-requests/p/deeper-integration-with-slack[Ideas board].
 
