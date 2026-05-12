@@ -18,7 +18,7 @@ This guide explains how to:
 .*One Slack workspace per organization*
 [WARNING]
 ====
-Each Slack workspace can only be connected to one CircleCI organization at a time. This is a Slack platform constraint — Slack issues a single bot token per workspace, and a new installation overwrites the existing one. If a second CircleCI organization installs the app into an already-connected workspace, it will invalidate the first organization's token and break their integration. Connecting multiple organizations to the same Slack workspace is not currently supported.
+Each Slack workspace can only be connected to one CircleCI organization at a time. This is a Slack platform constraint — Slack issues a single bot token per workspace, and a new installation overwrites the existing one. If a second CircleCI organization installs the app into an already-connected workspace, it will invalidate the first organization's token and break their integration. Connecting multiple organizations to the same Slack workspace is not currently supported. If this happens, an organization administrator can restore the connection by reinstalling the app from menu:Org[Slack Integration].
 ====
 
 == Prerequisites
@@ -123,12 +123,6 @@ Organization administrators can manage the Slack integration from menu:Org[Slack
 * **Delete** (trash icon). Remove the CircleCI Slack app from the workspace. Delete the integration to stop all Slack notifications for all projects in the organization.
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
-
-.*Integration stops working unexpectedly*
-[NOTE]
-====
-If your Slack integration stops working, it may be because another organization has installed the CircleCI app into the same Slack workspace, which invalidates the existing token. To restore the connection, an org admin can reinstall the app from menu:Org[Slack Integration].
-====
 
 == Feedback
 
