@@ -1,0 +1,120 @@
+= Slack integration
+:page-platform: Cloud
+:page-badge: Preview
+:page-description: Install the CircleCI Slack app and configure project-level Slack notifications for workflow status updates.
+:experimental:
+:noindex: true
+
+CAUTION: The CircleCI Slack integration is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have any feedback on the feature you can add it to our link:https://circleci.canny.io/cloud-feature-requests/p/deeper-integration-with-slack[Ideas board].
+
+Use the CircleCI Slack app to receive workflow notifications in Slack. The app is installed once at the organization level and can then be configured for individual projects.
+
+This guide explains how to:
+
+* Install the CircleCI Slack app for your organization.
+* Link a project to a Slack channel.
+* Update notification preferences for a project.
+
+== Prerequisites
+
+To install the CircleCI Slack app, you need:
+
+* CircleCI organization administrator permissions.
+** If you have an organization of type `circleci` permissions are controlled through CircleCI, see the xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page for more information.
+** If you have an organization of type `github` or `bitbucket` you must be an administrator in the connected GitHub or Bitbucket organization.
++
+include::ROOT:partial$tips/check-org-type.adoc[]
+* Slack Workspace Admin permissions to authorize the app in your workspace.
+
+After the app is installed, any CircleCI organization member with write permissions to a project can:
+
+* Link that project to a Slack channel.
+* Update or remove the channel configuration.
+* Enable or disable notifications at the project level.
+
+NOTE: If you do not have the required permissions, the relevant controls are disabled in the CircleCI web app.
+
+== 1. Install the CircleCI Slack app
+
+The CircleCI Slack app is installed once at the organization level and is then available to all projects in that organization.
+
+include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Select *Slack Integration* from the sidebar.
+. Select **Install CircleCI Slack app**. You are redirected to Slack to authorize the app.
+. In Slack, select the workspace you want to connect and select **Allow**.
++
+[NOTE]
+====
+If your workspace restricts app installations, you will see a **Request to Install** button. Submit the request. A Slack Workspace Admin must approve it before installation can complete. After approval, return to menu:Org[Slack Integration] and go through the installation flow again to complete setup.
+====
+. Verify that your Slack workspace appears as connected on the **Slack Integration** page.
+
+.Organization Settings > Slack Integration showing a connected workspace
+image::guides:ROOT:slack-integration/org-settings-slack-integration.png[Screenshot of the Notifications page in Organization Settings with Slack Integration selected. Shows the Slack App section with a connected CircleCI workspace, an enable/disable toggle in the enabled state, and a delete icon]
+
+== 2. Link a project to a Slack channel
+
+After the Slack app is installed, configure each project to send notifications to a Slack channel of your choice.
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+. Select *Slack Notifications* from the sidebar.
+. Select **Add Slack channel**.
+. For public Slack channels you can enter the channel name or channel ID. For private channels you must invite the CircleCI bot to the channel first and then enter the channel ID.
++
+[tabs]
+====
+Pubic channel::
++
+--
+Enter the channel name or channel ID. To find the channel ID, open the channel in Slack, select the *Open channel details* option from the channel menu and the channel ID is displayed in the modal.
+--
+Private channel::
++
+--
+First, invite the CircleCI bot to the channel first by running `/invite @CircleCI` in the channel.
+
+Then, enter the channel ID. Find your channel ID by opening the channel in Slack, select the *Open channel details* option from the channel menu and the channel ID is displayed in the modal. If the bot is not invited before you save, you will receive an error.
+--
+====
+
+. Confirm that the channel ID appears under **Slack channel ID**.
+
+TIP: To update the channel, select the edit icon icon:edit-solid[Edit icon] next to the channel ID. To remove it, select the delete icon icon:delete[Delete icon].
+
+When you save a channel configuration, CircleCI automatically posts a welcome message to the configured channel. This confirms the connection is working. No manual verification is needed.
+
+The message is sent from the CircleCI bot and includes your project name:
+
+----
+CircleCI APP
+Welcome! CircleCI is now configured to post updates for <your-project-name> in this channel.
+Manage notification settings · View documentation
+----
+
+NOTE: If you add the same Slack channel to multiple projects, CircleCI sends one welcome message per project.
+
+== 3. Update notification preferences
+
+Any organization member with write permissions to a project can manage notification settings from menu:Project settings[Slack Notifications].
+
+include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. Select *Slack Notifications* from the sidebar.
+. Scroll to *Events*.
+. Expand the **Workflow Completed** category.
+. Confirm that **On default branch (failed, error, unauthorized)** is enabled.
+
+.Project Settings > Slack Notifications showing the channel configuration and events
+image::guides:ROOT:slack-integration/project-settings-slack-notifications.png[Screenshot of Project Settings showing the Slack Notifications page. A Slack channel ID is shown with edit and delete icons. Below, the Events section shows Workflow Completed expanded with On default branch (failed, error, unauthorized) checked]
+
+NOTE: This setting is enabled by default when a channel is first configured. Changes are saved immediately and apply to subsequent workflow activity for that project.
+
+== Manage your Slack integration
+
+Organization administrators can manage the Slack integration from menu:Org[Slack Integration] using two controls:
+
+* **Toggle**. Enable or disable the Slack integration for the entire organization. Disable the integration to pause notifications for all projects. Individual project settings are preserved and resume when you re-enable the integration.
+* **Delete** (trash icon). Remove the CircleCI Slack app from the workspace. Delete the integration to stop all Slack notifications for all projects in the organization.
++
+WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
+

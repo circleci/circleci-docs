@@ -7,3 +7,5 @@ BitBucket
 PostgrSQL
 [Ee]asy
 [Ee]asily
+[Oo]pensource
+[Oo]pen-source

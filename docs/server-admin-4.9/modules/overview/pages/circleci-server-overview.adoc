@@ -208,7 +208,7 @@ but can also be configured to be exported to other places (such as Datadog or Pr
 | `feature-flags-api`
 | Execution
 | Used to configure and fetch feature flags.
-| Systems will use defaults in place of any flags. In the case of server it should have no effect, since no feature flags should be set.
+| Systems will use defaults in place of any flags. In the case of server it has no effect, since no feature flags will be set.
 |
 
 | `frontend`
@@ -374,7 +374,7 @@ We do our best to support a wide range of platforms for installation. We use env
 | Local installation
 | Tested
 |
-
+pass:[<!-- vale off -->]
 | Azure
 | Untested
 | Should work with S3 compatible object store and Runner.
@@ -391,6 +391,7 @@ We do our best to support a wide range of platforms for installation. We use env
 | Untested
 | Should work with S3 compatible object store and Runner.
 |===
+pass:[<!-- vale on -->]
 
 [#installation-options]
 == Installation options

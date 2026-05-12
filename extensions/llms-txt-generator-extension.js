@@ -167,6 +167,17 @@ async function generateLlmsTxt(playbook, contentCatalog) {
   }
   sections.push('');
 
+  // Platform Badges
+  sections.push('## Platform Badges\n');
+  sections.push('Documentation pages include platform badges that indicate feature availability:\n');
+  sections.push('- **Cloud**: The features and processes described on the page are available for CircleCI Cloud');
+  sections.push('- **Server Admin**: This guide is for CircleCI Server administrators');
+  sections.push('- **Server v4+**: The features and processes described on the page are available for CircleCI Server v4.x+');
+  sections.push('- **Server v4.x** (specific versions like v4.2, v4.3): This guide is for that specific CircleCI Server version');
+  sections.push('- **Server v3.x** (specific versions): This guide is for that specific CircleCI Server version');
+  sections.push('\nPages may show multiple badges if a feature is available on multiple platforms.');
+  sections.push('If no badge is shown, assume the feature is available on all platforms.\n');
+
   // Common URL Patterns
   sections.push('## Common URL Patterns\n');
   sections.push(`- Guides: ${playbook.site.url}/guides/<topic>/`);

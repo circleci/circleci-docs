@@ -115,12 +115,12 @@ ifndef::env-aws[]
 
 You need the following information:
 
-* The Domain name of the CircleCI application
-* The GCP Project you want to run Nomad clients in
-* The GCP Zone you want to run Nomad clients in
-* The GCP Region you want to run Nomad clients in
-* The GCP Network you want to run Nomad clients in
-* The GCP Subnetwork you want to run Nomad clients in
+* The Domain name of the CircleCI application.
+* The GCP Project you want to run Nomad clients in.
+* The GCP Zone you want to run Nomad clients in.
+* The GCP Region you want to run Nomad clients in.
+* The GCP Network you want to run Nomad clients in.
+* The GCP Subnetwork you want to run Nomad clients in.
 
 A full example, as well as a full list of variables, can be found in the link:https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[example GCP Terraform configuration].
 
@@ -332,7 +332,7 @@ nomad:
       certificate: <base64 encoded Client Certificate from your terraform output>
       privateKey: <base64 encoded Client Private Key from your terraform output>
 ----
-.. If you externalize your Nomad servers then the following blocks should be removed from your `values.yaml`: `nomad.server.replicas`, `nomad.server.gossip` and `nomad.server.rpc`.
+.. If you externalize your Nomad servers, remove the following blocks from your `values.yaml`: `nomad.server.replicas`, `nomad.server.gossip` and `nomad.server.rpc`.
 .. Once the above is complete, you can skip ahead to <<nomad-autoscaler>>.
 
 
@@ -419,6 +419,7 @@ nomad:
         privateKey: "<base64-encoded-private-key>"
         CACertificate: "<base64-encoded-ca-certificate>"
 ----
+
 --
 ====
 
@@ -513,7 +514,7 @@ Before running Reality Check, check if the Nomad servers can communicate with th
 kubectl -n <namespace> exec -it $(kubectl -n <namespace> get pods -l app=nomad-server -o name | tail -1) -- nomad node status
 ----
 
-You should be able to see output like this:
+You will be able to see output like this:
 
 [source,shell]
 ----
@@ -574,7 +575,7 @@ Once you have successfully cloned the repository, you can follow it from within 
 |Leave blank
 |===
 
-Once you have configured the environmental variables and contexts, rerun the Reality Check tests. You should see the features and resource jobs complete successfully. Your test results should look something like the following:
+Once you have configured the environment variables and contexts, rerun the Reality Check tests. You will see the features and resource jobs complete successfully. Your test results will look something like the following:
 
 .Reality Check pipeline
 image::guides:ROOT:realitycheck-pipeline.png[Screenshot showing the Reality Check project building in the CircleCI app]
@@ -861,7 +862,7 @@ Once done, you may skip to step 9, enabling machine provisioner.
 +
 . *Create policy:*
 +
-Create a `policy.json` file with the following content. You should fill in the ID of the machine provisioner security group created in step 2 (`MachineProvisionerSecurityGroupID`) and VPC ID (`vpcID`) below.
+Create a `policy.json` file with the following content. Fill in the ID of the machine provisioner security group created in step 2 (`MachineProvisionerSecurityGroupID`) and the VPC ID (`vpcID`) below.
 +
 [source,json]
 ----
@@ -1047,7 +1048,7 @@ We recommend you create a unique service account to be used exclusively by machi
 gcloud iam service-accounts create circleci-server-vm --display-name "circleci-server-vm service account"
 ----
 +
-NOTE: If you are deploying CircleCI Server in a shared VCP, you should create this user in the project in which you intend to run your VM jobs.
+NOTE: If you are deploying CircleCI Server in a shared VPC, create this user in the project in which you intend to run your VM jobs.
 
 . *Get the service account email address:*
 +
@@ -1100,7 +1101,7 @@ Get Service Account JSON key file::
 --
 If you are using link:https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity[Workload Identities] for GKE, this step is not required.
 
-After running the following command, you should have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
+After running the following command, you will have a file named `circleci-server-vm-keyfile` in your local working directory. You will need this when you configure your server installation.
 
 [source,shell]
 ----
@@ -1174,7 +1175,7 @@ namespace=<your-namespace>
 helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
 ----
 
-Once you have configured and deployed CircleCI Server, you should validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation and you should see the machine provisioner jobs complete. At this point, all tests should pass.
+Once you have configured and deployed CircleCI Server, the next step is to validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation to see the machine provisioner jobs complete. At this point, all tests will pass.
 
 [#runner]
 == 4. Runner

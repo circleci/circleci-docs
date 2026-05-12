@@ -1514,4 +1514,120 @@
   cursor: default !important;
 }
 
+/* Platform Badge Tooltips - CircleCI Web App Style */
+:root {
+  --tooltip-max-width: 300;
+  --tooltip-bg-light: #293548;
+  --tooltip-text-light: #ffffff;
+  --tooltip-bg-dark: #E5E7EB;
+  --tooltip-text-dark: #293548;
+}
+
+.platform-badge {
+  position: relative;
+  cursor: default;
+}
+
+/* Light mode tooltip - dark background with white text */
+.platform-badge::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 16px;
+  background: var(--tooltip-bg-light);
+  color: var(--tooltip-text-light);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  white-space: normal;
+  max-width: calc(var(--tooltip-max-width) * 1px);
+  width: max-content;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease-in-out;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Left-aligned tooltip for left edge */
+.platform-badge[style*="--tooltip-align: left"]::before {
+  left: 0;
+  transform: translateX(0);
+}
+
+.platform-badge[style*="--tooltip-align: left"]::after {
+  left: 20px;
+  transform: translateX(0);
+}
+
+/* Right-aligned tooltip for right edge */
+.platform-badge[style*="--tooltip-align: right"]::before {
+  left: auto;
+  right: 0;
+  transform: translateX(0);
+}
+
+.platform-badge[style*="--tooltip-align: right"]::after {
+  left: auto;
+  right: 20px;
+  transform: translateX(0);
+}
+
+/* Ensure tooltip stays within viewport on mobile */
+@media (max-width: 640px) {
+  .platform-badge::before {
+    max-width: 250px;
+  }
+}
+
+/* Dark mode tooltip - light background with dark text (inverted) */
+[data-theme="dark"] .platform-badge::before {
+  background: var(--tooltip-bg-dark);
+  color: var(--tooltip-text-dark);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Show tooltip only when visibility class is applied (after position calculated) */
+.platform-badge.tooltip-visible::before,
+.platform-badge.tooltip-visible::after {
+  opacity: 1;
+}
+
+/* Light mode arrow - dark color matching tooltip */
+.platform-badge::after {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 10px - 1px); /* Overlap with tooltip by 1px to hide gap */
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--tooltip-bg-light); /* Points down */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.05s ease-out; /* Faster than tooltip, appears first */
+  z-index: 999; /* Just below tooltip to render behind */
+}
+
+/* Dark mode arrow - light color matching inverted tooltip */
+[data-theme="dark"] .platform-badge::after {
+  border-top-color: var(--tooltip-bg-dark);
+}
+
+/* Focus outline for accessibility */
+.platform-badge:focus {
+  outline: 2px solid var(--tooltip-bg-light);
+  outline-offset: 2px;
+}
+
+[data-theme="dark"] .platform-badge:focus {
+  outline-color: var(--tooltip-bg-dark);
+}
+
 
