@@ -116,7 +116,8 @@ To set up organization-level contacts you must be an organization administrator.
 include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 . Scroll to the manage security and technical contacts sections.
 
-#insert screenshot#
+.Organization-level contacts
+image::guides:ROOT:security-technical-contacts.png[Screenshot showing how to set up organization-level contacts]
 
 [#notifications-with-orbs]
 == Sending notifications with orbs
