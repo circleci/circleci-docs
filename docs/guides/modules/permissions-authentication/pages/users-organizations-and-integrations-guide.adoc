@@ -330,7 +330,7 @@ To set up Bitbucket data center pipelines you will need to create a project HTTP
 
 A GitHub organization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
-If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page (for example, pass:[https://github.com/organizations/your-org-name/settings/installations/1234567]). You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. But, this successful installation refers to the existing connection to a different CircleCI organization, not the one you just tried to create. You can confirm this by checking the "installed at" date at the top of the page. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
+If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. But, this successful installation refers to the existing connection to a different CircleCI organization, not the one you just tried to create. You can confirm this by checking the "installed at" date at the top of the page. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
 
 .GitHub settings showing the CircleCI App integration settings page.
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
@@ -424,9 +424,9 @@ Pipelines are defined by two characteristics:
 
 The pipelines you can create and configure are derived from the integration types available to you. You can find this information in the <<vcs-integration>> section.
 
-If you have an organization of type `github` or `bitbucket` with a corresponding VCS integration, GitHub OAuth app or Bitbucket cloud, a pipeline definition is created automatically for each of your projects when the project is set up.
+If you have an organization of type `github` or `bitbucket` with a corresponding VCS integration, a pipeline definition is created automatically for each of your projects when the project is set up.
 
-If you have a `circleci` organizaiton, you must create pipeline definitions manually. See the xref:orchestrate:pipelines.adoc[Pipelines] page for more information.
+If you have a `circleci` organization, you must create pipeline definitions manually. See the xref:orchestrate:pipelines.adoc[Pipelines] page for more information.
 
 == Triggers
 
