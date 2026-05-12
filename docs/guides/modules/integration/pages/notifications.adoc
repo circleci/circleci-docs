@@ -3,7 +3,7 @@
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
-CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work, set up Slack notifications for team channels, receive alerts about deployment status and Chunk usage, and designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
+CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work and set up Slack notifications for team channels. You can receive alerts about deployment status and Chunk usage. You can also designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
 
 This page explains how to configure email notifications, Slack notifications, and organization-level contacts.
 
@@ -33,9 +33,9 @@ image::guides:ROOT:default-email.png[Screenshot showing how to change default em
 
 === Build notification preferences
 
-Under "Build notification preferences" you can select between your saved email addresses per organization, or select `Don't send email notifications` for a specific organization as required.
+Under "Build notification preferences" you can select between your saved email addresses per organization. You can also select `Don't send email notifications` for a specific organization as required.
 
-If you are a member of multiple organizations, you can specify a different email address, if available, for each organization using the dropdown menus.
+If you are a member of multiple organizations, you can specify a different email address for each organization. Use the dropdown menus to select from your available email addresses.
 
 .Build notification email preferences
 image::guides:ROOT:email-notifications.png[Screenshot showing how to change default email address and choose notifications]
@@ -48,7 +48,7 @@ You can configure your preferences for notification _categories_ at menu:User se
 
 The *My work* category sends notifications for builds that you personally triggered. Use this to track your own commits and workflow runs.
 
-You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on your default branch, including workflows that are automatically cancelled when approval jobs expire after 90 days.
+You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on your default branch. This includes workflows that are automatically cancelled when approval jobs expire after 90 days.
 
 Available filters:
 
@@ -81,7 +81,7 @@ For more information, see the xref:deploy:release-agent-overview.adoc[Release Ag
 
 The *Followed projects* category sends notifications for any build in a project that you have followed, regardless of who triggered it. Use this to monitor team projects and stay informed about the overall project health.
 
-You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on the default branch, including workflows that are automatically cancelled when approval jobs expire after 90 days.
+You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on the default branch. This includes workflows that are automatically cancelled when approval jobs expire after 90 days.
 
 Available filters:
 
@@ -98,7 +98,7 @@ image::guides:ROOT:categories-followed-projects.png[Screenshot showing how to ch
 
 ==== Chunk notifications
 
-Chunk by CircleCI assists with CI/CD related tasks through a natural language chat interface and task scheduling. You can receive notifications when a teammate attempts to use Chunk, allowing you as an organization administrator to evaluate and enable Chunk for your organization.
+Chunk by CircleCI assists with CI/CD related tasks through a natural language chat interface and task scheduling. You can receive notifications when a teammate attempts to use Chunk. This allows you as an organization administrator to evaluate and enable Chunk for your organization.
 
 For a full guide to setting up and using Chunk, see the xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Overview and Setup] guide.
 
