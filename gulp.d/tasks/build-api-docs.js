@@ -185,7 +185,22 @@ function buildApiV2(callback) {
 
         // For now, skip patching and use the spec with examples as final
         console.log('ℹ️  Skipping JSON patches (disabled for simplicity)')
-        fs.copyFileSync('build/temp-api-v2/openapi-with-examples.json', 'build/temp-api-v2/openapi-final.json')
+
+        // Add externalDocs and custom extensions for agent discoverability
+        const specWithExamples = JSON.parse(fs.readFileSync('build/temp-api-v2/openapi-with-examples.json', 'utf8'))
+        specWithExamples.externalDocs = {
+          description: 'LLM-friendly documentation and discovery manifest',
+          url: 'https://circleci.com/docs/llms.txt'
+        }
+        // Add custom extensions to info for additional discovery
+        if (!specWithExamples.info['x-llms-txt']) {
+          specWithExamples.info['x-llms-txt'] = 'https://circleci.com/docs/llms.txt'
+        }
+        if (!specWithExamples.info['x-api-specs']) {
+          specWithExamples.info['x-api-specs'] = 'https://circleci.com/docs/api/v2/specs/'
+        }
+
+        fs.writeFileSync('build/temp-api-v2/openapi-final.json', JSON.stringify(specWithExamples, null, 2))
 
         // STEP 5: Lint API docs
         // Quality check to catch issues before generating final docs
