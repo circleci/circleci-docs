@@ -64,7 +64,7 @@ All running a similar set of steps:
 * save cache
 * run command
 
-The `lint` and `code-cov` jobs could be combined with no affect on workflow length, but saving on duplicate steps.
+The `lint` and `code-cov` jobs could be combined with no effect on workflow length, but saving on duplicate steps.
 
 [#order-jobs-to-create-meaningful-workflows]
 === Order jobs to create meaningful workflows
@@ -313,7 +313,7 @@ We recommend using `yarn --frozen-lockfile --cache-folder ~/.cache/yarn` for two
 
 In cases where the build tools for your language include elegant handling of dependencies, partial cache restores may be preferable to zero cache restores for performance reasons. If you get a zero cache restore, you have to reinstall all your dependencies, which can cause reduced performance. One alternative is to get a large percentage of your dependencies from an older cache, instead of starting from zero.
 
-However, for other language types, partial caches carry the risk of creating code dependencies that are not aligned with your declared dependencies and do not break until you run a build without a cache. If the dependencies change infrequently, consider listing the zero cache restore key first. Then, track the costs over time.
+However, for other language types, partial caches carry the risk of creating code dependencies that are not aligned with your declared dependencies and do not break until you run a build without a cache. If the dependencies change infrequently, consider listing the zero cache restore key first, and then track the costs over time.
 
 If the performance costs of zero cache restores (also referred to as a _cache miss_) prove significant over time, only then consider adding a partial cache restore key.
 
