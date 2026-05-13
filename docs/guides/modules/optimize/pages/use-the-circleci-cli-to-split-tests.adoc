@@ -64,7 +64,7 @@ Alternatively, you can see `circleci tests split` examples <<tests-split-example
 [#tests-run-examples]
 == Test framework examples using circleci tests run
 
-The following set of examples show how to use the `circelci tests run` command to split and run your tests across parallel execution environments. Using this command also allows you to use the xref:test:rerun-failed-tests.adoc[rerun failed tests] feature.
+The following set of examples show how to use the `circci tests run` command to split and run your tests across parallel execution environments. Using this command also allows you to use the xref:test:rerun-failed-tests.adoc[rerun failed tests] feature.
 
 Some notes on the examples below:
 
@@ -126,7 +126,7 @@ jobs:
           circleci tests glob "features/**/*.feature" | circleci tests run --command="xargs bundle exec cucumber --format junit,fileattribute=true --out ~/cucumber/junit.xml" --verbose --split-by=timings
 
       - store_test_results:
-          ~/cucumber
+          path: ~/cucumber
 ```
 
 * Ensure you are using `xargs` in your `circleci tests run` command to pass the list of test files/classnames via stdin to `--command`.
@@ -317,8 +317,8 @@ jobs:
       - run:
           name: Run tests
           command: |
-            circleci tests glob 'test/**/*_test.exs'
-            | circleci tests run --command='xargs -n1 echo > test_file_paths.txt'
+            circleci tests glob 'test/**/*_test.exs' | \
+            circleci tests run --command='xargs -n1 echo > test_file_paths.txt'
 
             mix ecto.setup --quiet
             cat test_file_paths.txt | xargs mix test
