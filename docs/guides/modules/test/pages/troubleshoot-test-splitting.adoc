@@ -6,7 +6,7 @@
 [#using-test-splitting-with-python-django-tests]
 == Using test splitting with Python Django tests
 
-To use test splitting with CircleCI, you must pass in a list of tests to run. However, with how you execute tests with Django, you are unable to simply glob the tests and pass them in.
+To use test splitting with CircleCI, you must pass in a list of tests to run. However, due to how Django executes tests, you cannot simply glob the tests and pass them in.
 
 Sometimes, users run into specific issues when performing test splitting for their own unique use cases. One example of a user resolving an issue when test splitting in Python Django did not perform correctly can be found in the following link:https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624[Discuss post].
 
@@ -120,7 +120,7 @@ NOTE: To follow along with the commands in the video below you will need to be x
 [#other-ways-to-split-tests]
 ## Other ways to split tests
 
-Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, link:https://discuss.circleci.com/[Discuss].
+Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue, you can search and ask on our link:https://discuss.circleci.com/[Discuss] forum.
 
 * **link:https://knapsackpro.com[Knapsack Pro]** - Enables allocating tests
   dynamically across parallel CI nodes, allowing your test suite execution to run
