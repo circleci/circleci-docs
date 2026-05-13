@@ -294,7 +294,7 @@
 *** xref:integration:webhooks-airtable.adoc[Webhooks With Airtable]
 ** Notifications and status
 *** xref:integration:notifications.adoc[Notifications overview]
-*** xref:integration:slack-integration.adoc[Slack integration - Preview]
+*** xref:integration:slack-integration.adoc[Slack integration]
 *** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
 *** xref:integration:status-badges.adoc[Status Badges]
 
