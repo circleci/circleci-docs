@@ -243,6 +243,17 @@ jobs:
       - run: docker push company/app:$CIRCLE_BRANCH
 ----
 
+[#prefer-same-region-pulls]
+== Prefer same-region image pulls
+
+When `prefer_same_region` is set to `true`, CircleCI will attempt to pull the image from the same region as the VM on a best-effort basis. If the same-region pull fails, it falls back to pulling from the image's original region.
+
+[,yaml]
+----
+      - setup_remote_docker:
+          prefer_same_region: true
+----
+
 [#see-also]
 == See also
 
