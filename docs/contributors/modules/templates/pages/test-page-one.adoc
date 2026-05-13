@@ -17,6 +17,7 @@ WARNING: *Want to see a warning?* This is a warning.
 
 CAUTION: *Want to see a caution?* This is a caution.
 
+[badge="Preview"]
 == Diagram
 
 [mermaid]
@@ -34,6 +35,7 @@ Sometimes we have sections separated by horizontal lines, like this:
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
+[badge="Beta"]
 === This is a subsection
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -41,6 +43,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor i
 .This is an image
 image::guides:ROOT:circleci-system-diagram.png[CircleCI process diagram]
 
+[badge="Deprecated"]
 ==== This is a bullet list
 
 * AWS S3
@@ -52,6 +55,7 @@ image::guides:ROOT:circleci-system-diagram.png[CircleCI process diagram]
 * Android
 * iOS
 
+[badge="CircleCI Cloud only"]
 ==== This is a link
 
 link:https://circleci.com/developer/orbs[Orb registry].
