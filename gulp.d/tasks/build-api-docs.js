@@ -12,7 +12,18 @@
  * └── api/
  *     ├── v1/           # Static API v1 docs + assets (fonts, images, etc.)
  *     └── v2/           # Generated API v2 docs from CircleCI API
- *         └── index.html
+ *         ├── index.html            # Human-readable Redocly docs
+ *         └── specs/                # LLM-optimized documentation
+ *             ├── index.json        # Discovery manifest
+ *             ├── README.md         # Getting started guide
+ *             ├── json/             # Split OpenAPI specs by feature
+ *             │   ├── pipeline.json
+ *             │   ├── project.json
+ *             │   └── ...
+ *             └── markdown/         # LLM-friendly markdown docs
+ *                 ├── pipeline.md
+ *                 ├── project.md
+ *                 └── ...
  *
  * INTEGRATION:
  * - Called after Antora build completes (see gulp.d/tasks/build-site.js)
@@ -217,15 +228,141 @@ function buildApiV2(callback) {
                 console.log('✅ Logo file copied successfully')
               }
 
-              // STEP 8: Cleanup temporary files
-              // Remove intermediate files to keep build directory clean
-              exec('rm -rf build/temp-api-v2', () => {
-                console.log('🎉 API v2 documentation build completed!')
-                callback()
+              // STEP 8: Generate LLM-optimized markdown documentation
+              generateLlmOptimizedDocs(() => {
+                // STEP 9: Cleanup temporary files
+                // Remove intermediate files to keep build directory clean
+                exec('rm -rf build/temp-api-v2', () => {
+                  console.log('🎉 API v2 documentation build completed!')
+                  callback()
+                })
               })
             })
           })
         })
+      })
+    })
+  })
+}
+
+/**
+ * Generate LLM-Optimized Markdown Documentation
+ *
+ * PURPOSE: Create agent-friendly API documentation in markdown format
+ *
+ * PIPELINE:
+ * 1. Split OpenAPI spec by tag (e.g., Pipeline, Project, Context)
+ * 2. Convert each split spec to markdown (~80% size reduction)
+ * 3. Generate discovery manifest (index.json)
+ * 4. Generate README with quick start guide
+ * 5. Update llms.txt with API section
+ *
+ * OUTPUT: build/api/v2/specs/ directory with:
+ * - json/*.json (split OpenAPI specs)
+ * - markdown/*.md (LLM-optimized docs)
+ * - index.json (discovery manifest)
+ * - README.md (getting started guide)
+ */
+function generateLlmOptimizedDocs(callback) {
+  console.log('📝 Generating LLM-optimized markdown documentation...')
+
+  // Create specs directories
+  const specsDir = path.join('build', 'api', 'v2', 'specs')
+  const jsonDir = path.join(specsDir, 'json')
+  const markdownDir = path.join(specsDir, 'markdown')
+
+  if (!fs.existsSync(jsonDir)) {
+    fs.mkdirSync(jsonDir, { recursive: true })
+  }
+  if (!fs.existsSync(markdownDir)) {
+    fs.mkdirSync(markdownDir, { recursive: true })
+  }
+
+  // Step 1: Split OpenAPI spec by tag
+  console.log('📂 Splitting OpenAPI spec by tag...')
+  exec('node scripts/split-openapi-by-tag.js build/temp-api-v2/openapi-final.json build/api/v2/specs/json/', (err, stdout, stderr) => {
+    if (err) {
+      console.error('❌ Failed to split OpenAPI spec:', err)
+      console.log('ℹ️  Continuing without LLM-optimized docs...')
+      return callback()
+    }
+    console.log('✅ OpenAPI spec split into tag-specific files')
+
+    // Step 2: Convert each JSON spec to markdown
+    console.log('📝 Converting specs to markdown...')
+
+    // Get all JSON files (except full.json)
+    const jsonFiles = fs.readdirSync(jsonDir)
+      .filter(f => f.endsWith('.json') && f !== 'full.json')
+
+    if (jsonFiles.length === 0) {
+      console.warn('⚠️  No JSON files to convert')
+      return callback()
+    }
+
+    let converted = 0
+    let failed = 0
+
+    jsonFiles.forEach(jsonFile => {
+      const tag = path.basename(jsonFile, '.json')
+      const jsonPath = path.join(jsonDir, jsonFile)
+      const mdPath = path.join(markdownDir, `${tag}.md`)
+
+      exec(`node scripts/openapi-to-markdown.js "${jsonPath}" "${mdPath}"`, (err, stdout, stderr) => {
+        if (err) {
+          console.error(`❌ Failed to convert ${tag}:`, err.message)
+          failed++
+        } else {
+          converted++
+        }
+
+        // Check if all files processed
+        if (converted + failed === jsonFiles.length) {
+          console.log(`✅ Converted ${converted} specs to markdown (${failed} failed)`)
+
+          // Step 3: Generate discovery manifest
+          console.log('🔍 Generating discovery manifest...')
+          exec(`node scripts/generate-discovery-manifest.js "${specsDir}" "${path.join(specsDir, 'index.json')}"`, (err, stdout, stderr) => {
+            if (err) {
+              console.error('❌ Failed to generate manifest:', err)
+              console.log('ℹ️  Continuing without manifest...')
+              return callback()
+            }
+            console.log('✅ Discovery manifest generated')
+
+            // Step 4: Generate README
+            console.log('📋 Generating README...')
+            exec(`node scripts/generate-specs-readme.js "${path.join(specsDir, 'index.json')}" "${path.join(specsDir, 'README.md')}"`, (err, stdout, stderr) => {
+              if (err) {
+                console.error('❌ Failed to generate README:', err)
+                console.log('ℹ️  Continuing without README...')
+                return callback()
+              }
+              console.log('✅ README generated')
+
+              // Step 5: Update llms.txt
+              const llmsTxtPath = path.join('build', 'llms.txt')
+              if (fs.existsSync(llmsTxtPath)) {
+                console.log('📋 Updating llms.txt with API section...')
+                exec(`node scripts/update-llms-txt-api-section.js "${path.join(specsDir, 'index.json')}" "${llmsTxtPath}"`, (err, stdout, stderr) => {
+                  if (err) {
+                    console.error('❌ Failed to update llms.txt:', err)
+                    console.log('ℹ️  Continuing without llms.txt update...')
+                  } else {
+                    console.log('✅ llms.txt updated with API documentation')
+                  }
+
+                  console.log('🎉 LLM-optimized documentation complete!')
+                  callback()
+                })
+              } else {
+                console.log('ℹ️  llms.txt not found, skipping update')
+                console.log('🎉 LLM-optimized documentation complete!')
+                callback()
+              }
+            })
+          })
+        }
       })
     })
   })
