@@ -3,7 +3,6 @@
 :page-badge: Beta
 :page-description: Install the CircleCI Slack app and configure project-level Slack notifications for workflow status updates.
 :experimental:
-:noindex: true
 
 Use the CircleCI Slack app to receive workflow notifications in Slack. The app is installed once at the organization level and can then be configured for individual projects.
 
