@@ -350,7 +350,7 @@ You may also notice on the upper right corner within the Timing tab an indicator
 [#step-four-split-by-timing-data]
 == 4. Split by timing data
 
-In the previous step, you saw that test splitting defaulted to splitting tests based on name. Now that test data has been saved, CircleCI can split your tests by timing the next time the pipeline runs.
+In the previous step, you saw that test splitting defaulted to splitting tests based on name. Now that test data has been saved, CircleCI can now split your tests by timing the next time the pipeline runs.
 
 . Commit a change in your project to trigger the pipeline again.
 +
