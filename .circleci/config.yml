@@ -67,8 +67,8 @@ jobs:
       - restore_cache:
           name: Restore UI bundle cache
           keys:
-            - ui-bundle-v1-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
-            - ui-bundle-v1-{{ checksum "ui/package-lock.json" }}
+            - ui-bundle-v2-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+            - ui-bundle-v2-{{ checksum "ui/package-lock.json" }}
       - run:
           name: Check if UI rebuild needed
           command: |
@@ -84,8 +84,9 @@ jobs:
 
             # Determine base branch for comparison
             if [ "${CIRCLE_BRANCH}" = "main" ]; then
-              BASE_REF="HEAD~1"
-              echo "[INFO] On main branch, comparing against HEAD~1"
+              echo "[INFO] On main branch, always building UI to ensure latest changes are deployed"
+              echo "export SKIP_UI_BUILD=false" >> $BASH_ENV
+              exit 0
             else
               BASE_REF="origin/main"
               echo "[INFO] On feature branch, comparing against origin/main"
@@ -134,7 +135,7 @@ jobs:
             fi
       - save_cache:
           name: Save UI bundle cache
-          key: ui-bundle-v1-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
+          key: ui-bundle-v2-{{ checksum "ui/package-lock.json" }}-{{ checksum "ui/gulpfile.js" }}
           paths:
             - ui-bundle.zip
             - ui/node_modules
