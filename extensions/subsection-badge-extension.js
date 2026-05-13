@@ -43,8 +43,8 @@ module.exports.register = function register(registry, context = {}) {
         const badgeBg = section.getAttribute('badge-bg')
         const badgeBorder = section.getAttribute('badge-border')
 
-        // Build the badge HTML
-        let badgeHtml = `<span class="${badgeClasses}"`
+        // Build the badge HTML with subsection-badge class for CSS targeting
+        let badgeHtml = `<span class="subsection-badge ${badgeClasses}"`
 
         // Add inline styles if background or border colors are specified
         if (badgeBg || badgeBorder) {
