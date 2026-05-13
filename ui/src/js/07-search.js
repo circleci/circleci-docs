@@ -30,6 +30,8 @@
       mobileSearchInput: document.querySelector('[data-page-navigation] [data-search-input]'),
       clearButton: document.querySelector('header [data-search-clear]'),
       mobileClearButton: document.querySelector('[data-page-navigation] [data-search-clear]'),
+      keyboardShortcut: document.querySelector('header [data-keyboard-shortcut]'),
+      mobileKeyboardShortcut: document.querySelector('[data-page-navigation] [data-keyboard-shortcut]'),
       searchContainer: document.querySelector('header [data-search-results-container]'),
       mobileSearchContainer: document.querySelector('[data-page-navigation] [data-search-results-container]'),
       navigation: document.querySelector('[data-page-navigation]'),
@@ -510,6 +512,9 @@
         elements.searchInput.value = query
       }
 
+      // Update keyboard shortcut visibility based on input value
+      updateKeyboardShortcutVisibility()
+
       if (query.length < MIN_QUERY_LENGTH) {
         // Hide search results in both desktop and mobile
         elements.searchContainer.classList.add('hidden')
@@ -554,6 +559,9 @@
 
       // Clear URL parameters
       updateUrlWithSearchState('', 0, null)
+
+      // Update keyboard shortcut visibility
+      updateKeyboardShortcutVisibility()
     }
 
     function handlePrevPage (e) {
@@ -647,6 +655,9 @@
           elements.mobileClearButton.classList.add('flex')
         }
 
+        // Hide keyboard shortcut since input has text
+        updateKeyboardShortcutVisibility()
+
         // Perform search without updating URL (since we're loading from URL)
         await search(queryParam, componentParam, true)
 
@@ -683,6 +694,9 @@
           elements.mobileClearButton.classList.add('hidden')
         }
       }
+
+      // Show keyboard shortcut since input is empty
+      updateKeyboardShortcutVisibility()
     }
 
     function handlePopState () {
@@ -690,11 +704,82 @@
       readSearchStateFromUrl()
     }
 
+    // ===== KEYBOARD SHORTCUT HANDLER =====
+
+    function handleKeyboardShortcut (e) {
+      // Check for Cmd+/ (Mac) or Ctrl+/ (Windows/Linux)
+      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0
+      const modifierKey = isMac ? e.metaKey : e.ctrlKey
+
+      if (modifierKey && e.key === '/') {
+        e.preventDefault()
+
+        // Focus the appropriate search input based on current view
+        if (isMobileView && elements.mobileSearchInput) {
+          elements.mobileSearchInput.focus()
+        } else {
+          elements.searchInput.focus()
+        }
+      }
+    }
+
+    function updateKeyboardShortcutVisibility () {
+      // Hide keyboard shortcut when input has focus or contains text
+      const shouldHide = document.activeElement === elements.searchInput ||
+                         elements.searchInput.value.length > 0
+
+      if (elements.keyboardShortcut) {
+        if (shouldHide) {
+          elements.keyboardShortcut.classList.add('hidden')
+        } else {
+          elements.keyboardShortcut.classList.remove('hidden')
+        }
+      }
+
+      // Handle mobile keyboard shortcut visibility
+      if (elements.mobileKeyboardShortcut && elements.mobileSearchInput) {
+        const shouldHideMobile = document.activeElement === elements.mobileSearchInput ||
+                                 elements.mobileSearchInput.value.length > 0
+        if (shouldHideMobile) {
+          elements.mobileKeyboardShortcut.classList.add('hidden')
+        } else {
+          elements.mobileKeyboardShortcut.classList.remove('hidden')
+        }
+      }
+    }
+
+    function initializeKeyboardShortcut () {
+      // Detect platform and update shortcut key text
+      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0
+      const shortcutKey = isMac ? 'cmd' : 'ctrl'
+
+      // Update desktop shortcut text
+      if (elements.keyboardShortcut) {
+        const shortcutKeyElement = elements.keyboardShortcut.querySelector('[data-shortcut-key]')
+        if (shortcutKeyElement) {
+          shortcutKeyElement.textContent = shortcutKey
+        }
+      }
+
+      // Update mobile shortcut text if it exists
+      if (elements.mobileKeyboardShortcut) {
+        const mobileShortcutKeyElement = elements.mobileKeyboardShortcut.querySelector('[data-shortcut-key]')
+        if (mobileShortcutKeyElement) {
+          mobileShortcutKeyElement.textContent = shortcutKey
+        }
+      }
+
+      // Set initial visibility
+      updateKeyboardShortcutVisibility()
+    }
+
     // ===== INITIALIZATION =====
 
     function initializeEventListeners () {
       // Desktop search event listeners
       elements.searchInput.addEventListener('input', handleSearchInput)
+      elements.searchInput.addEventListener('focus', updateKeyboardShortcutVisibility)
+      elements.searchInput.addEventListener('blur', updateKeyboardShortcutVisibility)
       elements.clearButton.addEventListener('click', handleClearSearch)
       elements.prevButton.addEventListener('click', handlePrevPage)
       elements.nextButton.addEventListener('click', handleNextPage)
@@ -702,6 +787,8 @@
       // Mobile search event listeners (if elements exist)
       if (elements.mobileSearchInput) {
         elements.mobileSearchInput.addEventListener('input', handleSearchInput)
+        elements.mobileSearchInput.addEventListener('focus', updateKeyboardShortcutVisibility)
+        elements.mobileSearchInput.addEventListener('blur', updateKeyboardShortcutVisibility)
       }
       if (elements.mobileClearButton) {
         elements.mobileClearButton.addEventListener('click', handleClearSearch)
@@ -718,10 +805,14 @@
 
       // Listen for window resize to handle mobile/desktop transitions
       window.addEventListener('resize', updateSearchUIForScreenSize)
+
+      // Listen for keyboard shortcut (Cmd+/ or Ctrl+/)
+      document.addEventListener('keydown', handleKeyboardShortcut)
     }
 
     // Initialize everything
     initializeDomReferences()
+    initializeKeyboardShortcut()
     initializeEventListeners()
     readSearchStateFromUrl() // Check for query and page parameters in URL and trigger search if present
     console.log('Search input initialized')
