@@ -11,7 +11,7 @@ This page explains how to configure email notifications, Slack notifications, an
 
 Configure your notification preferences, including the email address to use and the notifications categories you would like to receive.
 
-TIP: Your available email addresses depend on how you log in. If you use email and password, you will have a single email address. If you log in via GitHub or Bitbucket, you will see all email addresses associated with your connected account.
+TIP: Your available email addresses depend on how you log in. If you use email and password, you will have a single email address. If you log in via GitHub or Bitbucket, you will see all email addresses associated with your connected account. To add or remove email addresses from your account, see the xref:permissions-authentication:manage-email-addresses.adoc[Manage Email Addresses] guide.
 
 === Default email address for notifications
 

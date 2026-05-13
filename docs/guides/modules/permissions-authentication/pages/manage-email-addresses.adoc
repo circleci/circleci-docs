@@ -1,0 +1,61 @@
+= Manage email addresses
+:page-platform: Cloud
+:page-description: Learn how to add, update, or remove email addresses associated with your CircleCI account.
+:experimental:
+
+Your CircleCI account uses email addresses for notifications, login, and communication. The email addresses available to you depend on how you log in to CircleCI. This guide explains how to manage your email addresses based on your account type.
+
+== Prerequisites
+
+* A CircleCI account. You can link:https://circleci.com/signup[sign up for free].
+
+== Understand your account type
+
+CircleCI supports two types of user accounts, and the way you manage email addresses differs for each:
+
+* **Email and password accounts**: If you log in with an email and password, your account has a single email address. You can change this email address in CircleCI.
+* **Social login accounts (GitHub or Bitbucket)**: If you log in via GitHub or Bitbucket, your available email addresses come from your connected version control system account. To add or remove email addresses, you manage them in GitHub or Bitbucket, not in CircleCI.
+
+== Manage email addresses for email and password accounts
+
+If you log in to CircleCI using an email and password, you can change your account email address.
+
+=== Change your email address
+
+To change the email address for your CircleCI account, follow these steps:
+
+include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
+. Select *Email* from the sidebar.
+. Select btn:[Change email].
+. Enter your new email address, your password and your one time code from your MFA app.
+. CircleCI will send a verification email to your new email address. Select the verification link in the email to confirm the change.
+
+.Change email address
+image::guides:ROOT:change-email-address.png[Screenshot showing the email change option in user settings]
+
+NOTE: Until you verify your new email address, CircleCI will continue using your previous email address for notifications and communication.
+
+== Manage email addresses for social login accounts
+
+If you log in to CircleCI via GitHub or Bitbucket, your email addresses are managed in your version control system account. CircleCI automatically syncs the email addresses from your connected GitHub or Bitbucket account.
+
+For information on adding, changing, or removing email addresses, see the following guides:
+
+* link:https://docs.github.com/en/account-and-profile/how-tos/email-preferences/adding-an-email-address-to-your-github-account[GitHub email settings docs].
+* link:https://support.atlassian.com/bitbucket-cloud/docs/set-email-aliases/[Bitbucket email settings docs].
+
+== Verify your changes in CircleCI
+
+After making changes to your email addresses, you can verify them in CircleCI:
+
+include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
+. Select *Notifications* from the sidebar.
+. Check the "Default email address for notifications" dropdown at the top of the page. You will see your updated email addresses listed.
+
+If your changes do not appear after a few minutes, try logging out of CircleCI and logging back in to refresh your account information.
+
+== Next steps
+
+* xref:integration:notifications.adoc[Notifications Overview] - Configure which notifications you receive at each email address.
+* xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] - Learn more about how user accounts work in CircleCI.
+* xref:permissions-authentication:mfa.adoc[Multi-factor authentication (MFA)] - Set up MFA to secure your account.
