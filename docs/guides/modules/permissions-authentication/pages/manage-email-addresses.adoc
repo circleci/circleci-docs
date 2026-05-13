@@ -58,4 +58,4 @@ If your changes do not appear after a few minutes, try logging out of CircleCI a
 
 * xref:integration:notifications.adoc[Notifications Overview] - Configure which notifications you receive at each email address.
 * xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] - Learn more about how user accounts work in CircleCI.
-* xref:permissions-authentication:mfa.adoc[Multi-factor authentication (MFA)] - Set up MFA to secure your account.
+* xref:permissions-authentication:mfa.adoc[Multi-factor Authentication] - Set up MFA to secure your account.
