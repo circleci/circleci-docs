@@ -140,7 +140,7 @@ jobs:
             - ui-bundle.zip
             - ui/node_modules
       - go/install:
-          version: "1.26"
+          version: "1.25.0"
       - run:
           name: Verify Go Installation
           command: |
