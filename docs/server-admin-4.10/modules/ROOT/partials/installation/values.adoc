@@ -1,4 +1,3 @@
-pass:[<!-- vale off -->]
 |===
 | Key | Type | Default | Description
 
@@ -16,21 +15,6 @@ pass:[<!-- vale off -->]
 | string
 | `"8Gi"`
 | Memory limit for the api-service deployment.
-
-| audit_log_service.replicas
-| int
-| `1`
-| Number of replicas to deploy for the audit-log-service deployment.
-
-| audit_log_service.resources.limits.cpu
-| string
-| `"2000m"`
-| CPU limit for the audit-log-service deployment.
-
-| audit_log_service.resources.limits.memory
-| string
-| `"6Gi"`
-| Memory limit for the audit-log-service deployment.
 
 | authentication_service.auth_api.replicas
 | int
@@ -141,6 +125,16 @@ pass:[<!-- vale off -->]
 | string
 | `"6Gi"`
 | Memory limit for the builds-service deployment.
+
+| checkout
+| object
+| `{"sshKeyType":""}`
+| Checkout configuration
+
+| checkout.sshKeyType
+| string
+| `""`
+| SSH key algorithm for CircleCI-generated deploy keys. Leave empty for the default (Ed25519). Set to "ssh-rsa" for FIPS 140 environments
 
 | ciam_gateway.internal_api.replicas
 | int
@@ -322,6 +316,11 @@ pass:[<!-- vale off -->]
 | `"512Mi"`
 | Memory limit for the docker-provisioner-internalapi deployment
 
+| docker_provisioner.fips_mode
+| bool
+| `false`
+|
+
 | docker_provisioner.internal.replicas
 | int
 | `1`
@@ -351,6 +350,11 @@ pass:[<!-- vale off -->]
 | string
 | `""`
 | Repository to use to download the reaper container. Must contain the `pause:3.6` image
+
+| docker_provisioner.use_podman
+| bool
+| `false`
+| Enable podman as the container runtime instead of docker. Defaults to false.
 
 | domain_service.providersMangerMaxPoolSize
 | int
@@ -508,17 +512,12 @@ The secret must be named 'license' and have the key 'license' (where the value e
 
 | global.otel.collector_host
 | string
-| `""`
+| `"otel-collector"`
 |
 
 | global.otel.collector_port
-| int
-| `4317`
-|
-
-| global.otel.enabled
-| bool
-| `false`
+| string
+| `"4317"`
 |
 
 | global.otel.sample_rate
@@ -588,6 +587,11 @@ The secret must be named 'signing-keys' and have the keys; signing-key, encrypti
 | bool
 | `false`
 | This setting controls the automatic fetching and renewal of Let's Encrypt certificates. It defaults to false. If set to true, you must ensure that the appropriate DNS entries are in place after the Helm install/upgrade. The ACME certificate will only be generated when a valid DNS entry is configured for your domain (and the app subdomain).
+
+| kong.additionalHosts
+| list
+| `[]`
+| Additional hostnames that Kong should accept for routing (e.g., for webhooks from external domains).
 
 | kong.debug_level
 | string
@@ -734,6 +738,11 @@ The secret must be named 'signing-keys' and have the keys; signing-key, encrypti
 | `"512Mi"`
 | Memory limit for the machine-provisioner-externalapi deployment
 
+| machine_provisioner.fips_mode
+| bool
+| `false`
+|
+
 | machine_provisioner.fudgeConstantTerm
 | int
 | `0`
@@ -781,7 +790,7 @@ The secret must be named 'signing-keys' and have the keys; signing-key, encrypti
 
 | machine_provisioner.providers
 | object
-| `+{"ec2":{"accessKey":"","assignPublicIP":false,"assumedRoleArn":"","enabled":false,"enforceIMDSv2":true,"iops":0,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-123","subnets":["subnet-abc","subnet-def"],"tags":{"key1":"value1","key2":"value2"},"throughput":0,"windowsAMI":""},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"default","network_tags":["circleci-vm"],"project_id":"my-server-project","region":"us-central1","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zones":["us-central1-a","us-central1-b","us-central1-c","us-central1-f"]}}+`
+| `+{"ec2":{"accessKey":"","allowIMDSv1":false,"assignPublicIP":false,"assumedRoleArn":"","enabled":false,"iops":0,"irsaRole":"","linuxAMI":"","region":"us-west-1","secretKey":"","securityGroupId":"sg-123","subnets":["subnet-abc","subnet-def"],"tags":{"key1":"value1","key2":"value2"},"throughput":0,"windowsAMI":""},"gcp":{"assignPublicIP":true,"enabled":false,"linuxImage":"","network":"default","network_tags":["circleci-vm"],"project_id":"my-server-project","region":"us-central1","service_account":{"project_id":"... ...","type":"service_account"},"subnetwork":"my-server-vm-subnet","windowsImage":"","workloadIdentity":"","zones":["us-central1-a","us-central1-b","us-central1-c","us-central1-f"]}}+`
 | Provider configuration for Machine Provisioner.
 
 | machine_provisioner.providers.ec2.accessKey
@@ -791,6 +800,11 @@ The secret must be named 'signing-keys' and have the keys; signing-key, encrypti
 *Option 1:* Set accessKey and secretKey here, and CircleCI will create the secret for you. +
 *Option 2:* Leave accessKey and secretKey blank, and create the secret yourself. CircleCI will assume it exists. +
 *Option 3:* Leave accessKey and secretKey blank, and set the irsaRole field (IAM roles for service accounts).
+
+| machine_provisioner.providers.ec2.allowIMDSv1
+| bool
+| `false`
+| Enable support for IMDSv1 on EC2 machine executor instances. Only IMDSv2 is supported by default.
 
 | machine_provisioner.providers.ec2.assumedRoleArn
 | string
@@ -883,6 +897,86 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | `"root"`
 |
 
+| mongodb.customLivenessProbe.exec.command[0]
+| string
+| `"mongosh"`
+|
+
+| mongodb.customLivenessProbe.exec.command[1]
+| string
+| `"--eval"`
+|
+
+| mongodb.customLivenessProbe.exec.command[2]
+| string
+| `"db.adminCommand('ping')"`
+|
+
+| mongodb.customLivenessProbe.failureThreshold
+| int
+| `6`
+|
+
+| mongodb.customLivenessProbe.initialDelaySeconds
+| int
+| `30`
+|
+
+| mongodb.customLivenessProbe.periodSeconds
+| int
+| `10`
+|
+
+| mongodb.customLivenessProbe.successThreshold
+| int
+| `1`
+|
+
+| mongodb.customLivenessProbe.timeoutSeconds
+| int
+| `5`
+|
+
+| mongodb.customReadinessProbe.exec.command[0]
+| string
+| `"bash"`
+|
+
+| mongodb.customReadinessProbe.exec.command[1]
+| string
+| `"-ec"`
+|
+
+| mongodb.customReadinessProbe.exec.command[2]
+| string
+| `"mongosh --eval 'db.hello().isWritablePrimary \|\| db.hello().secondary' \| grep -q 'true'\n"`
+|
+
+| mongodb.customReadinessProbe.failureThreshold
+| int
+| `6`
+|
+
+| mongodb.customReadinessProbe.initialDelaySeconds
+| int
+| `5`
+|
+
+| mongodb.customReadinessProbe.periodSeconds
+| int
+| `10`
+|
+
+| mongodb.customReadinessProbe.successThreshold
+| int
+| `1`
+|
+
+| mongodb.customReadinessProbe.timeoutSeconds
+| int
+| `5`
+|
+
 | mongodb.fullnameOverride
 | string
 | `"mongodb"`
@@ -905,7 +999,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 
 | mongodb.image.tag
 | string
-| `"3.6.22-debian-9-r38"`
+| `"7.0.15-debian-12-r2"`
 |
 
 | mongodb.internal
@@ -923,6 +1017,11 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | `"data"`
 |
 
+| mongodb.livenessProbe.enabled
+| bool
+| `false`
+|
+
 | mongodb.options
 | string
 | `""`
@@ -931,7 +1030,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | mongodb.persistence.size
 | string
 | `"8Gi"`
-| To increase PVC size, follow this guide: https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+| To increase PVC size, follow this guide: xref:../operator/expanding-internal-database-volumes#[Expanding internal database volumes]
 
 | mongodb.podAnnotations."backup.velero.io/backup-volumes"
 | string
@@ -946,6 +1045,11 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | mongodb.podLabels.layer
 | string
 | `"data"`
+|
+
+| mongodb.readinessProbe.enabled
+| bool
+| `false`
 |
 
 | mongodb.ssl
@@ -985,7 +1089,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 
 | nginx.image.tag
 | string
-| `"1.28.0"`
+| `"1.29.2"`
 | Nginx has been tested against this specific version tag; edit this value at your own risk.
 
 | nginx.loadBalancerIp
@@ -1126,7 +1230,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 
 | nomad.auto_scaler.image.tag
 | string
-| `"0.4.6"`
+| `"0.4.9"`
 | Nomad Autoscaler has been tested against this specific version tag; edit this value at your own risk.
 
 | nomad.auto_scaler.scaling.cooldown
@@ -1162,7 +1266,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | nomad.clients.mTLS
 | object
 | `{"CACertificate":"","certificate":"","privateKey":""}`
-| Configure Nomad clients mTLS only when using External Nomad Servers. Required when `nomad.server.internal: false`. All three fields must be provided: `CACertificate` (base64 encoded CA cert to verify server), `certificate` (base64 encoded client cert for authentication), and `privateKey` (base64 encoded private key).
+| Configure Nomad clients mTLS only when using External Nomad Servers
 
 | nomad.server.gossip.encryption.enabled
 | bool
@@ -1176,13 +1280,33 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 
 | nomad.server.image.tag
 | string
-| `"1.10.1"`
+| `"1.11.3"`
 | Nomad has been tested against this specific version tag; edit this value at your own risk.
 
 | nomad.server.internal
 | bool
 | `true`
 | Disables deploying this chart's Internal Nomad servers
+
+| nomad.server.limits.http_max_conns_per_client
+| string
+| `""`
+| Maximum number of concurrent HTTP connections per client IP. When not set, Nomad applies its default of 100.
+
+| nomad.server.limits.rpc_max_conns_per_client
+| string
+| `""`
+| Maximum number of concurrent RPC connections per client IP. When not set, Nomad applies its default of 100. Increase for large clusters with many Nomad clients.
+
+| nomad.server.livenessProbe.failureThreshold
+| int
+| `6`
+|
+
+| nomad.server.livenessProbe.initialDelaySeconds
+| int
+| `90`
+|
 
 | nomad.server.pdb.enabled
 | bool
@@ -1204,9 +1328,29 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | `5`
 |
 
+| nomad.server.resources.limits.cpu
+| int
+| `1`
+| CPU limit configuration for the Nomad Server deployment.
+
+| nomad.server.resources.limits.memory
+| string
+| `"1G"`
+| Memory limit configuration for the Nomad Server deployment.
+
+| nomad.server.resources.requests.cpu
+| string
+| `"50m"`
+| CPU request configuration for the Nomad Server deployment.
+
+| nomad.server.resources.requests.memory
+| string
+| `"100M"`
+| Memory request configuration for the Nomad Server deployment.
+
 | nomad.server.rpc.mTLS
 | object
-| `{"CACertificate":"","certificate":"","privateKey":""}`
+| `{"CACertificate":"","certificate":"","enabled":true,"privateKey":""}`
 | Nomad mTLS (2 Options), strongly suggested for RPC communication +
 Encrypts traffic and authenticates clients to ensure no unauthenticated clients can join the cluster. +
 *Option 1:* Provide the CACertificate, certificate, and privateKey values - CircleCI will create the secret for you. +
@@ -1222,6 +1366,36 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | bool
 | `false`
 |
+
+| notifications.audit_log_batcher.replicas
+| int
+| `1`
+| Number of replicas to deploy for the audit-log-batcher deployment.
+
+| notifications.audit_log_batcher.resources.limits.cpu
+| string
+| `"2000m"`
+| CPU limit for the audit-log-batcher deployment.
+
+| notifications.audit_log_batcher.resources.limits.memory
+| string
+| `"2Gi"`
+| Memory limit for the audit-log-batcher deployment.
+
+| notifications.audit_log_enricher.replicas
+| int
+| `1`
+| Number of replicas to deploy for the audit-log-enricher deployment.
+
+| notifications.audit_log_enricher.resources.limits.cpu
+| string
+| `"2000m"`
+| CPU limit for the audit-log-enricher deployment.
+
+| notifications.audit_log_enricher.resources.limits.memory
+| string
+| `"256Mi"`
+| Memory limit for the audit-log-enricher deployment.
 
 | object_storage
 | object
@@ -1269,6 +1443,11 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `""`
 | A role that can be assumed to provide direct bucket access credentials. Required if presigned is false
 
+| oidc_service.base_url
+| string
+| `""`
+| Override the OIDC issuer base URL. If set, tokens will use this as the issuer instead of the Server domain (global.domainName). Use this when your Server domain is not publicly accessible and OIDC tokens need to be verified by external providers (AWS, GCP, JFrog, etc.). The URL should point to a publicly accessible endpoint that serves the JWKS files (e.g. an API Gateway, S3 bucket, or CloudFront distribution). Example: "https://abc123def.execute-api.us-east-1.amazonaws.com"
+
 | oidc_service.isEnabled
 | bool
 | `false`
@@ -1277,7 +1456,12 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | oidc_service.json_web_keys
 | string
 | `""`
-| The json web key (JWK) or key set (JWKS) used for signing ID tokens. Value should be base64 encoded.
+| The json web key (JWK) or key set (JWKS) used for signing ID tokens. Value should be base64 encoded. Not required if json_web_keys_secret_name is set.
+
+| oidc_service.json_web_keys_secret_name
+| string
+| `""`
+| Name of a pre-existing Kubernetes Secret containing the JWKS in a key named "json-web-keys". When set, the chart will not create its own Secret and will reference this one instead. Use this to integrate with external secret managers (e.g. External Secrets Operator, CSI Secret Store Driver) that sync secrets from AWS Secrets Manager, HashiCorp Vault, etc.
 
 | oidc_service.replicas
 | int
@@ -1303,6 +1487,11 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | object
 | `{"limits":{"cpu":"200m","memory":"128Mi"},"requests":{"cpu":"100m","memory":"128Mi"}}`
 | Resource configuration for the oidc-tasks-service deployment.
+
+| opentelemetry-collector.config.exporters.debug
+| object
+| `{}`
+|
 
 | opentelemetry-collector.config.processors.filter/traces_lowSignal.error_mode
 | string
@@ -1359,6 +1548,11 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `{}`
 |
 
+| opentelemetry-collector.config.receivers.statsd.endpoint
+| string
+| `"0.0.0.0:8125"`
+|
+
 | opentelemetry-collector.config.receivers.zipkin
 | object
 | `{}`
@@ -1369,9 +1563,14 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `{}`
 |
 
-| opentelemetry-collector.config.service.pipelines.metrics
-| object
-| `{}`
+| opentelemetry-collector.config.service.pipelines.metrics.exporters[0]
+| string
+| `"debug"`
+|
+
+| opentelemetry-collector.config.service.pipelines.metrics.receivers[0]
+| string
+| `"statsd"`
 |
 
 | opentelemetry-collector.config.service.pipelines.traces
@@ -1386,7 +1585,12 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 
 | opentelemetry-collector.image.repository
 | string
-| `"otel/opentelemetry-collector-k8s"`
+| `"otel/opentelemetry-collector-contrib"`
+|
+
+| opentelemetry-collector.image.tag
+| string
+| `"0.144.0"`
 |
 
 | opentelemetry-collector.livenessProbe.terminationGracePeriodSeconds
@@ -1412,6 +1616,26 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | opentelemetry-collector.ports.jaeger-thrift.enabled
 | bool
 | `false`
+|
+
+| opentelemetry-collector.ports.statsd.containerPort
+| int
+| `8125`
+|
+
+| opentelemetry-collector.ports.statsd.enabled
+| bool
+| `true`
+|
+
+| opentelemetry-collector.ports.statsd.protocol
+| string
+| `"UDP"`
+|
+
+| opentelemetry-collector.ports.statsd.servicePort
+| int
+| `8125`
 |
 
 | opentelemetry-collector.ports.zipkin.enabled
@@ -1587,7 +1811,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | postgresql.primary.persistence.existingClaim
 | string
 | `""`
-| To increase PVC size, follow this guide: https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+| To increase PVC size, follow this guide: xref:../operator/expanding-internal-database-volumes#[Expanding internal database volumes]
 
 | postgresql.primary.persistence.size
 | string
@@ -1726,7 +1950,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 
 | rabbitmq.image.tag
 | string
-| `"3.12.1168-14155b1"`
+| `"3.12.4066-fcf0542"`
 |
 
 | rabbitmq.internal
@@ -1739,10 +1963,25 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `15672`
 | When `internal: true`, this value is '15672' else port of external rabbitmq instance
 
+| rabbitmq.memoryHighWatermark.enabled
+| bool
+| `true`
+|
+
+| rabbitmq.memoryHighWatermark.type
+| string
+| `"relative"`
+|
+
+| rabbitmq.memoryHighWatermark.value
+| float
+| `0.4`
+|
+
 | rabbitmq.persistence.existingClaim
 | string
 | `""`
-| To increase PVC size, follow this guide: https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+| To increase PVC size, follow this guide: xref:../operator/expanding-internal-database-volumes#[Expanding internal database volumes]
 
 | rabbitmq.persistence.size
 | string
@@ -1772,6 +2011,26 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | rabbitmq.replicaCount
 | int
 | `1`
+|
+
+| rabbitmq.resources.limits.cpu
+| string
+| `"2"`
+|
+
+| rabbitmq.resources.limits.memory
+| string
+| `"2Gi"`
+|
+
+| rabbitmq.resources.requests.cpu
+| string
+| `"500m"`
+|
+
+| rabbitmq.resources.requests.memory
+| string
+| `"1Gi"`
 |
 
 | rabbitmq.secure_amqp
@@ -1827,7 +2086,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | redis.master.persistence.size
 | string
 | `"8Gi"`
-| To increase PVC size, follow this guide: https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+| To increase PVC size, follow this guide: xref:../operator/expanding-internal-database-volumes#[Expanding internal database volumes]
 
 | redis.master.podAnnotations."backup.velero.io/backup-volumes"
 | string
@@ -1857,7 +2116,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | redis.slave.persistence.size
 | string
 | `"8Gi"`
-| To increase PVC size, follow this guide: https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+| To increase PVC size, follow this guide: xref:../operator/expanding-internal-database-volumes#[Expanding internal database volumes]
 
 | redis.slave.podAnnotations."backup.velero.io/backup-volumes"
 | string
@@ -2019,136 +2278,11 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | `"512Mi"`
 | Memory limit for the step-receiver deployment
 
-| telegraf.args[0]
-| string
-| `"--config"`
-|
-
-| telegraf.args[1]
-| string
-| `"/etc/telegraf/telegraf.conf"`
-|
-
-| telegraf.args[2]
-| string
-| `"--config-directory"`
-|
-
-| telegraf.args[3]
-| string
-| `"/etc/telegraf/telegraf.d"`
-|
-
-| telegraf.args[4]
-| string
-| `"--watch-config"`
-|
-
-| telegraf.args[5]
-| string
-| `"poll"`
-|
-
-| telegraf.config.agent.omit_hostname
-| bool
-| `true`
-|
-
-| telegraf.config.inputs[0].statsd.datadog_extensions
-| bool
-| `true`
-|
-
-| telegraf.config.inputs[0].statsd.max_ttl
-| string
-| `"12h"`
-|
-
-| telegraf.config.inputs[0].statsd.metric_separator
-| string
-| `"."`
-|
-
-| telegraf.config.inputs[0].statsd.percentile_limit
-| int
-| `1000`
-|
-
-| telegraf.config.inputs[0].statsd.percentiles[0]
-| int
-| `50`
-|
-
-| telegraf.config.inputs[0].statsd.percentiles[1]
-| int
-| `95`
-|
-
-| telegraf.config.inputs[0].statsd.percentiles[2]
-| int
-| `99`
-|
-
-| telegraf.config.inputs[0].statsd.service_address
-| string
-| `":8125"`
-|
-
-| telegraf.config.outputs[0].file.files[0]
-| string
-| `"stdout"`
-|
-
-| telegraf.custom_config
-| string
-| `""`
-|
-
-| telegraf.fullnameOverride
-| string
-| `"telegraf"`
-|
-
-| telegraf.mountPoints[0].mountPath
-| string
-| `"/etc/telegraf/telegraf.d"`
-|
-
-| telegraf.mountPoints[0].name
-| string
-| `"telegraf-config"`
-|
-
-| telegraf.resources.limits.memory
-| string
-| `"512Mi"`
-| Memory limit for the telegraf deployment.
-
-| telegraf.resources.requests.cpu
-| string
-| `"200m"`
-| CPU request for the telegraf deployment.
-
-| telegraf.resources.requests.memory
-| string
-| `"256Mi"`
-| Memory request for the telegraf deployment.
-
-| telegraf.volumes[0].configMap.name
-| string
-| `"telegraf-config"`
-|
-
-| telegraf.volumes[0].name
-| string
-| `"telegraf-config"`
-|
-
 | tink
 | object
 | `{"enabled":false,"keyset":""}`
 | Tink Configuration +
-Tink is given precedence over vault. If tink.enabled is true, vault will not be deployed. Tink keys can be rotated (see link:https://support.circleci.com/hc/en-us/articles/39931197265691-Rotating-Tink-keys-in-CircleCI-Server[Rotating Tink keys in CircleCI Server]). To migrate from Vault to Tink, see link:https://github.com/CircleCI-Public/server-scripts/tree/main/vault-to-tink[server-scripts vault-to-tink]. +
+Tink is given precedence over vault. If tink.enabled is true, vault will not be deployed. Tink or vault must be set once at install and cannot be changed. +
 *Option 1:* Leave this blank, and create the secret yourself. CircleCI will assume it exists. +
 The secret must be named 'tink' and have the key; keyset. *Option 2:* Set the values tink.keyset here and CircleCI will create the secret automatically. +
 Generate a keyset via: `tinkey create-keyset --key-template XCHACHA20_POLY1305`
@@ -2276,4 +2410,3 @@ The secret must be named 'vault' and have the key; token. +
 | `"8Gi"`
 | Memory limit configuration for the workflows-conductor-grpc deployment.
 |===
-pass:[<!-- vale on -->]
