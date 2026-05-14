@@ -3,7 +3,7 @@
 :page-description: How to install and configure the chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
 :experimental:
 
-The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. It works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. The Chunk CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
 
 Some of the things you can do with the chunk CLI include:
 
@@ -20,10 +20,10 @@ NOTE: **chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer t
 The `chunk` CLI supports macOS and Linux on both arm64 and x86_64 architectures. Windows is not supported.
 
 [#installation]
-== Installation
+== 1. Installation
 
 [#macos-install-with-homebrew]
-=== macOS and Linux install with Homebrew
+=== 1.1 macOS and Linux install with Homebrew
 
 The recommended installation method for both macOS and Linux is Homebrew:
 
@@ -33,7 +33,7 @@ $ brew install CircleCI-Public/circleci/chunk
 ----
 
 [#verify-installation]
-=== Verify the installation
+=== 2.2 Verify the installation
 
 Confirm the chunk CLI is working and check the version:
 
@@ -43,13 +43,17 @@ $ chunk --version
 ----
 
 [#authentication]
-== Authentication
+== 2. Authentication
 
-After installing the `chunk` CLI, set credentials for each service you plan to use.
+After installing the `chunk` CLI, set credentials for each service you plan to use. Authentication is required for some commands, such as `chunk sidecar` and `chunk task`.
 
-[#auth-circleci]
-=== CircleCI
+=== 2.1 Set authentication credentials
 
+[tabs]
+====
+CircleCI::
++
+--
 Required for `chunk sidecar` and `chunk task` commands.
 
 [source,console]
@@ -58,10 +62,11 @@ $ chunk auth set circleci
 ----
 
 Enter your CircleCI personal API token when prompted. Generate a personal API token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
+--
 
-[#auth-anthropic]
-=== Anthropic
-
+Anthropic::
++
+--
 Required for `chunk build-prompt`.
 
 [source,console]
@@ -70,10 +75,11 @@ $ chunk auth set anthropic
 ----
 
 Enter your Anthropic API key when prompted. Generate an API key from the link:https://console.anthropic.com/settings/keys[Anthropic console, window=_blank].
+--
 
-[#auth-github]
-=== GitHub
-
+GitHub::
++
+--
 Required for `chunk build-prompt`.
 
 [source,console]
@@ -82,9 +88,11 @@ $ chunk auth set github
 ----
 
 Enter a GitHub personal access token with `repo` scope when prompted.
+--
+====
 
 [#check-auth-status]
-=== Check authentication status
+=== 2.2 Check authentication status
 
 To see which credentials you have configured:
 
@@ -93,8 +101,7 @@ To see which credentials you have configured:
 $ chunk auth status
 ----
 
-[#remove-credentials]
-=== Remove credentials
+=== 2.3 Remove credentials
 
 To remove stored credentials for a provider:
 
@@ -106,7 +113,7 @@ $ chunk auth remove <provider>
 Replace `<provider>` with `circleci`, `anthropic`, or `github`.
 
 [#initialize-a-project]
-== Initialize a project
+== 3. Initialize a project
 
 Run `chunk init` in your project directory to configure chunk for that project:
 
@@ -148,6 +155,8 @@ The following flags are available:
 [#updating-the-cli]
 == Update the chunk CLI
 
+Run the following command to update the chunk CLI:
+
 [source,console]
 ----
 $ brew upgrade chunk
@@ -155,6 +164,8 @@ $ brew upgrade chunk
 
 [#uninstall]
 == Uninstall the chunk CLI
+
+To uninstall the chunk CLI, run the following command:
 
 [source,console]
 ----
