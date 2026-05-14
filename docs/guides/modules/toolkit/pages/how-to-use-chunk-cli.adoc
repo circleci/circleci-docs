@@ -62,7 +62,7 @@ You can customize this behavior with the following flags:
 --
 
 [#run-validation]
-== Validate your changes
+== Validate your changes locally
 
 The `chunk validate` command runs the commands configured in your project's `.chunk/config.json`. Use it to verify your changes pass all quality checks before pushing.
 
@@ -105,20 +105,85 @@ The following flags are available:
 --
 
 [#run-validation-in-a-sidecar]
-=== Validate in a Chunk sidecar
+[badge="Preview"]
+== Validate in a Chunk sidecar
 
 CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
-To validate in a CircleCI Cloud environment instead of locally, pass a Chunk sidecar ID:
+Chunk sidecars let you validate your changes in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses.
+
+Follow these steps to validate in a Chunk sidecar:
+
+=== 1. Authenticate with CircleCI
+
+Before creating a Chunk sidecar, authenticate with CircleCI:
+
+[source,console]
+----
+$ chunk auth set circleci
+----
+
+Enter your CircleCI personal API token when prompted. Generate a token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
+
+=== 2. Create a Chunk sidecar
+
+Create a new Chunk sidecar environment:
+
+[source,console]
+----
+$ chunk sidecar create --name <name>
+----
+
+Replace `<name>` with a descriptive name for your sidecar. The command auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment. When ready, it prints the Chunk sidecar ID. Copy this ID for use in the validation step.
+
+=== 3. Sync your local files to the sidecar
+
+Sync your local project files to the Chunk sidecar:
+
+[source,console]
+----
+$ chunk sidecar sync
+----
+
+This copies your current working directory to the remote environment.
+
+=== 4. Run validation in the sidecar
+
+Run your validation commands in the Chunk sidecar:
 
 [source,console]
 ----
 $ chunk validate --sidecar-id <sidecar-id>
 ----
 
-To get a Chunk sidecar ID, run `chunk sidecar create` and copy the ID printed when the environment is ready, or run `chunk sidecar list` to retrieve the ID of an existing Chunk sidecar. See the <<manage-sidecars>> section for details.
+Replace `<sidecar-id>` with the ID from step 2. The command executes all configured validation commands from your `.chunk/config.json` in the remote environment.
+
+=== 5. (Optional) SSH into the sidecar for debugging
+
+If validation fails and you need to investigate, SSH into the Chunk sidecar:
+
+[source,console]
+----
+$ chunk sidecar ssh
+----
+
+This opens an interactive shell in the remote environment.
+
+=== 6. (Optional) Snapshot the sidecar for reuse
+
+After configuring a Chunk sidecar successfully, capture its state as a snapshot for faster future sessions:
+
+[source,console]
+----
+$ chunk sidecar snapshot create --name <snapshot-name>
+----
+
+The command prints a snapshot ID. Use this ID to create new sidecars with `chunk sidecar create --name <name> --image <snapshot-id>`.
+
+For more details on managing Chunk sidecars, see the <<manage-sidecars>> section.
 
 [#manage-sidecars]
+[badge="Preview"]
 == Manage Chunk sidecars
 
 CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
@@ -287,3 +352,4 @@ Supported keys:
 == Next steps
 
 * xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI Web App]
+* link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[View the full command list in the chunk CLI repository, window=_blank]

@@ -47,14 +47,10 @@ $ chunk --version
 
 After installing the `chunk` CLI, set credentials for each service you plan to use. Authentication is required for some commands, such as `chunk sidecar` and `chunk task`.
 
-=== 2.1 Set authentication credentials
+[#auth-circleci]
+=== 2.1 CircleCI
 
-[tabs]
-====
-CircleCI::
-+
---
-Required for `chunk sidecar` and `chunk task` commands.
+Required for `chunk sidecar` and `chunk task` commands. The chunk CLI uses your CircleCI token to create and manage cloud sidecar environments for running remote validations.
 
 [source,console]
 ----
@@ -62,12 +58,11 @@ $ chunk auth set circleci
 ----
 
 Enter your CircleCI personal API token when prompted. Generate a personal API token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
---
 
-Anthropic::
-+
---
-Required for `chunk build-prompt`.
+[#auth-anthropic]
+=== 2.2 Anthropic
+
+Required for `chunk build-prompt`. The chunk CLI uses your Anthropic API key to analyze GitHub PR comments with Claude and generate team-specific review prompts.
 
 [source,console]
 ----
@@ -75,12 +70,11 @@ $ chunk auth set anthropic
 ----
 
 Enter your Anthropic API key when prompted. Generate an API key from the link:https://console.anthropic.com/settings/keys[Anthropic console, window=_blank].
---
 
-GitHub::
-+
---
-Required for `chunk build-prompt`.
+[#auth-github]
+=== 2.3 GitHub
+
+Required for `chunk build-prompt`. The chunk CLI uses your GitHub token to mine PR review comments from your repository history.
 
 [source,console]
 ----
@@ -88,32 +82,11 @@ $ chunk auth set github
 ----
 
 Enter a GitHub personal access token with `repo` scope when prompted.
---
-====
-
-[#check-auth-status]
-=== 2.2 Check authentication status
-
-To see which credentials you have configured:
-
-[source,console]
-----
-$ chunk auth status
-----
-
-=== 2.3 Remove credentials
-
-To remove stored credentials for a provider:
-
-[source,console]
-----
-$ chunk auth remove <provider>
-----
-
-Replace `<provider>` with `circleci`, `anthropic`, or `github`.
 
 [#initialize-a-project]
-== 3. Initialize a project
+== 3. Initialize and validate a project
+
+=== 3.1 Initialize a project
 
 Run `chunk init` in your project directory to configure chunk for that project:
 
@@ -128,9 +101,7 @@ $ chunk init
 * Creates a `.chunk/config.json` file with the detected commands.
 * Generates hook configuration in `.claude/settings.json` for Claude Code.
 
-After initialization, `chunk validate` runs the detected commands and `chunk build-prompt` mines your GitHub PR history.
-
-The following flags are available:
+The following flags are available for `chunk init`:
 
 [.table-scroll]
 --
@@ -152,6 +123,12 @@ The following flags are available:
 |===
 --
 
+=== 3.2 Validate your project
+
+After initialization, run `chunk validate` to run the detected commands. You can also run `chunk build-prompt` to mine your GitHub PR history for a team-specific review prompt.
+
+For detailed information on using the chunk CLI, including generating review prompts, running validations, and installing skills, refer to xref:how-to-use-chunk-cli.adoc[How To Use the `chunk` CLI].
+
 [#updating-the-cli]
 == Update the chunk CLI
 
@@ -171,6 +148,31 @@ To uninstall the chunk CLI, run the following command:
 ----
 $ brew uninstall chunk
 ----
+
+[#manage-credentials]
+== Manage credentials
+
+[#check-auth-status]
+=== Check authentication status
+
+To see which credentials you have configured:
+
+[source,console]
+----
+$ chunk auth status
+----
+
+[#remove-credentials]
+=== Remove credentials
+
+To remove stored credentials for a provider:
+
+[source,console]
+----
+$ chunk auth remove <provider>
+----
+
+Replace `<provider>` with `circleci`, `anthropic`, or `github`.
 
 [#next-steps]
 == Next steps
