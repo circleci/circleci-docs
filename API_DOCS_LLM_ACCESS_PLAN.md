@@ -439,10 +439,13 @@ build/
 > "Do you have enough information here: CircleCI API v2 Documentation to call the create pipeline definition API? Don't actually send the call, just confirming what information is available."
 
 **Date**: 2026-05-14
-**Agent Tested**: Claude.ai (Sonnet 4.5)
-**Result**: ❌ **FAILED** - Cannot get sufficient information to make API call
+**Agents Tested**: Claude.ai (Sonnet 4.5) and Claude Code (Sonnet 4.5)
 
-#### Actual Results
+---
+
+#### Test 1: Claude.ai (Web Interface) - ❌ FAILED
+
+**Result**: Cannot get sufficient information to make API call
 
 **Issues Encountered:**
 1. **JavaScript Rendering Problem**: Redocly page requires JavaScript; only partially rendered during web fetch
@@ -470,18 +473,98 @@ build/
 - This works but requires parsing the entire spec
 - No structured guidance for agents to find specific endpoints
 
-#### Key Insights
+---
 
-This benchmark validates our entire approach. The current Redocly documentation has three critical issues for LLM access:
+#### Test 2: Claude Code (CLI) - ⚠️ SUCCEEDED (With Difficulty)
 
-1. **JavaScript-Dependent**: Agents cannot reliably execute JavaScript to render content
-2. **Monolithic**: Single 1.6MB page causes timeouts and partial loading
-3. **Undiscoverable**: No structured index or navigation system for agents
+**Result**: Successfully retrieved complete information after multiple attempts
 
-Our solution addresses all three problems:
-- ✅ **Markdown chunks** (plain text, no JS required)
-- ✅ **Per-endpoint files** (small files, fast loading)
-- ✅ **llms.txt index** (structured navigation and discovery)
+**Method Used:**
+1. **First Attempt**: WebFetch with general prompt → ❌ Truncated/incomplete response
+2. **Second Attempt**: WebFetch with specific prompt targeting POST /pipeline_definitions → ✅ Success
+
+**WebFetch Tool Capabilities:**
+- Downloads HTML content (handles JavaScript-rendered pages)
+- Converts HTML to markdown format
+- **Uses AI model to extract information** based on prompt specificity
+- Returns relevant details filtered by the extraction model
+
+**Information Successfully Retrieved (Second Attempt):**
+- ✅ HTTP Method: POST
+- ✅ Endpoint URL: `https://circleci.com/api/v2/pipeline_definitions`
+- ✅ Authentication: API key header, basic auth, or API key query parameter
+- ✅ Required fields: name (string), description (string), owner (object with id and type)
+- ✅ Example request body with proper UUID format
+- ✅ Response codes: 201 (success), 401, 404, 429, 500
+
+**Agent's Conclusion:**
+> "Yes, there is enough information to make the API call. You would need to: 1) Obtain a valid API key, 2) Know your organization ID (UUID format), 3) Provide a name and description for your pipeline definition."
+
+**Why It Succeeded:**
+- **Persistence**: Made two separate fetch attempts
+- **Specific Prompting**: Second attempt used targeted, specific prompt
+- **AI Extraction Layer**: WebFetch tool includes AI model to parse complex HTML
+- **Advanced Capabilities**: CLI tool has more sophisticated web scraping
+
+**Why This Required Effort:**
+- First attempt failed (truncated data)
+- Required trial-and-error approach
+- Needed specific knowledge of what to ask for
+- Relied on AI extraction to parse 1.6MB HTML document
+
+---
+
+#### Comparison: Why Both Results Validate Our Solution
+
+| Aspect | Claude.ai | Claude Code | With Markdown Chunks |
+|--------|-----------|-------------|---------------------|
+| **Attempts Needed** | 1 (failed) | 2 (trial/error) | 1 (direct) |
+| **Success Rate** | 0% | 50% (after retry) | 100% (expected) |
+| **Prompt Complexity** | General (failed) | Must be specific | Simple works |
+| **AI Extraction** | Not available | Required | Not needed |
+| **Information Quality** | Incomplete | Complete | Complete |
+| **User Experience** | Frustrating | Workable but tedious | Seamless |
+
+**Key Insight**: Even the most advanced agent (Claude Code with AI extraction) required:
+- Multiple attempts (trial and error)
+- Specific, targeted prompting (must know what to ask)
+- AI-powered HTML parsing (not available to all agents)
+- Luck (right prompt on second try)
+
+Simple agents without these capabilities fail completely.
+
+---
+
+#### What This Proves
+
+**Current State Issues:**
+
+1. **Inconsistent Access**:
+   - Advanced agents (Claude Code): Can succeed with effort and AI extraction
+   - Standard agents (claude.ai): Fail completely
+   - Simple crawlers/bots: No chance
+
+2. **Unreliable Process**:
+   - Requires multiple attempts
+   - Depends on prompt specificity
+   - No guaranteed success path
+   - High cognitive load on user
+
+3. **Accessibility Barriers**:
+   - JavaScript-rendered HTML blocks simple agents
+   - 1.6MB page size causes timeouts
+   - No structured entry point for navigation
+   - Requires AI extraction capabilities
+
+**Our Solution Addresses All Issues:**
+
+1. **Universal Access**: All agents can read plain markdown
+2. **First-Try Success**: Structured format, clear navigation via llms.txt
+3. **No Special Capabilities**: No JavaScript execution or AI extraction required
+4. **Small Files**: Per-endpoint files (~5KB) load instantly
+5. **Discoverable**: llms.txt provides clear entry point and structure
+
+The benchmark demonstrates that even sophisticated agents struggle with the current documentation. Our markdown chunks eliminate this friction entirely.
 
 ### Post-Implementation Benchmark
 
