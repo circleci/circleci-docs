@@ -361,3 +361,138 @@ mongodb:
 --
 
 The changes will take effect upon running `helm install/upgrade`. If you are completing a migration to an externalized MongoDB instance, when you perform `helm upgrade`, the scaled down pods will be scaled back to their replica numbers as defined by your `values.yaml`.
+
+[#redis]
+== Redis
+
+CircleCI Server uses Redis for ephemeral application state. You can run Redis externally instead of using the internally deployed instance to gain control over scalability, availability, and patching.
+
+[#redis-limitations]
+=== Limitations
+
+[CAUTION]
+====
+The following limitations apply to external Redis support:
+
+* Redis Cluster mode is not supported. A single-shard configuration with replicas is supported.
+* Only password-based database authentication (`requirepass`) is supported. Redis 6 ACL-based authentication (username + password) is not supported.
+* Only TLS certificates signed by a publicly trusted certificate authority are supported. Private CAs and self-signed certificates are not supported.
+====
+
+[#best-practices-for-your-redis]
+=== Best practices for Redis
+
+* Your external Redis instance must be Redis 6.2 or later.
+* Make sure your external Redis instance supports up to 30 different logical databases. CircleCI Server uses multiple Redis databases to isolate workloads.
+* Run Redis with at least one read replica for failover.
+* Run Redis in the same VPC and region as your CircleCI Server cluster to minimise latency.
+
+[#connecting-your-external-redis]
+=== Connecting your external Redis instance to CircleCI Server
+
+Once you have provisioned your external Redis instance, add the following to your `values.yaml` file so that CircleCI Server can connect to it:
+
+[source,yaml]
+----
+redis:
+  internal: false
+  host: <primary-host>          # Primary endpoint (writer)
+  port: 6379
+  readerHost: <reader-host>     # Optional. Defaults to redis.host if empty.
+  readerPort: 6379              # Optional. Defaults to redis.port if empty.
+----
+
+NOTE: Setting `redis.internal: false` removes any previously deployed internal Redis instance.
+
+If your Redis provider exposes a separate reader endpoint, set `redis.readerHost` and `redis.readerPort` to that endpoint so read traffic is routed to the replica. If you do not set them, CircleCI Server uses `redis.host` and `redis.port` for both reads and writes.
+
+[#redis-tls]
+==== TLS
+
+If your external Redis endpoint is reachable over TLS, set `redis.ssl: true`:
+
+[source,yaml]
+----
+redis:
+  internal: false
+  host: <primary-host>
+  port: 6379
+  ssl: true
+  sslSkipVerify: false
+----
+
+The Redis endpoint must present a certificate signed by a publicly trusted certificate authority. Private CAs and self-signed certificates are not supported. If your Redis endpoint cannot present a publicly trusted certificate, set `redis.ssl: false` and ensure the connection between CircleCI Server and Redis runs over a trusted private network.
+
+[#redis-authentication]
+==== Authentication
+
+CircleCI Server authenticates to Redis using a password (Redis `requirepass`). ACL-based authentication is not supported.
+
+You can either pre-create a Kubernetes secret holding the password, or let CircleCI Server create the secret from a value in `values.yaml`.
+
+[tab.redis.Create_secret_yourself]
+--
+Create the secret first:
+
+[source,shell]
+----
+kubectl create secret generic redis-external \
+  --from-literal=redis-password=<redis-password>
+----
+
+Then reference it from `values.yaml`:
+
+[source,yaml]
+----
+redis:
+  internal: false
+  host: <primary-host>
+  port: 6379
+  auth:
+    existingSecret: redis-external
+    existingSecretKey: redis-password
+----
+--
+
+[tab.redis.CircleCI_creates_secret]
+--
+Add the password directly to `values.yaml`. CircleCI Server creates the secret automatically:
+
+[source,yaml]
+----
+redis:
+  internal: false
+  host: <primary-host>
+  port: 6379
+  auth:
+    password: <redis-password>
+----
+--
+
+The changes take effect on the next `helm install` or `helm upgrade`.
+
+[#redis-network-connectivity]
+=== Network connectivity requirements
+
+* The Kubernetes nodes that run CircleCI Server must be able to reach the Redis primary (and reader, if separate) on the configured port (default `6379`).
+* If your Redis instance lives in a different VPC from your CircleCI Server cluster, configure VPC peering, AWS Transit Gateway, or an equivalent route so the cluster's pod CIDR can reach the Redis subnets.
+* Allow inbound traffic on the Redis port from your cluster's node and pod CIDRs in the Redis security group (or firewall).
+* If TLS is enabled, ensure no middlebox terminates the TLS connection between CircleCI Server and Redis; the application validates the certificate end-to-end.
+
+[#redis-troubleshooting]
+=== Troubleshooting
+
+*Pods crash-looping with `NOAUTH Authentication required` or `WRONGPASS invalid username-password pair`*::
+The password in `redis.auth` does not match what the Redis endpoint requires. Confirm the password value and that the secret reference resolves to the expected value.
+
+*`MOVED` or `CLUSTERDOWN` errors in application logs*::
+The Redis endpoint is running in Cluster Mode Enabled, which is not supported. Recreate the cluster in Cluster Mode Disabled and update `redis.host` to the new primary endpoint.
+
+*TLS handshake failures (`x509: certificate signed by unknown authority`)*::
+The certificate presented by Redis is not trusted by the CircleCI Server containers. Use a Redis endpoint with a publicly trusted certificate, or disable TLS by setting `redis.ssl: false` (only when the connection runs over a trusted private network).
+
+*Application errors mentioning `ERR DB index is out of range`*::
+The external Redis instance does not support enough logical databases. Configure it to support up to 30 different logical databases.
+
+*Connection timeouts from CircleCI Server pods*::
+Verify the security group / firewall on the Redis side allows traffic from the cluster's node and pod CIDRs, and confirm DNS resolution from a pod with `kubectl exec -n "$namespace" <pod> -- nslookup <redis-host>`.
