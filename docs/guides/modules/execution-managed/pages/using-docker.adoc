@@ -1,11 +1,9 @@
 = Using the Docker execution environment
 :page-platform: Cloud, Server v4+
-:page-description: Learn how to configure a your jobs to run in the Docker execution environment
+:page-description: Learn how to configure your jobs to run in the Docker execution environment
 :experimental:
 
-CAUTION: *Legacy images with the prefix `circleci/`` were link:https://discuss.circleci.com/t/legacy-convenience-image-deprecation/41034[deprecated]* on December 31, 2021. For faster builds, upgrade your projects with link:https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/[next-generation convenience images].
-
-You can use the Docker execution environment to run your xref:orchestrate:jobs-steps.adoc[jobs] in Docker containers. The Docker execution environment is accessed using the xref:reference:ROOT:configuration-reference.adoc#docker[Docker executor]. Using Docker increases performance by building only what is required for your application.
+You can use the Docker execution environment to run your xref:orchestrate:jobs-steps.adoc[Jobs] in Docker containers. The Docker execution environment is accessed using the xref:reference:ROOT:configuration-reference.adoc#docker[Docker executor]. Using Docker increases performance by building only what is required for your application.
 
 Specify a Docker image in your xref:reference:ROOT:configuration-reference.adoc[`.circleci/config.yml`] file to spin up a container. All steps in your job will be run in this container.
 
@@ -19,7 +17,9 @@ jobs:
       - image: cimg/node:lts
 ----
 
-A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job will run. _Secondary_ containers can also be specified to run alongside for running services, such as, databases. If you are new to Docker, see the link:https://docs.docker.com/engine/docker-overview/[Docker Overview documentation] for concepts.
+A container is an instance of a specified Docker image. The first image listed in your configuration for a job is referred to as the _primary_ container image and this is where all steps in the job run. _Secondary_ containers can also be specified to run alongside the primary container for services such as databases.
+
+TIP: For an introduction to Docker concepts, see the link:https://docs.docker.com/engine/docker-overview/[Docker Overview documentation].
 
 CircleCI maintains convenience images on Docker Hub for popular languages. See link:https://circleci.com/developer/images[the CircleCI Developer Hub] for a complete list of image names and tags.
 
@@ -30,7 +30,7 @@ NOTE: If you need a Docker image that installs Docker and has Git, consider usin
 
 Docker images may be specified in a few ways:
 
-* By the image name and version tag on Docker Hub, or
+* By the image name and version tag on Docker Hub.
 * By using the URL to an image in a registry.
 
 Nearly all of the public images on Docker Hub and other Docker registries are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, refer to xref:private-images.adoc[Using Docker Authenticated Pulls].
@@ -82,9 +82,15 @@ jobs:
 [#x86]
 === x86
 
-For the Docker execution environment, the following resources classes are available for the x86 architecture:
+For the Docker execution environment, the following resource classes are available for the x86 architecture:
+
+==== Gen1
 
 include::ROOT:partial$execution-resources/docker-resource-table.adoc[]
+
+==== Gen2
+
+include::ROOT:partial$execution-resources/docker-gen2-resource-table.adoc[]
 
 [#arm]
 === Arm
@@ -97,6 +103,39 @@ include::ROOT:partial$execution-resources/docker-arm-resource-table.adoc[]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
+
+[#docker-gen2-benefits]
+== Docker gen2
+
+NOTE: Docker gen2 resource classes are available on paid plans only. See the xref:plans-pricing:plan-overview.adoc[Plans Overview] for details.
+
+Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
+
+[#docker-gen2-performance-improvements]
+=== Performance improvements
+
+Using more modern compute, gen2 instances are nearly 1.4x faster than their gen1 equivalents.
+
+x86 gen2 resources have a higher cost in credits per minute than their gen1 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+
+NOTE: Gen2 does not currently support the use of xref:security:ip-ranges.adoc[IP Ranges].
+
+[#using-docker-gen2]
+=== Using gen2
+
+To use a gen2 resource class, specify a `large.gen2` or equivalent class in your job configuration:
+
+[,yaml]
+----
+version: 2.1
+jobs:
+  my-job:
+    docker:
+      - image: cimg/base:current
+    resource_class: large.gen2
+    steps:
+      # ... steps for your job
+----
 
 [#docker-benefits-and-limitations]
 == Docker benefits and limitations
@@ -150,7 +189,7 @@ The table below shows tradeoffs between using a `docker` image versus an Ubuntu-
 | No
 | Yes
 
-| xref:optimize:docker-layer-caching.adoc[Docker layer caching]
+| xref:optimize:docker-layer-caching.adoc[Docker Layer Caching]
 | Yes
 | Yes
 
@@ -162,7 +201,7 @@ The table below shows tradeoffs between using a `docker` image versus an Ubuntu-
 | No
 | Yes
 
-| xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configurable resources (CPU/RAM)]
+| xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configurable Resources]
 | Yes
 | Yes
 |===
@@ -181,11 +220,11 @@ For more information on `machine`, see the next section below.
 [#docker-image-best-practices]
 == Docker image best practices
 
-* If you encounter problems with rate limits imposed by your registry provider, using xref:private-images.adoc[authenticated Docker pulls] may grant higher limits.
+* If you encounter problems with rate limits imposed by your registry provider, using xref:private-images.adoc[Authenticated Docker Pulls] may grant higher limits.
 
-* CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. We encourage you to xref:private-images.adoc[add Docker Hub authentication] to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+* CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. You are not impacted by rate limits when pulling images from Docker Hub through CircleCI. We encourage you to xref:private-images.adoc[Add Docker Hub Authentication] to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits.
 
-* Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `+redis@sha256:95f0c9434f37db0a4f...+` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
+* Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml` file. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `+redis@sha256:95f0c9434f37db0a4f...+` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
 
 * If you experience increases in your run times due to installing additional tools during execution, consider creating and using a custom-built image that comes with those tools pre-installed. See the xref:custom-images.adoc[Using Custom-Built Docker Images] page for more information.
 
@@ -193,7 +232,7 @@ For more information on `machine`, see the next section below.
 
 * If your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with the Docker images being used.
 
-More details on the Docker executor are available on the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
+More details on the Docker executor are available on the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
 
 [#using-multiple-docker-images]
 == Using multiple Docker images
@@ -202,7 +241,7 @@ It is possible to specify multiple images for your job. Each image will be used 
 
 Using multiple containers for a job will be useful if you need to use a database for your tests, or for some other required service.
 
-When using a multi-container job setup, all containers run in a common network and every exposed port will be available on `localhost`. All containers can communicate with one another. It is also possible to change this hostname using the `name` key. For a full list of options, see the xref:reference:ROOT:configuration-reference.adoc#docker[Configuration reference].
+When using a multi-container job setup, all containers run in a common network and every exposed port will be available on `localhost`. All containers can communicate with one another. It is also possible to change this hostname using the `name` key. For a full list of options, see the xref:reference:ROOT:configuration-reference.adoc#docker[Configuration Reference].
 
 *In a multi-image configuration job, all steps are executed in the container created by the first image listed*.
 
@@ -225,7 +264,7 @@ jobs:
 [#ram-disks]
 == RAM disks
 
-A RAM disk is available at `/mnt/ramdisk` that offers a link:https://en.wikipedia.org/wiki/Tmpfs[temporary file storage paradigm], similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents of your project (all files checked out from git, dependencies, assets generated etc).
+A RAM disk is available at `/mnt/ramdisk` that offers a link:https://en.wikipedia.org/wiki/Tmpfs[temporary file storage paradigm], similar to using `/dev/shm`. Using the RAM disk can help speed up your build. Ensure your `resource_class` has enough memory to fit the entire project contents (all files checked out from git, dependencies, assets generated, etc.).
 
 The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
 
@@ -249,17 +288,17 @@ jobs:
 [#caching-docker-images]
 == Caching Docker images
 
-NOTE: This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to xref:optimize:docker-layer-caching.adoc[Docker layer caching], which is a feature used to speed up building new Docker images in your projects.
+NOTE: This section discusses caching the Docker images used to spin up a Docker execution environment. It does not apply to xref:optimize:docker-layer-caching.adoc[Docker Layer Caching], which is a feature used to speed up building Docker images in your projects.
 
-The time it takes to spin up a Docker container to run a job can vary based on several different factors, such as the size of the image and if some, or all, of the layers are already cached on the underlying Docker host machine.
+The time it takes to spin up a Docker container to run a job can vary based on several factors. These include the size of the image and whether some, or all, of the layers are already cached on the underlying Docker host machine.
 
-If you are using a more popular image, such as CircleCI convenience images, then cache hits are more likely for a larger number of layers. Most of the popular CircleCI images use the same base image. The majority of the base layers are the same between images, so you have a greater chance of having a cache hit.
+If you are using a more popular image, such as CircleCI convenience images, then cache hits are more frequent across a larger number of layers. Most of the popular CircleCI images use the same base image. The majority of the base layers are the same between images, so you have a greater chance of having a cache hit.
 
-The environment has to spin up for every new job, regardless of whether it is in the same workflow or if it is a re-run/subsequent run. (CircleCI never reuses containers, for security reasons.) Once the job is finished, the container is destroyed. There is no guarantee that jobs, even in the same workflow, will run on the same Docker host machine. This implies that the cache status may differ.
+The environment has to spin up for every job, regardless of whether it is in the same workflow or if it is a re-run/subsequent run. (CircleCI never reuses containers, for security reasons.) Once the job is finished, the container is destroyed. Jobs, even in the same workflow, are not guaranteed to run on the same Docker host machine. This implies that the cache status may differ.
 
-In all cases, cache hits are not guaranteed, but are a bonus convenience when available. With this in mind, a worst-case scenario of a full image pull should be accounted for in all jobs.
+In all cases, cache hits are not guaranteed, but are a bonus convenience when available. With this in mind, a worst-case scenario of a full image pull must be accounted for in all jobs.
 
-In summary, the availability of caching is not something that can be controlled via settings or configuration, but by choosing a popular image, such as link:https://circleci.com/developer/images[CircleCI convenience images], you will have more chances of hitting cached layers in the "Spin Up Environment" step.
+Caching availability cannot be controlled via settings or configuration. Choosing a popular image, such as link:https://circleci.com/developer/images[CircleCI convenience images], increases the chances of hitting cached layers in the "Spin Up Environment" step.
 
 [#next-steps]
 == Next steps

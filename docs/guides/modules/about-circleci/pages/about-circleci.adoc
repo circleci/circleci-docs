@@ -10,6 +10,7 @@ CircleCI's mission is to manage change so software teams can innovate faster. Ci
 
 Build, test, and deploy by using intelligent automation.
 
+.CircleCI process diagram
 image::guides:ROOT:circleci-system-diagram.png[CircleCI process diagram]
 
 [#what-is-ci-cd]
@@ -24,15 +25,15 @@ The CI/CD process allows developers to release higher quality, more stable produ
 [#circleci-in-your-workflow]
 == CircleCI in your workflow
 
-A software repository on a supported version control system (VCS) needs to be authorized and added as a project on link:https://app.circleci.com/[CircleCI]. Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each xref:reference:ROOT:glossary.adoc#job[job] in a separate xref:reference:ROOT:glossary.adoc#container[container] or link:https://circleci.com/developer/images?imageType=machine[virtual machine].
+A software repository on a supported version control system (VCS) needs to be authorized and added as a project on link:https://app.circleci.com/[CircleCI]. Every code change then triggers automated tests in a clean container or virtual machine. CircleCI runs each xref:reference:ROOT:glossary.adoc#job[Job] in a separate xref:reference:ROOT:glossary.adoc#container[container] or link:https://circleci.com/developer/images?imageType=machine[virtual machine].
 
-CircleCI sends an email notification of success or failure after the tests complete. CircleCI also includes integrated xref:integration:notifications.adoc[Slack and IRC notifications]. Code test coverage results are available from the details page for any project for which a reporting library is added.
+CircleCI sends an email notification of success or failure after the tests complete. CircleCI also includes integrated xref:integration:notifications.adoc[Slack and IRC Notifications]. Code test coverage results are available from the details page for any project for which a reporting library is added.
 
 CircleCI may be configured to deploy code to various environments, including (but not limited to):
 
 * AWS S3
-* AWS EC2 Container Service (ECS)
-* Google Cloud Platform (GCP)
+* AWS EC2 Container Service
+* Google Cloud Platform
 * Azure Container Registry
 * Heroku
 * Firebase
@@ -57,4 +58,4 @@ Other cloud service deployments can be scripted using SSH, or by installing the 
 == Next steps
 
 * xref:benefits-of-circleci.adoc[Benefits of CircleCI]
-* xref:concepts.adoc[CirceCI concepts]
+* xref:concepts.adoc[CircleCI Concepts]

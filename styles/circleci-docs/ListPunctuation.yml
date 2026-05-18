@@ -44,8 +44,8 @@ script: |
     // Count words (split by whitespace)
     words := text.fields(content)
 
-    // Only check items with 4 or more words
-    if len(words) < 4 {
+    // Only check items with 5 or more words
+    if len(words) < 5 {
       continue
     }
 

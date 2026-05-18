@@ -422,6 +422,14 @@ jobs:
 
 Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your feature branch and push to your VCS.
 
+=== Verify in CI
+
+After your pipeline runs, verify the test job is behaving as expected before merging.
+
+. In the CircleCI web app, navigate to your pipeline and open the test job.
+. Check the *Tests* tab and confirm the number of test results matches what you see when running tests without the `testsuite` command. A difference in test results could be a misconfiguration in your `discover` command.
+. Compare the job duration to a recent run without the `testsuite` command. The runtime should be similar - a significant difference may indicate a misconfiguration in your `test-suites.yml`.
+
 == Next steps
 
 At this stage, all of your tests should successfully run locally and in CI using the `testsuite` command.

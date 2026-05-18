@@ -320,7 +320,7 @@ Unsafe retries enable container runner to automatically rerun tasks that are une
 
 Unsafe retries is useful when scheduling workloads on spot instances, which often come with cost-saving benefits at the risk of pod preemptions with many Kubernetes providers.
 
-The following sequence shows how unsafe retires work:
+The following sequence shows how unsafe retries work:
 
 . If a pod fails or gets evicted during runtime, container runner will release the task.
 . All resources managed by container runner for the task, such as the Kubernetes pod and secret, are cleaned up and deleted.

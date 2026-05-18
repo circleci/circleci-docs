@@ -195,9 +195,9 @@ Pipeline parameters which are defined in configuration are always in scope, with
 [#pipeline-parameters-and-dynamic-configuration]
 === Pipeline parameters and dynamic configuration
 
-Parameters can be passed from the setup to the continuation workflow using the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb]. To pass these parameters use the `parameters` parameter from the `continue` job/command. Any parameters passed in this way must be declared as pipeline parameters in the continuation configuration.
+Parameters can be passed from the setup to the continuation workflow using the `continue` job or command from the link:https://circleci.com/developer/orbs/orb/circleci/continuation[continuation orb]. To pass these parameters, use the `parameters` parameter from the `continue` job/command. Any parameters passed in this way must be declared as pipeline parameters in the continuation configuration.
 
-When a pipeline parameter is declared in both the setup and the continuation configurations, the pipeline will error if both the following conditions are met:
+When a pipeline parameter is declared in both the setup and the continuation configurations, the pipeline will error if both of the following conditions are met:
 
 . The pipeline is triggered via the API.
 . The pipeline parameter's value specified in the API request is different from the default value specified in the setup configuration.
@@ -207,7 +207,7 @@ More information on setup workflows can be found in the xref:dynamic-config.adoc
 [#conditional-workflows]
 == Pipeline parameters and conditional workflows
 
-Use the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[`when` clause] (or the inverse clause `unless`) under a workflow declaration, along with a xref:reference:ROOT:configuration-reference.adoc#logic-statements[logic statement], to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause should evaluate to a truthy or falsy value.
+Use the xref:reference:ROOT:configuration-reference.adoc#using-when-in-workflows[`when` clause] (or the inverse clause `unless`) under a workflow declaration, along with a xref:reference:ROOT:configuration-reference.adoc#logic-statements[logic statement], to decide whether or not to run that workflow. Logic statements in a `when` or `unless` clause must evaluate to a truthy or falsy value.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing a trigger to pass that parameter to determine which workflows to run. Below is an example configuration using the pipeline parameter `run_integration_tests` to set whether the workflow `integration_tests` will run.
 
