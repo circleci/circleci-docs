@@ -420,7 +420,7 @@ Pipelines (also called pipeline definitions, in the API) are the highest-level u
 Pipelines are defined by two characteristics:
 
 - A configuration source, stored in a repository.
-- A checkout source, which determines which repository will be checked out when running a xref:reference:configuration-reference.adoc#checkout[Checkout Step].
+- A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step].
 
 The pipelines you can create and configure are derived from the integration types available to you. You can find this information in the <<vcs-integration>> section.
 
