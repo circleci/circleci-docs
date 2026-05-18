@@ -29,7 +29,7 @@ TIP: The majority of new CircleCI work triggering functionality will be made ava
 
 [.table-scroll]
 --
-[cols=5*, options="header"]
+[cols=4*, options="header"]
 |===
 |Organization type identified by URL
 |GitHub OAuth integration
