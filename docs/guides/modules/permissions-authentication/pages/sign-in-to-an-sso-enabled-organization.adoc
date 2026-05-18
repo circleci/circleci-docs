@@ -6,7 +6,7 @@
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
 for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
 
-[join-an-organization]
+[#join-an-organization]
 == Join an organization
 
 To join a CircleCI organization that has SSO enabled you must first have an active CircleCI account that you log into with an email and password or with social logins like GitHub or Bitbucket. For more information on creating a CircleCI account, see the xref:getting-started:first-steps.adoc[Sign up and try] page.
@@ -16,10 +16,10 @@ NOTE: If you use OAuth/social login to join CircleCI, it is important to SSO aut
 Once you have a CircleCI account you can join an SSO-enabled CircleCI organization in one of the following ways:
 
 * Get xref:manage-roles-and-permissions.adoc#add-people-to-your-organization[an invite].
-* Visit the CircleCI link:https://app.circleci.com/home/[home page]. Select the **Join Organisation** dropdown, and then select the option to **Join via SSO**.
+* Visit the CircleCI link:https://app.circleci.com/home/[home page]. Select the **Join Organization** dropdown, and then select the option to **Join via SSO**.
 * Via your organization's Identity Provider (IdP).
 
-[log-in-to-an-organization]
+[#log-in-to-an-organization]
 == Authenticate with SSO for an organization
 
 You must be logged in to your CircleCI account in order to authenticate with SSO for an organization.
