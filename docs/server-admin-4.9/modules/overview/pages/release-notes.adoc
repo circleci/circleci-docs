@@ -15,6 +15,14 @@ NOTE: Server 4.9 requires mongoDB 4.4 or higher. If your MongoDB instance is not
 
 For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.9 Guide].
 
+== Release 4.9.3
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-3/[changelog].
+
+== Release 4.9.2
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-2/[changelog].
+
 == Release 4.9.1
 
 For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-1/[changelog].

@@ -85,7 +85,8 @@ helm install container-agent container-agent/container-agent -n circleci -f valu
 
 
 [#enable-rerun-job-with-ssh]
-== 3. Enable rerun job with SSH (optional) - Open preview
+[badge="Open preview"]
+== 3. Enable rerun job with SSH (optional)
 
 NOTE: The ability to rerun a job with SSH for CircleCI container runner is in **open preview**.
 

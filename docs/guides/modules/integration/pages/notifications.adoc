@@ -3,47 +3,54 @@
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
-CircleCI offers integrated email notifications. IRC and Slack notifications can also be configured using orbs. Slack and email notifications are delivered on the successful completion or failure of a xref:orchestrate:workflows.adoc[Workflow]. IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
+CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work and set up Slack notifications for team channels. You can receive alerts about deployment status and Chunk usage. You can also designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
 
-[,yaml]
-----
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: cimg/base:2021.04
-    steps:
-      - checkout
-      - run: <command>
-  test:
-    docker:
-      - image: cimg/base:2021.04
-    steps:
-      - checkout
-      - run: <command>
-workflows:
-  version: 2.1
-  build_and_test: # < Slack and email notifications are sent for workflows
-    jobs:
-    # IRC notifications are sent for each job.
-      - build
-      - test
-----
+This page explains how to configure email notifications, Slack notifications, and organization-level contacts.
 
-[#set-or-change-email-notifications]
-== Setting and changing email notifications
+== User-level notifications
 
-To set or change your default email address, visit the link:https://app.circleci.com/settings/user/notifications[Notifications] page of the CircleCI application. If you are a member of multiple organizations, you can specify a different email address for each organization using the dropdown for each org.
+Configure your notification preferences, including the email address to use and the notifications categories you would like to receive.
 
-.Default email
+TIP: Your available email addresses depend on how you log in. If you use email and password, you will have a single email address. If you log in via GitHub or Bitbucket, you will see all email addresses associated with your connected account. To add or remove email addresses from your account, see the xref:permissions-authentication:manage-email-addresses.adoc[Manage Email Addresses] guide.
+
+=== Default email address for notifications
+
+CircleCI uses your "default" email address to send mandatory communications, which include:
+
+* System and security messages.
+* Billing and account updates.
+* Deprecation notices.
+
+To set or change your default email address, follow these steps:
+
+include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
+. Select *Notifications* from the sidebar.
+
+At the top of the page you can select the default email address for your notifications.
+
+.Default email address for notifications
+image::guides:ROOT:default-email.png[Screenshot showing how to change default email address and choose notifications]
+
+=== Build notification preferences
+
+Under "Build notification preferences" you can select between your saved email addresses per organization. You can also select `Don't send email notifications` for a specific organization as required.
+
+If you are a member of multiple organizations, you can specify a different email address for each organization. Use the dropdown menus to select from your available email addresses.
+
+.Build notification email preferences
 image::guides:ROOT:email-notifications.png[Screenshot showing how to change default email address and choose notifications]
 
-You can also configure your preferences for different categories here:
+=== Notification categories
 
-* *My work* - you receive an email every time a build you triggered finishes.
-* *Followed projects* - you receive emails for any build that has finished in a project that you have followed.
+You can configure your preferences for notification _categories_ at menu:User settings[Notifications]. The following notification categories are available:
 
-You can further filter the notifications you receive based on the status of the build as below:
+==== My work
+
+The *My work* category sends notifications for builds that you personally triggered. Use this to track your own commits and workflow runs.
+
+You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on your default branch. This includes workflows that are automatically cancelled when approval jobs expire after 90 days.
+
+Available filters:
 
 * On default branch (any status).
 * On default branch (failed, error, unauthorized).
@@ -53,10 +60,8 @@ You can further filter the notifications you receive based on the status of the 
 * Unauthorized
 * Error
 
-NOTE: The "On default branch (any status)" setting overrides individual status filters. For example, if you have "Cancelled" notifications disabled but "On default branch (any status)" enabled under either "My Work" or "Followed Projects," you will still receive notifications for canceled workflows. This includes workflows that are automatically canceled when approval jobs expire after 90 days.
-
-.Notification categories
-image::guides:ROOT:email-categories.png[Screenshot showing how to change which notifications to receive]
+.Notification categories my work
+image::guides:ROOT:categories-my-work.png[Screenshot showing how to change which notifications to receive]
 
 Email notifications appear as follows:
 
@@ -66,85 +71,64 @@ image::guides:ROOT:notification-email-success.png[Example success email notifica
 .Failure email
 image::guides:ROOT:notification-email-failure.png[Example failure email notification]
 
+==== Deployment notifications
+
+If you use the CircleCI release agent for deployments, you can receive notifications when a deployment is inconclusive. This helps you catch deployment issues early and investigate problems before they affect production. An inconclusive deployment typically means the release agent could not determine whether the deployment succeeded or failed.
+
+For more information, see the xref:deploy:release-agent-overview.adoc[Release Agent Overview] guide.
+
+==== Followed projects
+
+The *Followed projects* category sends notifications for any build in a project that you have followed, regardless of who triggered it. Use this to monitor team projects and stay informed about the overall project health.
+
+You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on the default branch. This includes workflows that are automatically cancelled when approval jobs expire after 90 days.
+
+Available filters:
+
+* On default branch (any status).
+* On default branch (failed, error, unauthorized).
+* Failed
+* Succeeded
+* Cancelled
+* Unauthorized
+* Error
+
+.Notification categories followed projects
+image::guides:ROOT:categories-followed-projects.png[Screenshot showing how to change which notifications to receive]
+
+==== Chunk notifications
+
+Chunk by CircleCI assists with CI/CD related tasks through a natural language chat interface and task scheduling. You can receive notifications when a teammate attempts to use Chunk. This allows you as an organization administrator to evaluate and enable Chunk for your organization.
+
+For a full guide to setting up and using Chunk, see the xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Overview and Setup] guide.
+
+[badge="Beta"]
+== Slack notifications
+
+CAUTION: The CircleCI Slack integration is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features.
+
+Configure Slack notifications at the project level to send workflow status updates to your team's Slack channels. This allows your entire team to stay informed about build status without individual email notifications.
+
+To set up Slack notifications for a project, follow the steps in the xref:integration:slack-integration.adoc[Slack Integration] guide.
+
+== Organization-level contacts
+
+Organization-level contacts are different from user-level notifications. These contacts are used by CircleCI to reach designated administrators during security events, deprecation notices, and platform-level changes. They ensure your organization has a reliable point of contact for critical communications that affect your entire team, not just individual developers.
+
+Set organization-level contact email addresses for the following purposes:
+
+* *Security contacts*. Used during security events if no other key contact exists. A maximum of 5 email addresses can be stored.
+* *Technical contacts*. Used for deprecation notices and platform-level changes directed at the organization. A maximum of 5 email addresses can be stored.
+
+To set up organization-level contacts you must be an organization administrator. Follow these steps:
+
+include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Scroll to the manage security and technical contacts sections.
+
+.Organization-level contacts
+image::guides:ROOT:security-technical-contacts.png[Screenshot showing how to set up organization-level contacts]
+
 [#notifications-with-orbs]
 == Sending notifications with orbs
 
-You can use orbs to integrate notifications into your configuration. CircleCI offers a Slack orb and an IRC orb. Several third-party orbs are also available. Search the link:https://circleci.com/developer/orbs?query=notification&filterBy=all[orb registry] to see what other orbs are available.
-
-[#using-the-slack-orb]
-=== Using the Slack orb
-
-Using the link:https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb], you can integrate and customize Slack notifications directly from your `config.yml` file. The following config is an example of notifying a Slack channel with a custom message:
-
-[,yaml]
-----
-version: 2.1
-orbs:
-  slack: circleci/slack@4.9.3
-jobs:
-  notify:
-    docker:
-      - image: cimg/base:2021.04
-    steps:
-      - slack/notify:
-          custom: |
-            {
-              "blocks": [
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "plain_text",
-                      "text": "*This is a text notification*",
-                      "emoji": true
-                    }
-                  ]
-                }
-              ]
-            }
-          event: always
-workflows:
-  send-notification:
-    jobs:
-      - notify:
-          context: slack-secrets
-----
-
-See xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb] for a full tutorial with examples.
-
-CircleCI's Slack orb can be used for other types of notification, including notifying a Slack channel of a pending approval. For more information and to view usage examples, see the link:https://circleci.com/developer/orbs/orb/circleci/slack[CircleCI Slack orb page].
-
-[#using-the-irc-orb]
-=== Using the IRC orb
-
-The link:https://circleci.com/developer/orbs/orb/circleci/irc[IRC orb] is similar to the Slack orb, but only has one main feature: sending custom IRC notifications from CircleCI. Consider this example configuration:
-
-[,yaml]
-----
-version: 2.1
-orbs:
-  irc: circleci/irc@0.2.0
-jobs:
-  build:
-    docker:
-      - image: <Docker image>
-    steps:
-      - checkout
-      - irc/notify:
-          server: <IRC-server-to-connect-to> # default: IRC_SERVER environment varible.
-          port: <6667> # default: 6667 if left blank.
-          channel: <the IRC server to post in> # required parameter
-          nick: <Your IRC nickname> # default: `circleci-bot`
-          message: <Build complete!> # default: "Your CircleCI Job has completed."
-workflows:
-  your-workflow:
-    jobs:
-      - build
-----
-
-Replace the values in brackets (`< >`) with your own details.
-
-== See also
-
-* xref:orbs:use:orb-intro.adoc[Orbs Introduction].
-* xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb].
+You can use orbs to integrate notifications into your configuration. CircleCI offers a Slack orb and an IRC orb. Several third-party orbs are also available. Search the link:https://circleci.com/developer/orbs?query=notification&filterBy=all[orb registry] to see what other orbs are available. For more information on using the Slack orb, see xref:getting-started:slack-orb-tutorial.adoc[Using the Slack Orb].
