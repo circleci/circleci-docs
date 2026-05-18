@@ -139,6 +139,13 @@ jobs:
           paths:
             - ui-bundle.zip
             - ui/node_modules
+      - go/install:
+          version: "1.25.0"
+      - run:
+          name: Verify Go Installation
+          command: |
+            go version
+            echo "[INFO] Go installed successfully for API markdown generation"
       - run:
           name: Build the Documentation Site with Antora
           command: |

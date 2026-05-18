@@ -187,6 +187,25 @@ async function generateLlmsTxt(playbook, contentCatalog) {
   sections.push(`- API: ${playbook.site.url}/api/<version>/`);
   sections.push('');
 
+  // API Documentation (LLM-friendly)
+  sections.push('## API Documentation\n');
+  sections.push('CircleCI API v2 documentation is available in LLM-friendly format:\n');
+  sections.push(`- **API Index for LLMs**: ${playbook.site.url}/api/v2/llms.txt`);
+  sections.push(`  - Structured index of all API endpoints`);
+  sections.push(`  - Tag-grouped operations with descriptions`);
+  sections.push(`  - Authentication and rate limiting information`);
+  sections.push(`- **Per-Endpoint Markdown**: ${playbook.site.url}/api/v2/operations/{operationId}.md`);
+  sections.push(`  - Individual markdown files for each API endpoint`);
+  sections.push(`  - Complete schemas, parameters, and examples`);
+  sections.push(`  - Example: ${playbook.site.url}/api/v2/operations/createContext.md`);
+  sections.push(`- **Machine-Readable Index**: ${playbook.site.url}/api/v2/operations/index.json`);
+  sections.push(`  - JSON index of all operations with metadata`);
+  sections.push(`- **Full OpenAPI Spec**: ${playbook.site.url}/api/v2/openapi.json`);
+  sections.push(`  - Complete OpenAPI 3.0 specification`);
+  sections.push(`- **Human-Readable Docs**: ${playbook.site.url}/api/v2/`);
+  sections.push(`  - Interactive Redocly documentation (requires JavaScript)`);
+  sections.push('');
+
   // Server Versions
   const serverVersions = extractServerVersions(playbook);
   if (Object.keys(serverVersions).length > 0) {
