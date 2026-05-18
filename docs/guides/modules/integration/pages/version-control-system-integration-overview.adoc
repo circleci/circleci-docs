@@ -299,7 +299,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | *Set up xref:deploy:set-up-rollbacks.adoc[Rollback Pipelines] to manually revert your application to a previous stable version directly from the CircleCI web app*
 | Deployment
 | [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
@@ -310,7 +310,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | *Set up xref:deploy:set-up-deploys.adoc[Deploy Pipelines] to automatically deploy your application to a target environment directly from the CircleCI web app*
 | Deployment
 | [.circle-green]#**Yes**#
-| [.circle-red]#**No**#
+| [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
