@@ -100,6 +100,47 @@ function buildApiV1(callback) {
 }
 
 /**
+ * Generate LLM-Friendly Markdown Documentation
+ *
+ * PURPOSE: Create per-operation markdown files for agent/LLM consumption
+ *
+ * STRATEGY: Uses Go tool to parse OpenAPI spec and generate markdown chunks
+ *
+ * OUTPUT:
+ * - build/api/v2/operations/*.md - One file per API endpoint
+ * - build/api/v2/llms.txt - Structured index for agents
+ * - build/api/v2/operations/index.json - Machine-readable index
+ *
+ * ERROR HANDLING: Non-blocking - if generation fails, build continues
+ * This ensures human-readable docs are still built even if agent docs fail
+ */
+function generateApiMarkdown(callback) {
+  console.log('📝 Generating markdown chunks for LLMs/agents...')
+
+  // Run Go tool to generate markdown from bundled OpenAPI spec
+  // Use absolute paths since we're changing directory
+  const projectRoot = process.cwd()
+  const inputSpec = path.join(projectRoot, 'build/temp-api-v2/openapi-final.json')
+  const outputDir = path.join(projectRoot, 'build/api/v2')
+
+  const command = `cd scripts/generate-api-markdown && go run ./cmd/generate-api-markdown ${inputSpec} ${outputDir}`
+
+  exec(command, (err, stdout, stderr) => {
+    if (err) {
+      console.error('⚠️  Failed to generate markdown chunks:', err.message)
+      if (stderr) console.error(stderr)
+      console.log('ℹ️  Continuing build without LLM-friendly markdown...')
+      // Non-blocking: continue even if markdown generation fails
+      return callback()
+    }
+
+    console.log('✅ Markdown chunks generated successfully')
+    if (stdout) console.log(stdout)
+    callback()
+  })
+}
+
+/**
  * Build API v2 Documentation
  *
  * STRATEGY: Sophisticated pipeline for generating API documentation with code samples
@@ -109,14 +150,16 @@ function buildApiV1(callback) {
  * 2. Bundle and resolve all $ref pointers (using Redocly)
  * 3. Generate code samples with httpsnippet (for cURL, Node.js, Python, Go, Ruby)
  * 4. Apply JSON patches - CURRENTLY DISABLED for simplicity
+ * 4.5. Generate markdown chunks for LLMs/agents
  * 5. Lint for quality assurance
  * 6. Generate final HTML with Redocly
- * 7. Copy logo assets
+ * 7. Copy logo and OpenAPI spec
  * 8. Cleanup temporary files
  *
  * WHY THIS ORDER:
  * - Bundling first resolves $ref pointers, making parameters accessible
  * - Code samples need resolved parameters to generate valid snippets
+ * - Markdown generation needs final spec with code samples
  * - Linting catches issues before final HTML generation
  * - Live API ensures docs are always current
  */
@@ -166,17 +209,19 @@ function buildApiV2(callback) {
           if (stdout) console.log(stdout)
         }
 
-        // STEP 4: Apply JSON patches (COMMENTED OUT - keeping simple for now)
+        // STEP 4: Apply JSON patches
         // Allows customizing the API spec without modifying the source
-        // Uncomment this section when you need to apply custom patches
-        // console.log('🔧 Applying JSON patches...')
-        // applyJsonPatches(() => {
+        // This applies externalDocs and any other customizations from openapi-patch.json
+        console.log('🔧 Applying JSON patches...')
+        applyJsonPatches(() => {
+          // Copy patched file to final location
+          fs.copyFileSync('build/temp-api-v2/openapi-patched.json', 'build/temp-api-v2/openapi-final.json')
 
-        // For now, skip patching and use the spec with examples as final
-        console.log('ℹ️  Skipping JSON patches (disabled for simplicity)')
-        fs.copyFileSync('build/temp-api-v2/openapi-with-examples.json', 'build/temp-api-v2/openapi-final.json')
+          // STEP 4.5: Generate markdown chunks for LLMs/agents
+          // Creates per-operation markdown files and llms.txt index
+          generateApiMarkdown(() => {
 
-        // STEP 5: Lint API docs
+          // STEP 5: Lint API docs
         // Quality check to catch issues before generating final docs
         console.log('🔍 Linting API docs...')
         exec('npx @redocly/cli lint build/temp-api-v2/openapi-final.json', (err, stdout, stderr) => {
@@ -187,41 +232,43 @@ function buildApiV2(callback) {
             console.log('✅ API docs linting passed')
           }
 
-          // STEP 6: Build final HTML documentation
-          // Redocly transforms the OpenAPI spec into beautiful, interactive docs
-          console.log('🏗️  Building docs with Redocly CLI...')
+              // STEP 6: Build final HTML documentation
+            // Redocly transforms the OpenAPI spec into beautiful, interactive docs
+            console.log('🏗️  Building docs with Redocly CLI...')
 
-          const buildCommand = [
-            'npx @redocly/cli build-docs build/temp-api-v2/openapi-final.json',
-            '--output build/api/v2/index.html',
-            '--config redocly.yaml',
-            '--template custom-template.hbs',
-            '--title "CircleCI API v2 Documentation"',
-            '--disableGoogleFont=false',
-          ].join(' ')
+            const buildCommand = [
+              'npx @redocly/cli build-docs build/temp-api-v2/openapi-final.json',
+              '--output build/api/v2/index.html',
+              '--config redocly.yaml',
+              '--template custom-template.hbs',
+              '--title "CircleCI API v2 Documentation"',
+              '--disableGoogleFont=false',
+            ].join(' ')
 
-          exec(buildCommand, (err, stdout, stderr) => {
-            if (err) {
-              console.error('❌ Failed to build API docs:', err)
-              return callback(err)
-            }
-
-            console.log('✅ API v2 docs built successfully')
-
-            // STEP 7: Copy logo file for template
-            console.log('📋 Copying logo file...')
-            exec('cp logo.svg build/api/v2/', (err) => {
+            exec(buildCommand, (err, stdout, stderr) => {
               if (err) {
-                console.warn('⚠️  Warning: Could not copy logo file:', err.message)
-              } else {
-                console.log('✅ Logo file copied successfully')
+                console.error('❌ Failed to build API docs:', err)
+                return callback(err)
               }
 
-              // STEP 8: Cleanup temporary files
-              // Remove intermediate files to keep build directory clean
-              exec('rm -rf build/temp-api-v2', () => {
-                console.log('🎉 API v2 documentation build completed!')
-                callback()
+              console.log('✅ API v2 docs built successfully')
+
+                // STEP 7: Copy logo and OpenAPI spec
+              console.log('📋 Copying logo and OpenAPI spec...')
+              exec('cp logo.svg build/api/v2/ && cp build/temp-api-v2/openapi-final.json build/api/v2/openapi.json', (err) => {
+                if (err) {
+                  console.warn('⚠️  Warning: Could not copy files:', err.message)
+                } else {
+                  console.log('✅ Logo and OpenAPI spec copied successfully')
+                }
+
+                  // STEP 8: Cleanup temporary files
+                // Remove intermediate files to keep build directory clean
+                exec('rm -rf build/temp-api-v2', () => {
+                  console.log('🎉 API v2 documentation build completed!')
+                    callback()
+                  })
+                })
               })
             })
           })
@@ -288,6 +335,17 @@ function applyJsonPatches(callback) {
  * - @redocly/cli: OpenAPI processing and doc generation
  * - jq: JSON processing (system dependency)
  * - curl: API fetching (system dependency)
+ * - Go 1.25+: Markdown generation for LLMs (scripts/generate-api-markdown/)
+ *
+ * OUTPUT STRUCTURE (v2):
+ * build/api/v2/
+ * ├── index.html              # Human-readable Redocly documentation
+ * ├── openapi.json            # Full OpenAPI specification
+ * ├── llms.txt                # LLM/agent index
+ * └── operations/             # Per-endpoint markdown files
+ *     ├── get-project.md
+ *     ├── trigger-pipeline.md
+ *     └── index.json
  *
  * CUSTOMIZATION:
  * - Add code samples: Re-enable snippet-enricher-cli in step 2
