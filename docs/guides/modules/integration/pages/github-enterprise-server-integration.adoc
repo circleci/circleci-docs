@@ -12,9 +12,9 @@ NOTE: The GitHub Enterprise Server integration is currently in **Preview**. Acce
 
 CircleCI Cloud supports GitHub Enterprise Server as an add-on VCS integration. If your organization uses a self-hosted GitHub instance, you can connect it to CircleCI Cloud.
 
-Using the add-on VCS integration, you get the same CI/CD experience available to GitHub Cloud users, using CircleCI Cloud, without needing to run and maintain your own instance of CircleCI Server.
+Using the add-on VCS integration, you get the same CI/CD experience available to GitHub Cloud users, without needing to run and maintain your own instance of CircleCI Server.
 
-The GitHub Enterprise Server integration is designed to provide the same functionality as CircleCI's existing xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[GitHub App Integration] that is available for GitHub Cloud (GitHub.com and GitHub Enterprise Cloud). This includes pipeline triggering, project setup, commit status reporting, and all supported trigger event types.
+The GitHub Enterprise Server integration provides the same functionality as CircleCI's existing xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[GitHub App Integration] that is available for GitHub Cloud (GitHub.com and GitHub Enterprise Cloud). This includes pipeline triggering, project setup, commit status reporting, and all supported trigger event types.
 
 [#supported-functionality]
 == Supported functionality
