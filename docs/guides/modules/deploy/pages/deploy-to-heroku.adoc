@@ -1,6 +1,6 @@
 = Deploy to Heroku
 :page-platform: Cloud, Server v4+
-:page-description: This is document provides examples of deploying to Heroku.
+:page-description: This document provides examples of deploying to Heroku.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Heroku.
@@ -27,7 +27,7 @@ include::ROOT:partial$tips/env-var-or-context.adoc[]
 [#deploy-with-orb]
 === 3. Deploy with the Heroku orb
 
-Use the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to keep your configuration simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the link:https://circleci.com/developer/orbs/orb/circleci/heroku[orbs registry] for full details of parameters and options:
+Use the link:https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku orb] to keep your configuration simple. The `deploy-via-git` job installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the link:https://circleci.com/developer/orbs/orb/circleci/heroku[orbs registry] for full details of parameters and options:
 
 include::ROOT:partial$tips/add-version-number.adoc[]
 
