@@ -389,9 +389,9 @@ You create Secret::
 [source, shell]
 ----
 kubectl -n <namespace> create secret generic nomad-mtls \
-  --ca.pem="<base64-encoded-certificate>" \
-  --key.pem="<base64-encoded-private-key>" \
-  --cert.pem="<base64-encoded-ca-certificate>"
+  --from-literal=cert.pem="<base64-encoded-certificate>" \
+  --from-literal=key.pem="<base64-encoded-private-key>" \
+  --from-literal=ca.pem="<base64-encoded-ca-certificate>"
 
 kubectl -n <namespace> annotate secret/nomad-mtls \
   meta.helm.sh/release-name=<helm-release-name> \
@@ -499,7 +499,7 @@ Apply the changes made to your `values.yaml` file:
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion410} -f <path-to-values.yaml>
 ----
 
 [#nomad-clients-validation]
@@ -628,10 +628,12 @@ aws ec2 create-security-group --vpc-id "<VPC_ID>" --description "CircleCI machin
 +
 This outputs a GroupID to be used in the next steps:
 +
-[source, json]
+[source,json]
+----
 {
     "GroupId": "<VM_SECURITY_GROUP_ID>"
 }
+----
 
 . *Apply the security group for SSH (If using public IP addresses for machines)*
 +
@@ -829,7 +831,7 @@ aws iam attach-role-policy --role-name <VM_ROLE_NAME> --policy-arn=<VM_POLICY_AR
 +
 Configure machine provisioner by adding the following to `values.yaml`:
 +
-NOTE: If deploying in specific zone need to specify subnetwork for AWS
+NOTE: If deploying in a specific zone, you need to specify a subnetwork for AWS.
 +
 [source,yaml]
 ----
@@ -879,7 +881,7 @@ Create a `policy.json` file with the following content. Fill in the ID of the ma
         "arn:aws:ec2:*:*:launch-template/*",
         "arn:aws:ec2:*:*:network-interface/*",
         "arn:aws:ec2:*:*:placement-group/*",
-        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>"
+        "arn:aws:ec2:*:*:security-group/<SECURITY_GROUP_ID>",
         "arn:aws:ec2:*:*:volume/*"
       ]
     },
@@ -916,7 +918,7 @@ Create a `policy.json` file with the following content. Fill in the ID of the ma
       "Resource": "arn:aws:ec2:*:*:*/*",
       "Condition": {
         "StringEquals": {
-          "ec2:CreateAction" : "RunInstances"
+          "ec2:CreateAction": "RunInstances"
         }
       }
     },
@@ -1167,12 +1169,12 @@ endif::env-aws[]
 [#machine-provisioner-validation]
 === Machine provisioner validation
 
-Apply they changes made to your `values.yaml` file.
+Apply the changes made to your `values.yaml` file.
 
 [source,shell,subs=attributes+]
 ----
 namespace=<your-namespace>
-helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion47} -f <path-to-values.yaml>
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $namespace --version {serverversion410} -f <path-to-values.yaml>
 ----
 
 Once you have configured and deployed CircleCI Server, the next step is to validate that machine provisioner is operational. You can rerun the Reality Check project within your CircleCI installation to see the machine provisioner jobs complete. At this point, all tests will pass.

@@ -1952,7 +1952,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 
 | rabbitmq.image.tag
 | string
-| `"3.12.1168-14155b1"`
+| `"3.12.4066-fcf0542"`
 |
 
 | rabbitmq.internal
