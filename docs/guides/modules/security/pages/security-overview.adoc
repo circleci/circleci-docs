@@ -10,7 +10,7 @@ This document outlines recommended best practices to ensure the security of data
 
 Minimize the number of secrets (private keys and environment variables) your build needs and rotate secrets regularly. It is important to rotate secrets regularly in your organization, especially as team members come and go.
 
-Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised. Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build.
+Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised. Ensure the secrets you _do_ use are of limited scope — with only enough permissions for the purposes of your build.
 
 Understand the role and permission systems of other platforms you use outside of CircleCI. For example, IAM permissions on AWS, or GitHub's link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[Machine User] feature.
 
