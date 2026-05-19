@@ -233,7 +233,7 @@ link:https://github.com/jacoco/jacoco[JaCoCo] is a popular library for Java code
 </project>
 ----
 
-Running `mvn test` will include a code coverage report (an `exec`) file that is also converted to an `html` page, like many other coverage tools. The Pom file above writes to the `target` directory, which you can then store as an artifact in your `.circleci/config.yml` file.
+Running `mvn test` will include a code coverage report (an `exec` file) that is also converted to an `html` page, like many other coverage tools. The Pom file above writes to the `target` directory, which you can then store as an artifact in your `.circleci/config.yml` file.
 
 Below is a minimal CI configuration to correspond with the above example:
 

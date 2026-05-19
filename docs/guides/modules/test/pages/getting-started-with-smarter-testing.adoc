@@ -18,7 +18,7 @@ Smarter Testing provides independent features that can be enabled to reduce test
 * Evenly distributing tests across parallel execution nodes.
 * Automatically rerunning failed tests.
 
-To use the CircleCI's Smarter Testing, you first need to set up a couple of components:
+To use CircleCI's Smarter Testing, you first need to set up a couple of components:
 
 * Use the `testsuite` command for running your tests.
 * Create a `.circleci/test-suites.yml` configuration file to discover and run your tests.

@@ -71,7 +71,7 @@ Reach out to mailto:ai-feedback@circleci.com[] if you have a feature request for
 With the CircleCI evals orb, evaluations:
 
 * Will run as part of your CircleCI pipeline.
-* Job step details can include direct links to your evaluation results stored on your 3rd party evaluations provider. When you need to further review the evaluation results in detail, this link enables you to navigate to and view your evaluation results.
+* Job step details can include direct links to your evaluation results stored on your third-party evaluation provider. When you need to further review the evaluation results in detail, this link enables you to navigate to and view your evaluation results.
 * Your evaluation results can be saved to a `.json` file, for evaluation testing.
 
 image::guides:ROOT:llmops/eval-job-run-eval-step.png[Evaluations Job Step Details: Task Evals]
@@ -106,7 +106,7 @@ You can configure test case assertions, like this:
 [,json]
 ----
 {
-  "correctness": "correctness > 0.9"
+  "correctness": "correctness > 0.9",
   "toxicity": "toxicity < 0.01"
 }
 ----
@@ -120,7 +120,7 @@ You can configure test case assertions, like this:
 }
 ----
 
-Test cases are composed of a name and an assertion. In the first example above, the name is `correctness` and the assertion is that correctness will be above 0.9. When configuring test cases, we suggest assigning a name based on the test scenario. The examples above use names based on input metrics: `correctness` , `toxicity` and `labels`.
+Test cases are composed of a name and an assertion. In the first example above, the name is `correctness` and the assertion is that correctness is above 0.9. When configuring test cases, we suggest assigning a name based on the test scenario. The examples above use names based on input metrics: `correctness` , `toxicity` and `labels`.
 
 Evaluation testing results determine if a job should stop or continue, as follows:
 
