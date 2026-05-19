@@ -26,7 +26,7 @@ module.exports = (url, options) => {
     if (!urlCache) {
       urlCache = new Map()
       const pages = contentCatalog.getPages()
-      pages.forEach(page => {
+      pages.forEach((page) => {
         if (page.pub && page.pub.url) {
           urlCache.set(page.pub.url, page)
         }
@@ -50,7 +50,7 @@ module.exports = (url, options) => {
     // Build badge data object matching article.hbs pattern
     const badgeData = {
       text: badgeText,
-      classes: attrs['page-badge-classes'] || 'text-terminal-black border'
+      classes: attrs['page-badge-classes'] || 'text-terminal-black border',
     }
 
     // Build inline style if hex colors provided
