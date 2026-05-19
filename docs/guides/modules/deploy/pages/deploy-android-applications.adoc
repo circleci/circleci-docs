@@ -233,7 +233,7 @@ If you set your environment variables as shown earlier in this tutorial, you wil
 - `release_store_password`
 - `google_play_key`
 
-The following snippet an example with each parameter set as its default value.
+The following snippet is an example with each parameter set as its default value.
 
 ```yaml
 workflows:
@@ -268,7 +268,7 @@ To run each command individually in a job, you will need to add the following co
 
 Additionally, you need to run either `npm install` or `yarn install` using the Node orb.
 
-As with the deploy-to-play-store approach, you will not need to set the parameters `base64-keystore`, `release-key-alias`, `release-key-password`, `release-store-password`, and `google-play-key`, if you had created environment variables as outlined earlier in this tutorial.
+As with the deploy-to-play-store approach, you will not need to set the parameters `base64-keystore`, `release-key-alias`, `release-key-password`, `release-store-password`, and `google-play-key`, if you have created environment variables as outlined earlier in this tutorial.
 
 Below is an example configuration of this approach:
 
@@ -332,7 +332,7 @@ run:
 
 . **Create Google Play API key:**
 +
-Finally, create your Google Play API key from your `api.json` You have already saved the value with an environment variable `$GOOGLE_PLAY_KEY`. You can refer to this variable and write the `api.json` file at runtime, instead of uploading it to a remote repository.
+Finally, create your Google Play API key from your `api.json` file, which you have already saved as the environment variable `$GOOGLE_PLAY_KEY`. You can refer to this variable and write the `api.json` file at runtime, instead of uploading it to a remote repository.
 +
 Add the following command to the job:
 +
@@ -344,7 +344,7 @@ run:
 
 . **Deploy your app**
 +
-To now deploy your app, you need to add your Fastlane steps. To do this you only need to add a command that runs `fastlane my_deployment_lane`; in this case, the command looks like this:
+To deploy your app, you need to add your Fastlane steps. To do this you only need to add a command that runs `fastlane my_deployment_lane`; in this case, the command looks like this:
 +
 ```yaml
 run: fastlane playstore

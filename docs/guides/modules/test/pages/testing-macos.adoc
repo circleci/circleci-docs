@@ -79,7 +79,7 @@ workflows:
 [#configuring-fastlane]
 === Configuring Fastlane
 
-Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. Note that when using Fastlane, depending on the actions in your configuration, you may need to setup a 2-factor Authentication (2FA).
+Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. Note that when using Fastlane, depending on the actions in your configuration, you may need to set up a 2-factor Authentication (2FA).
 
 See the link:https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication[Fastlane docs] for more information.
 

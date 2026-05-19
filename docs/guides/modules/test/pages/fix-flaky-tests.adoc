@@ -9,8 +9,6 @@ NOTE: Chunk by CircleCI is currently in *beta*. There are no extra costs during 
 
 TIP: Have feedback or feature requests? Submit them on our link:https://circleci.canny.io/cloud-feature-requests?selectedCategory=chunk-ai[Ideas board, window=_blank] where you can also see existing feature requests and vote on them.
 
-Use Chunk by CircleCI to automatically identify and present resolutions to flaky tests in your CI/CD pipelines.
-
 Chunk provides automated capabilities to identify and resolve common issues in your CI/CD pipelines. Chunk can automatically detect flaky tests and generate fixes to help you reduce the time spent debugging intermittent failures.
 
 TIP: Chunk by CircleCI is an AI agent that you can choose to set up in your organization to help with CI/CD related tasks.
@@ -227,9 +225,9 @@ Also consider including a markdown file, named `claude.md` or `agents.md` at the
 If you get the following error inside a Chunk task, this indicates that your Open AI organization verification is pending.
 
 [source,shell]
-OpenAI organization verification required. Please verify your organization at https://platform.openai.com/settings/organization/generaland see our community forum for more debugging help.
+OpenAI organization verification required. Please verify your organization at https://platform.openai.com/settings/organization/general and see our community forum for more debugging help.
 
-To fix this issues, head to link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], navigate to menu:General[Organization Settings] and select btn:[Verify Organization]. Then follow the steps to get your organization verified.
+To fix this issue, head to link:https://platform.openai.com/settings/organization/general[OpenAI Platform, window=_blank], navigate to menu:General[Organization Settings] and select btn:[Verify Organization]. Then follow the steps to get your organization verified.
 
 === Action required error
 

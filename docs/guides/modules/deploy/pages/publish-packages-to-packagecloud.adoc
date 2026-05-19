@@ -8,7 +8,7 @@ In this how-to guide, you will learn how to configure CircleCI to publish packag
 [#introduction]
 == Introduction
 
-link:https://packagecloud.io[Packagecloud] is a hosted package repository service. It allows users to host npm, Java/Maven, Python, apt, yum and RubyGem repositories without any pre-configuration.
+link:https://packagecloud.io[Packagecloud] is a hosted package repository service. It allows users to host npm, Java/Maven, Python, apt, yum, and RubyGem repositories without any pre-configuration.
 
 [#configure-environment-variables]
 == 1. Configure environment variables
@@ -155,10 +155,10 @@ jobs:
           command: npm set registry https://packagecloud.io/example-user/example-repo/npm/
 
       - run:
-          name: Authenticate with registry
+          name: Authenticate with the registry
           command: echo "//packagecloud.io/example-user/example-repo/npm/:_authToken=$PACKAGECLOUD_TOKEN" > ~/repo/.npmrc
 
-- run:
+      - run:
           name: Publish package
           command: npm publish
 ----
