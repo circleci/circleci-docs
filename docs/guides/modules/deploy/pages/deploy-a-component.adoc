@@ -8,11 +8,11 @@ Deploy pipelines allow you to deploy your components to a target environment. Th
 
 == Introduction
 
-CircleCI deploy pipelines allow you to deploy a specific version of your component to a target environment using a custom deploy pipeline. By deploying an already-built and tested version, you can skip the build process that would normally be part of a CircleCI pipeline and deploy right away. This provides fast execution and full control over the deployment process, making it ideal for complex systems and time-critical requirements.
+CircleCI deploy pipelines allow you to deploy a specific version of your component to a target environment using a custom deploy pipeline. By deploying an already built and tested version, you can skip the build process that would normally be part of a CircleCI pipeline and deploy right away. This provides fast execution and full control over the deployment process, making it ideal for complex systems and time-critical requirements.
 
 == Prerequisites
 
-To deploy a component using a deploy pipeline ensure you have set up deploy markers and a deploy pipeline, as described in the xref:set-up-deploys.adoc[Set up a Deploy Pipeline] guide.
+To deploy a component using a deploy pipeline, ensure you have set up deploy markers and a deploy pipeline, as described in the xref:set-up-deploys.adoc[Set up a Deploy Pipeline] guide.
 
 == Deploy using a deploy pipeline
 
