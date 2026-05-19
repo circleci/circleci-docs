@@ -62,7 +62,7 @@ A pipeline definition is a setting within CircleCI in your project to specify th
 
 No changes are pushed to your repository at this point. GitHub pipelines are viewable at menu:Project settings[Project Setup].
 
-. Select the repository that includes your project code. This is the repository that you want to rollback with the pipeline you are setting up.
+. Select the repository that includes your project code. This is the repository that you want to roll back with the pipeline you are setting up.
 . Select btn:[Create pipeline definition]. This creates a new pipeline definition for your rollback pipeline in your project.
 
 === 4. Add deploy markers
@@ -87,8 +87,8 @@ Make the changes yourself::
 +
 --
 . Select the "I'll make the config changes myself" checkbox.
-. In the **Environment Name** field, select or type your target environment name. More information in the  xref:configure-deploy-markers#manage-environments[Configure Deploy Markers] guide.  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
-. In the **Component Name** field, select or type the name of the component you want to rollback. The component name sets the name that will be displayed in the Deploys UI.
+. In the **Environment Name** field, select or type your target environment name. More information in the xref:configure-deploy-markers#manage-environments[Configure Deploy Markers] guide.  If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named `default`.
+. In the **Component Name** field, select or type the name of the component you want to roll back. The component name sets the name that will be displayed in the Deploys UI.
 +
 The setup will auto-generate deploy marker commands based on your selections.
 +
@@ -122,7 +122,7 @@ image::guides:ROOT:deploy/rollback-commit-config-button.png[Commit config button
 +
 Alternatively, you can copy the suggested configuration into an existing or newly created rollback config file. Call the file `rollback.yml` and save it in your repository's `.circleci` folder, for the system to detect and use this file. If you choose this method, select btn:[I already have a rollback config] and skip to the next step. See the <<configuration-tips, Configuration tips>> section for more details on customizing your rollback configuration.
 
-. Navigate to the pull request in your repository by selecting btn:[View pull Request] under the example config file.
+. Navigate to the pull request in your repository by selecting btn:[View pull request] under the example config file.
 
 . In the pull request, modify the rollback configuration according to your specific deployment needs. For example, set your own parameters and rollback logic, uncomment the included common rollback setups or write your own custom rollback implementation.
 . Once you have customized the configuration, merge the pull request to complete the rollback setup. Head back to the CircleCI web app and select btn:[Setup rollback pipeline] to activate the rollback pipeline.
@@ -131,7 +131,7 @@ You can now rollback deployments by running your rollback pipeline. More informa
 
 == Run a rollback pipeline
 
-For steps to running a rollback pipeline, see the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.
+For steps to run a rollback pipeline, see the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.
 
 == Change rollback pipeline
 
@@ -140,7 +140,7 @@ You can switch rollback pipelines for your project at any time. If you have conf
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 . Select the *Deploys* tab.
-. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown. You can also choose the _unset_ the rollback pipeline at this point, which will enable you to use the guided setup again as described above.
+. In the Rollback Pipeline section, choose the pipeline you want to be selected as the rollback pipeline from the dropdown. You can also choose _unset_ rollback pipeline at this point, which will enable you to use the guided setup again as described above.
 
 .Change rollback pipeline
 image::guides:ROOT:deploy/change-rollback-pipeline.png[Change rollback pipeline]
