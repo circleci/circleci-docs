@@ -259,6 +259,67 @@ $ chunk sidecar sync
 $ chunk sidecar exec <command>
 ----
 
+[#trigger-chunk-tasks]
+== Trigger Chunk tasks
+
+The `chunk task` command triggers a xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk task] in CircleCI Cloud from your terminal, instead of opening the Chunk task drawer in the CircleCI web app.
+
+[#configure-task-runs]
+=== Configure task runs
+
+Before you can trigger a task run, set up `.chunk/run.json` for the repository. This file records which CircleCI project the task should run against.
+
+From your project directory:
+
+[source,console]
+----
+$ chunk task config
+----
+
+The command fetches your CircleCI projects and prompts you to select the project to use. It then saves the selection to `.chunk/run.json`. Pass `--force` (or `-f`) to overwrite an existing configuration without confirmation.
+
+[#trigger-a-task-run]
+=== Trigger a task run
+
+After you have configured the repository, trigger a task run with `chunk task run`:
+
+[source,console]
+----
+$ chunk task run --definition <name-or-uuid> --prompt "<prompt text>"
+----
+
+Replace `<name-or-uuid>` with the name or UUID of the Chunk task definition you want to run, and `<prompt text>` with the instructions to send to the task. Both flags are required.
+
+The command prints the run ID and pipeline ID when the task is triggered.
+
+The following flags are available:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--definition <name-or-uuid>`
+|Required. Name or UUID of the Chunk task definition to run.
+
+|`--prompt <text>`
+|Required. Prompt text to send to the task.
+
+|`--branch <branch>`
+|Override the branch the task checks out.
+
+|`--new-branch`
+|Create a new branch for the task run.
+
+|`--no-pipeline-as-tool`
+|Disable running the pipeline as a tool.
+
+|`--json`
+|Print the response as JSON.
+|===
+--
+
 [#install-skills]
 == Install AI agent skills
 

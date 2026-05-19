@@ -9,6 +9,7 @@ Some of the things you can do with the chunk CLI include:
 
 * Mine your team's GitHub pull request history to generate a team-specific review prompt for AI agents using `chunk build-prompt`.
 * Validate commands locally or in CircleCI Cloud environments using `chunk validate`.
+* Trigger Chunk tasks in CircleCI Cloud from your terminal using `chunk task`.
 * Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`.
 * Set up pre-commit and session-end hooks that automatically validate in Claude Code using `chunk init`.
 
@@ -179,4 +180,5 @@ Replace `<provider>` with `circleci`, `anthropic`, or `github`.
 
 * xref:how-to-use-chunk-cli.adoc#generate-a-review-prompt[Generate a Team Review Prompt From Your GitHub PR History]
 * xref:how-to-use-chunk-cli.adoc#run-validation[Validate Your Changes]
+* xref:how-to-use-chunk-cli.adoc#trigger-chunk-tasks[Trigger Chunk Tasks]
 * xref:how-to-use-chunk-cli.adoc#install-skills[Install AI Agent Skills]
