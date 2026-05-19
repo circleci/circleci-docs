@@ -12,11 +12,31 @@
           </button>
         {{/if}}
         {{#if (and ./url (not (eq ./url @root.page.url)))}}
-          <a class="nav-link hover:text-link-on-light" href="
+          <a class="nav-link hover:text-link-on-light flex items-center justify-between gap-1.5" href="
             {{~#if (eq ./urlType 'internal')}}{{{relativize ./url}}}
-            {{~else}}{{{./url}}}{{~/if}}">{{{./content}}}</a>
+            {{~else}}{{{./url}}}{{~/if}}">
+            <span class="nav-link-text flex-1 min-w-0">{{{./content}}}</span>
+            {{#with (get-page-badge ./url)}}
+              <span class="nav-badge text-[10px] rounded-full py-0.5 px-1.5 flex-shrink-0 {{classes}}"
+                    style="{{style}}"
+                    role="status"
+                    aria-label="{{text}} status">
+                {{text}}
+              </span>
+            {{/with}}
+          </a>
           {{else}}
-          <span>{{{./content}}}</span>
+          <span class="flex items-center justify-between gap-1.5">
+            <span class="nav-link-text flex-1 min-w-0">{{{./content}}}</span>
+            {{#with (get-page-badge ./url)}}
+              <span class="nav-badge text-[10px] rounded-full py-0.5 px-1.5 flex-shrink-0 {{classes}}"
+                    style="{{style}}"
+                    role="status"
+                    aria-label="{{text}} status">
+                {{text}}
+              </span>
+            {{/with}}
+          </span>
         {{/if}}
       </div>
     {{/if}}
