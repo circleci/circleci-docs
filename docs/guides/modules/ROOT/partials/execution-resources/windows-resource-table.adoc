@@ -6,21 +6,21 @@
 
 |`windows.medium` (default)
 | 4
-| 15GB
+| 16GB
 | 200 GB
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `windows.large`
 | 8
-| 30GB
+| 32GB
 | 200 GB
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `windows.xlarge`
 | 16
-| 60GB
+| 64GB
 | 200 GB
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
