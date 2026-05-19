@@ -1,4 +1,5 @@
 const js = require('@eslint/js')
+const globals = require('globals')
 
 module.exports = [
   js.configs.recommended,
@@ -7,47 +8,11 @@ module.exports = [
       ecmaVersion: 2022,
       sourceType: 'script',
       globals: {
-        // Browser globals
-        window: 'readonly',
-        document: 'readonly',
-        navigator: 'readonly',
-        console: 'readonly',
-        setTimeout: 'readonly',
-        clearTimeout: 'readonly',
-        setInterval: 'readonly',
-        clearInterval: 'readonly',
-        requestAnimationFrame: 'readonly',
-        cancelAnimationFrame: 'readonly',
-        fetch: 'readonly',
-        localStorage: 'readonly',
-        sessionStorage: 'readonly',
-        URL: 'readonly',
-        URLSearchParams: 'readonly',
-        FormData: 'readonly',
-        HTMLElement: 'readonly',
-        Element: 'readonly',
-        Node: 'readonly',
-        NodeList: 'readonly',
-        Event: 'readonly',
-        CustomEvent: 'readonly',
-        getComputedStyle: 'readonly',
-        location: 'readonly',
-        history: 'readonly',
-        Image: 'readonly',
-        alert: 'readonly',
-        confirm: 'readonly',
-        prompt: 'readonly',
-        // Node globals
-        process: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        Buffer: 'readonly',
-        global: 'readonly',
-        module: 'writable',
-        require: 'readonly',
-        exports: 'writable',
-        // Vendor libraries (if needed)
+        ...globals.browser,
+        ...globals.node,
+        // Vendor libraries
         algoliasearch: 'readonly',
+        simpleDatatables: 'readonly',
       },
     },
     rules: {
