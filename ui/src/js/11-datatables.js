@@ -3,7 +3,7 @@
   'use strict'
 
   // Initialize Simple DataTables on tables with specific class
-  function initializeDataTables() {
+  function initializeDataTables () {
     const tables = document.querySelectorAll('table.datatable')
 
     if (tables.length === 0) {
@@ -11,20 +11,20 @@
       return
     }
 
-        // Check if Simple DataTables is available globally
-        if (typeof simpleDatatables === 'undefined' && typeof window.simpleDatatables === 'undefined') {
-          console.log('Simple DataTables not yet available, waiting...')
-          setTimeout(initializeDataTables, 100)
-          return
-        }
+    // Check if Simple DataTables is available globally
+    if (typeof simpleDatatables === 'undefined' && typeof window.simpleDatatables === 'undefined') {
+      console.log('Simple DataTables not yet available, waiting...')
+      setTimeout(initializeDataTables, 100)
+      return
+    }
 
-        // Get the DataTable constructor
-        const DataTable = simpleDatatables?.DataTable || window.simpleDatatables?.DataTable || window.DataTable
+    // Get the DataTable constructor
+    const DataTable = simpleDatatables?.DataTable || window.simpleDatatables?.DataTable || window.DataTable
 
-        if (!DataTable) {
-          console.error('DataTable constructor not found!')
-          return
-        }
+    if (!DataTable) {
+      console.error('DataTable constructor not found!')
+      return
+    }
 
     console.log(`Found ${tables.length} table(s) with .datatable class`)
 
@@ -42,24 +42,24 @@
 
         // Check for specific no-sort classes (e.g., .no-sort-col-3)
         const classList = Array.from(table.classList)
-        const noSortClasses = classList.filter(cls => cls.startsWith('no-sort-col-'))
+        const noSortClasses = classList.filter((cls) => cls.startsWith('no-sort-col-'))
 
         if (noSortClasses.length > 0) {
           const totalColumns = table.querySelector('thead tr').children.length
-          const nonSortableColumns = noSortClasses.map(cls => {
+          const nonSortableColumns = noSortClasses.map((cls) => {
             const match = cls.match(/no-sort-col-(\d+)/)
             return match ? parseInt(match[1]) : null
-          }).filter(col => col !== null)
+          }).filter((col) => col !== null)
 
-          console.log(`Non-sortable columns:`, nonSortableColumns)
-          console.log(`Total columns:`, totalColumns)
+          console.log('Non-sortable columns:', nonSortableColumns)
+          console.log('Total columns:', totalColumns)
 
           columnConfig = []
           for (let i = 0; i < totalColumns; i++) {
             const isSortable = !nonSortableColumns.includes(i)
             columnConfig.push({
               select: i,
-              sortable: isSortable
+              sortable: isSortable,
             })
             console.log(`Column ${i}: sortable = ${isSortable}`)
           }
@@ -74,7 +74,7 @@
             const isSortable = i !== 3
             columnConfig.push({
               select: i,
-              sortable: isSortable
+              sortable: isSortable,
             })
             console.log(`Column ${i}: sortable = ${isSortable} (description column rule)`)
           }
@@ -87,12 +87,12 @@
           perPage: 25,
           perPageSelect: [10, 25, 50, 100],
           labels: {
-            placeholder: "Filter records...",
-            perPage: "Show {select} entries per page",
-            noRows: "No data available in table",
-            info: "Showing {start} to {end} of {rows} entries"
+            placeholder: 'Filter records...',
+            perPage: 'Show {select} entries per page',
+            noRows: 'No data available in table',
+            info: 'Showing {start} to {end} of {rows} entries',
           },
-          columns: columnConfig
+          columns: columnConfig,
         })
 
         console.log(`Simple DataTable initialized successfully for table ${index + 1}`)
