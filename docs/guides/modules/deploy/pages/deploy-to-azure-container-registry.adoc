@@ -1,6 +1,6 @@
 = Deploy to Azure Container Registry
 :page-platform: Cloud, Server v4+
-:page-description: This is document provides examples of deploying to Azure Container Registry.
+:page-description: This document provides examples of deploying to Azure Container Registry.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Azure Container Registry.
@@ -20,7 +20,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
 [#provide-env-vars]
 == 1. Provide environment variables to CircleCI
 
-Whether your require a user or service principal login, you will need to provide environment variables for username, password and tenant to CircleCI. For user logins use environment variable names as follows:
+Whether you require a user or service principal login, you will need to provide environment variables for username, password and tenant to CircleCI. For user logins use environment variable names as follows:
 
 * `AZURE_USERNAME`
 * `AZURE_PASSWORD`

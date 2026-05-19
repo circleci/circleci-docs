@@ -5,7 +5,7 @@
 
 Follow the steps on this page to update the CircleCI release agent installed in your Kubernetes cluster.
 
-Refer to the link:https://circleci.com/changelog/[CircleCI Change log] to find out about new release agent versioning, updates, and fixes.
+Refer to the link:https://circleci.com/changelog/[CircleCI Changelog] to find out about new release agent versioning, updates, and fixes.
 
 [#prerequisites]
 == Prerequisites
@@ -16,7 +16,7 @@ To update the Kubernetes release agent you need an operational CircleCI environm
 * xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
 
 ****
-If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend to migrate to the new labels as soon as possible.
+If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend migrating to the new labels as soon as possible.
 
 Support for the old labels will be dropped in one of the next releases.
 
