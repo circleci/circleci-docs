@@ -414,3 +414,5 @@ XQuartz
 Xvfb
 YAML
 Zstd
+[Tt]estsuite('s)?
+LangSmith
