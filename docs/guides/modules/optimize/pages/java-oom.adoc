@@ -15,16 +15,15 @@ CircleCI runs container based builds on large machines with lots of memory.
 Each container has a smaller memory limit than the total amount available
 on the machine.
 
-By default, Java's is configured so that it will use:
+By default, Java is configured so that it will use:
 
 * More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
 * Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
 
-As of link:https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor[June 3rd 2020]
-these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly
+As of link:https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor[June 3rd 2020], these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly
 detect the number of CPUs and amount of RAM available to the job.
 
-For older versions of Java, This can lead to the JVM seeing a large amount of memory and CPUs
+For older versions of Java, this can lead to the JVM seeing a large amount of memory and CPUs
 being available to it, and trying to use more than is allocated to the container. This pre-allocation can produce
 Out of Memory (OOM) errors, which are difficult to debug because the error messages lack detail. Usually you will
 see a `137` exit code, which means the process has been ``SIGKILL``ed by the OOM killer (`137 = 128 + "kill -9"`).
