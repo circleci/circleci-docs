@@ -317,8 +317,8 @@ jobs:
       - run:
           name: Run tests
           command: |
-            circleci tests glob 'test/**/*_test.exs'
-            | circleci tests run --command='xargs -n1 echo > test_file_paths.txt'
+            circleci tests glob 'test/**/*_test.exs' | \
+            circleci tests run --command='xargs -n1 echo > test_file_paths.txt'
 
             mix ecto.setup --quiet
             cat test_file_paths.txt | xargs mix test
