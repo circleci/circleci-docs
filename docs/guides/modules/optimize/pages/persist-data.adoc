@@ -1,9 +1,9 @@
 = Persisting data overview
 :page-platform: Cloud, Server v4+
-:page-description: A introductory guide to the various ways to persist data in CircleCI
+:page-description: An introductory guide to the various ways to persist data in CircleCI
 :experimental:
 
-This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. Use artifacts, workspaces and caches to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
+This guide gives an introductory overview of the various ways to persist and optimize data within and beyond your CircleCI builds. Use artifacts, workspaces, and caches to move data into, out of, and between jobs, persisting data for future use. Using the right feature for the right task will help speed up your builds, and improve repeatability and efficiency.
 
 Note the following distinctions between artifacts, workspaces, and caches:
 
@@ -44,7 +44,7 @@ Because caches are global within a project, a cache saved on one branch will be 
 [#cache-optimization]
 === Caching optimization
 
-Optimize your pipelines to ensure you are getting the most out of your network and storage usage. For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept. In the case of caches, consider whether the developer or compute time-saving from the cache outweigh the cost of the download and upload.
+Optimize your pipelines to ensure you are getting the most out of your network and storage usage. For example, when looking for opportunities to reduce data usage, consider whether specific usage is providing enough value to be kept. In the case of caches, consider whether the developer or compute time-saving from the cache outweighs the cost of the download and upload.
 
 Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
 
@@ -60,7 +60,7 @@ Workspaces are used to transfer data to downstream jobs as the workflow progress
 
 If you notice your workspace usage is high and would like to reduce it, try searching for the `persist_to_workspace` command in your `.circleci/config.yml` file to find all jobs utilizing workspaces and determine if all items in the path are necessary.
 
-You also might find that you are only using workspaces to be able to re-run builds from fail. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
+You also might find that you are only using workspaces to be able to re-run builds from failure. Once the failing build passes, the workspace might not be needed. Setting a low storage period of, for example, one day, might be suitable for your projects. A low storage retention period for workspaces will save costs by not keeping unnecessary data in storage.
 
 * For more information on workspace optimization, configuration, and expiration, see the xref:orchestrate:workspaces.adoc[Using Workspaces] page.
 * For more information on workflows, see the xref:orchestrate:workflows.adoc[Workflows] page.
@@ -184,7 +184,7 @@ For questions on data usage for the IP ranges feature, visit the xref:reference:
 [#reducing-excess-use-of-network-egress-and-storage]
 === Reducing excess use of network egress and storage
 
-Usage of network transfer to self-hosted runners can be mitigated by using custom local storage, such as a persistent volume as opposed to the built-in caches/workspaces provided by CircleCI.
+Usage of network transfer to self-hosted runners can be mitigated by using custom local storage, such as a persistent volume, as opposed to the built-in caches/workspaces provided by CircleCI.
 
 Billing for storage can be minimized by evaluating your storage needs and setting custom storage retention periods for artifacts, workspaces, and caches on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls].
 
