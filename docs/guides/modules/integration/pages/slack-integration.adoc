@@ -68,7 +68,7 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 [tabs]
 ====
-Pubic channel::
+Public channel::
 +
 --
 Enter the channel name or channel ID. To find the channel ID, open the channel in Slack, select the *Open channel details* option from the channel menu and the channel ID is displayed in the modal.
