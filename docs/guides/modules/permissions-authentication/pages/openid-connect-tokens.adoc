@@ -184,7 +184,7 @@ To do this, edit your IAM role's trust policy so that only an OIDC token from yo
 
 . Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to menu:Project Settings [Overview] to find your Project ID.
 
-. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Replace `<organization_id>` with your CircleCI Organization ID and `<project-id>` with your CircleCI Project ID.
+. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Replace `<organization_id>` with your CircleCI organization ID and `<project-id>` with your CircleCI project ID. See xref:toolkit:how-to-find-ids.adoc[How to Find IDs] for help.
 +
 --
 *Option 1: Using the CircleCI project-id claim (recommended)*
