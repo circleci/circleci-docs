@@ -9,11 +9,11 @@ CircleCI supports various pipeline types which map directly to the version contr
 * GitHub OAuth
 * GitHub OAuth (Server)
 * GitLab
-* GitLab Self-manages
+* GitLab Self-managed
 * Bitbucket
 * Bitbucket Data Center
 
-This guide provides an overview of the VCS options, organization types and pipeline types supported by CircleCI and the features available to each..
+This guide provides an overview of the VCS options, organization types, and pipeline types supported by CircleCI and the features available to each.
 
 == Which version control systems are supported?
 
@@ -232,7 +232,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
-| *Pull request event triggers. See more in the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Triggers Overview]*
+| *Pull request event triggers. See more in the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Triggers Overview].*
 | Triggers
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
@@ -242,7 +242,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**No**#
 
-| *Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide*
+| *Only build on push to pull/merge requests. See more in the xref:oss.adoc#only-build-pull-requests[Open Source Support] guide.*
 | Triggers
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
