@@ -237,7 +237,7 @@ jobs:
 
 The `circleci tests split` command has been superseded by `circleci tests run` as this command also gives you access to the xref:test:rerun-failed-tests.adoc[rerun failed tests] options.
 
-Integrating with some <<other-ways-to-split-tests,third party tools>> might still require you to use `circleci tests split`. For usage steps see, xref:use-the-circleci-cli-to-split-tests.adoc#tests-split-examples[Use the CircleCI CLI to split tests].
+Integrating with some <<other-ways-to-split-tests,third party tools>> might still require you to use `circleci tests split`. For usage steps, see xref:use-the-circleci-cli-to-split-tests.adoc#tests-split-examples[Use the CircleCI CLI to split tests].
 
 [#junit-xml-reports]
 === JUnit XML report formatting
