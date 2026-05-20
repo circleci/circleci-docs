@@ -12,14 +12,14 @@ Use config policies to create organization-level policies to impose rules and sc
 
 Config policies allow you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that project's pipelines cannot be triggered until it does comply.
 
-CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policies adds in this layer of control.
+CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policies add in this layer of control.
 
 Config policy decisions are stored, and can be audited. This provides useful data about the pipeline definitions being run within your organization.
 
 [#quickstart]
 == Quickstart
 
-If you already have a xref:getting-started:first-steps.adoc[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a policy] how-to guide to get started.
+If you already have a xref:getting-started:first-steps.adoc[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a policy] how-to guide.
 
 The following how-to guides are available for config policies:
 
@@ -58,9 +58,9 @@ circleci policy settings --enabled=true --owner-id <your-organization-ID> --poli
 ----
 ****
 
-Use the CircleCI CLI to manage your organization's policies programmatically. Config policies sub-commands are grouped under the `circleci policy` command.
+Use the CircleCI CLI to manage your organization's policies programmatically. Config policies subcommands are grouped under the `circleci policy` command.
 
-The following config policies sub-commands are currently supported within the CLI:
+The following config policies subcommands are currently supported within the CLI:
 
 * `diff` - shows the difference between local and remote policy bundles
 * `fetch` - fetches the policy bundle (or one policy, based on name) from remote
@@ -74,7 +74,7 @@ circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
 *  `settings` - used to modify config policies settings as required.
 +
-When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
+When the `settings` subcommand is called without any flags, current settings are fetched and printed in the console.
 +
 [source,shell]
 ----
@@ -437,7 +437,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - test: # invokation of parameterized job "test" with a size equal to "large".
+      - test: # invocation of parameterized job "test" with a size equal to "large".
           size: large
 ----
 
@@ -524,7 +524,7 @@ ban_bad_orb_namespace = { reason |
 } | { reason |
   some key, orb_ref in input.orbs
   config.is_parameterized_expression(orb_ref) # helper for detecting parameterized expressions.
-  reason := sprintf("orb %s is not allowed to contain a parameterized expression", ["key"])
+  reason := sprintf("orb %s is not allowed to contain a parameterized expression", [key])
 }
 ----
 
@@ -593,7 +593,7 @@ When working with allowlist-type rules, it is essential to recognize how they ca
 [#use-sets-and-variables]
 == Use sets and variables
 
-It is best practice to avoid hard coding values in code, and the same goes for your config policies. Hard coding data, such as project IDs, makes it difficult to read code, and can be confusing when collaborating with wider team members ("what is `99ada477-7029-44bb-b675-5b2d6448d1ab`?"). Because using rego means your policies are defined in code, you can define sets and variables in rego files external to your individual policies, and reference these sets and variables across multiple policies. For an example of this in practice, see the xref:manage-contexts-with-config-policies.adoc#use-sets-and-variables[Manage contexts with config policies] page.
+It is best practice to avoid hard-coding values in code, and the same goes for your config policies. Hard-coding data, such as project IDs, makes it difficult to read code, and can be confusing when collaborating with wider team members ("what is `99ada477-7029-44bb-b675-5b2d6448d1ab`?"). Because using rego means your policies are defined in code, you can define sets and variables in rego files external to your individual policies, and reference these sets and variables across multiple policies. For an example of this in practice, see the xref:manage-contexts-with-config-policies.adoc#use-sets-and-variables[Manage contexts with config policies] page.
 
 For further reading, see the link:https://circleci.com/blog/compliance-with-config-policies/[Config policies blog post].
 
