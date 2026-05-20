@@ -84,7 +84,7 @@ Once you have created your identity provider, a banner appears at the top of the
 ** For **Audience**, choose the only option, which is your organization ID that you entered when creating the identity provider.
 ** On the **Add Permissions** page you can specify what your CircleCI jobs _can_ and _cannot_ do. Choose only permissions that your job will need. Choosing minimal permissions is an https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice]. You can also write your own policies to lock down permissions to exactly what you need for a specific use case.
 
-TIP: AWS STS supports a dedicated link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[condition key] for CircleCI's `oidc.circleci.com/project-id` claim. Use this key in your role's trust policy to restrict which CircleCI projects can assume the role. See <<limit-role-access-based-on-project,Limit Role Access Based on Project>> for sample policies.
+TIP: AWS STS supports a dedicated link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[condition key] for CircleCI's `oidc.circleci.com/project-id` claim. Use this key in your role's trust policy to restrict which CircleCI projects can assume the role. See <<limit-role-access-based-on-project>> for sample policies.
 
 === 3. Add AWS to your CircleCI configuration file
 
