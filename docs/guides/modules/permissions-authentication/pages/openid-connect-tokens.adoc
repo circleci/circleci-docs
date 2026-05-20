@@ -606,7 +606,7 @@ CircleCI's OpenID Connect ID tokens also contain some https://openid.net/specs/o
 | The unique identifier for the pipeline that triggered this job. Its value is a string containing a UUID identifying the CircleCI pipeline.
 
 | `oidc.circleci.com/project-id`
-| The CircleCI project-id. Its value is a string containing a UUID that uniquely identifies the CircleCI project. Use this claim to restrict access to specific CircleCI projects. In AWS, this claim maps to a link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[Web Identity Federation condition key] that works with string operators.
+| The CircleCI project ID. Its value is a string containing a UUID that uniquely identifies the CircleCI project. Use this claim to restrict access to specific CircleCI projects. In AWS, this claim maps to a link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[Web Identity Federation condition key] that works with string operators.
 
 | `oidc.circleci.com/ssh-rerun`
 | A boolean indicating if the CI job is started using the SSH rerun feature.
