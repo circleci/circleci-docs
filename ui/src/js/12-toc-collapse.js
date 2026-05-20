@@ -36,7 +36,7 @@
     })
   })
 
-  function applyState(collapsed) {
+  function applyState (collapsed) {
     var sidebar = document.querySelector('aside.toc.sidebar')
     var btn = sidebar.querySelector('.toc-collapse-btn')
 
