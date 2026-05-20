@@ -9,10 +9,10 @@
 
 This guide explains the two different ways your CircleCI organization can integrate with GitHub and how they affect the following:
 
-* The type of pipeline you can set up .
+* The type of pipeline you can set up.
 * The triggers you can use.
 
-Through reading this guide you will better understand your integration options, and how to leverage both for maximum functionality.
+Through reading this guide, you will better understand your integration options, and how to leverage both for maximum functionality.
 
 == Two types of GitHub integration
 
@@ -77,7 +77,7 @@ a|* One (and only one) per project, created automatically for OAuth organization
 * Cannot be renamed (always matches the project name).
 * Configuration file must be named `.circleci/config.yml` and stored in the repository that gives the project its name.
 * Checkout source is always the repository that gives the project its name.
-a|* Zero, one or many per project.
+a|* Zero, one, or many per project.
 * Can be created and deleted freely.
 * Can be renamed.
 * Configuration files can be stored in any repository the CircleCI GitHub App has access to, at any file path.
@@ -97,7 +97,7 @@ _Used to trigger pipelines on push events from GitHub_
 *Schedules* +
 _Used to trigger pipelines on a schedule (nightly builds for example)_
 
-* Zero, one or many can be created per pipeline.
+* Zero, one, or many can be created per pipeline.
 * Uses proprietary "timetable" interface (Repeats, Start time, Repeats per hour, ...)
 
 *API / Manual* +
@@ -106,20 +106,20 @@ OAuth pipelines can be triggered via API and manually through the CircleCI web a
 a|*GitHub App triggers* +
 _Used to trigger pipelines on a wide range of events from GitHub_
 
-* Zero, one or many per pipeline.
-* The *event source* repository can be any repository the CircleCI GitHub App has access to. This enable cross-repository pipeline triggering.
+* Zero, one, or many per pipeline.
+* The *event source* repository can be any repository the CircleCI GitHub App has access to. This enables cross-repository pipeline triggering.
 * Extensive *event name* options available, including all pushes, pull request opened, pull request merged, pull request marked ready for review, tag pushes, and many more (see xref:orchestrate:github-trigger-event-options.adoc[full list]).
 
 *Custom Webhook triggers* +
 _Used to trigger pipelines from any external system that can send HTTP requests_
 
-* Zero, one or many per pipeline.
+* Zero, one, or many per pipeline.
 * Event name and event source are user-defined.
 
 *Schedules* +
 _Used to trigger pipelines on a schedule (nightly builds for example)_
 
-* Zero, one or many can be created per pipeline.
+* Zero, one, or many can be created per pipeline.
 * Uses cron syntax
 
 *API / Manual* +
@@ -178,7 +178,7 @@ Installing the CircleCI GitHub App is a one-time action that enables all new fea
 If you run into issues while installing the CircleCI GitHub App, submit a request through link:https://forms.gle/p8k51xYmG1U5HjsF7[this form]. A member of our team will be in touch promptly.
 
 ****
-Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by deleting the GitHub trigger associate with the GitHub OAuth pipeline, in menu:Project settings[Project setup]. This trigger can be re-created by selecting btn:[click here] at the bottom of the GitHub OAuth pipeline card.
+Having both a GitHub App trigger *and* a GitHub OAuth trigger configured in the same project could result in duplicate builds. You can prevent this behavior by deleting the GitHub trigger associated with the GitHub OAuth pipeline, in menu:Project settings[Project setup]. This trigger can be re-created by selecting btn:[click here] at the bottom of the GitHub OAuth pipeline card.
 ****
 
 === Authorization steps
