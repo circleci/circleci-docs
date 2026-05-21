@@ -98,7 +98,7 @@ CircleCI web app::
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 [start=4]
-. Scroll to the bottom of the Overview page, select **Delete Project**.
+. Scroll to the bottom of the Overview page, then select **Delete Project**.
 . Confirm your choice by typing the project name and selecting btn:[Permanently Delete Project] in the popup.
 --
 API::

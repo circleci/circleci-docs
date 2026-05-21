@@ -8,7 +8,7 @@ In this how-to guide, you will learn how to configure CircleCI to publish to the
 [#introduction]
 == Introduction
 
-Setting up CircleCI to publish packages to the npm registry enabling project collaborators to release new package versions in a consistent and predictable way.
+Setting up CircleCI to publish packages to the npm registry enables project collaborators to release new package versions in a consistent and predictable way.
 
 [#obtain-the-npm-authToken]
 == 1. Get the npm `authToken`
@@ -63,7 +63,7 @@ When you want to publish a new version to npm, run `npm version` to create a new
 npm version 10.0.1
 ```
 
-This will update the `package.json` file and creates a tagged Git commit. Next, push the commit with tags:
+This will update the `package.json` file and create a tagged Git commit. Next, push the commit with tags:
 
 ```shell
 git push --follow-tags

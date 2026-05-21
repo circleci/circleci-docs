@@ -28,7 +28,7 @@ If you want to use the link:https://docs.jfrog-applications.jfrog.io/jfrog-appli
 [#add-jfrog-to-your-configuration]
 === 1. Add JFrog to your configuration
 
-You can install JFrog CLI in one of a few ways. Refer to the link:https://docs.jfrog-applications.jfrog.io/jfrog-applications/jfrog-cli/install#installation[JFrog documentation]. for the method best suited for your pipeline.
+You can install JFrog CLI in one of a few ways. Refer to the link:https://docs.jfrog-applications.jfrog.io/jfrog-applications/jfrog-cli/install#installation[JFrog documentation] for the method best suited for your pipeline.
 
 For example, if using Node, add the following to your `.circleci/config.yml`:
 

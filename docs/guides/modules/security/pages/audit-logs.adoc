@@ -57,7 +57,7 @@ Frequency limits for requests are as follows:
 
 - Free Plan: 1 request per day.
 - All paid plans: 3 requests per day.
-- Maximum query window for 30 days - specifically, a customer can request logs for any 30 day window where the start of the window is within the last calendar year.
+- Maximum query window for 30 days - specifically, a customer can request logs for any 30-day window where the start of the window is within the last calendar year.
 
 If your organization reaches the maximum requests per 30 days, the system disables the audit log request feature.
 
@@ -197,7 +197,7 @@ Creating a streaming configuration pushes an empty file named `circleci_connecti
 
 ==== 3. Verify and test
 
-After setting up audit log streaming follow these steps to validate the setup was successful:
+After setting up audit log streaming, follow these steps to validate the setup was successful:
 
 . Verify successful streaming by checking the **Last delivery** timestamp.
 . Confirm logs are appearing in your designated S3 bucket.

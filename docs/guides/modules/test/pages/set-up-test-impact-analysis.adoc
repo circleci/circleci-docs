@@ -8,7 +8,7 @@
 ====
 *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
 ====
 Test impact analysis runs only the tests impacted by your code changes, reducing test execution time while maintaining code quality.
 
@@ -62,7 +62,7 @@ Before enabling test impact analysis, ensure you have completed the xref:getting
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 
-== 1. Enable test impact analysis option in your `.circleci/test-suites.yml` file
+== 1. Enable test impact analysis option in your test-suites.yml file
 
 Update the test suite from the getting started to include an `analysis` command and `test-impact-analysis` option, keep the `discover` and `run` commands in the config.
 
@@ -349,7 +349,7 @@ a| * `impacted` selects and runs only the tests impacted by a change.
 |===
 --
 
-== 4. Run in CI
+== 3. Run in CI
 
 TIP: When adding the `testsuite` command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers.
 

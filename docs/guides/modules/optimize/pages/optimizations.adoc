@@ -30,17 +30,17 @@ To persist data from a job and make it available to downstream jobs via the xref
 [#docker-image-choice]
 === Docker image choice
 
-Choosing the right Docker image for your project can have huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
+Choosing the right Docker image for your project can have a huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
 
 * CircleCI provides a range of xref:execution-managed:circleci-images.adoc[convenience images], typically based on official Docker images, but with a range of useful language tools pre-installed.
-* You can create xref:execution-managed:custom-images.adoc[custom images], maximizing specificity for your projects. To help with this we provide xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[guidance for building images manually].
+* You can create xref:execution-managed:custom-images.adoc[custom images], maximizing specificity for your projects. To help with this, we provide xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[guidance for building images manually].
 
 [#docker-layer-caching]
 === Docker layer caching
 
 Docker layer caching is a feature that can help to reduce the _build time_ of a Docker image in your build. DLC is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
-DLC is similar to _caching dependencies_, in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
+DLC is similar to _caching dependencies_ in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
 * Read more on the xref:docker-layer-caching.adoc[Docker Layer Caching] page.
 
@@ -54,14 +54,14 @@ Caching should be one of the first things you consider when trying to optimize y
 [#workflows]
 === Workflows
 
-Workflows provide a means to define a collection of jobs and their run order. If at any point in your configuration you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your CI/CD configuration. Read more about workflows on the xref:orchestrate:workflows.adoc[Workflow] page.
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your configuration you see a step where two jobs could happily run independently of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your CI/CD configuration. Read more about workflows on the xref:orchestrate:workflows.adoc[Workflow] page.
 
 * You can view examples of workflows in the link:https://github.com/CircleCI-Public/circleci-demo-workflows/[CircleCI demo workflows repository].
 
 [#parallelism]
 === Parallelism
 
-If your project has a large test suite, you can configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file-basis. You can also manually customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file basis. You can also manually customize how tests are allocated.
 
 * Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs.adoc[Parallelism and test splitting] page.
 * Refer to the xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests] how-to guide.
@@ -72,12 +72,12 @@ If your project has a large test suite, you can configure your build to use xref
 
 Use the rerun failed tests feature to only rerun a subset of tests when a transient test failure arises, rather than rerunning the entire test suite.
 
-* For more information see the xref:test:rerun-failed-tests.adoc[Rerun failed tests] page.
+* For more information, see the xref:test:rerun-failed-tests.adoc[Rerun failed tests] page.
 
 [#resource-class]
 === Resource class
 
-Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI cloud see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[configuration reference]. For an equivalent list for CircleCI server installations, contact your system administrator.
+Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI cloud, see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[configuration reference]. For an equivalent list for CircleCI server installations, contact your system administrator.
 
 Examples of how to set a resource class:
 
@@ -192,7 +192,7 @@ Read more about dynamic configuration on the xref:orchestrate:dynamic-config.ado
 
 Orbs are reusable packages of parameterizable configuration that can be used in any project. Use orbs to:
 
-* Simplify configuration (`.circleci/_config.yml`)
+* Simplify configuration (`.circleci/config.yml`)
 * Automate repeated processes
 * Accelerate project setup
 * Simplify integration with third-party tools
