@@ -113,7 +113,7 @@ The following data about the job associated with the webhook event is provided:
 
 | `name`
 | yes
-| Name of the job as defined in .circleci/config.yml
+| Name of the job as defined in your configuration file
 
 | `status`
 | yes
@@ -224,7 +224,7 @@ The following data about the trigger associated with the webhook event is provid
 
 | type
 | yes
-| How this pipeline was triggered (for example, "webhook", "api", "schedule")
+| How this pipeline was triggered (for example, `webhook`, `api`, `schedule`)
 |===
 --
 
@@ -256,7 +256,7 @@ NOTE: Data associated to the pipeline. Present for pipelines associated with Git
 --
 
 [#circleci]
-==== circleci
+==== CircleCI
 
 [.table-scroll]
 --
@@ -297,11 +297,11 @@ NOTE: The VCS map and its contents are always present for GitHub OAuth app and B
 | Always present?
 | Description
 
-| target_repository_url
+| `target_repository_url`
 | no
 | URL to the repository building the commit
 
-| origin_repository_url
+| `origin_repository_url`
 | no
 | URL to the repository where the commit was made (this will only be different in the case of a forked pull request)
 
