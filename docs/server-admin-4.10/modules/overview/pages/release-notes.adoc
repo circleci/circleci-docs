@@ -6,15 +6,15 @@
 [#overview]
 == Overview
 
-#TBC#
+CircleCI Server 4.10 introduces enhanced security and infrastructure management capabilities. This release adds support for configurable SSH key algorithms (RSA, ECDSA, Ed25519) to enable FIPS 140-compliant deployments and GovCloud environments. You can now delete Self-Hosted Runners resource classes directly in the web UI, customize CPU and memory resources for Nomad servers, and configure RabbitMQ memory settings. This release also includes Ubuntu 24.04 machine image support for EC2 instances.
 
 [#upgrade]
 == Upgrade
 
-NOTE: Server 4.10 requires mongoDB 4.4 or higher. If your MongoDB instance is not externalized then follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-4[Upgrade MongoDB to 4.4 Guide] before upgrading to Server 4.10.0.
+NOTE: Server 4.10 requires mongoDB 7.0 or higher. If your MongoDB instance is not externalized then follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-7[Upgrade MongoDB to 7.0 Guide] before upgrading to Server 4.10.0.
 
 For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.10 Guide].
 
 == Release 4.10.0
 
-For full details of this release see the link:https://circleci.com/changelog/server-4-10-0-released/[changelog].
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-10-0/[changelog].

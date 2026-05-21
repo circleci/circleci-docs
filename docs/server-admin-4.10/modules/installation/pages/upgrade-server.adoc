@@ -8,9 +8,7 @@ This page describes the steps needed to upgrade your CircleCI Server installatio
 [#path]
 == Upgrade paths
 
-#Check this note#
-
-IMPORTANT: Before upgrading to server 4.10, you must first upgrade to the latest patch release of server 4.8.x which is currently {serverversion48}.
+IMPORTANT: Before upgrading to server 4.10, you must first upgrade to the latest patch release of server 4.9.x which is currently {serverversion49}.
 
 We recommend that you **do not** skip releases when upgrading, however some patch releases can be skipped. Your upgrade path will depend on your current version, and the currently available version releases.
 
@@ -30,9 +28,11 @@ Customers that do not perform this step may have issues restoring Vault from bac
 [#prerequisites]
 == Prerequisites
 
+* Ensure you have upgraded to the latest patch release of server 4.9.x which is currently {serverversion49}.
 * Ensure you have access to the Kubernetes cluster in which CircleCI Server is installed.
 * Ensure you have set up xref:operator:backup-and-restore.adoc#[Backup and Restore].
 * Ensure there is a recent backup. For more information, see the xref:operator:backup-and-restore.adoc#creating-backups[Backup and Restore] guide.
+* Server 4.10 requires mongoDB 7.0 or higher. If your Mongo DB is not externalized, ensure you are running MongoDB 7.0 or higher. Follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-7[Upgrade MongoDB to 7.0] Guide for steps to upgrade your MongoDB instance.
 
 [#upgrade-steps]
 == Upgrade steps
