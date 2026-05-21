@@ -1,34 +1,70 @@
-= Deploy to npm registry
-:page-platform: Cloud, Server v4+
-:page-description: Learn how to deploy packages to the npm registry using CircleCI.
+= Publish to npm
+:page-platform: Cloud
+:page-description: Publish packages to npm from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
 :experimental:
 
-In this how-to guide, you will learn how to configure CircleCI to publish to the npm registry.
+In this how-to guide, you will learn how to configure CircleCI to publish to npm using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for an npm publish token at publish time, so there is no long-lived `NPM_TOKEN` to store, rotate, or leak.
+
+TIP: If trusted publishing is not an option for your package or registry, see xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm with an authentication token].
 
 [#introduction]
 == Introduction
 
-Setting up CircleCI to publish packages to the npm registry enables project collaborators to release new package versions in a consistent and predictable way.
+Trusted publishing is the recommended way to publish to npm from CircleCI. Compared to using a long-lived `NPM_TOKEN` environment variable, trusted publishing:
 
-[#obtain-the-npm-authToken]
-== 1. Get the npm `authToken`
+* Removes the need to create, store, and rotate a publish token.
+* Issues a short-lived publish token that is valid only for the duration of the publishing job.
+* Lets you scope publishing to a specific organization, project, pipeline definition, and (optionally) context.
 
-Get the npm `authToken` for the account that you wish to use to publish the package. You can do this by logging in to npm (`npm login`). This will save the `authToken` to the `~/.npmrc` file. Look for the following line:
+NOTE: Provenance attestations are not currently supported for packages published from CircleCI via trusted publishing.
 
-```shell
-//registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
-```
+[#prerequisites]
+== Prerequisites
 
-In this case, the `authToken` is `00000000-0000-0000-0000-000000000000`.
+* A CircleCI Cloud account integrated with a supported VCS. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A project on CircleCI that builds your npm package.
+* An npm package that has already been published at least once. npm requires an existing package before a trusted publisher can be configured for it.
+* npm CLI version 11.5.1 or later, and Node.js 22.14.0 or later, in the Docker image (or executor) used by your publishing job.
+* Maintainer or owner access to the npm package.
 
-[#set-npm-token]
-== 2. Set npm token
-Go to your xref:security:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project Settings], and set the `NPM_TOKEN` variable to the obtained `authToken`.
+[#gather-the-data-you-need]
+== 1. Gather the data you need
 
-[#configure-circleci]
-== 3. Configure CircleCI
+npm needs four CircleCI identifiers to configure your project as a trusted publisher. Collect these before you visit npm.
 
-Configure CircleCI to add the `authToken` to `~/.npmrc`, run `npm publish` and only for versioned tags:
+* *Organization ID* (required): Your CircleCI organization ID, in UUID format. From the CircleCI web app, go to menu:Org Settings[Overview]. `<pic>`
+
+* *Project ID* (required): Your CircleCI project ID, in UUID format. Go to menu:Project Settings[Overview]. `<pic>`
+
+* *Pipeline Definition ID* (required): The pipeline definition ID, in UUID format. Go to menu:Project Settings[Project Setup]. There you will see your list of pipelines. Find the pipeline that will run the publishing workflow and copy its ID. `<pic>`
+
+* *VCS origin* (required): The version control system origin URL for your project, for example `github.com/myorg/myrepo` or `gitlab.com/mylab/myproject`.
+
+* *Context IDs* (optional): If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Lock it down with protected contexts>>), find the UUID for each context under menu:Org Settings[Contexts] and selecting the context. `<pic>`
+
+[#set-up-the-trusted-publisher-on-npm]
+== 2. Set up the trusted publisher on npmjs.com
+
+. Sign in to https://www.npmjs.com[npmjs.com] and navigate to your package page.
+
+. Select the *Settings* tab.
+
+. Under *Trusted Publishing*, select *CircleCI*.
+
+. Fill in the fields with the values you collected in the previous step:
++
+** Organization ID
+** Project ID
+** Pipeline Definition ID
+** VCS origin
+** Context IDs (optional)
+
+. Choose which actions this trusted publisher can perform (`npm publish`, `npm stage publish`, or both) and save.
+
+[#configure-your-circleci-pipeline]
+== 3. Configure your CircleCI pipeline
+
+Add a publishing job to your `.circleci/config.yml`. The job retrieves an OIDC token for the `npm:registry.npmjs.org` audience and assigns it to the `NPM_ID_TOKEN` environment variable. When `NPM_ID_TOKEN` is set, the npm CLI automatically exchanges it for a short-lived publish token, so no `NPM_TOKEN` is needed.
 
 ```yaml
 version: 2.1
@@ -36,26 +72,71 @@ version: 2.1
 jobs:
   publish:
     docker:
-      - image: <docker-image-name-tag>
+      - image: cimg/node:22.14
     steps:
       - checkout
       - run:
-          name: Publish to NPM
+          name: Install dependencies
+          command: npm ci
+      - run:
+          name: Run tests
+          command: npm test
+      - run:
+          name: Build
+          command: npm run build --if-present
+      - run:
+          name: Publish to npm with OIDC
           command: |
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+            export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
             npm publish
 
 workflows:
-  tagged-build:
+  publish:
     jobs:
       - publish:
           filters:
             tags:
-              only: /v[0-9]+(\.[0-9]+)*/
+              only: /^v.*/
+            branches:
+              ignore: /.*/
 ```
 
-[#create-new-version]
-== 4. Create a new version
+The workflow runs only for tags that start with `v` and never on branches, so a routine commit cannot trigger a publish.
+
+For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs].
+
+[#lock-it-down]
+== 4. Lock it down with protected contexts
+
+You can further restrict who and what can run the publishing job by attaching the job to a xref:security:contexts.adoc[CircleCI context] and applying restrictions to that context. If you do this, remember to record the context's UUID under *Context IDs* when you configure the trusted publisher on npm (see <<set-up-the-trusted-publisher-on-npm,Step 2>>).
+
+[#group-restrictions]
+=== Security group restrictions
+
+xref:security:contexts.adoc#security-group-restrictions[Security group restrictions] limit job execution to members of a specific group. Anyone outside the group who attempts to run the job fails. This is useful when you want only a small set of people to be able to publish.
+
+[#expression-restrictions]
+=== Expression restrictions
+
+xref:security:contexts.adoc#expression-restrictions[Expression restrictions] are more powerful. The most common use is restricting a context to a specific branch. For example:
+
+```
+pipeline.git.branch == "main"
+```
+
+This causes any job on a different branch that tries to use the context to fail.
+
+[#ssh]
+=== SSH
+
+npm rejects any OIDC token whose `ssh_rerun` claim is `true`. As defense in depth, you can also add the following expression restriction to your publishing context so that the job cannot be re-run with SSH at all:
+
+```
+not job.ssh.enabled
+```
+
+[#publish-a-new-version]
+== 5. Publish a new version
 
 When you want to publish a new version to npm, run `npm version` to create a new version:
 
@@ -68,10 +149,19 @@ This will update the `package.json` file and create a tagged Git commit. Next, p
 ```shell
 git push --follow-tags
 ```
-[#publish]
-== 5. Publish
 
-If tests passed, CircleCI will publish the package to npm automatically.
+CircleCI runs the publishing workflow on the tag. The npm CLI exchanges the OIDC token for a short-lived publish token and uploads the package.
+
+[#self-hosted-runners]
+== Self-hosted runners
+
+Trusted publishing from CircleCI self-hosted runners works.
+
+[#notes]
+== Notes
+
+* npm is introducing staging for publishing. When this is available, you can configure your trusted publisher to allow `npm stage publish` in addition to `npm publish`.
+* Pull requests from forks do not have access to CircleCI secrets, including OIDC tokens. A fork cannot trigger a publish.
 
 [#track-deployments-with-deploy-markers]
 == Track your deployments with deploy markers
@@ -85,3 +175,8 @@ You have two options for setting up deploy markers:
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+
+[#questions-and-feedback]
+== Questions? Feedback?
+
+If you have questions or feedback, drop by the https://discuss.circleci.com/[CircleCI Discuss forum] or the CircleCI Discord community.
