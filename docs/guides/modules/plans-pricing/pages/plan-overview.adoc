@@ -44,4 +44,4 @@ For details on cancelling a Performance Plan, refer to the xref:reference:ROOT:f
 == Managing credit usage
 Optimizations can be implemented to help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc[Persisting Data] page.
 
-For comprehensive cost tracking and analysis, you can xref:integrate-with-vantage-for-cost-management.adoc[Integrate CircleCI With Vantage] to monitor and manage your CI/CD costs alongside other infrastructure spending.
+For comprehensive cost tracking and analysis, you can integrate with Vantage or Finout to monitor and manage your CI/CD costs alongside other infrastructure spending. See the xref:integrate-with-vantage-for-cost-management.adoc[Integrate CircleCI With Vantage] and xref:integrate-with-finout-for-cost-management.adoc[Integrate CircleCI With Finout] guides for more information.

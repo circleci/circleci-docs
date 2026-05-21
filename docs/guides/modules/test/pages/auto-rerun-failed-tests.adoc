@@ -9,7 +9,7 @@
 ====
 *Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
 
-Refer our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
+Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
 ====
 
 Auto rerun failed tests automatically detects and retries test failures during your test run. Compared with the existing xref:rerun-failed-tests.adoc[Rerun Failed Tests] feature that CircleCI provides, Auto rerun failed tests eliminates the need to:
@@ -129,7 +129,7 @@ $ circleci run testsuite "ci tests" --doctor
 
 [TIP]
 ====
-The `circleci run testsuite` CLI tooling should be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
+Run the `circleci run testsuite` CLI tooling from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
 
 The testsuite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
 ====

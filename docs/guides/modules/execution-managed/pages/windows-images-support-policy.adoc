@@ -11,7 +11,7 @@ This document outlines the CircleCI Windows image release, update, and deprecati
 [#release-policy]
 == Release policy
 
-The Windows images are based on Windows Server. We aim to maintain and release two major versions of Windows Server at all times. Currently we support `Windows server 2019` and `Windows server 2022`
+The Windows images are based on Windows Server. We aim to maintain and release two major versions of Windows Server at all times. Currently we support `Windows server 2019` and `Windows server 2022`.
 
 Tags will be redirected to the updated images automatically as described in the <<tagging>> section of this document. We will announce these releases on our link:https://discuss.circleci.com/[Discuss Forum].
 
@@ -20,11 +20,11 @@ Tags will be redirected to the updated images automatically as described in the 
 
 We support various tags for the Windows environment, allowing you to choose a suitable image for your needs.
 
-- `default`: version is what you will receive if do not specify an image.
+- `default`: version is what you will receive if you do not specify an image.
 
 - `current`: version of Windows Server will receive updates approximately every three months. This tag will be the same version as what is provided if no tag is specified.
 
-- `edge`: tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the current quarterly image release, which may change without notice, and is not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
+- `edge`: tags are reserved for previews of new releases, which will initially point to this tag. The `edge` tags may include incremental updates to the current quarterly image release, which may change without notice, and are not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
 
 We generally install the latest Major version of Visual Studio Community Edition that coincides with the Windows Server version in the image when it is built.
 
@@ -38,7 +38,7 @@ The variant of Windows Server can be specified by choosing the name parameter in
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), this image will supersede the original image.
+When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s), which will supersede the original image.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
@@ -89,7 +89,7 @@ Example: When Windows Server 2025 is released
 |===
 --
 
-When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum and along with additional outreach where possible.
+When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with additional outreach where possible.
 
 We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release.
 

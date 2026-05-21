@@ -35,7 +35,7 @@ image::guides:ROOT:deploy/version-promotion-page.png[Version promotion page]
 
 == Prerequisites
 
-Before using environment hierarchy and version promotion you need:
+Before using environment hierarchy and version promotion, you need:
 
 * *Environment integrations*. At least two integrations must exist for the organization (for example, a development environment and a production environment). You can create environment integrations in the CircleCI web app at menu:Deploys[Environments], select btn:[Create environment integration] and choose the custom option. See the xref:guides:deploy:configure-deploy-markers.adoc#create-an-environment-integration[Create an Environment Integration] page for more details. You can also choose to just configure your environment when creating your deploy markers which will automatically create an environment integration for you if it does not exist already.
 

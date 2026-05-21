@@ -21,7 +21,7 @@
 *** xref:getting-started:create-an-organization.adoc[Create an organization]
 ** Tutorials
 *** xref:getting-started:config-intro.adoc[Configuration intro]
-*** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
+
 
 * Migrate to CircleCI
 ** xref:migrate:migration-intro.adoc[Migration intro]
@@ -116,6 +116,9 @@
 ** xref:execution-runner:runner-overview.adoc[Self-hosted runner overview]
 ** xref:execution-runner:runner-concepts.adoc[Self-hosted runner concepts]
 ** xref:execution-runner:runner-feature-comparison-matrix.adoc[Runner feature comparison matrix]
+** Runner provisioner
+*** xref:execution-runner:runner-provisioner.adoc[Runner provisioner overview - Preview]
+
 ** Container runner
 *** xref:execution-runner:container-runner-installation.adoc[Container runner installation]
 *** xref:execution-runner:container-runner-performance-benchmarks.adoc[Container runner performance benchmarks]
@@ -225,6 +228,7 @@
 
 * Manage roles, permissions, and authentication
 ** xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide]
+** xref:permissions-authentication:manage-email-addresses.adoc[Manage email addresses]
 ** Roles and permissions
 *** xref:permissions-authentication:roles-and-permissions-overview.adoc[Roles and permissions overview]
 *** xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage roles and permissions]
@@ -292,7 +296,9 @@
 *** xref:reference:ROOT:outbound-webhooks-reference.adoc[Outbound Webhooks Reference]
 *** xref:integration:webhooks-airtable.adoc[Webhooks With Airtable]
 ** Notifications and status
-*** xref:integration:notifications.adoc[Notifications]
+*** xref:integration:notifications.adoc[Notifications overview]
+*** xref:integration:slack-integration.adoc[Slack integration]
+*** xref:getting-started:slack-orb-tutorial.adoc[Use the Slack orb to set up notifications]
 *** xref:integration:status-badges.adoc[Status Badges]
 
 
@@ -302,6 +308,7 @@
 *** xref:integration:sumo-logic-integration.adoc[Sumo Logic Integration]
 *** xref:integration:open-telemetry-integration.adoc[OpenTelemetry Integration]
 ** Cost management
+*** xref:plans-pricing:integrate-with-finout-for-cost-management.adoc[Finout Integration]
 *** xref:plans-pricing:integrate-with-vantage-for-cost-management.adoc[Vantage Integration]
 ** Project management
 *** xref:integration:jira-plugin.adoc[Connect With Jira]
@@ -317,6 +324,8 @@
 *** xref:toolkit:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
 *** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
 *** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
+*** xref:toolkit:install-and-configure-the-chunk-cli.adoc[Install and configure the chunk CLI]
+*** xref:toolkit:how-to-use-chunk-cli.adoc[How to use the chunk CLI]
 ** APIs
 *** xref:toolkit:api-intro.adoc[API v2 intro]
 *** xref:toolkit:api-developers-guide.adoc[API v2 developers guide]

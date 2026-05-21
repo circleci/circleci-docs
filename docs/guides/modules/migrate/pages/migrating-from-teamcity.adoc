@@ -14,7 +14,7 @@ CircleCI has various differences in setup and configuration from TeamCity. For t
 . **Read (or at least browse) this document** to solidify conceptual differences.
 . **Quickly build and run a simple https://circleci.com/docs/hello-world/#section=getting-started[Hello World job] in any repository**. This configuration demonstrates the simplicity of our YAML setup, and it showcases how to define both an execution environment and the steps to run within it. All jobs on CircleCI share this format.
 . **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our xref:toolkit:examples-and-guides-overview.adoc[Examples and Guides Overview] for various examples in different languages and frameworks.
-. **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/workflows/[configure a workflow]**. This would essentially migrate your Build Chain.
+. **After finishing one job, set up your other jobs on CircleCI and then https://circleci.com/docs/workflows/[configure a workflow]**. This would essentially migrate your Build Chain.
 . **Next, https://circleci.com/docs/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
 . **Throughout this process, consult the https://circleci.com/docs/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
 
@@ -89,118 +89,10 @@ jobs:
       - checkout
       - run: echo "Hello World!"
 ----
-
 |===
 --
-
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-
-| TeamCity _settings.kts_ | Equivalent CircleCI _config.yml_
-
-a|
-[source, kotlin]
-----
-import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
-
-version: "2019.2"
-
-project {
-  buildType(HelloWorld)
-}
-
-object HelloWorld: BuildType({
-  name = "Hello World"
-  steps {
-    script {
-      scriptContent = "echo 'Hello World!'"
-    }
-  }
-})
-----
-
-a|
-[source, yaml]
-----
-version: 2.1
-workflows:
-  hello-workflow:
-    jobs:
-      - hello-job
-
-jobs:
-  # Define job
-  hello-job:
-    # Define environment
-    docker:
-      - image: cimg/base:stable
-
-    # Define steps for job
-    steps:
-      - checkout
-      - run: echo "Hello World!"
-----
-
-|===
---
-
 * Instead of Build Chains, CircleCI has https://circleci.com/docs/workflows/[Workflows], which define dependencies and flow between jobs.
 * A https://circleci.com/docs/pipelines/[Pipeline] refers to all configuration, workflows, and jobs for a project. This multi-layer structure allows for strong flexibility and separation of concerns for different workloads.
-
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-| TeamCity Build Chain | Equivalent CircleCI Workflow
-
-a|
-[source,kotlin]
-----
-project {
-  sequence {
-    build(Compile)
-    parallel {
-        build(Test1)
-        build(Test2)
-    }
-    build(Package)
-    build(Publish)
-  }
-}
-
-/* BuildType definitions assumed
-----
-
-a|
-[source,yaml]
-----
-version: 2.1
-workflows:
-  build-deploy:
-    jobs:
-      - Compile
-      - Test1:
-          requires:
-            - Compile
-      - Test2:
-          requires:
-            - Compile
-      - Package:
-          requires:
-            - Test1
-            - Test2
-      - Publish:
-          requires:
-            - Package
-
-# Job definitions assumed
-----
-
-|===
---
 
 [.table-scroll]
 --
@@ -262,7 +154,7 @@ For more information on CircleCI Concepts, visit our https://circleci.com/docs/c
 
 === Environment
 
-TeamCity requires setting up a build agent with the required OS and tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up said agents for you. See our list of https://circleci.com/docs/executor-intro/[available executors].
+TeamCity requires setting up a build agent with the required OS and tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up those agents for you. See our list of https://circleci.com/docs/executor-intro/[available executors].
 
 [source,yaml]
 ----

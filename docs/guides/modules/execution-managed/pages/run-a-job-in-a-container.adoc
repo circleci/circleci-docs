@@ -34,7 +34,7 @@ cd circleci-demo-go
 circleci local execute build
 ```
 
-The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and PostgreSQL Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running, and so on.
+The commands above will run the entire `build` job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and then execute your CI steps locally. In this case, Golang and PostgreSQL Docker images are pulled down, allowing the build to install dependencies, run the unit tests, test that the service is running, and so on.
 
 [#limitations-of-running-jobs-locally]
 == Limitations of running jobs locally
@@ -43,7 +43,7 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 **Machine executor**
 
-You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
+You cannot use the machine executor in local jobs. The machine executor requires an extra VM to run its jobs.
 
 **Add SSH keys**
 
@@ -53,7 +53,7 @@ It is currently not possible to add SSH keys using the `add_ssh_keys` CLI comman
 
 The CLI tool does not provide support for running workflows. By nature, workflows leverage running jobs concurrently on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single jobs (which make up parts of a workflow).
 
-**Caching and online-only Commands**
+**Caching and online-only commands**
 
 Caching is not currently supported in local jobs. When you have either a xref:reference:ROOT:configuration-reference.adoc#savecache[`save_cache`] or xref:reference:ROOT:configuration-reference.adoc#restorecache[`restore_cache`] step in your config, `circleci` will skip them and display a warning.
 

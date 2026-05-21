@@ -26,12 +26,12 @@ Automation tools used for browser tests often use Selenium WebDriver, a widely-a
 
 Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:https://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
 
-WebDriver can operate in two modes, local, or remote:
+WebDriver can operate in two modes, local or remote:
 
 * When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine.
 * When run remotely, your tests interact with a Selenium server, and the server drives the browsers.
 
-If Selenium is not included in your primary Docker image, install, and run Selenium as shown below:
+If Selenium is not included in your primary Docker image, install and run Selenium as shown below:
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
@@ -63,7 +63,7 @@ link:https://www.lambdatest.com/[LambdaTest] integrates with CircleCI to boost y
 
 LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live. Lambda Tunnel executes a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
 
-LambdaTest has developed a link:https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel[CircleCI orb] for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to set up a Lambda tunnel and the define your test steps.
+LambdaTest has developed a link:https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel[CircleCI orb] for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to set up a Lambda tunnel and then define your test steps.
 
 [,yaml]
 ----

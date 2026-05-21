@@ -18,7 +18,7 @@ Smarter Testing provides independent features that can be enabled to reduce test
 * Evenly distributing tests across parallel execution nodes.
 * Automatically rerunning failed tests.
 
-To use the CircleCI's Smarter Testing, you first need to set up a couple of components:
+To use CircleCI's Smarter Testing, you first need to set up a couple of components:
 
 * Use the `testsuite` command for running your tests.
 * Create a `.circleci/test-suites.yml` configuration file to discover and run your tests.
@@ -381,7 +381,7 @@ $ circleci run testsuite "ci tests" --doctor
 
 [TIP]
 ====
-The `circleci run testsuite` CLI tooling should be run from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
+Run the `circleci run testsuite` CLI tooling from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
 
 The testsuite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
 ====
@@ -428,11 +428,11 @@ After your pipeline runs, verify the test job is behaving as expected before mer
 
 . In the CircleCI web app, navigate to your pipeline and open the test job.
 . Check the *Tests* tab and confirm the number of test results matches what you see when running tests without the `testsuite` command. A difference in test results could be a misconfiguration in your `discover` command.
-. Compare the job duration to a recent run without the `testsuite` command. The runtime should be similar - a significant difference may indicate a misconfiguration in your `test-suites.yml`.
+. Compare the job duration to a recent run without the `testsuite` command. The runtime is expected to be similar. A significant difference may indicate a misconfiguration in your `test-suites.yml`.
 
 == Next steps
 
-At this stage, all of your tests should successfully run locally and in CI using the `testsuite` command.
+At this stage, all of your tests run locally and in CI using the `testsuite` command.
 
 Next, you will build on these components to enable the various features of Smarter Testing.
 

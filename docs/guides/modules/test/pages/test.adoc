@@ -8,7 +8,7 @@
 
 CircleCI allows you to automatically test your code before changes are merged. You can integrate testing tools and frameworks such as Jest, Mocha, `pytest`, JUnit, Selenium, XCTest, and more.
 
-When you integrate your tests into your CircleCI pipelines, you not only deliver software to your users more reliably and efficiently, you get feedback more quickly so you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
+When you integrate your tests into your CircleCI pipelines, you deliver software to your users more reliably and efficiently, and get faster feedback. This also means you can fix issues and failed tests faster. Test output data becomes available in CircleCI to help debug failed tests. If you save your test data in CircleCI, you can also take advantage of Test Insights as well as parallelism features to identify opportunities to further optimize your pipelines.
 
 [#basics]
 == Basics
@@ -94,7 +94,7 @@ When xref:optimize:parallelism-faster-jobs.adoc[parallelism and test splitting] 
 
 image::guides:ROOT:parallel-runs-timing-tests.png[Timing tab, parallel runs]
 
-The Timing tab lets you identify which steps are taking the longest amount of time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
+The Timing tab lets you identify which steps are taking the most time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
 
 [#test-insights]
 == Test insights

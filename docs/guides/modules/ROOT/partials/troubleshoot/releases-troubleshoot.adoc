@@ -35,25 +35,25 @@ spec:
 ----
 
 [#why-stuck-in-running]
-=== Why is my release is stuck in the `Running` state?
+=== Why is my release stuck in the `Running` state?
 
 * If you are using a Deployment, check whether it was deleted before the release could complete. In this scenario, this is an expected behavior. This experience will be improved upon in future release agent updates.
 
 * If you are using a Deployment, check whether the release agent restarted before all pods for the deployment could become ready. This is a known limitation that will be addressed in future updates of the release agent. Restarting a release agent while a release is ongoing will cause the release agent to lose track of the release status and fail to update the CircleCI services accordingly.
 
 [#no-releases]
-=== Why are no new releases are showing up? and/or why are component versions not being updated?
+=== Why are no new releases showing up? and/or why are component versions not being updated?
 
 * Check whether the token used by the release agent has been revoked:
-.. Select btn:[Releases] in the CircleCI web app sidebar
-.. Select btn:[Configure Environments] to enter the release environments view
+.. Select btn:[Releases] in the CircleCI web app sidebar.
+.. Select btn:[Configure Environments] to enter the release environments view.
 .. Select your environment to view valid token details, including when the token was last used.
 +
 If the token has been last used longer than a minute ago, then this is likely to be the problem.
 
 * Check whether tokens are being shared between multiple release environments. This is **not** supported. Check this by following these steps:
-.. Retrieve the token value from the token field in the `circleci-release-agent` secret in the `circleci-release-agent-system` namespace
-.. Compare the value with the partially obscured value for the available Tokens in the CircleCI web app
+.. Retrieve the token value from the token field in the `circleci-release-agent` secret in the `circleci-release-agent-system` namespace.
+.. Compare the value with the partially obscured value for the available Tokens in the CircleCI web app.
 +
 If the token does **not** show up in the list, then it has been revoked or the value configured on the release agent is incorrect.
 In either case, creating a new token and reinstalling the Release Agent with the new value should solve the issue.
@@ -61,7 +61,7 @@ In either case, creating a new token and reinstalling the Release Agent with the
 [#restore-version-time-out]
 === Why is `restore version` using Helm is timing out?
 
-The time required for a Helm-based _restore version_ to complete successfully is dependent on the specific configuration of the target component. For example, a large number of replicas will lead to a longer duration, which could cause a timeout. It is possible to specify a different timeout by adding the `circleci.com/operation-timeout` annotation to the Rollout or Deployment. The default value for this is 10 minutes. For steps see the xref:guides:deploy:configure-your-kubernetes-components.adoc#operation-timeout[Configure your Kubernetes components] page.
+The time required for a Helm-based _restore version_ to complete successfully is dependent on the specific configuration of the target component. For example, a large number of replicas will lead to a longer duration, which could cause a timeout. It is possible to specify a different timeout by adding the `circleci.com/operation-timeout` annotation to the Rollout or Deployment. The default value for this is 10 minutes. For steps, see the xref:guides:deploy:configure-your-kubernetes-components.adoc#operation-timeout[Configure your Kubernetes components] page.
 
 [#restore-version-button-unavailable]
 === Why is the restore version button not available for a component version?

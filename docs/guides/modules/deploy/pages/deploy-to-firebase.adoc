@@ -1,6 +1,6 @@
 = Deploy to Firebase
 :page-platform: Cloud, Server v4+
-:page-description: This is document provides examples of deploying to Firebase.
+:page-description: This document provides examples of deploying to Firebase.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Firebase.
@@ -8,7 +8,7 @@ In this how-to guide, you will learn how to configure CircleCI to deploy to Fire
 [#introduction]
 == Introduction
 
-This page provides a configuration for deployment to Firebase. In order to deploy to Firebase you will need to add `firebase-tools` to your project's `devDependencies` since attempting to install `firebase-tools` globally in CircleCI will not work.
+This page provides a configuration for deployment to Firebase. In order to deploy to Firebase, you will need to add `firebase-tools` to your project's `devDependencies` since attempting to install `firebase-tools` globally in CircleCI will not work.
 
 [#install-firebase-tools]
 == 1. Install tools

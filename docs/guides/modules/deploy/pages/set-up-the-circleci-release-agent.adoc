@@ -4,7 +4,7 @@
 :experimental:
 :page-aliases: set-up-circleci-deploys.adoc, set-up-the-release-agent.adoc
 
-Visualise and control deployments to your Kubernetes cluster with the CircleCI release agent. The steps outlined on this page guide you to set up the CircleCI release agent for deploy management and monitoring using the CircleCI web app onboarding process. Alternatively, once you have set up an environment integration, you can follow the guides linked below to install the release agent and configure components manually.
+Visualize and control deployments to your Kubernetes cluster with the CircleCI release agent. The steps outlined on this page guide you to set up the CircleCI release agent for deploy management and monitoring using the CircleCI web app onboarding process. Alternatively, once you have set up an environment integration, you can follow the guides linked below to install the release agent and configure components manually.
 
 [#introduction]
 == Introduction
@@ -16,6 +16,7 @@ In this tutorial you will set up an integration between CircleCI and your Kubern
 * Restart version
 
 When using Argo Rollouts, the following commands are also available:
+
 * Retry Rollout
 * Promote Rollout
 * Cancel Rollout
@@ -145,7 +146,7 @@ After completing all the setup steps in the app, you will have done the followin
 * Installed the release agent into your Kubernetes cluster.
 * Configured your Kubernetes components.
 
-Alternatively, you can find manual set up instruction for your Kubernetes components in the xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components] page.
+Alternatively, you can find manual setup instructions for your Kubernetes components in the xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components] page.
 
 == Optional manual setup
 
@@ -153,7 +154,7 @@ This section shows how to manually install the CircleCI release agent into your 
 
 === 1. Add the release agent into your Kubernetes cluster
 
-Use Helm to install the CircleCI release agent into your Kubernetes cluster
+Use Helm to install the CircleCI release agent into your Kubernetes cluster.
 
 . Add the link:https://circleci-public.github.io/cci-k8s-release-agent/[CircleCI release agent Helm repository] by running the following command:
 +
@@ -197,7 +198,7 @@ helm upgrade --install circleci-release-agent-system release-agent/circleci-rele
 
 NOTE: You can further customize the agent installation and check all available options in the link:https://circleci-public.github.io/cci-k8s-release-agent/[release agent Helm repository].
 
-Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated. It navigate to the environment details page, follow these steps:
+Once you have run this command, you can check your environment is set up by navigating to the environment details page to check the "last used" date has been populated. To navigate to the environment details page, follow these steps:
 
 . Select **Deploys** in the CircleCI web app sidebar.
 . Select the **Environments** tab.

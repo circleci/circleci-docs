@@ -102,6 +102,45 @@ Click the icon:settings[Settings icon] to access project settings.
 - Each icon has a light version (`name.svg`) and dark version (`name-dark.svg`)
 - Use this macro instead of the older `image:` syntax for theme-aware icons
 
+### Subsection Badges
+Add status badges to section headings (h2-h6) to indicate feature maturity or platform availability.
+
+**Syntax:**
+```adoc
+[badge="Badge Text"]
+== Section Heading
+```
+
+**Common badge types:**
+- `Preview` - Features in preview
+- `Beta` - Beta features
+- `Deprecated` - Deprecated functionality
+- `Cloud only` - Cloud-specific features
+- `Server v4+` - Server version-specific features
+
+**Examples:**
+```adoc
+[badge="Preview"]
+== Slack notifications
+
+Configure Slack notifications for your project...
+```
+
+**Custom styling:**
+```adoc
+[badge="Beta",badge-classes="text-white bg-blue-500 border border-blue-600"]
+=== AI-powered optimization
+
+[badge="Deprecated",badge-bg="#ff0000",badge-border="#cc0000"]
+==== Legacy approach
+```
+
+**Important notes:**
+- Use subsection badges consistently across related pages
+- Badges appear next to the heading, not in cross-reference link text
+- Badge attributes: `badge` (text), `badge-classes` (Tailwind classes), `badge-bg` (hex color), `badge-border` (hex color)
+- See xref:contributors:docs-style:title-badges.adoc#subsection-badges[Subsection Badges] for complete documentation
+
 ### Headings
 - Write headings in **logical sequence** that tells a story
 - **Do not skip heading levels** (e.g., h2 to h4)
@@ -450,6 +489,15 @@ git diff --cached --name-only | grep '.adoc$' | xargs vale
 - Main config: `.vale.ini`
 - Style rules: `styles/` directory
 - Custom CircleCI rules: `styles/CircleCI/`
+
+**Automated Vale error fixing:**
+
+When asked to fix Vale errors, use the vale-linter skill located at `skills/vale-linter/SKILL.md`. This skill automates the workflow of:
+- Running Vale to identify error-level issues (not warnings or suggestions)
+- Applying fixes while preserving AsciiDoc formatting
+- Creating individual pull requests per file for easier review
+
+To use: "Fix vale errors in [file or directory]" or "Run vale on [file] and create a PR"
 
 ### AsciiDoc Validation
 
