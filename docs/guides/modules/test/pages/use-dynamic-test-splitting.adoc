@@ -57,7 +57,7 @@ Before enabling dynamic test splitting, ensure you have completed the xref:getti
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 
-== 1. Enable dynamic test splitting option in your `.circleci/test-suites.yml` file
+== 1. Enable dynamic test splitting option in your test-suites.yml file
 
 [source,yaml]
 ----

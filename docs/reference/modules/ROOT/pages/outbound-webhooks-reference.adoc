@@ -91,7 +91,7 @@ The following data about the organization associated with the webhook event is p
 [#job]
 === Job
 
-A xref:guides:orchestrate:jobs-steps.adoc[job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
+A xref:guides:orchestrate:jobs-steps.adoc[Job] typically represents one phase in a CircleCI workload (for example, "build", "test", or "deploy") and contains a series of steps.
 
 The following data about the job associated with the webhook event is provided:
 
@@ -148,7 +148,7 @@ xref:guides:orchestrate:workflows.adoc[Workflows] orchestrate jobs. The followin
 
 | `name`
 | Yes
-| Name of the workflow as defined in .circleci/config.yml
+| Name of the workflow as defined in your configuration file
 
 | `status`
 | No
@@ -256,7 +256,7 @@ NOTE: Data associated to the pipeline. Present for pipelines associated with Git
 --
 
 [#circleci]
-==== `circleci`
+==== circleci
 
 [.table-scroll]
 --
@@ -357,7 +357,7 @@ NOTE: The VCS map and its contents are always present for GitHub OAuth app and B
 NOTE: To find out which pipeline type you have, check menu:Project Settings[Project setup] or menu:Project Settings[Pipelines].
 
 [#workflow-completed-for-github-and-bitbucket]
-=== `workflow-completed` for GitHub OAuth and Bitbucket Cloud
+=== workflow-completed for GitHub OAuth and Bitbucket Cloud
 
 ```json
 {
@@ -418,7 +418,7 @@ NOTE: To find out which pipeline type you have, check menu:Project Settings[Proj
 ```
 
 [#job-completed-for-github-and-bitbucket]
-=== `job-completed` for GitHub OAuth and Bitbucket Cloud
+=== job-completed for GitHub OAuth and Bitbucket Cloud
 
 ```json
 {
@@ -486,7 +486,7 @@ NOTE: To find out which pipeline type you have, check menu:Project Settings[Proj
 ```
 
 [#workflow-completed-gitlab]
-=== `workflow-completed` for GitLab, GitHub App and Bitbucket Data Center
+=== workflow-completed for GitLab, GitHub App and Bitbucket Data Center
 
 ```json
 {
@@ -561,7 +561,7 @@ NOTE: To find out which pipeline type you have, check menu:Project Settings[Proj
 ```
 
 [#job-completed-gitlab]
-=== `job-completed` for GitLab, GitHub App and Bitbucket Data Center
+=== job-completed for GitLab, GitHub App and Bitbucket Data Center
 
 ```json
 {
@@ -638,4 +638,4 @@ NOTE: To find out which pipeline type you have, check menu:Project Settings[Proj
 [#next-steps]
 == Next steps
 
-* Follow the xref:guides:integration:webhooks-airtable.adoc[Using webhooks with third party tools] tutorial.
+* Follow the xref:guides:integration:webhooks-airtable.adoc[Using Webhooks With Third Party Tools] tutorial.

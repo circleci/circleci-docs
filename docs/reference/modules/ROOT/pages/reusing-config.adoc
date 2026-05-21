@@ -15,9 +15,9 @@ include::guides:ROOT:partial$notes/docker-auth.adoc[]
 * Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
 
 [#using-the-parameters-declaration]
-== Using the `parameters` declaration
+== Using the parameters declaration
 
-Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters guide] for more information.
+Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters] guide for more information.
 
 The immediate children of the `parameters` key are a set of keys in a map.
 
@@ -227,8 +227,8 @@ The following example uses parameters:
 * The `executor` parameter to allow the invoker of a job to decide which executor to use to run the job: `ubuntu`, `xenial`, `bionic`.
 * For the `ubuntu` executor:
  ** A string parameter is used to set the image to use.
- ** A boolean parameter is used to enable/disable xref:guides:optimize:docker-layer-caching.adoc[Docker layer caching].
- ** An enum parameter is used to choose a xref:configuration-reference.adoc#linuxvm-execution-environment[resource class].
+ ** A boolean parameter is used to enable/disable xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching].
+ ** An enum parameter is used to choose a xref:configuration-reference.adoc#linuxvm-execution-environment[Resource Class].
 * For the `xenial` executor:
  ** A string parameter is used to set an environment variable.
 
@@ -439,7 +439,7 @@ commands:
 ----
 
 [#the-commands-key]
-=== The `commands` key
+=== The commands key
 
 A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
@@ -504,7 +504,7 @@ Commands can use other commands in the scope of execution. For instance, if a co
 [#special-keys]
 === Special keys
 
-CircleCI has several special keys available to all link:https://circleci.com[circleci.com] customers and available by default in CircleCI server installations. Examples of these keys are:
+CircleCI has several special keys available to all link:https://circleci.com[circleci.com] customers and available by default in CircleCI Server installations. Examples of these keys are:
 
 * `checkout`
 * `setup_remote_docker`
@@ -640,7 +640,7 @@ jobs:
 ----
 
 [#the-executors-key]
-=== The `executors` key
+=== The executors key
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -731,7 +731,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job in the `matrix-tests` workflow, xref:configuration-reference.adoc#matrix[matrix jobs] are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
+When calling the `test` job in the `matrix-tests` workflow, xref:configuration-reference.adoc#matrix[Matrix Jobs] are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
 
 [,yaml]
 ----
@@ -825,7 +825,7 @@ NOTE: The `foo-orb/bar` and `baz-orb/bar` are different executors. They both hav
 
 When invoking an executor in a `job`, any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the xref:guides:security:env-vars.adoc#order-of-precedence[Environment Variables guide] for more information.
+The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the xref:guides:security:env-vars.adoc#order-of-precedence[Environment Variables] guide for more information.
 
 [,yaml]
 ----
@@ -1153,7 +1153,7 @@ workflows:
 ----
 
 [#the-when-step]
-=== *The `when` step*
+=== The when step
 
 Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a truthy value.
 
@@ -1166,7 +1166,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 | condition
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A logic statement]
+| xref:configuration-reference.adoc#logic-statements[A Logic Statement]
 
 | steps
 | Y
@@ -1176,7 +1176,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 --
 
 [#the-unless-step]
-=== *The `unless` step*
+=== The unless step
 
 Under the `unless` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a falsy value.
 
@@ -1189,7 +1189,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 | condition
 | Y
 | Logic
-| xref:reference:ROOT:configuration-reference.adoc#logic-statements[A logic statement]
+| xref:reference:ROOT:configuration-reference.adoc#logic-statements[A Logic Statement]
 
 | steps
 | Y
