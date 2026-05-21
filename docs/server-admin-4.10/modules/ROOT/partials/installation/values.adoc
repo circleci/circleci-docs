@@ -1032,7 +1032,7 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 | mongodb.persistence.size
 | string
 | `"8Gi"`
-| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 | mongodb.podAnnotations."backup.velero.io/backup-volumes"
 | string
@@ -1813,7 +1813,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | postgresql.primary.persistence.existingClaim
 | string
 | `""`
-| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 | postgresql.primary.persistence.size
 | string
@@ -1983,7 +1983,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | rabbitmq.persistence.existingClaim
 | string
 | `""`
-| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 | rabbitmq.persistence.size
 | string
@@ -2088,7 +2088,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | redis.master.persistence.size
 | string
 | `"8Gi"`
-| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 | redis.master.podAnnotations."backup.velero.io/backup-volumes"
 | string
@@ -2118,7 +2118,7 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | redis.slave.persistence.size
 | string
 | `"8Gi"`
-| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database volumes]
+| To increase PVC size, follow this guide: xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 | redis.slave.podAnnotations."backup.velero.io/backup-volumes"
 | string
