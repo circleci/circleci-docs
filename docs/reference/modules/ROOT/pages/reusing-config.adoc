@@ -3,7 +3,7 @@
 :page-description: Reference guide for CircleCI 2.1 Configuration
 :experimental:
 
-This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
+This guide describes how to get started with reusable commands, jobs, executors, and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
 
 include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
@@ -113,7 +113,10 @@ commands:
       - run: cp *.md << parameters.destination >>
 ----
 
-Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional.
+Strings must be enclosed in quotes in the following cases:
+
+* If they would otherwise represent another type (such as boolean or number).
+* If they contain characters that have special meaning in YAML, particularly for the colon character.
 
 Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
@@ -445,7 +448,7 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 
 [.table-scroll]
 --
-[cols="1,1,1,2", options="header"]
+[cols=4*, options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -727,7 +730,7 @@ jobs:
 It is also possible to allow an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
 
 [#example-of-using-an-executor-declared-in-configyml-with-matrix-jobs]
-=== Example of using an executor declared in `config.yml` with matrix jobs.
+=== Example of using an executor declared in config.yml with matrix jobs
 
 The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
@@ -959,7 +962,7 @@ workflows:
 [#using-parameters-in-executors]
 === Using parameters in executors
 
-To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
+To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the parameter keys as a map under the `executor:` declaration, each of which has the value of the parameter to pass in.
 
 Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
 
@@ -1043,10 +1046,11 @@ workflows:
 [#invoking-the-same-job-multiple-times]
 === Invoking the same job multiple times
 
-A single configuration may invoke a job multiple times. At configuration processing time during build ingestion, CircleCI will auto-generate names if none are provided or you may name the duplicate jobs explicitly with the `name` key.
+You can invoke a job multiple times in a CircleCI configuration file. You can name duplicate jobs explicitly with the `name` key. If you do not provide names, CircleCI will auto-generate names at configuration processing time.
 
-You must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow. For example, if a job is used under the `requires` key of a job invocation in a workflow, you will need to explicitly name it.
+If you are using a workflow pattern with serial execution, where you define when jobs are upstream from one another, you must explicitly name repeat jobs. For example, if a repeated job is used under the `requires` key of a job invocation in a workflow, you will need to explicitly name it.
 
+.Using a job more than once in a workflow
 [,yaml]
 ----
 version: 2.1
@@ -1111,14 +1115,11 @@ workflows:
 [#defining-conditional-steps]
 == Defining conditional steps
 
-Conditional steps run only if a condition is met at config-compile time, before a workflow runs. This means, for example, that you may not use a condition to check an environment variable, as those are not injected until your steps are running in the shell of your execution environment.
+Conditional steps run only if a condition is met at configuration compilation time. Conditional steps receive parameter values as inputs. You cannot use a condition to check an environment variable, as environment variables are not injected until your steps are running in the shell of your execution environment.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs.
 
-For example, an orb could define a command that runs a set of steps _if_ invoked with `myorb/foo: { dostuff: true }`, but not
-`myorb/foo: { dostuff: false }`.
-
-Furthermore, an orb author could define conditional steps in the `steps` key of a Job or a Command.
+Define conditional steps in the `steps` key of a job or a command.
 
 [,yaml]
 ----
@@ -1151,6 +1152,8 @@ workflows:
           preinstall-foo: true
       - myjob # The empty string is falsy
 ----
+
+For orb authoring, you can use conditional steps to define a command that runs a set of steps _if_ invoked with `myorb/foo: { dostuff: true }`, but not `myorb/foo: { dostuff: false }`.
 
 [#the-when-step]
 === The when step
@@ -1203,7 +1206,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 
 When defining reusable configuration elements directly within your config, you can also wrap those elements within an inline orb. You may find inline orbs useful for development or for name-spacing elements that share names in a local config.
 
-To write an inline orb, place the orb elements under that orb's key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another inline orb, the config could look like the example shown below, in which the inline orb `my-orb` imports the `node` orb:
+To write an inline orb, place the orb elements under that orb's key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another inline orb, the config could look like the example shown below. In this example, the inline orb `my-orb` imports the `node` orb:
 
 [,yaml]
 ----
