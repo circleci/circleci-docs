@@ -179,4 +179,4 @@ Both approaches will enable you to track deployment history and manage rollbacks
 [#questions-and-feedback]
 == Questions? Feedback?
 
-If you have questions or feedback, drop by the https://discuss.circleci.com/[CircleCI Discuss forum] or the CircleCI Discord community.
+If you have questions or feedback, drop by the https://discuss.circleci.com/[CircleCI Discuss forum] or the https://discord.gg/circleci[CircleCI Discord community].
