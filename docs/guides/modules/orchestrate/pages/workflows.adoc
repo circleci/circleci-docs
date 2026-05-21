@@ -3,10 +3,10 @@
 :page-description: Learn about using CircleCI workflows to orchestrate jobs
 :experimental:
 
-Workflows in CircleCI are used to orchestrate jobs. Workflows have options to control run order, scheduling, and access to resources. This page explains how to configure workflows to suit your project. Optimizing your workflows can increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.
+Use workflows to orchestrate jobs in CircleCI. A workflow defines which jobs run, in what order, and under what conditions. This page shows you how to configure workflows to control job execution, manage dependencies between jobs, schedule builds, and apply filters to run different jobs for different branches or tags.
 
 [#overview]
-== Overview
+== Workflow capabilities and benefits
 
 A *workflow* is a set of rules for defining a collection of jobs and their run order. Create workflows to orchestrate your jobs using the options described on this page.
 
@@ -20,6 +20,8 @@ With workflows, you can:
 
 [#workflows-configuration-examples]
 == Workflows configuration examples
+
+The following examples demonstrate common workflow patterns including concurrent execution, sequential dependencies, and fan-out/fan-in structures. Use these patterns to orchestrate your jobs based on your project's needs.
 
 TIP: For a full specification of the `workflows` key, see the xref:reference:ROOT:configuration-reference.adoc#workflows[Workflows] section of the configuration reference.
 
@@ -80,16 +82,16 @@ This configuration snippet is an example of a workflow configured for sequential
 workflows:
   build-test-and-deploy:
     jobs:
-      - build
+      - build  # First job runs immediately
       - test1:
           requires:
-            - build
+            - build  # test1 waits for build to complete successfully
       - test2:
           requires:
-            - test1
+            - test1  # test2 waits for test1 to complete successfully
       - deploy:
           requires:
-            - test2
+            - test2  # deploy runs last, after all tests pass
 ----
 
 Define job dependencies using the `requires` key. A job must wait until all upstream jobs in the dependency graph have run. In this example, the `deploy` job runs when the `build`, `test1` and `test2` jobs complete successfully:
@@ -120,8 +122,8 @@ This configuration snippet is an example of a workflow configured for fan-out/fa
 workflows:
   build_accept_deploy:
     jobs:
-      - build
-      - acceptance_test_1:
+      - build  # Single build job runs first
+      - acceptance_test_1:  # Fan-out: all acceptance tests run concurrently
           requires:
             - build
       - acceptance_test_2:
@@ -133,7 +135,7 @@ workflows:
       - acceptance_test_4:
           requires:
             - build
-      - deploy:
+      - deploy:  # Fan-in: deploy waits for all acceptance tests to succeed
           requires:
             - acceptance_test_1
             - acceptance_test_2
@@ -160,13 +162,13 @@ workflows:
       - build
       - deploy:
           requires:
-            - build
+            - build  # deploy waits for build to succeed
       - release:
           requires:
-            - deploy
+            - deploy  # release waits for deploy to succeed
       - rollback:
           requires:
-            - release:
+            - release:  # rollback runs only if release fails or is canceled
               - failed
               - canceled
 ----
@@ -286,15 +288,15 @@ workflows:
       - test2: # another custom job; runs test suite 2,
           requires: # test2 is dependent on the success of job `test1`
             - test1
-      - hold: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval # This key-value pair will set your workflow to a status of "Needs Approval"
+      - hold: # Approval job pauses the workflow and waits for manual action
+          type: approval # This type makes the workflow wait for manual approval in the CircleCI web app
           requires: # We only run the "hold" job when test2 has succeeded
            - test2
       # On approval of the `hold` job, any successive job that requires the `hold` job will run.
       # In this case, a user is manually triggering the deploy job.
-      - deploy:
+      - deploy:  # Deploy only runs after manual approval of the hold job
           requires:
-            - hold
+            - hold  # This requires the approval job, not test2, ensuring manual gate before deployment
 ----
 
 In this example, the `deploy` job will not run until the `hold` job is approved.
@@ -437,6 +439,8 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 [#scheduling-a-workflow]
 == Scheduling a workflow
 
+Schedule workflows to run your jobs at specific times rather than on every commit. Scheduling is useful for resource-intensive jobs, nightly builds, or generating reports on a regular cadence without triggering on every code change.
+
 NOTE: Scheduled workflows are not available for GitHub App, GitLab or Bitbucket Data Center pipelines.
 
 CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc[Dynamic Configuration]. If you use dynamic configuration you will need to use xref:schedule-triggers.adoc[Schedule Triggers] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
@@ -484,7 +488,7 @@ In the above example:
 * The `nightly` workflow has a `triggers` key and runs on the specified `schedule`, which is daily, and only runs on the `main` branch, as well as any branch that starts `release/`.
 
 [#specifying-a-valid-schedule]
-=== Specifying a valid schedule
+=== Schedule requirements and syntax
 
 A valid `schedule` requires:
 
@@ -621,7 +625,7 @@ For further details see the following guides:
 [#using-filters-in-your-workflows]
 == Using filters in your workflows
 
-The following sections provide examples for using filters in your workflows to manage job execution.
+Filters control which branches or tags trigger specific jobs in your workflows. Use filters to run different sets of jobs for development branches versus production tags, or to limit expensive jobs to specific branches. The following sections provide examples for using filters in your workflows to manage job execution.
 
 You can filter workflows by branch, git tag, or neither. Workflow filters for branches and tags have the keys `only` and `ignore`:
 

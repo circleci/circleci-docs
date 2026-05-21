@@ -17,7 +17,7 @@ The next sections go over what test insights are available.
 
 The summary section displays test suite performance across your most recent 100 runs. You can view the following:
 
-* Average test per run
+* Average tests per run
 * Number of all flaky tests detected
 * Failure counts
 * Slow run times in test suite

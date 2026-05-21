@@ -5,7 +5,7 @@
    * Adjusts tooltip position to prevent viewport overflow.
    * Detects if badge is near left/right edge and adjusts tooltip alignment accordingly.
    */
-  function calculateTooltipPosition(badge) {
+  function calculateTooltipPosition (badge) {
     const badgeRect = badge.getBoundingClientRect()
     const viewportWidth = window.innerWidth
 
@@ -33,7 +33,7 @@
    * Shows tooltip and adjusts position.
    * Triggered by both mouse and keyboard events.
    */
-  function showTooltip(badge) {
+  function showTooltip (badge) {
     requestAnimationFrame(() => {
       calculateTooltipPosition(badge)
       // Add class to show tooltip after position is calculated
@@ -44,7 +44,7 @@
   /**
    * Hides tooltip by removing alignment style and visibility class.
    */
-  function hideTooltip(badge) {
+  function hideTooltip (badge) {
     badge.classList.remove('tooltip-visible')
     badge.style.removeProperty('--tooltip-align')
   }
@@ -52,7 +52,7 @@
   /**
    * Initialize tooltip behavior on a badge.
    */
-  function initializeBadge(badge) {
+  function initializeBadge (badge) {
     // Mouse events
     badge.addEventListener('mouseenter', () => showTooltip(badge))
     badge.addEventListener('mouseleave', () => hideTooltip(badge))
@@ -80,7 +80,7 @@
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer)
     resizeTimer = setTimeout(() => {
-      badges.forEach(badge => {
+      badges.forEach((badge) => {
         // Only recalculate if tooltip is currently visible
         if (badge.matches(':hover, :focus')) {
           calculateTooltipPosition(badge)

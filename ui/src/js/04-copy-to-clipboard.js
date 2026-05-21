@@ -73,7 +73,7 @@
         this.appendChild(toast)
 
         this.classList.add('clicked')
-        this.offsetHeight // eslint-disable-line no-unused-expressions
+        this.offsetHeight
         this.classList.remove('clicked')
 
         // Remove toast after animation completes

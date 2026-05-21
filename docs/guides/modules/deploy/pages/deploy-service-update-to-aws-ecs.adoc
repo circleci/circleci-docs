@@ -20,7 +20,7 @@ The following environment variables need to be set. For more information on how 
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-NOTE: the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
+NOTE: The `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
 [#specify-a-version]
 == 2. Specify a version
@@ -60,7 +60,7 @@ workflows:
   build-and-deploy: # this can be any name you choose
 ----
 
-[#build-push-and-deploy-a-service-update]]
+[#build-push-and-deploy-a-service-update]
 == 5. Build, push and deploy a service update
 
 To configure an link:https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html[AWS service update] to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible:
@@ -131,7 +131,7 @@ This section illustrates how you can:
 [#add-verification-job-to-the-workflow]
 == 7. Add verification job to the workflow
 
-Now that we have our verification job, `verify-deployment`, we can add it to our `build-and-deploy` workflow and ensure it runs sequentially, after the build and deploy jobs using the `requires` key.
+Now that you have our verification job, `verify-deployment`, you can add it to our `build-and-deploy` workflow and ensure it runs sequentially, after the build and deploy jobs using the `requires` key.
 
 [source,yaml]
 ----
