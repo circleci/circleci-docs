@@ -11,8 +11,9 @@ CircleCI provides different options for code coverage reporting using built-in C
 [#view-coverage-on-circleci]
 == View coverage on CircleCI
 
-You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports are stored as build artifacts where they can be viewed or downloaded. See our xref:optimize:artifacts.adoc[build artifacts] guide for more information on downloading coverage reports stored in your artifacts.
+You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's artifacts directory. Code coverage reports are stored as build artifacts where they can be viewed or downloaded. See our xref:optimize:artifacts.adoc[Build Artifacts] guide for more information on downloading coverage reports stored in your artifacts.
 
+.Artifacts tab in the web app
 image::guides:ROOT:artifacts.png[Artifacts tab in the web app]
 
 [#language-specific-code-coverage-options]
@@ -286,7 +287,7 @@ jobs:
 [#php]
 === PHP
 
-PHPUnit is a popular testing framework for PHP. With PHP, you should have access to a link:https://www.php.net/manual/en/book.phpdbg.php[tool called `phpdbg`]. You can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`.
+PHPUnit is a popular testing framework for PHP. With PHP, you have access to a link:https://www.php.net/manual/en/book.phpdbg.php[tool called `phpdbg`]. You can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`.
 
 In the following basic `.circleci/config.yml`, we upload the coverage reports in the `store_artifacts` step at the end of the configuration.
 
@@ -389,6 +390,6 @@ Read more about Codecov's orb in their link:https://circleci.com/blog/making-cod
 [#coveralls]
 === Coveralls
 
-If you are a Coveralls customer, follow their link:https://docs.coveralls.io/[guide to set up your coverage stats]. You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI xref:security:env-vars.adoc[environment variables].
+If you are a Coveralls customer, follow their link:https://docs.coveralls.io/[guide to set up your coverage stats]. You will need to add `COVERALLS_REPO_TOKEN` to your CircleCI xref:security:env-vars.adoc[Environment Variables].
 
 Coveralls will automatically handle the merging of coverage stats in concurrent jobs.
