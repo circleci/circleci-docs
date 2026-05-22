@@ -17,7 +17,7 @@ The current preview version is `0.1.0`.
 
 Runner Provisioner is available to invited preview participants only. To request access, fill out the link:https://forms.gle/7W8z12EBdjuiTQJWA[Runner Provisioner preview access request form].
 
-Once access is granted, you will receive credentials for the image registry referenced in the <<quickstart>>, and access to the Runner Provisioner preview Slack channel.
+The Runner Provisioner image and Helm chart are publicly available. No registry credentials are required to pull either. Approved preview participants also receive an invite to the Runner Provisioner preview Slack channel.
 
 == Feedback and support
 
@@ -40,7 +40,6 @@ Do not open a support ticket for issues with Runner Provisioner. Issues are rout
 * `helm` v3+.
 * A CircleCI runner resource class and its associated resource class token. Create one in the CircleCI web app under **Self-Hosted Runners**. This token is used by the agent running on the VM to authenticate with CircleCI and claim and execute jobs for that resource class.
 * A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access.
-* An image pull secret named `regcred` in the target namespace. The Helm chart references this by default.
 
 === Cluster requirements
 
@@ -252,22 +251,8 @@ $ kubectl label nodes -l agentpool=<nodepool-name> node-role.kubernetes.io/contr
 $ kubectl create namespace runner-provisioner
 ----
 
-[#create-image-pull-secret]
-=== 2. Create the image pull secret
-
-Once access is granted, you will receive credentials for the image registry as described in <<getting-access,Getting Access>>. Use those credentials below.
-
-[source,console]
-----
-$ kubectl create secret docker-registry regcred \
-  --namespace runner-provisioner \
-  --docker-server=<registry> \
-  --docker-username=<user> \
-  --docker-password=<password>
-----
-
 [#configure-values]
-=== 3. Configure values
+=== 2. Configure values
 
 Create a `my-values.yaml` file:
 
@@ -312,7 +297,7 @@ provisioner:
 The image `quay.io/containerdisks/ubuntu:22.04` is an official container disk maintained by the KubeVirt project, providing a pre-built Ubuntu 22.04 OS image for running virtual machines on Kubernetes.
 
 [#install-helm-chart]
-=== 4. Install the Helm chart
+=== 3. Install the Helm chart
 
 [source,console]
 ----
@@ -324,7 +309,7 @@ $ helm install runner-provisioner circleci_runner-provisioner \
 ----
 
 [#verify-deployment]
-=== 5. Verify the deployment
+=== 4. Verify the deployment
 
 [source,console]
 ----
@@ -378,8 +363,8 @@ NOTE: Configuration field names and defaults may change before general availabil
 | SHA digest; takes precedence over tag when set
 
 | `imagePullSecrets`
-| `[{name: regcred}]`
-| Secrets for pulling the provisioner image
+| `[]`
+| Image pull secrets for private registries.
 |===
 --
 
@@ -669,7 +654,6 @@ $ kubectl logs -n runner-provisioner deployment/runner-provisioner
 
 Common causes:
 
-* *Image pull failure*: Verify the `regcred` secret exists in the namespace and credentials are valid.
 * *Missing secret keys*: If using `existingSecret`, confirm the secret contains both `circle-token` and `config.yaml` keys.
 * *Invalid config*: A malformed `config.yaml` or missing required fields (`resourceClass.name`, `resourceClass.token`) will cause the provisioner to exit on startup.
 
