@@ -7,7 +7,7 @@ During an incident you may need to **stop pipelines that are already running** a
 
 == Introduction
 
-During an incident you will need to take steps to pause or stop work in CircleCI. This guide provides information on the controls available in CircleCI to help you safely manage builds during and incident.
+During an incident you will need to take steps to pause or stop work in CircleCI. This guide provides information on the controls available in CircleCI to help you safely manage builds during an incident.
 
 First, we present a step-by-step guide to stopping or pausing work that you can follow during an incident. Then, we provide a table detailing some common scenarios that you may encounter during an incident and look at the remediation steps to take.
 
@@ -86,7 +86,7 @@ If you have an organization of type `circleci`, you can cancel all running workf
 
 Align with your team so that stopping or blocking work is not unintentionally undone. You can follow and unfollow projects from the Projects page in the CircleCI web app.
 
-For some integrations, _following_ a project can restore GitHub-side resources (such as webhook and deploy key) after the *Stop Building* option has been used. In this scenario there is no clear feedback in the CircleCI web app to show notify others if a teammate follows the project during an incident.
+For some integrations, _following_ a project can restore GitHub-side resources (such as webhook and deploy key) after the *Stop Building* option has been used. In this scenario there is no clear feedback in the CircleCI web app to notify others if a teammate follows the project during an incident.
 
 [#secrets-and-credentials]
 === 4. Rotate or remove secrets

@@ -24,13 +24,10 @@
     "browserify": "~17.0.0",
     "cssnano": "~7.1.0",
     "eslint": "~10.4.0",
-    "eslint-plugin-import": "~2.32.0",
-    "eslint-plugin-n": "~17.24.0",
-    "eslint-plugin-promise": "~7.3.0",
     "fancy-log": "~2.0.0",
     "fs-extra": "~11.3.0",
     "glob": "~13.0.0",
-    "globals": "~15.14.0",
+    "globals": "~15.15.0",
     "gulp": "~5.0.0",
     "gulp-concat": "~2.6",
     "gulp-connect": "~5.7",
@@ -56,13 +53,11 @@
   },
   "overrides": {
     "qs": "^6.14.1",
-    "eslint-plugin-node": {
-      "eslint": "~10.4.0"
-    },
     "gulp-stylelint": {
       "stylelint": "~17.11.0"
     },
-    "brace-expansion": "~1.1.12",
+    "brace-expansion": "~5.0.0",
+    "minimatch": "^10.2.3",
     "cross-spawn": "~7.0.0",
     "got": "~15.0.0",
     "http-cache-semantics": "~4.2.0",
