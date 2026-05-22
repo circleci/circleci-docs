@@ -208,7 +208,7 @@ You can read more about using CircleCI's API to interact with artifacts in the l
 | The name of the target VCS repository.
 
 | `:build_num`
-| The number of the job (aka. build) for which you want to download artifacts.
+| The number of the job (aka build) for which you want to download artifacts.
 |===
 --
 
@@ -234,7 +234,7 @@ If you are using parallelism in your jobs, it could be that each parallel task i
 [discrete#uploading-large-artifacts]
 ==== Uploading large artifacts
 
-Artifacts that are text can be compressed at very little cost. If you must upload a large artifact you can upload them to your own bucket at no cost.
+Artifacts that are text can be compressed at very little cost. If you must upload a large artifact you can upload it to your own bucket at no cost.
 
 If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
 
@@ -243,7 +243,7 @@ If your pipelines build a binary or uberJAR, consider whether these are necessar
 [discrete#only-upload-test-results-on-failure]
 ==== Only upload test results on failure
 
-xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[The When Attribute] lets you filter what happens within a step in your configuration. The `when` attribute can be set to `on_success`, `on_fail` or `always`. To only upload artifacts when tests fail, add the `when: on_fail` attribute to the `store_artifacts` step:
+xref:reference:ROOT:configuration-reference.adoc#the-when-attribute[The When Attribute] lets you filter what happens within a step in your configuration. The `when` attribute can be set to `on_success`, `on_fail`, or `always`. To only upload artifacts when tests fail, add the `when: on_fail` attribute to the `store_artifacts` step:
 
 .Upload artifacts only on failure
 [,yaml]
