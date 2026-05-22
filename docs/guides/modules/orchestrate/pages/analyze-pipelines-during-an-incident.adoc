@@ -9,7 +9,7 @@ In an incident situation, use this guide to investigate what happened after you 
 
 When an incident occurs, you may need to investigate what happened in your pipelines. This guide provides a step-by-step process to help you investigate what ran and what the incident exposed.
 
-Some common incident scenarios that include the following:
+Some common incident scenarios include the following:
 
 * **A secret may have leaked.** An API key, token, or credential leaked through job output, artifacts, or a compromised dependency.
 * **Unexpected code ran in a pipeline.** A pull request, merged commit, or modified configuration triggered jobs that ran unauthorized commands.

@@ -218,7 +218,7 @@ View attempts in the CircleCI web app as follows:
 
 Consider setting up a `cci-agent-setup.yml` file to control the environment in which Chunk runs your tests. For more information see <<chunk-environment-setup>>.
 
-Also consider including a markdown file, named `claude.md` or `agents.md` at the root of your repository with instructions for running tests. Chunk should pick this up automatically.
+Also consider including a markdown file, named `claude.md` or `agents.md` at the root of your repository with instructions for running tests. Chunk picks this up automatically.
 
 === Verification required error
 
