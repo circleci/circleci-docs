@@ -85,6 +85,8 @@ Once you have created your identity provider, a banner appears at the top of the
 ** For **Audience**, choose the only option, which is your organization ID that you entered when creating the identity provider.
 ** On the **Add Permissions** page you can specify what your CircleCI jobs _can_ and _cannot_ do. Choose only permissions that your job will need. Choosing minimal permissions is an https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#grant-least-privilege[AWS best practice]. You can also write your own policies to lock down permissions to exactly what you need for a specific use case.
 
+TIP: AWS STS supports a dedicated link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[condition key] for CircleCI's `oidc.circleci.com/project-id` claim. Use this key in your role's trust policy to restrict which CircleCI projects can assume the role. See <<limit-role-access-based-on-project>> for sample policies.
+
 === 3. Add AWS to your CircleCI configuration file
 
 Now that you have set up your trusted identity provider and IAM role, you are ready to configure a CircleCI job that authenticates with AWS using OIDC. Use CircleCI's link:https://circleci.com/developer/orbs/orb/circleci/aws-cli[AWS CLI orb] to generate temporary keys and configure a profile that uses OIDC.
@@ -183,12 +185,12 @@ To do this, edit your IAM role's trust policy so that only an OIDC token from yo
 
 . Go to an individual project's page in the https://app.circleci.com/[CircleCI web app] and navigate to menu:Project Settings [Overview] to find your Project ID.
 
-. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Enter your Organization ID for `organization_id` and your Project ID for `project-id`.
+. Add the following condition to your role's trust policy, so that only jobs in your chosen project can assume that role. Replace `<organization_id>` with your CircleCI organization ID and `<project-id>` with your CircleCI project ID. See xref:toolkit:how-to-find-ids.adoc[How to Find IDs] for help.
 +
 --
 *Option 1: Using the CircleCI project-id claim (recommended)*
 
-AWS STS now supports a dedicated condition key for CircleCI projects. Using this key is the most secure and direct way to ensure an IAM role can only be assumed by a specific project within your organization.
+AWS STS maps CircleCI's `oidc.circleci.com/project-id` OIDC claim to a link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[Web Identity Federation condition key]. This key identifies the CircleCI project in which the job is running. Its value is a string containing a UUID that uniquely identifies the CircleCI project. Use this condition key with string operators in your trust policy to restrict access to specific CircleCI projects.
 
 [source,yaml]
 ----
@@ -212,7 +214,7 @@ AWS STS now supports a dedicated condition key for CircleCI projects. Using this
 }
 ----
 
-NOTE: The `oidc.circleci.com/project-id` claim is used for trust policy evaluation during the initial authentication step and is not available as a session variable after the role is assumed.
+NOTE: The `oidc.circleci.com/project-id` condition key is evaluated during `sts:AssumeRoleWithWebIdentity` and is not available as a session tag after the role is assumed.
 
 *Option 2: Using the sub claim*
 
@@ -605,7 +607,7 @@ CircleCI's OpenID Connect ID tokens also contain some https://openid.net/specs/o
 | The unique identifier for the pipeline that triggered this job. Its value is a string containing a UUID identifying the CircleCI pipeline.
 
 | `oidc.circleci.com/project-id`
-| The ID of the project in which the job is running. Its value is a string containing a UUID identifying the CircleCI project.
+| The CircleCI project ID. Its value is a string containing a UUID that uniquely identifies the CircleCI project. Use this claim to restrict access to specific CircleCI projects. In AWS, this claim maps to a link:https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_iam-condition-keys.html#condition-keys-wif[Web Identity Federation condition key] that works with string operators.
 
 | `oidc.circleci.com/ssh-rerun`
 | A boolean indicating if the CI job is started using the SSH rerun feature.

@@ -249,7 +249,7 @@ Restrict contexts by setting up _expression restrictions_. Expression restrictio
 
 [source]
 ----
-pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api"")
+pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_source starts-with "api")
 ----
 
 Tabs and new lines are considered whitespace so can be used to break long lines, but have no other significance. For example, the snippet above could also be written:
@@ -396,7 +396,7 @@ NOTE: All operators are left associative. In practice, you should avoid operator
 | `starts-with`
 |
 
-| `>=` `>` `<=` `<`
+| `>=` `>` `+<=+` `<`
 | left
 
 | `not` `!`
@@ -503,7 +503,7 @@ Environment variables are used according to a specific precedence order, as foll
 . Context environment variables (assuming the user has access to the context).
 . xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project-level environment variables] set on the *Project Settings* page in the web app.
 
-Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the contexts page will take precedence over variables added on the *Project Settings* page.
+Environment variables declared inside a shell command `run` step, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the contexts page will take precedence over variables added on the *Project Settings* page.
 
 [#creating-environment-variables]
 === Add an environment variable to a context
