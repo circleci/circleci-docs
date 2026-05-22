@@ -15,15 +15,15 @@ The current preview version is `0.1.0`.
 
 == Getting access
 
-Runner Provisioner is available to invited preview participants only. To request access, fill out the link:https://forms.gle/7W8z12EBdjuiTQJWA[Runner Provisioner preview access request form].
+The Runner Provisioner image and Helm chart are publicly available. No registry credentials or invitation are required to install and use Runner Provisioner.
 
-The Runner Provisioner image and Helm chart are publicly available. No registry credentials are required to pull either. Approved preview participants also receive an invite to the Runner Provisioner preview Slack channel.
+Preview participants get access to a dedicated Slack channel for support and feedback during the preview. To request access to the Slack channel, fill out the link:https://forms.gle/7W8z12EBdjuiTQJWA[Runner Provisioner preview access request form].
 
 == Feedback and support
 
-Runner Provisioner is available to invited preview participants only. As a preview customer, expect bugs and missing features — this is early-stage software and sharp edges are normal.
+Runner Provisioner is preview software. Expect bugs and missing features. This is early-stage software and sharp edges are normal.
 
-In exchange, detailed feedback is expected. Your input directly shapes what gets built before general availability. You have direct access to the CircleCI product and engineering team throughout the preview.
+Preview participants get direct access to the CircleCI product and engineering team via the preview Slack channel throughout the preview. In exchange, detailed feedback is expected. Your input directly shapes what gets built before general availability.
 
 Escalate directly via the `#runner-provisioner-preview` Slack channel for:
 
