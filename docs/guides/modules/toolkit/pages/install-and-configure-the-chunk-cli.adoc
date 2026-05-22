@@ -1,11 +1,11 @@
-= Install and configure the chunk CLI
+= Install and configure the Chunk CLI
 :page-platform: Cloud
-:page-description: How to install and configure the chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
+:page-description: How to install and configure the Chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
 :experimental:
 
-The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. The Chunk CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
 
-Some of the things you can do with the chunk CLI include:
+Some of the things you can do with the `chunk` CLI include:
 
 * Mine your team's GitHub pull request history to generate a team-specific review prompt for AI agents using `chunk build-prompt`.
 * Validate commands locally or in CircleCI Cloud environments using `chunk validate`.
@@ -13,7 +13,7 @@ Some of the things you can do with the chunk CLI include:
 * Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`.
 * Set up pre-commit and session-end hooks that automatically validate in Claude Code using `chunk init`.
 
-NOTE: **chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
+NOTE: **Chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
 
 [#supported-platforms]
 == Supported platforms
@@ -36,7 +36,7 @@ $ brew install CircleCI-Public/circleci/chunk
 [#verify-installation]
 === 2.2 Verify the installation
 
-Confirm the chunk CLI is working and check the version:
+Confirm the `chunk` CLI is working and check the version:
 
 [source,console]
 ----
@@ -51,7 +51,7 @@ After installing the `chunk` CLI, set credentials for each service you plan to u
 [#auth-circleci]
 === 2.1 CircleCI
 
-Required for `chunk sidecar` and `chunk task` commands. The chunk CLI uses your CircleCI token to create and manage cloud sidecar environments for running remote validations.
+Required for `chunk sidecar` and `chunk task` commands. The `chunk` CLI uses your CircleCI token to create and manage cloud sidecar environments for running remote validations.
 
 [source,console]
 ----
@@ -63,7 +63,7 @@ Enter your CircleCI personal API token when prompted. Generate a personal API to
 [#auth-anthropic]
 === 2.2 Anthropic
 
-Required for `chunk build-prompt`. The chunk CLI uses your Anthropic API key to analyze GitHub PR comments with Claude and generate team-specific review prompts.
+Required for `chunk build-prompt`. The `chunk` CLI uses your Anthropic API key to analyze GitHub PR comments with Claude and generate team-specific review prompts.
 
 [source,console]
 ----
@@ -75,7 +75,7 @@ Enter your Anthropic API key when prompted. Generate an API key from the link:ht
 [#auth-github]
 === 2.3 GitHub
 
-Required for `chunk build-prompt`. The chunk CLI uses your GitHub token to mine PR review comments from your repository history.
+Required for `chunk build-prompt`. The `chunk` CLI uses your GitHub token to mine PR review comments from your repository history.
 
 [source,console]
 ----
@@ -89,7 +89,7 @@ Enter a GitHub personal access token with `repo` scope when prompted.
 
 === 3.1 Initialize a project
 
-Run `chunk init` in your project directory to configure chunk for that project:
+Run `chunk init` in your project directory to configure the `chunk` CLI for that project:
 
 [source,console]
 ----
@@ -128,12 +128,12 @@ The following flags are available for `chunk init`:
 
 After initialization, run `chunk validate` to run the detected commands. You can also run `chunk build-prompt` to mine your GitHub PR history for a team-specific review prompt.
 
-For detailed information on using the chunk CLI, including generating review prompts, running validations, and installing skills, refer to xref:how-to-use-chunk-cli.adoc[How to Use the `chunk` CLI].
+For detailed information on using the `chunk` CLI, including generating review prompts, running validations, and installing skills, refer to xref:how-to-use-chunk-cli.adoc[How to Use the `chunk` CLI].
 
 [#updating-the-cli]
-== Update the chunk CLI
+== Update the Chunk CLI
 
-Run the following command to update the chunk CLI:
+Run the following command to update the `chunk` CLI:
 
 [source,console]
 ----
@@ -141,9 +141,9 @@ $ brew upgrade chunk
 ----
 
 [#uninstall]
-== Uninstall the chunk CLI
+== Uninstall the Chunk CLI
 
-To uninstall the chunk CLI, run the following command:
+To uninstall the `chunk` CLI, run the following command:
 
 [source,console]
 ----

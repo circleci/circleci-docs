@@ -262,12 +262,12 @@ $ chunk sidecar exec <command>
 [#trigger-chunk-tasks]
 == Trigger Chunk tasks
 
-The `chunk task` command triggers a xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk task] in CircleCI Cloud from your terminal, instead of opening the Chunk task drawer in the CircleCI web app.
+The `chunk task` command triggers a xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Task] in CircleCI Cloud from your terminal, instead of opening the Chunk task drawer in the CircleCI web app.
 
 [#configure-task-runs]
 === Configure task runs
 
-Before you can trigger a task run, set up `.chunk/run.json` for the repository. This file records which CircleCI project the task should run against.
+Before you can trigger a task run, set up `.chunk/run.json` for the repository. This file records the CircleCI project to run the task against.
 
 From your project directory:
 
@@ -413,4 +413,4 @@ Supported keys:
 == Next steps
 
 * xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI Web App]
-* link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[View the full command list in the chunk CLI repository, window=_blank]
+* link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[View the full command list in the Chunk CLI repository, window=_blank]
