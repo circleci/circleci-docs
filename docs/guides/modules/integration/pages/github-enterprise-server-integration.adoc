@@ -25,7 +25,7 @@ The following functionality is available during Preview:
 * **Custom webhook triggers**.
 * **API triggers**.
 * **Scheduled pipelines**.
-* **Commit status reporting** to your GitHub Enterprise Server pull requests.
+* **Commit status reporting** to your GitHub Enterprise Server.
 * **Pipeline definitions and triggers** viewable and manageable in the Project Setup page.
 * **HTTPS code checkout** (same as GitHub App for GitHub Cloud).
 * **Custom configuration file paths** and cross-repo pipeline/trigger setups.
