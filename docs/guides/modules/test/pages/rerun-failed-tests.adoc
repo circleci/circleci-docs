@@ -33,12 +33,12 @@ If your current job is using xref:test-splitting-tutorial.adoc[Intelligent Test 
 [#quickstart]
 == Quickstart
 
-To use the rerun failed tests feature, run your tests using the `circleci tests run` command. The basic structure of your testing command should be:
+To use the rerun failed tests feature, run your tests using the `circleci tests run` command. The basic structure of your testing command is:
 
 * Create a directory for your results.
 * Glob your test files.
 * Make your test files available as standard input (stdin).
-* Run tests with `circleci tests run`. Your tests should be run with the `--command` flag, using `xargs` to get the tests from stdin.
+* Run tests with `circleci tests run`. Run your tests with the `--command` flag, using `xargs` to get the tests from stdin.
 * If you want to use intelligent test splitting, use the `--split-by=` flag as shown in the examples on the xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] page.
 
 [,yml]
@@ -147,7 +147,7 @@ You can specify the timing type similar to how you can when using `circleci test
 
 After updating your configuration, run the job that runs tests again and make sure that the same number of tests are being executed as before the config.yml change.
 
-Then, the next time you encounter a test failure on that job, select btn:[Rerun failed tests].  If the `--verbose` setting is enabled, you should see output similar to the following the next time you select btn:[Rerun failed tests] with this job on CircleCI:
+Then, the next time you encounter a test failure on that job, select btn:[Rerun failed tests].  If the `--verbose` setting is enabled, you will see output similar to the following the next time you select btn:[Rerun failed tests] with this job on CircleCI:
 
 ```sh
 Installing circleci-tests-plugin-cli plugin.
@@ -162,7 +162,7 @@ DEBUG[2023-05-18T22:09:08Z] Received: ****
 
 If you see `rerunning failed tests` present in the step's output, the functionality is configured correctly.  You will also see output that shows the total number of failed tests from the original job run.
 
-The job should only rerun tests that are from a `classname` of `file` that had at least one test failure when the btn:[Rerun failed tests] button was selected. If you are seeing different behavior, comment on this link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
+The job reruns only tests that are from a `classname` of `file` that had at least one test failure when the btn:[Rerun failed tests] button was selected. If you are seeing different behavior, comment on this link:https://discuss.circleci.com/t/product-launch-re-run-failed-tests-only/47775/[Discuss post] for support.
 
 [#additional-examples]
 == Additional examples
@@ -611,7 +611,7 @@ See <<parallel-rerun-failure>> for a workaround to avoid failures if you are als
 NOTE: The `halt` command will execute the rest of the _current_ step, regardless of whether `tests.txt` has content or not. Make sure to place the command to execute tests in the _following_ step.
 
 * Orbs that run tests may not work with this new functionality at this time.
-* If a shell script is invoked to run tests, `circleci tests run` should be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the <<output-test-files-only,section above>> to pipe the list of test files to be run to a `.txt` file and then pass the list of test file names to your shell script.
+* If a shell script is invoked to run tests, `circleci tests run` must be placed **in the shell script** itself, and not `.circleci/config.yml`. Alternatively, see the <<output-test-files-only,section above>> to pipe the list of test files to be run to a `.txt` file and then pass the list of test file names to your shell script.
 * Jobs that are older than the xref:optimize:persist-data.adoc#custom-storage-usage[Retention Period] for workspaces for the organization cannot be rerun with "Rerun failed tests".
 * Jobs that upload code coverage reports:
 +
@@ -762,7 +762,7 @@ To resolve this error, use "Rerun workflow from failed" to rerun all tests.  "Re
 
 ---
 
-**Question:** I don't see my test framework on this page, can I still use the functionality?
+**Question:** I do not see my test framework on this page, can I still use the functionality?
 
 **Answer:** Yes, as long as your job meets the xref:#prerequisites[Prerequisites] outlined above. The rerun failed tests functionality is test runner and test framework-agnostic. You can use the methods described in the xref:collect-test-data.adoc[Collect Test Data] document to ensure that the job is uploading test results. Note that `classname` and `file` is not always present by default, so your job may require additional configuration.
 
