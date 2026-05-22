@@ -34,7 +34,7 @@ $ brew install CircleCI-Public/circleci/chunk
 ----
 
 [#verify-installation]
-=== 2.2 Verify the installation
+=== 1.2 Verify the installation
 
 Confirm the `chunk` CLI is working and check the version:
 
