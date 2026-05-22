@@ -34,20 +34,20 @@ jobs:
           command: npm test
 ----
 
-`run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
+`run` is a built-in step that runs commands in a shell. To read more about the `run` step for executing tests and other commands, go to the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
 
 Depending on your requirements, you might have more complex workflows that orchestrate multiple jobs. For example, you might have several concurrent jobs for building and testing your project in separate Linux, macOS, and Windows execution environments. You might also want to require that a test job is run only if a preceding build job is successful.
 
 For a more in-depth look at workflows functionality, visit the xref:orchestrate:workflows.adoc[Workflows] page. You can also refer to the xref:toolkit:sample-config.adoc[Sample configuration] page for more workflow examples.
 
-If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
+If you need to restrict the connections allowed in your test jobs, consider enabling xref:security:ip-ranges.adoc[IP Ranges]. This enables CircleCI jobs to go through a set of well-defined IP address ranges.
 
 [#orbs]
 == Use orbs to simplify testing
 
 Orbs provide a way to integrate popular testing tools into your configuration. You can invoke CircleCI partner orbs such as Cypress, LambdaTest, and Sauce Labs in your `.circleci/config.yml` file. These orbs will allow you to include common testing tasks in your pipelines by running built-in jobs or concise usage commands in your jobs.
 
-Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, visit the xref:orbs:use:orb-intro.adoc[Orbs introduction] page. To view the orb registry, visit the link:https://circleci.com/developer/orbs?query=&category=Testing[CircleCI Developer Hub].
+Orbs are available for mobile testing, browser testing, load testing, and code coverage. To get started with orbs, visit the xref:orbs:use:orb-intro.adoc[Orbs Introduction] page. To view the orb registry, visit the link:https://circleci.com/developer/orbs?query=&category=Testing[CircleCI Developer Hub].
 
 [#store-test-data]
 == Store test data
@@ -66,7 +66,7 @@ steps:
 +
 This step uploads and stores test results, and also enables direct access to output from failed tests on the *Tests* tab of a job in the web app.
 +
-More details on `store_test_results` can be found on the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration reference] page.
+More details on `store_test_results` can be found on the xref:reference:ROOT:configuration-reference.adoc#storetestresults[Configuration Reference] page.
 
 * Store test results as artifacts:
 +
@@ -83,15 +83,16 @@ steps:
 +
 Results can later be accessed or downloaded as files via the *Artifacts* section of a job in the CircleCI web app, or through the API.
 +
-More details on `store_artifacts` can be found in the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[Configuration reference] page. You can also read more in the xref:optimize:artifacts.adoc[Storing build artifacts] guide.
+More details on `store_artifacts` can be found in the xref:reference:ROOT:configuration-reference.adoc#storeartifacts[Configuration Reference] page. You can also read more in the xref:optimize:artifacts.adoc[Storing Build Artifacts] guide.
 
-For more detailed examples of storing test data with different testing frameworks, refer to the xref:collect-test-data.adoc[Collect test data] page.
+For more detailed examples of storing test data with different testing frameworks, refer to the xref:collect-test-data.adoc[Collect Test Data] page.
 
 [#timing-tab]
 == Timing tab
 
-When xref:optimize:parallelism-faster-jobs.adoc[parallelism and test splitting] are enabled, CircleCI provides a bird's-eye view into the timing of each parallel run in the *Timing* tab in the *Job Details* UI.
+When xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] are enabled, CircleCI provides a bird's-eye view into the timing of each parallel run in the *Timing* tab in the *Job Details* UI.
 
+.Timing tab, parallel runs
 image::guides:ROOT:parallel-runs-timing-tests.png[Timing tab, parallel runs]
 
 The Timing tab lets you identify which steps are taking the most time in a given parallel run so that you can make targeted improvements to reduce overall runtime.
@@ -110,15 +111,15 @@ More information is available on the xref:insights:insights-tests.adoc[Test Insi
 
 You can configure jobs to re-run failed tests only. Using this option, when a transient test failure arises, only a subset of tests are re-run instead of the entire test suite. Also, only failed tests from the same commit are re-run, not new ones.
 
-More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun failed tests overview] page.  This functionality uses a command called `circleci tests run`.
+More information on how to use this option is available on the xref:rerun-failed-tests.adoc[Rerun Failed Tests Overview] page.  This functionality uses a command called `circleci tests run`.
 
 Historically, when your testing job in a workflow has flaky tests, the only option to get to a successful workflow was to re-run your workflow from failed. This type of re-run executes all tests from your testing job, including tests that passed, which prolongs time-to-feedback and consumes credits unnecessarily.
 
 [#next-steps]
 == Next steps
 
-* Further optimize your pipelines with xref:optimize:parallelism-faster-jobs.adoc[parallelism and test splitting].
-* Try our xref:test-splitting-tutorial.adoc[test splitting tutorial].
+* Further optimize your pipelines with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting].
+* Try our xref:test-splitting-tutorial.adoc[Test Splitting Tutorial].
 * Integrate tests for xref:testing-macos.adoc[macOS] or xref:testing-ios.adoc[iOS] apps.
-* Read our xref:browser-testing.adoc[Browser testing] guide to common methods for running and debugging browser tests in CircleCI.
-* To get event-based notifications in Slack about your pipelines (for example, if a job passes or fails), try our xref:getting-started:slack-orb-tutorial.adoc[Slack orb] tutorial.
+* Read our xref:browser-testing.adoc[Browser Testing] guide to common methods for running and debugging browser tests in CircleCI.
+* To get event-based notifications in Slack about your pipelines (for example, if a job passes or fails), try our xref:getting-started:slack-orb-tutorial.adoc[Slack Orb] tutorial.

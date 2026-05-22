@@ -162,6 +162,7 @@ geckodriver
 Gemfile
 GitHub
 \bGitHub Checks\b
+\bGitHub Enterprise Server\b
 GitLab
 \bGitLab self-managed\b
 GKE
