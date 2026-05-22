@@ -414,8 +414,4 @@ XQuartz
 Xvfb
 YAML
 Zstd
-<<<<<<< vale-fix-use-dynamic-test-splitting
-=======
-[Tt]estsuite('s)?
->>>>>>> main
 LangSmith
