@@ -1,6 +1,6 @@
-= How to use the chunk CLI
+= How to use the Chunk CLI
 :page-platform: Cloud
-:page-description: How to use the chunk CLI to generate AI review prompts, run validations, manage Chunk sidecars, and install AI agent skills.
+:page-description: How to use the `chunk` CLI to generate AI review prompts, run validations, manage Chunk sidecars, and install AI agent skills.
 :experimental:
 
 This page describes how to use the main features of the `chunk` CLI.
