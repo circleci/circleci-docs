@@ -25,7 +25,7 @@ Apple does not provide an alternative command line tool for granting permissions
 
 Two unique `TCC.db` files are in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime.
 
-While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
+You can write to the home directory copy, but not to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
 
 While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, link:https://circleci.com/developer/orbs/orb/circleci/macos[CircleCI provides an orb] to simplify this.
 
@@ -34,7 +34,7 @@ While adding permissions can be manually written in your CircleCI config with `s
 
 Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
 
-For more information, see the xref:execution-managed:using-macos.adoc#supported-xcode-versions[Supported Xcode versions] list.
+For more information, see the xref:execution-managed:using-macos.adoc#supported-xcode-versions[Supported Xcode Versions] list.
 
 If you are interested in Xcode Cross Compilation, visit the xref:execution-managed:using-macos.adoc#xcode-cross-compilation[Using macOS] page.
 
@@ -83,7 +83,7 @@ Fastlane allows you to avoid calling lengthy Xcode commands manually and instead
 
 See the link:https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication[Fastlane docs] for more information.
 
-A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the xref:execution-managed:ios-codesigning.adoc[Code signing] guide (the code signing documentation talks about iOS but it is also applicable to macOS).
+A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the xref:execution-managed:ios-codesigning.adoc[Code Signing] guide (the code signing documentation talks about iOS but it is also applicable to macOS).
 
 [,ruby]
 ----
@@ -249,4 +249,4 @@ jobs:
 [#see-also]
 == See also
 
-* xref:execution-managed:ios-codesigning.adoc[iOS code signing]
+* xref:execution-managed:ios-codesigning.adoc[iOS Code Signing]

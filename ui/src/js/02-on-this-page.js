@@ -40,7 +40,7 @@
     // Clone heading and remove badge elements to get clean text for TOC
     var headingClone = heading.cloneNode(true)
     var badges = headingClone.querySelectorAll('.subsection-badge')
-    badges.forEach(function(badge) { badge.remove() })
+    badges.forEach(function (badge) { badge.remove() })
     link.textContent = headingClone.textContent
     links[(link.href = '#' + heading.id)] = link
     var listItem = document.createElement('li')
