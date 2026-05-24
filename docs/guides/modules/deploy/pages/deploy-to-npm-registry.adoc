@@ -32,15 +32,27 @@ NOTE: Provenance attestations are not currently supported for packages published
 
 npm needs four CircleCI identifiers to configure your project as a trusted publisher. Collect these before you visit npm.
 
-* *Organization ID* (required): Your CircleCI organization ID, in UUID format. From the CircleCI web app, go to menu:Org Settings[Overview]. `<pic>`
+* *Organization ID* (required): Your CircleCI organization ID, in UUID format. From the CircleCI web app, go to menu:Org Settings[Overview].
++
+.Organization ID on the Org Settings Overview page
+image::guides:ROOT:npm-trusted-publishing/organization-id.png[CircleCI Org Settings Overview page showing the Organization ID field]
 
-* *Project ID* (required): Your CircleCI project ID, in UUID format. Go to menu:Project Settings[Overview]. `<pic>`
+* *Project ID* (required): Your CircleCI project ID, in UUID format. Go to menu:Project Settings[Overview].
++
+.Project ID on the Project Settings Overview page
+image::guides:ROOT:npm-trusted-publishing/project-id.png[CircleCI Project Settings Overview page showing the Project ID field]
 
-* *Pipeline Definition ID* (required): The pipeline definition ID, in UUID format. Go to menu:Project Settings[Project Setup]. There you will see your list of pipelines. Find the pipeline that will run the publishing workflow and copy its ID. `<pic>`
+* *Pipeline Definition ID* (required): The pipeline definition ID, in UUID format. Go to menu:Project Settings[Project Setup]. There you will see your list of pipelines. Find the pipeline that will run the publishing workflow and copy its ID.
++
+.Pipeline Definition ID on the Project Setup page
+image::guides:ROOT:npm-trusted-publishing/project-def-id.png[CircleCI Project Settings Project Setup page showing the list of pipelines with their definition IDs]
 
 * *VCS origin* (required): The version control system origin URL for your project, for example `github.com/myorg/myrepo` or `gitlab.com/mylab/myproject`.
 
-* *Context IDs* (optional): If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Lock it down with protected contexts>>), find the UUID for each context under menu:Org Settings[Contexts] and selecting the context. `<pic>`
+* *Context IDs* (optional): If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Lock it down with protected contexts>>), find the UUID for each context under menu:Org Settings[Contexts] and selecting the context.
++
+.Context ID on the Contexts detail page
+image::guides:ROOT:npm-trusted-publishing/context-id.png[CircleCI Org Settings Contexts detail page showing the Context ID]
 
 [#set-up-the-trusted-publisher-on-npm]
 == 2. Set up the trusted publisher on npmjs.com
