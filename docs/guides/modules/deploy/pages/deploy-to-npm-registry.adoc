@@ -133,6 +133,11 @@ You can further restrict who and what can run the publishing job by attaching th
 
 xref:security:contexts.adoc#security-group-restrictions[Security group restrictions] limit job execution to members of a specific group. Anyone outside the group who attempts to run the job fails. This is useful when you want only a small set of people to be able to publish.
 
+[#project-restrictions]
+=== Project restrictions
+
+xref:security:contexts.adoc#project-restrictions[Project restrictions] limit a context to one or more specific projects. With a project restriction in place, a job in any other project that tries to use the context will fail. This is useful for ensuring the publishing context can only be used by the project that owns your npm package.
+
 [#expression-restrictions]
 === Expression restrictions
 
