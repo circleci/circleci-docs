@@ -19,14 +19,14 @@ Unix and Linux shells can expose sensitive data in several ways. It is important
 [#mitigation-techniques]
 == Mitigation techniques
 
-In this section, several techniques to help mitigate the risks discussed above are presented. We will focus on methods for using `curl` commands and xref:toolkit:local-cli.adoc[the CircleCI CLI] securely with the Bash shell.
+This section covers several techniques to help mitigate the risks discussed above. We will focus on methods for using `curl` commands and xref:toolkit:local-cli.adoc[the CircleCI CLI] securely with the Bash shell.
 
 [#general-precautions]
 === General precautions
 
 Avoid running `env` or `printenv`, which will print the values of all environment variables, including secrets.
 
-Avoid writing secrets into your shell history with these following techniques. However, note that turning off history will not prevent commands from being exposed through audit logs and `ps`:
+Avoid writing secrets into your shell history with the following techniques. However, note that turning off history will not prevent commands from being exposed through audit logs and `ps`:
 
 * Running `set +o history` before the sensitive commands will prevent them from being written to the history file. `set -o history` will turn history logging back on.
 * If your shell supports the `HISTCONTROL` environment variable, and it is set to `ignoreboth` or `ignorespace`, placing a space before your command will prevent it from being written to the history file.
@@ -68,7 +68,7 @@ If writing a shell script that uses the CircleCI CLI, remember that in Bash you 
 
 [,bash]
 ----
-`circleci context store-secret --org-id <org-id> <context-name> <secret-name> <<< "$MY_SECRET"`
+circleci context store-secret --org-id <org-id> <context-name> <secret-name> <<< "$MY_SECRET"
 ----
 
 Using the `<<<` construct is more reliable than using `echo` or `printf`, which may or may not be shell built-ins and could potentially spawn a process.
