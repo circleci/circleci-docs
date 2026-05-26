@@ -99,7 +99,7 @@ _Used to trigger pipelines on push events from GitHub_
 *Schedules* +
 _Used to trigger pipelines on a schedule (nightly builds for example)_
 
-* Zero, one or many can be created per pipeline.
+* Zero, one, or many can be created per pipeline.
 * Uses proprietary _timetable_ interface (Repeats, Start time, Repeats per hour, ...).
 
 *API / Manual* +
