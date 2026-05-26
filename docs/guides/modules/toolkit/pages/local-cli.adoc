@@ -13,7 +13,7 @@ Some of the things you can do with the CLI include:
 * xref:how-to-use-the-circleci-local-cli.adoc#orb-development-kit[Create, publish, view, and manage orbs]
 * xref:how-to-use-the-circleci-local-cli.adoc#context-management[Manage contexts]
 
-This page covers the installation and usage of the CircleCI local CLI. The expectation is you have basic knowledge of CI/CD and xref:about-circleci:concepts.adoc[CircleCI's concepts]. You should already have a CircleCI account, an account with a supported VCS.
+This page covers the installation and usage of the CircleCI local CLI. The expectation is you have basic knowledge of CI/CD and xref:about-circleci:concepts.adoc[CircleCI's concepts]. You should already have a CircleCI account and an account with a supported VCS.
 
 == The CircleCI CLI and the task runner
 
