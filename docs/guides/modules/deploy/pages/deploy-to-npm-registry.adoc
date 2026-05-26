@@ -5,6 +5,8 @@
 
 In this how-to guide, you will learn how to configure CircleCI to publish to npm using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for an npm publish token at publish time, so there is no long-lived `NPM_TOKEN` to store, rotate, or leak.
 
+For a functional example you can clone and adapt, see the https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/npm[CircleCI npm trusted publishing example].
+
 TIP: If trusted publishing is not an option for your package or registry, see xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm with an authentication token].
 
 [#introduction]
@@ -189,7 +191,7 @@ Trusted publishing from CircleCI self-hosted runners works.
 [#notes]
 == Notes
 
-* npm is introducing staging for publishing. When this is available, you can configure your trusted publisher to allow `npm stage publish` in addition to `npm publish`.
+* npm supports https://docs.npmjs.com/staged-publishing[staged publishing]. You can configure your trusted publisher to allow `npm stage publish` in addition to (or instead of) `npm publish`, which lets you stage a release for review before promoting it.
 * Pull requests from forks do not have access to CircleCI secrets, including OIDC tokens. A fork cannot trigger a publish.
 
 [#track-deployments-with-deploy-markers]
