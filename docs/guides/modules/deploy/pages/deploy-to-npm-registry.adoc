@@ -81,53 +81,10 @@ image::guides:ROOT:npm-trusted-publishing/npm-trusted-form.png[npm Trusted Publi
 
 . Choose which actions this trusted publisher can perform (`npm publish`, `npm stage publish`, or both) and save.
 
-[#configure-your-circleci-pipeline]
-== 3. Configure your CircleCI pipeline
-
-Add a publishing job to your `.circleci/config.yml`. The job retrieves an OIDC token for the `npm:registry.npmjs.org` audience and assigns it to the `NPM_ID_TOKEN` environment variable. When `NPM_ID_TOKEN` is set, the npm CLI automatically exchanges it for a short-lived publish token, so no `NPM_TOKEN` is needed.
-
-The job is attached to a CircleCI xref:security:contexts.adoc[context] (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. The context is the lockdown point — see <<lock-it-down,Lock it down with protected contexts>> for how to restrict it.
-
-```yaml
-version: 2.1
-
-jobs:
-  publish:
-    docker:
-      - image: cimg/node:22.14
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: npm ci
-      - run:
-          name: Run tests
-          command: npm test
-      - run:
-          name: Build
-          command: npm run build --if-present
-      - run:
-          name: Publish to npm
-          command: |
-            export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
-            npm publish --access public
-
-workflows:
-  publish:
-    jobs:
-      - publish:
-          context:
-            - trusted-publishing-guard
-          filters:
-            branches:
-              only:
-                - main
-```
-
-For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs].
-
 [#lock-it-down]
-== 4. Lock it down with protected contexts
+== 3. Lock it down with protected contexts
+
+This step is optional but recommended. If you do not want context-based restrictions, skip to <<configure-your-circleci-pipeline,Step 4>>.
 
 You can further restrict who and what can run the publishing job by attaching the job to a xref:security:contexts.adoc[CircleCI context] and applying restrictions to that context. If you do this, remember to record the context's UUID under *Context IDs* when you configure the trusted publisher on npm (see <<set-up-the-trusted-publisher-on-npm,Step 2>>).
 
@@ -169,6 +126,51 @@ pipeline.git.branch == "main" and not job.ssh.enabled
 
 .Example publishing context with project and expression restrictions applied
 image::guides:ROOT:npm-trusted-publishing/context-restrictions-examples.png[CircleCI context settings showing a project restriction limiting the context to one project and an expression restriction combining a branch match with not job.ssh.enabled]
+
+[#configure-your-circleci-pipeline]
+== 4. Configure your CircleCI pipeline
+
+Add a publishing job to your `.circleci/config.yml`. The job retrieves an OIDC token for the `npm:registry.npmjs.org` audience and assigns it to the `NPM_ID_TOKEN` environment variable. When `NPM_ID_TOKEN` is set, the npm CLI automatically exchanges it for a short-lived publish token, so no `NPM_TOKEN` is needed.
+
+In the example below, the job is attached to the context from <<lock-it-down,Step 3>> (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. If you skipped Step 3, remove the `context:` block from the workflow.
+
+```yaml
+version: 2.1
+
+jobs:
+  publish:
+    docker:
+      - image: cimg/node:22.14
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
+          name: Run tests
+          command: npm test
+      - run:
+          name: Build
+          command: npm run build --if-present
+      - run:
+          name: Publish to npm
+          command: |
+            export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
+            npm publish --access public
+
+workflows:
+  publish:
+    jobs:
+      - publish:
+          context:
+            - trusted-publishing-guard
+          filters:
+            branches:
+              only:
+                - main
+```
+
+For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs].
 
 [#publish-a-new-version]
 == 5. Publish a new version
