@@ -84,6 +84,8 @@ image::guides:ROOT:npm-trusted-publishing/npm-trusted-form.png[npm Trusted Publi
 
 Add a publishing job to your `.circleci/config.yml`. The job retrieves an OIDC token for the `npm:registry.npmjs.org` audience and assigns it to the `NPM_ID_TOKEN` environment variable. When `NPM_ID_TOKEN` is set, the npm CLI automatically exchanges it for a short-lived publish token, so no `NPM_TOKEN` is needed.
 
+The job is attached to a CircleCI xref:security:contexts.adoc[context] (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. The context is the lockdown point — see <<lock-it-down,Lock it down with protected contexts>> for how to restrict it. Filtering to `main` gives you continuous delivery: every merge to `main` publishes a new version.
+
 ```yaml
 version: 2.1
 
@@ -103,23 +105,22 @@ jobs:
           name: Build
           command: npm run build --if-present
       - run:
-          name: Publish to npm with OIDC
+          name: Publish to npm
           command: |
             export NPM_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "npm:registry.npmjs.org"}')
-            npm publish
+            npm publish --access public
 
 workflows:
   publish:
     jobs:
       - publish:
+          context:
+            - trusted-publishing-guard
           filters:
-            tags:
-              only: /^v.*/
             branches:
-              ignore: /.*/
+              only:
+                - main
 ```
-
-The workflow runs only for tags that start with `v` and never on branches, so a routine commit cannot trigger a publish.
 
 For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs].
 
@@ -170,19 +171,15 @@ image::guides:ROOT:npm-trusted-publishing/context-restrictions-examples.png[Circ
 [#publish-a-new-version]
 == 5. Publish a new version
 
-When you want to publish a new version to npm, run `npm version` to create a new version:
+With the workflow above, every merge to `main` publishes a new version. To bump the package version, run `npm version` on a feature branch, then open a pull request:
 
 ```shell
-npm version 10.0.1
+npm version 10.0.1 --no-git-tag-version
 ```
 
-This will update the `package.json` file and create a tagged Git commit. Next, push the commit with tags:
+The `--no-git-tag-version` flag updates `package.json` without creating a Git tag, since tags are not part of the trigger here. Commit the change, open a PR, and merge to `main`. CircleCI runs the publishing workflow on the merge commit, and the npm CLI exchanges the OIDC token for a short-lived publish token to upload the package.
 
-```shell
-git push --follow-tags
-```
-
-CircleCI runs the publishing workflow on the tag. The npm CLI exchanges the OIDC token for a short-lived publish token and uploads the package.
+TIP: As an alternative to manually bumping the version, you can compute a version at build time from `CIRCLE_BUILD_NUM` so each merge to `main` produces a monotonically increasing version automatically. See the https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/npm[CircleCI npm trusted publishing example] for one approach.
 
 [#self-hosted-runners]
 == Self-hosted runners
