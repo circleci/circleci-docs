@@ -86,7 +86,7 @@ image::guides:ROOT:npm-trusted-publishing/npm-trusted-form.png[npm Trusted Publi
 
 Add a publishing job to your `.circleci/config.yml`. The job retrieves an OIDC token for the `npm:registry.npmjs.org` audience and assigns it to the `NPM_ID_TOKEN` environment variable. When `NPM_ID_TOKEN` is set, the npm CLI automatically exchanges it for a short-lived publish token, so no `NPM_TOKEN` is needed.
 
-The job is attached to a CircleCI xref:security:contexts.adoc[context] (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. The context is the lockdown point — see <<lock-it-down,Lock it down with protected contexts>> for how to restrict it. Filtering to `main` gives you continuous delivery: every merge to `main` publishes a new version.
+The job is attached to a CircleCI xref:security:contexts.adoc[context] (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. The context is the lockdown point — see <<lock-it-down,Lock it down with protected contexts>> for how to restrict it.
 
 ```yaml
 version: 2.1
