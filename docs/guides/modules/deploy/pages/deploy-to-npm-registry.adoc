@@ -171,13 +171,13 @@ image::guides:ROOT:npm-trusted-publishing/context-restrictions-examples.png[Circ
 [#publish-a-new-version]
 == 5. Publish a new version
 
-With the workflow above, every merge to `main` publishes a new version. To bump the package version, run `npm version` on a feature branch, then open a pull request:
+With the workflow above, every merge to `main` publishes a new version. To bump the package version, run `npm version` on a feature branch:
 
 ```shell
-npm version 10.0.1 --no-git-tag-version
+npm version 10.0.1
 ```
 
-The `--no-git-tag-version` flag updates `package.json` without creating a Git tag, since tags are not part of the trigger here. Commit the change, open a PR, and merge to `main`. CircleCI runs the publishing workflow on the merge commit, and the npm CLI exchanges the OIDC token for a short-lived publish token to upload the package.
+Open a pull request and merge to `main`. CircleCI runs the publishing workflow on the merge commit, and the npm CLI exchanges the OIDC token for a short-lived publish token to upload the package.
 
 TIP: As an alternative to manually bumping the version, you can compute a version at build time from `CIRCLE_BUILD_NUM` so each merge to `main` produces a monotonically increasing version automatically. See the https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/npm[CircleCI npm trusted publishing example] for one approach.
 
