@@ -48,7 +48,7 @@ Optimize your pipelines to ensure you are getting the most out of your network a
 
 Caching optimization strategies can include avoiding unnecessary workflow reruns, combining jobs, creating meaningful workflow orders, and pruning.
 
-* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the xref:caching-strategy.adoc[Caching Strategies] page.
+* For more information on caching optimization and other caching strategies, like partial dependency caching, caching tradeoffs, and using multiple caches, see the xref:caching.adoc[Caching] page.
 
 [#workspaces]
 == Workspaces
@@ -192,7 +192,6 @@ Billing for storage can be minimized by evaluating your storage needs and settin
 == See also
 
 * xref:caching.adoc[Caching Dependencies]
-* xref:caching-strategy.adoc[Caching Strategies]
 * xref:orchestrate:workspaces.adoc[Workspaces]
 * xref:artifacts.adoc[Artifacts]
 * xref:security:ip-ranges.adoc[IP Ranges]

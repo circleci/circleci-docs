@@ -70,7 +70,6 @@ deploy-ios-applications.adoc,docs/guides/modules/deploy/pages/deploy-ios-applica
 circleci-images.adoc,docs/guides/modules/execution-managed/pages/circleci-images.adoc,17379,NO,NO
 vs-code-extension-overview.adoc,docs/guides/modules/toolkit/pages/vs-code-extension-overview.adoc,16801,NO,NO
 outbound-webhooks-reference.adoc,docs/reference/modules/ROOT/pages/outbound-webhooks-reference.adoc,16587,NO,YES
-caching-strategy.adoc,docs/guides/modules/optimize/pages/caching-strategy.adoc,16268,NO,NO
 config-intro.adoc,docs/guides/modules/getting-started/pages/config-intro.adoc,15958,NO,NO
 container-runner-performance-benchmarks.adoc,docs/guides/modules/execution-runner/pages/container-runner-performance-benchmarks.adoc,15769,NO,NO
 orbs-best-practices.adoc,docs/orbs/modules/author/pages/orbs-best-practices.adoc,15702,NO,NO
