@@ -116,7 +116,7 @@
       const results = await searchIndex.search(searchQuery, {
         hitsPerPage: 10,
         page: paginationData?.page || 0,
-        attributesToRetrieve: ['title', 'url', 'relUrl', 'path', 'content', 'component', 'version'],
+        attributesToRetrieve: ['title', 'heading', 'url', 'relUrl', 'path', 'content', 'component', 'version'],
         highlightPreTag: '<strong class="font-bold">',
         highlightPostTag: '</strong>',
         facets: ['component'],
@@ -291,7 +291,11 @@
         const titleElement = resultElement.querySelector('h3')
         const contentElement = resultElement.querySelector('p')
 
-        titleElement.innerHTML = hit._highlightResult?.title?.value ?? hit.title ?? ''
+        const pageTitle = hit._highlightResult?.title?.value ?? hit.title ?? ''
+        const sectionHeading = hit._highlightResult?.heading?.value ?? hit.heading ?? ''
+        titleElement.innerHTML = (sectionHeading && sectionHeading !== pageTitle)
+          ? `${pageTitle} <span class="font-normal opacity-50">/ ${sectionHeading}</span>`
+          : pageTitle
 
         // Cap content to approximately 2 lines (~200 characters)
         const contentText = hit._highlightResult?.content?.value ?? hit.content ?? ''
