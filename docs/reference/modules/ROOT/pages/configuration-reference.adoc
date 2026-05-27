@@ -1844,7 +1844,7 @@ workflows:
 [#checkout]
 === *`checkout`*
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. If you require doing git over HTTPS, do not use this step as it configures git to checkout over SSH.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. For GitHub OAuth, GitLab, and Bitbucket pipelines, `checkout` configures git to check out over SSH. If you require git over HTTPS, do not use this step as it configures git to checkout over SSH. For GitHub App pipelines (GitHub Cloud and GitHub Enterprise Server), `checkout` uses HTTPS.
 
 [.table-scroll]
 --
@@ -1932,7 +1932,7 @@ jobs:
       - run: git submodule update --init
 ----
 
-NOTE: The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restorecache>> and would like to use garbage collection to reduce its size, you may wish to use a <<run>> step with command `git gc` before doing so.
+NOTE: The `checkout` step configures Git to skip automatic garbage collection. If you are caching your `.git` directory with <<restorecache>> and want to use garbage collection to reduce its size, use a <<run>> step with `git gc` before doing so.
 
 '''
 
