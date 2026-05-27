@@ -84,7 +84,7 @@ Configure your CircleCI credit pricing to ensure accurate cost calculations. Fin
 * Historical pricing for backfilling. This is an optional section that you can use if you have had different contracted USD per credit agreements over the time you have used CircleCI.
 
 . In the "Ongoing pricing" section, enter $0.0006, which is the standard price you pay (in US dollars) to purchase a credit. If you have an alternative pricing agreement, alter this value to reflect your contracted rate.
-. Select a start date for usage at this rate .
+. Select a start date for usage at this rate.
 . Optionally, add historical pricing periods for backfilling historical cost data:
 +
 * Select **Add historical pricing**.
