@@ -69,11 +69,13 @@ function collectPages(contentCatalog, siteUrl) {
         .filter(page => page.pub)
         .forEach(page => {
           const relUrl = page.pub.url; // e.g. '/path/to/page.html'
-          const html = `<article>${page.contents}</article>`;
+          const html = `<article>${page.contents}</article>`
+            .replace(/<\/(h[1-6]|p|div|li|blockquote|pre)>/gi, '</$1>\n\n')
           const text = parseHTML(html)
             .textContent.trim()
-            .replace(/<[^>]*>/g, '')  // Strip all HTML tags
-            .replace(/\s+/g, ' ');    // Normalize whitespace
+            .replace(/<[^>]*>/g, '')
+            .replace(/[ \t]+/g, ' ')
+            .replace(/\n{3,}/g, '\n\n')
           const pathSegments = [compVer.title];
           const nav = navMap[relUrl]?.path.map(item => item.content);
           if (nav) pathSegments.push(...nav);
@@ -220,7 +222,7 @@ async function indexToAlgolia(pages) {
       const maxContentSize = 9500 - metadataSize;
 
       // Trim content if necessary to ensure total record size is under limit
-      let content = chunk;
+      let content = chunk.replace(/\s+/g, ' ').trim()
       if (Buffer.byteLength(content, 'utf8') > maxContentSize) {
         content = content.slice(0, Math.floor(maxContentSize * 0.9));
       }

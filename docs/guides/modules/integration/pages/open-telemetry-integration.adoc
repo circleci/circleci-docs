@@ -1,23 +1,23 @@
 = OpenTelemetry for CI/CD
 
 CircleCI supports sending OpenTelemetry spans for your pipelines as they
-execute. CircleCI emits spans for pipelines, workflows, jobs, tasks, and steps
-allowing you to understand and visualise the behavior of your pipelines.
+execute. CircleCI emits spans for pipelines, workflows, jobs, tasks, and steps,
+allowing you to understand and visualize the behavior of your pipelines.
 
 == Configure OpenTelemetry export via the UI
 
 Complete the following steps to configure CircleCI to send OpenTelemetry spans
 to the collector of your choice.
 
-. Log in to the link:https://app.circleci.com/home[CircleCI web app]
+. Log in to the link:https://app.circleci.com/home[CircleCI web app].
 
 . Select your organization.
 
 . Open **Org** from the sidebar.
 
-. In the organization settings sidebar, click **OpenTelemetry Configuration**
+. In the organization settings sidebar, click **OpenTelemetry Configuration**.
 
-. Select **Add exporter**
+. Select **Add exporter**.
 
 . Complete the fields.
 ** **Endpoint**: The hostname and port for your OTLP collector, for example `otel.example.com:4317`.
