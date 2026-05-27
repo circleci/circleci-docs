@@ -2045,17 +2045,18 @@ All API calls are made in the same way, by making standard HTTP calls, using JSO
 </code></pre></div>
 <p>You can add the API token using your <a href="https://circleci.com/account/api">account dashboard</a>. We recommend using <strong>personal API tokens</strong> at this time because project API tokens are <strong>not</strong> supported for API v2. Project API tokens are supported for most API v1 endpoints. Notes are included below to indicate when a personal API token is required.</p>
 
-<p>To be authenticated by the API server, pass your API token in the <code>Authorization</code> header using Bearer Authentication (recommended):</p>
-
-<p>Or use the <code>Circle-Token</code> header:</p>
-
-<p>Or use the API token as the username for HTTP Basic Authentication, by passing the <code>-u</code> flag to the <code>curl</code> command:</p>
+<p>To be authenticated by the API server, pass your API token in the <code>Authorization</code> header using one of the following methods: </p>
+<ul>
+  <li><strong>Bearer Authentication</strong> (recommended).</li>
+  <li><strong>Circle-Token header</strong>.</li>
+  <li><strong>HTTP Basic Authentication</strong>, by passing the <code>-u</code> flag to the <code>curl</code> command.</li>
+</ul>
 
 <aside class="notice">
-the colon ":" tells curl that there's no password.
+The colon ":" as shown in the examples tells curl that there's no password.
+The API token can be added to the <code>circle-token</code> query param:
 </aside>
 
-<p>DEPRECATED (this option will be removed in the future): The API token can be added to the <code>circle-token</code> query param:</p>
 <h2 id='summary-of-api-endpoints'>Summary of API Endpoints</h2>
 <p>All CircleCI API endpoints begin with <code>https://circleci.com/api/v1.1/</code></p>
 <h3 id='get-requests'>GET Requests</h3>

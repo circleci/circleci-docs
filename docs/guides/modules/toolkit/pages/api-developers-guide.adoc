@@ -34,9 +34,9 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 
 The following authentication methods are supported:
 
-* **Bearer Authentication** (recommended): industry-standard (RFC 6750) - pass the token as a Bearer token in the `Authorization` header.
-* **Circle-Token header**: CircleCI-specific header, widely used in existing integrations - pass the token in the `Circle-Token` header.
-* **Basic Authentication**: legacy option, not recommended for new integrations - use the token as the username (Base64-encoded).
+* **Bearer Authentication** (recommended): Industry-standard (RFC 6750). Pass the token as a Bearer token in the `Authorization` header.
+* **Circle-Token header**: CircleCI-specific header, widely used in existing integrations. Pass the token in the `Circle-Token` header.
+* **Basic Authentication**: Legacy option, not recommended for new integrations. Use the token as the username (Base64-encoded).
 
 [#using-the-api-securely-wtih-curl]
 === Using the API securely with cURL
