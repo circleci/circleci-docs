@@ -24,7 +24,7 @@ executors:
 
   ruby_executor:
     docker:
-      - image: cimg/ruby:4.0.4
+      - image: cimg/ruby:4.0.5
     working_directory: ~/project
 
 commands:
