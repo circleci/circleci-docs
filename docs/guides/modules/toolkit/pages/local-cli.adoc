@@ -201,7 +201,7 @@ choco uninstall circleci-cli -y --remove dependencies
 '''
 
 [#useful-links]
-== CLI articles in the support centre
+== CLI articles in the support center
 
 If you wish to suggest ways we could improve the CLI link:https://github.com/CircleCI-Public/circleci-cli[share your suggestion on the GitHub repository].
 
