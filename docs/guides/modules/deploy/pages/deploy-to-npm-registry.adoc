@@ -3,11 +3,11 @@
 :page-description: Publish packages to npm from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
 :experimental:
 
-In this how-to guide, you will learn how to configure CircleCI to publish to npm using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for an npm publish token at publish time. There is no long-lived `NPM_TOKEN` to store, rotate, or leak.
+In this how-to guide, you will learn how to configure CircleCI to publish to npm using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for an npm publish token at publish time. No long-lived `NPM_TOKEN` exists to store, rotate, or leak.
 
-For a functional example you can clone and adapt, see the https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/npm[CircleCI npm trusted publishing example].
+For a functional example you can clone and adapt, see the link:https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/npm[CircleCI npm trusted publishing example].
 
-TIP: If trusted publishing is not an option for your package or registry, see xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm with an authentication token].
+TIP: If trusted publishing is not an option for your package or registry, see xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm With an Authentication Token].
 
 [#introduction]
 == Introduction
@@ -86,22 +86,22 @@ image::guides:ROOT:npm-trusted-publishing/npm-trusted-form.png[npm Trusted Publi
 
 This step is optional but recommended. If you do not want context-based restrictions, skip to <<configure-your-circleci-pipeline,Step 4>>.
 
-You can further restrict who and what can run the publishing job by attaching the job to a xref:security:contexts.adoc[CircleCI context] and applying restrictions to that context. If you do this, remember to record the context's UUID under *Context IDs* when you configure the trusted publisher on npm (see <<set-up-the-trusted-publisher-on-npm,Step 2>>).
+You can further restrict who and what can run the publishing job by attaching the job to a xref:security:contexts.adoc[CircleCI Context] and applying restrictions to that context. If you do this, remember to record the context's UUID under *Context IDs* when you configure the trusted publisher on npm (see <<set-up-the-trusted-publisher-on-npm,Step 2>>).
 
 [#group-restrictions]
 === Security group restrictions
 
-xref:security:contexts.adoc#security-group-restrictions[Security group restrictions] limit job execution to members of a specific group. Anyone outside the group who attempts to run the job fails. Use a security group restriction when you want only a small set of people to be able to publish.
+xref:security:contexts.adoc#security-group-restrictions[Security Group Restrictions] limit job execution to members of a specific group. Anyone outside the group who attempts to run the job fails. Use a security group restriction when you want only a small set of people to be able to publish.
 
 [#project-restrictions]
 === Project restrictions
 
-xref:security:contexts.adoc#project-restrictions[Project restrictions] limit a context to one or more specific projects. With a project restriction in place, a job in any other project that tries to use the context will fail. Use a project restriction to ensure the publishing context can only be used by the project that owns your npm package.
+xref:security:contexts.adoc#project-restrictions[Project Restrictions] limit a context to one or more specific projects. With a project restriction in place, a job in any other project that tries to use the context will fail. Use a project restriction to ensure the publishing context can only be used by the project that owns your npm package.
 
 [#expression-restrictions]
 === Expression restrictions
 
-xref:security:contexts.adoc#expression-restrictions[Expression restrictions] are more powerful. The most common use is restricting a context to a specific branch. For example:
+xref:security:contexts.adoc#expression-restrictions[Expression Restrictions] are more powerful. The most common use is restricting a context to a specific branch. For example:
 
 ```
 pipeline.git.branch == "main"
@@ -170,7 +170,7 @@ workflows:
                 - main
 ```
 
-For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect tokens in jobs].
+For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect Tokens in Jobs].
 
 [#publish-a-new-version]
 == 5. Publish a new version
@@ -210,6 +210,6 @@ You have two options for setting up deploy markers:
 Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
 
 [#questions-and-feedback]
-== Questions? Feedback?
+== Feedback
 
 If you have questions or feedback, drop by the https://discuss.circleci.com/[CircleCI Discuss forum] or the https://discord.gg/circleci[CircleCI Discord community].
