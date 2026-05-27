@@ -47,6 +47,11 @@ script: |
             continue
           }
 
+          // Skip words that contain backticks (code references)
+          if text.contains(word, "`") {
+            continue
+          }
+
           // Remove any trailing punctuation for checking
           clean_word := text.trim_right(word, ".,;:!?")
 
