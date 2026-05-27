@@ -42,7 +42,7 @@ Flaky tests are tests that fail non-deterministically; they pass and fail due to
 
 Test Insights detects flaky tests. Flaky tests are identified as tests that failed and passed on the same commit in a 14-day window. Deterministic tests rely on the state of the repository and show the same behavior on re-runs. Flaky tests are labeled `FLAKY` throughout the CircleCI app to help you identify them.
 
-image::guides:ROOT:test-insights-flaky.png[Flakey tests Insights example]
+image::guides:ROOT:test-insights-flaky.png[Flaky tests Insights example]
 
 [#most-failed-tests]
 === Most failed tests
