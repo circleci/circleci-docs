@@ -3,7 +3,7 @@
 :page-description: Publish packages to npm from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
 :experimental:
 
-In this how-to guide, you will learn how to configure CircleCI to publish to npm using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for an npm publish token at publish time, so there is no long-lived `NPM_TOKEN` to store, rotate, or leak.
+In this how-to guide, you will learn how to configure CircleCI to publish to npm using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for an npm publish token at publish time. There is no long-lived `NPM_TOKEN` to store, rotate, or leak.
 
 For a functional example you can clone and adapt, see the https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/npm[CircleCI npm trusted publishing example].
 
@@ -91,12 +91,12 @@ You can further restrict who and what can run the publishing job by attaching th
 [#group-restrictions]
 === Security group restrictions
 
-xref:security:contexts.adoc#security-group-restrictions[Security group restrictions] limit job execution to members of a specific group. Anyone outside the group who attempts to run the job fails. This is useful when you want only a small set of people to be able to publish.
+xref:security:contexts.adoc#security-group-restrictions[Security group restrictions] limit job execution to members of a specific group. Anyone outside the group who attempts to run the job fails. Use a security group restriction when you want only a small set of people to be able to publish.
 
 [#project-restrictions]
 === Project restrictions
 
-xref:security:contexts.adoc#project-restrictions[Project restrictions] limit a context to one or more specific projects. With a project restriction in place, a job in any other project that tries to use the context will fail. This is useful for ensuring the publishing context can only be used by the project that owns your npm package.
+xref:security:contexts.adoc#project-restrictions[Project restrictions] limit a context to one or more specific projects. With a project restriction in place, a job in any other project that tries to use the context will fail. Use a project restriction to ensure the publishing context can only be used by the project that owns your npm package.
 
 [#expression-restrictions]
 === Expression restrictions
@@ -125,7 +125,7 @@ pipeline.git.branch == "main" and not job.ssh.enabled
 ```
 
 .Example publishing context with project and expression restrictions applied
-image::guides:ROOT:npm-trusted-publishing/context-restrictions-examples.png[CircleCI context settings showing a project restriction limiting the context to one project and an expression restriction combining a branch match with not job.ssh.enabled]
+image::guides:ROOT:npm-trusted-publishing/context-restrictions-examples.png[CircleCI context settings showing a project restriction limiting the context to one project and an expression restriction combining a branch match with an SSH-rerun block]
 
 [#configure-your-circleci-pipeline]
 == 4. Configure your CircleCI pipeline
