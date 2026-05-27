@@ -2038,15 +2038,18 @@ Access to billing functions is only available from the CircleCI application.
 <aside class="notice">
 All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
 </aside>
-<h2 id='get-authenticated'>Get Authenticated</h2><div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span> <span class="s2">"https://circleci.com/api/..."</span>
+<h2 id='get-authenticated'>Get Authenticated</h2><div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Authorization: Bearer &lt;circle-token&gt;"</span> <span class="s2">"https://circleci.com/api/..."</span>
+</code></pre></div><div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-H</span> <span class="s2">"Circle-Token: &lt;circle-token&gt;"</span> <span class="s2">"https://circleci.com/api/..."</span>
 </code></pre></div><div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="nt">-u</span> &lt;circle-token&gt;: <span class="s2">"https://circleci.com/api/..."</span>
 </code></pre></div><div class="highlight"><pre class="highlight sh tab-shell"><code>curl <span class="s2">"https://circleci.com/api/v1.1/me?circle-token=&lt;circle-token&gt;"</span>
 </code></pre></div>
 <p>You can add the API token using your <a href="https://circleci.com/account/api">account dashboard</a>. We recommend using <strong>personal API tokens</strong> at this time because project API tokens are <strong>not</strong> supported for API v2. Project API tokens are supported for most API v1 endpoints. Notes are included below to indicate when a personal API token is required.</p>
 
-<p>To be authenticated by the API server, use this as the value of the Circle-Token header:</p>
+<p>To be authenticated by the API server, pass your API token in the <code>Authorization</code> header using Bearer Authentication (recommended):</p>
 
-<p>Or you can use the API token as the username for HTTP Basic Authentication, by passing the <code>-u</code> flag to the <code>curl</code> command:</p>
+<p>Or use the <code>Circle-Token</code> header:</p>
+
+<p>Or use the API token as the username for HTTP Basic Authentication, by passing the <code>-u</code> flag to the <code>curl</code> command:</p>
 
 <aside class="notice">
 the colon ":" tells curl that there's no password.

@@ -32,7 +32,11 @@ NOTE: Currently, xref:managing-api-tokens.adoc#creating-a-personal-api-token[Per
 
 The CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the next section.
 
-You can use the token in the request header with the name `Circle-Token`, as shown in the examples below. You may also use the API token as the username (Base64-encoded) with HTTP Basic Authentication.
+The following authentication methods are supported:
+
+* **Bearer Authentication** (recommended): industry-standard (RFC 6750) - pass the token as a Bearer token in the `Authorization` header.
+* **Circle-Token header**: CircleCI-specific header, widely used in existing integrations - pass the token in the `Circle-Token` header.
+* **Basic Authentication**: legacy option, not recommended for new integrations - use the token as the username (Base64-encoded).
 
 [#using-the-api-securely-wtih-curl]
 === Using the API securely with cURL
@@ -51,6 +55,11 @@ To add an API token, perform the steps listed below.
 [,shell]
 ----
 export CIRCLE_TOKEN={your_api_token}
+
+# using bearer authentication (recommended):
+curl https://circleci.com/api/v2/me --header "Authorization: Bearer $CIRCLE_TOKEN"
+
+# or, using Circle-Token header:
 curl https://circleci.com/api/v2/me --header "Circle-Token: $CIRCLE_TOKEN"
 ----
 
