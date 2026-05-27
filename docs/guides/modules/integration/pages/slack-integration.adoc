@@ -76,7 +76,7 @@ Enter the channel name or channel ID. To find the channel ID, open the channel i
 Private channel::
 +
 --
-First, invite the CircleCI bot to the channel first by running `/invite @CircleCI` in the channel.
+First, invite the CircleCI bot to the channel by running `/invite @CircleCI` in the channel.
 
 Then, enter the channel ID. Find your channel ID by opening the channel in Slack, select the *Open channel details* option from the channel menu and the channel ID is displayed in the modal. If the bot is not invited before you save, you will receive an error.
 --

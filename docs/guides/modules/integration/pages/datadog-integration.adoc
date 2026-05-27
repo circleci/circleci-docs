@@ -15,15 +15,15 @@ The link:https://docs.datadoghq.com/integrations/circleci/[Datadog CircleCI inte
 
 Complete the following steps to set up a CircleCI webhook to forward your logs to Datadog.
 
-. Log in to the link:https://app.circleci.com/projects[CircleCI web app]
+. Log in to the link:https://app.circleci.com/projects[CircleCI web app].
 
-. Access one of your CircleCI projects
+. Access one of your CircleCI projects.
 
-. Open **Project settings**
+. Open **Project settings**.
 
-. In the project settings sidebar, click **Webhooks**
+. In the project settings sidebar, click **Webhooks**.
 
-. Select **Add webhook**
+. Select **Add webhook**.
 
 . Complete the following fields:
 ** **Webhook name**: `Datadog CI Visibility` or any other identifier name that you want to provide.
@@ -33,7 +33,7 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 
 . Select **Add Webhook** to save the new webhook.
 
-NOTE: Webhook payload may be different depending on the integration used by the pipeline that emits the webhook. Checkout the xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[sample webhook payloads] for each integration for more information.
+NOTE: Webhook payload may be different depending on the integration used by the pipeline that emits the webhook. Check out the xref:reference:ROOT:outbound-webhooks-reference.adoc#sample-webhook-payloads[sample webhook payloads] for each integration for more information.
 
 [#visualize-pipeline-data-in-datadog]
 === Visualize pipeline data in Datadog

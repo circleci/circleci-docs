@@ -7,7 +7,7 @@ This document provides tips and best practices for building your open source pro
 
 == Credits for open source projects
 
-See the xref:plans-pricing:credits.adoc#open-source-credit-usage[Using Credits] page for up-to-date information on free credits available for open source projects
+See the xref:plans-pricing:credits.adoc#open-source-credit-usage[Using Credits] page for up-to-date information on free credits available for open source projects.
 
 [#security]
 == Security
@@ -15,7 +15,7 @@ See the xref:plans-pricing:credits.adoc#open-source-credit-usage[Using Credits] 
 While open source can be a liberating practice, take care not to liberate sensitive information.
 
 * If your repository is public, your CircleCI project and its build logs are also public. Pay attention to the information you choose to print.
-* Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in <<pass-secrets-to-builds-from-forked-pull-requests,forked PRs>>
+* Environment variables set in the CircleCI application are hidden from the public. These variables will not be shared in <<pass-secrets-to-builds-from-forked-pull-requests,forked PRs>>
 unless explicitly enabled.
 
 [#features-and-settings-for-open-source-projects]
@@ -56,7 +56,7 @@ GitHub OAuth app & Bitbucket Cloud::
 +
 --
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[Insert steps from selecting an organization up to the Project Settings page]
-. In the sidebar, click *Advanced*
+. In the sidebar, click *Advanced*.
 . Enable the *Only build pull requests* option.
 
 image::guides:ROOT:triggers/advanced-only-build-prs.png[Enable the Only build pull requests option]
@@ -135,7 +135,7 @@ main repo share a cache with the main repo branches (in particular the
 `main` branch).
 * Two PRs in different fork repos will have different caches. That means
 that a PR from a fork will not share a cache with the main repo `main` branch.
-* enabling the <<pass-secrets-to-builds-from-forked-pull-requests,passing of secrets to build from forked pull requests>>
+* Enabling the <<pass-secrets-to-builds-from-forked-pull-requests,passing of secrets to build from forked pull requests>>
 will enable cache sharing between the original repo and all forked builds.
 
 Currently there is no pre-population of caches because this optimization has not made it to the top of the priority list yet.
@@ -148,7 +148,7 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 * *https://github.com/storybookjs/storybook[Storybook]* - Interactive UI component develop and test: React, React Native, Vue, Angular, Ember.
 * *https://github.com/apollographql[Apollo]* - A community building flexible open source tools for GraphQL.
 * *https://github.com/Automattic/wp-calypso[Calypso]* - The next generation web app powering WordPress.com.
-* *https://github.com/fastlane/fastlane[Fastlane]* - A build automatically tool for Android and iOS.
+* *https://github.com/fastlane/fastlane[Fastlane]* - A build automation tool for Android and iOS.
 
 == See also
 

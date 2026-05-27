@@ -291,10 +291,10 @@
         const titleElement = resultElement.querySelector('h3')
         const contentElement = resultElement.querySelector('p')
 
-        titleElement.innerHTML = hit._highlightResult.title.value
+        titleElement.innerHTML = hit._highlightResult?.title?.value ?? hit.title ?? ''
 
         // Cap content to approximately 2 lines (~200 characters)
-        const contentText = hit._highlightResult.content.value
+        const contentText = hit._highlightResult?.content?.value ?? hit.content ?? ''
         contentElement.innerHTML = contentText.length > 300
           ? contentText.substring(0, 200).replace(/\s+\S*$/, '') + '...'
           : contentText

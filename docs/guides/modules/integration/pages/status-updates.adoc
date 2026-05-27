@@ -9,7 +9,7 @@ CircleCI reports the status of your pipelines back to your version control syste
 
 CircleCI provides two types of status reporting. This overview guide covers "status updates":
 
-*Status updates*:: CircleCI sends job level status information for every commit. Status updates are available for GitHub, Bitbucket, and GitLab. You can disable status updates in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **Status Updates** to `off`.
+*Status updates*:: CircleCI sends job level status information for every commit. Status updates are available for GitHub, Bitbucket, and GitLab. You can disable status updates in the CircleCI web app by navigating to menu:Project Settings[Advanced Settings] and setting **VCS Status Updates** to `off`.
 *GitHub Checks*:: GitHub Checks reports workflow-level status and is available for GitHub only. You can enable GitHub Checks in the CircleCI web app by navigating to menu:Organization Settings[VCS Connections] and selecting **Manage GitHub Checks**. GitHub Checks is a GitHub App, and you will notice that from the GitHub UI the App is called **CircleCI Checks**. For information on setting up and using GitHub Checks, see the xref:guides:integration:enable-checks.adoc[Enable GitHub Checks] guide.
 
 == Status update locations
