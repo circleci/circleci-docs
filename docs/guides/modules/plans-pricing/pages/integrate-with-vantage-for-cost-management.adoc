@@ -17,7 +17,7 @@ Vantage obtains your CircleCI usage data through the CircleCI Usage Export API. 
 
 Vantage automatically imports up to six months of historical data when you first connect, with ongoing imports following your configured retention settings.
 
-This guide provides instructions for connecting CircleCI to Vantage and configuring cost tracking and allocation. You can also read Vantage's docs on link:https://www.vantage.sh/blog/circle-ci-cost-management[connecting Vantage toCircleCI].
+This guide provides instructions for connecting CircleCI to Vantage and configuring cost tracking and allocation. You can also read Vantage's docs on link:https://www.vantage.sh/blog/circle-ci-cost-management[connecting Vantage to CircleCI].
 
 [#prerequisites]
 == Prerequisites
@@ -125,4 +125,4 @@ Refer to the link:https://docs.vantage.sh/virtual_tags[Vantage Virtual Tags docu
 * xref:plans-pricing:credits.adoc[Learn About CircleCI Credits]
 * xref:plans-pricing:manage-budgets.adoc[Manage Budgets in CircleCI]
 * link:https://docs.vantage.sh/connecting_circle_ci[Connecting CircleCI to Vantage]
-* link:https://docs.vantage.sh/cost_reports[Create cost reports in Vantage]
+* link:https://docs.vantage.sh/cost_reports[Create Cost Reports in Vantage]
