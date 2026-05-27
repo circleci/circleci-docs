@@ -22,7 +22,7 @@ The following sections detail CircleCI outbound webhook structure and protocols.
 
 == Quickstart
 
-NOTE: Projects are limited to 5 outbound webhooks. Organization admin permissions are required to add, update and delete outbound webhooks.
+NOTE: Projects are limited to 5 outbound webhooks. Organization admin permissions are required to add, update, and delete outbound webhooks.
 
 Webhooks are set up on a per-project basis, either within the CircleCI app or via API.
 
@@ -30,7 +30,7 @@ To configure webhooks via API see our documentation for https://circleci.com/doc
 
 To configure webhooks within the CircleCI app:
 
-. In the link:https://app.circleci.com/[CircleCI web app] select your organization.
+. In the link:https://app.circleci.com/[CircleCI web app], select your organization.
 . Select **Projects** in the sidebar.
 . Find your project in the list, select the ellipsis icon:more[Ellipsis menu icon], and select **Project Settings**.
 . In the sidebar select *Webhooks*.
@@ -99,7 +99,7 @@ A number of HTTP headers are set on webhooks, as detailed in the table below.
 | A string indicating that the sender was CircleCI (`CircleCI-Webhook/1.0`).
 
 | `circleci-event-type`
-| The type of event, (`workflow-completed`, `job-completed`, etc)
+| The type of event, (`workflow-completed`, `job-completed`, etc).
 
 | `circleci-signature`
 | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.

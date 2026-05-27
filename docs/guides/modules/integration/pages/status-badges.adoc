@@ -31,15 +31,15 @@ include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 [start=4]
 . Select **Status Badges** from the sidebar.
 . Select a branch to show the most recent status for.
-. [Optional] If you project is private, select btn:[Add API token] and in the modal select btn:[Add API token] once again to add an API token to your project with the `status` scope.
+. [Optional] If your project is private, select btn:[Add API token] and in the modal select btn:[Add API token] once again to add an API token to your project with the `status` scope.
 . Select a format for your status badge code from the dropdown.
-. Select btn:[Copy] to copy the token. You can now add the badge to your README or other document.
+. Select btn:[Copy] to copy the code. You can now add the badge to your README or other document.
 
 == Manually generate status badge code
 
 If your project is integrated with CircleCI through GitHub OAuth or Bitbucket Cloud, you can manually generate a status badge for your project. To check which method of GitHub authorization you have, see the xref:github-integration.adoc[GitHub integration] guide.
 
-The manual steps in this section will not work if your project is integrated with GitHub App, GitLab or Bitbucket Data Center
+The manual steps in this section will not work if your project is integrated with GitHub App, GitLab, or Bitbucket Data Center.
 
 [#generating-a-status-badge]
 === Generate a status badge
