@@ -31,6 +31,10 @@ CAUTION: Future dates listed here may change at any time.
 | Version | Released | End of Support
 
 |4.10.x
+|05/13/2026
+|05/13/2027
+
+|4.9.x
 |12/09/2025
 |12/09/2026
 
