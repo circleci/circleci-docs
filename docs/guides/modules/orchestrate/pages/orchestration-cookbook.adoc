@@ -94,7 +94,7 @@ include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statements/workflow-when/or-equal-legacy.yml[]
+include::ROOT:example$logic-statement-examples/workflow-when/or-equal-legacy.yml[]
 ----
 
 
@@ -114,7 +114,7 @@ Or using the logic statement syntax:
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statements/workflow-when/exclude-branch-legacy.yml[]
+include::ROOT:example$logic-statement-examples/workflow-when/exclude-branch-legacy.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
@@ -162,7 +162,7 @@ Or using the logic statement syntax:
 +
 [,yaml]
 ----
-include::ROOT:example$logic-statements/workflow-when/and-multiple-legacy.yml[]
+include::ROOT:example$logic-statement-examples/workflow-when/and-multiple-legacy.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
