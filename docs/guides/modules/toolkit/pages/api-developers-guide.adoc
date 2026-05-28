@@ -374,7 +374,7 @@ While this alone can be useful, you may want to customize parameters of the pipe
  -d '{ "branch": "my-branch" }'
 ----
 
-. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, you will pass a Docker image tag to the `docker` executor key.
+. The next example is more complex: Triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, you will pass a Docker image tag to the `docker` executor key.
 +
 First, modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 +
