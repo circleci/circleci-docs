@@ -1,18 +1,19 @@
-= Install and configure the chunk CLI
+= Install and configure the Chunk CLI
 :page-platform: Cloud
-:page-description: How to install and configure the chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
+:page-description: How to install and configure the Chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
 :experimental:
 
-The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. It works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
 
-Some of the things you can do with the chunk CLI include:
+Some of the things you can do with the `chunk` CLI include:
 
 * Mine your team's GitHub pull request history to generate a team-specific review prompt for AI agents using `chunk build-prompt`.
 * Validate commands locally or in CircleCI Cloud environments using `chunk validate`.
+* Trigger Chunk tasks in CircleCI Cloud from your terminal using `chunk task`.
 * Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`.
 * Set up pre-commit and session-end hooks that automatically validate in Claude Code using `chunk init`.
 
-NOTE: **chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
+NOTE: **Chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
 
 [#supported-platforms]
 == Supported platforms
@@ -20,10 +21,10 @@ NOTE: **chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer t
 The `chunk` CLI supports macOS and Linux on both arm64 and x86_64 architectures. Windows is not supported.
 
 [#installation]
-== Installation
+== 1. Installation
 
 [#macos-install-with-homebrew]
-=== macOS and Linux install with Homebrew
+=== 1.1 macOS and Linux install with Homebrew
 
 The recommended installation method for both macOS and Linux is Homebrew:
 
@@ -33,9 +34,9 @@ $ brew install CircleCI-Public/circleci/chunk
 ----
 
 [#verify-installation]
-=== Verify the installation
+=== 1.2 Verify the installation
 
-Confirm the chunk CLI is working and check the version:
+Confirm the `chunk` CLI is working and check the version:
 
 [source,console]
 ----
@@ -43,14 +44,14 @@ $ chunk --version
 ----
 
 [#authentication]
-== Authentication
+== 2. Authentication
 
-After installing the `chunk` CLI, set credentials for each service you plan to use.
+After installing the `chunk` CLI, set credentials for each service you plan to use. Authentication is required for some commands, such as `chunk sidecar` and `chunk task`.
 
 [#auth-circleci]
-=== CircleCI
+=== 2.1 CircleCI
 
-Required for `chunk sidecar` and `chunk task` commands.
+Required for `chunk sidecar` and `chunk task` commands. The `chunk` CLI uses your CircleCI token to create and manage cloud sidecar environments for running remote validations.
 
 [source,console]
 ----
@@ -60,9 +61,9 @@ $ chunk auth set circleci
 Enter your CircleCI personal API token when prompted. Generate a personal API token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
 
 [#auth-anthropic]
-=== Anthropic
+=== 2.2 Anthropic
 
-Required for `chunk build-prompt`.
+Required for `chunk build-prompt`. The `chunk` CLI uses your Anthropic API key to analyze GitHub PR comments with Claude and generate team-specific review prompts.
 
 [source,console]
 ----
@@ -72,9 +73,9 @@ $ chunk auth set anthropic
 Enter your Anthropic API key when prompted. Generate an API key from the link:https://console.anthropic.com/settings/keys[Anthropic console, window=_blank].
 
 [#auth-github]
-=== GitHub
+=== 2.3 GitHub
 
-Required for `chunk build-prompt`.
+Required for `chunk build-prompt`. The `chunk` CLI uses your GitHub token to mine PR review comments from your repository history.
 
 [source,console]
 ----
@@ -82,6 +83,75 @@ $ chunk auth set github
 ----
 
 Enter a GitHub personal access token with `repo` scope when prompted.
+
+[#initialize-a-project]
+== 3. Initialize and validate a project
+
+=== 3.1 Initialize a project
+
+Run `chunk init` in your project directory to configure the `chunk` CLI for that project:
+
+[source,console]
+----
+$ chunk init
+----
+
+`chunk init` performs these actions:
+
+* Detects your build, test, lint, and format commands.
+* Creates a `.chunk/config.json` file with the detected commands.
+* Generates hook configuration in `.claude/settings.json` for Claude Code.
+
+The following flags are available for `chunk init`:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--force`
+|Overwrite an existing `.chunk/config.json`.
+
+|`--skip-hooks`
+|Skip generating hook configuration in `.claude/settings.json`.
+
+|`--skip-validate`
+|Skip command detection. Creates the config file without running command auto-detection.
+
+|`--project-dir <path>`
+|Set the project directory. Defaults to the current directory.
+|===
+--
+
+=== 3.2 Validate your project
+
+After initialization, run `chunk validate` to run the detected commands. You can also run `chunk build-prompt` to mine your GitHub PR history for a team-specific review prompt.
+
+For detailed information on using the `chunk` CLI, including generating review prompts, running validations, and installing skills, refer to xref:how-to-use-chunk-cli.adoc[How to Use the `chunk` CLI].
+
+[#updating-the-cli]
+== Update the Chunk CLI
+
+Run the following command to update the `chunk` CLI:
+
+[source,console]
+----
+$ brew upgrade chunk
+----
+
+[#uninstall]
+== Uninstall the Chunk CLI
+
+To uninstall the `chunk` CLI, run the following command:
+
+[source,console]
+----
+$ brew uninstall chunk
+----
+
+[#manage-credentials]
+== Manage credentials
 
 [#check-auth-status]
 === Check authentication status
@@ -105,65 +175,10 @@ $ chunk auth remove <provider>
 
 Replace `<provider>` with `circleci`, `anthropic`, or `github`.
 
-[#initialize-a-project]
-== Initialize a project
-
-Run `chunk init` in your project directory to configure chunk for that project:
-
-[source,console]
-----
-$ chunk init
-----
-
-`chunk init` performs these actions:
-
-* Detects your build, test, lint, and format commands.
-* Creates a `.chunk/config.json` file with the detected commands.
-* Generates hook configuration in `.claude/settings.json` for Claude Code.
-
-After initialization, `chunk validate` runs the detected commands and `chunk build-prompt` mines your GitHub PR history.
-
-The following flags are available:
-
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-|Flag |Description
-
-|`--force`
-|Overwrite an existing `.chunk/config.json`.
-
-|`--skip-hooks`
-|Skip generating hook configuration in `.claude/settings.json`.
-
-|`--skip-validate`
-|Skip command detection. Creates the config file without running command auto-detection.
-
-|`--project-dir <path>`
-|Set the project directory. Defaults to the current directory.
-|===
---
-
-[#updating-the-cli]
-== Update the chunk CLI
-
-[source,console]
-----
-$ brew upgrade chunk
-----
-
-[#uninstall]
-== Uninstall the chunk CLI
-
-[source,console]
-----
-$ brew uninstall chunk
-----
-
 [#next-steps]
 == Next steps
 
 * xref:how-to-use-chunk-cli.adoc#generate-a-review-prompt[Generate a Team Review Prompt From Your GitHub PR History]
 * xref:how-to-use-chunk-cli.adoc#run-validation[Validate Your Changes]
+* xref:how-to-use-chunk-cli.adoc#trigger-chunk-tasks[Trigger Chunk Tasks]
 * xref:how-to-use-chunk-cli.adoc#install-skills[Install AI Agent Skills]
