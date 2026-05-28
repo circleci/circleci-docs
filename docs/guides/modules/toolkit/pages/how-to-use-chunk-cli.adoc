@@ -1,6 +1,6 @@
-= How to use the chunk CLI
+= How to use the Chunk CLI
 :page-platform: Cloud
-:page-description: How to use the chunk CLI to generate AI review prompts, run validations, manage Chunk sidecars, and install AI agent skills.
+:page-description: How to use the `chunk` CLI to generate AI review prompts, run validations, manage Chunk sidecars, and install AI agent skills.
 :experimental:
 
 This page describes how to use the main features of the `chunk` CLI.
@@ -62,7 +62,7 @@ You can customize this behavior with the following flags:
 --
 
 [#run-validation]
-== Validate your changes
+== Validate your changes locally
 
 The `chunk validate` command runs the commands configured in your project's `.chunk/config.json`. Use it to verify your changes pass all quality checks before pushing.
 
@@ -105,20 +105,85 @@ The following flags are available:
 --
 
 [#run-validation-in-a-sidecar]
-=== Validate in a Chunk sidecar
+[badge="Preview"]
+== Validate in a Chunk sidecar
 
 CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
-To validate in a CircleCI Cloud environment instead of locally, pass a Chunk sidecar ID:
+Chunk sidecars let you validate your changes in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses.
+
+Follow these steps to validate in a Chunk sidecar:
+
+=== 1. Authenticate with CircleCI
+
+Before creating a Chunk sidecar, authenticate with CircleCI:
+
+[source,console]
+----
+$ chunk auth set circleci
+----
+
+Enter your CircleCI personal API token when prompted. Generate a token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
+
+=== 2. Create a Chunk sidecar
+
+Create a new Chunk sidecar environment:
+
+[source,console]
+----
+$ chunk sidecar create --name <name>
+----
+
+Replace `<name>` with a descriptive name for your sidecar. The command auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment. When ready, it prints the Chunk sidecar ID. Copy this ID for use in the validation step.
+
+=== 3. Sync your local files to the sidecar
+
+Sync your local project files to the Chunk sidecar:
+
+[source,console]
+----
+$ chunk sidecar sync
+----
+
+This copies your current working directory to the remote environment.
+
+=== 4. Run validation in the sidecar
+
+Run your validation commands in the Chunk sidecar:
 
 [source,console]
 ----
 $ chunk validate --sidecar-id <sidecar-id>
 ----
 
-To get a Chunk sidecar ID, run `chunk sidecar create` and copy the ID printed when the environment is ready, or run `chunk sidecar list` to retrieve the ID of an existing Chunk sidecar. See the <<manage-sidecars>> section for details.
+Replace `<sidecar-id>` with the ID from step 2. The command executes all configured validation commands from your `.chunk/config.json` in the remote environment.
+
+=== 5. (Optional) SSH into the sidecar for debugging
+
+If validation fails and you need to investigate, SSH into the Chunk sidecar:
+
+[source,console]
+----
+$ chunk sidecar ssh
+----
+
+This opens an interactive shell in the remote environment.
+
+=== 6. (Optional) Snapshot the sidecar for reuse
+
+After configuring a Chunk sidecar successfully, capture its state as a snapshot for faster future sessions:
+
+[source,console]
+----
+$ chunk sidecar snapshot create --name <snapshot-name>
+----
+
+The command prints a snapshot ID. Use this ID to create new sidecars with `chunk sidecar create --name <name> --image <snapshot-id>`.
+
+For more details on managing Chunk sidecars, see the <<manage-sidecars>> section.
 
 [#manage-sidecars]
+[badge="Preview"]
 == Manage Chunk sidecars
 
 CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
@@ -193,6 +258,67 @@ $ chunk sidecar sync
 ----
 $ chunk sidecar exec <command>
 ----
+
+[#trigger-chunk-tasks]
+== Trigger Chunk tasks
+
+The `chunk task` command triggers a xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Task] in CircleCI Cloud from your terminal, instead of opening the Chunk task drawer in the CircleCI web app.
+
+[#configure-task-runs]
+=== Configure task runs
+
+Before you can trigger a task run, set up `.chunk/run.json` for the repository. This file records the CircleCI project to run the task against.
+
+From your project directory:
+
+[source,console]
+----
+$ chunk task config
+----
+
+The command fetches your CircleCI projects and prompts you to select the project to use. It then saves the selection to `.chunk/run.json`. Pass `--force` (or `-f`) to overwrite an existing configuration without confirmation.
+
+[#trigger-a-task-run]
+=== Trigger a task run
+
+After you have configured the repository, trigger a task run with `chunk task run`:
+
+[source,console]
+----
+$ chunk task run --definition <name-or-uuid> --prompt "<prompt text>"
+----
+
+Replace `<name-or-uuid>` with the name or UUID of the Chunk task definition you want to run, and `<prompt text>` with the instructions to send to the task. Both flags are required.
+
+The command prints the run ID and pipeline ID when the task is triggered.
+
+The following flags are available:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Flag |Description
+
+|`--definition <name-or-uuid>`
+|Required. Name or UUID of the Chunk task definition to run.
+
+|`--prompt <text>`
+|Required. Prompt text to send to the task.
+
+|`--branch <branch>`
+|Override the branch the task checks out.
+
+|`--new-branch`
+|Create a new branch for the task run.
+
+|`--no-pipeline-as-tool`
+|Disable running the pipeline as a tool.
+
+|`--json`
+|Print the response as JSON.
+|===
+--
 
 [#install-skills]
 == Install AI agent skills
@@ -287,3 +413,4 @@ Supported keys:
 == Next steps
 
 * xref:guides:toolkit:chunk-setup-and-overview.adoc[Set up Chunk in the CircleCI Web App]
+* link:https://github.com/CircleCI-Public/chunk-cli/blob/main/docs/CLI.md[View the full command list in the Chunk CLI repository, window=_blank]

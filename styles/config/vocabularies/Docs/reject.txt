@@ -9,3 +9,4 @@ PostgrSQL
 [Ee]asily
 [Oo]pensource
 [Oo]pen-source
+\bchunk CLI\b
