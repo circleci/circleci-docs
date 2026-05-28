@@ -55,9 +55,9 @@ workflows:
 ----
 
 [#example-configuration-pipeline-parameters]
-=== Example configuration file using IP ranges with pipeline parameters.
+=== Example configuration file using IP ranges with pipeline parameters
 
-Use conditional logic to control when IP ranges is enabled with pipeline parameters. You can set the pipeline parameter `ip_ranges` to `true` to enable IP ranges for the `build` job. For more information on triggering pipelines with pipeline parameters, see the xref:orchestrate:triggers-overview.adoc[Trigger a pipeline] page.
+Use conditional logic to control when IP ranges is enabled with pipeline parameters. You can set the pipeline parameter `ip_ranges` to `true` to enable IP ranges for the `build` job. For more information on triggering pipelines with pipeline parameters, see the xref:orchestrate:triggers-overview.adoc[Trigger a Pipeline] page.
 
 [,yaml]
 ----
@@ -137,16 +137,18 @@ Enabling IP ranges consumes 450 credits from your account for each GB of data us
 
 IP ranges usage is visible in the *Plan Usage* section of the CircleCI app:
 
+.IP ranges feature in Plan Usage
 image::guides:ROOT:ip-ranges.png[Screenshot showing the location of the IP ranges feature]
 
 On the *Resources* tab within the *Job Details* UI page, you can view approximations of network transfer for any Docker job, even those without the IP ranges feature enabled. This approximation can be used to predict the cost of enabling the IP ranges feature on a job without having to turn the feature on. You can also view whether or not the job has IP ranges enabled by viewing the IP Ranges badge.
 
+.Approximate network transfer on the Resources tab
 image::guides:ROOT:resources-network-transfer.png[Screenshot showing the approximate network transfer]
 
 [#known-limitations]
 == Known limitations
 
-* IP ranges is currently available for the xref:reference:ROOT:configuration-reference.adoc#machine[Docker executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a xref:reference:ROOT:configuration-reference.adoc#machine[Machine executor], or with `setup_remote_docker`, will fail with an error. See this link:https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.
+* IP ranges is currently available for the xref:reference:ROOT:configuration-reference.adoc#docker[Docker Executor], not including `remote_docker`. Jobs that attempt to use the IP ranges feature with a xref:reference:ROOT:configuration-reference.adoc#machine[Machine Executor], or with `setup_remote_docker`, will fail with an error. See this link:https://discuss.circleci.com/t/fyi-jobs-that-use-the-ip-ranges-feature-and-remote-docker-will-begin-to-fast-fail-this-week/44639[Discuss post] for details.
 
 == IP ranges for core CircleCI services
 
@@ -155,7 +157,7 @@ This section covers the IP ranges used by CircleCI core services. Core service I
 [#list-of-ip-address-ranges-for-core-services]
 === List of IP address ranges for core CircleCI services
 
-The following list shows the IP address ranges for core CircleCI cloud services (used to trigger jobs, exchange information about users between CircleCI and GitHub/GitLab/Bitbucket):
+The following list shows the IP address ranges for core CircleCI Cloud services (used to trigger jobs, exchange information about users between CircleCI and GitHub/GitLab/Bitbucket):
 
 * 18.214.70.5
 * 52.20.166.242
@@ -177,7 +179,7 @@ The machines that execute all jobs on CircleCI's platform, not just jobs opted i
 * Google Cloud Platform (GCP)
 * CircleCI's macOS cloud
 
-An exhaustive list of IP addresses that CircleCI's traffic may come can be found by looking up each cloud provider's IP address ranges. AWS and GCP offer endpoints to find this information:
+An exhaustive list of IP addresses that CircleCI's traffic may come from can be found by looking up each cloud provider's IP address ranges. AWS and GCP offer endpoints to find this information:
 
 * link:https://ip-ranges.amazonaws.com/ip-ranges.json[AWS]: CircleCI uses the _us-east-1_ and _us-east-2_ regions.
 * link:https://www.gstatic.com/ipranges/cloud.json[GCP]: CircleCI uses the _us-east1_ and _us-central1_ regions.
@@ -187,7 +189,7 @@ CAUTION: CircleCI _does not recommend_ configuring an IP-based firewall using th
 [#circleci-macos-cloud]
 === CircleCI macOS cloud
 
-In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs executed by machines. Here is https://circleci.com/docs/ip-ranges-list.json[list of the IP ranges] used by CircleCI macOS Cloud.
+In addition to AWS and GCP (see above), CircleCI's macOS cloud hosts jobs executed by machines. Here is a https://circleci.com/docs/ip-ranges-list.json[list of the IP ranges] used by CircleCI macOS Cloud.
 
 This list of IP Ranges can also be downloaded and saved using the following curl command:
 

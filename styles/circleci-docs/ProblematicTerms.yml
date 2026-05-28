@@ -1,0 +1,16 @@
+extends: substitution
+message: Use '%s' instead of '%s'.
+level: error
+ignorecase: true
+# swap maps tokens in form of bad: good
+swap:
+  master: primary
+  slave: replica
+  blacklist: blocklist
+  whitelist: safelist
+  easy: simple
+  insane: unreasonable
+  sane: reasonable
+  crazy: unreasonable
+  killer: very successful
+  guys: teammates

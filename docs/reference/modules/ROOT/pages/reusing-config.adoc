@@ -3,7 +3,7 @@
 :page-description: Reference guide for CircleCI 2.1 Configuration
 :experimental:
 
-This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
+This guide describes how to get started with reusable commands, jobs, executors, and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
 
 include::guides:ROOT:partial$notes/docker-auth.adoc[]
 
@@ -15,9 +15,9 @@ include::guides:ROOT:partial$notes/docker-auth.adoc[]
 * Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
 
 [#using-the-parameters-declaration]
-== Using the `parameters` declaration
+== Using the parameters declaration
 
-Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters guide] for more information.
+Parameters are declared by name under a job, command, or executor. _Pipeline parameters_ are defined at the top level of a project configuration. See the xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Values and Parameters] guide for more information.
 
 The immediate children of the `parameters` key are a set of keys in a map.
 
@@ -113,7 +113,10 @@ commands:
       - run: cp *.md << parameters.destination >>
 ----
 
-Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional.
+Strings must be enclosed in quotes in the following cases:
+
+* If they would otherwise represent another type (such as boolean or number).
+* If they contain characters that have special meaning in YAML, particularly for the colon character.
 
 Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
@@ -227,8 +230,8 @@ The following example uses parameters:
 * The `executor` parameter to allow the invoker of a job to decide which executor to use to run the job: `ubuntu`, `xenial`, `bionic`.
 * For the `ubuntu` executor:
  ** A string parameter is used to set the image to use.
- ** A boolean parameter is used to enable/disable xref:guides:optimize:docker-layer-caching.adoc[Docker layer caching].
- ** An enum parameter is used to choose a xref:configuration-reference.adoc#linuxvm-execution-environment[resource class].
+ ** A boolean parameter is used to enable/disable xref:guides:optimize:docker-layer-caching.adoc[Docker Layer Caching].
+ ** An enum parameter is used to choose a xref:configuration-reference.adoc#linuxvm-execution-environment[Resource Class].
 * For the `xenial` executor:
  ** A string parameter is used to set an environment variable.
 
@@ -439,13 +442,13 @@ commands:
 ----
 
 [#the-commands-key]
-=== The `commands` key
+=== The commands key
 
 A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
 [.table-scroll]
 --
-[cols="1,1,1,2", options="header"]
+[cols=4*, options="header"]
 |===
 | Key | Required | Type | Description
 
@@ -504,7 +507,7 @@ Commands can use other commands in the scope of execution. For instance, if a co
 [#special-keys]
 === Special keys
 
-CircleCI has several special keys available to all link:https://circleci.com[circleci.com] customers and available by default in CircleCI server installations. Examples of these keys are:
+CircleCI has several special keys available to all link:https://circleci.com[circleci.com] customers and available by default in CircleCI Server installations. Examples of these keys are:
 
 * `checkout`
 * `setup_remote_docker`
@@ -640,7 +643,7 @@ jobs:
 ----
 
 [#the-executors-key]
-=== The `executors` key
+=== The executors key
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -727,11 +730,11 @@ jobs:
 It is also possible to allow an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
 
 [#example-of-using-an-executor-declared-in-configyml-with-matrix-jobs]
-=== Example of using an executor declared in `config.yml` with matrix jobs.
+=== Example of using an executor declared in config.yml with matrix jobs
 
 The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job in the `matrix-tests` workflow, xref:configuration-reference.adoc#matrix[matrix jobs] are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
+When calling the `test` job in the `matrix-tests` workflow, xref:configuration-reference.adoc#matrix[Matrix Jobs] are used to run the job multiple times, concurrently, each with a different set of parameters. The Node application is tested against many versions of Node.js:
 
 [,yaml]
 ----
@@ -825,7 +828,7 @@ NOTE: The `foo-orb/bar` and `baz-orb/bar` are different executors. They both hav
 
 When invoking an executor in a `job`, any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the xref:guides:security:env-vars.adoc#order-of-precedence[Environment Variables guide] for more information.
+The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the xref:guides:security:env-vars.adoc#order-of-precedence[Environment Variables] guide for more information.
 
 [,yaml]
 ----
@@ -959,7 +962,7 @@ workflows:
 [#using-parameters-in-executors]
 === Using parameters in executors
 
-To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the keys of the parameters as a map of keys under the `executor:` declaration, each of which has the value of the parameter to pass in.
+To use parameters in executors, define the parameters under the given executor. When you invoke the executor, pass the parameter keys as a map under the `executor:` declaration, each of which has the value of the parameter to pass in.
 
 Parameters in executors can be of the type `string`, `enum`, or `boolean`. Default values can be provided with the optional `default` key.
 
@@ -1043,10 +1046,11 @@ workflows:
 [#invoking-the-same-job-multiple-times]
 === Invoking the same job multiple times
 
-A single configuration may invoke a job multiple times. At configuration processing time during build ingestion, CircleCI will auto-generate names if none are provided or you may name the duplicate jobs explicitly with the `name` key.
+You can invoke a job multiple times in a CircleCI configuration file. You can name duplicate jobs explicitly with the `name` key. If you do not provide names, CircleCI will auto-generate names at configuration processing time.
 
-You must explicitly name repeat jobs when a repeat job should be upstream of another job in a workflow. For example, if a job is used under the `requires` key of a job invocation in a workflow, you will need to explicitly name it.
+If you are using a workflow pattern with serial execution, where you define when jobs are upstream from one another, you must explicitly name repeat jobs. For example, if a repeated job is used under the `requires` key of a job invocation in a workflow, you will need to explicitly name it.
 
+.Using a job more than once in a workflow
 [,yaml]
 ----
 version: 2.1
@@ -1111,14 +1115,11 @@ workflows:
 [#defining-conditional-steps]
 == Defining conditional steps
 
-Conditional steps run only if a condition is met at config-compile time, before a workflow runs. This means, for example, that you may not use a condition to check an environment variable, as those are not injected until your steps are running in the shell of your execution environment.
+Conditional steps run only if a condition is met at configuration compilation time. Conditional steps receive parameter values as inputs. You cannot use a condition to check an environment variable, as environment variables are not injected until your steps are running in the shell of your execution environment.
 
 Conditional steps may be located anywhere a regular step could and may only use parameter values as inputs.
 
-For example, an orb could define a command that runs a set of steps _if_ invoked with `myorb/foo: { dostuff: true }`, but not
-`myorb/foo: { dostuff: false }`.
-
-Furthermore, an orb author could define conditional steps in the `steps` key of a Job or a Command.
+Define conditional steps in the `steps` key of a job or a command.
 
 [,yaml]
 ----
@@ -1152,8 +1153,10 @@ workflows:
       - myjob # The empty string is falsy
 ----
 
+For orb authoring, you can use conditional steps to define a command that runs a set of steps _if_ invoked with `myorb/foo: { dostuff: true }`, but not `myorb/foo: { dostuff: false }`.
+
 [#the-when-step]
-=== *The `when` step*
+=== The when step
 
 Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a truthy value.
 
@@ -1166,7 +1169,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 | condition
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A logic statement]
+| xref:configuration-reference.adoc#logic-statements[A Logic Statement]
 
 | steps
 | Y
@@ -1176,7 +1179,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 --
 
 [#the-unless-step]
-=== *The `unless` step*
+=== The unless step
 
 Under the `unless` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a falsy value.
 
@@ -1189,7 +1192,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 | condition
 | Y
 | Logic
-| xref:reference:ROOT:configuration-reference.adoc#logic-statements[A logic statement]
+| xref:reference:ROOT:configuration-reference.adoc#logic-statements[A Logic Statement]
 
 | steps
 | Y
@@ -1203,7 +1206,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 
 When defining reusable configuration elements directly within your config, you can also wrap those elements within an inline orb. You may find inline orbs useful for development or for name-spacing elements that share names in a local config.
 
-To write an inline orb, place the orb elements under that orb's key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another inline orb, the config could look like the example shown below, in which the inline orb `my-orb` imports the `node` orb:
+To write an inline orb, place the orb elements under that orb's key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another inline orb, the config could look like the example shown below. In this example, the inline orb `my-orb` imports the `node` orb:
 
 [,yaml]
 ----

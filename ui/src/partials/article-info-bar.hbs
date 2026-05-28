@@ -27,7 +27,14 @@
   {{#if page.attributes.platform}}
     <div class="flex items-center min-w-fit space-x-1 px-3 py-2 md:py-0 border-t md:border-t-0 md:border-l border-inherit">
       {{#each (split page.attributes.platform ',')}}
-        <span class="text-[10px] text-terminal-black border rounded-full py-1 px-1.5" style="font-family: 'Roboto', sans-serif; font-weight: 700;">{{this}}</span>
+        <span class="platform-badge text-[10px] text-terminal-black border rounded-full py-1 px-1.5"
+              aria-label="{{getTooltipText this}}"
+              data-tooltip="{{getTooltipText this}}"
+              data-platform="{{trim this}}"
+              tabindex="0"
+              style="font-family: 'Roboto', sans-serif; font-weight: 700;">
+          {{this}}
+        </span>
       {{/each}}
     </div>
   {{/if}}

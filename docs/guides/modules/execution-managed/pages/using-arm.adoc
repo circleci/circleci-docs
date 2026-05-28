@@ -3,7 +3,7 @@
 :page-description: Learn how to configure a your jobs to run in the Arm VM execution environment.
 :experimental:
 
-You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor, specifying a Linux virtual machine image that includes Arm resources, and then specifying an Arm resource class.
+You can access the Arm VM (virtual machine) execution environment for a job by using the machine executor and specifying a Linux virtual machine image that includes Arm resources. You then specify an Arm resource class.
 
 [tabs]
 ====
@@ -44,7 +44,7 @@ jobs:
 [#available-resource-classes]
 == Available resource classes
 
-The following Arm resources are available part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
+The following Arm resources are available as part of the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[`machine` executor]:
 
 include::ROOT:partial$execution-resources/arm-resource-table.adoc[]
 
@@ -62,7 +62,7 @@ Arm resources are accessible by using the machine executor when using one of the
 [discrete]
 ==== Ubuntu 20.04 - focal
 
-* `ubuntu-2004:current` - most recent, recommended for all users
+* `ubuntu-2004:current` - most recent, recommended for all users.
 * `ubuntu-2004:2023.07.1`
 * `ubuntu-2004:2023.04.2`
 * `ubuntu-2004:2023.02.1`
@@ -76,12 +76,12 @@ Arm resources are accessible by using the machine executor when using one of the
 * `ubuntu-2004:202107-01`
 * `ubuntu-2004:202104-01`
 * `ubuntu-2004:202101-01`
-* `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021
+* `ubuntu-2004:202011-01` - deprecated as of Feb 3, 2021.
 
 [discrete]
 ==== Ubuntu 22.04 - jammy
 
-* `ubuntu-2204:current` - most recent, recommended for all users
+* `ubuntu-2204:current` - most recent, recommended for all users.
 * `ubuntu-2204:2023.07.1`
 * `ubuntu-2204:2023.04.2`
 * `ubuntu-2204:2023.02.1`
@@ -94,13 +94,13 @@ For a full list of machine executor images, see the link:https://circleci.com/de
 == Limitations
 
 * Only 64-bit `arm64` architectures are supported.
-* In CircleCI server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. This is because there are no Arm instances available in GCP.
+* In CircleCI Server, Arm resources are only available when using the EC2 provider for VM service or machine provisioner. This is because there are no Arm instances available in GCP.
 * If you run into issues with orbs, or if there is software you require that is not available in the image, link:https://circleci.canny.io/cloud-feature-requests[submit a feature request].
 
 [#m1-mac-support]
 === M1 Mac support
 
-Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The `spin up environment` job in your pipelines will give you a green tic, but you will see the following message in the response:
+Docker images built on M1 Macs, are by default, not compatible with the CircleCI standard platform. The `spin up environment` job in your pipelines will give you a green tick, but you will see the following message in the response:
 
 [,shell]
 ----
@@ -112,4 +112,4 @@ If you build an image on an M1 you need to specify `docker build --platform linu
 [#arm-on-docker]
 == Arm on Docker
 
-For further information on using Arm with the Docker execution environment, see the xref:using-docker.adoc#arm[Using the Docker execution environment] page.
+For further information on using Arm with the Docker execution environment, see the xref:using-docker.adoc#arm[Using the Docker Execution Environment] page.

@@ -1,4 +1,0 @@
-unencrypted
-tls
-keystore
-reauthenticate

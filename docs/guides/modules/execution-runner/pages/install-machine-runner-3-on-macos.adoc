@@ -67,7 +67,7 @@ NOTE: You may see a notification indicating a background item for Circle Interne
 brew install circleci-runner
 ----
 
-. Open the runner `config.yaml` file with the text editor of your choice, and modify the `runner.name` and `api.auth_token` values.
+. Open the runner `config.yaml` file with a text editor of your choice, and modify the `runner.name` and `api.auth_token` values.
 +
 [,shell]
 ----

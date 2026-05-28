@@ -1,0 +1,2 @@
+. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your org from the org cards on your user homepage.
+. Select **Org** from the sidebar.

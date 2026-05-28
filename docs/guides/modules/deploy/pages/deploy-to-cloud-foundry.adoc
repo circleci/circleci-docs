@@ -1,6 +1,6 @@
 = Deploy to Cloud Foundry
 :page-platform: Cloud, Server v4+
-:page-description: This is document provides examples of deploying to Cloud Foundry.
+:page-description: This document provides examples of deploying to Cloud Foundry.
 :experimental:
 
 In this how-to guide, you will learn how to configure CircleCI to deploy to Cloud Foundry.
@@ -50,7 +50,7 @@ This example is the first step in a link:https://docs.cloudfoundry.org/devguide/
 [#live-deployment]
 === 3. Live deployment
 
-Until now, the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
+Until now, the previously pushed "app-name" has not changed. The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
 
 ```yaml
       - run:

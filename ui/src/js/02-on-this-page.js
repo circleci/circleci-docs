@@ -37,7 +37,11 @@
   var links = {}
   var list = headings.reduce(function (accum, heading) {
     var link = document.createElement('a')
-    link.textContent = heading.textContent
+    // Clone heading and remove badge elements to get clean text for TOC
+    var headingClone = heading.cloneNode(true)
+    var badges = headingClone.querySelectorAll('.subsection-badge')
+    badges.forEach(function (badge) { badge.remove() })
+    link.textContent = headingClone.textContent
     links[(link.href = '#' + heading.id)] = link
     var listItem = document.createElement('li')
     listItem.dataset.level = parseInt(heading.nodeName.slice(1), 10) - 1

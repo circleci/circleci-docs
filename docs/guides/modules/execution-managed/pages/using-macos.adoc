@@ -5,19 +5,19 @@
 
 The macOS execution environment is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch, and Apple TV simulators.
 
-You can use the macOS execution environment to run your xref:orchestrate:jobs-steps.adoc[jobs] in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
+You can use the macOS execution environment to run your xref:orchestrate:jobs-steps.adoc[Jobs] in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
 
 [source,yaml]
 ----
 jobs:
   build:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
     resource_class: m4pro.medium
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 16.4.0 installed
+      # with Xcode 26.4.0 installed
       - run: xcodebuild -version
 ----
 
@@ -39,7 +39,7 @@ include::ROOT:partial$execution-resources/macos-resource-table.adoc[]
 jobs:
   build:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
     resource_class: m4pro.medium
 ----
 
@@ -60,16 +60,16 @@ CircleCI will announce the availability of new macOS images, including Xcode bet
 
 CircleCI aims to make beta Xcode versions available on the macOS executor as soon as possible to allow developers to test their apps ahead of the next stable Xcode release.
 
-Unlike CircleCI's stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated.
+Unlike CircleCI's stable images, beta images are not frozen. Each new beta release overwrites the previous one until a GM (stable) image is released, at which point the image is frozen and no longer updated.
 
-If you are requesting an image using an Xcode version that is currently in beta, you should expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling, which are beyond CircleCI's control.
+If you are requesting an image using an Xcode version that is currently in beta, expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode and associated tooling, which are beyond CircleCI's control.
 
 To read about CircleCI's customer support policy regarding beta images, check out the following link:https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-[support center article].
 
 [#apple-silicon-support]
 === Apple silicon support
 
-Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using xref:execution-runner:runner-overview.adoc#available-self-hosted-runner-platforms[CircleCI runner].
+Running or testing Apple silicon apps natively can be done on our silicon-based Macs or by using xref:execution-runner:runner-overview.adoc#available-self-hosted-runner-platforms[CircleCI Runner].
 
 It is also possible to build Apple silicon/universal binaries using Xcode `12.0.0` and higher, as Apple provides both the Intel (`x86_64`) and Apple silicon (`arm64`) toolchains in this release. Cross-compiling Apple silicon binaries on Intel hosts has an additional overhead, and, as a result, compilation times will be longer than native compilation for Intel.
 
@@ -79,7 +79,7 @@ It is also possible to build Apple silicon/universal binaries using Xcode `12.0.
 [#universal-binaries]
 === Universal binaries
 
-Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. This is supported only under Xcode `12.2`+, although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
+Xcode currently supports the creation of universal binaries which can be run on both `x86_64` and `ARM64` CPU architectures without needing to ship separate executables. Universal binary support is supported only under Xcode `12.2`+, although older Xcode versions can still be used to compile separate `x86_64` and `ARM64` executables.
 
 [#extract-unwanted-architectures]
 === Extract unwanted architectures
@@ -100,7 +100,7 @@ You can then confirm the supported architecture of the extracted binary with the
 lipo -info circleci-demo-macos-x86_64
 ----
 
- Which will output the following:
+Which will output the following:
 
 [source,shell]
 ----
@@ -110,7 +110,7 @@ Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
 [#cross-compiled-binaries]
 === Cross compiled binaries
 
-While universal binaries are only supported under Xcode `12.2`+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For `xcodebuild` the process is relatively straightforward. To build `ARM64` binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to `x86_64`.
+While universal binaries are only supported under Xcode `12.2`+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For `xcodebuild` the process is relatively straightforward. To build `ARM64` binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO`. For the `x86_64` architecture change `ARCHS` to `x86_64`.
 
 [#optimization-and-best-practices]
 == Optimization and best practices
@@ -125,7 +125,7 @@ To pre-start the simulator, add the macOS orb (version `2.0.0` or higher) to you
 [source,yaml]
 ----
 orbs:
-  macos: circleci/macos@2
+  macos: circleci/macos@2.5.4
 ----
 
 Then call the `preboot-simulator` command, as shown in the example below:
@@ -134,9 +134,9 @@ Then call the `preboot-simulator` command, as shown in the example below:
 ----
 steps:
   - macos/preboot-simulator:
-      version: "18.5"
+      version: "26.2"
       platform: "iOS"
-      device: "iPhone 16 Pro Max"
+      device: "iPhone 17 Pro Max"
 ----
 
 It is advisable to place this command early in your job to allow maximum time for the simulator to boot in the background.
@@ -147,10 +147,10 @@ If you require an iPhone simulator that is paired with an Apple Watch simulator,
 ----
 steps:
   - macos/preboot-paired-simulator:
-      iphone-device: "iPhone 16"
-      iphone-version: "18.5"
-      watch-device: "Apple Watch Series 10 - 45mm"
-      watch-version: "11.5"
+      iphone-device: "iPhone 17"
+      iphone-version: "26.2"
+      watch-device: "Apple Watch Series 11 - 46mm"
+      watch-version: "26.2"
 ----
 
 NOTE: It may take a few minutes to boot a simulator, or longer if booting a pair of simulators. During this time, any calls to commands such as `xcrun simctl list` may appear to hang while the simulator is booting up.
@@ -158,7 +158,7 @@ NOTE: It may take a few minutes to boot a simulator, or longer if booting a pair
 [#collecting-ios-simulator-crash-reports]
 === Collecting iOS simulator crash reports
 
-Often if your `scan` step fails, for example, due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
+Often if your `scan` step fails, for example, due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash reports is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
 
 [source,yaml]
 ----
@@ -176,7 +176,7 @@ By default, Fastlane Scan generates test output reports in `html` and `junit` fo
 [#optimizing-cocoapods]
 === Optimizing CocoaPods
 
-In addition to the basic setup steps, it is best practice to use CocoaPods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repository. This will allow you to install pods faster, reducing build times. If you are using CocoaPods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
+In addition to the steps above, it is best practice to use a current version of CocoaPods which supports the CDN, rather than having to clone the entire Specs repository. This will allow you to install pods faster, reducing build times. The current macOS image ships with CocoaPods `1.16.2`. If you are using CocoaPods 1.7 or older, upgrade to take advantage of CDN support and faster `pod install` execution.
 
 To enable this, ensure the first line in your Podfile is as follows:
 
@@ -192,7 +192,7 @@ If upgrading from CocoaPods 1.7 or older, ensure the **Fetch CocoaPods Specs** s
 source 'https://github.com/CocoaPods/Specs.git'
 ----
 
-To update CocoaPods to the latest stable version, simply update the Ruby gem with the following command:
+To update CocoaPods to the latest stable version, update the Ruby gem with the following command:
 
 [source,shell]
 ----
@@ -218,7 +218,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -244,12 +244,12 @@ The following common test tools are known to work well on CircleCI:
 [#react-native-projects]
 === React Native projects
 
-React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, see link:https://github.com/CircleCI-Public/circleci-demo-react-native[our demo React Native application]
+React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, see link:https://github.com/CircleCI-Public/circleci-demo-react-native[our demo React Native application].
 
 [#using-multiple-executor-types-macos-docker]
 == Using multiple executor types (macOS + Docker)
 
-It is possible to use multiple xref:executor-intro.adoc[executor types] in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
+It is possible to use multiple xref:executor-intro.adoc[Executor Types] in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
 
 [source,yaml]
 ----
@@ -257,7 +257,7 @@ version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 26.3.0
+      xcode: 26.4.0
     environment:
       FL_OUTPUT_DIR: output
 
@@ -271,7 +271,7 @@ jobs:
           name: Build and run tests
           command: fastlane scan
           environment:
-            SCAN_DEVICE: iPhone 8
+            SCAN_DEVICE: iPhone 17
             SCAN_SCHEME: WebTests
 
       - store_test_results:
@@ -281,7 +281,7 @@ jobs:
 
   deploy-snapshot:
     docker:
-      - image: cimg/deploy:2022.08
+      - image: cimg/deploy:2026.02
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -295,6 +295,8 @@ workflows:
       - deploy-snapshot
       - build-and-test
 ----
+
+NOTE: `cimg/deploy` is updated monthly. For the latest available tag, see link:https://hub.docker.com/r/cimg/deploy/tags[cimg/deploy on Docker Hub].
 
 [#next-steps]
 == Next steps
