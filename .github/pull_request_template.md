@@ -1,9 +1,3 @@
-> [!NOTE]
-> You may find that there are errors for the `vale/lint` job that are unrelated to your change.
-> Vale checks the whole file when a change is made so if there are existing issues on the page they will be flagged.
-> You can ignore lint errors outside your changes and the CircleCI docs team will address them for you.
-> Vale logs are advisory to help all contributors create content that conforms to our style guide. The `vale/lint` job will not prevent changes from being published.
-
 # Description
 What did you change?
 

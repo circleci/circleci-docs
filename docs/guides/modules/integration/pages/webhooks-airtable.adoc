@@ -15,7 +15,7 @@ demonstrate how one could capture and visualize the output of your pipelines.
 * An Airtable account, if you wish to follow along.
 
 [#get-setup-in-airtable]
-== Get setup in Airtable
+== Get set up in Airtable
 
 [#create-a-new-base-on-airtable]
 === 1. Create a new "Base" on Airtable
@@ -64,11 +64,11 @@ image::guides:ROOT:webhooks/webhook_airtable_4.png[Get webhook link]
 [#connect-to-circleci]
 === 4. Connect to CircleCI
 
-. With our webhook URL from Airtable in hand, we can now setup our webhooks for
+. With our webhook URL from Airtable in hand, we can now set up our webhooks for
 CircleCI. Begin by opening up the project settings for the repository you
 want to monitor on CircleCI, and select "Webhooks" from the side panel.
 +
-image::guides:ROOT:webhooks/webhook_airtable_5.png[Setup webhooks on CircleCI]
+image::guides:ROOT:webhooks/webhook_airtable_5.png[Set up webhooks on CircleCI]
 
 . Click "Add Webhook" and enter a name for the webhook, the webhook URL we copied
 earlier, and select the "Job Completed" event, before saving by pressing "Add
@@ -88,7 +88,7 @@ image::guides:ROOT:webhooks/webhook_airtable_7_run_pipeline.png[Trigger a test w
 
 . Once the pipeline has completed the first test webhook should have been sent and
 we can validate this in Airtable. At the bottom of the webhook trigger config
-screen, press the "test" button and await for the webhook data to populate.
+screen, press the "test" button and wait for the webhook data to populate.
 +
 image::guides:ROOT:webhooks/webhook_airtable_8_test.png[Validate results in Airtable]
 
@@ -96,7 +96,7 @@ image::guides:ROOT:webhooks/webhook_airtable_8_test.png[Validate results in Airt
 creating an Action for the Trigger.
 
 [#setup-the-action-for-our-webhook-trigger]
-=== 6. Setup the Action for our webhook Trigger
+=== 6. Set up the Action for our webhook Trigger
 
 . For the Action Type, select from the drop-down "Create record", and select your
 Table.

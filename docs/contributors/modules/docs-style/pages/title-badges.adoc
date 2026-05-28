@@ -47,3 +47,95 @@ Currently we are not adding styling to these badges but this may change in futur
 - **`:page-badge-classes:`** - Tailwind CSS classes for styling (optional, defaults to `text-terminal-black border`)
 - **`:page-badge-bg:`** - Hex color code for background (optional, overrides classes)
 - **`:page-badge-border:`** - Hex color code for border (optional, requires `page-badge-bg`)
+
+== Badges in navigation
+
+When you add a page badge using `:page-badge:`, it automatically appears in two places:
+
+. Next to the page title when viewing the page
+. Next to the page link in the left sidebar navigation
+
+You do not need to configure navigation badges separately—the same `:page-badge:` attribute controls both locations.
+
+.Example
+[source,asciidoc]
+----
+= Slack Integration
+:page-badge: Preview
+:page-badge-classes: text-white bg-orange-500 border border-orange-600
+----
+
+This displays a "Preview" badge both on the page title and in the navigation sidebar.
+
+=== Best practices for navigation badges
+
+* Use concise badge text (8 characters or less recommended)
+* Apply badges sparingly (only for truly special status pages)
+* Common badge types work best:
+** `Preview` - Features in preview
+** `Beta` - Beta features
+** `New` - Recently added content
+** `Deprecated` - Deprecated functionality
+
+Longer badge text may wrap or truncate on narrow viewports.
+
+== Subsection badges
+
+You can add badges to subsections (h2-h6 headings) using attribute syntax on the section. This is useful when a single documentation page covers multiple features with different maturity levels.
+
+=== Basic usage
+
+[source,asciidoc]
+----
+[badge="Preview"]
+== Slack notifications
+
+Configure Slack notifications for your project...
+----
+
+The badge appears next to the section heading with the same visual styling as page-level badges.
+
+=== Custom styling with Tailwind classes
+
+[source,asciidoc]
+----
+[badge="Beta",badge-classes="text-white bg-blue-500 border border-blue-600"]
+=== New feature
+
+This feature is currently in beta...
+----
+
+=== Custom colors with hex values
+
+[source,asciidoc]
+----
+[badge="Deprecated",badge-bg="#ff0000",badge-border="#cc0000"]
+==== Old approach
+
+NOTE: This approach is deprecated. See xref:modern-approach.adoc[] instead.
+----
+
+=== Badge types
+
+Common badge types for subsections include:
+
+* `Preview` - Features in preview
+* `Beta` - Beta features
+* `Deprecated` - Deprecated functionality
+* `Cloud only` - Cloud-specific features
+* `Server v4+` - Server version-specific features
+* Custom text as needed
+
+=== Subsection badge attributes reference
+
+- **`badge`** - The text to display in the badge (required)
+- **`badge-classes`** - Tailwind CSS classes for styling (optional, defaults to `text-[10px] rounded-full py-1 px-1.5 text-terminal-black border`)
+- **`badge-bg`** - Hex color code for background (optional, overrides classes)
+- **`badge-border`** - Hex color code for border (optional, works with `badge-bg`)
+
+=== Best practices
+
+* Use subsection badges consistently across related pages
+* Keep badge text short and clear
+* Badges should not be included in cross-references to the section
+* The badge is metadata, not part of the heading text itself

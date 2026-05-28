@@ -8,7 +8,7 @@ A task is the smallest unit of work on CircleCI. If a job has xref:guides:optimi
 
 A resource class is a label to match your CircleCI job with a type of runner (or container runner) that is identified to process that job. The first part of the resource class is your organization’s namespace. For example, a CircleCI resource class could be `circleci/documentation`.
 
-Resource classes help you identify a pool of self-hosted runners, which allow you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
+Resource classes help you identify a pool of self-hosted runners, which allows you to set up your configuration to send jobs to specific resources. For example, if you have multiple machines running macOS, and multiple machines running Linux, you could create resource classes for each of these, `orgname/macOS` and `orgname/linux`, respectively. At the job level in your `.circleci/config.yml`, you can associate which self-hosted runner resources to send a job to based on the resource class.
 
 Every time you create a resource class, a *resource class token* is generated that is associated with the given resource class. This token is the method by which CircleCI authenticates that the resource class is valid. The resource class token only has access to claim tasks.
 
@@ -26,7 +26,7 @@ Install dependencies in one of two ways:
 
 * Allow the jobs to install their own dependencies.
 +
-This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner. For example into the working directory.
+This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner. For example, into the working directory.
 
 * Pre-install dependencies on the machine where the machine runner is installed.
 +
@@ -61,7 +61,7 @@ If you would prefer to take complete control of artifact storage, CircleCI recom
 
 Machine runners are not opinionated about state between jobs. Machine runners can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its working directory.
 
-In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective approach is to put cleanup steps at the start of a job. This ensures they run regardless of what happened to a previous job.
+In general, CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective approach is to put cleanup steps at the start of a job. This ensures they run regardless of what happened to a previous job.
 
 CAUTION: It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time. As a result, this trade-off could lead to higher billable usage.
 

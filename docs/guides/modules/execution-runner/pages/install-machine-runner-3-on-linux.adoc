@@ -17,7 +17,7 @@ To install machine runners and run jobs, you will need to have root access, and 
 * link:https://curl.se/[curl]
 
 * sha256sum (if not pre-installed):
-** `sudo apt install coreutils` for Ubuntu/Debain
+** `sudo apt install coreutils` for Ubuntu/Debian
 ** `sudo yum install coreutils` for Red Hat
 
 * link:https://www.gnu.org/software/tar/[tar]

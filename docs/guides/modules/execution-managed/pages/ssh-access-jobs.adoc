@@ -40,7 +40,7 @@ image::guides:ROOT:rerun-job-connect.png[Screenshot showing SSH connection detai
 
 . Run the connection command given in the job output and follow the instructions to SSH into the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
 +
-NOTE: If you are using the Windows executor, you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `+ssh -p <remote_ip> -- powershell.exe+`.
+NOTE: If you are using the Windows executor, you will need to pass in the shell you want to use when using SSH. For example, to run  `powershell` in your build you would run: `ssh -p <remote_ip> -- powershell.exe`.
 
 The job VM will remain available for an SSH connection for *10 minutes after the pipeline finishes running* and then automatically shut down (or you can cancel it). After you SSH into the job, the connection will remain open for *one hour* for customers on the Free Plan, or *two hours* for all other customers.
 
@@ -58,41 +58,40 @@ If you run into permission issues trying to SSH to your job, try the following i
 
 . Test that your keys are set up as expected by running one of the following commands.
 +
-For GitHub, run:
+For GitHub, run
 +
-[,console]
+[source,console]
 ----
-$ ssh git@github.com
+$ ssh git github.com
 ----
 +
 Or, for Bitbucket, run:
 +
-[,console]
+[source,console]
 ----
 $ ssh -Tv git@bitbucket.org
 ----
-
 . Check the output for the following messages:
 +
-[,shell]
+[source,shell]
 ----
 Hi :username! You've successfully authenticated...
 ----
 +
-[,shell]
+[source,shell]
 ----
 logged in as :username.
 ----
 
 . If you do not see this output, try troubleshooting with the following resources:
 +
-* https://help.github.com/articles/error-permission-denied-publickey[Troubleshooting your SSH keys with GitHub].
-* https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html[Troubleshooting your SSH keys with Bitbucket].
+* https://help.github.com/articles/error-permission-denied-publickey[Troubleshooting your SSH keys with GitHub]
+* https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html[Troubleshooting your SSH keys with Bitbucket]
 
 [#ensure-authenticating-as-the-correct-user]
 === Verify you are authenticating as the correct user
 
-You must authenticate as the user who triggered the rerun and who has access to the project. Verify your username appears in the 'Enable SSH' step.
+You must authenticate as the user who triggered the rerun and who has access to the project. Verify your username appears in the "Enable SSH" step.
 
 If you are authenticating as the wrong user, specify a different SSH key using `ssh -i`. See the next section for guidance on confirming which key is being offered.
 
@@ -103,28 +102,28 @@ If you have verified that you can authenticate as the correct user, but you are 
 
 . Check which key is being offered that authenticates you by running one of the following commands:
 +
-[,console]
+[source,console]
 ----
 $ ssh -v git@github.com
 ----
 +
 Or,
 +
-[,console]
+[source,console]
 ----
 $ ssh -v git@bitbucket.com
 ----
 
 . In the output, look for a sequence like this:
 +
-[,shell]
+[source,shell]
 ----
-debug1: Offering public key: /Users/me/.ssh/id_ed25519_github
+debug1: Offering public key: /Users/me/.SSH/id_ed25519_github
 <...>
 debug1: Authentication succeeded (publickey).
 ----
 +
-This sequence indicates that the key `/Users/me/.ssh/id_ed25519_github` is the one which your VCS accepted.
+This sequence indicates that the key `/Users/me/.SSH/id_ed25519_github` is the one which your VCS accepted.
 
 . Run the SSH command for your CircleCI job, but add the `-v` flag. In the output, look for one or more lines like this:
 +
@@ -133,25 +132,25 @@ This sequence indicates that the key `/Users/me/.ssh/id_ed25519_github` is the o
 debug1: Offering public key: ...
 ----
 
-. Make sure that the key which your VCS accepted (in our example, `/Users/me/.ssh/id_ed25519_github`) was also offered to CircleCI.
+. Make sure that the key which your VCS accepted (in our example, `/Users/me/.SSH/id_ed25519_github`) was also offered to CircleCI.
 
 . If it was not offered, you can specify it using the `-i` command-line argument to SSH. For example:
 +
-[,console]
+[source,console]
 ----
-$ ssh -i /Users/me/.ssh/id_ed25519_github -p 64784 54.224.97.243
+$ ssh -i /Users/me/.SSH/id_ed25519_github -p 64784 54.224.97.243
 ----
 
 You can increase the verbosity level to get more detailed debugging information by using multiple `-v` flags. For example, use `-vv` for more details:
 
-[,console]
+[source,console]
 ----
 $ ssh -vv git@github.com
 ----
 
 Or use `-vvv` for maximum verbosity:
 
-[,console]
+[source,console]
 ----
 $ ssh -vvv git@github.com
 ----

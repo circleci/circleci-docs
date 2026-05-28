@@ -64,7 +64,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ./Install-CircleCIRunner.ps1
 ----
 +
-The installation will be output into your PowerShell interface.
+The installation will be displayed in your PowerShell interface.
 
 . As part of the installation, the configuration file for the machine runner (`runner-agent-config.yaml`) will open in Notepad. Fill in the requested information (see xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3.0 Configuration Reference]). The configuration file is located in the installation directory, `C:\Program Files\CircleCI`, by default.
 
@@ -92,7 +92,7 @@ Uninstalling machine runners will prepare the system for installation again.
 
 By default, Windows machine runners run in xref:machine-runner-3-configuration-reference.adoc#runner-mode[single-task mode] in order to ensure high reliability of the underlying technology that the self-hosted runner uses to execute jobs. Single-task mode is the **recommended mode** for Windows machine runners.
 
-A Windows machine runner *can* be run in `continuous` mode. However, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected, and job failure.
+A Windows machine runner *can* be run in `continuous` mode. However, doing so eliminates the guarantee of a clean job environment.  This may translate into jobs not executing as expected, and job failures.
 
 [#troubleshooting]
 == Troubleshooting

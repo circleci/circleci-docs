@@ -45,7 +45,7 @@ Environment variables are used according to a specific precedence order, as foll
 . Context environment variables (assuming the user has access to the context). See the xref:contexts.adoc[Contexts] documentation for more information.
 . xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project-level environment variables] set on the *Project Settings* page in the web app.
 
-Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the *Contexts* page in the web app will take precedence over variables added on the *Project Settings* page.
+Environment variables declared inside a shell command `run` step, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the *Contexts* page in the web app will take precedence over variables added on the *Project Settings* page.
 
 image::guides:ROOT:env-var-order.png[Environment variable order of precedence]
 
@@ -100,7 +100,7 @@ The above `.circleci/config.yml` demonstrates the following:
 * Setting custom environment variables.
 * Reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`).
 * How variables are used (or interpolated) in your `.circleci/config.yml`.
-* Secrets masking, applied to environment variable set in the project or within a context.
+* Secrets masking, applied to environment variables set in the project or within a context.
 
 When the above configuration runs, the output looks like the image below. Notice the environment variables stored in the project is masked, and displays as `+****+`:
 

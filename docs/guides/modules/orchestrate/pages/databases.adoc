@@ -10,7 +10,7 @@ This page describes how to use the official CircleCI pre-built Docker container 
 
 CircleCI provides pre-built images (Docker and VM) for languages and services, like databases, with commonly-used tools preinstalled. For a full list, see the link:https://circleci.com/developer/images[CircleCI Developer Hub].
 
-When configuring a job, the first executor you select is the primary container. The primary container is where all execution occurs. You can add additional containers to the job, these are service, or secondary containers.
+When configuring a job, the first executor you select is the primary container. The primary container is where all execution occurs. You can add additional containers to the job; these are service, or secondary containers.
 
 The example in the next section shows a CircleCI configuration file with the following:
 
@@ -149,13 +149,13 @@ jobs:
 
 It is possible to apply the same principle for the following databases:
 
-* MySQL: `dockerize -wait tcp://localhost:3306 -timeout 1m`
+* MySQL: `dockerize -wait tcp://localhost:3306 -timeout 1m`.
 
-* Redis: `dockerize -wait tcp://localhost:6379 -timeout 1m`
+* Redis: `dockerize -wait tcp://localhost:6379 -timeout 1m`.
 +
 Redis also has a CLI available: `sudo apt-get install redis-tools ; while ! redis-cli ping 2>/dev/null ; do sleep 1 ; done`
 
-* Other services, such as web servers: `+dockerize -wait http://localhost:80 -timeout 1m+`
+* Other services, such as web servers: `+dockerize -wait http://localhost:80 -timeout 1m+`.
 
 === Custom MySQL configuration
 

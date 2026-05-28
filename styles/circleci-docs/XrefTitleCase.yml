@@ -15,7 +15,7 @@ script: |
   lowercase_words := ["a", "an", "the", "and", "but", "or", "for", "nor", "so", "yet",
                       "at", "by", "in", "of", "on", "to", "up", "as", "via", "per", "macos"]
   // Words with intentional capitalization that should be ignored by title case rules
-  exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS"]
+  exception_words := ["iOS", "macOS", "iPhone", "iPad", "tvOS", "watchOS", "vCPU"]
   for i, line in lines {
     // Find all xref patterns: xref:path[Link Text]
     xref_pattern := "xref:[^\\[]+\\[([^\\]]+)\\]"
@@ -44,6 +44,11 @@ script: |
         for word_idx, word in words {
           // Skip empty words
           if word == "" || text.trim_space(word) == "" {
+            continue
+          }
+
+          // Skip words that contain backticks (code references)
+          if text.contains(word, "`") {
             continue
           }
 

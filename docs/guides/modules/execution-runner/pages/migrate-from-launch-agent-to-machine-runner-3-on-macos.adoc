@@ -11,7 +11,7 @@ Migrating from launch agent to machine runner 3 is a straightforward process. Th
 
 [#uninstall-launch-agent]
 == 1. Uninstall launch agent service
-The first step is to uninstall launch-agent. If the agent has been installed as a `launchctl` service run the following commands to stop as well as uninstall the service, and delete the service file.
+The first step is to uninstall launch-agent. If the agent has been installed as a `launchctl` service, run the following commands to stop as well as uninstall the service, and delete the service file.
 
 [,shell]
 ----

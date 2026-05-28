@@ -30,14 +30,14 @@ The pod will have a status of `OOMKilled` when viewed in Kubernetes with kubectl
 [#pod-host-node-is-out-of-disk-space]
 === Pod host node is out of disk space
 
-If the node is full it will have a `node.kubernetes.io/disk-pressure` taint, which will prevent new task pods from being scheduled. If all valid nodes for the pod have the same taint, or other conditions that prevent scheduling, the task pod will wait in a pending state. It will remain there until an untainted valid node becomes available. This will show the job as stuck in the **Preparing Environment** step in the UI.
+If the node is full, it will have a `node.kubernetes.io/disk-pressure` taint, which will prevent new task pods from being scheduled. If all valid nodes for the pod have the same taint, or other conditions that prevent scheduling, the task pod will wait in a pending state. It will remain there until an untainted valid node becomes available. This will show the job as stuck in the **Preparing Environment** step in the UI.
 
 You need to scale your cluster more effectively to avoid this state.
 
 [#the-node-a-task-is-running-on-abruptly-dies]
 === The node a task is running on abruptly dies
 
-When container runner is hosted on a separate node, the task will still look like it is running in the CircleCI UI until there is a timeout for it. `kubectl` will also still show the pod as running until the cluster's liveness probe timeout is hit. The pod will then enter a terminating state that it will become wedged in. At this point the pod will need to be forcefully removed. If force is not used it may cause kubectl to hang:
+When container runner is hosted on a separate node, the task will still look like it is running in the CircleCI UI until there is a timeout for it. `kubectl` will also still show the pod as running until the cluster's liveness probe timeout is hit. The pod will then enter a terminating state that it will become wedged in. At this point, the pod will need to be forcefully removed. If force is not used it may cause kubectl to hang:
 
 ```bash
 kubectl delete pod $POD_NAME --force
@@ -112,7 +112,7 @@ You can check the logs for any of the previous runs using the command `kubectl l
 
 - **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.
 
-We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the connection to the links on our FAQ includes a section about the xref:guides:execution-runner:runner-faqs.adoc#what-connectivity-is-required[Connectivity Required for CircleCI’s Self-Hosted Runners].
+We suggest connecting to the pod using the command `kubectl exec --stdin --tty -n circleci < full pod name > -- /bin/sh` and then running a ping test for an extended period of time. We also recommend checking the required connectivity. Our FAQ includes a section about the xref:guides:execution-runner:runner-faqs.adoc#what-connectivity-is-required[Connectivity Required for CircleCI’s Self-Hosted Runners].
 
 - **Resources exhaustion:** Check if your pods are reaching their resources limits in the cluster, as the pod could end the job to free up resources. We recommend setting resource limits either within link:https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/[Your `values.yaml`] or within xref:guides:execution-runner:container-runner.adoc#resource-class-configuration-custom-pod[Resource Class Configuration].
 
@@ -121,7 +121,7 @@ Refer to the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-
 [#task-agent-appears-not-running]
 === Task agent appears not running
 
-The task pod may fail with an `Task agent appears not running: /bin/sh: 1: kill: No such process` error due a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe].
+The task pod may fail with an `Task agent appears not running: /bin/sh: 1: kill: No such process` error due to a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe].
 
 The liveness probe on the task pod checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output its PID to a file used by the liveness probe to confirm task agent is running. This probe may fail if the task agent process fails to start, no longer exists or takes longer to initiate than the liveness probe's default timeouts. You may adjust the liveness probe defaults in link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L196-L218[the `values.yaml`] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runner's Helm chart].
 
@@ -140,7 +140,7 @@ agent:
               successThreshold: 1
               failureThreshold: 5
 ```
-If the liveness probe fails or the task pod terminates, a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[pre-stop hook] attempts to kill any existing task agent by its provided PID. The hook ensures there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw and error and will instead log `PreStop hook: task agent appears never started or already stopped`.
+If the liveness probe fails or the task pod terminates, a link:https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/#container-hooks[pre-stop hook] attempts to kill any existing task agent by its provided PID. The hook ensures there are no orphaned task agent processes. However, if the PID on file does not map to an existing process, this will not throw an error and will instead log `PreStop hook: task agent appears never started or already stopped`.
 
 [#view-the-log-of-a-failed-task-pod]
 === View the logs of a failed task pod
@@ -191,3 +191,27 @@ NOTE: The `Rerun job with SSH` feature is disabled by default. To enable this fe
 === OIDC tokens missing from jobs
 
 If the link:https://circleci.com/docs/openid-connect-tokens/[OIDC token] environment variables (`$CIRCLE_OIDC_TOKEN`, `$CIRCLE_OIDC_TOKEN_V2`) are missing from jobs, check the default temporary directory. A common cause is that it (for example, `/tmp`) is not writable or is mounted as `noexec`. The system's temporary directory needs to be writable and allow execution for the OIDC plugin to be downloaded and executed from it.
+
+[#runners-queueing]
+=== Runner tasks queueing despite idle runners
+
+The runner inventory page only displays actively running tasks. Queued tasks are not visible.
+This can make it appear that runners are idle when concurrency is fully consumed by queued jobs.
+ 
+Concurrency is calculated across all tasks for a resource class, including those waiting in queue.
+For example, if your concurrency limit is 20 and you submit 20 jobs to resource class `X`, those jobs fill the available concurrency even while they wait to run one at a time.
+Any jobs targeting resource classes `Y` or `Z` will also queue, even if those runners have no active tasks, because the shared concurrency limit is already reached.
+ 
+To check for queued tasks that are consuming concurrency, use the link:https://circleci.com/docs/guides/execution-runner/runner-api/#get-api-v3-tasks[CircleCI Runner API]:
+
+[source,shell]
+----
+curl -X GET https://runner.circleci.com/api/v3/runner/tasks?resource-class=test-namespace/test-resource \
+    -H "Circle-Token: secret-token"
+----
+
+NOTE: Jobs assigned to a resource class that exists but has no runners attached will queue indefinitely.
+Verify that all resource class names in your `.circleci/config.yml` match what is configured in the runner inventory, and that each resource class has at least one runner assigned.
+ 
+ 
+If `unclaimed_task_count` is greater than `0`, cancel those tasks to free up concurrency for other resource classes.

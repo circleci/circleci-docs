@@ -1,5 +1,5 @@
 {
-  "name": "circleci-docs",
+  "name": "@circleci/circleci-docs",
   "version": "1.0.0",
   "description": "his is the public repository for <https://circleci.com/docs/>, a static website generated with [Antora](https://antora.org/).",
   "scripts": {
@@ -18,11 +18,11 @@
   "license": "",
   "type": "commonjs",
   "devDependencies": {
-    "@antora/cli": "3.1.14",
-    "@antora/site-generator": "3.1.14",
+    "@antora/cli": "3.1.15",
+    "@antora/site-generator": "3.1.15",
     "@dotenvx/dotenvx": "^1.40.0",
     "@redocly/cli": "^2.0.0",
-    "@sntke/antora-mermaid-extension": "^0.0.9",
+    "@sntke/antora-mermaid-extension": "^0.0.13",
     "browser-sync": "^3.0.4",
     "gulp": "^5.0.0",
     "httpsnippet": "^3.0.9"
@@ -38,7 +38,8 @@
   },
   "overrides": {
     "form-data": "^4.0.4",
-    "minimatch": "^10.2.1",
-    "qs": "^6.14.1"
+    "minimatch": "^10.2.3",
+    "qs": "^6.14.1",
+    "handlebars": "^4.7.9"
   }
 }

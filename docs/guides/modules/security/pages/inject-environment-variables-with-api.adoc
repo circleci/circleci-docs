@@ -11,7 +11,7 @@ include::ROOT:partial$notes/server-api-examples.adoc[]
 Pipeline parameters can be used to pass variables using the CircleCI API v2.
 
 A pipeline can be triggered with specific parameter values using the API v2
-endpoint to link:../../../api/v2/#operation/getPipelineConfigById[trigger a pipeline].
+endpoint to link:../../../api/#tag/Pipeline/operation/triggerPipeline[trigger a pipeline].
 This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
 The example below triggers a pipeline with parameter values for `workingdir` and `image-tag`.

@@ -1,3 +1,4 @@
+pass:[<!-- vale off -->]
 |===
 | Key | Type | Default | Description
 
@@ -582,6 +583,11 @@ The secret must be named 'signing-keys' and have the keys; signing-key, encrypti
 | string
 | `"your-email@example.com"`
 |
+
+| kong.additionalHosts
+| list
+| `++[]++`
+| Additional hostnames that Kong should accept for routing (e.g., for webhooks from external domains).
 
 | kong.acme.enabled
 | bool
@@ -1175,13 +1181,23 @@ Throughput can range from 125 to 1,000 MiB/s for gp3 volumes.
 
 | nomad.server.image.tag
 | string
-| `"1.10.1"`
+| `"1.11.3"`
 | Nomad has been tested against this specific version tag; edit this value at your own risk.
 
 | nomad.server.internal
 | bool
 | `true`
 | Disables deploying this chart's Internal Nomad servers
+
+| nomad.server.limits.http_max_conns_per_client
+| string
+| `""`
+| Maximum number of concurrent HTTP connections per client IP. When not set, Nomad applies its default of 100.
+ 
+| nomad.server.limits.rpc_max_conns_per_client
+| string
+| `""`
+| Maximum number of concurrent RPC connections per client IP. When not set, Nomad applies its default of 100. Increase for large clusters with many Nomad clients.
 
 | nomad.server.pdb.enabled
 | bool
@@ -1267,6 +1283,11 @@ The secret must be named 'nomad-mtls', be in the same namespace, and have the ke
 | string
 | `""`
 | A role that can be assumed to provide direct bucket access credentials. Required if presigned is false
+
+| oidc_service.base_url
+| string
+| `""`
+|Override the OIDC issuer base URL. If set, tokens will use this as the issuer instead of the Server domain (`global.domainName`). Use this when your Server domain is not publicly accessible and OIDC tokens need to be verified by external providers (AWS, GCP, JFrog, etc.). The URL should point to a publicly accessible endpoint that serves the JWKS files (e.g. an API Gateway, S3 bucket, or CloudFront distribution). Example: `https://abc123def.execute-api.us-east-1.amazonaws.com`
 
 | oidc_service.isEnabled
 | bool
@@ -2275,3 +2296,4 @@ The secret must be named 'vault' and have the key; token. +
 | `"8Gi"`
 | Memory limit configuration for the workflows-conductor-grpc deployment.
 |===
+pass:[<!-- vale on -->]

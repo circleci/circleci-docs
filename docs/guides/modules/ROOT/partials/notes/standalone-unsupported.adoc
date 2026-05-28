@@ -8,7 +8,7 @@ Check your Organization slug at menu:Organization settings[Overview]. OAuth auth
 
 This feature is **not supported** if your organization slug is in the following format:
 
-* `circleci/<UID>`.
+* `circleci/<UID>`
 
 For an overview of feature support, see the xref:guides:integration:version-control-system-integration-overview.adoc#feature-support-for-each-pipeline-type[VCS Integration Overview] page.
 ****

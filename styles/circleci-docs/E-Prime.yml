@@ -1,11 +1,11 @@
+---
 extends: existence
-message: "Try to avoid using '%s'."
+message: 'Avoid using "%s"'
 ignorecase: true
 level: suggestion
 tokens:
   - am
   - aren't
-  - been
   - being
   - he's
   - here's
@@ -13,17 +13,15 @@ tokens:
   - how's
   - i'm
   - isn't
-  - it's
   - she's
   - that's
   - there's
   - they're
   - wasn't
   - we're
-  - were
   - weren't
   - what's
   - where's
   - who's
   - you're
-  - you've
+  - foobar
