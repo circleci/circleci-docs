@@ -204,5 +204,5 @@ Read more about orbs on the xref:orbs:use:orb-intro.adoc[Orbs overview] page.
 
 * xref:persist-data.adoc[Persisting Data]
 * For a complete list of customizations, view the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
-* For information about how Yarn can potentially speed up builds and reduce errors, view the xref:caching.adoc#basic-example-of-dependency-caching[Caching Dependencies] page.
+* For information about how Yarn can potentially speed up builds and reduce errors, view the xref:caching.adoc#yarn-node[Caching Dependencies] page.
 * Coinbase published an article titled https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%].
