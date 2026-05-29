@@ -568,7 +568,7 @@ Chunk sends an email digest at 09:00 UTC every Monday summarizing your team's Ch
 * Completed tasks.
 * PRs opened.
 * Failed tasks.
-* Most recent PRs awaiting your review.
+* Most recent tasks that resulted in an open PR, ready for your review.
 
 .Chunk tasks weekly digest email
 image::guides:ROOT:chunk/chunk-weekly-email-digest.png[Chunk tasks weekly digest email]
@@ -578,6 +578,7 @@ Select **Review tasks** in the digest email to open Chunk tasks that resulted in
 To disable the digest:
 
 include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
+. Navigate to your **User Settings** page.
 . Select **Notifications** from the sidebar.
 . Scroll to the Chunk section.
 . Toggle off **Digest**.
