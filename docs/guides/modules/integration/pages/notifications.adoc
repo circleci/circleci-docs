@@ -102,6 +102,9 @@ Chunk by CircleCI assists with CI/CD related tasks through a natural language ch
 
 Chunk also sends an email digest every Monday summarizing your team's activity. The digest shows completed tasks, PRs opened, and failed tasks at a glance, plus a list of the most recent PRs awaiting your review. To disable the digest, scroll to the **Chunk** section in your notification settings and toggle off **Digest**.
 
+.Chunk notification settings
+image::guides:ROOT:chunk/chunk-notification-settings.png[Chunk notification settings on the Notifications page]
+
 For a full guide to setting up and using Chunk, including the email digest, see the xref:guides:toolkit:chunk-setup-and-overview.adoc#email-digest[Email Digest] section of the Chunk Overview and Setup guide.
 
 [badge="Beta"]

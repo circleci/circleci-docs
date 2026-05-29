@@ -570,6 +570,9 @@ Chunk sends an email digest every Monday summarizing your team's Chunk activity.
 * Failed tasks.
 * Most recent PRs awaiting your review.
 
+.Chunk tasks weekly digest email
+image::guides:ROOT:chunk/chunk-weekly-email-digest.png[Chunk tasks weekly digest email]
+
 Select **Review tasks** in the digest email to jump directly to Chunk tasks with open PRs.
 
 To disable the digest:
