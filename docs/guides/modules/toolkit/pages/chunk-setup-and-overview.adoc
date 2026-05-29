@@ -563,7 +563,7 @@ This is because traffic is routed through CircleCI's static IP infrastructure.
 [#email-digest]
 == Email digest
 
-Chunk sends an email digest every Monday summarizing your team's Chunk activity. The digest includes:
+Chunk sends an email digest at 09:00 UTC every Monday summarizing your team's Chunk activity. The digest includes:
 
 * Completed tasks.
 * PRs opened.
@@ -573,7 +573,7 @@ Chunk sends an email digest every Monday summarizing your team's Chunk activity.
 .Chunk tasks weekly digest email
 image::guides:ROOT:chunk/chunk-weekly-email-digest.png[Chunk tasks weekly digest email]
 
-Select **Review tasks** in the digest email to jump directly to Chunk tasks with open PRs.
+Select **Review tasks** in the digest email to open Chunk tasks that resulted in a pull request being opened. These tasks may not still have an open pull request.
 
 To disable the digest:
 

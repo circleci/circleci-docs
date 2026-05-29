@@ -1,2 +1,2 @@
-. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your avatar at the top right of the user area (dark blue top bar) in the web app.
+. In the link:https://app.circleci.com[CircleCI web app, window=_blank], select your avatar at the top right corner in the web app.
 . Select **User Settings**.
