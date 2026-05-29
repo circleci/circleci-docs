@@ -180,18 +180,18 @@ You will need a `CCI_INTEGRATION_TOKEN` to install the CircleCI release agent in
 . Select btn:[Create Integration Token] and then btn:[Create Token].
 . The new token will be displayed. Copy the token, then select btn:[Done].
 
-The token is shown only once and cannot be retrieved from CircleCI later. Store it in your organization's secret manager. Examples include HashiCorp Vault, AWS Secrets Manager, or a CircleCI context variable.
+*The integration token is shown only once and cannot be retrieved from CircleCI later*. Store the integration token in your organization's secret manager. Examples of secret managers include HashiCorp Vault, AWS Secrets Manager, or a CircleCI context variable.
 
-Pass the token to Helm at install or upgrade time. Use an environment variable (for example, `++--set tokenSecret.token="${CCI_INTEGRATION_TOKEN}"++`) or a values file that is not committed to source control.
+Pass the integration token to Helm at install or upgrade time. Use an environment variable (for example, `--set tokenSecret.token="${CCI_INTEGRATION_TOKEN}"`) or a values file that is not committed to source control.
 
-After installation, the chart stores the token in a Kubernetes Secret in the `circleci-release-agent-system` namespace. On subsequent `helm upgrade` runs, you do not need to supply the token again unless you use `--reset-values`. The same applies if you apply a values file that omits `tokenSecret.token` without `--reuse-values`.
+After installation, the Helm chart stores the integration token in a Kubernetes Secret in the `circleci-release-agent-system` namespace. On subsequent `helm upgrade` runs, you do not need to supply the integration token again unless you use `--reset-values`. The same applies if you apply a values file that omits `tokenSecret.token` without also setting `--reuse-values`.
 
 [#install-the-release-agent]
 === 3. Install the release agent
 
 Use the following command to install the Helm chart to integrate CircleCI's release agent into your Kubernetes cluster.
 
-If required, you can include a list of Kubernetes namespaces you want to monitor. If you only want to monitor the `default` namespace, you do not need to supply a list with `--set managedNamespaces="{namespace1,namespace2}"`. The `default` namespace is monitored by default. If you struggle to pass the `managedNamespaces` value, try enclosing the array value or the whole parameter itself in a string, with double or single quotes.
+If required, you can include a list of Kubernetes namespaces you want to monitor with `--set managedNamespaces="{namespace1,namespace2}"`. If you only want to monitor the `default` namespace, you do not need to supply a list. The `default` namespace is monitored by default. If you struggle to pass the `managedNamespaces` value, try enclosing the array value or the whole parameter itself in a string, with double or single quotes.
 
 [,shell]
 ----
@@ -260,6 +260,13 @@ NOTE: The `rbac.clusterRoles=true` flag also enables the RBAC permissions the ag
 ==== Upgrade from an earlier version
 
 If you are upgrading from a version earlier than 1.6.0, your existing configuration uses static mode by default. No action is required. The agent continues to monitor the exact namespace names already listed in `managedNamespaces`, and no new RBAC permissions are granted.
+
+To check your installed release agent version, run the following command and refer to the `CHART` and `APP VERSION` columns:
+
+[,shell]
+----
+helm list --namespace circleci-release-agent-system
+----
 
 To switch to dynamic mode after upgrading, re-run `helm upgrade` with `--set managedNamespacesMode=dynamic --set rbac.clusterRoles=true` and update `managedNamespaces` to use glob patterns where needed.
 
