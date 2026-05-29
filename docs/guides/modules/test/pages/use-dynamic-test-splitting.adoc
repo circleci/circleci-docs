@@ -4,14 +4,9 @@
 :experimental:
 :page-description: Evenly distribute tests across parallel execution nodes
 
-[NOTE]
-====
-*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
-Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
-====
-
-Dynamic test splitting reduces overall pipeline time by distributing tests across parallel nodes so all nodes finish at the same time. Unlike static test splitting, which pre-assigns tests upfront, dynamic test splitting redistributes work to nodes that are ready. Dynamic test splitting prevents nodes from sitting idle while others finish late.
+Dynamic test splitting reduces overall pipeline time by distributing test atoms across parallel nodes so all nodes finish at the same time. Unlike static test splitting, which pre-assigns tests upfront, dynamic test splitting redistributes work to nodes that are ready. Dynamic test splitting prevents nodes from sitting idle while others finish late.
 
 == Is my project a good fit for dynamic test splitting?
 
@@ -43,7 +38,7 @@ When you configure parallelism in your job and enable dynamic test splitting, Sm
 
 * Sorts tests by duration using timing data from previous runs, with longer tests prioritized first.
 * Gives the first node that is ready a full batch of tests, like static test splitting.
-* Gives each later-starting node a smaller batch sized so all nodes finish at the same time.
+* Gives each later-starting node a smaller batch size so all nodes finish at the same time.
 * Evenly distributes the remaining tests across all nodes.
 
 .Static test splitting with uneven node start times
@@ -66,7 +61,7 @@ Before enabling dynamic test splitting, ensure you have completed the xref:getti
 * Set parallelism greater than 1 for the test jobs that you want to split. See the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration Reference] for more information.
 
 
-== 1. Enable dynamic test splitting option in your test-suites.yml file
+== 1. Enable dynamic test splitting in your test-suites.yml file
 
 Add the `dynamic-test-splitting` option to your existing `test-suites.yml`. Keep the existing `discover` and `run` commands in place.
 
@@ -81,22 +76,16 @@ options:
 
 == 2. Run locally
 
-Use `--doctor` locally to validate the `test-suites.yml` is set up correctly.
-
-The CLI will run through additional checks when dynamic test splitting is enabled, if any results look incorrect an action
-item is provided to resolve it. Follow the steps until all checks pass.
+Use `--doctor` locally to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when dynamic test splitting is enabled. If any results look incorrect, an action item is provided to resolve it.
 
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --doctor
 ----
 
-[TIP]
-====
-Run the `circleci run testsuite` CLI tooling from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
+Follow the steps until all checks pass.
 
-The `testsuite` tooling will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
-====
+include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
 == 3. Run in CI
 
