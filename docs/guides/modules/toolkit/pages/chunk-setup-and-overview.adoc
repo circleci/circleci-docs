@@ -560,10 +560,10 @@ jobs:
 NOTE: **Startup time.** Enabling IP ranges may slightly increase job startup time.
 This is because traffic is routed through CircleCI's static IP infrastructure.
 
-[#weekly-email-digest]
-== Weekly email digest
+[#email-digest]
+== Email digest
 
-Chunk sends a weekly email digest every Monday summarizing your team's Chunk activity. The digest includes:
+Chunk sends an email digest every Monday summarizing your team's Chunk activity. The digest includes:
 
 * Completed tasks.
 * PRs opened.
