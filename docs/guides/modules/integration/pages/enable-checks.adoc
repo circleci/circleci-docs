@@ -22,7 +22,7 @@ NOTE: GitHub does not currently provide a granular way for you to rerun workflow
 [#github-check-and-github-status-updates]
 == GitHub Check and GitHub status updates
 
-GitHub Checks should not be confused with GitHub status updates:
+GitHub Checks are different than GitHub status updates:
 
 * *GitHub Checks* are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
 ** GitHub Checks from OAuth integrations have the same name as the associated workflow.
