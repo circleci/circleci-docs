@@ -53,7 +53,7 @@ If you are using GitHub Checks or GitHub status updates with the xref:orchestrat
 +
 .CircleCI VCS Settings Page
 image::guides:ROOT:github-checks.png[CircleCI VCS Settings Page]
-. You are now in the GitHub CircleCI Checks App settings page. Select the repositories that should use checks and select *Save*.
+. You are now in the GitHub CircleCI Checks App settings page. Select the repositories that you want to use checks and select *Save*.
 
 After installation completes, the Checks tab on the GitHub PR view is populated with workflow status information. From the Checks tab you can rerun workflows or navigate to the CircleCI app to view further information.
 
