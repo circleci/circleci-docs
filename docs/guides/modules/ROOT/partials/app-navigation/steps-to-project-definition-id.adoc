@@ -1,0 +1,8 @@
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. Navigate to the menu:Project Setup[] page.
+. Locate the pipeline definition you want to find the ID for.
+. Note the value below the pipeline name or select the btn:[Copy] icon next to the pipeline definition ID.
++
+.Pipeline definition ID on the Project Setup page
+image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[Get pipeline definition ID]

@@ -1,0 +1,5 @@
+include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Select the btn:[Copy] icon next to the organization ID to copy it to your clipboard.
++
+.Organization ID available in organization settings
+image::guides:ROOT:org-id.png[screenshot showing where to find your organization ID]

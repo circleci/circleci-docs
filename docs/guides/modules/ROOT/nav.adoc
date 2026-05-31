@@ -198,7 +198,8 @@
 *** xref:deploy:deploy-ios-applications.adoc[Deploy iOS applications]
 *** xref:deploy:deploy-over-ssh.adoc[Deploy over SSH]
 *** xref:deploy:publish-packages-to-packagecloud.adoc[Publish packages to Packagecloud]
-*** xref:deploy:deploy-to-npm-registry.adoc[Publish to npm]
+*** xref:deploy:deploy-to-npm-registry.adoc[Publish to npm using OIDC trusted publishing]
+*** xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm with an authentication token]
 
 * Optimize
 ** xref:optimize:optimizations.adoc[Optimizations reference]

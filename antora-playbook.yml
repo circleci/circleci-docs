@@ -120,7 +120,6 @@ antora:
       - rst
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
-      - deploy:deploy-to-npm-registry-with-token.adoc
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true

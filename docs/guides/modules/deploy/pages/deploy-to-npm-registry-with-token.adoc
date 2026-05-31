@@ -5,7 +5,7 @@
 
 In this how-to guide, you will learn how to configure CircleCI to publish to the npm registry using a long-lived npm authentication token.
 
-TIP: Trusted publishing is the recommended way to publish to npm from CircleCI. It removes the need for a long-lived `NPM_TOKEN` environment variable. See xref:deploy:deploy-to-npm-registry.adoc[Publish to npm]. Use this guide only if trusted publishing is not an option for your package or registry.
+CAUTION: Trusted publishing is the recommended way to publish to npm from CircleCI. It removes the need for a long-lived `NPM_TOKEN` environment variable. See xref:deploy:deploy-to-npm-registry.adoc[Publish to npm Using OIDC Trusted Publishing]. Use this guide only if trusted publishing is not an option for your package or registry.
 
 [#introduction]
 == Introduction
