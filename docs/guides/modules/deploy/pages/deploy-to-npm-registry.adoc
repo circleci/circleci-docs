@@ -48,7 +48,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
 === 1.3 Pipeline definition ID
 You need your pipeline definition ID, in UUID format from menu:Project Settings[Project Setup]. There you will see your list of pipelines. Find the pipeline that will run the publishing workflow and copy its ID.
 
-include::guides:ROOT:partial$app-navigation/steps-to-project-definition-id.adoc[]
+include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
 
 === 1.4 VCS origin
 You need the version control system origin URL for your project, for example `github.com/myorg/myrepo` or `gitlab.com/mylab/myproject`.

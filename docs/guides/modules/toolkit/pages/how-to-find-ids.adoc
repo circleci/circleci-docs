@@ -146,4 +146,4 @@ image::guides:ROOT:workflow-id-from-job-url.png[Get workflow ID from job page UR
 
 The pipeline definition ID is a unique identifier for a pipeline definition. Follow these steps to find it in the CircleCI web app:
 
-include::guides:ROOT:partial$app-navigation/steps-to-project-definition-id.adoc[]
+include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
