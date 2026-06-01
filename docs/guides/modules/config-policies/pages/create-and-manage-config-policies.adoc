@@ -20,7 +20,7 @@ circleci policy settings --enabled=true --owner-id <your-organization-ID> --poli
 
 Control whether policy evaluation is applied to pipeline configurations within your organization using the `--enabled` flag.
 
-* To **enable** policy evaluation run the following command. This sets `--enabled` to `true`, which means project configurations **will** be evaluated against your organization's policies when pipelines are triggered.:
+* To **enable** policy evaluation run the following command. This sets `--enabled` to `true`, which means project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
 +
 [source,shell]
 ----
@@ -36,7 +36,7 @@ Example output:
 }
 ----
 
-* To **disable** policy evaluation run the following command. This sets `--enabled` to `false`, which means project configurations **will not** be evaluated against your organization's policies when pipelines are triggered.:
+* To **disable** policy evaluation run the following command. This sets `--enabled` to `false`, which means project configurations **will not** be evaluated against your organization's policies when pipelines are triggered:
 +
 [source,shell]
 ----
@@ -63,7 +63,7 @@ CircleCI policies are managed by pushing directories of policies to CircleCI via
 
 * Create a bot account for pushing policies, and use its associated CircleCI personal API token for authentication. For maximum security the token should be stored as an environment variable within a context, and that context should be restricted to groups that are responsible for managing policies. For more information, see the xref:security:contexts.adoc[Using Contexts] page.
 
-The rest on the steps in this section show how to set up a CI/CD pipeline to manage your policies.
+The rest of the steps in this section show how to set up a CI/CD pipeline to manage your policies.
 
 [#prerequisites]
 === Prerequisites

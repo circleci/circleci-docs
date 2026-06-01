@@ -31,7 +31,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 The configuration example below shows a concurrent workflow in which the `build` and `test` jobs run at the same time. Both jobs are run in Docker containers using the base image provided by CircleCI.
 
 * Refer to the xref:orchestrate:workflows.adoc[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
-* Refer to the link:https://circleci.com/developer/images?imageType=docker[Developer Hub convenience images] page to find out about available Docker images for running your jobs.
+* Refer to the link:https://circleci.com/developer/images?imageType=docker[developer hub convenience images] page to find out about available Docker images for running your jobs.
 
 This image shows the workflow view for the following configuration example:
 
@@ -777,4 +777,4 @@ workflows:
 
 * See the xref:about-circleci:concepts.adoc#configuration[Concepts document] and xref:orchestrate:workflows.adoc[Workflows] for more details of the concepts covered in this example.
 * See the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] document for full details of each individual configuration key.
-* See the xref:example-configs.adoc[Example Public Repos] document for a list of public projects that use CircleCI.
+* See the xref:examples-and-guides-overview.adoc[Example Public Repos] document for a list of public projects that use CircleCI.

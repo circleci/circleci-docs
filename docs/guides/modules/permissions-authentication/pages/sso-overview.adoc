@@ -27,7 +27,7 @@ When a CircleCI organization has SSO enabled, note the following:
 
 Using SSO for authentication can result in improved security and user experience.
 
-**For organization administrators and owners:** SSO with an IdP allows the standardization of user management for an organization, across controlled applications (such as CircleCI). Standardizing user management can simplify the process of managing users by centralising common tasks, for example:
+**For organization administrators and owners:** SSO with an IdP allows the standardization of user management for an organization, across controlled applications (such as CircleCI). Standardizing user management can simplify the process of managing users by centralizing common tasks, for example:
 
 * Adding and deleting users.
 * Managing user permissions.
@@ -57,12 +57,12 @@ To use Personal API tokens with SSO-protected resources:
 
 SSO for CircleCI currently has the following limitations:
 
-* SSO requires all users to log into CircleCI either with an email and password or using social logins like GitHub, Bitbucket prior to the SSO login. The email used to log in to CircleCI does *not* need to match the email used to authenticate with the IdP.
+* SSO requires all users to log into CircleCI either with an email and password or using social logins, like GitHub or Bitbucket, prior to the SSO login. The email used to log in to CircleCI does *not* need to match the email used to authenticate with the IdP.
 * CircleCI supports SSO using one domain per organization.
 * When the user logs in using social logins like GitHub or Bitbucket, then they need to authorize SSO in the VCS org along with SSO setup in CircleCI.
 
 
 [#next-steps]
 == Next steps
-* xref:set-up-sso.adoc[Setup SAML SSO]
+* xref:set-up-sso.adoc[Set up SAML SSO]
 * xref:sign-in-to-an-sso-enabled-organization.adoc[Sign in to an SSO-enabled organization]

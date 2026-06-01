@@ -52,7 +52,7 @@ If you followed the xref:openid-connect-tokens.adoc#set-up-aws[Set up AWS Instru
                 "ecr:GetDownloadUrlForLayer"
             ],
             "Effect": "Allow",
-            "Resource": "<your-ECR-repo-ARN>"
+            "Resource": "<YOUR-ECR-REPO-ARN>"
         },
         {
             "Action": [

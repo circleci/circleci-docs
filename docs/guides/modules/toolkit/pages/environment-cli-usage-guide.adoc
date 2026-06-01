@@ -6,7 +6,6 @@
 This page provides reference documentation for the CircleCI environment CLI, which is the CLI available in your CircleCI pipelines.
 
 == Introduction
-
 This reference guide covers some basic information about the CircleCI task-agent CLI, including:
 
 * Complete command reference - available commands and subcommands.
@@ -32,7 +31,7 @@ The CLI tool available in CircleCI pipelines. The root command is `circleci`.
 
 === Environment variables
 
-Use `env` to manage environment variables
+Use `env` to manage environment variables.
 
 ==== Substitution
 

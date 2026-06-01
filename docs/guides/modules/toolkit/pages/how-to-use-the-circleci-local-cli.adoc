@@ -21,7 +21,7 @@ TIP: *Using VS Code?* You can validate your CircleCI configuration using the VS 
 
 You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally. Follow these steps:
 
-. Navigate to your project directory with a `.circleci/config.yml` file
+. Navigate to your project directory with a `.circleci/config.yml` file.
 . Run the following, providing the path to your `.circleci/config.yml`:
 +
 [,shell]
@@ -669,7 +669,7 @@ Use the `decide` sub-command to make a decision on a config policy.
 
 [,shell]
 ----
-circleci policy decide <policy-file-or-dir-path> --input <path-to-input-file>[flags]
+circleci policy decide <policy-file-or-dir-path> --input <path-to-input-file> [flags]
 ----
 
 - `<policy-file-or-dir-path>` is the path to either the policy file or the directory containing the policy file.
@@ -696,7 +696,7 @@ Use the `eval` sub-command to perform a raw link:https://www.openpolicyagent.org
 
 [,shell]
 ----
-circleci policy eval <policy-dir-path> --input <path-to-input-file>[flags]
+circleci policy eval <policy-dir-path> --input <path-to-input-file> [flags]
 ----
 
 - `<policy-dir-path>` is the path to the directory containing the policy files.
@@ -719,7 +719,7 @@ circleci policy fetch <policy-name> --owner-id <org-id> [flags]
 For full details on the `fetch` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_fetch.html[CLI docs].
 
 
-===  Get policy decision logs
+=== Get policy decision logs
 
 Use the `logs` sub-command to get decision logs for a policy bundle or single policy.
 
