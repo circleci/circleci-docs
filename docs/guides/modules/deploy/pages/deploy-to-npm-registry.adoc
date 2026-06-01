@@ -35,18 +35,17 @@ NOTE: Provenance attestations are not currently supported for packages published
 npm needs four CircleCI identifiers to configure your project as a trusted publisher. Collect these before you visit npm.
 
 === 1.1 Organization ID
-You need your CircleCI organization ID, in UUID format.
+You need your CircleCI organization ID, in UUID format. You can find your org ID in menu:Org Settings[Overview], or follow these steps:
 
 include::guides:ROOT:partial$app-navigation/steps-to-org-id.adoc[]
 
-
 === 1.2 Project ID
-You need your CircleCI project ID, in UUID format from menu:Project Settings[Overview].
+You need your CircleCI project ID, in UUID format. You can find your project ID in menu:Project Settings[Overview], or follow these steps:
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
 
 === 1.3 Pipeline definition ID
-You need your pipeline definition ID, in UUID format from menu:Project Settings[Project Setup]. There you will see your list of pipelines. Find the pipeline that will run the publishing workflow and copy its ID.
+You need your pipeline definition ID, in UUID format. You can find your pipeline definition ID in menu:Project Settings[Project Setup], where you will find all pipelines that have been set up for your project along with their definition IDs. Follow these steps to find your pipeline definition IDs:
 
 include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
 
@@ -55,10 +54,17 @@ You need the version control system origin URL for your project, for example `gi
 
 === 1.5 Context IDs (optional)
 
-If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Lock it down with protected contexts>>). Find the UUID for each context under menu:Org Settings[Contexts] and selecting the context.
+If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Lock it down with protected contexts>>) you will need the UUID for each context. To find a context ID, follow these steps:
+
+include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Select *Contexts* from the menu.
+. Select the context you want to find the ID for.
+. Select the btn:[Copy] icon next to the context ID to copy it to your clipboard.
 
 .Context ID on the Contexts detail page
 image::guides:ROOT:npm-trusted-publishing/context-id.png[CircleCI Org Settings Contexts detail page showing the Context ID]
+
+Gather context IDs for each context you want to restrict publishing to.
 
 [#set-up-the-trusted-publisher-on-npm]
 == 2. Set up the trusted publisher on npmjs.com
