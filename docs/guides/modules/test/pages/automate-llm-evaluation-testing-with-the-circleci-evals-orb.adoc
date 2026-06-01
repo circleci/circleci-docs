@@ -7,7 +7,7 @@ CircleCI supports running automatic large language model (LLM) evaluations and e
 
 With the CircleCI Evals orb, you can remove the manual work involved in triggering LLM evaluations, reviewing evaluation results, and determining whether the results meet set expectations.
 
-TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-enabled-applications-through-evaluations.adoc[methods for testing LLM-enabled applications through evaluations].
+TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-enabled-applications-through-evaluations.adoc[Methods for Testing LLM-Enabled Applications Through Evaluations].
 
 == Concepts
 * **LLM Evaluations**: A method to assess the performance and accuracy of AI models and algorithms. Evaluations measure metrics such as task fidelity, consistency, relevance and coherence, or tone and style.
@@ -29,14 +29,15 @@ TIP: To learn more about LLM evaluations, read our article on xref:testing-llm-e
 ** *Failure* indicates a proposed change resulted in a degradation of model performance. The job stops running, and the pipeline fails.
 ** *Success* indicates that model performance has met set criteria, the job continues to run.
 
+.Evaluation testing: Concepts diagram
 image::guides:ROOT:eval-test-diagram-concepts.png[Evaluation testing: Concepts diagram]
 
 == Prerequisites
 
-* A CircleCI account connected to your code. You can sign up xref:getting-started:first-steps.adoc[for free].
+* A CircleCI account connected to your code. You can sign up xref:getting-started:first-steps.adoc[For Free].
 * A CircleCI project with a workflow configured to build your code.
-* CircleCI xref:security:contexts.adoc[contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
-* Existing LLM evaluations on a open source library or third-party tools such as Braintrust or Langsmith.
+* CircleCI xref:security:contexts.adoc[Contexts] relevant for your workflow, which includes tools such as pre-trained model providers like OpenAI.
+* Existing LLM evaluations on an open source library or third-party tools such as Braintrust or LangSmith.
 
 == 1. Add the CircleCI Evals orb
 
@@ -104,15 +105,13 @@ Given metrics from `eval-results.json`:
 }
 ----
 
-Below are example test cases and a demonstration of link:https://cel.dev/[Common Expression Language] (CEL) usage.
-
-* For test case names we suggest assigning a name based on the test scenario. For example, using the name of an input metric: `correctness` or `toxicity`.
+Below is an example test cases and a demonstration of link:https://cel.dev/[Common Expression Language] (CEL) usage.
 
 [source ,json]
 ----
 {
-  "correctness": "correctness > 0.9"
-  "toxicity": "toxicity < 0.01"
+  "correctness": "correctness > 0.9",
+  "toxicity": "toxicity < 0.01",
   "labels": “labels[0] == \”CORRECT\””
 }
 ----
@@ -148,16 +147,19 @@ Here is an overview of the information you can expect to see in CircleCI’s web
 
 * Your evaluation step details can display a link to the results on your 3rd party LLM evaluations provider. If you need to review them, you can navigate to them directly.
 +
+.Evaluations Job Step Details: Task Evals
 image::guides:ROOT:llmops/eval-job-run-eval-step.png[Evaluations Job Step Details: Task Evals]
 
 *Evaluation test results*
 
-* The step details will display results for all assertions
+* The step details will display results for all assertions.
 +
+.Evaluation testing: Job Step Details
 image::guides:ROOT:llmops/eval-job-eval-test-step.png[Evaluation testing: Job Step Details]
 
-* The tests tab will surface failed evaluation tests
+* The tests tab will surface failed evaluation tests.
 +
+.Evaluation testing: Test Failure Details
 image::guides:ROOT:llmops/eval-test-fail-detail.png[Evaluation testing: Test Failure Details]
 
 == Examples
@@ -166,8 +168,8 @@ image::guides:ROOT:llmops/eval-test-fail-detail.png[Evaluation testing: Test Fai
 Here’s an example of a pipeline configuration set up with the CircleCI evals orb and job. In the following pipeline configuration example, the job `eval-test` will:
 
 * Checkout the project repository
-* Run LLM evaluations and store the results
-* Run evaluations testing
+* Run LLM evaluations and store the results.
+* Run evaluations testing.
 
 [source ,yaml]
 ----
@@ -229,10 +231,10 @@ Here is an example of an evaluation test suite. It includes five test cases:
 [source ,json]
 ----
 {
-  "correctness" : "correctness > 0.9"
-  "helpfulness" : "helpfulness > 0.9"
-  "maliciousness": "maliciousness > 0.9"
-  "relevance" : "relevance > 0.95"
+  "correctness" : "correctness > 0.9",
+  "helpfulness" : "helpfulness > 0.9",
+  "maliciousness": "maliciousness > 0.9",
+  "relevance" : "relevance > 0.95",
   "labels": “labels[0] == \”CORRECT\””
 }
 

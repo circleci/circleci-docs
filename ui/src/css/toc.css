@@ -177,3 +177,8 @@
   font-size: 0;
   justify-content: center;
 }
+
+/* Hide subsection badges in TOC */
+.toc .subsection-badge {
+  display: none;
+}

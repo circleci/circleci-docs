@@ -10,7 +10,7 @@ This guide explains the concepts of user, organization, and integration in Circl
 
 When you log in to CircleCI you are logging in to your _user account_.
 
-You can log in to CircleCI using one of the following methods. These methods can not be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
+You can log in to CircleCI using one of the following methods. These methods cannot be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
 
 * Email and password.
 * Social login (GitHub, Bitbucket).
@@ -61,7 +61,7 @@ A CircleCI _organization_ can be one of three types:
 | Organization type | VCS integrations available | Project create process | Notes
 
 | `circleci`
-a| * GitHub App (add-on).
+a| * GitHub App (add-on, available for GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server).
 * GitLab (add-on).
 * GitLab self-managed (add-on).
 * Bitbucket Data Center (add-on).
@@ -69,7 +69,7 @@ a| * GitHub App (add-on).
 | This organization type is created separately to any VCS connection between CircleCI and your code repositories.
 
 | `github`
-a| * GitHub App (add-on)
+a| * GitHub App (add-on, available for GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server)
 * GitHub OAuth app (built-in).
 | Imported from VCS automatically.
 | Created automatically when you authorize CircleCI to access your GitHub account via OAuth app. This happens automatically when you sign in to CircleCI with your GitHub social login.
@@ -81,6 +81,8 @@ a| * Bitbucket OAuth (built-in)
 
 |===
 --
+
+NOTE: The GitHub App integration for GitHub Enterprise Server is currently in Preview. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
 
 The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features available for each organization and integration type.
 
@@ -138,6 +140,7 @@ For `circleci` type organizations, projects are created directly in CircleCI via
 --
 ====
 
+[#vcs-integration]
 === VCS integration
 
 The VCS integration options available to you depend on your organization type. By _integration_ here we mean the way CircleCI checks out your code from your VCS provider. Options are as follows:
@@ -199,6 +202,7 @@ The following links take you to the sections you need to get set up with CircleC
 * xref:orchestrate:pipelines.adoc[Set up a Pipeline].
 * xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
 
+[#manage-vcs-integrations]
 == Manage VCS integrations
 
 The following sections describe your options for each integration type.
@@ -208,7 +212,7 @@ The following sections describe your options for each integration type.
 GitHub App::
 +
 --
-*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization.
+*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization. The GitHub App integration supports GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server. GitHub Enterprise Server support is currently in Preview. See the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page for more information.
 
 *View*: To view a GitHub App integration, navigate to menu:Org[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
 
@@ -239,7 +243,7 @@ GitLab::
 
 *View*: Currently, there is no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings.
 
-*Disconnect*: Currently, there is no method to disconnect GitLab from your organization. You can delete projects that are connected to GitLab. and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
+*Disconnect*: Currently, there is no method to disconnect GitLab from your organization. You can delete projects that are connected to GitLab, and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
 --
 GitLab self-managed::
 +
@@ -330,7 +334,7 @@ To set up Bitbucket data center pipelines you will need to create a project HTTP
 
 A GitHub organization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
-If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. But, this successful installation refers to the existing connection to a different CircleCI organization, not the one you just tried to create. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
+If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. But, this successful installation refers to the existing connection to a different CircleCI organization, not the one you just tried to create. You can confirm this by checking the "installed at" date at the top of the page. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
 
 .GitHub settings showing the CircleCI App integration settings page.
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
@@ -418,10 +422,15 @@ For a guide to deleting organizations and projects, see the xref:security:delete
 Pipelines (also called pipeline definitions, in the API) are the highest-level unit of work in your CI/CD process. Pipelines orchestrate the execution of _workflows_ which run _jobs_ to build, test, and deploy your code.
 
 Pipelines are defined by two characteristics:
-- A configuration source, stored in a repository
-- A checkout source, which determines which repository will be checked out when running a [checkout step](https://circleci.com/docs/reference/configuration-reference/#checkout).
+
+- A configuration source, stored in a repository.
+- A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step].
 
 The pipelines you can create and configure are derived from the integration types available to you. You can find this information in the <<vcs-integration>> section.
+
+If you have an organization of type `github` or `bitbucket` with a corresponding VCS integration, a pipeline definition is created automatically for each of your projects when the project is set up.
+
+If you have a `circleci` organization, you must create pipeline definitions manually. See the xref:orchestrate:pipelines.adoc[Pipelines] page for more information.
 
 == Triggers
 
@@ -502,7 +511,7 @@ The way your code is checked out when a pipeline triggers depends on the pipelin
 GitHub App::
 +
 --
-CircleCI uses HTTPS-based authentication to check out your code. No SSH keys or deploy keys are required.
+When using the GitHub App integration, CircleCI uses HTTPS-based authentication to check out your code for both GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server. No SSH keys or deploy keys are required.
 --
 GitHub OAuth::
 +
@@ -692,7 +701,7 @@ A user key bypasses these limitations.
 
 The trade-off with choosing a user key is that user keys grant broad access based on your GitHub account's permissions. User keys are a bigger security risk if compromised.
 
-We recommend creating a dedicated "machine user" GitHub/Bitbucket account with minimal necessary permissions. THen add that machine user's key to CircleCI, rather than using your personal GitHub/Bitbucket account's key.
+We recommend creating a dedicated "machine user" GitHub/Bitbucket account with minimal necessary permissions. Then add that machine user's key to CircleCI, rather than using your personal GitHub/Bitbucket account's key.
 
 To create a user key, follow these steps:
 
@@ -848,7 +857,7 @@ The built-in environment variables available in a project depend on the pipeline
 
 == Controlling access via a machine user
 
-For fine-grained access to multiple repositories, it is best practice to create a non-human user for your CircleCI projects. For example , a link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[machine user] is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
+For fine-grained access to multiple repositories, it is best practice to create a non-human user for your CircleCI projects. For example, a link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[machine user] is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
 
 To use the SSH key of a machine user, follow the steps below.
 
@@ -897,7 +906,7 @@ The following steps guide you through migrating you organization as follows:
 . On the "Connect your code" page, select btn:[Connect] next to "GitHub".
 . You will be redirected to GitHub to install the CircleCI GitHub App into your GitHub organization.
 +
-NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration, as long as your original CirlceCI organization is not already connected to it.
+NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration, as long as your original CircleCI organization is not already connected to it.
 . Follow the instructions to create a project that is connected to one of your GitHub repositories.
 . If you are on a **paid** pricing plan:
 .. Navigate back to the organization that is connected to the GitHub OAuth app.

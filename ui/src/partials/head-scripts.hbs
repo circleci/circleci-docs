@@ -1,3 +1,27 @@
+<script>
+  // Apply theme immediately to prevent flash
+  (function() {
+    function getThemePreference() {
+      try {
+        const stored = localStorage.getItem('theme')
+        if (stored === 'light' || stored === 'dark' || stored === 'auto') return stored
+      } catch (e) {}
+      return 'auto'
+    }
+    function getResolvedTheme(preference) {
+      if (preference === 'light') return 'light'
+      if (preference === 'dark') return 'dark'
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+      }
+      return 'light'
+    }
+    const preference = getThemePreference()
+    const resolvedTheme = getResolvedTheme(preference)
+    document.documentElement.setAttribute('data-theme', resolvedTheme)
+    document.documentElement.style.colorScheme = resolvedTheme
+  })()
+</script>
 {{#with site.keys.cookiebot}}
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="{{this}}" data-blockingmode="auto" type="text/javascript"></script>
 {{/with}}

@@ -41,7 +41,7 @@ Gain insights into your pipelines with the included dashboard panels. Filter eac
 
 Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
 
-image::guides:ROOT:sumologic_app_catalog.png[Sumo Logic App catalogue]
+image::guides:ROOT:sumologic_app_catalog.png[Sumo Logic App catalog]
 
 NOTE: This dashboard receives data through the link:https://circleci.com/developer/orbs/orb/sumologic/sumologic[Sumo Logic orb] which must be included in your projects to be tracked.
 
@@ -63,7 +63,7 @@ Follow the Sumo Logic documentation for link:https://help.sumologic.com/03Send-D
 
 To get the URL where the CircleCI webhooks will be sent and recorded to the collector, link:https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source[add an HTTP Source].
 
-When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This URL will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
+When complete, copy the generated *HTTP Source Address*. You can always get this link from Sumo Logic again in the future. This URL will need to be entered in the **Webhooks** section of the CircleCI web app in the next step.
 
 [#step-3-configure-project-webhooks]
 ==== 3. Configure project webhooks
@@ -82,7 +82,7 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 
 . Complete the following fields:
 ** **Webhook name**: `Sumo Logic CI Visibility` or any other identifier name that you want to provide.
-** **Receiver URL**: Use the `HTTP Source Address` you copied in the last section.
+** **Receiver URL**: Use the *HTTP Source Address* you copied in the last section.
 ** **Events**: Select **Workflow Completed** and **Job Completed**.
 ** Enable the check: **Certificate verifications**.
 

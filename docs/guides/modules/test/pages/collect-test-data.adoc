@@ -6,7 +6,7 @@
 [#introduction]
 == Introduction
 
-When you run tests in CircleCI there are two ways to store your test results. You can either use xref:optimize:artifacts.adoc[Artifacts] or the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
+When you run tests in CircleCI, there are two ways to store your test results. You can either use xref:optimize:artifacts.adoc[Artifacts] or the xref:reference:ROOT:configuration-reference.adoc#storetestresults[`store_test_results` step]. Each of these methods has advantages, so the decision needs to be made for each project.
 
 When you save test data using the `store_test_results` step, CircleCI collects data from XML files and uses it to provide insights into your job. This page describes how to configure CircleCI to output test data as XML for some common test runners and store reports with the `store_test_results` step.
 
@@ -481,7 +481,7 @@ See the link:https://github.com/circleci/minitest-ci#readme[minitest-ci README] 
 [#cucumber]
 === Cucumber
 
-For custom Cucumber steps, generate a file using the JUnit formatter and write it to the `cucumber` directory. Following is an example of the addition to your `.circleci/config.yml` file:
+For custom Cucumber steps, generate a file using the JUnit formatter and write it to the `cucumber` directory. The following is an example of the addition to your `.circleci/config.yml` file:
 
 [,yml]
 ----
@@ -618,7 +618,7 @@ A working `.circleci/config.yml` section might look like this:
 [#kaocha]
 === Kaocha
 
-Assuming that your are already using kaocha as your test runner, do these things to produce and store test results:
+Assuming that you are already using kaocha as your test runner, do the following to produce and store test results:
 
 Add the `kaocha-junit-xml` plugin to your dependencies
 

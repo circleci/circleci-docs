@@ -156,9 +156,10 @@ The sections below explain some key software delivery concepts. Understanding th
 === Command
 
 TIP: Commands are available when using the release agent. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
+
 A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component.
 
-Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, similarly to how step output works for CI jobs.
+Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, just like the step output works for CI jobs.
 
 Some commands are available for all components:
 
@@ -209,7 +210,7 @@ A deployment starts when the component version is updated, and ends when the new
 [#the-deploys-UI]
 == The deploys UI
 
-The CircleCI deploys UI is a powerful tool for visualising, monitoring and managing your deployments. The pages included in the deploys UI are described below.
+The CircleCI deploys UI is a powerful tool for visualising, monitoring, and managing your deployments. The pages included in the deploys UI are described below.
 
 [#dashboard]
 === The dashboard
@@ -219,7 +220,7 @@ image::guides:ROOT:releases/dashboard.png[Screenshot showing the deploys dashboa
 
 Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboard. The dashboard shows the following:
 
-* **Timeline**: A timeline of deploys across your organization's components and environments. You can use the filter dropdown menus at the top of the page to select a component and/or environment. You will see live status updates, deployment trigger source, deployment version version, deployment type (for example, _progressive_, when you are using an Argo Rollout). From here you can access the following:
+* **Timeline**: A timeline of deploys across your organization's components and environments. You can use the filter dropdown menus at the top of the page to select a component and/or environment. You will see live status updates, deployment trigger source, deployment version, deployment type (for example, _progressive_, when you are using an Argo Rollout). From here you can access the following:
 ** The deployment details page for a specific deployment by clicking on the status badge or version number.
 ** The component or environment details pages by clicking on the respective names.
 ** The project dashboard for the CircleCI project associated with a deployment.
@@ -232,7 +233,7 @@ Select **Deploys** in the CircleCI web app sidebar to enter the deploys dashboar
 ** Access the environment details view by selecting an environment name.
 
 * **Components**: A list of components and their associated projects. From here you can:
-** Set up a new component by selecting btn:[Create Component]. From here you can select and environment that has a successful environment integration set up, and from there you can add a new component.
+** Set up a new component by selecting btn:[Create Component]. From here you can select an environment that has a successful environment integration set up, and from there you can add a new component.
 ** Get straight to the component's project building on CircleCI by selecting the project name.
 ** Access setting for each component icon:settings[Settings icon].
 

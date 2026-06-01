@@ -2,7 +2,7 @@
   'use strict'
 
   // Get user's theme preference (light, dark, or auto)
-  function getThemePreference() {
+  function getThemePreference () {
     try {
       const stored = localStorage.getItem('theme')
       if (stored === 'light' || stored === 'dark' || stored === 'auto') return stored
@@ -13,7 +13,7 @@
   }
 
   // Get the actual theme to apply (light or dark)
-  function getResolvedTheme(preference) {
+  function getResolvedTheme (preference) {
     if (preference === 'light') return 'light'
     if (preference === 'dark') return 'dark'
 
@@ -25,7 +25,7 @@
   }
 
   // Apply theme to document
-  function applyTheme(preference) {
+  function applyTheme (preference) {
     const resolvedTheme = getResolvedTheme(preference)
     document.documentElement.setAttribute('data-theme', resolvedTheme)
     document.documentElement.style.colorScheme = resolvedTheme
@@ -40,7 +40,7 @@
   }
 
   // Update button icon and menu checkmarks
-  function updateUI(preference, resolvedTheme) {
+  function updateUI (preference, resolvedTheme) {
     const button = document.getElementById('theme-toggle-button')
     const menu = document.getElementById('theme-toggle-menu')
     const lightIcon = document.getElementById('theme-icon-light')
@@ -68,7 +68,7 @@
     button.setAttribute('aria-label', `Theme: ${preference}. Click to change theme`)
 
     // Update checkmarks in menu
-    menu.querySelectorAll('[role="menuitemradio"]').forEach(function(item) {
+    menu.querySelectorAll('[role="menuitemradio"]').forEach(function (item) {
       const itemTheme = item.getAttribute('data-theme-option')
       const isSelected = itemTheme === preference
       item.setAttribute('aria-checked', isSelected ? 'true' : 'false')
@@ -80,7 +80,7 @@
   }
 
   // Toggle dropdown menu
-  function toggleMenu() {
+  function toggleMenu () {
     const menu = document.getElementById('theme-toggle-menu')
     const button = document.getElementById('theme-toggle-button')
     if (!menu || !button) return
@@ -94,7 +94,7 @@
     }
   }
 
-  function openMenu() {
+  function openMenu () {
     const menu = document.getElementById('theme-toggle-menu')
     const button = document.getElementById('theme-toggle-button')
     if (!menu || !button) return
@@ -107,7 +107,7 @@
     if (firstItem) firstItem.focus()
   }
 
-  function closeMenu() {
+  function closeMenu () {
     const menu = document.getElementById('theme-toggle-menu')
     const button = document.getElementById('theme-toggle-button')
     if (!menu || !button) return
@@ -118,17 +118,17 @@
   }
 
   // Select theme from menu
-  function selectTheme(preference) {
+  function selectTheme (preference) {
     applyTheme(preference)
     closeMenu()
   }
 
   // Listen for system theme changes when in auto mode
-  function watchSystemTheme() {
+  function watchSystemTheme () {
     if (!window.matchMedia) return
 
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    mediaQuery.addEventListener('change', function(e) {
+    mediaQuery.addEventListener('change', function (e) {
       const preference = getThemePreference()
       // Only react to system changes if user is in auto mode
       if (preference === 'auto') {
@@ -141,7 +141,7 @@
   }
 
   // Close menu when clicking outside
-  function handleClickOutside(event) {
+  function handleClickOutside (event) {
     const menu = document.getElementById('theme-toggle-menu')
     const button = document.getElementById('theme-toggle-button')
 
@@ -154,7 +154,7 @@
   }
 
   // Close menu on Escape key
-  function handleEscape(event) {
+  function handleEscape (event) {
     if (event.key === 'Escape') {
       const menu = document.getElementById('theme-toggle-menu')
       if (menu && menu.classList.contains('show')) {
@@ -164,7 +164,7 @@
   }
 
   // Initialize
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const button = document.getElementById('theme-toggle-button')
     const menu = document.getElementById('theme-toggle-menu')
 
@@ -177,8 +177,8 @@
       button.addEventListener('click', toggleMenu)
 
       // Menu item clicks
-      menu.querySelectorAll('[role="menuitemradio"]').forEach(function(item) {
-        item.addEventListener('click', function() {
+      menu.querySelectorAll('[role="menuitemradio"]').forEach(function (item) {
+        item.addEventListener('click', function () {
           const theme = this.getAttribute('data-theme-option')
           selectTheme(theme)
         })

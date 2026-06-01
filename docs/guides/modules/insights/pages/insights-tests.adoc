@@ -17,7 +17,7 @@ The next sections go over what test insights are available.
 
 The summary section displays test suite performance across your most recent 100 runs. You can view the following:
 
-* Average test per run
+* Average tests per run
 * Number of all flaky tests detected
 * Failure counts
 * Slow run times in test suite
@@ -42,7 +42,7 @@ Flaky tests are tests that fail non-deterministically; they pass and fail due to
 
 Test Insights detects flaky tests. Flaky tests are identified as tests that failed and passed on the same commit in a 14-day window. Deterministic tests rely on the state of the repository and show the same behavior on re-runs. Flaky tests are labeled `FLAKY` throughout the CircleCI app to help you identify them.
 
-image::guides:ROOT:test-insights-flaky.png[Flakey tests Insights example]
+image::guides:ROOT:test-insights-flaky.png[Flaky tests Insights example]
 
 [#most-failed-tests]
 === Most failed tests

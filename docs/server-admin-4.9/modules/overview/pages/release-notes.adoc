@@ -11,9 +11,21 @@ The 4.9 release introduces xref:guides:orchestrate:controlling-serial-execution-
 [#upgrade]
 == Upgrade
 
-NOTE: Server 4.9 requires mongoDB 4.4 or higher. If your MongoDB instance is not externalized then please follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-4[Upgrade MongoDB to 4.4 guide] before upgrading to Server 4.9.0.
+NOTE: Server 4.9 requires mongoDB 4.4 or higher. If your MongoDB instance is not externalized then follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-4[Upgrade MongoDB to 4.4 Guide] before upgrading to Server 4.9.0.
 
 For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.9 Guide].
+
+== Release 4.9.4
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-4/[changelog].
+
+== Release 4.9.3
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-3/[changelog].
+
+== Release 4.9.2
+
+For full details of this release see the link:https://circleci.com/changelog/server-release-4-9-2/[changelog].
 
 == Release 4.9.1
 

@@ -7,8 +7,6 @@
 [Aa]uditability
 [Aa]utoscalers?
 [Bb]ooleans?
-\b[Cc]onfig policies\b
-\b[Cc]onfig policy\b
 [Cc]ron
 [Ee]nterprise
 [Gg]it
@@ -60,6 +58,7 @@ AWS Certificate Manager
 AWS\sECR
 Azure
 Azure Container Registry
+[Bb]ackfilling
 backoff
 [Bb]anlist?
 Bash
@@ -152,6 +151,7 @@ Fastlane
 /bFastlane Match/b
 [Ff]ilename
 [Ff]ilepath
+Finout
 framebuffer
 frameit
 \bFree Plan\b
@@ -162,6 +162,8 @@ geckodriver
 Gemfile
 GitHub
 \bGitHub Checks\b
+\bGitHub Enterprise Server\b
+GitLab
 \bGitLab self-managed\b
 GKE
 \bGoogle Cloud\b
@@ -189,6 +191,7 @@ IAM
 IdP
 [Ii]njectable
 [Ii]nsights
+inlines
 invocated
 iOS
 IP
@@ -214,6 +217,7 @@ Krew
 kubectl
 [Kk]ubelets?
 Kubernetes
+KubeVirt
 LambdaTest
 Lein
 Leiningen
@@ -230,6 +234,7 @@ MCP server
 MFEs?
 [Mm]iddleware
 minitest
+[Mm]isconfiguration
 [Mm]ultithreading
 [Mm]ultiline
 [Nn]amespaces?
@@ -311,6 +316,7 @@ SSO
 [Ss]afelist
 \bSauce Labs\b
 \bScale Plan\b
+[Ss]chedulable
 SDK
 seccomp
 [Ss]ecrets?
@@ -337,6 +343,7 @@ stdin
 [Ss]ubcommands?
 [Ss]ubnets?
 [Ss]ubnetworks?
+[Ss]ubpackage
 superset
 Sysbox
 systemd
@@ -407,3 +414,5 @@ XCTest
 XQuartz
 Xvfb
 YAML
+Zstd
+LangSmith
