@@ -50,61 +50,6 @@ flowchart TD
 The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this cost pays for itself by enabling the selection phase to skip unaffected tests on subsequent runs.
 ====
 
-=== Understand the `--analyze-tests` and `--select-tests` flags
-
-The `testsuite` command has two independent phases you control with CLI flags:
-
-* `--analyze-tests` controls whether to *build or update impact data*. This runs tests with coverage instrumentation and stores the mapping of test atoms to source files. Analysis must run on your default branch to keep impact data up to date.
-* `--select-tests` controls whether to *choose and run tests based on impact data*. This compares changed files against the stored impact data and runs only the affected test atoms.
-
-You can enable or disable each phase independently. For example, you can analyze without running tests (`--select-tests=none`), or run impacted tests without re-analyzing (`--analyze-tests=none`).
-
-Each flag accepts three values:
-
-[.table-scroll]
---
-[cols="1,1,3", options="header"]
-|===
-| Value | Meaning for `--analyze-tests` | Meaning for `--select-tests`
-
-| `impacted`
-| Analyze only test atoms whose impact data needs updating -- either the test changed, or the files it covers changed.
-| Select and run only the test atoms impacted by a change.
-
-| `none`
-| Skip analysis entirely.
-| Skip running tests entirely.
-
-| `all`
-| Analyze ALL discovered test atoms. *Rarely needed* -- only use to rebuild impact data from scratch.
-| Select and run all discovered test atoms (full test suite).
-|===
---
-
-.Default behavior
-[NOTE]
-====
-When you do not pass these flags, the defaults depend on which branch is running:
-
-[.table-scroll]
---
-[cols="1,1,1", options="header"]
-|===
-| Branch | `--analyze-tests` default | `--select-tests` default
-
-| Default branch (for example, `main`)
-| `impacted`
-| `all`
-
-| Feature branches
-| `none`
-| `impacted`
-|===
---
-
-This means by default, feature branches run only impacted tests, and the default branch runs all tests while also updating impact data.
-====
-
 == Prerequisites
 
 Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
@@ -367,7 +312,9 @@ This command uses the existing impact data to select only the test atoms that co
 
 include::ROOT:partial$tips/testsuite-ci-preinstalled.adoc[]
 
-Use the `--select-tests` and `--analyze-tests` flags to verify analysis on your feature branch before merging into the default branch.
+For most projects, no extra flags are needed -- the defaults handle analysis and selection automatically. You only need the `--select-tests` and `--analyze-tests` flags if you want to verify analysis on your feature branch before merging, or if you need a non-default setup (see <<set-up-examples,Common Setup Examples>>).
+
+To verify analysis on your feature branch, temporarily override the defaults so the job only runs analysis without executing tests:
 
 .Example: run analysis on a feature branch without executing tests
 [source,yaml]
@@ -434,6 +381,54 @@ If these defaults do not suit your project, see the <<set-up-examples,Common Set
 
 [#set-up-examples]
 == Common setup examples
+
+The `--analyze-tests` and `--select-tests` flags give you fine-grained control over how the `testsuite` command behaves. Most projects do not need to set these flags -- the defaults work automatically.
+
+=== Flag reference
+
+`--analyze-tests` controls whether to *build or update impact data* by running tests with coverage instrumentation. `--select-tests` controls whether to *choose and run tests* based on existing impact data.
+
+Each flag accepts three values:
+
+[.table-scroll]
+--
+[cols="1,1,3", options="header"]
+|===
+| Value | Meaning for `--analyze-tests` | Meaning for `--select-tests`
+
+| `impacted`
+| Analyze only test atoms whose impact data needs updating -- either the test changed, or the files it covers changed.
+| Select and run only the test atoms impacted by a change.
+
+| `none`
+| Skip analysis entirely.
+| Skip running tests entirely.
+
+| `all`
+| Analyze ALL discovered test atoms. *Rarely needed* -- only use to rebuild impact data from scratch.
+| Select and run all discovered test atoms (full test suite).
+|===
+--
+
+When you do not pass these flags, the defaults depend on which branch is running:
+
+[.table-scroll]
+--
+[cols="1,1,1", options="header"]
+|===
+| Branch | `--analyze-tests` default | `--select-tests` default
+
+| Default branch (for example, `main`)
+| `impacted`
+| `all`
+
+| Feature branches
+| `none`
+| `impacted`
+|===
+--
+
+By default, feature branches run only impacted tests, and the default branch runs all tests while also updating impact data.
 
 === Analyze impacted tests and run all tests on your default branch
 

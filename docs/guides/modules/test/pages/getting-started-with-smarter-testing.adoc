@@ -21,18 +21,15 @@ This guide walks you through the foundational setup that all three features buil
 
 == Before you begin
 
-Ensure you have the following:
+You need a repository with an existing test suite. The setup process guides you through configuring JUnit XML output and installing the CLI.
 
-* A CircleCI account with a project connected to your VCS.
-* A repository with an existing test suite that produces JUnit XML output.
-* The latest CircleCI CLI installed. See the xref:toolkit:local-cli.adoc[Install and Configure the CircleCI Local CLI] guide.
+NOTE: You can complete steps 1 through 3 (install, configure, and validate locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required for step 4, when you run tests in CI.
 
 === Terminology
 
 The following terms are used throughout the Smarter Testing documentation:
 
 Test atom:: The smallest unit of work your test runner can execute independently - typically a test file (for example, `tests/auth_test.py`), but can also be a test package or module.
-Impact data:: A mapping of test atoms to the source files they cover. Generated during the analysis phase and used by test impact analysis to determine which tests to run.
 Test suite:: A named configuration in `.circleci/test-suites.yml` that defines how to discover and run your test atoms.
 
 == 1. Install the testsuite plugin locally

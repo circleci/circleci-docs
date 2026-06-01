@@ -95,8 +95,8 @@ The command needs to be modified to use placeholders:
 
 For test atoms:
 
-* Use the template variable `<< test.atoms >>` in your run command – this will be replaced with a space-separated list of test atoms to run.
-* If the template variable is not found, the command’s stdin will receive a newline-separated list of test atoms.
+* Use the template variable `<< test.atoms >>` in your run command. This variable is replaced with a space-separated list of test atoms to run.
+* If the template variable is not found, the command stdin receives a newline-separated list of test atoms.
 
 For JUnit output:
 
@@ -193,9 +193,9 @@ The test atom to analyze can be specified in one of two ways:
 
 Different template variables are available for coverage output, depending on the format of the coverage data produced by the test runner:
 
-* *LCOV* `<< outputs.lcov >>` - analyses one test atom at a time.
-* *Go’s coverage format* `<< outputs.go-coverage >>` - analyses one test atom at a time.
-* *CircleCI coverage format* `<< outputs.circleci-coverage >>` - analyses all test atoms in a single pass.
+* *LCOV* `<< outputs.lcov >>` -- analyses one test atom at a time.
+* *Go coverage format* `<< outputs.go-coverage >>` -- analyses one test atom at a time.
+* *CircleCI coverage format* `<< outputs.circleci-coverage >>` -- analyses all test atoms in a single pass.
 
 Your `analysis` command must use the output variable for the coverage format it produces.
 
