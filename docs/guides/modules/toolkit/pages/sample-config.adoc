@@ -777,4 +777,4 @@ workflows:
 
 * See the xref:about-circleci:concepts.adoc#configuration[Concepts document] and xref:orchestrate:workflows.adoc[Workflows] for more details of the concepts covered in this example.
 * See the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] document for full details of each individual configuration key.
-* See the xref:example-and-guides-overview.adoc[Example Public Repos] document for a list of public projects that use CircleCI.
+* See the xref:examples-and-guides-overview.adoc[Example Public Repos] document for a list of public projects that use CircleCI.
