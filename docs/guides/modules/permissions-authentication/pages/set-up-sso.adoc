@@ -48,7 +48,7 @@ NOTE: CircleCI will periodically poll DNS to check for the required TXT record. 
 +
 ** Existing organization members will be prompted to authenticate with your IdP the next time they attempt to access your CircleCI organization.
 ** New organization members must be invited to your organization. See the xref:manage-roles-and-permissions.adoc#add-people-to-your-organization[Manage Roles and Permissions] page for more information.
-** Users must log into their email/password CircleCI account to authenticate with SSO. See the xref:sign-in-to-an-sso-enabled-organization.adoc#authenticate-with-sso-for-an-organization[Sign in to an SSO-Enabled Organization] page for more information.
+** Users must log into their email/password CircleCI account to authenticate with SSO. See the xref:sign-in-to-an-sso-enabled-organization.adoc#log-in-to-an-organization[Sign in to an SSO-Enabled Organization] page for more information.
 
 Your organization is now using SSO to grant and deny user access. You can manage user roles by following the steps outlined on the xref:manage-roles-and-permissions.adoc[Manage Roles and Permissions] page.
 
