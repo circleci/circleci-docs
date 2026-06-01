@@ -6,7 +6,7 @@
 [#notice]
 == Notice
 
-This is currently in ALPHA, and we are looking into improving experience for customers.
+This is currently in Alpha, and we are looking into improving the experience for customers.
 
 [#overview]
 == Overview

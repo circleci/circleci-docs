@@ -71,11 +71,11 @@ Re-run jobs with SSH directly from VS Code in one of two ways:
 
 * Open the job detail page, then select the **SSH** button on the top right.
 +
-image::guides:ROOT:vs_code_extension_job-details.png[Screenshot of side Panel with job details]
+image::guides:ROOT:vs_code_extension_job-details.png[Screenshot of side panel with job details]
 
 * Or, hover over the job in the pipelines panel, and select the SSH action button next to the job name.
 +
-image::guides:ROOT:vs_code_extension_action_in_side_panel.png[Screenshot of side Panel with rerun options]
+image::guides:ROOT:vs_code_extension_action_in_side_panel.png[Screenshot of side panel with rerun options]
 
 In both cases, you will be presented with two options:
 
@@ -146,11 +146,11 @@ The config helper also provides two commands that help you statically validate y
 
 * Validate current configuration file
 +
-Corresponds to the CLI command `circleci config validate`, and statically verifies that the config file is well formed. This command only validates the file for structure and syntax errors, **not** for semantic error (for example, "This job does not exist").
+Corresponds to the CLI command `circleci config validate`, and statically verifies that the config file is well formed. This command only validates the file for structure and syntax errors, **not** for semantic errors (for example, "This job does not exist").
 
 * Validate current configuration file against org policy
 +
-Corresponds to the CLI command `circleci policy decide`, and verifies that the configuration file complies with your organisation policies (if any are set).
+Corresponds to the CLI command `circleci policy decide`, and verifies that the configuration file complies with your organization policies (if any are set).
 
 Both of these commands can be run by:
 
@@ -227,7 +227,7 @@ This increases the risk of secret exfiltration, and could let users access cloud
 ==== Access and permissions
 link:https://circleci.com/docs/contexts/#restrict-a-context-to-a-security-group-or-groups[Context restrictions based on groups or security groups] are respected. We recommend using groups to exclude context access to untrusted users.
 
-Per-user, per-project, per-branch and per-org permission checks are also respected by pipelines triggered with unversioned config.
+Per-user, per-project, per-branch, and per-org permission checks are also respected by pipelines triggered with unversioned config.
 
 [#config-policies]
 ==== Config policies
