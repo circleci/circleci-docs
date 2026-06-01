@@ -108,6 +108,7 @@ function extractSections(html, pageTitle, pageRelUrl) {
 
     const parsed = parseHTML(`<div>${part}</div>`);
     const headingEl = parsed.querySelector('h2, h3, h4');
+    headingEl?.querySelector('.subsection-badge')?.remove();
 
     const heading = headingEl
       ? headingEl.textContent.trim()
