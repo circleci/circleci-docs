@@ -116,7 +116,11 @@ function extractSections(html, pageTitle, pageRelUrl) {
 
     const anchor = headingEl?.getAttribute('id') || '';
     const relUrl = anchor ? `${pageRelUrl}#${anchor}` : pageRelUrl;
-    const content = parsed.textContent.trim().replace(/\s+/g, ' ');
+    // Remove the heading node first — textContent inserts no separator where a
+    // tag is stripped, so heading text would otherwise fuse to the first body word.
+    headingEl?.remove();
+    const body = parsed.textContent.trim();
+    const content = `${heading} ${body}`.trim().replace(/\s+/g, ' ');
 
     if (!content) return;
     sections.push({ heading, content, relUrl });
