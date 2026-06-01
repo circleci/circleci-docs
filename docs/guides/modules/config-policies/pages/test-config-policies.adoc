@@ -202,7 +202,6 @@ Expected output:
     "ElapsedMS": 0
   },
   {
-  {
     "Passed": true,
     "Group": "config-policies",
     "Name": "test_version_check/inferior_version",
@@ -254,7 +253,7 @@ Next, add a second policy and test to your `config-policies` directory. The step
 # org level policy
 package org
 
-# needed to use keyworks like `in`.
+# needed to use keywords like `in`.
 import future.keywords
 
 # Unique name identifying this policy in our bundle.
@@ -420,7 +419,7 @@ fail    config-policies    0.002s
 Error: unsuccessful run
 ----
 
-Adding a new policy to the bundle added a new rule, which led to the failures. The decision in two ways:
+Adding a new policy to the bundle added a new rule, which led to the failures. The decision was affected in two ways:
 
 - A new rule was added to the `enabled_rules` field
 - A new `soft_failure` occurs because not all of the tests specify the configuration `version` as it is not needed for the Docker version policy.
@@ -633,7 +632,7 @@ OPA also has a way of specifying tests directly within a rego document. Read mor
 
 OPA evaluates rules that start with `test_` and expects the output to be truthy. The `circleci policy test` command runs the OPA tests and reports them as `<opa.tests>`.
 
-To illustrate this, the following steps show how to create a _helper_ function including some OPA tests, and run the `circleci tests` command to see the results of those tests.
+To illustrate this, the following steps show how to create a _helper_ function including some OPA tests, and run the `circleci policy test` command to see the results of those tests.
 
 . Create a directory for helper functions, if you haven't already:
 +

@@ -11,7 +11,7 @@ Follow this how-to guide to create config policies for managing the use of conte
 **Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
+circleci policy push ./config-policies --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 ****
 
@@ -143,7 +143,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -285,7 +285,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 === 2. Update policy with your details
 
 . Replace `<project-ID>` with the ID for the project you want to restrict:
-** In the CircleCI web app, select **Projects** from the sidebar, and click the elipsis (`...`) next to your project. Select **Project Settings** to locate the Project ID.
+** In the CircleCI web app, select **Projects** from the sidebar, and click the ellipsis (`...`) next to your project. Select **Project Settings** to locate the Project ID.
 
 . Replace `<context-1>` with the name of the context you want to block the use of. You can add multiple contexts as an array, or stick with one for now.
 ** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.
@@ -295,7 +295,7 @@ In the following steps you will replace `<project-ID>` and `<context-1>` (and `<
 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
-* Push the policy manually using the CLI from your local environment, or;
+* Push the policy manually using the CLI from your local environment
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tabs]
@@ -307,7 +307,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -370,7 +370,7 @@ policy_name["reserved_contexts"]
 
 # Declare a rule
 rule_reserve_contexts = config.contexts_reserved_by_project_ids(
-    ["<project-ID-1>","<project-ID-1>"],
+    ["<project-ID-1>","<project-ID-2>"],
     ["<context-1>","<context-2>"]
 )
 
@@ -386,7 +386,7 @@ In the following steps you will replace `<project-ID-1>` and `<context-1>` (and 
 === 2. Update policy with your details
 
 . Replace `<project-ID-1>` with the ID for the first project you want to add to the allow-list. You can add multiple project IDs as an array, or stick with one for now:
-** In the CircleCI web app, select **Projects** from the sidebar, and click the elipsis (`...`) next to your project, and select **Project Settings** to locate the Project ID.
+** In the CircleCI web app, select **Projects** from the sidebar, and click the ellipsis (`...`) next to your project, and select **Project Settings** to locate the Project ID.
 
 . Replace `<context-1>` with the name of the first context you want to restrict the use of. You can add multiple contexts as an array, or stick with one for now.
 ** To find a list of your contexts, select **Organization settings** from the sidebar in the CircleCI web app and then select **Contexts** from the menu.
@@ -396,7 +396,7 @@ In the following steps you will replace `<project-ID-1>` and `<context-1>` (and 
 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
-* Push the policy manually using the CLI from your local environment, or;
+* Push the policy manually using the CLI from your local environment
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tabs]
@@ -408,7 +408,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:
@@ -481,7 +481,7 @@ hard_fail["use_prod_context_on_main"]
 +
 NOTE: Notice the `contexts_reserved_by_branches` helper is accessed using the `config` keyword.
 
-. Create a second rego file, names `project_groups.rego` to specify an additional restriction on which projects are affected by this rule. Replace `<project-ID>` with one of your project IDs
+. Create a second rego file named `project_groups.rego` to specify an additional restriction on which projects are affected by this rule. Replace `<project-ID>` with one of your project IDs
 +
 `project_groups.rego`
 +
@@ -504,7 +504,7 @@ In the following steps you will replace `<context-1>` (and `<context-2>` if you 
 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
-* Push the policy manually using the CLI from your local environment, or;
+* Push the policy manually using the CLI from your local environment
 * Push your changes to your config policy repository if you are managing policies via your VCS as shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Manage policies with your VCS guide].
 
 [tabs]
@@ -516,7 +516,7 @@ Create and upload the policy bundle using CircleCI CLI:
 
 [source,shell]
 ----
-circleci policy push ./config-policies –owner-id <your-organization-ID>
+circleci policy push ./config-policies --owner-id <your-organization-ID>
 ----
 
 If the upload was successful, you will see something like the following:

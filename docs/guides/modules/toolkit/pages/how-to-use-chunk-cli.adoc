@@ -330,7 +330,7 @@ The `chunk skill install` command installs `chunk` CLI skills into your AI codin
 $ chunk skill install
 ----
 
-To see available skills and their current installation status run the following:
+To see available skills and their current installation status, run the following:
 
 [source,console]
 ----
@@ -369,7 +369,7 @@ Running `chunk init` adds hooks to `.claude/settings.json` that trigger `chunk v
 * **PreToolUse hook**: Blocks `git commit` if validation fails, preventing bad code from entering the repository.
 * **Stop hook**: Validates your changes when your Claude Code session ends, catching uncommitted changes.
 
-To add or update hooks without re-running the full initialization run the following:
+To add or update hooks without re-running the full initialization, run the following:
 
 [source,console]
 ----
@@ -379,14 +379,14 @@ $ chunk init --skip-validate
 [#view-config]
 == View and set configuration
 
-To display the fully resolved `chunk` CLI configuration for your project run the following:
+To display the fully resolved `chunk` CLI configuration for your project, run the following:
 
 [source,console]
 ----
 $ chunk config show
 ----
 
-To set a configuration value:
+To set a configuration value, run the following:
 
 [source,console]
 ----

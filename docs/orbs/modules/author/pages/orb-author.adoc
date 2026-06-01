@@ -12,7 +12,7 @@ If you manage multiple, similar projects, consider abstracting out your config w
 
 == Prerequisites
 
-Before authoring an orb, we recommend that you become familiar with the xref:guides:getting-started:config-intro.adoc[Configuration Reference] and authoring xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference] pages.
+Before authoring an orb, we recommend that you become familiar with the xref:guides:getting-started:config-intro.adoc[Configuration Reference] and xref:reference:ROOT:reusing-config.adoc[Reusable Configuration Reference] pages.
 
 Orbs consist of three main elements. You can follow the links for each to learn more:
 
