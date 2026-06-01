@@ -93,7 +93,7 @@ workflows:
 [#google-cloud-functions]
 == Google Cloud Functions
 
-If you are using Cloud Functions with Firebase, you should do the following:
+If you are using Cloud Functions with Firebase, do the following:
 
 * Instruct CircleCI to navigate to the folder where the Cloud Functions are held (in this case 'functions') and run `npm install`.
 * Add the following to your `.circleci/config.yml` file:
