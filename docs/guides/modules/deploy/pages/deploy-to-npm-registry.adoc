@@ -45,7 +45,7 @@ You need your CircleCI project ID, in UUID format. You can find your project ID 
 include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
 
 === 1.3 Pipeline definition ID
-You need your pipeline definition ID, in UUID format. You can find your pipeline definition ID in menu:Project Settings[Project Setup], where you will find all pipelines that have been set up for your project along with their definition IDs. Follow these steps to find your pipeline definition IDs:
+You need your pipeline definition ID, in UUID format. You can find your pipeline definition ID in menu:Project Settings[Project Setup], where you will find details of all pipelines that have been set up for your project. Follow these steps to find your pipeline definition IDs:
 
 include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
 
