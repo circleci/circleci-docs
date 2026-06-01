@@ -11,43 +11,46 @@
 Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
 ====
 
-Dynamic test splitting distributes tests across parallel nodes to minimize node idle time. Unlike static splitting, which divides tests evenly upfront, dynamic splitting uses a shared queue that nodes pull from continuously. This ensures balanced workloads even when some nodes start late or run slower than expected.
+Static test splitting pre-assigns each node a fixed set of tests upfront. Dynamic test splitting distributes tests across parallel nodes so they finish at the same time, adjusting each node's workload based on when that node is ready to run tests.
 
 == Is my project a good fit for dynamic test splitting?
 
-Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch.
+=== Fast test runner startup times
 
-If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
+Static test splitting runs all tests in a single batch. Dynamic test splitting runs tests across multiple batches.
+
+If your test runner starts fast compared to the runtime of tests, the overhead of running multiple batches is negligible.
+
+=== Nodes start at noticeably different times
+
+Static test splitting pre-allocates tests to each node. Dynamic test splitting redistributes tests to nodes that are ready.
+
+If your jobs have long container setup, dependency installation, or image pulls, each node's startup time can vary between runs. Dynamic test splitting moves tests from slow nodes to fast nodes.
+
+=== JUnit test results
+
+Static test splitting uses previous test results to preallocate tests to each node. Dynamic test splitting uses the same data to preallocate and redistribute tests.
+
+If your job uses the `store_test_results` step, dynamic test splitting reads the previous JUnit runtimes on each run to preallocate and redistribute tests.
 
 == How it works
 
 When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing automatically:
 
-* Sorts tests by duration by retrieving timing data from previous runs, with longer tests prioritized first.
-* Creates a shared queue containing all tests to be run.
-* Enables nodes to pull dynamically. Each parallel node continuously pulls test batches from the queue.
-* Adjusts batch sizes dynamically as the test queue empties to ensure even distribution.
+* Sorts tests by duration using timing data from previous runs, with longer tests prioritized first.
+* Gives the first node that is ready a full batch of tests, like static test splitting.
+* Gives each later-starting node a smaller batch sized so all nodes finish at the same time.
+* Evenly distributes the remaining tests across all nodes.
 
-Dynamic test splitting prevents any single slow node from becoming a bottleneck. Even if some nodes start late or run slower than expected, this dynamic batching ensures work stays balanced across all available nodes.
+.Static test splitting with uneven node start times
+image::guides:ROOT:test/static-test-splitting-uneven-nodes.png[Job timings with static test splitting,role=icon-light]
+.Static test splitting with uneven node start times
+image::guides:ROOT:test/static-test-splitting-uneven-nodes-dark.png[Job timings with static test splitting,role=icon-dark]
 
-[mermaid]
-----
-gantt
-      dateFormat X
-      axisFormat %s
-
-      section Node 0
-      Startup :n0s, 0, 2
-      Test A............... Test  B............. Test  C..... Test F........ :n0a, 2,  10
-
-      section Node 1
-      Startup :n2s, 0, 5
-      Test G ................... :n2a, 5, 10
-
-      section Node 2
-      Startup :n1s, 0, 3
-      Test D......................... Test E................ :n1a, 3, 10
-----
+.Dynamic test splitting with uneven node start times
+image::guides:ROOT:test/dynamic-test-splitting-uneven-nodes.png[Job timings with dynamic test splitting,role=icon-light]
+.Dynamic test splitting with uneven node start times
+image::guides:ROOT:test/dynamic-test-splitting-uneven-nodes-dark.png[Job timings with dynamic test splitting,role=icon-dark]
 
 == Prerequisites
 
