@@ -207,7 +207,7 @@ See the xref:orchestrate:workspaces.adoc[Using Workspaces] page for more informa
 
 Docker layer caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. CircleCI uses any unchanged layers on subsequent runs, rather than rebuilding the image each time.
 
-In the `.circle/config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+In the `.circleci/config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
 
 [,yaml]
 ----
@@ -475,7 +475,7 @@ See the xref:orchestrate:pipelines.adoc[Pipelines Overview] page for more inform
 
 For GitHub OAuth app and Bitbucket Cloud accounts, a _project_ in CircleCI is tied to, and shares the name of the associated code repository in your VCS.
 
-For GitHub App, GitLab SaaS and self-managed and Bitbucket Data Center users, a _project_ in CircleCI is standalone. You create and a project and then connect your code (stored in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
+For GitHub App, GitLab SaaS and self-managed and Bitbucket Data Center users, a _project_ in CircleCI is standalone. You create a project and then connect your code (stored in your GitHub, GitLab or Bitbucket Data Center repository) to that project.
 
 ****
 **Project names** must meet the following requirements:
@@ -498,10 +498,10 @@ Select *Projects* in the CircleCI web app sidebar to enter the projects dashboar
 .The projects dashboard in the CircleCI web app for a circleci organization
 image::guides:ROOT:projects-dashboard-circleci-org.png[Projects dashboard for a circleci organization]
 
-If you do not see the btn:[Create project] button you are in a `GitHub` or `bitbucket` organization. You can use the btn:[Set up] button to start building your project on CircleCI. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] page.
+If you do not see the btn:[Create project] button you are in a `GitHub` or `Bitbucket` organization. You can use the btn:[Set up] button to start building your project on CircleCI. For more information on organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] page.
 
 .The projects dashboard in the CircleCI web app for a GitHub or bitbucket organization
-image::guides:ROOT:projects-dashboard-set-up.png[Projects dashboard for a GitHub or bitbucket organization]
+image::guides:ROOT:projects-dashboard-set-up.png[Projects dashboard for a GitHub or Bitbucket organization]
 
 [#resource-class]
 == Resource class
