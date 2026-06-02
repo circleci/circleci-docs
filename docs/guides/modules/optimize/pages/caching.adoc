@@ -34,6 +34,28 @@ Caching is about achieving a balance between reliability and performance. Priori
 
 By default, cache storage duration is set to 15 days, which is the maximum. You can set a lower retention period on the link:https://app.circleci.com/[CircleCI web app] under menu:Plan[Usage Controls]. Shorter retention reduces storage costs when caches change frequently.
 
+To set a shorter retention period for a specific job, use the `retention` key in your `.circleci/config.yml`. Valid values range from `1d` to `15d`. Job-level retention overrides the organization default for caches produced by that job:
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    retention:
+      caches: 7d
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          paths:
+            - ~/.npm
+          key: node-v1-{{ checksum "package-lock.json" }}
+----
+
 When using self-hosted runners, cache network and storage usage counts against your plan. For more information, see the xref:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
 
 [#setting-up-caching]
