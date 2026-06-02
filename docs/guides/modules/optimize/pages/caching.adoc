@@ -123,7 +123,7 @@ We recommend verifying that your dependency installation step succeeds before in
 [#caching-race-conditions]
 === Race conditions in workflows
 
-Jobs in a workflow share caches. Because caches are immutable, the first job to write a key wins; subsequent writes of the same key are discarded without error.
+Jobs in a workflow share caches. Because caches are immutable, the first job to write a key wins. Subsequent writes of the same key are discarded without error.
 
 *Example 1:* Job1 and Job2 run in parallel and both write to the same key. Job3 depends on both and reads the cache. Job3 gets whichever cache was written first. The result is non-deterministic. Fix this by having Job1 and Job2 write to separate keys, or by enforcing a serial order: `Job1 -> Job2 -> Job3`.
 
