@@ -1,4 +1,3 @@
-
 = Caching dependencies
 :page-platform: Cloud, Server v4+
 :page-description: A guide to caching dependencies in CircleCI pipelines.
