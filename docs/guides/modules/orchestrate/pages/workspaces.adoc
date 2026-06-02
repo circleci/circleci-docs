@@ -122,6 +122,5 @@ It is important to define paths and files when using `persist_to_workspace`. Not
 * For conceptual and usage information on Workflows, see the xref:workflows.adoc[Using Workflows to Orchestrate Jobs] page.
 * xref:optimize:persist-data.adoc[Persisting Data]
 * xref:optimize:caching.adoc[Caching Dependencies]
-* xref:optimize:caching-strategy.adoc[Caching Strategies]
 * xref:optimize:artifacts.adoc[Artifacts]
 * xref:optimize:optimizations.adoc[Optimizations Overview]

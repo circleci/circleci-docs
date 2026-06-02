@@ -193,7 +193,7 @@ workflows:
             - build1
 ----
 
-For more information see the xref:optimize:caching.adoc[Caching Dependencies] and xref:optimize:caching-strategy.adoc[Caching Strategies] pages.
+For more information see the xref:optimize:caching.adoc[Caching Dependencies] page.
 
 [#workspaces]
 === Workspaces
