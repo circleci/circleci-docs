@@ -196,7 +196,7 @@ Trusted publishing from CircleCI self-hosted runners works.
 [#notes]
 == Notes
 
-* npm supports https://docs.npmjs.com/staged-publishing[staged publishing]. You can configure your trusted publisher to allow `npm stage publish` in addition to (or instead of) `npm publish`, which lets you stage a release for review before promoting it.
+* npm supports https://docs.npmjs.com/staged-publishing[staged publishing]. You can configure your trusted publisher to allow `npm stage publish` in addition to (or instead of) `npm publish`, which lets you stage a release for review before promoting it. Staged publishing requires npm CLI version 11.15.0 or later and Node version 22.14.0 or higher.
 * Pull requests from forks do not have access to CircleCI secrets, including OIDC tokens. A fork cannot trigger a publish.
 
 [#track-deployments-with-deploy-markers]
