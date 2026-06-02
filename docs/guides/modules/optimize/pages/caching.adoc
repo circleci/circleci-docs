@@ -4,7 +4,7 @@
 :page-description: A guide to caching dependencies in CircleCI pipelines.
 :experimental:
 
-Caching is one of the most effective ways to make jobs faster on CircleCI. By storing the results of expensive operations — typically dependency downloads — subsequent job runs can skip work they have already done.
+Caching is one of the most effective ways to make jobs faster on CircleCI. By storing the results of expensive operations, typically dependency downloads, subsequent job runs can skip work they have already done.
 
 .Caching Data Flow
 image::guides:ROOT:caching-dependencies-overview.png[caching data flow]
@@ -25,7 +25,7 @@ image::guides:ROOT:cache_deps.png[Caching Dependencies]
 
 Caches are *immutable on write*. Once a cache is written for a specific key, it cannot be overwritten. If a subsequent job produces the same key, the existing cache is reused and no new write occurs. Reuse without overwrite is expected: a key built from a checksum of your lock file produces the same key so long as the lock file has not changed.
 
-In the case of a *cache miss* — where no cache matches the key — the job still runs successfully. The job performs the full work rather than restoring from cache. Caching is always an optimization, never a requirement for correctness.
+In the case of a *cache miss*, where no cache matches the key, the job still runs successfully. The job performs the full work rather than restoring from cache. Caching is always an optimization, never a requirement for correctness.
 
 Caching is about achieving a balance between reliability and performance. Prioritize reliability: a corrupted build from stale dependencies costs more time than a fast build saves.
 
@@ -126,9 +126,9 @@ We recommend verifying that your dependency installation step succeeds before in
 
 Jobs in a workflow share caches. Because caches are immutable, the first job to write a key wins; subsequent writes of the same key are discarded without error.
 
-*Example 1:* Job1 and Job2 run in parallel and both write to the same key. Job3 depends on both and reads the cache. Job3 gets whichever cache was written first — the result is non-deterministic. Fix this by having Job1 and Job2 write to separate keys, or by enforcing a serial order: `Job1 -> Job2 -> Job3`.
+*Example 1:* Job1 and Job2 run in parallel and both write to the same key. Job3 depends on both and reads the cache. Job3 gets whichever cache was written first. The result is non-deterministic. Fix this by having Job1 and Job2 write to separate keys, or by enforcing a serial order: `Job1 -> Job2 -> Job3`.
 
-*Example 2:* `Job1 -> Job2`. Job2 reads the cache written by Job1. If Job2 starts before Job1 has finished saving, it may find no cache. The race condition is resolved by the explicit workflow dependency, but verify the dependency link is in place if you see intermittent misses on a dependent job.
+*Example 2:* `Job1` and `Job2` run concurrently. Job2 reads the cache written by Job1. If Job2 starts before Job1 has finished saving, it may find no cache. The race condition is resolved by the explicit workflow dependency so that Job2 waits for Job1 to finish: `Job1 -> Job2`.
 
 [#caching-and-open-source]
 === Caching and open source
@@ -147,7 +147,7 @@ The cache key determines when a new cache is written and which existing cache is
 [#key-templates]
 === Key templates
 
-A cache key can include *templates* — dynamic values evaluated at runtime and interpolated into the key string:
+A cache key can include *templates*, which are dynamic values evaluated at runtime and interpolated into the key string:
 
 [,shell]
 ----
@@ -239,13 +239,13 @@ The `v1-` prefix is a manual version number. Incrementing it (`v2-`) invalidates
 [#cache-download-not-installed]
 === Cache download caches, not installed environments
 
-The most reliable thing to cache is the *download cache* maintained by your package manager — the directory where it stores downloaded packages before installing them. The download cache differs from the installed environment (`node_modules`, `venv`, `vendor/bundle`).
+The most reliable thing to cache is the *download cache* maintained by your package manager, which is the directory where the package manager stores downloaded packages before installing them. The download cache differs from the installed environment (`node_modules`, `venv`, `vendor/bundle`).
 
 Download caches are safe to restore partially: the package manager re-resolves and installs correct versions from your manifest regardless of cached state. A stale partial restore means some packages are re-downloaded, but the install step corrects all discrepancies.
 
 Installed environments are only safe to restore partially when every dependency is pinned to an exact version in a lock file. Without version pinning, a package manager may leave stale versions in place rather than upgrading them.
 
-Generic tools not specific to your project — such as git or curl — belong in the Docker image, not in a cache. The CircleCI convenience images include common tooling for their respective languages. See xref:toolkit:examples-and-guides-overview.adoc[Language Guides and Demo Projects] for specifics.
+Generic tools not specific to your project, such as git or curl, belong in the Docker image, not in a cache. The CircleCI convenience images include common tooling for their respective languages. See xref:toolkit:examples-and-guides-overview.adoc[Language Guides and Demo Projects] for specifics.
 
 [#what-not-to-cache]
 === What not to cache
@@ -262,7 +262,7 @@ Some paths are commonly added to caches by mistake:
 
 CircleCI does not impose a cache size limit, but larger caches take longer to restore. The relevant measure is whether the time to download and expand a cache is less than the time to install dependencies from scratch.
 
-For most dependency caches (under 300 MB) restore time is well within that threshold. For large caches — Conda environments, large Gradle repositories, binary assets — it is worth measuring:
+For most dependency caches (under 300 MB) restore time is well within that threshold. For large caches, for example, Conda environments, large Gradle repositories, binary assets, it is worth measuring the following:
 
 * If your P50 restore time exceeds 15 seconds, time a cold install for comparison.
 * If the cache restore is comparable to or slower than a cold install, consider alternatives: a custom Docker image with dependencies pre-installed, or splitting one large cache into separate per-language caches.
@@ -272,7 +272,16 @@ The expansion step (decompression and file extraction) is typically the bottlene
 [#using-a-lock-file]
 === Using a lock file
 
-Lock files — `Gemfile.lock`, `package-lock.json`, `yarn.lock`, `Pipfile.lock`, `poetry.lock`, `uv.lock` — are the preferred checksum source for cache keys. They capture the exact resolved dependency tree. The cache key therefore changes only when your dependencies change, not when an unpinned version range resolves differently.
+Lock files are the preferred checksum source for cache keys, for example:
+
+* `Gemfile.lock`
+* `package-lock.json`
+* `yarn.lock`
+* `Pipfile.lock`
+* `poetry.lock`
+* `uv.lock`
+
+Lock files capture the exact resolved dependency tree. The cache key therefore changes only when your dependencies change, not when an unpinned version range resolves differently.
 
 For projects without a lock file, you can generate a deterministic checksum from the installed directory listing:
 
@@ -607,7 +616,7 @@ Broad fallback keys can cause one branch's cache to restore on another, producin
 [#multiple-caches-for-different-languages]
 === Multiple caches for different languages
 
-For projects with multiple dependency types — for example, both npm and pip — use separate cache keys for each. Each cache is smaller, so a miss on one type does not force a full re-download of all types.
+For projects with multiple dependency types, for example, both npm and pip, use separate cache keys for each. Each cache is smaller, so a miss on one type does not force a full re-download of all types.
 
 Split caches at the package manager boundary (npm, pip, Bundler). Each manager has its own storage format and upgrade semantics, so a miss on one type would otherwise invalidate all of them.
 
@@ -616,7 +625,7 @@ Split caches at the package manager boundary (npm, pip, Bundler). Each manager h
 
 Caching also applies to expensive compilation or asset generation steps, not just dependency downloads. Scala and Elixir compilation and Rails frontend asset pre-compilation are common examples where caching a build step output saves meaningful time.
 
-For compilation caches, use a key that reflects what determines the output — typically a checksum of source files or a version string — rather than a dependency manifest.
+For compilation caches, use a key that reflects what determines the output, for example, a checksum of source files or a version string, rather than a dependency manifest.
 
 Do not cache every step. Cache only where restore time is less than the time to regenerate the output.
 
@@ -662,7 +671,7 @@ If multiple parallel jobs write to the same cache key, only the first to complet
 [#prune-before-saving]
 === Prune unnecessary files before saving
 
-Dependency managers sometimes leave unnecessary files in their directories — documentation, type stubs, test fixtures. Tools like link:https://www.npmjs.com/package/node-prune[node-prune] can remove these before the `save_cache` step, reducing cache size and expansion time on restore.
+Dependency managers sometimes leave unnecessary files in their directories, for example, documentation, type stubs, test fixtures. Tools like link:https://www.npmjs.com/package/node-prune[node-prune] can remove these before the `save_cache` step, reducing cache size and expansion time on restore.
 
 If you prune files from a cached directory, ensure those files are not included in the checksum used for the cache key. A key mismatch between save and restore causes a miss on the next run.
 
@@ -686,7 +695,7 @@ CircleCI does not provide a way to delete individual caches directly. Use key ro
 [#clearing-cache]
 === Clearing cache
 
-Caches cannot be deleted directly. To force a fresh write, increment the version prefix in your cache key. Update the prefix in *both* `restore_cache` and `save_cache` steps — if only `restore_cache` is updated, the old key is never matched but the new cache is never written either.
+Caches cannot be deleted directly. To force a fresh write, increment the version prefix in your cache key. Update the prefix in *both* `restore_cache` and `save_cache` steps. If only `restore_cache` is updated, the old key is never matched but the new cache is never written either.
 
 [,yaml]
 ----
@@ -714,7 +723,7 @@ Do this when:
 * You remove dependencies and want to clear the stale packages from cached state.
 * A cache is corrupted and causing build failures.
 
-Incrementing the version creates a new cache going forward but does not delete the old one — old caches expire after your configured retention period. If you rebase commits that predate the key change, those jobs may write under the old key again.
+Incrementing the version creates a new cache going forward but does not delete the old one. Old caches expire after your configured retention period. If you rebase commits that predate the key change, those jobs may write under the old key again.
 
 NOTE: Use only `[a-zA-Z0-9-_]` characters in cache key prefixes. Special characters (`:`, `?`, `&`, `=`, `/`, `#`) may cause issues with your build.
 
