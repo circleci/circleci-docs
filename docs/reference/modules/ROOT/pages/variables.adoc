@@ -70,7 +70,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | `CIRCLE_NODE_INDEX`
 | GitHub, Bitbucket, GitLab
 | Integer
-| For jobs that run with parallelism enabled, this is the index of the current parallel run. The value ranges from 0 to (`CIRCLE_NODE_TOTAL` - 1)
+| For jobs that run with parallelism enabled, this is the index of the current parallel run. The value ranges from 0 to (`CIRCLE_NODE_TOTAL` - 1).
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -189,7 +189,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | `CIRCLE_TAG`
 | GitHub, Bitbucket, GitLab
 | String
-| The name of the git tag, if the current build is tagged. For more information, see the Git tag job execution section of the  xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Workflows] page.
+| The name of the git tag, if the current build is tagged. For more information, see the Git tag job execution section of the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Workflows] page.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
