@@ -586,6 +586,8 @@ jobs:
 [#caching-strategy-tradeoffs]
 == Caching strategy tradeoffs
 
+The right caching approach depends on your package manager, project structure, and how frequently dependencies change. The following patterns cover the most common decision points: when to use fallback keys, how to handle multiple dependency types, and when caching applies beyond dependency downloads.
+
 [#when-partial-caching-helps]
 === When partial caching helps vs. hurts
 
@@ -620,6 +622,8 @@ Do not cache every step. Cache only where restore time is less than the time to 
 
 [#optimizing-your-cache]
 == Optimizing your cache
+
+Once you have your caching set up, the next step is to make the caching strategy more efficient. The patterns outlined in this section will assist you to reduce storage costs, eliminate redundant uploads, and ensure caches are actually being hit.
 
 [#split-cache-keys-by-directory]
 === Split cache keys by directory
@@ -677,6 +681,8 @@ Switch to `{{ checksum "lockfile" }}`, which writes a new cache only when declar
 [#managing-caches]
 == Managing caches
 
+CircleCI does not provide a way to delete individual caches directly. Use key rotation to force a fresh cache write. You can inspect your cache size and storage usage from the jobs page.
+
 [#clearing-cache]
 === Clearing cache
 
@@ -719,6 +725,8 @@ The `restore_cache` step output on the CircleCI jobs page shows the restored cac
 
 [#advanced-patterns]
 == Advanced patterns
+
+The following pattern covers monorepos, where a single root lock file checksum may miss dependency changes across sub-packages.
 
 [#using-caching-in-monorepos]
 === Caching in monorepos
