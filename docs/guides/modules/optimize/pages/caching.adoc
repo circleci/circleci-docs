@@ -48,6 +48,10 @@ Add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
     steps:
       - save_cache:
           key: my-cache-{{ checksum "package-lock.json" }}
@@ -68,7 +72,12 @@ Add the `restore_cache` step *before* the dependency install step in your job, a
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
     steps:
+      - checkout
       - restore_cache:
           keys:
             - my-cache-{{ checksum "package-lock.json" }}
@@ -182,6 +191,11 @@ For most dependency caches, the recommended structure is:
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
       - restore_cache:
           keys:
             - v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
@@ -261,7 +275,12 @@ Bundler can reference system gems that are not explicitly specified, making part
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.3.11
     steps:
+      - checkout
       - restore_cache:
           keys:
             - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
@@ -285,7 +304,12 @@ Gradle repositories are designed to be centralized and additive. Libraries are f
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:21.0.11
     steps:
+      - checkout
       - restore_cache:
           keys:
             - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle" }}
@@ -309,7 +333,12 @@ Maven repositories are designed to be centralized and additive. Leiningen uses M
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:21.0.11
     steps:
+      - checkout
       - restore_cache:
           keys:
             - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
@@ -332,7 +361,12 @@ Caching `node_modules` directly is unreliable. It breaks when Node or npm versio
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
     steps:
+      - checkout
       - restore_cache:
           keys:
             - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
@@ -367,7 +401,12 @@ Cache the download cache at `~/.cache/pip`. Partial restoration is safe.
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
     steps:
+      - checkout
       - restore_cache:
           keys:
             - pip-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
@@ -389,7 +428,12 @@ Setting `PIPENV_VENV_IN_PROJECT=1` causes Pipenv to create the virtual environme
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
     steps:
+      - checkout
       - restore_cache:
           keys:
             - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
@@ -412,7 +456,12 @@ link:https://python-poetry.org/[Poetry] generates a `poetry.lock` file that pins
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
     steps:
+      - checkout
       - restore_cache:
           keys:
             - poetry-v1-{{ .Branch }}-{{ checksum "poetry.lock" }}
@@ -432,7 +481,12 @@ link:https://docs.astral.sh/uv/[`uv`] maintains its own download cache at `~/.ca
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
     steps:
+      - checkout
       - restore_cache:
           keys:
             - uv-cache-v1-{{ .Branch }}-{{ checksum "uv.lock" }}
@@ -463,7 +517,12 @@ NOTE: Yarn 2.x supports link:https://yarnpkg.com/features/zero-installs[Zero Ins
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
     steps:
+      - checkout
       - restore_cache:
           keys:
             - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
@@ -485,7 +544,12 @@ Two flags are important here:
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
     steps:
+      - checkout
       - restore_cache:
           keys:
             - yarn-packages-v1-{{ checksum "yarn.lock" }}
@@ -542,7 +606,12 @@ Avoid grouping unrelated directories under a single cache key. If any one direct
 
 [,yaml]
 ----
-# Avoid: unrelated directories tied to one key
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      # Avoid: unrelated directories tied to one key
       - save_cache:
           paths:
             - /mnt/ramdisk/node_modules
@@ -593,7 +662,13 @@ Caches cannot be deleted directly. To force a fresh write, increment the version
 
 [,yaml]
 ----
-# Increment v1 to v2 in both restore_cache and save_cache
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - checkout
+      # Increment v1 to v2 in both restore_cache and save_cache
       - restore_cache:
           keys:
             - v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
@@ -648,6 +723,10 @@ Then use the concatenated file as an additional checksum:
 
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
     steps:
       - checkout
       - create_concatenated_package_lock:
