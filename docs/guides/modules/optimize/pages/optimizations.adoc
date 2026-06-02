@@ -30,7 +30,7 @@ To persist data from a job and make it available to downstream jobs via the xref
 [#docker-image-choice]
 === Docker image choice
 
-Choosing the right Docker image for your project can have a huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
+Choosing the right Docker image for your project can have a huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline runs. If you choose or build an image with these dependencies and tools already installed, build time is reduced on every run. When configuring your projects and specifying images, consider the following options:
 
 * CircleCI provides a range of xref:execution-managed:circleci-images.adoc[convenience images], typically based on official Docker images, but with a range of useful language tools pre-installed.
 * You can create xref:execution-managed:custom-images.adoc[custom images], maximizing specificity for your projects. To help with this, we provide xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[guidance for building images manually].
@@ -61,7 +61,7 @@ Workflows provide a means to define a collection of jobs and their run order. If
 [#parallelism]
 === Parallelism
 
-If your project has a large test suite, you can configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file basis. You can also manually customize how tests are allocated.
+If your project has a large test suite, you can configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third-party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file basis. You can also manually customize how tests are allocated.
 
 * Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs.adoc[Parallelism and test splitting] page.
 * Refer to the xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests] how-to guide.
