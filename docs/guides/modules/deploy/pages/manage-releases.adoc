@@ -141,7 +141,7 @@ NOTE: You can use this action if you are using link:https://argoproj.github.io/a
 Use the btn:[Retry Rollout] action to retry a Rollout that has failed. For more information about this action, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
 
 .Retry Rollout button
-image::guides:ROOT:releases/retry-rollout.png[Screenshot showing the retry rollout button]
+image::guides:ROOT:releases/retry-rollout.png[Screenshot showing the retry Rollout button]
 
 [#retry-steps]
 === Steps
