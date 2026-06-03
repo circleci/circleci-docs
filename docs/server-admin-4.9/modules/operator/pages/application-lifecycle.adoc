@@ -1,9 +1,15 @@
-= Application lifecycle
+= Release cycle and versioning policy
 :page-platform: Server 4.9, Server Admin
 :page-description: Learn about CircleCI Server 4.9 semantic versioning and release schedules.
 :experimental:
 
-CircleCI is committed to supporting two minor versions of the software. This means a minor version will be released twice yearly and receive patches for up to 12 months. We use semantic versioning to help identify releases and their impact on your installation. Patch releases will continue to be monthly as needed.
+CircleCI supports the two most recent versions of CircleCI Server at any time, whether the release is a minor or major version bump. For example, if 4.9 is the current release and 5.0 ships next, then 5.0 and 4.9 become the supported pair.
+
+CircleCI targets a six-month release cadence, though the exact timing varies. When a version ships, the older of the two currently supported versions reaches end of life.
+
+For example: if 4.8 and 4.9 are the supported pair and 4.10 ships, then 4.8 reaches end of life. The supported pair becomes 4.9 and 4.10.
+
+We use semantic versioning to identify releases and communicate the impact on your installation. We publish patch releases each month as needed for bugs and security fixes.
 
 [#semantic-versioning]
 == Semantic versioning
@@ -17,13 +23,13 @@ Additional labels for pre-release and build metadata are available as extensions
 
 [#release-schedule]
 == Release schedule
-We release monthly patch fixes for bugs and security concerns. We will have twice yearly new minor (feature) releases. All releases will be posted to the change log. To stay up to date with the most recent releases, subscribe to the link:https://circleci.com/server/changelog/[change log].
+We release patch fixes for bugs and security concerns each month. We release minor and major (feature) versions twice a year. Subscribe to the link:https://circleci.com/server/changelog/[change log] to stay up to date.
 
 [#end-of-support]
 == End of support
-With each minor release, in accordance with our link:https://circleci.com/legal/terms-of-service/[terms of service], we end support for previous versions of server. The following table provides dates for previously released versions.
+With each minor or major release, in accordance with our link:https://circleci.com/legal/terms-of-service/[terms of service], we end support for previous versions of CircleCI Server. The following table provides dates for previously released versions.
 
-CAUTION: Future dates listed here may change at any time.
+CAUTION: These dates are subject to change.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
