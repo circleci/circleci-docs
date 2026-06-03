@@ -1,0 +1,59 @@
+---
+description: CircleCI scheduling best practices — prefer schedule triggers over scheduled workflows
+globs: .circleci/*.yml,.circleci/*.yaml
+alwaysApply: false
+---
+
+# CircleCI Scheduling: Use Schedule Triggers, Not Scheduled Workflows
+
+When adding scheduling to any CircleCI pipeline, always use **schedule triggers** — never the old `triggers:` key inside a workflow definition.
+
+## Two approaches exist — always pick schedule triggers
+
+### ❌ Old approach — scheduled workflow (do not use)
+
+```yaml
+workflows:
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only: main
+    jobs:
+      - build
+```
+
+This approach is limited: no restricted contexts, no dynamic config, no auto-cancel control, and the schedule can only be changed by editing config.yml.
+
+### ✅ New approach — schedule trigger (always use this)
+
+1. Write a standard workflow with no `triggers:` key (either in `config.yml` or a separate pipeline definition file like `.circleci/nightly.yml`):
+
+```yaml
+workflows:
+  nightly:
+    jobs:
+      - build
+```
+
+2. Set up the schedule in CircleCI Project Settings → Project Setup → Schedule + (or via the API).
+
+## When to use a separate pipeline definition file
+
+For pipelines that only ever run on a schedule (not on push), create a separate file like `.circleci/agent-docs-check.yml` instead of embedding in `config.yml`. Add this comment at the top:
+
+```yaml
+# Schedule this pipeline via CircleCI Project Settings → Project Setup → Schedule +
+```
+
+## Why schedule triggers are better
+
+- Can use restricted contexts (control the actor)
+- Works with dynamic configuration
+- Schedule is modified in the UI/API, not by committing to config
+- Auto-cancel and branch control work correctly
+- A single schedule can cover multiple workflows
+
+See: [Schedule Triggers docs](https://circleci.com/docs/schedule-triggers/) and the [Migration Guide](https://circleci.com/docs/migrate-scheduled-workflows-to-schedule-triggers/).
