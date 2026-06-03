@@ -24,7 +24,6 @@ Gen2 resource classes are available for the machine executor on CircleCI Cloud. 
 * Ubuntu 24.04
 * Ubuntu 26.04
 
-NOTE: Ubuntu 22.04 on gen2 has entered deprecation. We recommend using Ubuntu 26.04 for all new and existing gen2 workloads where possible.
 
 Gen2 resource classes are not available on CircleCI Server.
 
@@ -32,8 +31,6 @@ Gen2 resource classes are not available on CircleCI Server.
 == Tagging
 
 Set tags in your CircleCI configuration file when specifying the image to use. Tags we support for this image are as follows:
-
-- `default`: If you do not specify an image tag, you get this version.
 
 - `current`: CircleCI updates this tag every three months.
 
@@ -66,13 +63,13 @@ Current support status:
 | Support
 
 | Ubuntu 22.04 LTS
-| Deprecated; removal scheduled when Canonical ends support (2027)
+| Supported
 
 | Ubuntu 24.04 LTS
 | Supported
 
 | Ubuntu 26.04 LTS
-| Supported; `default`, `current`, and `edge` tags
+| Supported; `current` and `edge` tags
 |===
 --
 
@@ -92,7 +89,7 @@ Example: When Canonical ends support for Ubuntu 22.04 LTS (2027)
 | `current` and `edge` tags retained
 
 | Ubuntu 26.04 LTS
-| `default`, `current`, and `edge` tags retained
+| `current` and `edge` tags retained
 |===
 --
 
