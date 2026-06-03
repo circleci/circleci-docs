@@ -52,8 +52,8 @@ You can filter which notifications you receive based on build status. The "On de
 
 Available filters:
 
-* On default branch (any status)
-* On default branch (failed, error, unauthorized)
+* On default branch (any status).
+* On default branch (failed, error, unauthorized).
 * Failed
 * Succeeded
 * Cancelled
@@ -85,8 +85,8 @@ You can filter which notifications you receive based on build status. The "On de
 
 Available filters:
 
-* On default branch (any status)
-* On default branch (failed, error, unauthorized)
+* On default branch (any status).
+* On default branch (failed, error, unauthorized).
 * Failed
 * Succeeded
 * Cancelled
@@ -100,7 +100,12 @@ image::guides:ROOT:categories-followed-projects.png[Screenshot showing how to ch
 
 Chunk by CircleCI assists with CI/CD related tasks through a natural language chat interface and task scheduling. You can receive notifications when a teammate attempts to use Chunk. This allows you as an organization administrator to evaluate and enable Chunk for your organization.
 
-For a full guide to setting up and using Chunk, see the xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Overview and Setup] guide.
+Chunk also sends an email digest at 09:00 UTC every Monday summarizing your team's activity. The digest shows completed tasks, PRs opened, and failed tasks at a glance, plus a list of the most recent PRs awaiting your review. To disable the digest, select your avatar in the top right corner of the web app. Open **User Settings**, select **Notifications** from the sidebar, scroll to the **Chunk** section, and toggle off **Digest**.
+
+.Chunk notification settings
+image::guides:ROOT:chunk/chunk-notification-settings.png[Chunk notification settings on the Notifications page]
+
+For a full guide to setting up and using Chunk, including the email digest, see the xref:guides:toolkit:chunk-setup-and-overview.adoc#email-digest[Email Digest] section of the Chunk Overview and Setup guide.
 
 [badge="Beta"]
 == Slack notifications
