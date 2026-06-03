@@ -119,7 +119,7 @@ Upon selecting prepaid billing, your credit card will be charged immediately. Su
 
 You can follow these steps:
 
-. Select **Plan* in the web app.
+. Select **Plan** in the web app.
 . Select the **Manage** tab.
 . Select the pencil icon in the **Credits** section to edit your auto refill rate.
 

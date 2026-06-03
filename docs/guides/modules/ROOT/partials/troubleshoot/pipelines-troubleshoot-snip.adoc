@@ -34,7 +34,7 @@ After checking your `.circleci/config.yml` for formatting errors, search for you
 [#why-is-my-job-queued]
 === Why is my job queued?
 
-A job might end up being queued because of a concurrency limit being imposed due your organization's plan. If your jobs are queuing often, you can consider link:https://circleci.com/pricing/[upgrading your plan].
+A job might end up being queued because of a concurrency limit being imposed due to your organization's plan. If your jobs are queuing often, you can consider link:https://circleci.com/pricing/[upgrading your plan].
 
 [#why-are-my-jobs-queuing-performance-plan]
 === Why are my jobs queuing even though I'm on the Performance Plan?
