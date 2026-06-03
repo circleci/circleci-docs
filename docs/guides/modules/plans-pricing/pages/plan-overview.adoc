@@ -16,7 +16,7 @@ The right plan for you and your team will depend on several factors:
 - If you want access to different machine types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-Let's look at how a team might use credits. In this example, your team is divided into several groups working on different projects. Some projects are larger while others are smaller and need fewer resources from a CI/CD configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
+Consider how a team might use credits. In this example, your team is divided into several groups working on different projects. Some projects are larger while others are smaller and need fewer resources from a CI/CD configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
 
 For example, your team might:
 
