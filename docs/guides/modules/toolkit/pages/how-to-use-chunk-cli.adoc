@@ -108,7 +108,7 @@ The following flags are available:
 [badge="Preview"]
 == Validate in a Chunk sidecar
 
-CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Chunk sidecars let you validate your changes in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses.
 
@@ -186,7 +186,7 @@ For more details on managing Chunk sidecars, see the <<manage-sidecars>> section
 [badge="Preview"]
 == Manage Chunk sidecars
 
-CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Chunk sidecars are CircleCI Cloud environments where the `chunk` CLI validates your changes remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
 
