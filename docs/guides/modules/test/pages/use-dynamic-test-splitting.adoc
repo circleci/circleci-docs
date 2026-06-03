@@ -11,23 +11,27 @@
 Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
 ====
 
-Static test splitting pre-assigns each node a fixed set of tests upfront. Dynamic test splitting distributes tests across parallel nodes so they finish at the same time, adjusting each node's workload based on when that node is ready to run tests.
+Dynamic test splitting reduces overall pipeline time by distributing tests across parallel nodes so all nodes finish at the same time. Unlike static test splitting, which pre-assigns tests upfront, dynamic test splitting redistributes work to nodes that are ready. Dynamic test splitting prevents nodes from sitting idle while others finish late.
 
 == Is my project a good fit for dynamic test splitting?
 
-=== Fast test runner startup times
+This section outlines several project features that indicate your project is a good candidate for dynamic test splitting:
+
+=== Your test runner starts up quickly
+
+If your test runner startup time is short compared to the test runtime, the overhead of running multiple batches is negligible. This can make your project a good candidate for dynamic test splitting.
+
+For example, if your test runner takes ten seconds to start and your tests take 5 minutes to run, the overhead of running multiple batches is not significant. Conversely, if your test runner takes 2 minutes to start and your tests take just 3 minutes to run, the overhead of running multiple batches is significant.
 
 Static test splitting runs all tests in a single batch. Dynamic test splitting runs tests across multiple batches.
 
-If your test runner starts fast compared to the runtime of tests, the overhead of running multiple batches is negligible.
-
 === Nodes start at noticeably different times
+
+If your jobs have long container setup, dependency installation, or image pulls, each node's startup time can vary between runs. Your tests across nodes will start and finish at different times. Dynamic test splitting redistributes tests to nodes that are ready.
 
 Static test splitting pre-allocates tests to each node. Dynamic test splitting redistributes tests to nodes that are ready.
 
-If your jobs have long container setup, dependency installation, or image pulls, each node's startup time can vary between runs. Dynamic test splitting moves tests from slow nodes to fast nodes.
-
-=== JUnit test results
+=== Your job produces JUnit test results and you use the store test results step
 
 Static test splitting uses previous test results to preallocate tests to each node. Dynamic test splitting uses the same data to preallocate and redistribute tests.
 
@@ -62,6 +66,8 @@ Before enabling dynamic test splitting, ensure you have completed the xref:getti
 
 == 1. Enable dynamic test splitting option in your test-suites.yml file
 
+Add the `dynamic-test-splitting` option to your existing `test-suites.yml`. Keep the existing `discover` and `run` commands in place.
+
 [source,yaml]
 ----
 ---
@@ -94,7 +100,11 @@ The `testsuite` tooling will automatically find the `.circleci/test-suites.yml` 
 
 Commit `.circleci/test-suites.yml` to your feature branch and push to your VCS.
 
-Verify dynamic test splitting is working as expected in CI by looking at the "timings" tab in the UI.
+Verify dynamic test splitting is working as expected in CI by looking at the "timings" tab in the UI:
+
+. Navigate to your pipeline in the CircleCI web app and open the test job.
+. Open the **Timings** tab. Confirm that test distribution across nodes is more even than before enabling dynamic test splitting.
+. Check that no single node finishes significantly earlier or later than the others.
 
 == Next steps
 
