@@ -205,7 +205,6 @@
 ** Data
 *** xref:optimize:persist-data.adoc[Persisting data overview]
 *** xref:optimize:caching.adoc[Caching dependencies]
-*** xref:optimize:caching-strategy.adoc[Caching strategies]
 *** xref:optimize:artifacts.adoc[Store build artifacts]
 ** Speed
 *** xref:optimize:concurrency.adoc[Concurrency]
