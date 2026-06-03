@@ -72,7 +72,7 @@ For guidance on setting up and using an MCP server in Cursor, see the link:https
 
 Add this configuration to your Cursor MCP config file. You will need to supply your personal API token.
 
-NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
 
 [source,json]
 ----
@@ -96,7 +96,7 @@ For guidance on using an MCP server in Claude Desktop, see the link:https://mode
 
 Add the following configuration to your `claude_desktop_config.json` file. You can access `claude_desktop_config.json` from Claude desktop at menu:Claude[Settings > Developer > Edit Config]. You will need to supply your personal API token.
 
-NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
 
 [source,json]
 ----
@@ -125,7 +125,7 @@ After installing Claude Code, run the following command, substituting your Circl
 claude mcp add circleci-mcp-server -e CIRCLECI_TOKEN=your-circleci-token -e CIRCLECI_BASE_URL=https://circleci.com -- npx -y @circleci/mcp-server-circleci
 ----
 
-NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
 
 === VS Code
 
@@ -133,7 +133,7 @@ For guidance on setting up and using MCP servers in VS Code, see the link:https:
 
 Add this configuration to your VS Code settings in the location specified in the VS Code documentation. You will need to supply your personal API token.
 
-NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
 
 [source,json]
 ----
@@ -151,9 +151,9 @@ NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are 
 
 For guidance on setting up and using an MCP server in Windsurf, see the link:https://docs.windsurf.com/windsurf/mcp#model-context-protocol-mcp[Windsurf docs].
 
-You will need to add the following configuration to your Windsurf `mcp_config.json` file. You will need to supply your personal API token.
+Add the following configuration to your Windsurf `mcp_config.json` file. You will need to supply your personal API token.
 
-NOTE: The environment variable, `CIRCLECI_BASE_URL` is only required if you are using CircleCI server:
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
 
 [source,json]
 ----
@@ -234,7 +234,7 @@ This tool identifies unreliable tests in your CircleCI project by analyzing your
 ** Provide the project URL directly from CircleCI.
 ** Example: `Find flaky tests in https://app.circleci.com/pipelines/vcs/org/repo`
 
-* *Using Local Project Context*
+* *Using local project context*
 ** Works from your local workspace without manual searching.
 ** The server reads your Git remote information automatically.
 ** Example: `Find flaky tests in my current project`.
@@ -266,17 +266,17 @@ deployments to previous versions by either running your configured rollback pipe
 
 The tool provides:
 
-- Interactive rollback process with guided parameter collection.
-- Project resolution from either project slug or project ID.
-- Target environment selection.
-- Component version selection assistance.
-- Rollback pipeline execution or workflow rerun options.
-- Clear error handling and configuration guidance.
+* Interactive rollback process with guided parameter collection.
+* Project resolution from either project slug or project ID.
+* Target environment selection.
+* Component version selection assistance.
+* Rollback pipeline execution or workflow rerun options.
+* Clear error handling and configuration guidance.
 
 Prerequisites:
 
-- In order to trigger the rollback using a Rollback pipeline, the pipeline must be configured in the project. See the xref:deploy:set-up-rollbacks.adoc[Set up rollbacks] page for help.
-- Deploy markers should be set up for version tracking. See the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page for help.
+* In order to trigger the rollback using a Rollback pipeline, the pipeline must be configured in the project. See the xref:deploy:set-up-rollbacks.adoc[Set up rollbacks] page for help.
+* Deploy markers should be set up for version tracking. See the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page for help.
 
 == Real-world examples
 

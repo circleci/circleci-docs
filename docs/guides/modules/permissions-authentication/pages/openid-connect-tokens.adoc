@@ -71,8 +71,9 @@ The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (s
 Visit the https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_create_oidc.html[Creating OpenID Connect (OIDC) identity providers] page of the AWS docs and follow the instructions. Multiple setup options are available including using the management console or CLI.
 
 You will need to provide the following:
-** **OpenIDProvider URL**: Enter `\https://oidc.circleci.com/org/<your-organization-id>`, where `your-organization-id` is the ID of your CircleCI organization.
-** **Audience**: Enter your organization ID.
+
+* **OpenID Provider URL**: Enter `\https://oidc.circleci.com/org/<your-organization-id>`, where `your-organization-id` is the ID of your CircleCI organization.
+* **Audience**: Enter your organization ID.
 
 === 2. Assign a role to your identity provider
 

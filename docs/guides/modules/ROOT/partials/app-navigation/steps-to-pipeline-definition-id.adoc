@@ -1,0 +1,8 @@
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+
+. Select *Project Setup* from the menu, or if you are using Bitbucket Cloud, select *Pipelines* from the menu.
+. Locate the pipeline you want to find the definition ID for.
+. Select the btn:[Copy] icon next to the pipeline definition ID to copy it to your clipboard. If you are using Bitbucket Cloud, the user interface is different to the one shown in the image.
++
+.Pipeline definition ID on the Project Setup page
+image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[Get pipeline definition ID]

@@ -30,10 +30,10 @@ To persist data from a job and make it available to downstream jobs via the xref
 [#docker-image-choice]
 === Docker image choice
 
-Choosing the right Docker image for your project can have a huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
+Choosing the right Docker image for your project can have a huge impact on build time. For example, a basic language image requires downloading dependencies and tools on every pipeline run. An image with those dependencies pre-installed saves that time on every build run. When configuring your projects and specifying images, consider the following options:
 
-* CircleCI provides a range of xref:execution-managed:circleci-images.adoc[convenience images], typically based on official Docker images, but with a range of useful language tools pre-installed.
-* You can create xref:execution-managed:custom-images.adoc[custom images], maximizing specificity for your projects. To help with this, we provide xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[guidance for building images manually].
+* CircleCI provides a range of xref:execution-managed:circleci-images.adoc[Convenience Images], typically based on official Docker images, but with a range of useful language tools pre-installed.
+* You can create xref:execution-managed:custom-images.adoc[Custom Images], maximizing specificity for your projects. To help with this, we provide xref:execution-managed:custom-images.adoc#creating-a-custom-image-manually[Guidance for Building Images Manually].
 
 [#docker-layer-caching]
 === Docker layer caching
@@ -47,7 +47,7 @@ DLC is similar to _caching dependencies_ in that it _saves_ the image layers tha
 [#caching-dependencies]
 === Caching dependencies
 
-Caching should be one of the first things you consider when trying to optimize your jobs. If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
+Caching is one of the first optimizations to consider for your jobs. If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
 
 * Read more on the xref:caching.adoc[Caching Dependencies] page.
 
@@ -61,23 +61,23 @@ Workflows provide a means to define a collection of jobs and their run order. If
 [#parallelism]
 === Parallelism
 
-If your project has a large test suite, you can configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] together with either xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality], or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third party application or library] to split your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file basis. You can also manually customize how tests are allocated.
+If your project has a large test suite, configure your build to use xref:reference:ROOT:configuration-reference.adoc#parallelism[`parallelism`] with xref:parallelism-faster-jobs.adoc[CircleCI's test splitting functionality] or a xref:parallelism-faster-jobs.adoc#other-ways-to-split-tests[third party application or library]. This splits your tests across multiple machines. CircleCI supports automatic test allocation across machines/containers on a file basis. You can also manually customize how tests are allocated.
 
-* Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs.adoc[Parallelism and test splitting] page.
-* Refer to the xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests] how-to guide.
-* Follow the xref:test:test-splitting-tutorial.adoc[Test splitting tutorial].
+* Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] page.
+* Refer to the xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to Split Tests] how-to guide.
+* Follow the xref:test:test-splitting-tutorial.adoc[Test Splitting Tutorial].
 
 [#rerun-failed-tests]
 === Rerun failed tests
 
 Use the rerun failed tests feature to only rerun a subset of tests when a transient test failure arises, rather than rerunning the entire test suite.
 
-* For more information, see the xref:test:rerun-failed-tests.adoc[Rerun failed tests] page.
+* For more information, see the xref:test:rerun-failed-tests.adoc[Rerun Failed Tests] page.
 
 [#resource-class]
 === Resource class
 
-Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI cloud, see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[configuration reference]. For an equivalent list for CircleCI server installations, contact your system administrator.
+Using `resource_class`, it is possible to specify CPU and RAM resources for each job. For a full list of available resource class options for CircleCI Cloud, see the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Configuration Reference]. For an equivalent list for CircleCI Server installations, contact your system administrator.
 
 Examples of how to set a resource class:
 
@@ -171,7 +171,7 @@ NOTE: Open a link:https://support.circleci.com/hc/en-us/requests/new[Support tic
 --
 ====
 
-* Read more about resource classes on the xref:execution-managed:resource-class-overview.adoc[resource class overview] page.
+* Read more about resource classes on the xref:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
 
 [#configuration]
 == Optimize your configuration files
@@ -185,7 +185,7 @@ Use dynamic configuration to generate CircleCI config files dynamically, dependi
 * Pass pipeline parameter values and/or generate additional configuration.
 * Trigger separate config.yml configurations, which exist outside the default parent `.circleci/` directory.
 
-Read more about dynamic configuration on the xref:orchestrate:dynamic-config.adoc[Dynamic configuration] overview page.
+Read more about dynamic configuration on the xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] overview page.
 
 [#orbs]
 === Orbs
@@ -195,14 +195,14 @@ Orbs are reusable packages of parameterizable configuration that can be used in 
 * Simplify configuration (`.circleci/config.yml`)
 * Automate repeated processes
 * Accelerate project setup
-* Simplify integration with third-party tools
+* Simplify integration with third-party tools.
 
-Read more about orbs on the xref:orbs:use:orb-intro.adoc[Orbs overview] page.
+Read more about orbs on the xref:orbs:use:orb-intro.adoc[Orbs Overview] page.
 
 [#see-also]
 == See also
 
 * xref:persist-data.adoc[Persisting Data]
 * For a complete list of customizations, view the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
-* For information about how Yarn can potentially speed up builds and reduce errors, view the xref:caching.adoc#basic-example-of-dependency-caching[Caching Dependencies] page.
+* For information about how Yarn can potentially speed up builds and reduce errors, view the xref:caching.adoc#yarn-node[Caching Dependencies] page.
 * Coinbase published an article titled https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%].

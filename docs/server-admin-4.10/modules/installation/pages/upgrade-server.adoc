@@ -55,4 +55,6 @@ helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n $name
 
 . Deploy and run link:https://github.com/circleci/realitycheck[`reality check`] in your test environment to ensure your installation is fully operational.
 
+. If you have configured a custom workflow data retention period, re-apply it after upgrading. In server 4.10 the setting key changed from `:wfc-workflow-deletion-retention-period` to `:wfc-workflow-expired-delete-after-days`, and the existing value is *not* migrated automatically. If you leave the new key unset, workflow retention reverts to the default of 660 days. See the xref:operator:data-retention.adoc#setting-postgres-retention[Data Retention in Server] guide for the steps to set the new key.
+
 . Migrate any existing machine runner instances from the launch agent to the machine runner 3.0 agent, see the xref:guides:execution-runner:migrate-from-launch-agent-to-machine-runner-3-on-linux.adoc#[Migration Guide]. The launch agent is not supported.

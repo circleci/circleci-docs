@@ -10,7 +10,7 @@ This guide explains the concepts of user, organization, and integration in Circl
 
 When you log in to CircleCI you are logging in to your _user account_.
 
-You can log in to CircleCI using one of the following methods. These methods can not be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
+You can log in to CircleCI using one of the following methods. These methods cannot be used together. For example, if you have an email/password account and then use a social login, this will create a new account connected to your VCS provider:
 
 * Email and password.
 * Social login (GitHub, Bitbucket).
@@ -243,7 +243,7 @@ GitLab::
 
 *View*: Currently, there is no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings.
 
-*Disconnect*: Currently, there is no method to disconnect GitLab from your organization. You can delete projects that are connected to GitLab. and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
+*Disconnect*: Currently, there is no method to disconnect GitLab from your organization. You can delete projects that are connected to GitLab, and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
 --
 GitLab self-managed::
 +
@@ -701,7 +701,7 @@ A user key bypasses these limitations.
 
 The trade-off with choosing a user key is that user keys grant broad access based on your GitHub account's permissions. User keys are a bigger security risk if compromised.
 
-We recommend creating a dedicated "machine user" GitHub/Bitbucket account with minimal necessary permissions. THen add that machine user's key to CircleCI, rather than using your personal GitHub/Bitbucket account's key.
+We recommend creating a dedicated "machine user" GitHub/Bitbucket account with minimal necessary permissions. Then add that machine user's key to CircleCI, rather than using your personal GitHub/Bitbucket account's key.
 
 To create a user key, follow these steps:
 
@@ -857,7 +857,7 @@ The built-in environment variables available in a project depend on the pipeline
 
 == Controlling access via a machine user
 
-For fine-grained access to multiple repositories, it is best practice to create a non-human user for your CircleCI projects. For example , a link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[machine user] is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
+For fine-grained access to multiple repositories, it is best practice to create a non-human user for your CircleCI projects. For example, a link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[machine user] is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
 
 To use the SSH key of a machine user, follow the steps below.
 
@@ -906,7 +906,7 @@ The following steps guide you through migrating you organization as follows:
 . On the "Connect your code" page, select btn:[Connect] next to "GitHub".
 . You will be redirected to GitHub to install the CircleCI GitHub App into your GitHub organization.
 +
-NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration, as long as your original CirlceCI organization is not already connected to it.
+NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration, as long as your original CircleCI organization is not already connected to it.
 . Follow the instructions to create a project that is connected to one of your GitHub repositories.
 . If you are on a **paid** pricing plan:
 .. Navigate back to the organization that is connected to the GitHub OAuth app.

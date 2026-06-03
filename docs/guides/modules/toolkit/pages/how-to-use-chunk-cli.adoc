@@ -108,7 +108,7 @@ The following flags are available:
 [badge="Preview"]
 == Validate in a Chunk sidecar
 
-CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Chunk sidecars let you validate your changes in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses.
 
@@ -186,7 +186,7 @@ For more details on managing Chunk sidecars, see the <<manage-sidecars>> section
 [badge="Preview"]
 == Manage Chunk sidecars
 
-CAUTION: Chunk sidecars are available in preview if you are on a paid plan. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
 
 Chunk sidecars are CircleCI Cloud environments where the `chunk` CLI validates your changes remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
 
@@ -330,7 +330,7 @@ The `chunk skill install` command installs `chunk` CLI skills into your AI codin
 $ chunk skill install
 ----
 
-To see available skills and their current installation status run the following:
+To see available skills and their current installation status, run the following:
 
 [source,console]
 ----
@@ -369,7 +369,7 @@ Running `chunk init` adds hooks to `.claude/settings.json` that trigger `chunk v
 * **PreToolUse hook**: Blocks `git commit` if validation fails, preventing bad code from entering the repository.
 * **Stop hook**: Validates your changes when your Claude Code session ends, catching uncommitted changes.
 
-To add or update hooks without re-running the full initialization run the following:
+To add or update hooks without re-running the full initialization, run the following:
 
 [source,console]
 ----
@@ -379,14 +379,14 @@ $ chunk init --skip-validate
 [#view-config]
 == View and set configuration
 
-To display the fully resolved `chunk` CLI configuration for your project run the following:
+To display the fully resolved `chunk` CLI configuration for your project, run the following:
 
 [source,console]
 ----
 $ chunk config show
 ----
 
-To set a configuration value:
+To set a configuration value, run the following:
 
 [source,console]
 ----

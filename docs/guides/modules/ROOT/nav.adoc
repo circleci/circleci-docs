@@ -198,14 +198,14 @@
 *** xref:deploy:deploy-ios-applications.adoc[Deploy iOS applications]
 *** xref:deploy:deploy-over-ssh.adoc[Deploy over SSH]
 *** xref:deploy:publish-packages-to-packagecloud.adoc[Publish packages to Packagecloud]
-*** xref:deploy:deploy-to-npm-registry.adoc[Deploy to npm registry]
+*** xref:deploy:deploy-to-npm-registry.adoc[Publish to npm using OIDC trusted publishing]
+*** xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm with an authentication token]
 
 * Optimize
 ** xref:optimize:optimizations.adoc[Optimizations reference]
 ** Data
 *** xref:optimize:persist-data.adoc[Persisting data overview]
 *** xref:optimize:caching.adoc[Caching dependencies]
-*** xref:optimize:caching-strategy.adoc[Caching strategies]
 *** xref:optimize:artifacts.adoc[Store build artifacts]
 ** Speed
 *** xref:optimize:concurrency.adoc[Concurrency]

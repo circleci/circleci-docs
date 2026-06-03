@@ -6,7 +6,6 @@
 This page provides reference documentation for the CircleCI environment CLI, which is the CLI available in your CircleCI pipelines.
 
 == Introduction
-
 This reference guide covers some basic information about the CircleCI task-agent CLI, including:
 
 * Complete command reference - available commands and subcommands.
@@ -32,7 +31,7 @@ The CLI tool available in CircleCI pipelines. The root command is `circleci`.
 
 === Environment variables
 
-Use `env` to manage environment variables
+Use `env` to manage environment variables.
 
 ==== Substitution
 
@@ -111,7 +110,7 @@ A subcommand of `run`. The `circleci run release` commands allow you to manage y
 
 ==== Plan
 
-A subcommand of `release`. The `circleci run release plan` command is used to plan and identify a new deployment that will be referenced in the CircleCI UI. When a release is planned you can then update its status later in your pipeline to track progress of a deployment.
+A subcommand of `release`. The `circleci run release plan` command is used to plan and identify a new deployment that will be referenced in the CircleCI UI. When a release is planned, you can then update its status later in your pipeline to track progress of a deployment.
 
 A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 
@@ -280,7 +279,7 @@ A subcommand of `tests`. Use `circleci tests split` to split grouped tests into 
 | How to weight the split, allowed values are `name`, `filesize`, and `timings`.
 
 | `timings-type`
-| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose `classname` or `filename`) (default `autodetect`).
+| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect` (automatically choose `classname` or `filename`) (default `autodetect`).
 
 | `show-counts`
 | Print test file or test class counts to stderr (default `false`).
@@ -384,7 +383,7 @@ A subcommand of `tests`. The `circleci tests run` command splits and runs tests.
 | How to weight the split, allowed values are `name`, `filesize`, and `timings`.
 
 | `timings-type`
-| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect`(automatically choose classname or filename) (default `autodetect`).
+| Lookup historical timing data by: `classname`, `filename`, `testname` or `autodetect` (automatically choose `classname` or `filename`) (default `autodetect`).
 
 | `show-counts`
 | Print test file or test class counts to stderr (default `false`).
