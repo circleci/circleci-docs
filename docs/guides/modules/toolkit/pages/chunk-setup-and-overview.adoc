@@ -578,7 +578,6 @@ Select **Review tasks** in the digest email to open Chunk tasks that resulted in
 To disable the digest:
 
 include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
-. Navigate to your **User Settings** page.
 . Select **Notifications** from the sidebar.
 . Scroll to the Chunk section.
 . Toggle off **Digest**.
