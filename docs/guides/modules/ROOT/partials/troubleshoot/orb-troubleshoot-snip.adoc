@@ -25,7 +25,7 @@ To resolve this error, run `circleci config process` on your configuration and t
 
 You may not be an organization owner/admin.
 
-Organizations can only claim a single namespace. In order to claim a namespace for an organization the authenticating user must have owner/admin privileges within the organization.
+Organizations can only claim a single namespace. In order to claim a namespace for an organization, the authenticating user must have owner/admin privileges within the organization.
 
 If you do not have the required permission level you might see an error similar to below:
 

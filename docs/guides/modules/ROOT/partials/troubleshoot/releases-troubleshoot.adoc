@@ -63,7 +63,7 @@ If the token does **not** show up in the list, then it has been revoked or the v
 In either case, creating a new token and reinstalling the Release Agent with the new value solves the issue.
 
 [#restore-version-time-out]
-=== Why is `restore version` using Helm is timing out?
+=== Why does `restore version` time out when using Helm?
 
 The time required for a Helm-based _restore version_ to complete successfully is dependent on the specific configuration of the target component. For example, a large number of replicas will lead to a longer duration, which could cause a timeout. It is possible to specify a different timeout by adding the `circleci.com/operation-timeout` annotation to the Rollout or Deployment. The default value for this is 10 minutes. For steps, see the xref:guides:deploy:configure-your-kubernetes-components.adoc#operation-timeout[Configure Your Kubernetes Components] page.
 

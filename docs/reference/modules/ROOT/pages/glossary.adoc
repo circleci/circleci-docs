@@ -13,6 +13,7 @@ The first user to log into a private installation of CircleCI. Administrators ha
 
 A container is a running instance of an image.
 
+[#context]
 == Context
 
 xref:guides:security:contexts.adoc[Contexts] provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. After a context has been created, you can use the context key in the workflows section of a project `.circleci/config.yml` file to give any job(s) access to the environment variables associated with the context.
@@ -50,7 +51,7 @@ xref:guides:orchestrate:jobs-steps.adoc[Jobs] are collections of steps, which ru
 [#orbs]
 == Orbs
 
-xref:orbs:use:orb-concepts.adoc[Orbs] are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straight forward to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
+xref:orbs:use:orb-concepts.adoc[Orbs] are reusable snippets of code that help automate repeated processes, accelerate project setup, and make it straightforward to integrate with third-party tools. Visit the https://circleci.com/developer/orbs[Orbs Registry] on the CircleCI Developer Hub to search for orbs to help simplify your config.
 
 [#owner]
 == Owner

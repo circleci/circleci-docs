@@ -5,6 +5,7 @@
 
 Using the CircleCI release agent, you can integrate CircleCI with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
 
+.Architecture of CircleCI deploys
 image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
 
 == How it works
@@ -29,9 +30,9 @@ For progressive delivery, the release agent supports link:https://argoproj.githu
 
 To get started with the release agent, refer to the following guides:
 
-* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
-* xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
-* xref:manage-releases.adoc[How-to: Manage releases]
+* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent]
+* xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components]
+* xref:manage-releases.adoc[How-To: Manage Releases]
 
 [#known-limitations]
 == Known limitations
@@ -41,7 +42,7 @@ To get started with the release agent, refer to the following guides:
 +
 Depending on your setup, you will have options for configuring revision history limits: `revisionHistoryLimit` for Kubernetes and Argo Rollouts, and `$HELM_MAX_HISTORY` for Helm.
 +
-If you have these limits set, you can't restore a version outside these limits. For example, if your limit is set to the last 10 deployments, you can not restore the 11th deployment back.
+If you have these limits set, you cannot restore a version outside these limits. For example, if your limit is set to the last 10 deployments, you can not restore the 11th deployment back.
 +
 We are working on updates to:
 +
