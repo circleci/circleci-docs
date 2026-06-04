@@ -439,7 +439,7 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 [#scheduling-a-workflow]
 == Scheduling a workflow
 
-NOTE: For new scheduled pipelines, use xref:schedule-triggers.adoc[Schedule Triggers] instead of scheduled workflows. Schedule triggers offer improved control. Scheduled workflows are documented here for reference and for teams that cannot yet migrate to schedule triggers. See the xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to move to schedule triggers.
+IMPORTANT: For new scheduled pipelines, use xref:schedule-triggers.adoc[Schedule Triggers] instead of scheduled workflows. Schedule triggers offer improved control. Scheduled workflows are documented here for reference and for teams that cannot yet migrate to schedule triggers. See the xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to move to schedule triggers.
 
 Scheduled workflows allow you to run jobs at specific times rather than on every pipeline trigger. Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling is useful for resource-intensive jobs, nightly builds, or generating reports on a regular cadence, without triggering on every code change. A scheduled workflow runs on a schedule only. A scheduled workflow will **not** be run on commits to your code.
 
