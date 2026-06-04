@@ -31,7 +31,7 @@ When a brownout occurs, you have two options:
 
 === Option 1: Update your configuration (recommended)
 
-Update your link:/guides/execution-managed/resource-class-overview/[CircleCI config file] to use supported resource classes:
+Update your `.circleci/config.yml` to use supported resource classes:
 
 *For Docker executor:*
 
@@ -78,7 +78,7 @@ You must update your configurations before the EOL date.
 
 == Tips to minimize brownout impact
 
-*Review resource class usage*:: Audit your resource class specifications to ensure you use actively supported options. Consider whether your workloads might benefit from link:/guides/execution-managed/resource-class-overview/[newer, more efficient resource classes].
+*Review resource class usage*:: Audit your resource class specifications to ensure you use actively supported options. Consider whether your workloads might benefit from newer, more efficient resource classes by reviewing the xref:resource-class-overview.adoc[Resource Class Overview] page.
 
 *Update orbs*:: If you use CircleCI orbs, ensure you update them to current versions. Outdated orbs may specify deprecated resource classes internally.
 
