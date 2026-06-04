@@ -60,3 +60,8 @@ header [data-search-results-container] {
 .landing-page [data-page-navigation-toggle] {
   display: none;
 }
+
+/* Nav is after content in source order for agent readability; CSS restores visual left position */
+@media (width >= 75rem) {
+  [data-page-navigation] { order: -1; }
+}
