@@ -17,7 +17,7 @@ Complete all of the following before you begin. Do not scale anything down until
 * You have `kubectl` access to the Kubernetes cluster where CircleCI Server is installed.
 * You are able to modify your `values.yaml` file and run `helm upgrade`.
 * The target namespace does not enforce Pod Security `restricted` admission. The upgrade Job runs as root (UID 0).
-* The cluster has network access to the PostgreSQL 14 image (`14.22.x`) in your Azure Container Registry (ACR).
+* The cluster has network access to the PostgreSQL 14 image (`14.22.x`).
 * You have a tested backup. A volume snapshot is your only rollback path. Confirm you can snapshot the PostgreSQL persistent volume claim (PVC) while it is detached, and restore that snapshot to a new PVC. For more information, see the xref:operator:backup-and-restore.adoc#[Backup and Restore] guide.
 
 Verify the following details, which you need during the upgrade. Replace `<namespace>`, `<secret-name>`, and `<pvc-name>` with your own values.
