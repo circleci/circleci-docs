@@ -86,7 +86,7 @@ display:
 Most orbs will contain at least a single command. Commands are used to execute shell commands and special CircleCI steps automatically on the user's behalf. In less common situations, for instance, if a tool _requires_ the use of a particular Docker container, an orb may not contain commands and only provide jobs.
 
 [#use-the-minimal-number-of-steps-required]
-==== Use the minimal number of steps required.
+==== Use the minimal number of steps required
 
 When writing a xref:reference:ROOT:reusing-config.adoc#authoring-reusable-commands[Reusable Command] for your orb, you may input any number of xref:reference:ROOT:configuration-reference.adoc#steps[steps]. Each step should be properly named as it will appear in the user's UI. To limit the amount of "noise" in the UI, attempt to use as few steps as possible.
 
@@ -247,7 +247,7 @@ Be sure to name your usage examples so they reflect the use-case they demonstrat
 --
 
 [#all-public-orbs-should-contain-at-least-one-usage-example]
-==== All public orbs should contain at least one usage example.
+==== All public orbs should contain at least one usage example
 
 Orbs intended for consumption by other organizations should include at least one usage example, with a description.
 
