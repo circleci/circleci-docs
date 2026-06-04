@@ -33,7 +33,7 @@ include::guides:ROOT:partial$orbs/orb-type-comparison.adoc[]
 
 == Use a registry orb
 
-A registry orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name is followed by an `@` symbol and a xref:use:orb-concepts.adoc#semantic-versioning[Semantic Version] string, to identify which version of the orb to used. For example: `<namespace>/<orb-name>@1.2.3`.
+A registry orb is identified by its _slug_ which contains the _namespace_, and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name is followed by an `@` symbol and a xref:use:orb-concepts.adoc#semantic-versioning[Semantic Version] string, to identify which version of the orb is being used. For example: `<namespace>/<orb-name>@1.2.3`.
 
 Each orb within the link:https://circleci.com/developer/orbs[Registry] provides a link:https://circleci.com/developer/orbs/orb/circleci/node#quick-start[Quickstart Guide], which contains a sample code snippet for importing that specific orb, with its most recent version, into your CircleCI configuration file.
 
@@ -67,7 +67,7 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can include jobs, commands, and executors. The parameters available for each element are listed in the orb registry in a table under each element.
 
-Most orbs include usage examples detailing common functionality. If you would like to contribute to an existing orb, or file an issue on the orb's repository, most orb authors include the git repository link.
+Most orbs include usage examples detailing common functionality. If you would like to contribute to an existing orb, or file an issue on the orb's repository, most orb authors include the Git repository link.
 
 Orb elements can be used in the same way as xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] elements. The Node example below shows how to use an orb's default executor, and an orb command.
 
@@ -77,7 +77,7 @@ The Node orb provides a command, link:https://circleci.com/developer/orbs/orb/ci
 * Automatically enable caching.
 * Provide additional options through the use of parameters.
 
-To use the `install-packages` command, reference it in a step as follows:.
+To use the `install-packages` command, reference it in a step as follows:
 
 .Using the `install-packages` command in a steps
 [,yaml]
@@ -122,7 +122,7 @@ See the xref:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow Lists] gu
 
 Inline orbs are defined directly in your CircleCI configuration file using the `orbs` stanza. Inline orbs group together commands, jobs and executors that are specific to a single project. The following example shows how to define an inline orb:
 
-.Example showing the use of an inline orb names my-orb
+.Example showing the use of an inline orb named my-orb
 [,yaml]
 ----
 version: 2.1
@@ -160,7 +160,7 @@ NOTE: Inline orbs can be converted to URL orbs or registry orbs later if you nee
 [#benefits-of-using-orbs]
 == Benefits of using orbs
 
-Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows the a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the link:https://circleci.com/developer/orbs/orb/circleci/node[`circleci/node`] orb). In the second tab is the configuration required when not using the orb (defining a job with the required steps for testing the application).
+Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows a typical configuration for testing a Node.js application using the Node.JS orb (using the `test` job provided by the link:https://circleci.com/developer/orbs/orb/circleci/node[`circleci/node`] orb). In the second tab is the configuration required when not using the orb (defining a job with the required steps for testing the application).
 
 Orbs let you pull in predefined, parameterized configuration elements into your project configuration. Taking it a step further, authoring your own orb lets you define parameterized configuration elements once and utilize them across multiple similar projects.
 
