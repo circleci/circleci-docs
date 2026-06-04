@@ -1,0 +1,79 @@
+= Upgrade PostgreSQL
+:page-platform: Server 4.10, Server Admin
+:page-description: Learn how to upgrade the internal PostgreSQL database from version 12 to 14 in an installation of CircleCI Server 4.10.
+:experimental:
+
+PostgreSQL is a database service used by CircleCI Server. Server 4.10 ships PostgreSQL `14` so customers must upgrade to Postgres 14 before upgrading to Server 4.10. This page describes how to upgrade the internal PostgreSQL instance from version `12` to `14`.
+
+This is an in-place major-version upgrade that uses `pg_upgrade` to migrate the on-disk data format. The upgrade requires downtime, typically 30 to 60 minutes depending on your database size and storage performance.
+
+[#prerequisites]
+== Prerequisites
+
+* You have a recent backup. The upgrade does not take one for you. Snapshot the PostgreSQL persistent volume claim (PVC) or pre-provision a clone before you begin. For more information, see the xref:operator:backup-and-restore.adoc#[Backup and Restore] guide.
+* You have `kubectl` access to the Kubernetes cluster where CircleCI Server is installed.
+* You are able to modify your `values.yaml` file and run `helm upgrade`.
+* Your PostgreSQL password, or the secret that holds it, is available.
+* The target namespace does not enforce Pod Security `restricted` admission. The upgrade Job runs as root (UID 0).
+* The cluster has network access to the PostgreSQL 14 image in your Azure Container Registry (ACR).
+
+CAUTION: A major-version upgrade cannot be rolled back in place. If anything goes wrong, you must restore from your backup.
+
+[#scripted-upgrade]
+== Scripted upgrade
+
+CircleCI provides a shell script that performs the PostgreSQL upgrade for you. The script discovers your PVC, password secret, and source encoding and locale. It then scales the PostgreSQL StatefulSet to zero, applies a `pg_upgrade` Kubernetes Job, and streams the Job logs. You can find the script link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-postgres-to-14[in the server-scripts repository].
+
+. Take a backup of your PostgreSQL data. Snapshot the PostgreSQL PVC or provision a clone. The script does not back up your data.
+
+. Scale the application layer to zero. The script verifies that all `layer=application` workloads are stopped before it proceeds. Replace `<namespace>` with the namespace where CircleCI Server is installed.
++
+[source,console]
+----
+$ kubectl -n <namespace> scale deploy -l layer=application --replicas=0
+----
+
+. Run the upgrade script against your namespace.
++
+[source,console]
+----
+$ ./upgrade-postgres-to-14.sh -n <namespace>
+----
++
+TIP: Add the `--dry-run` flag to preview the Job manifest without applying it, or the `-y` (`--yes`) flag to skip the confirmation prompts.
+
+. When the script completes successfully, it prints a `postgresql` image block. Add it to your `values.yaml` file.
++
+[source,yaml]
+----
+postgresql:
+  image:
+    registry: cciserver.azurecr.io
+    repository: circleci/server-postgres
+    tag: 14.22.4094-4922444
+----
++
+NOTE: Use the exact tag emitted by the script for your Server release rather than copying the example tag above.
+
+. Run `helm upgrade` to bring PostgreSQL back up on the new image and restore your application-layer replicas.
++
+[source,shell,subs=attributes+]
+----
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version {serverversion410} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+----
+
+. Validate the upgrade. A `pg_upgrade` migration does not carry optimizer statistics across, so rebuild them after the upgrade.
++
+[source,console]
+----
+$ kubectl -n <namespace> exec postgresql-0 -- vacuumdb --all --analyze-in-stages
+----
+
+. After 24 hours or more of healthy operation, clean up. Remove the old `data-12.preupgrade` directory from the PVC, and delete the backup PVC if you no longer need it.
+
+[#troubleshooting]
+== Troubleshooting
+
+* *Locale or encoding mismatch.* `pg_upgrade` aborts during its consistency checks if the source and target settings differ. Verify your source encoding and locale before you run the script.
+* *Missing extensions.* Every extension present in your PostgreSQL 12 database must also exist in the PostgreSQL 14 image, or the upgrade fails.
+* *PostgreSQL will not restart during auto-discovery.* If the script cannot read the source encoding and locale, supply them explicitly with the `--initdb-*` flags.
