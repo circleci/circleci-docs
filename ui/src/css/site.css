@@ -65,9 +65,3 @@ header [data-search-results-container] {
 @media (width >= 75rem) {
   [data-page-navigation] { order: -1; }
 }
-
-/* Prevent off-screen mobile nav from intercepting pointer events on the page beneath it */
-@media (width < 75rem) {
-  [data-page-navigation] { pointer-events: none; }
-  [data-page-navigation].translate-x-0 { pointer-events: auto; }
-}
