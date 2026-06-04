@@ -13,37 +13,47 @@ This document outlines the CircleCI Linux VM (machine) image release, update, an
 
 The CircleCI Linux VM images are all based on Ubuntu. We support both ARM64 and AMD64 architectures.
 
-We aim to maintain, support, and release the two most recent LTS versions of Ubuntu.
+We aim to maintain and support Ubuntu LTS versions in line with Canonical's support lifecycle.
+
+[#gen2-support]
+== Gen2 support
+
+Gen2 resource classes are available for the machine executor on CircleCI Cloud. The gen2 support policy covers the following Ubuntu LTS versions:
+
+* Ubuntu 22.04
+* Ubuntu 24.04
+* Ubuntu 26.04
+
+
+Gen2 resource classes are not available on CircleCI Server.
 
 [#tagging]
 == Tagging
 
-Tags are configured when specifying the image you want to use in your CircleCI configuration file. Tags we support for this image are as follows:
+Set tags in your CircleCI configuration file when specifying the image to use. Tags we support for this image are as follows:
 
-- `default`: You will receive this version if you do not specify an image tag.
+- `current`: CircleCI updates this tag every three months.
 
-- `current`: Receives updates approximately every three months.
+- `edge`: Use `edge` for previews of new releases that point to this tag initially. Edge tags may include incremental updates to the current (every 3 months) image release, which may change without notice. Do not use `edge` for production CI workloads. CircleCI updates `current` with these changes after a period of stability.
 
-- `edge`: Reserved for previews of new releases, which will initially point to this tag. The edge tags may include incremental updates to the current quarterly (every 3 months) image release, which may change without notice, and are not recommended to be used for production CI workloads. `current` will be updated with these changes after a period of stability.
-
-We always aim to release a version of this image every three months. Tags will be supported on all versions we support.
+We always aim to release a version of this image every three months. We provide these tags on all versions we support.
 
 [#critical-cve-patches]
 == Critical CVE patches
 
-When critical CVEs are disclosed around the operating system or software stack of this image, we will investigate the impact this has on the image within the CircleCI execution environment. If customers are impacted by these CVEs we will push a patch fix to the released image(s). This image will supersede the original image.
+When vendors disclose critical CVEs around the operating system or software stack of this image, we investigate the impact on the image within the CircleCI execution environment. If these CVEs affect customers, we push a patch fix to the released image(s). This new image supersedes the original.
 
 [#bug-reports-issues-and-prs]
 == Bug reports, issues, and PRs
 
-You can file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the Linux VM images. Our support team will be able to escalate issues internally to the correct engineering team and provide updates on the issue.
+You can file a link:https://support.circleci.com/hc/en-us/requests/new[support ticket] with CircleCI Support for any issues or bugs found with the Linux VM images. Our support team can escalate issues internally to the correct engineering team and provide updates on the issue.
 
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-Image Lifespan will generally follow the support status of Ubuntu by Canonical. Once a new Ubuntu LTS is released, we will begin the deprecation process of the oldest version that we support and schedule it to be removed. This allows us to maintain our aim of two LTS Ubuntu versions effectively.
+Image lifespan follows Canonical's Ubuntu LTS support lifecycle. Canonical provides link:https://ubuntu.com/about/release-cycle[5 years of standard security maintenance] for each LTS release. When Canonical ends support for an Ubuntu LTS version, we begin the deprecation and removal process for the corresponding CircleCI image. Deprecation ties to Canonical's EOL dates, so it does not always align with a new Ubuntu LTS release.
 
-Current Deprecation (Jan 2024):
+Current support status:
 
 [.table-scroll]
 --
@@ -51,15 +61,19 @@ Current Deprecation (Jan 2024):
 |===
 | Version
 | Support
-
-| Ubuntu 20.04 LTS
 
 | Ubuntu 22.04 LTS
+| Supported
+
+| Ubuntu 24.04 LTS
+| Supported
+
+| Ubuntu 26.04 LTS
+| Supported; `current` and `edge` tags
 |===
 --
 
-
-Example: When Ubuntu 24.04 LTS is released
+Example: When Canonical ends support for Ubuntu 22.04 LTS (2027)
 
 [.table-scroll]
 --
@@ -68,22 +82,22 @@ Example: When Ubuntu 24.04 LTS is released
 | Version
 | Support
 
-| Ubuntu 20.04 LTS
+| Ubuntu 22.04 LTS
 | Deprecated and removed entirely
-
-| Ubuntu 22.04 LTS
-| `current` and `edge` tags retained
 
 | Ubuntu 24.04 LTS
 | `current` and `edge` tags retained
+
+| Ubuntu 26.04 LTS
+| `current` and `edge` tags retained
 |===
 --
 
-When an image is selected for deprecation and removal, we will create an announcement on our Discuss forum, along with additional outreach where possible.
+When we select an image for deprecation and removal, we post an announcement on our Discuss forum, along with additional outreach where possible.
 
-We will also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we will aim to start an EOL process within 3 months of a new version release.
+We also plan brownouts to ensure users are aware of the approaching removal of deprecated images. Generally, we aim to start an EOL process within 3 months of Canonical's EOL date for the affected version.
 
 [#exceptions]
 == Exceptions
 
-​​At any time, we reserve the right to work outside of the information in this document if the circumstances require. In the event that we are required to make an exception to the policy, we will aim to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our Discuss Forum, along with additional outreach, such as an email notice, where possible.
+At any time, we reserve the right to work outside of the information in this document if the circumstances require. If we need to make an exception to the policy, we aim to provide as much notice and clarity as possible. In these cases, we post an announcement on our Discuss Forum. We also provide additional outreach such as an email notice where possible.

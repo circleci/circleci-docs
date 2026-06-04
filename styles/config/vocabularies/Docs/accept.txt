@@ -75,6 +75,7 @@ Buildah
 Buildkite
 Buildx
 Bundler
+[Cc]anonical(?:'s)?
 Capistrano
 Certbot
 Cest
