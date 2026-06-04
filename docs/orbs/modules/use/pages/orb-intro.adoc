@@ -79,7 +79,7 @@ The Node orb provides a command, link:https://circleci.com/developer/orbs/orb/ci
 
 To use the `install-packages` command, reference it in a step as follows:
 
-.Using the `install-packages` command in a steps
+.Using the `install-packages` command in a step
 [,yaml]
 ----
 version: 2.1
