@@ -107,7 +107,7 @@ circleci local execute orb-tools/pack
 
 One of the major benefits of using the orb development kit is the ability to xref:use:orb-concepts.adoc#file-include-syntax[import external Bash scripts] into your final orb. Because you can keep your Bash scripts in the link:https://github.com/CircleCI-Public/Orb-Template/tree/main/src/scripts[src/scripts] directory, you can run additional tests against your scripts.
 
-The most basic tests to run against Bash scripts are a form of validation: "shellchecking". Shellchecking is similar to a linter for Bash. Find out more at https://www.shellcheck.net/[shellcheck.net].
+The most basic tests to run against Bash scripts are a form of validation called ShellCheck. ShellCheck is similar to a linter for Bash. Find out more at https://www.shellcheck.net/[shellcheck.net].
 
 In the `lint-pack` workflow, you will find the link:https://circleci.com/developer/orbs/orb/circleci/shellcheck[ShellCheck orb] is included. The ShellCheck orb steps are completely optional and can be removed, especially if your orb does not require scripts to be imported.
 
@@ -131,7 +131,7 @@ circleci local execute shellcheck/check
 [#review]
 === Review
 
-The orb-tools orb includes a job `orb-tools/review` which will run a suite of tests against your orb designed to find opportunities to implement best practices and improve the quality of the orb. The "review" job was modeled closely after _ShellCheck_, and operates based on a list of rules called "RC" Review Checks. Each "RC" code corresponds to a specific rule, which can optionally be ignored using the `exclude` parameter in your `config.yaml` file.
+The orb-tools orb includes a job `orb-tools/review` which will run a suite of tests against your orb designed to find opportunities to implement best practices and improve the quality of the orb. The "review" job was modeled closely after _ShellCheck_, and operates based on a list of rules called "RC" Review Checks. Each "RC" code corresponds to a specific rule, which can optionally be ignored using the `exclude` parameter in your `config.yml` file.
 
 [,yaml]
 ----
@@ -202,7 +202,7 @@ Want to see how CircleCI writes unit tests for Bash? Check out our link:https://
 [#integration-testing]
 == Integration testing
 
-After validating, linting, shellchecking, and any other testing that you can perform on the source code is complete, you must test your orb's functionality in a real CircleCI config. In the second config file (`test-deploy.yml`), you can access the development version of the orb you published in the first config, and attempt to execute your orbs commands and jobs.
+After validating, linting, running ShellCheck, and any other testing that you can perform on the source code is complete, you must test your orb's functionality in a real CircleCI config. In the second config file (`test-deploy.yml`), you can access the development version of the orb you published in the first config, and attempt to execute your orbs commands and jobs.
 
 [#testing-orb-commands]
 === Testing orb commands
