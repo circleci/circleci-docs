@@ -31,7 +31,7 @@ video::5ta4RUwqOBI[youtube]
 == Prerequisites
 
 * A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI] page for steps to get set up.
-* Follow the CircleCI CLI xref:guides:toolkit:local-cli.adoc#installation[Installation] guide on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
+* Follow the CircleCI CLI xref:guides:toolkit:local-cli.adoc#installation[Installation] guide on your local machine, with a link:https://app.circleci.com/settings/user/tokens[personal access token]. Ensure you are using the latest version of the CircleCI CLI. You must be using version `v0.1.17087` or later.
 +
 ```shell
 circleci update
@@ -405,7 +405,7 @@ This way, you can both mock and test your scripts locally.
 
 Much like any software, to ensure quality updates, we must test our changes. Various tools are available for testing your orb, from simple validation, to unit and integration testing.
 
-In the `.circleci/` directory created by the orb development kit, you will find a `config.yml` file and a `test-deploy.yml` file. You will find in the `config.yml` file, the different static testing methods we apply to orbs, such as linting, shellchecking, reviewing, validating, and in some cases, unit testing. While, the `test-deploy.yml` config file is used to test a development version of the orb for integration testing.
+In the `.circleci/` directory created by the orb development kit, you will find a `config.yml` file and a `test-deploy.yml` file. In the `config.yml` file, you will find the different static testing methods we apply to orbs, such as linting, shellchecking, reviewing, validating, and in some cases, unit testing. The `test-deploy.yml` config file is used to test a development version of the orb for integration testing.
 
 Read our full xref:testing-orbs.adoc[Orb Testing Methodologies] documentation.
 
@@ -439,13 +439,13 @@ The included `config.yml` and `test-deploy.yml` files in the `./circleci` direct
 . *Ensure all tests pass.*
 +
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline in the CircleCI web app.
-Notice there are two workflows, `lint-pack` will run first and contains our linting, ShellCheck, review, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready.
+Notice there are two workflows. `lint-pack` will run first and contains our linting, ShellCheck, and review steps, and will publish a development version to be tested in the second workflow. The `test-deploy` workflow contains our integration tests, and can publish the production version of our orb when ready.
 +
 .Orb test results as reported by GitHub Checks API on pull request
 image::guides:ROOT:orbtools-11-checks.png[Orb test results as reported by GitHub Checks API on pull request]
 . *"Squash" Merge.*
 +
-When your changes are complete, we recommend (not required) link:https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits[Squash Merging] your changes into a single commit, with a link:https://www.conventionalcommits.org/[Conventional Commit Message].
+When your changes are complete, we recommend link:https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-pull-request-commits[Squash Merging] your changes into a single commit, with a link:https://www.conventionalcommits.org/[Conventional Commit Message], though this is not required.
 +
 Examples:
 ** `fix: x-command parameter from string to integer`
