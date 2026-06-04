@@ -32,7 +32,7 @@ Registry orb authors *automatically agree* to the CircleCI link:https://circleci
 
 We recommend using our <<orb-development-kit>> to create a registry orb. A full guide is available in the xref:create-test-and-publish-a-registry-orb.adoc[Create, Test, and Publish a Registry Orb] guide.
 
-Alternatively, as orbs are packages of xref:reference:ROOT:reusing-config.adoc[Reusable Configuration], they can be written manually too, as singular `yaml` files, and published using our xref:guides:toolkit:local-cli.adoc#installation[CircleCI Orb CLI]. For a guide, see the  xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] page.
+Alternatively, as orbs are packages of xref:reference:ROOT:reusing-config.adoc[Reusable Configuration], they can be written manually as singular `yaml` files and published using our xref:guides:toolkit:local-cli.adoc#installation[CircleCI Orb CLI]. For a guide, see the  xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] page.
 
 == Getting started with creating a URL orb
 
@@ -148,8 +148,8 @@ You can categorize your orb for better discoverability in the link:https://circl
 [#listing-categories]
 ==== Listing categories
 
-.Example of showing listing categories using the CLI
-image::guides:ROOT:orb-categories-list-categories.png[Example of showing listing categories using the CLI]
+.Example of listing categories using the CLI
+image::guides:ROOT:orb-categories-list-categories.png[Example of listing categories using the CLI]
 
 You can select up to two categories for your orb. These are the available categories:
 
