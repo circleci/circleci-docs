@@ -184,7 +184,7 @@ By default, created namespaces appear as "community" namespaces in the link:http
 
 Registry orbs use the link:https://semver.org/[SemVer] release process, in which each orb update follows a standardized versioning pattern that orb authors and users should take advantage of.
 
-In Semantic versioning, release versions are represented by three integers separated by a `.`, where each integer represents a different type of change being added.
+In semantic versioning, release versions are represented by three integers separated by a `.`, where each integer represents a different type of change being added.
 
 [,shell]
 ----
@@ -287,7 +287,7 @@ Private registry orbs are described in more detail below.
 [#private-orbs]
 === Private registry orbs
 
-An unlimited amount of private registry orbs are available on all of CircleCI's link:https://circleci.com/pricing[plans]. Using a private registry orb enables you to author an orb while ensuring the following:
+An unlimited number of private registry orbs are available on all of CircleCI's link:https://circleci.com/pricing[plans]. Using a private registry orb enables you to author an orb while ensuring the following:
 
 * Your orb will not appear in the link:https://circleci.com/developer/orbs[CircleCI Orb Registry] unless you have the direct URL and are authenticated with the org that created it.
 * Your orb cannot be viewed or used by someone outside of your organization.
