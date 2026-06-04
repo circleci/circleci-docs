@@ -443,7 +443,7 @@ IMPORTANT: For new scheduled pipelines, use xref:schedule-triggers.adoc[Schedule
 
 Scheduled workflows allow you to run jobs at specific times rather than on every pipeline trigger. Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling is useful for resource-intensive jobs, nightly builds, or generating reports on a regular cadence, without triggering on every code change. A scheduled workflow runs on a schedule only. A scheduled workflow will **not** be run on commits to your code.
 
-By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule` includingh CRON syntax and branch filters. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC). See <<nightly-example>> for an basic example.
+By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule` including cron syntax and branch filters. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC). See <<nightly-example>> for an basic example.
 
 Scheduled workflows are *not* available for GitHub App, GitLab or Bitbucket Data Center pipelines.
 
