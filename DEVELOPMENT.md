@@ -331,6 +331,56 @@ The project includes several custom extensions:
   - See [Markdown Export](#markdown-export) section for configuration
   - Processes 563+ pages, adding significant build time
 
+## Search Integration
+
+### Current Setup: Kapa.ai Search (with Algolia preserved)
+
+The docs site search bar uses **Kapa.ai's unified search/chat modal** instead of the Algolia search UI. Algolia infrastructure is intentionally kept intact because the marketing site depends on it to surface docs search results.
+
+#### What was changed
+
+| File | Change |
+|------|--------|
+| `ui/src/partials/head-scripts.hbs` | Added search-mode attributes to the Kapa widget `<script>` tag |
+| `ui/src/partials/search-bar.hbs` | Changed keyboard shortcut display from `cmd+/` to `cmd+k` |
+| `ui/src/js/07-search.js` | Commented out the `handleKeyboardShortcut` function and its `addEventListener` call (Cmd+/ → Algolia) |
+
+#### Kapa widget attributes added (`head-scripts.hbs`)
+
+```html
+data-search-mode-enabled="true"
+data-search-mode-default="true"
+data-modal-override-open-selector-search="#search-text-input"
+data-modal-open-on-command-k="true"
+data-modal-command-k-search-mode-default="true"
+```
+
+- `data-modal-override-open-selector-search` wires the existing search input (`#search-text-input`) to open the Kapa modal instead of Algolia.
+- `data-search-mode-default` makes the Search tab the default (rather than Ask AI).
+- Cmd+K opens the modal (replaces Cmd+/).
+
+#### Filtering search results to docs only
+
+To restrict Kapa search results to this docs site, add the source ID to the script tag:
+
+```html
+data-search-source-ids-include="29044e81-a3f5-4a86-adf4-981fac02525b"
+```
+
+The source ID comes from the Kapa dashboard URL when viewing a source: `app.kapa.ai/.../sources/view/<source-id>`. If sources are grouped, use `data-source-group-ids-include` instead.
+
+#### How to revert to Algolia search
+
+1. **`head-scripts.hbs`**: Remove the five `data-search-mode-*` and `data-modal-*` attributes from the Kapa `<script>` tag.
+2. **`search-bar.hbs`**: Change `cmd+k` back to `cmd+/` in the keyboard shortcut span.
+3. **`07-search.js`**: Uncomment the `handleKeyboardShortcut` function body and the `document.addEventListener('keydown', handleKeyboardShortcut)` call (search for `Cmd+/ shortcut disabled`).
+
+#### How to disable Kapa entirely
+
+Remove the entire `<script defer src="https://widget.kapa.ai/...">` block from `head-scripts.hbs`.
+
+---
+
 ## Testing
 
 ### Testing Content Changes
