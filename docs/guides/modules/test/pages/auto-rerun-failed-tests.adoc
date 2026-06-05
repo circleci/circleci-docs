@@ -14,9 +14,15 @@ Auto rerun failed tests automatically detects and retries test failures during y
 
 == Is my project a good fit for auto rerun failed tests?
 
-Auto rerun failed tests reruns test atoms within the same step automatically until all tests pass or the maximum rerun attempts is reached.
+This section outlines several project features that indicate your project is a good candidate for auto rerun failed tests:
 
-If your test suite has flaky tests, auto rerun can quickly recover from test failures without rerunning your entire test suite.
+=== Your test runner produces JUnit test results
+
+Auto rerun failed tests identifies which test atoms to rerun from JUnit XML output. Your test runner must be configured to emit JUnit XML results for the feature to work.
+
+=== Your test suite has flaky tests
+
+If your test suite has flaky tests, auto rerun can quickly recover from intermittent failures without rerunning your entire test suite.
 
 == How it works
 

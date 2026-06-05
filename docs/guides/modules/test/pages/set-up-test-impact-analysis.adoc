@@ -6,21 +6,92 @@
 
 include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
-Test impact analysis runs only the tests impacted by your code changes, reducing test execution time while maintaining code quality.
+Test impact analysis (TIA) speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then skips tests that cover unchanged source files.
 
 == Is my project a good fit for test impact analysis?
 
-Test impact analysis works well on test frameworks with built-in coverage support (Jest, pytest, Go test, Vitest, RSpec) where generating coverage reports is straightforward.
+This section outlines several project features that indicate your project is a good candidate for test impact analysis:
 
-Code coverage data is used to determine how tests are related to code. This works best when tests directly import and run your source code. It becomes difficult when tests call code running in separate containers or services, because collecting and consolidating coverage data across service boundaries is not straightforward.
+=== Built-in coverage support
+
+Test impact analysis relies on code coverage data to determine which tests affect which files. Frameworks with built-in coverage support - Jest, pytest, Go test, Vitest and RSpec - make this straightforward.
+
+If your framework has no native coverage support, generating the data TIA needs may require significant rework of your test setup.
+
+=== Tests run in the same process
+
+Coverage data works best when tests directly import and run the source code in the same process.
+
+When tests call code running in separate containers or services, collecting and consolidating coverage data across those service boundaries is not straightforward.
 
 == How it works
 
-Test impact analysis identifies which tests need to run based on the files that changed in your checked out code. The system works in two phases:
+Test impact analysis is split into two phases:
 
-*Analysis phase*:: Builds a mapping between your test atoms and the source files they exercise. Tests are run with code coverage enabled to determine which files they cover. The results are stored as _impact data_ for future test runs.
+- *Analysis* runs on your default branch with coverage instrumentation, producing *impact data*. Impact data describes the relationship between files and tests.
+- *Selection* runs on feature branches, using the impact data to choose which tests to run based on what changed.
 
-*Selection phase*:: Compares the current repository state against the most recent impact data. Test atoms that cover modified files are selected to run. New tests, modified tests, and tests that do not exercise any source code are also selected.
+[TIP]
+====
+Analysis and selection can be configured to run on any change through CLI flags.
+====
+
+=== Analysis on default branches
+
+The analysis phase is run on your default branch (or the base branch of a pull request). It runs tests with coverage instrumentation and updates the impact data with the latest test-to-file relationships.
+
+Keeping impact data fresh on the default branch allows the selection phase to select fewer tests without other unrelated changes interfering.
+
+For each file found during coverage analysis, a fast non-crypto hash of its contents is stored in the impact data. The data also tracks which files impact the tests being selected.
+
+.Example impact data relationship between a handler and repository.
+[source,json]
+----
+{
+  "version": 1,
+  "files": {
+    "1": {
+      "path": "src/api/handlers.ts",
+      "hash": "c9684be83632a628"
+    },
+    "2": {
+      "path": "src/api/handlers.test.ts",
+      "hash": "5b8e1a04c7d2f391"
+    },
+    "3": {
+      "path": "src/data/repository.ts",
+      "hash": "2e7c4d18a9f6b052"
+    },
+    "4": {
+      "path": "src/data/repository.test.ts",
+      "hash": "f1d39e62a08c5b74"
+    }
+  },
+  "edges": {
+    "src/api/handlers.test.ts": ["1", "2", "3"],
+    "src/data/repository.test.ts": ["3", "4"]
+  }
+}
+----
+
+* `files` records every file that analysis has seen, along with the hash of its contents at the time it was last analyzed.
+* `edges` records, for each test, the IDs of the files that are covered by the test.
+
+[NOTE]
+====
+The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this cost pays for itself by enabling the selection phase to skip unaffected tests on subsequent runs.
+====
+
+=== Selection on feature branches
+
+By default, all tests run on default branches. Test selection runs only affected tests on feature branches, using the impact data produced by analysis on the default branch.
+
+During test selection, the current state of the branch's checked-out code is compared against the latest impact data. Tests are selected in the following scenarios:
+
+- The test is not found in the impact data. This indicates a new test in the checked-out code.
+- The test failed on the previous run for this branch.
+- A file affecting the test is not found in the impact data. This indicates the file was removed from the checked-out code.
+- A file affecting the test hash has changed.
 
 [mermaid]
 ----
@@ -40,14 +111,12 @@ flowchart TD
 
     Selected([Selected])
     Skipped([Skipped])
-
-    style Selected fill:#00DB74,color:#fff
-    style Skipped fill:#1C273A,color:#fff
 ----
+
 
 [NOTE]
 ====
-The analysis phase typically runs slower than a normal test run because it executes tests with coverage instrumentation. However, this cost pays for itself by enabling the selection phase to skip unaffected tests on subsequent runs.
+The selection rules can be extended to select tests beyond those identified in the impact data.
 ====
 
 == Prerequisites
@@ -258,31 +327,7 @@ This command:
 * `--select-tests=none` -- skips running your test suite (no test results are produced).
 * `--analyze-tests=impacted` -- runs coverage analysis on test atoms whose impact data is outdated.
 
-Inspect the locally stored impact data in `.circleci/ci tests-impact.json` to see the mapping between test atoms and files. The impact data is a JSON file with a structure like the following example:
-
-[source,json]
-----
-{
-  "version": 0,
-  "files": {
-    "1": {
-      "path": ".circleci/test-suites.yml",
-      "hash": "c9684be83632a628"
-    },
-    "2": {
-      "path": "src/foo.ts",
-      "hash": "c9684be83632a628"
-    },
-    ...
-  },
-  "edges": {
-    "test-atom-one": ["2", "4", "7"],
-    ...
-}
-----
-
-* `files` -- a map of IDs to files, with the `path` relative to the working directory and a `hash` of the contents.
-* `edges` -- a map of test atoms to an array of file IDs that the test atom covers.
+Inspect the locally stored impact data in `.circleci/impact-ci tests.json` to see the mapping between test atoms and files.
 
 Next, modify a source file whose ID appears in the `edges`, then run test selection to verify only impacted test atoms are selected:
 
