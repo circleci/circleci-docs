@@ -364,10 +364,10 @@ data-modal-command-k-search-mode-default="true"
 To restrict Kapa search results to this docs site, add the source ID to the script tag:
 
 ```html
-data-search-source-ids-include="29044e81-a3f5-4a86-adf4-981fac02525b"
+data-search-source-ids-include="585f4613-bd84-4fd1-9e73-d3a0265cfd39"
 ```
 
-The source ID comes from the Kapa dashboard URL when viewing a source: `app.kapa.ai/.../sources/view/<source-id>`. If sources are grouped, use `data-source-group-ids-include` instead.
+The source ID (`585f4613-bd84-4fd1-9e73-d3a0265cfd39`) is the "Documentation" source in the Kapa dashboard. It can be found in the Kapa dashboard URL when viewing a source: `app.kapa.ai/.../sources/view/<source-id>`. If sources are grouped, use `data-source-group-ids-include` instead.
 
 #### How to revert to Algolia search
 
