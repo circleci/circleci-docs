@@ -33,7 +33,7 @@ Before setting up your environment integration with CircleCI, run through the fo
 
 include::ROOT:partial$tips/check-org-type.adoc[]
 
-The following versions of Kubernetes, Helm, and Argo Rollouts have been tested and proven to work. Older versions may work but are not guaranteed:
+We support the three latest Kubernetes minor releases and the two latest minor releases of Helm and of Argo Rollouts (optional). Release agent chart **1.6.2** with agent image **1.6.2** was end-to-end tested across every combination of the versions in the following table. Older versions may work but are not guaranteed:
 
 include::ROOT:partial$deploy/supported-versions.adoc[]
 
