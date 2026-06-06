@@ -65,9 +65,6 @@
 - old: /caching/
   new: /guides/optimize/caching/
 
-- old: /caching-strategy/
-  new: /guides/optimize/caching-strategy/
-
 - old: /circleci-config-sdk/
   new: /guides/toolkit/circleci-config-sdk/
 

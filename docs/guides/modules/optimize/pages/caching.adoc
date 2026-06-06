@@ -1,434 +1,786 @@
 = Caching dependencies
 :page-platform: Cloud, Server v4+
-:page-description: This document is a guide to caching dependencies in CircleCI pipelines.
+:page-description: A guide to caching dependencies in CircleCI pipelines.
 :experimental:
 
-Caching is one of the most effective ways to make jobs faster on CircleCI. By reusing the data from previous jobs, you also reduce the cost of fetch operations. After an initial job run, subsequent instances of the job run faster, as you are not redoing work.
+Caching is one of the most effective ways to make jobs faster on CircleCI. By storing the results of expensive operations, typically dependency downloads, subsequent job runs can skip work they have already done.
 
 .Caching Data Flow
 image::guides:ROOT:caching-dependencies-overview.png[caching data flow]
 
-Caching is useful with *package dependency managers* such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` need only download new or updated dependencies, rather than downloading everything on each build.
+Caching is most valuable with *package dependency managers* such as Yarn, Bundler, or pip. With a warm cache, commands like `yarn install` only download new or changed dependencies rather than the full set on every build.
 
-WARNING: Caching files between different executors, for example, between Docker and machine, Linux, Windows or macOS, or CircleCI image and non-CircleCI image, can result in file permissions and path errors. These errors are often caused by missing users, users with different UIDs, and missing paths. Use extra care when caching files in these cases.
+WARNING: Caching files between different executor types can cause file permission and path errors. Affected combinations include Docker and machine executors, Linux and macOS, and CircleCI images with non-CircleCI images. Use extra care when caching across executor types.
 
-[#introduction]
-== Introduction
-
-Automatic dependency caching is not available in CircleCI, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration enables advanced strategies and fine-grained control. See the xref:caching-strategy.adoc[Caching Strategies] and xref:persist-data.adoc[Persisting Data] pages for tips on caching strategies and management.
-
-This document describes the manual caching options available, the costs and benefits of a chosen strategy, and tips for avoiding problems with caching.
-
-By default, cache storage duration is set to 15 days. This can be customized on the link:https://app.circleci.com/[CircleCI web app] by navigating to menu:Plan[Usage Controls]. 15 days is the maximum storage duration you can set.
-
-NOTE: The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible.
-
-CAUTION: Although several examples are included below, caching strategies need to be carefully planned for each individual project. Copying and pasting the code examples will not always be appropriate for your needs.
-
-For information about caching and reuse of unchanged layers of a Docker image, see the xref:docker-layer-caching.adoc[Docker Layer Caching] document.
+NOTE: The Docker images used for CircleCI jobs are automatically cached on the server infrastructure where possible. For reuse of unchanged layers within a Docker image, see xref:docker-layer-caching.adoc[Docker Layer Caching].
 
 [#how-caching-works]
 == How caching works
 
-A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but, in the case of a cache miss or zero cache restore, the job still runs successfully. For example, you might cache npm package directories (known as `node_modules`). The first time your job runs, it downloads all your dependencies and caches them. On subsequent runs, a valid cache speeds up your job.
-
-Caching is about achieving a balance between reliability and getting maximum performance. Prioritize reliability over speed, as a corrupted build or out-of-date dependencies cost more time than a fast build saves.
-
-[#basic-example-of-dependency-caching]
-== Basic example of dependency caching
-
-[#saving-cache]
-=== Saving cache
-
-CircleCI manual dependency caching requires you to be explicit about what you cache and how you cache it. See the xref:reference:ROOT:configuration-reference.adoc#savecache[Save Cache Section] of the Configuring CircleCI document for additional examples.
-
-To save a cache of a file or directory, add the `save_cache` step to a job in your `.circleci/config.yml` file:
-
-[,yaml]
-----
-    steps:
-      - save_cache:
-          key: my-cache
-          paths:
-            - my-file.txt
-            - my-project/my-dependencies-directory
-----
-
-CircleCI imposes a 900-character limit on the length of a `key`. Be sure to keep your cache keys under this maximum.
-The path for directories is relative to the `working_directory` of your job. You can specify an absolute path if you choose.
-
-NOTE: Unlike the special step xref:reference:ROOT:configuration-reference.adoc#persisttoworkspace[`persist_to_workspace`], neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
-
-[#restoring-cache]
-=== Restoring cache
-
-CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is scoped to the project, and retrieval is prefix-matched. The cache is restored from the first matching key. If there are multiple matches, the most recently generated cache is used.
-
-In the example below, two keys are provided:
-
-[,yaml]
-----
-    steps:
-      - restore_cache:
-          keys:
-            # Find a cache corresponding to this specific package-lock.json checksum
-            # when this file is changed, this key will fail
-            - v1-npm-deps-{{ checksum "package-lock.json" }}
-            # Find the most recently generated cache used from any branch
-            - v1-npm-deps-
-----
-
-Because the second key is less specific than the first, differences exist between the current state and the last generated cache. When a dependency tool runs, it discovers outdated dependencies and updates them. Updating outdated dependencies from a less specific cache key is referred to as a *partial cache restore*.
-
-Each line in the `keys:` list manages _one cache_ (each line does *not* correspond to its own cache). The list of keys (`v1-npm-deps-{{ checksum "package-lock.json" }}` and `v1-npm-deps-`), in this example, represent a *single* cache. When restoring a cache, CircleCI first validates it using the most specific key. It then steps through the remaining keys, looking for any changes.
-
-The first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`. If this file changed in your commit, CircleCI would detect a different cache key.
-
-The next key does not have a dynamic component to it. It is a static string: `v1-npm-deps-`. To invalidate your cache manually, you can bump `v1` to `v2` in your `.circleci/config.yml` file. This changes the cache key to `v2-npm-deps` and triggers the storing of a fresh cache.
-
-[#basic-example-of-yarn-package-manager-caching]
-== Basic example of Yarn package manager caching
-
-link:https://yarnpkg.com/[Yarn] is an open source package manager for JavaScript. The packages it installs can be cached, which can speed up builds, but more importantly, can also reduce errors related to network connectivity.
-
-NOTE: Yarn 2.x comes with the ability to do link:https://yarnpkg.com/features/zero-installs[Zero Installs]. If you are using Zero Installs, you do not need to do any special caching within CircleCI.
-
-If you are using Yarn 2.x _without_ Zero Installs, you can do something like the following:
-
-[,yaml]
-----
-    steps:
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --immutable
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - .yarn/cache
-            - .yarn/unplugged
-----
-
-If you are using Yarn 1.x, you can do something like the following:
-
-[,yaml]
-----
-    steps:
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
-      - save_cache:
-          name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-----
-
-[#caching-and-open-source]
-== Caching and open source
-
-If your project is open source/available to be forked and receive PRs from contributors, make note of the following:
-
-* PRs from the same fork repository share a cache (this includes, as previously stated, that PRs in the main repository share a cache with main).
-* Two PRs in different fork repositories have different caches.
-* Enabling the sharing of xref:security:env-vars.adoc[Environment Variables] allows cache sharing between the original repository and all forked builds.
-
-[#caching-libraries]
-== Caching libraries
-
-If a job fetches data at any point, you can make use of caching. The most important dependencies to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our xref:toolkit:examples-and-guides-overview.adoc[Language Guides and Demo Projects] for the specifics for your stack.
-
-Tools that are not explicitly required for your project are best stored on the Docker image. The Docker image(s) built by the CircleCI team have tools preinstalled that are generic for building projects using the relevant language. For example, the `cimg/ruby:3.1.2` image includes useful tools like git, openssh-client, and Gzip.
+A cache stores a hierarchy of files under a *key*. When a job runs a `restore_cache` step, CircleCI looks for a stored cache matching that key and downloads it into the job environment. A `save_cache` step writes the specified paths to storage under the given key.
 
 .Caching Dependencies
 image::guides:ROOT:cache_deps.png[Caching Dependencies]
 
-We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
+Caches are *immutable on write*. Once a cache is written for a specific key, it cannot be overwritten. If a subsequent job produces the same key, the existing cache is reused and no new write occurs. Reuse without overwrite is expected: a key built from a checksum of your lock file produces the same key so long as the lock file has not changed.
 
-Example of caching `pip` dependencies:
+In the case of a *cache miss*, where no cache matches the key, the job still runs successfully. The job performs the full work rather than restoring from cache. Caching is always an optimization, never a requirement for correctness.
+
+Caching is about achieving a balance between reliability and performance. Prioritize reliability: a corrupted build from stale dependencies costs more time than a fast build saves.
+
+[#storage-and-retention]
+=== Storage and retention
+
+By default, cache storage duration is set to 15 days, which is the maximum. You can set a lower retention period on the link:https://app.circleci.com/[CircleCI web app] under menu:Plan[Usage Controls]. Shorter retention reduces storage costs when caches change frequently.
+
+To set a shorter retention period for a specific job, use the `retention` key in your `.circleci/config.yml`. Valid values range from `1d` to `15d`. Job-level retention overrides the organization default for caches produced by that job:
 
 [,yaml]
 ----
-version: 2.1
-
 jobs:
   build:
     docker:
-      - image: cimg/base:2023.03
-    steps: # a collection of executable commands making up the 'build' job
-      - checkout # pulls source code to the working directory
-      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
-          key: &deps1-cache deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # install and activate virtual environment with pip
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-      - save_cache: # ** special step to save dependency cache **
-          key: *deps1-cache
+      - image: cimg/node:24.16.0
+    retention:
+      caches: 7d
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
           paths:
-            - "venv"
+            - ~/.npm
+          key: node-v1-{{ checksum "package-lock.json" }}
 ----
 
-Make note of the use of a `checksum` in the cache `key`. The checksum calculates when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_, and so the cache is updated accordingly. In the above example, the
-xref:reference:ROOT:configuration-reference.adoc#restorecache[`restore_cache`] example uses interpolation to put dynamic values into the cache-key, allowing more control in what constitutes the need to update a cache.
+When using self-hosted runners, cache network and storage usage counts against your plan. For more information, see the xref:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
 
-[#writing-to-the-cache-in-workflows]
-== Writing to the cache in workflows
+[#setting-up-caching]
+== Setting up caching
 
-Jobs in one workflow can share caches. This makes it possible to create race conditions in caching across different jobs in a workflow.
+CircleCI caching is manual. You configure explicitly what is cached and under what key. Automatic dependency caching is not available.
 
-Cache is immutable on write. Once a cache is written for a specific key, for example, `node-cache-main`, it cannot be written to again.
+[#saving-cache]
+=== Saving cache
 
-[#caching-race-condition-example-1]
-=== Caching race condition example 1
+Add the `save_cache` step to a job in your `.circleci/config.yml` file:
 
-Consider a workflow of 3 jobs, where Job3 depends on Job1 and Job2: `+{Job1, Job2} -> Job3+`. They all read and write to the same cache key.
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - save_cache:
+          key: my-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+----
 
-In a run of the workflow, Job3 may use the cache written by Job1 _or_ Job2. Since caches are immutable, this would be whichever job saved its cache first.
+The path is relative to the `working_directory` of your job. Absolute paths are also accepted. CircleCI imposes a *900-character limit* on the length of a `key`.
 
-A caching scenario like this is usually undesirable, because the results are not deterministic. Part of the result depends on chance.
+NOTE: Unlike `persist_to_workspace`, neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
-You can make this workflow deterministic by changing the job dependencies. For example, make Job1 and Job2 write to different caches, and Job3 loads from only one. Or ensure there can be only one ordering: `+Job1 -> Job2 -> Job3+`.
+See the xref:reference:ROOT:configuration-reference.adoc#savecache[Configuration Reference] for the full `save_cache` specification.
 
-[#caching-race-condition-example-2]
-=== Caching race condition example 2
+[#restoring-cache]
+=== Restoring cache
 
-A more complex caching example could be using a dynamic key, for example, `node-cache-{{ checksum "package-lock.json" }}` and restoring using a partial key match, for example, `node-cache-`.
+Add the `restore_cache` step *before* the dependency install step in your job, and `save_cache` *after* it:
 
-A race condition is still possible, but the details may change. For instance, the downstream job uses the cache from the upstream job that ran last.
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - my-cache-{{ checksum "package-lock.json" }}
+            - my-cache-
+      - run: npm install
+      - save_cache:
+          key: my-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+----
 
-Another race condition is possible when sharing caches between jobs. Consider a workflow with no dependency links: `+Job1 -> Job2+`. Job2 uses the cache saved from Job1. Job2 could sometimes successfully restore a cache, and sometimes report no cache is found, even when Job1 reports saving it. Job2 could also load a cache from a previous workflow. If this happens, this means Job2 tried to load the cache before Job1 saved it. This can be resolved by creating a workflow dependency: Job1 \-> Job2. This forces Job2 to wait until Job1 has finished running.
+CircleCI restores caches in key order, using the most recent matching cache. Keys are matched by *prefix*: `my-cache-` matches any stored cache whose name begins with `my-cache-`. If the first key is an exact match, that cache is used. If not, CircleCI tries each subsequent key in turn.
+
+A list of keys represents a *single cache with fallback options*, not multiple separate caches.
+
+The second key in the example above (`my-cache-`) is a fallback that matches any cache with that prefix. A fallback key match is a *partial cache restore*: the restored cache may differ from your current dependencies. See <<partial-dependency-caching-strategies>> for guidance on when this is safe for your package manager.
+
+CAUTION: Restoring cache after the install step overwrites freshly installed dependencies. Always place `restore_cache` before and `save_cache` after your install command.
+
+We recommend verifying that your dependency installation step succeeds before introducing caching. Caching a failed install step causes subsequent jobs to restore a broken cache. The only recovery is to update the cache key to force a fresh write.
+
+[#caching-race-conditions]
+=== Race conditions in workflows
+
+Jobs in a workflow share caches. Because caches are immutable, the first job to write a key wins. Subsequent writes of the same key are discarded without error.
+
+*Example 1:* Job1 and Job2 run in parallel and both write to the same key. Job3 depends on both and reads the cache. Job3 gets whichever cache was written first. The result is non-deterministic. Fix this by having Job1 and Job2 write to separate keys, or by enforcing a serial order: `Job1 -> Job2 -> Job3`.
+
+*Example 2:* `Job1` and `Job2` run concurrently. Job2 reads the cache written by Job1. If Job2 starts before Job1 has finished saving, it may find no cache. The race condition is resolved by the explicit workflow dependency so that Job2 waits for Job1 to finish: `Job1 -> Job2`.
+
+[#caching-and-open-source]
+=== Caching and open source
+
+If your project is open source or accepts pull requests from forks:
+
+* PRs from the same fork repository share a cache with each other and with the main repository's cache.
+* PRs from different fork repositories have separate caches.
+* Enabling xref:security:env-vars.adoc[Environment Variable] sharing allows cache sharing between the original repository and all forked builds.
+
+[#designing-your-cache-key]
+== Designing your cache key
+
+The cache key determines when a new cache is written and which existing cache is restored. Key design is the most consequential decision in your caching setup.
+
+[#key-templates]
+=== Key templates
+
+A cache key can include *templates*, which are dynamic values evaluated at runtime and interpolated into the key string:
+
+[,shell]
+----
+my-cache-{{ checksum "package-lock.json" }}
+----
+
+[.table-scroll]
+--
+[%header]
+|===
+| Template | Description | Use for caching?
+
+| `{{ checksum "filename" }}`
+| Base64-encoded SHA256 hash of the file contents. Changes when the file changes. Commit this file to your repository.
+| ✓ Primary choice. Use your dependency manifest or lock file.
+
+| `{{ .Branch }}`
+| The VCS branch currently being built.
+| ✓ Useful to scope caches per-branch when branches have divergent dependencies.
+
+| `{{ arch }}`
+| OS and CPU architecture, for example `linux-amd64-6_62`.
+| ✓ Required when caching compiled binaries that depend on OS or CPU.
+
+| `{{ .Environment.variableName }}`
+| Any CircleCI-exported environment variable or context variable.
+| ⚠ Only appropriate if the variable changes at the same rate as your dependencies.
+
+| `{{ epoch }}`
+| Seconds since Unix epoch. Changes on every run.
+| ✗ Creates a new cache every run. Almost always wrong for dependency caches.
+
+| `{{ .BuildNum }}`
+| The CircleCI job number. Increments on every run.
+| ✗ Creates a new cache every run. Almost always wrong for dependency caches.
+
+| `{{ .Revision }}`
+| The VCS commit SHA being built.
+| ✗ Creates a new cache every commit, even when dependencies have not changed.
+|===
+--
+
+Cache variables can also accept xref:reference:ROOT:reusing-config.adoc#using-parameters-in-executors[Parameters]: `v1-deps-<< parameters.varname >>`.
+
+[#keys-that-rotate-too-fast]
+=== Keys that rotate too fast
+
+The most common and costly caching mistake is using a template that changes more frequently than your dependencies do. This causes a new cache to be written on every run, storage accumulates without limit, and no run ever benefits from a hit. Common offenders:
+
+* `{{ epoch }}`: changes every second.
+* `{{ .BuildNum }}`: changes every build.
+* `{{ .Revision }}`: changes every commit.
+* `{{ .Environment.CIRCLE_WORKFLOW_ID }}`: changes every workflow run.
+
+None of these are appropriate as the primary template in a dependency cache key. A key like `my-deps-{{ epoch }}` costs you storage and upload time with no performance benefit.
+
+The correct primary template for dependency caching is `{{ checksum "your-lock-file" }}`, which changes only when your declared dependencies change.
+
+[#recommended-key-structure]
+=== Recommended key structure
+
+For most dependency caches, the recommended structure is:
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - restore_cache:
+          keys:
+            - v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - v1-deps-{{ .Branch }}-
+            - v1-deps-
+----
+
+This provides:
+
+* An exact hit when both the branch and lock file match (the common case on repeated runs).
+* A partial hit from the same branch when the lock file changes (for example, adding one dependency).
+* A partial hit from any branch as a last resort.
+
+The `v1-` prefix is a manual version number. Incrementing it (`v2-`) invalidates all existing caches for this structure and forces a fresh write. Version incrementing is the approach described in <<clearing-cache>>.
+
+[#what-to-cache]
+== What to cache
+
+[#cache-download-not-installed]
+=== Cache download caches, not installed environments
+
+The most reliable thing to cache is the *download cache* maintained by your package manager, which is the directory where the package manager stores downloaded packages before installing them. The download cache differs from the installed environment (`node_modules`, `venv`, `vendor/bundle`).
+
+Download caches are safe to restore partially: the package manager re-resolves and installs correct versions from your manifest regardless of cached state. A stale partial restore means some packages are re-downloaded, but the install step corrects all discrepancies.
+
+Installed environments are only safe to restore partially when every dependency is pinned to an exact version in a lock file. Without version pinning, a package manager may leave stale versions in place rather than upgrading them.
+
+Generic tools not specific to your project, such as git or curl, belong in the Docker image, not in a cache. The CircleCI convenience images include common tooling for their respective languages. See xref:toolkit:examples-and-guides-overview.adoc[Language Guides and Demo Projects] for specifics.
+
+[#what-not-to-cache]
+=== What not to cache
+
+Some paths are commonly added to caches by mistake:
+
+* `.git` directory: changes on every commit and provides no restoration value. This directory is often swept in when a job caches the entire project root.
+* Project root (`.` or `/home/circleci/project`): includes build output, test artifacts, temporary files, and `.git`. Cache size grows unpredictably and restore time increases with no benefit.
+* Build output directories (`target/`, `dist/`, `build/`): compiled artifacts that are fast to regenerate do not benefit from caching. See <<caching-expensive-steps>> for cases where compilation caching is worthwhile.
+* Installed environments without a lock file: a `venv`, `node_modules`, or `vendor/bundle` restored from a partial cache without version-pinned dependencies can contain wrong package versions. See <<partial-dependency-caching-strategies>>.
+
+[#cache-size-and-restore-time]
+=== Cache size and restore time
+
+CircleCI does not impose a cache size limit, but larger caches take longer to restore. The relevant measure is whether the time to download and expand a cache is less than the time to install dependencies from scratch.
+
+For most dependency caches (under 300 MB) restore time is well within that threshold. For large caches, for example, Conda environments, large Gradle repositories, binary assets, it is worth measuring the following:
+
+* If your P50 restore time exceeds 15 seconds, time a cold install for comparison.
+* If the cache restore is comparable to or slower than a cold install, consider alternatives: a custom Docker image with dependencies pre-installed, or splitting one large cache into separate per-language caches.
+
+The expansion step (decompression and file extraction) is typically the bottleneck, not download. Large caches have a proportionally higher restore time penalty.
+
+[#using-a-lock-file]
+=== Using a lock file
+
+Lock files are the preferred checksum source for cache keys, for example:
+
+* `Gemfile.lock`
+* `package-lock.json`
+* `yarn.lock`
+* `Pipfile.lock`
+* `poetry.lock`
+* `uv.lock`
+
+Lock files capture the exact resolved dependency tree. The cache key therefore changes only when your dependencies change, not when an unpinned version range resolves differently.
+
+For projects without a lock file, you can generate a deterministic checksum from the installed directory listing:
+
+[,shell]
+----
+ls -laR your-deps-dir > deps_checksum
+----
+
+Then reference it with `{{ checksum "deps_checksum" }}`. Using a checksum of the directory listing produces a more specific key than using a checksum of an unpinned requirements file.
+
+[#partial-dependency-caching-strategies]
+== Language-specific caching patterns
+
+Whether partial cache restores (using fallback keys) are safe depends on how each package manager handles an existing, potentially out-of-date dependency tree. The sections below document the recommended pattern and safety characteristics for each common package manager.
+
+[#bundler-ruby]
+=== Bundler (Ruby)
+
+*Safe to use partial cache restoration?* Yes, with a clean step.
+
+Bundler can reference system gems that are not explicitly specified, making partial restores non-deterministic without intervention. A `bundle clean --force` step after `bundle install` corrects any stale gems from the partial restore before the cache is saved.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.3.11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+            - v1-gem-cache-{{ arch }}-
+      - run: bundle config set --local path vendor/bundle
+      - run: bundle install
+      - run: bundle clean --force
+      - save_cache:
+          paths:
+            - vendor/bundle
+          key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+----
+
+[#gradle-java]
+=== Gradle (Java)
+
+*Safe to use partial cache restoration?* Yes.
+
+Gradle repositories are designed to be centralized and additive. Libraries are fetched into the cache and resolved from it; partial restores do not affect which libraries end up on classpaths.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:21.0.11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle" }}
+            - gradle-repo-v1-{{ .Branch }}-
+            - gradle-repo-v1-
+      - save_cache:
+          paths:
+            - ~/.gradle/caches
+            - ~/.gradle/wrapper
+          key: gradle-repo-v1-{{ .Branch }}-{{ checksum "build.gradle" }}
+----
+
+NOTE: If you use Gradle dependency locking, replace `build.gradle` with the path to your lock file (for example, `gradle/dependency-locks/compileClasspath.lockfile`). Using a lock file produces a more precise cache key.
+
+[#maven-java-and-leiningen-clojure]
+=== Maven (Java) and Leiningen (Clojure)
+
+*Safe to use partial cache restoration?* Yes.
+
+Maven repositories are designed to be centralized and additive. Leiningen uses Maven under the hood and behaves the same way.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/openjdk:21.0.11
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+            - maven-repo-v1-{{ .Branch }}-
+            - maven-repo-v1-
+      - save_cache:
+          paths:
+            - ~/.m2/repository
+          key: maven-repo-v1-{{ .Branch }}-{{ checksum "pom.xml" }}
+----
+
+[#npm-node]
+=== npm (Node)
+
+*Safe to use partial cache restoration?* Yes, with npm 5+.
+
+Cache the npm *download cache* at `~/.npm`, not `node_modules` directly. The `~/.npm` path is the correct location regardless of npm version and works with both `npm install` and `npm ci`.
+
+Caching `node_modules` directly is unreliable. It breaks when Node or npm versions change between the cache write and the restore. Partial restores can also leave orphaned packages that affect runtime behaviour. The `~/.npm` download cache avoids these problems: npm resolves and installs the correct versions from your lock file, using the cached downloads to skip the network fetch.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - run: npm install
+      - save_cache:
+          paths:
+            - ~/.npm
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+----
+
+[NOTE]
+====
+If your job uses `npm ci` rather than `npm install`, be aware that `npm ci` deletes and rebuilds `node_modules` on every run by design. Caching `~/.npm` still avoids re-downloading packages from the registry, but the time saving is smaller than with `npm install`. If you find the `restore_cache` step is adding more time than it saves when using `npm ci`, consider switching to `npm install` with a lock file, or removing the cache step entirely.
+====
+
+[#pip-python]
+=== Pip (Python)
+
+*Safe to use partial cache restoration?* Depends on what you cache.
+
+* *Download cache* (`~/.cache/pip`): pip stores downloaded wheels here before installing them. Partial restoration is safe: pip resolves and installs correct versions from your dependency file regardless of what wheels are present in the cache.
+* *Installed environment* (a virtual environment or `site-packages` directory): partial restoration is only safe with a lock file that pins every dependency to an exact version. Without pinning, pip may leave stale versions in place rather than upgrading them.
+
+The sections below follow this distinction. Bare pip and `uv` cache the download cache and use fallback keys without risk. Pipenv and Poetry cache the installed environment and rely on their lock files to make partial restores deterministic.
+
+[#pip-requirements-txt]
+==== Pip with requirements.txt
+
+Cache the download cache at `~/.cache/pip`. Partial restoration is safe.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - pip-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+            - pip-cache-v1-{{ .Branch }}-
+            - pip-cache-v1-
+      - run: pip install -r requirements.txt
+      - save_cache:
+          paths:
+            - ~/.cache/pip
+          key: pip-cache-v1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+----
+
+[#pip-pipenv]
+==== Pipenv
+
+Pipenv generates a `Pipfile.lock` that pins every dependency to an exact version. Partial restoration of the installed virtual environment is safe, because the lock file ensures pip installs correct versions even on top of a stale partial restore.
+
+Setting `PIPENV_VENV_IN_PROJECT=1` causes Pipenv to create the virtual environment at `.venv` in the project directory, giving you a stable, predictable path to cache.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - pip-packages-v1-{{ .Branch }}-
+            - pip-packages-v1-
+      - run:
+          command: pipenv install
+          environment:
+            PIPENV_VENV_IN_PROJECT: "1"
+      - save_cache:
+          paths:
+            - .venv
+          key: pip-packages-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+----
+
+[#pip-poetry]
+==== Poetry
+
+link:https://python-poetry.org/[Poetry] generates a `poetry.lock` file that pins all dependencies to specific versions. As with Pipenv, the lock file makes partial restoration of the installed virtual environments directory safe.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - poetry-v1-{{ .Branch }}-{{ checksum "poetry.lock" }}
+            - poetry-v1-{{ .Branch }}-
+            - poetry-v1-
+      - run: poetry install --no-interaction
+      - save_cache:
+          paths:
+            - ~/.cache/pypoetry/virtualenvs
+          key: poetry-v1-{{ .Branch }}-{{ checksum "poetry.lock" }}
+----
+
+[#pip-uv]
+==== The `uv` package installer
+
+link:https://docs.astral.sh/uv/[`uv`] maintains its own download cache at `~/.cache/uv`. Like bare pip, the `uv` cache is a download cache rather than an installed environment, so partial restoration is safe.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/python:3.12.13
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - uv-cache-v1-{{ .Branch }}-{{ checksum "uv.lock" }}
+            - uv-cache-v1-{{ .Branch }}-
+            - uv-cache-v1-
+      - run: uv sync --frozen
+      - save_cache:
+          paths:
+            - ~/.cache/uv
+          key: uv-cache-v1-{{ .Branch }}-{{ checksum "uv.lock" }}
+----
+
+[NOTE]
+====
+Package installation with `uv` is faster than with pip, which reduces the absolute time saving from caching. Whether caching is worthwhile depends on your dependency tree size and how frequently it changes.
+====
+
+[#yarn-node]
+=== Yarn (Node)
+
+*Safe to use partial cache restoration?* Yes.
+
+Yarn has always used a lock file, making partial restoration safe.
+
+NOTE: Yarn 2.x supports link:https://yarnpkg.com/features/zero-installs[Zero Installs]. If you are using Zero Installs, no caching configuration is needed in CircleCI.
+
+*Yarn 1.x:*
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-v1-
+      - run: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+----
+
+Two flags are important here:
+
+* `--frozen-lockfile` ensures the lockfile is not modified during install, keeping the checksum stable for the `save_cache` key.
+* `--cache-folder ~/.cache/yarn` makes the cache location explicit. The default location is OS-dependent; setting it explicitly ensures the `paths` in `save_cache` always matches where Yarn writes.
+
+*Yarn 2.x without Zero Installs:*
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-packages-v1-{{ checksum "yarn.lock" }}
+      - run: yarn install --immutable
+      - save_cache:
+          paths:
+            - .yarn/cache
+            - .yarn/unplugged
+          key: yarn-packages-v1-{{ checksum "yarn.lock" }}
+----
+
+[#caching-strategy-tradeoffs]
+== Caching strategy tradeoffs
+
+The right caching approach depends on your package manager, project structure, and how frequently dependencies change. The following patterns cover the most common decision points: when to use fallback keys, how to handle multiple dependency types, and when caching applies beyond dependency downloads.
+
+[#when-partial-caching-helps]
+=== When partial caching helps vs. hurts
+
+The following package managers use additive, centralized repositories where partial caching with fallback keys is the default recommendation:
+
+* Gradle
+* Maven
+* npm
+* Yarn
+
+These managers install on top of a partially restored cache without issues. Getting dependencies from a cached state is faster than a full cold install.
+
+For installed environments without exact version pinning, partial caching can produce incorrect dependency states. In these cases a cache miss is preferable to a partial hit. Use a single exact-match key with no fallbacks, or use a lock-file-based tool such as Pipenv or Poetry.
+
+Broad fallback keys can cause one branch's cache to restore on another, producing unexpected dependency states. For example, a project upgrading from Node 18 to Node 20 on a feature branch may restore a Node 18 cache if the fallback key is broad enough. If you see unexpected dependency behavior on a branch, clear the cache by incrementing the version prefix in your key.
+
+[#multiple-caches-for-different-languages]
+=== Multiple caches for different languages
+
+For projects with multiple dependency types, for example, both npm and pip, use separate cache keys for each. Each cache is smaller, so a miss on one type does not force a full re-download of all types.
+
+Split caches at the package manager boundary (npm, pip, Bundler). Each manager has its own storage format and upgrade semantics, so a miss on one type would otherwise invalidate all of them.
+
+[#caching-expensive-steps]
+=== Caching expensive compilation steps
+
+Caching also applies to expensive compilation or asset generation steps, not just dependency downloads. Scala and Elixir compilation and Rails frontend asset pre-compilation are common examples where caching a build step output saves meaningful time.
+
+For compilation caches, use a key that reflects what determines the output, for example, a checksum of source files or a version string, rather than a dependency manifest.
+
+Do not cache every step. Cache only where restore time is less than the time to regenerate the output.
+
+[#optimizing-your-cache]
+== Optimizing your cache
+
+Once you have your caching set up, the next step is to make the caching strategy more efficient. The patterns outlined in this section will assist you to reduce storage costs, eliminate redundant uploads, and ensure caches are actually being hit.
+
+[#split-cache-keys-by-directory]
+=== Split cache keys by directory
+
+Avoid grouping unrelated directories under a single cache key. If any one directory changes, the entire cache is invalidated and all directories are re-uploaded and re-restored. Separate keys mean only the changed cache is refreshed.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      # Avoid: unrelated directories tied to one key
+      - save_cache:
+          paths:
+            - /mnt/ramdisk/node_modules
+            - /mnt/ramdisk/.cache/yarn
+            - /mnt/ramdisk/apps/a/node_modules
+            - /mnt/ramdisk/apps/b/node_modules
+          key: v1-node-{{ checksum "package.json" }}
+----
+
+[#combine-jobs]
+=== Combine jobs where duplicate steps add no value
+
+If two parallel jobs perform the same setup steps, combining them into one job removes duplicated overhead without changing total workflow duration. Common duplicate steps include checkout, cache restore, build, and save cache.
+
+For example, if `lint` (20s) and `code-coverage` (30s) both perform an identical build step, combining them saves one full set of cache restore and build steps.
+
+[#order-jobs-to-avoid-duplicate-saves]
+=== Order jobs to avoid duplicate cache writes
+
+If multiple parallel jobs write to the same cache key, only the first to complete saves a cache (caches are immutable). The remaining jobs each upload a cache that CircleCI discards, wasting upload time. Reordering so that one upstream job produces the cache and downstream jobs consume it avoids redundant uploads.
+
+[#prune-before-saving]
+=== Prune unnecessary files before saving
+
+Dependency managers sometimes leave unnecessary files in their directories, for example, documentation, type stubs, test fixtures. Tools like link:https://www.npmjs.com/package/node-prune[node-prune] can remove these before the `save_cache` step, reducing cache size and expansion time on restore.
+
+If you prune files from a cached directory, ensure those files are not included in the checksum used for the cache key. A key mismatch between save and restore causes a miss on the next run.
+
+[#check-cache-is-restored]
+=== Check cache is being restored as well as saved
+
+A cache that saves but never restores is a cost with no benefit. If you find a cache is not being restored, see link:https://support.circleci.com/hc/en-us/articles/360004632473-No-Cache-Found-and-Skipping-Cache-Generation[this support article] for troubleshooting steps.
+
+[#identify-wasteful-keys]
+=== Identify high-cost, low-value cache keys
+
+If cache storage costs are higher than expected, look for keys with high write volume but low or zero hit counts. The common cause is a key template that rotates on every run: `{{ epoch }}`, `{{ .BuildNum }}`, `{{ .Revision }}`, or `{{ .Environment.CIRCLE_WORKFLOW_ID }}`. These write a new cache on every run and are never reused.
+
+Switch to `{{ checksum "lockfile" }}`, which writes a new cache only when declared dependencies change.
+
+[#managing-caches]
+== Managing caches
+
+CircleCI does not provide a way to delete individual caches directly. Use key rotation to force a fresh cache write. You can inspect your cache size and storage usage from the jobs page.
+
+[#clearing-cache]
+=== Clearing cache
+
+Caches cannot be deleted directly. To force a fresh write, increment the version prefix in your cache key. Update the prefix in *both* `restore_cache` and `save_cache` steps. If only `restore_cache` is updated, the old key is never matched but the new cache is never written either.
+
+[,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
+    steps:
+      - checkout
+      # Increment v1 to v2 in both restore_cache and save_cache
+      - restore_cache:
+          keys:
+            - v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+      - run: npm install
+      - save_cache:
+          key: v2-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+----
+
+Do this when:
+
+* You change your dependency manager version (for example, npm 4 to 5).
+* You change your language runtime version (for example, Ruby 2.3 to 2.4).
+* You remove dependencies and want to clear the stale packages from cached state.
+* A cache is corrupted and causing build failures.
+
+Incrementing the version creates a new cache going forward but does not delete the old one. Old caches expire after your configured retention period. If you rebase commits that predate the key change, those jobs may write under the old key again.
+
+NOTE: Use only `[a-zA-Z0-9-_]` characters in cache key prefixes. Special characters (`:`, `?`, `&`, `=`, `/`, `#`) may cause issues with your build.
+
+[#cache-size]
+=== Viewing cache size and storage usage
+
+The `restore_cache` step output on the CircleCI jobs page shows the restored cache size. For fleet-wide storage usage and overage cost calculations, see the xref:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
+
+[#advanced-patterns]
+== Advanced patterns
+
+The following pattern covers monorepos, where a single root lock file checksum may miss dependency changes across sub-packages.
 
 [#using-caching-in-monorepos]
-== Using caching in monorepos
+=== Caching in monorepos
 
-The following example is one approach to managing a shared cache based on multiple files in different parts of your monorepo.
+For monorepos with multiple lock files in different packages, using a checksum of a single root `package-lock.json` may miss dependency changes in sub-packages. One approach is to concatenate all lock files and checksum the combined file.
 
-[#creating-and-building-a-concatenated-package-lock-file]
-=== Creating and building a concatenated `package-lock` file
+Add a custom command to your config:
 
-. Add custom command to config:
-+
 [,yaml]
 ----
 commands:
   create_concatenated_package_lock:
-    description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
+    description: "Concatenate all package-lock.json files recognized by lerna.js into a single file for use as a cache key checksum."
     parameters:
       filename:
         type: string
     steps:
       - run:
-          name: Combine package-lock.json files to single file
+          name: Combine package-lock.json files
           command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
-
 ----
 
-. Use custom command in build to generate the concatenated `package-lock` file:
-+
+Then use the concatenated file as an additional checksum:
+
 [,yaml]
 ----
+jobs:
+  build:
+    docker:
+      - image: cimg/node:24.16.0
     steps:
       - checkout
       - create_concatenated_package_lock:
           filename: combined-package-lock.txt
-      ## Use combined-package-lock.text in cache key
       - restore_cache:
           keys:
             - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
-            - v3-deps
+            - v3-deps-
 ----
-
-
-[#managing-caches]
-== Managing caches
-
-[#clearing-cache]
-=== Clearing cache
-
-Caches cannot be cleared. If you need to generate a new set of caches you can update the cache key, similar to the previous example. You might wish to do this if you have updated language or build management tool versions.
-
-Updating the cache key on save and restore steps in your `.circleci/config.yml` file will then generate new sets of caches from that point. Older commits using the previous keys may still generate and save cache, so it is recommended that you rebase after the `config.yml` changes when possible.
-
-If you create an additional cache by incrementing the cache version, the older cache is still stored. It is important to be aware that you are creating an additional cache. This method increases your storage usage. As a general best practice, review what is currently being cached and reduce your storage usage as much as possible.
-
-NOTE: Caches are immutable, so it is helpful to start all your cache keys with a version prefix, for example `+v1-...+`. This allows you to regenerate all of your caches just by incrementing the version in this prefix.
-
-For example, you may want to clear the cache in the following scenarios by incrementing the cache key name:
-
-* Dependency manager version change, for example, you change npm from 4 to 5.
-* Language version change, for example, you change Ruby 2.3 to 2.4.
-* Dependencies are removed from your project.
-
-NOTE: Beware when using special or reserved characters in your cache key (for example: `:, ?, &, =, /, #`), as they may cause issues with your build. Consider using keys within [a-z][A-Z] in your cache key prefix.
-
-[#cache-size]
-=== Cache size
-
-You can view the cache size from the CircleCI jobs page within the `restore_cache` step. Cache size is unlimited. However, larger caches take longer to save and restore than smaller caches, as this operation is bounded by network transfer speed.
-
-[#viewing-network-and-storage-usage]
-=== Viewing network and storage usage
-
-For information on viewing your network and storage usage, and calculating your monthly network and storage overage costs, see the xref:persist-data.adoc#managing-network-and-storage-usage[Persisting Data] page.
-
-[#using-keys-and-templates]
-== Using keys and templates
-
-A cache key is a _user-defined_ string that corresponds to a data cache. A cache key can be created by interpolating *dynamic values*. These are called *templates*. Anything that appears between curly braces in a cache key is a template. Consider the following example:
-
-[,shell]
-----
-myapp-{{ checksum "package-lock.json" }}
-----
-
-The above example outputs a unique string to represent this key. The example is using a link:https://en.wikipedia.org/wiki/Checksum[checksum] to create a unique string that represents the contents of a `package-lock.json` file.
-
-The example may output a string similar to the following:
-
-[,shell]
-----
-myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ=
-----
-
-If the contents of the `package-lock` file change, the `checksum` function returns a different, unique string, indicating the need to invalidate the cache.
-
-When choosing suitable templates for your cache `key`, remember that cache saving is not a free operation. Uploading the cache to CircleCI storage takes time. To avoid generating a cache every build, include a `key` that generates a cache only if something changes.
-
-The first step is to decide when a cache will be saved or restored by using a key for which some value is an explicit aspect of your project. For example, when a build number increments, when a revision is incremented, or when the hash of a dependency manifest file changes.
-
-The following are examples of caching strategies for different goals:
-
-* `myapp-{{ checksum "package-lock.json" }}` - Cache is regenerated every time something is changed in `package-lock.json` file. Different branches of this project generate the same cache key.
-* `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}` - Cache is regenerated every time something is changed in `package-lock.json` file. Different branches of this project generate separate cache keys.
-* `myapp-{{ epoch }}` - Every build generates separate cache keys.
-
-During step execution, the templates above are replaced by runtime values and use the resultant string as the `key`. The following table describes the available cache `key` templates:
-
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-| Template | Description
-
-| `{{ checksum "filename" }}`
-| A base64 encoded SHA256 hash of a given filename, so that a unique cache key is generated if the file changes. Commit this file in your repository. Consider using dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. The important factor is that the file does not change between `restore_cache` and `save_cache`, otherwise the cache is saved under a cache key that is different from the file used at `restore_cache` time.
-
-| `{{ .Branch }}`
-| The VCS branch currently being built.
-
-| `{{ .BuildNum }}`
-| The CircleCI job number for this build.
-
-| `{{ .Revision }}`
-| The VCS revision currently being built.
-
-| `{{ .Environment.variableName }}`
-| The environment variable `variableName` (supports any environment variable xref:security:env-vars.adoc[Exported by CircleCI] or added to a specific xref:security:contexts.adoc[Context], not any arbitrary environment variable).
-
-| `{{ epoch }}`
-| The number of seconds that have elapsed since 00:00:00 Coordinated Universal Time (UTC), also known as POSIX or UNIX epoch. This cache key is a good option if you need to ensure a new cache is always stored for each run.
-
-| `{{ arch }}`
-| Captures OS and CPU (architecture, family, model) information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin-amd64-6_58` versus `linux-amd64-6_62`. See xref:reference:ROOT:faq.adoc#cpu-architecture-circleci-support[Supported CPU Architectures].
-|===
---
-
-[#further-notes-on-using-keys-and-templates]
-=== Further notes on using keys and templates
-
-* A 900 character limit is imposed on each cache key. Be sure your key is shorter than this, otherwise your cache will not save.
-* When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as `{{ epoch }}`. If you use less specific template keys such as `{{ .Branch }}` or `{{ checksum "filename" }}`, you increase the chance of the cache being used.
-* Cache variables can also accept xref:reference:ROOT:reusing-config.adoc#using-parameters-in-executors[Parameters], if your build makes use of them. For example: `v1-deps-<< parameters.varname >>`.
-* You do not have to use dynamic templates for your cache key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
-
-[#full-example-of-saving-and-restoring-cache]
-== Full example of saving and restoring cache
-
-The following example demonstrates how to use `restore_cache` and `save_cache`, together with templates and keys in your `.circleci/config.yml` file.
-
-CAUTION: This example uses a _very_ specific cache key. Making your caching key more specific gives you greater control over which branch or commit dependencies are saved to a cache. However, it is important to be aware that this can *significantly increase* your storage usage. For tips on optimizing your caching strategy, see the xref:caching-strategy.adoc[Caching Strategies] page.
-This example is only a _potential_ solution and might be unsuitable for your specific needs, and increase storage costs.
-
-
-
-[,yaml]
-----
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: customimage/ruby:2.3-node-phantomjs-0.0.1
-        environment:
-          RAILS_ENV: test
-          RACK_ENV: test
-      - image: cimg/mysql:5.7
-
-    steps:
-      - checkout
-      - run: cp config/{database_circleci,database}.yml
-
-      # Run bundler
-      # Load installed gems from cache if possible, bundle install then save cache
-      # Multiple caches are used to increase the chance of a cache hit
-
-      - restore_cache:
-          keys:
-            - &gem-cache gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ arch }}-{{ .Branch }}
-            - gem-cache-v1
-
-      - run: bundle install --path vendor/bundle
-
-      - save_cache:
-          key: *gem-cache
-          paths:
-            - vendor/bundle
-
-      - run: bundle exec rubocop
-      - run: bundle exec rake db:create db:schema:load --trace
-      - run: bundle exec rake factory_girl:lint
-
-      # Precompile assets
-      # Load assets from cache if possible, precompile assets then save cache
-      # Multiple caches are used to increase the chance of a cache hit
-
-      - restore_cache:
-          keys:
-            - &asset-cache asset-cache-v1-{{ arch }}-{{ .Branch }}-{{ .Environment.CIRCLE_SHA1 }}
-            - asset-cache-v1-{{ arch }}-{{ .Branch }}
-            - asset-cache-v1
-
-      - run: bundle exec rake assets:precompile
-
-      - save_cache:
-          key: *asset-cache
-          paths:
-            - public/assets
-            - tmp/cache/assets/sprockets
-
-      - run: bundle exec rspec
-      - run: bundle exec cucumber
-----
-
-
-include::ROOT:partial$notes/docker-auth.adoc[]
 
 [#see-also]
 == See also
 
 * xref:persist-data.adoc[Persisting Data]
-* xref:caching-strategy.adoc[Caching Strategies]
 * xref:orchestrate:workspaces.adoc[Workspaces]
 * xref:artifacts.adoc[Artifacts]
 * xref:optimizations.adoc[Optimizations Overview]
+* xref:docker-layer-caching.adoc[Docker Layer Caching]
+* xref:toolkit:examples-and-guides-overview.adoc[Language Guides and Demo Projects]

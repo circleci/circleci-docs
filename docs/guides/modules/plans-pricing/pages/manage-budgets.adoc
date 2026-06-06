@@ -11,11 +11,11 @@ Budget controls help you manage and monitor your CircleCI credit usage by settin
 
 Budget controls allow you to:
 
-* **Set weekly budget limits** for your entire organization or individual projects.
-* **Track credit consumption** in real-time as a percentage of your budget.
-* **Receive automated notifications** when you approach or reach budget thresholds.
+* *Set weekly budget limits* for your entire organization or individual projects.
+* *Track credit consumption* in real-time as a percentage of your budget.
+* *Receive automated notifications* when you approach or reach budget thresholds.
 
-Budgets run on weekly cycles from Monday 00:00 UTC through Sunday 23:59:59 UTC and reset automatically each week.
+Budgets run on weekly cycles from Monday 00:00:00 UTC through Sunday 23:59:59 UTC and reset automatically each week.
 
 == What counts towards budgets?
 
@@ -23,16 +23,16 @@ NOTE: User seat charges are excluded from budget limits, as these are fixed orga
 
 Your budget limits track credits consumed across:
 
-* **Compute usage** for all execution environments (Docker, machine, macOS, Windows, GPU, Arm).
-* **Docker Layer Caching (DLC)** usage.
-* **Storage costs** for artifact and workspace storage.
-* **IP ranges** usage, to restrict traffic to specific IP ranges.
-* **Network usage**, data transfer costs.
-* **AI agents** usage.
+* *Compute usage* for all execution environments (Docker, machine, macOS, Windows, GPU, Arm).
+* *Docker Layer Caching (DLC)* usage.
+* *Storage costs* for artifact and workspace storage.
+* *IP ranges* usage, to restrict traffic to specific IP ranges.
+* *Network usage*, data transfer costs.
+* *AI agents* usage.
 
 == Prerequisites
 
-To use Budget Controls, you need:
+To use budget controls, you need:
 
 * A CircleCI Scale Plan.
 * Organization administrator permissions to create, edit, or delete budgets.
@@ -44,7 +44,7 @@ The following steps show you how to set up budget controls for your organization
 
 === Create an organization budget
 
-. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
 . Scroll down to the *Credit Budget* section.
 . Select btn:[Add organization budget] to open the add organization budget modal.
@@ -53,7 +53,7 @@ The following steps show you how to set up budget controls for your organization
 
 === Create a project budget
 
-. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
 . Scroll down to the *Credit Budget* section.
 . Select btn:[Add project budget] to open the add project budget modal.
@@ -63,20 +63,20 @@ The following steps show you how to set up budget controls for your organization
 
 === Edit a budget
 
-. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
 . Scroll down to the *Credit Budget* section.
 . Locate the budget you want to edit (organization or project).
-. Select the corresponding budget edit icon icon:edit-solid[Edit icon]
+. Select the corresponding budget edit icon icon:edit-solid[Edit icon].
 . Update the credit budget limit in the text field.
 . Select btn:[Save].
 
 === Delete a budget
 
-. In the link:https://app.circleci.com[CircleCI web app] select your organization.
+. In the link:https://app.circleci.com[CircleCI web app], select your organization.
 . Navigate to *Plan* in the CircleCI web app sidebar and select the *Credit Usage* tab.
 . Scroll down to the *Credit Budget* section.
-. Locate the budget you want to edit (organization or project).
+. Locate the budget you want to delete (organization or project).
 . Select the corresponding budget trash bin icon icon:delete[Trash bin icon].
 . Confirm the deletion by selecting btn:[Delete budget].
 

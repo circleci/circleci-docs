@@ -22,11 +22,11 @@ NOTE: GitHub does not currently provide a granular way for you to rerun workflow
 [#github-check-and-github-status-updates]
 == GitHub Check and GitHub status updates
 
-GitHub Checks should not be confused with GitHub status updates:
+GitHub Checks are different than GitHub status updates:
 
 * *GitHub Checks* are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
 ** GitHub Checks from OAuth integrations have the same name as the associated workflow.
-** GitHub Checks from GitHub App integrations are named using a combination of the workflow name and the first eight characters of the pipeline definition ID. The identifier is used to prevent naming collisions. The pipeline definition ID is available in the *Project Settings* > *Pipelines* page in the CircleCI web app.
+** GitHub Checks from GitHub App integrations are named using a combination of the workflow name and the first eight characters of the pipeline definition ID. The identifier is used to prevent naming collisions. The pipeline definition ID is available in the menu:Project Settings[Project Setup] page in the CircleCI web app.
 ** Each workflow in a pipeline generates a GitHub Check. If multiple pipelines trigger for the same commit SHA with workflows that share the same name, only one GitHub Check appears for that workflow name. Use unique workflow names across pipelines to get distinct GitHub Checks.
 * GitHub *status updates* are the default way status updates from your builds are reported in your VCS UI. Status updates are reported per _job_. For more information on status updates, see the xref:status-updates.adoc[Status Updates Overview] guide.
 
@@ -53,7 +53,7 @@ If you are using GitHub Checks or GitHub status updates with the xref:orchestrat
 +
 .CircleCI VCS Settings Page
 image::guides:ROOT:github-checks.png[CircleCI VCS Settings Page]
-. You are now in the GitHub CircleCI Checks App settings page. Select the repositories that should use checks and select *Save*.
+. You are now in the GitHub CircleCI Checks App settings page. Select the repositories that you want to use Checks and select *Save*.
 
 After installation completes, the Checks tab on the GitHub PR view is populated with workflow status information. From the Checks tab you can rerun workflows or navigate to the CircleCI app to view further information.
 

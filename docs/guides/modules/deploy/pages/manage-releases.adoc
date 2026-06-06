@@ -36,7 +36,7 @@ NOTE: The steps outlined here are to revert a deployment from the deploys dashbo
 
 To understand the btn:[Restore Version] action, it may be helpful to understand the equivalent commands for Kubernetes Deployments, Helm, and Argo Rollouts. Selecting the btn:[Restore Version] action from the CircleCI web app is the equivalent of using the following:
 
-* If you are using Helm (Helm opt-in instructions are xref:configure-your-kubernetes-components.adoc#helm-rollback[here]):
+* If you are using Helm (see xref:configure-your-kubernetes-components.adoc#helm-rollback[Helm Opt-in Instructions]):
 +
 [,shell]
 ----
@@ -141,7 +141,7 @@ NOTE: You can use this action if you are using link:https://argoproj.github.io/a
 Use the btn:[Retry Rollout] action to retry a Rollout that has failed. For more information about this action, see link:https://argo-rollouts.readthedocs.io/en/latest/generated/kubectl-argo-rollouts/kubectl-argo-rollouts_retry/[Argo Rollout retry].
 
 .Retry Rollout button
-image::guides:ROOT:releases/retry-rollout.png[Screenshot showing the retry rollout button]
+image::guides:ROOT:releases/retry-rollout.png[Screenshot showing the retry Rollout button]
 
 [#retry-steps]
 === Steps
@@ -172,7 +172,7 @@ Use the btn:[Promote] or btn:[Promote All] action to progress a deployment that 
 * Skip the step.
 * btn:[Promote All] to skip all steps and complete the deployment.
 
-The btn:[Promote] a step and btn:[Promote All] options are visible in the step view on the deployment details page, which you can access by selecting a version number in the deploys UI.
+The btn:[Promote] a step and btn:[Promote All] options are visible in the step view on the deployment details page. Access this view by selecting a version number in the deploys UI.
 
 .Promote options
 image::guides:ROOT:releases/promote-options.png[Screenshot showing the promote deploy step options]

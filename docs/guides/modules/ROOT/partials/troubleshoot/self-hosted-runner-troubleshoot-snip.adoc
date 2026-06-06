@@ -107,8 +107,7 @@ image::guides:ROOT:task-lifecycle.png[Image showing the task lifecycle with no c
 
 - **Pod restart:** Check if there were any container agent pod restarts around the time the workflow ran. If the pod was restarted around that time it would have resulted in the job not being processed. In such a case, we recommend rerunning the job once again.
 
-You can check the logs for any of the previous runs using the command `kubectl logs -n <namespace> <full pod name> --previous`
-`.
+You can check the logs for any of the previous runs using the command `kubectl logs -n <namespace> <full pod name> --previous`.
 
 - **Network connectivity issue:** Check the network connectivity of the container agent, especially if the issue is intermittent. The issue can be seen when the container agent has lost network connectivity after claiming the tasks.
 
@@ -121,7 +120,7 @@ Refer to the link:https://kubernetes.io/docs/tasks/debug/debug-cluster/resource-
 [#task-agent-appears-not-running]
 === Task agent appears not running
 
-The task pod may fail with an `Task agent appears not running: /bin/sh: 1: kill: No such process` error due to a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe].
+The task pod may fail with a `Task agent appears not running: /bin/sh: 1: kill: No such process` error due to a failing link:https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#types-of-probe[liveness probe].
 
 The liveness probe on the task pod checks to see if the PID provided by task agent is running using `kill -0 $PID`. Task agent will output its PID to a file used by the liveness probe to confirm task agent is running. This probe may fail if the task agent process fails to start, no longer exists or takes longer to initiate than the liveness probe's default timeouts. You may adjust the liveness probe defaults in link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml#L196-L218[the `values.yaml`] for link:https://github.com/CircleCI-Public/container-runner-helm-chart/tree/main[container runner's Helm chart].
 
@@ -147,7 +146,7 @@ If the liveness probe fails or the task pod terminates, a link:https://kubernete
 
 When a task pod fails, it is cleaned up by the container-agent almost immediately. However, sometimes you may want the pod to stick around longer so that you may review the logs and diagnose the failure. You can disable task pod deletion by adding the environment variable `KUBE_DISABLE_POD_DELETION_ON_TASK_CLEANUP=true` to your container-agent `values.yaml`.
 
-example:
+Example:
 
 ```yaml
 agent:
