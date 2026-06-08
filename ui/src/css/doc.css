@@ -15,7 +15,7 @@
 @media screen and (max-width: 1199.5px) {
   .doc {
     max-width: var(--doc-max-width--desktop);
-    padding: 0 32px 4rem;
+    padding: 0 var(--doc-padding-x) 4rem;
   }
 }
 
