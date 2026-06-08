@@ -75,6 +75,7 @@ Buildah
 Buildkite
 Buildx
 Bundler
+[Cc]anonical(?:'s)?
 Capistrano
 Certbot
 Cest
@@ -416,3 +417,4 @@ Xvfb
 YAML
 Zstd
 LangSmith
+[Tt]estsuite

@@ -4,50 +4,52 @@
 :experimental:
 :page-description: Evenly distribute tests across parallel execution nodes
 
-[NOTE]
-====
-*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
-Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
-====
-
-Dynamic test splitting distributes tests across parallel nodes to minimize node idle time. Unlike static splitting, which divides tests evenly upfront, dynamic splitting uses a shared queue that nodes pull from continuously. This ensures balanced workloads even when some nodes start late or run slower than expected.
+Dynamic test splitting reduces overall pipeline time by distributing test atoms across parallel nodes so all nodes finish at the same time. Unlike static test splitting, which pre-assigns tests upfront, dynamic test splitting redistributes work to nodes that are ready. Dynamic test splitting prevents nodes from sitting idle while others finish late.
 
 == Is my project a good fit for dynamic test splitting?
 
-Dynamic test splitting pulls multiple batches from the queue, requiring the test runner to start up for each batch.
+This section outlines several project features that indicate your project is a good candidate for dynamic test splitting:
 
-If your test runner has significant startup overhead, these repeated startups can outweigh the benefits of dynamic test splitting. Disable dynamic test splitting to use static test splitting instead, where each node starts up once and runs all its pre-assigned tests in a single batch.
+=== Your test runner starts up quickly
+
+If your test runner startup time is short compared to the test runtime, the overhead of running multiple batches is negligible. This can make your project a good candidate for dynamic test splitting.
+
+For example, if your test runner takes ten seconds to start and your tests take 5 minutes to run, the overhead of running multiple batches is not significant. Conversely, if your test runner takes 2 minutes to start and your tests take just 3 minutes to run, the overhead of running multiple batches is significant.
+
+Static test splitting runs all tests in a single batch. Dynamic test splitting runs tests across multiple batches.
+
+=== Nodes start at noticeably different times
+
+If your jobs have long container setup, dependency installation, or image pulls, each node's startup time can vary between runs. Your tests across nodes will start and finish at different times. Dynamic test splitting redistributes tests to nodes that are ready.
+
+Static test splitting pre-allocates tests to each node. Dynamic test splitting redistributes tests to nodes that are ready.
+
+=== Your job produces JUnit test results and you use the store test results step
+
+Static test splitting uses previous test results to preallocate tests to each node. Dynamic test splitting uses the same data to preallocate and redistribute tests.
+
+If your job uses the `store_test_results` step, dynamic test splitting reads the previous JUnit runtimes on each run to preallocate and redistribute tests.
 
 == How it works
 
 When you configure parallelism in your job and enable dynamic test splitting, Smarter Testing automatically:
 
-* Sorts tests by duration by retrieving timing data from previous runs, with longer tests prioritized first.
-* Creates a shared queue containing all tests to be run.
-* Enables nodes to pull dynamically. Each parallel node continuously pulls test batches from the queue.
-* Adjusts batch sizes dynamically as the test queue empties to ensure even distribution.
+* Sorts tests by duration using timing data from previous runs, with longer tests prioritized first.
+* Gives the first node that is ready a full batch of tests, like static test splitting.
+* Gives each later-starting node a smaller batch size so all nodes finish at the same time.
+* Evenly distributes the remaining tests across all nodes.
 
-Dynamic test splitting prevents any single slow node from becoming a bottleneck. Even if some nodes start late or run slower than expected, this dynamic batching ensures work stays balanced across all available nodes.
+.Static test splitting with uneven node start times
+image::guides:ROOT:test/static-test-splitting-uneven-nodes.png[Job timings with static test splitting,role=icon-light]
+.Static test splitting with uneven node start times
+image::guides:ROOT:test/static-test-splitting-uneven-nodes-dark.png[Job timings with static test splitting,role=icon-dark]
 
-[mermaid]
-----
-gantt
-      dateFormat X
-      axisFormat %s
-
-      section Node 0
-      Startup :n0s, 0, 2
-      Test A............... Test  B............. Test  C..... Test F........ :n0a, 2,  10
-
-      section Node 1
-      Startup :n2s, 0, 5
-      Test G ................... :n2a, 5, 10
-
-      section Node 2
-      Startup :n1s, 0, 3
-      Test D......................... Test E................ :n1a, 3, 10
-----
+.Dynamic test splitting with uneven node start times
+image::guides:ROOT:test/dynamic-test-splitting-uneven-nodes.png[Job timings with dynamic test splitting,role=icon-light]
+.Dynamic test splitting with uneven node start times
+image::guides:ROOT:test/dynamic-test-splitting-uneven-nodes-dark.png[Job timings with dynamic test splitting,role=icon-dark]
 
 == Prerequisites
 
@@ -56,8 +58,12 @@ Before enabling dynamic test splitting, ensure you have completed the xref:getti
 * Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
+* Set parallelism greater than 1 for the test jobs that you want to split. See the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration Reference] for more information.
 
-== 1. Enable dynamic test splitting option in your test-suites.yml file
+
+== 1. Enable dynamic test splitting in your test-suites.yml file
+
+Add the `dynamic-test-splitting` option to your existing `test-suites.yml`. Keep the existing `discover` and `run` commands in place.
 
 [source,yaml]
 ----
@@ -70,28 +76,26 @@ options:
 
 == 2. Run locally
 
-Use `--doctor` locally to validate the `test-suites.yml` is set up correctly.
-
-The CLI will run through additional checks when dynamic test splitting is enabled, if any results look incorrect an action
-item is provided to resolve it. Follow the steps until all checks pass.
+Use `--doctor` locally to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when dynamic test splitting is enabled. If any results look incorrect, an action item is provided to resolve it.
 
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --doctor
 ----
 
-[TIP]
-====
-Run the `circleci run testsuite` CLI tooling from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
+Follow the steps until all checks pass.
 
-The `testsuite` tooling will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
-====
+include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
 == 3. Run in CI
 
 Commit `.circleci/test-suites.yml` to your feature branch and push to your VCS.
 
-Verify dynamic test splitting is working as expected in CI by looking at the "timings" tab in the UI.
+Verify dynamic test splitting is working as expected in CI by looking at the "timings" tab in the UI:
+
+. Navigate to your pipeline in the CircleCI web app and open the test job.
+. Open the **Timings** tab. Confirm that test distribution across nodes is more even than before enabling dynamic test splitting.
+. Check that no single node finishes significantly earlier or later than the others.
 
 == Next steps
 

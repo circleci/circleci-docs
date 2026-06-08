@@ -5,33 +5,28 @@
 :page-description: Automatically retry failed tests to improve build reliability
 :page-show-readtime: true
 
-[NOTE]
-====
-*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
-Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
-====
-
-Auto rerun failed tests automatically detects and retries test failures during your test run. Compared with the existing xref:rerun-failed-tests.adoc[Rerun Failed Tests] feature that CircleCI provides, Auto rerun failed tests eliminates the need to:
+Auto rerun failed tests automatically detects and retries test failures during your test run. Compared with the existing xref:rerun-failed-tests.adoc[Rerun Failed Tests] feature that CircleCI provides, auto rerun failed tests eliminates the need to:
 
 * Manually identify which jobs failed.
 * Manually select the btn:[Rerun failed tests] option in the CircleCI web app.
 
 == Is my project a good fit for auto rerun failed tests?
 
-Auto rerun failed tests reruns tests within the same step automatically until all tests pass or the maximum rerun attempts is reached.
+Auto rerun failed tests reruns test atoms within the same step automatically until all tests pass or the maximum rerun attempts is reached.
 
 If your test suite has flaky tests, auto rerun can quickly recover from test failures without rerunning your entire test suite.
 
 == How it works
 
-All tests are run as normal with the `discover` and `run` command.
+All test atoms are run as normal with the `discover` and `run` commands.
 
 When auto rerun failed tests is enabled:
 
-* Any test results that failed in the JUnit XML output are rerun.
-* The process repeats until all tests are successful, or the maximum number of rerun attempts is reached.
-* If all tests are successful, the errors are suppressed and the job succeeds.
+* Any test atoms that failed in the JUnit XML output are rerun.
+* The process repeats until all test atoms pass, or the maximum number of rerun attempts is reached.
+* If all test atoms pass, the errors are suppressed and the job succeeds.
 * If the maximum number of reruns is reached and there are still test failures, the job fails.
 
 [mermaid]
@@ -83,7 +78,9 @@ Before enabling auto rerun failed tests, ensure you have completed the xref:gett
 * Correctly configured JUnit XML output in `.circleci/test-suites.yml`.
 
 
-== 1. Enable auto rerun failed tests option in your `.circleci/test-suites.yml` file
+== 1. Enable auto rerun failed tests in your `.circleci/test-suites.yml` file
+
+Add the `max-auto-rerun` option to your `.circleci/test-suites.yml`:
 
 [source,yaml]
 ----
@@ -103,38 +100,32 @@ options:
 
 |`max-auto-rerun`
 |0
-|The maximum number of times tests will be rerun if they fail. `max-auto-rerun` can be set in the range 0 to 10 inclusive.
+|The maximum number of times test atoms are rerun if they fail. Accepts a value in the range 0 to 10 inclusive.
 
-When `auto-rerun-duration` is set, tests will rerun until one of the two conditions is reached.
+When `auto-rerun-duration` is also set, test atoms rerun until one of the two conditions is reached.
 
 |`auto-rerun-duration`
 |null
-|The duration or percentage of total runtime tests will be rerun if they fail, for example, `5m`, `1h`, `20%`.
+|The duration or percentage of total runtime to spend rerunning failed test atoms, for example, `5m`, `1h`, `20%`.
 
-When `max-auto-rerun` is set, tests will rerun until one of the two conditions is reached.
+When `max-auto-rerun` is also set, test atoms rerun until one of the two conditions is reached.
 |===
 --
 
 == 2. Run locally
 
-Use `--doctor` locally to validate the `test-suites.yml` is set up correctly.
-
-The CLI will run through additional checks when auto rerun is enabled, if any results look incorrect an action
-item is provided to resolve it. Follow the steps until all checks pass.
+Use `--doctor` locally to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when auto rerun is enabled. If any results look incorrect, an action item is provided to resolve it.
 
 [source,console]
 ----
 $ circleci run testsuite "ci tests" --doctor
 ----
 
-[TIP]
-====
-Run the `circleci run testsuite` CLI tooling from the directory where your tests are located. This is typically your repository root, but for monorepos it can be the root of a subpackage (for example, `cd service-1 && circleci run testsuite "ci tests"`).
+Follow the steps until all checks pass.
 
-The testsuite will automatically find the `.circleci/test-suites.yml` configuration file by walking up the directory tree. All commands (`discover`, `run`, `analysis`) execute relative to where you run the CLI, so avoid using `cd` or `--directory` flags within your commands.
-====
+include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
-Modify a test to cause it to fail and check that the test is rerun locally by removing the `--doctor` flag.
+To verify auto rerun locally, modify a test to cause it to fail, then run the test suite without the `--doctor` flag:
 
 [source,console]
 ----
@@ -145,7 +136,7 @@ $ circleci run testsuite "ci tests"
 
 Commit `.circleci/test-suites.yml` to your feature branch and push to your VCS.
 
-Verify auto rerun failed tests is working as expected in CI by looking at the "Test" tab in the UI.
+Verify auto rerun failed tests is working as expected in CI by checking the *Tests* tab in the CircleCI web app.
 
 == Next steps
 

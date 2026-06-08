@@ -52,6 +52,39 @@ body.-toc aside.toc.sidebar {
     flex: 0 0 var(--toc-width);
     order: 1;
   }
+
+  /* The breadcrumb toolbar sits above the article/TOC flex row and spans the
+     full width of main. Constrain its width to the article column so the trail
+     truncates before it can reach the (negatively offset) sticky TOC.
+     The 5rem subtracted is the toolbar's own left margin (lg:ml-12 = 3rem) plus a
+     ~2rem gap before the TOC; keep it in sync with that margin.
+     A percentage width is used rather than margin-right because margins count
+     toward intrinsic (max-content) width: a wide right margin would inflate main
+     to its max-width and overflow the viewport. The percentage is ignored during
+     intrinsic sizing, while the existing max-w-[800px] still caps the trail. */
+  .article-toolbar {
+    width: calc(100% - var(--toc-width) - 5rem);
+  }
+
+  /* Pages without a sidebar TOC (body.-toc) give the article full width, so the
+     toolbar should not reserve a TOC column. */
+  body.-toc .article-toolbar {
+    width: auto;
+  }
+
+  /* Keep the trail on a single line and truncate it with an ellipsis at the
+     reserved boundary. Wrapping would grow the toolbar and push the whole
+     article/TOC row — and therefore the TOC — down a line. min-width: 0 lets the
+     nav flex item shrink below its content width so the overflow can be clipped. */
+  .article-toolbar nav[aria-label="breadcrumbs"] {
+    min-width: 0;
+  }
+
+  .article-toolbar nav[aria-label="breadcrumbs"] ul {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 @media screen and (min-width: 1280px) { /* Use xl breakpoint to match existing xl:items-center */
@@ -68,5 +101,10 @@ body.-toc aside.toc.sidebar {
 
   main {
     max-width: calc(var(--doc-max-width--desktop) + var(--toc-width--widescreen)); /* Article + wider TOC */
+  }
+
+  /* Match the wider sidebar TOC column at widescreen widths. */
+  .article-toolbar {
+    width: calc(100% - var(--toc-width--widescreen) - 5rem);
   }
 }

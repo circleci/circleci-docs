@@ -971,6 +971,7 @@ jobs:
 
 * https://circleci.com/developer/machine/image/ubuntu-2204[Ubuntu-2204]
 * https://circleci.com/developer/machine/image/ubuntu-2404[Ubuntu-2404]
+* https://circleci.com/developer/machine/image/ubuntu-2604[Ubuntu-2604]
 
 More information on the software available in each image can be found in our https://discuss.circleci.com/tag/machine-images[Discuss forum].
 
