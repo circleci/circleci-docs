@@ -710,22 +710,19 @@
 
     // ===== KEYBOARD SHORTCUT HANDLER =====
 
-    function handleKeyboardShortcut (e) {
-      // Check for Cmd+/ (Mac) or Ctrl+/ (Windows/Linux)
-      const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0
-      const modifierKey = isMac ? e.metaKey : e.ctrlKey
-
-      if (modifierKey && e.key === '/') {
-        e.preventDefault()
-
-        // Focus the appropriate search input based on current view
-        if (isMobileView && elements.mobileSearchInput) {
-          elements.mobileSearchInput.focus()
-        } else {
-          elements.searchInput.focus()
-        }
-      }
-    }
+    // Cmd+/ shortcut disabled in favour of Cmd+K (handled by Kapa widget)
+    // function handleKeyboardShortcut (e) {
+    //   const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0
+    //   const modifierKey = isMac ? e.metaKey : e.ctrlKey
+    //   if (modifierKey && e.key === '/') {
+    //     e.preventDefault()
+    //     if (isMobileView && elements.mobileSearchInput) {
+    //       elements.mobileSearchInput.focus()
+    //     } else {
+    //       elements.searchInput.focus()
+    //     }
+    //   }
+    // }
 
     function updateKeyboardShortcutVisibility () {
       // Hide keyboard shortcut when input has focus or contains text
@@ -810,8 +807,7 @@
       // Listen for window resize to handle mobile/desktop transitions
       window.addEventListener('resize', updateSearchUIForScreenSize)
 
-      // Listen for keyboard shortcut (Cmd+/ or Ctrl+/)
-      document.addEventListener('keydown', handleKeyboardShortcut)
+      // document.addEventListener('keydown', handleKeyboardShortcut)
     }
 
     // Initialize everything
