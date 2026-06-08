@@ -89,8 +89,10 @@
   font-size: 16px;
 }
 
-/* Mobile heading sizes */
-@media screen and (max-width: 1023.5px) {
+/* Mobile heading sizes (below the tablet breakpoint). 767.5px pairs with the
+   768px html font-size bump in base.css so the whole type scale switches at one
+   boundary. */
+@media screen and (max-width: 767.5px) {
   .doc h1 {
     font-size: 24px;
   }
