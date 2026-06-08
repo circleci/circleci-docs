@@ -23,7 +23,7 @@ The `version` field is intended to be used in order to issue warnings for deprec
 | `version`
 | Y
 | String
-| `2`, `2.0`, or `2.1` See the xref:reusing-config.adoc#[Reusable Configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+| `2`, `2.0`, or `2.1`. See the xref:reusing-config.adoc#[Reusable Configuration] page for an overview of 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 |===
 --
 
@@ -215,8 +215,7 @@ parameters:
     default: "current"
 ----
 
-Once you have declared a pipeline parameter, you can pass a pipelines parameter value when triggering a pipeline via the API or from the CircleCI web app.
-'''
+Once you have declared a pipeline parameter, you can pass a pipeline parameter value when triggering a pipeline via the API or from the CircleCI web app.
 
 [#executors]
 == *`executors`*
@@ -334,7 +333,7 @@ jobs:
 [#job-name]
 === *<``job_name``>*
 
-Each job consists of the job's name as a key and a map as a value. A name must be case insensitive unique within a current `jobs` list. The value map has the following attributes:
+Each job consists of the job's name as a key and a map as a value. A name must be unique and case-insensitive within the `jobs` list. The value map has the following attributes:
 
 [.table-scroll]
 --
@@ -460,7 +459,7 @@ jobs:
     plan_name: <my-service-release>
 ----
 
-The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organise the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using no-op jobs,  see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook]
+The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organize the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using `no-op` jobs, see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook].
 
 **Example** of a job with a `no-op` type:
 
@@ -681,7 +680,7 @@ workflows:
 [#executor-job]
 == Executor *`docker`* / *`machine`* / *`macos`*
 
-CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify and image and a resource class. An executor defines the underlying technology, environment, and operating system in which to run a job.
+CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify an image and a resource class. An executor defines the underlying technology, environment, and operating system in which to run a job.
 
 Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
 
@@ -692,7 +691,7 @@ Learn more about execution environments and executors in the xref:guides:executi
 [#docker]
 === `docker`
 
-Configure a job to use the Docker execution environment using the  `docker` key which takes a list of maps:
+Configure a job to use the Docker execution environment using the `docker` key which takes a list of maps:
 
 [.table-scroll]
 --
@@ -1363,7 +1362,7 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 '''
 
 [#gpu-execution-environment-windows]
-==== GPU execution-environment (Windows)
+==== GPU execution environment (Windows)
 
 include::guides:ROOT:partial$execution-resources/gpu-windows-resource-table.adoc[]
 
@@ -1389,7 +1388,7 @@ jobs:
 '''
 
 [#arm-execution-environment-linux]
-==== Arm VM execution-environment
+==== Arm VM execution environment
 
 include::guides:ROOT:partial$execution-resources/arm-resource-table.adoc[]
 
@@ -1451,9 +1450,9 @@ jobs:
           command: make test
 ----
 
-Here `run` is a step type. The `name` attribute is used by the UI for display purposes. The `command` attribute is specific for `run` step and defines command to execute.
+Here `run` is a step type. The `name` attribute is used by the UI for display purposes. The `command` attribute is specific to the `run` step and defines the command to execute.
 
-Some steps may implement a shorthand semantic. For example, `run` may be also be called like this:
+Some steps may implement a shorthand semantic. For example, `run` may also be called like this:
 
 [,yml]
 ----
@@ -1465,7 +1464,7 @@ jobs:
       - run: make test
 ----
 
-In its short form, the `run` step allows us to directly specify which `command` to execute as a string value. In this case step itself provides default suitable values for other attributes (`name` here has the same value as `command`, for example).
+In its short form, the `run` step allows us to directly specify which `command` to execute as a string value. In this case the step itself provides default suitable values for other attributes (`name` here has the same value as `command`, for example).
 
 Another shorthand, which is possible for some steps, is to use the step name as a string instead of a key/value pair:
 
@@ -1505,7 +1504,7 @@ Each built-in step is described in detail below.
 
 Use the `run` step to invoke command-line programs. The `run` step takes either a map of configuration values, or, when you call it in short-form, a string that serves as both the `command` and `name`. CircleCI executes `run` commands using non-login shells by default, so you must explicitly source any `dotfiles` as part of the command.
 
-NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate From Deploy to Run].
+NOTE: The `run` step replaces the deprecated `deploy` step. If your job has a parallelism of 1, the deprecated `deploy` step can be swapped out directly for the `run` step. If your job has parallelism `> 1`, see xref:guides:orchestrate:migrate-from-deploy-to-run.adoc#[Migrate From Deploy to Run].
 
 [.table-scroll]
 --
@@ -1536,7 +1535,7 @@ NOTE: the `run` step replaces the deprecated `deploy` step. If your job has a pa
 | `background`
 | N
 | Boolean
-| Whether or not this step run in the background (default: false)
+| Whether or not this step runs in the background (default: false)
 
 | `working_directory`
 | N
@@ -1596,7 +1595,7 @@ For jobs that run on *Linux*, CircleCI defaults the `shell` option to `/bin/bash
 
 For jobs that run on *macOS*, the default shell is `/bin/bash --login -eo pipefail`. The shell is a non-interactive login shell. The shell executes `/etc/profile/` followed by `~/.bash_profile` before every step.
 
-For more information about which files are executed when Bash is invocated, link:https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
+For more information about which files are executed when Bash is invoked, link:https://linux.die.net/man/1/bash[see the `INVOCATION` section of the `bash` manpage].
 
 Descriptions of the `-eo pipefail` options are provided below.
 
@@ -1642,9 +1641,9 @@ If `pipefail` is enabled, the pipeline's return status is the value of the last 
 
 If `make test` fails, the `-o pipefail` option causes the whole step to fail. Without `-o pipefail`, the step always runs successfully because the result of the whole pipeline is determined by the last command (`tee test-output.log`), which always returns a zero status.
 
-NOTE: If `make test` fails the rest of pipeline is executed.
+NOTE: If `make test` fails, the rest of the pipeline is executed.
 
-If you want to avoid this behaviour, you can specify `set +o pipefail` in the command or override the whole `shell` (see example above).
+If you want to avoid this behavior, you can specify `set +o pipefail` in the command or override the whole `shell` (see example above).
 
 We recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
@@ -1697,7 +1696,7 @@ In this case, `command` and `name` become the string value of `run`, and the res
 
 By default, CircleCI executes job steps one at a time, in the order you define them in `config.yml`, until a step fails (returns a non-zero exit code). After a command fails, no further job steps execute.
 
-Adding the `when` attribute to a job step allows you to override this default behaviour, and selectively run or skip steps depending on the status of the job.
+Adding the `when` attribute to a job step allows you to override this default behavior, and selectively run or skip steps depending on the status of the job.
 
 The `when` attribute accepts the following values:
 
@@ -1845,7 +1844,7 @@ workflows:
 [#checkout]
 === *`checkout`*
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. For GitHub OAuth, GitLab, and Bitbucket pipelines, `checkout` configures git to check out over SSH. If you require git over HTTPS, do not use this step as it configures git to checkout over SSH. For GitHub App pipelines (GitHub Cloud and GitHub Enterprise Server), `checkout` uses HTTPS.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to simplify the process of checking out code. For GitHub OAuth, GitLab, and Bitbucket pipelines, `checkout` configures git to check out over SSH. If you require git over HTTPS, do not use this step as it configures git to check out over SSH. For GitHub App pipelines (GitHub Cloud and GitHub Enterprise Server), `checkout` uses HTTPS.
 
 [.table-scroll]
 --
@@ -2042,7 +2041,7 @@ When storing a new cache, the `key` value may contain special, templated, values
 | The VCS revision currently being built.
 
 | `{{ .CheckoutKey }}`
-| The SSH key used to checkout the repository.
+| The SSH key used to check out the repository.
 
 | `{{ .Environment.variableName }}`
 | The environment variable `variableName` (supports any environment variable xref:guides:security:env-vars.adoc#[Exported by CircleCI] or added to a specific xref:guides:security:contexts.adoc#[context]--not any arbitrary environment variable).
@@ -2054,7 +2053,7 @@ When storing a new cache, the `key` value may contain special, templated, values
 | The current time in seconds since the UNIX epoch.
 
 | `{{ arch }}`
-| The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
+| The OS and CPU information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 |===
 --
 
@@ -2193,7 +2192,7 @@ See <<run>> for current processes. If you have parallelism `> 1` in your job, se
 [#storeartifacts]
 === *`store_artifacts`*
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the xref:guides:optimize:artifacts.adoc#[Uploading Artifacts] page for more information.
+Step to store artifacts (for example logs, binaries, etc.) to be available in the web app or through the API. See the xref:guides:optimize:artifacts.adoc#[Uploading Artifacts] page for more information.
 
 [.table-scroll]
 --
@@ -2357,7 +2356,7 @@ character-range:
 
 The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/').
 
-NOTE: Everything must be relative to the work space root directory.
+NOTE: Everything must be relative to the workspace root directory.
 
 '''
 
@@ -2786,7 +2785,7 @@ workflows:
 [#using-when-in-workflows]
 ==== *Using `when` in workflows*
 
-NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration. Workflows are always run unless there is a when or unless filter that prevents the workflow from being run. If you want a workflow to run in every pipeline, do not add a when or unless filter.
+NOTE: Using `when` or `unless` under `workflows` is supported in `version: 2.1` configuration. Workflows are always run unless there is a `when` or `unless` filter that prevents the workflow from being run. If you want a workflow to run in every pipeline, do not add a `when` or `unless` filter.
 
 You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a <<logic-statements,logic statement>> to determine whether or not to run that workflow.
 
@@ -2962,7 +2961,7 @@ Possible types of `requires` items:
 
 * Job name (a required job that must succeed for the job to start).
 * Map of job name to status (a required job that must attain the specified status for the job to start).
-* Map of job name to a list of statuses (a required job that must attain one of the specified status for the job to start).
+* Map of job name to a list of statuses (a required job that must attain one of the specified statuses for the job to start).
 
 The possible *status* values are: `success`, `failed`, `canceled`, `unauthorized`, `not_run`, and `terminal`.
 |===
@@ -3003,7 +3002,7 @@ workflows:
 [#name]
 ==== *`name`*
 
-The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (for example, sayhello-1 , sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
+The `name` key can be used to invoke reusable jobs across any number of workflows. Using the name key ensures numbers are not appended to your job name (for example, sayhello-1, sayhello-2, etc.). The name you assign to the `name` key needs to be unique, otherwise the numbers will still be appended to the job name.
 
 [.table-scroll]
 --
@@ -3267,7 +3266,7 @@ curl -X POST https://circleci.com/api/v2/project/circleci/<org-id>/<project-id>/
 
 **Operators**
 
-The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)`. as in the examples above.
+The operators you can use for expression-based job filters are described in the following table. You can also group sub-expressions with parentheses `(`, `)` as in the examples above.
 
 include::guides:ROOT:partial$using-expressions/operators.adoc[]
 
@@ -3337,7 +3336,7 @@ CircleCI does not run workflows for tags unless you explicitly specify tag filte
 Tags can have the keys `only` and `ignore`. You may also use regular expressions to match against tags by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string. Both lightweight and annotated tags are supported.
 
 * Any tags that match `only` runs the job.
-* Any tags that match `ignore` does not run the job.
+* Any tags that match `ignore` do not run the job.
 * If neither `only` nor `ignore` are specified then the job is skipped for all tags.
 * If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
@@ -3667,10 +3666,7 @@ Logic statements always evaluate to a boolean value at the top level, and coerce
 as necessary. They can be nested in an arbitrary fashion, according to their
 argument specifications, and to a maximum depth of 100 levels.
 
-`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular
-expressions]
-for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and
-`$` to avoid accidental partial matches.
+`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. It is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
 
 NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
