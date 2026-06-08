@@ -7,28 +7,30 @@
   padding: 0 1rem 4rem;
 }
 
-@media screen and (max-width: 1023.5px) {
+/* Below the 1200px sidebar-TOC reflow (mobile + tablet) there is no TOC beside
+   the article, so the article is a centered column — capped at the same width it
+   uses on desktop and centred via the base `margin: 0 auto` — with wider side
+   padding. The breadcrumb toolbar is centred to the same column in
+   article-toolbar.hbs so their left edges line up. */
+@media screen and (max-width: 1199.5px) {
   .doc {
+    max-width: var(--doc-max-width--desktop);
     padding: 0 32px 4rem;
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .doc {
-    flex: auto;
-    font-size: var(--doc-font-size--desktop);
-    margin: var(--doc-margin--desktop);
-    max-width: var(--doc-max-width--desktop);
-    min-width: 0;
-  }
-}
-
-/* Apply aggressive flexbox fix only above 1200px where the original problem occurs */
+/* The article column only narrows for the TOC at 1200px, where the sidebar TOC
+   actually appears (see main.css). Below that — the entire tablet range — the
+   article stays full-width, so there is no capped column with an empty gutter
+   where the TOC will later sit. Previously this block fired at 1024px, 176px
+   before the TOC arrived, which left that dead gutter on the right. */
 @media screen and (min-width: 1200px) {
   .doc {
     flex: 1 1 0%;
     width: 0; /* Force flexbox to ignore content width */
-    max-width: var(--doc-max-width--desktop); /* Restore max-width for centering */
+    margin: var(--doc-margin--desktop);
+    max-width: var(--doc-max-width--desktop);
+    min-width: 0;
     transition: max-width 0.3s ease;
   }
 }
