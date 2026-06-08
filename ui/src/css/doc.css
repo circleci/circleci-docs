@@ -11,9 +11,19 @@
    the article, so the article is a centered column — capped at the same width it
    uses on desktop and centred via the base `margin: 0 auto` — with wider side
    padding. The breadcrumb toolbar is centred to the same column in
-   article-toolbar.hbs so their left edges line up. */
+   article-toolbar.hbs so their left edges line up.
+
+   width:100% + min-width:0 are required because .doc is a flex item and the base
+   `margin: 0 auto` gives it auto cross-axis margins. Auto margins make a flex
+   item size to its content (capped at max-width), so wide content (long code
+   lines, wide tables) would push it out to the 888px max-width even on a phone,
+   overflowing the page horizontally. width:100% sizes it to the container instead
+   (still capped/centred by max-width), and min-width:0 lets wide children be
+   clipped/scrolled inside the article rather than widening it. */
 @media screen and (max-width: 1199.5px) {
   .doc {
+    width: 100%;
+    min-width: 0;
     max-width: var(--doc-max-width--desktop);
     padding: 0 var(--doc-padding-x) 4rem;
   }
