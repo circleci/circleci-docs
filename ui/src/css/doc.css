@@ -99,6 +99,14 @@
     font-size: 24px;
   }
 
+  /* Gives the breadcrumbs→title gap on mobile, matching the tablet/desktop rule.
+     Uses the same --rem-base calc as the ≥768 rule for consistency; note the root
+     is 17px below 768px, so this resolves to ~37.8px rather than a true 40px until
+     the 17px-root quirk is revisited. */
+  .doc h1.page {
+    margin-top: calc(40 / var(--rem-base) * 1rem);
+  }
+
   .doc h2 {
     font-size: 20px;
     margin-bottom: 24px;
