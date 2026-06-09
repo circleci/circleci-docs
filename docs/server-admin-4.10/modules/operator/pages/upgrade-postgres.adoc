@@ -3,9 +3,12 @@
 :page-description: Learn how to upgrade the internal PostgreSQL database from version 12 to 14 in an installation of CircleCI Server 4.10.
 :experimental:
 
-PostgreSQL is a database service used by CircleCI Server. Server 4.10 ships PostgreSQL `14` so customers must upgrade to PostgreSQL 14 before upgrading to Server 4.10. This page describes how to upgrade the internal PostgreSQL instance from version `12` to `14`.
+PostgreSQL is a database service used by CircleCI Server. Server 4.10 ships PostgreSQL `14` so you must upgrade to PostgreSQL 14 before upgrading to Server 4.10. This page describes how to upgrade your internal PostgreSQL instance from version `12` to `14`.
 
-This major-version upgrade runs in place and uses `pg_upgrade` to migrate the on-disk data format. The upgrade requires downtime, typically 30 to 60 minutes depending on your database size and storage performance. All CircleCI services are unavailable during the upgrade, so schedule it during a maintenance window.
+== Important notes about upgrading PostgreSQL
+
+* This major-version upgrade runs in place and uses `pg_upgrade` to migrate the on-disk data format. The upgrade *requires downtime*, typically 30 to 60 minutes depending on your database size and storage performance. All CircleCI services are unavailable during the upgrade, so schedule it during a maintenance window.
+* A major-version upgrade *cannot be rolled back in place*. If anything goes wrong, you must restore from your backup snapshot.
 
 [#prerequisites]
 == Prerequisites
@@ -61,8 +64,6 @@ done
 +
 Any extension other than `plpgsql` must have a PostgreSQL 14 build, or the upgrade fails during its pre-checks.
 
-CAUTION: A major-version upgrade cannot be rolled back in place. If anything goes wrong, you must restore from your backup snapshot.
-
 [#scripted-upgrade]
 == Scripted upgrade
 
@@ -97,7 +98,7 @@ postgresql:
     tag: 14.22.4094-4922444
 ----
 +
-NOTE: Use the exact tag emitted by the script for your Server release rather than copying the example tag above.
+NOTE: Use the exact tag emitted by the script for your CircleCI Server release rather than copying the example tag above.
 
 . Run `helm upgrade` to bring PostgreSQL back up on the new image and restore your application-layer replicas.
 +

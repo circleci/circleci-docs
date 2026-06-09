@@ -7,7 +7,10 @@ PostgreSQL is a database service used by CircleCI Server. Server 4.9 ships Postg
 
 NOTE: PostgreSQL 12 reached end of life in November 2024 and no longer receives security or bug fixes. Upgrade to PostgreSQL 14 to stay on a supported version.
 
-This major-version upgrade runs in place and uses `pg_upgrade` to migrate the on-disk data format. The upgrade requires downtime, typically 30 to 60 minutes depending on your database size and storage performance. All CircleCI services are unavailable during the upgrade, so schedule it during a maintenance window.
+== Important notes about upgrading PostgreSQL
+
+* This major-version upgrade runs in place and uses `pg_upgrade` to migrate the on-disk data format. The upgrade *requires downtime*, typically 30 to 60 minutes depending on your database size and storage performance. All CircleCI services are unavailable during the upgrade, so schedule it during a maintenance window.
+* A major-version upgrade *cannot be rolled back in place*. If anything goes wrong, you must restore from your backup snapshot.
 
 [#prerequisites]
 == Prerequisites
@@ -62,8 +65,6 @@ done
 ----
 +
 Any extension other than `plpgsql` must have a PostgreSQL 14 build, or the upgrade fails during its pre-checks.
-
-CAUTION: A major-version upgrade cannot be rolled back in place. If anything goes wrong, you must restore from your backup snapshot.
 
 [#scripted-upgrade]
 == Scripted upgrade
