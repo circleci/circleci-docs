@@ -1,0 +1,369 @@
+= Upgrade PostgreSQL
+:page-platform: Server 4.10, Server Admin
+:page-description: Learn how to upgrade the internal PostgreSQL database from version 12 to 14 in an installation of CircleCI Server 4.10.
+:experimental:
+
+PostgreSQL is a database service used by CircleCI Server. Server 4.10 ships PostgreSQL `14` so you must upgrade to PostgreSQL 14 before upgrading to Server 4.10. This page describes how to upgrade your internal PostgreSQL instance from version `12` to `14`.
+
+== Important notes about upgrading PostgreSQL
+
+* This major-version upgrade runs in place and uses `pg_upgrade` to migrate the on-disk data format. The upgrade *requires downtime*, typically 30 to 60 minutes depending on your database size and storage performance. All CircleCI services are unavailable during the upgrade, so schedule it during a maintenance window.
+* A major-version upgrade *cannot be rolled back in place*. If anything goes wrong, you must restore from your backup snapshot.
+
+[#prerequisites]
+== Prerequisites
+
+Complete all of the following before you begin. Do not scale anything down until these checks pass.
+
+* You have `kubectl` access to the Kubernetes cluster where CircleCI Server is installed.
+* You are able to modify your `values.yaml` file and run `helm upgrade`.
+* The target namespace does not enforce Pod Security `restricted` admission. The upgrade Job runs as root (UID 0).
+* The cluster has network access to the PostgreSQL 14 image (`14.22.x`).
+* You have a tested backup. A volume snapshot is your only rollback path. Confirm you can snapshot the PostgreSQL persistent volume claim (PVC) while it is detached, and restore that snapshot to a new PVC. For more information, see the xref:operator:backup-and-restore.adoc#[Backup and Restore] guide.
+
+Verify the following details, which you need during the upgrade. Replace `<namespace>`, `<secret-name>`, and `<pvc-name>` with your own values.
+
+* *Confirm the StatefulSet layout.* The upgrade Job expects the PVC mounted at `/bitnami/postgresql`, the data directory at `/bitnami/postgresql/data`, and runtime UID `1001`. If your setup differs, update the Job before you apply it.
++
+[source,console]
+----
+$ kubectl -n <namespace> describe sts postgresql | grep -E '(Mounts|securityContext|PGDATA|Image)'
+----
+
+* *Locate the PostgreSQL superuser secret.* For a default Bitnami installation, the secret is named `<release>-postgresql` and the key is `postgres-password`. Confirm the credentials work. A result of `1` confirms the credentials are valid.
++
+[source,console]
+----
+$ PGP=$(kubectl -n <namespace> get secret <secret-name> -o jsonpath='{.data.postgres-password}' | base64 -d)
+$ kubectl -n <namespace> exec postgresql-0 -- env PGPASSWORD="$PGP" psql -U postgres -c 'SELECT 1'
+----
+
+* *Check the source encoding and locale.* `pg_upgrade` fails if the new cluster's locale does not match the source.
++
+[source,console]
+----
+$ kubectl -n <namespace> exec postgresql-0 -- env PGPASSWORD="$PGP" psql -U postgres -tAc \
+  "SELECT pg_encoding_to_char(encoding), datcollate, datctype FROM pg_database WHERE datname='template1'"
+----
++
+The upgrade Job defaults to `UTF8`, `C.UTF-8`, and `C.UTF-8`. If your source cluster differs, set the `INITDB_ENCODING`, `INITDB_LC_COLLATE`, and `INITDB_LC_CTYPE` variables in the Job.
+
+* *Check for non-standard extensions.* Every extension present in PostgreSQL 12 must have a PostgreSQL 14 build available in `circleci/server-postgres:14.22.x`. List the installed extensions in each database.
++
+[source,console]
+----
+$ for db in $(kubectl -n <namespace> exec postgresql-0 -- \
+    env PGPASSWORD="$PGP" psql -U postgres -tAc \
+    "SELECT datname FROM pg_database WHERE datistemplate=false AND datname!='postgres'"); do
+  echo "=== $db ==="
+  kubectl -n <namespace> exec postgresql-0 -- \
+    env PGPASSWORD="$PGP" psql -U postgres -d "$db" \
+    -c "SELECT extname, extversion FROM pg_extension"
+done
+----
++
+Any extension other than `plpgsql` must have a PostgreSQL 14 build, or the upgrade fails during its pre-checks.
+
+[#scripted-upgrade]
+== Scripted upgrade
+
+CircleCI provides a shell script that performs the PostgreSQL upgrade for you. The script discovers your PVC, password secret, and source encoding and locale. It then scales the PostgreSQL StatefulSet to zero, applies a `pg_upgrade` Kubernetes Job, and streams the Job logs. You can find the script link:https://github.com/CircleCI-Public/server-scripts/tree/main/upgrade-postgres-to-14[in the server-scripts repository].
+
+. Take a backup of your PostgreSQL data. Snapshot the PostgreSQL PVC or provision a clone. The script does not back up your data.
+
+. Scale the application layer to zero. The script verifies that all `layer=application` workloads are stopped before it proceeds. Replace `<namespace>` with the namespace where CircleCI Server is installed.
++
+[source,console]
+----
+$ kubectl -n <namespace> scale deploy -l layer=application --replicas=0
+----
+
+. Run the upgrade script against your namespace.
++
+[source,console]
+----
+$ ./upgrade-postgres-to-14.sh -n <namespace>
+----
++
+TIP: Add the `--dry-run` flag to preview the Job manifest without applying it, or the `-y` (`--yes`) flag to skip the confirmation prompts.
+
+. When the script completes successfully, it prints a `postgresql` image block. Add it to your `values.yaml` file.
++
+[source,yaml]
+----
+postgresql:
+  image:
+    registry: cciserver.azurecr.io
+    repository: circleci/server-postgres
+    tag: 14.22.4094-4922444
+----
++
+NOTE: Use the exact tag emitted by the script for your CircleCI Server release rather than copying the example tag above.
+
+. Run `helm upgrade` to bring PostgreSQL back up on the new image and restore your application-layer replicas.
++
+[source,shell,subs=attributes+]
+----
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version {serverversion410} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+----
+
+. Validate the upgrade. A `pg_upgrade` migration does not carry optimizer statistics across, so rebuild them after the upgrade.
++
+[source,console]
+----
+$ kubectl -n <namespace> exec postgresql-0 -- vacuumdb --all --analyze-in-stages
+----
+
+. After 24 hours or more of healthy operation, clean up. Remove the old `data-12.preupgrade` directory from the PVC, and delete the backup PVC if you no longer need it.
+
+[#manual-upgrade]
+== Manual upgrade
+
+If you prefer not to use the script, follow these steps to upgrade PostgreSQL manually. The procedure runs `pg_upgrade --link` as a one-shot Kubernetes Job against your existing PVC.
+
+. Scale down the application services and quiesce PostgreSQL.
++
+[source,console]
+----
+$ kubectl -n <namespace> scale deploy -l layer=application --replicas=0
+$ kubectl -n <namespace> scale sts postgresql --replicas=0
+$ kubectl -n <namespace> wait --for=delete pod/postgresql-0 --timeout=5m
+----
++
+WARNING: After the pod terminates, the volume can stay attached to the node for up to 90 seconds while the cloud provider completes the detach. Wait for the detach before you continue.
++
+Wait for the `VolumeAttachment` to be removed. If `$VA` is empty, the volume is already detached.
++
+[source,console]
+----
+$ PV=$(kubectl -n <namespace> get pvc <pvc-name> -o jsonpath='{.spec.volumeName}')
+$ VA=$(kubectl get volumeattachment \
+  -o jsonpath='{range .items[?(@.spec.source.persistentVolumeName=="'$PV'")]}{.metadata.name}{end}')
+$ if [[ -n "$VA" ]]; then kubectl wait --for=delete volumeattachment/$VA --timeout=2m; fi
+----
++
+Confirm no other workloads use the PVC before you proceed. If any pod names are returned, scale them down first.
++
+[source,console]
+----
+$ kubectl -n <namespace> get pods -o json \
+  | jq -r '.items[] | select(.spec.volumes[]?.persistentVolumeClaim.claimName=="<pvc-name>") | .metadata.name'
+----
+
+. Take a snapshot of the PostgreSQL PVC using the mechanism you verified in the prerequisites.
++
+CAUTION: Do not skip this step. The snapshot is your only rollback path. Do not continue until the snapshot is complete and you have confirmed it can be restored to a new PVC.
+
+. Run the upgrade Job. Fill in the placeholders below, then apply the manifest.
++
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Placeholder
+| Description
+
+| `NAMESPACE`
+| Kubernetes namespace where PostgreSQL is running.
+
+| `POSTGRES_PVC_NAME`
+| Name of the PostgreSQL PVC, typically `data-postgresql-0`.
+
+| `POSTGRES_SECRET_NAME`
+| Name of the secret that holds the superuser password.
+
+| `POSTGRES_SECRET_KEY`
+| Key within that secret. The Bitnami default is `postgres-password`.
+|===
+--
++
+NOTE: If your source cluster's locale differs from `C.UTF-8`, uncomment and set `INITDB_LC_COLLATE` and `INITDB_LC_CTYPE` in the Job environment variables.
++
+[source,yaml]
+----
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-upgrade-12-to-14
+  namespace: NAMESPACE
+  labels:
+    purpose: pg-major-upgrade
+    source-version: "12.16"
+    target-version: "14.22"
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: postgres-upgrade
+    spec:
+      restartPolicy: Never
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+      containers:
+        - name: pg-upgrade
+          image: tianon/postgres-upgrade:12-to-14
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: POSTGRES_SECRET_NAME
+                  key: POSTGRES_SECRET_KEY
+            # - name: INITDB_LC_COLLATE
+            #   value: "en_US.UTF-8"
+            # - name: INITDB_LC_CTYPE
+            #   value: "en_US.UTF-8"
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              set -euo pipefail
+              PGROOT=/bitnami/postgresql
+              CUR=$PGROOT/data
+              OLD=$PGROOT/data-12
+              NEW=$PGROOT/data-14
+              ARCHIVED=$PGROOT/data-12.preupgrade
+              LOGS=$PGROOT/upgrade-logs
+              UPGRADE_UID=999
+              UPGRADE_GID=999
+              CHART_UID=1001
+              CHART_GID=1001
+              echo "==> [1/7] Verifying PG 12 cluster at $CUR"
+              if [[ ! -f "$CUR/PG_VERSION" ]]; then
+                echo "FATAL: $CUR/PG_VERSION not found. Is the PVC mounted? Is data at this path?"
+                exit 1
+              fi
+              VER=$(cat "$CUR/PG_VERSION")
+              if [[ "$VER" != "12" ]]; then
+                echo "FATAL: expected PG_VERSION=12, found '$VER'. Refusing to upgrade."
+                exit 1
+              fi
+              if [[ -d "$OLD" || -d "$NEW" || -d "$ARCHIVED" ]]; then
+                echo "FATAL: leftover directories from a prior run found under $PGROOT."
+                echo "       Please inspect manually before re-running."
+                ls -la "$PGROOT" || true
+                exit 1
+              fi
+              echo "==> [2/7] Staging directories and configs"
+              mv "$CUR" "$OLD"
+              mkdir -p "$NEW" "$LOGS"
+              chmod 0700 "$OLD" "$NEW"
+              if [[ ! -f "$OLD/postgresql.conf" ]]; then
+                printf '%s\n' \
+                  '# Minimal postgresql.conf injected by the upgrade Job.' \
+                  > "$OLD/postgresql.conf"
+              fi
+              if [[ ! -f "$OLD/pg_hba.conf" ]]; then
+                printf '%s\n' \
+                  '# Minimal pg_hba.conf injected by the upgrade Job.' \
+                  'local all all trust' \
+                  'host  all all 127.0.0.1/32 trust' \
+                  'host  all all ::1/128      trust' \
+                  > "$OLD/pg_hba.conf"
+              fi
+              chown -R ${UPGRADE_UID}:${UPGRADE_GID} "$OLD" "$NEW" "$LOGS"
+              echo "==> [3/7] Initializing new PG14 cluster"
+              INITDB_ENCODING="${INITDB_ENCODING:-UTF8}"
+              INITDB_LC_COLLATE="${INITDB_LC_COLLATE:-C.UTF-8}"
+              INITDB_LC_CTYPE="${INITDB_LC_CTYPE:-C.UTF-8}"
+              gosu postgres /usr/lib/postgresql/14/bin/initdb \
+                -D "$NEW" \
+                --encoding="$INITDB_ENCODING" \
+                --lc-collate="$INITDB_LC_COLLATE" \
+                --lc-ctype="$INITDB_LC_CTYPE"
+              echo "==> [4/7] Running pg_upgrade --link"
+              cd "$LOGS"
+              gosu postgres /usr/lib/postgresql/14/bin/pg_upgrade \
+                --old-bindir=/usr/lib/postgresql/12/bin \
+                --new-bindir=/usr/lib/postgresql/14/bin \
+                --old-datadir="$OLD" \
+                --new-datadir="$NEW" \
+                --link \
+                --jobs=4
+              echo "==> [5/7] Verifying new cluster"
+              NEWVER=$(cat "$NEW/PG_VERSION")
+              if [[ "$NEWVER" != "14" ]]; then
+                echo "FATAL: new cluster PG_VERSION='$NEWVER', expected 14."
+                exit 1
+              fi
+              echo "==> [6/7] Swapping data directories"
+              mv "$OLD" "$ARCHIVED"
+              mv "$NEW" "$CUR"
+              echo "==> [7/7] Restoring ownership"
+              chown -R ${CHART_UID}:${CHART_GID} "$CUR"
+              echo "==> Done. PostgreSQL 14 cluster is ready at $CUR."
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /bitnami/postgresql
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: POSTGRES_PVC_NAME
+----
++
+Apply the Job and monitor the logs.
++
+[source,console]
+----
+$ kubectl -n <namespace> apply -f <job-file>.yaml
+$ kubectl -n <namespace> logs -f job/postgres-upgrade-12-to-14
+----
++
+The upgrade is complete when the Job exits with code 0 and the logs end with `Done. PostgreSQL 14 cluster is ready` and `Upgrade Complete`.
++
+CAUTION: If the Job fails, do not re-run it immediately. The `backoffLimit: 0` setting is intentional. Review the logs first. The Job refuses to re-run while the `data-12`, `data-14`, or `data-12.preupgrade` directories exist on the PVC. Contact CircleCI Support if you need help recovering.
+
+. Update the Helm values image tag. Change `postgresql.image.tag` to your `14.22.x` tag, then run `helm upgrade`. The StatefulSet rolls with the new image, mounts the existing PVC, and starts against the upgraded PostgreSQL 14 data directory.
++
+[source,shell,subs=attributes+]
+----
+helm upgrade circleci-server oci://cciserver.azurecr.io/circleci-server -n <namespace> --version {serverversion410} -f <path-to-values.yaml> --username $USERNAME --password $PASSWORD
+----
+
+. Validate the upgrade. Confirm the running version.
++
+[source,console]
+----
+$ kubectl -n <namespace> exec -it postgresql-0 -- env PGPASSWORD="$PGP" psql -U postgres -c 'SELECT version();'
+----
++
+Rebuild query statistics. A `pg_upgrade` migration does not carry statistics across versions, so query performance is degraded until this completes.
++
+[source,console]
+----
+$ kubectl -n <namespace> exec -it postgresql-0 -- \
+  env PGPASSWORD="$PGP" vacuumdb -U postgres --all --analyze-in-stages
+----
++
+If you see collation version mismatch warnings in the PostgreSQL logs, run `REINDEX DATABASE <db>;` on each affected database. Then scale the application services back up.
++
+[source,console]
+----
+$ kubectl -n <namespace> scale deploy -l layer=application --replicas=1
+$ for d in $(kubectl -n <namespace> get deploy -l layer=application -o name); do
+  kubectl -n <namespace> rollout status "$d" --timeout=10m
+done
+----
++
+Trigger a workflow and confirm your projects and user data are accessible.
+
+. Clean up after at least 24 hours of stable operation. Remove the leftover files from the PVC, then delete the PVC snapshot.
++
+[source,console]
+----
+$ kubectl -n <namespace> exec -it postgresql-0 -- bash
+# inside the pod:
+$ ls /bitnami/postgresql/upgrade-logs/delete_old_cluster.sh && \
+  bash /bitnami/postgresql/upgrade-logs/delete_old_cluster.sh || \
+  rm -rf /bitnami/postgresql/data-12.preupgrade
+----
+
+[#troubleshooting]
+== Troubleshooting
+
+* *Locale or encoding mismatch.* `pg_upgrade` aborts during its consistency checks if the source and target settings differ. Verify your source encoding and locale before you run the upgrade.
+* *Missing extensions.* Every extension present in your PostgreSQL 12 database must also exist in the PostgreSQL 14 image, or the upgrade fails.
+* *PostgreSQL will not restart during auto-discovery.* If the script cannot read the source encoding and locale, supply them explicitly with the `--initdb-*` flags.
