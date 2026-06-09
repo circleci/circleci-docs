@@ -31,7 +31,10 @@
   margin-bottom: 1.2rem;
 }
 
-@media screen and (max-width: 1023.5px) {
+/* The embedded TOC is shown the whole way up to the 1200px sidebar reflow, so
+   its heading spacing must cover that range too — previously this stopped at
+   1024px, leaving the heading cramped against the links in the 1024–1199 band. */
+@media screen and (max-width: 1199.5px) {
   .toc.embedded .toc-menu h3 {
     margin-bottom: 1.25rem;
   }
@@ -94,7 +97,10 @@
   transition: border-left-color 0.3s ease, border-left-width 0.3s ease;
 }
 
-@media screen and (max-width: 48rem) {
+/* The embedded TOC (shown below the 1200px sidebar reflow) uses link-blue for its
+   items on both mobile and tablet — previously this stopped at 768px, leaving the
+   tablet links grey. The sidebar TOC at 1200px+ keeps its own grey styling. */
+@media screen and (max-width: 1199.5px) {
   .toc .toc-menu a {
     color: var(--link-font-color);
   }

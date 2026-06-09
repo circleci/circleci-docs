@@ -12,7 +12,11 @@ body.-toc aside.toc.sidebar {
     margin-bottom: 2.5rem;
   }
 
-  main > div {
+  /* Overflow guard for the content wrapper only. Excludes the breadcrumb
+     toolbar: this unlayered max-width would otherwise override the toolbar's
+     max-w-[888px] utility (unlayered beats @layer) and break its centring,
+     making the breadcrumbs jump to the left below 1024px. */
+  main > div:not(.article-toolbar) {
     overflow-x: auto;
     max-width: 100vw;
   }
@@ -61,7 +65,8 @@ body.-toc aside.toc.sidebar {
      A percentage width is used rather than margin-right because margins count
      toward intrinsic (max-content) width: a wide right margin would inflate main
      to its max-width and overflow the viewport. The percentage is ignored during
-     intrinsic sizing, while the existing max-w-[800px] still caps the trail. */
+     intrinsic sizing, while the toolbar's max-width (the shared article column
+     width) still caps the trail. */
   .article-toolbar {
     width: calc(100% - var(--toc-width) - 5rem);
   }

@@ -212,7 +212,6 @@
   --monospace-font-family: "IBM Plex Mono", monospace;
   --monospace-font-weight-bold: 600;
   --doc-font-size: 16px;
-  --doc-font-size--desktop: 16px;
   --doc-line-height: 1.7;
   --heading-font-weight: 500;
   --alt-heading-font-weight: 500;
@@ -245,6 +244,10 @@
   --doc-max-width--desktop: calc(888 / var(--rem-base) * 1rem);
   --doc-margin: 0 auto;
   --doc-margin--desktop: 0 2rem;
+  /* Side padding of the centred article column below the 1200px reflow. Shared by
+     .doc (doc.css) and the breadcrumb toolbar (article-toolbar.hbs) so their
+     content edges stay aligned — keep them pointed at this one value. */
+  --doc-padding-x: 32px;
 
   /* ============================================
      STACKING (Z-INDEX)
