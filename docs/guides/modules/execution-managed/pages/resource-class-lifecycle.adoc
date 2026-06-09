@@ -31,7 +31,7 @@ When a brownout occurs, you have two options:
 
 === Option 1: Update your configuration (recommended)
 
-Update your `.circleci/config.yml` to use supported resource classes:
+Update your CircleCI configuration file to use supported resource classes:
 
 *For Docker executor:*
 
