@@ -173,7 +173,7 @@ contexts_allowed_by_project_ids(
   PROJECTS: string | Array<string> | Set<string>
   ALLOWED_CONTEXTS: string | Array<string> | Set<string>
 )
-returns reason <type string>
+returns reason: string
 ----
 
 [#usage-contexts-allowed-by-project-ids]
@@ -324,7 +324,7 @@ policy_name["a_unique_policy_name"]
 
 rule_contexts_reserved_by_branches = config.contexts_reserved_by_branches(
    ["${BRANCH_1}", "${BRANCH_2}", "${BRANCH_3}"],
-  ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
+   ["${RESERVED_CONTEXT_1}","${RESERVED_CONTEXT_2}"]
 )
 
 enable_hard["rule_contexts_reserved_by_branches"]

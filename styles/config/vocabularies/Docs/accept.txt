@@ -66,6 +66,7 @@ Behat
 Bioconda
 Bitbucket
 \bBitbucket Cloud\b
+Bitnami
 [Bb]lobless
 [Bb]lockchain
 Braintrust
@@ -417,3 +418,4 @@ Xvfb
 YAML
 Zstd
 LangSmith
+[Tt]estsuite

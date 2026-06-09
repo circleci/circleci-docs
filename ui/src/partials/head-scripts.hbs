@@ -37,18 +37,25 @@
         analytics.load("{{this}}");
         const urlSearchParams = new URLSearchParams(window.location.search);
         const pathName = window.location.pathname.replace("docs/", "");
-        analytics.track("dd_docs_page", {
-            fullPath: pathName,
-            has2dot0: pathName.includes("2.0/"),
-            fbclid: urlSearchParams.get("fbclid"),
-            gclid: urlSearchParams.get("gclid"),
-            action: "viewed",
-            orgId: Cookies.get("cci-org-analytics-id") || null,
-            page: pathName == "/" ? "homepage" : pathName,
-            hash: window.location.hash ? window.location.hash.replace("#", "") : null,
-            locale: "en",
-            desktop: window.innerWidth >= 1200,
-        })
+        // Pages excluded from dd_docs_page tracking because heavy automated/bot
+        // traffic skews analytics and inflates Segment usage. Paths are matched
+        // against window.location.pathname with any trailing slash removed.
+        const trackingExcludedPaths = ["/docs/guides/about-circleci/concepts"];
+        const normalizedPath = window.location.pathname.replace(/\/$/, "");
+        if (!trackingExcludedPaths.includes(normalizedPath)) {
+            analytics.track("dd_docs_page", {
+                fullPath: pathName,
+                has2dot0: pathName.includes("2.0/"),
+                fbclid: urlSearchParams.get("fbclid"),
+                gclid: urlSearchParams.get("gclid"),
+                action: "viewed",
+                orgId: Cookies.get("cci-org-analytics-id") || null,
+                page: pathName == "/" ? "homepage" : pathName,
+                hash: window.location.hash ? window.location.hash.replace("#", "") : null,
+                locale: "en",
+                desktop: window.innerWidth >= 1200,
+            })
+        }
         }}();
     </script>
 {{/with}}

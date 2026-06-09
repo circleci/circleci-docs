@@ -266,7 +266,7 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud#
 | String
-| The long (40-character) git SHA of the build that ran before the current build. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build runs first for a branch, the variable will not appear. In addition, if you trigger the build via the API, the variable will not appear.
+| The long (40-character) git SHA of the build that ran before the current build. **Note:** While in most cases `pipeline.git.base_revision` will be the SHA of the commit that ran before your currently running pipeline, there are some caveats. When the build runs first for a branch, the variable will not appear. In addition, if you trigger the build via the API, the variable will not appear.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -614,7 +614,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitLab#
 | String
-|Use `pipeline.trigger.type` instead.
+| Use `pipeline.trigger.type` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -624,7 +624,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitLab#
 | String
-|Use `pipeline.trigger.received_at` instead.
+| Use `pipeline.trigger.received_at` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -634,7 +634,7 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
 [.nowrap]#GitLab#
 | String
-|Use `pipeline.event.name` instead.
+| Use `pipeline.event.name` instead.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -960,7 +960,7 @@ d| [.nowrap]#GitHub App# +
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server#
 | String
-| The current version of the component that CircleCI will roll back or deploy. Can verify that the component status matches expectations.
+| The current version of the component that CircleCI will roll back or deploy. Use this to verify that the component status matches expectations.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
