@@ -24,7 +24,7 @@ Compared with the 3.0 self-hosted runner, GOAT shows a net improvement across al
 The most notable improvement is the reduction in queue times.
 GOAT also demonstrated a minor but notable decrease in failed runs, showing an improvement when run under stress.
 
-== 3.1 self-hosted runner benchmarks
+== GOAT benchmarks
 
 [.table-scroll]
 --

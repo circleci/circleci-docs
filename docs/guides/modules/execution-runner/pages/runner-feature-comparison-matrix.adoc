@@ -60,7 +60,7 @@ This page offers a comparison of the features available for CircleCI machine run
 |*Docker Support*
 |How Docker-in-Docker is handled
 |Native OS support
-|Possible xref:container-runner.adoc#building-container-images[With Third-Party Tools]
+|Possible with xref:container-runner.adoc#building-container-images[Third-Party Tools]
 
 |*Resource Cleanup*
 |How build environments are cleaned after jobs
