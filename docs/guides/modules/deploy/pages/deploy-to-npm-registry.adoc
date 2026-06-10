@@ -20,6 +20,16 @@ Trusted publishing is the recommended way to publish to npm from CircleCI. Compa
 
 NOTE: Provenance attestations are not currently supported for packages published from CircleCI via trusted publishing.
 
+[#onboarding-tool]
+== Automate setup with the onboarding tool
+
+The link:https://github.com/CircleCI-Public/npm-trusted-publishing-tool[npm trusted publishing onboarding tool] automates the configuration described in this guide, gathering the required CircleCI identifiers and setting up the trusted publisher for you. Use it to skip the manual data gathering and setup steps:
+
+* *Single project*: Onboard one npm package to trusted publishing.
+* *Bulk onboarding*: Onboard many npm packages at once.
+
+To understand each step, read the manual instructions below.
+
 [#prerequisites]
 == Prerequisites
 
