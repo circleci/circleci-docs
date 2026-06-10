@@ -6,7 +6,7 @@
 
 include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
-Test impact analysis (TIA) speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then skips tests that cover unchanged source files.
+Test impact analysis speeds up CI by running only the tests affected by your code changes. CircleCI tracks which tests exercise which source files, then skips tests that cover unchanged source files.
 
 == Is my project a good fit for test impact analysis?
 
@@ -16,7 +16,7 @@ This section outlines several project features that indicate your project is a g
 
 Test impact analysis relies on code coverage data to determine which tests affect which files. Frameworks with built-in coverage support - Jest, pytest, Go test, Vitest and RSpec - make this straightforward.
 
-If your framework has no native coverage support, generating the data TIA needs may require significant rework of your test setup.
+If your framework has no native coverage support, generating the data test impact analysis needs may require significant rework of your test setup.
 
 === Tests run in the same process
 
