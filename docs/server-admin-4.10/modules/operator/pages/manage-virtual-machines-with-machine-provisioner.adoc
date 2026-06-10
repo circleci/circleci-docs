@@ -447,7 +447,7 @@ The machine provisioner ships a fixed set of default images. Share the following
 
 * `windows-default`
 
-For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM execution environment] section of the configuration reference.
+For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM Execution Environment] section of the configuration reference.
 
 [#gcp]
 === GCP
@@ -509,7 +509,7 @@ NOTE: The Android machine executor is only available when machine provisioner is
 
 * `android-default`
 
-For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM execution environment] section of the configuration reference.
+For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM Execution Environment] section of the configuration reference.
 
 [#instance-preallocation]
 == Instance preallocation
