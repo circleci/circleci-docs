@@ -40,15 +40,15 @@ GOAT also demonstrated a minor but notable decrease in failed runs, showing an i
 h| Total Tasks
 h| Max Concurrency
 h| Replica Count
-h| Failure Rate (Goat)
+h| Failure Rate (GOAT)
 h| Failure Rate (3.0)
-h| Average Run Time (Goat)
+h| Average Run Time (GOAT)
 h| Improvement From 3.0
-h| Max Run Time (Goat)
+h| Max Run Time (GOAT)
 h| Improvement From 3.0
-h| Average Queue Time (Goat)
+h| Average Queue Time (GOAT)
 h| Improvement From 3.0
-h| Max Queue Time (Goat)
+h| Max Queue Time (GOAT)
 h| Improvement From 3.0
 
 | 20
