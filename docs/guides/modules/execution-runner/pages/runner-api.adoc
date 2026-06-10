@@ -26,14 +26,14 @@ This authentication method is based on personal tokens and follows the same rule
 | Header that contains the `<circle-token>` used to authenticate the user.
 
 | HTTP Basic auth username
-| The token can be provided using the Basic scheme, where username should be set as the `<circle-token>` and the password should be left blank.
+| The token can be provided using the Basic scheme, where you set the username as the `<circle-token>` and leave the password blank.
 |===
 --
 
 [#browser-session-authentication]
 === Browser session authentication
 
-Ring-session is sent through a cookie on the request. This authentication allows users that are already logged into CircleCI.com to access certain endpoints seamlessly.
+Ring-session is sent through a cookie on the request. This authentication allows users that are already logged into circleci.com to access certain endpoints seamlessly.
 
 [#resource-class-authentication-token]
 === Resource class token authentication
@@ -51,7 +51,7 @@ This token is generated when creating a new resource class. This token is only d
 | Description
 
 | HTTP Bearer auth
-| The token that should be provided using the Bearer scheme.
+| The token to provide using the Bearer scheme.
 |===
 --
 
@@ -68,7 +68,7 @@ Lists the available self-hosted runners based on the specified parameters. It is
 
 * Circle-Token (personal authentication)
 * Browser session authentication
-** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com.
+** This allows the endpoint to be accessible on `circleci.com/api/v3/runner` for users that have already logged into circleci.com.
 
 [#get-api-v3-runner-request]
 ==== Request
@@ -212,7 +212,7 @@ Get the number of unclaimed tasks for a given resource class.
 
 * Circle-Token (personal authentication)
 * Browser session authentication
-** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com.
+** This allows the endpoint to be accessible on `circleci.com/api/v3/runner` for users that have already logged into circleci.com.
 
 [#get-api-v3-tasks-request]
 ==== Request
@@ -300,7 +300,7 @@ Get the number of running tasks for a given resource class.
 
 * Circle-Token (personal authentication)
 * Browser Session Authentication
-** This allows the endpoint to be accessible on circleci.com/api/v3/runner for users that have already logged into circleci.com.
+** This allows the endpoint to be accessible on `circleci.com/api/v3/runner` for users that have already logged into circleci.com.
 
 [#get-api-v3-tasks-running-request]
 ==== Request
