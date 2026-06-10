@@ -27,7 +27,7 @@ NOTE: Machine runner can also be configured via environment variables. These wil
 ---
 
 [#api-auth-token]
-=== api.auth_token
+=== `api.auth_token`
 
 `$CIRCLECI_RUNNER_API_AUTH_TOKEN`
 
@@ -36,11 +36,11 @@ The token is used to identify the machine runner to CircleCI and can be generate
 ---
 
 [#api-url]
-=== api.url
+=== `api.url`
 
 `$CIRCLECI_RUNNER_API_URL`
 
-The URL will be pointing to `https://runner.circleci.com` by default. It should not be modified unless you have a CircleCI server installation. In that case, it must be set to the URL of your server installation.
+The URL points to `https://runner.circleci.com` by default. Do not modify it unless you have a CircleCI Server installation. In that case, set it to the URL of your Server installation.
 
 ---
 
@@ -95,7 +95,7 @@ logging:
 
 `$CIRCLECI_RUNNER_LOGGING_FILE`
 
-This controls the file where the machine runner and task-agent logs will go. See xref:runner-concepts.adoc#task-agent[Runner concepts] for more information on task-agent.
+This controls the file where the machine runner and task-agent logs will go. See xref:runner-concepts.adoc#task-agent[Runner Concepts] for more information on task-agent.
 
 Example:
 
@@ -139,8 +139,8 @@ The prefix can also be a custom script. The arguments passed to the script will 
 
 The custom script must:
 
-* Take great care to ensure the task-agent (that is, the arguments passed to it) runs
-* Forward the exit code from task-agent as its own exit code
+* Take great care to ensure the task-agent (that is, the arguments passed to it) runs.
+* Forward the exit code from task-agent as its own exit code.
 
 Example script saved as `/var/opt/circleci/wrapper.sh`:
 
@@ -275,7 +275,7 @@ runner:
 
 `$CIRCLECI_RUNNER_CACHE_TASK_AGENT`
 
-When set to true, machine runner will not clear the task-agent cache when the agent shuts down. On startup, the machine agent will check for an already downloaded task agent and will use that task-agent unless there is a newer version of task-agent available for download. This feature is off by default. This may be particularly useful for Windows which relies on `single-task` mode.
+When set to true, machine runner will not clear the task-agent cache when the agent shuts down. On startup, the machine agent checks for an already downloaded task agent. It uses that task-agent unless a newer version is available for download. This feature is off by default. This may be particularly useful for Windows which relies on `single-task` mode.
 
 Example:
 
@@ -296,10 +296,10 @@ This value can be used to override the default maximum duration the task-agent w
 Here are a few valid examples:
 
 * `72h` - 3 days
-* `1h30m` - 1 hour 30 minutes
+* `1h30m` - 1 hour 30 minutes.
 * `30s` - 30 seconds
 * `50m` - 50 minutes
-* `1h30m20s` - An overly specific (yet still valid) duration
+* `1h30m20s` - An overly specific (yet still valid) duration.
 
 NOTE: The default value is 5 hours.
 
@@ -319,8 +319,8 @@ NOTE: If the task-agent does not exit a brief period after the TERM, the machine
 
 Draining can end in one of two ways:
 
-* The task has been in the draining state for longer than the configured `max_run_time`
-* An additional TERM signal is received by the machine runner during _draining_
+* The task has been in the draining state for longer than the configured `max_run_time`.
+* An additional TERM signal is received by the machine runner during _draining_.
 
 ---
 
@@ -342,10 +342,10 @@ runner:
 ---
 
 [#runner-ssh-advertise-addr]
-=== runner.ssh.advertise_addr
+=== `runner.ssh.advertise_addr`
 `$CIRCLECI_RUNNER_SSH_ADVERTISE_ADDR`
 
-This parameter enables the “Rerun job with SSH” feature. Before enabling this feature, there are <<#considerations-before-enabling-ssh-debugging,*important considerations*>> that should be made. Rerun with SSH is not currently available on container runner.
+This parameter enables the “Rerun job with SSH” feature. Before enabling this feature, review the <<#considerations-before-enabling-ssh-debugging,*important considerations*>>. Rerun with SSH is not currently available on container runner.
 
 The address is of the form `*host:port*` and is displayed in the “Enable SSH” and “Wait for SSH” sections for a job that is rerun.
 
@@ -367,7 +367,8 @@ Task-agent runs an embedded SSH server and agent on a dedicated port when the �
 * The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple machine runners are installed on the same host.
 * The SSH server will inherit the same user privileges and associated access authorizations as the task-agent, defined by the <<#runner-command-prefix,runner.command_prefix parameter>>.
 * The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH. However, only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
-* Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organization’s concurrency limit, and the task-agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when finished debugging.
+* Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organization's concurrency limit, and the task-agent will be unavailable to handle other jobs.
+* Cancel an SSH rerun job explicitly (through the web UI or CLI) when you finish debugging.
 
 ---
 

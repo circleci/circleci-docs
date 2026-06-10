@@ -168,6 +168,7 @@ GitHub
 GitLab
 \bGitLab self-managed\b
 GKE
+GOAT
 \bGoogle Cloud\b
 \bGoogle Cloud Functions\b
 \bGoogle Cloud Platform\b

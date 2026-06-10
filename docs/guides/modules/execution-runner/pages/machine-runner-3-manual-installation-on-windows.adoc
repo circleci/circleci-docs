@@ -13,7 +13,7 @@ This page describes how to manually install CircleCI's machine runner 3 on Windo
 
 * https://www.gnu.org/software/gzip/[Gzip]
 
-* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line.
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
@@ -83,8 +83,8 @@ logging:
 [#additional-resources]
 == Additional resources
 
-- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3 Windows installation]
-- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
-- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3 macOS Homebrew installation]
-- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
+- xref:install-machine-runner-3-on-windows.adoc[Machine Runner 3 Windows Installation]
+- xref:install-machine-runner-3-on-linux.adoc[Machine Runner 3 Linux Package Installation]
+- xref:install-machine-runner-3-on-macos.adoc[Machine Runner 3 macOS Homebrew Installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine Runner 3 Docker Installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3 Configuration Reference]

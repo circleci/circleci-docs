@@ -16,7 +16,7 @@ Resource classes help you identify a pool of self-hosted runners, which allows y
 
 Optionally, you can give your resource class a description.
 
-NOTE: If you are already using xref:orbs:use:orb-intro.adoc[orbs], you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].
+NOTE: If you are already using xref:orbs:use:orb-intro.adoc[Orbs], you have an existing namespace. Your self-hosted runner namespace will be the same one you are using for orbs. If you need to change your namespace, https://support.circleci.com/hc/en-us[Contact Support].
 
 [#task-agent]
 == Task-agent
@@ -41,11 +41,11 @@ CircleCI's self-hosted runners are limited by the total number of self-hosted ru
 [#public-repositories]
 == Public repositories
 
-CircleCI's self-hosted runners are xref:runner-faqs.adoc#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization[not available] for use with public projects that have the **Build forked pull requests** setting enabled. This feature is not available for security reasons. A malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+CircleCI's self-hosted runners are xref:runner-faqs.adoc#can-jobs-on-forks-of-my-OSS-project-use-my-organizations-self-hosted-runners-if-the-fork-is-not-a-part-of-my-organization[Not Available] for use with public projects that have the **Build forked pull requests** setting enabled. This feature is not available for security reasons. A malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your self-hosted runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
 
-* Malicious programs running on the machine
-* Escaping the machine's self-hosted runner sandbox
-* Exposing access to the machine's network environment
-* Persisting unwanted or dangerous data on the machine
+* Malicious programs running on the machine.
+* Escaping the machine's self-hosted runner sandbox.
+* Exposing access to the machine's network environment.
+* Persisting unwanted or dangerous data on the machine.
 
 NOTE: Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, https://support.circleci.com/hc/en-us[contact support].

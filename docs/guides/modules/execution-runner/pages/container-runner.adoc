@@ -316,7 +316,7 @@ jobs:
 
 CAUTION: Unlike automatic retries on startup, retrying tasks during runtime can be risky. This is because tasks can have arbitrary steps that produce external side effects which are not idempotent or stateless. This includes steps that could impact production environments or databases. Use this feature with care, knowing the risks of rerunning jobs and workflows that may or may not be idempotent.
 
-Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would be displayed in the CircleCI web app as an infrastructure fail should be expected to trigger an unsafe retry when enabled.
+Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would be displayed in the CircleCI web app as an infrastructure fail can trigger an unsafe retry when enabled.
 
 Unsafe retries is useful when scheduling workloads on spot instances, which often come with cost-saving benefits at the risk of pod preemptions with many Kubernetes providers.
 
@@ -358,9 +358,9 @@ You can utilize these fields with your preferred Kubernetes logging integrations
 [#custom-secret]
 == Custom token secret
 
-Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via Helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you might not want to specify the tokens via Helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
 
-The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
+The secret must contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
 
 ```yaml
 agent:
@@ -512,7 +512,7 @@ To build container images in a container-agent job, a user may use:
 * Machine runner with Docker installed.
 * CircleCI-hosted compute.
 
-Note: Third-party tools should be used at your own discretion.
+NOTE: Use third-party tools at your own discretion.
 
 Jobs that run with container-agent cannot use CircleCI's xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] feature. You can use a third-party tool to build Docker images in your container-agent job without the Docker daemon.
 

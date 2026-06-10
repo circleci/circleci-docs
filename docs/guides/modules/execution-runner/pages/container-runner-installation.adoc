@@ -113,8 +113,8 @@ CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[
 
 
 === a. Install Envoy Gateway to your cluster
-. First, install the Gateway API CRDs and Envoy Gateway, as defined in the
-link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document]. To do this, replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run the following command:
+. First, install the Gateway API `CRDs` and Envoy Gateway as defined in the link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document].
+. Replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run the following command:
 +
 [source,shell]
 ----
@@ -160,8 +160,10 @@ Container runner is now ready for rerunning jobs with SSH.
 [#container-runner-configuration-example]
 == Container runner configuration example
 
-Once you have installed container runner, select btn:[Continue] in the CircleCI web app and you will be presented with an example configuration snippet showing a job configured to use your new self-hosted runner resource class.
+Once you have installed container runner, select btn:[Continue] in the CircleCI web app.
+You will see an example configuration snippet showing a job configured to use your new self-hosted runner resource class.
 
+.Container runner configuration example
 image::guides:ROOT:runner/container-runner-config-example.png[Runner set up, copy code to config file]
 
 Once you have installed the container runner within your cluster, create and trigger a CircleCI job that uses the Docker executor to validate the installation. The fields you must set for a specific job to run using your container runners are:
@@ -189,7 +191,7 @@ workflows:
       - build
 ```
 
-CAUTION: **Do not** use an existing job that uses xref:execution-managed:building-docker-images.adoc[setup_remote_docker] (see xref:container-runner.adoc#building-container-images[Building container images] for more information).
+CAUTION: **Do not** use an existing job that uses xref:execution-managed:building-docker-images.adoc[Building Docker Images] (see xref:container-runner.adoc#building-container-images[Building Container Images] for more information).
 
 [#troubleshooting]
 == Troubleshooting
@@ -199,6 +201,6 @@ Refer to the <<troubleshoot-self-hosted-runner#container-runner,Troubleshoot Con
 [#additional-resources]
 == Additional resources
 
-- xref:container-runner.adoc[Container runner reference guide]
-- xref:runner-concepts.adoc[Self-hosted runner concepts]
-- xref:runner-faqs.adoc[Self-hosted runner FAQ]
+- xref:container-runner.adoc[Container Runner Reference Guide]
+- xref:runner-concepts.adoc[Runner Concepts]
+- xref:runner-faqs.adoc[Self-Hosted Runner FAQ]
