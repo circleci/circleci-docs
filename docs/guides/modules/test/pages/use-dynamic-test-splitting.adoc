@@ -12,6 +12,12 @@ Dynamic test splitting reduces overall pipeline time by distributing test atoms 
 
 This section outlines several project features that indicate your project is a good candidate for dynamic test splitting:
 
+=== Your test runner produces JUnit test results that are inaccurate
+
+Static test splitting uses the durations reported in your JUnit results to split tests. If those durations leave out fixed costs, such as runner startup, per-batch overhead, or before/after hooks, the split is uneven and some nodes finish much later than others.
+
+Dynamic test splitting learns the gap between reported and real runtime over time. It accounts for the fixed cost of running a batch and the overhead each test adds beyond its reported duration, resulting in a more even split.
+
 === Your test runner starts up quickly
 
 If your test runner startup time is short compared to the test runtime, the overhead of running multiple batches is negligible. This can make your project a good candidate for dynamic test splitting.
@@ -25,12 +31,6 @@ Static test splitting runs all tests in a single batch. Dynamic test splitting r
 If your jobs have long container setup, dependency installation, or image pulls, each node's startup time can vary between runs. Your tests across nodes will start and finish at different times. Dynamic test splitting redistributes tests to nodes that are ready.
 
 Static test splitting pre-allocates tests to each node. Dynamic test splitting redistributes tests to nodes that are ready.
-
-=== Your job produces JUnit test results and you use the store test results step
-
-Static test splitting uses previous test results to preallocate tests to each node. Dynamic test splitting uses the same data to preallocate and redistribute tests.
-
-If your job uses the `store_test_results` step, dynamic test splitting reads the previous JUnit runtimes on each run to preallocate and redistribute tests.
 
 == How it works
 
