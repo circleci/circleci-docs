@@ -216,7 +216,7 @@ jobs:
 
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
-. Shell scripts and Docker compose files
+. Shell scripts and Docker compose files.
 . https://circleci.com/docs/workflows/[Workflows]
 . https://circleci.com/docs/artifacts/[Artifacts]
 . https://circleci.com/docs/caching/[Caching]
