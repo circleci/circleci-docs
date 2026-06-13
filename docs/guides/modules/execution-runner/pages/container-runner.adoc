@@ -446,12 +446,23 @@ Container runner will drain and restart cleanly when sent a termination signal. 
 
 If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully.
 
+[#private-container-registry]
+== Private container registry
+
+In environments that block outbound access to Docker Hub, mirror the CircleCI runner images to your own registry (or use a pull-through cache) and set `agent.image`, `orchestrator.image`, and `logging.image` in the Helm chart `values.yaml`. All three keys are top-level; only configuring `agent.image` leaves task pods pulling `circleci/runner-init` and `circleci/logging-collector` from the public registry by default.
+
+See xref:container-runner-installation.adoc#private-container-registry[Using a private container registry] for a full example and verification steps.
+
+The orchestrator init container image is configured under `orchestrator.image`. The logging sidecar image is configured under `logging.image`. Both accept the same fields as `agent.image` (`registry`, `repository`, `tag`, and optional `digest`). Refer to the link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml[Helm chart values.yaml] for defaults.
+
 [#logging-containers]
 == Logging containers
 
 Container runner schedules a logging container if there are secondary (service) containers in the task pod. This container will get the secondary container logs and stream them to the steps UI in the CircleCI web app. Task agent, which runs in the primary container, is responsible for streaming all other step output to the CircleCI web app. The only exception is the `Task lifecycle` step, which is streamed by container runner itself.
 
 Logging containers require a service account token with the minimal privileges to get container logs.
+
+The logging sidecar image defaults to `circleci/logging-collector` from Docker Hub. To use a private registry, set the top-level `logging.image` values in your Helm chart. See <<private-container-registry,Private container registry>>.
 
 Container runner currently sets default resource limits and requests on the logging container, they are:
 

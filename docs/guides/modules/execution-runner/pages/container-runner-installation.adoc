@@ -83,6 +83,66 @@ agent:
 helm install container-agent container-agent/container-agent -n circleci -f values.yaml
 ----
 
+[#private-container-registry]
+== Using a private container registry (optional)
+
+If your cluster cannot pull images from Docker Hub (for example, in an air-gapped environment or when outbound registry access is restricted), mirror the CircleCI container runner images to your own registry or configure a pull-through cache, then point the Helm chart at those locations.
+
+Container runner uses **three separate images**. Each is configured with a **top-level** key in `values.yaml` (not nested under `agent`):
+
+[cols="1,1,1",options="header"]
+|===
+| Helm key | Default image | Where it runs
+| `agent.image` | `circleci/runner-agent` | container-agent deployment
+| `orchestrator.image` | `circleci/runner-init` | init container on each task pod
+| `logging.image` | `circleci/logging-collector` | sidecar on task pods that use service containers
+|===
+
+Setting `agent.image` alone does not repoint the orchestrator or logging sidecar. Task pods may still try to pull from Docker Hub and fail with `ImagePullBackOff` if those keys are omitted.
+
+Add the following to your `values.yaml`, substituting your registry host, repository path, and tags (tags should match your container-agent chart version for compatibility):
+
+[source,yaml]
+----
+agent:
+  image:
+    registry: registry.example.com
+    repository: circleci/runner-agent
+    tag: kubernetes-3
+  resourceClasses:
+    <your-namespace>/<your-resource-class-name>:
+      token: <your-resource_class_token>
+
+orchestrator:
+  image:
+    registry: registry.example.com
+    repository: circleci/runner-init
+    tag: agent-server-4.7
+
+logging:
+  image:
+    registry: registry.example.com
+    repository: circleci/logging-collector
+    tag: 3.1.9-9141-f95ed2b
+----
+
+If you use CircleCI Server, include `agent.runnerAPI` as shown in <<#container-runner-installation,step 2>> above. Adjust the `runner-init` tag to match your Server version.
+
+After updating `values.yaml`, upgrade the release:
+
+[source,shell]
+----
+helm upgrade container-agent container-agent/container-agent -n circleci -f values.yaml
+----
+
+Verify the container-agent pod exposes your registry paths (not Docker Hub defaults):
+
+[source,shell]
+----
+kubectl describe pod -n circleci -l app=container-agent | grep -E 'KUBE_LOGGING_IMAGE|KUBE_RUNNER_INIT_IMAGE'
+----
+
+For job images (not CircleCI runner components), use `imagePullSecrets` on the resource class pod spec. See xref:container-runner.adoc#resource-class-configuration-custom-pod[Resource class configuration] and the link:https://support.circleci.com/hc/en-us/articles/20665530773403[Support Center article on imagePullSecrets for container runner].
 
 [#enable-rerun-job-with-ssh]
 [badge="Open preview"]
