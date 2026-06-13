@@ -84,11 +84,11 @@ helm install container-agent container-agent/container-agent -n circleci -f valu
 ----
 
 [#private-container-registry]
-== Using a private container registry (optional)
+=== Using a private container registry (optional)
 
 If your cluster cannot pull images from Docker Hub, mirror the CircleCI container runner images to your own registry or configure a pull-through cache. This applies in air-gapped environments or when outbound registry access is restricted. Then point the Helm chart at those locations.
 
-Container runner uses **three separate images**. Each is configured with a **top-level** key in `values.yaml` (not nested under `agent`):
+Container runner uses three separate images. Configure each image with a top-level key in `values.yaml` (not nested under `agent`):
 
 [cols="1,1,1",options="header"]
 |===
@@ -98,7 +98,7 @@ Container runner uses **three separate images**. Each is configured with a **top
 | `logging.image` | `circleci/logging-collector` | sidecar on task pods that use service containers
 |===
 
-Setting `agent.image` alone does not override the orchestrator or logging sidecar image settings. Task pods may still try to pull from Docker Hub and fail with `ImagePullBackOff` if those keys are omitted.
+Setting `agent.image` alone does not override the orchestrator or logging sidecar image settings. Task pods may still try to pull from Docker Hub and fail with `ImagePullBackOff` if you omit those keys.
 
 Add the following to your `values.yaml`, substituting your registry host, repository path, and tags (tags must match your container-agent chart version for compatibility):
 
@@ -126,7 +126,7 @@ logging:
     tag: 3.1.9-9141-f95ed2b
 ----
 
-If you use CircleCI Server, include `agent.runnerAPI` as shown in <<#container-runner-installation,step 2>> above. Adjust the `runner-init` tag to match your Server version.
+If you use CircleCI Server, include `agent.runnerAPI` as shown in the CircleCI Server step above. Adjust the `runner-init` tag to match your Server version.
 
 After updating `values.yaml`, upgrade the release:
 
