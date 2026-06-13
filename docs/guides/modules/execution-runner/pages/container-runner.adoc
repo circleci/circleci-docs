@@ -449,9 +449,9 @@ If the container runner crashes, there is no expectation that in-process or queu
 [#private-container-registry]
 == Private container registry
 
-In environments that block outbound access to Docker Hub, mirror the CircleCI runner images to your own registry (or use a pull-through cache) and set `agent.image`, `orchestrator.image`, and `logging.image` in the Helm chart `values.yaml`. All three keys are top-level; only configuring `agent.image` leaves task pods pulling `circleci/runner-init` and `circleci/logging-collector` from the public registry by default.
+In environments that block outbound access to Docker Hub, mirror the CircleCI runner images to your own registry (or use a pull-through cache). Set `agent.image`, `orchestrator.image`, and `logging.image` in the Helm chart `values.yaml`. All three keys are top-level. Only configuring `agent.image` leaves task pods pulling `circleci/runner-init` and `circleci/logging-collector` from the public registry by default.
 
-See xref:container-runner-installation.adoc#private-container-registry[Using a private container registry] for a full example and verification steps.
+See xref:container-runner-installation.adoc#private-container-registry[Using a Private Container Registry] for a full example and verification steps.
 
 The orchestrator init container image is configured under `orchestrator.image`. The logging sidecar image is configured under `logging.image`. Both accept the same fields as `agent.image` (`registry`, `repository`, `tag`, and optional `digest`). Refer to the link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml[Helm chart values.yaml] for defaults.
 
