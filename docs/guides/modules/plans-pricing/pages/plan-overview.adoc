@@ -6,8 +6,6 @@
 
 CircleCI offers credit-based usage plans that let you pay only for what you use, with the flexibility to scale as your team and project needs grow. This page explains how the plan system works and what features are available at each tier.
 
-For current credit amounts, included resource classes, and full pricing details, refer to the link:https://circleci.com/pricing/[CircleCI Pricing] page. That page is the source of truth for plan-specific limits and costs.
-
 [#how-credits-work]
 == How credits work
 
@@ -20,6 +18,12 @@ This model gives you precise control over your spending. For example, your team 
 
 For a full breakdown of credit rates per resource class and execution environment, refer to the link:https://circleci.com/product/features/resource-classes/[Resource Classes] page.
 
+== Feature comparison
+
+For a full comparison of features on each plan, refer to the pricing comparison chart on the link:https://circleci.com/pricing/[Pricing] page and the link:https://circleci.com/pricing/#comparison-table[Comparison Table] on the same page. You will also find a link to the link:https://circleci.com/pricing/price-list/full[price list].
+
+The sections below provide some highlights of what is available on each plan.
+
 [#free-plan]
 == Free plan
 
@@ -28,11 +32,10 @@ The Free plan includes a set number of credits per month and provides access to 
 The Free plan includes:
 
 * A selection of resource classes across Docker, Arm, Linux, Windows, and macOS execution environments.
-* A set number of active users. Users beyond the included number are charged at an additional per-user credit rate.
+* A set number of active users. Users beyond the included number are charged at an additional per-user credit rate. For more information on user types and registration, see xref:user-types-and-registration.adoc[User Types and Registration].
 * Access to the features described in <<#features-available-on-all-plans,Features available on all plans>>.
 * Community support via the link:https://discuss.circleci.com/[CircleCI community forums] and the link:https://support.circleci.com/hc/en-us[support portal].
 
-For more information on user types and registration, see xref:user-types-and-registration.adoc[User Types and Registration].
 
 [#performance-plan]
 == Performance plan
@@ -45,7 +48,7 @@ In addition to everything in the Free plan, the Performance plan includes:
 * *IP ranges*: Route job traffic through a defined set of IP addresses for access to restricted environments. Refer to the xref:security:ip-ranges.adoc[IP Ranges] page for details.
 * *Higher concurrency*: Run more jobs simultaneously within your workflows, reducing queue times.
 * *Scalable user seats*: Start with a set number of active users and add more as your team grows. Additional users are charged at a per-user credit rate.
-* *Custom storage retention*: Configure how long artifact, workspace, and cache objects are stored via the link:https://app.circleci.com/[CircleCI web app]. Reducing retention periods can lower your monthly bill.
+* *Organization-level custom storage retention*: Configure how long artifact, workspace, and cache objects are stored for your organization. Reducing retention periods can lower your monthly bill.
 * *Additional self-hosted runners*: Expand the number of jobs running on your own infrastructure.
 * *Standard support*: Support through SLAs with defined response times, plus access to the global link:https://support.circleci.com/hc/en-us/requests/new[ticket-based system].
 
@@ -58,7 +61,7 @@ The Scale plan is designed for large organizations with advanced compliance, cus
 
 In addition to everything in the Performance plan, the Scale plan includes:
 
-* *All resource classes*: Access to every available machine size across all execution environments.
+* *All resource classes*: Access to every available machine size across all execution environments, including GPUs.
 * *Custom concurrency*: Configure exactly how many jobs run concurrently across all build configurations and execution environments.
 * *Custom user seat count*: Set user limits based on your organization's needs.
 * *Unlimited self-hosted runners*: No cap on the number of jobs running on your own infrastructure.
