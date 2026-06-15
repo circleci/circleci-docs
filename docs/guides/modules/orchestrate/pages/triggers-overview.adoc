@@ -72,11 +72,11 @@ Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2
 .. Copy your project slug. Save this somewhere, you will need it later.
 
 . Find your definition ID:
-.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select **Pipelines** in the sidebar.
-.. In the column **Definition ID**, select btn:[Copy] for the correct pipeline. Save this somewhere, you will need it in the next step.
+.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select *Project Setup* in the sidebar (or **Pipelines** if you are using Bitbucket Cloud) in the sidebar.
+.. Copy the definition ID for the correct pipeline. Save this somewhere, you will need it in the next step.
 +
 .Screenshot showing the pipeline definition ID copy button
-image::guides:ROOT:triggers/copy-pipeline-definition-id.png[screenshot showing location of pipeline definition ID copy button]
+image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[screenshot showing location of pipeline definition ID copy button]
 
 . To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details. The key `parameters` is optional:
 +
