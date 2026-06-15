@@ -156,7 +156,7 @@ Fastlane
 Finout
 framebuffer
 frameit
-\bFree Plan\b
+[Ff]ree
 [Ff]ormatters?
 Gbps
 GCP
@@ -261,7 +261,7 @@ OPA
 [Pp]arameterizable
 [Pp]arsable
 [Pp]assphraseless
-\bPerformance Plan\b
+[Pp]erformance
 PHP
 PHPUnit
 Pipenv
@@ -318,14 +318,14 @@ SAML
 SSO
 [Ss]afelist
 \bSauce Labs\b
-\bScale Plan\b
+[Ss]cale
 [Ss]chedulable
 SDK
 seccomp
 [Ss]ecrets?
 Selenium
 SemVer
-Server Plan
+[Ss]erver
 SELinux
 \b[Ss]hellchecking\b
 [Ss]harded
