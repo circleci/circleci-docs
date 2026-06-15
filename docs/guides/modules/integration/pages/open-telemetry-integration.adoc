@@ -122,9 +122,6 @@ of the CircleCI project in which this ran.
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
 
-|`vcs.change.state` |open |The state of the GitHub pull request. Only
-present for pipelines triggered by a pull request.
-
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
@@ -227,9 +224,6 @@ condition. Only present for statuses that map to a `failure` result
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
-
-|`vcs.change.state` |open |The state of the GitHub pull request. Only
-present for pipelines triggered by a pull request.
 
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
@@ -357,9 +351,6 @@ condition. Only present for statuses that map to a `failure` result
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
-
-|`vcs.change.state` |open |The state of the GitHub pull request. Only
-present for pipelines triggered by a pull request.
 
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
@@ -560,9 +551,6 @@ result.
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
 
-|`vcs.change.state` |open |The state of the GitHub pull request. Only
-present for pipelines triggered by a pull request.
-
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.
 
@@ -739,9 +727,6 @@ condition. Only present for steps that have a result of `failed`,
 
 |`vcs.change.id` |42 |The GitHub pull request number. Only present for
 pipelines triggered by a pull request.
-
-|`vcs.change.state` |open |The state of the GitHub pull request. Only
-present for pipelines triggered by a pull request.
 
 |`vcs.change.title` |Fix the thing |The title of the GitHub pull request.
 Only present for pipelines triggered by a pull request.

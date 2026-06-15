@@ -30,7 +30,7 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * link:https://gnupg.org/download/[GPG 2.1+]
 
-* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line.
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
@@ -59,7 +59,7 @@ include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 
 [tabs]
 ====
-debian::
+Debian::
 +
 --
 include::ROOT:partial$runner/machine-runner-deb-package-install.adoc[]
@@ -81,8 +81,8 @@ Refer to the <<troubleshoot-self-hosted-runner#machine-runner,Troubleshoot Machi
 [#additional-resources]
 == Additional resources
 
-- xref:install-machine-runner-3-on-macos.adoc[Machine runner 3 macOS Homebrew installation]
-- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3 Windows installation]
-- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
-- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
+- xref:install-machine-runner-3-on-macos.adoc[Machine Runner 3 macOS Homebrew Installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine Runner 3 Windows Installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine Runner 3 Docker Installation]
+- xref:machine-runner-3-manual-installation.adoc[Manual Installation for Machine Runner 3]
+- xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3 Configuration Reference]

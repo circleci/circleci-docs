@@ -52,7 +52,7 @@ machine_provisioner:
 [#default-aws-ami-lists]
 ==== Default AWS AMI lists
 
-The default AMIs for server 4.9 are based on Ubuntu 22.04.
+The default AMIs for server 4.9 are based on Ubuntu 22.04, in both x86 and Arm variants.
 
 [tabs]
 ====
@@ -66,55 +66,55 @@ x86 AMI list::
 | AMI
 
 | `us-east-1`
-| `ami-060a1e5d499c85d12`
+| `ami-021dd518493189806`
 
 | `us-east-2`
-| `ami-036fa23a3bd3b5013`
+| `ami-03d2720cad192d1b1`
 
 | `ca-central-1`
-| `ami-0e323ff60823ceb5c`
+| `ami-073cd5dbfc0085d5f`
 
 | `ap-south-1`
-| `ami-072d2c41d591ee7a5`
+| `ami-0482b6adbc8513ce4`
 
 | `ap-southeast-2`
-| `ami-0880195a4612a9d61`
+| `ami-03e3bbfaf796bfd1a`
 
 | `ap-southeast-1`
-| `ami-0177e901826e7b422`
+| `ami-08e24c82eed550847`
 
 | `eu-central-1`
-| `ami-00588b75fa9a72eff`
+| `ami-0f2c31d55be76bb3b`
 
 | `eu-west-1`
-| `ami-08a090a8c770fe41f`
+| `ami-0b37ee6bcea703e9e`
 
 | `eu-west-2`
-| `ami-056ff1116a86d9e87`
+| `ami-097b99ef88e52c4a7`
 
 | `sa-east-1`
-| `ami-0117daec76cc825e7`
+| `ami-08087741d7744181d`
 
 | `us-west-1`
-| `ami-09bc39e1cf1850c79`
+| `ami-05b1f71036abfcf39`
 
 | `us-west-2`
-| `ami-01f4236b649731f59`
+| `ami-004cb0c913bbb5370`
 
 | `ap-northeast-1`
-| `ami-0d71a7594982c0233`
+| `ami-02e3cdb7fcd47fe97`
 
 | `ap-northeast-2`
-| `ami-06b70b9f78e46f8b4`
+| `ami-03fc14b5592ec8f98`
 
 | `eu-west-3`
-| `ami-0af2e6edf47f7b7cc`
+| `ami-0f6642f967389858d`
 
 | `us-gov-east-1`
-| `ami-00e0319619e88edf7`
+| `ami-07dfad9c46251171f`
 
 | `us-gov-west-1`
-| `ami-0fdf4561a0d3b0346`
+| `ami-0f1ca9606171e022b`
 |===
 --
 Arm AMI list::
@@ -126,56 +126,83 @@ Arm AMI list::
 | Region
 | AMI
 
-|`us-east-1`
-|`ami-09688117b98d2fc85`
+| `us-east-1`
+| `ami-039e377b0827a4701`
 
-|`us-east-2`
-|`ami-0f74df98c729f23da`
+| `us-east-2`
+| `ami-02e0f05558bdad8f8`
 
-|`ca-central-1`
-|`ami-0c38cb9bafc2d2367`
+| `ca-central-1`
+| `ami-01bbaccf6eda8974f`
 
-|`ap-south-1`
-|`ami-0bd058bca7362651a`
+| `ap-south-1`
+| `ami-09923e7fc8d31ddbc`
 
-|`ap-southeast-2`
-|`ami-063193aeb76899a04`
+| `ap-southeast-2`
+| `ami-01eda0b404cfbc0e8`
 
-|`ap-southeast-1`
-|`ami-0b93f7ee96e0544c8`
+| `ap-southeast-1`
+| `ami-0832fe727071bc902`
 
-|`eu-central-1`
-|`ami-0603edd8ca55f1aea`
+| `eu-central-1`
+| `ami-0fd98c11faa73574c`
 
-|`eu-west-1`
-|`ami-06284417985a234a6`
+| `eu-west-1`
+| `ami-097b321f4ba342c0d`
 
-|`eu-west-2`
-|`ami-042850328df475cf4`
+| `eu-west-2`
+| `ami-01491022ef9b8ccc0`
 
-|`sa-east-1`
-|`ami-065ea52e0a95d6097`
+| `sa-east-1`
+| `ami-0eab92571453f2c66`
 
-|`us-west-1`
-|`ami-008f62919e40a0607`
+| `us-west-1`
+| `ami-0e13348127b2586b5`
 
-|`us-west-2`
-|`ami-0f02394a567f27c57`
+| `us-west-2`
+| `ami-0467f7d2ee9e202a9`
 
-|`ap-northeast-1`
-|`ami-0cd7ad99dc5c77394`
+| `ap-northeast-1`
+| `ami-07f3c828fbfbe005b`
 
-|`ap-northeast-2`
-|`ami-02c787546f70518d8`
+| `ap-northeast-2`
+| `ami-0b7934443f313efdf`
 
-|`us-gov-east-1`
-|`ami-0b0841c7bba30ab06`
+| `eu-west-3`
+| `ami-065d375353bd3b58b`
 
-|`us-gov-west-1`
-|`ami-02268e2fe5572a88c`
+| `us-gov-east-1`
+| `ami-06403683c8f97b0a0`
+
+| `us-gov-west-1`
+| `ami-01d2ac64f0da5159f`
 |===
 --
 ====
+
+[#default-images-aws]
+==== Default machine executor images
+
+The machine provisioner ships a fixed set of default images. Share the following image names with your developers, who reference them in the `machine.image` key of their `.circleci/config.yml`.
+
+[discrete]
+===== Linux (AMD64)
+
+* `ubuntu-2204`
+* `default` - alias that resolves to `ubuntu-2204`.
+* `docker-default` - alias used by xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
+
+[discrete]
+===== Linux (Arm)
+
+* `arm-default`
+
+[discrete]
+===== Windows
+
+* `windows-default`
+
+For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM Execution Environment] section of the configuration reference.
 
 [#gcp]
 === GCP
@@ -210,6 +237,32 @@ machine_provisioner:
       ...
       linuxImage: "<my-linux-image>"
 ----
+
+[#default-images-gcp]
+==== Default machine executor images
+
+The machine provisioner ships a fixed set of default images. Share the following image names with your developers, who reference them in the `machine.image` key of their `.circleci/config.yml`.
+
+[discrete]
+===== Linux (AMD64)
+
+* `ubuntu-2204`
+* `default` - alias that resolves to `ubuntu-2204`.
+* `docker-default` - alias used by xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
+
+[discrete]
+===== Windows
+
+* `windows-default`
+
+[discrete]
+===== Android
+
+NOTE: The Android machine executor is only available when machine provisioner is configured with GCP.
+
+* `android-default`
+
+For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM Execution Environment] section of the configuration reference.
 
 [#instance-preallocation]
 == Instance preallocation

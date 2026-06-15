@@ -601,7 +601,7 @@ jobs:
     executor: aws-cli/default
     steps:
       - checkout
-      - run: mkdir bucket && echo "lorum ipsum" > bucket/build_asset.txt
+      - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
       - aws-s3/sync:
           from: bucket
           to: "s3://my-s3-bucket-name/prefix"
@@ -614,7 +614,7 @@ jobs:
 [#authoring-reusable-executors]
 == Authoring reusable executors
 
-Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters for that environment, including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
+Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`, etc.) to run in, as well as any other parameters for that environment, including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
 
 Executor declarations outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -897,7 +897,7 @@ workflows:
           saywhat: Everyone
 ----
 
-When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (for example, `sayhello-1`, `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
+When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (for example, `sayhello-1`, `sayhello-2`, etc.). To ensure build numbers are not appended, use the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
 
 [,yaml]
 ----
@@ -1076,8 +1076,7 @@ workflows:
 [#using-pre-and-post-steps]
 === Using pre and post steps
 
-Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps`
-are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
+Every job invocation may optionally accept two special arguments: `pre-steps` and `post-steps`. Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
 Pre and post steps allow you to execute steps in a given job without modifying the job. Pre steps can be useful, for example, in running custom setup steps before job execution.
 
