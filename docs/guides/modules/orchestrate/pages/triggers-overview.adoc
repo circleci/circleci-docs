@@ -72,7 +72,7 @@ Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2
 .. Copy your project slug. Save this somewhere, you will need it later.
 
 . Find your definition ID:
-.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select *Project Setup* in the sidebar (or **Pipelines** if you are using Bitbucket Cloud) in the sidebar.
+.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select *Project Setup* in the sidebar, or **Pipelines** if you are using Bitbucket Cloud.
 .. Copy the definition ID for the correct pipeline. Save this somewhere, you will need it in the next step.
 +
 .Screenshot showing the pipeline definition ID copy button
