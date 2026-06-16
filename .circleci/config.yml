@@ -15,6 +15,7 @@ executors:
   node_executor:
     docker:
       - image: cimg/node:24.16.0
+    resource_class: large
     working_directory: ~/project
 
   go_executor:
