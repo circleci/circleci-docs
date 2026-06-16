@@ -547,17 +547,18 @@ docker:
 
 NOTE: Overriding the default container entrypoint requires container runner version 3.1.10 or later.
 
-WARNING: This is an advanced feature. An incorrectly configured entrypoint can result in zombie processes, failed signal propagation, and unclean container shutdown.
+WARNING: Overriding the default container entrypoint is an advanced operation. An incorrectly configured entrypoint can result in zombie processes, failed signal propagation, and unclean container shutdown.
 
 By default, the task agent (GOAT) runs as PID 1 in the primary task container. You can override this by specifying a custom entrypoint in either the CircleCI job configuration or the resource class pod template spec.
 
-Any custom entrypoint must fulfill all of the following requirements:
+Any custom entrypoint must fulfill the following requirements:
 
-* Reap zombie processes and clean up child processes
-* Propagate signals to child processes, including GOAT* Manage the container lifecycle to ensure a clean exit
-* Spawn GOAT as a child process using the automatically provided command and arguments
+* Reap zombie processes and clean up child processes.
+* Propagate signals to child processes, including GOAT.
+* Manage the container lifecycle to ensure a clean exit.
+* Spawn GOAT as a child process using the automatically provided command and arguments.
 
-link:https://github.com/krallin/tini[Tini] is a purpose-built container init system that satisfies all of these requirements with minimal configuration.
+link:https://github.com/krallin/tini[tini] is a purpose-built container init system that satisfies these requirements with minimal configuration.
 
 === CircleCI job configuration
 
@@ -576,7 +577,7 @@ jobs:
           name: Who is PID 1?
           command: ps -p 1 -o comm=
 ----
-<1> The GOAT command and arguments are automatically appended and passed to tini.
+<1> The GOAT command and arguments are automatically appended and passed to `tini`.
 
 === Resource class pod template spec
 
