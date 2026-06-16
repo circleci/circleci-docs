@@ -57,7 +57,7 @@ module.exports.register = function () {
    * This event fires after HTML is generated but before the site is published.
    * We use it to convert all collected pages to Markdown format.
    */
-  this.on('beforePublish', ({ playbook }) => {
+  this.on('beforePublish', async ({ playbook }) => {
     // Get the site URL and remove any trailing slashes
     const siteUrl = playbook.site.url.replace(/\/+$/, '')
 
@@ -189,8 +189,13 @@ module.exports.register = function () {
      * PROCESS ALL PAGES
      *
      * Convert each HTML page to Markdown and write to temp directory.
+     * Pages are processed in batches with a GC yield between each batch
+     * to prevent OOM kills when processing large page sets.
      */
-    this.pages.forEach((page) => {
+    const BATCH_SIZE = 50
+    for (let i = 0; i < this.pages.length; i += BATCH_SIZE) {
+      const batch = this.pages.slice(i, i + BATCH_SIZE)
+      for (const page of batch) {
       /**
        * EXTRACT ARTICLE CONTENT
        *
@@ -416,7 +421,9 @@ module.exports.register = function () {
       } catch (err) {
         console.error(`Error writing ${mdPath}:`, err.message)
       }
-    })
+      }
+      await new Promise(resolve => setImmediate(resolve))
+    }
 
     console.log(`Generated ${markdownCount} markdown files in temp directory`)
     console.log(`Markdown files will need to be copied to ${outputDir} after Antora completes`)
