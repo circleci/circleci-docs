@@ -303,7 +303,7 @@ function findPageByUrl(contentCatalog, url) {
 }
 
 /**
- * Convert HTML URL to markdown URL following the pattern from markdown-export-extension
+ * Convert HTML URL to markdown URL following the pattern from scripts/convert-html-to-markdown.js
  */
 function getMarkdownUrl(pageUrl, siteUrl) {
   if (pageUrl.endsWith('/')) {

@@ -8,43 +8,9 @@ const buildApiDocs = require('./build-api-docs')
 
 const resolvedPath =  require.resolve('../../extensions/page-metadata-extension');
 const resolvedPathExportExtension = require.resolve('../../extensions/export-content-extension');
-const resolvedPathMarkdownExtension = require.resolve('../../extensions/markdown-export-extension');
+const { convertHtmlToMarkdown } = require('../../scripts/convert-html-to-markdown');
 console.log('Resolved path:', resolvedPath);
 
-function copyMarkdownFiles() {
-  const metaPath = path.join(__dirname, '../../extensions/.temp/markdown-meta.json')
-  if (!fs.existsSync(metaPath)) {
-    console.log('No markdown metadata found, skipping markdown copy')
-    return
-  }
-
-  const metadata = JSON.parse(fs.readFileSync(metaPath, 'utf8'))
-  const { tempDir, outputDir } = metadata
-
-  if (!fs.existsSync(tempDir)) {
-    console.log('Markdown temp directory not found, skipping')
-    return
-  }
-
-  console.log(`Copying ${metadata.fileCount} markdown files to build directory...`)
-
-  // Recursively copy all files from tempDir to outputDir
-  function copyRecursive(src, dest) {
-    if (fs.statSync(src).isDirectory()) {
-      if (!fs.existsSync(dest)) {
-        fs.mkdirSync(dest, { recursive: true })
-      }
-      fs.readdirSync(src).forEach(item => {
-        copyRecursive(path.join(src, item), path.join(dest, item))
-      })
-    } else {
-      fs.copyFileSync(src, dest)
-    }
-  }
-
-  copyRecursive(tempDir, outputDir)
-  console.log(`✅ Copied ${metadata.fileCount} markdown files to ${outputDir}`)
-}
 
 function copyLlmsTxt() {
   const metaPath = path.join(__dirname, '../../extensions/.temp/llms-meta.json')
@@ -69,14 +35,11 @@ function copyLlmsTxt() {
 module.exports = function buildSite(cb) {
   console.log('Starting Antora build...')
 
-  // Enable markdown generation in CI environments by default, but allow explicit override
   const isCI = process.env.CI === 'true'
   const explicitSetting = process.env.ENABLE_MARKDOWN_EXPORT
   const enableMarkdown = explicitSetting !== undefined
     ? explicitSetting === 'true'
     : isCI
-
-  const markdownExtension = enableMarkdown ? `--extension ${resolvedPathMarkdownExtension}` : ''
 
   if (enableMarkdown) {
     console.log('Markdown export enabled' + (isCI ? ' (CI environment)' : ''))
@@ -84,14 +47,20 @@ module.exports = function buildSite(cb) {
     console.log('Skipping markdown export for faster local builds (set ENABLE_MARKDOWN_EXPORT=true to enable)')
   }
 
-  exec(`npx antora ${antoraPlaybook} --log-failure-level=warn --extension ${resolvedPath} --extension ${resolvedPathExportExtension} ${markdownExtension} --key segment_write=${process.env.SEGMENT_WRITE_KEY || null} ${process.env.COOKIEBOT ? `--key cookiebot=${process.env.COOKIEBOT}` : ''}`, (err, stdout, stderr) => {
+  exec(`npx antora ${antoraPlaybook} --log-failure-level=warn --extension ${resolvedPath} --extension ${resolvedPathExportExtension} --key segment_write=${process.env.SEGMENT_WRITE_KEY || null} ${process.env.COOKIEBOT ? `--key cookiebot=${process.env.COOKIEBOT}` : ''}`, async (err, stdout, stderr) => {
     console.log(stdout)
     if (stderr) console.error(stderr)
     if (err) return cb(err)
 
-    // Copy markdown files from temp to build directory (only if enabled)
+    // Convert HTML to markdown after Antora exits so its memory is fully freed first
     if (enableMarkdown) {
-      copyMarkdownFiles()
+      const buildDir = path.resolve(path.join(__dirname, '../../build'))
+      const siteUrl = 'https://circleci.com/docs'
+      try {
+        await convertHtmlToMarkdown(buildDir, siteUrl)
+      } catch (mdErr) {
+        console.error('Markdown conversion failed:', mdErr)
+      }
     }
 
     // Copy llms.txt to build directory
