@@ -16,7 +16,7 @@ For detailed information about user types, how to register, and why registration
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * You must be on the link:https://circleci.com/pricing/[Performance or Scale Plan].
-* You must be an org admin.
+include::ROOT:partial$prerequisites/organization-admin.adoc[]
 
 [#steps]
 == Steps
@@ -25,7 +25,7 @@ Follow these steps to prevent unregistered users from triggering work that consu
 
 . In the link:https://app.circleci.com/[CircleCI web app], select *Plan* in the sidebar.
 . Select the **Usage Controls** tab. If you do not see this option, you might be on the Free Plan, or you may not be an org admin, in which case this guide does not apply to you.
-. Click on the **Prevent unregistered user spend** toggle to switch it "On".
+. Select on the **Prevent unregistered user spend** toggle to switch it "On".
 
 To disable this feature you can toggle this switch "Off" at any time.
 

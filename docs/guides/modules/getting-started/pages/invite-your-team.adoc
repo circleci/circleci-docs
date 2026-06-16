@@ -17,7 +17,7 @@ After setting up an organization in CircleCI, ensure your whole team gets access
 [#invite-teammates]
 == Invite teammates to join your organization
 
-The steps in this section show how an org admin can invite teammates to join their organization.
+The steps in this section show how an organization admin can invite teammates to join their organization.
 
 The steps are different depending on your organization type.
 
