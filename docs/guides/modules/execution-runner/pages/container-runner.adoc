@@ -558,7 +558,7 @@ Any custom entrypoint must fulfill the following requirements:
 * Manage the container lifecycle to ensure a clean exit.
 * Spawn GOAT as a child process using the automatically provided command and arguments.
 
-link:https://github.com/krallin/tini[tini] is a purpose-built container init system that satisfies these requirements with minimal configuration.
+link:https://github.com/krallin/tini[Tini] is a purpose-built container init system that satisfies these requirements with minimal configuration.
 
 === CircleCI job configuration
 
