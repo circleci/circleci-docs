@@ -20,12 +20,12 @@ to the collector of your choice.
 . Select **Add exporter**.
 
 . Complete the fields.
-** **Endpoint**: The hostname and port for your OTLP collector, for example `otel.example.com:4317`.
-** **Protocol**: Either `grpc` or `http`.
+** **Protocol**: Either `grpc` or `http`. Choose the protocol your collector supports.
+** **Endpoint**: Hostname and port for your OTLP collector, for example `otel.example.com:4317`. For HTTP, `/v1/traces` is appended automatically. You can also provide a full URL (e.g. `\https://gateway.example.com/otlp/v1/traces`) if your collector uses a custom path.
 ** **Use insecure connection**: Only enable this switch if your collector is incapable of TLS.
 ** **Additional Headers**: If your collector needs additional headers with each
-   request add it here. For example, for Honeycomb you must add an
-   `x-honeycomb-team` header with your Honeycomb API key as the value.
+   request, add them here. Enter plain values, not URL-encoded. For example, for Honeycomb you must add an
+   `x-honeycomb-team` header with your Honeycomb API key as the value. For Grafana Cloud, add an `Authorization` header with your `Basic <base64>` credentials.
 
 . Select **Add exporter** to save the new exporter.
 
@@ -52,6 +52,21 @@ Then run this command, substituting your own values:
 [source,console]
 ----
 $ curl -sH "Circle-Token: <CircleCI Token>" -X POST -d '{"org_id": "<CircleCI org ID>", "endpoint": "api.honeycomb.io:443", "protocol": "grpc", "headers": {"x-honeycomb-team": "<Honeycomb API token>"}}' 'https://circleci.com/api/v2/otel/exporters'
+----
+
+=== Example setup for exporting to Grafana Cloud
+
+You need three things:
+
+* A CircleCI personal API token belonging to an organization admin.
+* The CircleCI organization ID.
+* Your Grafana Cloud OTLP gateway hostname and base64-encoded credentials.
+
+Then run this command, substituting your own values:
+
+[source,console]
+----
+$ curl -sH "Circle-Token: <CircleCI Token>" -X POST -H "Content-Type: application/json" -d '{"org_id": "<CircleCI org ID>", "endpoint": "https://<your-gateway>.grafana.net/otlp/v1/traces", "protocol": "http", "headers": {"Authorization": "Basic <base64>"}}' 'https://circleci.com/api/v2/otel/exporters'
 ----
 
 [NOTE]
