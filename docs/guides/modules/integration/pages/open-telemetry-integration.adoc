@@ -21,7 +21,7 @@ to the collector of your choice.
 
 . Complete the fields.
 ** **Protocol**: Either `grpc` or `http`. Choose the protocol your collector supports.
-** **Endpoint**: Hostname and port for your OTLP collector, for example `otel.example.com:4317`. For HTTP, `/v1/traces` is appended automatically. You can also provide a full URL (e.g. `\https://gateway.example.com/otlp/v1/traces`) if your collector uses a custom path.
+** **Endpoint**: Hostname and port for your OTLP collector, for example `otel.example.com:4317`. For HTTP, the exporter appends `/v1/traces` to this automatically. You can also provide a full URL (for example `\https://gateway.example.com/otlp/v1/traces`) if your collector uses a custom path.
 ** **Use insecure connection**: Only enable this switch if your collector is incapable of TLS.
 ** **Additional Headers**: If your collector needs additional headers with each
    request, add them here. Enter plain values, not URL-encoded. For example, for Honeycomb you must add an
