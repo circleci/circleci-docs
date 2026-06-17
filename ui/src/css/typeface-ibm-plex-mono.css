@@ -2,6 +2,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 300;
+  font-display: swap;
   src:
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-300-normal.woff2) format("woff2"),
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-300-normal.woff) format("woff");
@@ -13,6 +14,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 300;
+  font-display: swap;
   src: url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-cyrillic-300-normal.woff2) format("woff2");
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
@@ -22,6 +24,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   src:
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2) format("woff2"),
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff) format("woff");
@@ -33,6 +36,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 400;
+  font-display: swap;
   src: url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-cyrillic-400-normal.woff2) format("woff2");
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
@@ -42,6 +46,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 500;
+  font-display: swap;
   src:
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2) format("woff2"),
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff) format("woff");
@@ -53,6 +58,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 500;
+  font-display: swap;
   src: url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-cyrillic-500-normal.woff2) format("woff2");
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
@@ -62,6 +68,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 600;
+  font-display: swap;
   src:
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff2) format("woff2"),
     url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-600-normal.woff) format("woff");
@@ -73,6 +80,7 @@
   font-family: "IBM Plex Mono";
   font-style: normal;
   font-weight: 600;
+  font-display: swap;
   src: url(~@fontsource/ibm-plex-mono/files/ibm-plex-mono-cyrillic-600-normal.woff2) format("woff2");
   unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
