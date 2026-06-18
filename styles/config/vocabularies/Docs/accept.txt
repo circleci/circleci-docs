@@ -362,6 +362,7 @@ TestFairy
 \btime windows\b
 [Tt]imebox
 [Tt]imeboxing
+Tini
 Tink
 Tinkey
 TLS
