@@ -6,5 +6,22 @@
   <body class="status-404">
 {{> header}}
 {{> body}}
+{{#with site.keys.segmentWrite}}
+<script>
+  (function() {
+    var pathName = window.location.pathname.replace("docs/", "");
+    analytics.track("dd_docs_404-page", {
+      fullPath: pathName,
+      action: "viewed",
+      orgId: (typeof Cookies !== "undefined") ? Cookies.get("cci-org-analytics-id") || null : null,
+      page: pathName,
+      referrer: document.referrer || null,
+      hash: window.location.hash ? window.location.hash.replace("#", "") : null,
+      locale: "en",
+      desktop: window.innerWidth >= 1200,
+    });
+  })();
+</script>
+{{/with}}
   </body>
 </html>
