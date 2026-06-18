@@ -63,7 +63,7 @@ Organization-level rules that govern which configuration elements are required, 
 
 == Configuration
 
-The YAML file that defines your entire CI/CD process as code. The configuration file declares the <<pipeline>>, <<workflow,workflows>>, <<job,jobs>>, and <<step,steps>> that run when work is triggered. It is most often stored at `.circleci/config.yml` in the root of a repository, but a project is not limited to that name or location and can use a configuration file stored elsewhere. See the xref:guides:getting-started:config-intro.adoc[Configuration Introduction] page and the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
+The YAML file that defines your entire CI/CD process as code. The configuration file declares the <<pipeline>>, <<workflow,workflows>>, <<job,jobs>>, and <<step,steps>> that run when work is triggered. It is most often stored at `.circleci/config.yml` in the root of a repository, but a project is not limited to that name or location. See the xref:guides:getting-started:config-intro.adoc[Configuration Introduction] page and the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
 
 == Container
 
@@ -91,7 +91,7 @@ A <<trigger>> that runs a pipeline in one repository when an event, such as a ta
 
 == Custom image
 
-A Docker <<image>> that you build and maintain yourself, typically from a Dockerfile stored in a registry, for use with the <<docker-executor>> when convenience images do not meet your needs. See the xref:guides:execution-managed:custom-images.adoc[Using Custom-Built Docker Images] page.
+A Docker <<image>> that you build and maintain yourself, typically from a Dockerfile stored in a registry. Use a custom image with the <<docker-executor>> when convenience images do not meet your needs. See the xref:guides:execution-managed:custom-images.adoc[Using Custom-Built Docker Images] page.
 
 == Custom webhook
 
@@ -109,6 +109,7 @@ A lightweight logging mechanism, configured as steps in your pipeline, that reco
 
 The act of putting a new <<component>> version into an <<environment>>, regardless of whether traffic is yet routed to it. See the xref:guides:deploy:deployment-overview.adoc[Deployment Overview] page. Compare with <<release>> and <<delivery>>, which CircleCI defines as distinct steps.
 
+[#docker-executor]
 == Docker executor
 
 The <<executor>> (`docker`) that runs a job inside one or more Docker containers, providing the Docker <<execution-environment,execution environment>>. The Docker executor is resource-efficient and well suited to most build and test jobs. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
@@ -147,7 +148,7 @@ A <<workflow>> pattern in which a single job branches into multiple jobs that ru
 
 == Filtering
 
-The mechanisms for controlling whether a <<job>>, <<workflow>>, or <<step>> runs, based on the git branch or tag, or on other conditions. You can filter a job by branch or tag using the `filters` key with `only` and `ignore` values, or set `filters` to an expression for finer control, for example `filters: pipeline.git.branch == "main"`. You can also gate a whole workflow or a single step with an expression in a `when` or `unless` condition. Expression-based conditions are the most flexible option and can reference pipeline values and parameters. See the xref:guides:orchestrate:using-branch-filters.adoc[Branch and Tag Filtering] page.
+The mechanisms for controlling whether a <<job>>, <<workflow>>, or <<step>> runs, based on the git branch or tag, or on other conditions. You can filter a job by branch or tag using the `filters` key with `only` and `ignore` values. For finer control, set `filters` to an expression, for example `filters: pipeline.git.branch == "main"`. You can also gate a whole workflow or a single step with an expression in a `when` or `unless` condition. Expression-based conditions are the most flexible option and can reference pipeline values and parameters. See the xref:guides:orchestrate:using-branch-filters.adoc[Branch and Tag Filtering] page.
 
 == Flaky test
 
@@ -204,7 +205,7 @@ An additional layer of account security that requires a second verification fact
 
 == Namespace
 
-A unique, immutable identifier that groups an organization's resources under a single owner. Each user or organization claims one namespace, typically the lowercase VCS organization name. The same namespace is used to group your registry <<orbs>> by author and to identify your <<self-hosted-runner,self-hosted runners>>, where it is combined with a resource-class name to form the full runner <<resource-class>> label. See the xref:orbs:use:orb-concepts.adoc[Orb Concepts] and xref:guides:execution-runner:runner-concepts.adoc[Runner Concepts] pages.
+A unique, immutable identifier that groups an organization's resources under a single owner. Each user or organization claims one namespace, typically the lowercase VCS organization name. The same namespace groups your registry <<orbs>> by author and identifies your <<self-hosted-runner,self-hosted runners>>. For runners, it is combined with a resource-class name to form the full runner <<resource-class>> label. See the xref:orbs:use:orb-concepts.adoc[Orb Concepts] and xref:guides:execution-runner:runner-concepts.adoc[Runner Concepts] pages.
 
 [#oidc-token]
 == OpenID Connect (OIDC) token
