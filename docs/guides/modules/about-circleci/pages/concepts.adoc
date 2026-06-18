@@ -11,7 +11,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 [#concurrency]
 == Concurrency
 
-In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we use different soft concurrency limits on each of the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
+In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. Concurrency is different from CircleCI _parallelism_, which splits the tests of a single job across multiple containers. To keep the system stable for all CircleCI customers, we use different soft concurrency limits on each of the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
 
 See the xref:optimize:concurrency.adoc[Concurrency] page for more information.
 
@@ -536,6 +536,8 @@ Examples for all execution environments are available on the following pages:
 Pricing and plans information for the various resource classes can be found on the link:https://circleci.com/product/features/resource-classes/[Resource classes] product page.
 
 The `resource_class` key is also used to configure a xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
+
+For full details on both uses of resource classes, see the xref:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
 
 [#steps]
 == Steps

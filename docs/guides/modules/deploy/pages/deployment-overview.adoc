@@ -153,21 +153,21 @@ To get started with the release agent see the following guides:
 
 The sections below explain some key software delivery concepts. Understanding these concepts will help you take full advantage of CircleCI deploy markers and the release agent.
 
-=== Command
+=== Release agent command
 
-TIP: Commands are available when using the release agent. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
+TIP: Release agent commands are available when using the release agent. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
 
-A _command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component.
+A _release agent command_ is a user-initiated action CircleCI performs on the user's behalf to manipulate a specific component. Release agent commands are distinct from the reusable `commands` you define in your configuration file.
 
-Actions are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, just like the step output works for CI jobs.
+Release agent commands are run asynchronously via our release agent and the results are reported back to the CircleCI web app. You can see the results in the deployments dashboard, just like the step output works for CI jobs.
 
-Some commands are available for all components:
+Some release agent commands are available for all components:
 
 * Restore version
 * Scale component
 * Restart component
 
-A subset of commands are available for _progressive_ deployments (when using Argo Rollouts):
+A subset of release agent commands are available for _progressive_ deployments (when using Argo Rollouts):
 
 * Retry deployment
 * Promote deployment
@@ -281,14 +281,14 @@ To view all deployments for an environment, follow these steps:
 . Select your environment by name.
 . You are now on the environment details page. Select the **Deployments** tab to view a list of all deployments for your chosen environment.
 
-=== View all commands run for an environment
+=== View all release agent commands run for an environment
 
-To view all commands run for an environment, follow these steps:
+To view all release agent commands run for an environment, follow these steps:
 
 . Select *Deploys* in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Environments** tab.
 . Select your environment by name.
-. You are now on the environment details page. Select the **Commands** tab to view a list of all commands that have been run for your chosen environment.
+. You are now on the environment details page. Select the **Commands** tab to view a list of all release agent commands that have been run for your chosen environment.
 
 === View all deployments for a component
 
@@ -299,14 +299,14 @@ To view all deployments for a component, follow these steps:
 . Select your component by name. You can use the filter at the top of the page to help.
 . You are now on the component details page. Select the **Deployments** tab to view a list of all deployments for your chosen component.
 
-=== View all commands run for a component
+=== View all release agent commands run for a component
 
-To view all commands run for a component, follow these steps:
+To view all release agent commands run for a component, follow these steps:
 
 . Select *Deploys* in the CircleCI web app sidebar.
 . You are now in the timeline view. Select the **Components** tab.
 . Select your component by name. You can use the filter at the top of the page to help.
-. You are now on the component details page. Select the **Commands** tab to view a list of all commands run for your chosen component.
+. You are now on the component details page. Select the **Commands** tab to view a list of all release agent commands run for your chosen component.
 
 [#release-status]
 == Deploy status
@@ -333,7 +333,7 @@ A deployment can be in one of the following states:
 |The deployment has been cancelled, either using the `cancel deployment` option, or by being superseded by another deployment.
 
 |EXPIRED
-|Deployment commands failed to be picked up by the release agent within the required time window.
+|Release agent commands failed to be picked up by the release agent within the required time window.
 
 |LOGGED
 |Deployment has been logged using a deploy marker and is available in the CircleCI deploys UI.
