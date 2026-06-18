@@ -13,7 +13,7 @@ Any user, registered or unregistered, who triggers the use of compute resources 
 [#approval-job]
 == Approval job
 
-A special job, configured with `type: approval`, that pauses a <<workflow>> until a user with the required permissions manually approves it. An approval job runs no steps of its own; it acts as a manual gate before downstream jobs continue. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
+A special job, configured with `type: approval`, that pauses a <<workflow>> until a user with the required permissions manually approves it. An approval job runs no steps of its own. It acts as a manual gate before downstream jobs continue. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
 
 [#artifact]
 == Artifact
@@ -405,7 +405,7 @@ Reverting an application to a previous stable version when an issue is detected,
 [#schedule-trigger]
 == Schedule trigger
 
-A <<trigger>> that runs a pipeline on a defined schedule, using cron syntax, rather than on each commit. Schedule triggers are the recommended way to run scheduled work; use them instead of scheduled workflows unless your setup requires the older approach. See the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
+A <<trigger>> that runs a pipeline on a defined schedule, using cron syntax, rather than on each commit. Schedule triggers are the recommended way to run scheduled work. Use them instead of scheduled workflows unless your setup requires the older approach. See the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
 
 [#secrets-masking]
 == Secrets masking
@@ -430,7 +430,7 @@ An authentication method that lets users authenticate once through an identity p
 [#ssh-key]
 == SSH key
 
-A cryptographic key pair used for authentication in CircleCI. A deploy key gives CircleCI access to check out a single repository; a user key is associated with a user account and can give access to multiple repositories. See the xref:guides:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys] page.
+A cryptographic key pair used for authentication in CircleCI. A deploy key gives CircleCI access to check out a single repository. A user key is associated with a user account and can give access to multiple repositories. See the xref:guides:security:rotate-project-ssh-keys.adoc[Rotate Project SSH Keys] page.
 
 [#step]
 == Step
@@ -496,4 +496,4 @@ A set of rules that defines a collection of <<job,jobs>> and their run order. Wo
 [#workspace]
 == Workspace
 
-A workflow-aware storage mechanism that passes data between <<job,jobs>> in the same <<workflow>>. A job persists files with `persist_to_workspace`, and downstream jobs access them with `attach_workspace`. On CircleCI Cloud, workspace storage is retained for 15 days by default, which is also the maximum; you can set a shorter period (1 to 15 days) under menu:Plan[Usage Controls] in the web app. See the xref:guides:orchestrate:workspaces.adoc[Using Workspaces to Share Data Between Jobs] page. Compare with <<cache>> and <<artifact>>.
+A workflow-aware storage mechanism that passes data between <<job,jobs>> in the same <<workflow>>. A job persists files with `persist_to_workspace`, and downstream jobs access them with `attach_workspace`. On CircleCI Cloud, workspace storage is retained for 15 days by default, which is also the maximum. You can set a shorter period (1 to 15 days) under menu:Plan[Usage Controls] in the web app. See the xref:guides:orchestrate:workspaces.adoc[Using Workspaces to Share Data Between Jobs] page. Compare with <<cache>> and <<artifact>>.
