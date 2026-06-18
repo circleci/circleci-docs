@@ -21,7 +21,7 @@ See <<adding-an-entrypoint,Adding an Entrypoint>> for more details.
 [#creating-a-custom-image-manually]
 == Create a custom image manually
 
-The following sections provide a walkthrough of how to create a custom image manually. In most cases you will want to have a custom image for your xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] so that is the focus of this guide. You can also apply this knowledge to create images for secondary containers.
+The following sections provide a walkthrough of how to create a custom image manually. In most cases you will want to have a custom image for your xref:reference:ROOT:glossary.adoc#primary-container[Primary Container] so that is the focus of this guide. You can also apply this knowledge to create images for service containers.
 
 [#prerequisites]
 === Prerequisites

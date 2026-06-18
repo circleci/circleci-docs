@@ -48,7 +48,7 @@ The following table describes user authorization for the different VCS providers
 
 == Organizations
 
-An organization in CircleCI is a workspace that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, or Bitbucket).
+An organization in CircleCI is a top-level account that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, or Bitbucket).
 
 Each organization has its own settings, including security, integrations, and resource management, allowing you to coordinate and control your CI/CD processes across multiple projects and users.
 
