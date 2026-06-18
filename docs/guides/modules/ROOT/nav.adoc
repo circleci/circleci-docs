@@ -182,6 +182,7 @@
 *** xref:deploy:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
 *** xref:deploy:update-the-kubernetes-release-agent.adoc[Update the Kubernetes release agent]
 *** xref:deploy:manage-releases.adoc[Manage releases]
+*** xref:deploy:release-validation-engine.adoc[Release validation engine]
 ** How-to guides
 *** xref:deploy:deploy-android-applications.adoc[Deploy Android applications]
 *** xref:deploy:deploy-to-artifactory.adoc[Deploy to Artifactory]
