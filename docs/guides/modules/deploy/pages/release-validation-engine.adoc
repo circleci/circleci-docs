@@ -1,0 +1,81 @@
+= Release validation engine
+:page-platform: Cloud
+:page-description: Gate releases on signals from your existing monitoring tools and roll back automatically, without Kubernetes, Argo Rollouts, or the Release Agent.
+:experimental:
+
+The release validation engine determines whether a deployment is healthy and gates the release on that outcome. It listens for signals from your existing monitoring tools and evaluates them against a policy in your CI/CD configuration. The engine then marks the release as a success or a failure, and triggers your rollback pipeline when a release fails.
+
+NOTE: The release validation engine is a preview feature. It is enabled for selected organizations, and the configuration syntax can change before general availability.
+
+// REVIEWER NOTE: This page is the value/conceptual companion to the flat-config
+// reference in circleci-docs PR #10469 (DR-520). It deliberately avoids duplicating
+// field-level config. Add verified xrefs to the release management page, the rollback
+// pipeline page, and the #10469 reference before merge (style guide requires verifying
+// every xref target exists). Confirm nav.adoc placement under the Deploy section.
+
+== Value the validation engine unlocks
+
+Until now, release management on CircleCI required Kubernetes, Argo Rollouts, and the Release Agent. The validation engine removes that requirement. You define a policy, point a monitor at a webhook URL, and CircleCI determines release health for you.
+
+No specialized infrastructure:: Gate releases without Kubernetes, Argo Rollouts, or the Release Agent. The engine builds on the release management you already have.
+Works with your existing tools:: The engine has built-in support for Datadog, and a custom provider for any other tool that can send an HTTP POST. You reuse the monitors you already operate.
+Automated rollback:: When a release breaches your policy, the engine triggers your rollback pipeline and sets the target back to the last successful release.
+Real-time gating:: The engine evaluates alert signals as they arrive. There is no polling, and no extra infrastructure to operate.
+Built-in visibility:: Validation status and the full event timeline appear on the release details page in the web app.
+
+== When to use the validation engine
+
+Use the validation engine when any of the following apply:
+
+* You want deployment safety without adopting a service mesh or a progressive-delivery stack.
+* You already run monitors and want them to decide whether a release is healthy.
+* You want failed releases to roll back without manual intervention.
+* You prefer one declarative policy in your configuration over custom health-check scripts.
+
+== How validation works
+
+. You trigger a release that includes a validation policy in its configuration.
+. CircleCI creates a validation plan and opens an evaluation window.
+. Your monitoring tool sends alert webhooks to the engine during the window.
+. The engine evaluates each signal against your failure criteria.
+. If the criteria are met, the release fails. If the window closes first, the release succeeds.
+
+When a release fails and your project has a rollback pipeline configured, the engine triggers that pipeline automatically. The engine sets the current version to the failed deploy and the target version to the last successful release.
+
+== Configure a validation policy
+
+// REVIEWER NOTE: Full field-level config reference is being added in circleci-docs
+// PR #10469 (DR-520, flat release-job validation config). This section stays
+// intentionally minimal and links to that reference to avoid duplication. Replace the
+// placeholder xref below with the verified path once #10469 merges. The exact fields
+// inside `webhooks[]` and `agents[]` were not reproduced here because they were not
+// verified against the merged reference.
+
+Enable validation in your release component configuration. Setting `validation.enabled` to `true` creates a default Datadog webhook, so a basic policy needs no further configuration.
+
+.Enable validation on a release component
+[source,yaml]
+----
+release-component:
+  type: release
+  plan_name: component-release
+  validation:
+    enabled: true
+----
+
+To override the defaults, add top-level `webhooks` or `agents` entries to the release component. CircleCI builds the full validation policy server-side from these values.
+
+IMPORTANT: The nested `validation_policy` block is no longer supported. CircleCI rejects it with a configuration error. Use the flat `validation`, `webhooks`, and `agents` fields instead.
+
+// TODO(reviewer): replace with verified xref once PR #10469 merges.
+// For the complete list of webhook and agent fields, see the validation configuration reference.
+
+== View validation results
+
+Open the release details page in the web app to track a validation. The page shows the validation status, the failure count, the evaluation deadline, and the timeline of matched events.
+
+== Limitations
+
+* The validation engine is a preview feature, and it is enabled for selected organizations.
+* Each policy currently supports a single validation check.
+* Automatic rollback requires a rollback pipeline configured for the project. The engine skips rollback for a first deploy, because no previous successful release exists.
