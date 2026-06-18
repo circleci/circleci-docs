@@ -3,7 +3,7 @@
 :page-description: A glossary of CircleCI-specific and CI/CD terminology used across the CircleCI product and documentation.
 :experimental:
 
-This glossary defines terms used across the CircleCI product and documentation. It covers CircleCI-specific concepts as well as general CI/CD terms as CircleCI uses them. Entries marked with a *Server* badge apply to xref:guides:plans-pricing:plan-server.adoc[CircleCI Server], the self-hosted installation.
+This glossary defines terms used across the CircleCI product and documentation. It covers CircleCI-specific concepts as well as general CI/CD terms as CircleCI uses them.
 
 == Active user
 
@@ -21,10 +21,9 @@ A file or directory that persists after a <<job>> finishes, such as a compiled b
 
 A record of significant events in a CircleCI organization, available to organization admins for audit and forensic analysis. See the xref:guides:security:audit-logs.adoc[Audit Logs] page.
 
-[badge="Server v4+"]
 == Build agent
 
-On CircleCI Server, the CircleCI program that executes the steps within a job and reports the results. The build agent runs as the main process inside a Nomad job allocation. See <<nomad>> and the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+On CircleCI Server, the CircleCI program that executes the steps within a job and reports the results. The build agent runs as the main process inside a Nomad job allocation. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
 
 == Built-in environment variable
 
@@ -38,24 +37,17 @@ A stored hierarchy of files that CircleCI restores into later <<job,jobs>> to sp
 
 A unique identifier that determines when CircleCI writes a new <<cache>> and which existing cache it restores. Cache keys can include templates, such as a checksum of a lock file or the branch name, that are evaluated at runtime. See the xref:guides:optimize:caching.adoc[Caching Dependencies] page.
 
-== CircleCI administrator
-
-On CircleCI Server, the first user to log in to a private installation. The administrator can add and remove users. For role-based access on cloud, see <<organization-role>> and the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
-
 == CircleCI CLI
 
-The command-line interface you install on your local machine to validate and debug configuration, run jobs locally, and manage orbs, contexts, and policies. See the xref:guides:toolkit:local-cli.adoc[CircleCI Local CLI] page. The CircleCI CLI is distinct from the in-pipeline `circleci` commands that run during a job.
+The command-line interface you install on your local machine to validate and debug configuration, run jobs locally, and manage orbs, contexts, and policies. See the xref:guides:toolkit:local-cli.adoc[CircleCI Local CLI] page. The CircleCI CLI is distinct from the environment CLI, which is available in your CircleCI pipelines.
 
-[badge="Server v4+"]
 == CircleCI Server
 
-The self-hosted CI/CD platform for organizations that must operate within their own firewall, private cloud, or data center. CircleCI Server runs in a Kubernetes cluster and provides the same core features as CircleCI Cloud. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
+CircleCI's on-premises CI/CD platform for organizations that must operate within their own firewall, private cloud, or data center. CircleCI Server runs in a Kubernetes cluster and provides the same core features as CircleCI Cloud. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
 
 == Command
 
 A reusable sequence of <<step,steps>> that can be invoked multiple times within a job, within other commands, or across jobs in a configuration file. Commands are a building block of reusable config and <<orbs>>. See the xref:reference:ROOT:reusing-config.adoc[Reusable Config Reference] page.
-
-NOTE: Not to be confused with a _release agent command_, a user-initiated release action (such as restore version or scale component) run by the <<release-agent>>. See the xref:guides:deploy:deployment-overview.adoc[Deployment Overview] page.
 
 == Component
 
@@ -143,11 +135,11 @@ A named value stored in CircleCI and injected at runtime into jobs, used for con
 
 == Execution environment
 
-The runtime in which a <<job>> runs, either a Docker container or a virtual machine. CircleCI offers the Docker, Linux VM, macOS, Windows, GPU, Android, and Arm VM execution environments. You do not select an execution environment directly: you choose an <<executor>> (`docker`, `machine`, or `macos`) and an image, and those determine the environment. This split between executor and execution environment is specific to CircleCI. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
+The runtime in which a <<job>> runs, either a Docker container or a virtual machine. CircleCI offers the Docker, Linux VM, macOS, Windows, GPU, Android, and Arm VM execution environments. You choose an <<executor>> (`docker`, `machine`, or `macos`) and an image, and those together determine the environment. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
 
 == Executor
 
-The type you assign to a <<job>> that defines the underlying technology used to run it. CircleCI has three executors: `docker`, `machine`, and `macos`. The executor is not the same as the <<execution-environment>>: the executor you choose, together with the image you specify, determines which execution environment the job runs in. For example, the `machine` executor can run a job in the Linux VM, Windows, GPU, Android, or Arm VM environment. In reusable config and orbs, an executor is also a named, parameterizable definition that multiple jobs can share. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] and xref:reference:ROOT:reusing-config.adoc[Reusable Config Reference] pages.
+The type you assign to a <<job>> that defines the underlying technology used to run it. CircleCI has three executors: `docker`, `machine`, and `macos`. For example, the `machine` executor can run a job in the Linux VM, Windows, GPU, Android, or Arm VM execution environment. In configuration an `executor` is also a named, parameterizable definition that multiple jobs can share. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] and xref:reference:ROOT:reusing-config.adoc[Reusable Config Reference] pages.
 
 == Fan-out/fan-in
 
@@ -160,10 +152,6 @@ The mechanisms for controlling whether a <<job>>, <<workflow>>, or <<step>> runs
 == Flaky test
 
 A test that passes and fails inconsistently without changes to the code under test. CircleCI identifies a test as flaky when it both fails and passes on the same commit within a set time window. See the xref:guides:test:fix-flaky-tests.adoc[Identify and Fix Flaky Tests] page.
-
-== Group
-
-A collection of users that can be assigned roles together, so administrators can manage access for many users at once. Groups can be mapped automatically from an identity provider. See the xref:guides:permissions-authentication:manage-groups.adoc[Manage Groups] and xref:guides:permissions-authentication:sso-group-mapping.adoc[SSO Group Mapping] pages.
 
 == Image
 
@@ -181,10 +169,6 @@ A feature that routes a job's traffic through a set of well-defined CircleCI IP 
 
 A collection of <<step,steps>> that run in a single <<execution-environment>>. Each job declares an <<executor>>, and jobs are orchestrated by <<workflow,workflows>>. See the xref:guides:orchestrate:jobs-steps.adoc[Jobs and Steps] page.
 
-== Job space
-
-All the containers being run by an <<executor>> for the current job.
-
 == Machine executor
 
 The <<executor>> (`machine`) that runs a job in a dedicated, ephemeral virtual machine with full operating-system access. Depending on the image you specify, the machine executor provides the Linux VM, Windows, GPU, Android, or Arm VM <<execution-environment,execution environment>>. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
@@ -193,7 +177,6 @@ The <<executor>> (`machine`) that runs a job in a dedicated, ephemeral virtual m
 
 A prebuilt virtual machine image for the <<machine-executor>>, available for Linux, macOS, Windows, Android, and GPU environments. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
 
-[badge="Server v4+"]
 == Machine provisioner
 
 On CircleCI Server, the service that dynamically provisions and manages the virtual machines used by jobs configured for the machine execution environment, as well as Remote Docker jobs. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
@@ -223,11 +206,6 @@ An additional layer of account security that requires a second verification fact
 
 A unique, immutable identifier that groups an organization's resources under a single owner. Each user or organization claims one namespace, typically the lowercase VCS organization name. The same namespace is used to group your registry <<orbs>> by author and to identify your <<self-hosted-runner,self-hosted runners>>, where it is combined with a resource-class name to form the full runner <<resource-class>> label. See the xref:orbs:use:orb-concepts.adoc[Orb Concepts] and xref:guides:execution-runner:runner-concepts.adoc[Runner Concepts] pages.
 
-[badge="Server v4+"]
-== Nomad
-
-On CircleCI Server, the HashiCorp workload orchestrator that schedules and runs CI/CD jobs. It consists of a Nomad control plane (server) that runs in the Kubernetes cluster and Nomad clients, provisioned outside the cluster, that execute jobs. See the xref:guides:plans-pricing:plan-server.adoc[CircleCI Server] page.
-
 [#oidc-token]
 == OpenID Connect (OIDC) token
 
@@ -235,7 +213,7 @@ A token issued by CircleCI that lets a job authenticate with a cloud provider wi
 
 == Orbs
 
-Reusable packages of YAML configuration that bundle <<job,jobs>>, <<command,commands>>, and <<executor,executors>> to automate repeated processes and integrate with third-party tools. Orbs can be published to the orb registry as public or private, or defined inline in your configuration. Visit the https://circleci.com/developer/orbs[Orb Registry] to find orbs, and see the xref:orbs:use:orb-intro.adoc[Orbs Introduction] page.
+Reusable packages of YAML configuration that bundle <<job,jobs>>, <<command,commands>>, and <<executor,executors>> to automate repeated processes and integrate with third-party tools. Orbs come in three forms. Registry orbs are published to the orb registry and can be public or private. Inline orbs are defined directly in your configuration. URL orbs are a single YAML file imported by HTTPS URL, subject to the organization's allow list. Visit the https://circleci.com/developer/orbs[Orb Registry] to find orbs, and see the xref:orbs:use:orb-intro.adoc[Orbs Introduction] page.
 
 == Orb registry
 
@@ -247,11 +225,7 @@ The top-level account in CircleCI that contains a team's projects, settings, per
 
 == Organization role
 
-In a `circleci` type <<organization>>, a role assigned at the organization level that determines a user's permissions across the whole organization. The organization roles are admin, contributor, and viewer. (In `github` and `bitbucket` OAuth organizations, access follows the VCS <<owner>> model instead.) See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page. Compare with <<project-role>>.
-
-== Owner
-
-In a `github` or `bitbucket` (OAuth) <<organization>>, the owner of the team's VCS organization, who has full administrative control over the organization's CircleCI resources. In a `circleci` type organization, access is governed instead by an <<organization-role>>. See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
+In a `circleci` type <<organization>>, a role assigned at the organization level that determines a user's permissions across the whole organization. The organization roles are admin, contributor, and viewer. In `github` and `bitbucket` OAuth organizations, access follows the VCS <<owner>> model instead. See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page. Compare with <<project-role>>.
 
 == Parallelism
 
@@ -291,14 +265,6 @@ For `circleci` type organizations, a CircleCI project is a standalone entity tha
 
 After a project is set up, you can configure settings, contexts, environment variables, and the team members who may follow it. See the xref:guides:getting-started:create-project.adoc[Create a Project] page.
 
-== Project administrator
-
-In a `github` or `bitbucket` (OAuth) <<organization>>, the user who adds a repository in the VCS to CircleCI as a project. In a `circleci` type organization, project access is governed instead by a <<project-role>>. See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
-
-== Project role
-
-In a `circleci` type <<organization>>, a role assigned at the project level that determines a user's permissions for a specific project, offering finer-grained control than an <<organization-role>>. The project roles are admin, contributor, and viewer. See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
-
 == Registered user
 
 A user who has created a CircleCI account. Registered users can access the web app, view pipelines and build history, trigger and rerun builds, and have organization access based on their role. See the xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration] page. Compare with <<unregistered-user>>.
@@ -329,7 +295,7 @@ Reverting an application to a previous stable version when an issue is detected,
 
 == Schedule trigger
 
-A <<trigger>> that runs a pipeline on a defined schedule, using cron syntax, rather than on each commit. Schedule triggers are the recommended way to run scheduled work. Use them instead of scheduled workflows unless your setup requires the older approach. See the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
+A <<trigger>> that runs a pipeline on a defined schedule, using cron syntax, rather than on each commit. Schedule triggers are the recommended way to run scheduled work. Use them instead of scheduled workflows unless your setup requires that approach. See the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
 
 == Secrets masking
 
@@ -358,7 +324,7 @@ A single executable action within a <<job>>, such as a `run`, `checkout`, `save_
 
 == Setup workflow
 
-A <<workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the rest of the pipeline. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
+A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the rest of the pipeline. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
 [badge="Beta"]
 == Test impact analysis
@@ -376,14 +342,6 @@ A mechanism that initiates a <<pipeline>>. Triggers can be automatic, based on V
 == Unregistered user
 
 Someone who has triggered builds in a CircleCI organization but has not created a CircleCI account. Unregistered users count as <<active-user,active users>> for billing. See the xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration] page.
-
-== URL orb
-
-A single YAML file of shared <<orbs,orb>> configuration, stored somewhere accessible over HTTPS, such as a GitHub repository, and imported by its URL rather than from the orb registry. The URL must be allowed by the organization's allow list. URL orbs let you share configuration across an organization while keeping direct control over updates. See the xref:orbs:use:orb-intro.adoc[Orbs Introduction] page.
-
-== User
-
-An individual who can log in to the CircleCI platform. A user must be part of an organization to view or follow its projects. Access is governed by an <<organization-role>> and <<project-role>> in `circleci` type organizations, or by the VCS <<owner>> and <<project-administrator>> model in `github` and `bitbucket` OAuth organizations. Users may *not* view project data stored in environment variables. See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
 
 == Version promotion
 
