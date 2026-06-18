@@ -226,7 +226,7 @@ The top-level account in CircleCI that contains a team's projects, settings, per
 
 == Organization role
 
-In a `circleci` type <<organization>>, a role assigned at the organization level that determines a user's permissions across the whole organization. The organization roles are admin, contributor, and viewer. In `github` and `bitbucket` OAuth organizations, access follows the VCS <<owner>> model instead. See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page. Compare with <<project-role>>.
+In a `circleci` type <<organization>>, a role assigned at the organization level that determines a user's permissions across the whole organization. The organization roles are admin, contributor, and viewer. In `github` and `bitbucket` OAuth organizations, access follows the VCS permissions model instead. See the xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page.
 
 == Parallelism
 
