@@ -543,7 +543,7 @@ docker:
 ```
 
 [#custom-entrypoint]
-== Overriding the default container entrypoint
+== Override the default container entrypoint
 
 NOTE: Overriding the default container entrypoint requires container runner version 3.1.10 or later.
 
@@ -562,7 +562,7 @@ link:https://github.com/krallin/tini[Tini] is a purpose-built container init sys
 
 === CircleCI job configuration
 
-Set a custom entrypoint using the `entrypoint` field on the Docker image in your CircleCI `config.yml`. Container runner automatically passes the GOAT command and arguments to your entrypoint:
+Set a custom entrypoint using the `entrypoint` field on the Docker image in your CircleCI configuration file. Container runner automatically passes the GOAT command and arguments to your entrypoint:
 
 [source,yaml]
 ----
@@ -570,18 +570,17 @@ jobs:
   test:
     docker:
       - image: krallin/ubuntu-tini
-        entrypoint: ["/usr/bin/tini", "--"] <1>
+        entrypoint: ["/usr/bin/tini", "--"] # The GOAT command and arguments are automatically appended and passed to `tini`.
     resource_class: <your-resource-class-here>
     steps:
       - run:
           name: Who is PID 1?
           command: ps -p 1 -o comm=
 ----
-<1> The GOAT command and arguments are automatically appended and passed to `tini`.
 
 === Resource class pod template spec
 
-To apply a custom entrypoint to all jobs using a resource class, configure it in the pod template spec within your Helm `values.yaml`. See <<resource-class-configuration-custom-pod,Resource class configuration and custom task pod configuration>> for details on pod template spec configuration. The same entrypoint requirements apply.
+To apply a custom entrypoint to all jobs using a resource class, configure it in the pod template spec within your Helm `values.yaml`. See <<resource-class-configuration-custom-pod>> for details on pod template spec configuration. The same entrypoint requirements apply.
 
 [#limitations]
 == Limitations
