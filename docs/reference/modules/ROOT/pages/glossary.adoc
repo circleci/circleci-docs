@@ -21,10 +21,6 @@ A file or directory that persists after a <<job>> finishes, such as a compiled b
 
 A record of significant events in a CircleCI organization, available to organization admins for audit and forensic analysis. See the xref:guides:security:audit-logs.adoc[Audit Logs] page.
 
-== Branch filter
-
-A <<workflow>> configuration option that controls which branches run a given <<job>>. Branch filters use `only` and `ignore` keys with exact branch names or regular expressions. See the xref:guides:orchestrate:using-branch-filters.adoc[Using Branch Filters] page. Compare with <<tag-filter>>.
-
 [badge="Server v4+"]
 == Build agent
 
@@ -156,6 +152,10 @@ The type you assign to a <<job>> that defines the underlying technology used to 
 == Fan-out/fan-in
 
 A <<workflow>> pattern in which a single job branches into multiple jobs that run concurrently (fan-out), which then converge on a single downstream job (fan-in). This pattern is useful for running test suites in parallel after a build, then deploying once all tests pass. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
+
+== Filtering
+
+The mechanisms for controlling whether a <<job>>, <<workflow>>, or <<step>> runs, based on the git branch or tag, or on other conditions. You can filter a job by branch or tag using the `filters` key with `only` and `ignore` values, or set `filters` to an expression for finer control, for example `filters: pipeline.git.branch == "main"`. You can also gate a whole workflow or a single step with an expression in a `when` or `unless` condition. Expression-based conditions are the most flexible option and can reference pipeline values and parameters. See the xref:guides:orchestrate:using-branch-filters.adoc[Branch and Tag Filtering] page.
 
 == Flaky test
 
@@ -359,10 +359,6 @@ A single executable action within a <<job>>, such as a `run`, `checkout`, `save_
 == Setup workflow
 
 A <<workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the rest of the pipeline. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
-
-== Tag filter
-
-A <<workflow>> configuration option that controls which git tags run a given <<job>>. Tag filters use `only` and `ignore` keys with exact tag names or regular expressions, and are often used to run deployment jobs on release tags. See the xref:guides:orchestrate:workflows.adoc[Workflows] page. Compare with <<branch-filter>>.
 
 [badge="Beta"]
 == Test impact analysis
