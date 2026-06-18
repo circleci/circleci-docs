@@ -252,7 +252,7 @@ jobs:
     docker:
     # Primary container image where all steps run.
      - image: cimg/base:current
-    # Secondary container image on common network.
+    # Service container image on common network.
      - image: cimg/mariadb:10.6
 
     steps:

@@ -1103,7 +1103,7 @@ This key is deprecated. Use <<jobfilters,workflows filtering>> to control which 
 [#resourceclass]
 == *`resource_class`*
 
-The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below.
+The `resource_class` feature allows you to configure CPU and RAM resources for each job. Resource classes are available for each execution environment, as described in the tables below. A resource class is also used as a label to identify a pool of self-hosted runners and to route a job to that pool. For full details on both uses, see the xref:guides:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or Custom Plan and experience queuing for certain resource classes, it is possible you are hitting these limits. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI support] to request a raise on these limits for your account.
 

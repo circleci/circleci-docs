@@ -252,7 +252,7 @@ jobs:
     docker:
       # The primary container is an instance of the first image listed. The job's commands run in this container.
       - image: cimg/node:current
-      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      # The service container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:4.2
     steps:
       # Reuse the workspace from the build job

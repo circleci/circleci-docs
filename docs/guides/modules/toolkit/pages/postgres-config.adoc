@@ -208,7 +208,7 @@ jobs:
 [#example-mysql-project]
 == Example MySQL project
 
-The following example sets up MySQL as a secondary container alongside a PHP container.
+The following example sets up MySQL as a service container alongside a PHP container.
 
 [,yaml]
 ----
