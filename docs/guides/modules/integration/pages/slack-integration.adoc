@@ -14,7 +14,7 @@ This guide explains how to:
 
 == Limitations
 
-Each Slack workspace can only be connected to one CircleCI organization at a time. This restriction is a Slack platform constraint. Slack issues a single bot token per workspace, and a new installation overwrites the existing one. If a second CircleCI organization installs the app into an already-connected workspace, it will invalidate the first organization's token and break their integration. Connecting multiple organizations to the same Slack workspace is not currently supported. If this happens, an organization administrator can restore the connection by reinstalling the app from menu:Org[Slack Integration].
+Each Slack workspace can only be connected to one CircleCI organization at a time. This restriction is a Slack platform constraint. Slack issues a single bot token per workspace, and a new installation overwrites the existing one. If a second CircleCI organization installs the app into an already-connected workspace, it will invalidate the first organization's token and break their integration. Connecting multiple organizations to the same Slack workspace is not currently supported but is in development. If your integration is broken, an organization administrator can restore the connection by reinstalling the app from menu:Org[Slack Integration].
 
 == Prerequisites
 
