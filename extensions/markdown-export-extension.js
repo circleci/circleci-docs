@@ -57,15 +57,23 @@ module.exports.register = function () {
     })
 
     /**
-     * CUSTOM RULE: Remove Images
+     * CUSTOM RULE: Replace Images With Alt Text
      *
-     * Images don't translate well to markdown exports, so we remove them.
-     * Users viewing the markdown online can see images on the actual site.
+     * By the time Turndown runs, inline images and icons have been removed from
+     * the DOM, so this only sees block images (image::foo[]). The image binary
+     * isn't useful in a markdown export, but its alt text usually describes what
+     * the image shows, so surface that as a labeled blockquote block for readers
+     * (and LLMs). Images without usable alt text are dropped, to avoid emitting
+     * empty "Image:" blocks.
      */
-    turndownService.addRule('removeImages', {
+    turndownService.addRule('imageAltText', {
       filter: 'img',
-      replacement: function () {
-        return '' // Replace all images with empty string
+      replacement: function (content, node) {
+        const alt = (node.getAttribute('alt') || '').trim()
+        if (!alt) {
+          return '' // No alt text to surface - drop the image
+        }
+        return '\n\n> **Image:** ' + alt + '\n\n'
       }
     })
 
@@ -189,6 +197,17 @@ module.exports.register = function () {
        * mermaid diagrams before handing it to Turndown.
        */
       const parsed = parseHTML(page.contents.toString())
+
+      /**
+       * REMOVE INLINE IMAGES AND ICONS
+       *
+       * Asciidoctor renders inline images (the image:foo[] macro, including the
+       * theme-aware icons from theme-icon-extension) as <span class="image">,
+       * while block images (image::foo[]) render as <div class="imageblock">.
+       * Inline images and icons are decorative in a markdown export, so drop
+       * them entirely. Block images are kept and surfaced as alt text below.
+       */
+      parsed.querySelectorAll('span.image').forEach(el => el.remove())
 
       /**
        * FLATTEN TABS
