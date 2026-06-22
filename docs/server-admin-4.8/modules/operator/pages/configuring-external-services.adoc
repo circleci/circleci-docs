@@ -103,7 +103,7 @@ kubectl exec -it -n "$namespace" "$PG_POD" -- bash
 psql -h <your-external-postgres-host> -U postgres -p <your-external-postgres-port>
 ----
 
-You should be able to connect to your external PostgreSQL at this point. If not, resolve any issues before proceeding.
+You must be able to connect to your external PostgreSQL at this point. If not, resolve any issues before proceeding.
 
 TIP: You may use `helm upgrade ...` to restore your CircleCI Server instance to a running state.
 
@@ -205,7 +205,7 @@ The changes will take effect upon running `helm install/upgrade`. If you are com
 
 [#backing-up-postgresql]
 === Back up PostgreSQL
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found link:https://www.postgresql.org/docs/12/backup.html[here].
+PostgreSQL provides link:https://www.postgresql.org/docs/12/backup.html[official documentation for backing up and restoring your PostgreSQL 12 install].
 
 We strongly recommend the following:
 
@@ -218,6 +218,8 @@ We strongly recommend the following:
 == MongoDB
 
 NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
+
+IMPORTANT: CircleCI Server is not currently compatible with DocumentDB.
 
 [#migrating-from-internal-mongodb]
 === Migrating from an internal MongoDB to an externalized source
@@ -259,7 +261,7 @@ kubectl exec -it -n "$namespace" "$MONGO_POD" -- bash
 mongo --username <username> --password --authenticationDatabase admin --host <external-mongodb-host> --port <external-mongodb-port>
 ----
 
-You should be able to connect to your external MongoDB at this point. If not, resolve any issues before proceeding.
+You must be able to connect to your external MongoDB at this point. If not, resolve any issues before proceeding.
 
 TIP: You may use `helm upgrade ...` to restore your CircleCI Server instance to a running state.
 
