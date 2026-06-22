@@ -552,7 +552,7 @@ docker:
     command: ["--host=unix:///var/run/docker.sock"]
 ```
 
-[#custom-entrypoint]
+[#override-the-default-container-entrypoint]
 == Override the default container entrypoint
 
 NOTE: Overriding the default container entrypoint requires container runner version 3.1.10 or later.
