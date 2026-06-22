@@ -1,7 +1,7 @@
 /**
  * Markdown Export Extension for Antora
  *
- * This Antora extension converts the generated HTML documentation pages into
+ * This Antora extension converts the generated documentation pages into
  * Markdown format, making each page available as a downloadable .md file.
  *
  * Purpose:
@@ -9,13 +9,18 @@
  * - Converts HTML to clean, readable markdown
  * - Preserves code blocks with language syntax highlighting
  * - Converts relative links to absolute URLs
- * - Removes UI elements (images, diagrams, metadata bars)
+ * - Removes UI elements (images, diagrams)
  *
  * How it works:
- * 1. Collects all pages during 'contentClassified' event
- * 2. Converts HTML to Markdown during 'beforePublish' event
- * 3. Writes .md files to temp directory
- * 4. Post-build script copies them to final output directory
+ * 1. Hooks the 'documentsConverted' event. At this point Antora has converted
+ *    each page's AsciiDoc into an *embeddable HTML body* (page.contents), but
+ *    has NOT yet wrapped it in the site layout (header, nav, footer, the
+ *    article info bar, toolbars, etc. — those are added later, at
+ *    'pagesComposed'). Working from the pre-composition body means we never
+ *    have to find and strip the site chrome by hand.
+ * 2. Converts each body to Markdown and writes .md files to a temp directory.
+ * 3. A post-build script (gulp.d/tasks/build-site.js) copies them to the final
+ *    output directory once Antora finishes publishing.
  */
 
 'use strict'
@@ -26,38 +31,13 @@ const { parse: parseHTML } = require('node-html-parser') // HTML parser
 
 module.exports.register = function () {
   /**
-   * EVENT 1: contentClassified
+   * EVENT: documentsConverted
    *
-   * This event fires after Antora has classified all content but before
-   * it starts generating the site. We use it to collect all pages that
-   * need to be converted to Markdown.
+   * Fires after every page's AsciiDoc has been converted to embeddable HTML
+   * but before the UI layout is applied. page.contents holds just the document
+   * body, so there is no site chrome to remove.
    */
-  this.on('contentClassified', ({ contentCatalog }) => {
-    // Initialize array to store all pages for later processing
-    this.pages = []
-
-    // Iterate through all components (guides, reference, orbs, etc.)
-    contentCatalog.getComponents().forEach(({ versions }) => {
-      // For each version of each component
-      versions.forEach(({ name: component, version }) => {
-        // Find all pages in this component/version that will be published
-        const pages = contentCatalog
-          .findBy({ component, version, family: 'page' })
-          .filter(page => page.pub) // Only include pages that will be published
-
-        // Add these pages to our collection
-        this.pages.push(...pages)
-      })
-    })
-  })
-
-  /**
-   * EVENT 2: beforePublish
-   *
-   * This event fires after HTML is generated but before the site is published.
-   * We use it to convert all collected pages to Markdown format.
-   */
-  this.on('beforePublish', ({ playbook }) => {
+  this.on('documentsConverted', ({ playbook, contentCatalog }) => {
     // Get the site URL and remove any trailing slashes
     const siteUrl = playbook.site.url.replace(/\/+$/, '')
 
@@ -88,7 +68,6 @@ module.exports.register = function () {
         return '' // Replace all images with empty string
       }
     })
-
 
     /**
      * CUSTOM RULE: Clean Up Headings
@@ -181,115 +160,87 @@ module.exports.register = function () {
     }
     fs.mkdirSync(tempDir, { recursive: true })
 
+    /**
+     * COLLECT PAGES
+     *
+     * Gather every publishable page across all components/versions. The `pub`
+     * property (and `pub.url`) is assigned during classification, which runs
+     * before this event, so it is available here.
+     */
+    const pages = contentCatalog
+      .findBy({ family: 'page' })
+      .filter(page => page.pub)
+
     console.log(`Generating markdown files to temp: ${tempDir}`)
-    console.log(`Pages to process: ${this.pages.length}`)
+    console.log(`Pages to process: ${pages.length}`)
     let markdownCount = 0
 
     /**
      * PROCESS ALL PAGES
      *
-     * Convert each HTML page to Markdown and write to temp directory.
+     * Convert each page's HTML body to Markdown and write to temp directory.
      */
-    this.pages.forEach((page) => {
+    pages.forEach((page) => {
       /**
-       * EXTRACT ARTICLE CONTENT
+       * PARSE THE DOCUMENT BODY
        *
-       * Parse the HTML and extract just the main article content,
-       * ignoring navigation, sidebars, footers, etc.
+       * page.contents is the embeddable HTML body (no site chrome). We still
+       * parse it so we can flatten interactive elements (tabs) and convert
+       * mermaid diagrams before handing it to Turndown.
        */
-      const fullHtml = page.contents.toString()
-      const parsed = parseHTML(fullHtml)
+      const parsed = parseHTML(page.contents.toString())
 
-      // Find the main article content (try multiple selectors)
-      const article = parsed.querySelector('article.doc') ||
-                      parsed.querySelector('.doc') ||
-                      parsed.querySelector('article') ||
-                      parsed.querySelector('main')
+      /**
+       * FLATTEN TABS
+       *
+       * Tabs are interactive UI that don't work in markdown. Convert them to
+       * sequential content with bold labels for each tab.
+       */
+      const tabBlocks = parsed.querySelectorAll('.openblock.tabs')
+      tabBlocks.forEach(tabBlock => {
+        // Get tab labels
+        const tabLabels = []
+        const tabItems = tabBlock.querySelectorAll('.tablist .tab')
+        tabItems.forEach(tab => {
+          tabLabels.push(tab.textContent.trim())
+        })
 
-      if (article) {
-        /**
-         * REMOVE METADATA ELEMENTS
-         *
-         * Remove the article info bar (last updated, reading time, etc.)
-         * and other UI elements that aren't relevant to markdown export.
-         */
-        const h1 = article.querySelector('h1.page')
-        if (h1) {
-          // Find the metadata bar (the div after the h1)
-          let nextElement = h1.nextElementSibling
-          while (nextElement) {
-            // Check if this is the info bar with Contribute link
-            if (nextElement.tagName === 'DIV' &&
-                (nextElement.rawText || nextElement.innerHTML).includes('Contribute')) {
-              nextElement.remove()
-              break
-            }
-            // Also check if it's the info bar with border-vapor styling
-            if (nextElement.tagName === 'DIV' && nextElement.classList &&
-                nextElement.classList.toString().includes('border-vapor')) {
-              nextElement.remove()
-              break
-            }
-            nextElement = nextElement.nextElementSibling
+        // Get tab panels and build replacement HTML
+        const tabPanels = tabBlock.querySelectorAll('.tabpanel')
+        let replacementHtml = '<div class="tabs-content">'
+
+        tabPanels.forEach((panel, index) => {
+          if (tabLabels[index]) {
+            replacementHtml += `<p><strong>${tabLabels[index]}:</strong></p>`
           }
-        }
-
-        // Remove toolbars and edit links
-        const toolbars = article.querySelectorAll('.toolbar, .page-versions, .edit-this-page')
-        toolbars.forEach(el => el.remove())
-
-        /**
-         * FLATTEN TABS
-         *
-         * Tabs are interactive UI that don't work in markdown. Convert them to
-         * sequential content with bold labels for each tab.
-         */
-        const tabBlocks = article.querySelectorAll('.openblock.tabs')
-        tabBlocks.forEach(tabBlock => {
-          // Get tab labels
-          const tabLabels = []
-          const tabItems = tabBlock.querySelectorAll('.tablist .tab')
-          tabItems.forEach(tab => {
-            tabLabels.push(tab.textContent.trim())
-          })
-
-          // Get tab panels and build replacement HTML
-          const tabPanels = tabBlock.querySelectorAll('.tabpanel')
-          let replacementHtml = '<div class="tabs-content">'
-
-          tabPanels.forEach((panel, index) => {
-            if (tabLabels[index]) {
-              replacementHtml += `<p><strong>${tabLabels[index]}:</strong></p>`
-            }
-            replacementHtml += panel.innerHTML
-          })
-
-          replacementHtml += '</div>'
-
-          // Replace the entire tab block with flattened content
-          tabBlock.replaceWith(replacementHtml)
+          replacementHtml += panel.innerHTML
         })
 
-        /**
-         * CONVERT MERMAID TO CODE BLOCKS
-         *
-         * Extract mermaid diagrams and convert them to proper <pre><code> blocks
-         * so Turndown's code block rule handles them with proper whitespace preservation.
-         */
-        const mermaidDivs = article.querySelectorAll('.mermaid.content')
-        mermaidDivs.forEach(mermaidDiv => {
-          // Get raw text which preserves newlines in node-html-parser
-          const mermaidCode = mermaidDiv.rawText || mermaidDiv.textContent || ''
+        replacementHtml += '</div>'
 
-          // Replace with a proper code block that Turndown knows how to handle
-          // Use <pre><code> structure so Turndown's code block rule processes it
-          const codeBlock = `<pre><code class="language-mermaid">${mermaidCode.trim()}</code></pre>`
-          mermaidDiv.replaceWith(codeBlock)
-        })
-      }
+        // Replace the entire tab block with flattened content
+        tabBlock.replaceWith(replacementHtml)
+      })
+
+      /**
+       * CONVERT MERMAID TO CODE BLOCKS
+       *
+       * Extract mermaid diagrams and convert them to proper <pre><code> blocks
+       * so Turndown's code block rule handles them with proper whitespace preservation.
+       */
+      const mermaidDivs = parsed.querySelectorAll('.mermaid.content')
+      mermaidDivs.forEach(mermaidDiv => {
+        // Get raw text which preserves newlines in node-html-parser
+        const mermaidCode = mermaidDiv.rawText || mermaidDiv.textContent || ''
+
+        // Replace with a proper code block that Turndown knows how to handle
+        // Use <pre><code> structure so Turndown's code block rule processes it
+        const codeBlock = `<pre><code class="language-mermaid">${mermaidCode.trim()}</code></pre>`
+        mermaidDiv.replaceWith(codeBlock)
+      })
 
       // Get the cleaned HTML content
-      const htmlContent = article ? article.innerHTML : fullHtml
+      const htmlContent = parsed.innerHTML
 
       /**
        * CONVERT HTML TO MARKDOWN
@@ -297,6 +248,28 @@ module.exports.register = function () {
        * Use Turndown service with our custom rules to convert HTML to markdown.
        */
       let markdown = turndownService.turndown(htmlContent)
+
+      /**
+       * ADD THE PAGE TITLE
+       *
+       * The document title (h1) is rendered by the UI layout, not by the
+       * AsciiDoc converter, so it is not part of page.contents at this stage.
+       * Reconstruct it from the parsed AsciiDoc metadata so the markdown export
+       * still leads with the page title.
+       *
+       * doctitle is converted inline HTML (typographic characters appear as
+       * entities such as &#8217;, and inline markup as tags), so we run it
+       * through Turndown to decode it the same way the rendered <h1> was.
+       * When a page declares a badge attribute (e.g. "Beta", "Preview"), the
+       * layout appends it to the heading, so we preserve it here too.
+       */
+      const doctitle = page.asciidoc && page.asciidoc.doctitle
+      if (doctitle) {
+        const badge = page.asciidoc.attributes && page.asciidoc.attributes['page-badge']
+        const titleHtml = badge ? `${doctitle} ${badge}` : doctitle
+        const titleMd = turndownService.turndown(`<h1>${titleHtml}</h1>`).trim()
+        markdown = `${titleMd}\n\n` + markdown
+      }
 
       /**
        * CONVERT RELATIVE LINKS TO ABSOLUTE URLS
