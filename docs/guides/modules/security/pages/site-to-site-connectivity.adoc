@@ -33,6 +33,8 @@ Once a job is running with the orb configured, it can:
 
 *Guided onboarding required* - CircleCI runs setup with you end-to-end: scoping your use case, configuring the tunnel, and verifying the connection.
 
+*Docker executor support* - Because the executor fetches Docker images before the tunnel starts, your registry must support OIDC. See xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] for more information.
+
 [#prerequisites]
 == Prerequisites
 
@@ -53,11 +55,12 @@ Once a job is running with the orb configured, it can:
 | Running GHES or GitLab on-prem and unwilling to publish it externally
 | Not on a CircleCI Scale plan
 
-| Internal artifact registry your jobs need to reach after the tunnel connects
+| Internal artifact registry your jobs need to reach
 | Requires production-grade reliability guarantees or a formal SLA for the connectivity layer
 
 | Security team blocks CircleCI Cloud because adding CircleCI's IP ranges to your allow list is not acceptable
-| Needs the Docker executor to pull from tunnel-accessed registries
+| Docker image registry does not support OIDC
+
 |===
 
 [#get-started]
