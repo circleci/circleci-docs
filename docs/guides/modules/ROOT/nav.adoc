@@ -255,6 +255,7 @@
 *** xref:security:env-vars.adoc[Intro to environment variables]
 *** xref:security:contexts.adoc[Using contexts]
 *** xref:security:ip-ranges.adoc[IP ranges]
+*** xref:security:site-to-site-connectivity.adoc[Site-to-site connectivity]
 *** xref:security:audit-logs.adoc[Audit logs]
 ** Security recommendations
 *** xref:security:security-overview.adoc[Security overview]
