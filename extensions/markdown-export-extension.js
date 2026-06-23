@@ -222,28 +222,24 @@ module.exports.register = function () {
         )
       },
       replacement: function (content, node, options) {
-        // Extract language from class name (e.g., "language-javascript")
-        var className = node.firstChild.className || ''
-        var language = (className.match(/language-(\S+)/) || [null, ''])[1]
+        var codeEl = node.firstChild
 
-        // Get the actual code content
-        var code = node.firstChild.textContent
-        var fenceChar = options.fence
-        var fenceSize = 3
+        // Asciidoctor/shiki put the language in data-lang (e.g. data-lang="yaml");
+        // fall back to a "language-xxx" class for any other source.
+        var className = codeEl.getAttribute('class') || ''
+        var language =
+          codeEl.getAttribute('data-lang') ||
+          (className.match(/language-(\S+)/) || [null, ''])[1] ||
+          ''
 
-        // Check if the code contains ``` and adjust fence size if needed
-        // (prevents breaking out of the code block)
-        var fenceInCodeRegex = new RegExp('^' + fenceChar + '{' + fenceSize + ',}', 'gm')
+        // Get the actual code content (textContent strips shiki's highlight spans)
+        var code = codeEl.textContent
 
-        var match
-        while ((match = fenceInCodeRegex.exec(code))) {
-          if (match[0].length >= fenceSize) {
-            fenceSize = match[0].length + 1
-          }
-        }
-
-        // Create fence with appropriate length
-        var fence = Array(fenceSize + 1).join(fenceChar)
+        // Use a backtick fence at least three long, widened if the code itself
+        // contains a longer run of backticks so it can't break out of the block.
+        var longestBacktickRun = (code.match(/`+/g) || [])
+          .reduce(function (max, run) { return Math.max(max, run.length) }, 0)
+        var fence = '`'.repeat(Math.max(3, longestBacktickRun + 1))
 
         // Return formatted code block with language
         return (
