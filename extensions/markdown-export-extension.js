@@ -126,18 +126,26 @@ module.exports.register = function () {
      *
      * Convert a simple data table (inline-only cells, with a heading row) to a
      * GitHub-flavored markdown table. Each cell's inline content is converted
-     * with Turndown, collapsed to a single line, and pipe characters escaped so
-     * they don't break columns.
+     * with Turndown and forced onto a single line: hard line breaks (<br>) are
+     * preserved as a literal <br> (which GFM renders as a line break within a
+     * cell), any other stray newlines are collapsed to spaces, and pipes are
+     * escaped so they don't break columns.
      */
     const buildGfmTable = (table) => {
+      const cellToMarkdown = (cellEl) => {
+        // Protect <br> from Turndown (which would turn it into a newline that
+        // breaks the row); restore it as a literal <br> after conversion.
+        const html = cellEl.innerHTML.replace(/<br\s*\/?>/gi, '{X-BR-X}')
+        return turndownService
+          .turndown(html)
+          .replace(/\s*\n+\s*/g, ' ')          // collapse stray line breaks to a space
+          .replace(/\s*\{X-BR-X\}\s*/g, '<br>') // restore hard line breaks (no padding)
+          .replace(/\|/g, '\\|')               // escape pipes so columns survive
+          .trim()
+      }
+
       const rowToMarkdown = (tr) => {
-        const cellsMd = tr.querySelectorAll('th, td').map(cellEl =>
-          turndownService
-            .turndown(cellEl.innerHTML)
-            .replace(/\s*\n+\s*/g, ' ')   // collapse any line breaks to a space
-            .replace(/\|/g, '\\|')         // escape pipes so columns survive
-            .trim()
-        )
+        const cellsMd = tr.querySelectorAll('th, td').map(cellToMarkdown)
         return '| ' + cellsMd.join(' | ') + ' |'
       }
 
@@ -319,10 +327,11 @@ module.exports.register = function () {
        *   path render cleanly), while cells with lists/blocks keep them
        *
        * A table is "simple" when it has a heading row (GFM tables require one)
-       * and every cell holds only single-line inline content: no lists, nested
-       * tables, code blocks, multiple paragraphs, hard line breaks (<br>), or
-       * spanned cells (colspan/rowspan), none of which a markdown table cell can
-       * represent. Anything else is kept as HTML.
+       * and every cell holds only inline content: no lists, nested tables, code
+       * blocks, multiple paragraphs, or spanned cells (colspan/rowspan), none of
+       * which a markdown table cell can represent. Hard line breaks (<br>) are
+       * allowed - buildGfmTable keeps them as literal <br>, which GFM renders as
+       * a line break inside a cell. Anything else is kept as HTML.
        *
        * Simple tables are converted to markdown now and stashed behind a
        * placeholder, which is swapped back in after Turndown runs (so the cell
@@ -331,7 +340,7 @@ module.exports.register = function () {
        * (preserving structural colspan/rowspan), absolutize their links (kept
        * HTML bypasses the markdown link rewriting), and mark them data-md-keep.
        */
-      const blockCellSelector = 'ul, ol, dl, pre, table, div, blockquote, h1, h2, h3, h4, h5, h6, hr, p, br'
+      const blockCellSelector = 'ul, ol, dl, pre, table, div, blockquote, h1, h2, h3, h4, h5, h6, hr, p'
       const gfmTablePlaceholders = []
       parsed.querySelectorAll('table.tableblock').forEach(table => {
         table.querySelectorAll('colgroup').forEach(colgroup => colgroup.remove())
@@ -440,7 +449,9 @@ module.exports.register = function () {
        * the link rewriting below so in-table links are absolutized too.
        */
       gfmTablePlaceholders.forEach(({ token, markdown: tableMd }) => {
-        markdown = markdown.replace(token, '\n\n' + tableMd + '\n\n')
+        // Use a replacement function so "$" sequences in the table (e.g. a `$`
+        // code span) aren't interpreted as String.replace special patterns.
+        markdown = markdown.replace(token, () => '\n\n' + tableMd + '\n\n')
       })
 
       /**
