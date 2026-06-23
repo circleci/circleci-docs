@@ -8,12 +8,12 @@ NOTE: Site-to-site connectivity is available on link:https://circleci.com/pricin
 [#overview]
 == Overview
 
-Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behind your firewall like a private GitHub Enterprise instance, an internal Artifactory, or on-prem APIs. This removes the need to expose those resources to the public internet or add CircleCI IP ranges to your network allow list.
+Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behind your firewall, like a private GitHub Enterprise instance, an internal Artifactory, or on-prem APIs. This removes the need to expose those resources to the public internet or add CircleCI's IP ranges to your network allow list.
 
 [#how-it-works]
 == How it works
 
-Site-to-site connectivity creates an encrypted tunnel between a lightweight endpoint you run in your network and your CircleCI jobs. When the tunnel connects, jobs reach your internal resources directly without any firewall rules, IP allow lists, or traffic through the public internet.
+Site-to-site connectivity creates an encrypted tunnel between a lightweight endpoint you run in your network and your CircleCI jobs. When the tunnel connects, jobs reach your internal resources directly.
 
 You start the connection via the link:https://github.com/CircleCI-Labs/site-to-site-connectivity-orb[site-to-site connectivity orb]. CircleCI manages the tunnel service on its end.
 
@@ -37,9 +37,9 @@ Once a job is running with the orb configured, it can:
 == Prerequisites
 
 . A CircleCI Scale plan.
-. A lightweight endpoint to run inside your network, managed by your team.
+. An agent deployment inside your network, managed by your team.
 . Time to work with CircleCI during onboarding.
-. A use case that fits the list above.
+. A use case that maps to the capabilities described in this page.
 
 [#is-this-right-for-you]
 == Is this right for you?
@@ -53,11 +53,11 @@ Once a job is running with the orb configured, it can:
 | Running GHES or GitLab on-prem and unwilling to publish it externally
 | Not on a CircleCI Scale plan
 
-| Internal artifact registry (Artifactory, Nexus, private Docker registry) your jobs need to reach
+| Internal artifact registry your jobs need to reach after the tunnel connects
 | Requires production-grade reliability guarantees or a formal SLA for the connectivity layer
 
 | Security team blocks CircleCI Cloud because adding CircleCI's IP ranges to your allow list is not acceptable
-| Needs the executor image itself hosted behind the firewall
+| Needs the Docker executor to pull from tunnel-accessed registries
 |===
 
 [#get-started]
