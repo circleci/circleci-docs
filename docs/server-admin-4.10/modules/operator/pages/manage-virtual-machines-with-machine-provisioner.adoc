@@ -11,6 +11,47 @@ NOTE: Prescaling controls will be exposed in a future release for tuning.
 
 CAUTION: We recommend that you leave these options at their defaults until you have successfully configured and verified the core and build services of your server installation. Steps to set up machine provisioner are provided in the installation guide for xref:installation:phase-3-aws-execution-environments.adoc#aws-machine-provisioner[AWS] and xref:installation:phase-3-gcp-execution-environments.adoc#gcp-authentication[GCP].
 
+[#resource-class-naming]
+== Resource class naming
+
+When configuring self-hosted runners with machine provisioner, resource class names must follow specific naming conventions. A resource class name consists of two parts joined by a forward slash: `namespace/class`
+
+[#namespace-requirements]
+=== Namespace requirements
+
+The namespace portion must contain only the following characters:
+
+* Lowercase letters (`a-z`)
+* Numbers (`0-9`)
+* Underscores (`_`)
+* Dashes (`-`)
+
+Valid namespace examples: `my-org`, `my_namespace`, `org123`
+
+[#class-requirements]
+=== Class requirements
+
+The class portion can contain the following characters:
+
+* Uppercase and lowercase letters (`a-z`, `A-Z`)
+* Numbers (`0-9`)
+* Colons (`:`)
+* Underscores (`_`)
+* Dashes (`-`)
+* Plus signs (`+`)
+
+Valid class examples: `medium`, `large-gpu`, `custom:arm64`, `xlarge+`
+
+[#valid-resource-class-examples]
+=== Valid resource class examples
+
+Complete resource class names combine the namespace and class portions:
+
+* `my-org/medium`
+* `acme_corp/large-gpu`
+* `dev-team/custom:arm64`
+* `org123/xlarge+memory`
+
 [#provider]
 == Provider
 The following configuration options are for the machine provisioner provider, either AWS or GCP.
