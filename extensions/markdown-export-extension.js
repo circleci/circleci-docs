@@ -98,18 +98,18 @@ module.exports.register = function () {
     })
 
     /**
-     * KEEP DATA TABLES AS HTML
+     * KEEP COMPLEX TABLES AS HTML
      *
-     * Markdown table syntax can only hold single-line cells, but CircleCI
-     * tables frequently put lists, multiple paragraphs, and code blocks inside
-     * cells. Converting those to a markdown table would destroy their
-     * structure (Turndown's default flattens every cell onto its own line), so
-     * we keep real data tables as HTML instead.
+     * Markdown table syntax can only hold single-line cells. Simple tables are
+     * turned into GFM markdown tables in the per-page DOM pass below, but
+     * CircleCI tables frequently put lists, multiple paragraphs, or code blocks
+     * inside cells, and those can't be represented as a markdown table, so we
+     * keep them as HTML. Such tables are marked with data-md-keep in the DOM
+     * pass and emitted verbatim by this rule.
      *
-     * Only tables marked with data-md-keep in the per-page DOM pass below are
-     * kept. That marker is applied to Asciidoctor data tables (table.tableblock)
-     * but NOT to admonition blocks (NOTE/TIP/WARNING), which Asciidoctor also
-     * renders as <table> - those still flatten to text via the default rules.
+     * Admonition blocks (NOTE/TIP/WARNING), which Asciidoctor also renders as
+     * <table>, are never marked and have no table rule, so they flatten to text
+     * via Turndown's default handling.
      */
     turndownService.addRule('keepDataTables', {
       filter: function (node) {
@@ -120,6 +120,36 @@ module.exports.register = function () {
         return '\n\n' + node.outerHTML + '\n\n'
       }
     })
+
+    /**
+     * BUILD A GFM MARKDOWN TABLE
+     *
+     * Convert a simple data table (inline-only cells, with a heading row) to a
+     * GitHub-flavored markdown table. Each cell's inline content is converted
+     * with Turndown, collapsed to a single line, and pipe characters escaped so
+     * they don't break columns.
+     */
+    const buildGfmTable = (table) => {
+      const rowToMarkdown = (tr) => {
+        const cellsMd = tr.querySelectorAll('th, td').map(cellEl =>
+          turndownService
+            .turndown(cellEl.innerHTML)
+            .replace(/\s*\n+\s*/g, ' ')   // collapse any line breaks to a space
+            .replace(/\|/g, '\\|')         // escape pipes so columns survive
+            .trim()
+        )
+        return '| ' + cellsMd.join(' | ') + ' |'
+      }
+
+      const headRow = table.querySelector('thead tr')
+      const columnCount = headRow.querySelectorAll('th, td').length
+      const lines = [
+        rowToMarkdown(headRow),
+        '| ' + Array(columnCount).fill('---').join(' | ') + ' |'
+      ]
+      table.querySelectorAll('tbody tr').forEach(tr => lines.push(rowToMarkdown(tr)))
+      return lines.join('\n')
+    }
 
     /**
      * CUSTOM RULE: Replace Images With Alt Text
@@ -275,30 +305,36 @@ module.exports.register = function () {
       parsed.querySelectorAll('span.image').forEach(el => el.remove())
 
       /**
-       * TIDY DATA TABLES
+       * CONVERT DATA TABLES
        *
-       * Real data tables (table.tableblock) are kept as HTML (see the Turndown
-       * setup above); admonition blocks, which Asciidoctor also renders as
-       * <table>, are deliberately excluded so they still flatten to text. Here
-       * we tidy each data table's Asciidoctor markup:
+       * Each Asciidoctor data table (table.tableblock) is either converted to a
+       * GFM markdown table (if it is simple) or kept as HTML (if it is complex).
+       * Admonition blocks, which Asciidoctor also renders as <table>, are not
+       * table.tableblock, so they are left alone and flatten to text.
+       *
+       * Common tidy-up for both paths:
        * - remove <colgroup> column-width definitions
-       * - strip presentational class/style attributes (structural attributes
-       *   like colspan/rowspan are preserved)
-       * - unwrap cells whose only child is a <p>, so simple cells read cleanly
-       *   while cells with lists/blocks keep their structure
-       * - absolutize links, since links inside kept HTML don't pass through the
-       *   markdown link rewriting applied later
-       * - mark the table with data-md-keep so the Turndown rule keeps it
+       * - unwrap cells whose only child is a <p>, so a "simple" cell holds
+       *   inline content directly (which both markdown tables and the HTML
+       *   path render cleanly), while cells with lists/blocks keep them
+       *
+       * A table is "simple" when it has a heading row (GFM tables require one)
+       * and every cell holds only single-line inline content: no lists, nested
+       * tables, code blocks, multiple paragraphs, hard line breaks (<br>), or
+       * spanned cells (colspan/rowspan), none of which a markdown table cell can
+       * represent. Anything else is kept as HTML.
+       *
+       * Simple tables are converted to markdown now and stashed behind a
+       * placeholder, which is swapped back in after Turndown runs (so the cell
+       * markdown isn't re-escaped, and in-table links still get absolutized).
+       * Complex tables are kept as HTML: we strip presentational class/style
+       * (preserving structural colspan/rowspan), absolutize their links (kept
+       * HTML bypasses the markdown link rewriting), and mark them data-md-keep.
        */
+      const blockCellSelector = 'ul, ol, dl, pre, table, div, blockquote, h1, h2, h3, h4, h5, h6, hr, p, br'
+      const gfmTablePlaceholders = []
       parsed.querySelectorAll('table.tableblock').forEach(table => {
         table.querySelectorAll('colgroup').forEach(colgroup => colgroup.remove())
-
-        table.removeAttribute('class')
-        table.removeAttribute('style')
-        table.querySelectorAll('*').forEach(el => {
-          el.removeAttribute('class')
-          el.removeAttribute('style')
-        })
 
         table.querySelectorAll('th, td').forEach(cellEl => {
           const elementChildren = cellEl.childNodes.filter(n => n.nodeType === 1)
@@ -307,13 +343,34 @@ module.exports.register = function () {
           }
         })
 
+        const hasHeader = !!table.querySelector('thead')
+        const cells = table.querySelectorAll('th, td')
+        const isSimple = cells.every(cellEl =>
+          !cellEl.querySelector(blockCellSelector) &&
+          !cellEl.getAttribute('colspan') &&
+          !cellEl.getAttribute('rowspan'))
+
+        if (hasHeader && isSimple) {
+          // Convert to a markdown table now, swap back in after Turndown.
+          const token = `XGFMTABLE${gfmTablePlaceholders.length}X`
+          gfmTablePlaceholders.push({ token, markdown: buildGfmTable(table) })
+          table.replaceWith(`<p>${token}</p>`)
+          return
+        }
+
+        // Keep as cleaned HTML.
+        table.removeAttribute('class')
+        table.removeAttribute('style')
+        table.querySelectorAll('*').forEach(el => {
+          el.removeAttribute('class')
+          el.removeAttribute('style')
+        })
         table.querySelectorAll('a').forEach(a => {
           const href = a.getAttribute('href')
           if (href) {
             a.setAttribute('href', absolutizeUrl(href, page.pub.url))
           }
         })
-
         table.setAttribute('data-md-keep', '')
       })
 
@@ -375,6 +432,16 @@ module.exports.register = function () {
        * Use Turndown service with our custom rules to convert HTML to markdown.
        */
       let markdown = turndownService.turndown(htmlContent)
+
+      /**
+       * RESTORE SIMPLE TABLES
+       *
+       * Swap the markdown tables back in for their placeholders. Done before
+       * the link rewriting below so in-table links are absolutized too.
+       */
+      gfmTablePlaceholders.forEach(({ token, markdown: tableMd }) => {
+        markdown = markdown.replace(token, '\n\n' + tableMd + '\n\n')
+      })
 
       /**
        * ADD THE PAGE TITLE
