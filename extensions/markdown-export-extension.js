@@ -342,6 +342,7 @@ module.exports.register = function () {
        */
       const blockCellSelector = 'ul, ol, dl, pre, table, div, blockquote, h1, h2, h3, h4, h5, h6, hr, p'
       const gfmTablePlaceholders = []
+      const tabPlaceholders = []
       parsed.querySelectorAll('table.tableblock').forEach(table => {
         table.querySelectorAll('colgroup').forEach(colgroup => colgroup.remove())
 
@@ -384,38 +385,6 @@ module.exports.register = function () {
       })
 
       /**
-       * FLATTEN TABS
-       *
-       * Tabs are interactive UI that don't work in markdown. Convert them to
-       * sequential content with bold labels for each tab.
-       */
-      const tabBlocks = parsed.querySelectorAll('.openblock.tabs')
-      tabBlocks.forEach(tabBlock => {
-        // Get tab labels
-        const tabLabels = []
-        const tabItems = tabBlock.querySelectorAll('.tablist .tab')
-        tabItems.forEach(tab => {
-          tabLabels.push(tab.textContent.trim())
-        })
-
-        // Get tab panels and build replacement HTML
-        const tabPanels = tabBlock.querySelectorAll('.tabpanel')
-        let replacementHtml = '<div class="tabs-content">'
-
-        tabPanels.forEach((panel, index) => {
-          if (tabLabels[index]) {
-            replacementHtml += `<p><strong>${tabLabels[index]}:</strong></p>`
-          }
-          replacementHtml += panel.innerHTML
-        })
-
-        replacementHtml += '</div>'
-
-        // Replace the entire tab block with flattened content
-        tabBlock.replaceWith(replacementHtml)
-      })
-
-      /**
        * CONVERT MERMAID TO CODE BLOCKS
        *
        * Extract mermaid diagrams and convert them to proper <pre><code> blocks
@@ -432,6 +401,41 @@ module.exports.register = function () {
         mermaidDiv.replaceWith(codeBlock)
       })
 
+      /**
+       * CONVERT TABS TO <Tabs>/<Tab> BLOCKS
+       *
+       * Tabs are interactive UI. Flattening them to paragraphs loses the link
+       * between a tab's label and its content, so instead emit an XML-style
+       * structure: <Tabs> wrapping one <Tab title="..."> per tab. This gives an
+       * ingesting model explicit, unambiguous boundaries and preserves the
+       * "these are alternatives" relationship between tabs.
+       *
+       * Each panel's content is converted to real markdown (so code blocks,
+       * lists, tables, and images survive) and stashed behind a placeholder that
+       * is swapped back in after Turndown runs, so the panel markdown isn't
+       * re-escaped. This runs after the table and mermaid passes so panel
+       * content containing those is already handled.
+       */
+      parsed.querySelectorAll('.openblock.tabs').forEach(tabBlock => {
+        const tabLabels = tabBlock
+          .querySelectorAll('.tablist .tab')
+          .map(tab => tab.textContent.trim())
+        const tabPanels = tabBlock.querySelectorAll('.tabpanel')
+
+        const parts = ['<Tabs>']
+        tabPanels.forEach((panel, index) => {
+          // Escape double quotes so they don't break the title attribute
+          const title = (tabLabels[index] || `Tab ${index + 1}`).replace(/"/g, "'")
+          const panelMarkdown = turndownService.turndown(panel.innerHTML).trim()
+          parts.push(`<Tab title="${title}">`, '', panelMarkdown, '', '</Tab>')
+        })
+        parts.push('</Tabs>')
+
+        const token = `XTABSBLOCK${tabPlaceholders.length}X`
+        tabPlaceholders.push({ token, markdown: parts.join('\n') })
+        tabBlock.replaceWith(`<p>${token}</p>`)
+      })
+
       // Get the cleaned HTML content
       const htmlContent = parsed.innerHTML
 
@@ -443,14 +447,20 @@ module.exports.register = function () {
       let markdown = turndownService.turndown(htmlContent)
 
       /**
-       * RESTORE SIMPLE TABLES
+       * RESTORE TABS AND TABLES
        *
-       * Swap the markdown tables back in for their placeholders. Done before
-       * the link rewriting below so in-table links are absolutized too.
+       * Swap the markdown tab blocks and tables back in for their placeholders.
+       * Done before the link rewriting below so links inside them are
+       * absolutized too. Tabs are restored first so a table nested inside a tab
+       * (its placeholder carried in the tab markdown) is then resolved by the
+       * table pass. A replacement function is used so "$" sequences in the
+       * content (e.g. a `$` code span) aren't interpreted as String.replace
+       * special patterns.
        */
+      tabPlaceholders.forEach(({ token, markdown: tabsMd }) => {
+        markdown = markdown.replace(token, () => '\n\n' + tabsMd + '\n\n')
+      })
       gfmTablePlaceholders.forEach(({ token, markdown: tableMd }) => {
-        // Use a replacement function so "$" sequences in the table (e.g. a `$`
-        // code span) aren't interpreted as String.replace special patterns.
         markdown = markdown.replace(token, () => '\n\n' + tableMd + '\n\n')
       })
 
