@@ -18,9 +18,31 @@
  *    article info bar, toolbars, etc. — those are added later, at
  *    'pagesComposed'). Working from the pre-composition body means we never
  *    have to find and strip the site chrome by hand.
- * 2. Converts each body to Markdown and writes .md files to a temp directory.
+ * 2. For each page: parse the body, run DOM pre-passes (remove inline images,
+ *    convert data tables, mermaid, and tabs), convert the result to Markdown
+ *    with Turndown, swap structured blocks back in, rewrite links, and write
+ *    the .md file to a temp directory.
  * 3. A post-build script (gulp.d/tasks/build-site.js) copies them to the final
  *    output directory once Antora finishes publishing.
+ *
+ * Tables and tabs use a "placeholder" pattern: the block is converted to
+ * Markdown during the DOM pass (calling Turndown on each cell/panel), stashed
+ * behind a token, and the token is swapped back in after the main Turndown pass
+ * so its Markdown isn't re-escaped. Complex tables are instead kept as HTML and
+ * emitted verbatim via the keepDataTables rule.
+ *
+ * MAINTAINER NOTE — possible future refactor:
+ * The placeholder pattern means Turndown is invoked many times per page (once
+ * for the whole body, plus once per simple-table cell, per tab panel, and for
+ * the title). It is correct and the full-site build time is fine, but if build
+ * time or readability ever becomes a concern, the cleaner design is to mark
+ * simple tables/tabs in the DOM and register *scoped* Turndown rules for
+ * table/tr/td (and the tab wrappers) that emit GFM in the single page-level
+ * Turndown pass — no per-cell calls, no placeholders. This is roughly what
+ * turndown-plugin-gfm does; we avoid that plugin because its global table rules
+ * and its keep() for header-less tables capture Asciidoctor admonition blocks
+ * (NOTE/TIP/WARNING, also rendered as <table>) and dump them as raw HTML, so a
+ * scoped/hand-rolled version would be required.
  */
 
 'use strict'
