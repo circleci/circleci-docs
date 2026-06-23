@@ -1,5 +1,12 @@
 DirectoryPath: "build"
-CheckExternal: false
+# External links are checked by default. The per-commit pipeline skips them for
+# speed by passing htmltest's -s flag (see the validate-html task); the daily
+# external-link-check pipeline runs the full check with no flag.
+CheckExternal: true
+# Tuning that only takes effect when external links are checked (daily run):
+# give remote hosts a generous timeout and cache results so reruns are cheap.
+ExternalTimeout: 20
+CacheExpires: "6h"
 EnforceHTTPS: true
 CheckSelfReferencesAsInternal: true
 BaseURL: https://circleci.com/docs

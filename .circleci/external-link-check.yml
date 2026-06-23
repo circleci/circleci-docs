@@ -1,0 +1,48 @@
+version: 2.1
+
+# Stripped-back pipeline whose only job is to validate EXTERNAL links once per day.
+#
+# The per-commit pipeline (.circleci/config.yml) skips external links for speed by
+# running htmltest with the -s flag. This pipeline builds the site and runs the full
+# htmltest check (no -s), so broken external links surface daily without slowing down
+# normal PR/commit validation.
+#
+# Wiring (done once in the CircleCI web UI, not in this file):
+#   Project Settings -> Pipelines -> add a pipeline definition that uses this config
+#   file path (.circleci/external-link-check.yml). Then add a Scheduled trigger on
+#   that pipeline that runs daily against the main branch. No VCS push trigger, so
+#   this pipeline only runs on the schedule.
+
+orbs:
+  go: circleci/go@3.0.4
+
+executors:
+  node_executor:
+    docker:
+      - image: cimg/node:24.16.0
+    resource_class: medium+.gen2
+    working_directory: ~/project
+
+jobs:
+  external-link-check:
+    executor: node_executor
+    steps:
+      - checkout
+      - run:
+          name: Install Node dependencies
+          command: npm ci
+      - go/install:
+          version: "1.25.0"
+      - run:
+          name: Build the documentation site
+          command: NODE_OPTIONS="--max-old-space-size=4096" npm run build:docs
+      - run:
+          name: Validate HTML including external links
+          command: go tool htmltest
+      - store_artifacts:
+          path: .htmltest
+
+workflows:
+  external-link-check:
+    jobs:
+      - external-link-check
