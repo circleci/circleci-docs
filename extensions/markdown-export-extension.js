@@ -349,14 +349,18 @@ module.exports.register = function () {
           }
         })
 
-        const hasHeader = !!table.querySelector('thead')
+        // GFM tables need exactly one header row and can't represent a footer,
+        // so anything else is kept as HTML (buildGfmTable only reads the single
+        // thead row and the tbody rows, so this also avoids dropping content).
+        const hasSingleHeader =
+          table.querySelectorAll('thead tr').length === 1 && !table.querySelector('tfoot')
         const cells = table.querySelectorAll('th, td')
         const isSimple = cells.every(cellEl =>
           !cellEl.querySelector(blockCellSelector) &&
           !cellEl.getAttribute('colspan') &&
           !cellEl.getAttribute('rowspan'))
 
-        if (hasHeader && isSimple) {
+        if (hasSingleHeader && isSimple) {
           // Convert to a markdown table now, swap back in after Turndown.
           const token = `XGFMTABLE${gfmTablePlaceholders.length}X`
           gfmTablePlaceholders.push({ token, markdown: buildGfmTable(table) })
