@@ -42,6 +42,47 @@ module.exports.register = function () {
     const siteUrl = playbook.site.url.replace(/\/+$/, '')
 
     /**
+     * URL RESOLVER
+     *
+     * Resolve a possibly-relative link to an absolute docs URL so markdown
+     * files work when viewed outside the site. Already-absolute links (with a
+     * scheme such as http: or mailto:) and pure anchor links are returned
+     * unchanged. Used both for markdown links and for links inside HTML tables.
+     */
+    const absolutizeUrl = (url, pageUrl) => {
+      // Already absolute (http://, https://, mailto:, etc.) or a pure anchor
+      if (/^[a-z]+:/.test(url) || url.startsWith('#')) {
+        return url
+      }
+      // Root-relative - just prepend the site domain
+      if (url.startsWith('/')) {
+        return siteUrl + url
+      }
+      const pageDir = pageUrl.endsWith('/')
+        ? pageUrl
+        : pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1)
+      if (url.startsWith('../') || url.startsWith('./')) {
+        // Relative path - walk up from the current page directory
+        let upCount = 0
+        let cleanUrl = url
+        while (cleanUrl.startsWith('../')) {
+          upCount++
+          cleanUrl = cleanUrl.substring(3)
+        }
+        if (cleanUrl.startsWith('./')) {
+          cleanUrl = cleanUrl.substring(2)
+        }
+        const basePath = pageDir.split('/').filter(p => p)
+        for (let i = 0; i < upCount; i++) {
+          basePath.pop()
+        }
+        return siteUrl + '/' + basePath.join('/') + (basePath.length > 0 ? '/' : '') + cleanUrl
+      }
+      // Bare relative URL - resolve against the current page directory
+      return siteUrl + pageDir + url
+    }
+
+    /**
      * TURNDOWN CONFIGURATION
      *
      * Turndown is the library that converts HTML to Markdown.
@@ -54,6 +95,30 @@ module.exports.register = function () {
       emDelimiter: '_',           // Use _ for emphasis (not *)
       strongDelimiter: '**',      // Use ** for bold
       linkStyle: 'inlined'        // Use [text](url) format (not reference style)
+    })
+
+    /**
+     * KEEP DATA TABLES AS HTML
+     *
+     * Markdown table syntax can only hold single-line cells, but CircleCI
+     * tables frequently put lists, multiple paragraphs, and code blocks inside
+     * cells. Converting those to a markdown table would destroy their
+     * structure (Turndown's default flattens every cell onto its own line), so
+     * we keep real data tables as HTML instead.
+     *
+     * Only tables marked with data-md-keep in the per-page DOM pass below are
+     * kept. That marker is applied to Asciidoctor data tables (table.tableblock)
+     * but NOT to admonition blocks (NOTE/TIP/WARNING), which Asciidoctor also
+     * renders as <table> - those still flatten to text via the default rules.
+     */
+    turndownService.addRule('keepDataTables', {
+      filter: function (node) {
+        return node.nodeName === 'TABLE' && node.hasAttribute('data-md-keep')
+      },
+      replacement: function (content, node) {
+        node.removeAttribute('data-md-keep')
+        return '\n\n' + node.outerHTML + '\n\n'
+      }
     })
 
     /**
@@ -210,6 +275,49 @@ module.exports.register = function () {
       parsed.querySelectorAll('span.image').forEach(el => el.remove())
 
       /**
+       * TIDY DATA TABLES
+       *
+       * Real data tables (table.tableblock) are kept as HTML (see the Turndown
+       * setup above); admonition blocks, which Asciidoctor also renders as
+       * <table>, are deliberately excluded so they still flatten to text. Here
+       * we tidy each data table's Asciidoctor markup:
+       * - remove <colgroup> column-width definitions
+       * - strip presentational class/style attributes (structural attributes
+       *   like colspan/rowspan are preserved)
+       * - unwrap cells whose only child is a <p>, so simple cells read cleanly
+       *   while cells with lists/blocks keep their structure
+       * - absolutize links, since links inside kept HTML don't pass through the
+       *   markdown link rewriting applied later
+       * - mark the table with data-md-keep so the Turndown rule keeps it
+       */
+      parsed.querySelectorAll('table.tableblock').forEach(table => {
+        table.querySelectorAll('colgroup').forEach(colgroup => colgroup.remove())
+
+        table.removeAttribute('class')
+        table.removeAttribute('style')
+        table.querySelectorAll('*').forEach(el => {
+          el.removeAttribute('class')
+          el.removeAttribute('style')
+        })
+
+        table.querySelectorAll('th, td').forEach(cellEl => {
+          const elementChildren = cellEl.childNodes.filter(n => n.nodeType === 1)
+          if (elementChildren.length === 1 && elementChildren[0].tagName === 'P') {
+            cellEl.set_content(elementChildren[0].innerHTML)
+          }
+        })
+
+        table.querySelectorAll('a').forEach(a => {
+          const href = a.getAttribute('href')
+          if (href) {
+            a.setAttribute('href', absolutizeUrl(href, page.pub.url))
+          }
+        })
+
+        table.setAttribute('data-md-keep', '')
+      })
+
+      /**
        * FLATTEN TABS
        *
        * Tabs are interactive UI that don't work in markdown. Convert them to
@@ -303,54 +411,9 @@ module.exports.register = function () {
        * - /docs/page -> https://circleci.com/docs/page
        */
       markdown = markdown.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
-        // Skip if already absolute (http://, https://, mailto:, etc.)
-        if (/^[a-z]+:/.test(url)) {
-          return match
-        }
-
-        // Keep anchor links (e.g., #section-name) as-is
-        if (url.startsWith('#')) {
-          return match
-        }
-
-        // Convert relative URLs to absolute
-        let absoluteUrl = url
-        if (url.startsWith('/')) {
-          // URL starts with / - just prepend site domain
-          absoluteUrl = siteUrl + url
-        } else if (url.startsWith('../') || url.startsWith('./')) {
-          // Relative path - resolve based on current page URL
-          const pageUrl = page.pub.url
-          const pageDir = pageUrl.endsWith('/') ? pageUrl : pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1)
-
-          // Count how many directories to go up (../)
-          let upCount = 0
-          let cleanUrl = url
-          while (cleanUrl.startsWith('../')) {
-            upCount++
-            cleanUrl = cleanUrl.substring(3)
-          }
-          // Remove leading ./
-          if (cleanUrl.startsWith('./')) {
-            cleanUrl = cleanUrl.substring(2)
-          }
-
-          // Navigate up from current page directory
-          let basePath = pageDir.split('/').filter(p => p)
-          for (let i = 0; i < upCount; i++) {
-            basePath.pop()
-          }
-
-          // Construct absolute URL
-          absoluteUrl = siteUrl + '/' + basePath.join('/') + (basePath.length > 0 ? '/' : '') + cleanUrl
-        } else {
-          // Relative URL without ./ or ../ - resolve relative to current page
-          const pageUrl = page.pub.url
-          const pageDir = pageUrl.endsWith('/') ? pageUrl : pageUrl.substring(0, pageUrl.lastIndexOf('/') + 1)
-          absoluteUrl = siteUrl + pageDir + url
-        }
-
-        return `[${text}](${absoluteUrl})`
+        const absoluteUrl = absolutizeUrl(url, page.pub.url)
+        // Leave the link untouched when nothing needed resolving
+        return absoluteUrl === url ? match : `[${text}](${absoluteUrl})`
       })
 
       /**
