@@ -29,6 +29,8 @@ circleci runner resource-class create <namespace>/<resource-class> <description>
 +
 Make sure to replace `<namespace>` and `<resource-class>` with your org namespace and desired resource class name, respectively. You may optionally add a description.
 +
+NOTE: Resource class names must follow specific naming conventions. The *namespace* can contain lowercase letters, numbers, underscores, and dashes. The *resource class name* can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs. Valid examples: `my-org/medium`, `acme_corp/large-gpu`, `dev-team/custom:arm64`
++
 Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
 +
 The resource class token is returned after the runner resource class is successfully created.

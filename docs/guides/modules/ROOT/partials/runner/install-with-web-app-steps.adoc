@@ -11,6 +11,8 @@ image::guides:ROOT:runner/runner-ui-step-one.png[Runner set up, step one - Get s
 +
 TIP: *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
 +
+NOTE: Resource class names must follow specific naming conventions. The *namespace* can contain lowercase letters, numbers, underscores, and dashes. The *resource class name* can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs. The complete format is `namespace/resource-class-name`.
++
 image::guides:ROOT:runner/runner-ui-step-two.png[Runner set up, step two - Create a namespace and resource class]
 
 . Copy and save the resource class token. Self-hosted runners use this token to claim work for the associated resource class.
