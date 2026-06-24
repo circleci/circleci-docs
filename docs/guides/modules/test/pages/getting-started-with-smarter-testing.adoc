@@ -21,9 +21,10 @@ This guide walks you through the foundational setup that all three features buil
 
 == Before you begin
 
-You need a repository with an existing test suite. The setup process guides you through configuring JUnit XML output and installing the CLI.
+* You need to install the latest xref:toolkit:local-cli.adoc[Local CLI].
+* You need a repository with an existing test suite. The following setup process guides you through configuring JUnit XML output and installing the CLI `testsuite` plugin.
 
-NOTE: You can complete steps 1 through 3 (install, configure, and validate locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required for step 4, when you run tests in CI.
+NOTE: You can complete steps 1 and 2 (install, configure and validate locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required for step 3, when you run tests in CI.
 
 === Terminology
 
@@ -34,7 +35,7 @@ Test suite:: A named configuration in `.circleci/test-suites.yml` that defines h
 
 == 1. Install the testsuite plugin locally
 
-The `testsuite` plugin can be used both locally and in CI. Install locally to validate your commands work immediately, without waiting for them to run in CI.
+The `testsuite` plugin can be used both locally and in CI.
 
 [tabs]
 ====
@@ -252,127 +253,9 @@ $ mv circleci-testsuite "${HOME}/bin/"
 --
 ====
 
-== 2. Add a `.circleci/test-suites.yml` file at your project root
+== 2. Validate and run locally
 
-Create a `.circleci/test-suites.yml` file in your project. Choose the starter configuration for your test runner below and copy it into the file.
-
-The configuration uses two template variables that Smarter Testing replaces at runtime:
-
-* `<< test.atoms >>` -- replaced with the list of test files to run.
-* `<< outputs.junit >>` -- replaced with the file path for JUnit XML results.
-
-[tabs]
-====
-Vitest::
-+
---
-[source,yaml]
-----
----
-name: ci tests
-discover: vitest list --filesOnly
-run: vitest run --reporter=junit --outputFile="<< outputs.junit >>" --bail 0 << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
---
-
-Jest::
-+
---
-[source,yaml]
-----
----
-name: ci tests
-discover: jest --listTests
-run: JEST_JUNIT_OUTPUT_FILE="<< outputs.junit >>" jest --runInBand --reporters=jest-junit --bail << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
---
-
-Mocha::
-+
---
-[source,yaml]
-----
----
-name: ci tests
-discover: find ./tests -type f -name '*_test.js'
-run: mocha --reporter xunit --reporter-options output="<< outputs.junit >>",showRelativePaths << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
---
-
-pytest::
-+
---
-[source,yaml]
-----
----
-name: ci tests
-discover: find ./tests -type f -name 'test*.py'
-run: pytest --disable-pytest-warnings --no-header --quiet --tb=short --junit-xml="<< outputs.junit >>" << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
---
-
-Go with gotestsum::
-+
-[source,yaml]
-----
----
-name: ci tests
-discover: go list -f '{{ if or (len .TestGoFiles) (len .XTestGoFiles) }} {{ .ImportPath }} {{end}}' ./...
-run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
-
-RSpec::
-+
---
-Install the RSpec JUnit Formatter to collect JUnit XML test reports.
-[source,console]
-----
-$ gem install rspec_junit_formatter
-----
-
-[source,yaml]
-----
----
-name: ci tests
-discover: find spec -type f -name '*_spec.rb'
-run: bundle exec rspec --format RspecJunitFormatter --out "<< outputs.junit >>" << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
---
-
-Other::
-+
---
-Smarter Testing is test runner agnostic. Replace the `discover` and `run` examples below with your test runner commands. The next step validates that the commands are set up correctly.
-[source,yaml]
-----
----
-name: ci tests
-# Replace with the command that lists your tests
-discover: my-test-runner --only-list-tests
-# Replace with the command that runs your tests, be sure to enable JUnit and
-# send the JUnit output to the '<< outputs.junit >>' template variable.
-run: my-test-runner --junit=<< outputs.junit >> --run << test.atoms >>
-outputs:
-  junit: test-reports/tests.xml
-----
---
-====
-
-== 3. Validate and run locally
-
-Use the `--doctor` flag to validate that your `test-suites.yml` is set up correctly. The CLI runs through a series of checks, executing tests and validating the output. If any results look incorrect, an action item is provided to resolve it.
+Use the `--doctor` flag to set up and validate your `test-suites.yml`. The CLI runs through a series of checks, executing tests and validating the output. If any results look incorrect, action items are provided to resolve them.
 
 [source,console]
 ----
@@ -383,18 +266,11 @@ Follow the steps until all checks pass.
 
 include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
-Once all checks pass, run all tests locally by removing the `--doctor` flag:
-
-[source,console]
-----
-$ circleci run testsuite "ci tests"
-----
-
-== 4. Run in CI
+== 3. Run in CI
 
 include::ROOT:partial$tips/testsuite-ci-preinstalled.adoc[]
 
-In your `.circleci/config.yml`, replace your existing test command with `circleci run testsuite` -- the same command you used locally. Keep all other job steps the same.
+In your CircleCI configuration file, replace your existing test command with `circleci run testsuite` -- the same command you used locally. Keep all other job steps the same.
 
 Verify that `store_test_results` points to the directory that matches `outputs.junit` in your `test-suites.yml` file.
 
