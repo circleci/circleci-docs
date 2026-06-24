@@ -38,10 +38,11 @@ Do not open a support ticket for issues with Runner Provisioner. Issues are rout
 * A Kubernetes cluster with KubeVirt installed. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
 * `kubectl` configured against your cluster.
 * `helm` v3+.
-* A CircleCI runner resource class and its associated resource class token. Create one in the CircleCI web app under **Self-Hosted Runners**. This token is used by the agent running on the VM to authenticate with CircleCI and claim and execute jobs for that resource class.
-* A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access.
+* A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access. See the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page for more information.
 
 === Cluster requirements
+
+The following sections cover the cluster requirements for running Runner Provisioner on a Kubernetes cluster.
 
 ==== Nested virtualization
 
@@ -256,8 +257,24 @@ $ kubectl label nodes -l agentpool=<nodepool-name> node-role.kubernetes.io/contr
 
 == Quickstart
 
+=== 1. Create CircleCI namespace and resource class
+
+[tabs]
+====
+Web app installation::
++
+--
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
+--
+CLI installation::
++
+--
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
+--
+====
+
 [#create-namespace]
-=== 1. Create the namespace
+=== 3. Create the Kubernetes namespace
 
 [source,console]
 ----
@@ -310,7 +327,7 @@ provisioner:
 The image `quay.io/containerdisks/ubuntu:22.04` is an official container disk maintained by the KubeVirt project, providing a pre-built Ubuntu 22.04 OS image for running virtual machines on Kubernetes.
 
 [#install-helm-chart]
-=== 3. Install the Helm chart
+=== 4. Install the Helm chart
 
 [source,console]
 ----
@@ -322,7 +339,7 @@ $ helm install runner-provisioner circleci_runner-provisioner \
 ----
 
 [#verify-deployment]
-=== 4. Verify the deployment
+=== 5. Verify the deployment
 
 [source,console]
 ----
