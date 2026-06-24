@@ -1,18 +1,18 @@
 //== CircleCI web app installation: pre-steps
-You need to create a namespace, resource class, and resource class token to set up a runner. You must be an organization admin to complete this process.
+To install self-hosted runners, you need to create a CircleCI namespace and resource class. Once set up you will receive a resource class token. You must be an organization admin to complete this process. View your installed runners on the inventory page in the link:https://app.circleci.com/[web app] by selecting *Runners* from the sidebar.
 
-You can view your installed runners on the inventory page, by selecting *Runners* from the sidebar.
+TIP: If you already create orb in your organization you will already have a namespace configured. You must use this same namespace for runners. Each organization can only create a single namespace.
 
 . On the https://app.circleci.com/[CircleCI web app], navigate to *Runners* and select btn:[Create Resource Class].
 +
 .Runner set up, step one - Get started
 image::guides:ROOT:runner/runner-ui-step-one.png[Runner set up, step one - Get started]
 
-. Next, create a custom xref:guides:execution-managed:resource-class-overview.adoc[Resource Class]. You will configure jobs to use this resource class when you want them to run on your runner. If this is your organization's first time using self-hosted runners, you will need to create a namespace. If your organization already creates orbs, use the same namespace for your self-hosted runners. Each organization has a single CircleCI namespace. Enter a name for your self-hosted runner resource class.
+. Create a custom xref:guides:execution-managed:resource-class-overview.adoc[Resource Class]. You will configure jobs to use this resource class when you want them to run on your self-hosted runner.
 +
 We suggest using a lowercase representation of your CircleCI account name for your namespace. CircleCI will populate your org name as the suggested namespace by default in the UI.
 +
-Resource class names must follow specific naming conventions:
+Namespace and resource classes must follow specific naming conventions:
 +
 ** The *namespace* can contain lowercase letters, numbers, underscores, and dashes.
 ** The *resource class name* can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs.
