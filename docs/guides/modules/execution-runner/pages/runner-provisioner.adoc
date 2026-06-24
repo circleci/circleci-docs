@@ -256,14 +256,6 @@ $ kubectl label nodes -l agentpool=<nodepool-name> node-role.kubernetes.io/contr
 
 == Quickstart
 
-In the following section you will create a namespace and configure a resource class name. Resource class names must follow specific naming conventions.
-
-The *namespace* can contain lowercase letters, numbers, underscores, and dashes.
-
-The *resource class name* can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs.
-
-Valid examples: `my-org/medium`, `acme_corp/large-gpu`, `dev-team/custom:arm64`
-
 [#create-namespace]
 === 1. Create the namespace
 
@@ -453,7 +445,7 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 
 | `namespace`
 | `runner-provisioner`
-| Namespace where runner VMs are created. The namespace can contain lowercase letters, numbers, underscores, and dashes.
+| Namespace where runner VMs are created.
 
 | `circleToken`
 | `""`
