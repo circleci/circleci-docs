@@ -1,5 +1,5 @@
 //== CircleCI web app installation: pre-steps
-In order to install self-hosted runners, you will need to create a namespace and resource class token. To create resource classes and tokens, you need to be an organization admin in the VCS provider. You can read about namespaces and resource classes on the <<runner-concepts#namespaces-and-resource-classes,Concepts>> page.
+You need to create a namespace, resource class, and resource class token to set up a runner. You must be an organization admin to complete this process.
 
 You can view your installed runners on the inventory page, by selecting *Runners* from the sidebar.
 
@@ -8,18 +8,23 @@ You can view your installed runners on the inventory page, by selecting *Runners
 .Runner set up, step one - Get started
 image::guides:ROOT:runner/runner-ui-step-one.png[Runner set up, step one - Get started]
 
-. Next, you will create a custom xref:guides:execution-managed:resource-class-overview.adoc[Resource Class] to use when configuring jobs to use your self-hosted runners. If this is your organization's first time using self-hosted runners, you will need to create or enter a namespace. If your organization already creates orbs, do not create a new namespace, but instead enter the namespace your organization uses for orbs here too. Enter a name for your self-hosted runner resource class.
+. Next, create a custom xref:guides:execution-managed:resource-class-overview.adoc[Resource Class]. You will configure jobs to use this resource class when you want them to run on your runner. If this is your organization's first time using self-hosted runners, you will need to create a namespace. If your organization already creates orbs, use the same namespace for your self-hosted runners. Each organization has a single CircleCI namespace. Enter a name for your self-hosted runner resource class.
 +
-TIP: *Each organization can only create a single namespace*. While not required, we suggest using a lowercase representation of your CircleCI account name. CircleCI will populate your org name as the suggested namespace by default in the UI.
+We suggest using a lowercase representation of your CircleCI account name for your namespace. CircleCI will populate your org name as the suggested namespace by default in the UI.
 +
-NOTE: Resource class names must follow specific naming conventions. The *namespace* can contain lowercase letters, numbers, underscores, and dashes. The *resource class name* can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs. The complete format is `namespace/resource-class-name`.
+Resource class names must follow specific naming conventions:
++
+** The *namespace* can contain lowercase letters, numbers, underscores, and dashes.
+** The *resource class name* can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs.
 +
 .Runner set up, step two - Create a namespace and resource class
 image::guides:ROOT:runner/runner-ui-step-two.png[Runner set up, step two - Create a namespace and resource class]
 
+. Enter a description for your resource class. This is an optional field.
+. Select btn:[Save and continue] to save and view your resource class token.
 . Copy and save the resource class token. Self-hosted runners use this token to claim work for the associated resource class.
 +
-CAUTION: The token cannot be retrieved again, be sure to store it safely.
+CAUTION: The token is only displayed once, be sure to store it safely.
 +
 .Runner set up, step three - Create a resource class token
 image::guides:ROOT:runner/runner-ui-step-three.png[Runner set up, step three - Create a resource class token]
@@ -35,5 +40,11 @@ ifdef::machine[]
 +
 // Display the following step for machine runner installation only
 . Select the **Machine** tab and progress on to the platform-specific instructions in the next section of this installation guide.
++
+endif::[]
+
+ifdef::provisioner[]
++
+. Select btn:[Continue] to complete the setup.
 +
 endif::[]
