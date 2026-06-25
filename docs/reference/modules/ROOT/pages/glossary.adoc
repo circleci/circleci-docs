@@ -346,7 +346,7 @@ Dividing a test suite across multiple parallel execution environments, by name, 
 
 == Trigger
 
-A trigger watches for events and, when matched, chooses a pipeline and initiates a run. Triggers can be automatic, based on events or schedules, or manual, through the web app, API, or CLI. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page. See also <<schedule-trigger>>, <<custom-webhook>>, and <<cross-repo-trigger>>.
+A trigger watches for events and, when matched, uses the configured pipeline to initiate a run. Triggers can be automatic, based on events or schedules, or manual, through the web app, API, or CLI. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page. See also <<schedule-trigger>>, <<custom-webhook>>, and <<cross-repo-trigger>>.
 
 == Unregistered user
 
