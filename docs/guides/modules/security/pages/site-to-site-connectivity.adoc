@@ -13,12 +13,12 @@ Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behi
 
 Site-to-site connectivity creates an encrypted tunnel between a lightweight endpoint you run in your network and your CircleCI jobs. When the tunnel connects, jobs reach your internal resources directly.
 
-You start the connection by using the link:https://github.com/CircleCI-Labs/site-to-site-connectivity-orb[site-to-site connectivity orb] in your CircleCI configuration. CircleCI manages the tunnel service on its end.
+You start the connection by using the link:https://circleci.com/developer/orbs/orb/cci-labs/site-to-site-connectivity[site-to-site connectivity orb] in your CircleCI configuration. CircleCI manages the tunnel service on its end.
 
 [#what-you-can-do]
 == What you can do today
 
-Once a job is running with the orb configured, it can:
+Once a job runs with the link:https://circleci.com/developer/orbs/orb/cci-labs/site-to-site-connectivity[site-to-site connectivity orb] configured, it can:
 
 * *Clone from private GHES or GitLab* - SSH-based clones from a self-hosted GitHub Enterprise or GitLab instance work out of the box.
 * *Call internal HTTPS endpoints* - Reach internal package registries, REST APIs, Artifactory, or any service on your internal network.
@@ -31,13 +31,13 @@ Once a job is running with the orb configured, it can:
 
 *Guided onboarding required* - CircleCI runs setup with you end-to-end: scoping your use case, configuring the tunnel, and verifying the connection.
 
-*Docker executor support* - Because the executor fetches Docker images before the tunnel starts, your registry must support OIDC. See xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] for more information.
+*Docker executor support* - CircleCI fetches your executor's Docker image before the tunnel starts. If that image lives in a private registry, configure OIDC between CircleCI and your registry so CircleCI can pull it. See xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] to set up the CircleCI side.
 
 [#prerequisites]
 == Prerequisites
 
 . A CircleCI Scale plan.
-. An agent deployment inside your network, managed by your team.
+. A tunnel endpoint inside your network, deployed and managed by your team.
 . Time to work with CircleCI during onboarding.
 . A use case that maps to the capabilities described on this page.
 
@@ -50,7 +50,7 @@ Once a job is running with the orb configured, it can:
 | Good fit
 | Not a fit today
 
-| Running GHES or GitLab on-prem and unwilling to publish it externally
+| Running GHES or GitLab on-prem and unable to publish it externally
 | Not on a CircleCI Scale plan
 
 | Internal artifact registry your jobs need to reach
