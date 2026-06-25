@@ -8,7 +8,7 @@ NOTE: Site-to-site connectivity is available on link:https://circleci.com/pricin
 [#overview]
 == Overview
 
-Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behind your firewall, like a private GitHub Enterprise instance, an internal Artifactory, or on-prem APIs. This removes the need to expose those resources to the public internet or add CircleCI's IP ranges to your network allow list.
+Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behind your firewall, like a private GitHub Enterprise instance, an internal Artifactory, or on-prem APIs. Site-to-site connectivity removes the need to expose private resources to the public internet or add CircleCI's IP ranges to your network allow list.
 
 [#how-it-works]
 == How it works
