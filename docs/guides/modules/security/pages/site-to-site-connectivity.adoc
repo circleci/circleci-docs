@@ -13,7 +13,7 @@ Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behi
 
 Site-to-site connectivity creates an encrypted tunnel between a lightweight endpoint you run in your network and your CircleCI jobs. When the tunnel connects, jobs reach your internal resources directly.
 
-You start the connection via the link:https://github.com/CircleCI-Labs/site-to-site-connectivity-orb[site-to-site connectivity orb]. CircleCI manages the tunnel service on its end.
+You start the connection by using the link:https://github.com/CircleCI-Labs/site-to-site-connectivity-orb[site-to-site connectivity orb] in your CircleCI configuration. CircleCI manages the tunnel service on its end.
 
 [#what-you-can-do]
 == What you can do today
