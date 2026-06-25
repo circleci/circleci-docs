@@ -134,6 +134,10 @@ An ordered sequence of <<environment,environments>> that defines a promotion pat
 
 A named value stored in CircleCI and injected at runtime into jobs, used for configuration, secrets, and credentials. Environment variables can be set at the context, project, job, or step level, and follow an order of precedence. Values are encrypted at rest and masked in job output. See the xref:guides:security:env-vars.adoc[Using Environment Variables] page. Compare with <<built-in-environment-variable>>.
 
+== Event
+
+The inbound occurrence that happened in the world. An event could be a webhook delivery, a PR opened, a clock tick, an API call, a tag push. A <<trigger>> can match an event.
+
 == Execution environment
 
 The runtime in which a <<job>> runs, either a Docker container or a virtual machine. CircleCI offers the Docker, Linux VM, macOS, Windows, GPU, Android, and Arm VM execution environments. You choose an <<executor>> (`docker`, `machine`, or `macos`) and an image, and those together determine the environment. See the xref:guides:execution-managed:executor-intro.adoc[Introduction to Execution Environments] page.
@@ -238,7 +242,7 @@ A named, typed value passed to a <<command>>, <<job>>, or <<executor>> to make r
 
 == Pipeline
 
-The full set of processes you run when you trigger work on a project. A pipeline encompasses your <<workflow,workflows>>, which in turn coordinate your <<job,jobs>>, and is defined in your project's <<configuration,configuration file>>. See the xref:guides:orchestrate:pipelines.adoc[Pipelines] page.
+A definition that specifies where your CircleCI configuration is stored and where your code is checked out from. A <<trigger>> references a pipeline and uses it when initiating a <<run>>.
 
 == Pipeline parameter
 
@@ -294,6 +298,10 @@ A configuration option that specifies the compute resources, such as CPU and RAM
 
 Reverting an application to a previous stable version when an issue is detected, either through a dedicated rollback pipeline or by rerunning a prior workflow. See the xref:guides:deploy:rollback-a-deployment.adoc[Roll Back a Deployment] page.
 
+== Run
+
+The instance produced when an <<event>> matches a <<trigger>>. A run records the outcome of the attempt and groups any <<workflow,workflows>> that executed, including errors that occurred before workflows could start.
+
 == Schedule trigger
 
 A <<trigger>> that runs a pipeline on a defined schedule, using cron syntax, rather than on each commit. Schedule triggers are the recommended way to run scheduled work. Use them instead of scheduled workflows unless your setup requires that approach. See the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
@@ -338,7 +346,7 @@ Dividing a test suite across multiple parallel execution environments, by name, 
 
 == Trigger
 
-A mechanism that initiates a <<pipeline>>. Triggers can be automatic, based on VCS events, schedules, or custom webhooks, or manual, through the web app, API, or CLI. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page. See also <<schedule-trigger>>, <<custom-webhook>>, and <<cross-repo-trigger>>.
+A trigger watches for events and, when matched, chooses a pipeline and initiates a run. Triggers can be automatic, based on events or schedules, or manual, through the web app, API, or CLI. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page. See also <<schedule-trigger>>, <<custom-webhook>>, and <<cross-repo-trigger>>.
 
 == Unregistered user
 
@@ -360,7 +368,7 @@ An HTTP POST request that CircleCI sends to an external service when a specified
 
 == Workflow
 
-A set of rules that defines a collection of <<job,jobs>> and their run order. Workflows can run jobs concurrently, sequentially, on a schedule, or with a manual gate using an <<approval-job>>. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
+A workflow is the container of executed work, a set of rules that defines a collection of <<job,jobs>> and their run order. Workflows can run jobs concurrently, sequentially, on a schedule, or with a manual gate using an <<approval-job>>. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
 
 == Workspace
 
