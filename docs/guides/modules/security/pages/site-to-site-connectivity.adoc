@@ -38,7 +38,7 @@ Once a job is running with the orb configured, it can:
 . A CircleCI Scale plan.
 . An agent deployment inside your network, managed by your team.
 . Time to work with CircleCI during onboarding.
-. A use case that maps to the capabilities described in this page.
+. A use case that maps to the capabilities described on this page.
 
 [#is-this-right-for-you]
 == Is this right for you?
