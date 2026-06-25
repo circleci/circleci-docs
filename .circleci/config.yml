@@ -7,7 +7,7 @@ parameters:
     description: "Force UI bundle rebuild regardless of changes detected"
 
 orbs:
-  aws-cli: circleci/aws-cli@5.4.1
+  aws-cli: circleci/aws-cli@5.4.2
   vale: circleci/vale@1.2.1
   go: circleci/go@3.0.4
 
