@@ -490,13 +490,25 @@
           elements.searchContainer.classList.add('hidden')
           elements.header.classList.remove('h-dvh')
           if (elements.componentExplorerNav) elements.componentExplorerNav.classList.remove('hidden')
+          elements.clearButton.classList.remove('flex')
+          elements.clearButton.classList.add('hidden')
           showMobileSearchResults()
+          if (elements.mobileClearButton) {
+            elements.mobileClearButton.classList.remove('hidden')
+            elements.mobileClearButton.classList.add('flex')
+          }
         } else {
           // On desktop: show search in header
           hideMobileSearchResults()
+          if (elements.mobileClearButton) {
+            elements.mobileClearButton.classList.remove('flex')
+            elements.mobileClearButton.classList.add('hidden')
+          }
           elements.searchContainer.classList.remove('hidden')
           elements.header.classList.add('h-dvh')
           if (elements.componentExplorerNav) elements.componentExplorerNav.classList.add('hidden')
+          elements.clearButton.classList.remove('hidden')
+          elements.clearButton.classList.add('flex')
         }
       }
     }
