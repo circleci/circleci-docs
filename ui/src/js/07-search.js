@@ -11,7 +11,7 @@
   let PAGINATION_MAX_VISIBLE_PAGES = 5
   const SEARCH_DEBOUNCE_MS = 300
   const MIN_QUERY_LENGTH = 2
-  const MOBILE_BREAKPOINT = 1200 // lg breakpoint (in pixels) — matches --breakpoint-lg: 75rem in site.css
+  const MOBILE_BREAKPOINT = 768 // md breakpoint (in pixels) — matches when header search bar becomes visible
 
   function setupSearch () {
     // State variables
