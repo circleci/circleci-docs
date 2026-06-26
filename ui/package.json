@@ -27,7 +27,7 @@
     "fancy-log": "~2.0.0",
     "fs-extra": "~11.3.0",
     "glob": "~13.0.0",
-    "globals": "~17.6.0",
+    "globals": "~17.7.0",
     "gulp": "~5.0.0",
     "gulp-concat": "~2.6",
     "gulp-connect": "~5.7",
