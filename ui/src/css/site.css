@@ -49,7 +49,6 @@ header.h-dvh [data-component-explorer-nav] {
 
 /* Center search results container on the page */
 header [data-search-results-container] {
-  max-width: 1200px;
   width: min(90%, 1200px);
   margin-left: auto;
   margin-right: auto;
