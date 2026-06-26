@@ -11,7 +11,7 @@
   let PAGINATION_MAX_VISIBLE_PAGES = 5
   const SEARCH_DEBOUNCE_MS = 300
   const MIN_QUERY_LENGTH = 2
-  const MOBILE_BREAKPOINT = 1024 // lg breakpoint (in pixels) — matches the lg:hidden nav sidebar threshold
+  const MOBILE_BREAKPOINT = 1200 // lg breakpoint (in pixels) — matches --breakpoint-lg: 75rem in site.css
 
   function setupSearch () {
     // State variables
@@ -32,6 +32,7 @@
       mobileClearButton: document.querySelector('[data-page-navigation] [data-search-clear]'),
       keyboardShortcut: document.querySelector('header [data-keyboard-shortcut]'),
       mobileKeyboardShortcut: document.querySelector('[data-page-navigation] [data-keyboard-shortcut]'),
+      componentExplorerNav: document.querySelector('header [data-component-explorer-nav]'),
       searchContainer: document.querySelector('header [data-search-results-container]'),
       mobileSearchContainer: document.querySelector('[data-page-navigation] [data-search-results-container]'),
       navigation: document.querySelector('[data-page-navigation]'),
@@ -488,12 +489,14 @@
           // On mobile: show search in navigation panel
           elements.searchContainer.classList.add('hidden')
           elements.header.classList.remove('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.remove('hidden')
           showMobileSearchResults()
         } else {
           // On desktop: show search in header
           hideMobileSearchResults()
           elements.searchContainer.classList.remove('hidden')
           elements.header.classList.add('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.add('hidden')
         }
       }
     }
@@ -523,6 +526,7 @@
         // Hide search results in both desktop and mobile
         elements.searchContainer.classList.add('hidden')
         elements.header.classList.remove('h-dvh')
+        if (elements.componentExplorerNav) elements.componentExplorerNav.classList.remove('hidden')
         elements.clearButton.classList.remove('flex')
         elements.clearButton.classList.add('hidden')
 
@@ -551,6 +555,7 @@
           // Desktop view: show results in header
           elements.searchContainer.classList.remove('hidden')
           elements.header.classList.add('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.add('hidden')
           elements.clearButton.classList.remove('hidden')
           elements.clearButton.classList.add('flex')
         }
@@ -671,6 +676,7 @@
         } else {
           elements.searchContainer.classList.remove('hidden')
           elements.header.classList.add('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.add('hidden')
         }
       } else {
         // No query in URL, make sure search UI is hidden
@@ -687,6 +693,7 @@
       // Hide desktop search
       elements.searchContainer.classList.add('hidden')
       elements.header.classList.remove('h-dvh')
+      if (elements.componentExplorerNav) elements.componentExplorerNav.classList.remove('hidden')
       elements.clearButton.classList.remove('flex')
       elements.clearButton.classList.add('hidden')
 
