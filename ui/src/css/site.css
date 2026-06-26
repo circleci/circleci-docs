@@ -56,10 +56,6 @@ header [data-search-results-container] {
   justify-content: center;
 }
 
-/* Hide hamburger menu on landing page */
-.landing-page [data-page-navigation-toggle] {
-  display: none;
-}
 
 /* Nav is after content in source order for agent readability; CSS restores visual left position */
 @media (width >= 75rem) {

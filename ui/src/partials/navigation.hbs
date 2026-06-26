@@ -17,6 +17,28 @@
     </div>
     <div class="flex flex-col space-between">
       {{> left-side-nav}}
+      <ul class="flex flex-col gap-1 mt-4 lg:hidden">
+        <li class="flex items-center">
+          <a href="https://circleci.com/developer/" class="inline-block py-2 ml-2 font-medium">Dev Hub</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="ml-2 inline-block w-[13px] h-[13px]">
+        </li>
+        <li class="flex items-center">
+          <a href="{{{siteRootPath}}}/reference/api-homepage/" class="inline-block py-2 ml-2 font-medium">API</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="ml-2 inline-block w-[13px] h-[13px]">
+        </li>
+        <li class="flex items-center">
+          <a href="https://support.circleci.com/hc/en-us/" class="inline-block py-2 ml-2 font-medium">Support</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="ml-2 inline-block w-[13px] h-[13px]">
+        </li>
+        <li class="flex items-center">
+          <a href="https://discuss.circleci.com/" class="inline-block py-2 ml-2 font-medium">Discuss</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="ml-2 inline-block w-[13px] h-[13px]">
+        </li>
+        <li class="flex items-center">
+          <a href="https://circleci.com/" class="inline-block py-2 ml-2 font-medium">CircleCI.com</a>
+          <img src="{{{uiRootPath}}}/img/link-arrow.svg" alt="Go to" class="ml-2 inline-block w-[13px] h-[13px]">
+        </li>
+      </ul>
       <a href="https://app.circleci.com/" class="flex items-center mt-4 ml-2 gap-2 font-medium lg:hidden bg-body-bg" >
         Go to Application
         <div class="inline-flex h-[24px] w-[24px] rounded items-center justify-center bg-slime-green border border-accent-green text-dark-green">
