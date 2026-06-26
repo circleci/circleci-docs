@@ -37,7 +37,7 @@
       mobileSearchContainer: document.querySelector('[data-page-navigation] [data-search-results-container]'),
       navigation: document.querySelector('[data-page-navigation]'),
       leftSideNav: document.querySelector('[data-left-side-nav-container]'),
-      goToAppMobileButton: document.querySelector('[data-left-side-nav-container] + a'),
+      goToAppMobileButton: document.querySelector('[data-go-to-app-mobile]'),
       searchResultPathsContainer: null,
       mobileSearchResultPathsContainer: null,
       pathsList: null,
