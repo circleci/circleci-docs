@@ -11,7 +11,7 @@
   let PAGINATION_MAX_VISIBLE_PAGES = 5
   const SEARCH_DEBOUNCE_MS = 300
   const MIN_QUERY_LENGTH = 2
-  const MOBILE_BREAKPOINT = 768 // md breakpoint (in pixels)
+  const MOBILE_BREAKPOINT = 1024 // lg breakpoint (in pixels) — matches the lg:hidden nav sidebar threshold
 
   function setupSearch () {
     // State variables
