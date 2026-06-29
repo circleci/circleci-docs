@@ -207,7 +207,7 @@
   --body-font-size--desktop: 1.125em; /* 18px */
   --body-font-size--print: 0.9375em; /* 15px */
   --body-line-height: 1.6;
-  --body-font-family: "Inter", sans-serif;
+  --body-font-family: "Inter", "Inter Fallback", sans-serif;
   --body-font-weight-bold: 700;
   --monospace-font-family: "IBM Plex Mono", monospace;
   --monospace-font-weight-bold: 600;

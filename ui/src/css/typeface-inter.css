@@ -1,4 +1,13 @@
 @font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial"), local("Helvetica Neue");
+  ascent-override: 96.88%;
+  descent-override: 24.12%;
+  line-gap-override: 0%;
+  size-adjust: 105.27%;
+}
+
+@font-face {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
