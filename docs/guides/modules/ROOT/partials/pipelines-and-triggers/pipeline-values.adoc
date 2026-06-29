@@ -377,10 +377,11 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.trigger.type`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center#
 | String
-| The type of trigger that initiated the pipeline. Possible values: `github_app`, `bitbucket_dc`, `schedule`, `webhook`, `api`.
+| The type of trigger that initiated the pipeline. Possible values: `github_app`, `github_server`, `github_oauth`, `bitbucket_cloud`, `bitbucket_dc`, `schedule`, `webhook`, `api`.
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -435,7 +436,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.after`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The SHA of the most recent commit on the branch after the push. Corresponds to the `after` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub push event payload]. Only populated for push events.
 | [.circle-green]#**Yes**#
@@ -443,7 +445,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.head_commit.url`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The URL of the most recent commit on the branch. Corresponds to the `head_commit.url` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub push event payload]. Only populated for push events.
 | [.circle-green]#**Yes**#
@@ -451,7 +454,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.ref`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The full Git ref that was pushed. Corresponds to the `ref` field on the link:https://docs.github.com/en/webhooks/webhook-events-and-payloads#push[GitHub push event payload]. Only populated for push events.
 | [.circle-green]#**Yes**#
@@ -555,7 +559,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.sender.type`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The type of GitHub user that triggered the event. Corresponds to the `sender.type` field on GitHub event payloads. Possible values are `User`, `Organization`, and `Bot`.
 | [.circle-green]#**Yes**#
@@ -563,7 +568,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.sender.avatar_url`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The avatar URL of the GitHub user who triggered the event. Corresponds to the `sender.avatar_url` field on GitHub event payloads.
 | [.circle-green]#**Yes**#
@@ -571,7 +577,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.sender.login`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The VCS username of the GitHub user who triggered the event. Corresponds to the `sender.login` field on GitHub event payloads.
 | [.circle-green]#**Yes**#
@@ -579,7 +586,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.repository.name`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The name of the repository that triggered the event, without the owner prefix. Corresponds to the `repository.name` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
@@ -587,7 +595,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.repository.owner.login`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The VCS username of the repository owner. Corresponds to the `repository.owner.login` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
@@ -595,7 +604,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.event.github.repository.url`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth#
 | String
 | The URL of the repository that triggered the event. Corresponds to the `repository.url` field on repository-related GitHub event payloads.
 | [.circle-green]#**Yes**#
