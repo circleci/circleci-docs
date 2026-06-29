@@ -4,9 +4,9 @@
 :page-description: Run CircleCI Cloud jobs that reach private infrastructure without opening your firewall to the internet.
 :experimental:
 
-NOTE: Site-to-site connectivity is available on link:https://circleci.com/pricing/[CircleCI Scale plan] only. Contact your account team to confirm eligibility before getting started.
+NOTE: Site-to-site connectivity is available in preview on link:https://circleci.com/pricing/[CircleCI Scale plan]. Contact your account team to confirm eligibility before getting started. This feature is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. Share your feedback with your account team.
 
-Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behind your firewall, like a private GitHub Enterprise instance, an internal Artifactory, or on-prem APIs. Site-to-site connectivity removes the need to expose private resources to the public internet or add CircleCI's IP ranges to your network allow list.
+Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behind your firewall, for example, a private GitHub Enterprise instance, an internal Artifactory, or on-prem APIs. Site-to-site connectivity removes the need to expose private resources to the public internet or add CircleCI's IP ranges to your network allow list.
 
 [#how-it-works]
 == How it works
@@ -14,9 +14,6 @@ Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behi
 Site-to-site connectivity creates an encrypted tunnel between a lightweight endpoint you run in your network and your CircleCI jobs. When the tunnel connects, jobs reach your internal resources directly.
 
 You start the connection by using the link:https://circleci.com/developer/orbs/orb/cci-labs/site-to-site-connectivity[site-to-site connectivity orb] in your CircleCI configuration. CircleCI manages the tunnel service on its end.
-
-[#what-you-can-do]
-== What you can do today
 
 Once a job runs with the link:https://circleci.com/developer/orbs/orb/cci-labs/site-to-site-connectivity[site-to-site connectivity orb] configured, it can:
 
@@ -26,40 +23,27 @@ Once a job runs with the link:https://circleci.com/developer/orbs/orb/cci-labs/s
 * *Preserve end-to-end TLS* - The job respects your destination's TLS certificate with no man-in-the-middle.
 * *Route wildcard host names* - Route an entire domain (for example, `+*.internal.acme.dev+`) through a single tunnel setup.
 
-[#considerations]
-== Considerations
+=== Is site to site connectivity a good fit for you?
 
-*Guided onboarding required* - CircleCI runs setup with you end-to-end: scoping your use case, configuring the tunnel, and verifying the connection.
+Examples of use cases that are a good fit for site to site connectivity:
 
-*Docker executor support* - CircleCI fetches your executor's Docker image before the tunnel starts. If that image lives in a private registry, configure OIDC between CircleCI and your registry so CircleCI can pull it. See xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] to set up the CircleCI side.
+* Running GHES or GitLab selm-managed and unable to publish externally.
+* Internal artifact registry your jobs need to reach.
+* Security team blocks CircleCI Cloud because adding CircleCI's IP ranges to your allow list is not acceptable.
 
-[#prerequisites]
+Examples of use cases that are not a good fit for site to site connectivity:
+
+* Not on a CircleCI Scale plan.
+* Require production-grade reliability guarantees or a formal SLA for the connectivity layer.
+* Docker image registry does not support OIDC.
+
 == Prerequisites
 
-. A CircleCI Scale plan.
-. A tunnel endpoint inside your network, deployed and managed by your team.
-. Time to work with CircleCI during onboarding.
-. A use case that maps to the capabilities described on this page.
-
-[#is-this-right-for-you]
-== Is this right for you?
-
-[.table.table-striped]
-[cols="1,1", options="header"]
-|===
-| Good fit
-| Not a fit today
-
-| Running GHES or GitLab on-prem and unable to publish it externally
-| Not on a CircleCI Scale plan
-
-| Internal artifact registry your jobs need to reach
-| Requires production-grade reliability guarantees or a formal SLA for the connectivity layer
-
-| Security team blocks CircleCI Cloud because adding CircleCI's IP ranges to your allow list is not acceptable
-| Docker image registry does not support OIDC
-
-|===
+* A CircleCI Scale plan organization.
+* A tunnel endpoint inside your network, deployed and managed by your team.
+* Time to work with CircleCI during onboarding. *Guided onboarding is required*. CircleCI engineers work with you end-to-end, scoping your use case, configuring the tunnel, and verifying the connection.
+* A use case that maps to the capabilities described on this page.
+* OIDC set up for any connections to private Docker image registries. CircleCI fetches your executor's Docker image before the tunnel starts. If that image lives in a private registry, you must configure OIDC between CircleCI and your registry so CircleCI can pull images. See xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] to get set up.
 
 [#get-started]
 == Get started
