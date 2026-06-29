@@ -1,0 +1,36 @@
+{
+  "commands": [
+    {
+      "name": "install",
+      "run": "npm ci"
+    },
+    {
+      "name": "test",
+      "run": "task test",
+      "role": "gate",
+      "fileExt": ".go",
+      "timeout": 300,
+      "limit": 3
+    },
+    {
+      "name": "lint",
+      "run": "task lint",
+      "role": "gate",
+      "fileExt": ".go",
+      "timeout": 300,
+      "limit": 3
+    },
+    {
+      "name": "format",
+      "run": "task fmt",
+      "role": "autofix",
+      "timeout": 30,
+      "limit": 3,
+      "always": true
+    }
+  ],
+  "vcs": {
+    "org": "circleci",
+    "repo": "circleci-docs"
+  }
+}

@@ -11,3 +11,7 @@
 /.vscode/
 /.htmltest
 /test-reports
+
+# chunk active sidecar tracking
+.chunk/sidecar.json
+.chunk/sidecar.*.json

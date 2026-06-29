@@ -1,0 +1,92 @@
+rank,repo,pr_number,pr_title,pr_author,total_comments,reviewer_count,state,pr_url
+1,circleci-docs,9795,Update Smarter Testing docs,gordonsyme,53,2,MERGED,https://github.com/circleci/circleci-docs/pull/9795
+2,circleci-docs,9715,Consolidate VCS integration guides with org/user/project/pipeline content,rosieyohannan,50,1,MERGED,https://github.com/circleci/circleci-docs/pull/9715
+3,circleci-docs,9577,Update steps and images for new project setup page,rosieyohannan,38,1,MERGED,https://github.com/circleci/circleci-docs/pull/9577
+4,circleci-docs,9823,Smarter testing refinement,mseong6251,31,2,MERGED,https://github.com/circleci/circleci-docs/pull/9823
+5,circleci-docs,9952,Cross repo triggers how-to,rosieyohannan,26,1,MERGED,https://github.com/circleci/circleci-docs/pull/9952
+6,circleci-docs,10311,Add Runner Provisioner preview documentation,nathanfishcircleci,25,1,MERGED,https://github.com/circleci/circleci-docs/pull/10311
+7,circleci-docs,9614,New page for Chunk flaky test fix,rosieyohannan,20,1,MERGED,https://github.com/circleci/circleci-docs/pull/9614
+8,circleci-docs,9901,Smarter testing doc split,mseong6251,19,3,MERGED,https://github.com/circleci/circleci-docs/pull/9901
+9,circleci-docs,10264,[FACT-118] Add chunk CLI documentation,hanabel1,13,1,MERGED,https://github.com/circleci/circleci-docs/pull/10264
+10,circleci-docs,9800,Chunk docs split,rosieyohannan,12,1,MERGED,https://github.com/circleci/circleci-docs/pull/9800
+11,circleci-docs,10405,docs(DR-481): document k8s release agent 1.6.0 dynamic managed namespaces,avalcepina,11,1,MERGED,https://github.com/circleci/circleci-docs/pull/10405
+12,circleci-docs,10300,Typos-execution section,benNew89,11,1,MERGED,https://github.com/circleci/circleci-docs/pull/10300
+13,circleci-docs,9627,Updating guidance on pipeline parameters use with dynamic config,yaningo,10,1,MERGED,https://github.com/circleci/circleci-docs/pull/9627
+14,circleci-docs,10508,Add information for site-to-site connectivity,kevintse328,9,1,OPEN,https://github.com/circleci/circleci-docs/pull/10508
+15,circleci-docs,10465,TEST-191 Update smarter testing introductions,liamclarkedev,9,1,MERGED,https://github.com/circleci/circleci-docs/pull/10465
+16,circleci-docs,9556,Document audit log streaming feature,yaningo,9,1,MERGED,https://github.com/circleci/circleci-docs/pull/9556
+17,circleci-docs,10511,TEST-198 Update smarter testing onboarding docs,liamclarkedev,8,1,MERGED,https://github.com/circleci/circleci-docs/pull/10511
+18,circleci-docs,9949,Enhance test impact analysis setup in CircleCI,mseong6251,8,1,MERGED,https://github.com/circleci/circleci-docs/pull/9949
+19,circleci-docs,9617,Documenting new guided setup for rollback pipeline,yaningo,8,1,MERGED,https://github.com/circleci/circleci-docs/pull/9617
+20,circleci-docs,9731,Enhance documentation for coverage baseline in tests,mseong6251,8,3,MERGED,https://github.com/circleci/circleci-docs/pull/9731
+21,circleci-docs,9830,ONPREM-2210 | Added why for nomad externalization,atulsingh0,8,1,MERGED,https://github.com/circleci/circleci-docs/pull/9830
+22,circleci-docs,10298,PIPE-5421: Document Release serial group button and View job button in new pipelines UI,SashaLsnko,8,1,MERGED,https://github.com/circleci/circleci-docs/pull/10298
+23,circleci-docs,9634,Create a page to explain how to find ids,yaningo,7,1,MERGED,https://github.com/circleci/circleci-docs/pull/9634
+24,circleci-docs,10469,[DR-520] docs: flat release-job validation config reference,avalcepina,6,1,OPEN,https://github.com/circleci/circleci-docs/pull/10469
+25,circleci-docs,10482,[ONP-949] - Add documentation for overriding the default entrypoint,imlogang,6,1,MERGED,https://github.com/circleci/circleci-docs/pull/10482
+26,circleci-docs,9804,ONPREM-2442 | Access Nomad UI when using External Nomad Servers,atulsingh0,5,1,MERGED,https://github.com/circleci/circleci-docs/pull/9804
+27,circleci-docs,9905,Feature availability matrix,rosieyohannan,5,1,MERGED,https://github.com/circleci/circleci-docs/pull/9905
+28,circleci-docs,9611,Document new checkout method key,anthony-j-castro,5,1,MERGED,https://github.com/circleci/circleci-docs/pull/9611
+29,circleci-docs,10429,Update intelligent-summaries.adoc,pangomari,4,2,MERGED,https://github.com/circleci/circleci-docs/pull/10429
+30,circleci-docs,9778,Revise MFA documentation for clarity and completeness,rowantomas,4,1,OPEN,https://github.com/circleci/circleci-docs/pull/9778
+31,circleci-docs,10418,Weekly email digest section for Chunk,luisejroblesci,4,1,MERGED,https://github.com/circleci/circleci-docs/pull/10418
+32,circleci-docs,10416,Update Smarter Testing documentation,jvincent42,4,1,MERGED,https://github.com/circleci/circleci-docs/pull/10416
+33,circleci-docs,10045,docs: document 13 additional pipeline values,BeFunes,4,1,MERGED,https://github.com/circleci/circleci-docs/pull/10045
+34,circleci-docs,9872,server: add 4.9.x to end-of-support table,marcospereira-circleci,4,1,MERGED,https://github.com/circleci/circleci-docs/pull/9872
+35,circleci-docs,10305,Add docker gen2,kevintse328,4,1,MERGED,https://github.com/circleci/circleci-docs/pull/10305
+36,circleci-docs,9934,Update guidance on running multiple test suites,mseong6251,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9934
+37,circleci-docs,9936,Create manage-budgets.adoc,nathanfishcircleci,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9936
+38,circleci-docs,10104,ONPREM-2661 | Replaced minio with seaweedFS in server-4.9 docs,atulsingh0,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/10104
+39,circleci-docs,10376,Update OIDC docs: project-id claim and IAM policy guidance [CIAM-34],lavin-ds,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/10376
+40,circleci-docs,10262,Ben/typos orchestration section,benNew89,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/10262
+41,circleci-docs,9757,TEST-52 Add impact-key to the adaptive testing docs,liamclarkedev,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9757
+42,circleci-docs,10219,Typos found in the 'Migrate to CircleCI' section of the docs,benNew89,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/10219
+43,circleci-docs,10173,Add Machine Gen2 table to Linux VM docs,kevintse328,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/10173
+44,circleci-docs,10420,TEST-160 Update dynamic test splitting docs,liamclarkedev,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/10420
+45,circleci-docs,9741,[Fix flaky tests ] - Replace contact email with Canny board link,luisejroblesci,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9741
+46,circleci-docs,10055,Dlc purge methods documentation,rrakin,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/10055
+47,circleci-docs,9573,REL-4233: Add warning about release agent compatibility in deploy markers docs,sds0307,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9573
+48,circleci-docs,9701,Document caveat for PR event-related pipeline values,yaningo,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9701
+49,circleci-docs,9776,[ONPREM-2564] - Add docs on how to go from 4.4 to 7.0,imlogang,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9776
+50,circleci-docs,9852,[DOCSS-1995] Clarify workflow when clause template variable limitation,nanophate,3,1,MERGED,https://github.com/circleci/circleci-docs/pull/9852
+51,circleci-docs,9838,Chunk docs updates,rosieyohannan,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/9838
+52,circleci-docs,10419,NOT-859 change from pipelines to project setup,rasheeda-cci,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10419
+53,circleci-docs,10027,Chunk AWS Bedrock support,luisejroblesci,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10027
+54,circleci-docs,10005,TEST-120 Update Smarter Testing docs to use test plugins when possible,gordonsyme,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10005
+55,circleci-docs,9645,Documenting status-agnostic job dependency,yaningo,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/9645
+56,circleci-docs,10312,Typos - Runner Execution section,benNew89,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10312
+57,circleci-docs,9532,Add docs for automatic step reruns,rosieyohannan,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/9532
+58,circleci-docs,10162,TEST-162 note when setting up test impact analysis is finished,gordonsyme,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10162
+59,circleci-docs,9996,Add GitHub App configuration guide for GHES,BeFunes,2,1,CLOSED,https://github.com/circleci/circleci-docs/pull/9996
+60,circleci-docs,9708,Create adaptive-testing.adoc,nathanfishcircleci,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/9708
+61,circleci-docs,10131,Add GitHub Enterprise Server (Preview) integration docs,BeFunes,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10131
+62,circleci-docs,9746,Update enable-checks.adoc,HennaAbbas,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/9746
+63,circleci-docs,10166,Updating Xcode policy,kevintse328,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10166
+64,circleci-docs,10031,More Chunk entrypoints in CCI UI,luisejroblesci,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/10031
+65,circleci-docs,9931,Update instructions for running circleci testsuite CLI,mseong6251,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/9931
+66,circleci-docs,9756,[ONPREM-2719] Point server 4.8 upgrade steps to newest server-terraform patch,christian-stephen,2,1,MERGED,https://github.com/circleci/circleci-docs/pull/9756
+67,circleci-docs,10431,Typos - Plans Pricing section,benNew89,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10431
+68,circleci-docs,10087,[DOCSS-2014] Add gcp_auth to Docker executor config reference,nanophate,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10087
+69,circleci-docs,9798,adding client block to values.yaml,soulchips,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9798
+70,circleci-docs,9865,Update reference from 'Manage deploys' to 'Manage releases',felixshiftellecon,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9865
+71,circleci-docs,10152,Add reo.dev snippet to head scripts,kevin-adoboe,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10152
+72,circleci-docs,10004,SC-2942: Add pushes-to-merge-queues to GitHub trigger event options,GaborGyorgy,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10004
+73,circleci-docs,9601,document pipeline value pipeline.event.github.pull_request.merged,BeFunes,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9601
+74,circleci-docs,10354,Typos - Security Section,benNew89,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10354
+75,circleci-docs,10145,server: expand on release/support policy to make it clearer,marcospereira-circleci,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10145
+76,circleci-docs,10156,Updating caching advice,kevintse328,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10156
+77,circleci-docs,9873,mongo 4.4 is required for server 4.9,soulchips,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9873
+78,circleci-docs,10404,Typos -  Developer Toolkit section,benNew89,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10404
+79,circleci-docs,10170,Update users-organizations-and-integrations-guide.adoc,BeFunes,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10170
+80,circleci-docs,10046,Ben/typo update,benNew89,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10046
+81,circleci-docs,9774,Refine adaptive testing documentation,mseong6251,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9774
+82,circleci-docs,9805,Update notifications.adoc,HennaAbbas,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9805
+83,circleci-docs,9797,adding client block to values.yaml,soulchips,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9797
+84,circleci-docs,10367,CIAM-106: Update API docs to mention bearer authentication support,magarpratik,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10367
+85,circleci-docs,10006,Update audit log fields table to match enriched event schema,HennaAbbas,1,1,OPEN,https://github.com/circleci/circleci-docs/pull/10006
+86,circleci-docs,10451,docs: align release agent supported versions with chart 1.6.2,avalcepina,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10451
+87,circleci-docs,10043,docs: deprecate pipeline.trigger_parameters.circleci.* and github_app.* values,BeFunes,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10043
+88,circleci-docs,9623,Update scheduled-pipelines.adoc,BeFunes,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9623
+89,circleci-docs,10296,Add full-test-run-paths and test-selection-rules to TIA docs,liamclarkedev,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/10296
+90,circleci-docs,9959,Update documentation for test impact analysis setup,mseong6251,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9959
+91,circleci-docs,9718,Adding `executor` key to job reference table (DOCSS-1956),yaningo,1,1,MERGED,https://github.com/circleci/circleci-docs/pull/9718
