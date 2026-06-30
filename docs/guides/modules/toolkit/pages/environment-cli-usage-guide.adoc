@@ -15,7 +15,7 @@ This reference guide covers some basic information about the CircleCI task-agent
 
 == CLI differentiation
 
-The environment CLI is different from the xref:local-cli.adoc[CircleCI local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
+The environment CLI is different from the xref:local-cli.adoc[CircleCI Local CLI] tool that you may already know. Understanding the difference between these two CLI interfaces is essential for effective usage during your build processes.
 
 The CircleCI environment CLI:: A specialized command-line interface. The environment CLI retrieves and configures a task before managing the execution of the job within a chosen compute environment. The environment CLI is available for use in your CI/CD pipelines.
 
@@ -92,7 +92,7 @@ Output:
 }
 ----
 
-For more information on using the `env` command, see the xref:security:env-vars.adoc#environment-variable-substitution[Introduction to environment variables] page.
+For more information on using the `env` command, see the xref:security:env-vars.adoc#environment-variable-substitution[Introduction to Environment Variables] page.
 
 === Run
 
@@ -102,7 +102,7 @@ Invokes a task-agent subcommand by name.
 
 A subcommand of `run`. The `circleci run oidc` command runs authentication using OIDC.
 
-For more information, including an example, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims] page.
+For more information, including an example, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect Tokens With Custom Claims] page.
 
 ==== Release
 
@@ -123,7 +123,7 @@ A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 | Flag | Description
 
 | `deploy-name`
-| An arbitrary positional argument that is used to identify the deployment. This should be unique within the workflow.
+| An arbitrary positional argument that is used to identify the deployment. This must be unique within the workflow.
 
 | `environment-name`
 | Sets the target environment. If the specified environment does not exist, it will be created. If you do not specify an environment, CircleCI will create one named default.
@@ -132,7 +132,7 @@ A _planned_ deployment is displayed in the Deploys UI with `pending` status.
 | Sets the name that will be displayed in the UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
 
 | `target-version`
-| Should match the version being deployed.
+| Matches the version being deployed.
 
 | `namespace`
 | Optional flag to use a namespace value other than default.
@@ -154,11 +154,11 @@ jobs:
             circleci run release plan <deploy-name> --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name> --namespace=<some-namespace>
 ----
 
-For more information on using the `circleci run release plan` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+For more information on using the `circleci run release plan` command, see the xref:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page.
 
 ==== Update
 
-WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:deploy:release-agent-overview.adoc[release agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
+WARNING: The `circleci run release update` command is only for use with deploy markers. If you are using the CircleCI xref:deploy:release-agent-overview.adoc[Release Agent] for Kubernetes deployments, do NOT use the `update` commands. The release agent automatically handles status updates for you.
 
 A subcommand of `release`. Use the `circleci run release update` command to update the status of the deployment.
 
@@ -190,7 +190,7 @@ jobs:
             circleci run release update <deploy-name> --status=running
 ----
 
-For more information on using the `circleci run release update` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+For more information on using the `circleci run release update` command, see the xref:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page.
 
 ==== Log
 
@@ -211,7 +211,7 @@ A subcommand of `release`. The `circleci run release log` command allows you to 
 | Sets the name to display in the UI. If you do not already have a component in your project a new one will be created with the name of the project. This will be set as the component that is being deployed.
 
 | `target-version`
-| Should match the version you are deploying.
+| Matches the version you are deploying.
 
 | `namespace`
 | Optional flag to use a namespace value other than default.
@@ -233,7 +233,7 @@ jobs:
             circleci run release log --environment-name=<some-environment-name> --component-name=<some-component-name> --target-version=<some-version-name>
 ----
 
-For more information on using the `circleci run release log` command, see the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page.
+For more information on using the `circleci run release log` command, see the xref:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page.
 
 === Task
 
@@ -255,7 +255,7 @@ circleci step halt
 
 === Tests
 
-Collect and split tests so they can run in parallel. For full details of splitting and running tests using the environment CLI, see the xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI environment CLI to split tests] page.
+Collect and split tests so they can run in parallel. For full details of splitting and running tests using the environment CLI, see the xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI Environment CLI to Split Tests] page.
 
 ==== Split
 
@@ -409,8 +409,8 @@ jobs:
 
 *More information on using the `tests` command*:
 
-* xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[Guide to Test splitting and parallelism]
-* xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to split tests]
+* xref:optimize:parallelism-faster-jobs.adoc#how-test-splitting-works[Guide to Test Splitting and Parallelism]
+* xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to Split Tests]
 
 === Version
 
