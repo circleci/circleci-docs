@@ -35,6 +35,7 @@
       componentExplorerNav: document.querySelector('header [data-component-explorer-nav]'),
       searchContainer: document.querySelector('header [data-search-results-container]'),
       mobileSearchContainer: document.querySelector('[data-page-navigation] [data-search-results-container]'),
+      mobileAskAiButton: document.querySelector('[data-page-navigation] [data-ask-ai-button]'),
       navigation: document.querySelector('[data-page-navigation]'),
       leftSideNav: document.querySelector('[data-left-side-nav-container]'),
       goToAppMobileButton: document.querySelector('[data-go-to-app-mobile]'),
@@ -523,6 +524,11 @@
         elements.searchInput.value = query
       }
 
+      // Hide Ask AI button on mobile while typing to give search more space
+      if (elements.mobileAskAiButton) {
+        elements.mobileAskAiButton.classList.toggle('hidden', query.length > 0)
+      }
+
       // Update keyboard shortcut visibility based on input value
       updateKeyboardShortcutVisibility()
 
@@ -682,6 +688,7 @@
       elements.clearButton.classList.add('hidden')
 
       hideMobileSearchResults()
+      if (elements.mobileAskAiButton) elements.mobileAskAiButton.classList.remove('hidden')
 
       // Show keyboard shortcut since input is empty
       updateKeyboardShortcutVisibility()
