@@ -1,0 +1,345 @@
+= CLI command migration guide
+:page-platform: Cloud, Server v4+
+:page-description: A mapping of legacy CircleCI CLI commands to their equivalents in CircleCI CLI v1.
+:experimental:
+
+This page maps legacy CircleCI CLI commands to their equivalents in the new link:https://cli.circleci.com/[CircleCI CLI v1]. Use it as a reference when updating scripts or workflows that use the legacy CLI.
+
+Some legacy commands have been removed in v1. Where a command has no v1 equivalent, this is noted in the table.
+
+[#config]
+== Config
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Validate a config file
+| `circleci config validate <path-to-config.yml>`
+| `circleci config validate`
+
+| Pack a multi-file config into a single YAML
+| `circleci config pack <path>`
+| `circleci config pack <path>`
+
+| Process and expand a config file
+| `circleci config process <path-to-config.yml>`
+| `circleci config process <path>`
+
+| Generate a config from a repository scan
+| No equivalent
+| `circleci config generate [path]`
+|===
+--
+
+[#local-execution]
+== Local job execution
+
+[NOTE]
+====
+Local job execution with `circleci local execute` and `circleci build` has been removed in CLI v1. These commands ran jobs locally in Docker and are no longer supported.
+====
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Run a job locally in Docker
+| `circleci local execute <job-name>`
+| Not available in v1
+
+| Process a v2.1 config then run a job locally
+| `circleci config process .circleci/config.yml > process.yml` +
+`circleci local execute -c process.yml <job-name>`
+| Not available in v1
+|===
+--
+
+[#pipelines-and-runs]
+== Pipelines and runs
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Create a pipeline definition
+| `circleci pipeline create <project-id>`
+| `circleci pipeline create --name <name>`
+
+| List pipeline definitions
+| `circleci pipeline list <project-id>`
+| `circleci pipeline list`
+
+| Trigger a pipeline run
+| `circleci pipeline run <org-id> <project-id>`
+| `circleci run trigger`
+
+| Create a project trigger
+| `circleci trigger create <project-id>`
+| `circleci project trigger create`
+
+| List recent runs
+| No equivalent
+| `circleci run list`
+
+| Watch a run until completion
+| No equivalent
+| `circleci run watch [<run-id>]`
+
+| Cancel a run
+| No equivalent
+| `circleci run cancel <run-number-or-id>`
+
+| Rerun a workflow
+| No equivalent
+| `circleci workflow rerun <workflow-id>`
+
+| Rerun a workflow from failed
+| No equivalent
+| `circleci workflow rerun <workflow-id> --from-failed`
+|===
+--
+
+[#jobs-and-artifacts]
+== Jobs and artifacts
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| List or download artifacts for a job
+| No equivalent
+| `circleci artifact <job-id>`
+
+| Get job details
+| No equivalent
+| `circleci job get <job-id>`
+
+| Get job step output
+| No equivalent
+| `circleci job output get <job-id>`
+
+| Open a job in the browser
+| No equivalent
+| `circleci job open <job-id>`
+|===
+--
+
+[#orbs]
+== Orbs
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Initialize an orb project
+| `circleci orb init`
+| Not available in v1
+
+| Pack a multi-file orb into a single YAML
+| `circleci orb pack`
+| `circleci orb pack <path>`
+
+| Validate an orb
+| `circleci orb validate <path-to-orb.yml>`
+| `circleci orb validate <path>`
+
+| Reserve an orb name
+| `circleci orb create <namespace>/<orb>`
+| `circleci orb create <namespace>/<orb>`
+
+| List orbs in the registry
+| `circleci orb list [<namespace>]`
+| `circleci orb list [<namespace>]`
+
+| Publish a new orb version
+| `circleci orb publish increment <path> <ns>/<orb> --bump major\|minor\|patch`
+| `circleci orb publish increment <path> <ns>/<orb> --bump major\|minor\|patch`
+
+| Promote a dev orb to a stable version
+| `circleci orb publish promote <ns>/<orb>@dev:<label> --bump major\|minor\|patch`
+| `circleci orb publish promote <ns>/<orb>@dev:<label> --bump major\|minor\|patch`
+|===
+--
+
+[#contexts]
+== Contexts
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Create a context
+| `circleci context create --org-id <org-id> <context-name>`
+| `circleci context create <name> --org <org>`
+
+| Delete a context
+| `circleci context delete`
+| `circleci context delete <id\|name>`
+
+| List all contexts
+| `circleci context list`
+| `circleci context list`
+
+| View a context
+| `circleci context show`
+| `circleci context get <id\|name>`
+
+| Store an environment variable in a context
+| `circleci context store-secret`
+| `circleci context secret set --name <name> --value <value>`
+
+| Remove an environment variable from a context
+| `circleci context remove-secret`
+| `circleci context secret delete --name <name>`
+
+| List environment variables in a context
+| No equivalent
+| `circleci context secret list <id\|name>`
+|===
+--
+
+[#environment-variables]
+== Project environment variables
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Set a project environment variable
+| `circleci project secret create <vcs-type> <org-id> <project-id> <env-name>`
+| `circleci envvar set <name> <value>`
+
+| List project environment variables
+| `circleci project secret list <vcs-type> <org-id> <project-id>`
+| `circleci envvar list`
+
+| Delete a project environment variable
+| No equivalent
+| `circleci envvar delete <name>`
+|===
+--
+
+[#projects]
+== Projects
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Create a project
+| `circleci project create <vcs-type> <org-id>`
+| `circleci project create [name] --org <slug>`
+
+| Purge Docker layer cache for a project
+| `circleci dlc purge <vcs-type> <org-id> <project-id>`
+| `circleci dlc purge --project <slug>`
+|===
+--
+
+[#runners]
+== Self-hosted runners
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| List runner instances
+| `circleci runner instance list <namespace>`
+| `circleci runner instance list --namespace <namespace>`
+
+| Create a resource class
+| `circleci runner instance create <namespace/resource-class> <description>`
+| `circleci runner resource-class create <namespace>/<name> --description <desc>`
+
+| Delete a resource class
+| `circleci runner resource-class delete <namespace/resource-class>`
+| `circleci runner resource-class delete <namespace>/<name>`
+
+| List resource classes
+| `circleci runner resource-class list <namespace>`
+| `circleci runner resource-class list --namespace <namespace>`
+
+| Create a runner token
+| `circleci runner token create <namespace/resource-class> <nickname>`
+| `circleci runner token create <resource-class> --nickname <nickname>`
+
+| List runner tokens
+| `circleci runner token list <namespace/resource-class>`
+| `circleci runner token list --resource-class <resource-class>`
+
+| Delete a runner token
+| `circleci runner token delete <token-id>`
+| `circleci runner token delete <token-id>`
+|===
+--
+
+[#policy]
+== Config policy management
+
+[NOTE]
+====
+The `--owner-id` flag used in legacy policy commands has been renamed to `--org` in CLI v1.
+====
+
+[.table-scroll]
+--
+[cols="2,3,3", options="header"]
+|===
+| Task | Legacy command | CLI v1 command
+
+| Evaluate a config against policies
+| `circleci policy decide <path> --input <path>`
+| `circleci policy decide --input <path> --org <org>`
+
+| Compare local and remote policy bundles
+| `circleci policy diff <path>`
+| `circleci policy diff <path> --org <org>`
+
+| Run a raw OPA evaluation locally
+| `circleci policy eval <path> --input <path>`
+| Not available in v1
+
+| Fetch a policy bundle
+| `circleci policy fetch [name] --owner-id <org-id>`
+| `circleci policy fetch [name] --org <org>`
+
+| Get policy decision logs
+| `circleci policy logs [name] --owner-id <org-id>`
+| `circleci policy logs [name] --org <org>`
+
+| Push a policy bundle
+| `circleci policy push <path>`
+| `circleci policy push <path> --org <org>`
+
+| Read policy settings
+| `circleci policy settings --owner-id <org-id>`
+| `circleci policy settings get --org <org>`
+
+| Update policy settings
+| `circleci policy settings --owner-id <org-id> --enable <true\|false>`
+| `circleci policy settings set --org <org> --enabled`
+
+| Test policies
+| `circleci policy test <path>`
+| Not available in v1
+|===
+--

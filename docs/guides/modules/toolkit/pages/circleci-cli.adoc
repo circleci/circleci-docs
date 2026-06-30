@@ -1,0 +1,55 @@
+= The CircleCI CLI
+:page-platform: Cloud, Server v4+
+:page-description: A guide to the CircleCI CLI with links to setup guides, a ful reference and how-to guides for common tasks.
+:experimental:
+:page-aliases: local-cli.adoc
+
+The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
+
+Some of the things you can do with the CLI include:
+
+* Validate, pack, and process your CircleCI config.
+* Trigger, monitor, and cancel pipeline runs.
+* Inspect jobs, workflows, and retrieve artifacts.
+* Manage contexts and project environment variables.
+* Create, publish, and manage orbs.
+* Manage self-hosted runners and namespaces.
+* Enforce security policies across your organization.
+* Track component versions and deployments.
+
+== Install, configure, and use the CircleCI CLI
+
+For full details on how to install, configure, and use the CircleCI CLI, see the link:https://cli.circleci.com/[CircleCI CLI] page.
+
+To update or uninstall the CircleCI CLI, use the appropriate method for your package manager.
+
+== Explaining CircleCI's CLI offerings
+
+The CircleCI CLI:: The development tool used on your local machine for day-to-day development tasks. It handles testing and local workflow management.
+
+The CircleCI environment CLI:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
+
+The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+
+== Quickstart
+
+#step by step setup followed by a couple of useful commands#
+
+[#telemetry]
+== Telemetry
+
+#TBC#
+
+== The CLI reference
+
+You can find the full CircleCI CLI reference at link:https://cli.circleci.com/reference/[CircleCI CLI reference].
+
+You can find the same reference information in your terminal #insert how with a couple of examples#
+
+== Share feedback
+
+If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
+
+== Next steps
+
+#Add links to how-to pages#
