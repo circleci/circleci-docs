@@ -195,17 +195,6 @@ workflows:
 
 In this example, the jobs `test` and `deploy` are restricted, and `deploy` will only run if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` will run, then the `hold` job will run, which will present a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the project, but the `deploy` job will fail as `unauthorized` if the approver is not part of the restricted context security group.
 
-[#delete-a-context]
-=== Delete a context
-
-If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task. To delete a context, follow the steps below:
-
-. Navigate to the menu:Org[Contexts] in the CircleCI web app.
-. Select the *X* icon in the row of the context you want to delete. A confirmation dialog box will appear.
-. Type "DELETE" in the field and then select *Delete Context*. The context and all associated environment variables will be deleted.
-
-NOTE: If a _deleted_ context is used in a job, the job will fail and show an error.
-
 [#security-group-restrictions]
 == Security group restrictions
 
@@ -512,30 +501,35 @@ where the values are:
 .. `false`
 . The result is `false`.
 
-[#context-management-with-the-cli]
-== Context management with the CLI
+[#delete-a-context]
+== Delete a context
 
-NOTE: Before using the CLI, ensure you have configured the CLI with a token. See the xref:toolkit:local-cli.adoc#configure-the-cli[Local CLI] page for more information.
+To delete a context, follow the steps below:
 
-You can use the link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI] to manage contexts, as an alternative to the web app and the API. With the CLI, you can execute several link:https://circleci-public.github.io/circleci-cli/circleci_context.html[context-oriented commands].
+NOTE: If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task.
 
-* `create` - Create a new context.
-* `delete` - Delete a named context.
-* `list` - List all contexts.
-* `remove-secret` - Remove an environment variable from the named context.
-* `show` - Show a context.
-* `store-secret` - Store a new environment variable in the named context.
-
-The above list are "sub-commands" in the CLI, which would be executed like so:
+[tabs]
+====
+CLI::
++
+--
+Run the following command, replacing `<context-name>` with the name or ID of the context you want to delete. You can use `circleci context list` to find the name or ID of the context:
 
 [,shell]
 ----
-circleci context create --org-id <org-id> <context-name> [flags]
+circleci context delete <context-name>
 ----
+--
+Web app::
++
+--
+. Navigate to the menu:Org[Contexts] in the CircleCI web app.
+. Select the *X* icon in the row of the context you want to delete. A confirmation dialog box will appear.
+. Type "DELETE" in the field and then select *Delete Context*. The context and all associated environment variables will be deleted.
+--
+====
 
-Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
-
-include::ROOT:partial$notes/find-organization-id.adoc[]
+If a _deleted_ context is used in a job, the job will fail and show an error.
 
 [#environment-variable-usage]
 == Environment variable usage
