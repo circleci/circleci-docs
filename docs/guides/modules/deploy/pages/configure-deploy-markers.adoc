@@ -49,9 +49,9 @@ You can set up deploy markers for a single project or for multiple projects at o
 * Your code must be stored in a *GitHub* repository.
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
-* Organization admin permissions in CircleCI (required for multi-project setup).
 * The GitHub App installed in your organization. If not installed, the setup process prompts you to install it.
 * AI features enabled for your organization (required for AI-based generation). See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps. If AI features are not enabled, you are presented with a configuration template instead of AI-generated configuration. You can copy the template and use it to update your configuration files manually.
+include::ROOT:partial$prerequisites/organization-admin.adoc[]
 
 === 1. Start the setup
 

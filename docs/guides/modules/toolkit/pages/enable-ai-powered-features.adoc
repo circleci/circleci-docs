@@ -8,7 +8,7 @@ Enable AI-powered convenience features in your CircleCI organization to access t
 
 == Prerequisites
 
-You must have organization administrator permissions to enable AI-powered features.
+include::ROOT:partial$prerequisites/organization-admin.adoc[]
 
 == Enable AI-powered features
 
