@@ -129,6 +129,10 @@ circleci help formatting
 circleci help reference
 ----
 
+== Migration from the legacy CLI
+
+To help you migrate from the legacy CLI to the CircleCI CLI v1, see the xref:toolkit:cli-migration-guide.adoc[CLI Migration Guide].
+
 == Share feedback
 
 If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.

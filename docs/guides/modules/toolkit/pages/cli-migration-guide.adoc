@@ -7,30 +7,84 @@ This page maps legacy CircleCI CLI commands to their equivalents in the new link
 
 Some legacy commands have been removed in v1. Where a command has no v1 equivalent, this is noted in the table.
 
+[#terminology-changes]
+== Terminology changes
+
+CLI v1 reflects updated CircleCI terminology that resolves longstanding ambiguity in the word "pipeline". Two terms have changed meaning in ways that affect command names directly.
+
+[.table-scroll]
+--
+[cols="1,1,2", options="header"]
+|===
+| Legacy | New | Definition
+
+| Pipeline definition
+| Pipeline
+| A definition that specifies where your CircleCI configuration is stored and where your code is checked out from. A trigger references a pipeline and uses it when initiating a run.
+
+| Pipeline
+| Run
+| The instance produced when an event matches a trigger. A run records the outcome of the attempt and groups any workflows that executed, including errors that occurred before workflows could start.
+|===
+--
+
+As a result, commands that previously used `pipeline` to refer to a triggered execution now use `run`. For example, `circleci pipeline run` in the legacy CLI becomes `circleci run trigger` in v1, and commands for listing, watching, and cancelling triggered executions all live under `circleci run` rather than `circleci pipeline`.
+
+[#new-in-v1]
+== New in CLI v1
+
+The following capabilities are new in CLI v1 and have no equivalent in the legacy CLI.
+
+*Config*
+
+* *Generate a config from a repository scan* — `circleci config generate [path]`
+
+*Pipeline runs*
+
+* *List recent runs* — `circleci run list`
+* *Watch a run until completion* — `circleci run watch [<run-id>]`
+* *Cancel a run* — `circleci run cancel <run-number-or-id>`
+* *Rerun a workflow* — `circleci workflow rerun <workflow-id>`
+* *Rerun a workflow from the first failed job* — `circleci workflow rerun <workflow-id> --from-failed`
+
+*Jobs and artifacts*
+
+* *List or download job artifacts* — `circleci artifact <job-id>`
+* *Get job details* — `circleci job get <job-id>`
+* *Get job step output* — `circleci job output get <job-id>`
+* *Open a job in the browser* — `circleci job open <job-id>`
+
+*Contexts*
+
+* *List environment variables in a context* — `circleci context secret list <id|name>`
+
+*Project environment variables*
+
+* *Delete a project environment variable* — `circleci envvar delete <name>`
+
 [#config]
 == Config
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Validate a config file
 | `circleci config validate <path-to-config.yml>`
 | `circleci config validate`
+| Unchanged
 
 | Pack a multi-file config into a single YAML
 | `circleci config pack <path>`
 | `circleci config pack <path>`
+| Unchanged
 
 | Process and expand a config file
 | `circleci config process <path-to-config.yml>`
 | `circleci config process <path>`
-
-| Generate a config from a repository scan
-| No equivalent
-| `circleci config generate [path]`
+| Unchanged
 |===
 --
 
@@ -44,18 +98,20 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Run a job locally in Docker
 | `circleci local execute <job-name>`
 | Not available in v1
+|
 
 | Process a v2.1 config then run a job locally
 | `circleci config process .circleci/config.yml > process.yml` +
 `circleci local execute -c process.yml <job-name>`
 | Not available in v1
+|
 |===
 --
 
@@ -64,72 +120,29 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Create a pipeline definition
 | `circleci pipeline create <project-id>`
 | `circleci pipeline create --name <name>`
+|
 
 | List pipeline definitions
 | `circleci pipeline list <project-id>`
 | `circleci pipeline list`
+|
 
 | Trigger a pipeline run
 | `circleci pipeline run <org-id> <project-id>`
 | `circleci run trigger`
+|
 
 | Create a project trigger
 | `circleci trigger create <project-id>`
 | `circleci project trigger create`
-
-| List recent runs
-| No equivalent
-| `circleci run list`
-
-| Watch a run until completion
-| No equivalent
-| `circleci run watch [<run-id>]`
-
-| Cancel a run
-| No equivalent
-| `circleci run cancel <run-number-or-id>`
-
-| Rerun a workflow
-| No equivalent
-| `circleci workflow rerun <workflow-id>`
-
-| Rerun a workflow from failed
-| No equivalent
-| `circleci workflow rerun <workflow-id> --from-failed`
-|===
---
-
-[#jobs-and-artifacts]
-== Jobs and artifacts
-
-[.table-scroll]
---
-[cols="2,3,3", options="header"]
-|===
-| Task | Legacy command | CLI v1 command
-
-| List or download artifacts for a job
-| No equivalent
-| `circleci artifact <job-id>`
-
-| Get job details
-| No equivalent
-| `circleci job get <job-id>`
-
-| Get job step output
-| No equivalent
-| `circleci job output get <job-id>`
-
-| Open a job in the browser
-| No equivalent
-| `circleci job open <job-id>`
+|
 |===
 --
 
@@ -138,37 +151,44 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Initialize an orb project
 | `circleci orb init`
 | Not available in v1
+|
 
 | Pack a multi-file orb into a single YAML
 | `circleci orb pack`
 | `circleci orb pack <path>`
+|
 
 | Validate an orb
 | `circleci orb validate <path-to-orb.yml>`
 | `circleci orb validate <path>`
+| Unchanged
 
 | Reserve an orb name
 | `circleci orb create <namespace>/<orb>`
 | `circleci orb create <namespace>/<orb>`
+| Unchanged
 
 | List orbs in the registry
 | `circleci orb list [<namespace>]`
 | `circleci orb list [<namespace>]`
+| Unchanged
 
 | Publish a new orb version
 | `circleci orb publish increment <path> <ns>/<orb> --bump major\|minor\|patch`
 | `circleci orb publish increment <path> <ns>/<orb> --bump major\|minor\|patch`
+| Unchanged
 
 | Promote a dev orb to a stable version
 | `circleci orb publish promote <ns>/<orb>@dev:<label> --bump major\|minor\|patch`
 | `circleci orb publish promote <ns>/<orb>@dev:<label> --bump major\|minor\|patch`
+| Unchanged
 |===
 --
 
@@ -177,37 +197,39 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Create a context
 | `circleci context create --org-id <org-id> <context-name>`
 | `circleci context create <name> --org <org>`
+|
 
 | Delete a context
 | `circleci context delete`
 | `circleci context delete <id\|name>`
+|
 
 | List all contexts
 | `circleci context list`
 | `circleci context list`
+| Unchanged
 
 | View a context
 | `circleci context show`
 | `circleci context get <id\|name>`
+|
 
 | Store an environment variable in a context
 | `circleci context store-secret`
 | `circleci context secret set --name <name> --value <value>`
+|
 
 | Remove an environment variable from a context
 | `circleci context remove-secret`
 | `circleci context secret delete --name <name>`
-
-| List environment variables in a context
-| No equivalent
-| `circleci context secret list <id\|name>`
+|
 |===
 --
 
@@ -216,21 +238,19 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Set a project environment variable
 | `circleci project secret create <vcs-type> <org-id> <project-id> <env-name>`
 | `circleci envvar set <name> <value>`
+|
 
 | List project environment variables
 | `circleci project secret list <vcs-type> <org-id> <project-id>`
 | `circleci envvar list`
-
-| Delete a project environment variable
-| No equivalent
-| `circleci envvar delete <name>`
+|
 |===
 --
 
@@ -239,17 +259,19 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Create a project
 | `circleci project create <vcs-type> <org-id>`
 | `circleci project create [name] --org <slug>`
+|
 
 | Purge Docker layer cache for a project
 | `circleci dlc purge <vcs-type> <org-id> <project-id>`
 | `circleci dlc purge --project <slug>`
+|
 |===
 --
 
@@ -258,37 +280,44 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | List runner instances
 | `circleci runner instance list <namespace>`
 | `circleci runner instance list --namespace <namespace>`
+|
 
 | Create a resource class
 | `circleci runner instance create <namespace/resource-class> <description>`
 | `circleci runner resource-class create <namespace>/<name> --description <desc>`
+|
 
 | Delete a resource class
 | `circleci runner resource-class delete <namespace/resource-class>`
 | `circleci runner resource-class delete <namespace>/<name>`
+| Unchanged
 
 | List resource classes
 | `circleci runner resource-class list <namespace>`
 | `circleci runner resource-class list --namespace <namespace>`
+|
 
 | Create a runner token
 | `circleci runner token create <namespace/resource-class> <nickname>`
 | `circleci runner token create <resource-class> --nickname <nickname>`
+|
 
 | List runner tokens
 | `circleci runner token list <namespace/resource-class>`
 | `circleci runner token list --resource-class <resource-class>`
+|
 
 | Delete a runner token
 | `circleci runner token delete <token-id>`
 | `circleci runner token delete <token-id>`
+| Unchanged
 |===
 --
 
@@ -302,44 +331,53 @@ The `--owner-id` flag used in legacy policy commands has been renamed to `--org`
 
 [.table-scroll]
 --
-[cols="2,3,3", options="header"]
+[cols="2,3,3,1", options="header"]
 |===
-| Task | Legacy command | CLI v1 command
+| Task | Legacy command | CLI v1 command | Notes
 
 | Evaluate a config against policies
 | `circleci policy decide <path> --input <path>`
 | `circleci policy decide --input <path> --org <org>`
+|
 
 | Compare local and remote policy bundles
 | `circleci policy diff <path>`
 | `circleci policy diff <path> --org <org>`
+|
 
 | Run a raw OPA evaluation locally
 | `circleci policy eval <path> --input <path>`
 | Not available in v1
+|
 
 | Fetch a policy bundle
 | `circleci policy fetch [name] --owner-id <org-id>`
 | `circleci policy fetch [name] --org <org>`
+|
 
 | Get policy decision logs
 | `circleci policy logs [name] --owner-id <org-id>`
 | `circleci policy logs [name] --org <org>`
+|
 
 | Push a policy bundle
 | `circleci policy push <path>`
 | `circleci policy push <path> --org <org>`
+|
 
 | Read policy settings
 | `circleci policy settings --owner-id <org-id>`
 | `circleci policy settings get --org <org>`
+|
 
 | Update policy settings
 | `circleci policy settings --owner-id <org-id> --enable <true\|false>`
 | `circleci policy settings set --org <org> --enabled`
+|
 
 | Test policies
 | `circleci policy test <path>`
 | Not available in v1
+|
 |===
 --
