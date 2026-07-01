@@ -4,12 +4,10 @@
 :experimental:
 :page-aliases: local-cli.adoc
 
-The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
-
-Some of the things you can do with the CLI include:
+The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal. Some of the things you can do with the CLI include:
 
 * Validate, pack, and process your CircleCI config.
-* Trigger, monitor, and cancel pipeline runs.
+* Trigger, monitor, and cancel runs.
 * Inspect jobs, workflows, and retrieve artifacts.
 * Manage contexts and project environment variables.
 * Create, publish, and manage orbs.
@@ -21,7 +19,119 @@ Some of the things you can do with the CLI include:
 
 For full details on how to install, configure, and use the CircleCI CLI, see the link:https://cli.circleci.com/[CircleCI CLI] page.
 
-To update or uninstall the CircleCI CLI, use the appropriate method for your package manager.
+You can update and uninstall the CircleCI CLI using the appropriate method for your package manager.
+
+== Quickstart
+
+Follow these steps to authenticate and connect the CLI to your CircleCI project.
+
+. *Log in to CircleCI:*
++
+[,shell]
+----
+circleci auth login
+----
++
+This opens a browser window to complete authentication. Run `circleci auth me` to confirm the login succeeded.
+
+. *Navigate to your project directory:*
++
+[,shell]
+----
+cd /path/to/your/project
+----
+
+. *Link your project:*
++
+[,shell]
+----
+circleci project link
+----
++
+This writes a `.circleci/info.yml` file to your repository containing your project and organization IDs. Once linked, all project-scoped commands, such as `pipeline list`, `run list`, `envvar list`, and `artifact`, automatically resolve to the correct project without requiring a `--project` flag.
++
+[NOTE]
+====
+Running `circleci project link` is required if your organization slug starts with `circleci/` rather than `gh/` or `bb/`. Without it, the CLI falls back to deriving the project from your git remote URL, which does not work for the `circleci/` organization type and causes project-not-found errors.
+====
+
+. *Try some commands:*
++
+List your recent runs:
++
+[,shell]
+----
+circleci run list
+----
++
+Validate your CircleCI config file:
++
+[,shell]
+----
+circleci config validate
+----
+
+[#telemetry]
+== Telemetry
+
+The CLI collects usage data to help improve the tool. Telemetry is enabled by default. For each command invocation, the CLI records the command path and the flags passed, along with metadata including your CLI version, OS, and a stable per-install device ID. Telemetry is automatically disabled when `CI=true` is set in the environment.
+
+To disable telemetry permanently, run:
+
+[,shell]
+----
+circleci setting set telemetry off
+----
+
+You can also disable it for a session using any of these environment variables:
+
+* `CIRCLE_NO_TELEMETRY=1`
+* `DO_NOT_TRACK=1`
+* `NO_ANALYTICS=1`
+
+== The CLI reference
+
+You can find the full CircleCI CLI reference at link:https://cli.circleci.com/reference/[CircleCI CLI reference].
+
+You can also access reference information directly in your terminal in three ways:
+
+* Add `--help` to any command at any depth to see its description, flags, and examples: `--help`
++
+[,shell]
+----
+circleci --help
+circleci pipeline --help
+circleci pipeline list --help
+----
+
+* Use `circleci help <command>` to see the description, flags, and examples for a specific command:
++
+[,shell]
+----
+circleci help pipeline
+circleci help pipeline list
+----
+
+* Use `circleci help <topic>` to see prose reference articles on specific subjects:
++
+[,shell]
+----
+circleci help getting-started
+circleci help environment
+circleci help telemetry
+circleci help formatting
+----
+
+* The `reference` topic generates a full dump of every command and flag in the CLI at runtime:
++
+[,shell]
+----
+circleci help reference
+----
+
+== Share feedback
+
+If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
 
 == Explaining CircleCI's CLI offerings
 
@@ -30,25 +140,6 @@ The CircleCI CLI:: The development tool used on your local machine for day-to-da
 The CircleCI environment CLI:: A specialized command-line interface that retrieves and configures a task. It manages the execution of the job within a chosen compute environment.
 
 The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
-
-== Quickstart
-
-#step by step setup followed by a couple of useful commands#
-
-[#telemetry]
-== Telemetry
-
-#TBC#
-
-== The CLI reference
-
-You can find the full CircleCI CLI reference at link:https://cli.circleci.com/reference/[CircleCI CLI reference].
-
-You can find the same reference information in your terminal #insert how with a couple of examples#
-
-== Share feedback
-
-If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
 
 == Next steps
 
