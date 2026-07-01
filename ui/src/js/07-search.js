@@ -11,7 +11,7 @@
   let PAGINATION_MAX_VISIBLE_PAGES = 5
   const SEARCH_DEBOUNCE_MS = 300
   const MIN_QUERY_LENGTH = 2
-  const MOBILE_BREAKPOINT = 768 // md breakpoint (in pixels)
+  const MOBILE_BREAKPOINT = 768 // md breakpoint (in pixels) — matches when header search bar becomes visible
 
   function setupSearch () {
     // State variables
@@ -32,11 +32,13 @@
       mobileClearButton: document.querySelector('[data-page-navigation] [data-search-clear]'),
       keyboardShortcut: document.querySelector('header [data-keyboard-shortcut]'),
       mobileKeyboardShortcut: document.querySelector('[data-page-navigation] [data-keyboard-shortcut]'),
+      componentExplorerNav: document.querySelector('header [data-component-explorer-nav]'),
       searchContainer: document.querySelector('header [data-search-results-container]'),
       mobileSearchContainer: document.querySelector('[data-page-navigation] [data-search-results-container]'),
+      mobileAskAiButton: document.querySelector('[data-page-navigation] [data-ask-ai-button]'),
       navigation: document.querySelector('[data-page-navigation]'),
       leftSideNav: document.querySelector('[data-left-side-nav-container]'),
-      goToAppMobileButton: document.querySelector('[data-left-side-nav-container] + a'),
+      goToAppMobileButton: document.querySelector('[data-go-to-app-mobile]'),
       searchResultPathsContainer: null,
       mobileSearchResultPathsContainer: null,
       pathsList: null,
@@ -138,7 +140,6 @@
       setCurrentPath(componentPath ?? 'All')
       updatePathsList(componentPath ?? 'All')
       setResults(results.hits)
-      console.log('Search results:', results)
 
       // Update URL with search state (query, component, and pagination)
       if (!skipUrlUpdate) {
@@ -455,14 +456,17 @@
     function showMobileSearchResults () {
       if (!elements.mobileSearchContainer || !elements.leftSideNav) return
 
-      // Hide the navigation content
       elements.leftSideNav.classList.add('hidden')
-      elements.goToAppMobileButton.classList.add('hidden')
-
-      // Show the search results
+      if (elements.goToAppMobileButton) elements.goToAppMobileButton.classList.add('hidden')
       elements.mobileSearchContainer.classList.remove('hidden')
 
-      // Open the navigation panel if it's closed
+      elements.clearButton.classList.remove('flex')
+      elements.clearButton.classList.add('hidden')
+      if (elements.mobileClearButton) {
+        elements.mobileClearButton.classList.remove('hidden')
+        elements.mobileClearButton.classList.add('flex')
+      }
+
       if (elements.navigation.classList.contains('-translate-x-full')) {
         elements.navigation.classList.remove('-translate-x-full')
       }
@@ -471,12 +475,14 @@
     function hideMobileSearchResults () {
       if (!elements.mobileSearchContainer || !elements.leftSideNav) return
 
-      // Show the navigation content
       elements.leftSideNav.classList.remove('hidden')
-      elements.goToAppMobileButton.classList.remove('hidden')
-
-      // Hide the search results
+      if (elements.goToAppMobileButton) elements.goToAppMobileButton.classList.remove('hidden')
       elements.mobileSearchContainer.classList.add('hidden')
+
+      if (elements.mobileClearButton) {
+        elements.mobileClearButton.classList.remove('flex')
+        elements.mobileClearButton.classList.add('hidden')
+      }
     }
 
     function updateSearchUIForScreenSize () {
@@ -485,15 +491,17 @@
       // Reset UI when switching between mobile and desktop
       if (query.length >= MIN_QUERY_LENGTH) {
         if (isMobileView) {
-          // On mobile: show search in navigation panel
           elements.searchContainer.classList.add('hidden')
           elements.header.classList.remove('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.remove('hidden')
           showMobileSearchResults()
         } else {
-          // On desktop: show search in header
           hideMobileSearchResults()
           elements.searchContainer.classList.remove('hidden')
           elements.header.classList.add('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.add('hidden')
+          elements.clearButton.classList.remove('hidden')
+          elements.clearButton.classList.add('flex')
         }
       }
     }
@@ -516,24 +524,21 @@
         elements.searchInput.value = query
       }
 
+      // Hide Ask AI button on mobile while typing to give search more space
+      if (elements.mobileAskAiButton) {
+        elements.mobileAskAiButton.classList.toggle('hidden', query.length > 0)
+      }
+
       // Update keyboard shortcut visibility based on input value
       updateKeyboardShortcutVisibility()
 
       if (query.length < MIN_QUERY_LENGTH) {
-        // Hide search results in both desktop and mobile
         elements.searchContainer.classList.add('hidden')
         elements.header.classList.remove('h-dvh')
+        if (elements.componentExplorerNav) elements.componentExplorerNav.classList.remove('hidden')
         elements.clearButton.classList.remove('flex')
         elements.clearButton.classList.add('hidden')
-
-        if (elements.mobileSearchContainer) {
-          elements.mobileSearchContainer.classList.add('hidden')
-          if (elements.leftSideNav) elements.leftSideNav.classList.remove('hidden')
-          if (elements.mobileClearButton) {
-            elements.mobileClearButton.classList.remove('flex')
-            elements.mobileClearButton.classList.add('hidden')
-          }
-        }
+        hideMobileSearchResults()
         return
       }
 
@@ -541,16 +546,12 @@
         await search(query)
 
         if (isMobileView) {
-          // Mobile view: show results in navigation panel
           showMobileSearchResults()
-          if (elements.mobileClearButton) {
-            elements.mobileClearButton.classList.remove('hidden')
-            elements.mobileClearButton.classList.add('flex')
-          }
         } else {
           // Desktop view: show results in header
           elements.searchContainer.classList.remove('hidden')
           elements.header.classList.add('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.add('hidden')
           elements.clearButton.classList.remove('hidden')
           elements.clearButton.classList.add('flex')
         }
@@ -651,14 +652,6 @@
           elements.mobileSearchInput.value = queryParam
         }
 
-        // Show clear buttons
-        elements.clearButton.classList.remove('hidden')
-        elements.clearButton.classList.add('flex')
-        if (elements.mobileClearButton) {
-          elements.mobileClearButton.classList.remove('hidden')
-          elements.mobileClearButton.classList.add('flex')
-        }
-
         // Hide keyboard shortcut since input has text
         updateKeyboardShortcutVisibility()
 
@@ -671,6 +664,9 @@
         } else {
           elements.searchContainer.classList.remove('hidden')
           elements.header.classList.add('h-dvh')
+          if (elements.componentExplorerNav) elements.componentExplorerNav.classList.add('hidden')
+          elements.clearButton.classList.remove('hidden')
+          elements.clearButton.classList.add('flex')
         }
       } else {
         // No query in URL, make sure search UI is hidden
@@ -687,17 +683,12 @@
       // Hide desktop search
       elements.searchContainer.classList.add('hidden')
       elements.header.classList.remove('h-dvh')
+      if (elements.componentExplorerNav) elements.componentExplorerNav.classList.remove('hidden')
       elements.clearButton.classList.remove('flex')
       elements.clearButton.classList.add('hidden')
 
-      // Hide mobile search
-      if (elements.mobileSearchContainer) {
-        hideMobileSearchResults()
-        if (elements.mobileClearButton) {
-          elements.mobileClearButton.classList.remove('flex')
-          elements.mobileClearButton.classList.add('hidden')
-        }
-      }
+      hideMobileSearchResults()
+      if (elements.mobileAskAiButton) elements.mobileAskAiButton.classList.remove('hidden')
 
       // Show keyboard shortcut since input is empty
       updateKeyboardShortcutVisibility()
@@ -818,9 +809,6 @@
     initializeDomReferences()
     initializeKeyboardShortcut()
     initializeEventListeners()
-    readSearchStateFromUrl() // Check for query and page parameters in URL and trigger search if present
-    console.log('Search input initialized')
+    readSearchStateFromUrl()
   }
-
-  console.log('Search functionality initialized')
 })()
