@@ -2,7 +2,7 @@
 :page-platform: Cloud, Server v4+
 :page-description: A guide to the CircleCI CLI with links to setup guides, a ful reference and how-to guides for common tasks.
 :experimental:
-:page-aliases: local-cli.adoc
+:page-aliases: local-cli.adoc, how-to-use-the-circleci-local-cli.adoc
 
 The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal. Some of the things you can do with the CLI include:
 

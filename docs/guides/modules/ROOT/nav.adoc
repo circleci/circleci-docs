@@ -324,7 +324,6 @@
 ** CircleCI CLI
 *** xref:toolkit:circleci-cli.adoc[The CircleCI CLI]
 *** xref:toolkit:cli-migration-guide.adoc[CLI migration guide]
-*** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
 
 ** Chunk CLI
 *** xref:toolkit:install-and-configure-the-chunk-cli.adoc[Install and configure the Chunk CLI]

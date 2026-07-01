@@ -67,14 +67,14 @@ The following capabilities are new in CLI v1 and have no equivalent in the legac
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
 | Validate a config file
 | `circleci config validate <path-to-config.yml>`
 | `circleci config validate`
-| Unchanged
+|
 
 | Pack a multi-file config into a single YAML
 | `circleci config pack <path>`
@@ -98,7 +98,7 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -120,7 +120,7 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -151,7 +151,7 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -197,7 +197,7 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -223,12 +223,12 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 | Store an environment variable in a context
 | `circleci context store-secret`
-| `circleci context secret set --name <name> --value <value>`
+| `circleci context secret set <context-id\|name> --name <name> --value <value>`
 |
 
 | Remove an environment variable from a context
 | `circleci context remove-secret`
-| `circleci context secret delete --name <name>`
+| `circleci context secret delete <context-id\|name> --name <name>`
 |
 |===
 --
@@ -238,7 +238,7 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -259,7 +259,7 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -280,7 +280,7 @@ Local job execution with `circleci local execute` and `circleci build` has been 
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -331,7 +331,7 @@ The `--owner-id` flag used in legacy policy commands has been renamed to `--org`
 
 [.table-scroll]
 --
-[cols="2,3,3,1", options="header"]
+[.datatable,cols="2,3,3,1", options="header"]
 |===
 | Task | Legacy command | CLI v1 command | Notes
 
@@ -357,7 +357,7 @@ The `--owner-id` flag used in legacy policy commands has been renamed to `--org`
 
 | Get policy decision logs
 | `circleci policy logs [name] --owner-id <org-id>`
-| `circleci policy logs [name] --org <org>`
+| `circleci policy logs [decision-id] --org <org>`
 |
 
 | Push a policy bundle
