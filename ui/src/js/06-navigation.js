@@ -22,8 +22,10 @@
       const content = current?.nextElementSibling
       if (content) {
         content.classList.toggle('hidden')
-        const img = toggleButton.querySelector('img')
-        if (img) img.classList.toggle('-rotate-90')
+        const svg = toggleButton.querySelector('svg')
+        if (svg) svg.classList.toggle('-rotate-90')
+        const button = toggleButton.querySelector('button')
+        if (button) button.setAttribute('aria-expanded', !content.classList.contains('hidden'))
       }
     })
   })

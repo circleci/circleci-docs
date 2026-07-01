@@ -3,14 +3,17 @@
     <!-- Logo + Title -->
     <div class="flex items-center space-x-2">
       <a href="{{{relativize '/'}}}">
-        <img src="{{{uiRootPath}}}/img/logo.svg" alt="CircleCI Logo" class="h-[44px] logo-light">
-        <img src="{{{uiRootPath}}}/img/logo-dark.svg" alt="CircleCI Logo" class="h-[44px] logo-dark hidden">
+        <img src="{{{uiRootPath}}}/img/logo.svg" alt="CircleCI Logo" class="h-[44px] logo-light" width="167" height="44">
+        <img src="{{{uiRootPath}}}/img/logo-dark.svg" alt="CircleCI Logo" class="h-[44px] logo-dark hidden" width="175" height="44">
       </a>
     </div>
 
-    <!-- Search Bar -->
+    <!-- Search Bar + Ask AI -->
 
-    {{> search-bar class="hidden md:block flex-1 md:px-4" }}
+    <div class="hidden md:flex flex-1 items-center justify-center gap-3 px-4">
+      {{> search-bar class="flex-1 min-w-[200px] max-w-[430px]" }}
+      {{> ask-ai-button}}
+    </div>
 
     <!-- Localization + CTA -->
 
@@ -156,7 +159,7 @@
         <path d="M1.45455 8H20.1959" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
         <path d="M1.45455 1H20.1959" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
       </svg>
-      <a href="https://app.circleci.com/" class="hidden md:block bg-slime-green text-dark-green rounded-full px-[16px] border py-[8px] border-operational-green font-medium">
+      <a href="https://app.circleci.com/" class="hidden lg:block bg-slime-green text-dark-green rounded-full px-[16px] border py-[8px] border-operational-green font-medium">
         Go to Application
       </a>
     </div>
@@ -164,8 +167,10 @@
 
   <!-- Components Nav -->
 
-  {{> component-explorer-nav class='hidden md:flex' options=(components-to-nav-list)}}
+  <div class="hidden md:block">
+    {{> component-explorer-nav options=(components-to-nav-list)}}
+  </div>
 
-  {{> search-results class="hidden flex-1 pt-6 overflow-auto bg-panel-bg"}}
+  {{> search-results class="hidden flex-1 min-h-0 pt-6 overflow-auto bg-panel-bg"}}
 
 </header>

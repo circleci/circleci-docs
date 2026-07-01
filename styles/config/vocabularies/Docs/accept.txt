@@ -262,6 +262,7 @@ OPA
 [Pp]arsable
 [Pp]assphraseless
 [Pp]erformance
+pg_partman
 PHP
 PHPUnit
 Pipenv
@@ -362,6 +363,7 @@ TestFairy
 \btime windows\b
 [Tt]imebox
 [Tt]imeboxing
+Tini
 Tink
 Tinkey
 TLS

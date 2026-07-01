@@ -26,7 +26,7 @@ NOTE: Context names must be unique for each VCS organization. The default name f
 
 . Using the CircleCI web app, select menu:Org[Contexts] on the left side navigation.
 +
-Be aware that organization members can create contexts, but only organization administrators can restrict them using security groups. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+Be aware that organization members can create contexts, but only organization administrators can restrict them using security groups. The one exception to this case is Bitbucket organizations. These require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
 +
 .Organization settings contexts page
 image::guides:ROOT:org-settings-contexts.png[Contexts]
@@ -119,7 +119,7 @@ If the user running the workflow does not have access to the context or an expre
 [#approve-jobs-that-use-restricted-contexts]
 === Approve jobs that use restricted contexts
 
-Adding an xref:reference:ROOT:configuration-reference.adoc#type[approval job] to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
+Adding an xref:reference:ROOT:configuration-reference.adoc#type[Approval Job] to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
 
 [,yaml]
 ----
@@ -196,7 +196,7 @@ To make a context available _only_ to the administrators of the organization, yo
 [#add-and-remove-users-from-teams-and-groups]
 === Add and remove users from teams and groups
 
-*GitHub OAuth app users:* CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it can take up to a few hours to update the CircleCI records and remove access to the context.
+*GitHub OAuth app users:* CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it can take up to a few hours to update CircleCI records. Access to the context will be removed at that point.
 
 [#adding-and-removing-environment-variables-from-restricted-contexts]
 === Add and remove environment variables from restricted contexts
@@ -206,7 +206,7 @@ Addition and deletion of environment variables from a restricted context is limi
 [#project-restrictions]
 == Project restrictions
 
-CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:permissions-authentication:roles-and-permissions-overview.adoc[organization admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
+CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:permissions-authentication:roles-and-permissions-overview.adoc[Organization Admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
 NOTE: API support for project restricted contexts is coming soon.
 
@@ -227,8 +227,8 @@ You must be an *organization admin* to restrict a context though the method deta
 . Select the name of an existing context, or select *Create Context* if you want to use a new context.
 . Select *Add Project Restriction* to view the dialog box.
 . Select the project name to add to the context, and select *Add*. Use of the context is now limited to the specified project. Currently, multiple projects must be added individually.
-. You should now see a list of the defined project restrictions on the context page.
-. If you have environment variables, they should appear on the page. If there are none, you can select *Add Environment Variables* to add them to the context. Then select *Add* to finish. Use of the environment variables for this context is now limited to the specified projects.
+. You can now see a list of the defined project restrictions on the context page.
+. If you have environment variables, they appear on the page. If there are none, you can select *Add Environment Variables* to add them to the context. Then select *Add* to finish. Use of the environment variables for this context is now limited to the specified projects.
 
 Only workflows under the specified projects may now use the context and its environment variables.
 
@@ -245,7 +245,7 @@ You must be an *organization admin* to remove projects from contexts though the 
 [#expression-restrictions]
 == Expression restrictions
 
-Restrict contexts by setting up _expression restrictions_. Expression restrictions are rules that xref:orchestrate:pipeline-variables.adoc#pipeline-values[pipeline values] must match. Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use. For example, you may have a context containing credentials that should only be used for deploying your code from your protected `main` branch:
+Restrict contexts by setting up _expression restrictions_. Expression restrictions are rules that xref:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values] must match. Using expression restrictions allows you to create arbitrary constraints on the circumstances in which a context is available for use. For example, you may have a context containing credentials that are only used for deploying your code from your protected `main` branch:
 
 [source]
 ----
@@ -299,7 +299,7 @@ curl --request GET \
   --header "Accept: application/json" \
   --header "Content-Type: application/json" | jq
 ----
-. Copy the ID for your context from the previous API response
+. Copy the ID for your context from the previous API response.
 . Create your context expression restriction, as follows, substituting your context ID and expression restriction:
 +
 [,shell]
@@ -330,7 +330,7 @@ Allow the context only on the project's `main` branch, or branches starting with
 pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-test"
 ----
 
-Restrict a context to the `main` branch, disallow use in an SSH rerun, and disallow use with pipelines xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[triggered with unversioned configuration]:
+Restrict a context to the `main` branch, disallow use in an SSH rerun, and disallow use with pipelines xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Triggered With Unversioned Configuration]:
 
 [source]
 ----
@@ -340,7 +340,7 @@ pipeline.git.branch == "main" and not job.ssh.enabled and not (pipeline.config_s
 [#variables]
 === Variables
 
-xref:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline values] can be used as variables in an expression restriction. The exception to this is that `pipeline.trigger_parameters.*` pipeline values **cannot** be used. xref:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline parameters] **cannot** be used in expression restrictions.
+xref:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Values] can be used as variables in an expression restriction. The exception to this is that `pipeline.trigger_parameters.*` pipeline values **cannot** be used. xref:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameters] **cannot** be used in expression restrictions.
 
 Job-specific variables are also available to use in expressions, as follows:
 
@@ -376,7 +376,7 @@ include::ROOT:partial$using-expressions/operators.adoc[]
 === Precedence
 The following table shows operator precedence table, from weakest to strongest binding.
 
-NOTE: All operators are left associative. In practice, you should avoid operator chaining for anything other than `and` or `or`. This is because evaluation may cause type mismatches for other operators (see <<evaluation>>).
+NOTE: All operators are left associative. In practice, avoid operator chaining for anything other than `and` or `or`. This is because evaluation may cause type mismatches for other operators (see <<evaluation>>).
 
 [.table-scroll]
 --
@@ -496,12 +496,12 @@ include::ROOT:partial$notes/find-organization-id.adoc[]
 
 Environment variables are used according to a specific precedence order, as follows:
 
-. Environment variables declared xref:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[inside a shell command] in a `run` step, for example `FOO=bar make install`.
-. Environment variables declared with the `environment` key xref:set-environment-variable.adoc#set-an-environment-variable-in-a-step[for a `run` step].
-. Environment variables set with the `environment` key xref:set-environment-variable.adoc#set-an-environment-variable-in-a-job[for a job].
-. Special CircleCI environment variables defined on the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Project values and variables] page.
+. Environment variables declared xref:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[Inside a Shell Command] in a `run` step, for example `FOO=bar make install`.
+. Environment variables declared with the `environment` key xref:set-environment-variable.adoc#set-an-environment-variable-in-a-step[For a `run` Step].
+. Environment variables set with the `environment` key xref:set-environment-variable.adoc#set-an-environment-variable-in-a-job[For a Job].
+. Special CircleCI environment variables defined on the xref:reference:ROOT:variables.adoc#built-in-environment-variables[Project Values and Variables] page.
 . Context environment variables (assuming the user has access to the context).
-. xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project-level environment variables] set on the *Project Settings* page in the web app.
+. xref:set-environment-variable.adoc#set-an-environment-variable-in-a-project[Project-Level Environment Variables] set on the *Project Settings* page in the web app.
 
 Environment variables declared inside a shell command `run` step, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the contexts page will take precedence over variables added on the *Project Settings* page.
 
@@ -536,7 +536,7 @@ The CLI will prompt you to input the secret value, rather than accepting it as a
 API::
 +
 --
-To create an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add Environment Variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plain text secret as a string.
+To create an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Add Environment Variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body must include a `value` key containing the plain text secret as a string.
 --
 ====
 
@@ -550,7 +550,7 @@ Removing an environment variable from a context deletes the environment variable
 CLI::
 +
 --
-NOTE: Before using the CLI ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[configured the CLI] with a token.
+NOTE: Before using the CLI ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[Configured the CLI] with a token.
 
 To remove an environment variable from a context using the CLI, perform the following steps:
 
@@ -580,7 +580,7 @@ API::
 --
 To delete an environment variable using the API, call the https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Delete environment variable] endpoint.
 
-For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated.
+For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name to update.
 --
 ====
 
@@ -598,7 +598,7 @@ Context environment variables can be rotated using CircleCI's CLI or API.
 CLI::
 +
 --
-NOTE: Before using the CLI, ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[configured the CLI] with a token.
+NOTE: Before using the CLI, ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[Configured the CLI] with a token.
 
 To rotate an environment variable using the CLI, perform the following steps:
 
@@ -628,7 +628,7 @@ NOTE: The CLI will prompt you to input the new secret value, rather than accepti
 API::
 +
 --
-To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plain text secret as a string.
+To rotate an environment variable from the API, call the link:https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext[Update environment variable] endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name to update. The request body must include a `value` key containing the plain text secret as a string.
 --
 ====
 

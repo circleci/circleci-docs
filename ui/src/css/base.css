@@ -185,8 +185,12 @@ html[data-theme="dark"] [data-search-results-container] {
 }
 
 /* Search bar dark mode styling */
-html[data-theme="dark"] .search-input {
+html[data-theme="dark"] .search-input,
+html[data-theme="dark"] .ask-ai-button {
   border-color: var(--dark-text-secondary);
+}
+
+html[data-theme="dark"] .search-input {
   color: var(--dark-text-muted);
 }
 
