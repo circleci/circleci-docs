@@ -15,7 +15,7 @@ Create a context and add your environment variables. You can use the `context` k
 .Diagram showing how contexts are used in a workflow
 image::guides:ROOT:contexts_cloud.png[Contexts Overview]
 
-To use environment variables set within a context, the person running the workflow must be a member of the organization for which the context is set and have access to the context. The workflow must also meet any restrictions placed on the context.
+To use environment variables from a context, the actor running the workflow must be a member of the organization that owns the context and have access to the context. The workflow must also meet any restrictions placed on the context.
 
 NOTE: Context names must be unique for each VCS organization. The default name for a context is `org-global`. Contexts created with the initial default name of `org-global` will continue to work.
 

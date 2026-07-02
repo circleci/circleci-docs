@@ -37,30 +37,30 @@ The following capabilities are new in CLI v1 and have no equivalent in the legac
 
 *Config*
 
-* *Generate a config from a repository scan* — `circleci config generate [path]`
+* *Generate a config from a repository scan*: `circleci config generate [path]`.
 
 *Pipeline runs*
 
-* *List recent runs* — `circleci run list`
-* *Watch a run until completion* — `circleci run watch [<run-id>]`
-* *Cancel a run* — `circleci run cancel <run-number-or-id>`
-* *Rerun a workflow* — `circleci workflow rerun <workflow-id>`
-* *Rerun a workflow from the first failed job* — `circleci workflow rerun <workflow-id> --from-failed`
+* *List recent runs*: `circleci run list`.
+* *Watch a run until completion*: `circleci run watch [<run-id>]`.
+* *Cancel a run*: `circleci run cancel <run-number-or-id>`.
+* *Rerun a workflow*: `circleci workflow rerun <workflow-id>`.
+* *Rerun a workflow from the first failed job*: `circleci workflow rerun <workflow-id> --from-failed`.
 
 *Jobs and artifacts*
 
-* *List or download job artifacts* — `circleci artifact <job-id>`
-* *Get job details* — `circleci job get <job-id>`
-* *Get job step output* — `circleci job output get <job-id>`
-* *Open a job in the browser* — `circleci job open <job-id>`
+* *List or download job artifacts*: `circleci artifact <job-id>`.
+* *Get job details*: `circleci job get <job-id>`.
+* *Get job step output*: `circleci job output get <job-id>`.
+* *Open a job in the browser*: `circleci job open <job-id>`.
 
 *Contexts*
 
-* *List environment variables in a context* — `circleci context secret list <id|name>`
+* *List environment variables in a context*: `circleci context secret list <id|name>`.
 
 *Project environment variables*
 
-* *Delete a project environment variable* — `circleci envvar delete <name>`
+* *Delete a project environment variable*: `circleci envvar delete <name>`.
 
 [#config]
 == Config
