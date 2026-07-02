@@ -78,7 +78,7 @@ You can do this using a context. For more information about setting up and using
 . In the CircleCI web app, select **Organization settings > Contexts**.
 . Select **Create Context** and enter a name for your context, for example `my-context`.
 . Select your new context name in the list to access options.
-. Select **Add Environment Variable** and enter `CIRCLECI_CLI_TOKEN` for the environment variable name, and your personal API token string for the value (For more information about this see the xref:toolkit:local-cli.adoc#configure-the-cli[Installing the CircleCI local CLI] page). Then click **Add Environment Variable** again to complete.
+. Select **Add Environment Variable** and enter `CIRCLECI_CLI_TOKEN` for the environment variable name, and your personal API token string for the value (For more information about this see the xref:toolkit:circleci-cli.adoc[Installing the CircleCI CLI] page). Then click **Add Environment Variable** again to complete.
 . Select **Add Environment Variable** and enter `ORG_ID` for the environment variable name, and your organization ID for the value.
 +
 include::ROOT:partial$notes/find-organization-id.adoc[]

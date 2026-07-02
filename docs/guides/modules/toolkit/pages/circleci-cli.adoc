@@ -95,7 +95,7 @@ You can find the full CircleCI CLI reference at link:https://cli.circleci.com/re
 
 You can also access reference information directly in your terminal in three ways:
 
-* Add `--help` to any command at any depth to see its description, flags, and examples: `--help`
+* Add `--help` to any command at any depth to see its description, flags, and examples: `--help`.
 +
 [,shell]
 ----
@@ -147,4 +147,6 @@ The Chunk CLI:: A developer tool that brings AI-powered code review and remote v
 
 == Next steps
 
-#Add links to how-to pages#
+Using the CLI to complete common tasks is described across the docs. Some examples are:
+
+* Managing xref:security:contexts.adoc[Contexts] and environment variables.
