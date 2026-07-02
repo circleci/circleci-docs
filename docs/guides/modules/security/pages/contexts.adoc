@@ -134,6 +134,23 @@ For any VCS enterprise installation that includes multiple organizations, the co
 
 You can combine several contexts for a single job by adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way, you can scope contexts to be as small and granular as you like.
 
+In the following example, the `deploy` job has access to environment variables from three contexts. If the same variable name exists in more than one context, the value from `env-production` takes precedence as it is listed last:
+
+[,yaml]
+----
+workflows:
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          context:
+            - org-global
+            - aws-credentials
+            - env-production
+----
+
 [#restrict-a-context]
 == Restrict a context
 
@@ -142,9 +159,9 @@ NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contex
 
 CircleCI enables you to restrict contexts at run time in the following ways:
 
-* Using security groups.
-* Using project restrictions.
-* Using expression restrictions.
+* Using <<security-group-restrictions,security groups>>.
+* Using <<project-restrictions>>.
+* Using <<expression-restrictions>>.
 
 Only organization administrators may add restrictions to new or existing contexts.
 
