@@ -19,7 +19,7 @@ circleci policy push ./config-policies --owner-id <your-organization-ID> --polic
 [#prerequisites]
 == Prerequisites
 
-* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:toolkit:circleci-cli.adoc[Installing the CircleCI CLI] page for more information.
+* Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:toolkit:local-cli.adoc[Installing the Local CLI] page for more information.
 
 * Set up a self-hosted runner. See the xref:execution-runner:runner-overview.adoc#getting-started[Getting started] section of the Self-hosted runners overview.
 
