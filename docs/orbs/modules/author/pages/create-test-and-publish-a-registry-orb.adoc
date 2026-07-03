@@ -31,13 +31,7 @@ video::5ta4RUwqOBI[youtube]
 == Prerequisites
 
 * A GitHub account connected to your CircleCI account. See the xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI] page for steps to get set up.
-* Install the link:https://cli.circleci.com/[CircleCI CLI] on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token].
-+
-```shell
-circleci update
-
-circleci version
-```
+* Install the link:https://cli.circleci.com/[CircleCI CLI] on your local machine with a link:https://app.circleci.com/settings/user/tokens[personal access token]. More information is available for the CLI on the xref:guides:toolkit:circleci-cli.adoc[CircleCI CLI] page.
 * Register a namespace for your GitHub organization. Every organization registered on CircleCI is able to claim *one* unique xref:use:orb-concepts.adoc#namespaces[Namespace]. This includes your personal organization and any organization you are a member of. As each organization or user account is limited to a single namespace, in order to register the namespace for an organization you must be the _owner_ of the organization.
 +
 Enter the following command to claim your namespace, if you have not yet claimed one:
