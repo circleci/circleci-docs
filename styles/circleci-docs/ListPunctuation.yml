@@ -36,8 +36,8 @@ script: |
       continue
     }
 
-    // Skip if content is entirely wrapped in backticks (code)
-    if text.has_prefix(content, "`") && text.has_suffix(content, "`") {
+    // Skip if content ends in backticks (inline code)
+    if text.has_suffix(content, "`") {
       continue
     }
 
