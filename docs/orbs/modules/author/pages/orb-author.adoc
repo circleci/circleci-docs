@@ -32,7 +32,7 @@ Registry orb authors *automatically agree* to the CircleCI link:https://circleci
 
 We recommend using our <<orb-development-kit>> to create a registry orb. A full guide is available in the xref:create-test-and-publish-a-registry-orb.adoc[Create, Test, and Publish a Registry Orb] guide.
 
-Alternatively, as orbs are packages of xref:reference:ROOT:reusing-config.adoc[Reusable Configuration], they can be written manually too, as singular `yaml` files, and published using our xref:guides:toolkit:local-cli.adoc#installation[CircleCI Orb CLI]. For a guide, see the  xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] page.
+Alternatively, as orbs are packages of xref:reference:ROOT:reusing-config.adoc[Reusable Configuration], they can be written manually too, as singular `yaml` files, and published using the link:https://cli.circleci.com[CircleCI CLI]. For a guide, see the  xref:manual-orb-authoring-process.adoc[Manual Orb Authoring Process] page.
 
 == Getting started with creating a URL orb
 
@@ -85,7 +85,7 @@ The *orb tools orb* is an orb for creating orbs.
 [#orb-cli]
 === Orb CLI
 
-To begin creating orbs, follow the CircleCI CLI xref:guides:toolkit:local-cli.adoc#installation[Installation] guide on your local machine, with a link:https://app.circleci.com/settings/user/tokens[personal access token]. For a full list of orb-related commands inside the CircleCI CLI, visit link:https://circleci-public.github.io/circleci-cli/circleci_orb.html[CircleCI CLI help].
+To begin creating orbs, first install the link:https://cli.circleci.com/[CircleCI CLI] on your local machine, with a link:https://app.circleci.com/settings/user/tokens[personal access token]. More information is available for the CLI on the xref:toolkit:circleci-cli.adoc[CircleCI CLI] page.
 
 [#permissions-matrix]
 === Permissions matrix
