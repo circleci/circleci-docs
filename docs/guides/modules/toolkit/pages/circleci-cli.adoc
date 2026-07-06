@@ -58,6 +58,14 @@ Validate your CircleCI config file:
 circleci config validate
 ----
 
+. Enter the interactive terminal UI for inspecting CI runs.
++
+[,shell]
+----
+circleci run get
+----
+
+
 == Features of the CircleCI CLI
 
 The following sections highlight some features of the CircleCI CLI.
@@ -66,7 +74,7 @@ The following sections highlight some features of the CircleCI CLI.
 
 Log in with a short browser-based auth flow. Tokens are stored in your credential management system so no manual token generation or pasting is required.
 
-.Login with a short browser-based auth flow and store tokens in your credential management system.
+.Log in with a short browser-based auth flow and store tokens in your credential management system.
 [,shell]
 ----
 circleci auth login    # opens a browser window to complete authentication
@@ -125,7 +133,7 @@ The CLI respects standard terminal conventions:
 * Use `NO_COLOR=1` to disable all color output.
 * Use `PAGER` to control the pager used for long output (defaults to `less`).
 * Use `DO_NOT_TRACK=1` to disable telemetry (see also xref:#telemetry[Telemetry]).
-* Use TTY detection to automatically adjust output formatting when not connected to a terminal, for example in CI pipelines or when piping to other commands.
+* Output formatting adjusts automatically when the CLI is not connected to a terminal — for example, color and interactive elements are stripped when piping output to another command or running in a CI pipeline.
 
 [#telemetry]
 == Telemetry
@@ -151,7 +159,7 @@ You can find the full CircleCI CLI reference at link:https://cli.circleci.com/re
 
 You can also access reference information directly in your terminal in three ways:
 
-* Add `--help` to any command at any depth to see its description, flags, and examples: `--help`.
+* Add `--help` to any command at any depth to see its description, flags, and examples:
 +
 [,shell]
 ----
