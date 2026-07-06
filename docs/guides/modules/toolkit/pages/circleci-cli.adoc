@@ -4,26 +4,13 @@
 :experimental:
 :page-aliases: local-cli.adoc, how-to-use-the-circleci-local-cli.adoc
 
-The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal. Some of the things you can do with the CLI include:
-
-* Validate, pack, and process your CircleCI config.
-* Trigger, monitor, and cancel runs.
-* Inspect jobs, workflows, and retrieve artifacts.
-* Manage contexts and project environment variables.
-* Create, publish, and manage orbs.
-* Manage self-hosted runners and namespaces.
-* Enforce security policies across your organization.
-* Track component versions and deployments.
-
-== Install, configure, and use the CircleCI CLI
-
-For full details on how to install, configure, and use the CircleCI CLI, see the link:https://cli.circleci.com/[CircleCI CLI] page.
-
-You can update and uninstall the CircleCI CLI using the appropriate method for your package manager.
+The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
 
 == Quickstart
 
 Follow these steps to authenticate and connect the CLI to your CircleCI project.
+
+. *Install the CircleCI CLI:* Visit the link:https://cli.circleci.com/[CircleCI CLI] page for installation instructions.
 
 . *Log in to CircleCI:*
 +
@@ -71,6 +58,75 @@ Validate your CircleCI config file:
 circleci config validate
 ----
 
+== Features of the CircleCI CLI
+
+The following sections highlight some features of the CircleCI CLI.
+
+=== Secure OAuth authentication
+
+Log in with a short browser-based auth flow. Tokens are stored in your credential management system so no manual token generation or pasting is required.
+
+.Login with a short browser-based auth flow and store tokens in your credential management system.
+[,shell]
+----
+circleci auth login    # opens a browser window to complete authentication
+circleci auth me       # confirm the logged-in identity
+circleci auth logout   # log out and remove stored credentials
+----
+
+=== Interactive run inspection
+
+Use `circleci run get` to open an interactive terminal UI for inspecting CI runs. Access all the following without opening a browser:
+
+* Navigate from a run into its workflows, jobs, and steps.
+* Page through step output.
+* Jump to failed tests.
+
+.Browse recent runs interactively.
+[,shell]
+----
+circleci run list              # list recent runs for the linked project
+circleci run get               # browse recent runs interactively
+circleci run get <run-id>      # open a specific run directly
+----
+
+From inside the TUI, use arrow keys to navigate, `Enter` to drill in, and `Esc` or `q` to go back.
+
+=== Agent-ready
+
+A built-in MCP server lets AI agents inspect CI runs, retrieve test results, and diagnose failures without leaving the agent's context. Enable it for your editor with one command:
+
+.Enable MCP server for your editor.
+[,shell]
+----
+circleci mcp claude enable    # Claude Desktop
+circleci mcp cursor enable    # Cursor
+circleci mcp vscode enable    # VS Code
+----
+
+To disable, replace `enable` with `disable`. You can also start the server manually with `circleci mcp start`, or stream it over HTTP with `circleci mcp stream`.
+
+=== Readable output
+
+Every command renders a formatted markdown report in the terminal. For scripting and data processing, all commands support `--json` for machine-readable output and `--jq` for inline filtering:
+
+.Generate machine-readable output and inline filtering.
+[,shell]
+----
+circleci run list --json                        # full JSON output
+circleci run list --jq '.[0].id'               # extract the most recent run ID
+circleci job get <job-id> --jq '.status'       # get the status of a specific job
+----
+
+=== Modern terminal interface
+
+The CLI respects standard terminal conventions:
+
+* Use `NO_COLOR=1` to disable all color output.
+* Use `PAGER` to control the pager used for long output (defaults to `less`).
+* Use `DO_NOT_TRACK=1` to disable telemetry (see also xref:#telemetry[Telemetry]).
+* Use TTY detection to automatically adjust output formatting when not connected to a terminal, for example in CI pipelines or when piping to other commands.
+
 [#telemetry]
 == Telemetry
 
@@ -100,16 +156,16 @@ You can also access reference information directly in your terminal in three way
 [,shell]
 ----
 circleci --help
-circleci pipeline --help
-circleci pipeline list --help
+circleci run --help
+circleci run list --help
 ----
 
 * Use `circleci help <command>` to see the description, flags, and examples for a specific command:
 +
 [,shell]
 ----
-circleci help pipeline
-circleci help pipeline list
+circleci help run
+circleci help run list
 ----
 
 * Use `circleci help <topic>` to see prose reference articles on specific subjects:
