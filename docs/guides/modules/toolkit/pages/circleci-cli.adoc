@@ -39,7 +39,7 @@ This writes a `.circleci/info.yml` file to your repository containing your proje
 +
 [NOTE]
 ====
-Running `circleci project link` is required if your organization slug starts with `circleci/` rather than `gh/` or `bb/`. Without it, the CLI falls back to deriving the project from your git remote URL, which does not work for the `circleci/` organization type and causes project-not-found errors.
+Running `circleci project link` is recommended for all and *required* if your organization slug starts with `circleci/` rather than `gh/` or `bb/`. Without it, the CLI falls back to deriving the project from your git remote URL, which does not work for the `circleci/` organization type and causes project-not-found errors.
 ====
 
 . *Try some commands:*
