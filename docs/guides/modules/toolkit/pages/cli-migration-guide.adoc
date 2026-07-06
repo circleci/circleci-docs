@@ -33,45 +33,15 @@ As a result, commands that previously used `pipeline` to refer to a triggered ex
 [#implicit-context]
 == Implicit project and org context
 
-In CLI v1, most commands no longer require explicit project or org IDs as positional arguments.
+In CLI v1, most commands do not require explicit project or org IDs as positional arguments.
 
-We now recommend you run `circleci project link` in your project directory. The CLI then writes your project and org IDs to `.circleci/info.yml`. Commands then resolve the project and org automatically from that file, or fall back to deriving them from your git remote URL.
+We recommend you run `circleci project link` in your project directory through which the CLI writes your project and org IDs to `.circleci/info.yml`. Commands resolve the project and org automatically from the `info.yml` file, or fall back to deriving them from your git remote URL.
 
-As a result, commands that previously required positional `<project-id>`, `<org-id>`, or `<vcs-type>` arguments work without them in v1.
+Commands that previously required positional `<project-id>`, `<org-id>`, or `<vcs-type>` arguments work without them in v1.
 
-For example, `circleci pipeline list <project-id>` in the legacy CLI becomes `circleci pipeline list` in v1, with the project resolved automatically. Where an explicit override is needed, most commands accept `--project <slug>` or `--org <org-slug>`.
+For example, `circleci pipeline list <project-id>` in the legacy CLI becomes `circleci pipeline list` in v1, with the project resolved automatically.
 
-[#new-in-v1]
-== New in CLI v1
-
-The following capabilities are new in CLI v1 and have no equivalent in the legacy CLI.
-
-*Config*::
-+
-* *Generate a config from a repository scan*: `circleci config generate [path]`.
-
-*Runs*::
-+
-* *List recent runs*: `circleci run list`.
-* *Watch a run until completion*: `circleci run watch [<run-id>]`.
-* *Cancel a run*: `circleci run cancel <run-number-or-id>`.
-* *Rerun a workflow*: `circleci workflow rerun <workflow-id>`.
-* *Rerun a workflow from the first failed job*: `circleci workflow rerun <workflow-id> --from-failed`.
-
-*Jobs and artifacts*::
-+
-* *List or download job artifacts*: `circleci artifact <job-id>`.
-* *Get job details*: `circleci job get <job-id>`.
-* *Get job step output*: `circleci job output get <job-id>`.
-* *Open a job in the browser*: `circleci job open <job-id>`.
-
-*Contexts*::
-+
-* *List environment variables in a context*: `circleci context secret list <id|name>`.
-
-*Project environment variables*::
-+
-* *Delete a project environment variable*: `circleci envvar delete <name>`.
+Where an explicit override is needed, most commands accept `--project <slug>` or `--org <org-slug>` flags.
 
 == Changed commands
 
