@@ -591,7 +591,6 @@ You can use the CircleCI CLI to split your test suite across parallel containers
 
 * Read more about splitting tests across parallel execution environments on the xref:guides:optimize:parallelism-faster-jobs.adoc#[Parallelism and Test Splitting] page.
 * Refer to the xref:guides:optimize:use-the-circleci-cli-to-split-tests.adoc#[Use the CircleCI CLI to Split Tests] how-to guide.
-* Follow the xref:guides:test:test-splitting-tutorial.adoc#[Test Splitting Tutorial].
 
 [tabs]
 ====
