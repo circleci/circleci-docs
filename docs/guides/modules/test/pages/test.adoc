@@ -119,7 +119,6 @@ Historically, when your testing job in a workflow has flaky tests, the only opti
 == Next steps
 
 * Further optimize your pipelines with xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting].
-* Try our xref:test-splitting-tutorial.adoc[Test Splitting Tutorial].
 * Integrate tests for xref:testing-macos.adoc[macOS] or xref:testing-ios.adoc[iOS] apps.
 * Read our xref:browser-testing.adoc[Browser Testing] guide to common methods for running and debugging browser tests in CircleCI.
 * To get event-based notifications in Slack about your pipelines (for example, if a job passes or fails), try our xref:getting-started:slack-orb-tutorial.adoc[Slack Orb] tutorial.

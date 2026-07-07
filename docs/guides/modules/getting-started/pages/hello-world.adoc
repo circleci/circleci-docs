@@ -169,11 +169,9 @@ workflows:
     jobs:
       - hello-job
 ----
+
 --
 ====
-
-.Hello world job output
-image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
@@ -279,11 +277,9 @@ workflows:
     jobs:
       - hello-job
 ----
+
 --
 ====
-
-.Hello world job output
-image::guides:ROOT:hello-world-app.png[Screenshot showing hello world in the job step output]
 
 TIP: If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
