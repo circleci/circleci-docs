@@ -150,7 +150,6 @@
 ** Manage and optimize tests
 *** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
@@ -213,8 +212,6 @@
 *** xref:optimize:docker-layer-caching.adoc[Docker layer caching overview]
 ** Config
 *** xref:orchestrate:dynamic-config.adoc[Dynamic configuration]
-** Tutorials
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 ** How-to guides
 *** xref:orchestrate:using-matrix-jobs.adoc[Use matrix jobs]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]

@@ -65,8 +65,8 @@ workflows:
       - build-and-test
 ----
 
-* **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and reusable configuration. More information on config version 2.1 can be found in the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
-* **Lines 3-4:** This project uses the CircleCI Node xref:orbs:use:orb-intro.adoc[orb]. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the link:https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].
+* **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and reusable configuration. More information on config version 2.1 can be found in the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
+* **Lines 3-4:** This project uses the CircleCI Node xref:orbs:use:orb-intro.adoc[Orb]. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the link:https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].
 * **Lines 18-21:** The project pipeline consists of one workflow called `sample`. This workflow is comprised of one job, named `build-and-test`, which is made up of a few steps to check out the project code, install Node packages and set the default package manager, and run tests (lines 8 to 16).
 
 Test splitting is typically set up within a job. In this tutorial you will modify the `build-and-test` job to define the following:
@@ -80,7 +80,7 @@ Test splitting is typically set up within a job. In this tutorial you will modif
 
 To get started, you need to get the sample app building as a project on CircleCI.
 
-The steps are a little different depending on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
+The steps are a little different depending on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for more information.
 
 [tabs]
 ====
@@ -96,8 +96,6 @@ The steps are a little different depending on which organization type you have: 
 . You will be prompted to select your config.yml file. In the window, select the "Fast: Take me to a config.yml template that I can edit" option. Select btn:[Set Up Project].
 
 . You will then see a list of sample configurations. Scroll down within the window until you see **Node (Advanced)**, then choose btn:[Select].
-+
-image::guides:ROOT:test-splitting-sample-configs.png[Sample config for Node]
 
 . You will be taken to the in-app configuration editor. The project actually uses Yarn, so you will need to edit the following steps so that they use `yarn` instead of `npm`, like so:
 +

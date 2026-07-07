@@ -572,5 +572,4 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 == See also
 
 * xref:parallelism-faster-jobs.adoc[Test splitting and parallelism]
-* xref:test:test-splitting-tutorial.adoc[Test splitting tutorial]
 * xref:reference:ROOT:configuration-reference.adoc#parallelism[CircleCI configuration reference: parallelism]

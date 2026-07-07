@@ -8,8 +8,8 @@ This quickstart guide covers integrating a Node.js project with CircleCI. This g
 [#prerequisites]
 == Prerequisites
 
-* xref:first-steps.adoc[A CircleCI account]
-* A Node.js project located in a supported VCS
+* xref:first-steps.adoc[A CircleCI Account].
+* A Node.js project located in a supported VCS.
 
 [#configuration-walkthrough]
 == Configuration walkthrough
@@ -220,4 +220,4 @@ workflows:
 * link:https://circleci.com/blog/continuous-deployment-to-heroku/[Continuous deployment of Node apps to Heroku]
 * link:https://circleci.com/blog/cd-azure-vm/[Continuous deployment of Node.js to Azure VM]
 * link:https://support.circleci.com/hc/en-us/articles/360038192673-NodeJS-Builds-or-Test-Suites-Fail-With-ENOMEM-or-a-Timeout[Troubleshoot Node.js build and test suite timeouts]
-* xref:test:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines]
+* xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting]
