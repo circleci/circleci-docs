@@ -1,7 +1,5 @@
 'use strict'
 
-const fs = require('fs')
-const path = require('path')
 const File = require('vinyl')
 
 /**
@@ -98,9 +96,7 @@ function generateLlmsTxt (playbook, contentCatalog) {
   // Site Information
   sections.push('## Site Information\n')
   sections.push(`- URL: ${siteUrl}`)
-  sections.push('- Repository: https://github.com/circleci/circleci-docs')
-  sections.push('- Generator: Antora (static site generator for technical documentation)')
-  sections.push('- Markup: AsciiDoc\n')
+  sections.push('- Repository: https://github.com/circleci/circleci-docs\n')
 
   // Markdown Exports
   sections.push('## Markdown Exports\n')
@@ -125,15 +121,18 @@ function generateLlmsTxt (playbook, contentCatalog) {
 
   const components = contentCatalog.getComponents()
 
-  const componentOrder = ['root', 'guides', 'reference', 'orbs', 'server-admin', 'services', 'contributors']
-  const sortedComponents = [...components].sort((a, b) => {
-    const indexA = componentOrder.indexOf(a.name)
-    const indexB = componentOrder.indexOf(b.name)
-    if (indexA === -1 && indexB === -1) return a.name.localeCompare(b.name)
-    if (indexA === -1) return 1
-    if (indexB === -1) return -1
-    return indexA - indexB
-  })
+  const componentOrder = ['root', 'guides', 'reference', 'orbs', 'server-admin']
+  const excludedComponents = ['services', 'contributors']
+  const sortedComponents = [...components]
+    .filter(c => !excludedComponents.includes(c.name))
+    .sort((a, b) => {
+      const indexA = componentOrder.indexOf(a.name)
+      const indexB = componentOrder.indexOf(b.name)
+      if (indexA === -1 && indexB === -1) return a.name.localeCompare(b.name)
+      if (indexA === -1) return 1
+      if (indexB === -1) return -1
+      return indexA - indexB
+    })
 
   for (const component of sortedComponents) {
     if (component.name === 'server-admin') {
@@ -175,25 +174,6 @@ function generateLlmsTxt (playbook, contentCatalog) {
       sections.push('')
     }
   }
-
-  // Content Statistics
-  sections.push('## Content Statistics\n')
-  const stats = calculateStatistics(contentCatalog)
-  sections.push(`- Total components: ${stats.componentCount}`)
-  sections.push(`- Total pages: ${stats.totalPages}`)
-  sections.push('\nPages by component:')
-  for (const [comp, count] of Object.entries(stats.pagesByComponent).sort((a, b) => b[1] - a[1])) {
-    sections.push(`  - ${comp}: ${count}`)
-  }
-  sections.push('')
-
-  // Technical Stack
-  sections.push('## Technical Stack\n')
-  const techStack = getTechnicalStack()
-  for (const [name, version] of Object.entries(techStack)) {
-    sections.push(`- ${name}: ${version}`)
-  }
-  sections.push('')
 
   // Platform Badges
   sections.push('## Platform Badges\n')
@@ -301,46 +281,6 @@ function getMarkdownUrl (pageUrl, siteUrl) {
   if (pageUrl.endsWith('/')) return siteUrl + pageUrl + 'index.md'
   if (pageUrl.endsWith('.html')) return siteUrl + pageUrl.replace(/\.html$/, '.md')
   return siteUrl + pageUrl + '.md'
-}
-
-function calculateStatistics (contentCatalog) {
-  const components = contentCatalog.getComponents()
-  const pagesByComponent = {}
-  let totalPages = 0
-
-  for (const component of components) {
-    for (const version of component.versions) {
-      const pages = contentCatalog.findBy({
-        component: component.name,
-        version: version.version,
-        family: 'page',
-      }).filter(page => page.pub)
-
-      const key = component.name === 'server-admin'
-        ? `${component.name} (${version.version})`
-        : (component.title || component.name)
-
-      pagesByComponent[key] = (pagesByComponent[key] || 0) + pages.length
-      totalPages += pages.length
-    }
-  }
-
-  return { componentCount: components.length, totalPages, pagesByComponent }
-}
-
-function getTechnicalStack () {
-  try {
-    const packageJson = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'))
-    return {
-      'Static Site Generator': `Antora ${packageJson.devDependencies?.['@antora/cli']?.replace('^', '') || 'unknown'}`,
-      'Markup Language': 'AsciiDoc',
-      'API Docs': `Redocly CLI ${packageJson.devDependencies?.['@redocly/cli']?.replace('^', '') || 'unknown'}`,
-      'Search': 'Algolia',
-      'Build Tool': 'npm scripts with Gulp',
-    }
-  } catch {
-    return { 'Static Site Generator': 'Antora', 'Markup Language': 'AsciiDoc' }
-  }
 }
 
 function extractServerVersions (playbook) {
