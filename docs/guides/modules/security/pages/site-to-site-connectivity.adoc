@@ -1,0 +1,51 @@
+= Site-to-site connectivity
+:page-badge: Preview
+:page-platform: Cloud
+:page-description: Run CircleCI Cloud jobs that reach private infrastructure without opening your firewall to the internet.
+:experimental:
+
+NOTE: Site-to-site connectivity is available in preview on link:https://circleci.com/pricing/[CircleCI Scale plan]. Contact your account team to confirm eligibility before getting started. This feature is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. Share your feedback with your account team.
+
+Site-to-site connectivity lets CircleCI Cloud jobs securely reach resources behind your firewall, for example, a private GitHub Enterprise instance, an internal Artifactory, or on-prem APIs. Site-to-site connectivity removes the need to expose private resources to the public internet or add CircleCI's IP ranges to your network allow list.
+
+[#how-it-works]
+== How it works
+
+Site-to-site connectivity creates an encrypted tunnel between a lightweight endpoint you run in your network and your CircleCI jobs. When the tunnel connects, jobs reach your internal resources directly.
+
+You start the connection by using the link:https://circleci.com/developer/orbs/orb/cci-labs/site-to-site-connectivity[site-to-site connectivity orb] in your CircleCI configuration. CircleCI manages the tunnel service on its end.
+
+Once a job runs with the link:https://circleci.com/developer/orbs/orb/cci-labs/site-to-site-connectivity[site-to-site connectivity orb] configured, it can:
+
+* *Clone from private GHES or GitLab* - SSH-based clones from a self-hosted GitHub Enterprise or GitLab instance work out of the box.
+* *Call internal HTTPS endpoints* - Reach internal package registries, REST APIs, Artifactory, or any service on your internal network.
+* *Pull images during a job* - Run `docker pull` as a job step against a private registry over the tunnel.
+* *Preserve end-to-end TLS* - The job respects your destination's TLS certificate with no man-in-the-middle.
+* *Route wildcard host names* - Route an entire domain (for example, `+*.internal.acme.dev+`) through a single tunnel setup.
+
+=== Is site to site connectivity a good fit for you?
+
+Examples of use cases that are a good fit for site to site connectivity:
+
+* Running GHES or GitLab selm-managed and unable to publish externally.
+* Internal artifact registry your jobs need to reach.
+* Security team blocks CircleCI Cloud because adding CircleCI's IP ranges to your allow list is not acceptable.
+
+Examples of use cases that are not a good fit for site to site connectivity:
+
+* Not on a CircleCI Scale plan.
+* Require production-grade reliability guarantees or a formal SLA for the connectivity layer.
+* Docker image registry does not support OIDC.
+
+== Prerequisites
+
+* A CircleCI Scale plan organization.
+* A tunnel endpoint inside your network, deployed and managed by your team.
+* Time to work with CircleCI during onboarding. *Guided onboarding is required*. CircleCI engineers work with you end-to-end, scoping your use case, configuring the tunnel, and verifying the connection.
+* A use case that maps to the capabilities described on this page.
+* OIDC set up for any connections to private Docker image registries. CircleCI fetches your executor's Docker image before the tunnel starts. If that image lives in a private registry, you must configure OIDC between CircleCI and your registry so CircleCI can pull images. See xref:permissions-authentication:openid-connect-tokens.adoc[OpenID Connect Tokens] to get set up.
+
+[#get-started]
+== Get started
+
+Site-to-site connectivity is in closed preview and requires onboarding with CircleCI. If your use case fits, contact your account team.
