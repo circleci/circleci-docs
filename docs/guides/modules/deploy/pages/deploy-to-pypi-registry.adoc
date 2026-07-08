@@ -87,9 +87,6 @@ image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[pypi Trusted Pu
 ** Context ID (optional)
 ** VCS origin (optional)
 ** VCS ref (optional)
-+
-.Trusted publisher form with the CircleCI identifiers filled in
-image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[PyPI trusted publisher form for the CircleCI provider]
 
 . Save the publisher.
 
@@ -126,7 +123,7 @@ This causes any job on a different branch that tries to use the context to fail.
 +
 *SSH rerun restrictions*
 +
-PyPI rejects any OIDC token whose `ssh_rerun` claim is `true`. As defense in depth, you can also add the following expression restriction to your publishing context so that the job cannot be re-run with SSH at all: <!-- [tktktk] confirm PyPI enforces the ssh_rerun claim -->
+PyPI rejects any OIDC token whose `ssh_rerun` claim is `true`. As defense in depth, you can also add the following expression restriction to your publishing context so that the job cannot be re-run with SSH at all:
 +
 ```
 not job.ssh.enabled
