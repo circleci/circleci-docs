@@ -30,7 +30,7 @@ NOTE: PyPI also supports a _pending publisher_ for projects that do not exist ye
 [#gather-the-data-you-need]
 == 1. Gather the data you need
 
-Three CircleCI identifiers are required to configure your project as a trusted publisher. Organization ID, Project ID, and Pipeline definition ID. Three others are optional - Context ID, VCS Origin, and VCS Ref. We recommend using at least some of these to futher control who can trigger a publish depending on your workflow. 
+Three CircleCI identifiers are required to configure your project as a trusted publisher. Organization ID, Project ID, and Pipeline definition ID. Three others are optional - Context ID, VCS origin, and VCS ref. We recommend using at least some of these to further control who can trigger a publish depending on your workflow.
 
 Collect these before you visit PyPI.
 
@@ -100,11 +100,11 @@ To publish a project name that does not exist yet, create a pending publisher in
 
 We recommend adding some additional information to further secure your publishing pipeline. Contexts will allow you to control who can run pipelines that publish. You can also add information about your source repo and branch. 
 
-== 3.1 VCS Origin and VCS Ref
+=== 3.1 VCS origin and VCS ref
 
-Using these, you can create trusted publishers who can only publish from specific branches. This can be useful if you have branch protections that control who can merge, triggering pipelines. One example is to have a trusted publisher bound to a main branch for prod releases, and to a staging branch for generating pre-releases. Reminder: VCS Origin and VCS Ref info is not available for pipelines triggered via https://circleci.com/docs/guides/orchestrate/triggers-overview/#trigger-a-pipeline-from-a-custom-webhook[custom webhooks]. 
+Using these, you can create trusted publishers who can only publish from specific branches. This can be useful if you have branch protections that control who can merge, triggering pipelines. One example is to have a trusted publisher bound to a main branch for prod releases, and to a staging branch for generating pre-releases. Reminder: VCS origin and VCS ref info is not available for pipelines triggered via https://circleci.com/docs/guides/orchestrate/triggers-overview/#trigger-a-pipeline-from-a-custom-webhook[custom webhooks].
 
-== 3.2 Lock it down with protected contexts
+=== 3.2 Lock it down with protected contexts
 
 This step is optional but recommended. If you do not want context-based restrictions, skip to <<configure-your-circleci-pipeline,Step 4>>.
 
