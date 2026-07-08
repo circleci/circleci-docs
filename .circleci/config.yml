@@ -140,8 +140,9 @@ jobs:
           paths:
             - ui-bundle.zip
             - ui/node_modules
-      - go/install:
-          version: "1.25.0"
+      - run:
+          name: Install Go
+          command: circleci run circleci/setup-go@0.0.5-bf6c59b -- --version 1.25.0 --go-cache-checksum '{{ checksum "go.sum" }}'
       - run:
           name: Verify Go Installation
           command: |
