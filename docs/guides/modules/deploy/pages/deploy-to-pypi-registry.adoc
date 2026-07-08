@@ -25,7 +25,8 @@ NOTE: PyPI also supports a _pending publisher_ for projects that do not exist ye
 * A project on CircleCI that builds your Python package.
 * A PyPI account with two-factor authentication enabled.
 * Owner access to the PyPI project, or permission to create a pending publisher for a new project name.
-* `twine` and a recent Python in the Docker image (or executor) used by your publishing job. <!-- [tktktk] confirm minimum twine version once the mint-token flow is finalized -->
+* `twine` version 6.1.0 or later, and Python 3.9 or later, in the Docker image (or executor) used by your publishing job. From version 6.1.0, `twine` has built-in support for trusted publishing and detects CircleCI OIDC credentials automatically.
+* The `circleci` CLI available in your publishing job. The CircleCI convenience images (`cimg/*`) include it.
 
 [#gather-the-data-you-need]
 == 1. Gather the data you need
@@ -89,7 +90,7 @@ image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[pypi Trusted Pu
 ** VCS ref (optional)
 +
 .Trusted publisher form with the CircleCI identifiers filled in
-image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[PyPI trusted publisher form for the CircleCI provider
+image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[PyPI trusted publisher form for the CircleCI provider]
 
 . Save the publisher.
 
@@ -141,9 +142,55 @@ pipeline.git.branch == "main" and not job.ssh.enabled
 [#configure-your-circleci-pipeline]
 == 4. Configure your CircleCI pipeline
 
-Add a publishing job to your `.circleci/config.yml`. The job retrieves an OIDC token for the `pypi` audience, exchanges it with PyPI for a short-lived API token, and uses that token to upload your distributions with `twine`.
+Add a publishing job to your `.circleci/config.yml`. From version 6.1.0, `twine` detects that it is running on CircleCI, retrieves an OIDC token for the `pypi` audience, exchanges it with PyPI for a short-lived API token, and uploads your distributions. You do not need to store any credentials or mint a token yourself.
 
-In the example below, the job is attached to the context from <<lock-it-down,Step 3>> (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. If you skipped Step 3, remove the `context:` block from the workflow.
+In the examples below, the job is attached to the context from <<lock-it-down,Step 3>> (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. If you skipped Step 3, remove the `context:` block from the workflow.
+
+[tabs]
+====
+Automatic (recommended)::
++
+--
+With `twine` 6.1.0 or later, run `twine upload` and let `twine` handle the OIDC exchange for you.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  publish:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - run:
+          name: Build distributions
+          command: |
+            python -m pip install --upgrade build twine
+            python -m build
+      - run:
+          name: Publish to PyPI
+          command: |
+            # twine detects the CircleCI OIDC credentials and performs the
+            # trusted publishing exchange automatically. No token is needed.
+            twine upload dist/*
+
+workflows:
+  publish:
+    jobs:
+      - publish:
+          context:
+            - trusted-publishing-guard
+          filters:
+            branches:
+              only:
+                - main
+----
+--
+Manual exchange (fallback)::
++
+--
+If you cannot use `twine` 6.1.0 or later, retrieve the OIDC token and exchange it for a short-lived API token yourself.
 
 [source,yaml]
 ----
@@ -183,27 +230,27 @@ workflows:
               only:
                 - main
 ----
-
-<!-- [tktktk] simplify this step if twine adds native CircleCI trusted publishing support, so the mint-token exchange is no longer needed -->
+--
+====
 
 For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect Tokens in Jobs].
 
 [#publish-a-new-version]
 == 5. Publish a new version
 
-With the workflow above, every merge to `main` publishes a new version. Bump the `version` in your `pyproject.toml` (or `setup.py`) on a feature branch, open a pull request, and merge to `main`. CircleCI runs the publishing workflow on the merge commit, exchanges the OIDC token for a short-lived API token, and uploads the package.
+With the workflow above, every merge to `main` publishes a new version. Bump the `version` in your `pyproject.toml` (or `setup.py`) on a feature branch, open a pull request, and merge to `main`. CircleCI runs the publishing workflow on the merge commit, and `twine` exchanges the OIDC token for a short-lived API token to upload the package.
 
 NOTE: PyPI does not allow re-uploading a version that already exists. Make sure each merge to `main` carries a new version number.
 
 [#self-hosted-runners]
 == Self-hosted runners
 
-Trusted publishing from CircleCI self-hosted runners works. <!-- [tktktk] confirm -->
+Trusted publishing from CircleCI self-hosted runners works.
 
 [#notes]
 == Notes
 
-* You can test the full flow against link:https://test.pypi.org[TestPyPI] before publishing to production PyPI. Use the `testpypi` audience and the `https://test.pypi.org/_/oidc/mint-token` endpoint, and configure a separate trusted publisher on TestPyPI.
+* You can test the full flow against link:https://test.pypi.org[TestPyPI] before publishing to production PyPI. Configure a separate trusted publisher on TestPyPI and point `twine` at it with `twine upload --repository testpypi dist/*`. If you use the manual exchange, use the `testpypi` audience and the `https://test.pypi.org/_/oidc/mint-token` endpoint instead.
 * Pull requests from forks do not have access to CircleCI secrets, including OIDC tokens. A fork cannot trigger a publish.
 
 [#track-deployments-with-deploy-markers]
@@ -223,5 +270,3 @@ Both approaches will enable you to track deployment history and manage rollbacks
 == Feedback
 
 If you have questions or feedback, drop by the https://discuss.circleci.com/[CircleCI Discuss forum] or the https://discord.gg/circleci[CircleCI Discord community].
-</content>
-</invoke>
