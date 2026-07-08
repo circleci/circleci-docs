@@ -1,0 +1,227 @@
+= Publish to PyPI using OIDC trusted publishing
+:page-platform: Cloud
+:page-description: Publish packages to PyPI from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
+:experimental:
+
+In this how-to guide, you will learn how to configure CircleCI to publish to the Python Package Index (PyPI) using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for a PyPI API token at publish time. No long-lived `PYPI_API_TOKEN` exists to store, rotate, or leak.
+
+For a functional example you can clone and adapt, see the link:https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/pypi[CircleCI PyPI trusted publishing example].
+
+[#introduction]
+== Introduction
+
+Trusted publishing is the recommended way to publish to PyPI from CircleCI. Compared to using a long-lived API token stored in an environment variable, trusted publishing offers the following benefits:
+
+* Removes the need to create, store, and rotate a publish token.
+* Issues a short-lived API token that is valid only for the duration of the publishing job.
+* Lets you scope publishing to a specific organization, project, pipeline definition, and (optionally) context.
+
+NOTE: PyPI also supports a _pending publisher_ for projects that do not exist yet. Unlike some registries, you do not need to publish a first release manually before configuring trusted publishing. See <<set-up-the-trusted-publisher-on-pypi,Step 2>>.
+
+[#prerequisites]
+== Prerequisites
+
+* A CircleCI Cloud account integrated with a supported VCS. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* A project on CircleCI that builds your Python package.
+* A PyPI account with two-factor authentication enabled.
+* Owner access to the PyPI project, or permission to create a pending publisher for a new project name.
+* `twine` and a recent Python in the Docker image (or executor) used by your publishing job. <!-- [tktktk] confirm minimum twine version once the mint-token flow is finalized -->
+
+[#gather-the-data-you-need]
+== 1. Gather the data you need
+
+Three CircleCI identifiers are required to configure your project as a trusted publisher. Organization ID, Project ID, and Pipeline definition ID. Three others are optional - Context ID, VCS Origin, and VCS Ref. We recommend using at least some of these to futher control who can trigger a publish depending on your workflow. 
+
+Collect these before you visit PyPI.
+
+=== 1.1 Organization ID (required)
+You need your CircleCI organization ID, in UUID format. You can find your org ID in menu:Org Settings[Overview], or follow these steps:
+
+include::guides:ROOT:partial$app-navigation/steps-to-org-id.adoc[]
+
+=== 1.2 Project ID (required)
+You need your CircleCI project ID, in UUID format. You can find your project ID in menu:Project Settings[Overview], or follow these steps:
+
+include::guides:ROOT:partial$app-navigation/steps-to-project-id.adoc[]
+
+=== 1.3 Pipeline definition ID (required)
+You need your pipeline definition ID, in UUID format. You can find your pipeline definition ID in menu:Project Settings[Project Setup], where you will find details of all pipelines that have been set up for your project. Follow these steps to find your pipeline definition IDs:
+
+include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
+
+=== 1.4 Context ID (optional)
+If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Lock it down with protected contexts>>) you will need the UUID for the context. To find a context ID, follow these steps:
+
+include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Select *Contexts* from the menu.
+. Select the context you want to find the ID for.
+. Select the btn:[Copy] icon next to the context ID to copy it to your clipboard.
+
+Gather context ID the context you want to restrict publishing to.
+
+=== 1.5 VCS origin (optional)
+You need the version control system origin URL for your project, for example `github.com/myorg/myrepo` or `gitlab.com/mylab/myproject`.
+
+=== 1.6 VCS ref (optional)
+The reference to the change that triggered the pipeline. Its value is a string similar to refs/heads/main.
+
+[#set-up-the-trusted-publisher-on-pypi]
+== 2. Set up the trusted publisher on PyPI
+
+You can configure a trusted publisher for an existing project, or create a _pending publisher_ for a project name that has not been published yet.
+
+For an existing project:
+
+. Sign in to https://pypi.org[PyPI] and navigate to menu:Your projects.
+. Select menu:Manage for the project you want to add Trusted Publishing to.
+. Select menu:Publishing to begin the process.
++
+.Trusted publisher form 
+image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[pypi Trusted Publisher form]
+
+. Fill in the fields with the values you collected in the previous step:
++
+** Organization ID
+** Project ID
+** Pipeline Definition ID
+** Context ID (optional)
+** VCS origin (optional)
+** VCS ref (optional)
++
+.Trusted publisher form with the CircleCI identifiers filled in
+image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[PyPI trusted publisher form for the CircleCI provider
+
+. Save the publisher.
+
+To publish a project name that does not exist yet, create a pending publisher instead from menu:Your projects[Publishing], then publish your first release through the workflow.
+
+[#lock-it-down]
+== 3. Lock it down
+
+We recommend adding some additional information to further secure your publishing pipeline. Contexts will allow you to control who can run pipelines that publish. You can also add information about your source repo and branch. 
+
+== 3.1 VCS Origin and VCS Ref
+
+Using these, you can create trusted publishers who can only publish from specific branches. This can be useful if you have branch protections that control who can merge, triggering pipelines. One example is to have a trusted publisher bound to a main branch for prod releases, and to a staging branch for generating pre-releases. Reminder: VCS Origin and VCS Ref info is not available for pipelines triggered via https://circleci.com/docs/guides/orchestrate/triggers-overview/#trigger-a-pipeline-from-a-custom-webhook[custom webhooks]. 
+
+== 3.2 Lock it down with protected contexts
+
+This step is optional but recommended. If you do not want context-based restrictions, skip to <<configure-your-circleci-pipeline,Step 4>>.
+
+You can further restrict who and what can run the publishing job by attaching the job to a xref:security:contexts.adoc[CircleCI Context] and applying restrictions to that context. If you do this, remember to record the context's UUID under *Context ID* when you configure the trusted publisher on PyPI (see <<set-up-the-trusted-publisher-on-pypi,Step 2>>). Three types of restrictions are available, as described in the following sections.
+
+Security group restrictions:: xref:security:contexts.adoc#security-group-restrictions[Security Group Restrictions] limit job execution to members of a specific group. Anyone outside the group who attempts to run the job fails. Use a security group restriction when you want only a small set of people to be able to publish.
+
+Project restrictions:: xref:security:contexts.adoc#project-restrictions[Project Restrictions] limit a context to one or more specific projects. With a project restriction in place, a job in any other project that tries to use the context will fail. Use a project restriction to ensure the publishing context can only be used by the project that owns your PyPI package.
+
+Expression restrictions::
+
+xref:security:contexts.adoc#expression-restrictions[Expression Restrictions] are more powerful. The most common use is restricting a context to a specific branch. For example:
++
+```
+pipeline.git.branch == "main"
+```
++
+This causes any job on a different branch that tries to use the context to fail.
++
+*SSH rerun restrictions*
++
+PyPI rejects any OIDC token whose `ssh_rerun` claim is `true`. As defense in depth, you can also add the following expression restriction to your publishing context so that the job cannot be re-run with SSH at all: <!-- [tktktk] confirm PyPI enforces the ssh_rerun claim -->
++
+```
+not job.ssh.enabled
+```
++
+You can combine expressions to restrict the context to a specific branch and disallow SSH reruns in a single rule:
++
+```
+pipeline.git.branch == "main" and not job.ssh.enabled
+```
+
+[#configure-your-circleci-pipeline]
+== 4. Configure your CircleCI pipeline
+
+Add a publishing job to your `.circleci/config.yml`. The job retrieves an OIDC token for the `pypi` audience, exchanges it with PyPI for a short-lived API token, and uses that token to upload your distributions with `twine`.
+
+In the example below, the job is attached to the context from <<lock-it-down,Step 3>> (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. If you skipped Step 3, remove the `context:` block from the workflow.
+
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  publish:
+    docker:
+      - image: cimg/python:3.12
+    steps:
+      - checkout
+      - run:
+          name: Build distributions
+          command: |
+            python -m pip install --upgrade build twine
+            python -m build
+      - run:
+          name: Publish to PyPI
+          command: |
+            # Retrieve a CircleCI OIDC token for the PyPI audience
+            PYPI_ID_TOKEN=$(circleci run oidc get --claims '{"aud": "pypi"}')
+            # Exchange the OIDC token for a short-lived PyPI API token
+            API_TOKEN=$(curl -s -X POST https://pypi.org/_/oidc/mint-token \
+              -d "{\"token\": \"${PYPI_ID_TOKEN}\"}" | jq -r '.token')
+            # Upload using the minted token
+            twine upload --non-interactive \
+              --username __token__ --password "${API_TOKEN}" dist/*
+
+workflows:
+  publish:
+    jobs:
+      - publish:
+          context:
+            - trusted-publishing-guard
+          filters:
+            branches:
+              only:
+                - main
+----
+
+<!-- [tktktk] simplify this step if twine adds native CircleCI trusted publishing support, so the mint-token exchange is no longer needed -->
+
+For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect Tokens in Jobs].
+
+[#publish-a-new-version]
+== 5. Publish a new version
+
+With the workflow above, every merge to `main` publishes a new version. Bump the `version` in your `pyproject.toml` (or `setup.py`) on a feature branch, open a pull request, and merge to `main`. CircleCI runs the publishing workflow on the merge commit, exchanges the OIDC token for a short-lived API token, and uploads the package.
+
+NOTE: PyPI does not allow re-uploading a version that already exists. Make sure each merge to `main` carries a new version number.
+
+[#self-hosted-runners]
+== Self-hosted runners
+
+Trusted publishing from CircleCI self-hosted runners works. <!-- [tktktk] confirm -->
+
+[#notes]
+== Notes
+
+* You can test the full flow against link:https://test.pypi.org[TestPyPI] before publishing to production PyPI. Use the `testpypi` audience and the `https://test.pypi.org/_/oidc/mint-token` endpoint, and configure a separate trusted publisher on TestPyPI.
+* Pull requests from forks do not have access to CircleCI secrets, including OIDC tokens. A fork cannot trigger a publish.
+
+[#track-deployments-with-deploy-markers]
+== Track your deployments with deploy markers
+
+Deploy markers provide a way to track and manage your PyPI package publications in the CircleCI web app. When you add deploy markers to your deployment job, you can view a timeline of all deployments, track their status, and enable rollback and deploy pipelines.
+
+You have two options for setting up deploy markers:
+
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+
+* *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
+
+Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+
+[#questions-and-feedback]
+== Feedback
+
+If you have questions or feedback, drop by the https://discuss.circleci.com/[CircleCI Discuss forum] or the https://discord.gg/circleci[CircleCI Discord community].
+</content>
+</invoke>

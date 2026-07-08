@@ -200,6 +200,7 @@
 *** xref:deploy:publish-packages-to-packagecloud.adoc[Publish packages to Packagecloud]
 *** xref:deploy:deploy-to-npm-registry.adoc[Publish to npm using OIDC trusted publishing]
 *** xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm with an authentication token]
+*** xref:deploy:deploy-to-pypi-registry.adoc[Publish to PyPI using OIDC trusted publishing]
 
 * Optimize
 ** xref:optimize:optimizations.adoc[Optimizations reference]
