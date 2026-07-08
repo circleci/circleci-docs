@@ -27,7 +27,7 @@ Once a job runs with the link:https://circleci.com/developer/orbs/orb/cci-labs/s
 
 Examples of use cases that are a good fit for site to site connectivity:
 
-* Running GHES or GitLab selm-managed and unable to publish externally.
+* Running GHES or GitLab self-managed and unable to publish externally.
 * Internal artifact registry your jobs need to reach.
 * Security team blocks CircleCI Cloud because adding CircleCI's IP ranges to your allow list is not acceptable.
 
