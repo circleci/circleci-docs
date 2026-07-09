@@ -73,12 +73,9 @@ You can configure a trusted publisher for an existing project, or create a _pend
 
 For an existing project:
 
-. Sign in to https://pypi.org[PyPI] and navigate to menu:Your projects.
-. Select menu:Manage for the project you want to add Trusted Publishing to.
-. Select menu:Publishing to begin the process.
-+
-.Trusted publisher form
-image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[pypi Trusted Publisher form]
+. Sign in to https://pypi.org[PyPI] and navigate to *Your projects*.
+. Select *Manage* for the project you want to add Trusted Publishing to.
+. Select *Publishing* to begin the process.
 
 . Fill in the fields with the values you collected in the previous step:
 +
@@ -91,7 +88,7 @@ image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[pypi Trusted Pu
 
 . Save the publisher.
 
-To publish a project name that does not exist yet, create a pending publisher instead from menu:Your projects[Publishing], then publish your first release through the workflow.
+To publish a project name that does not exist yet, create a pending publisher instead from the *Publishing* page, then publish your first release through the workflow.
 
 [#lock-it-down]
 == 3. Lock it down
@@ -100,9 +97,11 @@ We recommend adding some additional information to further secure your publishin
 
 === 3.1 VCS origin and VCS ref
 
-Using these, you can create trusted publishers who can only publish from specific branches. This can be useful if you have branch protections that control who can merge, triggering pipelines. One example is to have a trusted publisher bound to a main branch for prod releases, and to a staging branch for generating pre-releases. Reminder: VCS origin and VCS ref info is not available for pipelines triggered via https://circleci.com/docs/guides/orchestrate/triggers-overview/#trigger-a-pipeline-from-a-custom-webhook[custom webhooks].
+Using VCS origin and VCS ref, you can create trusted publishers that can only publish from specific branches. This can be useful if you have branch protections that control who can merge and therefore trigger pipelines. One example is to have a trusted publisher bound to a main branch for production releases, and to a staging branch for generating pre-releases.
 
-=== 3.2 Lock it down with protected contexts
+NOTE: VCS origin and VCS ref info is not available for pipelines triggered via xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhooks].
+
+=== 3.2 Lock it down with restricted contexts
 
 This step is optional but recommended. If you do not want context-based restrictions, skip to <<configure-your-circleci-pipeline,Step 4>>.
 
@@ -139,7 +138,12 @@ pipeline.git.branch == "main" and not job.ssh.enabled
 [#configure-your-circleci-pipeline]
 == 4. Configure your CircleCI pipeline
 
-Add a publishing job to your `.circleci/config.yml`. From version 6.1.0, `twine` detects that it is running on CircleCI, retrieves an OIDC token for the `pypi` audience, exchanges it with PyPI for a short-lived API token, and uploads your distributions. You do not need to store any credentials or mint a token yourself.
+Add a publishing job to your `.circleci/config.yml`. From version 6.1.0, Twine handles the following steps:
+
+* Detects it is running on CircleCI.
+* Retrieves an OIDC token for the `pypi` audience.
+* Exchanges it with PyPI for a short-lived API token.
+* Uploads your distributions.
 
 In the examples below, the job is attached to the context from <<lock-it-down,Step 3>> (here named `trusted-publishing-guard`) and the workflow filters to the `main` branch only. If you skipped Step 3, remove the `context:` block from the workflow.
 
