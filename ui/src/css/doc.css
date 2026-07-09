@@ -1425,6 +1425,11 @@
   font-weight: 400;
 }
 
+/* remove bottom margin from paragraphs inside list items */
+.doc li > p {
+  margin-bottom: 0;
+}
+
 /* inline links pick up the new blue */
 .doc a {
   color: var(--link-font-color);
