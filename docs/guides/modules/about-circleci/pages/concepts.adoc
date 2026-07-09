@@ -597,9 +597,6 @@ CircleCI has various user roles with permissions inherited from VCS accounts.
 
 Workflows orchestrate jobs. A workflow defines a list of jobs and their run order. You can run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
-.Workflows illustration
-image::guides:ROOT:workflow_detail_newui.png[Workflows illustration cloud]
-
 The following configuration example shows two workflows with modern features:
 
 * `build_and_test` runs on every commit with concurrent job execution.

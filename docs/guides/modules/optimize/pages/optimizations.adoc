@@ -65,7 +65,7 @@ If your project has a large test suite, configure your build to use xref:referen
 
 * Read more about splitting tests across parallel execution environments on the xref:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] page.
 * Refer to the xref:use-the-circleci-cli-to-split-tests.adoc[Use the CircleCI CLI to Split Tests] how-to guide.
-* Follow the xref:test:test-splitting-tutorial.adoc[Test Splitting Tutorial].
+* Follow the xref:parallelism-faster-jobs.adoc[Parallelism and Test Splitting] page.
 
 [#rerun-failed-tests]
 === Rerun failed tests

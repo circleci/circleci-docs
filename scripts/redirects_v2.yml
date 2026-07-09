@@ -1283,9 +1283,6 @@
 - old: /test-config-policies/
   new: /guides/config-policies/test-config-policies/
 
-- old: /test-splitting-tutorial/
-  new: /guides/test/test-splitting-tutorial/
-
 - old: /testing-ios/
   new: /guides/test/testing-ios/
 

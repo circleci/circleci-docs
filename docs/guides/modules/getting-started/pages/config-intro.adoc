@@ -69,15 +69,7 @@ As mentioned in the note above the sample code, you may optionally supply your D
 
 . Commit your `config.yml` file (and push, if you are working remotely).
 
-. A new pipeline is triggered in CircleCI. You can see the output in the link:https://app.circleci.com/[CircleCI dashboard]. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details.
-+
-.Successful build job
-image::guides:ROOT:config-intro-part1-job.png[Successful build job]
-+
-You can see your step - The First Step - with the output of the commands:
-+
-.Successful step within job
-image::guides:ROOT:config-first-step.png[Successful step within job]
+. A new pipeline is triggered in CircleCI. You can see the output in the link:https://app.circleci.com/[CircleCI dashboard]. A green tick denotes a successful pipeline. A red exclamation mark alerts you to a failure. Click on the job for more details. You can see your step - The First Step - along with the output of the commands.
 
 NOTE: Although the `config.yml` syntax itself is straightforward, the indentation is more complicated. Incorrect indentation is the most common error. If you are experiencing problems with this example, check your indentation carefully, or copy and paste the sample code.
 
@@ -129,9 +121,6 @@ You can now see some additional steps on the CircleCI dashboard:
 
 * *Checkout code* has cloned the code from your git repository.
 * *The Second Step* has listed the files found in your git repository.
-
-.Successful step within job list files in repository
-image::guides:ROOT:config-second-step.png[Checking out your repository]
 
 [#part-3-using-different-environments-and-creating-workflows]
 == Part 3: Using different environments and creating workflows
@@ -211,13 +200,7 @@ As before, commit and push your updated `config.yml` file.
 
 In CircleCI, your pipeline will look different. Your workflow is now called _Example-Workflow_ and you have three jobs, rather than just one.
 
-.Running multiple jobs
-image::guides:ROOT:config-intro-part3.png[Running multiple jobs]
-
 If you click on the _Using-Node_ job and then the _Running the Node Container_ step, you can see that the command `node -v` has printed the version of Node.
-
-.Running Node job
-image::guides:ROOT:config-node-job.png[Running Node job]
 
 In this example, you have:
 
@@ -311,17 +294,11 @@ As before, commit and push your updated `config.yml` file.
 
 If you look at your pipeline in CircleCI, you will see a purple status badge of *Needs Approval*.
 
-.Job requires approval
-image::guides:ROOT:config-on-hold.png[Job requires approval]
-
-To approve the job, click the thumbs up icon to the right of the _Hold-for-Approval_ job in the _Actions_ column. In the pop-up message, click the blue btn:[Approve] button.
+To approve the job, select the thumbs up icon to the right of the _Hold-for-Approval_ job in the _Actions_ column. In the pop-up message, click the blue btn:[Approve] button.
 
 Now you will see a tick in the Actions column and your jobs will complete.
 
 Select the _Now-Complete_ job, then the _Approval Complete_ step. You can see the output of your command: `The work is now complete`.
-
-.Approval complete
-image::guides:ROOT:config-approval-complete.png[Approval complete]
 
 TIP: If you encounter errors, the problem is likely to be caused by incorrect indentation. The xref:config-editor.adoc[CircleCI Configuration Editor] validates your syntax, provides autocomplete suggestions, and offers tips.
 
