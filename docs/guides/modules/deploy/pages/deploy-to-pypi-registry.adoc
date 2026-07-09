@@ -4,7 +4,9 @@
 :page-description: Publish packages to PyPI from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
 :experimental:
 
-In this how-to guide, you will learn how to configure CircleCI to publish to the Python Package Index (PyPI) using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for a PyPI API token at publish time. No long-lived `PYPI_API_TOKEN` exists to store, rotate, or leak.
+NOTE: Publishing to PyPI with trusted publishing is currently in preview.
+
+Follow this how-to guide to configure CircleCI to publish to the Python Package Index (PyPI) using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for a PyPI API token at publish time. No long-lived `PYPI_API_TOKEN` exists to store, rotate, or leak.
 
 For a functional example you can clone and adapt, see the link:https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/pypi[CircleCI PyPI trusted publishing example].
 
@@ -31,7 +33,14 @@ NOTE: PyPI also supports a _pending publisher_ for projects that do not exist ye
 [#gather-the-data-you-need]
 == 1. Gather the data you need
 
-Three CircleCI identifiers are required to configure your project as a trusted publisher. Organization ID, Project ID, and Pipeline definition ID. Three others are optional - Context ID, VCS origin, and VCS ref. We recommend using at least some of these to further control who can trigger a publish depending on your workflow.
+You need CircleCI identifiers to configure your project as a trusted publisher. These are:
+
+* Organization ID
+* Project ID
+* Pipeline definition ID
+* Context ID (optional)
+* VCS origin (optional)
+* VCS ref (optional)
 
 Collect these before you visit PyPI.
 
@@ -51,7 +60,7 @@ You need your pipeline definition ID, in UUID format. You can find your pipeline
 include::guides:ROOT:partial$app-navigation/steps-to-pipeline-definition-id.adoc[]
 
 === 1.4 Context ID (optional)
-If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Lock it down with protected contexts>>) you will need the UUID for the context. To find a context ID, follow these steps:
+If you intend to restrict publishing to a CircleCI context (recommended, see <<lock-it-down,Step 3>>), get the UUID for the context now. To find a context ID, follow these steps:
 
 include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 . Select *Contexts* from the menu.
@@ -60,11 +69,14 @@ include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
 Gather context ID the context you want to restrict publishing to.
 
-=== 1.5 VCS origin (optional)
-You need the version control system origin URL for your project, for example `github.com/myorg/myrepo` or `gitlab.com/mylab/myproject`.
+=== 1.5 VCS origin and VCS ref (optional)
 
-=== 1.6 VCS ref (optional)
-The reference to the change that triggered the pipeline. Its value is a string similar to refs/heads/main.
+Using VCS origin and VCS ref, you can create trusted publishers that can only publish from specific branches. This can be useful if you have branch protections that control who can merge and therefore trigger pipelines. One example is to have a trusted publisher bound to a main branch for production releases, and to a staging branch for generating pre-releases.
+
+VCS origin:: You need the version control system origin URL for your project, for example `github.com/myorg/myrepo` or `gitlab.com/mylab/myproject`.
+VCS ref:: The reference to the change that triggered the pipeline, for example, `refs/heads/main`.
+
+NOTE: VCS origin and VCS ref info is not available for pipelines triggered via xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhooks].
 
 [#set-up-the-trusted-publisher-on-pypi]
 == 2. Set up the trusted publisher on PyPI
@@ -91,17 +103,9 @@ For an existing project:
 To publish a project name that does not exist yet, create a pending publisher instead from the *Publishing* page, then publish your first release through the workflow.
 
 [#lock-it-down]
-== 3. Lock it down
+== 3. Lock it down with restricted contexts
 
-We recommend adding some additional information to further secure your publishing pipeline. Contexts will allow you to control who can run pipelines that publish. You can also add information about your source repo and branch.
-
-=== 3.1 VCS origin and VCS ref
-
-Using VCS origin and VCS ref, you can create trusted publishers that can only publish from specific branches. This can be useful if you have branch protections that control who can merge and therefore trigger pipelines. One example is to have a trusted publisher bound to a main branch for production releases, and to a staging branch for generating pre-releases.
-
-NOTE: VCS origin and VCS ref info is not available for pipelines triggered via xref:orchestrate:triggers-overview.adoc#trigger-a-pipeline-from-a-custom-webhook[Custom Webhooks].
-
-=== 3.2 Lock it down with restricted contexts
+Using restricted contexts allows you to control who can run pipelines that publish. You can also add information about your source repo and branch.
 
 This step is optional but recommended. If you do not want context-based restrictions, skip to <<configure-your-circleci-pipeline,Step 4>>.
 
@@ -152,7 +156,7 @@ In the examples below, the job is attached to the context from <<lock-it-down,St
 Automatic (recommended)::
 +
 --
-With `twine` 6.1.0 or later, run `twine upload` and let `twine` handle the OIDC exchange for you.
+With Twine 6.1.0 or later, run `twine upload` and let Twine handle the OIDC exchange for you.
 
 [source,yaml]
 ----
@@ -191,7 +195,7 @@ workflows:
 Manual exchange (fallback)::
 +
 --
-If you cannot use `twine` 6.1.0 or later, retrieve the OIDC token and exchange it for a short-lived API token yourself.
+If you cannot use Twine 6.1.0 or later, retrieve the OIDC token and exchange it for a short-lived API token yourself.
 
 [source,yaml]
 ----
@@ -231,6 +235,7 @@ workflows:
               only:
                 - main
 ----
+
 --
 ====
 
@@ -261,11 +266,11 @@ Deploy markers provide a way to track and manage your PyPI package publications 
 
 You have two options for setting up deploy markers:
 
-* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup will walk you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
+* *In-app setup*: Use the guided setup in the CircleCI web app when configuring a xref:set-up-rollbacks.adoc[Rollback Pipeline] or xref:set-up-deploys.adoc[Deploy Pipeline]. The setup walks you through adding deploy markers to your configuration. If you are using GitHub and have the CircleCI GitHub App installed, you can use AI to generate the deploy marker configuration automatically.
 
 * *Manual setup*: Add deploy marker commands directly to your `.circleci/config.yml` file by following the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide.
 
-Both approaches will enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
+Both approaches enable you to track deployment history and manage rollbacks directly from the CircleCI web app.
 
 [#questions-and-feedback]
 == Feedback
