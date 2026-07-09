@@ -1415,7 +1415,7 @@
 
 
 /* paragraphs, lists, tables, blockquotes all get 16px bottom spacing */
-.doc p,
+.doc :not(li) > p,
 .doc blockquote,
 .doc ul,
 .doc ol,
