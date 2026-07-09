@@ -149,7 +149,7 @@ Approval job notifications are delivered through email and Slack. Who is notifie
 |===
 --
 
-By default, email notifications are sent to the user who triggered the pipeline and to project followers. You can manage your email preferences from your user notification settings. To adjust these settings, see the xref:integration:notifications.adoc#user-level-notifications[User-Level Notifications] section.
+By default, the user who triggered the pipeline receives an email notification. Project followers do not receive these emails by default, but can opt in from their user notification settings. To manage your email preferences, see the xref:integration:notifications.adoc#user-level-notifications[User-Level Notifications] section.
 
 Slack notifications are sent to the project's configured Slack channel and require an active Slack integration for your organization. To set up Slack for a project, follow the steps in the xref:integration:slack-integration.adoc[Slack Integration] guide.
 
