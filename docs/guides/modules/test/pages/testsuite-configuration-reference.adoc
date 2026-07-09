@@ -213,7 +213,7 @@ src/quz_test.py
 |===
 --
 
-.Example of file-mapper using << outputs.go-list-json >>
+.Example of file-mapper using `<< outputs.go-list-json >>`
 [%linenums,yaml]
 ----
 ---
@@ -221,7 +221,7 @@ name: go tests
 file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
 ----
 
-.Example of file-mapper using << outputs.circleci-list >>
+.Example of file-mapper using `<< outputs.circleci-list >>`
 [%linenums,yaml]
 ----
 ---
