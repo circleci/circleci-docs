@@ -202,9 +202,8 @@
      FONTS
      ============================================ */
 
-  --rem-base: 18; /* used to compute rem value from desired pixel value (e.g., calc(18 / var(--rem-base) * 1rem) = 18px) */
-  --body-font-size: 1.0625em; /* 17px */
-  --body-font-size--desktop: 1.125em; /* 18px */
+  --rem-base: 16; /* matches the 16px root; used to compute rem from px (e.g., calc(40 / var(--rem-base) * 1rem) = 40px) */
+  --body-font-size: 100%; /* 16px root (browser default); respects the user's font-size preference */
   --body-font-size--print: 0.9375em; /* 15px */
   --body-line-height: 1.6;
   --body-font-family: "Inter", "Inter Fallback", sans-serif;
