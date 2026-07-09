@@ -26,7 +26,7 @@ NOTE: PyPI also supports a _pending publisher_ for projects that do not exist ye
 * A project on CircleCI that builds your Python package.
 * A PyPI account with two-factor authentication enabled.
 * Owner access to the PyPI project, or permission to create a pending publisher for a new project name.
-* `twine` version 6.1.0 or later, and Python 3.9 or later, in the Docker image (or executor) used by your publishing job. From version 6.1.0, `twine` has built-in support for trusted publishing and detects CircleCI OIDC credentials automatically.
+* link:https://pypi.org/project/twine/[Twine] version 6.1.0 or later, and Python 3.9 or later, in the Docker image (or executor) used by your publishing job. From version 6.1.0, Twine has built-in support for trusted publishing and detects CircleCI OIDC credentials automatically.
 
 [#gather-the-data-you-need]
 == 1. Gather the data you need
