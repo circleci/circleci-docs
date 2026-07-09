@@ -3,7 +3,7 @@
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
-CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work and set up Slack notifications for team channels. You can receive alerts about deployment status and Chunk usage. You can also designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
+CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work and set up Slack notifications for team channels. You can receive alerts about deployment status and Chunk usage, and when a workflow pauses and waits for a manual approval. You can also designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
 
 This page explains how to configure email notifications, Slack notifications, and organization-level contacts.
 
@@ -115,6 +115,49 @@ CAUTION: The CircleCI Slack integration is available in preview. This means the 
 Configure Slack notifications at the project level to send workflow status updates to your team's Slack channels. This allows your entire team to stay informed about build status without individual email notifications.
 
 To set up Slack notifications for a project, follow the steps in the xref:integration:slack-integration.adoc[Slack Integration] guide.
+
+[badge="Preview"]
+== Approval job notifications
+
+CAUTION: Approval job notifications are available in preview. This means the feature is in early stages and you may encounter bugs, unexpected behavior, or incomplete features.
+
+When a workflow reaches an approval job, it pauses and waits for a person to approve it before continuing. A paused workflow is described as being _on hold_. Approval job notifications alert the relevant people as soon as a workflow goes on hold, so approvals are not missed and pipelines do not sit waiting.
+
+For more information on approval jobs, see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Hold a Workflow for a Manual Approval] section.
+
+=== When notifications are sent
+
+CircleCI sends an approval job notification when a workflow pauses at an approval job and is waiting for manual approval. Jobs that do not require approval do not trigger these notifications.
+
+=== Who is notified
+
+Approval job notifications are delivered through email and Slack. Who is notified, and on which channel, depends on their relationship to the pipeline:
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Recipient
+| Channel
+
+| The user who triggered the pipeline
+| Email
+
+| Followers of the project
+| Email
+
+| The project's configured Slack channel
+| Slack
+|===
+--
+
+By default, email notifications are sent to the user who triggered the pipeline and to project followers. You can manage your email preferences from your user notification settings. To adjust these settings, see the xref:integration:notifications.adoc#user-level-notifications[User-Level Notifications] section.
+
+Slack notifications are sent to the project's configured Slack channel and require an active Slack integration for your organization. To set up Slack for a project, follow the steps in the xref:integration:slack-integration.adoc[Slack Integration] guide.
+
+=== Approve or cancel an on-hold workflow
+
+Approval job notifications include a link to the workflow in the CircleCI web app. You cannot approve or cancel a workflow from within Slack or email. Select the link in the notification to open the workflow, then approve or cancel the paused job from there.
 
 == Organization-level contacts
 
