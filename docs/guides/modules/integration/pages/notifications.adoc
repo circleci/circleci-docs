@@ -119,8 +119,6 @@ To set up Slack notifications for a project, follow the steps in the xref:integr
 [badge="Preview"]
 == Approval job notifications
 
-CAUTION: Approval job notifications are available in preview. This means the feature is in early stages and you may encounter bugs, unexpected behavior, or incomplete features.
-
 When a workflow reaches an approval job, it pauses and waits for a person to approve it before continuing. A paused workflow is described as being _on hold_. Approval job notifications alert the relevant people as soon as a workflow goes on hold, so approvals are not missed and pipelines do not sit waiting.
 
 For more information on approval jobs, see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Hold a Workflow for a Manual Approval] section.
