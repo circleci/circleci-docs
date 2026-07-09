@@ -120,6 +120,7 @@ antora:
       - rst
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
+      - 'deploy:deploy-to-pypi-registry.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true

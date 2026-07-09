@@ -1,4 +1,5 @@
 = Publish to PyPI using OIDC trusted publishing
+:page-badge: Preview
 :page-platform: Cloud
 :page-description: Publish packages to PyPI from CircleCI using OIDC trusted publishing, the recommended tokenless approach.
 :experimental:
@@ -76,7 +77,7 @@ For an existing project:
 . Select menu:Manage for the project you want to add Trusted Publishing to.
 . Select menu:Publishing to begin the process.
 +
-.Trusted publisher form 
+.Trusted publisher form
 image::guides:ROOT:pypi-trusted-publishing/pypi-trusted-form.png[pypi Trusted Publisher form]
 
 . Fill in the fields with the values you collected in the previous step:
@@ -95,7 +96,7 @@ To publish a project name that does not exist yet, create a pending publisher in
 [#lock-it-down]
 == 3. Lock it down
 
-We recommend adding some additional information to further secure your publishing pipeline. Contexts will allow you to control who can run pipelines that publish. You can also add information about your source repo and branch. 
+We recommend adding some additional information to further secure your publishing pipeline. Contexts will allow you to control who can run pipelines that publish. You can also add information about your source repo and branch.
 
 === 3.1 VCS origin and VCS ref
 
