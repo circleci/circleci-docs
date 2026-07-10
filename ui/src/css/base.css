@@ -22,21 +22,29 @@ body {
   overflow-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
 }
 
-/* Desktop "tray": the page content sits in a white panel with rounded corners,
-   floating on a grey (--color-fog, theme-aware) backdrop inset by --tray-inset on
-   all sides — matches the redesign frame. Uses margin + border-radius rather than an
-   overflow-clip wrapper so the sticky header/nav/TOC keep working (sticky breaks
-   inside a clipped ancestor). The header carries the same rounded top corners
-   (lg:rounded-t-[16px]) and sticks at top:--tray-inset so the top gutter stays visible
-   when scrolled; without the matching radius its square corners would cover the notch. */
+/* Desktop "tray": the page is a white panel with 16px rounded corners, framed by an
+   even grey (--color-fog, theme-aware) --tray-inset gutter on all four sides. The
+   gutter is html PADDING (not body margin): a body bottom-margin isn't reachable by
+   scroll — browsers clamp to the content — so it never shows at the page end, whereas
+   html's padding-bottom sits at the true content end and is scrollable-to. height:auto
+   is needed for that (with the base height:100% the padding-bottom would sit a viewport
+   up, not at the content end); body min-height keeps short pages filling the viewport.
+   The panel scrolls and rubber-band-bounces with the document, so its rounded corners
+   move against the fixed grey backdrop.
+   Trade-off: the header's rounded top corners read as round at the top / during the top
+   bounce (grey behind them); mid-scroll the sticky header has white content behind, so
+   they look square. Keeping them round mid-scroll needs a fixed overlay, which kills the
+   bounce. */
 @media screen and (min-width: 1200px) {
   html {
     background: var(--color-fog);
+    padding: var(--tray-inset);
+    height: auto;
   }
 
   body {
-    margin: var(--tray-inset);
     border-radius: 16px;
+    min-height: calc(100vh - 2 * var(--tray-inset));
   }
 }
 
