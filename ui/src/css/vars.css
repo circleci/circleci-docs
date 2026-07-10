@@ -227,7 +227,6 @@
   --navbar-height: calc(63 / var(--rem-base) * 1rem);
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);
   --header-height: 9.5rem; /* ≈152px: rendered height of the sticky site header (pt-6 + logo row + mb-9 + component-nav row + border-b). Single source of truth for clearing the header — retune here if the header layout changes. */
-  --tray-inset: 4px; /* Desktop "tray": width of the grey gutter framing the page panel on all four sides (see base.css). */
   --drawer-height: var(--toolbar-height);
   --body-top: var(--navbar-height);
   --body-min-height: calc(100vh - var(--body-top));
