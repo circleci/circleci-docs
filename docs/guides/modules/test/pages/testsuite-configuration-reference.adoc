@@ -33,8 +33,8 @@ The `name` field is used to run a test suite with the local plugin and CI subcom
 
 [source,console]
 ----
-$ circleci run testsuite "frontend tests"
-$ circleci run testsuite "backend tests"
+$ circleci testsuite "frontend tests"
+$ circleci testsuite "backend tests"
 ----
 
 [%linenums,yaml]
@@ -318,7 +318,7 @@ jobs:
     executor: node-with-service
     steps:
       - setup
-      - run: circleci run testsuite "ci tests"
+      - run: circleci testsuite "ci tests"
       - store_test_results:
           path: test-reports
 ----
