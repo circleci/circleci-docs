@@ -18,10 +18,11 @@ The next sections go over what test insights are available.
 The summary section displays test suite performance across your most recent 100 runs. You can view the following:
 
 * Average tests per run
-* Number of all flaky tests detected
+* Number of all flaky tests detected.
 * Failure counts
-* Slow run times in test suite
+* Slow run times in test suite.
 
+.Performance summary
 image::guides:ROOT:test-insights-performance-summary.png[Performance summary example]
 
 [#most-recent-runs]
@@ -33,6 +34,7 @@ The most recent runs chart displays the most recent 100 executions of the test s
 * Skipped tests
 * Success rate of tests
 
+.Most recent runs
 image::guides:ROOT:test-insights-recent-runs.png[Recent runs example]
 
 [#flaky-tests]
@@ -42,6 +44,7 @@ Flaky tests are tests that fail non-deterministically; they pass and fail due to
 
 Test Insights detects flaky tests. Flaky tests are identified as tests that failed and passed on the same commit in a 14-day window. Deterministic tests rely on the state of the repository and show the same behavior on re-runs. Flaky tests are labeled `FLAKY` throughout the CircleCI app to help you identify them.
 
+.Flaky tests
 image::guides:ROOT:test-insights-flaky.png[Flaky tests Insights example]
 
 [#most-failed-tests]
@@ -54,6 +57,7 @@ You can view the 100 tests with the lowest success rates in their most recent pi
 * Run time
 * Success rate
 
+.Most failed tests
 image::guides:ROOT:test-insights-failed.png[Most failed tests examples]
 
 [#slowest-tests]
@@ -66,4 +70,5 @@ You can view the 100 tests with the longest run times in their most recent pipel
 * Run time
 * Success rate
 
+.Slowest tests
 image::guides:ROOT:test-insights-slowest.png[Slowest tests example]
