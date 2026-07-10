@@ -226,6 +226,7 @@
 
   --navbar-height: calc(63 / var(--rem-base) * 1rem);
   --toolbar-height: calc(45 / var(--rem-base) * 1rem);
+  --header-height: 9.5rem; /* ≈152px: rendered height of the sticky site header (pt-6 + logo row + mb-9 + component-nav row + border-b). Single source of truth for clearing the header — retune here if the header layout changes. */
   --drawer-height: var(--toolbar-height);
   --body-top: var(--navbar-height);
   --body-min-height: calc(100vh - var(--body-top));
@@ -234,8 +235,8 @@
   --nav-panel-menu-height: calc(100% - var(--drawer-height));
   --nav-panel-explore-height: calc(50% + var(--drawer-height));
   --nav-width: calc(270 / var(--rem-base) * 1rem);
-  --spacing: 0.25rem; /* Base spacing unit (0.25rem * 40 = 10rem for TOC positioning) */
-  --toc-top: calc(var(--spacing) * 40); /* Empirically determined: clears the sticky header (logo row + component nav) plus a gap below its border. ≈10rem/160px at the 16px root; retune if the header height changes. */
+  --spacing: 0.25rem; /* Base spacing unit */
+  --toc-top: calc(var(--header-height) + var(--spacing) * 2); /* Sticky TOC sits below the header with an 8px gap (≈10rem/160px). */
   --toc-height: calc(100vh - var(--toc-top) - 6.2rem);
   --toc-width: calc(265 / var(--rem-base) * 1rem);
   --toc-width--widescreen: calc(474 / var(--rem-base) * 1rem);

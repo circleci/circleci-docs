@@ -73,7 +73,7 @@
   margin: 16px 0;
   padding: 0;
   text-align: left;
-  scroll-margin-top: calc(var(--navbar-height) + var(--toolbar-height) + 1rem);
+  scroll-margin-top: calc(var(--header-height) + 1.5rem); /* No-JS fallback for anchor jumps; the active offset is set in js/03-fragment-jumper.js (HEADER_GAP). Keep the gap in sync (1.5rem = 24px). */
   /* Flex layout for badge vertical alignment */
   display: flex;
   align-items: center;
