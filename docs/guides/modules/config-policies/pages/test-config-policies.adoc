@@ -445,7 +445,7 @@ It is best-practice to use a file structure that allows you to write stable test
 │   │   ├── policy2_test.yaml
 ----
 
-Run tests against the entire production policy bundle, and also write stable tests against individual policies. Isolate each policy in its own subdirectory with its tests; each subdirectory will then run with a sub-bundle and its defined tests.
+Run tests against the entire production policy bundle, and also write stable tests against individual policies. Isolate each policy in its own subdirectory with its tests. Each subdirectory will then run with a sub-bundle and its defined tests.
 
 . Update the file structure:
 +
