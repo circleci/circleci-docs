@@ -22,6 +22,24 @@ body {
   overflow-wrap: anywhere; /* aka overflow-wrap; used when hyphens are disabled or aren't sufficient */
 }
 
+/* Desktop "tray": the page content sits in a white panel with rounded corners,
+   floating on a grey (--color-fog, theme-aware) backdrop inset by --tray-inset on
+   all sides — matches the redesign frame. Uses margin + border-radius rather than an
+   overflow-clip wrapper so the sticky header/nav/TOC keep working (sticky breaks
+   inside a clipped ancestor). The header carries the same rounded top corners
+   (lg:rounded-t-[16px]) and sticks at top:--tray-inset so the top gutter stays visible
+   when scrolled; without the matching radius its square corners would cover the notch. */
+@media screen and (min-width: 1200px) {
+  html {
+    background: var(--color-fog);
+  }
+
+  body {
+    margin: var(--tray-inset);
+    border-radius: 16px;
+  }
+}
+
 a {
   text-decoration: none;
 }
