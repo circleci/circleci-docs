@@ -55,7 +55,7 @@ a| * You want to use centralized configuration for your organization.
 * You need to use proprietary or confidential configurations.
 a| * Configuration is specific to a single project.
 * You want zero publishing or hosting overhead.
-* You're learning about orbs and want to experiment.
+* You are learning about orbs and want to experiment.
 * You need immediate changes without any publishing delay.
 
 |===
