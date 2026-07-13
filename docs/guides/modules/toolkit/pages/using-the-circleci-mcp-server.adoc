@@ -5,6 +5,11 @@
 
 The CircleCI MCP server enables you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
 
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
+
 == Introduction
 
 Model Context Protocol (MCP) is a standardized protocol that allows large language models (LLMs) to interact with external systems. The CircleCI MCP server connects your AI coding assistants directly to your CircleCI pipelines.
@@ -38,6 +43,11 @@ With the CircleCI MCP server, you can perform CircleCI tasks using natural langu
 * "Validate my CircleCI config."
 
 == Installation
+
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
 
 This section describes how to install the CircleCI MCP server in your development environment.
 
@@ -173,6 +183,11 @@ NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are u
 
 == Using the CircleCI MCP server
 
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
+
 Once you have installed the CircleCI MCP server, you can use it to diagnose build failures, fix issues, and manage CI pipelines through natural language commands.
 
 Your agent chat facility (which will be different for each AI coding assistant) will have access to the tools that the CircleCI MCP server supports. The supported tools are described in the next section.
@@ -183,6 +198,11 @@ Your agent chat facility (which will be different for each AI coding assistant) 
 image::guides:ROOT:mcp-server-cursor.png[CircleCI MCP server in Cursor IDE]
 
 == Supported tools
+
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
 
 This section outlines the abilities that the CircleCI MCP server currently supports. Several tools are described below along with usage examples. For full information on each tool see the link:https://github.com/CircleCI-Public/mcp-server-circleci/blob/main/README.md[README] file in the tool's repository.
 
