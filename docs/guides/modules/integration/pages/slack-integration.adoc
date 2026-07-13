@@ -11,6 +11,7 @@ This guide explains how to:
 * Install the CircleCI Slack app for your organization.
 * Link a project to a Slack channel.
 * Update notification preferences for a project.
+* Link your Slack identity to receive personal notifications.
 
 == Limitations
 
@@ -35,6 +36,7 @@ After the app is installed, any CircleCI organization member with write permissi
 
 NOTE: If you do not have the required permissions, the relevant controls are disabled in the CircleCI web app.
 
+[#install-the-slack-app]
 == 1. Install the CircleCI Slack app
 
 The CircleCI Slack app is installed once at the organization level and is then available to all projects in that organization.
@@ -119,7 +121,55 @@ Organization administrators can manage the Slack integration from menu:Org[Slack
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
 
-== Example slack notifications
+[badge="Beta"]
+== Link your Slack identity
+
+Linking your Slack identity connects your CircleCI user account to your identity in a Slack workspace that has the CircleCI Slack app installed. Linking your identity enables direct message notifications, actor tagging, and interactivity such as approving a held workflow directly from Slack.
+
+Linking is scoped by Slack workspace. If you belong to multiple organizations that each have their own connected Slack workspace, link your identity separately for each one.
+
+NOTE: A Slack identity can be linked to only one CircleCI user account at a time. If you try to link a Slack identity that is already linked to a different CircleCI account, the link attempt fails. Unlink the Slack identity from the other account, then try again.
+
+=== Prerequisites
+
+* Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app>> above.
+* Your Slack workspace must allow **Sign in with Slack**. A Slack workspace admin can confirm or enable this from **Admin** > **Apps and workflows** > **App Management Settings** in Slack. If your organization has an Apps organization policy set at the Slack org level, an Org Owner may also need to approve the CircleCI app's use of the Sign in with Slack identity scope.
+
+=== How Slack identity linking works
+
+CircleCI uses link:https://docs.slack.dev/authentication/sign-in-with-slack/[Sign in with Slack] to link your identity. Sign in with Slack is Slack's own implementation of OpenID Connect (OIDC), a standard built on top of OAuth 2.0.
+
+During the exchange, Slack returns an ID token containing your Slack user ID, team ID, and display name. CircleCI reads these identity claims to create the link between your CircleCI user and your Slack identity. CircleCI does not retain the Slack access token or ID token from the exchange.
+
+=== Link your identity from Account Integrations
+
+include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
+. Select link:https://app.circleci.com/settings/user[Account Integrations] from the sidebar.
+. In the *Slack* section, find the organization you want to link and select **Connect**.
+. In Slack, confirm you are signed in to the account you want to link and select **Allow**.
++
+NOTE: If you previously signed in to this Slack workspace with Sign in with Slack, Slack may skip this confirmation and link your identity automatically.
+. Confirm that the workspace now shows as connected on the *Account Integrations* page.
+
+=== Link your identity from Notifications settings
+
+You can also link or unlink your Slack identity from menu:User Settings[Notifications].
+
+include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
+. Select link:https://app.circleci.com/settings/user/notifications[Notifications] from the sidebar.
+. Find your organization in the table and select **Connect** in the Slack column.
+
+=== Unlink your Slack identity
+
+To stop personal Slack notifications, select **Disconnect** next to the linked workspace on either the *Account Integrations* page or the *Notifications* page in User Settings.
+
+=== Troubleshoot Slack identity linking
+
+* **The link fails after you select Allow in Slack.** Your Slack workspace or organization may have Sign in with Slack disabled, or may require admin approval for apps that request the Sign in with Slack identity scope. Ask a Slack workspace admin or Org Owner to enable Sign in with Slack for the CircleCI app and try again.
+* **CircleCI shows a "Slack account already linked" error.** The Slack identity you authenticated with is already connected to a different CircleCI account. Sign in to that account and unlink the Slack identity before linking it here.
+* **The Connect button is unavailable or shows "Slack not installed."** An organization administrator must install the CircleCI Slack app before you can link your identity. See <<install-the-slack-app>> above.
+
+== Example Slack notifications
 
 The following images show example of the CircleCI slack integration notifications.
 
