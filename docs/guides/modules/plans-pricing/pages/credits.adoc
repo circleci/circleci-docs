@@ -38,9 +38,9 @@ If you build on macOS, we also offer organizations on our Free Plan 30,000 credi
 [#free-plan-limits]
 == Free plan limits
 
-Organizations on the Free Plan receive 30,000 credits per month for personal (non-open-source) usage, along with an included allotment of 1 GB of network transfer and 2 GB-months of storage. Network and storage usage beyond these allotments draws from your monthly credits rather than being billed separately.
+Organizations on the Free Plan receive 30,000 credits per month for personal (non-open source) usage. Free organizations also receive an included allotment of 1 GB of network transfer and 2 GB-months of storage. Network and storage usage beyond these allotments draws from your monthly credits rather than being billed separately.
 
-When your available credits reach 0, personal builds are blocked until your credits refill at the start of the next month. There is no mid-cycle refill. Open source builds are not subject to this block and continue to run even if your credit balance is exhausted.
+When your available credits reach 0, personal builds are blocked until your credits refill at the start of the next month. Open source builds are not subject to this block and continue to run even if your credit balance is exhausted.
 
 [#troubleshooting-job-is-queued]
 == Troubleshooting: Do I get charged if my job is "queued" or "preparing"?
