@@ -123,7 +123,6 @@ The selection rules can be extended to select tests beyond those identified in t
 
 Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 
@@ -146,7 +145,7 @@ Use `--doctor` locally to validate the `test-suites.yml` is set up correctly. Th
 
 [source,console]
 ----
-$ circleci run testsuite "ci tests" --doctor
+$ circleci testsuite "ci tests" --doctor
 ----
 
 Follow the steps until all checks pass.
@@ -295,7 +294,7 @@ jobs:
     steps:
       - setup
       # Disable analysis, run all tests on default branches, impacted tests on feature branches.
-      - run: circleci run testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -304,7 +303,7 @@ jobs:
     steps:
       - setup
       # Disable running tests, default will analyze impacted tests on main.
-      - run: circleci run testsuite "ci tests" --run-tests="none"
+      - run: circleci testsuite "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -344,7 +343,7 @@ jobs:
       - setup
       # Disable analysis.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci run testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -354,7 +353,7 @@ jobs:
       - setup
       # Disable running tests.
       # Default will analyze impacted tests on main.
-      - run: circleci run testsuite "ci tests" --run-tests="none"
+      - run: circleci testsuite "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -396,7 +395,7 @@ jobs:
       - setup
       # Analyze impacted tests on "develop" branch, otherwise disable.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci run testsuite "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
+      - run: circleci testsuite "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
       - store_test_results:
           path: test-reports
 ----
