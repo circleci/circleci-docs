@@ -184,6 +184,8 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.git.repo_url`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center#
 | String
 | The URL of the repository.
@@ -192,7 +194,9 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.git.repo_owner`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud#
 | String
 | The VCS username of the repository owner.
 | [.circle-green]#**Yes**#
@@ -200,7 +204,9 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.git.repo_name`
 d| [.nowrap]#GitHub App# +
-[.nowrap]#GitHub App Server#
+[.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud#
 | String
 | The name of the repository, without the owner prefix.
 | [.circle-green]#**Yes**#
@@ -209,6 +215,8 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.git.repo_id`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center#
 | String
 | The unique identifier of the repository.
@@ -231,8 +239,8 @@ _(except schedule workflows)_
 | `pipeline.git.commit.subject`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
-[.nowrap]#GitHub OAuth# _(push events only)_ +
-[.nowrap]#Bitbucket Cloud# _(push events only)_ +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
@@ -243,7 +251,8 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.git.commit.body`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
-[.nowrap]#Bitbucket Cloud# _(push events only)_ +
+[.nowrap]#GitHub OAuth# +
+[.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
@@ -254,11 +263,11 @@ d| [.nowrap]#GitHub App# +
 | `pipeline.git.commit.author_login`
 d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub App Server# +
-[.nowrap]#GitHub OAuth# _(push events only)_ +
+[.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Data Center# +
 [.nowrap]#GitLab#
 | String
-| The VCS username of the author of the checkout commit.
+| The VCS username of the author of the checkout commit. Not available for Bitbucket Cloud because Bitbucket has link:https://developer.atlassian.com/cloud/bitbucket/bitbucket-api-changes-gdpr/[deprecated usernames].
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
 
@@ -339,7 +348,7 @@ These values describe how and why the pipeline was triggered, including the even
 
 [WARNING]
 ====
-All `+pipeline.trigger_parameters.circleci.*+` and `+pipeline.trigger_parameters.github_app.*+` values are deprecated and their presence is not guaranteed after **2026-08-01**. Use the replacement values listed in the table below.
+All `+pipeline.trigger_parameters.circleci.*+` and `+pipeline.trigger_parameters.github_app.*+` values are deprecated and their presence is not guaranteed after **2026-09-21**. Use the replacement values listed in the table below.
 ====
 
 [.table-scroll]

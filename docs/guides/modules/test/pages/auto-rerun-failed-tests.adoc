@@ -78,7 +78,6 @@ flowchart LR
 
 Before enabling auto rerun failed tests, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 * Correctly configured JUnit XML output in `.circleci/test-suites.yml`.
@@ -124,7 +123,7 @@ Use `--doctor` locally to validate that your `test-suites.yml` is set up correct
 
 [source,console]
 ----
-$ circleci run testsuite "ci tests" --doctor
+$ circleci testsuite "ci tests" --doctor
 ----
 
 Follow the steps until all checks pass.
@@ -135,7 +134,7 @@ To verify auto rerun locally, modify a test to cause it to fail, then run the te
 
 [source,console]
 ----
-$ circleci run testsuite "ci tests"
+$ circleci testsuite "ci tests"
 ----
 
 == 3. Run in CI

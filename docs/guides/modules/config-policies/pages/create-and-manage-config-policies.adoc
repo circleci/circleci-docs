@@ -289,7 +289,7 @@ If the upload was successful, you will see something like the following:
 Push to VCS::
 +
 --
-Push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+Push your changes to the `main` branch of your config policies repository. The CircleCI web app will then show your policy pipeline running.
 
 For policy development, you can push to a development branch. You get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization.
 --
