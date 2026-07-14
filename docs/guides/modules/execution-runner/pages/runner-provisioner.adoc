@@ -636,8 +636,8 @@ $ docker push <your-registry>/<your-image>:<tag>
 
 === Point a resource class at the custom image
 
-Update `spec.volumes[].containerDisk.image` in `my-values.yaml` to reference the custom image instead of the default:
-
+. Update `spec.volumes[].containerDisk.image` in `my-values.yaml` to reference the custom image instead of the default:
++
 .`my-values.yaml`
 [source,yaml]
 ----
@@ -650,7 +650,7 @@ provisioner:
             image: "<your-registry>/<your-image>:<tag>"
 ----
 
-Run `helm upgrade` as described in <<upgrading,Upgrading>> to roll out the change. Existing VMs keep running on the old image until they are recreated.
+. Run `helm upgrade` as described in <<upgrading>> to roll out the change. Existing VMs keep running on the old image until they are recreated.
 
 NOTE: A pre-built reference image with a larger root and Docker preinstalled is planned for a future release. Until then, build a custom image using the steps in this section.
 
