@@ -589,7 +589,7 @@ The startup script performs the following steps on each VM:
 [#custom-containerdisk-image]
 == Building a custom containerDisk image
 
-The default base image, `quay.io/containerdisks/ubuntu:22.04`, has a root filesystem capped at 2.2 GiB. Installs that write a lot of data to `/usr` or `/`, such as a full Docker install, can fail with a disk full error. This limit is not configurable through Runner Provisioner or KubeVirt; it comes from the base image itself. To get more root space, build a custom containerDisk image with a larger virtual size and point your resource class at it.
+The default base image, `quay.io/containerdisks/ubuntu:22.04`, has a root filesystem capped at 2.2 GiB. Installs that write a lot of data to `/usr` or `/`, such as a full Docker install, can fail with a disk full error. This limit is not configurable through Runner Provisioner or KubeVirt. The limit comes from the base image itself. To get more root space, build a custom containerDisk image with a larger virtual size and point your resource class at it.
 
 === Resize the disk image
 
