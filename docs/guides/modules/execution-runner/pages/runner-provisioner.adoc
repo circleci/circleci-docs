@@ -603,7 +603,7 @@ $ docker rm extract-base
 $ qemu-img resize disk.qcow2 20G
 ----
 
-`qemu-img resize` only grows the virtual size recorded in the qcow2 header. The image stays sparse, so the file on disk and the pushed registry layer barely grow. The extra space only becomes real data once the guest OS writes to it. The resize itself has minimal impact on registry storage or node-side image pulls.
+The `qemu-img resize` command only grows the virtual size recorded in the qcow2 header. The image stays sparse, so the file on disk and the pushed registry layer barely grow. The extra space only becomes real data once the guest OS writes to it. The resize itself has minimal impact on registry storage or node-side image pulls.
 
 === Install dependencies in the image
 
