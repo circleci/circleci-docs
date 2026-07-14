@@ -112,11 +112,11 @@ The `circleci orb init` command is not currently available in CLI v1.
 
 === Config policy management
 
-Note the following changes to config policy management:
-
 * The `--owner-id` flag used in legacy policy commands has been renamed to `--org` in CLI v1.
 * The `circleci policy eval` for running local evaluations has been removed in CLI v1.
 * The `circleci policy test <path>` command has been removed in CLI v1. If you require this functionality let your account manager know.
+
+Note the following changes to config policy management:
 
 *Read policy settings*::
 +
