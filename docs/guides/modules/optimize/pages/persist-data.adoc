@@ -170,7 +170,7 @@ jobs:
       - run: npm test
 ----
 
-Data stored at the end of a billing cycle is restored when the cycle restarts, using the storage period set in your usage controls. For example, suppose you restore and save a cache on day 25 with a 10-day storage period. If no changes are made by day 30, a new cache is built on day 31 and saved for a new 10-day period.
+Storage retention periods run independently of your billing cycle. When you save a cache, its retention countdown begins immediately for the configured storage period (for example, 10 days). Storage retention is not affected by when your billing cycle starts or ends. For example, if you save a cache on day 25 with a 10-day storage period, that cache remains in storage through day 35. This period spans the end of one billing cycle and the start of the next.
 
 [#how-to-calculate-an-approximation-of-network-and-storage-costs]
 === How to calculate an approximation of network and storage costs
@@ -180,6 +180,8 @@ NOTE: For our monthly Performance Plan customers: billing for network egress and
 Network charges apply when an organization has runner network egress beyond the included network GB allotment. Billing for network usage is only applicable to traffic from CircleCI to self-hosted runners. If you are exclusively using our cloud-hosted executors, no network fees apply.
 
 Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
+
+Storage usage is calculated once, at the moment an object is saved. Storage usage is not accrued day by day while it remains in storage. CircleCI multiplies the object's size by its configured retention period to get its total GB-days. This amount is added to your storage usage for the billing period in which it was saved.
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
 
