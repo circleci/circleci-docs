@@ -170,7 +170,7 @@ jobs:
       - run: npm test
 ----
 
-Storage retention periods run independently of your billing cycle. When you save a cache, its retention countdown begins immediately for the configured storage period (for example, 10 days) and is not affected by when your billing cycle starts or ends. For example, if you save a cache on day 25 with a 10-day storage period, that cache remains in storage through day 35. This period spans the end of one billing cycle and the start of the next.
+Storage retention periods run independently of your billing cycle. When you save a cache, its retention countdown begins immediately for the configured storage period (for example, 10 days). Storage retention is not affected by when your billing cycle starts or ends. For example, if you save a cache on day 25 with a 10-day storage period, that cache remains in storage through day 35. This period spans the end of one billing cycle and the start of the next.
 
 [#how-to-calculate-an-approximation-of-network-and-storage-costs]
 === How to calculate an approximation of network and storage costs
