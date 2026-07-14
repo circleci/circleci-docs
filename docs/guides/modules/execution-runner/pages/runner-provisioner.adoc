@@ -652,8 +652,6 @@ provisioner:
 
 . Run `helm upgrade` as described in <<upgrading>> to roll out the change. Existing VMs keep running on the old image until they are recreated.
 
-NOTE: A pre-built reference image with a larger root and Docker preinstalled is planned for a future release. Until then, build a custom image using the steps in this section.
-
 == Scaling behavior
 
 Desired replicas are calculated as unclaimed tasks plus running tasks, clamped to `[minReplicas, maxReplicas]`.
