@@ -181,7 +181,7 @@ Network charges apply when an organization has runner network egress beyond the 
 
 Storage charges apply when you retain artifacts, workspaces, and caches beyond the included storage GB allotment.
 
-Storage usage is calculated once, at the moment an object is saved, rather than accrued day by day while it remains in storage. CircleCI multiplies the object's size by its configured retention period to get its total GB-months, and adds that amount to your storage usage for the billing period in which it was saved.
+Storage usage is calculated once, at the moment an object is saved, rather than accrued day by day while it remains in storage. CircleCI multiplies the object's size by its configured retention period to get its total GB-days, and adds that amount to your storage usage for the billing period in which it was saved.
 
 You can find out how much network and storage usage is available on your plan by visiting the features section of the link:https://circleci.com/pricing/[Pricing] page. If you would like more details about credit usage, and how to calculate your potential network and storage costs, visit the billing section on the xref:reference:ROOT:faq.adoc#calculate-monthly-storage-and-network-costs[FAQ] page.
 
