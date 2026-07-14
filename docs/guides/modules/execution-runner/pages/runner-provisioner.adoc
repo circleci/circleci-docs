@@ -898,7 +898,7 @@ Common causes:
 [#disk-full-during-install]
 === Package installs fail with a disk full error
 
-A disk full error while installing packages, such as Docker, means the root filesystem on the default base image ran out of space. The default image caps root at 2.2 GiB, inherited from the upstream Ubuntu cloud image, and this limit cannot be raised at runtime. Build a custom image with a larger root. See <<custom-containerdisk-image,Building a Custom containerDisk Image>> for more infromation.
+A disk full error while installing packages, such as Docker, means the root filesystem on the default base image ran out of space. The default image caps root at 2.2 GiB, inherited from the upstream Ubuntu cloud image, and this limit cannot be raised at runtime. Build a custom image with a larger root. See <<custom-containerdisk-image,Building a Custom containerDisk Image>> for more information.
 
 [#scaling-not-responding]
 === Scaling is not responding to job demand
