@@ -618,16 +618,16 @@ Run additional `--run-command` or `--install` flags for any other packages the r
 
 === Package and push the custom image
 
-Package the resized, customized qcow2 as a new OCI image with the disk at `/disk`, matching the layout KubeVirt expects:
-
+. Package the resized, customized qcow2 as a new OCI image with the disk at `/disk`, matching the layout KubeVirt expects:
++
 [source,dockerfile]
 ----
 FROM scratch
 ADD disk.qcow2 /disk/
 ----
 
-Build and push the image to a registry your cluster can reach:
-
+. Build and push the image to a registry your cluster can reach:
++
 [source,console]
 ----
 $ docker build -t <your-registry>/<your-image>:<tag> .
