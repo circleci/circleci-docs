@@ -7,14 +7,15 @@ parameters:
     description: "Force UI bundle rebuild regardless of changes detected"
 
 orbs:
-  aws-cli: circleci/aws-cli@5.4.1
+  aws-cli: circleci/aws-cli@5.4.2
   vale: circleci/vale@1.2.1
   go: circleci/go@3.0.4
 
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.15.0
+      - image: cimg/node:24.16.0
+    resource_class: medium+.gen2
     working_directory: ~/project
 
   go_executor:
@@ -139,8 +140,9 @@ jobs:
           paths:
             - ui-bundle.zip
             - ui/node_modules
-      - go/install:
-          version: "1.25.0"
+      - run:
+          name: Install Go
+          command: circleci run circleci/setup-go@0.0.6-2f4558a -- --version 1.25.0 --go-cache-checksum '{{ checksum "go.sum" }}'
       - run:
           name: Verify Go Installation
           command: |

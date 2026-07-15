@@ -3,37 +3,37 @@
 :page-description: Config policies for CircleCI project configurations.
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2. You must be an organization admin in order to create and manage config policies.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2. You must be an organization admin in order to create and manage config policies.
 
 Use config policies to create organization-level policies to impose rules and scopes to govern which configuration elements are required, allowed, not allowed etc.
 
 [#introduction]
 == Introduction
 
-Config policies allow you to create policies for governing CircleCI project configurations. In its strictest case, if a project configuration does not comply with the rules set out in the associated policy, that project's pipelines cannot be triggered until it does comply.
+Config policies allow you to create policies for governing CircleCI project configurations. In the strictest case, pipelines cannot be triggered until a project configuration complies with all associated policy rules.
 
-CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. This is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policies adds in this layer of control.
+CircleCI uses `config.yml` files to define CI/CD pipelines at the project level. Using `config.yml` files is a convenient way of developing and iterating quickly, as each pipeline can be made to meet the needs of the project as it grows. However, it can be difficult to manage and enforce organization-wide conventions and security policies. Config policies add in this layer of control.
 
 Config policy decisions are stored, and can be audited. This provides useful data about the pipeline definitions being run within your organization.
 
 [#quickstart]
 == Quickstart
 
-If you already have a xref:getting-started:first-steps.adoc[CircleCI account] connected to your VCS, and you would like to get started with config policies right away, check out the steps in the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a policy] how-to guide to get started.
+If you have a xref:getting-started:first-steps.adoc[CircleCI Account] and want to get started with config policies, see the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a Policy] how-to guide.
 
 The following how-to guides are available for config policies:
 
-* xref:create-and-manage-config-policies.adoc[Create and manage config policies]
-* xref:test-config-policies.adoc[Test config policies]
-* xref:use-the-cli-for-config-and-policy-development.adoc[Use the CLI for config and policy development]
-* xref:config-policies-for-self-hosted-runner.adoc[Config policies for self-hosted runner]
+* xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies]
+* xref:test-config-policies.adoc[Test Config Policies]
+* xref:use-the-cli-for-config-and-policy-development.adoc[Use the CLI for Config and Policy Development]
+* xref:config-policies-for-self-hosted-runner.adoc[Config Policies for Self-Hosted Runner]
 
 [#how-config-policy-work]
 == How config policies work
 
 Config policies use a decision engine based on link:https://www.openpolicyagent.org/[Open Policy Agent (OPA)]. Policies are written in the Rego query language, as defined by OPA. Rule violations are surfaced when pipeline triggers are applied.
 
-Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the xref:create-and-manage-config-policies.adoc[Create and manage config policies] page.
+Policies can be developed locally and pushed to CircleCI using the CircleCI CLI. Policies can be saved to a repository within your VCS. For more information see the xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies] page.
 
 CircleCI uses the result of OPA output to generate _decisions_ from policy executions. Those decisions have the following outputs:
 
@@ -45,26 +45,26 @@ soft_failures:    Array<{ rule: string, reason: string }>
 hard_failures:    Array<{ rule: string, reason: string }>
 ```
 
-The decision result tracks which rules were included in the making of the decision, and any violations, both soft and hard, that were found.
+The decision result tracks which rules it included in the decision, and any violations—both soft and hard—that it found.
 
 [#use-the-cli-with-config-policies]
 == Use the CLI with config policies
 
 ****
-**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+**Using server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 [source,shell]
 ----
 circleci policy settings --enabled=true --owner-id <your-organization-ID> --policy-base-url <your-circleci-server-domain>
 ----
 ****
 
-Use the CircleCI CLI to manage your organization's policies programmatically. Config policies sub-commands are grouped under the `circleci policy` command.
+Use the CircleCI CLI to manage your organization's policies programmatically. Config policies subcommands are grouped under the `circleci policy` command.
 
-The following config policies sub-commands are currently supported within the CLI:
+The following config policies subcommands are currently supported within the CLI:
 
-* `diff` - shows the difference between local and remote policy bundles
-* `fetch` - fetches the policy bundle (or one policy, based on name) from remote
-* `push` - pushes the policy bundle (activate policy bundle)
+* `diff` - shows the difference between local and remote policy bundles.
+* `fetch` - fetches the policy bundle (or one policy, based on name) from remote.
+* `push` - pushes the policy bundle (activate policy bundle).
 +
 For example, running the following command activates a policy bundle stored at `./policy_bundle_dir_path`:
 +
@@ -74,7 +74,7 @@ circleci policy push ./policy_bundle_dir_path --owner-id <your-organization-ID>
 ----
 *  `settings` - used to modify config policies settings as required.
 +
-When the `settings` sub-command is called without any flags, current settings are fetched and printed on console.
+When the `settings` subcommand is called without any flags, current settings are fetched and printed in the console.
 +
 [source,shell]
 ----
@@ -120,7 +120,7 @@ generated when your policies are evaluated. Therefore, policies must be written 
 [#package-and-name]
 === Package and name
 
-All policies must belong to the `org` package and declare the policy name as the first rule. All policy Rego files should include:
+All policies must belong to the `org` package and declare the policy name as the first rule. All policy Rego files must include:
 
 [source,go]
 ----
@@ -140,10 +140,10 @@ The `policy_name` must be declared using a partial rule and declare the name as 
 After declaring the `org` package and `policy_name` rule, policies can then be defined as a list of rules. Each rule is composed of three parts:
 
 * Evaluation - Evaluates whether the config contains the policy violation.
-* Enforcement status - Determines how a violation should be enforced.
-* Enablement - Determines if a policy violation should be enabled.
+* Enforcement status - Determines how a violation is enforced.
+* Enablement - Determines if a policy violation is enabled.
 
-Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the xref:config-policy-reference.adoc[Config policy reference].
+Using this format allows policy writers to create custom helper functions without impacting CircleCI's ability to parse policy evaluation output. You can create your own helper functions, but also CircleCI provides a set of helpers by importing `data.circleci.config` in your policies. For more information, see the xref:config-policy-reference.adoc[Config Policy Reference].
 
 NOTE: **Helpers** in the context of config policies are rules like any other, but rules that are not individually _enabled_ for the process of determining policy violation. Helpers can be written and used as building blocks for your policies.
 
@@ -157,9 +157,9 @@ input.jobs          # an array of nested structures mirroring jobs in the Circle
 
 In OPA, rules can produce any type of output. At CircleCI, rules that produce violations must have outputs of the following types:
 
-* String
-* String array
-* Map of string to string
+* String.
+* String array.
+* Map of string to string.
 
 This restriction is in place so that rule violations produce error messages that individual contributors and SecOps can act upon.
 Helper rules that produce differently typed outputs can still be defined, but rules that will be considered when making CircleCI decisions must have the output types specified above. For more information see the <<#enablement>> section below.
@@ -195,7 +195,7 @@ contains_workflows = reason {
 }
 ----
 
-The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial Docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs should only be used when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
+The rule ID can be used to differentiate between multiple violations of the same rule. For example, if a config uses multiple unofficial Docker images, this might lead to multiple violations of a `use_official_docker_image` rule. Rule IDs are only needed when multiple violations are expected. In some cases, the customer may only need to know if a rule passes or not. In this case, the rule will not need a rule ID.
 
 [source,go]
 ----
@@ -270,18 +270,18 @@ hard_fail["use_official_docker_image"]
 [#using-pipeline-metadata]
 === Using pipeline metadata
 
-When writing policies for CircleCI config, it is often desirable to have policies that vary slightly in behaviour by project or branch. This is possible using the `data.meta` Rego  property.
+When writing policies for CircleCI config, it is often desirable to have policies that vary slightly in behaviour by project or branch. Varying behavior by project or branch is possible using the `data.meta` Rego  property.
 
 When a policy is evaluated in the context of a triggered pipeline the following properties will be available on `data.meta`:
 
-* `project_id` (CircleCI Project UUID)
-* `build_number` (number)
-* `ssh_rerun` (boolean) - indicates if CI job is started using the SSH rerun feature
+* `project_id` (CircleCI Project UUID).
+* `build_number` (number).
+* `ssh_rerun` (boolean) - indicates if CI job is started using the SSH rerun feature.
 
 * `vcs.branch` (string)
 * `vcs.release_tag` (string)
-* `vcs.origin_repository_url` (string) - URL to the repository where the commit was made (this will only be different in the case of a forked pull request)
-* `vcs.target_repository_url` (string) - URL to the repository building the commit
+* `vcs.origin_repository_url` (string) - URL to the repository where the commit was made (this will only be different in the case of a forked pull request).
+* `vcs.target_repository_url` (string) - URL to the repository building the commit.
 
 This metadata can be used to activate/deactivate rules, modify enforcement statuses, and be part of the rule definitions themselves.
 
@@ -362,7 +362,7 @@ disallow_ssh_rerun = "Cannot perform ssh_rerun with sensitive contexts" {
 [#policies-and-parameterization]
 == Config policies with parameterization and reusable config
 
-Writing policies for CircleCI `version 2.1` configuration introduces some challenges due to the parameterization and reusable configuration options. To read more about these options, see the xref:reference:ROOT:reusing-config.adoc[Reusable config reference guide].
+Writing policies for CircleCI `version 2.1` configuration introduces some challenges due to the parameterization and reusable configuration options. To read more about these options, see the xref:reference:ROOT:reusing-config.adoc[Reusable Config Reference Guide].
 
 Before executing any pipelines, config `version 2.1` is compiled into config `version 2.0`. This compilation expands all parameters and reusable config blocks (jobs, executors, commands, orbs) into workflows and jobs.
 
@@ -437,7 +437,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - test: # invokation of parameterized job "test" with a size equal to "large".
+      - test: # invocation of parameterized job "test" with a size equal to "large".
           size: large
 ----
 
@@ -445,7 +445,7 @@ The same situation applies as for the first configuration presented above. The p
 
 However, once the config is compiled, the job test will have a `resource_class == "large"`.
 
-To resolve both of these issues, it is important to acknowledge that we want to apply the policy to all jobs, which is a configuration `version: 2.0` construct, and write the policy to target the compiled version accordingly, as follows:
+To resolve both issues, write the policy to target the compiled version of the config (`version: 2.0`), as follows:
 
 .Policy rule that inspects compiled configuration
 [source,go]
@@ -503,7 +503,7 @@ In the above example, the rule does not raise a violation because the string `<<
 
 We cannot rely on `++input._compiled_++` because orbs are compiled away at that stage.
 
-The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly. To do this we can use the `is_parameterized_expression` xref:config-policy-reference.adoc#is_parameterized_expression[helper].
+The best approach here is to detect if an orb reference is a parameterized expression and raise a violation accordingly. To do this we can use the `is_parameterized_expression` xref:config-policy-reference.adoc#is_parameterized_expression[Helper].
 
 .Policy to ban orbs from a specific namespace and detect parameterized orb references
 [source,go]
@@ -524,29 +524,29 @@ ban_bad_orb_namespace = { reason |
 } | { reason |
   some key, orb_ref in input.orbs
   config.is_parameterized_expression(orb_ref) # helper for detecting parameterized expressions.
-  reason := sprintf("orb %s is not allowed to contain a parameterized expression", ["key"])
+  reason := sprintf("orb %s is not allowed to contain a parameterized expression", [key])
 }
 ----
 
 [#allowlists-vs-banlists-with-parameterization]
-=== Allowlists vs banlists with parameterization
+=== Allow lists vs. deny lists with parameterization
 
 Policies and their rules can be categorized into two main types:
 
-* **Allowlists**: Assert that the input must match a specific value, or fall within a defined set of values
-* **Banlists**: Assert that the input must not match a particular value nor be within a set of prohibited values
+* **Allow lists**: Assert that the input must match a specific value, or fall within a defined set of values.
+* **Deny lists**: Assert that the input must not match a particular value nor be within a set of prohibited values.
 
 When working with configuration `version 2.1` constructs and parameterization, it is crucial to understand how these two rule types interact with your policies.
 
-* **Banlist** rules are susceptible to being bypassed using parameterization and reusable constructs. This is because the literal parameter value is unlikely to match the banned value, and during config compilation, the values intended to be banned can be reintroduced. All parameterization examples provided above fall into this category. To address this, you can either utilize `++input._compiled_++` or detect parameterization and handle it appropriately.
+* **Deny list** rules are susceptible to being bypassed using parameterization and reusable constructs. This is because the literal parameter value is unlikely to match the banned value, and during config compilation, the values intended to be banned can be reintroduced. All parameterization examples provided above fall into this category. To address this, you can either utilize `++input._compiled_++` or detect parameterization and handle it appropriately.
 
-* **Allowlist** rules are incompatible with parameterization. They reject configurations that could otherwise be considered valid but do not cause invalid configurations to pass.
+* **Allow list** rules are incompatible with parameterization. They reject configurations that could otherwise be considered valid but do not cause invalid configurations to pass.
 
 Consider an example to illustrate this:
 
-NOTE: This example is artificial and for illustration purposes only. The appropriate policy for enforcing job resource classes should target the compiled input (`++input._compiled_++`). This ensures proper validation against the resolved values.
+NOTE: This example is artificial and for illustration purposes only. The appropriate policy for enforcing job resource classes must target the compiled input (`++input._compiled_++`). This ensures proper validation against the resolved values.
 
-.Policy using an allowlist to restrict resource classes
+.Policy using an allow list to restrict resource classes
 [source,go]
 ----
 import future.keywords
@@ -586,23 +586,23 @@ workflows:
           size: small
 ----
 
-The rule (`restrict_resource_classes`) raises a violation because `<< parameters.size >>` does not conform to the allowlist values of `small` or `large`. Even if this configuration would compile to a job that uses the correct `small` resource class, the violation is still triggered.
+The rule (`restrict_resource_classes`) raises a violation because `<< parameters.size >>` does not conform to the allow list values of `small` or `large`. Even if this configuration would compile to a job that uses the correct `small` resource class, the violation is still triggered.
 
-When working with allowlist-type rules, it is essential to recognize how they can restrict parameterization, so you can strike the right balance between configurational reusability and rule enforcement.
+When working with allow list-type rules, it is essential to recognize how they can restrict parameterization, so you can strike the right balance between configurational reusability and rule enforcement.
 
 [#use-sets-and-variables]
 == Use sets and variables
 
-It is best practice to avoid hard coding values in code, and the same goes for your config policies. Hard coding data, such as project IDs, makes it difficult to read code, and can be confusing when collaborating with wider team members ("what is `99ada477-7029-44bb-b675-5b2d6448d1ab`?"). Because using rego means your policies are defined in code, you can define sets and variables in rego files external to your individual policies, and reference these sets and variables across multiple policies. For an example of this in practice, see the xref:manage-contexts-with-config-policies.adoc#use-sets-and-variables[Manage contexts with config policies] page.
+It is best practice to avoid hard-coding values in code, and the same goes for your config policies. Hard-coding data, such as project IDs, makes it difficult to read code, and can be confusing when collaborating with wider team members ("what is `99ada477-7029-44bb-b675-5b2d6448d1ab`?"). Because Rego policies are defined in code, you can define sets and variables in external Rego files and reference them across multiple policies. For an example, see the xref:manage-contexts-with-config-policies.adoc#use-sets-and-variables[Manage Contexts With Config Policies] page.
 
 For further reading, see the link:https://circleci.com/blog/compliance-with-config-policies/[Config policies blog post].
 
 [#testing-policies]
 == Testing policies
 
-It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the golang and OPA test commands. For more information on setting up testing, see the xref:test-config-policies.adoc[Test config policies] guide.
+It is important to be able to deploy new policies with confidence, knowing how they will be applied, and the decisions they will generate ahead of time. To enable this process, the `circleci policy test` command is available. The `test` subcommand is inspired by the Go and OPA test commands. For more information on setting up testing, see the xref:test-config-policies.adoc[Test Config Policies] guide.
 
-The `circleci policy test` command is intended for testing the validity of the policy when adding and updating your config policies only within your config policy repo. Usage outside of adding/updating your config policy repo could result in false responses resulting from race conditions when reading and writing to the config policy service at the same time.
+The `circleci policy test` command is intended for testing the validity of the policy when adding and updating your config policies only within your config policy repo. Using the command outside your config policy repo could result in false responses from race conditions when reading and writing to the config policy service.
 
 [#dynamic-config]
 == Config policies and dynamic configuration
@@ -630,7 +630,7 @@ enable_hard["not_setup_rule"] { not input.setup } # only applied to configs that
 enable_hard["some_rule"] # rule applied to all configs
 ----
 
-For more information about dynamic configuration, see the xref:orchestrate:dynamic-config.adoc[Dynamic configuration overview].
+For more information about dynamic configuration, see the xref:orchestrate:dynamic-config.adoc[Dynamic Configuration Overview].
 
 [#example-policy]
 == Example policy
@@ -667,7 +667,7 @@ enable_hard["use_official_docker_image"]
 [#next-steps]
 == Next steps
 
-* xref:create-and-manage-config-policies.adoc[Create and manage config policies]
-* xref:test-config-policies.adoc[Test config policies]
-* xref:use-the-cli-for-config-and-policy-development.adoc[Use the CircleCI CLI for config and policy development]
-* xref:config-policy-reference.adoc[Config policy reference]
+* xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies]
+* xref:test-config-policies.adoc[Test Config Policies]
+* xref:use-the-cli-for-config-and-policy-development.adoc[Use the CircleCI CLI for Config and Policy Development]
+* xref:config-policy-reference.adoc[Config Policy Reference]

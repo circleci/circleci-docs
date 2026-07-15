@@ -439,24 +439,16 @@ In this example, the purpose of the `hold` job is to wait for approval to begin 
 [#scheduling-a-workflow]
 == Scheduling a workflow
 
-Schedule workflows to run your jobs at specific times rather than on every commit. Scheduling is useful for resource-intensive jobs, nightly builds, or generating reports on a regular cadence without triggering on every code change.
+IMPORTANT: For new scheduled pipelines, use xref:schedule-triggers.adoc[Schedule Triggers] instead of scheduled workflows. Schedule triggers offer improved control. Scheduled workflows are documented here for reference and for teams that cannot yet migrate to schedule triggers. See the xref:migrate-scheduled-workflows-to-schedule-triggers.adoc[Migration Guide] to move to schedule triggers.
 
-NOTE: Scheduled workflows are not available for GitHub App, GitLab or Bitbucket Data Center pipelines.
+Scheduled workflows allow you to run jobs at specific times rather than on every pipeline trigger. Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling is useful for resource-intensive jobs, nightly builds, or generating reports on a regular cadence, without triggering on every code change. A scheduled workflow runs on a schedule only. A scheduled workflow will **not** be run on commits to your code.
 
-CAUTION: The scheduled workflows feature does not support xref:dynamic-config.adoc[Dynamic Configuration]. If you use dynamic configuration you will need to use xref:schedule-triggers.adoc[Schedule Triggers] for scheduling. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
+By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule` including cron syntax and branch filters. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC). See <<nightly-example>> for an basic example.
 
-By default, a workflow runs on every push, or based on the event rules you have set up for your trigger (menu:Project settings[Triggers] or menu:Project settings[Project Setup]). To trigger a workflow on a schedule, add the `triggers` key to the workflow and specify a `schedule`. Scheduled workflows use the `cron` syntax to represent Coordinated Universal Time (UTC).
-
-Running a workflow for every commit for every branch can be inefficient and expensive. Scheduling a workflow is an alternative to building on every commit. You can _schedule_ a workflow to run at a certain time for a specific branch or branches. Consider scheduling workflows that are resource-intensive or that generate reports on a schedule rather than on every commit.
-
-CAUTION: A scheduled workflow will run on a schedule only. A scheduled workflow will **not** be run on commits to your code.
-
-If you do not configure any workflows in your `.circleci/config.yml`, an implicit workflow is used. If you configure a scheduled workflow the implicit workflow is no longer run. If you want to build on every commit you must add your workflow to your configuration file.
-
-NOTE: When you schedule a workflow, the workflow will be counted as an individual user seat.
+Scheduled workflows are *not* available for GitHub App, GitLab or Bitbucket Data Center pipelines.
 
 [#nightly-example]
-=== Build every night
+=== Example: Build every night
 
 In the example below, the `nightly` workflow is configured to run every day at 12:00am UTC. The `cron` key is specified using POSIX `crontab` syntax. See the link:https://www.unix.com/man-page/POSIX/1posix/crontab/[crontab man page] for `cron` syntax basics. The workflow runs on the `main` and `beta` branches.
 
@@ -465,11 +457,13 @@ NOTE: Scheduled workflows may be delayed by up to 15 minutes. This delay is to m
 [source,yaml]
 ----
 workflows:
+  # the commit workflow runs on every pipeline trigger
   commit:
     jobs:
       - test
       - deploy
-  nightly:
+  # the nightly workflow runs on the specified schedule on the main branch and any branch that starts with `release/
+  nightly: `
     triggers:
       - schedule:
           cron: "0 0 * * *"
@@ -506,8 +500,7 @@ The following are *not* supported:
 
 Use comma-separated digits instead.
 
-Example *invalid* cron range syntax:
-
+.Example *invalid* cron range syntax
 [source,yaml]
 ----
     triggers:
@@ -519,8 +512,7 @@ Example *invalid* cron range syntax:
                 - main
 ----
 
-Example *valid* cron range syntax:
-
+.Example *valid* cron range syntax
 [source,yaml]
 ----
     triggers:
@@ -537,6 +529,14 @@ The value of the `filters` key must be a map that defines rules for execution on
 For more details, see the `branches` section of the xref:reference:ROOT:configuration-reference.adoc#schedule-branches[Configuration Reference].
 
 For a full configuration example, see the link:https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml[Sample Scheduled Workflows configuration].
+
+=== Scheduling and dynamic configuration
+
+Scheduled workflows do not support xref:dynamic-config.adoc[Dynamic Configuration]. If you use dynamic configuration you will need to use xref:schedule-triggers.adoc[Schedule Triggers]. More information can be found in this link:https://support.circleci.com/hc/en-us/articles/360060833331-Support-for-Scheduled-Workflows-in-Dynamic-Configurations-Setup-Workflows[support article].
+
+=== Scheduled workflows and billing
+
+When you schedule a workflow, the workflow will be counted as an individual active user. For more information, see the xref:plans-pricing:user-types-and-registration.adoc#active-users[User Types and Registration] guide.
 
 [#using-job-contexts-to-share-environment-variables]
 == Using contexts to share and secure environment variables
@@ -1014,6 +1014,12 @@ NOTE: After 90 days non-terminal workflows are automatically canceled by CircleC
 == Troubleshooting
 
 This section describes common problems and solutions for workflows.
+
+=== What happens if I do not configure any workflows in my configuration file?
+
+We recommend you configure at least one workflow in your configuration file. If you do not configure any workflows and you have a single job named `build`, an implicit workflow is generated and used for you.
+
+If you have a working configuration with a single job named `build` and you then configure a scheduled workflow, for example, the implicit workflow is no longer run. If you want to build on every pipeline trigger as well as on the schedule in this case, you must add a (non-scheduled) workflow to your configuration file.
 
 [#workflow-and-subsequent-jobs-do-not-trigger]
 === Workflow and subsequent jobs do not trigger

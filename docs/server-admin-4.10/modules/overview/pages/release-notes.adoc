@@ -11,7 +11,13 @@ CircleCI Server 4.10 introduces enhanced security and infrastructure management 
 [#upgrade]
 == Upgrade
 
-NOTE: Server 4.10 requires mongoDB 7.0 or higher. If your MongoDB instance is not externalized then follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-7[Upgrade MongoDB to 7.0 Guide] before upgrading to Server 4.10.0.
+[IMPORTANT]
+====
+Server 4.10 requires *mongoDB 7.0* or higher
+
+* If your MongoDB instance is not externalized then follow our xref:operator:upgrade-mongo.adoc#upgrade-mongodb-to-7[Upgrade MongoDB to 7.0 Guide] before upgrading to Server 4.10.0.
+
+====
 
 For upgrade steps see the xref:installation:upgrade-server.adoc#[Upgrade Server 4.10 Guide].
 

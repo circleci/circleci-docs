@@ -1,47 +1,97 @@
-= CircleCI plan overview
-:page-platform: Cloud, Server v4+
-:page-description: This document is an introduction to the plans CircleCI offers to developers.
+= CircleCI plans overview
+:page-platform: Cloud
+:page-description: An overview of CircleCI's credit-based plans, including features available at each plan tier.
 :experimental:
+:page-aliases: plan-free.adoc, plan-performance.adoc, plan-scale.adoc
 
-This document is an introduction to the plans CircleCI offers to developers.
+CircleCI offers credit-based usage plans that let you pay only for what you use, with the flexibility to scale as your team and project needs grow. This page explains how the plan system works and what features are available at each tier.
 
-[#overview]
-== Overview
-The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's link:https://circleci.com/continuous-integration/#what-is-continuous-integration[CI/CD] solution. Credits are consumed by the second, at varying rates per minute, according to what build configuration you use.
+[#how-credits-work]
+== How credits work
 
-The right plan for you and your team will depend on several factors:
+Credits are the unit of compute consumption in CircleCI. They are consumed by the second at varying rates per minute depending on the machine type and resource class used for a given job. Larger, more powerful machine types consume credits at a higher rate.
 
-- How many users are on your team
-- How much link:https://support.circleci.com/hc/en-us/articles/4415357235995-Support-Plans-Priority-Response-Timings[support] you need (community and free support, standard support, or premium support)
-- If you want access to different machine-types and resource classes
-- If you want a limited or unlimited number of self-hosted runners
+This model gives you precise control over your spending. For example, your team might:
 
-Let us look at how a team might use credits. In this example, your team is divided into several groups working on different projects. Some projects are larger while others are smaller and need less resources from a CI/CD configuration. With credits, it is possible to specify exactly where and when you need to maximize machine resources.
+* Use a `large` resource class (4 CPUs, 8 GB memory) for a high-priority service that needs fast builds.
+* Use a `small` resource class (1 CPU, 2 GB memory) for a utility project that ships infrequently.
 
-For example, your team might:
+For a full breakdown of credit rates per resource class and execution environment, refer to the link:https://circleci.com/product/features/resource-classes/[Resource Classes] page.
 
-* Use a `large` `resource_class` (4 CPUs and 8 GB of memory) and make use of more credits/minute to speed up a build for a bigger project.
-* Use a `small` `resource_class` (1 CPU, 2 GB memory) with less credits/minute for a smaller project that may not ship code as frequently, or where build time is inconsequential.
+== Feature comparison
 
-The documents in this section cover what each plan offers developers for their CI/CD needs. Consider also taking a moment to look at the CircleCI link:https://circleci.com/pricing/[Pricing] page to learn about how credits are distributed across different machine types.
+For a full comparison of features on each plan, refer to the pricing comparison chart on the link:https://circleci.com/pricing/[Pricing] page and the link:https://circleci.com/pricing/#comparison-table[Comparison Table] on the same page. You will also find a link to the link:https://circleci.com/pricing/price-list/full[price list].
 
-[#our-plans]
-== Our plans
-Visit the pages below to learn about the features of CircleCI's plans.
+The sections below provide some highlights of what is available on each plan.
 
-- xref:plan-free.adoc[Free Plan]
-- xref:plan-performance.adoc[Performance Plan]
-- xref:plan-scale.adoc[Scale Plan]
-- xref:plan-server.adoc[Server Plan]
+[#free-plan]
+== Free plan
 
-[#configuring-your-credit-plan]
-== Configuring your credit plan
-To set up a Free or Performance Plan, go to **Plan > Plan Overview** in the CircleCI link:https://app.circleci.com/[web application]. From there, select the plan that best fits your needs. To set up a Scale or Server Plan, link:https://circleci.com/talk-to-us/[contact us].
+The Free plan includes a set number of credits per month and provides access to the core CircleCI feature set. It is designed to support individual developers and small teams getting started with CI/CD.
 
-For details on cancelling a Performance Plan, refer to the xref:reference:ROOT:faq.adoc#cancel-performance-plan[Cancel Performance Plan FAQ].
+The Free plan includes:
+
+* A selection of resource classes across Docker, Arm, Linux, Windows, and macOS execution environments.
+* A set number of active users. Users beyond the included number are charged at an additional per-user credit rate. For more information on user types and registration, see xref:user-types-and-registration.adoc[User Types and Registration].
+* Access to the features described in <<#features-available-on-all-plans,Features available on all plans>>.
+* Community support via the link:https://discuss.circleci.com/[CircleCI community forums] and the link:https://support.circleci.com/hc/en-us[support portal].
+
+
+[#performance-plan]
+== Performance plan
+
+The Performance plan expands on the Free plan with additional compute options, higher concurrency, and improved support. It is suited to growing teams that need more throughput and control.
+
+In addition to everything in the Free plan, the Performance plan includes:
+
+* *Additional resource classes*: Access to larger machine sizes across Docker, Linux, Windows, and macOS execution environments, giving you higher CPU and memory limits where needed.
+* *IP ranges*: Route job traffic through a defined set of IP addresses for access to restricted environments. Refer to the xref:security:ip-ranges.adoc[IP Ranges] page for details.
+* *Higher concurrency*: Run more jobs simultaneously within your workflows, reducing queue times.
+* *Scalable user seats*: Start with a set number of active users and add more as your team grows. Additional users are charged at a per-user credit rate.
+* *Organization-level custom storage retention*: Configure how long artifact, workspace, and cache objects are stored for your organization. Reducing retention periods can lower your monthly bill.
+* *Additional self-hosted runners*: Expand the number of jobs running on your own infrastructure.
+* *Standard support*: Support through SLAs with defined response times, plus access to the global link:https://support.circleci.com/hc/en-us/requests/new[ticket-based system].
+
+NOTE: For details on canceling a Performance plan, refer to the xref:reference:ROOT:faq.adoc#cancel-performance-plan[Cancel Performance Plan FAQ].
+
+[#scale-plan]
+== Scale plan
+
+The Scale plan is designed for large organizations with advanced compliance, customization, and infrastructure requirements. It provides the highest available limits and a dedicated account team.
+
+In addition to everything in the Performance plan, the Scale plan includes:
+
+* *All resource classes*: Access to every available machine size across all execution environments, including GPUs.
+* *Custom concurrency*: Configure exactly how many jobs run concurrently across all build configurations and execution environments.
+* *Custom user seat count*: Set user limits based on your organization's needs.
+* *Unlimited self-hosted runners*: No cap on the number of jobs running on your own infrastructure.
+* *Custom storage retention*: Full customization of retention periods for artifacts, workspaces, and caches.
+* *Premium support*: Expanded SLAs, an account team, training and onboarding options, and available support package add-ons.
+
+To set up a Scale plan, link:https://circleci.com/talk-to-us/[contact us].
+
+[#server-plan]
+== Server plan
+
+The Server plan is an on-premises CI/CD option for enterprise customers with compliance or security requirements that require operation within a private network or behind a firewall. Refer to the xref:plan-server.adoc[Server Plan] page for details.
+
+[#features-available-on-all-plans]
+== Features available on all plans
+
+The following features are available on every CircleCI plan.
+
+include::ROOT:partial$shared-sections/features-of-circleci.adoc[]
+
+[#configuring-your-plan]
+== Configuring your plan
+
+To set up a Free or Performance plan, go to menu:Plan[Plan Overview] in the link:https://app.circleci.com/[CircleCI web app] and select the plan that fits your needs.
+
+To set up a Scale or Server plan, link:https://circleci.com/talk-to-us/[contact us].
 
 [#managing-credit-usage]
 == Managing credit usage
-Optimizations can be implemented to help lower your credit consumption, such as eliminating duplicate artifact uploads. Properly managing network and storage usage can potentially lower the amount of credits used per month. If you would like to find out more about managing network and storage usage, see the xref:optimize:persist-data.adoc[Persisting Data] page.
 
-For comprehensive cost tracking and analysis, you can integrate with Vantage or Finout to monitor and manage your CI/CD costs alongside other infrastructure spending. See the xref:integrate-with-vantage-for-cost-management.adoc[Integrate CircleCI With Vantage] and xref:integrate-with-finout-for-cost-management.adoc[Integrate CircleCI With Finout] guides for more information.
+You can reduce credit consumption by optimizing how your pipelines use storage and network resources. For example, eliminating duplicate artifact uploads lowers your monthly network usage. Refer to the xref:optimize:persist-data.adoc[Persisting Data] page for guidance on managing network and storage costs.
+
+For cost tracking alongside other infrastructure spending, you can integrate CircleCI with Vantage or Finout. See the xref:integrate-with-vantage-for-cost-management.adoc[Integrate CircleCI With Vantage] and xref:integrate-with-finout-for-cost-management.adoc[Integrate CircleCI With Finout] guides for more information.

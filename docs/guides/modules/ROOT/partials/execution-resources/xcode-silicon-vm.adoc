@@ -9,6 +9,22 @@
 | VM Software Manifest
 | Release Notes
 
+| `27.0`
+| Xcode 27.0 (27A5209h)
+| 26.5.1
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v18905/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-27-0-beta-2-available/[Release Notes]
+
+| `26.6`
+| Xcode 26.6 (17F113)
+| 26.5.1
+a| `m4pro.medium` +
+   `m4pro.large`
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v18807/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-26-6-rc-2-available/[Release Notes]
+
 | `26.5`
 | Xcode 26.5 (17F42)
 | 26.3.1
@@ -49,14 +65,6 @@ a| `m4pro.medium` +
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15895/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-26-1-1-available/[Release Notes]
 
-| `26.0.1`
-| Xcode 26.0.1 (17A400)
-| 15.6
-a| `m4pro.medium` +
-   `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15738/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-26-0-1-released/[Release Notes]
-
 | `16.4.0`
 | Xcode 16.4 (16F6)
 | 15.3.2
@@ -64,14 +72,6 @@ a| `m4pro.medium` +
    `m4pro.large`
 | link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15338/manifest.txt[Installed software]
 | link:https://circleci.com/changelog/xcode-16-4-ga-available/[Release Notes]
-
-| `16.3.0`
-| Xcode 16.3 (16E140)
-| 15.3.2
-a| `m4pro.medium` +
-   `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v15328/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-16-3-available/[Release Notes]
 
 | `15.4.0`
 | Xcode 15.4 (15F31d)

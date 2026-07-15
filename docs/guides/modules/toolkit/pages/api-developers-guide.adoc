@@ -38,7 +38,7 @@ The following authentication methods are supported:
 * **Circle-Token header**: CircleCI-specific header, widely used in existing integrations. Pass the token in the `Circle-Token` header.
 * **Basic Authentication**: Legacy option, not recommended for new integrations. Use the token as the username (Base64-encoded).
 
-[#using-the-api-securely-wtih-curl]
+[#using-the-api-securely-with-curl]
 === Using the API securely with cURL
 
 CircleCI encourages security best practices when using cURL with the API. Visit the xref:security:security-recommendations.adoc#protect-the-api-token[Security Recommendations] page to learn how to mitigate risks and protect your API token and secrets.
@@ -374,7 +374,7 @@ While this alone can be useful, you may want to customize parameters of the pipe
  -d '{ "branch": "my-branch" }'
 ----
 
-. Let us move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, you will pass a Docker image tag to the `docker` executor key.
+. The next example is more complex: Triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, you will pass a Docker image tag to the `docker` executor key.
 +
 First, modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 +
@@ -548,7 +548,7 @@ Notice in the example above that you will receive very specific information abou
 
 * Project and workflow details for the job.
 * Date and time the job started and finished.
-* Executor type
+* Executor type.
 * Current status of the job.
 * Duration of the job.
 
@@ -814,5 +814,5 @@ The following information is returned for each job:
 [#reference]
 == Reference
 
-* Refer to xref:api-intro.adoc[API V2 Introduction] for high-level information about the CircleCI V2 API.
-* Refer to link:https://circleci.com/docs/api/v2/[API V2 Reference Guide] for a detailed list of all endpoints that make up the CircleCI V2 API.
+* Refer to xref:api-intro.adoc[API Overview] for high-level information about the CircleCI v2 API.
+* Refer to link:https://circleci.com/docs/api/v2/[API v2 Reference Guide] for a detailed list of all endpoints that make up the CircleCI v2 API.

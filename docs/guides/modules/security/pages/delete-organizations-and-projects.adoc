@@ -5,7 +5,7 @@
 
 This page details everything you need to know about deleting organizations and projects connected to CircleCI.
 
-If you only want to stop builds for a project and keep the complete build history, see the xref:security:stop-building-a-project-on-circleci.adoc[Stop building a project on CircleCI] page.
+If you only want to stop builds for a project and keep the complete build history, see the xref:security:stop-building-a-project-on-circleci.adoc[Stop Building a Project on CircleCI] page.
 
 [.table-scroll]
 --
@@ -69,7 +69,7 @@ CircleCI web app::
 API::
 +
 --
-. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . You can use the link:https://circleci.com/docs/api/v2/#tag/Organization/operation/deleteOrganization[Delete an organization] endpoint with either your organization ID or your organization slug. You can retrieve both from the CircleCI web app under menu:Organization Settings[Overview].
 +
 [,shell]
@@ -104,7 +104,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 API::
 +
 --
-. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API developers guide].
+. Set up your API authentication. Steps are available in the xref:toolkit:api-developers-guide.adoc#add-an-api-token[API Developers Guide].
 . You need the project slug to use the link:https://circleci.com/docs/api/v2/#tag/Project/operation/deleteProjectBySlug[Delete a project] endpoint. You can retrieve the project slug from the CircleCI web app under menu:Project Settings[Overview].
 +
 [,shell]

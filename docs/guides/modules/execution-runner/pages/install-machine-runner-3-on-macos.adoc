@@ -14,14 +14,14 @@ To install machine runners and run jobs, you will need to have root access, and 
 
 * https://brew.sh/[Homebrew]
 
-* https://curl.se/[curl] (installed by default on macOS)
+* https://curl.se/[curl] (installed by default on macOS).
 
 * sha256sum (if not pre-installed):
 ** `brew install coreutils`
 
 * https://www.gnu.org/software/tar/[tar]
 
-* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line
+* The xref:toolkit:local-cli.adoc[CircleCI CLI] if you wish to install runners from the command line.
 
 [#self-hosted-runner-terms-agreement]
 == Self-hosted runner terms agreement
@@ -85,7 +85,7 @@ api:
 ----
 Replace `api.auth_token` with the token generated in the steps above, and choose a name for your runner.
 
-. **If you are using CircleCI server** you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
+. **If you are using CircleCI Server** you will need to provide the URL for your install. You can do this by either setting the `CIRCLECI_RUNNER_API_URL` environment variable:
 +
 [source,shell]
 ----
@@ -134,7 +134,7 @@ The binary must be approved to run on your macOS system because the self-hosted 
 spctl -a -vvv -t install "$(brew --prefix)/bin/circleci-runner"
 ----
 +
-It should return an output that looks like this:
+The command returns output that looks like this:
 +
 [source,shell]
 ----
@@ -179,7 +179,7 @@ User domain::
 +
 --
 
-1. When using a non-GUI (or headless) session, the provided `.plist` file should be moved to `/Library/LaunchAgents`. This location is for per-user agents configured by the administrator, which allows the service to load after a reboot. Run the following command to do this:
+1. When using a non-GUI (or headless) session, move the provided `.plist` file to `/Library/LaunchAgents`. This location is for per-user agents configured by the administrator, which allows the service to load after a reboot. Run the following command to do this:
 +
 [source,shell]
 ----
@@ -298,8 +298,8 @@ $HOME/Library/Logs/com.circleci.runner/runner.log
 [#additional-resources]
 == Additional resources
 
-- xref:machine-runner-3-manual-installation.adoc[Manual installation for machine runner 3]
-- xref:install-machine-runner-3-on-linux.adoc[Machine runner 3 Linux package installation]
-- xref:install-machine-runner-3-on-windows.adoc[Machine runner 3 Windows installation]
-- xref:install-machine-runner-3-on-docker.adoc[Machine runner 3 Docker installation]
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
+- xref:machine-runner-3-manual-installation.adoc[Manual Installation for Machine Runner 3]
+- xref:install-machine-runner-3-on-linux.adoc[Machine Runner 3 Linux Package Installation]
+- xref:install-machine-runner-3-on-windows.adoc[Machine Runner 3 Windows Installation]
+- xref:install-machine-runner-3-on-docker.adoc[Machine Runner 3 Docker Installation]
+- xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3 Configuration Reference]

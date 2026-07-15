@@ -22,10 +22,10 @@ sudo rm -rf '/opt/circleci'
 
 [#install-macos-machine-runner]
 == 2. Install the macOS Machine Runner 3.0
-Follow the instructions in xref:install-machine-runner-3-on-macos.adoc#install-circleci-runner[Install machine runner 3 on macOS] to install machine runner 3 using a Homebrew package.
+Follow the instructions in xref:install-machine-runner-3-on-macos.adoc#install-circleci-runner[Install Machine Runner 3 on macOS] to install machine runner 3 using a Homebrew package.
 
 [#additional-resources]
 == Additional resources
 
-- xref:machine-runner-3-configuration-reference.adoc[Machine runner 3 configuration reference]
-- xref:machine-runner-3-manual-installation.adoc[Machine runner 3 manual installation reference]
+- xref:machine-runner-3-configuration-reference.adoc[Machine Runner 3 Configuration Reference]
+- xref:machine-runner-3-manual-installation.adoc[Machine Runner 3 Manual Installation Reference]

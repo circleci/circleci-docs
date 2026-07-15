@@ -68,7 +68,7 @@ In the CircleCI application, set the following xref:security:set-environment-var
 | Required for deployment. https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId[Find your AWS Account ID].
 
 | AWS_RESOURCE_NAME_PREFIX
-| Prefix for some required AWS resources. Should correspond to the value of `aws_resource_prefix` in `terraform_setup/terraform.tfvars`.
+| Prefix for some required AWS resources. Must correspond to the value of `aws_resource_prefix` in `terraform_setup/terraform.tfvars`.
 
 | AWS_ECR_REGISTRY_ID
 | The 12 digit AWS id associated with the ECR account.

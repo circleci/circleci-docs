@@ -3,27 +3,27 @@
 :page-description: Open preview of config policies for CircleCI. Learn about testing your policies.
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.
 
 Follow the how-to guides on this page to write and set up tests for your config policies.
 
 ****
-**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+**Using server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 [source,shell]
 ----
 circleci policy test ./config-policies --policy-base-url <your-circleci-server-domain>
 ----
 ****
 
-This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config policies overview] and xref:create-and-manage-config-policies.adoc[Create and manage config policies] pages.
+This guide assumes you are familiar with writing config policies. If you would like more information on configuration policies, or the process of creating policies, see the xref:config-policy-management-overview.adoc[Config Policies Overview] and xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies] pages.
 
 [#prerequisites]
 == Prerequisites
 
-The instructions on this page assume you have followed and completed the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a policy] guide, through which you will have done the following:
+The instructions on this page assume you have followed and completed the xref:create-and-manage-config-policies.adoc#create-a-policy[Create a Policy] guide, through which you will have done the following:
 
-* Enabled config policies for your organization
-* Created a simple policy to check CircleCI config versions within your org. You will have the following file structure: `./config-policies/version.rego`
+* Enabled config policies for your organization.
+* Created a simple policy to check CircleCI config versions within your org. You will have the following file structure: `./config-policies/version.rego`.
 
 [#write-a-policy-test]
 == Write a policy test
@@ -202,7 +202,6 @@ Expected output:
     "ElapsedMS": 0
   },
   {
-  {
     "Passed": true,
     "Group": "config-policies",
     "Name": "test_version_check/inferior_version",
@@ -244,7 +243,7 @@ Expected output:
 
 [#add-another-policy-and-test]
 == Add another policy and test
-Next, add a second policy and test to your `config-policies` directory. The steps below show how to add a policy that specifies the minimum Docker version for xref:execution-managed:building-docker-images.adoc[remote Docker], writing tests for that policy, and running those tests.
+Next, add a second policy and test to your `config-policies` directory. The steps below show how to add a policy that specifies the minimum Docker version for xref:execution-managed:building-docker-images.adoc[Remote Docker], writing tests for that policy, and running those tests.
 
 . Inside your `config-policies` directory, create a Rego file for a new policy, call it: `docker.rego`.
 . Copy the following policy definition into `docker.rego`:
@@ -254,7 +253,7 @@ Next, add a second policy and test to your `config-policies` directory. The step
 # org level policy
 package org
 
-# needed to use keyworks like `in`.
+# needed to use keywords like `in`.
 import future.keywords
 
 # Unique name identifying this policy in our bundle.
@@ -420,7 +419,7 @@ fail    config-policies    0.002s
 Error: unsuccessful run
 ----
 
-Adding a new policy to the bundle added a new rule, which led to the failures. The decision in two ways:
+Adding a new policy to the bundle added a new rule, which led to the failures. The decision was affected in two ways:
 
 - A new rule was added to the `enabled_rules` field
 - A new `soft_failure` occurs because not all of the tests specify the configuration `version` as it is not needed for the Docker version policy.
@@ -446,7 +445,7 @@ It is best-practice to use a file structure that allows you to write stable test
 │   │   ├── policy2_test.yaml
 ----
 
-It is a good idea to have tests that run against the entire bundle that will be active in production, but we also want to be able to write stable tests against an individual policy. This is achieved by isolating each policy in its own subdirectory with its tests. This way each subdirectory will run with a sub-bundle and the tests defined within it.
+Run tests against the entire production policy bundle, and also write stable tests against individual policies. Isolate each policy in its own subdirectory with its tests. Each subdirectory will then run with a sub-bundle and its defined tests.
 
 . Update the file structure:
 +
@@ -480,7 +479,7 @@ ok    config-policies/version    0.000s
 ----
 
 . To build more confidence, best practice is to create a top level test that will use the entire policy bundle, similar to an integration or end-to-end test.
-. Create a new test file: `./config-policies/policy_test.yaml`
+. Create a new test file: `./config-policies/policy_test.yaml`.
 . Copy the following into your `policy_test.yaml` file:
 +
 [source,yaml]
@@ -629,11 +628,11 @@ NOTE: Modifying the version policy will also affect the top level tests, so the 
 [#opa-tests]
 == OPA tests
 
-OPA also has a way of specifying tests directly within a rego document. Read more about it in the link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA docs].
+OPA also has a way of specifying tests directly within a Rego document. Read more about it in the link:https://www.openpolicyagent.org/docs/latest/policy-testing/[OPA docs].
 
 OPA evaluates rules that start with `test_` and expects the output to be truthy. The `circleci policy test` command runs the OPA tests and reports them as `<opa.tests>`.
 
-To illustrate this, the following steps show how to create a _helper_ function including some OPA tests, and run the `circleci tests` command to see the results of those tests.
+To illustrate this, the following steps show how to create a _helper_ function including some OPA tests, and run the `circleci policy test` command to see the results of those tests.
 
 . Create a directory for helper functions, if you haven't already:
 +
@@ -700,7 +699,7 @@ ok    <opa.tests>         0.001s
 3/3 tests passed (0.001s)
 ----
 
-. Run in verbose mode to see the OPA tests that were run by name:
+. Run in verbose mode to see the OPA tests that ran by name:
 +
 [source,shell]
 ----

@@ -1,6 +1,6 @@
 = Roles and permissions
 :page-platform: Cloud
-:page-description: An overview of the various project and orgnization roles in CircleCI and the permissions associated with each role.
+:page-description: An overview of the various project and organization roles in CircleCI and the permissions associated with each role.
 :experimental:
 
 If you have a `circleci` type organization, the content on this page applies to you.

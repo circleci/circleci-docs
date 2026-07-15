@@ -9,7 +9,7 @@ For information on orbs and related use cases, see the xref:orbs:use:orb-intro.a
 
 If you are looking for information on creating an orb, see the xref:orbs:author:orb-author.adoc#[Introduction to Authoring Orbs].
 
-Orbs are accessed via the xref:guides:toolkit:local-cli.adoc#[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a xref:guides:toolkit:managing-api-tokens.adoc#[personal API token].
+Orbs are accessed via the xref:guides:toolkit:circleci-cli.adoc#[CircleCI CLI]. Orbs require your CircleCI user to be an admin. They also require a xref:guides:toolkit:managing-api-tokens.adoc#[personal API token].
 
 Ensure that you are using a personal API token generated _after_ your user account is made an admin.
 

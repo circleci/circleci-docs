@@ -75,17 +75,17 @@ spec:
         circleci.com/version: 1.0.0
 ----
 
-NOTE: Do not add `circleci.com/version` and `circleci.com/component-name` to the selector labels. These labels can not be changed later, and `circleci.com//version` should change for every new release.
+NOTE: Do not add `circleci.com/version` and `circleci.com/component-name` to the selector labels. These labels can not be changed later, and `circleci.com//version` changes for every new release.
 
 ****
-If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend migrating to the new labels as soon as possible.
+If you used the release agent prior to version `1.2.0`, you used `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend migrating to the new labels as soon as possible.
 
 Support for the old labels will be dropped in one of the next releases.
 
 After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
 ****
 
-Once you have updated your Deployment or Rollout, check the CircleCI deploys dashboard and you should see your deployment in the timeline view.
+Once you have updated your Deployment or Rollout, check the CircleCI deploys dashboard and you will see your deployment in the timeline view.
 
 [#link-release]
 == 2. Link deployment to release job trigger (optional)
@@ -113,9 +113,9 @@ jobs:
 +
 Substitute the placeholders above based on your application's details:
 +
-** The `environment-name` parameter should match the name of your environment integration created via the CircleCI UI.
-** The `component-name` parameter should match the name of your component as displayed in the CircleCI UI.
-** The `target-version` parameter should match the name of the version being released (same as the value of the `circleci.com/version` label)
+** The `environment-name` parameter must match the name of your environment integration created via the CircleCI UI.
+** The `component-name` parameter must match the name of your component as displayed in the CircleCI UI.
+** The `target-version` parameter must match the name of the version being released (same as the value of the `circleci.com/version` label)
 ** The name of the "release plan" (`my-service-release` in the example above) can be any arbitrary value you would like. The release plan name is used to reference the "release plan" as part of the release job config.
 +
 [Optional] You can also add the following parameters if required:

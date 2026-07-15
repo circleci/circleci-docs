@@ -5,21 +5,16 @@
 :page-description: Reference for .circleci/test-suites.yml
 :page-show-readtime: true
 
-[NOTE]
-====
-*Smarter Testing* is available in beta. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features. When the feature is made generally available, there will be a cost associated with access and usage.
+include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
-Refer to our link:https://discuss.circleci.com/t/product-launch-smarter-testing-is-now-in-beta/54497[Discuss post] for more information about our beta launch.
-====
-
-This document is a reference for the CircleCI Smarter Testing testsuite configuration keys that are used in the `.circleci/test-suites.yml` file.
+This document is a reference for the CircleCI Smarter Testing test suite configuration keys used in the `.circleci/test-suites.yml` file.
 
 '''
 
 [#name]
 == *`name`*
 
-The `name` field is used to run a testsuite with the local plugin and CI subcommand.
+The `name` field is used to run a test suite with the local plugin and CI subcommand.
 
 [.table-scroll]
 --
@@ -30,7 +25,7 @@ The `name` field is used to run a testsuite with the local plugin and CI subcomm
 | `name`
 | Y
 | String
-| Name of the testsuite to run with the CLI.
+| Name of the test suite to run with the CLI.
 |===
 --
 
@@ -38,8 +33,8 @@ The `name` field is used to run a testsuite with the local plugin and CI subcomm
 
 [source,console]
 ----
-$ circleci run testsuite "frontend tests"
-$ circleci run testsuite "backend tests"
+$ circleci testsuite "frontend tests"
+$ circleci testsuite "backend tests"
 ----
 
 [%linenums,yaml]
@@ -57,7 +52,7 @@ name: backend tests
 
 The `discover` command finds all test atoms for a given test suite. The command’s output is split on newlines to extract individual test atoms (the command may instead output a single line of space-separated test atoms).
 
-The `discover` command should not execute any tests.
+The `discover` command must not execute any tests.
 
 Every line of stdout is interpreted as a test atom. Any tool that prints metadata in the stdout must be suppressed.
 
@@ -100,8 +95,8 @@ The command needs to be modified to use placeholders:
 
 For test atoms:
 
-* Use the template variable `<< test.atoms >>` in your run command – this will be replaced with a space-separated list of test atoms to run.
-* If the template variable is not found, the command’s stdin will receive a newline-separated list of test atoms.
+* Use the template variable `<< test.atoms >>` in your run command. This variable is replaced with a space-separated list of test atoms to run.
+* If the template variable is not found, the command stdin receives a newline-separated list of test atoms.
 
 For JUnit output:
 
@@ -116,7 +111,7 @@ For JUnit output:
 | `run`
 | Y
 | String
-| A command that executed tests.
+| A command that executes tests.
 |===
 --
 
@@ -140,20 +135,70 @@ run: go tool gotestsum --junitfile="<< outputs.junit >>" -- -race -count=1 << te
 [#file-mapper]
 == *`file-mapper`*
 
-When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` creates a mapping of test atoms to related test files.
+When test atoms are not files, Smarter Testing cannot determine which test files belong to which test atom. The `file-mapper` command creates a mapping of test atoms to related test files.
 
 * During analysis, Smarter Testing can associate test files with their test atoms in impact data.
 * During selection, Smarter Testing can determine which test atom to run when a test file is modified.
 
-The test atom to map can be specified in one of two ways:
+File mapper maps all test atoms to test files in a single pass.
+
+The test atoms to map can be specified in one of two ways:
 
 * Use the template variable `<< test.atoms >>` in the `file-mapper` command.
-* If the template variable is not found in the `file-mapper` command, the test atom will be passed on stdin.
+* If the template variable is not found in the `file-mapper` command, the test atoms will be passed on stdin separated by newlines.
 
-File mapper can run in two modes:
+File mapper supports two different output formats:
 
-* *One test atom at a time.* This mode expects a list of files back for a passed in `<< test.atom >>`.
-* *All test atoms in a single pass.* This mode supports `<< outputs.go-list-json >>` to map all go test files to go packages.
+* *Go list JSON format* `<< outputs.go-list-json >>`.
+* *CircleCI list format* `<< outputs.circleci-list >>`.
+
+=== *Go list JSON format*
+
+Go list JSON format is the format produced by `go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./\...`.
+
+It consists of one or more JSON documents separated by newlines. Note that each record is a separate JSON document.
+
+.Example showing Go list JSON format
+[source,json]
+----
+{
+	"Dir": "/home/user/dev/module-name/internal/foo",
+	"ImportPath": "github.com/org/module-name/internal/foo",
+	"TestGoFiles": [
+		"foo_test.go"
+	]
+}
+{
+	"Dir": "/home/user/dev/module-name/internal/bar",
+	"ImportPath": "github.com/org/module-name/internal/bar",
+	"XTestGoFiles": [
+		"bar_test.go",
+		"baz_test.go",
+		"shared_test.go"
+	]
+}
+----
+
+=== *CircleCI list format*
+
+CircleCI list format is a plain text, record oriented format. It consists of one or more records separated by newlines.
+
+Each record begins with a line starting with `TA:`, followed by the test atom name.
+
+Each subsequent line lists a file that contains code for the test atom.
+
+Each line must be fewer than 32,768 characters long.
+
+.Example showing CircleCI list format
+[source]
+----
+TA:TestFooClass
+src/foo_test.py
+src/bar_test.py
+
+TA:TestQuzClass
+src/quz_test.py
+----
 
 [.table-scroll]
 --
@@ -168,8 +213,7 @@ File mapper can run in two modes:
 |===
 --
 
-*Example:*
-
+.Example of file-mapper using `<< outputs.go-list-json >>`
 [%linenums,yaml]
 ----
 ---
@@ -177,19 +221,27 @@ name: go tests
 file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
 ----
 
+.Example of file-mapper using `<< outputs.circleci-list >>`
+[%linenums,yaml]
+----
+---
+name: python tests
+file-mapper: for _atom in << test.atoms >>; do echo "TA:${_atom}"; echo "${_atom}" | sed -E 's/::.*$//'; done > << outputs.circleci-list >>
+----
+
 '''
 
 [#analysis]
 == *`analysis`*
 
-The `analysis` command is similar to your `run` command, but with coverage instrumentation enabled. Analysis generates coverage data that tells Smarter Testing which source files were covered by each test atom.
+The `analysis` command is similar to your `run` command, but with coverage instrumentation enabled. Analysis generates coverage data that tells Smarter Testing which source files are covered by each test atom.
 
 Analysis can run in two modes:
 
 * *One test atom at a time.* This mode is compatible with most coverage tooling.
 * *All test atoms in a single pass.* This mode is much faster but requires specific support for the CircleCI coverage format from the coverage tooling.
 
-The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that should be run.
+The `analysis` command needs to be modified to use placeholders for the coverage report output location, and the test atom that will be run.
 
 The test atom to analyze can be specified in one of two ways:
 
@@ -198,11 +250,11 @@ The test atom to analyze can be specified in one of two ways:
 
 Different template variables are available for coverage output, depending on the format of the coverage data produced by the test runner:
 
-* *LCOV* `<< outputs.lcov >>` - analyses one test atom at a time.
-* *Go’s coverage format* `<< outputs.go-coverage >>` - analyses one test atom at a time.
-* *CircleCI coverage format* `<< outputs.circleci-coverage >>` - analyses all test atoms in a single pass.
+* *LCOV* `<< outputs.lcov >>` -- analyses one test atom at a time.
+* *Go coverage format* `<< outputs.go-coverage >>` -- analyses one test atom at a time.
+* *CircleCI coverage format* `<< outputs.circleci-coverage >>` -- analyses all test atoms in a single pass.
 
-Your `analysis` command should use the output variable for the coverage format it produces.
+Your `analysis` command must use the output variable for the coverage format it produces.
 
 [.table-scroll]
 --
@@ -266,7 +318,7 @@ jobs:
     executor: node-with-service
     steps:
       - setup
-      - run: circleci run testsuite "ci tests"
+      - run: circleci testsuite "ci tests"
       - store_test_results:
           path: test-reports
 ----
@@ -285,14 +337,14 @@ outputs:
 [#options]
 == *`options`*
 
-A map of option fields that can be set to configure how the testsuite is run.
+A map of option fields that configure how the test suite is run.
 
 '''
 
 [#test-impact-analysis]
 === *`test-impact-analysis`*
 
-To enable test impact analysis and only run test atoms relevant to your changes.
+Enable test impact analysis to run only the test atoms relevant to your changes.
 
 [.table-scroll]
 --
@@ -360,9 +412,9 @@ options:
 
 Set a unique key for storing impact data.
 
-Each independent testsuite should use a different impact key to avoid overwriting each other's data.
+Each independent test suite must use a different impact key to avoid overwriting each other's data.
 
-There is no need to set this option if you only have a single test suite in `.circleci/test-suites.yml`.
+You do not need to set this option if you have only a single test suite in `.circleci/test-suites.yml`.
 
 [.table-scroll]
 --
@@ -373,7 +425,7 @@ There is no need to set this option if you only have a single test suite in `.ci
 | `impact-key`
 | N
 | String
-| Unique key to use for storing this testsuite's impact data
+| Unique key to use for storing this test suite's impact data.
 |===
 --
 
@@ -394,7 +446,7 @@ options:
 [#dynamic-test-splitting]
 === *`dynamic-test-splitting`*
 
-To enable dynamic test splitting and run test atoms from a shared queue, reducing the impact of slow parallel nodes.
+Enable dynamic test splitting to run test atoms from a shared queue, reducing the impact of slow parallel nodes.
 
 [.table-scroll]
 --
@@ -427,7 +479,7 @@ options:
 
 When test selection is enabled, changes to these file paths cause all test atoms to be selected and run.
 
-Project files that affect the running system without directly referencing tests should be listed here. For example project dependency files, or database migration files.
+Project files that affect the running system without directly referencing tests may be listed here. For example, project dependency files or database migration files.
 
 The `\*` and `**` globs can be used to match files and directories.
 
@@ -465,7 +517,7 @@ options:
 
 Use test selection rules to extend the test selection mechanism to cover non-source files.
 
-Each rule lists a test atom, and what should cause that test atom to be selected in addition to the usual selection algorithm.
+Each rule lists a test atom, and what cause that test atom to be selected in addition to the usual selection algorithm.
 
 The `\*` and `**` globs can be used to match files and directories.
 

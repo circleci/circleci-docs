@@ -1,4 +1,4 @@
-= CircleCI Image Updater
+= CircleCI image updater
 :page-platform: Cloud
 :page-description: The CircleCI tool to help customers update images in config.
 :experimental:
@@ -6,7 +6,7 @@
 [#notice]
 == Notice
 
-This is currently in ALPHA, and we are looking into improving experience for customers.
+The CircleCI image updater is currently in Alpha, and we are working to improve the experience for customers.
 
 [#overview]
 == Overview
@@ -15,8 +15,8 @@ A link:https://github.com/CircleCI-Public/image-updater[script] to determine whi
 
 Limitations:
 
-* Only supports GitHub lookups
-* Will not find orb specific changes without being pointed at that specific orb config
+* Only supports GitHub repository searches.
+* Will not find orb-specific changes without being pointed at that specific orb config.
 
 [#contribute]
 == Contribute

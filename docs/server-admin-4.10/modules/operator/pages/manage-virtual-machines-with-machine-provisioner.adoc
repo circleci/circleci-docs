@@ -52,13 +52,14 @@ machine_provisioner:
 [#default-aws-ami-lists]
 ==== Default AWS AMI lists
 
-The default AMIs for server 4.10 are based on Ubuntu 22.04.
+The default AMIs for server 4.10 are available for Ubuntu 22.04, 24.04, and 26.04, in both x86 and Arm variants.
 
 [tabs]
 ====
-x86 AMI list::
+Ubuntu 22.04::
 +
 --
+.x86 AMI list
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
@@ -66,116 +67,387 @@ x86 AMI list::
 | AMI
 
 | `us-east-1`
-| `ami-060a1e5d499c85d12`
+| `ami-021dd518493189806`
 
 | `us-east-2`
-| `ami-036fa23a3bd3b5013`
+| `ami-03d2720cad192d1b1`
 
 | `ca-central-1`
-| `ami-0e323ff60823ceb5c`
+| `ami-073cd5dbfc0085d5f`
 
 | `ap-south-1`
-| `ami-072d2c41d591ee7a5`
+| `ami-0482b6adbc8513ce4`
 
 | `ap-southeast-2`
-| `ami-0880195a4612a9d61`
+| `ami-03e3bbfaf796bfd1a`
 
 | `ap-southeast-1`
-| `ami-0177e901826e7b422`
+| `ami-08e24c82eed550847`
 
 | `eu-central-1`
-| `ami-00588b75fa9a72eff`
+| `ami-0f2c31d55be76bb3b`
 
 | `eu-west-1`
-| `ami-08a090a8c770fe41f`
+| `ami-0b37ee6bcea703e9e`
 
 | `eu-west-2`
-| `ami-056ff1116a86d9e87`
+| `ami-097b99ef88e52c4a7`
 
 | `sa-east-1`
-| `ami-0117daec76cc825e7`
+| `ami-08087741d7744181d`
 
 | `us-west-1`
-| `ami-09bc39e1cf1850c79`
+| `ami-05b1f71036abfcf39`
 
 | `us-west-2`
-| `ami-01f4236b649731f59`
+| `ami-004cb0c913bbb5370`
 
 | `ap-northeast-1`
-| `ami-0d71a7594982c0233`
+| `ami-02e3cdb7fcd47fe97`
 
 | `ap-northeast-2`
-| `ami-06b70b9f78e46f8b4`
+| `ami-03fc14b5592ec8f98`
 
 | `eu-west-3`
-| `ami-0af2e6edf47f7b7cc`
+| `ami-0f6642f967389858d`
 
 | `us-gov-east-1`
-| `ami-00e0319619e88edf7`
+| `ami-07dfad9c46251171f`
 
 | `us-gov-west-1`
-| `ami-0fdf4561a0d3b0346`
+| `ami-0f1ca9606171e022b`
 |===
---
-Arm AMI list::
-+
---
+
+.Arm AMI list
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
 | Region
 | AMI
 
-|`us-east-1`
-|`ami-09688117b98d2fc85`
+| `us-east-1`
+| `ami-039e377b0827a4701`
 
-|`us-east-2`
-|`ami-0f74df98c729f23da`
+| `us-east-2`
+| `ami-02e0f05558bdad8f8`
 
-|`ca-central-1`
-|`ami-0c38cb9bafc2d2367`
+| `ca-central-1`
+| `ami-01bbaccf6eda8974f`
 
-|`ap-south-1`
-|`ami-0bd058bca7362651a`
+| `ap-south-1`
+| `ami-09923e7fc8d31ddbc`
 
-|`ap-southeast-2`
-|`ami-063193aeb76899a04`
+| `ap-southeast-2`
+| `ami-01eda0b404cfbc0e8`
 
-|`ap-southeast-1`
-|`ami-0b93f7ee96e0544c8`
+| `ap-southeast-1`
+| `ami-0832fe727071bc902`
 
-|`eu-central-1`
-|`ami-0603edd8ca55f1aea`
+| `eu-central-1`
+| `ami-0fd98c11faa73574c`
 
-|`eu-west-1`
-|`ami-06284417985a234a6`
+| `eu-west-1`
+| `ami-097b321f4ba342c0d`
 
-|`eu-west-2`
-|`ami-042850328df475cf4`
+| `eu-west-2`
+| `ami-01491022ef9b8ccc0`
 
-|`sa-east-1`
-|`ami-065ea52e0a95d6097`
+| `sa-east-1`
+| `ami-0eab92571453f2c66`
 
-|`us-west-1`
-|`ami-008f62919e40a0607`
+| `us-west-1`
+| `ami-0e13348127b2586b5`
 
-|`us-west-2`
-|`ami-0f02394a567f27c57`
+| `us-west-2`
+| `ami-0467f7d2ee9e202a9`
 
-|`ap-northeast-1`
-|`ami-0cd7ad99dc5c77394`
+| `ap-northeast-1`
+| `ami-07f3c828fbfbe005b`
 
-|`ap-northeast-2`
-|`ami-02c787546f70518d8`
+| `ap-northeast-2`
+| `ami-0b7934443f313efdf`
 
-|`us-gov-east-1`
-|`ami-0b0841c7bba30ab06`
+| `eu-west-3`
+| `ami-065d375353bd3b58b`
 
-|`us-gov-west-1`
-|`ami-02268e2fe5572a88c`
+| `us-gov-east-1`
+| `ami-06403683c8f97b0a0`
+
+| `us-gov-west-1`
+| `ami-01d2ac64f0da5159f`
+|===
+--
+Ubuntu 24.04::
++
+--
+.x86 AMI list
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+| `us-east-1`
+| `ami-0af5bb187c503a2e5`
+
+| `us-east-2`
+| `ami-0289d0e6196ab7546`
+
+| `ca-central-1`
+| `ami-0652c415fafe84f93`
+
+| `ap-south-1`
+| `ami-0f1cf01e6829f99c5`
+
+| `ap-southeast-2`
+| `ami-07555a208f08483ed`
+
+| `ap-southeast-1`
+| `ami-0cb2bab565e724605`
+
+| `eu-central-1`
+| `ami-0cf99fda06ad4401c`
+
+| `eu-west-1`
+| `ami-0853d711e98e79203`
+
+| `eu-west-2`
+| `ami-07da813eb90314a78`
+
+| `sa-east-1`
+| `ami-0cefde360c26670e0`
+
+| `us-west-1`
+| `ami-007e6009c228c8381`
+
+| `us-west-2`
+| `ami-003cb41994b6f19a4`
+
+| `ap-northeast-1`
+| `ami-02a11ed5d095e9e39`
+
+| `ap-northeast-2`
+| `ami-0a04f436e8fbb634a`
+
+| `eu-west-3`
+| `ami-08456bd1814dc4cbb`
+
+| `us-gov-east-1`
+| `ami-0c8266181022e490b`
+
+| `us-gov-west-1`
+| `ami-0014f948c954918e6`
+|===
+
+.Arm AMI list
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+| `us-east-1`
+| `ami-09077aa7d1319e6ba`
+
+| `us-east-2`
+| `ami-095c86f8117e830ba`
+
+| `ca-central-1`
+| `ami-089a807c9ae75904f`
+
+| `ap-south-1`
+| `ami-0b3f107a981edbe06`
+
+| `ap-southeast-2`
+| `ami-014e3fa2f720fb9f5`
+
+| `ap-southeast-1`
+| `ami-02d1e89646ef99673`
+
+| `eu-central-1`
+| `ami-0a04869a3f9f0d356`
+
+| `eu-west-1`
+| `ami-0c7fa8f572f4f911c`
+
+| `eu-west-2`
+| `ami-06686dc0d574ddba3`
+
+| `sa-east-1`
+| `ami-099f4f250b9f0857a`
+
+| `us-west-1`
+| `ami-0d38f6c8360ec6dac`
+
+| `us-west-2`
+| `ami-0b0c461f378dd181f`
+
+| `ap-northeast-1`
+| `ami-01a6d91693afeba71`
+
+| `ap-northeast-2`
+| `ami-0c4a14733353d0548`
+
+| `eu-west-3`
+| `ami-0ad57e53c9c60e734`
+
+| `us-gov-east-1`
+| `ami-0030e8a905068d0af`
+
+| `us-gov-west-1`
+| `ami-091495849a9d25130`
+|===
+--
+Ubuntu 26.04::
++
+--
+.x86 AMI list
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+| `us-east-1`
+| `ami-06efbb2ecb4ecc81a`
+
+| `us-east-2`
+| `ami-0d32c577d644688f9`
+
+| `ca-central-1`
+| `ami-047ad36fd26e6e9a9`
+
+| `ap-south-1`
+| `ami-054e30c2bcf380c0a`
+
+| `ap-southeast-2`
+| `ami-0034e48819c7952e7`
+
+| `ap-southeast-1`
+| `ami-0f9d5444538154bc5`
+
+| `eu-central-1`
+| `ami-07856d612bfc4ef8c`
+
+| `eu-west-1`
+| `ami-06bc37f80790b82c0`
+
+| `eu-west-2`
+| `ami-073b9fd55063eb831`
+
+| `sa-east-1`
+| `ami-0de66fc17efec061c`
+
+| `us-west-1`
+| `ami-0482a0001e14da674`
+
+| `us-west-2`
+| `ami-0da25b4d4df56ecaa`
+
+| `ap-northeast-1`
+| `ami-0dcfb735aa2a366b9`
+
+| `ap-northeast-2`
+| `ami-00b4cd14cecc530cc`
+
+| `eu-west-3`
+| `ami-03a6932e168663e17`
+
+| `us-gov-east-1`
+| `ami-00f809e6ba4e9a371`
+
+| `us-gov-west-1`
+| `ami-03a5f8d7664497eb5`
+|===
+
+.Arm AMI list
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Region
+| AMI
+
+| `us-east-1`
+| `ami-0edb2833fe7709417`
+
+| `us-east-2`
+| `ami-0fd4d0e9767efa6b4`
+
+| `ca-central-1`
+| `ami-04eebe21482a91a72`
+
+| `ap-south-1`
+| `ami-039aa63ddf69118d6`
+
+| `ap-southeast-2`
+| `ami-0a09db53cc2b547e4`
+
+| `ap-southeast-1`
+| `ami-02e8997868204b060`
+
+| `eu-central-1`
+| `ami-061266bf416870f7f`
+
+| `eu-west-1`
+| `ami-0a3af994a2b546559`
+
+| `eu-west-2`
+| `ami-07562eb5a4922bb8d`
+
+| `sa-east-1`
+| `ami-09387d8e7d9b9d07c`
+
+| `us-west-1`
+| `ami-021d07a7b6010cb6e`
+
+| `us-west-2`
+| `ami-0a10ca25565064aac`
+
+| `ap-northeast-1`
+| `ami-082a3221f21bfc6de`
+
+| `ap-northeast-2`
+| `ami-09617db07998b07bb`
+
+| `eu-west-3`
+| `ami-0365b7f58c9376da6`
+
+| `us-gov-east-1`
+| `ami-03d630b0bd8e40e96`
+
+| `us-gov-west-1`
+| `ami-076b1295927821aa0`
 |===
 --
 ====
+
+[#default-images-aws]
+==== Default machine executor images
+
+The machine provisioner ships a fixed set of default images. Share the following image names with your developers, who reference them in the `machine.image` key of their `.circleci/config.yml`.
+
+[discrete]
+===== Linux (AMD64)
+
+* `ubuntu-2204`
+* `ubuntu-2404`
+* `ubuntu-2604`
+* `default` - alias that resolves to `ubuntu-2204`.
+* `docker-default` - alias used by xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
+
+[discrete]
+===== Linux (Arm)
+
+* `arm-default`
+* `ubuntu-2404`
+* `ubuntu-2604`
+
+[discrete]
+===== Windows
+
+* `windows-default`
+
+For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM Execution Environment] section of the configuration reference.
 
 [#gcp]
 === GCP
@@ -210,6 +482,34 @@ machine_provisioner:
       ...
       linuxImage: "<my-linux-image>"
 ----
+
+[#default-images-gcp]
+==== Default machine executor images
+
+The machine provisioner ships a fixed set of default images. Share the following image names with your developers, who reference them in the `machine.image` key of their `.circleci/config.yml`.
+
+[discrete]
+===== Linux (AMD64)
+
+* `ubuntu-2204`
+* `ubuntu-2404`
+* `ubuntu-2604`
+* `default` - alias that resolves to `ubuntu-2204`.
+* `docker-default` - alias used by xref:guides:execution-managed:building-docker-images.adoc#[Remote Docker] jobs that resolves to `ubuntu-2204`.
+
+[discrete]
+===== Windows
+
+* `windows-default`
+
+[discrete]
+===== Android
+
+NOTE: The Android machine executor is only available when machine provisioner is configured with GCP.
+
+* `android-default`
+
+For an example of how developers reference these images and the resource classes available in their `.circleci/config.yml`, see the xref:reference:ROOT:configuration-reference.adoc#linuxvm-execution-environment[LinuxVM Execution Environment] section of the configuration reference.
 
 [#instance-preallocation]
 == Instance preallocation

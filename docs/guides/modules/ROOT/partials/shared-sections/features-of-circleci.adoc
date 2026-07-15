@@ -26,7 +26,7 @@ For more information about Docker Layer Caching, refer to the xref:guides:optimi
 ifndef::server[]
 === Deploys
 
-Visualise and control your deployments with CircleCI deploys. Deployments to Kubernetes are supported.
+Visualize and control your deployments with CircleCI deploys. Deployments to Kubernetes are supported.
 
-Start with the xref:guides:deploy:deployment-overview.adoc[Deploys overview] for more information.
+Start with the xref:guides:deploy:deployment-overview.adoc[Deploys Overview] for more information.
 endif::server[]

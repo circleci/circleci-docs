@@ -316,7 +316,7 @@ jobs:
 
 CAUTION: Unlike automatic retries on startup, retrying tasks during runtime can be risky. This is because tasks can have arbitrary steps that produce external side effects which are not idempotent or stateless. This includes steps that could impact production environments or databases. Use this feature with care, knowing the risks of rerunning jobs and workflows that may or may not be idempotent.
 
-Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would be displayed in the CircleCI web app as an infrastructure fail should be expected to trigger an unsafe retry when enabled.
+Unsafe retries enable container runner to automatically rerun tasks that are unexpectedly interrupted during their execution. These disruptions could be due to network connectivity issues, the underlying node shutting down, or other unpredictable causes. Any job failure that would be displayed in the CircleCI web app as an infrastructure fail can trigger an unsafe retry when enabled.
 
 Unsafe retries is useful when scheduling workloads on spot instances, which often come with cost-saving benefits at the risk of pod preemptions with many Kubernetes providers.
 
@@ -358,9 +358,9 @@ You can utilize these fields with your preferred Kubernetes logging integrations
 [#custom-secret]
 == Custom token secret
 
-Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you simply might not want to specify the tokens via Helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
+Using the configuration described above provisions a Kubernetes secret containing your resource class tokens. In some circumstances, you may wish to provision your own secret, or you might not want to specify the tokens via Helm. Instead, you can provision your own Kubernetes secret containing your tokens and specify its name in the `agent.customSecret` field.
 
-The secret should contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
+The secret must contain a field for each resource class, using the resource class name as the key and the token as the value. Consider the following `resourceClasses` configuration:
 
 ```yaml
 agent:
@@ -390,8 +390,7 @@ Additional instructions can be found in our link:https://support.circleci.com/hc
 [#parameters]
 == Helm chart parameters
 
-The container runner Helm chart is hosted link:https://github.com/CircleCI-Public/container-runner-helm-chart[here]. You can find a full link:https://github.com/circleci-public/container-runner-helm-chart#values[chart values reference] section in the README.
-
+Refer to the link:https://github.com/CircleCI-Public/container-runner-helm-chart[container runner Helm chart]. You can find a full link:https://github.com/circleci-public/container-runner-helm-chart#values[chart values reference] section in the README.
 
 [#container-permissions]
 == Kubernetes permissions
@@ -446,12 +445,23 @@ Container runner will drain and restart cleanly when sent a termination signal. 
 
 If the container runner crashes, there is no expectation that in-process or queued tasks are handled gracefully.
 
+[#private-container-registry]
+== Private container registry
+
+In environments that block outbound access to Docker Hub, mirror the CircleCI runner images to your own registry (or use a pull-through cache). Set `agent.image`, `orchestrator.image`, and `logging.image` in the Helm chart `values.yaml`. All three keys are top-level. If you configure only `agent.image`, task pods still pull `circleci/runner-init` and `circleci/logging-collector` from the public registry by default.
+
+See xref:container-runner-installation.adoc#private-container-registry[Using a Private Container Registry] for a full example and verification steps.
+
+Set the orchestrator init container image under `orchestrator.image`. Set the logging sidecar image under `logging.image`. Both accept the same fields as `agent.image` (`registry`, `repository`, `tag`, and optional `digest`). Refer to the link:https://github.com/CircleCI-Public/container-runner-helm-chart/blob/main/values.yaml[Helm Chart values.yaml] for defaults.
+
 [#logging-containers]
 == Logging containers
 
-Container runner schedules a logging container if there are secondary (service) containers in the task pod. This container will get the secondary container logs and stream them to the steps UI in the CircleCI web app. Task agent, which runs in the primary container, is responsible for streaming all other step output to the CircleCI web app. The only exception is the `Task lifecycle` step, which is streamed by container runner itself.
+Container runner schedules a logging container if there are service containers in the task pod. This container will get the service container logs and stream them to the steps UI in the CircleCI web app. Task agent, which runs in the primary container, is responsible for streaming all other step output to the CircleCI web app. The only exception is the `Task lifecycle` step, which is streamed by container runner itself.
 
 Logging containers require a service account token with the minimal privileges to get container logs.
+
+The logging sidecar image defaults to `circleci/logging-collector` from Docker Hub. To use a private registry, set the top-level `logging.image` values in your Helm chart. See <<private-container-registry,Private Container Registry>>.
 
 Container runner currently sets default resource limits and requests on the logging container, they are:
 
@@ -512,7 +522,7 @@ To build container images in a container-agent job, a user may use:
 * Machine runner with Docker installed.
 * CircleCI-hosted compute.
 
-Note: Third-party tools should be used at your own discretion.
+NOTE: Use third-party tools at your own discretion.
 
 Jobs that run with container-agent cannot use CircleCI's xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] feature. You can use a third-party tool to build Docker images in your container-agent job without the Docker daemon.
 
@@ -542,6 +552,46 @@ docker:
     command: ["--host=unix:///var/run/docker.sock"]
 ```
 
+[#override-the-default-container-entrypoint]
+== Override the default container entrypoint
+
+NOTE: Overriding the default container entrypoint requires container runner version 3.1.10 or later.
+
+WARNING: Overriding the default container entrypoint is an advanced operation. An incorrectly configured entrypoint can result in zombie processes, failed signal propagation, and unclean container shutdown.
+
+By default, the task agent (GOAT) runs as PID 1 in the primary task container. You can override this by specifying a custom entrypoint in either the CircleCI job configuration or the resource class pod template spec.
+
+Any custom entrypoint must fulfill the following requirements:
+
+* Reap zombie processes and clean up child processes.
+* Propagate signals to child processes, including GOAT.
+* Manage the container lifecycle to ensure a clean exit.
+* Spawn GOAT as a child process using the automatically provided command and arguments.
+
+link:https://github.com/krallin/tini[Tini] is a purpose-built container init system that satisfies these requirements with minimal configuration.
+
+=== CircleCI job configuration
+
+Set a custom entrypoint using the `entrypoint` field on the Docker image in your CircleCI configuration file. Container runner automatically passes the GOAT command and arguments to your entrypoint:
+
+[source,yaml]
+----
+jobs:
+  test:
+    docker:
+      - image: krallin/ubuntu-tini
+        entrypoint: ["/usr/bin/tini", "--"] # The GOAT command and arguments are automatically appended and passed to `tini`.
+    resource_class: <your-resource-class-here>
+    steps:
+      - run:
+          name: Who is PID 1?
+          command: ps -p 1 -o comm=
+----
+
+=== Resource class pod template spec
+
+To apply a custom entrypoint to all jobs using a resource class, configure it in the pod template spec within your Helm `values.yaml`. See <<resource-class-configuration-custom-pod>> for details on pod template spec configuration. The same entrypoint requirements apply.
+
 [#limitations]
 == Limitations
 
@@ -549,7 +599,6 @@ docker:
 * Only Kubernetes container environments are supported at this time.
 * xref:execution-managed:building-docker-images.adoc[`setup_remote_docker`] as a command is not supported with container runner.  See <<building-container-images>>.
 * `aws_auth.oidc_role_arn` is not supported on the container runner. You can set up AWS authentication using the `aws_auth` field. More information can be found in the xref:reference:ROOT:configuration-reference.adoc#oidc[Configuration Reference].
-* Container agent runs as PID 1 in the primary task container and currently does not support custom init processes.
 
 [#faqs]
 == FAQs

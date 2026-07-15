@@ -3,7 +3,7 @@
 :page-description: Introduction to the CircleCI API
 :experimental:
 
-The CircleCI API may be used to make API calls to interact with your pipelines, projects and orgs, including retrieving detailed information about users, jobs, workflows, and pipelines, as well as triggering pipelines. There are currently two supported API versions:
+The CircleCI API may be used to make API calls to interact with your pipelines, projects, and orgs. This includes retrieving detailed information about users, jobs, workflows, and pipelines, as well as triggering pipelines. CircleCI currently supports two API versions:
 
 * link:../../../api/v1/[API v1.1 Reference]
 * link:../../../api/v2/[API v2 Reference]
@@ -12,14 +12,14 @@ API v2 includes several powerful features (for example, support for pipelines an
 
 CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
-To get started with the API v2, see the xref:api-developers-guide.adoc[API developers guide].
+To get started with the API v2, see the xref:api-developers-guide.adoc[API Developers Guide].
 
 [#changes-in-endpoints]
 == Changes in endpoints
 
 The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-For a complete list of all API v2 endpoints, refer to the link:../../../api/v2/[API v2 Reference Guide], which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+Refer to the link:../../../api/v2/[API v2 Reference Guide] for a complete list of all API v2 endpoints. The guide contains a detailed description of each individual endpoint, including required and optional parameters, HTTP status and error codes, and code samples.
 
 [#deprecated-endpoints]
 === Deprecated endpoints

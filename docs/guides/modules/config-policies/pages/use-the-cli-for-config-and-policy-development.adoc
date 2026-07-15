@@ -63,7 +63,7 @@ It is recommended that you build a test suite of policy/config combinations and 
 [#get-policy-decision-audit-logs]
 == Get policy decision audit logs
 
-Audit logs provide documentary evidence for a policy decision being performed at a certain point of time.
+Audit logs provide documentary evidence for a policy decision being made at a certain point in time.
 Audit logs include the inputs which influenced the decision, as well as the outcome of the decision.
 
 The CLI provides a `policy logs` command to fetch the policy decision logs for your organization.
@@ -99,7 +99,7 @@ Flags:
 [#input]
 === Input
 * The organization ID information is required, which can be provided with `--owner-id` flag.
-* The command accepts the following filters for logs: `--after`, `--before`, `--branch`, `--status`, and `--project-id`. These filters are optional. Also, any combination of filters can be used to suit your auditing needs.
+* The command accepts the following filters for logs: `--after`, `--before`, `--branch`, `--status`, and `--project-id`. These filters are optional, and any combination of filters can be used to suit your auditing needs.
 
 [#output]
 === Output

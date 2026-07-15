@@ -66,6 +66,7 @@ Behat
 Bioconda
 Bitbucket
 \bBitbucket Cloud\b
+Bitnami
 [Bb]lobless
 [Bb]lockchain
 Braintrust
@@ -75,6 +76,7 @@ Buildah
 Buildkite
 Buildx
 Bundler
+[Cc]anonical(?:'s)?
 Capistrano
 Certbot
 Cest
@@ -154,7 +156,7 @@ Fastlane
 Finout
 framebuffer
 frameit
-\bFree Plan\b
+[Ff]ree
 [Ff]ormatters?
 Gbps
 GCP
@@ -166,6 +168,7 @@ GitHub
 GitLab
 \bGitLab self-managed\b
 GKE
+GOAT
 \bGoogle Cloud\b
 \bGoogle Cloud Functions\b
 \bGoogle Cloud Platform\b
@@ -202,6 +205,7 @@ Jenkins
 JFrog
 Jira
 jq\b
+JSON
 \bJUnit\b
 junit
 JRuby
@@ -258,7 +262,8 @@ OPA
 [Pp]arameterizable
 [Pp]arsable
 [Pp]assphraseless
-\bPerformance Plan\b
+[Pp]erformance
+pg_partman
 PHP
 PHPUnit
 Pipenv
@@ -315,15 +320,16 @@ SAML
 SSO
 [Ss]afelist
 \bSauce Labs\b
-\bScale Plan\b
+[Ss]cale
 [Ss]chedulable
 SDK
 seccomp
 [Ss]ecrets?
 Selenium
 SemVer
-Server Plan
+[Ss]erver
 SELinux
+[Ss]erverless
 \b[Ss]hellchecking\b
 [Ss]harded
 \b[Ss]ingle sign-on\b
@@ -359,6 +365,7 @@ TestFairy
 \btime windows\b
 [Tt]imebox
 [Tt]imeboxing
+Tini
 Tink
 Tinkey
 TLS
@@ -416,3 +423,6 @@ Xvfb
 YAML
 Zstd
 LangSmith
+[Tt]estsuite
+containerDisk
+routable

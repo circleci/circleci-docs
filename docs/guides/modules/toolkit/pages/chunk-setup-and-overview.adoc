@@ -560,6 +560,28 @@ jobs:
 NOTE: **Startup time.** Enabling IP ranges may slightly increase job startup time.
 This is because traffic is routed through CircleCI's static IP infrastructure.
 
+[#email-digest]
+== Email digest
+
+Chunk sends an email digest at 09:00 UTC every Monday summarizing your team's Chunk activity. The digest includes:
+
+* Completed tasks.
+* PRs opened.
+* Failed tasks.
+* Most recent tasks that resulted in an open PR, ready for your review.
+
+.Chunk tasks weekly digest email
+image::guides:ROOT:chunk/chunk-weekly-email-digest.png[Chunk tasks weekly digest email]
+
+Select **Review tasks** in the digest email to open Chunk tasks that resulted in a pull request being opened. These tasks may not still have an open pull request.
+
+To disable the digest:
+
+include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
+. Select **Notifications** from the sidebar.
+. Scroll to the Chunk section.
+. Toggle off **Digest**.
+
 == Troubleshooting
 
 === I cannot see the Chunk option in the sidebar

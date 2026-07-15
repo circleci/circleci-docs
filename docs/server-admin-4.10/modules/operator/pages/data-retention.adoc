@@ -30,14 +30,14 @@ lein repl :connect host.docker.internal:16000
 +
 [source,clojure]
 ----
-(circle.http.api.admin-commands/get-setting :wfc-workflow-deletion-retention-period)
+(circle.http.api.admin-commands/get-setting :wfc-workflow-expired-delete-after-days)
 ----
 
-. The retention period can be set as needed (the example below sets it to 90 days):
+. The retention period can be set as needed (the default is 660 days; the example below sets it to 90 days):
 +
 [source,clojure]
 ----
-(circle.http.api.admin-commands/set-setting :wfc-workflow-deletion-retention-period 90)
+(circle.http.api.admin-commands/set-setting :wfc-workflow-expired-delete-after-days 90)
 ----
 
 . The deletion interval can be verified by running:

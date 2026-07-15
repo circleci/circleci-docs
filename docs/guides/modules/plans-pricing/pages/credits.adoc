@@ -14,15 +14,10 @@ The right plan for you and your team will depend on several factors:
 
 - How many users are on your team
 - How much support you need (community and free support, standard support, or premium support)
-- If you want access to different machine-types and resource classes
+- If you want access to different machine types and resource classes
 - If you want a limited or unlimited number of self-hosted runners
 
-You can view the xref:plan-overview.adoc[Plan Overview] page for more information, or if you would like more details on what features are available per plan, view the individual plan pages:
-
-- xref:plan-free.adoc[Free Plan]
-- xref:plan-performance.adoc[Performance Plan]
-- xref:plan-scale.adoc[Scale Plan]
-- xref:plan-server.adoc[Server Plan]
+View the xref:plan-overview.adoc[Plans Overview] page for details on what features are available per plan, including the Free, Performance, Scale, and Server plans. For the xref:plan-server.adoc[Server Plan], see the dedicated page.
 
 Take a look at the CircleCI link:https://circleci.com/pricing/[Pricing] page, and the link:https://circleci.com/product/features/resource-classes/[resource class comparison table], to learn more about how credits are distributed across different machine types and resource classes.
 
@@ -40,17 +35,24 @@ Organizations on our Free Plan can use up to 400,000 credits per month, for free
 
 If you build on macOS, we also offer organizations on our Free Plan 30,000 credits every month to use on macOS open source builds. To find out more, visit the CircleCI link:https://support.circleci.com/hc/en-us[support portal], which includes an Ask AI option to get you the information you need.
 
+[#free-plan-limits]
+== Free plan limits
+
+Organizations on the Free Plan receive 30,000 credits per month for personal (non-open source) usage. Free organizations also receive an included allotment of 1 GB of network transfer and 2 GB-months of storage. Network and storage usage beyond these allotments draws from your monthly credits rather than being billed separately.
+
+When your available credits reach 0, personal builds are blocked until your credits refill at the start of the next month. Open source builds are not subject to this block and continue to run even if your credit balance is exhausted.
+
 [#troubleshooting-job-is-queued]
-== Troubleshooting: Do I get  charged if my job is "queued" or "preparing"?
+== Troubleshooting: Do I get charged if my job is "queued" or "preparing"?
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
-If your jobs use the Docker executor and you find that they are "preparing" for quite some time. You may be able to reduce the delay by using more recent Docker images. See xref:execution-managed:building-docker-images.adoc[Building Docker Images] for more information.
+If your jobs use the Docker executor and you find that they are "preparing" for quite some time, try using a more recent Docker image to reduce the delay. See the xref:execution-managed:building-docker-images.adoc[Building Docker Images] page for more information.
 
 [#questions-and-comments]
-## Questions and comments
+== Questions and comments
 
-Consider reading the section below on <<#billing-faqs,billing>>. For any further questions, do not hesitate to open a link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket].
+Consider reading the section below on <<#billing-faqs,billing>>. For any further questions, do not hesitate to link:https://support.circleci.com/hc/en-us/requests/new[open a support ticket].
 
 [#billing-faqs]
 == FAQs

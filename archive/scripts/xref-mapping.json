@@ -529,11 +529,6 @@
     "module": "security",
     "filename": "security.adoc"
   },
-  "caching-strategy": {
-    "component": "guides",
-    "module": "optimize",
-    "filename": "caching-strategy.adoc"
-  },
   "concepts": {
     "component": "guides",
     "module": "about-circleci",

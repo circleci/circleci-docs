@@ -258,5 +258,4 @@ When `prefer_same_region` is set to `true`, CircleCI will attempt to pull the im
 == See also
 
 * xref:optimize:docker-layer-caching.adoc[Docker Layer Caching]
-* xref:reference:ROOT:glossary.adoc#job-space[Job Space]
 * xref:reference:ROOT:glossary.adoc#primary-container[Primary Container]

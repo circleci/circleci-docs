@@ -3,7 +3,7 @@
 :page-description: Learn how to get CircleCI notifications through Slack, IRC and email notifications.
 :experimental:
 
-CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work and set up Slack notifications for team channels. You can receive alerts about deployment status and Chunk usage. You can also designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
+CircleCI offers multiple ways to receive notifications about your builds, workflows, and deployments. You can configure email notifications for your own work and set up Slack notifications for team channels. You can receive alerts about deployment status and Chunk usage, and when a workflow pauses and waits for a manual approval. You can also designate contacts for organization-wide security and technical communications. Notifications can be configured at the user level, project level, and organization level.
 
 This page explains how to configure email notifications, Slack notifications, and organization-level contacts.
 
@@ -46,14 +46,14 @@ You can configure your preferences for notification _categories_ at menu:User se
 
 ==== My work
 
-The *My work* category sends notifications for builds that you personally triggered. Use this to track your own commits and workflow runs.
+The *My work* category sends notifications for builds that you personally triggered. Use this to track your own commits and workflow runs. This category also notifies you by email when a workflow you triggered goes on hold at an approval job. For more detail, see the xref:integration:notifications.adoc#approval-job-notifications[Approval Job Notifications] section.
 
 You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on your default branch. This includes workflows that are automatically cancelled when approval jobs expire after 90 days.
 
 Available filters:
 
-* On default branch (any status)
-* On default branch (failed, error, unauthorized)
+* On default branch (any status).
+* On default branch (failed, error, unauthorized).
 * Failed
 * Succeeded
 * Cancelled
@@ -79,14 +79,14 @@ For more information, see the xref:deploy:release-agent-overview.adoc[Release Ag
 
 ==== Followed projects
 
-The *Followed projects* category sends notifications for any build in a project that you have followed, regardless of who triggered it. Use this to monitor team projects and stay informed about the overall project health.
+The *Followed projects* category sends notifications for any build in a project that you have followed, regardless of who triggered it. Use this to monitor team projects and stay informed about the overall project health. This category also notifies you by email when a workflow in a followed project goes on hold at an approval job. For more detail, see the xref:integration:notifications.adoc#approval-job-notifications[Approval Job Notifications] section.
 
 You can filter which notifications you receive based on build status. The "On default branch (any status)" filter overrides individual status filters. For example, if you enable "On default branch (any status)" but disable "Cancelled" notifications, you will still receive notifications for cancelled workflows on the default branch. This includes workflows that are automatically cancelled when approval jobs expire after 90 days.
 
 Available filters:
 
-* On default branch (any status)
-* On default branch (failed, error, unauthorized)
+* On default branch (any status).
+* On default branch (failed, error, unauthorized).
 * Failed
 * Succeeded
 * Cancelled
@@ -100,16 +100,37 @@ image::guides:ROOT:categories-followed-projects.png[Screenshot showing how to ch
 
 Chunk by CircleCI assists with CI/CD related tasks through a natural language chat interface and task scheduling. You can receive notifications when a teammate attempts to use Chunk. This allows you as an organization administrator to evaluate and enable Chunk for your organization.
 
-For a full guide to setting up and using Chunk, see the xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Overview and Setup] guide.
+Chunk also sends an email digest at 09:00 UTC every Monday summarizing your team's activity. The digest shows completed tasks, PRs opened, and failed tasks at a glance, plus a list of the most recent PRs awaiting your review. To disable the digest, select your avatar in the top right corner of the web app. Open **User Settings**, select **Notifications** from the sidebar, scroll to the **Chunk** section, and toggle off **Digest**.
+
+.Chunk notification settings
+image::guides:ROOT:chunk/chunk-notification-settings.png[Chunk notification settings on the Notifications page]
+
+For a full guide to setting up and using Chunk, including the email digest, see the xref:guides:toolkit:chunk-setup-and-overview.adoc#email-digest[Email Digest] section of the Chunk Overview and Setup guide.
 
 [badge="Beta"]
 == Slack notifications
 
-CAUTION: The CircleCI Slack integration is available in preview. This means the product is in early stages and you may encounter bugs, unexpected behavior, or incomplete features.
-
-Configure Slack notifications at the project level to send workflow status updates to your team's Slack channels. This allows your entire team to stay informed about build status without individual email notifications.
+Configure Slack notifications at the project level to send workflow status updates to your team's Slack channels. This allows your entire team to stay informed about build status without individual email notifications. CircleCI also sends a message to the project's Slack channel when a workflow goes on hold at an approval job. For more detail, see the xref:integration:notifications.adoc#approval-job-notifications[Approval Job Notifications] section.
 
 To set up Slack notifications for a project, follow the steps in the xref:integration:slack-integration.adoc[Slack Integration] guide.
+
+== Approval job notifications
+
+When a workflow reaches an approval job, it pauses until someone manually approves it. This state is called _on hold_. CircleCI sends an approval job notification when a workflow goes on hold, so it can be reviewed and approved without delay.
+
+For more information on approval jobs, see the xref:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Hold a Workflow for a Manual Approval] section.
+
+=== Who is notified
+
+Approval job notifications are delivered through the same categories as your other notifications:
+
+* *Email* to the user who triggered the pipeline, through the xref:integration:notifications.adoc#my-work[My Work] category.
+* *Email* to followers of the project, through the xref:integration:notifications.adoc#followed-projects[Followed Projects] category. Followers can enable these emails in their user notification settings.
+* *Slack* to the project's configured Slack channel, through xref:integration:notifications.adoc#slack-notifications[Slack Notifications]. This requires an active xref:integration:slack-integration.adoc[Slack Integration] for your organization.
+
+=== Approve or cancel an on-hold workflow
+
+Each approval job notification includes a link to the workflow in the CircleCI web app. Select the link to open the workflow, where you can approve or cancel it.
 
 == Organization-level contacts
 

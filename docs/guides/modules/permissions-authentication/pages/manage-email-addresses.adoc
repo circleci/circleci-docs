@@ -27,7 +27,7 @@ To change the email address for your CircleCI account, follow these steps:
 include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 . Select *Email* from the sidebar.
 . Select btn:[Change email].
-. Enter your new email address, your password and your one time code from your MFA app.
+. Enter your new email address, your password, and your one-time code from your MFA app.
 . CircleCI will send a verification email to your new email address. Select the verification link in the email to confirm the change.
 
 .Change email address

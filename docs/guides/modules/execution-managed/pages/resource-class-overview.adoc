@@ -1,7 +1,9 @@
 = Resource class overview
 :page-platform: Cloud, Server v4+
-:page-description: An overview of resource classes in CircleCI
+:page-description: Learn how to use resource classes in CircleCI to specify compute resources for jobs, configure self-hosted runners, and choose execution environments.
 :experimental:
+
+Use the `resource_class` key in your `.circleci/config.yml` to control the compute resources available to each job. Specifying the right resource class speeds up builds and reduces credit usage. Over-provisioned jobs cost more than necessary, and under-provisioned jobs run slowly or fail.
 
 Use resource classes to:
 
@@ -9,20 +11,16 @@ Use resource classes to:
 * Configure xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runners] for use in your `.circleci/config.yml` file.
 * Specify an execution environment.
 
-[#introduction]
-== Introduction
-
-The `resource_class` configuration option has multiple uses: specifying compute resource size, optimizing executors, configuring self-hosted runners, and specifying an execution environment.
-
 The most common usage is to specify CPU and RAM requirements for a job by configuring the `resource_class` key for an executor.
 
+.Specify a resource class for a Docker job
 [source,yaml]
 ----
 jobs:
   my-job:
-    docker: # use the Docker executor
+    docker:
       - image: cimg/base:2022.09 # specify a Docker image
-    resource_class: xlarge # specify a resource class
+    resource_class: xlarge # sets CPU and RAM for this job
     steps:
       - run: echo "Hello World"
 ----
@@ -33,25 +31,27 @@ NOTE: **For a full list of available resource class options,** see the xref:refe
 
 When using CircleCI's self-hosted runners, use the `resource_class` key in your project configuration to specify which runner to use for a job. Self-hosted runner resource classes are assigned and configured during the xref:execution-runner:runner-overview.adoc#getting-started[Runner Installation Process].
 
+.Self-hosted runner resource class
 [source,yaml]
 ----
 jobs:
   my-job:
     machine: true
-    resource_class: <my-namespace>/<my-runner>
+    resource_class: <my-namespace>/<my-runner> # namespace/runner-name assigned during runner installation
     steps:
       - run: echo "Hello runner"
 ----
 
 Another use of the `resource_class` key is to specify an execution environment. For example, xref:using-arm.adoc[Arm] is a resource class option when using the `machine` executor.
 
+.Arm execution environment via resource class
 [source,yaml]
 ----
 jobs:
   my-job:
     machine:
       image: ubuntu-2004:202101-01
-    resource_class: arm.medium
+    resource_class: arm.medium # arm.medium or arm.large selects the Arm execution environment
     steps:
       - run: uname -a
       - run: echo "Hello, Arm!"
@@ -79,7 +79,7 @@ NOTE: **To get started setting up a self-hosted runner**, see the xref:execution
 If a `resource_class` is not explicitly declared for a job, CircleCI will use a default resource class size. Defaults are subject to change. It is best practice to specify a resource class, rather than relying on a default.
 
 [#resource-class-usage-tools]
-== Resource class usage tools
+== View and monitor resource class usage
 
 Information about the resource classes used in your jobs can be found in the web app, or by using the API. See the sections below for details.
 

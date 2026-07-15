@@ -55,7 +55,7 @@
 *** xref:orchestrate:automatic-reruns.adoc[Automatic reruns]
 *** xref:orchestrate:skip-build.adoc[Skip CI, auto-cancel, and block new pipelines]
 *** xref:orchestrate:controlling-serial-execution-across-your-organization.adoc[Controlling serial execution across your organization]
-*** xref:orchestrate:using-branch-filters.adoc[Using branch filters]
+*** xref:orchestrate:using-branch-filters.adoc[Branch and tag filtering]
 *** xref:orchestrate:selecting-a-workflow-to-run-using-pipeline-parameters.adoc[Select a workflow to run using pipeline parameters]
 *** xref:orchestrate:notify-a-slack-channel-of-a-paused-workflow.adoc[Notify a Slack channel of a paused workflow]
 ** Share data
@@ -150,7 +150,6 @@
 ** Manage and optimize tests
 *** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
@@ -198,14 +197,14 @@
 *** xref:deploy:deploy-ios-applications.adoc[Deploy iOS applications]
 *** xref:deploy:deploy-over-ssh.adoc[Deploy over SSH]
 *** xref:deploy:publish-packages-to-packagecloud.adoc[Publish packages to Packagecloud]
-*** xref:deploy:deploy-to-npm-registry.adoc[Deploy to npm registry]
+*** xref:deploy:deploy-to-npm-registry.adoc[Publish to npm using OIDC trusted publishing]
+*** xref:deploy:deploy-to-npm-registry-with-token.adoc[Publish to npm with an authentication token]
 
 * Optimize
 ** xref:optimize:optimizations.adoc[Optimizations reference]
 ** Data
 *** xref:optimize:persist-data.adoc[Persisting data overview]
 *** xref:optimize:caching.adoc[Caching dependencies]
-*** xref:optimize:caching-strategy.adoc[Caching strategies]
 *** xref:optimize:artifacts.adoc[Store build artifacts]
 ** Speed
 *** xref:optimize:concurrency.adoc[Concurrency]
@@ -213,8 +212,6 @@
 *** xref:optimize:docker-layer-caching.adoc[Docker layer caching overview]
 ** Config
 *** xref:orchestrate:dynamic-config.adoc[Dynamic configuration]
-** Tutorials
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 ** How-to guides
 *** xref:orchestrate:using-matrix-jobs.adoc[Use matrix jobs]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]
@@ -255,6 +252,7 @@
 *** xref:security:env-vars.adoc[Intro to environment variables]
 *** xref:security:contexts.adoc[Using contexts]
 *** xref:security:ip-ranges.adoc[IP ranges]
+*** xref:security:site-to-site-connectivity.adoc[Site-to-site connectivity]
 *** xref:security:audit-logs.adoc[Audit logs]
 ** Security recommendations
 *** xref:security:security-overview.adoc[Security overview]
@@ -321,9 +319,9 @@
 *** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
-** Local CLI
-*** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
-*** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
+** CircleCI CLI
+*** xref:toolkit:circleci-cli.adoc[The CircleCI CLI]
+*** xref:toolkit:cli-migration-guide.adoc[CLI migration guide]
 
 ** Chunk CLI
 *** xref:toolkit:install-and-configure-the-chunk-cli.adoc[Install and configure the Chunk CLI]
@@ -353,7 +351,4 @@
 ** xref:plans-pricing:credits.adoc[Credits overview]
 ** xref:plans-pricing:user-types-and-registration.adoc[User types and registration]
 ** xref:plans-pricing:manage-budgets.adoc[Manage budgets]
-** xref:plans-pricing:plan-free.adoc[Free Plan overview]
-** xref:plans-pricing:plan-performance.adoc[Performance Plan overview]
-** xref:plans-pricing:plan-scale.adoc[Scale Plan overview]
 ** xref:plans-pricing:plan-server.adoc[Server Plan overview]

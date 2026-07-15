@@ -11,7 +11,7 @@ Runner Provisioner is currently in preview. The product, its configuration schem
 
 Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using link:https://github.com/kubevirt/kubevirt[KubeVirt]. Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand.
 
-The current preview version is `0.1.0`.
+The current preview version is `0.1.1`.
 
 == Getting access
 
@@ -38,10 +38,11 @@ Do not open a support ticket for issues with Runner Provisioner. Issues are rout
 * A Kubernetes cluster with KubeVirt installed. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
 * `kubectl` configured against your cluster.
 * `helm` v3+.
-* A CircleCI runner resource class and its associated resource class token. Create one in the CircleCI web app under **Self-Hosted Runners**. This token is used by the agent running on the VM to authenticate with CircleCI and claim and execute jobs for that resource class.
-* A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access.
+* A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access. See the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page for more information.
 
 === Cluster requirements
+
+The following sections cover the cluster requirements for running Runner Provisioner on a Kubernetes cluster.
 
 ==== Nested virtualization
 
@@ -152,9 +153,20 @@ Then install KubeVirt and apply the `virt-handler` patch from <<tainted-nodes,Ta
 [#example-eks]
 ==== Example: AWS EKS
 
-On EKS, KVM support requires bare metal instances — regular EC2 instances, even Nitro-based ones, do not expose `/dev/kvm` to pods. Use a `.metal` instance type (for example, `m5.metal` or `c5.metal`). An active request for nested virtualization support on EC2 instances remains open.
+As of February 2026, AWS supports nested virtualization on 8th-generation Intel instances (`c8i`, `m8i`, and `r8i`, including their flex variants), so bare metal instances are no longer required to expose `/dev/kvm` to pods. See the link:https://aws.amazon.com/about-aws/whats-new/2026/02/amazon-ec2-nested-virtualization-on-virtual/[AWS announcement]. Earlier-generation or non-Intel instances do not support nested virtualization; for those you must still use a `.metal` instance type (for example, `m5.metal`).
 
-`eksctl` does not support taints as CLI flags for clusters it did not create. Use a config file instead:
+Nested virtualization is enabled through the instance's CPU options (`NestedVirtualization=enabled`). `eksctl` managed node groups do not expose this CPU option directly, so create an EC2 launch template with it set and reference that launch template from the node group. Use a supported instance type and the AL2023 AMI family.
+
+Create the launch template:
+
+[source,console]
+----
+$ aws ec2 create-launch-template \
+  --launch-template-name kubevirt-nested-virt \
+  --launch-template-data '{"InstanceType":"c8i.xlarge","CpuOptions":{"NestedVirtualization":"enabled"}}'
+----
+
+Note the `LaunchTemplateId` from the output and reference it in the node group config. `eksctl` does not support taints as CLI flags for clusters it did not create, so use a config file:
 
 .`kubevirt-nodegroup.yaml`
 [source,yaml]
@@ -176,7 +188,9 @@ vpc:
 managedNodeGroups:
   - name: kubevirt-pool
     privateNetworking: true
-    instanceType: m5.metal
+    amiFamily: AmazonLinux2023
+    launchTemplate:
+      id: <launch-template-id>
     minSize: 3
     maxSize: 10
     desiredCapacity: 3
@@ -243,8 +257,24 @@ $ kubectl label nodes -l agentpool=<nodepool-name> node-role.kubernetes.io/contr
 
 == Quickstart
 
+=== 1. Create CircleCI namespace and resource class
+
+[tabs]
+====
+Web app installation::
++
+--
+include::ROOT:partial$runner/install-with-web-app-steps.adoc[]
+--
+CLI installation::
++
+--
+include::ROOT:partial$runner/install-with-cli-steps.adoc[]
+--
+====
+
 [#create-namespace]
-=== 1. Create the namespace
+=== 3. Create the Kubernetes namespace
 
 [source,console]
 ----
@@ -297,7 +327,7 @@ provisioner:
 The image `quay.io/containerdisks/ubuntu:22.04` is an official container disk maintained by the KubeVirt project, providing a pre-built Ubuntu 22.04 OS image for running virtual machines on Kubernetes.
 
 [#install-helm-chart]
-=== 3. Install the Helm chart
+=== 4. Install the Helm chart
 
 [source,console]
 ----
@@ -309,7 +339,7 @@ $ helm install runner-provisioner circleci_runner-provisioner \
 ----
 
 [#verify-deployment]
-=== 4. Verify the deployment
+=== 5. Verify the deployment
 
 [source,console]
 ----
@@ -321,7 +351,7 @@ $ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
 [#connecting-to-server]
 == Connecting to a CircleCI Server instance
 
-By default, Runner Provisioner connects to the CircleCI Cloud API at `https://runner.circleci.com/`. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
+By default, Runner Provisioner connects to the CircleCI Cloud API at `https://runner.circleci.com`. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
 
 .`my-values.yaml`
 [source,yaml]
@@ -350,12 +380,20 @@ NOTE: Configuration field names and defaults may change before general availabil
 | Default
 | Description
 
+| `replicaCount`
+| `1`
+| Number of provisioner replicas. Replicas coordinate via a `coordination.k8s.io` Lease, electing one leader with the rest on standby. Set greater than `1` for high availability.
+
 | `image.repository`
 | `circleci/runner-provisioner`
 | Container image
 
+| `image.pullPolicy`
+| `Always`
+| Image pull policy
+
 | `image.tag`
-| `0.1.0`
+| Chart `appVersion` (currently `0.1.1`)
 | Image tag (overridden by `image.digest` when set)
 
 | `image.digest`
@@ -365,6 +403,45 @@ NOTE: Configuration field names and defaults may change before general availabil
 | `imagePullSecrets`
 | `[]`
 | Image pull secrets for private registries.
+|===
+--
+
+[#runner-bundle-values]
+=== `runnerBundle.*` values
+
+When enabled, the provisioner attaches a containerDisk that ships the `circleci-runner` packages so pool VMs install from local block storage instead of downloading from packagecloud.io at boot.
+
+[.table-scroll]
+--
+[cols="2,2,3", options="header"]
+|===
+| Key
+| Default
+| Description
+
+| `enabled`
+| `true`
+| Attach the runner bundle containerDisk to each VM
+
+| `image.repository`
+| `circleci/runner-bundle`
+| Bundle image repository
+
+| `image.pullPolicy`
+| `Always`
+| Bundle image pull policy
+
+| `image.tag`
+| Chart `appVersion` (currently `0.1.1`)
+| Bundle image tag (overridden by `runnerBundle.image.digest` when set)
+
+| `image.digest`
+| `""`
+| SHA digest; takes precedence over tag when set
+
+| `imagePullSecrets`
+| `[]`
+| Pull secrets for the bundle image, falling back to the top-level `imagePullSecrets`. Only the first is used (KubeVirt allows one per disk).
 |===
 --
 
@@ -380,12 +457,12 @@ NOTE: Configuration field names and defaults may change before general availabil
 | Description
 
 | `circleciAPIAddr`
-| `https://runner.circleci.com/`
+| `https://runner.circleci.com`
 | CircleCI API base URL
 
 | `namespace`
 | `runner-provisioner`
-| Namespace where runner VMs are created
+| Namespace where runner VMs are created.
 
 | `circleToken`
 | `""`
@@ -410,11 +487,16 @@ NOTE: Configuration field names and defaults may change before general availabil
 
 | `name`
 | `""`
-| Resource class in `namespace/name` format (required)
+| Resource class in `namespace/name` format (required). The namespace can contain lowercase letters, numbers, underscores, and dashes. The resource class name can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs.
+Valid examples: `my-org/medium`, `acme_corp/large-gpu`, `dev-team/custom:arm64`.
 
 | `token`
 | `""`
 | Runner authentication token (required)
+
+| `userData`
+| `""`
+| Optional Bash script run before the runner is installed, for example to install dependencies
 
 | `idleTimeout`
 | `""`
@@ -489,13 +571,15 @@ provisioner:
 
 === VM specification notes
 
-The `spec` field is a KubeVirt `VirtualMachineInstanceSpec`. The provisioner always appends a cloud-init disk and volume automatically — do not add one yourself.
+The `spec` field is a KubeVirt `VirtualMachineInstanceSpec`. The provisioner always appends a cloud-init disk and volume automatically, so do not add one yourself. When `runnerBundle.enabled` is `true` (the default), the provisioner also appends a containerDisk shipping the `circleci-runner` packages, so do not add one yourself either.
+
+When no `interfaces` or `networks` are set in `spec`, the provisioner defaults the VM to masquerade binding on the pod network. Set both to override (for example, bridge for a routable pod IP). See the link:https://kubevirt.io/user-guide/network/interfaces_and_networks/#masquerade[KubeVirt networking documentation].
 
 VM OS support is limited to Debian/Ubuntu and RHEL/CentOS based images. Other Linux distributions are not supported.
 
 The startup script performs the following steps on each VM:
 
-. Detects the OS and installs `circleci-runner` from packagecloud.io.
+. Detects the OS and installs `circleci-runner`. By default (`runnerBundle.enabled`), packages are installed from the bundled containerDisk attached to the VM. When the bundle is disabled, packages are downloaded from packagecloud.io instead.
 . Injects the runner auth token into `/etc/circleci-runner/circleci-runner-config.yaml`.
 . Configures the runner in single-task mode (one job per VM lifetime).
 . Optionally sets `idle_timeout` in the runner config.
@@ -529,6 +613,9 @@ The Helm chart creates a `ServiceAccount`, `Role`, and `RoleBinding` scoped to t
 | Resource
 | Verbs
 
+| `deployments` (`apps`)
+| `get`
+
 | `secrets`
 | `get`, `list`, `watch`, `create`, `update`, `patch`
 
@@ -540,6 +627,12 @@ The Helm chart creates a `ServiceAccount`, `Role`, and `RoleBinding` scoped to t
 
 | `virtualmachines` (`kubevirt.io`)
 | `get`, `list`, `watch`, `patch`, `delete`
+
+| `leases` (`coordination.k8s.io`)
+| `get`, `list`, `watch`, `create`, `update`, `patch`
+
+| `events`
+| `create`, `patch`
 |===
 --
 
@@ -638,6 +731,17 @@ Configuration changes (tokens, API address, VM spec) are injected into VMs at fi
 $ kubectl delete vm -n runner-provisioner --all
 ----
 
+== Uninstalling
+
+Uninstall the Helm release with:
+
+[source,console]
+----
+$ helm uninstall runner-provisioner --namespace runner-provisioner
+----
+
+Uninstalling scales the VM pool down to zero before deleting the release, so runner VMs are cleaned up automatically.
+
 == Troubleshooting
 
 [#provisioner-pod-not-starting]
@@ -694,7 +798,15 @@ Common causes:
 [#runner-vms-not-claiming-jobs]
 === Runner VMs boot but do not claim jobs
 
-SSH into a VM or check its cloud-init output to confirm the runner agent started successfully:
+Runner logs are forwarded to each VM's serial console, so runner output is visible through the virtualization layer without logging into the VM. KubeVirt exposes the serial console output on the VM's `virt-launcher` pod in the `guest-console-log` container. Find the pod and tail its console log:
+
+[source,console]
+----
+$ kubectl get pods -n runner-provisioner -l kubevirt.io=virt-launcher
+$ kubectl logs <virt-launcher-pod> -c guest-console-log -n runner-provisioner -f
+----
+
+To inspect the runner service directly, connect to the VM console instead:
 
 [source,console]
 ----
@@ -788,5 +900,5 @@ The primary mitigation is `minReplicas`. Pre-warmed VMs have already completed s
 
 Two factors can push latency toward the higher end or cause provisioning to fail silently:
 
-* *Package downloads*: The cloud-init script installs `circleci-runner` from packagecloud.io at boot time. Slow or unavailable package repositories will delay or prevent the runner from starting. Baking the runner binary into a custom disk image removes this dependency.
+* *Package downloads*: With the runner bundle enabled (the default), `circleci-runner` is installed from the bundled containerDisk and there is no boot-time download from packagecloud.io. If you disable `runnerBundle`, the cloud-init script downloads `circleci-runner` from packagecloud.io at boot, and slow or unavailable package repositories will delay or prevent the runner from starting.
 * *Cold image pulls*: The first time a VM is scheduled on a node, KubeVirt must pull the full container disk image. Subsequent VMs on the same node use the cached image and are significantly faster.

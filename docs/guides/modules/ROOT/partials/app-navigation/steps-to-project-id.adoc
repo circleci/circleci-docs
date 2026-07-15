@@ -1,0 +1,5 @@
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
+. Select the btn:[Copy] icon next to the project ID to copy it to your clipboard.
++
+.Project ID available in project settings overview
+image::guides:ROOT:project-id.png[screenshot showing where to find your project ID]

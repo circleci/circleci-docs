@@ -12,16 +12,26 @@ Refer to the link:https://circleci.com/changelog/[CircleCI Changelog] to find ou
 
 To update the Kubernetes release agent you need an operational CircleCI environment integrated with your Kubernetes cluster. Refer to the following pages for steps:
 
-* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI release agent]
-* xref:configure-your-kubernetes-components.adoc[Configure your Kubernetes components]
+* xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent]
+* xref:configure-your-kubernetes-components.adoc[Configure Your Kubernetes Components]
 
 ****
-If you were using the release agent prior to version `1.2.0` you were using `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend migrating to the new labels as soon as possible.
+If you used the release agent prior to version `1.2.0`, you used `app` and `version` in place of `circleci.com/component-name` and `circleci.com/version`. While `app` and `version` are still supported, we recommend migrating to the new labels as soon as possible.
 
 Support for the old labels will be dropped in one of the next releases.
 
 After migrating to the new labels, rolling back to versions that used the old labels will be supported only for deployments and Rollouts managed through Helm.
 ****
+
+[NOTE]
+====
+*Upgrading to v1.6.0:* Release agent v1.6.0 and Helm chart v1.6.0 introduce `managedNamespacesMode` (`static` or `dynamic`). The default is `static`, which preserves the existing behavior.
+
+The release agent monitors the exact namespace names in `managedNamespaces` with no change to RBAC permissions.
+No action is required when upgrading if you want to keep the existing static behavior.
+
+To opt in to dynamic mode (glob-pattern namespace discovery), re-run `helm upgrade` with `--set managedNamespacesMode=dynamic --set rbac.clusterRoles=true` after upgrading. See the xref:set-up-the-circleci-release-agent.adoc#managed-namespaces-mode[Managed Namespaces Mode] section for details.
+====
 
 [#update-steps]
 == Update steps
@@ -41,3 +51,5 @@ helm upgrade --install circleci-release-agent-system release-agent/circleci-rele
 --namespace circleci-release-agent-system \
 --set managedNamespaces="{namespace1,namespace2}"
 ----
++
+If the agent was installed with the integration token stored in the Helm release, you can omit `--set tokenSecret.token` on upgrade. Use `--reuse-values` when applying a values file that does not include the token. Do not use `--reset-values` unless you also supply the token again. See xref:set-up-the-circleci-release-agent.adoc[Set up the CircleCI Release Agent] for details on storing and managing integration tokens.

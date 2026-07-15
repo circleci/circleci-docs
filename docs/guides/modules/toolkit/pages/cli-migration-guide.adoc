@@ -1,0 +1,130 @@
+= CLI command migration guide
+:page-platform: Cloud, Server v4+
+:page-description: A mapping of legacy CircleCI CLI commands to their equivalents in CircleCI CLI v1.
+:experimental:
+
+NOTE: The CircleCI CLI v1 is currently in preview. You can expect changes to the available commands and features during this phase. If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
+
+This guide covers CircleCI CLI commands that changed between the legacy CLI (v0.1.x) and link:https://cli.circleci.com/[CLI v1], plus capabilities that are new in v1. Commands not listed here are unchanged. Use it as a reference when updating scripts or workflows that use the legacy CLI.
+
+== Quickstart
+
+If you are new to the CircleCI CLI or are upgrading from the legacy CLI (v0.1.x), head over to the xref:circleci-cli.adoc[CircleCI CLI Guide] to get started. This guide covers differences between the legacy CLI and CLI v1.
+
+[#terminology-changes]
+== Terminology changes
+
+CLI v1 reflects updated CircleCI terminology that resolves longstanding ambiguity in the word "pipeline". Two terms have changed meaning in ways that affect command names directly.
+
+[.table-scroll]
+--
+[cols="1,1,2", options="header"]
+|===
+| Legacy | New | Definition
+
+| Pipeline definition
+| Pipeline
+| A definition that specifies where your CircleCI configuration is stored and where your code is checked out from. A trigger references a pipeline and uses it when initiating a run.
+
+| Pipeline
+| Run
+| The instance produced when an event matches a trigger. A run records the outcome of the attempt and groups any workflows that executed, including errors that occurred before workflows could start.
+|===
+--
+
+As a result, commands that previously used `pipeline` to refer to a triggered execution now use `run`. For example, `circleci pipeline run` in the legacy CLI (v0.1.x) becomes `circleci run trigger` in v1, and commands for listing, watching, and cancelling triggered executions all live under `circleci run` rather than `circleci pipeline`.
+
+[#implicit-context]
+== Implicit project and org context
+
+In CLI v1, most commands do not require explicit project or org IDs as positional arguments.
+
+We recommend you run `circleci project link` in your project directory through which the CLI writes your project and org IDs to `.circleci/info.yml`. Commands resolve the project and org automatically from the `info.yml` file, or fall back to deriving them from your git remote URL.
+
+Commands that previously required positional `<project-id>`, `<org-id>`, or `<vcs-type>` arguments work without them in v1.
+
+For example, `circleci pipeline list <project-id>` in the legacy CLI becomes `circleci pipeline list` in v1, with the project resolved automatically.
+
+Where an explicit override is needed, most commands accept `--project <slug>` or `--org <org-slug>` flags.
+
+== Changed commands
+
+The following sections cover commands that have changed between the legacy CLI (v0.1.x) and CLI v1.
+
+=== Local job execution
+
+Local job execution with `circleci local execute` and `circleci build` has been removed in CLI v1. These commands ran jobs locally in Docker and are no longer supported.
+
+For an alternative, see the Chunk CLI `validate` command and Chunk sidecars. For full details see the xref:how-to-use-chunk-cli.adoc#run-validation[Chunk CLI Guide].
+
+=== Pipelines and runs
+
+*Trigger a run*::
++
+* Legacy: `circleci pipeline run <org-slug> <project-id>`
+* New: `circleci run trigger`
+
+*Create a project trigger*::
++
+* Legacy: `circleci trigger create <project-id>`
+* New: `circleci project trigger create --pipeline-definition-id <id>`
+
+=== Contexts
+
+*View a context*::
++
+* Legacy: `circleci context show --org-id <org-id> <context-name>`
+* New: `circleci context get <id\|name>`
+
+*Store an environment variable in a context*::
++
+* Legacy: `circleci context store-secret --org-id <org-id> <context-name> <secret-name>`
+* New: `circleci context secret set <context-id\|name> --name <name> --value <value>`
+
+*Remove an environment variable from a context*::
++
+* Legacy: `circleci context remove-secret --org-id <org-id> <context-name> <secret-name>`
+* New: `circleci context secret delete <context-id\|name> --name <name>`
+
+=== Project environment variables
+
+*Set a project environment variable*::
++
+* Legacy: `circleci project secret create <vcs-type> <org-name> <project-name> <env-name>`
+* New: `circleci envvar set <name> <value>`
+
+*List project environment variables*::
++
+* Legacy: `circleci project secret list <vcs-type> <org-name> <project-name>`
+* New: `circleci envvar list`
+
+=== Projects
+
+*Create a project*::
++
+* Legacy: `circleci project create <vcs-type> <org-slug>`
+* New: `circleci project create [project-name] --org <vcs/org-slug>`
+
+=== Self-hosted runners
+
+*Create a resource class*::
++
+* Legacy: `circleci runner resource-class create <namespace/resource-class> <description>`
+* New: `circleci runner resource-class create <namespace>/<name> --description <desc>`
+
+=== Config policy management
+
+NOTE: The `--owner-id` flag used in legacy policy commands has been renamed to `--org` in CLI v1.
+
+
+*Read policy settings*::
++
+* Legacy: `circleci policy settings --owner-id <org-id>`
+* New: `circleci policy settings get --org <org>`
+
+*Update policy settings*::
++
+* Legacy: `circleci policy settings --owner-id <org-id> --enabled`
+* New: `circleci policy settings set --org <org> --enabled`
+
+

@@ -7,28 +7,40 @@
   padding: 0 1rem 4rem;
 }
 
-@media screen and (max-width: 1023.5px) {
-  .doc {
-    padding: 0 32px 4rem;
-  }
-}
+/* Below the 1200px sidebar-TOC reflow (mobile + tablet) there is no TOC beside
+   the article, so the article is a centered column — capped at the same width it
+   uses on desktop and centred via the base `margin: 0 auto` — with wider side
+   padding. The breadcrumb toolbar is centred to the same column in
+   article-toolbar.hbs so their left edges line up.
 
-@media screen and (min-width: 1024px) {
+   width:100% + min-width:0 are required because .doc is a flex item and the base
+   `margin: 0 auto` gives it auto cross-axis margins. Auto margins make a flex
+   item size to its content (capped at max-width), so wide content (long code
+   lines, wide tables) would push it out to the 888px max-width even on a phone,
+   overflowing the page horizontally. width:100% sizes it to the container instead
+   (still capped/centred by max-width), and min-width:0 lets wide children be
+   clipped/scrolled inside the article rather than widening it. */
+@media screen and (max-width: 1199.5px) {
   .doc {
-    flex: auto;
-    font-size: var(--doc-font-size--desktop);
-    margin: var(--doc-margin--desktop);
-    max-width: var(--doc-max-width--desktop);
+    width: 100%;
     min-width: 0;
+    max-width: var(--doc-max-width--desktop);
+    padding: 0 var(--doc-padding-x) 4rem;
   }
 }
 
-/* Apply aggressive flexbox fix only above 1200px where the original problem occurs */
+/* The article column only narrows for the TOC at 1200px, where the sidebar TOC
+   actually appears (see main.css). Below that — the entire tablet range — the
+   article stays full-width, so there is no capped column with an empty gutter
+   where the TOC will later sit. Previously this block fired at 1024px, 176px
+   before the TOC arrived, which left that dead gutter on the right. */
 @media screen and (min-width: 1200px) {
   .doc {
     flex: 1 1 0%;
     width: 0; /* Force flexbox to ignore content width */
-    max-width: var(--doc-max-width--desktop); /* Restore max-width for centering */
+    margin: var(--doc-margin--desktop);
+    max-width: var(--doc-max-width--desktop);
+    min-width: 0;
     transition: max-width 0.3s ease;
   }
 }
@@ -61,7 +73,7 @@
   margin: 16px 0;
   padding: 0;
   text-align: left;
-  scroll-margin-top: calc(var(--navbar-height) + var(--toolbar-height) + 1rem);
+  scroll-margin-top: calc(var(--header-height) + 1.5rem); /* No-JS fallback for anchor jumps; the active offset is set in js/03-fragment-jumper.js (HEADER_GAP). Keep the gap in sync (1.5rem = 24px). */
   /* Flex layout for badge vertical alignment */
   display: flex;
   align-items: center;
@@ -89,10 +101,19 @@
   font-size: 16px;
 }
 
-/* Mobile heading sizes */
-@media screen and (max-width: 1023.5px) {
+/* Mobile heading sizes (below the tablet breakpoint). The 767.5px boundary keeps
+   the whole type scale switching at one place; the root is a uniform 16px across
+   breakpoints (see base.css). */
+@media screen and (max-width: 767.5px) {
   .doc h1 {
     font-size: 24px;
+  }
+
+  /* Gives the breadcrumbs→title gap on mobile, matching the tablet/desktop rule.
+     Uses the same --rem-base calc as the ≥768 rule; with the 16px root and
+     --rem-base:16 this resolves to a true 40px. */
+  .doc h1.page {
+    margin-top: calc(40 / var(--rem-base) * 1rem);
   }
 
   .doc h2 {
@@ -1393,7 +1414,7 @@
 
 
 /* paragraphs, lists, tables, blockquotes all get 16px bottom spacing */
-.doc p,
+.doc :not(li) > p,
 .doc blockquote,
 .doc ul,
 .doc ol,
@@ -1530,6 +1551,7 @@
 .platform-badge {
   position: relative;
   cursor: default;
+  flex-shrink: 0;
 }
 
 /* Light mode tooltip - dark background with white text */
@@ -1635,3 +1657,9 @@
 }
 
 
+
+/* Page vote buttons - dark mode muted color for text and icons */
+[data-theme="dark"] #docs-vote-yes,
+[data-theme="dark"] #docs-vote-no {
+  color: var(--dark-text-muted);
+}
