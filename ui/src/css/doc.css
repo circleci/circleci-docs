@@ -73,7 +73,7 @@
   margin: 16px 0;
   padding: 0;
   text-align: left;
-  scroll-margin-top: calc(var(--navbar-height) + var(--toolbar-height) + 1rem);
+  scroll-margin-top: calc(var(--header-height) + 1.5rem); /* No-JS fallback for anchor jumps; the active offset is set in js/03-fragment-jumper.js (HEADER_GAP). Keep the gap in sync (1.5rem = 24px). */
   /* Flex layout for badge vertical alignment */
   display: flex;
   align-items: center;
@@ -101,18 +101,17 @@
   font-size: 16px;
 }
 
-/* Mobile heading sizes (below the tablet breakpoint). 767.5px pairs with the
-   768px html font-size bump in base.css so the whole type scale switches at one
-   boundary. */
+/* Mobile heading sizes (below the tablet breakpoint). The 767.5px boundary keeps
+   the whole type scale switching at one place; the root is a uniform 16px across
+   breakpoints (see base.css). */
 @media screen and (max-width: 767.5px) {
   .doc h1 {
     font-size: 24px;
   }
 
   /* Gives the breadcrumbs→title gap on mobile, matching the tablet/desktop rule.
-     Uses the same --rem-base calc as the ≥768 rule for consistency; note the root
-     is 17px below 768px, so this resolves to ~37.8px rather than a true 40px until
-     the 17px-root quirk is revisited. */
+     Uses the same --rem-base calc as the ≥768 rule; with the 16px root and
+     --rem-base:16 this resolves to a true 40px. */
   .doc h1.page {
     margin-top: calc(40 / var(--rem-base) * 1rem);
   }

@@ -12,16 +12,6 @@ html {
   color-scheme: light dark; /* Support both light and dark modes */
 }
 
-/* Type scale matches desktop from the tablet breakpoint up; only mobile drops
-   down (the design has one mobile type scale and a shared tablet/desktop scale).
-   Kept at 768px (md) to align with the heading sizes in doc.css. The structural
-   reflow to sidebars stays at 1200px (lg) — see main.css. */
-@media screen and (min-width: 768px) {
-  html {
-    font-size: var(--body-font-size--desktop);
-  }
-}
-
 body {
   background: var(--body-background);
   color: var(--body-font-color);

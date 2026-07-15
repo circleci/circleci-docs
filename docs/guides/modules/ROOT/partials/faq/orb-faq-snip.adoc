@@ -8,7 +8,7 @@ include::guides:ROOT:partial$orbs/orb-types.adoc[]
 For a detailed comparison, see the xref:orbs:use:orb-concepts.adoc#orb-types-comparison[Orb Types Comparison] section.
 
 [#which-orb-type-should-i-use]
-=== Which orb type should I use?
+=== Which orb type do I use?
 
 Choose **registry orbs** when:
 

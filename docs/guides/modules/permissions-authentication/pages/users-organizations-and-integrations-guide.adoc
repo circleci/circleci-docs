@@ -29,15 +29,15 @@ The following table describes user authorization for the different VCS providers
 | Integration type | Authorization management | Notes
 
 |GitHub OAuth app
-|Displayed in menu:User Settings[Account Integration], managed in GitHub at link:https://github.com/settings/applications[GitHub settings].
+|Displayed in menu:User Settings[Account Integrations], managed in GitHub at link:https://github.com/settings/applications[GitHub settings].
 |Can exist alongside GitHub App authorization.
 
 |GitHub App
-|If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings]. Not displayed in menu:User Settings[Account Integration].
+|If you are not "authorized" you will see a button in the top bar of the web app that prompts you to authorize. Managed in GitHub at link:https://github.com/settings/apps/authorizations[GitHub settings]. Not displayed in menu:User Settings[Account Integrations].
 |Can exist alongside GitHub OAuth app authorization.
 
 |Bitbucket Cloud OAuth
-|Displayed in menu:User Settings[Account Integrations] , managed in Bitbucket at link:https://bitbucket.org/account/settings/app-authorizations/[Bitbucket settings].
+|Displayed in menu:User Settings[Account Integrations], managed in Bitbucket at link:https://bitbucket.org/account/settings/app-authorizations/[Bitbucket settings].
 |Mutually exclusive with other VCS authorization
 
 |GitLab
@@ -401,7 +401,7 @@ If you feel strongly about reducing the number of permissions CircleCI uses, con
 
 === GitHub OAuth SAML SSO
 
-Enabling SAML protection on a GitHub org can cause changes to CircleCI’s settings related to GitHub Checks and GitHub status updates. Ensure these settings are configured for their desired state after enabling SAML for your organization. You can find these settings at:
+If you use SAML SSO with a `github` type organization, be aware that it can affect settings that control how CircleCI reports build status back to GitHub. Enabling SAML protection on a GitHub org can cause changes to CircleCI’s settings related to GitHub Checks and GitHub status updates. Ensure these settings are configured for their desired state after enabling SAML for your organization. You can find these settings at:
 
 * GitHub Checks, from the GitHub website, select menu:Org[VCS > GitHub Checks]
 * GitHub status updates, from the CircleCI web app menu:Project Settings[Advanced > GitHub Status Updates]
@@ -411,11 +411,11 @@ For more information on GitHub Checks and GitHub status updates, see the xref:in
 
 == Rename an organization or project
 
-For a guide to renaming organizations and projects, see the xref:security:rename-organizations-and-repositories.adoc[Rename Organizations and Projects] page.
+For a guide to renaming organizations and projects, see the xref:security:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] page.
 
-== Delete and organization or project
+== Delete an organization or project
 
-For a guide to deleting organizations and projects, see the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Repositories] page.
+For a guide to deleting organizations and projects, see the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page.
 
 == Pipelines
 
@@ -529,7 +529,6 @@ For code in GitHub, to set up a CircleCI project, you might find you need to ena
 
 If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
 
-****
 If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
 
 * GitHub will remove inactive keys if they are unused for over a year.
@@ -537,7 +536,6 @@ If your deploy keys or user keys appear to have been removed, it may be due to o
 * In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
 * If your CircleCI project has no followers, CircleCI will consider it disabled and remove the associated keys.
 * When you delete a CircleCI project, CircleCI will remove its associated keys.
-****
 
 When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
@@ -553,17 +551,15 @@ Bitbucket Cloud::
 --
 When you set up a new project with a Bitbucket Cloud pipeline, CircleCI creates a deployment key on the VCS provider for your project. A deploy key is an SSH key-pair, one public, one private. The VCS provider stores the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
-If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for GitHub-specific instructions to create a deployment key.
+If you want to push to the repository from your builds, you will need a deployment key with write access. See the below section for Bitbucket-specific instructions to create a deployment key.
 
-****
 If your deploy keys or user keys appear to have been removed, it may be due to one of the following reasons:
 
-* GitHub will remove inactive keys if they are unused for over a year.
-* If CircleCI creates keys through a user's OAuth integration with GitHub, and the user revokes or removes the integration, GitHub will also remove the associated keys.
-* In GitHub, if an organization owner restricts or disables deploy keys across all repositories, GitHub may disable or remove existing deploy keys.
+* Bitbucket will remove inactive keys if they are unused for over a year.
+* If CircleCI creates keys through a user's OAuth integration with Bitbucket, and the user revokes or removes the integration, Bitbucket will also remove the associated keys.
+* In Bitbucket, if an organization owner restricts or disables deploy keys across all repositories, Bitbucket may disable or remove existing deploy keys.
 * If your CircleCI project has no followers, CircleCI will consider it disabled and remove the associated keys.
 * When you delete a CircleCI project, CircleCI will remove its associated keys.
-****
 
 When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
@@ -851,10 +847,6 @@ When you push to your GitLab repository from a job, CircleCI will use the SSH ke
 
 For a guide to additional SSH keys for CircleCI pipelines, see the xref:integration:add-ssh-key.adoc[Add SSH Keys] page.
 
-== Built-in environment variables and pipeline values
-
-The built-in environment variables available in a project depend on the pipeline type. For a full list see the xref:reference:ROOT:variables.adoc[Project Values and Variables] page.
-
 == Controlling access via a machine user
 
 For fine-grained access to multiple repositories, it is best practice to create a non-human user for your CircleCI projects. For example, a link:https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users[machine user] is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
@@ -991,6 +983,8 @@ Follow these steps to disconnect your CircleCI account from GitHub.
 Once disconnected, you will be redirected to the CircleCI login page. To reconnect your account, log in to CircleCI using your GitHub or Bitbucket social login credentials.
 
 == Frequently asked questions
+
+The following are common questions about managing your user account and organizations in CircleCI.
 
 === How do I delete my user account?
 

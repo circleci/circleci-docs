@@ -31,7 +31,7 @@ sudo sed -i "s/<< AUTH_TOKEN >>/$RUNNER_AUTH_TOKEN/g" /etc/circleci-runner/circl
 export CIRCLECI_RUNNER_API_URL="your server domain"
 ```
 +
-Or by adding the url to `/etc/circleci-runner/circleci-runner-config.yaml` using text editor of your choice.
+Or by adding the URL to `/etc/circleci-runner/circleci-runner-config.yaml` using text editor of your choice.
 +
 ```yaml
 api:
