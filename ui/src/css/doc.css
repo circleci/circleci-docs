@@ -1657,3 +1657,9 @@
 }
 
 
+
+/* Page vote buttons - dark mode muted color for text and icons */
+[data-theme="dark"] #docs-vote-yes,
+[data-theme="dark"] #docs-vote-no {
+  color: var(--dark-text-muted);
+}
