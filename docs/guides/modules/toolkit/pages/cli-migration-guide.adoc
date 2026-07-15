@@ -3,9 +3,13 @@
 :page-description: A mapping of legacy CircleCI CLI commands to their equivalents in CircleCI CLI v1.
 :experimental:
 
-This guide covers CircleCI CLI commands that changed between the legacy CLI and link:https://cli.circleci.com/[CLI v1], plus capabilities that are new in v1. Commands not listed here are unchanged. Use it as a reference when updating scripts or workflows that use the legacy CLI.
+NOTE: The CircleCI CLI v1 is currently in preview. You can expect changes to the available commands and features during this phase. If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
 
-Some legacy commands have been removed in v1. Where a command has no v1 equivalent, this is noted in the table.
+This guide covers CircleCI CLI commands that changed between the legacy CLI (v0.1.x) and link:https://cli.circleci.com/[CLI v1], plus capabilities that are new in v1. Commands not listed here are unchanged. Use it as a reference when updating scripts or workflows that use the legacy CLI.
+
+== Quickstart
+
+If you are new to the CircleCI CLI or are upgrading from the legacy CLI (v0.1.x), head over to the xref:circleci-cli.adoc[CircleCI CLI Guide] to get started. This guide covers differences between the legacy CLI and CLI v1.
 
 [#terminology-changes]
 == Terminology changes
@@ -28,7 +32,7 @@ CLI v1 reflects updated CircleCI terminology that resolves longstanding ambiguit
 |===
 --
 
-As a result, commands that previously used `pipeline` to refer to a triggered execution now use `run`. For example, `circleci pipeline run` in the legacy CLI becomes `circleci run trigger` in v1, and commands for listing, watching, and cancelling triggered executions all live under `circleci run` rather than `circleci pipeline`.
+As a result, commands that previously used `pipeline` to refer to a triggered execution now use `run`. For example, `circleci pipeline run` in the legacy CLI (v0.1.x) becomes `circleci run trigger` in v1, and commands for listing, watching, and cancelling triggered executions all live under `circleci run` rather than `circleci pipeline`.
 
 [#implicit-context]
 == Implicit project and org context
@@ -45,7 +49,7 @@ Where an explicit override is needed, most commands accept `--project <slug>` or
 
 == Changed commands
 
-The following sections cover commands that have changed between the legacy CLI and CLI v1.
+The following sections cover commands that have changed between the legacy CLI (v0.1.x) and CLI v1.
 
 === Local job execution
 
