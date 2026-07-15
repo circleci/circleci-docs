@@ -1,8 +1,11 @@
 = The CircleCI CLI
+:page-badge: Preview
 :page-platform: Cloud, Server v4+
 :page-description: A guide to the CircleCI CLI with links to setup guides, a ful reference and how-to guides for common tasks.
 :experimental:
 :page-aliases: local-cli.adoc, how-to-use-the-circleci-local-cli.adoc
+
+NOTE: The CircleCI CLI v1 is currently in preview. You should expect changes to the available commands during this phase. If you have any feedback or suggestions for the CircleCI CLI, or to report an issue, open an link:https://github.com/CircleCI-Public/circleci-cli/issues[Issue] on the GitHub repository.
 
 The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings CircleCI's tooling to your terminal.
 

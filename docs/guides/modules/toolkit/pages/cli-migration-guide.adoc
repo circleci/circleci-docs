@@ -51,72 +51,67 @@ The following sections cover commands that have changed between the legacy CLI a
 
 Local job execution with `circleci local execute` and `circleci build` has been removed in CLI v1. These commands ran jobs locally in Docker and are no longer supported.
 
+For an alternative, see the Chunk CLI `validate` command and Chunk sidecars. For full details see the xref:how-to-use-chunk-cli.adoc#run-validation[Chunk CLI Guide].
+
 === Pipelines and runs
 
 *Trigger a run*::
 +
-* Legacy: `circleci pipeline run <org-id> <project-id>`
+* Legacy: `circleci pipeline run <org-slug> <project-id>`
 * New: `circleci run trigger`
 
 *Create a project trigger*::
 +
 * Legacy: `circleci trigger create <project-id>`
-* New: `circleci project trigger create`
-
-=== Orbs
-
-The `circleci orb init` command is not currently available in CLI v1.
+* New: `circleci project trigger create --pipeline-definition-id <id>`
 
 === Contexts
 
 *View a context*::
 +
-* Legacy: `circleci context show`
+* Legacy: `circleci context show --org-id <org-id> <context-name>`
 * New: `circleci context get <id\|name>`
 
 *Store an environment variable in a context*::
 +
-* Legacy: `circleci context store-secret`
+* Legacy: `circleci context store-secret --org-id <org-id> <context-name> <secret-name>`
 * New: `circleci context secret set <context-id\|name> --name <name> --value <value>`
 
 *Remove an environment variable from a context*::
 +
-* Legacy: `circleci context remove-secret`
+* Legacy: `circleci context remove-secret --org-id <org-id> <context-name> <secret-name>`
 * New: `circleci context secret delete <context-id\|name> --name <name>`
 
 === Project environment variables
 
 *Set a project environment variable*::
 +
-* Legacy: `circleci project secret create <vcs-type> <org-id> <project-id> <env-name>`
+* Legacy: `circleci project secret create <vcs-type> <org-name> <project-name> <env-name>`
 * New: `circleci envvar set <name> <value>`
 
 *List project environment variables*::
 +
-* Legacy: `circleci project secret list <vcs-type> <org-id> <project-id>`
+* Legacy: `circleci project secret list <vcs-type> <org-name> <project-name>`
 * New: `circleci envvar list`
 
 === Projects
 
 *Create a project*::
 +
-* Legacy: `circleci project create <vcs-type> <org-id> --name [name]`
-* New: `circleci project create [name]`
+* Legacy: `circleci project create <vcs-type> <org-slug>`
+* New: `circleci project create [project-name] --org <vcs/org-slug>`
 
 === Self-hosted runners
 
 *Create a resource class*::
 +
-* Legacy: `circleci runner instance create <namespace/resource-class> <description>`
+* Legacy: `circleci runner resource-class create <namespace/resource-class> <description>`
 * New: `circleci runner resource-class create <namespace>/<name> --description <desc>`
 
 === Config policy management
 
-* The `--owner-id` flag used in legacy policy commands has been renamed to `--org` in CLI v1.
-* The `circleci policy eval` for running local evaluations has been removed in CLI v1.
-* The `circleci policy test <path>` command has been removed in CLI v1. If you require this functionality let your account manager know.
+NOTE: The `--owner-id` flag used in legacy policy commands has been renamed to `--org` in CLI v1.
 
-Note the following changes to config policy management:
 
 *Read policy settings*::
 +
@@ -125,7 +120,7 @@ Note the following changes to config policy management:
 
 *Update policy settings*::
 +
-* Legacy: `circleci policy settings --owner-id <org-id> --enable <true\|false>`
+* Legacy: `circleci policy settings --owner-id <org-id> --enabled`
 * New: `circleci policy settings set --org <org> --enabled`
 
 
