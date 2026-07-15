@@ -5,40 +5,11 @@
 
 You can control whether a job, workflow, or step runs, based on the git branch or tag that triggered the pipeline. CircleCI provides several mechanisms, covered in the sections below. Choose one based on what you want to control:
 
-* Filter a *job* by branch or tag with workflow filters.
 * Filter a *job* with an expression, for finer control than branch and tag filters allow.
 * Run a whole *workflow* only when a condition is met, using an expression.
 * Run a single *step* only when a condition is met, using a `when` step.
 
 Expression-based conditions are the most flexible option. They can reference pipeline values and pipeline parameters and use comparison and logic operators, so they cover most cases where you previously needed branch filters.
-
-[#filter-a-job-by-branch-or-tag]
-== Filter a job by branch or tag
-
-To control which branches or tags run a job, add a `filters` key to the job in your workflow. The `filters` key takes `branches` and `tags` keys. Each accepts `only` and `ignore` values, which can be exact strings or regular expressions.
-
-[source,yaml]
-----
-version: 2.1
-
-workflows:
-  build-test-deploy:
-    jobs:
-      - test:
-          filters:
-            branches:
-              only:
-                - main
-                - /^feature-.*/ # any branch beginning feature-
-      - deploy:
-          filters:
-            branches:
-              ignore: main
-----
-
-NOTE: CircleCI does not run workflows for tags unless you specify a `tags` filter. If a job uses a tag filter, every job it depends on must specify the same tag filter.
-
-For regular-expression examples and tag-filtering detail, see the xref:workflows.adoc#using-filters-in-your-workflows[Using Filters in Your Workflows] section.
 
 [#filter-a-job-with-an-expression]
 == Filter a job with an expression
@@ -62,7 +33,9 @@ workflows:
           filters: pipeline.git.branch == "main"
 ----
 
-Use either the expression form or the `branches` and `tags` form for a given job, not both. For the full operator list and more examples, see the xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[Expression-Based Job Filters] reference.
+For the full operator list and more examples, see the xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[Expression-Based Job Filters] reference.
+
+xref:reference:ROOT:configuration-reference.adoc#jobfilters[Branch and tag job filters] are deprecated. If you have a job that uses them, you can replace them with expression-based job filters as described in this section.
 
 [#filter-a-workflow-with-an-expression]
 == Filter a workflow with an expression
