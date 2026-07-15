@@ -5,31 +5,75 @@
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI.
 
-If you have existing contexts (or environment variables) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. Following these steps will ensure you do not lose access to contexts or environment variables in the process.
-
 [#overview]
-== Overview
+== Introduction
 
-Manage contexts on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app], or via the link:https://circleci.com/docs/api/v2/#tag/Context[API]. You must be an organization member to view, create, or edit contexts.
+Manage contexts using the xref:toolkit:circleci-cli.adoc[CircleCI CLI], link:https://circleci.com/docs/api/v2/#tag/Context[API], or on the *Organization Settings* page of the https://app.circleci.com[CircleCI web app]. You must be an organization member to view, create, or edit contexts.
 
-Create a context and then add environment variables to it. You can use the `context` key in the workflows section of a project's configuration file to give any job(s) access to the environment variables associated with the context. See the xref:reference:ROOT:configuration-reference.adoc#context[Configuration Reference] page for more information.
+Create a context and add your environment variables. You can use the `context` key in the workflows section of a project's configuration file to give any job(s) access to the environment variables associated with the context. See the xref:reference:ROOT:configuration-reference.adoc#context[Configuration Reference] page for more information.
 
 .Diagram showing how contexts are used in a workflow
 image::guides:ROOT:contexts_cloud.png[Contexts Overview]
 
-To use environment variables set within a context, the person running the workflow must be a member of the organization for which the context is set.
+To use environment variables from a context, the actor running the workflow must be a member of the organization that owns the context and have access to the context. The workflow must also meet any restrictions placed on the context.
 
 NOTE: Context names must be unique for each VCS organization. The default name for a context is `org-global`. Contexts created with the initial default name of `org-global` will continue to work.
 
 [#create-and-use-a-context]
 == Quickstart: Create and use a context
 
-. Using the CircleCI web app, select menu:Org[Contexts] on the left side navigation.
+NOTE: Organization members can create contexts, but only organization administrators can restrict them using security groups. Bitbucket organizations are an exception. Organization members must also have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+
+[tabs]
+====
+CLI::
 +
-Be aware that organization members can create contexts, but only organization administrators can restrict them using security groups. The one exception to this case is Bitbucket organizations. These require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+--
+. Create a context:
 +
-.Organization settings contexts page
-image::guides:ROOT:org-settings-contexts.png[Contexts]
+[,shell]
+----
+circleci context create <context-name> --org <org-slug>
+----
++
+The new context appears with security set to `All members`, meaning anyone in your organization can access it at runtime.
+
+. Add an environment variable to the context:
++
+[,shell]
+----
+circleci context secret set <context-name> --name <env-var-name> --value <env-var-value>
+----
+
+. To allow a job to access the environment variables stored in a context, add a `context` key to that job's entry in the xref:reference:ROOT:configuration-reference.adoc#workflows[`workflows`] section of the `.circleci/config.yml` file. For example, the following gives the `run-tests` job access to variables in the `org-global` and `my-context` contexts:
++
+[,yaml]
+----
+version: 2.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - run-tests:
+          context:
+            - org-global
+            - my-context
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
+----
+--
+Web app::
++
+--
+include::ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
 . Select btn:[Create Context], add a unique name for your context and select btn:[Create Context] in the modal to finalize. The new context will appear in a list with security set to `All members` to show that anyone in your organization can access this context at runtime.
 . You can now select any context created in your list to add environment variables. Once you have a context selected, select btn:[Add Environment Variable] to enter the variable name and value. Select btn:[Add Environment Variable] in the modal to finalize.
@@ -57,6 +101,8 @@ jobs:
           name: "echo environment variables from org-global context"
           command: echo $MY_ENV_VAR
 ----
+--
+====
 
 CAUTION: If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
 
@@ -88,6 +134,23 @@ For any VCS enterprise installation that includes multiple organizations, the co
 
 You can combine several contexts for a single job by adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way, you can scope contexts to be as small and granular as you like.
 
+In the following example, the `deploy` job has access to environment variables from three contexts. If the same variable name exists in more than one context, the value from `env-production` takes precedence as it is listed last:
+
+[,yaml]
+----
+workflows:
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          context:
+            - org-global
+            - aws-credentials
+            - env-production
+----
+
 [#restrict-a-context]
 == Restrict a context
 
@@ -96,9 +159,9 @@ NOTE: Bitbucket repositories do *not* provide an API that allows CircleCI contex
 
 CircleCI enables you to restrict contexts at run time in the following ways:
 
-* Using security groups.
-* Using project restrictions.
-* Using expression restrictions.
+* Using <<security-group-restrictions,security groups>>.
+* Using <<project-restrictions>>.
+* Using <<expression-restrictions>>.
 
 Only organization administrators may add restrictions to new or existing contexts.
 
@@ -149,17 +212,6 @@ workflows:
 
 In this example, the jobs `test` and `deploy` are restricted, and `deploy` will only run if the user who approves the `hold` job is a member of the security group assigned to the context _and_ `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` will run, then the `hold` job will run, which will present a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the project, but the `deploy` job will fail as `unauthorized` if the approver is not part of the restricted context security group.
 
-[#delete-a-context]
-=== Delete a context
-
-If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task. To delete a context, follow the steps below:
-
-. Navigate to the menu:Org[Contexts] in the CircleCI web app.
-. Select the *X* icon in the row of the context you want to delete. A confirmation dialog box will appear.
-. Type "DELETE" in the field and then select *Delete Context*. The context and all associated environment variables will be deleted.
-
-NOTE: If a _deleted_ context is used in a job, the job will fail and show an error.
-
 [#security-group-restrictions]
 == Security group restrictions
 
@@ -172,12 +224,45 @@ A context security setting is available for `github` type organizations to requi
 
 CAUTION: To use security group context restrictions you must be an organization administrator, and your code must be integrated with CircleCI via the GitHub OAuth app.
 
+[tabs]
+====
+CLI::
++
+--
+. Create a new context or use an existing one. To create a new context:
++
+[,shell]
+----
+circleci context create <context-name> --org <org-slug>
+----
+
+. Add a security group restriction to the context, where `<github-team-name>` is the name of the GitHub team you want to restrict access to:
++
+[,shell]
+----
+circleci context restriction create <context-name> --type group --value <github-team-name> --org <org-slug>
+----
++
+Only members of the specified GitHub team can now use the context in their workflows.
+
+. Optionally, add environment variables to the context:
++
+[,shell]
+----
+circleci context secret set <context-name> --name <env-var-name> --value <env-var-value>
+----
+--
+Web app::
++
+--
 . Navigate to menu:Org[Contexts] in the CircleCI web app to see the list of contexts. The default security group is `All members`, and allows all users in the organization to invoke jobs with that context.
 . Select *Create Context* if you wish to use a new context, or select the name of an existing context (if using an existing context, you will need to remove the `All members` security group before adding a new one).
 . Select *Add Security Group* button to view the dialog box.
 . Make your choices in the dialog box and then select the *Add Security Group* or *Add Project Restriction* button to finalize. Contexts will now be restricted to the selections you have made.
 . Select *Add Environment Variables* to add environment variables to the context if none exist, fill out your desired name and value in the dialogue box, then select the *Add Environment Variables* button to finalize. Use of the environment variables for this context is now limited to members of the security groups.
 . Navigate back to menu:Org[Contexts] in the CircleCI app. The security groups appear in the Security column for the context.
+--
+====
 
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
 
@@ -208,8 +293,6 @@ Addition and deletion of environment variables from a restricted context is limi
 
 CircleCI enables you to restrict secret environment variables by adding project restrictions to contexts. Only xref:permissions-authentication:roles-and-permissions-overview.adoc[Organization Admins] may add or remove project restrictions to a new or existing context. After a project restriction is added to a context, only workflows associated with the specified project(s) will have access to the context and its environment variables.
 
-NOTE: API support for project restricted contexts is coming soon.
-
 Organization Admins have read/write access to all projects, and have unrestricted access to all contexts.
 
 [#run-workflows-with-a-project-restricted-context]
@@ -222,6 +305,39 @@ To invoke a workflow that uses a restricted context, the workflow must be part o
 
 You must be an *organization admin* to restrict a context though the method detailed below.
 
+[tabs]
+====
+CLI::
++
+--
+. Find the ID of the project you want to restrict access to by listing your projects:
++
+[,shell]
+----
+circleci project list
+----
++
+Copy the ID of the project from the output.
+
+. Add a project restriction to the context using the project ID:
++
+[,shell]
+----
+circleci context restriction create <context-name> --type project --value <project-id> --org <org-slug>
+----
++
+To add restrictions for multiple projects, run the command once for each project ID.
+
+. To verify the restrictions, list the context details:
++
+[,shell]
+----
+circleci context get <context-name>
+----
+--
+Web app::
++
+--
 . Navigate to the menu:Org[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
 
 . Select the name of an existing context, or select *Create Context* if you want to use a new context.
@@ -229,6 +345,8 @@ You must be an *organization admin* to restrict a context though the method deta
 . Select the project name to add to the context, and select *Add*. Use of the context is now limited to the specified project. Currently, multiple projects must be added individually.
 . You can now see a list of the defined project restrictions on the context page.
 . If you have environment variables, they appear on the page. If there are none, you can select *Add Environment Variables* to add them to the context. Then select *Add* to finish. Use of the environment variables for this context is now limited to the specified projects.
+--
+====
 
 Only workflows under the specified projects may now use the context and its environment variables.
 
@@ -237,10 +355,33 @@ Only workflows under the specified projects may now use the context and its envi
 
 You must be an *organization admin* to remove projects from contexts though the method detailed below.
 
+[tabs]
+====
+CLI::
++
+--
+. Get the context details to find the restriction ID you want to remove:
++
+[,shell]
+----
+circleci context get <context-name>
+----
+
+. Delete the restriction using the restriction ID from the output:
++
+[,shell]
+----
+circleci context restriction delete <context-name> --restriction-id <restriction-id>
+----
+--
+Web app::
++
+--
 . Navigate to menu:Org[Contexts] page in the https://app.circleci.com/[CircleCI web app]. The list of contexts will be visible.
 . Select the name of the existing context for which you would like to modify restrictions.
-. Select *X* next to the project restriction you would like to remove. The project restriction will be removed for the context.
-. If there are no longer any project restrictions for the context, the context and its environment variables are now effectively unrestricted.
+. Select *X* next to the project restriction you would like to remove. The project restriction will be removed for the context. If there are no longer any project restrictions for the context, the context and its environment variables are now effectively unrestricted.
+--
+====
 
 [#expression-restrictions]
 == Expression restrictions
@@ -274,7 +415,17 @@ Follow these steps to set an expression restriction on a context:
 
 [tabs]
 ====
-CircleCI UI::
+CLI::
++
+--
+Add an expression restriction to a context, where `<expression>` is a pipeline value expression such as `pipeline.git.branch == "main"`:
+
+[,shell]
+----
+circleci context restriction create <context-name> --type expression --value "<expression>" --org <org-slug>
+----
+--
+Web app::
 +
 --
 . Navigate to the menu:Organization Settings[Contexts] page of your organization in the https://app.circleci.com/[CircleCI web app].
@@ -466,30 +617,35 @@ where the values are:
 .. `false`
 . The result is `false`.
 
-[#context-management-with-the-cli]
-== Context management with the CLI
+[#delete-a-context]
+== Delete a context
 
-NOTE: Before using the CLI, ensure you have configured the CLI with a token. See the xref:toolkit:local-cli.adoc#configure-the-cli[Local CLI] page for more information.
+To delete a context, follow the steps below:
 
-You can use the link:https://circleci-public.github.io/circleci-cli/[CircleCI CLI] to manage contexts, as an alternative to the web app and the API. With the CLI, you can execute several link:https://circleci-public.github.io/circleci-cli/circleci_context.html[context-oriented commands].
+NOTE: If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task.
 
-* `create` - Create a new context.
-* `delete` - Delete a named context.
-* `list` - List all contexts.
-* `remove-secret` - Remove an environment variable from the named context.
-* `show` - Show a context.
-* `store-secret` - Store a new environment variable in the named context.
-
-The above list are "sub-commands" in the CLI, which would be executed like so:
+[tabs]
+====
+CLI::
++
+--
+Run the following command, replacing `<context-name>` with the name or ID of the context you want to delete. You can use `circleci context list` to find the name or ID of the context:
 
 [,shell]
 ----
-circleci context create --org-id <org-id> <context-name> [flags]
+circleci context delete <context-name>
 ----
+--
+Web app::
++
+--
+. Navigate to the menu:Org[Contexts] in the CircleCI web app.
+. Select the *X* icon in the row of the context you want to delete. A confirmation dialog box will appear.
+. Type "DELETE" in the field and then select *Delete Context*. The context and all associated environment variables will be deleted.
+--
+====
 
-Refer to the link:https://circleci-public.github.io/circleci-cli/circleci_context.html[CLI docs] for full details for each command. Many commands require that you include additional information as indicated by parameters delimited by `< >`. For example, when running `circleci context create`, you will need to provide a name for the context and your org ID.
-
-include::ROOT:partial$notes/find-organization-id.adoc[]
+If a _deleted_ context is used in a job, the job will fail and show an error.
 
 [#environment-variable-usage]
 == Environment variable usage
@@ -513,25 +669,21 @@ Environment variables declared inside a shell command `run` step, for example `F
 CLI::
 +
 --
-NOTE: Before using the CLI ensure you have configured the CLI with a token. See the xref:toolkit:local-cli.adoc#configure-the-cli[Local CLI] page for more information.
+To add an environment variable to a context using the CLI, follow these steps:
 
-To create an environment variable using our CLI, perform the following steps:
-
-. If you have not already done so, find the right context name that will contain the new environment variable by executing this command:
+. If you have not already done so, find the right context name that will contain the new environment variable:
 +
 [,shell]
 ----
-circleci context list --org-id <org-id>
+circleci context list
 ----
 
-. Store a new environment variable under that context by executing this command:
+. Store a new environment variable under that context:
 +
 [,shell]
 ----
-circleci context store-secret --org-id <org-id> <context-name> <environment-variable-name>
+circleci context secret set <context-name> --name <env-var-name> --value <env-var-value>
 ----
-+
-The CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 --
 API::
 +
@@ -550,29 +702,27 @@ Removing an environment variable from a context deletes the environment variable
 CLI::
 +
 --
-NOTE: Before using the CLI ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[Configured the CLI] with a token.
+To remove an environment variable from a context using the CLI, follow these steps:
 
-To remove an environment variable from a context using the CLI, perform the following steps:
-
-. If you have not already done so, find the context name that contains the environment variable you wish to delete by executing this command:
+. If you have not already done so, find the context name that contains the environment variable you wish to delete:
 +
 [,shell]
 ----
-circleci context list --org-id <org-id>
+circleci context list
 ----
 
-. Confirm the environment variable exists within that context. To list all variables under that context, execute this command:
+. Confirm the environment variable exists within that context:
 +
 [,shell]
 ----
-circleci context show --org-id <org-id> <context-name>
+circleci context get <context-name>
 ----
 
-. Delete the environment variable by executing this command:
+. Delete the environment variable:
 +
 [,shell]
 ----
-circleci context remove-secret --org-id <org-id> <context-name> <secret name>
+circleci context secret delete <context-name> --name <secret-name>
 ----
 --
 API::
@@ -598,32 +748,28 @@ Context environment variables can be rotated using CircleCI's CLI or API.
 CLI::
 +
 --
-NOTE: Before using the CLI, ensure you have xref:toolkit:local-cli.adoc#configure-the-cli[Configured the CLI] with a token.
+To rotate an environment variable using the CLI, follow these steps:
 
-To rotate an environment variable using the CLI, perform the following steps:
-
-. If you have not already done so, find the context name that contains the variable you would like to rotate by executing this command:
+. Find the context name that contains the variable you would like to rotate:
 +
 [,shell]
 ----
-circleci context list --org-id <org-id>
+circleci context list --org <org-slug>
 ----
 
-. Find the environment variable to rotate within that context by executing this command:
+. Find the environment variable to rotate within that context:
 +
 [,shell]
 ----
-circleci context show --org-id <org-id> <context-name>
+circleci context get <context-name>
 ----
 
-. Update the existing environment variable under that context. Execute this command and replace the `<env-var-name>` with the name of the environment variable you chose in Step 2:
+. Update the existing environment variable, replacing `<env-var-name>` with the name of the environment variable you chose in Step 2:
 +
 [,shell]
 ----
-circleci context store-secret --org-id <org-id> <context-name> <env-var-name>
+circleci context secret set <context-name> --name <env-var-name> --value <new-value>
 ----
-+
-NOTE: The CLI will prompt you to input the new secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 --
 API::
 +
@@ -633,6 +779,12 @@ To rotate an environment variable from the API, call the link:https://circleci.c
 ====
 
 include::ROOT:partial$shared-sections/secrets-masking.adoc[]
+
+== Troubleshooting
+
+=== Renaming organizations and repositories
+
+If you have existing contexts (or environment variables) and you would like to rename your organization or repository, follow the xref:rename-organizations-and-repositories.adoc[Rename Organizations and Repositories] guide. Following these steps will ensure you do not lose access to contexts or environment variables in the process.
 
 [#see-also]
 == See also

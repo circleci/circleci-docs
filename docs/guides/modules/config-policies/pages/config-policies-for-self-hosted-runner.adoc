@@ -8,7 +8,7 @@ NOTE: The config policies feature is available on the **Scale** Plan and from Ci
 Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview.adoc[Config Policies Overview].
 
 ****
-**Using server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
+**Using Server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 
 [source,shell]
 ----
@@ -112,9 +112,9 @@ If the upload was successful, you will see something like the following:
 Push to VCS::
 +
 --
-Set up your config policies repository using the sample configuration in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Create and Manage Config Policies Guide]. Push your changes to the `main` branch of your config policies repository. The CircleCI web app will then show your policy pipeline running.
+Push your changes to `main` and head to the CircleCI web app to see your policy pipeline. This assumes you set up your config policies repository with the sample configuration from the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Config Policies] guide, .
 
-You can also push to a development branch. Doing this gives you a diff of your policy bundle rather than pushing the new policy to your CircleCI organization. Pushing to a development branch is useful during policy development.
+Push to a development branch during policy development to get a diff of your policy bundle when you push your changes.
 --
 ====
 
