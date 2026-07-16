@@ -220,6 +220,7 @@
 * Insights
 ** xref:insights:insights.adoc[Use Insights]
 ** xref:insights:insights-tests.adoc[Test Insights]
+** xref:insights:project-usage-dashboard.adoc[Project Usage Dashboard]
 ** xref:insights:insights-snapshot-badge.adoc[Generate an Insights snapshot badge]
 ** xref:insights:insights-glossary.adoc[Insights glossary]
 
