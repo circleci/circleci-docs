@@ -79,8 +79,9 @@ You may want to configure a workflow that will only run when the pipeline is tri
 
 === Steps
 
-* Update your CircleCI config to include a workflow that will only run for specific branches.
+* Update your CircleCI config to include a workflow that will only run for specific branches. You can configure the workflow using an expression.
 +
+.The nightly-run-workflow only runs on the main and staging branches
 [,yaml]
 ----
 include::ROOT:example$expression-examples/workflow-when/or-equal-dynamic.yml[]
@@ -89,13 +90,6 @@ include::ROOT:example$expression-examples/workflow-when/or-equal-dynamic.yml[]
 === Notes
 
 include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
-
-* Alternatively, you can use the logic statement syntax to achieve the same result:
-+
-[,yaml]
-----
-include::ROOT:example$logic-statement-examples/workflow-when/or-equal-legacy.yml[]
-----
 
 
 * You can also choose to prevent the workflow from running for specific branches using the `not` operator with `matches` for pattern matching:
@@ -108,13 +102,6 @@ workflows:
     when: not (pipeline.git.branch matches "^feature-.*$")
     jobs:
       - build
-----
-+
-Or using the logic statement syntax:
-+
-[,yaml]
-----
-include::ROOT:example$logic-statement-examples/workflow-when/exclude-branch-legacy.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
@@ -157,13 +144,6 @@ workflows:
     jobs:
       - build
 ----
-+
-Or using the logic statement syntax:
-+
-[,yaml]
-----
-include::ROOT:example$logic-statement-examples/workflow-when/and-multiple-legacy.yml[]
-----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
@@ -191,6 +171,7 @@ parameters:
 
 . Write your workflow `when` clause as a direct expression. Reference pipeline parameters using `pipeline.parameters.<name>` directly (without `<< >>` delimiters):
 +
+.The my-workflow workflow runs when: the event is a push or a pull request that is not a draft or the deploy parameter is true.
 [,yaml]
 ----
 workflows:
@@ -254,11 +235,11 @@ include::ROOT:example$logic-statement-examples/step-when/when-step-nested.yml[]
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
-== Run a job only on specific branches **or** when the value of a pipeline parameter is true
+== Run a job only on specific branches or when the value of a pipeline parameter is true
 
 === Goal
 
-You may want to configure a job that only runs on specific branches or when the value of a pipeline parameter is `true` when triggered via the API.
+You may want to configure a job that only runs on specific branches or when the value of a pipeline parameter is `true`.
 
 === Steps
 
@@ -283,7 +264,7 @@ In some cases, you may want to configure a workflow that will only run when a sc
 
 === Steps
 
-* Update your CircleCI config to use the `pipeline.scheduled_source` and `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[Pipeline Values].
+* Update your CircleCI config to use the `pipeline.trigger.type` and `pipeline.schedule.name` xref:pipeline-variables.adoc#pipeline-values[Pipeline Values].
 +
 .The nightly-run-workflow only runs when the trigger is a schedule trigger AND the name of that trigger is `nightly_build`
 [,yaml]
@@ -312,7 +293,7 @@ include::ROOT:example$expression-examples/workflow-when/pr-synced-or-labeled.yml
 
 === Notes
 
-* The `pipeline.event.name` and `pipeline.event.action` variables are only available for GitHub App pipelines. If you have a GitHub OAuth integration you can install the GitHub App into your GitHub org and then create GitHub App pipelines. This is a quick one-time action, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
+* The `pipeline.event.name` and `pipeline.event.action` variables are not available for GitLab pipelines.
 
 include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 
