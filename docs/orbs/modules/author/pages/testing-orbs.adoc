@@ -269,9 +269,7 @@ workflows:
             - run:
                 name: "Delete repository"
                 command: aws ecr delete-repository
-          filters:
-            tags:
-              only: /.*/
+          filters: pipeline.git.tag matches /^v[0-9]+\.[0-9]+\.[0-9]+$/
 # ...
       - orb-tools/publish:
           orb-name: circleci/aws-ecr
@@ -280,11 +278,7 @@ workflows:
           requires:
             - integration-tests-default-profile
           context: orb-publisher
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v[0-9]+\.[0-9]+\.[0-9]+$/
+          filters: pipeline.git.branch matches /^v[0-9]+\.[0-9]+\.[0-9]+$/
 ----
 
 The AWS ECR orb contains a job named "build-and-push-image" which will build and push an image to the AWS ECR repository. We run this job and others with multiple parameter options to test their functionality with each code change.

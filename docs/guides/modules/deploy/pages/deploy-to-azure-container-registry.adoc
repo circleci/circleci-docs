@@ -54,9 +54,7 @@ workflows:
           login-server-name: <your-login-server-name> # e.g. {yourregistryname}.azure.io
           registry-name: <your-ACR-registry-name>
           repo: <URI-to-your-login-server-name>
-          filters:
-            branches:
-              only: main # Only deploys when the commit is on the `main` branch
+          filters: pipeline.git.branch == "main" # only deploy on the main branch
 ```
 
 If pushing to your repository is required, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#enable-project-to-check-out-additional-private-repositories[Users, Organizations, and Integrations Guide]. Then, configure the Azure Web App to use your production branch.

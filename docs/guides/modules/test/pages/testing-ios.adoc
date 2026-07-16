@@ -154,8 +154,7 @@ workflows:
       - build-and-test
       - adhoc:
           filters:
-            branches:
-              only: development
+            pipeline.git.branch == "development" # only deploy on the development branch
           requires:
             - build-and-test
 ----

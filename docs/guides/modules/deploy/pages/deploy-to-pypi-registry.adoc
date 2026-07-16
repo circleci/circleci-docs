@@ -186,10 +186,7 @@ workflows:
       - publish:
           context:
             - trusted-publishing-guard
-          filters:
-            branches:
-              only:
-                - main
+          filters: pipeline.git.branch == main
 ----
 --
 Manual exchange (fallback)::
@@ -230,10 +227,7 @@ workflows:
       - publish:
           context:
             - trusted-publishing-guard
-          filters:
-            branches:
-              only:
-                - main
+          filters: pipeline.git.branch == main
 ----
 
 --

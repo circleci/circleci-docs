@@ -85,9 +85,7 @@ workflows:
     jobs:
       - build-and-test
       - adhoc:
-          filters:
-            branches:
-              only: development
+          filters: pipeline.git.branch == "development"
           requires:
             - build-and-test
 ----

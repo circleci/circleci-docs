@@ -500,9 +500,7 @@ workflows:
           requires:
             - rollback-component:
               - canceled
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == main
 ----
 
 
