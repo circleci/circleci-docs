@@ -96,12 +96,7 @@ include::ROOT:partial$using-expressions/env-vars-in-conditional-caveat.adoc[]
 +
 [,yaml]
 ----
-workflows:
-  my-workflow:
-# The "my-workflow" workflow will NOT run when the branch name matches the pattern "feature-.*"
-    when: not (pipeline.git.branch matches "^feature-.*$")
-    jobs:
-      - build
+include::ROOT:example$expression-examples/workflow-when/exclude-branch-dynamic.yml[]
 ----
 
 include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]

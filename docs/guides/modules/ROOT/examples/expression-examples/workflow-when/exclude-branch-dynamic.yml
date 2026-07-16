@@ -1,0 +1,6 @@
+workflows:
+  my-workflow:
+# The "my-workflow" workflow will NOT run when the branch name matches the pattern "feature-.*"
+    when: not (pipeline.git.branch matches "^feature-.*$")
+    jobs:
+      - build
