@@ -2060,7 +2060,7 @@ During step execution, CircleCI replaces the templates above with runtime values
 
 *Template examples:*
 
-`++myapp-{{ checksum "package-lock.json" }}++`:: CircleCI regenerates the cache every time you change something in the package-lock.json file. Different branches of this project generate the same cache key.
+`++myapp-{{ checksum "package-lock.json" }}++`:: CircleCI regenerates the cache every time you change something in the `package-lock.json` file. Different branches of this project generate the same cache key.
 `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`:: Same as the previous one, but each branch generates a separate cache.
 `myapp-{{ epoch }}`:: Every job run generates a separate cache.
 

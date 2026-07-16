@@ -5,7 +5,7 @@
 
 You can control whether a job, workflow, or step runs, based on the git branch or tag that triggered the pipeline. CircleCI provides several mechanisms, covered in the sections below. Choose one based on what you want to control:
 
-* Filter a *job* with an expression, for finer control than branch and tag filters allow.
+* Filter a *job* with an expression.
 * Run a whole *workflow* only when a condition is met, using an expression.
 * Run a single *step* only when a condition is met, using a `when` step.
 
@@ -35,7 +35,7 @@ workflows:
 
 For the full operator list and more examples, see the xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[Expression-Based Job Filters] reference.
 
-xref:reference:ROOT:configuration-reference.adoc#jobfilters[Branch and tag job filters] are deprecated. If you have a job that uses them, you can replace them with expression-based job filters as described in this section.
+xref:reference:ROOT:configuration-reference.adoc#jobfilters[Branch and Tag Job Filters] are deprecated. If you have a job that uses them, you can replace them with expression-based job filters as described in this section.
 
 [#filter-a-workflow-with-an-expression]
 == Filter a workflow with an expression
