@@ -3700,6 +3700,93 @@ To use a pipeline parameter in an expression, the parameter name must follow the
 If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
 ====
 
+[#logic-statements]
+== Using logic statements
+
+Certain dynamic configuration features accept logic statements as arguments.
+Logic statements are evaluated to boolean values at configuration compilation
+time, that is, before the workflow is run. The group of logic statements
+includes:
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Type | Arguments | `true` if | Example
+
+| YAML literal
+| None
+| is truthy
+| `true`/`42`/`"a string"`
+
+| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
+| None
+| resolves to a truthy value
+| `<< pipeline.git.branch >>`
+
+| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameter]
+| None
+| resolves to a truthy value
+| `<< pipeline.parameters.my-parameter >>`
+
+| `and`
+| N logic statements
+| all arguments are truthy
+| `and: [ true, true, false ]`
+
+| `or`
+| N logic statements
+| any argument is truthy
+| `or: [ false, true, false ]`
+
+| `not`
+| 1 logic statement
+| the argument is not truthy
+| `not: true`
+
+| `equal`
+| N values
+| all arguments evaluate to equal values
+| `equal: [ 42, << pipeline.number >>]`
+
+| `matches`
+| `pattern` and `value`
+| `value` matches the `pattern`
+| `+matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }+`
+|===
+--
+
+The following logic values are considered falsy:
+
+* false.
+* null.
+* 0
+* NaN
+* empty strings ("").
+* statements with no arguments.
+
+All other values are truthy. Also note that using logic with an empty list will cause a validation error.
+
+Logic statements always evaluate to a boolean value at the top level, and coerce
+as necessary. They can be nested in an arbitrary fashion, according to their
+argument specifications, and to a maximum depth of 100 levels.
+
+`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. It is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
+
+NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
+
+*Example:*
+
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ staging, << pipeline.git.branch >> ]
+----
+
 [#logic-statement-examples]
 === Logic statement and expression examples
 
