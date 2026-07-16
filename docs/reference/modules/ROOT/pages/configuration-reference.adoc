@@ -1783,11 +1783,11 @@ For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Aut
 '''
 
 [#the-when-step]
-=== *The `when` step*
+=== *The when step*
 
 NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuration
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps Section of the Reusable Configuration Reference] for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. Use the `when` step to customize commands and job configuration to run on custom conditions. Conditions are determined at config compilation time. This means `when` step conditions are checked before your workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps Section of the Reusable Configuration Reference] for more details.
 
 [.table-scroll]
 --
@@ -1798,7 +1798,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | `condition`
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A logic statement] (or use xref:configuration-reference.adoc#using-expressions-in-your-configuration[expressions] in workflow/job filters instead)
+| xref:configuration-reference.adoc#logic-statements[A logic statement]. Expressions are not supported for the `when` step.
 
 | `steps`
 | Y
