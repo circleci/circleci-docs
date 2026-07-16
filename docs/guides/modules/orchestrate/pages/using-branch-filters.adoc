@@ -14,7 +14,7 @@ Expression-based conditions are the most flexible option. They can reference pip
 [#filter-a-job-with-an-expression]
 == Filter a job with an expression
 
-For finer control than `branches` and `tags` allow, set the `filters` key on a job to an expression instead of a `branches` or `tags` map. The job runs only when the expression evaluates to true. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators. A single expression can replace conditions that would otherwise need several filters.
+Set the `filters` key on a job to an expression. The job runs only when the expression evaluates to true. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
 
 The following example runs `integration-test` on `main` or any branch starting with `integration-`, and runs `deploy` only on `main`:
 
