@@ -40,7 +40,7 @@ xref:reference:ROOT:configuration-reference.adoc#jobfilters[Branch and Tag Job F
 [#filter-a-workflow-with-an-expression]
 == Filter a workflow with an expression
 
-To run an entire workflow only when a condition is met, add a `when` clause (or the inverse `unless` clause) with a logic statement to the workflow declaration. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
+To run an entire workflow only when a condition is met, add a `when` clause (or the inverse `unless` clause) with an expression to the workflow declaration. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
 
 The following example runs the `integration_tests` workflow only when the pipeline is on the `main` branch:
 
