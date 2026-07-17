@@ -58,6 +58,10 @@ include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
 include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
 
+=== Gen3
+
+include::ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
+
 [#view-resource-usage]
 === View resource usage
 
@@ -71,7 +75,7 @@ Resource classes running on gen2 infrastructure offer significant performance an
 [#performance-improvements]
 === Performance improvements
 
-Using more modern compute, gen2 instances deliver up to 180% faster multi-threaded CPU performance compared to gen1 equivalents.
+Using more modern compute, and using gen1 CPU performance as a baseline (100%), gen2 instances deliver up to 125% faster multi-threaded CPU performance compared to gen1 equivalents.
 
 These improvements are most noticeable in workloads that saturate multiple cores simultaneously. For example, parallel test runs, compilation steps, and image builds. On a per-resource-class basis, gen2 can be priced either higher or lower than its gen1 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
@@ -88,6 +92,33 @@ jobs:
     machine:
       image: ubuntu-2404:current
     resource_class: large.gen2
+----
+
+[#linux-vm-gen3-benefits]
+== Linux VM gen3
+
+Resource classes running on gen3 infrastructure offer further performance and cost improvements over their gen1 and gen2 equivalents. Gen3 resource classes are available on CircleCI Cloud only.
+
+[#gen3-performance-improvements]
+=== Performance improvements
+
+Using gen1 CPU performance as a baseline (100%), gen3 instances deliver up to 167% faster multi-threaded CPU performance compared to gen1 equivalents. These are CPU benchmark figures; real-world performance gains for your workloads are typically more modest.
+
+On a per-resource-class basis, gen3 can be priced either higher or lower than its gen1 or gen2 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+
+[#using-gen3]
+=== Using gen3
+
+To use a gen3 resource class, specify a `large.gen3` or equivalent class in your job configuration:
+
+[,yaml]
+----
+version: 2.1
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2404:current
+    resource_class: large.gen3
 ----
 
 [#pre-installed-software]

@@ -1259,6 +1259,26 @@ jobs:
 
 '''
 
+[#linuxvm-gen3-execution-environment]
+==== LinuxVM (gen3) execution environment
+
+include::guides:ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
+
+*Example:*
+
+[,yaml]
+----
+jobs:
+  build:
+    machine:
+      image: ubuntu-2404:current # recommended linux image
+    resource_class: large.gen3
+    steps:
+      ... // other config
+----
+
+'''
+
 [#macos-execution-environment]
 ==== macOS execution environment
 
