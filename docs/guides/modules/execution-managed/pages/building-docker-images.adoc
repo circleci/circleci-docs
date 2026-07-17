@@ -104,6 +104,27 @@ NOTE: Gen2/Gen3 resource classes are not currently available for Arm-based remot
 |===
 --
 
+==== x86 gen3 architecture
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Docker resource class
+| Remote Docker (Linux Machine) resource class
+| `medium.gen3`
+| `medium.gen3` (Linux VM)
+| `large.gen3`
+| `large.gen3` (Linux VM)
+| `xlarge.gen3`
+| `xlarge.gen3` (Linux VM)
+| `2xlarge.gen3`
+| `2xlarge.gen3` (Linux VM)
+| `2xlarge+.gen3`
+| `2xlarge+.gen3` (Linux VM)
+|===
+--
+
 ==== Arm architecture
 
 [.table-scroll]
