@@ -1,0 +1,6 @@
+workflows:
+  my-workflow:
+# This workflow runs when: branch is "main" AND param1 is false AND (param1 OR param2 is true)
+    when: pipeline.git.branch == "main" and not pipeline.parameters.param1 and (pipeline.parameters.param1 or pipeline.parameters.param2)
+    jobs:
+      - build

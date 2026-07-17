@@ -3710,7 +3710,7 @@ You can find usage examples on the xref:guides:orchestrate:orchestration-cookboo
 [#logic-statements]
 == Logic statement syntax
 
-NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[expressions] for conditional logic in your configuration. The logic statement syntax described in this section still works, but expressions provide a more intuitive and flexible approach.
+NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[expressions] for conditional logic in your configuration. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is, before the workflow is run. The group of logic statements includes:
 
