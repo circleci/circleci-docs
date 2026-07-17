@@ -516,34 +516,25 @@ For an example of how developers reference these images and the resource classes
 
 CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per minute to ensure they do not end up in an unworkable state.
 
-To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` examples.
+To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` example.
 
-NOTE: Set `preboot.scheduled[].image` to an offering image **name** from your machine provisioner provider config (for example `ubuntu-2204`). Do not use job-config aliases such as `default` or `docker-default` here. Those aliases resolve for jobs in `.circleci/config.yml`. Machine provisioner does **not** resolve aliases for scheduled preallocation. An unknown scheduled image fails config validation and prevents machine provisioner from starting.
+NOTE: Set `preboot.scheduled[].image` to an offering image name from your machine provisioner provider config. Use a name such as `ubuntu-2204`. Do not use job configuration aliases such as `default` or `docker-default`. Those aliases resolve for jobs in `.circleci/config.yml`. Machine provisioner does not resolve aliases for scheduled preallocation. Remote Docker jobs that use `docker-default` still require the resolved offering name here.
 
-NOTE: Set `cron` to a valid cron expression, and quote it in YAML (for example `"* * * * *"`). An empty string is not valid.
+WARNING: An unknown scheduled image fails config validation. Machine provisioner does not start until you correct the image name.
 
-[source,yaml]
-----
-# -- Warm instances for Remote Docker jobs (canonical image name; docker-default is an alias only in job config).
-preboot:
-   scheduled:
-       - executor: linux
-         class: medium
-         image: ubuntu-2204
-         cron: "* * * * *"
-         count: 2
-----
+NOTE: Set `cron` to a valid cron expression. Quote the value in YAML. An empty string is not valid. The example below keeps two instances warm during weekday business hours in UTC.
 
 [source,yaml]
 ----
-# -- Warm instances for machine jobs (canonical image name; default is an alias only in job config).
+# Warm linux medium instances during weekday business hours (UTC).
+# Use the canonical offering image name, not a job configuration alias.
 preboot:
-   scheduled:
-     - executor: linux
-       class: medium
-       image: ubuntu-2204
-       cron: "* * * * *"
-       count: 2
+  scheduled:
+    - executor: linux
+      class: medium
+      image: ubuntu-2204
+      cron: "* 8-17 * * 1-5"
+      count: 2
 ----
 
 [#apply-changes]
