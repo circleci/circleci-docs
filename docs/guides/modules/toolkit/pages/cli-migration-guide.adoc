@@ -59,6 +59,8 @@ For an alternative, see the Chunk CLI `validate` command and Chunk sidecars. For
 
 === Pipelines and runs
 
+NOTE: In the legacy CLI (v0.1.x), `circleci run <name>` executed a CLI plugin. In v1, `circleci run` is the command group for triggering, watching, and cancelling runs. Scripts that called `circleci run` to execute a plugin no longer work.
+
 *Trigger a run*::
 +
 * Legacy: `circleci pipeline run <org-slug> <project-id>`
@@ -105,6 +107,11 @@ For an alternative, see the Chunk CLI `validate` command and Chunk sidecars. For
 * Legacy: `circleci project create <vcs-type> <org-slug>`
 * New: `circleci project create [project-name] --org <vcs/org-slug>`
 
+*Follow a project*::
++
+* Legacy: `circleci follow`
+* New: `circleci project follow`
+
 === Self-hosted runners
 
 *Create a resource class*::
@@ -116,7 +123,6 @@ For an alternative, see the Chunk CLI `validate` command and Chunk sidecars. For
 
 NOTE: The `--owner-id` flag used in legacy policy commands has been renamed to `--org` in CLI v1.
 
-
 *Read policy settings*::
 +
 * Legacy: `circleci policy settings --owner-id <org-id>`
@@ -127,4 +133,71 @@ NOTE: The `--owner-id` flag used in legacy policy commands has been renamed to `
 * Legacy: `circleci policy settings --owner-id <org-id> --enabled`
 * New: `circleci policy settings set --org <org> --enabled`
 
+=== Organizations and account information
+
+*View your organizations*::
++
+* Legacy: `circleci info org`
+* New: `circleci org list`
+
+*View your account information*::
++
+* Legacy: `circleci info`
+* New: `circleci auth me`
+
+=== Namespaces
+
+*Delete a namespace*::
++
+* Legacy: `circleci admin delete-namespace <name>`
+* New: `circleci namespace delete <name>`
+
+*Rename a namespace*::
++
+* Legacy: `circleci admin rename-namespace <old-name> <new-name>`
+* New: `circleci namespace rename <name> <new-name>`
+
+=== Docker layer caching
+
+*Purge the Docker layer cache*::
++
+* Legacy: `circleci project dlc purge <vcs-type> <org-name> <project-name>`
+* New: `circleci dlc purge`
+
+=== CLI telemetry
+
+*Enable or disable telemetry*::
++
+* Legacy: `circleci telemetry enable` or `circleci telemetry disable`
+* New: `circleci setting set telemetry on` or `circleci setting set telemetry off`
+
+=== Removed commands
+
+The following legacy commands have been removed in CLI v1 and have no direct replacement.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+| Legacy command | Notes
+
+| `circleci diagnostic`
+| Checked the status of the legacy CLI. Removed in v1.
+
+| `circleci query`
+| Queried the CircleCI GraphQL API directly. Removed in v1. To call the REST API, use `circleci api`.
+
+| `circleci config migrate`
+| Migrated a pre-release 2.0 config to the release version. Removed in v1.
+
+| `circleci env subst`
+| Substituted environment variables in a string. Removed in v1.
+
+| `circleci update`, `circleci update check`, `circleci update install`
+| Self-updated the legacy CLI. Removed in v1; update the CLI through the package manager you used to install it.
+
+| `circleci admin import-orb`
+| Imported an orb into a CircleCI Server installation. Removed in v1.
+|===
+--
 
