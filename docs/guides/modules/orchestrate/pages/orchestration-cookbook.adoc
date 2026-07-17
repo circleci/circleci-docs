@@ -208,7 +208,7 @@ include::ROOT:partial$tips/trigger-pipeline-with-parameters.adoc[]
 
 You may want to configure a step that will run depending on the output of a nested condition using logic statement syntax.
 
-NOTE: Expressions are not supported for step-level `when` conditions. Use logic statement syntax for the `condition` field of xref:reference:ROOT:configuration-reference.adoc#the-when-step[the `when` step]. For workflow-level conditions, you can use xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[expression syntax] instead.
+NOTE: Expressions are not supported for step-level `when` conditions. Use logic statement syntax for the `condition` field of xref:reference:ROOT:configuration-reference.adoc#the-when-step[The When Step]. For workflow-level conditions, you can use xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Expression Syntax] instead.
 
 === Steps
 

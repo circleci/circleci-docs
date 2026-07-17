@@ -1798,7 +1798,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | `condition`
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A logic statement]. Expressions are not supported for the `when` step.
+| xref:configuration-reference.adoc#logic-statements[A Logic Statement]. Expressions are not supported for the `when` step.
 
 | `steps`
 | Y
@@ -3680,7 +3680,7 @@ You can find usage examples on the xref:guides:orchestrate:orchestration-cookboo
 [#logic-statements]
 == Logic statement syntax
 
-NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[expressions] for conditional logic in your configuration. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
+NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[Expressions] for conditional logic in your configuration. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is, before the workflow is run. The group of logic statements includes:
 
