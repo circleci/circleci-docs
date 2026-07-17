@@ -111,10 +111,10 @@ workflows:
     jobs:
       - diff-policy-bundle:
           context: my-context
-          filters: pipeline.git.branch != "main"
+          filters: pipeline.git.branch != "main" # run the job on all branches except main
       - push-policy-bundle:
           context: my-context
-          filters: pipeline.git.branch == "main"
+          filters: pipeline.git.branch == "main" # run the job on the main branch only
 
 jobs:
   diff-policy-bundle:

@@ -98,7 +98,7 @@ version: 2.1
 
 workflows:
   test-workflow:
-    when: pipeline.trigger.type != "schedule"
+    when: pipeline.trigger.type != "schedule" # run the workflow only if it is not triggered by a schedule trigger
     max_auto_reruns: 4
     jobs:
       - build

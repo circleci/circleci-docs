@@ -153,7 +153,7 @@ workflows:
     jobs:
       - build-and-test
       - adhoc:
-          filters: pipeline.git.branch == development
+          filters: pipeline.git.branch == development # run the job on the development branch only
           requires:
             - build-and-test
 ----
@@ -228,7 +228,7 @@ workflows:
     jobs:
       - build-and-test
       - adhoc:
-          filters: pipeline.git.branch == development
+          filters: pipeline.git.branch == development # run the job on the development branch only
           requires:
             - build-and-test
 ----
