@@ -2613,13 +2613,7 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters:
-             branches:
-               only:
-                 - main
-                 - beta
-     jobs:
-       - test
+           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
 ----
 
 '''
@@ -2640,13 +2634,7 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters:
-             branches:
-               only:
-                 - main
-                 - beta
-     jobs:
-       - test
+           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
 ----
 
 '''
@@ -2676,13 +2664,7 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters:
-             branches:
-               only:
-                 - main
-                 - beta
-     jobs:
-       - test
+           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
 ----
 
 '''
@@ -2712,13 +2694,7 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters:
-             branches:
-               only:
-                 - main
-                 - beta
-     jobs:
-       - test
+           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
 ----
 
 '''
@@ -2745,11 +2721,7 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - main
-                - /^release\/.*/
+          filters: pipeline.git.branch == "main" or pipeline.git.branch starts_with "release/" # only run on main or release branches
     jobs:
       - coverage
 ----
@@ -3263,9 +3235,7 @@ workflows:
     jobs:
       - js_build
       - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
-          filters:
-            branches:
-              only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
+          filters: pipeline.git.branch starts-with "server/" # only run on branches starting with server/
 ----
 
 You can read more about using regular expressions in your config in the xref:guides:orchestrate:workflows.adoc#using-regular-expressions-to-filter-tags-and-branches[Using Workflows to Schedule Jobs] page.
@@ -3900,21 +3870,13 @@ workflows:
   build-deploy:
     jobs:
       - build:
-          filters:
-            branches:
-              ignore:
-                - develop
-                - /feature-.*/
+          filters: pipeline.git.branch != "develop" and not(pipeline.git.branch matches /feature-.*/) # only run on branches that are not develop or feature- prefixed
       - deploy-stage:
           requires:
             - build
-          filters:
-            branches:
-              only: staging
+          filters: pipeline.git.branch == "staging" # only run on the staging branch
       - deploy-prod:
           requires:
             - build
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == "main" # only run on the main branch
 ----
