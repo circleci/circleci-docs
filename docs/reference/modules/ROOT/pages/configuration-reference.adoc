@@ -2060,7 +2060,7 @@ During step execution, CircleCI replaces the templates above with runtime values
 
 *Template examples:*
 
-`++myapp-{{ checksum "package-lock.json" }}++`:: CircleCI regenerates the cache every time you change something in the package-lock.json file. Different branches of this project generate the same cache key.
+`++myapp-{{ checksum "package-lock.json" }}++`:: CircleCI regenerates the cache every time you change something in the `package-lock.json` file. Different branches of this project generate the same cache key.
 `myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`:: Same as the previous one, but each branch generates a separate cache.
 `myapp-{{ epoch }}`:: Every job run generates a separate cache.
 
@@ -3111,50 +3111,6 @@ An approval job can have any name. In the example above the approval job is name
 
 '''
 
-[#jobfilters]
-==== *`filters`*
-Filter job execution within a workflow based on the following:
-
-* Branch
-* Tag
-* Expression-based condition
-
-Job filters can have the keys `branches` or `tags`.
-
-NOTE: Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`.
-
-[.table-scroll]
---
-[cols="1,1,1,2", options="header"]
-|===
-| Key | Required | Type | Description
-
-| `filters`
-| N
-| Map
-| A map or string to define rules for job execution. Branch and tag filters require a map. Expression-based filters require a string.
-|===
---
-
-The following is an example of how the CircleCI documentation project uses a regular expression to filter running a job in a workflow only on a specific branch:
-
-[,yaml]
-----
-# ...
-workflows:
-  build-deploy:
-    jobs:
-      - js_build
-      - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
-          filters:
-            branches:
-              only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
-----
-
-You can read more about using regular expressions in your config in the xref:guides:orchestrate:workflows.adoc#using-regular-expressions-to-filter-tags-and-branches[Using Workflows to Schedule Jobs] page.
-
-'''
-
 ==== Expression-based job filters
 Expression-based job filters allow you to conditionally run jobs based on the following:
 
@@ -3271,8 +3227,55 @@ include::guides:ROOT:partial$using-expressions/operators.adoc[]
 
 '''
 
+[#jobfilters]
+==== *`filters`*
+
+WARNING: Job filters are deprecated. Use expression-based job filters instead. See <<expression-based-job-filters>> for more information.
+
+Filter job execution within a workflow based on the following:
+
+* Branch
+* Tag
+* Expression-based condition
+
+Job filters can have the keys `branches` or `tags`.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `filters`
+| N
+| Map
+| A map or string to define rules for job execution. Branch and tag filters require a map. Expression-based filters require a string.
+|===
+--
+
+The following is an example of how the CircleCI documentation project uses a regular expression to filter running a job in a workflow only on a specific branch:
+
+[,yaml]
+----
+# ...
+workflows:
+  build-deploy:
+    jobs:
+      - js_build
+      - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
+          filters:
+            branches:
+              only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
+----
+
+You can read more about using regular expressions in your config in the xref:guides:orchestrate:workflows.adoc#using-regular-expressions-to-filter-tags-and-branches[Using Workflows to Schedule Jobs] page.
+
+'''
+
 [#branches]
 ==== *`branches`*
+
+WARNING: Job filters are deprecated. Use expression-based job filters instead. See <<expression-based-job-filters>> for more information.
 
 The branches filter can have the keys `only` and `ignore`, which map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the *entire* string.
 
@@ -3329,6 +3332,8 @@ workflows:
 
 [#tags]
 ==== *`tags`*
+
+WARNING: Job filters are deprecated. Use expression-based job filters instead. See <<expression-based-job-filters>> for more information.
 
 CircleCI does not run workflows for tags unless you explicitly specify tag filters. If a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
 
@@ -3594,93 +3599,6 @@ workflows:
 
 '''
 
-[#logic-statements]
-== Logic statements
-
-Certain dynamic configuration features accept logic statements as arguments.
-Logic statements are evaluated to boolean values at configuration compilation
-time, that is, before the workflow is run. The group of logic statements
-includes:
-
-[.table-scroll]
---
-[cols="1,1,1,2", options="header"]
-|===
-| Type | Arguments | `true` if | Example
-
-| YAML literal
-| None
-| is truthy
-| `true`/`42`/`"a string"`
-
-| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
-| None
-| resolves to a truthy value
-| `<< pipeline.git.branch >>`
-
-| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameter]
-| None
-| resolves to a truthy value
-| `<< pipeline.parameters.my-parameter >>`
-
-| `and`
-| N logic statements
-| all arguments are truthy
-| `and: [ true, true, false ]`
-
-| `or`
-| N logic statements
-| any argument is truthy
-| `or: [ false, true, false ]`
-
-| `not`
-| 1 logic statement
-| the argument is not truthy
-| `not: true`
-
-| `equal`
-| N values
-| all arguments evaluate to equal values
-| `equal: [ 42, << pipeline.number >>]`
-
-| `matches`
-| `pattern` and `value`
-| `value` matches the `pattern`
-| `+matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }+`
-|===
---
-
-The following logic values are considered falsy:
-
-* false.
-* null.
-* 0
-* NaN
-* empty strings ("").
-* statements with no arguments.
-
-All other values are truthy. Also note that using logic with an empty list will cause a validation error.
-
-Logic statements always evaluate to a boolean value at the top level, and coerce
-as necessary. They can be nested in an arbitrary fashion, according to their
-argument specifications, and to a maximum depth of 100 levels.
-
-`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. It is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
-
-NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
-
-*Example:*
-
-[,yaml]
-----
-workflows:
-  my-workflow:
-    when:
-      or:
-        - equal: [ main, << pipeline.git.branch >> ]
-        - equal: [ staging, << pipeline.git.branch >> ]
-----
-
 == Using expressions in your configuration
 
 CircleCI configuration supports expressions for dynamic value evaluation. Expressions can include pipeline values, pipeline parameters, literals, and operators such as `and`, `or`, and comparison operators.
@@ -3781,6 +3699,93 @@ To use a pipeline parameter in an expression, the parameter name must follow the
 ====
 If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
 ====
+
+[#logic-statements]
+== Using logic statements
+
+Certain dynamic configuration features accept logic statements as arguments.
+Logic statements are evaluated to boolean values at configuration compilation
+time, that is, before the workflow is run. The group of logic statements
+includes:
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Type | Arguments | `true` if | Example
+
+| YAML literal
+| None
+| is truthy
+| `true`/`42`/`"a string"`
+
+| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-values[Pipeline Value]
+| None
+| resolves to a truthy value
+| `<< pipeline.git.branch >>`
+
+| xref:guides:orchestrate:pipeline-variables.adoc#pipeline-parameters-in-configuration[Pipeline Parameter]
+| None
+| resolves to a truthy value
+| `<< pipeline.parameters.my-parameter >>`
+
+| `and`
+| N logic statements
+| all arguments are truthy
+| `and: [ true, true, false ]`
+
+| `or`
+| N logic statements
+| any argument is truthy
+| `or: [ false, true, false ]`
+
+| `not`
+| 1 logic statement
+| the argument is not truthy
+| `not: true`
+
+| `equal`
+| N values
+| all arguments evaluate to equal values
+| `equal: [ 42, << pipeline.number >>]`
+
+| `matches`
+| `pattern` and `value`
+| `value` matches the `pattern`
+| `+matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }+`
+|===
+--
+
+The following logic values are considered falsy:
+
+* false.
+* null.
+* 0
+* NaN
+* empty strings ("").
+* statements with no arguments.
+
+All other values are truthy. Also note that using logic with an empty list will cause a validation error.
+
+Logic statements always evaluate to a boolean value at the top level, and coerce
+as necessary. They can be nested in an arbitrary fashion, according to their
+argument specifications, and to a maximum depth of 100 levels.
+
+`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. It is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
+
+NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
+
+*Example:*
+
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ staging, << pipeline.git.branch >> ]
+----
 
 [#logic-statement-examples]
 === Logic statement and expression examples
