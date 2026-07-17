@@ -586,6 +586,72 @@ The startup script performs the following steps on each VM:
 . Configures systemd to power off the VM after the runner process exits.
 . Starts the runner service.
 
+[#custom-containerdisk-image]
+== Building a custom containerDisk image
+
+The default base image, `quay.io/containerdisks/ubuntu:22.04`, has a root filesystem capped at 2.2 GiB. Installs that write a lot of data to `/usr` or `/`, such as a full Docker install, can fail with a disk full error. This limit is not configurable through Runner Provisioner or KubeVirt. The limit comes from the base image itself. To get more root space, build a custom containerDisk image with a larger virtual size and point your resource class at it.
+
+=== Resize the disk image
+
+A containerDisk image stores its disk file at `/disk` inside an OCI image. Extract the disk from the base image and resize it with `qemu-img`:
+
+[source,console]
+----
+$ docker create --name extract-base quay.io/containerdisks/ubuntu:22.04
+$ docker cp extract-base:/disk/disk.qcow2 ./disk.qcow2
+$ docker rm extract-base
+$ qemu-img resize disk.qcow2 20G
+----
+
+The `qemu-img resize` command only grows the virtual size recorded in the qcow2 header. The image stays sparse, so the file on disk and the pushed registry layer barely grow. The extra space only becomes real data once the guest OS writes to it. The resize itself has minimal impact on registry storage or node-side image pulls.
+
+=== Install dependencies in the image
+
+Bake dependencies like Docker into the image so VMs do not need to install them on every boot. Use `virt-customize` from the `libguestfs-tools` package to modify the qcow2 file directly, without booting a VM:
+
+[source,console]
+----
+$ virt-customize -a disk.qcow2 --run-command 'curl -fsSL https://get.docker.com | sh'
+----
+
+Run additional `--run-command` or `--install` flags for any other packages the resource class needs. `virt-customize` requires `libguestfs-tools`, available through most Linux package managers.
+
+=== Package and push the custom image
+
+. Package the resized, customized qcow2 as a new OCI image with the disk at `/disk`, matching the layout KubeVirt expects:
++
+[source,dockerfile]
+----
+FROM scratch
+ADD disk.qcow2 /disk/
+----
+
+. Build and push the image to a registry your cluster can reach:
++
+[source,console]
+----
+$ docker build -t <your-registry>/<your-image>:<tag> .
+$ docker push <your-registry>/<your-image>:<tag>
+----
+
+=== Point a resource class at the custom image
+
+. Update `spec.volumes[].containerDisk.image` in `my-values.yaml` to reference the custom image instead of the default:
++
+.`my-values.yaml`
+[source,yaml]
+----
+provisioner:
+  resourceClass:
+    spec:
+      volumes:
+        - name: disk
+          containerDisk:
+            image: "<your-registry>/<your-image>:<tag>"
+----
+
+. Run `helm upgrade` as described in <<upgrading>> to roll out the change. Existing VMs keep running on the old image until they are recreated.
+
 == Scaling behavior
 
 Desired replicas are calculated as unclaimed tasks plus running tasks, clamped to `[minReplicas, maxReplicas]`.
@@ -828,6 +894,11 @@ Common causes:
 * *Wrong resource class name*: The `resourceClass.name` in values must match the resource class your jobs target, in `namespace/name` format.
 * *CircleCI Server not reachable*: If using a self-hosted server, confirm `circleciAPIAddr` is set and that the VM can reach that address. Check runner agent logs for connection errors.
 * *Cloud-init did not run*: If the VM booted from a cached image state, cloud-init may have been skipped. Delete the VM and let the pool recreate it: `kubectl delete vm -n runner-provisioner <vm-name>`.
+
+[#disk-full-during-install]
+=== Package installs fail with a disk full error
+
+A disk full error while installing packages, such as Docker, means the root filesystem on the default base image ran out of space. The default image caps root at 2.2 GiB, inherited from the upstream Ubuntu cloud image, and this limit cannot be raised at runtime. Build a custom image with a larger root. See <<custom-containerdisk-image,Building a Custom containerDisk Image>> for more information.
 
 [#scaling-not-responding]
 === Scaling is not responding to job demand
