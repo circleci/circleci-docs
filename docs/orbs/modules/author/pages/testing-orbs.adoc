@@ -162,7 +162,7 @@ CAUTION: The `orb-tools/review` job currently cannot be run locally due to the f
 [#unit-testing]
 == Unit testing
 
-If you are using the `<<include(file)>>` xref:use:orb-concepts.adoc#file-include-syntax[File Inclusion] feature and `src/scripts` directory to store and source your Bash files, you can write true integration tests for your scripts.
+If you are using the ++`<<include(file)>>`++ xref:use:orb-concepts.adoc#file-include-syntax[File Inclusion] feature and `src/scripts` directory to store and source your Bash files, you can write true integration tests for your scripts.
 
 .Example of unit testing Bash with BATS-Core
 image::guides:ROOT:bats_tests_example.png[Unit testing Bash with BATS-Core]
