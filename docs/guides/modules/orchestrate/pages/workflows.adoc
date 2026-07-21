@@ -468,7 +468,7 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 * * *"
-          filters: pipeline.git.branch == main or pipeline.git.branch matches /^release\/.*/ # only run the nightly workflow on the main branch and any branch that starts with `release/`
+          filters: pipeline.git.branch == "main" or pipeline.git.branch matches /^release\/.*/ # only run the nightly workflow on the main branch and any branch that starts with `release/`
     jobs:
       - coverage
 ----
@@ -503,7 +503,7 @@ Use comma-separated digits instead.
     triggers:
       - schedule:
           cron: "5 4 * * 1,3-5,6" # < the range separator with `-` is invalid
-          filters: pipeline.git.branch == main # only run the workflow on the main branch
+          filters: pipeline.git.branch == "main" # only run the workflow on the main branch
 ----
 
 .Example *valid* cron range syntax
@@ -513,7 +513,7 @@ Use comma-separated digits instead.
       - schedule:
           cron: "5 4 * * 1,3,4,5,6"
           filters:
-            pipeline.git.branch == main # only run the workflow on the main branch
+            pipeline.git.branch == "main" # only run the workflow on the main branch
 ----
 
 The value of the `filters` key must be a map that defines rules for execution on specific branches.
@@ -647,9 +647,9 @@ workflows:
   dev_stage_pre-prod:
     jobs:
       - test_dev:
-          filters: pipeline.git.branch == dev or pipeline.git.branch matches /^user-.*/ # using regex requires the entire branch to match
+          filters: pipeline.git.branch == "dev" or pipeline.git.branch matches /^user-.*/ # using regex requires the entire branch to match
       - test_stage:
-          filters: pipeline.git.branch == stage # only run the workflow on the stage branch
+          filters: pipeline.git.branch == "stage" # only run the workflow on the stage branch
       - test_pre-prod:
           filters: pipeline.git.branch matches /^pre-prod(?:-.+)?$/ # only run the workflow on any branch that starts with `pre-prod` including any suffix added to the branch name using a hyphen
 ----
@@ -754,7 +754,7 @@ workflows:
   staging: # This workflow will only run on 'main' and will not run on tags
     jobs:
       - test:
-          filters: pipeline.git.branch == main &filters-staging # this yaml anchor is setting these values to "filters-staging"
+          filters: pipeline.git.branch == "main" &filters-staging # this yaml anchor is setting these values to "filters-staging"
       - deploy:
           requires:
             - test

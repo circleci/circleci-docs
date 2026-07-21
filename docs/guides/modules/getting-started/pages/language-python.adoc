@@ -127,7 +127,7 @@ workflows:
       - deploy:
           requires:
             - build_and_test # only deploy if the build_and_test job has completed
-          filters: pipeline.git.branch == main # run the job on the main branch only
+          filters: pipeline.git.branch == "main" # run the job on the main branch only
 ----
 
 [#conclusion]
@@ -177,7 +177,7 @@ workflows:
       - deploy:
           requires:
             - build_and_test # only deploy if the build_and_test job has completed
-          filters: pipeline.git.branch == main # run the job on the main branch only
+          filters: pipeline.git.branch == "main" # run the job on the main branch only
 ----
 
 [#see-also-new]

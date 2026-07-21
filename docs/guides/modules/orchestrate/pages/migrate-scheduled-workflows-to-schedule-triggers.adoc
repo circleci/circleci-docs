@@ -30,7 +30,7 @@ daily-run-workflow:
     - schedule:
         # Every day, 0421Z.
         cron: "21 4 * * *"
-        filters: pipeline.git.branch == main # run the workflow on the main branch only
+        filters: pipeline.git.branch == "main" # run the workflow on the main branch only
   jobs:
     - test
     - build
