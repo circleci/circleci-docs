@@ -3870,7 +3870,7 @@ workflows:
   build-deploy:
     jobs:
       - build:
-          filters: pipeline.git.branch != "develop" and not(pipeline.git.branch matches /feature-.*/) # only run on branches that are not develop or feature- prefixed
+          filters: pipeline.git.branch != "develop" and not (pipeline.git.branch matches /feature-.*/) # only run on branches that are not develop or feature- prefixed
       - deploy-stage:
           requires:
             - build
