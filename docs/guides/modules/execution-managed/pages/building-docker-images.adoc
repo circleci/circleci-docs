@@ -48,15 +48,15 @@ A remote Docker environment uses a **Linux VM machine** resource class that corr
 * `small` maps to `medium` (Linux VM).
 * `medium+` maps to `large` (Linux VM).
 
-Gen2 resource classes are also available for remote Docker (for example, `medium.gen2`). The `small.gen2` resource class is not supported for remote Docker; the smallest available size is `medium.gen2`.
+Gen2/Gen3 resource classes are also available for remote Docker (for example, `medium.gen2`/`medium.gen3`). The `small.gen2`/`small.gen3` resource classes are not supported for remote Docker; the smallest available size is `medium.gen2`/`medium.gen3`.
 
-NOTE: Gen2 does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
+NOTE: Gen2/Gen3 does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
 
 === Arm architecture
 
 Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
 
-NOTE: Gen2 resource classes are not currently available for Arm-based remote Docker.
+NOTE: Gen2/Gen3 resource classes are not currently available for Arm-based remote Docker. Arm-based remote Docker also does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
 
 === Docker executor to Remote Docker (Linux/Arm Machine) mapping
 
@@ -101,6 +101,27 @@ NOTE: Gen2 resource classes are not currently available for Arm-based remote Doc
 | `2xlarge.gen2` (Linux VM)
 | `2xlarge+.gen2`
 | `2xlarge+.gen2` (Linux VM)
+|===
+--
+
+==== x86 gen3 architecture
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Docker resource class
+| Remote Docker (Linux Machine) resource class
+| `medium.gen3`
+| `medium.gen3` (Linux VM)
+| `large.gen3`
+| `large.gen3` (Linux VM)
+| `xlarge.gen3`
+| `xlarge.gen3` (Linux VM)
+| `2xlarge.gen3`
+| `2xlarge.gen3` (Linux VM)
+| `2xlarge+.gen3`
+| `2xlarge+.gen3` (Linux VM)
 |===
 --
 
@@ -227,7 +248,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-2204:2022.04.2
+      image: ubuntu-2604:current
     steps:
       - checkout
       # start proprietary DB using private Docker image

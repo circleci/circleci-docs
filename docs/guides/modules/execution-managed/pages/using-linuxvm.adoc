@@ -28,7 +28,7 @@ version: 2.1
 jobs:
   my-job:
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     resource_class: large.gen2
 ----
 --
@@ -58,25 +58,32 @@ include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
 include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
 
+=== Gen3
+
+include::ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
+
 [#view-resource-usage]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+[#linux-vm-generations]
+== Linux VM generations
+
 [#linux-vm-gen2-benefits]
-== Linux VM gen2
+=== Gen2
 
 Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
 
 [#performance-improvements]
-=== Performance improvements
+==== Performance improvements
 
-Using more modern compute, gen2 instances deliver up to 180% faster multi-threaded CPU performance compared to gen1 equivalents.
+Using more modern compute, gen2 instances deliver up to 25% faster performance compared to gen1 equivalents. This figure is based on real-world benchmarks across open source projects.
 
-These improvements are most noticeable in workloads that saturate multiple cores simultaneously. For example, parallel test runs, compilation steps, and image builds. On a per-resource-class basis, gen2 can be priced either higher or lower than its gen1 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+On a per-resource-class basis, gen2 can be priced either higher or lower than its gen1 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
 [#using-gen2]
-=== Using gen2
+==== Using gen2
 
 To use a gen2 resource class, specify a `large.gen2` or equivalent class in your job configuration:
 
@@ -86,8 +93,35 @@ version: 2.1
 jobs:
   my-job:
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     resource_class: large.gen2
+----
+
+[#linux-vm-gen3-benefits]
+=== Gen3
+
+Resource classes running on gen3 infrastructure offer further performance and cost improvements over their gen1 and gen2 equivalents. Gen3 resource classes are available on CircleCI Cloud only.
+
+[#gen3-performance-improvements]
+==== Performance improvements
+
+Gen3 instances deliver up to 67% faster performance compared to gen1 equivalents, based on real-world benchmarks across open source projects.
+
+Gen3 is priced lower than both its gen1 and gen2 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+
+[#using-gen3]
+==== Using gen3
+
+To use a gen3 resource class, specify a `large.gen3` or equivalent class in your job configuration:
+
+[,yaml]
+----
+version: 2.1
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2604:current
+    resource_class: large.gen3
 ----
 
 [#pre-installed-software]
@@ -104,7 +138,7 @@ version: 2.1
 jobs:
   whats-installed:
     machine: # executor type
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     steps:
       - run: apt list --installed
 ...
@@ -122,7 +156,7 @@ The following example uses an image and enables xref:optimize:docker-layer-cachi
 [,yaml]
 ----
 machine:
-  image: ubuntu-2404:current
+  image: ubuntu-2604:current
   docker_layer_caching: true    # default - false
 ----
 
