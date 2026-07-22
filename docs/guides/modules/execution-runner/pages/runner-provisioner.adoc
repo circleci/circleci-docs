@@ -21,7 +21,7 @@ Preview participants get access to a dedicated Slack channel for support and fee
 
 == Feedback and support
 
-Runner Provisioner is preview software. Expect bugs and missing features. This is early-stage software and sharp edges are normal.
+Runner Provisioner is early-stage preview software. Expect bugs, missing features, and sharp edges.
 
 Preview participants get direct access to the CircleCI product and engineering team via the preview Slack channel throughout the preview. In exchange, detailed feedback is expected. Your input directly shapes what gets built before general availability.
 
