@@ -2613,7 +2613,11 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
 ----
 
 '''
@@ -2634,7 +2638,11 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
 ----
 
 '''
@@ -2664,7 +2672,11 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
 ----
 
 '''
@@ -2694,7 +2706,11 @@ workflows:
      triggers:
        - schedule:
            cron: "0 0 * * *"
-           filters: pipeline.git.branch == "main" or pipeline.git.branch == "beta" # only run on main or beta branches
+           filters:
+             branches:
+               only:
+                 - main
+                 - beta
 ----
 
 '''
@@ -2721,7 +2737,11 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 * * *"
-          filters: pipeline.git.branch == "main" or pipeline.git.branch starts_with "release/" # only run on main or release branches
+          filters:
+            branches:
+              only:
+                - main
+                - /release\/.*/
     jobs:
       - coverage
 ----

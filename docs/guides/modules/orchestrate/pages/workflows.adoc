@@ -468,7 +468,11 @@ workflows:
     triggers:
       - schedule:
           cron: "0 0 * * *"
-          filters: pipeline.git.branch == "main" or pipeline.git.branch matches /^release\/.*/ # only run the nightly workflow on the main branch and any branch that starts with `release/`
+          filters:
+            branches:
+              only:
+                - main
+                - /release\/.*/
     jobs:
       - coverage
 ----
@@ -503,7 +507,10 @@ Use comma-separated digits instead.
     triggers:
       - schedule:
           cron: "5 4 * * 1,3-5,6" # < the range separator with `-` is invalid
-          filters: pipeline.git.branch == "main" # only run the workflow on the main branch
+          filters:
+            branches:
+              only:
+                - main
 ----
 
 .Example *valid* cron range syntax
@@ -513,7 +520,9 @@ Use comma-separated digits instead.
       - schedule:
           cron: "5 4 * * 1,3,4,5,6"
           filters:
-            pipeline.git.branch == "main" # only run the workflow on the main branch
+            branches:
+              only:
+                - main
 ----
 
 The value of the `filters` key must be a map that defines rules for execution on specific branches.
