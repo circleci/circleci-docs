@@ -1,17 +1,21 @@
 'use strict'
 
-const detag = require('./detag')
+const TAG_ALL_RX = /<[^>]+>/g
+const detag = (html) => html && html.replace(TAG_ALL_RX, '')
 
 module.exports = (page, site, defaultPageTitle, { data }) => {
-  const { contentCatalog } = data.root
-  const pageFromCatalog = contentCatalog.findBy({
-    family: 'page',
-    version: page.componentVersion.version,
-    component: page.component.name,
-    module: page.module,
-    relative: page.relativeSrcPath,
-  })
-  const meta = pageFromCatalog[0]?.asciidoc?.attributes?.meta
+  let meta
+  if (page.componentVersion && page.component) {
+    const { contentCatalog } = data.root
+    const pageFromCatalog = contentCatalog.findBy({
+      family: 'page',
+      version: page.componentVersion.version,
+      component: page.component.name,
+      module: page.module,
+      relative: page.relativeSrcPath,
+    })
+    meta = pageFromCatalog[0]?.asciidoc?.attributes?.meta
+  }
 
   const jsonLd = {
     '@context': 'https://schema.org',
