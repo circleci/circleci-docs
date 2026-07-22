@@ -96,6 +96,7 @@ Manage notification settings · View documentation
 
 NOTE: If you add the same Slack channel to multiple projects, CircleCI sends one welcome message per project.
 
+[#update-notification-preferences]
 == 3. Update notification preferences
 
 Any organization member with write permissions to a project can manage notification settings from menu:Project settings[Slack Notifications].
@@ -129,6 +130,10 @@ Linking your Slack identity connects your CircleCI user account to your identity
 Linking is scoped by Slack workspace. If you belong to multiple organizations that each have their own connected Slack workspace, link your identity separately for each one.
 
 NOTE: A Slack identity can be linked to only one CircleCI user account at a time. If you try to link a Slack identity that is already linked to a different CircleCI account, the link attempt fails. Unlink the Slack identity from the other account, then try again.
+
+=== Get tagged in notifications
+
+When you link your Slack identity, CircleCI tags you in a project's Slack notifications for workflows you trigger, shown as your Slack tag followed by your VCS username. If you have not linked your identity, the notification shows your name followed by your VCS username instead, with a link to connect your Slack account.
 
 === Prerequisites
 
