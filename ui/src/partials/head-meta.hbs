@@ -1,4 +1,8 @@
 {{#if page.attributes.noindex}}
     <meta name="robots" content="noindex">
 {{/if}}
+<meta property="og:title" content="{{{detag (or page.title defaultPageTitle)}}}{{#with site.title}} - {{this}}{{/with}}">
+{{#with (or page.description page.attributes.description)}}
+<meta property="og:description" content="{{{detag this}}}">
+{{/with}}
 {{!-- Add additional meta tags here --}}
