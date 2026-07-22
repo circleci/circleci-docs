@@ -575,6 +575,20 @@ Bitbucket Data Center::
 --
 When you connect a repository with your CircleCI project, behind the scenes, CircleCI is registering a webhook within your Bitbucket Data Center project. You may verify this once you have successfully created the project by navigating to your repository's menu:Project Settings[Webhooks] page.
 --
+GitLab::
++
+--
+When you set up a new project with GitLab in CircleCI, an SSH key is created, which is used to check out code from your repository.
+
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is configured to communicate with GitLab. Therefore, the SSH key is used for:
+
+- Checking out the main project.
+- Checking out any GitLab-hosted submodules.
+- Checking out any GitLab-hosted private dependencies.
+- Automatic git merging/tagging/etc.
+
+For GitLab self-managed instances, you will need to provide SSH host keys during the integration setup. You can retrieve these keys by running `ssh-keyscan <instance_url>`. See the <<manage-vcs-integrations>> section for more information on configuring GitLab self-managed integrations.
+--
 ====
 
 === Custom checkout commands
