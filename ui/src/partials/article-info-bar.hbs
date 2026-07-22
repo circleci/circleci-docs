@@ -38,6 +38,21 @@
       {{/each}}
     </div>
   {{/if}}
+  <!-- Plan Tags -->
+  {{#if page.attributes.plan}}
+    <div class="flex items-center min-w-fit space-x-1 px-3 py-2 md:py-0 border-t md:border-t-0 md:border-l border-inherit">
+      {{#each (split page.attributes.plan ',')}}
+        <span class="platform-badge text-[10px] text-terminal-black border rounded-full py-1 px-1.5"
+              aria-label="{{getPlanTooltipText this}}"
+              data-tooltip="{{getPlanTooltipText this}}"
+              data-plan="{{trim this}}"
+              tabindex="0"
+              style="font-family: 'Roboto', sans-serif; font-weight: 700;">
+          {{this}}
+        </span>
+      {{/each}}
+    </div>
+  {{/if}}
   <!-- Markdown Dropdown -->
   <div data-dropdown class="relative flex items-center py-2 md:py-0 pl-3 min-w-fit border-t md:border-t-0 md:border-l border-inherit">
     <button

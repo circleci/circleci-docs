@@ -63,6 +63,7 @@ If your organization reaches the maximum requests per 30 days, the system disabl
 
 If you hover over the disabled btn:[Request audit logs] button, a tooltip appears with the date when you can make new requests. Pending requests count toward the rate limit.
 
+[badge="Scale Plan"]
 == Stream audit logs
 
 TIP: If you choose to set up audit log streaming, you can still <<request-audit-logs,request audit logs>>.
@@ -79,7 +80,7 @@ Audit log streaming provides the following benefits to your organization:
 
 Before setting up audit log streaming, ensure you have the following:
 
-* CircleCI Scale Plan (the feature is not available to Free or Performance customers).
+* A CircleCI Scale plan.
 * AWS account with permissions to create and manage S3 buckets.
 * IAM role or user with appropriate S3 write permissions.
 * Network configuration to allow secure connections between CircleCI and AWS.
@@ -298,7 +299,7 @@ image::guides:ROOT:audit-log-stream-actions.png[Audit log stream actions]
 
 === Limitations
 
-- Audit log streaming is only available to CircleCI Scale Plan customers. Free and Performance Plan customers do not have access to this feature.
+- Audit log streaming requires a CircleCI Scale plan.
 
 - CircleCI currently supports streaming for a single S3 bucket per organization.
 

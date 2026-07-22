@@ -638,6 +638,13 @@ All documentation pages must include attributes at the top of the file, before t
   - If feature is Cloud-only, use `:page-platform: Cloud`
   - If feature is available on all platforms, use `:page-platform: Cloud, Server v4+`
 
+- `:page-plan:` - Indicates which CircleCI pricing plan tier(s) support the feature. Displays as badges under the page title, next to the platform badges.
+  - Options: `Free`, `Performance`, `Scale`, or a comma-separated combination like `Performance, Scale`
+  - List every tier the feature is available on explicitly — plans are cumulative (Performance includes everything in Free, Scale includes everything in Performance), so a Performance-gated feature should be tagged `:page-plan: Performance, Scale`, not `:page-plan: Performance` alone
+  - **Omit this attribute entirely if the feature is available on every plan.** Unlike `:page-platform:`, `:page-plan:` is optional and should only appear on pages describing a plan-gated feature — adding it to every page would make the badge meaningless noise and create a maintenance burden across hundreds of pages
+  - This attribute does not apply to CircleCI Server; Server availability is conveyed by `:page-platform:` instead
+  - When you add `:page-plan:` to a page, remove or rewrite any freeform prose (e.g. "This feature is only available on the Scale plan") that duplicates what the badge now states — keep prose for the *why*, not the *what*, to avoid the two drifting out of sync
+
 - `:page-description:` - Used for SEO meta descriptions and page previews
   - **Must be between 70-160 characters** (Vale enforced)
   - Write a clear, concise summary of what the page covers
