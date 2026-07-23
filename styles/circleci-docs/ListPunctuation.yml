@@ -51,8 +51,9 @@ script: |
 
     // Check if ends with period, colon, or forward slash
     // Note: We don't allow ] or ) here because xref/link-only lines are already excluded above
-    last_char := content[len(content)-1]
-    if last_char == '.' || last_char == ':' || last_char == '/' || last_char == '*'|| last_char == '>' || last_char == ']' {
+    // Use has_suffix (not byte/rune indexing) so multi-byte characters earlier
+    // in the content (e.g. em dashes, curly quotes) don't throw off the check.
+    if text.has_suffix(content, ".") || text.has_suffix(content, ":") || text.has_suffix(content, "/") || text.has_suffix(content, "*") || text.has_suffix(content, ">") || text.has_suffix(content, "]") {
       continue
     }
 

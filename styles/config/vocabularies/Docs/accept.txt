@@ -32,6 +32,7 @@ Airtable
 /bAmazon SageMaker/b
 Android
 [Aa]llowlist?
+AKS
 AMI
 AMIs?
 APIs?
@@ -216,6 +217,7 @@ Krew
 kubectl
 [Kk]ubelets?
 Kubernetes
+KubeVirt
 LambdaTest
 Lein
 Leiningen
@@ -232,6 +234,7 @@ MCP server
 MFEs?
 [Mm]iddleware
 minitest
+[Mm]isconfiguration
 [Mm]ultithreading
 [Mm]ultiline
 [Nn]amespaces?
@@ -284,6 +287,7 @@ PVCs?
 Python
 pytest
 RAM
+RBAC
 RDoc
 \bReact Native\b
 READMEs?
@@ -313,6 +317,7 @@ SSO
 [Ss]afelist
 \bSauce Labs\b
 \bScale Plan\b
+[Ss]chedulable
 SDK
 seccomp
 [Ss]ecrets?

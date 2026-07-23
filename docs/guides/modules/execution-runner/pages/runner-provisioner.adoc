@@ -1,4 +1,4 @@
-= Runner Provisioner
+= Runner provisioner
 :page-platform: Cloud, Server v4+
 :page-description: Learn how to install and configure Runner Provisioner to automatically scale CircleCI runner VMs using KubeVirt on Kubernetes.
 :experimental:
@@ -68,7 +68,7 @@ Defaulted container "virt-handler" out of: virt-handler, virt-launcher (init)
 /proc/1/root/dev/kvm
 ----
 
-If the file is absent, VMs cannot be scheduled on that node regardless of how KubeVirt is configured. On cloud providers, nested virtualization is typically disabled by default and must be explicitly enabled on the node pool or instance group before the nodes are created — it cannot be patched onto existing nodes.
+If the file is absent, VMs cannot be scheduled on that node regardless of how KubeVirt is configured. On cloud providers, nested virtualization is typically disabled by default and must be explicitly enabled on the node pool or instance group before the nodes are created. It cannot be patched onto existing nodes.
 
 [#dedicated-node-pool]
 === Dedicated node pool for VM workloads (optional)
@@ -155,11 +155,11 @@ Then install KubeVirt and apply the `virt-handler` patch from <<tainted-nodes,Ta
 [#example-eks]
 === Example: AWS EKS
 
-On EKS, KVM support requires bare metal instances — regular EC2 instances, even Nitro-based ones, do not expose `/dev/kvm` to pods. Use a `.metal` instance type (for example, `m5.metal` or `c5.metal`). There is an active request for nested virtualization support on EC2 instances, but at this time the issue remains open.
+On EKS, KVM support requires bare metal instances — regular EC2 instances, even Nitro-based ones, do not expose `/dev/kvm` to pods. Use a `.metal` instance type (for example, `m5.metal` or `c5.metal`). An open request for nested virtualization support on EC2 instances remains unresolved.
 
 `eksctl` does not support taints as CLI flags for clusters it did not create. Use a config file instead:
 
-.kubevirt-nodegroup.yaml
+.`kubevirt-nodegroup.yaml`
 [source,yaml]
 ----
 apiVersion: eksctl.io/v1alpha5
@@ -339,7 +339,7 @@ $ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
 [#connecting-to-server]
 == Connecting to a CircleCI Server instance
 
-By default, Runner Provisioner connects to the CircleCI cloud API at `https://runner.circleci.com/`. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
+By default, Runner Provisioner connects to the CircleCI Cloud API at `https://runner.circleci.com/`. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
 
 .my-values.yaml
 [source,yaml]
@@ -352,7 +352,7 @@ provisioner:
     token: "your-runner-token"
 ----
 
-This value is injected into each VM's cloud-init script so the runner agent connects to your server instance rather than CircleCI cloud. Without it, runners will fail to register.
+This value is injected into each VM's cloud-init script so the runner agent connects to your server instance rather than CircleCI Cloud. Without it, runners will fail to register.
 
 [#configuration-reference]
 == Configuration reference
@@ -464,7 +464,7 @@ The Secret must have two keys:
 * `circle-token` — the CircleCI API token for task polling.
 * `config.yaml` — the resource class configuration:
 
-.config.yaml
+.`config.yaml`
 [source,yaml]
 ----
 resourceClass:
@@ -535,7 +535,7 @@ Desired replicas are calculated as unclaimed tasks plus running tasks, clamped t
 [#idle-timeout]
 === `idleTimeout`
 
-Without `idleTimeout`, a pre-warmed VM that never receives a job waits indefinitely. Setting `idleTimeout` (for example, `"10m"`) causes VMs to shut down after that period of inactivity. This is useful for:
+Without `idleTimeout`, a pre-warmed VM that never receives a job waits indefinitely. Setting `idleTimeout` (for example, `"10m"`) causes VMs to shut down after that period of inactivity. Setting `idleTimeout` is useful for:
 
 * Draining excess pre-scaled VMs when demand drops.
 * Cycling VMs after a spec or config update (old VMs will eventually time out and be replaced).
@@ -648,13 +648,13 @@ $ helm upgrade runner-provisioner ./chart \
   --values my-values.yaml
 ----
 
-The deployment pod annotation `checksum/config` is derived from the Secret contents, so a config-only change (for example, a new token or VM spec) triggers a pod rollout automatically.
+The deployment pod annotation `checksum/config` is derived from the Secret contents, so a config-only change (for example, a new token or VM spec) triggers a pod Rollout automatically.
 
-Configuration changes (tokens, API address, VM spec) are injected into VMs at first boot via cloud-init and are not re-applied to running VMs. After a `helm upgrade`, existing VMs continue using their original config until they are recreated. Two rollout options are available:
+Configuration changes (tokens, API address, VM spec) are injected into VMs at first boot via cloud-init and are not re-applied to running VMs. After a `helm upgrade`, existing VMs continue using their original config until they are recreated. Two Rollout options are available:
 
-* *Graceful rollout — no job interruption*: Set `idleTimeout` in your values before upgrading. VMs will shut down on their own once they finish their current job and go idle. The pool recreates them with the updated config. This is the right choice when you cannot interrupt in-progress jobs, but rollout is slow — it completes only once every existing VM has either run a job to completion or timed out.
+* *Graceful Rollout — no job interruption*: Set `idleTimeout` in your values before upgrading. VMs will shut down on their own once they finish their current job and go idle. The pool recreates them with the updated config. This is the right choice when you cannot interrupt in-progress jobs, but the Rollout is slow — it completes only once every existing VM has either run a job to completion or timed out.
 
-* *Immediate rollout — jobs will be interrupted*: Delete all VMs after upgrading. The pool recreates them immediately with the updated config. Any jobs running on deleted VMs will fail and must be rerun.
+* *Immediate Rollout — jobs will be interrupted*: Delete all VMs after upgrading. The pool recreates them immediately with the updated config. Any jobs running on deleted VMs will fail and must be rerun.
 +
 [source,console]
 ----
@@ -698,10 +698,10 @@ Common causes:
 
 * *`minReplicas` is 0*: The pool will have 0 VMs unless there are pending tasks. Set `minReplicas` to at least 1 to confirm the pool is functional.
 * *KubeVirt not installed or not ready*: Check that KubeVirt components are running: `kubectl get pods -n kubevirt`.
-* *RBAC misconfiguration*: The provisioner's `ServiceAccount` may lack permission to create or update `VirtualMachinePool` resources. Check events on the provisioner pod.
+* *RBAC misconfiguration*: The provisioner `ServiceAccount` may lack permission to create or update `VirtualMachinePool` resources. Check events on the provisioner pod.
 
 [#vms-stuck-in-pending]
-=== VMs are stuck in Pending or never reach Running
+=== VMs are stuck in pending or never reach running
 
 [source,console]
 ----
