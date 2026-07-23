@@ -150,7 +150,7 @@ During the exchange, Slack returns an ID token containing your Slack user ID, te
 
 include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 . Select link:https://app.circleci.com/settings/user[Account Integrations] from the sidebar.
-. In the *Slack* section, find the organization you want to link and select **Connect**.
+. In the *Slack* section, find the organization you want to link and select btn:[Connect].
 . In Slack, confirm you are signed in to the account you want to link and select btn:[Allow].
 +
 NOTE: If you previously signed in to this Slack workspace with Sign in with Slack, Slack may skip this confirmation and link your identity automatically.
