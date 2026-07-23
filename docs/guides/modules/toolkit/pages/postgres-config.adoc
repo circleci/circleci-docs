@@ -3,7 +3,7 @@
 :page-description: See example database config.yml files using PostgreSQL/Rails and MySQL/Ruby for rails app with structure.sql, go app with postgresql, and MySQL project.
 :experimental:
 
-This document provides example database xref:orchestrate:databases.adoc[config.yml] files using PostgreSQL/Rails and MySQL/Ruby.
+This document provides example database configuration files using PostgreSQL/Rails and MySQL/Ruby.
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
@@ -11,8 +11,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 == Example CircleCI configuration for a rails app with structure.sql
 
 If you are migrating a Rails app configured with a `structure.sql` file make
-sure that `psql` is installed in your PATH and has the proper permissions, as
-follows, because the `cimg/ruby:3.0-node` image does not have `psql` installed
+sure that `psql` is installed in your PATH and has the proper permissions. The `cimg/ruby:3.0-node` image does not have `psql` installed
 by default and uses `pg` gem for database access.
 
 [,yaml]
@@ -82,7 +81,7 @@ NOTE: An alternative is to build your own image by extending the current image, 
 
 You must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
-. DATABASE_URL environment variable, if set
+. DATABASE_URL environment variable, if set.
 . The test section configuration for the appropriate environment in your `config.yml` file (usually `test` for your test suite).
 
 The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
@@ -253,10 +252,10 @@ workflows:
 
 While it is possible to make MySQL your primary and only container, this example
 does not. As a more practical use case, the example uses a PHP Docker image as
-its primary container, and will wait until MySQL is up and running before performing any `run` commands
+its primary container. It will wait until MySQL is up and running before performing any `run` commands
 involving the database (DB).
 
-Once the DB is up, install the `mysql` client into the primary container so that you can run a command to connect and import the dummy data, presumably found at `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
+Once the DB is up, install the `mysql` client into the primary container. You can then run a command to connect and import the dummy data, presumably found at `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
 
 [,sql]
 ----
