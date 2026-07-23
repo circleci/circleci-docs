@@ -166,7 +166,7 @@ include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 
 === Unlink your Slack identity
 
-To stop personal Slack notifications, select **Disconnect** next to the linked workspace on either the *Account Integrations* page or the *Notifications* page in User Settings.
+To stop personal Slack notifications, select btn:[Disconnect] next to the linked workspace on either the *Account Integrations* page or the *Notifications* page in User Settings.
 
 === Troubleshoot Slack identity linking
 
