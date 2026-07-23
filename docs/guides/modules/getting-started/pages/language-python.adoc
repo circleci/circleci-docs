@@ -190,4 +190,4 @@ workflows:
 * link:https://support.circleci.com/hc/en-us/articles/360048786831-Use-test-splitting-with-Python-Django-tests[Use test splitting with Python Django tests]
 * link:https://circleci.com/blog/testing-flask-framework-with-pytest/[Testing Flask framework with pytest]
 * link:https://support.circleci.com/hc/en-us/articles/115012795327-How-do-I-use-Django-on-CircleCI-[How do I use Django on CircleCI?]
-* xref:test:test-splitting-tutorial.adoc[Test Splitting to Speed up Your Pipelines]
+* xref:optimize:parallelism-faster-jobs.adoc[Parallelism and Test Splitting]

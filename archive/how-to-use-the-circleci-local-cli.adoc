@@ -10,14 +10,14 @@ This page describes how to use some features of the CircleCI CLI.
 
 To follow the guides on this page you will need the following:
 
-* A CircleCI account (you can link:https://circleci.com/signup/[sign up for free])
-* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli.adoc[Installing the local CLI] page.
-* xref:local-cli.adoc#configure-the-cli[Set up and configure] the CircleCI CLI.
+* A CircleCI account (you can link:https://circleci.com/signup/[sign up for free]).
+* Local installation of the CircleCI CLI. Steps and options are available on the xref:local-cli.adoc[Installing the Local CLI] page.
+* xref:local-cli.adoc#configure-the-cli[Set up and Configure] the CircleCI CLI.
 
 [#validate-a-circleci-config]
 == Validate a CircleCI config
 
-TIP: *Using VS Code?* You can validate your CircleCI configuration using the VS Code extension. For full information about the features provided in the VS Code extension, see the xref:vs-code-extension-overview.adoc[VS Code extension overview] page.
+TIP: *Using VS Code?* You can validate your CircleCI configuration using the VS Code extension. For full information about the features provided in the VS Code extension, see the xref:vs-code-extension-overview.adoc[VS Code Extension Overview] page.
 
 You can avoid pushing additional commits to test your `.circleci/config.yml` by using the CLI to validate your configuration locally. Follow these steps:
 
@@ -29,7 +29,7 @@ You can avoid pushing additional commits to test your `.circleci/config.yml` by 
 circleci config validate <path-to-config.yml>
 ----
 
-. If your configuration is valid, you should see the following:
+. If your configuration is valid, you will see the following:
 +
 [,shell]
 ----
@@ -51,7 +51,7 @@ Error: config compilation contains errors: config compilation contains errors:
 [#orb-development-kit]
 == Orb development kit
 
-The xref:orbs:author:orb-author.adoc#orb-development-kit[orb development kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[orb] development process, with automatic testing and deployment on CircleCI. The orb development kit has two commands:
+The xref:orbs:author:orb-author.adoc#orb-development-kit[Orb Development Kit] refers to a suite of tools that work together to simplify the xref:orbs:use:orb-intro.adoc[Orb] development process, with automatic testing and deployment on CircleCI. The orb development kit has two commands:
 
 * The following command link:https://circleci-public.github.io/circleci-cli/circleci_orb_init.html[initializes a new orb project]:
 +
@@ -250,8 +250,8 @@ workflows:
 
 The CircleCI CLI enables you to run a job from your configuration locally with Docker. This can be useful for the following:
 
-* To run tests before pushing configuration changes
-* Debugging your build process without impacting your build queue
+* To run tests before pushing configuration changes.
+* Debugging your build process without impacting your build queue.
 
 Only single jobs can be run locally, not workflows.
 
@@ -290,7 +290,7 @@ Although running jobs locally with `circleci` is helpful, there are some limitat
 [#executors]
 ==== Executors
 
-The CLI does not support running jobs that use a xref:execution-managed:executor-intro.adoc#linux-vm[machine] (`machine`) or xref:execution-managed:executor-intro.adoc#macos[macOS] (`macos`) executor locally because these executors require running an additional virtual machine. Only jobs that use a xref:execution-managed:executor-intro.adoc#docker[Docker] (`docker`) executor can be run locally.
+The CLI does not support running jobs that use a xref:execution-managed:executor-intro.adoc#linux-vm[Machine] (`machine`) or xref:execution-managed:executor-intro.adoc#macos[macOS] (`macos`) executor locally because these executors require running an additional virtual machine. Only jobs that use a xref:execution-managed:executor-intro.adoc#docker[Docker] (`docker`) executor can be run locally.
 
 [#add-ssh-keys]
 ==== Add SSH keys
@@ -353,7 +353,7 @@ circleci runner instance list <namespace/resource-class> [flags]
 
 - `<resource-class>` is the label for the resource class of the specific pool of self-hosted runners. You can find the resource class for all your pools in the link:https://app.circleci.com[CircleCI web app], by selecting **Runners** in the sidebar.
 
-To find out more on namespace and resource class, see the xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-hosted runner concepts] page.
+To find out more on namespace and resource class, see the xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Concepts] page.
 
 For full details on the `instance list` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_runner_instance_list.html[CLI docs].
 
@@ -602,7 +602,7 @@ You can use the CircleCI CLI to create triggers for your projects.
 
 NOTE: The `trigger` command and its `create` sub-command only apply to pipeline definitions created with the GitHub App provider (Organization slug starts with `circleci` followed by a UUID. For example, `circleci/34R3kN5RtfEE7v4sa4nWAU`. You can find your organization slug under menu:Org[Overview]).
 
-For full details on creating, testing, and managing triggers for your organization, see the xref:orchestrate:triggers-overview.adoc[Trigger a pipeline] page.
+For full details on creating, testing, and managing triggers for your organization, see the xref:orchestrate:triggers-overview.adoc[Trigger a Pipeline] page.
 
 Use the `create` sub-command to create a trigger for your project.
 
@@ -619,7 +619,7 @@ The above example shows the minimal usage. You will be prompted for required val
 
 - `--repo-id` is the flag that allows you to specify the ID of the GitHub repository you wish to build a pipeline definition for. It is required if the config file is in a different repository than the code repository. Refer to the link:https://docs.github.com/en/rest/repos/repos?api#get-a-repository[GitHub documentation] to find the ID.
 
-- `--event-preset` is the flag that allows you to specify xref:orchestrate:github-trigger-event-options.adoc[the name of the event preset] to use when filtering events for this trigger. The value can be any of:
+- `--event-preset` is the flag that allows you to specify xref:orchestrate:github-trigger-event-options.adoc[The Name of the Event Preset] to use when filtering events for this trigger. The value can be any of:
 ** `all-pushes`
 ** `only-tags`
 ** `default-branch-pushes`
@@ -661,7 +661,7 @@ include::ROOT:partial$notes/find-organization-id.adoc[]
 
 You can use the CircleCI CLI to manage config policies for your projects.
 
-For more information on config policies, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage config policies] section.
+For more information on config policies, including how-to guides, see the xref:config-policies:config-policy-management-overview.adoc[Manage Config Policies] section.
 
 === Make a decision on a config policy
 
@@ -790,7 +790,7 @@ circleci policy settings --owner-id <org-id> --enable <true|false>
 
 - `--enable` is the flag to either enable or disable a policy evaluation. Set to `true` to enable, `false` to disable.
 
-The `settings` sub-command can only be used to read the settings and to xref:config-policies:create-and-manage-config-policies.adoc#config-policy-management-enablement[enable/disable policy evaluation for the organization].
+The `settings` sub-command can only be used to read the settings and to xref:config-policies:create-and-manage-config-policies.adoc#config-policy-management-enablement[Enable/Disable Policy Evaluation for the Organization].
 
 For full details on the `settings` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_policy_settings.html[CLI docs].
 

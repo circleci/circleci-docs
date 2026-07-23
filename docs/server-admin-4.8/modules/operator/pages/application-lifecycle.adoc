@@ -30,7 +30,7 @@ We release patch fixes for bugs and security concerns each month. We release min
 == End of support
 With each minor or major release, in accordance with our link:https://circleci.com/legal/terms-of-service/[terms of service], we end support for previous versions of CircleCI Server. The following table provides dates for previously released versions.
 
-CAUTION: These dates are subject to change.
+CAUTION: These dates (MM/DD/YYYY) are subject to change.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]

@@ -14,9 +14,9 @@ For basic examples of adding pipeline jobs in a specific execution environment s
 
 To get a project up and running on CircleCI, see the following quickstart guides:
 
-* xref:getting-started:language-javascript.adoc[Configure a Node.js application on CircleCI]
-* xref:getting-started:language-python.adoc[Configure a Python application on CircleCI]
-* xref:getting-started:language-go.adoc[Configure a Go application on CircleCI]
+* xref:getting-started:language-javascript.adoc[Configure a Node.js Application on CircleCI]
+* xref:getting-started:language-python.adoc[Configure a Python Application on CircleCI]
+* xref:getting-started:language-go.adoc[Configure a Go Application on CircleCI]
 
 We have created demo applications in various languages so you can learn by example. Each language listed below has an associated guide and public repository on GitHub.
 
@@ -30,15 +30,15 @@ We have created demo applications in various languages so you can learn by examp
 
 | xref:getting-started:language-javascript.adoc[Configuring a Node.js Application on CircleCI^]
 | Vue.js
-| link:https://github.com/CircleCI-Public/sample-javascript-cfd[sample-javascript-cfd]
+| link:https://github.com/CircleCI-Public/sample-javascript-cfd[Node.js sample]
 
 | xref:getting-started:language-python.adoc[Configuring a Python Application on CircleCI^]
 | Flask
-| link:https://github.com/CircleCI-Public/sample-python-cfd[sample-python-cfd]
+| link:https://github.com/CircleCI-Public/sample-python-cfd[Python sample]
 
 | link:https://github.com/CircleCI-Public/sample-java-cfd/blob/master/README.md[Java]
 | Spring Boot
-| link:https://github.com/CircleCI-Public/sample-java-cfd[sample-java-cfd]
+| link:https://github.com/CircleCI-Public/sample-java-cfd[Java sample]
 
 | link:https://github.com/CircleCI-Public/sample-dotnet-cfd/blob/master/README.md[C#/.NET]
 | ASP.NET Core
@@ -77,5 +77,5 @@ Use the tutorial associated with your platform to learn about the customization 
 
 [#next-steps]
 == Next steps
-- Read the xref:sample-config.adoc[Sample config.yml Files] document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.
-- Refer to the xref:reference:ROOT:configuration-reference.adoc[Configuration reference page] for detailed syntax.
+- Read the xref:sample-config.adoc[Sample Configuration Files] document for examples of using concurrent workflows, sequential workflows, fan-in/fan-out workflows, and building Linux and iOS in one configuration file.
+- Refer to the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] for detailed syntax.

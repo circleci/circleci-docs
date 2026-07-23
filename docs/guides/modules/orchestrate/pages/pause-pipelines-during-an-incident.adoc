@@ -115,11 +115,10 @@ Environment variables are stored in **contexts** (shared across projects) and **
 * xref:security:contexts.adoc#rotating-environment-variables[Rotate Environment Variables With the CLI or API]
 * xref:security:contexts.adoc#deleting-environment-variables[Remove an Environment Variable From a Context]
 
-**Project variables.** The method depends on your integration type:
+**Project variables.** Use the CLI or rotate in the web app:
 
-* **GitHub App / GitLab projects:** Use `circleci project secret` commands. See xref:toolkit:how-to-use-the-circleci-local-cli.adoc#project-management[Project Management] in the CLI guide.
-* **GitHub OAuth / Bitbucket Cloud projects:** Use the link:https://circleci.com/docs/api/v2/#tag/Project[Project API].
-* **Web app (all integration types):** See xref:security:set-environment-variable.adoc[Set an Environment Variable].
+* *CLI:*Use the `circleci project envvar` commands. See the link:https://cli.circleci.com/reference/#circleci-project-envvar-command[CLI reference] for more information.
+* **Web app:** See xref:security:set-environment-variable.adoc[Set an Environment Variable].
 
 ==== 4.3 SSH keys and self-hosted runners
 

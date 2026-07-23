@@ -205,6 +205,7 @@ Jenkins
 JFrog
 Jira
 jq\b
+JSON
 \bJUnit\b
 junit
 JRuby
@@ -328,6 +329,7 @@ Selenium
 SemVer
 [Ss]erver
 SELinux
+[Ss]erverless
 \b[Ss]hellchecking\b
 [Ss]harded
 \b[Ss]ingle sign-on\b

@@ -814,5 +814,5 @@ The following information is returned for each job:
 [#reference]
 == Reference
 
-* Refer to xref:api-intro.adoc[API v2 Introduction] for high-level information about the CircleCI v2 API.
+* Refer to xref:api-intro.adoc[API Overview] for high-level information about the CircleCI v2 API.
 * Refer to link:https://circleci.com/docs/api/v2/[API v2 Reference Guide] for a detailed list of all endpoints that make up the CircleCI v2 API.

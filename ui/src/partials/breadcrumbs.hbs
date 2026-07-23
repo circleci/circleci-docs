@@ -3,19 +3,19 @@
   <ul>
     {{#if site.homeUrl}}
     <li class="inline after:text-[var(--breadcrumb-separator-color)] after:content-['/'] after:px-2">
-      <a class="font-normal" style="color: var(--breadcrumb-link-color)" href="{{{relativize site.homeUrl}}}">Home</a>
+      <a class="font-medium" style="color: var(--breadcrumb-link-color)" href="{{{relativize site.homeUrl}}}">Home</a>
     </li>
     {{/if}}
     {{#with page.componentVersion}}
     {{#if (and ./title (ne ./title @root.page.breadcrumbs.0.content))}}
-    <li class="inline after:text-[var(--breadcrumb-separator-color)] after:content-['/'] after:px-2"><a class="font-normal" style="color: var(--breadcrumb-link-color)" href="{{{relativize ./url}}}">{{{./title}}}</a></li>
+    <li class="inline after:text-[var(--breadcrumb-separator-color)] after:content-['/'] after:px-2"><a class="font-medium" style="color: var(--breadcrumb-link-color)" href="{{{relativize ./url}}}">{{{./title}}}</a></li>
     {{/if}}
     {{/with}}
     {{#each page.breadcrumbs}}
     {{#unless @last}}
     <li class="inline after:text-[var(--breadcrumb-separator-color)] after:content-['/'] after:px-2">
       {{#if (and ./url (eq ./urlType 'internal'))}}
-        <a class="font-normal" style="color: var(--breadcrumb-link-color)" href="{{{relativize ./url}}}">{{{./content}}}</a>
+        <a class="font-medium" style="color: var(--breadcrumb-link-color)" href="{{{relativize ./url}}}">{{{./content}}}</a>
               {{else}}
           <span class="font-normal cursor-default" style="color: var(--breadcrumb-font-color)">{{{./content}}}</span>
         {{/if}}

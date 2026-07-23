@@ -10,16 +10,16 @@
 [#cpu-architecture-circleci-support]
 === Which CPU architectures does CircleCI support?
 
-CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:guides:execution-managed:using-arm.adoc[Arm resources] for machine jobs.
+CircleCI supports `amd64` for Docker jobs, and both `amd64` and xref:guides:execution-managed:using-arm.adoc[Arm Resources] for machine jobs.
 
 [#ipv6-in-tests]
 === Can I use IPv6 in my tests?
 
-You can use the xref:reference:ROOT:configuration-reference.adoc#machine[Machine executor] for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
+You can use the xref:reference:ROOT:configuration-reference.adoc#machine[Machine Executor] for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
 Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 
-You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup.  You can enable it globally by configuring docker daemon like the following:
+You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup.  You can enable it globally by configuring Docker daemon like the following:
 
 [source,yaml]
 ----

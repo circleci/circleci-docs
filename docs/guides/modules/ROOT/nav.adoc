@@ -150,7 +150,6 @@
 ** Manage and optimize tests
 *** xref:test:fix-flaky-tests.adoc[Fix flaky tests]
 *** xref:optimize:parallelism-faster-jobs.adoc[Test splitting and parallelism]
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 *** xref:optimize:use-the-circleci-cli-to-split-tests.adoc[Use the environment CLI to split tests]
 *** xref:test:troubleshoot-test-splitting.adoc[Troubleshoot test splitting]
 *** xref:test:automate-llm-evaluation-testing-with-the-circleci-evals-orb.adoc[Automate LLM evaluation testing with the CircleCI Evals orb]
@@ -213,8 +212,6 @@
 *** xref:optimize:docker-layer-caching.adoc[Docker layer caching overview]
 ** Config
 *** xref:orchestrate:dynamic-config.adoc[Dynamic configuration]
-** Tutorials
-*** xref:test:test-splitting-tutorial.adoc[Speed up pipelines with test splitting]
 ** How-to guides
 *** xref:orchestrate:using-matrix-jobs.adoc[Use matrix jobs]
 *** xref:orchestrate:using-dynamic-configuration.adoc[Using dynamic configuration]
@@ -223,6 +220,7 @@
 * Insights
 ** xref:insights:insights.adoc[Use Insights]
 ** xref:insights:insights-tests.adoc[Test Insights]
+** xref:insights:project-usage-dashboard.adoc[Project Usage Dashboard]
 ** xref:insights:insights-snapshot-badge.adoc[Generate an Insights snapshot badge]
 ** xref:insights:insights-glossary.adoc[Insights glossary]
 
@@ -255,6 +253,7 @@
 *** xref:security:env-vars.adoc[Intro to environment variables]
 *** xref:security:contexts.adoc[Using contexts]
 *** xref:security:ip-ranges.adoc[IP ranges]
+*** xref:security:site-to-site-connectivity.adoc[Site-to-site connectivity]
 *** xref:security:audit-logs.adoc[Audit logs]
 ** Security recommendations
 *** xref:security:security-overview.adoc[Security overview]
@@ -321,9 +320,9 @@
 *** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
 *** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
 *** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
-** Local CLI
-*** xref:toolkit:local-cli.adoc[Install and configure the CircleCI local CLI]
-*** xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
+** CircleCI CLI
+*** xref:toolkit:circleci-cli.adoc[The CircleCI CLI]
+*** xref:toolkit:cli-migration-guide.adoc[CLI migration guide]
 
 ** Chunk CLI
 *** xref:toolkit:install-and-configure-the-chunk-cli.adoc[Install and configure the Chunk CLI]

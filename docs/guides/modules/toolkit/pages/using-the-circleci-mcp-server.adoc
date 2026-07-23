@@ -5,6 +5,11 @@
 
 The CircleCI MCP server enables you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
 
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
+
 == Introduction
 
 Model Context Protocol (MCP) is a standardized protocol that allows large language models (LLMs) to interact with external systems. The CircleCI MCP server connects your AI coding assistants directly to your CircleCI pipelines.
@@ -31,13 +36,18 @@ The CircleCI MCP server acts as a bridge between your AI assistant and CircleCI 
 
 With the CircleCI MCP server, you can perform CircleCI tasks using natural language commands. For example:
 
-* "What failed on my last deploy?"
-* "Find the latest failed pipeline on my branch and help me fix it."
-* "Get logs from [pipeline URL] and help me fix it."
-* "Find flaky tests in my current project."
+* `What failed on my last deploy?`
+* `Find the latest failed pipeline on my branch and help me fix it.`
+* `Get logs from [pipeline URL] and help me fix it.`
+* `Find flaky tests in my current project.`
 * "Validate my CircleCI config."
 
 == Installation
+
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
 
 This section describes how to install the CircleCI MCP server in your development environment.
 
@@ -47,7 +57,7 @@ Before installing the CircleCI MCP server, ensure you have the following:
 
 * `pnpm` package manager installed.
 * Node.js version 18.0.0 or higher.
-* A CircleCI personal API token. See the xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API tokens] page for steps.
+* A CircleCI personal API token. See the xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API Tokens] page for steps.
 
 === Automatic installation via Smithery
 
@@ -72,7 +82,7 @@ For guidance on setting up and using an MCP server in Cursor, see the link:https
 
 Add this configuration to your Cursor MCP config file. You will need to supply your personal API token.
 
-NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI Server.
 
 [source,json]
 ----
@@ -96,7 +106,7 @@ For guidance on using an MCP server in Claude Desktop, see the link:https://mode
 
 Add the following configuration to your `claude_desktop_config.json` file. You can access `claude_desktop_config.json` from Claude desktop at menu:Claude[Settings > Developer > Edit Config]. You will need to supply your personal API token.
 
-NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI Server.
 
 [source,json]
 ----
@@ -125,7 +135,7 @@ After installing Claude Code, run the following command, substituting your Circl
 claude mcp add circleci-mcp-server -e CIRCLECI_TOKEN=your-circleci-token -e CIRCLECI_BASE_URL=https://circleci.com -- npx -y @circleci/mcp-server-circleci
 ----
 
-NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI Server.
 
 === VS Code
 
@@ -133,7 +143,7 @@ For guidance on setting up and using MCP servers in VS Code, see the link:https:
 
 Add this configuration to your VS Code settings in the location specified in the VS Code documentation. You will need to supply your personal API token.
 
-NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI Server.
 
 [source,json]
 ----
@@ -153,7 +163,7 @@ For guidance on setting up and using an MCP server in Windsurf, see the link:htt
 
 Add the following configuration to your Windsurf `mcp_config.json` file. You will need to supply your personal API token.
 
-NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI server.
+NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are using CircleCI Server.
 
 [source,json]
 ----
@@ -173,6 +183,11 @@ NOTE: The environment variable `CIRCLECI_BASE_URL` is only required if you are u
 
 == Using the CircleCI MCP server
 
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
+
 Once you have installed the CircleCI MCP server, you can use it to diagnose build failures, fix issues, and manage CI pipelines through natural language commands.
 
 Your agent chat facility (which will be different for each AI coding assistant) will have access to the tools that the CircleCI MCP server supports. The supported tools are described in the next section.
@@ -184,6 +199,11 @@ image::guides:ROOT:mcp-server-cursor.png[CircleCI MCP server in Cursor IDE]
 
 == Supported tools
 
+[IMPORTANT]
+====
+This MCP server has been deprecated. The CircleCI MCP server is now built into the CircleCI CLI. Visit link:https://cli.circleci.com[CircleCI CLI] to get started.
+====
+
 This section outlines the abilities that the CircleCI MCP server currently supports. Several tools are described below along with usage examples. For full information on each tool see the link:https://github.com/CircleCI-Public/mcp-server-circleci/blob/main/README.md[README] file in the tool's repository.
 
 You can find further help information for each tool at the point at which you installed the MCP server. For example, using Cursor IDE, under menu:Cursor settings[Tools and MCP] you can hover over a tool name to view in-app help.
@@ -193,17 +213,17 @@ image::guides:ROOT:mcp-tools-cursor.png[CircleCI MCP server tools in Cursor IDE]
 
 CircleCI MCP server tools include the following:
 
-* Get build failure logs (`get_build_failure_logs`)
+* Get build failure logs (`get_build_failure_logs`).
 * Find flaky tests (`find_flaky_tests`)
-* Get latest pipeline status (`get_latest_pipeline_status`)
-* Get job test results (`get_job_test_results`)
+* Get latest pipeline status (`get_latest_pipeline_status`).
+* Get job test results (`get_job_test_results`).
 * Configuration Helper (`config_helper`)
 * Run pipeline (`run_pipeline`)
 * List followed projects (`list_followed_projects`)
 * Run evaluation tests (`run_evaluation_tests`)
 * Rerun workflow (`rerun_workflow`)
-* Download usage API data (`download_usage_api_data`)
-* Find underused resource classes (`find_underused_resource_classes`)
+* Download usage API data (`download_usage_api_data`).
+* Find underused resource classes (`find_underused_resource_classes`).
 * Analyze diff (`analyze_diff`)
 * Rollback Tool (`run_rollback_pipeline`)
 * List component versions (`list_component_versions`)
@@ -275,8 +295,8 @@ The tool provides:
 
 Prerequisites:
 
-* In order to trigger the rollback using a Rollback pipeline, the pipeline must be configured in the project. See the xref:deploy:set-up-rollbacks.adoc[Set up rollbacks] page for help.
-* Deploy markers should be set up for version tracking. See the xref:deploy:configure-deploy-markers.adoc[Configure deploy markers] page for help.
+* In order to trigger the rollback using a Rollback pipeline, the pipeline must be configured in the project. See the xref:deploy:set-up-rollbacks.adoc[Set up Rollbacks] page for help.
+* Set up deploy markers for version tracking. See the xref:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page for help.
 
 == Real-world examples
 
@@ -286,7 +306,7 @@ Here are common scenarios where the CircleCI MCP server can help you and your te
 
 Your pull request build fails and blocks progress. Instead of switching to the CircleCI UI:
 
-. You ask your assistant: "Why did my PR build fail?"
+. You ask your assistant: "Why did my PR build fail?".
 . The MCP server fetches structured logs from the failed job.
 . Your assistant identifies the issue and suggests a fix for you.
 . You apply the fix directly from your IDE and continue working.
@@ -295,7 +315,7 @@ Your pull request build fails and blocks progress. Instead of switching to the C
 
 Your deploy to staging fails right before a release:
 
-. You share the pipeline URL: `Get logs from https://app.circleci.com/pipeline/github/my-org/my-repo/789`
+. You share the pipeline URL: `Get logs from https://app.circleci.com/pipeline/github/my-org/my-repo/789`.
 . The MCP server returns structured logs from the failed job.
 . Your assistant identifies the issue and suggests a solution for you.
 . You apply the fix and complete your deployment.
@@ -304,7 +324,7 @@ Your deploy to staging fails right before a release:
 
 Your team wastes time with unreliable tests:
 
-. You ask: "Find flaky tests in my project"
+. You ask your assistant to find flaky tests in your project.
 . The MCP server analyzes test history to identify problematic tests.
 . Your assistant explains the issues and suggests improvements to you.
 . You fix the tests and improve the reliability of your pipeline.
@@ -313,14 +333,11 @@ Your team wastes time with unreliable tests:
 
 A critical bug is discovered in production after your latest deployment:
 
-. You tell your assistant: "I need to rollback the frontend component in production
-due to a critical bug"
+. You tell your assistant that you need to rollback the frontend component in production due to a critical bug.
 . The assistant lists your followed projects and you select the affected project.
-. The MCP server fetches available component versions and you choose the last known
-good version.
-. You provide the rollback reason: "Critical authentication bug affecting user login"
-. The assistant executes the rollback pipeline, reverting to the stable version
-within minutes.
+. The MCP server fetches available component versions and you choose the last known good version.
+. You provide the rollback reason: "Critical authentication bug affecting user login".
+. The assistant executes the rollback pipeline, reverting to the stable version within minutes.
 
 == Troubleshooting
 
@@ -330,7 +347,7 @@ For general MCP server troubleshooting steps, see the link:https://modelcontextp
 If you experience issues installing the CircleCI MCP server, consider the following troubleshooting steps:
 
 * Ensure your personal API token is valid and has the necessary permissions.
-* If you are using CircleCI server, check that the CircleCI base URL is correct.
+* If you are using CircleCI Server, check that the CircleCI base URL is correct.
 
 === Not seeing an up-to-date list of tools?
 

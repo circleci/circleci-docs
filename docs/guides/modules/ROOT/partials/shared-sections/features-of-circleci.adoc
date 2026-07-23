@@ -28,5 +28,5 @@ ifndef::server[]
 
 Visualize and control your deployments with CircleCI deploys. Deployments to Kubernetes are supported.
 
-Start with the xref:guides:deploy:deployment-overview.adoc[Deploys overview] for more information.
+Start with the xref:guides:deploy:deployment-overview.adoc[Deploys Overview] for more information.
 endif::server[]
