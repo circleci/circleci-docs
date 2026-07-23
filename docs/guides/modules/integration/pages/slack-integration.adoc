@@ -172,7 +172,7 @@ To stop personal Slack notifications, select **Disconnect** next to the linked w
 
 * **The link fails after you select Allow in Slack.** Your Slack workspace or organization may have Sign in with Slack disabled, or may require admin approval for apps that request the Sign in with Slack identity scope. Ask a Slack workspace admin or Org Owner to enable Sign in with Slack for the CircleCI app and try again.
 * **CircleCI shows a "Slack account already linked" error.** The Slack identity you authenticated with is already connected to a different CircleCI account. Sign in to that account and unlink the Slack identity before linking it here.
-* **The Connect button is unavailable or shows "Slack not installed."** An organization administrator must install the CircleCI Slack app before you can link your identity. See <<install-the-slack-app>> above.
+* **The Connect button is unavailable or shows "Slack not installed."** An organization administrator must install the CircleCI Slack app before you can link your identity. See <<install-the-slack-app,Install the Slack app>> above.
 
 == Example Slack notifications
 
