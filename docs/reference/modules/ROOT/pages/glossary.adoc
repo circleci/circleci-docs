@@ -92,7 +92,7 @@ Organization-level rules that govern which configuration elements are required, 
 [#configuration]
 == Configuration
 
-The YAML file that defines your entire CI/CD process as code. The configuration file declares the <<pipeline>>, <<workflow,workflows>>, <<job,jobs>>, and <<step,steps>> that run when work is triggered. It is most often stored at `.circleci/config.yml` in the root of a repository, but a project is not limited to that name or location and can use a configuration file stored elsewhere. See the xref:guides:getting-started:config-intro.adoc[Configuration Introduction] page and the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
+The YAML file that defines your entire CI/CD process as code. The configuration file declares the <<pipeline>>, <<workflow,workflows>>, <<job,jobs>>, and <<step,steps>> that run when work is triggered. It is most often stored at `.circleci/config.yml` in the root of a repository. A project is not limited to that name or location, though, and can use a configuration file stored elsewhere. See the xref:guides:getting-started:config-intro.adoc[Configuration Introduction] page and the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
 
 [#container]
 == Container
@@ -127,7 +127,7 @@ A <<trigger>> that runs a pipeline in one repository when an event, such as a ta
 [#custom-image]
 == Custom image
 
-A Docker <<image>> that you build and maintain yourself, typically from a Dockerfile stored in a registry, for use with the <<docker-executor>> when convenience images do not meet your needs. See the xref:guides:execution-managed:custom-images.adoc[Using Custom-Built Docker Images] page.
+A Docker <<image>> that you build and maintain yourself, typically from a Dockerfile stored in a registry. Use a custom image with the <<docker-executor>> when convenience images do not meet your needs. See the xref:guides:execution-managed:custom-images.adoc[Using Custom-Built Docker Images] page.
 
 [#custom-webhook]
 == Custom webhook
@@ -273,7 +273,7 @@ An additional layer of account security that requires a second verification fact
 [#namespace]
 == Namespace
 
-A unique, immutable identifier that groups an organization's resources under a single owner. Each user or organization claims one namespace, typically the lowercase VCS organization name. The same namespace is used to group your registry <<orbs>> by author and to identify your <<self-hosted-runner,self-hosted runners>>, where it is combined with a resource-class name to form the full runner <<resource-class>> label. See the xref:orbs:use:orb-concepts.adoc[Orb Concepts] and xref:guides:execution-runner:runner-concepts.adoc[Runner Concepts] pages.
+A unique, immutable identifier that groups an organization's resources under a single owner. Each user or organization claims one namespace, typically the lowercase VCS organization name. The same namespace is used to group your registry <<orbs>> by author and to identify your <<self-hosted-runner,self-hosted runners>>. It is combined with a resource-class name to form the full runner <<resource-class>> label. See the xref:orbs:use:orb-concepts.adoc[Orb Concepts] and xref:guides:execution-runner:runner-concepts.adoc[Runner Concepts] pages.
 
 [badge="Server v4+"]
 [#nomad]
@@ -442,6 +442,11 @@ A single executable action within a <<job>>, such as a `run`, `checkout`, `save_
 
 A <<workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the rest of the pipeline. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
+[#tag-filter]
+== Tag filter
+
+A <<workflow>> configuration option that controls which tags run a given <<job>>. CircleCI does not run workflows for tags unless you explicitly specify tag filters, using `only` and `ignore` keys with exact tag names or regular expressions. See the xref:reference:ROOT:configuration-reference.adoc#tags[`tags`] entry in the Configuration Reference. Compare with <<branch-filter>>.
+
 [badge="Beta"]
 [#test-impact-analysis]
 == Test impact analysis
@@ -496,4 +501,4 @@ A set of rules that defines a collection of <<job,jobs>> and their run order. Wo
 [#workspace]
 == Workspace
 
-A workflow-aware storage mechanism that passes data between <<job,jobs>> in the same <<workflow>>. A job persists files with `persist_to_workspace`, and downstream jobs access them with `attach_workspace`. On CircleCI Cloud, workspace storage is retained for 15 days by default, which is also the maximum; you can set a shorter period (1 to 15 days) under menu:Plan[Usage Controls] in the web app. See the xref:guides:orchestrate:workspaces.adoc[Using Workspaces to Share Data Between Jobs] page. Compare with <<cache>> and <<artifact>>.
+A workflow-aware storage mechanism that passes data between <<job,jobs>> in the same <<workflow>>. A job persists files with `persist_to_workspace`, and downstream jobs access them with `attach_workspace`. On CircleCI Cloud, workspace storage is retained for 15 days by default, which is also the maximum. You can set a shorter period (1 to 15 days) under menu:Plan[Usage Controls] in the web app. See the xref:guides:orchestrate:workspaces.adoc[Using Workspaces to Share Data Between Jobs] page. Compare with <<cache>> and <<artifact>>.
