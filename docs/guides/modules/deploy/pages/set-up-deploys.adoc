@@ -461,7 +461,7 @@ workflows:
           requires:
             - deploy-component:
               - canceled
-          filters: pipeline.git.branch == "main" # run the job on the main branch only
+          filters: pipeline.git.branch == "main" # only run the cancel-deploy job on the main branch
 ----
 
 == Next steps

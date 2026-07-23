@@ -98,8 +98,8 @@ workflows:
       - build
       - deploy:
           requires:
-            - build # only run deploy-via-git job if the build job has completed
-          filters: pipeline.git.branch == "main" # run the job on the main branch only
+            - build # only run the deploy job once the build job has completed
+          filters: pipeline.git.branch == "main" # only run the deploy job on the main branch
 ```
 
 NOTE: Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the link:https://devcenter.heroku.com/articles/github-integration#automatic-deploys[Heroku documentation] for details.

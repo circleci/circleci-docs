@@ -3898,13 +3898,13 @@ workflows:
   build-deploy:
     jobs:
       - build:
-          filters: pipeline.git.branch != "develop" and not (pipeline.git.branch matches /feature-.*/) # only run on branches that are not develop or feature- prefixed
+          filters: pipeline.git.branch != "develop" and not (pipeline.git.branch matches /feature-.*/) # only run the build job on branches other than develop and any branch starting with feature-
       - deploy-stage:
           requires:
             - build
-          filters: pipeline.git.branch == "staging" # only run on the staging branch
+          filters: pipeline.git.branch == "staging" # only run the deploy-stage job on the staging branch
       - deploy-prod:
           requires:
             - build
-          filters: pipeline.git.branch == "main" # only run on the main branch
+          filters: pipeline.git.branch == "main" # only run the deploy-prod job on the main branch
 ----

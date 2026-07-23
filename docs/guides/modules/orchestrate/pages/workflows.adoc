@@ -658,9 +658,9 @@ workflows:
       - test_dev:
           filters: pipeline.git.branch == "dev" or pipeline.git.branch matches /^user-.*/ # using regex requires the entire branch to match
       - test_stage:
-          filters: pipeline.git.branch == "stage" # only run the workflow on the stage branch
+          filters: pipeline.git.branch == "stage" # only run the test_stage job on the stage branch
       - test_pre-prod:
-          filters: pipeline.git.branch matches /^pre-prod(?:-.+)?$/ # only run the workflow on any branch that starts with `pre-prod` including any suffix added to the branch name using a hyphen
+          filters: pipeline.git.branch matches /^pre-prod(?:-.+)?$/ # only run the test_pre-prod job on any branch that matches the pattern
 ----
 
 This setup can be illustrated as follows:
@@ -697,7 +697,7 @@ workflows:
   tagged-build:
     jobs:
       - build:
-          filters: pipeline.git.tag matches /^v.*/ # only run the workflow on any tag that starts with `v`
+          filters: pipeline.git.tag matches /^v.*/ # only run the build job on tags starting with `v`
 ----
 
 ---
@@ -713,11 +713,11 @@ workflows:
   build-deploy:
     jobs:
       - build:
-          filters: pipeline.git.branch or pipeline.git.tag # only run the workflow on any branch or tag
+          filters: pipeline.git.branch or pipeline.git.tag # run the build job on every branch and every tag
       - deploy:
           requires:
             - build
-          filters: pipeline.git.branch or (pipeline.git.tag matches /^v.*/) # only run the workflow on any branch or tag that starts with `v`
+          filters: pipeline.git.branch or (pipeline.git.tag matches /^v.*/) # run the deploy job on every branch, and on tags starting with `v`
 ----
 
 ---
@@ -734,15 +734,15 @@ workflows:
   build-test-deploy:
     jobs:
       - build:
-          filters: pipeline.git.branch or (pipeline.git.tag matches /^config-test.*/) # only run the workflow on any branch or tag that starts with `config-test`
+          filters: pipeline.git.branch or (pipeline.git.tag matches /^config-test.*/) # run the build job on every branch, and on tags starting with `config-test`
       - test:
           requires:
             - build
-          filters: pipeline.git.branch or (pipeline.git.tag matches /^config-test.*/) # only run the workflow on any branch or tag that starts with `config-test`
+          filters: pipeline.git.branch or (pipeline.git.tag matches /^config-test.*/) # run the test job on every branch, and on tags starting with `config-test`
       - deploy:
           requires:
             - test
-          filters: pipeline.git.tag matches /^config-test.*/ # only run the workflow on any tag that starts with `config-test`
+          filters: pipeline.git.tag matches /^config-test.*/ # only run the deploy job on tags starting with `config-test`
 ----
 
 ---
@@ -759,7 +759,7 @@ workflows:
   build: # This workflow will run on all branches except 'main' and will not run on tags
     jobs:
       - test:
-          filters: pipeline.git.branch != "main" # only run the workflow on any branch that is not the main branch
+          filters: pipeline.git.branch != "main" # only run the test job on any branch other than main
   staging: # This workflow will only run on 'main' and will not run on tags
     jobs:
       - test:

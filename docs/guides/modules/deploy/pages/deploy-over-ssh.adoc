@@ -60,7 +60,7 @@ workflows:
       - deploy:
           requires:
             - build # only deploy once build job has completed
-          filters: pipeline.git.branch == "main" # only deploy on the main branch
+          filters: pipeline.git.branch == "main" # only run the deploy job on the main branch
 ```
 
 [#track-deployments-with-deploy-markers]

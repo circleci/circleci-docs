@@ -54,7 +54,7 @@ workflows: # Define a Workflow running the build job, then the deploy job
       - deploy:
           requires:
             - build # Only run deploy job once the build job has completed
-          filters: pipeline.git.branch == "main" # only deploy on the main branch
+          filters: pipeline.git.branch == "main" # only run the deploy job on the main branch
 
 jobs: # Define the build and deploy jobs
   build:
@@ -115,7 +115,7 @@ workflows: # Define a Workflow running the build job, then the deploy job
         - deploy:
             requires:
             - build
-            filters: pipeline.git.branch == "main" # only deploy on the main branch
+            filters: pipeline.git.branch == "main" # only run the deploy job on the main branch
 
 jobs:
     build:

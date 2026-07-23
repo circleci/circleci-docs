@@ -51,7 +51,7 @@ workflows:
   tagged-build:
     jobs:
       - publish:
-          filters: pipeline.git.tag matches /v[0-9]+(\.[0-9]+)*/ # run the job on versioned tags only
+          filters: pipeline.git.tag matches /^v[0-9]+(\.[0-9]+)*$/ # only run the publish job on version tags
 ```
 
 [#create-new-version]
