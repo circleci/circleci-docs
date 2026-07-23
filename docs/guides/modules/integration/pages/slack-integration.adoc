@@ -137,7 +137,7 @@ When you link your Slack identity, CircleCI tags you in a project's Slack notifi
 
 === Prerequisites
 
-* Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app>> above.
+* Your organization must have the CircleCI Slack app installed. See <<install-the-slack-app,Install the Slack app>> above.
 * Your Slack workspace must allow **Sign in with Slack**. A Slack workspace admin can confirm or enable this from **Admin** > **Apps and workflows** > **App Management Settings** in Slack. If your organization has an Apps organization policy set at the Slack org level, an Org Owner may also need to approve the CircleCI app's use of the Sign in with Slack identity scope.
 
 === How Slack identity linking works
