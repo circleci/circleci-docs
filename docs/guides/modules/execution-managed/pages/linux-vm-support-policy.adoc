@@ -27,18 +27,6 @@ Gen2 resource classes are available for the machine executor on CircleCI Cloud. 
 
 Gen2 resource classes are not available on CircleCI Server.
 
-[#gen3-support]
-== Gen3 support
-
-Gen3 resource classes are available for the machine executor on CircleCI Cloud. The gen3 support policy covers the following Ubuntu LTS versions:
-
-* Ubuntu 22.04
-* Ubuntu 24.04
-* Ubuntu 26.04
-
-
-Gen3 resource classes are not available on CircleCI Server.
-
 [#tagging]
 == Tagging
 
