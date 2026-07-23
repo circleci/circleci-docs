@@ -87,7 +87,7 @@
 ** macOS
 *** xref:execution-managed:using-macos.adoc[Using the macOS execution environment]
 *** xref:execution-managed:hello-world-macos.adoc[Configuring a macOS app]
-*** xref:execution-managed:ios-codesigning.adoc[iOS code signing]
+*** xref:execution-managed:ios-codesigning.adoc[iOS and macOS code signing]
 ** Windows
 *** xref:execution-managed:using-windows.adoc[Using the Windows execution environment]
 *** xref:execution-managed:hello-world-windows.adoc[Hello world Windows]
