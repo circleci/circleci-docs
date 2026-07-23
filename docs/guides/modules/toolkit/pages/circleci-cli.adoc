@@ -15,7 +15,7 @@ Follow these steps to authenticate and connect the CLI to your CircleCI project.
 
 . *Install the CircleCI CLI:* Visit the link:https://cli.circleci.com/[CircleCI CLI] page for installation instructions.
 +
-If you currently have the legacy stable release installed (v0.1.x) you should uninstall this before installing the new preview version, for example, `brew uninstall circleci` or the appropriate command for your operating system and/or package manager.
+If you have the legacy stable release (v0.1.x) installed, uninstall it before installing the new preview version. For example, run `brew uninstall circleci`, or use the appropriate command for your operating system and package manager.
 
 . *Log in to CircleCI:*
 +
