@@ -122,7 +122,6 @@ Organization administrators and contributors can manage the Slack integration fr
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
 
-[badge="Beta"]
 == Link your Slack identity
 
 Linking your Slack identity connects your CircleCI user account to your identity in a Slack workspace that has the CircleCI Slack app installed. Linking your identity enables direct message notifications, actor tagging, and interactivity such as approving a held workflow directly from Slack.
