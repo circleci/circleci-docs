@@ -26,6 +26,7 @@
 [Ww]alkthrough
 [Aa]ctions
 ACR
+AKS
 Aeternity
 [Aa]ir-gapped
 Airtable
@@ -104,6 +105,7 @@ Coinbase
 [Cc]oncurrency
 [Cc]oncurrencies
 \bConda\b
+[Cc]onfig\.yaml
 [Cc]onfigs?\b
 ConfigMap
 /b[Cc]ontainer [Rr]egistry/b
@@ -214,6 +216,8 @@ known_hosts
 Kotlin
 Krew
 kubectl
+KubeVirt
+kubevirt-nodegroup.yaml
 [Kk]ubelets?
 Kubernetes
 LambdaTest
@@ -231,6 +235,7 @@ manpage
 MCP server
 MFEs?
 [Mm]iddleware
+[Mm]isconfigurations?
 minitest
 [Mm]ultithreading
 [Mm]ultiline
@@ -284,6 +289,7 @@ PVCs?
 Python
 pytest
 RAM
+RBAC
 RDoc
 \bReact Native\b
 READMEs?
@@ -305,6 +311,7 @@ RSpec
 Rubies
 Ruby
 [Rr]unner
+\bRunner Provisioner\b
 [Rr]untimes?
 S3
 SAML
@@ -312,6 +319,7 @@ SAML
 SSO
 [Ss]afelist
 \bSauce Labs\b
+[Ss]chedulable
 \bScale Plan\b
 SDK
 seccomp
