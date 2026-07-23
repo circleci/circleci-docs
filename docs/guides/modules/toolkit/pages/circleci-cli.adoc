@@ -17,6 +17,8 @@ The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings
 
 == Install, configure, and use the CircleCI CLI
 
+anchor:installation[]
+anchor:configure-the-cli[]
 For full details on how to install, configure, and use the CircleCI CLI, see the link:https://cli.circleci.com/[CircleCI CLI] page.
 
 You can update and uninstall the CircleCI CLI using the appropriate method for your package manager.
@@ -95,7 +97,7 @@ You can find the full CircleCI CLI reference at link:https://cli.circleci.com/re
 
 You can also access reference information directly in your terminal in three ways:
 
-* Add `--help` to any command at any depth to see its description, flags, and examples: `--help`
+* Add `--help` to any command at any depth to see its description, flags, and examples:
 +
 [,shell]
 ----
@@ -141,6 +143,8 @@ The CircleCI environment CLI:: A specialized command-line interface that retriev
 
 The Chunk CLI:: A developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
 
+[#next-steps]
 == Next steps
 
-#Add links to how-to pages#
+* xref:cli-migration-guide.adoc[CLI Migration Guide]
+* xref:how-to-use-the-circleci-local-cli.adoc[How to Use the CircleCI Local CLI]
