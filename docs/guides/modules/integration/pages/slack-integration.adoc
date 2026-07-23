@@ -162,7 +162,7 @@ You can also link or unlink your Slack identity from menu:User Settings[Notifica
 
 include::ROOT:partial$app-navigation/steps-to-user-settings.adoc[]
 . Select link:https://app.circleci.com/settings/user/notifications[Notifications] from the sidebar.
-. Find your organization in the table and select **Connect** in the Slack column.
+. Find your organization in the table and select btn:[Connect] in the Slack column.
 
 === Unlink your Slack identity
 
