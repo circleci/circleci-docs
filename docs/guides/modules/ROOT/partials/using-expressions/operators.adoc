@@ -18,7 +18,7 @@
 
 | Equality
 | `matches`
-| String pattern matching, `"hello world" matches /hello.*"/` evaluates as `true`. It is an error to use a non-string type as an operand.
+| String pattern matching, `"hello world" matches /hello.*/` evaluates as `true`. It is an error to use a non-string type as an operand.
 
 | Numeric comparison
 | `>=`, `>`, `<=`, `<`

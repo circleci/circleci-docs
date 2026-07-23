@@ -2618,6 +2618,8 @@ workflows:
                only:
                  - main
                  - beta
+     jobs:
+       - test
 ----
 
 '''
@@ -2643,6 +2645,8 @@ workflows:
                only:
                  - main
                  - beta
+     jobs:
+       - test
 ----
 
 '''
@@ -2677,6 +2681,8 @@ workflows:
                only:
                  - main
                  - beta
+     jobs:
+       - test
 ----
 
 '''
@@ -2711,6 +2717,8 @@ workflows:
                only:
                  - main
                  - beta
+     jobs:
+       - test
 ----
 
 '''
