@@ -1,13 +1,241 @@
-= Set up code signing for iOS projects
+= Set up code signing for iOS and macOS projects
 :page-platform: Cloud
-:page-description: How to set up code signing for an iOS app
+:page-description: How to set up code signing for iOS and macOS apps
 :experimental:
 
-This document describes the guidelines for setting up code signing
-for your iOS project on CircleCI.
+This document describes how to set up code signing for your iOS and
+macOS projects on CircleCI. The recommended method is the *CircleCI code
+signing API*. You upload your Apple signing certificates and provisioning
+profiles to CircleCI, and it installs them onto the macOS executor at
+build time. This method works for both iOS and macOS.
+
+If you would rather store and manage your certificates yourself, or you
+already use it, <<fastlane-match,Fastlane Match>> is available as an
+alternative.
+
+NOTE: CircleCI supports the code signing API (recommended) and Fastlane Match. Other methods may be used, but are not guaranteed to work and are unsupported.
+
+[#code-signing-api]
+== Code signing with the CircleCI API
+
+With the CircleCI code signing API you upload your Apple signing
+certificate (`.p12`) and any required provisioning profiles once, then
+reference the resulting _signing bundle_ by name in your job. At build
+time, CircleCI installs the certificate and profiles into a temporary
+keychain on the macOS executor and removes them when the job finishes.
+The same endpoints and configuration are used for both iOS and macOS.
+
+[#api-prerequisites]
+=== Prerequisites
+
+* *Apple assets*: Your `.p12` certificate file and its password, and your provisioning profiles (if required for your certificate type, see <<supported-certificate-types>>).
+* *CircleCI API token*: A personal API token to authenticate your requests. See xref:guides:toolkit:managing-api-tokens.adoc[Managing API Tokens].
+* *Organization ID*: Your CircleCI organization ID. See xref:guides:toolkit:how-to-find-ids.adoc#find-an-organization-id[How to Find IDs].
+
+[#api-upload-certificate]
+=== 1. Upload a certificate
+
+Send a `POST` request to upload your certificate. The `cert_blob` is the
+Base64-encoded contents of your `.p12` file. On macOS you can generate it
+with `base64 -i <.p12-file> -o -`.
+
+[,shell]
+----
+curl -X POST https://circleci.com/api/v2/certificates \
+  -H "Circle-Token: <your-circleci-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "org_id": "<org-id>",
+    "cert_file_name": "<.p12-file>",
+    "cert_blob": "<.p12-base64-encoded-blob>",
+    "cert_password": "<your-cert-password>"
+  }'
+----
+
+The response returns the certificate ID:
+
+[,json]
+----
+{"id":"<cert-id>"}
+----
+
+[#api-create-signing-bundle]
+=== 2. Create a signing bundle
+
+A signing bundle maps a certificate to its provisioning profiles. Send a
+`POST` request, using the `cert-id` returned in the previous step. Each
+profile `blob` is the Base64-encoded contents of the profile file.
+
+NOTE: Signing bundle names must be unique within your organization, be at most 50 characters, and contain only letters, numbers, and hyphens (no underscores or other characters). This matches the naming rules enforced when the bundle is referenced in your configuration. See <<api-constraints>>.
+
+[,shell]
+----
+curl -X POST https://circleci.com/api/v2/signing-configs \
+  -H "Circle-Token: <your-circleci-api-token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "<signing-bundle-name>",
+    "org_id": "<org-id>",
+    "cert_id": "<cert-id-from-previous-request>",
+    "provisioning_profiles": [
+      {
+        "file_name": "<provisioning-profile-file>",
+        "blob": "<provisioning-profile-base64-blob>"
+      }
+    ]
+  }'
+----
+
+The response returns the signing bundle ID:
+
+[,json]
+----
+{"id":"<signing-bundle-id>"}
+----
+
+[#api-update-config]
+=== 3. Reference the signing bundle in your configuration
+
+Add a `code_signing` key to your `macos` executor listing the signing
+bundles to install, and add the `install_signing_bundle` step before you
+build. CircleCI installs the referenced bundles onto the executor.
+
+[,yaml]
+----
+version: 2.1
+
+jobs:
+  build-and-sign:
+    macos:
+      xcode: 15.2.0
+      # List the signing bundles to install from your organization
+      code_signing:
+        - <signing-bundle-name>
+        # Add more bundles as needed
+        - <other-signing-bundle-name>
+    steps:
+      # Installs the certificates and profiles from the bundles above
+      - install_signing_bundle
+      - checkout
+      - run:
+          name: Build and archive
+          command: xcodebuild archive -scheme <your-xcode-scheme> -configuration Release
+----
+
+[#api-what-happens]
+=== What happens during the build
+
+When the `install_signing_bundle` step runs, CircleCI:
+
+* Creates a temporary keychain on the executor.
+* Imports the certificate and installs the provisioning profiles into the correct locations.
+* Configures the keychain so Xcode can use the signing key without a password prompt.
+* Removes the keychain and profiles when the job completes.
+
+[#supported-certificate-types]
+=== Supported certificate types
+
+The certificate's Subject Common Name must begin with one of the
+following prefixes, or the upload is rejected. Whether a signing bundle
+requires provisioning profiles depends on the certificate type.
+
+[.table-scroll]
+--
+[cols="2,1,2", options="header"]
+|===
+| Common Name prefix | Platform | Provisioning profiles
+
+| `Apple Distribution:`, `Apple Development:` | iOS and macOS | At least one required
+| `iPhone Distribution:`, `iPhone Developer:` | iOS | At least one required
+| `3rd Party Mac Developer Application:` (Mac App Store) | macOS | At least one required
+| `Mac Developer:` | macOS | At least one required
+| `Developer ID Application:`, `Developer ID Installer:` | macOS | None (profiles are rejected)
+| `3rd Party Mac Developer Installer:` | macOS | None (profiles are rejected)
+|===
+--
+
+[#api-manage-assets]
+=== View and delete certificates and signing bundles
+
+List the certificates stored for your organization:
+
+[,shell]
+----
+curl -H "Circle-Token: <your-circleci-api-token>" \
+  "https://circleci.com/api/v2/certificates?org-id=<org-id>"
+----
+
+List the signing bundles created for your organization:
+
+[,shell]
+----
+curl -H "Circle-Token: <your-circleci-api-token>" \
+  "https://circleci.com/api/v2/signing-configs?org-id=<org-id>"
+----
+
+Delete a certificate. Deletion fails with an HTTP 409 response if any
+signing bundle still references the certificate, so delete or update
+those bundles first.
+
+[,shell]
+----
+curl -X DELETE -H "Circle-Token: <your-circleci-api-token>" \
+  https://circleci.com/api/v2/certificates/<cert-id>
+----
+
+Delete a signing bundle:
+
+[,shell]
+----
+curl -X DELETE -H "Circle-Token: <your-circleci-api-token>" \
+  https://circleci.com/api/v2/signing-configs/<signing-bundle-id>
+----
+
+[#api-placeholders]
+=== Placeholders
+
+Replace these placeholders in the commands and configuration above with your own values.
+
+`<cert-id>`:: The unique identifier for a certificate, returned in the API response after a successful certificate upload.
+`<cert-id-from-previous-request>`:: The specific `cert_id` returned in Step 1, used to associate that certificate with a signing bundle.
+`<org-id>`:: The unique UUID for your CircleCI organization.
+`<other-signing-bundle-name>`:: An optional secondary signing configuration name (for example, `staging-signing`) if your job requires more than one certificate or set of profiles.
+`<.p12-base64-encoded-blob>`:: The raw binary content of your `.p12` certificate file converted into a Base64-encoded string. On macOS, generate it with `base64 -i <.p12-file> -o -`.
+`<.p12-file>`:: The filename of your Apple signing certificate (iOS or macOS), exported from the Keychain Access app on macOS as a `.p12` file.
+`<provisioning-profile-base64-blob>`:: The raw binary content of your provisioning profile file converted into a Base64-encoded string. On macOS, generate it with `base64 -i <provisioning-profile-file> -o -`.
+`<provisioning-profile-file>`:: The filename of the Apple provisioning profile associated with the app's bundle ID. Use a `.mobileprovision` file for iOS, or a `.provisionprofile` file for macOS, usually downloaded from the Apple Developer Portal.
+`<signing-bundle-id>`:: The unique identifier for a signing bundle, returned in the API response after a successful bundle creation.
+`<signing-bundle-name>`:: A descriptive name for this set of credentials (for example, `production-signing`) that you reference in your configuration.
+`<your-cert-password>`:: The password created when the `.p12` file was exported from Keychain Access.
+`<your-circleci-api-token>`:: A personal API token used to authenticate your requests to the CircleCI API.
+`<your-xcode-scheme>`:: The name of the specific build scheme you want to archive (for example, `MyApp` or `Runner`). Found in Xcode under *Product > Scheme*, or by running `xcodebuild -list`.
+
+[#api-constraints]
+=== Constraints
+
+[.table-scroll]
+--
+[cols="2,3", options="header"]
+|===
+| Field | Constraint
+
+| `cert_file_name` | Maximum 40 characters
+| Signing bundle `name` | Unique per organization, maximum 50 characters, letters, numbers, and hyphens only
+| `provisioning_profiles` | Maximum 100 profiles per bundle
+| Provisioning profile `file_name` | Maximum 40 characters
+|===
+--
+
+[#fastlane-match]
+== Alternative: code signing with Fastlane Match
+
+If you prefer to store and manage your own certificates and provisioning
+profiles, you can use Fastlane Match instead of the CircleCI code signing
+API. The following sections describe the Fastlane Match setup for iOS
+projects.
 
 [#basic-configuration-of-ios-projects]
-== Basic configuration of iOS projects
+=== Basic configuration of iOS projects
 
 This document assumes that you already have an iOS project building
 correctly on CircleCI using our recommended best practices. It also assumes that you use Bundler and
@@ -17,10 +245,8 @@ your repository.
 If you have not yet configured your iOS project on CircleCI,
 you can find the configuration instructions in the xref:test:testing-ios.adoc[Testing iOS Applications Document].
 
-NOTE: CircleCI only officially supports Fastlane Match for code signing. Other methods may be used, but are not guaranteed to work and are unsupported.
-
 [#setting-up-fastlane-match]
-== Set up Fastlane Match
+=== Set up Fastlane Match
 
 Code signing must be configured to generate
 ad-hoc distributions of your app and App Store builds.
@@ -42,7 +268,7 @@ To set up Fastlane Match:
 . Then, run `bundle exec fastlane match adhoc` to generate and install the Ad-hoc distribution certificates and profiles.
 
 [#preparing-your-xcode-project-for-use-with-fastlane-match]
-=== Prepare your Xcode project for use with Fastlane Match
+==== Prepare your Xcode project for use with Fastlane Match
 
 Before setting up Match you must ensure that the code signing
 settings in your Xcode project are configured as follows:
@@ -51,7 +277,7 @@ settings in your Xcode project are configured as follows:
 * *Signing & Capabilities \-> Provisioning Profile* choose the appropriate profile created by Fastlane Match (for example, `match adhoc com.circleci.helloworld`).
 
 [#adding-match-to-the-fastlane-lane]
-=== Add Match to the Fastlane lane
+==== Add Match to the Fastlane lane
 
 On CircleCI, Fastlane Match will need to be run every time you build and sign your app. The easiest way to do this is to add the `match` action to the lane which builds your app.
 
@@ -82,7 +308,7 @@ end
 ----
 
 [#adding-a-user-key-to-the-circleci-project]
-=== Add a user key to the CircleCI project
+==== Add a user key to the CircleCI project
 
 To enable Fastlane Match to download the certificates and the keys from GitHub, add a user key to the CircleCI project. This key needs access to both the project repository and the certificates / keys repository.
 
@@ -115,7 +341,7 @@ After you have added a user key, CircleCI will be able to checkout both the
 project repository and the Fastlane Match repository from GitHub.
 
 [#adding-the-match-passphrase-to-the-project]
-=== Add the Match passphrase to the project
+==== Add the Match passphrase to the project
 
 To enable Fastlane Match to decrypt the certificates and profiles stored in the GitHub repository, add the encryption passphrase to the CircleCI project's environment variables. Use the passphrase that you configured in the Match setup step.
 
@@ -123,7 +349,7 @@ In the project settings on CircleCI, click on *Environment Variables* and add th
 encrypted at rest.
 
 [#invoking-the-fastlane-test-lane-on-circleci]
-=== Build and code-sign the app on CircleCI
+==== Build and code-sign the app on CircleCI
 
 After you have configured Match and added its invocation into the appropriate
 lane, you can run that lane on CircleCI. The following `config.yml` will
@@ -159,7 +385,7 @@ workflows:
 ----
 
 [#sample-configuration-files]
-== Sample configuration files
+=== Sample configuration files
 
 The best practice configuration for setting up code signing for iOS projects is as follows:
 
@@ -236,7 +462,7 @@ workflows:
 By setting `FL_OUTPUT_DIR:`, that will tell Fastlane to output the Xcode and Fastlane logs to that directory, so they get uploaded as artifacts for ease in troubleshooting.
 
 [#example-application-on-github]
-== Example application on GitHub
+=== Example application on GitHub
 
 See the link:https://github.com/CircleCI-Public/circleci-demo-ios[`circleci-demo-ios` GitHub repository]
 for an example of how to configure code signing for iOS apps using
