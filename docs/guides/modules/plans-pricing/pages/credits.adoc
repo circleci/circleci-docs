@@ -40,7 +40,7 @@ If you build on macOS, we also offer organizations on our Free Plan 30,000 credi
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
-If your jobs use the Docker executor and you find that they are "preparing" for quite some time, you may be able to reduce the delay by using more recent Docker images. See xref:execution-managed:building-docker-images.adoc[Building Docker Images] for more information.
+If your jobs use the Docker executor and stay in the "preparing" state for a while, using more recent Docker images may reduce the delay. See xref:execution-managed:building-docker-images.adoc[Building Docker Images] for more information.
 
 [#questions-and-comments]
 == Questions and comments
