@@ -7,6 +7,11 @@ This page walks through connecting an AI coding assistant to CircleCI's hosted M
 
 To connect to the CircleCI CLI's built-in MCP instead, see xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
 
+[NOTE]
+====
+CircleCI previously offered a local MCP server that you installed with `npx` and configured with a personal API token. That server is deprecated. If your AI assistant still has it configured, remove it before connecting to the hosted MCP server and/or the CircleCI CLI MCP. For example, run `claude mcp remove circleci-mcp-server` in Claude Code.
+====
+
 == Prerequisites
 
 Before connecting to the CircleCI MCP server, ensure you have the following:
@@ -34,14 +39,15 @@ Claude Code::
 --
 For guidance on setting up MCP servers in Claude Code, see the link:https://code.claude.com/docs/en/mcp[Claude Code documentation].
 
-Use the following command:
-
+. Use the following command to add the CircleCI MCP server to Claude Code:
++
 [source,console]
 ----
 $ claude mcp add --transport http circleci-mcp-server https://mcp.circleci.com/v1/mcp
 ----
 
-Then run `/mcp` inside Claude Code, select `circleci-mcp-server`, and complete the OAuth2 sign-in in your browser.
+. Run the `/mcp` command inside Claude Code, select `circleci-mcp-server`.
+. Select `Authenticate` to complete the OAuth2 sign-in in your browser.
 --
 Claude Desktop and claude.ai::
 +
@@ -58,9 +64,11 @@ Cursor::
 --
 For guidance on setting up MCP servers in Cursor, see the link:https://cursor.com/docs[Cursor documentation].
 
-Select the following link to add the CircleCI MCP server to Cursor automatically: link:cursor://anysphere.cursor-deeplink/mcp/install?name=circleci&config=eyJ1cmwiOiJodHRwczovL21jcC5jaXJjbGVjaS5jb20vdjEvbWNwIn0=[Add CircleCI MCP server to Cursor].
+. Select the following link to add the CircleCI MCP server to Cursor automatically: link:cursor://anysphere.cursor-deeplink/mcp/install?name=circleci&config=eyJ1cmwiOiJodHRwczovL21jcC5jaXJjbGVjaS5jb20vdjEvbWNwIn0=[Add CircleCI MCP server to Cursor]. Using this link takes you to your Cursor settings and opens an installation prompt for the MCP server. If you do not see the installation prompt in Cursor, scroll down.
+. Select *Install*. The CircleCI MCP will now be displayed with a "Needs authentication" label and a button to connect.
+. Select *Connect* to start the OAuth2 flow to CircleCI through your browser.
 
-Or, add the following configuration to your Cursor `mcp.json` file:
+Alternatively, add the following configuration to your Cursor `mcp.json` file:
 
 [source,json]
 ----
@@ -72,6 +80,7 @@ Or, add the following configuration to your Cursor `mcp.json` file:
   }
 }
 ----
+
 --
 VS Code::
 +

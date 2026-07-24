@@ -8,7 +8,7 @@ CircleCI's MCP servers enable you to diagnose build failures, fix issues, and ma
 
 [NOTE]
 ====
-CircleCI previously offered a local MCP server that you installed with `npx` and configured with a personal API token. That server is deprecated. If your AI assistant still has it configured, remove it before connecting to the hosted MCP server and/or the CircleCI CLI MCP.
+CircleCI previously offered a local MCP server that you installed with `npx` and configured with a personal API token. That server is deprecated. If your AI assistant still has it configured, remove it before connecting to the hosted MCP server and/or the CircleCI CLI MCP. For example, run `claude mcp remove circleci-mcp-server` in Claude Code.
 ====
 
 == Introduction
