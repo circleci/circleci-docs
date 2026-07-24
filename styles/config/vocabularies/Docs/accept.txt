@@ -29,6 +29,7 @@ ACR
 Aeternity
 [Aa]ir-gapped
 Airtable
+AKS
 /bAmazon SageMaker/b
 Android
 [Aa]llowlist?
@@ -216,6 +217,8 @@ Krew
 kubectl
 [Kk]ubelets?
 Kubernetes
+KubeVirt
+KubeVirt's
 LambdaTest
 Lein
 Leiningen
@@ -232,6 +235,7 @@ MCP server
 MFEs?
 [Mm]iddleware
 minitest
+[Mm]isconfigurations?
 [Mm]ultithreading
 [Mm]ultiline
 [Nn]amespaces?
@@ -274,6 +278,8 @@ PowerShell
 [Pp]rescaling
 [Pp]resign
 [Pp]resigned
+[Pp]rovisioners?
+[Pp]rovisioner's
 [Pp]rox[ying|ied]
 \b[Pp]roject [Aa]\b
 \bProject B\b
@@ -284,6 +290,7 @@ PVCs?
 Python
 pytest
 RAM
+RBAC
 RDoc
 \bReact Native\b
 READMEs?
@@ -309,6 +316,7 @@ Ruby
 S3
 SAML
 [Ss]andbox(ing|ed)
+[Ss]chedulable
 SSO
 [Ss]afelist
 \bSauce Labs\b
@@ -385,6 +393,7 @@ URLEncoder
 UUID
 UUIDs?
 [Vv]alidator
+kubevirt-nodegroup.yaml
 values.yaml
 vCPUs?
 VCS

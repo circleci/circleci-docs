@@ -51,8 +51,18 @@ script: |
 
     // Check if ends with period, colon, or forward slash
     // Note: We don't allow ] or ) here because xref/link-only lines are already excluded above
-    last_char := content[len(content)-1]
-    if last_char == '.' || last_char == ':' || last_char == '/' || last_char == '*'|| last_char == '>' || last_char == ']' {
+    // Use has_suffix (rather than indexing by len(content), which counts bytes and
+    // breaks on lines containing multi-byte characters like em dashes) to check the
+    // final character.
+    valid_endings := [".", ":", "/", "*", ">", "]"]
+    ends_valid := false
+    for ending in valid_endings {
+      if text.has_suffix(content, ending) {
+        ends_valid = true
+        break
+      }
+    }
+    if ends_valid {
       continue
     }
 
