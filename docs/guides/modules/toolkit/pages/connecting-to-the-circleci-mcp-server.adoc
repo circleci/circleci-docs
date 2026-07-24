@@ -21,7 +21,7 @@ The CircleCI MCP server is available at `https://mcp.circleci.com/v1/mcp`.
 
 You can authenticate with the OAuth2 flow or with a personal API token.
 
-TIP: Use the OAuth2 flow whenever your MCP host supports it. You sign in with your existing CircleCI account, there is no token to copy or store, and CircleCI can revoke or rotate access without you having to update any configuration. Reach for a personal API token only when your MCP host cannot complete an OAuth2 flow, or for headless and automated use.
+TIP: Use the OAuth2 flow whenever your MCP host supports it. You sign in with your existing CircleCI account, there is no token to copy or store, and CircleCI can revoke or rotate access without you having to update any configuration. Choose a personal API token setup only when your MCP host cannot complete an OAuth2 flow, or for headless and automated use.
 
 === Authenticate with OAuth2 (recommended)
 
@@ -111,6 +111,7 @@ Add the following configuration to your Windsurf `mcp_config.json` file:
   }
 }
 ----
+
 --
 ====
 

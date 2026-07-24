@@ -8,14 +8,14 @@ CircleCI's MCP servers enable you to diagnose build failures, fix issues, and ma
 
 [NOTE]
 ====
-CircleCI previously offered a local MCP server that you installed with `npx` and configured with a personal API token. That server is deprecated. If your AI assistant still has it configured, remove it. Connect instead to the xref:connecting-to-the-circleci-mcp-server.adoc[Hosted CircleCI MCP], or to the <<hosted-vs-cli-mcp,CircleCI CLI MCP>>.
+CircleCI previously offered a local MCP server that you installed with `npx` and configured with a personal API token. That server is deprecated. If your AI assistant still has it configured, remove it before connecting to the hosted MCP server and/or the CircleCI CLI MCP.
 ====
 
 == Introduction
 
 Model Context Protocol (MCP) is a standardized protocol that lets large language models (LLMs) interact with external systems. CircleCI offers two MCP servers that connect your AI coding assistant directly to your CircleCI runs. One is a hosted server that CircleCI runs for you. The other is built into the CircleCI CLI and runs on your machine. See <<hosted-vs-cli-mcp>> for the difference between the two.
 
-Either MCP server provides the following benefits:
+Both MCP servers provide the following benefits:
 
 * Diagnose build failures without leaving your IDE.
 * Receive structured information your AI assistant can understand.
@@ -31,25 +31,29 @@ CircleCI exposes CircleCI to AI assistants through MCP in two ways:
 * *The hosted MCP server*, available at `https://mcp.circleci.com/v1/mcp`. CircleCI runs it, so there is nothing to install locally. Your AI assistant connects to it over HTTPS, authenticating with OAuth2 or a personal API token. See xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the Hosted CircleCI MCP].
 * *The CircleCI CLI MCP*, built into the link:https://cli.circleci.com/reference/#circleci-mcp[CircleCI CLI]. It runs as a local process on your machine, and uses the credentials from `circleci auth login` or the `CIRCLE_TOKEN` environment variable. See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
 
-The two also differ in scope, not just in how they run.
+The two MCP servers differ in scope as well as in how they run.
 
-The hosted MCP server exposes a focused, curated set of tools for observing and acting on CI runs: inspecting failures, reading logs, and rerunning or canceling workflows. It is a diagnostic and operational surface, aimed at reasoning over CI runs from natural language.
+The *hosted MCP server* exposes a focused, curated set of tools for observing and acting on CI runs, including:
 
-The CLI MCP exposes the entire CircleCI CLI as tools, a much broader administrative surface. Alongside run, workflow, and job inspection, it also covers areas the hosted server does not touch at all:
+* Inspecting failures
+* Reading logs
+* Rerunning or canceling workflows
 
-* Config authoring: validate, process, pack, and generate config YAML.
-* Org and project management: contexts, environment variables, and project or org settings.
-* Orb tooling: create, publish, validate, and diff orb versions.
-* Policy: push, test, and evaluate Rego policies.
-* Self-hosted runners: manage runner resource classes and tokens.
-* iOS code signing: manage certificates and signing configs.
-* Deploy tracking: list and instrument deploys.
-* Docker Layer Cache: purge DLC.
-* Direct API access: call the CircleCI API directly through `circleci api` for anything not covered by a dedicated command.
+The *CLI MCP* exposes the entire CircleCI CLI as tools including the following:
 
-Choose the hosted server for day-to-day diagnostic work: investigating a failed run, reading logs, or rerunning a workflow. It requires nothing to install or maintain locally, and it is the right choice when your AI assistant only supports remote MCP servers.
+* Config authoring. Validate, process, pack, and generate config YAML.
+* Org and project management. Manage contexts, environment variables, and project or org settings.
+* Orb tooling. Create, publish, validate, and diff orb versions.
+* Policy. Push, test, and evaluate Rego policies.
+* Self-hosted runners. Manage runner resource classes and tokens.
+* iOS code signing. Manage certificates and signing configs.
+* Deploy tracking. List and instrument deploys.
+* Docker Layer Cache. Purge DLC.
+* Direct API access. Call the CircleCI API directly through `circleci api` for anything not covered by a dedicated command.
 
-Choose the CLI MCP when your assistant also needs to author or validate config, manage orbs, or handle other administrative tasks beyond inspecting runs. It is also the right choice when your organization keeps credentials on the developer's machine rather than sending them to a remote server.
+*Choose the hosted MCP server* for day-to-day diagnostic work: investigating a failed run, reading logs, or rerunning a workflow. It requires nothing to install or maintain locally, and it is the right choice when your AI assistant only supports remote MCP servers.
+
+*Choose the CLI MCP* when your assistant also needs to author or validate config, manage orbs, or handle other administrative tasks beyond inspecting runs. It is also the right choice when your organization keeps credentials on the developer's machine rather than sending them to a remote server.
 
 The two are independent, and connecting one does not disconnect the other.
 
