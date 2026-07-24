@@ -545,6 +545,13 @@
       elements.searchTimeout = setTimeout(async () => {
         await search(query)
 
+        if (typeof window.analytics === 'object') {
+          window.analytics.track('dd_docs_search-box', {
+            query: query,
+            page: window.location.pathname,
+          })
+        }
+
         if (isMobileView) {
           showMobileSearchResults()
         } else {
