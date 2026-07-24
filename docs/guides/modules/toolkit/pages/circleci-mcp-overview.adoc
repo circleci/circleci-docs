@@ -1,0 +1,189 @@
+= CircleCI MCP overview
+:page-platform: Cloud
+:page-description: An overview of CircleCI's MCP offerings for AI coding assistants, how they work, best practices, and troubleshooting steps.
+:experimental:
+:page-aliases: using-the-circleci-mcp-server.adoc
+
+CircleCI's MCP servers enable you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
+
+[NOTE]
+====
+CircleCI previously offered a local MCP server that you installed with `npx` and configured with a personal API token. That server is deprecated. If your AI assistant still has it configured, remove it. Connect instead to the xref:connecting-to-the-circleci-mcp-server.adoc[Hosted CircleCI MCP], or to the <<hosted-vs-cli-mcp,CircleCI CLI MCP>>.
+====
+
+== Introduction
+
+Model Context Protocol (MCP) is a standardized protocol that lets large language models (LLMs) interact with external systems. CircleCI offers two MCP servers that connect your AI coding assistant directly to your CircleCI runs. One is a hosted server that CircleCI runs for you. The other is built into the CircleCI CLI and runs on your machine. See <<hosted-vs-cli-mcp>> for the difference between the two.
+
+Either MCP server provides the following benefits:
+
+* Diagnose build failures without leaving your IDE.
+* Receive structured information your AI assistant can understand.
+* Fix issues faster through natural language requests.
+* Rerun or cancel workflows without switching to the web app.
+* Improve your CI/CD pipeline without context switching.
+
+[#hosted-vs-cli-mcp]
+== Hosted server vs. the CircleCI CLI MCP
+
+CircleCI exposes CircleCI to AI assistants through MCP in two ways:
+
+* *The hosted MCP server*, available at `https://mcp.circleci.com/v1/mcp`. CircleCI runs it, so there is nothing to install locally. Your AI assistant connects to it over HTTPS, authenticating with OAuth2 or a personal API token. See xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the Hosted CircleCI MCP].
+* *The CircleCI CLI MCP*, built into the link:https://cli.circleci.com/reference/#circleci-mcp[CircleCI CLI]. It runs as a local process on your machine, and uses the credentials from `circleci auth login` or the `CIRCLE_TOKEN` environment variable. See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
+
+The two also differ in scope, not just in how they run.
+
+The hosted MCP server exposes a focused, curated set of tools for observing and acting on CI runs: inspecting failures, reading logs, and rerunning or canceling workflows. It is a diagnostic and operational surface, aimed at reasoning over CI runs from natural language.
+
+The CLI MCP exposes the entire CircleCI CLI as tools, a much broader administrative surface. Alongside run, workflow, and job inspection, it also covers areas the hosted server does not touch at all:
+
+* Config authoring: validate, process, pack, and generate config YAML.
+* Org and project management: contexts, environment variables, and project or org settings.
+* Orb tooling: create, publish, validate, and diff orb versions.
+* Policy: push, test, and evaluate Rego policies.
+* Self-hosted runners: manage runner resource classes and tokens.
+* iOS code signing: manage certificates and signing configs.
+* Deploy tracking: list and instrument deploys.
+* Docker Layer Cache: purge DLC.
+* Direct API access: call the CircleCI API directly through `circleci api` for anything not covered by a dedicated command.
+
+Choose the hosted server for day-to-day diagnostic work: investigating a failed run, reading logs, or rerunning a workflow. It requires nothing to install or maintain locally, and it is the right choice when your AI assistant only supports remote MCP servers.
+
+Choose the CLI MCP when your assistant also needs to author or validate config, manage orbs, or handle other administrative tasks beyond inspecting runs. It is also the right choice when your organization keeps credentials on the developer's machine rather than sending them to a remote server.
+
+The two are independent, and connecting one does not disconnect the other.
+
+== How the hosted MCP server works
+
+The hosted CircleCI MCP server acts as a bridge between your AI assistant and CircleCI, and works as follows:
+
+. You ask a question about your CircleCI runs in natural language.
+. Your AI assistant sends a request to the hosted MCP server.
+. The server calls the appropriate CircleCI APIs on your behalf.
+. The server transforms raw API responses into structured data.
+. Your AI assistant receives this data and provides you with useful insights.
+
+The CLI MCP works the same way in principle, but calls the CircleCI CLI's own commands locally instead of a remote server.
+
+With the hosted CircleCI MCP server, you can perform CircleCI tasks using natural language commands. For example:
+
+* `What failed on my last run on this branch?`
+* `List my recent CircleCI runs.`
+* `Rerun the failed jobs in that workflow.`
+* `Which tests failed in that job?`
+
+== Supported tools
+
+This section outlines the tools that the hosted CircleCI MCP server currently supports.
+
+You do not call these tools yourself. You ask your AI assistant a question or give it an instruction in plain language. Your assistant then decides which tools to call, in which order, and with which arguments. This table is a reference for what your assistant can do on your behalf. Use it to understand its capabilities, or to troubleshoot why it took a particular action.
+
+Most of these tools chain together. `list_runs` returns run IDs for `get_run`. `get_run` feeds `list_workflows`. `list_workflows` feeds `list_jobs`. `list_jobs` feeds `get_job`, `get_job_logs`, `list_artifacts`, and `list_job_tests`.
+
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Tool | What it does
+
+| `hello`
+| Verifies connectivity to the hosted CircleCI MCP server.
+
+| `list_runs`
+| Lists runs for a project, given its slug (`gh/org/repo`) or UUID, or your own runs across all projects. Filter by branch or run status.
+
+| `get_run`
+| Fetches a single run by UUID, returning its phase, outcome, VCS details, and any config errors.
+
+| `list_workflows`
+| Lists the workflows belonging to a run, given the run's UUID.
+
+| `get_workflow`
+| Fetches a single workflow by UUID, returning its name, phase, and outcome.
+
+| `rerun_workflow`
+| Reruns a workflow, given its UUID. By default every job reruns from the start. Set `from_failed` to rerun only the failed jobs and everything downstream of them.
+
+| `cancel_workflow`
+| Cancels a running workflow, given its UUID.
+
+| `list_jobs`
+| Lists the jobs belonging to a workflow, given the workflow's UUID.
+
+| `get_job`
+| Fetches a single job by UUID, returning its phase, outcome, and per-step detail, including each step's exit code.
+
+| `get_job_logs`
+| Fetches the output of a job's steps, given the job's UUID. When you do not name a step, the tool reads the failed steps automatically.
+
+| `list_artifacts`
+| Lists the files a job persisted, such as test reports, coverage, or build output, given the job's UUID.
+
+| `list_job_tests`
+| Lists a job's test results, given the job's UUID. The tool returns failing tests by default; set `all` to include passing and skipped tests.
+
+| `download_usage_data`
+| Exports an organization's usage data as downloadable CSV files, given an org slug or UUID and a date range of up to 31 days.
+|===
+--
+
+Tools for the CLI MCP mirror the full CircleCI CLI, so there is no equivalent fixed list here. Run `circleci help reference` for a full dump of every command it can call.
+
+== Best practices
+
+* Ask specific questions. Name the branch, run, workflow, or job you care about, for example "why did the last run on main fail," rather than "check my builds." A specific question lets your assistant pick the right tool without back-and-forth.
+* Let your assistant chain tools. On the hosted MCP server, diagnosing a failure often takes several tool calls in sequence, such as `list_runs`, then `get_run`, then `list_workflows`, and so on down to `get_job_logs`. Ask for the outcome you want, and let your assistant work out the steps.
+* Review destructive actions before confirming. Rerunning or canceling a workflow changes real CI state, so check what your assistant is about to do first. This matters most on a shared or production-facing project.
+* Match the server to the task. Use the hosted server for diagnosing runs, and switch to the CLI MCP when a task needs config authoring, orb management, or another administrative capability. See <<hosted-vs-cli-mcp>>.
+
+=== Example workflows
+
+Here are common scenarios where the hosted CircleCI MCP server can help you and your team:
+
+==== Diagnosing a failed run
+
+Your latest run on a branch fails:
+
+. You ask your assistant: "Why did my last run fail on this branch?".
+. The hosted MCP server finds the run, confirms it failed, and locates the failed job's logs.
+. Your assistant identifies the issue and suggests a fix.
+. You apply the fix and continue working.
+
+==== Rerunning only what failed
+
+A run failed partway through a long workflow:
+
+. You ask your assistant to rerun the failed jobs in that workflow.
+. The hosted MCP server calls `rerun_workflow` with `from_failed` set, reusing the jobs that already succeeded.
+. Your workflow completes without rerunning everything from the start.
+
+==== Investigating failing tests
+
+Your team wants to understand why a job's tests failed:
+
+. You ask your assistant which tests failed in a specific job.
+. The hosted MCP server returns the failing tests along with their failure messages.
+. Your assistant explains the failures and suggests fixes.
+
+== Troubleshooting
+
+For general MCP troubleshooting steps, see the link:https://modelcontextprotocol.io/docs/tools/debugging[Model Context Protocol documentation].
+
+=== Authentication issues
+
+These steps cover the hosted MCP server. If the CLI MCP fails to connect, check your CLI session instead. See xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
+
+* If you connected to the hosted MCP server with OAuth2, re-authenticate from your MCP host. In Claude Code, run `/mcp` and select *Re-authenticate*.
+* If you connected to the hosted MCP server with a personal API token, confirm the token is still valid and belongs to a user with access to the project.
+* For setup steps, see xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the Hosted CircleCI MCP].
+
+=== Not seeing an up-to-date list of tools
+
+After CircleCI releases new tools, restart your MCP host or reconnect the server to load them.
+
+== Additional resources
+
+* xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the Hosted CircleCI MCP].
+* xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
+* xref:managing-api-tokens.adoc[Managing API Tokens].
+* link:https://modelcontextprotocol.io[Model Context Protocol].
