@@ -84,10 +84,7 @@ workflows:
       - deploy-job:
           requires:
             - build-job
-          filters:
-            branches:
-              only: main
-
+          filters: pipeline.git.branch == "main" # only run the deploy-job job on the main branch
 ----
 
 [#google-cloud-functions]

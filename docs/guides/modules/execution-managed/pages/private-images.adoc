@@ -192,17 +192,11 @@ workflows:
   main:
     jobs:
       - build:
-          filters:
-            tags:
-              only: /^\d{4}\.\d+$/
+          filters: pipeline.git.branch or (pipeline.git.tag matches /^\d{4}\.\d+$/) # run the build job on every branch, and on tags matching the pattern
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^\d{4}\.\d+$/
+          filters: pipeline.git.tag matches /^\d{4}\.\d+$/ # only run the deploy job on tags matching the pattern
 ----
 
 The minimum permissions required for your AWS account are as follows (you will need to substitute `YOUR_ECR_REPO_ARN`):

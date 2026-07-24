@@ -712,9 +712,7 @@ workflows:
             - test-windows
             - test-macos
           context: github
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == "main" # only run the release job on the main branch
 ----
 --
 Example 2::

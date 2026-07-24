@@ -1783,11 +1783,11 @@ For more information, see the xref:guides:orchestrate:automatic-reruns.adoc#[Aut
 '''
 
 [#the-when-step]
-=== *The `when` step*
+=== *The when step*
 
 NOTE: The `when` and `unless` steps are supported in `version: 2.1` configuration
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps Section of the Reusable Configuration Reference] for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. Use the `when` step to customize commands and job configuration to run on custom conditions. Conditions are determined at config compilation time. This means `when` step conditions are checked before your workflow runs. See the xref:reusing-config.adoc#defining-conditional-steps[Conditional Steps Section of the Reusable Configuration Reference] for more details.
 
 [.table-scroll]
 --
@@ -1798,7 +1798,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 | `condition`
 | Y
 | Logic
-| xref:configuration-reference.adoc#logic-statements[A Logic Statement]
+| xref:configuration-reference.adoc#logic-statements[A Logic Statement]. Expressions are not supported for the `when` step.
 
 | `steps`
 | Y
@@ -2749,7 +2749,7 @@ workflows:
             branches:
               only:
                 - main
-                - /^release\/.*/
+                - /release\/.*/
     jobs:
       - coverage
 ----
@@ -3263,9 +3263,7 @@ workflows:
     jobs:
       - js_build
       - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
-          filters:
-            branches:
-              only: /server\/.*/ # the job build_server_pdfs will only run when the branch being built starts with server/
+          filters: pipeline.git.branch starts-with "server/" # only run on branches starting with server/
 ----
 
 You can read more about using regular expressions in your config in the xref:guides:orchestrate:workflows.adoc#using-regular-expressions-to-filter-tags-and-branches[Using Workflows to Schedule Jobs] page.
@@ -3700,13 +3698,19 @@ To use a pipeline parameter in an expression, the parameter name must follow the
 If a pipeline parameter has a name that does not follow these rules, CircleCI performs string replacement instead of evaluating an expression.
 ====
 
-[#logic-statements]
-== Using logic statements
+[#expression-examples]
+=== Expression examples
 
-Certain dynamic configuration features accept logic statements as arguments.
-Logic statements are evaluated to boolean values at configuration compilation
-time, that is, before the workflow is run. The group of logic statements
-includes:
+You can find usage examples on the xref:guides:orchestrate:orchestration-cookbook.adoc#[Orchestration Cookbook] page.
+
+'''
+
+[#logic-statements]
+== Logic statement syntax
+
+NOTE: CircleCI recommends using xref:#using-expressions-in-your-configuration[Expressions] for conditional logic in your configuration. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
+
+Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is, before the workflow is run. The group of logic statements includes:
 
 [.table-scroll]
 --
@@ -3767,15 +3771,14 @@ The following logic values are considered falsy:
 
 All other values are truthy. Also note that using logic with an empty list will cause a validation error.
 
-Logic statements always evaluate to a boolean value at the top level, and coerce
-as necessary. They can be nested in an arbitrary fashion, according to their
-argument specifications, and to a maximum depth of 100 levels.
+Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
-`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. It is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
+`matches` uses link:https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html[Java regular expressions] for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
 
 NOTE: When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
-*Example:*
+[#logic-statement-example]
+=== Logic statement example
 
 [,yaml]
 ----
@@ -3787,10 +3790,14 @@ workflows:
         - equal: [ staging, << pipeline.git.branch >> ]
 ----
 
-[#logic-statement-examples]
-=== Logic statement and expression examples
+Compare this with the expression syntax equivalent:
 
-You can find usage examples on the xref:guides:orchestrate:orchestration-cookbook.adoc#[Orchestration Cookbook] page.
+[,yaml]
+----
+workflows:
+  my-workflow:
+    when: pipeline.git.branch == "main" or pipeline.git.branch == "staging"
+----
 
 [#example-full-configuration]
 == Example full configuration
@@ -3891,21 +3898,13 @@ workflows:
   build-deploy:
     jobs:
       - build:
-          filters:
-            branches:
-              ignore:
-                - develop
-                - /feature-.*/
+          filters: pipeline.git.branch != "develop" and not (pipeline.git.branch matches /feature-.*/) # only run the build job on branches other than develop and any branch starting with feature-
       - deploy-stage:
           requires:
             - build
-          filters:
-            branches:
-              only: staging
+          filters: pipeline.git.branch == "staging" # only run the deploy-stage job on the staging branch
       - deploy-prod:
           requires:
             - build
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == "main" # only run the deploy-prod job on the main branch
 ----

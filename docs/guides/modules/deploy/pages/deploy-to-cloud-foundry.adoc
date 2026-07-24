@@ -81,22 +81,16 @@ workflows:
       - dark-deploy:
           requires:
             - test
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == "main" # only run the dark-deploy job on the main branch
       - hold:
           type: approval
           requires:
             - dark-deploy
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == "main" # only run the hold approval job on the main branch
       - live-deploy:
           requires:
             - hold # manual approval required via the CircleCI UI to run the live-deploy job
-          filters:
-            branches:
-              only: main
+          filters: pipeline.git.branch == "main" # only run the live-deploy job on the main branch
 ```
 
 [#track-deployments-with-deploy-markers]

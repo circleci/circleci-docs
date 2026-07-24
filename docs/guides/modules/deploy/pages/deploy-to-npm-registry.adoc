@@ -177,10 +177,7 @@ workflows:
       - publish:
           context:
             - trusted-publishing-guard
-          filters:
-            branches:
-              only:
-                - main
+          filters: pipeline.git.branch == "main" # only run the publish job on the main branch
 ```
 
 For background on OIDC tokens in CircleCI, see xref:permissions-authentication:openid-connect-tokens.adoc[Use OpenID Connect Tokens in Jobs].
