@@ -4,7 +4,7 @@
 :experimental:
 :page-aliases: example-configs.adoc
 
-This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
+This document provides sample `.circleci/config.yml` files that you can use as a starting point when setting up projects, or to better understand different ways to orchestrate jobs using workflows and filters. For information on all configuration elements available to you, see the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
 
 If you would like to get set up quickly, see our language-specific quickstart guides:
 
@@ -14,7 +14,7 @@ If you would like to get set up quickly, see our language-specific quickstart gu
 
 == Tools for editing configuration files
 
-CircleCI has created an xref:vs-code-extension-overview.adoc[extension for Visual Studio Code] that reduces context switching between the web app and VS Code through a set of helpful features.
+CircleCI has created an xref:vs-code-extension-overview.adoc[Extension for Visual Studio Code] that reduces context switching between the web app and VS Code through a set of helpful features.
 
 The VS Code extension reduces the time to create, modify, and troubleshoot configuration files through real-time syntax validation, highlighting, and autocomplete suggestions. Authenticating the extension with your CircleCI account will also allow you to visualize and manage your CircleCI pipelines directly from your code editor, and be notified of workflow status changes.
 
@@ -35,6 +35,7 @@ The configuration example below shows a concurrent workflow in which the `build`
 
 This image shows the workflow view for the following configuration example:
 
+.Concurrent workflow graph
 image::guides:ROOT:concurrent-workflow-map.png[Concurrent Workflow Graph]
 
 [,yaml]
@@ -74,6 +75,7 @@ The configuration example below shows a sequential workflow where the `build` jo
 
 This image shows the workflow view for the following configuration example, in which jobs run sequentially (one after the other):
 
+.Sequential workflow graph
 image::guides:ROOT:sequential-workflow-map.png[Sequential Workflow Graph]
 
 [,yaml]
@@ -108,7 +110,7 @@ workflows:
 [#approval-job]
 === Approval job
 
-The example below shows a sequential workflow with an xref:reference:ROOT:configuration-reference.adoc#type[approval job]. Use an approval job to require manual approval before downstream jobs may proceed.
+The example below shows a sequential workflow with an xref:reference:ROOT:configuration-reference.adoc#type[Approval Job]. Use an approval job to require manual approval before downstream jobs may proceed.
 
 [,yaml]
 ----
@@ -155,19 +157,20 @@ workflows:
 
 The workflow runs as follows:
 
-. `build` job runs
-. `test` job runs
-. `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app
-. Once `hold` job is approved the `deploy` job runs
+. `build` job runs.
+. `test` job runs.
+. `hold` job, with `type: approval` ensures the workflow waits for manual approval in the CircleCI web app.
+. Once `hold` job is approved the `deploy` job runs.
 
-An approval job can have any name. In the example above the approval job is named `hold`. The name you choose for an approval job should not be used to define a job in the main configuration. An approval job only exists as a workflow orchestration device.
+An approval job can have any name. In the example above the approval job is named `hold`. Do not reuse the name you choose for an approval job to define a job in the main configuration. An approval job only exists as a workflow orchestration device.
 
 The image below shows the workflow view for the following configuration example. This image has three parts to show:
 
-* The workflow graph with the `hold` job paused
-* The "Needs Approval" popup that appears when you click on a hold job
-* The workflow view again once the `hold` job has been approved and the `deploy` job has run
+* The workflow graph with the `hold` job paused.
+* The "Needs Approval" popup that appears when you click on a hold job.
+* The workflow view again once the `hold` job has been approved and the `deploy` job has run.
 
+.Approval workflow graph
 image::guides:ROOT:approval-workflow-map.png[Approval Workflow Graph]
 
 * Refer to the xref:orchestrate:workflows.adoc[Workflows] document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
@@ -296,6 +299,7 @@ This example shows a sequential workflow with the `test` job configured to run o
 
 Below are two sample configurations for a Fan-in/Fan-out workflow.
 
+.Fan-in/fan-out workflow example
 image::guides:ROOT:fan-in-out-example.png[Fan-in-out]
 
 [,yaml]
@@ -438,7 +442,7 @@ NOTE: A job can only run when its dependencies are satisfied therefore it requir
 [#sample-configuration-with-multiple-executor-types]
 == Sample configuration with multiple executor types
 
-It is possible to use multiple xref:execution-managed:executor-intro.adoc[executor types]
+It is possible to use multiple xref:execution-managed:executor-intro.adoc[Executor Types]
 in the same workflow.
 
 In Example 1 each push will build and test the project on Linux, Windows and macOS.
@@ -775,6 +779,6 @@ workflows:
 [#see-also]
 == See also
 
-* See the xref:about-circleci:concepts.adoc#configuration[Concepts document] and xref:orchestrate:workflows.adoc[Workflows] for more details of the concepts covered in this example.
+* See the xref:about-circleci:concepts.adoc#configuration[Concepts Document] and xref:orchestrate:workflows.adoc[Workflows] for more details of the concepts covered in this example.
 * See the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] document for full details of each individual configuration key.
 * See the xref:examples-and-guides-overview.adoc[Example Public Repos] document for a list of public projects that use CircleCI.
