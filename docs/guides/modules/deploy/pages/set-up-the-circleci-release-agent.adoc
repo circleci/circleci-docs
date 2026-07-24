@@ -180,7 +180,7 @@ You will need a `CCI_INTEGRATION_TOKEN` to install the CircleCI release agent in
 . Select btn:[Create Integration Token] and then btn:[Create Token].
 . The new token will be displayed. Copy the token, then select btn:[Done].
 
-The token is shown only once and cannot be retrieved from CircleCI later. Store it in your organization's secret manager (for example, HashiCorp Vault, AWS Secrets Manager, or a CircleCI context variable) and pass it to Helm at install or upgrade time using an environment variable (for example, `--set tokenSecret.token="${CCI_INTEGRATION_TOKEN}"`) or a values file that is not committed to source control. After installation, the chart stores the token in a Kubernetes Secret in the `circleci-release-agent-system` namespace. On subsequent `helm upgrade` runs, you do not need to supply the token again unless you use `--reset-values` or apply a values file that omits `tokenSecret.token` without `--reuse-values`.
+The token is shown only once and cannot be retrieved from CircleCI later. Store it in your organization's secret manager (for example, HashiCorp Vault, AWS Secrets Manager, or a CircleCI context variable). Pass it to Helm at install or upgrade time using an environment variable (for example, `--set tokenSecret.token="\${CCI_INTEGRATION_TOKEN}"`) or a values file that is not committed to source control. After installation, the chart stores the token in a Kubernetes Secret in the `circleci-release-agent-system` namespace. On subsequent `helm upgrade` runs, you do not need to supply the token again unless you use `--reset-values` or apply a values file that omits `tokenSecret.token` without `--reuse-values`.
 
 [#install-the-release-agent]
 === 3. Install the release agent
