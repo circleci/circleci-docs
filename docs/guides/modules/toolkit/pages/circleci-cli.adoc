@@ -15,12 +15,14 @@ The link:https://cli.circleci.com/[CircleCI command line interface (CLI)] brings
 * Enforce security policies across your organization.
 * Track component versions and deployments.
 
+[#installation]
 == Install, configure, and use the CircleCI CLI
 
 For full details on how to install, configure, and use the CircleCI CLI, see the link:https://cli.circleci.com/[CircleCI CLI] page.
 
 You can update and uninstall the CircleCI CLI using the appropriate method for your package manager.
 
+[#configure-the-cli]
 == Quickstart
 
 Follow these steps to authenticate and connect the CLI to your CircleCI project.
@@ -95,7 +97,7 @@ You can find the full CircleCI CLI reference at link:https://cli.circleci.com/re
 
 You can also access reference information directly in your terminal in three ways:
 
-* Add `--help` to any command at any depth to see its description, flags, and examples: `--help`
+* Add `--help` to any command at any depth to see its description, flags, and examples.
 +
 [,shell]
 ----
@@ -143,4 +145,5 @@ The Chunk CLI:: A developer tool that brings AI-powered code review and remote v
 
 == Next steps
 
-#Add links to how-to pages#
+* xref:toolkit:how-to-use-the-circleci-local-cli.adoc[How to use the CircleCI local CLI]
+* xref:toolkit:cli-migration-guide.adoc[CLI command migration guide]
