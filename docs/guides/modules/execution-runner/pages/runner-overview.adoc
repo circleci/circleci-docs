@@ -95,7 +95,7 @@ Runner Provisioner is a Kubernetes controller that automatically scales CircleCI
 
 Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand. A configurable `minReplicas` setting keeps a pre-warmed pool of VMs ready to claim jobs immediately.
 
-CAUTION: Runner Provisioner is currently in preview and available to invited participants only. Refer to the xref:runner-provisioner.adoc[Runner Provisioner] page for installation and configuration details.
+CAUTION: Runner Provisioner is currently in preview and not recommended for production workloads. Its image and Helm chart are publicly available. Refer to the xref:runner-provisioner.adoc[Runner Provisioner] page for installation and configuration details.
 
 [#getting-started]
 == Getting started
