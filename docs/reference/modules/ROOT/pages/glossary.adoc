@@ -196,7 +196,7 @@ A <<job>> that runs multiple times with different combinations of parameter valu
 
 == MCP server
 
-The CircleCI Model Context Protocol (MCP) server, which lets AI coding assistants diagnose build failures, fix issues, and manage pipelines through natural language without leaving the development environment. See the xref:guides:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI Model Context Protocol Server] page.
+The CircleCI Model Context Protocol (MCP) server, which lets AI coding assistants diagnose build failures, fix issues, and manage pipelines through natural language without leaving the development environment. See the xref:guides:toolkit:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
 
 [#mfa]
 == Multi-factor authentication (MFA)

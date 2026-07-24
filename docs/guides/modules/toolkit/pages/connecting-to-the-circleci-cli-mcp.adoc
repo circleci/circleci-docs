@@ -1,0 +1,49 @@
+= Connecting to the CircleCI CLI MCP
+:page-platform: Cloud, Server v4+
+:page-description: Enable the CircleCI CLI's built-in MCP server so AI coding assistants like Claude, Cursor, and VS Code can inspect your CI runs locally.
+:experimental:
+
+The CircleCI CLI includes a built-in MCP server that runs locally on your machine, using your existing CLI authentication. For a comparison with CircleCI's hosted MCP server, see the xref:circleci-mcp-overview.adoc#hosted-vs-cli-mcp[Hosted and CLI MCP Comparison] section of the CircleCI MCP overview page.
+
+== Prerequisites
+
+* The CircleCI CLI installed. See the xref:circleci-cli.adoc[CircleCI CLI] page for installation instructions.
+* An authenticated CLI session. Run `circleci auth login`, or set the `CIRCLE_TOKEN` environment variable.
+
+== Enable the CLI MCP
+
+Enable the MCP server for your AI assistant with one command:
+
+[source,shell]
+----
+circleci mcp claude enable    # Claude Desktop
+circleci mcp cursor enable    # Cursor
+circleci mcp vscode enable    # VS Code
+----
+
+To disable it, replace `enable` with `disable`.
+
+You can also start the server manually, or stream it over HTTP instead of the default stdio transport:
+
+[source,shell]
+----
+circleci mcp start     # start over stdio
+circleci mcp stream    # stream over HTTP
+----
+
+== Try it out
+
+Once enabled, ask your AI assistant something like:
+
+* `What failed on my last run?`
+* `Validate my CircleCI config.`
+* `List the environment variables set on this project.`
+* `Create and publish a new orb version.`
+* `Show me the resource classes for my self-hosted runners.`
+* `Purge the Docker Layer Cache for this project.`
+
+== Next steps
+
+* xref:circleci-mcp-overview.adoc[CircleCI MCP Overview], for how the CLI MCP compares to the hosted server, best practices, and troubleshooting.
+* xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the Hosted CircleCI MCP], for the hosted alternative.
+* link:https://cli.circleci.com/reference/#circleci-mcp[CircleCI CLI reference: MCP], for the full command reference.

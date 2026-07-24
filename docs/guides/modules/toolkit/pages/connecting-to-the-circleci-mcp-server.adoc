@@ -1,0 +1,172 @@
+= Connecting to the CircleCI MCP server
+:page-platform: Cloud
+:page-description: Connect an AI coding assistant to CircleCI's hosted MCP server using OAuth2 or a personal API token.
+:experimental:
+
+This page walks through connecting an AI coding assistant to CircleCI's hosted MCP server. For conceptual background, best practices, and troubleshooting, see the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page. That page also lists the supported tools.
+
+To connect to the CircleCI CLI's built-in MCP instead, see xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP].
+
+[NOTE]
+====
+CircleCI previously offered a local MCP server that you installed with `npx` and configured with a personal API token. That server is deprecated. If your AI assistant still has it configured, remove it before connecting to the hosted MCP server and/or the CircleCI CLI MCP. For example, run `claude mcp remove circleci-mcp-server` in Claude Code.
+====
+
+== Prerequisites
+
+Before connecting to the CircleCI MCP server, ensure you have the following:
+
+* A CircleCI account with access to the projects you want to inspect.
+* An AI coding assistant or MCP host that supports remote MCP servers over streamable HTTP.
+* A CircleCI personal API token, if your MCP host cannot complete an OAuth2 flow. See the xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API Tokens] page for steps.
+
+== Connecting to the CircleCI MCP server
+
+The CircleCI MCP server is available at `https://mcp.circleci.com/v1/mcp`.
+
+You can authenticate with the OAuth2 flow or with a personal API token.
+
+TIP: Use the OAuth2 flow whenever your MCP host supports it. You sign in with your existing CircleCI account, there is no token to copy or store, and CircleCI can revoke or rotate access without you having to update any configuration. Choose a personal API token setup only when your MCP host cannot complete an OAuth2 flow, or for headless and automated use.
+
+=== Authenticate with OAuth2 (recommended)
+
+Most MCP hosts detect that the CircleCI MCP server requires OAuth2 and prompt you to sign in the first time you connect. Add the server using the instructions for your AI assistant.
+
+[tabs]
+====
+Claude Code::
++
+--
+For guidance on setting up MCP servers in Claude Code, see the link:https://code.claude.com/docs/en/mcp[Claude Code documentation].
+
+. Use the following command to add the CircleCI MCP server to Claude Code:
++
+[source,console]
+----
+$ claude mcp add --transport http circleci-mcp-server https://mcp.circleci.com/v1/mcp
+----
+
+. Run the `/mcp` command inside Claude Code, select `circleci-mcp-server`.
+. Select `Authenticate` to complete the OAuth2 sign-in in your browser.
+--
+Claude Desktop and claude.ai::
++
+--
+For guidance on setting up custom connectors, see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude documentation].
+
+. Go to menu:Settings[Connectors].
+. Select *Add custom connector*.
+. Enter `https://mcp.circleci.com/v1/mcp` as the server URL.
+. Select *Add*, then complete the OAuth2 sign-in in your browser.
+--
+Cursor::
++
+--
+For guidance on setting up MCP servers in Cursor, see the link:https://cursor.com/docs[Cursor documentation].
+
+. Select the following link to add the CircleCI MCP server to Cursor automatically: link:cursor://anysphere.cursor-deeplink/mcp/install?name=circleci&config=eyJ1cmwiOiJodHRwczovL21jcC5jaXJjbGVjaS5jb20vdjEvbWNwIn0=[Add CircleCI MCP server to Cursor]. Using this link takes you to your Cursor settings and opens an installation prompt for the MCP server. If you do not see the installation prompt in Cursor, scroll down.
+. Select *Install*. The CircleCI MCP will now be displayed with a "Needs authentication" label and a button to connect.
+. Select *Connect* to start the OAuth2 flow to CircleCI through your browser.
+
+Alternatively, add the following configuration to your Cursor `mcp.json` file:
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "circleci-mcp-server": {
+      "url": "https://mcp.circleci.com/v1/mcp"
+    }
+  }
+}
+----
+
+--
+VS Code::
++
+--
+For guidance on setting up MCP servers in VS Code, see the link:https://code.visualstudio.com/docs/copilot/chat/mcp-servers[VS Code documentation].
+
+Select the following link to add the CircleCI MCP server to VS Code automatically: link:vscode:mcp/install?%7B%22name%22%3A%22circleci%22%2C%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.circleci.com%2Fv1%2Fmcp%22%7D[Add CircleCI MCP server to VS Code].
+
+Or, add the following configuration to your `.vscode/mcp.json` file:
+
+[source,json]
+----
+{
+  "servers": {
+    "circleci-mcp-server": {
+      "type": "http",
+      "url": "https://mcp.circleci.com/v1/mcp"
+    }
+  }
+}
+----
+--
+Windsurf::
++
+--
+For guidance on setting up MCP servers in Windsurf, see the link:https://docs.windsurf.com/windsurf/cascade/mcp[Windsurf documentation].
+
+Add the following configuration to your Windsurf `mcp_config.json` file:
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "circleci-mcp-server": {
+      "serverUrl": "https://mcp.circleci.com/v1/mcp"
+    }
+  }
+}
+----
+
+--
+====
+
+=== Authenticate with a personal API token (fallback)
+
+Use this method only when your MCP host cannot complete an OAuth2 flow, or for headless and automated use. Authenticate by sending your CircleCI personal API token as a bearer token in the `Authorization` header.
+
+. Create a personal API token. See the xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API Tokens] page for steps.
+. Add the token as a header in your MCP host's configuration.
+
+NOTE: Treat your personal API token like a password. Where your MCP host supports it, reference the token through an environment variable or secret store instead of writing it directly into a config file.
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "circleci-mcp-server": {
+      "url": "https://mcp.circleci.com/v1/mcp",
+      "headers": {
+        "Authorization": "Bearer <your-circleci-token>"
+      }
+    }
+  }
+}
+----
+
+For Claude Code, pass the header on the command line instead:
+
+[source,console]
+----
+$ claude mcp add --transport http circleci-mcp-server https://mcp.circleci.com/v1/mcp \
+  --header "Authorization: Bearer <your-circleci-token>"
+----
+
+== Try it out
+
+Once connected, ask your AI assistant something like:
+
+* `What failed on my last run on this branch?`
+* `List my recent CircleCI runs.`
+* `Show me the logs for the failed job in my last run.`
+* `Rerun only the failed jobs in that workflow.`
+* `Which tests failed in the last run on main?`
+* `Cancel the workflow that's currently running on this branch.`
+
+== Next steps
+
+* xref:circleci-mcp-overview.adoc[CircleCI MCP Overview], for supported tools, best practices, and troubleshooting.
+* xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP], for the local, CLI-based alternative.
