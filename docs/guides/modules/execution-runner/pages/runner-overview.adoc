@@ -103,8 +103,8 @@ CAUTION: Runner Provisioner is currently in preview and available to invited par
 To get started with CircleCI's self-hosted runners:
 
 * Provide your own platform for your self-hosted runners (see the following <<#available-self-hosted-runner-platforms,Available self-hosted runner platforms>> section for supported platforms).
-* You will need at least one credit on your account to use runners. Runner execution itself does not require credits, but one credit is required in case your jobs use storage or networking. For more information, see the xref:optimize:persist-data.adoc#overview-of-network-and-storage-transfer[Persisting data overview].
-* For container runner installation, visit the xref:container-runner-installation.adoc[Container runner installation] page.
+* You will need at least one credit on your account to use runners. Runner execution itself does not require credits, but one credit is required in case your jobs use storage or networking. For more information, see the xref:optimize:persist-data.adoc#overview-of-network-and-storage-transfer[Persisting Data Overview].
+* For container runner installation, visit the xref:container-runner-installation.adoc[Container Runner Installation] page.
 * For machine runner, visit the installation guide for your desired platform:
 ** xref:install-machine-runner-3-on-linux.adoc[Linux]
 ** xref:install-machine-runner-3-on-macos.adoc[macOS]
