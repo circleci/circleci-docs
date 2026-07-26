@@ -1,4 +1,6 @@
 <!-- Component Dropdown for Mobile -->
-<div class="md:hidden flex justify-center px-[32px] mt-6 mb-4">
+<!-- pr is widened to clear the floating page-TOC book button (fixed top-right below 768px).
+     Temporary: the book button is slated for rework in a separate change. -->
+<div class="md:hidden flex justify-center pl-[32px] pr-[84px] mt-6 mb-4">
   {{> dropdown options=(components-to-nav-list) class="w-full" }}
 </div>

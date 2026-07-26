@@ -58,21 +58,62 @@
   menu.appendChild(title)
   menu.appendChild(list)
 
-  var pageTitle = article.querySelector('h1.page')
-  if (pageTitle) {
-    var embeddedToc = document.createElement('aside')
-    embeddedToc.className = 'toc embedded'
-    embeddedToc.appendChild(menu.cloneNode(true))
-    // Find the info bar (next sibling after the title, or the element after the title)
-    var infoBar = pageTitle.nextElementSibling
-    if (infoBar && infoBar.classList && infoBar.classList.contains('mt-5')) {
-      // Insert after the info bar
-      infoBar.parentNode.insertBefore(embeddedToc, infoBar.nextSibling)
-    } else {
-      // Fallback: insert after the title if no info bar found
-      pageTitle.parentNode.insertBefore(embeddedToc, pageTitle.nextSibling)
-    }
+  // Below the 1200px sidebar reflow, surface the TOC through a floating
+  // book button that toggles a dropdown panel (CSS shows this only < 1200px;
+  // the sidebar above owns >= 1200px). Cloning happens before 12-toc-collapse
+  // runs, so the panel copy has no collapse button.
+  var tocTitle = sidebar.dataset.title || 'On This Page'
+  var float = document.createElement('div')
+  float.className = 'toc-float'
+
+  var btn = document.createElement('button')
+  btn.className = 'toc-float-btn'
+  btn.setAttribute('type', 'button')
+  btn.setAttribute('aria-haspopup', 'true')
+  btn.setAttribute('aria-expanded', 'false')
+  btn.setAttribute('aria-controls', 'toc-float-panel')
+  btn.setAttribute('aria-label', tocTitle)
+  btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/><path d="M6 8h2"/><path d="M6 12h2"/><path d="M16 8h2"/><path d="M16 12h2"/></svg>'
+
+  var panel = document.createElement('div')
+  panel.className = 'toc toc-float-panel'
+  panel.id = 'toc-float-panel'
+  panel.setAttribute('hidden', '')
+  panel.appendChild(menu.cloneNode(true))
+
+  float.appendChild(btn)
+  float.appendChild(panel)
+  document.body.appendChild(float)
+
+  function openPanel () {
+    panel.removeAttribute('hidden')
+    btn.setAttribute('aria-expanded', 'true')
+    float.classList.add('open')
   }
+  function closePanel () {
+    panel.setAttribute('hidden', '')
+    btn.setAttribute('aria-expanded', 'false')
+    float.classList.remove('open')
+  }
+
+  btn.addEventListener('click', function (e) {
+    e.stopPropagation()
+    if (panel.hasAttribute('hidden')) openPanel(); else closePanel()
+  })
+  // Close after choosing a destination.
+  panel.addEventListener('click', function (e) {
+    if (e.target.closest('a')) closePanel()
+  })
+  // Close on outside click and on Escape.
+  document.addEventListener('click', function (e) {
+    if (!panel.hasAttribute('hidden') && !float.contains(e.target)) closePanel()
+  })
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !panel.hasAttribute('hidden')) {
+      closePanel()
+      btn.focus()
+    }
+  })
 
   window.addEventListener('load', function () {
     onScroll()

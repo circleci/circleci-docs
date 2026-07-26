@@ -7,11 +7,6 @@ body.-toc aside.toc.sidebar {
     display: none;
   }
 
-  aside.toc.embedded {
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-
   /* Overflow guard for the content wrapper only. Excludes the breadcrumb
      toolbar: this unlayered max-width would otherwise override the toolbar's
      max-w-[888px] utility (unlayered beats @layer) and break its centring,
@@ -33,25 +28,15 @@ body.-toc aside.toc.sidebar {
   }
 }
 
-/* Tablet view (1024px - 1199px): Show embedded TOC, hide sidebar TOC */
+/* Tablet view (1024px - 1199px): hide sidebar TOC (page TOC lives in the floating dropdown) */
 @media screen and (min-width: 1024px) and (max-width: 1199.5px) {
   aside.toc.sidebar {
     display: none;
   }
-
-  aside.toc.embedded {
-    display: block;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
 }
 
-/* Desktop view (1200px+): Show sidebar TOC, hide embedded TOC */
+/* Desktop view (1200px+): show sidebar TOC */
 @media screen and (min-width: 1200px) {
-  aside.toc.embedded {
-    display: none;
-  }
-
   aside.toc.sidebar {
     flex: 0 0 var(--toc-width);
     order: 1;
