@@ -17,7 +17,7 @@
   [data-page-navigation] aside {
     height: 100%;
     overflow-y: auto;
-    padding-top: 2.5rem; /* Space for component nav area */
+    padding-top: 2rem; /* 32px gap below the header, aligned with the article breadcrumbs */
     padding-bottom: 3rem; /* Extra space at bottom for last nav item */
   }
 }
