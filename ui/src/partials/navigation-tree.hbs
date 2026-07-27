@@ -3,9 +3,9 @@
   {{#each navigation}}
   <li data-navigation-tree-content class="my-0" data-depth="{{or ../level 0}}" {{#if (eq ./url @root.page.url)}} data-current{{/if}}>
     {{#if ./content}}
-      <div data-navigation-tree-toggle class="flex items-start py-[4px] px-[12px] space-x-2 max-w-fit"{{#if (has-active-child ./items)}} data-active-parent{{/if}}>
+      <div data-navigation-tree-toggle class="flex items-start py-[4px] pl-[8px] pr-[12px] space-x-2 max-w-fit"{{#if (has-active-child ./items)}} data-active-parent{{/if}}>
         {{#if ./items.length }}
-          <button class="flex items-center h-[26px] -ml-[1.3rem] p-1 flex-shrink-0" aria-label="Toggle {{./content}}" aria-expanded="{{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url)))}}false{{else}}true{{/if}}">
+          <button class="flex items-center h-[26px] p-1 flex-shrink-0" aria-label="Toggle {{./content}}" aria-expanded="{{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url)))}}false{{else}}true{{/if}}">
             <svg width="6" height="4" viewBox="0 0 6 4" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[6px] h-[6px] transform {{#if (and (not (has-active-child ./items)) (not (eq ./url @root.page.url))) }}-rotate-90{{/if}}" aria-hidden="true">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M3.35355 3.85355C3.15829 4.04882 2.84171 4.04882 2.64645 3.85355L0.146447 1.35355C-0.0488155 1.15829 -0.0488155 0.841708 0.146447 0.646446C0.341709 0.451184 0.658292 0.451184 0.853554 0.646446L3 2.79289L5.14645 0.646447C5.34171 0.451184 5.65829 0.451184 5.85355 0.646447C6.04882 0.841709 6.04882 1.15829 5.85355 1.35355L3.35355 3.85355Z" fill="currentColor"/>
             </svg>
@@ -42,7 +42,14 @@
     {{/if}}
   </li>
   <li data-navigation-tree-children class="{{#if (and ./content ./items.length (not (has-active-child ./items)) (not (eq ./url @root.page.url)) ) }}hidden{{/if}}">
-    {{> navigation-tree class="pr-2 pl-8" navigation=./items level=(increment ../level)}}
+    {{!-- Indent 32px per real nesting level. The component nav has an empty root
+          wrapper node, so its children are the visible top-level items and must
+          stay flush; only indent when the parent item itself has content. --}}
+    {{#if ./content}}
+      {{> navigation-tree class="pr-2 pl-8" navigation=./items level=(increment ../level)}}
+    {{else}}
+      {{> navigation-tree class="pr-2" navigation=./items level=(increment ../level)}}
+    {{/if}}
   </li>
   {{/each}}
 </ul>
