@@ -344,6 +344,7 @@ statsd
 stderr
 stdin
 [Ss]tdout
+[Ss]treamable
 [Ss]ubkeys?
 [Ss]ubshells?
 [Ss]ubcommands?
