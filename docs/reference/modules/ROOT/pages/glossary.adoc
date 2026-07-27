@@ -7,7 +7,7 @@ This glossary defines terms used across the CircleCI product and documentation. 
 
 == Active user
 
-Any user, registered or unregistered, who triggers the use of compute resources on projects that are not open source during a billing period. Commits, reruns, approvals, scheduled pipelines, and machine users can all make a user active. Active users are counted for billing. See the xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration] page.
+Any user, registered or unregistered, who triggers the use of compute resources on projects that are not open source during a billing period. Commits, reruns, approvals, scheduled triggers, and machine users can all make a user active. Active users are counted for billing. See the xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration] page.
 
 == Approval job
 
@@ -39,7 +39,7 @@ A unique identifier that determines when CircleCI writes a new <<cache>> and whi
 
 == CircleCI CLI
 
-The command-line interface you install on your local machine to validate and debug configuration, run jobs locally, and manage orbs, contexts, and policies. See the xref:guides:toolkit:local-cli.adoc[CircleCI Local CLI] page. The CircleCI CLI is distinct from the environment CLI, which is available in your CircleCI pipelines.
+The command-line interface you install on your local machine to validate and debug configuration, run jobs locally, and manage orbs, contexts, and policies. See the xref:guides:toolkit:local-cli.adoc[CircleCI Local CLI] page. The CircleCI CLI is distinct from the environment CLI, which is available in your CircleCI runs.
 
 == CircleCI Server
 
@@ -63,7 +63,7 @@ Organization-level rules that govern which configuration elements are required, 
 
 == Configuration
 
-The YAML file that defines your entire CI/CD process as code. The configuration file declares the <<pipeline>>, <<workflow,workflows>>, <<job,jobs>>, and <<step,steps>> that run when work is triggered. It is most often stored at `.circleci/config.yml` in the root of a repository, but a project is not limited to that name or location. See the xref:guides:getting-started:config-intro.adoc[Configuration Introduction] page and the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
+The YAML file that defines your entire CI/CD process as code. The configuration file declares the <<workflow,workflows>>, <<job,jobs>>, and <<step,steps>> that run when work is triggered. It is most often stored at `.circleci/config.yml` in the root of a repository, but a project is not limited to that name or location. See the xref:guides:getting-started:config-intro.adoc[Configuration Introduction] page and the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference].
 
 == Container
 
@@ -87,7 +87,7 @@ The unit of compute consumption in CircleCI. Credits are consumed by the second,
 
 == Cross-repo trigger
 
-A <<trigger>> that runs a pipeline in one repository when an event, such as a tag push, occurs in another. Cross-repo triggers help you test library consumers. See the xref:guides:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up Cross-Repo Triggers] page.
+A <<trigger>> that initiates a run in one repository when an event, such as a tag push, occurs in another. Cross-repo triggers help you test library consumers. See the xref:guides:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up Cross-Repo Triggers] page.
 
 == Custom image
 
@@ -95,7 +95,7 @@ A Docker <<image>> that you build and maintain yourself, typically from a Docker
 
 == Custom webhook
 
-An inbound webhook that lets any third-party service capable of sending an HTTP request trigger a CircleCI <<pipeline>>. See the xref:guides:orchestrate:custom-webhooks.adoc[Custom Webhooks] page. Compare with <<outbound-webhook>>.
+An inbound webhook that lets any third-party service capable of sending an HTTP request match a CircleCI <<trigger>> and initiate a <<run>>. See the xref:guides:orchestrate:custom-webhooks.adoc[Custom Webhooks] page. Compare with <<outbound-webhook>>.
 
 == Delivery
 
@@ -103,7 +103,7 @@ The act of packaging code changes and making them available for <<deployment>>. 
 
 == Deploy marker
 
-A lightweight logging mechanism, configured as steps in your pipeline, that records a timeline of deployments in one place. Deploy markers let you track deployment status, roll back, and promote versions through environments. See the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page.
+A lightweight logging mechanism, configured as steps in your CircleCI configuration, that records a timeline of deployments in one place. Deploy markers let you track deployment status, roll back, and promote versions through environments. See the xref:guides:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] page.
 
 == Deployment
 
@@ -120,7 +120,7 @@ Docker Layer Caching (DLC) lets builds reuse Docker image layers from previous b
 
 == Dynamic configuration
 
-A feature that lets a pipeline determine the work it runs at runtime, based on pipeline parameters, changed file paths, or other conditions, rather than using fully static configuration. Dynamic configuration is enabled with a <<setup-workflow>> (`setup: true`). See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
+A feature that lets a run determine the work it executes at runtime, based on pipeline parameters, changed file paths, or other conditions, rather than using fully static configuration. Dynamic configuration is enabled with a <<setup-workflow>> (`setup: true`). See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
 == Environment
 
@@ -133,6 +133,10 @@ An ordered sequence of <<environment,environments>> that defines a promotion pat
 == Environment variable
 
 A named value stored in CircleCI and injected at runtime into jobs, used for configuration, secrets, and credentials. Environment variables can be set at the context, project, job, or step level, and follow an order of precedence. Values are encrypted at rest and masked in job output. See the xref:guides:security:env-vars.adoc[Using Environment Variables] page. Compare with <<built-in-environment-variable>>.
+
+== Event
+
+The inbound occurrence that happened in the world. An event could be a webhook delivery, a PR opened, a clock tick, an API call, a tag push. A <<trigger>> can match an event.
 
 == Execution environment
 
@@ -196,7 +200,7 @@ A <<job>> that runs multiple times with different combinations of parameter valu
 
 == MCP server
 
-The CircleCI Model Context Protocol (MCP) server, which lets AI coding assistants diagnose build failures, fix issues, and manage pipelines through natural language without leaving the development environment. See the xref:guides:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI Model Context Protocol Server] page.
+The CircleCI Model Context Protocol (MCP) server, which lets AI coding assistants diagnose build failures, fix issues, and manage runs through natural language without leaving the development environment. See the xref:guides:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI Model Context Protocol Server] page.
 
 [#mfa]
 == Multi-factor authentication (MFA)
@@ -238,11 +242,11 @@ A named, typed value passed to a <<command>>, <<job>>, or <<executor>> to make r
 
 == Pipeline
 
-The full set of processes you run when you trigger work on a project. A pipeline encompasses your <<workflow,workflows>>, which in turn coordinate your <<job,jobs>>, and is defined in your project's <<configuration,configuration file>>. See the xref:guides:orchestrate:pipelines.adoc[Pipelines] page.
+A definition that specifies where your CircleCI configuration is stored and where your code is checked out from. A <<trigger>> references a pipeline and uses it when initiating a <<run>>.
 
 == Pipeline parameter
 
-A typed <<parameter>> declared at the top level of a configuration file and passed when a <<pipeline>> is triggered through the API or web app. Pipeline parameters are referenced with `pipeline.parameters.<name>`. See the xref:guides:orchestrate:pipeline-variables.adoc[Pipeline Values and Parameters] page.
+A typed <<parameter>> declared at the top level of a configuration file and passed when a <<run>> is initiated through the API or web app. Pipeline parameters are referenced with `pipeline.parameters.<name>`. See the xref:guides:orchestrate:pipeline-variables.adoc[Pipeline Values and Parameters] page.
 
 == Pipeline value
 
@@ -268,7 +272,7 @@ After a project is set up, you can configure settings, contexts, environment var
 
 == Registered user
 
-A user who has created a CircleCI account. Registered users can access the web app, view pipelines and build history, trigger and rerun builds, and have organization access based on their role. See the xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration] page. Compare with <<unregistered-user>>.
+A user who has created a CircleCI account. Registered users can access the web app, view runs and build history, trigger and rerun builds, and have organization access based on their role. See the xref:guides:plans-pricing:user-types-and-registration.adoc[User Types and Registration] page. Compare with <<unregistered-user>>.
 
 == Release
 
@@ -284,7 +288,7 @@ A feature that enables building, running, and pushing Docker images to registrie
 
 == Rerun
 
-Re-executing a failed <<workflow>>, or individual failed <<job,jobs>> within it, to recover from transient failures without triggering a new pipeline. See the xref:guides:orchestrate:workflows.adoc[Workflows] page. For tests specifically, see <<test-splitting>> and the xref:guides:test:rerun-failed-tests.adoc[Rerun Failed Tests] page.
+Re-executing a failed <<workflow>>, or individual failed <<job,jobs>> within it, to recover from transient failures without initiating a new <<run>>. See the xref:guides:orchestrate:workflows.adoc[Workflows] page. For tests specifically, see <<test-splitting>> and the xref:guides:test:rerun-failed-tests.adoc[Rerun Failed Tests] page.
 
 == Resource class
 
@@ -292,11 +296,15 @@ A configuration option that specifies the compute resources, such as CPU and RAM
 
 == Rollback
 
-Reverting an application to a previous stable version when an issue is detected, either through a dedicated rollback pipeline or by rerunning a prior workflow. See the xref:guides:deploy:rollback-a-deployment.adoc[Roll Back a Deployment] page.
+Reverting an application to a previous stable version when an issue is detected, either through a run triggered with a dedicated rollback pipeline or by rerunning a prior workflow. See the xref:guides:deploy:rollback-a-deployment.adoc[Roll Back a Deployment] page.
+
+== Run
+
+The instance produced when an <<event>> matches a <<trigger>>. A run records the outcome of the attempt and groups any <<workflow,workflows>> that executed, including errors that occurred before workflows could start.
 
 == Schedule trigger
 
-A <<trigger>> that runs a pipeline on a defined schedule, using cron syntax, rather than on each commit. Schedule triggers are the recommended way to run scheduled work. Use them instead of scheduled workflows unless your setup requires that approach. See the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
+A <<trigger>> that initiates a run on a defined schedule, using cron syntax, rather than on each commit. Schedule triggers are the recommended way to run scheduled work. Use them instead of scheduled workflows unless your setup requires that approach. See the xref:guides:orchestrate:schedule-triggers.adoc[Schedule Triggers] page.
 
 == Secrets masking
 
@@ -325,7 +333,7 @@ A single executable action within a <<job>>, such as a `run`, `checkout`, `save_
 
 == Setup workflow
 
-A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the rest of the pipeline. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
+A <<workflow,workflow>> marked with `setup: true` that runs first in a <<dynamic-configuration,dynamic configuration>>. A setup workflow can compute pipeline parameters and select which configuration to continue with, enabling conditional execution of the remaining workflows. See the xref:guides:orchestrate:dynamic-config.adoc[Dynamic Configuration] page.
 
 [badge="Beta"]
 == Test impact analysis
@@ -338,7 +346,7 @@ Dividing a test suite across multiple parallel execution environments, by name, 
 
 == Trigger
 
-A mechanism that initiates a <<pipeline>>. Triggers can be automatic, based on VCS events, schedules, or custom webhooks, or manual, through the web app, API, or CLI. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page. See also <<schedule-trigger>>, <<custom-webhook>>, and <<cross-repo-trigger>>.
+A trigger watches for events and, when matched, uses the configured pipeline to initiate a run. Triggers can respond to events from VCS activity, schedules, the API, the CLI, or the web app. See the xref:guides:orchestrate:triggers-overview.adoc[Triggers Overview] page. See also <<schedule-trigger>>, <<custom-webhook>>, and <<cross-repo-trigger>>.
 
 == Unregistered user
 
@@ -356,11 +364,11 @@ The platform where your code is stored and that CircleCI integrates with, such a
 [#outbound-webhook]
 == Webhook (outbound)
 
-An HTTP POST request that CircleCI sends to an external service when a specified event occurs, such as a workflow or job completing. Outbound webhooks let other services react in real time without polling. See the xref:guides:integration:outbound-webhooks.adoc[Outbound Webhooks] page. Compare with <<custom-webhook>>, which triggers CircleCI.
+An HTTP POST request that CircleCI sends to an external service when a specified action occurs, such as a workflow or job completing. Outbound webhooks let other services react in real time without polling. See the xref:guides:integration:outbound-webhooks.adoc[Outbound Webhooks] page. Compare with <<custom-webhook>>, which triggers CircleCI.
 
 == Workflow
 
-A set of rules that defines a collection of <<job,jobs>> and their run order. Workflows can run jobs concurrently, sequentially, on a schedule, or with a manual gate using an <<approval-job>>. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
+A workflow is the container of executed work, a set of rules that defines a collection of <<job,jobs>> and their run order. Workflows can run jobs concurrently, sequentially, on a schedule, or with a manual gate using an <<approval-job>>. See the xref:guides:orchestrate:workflows.adoc[Workflows] page.
 
 == Workspace
 
