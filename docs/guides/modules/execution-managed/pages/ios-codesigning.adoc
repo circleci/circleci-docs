@@ -42,7 +42,7 @@ You will need to provide the following:
 * Your personal API token.
 * `<org-id>`: Your CircleCI organization ID. See xref:guides:toolkit:how-to-find-ids.adoc#find-an-organization-id[How to Find IDs].
 * `<.p12-base64-encoded-blob>`: he the raw binary content of your `.p12` certificate file converted into a Base64-encoded string. On macOS, generate it with `base64 -i <.p12-file> -o -`.
-* `<.p12-file>`: Thsi is the filename of your Apple signing certificate (iOS or macOS), exported from the Keychain Access app on macOS as a `.p12` file. Max 40 characters.
+* `<.p12-file>`: This is the filename of your Apple signing certificate (iOS or macOS), exported from the Keychain Access app on macOS as a `.p12` file. Max 40 characters.
 * `<your-cert-password>`: The password created when the `.p12` file was exported from Keychain Access.
 
 [,shell]
@@ -96,7 +96,7 @@ curl -X POST https://circleci.com/api/v2/signing-configs \
   }'
 ----
 
-The response returns the signing bundle ID. You wiln need the signing bundle ID when managing your assets, for example deleting a signing bundle. See <<api-manage-assets>> for more information:
+The response returns the signing bundle ID. You will need the signing bundle ID when managing your assets, for example deleting a signing bundle. See <<api-manage-assets>> for more information:
 
 [,json]
 ----
