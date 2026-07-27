@@ -35,9 +35,15 @@ The same endpoints and configuration are used for both iOS and macOS.
 [#api-upload-certificate]
 === 1. Upload a certificate
 
-Send a `POST` request to upload your certificate. The `cert_blob` is the
-Base64-encoded contents of your `.p12` file. On macOS you can generate it
-with `base64 -i <.p12-file> -o -`.
+Send a `POST` request to upload your certificate.
+
+You will need to provide the following:
+
+* Your personal API token.
+* `<org-id>`: Your CircleCI organization ID. See xref:guides:toolkit:how-to-find-ids.adoc#find-an-organization-id[How to Find IDs].
+* `<.p12-base64-encoded-blob>`: he the raw binary content of your `.p12` certificate file converted into a Base64-encoded string. On macOS, generate it with `base64 -i <.p12-file> -o -`.
+* `<.p12-file>`: Thsi is the filename of your Apple signing certificate (iOS or macOS), exported from the Keychain Access app on macOS as a `.p12` file. Max 40 characters.
+* `<your-cert-password>`: The password created when the `.p12` file was exported from Keychain Access.
 
 [,shell]
 ----
@@ -52,7 +58,7 @@ curl -X POST https://circleci.com/api/v2/certificates \
   }'
 ----
 
-The response returns the certificate ID:
+The response returns the certificate ID. The certificate ID is the unique identifier for a certificate, returned in the API response after a successful certificate upload:
 
 [,json]
 ----
@@ -63,10 +69,14 @@ The response returns the certificate ID:
 === 2. Create a signing bundle
 
 A signing bundle maps a certificate to its provisioning profiles. Send a
-`POST` request, using the `cert-id` returned in the previous step. Each
-profile `blob` is the Base64-encoded contents of the profile file.
+`POST` request, using the following:
 
-NOTE: Signing bundle names must be unique within your organization, be at most 50 characters, and contain only letters, numbers, and hyphens (no underscores or other characters). This matches the naming rules enforced when the bundle is referenced in your configuration. See <<api-constraints>>.
+* Your personal API token.
+* `<signing-bundle-name>`: A descriptive name for this set of credentials (for example, `production-signing`) that you reference in your configuration. Unique per organization, maximum 50 characters, letters, numbers, and hyphens only.
+* `<org-id>`: Your CircleCI organization ID. See xref:guides:toolkit:how-to-find-ids.adoc#find-an-organization-id[How to Find IDs].
+* `cert-id-from-previous-request`: The `cert-id` returned in the previous step.
+* Each provisioning profile's filename and `blob`. The `blob` is the raw binary content of the profile file converted into a Base64-encoded string. On macOS, generate it with `base64 -i <provisioning-profile-file> -o -`. The filename is the filename of the Apple provisioning profile associated with the app's bundle ID. Use a `.mobileprovision` file for iOS, or a `.provisionprofile` file for macOS, usually downloaded from the Apple Developer Portal. Maximum 40 characters.
+* A maximum of 100 profiles per bundle.
 
 [,shell]
 ----
@@ -86,7 +96,7 @@ curl -X POST https://circleci.com/api/v2/signing-configs \
   }'
 ----
 
-The response returns the signing bundle ID:
+The response returns the signing bundle ID. You wiln need the signing bundle ID when managing your assets, for example deleting a signing bundle. See <<api-manage-assets>> for more information:
 
 [,json]
 ----
@@ -99,6 +109,11 @@ The response returns the signing bundle ID:
 Add a `code_signing` key to your `macos` executor listing the signing
 bundles to install, and add the `install_signing_bundle` step before you
 build. CircleCI installs the referenced bundles onto the executor.
+
+* `<signing-bundle-name>`: A descriptive name for this set of credentials (for example, `production-signing`) that you reference in your configuration. Unique per organization, maximum 50 characters, letters, numbers, and hyphens only.
+* `<other-signing-bundle-name>`: An optional secondary signing configuration name (for example, `staging-signing`) if your job requires more than one certificate or set of profiles.
+* `<your-xcode-scheme>`: The name of the specific build scheme you want to archive (for example, `MyApp` or `Runner`). Found in Xcode under *Product > Scheme*, or by running `xcodebuild -list`.
+
 
 [,yaml]
 ----
@@ -157,74 +172,35 @@ requires provisioning profiles depends on the certificate type.
 [#api-manage-assets]
 === View and delete certificates and signing bundles
 
-List the certificates stored for your organization:
+You can list the certificates stored for your organization, and the signing bundles created for your organization. You can also delete a certificate or signing bundle.
 
+.List the certificates stored for your organization
 [,shell]
 ----
 curl -H "Circle-Token: <your-circleci-api-token>" \
   "https://circleci.com/api/v2/certificates?org-id=<org-id>"
 ----
 
-List the signing bundles created for your organization:
-
+.List the signing bundles created for your organization
 [,shell]
 ----
 curl -H "Circle-Token: <your-circleci-api-token>" \
   "https://circleci.com/api/v2/signing-configs?org-id=<org-id>"
 ----
 
-Delete a certificate. Deletion fails with an HTTP 409 response if any
-signing bundle still references the certificate, so delete or update
-those bundles first.
-
+.Delete a certificate. Deletion fails with an HTTP 409 response if any signing bundle still references the certificate, so delete or update those bundles first.
 [,shell]
 ----
 curl -X DELETE -H "Circle-Token: <your-circleci-api-token>" \
   https://circleci.com/api/v2/certificates/<cert-id>
 ----
 
-Delete a signing bundle:
-
+.Delete a signing bundle
 [,shell]
 ----
 curl -X DELETE -H "Circle-Token: <your-circleci-api-token>" \
   https://circleci.com/api/v2/signing-configs/<signing-bundle-id>
 ----
-
-[#api-placeholders]
-=== Placeholders
-
-Replace these placeholders in the commands and configuration above with your own values.
-
-`<cert-id>`:: The unique identifier for a certificate, returned in the API response after a successful certificate upload.
-`<cert-id-from-previous-request>`:: The specific `cert_id` returned in Step 1, used to associate that certificate with a signing bundle.
-`<org-id>`:: The unique UUID for your CircleCI organization.
-`<other-signing-bundle-name>`:: An optional secondary signing configuration name (for example, `staging-signing`) if your job requires more than one certificate or set of profiles.
-`<.p12-base64-encoded-blob>`:: The raw binary content of your `.p12` certificate file converted into a Base64-encoded string. On macOS, generate it with `base64 -i <.p12-file> -o -`.
-`<.p12-file>`:: The filename of your Apple signing certificate (iOS or macOS), exported from the Keychain Access app on macOS as a `.p12` file.
-`<provisioning-profile-base64-blob>`:: The raw binary content of your provisioning profile file converted into a Base64-encoded string. On macOS, generate it with `base64 -i <provisioning-profile-file> -o -`.
-`<provisioning-profile-file>`:: The filename of the Apple provisioning profile associated with the app's bundle ID. Use a `.mobileprovision` file for iOS, or a `.provisionprofile` file for macOS, usually downloaded from the Apple Developer Portal.
-`<signing-bundle-id>`:: The unique identifier for a signing bundle, returned in the API response after a successful bundle creation.
-`<signing-bundle-name>`:: A descriptive name for this set of credentials (for example, `production-signing`) that you reference in your configuration.
-`<your-cert-password>`:: The password created when the `.p12` file was exported from Keychain Access.
-`<your-circleci-api-token>`:: A personal API token used to authenticate your requests to the CircleCI API.
-`<your-xcode-scheme>`:: The name of the specific build scheme you want to archive (for example, `MyApp` or `Runner`). Found in Xcode under *Product > Scheme*, or by running `xcodebuild -list`.
-
-[#api-constraints]
-=== Constraints
-
-[.table-scroll]
---
-[cols="2,3", options="header"]
-|===
-| Field | Constraint
-
-| `cert_file_name` | Maximum 40 characters
-| Signing bundle `name` | Unique per organization, maximum 50 characters, letters, numbers, and hyphens only
-| `provisioning_profiles` | Maximum 100 profiles per bundle
-| Provisioning profile `file_name` | Maximum 40 characters
-|===
---
 
 [#fastlane-match]
 == Alternative: code signing with Fastlane Match
