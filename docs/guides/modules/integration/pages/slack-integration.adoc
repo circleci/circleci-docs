@@ -21,6 +21,7 @@ The Slack integration is the recommended way to set up workflow notifications in
 * Notifications work without changes to your `.circleci/config.yml`. You do not need to add an orb or extra steps to your pipelines.
 * You do not need to create a Slack app or store OAuth tokens in a context or environment variable.
 * Link projects to channels and manage notification preferences from your project settings in the web app. Any organization member with write access to a project can configure it.
+* Get tagged directly in notifications. When you <<link-your-slack-identity,link your Slack identity>>, CircleCI mentions you in the Slack notifications for workflows you trigger.
 * New Slack notification features are added to the integration first.
 
 == Limitations
