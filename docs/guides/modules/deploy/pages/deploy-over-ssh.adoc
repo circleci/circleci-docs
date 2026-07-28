@@ -46,7 +46,7 @@ jobs:
   #...
   deploy:
     machine:
-      image: ubuntu-2204:2023.07.2
+      image: ubuntu-2404:current
     steps:
       - run:
           name: Deploy Over SSH
