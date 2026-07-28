@@ -942,7 +942,7 @@ Cloud::
 jobs:
   build: # name of your job
     machine: # executor type
-      image: ubuntu-2004:current # recommended linux image
+      image: ubuntu-2404:current # recommended linux image
 
     steps:
       # Commands run in a Linux virtual machine environment
@@ -1221,7 +1221,7 @@ Cloud::
 jobs:
   build:
     machine:
-      image: ubuntu-2004:2024.01.2 # recommended linux image
+      image: ubuntu-2404:current # recommended linux image
     resource_class: large
     steps:
       ... // other config
@@ -1408,7 +1408,7 @@ Cloud::
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:2024.01.2
+      image: ubuntu-2404:current
     resource_class: arm.medium
     steps:
       - run: uname -a
@@ -1825,7 +1825,7 @@ jobs: # conditional steps may also be defined in `commands:`
         type: string
         default: ""
     machine:
-      image: ubuntu-2004:2024.11.1
+      image: ubuntu-2404:current
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -3604,7 +3604,7 @@ version: 2.1
 jobs:
   bar:
     machine:
-      image: ubuntu-2004:2024.05.1
+      image: ubuntu-2404:current
     steps:
       - checkout
       - run:

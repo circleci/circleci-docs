@@ -42,7 +42,7 @@ image: ubuntu-2004:202201-01  # Deprecated image
 
 # To this:
 machine:
-  image: ubuntu-2004:current    # or "default" for the latest supported version
+  image: ubuntu-2404:current    # or "default" for the latest supported version
 ----
 
 **For Remote Docker**: Update the version parameter:

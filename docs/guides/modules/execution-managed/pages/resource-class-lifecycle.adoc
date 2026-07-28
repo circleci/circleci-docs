@@ -54,12 +54,12 @@ docker:
 ----
 # Change this:
 machine:
-  image: ubuntu-2204:current
+  image: ubuntu-2404:current
   resource_class: old.medium        # Deprecated resource class
 
 # To this:
 machine:
-  image: ubuntu-2204:current
+  image: ubuntu-2404:current
   resource_class: new.medium         # Supported resource class
 ----
 

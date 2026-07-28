@@ -82,7 +82,7 @@ workflows:
 jobs:
   machine-job:
     machine:
-      image: ubuntu-2004:current
+      image: ubuntu-2404:current
     resource_class: large
     steps:
       - docker/check:
@@ -103,7 +103,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-2004:current
+      image: ubuntu-2404:current
     resource_class: large
     working_directory: ~/my_app
     steps:
