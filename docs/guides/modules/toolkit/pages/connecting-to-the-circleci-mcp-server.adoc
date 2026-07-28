@@ -4,7 +4,7 @@
 :page-description: Connect an AI coding assistant to CircleCI's hosted MCP server using OAuth2 or a personal API token.
 :experimental:
 
-NOTE: The CircleCI hosted MCP server is currently in preview. You can expect changes to the available tools during this phase.
+NOTE: The CircleCI hosted MCP server is currently in preview. You can expect changes to the available tools during this phase. If you have any issues, questions, or feedback, post on our link:https://discuss.circleci.com/t/hosted-and-cli-mcp-server-feedback/54827[community forum].
 
 This page walks through connecting an AI coding assistant to CircleCI's hosted MCP server. For conceptual background, best practices, and troubleshooting, see the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page. That page also lists the supported tools.
 
