@@ -5,6 +5,11 @@
 
 This guide gets you started with the CircleCI Slack orb.
 
+[NOTE]
+====
+If you are on CircleCI Cloud, we recommend the xref:guides:integration:slack-integration.adoc[Slack integration] for workflow-status notifications. It is set up once at the organization level, requires no changes to your `config.yml`, and is where new Slack notification features are being added.
+====
+
 [#introduction]
 == Introduction
 
