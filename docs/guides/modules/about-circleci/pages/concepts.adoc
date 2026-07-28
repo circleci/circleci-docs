@@ -6,7 +6,7 @@
 [#introduction]
 == Introduction
 
-This guide introduces some basic concepts to help you understand how CircleCI manages your CI/CD pipelines.
+This guide introduces the core concepts you need to understand how CircleCI works.
 
 [#concurrency]
 == Concurrency
@@ -18,7 +18,7 @@ See the xref:optimize:concurrency.adoc[Concurrency] page for more information.
 [#configuration]
 == Configuration
 
-CircleCI believes in _configuration as code_. A single file called `config.yml` orchestrates your entire CI/CD process. This file lives in a folder called `.circleci` at the root of your project and defines the entire pipeline.
+CircleCI believes in _configuration as code_. A single file called `config.yml` orchestrates your entire CI/CD process. This file lives in a folder called `.circleci` at the root of your project and defines your entire CI/CD process.
 
 Example of a directory setup using CircleCI:
 
@@ -32,7 +32,6 @@ Example of a directory setup using CircleCI:
 
 You can adapt your CircleCI configuration to fit the different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
-* *<<pipelines,Pipeline>>*: Represents the entirety of your configuration.
 * *<<workflows,Workflows>>*: Responsible for orchestrating multiple _jobs_.
 * *<<jobs,Jobs>>*: Responsible for running a series of _steps_ that perform commands.
 * *<<steps,Steps>>*: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project.
@@ -240,6 +239,13 @@ See the xref:optimize:docker-layer-caching.adoc[Docker Layer Caching] page for m
 Instead of manually creating your configuration for each CircleCI project, you can generate this configuration dynamically, based on specific pipeline parameters or file paths. Dynamic configuration is helpful where your team is working on a monorepo (or a single repository). Dynamic configuration allows you to trigger builds from _specific_ parts of your project, rather than rebuilding everything each time.
 
 See the xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] page for more information.
+
+[#events]
+== Events
+
+An event is the inbound occurrence that prompts CircleCI to act — a push to a branch, a pull request opened, a scheduled time, or an API call. Events are the starting point of the entity chain: when CircleCI receives an event, it checks whether any <<triggers,triggers>> match and, if so, initiates a <<runs,run>>.
+
+See the xref:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
 
 [#execution-environments]
 == Execution environments
@@ -454,19 +460,11 @@ See xref:optimize:parallelism-faster-jobs.adoc[Test Splitting and Parallelism] p
 [#pipelines]
 == Pipelines
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. Pipelines are defined in your project <<configuration,configuration file>>.
+A pipeline is a definition that specifies where your CircleCI configuration is stored and where your code is checked out from. A <<triggers,trigger>> references a pipeline and uses it when initiating a <<runs,run>>.
 
-Pipelines represent methods for interacting with your configuration:
+Pipelines are distinct from the work they produce. When an <<events,event>> matches a trigger, CircleCI uses the pipeline definition to fetch your configuration and create a run. That run then executes the <<workflows,workflows>>, <<jobs,jobs>>, and <<steps,steps>> defined in your configuration file.
 
-* Trigger a pipeline through the API with the link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[trigger a pipeline] endpoint.
-* Use pipeline parameters to trigger xref:orchestrate:pipeline-variables.adoc#conditional-workflows[Conditional Workflows].
-* Use `version 2.1` configuration, which provides access to:
-    * xref:reference:ROOT:reusing-config.adoc[Reusable Configuration] elements, including executors, commands and jobs.
-    * Packaged reusable configuration, known as xref:orbs:use:orb-intro.adoc[Orbs].
-    * Improved configuration validation error messages.
-    * Option to enable auto-cancel, within **Advanced** project settings in the web app to terminate workflows when pipelines trigger on non-default branches.
-
-NOTE: Consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
+You can use xref:orchestrate:pipeline-variables.adoc#conditional-workflows[pipeline parameters] to control which workflows run when a run is initiated.
 
 See the xref:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
 
@@ -488,7 +486,7 @@ For GitHub App, GitLab SaaS and self-managed and Bitbucket Data Center users, a 
 A standalone project can have:
 
 * One or more configurations (pipeline definitions), including, but not limited to, a `.circleci/config.yml` file in the repository associated with the project.
-* One or more triggers (events from a source of change), including, but not limited to, a VCS. A trigger determines which configuration to use to start a pipeline.
+* One or more triggers (events from a source of change), including, but not limited to, a VCS. A trigger determines which configuration to use to initiate a run.
 
 Select *Projects* in the CircleCI web app sidebar to enter the projects dashboard. On the dashboard, you can set up and follow any project you have access to.
 
@@ -539,6 +537,19 @@ The `resource_class` key is also used to configure a xref:execution-runner:runne
 
 For full details on both uses of resource classes, see the xref:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
 
+[#runs]
+== Runs
+
+A run is the instance produced when an <<events,event>> matches a <<triggers,trigger>>. It is what you investigate when something passes or fails: a run records the outcome of the attempt and groups any <<workflows,workflows>> that executed, including errors that occurred before workflows could start.
+
+A run is created on every trigger match — even if a configuration error prevents any workflows from starting. In that case, the run records the error rather than leaving no trace.
+
+You can enable auto-cancel in *Advanced* project settings in the web app to automatically terminate an in-progress run when a new one is triggered on the same branch.
+
+NOTE: Consider the impact of enabling auto-cancel if you have configured automated deployment jobs on non-default branches.
+
+See the xref:orchestrate:pipelines.adoc[Pipelines Overview] page for more information.
+
 [#steps]
 == Steps
 
@@ -563,6 +574,15 @@ jobs:
 ----
 
 See the xref:orchestrate:jobs-steps.adoc[Jobs and Steps] page for more information.
+
+[#triggers]
+== Triggers
+
+A trigger is a matching rule that watches for <<events,events>> and, when matched, uses the configured <<pipelines,pipeline>> to initiate a <<runs,run>>. You configure triggers in the CircleCI web app.
+
+Triggers can respond to events from VCS activity such as pushes and pull requests, scheduled times, API calls, or actions in the web app or CLI. You can also initiate a run programmatically using the link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[trigger a pipeline] API endpoint.
+
+See the xref:orchestrate:triggers-overview.adoc[Triggers Overview] page for more information.
 
 [#user-types]
 == User roles
