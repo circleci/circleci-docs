@@ -1,5 +1,5 @@
 pass:[<!-- vale off -->]
-
+[.datatable.cols=4*]
 |===
 | Key | Type | Default | Description
 
