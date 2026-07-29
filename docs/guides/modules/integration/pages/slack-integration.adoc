@@ -122,14 +122,21 @@ Organization administrators and contributors can manage the Slack integration fr
 +
 WARNING: Deleting the Slack app stops all project notifications across the organization. You must reinstall the app to resume notifications.
 
-[badge="Beta"]
+[#link-your-slack-identity]
 == Link your Slack identity
 
 Linking your Slack identity connects your CircleCI user account to your identity in a Slack workspace that has the CircleCI Slack app installed. Linking your identity enables direct message notifications, actor tagging, and interactivity such as approving a held workflow directly from Slack.
 
-Linking is scoped by Slack workspace. If you belong to multiple organizations that each have their own connected Slack workspace, link your identity separately for each one.
+Each Slack identity link applies to a single Slack workspace. If you belong to multiple organizations that each have their own connected Slack workspace, link your identity separately for each one.
 
-NOTE: A Slack identity can be linked to only one CircleCI user account at a time. If you try to link a Slack identity that is already linked to a different CircleCI account, the link attempt fails. Unlink the Slack identity from the other account, then try again.
+NOTE: You can link a Slack identity to only one CircleCI user account at a time. If you try to link a Slack identity that is already linked to a different CircleCI account, the link attempt fails. Unlink the Slack identity from the other account, then try again.
+
+[#receive-dms-for-workflows-you-trigger]
+=== Receive DMs for workflows you trigger
+
+When you link your Slack identity, CircleCI delivers your xref:integration:notifications.adoc#my-work[My Work] notifications as Slack direct messages. You can set different status filters for Slack and email. This includes xref:integration:notifications.adoc#approval-job-notifications[Approval Job Notifications] for workflows you trigger.
+
+Update your preferences in menu:User Settings[Notifications].
 
 === Get tagged in notifications
 
