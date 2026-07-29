@@ -154,7 +154,7 @@ nomad:
         certificate: "<nomad-mtls-base64-cert>"
         privateKey: "<nomad-mtls-base64-key>"
 ----
-s
+
 [#all-values-yaml-options]
 == All Helm `values.yaml` options
 
