@@ -1,8 +1,11 @@
 = CircleCI MCP overview
 :page-platform: Cloud
+:page-badge: Preview
 :page-description: An overview of CircleCI's MCP offerings for AI coding assistants, how they work, best practices, and troubleshooting steps.
 :experimental:
 :page-aliases: using-the-circleci-mcp-server.adoc
+
+NOTE: The CircleCI hosted and CLI MCP servers are currently in preview. You can expect changes to the available tools during this phase. If you have any issues, questions, or feedback, post on our link:https://discuss.circleci.com/t/hosted-and-cli-mcp-server-feedback/54827[community forum].
 
 CircleCI's MCP servers enable you to diagnose build failures, fix issues, and manage CI pipelines through natural language commands without leaving your development environment.
 
