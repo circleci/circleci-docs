@@ -171,6 +171,7 @@
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
 ** Deploys and rollbacks
 *** xref:deploy:set-up-smart-deployments.adoc[Set up Smart Deployments]
+*** xref:deploy:set-up-deploy-validation-manually.adoc[Set up deploy validation manually]
 *** xref:deploy:deploy-validation-reference.adoc[Deploy validation configuration reference]
 *** xref:deploy:set-up-rollbacks.adoc[Set up a rollback pipeline]
 *** xref:deploy:set-up-deploys.adoc[Set up a deploy pipeline]

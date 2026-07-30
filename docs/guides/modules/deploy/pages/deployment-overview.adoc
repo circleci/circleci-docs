@@ -144,7 +144,7 @@ If Smart Deployments is unavailable for your organization, or you want to add on
 * xref:configure-deploy-markers.adoc[Configure Deploy Markers]: Configure deploy markers manually, or use the multi-project setup to generate and commit deploy marker configuration for multiple projects at once.
 * xref:set-up-rollbacks.adoc[Set up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
 * xref:set-up-deploys.adoc[Set up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
-* xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference]: Configure deploy validation by editing your configuration file directly.
+* xref:set-up-deploy-validation-manually.adoc[Set up Deploy Validation Manually]: Configure deploy validation by editing your configuration file directly, then connect your monitoring tool. Use this route if your code is not in a GitHub repository.
 
 === CircleCI release agent
 

@@ -1,0 +1,275 @@
+= Set up deploy validation manually
+:page-platform: Cloud
+:page-description: Configure deploy validation by editing your CircleCI configuration file, for organizations that cannot use the Smart Deployments guided setup.
+:experimental:
+
+Deploy validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This guide shows how to configure it by editing your CircleCI configuration file, rather than through the Smart Deployments guided setup.
+
+== Introduction
+
+The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup generates this configuration for you, but it is unavailable in two cases:
+
+* Your code is not stored in a GitHub repository.
+* Your organization does not have AI features enabled.
+
+Follow this guide in either case. The result is the same deploy validation feature. The difference is that you write the configuration and connect your monitoring tool yourself.
+
+=== What you can set up manually
+
+Deploy validation and deploy markers are configuration, so they work on any version control system. Rollback and deploy pipelines are a web app feature that currently requires GitHub.
+
+[.table-scroll]
+--
+[cols="2,1,2", options="header"]
+|===
+|Capability
+|Needs GitHub
+|Notes
+
+|Deploy markers
+|No
+|Add the `circleci run release` commands to any project. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set up Deploy Markers Manually] section.
+
+|Deploy validation
+|No
+|Add a `validation` block to your release job, as described on this page.
+
+|Rollback and deploy pipelines
+|Yes
+|See the xref:set-up-rollbacks.adoc[Set up Rollbacks] and xref:set-up-deploys.adoc[Set up Deploys] guides.
+
+|Automatic rollback
+|Yes
+|Requires a rollback pipeline, so it inherits the GitHub requirement.
+|===
+--
+
+[IMPORTANT]
+====
+Without a rollback pipeline, deploy validation detects failures but cannot revert them.
+
+A failing check still marks the release as failed, records the events that caused it, and surfaces the failure in the deploys UI. CircleCI then reports the rollback as skipped, because no rollback pipeline is configured. Treat validation as your alerting and audit trail in this case, and roll back through your own tooling.
+====
+
+== Prerequisites
+
+* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A CircleCI project with a workflow configured to deploy your code.
+* Deploy markers configured in that workflow. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set up Deploy Markers Manually] section.
+* A monitoring tool that can send outbound webhooks. Datadog, Prometheus, and Alertmanager are supported directly, and you can connect any other tool as a custom provider.
+* Organization administrator permissions, to create a webhook secret.
+
+== 1. Add a release job to your configuration
+
+Deploy validation attaches to a _release job_, which is a job with `type: release` that names the release plan created by your `circleci run release plan` step. If your configuration already has one, skip to the next step.
+
+The `plan_name` value must match the deploy name you passed to `circleci run release plan`. In the following example, both are `my-service-release`:
+
+.Deployment job and release job
+[source,yaml]
+----
+version: 2.1
+
+jobs:
+  deploy-my-service:
+    executor: some-executor
+    steps:
+      - checkout
+      - run:
+          name: Plan deployment
+          command: |
+            circleci run release plan my-service-release \
+              --environment-name=production \
+              --component-name=my-service \
+              --target-version=<some-version-name>
+      - run:
+          name: Perform deployment
+          command: <your-deployment-logic>
+      - run:
+          name: Update planned deployment to running
+          command: circleci run release update my-service-release --status=running
+
+  release-my-service:
+    type: release
+    plan_name: my-service-release
+
+workflows:
+  deploy-service:
+    jobs:
+      - deploy-my-service
+      - release-my-service:
+          requires:
+            - deploy-my-service
+----
+
+For details of the `circleci run release` commands, see the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. For the release job keys, see the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration Reference].
+
+== 2. Turn on deploy validation
+
+Add a `validation` block to your release job. Deploy validation needs only one field to turn it on:
+
+.Release job with validation enabled
+[source,yaml]
+----
+jobs:
+  release-my-service:
+    type: release
+    plan_name: my-service-release
+    validation:
+      enabled: true
+----
+
+With `enabled: true` and nothing else, CircleCI creates a system catch-all check. The catch-all accepts any signal from your monitoring tool, whatever its name, and fails when the criteria matches `firing`, `triggered`, or `alert`.
+
+Start here. A catch-all is enough when one monitor guards one component, and it saves you from matching signal names before you have confirmed the webhook arrives at all.
+
+== 3. Add named validation checks
+
+Move to named checks when one catch-all is too blunt, for example when you want a latency monitor and an error rate monitor to fail the release independently.
+
+Each entry under `validation.webhooks` defines one check. As soon as you add any entry, CircleCI stops using the catch-all, and every monitor must send a `signal_name` matching the `name` of the entry that handles it.
+
+.Release job with two named checks
+[source,yaml]
+----
+jobs:
+  release-my-service:
+    type: release
+    plan_name: my-service-release
+    validation:
+      enabled: true
+      webhooks:
+        - name: error_rate
+          provider: datadog
+          max_failures: 2
+
+        - name: latency_smoke
+          provider: datadog
+----
+
+This example relies on the Datadog defaults for `data_points` and `fail_when`. Add explicit mappings when your monitoring tool sends payloads in a shape those defaults do not understand.
+
+For every field, the `data_points` keys, and the provider defaults, see the xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference] page.
+
+== 4. Set the evaluation window
+
+By default, validation listens for the system evaluation window. Set `evaluation_time` to control how long CircleCI waits for signals after a deploy completes:
+
+.Release job with an explicit evaluation window
+[source,yaml]
+----
+jobs:
+  release-my-service:
+    type: release
+    plan_name: my-service-release
+    validation:
+      enabled: true
+      evaluation_time: 30m
+      webhooks:
+        - name: error_rate
+          provider: datadog
+----
+
+Match the window to how quickly your monitors fire. A window shorter than your monitor evaluation interval finishes before any signal can arrive, and the release ends as inconclusive.
+
+If you have a rollback pipeline configured, add `auto_rollback_on_failure: true` to revert automatically when a check fails. On a version control system other than GitHub, leave it out: there is no rollback pipeline for it to trigger.
+
+== 5. Connect your monitoring tool
+
+This step is required. Without it, CircleCI has no signals to evaluate and every release finishes as inconclusive.
+
+=== a. Copy the webhook ingest URL
+
+All validation webhooks POST to the following URL:
+
+[source,text]
+----
+https://circleci.com/api/v3/deploy/hooks/<org-id>/validate
+----
+
+Replace `<org-id>` with your organization ID. The URL is the same for every webhook secret in your organization. You can also copy the full URL, with your organization ID already filled in, from your organization deploy settings.
+
+include::guides:ROOT:partial$notes/find-organization-id.adoc[]
+
+=== b. Create a webhook secret
+
+CircleCI authenticates validation webhooks with a bearer token. To create one, follow these steps:
+
+include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
+. Select *Deploys*.
+. Find the Webhook secrets card.
+. Select btn:[Create webhook secret].
+. Enter a descriptive name, for example `Production Datadog`.
+. Optionally set an expiration date.
+. Copy the plaintext token before you close the modal.
+
+CAUTION: The plaintext token is shown once. Store it in your monitoring tool or your secrets manager straight away. If you lose it, revoke the secret and create a new one.
+
+=== c. Authenticate webhook requests
+
+Configure your monitoring tool to send the following custom header on every validation webhook:
+
+[source,json]
+----
+{
+  "Authorization": "Bearer <secret>"
+}
+----
+
+Replace `<secret>` with the token you copied. Do not include the angle brackets.
+
+=== d. Configure your monitoring provider
+
+Follow the instructions for your monitoring tool. Each provider needs the ingest URL, the bearer auth header, and a set of tags that let CircleCI match the alert to the right release.
+
+include::guides:ROOT:partial$deploy/configure-validation-providers.adoc[leveloffset=+2]
+
+== 6. Verify your setup
+
+Confirm the two halves work in order. Check that validation starts, then check that your webhook arrives.
+
+. Trigger your deploy workflow and let it complete.
+. Open the deployment from the deploys timeline and find the Release Validation panel. It shows an evaluation deadline and each check in a *Listening* state. If the panel is absent, validation is not running: check that your release job has `validation.enabled: true` and that `plan_name` matches your `circleci run release plan` deploy name.
+. Trigger a test alert in your monitoring tool while the window is open.
+. Refresh the deployment page. The event appears under the matching check, with a note saying whether it matched the fail criteria.
+
+An event that arrives but attaches to no check means the payload reached CircleCI and the matching failed. See the next section.
+
+== Troubleshooting
+
+If your webhook produces no event on the deployment, work through the following causes.
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+|Cause
+|How to check
+
+|The request is not authenticated
+|Your monitoring tool reports a delivery failure. Confirm the `Authorization` header is `Bearer <secret>` with a token that is neither revoked nor expired, in the Webhook secrets card of your organization deploy settings.
+
+|The component name does not match
+|The extracted `component_name` must match the component on the release exactly. Confirm your monitor sends `component_name`, or the alias `app` or `service`, with the same value as `--component-name` in your deploy marker.
+
+|The environment does not match
+|`env` is not optional for matching. Confirm your monitor sends the same value as `--environment-name` in your deploy marker.
+
+|The signal name does not match
+|Once you add entries under `validation.webhooks`, each monitor must send a `signal_name` matching an entry name. A missing or unmatched name is ignored. Remove your `webhooks` entries to fall back to the catch-all and confirm delivery, then add them back.
+
+|The criteria expression does not match
+|CircleCI normalizes criteria values to lowercase before evaluation. Write lowercase literals in `fail_when`, so `"triggered"` rather than `"Triggered"`.
+
+|The window closed before the alert
+|Compare the alert time with the evaluation deadline on the deployment. If the monitor fires more slowly than the window, raise `evaluation_time`.
+|===
+--
+
+For what each field means during matching, see the xref:deploy-validation-reference.adoc#data-point-keys[Data Point Keys] section.
+
+== Next steps
+
+* Review every field you can set on the `validation` block. See the xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference] page.
+* Understand what happens when validation passes or fails. See the xref:set-up-smart-deployments.adoc#how-deploy-validation-works[How Deploy Validation Works] section.
+* If your code is in a GitHub repository, set up a rollback pipeline to enable automatic rollback. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.

@@ -1,0 +1,149 @@
+== Configure Datadog
+
+. In Datadog, create or edit a webhook integration for alerts.
+. Set the webhook URL to the CircleCI ingest URL.
+. Add the bearer auth custom header.
+. Set the payload to include the provider, the alert transition, and your tags:
++
+[source,json]
+----
+{
+  "provider": "datadog",
+  "alert_transition": "$ALERT_TRANSITION",
+  "tags": "$TAGS"
+}
+----
+
+. Ensure your alert notifications include the tags listed below on every payload. Use the format `tag_name:value` in the `tags` array.
+
+[.table-scroll]
+--
+.Datadog tags CircleCI matches on
+[cols="1,1,2", options="header"]
+|===
+|Tag
+|Required
+|Purpose
+
+|`app`
+|Yes
+|The component or application name for the release under validation.
+
+|`env`
+|Yes
+|The environment, for example `production`.
+
+|`signal_name`
+|Yes, when using named webhooks
+|Must match a `validation.webhooks[].name` value in your configuration. This routes the alert to the correct check when a release has more than one check.
+
+|`version`
+|No
+|The deployed version. Omit this tag only if you accept fan-out to all matching running releases.
+
+|`project_id`
+|No
+|The CircleCI project UUID. Omit this tag to match any project that shares the same component and environment.
+
+|`namespace`
+|No
+|The component instance namespace. Omit this tag to match any namespace for that component and environment.
+|===
+--
+
+Map your Datadog template variables so that `app`, `version`, `env`, and `signal_name` align with the values your deploy markers use.
+
+== Configure Prometheus or Alertmanager
+
+. In Prometheus or Alertmanager, create or edit a webhook receiver.
+. Set the URL to the CircleCI ingest URL.
+. Add the bearer auth custom header.
+. Include the keys listed below under `groupLabels` in the webhook payload.
+
+[.table-scroll]
+--
+.Prometheus and Alertmanager labels CircleCI matches on
+[cols="1,2", options="header"]
+|===
+|Label
+|Purpose
+
+|`alertname`
+|The validation signal name. This must match a `validation.webhooks[].name` value in your configuration.
+
+|`app`
+|The component or application name.
+
+|`env`
+|The environment.
+
+|`version`
+|The deployed version.
+|===
+--
+
+Check that your payload shape matches the following example:
+
+[source,json]
+----
+{
+  "provider": "prometheus",
+  "status": "firing",
+  "groupLabels": {
+    "alertname": "error_rate",
+    "app": "my-service",
+    "env": "production",
+    "version": "1.0.0"
+  }
+}
+----
+
+== Configure a custom monitoring tool
+
+. Configure an alert webhook in your monitoring tool.
+. POST to the CircleCI ingest URL with the bearer auth custom header.
+. Send a JSON body that includes the fields listed below.
+
+[.table-scroll]
+--
+.Fields to include in a custom webhook payload
+[cols="1,2", options="header"]
+|===
+|Field
+|Purpose
+
+|`provider`
+|Set this to `custom`.
+
+|`component_name`
+|The application or component name.
+
+|`env`
+|The environment.
+
+|`signal_name`
+|The validation signal. This must match a `validation.webhooks[].name` value in your configuration.
+
+|`version`
+|The deployed version.
+
+|`alert_transition`
+|The condition signal, for example `triggered`.
+|===
+--
+
+Check that your payload shape matches the following example:
+
+[source,json]
+----
+{
+  "provider": "custom",
+  "component_name": "my-service",
+  "version": "1.0.0",
+  "env": "production",
+  "signal_name": "error_rate",
+  "alert_transition": "triggered"
+}
+----
+
+If your monitoring tool sends payloads in a different shape, map the fields explicitly in your configuration. See the xref:deploy-validation-reference.adoc#data-point-keys[Data Point Keys] section.

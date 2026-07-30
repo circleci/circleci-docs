@@ -30,8 +30,11 @@ With `enabled: true` and nothing else, CircleCI creates a system catch-all check
 You need to write this configuration by hand in the following cases:
 
 * You use a version control system other than GitHub, so the guided setup is unavailable.
+* Your organization does not have AI features enabled.
 * You want more than one named check per release.
 * Your monitoring tool sends payloads in a shape the provider defaults do not understand.
+
+For the steps to configure validation and connect your monitoring tool by hand, see the xref:set-up-deploy-validation-manually.adoc[Set up Deploy Validation Manually] guide. This page is the field reference for that work.
 
 [#optional-validation-fields]
 == Optional validation fields
