@@ -10,7 +10,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 [#set-an-environment-variable-in-a-shell-command]
 == Set an environment variable in a shell command
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by xref:env-vars.adoc#parameters-and-bash-environment[using `BASH_ENV`]. This approach is useful for both modifying your `PATH` and setting environment variables that reference other variables.
+While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by xref:env-vars.adoc#parameters-and-bash-environment[Using `BASH_ENV`]. This approach is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
 IMPORTANT: To access environment variables in the same step where they are set, you **must** run `source "$BASH_ENV"` after writing to `$BASH_ENV`. This is because writing to `$BASH_ENV` only adds commands to a file, it does not execute them. The `source` command reads and executes the file's contents in the current shell, making the variables available immediately. Without sourcing, the variables will only be available in subsequent steps when CircleCI automatically sources `$BASH_ENV` at the start of each new step.
 
@@ -58,7 +58,7 @@ jobs:
 ```
 
 NOTE: Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
-to be accessible in more than one step, export the value xref:env-vars.adoc#parameters-and-bash-environment[using `BASH_ENV`].
+to be accessible in more than one step, export the value xref:env-vars.adoc#parameters-and-bash-environment[Using `BASH_ENV`].
 
 [#set-an-environment-variable-in-a-job]
 == Set an environment variable in a job
@@ -83,6 +83,7 @@ NOTE: Integers longer than 6 digits will be converted to an exponential number. 
 
 . In the CircleCI web app, select **Org** from the sidebar.
 +
+.Organization settings showing Contexts
 image::guides:ROOT:org-settings-contexts.png[Contexts]
 
 . Select the context you want to associate your environment variable with, or create a new one by clicking the **Create Context** button.
@@ -112,13 +113,14 @@ jobs:
             echo $MY_ENV_VAR
 ```
 
-Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information about controlling access to environment variables with contexts, refer to the xref:contexts.adoc#restrict-a-context[Restricting a context] documentation.
+Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information about controlling access to environment variables with contexts, refer to the xref:contexts.adoc#restrict-a-context[Restricting a Context] documentation.
 
 [#set-an-environment-variable-in-a-project]
 == Set an environment variable in a project
 
 . On the CircleCI web app, go to your project's settings. You can do this two ways: Navigate to **Projects** on the side navigation, and then click the ellipsis button in the project's row, or select the **Project Settings** button on the project's individual **Pipelines** page.
 +
+.Project settings showing environment variables
 image::guides:ROOT:project-settings-env-var-v2.png[Environment Variables]
 
 . Select **Environment Variables** in the side navigation.
@@ -154,7 +156,7 @@ Once created, environment variables are hidden and uneditable in the application
 
 Environment variables can also be set for a Docker container. To do this, use the xref:reference:ROOT:configuration-reference.adoc#docker[`environment` key].
 
-NOTE: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the xref:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an entrypoint] section of the Custom images guide.
+NOTE: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the xref:execution-managed:custom-images.adoc#adding-an-entrypoint[Adding an Entrypoint] section of the Custom images guide.
 
 ```yaml
 version: 2.1

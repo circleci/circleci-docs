@@ -5,32 +5,29 @@ ifdef::machine[]
 NOTE: If you are installing **self-hosted runners for server**, the CircleCI CLI needs to be configured using your server API key. Run `circleci setup` to configure the CLI and access the option to supply a new API token if required.
 endif::[]
 
-In order to install self-hosted runners, you will need to create a namespace and authentication token by performing the steps listed below.
+To install self-hosted runners, you need to create a CircleCI namespace and resource class. Once set up you will receive a resource class token. You must be an organization admin to complete this process. View your installed runners on the inventory page in the link:https://app.circleci.com/[web app] by selecting *Runners* from the sidebar.
 
-NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
+TIP: If you already create orb in your organization you will already have a namespace configured. You must use this same namespace for runners. Each organization can only create a single namespace.
 
-You can view your installed runners on the inventory page in the link:https://app.circleci.com/[web app] or your CircleCI server app, by selecting *Runners* from the sidebar.
+. Create a namespace for your organization's self-hosted runners if you do not already have one configured. We suggest using a lowercase representation of your CircleCI organization's account name.
++
+Use the following command to create your CircleCI organization's namespace:
++
+[source,console]
+$ circleci namespace create <name> --org-id <your-organization-id>
 
-. Create a namespace for your organization's self-hosted runners. *Each organization can only create a single namespace*. We suggest using a lowercase representation of your CircleCI organization's account name. If you already use orbs, this namespace should be the same namespace orbs use.
+. Create a resource class for your runner using the following command. You will configure jobs to use this resource class when you want them to run on your slef-hosted runner:
 +
-Use the following command to create a namespace:
+[source,console]
+$ circleci runner resource-class create <namespace>/<resource-class> <description> --generate-token
 +
-```
-circleci namespace create <name> --org-id <your-organization-id>
-```
+Make sure to replace `<namespace>` and `<resource-class>` with your org namespace and desired resource class name, respectively. You can add a description but this is optional.
 +
-TIP: If your organization already has a namespace, you will receive an error if you run the above command to create a _different_ namespace. The error message returns the name of the existing namespace. In this case, move on to step 2 below, using your existing namespace.
-
-. Create a resource class for your self-hosted runner's namespace using the following command:
+Resource class names must follow specific naming conventions.
 +
-```
-circleci runner resource-class create <namespace>/<resource-class> <description> --generate-token
-```
-+
-Make sure to replace `<namespace>` and `<resource-class>` with your org namespace and desired resource class name, respectively. You may optionally add a description.
-+
-Example: `circleci runner resource-class create my-namespace/my-resource-class my-description --generate-token`.
+** The *namespace* can contain lowercase letters, numbers, underscores, and dashes.
+** The *resource class name* can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs.
 +
 The resource class token is returned after the runner resource class is successfully created.
 +
-CAUTION: The token cannot be retrieved again, so be sure to store it safely.
+CAUTION: The token is only displayed once, so be sure to store it safely.

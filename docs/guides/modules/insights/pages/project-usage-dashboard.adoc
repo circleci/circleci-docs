@@ -1,0 +1,53 @@
+= Project usage dashboard
+:page-platform: Cloud
+:page-description: Use the Project Usage dashboard to understand credit consumption by workflow and job within a specific project.
+:experimental:
+
+The Project Usage dashboard gives you a breakdown of how your CircleCI credits are being consumed within a specific project. Use it to understand spending patterns across workflows and jobs, identify cost drivers, and make informed decisions about where to optimize.
+
+NOTE: The data on this page is directional. It is intended to help you understand relative spend patterns and trends over time, but must not be used as a source of billing truth. For authoritative billing information, refer to your link:https://app.circleci.com/settings/plan/usage[Plan Usage page].
+
+[#availability]
+== Availability
+
+The Project Usage dashboard is available on *CircleCI Cloud* plans. It is not available on CircleCI Server installations.
+
+[#how-to-access]
+== How to access
+
+You can reach the Project Usage dashboard from two places:
+
+*From the Project Overview page* — Open any project, then select the *Usage* button in the top navigation area.
+
+*Directly via URL* — The dashboard URL follows this pattern:
+
+[source]
+----
+https://app.circleci.com/projects/<vcs>/<org>/<project>/usage
+----
+
+[#what-the-dashboard-shows]
+== What the dashboard shows
+
+[#summary-metrics]
+=== Summary metrics
+
+At the top of the page, a row of metric cards shows aggregate credit consumption for the selected time period. Each card includes a comparison to the prior period so you can see whether usage is trending up or down.
+
+[#usage-over-time]
+=== Usage over time
+
+A time-series chart shows how credit consumption has changed over the selected date range. Hover over any point to see the exact value for that day.
+
+[#data-freshness]
+== Data freshness
+
+Dashboard data is sourced from CircleCI's internal analytics pipeline and is typically available within a few hours of pipeline completion. Recently run pipelines may not appear immediately.
+
+[#coming-soon]
+== Coming soon
+
+[#breakdown-by-workflow-and-job]
+=== Breakdown by workflow and job
+
+Tables below the chart break down credit consumption by workflow and by job, letting you pinpoint which parts of your pipeline are driving the most spend.

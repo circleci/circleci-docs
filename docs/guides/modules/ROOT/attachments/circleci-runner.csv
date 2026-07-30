@@ -8,8 +8,8 @@ github.com/aws/aws-sdk-go-v2/credentials,Apache-2.0
 github.com/aws/aws-sdk-go-v2/feature/ec2/imds,Apache-2.0
 github.com/aws/aws-sdk-go-v2/internal/configsources,Apache-2.0
 github.com/aws/aws-sdk-go-v2/internal/endpoints/v2,Apache-2.0
-github.com/aws/aws-sdk-go-v2/internal/ini,Apache-2.0
 github.com/aws/aws-sdk-go-v2/internal/sync/singleflight,BSD-3-Clause
+github.com/aws/aws-sdk-go-v2/internal/v4a,Apache-2.0
 github.com/aws/aws-sdk-go-v2/service/ecr,Apache-2.0
 github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding,Apache-2.0
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url,Apache-2.0
@@ -27,6 +27,7 @@ github.com/davecgh/go-spew/spew,ISC
 github.com/distribution/reference,Apache-2.0
 github.com/emicklei/go-restful/v3,MIT
 github.com/fatih/camelcase,MIT
+github.com/fsnotify/fsnotify,BSD-3-Clause
 github.com/fxamacker/cbor/v2,MIT
 github.com/gabriel-vasile/mimetype,MIT
 github.com/gin-contrib/sse,MIT
@@ -56,7 +57,6 @@ github.com/goccy/go-yaml,MIT
 github.com/google/btree,Apache-2.0
 github.com/google/gnostic-models,Apache-2.0
 github.com/google/go-cmp/cmp,BSD-3-Clause
-github.com/google/shlex,Apache-2.0
 github.com/google/uuid,BSD-3-Clause
 github.com/gregjones/httpcache,MIT
 github.com/grpc-ecosystem/grpc-gateway/v2,BSD-3-Clause
@@ -85,6 +85,7 @@ github.com/rollbar/rollbar-go,MIT
 github.com/shirou/gopsutil,BSD-3-Clause
 github.com/spf13/cobra,Apache-2.0
 github.com/spf13/pflag,BSD-3-Clause
+github.com/tklauser/go-sysconf,BSD-3-Clause
 github.com/ugorji/go/codec,MIT
 github.com/vmihailenco/go-tinylfu,MIT
 github.com/x448/float16,MIT

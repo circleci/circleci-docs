@@ -5,6 +5,7 @@
   if (!article) return
   var toolbar = document.querySelector('header') || document.querySelector('.toolbar')
   var supportsScrollToOptions = 'scrollTo' in document.documentElement
+  var HEADER_GAP = 24 // px of breathing room below the sticky header on anchor jumps; keep in sync with .doc heading scroll-margin-top in doc.css
 
   function decodeFragment (hash) {
     return hash && (~hash.indexOf('%') ? decodeURIComponent(hash) : hash).slice(1)
@@ -20,7 +21,7 @@
       window.location.hash = '#' + this.id
       e.preventDefault()
     }
-    var y = computePosition(this, 0) - toolbar.getBoundingClientRect().bottom
+    var y = computePosition(this, 0) - toolbar.getBoundingClientRect().bottom - HEADER_GAP
     var instant = e === false && supportsScrollToOptions
     instant ? window.scrollTo({ left: 0, top: y, behavior: 'instant' }) : window.scrollTo(0, y)
   }

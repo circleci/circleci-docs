@@ -227,7 +227,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-2204:2022.04.2
+      image: ubuntu-2404:current
     steps:
       - checkout
       # start proprietary DB using private Docker image
@@ -258,5 +258,4 @@ When `prefer_same_region` is set to `true`, CircleCI will attempt to pull the im
 == See also
 
 * xref:optimize:docker-layer-caching.adoc[Docker Layer Caching]
-* xref:reference:ROOT:glossary.adoc#job-space[Job Space]
 * xref:reference:ROOT:glossary.adoc#primary-container[Primary Container]

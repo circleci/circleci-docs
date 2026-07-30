@@ -76,7 +76,12 @@ tasks:
       - npm run build:docs
 
   validate-html:
-    desc: Validate HTML, links, etc
+    desc: Validate HTML and internal links (skips external links for speed)
+    cmds:
+      - go tool htmltest -s
+
+  validate-html-external:
+    desc: Validate HTML including external links (slower; used by the daily pipeline)
     cmds:
       - go tool htmltest
 

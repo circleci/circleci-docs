@@ -8,7 +8,7 @@ This guide walks you through a basic example of test splitting in CircleCI. Test
 [#introduction]
 == Introduction
 
-Test splitting is a technique in which tests are executed simultaneously across multiple execution environments. Test splitting takes advantage of a feature called xref:optimize:parallelism-faster-jobs.adoc[_parallelism_], which allows you to run a job in CircleCI on different nodes at the same time.
+Test splitting is a technique in which tests are executed simultaneously across multiple execution environments. Test splitting takes advantage of a xref:optimize:parallelism-faster-jobs.adoc[Parallelism], which allows you to run a job in CircleCI on different nodes at the same time.
 
 You may have a test suite that consists of dozens or hundreds of tests, and executing them one after the other can take up a lot of time. When you split tests, you have the opportunity to significantly reduce wait times and receive feedback more quickly.
 
@@ -65,8 +65,8 @@ workflows:
       - build-and-test
 ----
 
-* **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and reusable configuration. More information on config version 2.1 can be found in the xref:reference:ROOT:configuration-reference.adoc[Configuration reference] page.
-* **Lines 3-4:** This project uses the CircleCI Node xref:orbs:use:orb-intro.adoc[orb]. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the link:https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].
+* **Line 1:** This project uses the configuration `version: 2.1`. This enables CircleCI features such as orbs and reusable configuration. More information on config version 2.1 can be found in the xref:reference:ROOT:configuration-reference.adoc[Configuration Reference] page.
+* **Lines 3-4:** This project uses the CircleCI Node xref:orbs:use:orb-intro.adoc[Orb]. The Node orb is a package of reusable configuration elements that allow you to execute tasks common to Node.js apps and help reduce complexity in your config.yml file. In this particular example, the orb's `install-packages` command is used to install Node packages and configure Yarn as the default package manager using the `pkg-manager` parameter. More details on the Node orb can be found on the link:https://circleci.com/developer/orbs/orb/circleci/node[Developer Hub].
 * **Lines 18-21:** The project pipeline consists of one workflow called `sample`. This workflow is comprised of one job, named `build-and-test`, which is made up of a few steps to check out the project code, install Node packages and set the default package manager, and run tests (lines 8 to 16).
 
 Test splitting is typically set up within a job. In this tutorial you will modify the `build-and-test` job to define the following:
@@ -80,7 +80,7 @@ Test splitting is typically set up within a job. In this tutorial you will modif
 
 To get started, you need to get the sample app building as a project on CircleCI.
 
-The steps are a little different depending on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, organizations, and integrations guide] for more information.
+The steps are a little different depending on which organization type you have: `circleci`, `github` or `bitbucket`. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide] for more information.
 
 [tabs]
 ====
@@ -96,8 +96,6 @@ The steps are a little different depending on which organization type you have: 
 . You will be prompted to select your config.yml file. In the window, select the "Fast: Take me to a config.yml template that I can edit" option. Select btn:[Set Up Project].
 
 . You will then see a list of sample configurations. Scroll down within the window until you see **Node (Advanced)**, then choose btn:[Select].
-+
-image::guides:ROOT:test-splitting-sample-configs.png[Sample config for Node]
 
 . You will be taken to the in-app configuration editor. The project actually uses Yarn, so you will need to edit the following steps so that they use `yarn` instead of `npm`, like so:
 +
@@ -314,15 +312,13 @@ In the CircleCI web app, take a look at the steps in the recently triggered pipe
 
 . You may have noticed that this pipeline ran more quickly compared to earlier. The Node orb automatically caches node packages by default, so a cache exists from the earlier pipeline run. This helps speed up the install step.
 
-. You should also now see five **parallel runs**, as a result of the number of execution environments set by the `parallelism` key. Each Docker environment (node) is labeled by its index number (so you have numbers 0 through 4). You can select each node to see the individual steps that executed in each parallel run. The environment you are viewing will be highlighted in green.
-+
-image::guides:ROOT:test-splitting-parallel-runs.png[Five parallel runs with run times displayed]
+. You will see five **parallel runs**, as a result of the number of execution environments set by the `parallelism` key. Each Docker environment (node) is labeled by its index number (so you have numbers 0 through 4). You can select each node to see the individual steps that executed in each parallel run. The environment you are viewing is highlighted.
 +
 You might also notice that the parallel run times are not all equal, nor is the overall run time of the pipeline cut down to precisely 1/5. Each executor runs the same steps, but there is a difference in terms of which executor runs which tests. There may also be some variation in how long each executor takes to spin up.
 +
 Splitting tests by timing is the best way to ensure tests are split as evenly as possible and parallel runs finish around the same time. With that said, you may need to play around with the parallelism level to find the number that works best for you.
 
-. In any of the parallel runs, open the **Test application** step. You will see which test suites and how many individual tests were executed in this particular run. You will also see this message in the output:
+. In any of the parallel runs, open the **Test application** step. You will see which test suites and how many individual tests executed in this particular run. You will also see this message in the output:
 +
 [,shell]
 ----
@@ -333,14 +329,13 @@ Requested weighting by historical based timing, but they are not present. Fallin
 CircleCI defaults to splitting tests by name. As this is the first time you are storing test data from the pipeline, CircleCI does not yet have timing data to work with.
 // Check if this applies to GitLab
 +
-On subsequent runs, you'll see an additional step labelled **Downloading previous test results**:
+On subsequent runs, you will see an additional step labelled **Downloading previous test results**.
 +
-image::guides:ROOT:downloading-previous-test-results-step.png[Downloading previous test results step]
-+
-The presence of this step confirms that, during this run, the test results stored by a previous run (with the `store_test_results` step) were successfully retrieved. Provided that the data is xref:optimize:parallelism-faster-jobs.adoc#junit-xml-reports[properly formatted], the test suite will be split as evenly as possible over the specified number of test environments.
+The presence of this step confirms that, during this run, test results stored by a previous run (with the `store_test_results` step) were successfully retrieved. Provided that the data is properly formatted () xref:optimize:parallelism-faster-jobs.adoc#junit-xml-reports[JUnit XML]), the test suite will be split as evenly as possible over the specified number of test environments.
 
 . Open the **Timing** tab in the job. This tab provides a visualization of how each parallel run did relative to each other.
 +
+.Parallel runs visualization in Timings tab
 image::guides:ROOT:test-splitting-timing-tab.png[Parallel runs visualization in Timings tab]
 +
 The chart indicates which three steps within each run took the longest to complete. Hover over each section of the bar to see those respective steps.
@@ -356,8 +351,9 @@ In the previous step, you saw that test splitting defaulted to splitting tests b
 +
 For example, you can try upgrading to a newer version of the Node orb, such as `circleci/node@5.0.2`. Or you may choose to trigger a pipeline. On the *Pipelines* page in the CircleCI web app, select btn:[Trigger Pipeline].
 
-. Open the pipeline in the web app, and view the **Test application** step. This time, you should see `Autodetected filename timings.` in the output. This means that CircleCI is now splitting tests based on available timing data from preceding runs.
+. Open the pipeline in the web app, and view the **Test application** step. This time, you will see `Autodetected filename timings.` in the output. This means that CircleCI is now splitting tests based on available timing data from preceding runs.
 +
+.Testing step showing split by timing
 image::guides:ROOT:test-splitting-by-timing.png[Testing step showing split by timing]
 
 . Lastly, open the **Timing** tab. In this particular example, you might find that the time taken for the testing step to complete is not drastically different from earlier, when tests were split by name. However, you may notice that the idle time between runs has now been cut down to only five seconds, compared to 11 seconds from earlier.
@@ -371,4 +367,4 @@ In this tutorial, you have configured your pipeline to split tests by timing dat
 == Next steps
 
 * For a more in-depth discussion of the demo used in this tutorial, read our link:https://circleci.com/blog/a-guide-to-test-splitting/[A Guide to Test Splitting] blog post.
-* Learn about xref:insights:insights-tests.adoc[Test insights] available in CircleCI.
+* Learn about xref:insights:insights-tests.adoc[Test Insights] available in CircleCI.

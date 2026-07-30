@@ -55,7 +55,6 @@ image::guides:ROOT:test/dynamic-test-splitting-uneven-nodes-dark.png[Job timings
 
 Before enabling dynamic test splitting, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 * Set parallelism greater than 1 for the test jobs that you want to split. See the xref:reference:ROOT:configuration-reference.adoc#parallelism[Configuration Reference] for more information.
@@ -80,7 +79,7 @@ Use `--doctor` locally to validate that your `test-suites.yml` is set up correct
 
 [source,console]
 ----
-$ circleci run testsuite "ci tests" --doctor
+$ circleci testsuite "ci tests" --doctor
 ----
 
 Follow the steps until all checks pass.

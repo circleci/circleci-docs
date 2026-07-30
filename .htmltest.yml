@@ -1,5 +1,12 @@
 DirectoryPath: "build"
-CheckExternal: false
+# External links are checked by default. The per-commit pipeline skips them for
+# speed by passing htmltest's -s flag (see the validate-html task); the daily
+# external-link-check pipeline runs the full check with no flag.
+CheckExternal: true
+# Tuning that only takes effect when external links are checked (daily run):
+# give remote hosts a generous timeout and cache results so reruns are cheap.
+ExternalTimeout: 20
+CacheExpires: "6h"
 EnforceHTTPS: true
 CheckSelfReferencesAsInternal: true
 BaseURL: https://circleci.com/docs
@@ -9,6 +16,9 @@ IgnoreURLs:
   - "\\[url\\]"                          # Escaped literal [url] placeholder in search templates
   - "^/docs/"                            # All absolute paths from 404 page (navigation + assets)
   - "llms\\.txt$"                        # llms.txt only generated on main branch, not PR builds
+  - "github\\.com/circleci/circleci-docs/commit/" # Per-page "last updated" commit links — require GitHub login
+  - "github\\.com/circleci/circleci-docs/edit/"   # Per-page "propose changes" edit links — require GitHub login
+  - "^https://support\\.circleci\\.com"  # Support site returns 403 to automated checkers; links are valid
 IgnoreDirs:
   - "api"
 OutputDir: ".htmltest"

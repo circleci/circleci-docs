@@ -3,7 +3,7 @@
 :page-description: Learn how to upgrade the internal PostgreSQL database from version 12 to 14 in an installation of CircleCI Server 4.10.
 :experimental:
 
-PostgreSQL is a database service used by CircleCI Server. Server 4.10 ships PostgreSQL `14` so you must upgrade to PostgreSQL 14 before upgrading to Server 4.10. This page describes how to upgrade your internal PostgreSQL instance from version `12` to `14`.
+PostgreSQL is a database service used by CircleCI Server. This page describes how to upgrade your internal PostgreSQL instance from version `12` to `14`.
 
 == Important notes about upgrading PostgreSQL
 

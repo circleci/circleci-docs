@@ -269,30 +269,25 @@ For an example of how developers reference these images and the resource classes
 
 CAUTION: When using preallocated instances be aware that a cron job is scheduled to cycle through these instances once per minute to ensure they do not end up in an unworkable state.
 
-To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` examples:
+To configure server to keep instances preallocated, use the keys shown in the following `machine-provisioner-config.yaml` example.
+
+NOTE: Set `preboot.scheduled[].image` to an offering image name from your machine provisioner provider config. Use a name such as `ubuntu-2204`. Do not use job configuration aliases such as `default` or `docker-default`. Those aliases resolve for jobs in `.circleci/config.yml`. Machine provisioner does not resolve aliases for scheduled preallocation. Remote Docker jobs that use `docker-default` still require the resolved offering name here.
+
+WARNING: An unknown scheduled image fails config validation. Machine provisioner does not start until you correct the image name.
+
+NOTE: Set `cron` to a valid cron expression. Quote the value in YAML. An empty string is not valid. The example below keeps two instances warm during weekday business hours in UTC.
 
 [source,yaml]
 ----
-# -- Configuration options for, and numbers of, prescaled instances for remote Docker jobs.
+# Warm linux medium instances during weekday business hours (UTC).
+# Use the canonical offering image name, not a job configuration alias.
 preboot:
-   scheduled:
-       - executor: linux
-         class: medium
-         image: docker-default
-         cron: ""
-         count: 2
-----
-
-[source,yaml]
-----
-# -- Configuration options for, and numbers of, prescaled instances for machine jobs.
-preboot:
-   scheduled:
-     - executor: linux
-       class: medium
-       image: default
-       cron: ""
-       count: 2
+  scheduled:
+    - executor: linux
+      class: medium
+      image: ubuntu-2204
+      cron: "* 8-17 * * 1-5"
+      count: 2
 ----
 
 [#apply-changes]

@@ -1,1 +1,0 @@
-TIP: When adding the `testsuite` command to your CircleCI jobs, there is no need to install the `testsuite` plugin as it is already available in CircleCI Docker containers.

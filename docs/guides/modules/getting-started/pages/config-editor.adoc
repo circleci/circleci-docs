@@ -7,9 +7,6 @@ include::ROOT:partial$notes/standalone-unsupported.adoc[This feature is not supp
 
 With the CircleCI configuration editor, you can modify your configuration files without the use of the xref:toolkit:local-cli.adoc[CircleCI CLI] or a text editor.
 
-.Configuration Editor
-image::guides:ROOT:config-editor-main.png[Configuration Editor]
-
 The benefits of using the CircleCI configuration editor include:
 
 * Automatic validation and error checking.
@@ -25,18 +22,12 @@ In the link:https://app.circleci.com/[CircleCI web UI], select a pipeline in the
 
 To access the CircleCI configuration editor, select your desired branch from the *All Branches* drop-down menu near the top of the screen. Once you select a branch, the btn:[Edit Config] button will become enabled, and you can access the configuration editor.
 
-.Configuration Editor Access
-image::guides:ROOT:config-editor-all-branches.png[Configuration Editor Access]
-
 In the *Pipelines* view in a pipeline's row, and in the *Workflows* view at the top of the page, you will see the three-dots menu (meatball menu). Clicking this menu will allow you to open the configuration file.
 
 [#auto-completion]
 == Auto-completion
 
 The CircleCI configuration editor provides auto-complete suggestions as you type, with the ability to click on a suggestion to find out more. You will also find links to relevant documentation within the auto-completion tooltip.
-
-.Auto-completion
-image::guides:ROOT:config-editor-auto-complete.png[Auto-completion]
 
 [#configuration-menu]
 == Configuration tab options
@@ -49,13 +40,7 @@ The docs tab links out to helpful documentation relating to configuration files.
 
 The workflow tab shows all the jobs in the workflow, and links out to the individual job's *Job* view in the web UI.
 
-.Suggested Docs
-image::guides:ROOT:config-editor-docs.png[Suggested Docs]
-
 When hovering over a key-value pair in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
-
-.Tooltips
-image::guides:ROOT:config-editor-tooltips.png[Tooltips]
 
 [#save-and-run]
 == Save and run
@@ -63,9 +48,6 @@ image::guides:ROOT:config-editor-tooltips.png[Tooltips]
 Once your changes are made and your configuration is valid, you can commit to your VCS and re-run the pipeline by clicking the *Save and Run* button. A modal will pop up, and you will see the option to commit on the branch you are working from. You can also choose to create a new branch for the commit.
 
 If you are not making changes on your main branch, open a pull request on your VCS to save the changes to your main branch when you are ready.
-
-.Save and run
-image::guides:ROOT:config-editor-commit-and-run.png[Save and run]
 
 [#visual-studio-code-extension]
 == VS Code extension

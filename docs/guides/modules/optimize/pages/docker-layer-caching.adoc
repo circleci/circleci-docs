@@ -51,7 +51,7 @@ version: 2.1
 jobs:
  build:
     machine:
-      image: ubuntu-2004:202104-01  # any available image
+      image: ubuntu-2404:current  # any available image
       docker_layer_caching: true    # default - false
 
     steps:

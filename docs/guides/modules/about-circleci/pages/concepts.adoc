@@ -11,7 +11,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 [#concurrency]
 == Concurrency
 
-In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. To keep the system stable for all CircleCI customers, we use different soft concurrency limits on each of the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
+In CircleCI, _concurrency_ refers to utilizing multiple containers to run multiple jobs at the same time. Concurrency is different from CircleCI _parallelism_, which splits the tests of a single job across multiple containers. To keep the system stable for all CircleCI customers, we use different soft concurrency limits on each of the xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Classes] for different executors. If you experience queueing on your jobs, you may be hitting these limits. Customers on annual plans can request an increase to those limits at no extra charge.
 
 See the xref:optimize:concurrency.adoc[Concurrency] page for more information.
 
@@ -120,7 +120,7 @@ jobs:
 
   build2:
     machine:
-      image: ubuntu-2204:2024.01.2
+      image: ubuntu-2404:current
     steps:
       - attach_workspace:
         # Must be absolute path or relative path from working_directory
@@ -207,7 +207,7 @@ See the xref:orchestrate:workspaces.adoc[Using Workspaces] page for more informa
 
 Docker layer caching (DLC) caches the individual layers of Docker images built during your CircleCI jobs. CircleCI uses any unchanged layers on subsequent runs, rather than rebuilding the image each time.
 
-In the `.circleci/config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2004:202104-01` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
+In the `.circleci/config.yml` snippet below, the `build_elixir` job builds an image using the `ubuntu-2404:current` Dockerfile. Adding `docker_layer_caching: true` below the `machine` executor key ensures CircleCI saves each Docker image layer as the Elixir image is built.
 
 [,yaml]
 ----
@@ -216,7 +216,7 @@ version: 2.1
 jobs:
   build_elixir:
     machine:
-      image: ubuntu-2004:202104-01
+      image: ubuntu-2404:current
       docker_layer_caching: true
     steps:
       - checkout
@@ -279,10 +279,9 @@ jobs:
 #...
   build2:
     machine: # Specifies a machine image that uses
-      # an Ubuntu version 20.04 image with Docker 20.10.12
-      # and docker compose 1.29.2, follow CircleCI Discuss Announcements
+      # an Ubuntu version 24.04 image, follow CircleCI Discuss Announcements
       # for new image releases.
-      image: ubuntu-2004:current
+      image: ubuntu-2404:current
     steps:
       - checkout
 
@@ -378,8 +377,8 @@ jobs:
 #...
   build2:
     machine: # Specifies a machine image that uses
-      # an Ubuntu version 22.04 image
-      image: ubuntu-2204:2024.01.2
+      # an Ubuntu version 24.04 image
+      image: ubuntu-2404:current
     steps:
       - checkout
 
@@ -537,6 +536,8 @@ Pricing and plans information for the various resource classes can be found on t
 
 The `resource_class` key is also used to configure a xref:execution-runner:runner-concepts.adoc#namespaces-and-resource-classes[Self-Hosted Runner Instance].
 
+For full details on both uses of resource classes, see the xref:execution-managed:resource-class-overview.adoc[Resource Class Overview] page.
+
 [#steps]
 == Steps
 
@@ -594,9 +595,6 @@ CircleCI has various user roles with permissions inherited from VCS accounts.
 == Workflows
 
 Workflows orchestrate jobs. A workflow defines a list of jobs and their run order. You can run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
-
-.Workflows illustration
-image::guides:ROOT:workflow_detail_newui.png[Workflows illustration cloud]
 
 The following configuration example shows two workflows with modern features:
 

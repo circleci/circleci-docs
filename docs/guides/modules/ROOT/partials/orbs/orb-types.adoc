@@ -12,7 +12,7 @@ See the xref:orbs:use:managing-url-orbs-allow-lists.adoc[Managing URL Orb Allow 
 +
 If you would like to author your own URL orb, see the xref:orbs:author:create-test-and-use-url-orbs.adoc[Create, Test, and Use URL Orbs] guide.
 
-*Inline orbs*:: Inline orbs are defined directly within your project's configuration file. They are project-specific and not published or shared externally. Inline orbs are ideal for reusable configuration within a single project, and are also useful for learning orb concepts and testing configurations prior to extracting to a URL or registry orb.
+*Inline orbs*:: Inline orbs are defined directly within your project's configuration file. They are project-specific and not published or shared externally. Inline orbs are ideal for reusable configuration within a single project. They are also useful for learning orb concepts and testing configurations before extracting to a URL or registry orb.
 +
 Inline orbs do not require publishing, versioning, or external hosting. They exist only within your `.circleci/config.yml` file.
 +

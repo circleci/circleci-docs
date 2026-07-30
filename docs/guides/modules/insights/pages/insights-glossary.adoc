@@ -44,6 +44,7 @@ _Medians are a better measure of central tendency than arithmetic means because 
 [#organization-level-metrics]
 == Organization-level metrics
 
+.Organization-level metrics
 image::guides:ROOT:insights-org-metrics.png[Organization-level metrics example]
 
 Organization-level metrics allow you to analyze your organization's performance.
@@ -71,6 +72,7 @@ Organization-level metrics allow you to analyze your organization's performance.
 [#workflow-metrics]
 == Workflow Metrics
 
+.Workflow metrics
 image::guides:ROOT:insights-workflow-metrics.png[Workflow metrics example]
 
 [.table-scroll]
@@ -133,6 +135,7 @@ For percentile metrics like duration, approximation methods are used to find the
 
 This section describes how your trend data may appear across various metrics.
 
+.Trend data representations
 image::guides:ROOT:insights_trend_data.png[Trends data example]
 
 * *Green*: The metric is trending in the right direction.
@@ -141,7 +144,7 @@ image::guides:ROOT:insights_trend_data.png[Trends data example]
 
 Red and Green are used when describing the `Success Rate`, `Throughput` and `MTTR` metrics. Grey arrows are used when describing `Runs`, `Duration` and `Total Credits`.
 
-*Percentages*:: Percentages indicate the relative percentage change for a metric in the selected time window compared to the prior window. For instance, if the success rate of a workflow in the last 7 days has increased to 60% from 40% in the prior 7 days, Trends displays the +50% change in the current time window.
+*Percentages*:: Percentages indicate the relative percentage change for a metric in the selected time window compared to the prior window. For example, if a workflow's success rate increased from 40% to 60% over the last 7 days, Trends displays a +50% change.
 
 *Multiples*:: Multiples are used to indicate large swings in relative change over the selected period.
 

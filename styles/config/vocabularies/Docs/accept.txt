@@ -205,6 +205,7 @@ Jenkins
 JFrog
 Jira
 jq\b
+JSON
 \bJUnit\b
 junit
 JRuby
@@ -262,6 +263,7 @@ OPA
 [Pp]arsable
 [Pp]assphraseless
 [Pp]erformance
+pg_partman
 PHP
 PHPUnit
 Pipenv
@@ -327,6 +329,7 @@ Selenium
 SemVer
 [Ss]erver
 SELinux
+[Ss]erverless
 \b[Ss]hellchecking\b
 [Ss]harded
 \b[Ss]ingle sign-on\b
@@ -341,6 +344,7 @@ statsd
 stderr
 stdin
 [Ss]tdout
+[Ss]treamable
 [Ss]ubkeys?
 [Ss]ubshells?
 [Ss]ubcommands?
@@ -362,6 +366,7 @@ TestFairy
 \btime windows\b
 [Tt]imebox
 [Tt]imeboxing
+Tini
 Tink
 Tinkey
 TLS

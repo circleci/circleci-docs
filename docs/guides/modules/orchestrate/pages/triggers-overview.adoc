@@ -20,7 +20,8 @@ image::guides:ROOT:pipelines-dashboard.png[Screenshot showing running pipelines 
 
 NOTE: This feature is not available for GitLab integrations.
 
-. In the link:https://app.circleci.com/home[CircleCI web app], select your organization from your homepage, then select your project, either from your org homepage or select **Projects** from the sidebar for a full list. You will now be on your project's pipelines page.
+. In the link:https://app.circleci.com/home[CircleCI web app], select your organization from your homepage.
+. Select *Pipelines* for your project. If you do not see your project listed, select *Projects* in the sidebar to get to a full list. You will now be on your project's pipelines page.
 
 . Select btn:[Trigger Pipeline].
 +
@@ -34,9 +35,7 @@ image::guides:ROOT:trigger-pipeline-app.png[Screenshot showing location on trigg
 .Screenshot showing the trigger pipeline modal
 image::guides:ROOT:trigger-pipeline-app-modal.png[Trigger a pipeline modal in the CircleCI web app]
 
-. If your code is integrated via the **GitHub App or Bitbucket Data Center**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` step].
-+
-TIP: If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can skip this step, the same location is used for both config and checkout source.
+. If your code is integrated via the **GitHub App or Bitbucket Data Center**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` step]. If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can skip this step, the same location is used for both config and checkout source.
 
 . If you would like to specify any pipeline parameters, select **Add +** and enter the required fields.
 
@@ -73,11 +72,11 @@ Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2
 .. Copy your project slug. Save this somewhere, you will need it later.
 
 . Find your definition ID:
-.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select **Pipelines** in the sidebar.
-.. In the column **Definition ID**, select btn:[Copy] for the correct pipeline. Save this somewhere, you will need it in the next step.
+.. You are in project settings if you are following these steps in sequence. If not see previous steps to get there. Select *Project Setup* in the sidebar, or **Pipelines** if you are using Bitbucket Cloud.
+.. Copy the definition ID for the correct pipeline. Save this somewhere, you will need it in the next step.
 +
 .Screenshot showing the pipeline definition ID copy button
-image::guides:ROOT:triggers/copy-pipeline-definition-id.png[screenshot showing location of pipeline definition ID copy button]
+image::guides:ROOT:orchestrate-and-trigger/pipeline-definition-id.png[screenshot showing location of pipeline definition ID copy button]
 
 . To trigger a pipeline from the command line using `curl`, copy and paste this sample request and replace the details in `< >` with your details. The key `parameters` is optional:
 +

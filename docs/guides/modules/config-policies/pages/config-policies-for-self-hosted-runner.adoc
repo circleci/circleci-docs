@@ -3,12 +3,12 @@
 :page-description: Learn how to write a policy to restrict which projects can run jobs on a self-hosted runner.
 :experimental:
 
-NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI server v4.2.
+NOTE: The config policies feature is available on the **Scale** Plan and from CircleCI Server v4.2.
 
-Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview.adoc[Config policies overview].
+Follow this how-to guide to learn how to create a config policy to restrict which projects can run jobs on a self-hosted runner resource class. For more information about config policies, see the xref:config-policy-management-overview.adoc[Config Policies Overview].
 
 ****
-**Using server?** When using the `circleci policy` commands with CircleCI server, you will need to use the `policy-base-url` flag to provide your CircleCI server domain. For example:
+**Using Server?** When using the `circleci policy` commands with CircleCI Server, you will need to use the `policy-base-url` flag to provide your CircleCI Server domain. For example:
 
 [source,shell]
 ----
@@ -21,7 +21,7 @@ circleci policy push ./config-policies --owner-id <your-organization-ID> --polic
 
 * Install/update the CircleCI CLI, and ensure you have authenticated with a token before attempting to use the CLI with config policies. See the xref:toolkit:local-cli.adoc[Installing the Local CLI] page for more information.
 
-* Set up a self-hosted runner. See the xref:execution-runner:runner-overview.adoc#getting-started[Getting started] section of the Self-hosted runners overview.
+* Set up a self-hosted runner. See the xref:execution-runner:runner-overview.adoc#getting-started[Getting Started] section of the Self-hosted runners overview.
 
 * Ensure you have **enabled** config policy evaluation for your organization so that project configurations **will** be evaluated against your organization's policies when pipelines are triggered:
 +
@@ -85,8 +85,8 @@ In the following steps you will replace `namespace/resource_class` and `project_
 
 You can now push your new policy to your organization for it to take effect. You have two options:
 
-* Push the policy manually using the CLI from your local environment
-* Push your changes to your config policy repository if you are xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[managing policies via your VCS].
+* Push the policy manually using the CLI from your local environment.
+* Push your changes to your config policy repository if you are xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Managing Policies via Your VCS].
 
 [tabs]
 ====
@@ -112,13 +112,13 @@ If the upload was successful, you will see something like the following:
 Push to VCS::
 +
 --
-If you have set up your config policies repository with the sample configuration shown in the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Create and manage config policies guide], push your changes to the `main` branch of your config policies repository, and head to the CircleCI web app to see your policy pipeline run.
+Push your changes to `main` and head to the CircleCI web app to see your policy pipeline. This assumes you set up your config policies repository with the sample configuration from the xref:create-and-manage-config-policies.adoc#manage-policies-with-your-vcs[Config Policies] guide, .
 
-You can also push to a development branch, in which case you will get a diff of your policy bundle when you push your changes, rather than your new policy being pushed to your CircleCI organization. This is useful when developing your policies.
+Push to a development branch during policy development to get a diff of your policy bundle when you push your changes.
 --
 ====
 
-NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc[Test config policies] guide.
+NOTE: If you would like to write tests for your policy, check out the xref:test-config-policies.adoc[Test Config Policies] guide.
 
 [#a-more-complex-example]
 == A more complex example
@@ -152,6 +152,6 @@ resource_class_check = config.resource_class_by_project({
 [#next-steps]
 == Next steps
 
-* xref:create-and-manage-config-policies.adoc[Create and manage config policies]
-* xref:test-config-policies.adoc[Test config policies]
-* xref:config-policy-reference.adoc[Config policy reference]
+* xref:create-and-manage-config-policies.adoc[Create and Manage Config Policies]
+* xref:test-config-policies.adoc[Test Config Policies]
+* xref:config-policy-reference.adoc[Config Policy Reference]

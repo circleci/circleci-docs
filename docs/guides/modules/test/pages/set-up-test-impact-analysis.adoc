@@ -42,7 +42,7 @@ The analysis phase is run on your default branch (or the base branch of a pull r
 
 Keeping impact data fresh on the default branch allows the selection phase to select fewer tests without other unrelated changes interfering.
 
-For each file found during coverage analysis, a fast non-crypto hash of its contents is stored in the impact data. The data also tracks which files impact the tests being selected.
+For each file found during coverage analysis, a fast non-cryptographic hash of its contents is stored in the impact data. The data also tracks which files impact the tests being selected.
 
 .Example impact data relationship between a handler and repository.
 [source,json]
@@ -123,146 +123,70 @@ The selection rules can be extended to select tests beyond those identified in t
 
 Before enabling test impact analysis, ensure you have completed the xref:getting-started-with-smarter-testing.adoc[Getting Started With Smarter Testing] guide and have:
 
-* Installed the `testsuite` CLI plugin.
 * Configured your `.circleci/test-suites.yml` with `discover` and `run` commands.
 * Verified your tests run successfully with the `testsuite` command.
 
 == 1. Enable test impact analysis in your test-suites.yml file
 
-Update your test suite configuration to include an `analysis` command and the `test-impact-analysis` option. Keep your existing `discover` and `run` commands.
-
-Choose the starter configuration for your test runner and add the `analysis` line to your `.circleci/test-suites.yml`.
-
-[tabs]
-====
-Vitest::
-+
---
-Follow the instructions to add the link:https://github.com/circleci/vitest-circleci-coverage[Vitest CircleCI Coverage] plugin as a dev dependency.
-
-Add the `analysis` command to your `.circleci/test-suites.yml`.
+Add the `test-impact-analysis` option to your `test-suites.yml` configuration.
 
 [source,yaml]
 ----
 ---
 name: ci tests
 # ...
-analysis: CIRCLECI_COVERAGE=<< outputs.circleci-coverage >> vitest run --silent --bail 0 << test.atoms >>
-options:
-  test-impact-analysis: true
-----
---
-
-Jest::
-+
---
-Follow the instructions to add the link:https://github.com/circleci/jest-circleci-coverage[Jest CircleCI Coverage] plugin as a dev dependency. The plugin is compatible with Jest 28 through 30. It requires `jest`, `jest-environment-node`, and `jest-environment-jsdom` as peer dependencies.
-
-Add the `analysis` command to your `.circleci/test-suites.yml`.
-
-[source,yaml]
-----
----
-name: ci tests
-# ...
-analysis: CIRCLECI_COVERAGE=<< outputs.circleci-coverage >> jest --runInBand --silent --bail << test.atoms >>
-options:
-  test-impact-analysis: true
-----
---
-
-Mocha::
-+
---
-Follow the instructions to add the link:https://github.com/circleci/mocha-circleci-coverage[Mocha CircleCI Coverage] plugin as a dev dependency.
-
-Add the `analysis` command to your `.circleci/test-suites.yml`.
-
-[source,yaml]
-----
----
-name: ci tests
-# ...
-analysis: CIRCLECI_COVERAGE="<< outputs.circleci-coverage >>" mocha << test.atoms >>
-options:
-  test-impact-analysis: true
-----
---
-
-pytest::
-+
---
-Follow the instructions to add the link:https://github.com/circleci/pytest-circleci-coverage[pytest CircleCI Coverage] plugin as a dev dependency.
-
-Add the `analysis` command to your `.circleci/test-suites.yml`.
-
-[source,yaml]
-----
----
-name: ci tests
-# ...
-analysis: pytest --disable-pytest-warnings --no-header --quiet --tb=short --cov=myproj --cov-context=test --circleci-coverage=<< outputs.circleci-coverage >> << test.atoms >>
-options:
-  test-impact-analysis: true
-----
---
-
-Go with gotestsum::
-+
-[source,yaml]
-----
----
-name: ci tests
-# ...
-file-mapper: go list -json="Dir,ImportPath,TestGoFiles,XTestGoFiles" ./... > << outputs.go-list-json >>
-analysis: go tool gotestsum -- -coverprofile="<< outputs.go-coverage >>" -cover -coverpkg ./... << test.atoms >>
 options:
   test-impact-analysis: true
 ----
 
-RSpec::
-+
---
-Follow the instructions to add the link:https://github.com/circleci/rspec-circleci-coverage[RSpec CircleCI Coverage] plugin as a dev dependency.
+== 2. Run locally
 
-Add the `analysis` command to your `.circleci/test-suites.yml`.
+Use `--doctor` locally to validate the `test-suites.yml` is set up correctly. The CLI runs additional analysis checks when test impact analysis is enabled. If any results look incorrect, action items are provided to resolve them.
 
-[source,yaml]
+[source,console]
 ----
----
-name: ci tests
-# ...
-analysis: CIRCLECI_COVERAGE="<< outputs.circleci-coverage >>" bundle exec rspec << test.atoms >>
-options:
-  test-impact-analysis: true
+$ circleci testsuite "ci tests" --doctor
 ----
---
 
-Other::
-+
---
-Smarter Testing is test runner agnostic. Replace the `analysis` example below with your test runner. The next step validates that the commands are set up correctly.
-[source,yaml]
-----
----
-name: ci tests
-# ...
-analysis: my-test-runner --coverage=<< outputs.coverage >> --run << test.atoms >>
-options:
-  test-impact-analysis: true
-----
---
-====
+Follow the steps until all checks pass.
 
-=== Configure the test suite
+include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
-Code coverage cannot detect every relationship between source files and test atoms. The following options let you extend test selection for edge cases.
+Once all checks pass, follow the "Next steps" from the doctor output to generate initial impact data locally and send it to CircleCI.
 
-For the full list of available options, see the xref:testsuite-configuration-reference.adoc#options[Options] section in the test suite configuration reference.
+NOTE: Depending on the test runner, the first run of analysis can take a long time because every test atom needs to run analysis.
 
-==== Full test run paths
+== 3. Run in CI
 
-Some project files affect the running system without being directly covered by tests. Examples include dependency manifests, database migration files, or CI configuration. Use `full-test-run-paths` to list files that cause all test atoms to be selected and run.
+Commit the `.circleci/test-suites.yml` changes to your feature branch and push to your VCS. Follow your usual process to merge to your default branch.
+
+[#verify-in-ci]
+=== Verify in CI (optional)
+
+After analysis has been generated locally and sent to CircleCI, verify test impact analysis is working correctly by following these steps:
+
+. In the CircleCI web app, navigate to your pipeline and open the test job.
+. Check that the job was successful with skipped test atoms in the "Test" tab.
+. Modify a source file that was analyzed, then push. Only the test atoms that cover the modified file are selected to run. Look for the `Selecting tests...` output in the job to confirm the correct test atoms are selected and the reason for selection.
+
+*Test impact analysis is now set up for your test suite.* Feature branches run the test atoms impacted by code changes, and your default branch runs all tests while also updating impact data.
+
+If these defaults do not suit your project, see the <<advanced-configuration,Advanced configuration>> section for alternative configurations.
+
+== Next steps
+
+* xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
+* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
+
+
+[#advanced-configuration]
+== Advanced configuration
+
+=== Full test run paths
+
+Some project files affect the running system without being directly covered by tests. Examples include dependency manifests, database migration files, or CI configuration.
+
+Use `full-test-run-paths` to list files that cause all test atoms to be selected and run.
 
 .Example test suite with full test run paths configured
 [source,yaml]
@@ -280,7 +204,9 @@ options:
     - database-migrations/**/*.sql
 ----
 
-==== Test selection rules
+=== Test selection rules
+
+Code coverage cannot detect every relationship between source files and test atoms.
 
 Use `test-selection-rules` to extend test selection to cover non-source files, or to always run specific test atoms. For example, run integration tests when database migrations change, or always run acceptance tests regardless of which files changed.
 
@@ -300,138 +226,11 @@ options:
       include: true
 ----
 
+=== Overriding tests selected for run and analysis
 
-== 2. Run locally
+The `--analyze-tests` and `--run-tests` flags give you fine-grained control over how the `testsuite` command behaves. For most projects you can rely on defaults to work automatically with no need to set these flags.
 
-Use `--doctor` locally to validate the `test-suites.yml` is set up correctly. The CLI runs additional analysis checks when test impact analysis is enabled. If any results look incorrect, an action item is provided to resolve it.
-
-[source,console]
-----
-$ circleci run testsuite "ci tests" --doctor
-----
-
-Follow the steps until all checks pass.
-
-include::ROOT:partial$tips/testsuite-working-directory.adoc[]
-
-Once all checks pass, build the impact data locally. The following command runs coverage analysis on impacted test atoms without executing your test suite:
-
-[source,console]
-----
-$ circleci run testsuite "ci tests" --verbose --local --select-tests=none --analyze-tests=impacted
-----
-
-This command:
-
-* `--local` -- stores impact data in the `.circleci/` directory instead of fetching from the CircleCI API.
-* `--select-tests=none` -- skips running your test suite (no test results are produced).
-* `--analyze-tests=impacted` -- runs coverage analysis on test atoms whose impact data is outdated.
-
-Inspect the locally stored impact data in `.circleci/impact-ci tests.json` to see the mapping between test atoms and files.
-
-Next, modify a source file whose ID appears in the `edges`, then run test selection to verify only impacted test atoms are selected:
-
-[source,console]
-----
-$ circleci run testsuite "ci tests" --verbose --local --select-tests=impacted
-----
-
-This command uses the existing impact data to select only the test atoms that cover the file you modified. Look for the "Selecting tests..." section in the output to confirm the correct tests are selected:
-
-[source,console]
-----
-==> Selecting tests...
---> Selecting 'test-atom-one' due to modified file: 'src/foo.ts'
-==> - 0 new test atoms
-==> - 0 test atoms impacted by new files
-==> - 1 test atoms impacted by modified files
-==> - 0 test atoms impacted by removed files
-==> - 0 test atoms failed previously
-==> - 0 test atoms with no source file mappings in impact data
-==> - 0 test atoms impacted by include rule
-==> - 0 test atoms impacted by full test run paths
-==> Selected 1 test atoms, Skipped 123 test atoms in 168ms
-----
-
-== 3. Run in CI
-
-include::ROOT:partial$tips/testsuite-ci-preinstalled.adoc[]
-
-For most projects, no extra flags are needed -- the defaults handle analysis and selection automatically. You only need the `--select-tests` and `--analyze-tests` flags if you want to verify analysis on your feature branch before merging, or if you need a non-default setup (see <<set-up-examples,Common Setup Examples>>).
-
-To verify analysis on your feature branch, temporarily override the defaults so the job only runs analysis without executing tests:
-
-.Example: run analysis on a feature branch without executing tests
-[source,yaml]
-----
-version: 2.1
-jobs:
-  test:
-    executor: node-with-service
-    steps:
-      - setup
-      - run: circleci run testsuite "ci tests" --select-tests=none --analyze-tests=impacted
-      - store_test_results:
-          # This directory must match the directory of `outputs.junit` in your
-          # test-suites.yml
-          path: test-reports
-----
-
-This configuration skips running tests (`--select-tests=none`) and only runs coverage analysis (`--analyze-tests=impacted`), which lets you verify that analysis works before merging.
-
-IMPORTANT: Analysis must run on your default branch to keep impact data current. Once you have verified analysis on a feature branch, remove the flags to use the defaults, or see the <<set-up-examples,Common Setup Examples>> section to dynamically change flags.
-
-Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your feature branch and push to your VCS.
-
-TIP: Depending on the test runner, the first run of analysis can take a long time because every test atom needs to run analysis. Consider temporarily increasing the job parallelism on the feature branch.
-
-Once analysis has completed on the feature branch, restore the `.circleci/config.yml` back to its original state without the CLI flags and parallelism changes.
-
-.Example: default CircleCI test job configuration with the testsuite command
-[source,yaml]
-----
-version: 2.1
-jobs:
-  test:
-    executor: node-with-service
-    steps:
-      - setup
-      - run: circleci run testsuite "ci tests"
-      - store_test_results:
-          # This directory must match the directory of `outputs.junit` in your
-          # test-suites.yml
-          path: test-reports
-----
-
-Commit the restored `.circleci/config.yml` to your feature branch and push to your VCS. Follow your usual process to merge to your default branch.
-
-NOTE: Do not check in the local impact JSON files generated by the local CLI (for example, `.circleci/ci tests-impact.json`) to your VCS.
-
-=== Verify in CI
-
-After analysis completes on your feature branch, verify test impact analysis is working correctly:
-
-. In the CircleCI web app, navigate to your pipeline and open the test job.
-. Check that the job was successful and analyzed all test atoms. A successful analysis run outputs "Found n files impacting tests" for each test atom.
-. Modify a source file that appears in the impact data, then push. Only the test atoms that cover the modified file are selected to run. Look for the "Selecting tests..." output in the job to confirm the correct test atoms are selected and the reason for selection.
-
-*Test impact analysis is now set up for your test suite.* Feature branches run the test atoms impacted by code changes, and your default branch runs all tests while also updating impact data.
-
-If these defaults do not suit your project, see the <<set-up-examples,Common Setup Examples>> section for alternative configurations.
-
-== Next steps
-
-* xref:use-dynamic-test-splitting.adoc[Use Dynamic Test Splitting] to evenly split tests across parallel nodes.
-* xref:auto-rerun-failed-tests.adoc[Auto Rerun Failed Tests] to automatically retry flaky tests.
-
-[#set-up-examples]
-== Common setup examples
-
-The `--analyze-tests` and `--select-tests` flags give you fine-grained control over how the `testsuite` command behaves. Most projects do not need to set these flags -- the defaults work automatically.
-
-=== Flag reference
-
-`--analyze-tests` controls whether to *build or update impact data* by running tests with coverage instrumentation. `--select-tests` controls whether to *choose and run tests* based on existing impact data.
+`--run-tests` controls which tests are run based on existing impact data. `--analyze-tests` controls which tests are analyzed.
 
 Each flag accepts three values:
 
@@ -439,7 +238,7 @@ Each flag accepts three values:
 --
 [cols="1,1,3", options="header"]
 |===
-| Value | Meaning for `--analyze-tests` | Meaning for `--select-tests`
+| Value | Meaning for `--analyze-tests` | Meaning for `--run-tests`
 
 | `impacted`
 | Analyze only test atoms whose impact data needs updating -- either the test changed, or the files it covers changed.
@@ -461,7 +260,7 @@ When you do not pass these flags, the defaults depend on which branch is running
 --
 [cols="1,1,1", options="header"]
 |===
-| Branch | `--analyze-tests` default | `--select-tests` default
+| Branch | `--analyze-tests` default | `--run-tests` default
 
 | Default branch (for example, `main`)
 | `impacted`
@@ -495,7 +294,7 @@ jobs:
     steps:
       - setup
       # Disable analysis, run all tests on default branches, impacted tests on feature branches.
-      - run: circleci run testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -503,8 +302,8 @@ jobs:
     executor: my-executor
     steps:
       - setup
-      # Disable running tests, analyze impacted tests.
-      - run: circleci run testsuite "ci tests" --select-tests="none" --analyze-tests="impacted"
+      # Disable running tests, default will analyze impacted tests on main.
+      - run: circleci testsuite "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -518,7 +317,7 @@ workflows:
       - test
       # Only analyze tests on main.
       - analysis:
-          filters pipeline.git.branch == "main"
+          filters: pipeline.git.branch == "main"
       - deploy:
           requires:
             - test
@@ -544,7 +343,7 @@ jobs:
       - setup
       # Disable analysis.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci run testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -553,8 +352,8 @@ jobs:
     steps:
       - setup
       # Disable running tests.
-      # Analyze impacted tests.
-      - run: circleci run testsuite "ci tests" --select-tests="none" --analyze-tests="impacted"
+      # Default will analyze impacted tests on main.
+      - run: circleci testsuite "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -572,10 +371,10 @@ workflows:
           filters: pipeline.git.branch == "main"
 
   analysis-workflow:
+    # Only analyze tests on main.
+    when: pipeline.git.branch == "main"
     jobs:
-      # Only analyze tests on main.
-      - analysis:
-          filters: pipeline.git.branch == "main"
+      - analysis
 ----
 
 [#run-analysis-on-non-default-branch]
@@ -596,7 +395,7 @@ jobs:
       - setup
       # Analyze impacted tests on "develop" branch, otherwise disable.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci run testsuite "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
+      - run: circleci testsuite "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
       - store_test_results:
           path: test-reports
 ----

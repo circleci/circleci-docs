@@ -34,16 +34,6 @@ content:
   - url: .
     start_path: docs/server-admin-4.7
   - url: .
-    start_path: docs/server-admin-4.6
-  - url: .
-    start_path: docs/server-admin-4.5
-  - url: .
-    start_path: docs/server-admin-4.4
-  - url: .
-    start_path: docs/server-admin-4.3
-  - url: .
-    start_path: docs/server-admin-4.2
-  - url: .
     start_path: docs/services
   - url: .
     start_path: docs/contributors
@@ -78,7 +68,6 @@ asciidoc:
     page-toclevels: 6
     idprefix: ""
     idseparator: "-"
-    # Smarter Testing testsuite subcommand attributes are set by smarter-testing-checksum-update-extension.
   extensions:
   - '@asciidoctor/tabs'
   - ./extensions/theme-icon-extension.js
@@ -120,6 +109,7 @@ antora:
       - rst
   - require: ./extensions/unlisted-pages-extension.js
     allowedUnlistedPages:
+      - 'deploy:deploy-to-pypi-registry.adoc'
   - require: '@sntke/antora-mermaid-extension'
     mermaid_initialize_options:
       start_on_load: true
@@ -136,4 +126,3 @@ antora:
       - '*-dark.svg'
       - 'icons/*.svg'
   - require: ./extensions/llms-txt-generator-extension.js
-  - require: ./extensions/smarter-testing-checksum-update-extension.js

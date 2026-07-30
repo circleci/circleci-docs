@@ -12,4 +12,4 @@ Yes, CircleCI offers migration guides for the following:
 - xref:guides:migrate:migrating-from-teamcity.adoc[TeamCity]
 - xref:guides:migrate:migrating-from-travis.adoc[Travis CI]
 
-You can also visit the xref:guides:migrate:migration-intro.adoc[Migration introduction] page for more information.
+You can also visit the xref:guides:migrate:migration-intro.adoc[Migration Introduction] page for more information.

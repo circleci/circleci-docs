@@ -14,6 +14,10 @@ This page describes how to configure external services for use with a new Circle
 
 NOTE: Your externalized PostgreSQL instance needs to be version 12. While you can use PostgreSQL 13 and 14, the version we use for testing is 12.22, which is also the version we ship when using an internalized PostgreSQL. You can also use services that are fully compatible with PostgreSQL, such as Amazon RDS for PostgreSQL.
 
+IMPORTANT: CircleCI Server requires TLS 1.3 to authenticate with an externalized PostgreSQL instance.
+
+IMPORTANT: Your externalized PostgreSQL instance must use pg_partman 4.5.x. pg_partman 5.x is not currently supported.
+
 Consider running at least two PostgreSQL replicas to allow recovery from primary failure and for backups. The table below shows the recommended specifications for PostgreSQL machines:
 
 [.table.table-striped]
@@ -204,7 +208,7 @@ The changes will take effect upon running `helm install/upgrade`. If you are com
 
 [#backing-up-postgresql]
 === Back up PostgreSQL
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install, which can be found link:https://www.postgresql.org/docs/12/backup.html[here].
+PostgreSQL provides link:https://www.postgresql.org/docs/12/backup.html[official documentation for backing up and restoring your PostgreSQL 12 install].
 
 We strongly recommend the following:
 
@@ -217,6 +221,8 @@ We strongly recommend the following:
 == MongoDB
 
 NOTE: If using your own MongoDB instance, it needs to be version 3.6 or higher.
+
+IMPORTANT: CircleCI Server is not currently compatible with DocumentDB.
 
 [#migrating-from-internal-mongodb]
 === Migrating from an internal MongoDB to an externalized source

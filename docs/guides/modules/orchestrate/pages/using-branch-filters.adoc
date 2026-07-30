@@ -1,18 +1,71 @@
-= Using branch filters
+= Branch and tag filtering
 :page-platform: Cloud, Server v4+
-:page-description: A how to guide for using branch fileters at the job level to simplify your CircleCI configuration.
+:page-description: Control whether jobs, workflows, and steps run, based on the git branch or tag, using workflow filters or expression-based conditions.
 :experimental:
 
-[#branch-filtering-for-job-steps]
-== Branch-filtering to control when job steps will run
+You can control whether a job, workflow, or step runs, based on the git branch or tag that triggered the pipeline. CircleCI provides several mechanisms, covered in the sections below. Choose one based on what you want to control:
 
-Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
+* Filter a *job* with an expression.
+* Run a whole *workflow* only when a condition is met, using an expression.
+* Run a single *step* only when a condition is met, using a `when` step.
 
-The following example shows using the <<pipeline-variables#pipeline-values,pipeline value>> `pipeline.git.branch` to control `when` a step runs. In this case, the step `run: echo "I am on main"` only runs when the commit is on the main branch:
+Expression-based conditions are the most flexible option. They can reference pipeline values and pipeline parameters and use comparison and logic operators, so they cover most cases where you previously needed branch filters.
 
-include::ROOT:partial$notes/docker-auth.adoc[]
+[#filter-a-job-with-an-expression]
+== Filter a job with an expression
 
-```yaml
+Set the `filters` key on a job to an expression. The job runs only when the expression evaluates to true. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
+
+The following example runs `integration-test` on `main` or any branch starting with `integration-`, and runs `deploy` only on `main`:
+
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  build-deploy:
+    jobs:
+      - integration-test:
+          filters: pipeline.git.branch == "main" or pipeline.git.branch starts-with "integration-"
+      - deploy:
+          requires:
+            - integration-test
+          filters: pipeline.git.branch == "main"
+----
+
+For the full operator list and more examples, see the xref:reference:ROOT:configuration-reference.adoc#expression-based-job-filters[Expression-Based Job Filters] reference.
+
+xref:reference:ROOT:configuration-reference.adoc#jobfilters[Branch and Tag Job Filters] are deprecated. If you have a job that uses them, you can replace them with expression-based job filters as described in this section.
+
+[#filter-a-workflow-with-an-expression]
+== Filter a workflow with an expression
+
+To run an entire workflow only when a condition is met, add a `when` clause (or the inverse `unless` clause) with an expression to the workflow declaration. Expressions can reference pipeline values and pipeline parameters and use comparison and logic operators.
+
+The following example runs the `integration_tests` workflow only when the pipeline is on the `main` branch:
+
+[source,yaml]
+----
+version: 2.1
+
+workflows:
+  integration_tests:
+    when: pipeline.git.branch == "main"
+    jobs:
+      - mytestjob
+----
+
+For the operators you can use in a condition, see the xref:reference:ROOT:configuration-reference.adoc#expression-operators[Expression Operators] reference.
+
+[#filter-a-step-with-when]
+== Filter a step with when
+
+To control whether a single step runs, wrap it in a `when` step with a condition. Use this approach when most of a job is shared across branches but one step runs only on a particular branch.
+
+The following example uses the `pipeline.git.branch` pipeline value to run the `echo` step only when the commit is on the `main` branch:
+
+[source,yaml]
+----
 version: 2.1
 
 jobs:
@@ -31,4 +84,4 @@ workflows:
   my-workflow:
     jobs:
       - my-job
-```
+----

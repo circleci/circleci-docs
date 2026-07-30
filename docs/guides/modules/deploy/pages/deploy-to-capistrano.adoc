@@ -23,9 +23,7 @@ workflows:
       - deploy-job:
           requires:
             - build-job # Only run deploy job once build job has completed
-          filters:
-            branches:
-              only: main # Only run deploy job when commit is on the main branch
+          filters: pipeline.git.branch == "main" # only run the deploy-job job on the main branch
 
 jobs:
   #  build and test jobs go here - not included for brevity
