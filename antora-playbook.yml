@@ -65,6 +65,7 @@ asciidoc:
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
     kotsversion: 1.65.0
+    xcodeversion: 26.6.0
     page-toclevels: 6
     idprefix: ""
     idseparator: "-"

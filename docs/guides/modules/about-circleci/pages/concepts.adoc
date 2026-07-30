@@ -258,7 +258,7 @@ include::ROOT:partial$notes/docker-auth.adoc[]
 Cloud::
 +
 --
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -287,8 +287,8 @@ jobs:
 
 #...
   build3:
-    macos: # Specifies a macOS virtual machine with Xcode version 12.5.1
-      xcode: "12.5.1"
+    macos: # Specifies a macOS virtual machine with Xcode version {xcodeversion}
+      xcode: {xcodeversion}
     steps:
       - checkout
 # ...
