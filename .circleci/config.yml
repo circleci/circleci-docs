@@ -23,11 +23,6 @@ executors:
       - image: cimg/go:1.26
     working_directory: ~/project
 
-  ruby_executor:
-    docker:
-      - image: cimg/ruby:4.0.5
-    working_directory: ~/project
-
 commands:
   aws-setup:
     steps:
