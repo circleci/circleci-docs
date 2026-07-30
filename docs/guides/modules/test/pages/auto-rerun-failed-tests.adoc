@@ -119,22 +119,22 @@ When `max-auto-rerun` is also set, test atoms rerun until one of the two conditi
 
 == 2. Run locally
 
-Use `--doctor` locally to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when auto rerun is enabled. If any results look incorrect, an action item is provided to resolve it.
+Use the `doctor` command to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when auto rerun is enabled. If any results look incorrect, an action item is provided to resolve it.
 
 [source,console]
 ----
-$ circleci testsuite "ci tests" --doctor
+$ circleci testsuite doctor "ci tests"
 ----
 
 Follow the steps until all checks pass.
 
 include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
-To verify auto rerun locally, modify a test to cause it to fail, then run the test suite without the `--doctor` flag:
+To verify auto rerun locally, modify a test to cause it to fail, then run the test suite:
 
 [source,console]
 ----
-$ circleci testsuite "ci tests"
+$ circleci testsuite run "ci tests"
 ----
 
 == 3. Run in CI
