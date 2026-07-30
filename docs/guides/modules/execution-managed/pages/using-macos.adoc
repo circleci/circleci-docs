@@ -7,17 +7,17 @@ The macOS execution environment is used for iOS and macOS development, allowing 
 
 You can use the macOS execution environment to run your xref:orchestrate:jobs-steps.adoc[Jobs] in a macOS environment on a virtual machine (VM). You can access the macOS execution environment by using the `macos` executor and specifying an Xcode version:
 
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 jobs:
   build:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
     resource_class: m4pro.medium
 
     steps:
       # Commands will execute in macOS container
-      # with Xcode 26.4.0 installed
+      # with Xcode {xcodeversion} installed
       - run: xcodebuild -version
 ----
 
@@ -34,12 +34,12 @@ include::ROOT:partial$execution-resources/xcode-silicon-vm.adoc[]
 
 include::ROOT:partial$execution-resources/macos-resource-table.adoc[]
 
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 jobs:
   build:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
     resource_class: m4pro.medium
 ----
 
@@ -212,13 +212,13 @@ If build speed, or bugs introduced by new Homebrew updates are a concern, this a
 
 To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable within your job:
 
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -251,13 +251,13 @@ React Native projects can be built on CircleCI using `macos` and `docker` execut
 
 It is possible to use multiple xref:executor-intro.adoc[Executor Types] in the same workflow. In the following example each push of an iOS project will be built on macOS, and a deploy image will run in Docker.
 
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
     environment:
       FL_OUTPUT_DIR: output
 

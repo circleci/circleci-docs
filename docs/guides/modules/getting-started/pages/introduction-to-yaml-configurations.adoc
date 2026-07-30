@@ -51,15 +51,16 @@ jobs:
 
 Images are used by either a Docker or machine executor. In our example, we are using a Docker **convenience image** that spins up an Ubuntu environment. If we used macOS as an execution environment, we could use a **machine image** instead. This would spin up a dedicated virtual machine with Xcode preinstalled, as in the example below.
 
-```yaml
+[,yaml,subs=attributes+]
+----
 # CircleCI configuration file
 version: 2.1
 
 jobs:
   build:
     macos:
-      xcode: 13.3.0
-```
+      xcode: {xcodeversion}
+----
 
 You will notice that the key-value pairs do not follow the same syntax. Each execution environment will be set up a little differently. You can refer to our execution environment documentation, or visit the CircleCI developer hub to find a list of https://circleci.com/developer/images?imageType=docker[convenience images] and https://circleci.com/developer/images?imageType=machine[machine images], and their syntax.
 
