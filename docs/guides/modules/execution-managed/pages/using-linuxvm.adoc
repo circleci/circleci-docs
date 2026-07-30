@@ -58,6 +58,7 @@ include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
 include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
 
+[badge="Beta"]
 === Gen3
 
 include::ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
@@ -98,14 +99,17 @@ jobs:
 ----
 
 [#linux-vm-gen3-benefits]
+[badge="Beta"]
 === Gen3
 
 Resource classes running on gen3 infrastructure offer further performance and cost improvements over their gen1 and gen2 equivalents. Gen3 resource classes are available on CircleCI Cloud only.
 
+NOTE: Gen3 is an Open Beta feature. See the <<gen3-beta-notice,Gen3 Beta release notes>> for full details.
+
 [#gen3-performance-improvements]
 ==== Performance improvements
 
-Gen3 instances deliver up to 67% faster performance compared to gen1 equivalents, based on real-world benchmarks across open source projects.
+Gen3 instances deliver up to 67% faster performance compared to gen1 equivalents, based on early benchmarks across open source projects. These figures are promising, but have not yet been validated at production scale, and queue times may occasionally be longer than expected as we continue tuning Gen3 capacity during Beta.
 
 Gen3 is priced lower than both its gen1 and gen2 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 

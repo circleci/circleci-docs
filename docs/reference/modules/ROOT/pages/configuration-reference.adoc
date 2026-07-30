@@ -1259,6 +1259,7 @@ jobs:
 ----
 
 [#linuxvm-gen3-execution-environment]
+[badge="Beta"]
 ==== Gen3
 
 include::guides:ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]

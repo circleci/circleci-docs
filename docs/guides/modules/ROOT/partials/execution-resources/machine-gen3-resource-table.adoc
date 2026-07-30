@@ -1,3 +1,15 @@
+[#gen3-beta-notice]
+.Gen3 Beta release notes
+[NOTE]
+====
+**Gen3 is an Open Beta feature.**
+
+* It's under active development and behavior may change without notice.
+* Performance and reliability are still being validated; SLOs are measured but not guaranteed.
+* Some jobs may see longer-than-expected queue times as we tune capacity.
+* We recommend testing on non-critical workloads first while the Beta is refined based on customer feedback.
+====
+
 [.table-scroll]
 --
 [cols=6*, options="header"]
