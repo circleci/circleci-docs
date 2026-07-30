@@ -167,7 +167,7 @@ workflows:
           - job3
 ----
 
-2+| Execute jobs on multiple platforms. An AWS CodePipeline project can target a single platform only. If you are targeting multiple platforms, you’re probably using CodePipeline and multiple CodeBuild projects. CircleCI provides executors for Docker, Linux and macOS that can be combined in a single build definition.
+2+| Execute jobs on multiple platforms. An AWS CodePipeline project can target a single platform only. If you are targeting multiple platforms, you are probably using CodePipeline and multiple CodeBuild projects. CircleCI provides executors for Docker, Linux and macOS that can be combined in a single build definition.
 
 a|
 [source,yaml]
