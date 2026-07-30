@@ -27,7 +27,7 @@ jobs:
       - setup_remote_docker
 ----
 
-Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that is used to spin up the primary container.
+Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that spins up the primary container.
 
 In the CircleCI web app, jobs that run in the remote Docker environment have the **Remote Docker** label, as follows:
 
@@ -52,7 +52,7 @@ Gen2/Gen3 resource classes are also available for remote Docker (for example, `m
 
 [NOTE]
 ====
-* **Gen3 resource classes for remote Docker are part of an Open Beta.** See the xref:using-linuxvm.adoc#gen3-beta-notice[Gen3 Beta release notes] for full details.
+* **Gen3 resource classes for remote Docker are part of an Open Beta.** See the xref:using-linuxvm.adoc#gen3-beta-notice[Gen3 Beta Release Notes] for full details.
 * Gen2/Gen3 does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
 ====
 
@@ -194,7 +194,7 @@ Below is a breakdown of what is happening during this build's execution:
 [#install-the-docker-cli]
 == Install the Docker CLI
 
-xref:circleci-images.adoc[CircleCI Convenience Images] have the Docker CLI pre-installed. If you are using a third-party image that does not have the Docker CLI installed, link:https://docs.docker.com/install/#supported-platforms[you will need to install it] as part of your job.
+xref:circleci-images.adoc[CircleCI Convenience Images] have the Docker CLI pre-installed. If you are using a third-party image that does not have the Docker CLI installed, link:https://docs.docker.com/install/#supported-platforms[you need to install it] as part of your job.
 
 [,yml]
 ----
@@ -272,7 +272,7 @@ jobs:
 [#prefer-same-region-pulls]
 == Prefer same-region image pulls
 
-When `prefer_same_region` is set to `true`, CircleCI will attempt to pull the image from the same region as the VM on a best-effort basis. If the same-region pull fails, it falls back to pulling from the image's original region.
+When you set `prefer_same_region` to `true`, CircleCI attempts to pull the image from the same region as the VM on a best-effort basis. If the same-region pull fails, it falls back to pulling from the image's original region.
 
 [,yaml]
 ----

@@ -31,7 +31,7 @@ Gen2 resource classes are not available on CircleCI Server.
 [badge="Beta"]
 == Gen3 support
 
-NOTE: Gen3 resource classes are part of an Open Beta. See the xref:using-linuxvm.adoc#gen3-beta-notice[Gen3 Beta release notes] for full details.
+NOTE: Gen3 resource classes are part of an Open Beta. See the xref:using-linuxvm.adoc#gen3-beta-notice[Gen3 Beta Release Notes] for full details.
 
 Gen3 resource classes are available for the machine executor on CircleCI Cloud. The gen3 support policy covers the following Ubuntu LTS versions:
 
