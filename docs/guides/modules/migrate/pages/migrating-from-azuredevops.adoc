@@ -192,7 +192,7 @@ jobs:
 ----
 
 a|
-[source, yaml,subs=attributes+]
+[source, yaml, subs=attributes+]
 ----
 jobs:
   ubuntuJob:
