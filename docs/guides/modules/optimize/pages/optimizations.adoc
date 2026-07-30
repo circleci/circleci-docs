@@ -105,7 +105,7 @@ Linux VM::
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:current
+      image: ubuntu-2404:current
     resource_class: large
     steps:
     #  ...  other config
@@ -147,7 +147,7 @@ Arm::
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2404:current
     resource_class: arm.medium
     steps:
     #  ...  other config

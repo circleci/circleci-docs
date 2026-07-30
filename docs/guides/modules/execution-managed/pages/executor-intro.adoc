@@ -78,7 +78,7 @@ Cloud::
 jobs:
   build: # name of your job
     machine: # executor type
-      image: ubuntu-2204:current
+      image: ubuntu-2404:current
 
     steps:
         # Commands run in a Linux virtual machine environment
@@ -278,7 +278,7 @@ version: 2.1
 jobs:
   build-medium:
     machine:
-      image: ubuntu-2204:current
+      image: ubuntu-2404:current
     resource_class: arm.medium
     steps:
       - run: uname -a
@@ -286,7 +286,7 @@ jobs:
 
   build-large:
     machine:
-      image: ubuntu-2204:current
+      image: ubuntu-2404:current
     resource_class: arm.large
     steps:
       - run: uname -a

@@ -431,6 +431,7 @@ curl --request POST \
   --header "Circle-Token: ${CIRCLE_TOKEN}" \
   --header 'content-type: application/json' \
 ----
+
 --
 ====
 
@@ -576,7 +577,7 @@ The `test1` and `test2` jobs have access to environment variables stored in the 
 
 == Use conditional logic in workflows
 
-You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a xref:reference:ROOT:configuration-reference.adoc#logic-statements[Logic Statements] to determine whether or not to run that workflow.
+You may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with xref:reference:ROOT:configuration-reference.adoc#using-expressions-in-your-configuration[Expression Syntax] to determine whether or not to run that workflow.
 
 Workflows are always run unless there is a `when` or `unless` filter that prevents the workflow from being run. If you want a workflow to run in **every** pipeline, do **not** add a when or unless filter.
 
@@ -655,19 +656,11 @@ workflows:
   dev_stage_pre-prod:
     jobs:
       - test_dev:
-          filters:  # using regex filters requires the entire branch to match
-            branches:
-              only:  # only branches matching the below regex filters will run
-                - dev
-                - /user-.*/
+          filters: pipeline.git.branch == "dev" or pipeline.git.branch matches /^user-.*/ # using regex requires the entire branch to match
       - test_stage:
-          filters:
-            branches:
-              only: stage
+          filters: pipeline.git.branch == "stage" # only run the test_stage job on the stage branch
       - test_pre-prod:
-          filters:
-            branches:
-              only: /pre-prod(?:-.+)?$/
+          filters: pipeline.git.branch matches /^pre-prod(?:-.+)?$/ # only run the test_pre-prod job on any branch that matches the pattern
 ----
 
 This setup can be illustrated as follows:
@@ -704,9 +697,7 @@ workflows:
   tagged-build:
     jobs:
       - build:
-          filters:
-            tags:
-              only: /^v.*/
+          filters: pipeline.git.tag matches /^v.*/ # only run the build job on tags starting with `v`
 ----
 
 ---
@@ -722,15 +713,11 @@ workflows:
   build-deploy:
     jobs:
       - build:
-          filters:  # required since `deploy` has tag filters AND requires `build`
-            tags:
-              only: /.*/
+          filters: pipeline.git.branch or pipeline.git.tag # run the build job on every branch and every tag
       - deploy:
           requires:
             - build
-          filters:
-            tags:
-              only: /^v.*/
+          filters: pipeline.git.branch or (pipeline.git.tag matches /^v.*/) # run the deploy job on every branch, and on tags starting with `v`
 ----
 
 ---
@@ -747,23 +734,15 @@ workflows:
   build-test-deploy:
     jobs:
       - build:
-          filters:  # required since `test` has tag filters AND requires `build`
-            tags:
-              only: /^config-test.*/
+          filters: pipeline.git.branch or (pipeline.git.tag matches /^config-test.*/) # run the build job on every branch, and on tags starting with `config-test`
       - test:
           requires:
             - build
-          filters:  # required since `deploy` has tag filters AND requires `test`
-            tags:
-              only: /^config-test.*/
+          filters: pipeline.git.branch or (pipeline.git.tag matches /^config-test.*/) # run the test job on every branch, and on tags starting with `config-test`
       - deploy:
           requires:
             - test
-          filters:
-            tags:
-              only: /^config-test.*/
-            branches:
-              ignore: /.*/
+          filters: pipeline.git.tag matches /^config-test.*/ # only run the deploy job on tags starting with `config-test`
 ----
 
 ---
@@ -780,33 +759,23 @@ workflows:
   build: # This workflow will run on all branches except 'main' and will not run on tags
     jobs:
       - test:
-          filters:
-            branches:
-              ignore: main
+          filters: pipeline.git.branch != "main" # only run the test job on any branch other than main
   staging: # This workflow will only run on 'main' and will not run on tags
     jobs:
       - test:
-          filters: &filters-staging # this yaml anchor is setting these values to "filters-staging"
-            branches:
-              only: main
+          filters: &filters-staging pipeline.git.branch == "main" # this yaml anchor is setting these values to "filters-staging"
       - deploy:
           requires:
             - test
-          filters:
-            <<: *filters-staging # this is calling the previously set yaml anchor
+          filters: *filters-staging # this is calling the previously set yaml anchor
   production: # This workflow will only run on tags (specifically starting with 'v.') and will not run on branches
     jobs:
       - test:
-          filters: &filters-production # this yaml anchor is setting these values to "filters-production"
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
+          filters: &filters-production pipeline.git.tag matches /^v.*/ # this yaml anchor is setting these values to "filters-production"
       - deploy:
           requires:
             - test
-          filters:
-            <<: *filters-production # this is calling the previously set yaml anchor
+          filters: *filters-production # this is calling the previously set yaml anchor
 ----
 
 [#using-regular-expressions-to-filter-tags-and-branches]

@@ -1,5 +1,5 @@
 'use strict'
 
 module.exports = (data) => {
-  return JSON.stringify(data, null, 2)
+  return JSON.stringify(data, null, 2).replace(/</g, '\\u003c')
 }

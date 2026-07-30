@@ -87,7 +87,7 @@
 ** macOS
 *** xref:execution-managed:using-macos.adoc[Using the macOS execution environment]
 *** xref:execution-managed:hello-world-macos.adoc[Configuring a macOS app]
-*** xref:execution-managed:ios-codesigning.adoc[iOS code signing]
+*** xref:execution-managed:ios-codesigning.adoc[iOS and macOS code signing]
 ** Windows
 *** xref:execution-managed:using-windows.adoc[Using the Windows execution environment]
 *** xref:execution-managed:hello-world-windows.adoc[Hello world Windows]
@@ -220,6 +220,7 @@
 * Insights
 ** xref:insights:insights.adoc[Use Insights]
 ** xref:insights:insights-tests.adoc[Test Insights]
+** xref:insights:project-usage-dashboard.adoc[Project Usage Dashboard]
 ** xref:insights:insights-snapshot-badge.adoc[Generate an Insights snapshot badge]
 ** xref:insights:insights-glossary.adoc[Insights glossary]
 
@@ -314,11 +315,6 @@
 
 * Developer toolkit
 ** xref:toolkit:how-to-find-ids.adoc[How to find IDs]
-** AI features
-*** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
-*** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
-*** xref:toolkit:using-the-circleci-mcp-server.adoc[Using the CircleCI MCP server]
-*** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 ** CircleCI CLI
 *** xref:toolkit:circleci-cli.adoc[The CircleCI CLI]
 *** xref:toolkit:cli-migration-guide.adoc[CLI migration guide]
@@ -329,6 +325,16 @@
 
 ** Environment CLI
 *** xref:toolkit:environment-cli-usage-guide.adoc[CircleCI environment CLI usage guide]
+
+** MCP
+*** xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP overview]
+*** xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP server]
+*** xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
+
+** AI-powered features
+*** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
+*** xref:guides:toolkit:chunk-setup-and-overview.adoc[Chunk Setup and Overview]
+*** xref:toolkit:intelligent-summaries.adoc[Intelligent summaries]
 
 ** APIs
 *** xref:toolkit:api-intro.adoc[API v2 intro]

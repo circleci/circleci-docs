@@ -10,12 +10,12 @@
 | Release Notes
 
 | `27.0`
-| Xcode 27.0 (27A5209h)
+| Xcode 27.0 (27A5228h)
 | 26.5.1
 a| `m4pro.medium` +
    `m4pro.large`
-| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v18905/manifest.txt[Installed software]
-| link:https://circleci.com/changelog/xcode-27-0-beta-2-available/[Release Notes]
+| link:https://circle-macos-docs.s3.amazonaws.com/image-manifest/v19120/manifest.txt[Installed software]
+| link:https://circleci.com/changelog/xcode-27-0-beta-4-available/[Release Notes]
 
 | `26.6`
 | Xcode 26.6 (17F113)

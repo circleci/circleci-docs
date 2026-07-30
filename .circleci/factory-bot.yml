@@ -1,0 +1,6 @@
+checks:
+  settings:
+    author-membership:
+      mode: specific-users
+      specific-users:
+        - rosieyohannan

@@ -7,7 +7,7 @@ version: 2.1
 executors:
   node_executor:
     docker:
-      - image: cimg/node:24.16.0
+      - image: cimg/node:24.18.0
     working_directory: ~/project
 
 jobs:

@@ -11,7 +11,7 @@ Runner Provisioner is currently in preview. The product, its configuration schem
 
 Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using link:https://github.com/kubevirt/kubevirt[KubeVirt]. Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand.
 
-The current preview version is `0.1.1`.
+The current preview version is `0.1.2`.
 
 == Getting access
 
@@ -274,7 +274,7 @@ include::ROOT:partial$runner/install-with-cli-steps.adoc[]
 ====
 
 [#create-namespace]
-=== 3. Create the Kubernetes namespace
+=== 2. Create the Kubernetes namespace
 
 [source,console]
 ----
@@ -282,9 +282,9 @@ $ kubectl create namespace runner-provisioner
 ----
 
 [#configure-values]
-=== 2. Configure values
+=== 3. Configure values
 
-Create a `my-values.yaml` file:
+Create a `my-values.yaml` file. Resource classes are configured under `provisioner.resourceClasses`, a map keyed by the resource class name in `namespace/name` format:
 
 .`my-values.yaml`
 [source,yaml]
@@ -293,38 +293,17 @@ provisioner:
   # CircleCI API token for querying unclaimed/running tasks
   circleToken: "your-circle-api-token"
 
-  resourceClass:
-    # Resource class in the format "namespace/name"
-    name: "my-org/my-runner"
-    # Runner token for this resource class
-    token: "your-runner-token"
-
-    # Scaling bounds
-    minReplicas: 3
-    maxReplicas: 10
-
-    # Optional: idle timeout before a waiting VM shuts itself down (e.g. "10m")
-    # idleTimeout: ""
-
-    # KubeVirt VirtualMachineInstanceSpec for each runner VM
-    spec:
-      domain:
-        resources:
-          requests:
-            memory: "2Gi"
-            cpu: "1"
-        devices:
-          disks:
-            - name: disk
-              disk:
-                bus: virtio
-      volumes:
-        - name: disk
-          containerDisk:
-            image: "quay.io/containerdisks/ubuntu:22.04"
+  resourceClasses:
+    # Keyed by resource class in "namespace/name" format
+    "my-org/my-runner":
+      # Runner token for this resource class
+      token: "your-runner-token"
+      scaling:
+        minReplicas: 3
+        maxReplicas: 10
 ----
 
-The image `quay.io/containerdisks/ubuntu:22.04` is an official container disk maintained by the KubeVirt project, providing a pre-built Ubuntu 22.04 OS image for running virtual machines on Kubernetes.
+The chart ships a default VM `spec` (2 GiB memory, 1 CPU). It boots the CircleCI-maintained Ubuntu 24.04 containerDisk with Docker and common CI tooling baked in, so a class typically only needs its `token` and `scaling`. To run several resource classes from one deployment, add more keys to the map. See <<multiple-resource-classes,Multiple Resource Classes>>. To change the VM size, image, or disks, set `spec` on the class or in `provisioner.resourceClassDefaults`, described in <<configuration-reference,Configuration Reference>>.
 
 [#install-helm-chart]
 === 4. Install the Helm chart
@@ -348,6 +327,44 @@ $ kubectl get virtualmachinepool -n runner-provisioner
 $ kubectl logs -n runner-provisioner deployment/runner-provisioner -f
 ----
 
+[#multiple-resource-classes]
+== Multiple resource classes
+
+`provisioner.resourceClasses` is a map keyed by resource class name in `namespace/name` format. Add a key per class to provision several classes from one deployment. Shared settings live in `provisioner.resourceClassDefaults` and are merged into every entry, with the entry's own values winning. The chart ships the runner execution config and a base VM `spec` as defaults, so a class typically only needs its `token` and `scaling`:
+
+.`my-values.yaml`
+[source,yaml]
+----
+provisioner:
+  circleToken: "your-circle-api-token"
+  resourceClassDefaults:
+    # Runner and base spec shared by every class (see the configuration reference)
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "2Gi"
+  resourceClasses:
+    "my-org/small":
+      token: "small-runner-token"
+      scaling:
+        minReplicas: 1
+        maxReplicas: 5
+    "my-org/large":
+      token: "large-runner-token"
+      scaling:
+        minReplicas: 2
+        maxReplicas: 20
+      # Override only what differs. The rest is inherited.
+      spec:
+        domain:
+          resources:
+            requests:
+              memory: "8Gi"
+----
+
+The merge is by field, so the `large` class above inherits everything except memory. It is applied in the provisioner, so a hand-managed `existingConfigMap` gets the same behavior. A merge only fills fields an entry leaves unset, so it cannot reset a value back to empty. To change a shared value such as `runner.commandPrefix` for every class, edit it in `resourceClassDefaults` rather than per entry.
+
 [#connecting-to-server]
 == Connecting to a CircleCI Server instance
 
@@ -359,13 +376,14 @@ By default, Runner Provisioner connects to the CircleCI Cloud API at `https://ru
 provisioner:
   circleciAPIAddr: "https://your-server-hostname"
   circleToken: "your-circle-api-token"
-  resourceClass:
-    name: "my-org/my-runner"
-    token: "your-runner-token"
+  resourceClasses:
+    "my-org/my-runner":
+      token: "your-runner-token"
 ----
 
 This value is injected into each VM's cloud-init script so the runner agent connects to your server instance rather than CircleCI Cloud. Without it, runners will fail to register.
 
+[#configuration-reference]
 == Configuration reference
 
 NOTE: Configuration field names and defaults may change before general availability. Pin your `my-values.yaml` to a specific chart version and review the changelog before upgrading.
@@ -386,25 +404,51 @@ NOTE: Configuration field names and defaults may change before general availabil
 
 | `image.repository`
 | `circleci/runner-provisioner`
-| Container image
+| Container image repository.
 
 | `image.pullPolicy`
 | `Always`
-| Image pull policy
+| Image pull policy.
 
 | `image.tag`
-| Chart `appVersion` (currently `0.1.1`)
-| Image tag (overridden by `image.digest` when set)
+| Chart `appVersion` (currently `0.1.2`)
+| Image tag. Overridden by `image.digest` when set.
 
 | `image.digest`
 | `""`
-| SHA digest; takes precedence over tag when set
+| Image digest. Takes precedence over the tag when set.
 
 | `imagePullSecrets`
 | `[]`
 | Image pull secrets for private registries.
+
+| `logLevel`
+| `""`
+| Log level, one of `debug`, `info`, `warn`, `error`, `panic`, or `fatal`. Empty uses the default (`info`). Applies to both the provisioner and controller-runtime logs.
+
+| `extraEnv`
+| `[]`
+| Extra environment variables for the provisioner container.
+
+| `podDisruptionBudget.enabled`
+| `false`
+| Create a PodDisruptionBudget for the provisioner. Useful with `replicaCount` greater than `1`, so a node drain keeps a standby available to take over.
+
+| `priorityClassName`
+| `""`
+| Priority class for the provisioner pod, so it is not among the first evicted under node pressure.
+
+| `topologySpreadConstraints`
+| `[]`
+| Topology spread constraints for the provisioner pod, for example to spread replicas across nodes or zones.
+
+| `tokenProxy.enabled`
+| `true`
+| Inject the token-proxy sidecar into each pool VM. See <<token-proxy,Token Proxy>>.
 |===
 --
+
+The chart applies a hardened pod and container security context by default. The provisioner runs as a non-root user (UID 65534) with a read-only root filesystem and all Linux capabilities dropped. Override `podSecurityContext` or `securityContext` if your environment needs different settings.
 
 [#runner-bundle-values]
 === `runnerBundle.*` values
@@ -432,7 +476,7 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 | Bundle image pull policy
 
 | `image.tag`
-| Chart `appVersion` (currently `0.1.1`)
+| Chart `appVersion` (currently `0.1.2`)
 | Bundle image tag (overridden by `runnerBundle.image.digest` when set)
 
 | `image.digest`
@@ -458,24 +502,36 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 
 | `circleciAPIAddr`
 | `https://runner.circleci.com`
-| CircleCI API base URL
-
-| `namespace`
-| `runner-provisioner`
-| Namespace where runner VMs are created.
+| CircleCI Runner API address.
 
 | `circleToken`
 | `""`
-| CircleCI API token for task polling
+| CircleCI API token for polling unclaimed and running tasks. Required unless `existingSecret` is set.
 
 | `existingSecret`
 | `""`
-| Name of a pre-existing Secret (see <<using-existing-secret,Using an Existing Secret>>)
+| Name of a pre-existing Secret holding the tokens. See <<config-and-secrets,Config and Secrets>>.
+
+| `existingConfigMap`
+| `""`
+| Name of a pre-existing ConfigMap holding the resource-class config. See <<config-and-secrets,Config and Secrets>>.
+
+| `resourceClassDefaults`
+| See description
+| Defaults merged into every `resourceClasses` entry, where the entry's own values win. Put settings shared across classes here (scaling bounds, the runner execution config, and the base VM `spec`) so each class only sets what differs.
+
+| `resourceClasses`
+| `{}`
+| Resource classes to provision, keyed by name in `namespace/name` format. See <<multiple-resource-classes,Multiple Resource Classes>> and the per-class fields below.
 |===
 --
 
 [#resource-class-values]
-=== `provisioner.resourceClass.*` values
+=== Resource class values
+
+Each entry under `provisioner.resourceClasses` is keyed by the resource class name in `namespace/name` format and supports the fields below. Any field an entry leaves unset is inherited from `provisioner.resourceClassDefaults`.
+
+The namespace part of the key may contain lowercase letters, numbers, underscores, and dashes. The name part may also contain uppercase letters, colons, and plus signs. Valid examples are `my-org/medium`, `acme_corp/large-gpu`, and `dev-team/custom:arm64`.
 
 [.table-scroll]
 --
@@ -485,78 +541,197 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 | Default
 | Description
 
-| `name`
-| `""`
-| Resource class in `namespace/name` format (required). The namespace can contain lowercase letters, numbers, underscores, and dashes. The resource class name can contain uppercase and lowercase letters, numbers, colons, underscores, dashes, and plus signs.
-Valid examples: `my-org/medium`, `acme_corp/large-gpu`, `dev-team/custom:arm64`.
-
 | `token`
 | `""`
-| Runner authentication token (required)
+| Runner authentication token for the class. Required unless `existingSecret` is set.
 
 | `userData`
 | `""`
-| Optional Bash script run before the runner is installed, for example to install dependencies
+| Optional Bash script run in cloud-init before the runner is installed, for example to install dependencies.
 
-| `idleTimeout`
-| `""`
-| Duration a VM waits for a job before shutting down (for example, `"10m"`)
+| `scaling`
+| Inherited
+| Scaling controls for the class. See <<scaling-behavior,Scaling Behavior>>.
 
-| `minReplicas`
-| `3`
-| Minimum number of VMs always running
+| `runner`
+| Inherited
+| `circleci-runner` execution settings written into each VM's runner config. See <<machine-runner-options,Machine Runner Options>>.
 
-| `maxReplicas`
-| `10`
-| Maximum number of VMs allowed
+| `emptyDiskMounts`
+| `[]`
+| Extra disks from `spec` to format and mount at boot. See <<empty-disk-mounts,Mounting Extra Disks>>.
 
 | `spec`
-| Ubuntu 22.04, 2Gi RAM, 1 CPU
-| KubeVirt `VirtualMachineInstanceSpec` for runner VMs
+| Ubuntu 24.04, 2 GiB memory, 1 CPU
+| KubeVirt `VirtualMachineInstanceSpec` for the class's VMs. See <<vm-specification-notes,VM Specification Notes>>.
 |===
 --
 
-[#using-existing-secret]
-=== Using an existing secret
+[#machine-runner-options]
+=== Machine runner options
 
-If you manage secrets externally (for example, via Vault or Sealed Secrets), set `provisioner.existingSecret` to the name of a pre-existing Kubernetes Secret. When set, `resourceClass.token` and `circleToken` in values are ignored.
+`runner` holds optional link:https://circleci.com/docs/guides/execution-runner/machine-runner-3-configuration-reference/[machine runner 3] settings written into each VM's runner config. Set them per class, or more commonly once in `resourceClassDefaults.runner`. Any field left unset falls back to the runner's own default.
 
-The Secret must have two keys:
+[.table-scroll]
+--
+[cols="2,2,3", options="header"]
+|===
+| Key
+| Default
+| Description
 
-* `circle-token`. The CircleCI API token for task polling.
-* `config.yaml`. The resource class configuration.
+| `runner.workingDirectory`
+| `/home/circleci/workdir`
+| Working directory for jobs, under the `circleci` user's home.
 
-.`config.yaml`
+| `runner.taskAgentDirectory`
+| `/tmp/libexec/circleci`
+| Directory the task-agent binary is downloaded to. Kept under `/tmp` so the runner can write it and the `circleci` user can run it.
+
+| `runner.commandPrefix`
+| `["sudo", "PATH=$PATH", "-niHu", "circleci", "--"]`
+| Command wrapping task-agent execution. The default steps jobs down to the unprivileged `circleci` user. Clearing it runs jobs as the runner user.
+
+| `runner.useHomeSSHDirForCheckoutKeys`
+| `false`
+| Use the home directory for SSH checkout keys.
+
+| `runner.maxRunTime`
+| `""`
+| Maximum job duration before the runner is terminated, for example `5h`. Unset uses the runner default of five hours.
+
+| `runner.grantSudo`
+| `false`
+| Grant the `circleci` task user root access without a password. See <<granting-sudo,Running Jobs With Elevated Privileges>>.
+|===
+--
+
+By default the runner agent runs as a dedicated `circleci-runner` user and steps each job down to the unprivileged `circleci` user through the default `commandPrefix`. Jobs therefore do not run as root.
+
+[#granting-sudo]
+=== Running jobs with elevated privileges
+
+Set `runner.grantSudo: true` (on a class or in `resourceClassDefaults`) to give the `circleci` task user root access without a password. It applies to jobs run under the default `commandPrefix` step-down. A custom `commandPrefix` is responsible for its own privileges.
+
+`grantSudo` requires `tokenProxy.enabled: true`, since otherwise a root job could read the resource-class token from the VM. The chart rejects `grantSudo: true` when the token proxy is disabled. Everything else on the VM is still exposed to the job, so use this setting with care.
+
+[#empty-disk-mounts]
+=== Mounting extra disks
+
+`emptyDiskMounts` formats and mounts `emptyDisk` volumes declared in the VM `spec`, which KubeVirt attaches but leaves unmounted. Each entry references a disk by its `spec` `serial`. Cloud-init formats the disk when empty, seeds it with whatever already lives at `path`, then mounts it there.
+
+.`my-values.yaml`
 [source,yaml]
 ----
-resourceClass:
-  "my-org/my-runner":
-    token: "your-runner-token"
-    idleTimeout: "10m"   # optional
-    spec:
-      domain:
-        resources:
-          requests:
-            memory: "2Gi"
-            cpu: "1"
-        devices:
-          disks:
-            - name: disk
-              disk:
-                bus: virtio
-      volumes:
-        - name: disk
-          containerDisk:
-            image: "quay.io/containerdisks/ubuntu:22.04"
+provisioner:
+  resourceClasses:
+    "my-org/my-runner":
+      token: "your-runner-token"
+      emptyDiskMounts:
+        - serial: varlib
+          path: /var/lib
+          fsType: ext4   # optional, default ext4
+      spec:
+        domain:
+          devices:
+            disks:
+              - name: var-lib
+                serial: varlib
+                disk:
+                  bus: virtio
+        volumes:
+          - name: var-lib
+            emptyDisk:
+              capacity: 50Gi
 ----
 
-Create the secret with:
+`serial` must be alphanumeric and at most 20 characters, and it must match a virtio-bus `emptyDisk` in `spec`. `fsType` is optional and defaults to `ext4` (`ext2`, `ext3`, `ext4`, and `xfs` are supported). The disk is a sparse ceiling rather than a reservation, so it only uses node storage as it fills.
+
+[#token-proxy]
+=== Token proxy
+
+By default the chart injects a token-proxy sidecar into each pool VM. The guest's `circleci-runner` talks to the proxy instead of the CircleCI API. The proxy attaches the real resource-class token only on the task-claim call, and every later call uses the task-scoped token returned by that response. The resource-class token itself never reaches the guest, so a job cannot read it from the VM it runs on.
+
+The sidecar is injected through a mutating webhook the chart installs, and it reuses the provisioner image. The proxy is enabled by default and optional. Set `tokenProxy.enabled: false` to turn it off, though that hands the resource-class token to the VM and rules out `grantSudo`.
+
+[#config-and-secrets]
+=== Config and secrets
+
+The chart splits configuration in two. Non-secret resource-class settings (the `resourceClasses` keys, `scaling`, `runner`, and `spec`) are rendered into a generated ConfigMap, mounted at `/etc/runner-provisioner/config.yaml`. Secrets (the CircleCI API token, and each class's runner `token` and `userData`) are rendered into a generated Secret, mounted at `/etc/runner-provisioner-secrets/secrets.yaml`.
+
+You can supply either or both from pre-existing resources instead. For example, manage secrets through Vault or Sealed Secrets, or keep a large multi-class config out of Helm values.
+
+==== Using an existing secret
+
+Set `provisioner.existingSecret` to the name of a pre-existing Kubernetes Secret. When set, no Secret is created, and `circleToken` and each class's `token`/`userData` in values are ignored. The non-secret config (the `resourceClasses` keys, `scaling`, and `spec`) is still taken from values, so you must still set it.
+
+The Secret needs two keys:
+
+* `circle-token`. The CircleCI API token for task polling.
+* `secrets.yaml`. The per-class credentials, keyed by class name.
+
+.`secrets.yaml`
+[source,yaml]
+----
+resourceClasses:
+  "my-org/my-runner":
+    token: "your-runner-token"
+    userData: |          # optional pre-install script
+      apt-get install -y jq
+----
+
+Create it with:
 
 [source,console]
 ----
 $ kubectl create secret generic my-secret \
   --namespace runner-provisioner \
   --from-literal=circle-token="your-circleci-api-token" \
+  --from-file=secrets.yaml=./secrets.yaml
+----
+
+Then reference it in values, still providing the non-secret config:
+
+.`my-values.yaml`
+[source,yaml]
+----
+provisioner:
+  existingSecret: "my-secret"
+  resourceClasses:
+    "my-org/my-runner":
+      scaling:
+        minReplicas: 3
+        maxReplicas: 10
+----
+
+==== Using an existing ConfigMap
+
+Set `provisioner.existingConfigMap` to the name of a pre-existing ConfigMap to manage the non-secret resource-class config yourself. When set, no ConfigMap is created, and the `resourceClasses` config values are ignored. This keeps a large config out of Helm values and lets it be updated without a chart upgrade.
+
+The ConfigMap needs a `config.yaml` key:
+
+.`config.yaml`
+[source,yaml]
+----
+resourceClasses:
+  "my-org/my-runner":
+    scaling:
+      minReplicas: 3
+      maxReplicas: 10
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+----
+
+Create it with:
+
+[source,console]
+----
+$ kubectl create configmap my-config \
+  --namespace runner-provisioner \
   --from-file=config.yaml=./config.yaml
 ----
 
@@ -566,12 +741,15 @@ Then reference it in values:
 [source,yaml]
 ----
 provisioner:
-  existingSecret: "my-secret"
+  existingConfigMap: "my-config"
 ----
 
+If the Secret is still chart-generated (no `existingSecret`), the `resourceClasses` keys must match the class names in your ConfigMap so the generated Secret is keyed to match.
+
+[#vm-specification-notes]
 === VM specification notes
 
-The `spec` field is a KubeVirt `VirtualMachineInstanceSpec`. The provisioner always appends a cloud-init disk and volume automatically, so do not add one yourself. When `runnerBundle.enabled` is `true` (the default), the provisioner also appends a containerDisk shipping the `circleci-runner` packages, so do not add one yourself either.
+The `spec` field is a KubeVirt `VirtualMachineInstanceSpec`. The chart's `resourceClassDefaults.spec` already includes a boot containerDisk (the CircleCI Ubuntu 24.04 image, see <<containerdisk-images,Container Disk Images>>), so a class inherits it unless you override `spec.volumes[].containerDisk.image`. The provisioner always appends a cloud-init disk and volume automatically, so do not add one yourself. When `runnerBundle.enabled` is `true` (the default), the provisioner also appends a containerDisk shipping the `circleci-runner` packages, so do not add one yourself either.
 
 When no `interfaces` or `networks` are set in `spec`, the provisioner defaults the VM to masquerade binding on the pod network. Set both to override (for example, bridge for a routable pod IP). See the link:https://kubevirt.io/user-guide/network/interfaces_and_networks/#masquerade[KubeVirt networking documentation].
 
@@ -586,18 +764,56 @@ The startup script performs the following steps on each VM:
 . Configures systemd to power off the VM after the runner process exits.
 . Starts the runner service.
 
+[#containerdisk-images]
+== Container disk images
+
+Pool VMs boot from a KubeVirt containerDisk. The chart defaults to a CircleCI-maintained image with Docker and common CI tooling baked in. Its root filesystem is sized for real jobs, so you can run a working pool without building your own.
+
+[.table-scroll]
+--
+[cols="2,2", options="header"]
+|===
+| Image
+| Family
+
+| `circleci/runner-containerdisk:ubuntu-24.04`
+| Debian/Ubuntu (default)
+
+| `circleci/runner-containerdisk:almalinux-9`
+| RHEL/AlmaLinux
+|===
+--
+
+The default is the Ubuntu image, set in `resourceClassDefaults.spec.volumes[].containerDisk.image`. To run RHEL-family jobs, override that image on a class:
+
+.`my-values.yaml`
+[source,yaml]
+----
+provisioner:
+  resourceClasses:
+    "my-org/rhel-runner":
+      token: "your-runner-token"
+      spec:
+        volumes:
+          - name: disk
+            containerDisk:
+              image: "circleci/runner-containerdisk:almalinux-9"
+----
+
+The default tag (`ubuntu-24.04`) floats to the latest published image. Each release also publishes an immutable dated tag (`ubuntu-24.04-<date>`). Pin a dated tag to hold a version or to roll back.
+
 [#custom-containerdisk-image]
-== Building a custom containerDisk image
+=== Building a custom image
 
-The default base image, `quay.io/containerdisks/ubuntu:22.04`, has a root filesystem capped at 2.2 GiB. Installs that write a lot of data to `/usr` or `/`, such as a full Docker install, can fail with a disk full error. This limit is not configurable through Runner Provisioner or KubeVirt. The limit comes from the base image itself. To get more root space, build a custom containerDisk image with a larger virtual size and point your resource class at it.
+The default images already bundle Docker and common tooling, so most setups do not need a custom image. Build one only to bake in bespoke tooling, or to run an OS the defaults do not cover. A containerDisk stores its disk file at `/disk` inside an OCI image.
 
-=== Resize the disk image
+==== Resize the disk image
 
-A containerDisk image stores its disk file at `/disk` inside an OCI image. Extract the disk from the base image and resize it with `qemu-img`:
+Extract the disk from a base image and resize it with `qemu-img`:
 
 [source,console]
 ----
-$ docker create --name extract-base quay.io/containerdisks/ubuntu:22.04
+$ docker create --name extract-base quay.io/containerdisks/ubuntu:24.04
 $ docker cp extract-base:/disk/disk.qcow2 ./disk.qcow2
 $ docker rm extract-base
 $ qemu-img resize disk.qcow2 20G
@@ -605,9 +821,9 @@ $ qemu-img resize disk.qcow2 20G
 
 The `qemu-img resize` command only grows the virtual size recorded in the qcow2 header. The image stays sparse, so the file on disk and the pushed registry layer barely grow. The extra space only becomes real data once the guest OS writes to it. The resize itself has minimal impact on registry storage or node-side image pulls.
 
-=== Install dependencies in the image
+==== Install dependencies in the image
 
-Bake dependencies like Docker into the image so VMs do not need to install them on every boot. Use `virt-customize` from the `libguestfs-tools` package to modify the qcow2 file directly, without booting a VM:
+Bake dependencies like Docker into the image so VMs do not install them on every boot. Use `virt-customize` from the `libguestfs-tools` package to modify the qcow2 file directly, without booting a VM:
 
 [source,console]
 ----
@@ -616,7 +832,7 @@ $ virt-customize -a disk.qcow2 --run-command 'curl -fsSL https://get.docker.com 
 
 Run additional `--run-command` or `--install` flags for any other packages the resource class needs. `virt-customize` requires `libguestfs-tools`, available through most Linux package managers.
 
-=== Package and push the custom image
+==== Package and push the custom image
 
 . Package the resized, customized qcow2 as a new OCI image with the disk at `/disk`, matching the layout KubeVirt expects:
 +
@@ -634,7 +850,7 @@ $ docker build -t <your-registry>/<your-image>:<tag> .
 $ docker push <your-registry>/<your-image>:<tag>
 ----
 
-=== Point a resource class at the custom image
+==== Point a resource class at the custom image
 
 . Update `spec.volumes[].containerDisk.image` in `my-values.yaml` to reference the custom image instead of the default:
 +
@@ -642,31 +858,90 @@ $ docker push <your-registry>/<your-image>:<tag>
 [source,yaml]
 ----
 provisioner:
-  resourceClass:
-    spec:
-      volumes:
-        - name: disk
-          containerDisk:
-            image: "<your-registry>/<your-image>:<tag>"
+  resourceClasses:
+    "my-org/my-runner":
+      spec:
+        volumes:
+          - name: disk
+            containerDisk:
+              image: "<your-registry>/<your-image>:<tag>"
 ----
 
 . Run `helm upgrade` as described in <<upgrading>> to roll out the change. Existing VMs keep running on the old image until they are recreated.
 
+[#scaling-behavior]
 == Scaling behavior
 
-Desired replicas are calculated as unclaimed tasks plus running tasks, clamped to `[minReplicas, maxReplicas]`.
+The scaler polls CircleCI every 5 seconds and sets the pool size to match demand. Desired replicas are `unclaimed tasks + running tasks` (plus `headroom` when there are any tasks), clamped to `[minReplicas, maxReplicas]`, then capped by `maxSurge` above the VMs already ready.
 
-* The scaler polls CircleCI every one second.
-* `minReplicas` VMs are always kept running as a pre-warmed pool.
-* When demand drops, excess VMs drain naturally. That is, they pick up no new jobs and shut down after completing their current job (or after `idleTimeout` if set).
+* `minReplicas` VMs are always kept running as a pre-warmed pool. Set `minReplicas: 0` to scale fully to zero when idle.
+* Scale-up is immediate unless `maxSurge` is set to ramp it in waves.
+* Scale-in never force-stops a VM. When demand drops, the pool shrinks by not replacing VMs as they self-terminate, after finishing a job or after `idleTimeout`. Without `idleTimeout`, an idle VM waits indefinitely for the next job.
+
+Set these controls under a class's `scaling` block, or in `resourceClassDefaults.scaling` to share them:
+
+[.table-scroll]
+--
+[cols="2,2,3", options="header"]
+|===
+| Key
+| Default
+| Description
+
+| `minReplicas`
+| `3`
+| Minimum VM pool size. Set to `0` to scale fully to zero when idle.
+
+| `maxReplicas`
+| `10`
+| Maximum VM pool size.
+
+| `headroom`
+| `0`
+| Spare warm VMs kept above demand while there are tasks, so a new task runs on an idle VM instead of waiting for a cold boot. Counted toward `maxReplicas`. `0` disables it.
+
+| `maxSurge`
+| `0`
+| Cap on how many VMs the pool requests above those already ready, so a spike ramps in waves instead of booting everything at once. `0` disables it.
+
+| `scaleDownDelay`
+| `0s`
+| How long to hold the pool at its elevated size after demand drops, so a brief dip does not shed warm VMs. `0s` disables it.
+
+| `idleTimeout`
+| `""`
+| How long an idle VM runs before shutting itself down, for example `10m`. Unset means it waits indefinitely. Must be `>= scaleDownDelay` when both are set.
+
+| `schedules`
+| `[]`
+| Recurring periods that temporarily replace the controls above. See <<scaling-schedules,Scaling Schedules>>.
+|===
+--
 
 [#idle-timeout]
-=== `idleTimeout`
+=== Idle timeout
 
-Without `idleTimeout`, a pre-warmed VM that never receives a job waits indefinitely. Setting `idleTimeout` (for example, `"10m"`) causes VMs to shut down after that period of inactivity. An idle timeout is useful for:
+Because scale-in never force-stops a VM, `idleTimeout` is the only way an unused pre-warmed VM is reclaimed. Setting it (for example `10m`) shuts a VM down after that period without a job. An idle timeout also cycles VMs after a spec or config update, since old VMs time out and are replaced. When both are set, `idleTimeout` must be `>= scaleDownDelay`, otherwise the shorter timeout would churn the warm VMs the delay is holding.
 
-* Draining excess pre-scaled VMs when demand drops.
-* Cycling VMs after a spec or config update (old VMs will eventually time out and be replaced).
+[#scaling-schedules]
+=== Scaling schedules
+
+`scaling.schedules` defines recurring periods that override the baseline controls (`minReplicas`, `maxReplicas`, `headroom`, `maxSurge`, and `scaleDownDelay`) while active, for example a higher floor and ceiling during working hours. Each period has a `start` and `end` cron expression (standard 5-field cron), an optional `timezone` (IANA name, default UTC), and any controls to override. Omitted controls keep their baseline value. When two periods overlap, the one listed first wins. `idleTimeout` cannot be scheduled, since it is baked into each VM when it is created.
+
+[source,yaml]
+----
+scaling:
+  minReplicas: 3
+  maxReplicas: 10
+  schedules:
+    - name: working-hours
+      start: "0 8 * * MON-FRI"
+      end: "0 18 * * MON-FRI"
+      timezone: UTC
+      minReplicas: 20
+      maxReplicas: 50
+      headroom: 5
+----
 
 == Role-based access control
 
@@ -727,7 +1002,7 @@ Logs are written to stderr in JSON format.
 [#confirming-scaler-polling]
 === Confirming the scaler is polling
 
-The scaler emits a log entry on every poll cycle (every one second) as part of a span named `worker loop scaler`. Each entry includes the following fields:
+The scaler emits a log entry on every poll cycle (every 5 seconds) as part of a span named `worker loop scaler`. Each entry includes the following fields:
 
 [.table-scroll]
 --
@@ -782,9 +1057,9 @@ $ helm upgrade runner-provisioner ./chart \
   --values my-values.yaml
 ----
 
-The deployment pod annotation `checksum/config` is derived from the Secret contents, so a config-only change (for example, a new token or VM spec) triggers a pod deployment automatically.
+Resource-class configuration and secrets hot-reload without a pod restart. The provisioner watches the mounted `config.yaml` and `secrets.yaml`, so changes to scaling controls, schedules, tokens, or the set of resource classes take effect within a poll cycle. For the chart-generated ConfigMap and Secret, the `checksum/config` and `checksum/secret` pod annotations also roll the deployment on a change. An `existingConfigMap` or `existingSecret` is not covered by those checksums, so the pods are not rolled for it, but the provisioner still reloads the mounted files.
 
-Configuration changes (tokens, API address, VM spec) are injected into VMs at first boot via cloud-init and are not re-applied to running VMs. After a `helm upgrade`, existing VMs continue using their original config until they are recreated. Two deployment options are available:
+Per-VM settings are different. The VM `spec` and `userData` are baked into each VM by cloud-init at first boot and are not re-applied to running VMs. After changing them, existing VMs keep their original config until they are recreated. Two options are available:
 
 *Graceful deployment — no job interruption*:: Set `idleTimeout` in your values before upgrading. VMs will shut down on their own once they finish their current job and go idle. The pool recreates the VMs with the updated config. Graceful deployment is the right choice when:
 ** You cannot interrupt in-progress jobs.
@@ -824,8 +1099,8 @@ $ kubectl logs -n runner-provisioner deployment/runner-provisioner
 
 Common causes:
 
-* *Missing secret keys*: If using `existingSecret`, confirm the secret contains both `circle-token` and `config.yaml` keys.
-* *Invalid config*: A malformed `config.yaml` or missing required fields (`resourceClass.name`, `resourceClass.token`) will cause the provisioner to exit on startup.
+* *Missing secret keys*: If using `existingSecret`, confirm the Secret contains both `circle-token` and `secrets.yaml` keys.
+* *Invalid config*: A malformed `config.yaml` or `secrets.yaml`, or a resource class missing its `token`, will cause the provisioner to exit on startup.
 
 [#vms-not-being-created]
 === VMs are not being created
@@ -891,14 +1166,14 @@ $ sudo journalctl -u circleci-runner -n 50
 Common causes:
 
 * *Wrong runner token*: The resource class token in your values does not match the token in CircleCI. Regenerate the token in the CircleCI web app under **Self-Hosted Runners** and update your Helm values.
-* *Wrong resource class name*: The `resourceClass.name` in values must match the resource class your jobs target, in `namespace/name` format.
+* *Wrong resource class name*: Each key under `resourceClasses` must match a resource class your jobs target, in `namespace/name` format.
 * *CircleCI Server not reachable*: If using a self-hosted server, confirm `circleciAPIAddr` is set and that the VM can reach that address. Check runner agent logs for connection errors.
 * *Cloud-init did not run*: If the VM booted from a cached image state, cloud-init may have been skipped. Delete the VM and let the pool recreate it: `kubectl delete vm -n runner-provisioner <vm-name>`.
 
 [#disk-full-during-install]
 === Package installs fail with a disk full error
 
-A disk full error while installing packages, such as Docker, means the root filesystem on the default base image ran out of space. The default image caps root at 2.2 GiB, inherited from the upstream Ubuntu cloud image, and this limit cannot be raised at runtime. Build a custom image with a larger root. See <<custom-containerdisk-image,Building a Custom containerDisk Image>> for more information.
+The default CircleCI containerDisk ships with Docker and common tooling pre-installed on a root filesystem sized for real jobs, so this is rare on the default image. It can still happen if a job or `userData` writes a large amount of data, or on a custom image with a small root. Attach an extra disk with <<empty-disk-mounts,Mounting Extra Disks>>, or build a custom image with a larger root. See <<custom-containerdisk-image,Building a Custom Image>>.
 
 [#scaling-not-responding]
 === Scaling is not responding to job demand
@@ -914,19 +1189,19 @@ The provisioner logs the unclaimed and running task counts each poll cycle. If c
 
 * *Wrong `CIRCLE_TOKEN`*: The API token does not have permission to query runner tasks for the configured resource class, or it belongs to the wrong org.
 * *Wrong `circleciAPIAddr`*: For CircleCI Server, confirm the API address points to your instance.
-* *Resource class name mismatch*: The provisioner queries tasks for `resourceClass.name`. Confirm this matches the resource class your jobs target exactly.
+* *Resource class name mismatch*: The provisioner queries tasks for each configured class. Confirm the `resourceClasses` keys match the resource classes your jobs target exactly.
 
 [#config-changes-not-reflected]
-=== Config changes are not reflected in running VMs
+=== VM spec changes are not reflected in running VMs
 
-Cloud-init runs only once at first boot. After a `helm upgrade` that changes tokens, API address, or VM spec, existing VMs will not pick up the new config. Delete them so the pool recreates them:
+Resource-class config and secrets (scaling, tokens, and the set of classes) hot-reload without a restart. The VM `spec` and `userData`, though, are applied by cloud-init only at first boot, so existing VMs keep their original values after a change. Delete them so the pool recreates them:
 
 [source,console]
 ----
 $ kubectl delete vm -n runner-provisioner --all
 ----
 
-New VMs created by the pool will use the updated cloud-init script.
+New VMs created by the pool boot with the updated spec. Set `idleTimeout` to cycle them out gracefully instead.
 
 [#kubevirt-operator-pods-not-scheduling]
 === KubeVirt operator pods are not scheduling
@@ -947,7 +1222,6 @@ $ kubectl label nodes --all node-role.kubernetes.io/control-plane=
 [#architectural-limits]
 === Current architectural limits
 
-* Only one resource class is supported per provisioner deployment. Run multiple deployments for multiple resource classes.
 * VM OS must be Debian/Ubuntu or RHEL/CentOS based.
 * The provisioner requires KubeVirt's `VirtualMachinePool` API (`pool.kubevirt.io`).
 
@@ -956,7 +1230,6 @@ $ kubectl label nodes --all node-role.kubernetes.io/control-plane=
 
 The following capabilities are not yet available and are planned before general availability:
 
-* Multi-resource-class support in a single deployment.
 * Metrics endpoint (Prometheus-compatible).
 * Windows guest OS support for runner VMs (the cloud-init startup script is Linux-only).
 

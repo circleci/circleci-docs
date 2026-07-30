@@ -437,7 +437,7 @@ workflows:
 jobs:
   cci-agent-setup:
     machine:
-      image: ubuntu-2204:2024.01.2
+      image: ubuntu-2404:current
     resource_class: large
     steps:
       - checkout

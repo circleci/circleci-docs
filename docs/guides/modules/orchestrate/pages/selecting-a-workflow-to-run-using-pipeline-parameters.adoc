@@ -37,14 +37,12 @@ jobs:
 
 workflows:
   build:
-    when:
-      equal: [ build, << pipeline.parameters.action >> ]
+    when: pipeline.parameters.action == "build" # only run the build workflow if the action parameter is set to "build"
     jobs:
       - build
 
   report:
-    when:
-      equal: [ report, << pipeline.parameters.action >> ]
+    when: pipeline.parameters.action == "report" # only run the report workflow if the action parameter is set to "report"
     jobs:
       - report
 ----

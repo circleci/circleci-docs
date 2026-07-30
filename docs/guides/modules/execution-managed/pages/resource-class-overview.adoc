@@ -50,7 +50,7 @@ Another use of the `resource_class` key is to specify an execution environment. 
 jobs:
   my-job:
     machine:
-      image: ubuntu-2004:202101-01
+      image: ubuntu-2404:current
     resource_class: arm.medium # arm.medium or arm.large selects the Arm execution environment
     steps:
       - run: uname -a

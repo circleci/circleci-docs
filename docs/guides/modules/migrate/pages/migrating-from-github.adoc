@@ -119,7 +119,7 @@ docker:
 
 # Linux Ubuntu Executor
 machine:
-  image: ubuntu-2004:202010-01
+  image: ubuntu-2404:current
 
 # macOS Executor
 macos:

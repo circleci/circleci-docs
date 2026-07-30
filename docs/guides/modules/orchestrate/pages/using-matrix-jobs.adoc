@@ -23,9 +23,9 @@ executors:
   docker: # Docker using the Base Convenience Image
     docker:
       - image: cimg/base:stable
-  linux: # a Linux VM running Ubuntu 20.04
+  linux: # a Linux VM running Ubuntu 24.04
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2404:current
   macos: # macos executor running Xcode
     macos:
       xcode: 14.2.0

@@ -501,7 +501,9 @@ module.exports.register = function () {
        * layout appends it to the heading, so we preserve it here too.
        */
       const doctitle = page.asciidoc && page.asciidoc.doctitle
+      let plainTitle = ''
       if (doctitle) {
+        plainTitle = turndownService.turndown(doctitle).trim()
         const badge = page.asciidoc.attributes && page.asciidoc.attributes['page-badge']
         const titleHtml = badge ? `${doctitle} ${badge}` : doctitle
         const titleMd = turndownService.turndown(`<h1>${titleHtml}</h1>`).trim()
@@ -542,6 +544,44 @@ module.exports.register = function () {
        */
       const llmsTxtDirective = `> For the complete documentation index, see [llms.txt](${siteUrl}/llms.txt)\n\n`
       markdown = llmsTxtDirective + markdown
+
+      /**
+       * ADD YAML FRONTMATTER
+       *
+       * Metadata an agent can read without parsing the body: title,
+       * description, the doc version this page belongs to (or "unversioned"
+       * for the version-less components: guides, reference, orbs, services,
+       * contributors), and the source file's last-updated date. lastUpdate
+       * comes from page-metadata-extension.js, which runs earlier in the
+       * same 'documentsConverted' event and stashes it on this same
+       * attributes object, so it's already there by the time we get here.
+       *
+       * doc_version: page-version is '' for version-less components, so only
+       * trust page-component-display-version (the human-readable version,
+       * e.g. "Server 4.10") when a real version is set. Antora itself
+       * defaults displayVersion to the literal string 'default' when a
+       * component has no version and no display_version configured
+       * (content-catalog.js), which would be a misleading value to publish.
+       */
+      const yamlString = (value) => JSON.stringify(value || '')
+      const description = page.asciidoc.attributes && page.asciidoc.attributes['page-description']
+      const rawVersion = page.asciidoc.attributes && page.asciidoc.attributes['page-version']
+      const docVersion = rawVersion
+        ? (page.asciidoc.attributes['page-component-display-version'] || rawVersion)
+        : 'unversioned'
+      const lastUpdate = page.asciidoc.attributes && page.asciidoc.attributes.meta && page.asciidoc.attributes.meta.lastUpdate
+      const lastUpdatedISO = lastUpdate ? new Date(lastUpdate).toISOString().split('T')[0] : ''
+
+      const frontmatter = [
+        '---',
+        `title: ${yamlString(plainTitle)}`,
+        `description: ${yamlString(description)}`,
+        `doc_version: ${yamlString(docVersion)}`,
+        `last_updated: ${yamlString(lastUpdatedISO)}`,
+        '---',
+        ''
+      ].join('\n')
+      markdown = frontmatter + '\n' + markdown
 
       /**
        * CONSTRUCT OUTPUT PATH

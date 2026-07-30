@@ -32,9 +32,7 @@ workflows:
       - build-job:
           requires:
             - shellcheck/check # only run build-job once shellcheck has run
-          filters:
-            branches:
-              only: main # only run build-job on main branch
+          filters: pipeline.git.branch == "main" # only run build-job on the main branch
 
 jobs:
   build-job:
@@ -67,9 +65,7 @@ workflows:
       - build-job:
           requires:
             - shellcheck # only run build-job once shellcheck has run
-          filters:
-            branches:
-              only: main # only run build-job on main branch
+          filters: pipeline.git.branch == "main" # only run build-job on the main branch
 ----
 
 Take caution when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they can be exposed, as in the example below.

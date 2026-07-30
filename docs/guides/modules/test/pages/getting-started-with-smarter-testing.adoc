@@ -34,11 +34,11 @@ Test suite:: A named configuration in `.circleci/test-suites.yml` that defines h
 
 == 1. Validate and run locally
 
-Use the `--doctor` flag to set up and validate your `test-suites.yml`. The CLI runs through a series of checks, executing tests and validating the output. If any results look incorrect, action items are provided to resolve them.
+Use the `doctor` command to set up and validate your `test-suites.yml`. The CLI runs through a series of checks, executing tests and validating the output. If any results look incorrect, action items are provided to resolve them.
 
 [source,console]
 ----
-$ circleci testsuite "ci tests" --doctor
+$ circleci testsuite doctor "ci tests"
 ----
 
 Follow the steps until all checks pass.
@@ -47,7 +47,7 @@ include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
 == 2. Run in CI
 
-In your CircleCI configuration file, replace your existing test command with `circleci testsuite` -- the same command you used locally. Keep all other job steps the same.
+In your CircleCI configuration file, replace your existing test command with `circleci testsuite run "ci tests"` -- the same command you used locally. Keep all other job steps the same.
 
 Verify that `store_test_results` points to the directory that matches `outputs.junit` in your `test-suites.yml` file.
 
@@ -61,7 +61,7 @@ jobs:
     steps:
       - setup
       # Replace previous tests command e.g. vitest run --reporter=junit ...
-      - run: circleci testsuite "ci tests"
+      - run: circleci testsuite run "ci tests"
       - store_test_results:
           # This directory must match the directory of `outputs.junit` in your
           # test-suites.yml

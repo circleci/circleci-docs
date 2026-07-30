@@ -62,19 +62,27 @@ Ask the user which month and year they want to analyze if not specified.
 
 ### 2. Extract git commits
 
-Run these git commands to gather commit data:
+**Important**: Do NOT use `--since`/`--until` or `--after`/`--before` date filters directly on `git log`. Those filter by author date, which means commits from a PR opened in month X but merged in month Y will appear in the wrong month's results.
+
+Instead, find the exact state of main at the start and end of the month, then diff between them:
 
 ```bash
-# Get all non-merge commits for the month
-git log --since="YYYY-MM-01" --until="YYYY-MM-31" --oneline --no-merges
+# Find the boundary SHAs — last commit on main before the month started and ended
+MONTH_END=$(git rev-list --max-count=1 --before="YYYY-MM-31T23:59:59" main)
+MONTH_START=$(git rev-list --max-count=1 --before="YYYY-MM-01T00:00:00" main)
+
+# Get all non-merge commits that actually landed on main during the month
+git log --no-merges ${MONTH_START}..${MONTH_END} --oneline
 
 # Get commits excluding dependency updates
-git log --since="YYYY-MM-01" --until="YYYY-MM-31" --oneline --no-merges | \
-  grep -vE "(chore\(deps\)|fix\(deps\)|Update dependency|Update Node.js|Update aws-sdk|Update module|Update tailwindcss|Update cimg/)"
+git log --no-merges ${MONTH_START}..${MONTH_END} --oneline | \
+  grep -vE "(chore\(deps\)|fix\(deps\)|Update dependency|Update Node.js|Update aws-sdk|Update module|Update tailwindcss|Update cimg/|feat: update Xcode|feat: add Xcode|Bump )"
 
 # For key commits, get details with file changes
 git show --stat --oneline <commit-hash>
 ```
+
+This approach correctly handles PRs that were opened in one month but merged in another.
 
 ### 3. Categorize changes
 
@@ -116,7 +124,7 @@ For each significant change:
 
 To get contributor names along with commits:
 ```bash
-git log --since="YYYY-MM-01" --until="YYYY-MM-31" --pretty=format:"%h | %s | %an" --no-merges
+git log --no-merges ${MONTH_START}..${MONTH_END} --pretty=format:"%h | %s | %an"
 ```
 
 When multiple people contribute to related changes, list all contributors (e.g., "Contributor A, Contributor B")
