@@ -4,17 +4,17 @@
 :experimental:
 You can run your jobs in the Linux VM (virtual machine) execution environment by using the machine executor and specifying a Linux image. Using the machine executor runs your jobs in a dedicated, ephemeral VM.
 
-Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful when you need full access to the network stack. For example, you can listen on a network interface or modify the system with `sysctl` commands.
+Using the machine executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful when you need full access to the network stack. For example, you can listen on a network interface or change the system with `sysctl` commands.
 
 To use the machine executor, use the xref:reference:ROOT:configuration-reference.adoc#machine[`machine` key] in your job configuration and specify an image:
 
 ****
-The use of `machine: true` is deprecated when using **CircleCI Cloud**. You must specify an image to use.
+We have deprecated the use of `machine: true` on **CircleCI Cloud**. You must specify an image to use.
 
-`machine: true` **is** supported when using:
+You can still use `machine: true` with:
 
 * Self-hosted runners
-* When using the machine executor on CircleCI Server.
+* The machine executor on CircleCI Server.
 ****
 
 [tabs]
@@ -28,7 +28,7 @@ version: 2.1
 jobs:
   my-job:
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     resource_class: large.gen2
 ----
 --
@@ -46,7 +46,7 @@ jobs:
 --
 ====
 
-You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI Server, the syntax is slightly different. The available Linux images are managed by your system administrator.
+You can view the list of available images in the xref:reference:ROOT:configuration-reference.adoc#available-linux-machine-images-cloud[Configuration Reference], or on the link:https://circleci.com/developer/images?imageType=machine[Developer Hub]. If you are working on an installation of CircleCI Server, the syntax is slightly different. Your system administrator manages the available Linux images.
 
 [#available-linuxvm-resource-classes]
 == Available LinuxVM resource classes
@@ -58,25 +58,33 @@ include::ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
 include::ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
 
+[badge="Beta"]
+=== Gen3
+
+include::ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
+
 [#view-resource-usage]
 === View resource usage
 
 include::ROOT:partial$execution-resources/resource-class-view.adoc[]
 
+[#linux-vm-generations]
+== Linux VM generations
+
 [#linux-vm-gen2-benefits]
-== Linux VM gen2
+=== Gen2
 
 Resource classes running on gen2 infrastructure offer significant performance and cost improvements over their gen1 equivalents.
 
 [#performance-improvements]
-=== Performance improvements
+==== Performance improvements
 
-Using more modern compute, gen2 instances deliver up to 180% faster multi-threaded CPU performance compared to gen1 equivalents.
+Using more modern compute, gen2 instances deliver up to 25% faster performance compared to gen1 equivalents. This figure comes from real-world benchmarks across open source projects.
 
-These improvements are most noticeable in workloads that saturate multiple cores simultaneously. For example, parallel test runs, compilation steps, and image builds. On a per-resource-class basis, gen2 can be priced either higher or lower than its gen1 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+On a per-resource-class basis, gen2 pricing can be higher or lower than its gen1 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
 [#using-gen2]
-=== Using gen2
+==== Using gen2
 
 To use a gen2 resource class, specify a `large.gen2` or equivalent class in your job configuration:
 
@@ -86,14 +94,44 @@ version: 2.1
 jobs:
   my-job:
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     resource_class: large.gen2
+----
+
+[#linux-vm-gen3-benefits]
+[badge="Beta"]
+=== Gen3
+
+Resource classes running on gen3 infrastructure offer further performance and cost improvements over their gen1 and gen2 equivalents. Gen3 resource classes are available on CircleCI Cloud only.
+
+NOTE: Gen3 is an Open Beta feature. See the <<gen3-beta-notice,Gen3 Beta Release Notes>> for full details.
+
+[#gen3-performance-improvements]
+==== Performance improvements
+
+Gen3 instances deliver up to 67% faster performance compared to gen1 equivalents, based on benchmarks collected during Beta across open source projects. These figures are promising, but we have not yet validated them at production scale, and queue times may be longer than expected while we continue tuning Gen3 capacity during Beta.
+
+Gen3 costs less than both its gen1 and gen2 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
+
+[#using-gen3]
+==== Using gen3
+
+To use a gen3 resource class, specify a `large.gen3` or equivalent class in your job configuration:
+
+[,yaml]
+----
+version: 2.1
+jobs:
+  my-job:
+    machine:
+      image: ubuntu-2604:current
+    resource_class: large.gen3
 ----
 
 [#pre-installed-software]
 == Pre-installed software
 
-The most up-to-date list of pre-installed software can be found on the link:https://discuss.circleci.com/tag/machine-images[Discuss] page.
+You can find the most up-to-date list of pre-installed software on the link:https://discuss.circleci.com/tag/machine-images[Discuss] page.
 
 If you are already using an image, you can verify all the packages that come pre-installed. Run the `apt list --installed` command as a step, like in the example below:
 
@@ -104,13 +142,13 @@ version: 2.1
 jobs:
   whats-installed:
     machine: # executor type
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     steps:
       - run: apt list --installed
 ...
 ----
 
-Additional packages can be installed with `sudo apt-get install <package>`. If the package in question is not found, `sudo apt-get update` may be required before installing it.
+You can install additional packages with `sudo apt-get install <package>`. If the package is not found, run `sudo apt-get update` before installing it.
 
 [#use-machine-with-docker]
 == Use machine with Docker
@@ -122,14 +160,14 @@ The following example uses an image and enables xref:optimize:docker-layer-cachi
 [,yaml]
 ----
 machine:
-  image: ubuntu-2404:current
+  image: ubuntu-2604:current
   docker_layer_caching: true    # default - false
 ----
 
 [#using-machine-and-ip-ranges]
 == Using machine and IP ranges
 
-The IP range `192.168.53.0/24` is reserved by CircleCI for internal use on the machine executor. Do not use this range in your jobs.
+CircleCI reserves the IP range `192.168.53.0/24` for internal use on the machine executor. Do not use this range in your jobs.
 
 [#next-steps]
 == Next steps

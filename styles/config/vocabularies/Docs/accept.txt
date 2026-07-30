@@ -334,6 +334,7 @@ SELinux
 [Ss]harded
 \b[Ss]ingle sign-on\b
 SLAs?
+SLOs?
 Slanger
 [Ss]ignup
 SKUs?

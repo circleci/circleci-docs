@@ -942,7 +942,7 @@ Cloud::
 jobs:
   build: # name of your job
     machine: # executor type
-      image: ubuntu-2404:current # recommended linux image
+      image: ubuntu-2604:current # recommended linux image
 
     steps:
       # Commands run in a Linux virtual machine environment
@@ -1205,9 +1205,7 @@ include::guides:ROOT:partial$execution-resources/docker-arm-resource-table.adoc[
 '''
 
 [#linuxvm-execution-environment]
-==== LinuxVM execution environment
-
-include::guides:ROOT:partial$execution-resources/machine-resource-table.adoc[]
+=== LinuxVM execution environment
 
 *Example:*
 
@@ -1221,7 +1219,7 @@ Cloud::
 jobs:
   build:
     machine:
-      image: ubuntu-2404:current # recommended linux image
+      image: ubuntu-2604:current # recommended linux image
     resource_class: large
     steps:
       ... // other config
@@ -1242,10 +1240,13 @@ jobs:
 --
 ====
 
-'''
+[#linuxvm-gen1]
+==== Gen1
+
+include::guides:ROOT:partial$execution-resources/machine-resource-table.adoc[]
 
 [#linuxvm-gen2-execution-environment]
-==== LinuxVM (gen2) execution environment
+==== Gen2
 
 include::guides:ROOT:partial$execution-resources/machine-gen2-resource-table.adoc[]
 
@@ -1256,8 +1257,27 @@ include::guides:ROOT:partial$execution-resources/machine-gen2-resource-table.ado
 jobs:
   build:
     machine:
-      image: ubuntu-2404:current # recommended linux image
+      image: ubuntu-2604:current # recommended linux image
     resource_class: large.gen2
+    steps:
+      ... // other config
+----
+
+[#linuxvm-gen3-execution-environment]
+[badge="Beta"]
+==== Gen3
+
+include::guides:ROOT:partial$execution-resources/machine-gen3-resource-table.adoc[]
+
+*Example:*
+
+[,yaml]
+----
+jobs:
+  build:
+    machine:
+      image: ubuntu-2604:current # recommended linux image
+    resource_class: large.gen3
     steps:
       ... // other config
 ----
@@ -1265,7 +1285,7 @@ jobs:
 '''
 
 [#macos-execution-environment]
-==== macOS execution environment
+=== macOS execution environment
 
 include::guides:ROOT:partial$execution-resources/macos-resource-table.adoc[]
 
@@ -1285,14 +1305,14 @@ jobs:
 '''
 
 [#macos-server]
-==== macOS execution environment on server
+=== macOS execution environment on server
 
 If you are working on CircleCI Server you can access the macOS execution environment using xref:guides:execution-runner:runner-overview.adoc#[Self-hosted Runner].
 
 '''
 
 [#windows-execution-environment]
-==== Windows execution environment
+=== Windows execution environment
 
 include::guides:ROOT:partial$execution-resources/windows-resource-table.adoc[]
 
@@ -1341,7 +1361,7 @@ jobs:
 '''
 
 [#gpu-execution-environment-linux]
-==== GPU execution environment (Linux)
+=== GPU execution environment (Linux)
 
 include::guides:ROOT:partial$execution-resources/gpu-linux-resource-table.adoc[]
 
@@ -1366,7 +1386,7 @@ See the <<available-linux-gpu-images,Available Linux GPU images>> section for th
 '''
 
 [#gpu-execution-environment-windows]
-==== GPU execution environment (Windows)
+=== GPU execution environment (Windows)
 
 include::guides:ROOT:partial$execution-resources/gpu-windows-resource-table.adoc[]
 
@@ -1392,7 +1412,7 @@ jobs:
 '''
 
 [#arm-execution-environment-linux]
-==== Arm VM execution environment
+=== Arm VM execution environment
 
 include::guides:ROOT:partial$execution-resources/arm-resource-table.adoc[]
 
@@ -1408,7 +1428,7 @@ Cloud::
 jobs:
   my-job:
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     resource_class: arm.medium
     steps:
       - run: uname -a
@@ -1825,7 +1845,7 @@ jobs: # conditional steps may also be defined in `commands:`
         type: string
         default: ""
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -3604,7 +3624,7 @@ version: 2.1
 jobs:
   bar:
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     steps:
       - checkout
       - run:
