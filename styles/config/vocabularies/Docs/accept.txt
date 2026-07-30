@@ -42,6 +42,7 @@ Appium
 Arm
 Artifactory
 [Aa]rchitected
+Alertmanager
 Arweave
 Asciidoctor
 Atlassian

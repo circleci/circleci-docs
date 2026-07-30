@@ -5,6 +5,8 @@
 
 CircleCI rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to create and configure a CircleCI pipeline to enable rollback operations.
 
+TIP: *Smart Deployments sets up a rollback pipeline for you.* The Smart Deployments guided setup configures your rollback pipeline alongside deploy markers, a deploy pipeline, deploy validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page to configure a rollback pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
+
 == Introduction
 
 CircleCI rollbacks support two methods of manually reverting to a previous version:
@@ -13,6 +15,8 @@ CircleCI rollbacks support two methods of manually reverting to a previous versi
 * Rollback by rerunning the workflow that originally deployed the version you want to revert to.
 
 This guide covers setting up a rollback pipeline, which is the recommended approach for most applications. The process of rolling back is described in detail in the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide, including a comparison of the two methods.
+
+A rollback pipeline is also what CircleCI triggers when deploy validation fails and automatic rollback is enabled. For more information, see the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]

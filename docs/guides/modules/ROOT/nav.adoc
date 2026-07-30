@@ -170,6 +170,8 @@
 * Deploy with CircleCI
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
 ** Deploys and rollbacks
+*** xref:deploy:set-up-smart-deployments.adoc[Set up Smart Deployments]
+*** xref:deploy:deploy-validation-reference.adoc[Deploy validation configuration reference]
 *** xref:deploy:set-up-rollbacks.adoc[Set up a rollback pipeline]
 *** xref:deploy:set-up-deploys.adoc[Set up a deploy pipeline]
 *** xref:deploy:deploy-a-component.adoc[Deploy a component]

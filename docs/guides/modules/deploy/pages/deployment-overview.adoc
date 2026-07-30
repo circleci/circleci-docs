@@ -6,7 +6,9 @@
 
 With CircleCI you can deploy to any target and manage your deployments in the CircleCI web app.
 
-Track deployments using deploy markers. Deploy and rollback to a stable version using preconfigured deploy and rollback pipelines.
+Track deployments using deploy markers. Deploy and rollback to a stable version using preconfigured deploy and rollback pipelines. Validate each release against your monitoring tool and roll back automatically when a signal fails.
+
+The quickest way to get all of this set up is the Smart Deployments guided setup in the web app. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
 
 Alternatively, if you are deploying to Kubernetes, you can also use the CircleCI release agent to manage your deployments. For more information, see the xref:release-agent-overview.adoc[Release Agent Overview] guide.
 
@@ -20,7 +22,7 @@ Once a software application has been developed and tested, it needs to be deploy
 
 Customize your configuration to match your requirements, whether you need a fully automated process or one that requires manual approval.
 
-Set up deploy markers to track deployments in the CircleCI web app and rollback to previous versions as required.
+Set up deploy markers to track deployments in the CircleCI web app and rollback to previous versions as required. Add deploy validation to check the health of each release before you let it stand.
 
 == The basics of deployment
 
@@ -104,8 +106,8 @@ CircleCI provides deployment tracking and management through two main features a
 |Use cases
 
 |CircleCI deploys and rollbacks
-|CircleCI deploy markers generate a log of all deployments in one place. This deploy log provides a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers enable rollback and deploy pipelines so you can deploy and rollback your projects from the CircleCI web app.
-|All CircleCI projects can use the deploy and rollback features. More information is available in the following guides: xref:set-up-rollbacks.adoc[Set up Rollbacks], xref:configure-deploy-markers.adoc[Configure Deploy Markers].
+|CircleCI deploy markers generate a log of all deployments in one place. This deploy log provides a clear overview of what has changed, without the need to search through your CI/CD pipelines. Deploy markers enable rollback and deploy pipelines so you can deploy and rollback your projects from the CircleCI web app. Deploy validation adds automatic health checks and automatic rollback on top.
+|All CircleCI projects can use the deploy and rollback features. To set them all up at once, see the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. For individual setup, see the xref:set-up-rollbacks.adoc[Set up Rollbacks] and xref:configure-deploy-markers.adoc[Configure Deploy Markers] guides.
 
 |CircleCI release agent
 |The CircleCI release agent is a tool that you install in your Kubernetes cluster to enable you to manage your deployments through CircleCI. The release agent supports Argo Rollouts for progressive delivery.
@@ -123,16 +125,26 @@ Once you have deploy markers configured you can set up and use the following fea
 
 * *Rollback pipelines* to manually revert your application to a previous stable version directly from the CircleCI web app.
 * *Deploy pipelines* to automatically deploy your application to a target environment directly from the CircleCI web app.
+* *Deploy validation* to evaluate signals from your monitoring tool after each deploy, and roll back automatically when a signal fails. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
 * *Environment hierarchy and version promotion* to define ordered promotion paths and promote versions through each stage. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
 
-To get set up see the following guides, you can choose manual configuration, a guided setup option, or multi-project setup:
+==== Get set up with Smart Deployments
+
+Smart Deployments is a guided setup in the web app that configures deploy markers, rollback and deploy pipelines, deploy validation, and automatic rollback in one flow. It generates the configuration with AI and opens a pull request for you to review and merge.
+
+Start with the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Smart Deployments requires a GitHub repository and AI features enabled for your organization.
+
+==== Get set up feature by feature
+
+If Smart Deployments is unavailable for your organization, or you want to add one feature at a time, use the following guides:
 
 * xref:configure-deploy-markers.adoc[Configure Deploy Markers]: Configure deploy markers manually, or use the multi-project setup to generate and commit deploy marker configuration for multiple projects at once.
 * xref:set-up-rollbacks.adoc[Set up Rollbacks]: Set up a rollback pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
 * xref:set-up-deploys.adoc[Set up Deploys]: Set up a deploy pipeline for your project. You will be guided to set up deploy markers too if you have not already done so.
+* xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference]: Configure deploy validation by editing your configuration file directly.
 
 === CircleCI release agent
 
@@ -176,6 +188,14 @@ A subset of release agent commands are available for _progressive_ deployments (
 === Component
 
 A _component_ in CircleCI is a collection of code and configuration that is deployed and released as a single unit. In Kubernetes terms, this would be a Deployment or Rollout object along with the related objects such as Pods, ReplicaSets, etc. that share a common `circleci.com/component-name` label.
+
+=== Continuous validation
+
+_Continuous validation_ is the practice of checking the health of a release automatically after it ships, and reverting it without human intervention when the checks fail.
+
+CircleCI implements continuous validation as *deploy validation*. After a deploy completes, CircleCI opens an evaluation window and listens for webhook alerts from your monitoring tool. Each validation check has an expression that decides when an incoming alert counts as a failure, and a threshold for how many failures it tolerates. If a check fails, CircleCI marks the release as failed and can trigger your rollback pipeline automatically.
+
+Set up deploy validation with the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
 
 === Delivery
 
@@ -337,5 +357,10 @@ A deployment can be in one of the following states:
 
 |LOGGED
 |Deployment has been logged using a deploy marker and is available in the CircleCI deploys UI.
+
+|INCONCLUSIVE
+|Deploy validation reached its evaluation deadline without a decisive result. See the xref:set-up-smart-deployments.adoc#how-deploy-validation-works[How Deploy Validation Works] section.
 |===
 --
+
+When you use deploy validation, each deployment also has a validation status of its own, visible in the Release Validation panel on the deployment details page. For more information, see the xref:set-up-smart-deployments.adoc#view-validation-results[View Validation Results] section.
