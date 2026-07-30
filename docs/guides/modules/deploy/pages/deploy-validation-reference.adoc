@@ -88,7 +88,7 @@ Each entry under `webhooks` supports the following fields:
 |===
 --
 
-NOTE: The `grafana` and `alertmanager` provider values are valid in your configuration file, even though the guided setup offers only Datadog, Prometheus, and Custom. Choose Prometheus in the guided setup and edit the provider value in the generated pull request, or choose Custom and map the fields yourself.
+The guided setup offers Datadog, Prometheus, and Custom. The `grafana` and `alertmanager` values are accepted in your configuration file, and both use the same defaults as `prometheus`. For webhook setup steps, see the xref:set-up-smart-deployments.adoc#connect-monitoring-webhooks[Connect Monitoring Webhooks] section: Alertmanager is covered alongside Prometheus, and Grafana has no setup steps of its own.
 
 [#data-point-keys]
 == Data point keys
