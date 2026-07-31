@@ -1,48 +1,16 @@
 = Set up Smart Deployments
 :page-platform: Cloud
-:page-description: Use the Smart Deployments guided setup to configure deploy markers, deploy and rollback pipelines, deploy validation, and automatic rollback.
+:page-description: Use the guided setup in the CircleCI web app to configure Smart Deployments, including release validation and automatic rollback, from one flow.
 :experimental:
 :tabs-sync-option:
 
-Smart Deployments is a guided setup in the CircleCI web app. It generates the configuration you need to track your deployments, deploy and roll back from the web app, and validate each release against your monitoring tool.
+This guide shows how to configure Smart Deployments using the guided setup in the CircleCI web app. You answer a few questions, and CircleCI generates the configuration and opens a pull request for you to merge.
 
-Smart Deployments is the recommended way to get set up. You answer a few questions in the web app, and CircleCI opens a pull request with the configuration. This replaces working through the deploy marker, rollback pipeline, and deploy pipeline guides separately.
+Smart Deployments is the CircleCI continuous validation feature. For what it does, how the release validation engine works, and the concepts behind it, see the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page.
 
-== Introduction
+The guided setup configures deploy markers, release validation, rollback and deploy pipelines, and automatic rollback in one flow. It replaces working through the deploy marker, rollback pipeline, and deploy pipeline guides separately.
 
-Smart Deployments implements _continuous validation_. After a deploy completes, CircleCI opens an evaluation window and listens for alerts from your monitoring tool. If a signal fails, CircleCI marks the release as failed and can roll back to the last healthy version automatically.
-
-The guided setup offers two protection levels:
-
-* *Continuous validation*: Deploy markers, deploy validation, rollback and deploy pipelines, and automatic rollback. This is the suggested option.
-* *Deploy tracking*: Deploy markers only. CircleCI records what shipped and when, with no validation or rollback.
-
-You can start with deploy tracking and move to continuous validation later. Your protection level is not fixed at setup time.
-
-=== What continuous validation provides
-
-When you choose continuous validation, CircleCI configures the following capabilities:
-
-[.table-scroll]
---
-[cols="1,2", options="header"]
-|===
-|Capability
-|Description
-
-|Deploy markers
-|Records when your deploys start and finish. This is the required baseline for every other capability.
-
-|Deploy validation
-|Evaluates webhook signals from your monitoring tool during an evaluation window after each deploy.
-
-|Rollback and deploy pipelines
-|Rollback and deploy workflows you can trigger from the web app. Required for automatic rollbacks.
-
-|Automatic rollback
-|Reverts to the last healthy version when validation fails, using your rollback pipeline. Optional, and enabled by default.
-|===
---
+TIP: If your code is not in a GitHub repository, or your organization does not have AI features enabled, the guided setup is unavailable. Follow the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide instead.
 
 == Prerequisites
 
@@ -52,9 +20,9 @@ Before you start, confirm the following:
 * A CircleCI project with a workflow configured to deploy your code.
 * Your code must be stored in a *GitHub* repository. CircleCI installs the GitHub App in your organization during setup if it is not installed already. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 +
-NOTE: Only organization administrators can install the GitHub App. If you use a version control system other than GitHub, see the xref:set-up-deploy-validation-manually.adoc[Set up Deploy Validation Manually] guide instead.
-* AI features enabled for your organization. Smart Deployments uses AI to generate your configuration, so the guided setup is unavailable without it. See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps. Without AI features, follow the xref:set-up-deploy-validation-manually.adoc[Set up Deploy Validation Manually] guide.
-* For continuous validation, a monitoring tool that can send outbound webhooks. Datadog, Prometheus, and Alertmanager are supported directly, and you can connect any other tool as a custom provider.
+NOTE: Only organization administrators can install the GitHub App.
+* AI features enabled for your organization, because the guided setup generates your configuration with AI. See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps.
+* For continuous validation, a monitoring tool that can send outbound webhooks. Datadog and Prometheus-compatible tools are supported directly, and you can connect any other tool as a custom provider.
 
 == Start the guided setup
 
@@ -85,7 +53,7 @@ If you select deploy tracking, the guided setup skips monitoring provider select
 
 Leave *Auto rollback on failure* enabled unless you want failure detection without an automatic revert. When the toggle is enabled, CircleCI attempts a rollback to the last healthy version if validation fails during the evaluation window.
 
-You can also change this setting later in your configuration file. See the xref:deploy-validation-reference.adoc#optional-validation-fields[Optional Validation Fields] section.
+You can also change this setting later in your configuration file. See the xref:release-validation-reference.adoc#optional-validation-fields[Optional Validation Fields] section.
 
 === c. Select a monitoring provider
 
@@ -106,7 +74,7 @@ Expand *What we'll add to your config* to see the changes CircleCI generates:
 * A rollback pipeline in `.circleci/rollback.yml`.
 * A deploy pipeline in `.circleci/deploy.yml`.
 
-The guided setup generates a starting configuration. You can extend it once you have reviewed the pull request. For every field you can set, see the xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference] page.
+The guided setup generates a starting configuration. You can extend it once you have reviewed the pull request. For every field you can set, see the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 
 Select btn:[Generate configuration] to continue.
 
@@ -216,70 +184,19 @@ Your next deploy through the release job starts an evaluation window and waits f
 
 If you closed the guided setup before you connected your monitoring tool, you can finish the webhook setup at any time from your organization deploy settings.
 
-[#how-deploy-validation-works]
-== How deploy validation works
+== Check your first validated release
 
-When a deploy runs through a release job with validation enabled, the following happens:
+Your next deploy through the release job starts an evaluation window and waits for signals from your monitoring tool.
 
-. The deploy completes and validation starts.
-. CircleCI opens an evaluation window with a deadline.
-. Each webhook validation plan enters a *Listening* state.
-. CircleCI evaluates incoming webhook events against the `fail_when` expression for each plan.
-. Failures increment a counter until the plan reaches its `max_failures` threshold.
+Open the deployment from the deploys timeline and find its Release Validation panel. The panel shows the evaluation deadline and each check in a *Listening* state, then records each webhook event as it arrives.
 
-=== Validation outcomes
-
-[.table-scroll]
---
-[cols="1,2", options="header"]
-|===
-|Outcome
-|What happens
-
-|Validation passes
-|The release completes successfully.
-
-|Validation fails
-|The release is marked failed. Automatic rollback may trigger.
-
-|Automatic rollback succeeds
-|The rollback pipeline runs and returns the component to the prior healthy version.
-
-|Automatic rollback fails
-|The failed rollback does not trigger another automatic rollback, even when the rollback pipeline includes validation of its own.
-
-|Automatic rollback skipped
-|No rollback runs. This happens when there is no prior successful release, or when no rollback pipeline is configured.
-
-|Manual promote
-|Validation ends early and the release is marked successful.
-
-|Manual cancel
-|Validation stops. A rollback may trigger if a prior version exists.
-
-|Inconclusive
-|No decisive result arrived within the evaluation window.
-|===
---
-
-To end validation early, use the promote or cancel actions on the deployment details page. Promoting marks the release successful, so use it when you have confirmed the release is healthy by other means.
-
-=== View validation results
-
-Open a deployment from the deploys timeline to see its Release Validation panel. The panel shows the following:
-
-* The overall validation status, evaluation deadline, start time, and the number of validations and failures.
-* A progress bar for the evaluation window, with the start time and deadline.
-* Each validation plan, with its status, failure count against the maximum, and its `fails when` expression.
-* The webhook events received for each plan, and whether each event matched the fail criteria.
-
-If validation fails, a banner at the top of the page names the plan that failed and the expression that matched.
+For what each outcome means, and what the panel shows, see the xref:smart-deployments-overview.adoc#how-release-validation-works[How Release Validation Works] section.
 
 == Manage Smart Deployments settings
 
 === Change your protection level
 
-Your protection level is a configuration setting, not a one-time choice. To move from deploy tracking to continuous validation, or to turn validation off, edit the `validation` block on your release job. See the xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference] page.
+Your protection level is a configuration setting, not a one-time choice. To move from deploy tracking to continuous validation, or to turn validation off, edit the `validation` block on your release job. See the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 
 You can also run the guided setup again from project settings.
 
@@ -305,7 +222,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
 == Next steps
 
-* Extend your generated validation configuration with named checks, custom fail criteria, and explicit field mappings. See the xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference] page.
+* Extend your generated validation configuration with named checks, custom fail criteria, and explicit field mappings. See the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 * Customize your generated rollback pipeline. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.
 * Customize your generated deploy pipeline. See the xref:set-up-deploys.adoc[Set up Deploys] guide.
 * Learn how to roll back manually. See the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide.

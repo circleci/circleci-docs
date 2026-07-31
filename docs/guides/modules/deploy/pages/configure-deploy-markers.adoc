@@ -30,7 +30,7 @@ Deploy markers also enable you to use the rollback and deploy features:
 
 == Choose your setup method
 
-TIP: *Consider using Smart Deployments instead of this guide.* The Smart Deployments guided setup configures deploy markers along with rollback and deploy pipelines, deploy validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page when you want deploy markers on their own, when your code is not in a GitHub repository, or when your organization does not have AI features enabled.
+TIP: *Consider using Smart Deployments instead of this guide.* The Smart Deployments guided setup configures deploy markers along with rollback and deploy pipelines, release validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page when you want deploy markers on their own, when your code is not in a GitHub repository, or when your organization does not have AI features enabled.
 
 You can set up deploy markers in two ways:
 
@@ -440,4 +440,4 @@ You can now:
 
 * xref:set-up-deploys.adoc[Set up Deploys].
 
-* xref:set-up-smart-deployments.adoc[Set up Smart Deployments] to add deploy validation and automatic rollback.
+* xref:set-up-smart-deployments.adoc[Set up Smart Deployments] to add release validation and automatic rollback.

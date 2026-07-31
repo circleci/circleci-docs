@@ -1,0 +1,154 @@
+= Smart Deployments overview
+:page-platform: Cloud
+:page-description: Smart Deployments is the CircleCI continuous validation feature. Learn how the release validation engine gates releases on your monitoring signals.
+:experimental:
+
+Smart Deployments is the CircleCI _continuous validation_ feature. It decides whether a deployment is healthy, and gates the release on that outcome.
+
+Smart Deployments works through the *release validation engine*. The engine listens for signals from the monitoring tools you already run, then evaluates them against a policy in your CI/CD configuration. It marks the release as a success or a failure, and triggers your rollback pipeline when a release fails.
+
+== How release validation works
+
+. You trigger a release whose configuration includes a validation policy.
+. CircleCI creates a validation plan and opens an evaluation window.
+. Your monitoring tool sends alert webhooks to the engine during the window.
+. The engine evaluates each signal against your failure criteria.
+. If the criteria are met, the release fails. If the window closes first, the release succeeds.
+
+When a release fails and your project has a rollback pipeline configured, the engine triggers that pipeline for you. It sets the current version to the failed deploy, and the target version to the last successful release.
+
+=== Validation outcomes
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+|Outcome
+|What happens
+
+|Validation passes
+|The release completes successfully.
+
+|Validation fails
+|The release is marked failed. Automatic rollback may trigger.
+
+|Automatic rollback succeeds
+|The rollback pipeline runs and returns the component to the last successful release.
+
+|Automatic rollback fails
+|The failed rollback does not trigger another automatic rollback, even when the rollback pipeline includes validation of its own.
+
+|Automatic rollback skipped
+|No rollback runs. This happens when there is no prior successful release, or when no rollback pipeline is configured.
+
+|Manual promote
+|Validation ends early and the release is marked successful.
+
+|Manual cancel
+|Validation stops. A rollback may trigger if a prior version exists.
+
+|Inconclusive
+|No decisive result arrived within the evaluation window. Configure how long a release stays inconclusive before CircleCI cancels it, in your organization deploy settings.
+|===
+--
+
+To end validation early, use the promote or cancel actions on the deployment details page. Promoting marks the release successful, so use it when you have confirmed the release is healthy by other means.
+
+[#view-validation-results]
+=== View validation results
+
+Open a deployment from the deploys timeline to see its Release Validation panel. The panel shows the following:
+
+* The validation status, evaluation deadline, start time, and the number of validations and failures.
+* A progress bar for the evaluation window, with its start time and deadline.
+* Each validation plan, with its status, failure count against the maximum, and its `fails when` expression.
+* The webhook events received for each plan, and whether each event matched the fail criteria.
+
+If validation fails, a banner at the top of the page names the plan that failed and the expression that matched.
+
+== Value Smart Deployments unlocks
+
+You define a policy, point a monitor at a webhook URL, and CircleCI determines release health for you.
+
+No specialized infrastructure:: Gate releases without Kubernetes, Argo Rollouts, or the CircleCI release agent. The engine builds on the release management you already have.
+Works with your existing tools:: The engine has built-in support for Datadog and for Prometheus-compatible tools such as Alertmanager, plus a custom provider for any tool that can send an HTTP POST. You reuse the monitors you already operate.
+Automated rollback:: When a release breaches your policy, the engine triggers your rollback pipeline and sets the target back to the last successful release.
+Real-time gating:: The engine evaluates alert signals as they arrive. It does no polling, and needs no extra infrastructure to operate.
+Built-in visibility:: Validation status and the full event timeline appear on the release details page in the web app.
+
+== When to use Smart Deployments
+
+Use release validation when any of the following apply:
+
+* You want deployment safety without adopting a service mesh or a progressive delivery stack.
+* You already run monitors, and you want them to decide whether a release is healthy.
+* You want failed releases to roll back without manual intervention.
+* You prefer one declarative policy in your configuration over custom health-check scripts.
+
+== What Smart Deployments configures
+
+Smart Deployments has two protection levels:
+
+* *Continuous validation*: Deploy markers, release validation, rollback and deploy pipelines, and automatic rollback. This is the suggested option.
+* *Deploy tracking*: Deploy markers only. CircleCI records what shipped and when, with no validation or rollback.
+
+You can start with deploy tracking and add validation later. Your protection level is a configuration setting, not a one-time choice.
+
+Choosing continuous validation gives you the following capabilities:
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+|Capability
+|Description
+
+|Deploy markers
+|Records when your deploys start and finish. This is the required baseline for every other capability.
+
+|Release validation
+|Evaluates webhook signals from your monitoring tool during an evaluation window after each deploy.
+
+|Rollback and deploy pipelines
+|Rollback and deploy workflows you can trigger from the web app. Required for automatic rollbacks.
+
+|Automatic rollback
+|Reverts to the last successful release when validation fails, using your rollback pipeline. Optional, and enabled by default.
+|===
+--
+
+== Concepts
+
+=== Validation policy
+
+A _validation policy_ is the declarative definition of release health that you add to your CI/CD configuration. It sets how long to listen, what counts as a failure, and how many failures to tolerate.
+
+You configure the policy under a `validation` key on your release job. For every field, see the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
+
+=== Validation plan
+
+A _validation plan_ is one instance of a check for one release. CircleCI creates the plans from your policy when the release starts, and each plan tracks its own status, event history, and failure count.
+
+=== Evaluation window
+
+The _evaluation window_ is the period after a deploy completes during which the engine accepts signals. When the window closes, the engine stops listening and settles the outcome.
+
+Match the window to how quickly your monitors fire. A window shorter than your monitor evaluation interval closes before any signal can arrive.
+
+=== Signal
+
+A _signal_ is one alert webhook that your monitoring tool sends to the engine. The engine matches each signal to a validation plan using the component, environment, and check name it carries, then evaluates it against your failure criteria.
+
+== Smart Deployments and the release agent
+
+Smart Deployments is the route to release management for most projects, whatever you deploy to. It needs no cluster access and no agent installed.
+
+The xref:release-agent-overview.adoc[CircleCI Release Agent] remains the option for teams who want Kubernetes-native controls, such as scaling and restarting components from the web app, or progressive delivery with Argo Rollouts. Choose the release agent when you need those controls, not as a prerequisite for gating releases.
+
+CAUTION: Do not use both Smart Deployments and the CircleCI release agent in the same project.
+
+== Get started
+
+* xref:set-up-smart-deployments.adoc[Set up Smart Deployments]: Use the guided setup in the web app to generate your configuration and open a pull request. This is the quickest route for projects in a GitHub repository.
+* xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route if your code is not in a GitHub repository, or if your organization does not have AI features enabled.
+* xref:release-validation-reference.adoc[Release Validation Configuration Reference]: Every field you can set on the `validation` block.

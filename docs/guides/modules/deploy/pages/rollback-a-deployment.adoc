@@ -116,7 +116,7 @@ If you have a rollback pipeline set up for your project, workflow rollbacks are 
 [#automatic-rollback-on-validation-failure]
 == Automatic rollback on validation failure
 
-Both methods above are manual: someone notices a problem and triggers the rollback. With deploy validation configured, CircleCI can detect the problem and roll back on its own.
+Both methods above are manual: someone notices a problem and triggers the rollback. With release validation configured, CircleCI can detect the problem and roll back on its own.
 
 After a deploy completes, CircleCI opens an evaluation window and listens for alerts from your monitoring tool. If a validation check fails, CircleCI marks the release as failed and triggers your rollback pipeline to return the component to the last healthy version. No manual step is involved.
 

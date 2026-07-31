@@ -1,9 +1,9 @@
-= Set up deploy validation manually
+= Set up release validation manually
 :page-platform: Cloud
-:page-description: Configure deploy validation by editing your CircleCI configuration file, for organizations that cannot use the Smart Deployments guided setup.
+:page-description: Configure release validation by editing your CircleCI configuration file, for organizations that cannot use the Smart Deployments guided setup.
 :experimental:
 
-Deploy validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This guide shows how to configure it by editing your CircleCI configuration file, rather than through the Smart Deployments guided setup.
+Release validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This guide shows how to configure it by editing your CircleCI configuration file, rather than through the Smart Deployments guided setup.
 
 == Introduction
 
@@ -12,11 +12,11 @@ The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup ge
 * Your code is not stored in a GitHub repository.
 * Your organization does not have AI features enabled.
 
-Follow this guide in either case. The result is the same deploy validation feature. The difference is that you write the configuration and connect your monitoring tool yourself.
+Follow this guide in either case. The result is the same release validation feature. The difference is that you write the configuration and connect your monitoring tool yourself.
 
 === What you can set up manually
 
-Deploy validation and deploy markers are configuration, so they work on any version control system. Rollback and deploy pipelines are a web app feature that currently requires GitHub.
+Release validation and deploy markers are configuration, so they work on any version control system. Rollback and deploy pipelines are a web app feature that currently requires GitHub.
 
 [.table-scroll]
 --
@@ -30,7 +30,7 @@ Deploy validation and deploy markers are configuration, so they work on any vers
 |No
 |Add the `circleci run release` commands to any project. See the xref:configure-deploy-markers.adoc#set-up-deploy-markers-manually[Set up Deploy Markers Manually] section.
 
-|Deploy validation
+|Release validation
 |No
 |Add a `validation` block to your release job, as described on this page.
 
@@ -46,7 +46,7 @@ Deploy validation and deploy markers are configuration, so they work on any vers
 
 [IMPORTANT]
 ====
-Without a rollback pipeline, deploy validation detects failures but cannot revert them.
+Without a rollback pipeline, release validation detects failures but cannot revert them.
 
 A failing check still marks the release as failed, records the events that caused it, and surfaces the failure in the deploys UI. CircleCI then reports the rollback as skipped, because no rollback pipeline is configured. Treat validation as your alerting and audit trail in this case, and roll back through your own tooling.
 ====
@@ -61,7 +61,7 @@ A failing check still marks the release as failed, records the events that cause
 
 == 1. Add a release job to your configuration
 
-Deploy validation attaches to a _release job_, which is a job with `type: release` that names the release plan created by your `circleci run release plan` step. If your configuration already has one, skip to the next step.
+Release validation attaches to a _release job_, which is a job with `type: release` that names the release plan created by your `circleci run release plan` step. If your configuration already has one, skip to the next step.
 
 The `plan_name` value must match the deploy name you passed to `circleci run release plan`. In the following example, both are `my-service-release`:
 
@@ -104,9 +104,9 @@ workflows:
 
 For details of the `circleci run release` commands, see the xref:configure-deploy-markers.adoc[Configure Deploy Markers] guide. For the release job keys, see the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration Reference].
 
-== 2. Turn on deploy validation
+== 2. Turn on release validation
 
-Add a `validation` block to your release job. Deploy validation needs only one field to turn it on:
+Add a `validation` block to your release job. Release validation needs only one field to turn it on:
 
 .Release job with validation enabled
 [source,yaml]
@@ -149,7 +149,7 @@ jobs:
 
 This example relies on the Datadog defaults for `data_points` and `fail_when`. Add explicit mappings when your monitoring tool sends payloads in a shape those defaults do not understand.
 
-For every field, the `data_points` keys, and the provider defaults, see the xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference] page.
+For every field, the `data_points` keys, and the provider defaults, see the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 
 == 4. Set the evaluation window
 
@@ -266,10 +266,10 @@ If your webhook produces no event on the deployment, work through the following 
 |===
 --
 
-For what each field means during matching, see the xref:deploy-validation-reference.adoc#data-point-keys[Data Point Keys] section.
+For what each field means during matching, see the xref:release-validation-reference.adoc#data-point-keys[Data Point Keys] section.
 
 == Next steps
 
-* Review every field you can set on the `validation` block. See the xref:deploy-validation-reference.adoc[Deploy Validation Configuration Reference] page.
-* Understand what happens when validation passes or fails. See the xref:set-up-smart-deployments.adoc#how-deploy-validation-works[How Deploy Validation Works] section.
+* Review every field you can set on the `validation` block. See the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
+* Understand what happens when validation passes or fails. See the xref:smart-deployments-overview.adoc#how-release-validation-works[How Release Validation Works] section.
 * If your code is in a GitHub repository, set up a rollback pipeline to enable automatic rollback. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.

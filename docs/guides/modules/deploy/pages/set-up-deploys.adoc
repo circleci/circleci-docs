@@ -5,7 +5,7 @@
 
 Deploy pipelines allow you to deploy your components to a target environment as fast as possible. This guide covers how to configure your CircleCI pipeline to support manual deployment capabilities using a deploy pipeline.
 
-TIP: *Smart Deployments sets up a deploy pipeline for you.* The Smart Deployments guided setup configures your deploy pipeline alongside deploy markers, a rollback pipeline, deploy validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page to configure a deploy pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
+TIP: *Smart Deployments sets up a deploy pipeline for you.* The Smart Deployments guided setup configures your deploy pipeline alongside deploy markers, a rollback pipeline, release validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page to configure a deploy pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
 
 == Introduction
 

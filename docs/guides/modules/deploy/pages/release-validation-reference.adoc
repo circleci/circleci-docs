@@ -1,19 +1,19 @@
-= Deploy validation configuration reference
+= Release validation configuration reference
 :page-platform: Cloud
 :page-description: Reference for the validation block in your CircleCI configuration file, including webhook fields, data point mappings, and provider defaults.
 :experimental:
 
-Deploy validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This page documents every field you can set to control that evaluation.
+Release validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This page documents every field you can set to control that evaluation.
 
 The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup generates a starting validation configuration for you. Use this page when you want to extend that configuration, or when you need to write it by hand.
 
 == Introduction
 
-Add a `validation` key to your release job to configure deploy validation. A release job is a job with `type: release` that references a release plan created by a `circleci run release plan` step.
+Add a `validation` key to your release job to configure release validation. A release job is a job with `type: release` that references a release plan created by a `circleci run release plan` step.
 
 For the release job keys and their accepted types, see the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration Reference]. This page covers what CircleCI does with those values.
 
-Deploy validation needs only one field to turn it on:
+Release validation needs only one field to turn it on:
 
 [source,yaml]
 ----
@@ -34,7 +34,7 @@ You need to write this configuration by hand in the following cases:
 * You want more than one named check per release.
 * Your monitoring tool sends payloads in a shape the provider defaults do not understand.
 
-For the steps to configure validation and connect your monitoring tool by hand, see the xref:set-up-deploy-validation-manually.adoc[Set up Deploy Validation Manually] guide. This page is the field reference for that work.
+For the steps to configure validation and connect your monitoring tool by hand, see the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide. This page is the field reference for that work.
 
 [#optional-validation-fields]
 == Optional validation fields
@@ -303,5 +303,5 @@ jobs:
 == Next steps
 
 * Connect your monitoring tool so that it sends the tags these mappings expect. See the xref:set-up-smart-deployments.adoc#connect-monitoring-webhooks[Connect Monitoring Webhooks] section.
-* Understand what happens when validation passes or fails. See the xref:set-up-smart-deployments.adoc#how-deploy-validation-works[How Deploy Validation Works] section.
+* Understand what happens when validation passes or fails. See the xref:smart-deployments-overview.adoc#how-release-validation-works[How Release Validation Works] section.
 * Configure the rollback pipeline that automatic rollback triggers. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.

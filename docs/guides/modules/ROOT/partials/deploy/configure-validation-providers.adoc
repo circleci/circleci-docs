@@ -146,4 +146,4 @@ Check that your payload shape matches the following example:
 }
 ----
 
-If your monitoring tool sends payloads in a different shape, map the fields explicitly in your configuration. See the xref:deploy-validation-reference.adoc#data-point-keys[Data Point Keys] section.
+If your monitoring tool sends payloads in a different shape, map the fields explicitly in your configuration. See the xref:release-validation-reference.adoc#data-point-keys[Data Point Keys] section.
