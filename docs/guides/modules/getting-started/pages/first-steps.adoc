@@ -39,7 +39,8 @@ If you want to primarily build **Bitbucket Cloud** projects, sign up with your B
 
 . Select btn:[Sign Up With Bitbucket].
 . Log in to your Bitbucket Cloud account.
-#TBC#
+. Once logged in and authorized, you will be taken to the CircleCI web app. At this point you have one `bitbucket` organization created for you with the name of your Bitbucket workspace.
+. You can now select *Projects* from the left sidebar and follow your projects. For Bitbuckets cloud one repository equals one project. When you follow a project you will see the project's pipelines and runs in the web app.
 
 [#sign-up-with-the-cli]
 == Sign up with the CLI
