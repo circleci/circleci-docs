@@ -3,7 +3,7 @@
 :page-description: Use the CircleCI Slack integration to notify a channel when a workflow is held for approval, and approve held workflows directly from Slack.
 :experimental:
 
-When a workflow includes a manual approval job, CircleCI holds the workflow until someone approves it. With the CircleCI Slack integration, your team is notified in Slack when a workflow is waiting for approval, and approvers who have linked their Slack identity can approve the held workflow directly from Slack.
+When a workflow includes a manual approval job, CircleCI holds the workflow until someone approves it. With the CircleCI Slack integration, your team is notified in Slack when a workflow is waiting for approval. Anyone who has linked their Slack identity can then approve the held workflow directly from Slack.
 
 This page shows how to set up notifications for a paused workflow using the xref:guides:integration:slack-integration.adoc[Slack Integration]. The integration is installed once at the organization level and configured per project.
 
@@ -12,8 +12,8 @@ For more information on manual approval, see the xref:orchestrate:workflows.adoc
 [#prerequisites]
 == Prerequisites
 
-* The CircleCI Slack app is installed for your organization, and the project is linked to a Slack channel. See xref:guides:integration:slack-integration.adoc#install-the-slack-app[Install the CircleCI Slack app] and link a project to a channel.
-* To approve a held workflow directly from Slack, link your Slack identity. See xref:guides:integration:slack-integration.adoc#link-your-slack-identity[Link your Slack identity].
+* The CircleCI Slack app is installed for your organization, and the project is linked to a Slack channel. See xref:guides:integration:slack-integration.adoc#install-the-slack-app[Install the CircleCI Slack App] and link a project to a channel.
+* To approve a held workflow directly from Slack, link your Slack identity. See xref:guides:integration:slack-integration.adoc#link-your-slack-identity[Link Your Slack Identity].
 
 [#add-an-approval-job]
 == 1. Add an approval job to your workflow
@@ -42,8 +42,8 @@ When this workflow reaches `pause_workflow`, CircleCI holds it until the job is 
 
 Notifications are managed from your project settings in the CircleCI web app. Any organization member with write access to the project can configure them.
 
-. Link the project to a Slack channel if you have not already. See xref:guides:integration:slack-integration.adoc#link-a-project-to-a-slack-channel[Link a project to a Slack channel].
-. Review the notification events for the project from menu:Project settings[Slack Notifications]. See xref:guides:integration:slack-integration.adoc#update-notification-preferences[Update notification preferences].
+. Link the project to a Slack channel if you have not already. For steps, see the xref:guides:integration:slack-integration.adoc[Slack Integration] guide.
+. Review the notification events for the project from menu:Project settings[Slack Notifications]. See xref:guides:integration:slack-integration.adoc#update-notification-preferences[Update Notification Preferences].
 
 When a workflow for the project is held for approval, CircleCI sends a notification to the linked Slack channel.
 
@@ -52,7 +52,7 @@ When a workflow for the project is held for approval, CircleCI sends a notificat
 
 After you link your Slack identity, you can approve a held workflow directly from the Slack notification.
 
-. Link your Slack identity for the organization. See xref:guides:integration:slack-integration.adoc#link-your-slack-identity[Link your Slack identity].
+. Link your Slack identity for the organization. See xref:guides:integration:slack-integration.adoc#link-your-slack-identity[Link Your Slack Identity].
 . When a workflow is held for approval, open the notification in your linked Slack channel.
 . Approve the held workflow from the notification to let the workflow continue.
 
