@@ -64,7 +64,7 @@ Open a deployment from the deploys timeline to see its Release Validation panel.
 
 If validation fails, a banner at the top of the page names the plan that failed and the expression that matched.
 
-== Value Smart Deployments unlocks
+== Benefits of Smart Deployments
 
 You define a policy, point a monitor at a webhook URL, and CircleCI determines release health for you.
 
@@ -76,14 +76,14 @@ Built-in visibility:: Validation status and the full event timeline appear on th
 
 == When to use Smart Deployments
 
-Use release validation when any of the following apply:
+Use Smart Deployments when any of the following apply:
 
 * You want deployment safety without adopting a service mesh or a progressive delivery stack.
 * You already run monitors, and you want them to decide whether a release is healthy.
 * You want failed releases to roll back without manual intervention.
 * You prefer one declarative policy in your configuration over custom health-check scripts.
 
-== What Smart Deployments configures
+== Protection levels
 
 Smart Deployments has two protection levels:
 
