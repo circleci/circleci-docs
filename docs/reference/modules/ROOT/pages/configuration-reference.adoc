@@ -447,7 +447,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[Connect Your Pipeline Configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys Overview] page.
+Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[Connect Your Pipeline Configuration] to a deployment in the CircleCI deploys UI. A release job names the release plan created by a `circleci run release plan` step, using the `plan_name` key. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys Overview] page.
 
 **Example** of a job with a `release` type:
 
@@ -458,6 +458,95 @@ jobs:
     type: release
     plan_name: <my-service-release>
 ----
+
+[#release-job-validation]
+===== `validation`
+
+Add a `validation` key to a release job to turn on the release validation engine. The engine gates the release on signals from your monitoring tool, and triggers your rollback pipeline when a release fails. For an overview of the feature, see the xref:guides:deploy:smart-deployments-overview.adoc[Smart Deployments Overview] page.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `enabled`
+| Y
+| Boolean
+| Turns on release validation for this release job.
+
+| `evaluation_time`
+| N
+| String
+| How long the engine waits for validation signals before treating the release as successful, for example `30m`. Defaults to `20m`.
+
+| `auto_rollback_on_failure`
+| N
+| Boolean
+| When `true`, the engine triggers your rollback pipeline if validation fails during the evaluation window.
+
+| `webhooks`
+| N
+| List
+| Webhook validation checks, where each entry defines one named signal from a monitoring provider. When omitted, CircleCI uses a catch-all check that accepts any signal.
+|===
+--
+
+Each entry under `webhooks` takes the following keys:
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `name`
+| Y
+| String
+| Identifier for this check. Your monitoring tool must send a matching `signal_name` so CircleCI can route alerts to it.
+
+| `provider`
+| Y
+| String
+| One of `datadog`, `prometheus`, `grafana`, `alertmanager`, or `custom`.
+
+| `data_points`
+| N
+| Map
+| Maps fields in the incoming webhook payload to the values CircleCI matches on. Provider defaults apply to any key you omit.
+
+| `fail_when`
+| N
+| String
+| Expression that decides when a webhook event counts as a failure. Provider defaults apply when you omit it.
+
+| `max_failures`
+| N
+| Integer
+| Number of matching failures before this check fails.
+|===
+--
+
+**Example** of a release job with release validation enabled:
+
+[,yaml]
+----
+jobs:
+  release-my-service:
+    type: release
+    plan_name: <my-service-release>
+    validation:
+      enabled: true
+      evaluation_time: 30m
+      auto_rollback_on_failure: true
+      webhooks:
+        - name: error_rate
+          provider: datadog
+          fail_when: 'criteria == "triggered" or criteria == "re-triggered"'
+          max_failures: 2
+----
+
+For the `data_points` keys, the provider defaults, and how the engine matches an incoming signal to a check, see the xref:guides:deploy:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 
 The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organize the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using `no-op` jobs, see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook].
 

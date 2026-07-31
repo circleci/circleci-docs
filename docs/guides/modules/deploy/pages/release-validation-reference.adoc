@@ -11,7 +11,7 @@ The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup ge
 
 Add a `validation` key to your release job to configure release validation. A release job is a job with `type: release` that references a release plan created by a `circleci run release plan` step.
 
-For the release job keys and their accepted types, see the xref:reference:ROOT:configuration-reference.adoc#job-type[Configuration Reference]. This page covers what CircleCI does with those values.
+For the release job keys and their accepted types, see the xref:reference:ROOT:configuration-reference.adoc#release-job-validation[Configuration Reference]. This page covers what CircleCI does with those values.
 
 Release validation needs only one field to turn it on:
 
