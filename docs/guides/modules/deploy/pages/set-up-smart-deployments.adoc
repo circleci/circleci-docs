@@ -140,7 +140,7 @@ In the guided setup::
 . On the *Connect monitoring* step, select btn:[Generate webhook secret].
 . Copy the secret immediately. You cannot view it again after you leave the screen.
 
-CircleCI names the generated secret after your organization and provider, for example `validation-webhook`.
+CircleCI names the secret `validation-webhook`. Each additional generated secret takes a numbered suffix, so the next is `validation-webhook-2`, then `validation-webhook-3`.
 --
 In organization deploy settings::
 +
@@ -208,6 +208,8 @@ include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 . Select *Deploys*.
 . Find the Webhook secrets card. The table lists each secret with its name, creation date, last used date, and expiry date.
 . Select btn:[Revoke] to revoke a secret.
+
+Secrets created by the guided setup are named `validation-webhook`, then `validation-webhook-2`, `validation-webhook-3`, and so on for each one after that. Secrets you create yourself keep the name you give them, so use a descriptive name if you run several monitoring tools.
 
 Revoking a secret takes effect immediately. Any monitoring tool still sending that token stops being able to deliver validation webhooks, so update your monitoring tool before you revoke.
 

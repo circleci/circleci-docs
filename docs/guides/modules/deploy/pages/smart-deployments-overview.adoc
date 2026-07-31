@@ -48,7 +48,7 @@ When a release fails and your project has a rollback pipeline configured, the en
 |Validation stops. A rollback may trigger if a prior version exists.
 
 |Inconclusive
-|No decisive result arrived within the evaluation window. Configure how long a release stays inconclusive before CircleCI cancels it, in your organization deploy settings.
+|No decisive result arrived within the evaluation window.
 |===
 --
 
