@@ -45,9 +45,11 @@ The first step of the guided setup asks how much protection you want, and which 
 
 === a. Select continuous validation or deploy tracking
 
-Select *Continuous validation*, marked *Suggested*, to validate every release against your monitoring tool. Select *Deploy tracking* to record deploy markers only.
+Select *Continuous validation*, marked *Suggested*, to validate every release against your monitoring tool. Select *Deploy tracking* to log your deploys and set up the pipelines without validating anything.
 
-If you select deploy tracking, the guided setup skips monitoring provider selection and the Connect monitoring step. You get deploy markers, and you can return later to add validation.
+Both levels generate deploy markers, a rollback pipeline, and a deploy pipeline. The difference is that continuous validation also adds a validation policy, so the release validation engine decides whether each release is healthy.
+
+If you select deploy tracking, the guided setup skips monitoring provider selection and the Connect monitoring step. You can return later and add a validation policy to your configuration.
 
 === b. Configure automatic rollback
 
@@ -113,7 +115,7 @@ TIP: Review the generated pipelines against your deployment process before you r
 [#connect-monitoring-webhooks]
 == 3. Connect monitoring webhooks
 
-This step is required for continuous validation. Without it, CircleCI has no signals to evaluate and every release finishes as inconclusive.
+This step is required for continuous validation. Without it, the engine receives no signals, so every release passes without being checked.
 
 === a. Copy the webhook ingest URL
 

@@ -15,7 +15,7 @@ Smart Deployments works through the *release validation engine*. The engine list
 . The engine evaluates each signal against your failure criteria.
 . If the criteria are met, the release fails. If the window closes first, the release succeeds.
 
-When a release fails and your project has a rollback pipeline configured, the engine triggers that pipeline for you. It sets the current version to the failed deploy, and the target version to the last successful release.
+When a release fails and your project has a rollback pipeline configured, the engine triggers that pipeline for you, targeting the last successful release.
 
 === Validation outcomes
 
@@ -47,8 +47,6 @@ When a release fails and your project has a rollback pipeline configured, the en
 |Manual cancel
 |Validation stops. A rollback may trigger if a prior version exists.
 
-|Inconclusive
-|No decisive result arrived within the evaluation window.
 |===
 --
 
@@ -90,9 +88,9 @@ Use release validation when any of the following apply:
 Smart Deployments has two protection levels:
 
 * *Continuous validation*: Deploy markers, release validation, rollback and deploy pipelines, and automatic rollback. This is the suggested option.
-* *Deploy tracking*: Deploy markers only. CircleCI records what shipped and when, with no validation or rollback.
+* *Deploy tracking*: Deploy markers plus rollback and deploy pipelines, without release validation or automatic rollback. CircleCI records what shipped and when, and you deploy and roll back from the web app yourself.
 
-You can start with deploy tracking and add validation later. Your protection level is a configuration setting, not a one-time choice.
+Both levels generate the same deploy markers, rollback pipeline, and deploy pipeline. Continuous validation adds the validation policy on top, so the engine decides release health instead of a person. You can start with deploy tracking and add validation later, because your protection level is a configuration setting rather than a one-time choice.
 
 Choosing continuous validation gives you the following capabilities:
 
@@ -131,9 +129,9 @@ A _validation plan_ is one instance of a check for one release. CircleCI creates
 
 === Evaluation window
 
-The _evaluation window_ is the period after a deploy completes during which the engine accepts signals. When the window closes, the engine stops listening and settles the outcome.
+The _evaluation window_ is the period after a deploy completes during which the engine accepts signals. When the window closes without a failure, the release succeeds. The default window is 20 minutes, and you set your own with `evaluation_time`.
 
-Match the window to how quickly your monitors fire. A window shorter than your monitor evaluation interval closes before any signal can arrive.
+Match the window to how quickly your monitors fire. A window shorter than your monitor evaluation interval closes before any signal can arrive, so the release passes without ever being checked.
 
 === Signal
 

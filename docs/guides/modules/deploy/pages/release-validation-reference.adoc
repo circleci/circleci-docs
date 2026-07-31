@@ -47,7 +47,7 @@ For the steps to configure validation and connect your monitoring tool by hand, 
 |Description
 
 |`evaluation_time`
-|How long CircleCI listens for webhook signals after a deploy completes, for example `30m`.
+|How long the engine waits for validation signals before treating the release as successful, for example `30m`. Defaults to `20m`.
 
 |`auto_rollback_on_failure`
 |When `true`, CircleCI rolls back automatically if validation fails during the evaluation window. This requires a configured rollback pipeline.
@@ -148,9 +148,11 @@ The sections below describe each key in full.
 
 The extracted value must match the component name for the release under validation. If extraction yields an empty or incorrect name, CircleCI ignores the webhook for that validation plan.
 
-Typical sources are Datadog `alert_tags` or `tags`, using `component_name:<your-component>`. The provider defaults also understand the aliases `app` and `service`.
+Typical sources are Datadog `alert_tags` or `tags`, using `component_name:<your-component>`.
 
-In your monitor setup, include a tag such as `component_name:<your-component>`, or one of the aliases your provider defaults understand.
+In your monitor setup, include a tag such as `component_name:<your-component>`.
+
+NOTE: For Datadog, the engine also accepts the monitor tags `app:<name>` and `service:<name>` as aliases for `component_name`. Prefer the canonical name.
 
 === Environment
 
@@ -158,7 +160,9 @@ In your monitor setup, include a tag such as `component_name:<your-component>`, 
 
 The extracted value must match the environment on the validation plan, which comes from the release and its environment integration. Unlike `version`, `project_id`, and `namespace`, `env` is not optional for matching. Both sides must agree.
 
-Typical sources are `env:` or `environment:` in your monitor tags.
+Typical sources are `env:` in your monitor tags.
+
+NOTE: For Datadog, the engine also accepts the monitor tag `environment:<name>` as an alias for `env`. Prefer the canonical name.
 
 === Version
 

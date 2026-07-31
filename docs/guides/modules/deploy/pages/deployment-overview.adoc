@@ -364,8 +364,6 @@ A deployment can be in one of the following states:
 |LOGGED
 |Deployment has been logged using a deploy marker and is available in the CircleCI deploys UI.
 
-|INCONCLUSIVE
-|Release validation reached its evaluation deadline without a decisive result. See the xref:smart-deployments-overview.adoc#how-release-validation-works[How Release Validation Works] section.
 |===
 --
 

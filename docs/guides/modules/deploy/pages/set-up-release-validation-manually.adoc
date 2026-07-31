@@ -153,7 +153,7 @@ For every field, the `data_points` keys, and the provider defaults, see the xref
 
 == 4. Set the evaluation window
 
-By default, validation listens for the system evaluation window. Set `evaluation_time` to control how long CircleCI waits for signals after a deploy completes:
+The engine waits 20 minutes for signals by default. Set `evaluation_time` to change how long it waits after a deploy completes:
 
 .Release job with an explicit evaluation window
 [source,yaml]
@@ -170,13 +170,13 @@ jobs:
           provider: datadog
 ----
 
-Match the window to how quickly your monitors fire. A window shorter than your monitor evaluation interval finishes before any signal can arrive, and the release ends as inconclusive.
+The default window is 20 minutes. Match it to how quickly your monitors fire: a window shorter than your monitor evaluation interval closes before any signal can arrive, so the release passes without ever being checked.
 
 If you have a rollback pipeline configured, add `auto_rollback_on_failure: true` to revert automatically when a check fails. On a version control system other than GitHub, leave it out: there is no rollback pipeline for it to trigger.
 
 == 5. Connect your monitoring tool
 
-This step is required. Without it, CircleCI has no signals to evaluate and every release finishes as inconclusive.
+This step is required. Without it, the engine receives no signals, so every release passes without being checked.
 
 === a. Copy the webhook ingest URL
 
@@ -250,7 +250,7 @@ If your webhook produces no event on the deployment, work through the following 
 |Your monitoring tool reports a delivery failure. Confirm the `Authorization` header is `Bearer <secret>` with a token that is neither revoked nor expired, in the Webhook secrets card of your organization deploy settings.
 
 |The component name does not match
-|The extracted `component_name` must match the component on the release exactly. Confirm your monitor sends `component_name`, or the alias `app` or `service`, with the same value as `--component-name` in your deploy marker.
+|The extracted `component_name` must match the component on the release exactly. Confirm your monitor sends `component_name`, or a Datadog alias such as `app`, with the same value as `--component-name` in your deploy marker.
 
 |The environment does not match
 |`env` is not optional for matching. Confirm your monitor sends the same value as `--environment-name` in your deploy marker.

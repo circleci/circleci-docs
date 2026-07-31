@@ -25,9 +25,9 @@
 |Required
 |Purpose
 
-|`app`
+|`component_name`
 |Yes
-|The component or application name for the release under validation.
+|The component for the release under validation.
 
 |`env`
 |Yes
@@ -51,7 +51,9 @@
 |===
 --
 
-Map your Datadog template variables so that `app`, `version`, `env`, and `signal_name` align with the values your deploy markers use.
+Map your Datadog template variables so that `component_name`, `version`, `env`, and `signal_name` align with the values your deploy markers use.
+
+NOTE: For Datadog, the engine also accepts the monitor tags `app:<name>` and `service:<name>` as aliases for `component_name`, and `environment:<name>` as an alias for `env`. Prefer the canonical names.
 
 == Configure Prometheus or Alertmanager
 
@@ -71,8 +73,8 @@ Map your Datadog template variables so that `app`, `version`, `env`, and `signal
 |`alertname`
 |The validation signal name. This must match a `validation.webhooks[].name` value in your configuration.
 
-|`app`
-|The component or application name.
+|`component_name`
+|The component for the release under validation.
 
 |`env`
 |The environment.
@@ -91,7 +93,7 @@ Check that your payload shape matches the following example:
   "status": "firing",
   "groupLabels": {
     "alertname": "error_rate",
-    "app": "my-service",
+    "component_name": "my-service",
     "env": "production",
     "version": "1.0.0"
   }
