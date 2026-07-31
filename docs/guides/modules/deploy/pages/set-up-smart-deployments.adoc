@@ -140,7 +140,7 @@ In the guided setup::
 . On the *Connect monitoring* step, select btn:[Generate webhook secret].
 . Copy the secret immediately. You cannot view it again after you leave the screen.
 
-CircleCI names the generated secret after your organization and provider, for example `my-org-datadog-webhook`.
+CircleCI names the generated secret after your organization and provider, for example `validation-webhook`.
 --
 In organization deploy settings::
 +
@@ -210,15 +210,6 @@ include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 . Select btn:[Revoke] to revoke a secret.
 
 Revoking a secret takes effect immediately. Any monitoring tool still sending that token stops being able to deliver validation webhooks, so update your monitoring tool before you revoke.
-
-=== Set the inconclusive release timeout
-
-A release that receives no decisive signal stays in an inconclusive state until it times out. Configure how long CircleCI waits before it cancels the release automatically, as follows:
-
-include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
-. Select *Deploys*.
-. Find the Inconclusive Release Timeout card.
-. Choose a value from the dropdown menu. When you set no custom value, CircleCI uses the system default of four hours.
 
 == Next steps
 
