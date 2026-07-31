@@ -16,7 +16,7 @@ You can use DLC with both the `machine` executor and in a xref:execution-managed
 
 DLC costs 200 credits per job run. For more information about DLC charges, see the xref:plans-pricing:credits.adoc#charge-for-docker-layer-caching[FAQ].
 
-NOTE: DLC has a couple of temporary, known issues. See <<known-issues,Known issues>> before enabling it on gen3 resource classes or newer Docker versions.
+NOTE: DLC has a couple of temporary, known issues. See <<known-issues,Known Issues>> before enabling it on gen3 resource classes or newer Docker versions.
 
 [#quickstart]
 == Quickstart
