@@ -1085,14 +1085,14 @@ CircleCI supports running jobs on link:https://developer.apple.com/macos/[macOS]
 |===
 --
 
-*Example:* Use a macOS virtual machine with Xcode version 26.4.0:
+*Example:* Use a macOS virtual machine with Xcode version {xcodeversion}:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 jobs:
   build:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
 ----
 
 '''
@@ -1291,12 +1291,12 @@ include::guides:ROOT:partial$execution-resources/macos-resource-table.adoc[]
 
 *Example:*
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 jobs:
   build:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
     resource_class: m4pro.medium
     steps:
       ... // other config
@@ -2458,12 +2458,12 @@ In the case of `install_signing_bundle`, the step type is just a string with no 
 
 *Example:*
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 jobs:
   build-and-sign:
     macos:
-      xcode: 15.2.0
+      xcode: {xcodeversion}
       code_signing:
         - my-signing-bundle
     steps:

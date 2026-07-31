@@ -52,7 +52,7 @@ If additional permissions are required, you can find out how to set these up in 
 
 Sample `config.yml` for testing a macOS app:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -62,7 +62,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
         - checkout
         - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
@@ -116,7 +116,7 @@ While it can be written to manually with `sqlite3` commands, we encourage the us
 
 To list the currently defined permissions in both the user and system database, call the `list-permissions` command provided by the orb, such as in this example:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -126,7 +126,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
         - checkout
         - mac-permissions/list-permissions
@@ -152,7 +152,7 @@ This command generates two steps; one lists the contents of the user `TCC.db` an
 
 To grant permissions, the correct type of key for the permission type needs to be passed. These are not clearly documented by Apple, but can be found by running the `list-permission-types` command, as this example shows:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -162,7 +162,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
         - checkout
         - mac-permissions/list-permission-types
@@ -184,7 +184,7 @@ kTCCServiceSpeechRecognition
 
 For most developers, only a few standard permissions for Terminal and Xcode Helper are required to set up the environment for macOS app UI Testing. These can be set by calling the `add-uitest-permissions` command, such as in this example:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -194,7 +194,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
         - checkout
         - mac-permissions/add-uitest-permissions
@@ -205,7 +205,7 @@ jobs:
 
 The orb can be used to add custom permissions with the `add-permission` command. The following example grants Screen Capture permissions to Terminal. The Bundle ID and the <<listing-permission-types,permission>> type are both required parameters:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -215,7 +215,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
         - checkout
         - mac-permissions/add-permission:
@@ -228,7 +228,7 @@ jobs:
 
 In the unlikely event that a permission needs to be removed during a job, use the `delete-permission` command. In the following example, we are removing Screen Capture permissions from Terminal. The Bundle ID and the <<listing-permission-types,permission>> type are both required parameters:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -238,7 +238,7 @@ orbs:
 jobs:
   build-test:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
         - checkout
         - mac-permissions/delete-permission:

@@ -192,7 +192,7 @@ jobs:
 ----
 
 a|
-[source, yaml]
+[source, yaml, subs=attributes+]
 ----
 jobs:
   ubuntuJob:
@@ -203,7 +203,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
     steps:
       - checkout
       - run: echo "Hello, $USER!"

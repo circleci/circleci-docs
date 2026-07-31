@@ -12,7 +12,7 @@ In the following example, the `test` job runs across a Linux Docker container, L
 
 include::ROOT:partial$notes/docker-auth.adoc[]
 
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 version: 2.1
 
@@ -28,7 +28,7 @@ executors:
       image: ubuntu-2404:current
   macos: # macos executor running Xcode
     macos:
-      xcode: 14.2.0
+      xcode: {xcodeversion}
 
 jobs:
   test:
