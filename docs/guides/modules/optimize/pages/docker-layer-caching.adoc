@@ -68,7 +68,7 @@ jobs:
 
 [WARNING]
 ====
-We are investigating reports that enabling DLC (`docker_layer_caching: true`) on gen3 resource classes (`*.gen3`) can cause infrastructure failures. This is a temporary, known issue, not a permanent limitation of DLC or gen3. Avoid enabling DLC on gen3 resource classes for now, whether you are using the `machine` executor or a xref:execution-managed:building-docker-images.adoc[Remote Docker Environment].
+We are investigating reports that enabling DLC (`docker_layer_caching: true`) on gen3 resource classes (`*.gen3`) can cause infrastructure failures. This incompatibility is a temporary, known issue, not a permanent limitation of DLC or gen3. Avoid enabling DLC on gen3 resource classes for now, whether you are using the `machine` executor or a xref:execution-managed:building-docker-images.adoc[Remote Docker Environment].
 ====
 
 [#docker29-incompatibility]
@@ -76,7 +76,7 @@ We are investigating reports that enabling DLC (`docker_layer_caching: true`) on
 
 [WARNING]
 ====
-DLC is not currently compatible with Docker 29 or later. This is a temporary, known issue, and we are working on a fix. Avoid `docker29` if you use DLC. See xref:execution-managed:building-docker-images.adoc#docker-version[Specify a Docker Version for Remote Docker] for how to pin a version.
+DLC is not currently compatible with Docker 29 or later. This incompatibility is a temporary, known issue, and we are working on a fix. Avoid `docker29` if you use DLC. See xref:execution-managed:building-docker-images.adoc#docker-version[Specify a Docker Version for Remote Docker] for how to pin a version.
 ====
 
 [#limitations]
