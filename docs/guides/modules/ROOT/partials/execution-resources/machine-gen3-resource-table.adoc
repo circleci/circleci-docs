@@ -8,6 +8,7 @@
 * We are still validating performance and reliability. We measure SLOs, but do not guarantee them yet.
 * Some jobs may see longer-than-expected queue times as we tune capacity.
 * We recommend testing on non-critical workloads first while we refine the Beta based on customer feedback.
+* **Known issue (temporary):** Enabling Docker Layer Caching (`docker_layer_caching: true`) on gen3 resource classes can currently cause infrastructure failures. We are actively working on a fix. See xref:guides:optimize:docker-layer-caching.adoc#gen3-infrastructure-failures[known issues] for details.
 ====
 
 [.table-scroll]
