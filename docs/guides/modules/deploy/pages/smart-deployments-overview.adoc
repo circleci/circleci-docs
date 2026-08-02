@@ -64,25 +64,6 @@ Open a deployment from the deploys timeline to see its Release Validation panel.
 
 If validation fails, a banner at the top of the page names the plan that failed and the expression that matched.
 
-== Benefits of Smart Deployments
-
-You define a policy, point a monitor at a webhook URL, and CircleCI determines release health for you.
-
-No specialized infrastructure:: Gate releases without Kubernetes, Argo Rollouts, or the CircleCI release agent. The engine builds on the release management you already have.
-Works with your existing tools:: The engine has built-in support for Datadog and for Prometheus-compatible tools such as Alertmanager, plus a custom provider for any tool that can send an HTTP POST. You reuse the monitors you already operate.
-Automated rollback:: When a release breaches your policy, the engine triggers your rollback pipeline and sets the target back to the last successful release.
-Real-time gating:: The engine evaluates alert signals as they arrive. It does no polling, and needs no extra infrastructure to operate.
-Built-in visibility:: Validation status and the full event timeline appear on the release details page in the web app.
-
-== When to use Smart Deployments
-
-Use Smart Deployments when any of the following apply:
-
-* You want deployment safety without adopting a service mesh or a progressive delivery stack.
-* You already run monitors, and you want them to decide whether a release is healthy.
-* You want failed releases to roll back without manual intervention.
-* You prefer one declarative policy in your configuration over custom health-check scripts.
-
 == Protection levels
 
 Smart Deployments has two protection levels:
@@ -114,6 +95,25 @@ Choosing continuous validation gives you the following capabilities:
 |Reverts to the last successful release when validation fails, using your rollback pipeline. Optional, and enabled by default.
 |===
 --
+
+== Benefits of Smart Deployments
+
+You define a policy, point a monitor at a webhook URL, and CircleCI determines release health for you.
+
+No specialized infrastructure:: Gate releases without Kubernetes, Argo Rollouts, or the CircleCI release agent. The engine builds on the release management you already have.
+Works with your existing tools:: The engine has built-in support for Datadog and for Prometheus-compatible tools such as Alertmanager, plus a custom provider for any tool that can send an HTTP POST. You reuse the monitors you already operate.
+Automated rollback:: When a release breaches your policy, the engine triggers your rollback pipeline and sets the target back to the last successful release.
+Real-time gating:: The engine evaluates alert signals as they arrive. It does no polling, and needs no extra infrastructure to operate.
+Built-in visibility:: Validation status and the full event timeline appear on the release details page in the web app.
+
+== When to use Smart Deployments
+
+Use Smart Deployments when any of the following apply:
+
+* You want deployment safety without adopting a service mesh or a progressive delivery stack.
+* You already run monitors, and you want them to decide whether a release is healthy.
+* You want failed releases to roll back without manual intervention.
+* You prefer one declarative policy in your configuration over custom health-check scripts.
 
 == Concepts
 
