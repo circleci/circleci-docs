@@ -6,7 +6,7 @@
 
 This guide shows how to configure Smart Deployments using the guided setup in the CircleCI web app. You answer a few questions, and CircleCI generates the configuration and opens a pull request for you to merge.
 
-Smart Deployments is the CircleCI continuous validation feature. For what it does, how the release validation engine works, and the concepts behind it, see the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page.
+Smart Deployments is the CircleCI continuous validation feature. For more information, see the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page.
 
 The guided setup configures deploy markers, release validation, rollback and deploy pipelines, and automatic rollback in one flow. It replaces working through the deploy marker, rollback pipeline, and deploy pipeline guides separately.
 
@@ -43,7 +43,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
 The first step of the guided setup asks how much protection you want, and which monitoring tool sends the signals.
 
-=== a. Select continuous validation or deploy tracking
+=== 1.1. Select continuous validation or deploy tracking
 
 Select *Continuous validation*, marked *Suggested*, to validate every release against your monitoring tool. Select *Deploy tracking* to log your deploys and set up the pipelines without validating anything.
 
@@ -51,13 +51,13 @@ Both levels generate deploy markers, a rollback pipeline, and a deploy pipeline.
 
 If you select deploy tracking, the guided setup skips monitoring provider selection and the Connect monitoring step. You can return later and add a validation policy to your configuration.
 
-=== b. Configure automatic rollback
+=== 1.2. Configure automatic rollback
 
 Leave *Auto rollback on failure* enabled unless you want failure detection without an automatic revert. When the toggle is enabled, CircleCI attempts a rollback to the last healthy version if validation fails during the evaluation window.
 
 You can also change this setting later in your configuration file. See the xref:release-validation-reference.adoc#optional-validation-fields[Optional Validation Fields] section.
 
-=== c. Select a monitoring provider
+=== 1.3. Select a monitoring provider
 
 Choose the provider that sends your validation webhooks:
 
@@ -65,9 +65,9 @@ Choose the provider that sends your validation webhooks:
 * Prometheus
 * Custom
 
-You must select a provider before you continue. Provider-specific webhook instructions appear in step three, after you merge the configuration pull request. You can also finish the webhook setup later from your organization deploy settings.
+You must select a provider before you continue. Provider-specific webhook instructions appear in <<3-4-configure-your-monitoring-provider,step 3.4>>, after you merge the configuration pull request. You can also finish the webhook setup later from your organization deploy settings.
 
-=== d. Review what is added to your configuration
+=== 1.4. Review what is added to your configuration
 
 Expand *What we'll add to your config* to see the changes CircleCI generates:
 
@@ -84,13 +84,13 @@ Select btn:[Generate configuration] to continue.
 
 In this step CircleCI writes the generated configuration to a branch in your repository, and you review and merge it.
 
-=== a. Select the config branch
+=== 2.1. Select the config branch
 
 Choose the branch that contains your `.circleci/config.yml` file. CircleCI commits the generated configuration to a branch called `circleci/deploy-setup` and targets the branch you select.
 
 The *Ready to generate* panel confirms which configurations the pull request includes.
 
-=== b. Generate the configuration
+=== 2.2. Generate the configuration
 
 Select btn:[Generate configuration]. CircleCI generates each configuration in turn and shows its progress. Generation takes a few moments.
 
@@ -100,7 +100,7 @@ CircleCI generates the following:
 * A rollback pipeline in `.circleci/rollback.yml`, when you selected that option.
 * A deploy pipeline in `.circleci/deploy.yml`, when you selected that option.
 
-=== c. Review and merge the pull request
+=== 2.3. Review and merge the pull request
 
 . Select btn:[Create pull request on GitHub]. This opens GitHub with a pull request titled *Configure deploy settings*, from `circleci/deploy-setup` to the branch you selected. The pull request description contains a pre-filled verification checklist.
 . Review the generated validation and deploy configuration. To check the generated commit without opening a pull request, select *View commit*.
@@ -117,7 +117,7 @@ TIP: Review the generated pipelines against your deployment process before you r
 
 This step is required for continuous validation. Without it, the engine receives no signals, so every release passes without being checked.
 
-=== a. Copy the webhook ingest URL
+=== 3.1. Copy the webhook ingest URL
 
 All validation webhooks POST to the following URL:
 
@@ -126,11 +126,9 @@ All validation webhooks POST to the following URL:
 https://circleci.com/api/v3/deploy/hooks/<org-id>/validate
 ----
 
-Replace `<org-id>` with your organization ID. The URL is the same for every webhook secret in your organization. You can copy the full URL, with your organization ID already filled in, from the guided setup or from your organization deploy settings.
+The URL is the same for every webhook secret in your organization. You can copy the full URL, with your organization ID already filled in, from the guided setup or from your organization deploy settings.
 
-include::guides:ROOT:partial$notes/find-organization-id.adoc[]
-
-=== b. Create a webhook secret
+=== 3.2. Create a webhook secret
 
 CircleCI authenticates validation webhooks with a bearer token. Create the token in the guided setup or in your organization deploy settings.
 
@@ -159,7 +157,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
 CAUTION: The plaintext token is shown once. Store it in your monitoring tool or your secrets manager straight away. If you lose it, revoke the secret and create a new one.
 
-=== c. Authenticate webhook requests
+=== 3.3. Authenticate webhook requests
 
 Configure your monitoring tool to send the following custom header on every validation webhook:
 
@@ -172,13 +170,15 @@ Configure your monitoring tool to send the following custom header on every vali
 
 Replace `<secret>` with the token you copied. Do not include the angle brackets.
 
-=== d. Configure your monitoring provider
+=== 3.4. Configure your monitoring provider
 
-Follow the instructions for the provider you selected in step one. Each provider needs the ingest URL, the bearer auth header, and a set of tags that let CircleCI match the alert to the right release.
+Follow the instructions for the provider you selected in <<1-3-select-a-monitoring-provider,step 1.3>>.
+
+Each provider needs the ingest URL, the bearer auth header, and a set of tags that let CircleCI match the alert to the right release.
 
 include::guides:ROOT:partial$deploy/configure-validation-providers.adoc[leveloffset=+2]
 
-=== e. Finish the setup
+=== 3.5. Finish the setup
 
 Select btn:[Done] to finish the guided setup.
 

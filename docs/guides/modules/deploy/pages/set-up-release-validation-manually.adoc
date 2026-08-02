@@ -178,7 +178,7 @@ If you have a rollback pipeline configured, add `auto_rollback_on_failure: true`
 
 This step is required. Without it, the engine receives no signals, so every release passes without being checked.
 
-=== a. Copy the webhook ingest URL
+=== 5.1. Copy the webhook ingest URL
 
 All validation webhooks POST to the following URL:
 
@@ -191,7 +191,7 @@ Replace `<org-id>` with your organization ID. The URL is the same for every webh
 
 include::guides:ROOT:partial$notes/find-organization-id.adoc[]
 
-=== b. Create a webhook secret
+=== 5.2. Create a webhook secret
 
 CircleCI authenticates validation webhooks with a bearer token. To create one, follow these steps:
 
@@ -205,7 +205,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-org-settings.adoc[]
 
 CAUTION: The plaintext token is shown once. Store it in your monitoring tool or your secrets manager straight away. If you lose it, revoke the secret and create a new one.
 
-=== c. Authenticate webhook requests
+=== 5.3. Authenticate webhook requests
 
 Configure your monitoring tool to send the following custom header on every validation webhook:
 
@@ -218,7 +218,7 @@ Configure your monitoring tool to send the following custom header on every vali
 
 Replace `<secret>` with the token you copied. Do not include the angle brackets.
 
-=== d. Configure your monitoring provider
+=== 5.4. Configure your monitoring provider
 
 Follow the instructions for your monitoring tool. Each provider needs the ingest URL, the bearer auth header, and a set of tags that let CircleCI match the alert to the right release.
 
