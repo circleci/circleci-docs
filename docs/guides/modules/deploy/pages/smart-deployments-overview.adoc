@@ -7,6 +7,27 @@ Smart Deployments is the CircleCI _continuous validation_ feature. It decides wh
 
 Smart Deployments works through the *release validation engine*. The engine listens for signals from the monitoring tools you already run, then evaluates them against a policy in your CI/CD configuration. It marks the release as a success or a failure, and triggers your rollback pipeline when a release fails.
 
+== Quickstart
+
+To get set up right away, choose your route:
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+|Your situation
+|Start here
+
+|Your code is in a GitHub repository, and your organization has AI features enabled
+|xref:set-up-smart-deployments.adoc[Set up Smart Deployments]. The guided setup generates your configuration and opens a pull request for you to merge.
+
+|Anything else
+|xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]. You write the validation policy and connect your monitoring tool yourself.
+|===
+--
+
+For every field you can set once you are configured, see the xref:release-validation-reference.adoc[Release Validation Configuration Reference] page.
+
 == How release validation works
 
 . You trigger a release whose configuration includes a validation policy.
