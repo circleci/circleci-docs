@@ -17,6 +17,21 @@ Smart Deployments works through the *release validation engine*. The engine list
 
 When a release fails and your project has a rollback pipeline configured, the engine triggers that pipeline for you, targeting the last successful release.
 
+.How the release validation engine gates a release
+[mermaid]
+----
+flowchart TD
+    Deploy([Deploy completes]) --> Window[Engine opens<br/>evaluation window]
+    Window --> Signal[Monitoring tool<br/>sends alert webhook]
+    Signal --> Criteria{Failure criteria met?}
+    Criteria -->|No| Open{Window still open?}
+    Open -->|Yes| Signal
+    Open -->|No| Pass([Release succeeds])
+    Criteria -->|Yes| Fail[Release marked failed]
+    Fail -->|If configured| Rollback[Rollback pipeline targets<br/>last successful release]
+    Rollback --> Restored([Last successful<br/>release restored])
+----
+
 === Validation outcomes
 
 [.table-scroll]
