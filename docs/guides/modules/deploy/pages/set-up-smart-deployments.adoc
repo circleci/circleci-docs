@@ -118,14 +118,14 @@ This step is required for continuous validation. Without it, the engine receives
 
 === 3.1. Copy the webhook ingest URL
 
-All validation webhooks POST to the following URL:
+On the *Connect monitoring* step, copy the webhook ingest URL. CircleCI shows the full URL with your organization ID already filled in:
 
 [source,text]
 ----
 https://circleci.com/api/v3/deploy/hooks/<org-id>/validate
 ----
 
-The URL is the same for every webhook secret in your organization. You can copy the full URL, with your organization ID already filled in, from the guided setup or from your organization deploy settings.
+All validation webhooks POST to this URL. It is the same for every webhook secret in your organization.
 
 === 3.2. Create a webhook secret
 
