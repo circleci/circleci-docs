@@ -163,15 +163,13 @@ You configure the policy under a `validation` key on your release job. For every
 
 A _validation plan_ is one instance of a check for one release. CircleCI creates the plans from your policy when the release starts, and each plan tracks its own status, event history, and failure count.
 
+The engine matches each incoming webhook to a plan using the component, environment, and check name that the webhook carries. For the full matching rules, see the xref:release-validation-reference.adoc#data-point-keys[Data Point Keys] section.
+
 === Evaluation window
 
 The _evaluation window_ is the period after a deploy completes during which the engine accepts signals. When the window closes without a failure, the release succeeds. The default window is 20 minutes, and you set your own with `evaluation_time`.
 
 Match the window to how quickly your monitors fire. A window shorter than your monitor evaluation interval closes before any signal can arrive, so the release passes without ever being checked.
-
-=== Signal
-
-A _signal_ is one alert webhook that your monitoring tool sends to the engine. The engine matches each signal to a validation plan using the component, environment, and check name it carries, then evaluates it against your failure criteria.
 
 == Smart Deployments and the release agent
 
