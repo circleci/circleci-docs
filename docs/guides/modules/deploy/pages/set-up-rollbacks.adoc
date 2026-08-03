@@ -66,7 +66,7 @@ A pipeline definition is a setting within CircleCI in your project to specify th
 
 No changes are pushed to your repository at this point. GitHub pipelines are viewable at menu:Project settings[Project Setup].
 
-. Select the repository that includes your project code. This is the repository that you want to roll back with the pipeline you are setting up.
+. Select the repository that includes the project code you want to roll back with this pipeline.
 . Select btn:[Create pipeline definition]. This creates a new pipeline definition for your rollback pipeline in your project.
 
 === 4. Add deploy markers
@@ -99,7 +99,7 @@ The setup will auto-generate deploy marker commands based on your selections.
 .Add deploy marker values
 image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
 
-. Copy the generated commands using the btn:[Copy] button and paste them into your existing config file in your repository where the deployment occurs on the branch you selected in the guided setup.
+. Copy the generated commands using the btn:[Copy] button. Paste them into your existing config file where the deployment occurs, on the branch you selected in the guided setup.
 +
 Ensure the `circleci run release plan` step comes before the deployment step, followed by the `circleci run release update` step.
 +

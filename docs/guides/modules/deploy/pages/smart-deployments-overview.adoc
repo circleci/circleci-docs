@@ -104,7 +104,7 @@ If validation fails, a banner at the top of the page names the plan that failed 
 
 Smart Deployments has two protection levels:
 
-* *Continuous validation*: Deploy markers, release validation, rollback and deploy pipelines, and automatic rollback. This is the suggested option.
+* *Continuous validation* (suggested): Deploy markers, release validation, rollback and deploy pipelines, and automatic rollback.
 * *Deploy tracking*: Deploy markers plus rollback and deploy pipelines, without release validation or automatic rollback. CircleCI records what shipped and when, and you deploy and roll back from the web app yourself.
 
 Both levels generate the same deploy markers, rollback pipeline, and deploy pipeline. Continuous validation adds the validation policy on top, so the engine decides release health instead of a person. You can start with deploy tracking and add validation later, because your protection level is a configuration setting rather than a one-time choice.
@@ -119,7 +119,7 @@ Choosing continuous validation gives you the following capabilities:
 |Description
 
 |Deploy markers
-|Records when your deploys start and finish. This is the required baseline for every other capability.
+|Records when your deploys start and finish. Every other capability requires deploy markers.
 
 |Release validation
 |Evaluates webhook signals from your monitoring tool during an evaluation window after each deploy.
@@ -181,6 +181,6 @@ CAUTION: Do not use both Smart Deployments and the CircleCI release agent in the
 
 == Get started
 
-* xref:set-up-smart-deployments.adoc[Set up Smart Deployments]: Use the guided setup in the web app to generate your configuration and open a pull request. This is the quickest route for projects in a GitHub repository.
+* xref:set-up-smart-deployments.adoc[Set up Smart Deployments]: Use the guided setup in the web app to generate your configuration and open a pull request. Use this route for projects in a GitHub repository.
 * xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route if your code is not in a GitHub repository, or if your organization does not have AI features enabled.
 * xref:release-validation-reference.adoc[Release Validation Configuration Reference]: Every field you can set on the `validation` block.

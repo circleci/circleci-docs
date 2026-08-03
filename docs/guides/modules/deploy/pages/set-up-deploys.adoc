@@ -56,7 +56,7 @@ A pipeline definition is a setting within CircleCI in your project to specify th
 
 No changes are being pushed to your repository at this point. GitHub pipelines are viewable at menu:Project settings[Project Setup].
 
-. Select the repository that includes your project code. This is the repository that you want to deploy with this deploy pipeline.
+. Select the repository that includes the project code you want to deploy with this pipeline.
 . Select btn:[Create pipeline definition]. This creates a new pipeline definition for your deploy pipeline in your project.
 
 === 4. Add deploy markers
@@ -89,7 +89,7 @@ The setup will auto-generate deploy marker commands based on your selections.
 .Add deploy marker values
 image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
 
-. Copy the generated commands using the btn:[Copy] button and paste them into your existing config file in your repository where the deployment occurs on the branch you selected in the guided setup.
+. Copy the generated commands using the btn:[Copy] button. Paste them into your existing config file where the deployment occurs, on the branch you selected in the guided setup.
 +
 Ensure the `circleci run release plan` step comes before the deployment step, followed by the `circleci run release update` step.
 +
@@ -124,7 +124,7 @@ Alternatively, you can copy the suggested configuration into an existing or newl
 
 You can now deploy your component by selecting btn:[Deploy] in your project overview and running your deploy pipeline. For detailed steps, see the xref:deploy-a-component.adoc[Deploy a Component] guide.
 
-TIP: If you deploy to multiple environments (for example, dev, staging, production), you can set up an environment hierarchy to define your promotion path and use version promotion to move versions through each stage with one click. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
+TIP: If you deploy to multiple environments (for example dev, staging, or production), you can set up an environment hierarchy to define your promotion path. Version promotion then moves versions through each stage with one click. See the xref:environment-hierarchy-and-version-promotion.adoc[Environment Hierarchy and Version Promotion] guide.
 
 == Run a deploy pipeline
 

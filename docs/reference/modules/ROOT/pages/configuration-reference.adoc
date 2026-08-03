@@ -770,7 +770,7 @@ workflows:
 
 CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify an image and a resource class. An executor defines the underlying technology, environment, and operating system in which to run a job.
 
-Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
+Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor. Then specify an image with the tools and packages you need, and a resource class.
 
 Learn more about execution environments and executors in the xref:guides:execution-managed:executor-intro.adoc#[Introduction to Execution Environments].
 
@@ -1202,7 +1202,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 If you do not specify a resource class, CircleCI uses a default value that can change. Specify a resource class instead of relying on a default.
 
-CAUTION: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue must pin their CPU count to their guaranteed CPU resources.
+CAUTION: Java, Erlang, and any other languages that introspect the `/proc` directory for CPU count information may require additional configuration. Without it, they can slow down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue must pin their CPU count to their guaranteed CPU resources.
 
 NOTE: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
@@ -1874,7 +1874,7 @@ The following attributes can be used to automatically rerun a step if it fails, 
 
 Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
 
-You must configure the `command` key for the step, you cannot use the short form run step configuration, for example, the following is not supported for use with automatic reruns: `- run: echo "Hello, world!"`
+You must configure the `command` key for the step. You cannot use the short form run step configuration. For example, the following is not supported for use with automatic reruns: `- run: echo "Hello, world!"`
 
 *Example:*
 
@@ -2074,7 +2074,7 @@ Allows Docker commands to be run locally. See xref:guides:execution-managed:buil
 | `prefer_same_region`
 | N
 | boolean
-| Set this to `true` to attempt pulling images from the same region as the VM on a best-effort basis, falling back to the image's original region if the pull fails (default: `false`)
+| Set this to `true` to pull images from the same region as the VM where possible. If the pull fails, CircleCI falls back to the image's original region (default: `false`)
 
 | `version`
 | N
@@ -2266,7 +2266,7 @@ steps:
       key: v1-myapp-cache
 ----
 
-In this case, CircleCI restores cache `v1-myapp-cache-new` because this is the most recent match with the `v1-myapp-cache` prefix, even though the first key (`v1-myapp-cache`) is an exact match.
+In this case, CircleCI restores cache `v1-myapp-cache-new`, the most recent match with the `v1-myapp-cache` prefix. CircleCI restores it even though the first key (`v1-myapp-cache`) is an exact match.
 
 For more information on key formatting, see the `key` section of <<savecache,`save_cache` step>>.
 
@@ -2942,10 +2942,9 @@ jobs:
 ...
 ----
 
-This example prevents the workflow `integration_tests` from running unless the pipeline is triggered on the `main` branch.
+The `integration_tests` workflow runs only when the pipeline is triggered on the `main` branch.
 
-
-Refer to the xref:guides:orchestrate:workflows.adoc#[Workflows] for more examples and conceptual information.
+For more examples and conceptual information, see the xref:guides:orchestrate:workflows.adoc#[Workflows] page.
 
 '''
 
@@ -3598,8 +3597,7 @@ workflows:
 [#excluding-sets-of-parameters-from-a-matrix]
 ==== Excluding sets of parameters from a matrix
 
-Sometimes you may wish to run a job with every combination of arguments _except_
-some value or values. You can use an `exclude` stanza to achieve this:
+Sometimes you may wish to run a job with every combination of arguments _except_ some value or values. You can use an `exclude` stanza to achieve this:
 
 [,yaml]
 ----
@@ -3616,8 +3614,7 @@ workflows:
                 b: 5
 ----
 
-The matrix above would expand into 8 jobs: every combination of the parameters
-`a` and `b`, excluding `{a: 3, b: 5}`
+The matrix above would expand into 8 jobs: every combination of the parameters `a` and `b`, excluding `{a: 3, b: 5}`
 
 '''
 
