@@ -23,7 +23,6 @@ The Slack integration is the recommended way to set up workflow notifications in
 * Link projects to channels and manage notification preferences from your project settings in the web app. Any organization member with write access to a project can configure it.
 * Receive notifications as direct messages. After you <<link-your-slack-identity,link your Slack identity>>, CircleCI can send workflow notifications to you directly, not only to shared channels.
 * Get tagged directly in notifications. Once your identity is linked, CircleCI mentions you in the Slack notifications for workflows you trigger.
-* New Slack notification features are added to the integration first.
 
 == Limitations
 
