@@ -2015,7 +2015,7 @@ jobs:
 
 [NOTE]
 ====
-In certain cases, CircleCI falls back to a full checkout even though blobless was specified. This occurs if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed, which contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
+In certain cases, CircleCI falls back to a full checkout even though blobless was specified. This occurs if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed. Git version 2.41.0 contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
 ====
 
 If a downstream step requires those objects to exist for scanning or comparisons, a blobless clone can cause failures. In that case, you can specify a full checkout as shown in the following example:
@@ -3552,8 +3552,7 @@ The `matrix` stanza allows you to run a parameterized job multiple times with di
 
 *Example:*
 
-The following is a basic example of using matrix jobs.
-
+.Basic example of using matrix jobs which creates nine different `build` jobs
 [,yaml]
 ----
 workflows:
@@ -3566,8 +3565,7 @@ workflows:
               platform: ["macos", "windows", "linux"]
 ----
 
-This expands to 9 different `build` jobs, and could be equivalently written as:
-
+.Equivalent configuration without using matrix jobs
 [,yaml]
 ----
 workflows:
@@ -3638,13 +3636,9 @@ workflows:
             - deploy
 ----
 
-This means that `another-job` will require both deploy jobs in the matrix to
-finish before it runs.
+This means that `another-job` will require both deploy jobs in the matrix to finish before it runs.
 
-Matrix jobs expose their parameter values via `<< matrix.* >>`
-which can be used to generate more complex workflows. For example, here is a
-`deploy` matrix where each job waits for its respective `build` job in another
-matrix.
+Matrix jobs expose their parameter values via `<< matrix.* >>` which can be used to generate more complex workflows. For example, here is a `deploy` matrix where each job waits for its respective `build` job in another matrix.
 
 [,yaml]
 ----
