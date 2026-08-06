@@ -5,6 +5,8 @@
 
 Using the CircleCI release agent, you can integrate CircleCI with your Kubernetes cluster to give you visibility and control over your release process through the CircleCI web app. We currently support Kubernetes Deployments and Argo Rollouts.
 
+The release agent is the option for teams who want Kubernetes-native controls or progressive delivery. To gate releases on health without installing anything in your cluster, use Smart Deployments instead. See the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page.
+
 .Architecture of CircleCI deploys
 image::guides:ROOT:releases/releases-architecture.png[Diagram showing the architecture of CircleCI deploys]
 

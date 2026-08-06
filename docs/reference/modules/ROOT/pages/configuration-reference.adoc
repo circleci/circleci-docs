@@ -447,7 +447,7 @@ jobs:
       ... // other config
 ----
 
-Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[Connect Your Pipeline Configuration] to a deployment in the CircleCI deploys UI. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys Overview] page.
+Jobs with the `release` type are used to xref:guides:deploy:configure-your-kubernetes-components.adoc#link-release[Connect Your Pipeline Configuration] to a deployment in the CircleCI deploys UI. A release job names the release plan created by a `circleci run release plan` step, using the `plan_name` key. For full details, see the xref:guides:deploy:deployment-overview.adoc#[Deploys Overview] page.
 
 **Example** of a job with a `release` type:
 
@@ -458,6 +458,95 @@ jobs:
     type: release
     plan_name: <my-service-release>
 ----
+
+[#release-job-validation]
+===== `validation`
+
+Add a `validation` key to a release job to turn on the release validation engine. The engine gates the release on signals from your monitoring tool, and triggers your rollback pipeline when a release fails. For an overview of the feature, see the xref:guides:deploy:smart-deployments-overview.adoc[Smart Deployments Overview] page.
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `enabled`
+| Y
+| Boolean
+| Turns on release validation for this release job.
+
+| `evaluation_time`
+| N
+| String
+| How long the engine waits for validation signals before treating the release as successful, for example `30m`. Defaults to `20m`.
+
+| `auto_rollback_on_failure`
+| N
+| Boolean
+| When `true`, the engine triggers your rollback pipeline if validation fails during the evaluation window.
+
+| `webhooks`
+| N
+| List
+| Webhook validation checks, where each entry defines one named signal from a monitoring provider. When omitted, CircleCI uses a catch-all check that accepts any signal.
+|===
+--
+
+Each entry under `webhooks` takes the following keys:
+
+[.table-scroll]
+--
+[cols="1,1,1,2", options="header"]
+|===
+| Key | Required | Type | Description
+
+| `name`
+| Y
+| String
+| Identifier for this check. Your monitoring tool must send a matching `signal_name` so CircleCI can route alerts to it.
+
+| `provider`
+| Y
+| String
+| One of `datadog`, `prometheus`, `grafana`, `alertmanager`, or `custom`.
+
+| `data_points`
+| N
+| Map
+| Maps fields in the incoming webhook payload to the values CircleCI matches on. Provider defaults apply to any key you omit.
+
+| `fail_when`
+| N
+| String
+| Expression that decides when a webhook event counts as a failure. Provider defaults apply when you omit it.
+
+| `max_failures`
+| N
+| Integer
+| Number of matching failures before this check fails.
+|===
+--
+
+**Example** of a release job with release validation enabled:
+
+[,yaml]
+----
+jobs:
+  release-my-service:
+    type: release
+    plan_name: <my-service-release>
+    validation:
+      enabled: true
+      evaluation_time: 30m
+      auto_rollback_on_failure: true
+      webhooks:
+        - name: error_rate
+          provider: datadog
+          fail_when: 'criteria == "triggered" or criteria == "re-triggered"'
+          max_failures: 2
+----
+
+For the `data_points` keys, the provider defaults, and how the engine matches an incoming signal to a check, see the xref:guides:deploy:release-validation-reference.adoc[Release Validation Configuration Reference] page.
 
 The `no-op` type is used to configure a job that performs no actions and consumes no credits. `no-op` is commonly used to organize the order of operations within a workflow and make it easier to maintain. Only the `type` is required for a `no-op` type job, no further job configuration is required. For some examples of using `no-op` jobs, see the xref:guides:orchestrate:orchestration-cookbook.adoc#use-no-op-jobs-to-create-a-cleaner-workflow-graph[Orchestration Cookbook].
 
@@ -681,7 +770,7 @@ workflows:
 
 CircleCI offers several execution environments in which to run your jobs. To specify an execution environment choose an _executor_, then specify an image and a resource class. An executor defines the underlying technology, environment, and operating system in which to run a job.
 
-Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor, then specify an image with the tools and packages you need, and a resource class.
+Set up your jobs to run using the `docker` (Linux), `machine` (LinuxVM, Windows, GPU, Arm), or `macos` executor. Then specify an image with the tools and packages you need, and a resource class.
 
 Learn more about execution environments and executors in the xref:guides:execution-managed:executor-intro.adoc#[Introduction to Execution Environments].
 
@@ -1113,7 +1202,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 If you do not specify a resource class, CircleCI uses a default value that can change. Specify a resource class instead of relying on a default.
 
-CAUTION: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue must pin their CPU count to their guaranteed CPU resources.
+CAUTION: Java, Erlang, and any other languages that introspect the `/proc` directory for CPU count information may require additional configuration. Without it, they can slow down when using the CircleCI resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue must pin their CPU count to their guaranteed CPU resources.
 
 NOTE: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
@@ -1785,7 +1874,7 @@ The following attributes can be used to automatically rerun a step if it fails, 
 
 Automatic reruns are only supported for `run` steps, not special steps like `checkout` or `setup_remote_docker`.
 
-You must configure the `command` key for the step, you cannot use the short form run step configuration, for example, the following is not supported for use with automatic reruns: `- run: echo "Hello, world!"`
+You must configure the `command` key for the step. You cannot use the short form run step configuration. For example, the following is not supported for use with automatic reruns: `- run: echo "Hello, world!"`
 
 *Example:*
 
@@ -1926,7 +2015,7 @@ jobs:
 
 [NOTE]
 ====
-In certain cases, CircleCI falls back to a full checkout even though blobless was specified. This occurs if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed, which contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
+In certain cases, CircleCI falls back to a full checkout even though blobless was specified. This occurs if Git and SSH clients are not available in the current environment, or if Git version 2.41.0 is installed. Git version 2.41.0 contained a link:https://lore.kernel.org/git/kl6lh6qyrnjm.fsf@chooglen-macbookpro.roam.corp.google.com/[known issue] for blobless clones.
 ====
 
 If a downstream step requires those objects to exist for scanning or comparisons, a blobless clone can cause failures. In that case, you can specify a full checkout as shown in the following example:
@@ -1985,7 +2074,7 @@ Allows Docker commands to be run locally. See xref:guides:execution-managed:buil
 | `prefer_same_region`
 | N
 | boolean
-| Set this to `true` to attempt pulling images from the same region as the VM on a best-effort basis, falling back to the image's original region if the pull fails (default: `false`)
+| Set this to `true` to pull images from the same region as the VM where possible. If the pull fails, CircleCI falls back to the image's original region (default: `false`)
 
 | `version`
 | N
@@ -2177,7 +2266,7 @@ steps:
       key: v1-myapp-cache
 ----
 
-In this case, CircleCI restores cache `v1-myapp-cache-new` because this is the most recent match with the `v1-myapp-cache` prefix, even though the first key (`v1-myapp-cache`) is an exact match.
+In this case, CircleCI restores cache `v1-myapp-cache-new`, the most recent match with the `v1-myapp-cache` prefix. CircleCI restores it even though the first key (`v1-myapp-cache`) is an exact match.
 
 For more information on key formatting, see the `key` section of <<savecache,`save_cache` step>>.
 
@@ -2853,10 +2942,9 @@ jobs:
 ...
 ----
 
-This example prevents the workflow `integration_tests` from running unless the pipeline is triggered on the `main` branch.
+The `integration_tests` workflow runs only when the pipeline is triggered on the `main` branch.
 
-
-Refer to the xref:guides:orchestrate:workflows.adoc#[Workflows] for more examples and conceptual information.
+For more examples and conceptual information, see the xref:guides:orchestrate:workflows.adoc#[Workflows] page.
 
 '''
 
@@ -3464,8 +3552,7 @@ The `matrix` stanza allows you to run a parameterized job multiple times with di
 
 *Example:*
 
-The following is a basic example of using matrix jobs.
-
+.Basic example of using matrix jobs which creates nine different `build` jobs
 [,yaml]
 ----
 workflows:
@@ -3478,8 +3565,7 @@ workflows:
               platform: ["macos", "windows", "linux"]
 ----
 
-This expands to 9 different `build` jobs, and could be equivalently written as:
-
+.Equivalent configuration without using matrix jobs
 [,yaml]
 ----
 workflows:
@@ -3509,8 +3595,7 @@ workflows:
 [#excluding-sets-of-parameters-from-a-matrix]
 ==== Excluding sets of parameters from a matrix
 
-Sometimes you may wish to run a job with every combination of arguments _except_
-some value or values. You can use an `exclude` stanza to achieve this:
+Sometimes you may wish to run a job with every combination of arguments _except_ some value or values. You can use an `exclude` stanza to achieve this:
 
 [,yaml]
 ----
@@ -3527,8 +3612,7 @@ workflows:
                 b: 5
 ----
 
-The matrix above would expand into 8 jobs: every combination of the parameters
-`a` and `b`, excluding `{a: 3, b: 5}`
+The matrix above would expand into 8 jobs: every combination of the parameters `a` and `b`, excluding `{a: 3, b: 5}`
 
 '''
 
@@ -3552,13 +3636,9 @@ workflows:
             - deploy
 ----
 
-This means that `another-job` will require both deploy jobs in the matrix to
-finish before it runs.
+This means that `another-job` will require both deploy jobs in the matrix to finish before it runs.
 
-Matrix jobs expose their parameter values via `<< matrix.* >>`
-which can be used to generate more complex workflows. For example, here is a
-`deploy` matrix where each job waits for its respective `build` job in another
-matrix.
+Matrix jobs expose their parameter values via `<< matrix.* >>` which can be used to generate more complex workflows. For example, here is a `deploy` matrix where each job waits for its respective `build` job in another matrix.
 
 [,yaml]
 ----

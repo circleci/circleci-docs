@@ -1,0 +1,311 @@
+= Release validation configuration reference
+:page-platform: Cloud
+:page-description: Reference for the validation block in your CircleCI configuration file, including webhook fields, data point mappings, and provider defaults.
+:experimental:
+
+Release validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This page documents every field you can set to control that evaluation.
+
+The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup generates a starting validation configuration for you. Use this page when you want to extend that configuration, or when you need to write it by hand.
+
+== Introduction
+
+Add a `validation` key to your release job to configure release validation. A release job is a job with `type: release` that references a release plan created by a `circleci run release plan` step.
+
+For the release job keys and their accepted types, see the xref:reference:ROOT:configuration-reference.adoc#release-job-validation[Configuration Reference]. This page covers what CircleCI does with those values.
+
+Release validation needs only one field to turn it on:
+
+[source,yaml]
+----
+jobs:
+  release-service:
+    type: release
+    plan_name: service-release
+    validation:
+      enabled: true
+----
+
+With `enabled: true` and nothing else, CircleCI creates a system catch-all check that accepts any signal from your monitoring tool. See the <<default-catch-all-check,Default Catch-All Check>> section.
+
+You need to write this configuration by hand in the following cases:
+
+* You use a version control system other than GitHub, so the guided setup is unavailable.
+* Your organization does not have AI features enabled.
+* You want more than one named check per release.
+* Your monitoring tool sends payloads in a shape the provider defaults do not understand.
+
+For the steps to configure validation and connect your monitoring tool by hand, see the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide. This page is the field reference for that work.
+
+[#optional-validation-fields]
+== Optional validation fields
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+|Field
+|Description
+
+|`evaluation_time`
+|How long the engine waits for validation signals before treating the release as successful, for example `30m`. Defaults to `20m`.
+
+|`auto_rollback_on_failure`
+|When `true`, CircleCI rolls back automatically if validation fails during the evaluation window. This requires a configured rollback pipeline.
+
+|`webhooks`
+|A list of webhook validation checks. Each entry defines a named signal from a monitoring provider.
+|===
+--
+
+== Webhook fields
+
+Each entry under `webhooks` supports the following fields:
+
+[.table-scroll]
+--
+[cols="1,1,2", options="header"]
+|===
+|Field
+|Required
+|Description
+
+|`name`
+|Yes
+|The identifier for this validation check. Your monitoring tool must send a matching `signal_name` so CircleCI can route alerts to this check.
+
+|`provider`
+|Yes
+|One of `datadog`, `prometheus`, `grafana`, `alertmanager`, or `custom`.
+
+|`data_points`
+|No
+|Maps fields from the incoming webhook payload to the values CircleCI matches on. Provider defaults apply to any key you omit.
+
+|`fail_when`
+|No
+|An expression that determines when a webhook event counts as a failure. Provider defaults apply when you omit it.
+
+|`max_failures`
+|No
+|The number of matching failures before this validation check fails.
+|===
+--
+
+The guided setup offers Datadog, Prometheus, and Custom. The `grafana` and `alertmanager` values are accepted in your configuration file, and both use the same defaults as `prometheus`. For webhook setup steps, see the xref:set-up-smart-deployments.adoc#connect-monitoring-webhooks[Connect Monitoring Webhooks] section: Alertmanager is covered alongside Prometheus, and Grafana has no setup steps of its own.
+
+[#data-point-keys]
+== Data point keys
+
+The `data_points` block maps paths in the incoming webhook payload to the values CircleCI uses. The supported keys are `component_name`, `env`, `version`, `project_id`, `namespace`, `signal_name`, and `criteria`.
+
+CircleCI extracts each value from the payload, then uses it to find the validation plan the event belongs to. The following table summarizes whether each extracted value must be present for a match to succeed.
+
+Presence in the payload is separate from whether you need to write the mapping. Provider defaults cover the common payload shapes, so a required value often needs no mapping at all.
+
+[.table-scroll]
+--
+[cols="1,1,2", options="header"]
+|===
+|Key
+|Required for a match
+|Summary
+
+|`component_name`
+|Yes
+|The deployable component the alert belongs to.
+
+|`env`
+|Yes
+|The environment for the release.
+
+|`signal_name`
+|Conditionally
+|Which validation check handles this webhook.
+
+|`version`
+|No
+|The deployed version string. Acts as a filter when present.
+
+|`project_id`
+|No
+|The CircleCI project UUID. Acts as a filter when present.
+
+|`namespace`
+|No
+|The component instance namespace. Acts as a filter when present.
+
+|`criteria`
+|No
+|The condition signal your `fail_when` expression evaluates.
+|===
+--
+
+The sections below describe each key in full.
+
+=== Component name
+
+`component_name` identifies the deployable component the alert belongs to, for example `web-api`.
+
+The extracted value must match the component name for the release under validation. If extraction yields an empty or incorrect name, CircleCI ignores the webhook for that validation plan.
+
+Typical sources are Datadog `alert_tags` or `tags`, using `component_name:<your-component>`.
+
+In your monitor setup, include a tag such as `component_name:<your-component>`.
+
+NOTE: For Datadog, the engine also accepts the monitor tags `app:<name>` and `service:<name>` as aliases for `component_name`. Prefer the canonical name.
+
+=== Environment
+
+`env` identifies the environment for the release, for example `production` or `staging`.
+
+The extracted value must match the environment on the validation plan, which comes from the release and its environment integration. Unlike `version`, `project_id`, and `namespace`, `env` is not optional for matching. Both sides must agree.
+
+Typical sources are `env:` in your monitor tags.
+
+NOTE: For Datadog, the engine also accepts the monitor tag `environment:<name>` as an alias for `env`. Prefer the canonical name.
+
+=== Version
+
+`version` holds the deployed version string, for example a Git tag, a semantic version, or a build ID.
+
+CircleCI treats the version as an optional filter. If the webhook extracts a non-empty version, it must match the release version on the validation plan. If the webhook omits the version, any version on that plan matches. Omitting the version is useful when one monitor fires for every deploy, rather than one monitor per release.
+
+Typical sources are `version:` in your monitor tags.
+
+=== Project ID
+
+`project_id` holds the CircleCI project UUID that ties the alert to a specific project.
+
+CircleCI treats the project ID as an optional filter, following the same rules as `version`. When present, it must match the `project_id` on the validation plan. When absent, any project on that plan matches.
+
+Typical sources are `project_id` in Datadog `tags` or `alert_tags`.
+
+=== Namespace
+
+`namespace` holds the component instance namespace, taken from the component slug of the release. A namespace can be a multi-tenant identifier or a logical partition.
+
+CircleCI treats the namespace as an optional filter. When present in the webhook, it must match the namespace parsed from the component slug of the release. When absent, any namespace matches.
+
+Typical sources are `namespace:` in your monitor tags.
+
+NOTE: More than one validation plan can match when you omit optional fields. CircleCI sorts matching plans by newest release first, and may process more than one plan.
+
+=== Signal name
+
+`signal_name` identifies which entry in `validation.webhooks[]` handles this webhook.
+
+CircleCI compares the extracted value to the `validation_name` of the plan. That name comes from the `name` field of your webhook entry, not from a separate YAML field. The extracted `signal_name` must equal that name for the event to attach to that plan.
+
+This matters because one release can define several checks, such as `error_rate` and `latency_smoke`. Send a distinct `signal_name` tag from each monitor, matching the corresponding `webhooks[].name` value.
+
+=== Criteria
+
+`criteria` holds the condition signal from your monitoring system, such as an alert transition or a firing state. Your `fail_when` expression interprets this value.
+
+CircleCI does not use `criteria` for routing. Once a plan matches, CircleCI evaluates `fail_when` against the full extracted map, and `criteria` is the usual variable in that expression.
+
+CircleCI normalizes values to lowercase before evaluation, so write your expressions with lowercase literals. Use `"triggered"`, not `"Triggered"`.
+
+You can map `criteria` to another field and write your own expression, for example `criteria == "critical"` or `criteria in ['firing', 'pending']`.
+
+== Provider defaults
+
+When you omit `data_points` or `fail_when`, CircleCI applies provider-specific defaults:
+
+[.table-scroll]
+--
+[cols="1,1,1", options="header"]
+|===
+|Provider
+|Default `criteria` path
+|Default `fail_when`
+
+|`datadog`
+|`request.alert_transition`
+|`criteria == "triggered" or criteria == "re-triggered"`
+
+|`prometheus`, `grafana`, `alertmanager`
+|`request.status`
+|`criteria == "firing"`
+|===
+--
+
+Add explicit mappings when your monitoring tool sends payloads in a non-standard shape, and when you use the `custom` provider.
+
+[#default-catch-all-check]
+== Default catch-all check
+
+If your configuration sets only `validation.enabled: true`, CircleCI creates a system catch-all check. The catch-all accepts any `signal_name`, including none at all. It fails when the criteria matches `firing`, `triggered`, or `alert`.
+
+As soon as you add entries under `validation.webhooks`, CircleCI stops using the catch-all. From that point, each monitor must send a `signal_name` matching the `name` of the entry that handles it. CircleCI ignores a monitor that sends no `signal_name`, and a name with no matching entry.
+
+== Full configuration example
+
+The following example shows every supported option. The first webhook entry maps every `data_points` key explicitly and sets every per-webhook field. The remaining entries show the other supported providers, relying on defaults where `data_points` and `fail_when` are omitted.
+
+.Release job with a full validation configuration
+[source,yaml]
+----
+jobs:
+  release-service:
+    type: release
+    plan_name: service-release
+    validation:
+      enabled: true
+      evaluation_time: 30m
+      auto_rollback_on_failure: true
+      webhooks:
+        # A fully explicit Datadog check, mapping every supported data_points
+        # key and setting every per-webhook field.
+        - name: error_rate
+          provider: datadog
+          data_points:
+            component_name: request.tags.component_name
+            version: request.tags.version
+            project_id: request.tags.project_id
+            namespace: request.tags.namespace
+            env: request.tags.env
+            criteria: request.alert_transition
+            signal_name: request.tags.signal_name
+          fail_when: 'criteria == "triggered" or criteria == "re-triggered"'
+          max_failures: 2
+
+        # Provider defaults apply when data_points and fail_when are omitted.
+        - name: latency_smoke
+          provider: datadog
+
+        - name: prom_check
+          provider: prometheus
+          fail_when: 'criteria == "firing"'
+          max_failures: 1
+
+        - name: grafana_check
+          provider: grafana
+          data_points:
+            criteria: request.status
+          fail_when: 'criteria == "firing"'
+          max_failures: 1
+
+        - name: alertmanager_check
+          provider: alertmanager
+
+        # Custom providers need explicit mappings, as no defaults apply.
+        - name: custom_ingest
+          provider: custom
+          data_points:
+            component_name: request.component_name
+            version: request.version
+            project_id: request.project_id
+            namespace: request.namespace
+            env: request.env
+            criteria: request.status
+            signal_name: request.signal_name
+          fail_when: 'criteria == "firing" or criteria == "triggered" or criteria == "alert"'
+          max_failures: 1
+----
+
+== Next steps
+
+* Connect your monitoring tool so that it sends the tags these mappings expect. See the xref:set-up-smart-deployments.adoc#connect-monitoring-webhooks[Connect Monitoring Webhooks] section.
+* Understand what happens when validation passes or fails. See the xref:smart-deployments-overview.adoc#how-release-validation-works[How Release Validation Works] section.
+* Configure the rollback pipeline that automatic rollback triggers. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] guide.

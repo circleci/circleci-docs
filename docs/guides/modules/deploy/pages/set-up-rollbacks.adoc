@@ -5,6 +5,8 @@
 
 CircleCI rollbacks allow you to quickly revert your application to a previous stable version when issues are detected in production. This guide covers how to create and configure a CircleCI pipeline to enable rollback operations.
 
+TIP: *Smart Deployments sets up a rollback pipeline for you.* The Smart Deployments guided setup configures your rollback pipeline alongside deploy markers, a deploy pipeline, release validation, and automatic rollback, then opens a single pull request for you to merge. See the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide. Use this page to configure a rollback pipeline on its own, or to customize the pipeline that Smart Deployments generated for you.
+
 == Introduction
 
 CircleCI rollbacks support two methods of manually reverting to a previous version:
@@ -13,6 +15,8 @@ CircleCI rollbacks support two methods of manually reverting to a previous versi
 * Rollback by rerunning the workflow that originally deployed the version you want to revert to.
 
 This guide covers setting up a rollback pipeline, which is the recommended approach for most applications. The process of rolling back is described in detail in the xref:rollback-a-deployment.adoc[Rollback a Deployment] guide, including a comparison of the two methods.
+
+A rollback pipeline is also what CircleCI triggers when release validation fails and automatic rollback is enabled. For more information, see the xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guide.
 
 .Rollback guided setup
 image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
@@ -62,7 +66,7 @@ A pipeline definition is a setting within CircleCI in your project to specify th
 
 No changes are pushed to your repository at this point. GitHub pipelines are viewable at menu:Project settings[Project Setup].
 
-. Select the repository that includes your project code. This is the repository that you want to roll back with the pipeline you are setting up.
+. Select the repository that includes the project code you want to roll back with this pipeline.
 . Select btn:[Create pipeline definition]. This creates a new pipeline definition for your rollback pipeline in your project.
 
 === 4. Add deploy markers
@@ -95,7 +99,7 @@ The setup will auto-generate deploy marker commands based on your selections.
 .Add deploy marker values
 image::guides:ROOT:deploy/add-deploy-markers-selection.png[Select deploy markers values]
 
-. Copy the generated commands using the btn:[Copy] button and paste them into your existing config file in your repository where the deployment occurs on the branch you selected in the guided setup.
+. Copy the generated commands using the btn:[Copy] button. Paste them into your existing config file where the deployment occurs, on the branch you selected in the guided setup.
 +
 Ensure the `circleci run release plan` step comes before the deployment step, followed by the `circleci run release update` step.
 +
