@@ -139,8 +139,8 @@ image::guides:ROOT:deploy/rollback-guided-setup.png[Rollback guided setup]
 
 Smart Deployments configures deploy markers, rollback and deploy pipelines, release validation, and automatic rollback together. Start with the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page, then choose a setup route:
 
-* xref:set-up-smart-deployments.adoc[Set up Smart Deployments]: The guided setup in the web app generates your configuration with AI and opens a pull request. Requires a GitHub repository and AI features enabled for your organization.
-* xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route if your code is not in a GitHub repository, or if your organization does not have AI features enabled.
+* xref:set-up-smart-deployments.adoc[Set up Smart Deployments]: Use the guided setup in the web app. See the xref:set-up-smart-deployments.adoc#setup-routes[Setup routes] section for what the wizard generates with and without the GitHub App and AI features.
+* xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually]: Write the configuration yourself and connect your monitoring tool. Use this route when you prefer to edit YAML directly.
 
 ==== Get set up feature by feature
 
