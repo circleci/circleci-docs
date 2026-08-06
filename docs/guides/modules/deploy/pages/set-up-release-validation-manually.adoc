@@ -1,29 +1,26 @@
 = Set up release validation manually
 :page-platform: Cloud
-:page-description: Configure release validation by editing your CircleCI configuration file, for organizations that cannot use the Smart Deployments guided setup.
+:page-description: Configure release validation by editing your CircleCI configuration file, or when you prefer to write the validation policy yourself.
 :experimental:
 
-Release validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This guide shows how to configure it by editing your CircleCI configuration file, rather than through the Smart Deployments guided setup.
+Release validation evaluates webhook signals from your monitoring tool during an evaluation window after each deploy. This guide shows how to configure it by editing your CircleCI configuration file directly.
 
 == Introduction
 
-The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup generates this configuration for you, but it is unavailable in two cases:
+The xref:set-up-smart-deployments.adoc[Set up Smart Deployments] guided setup can generate this configuration for you in the web app. Use this guide when you prefer to edit YAML directly, or when you need field-level detail beyond what the wizard provides.
 
-* Your code is not stored in a GitHub repository.
-* Your organization does not have AI features enabled.
-
-Follow this guide in either case. The result is the same release validation feature. The difference is that you write the configuration and connect your monitoring tool yourself.
+Follow this guide to write the configuration and connect your monitoring tool yourself. The result is the same release validation feature.
 
 === What you can set up manually
 
-Release validation and deploy markers are configuration, so they work on any version control system. Rollback and deploy pipelines are a web app feature that currently requires GitHub.
+Release validation and deploy markers are configuration, so they work on any version control system. Rollback and deploy pipelines require the CircleCI GitHub App.
 
 [.table-scroll]
 --
 [cols="2,1,2", options="header"]
 |===
 |Capability
-|Needs GitHub
+|Needs GitHub App
 |Notes
 
 |Deploy markers
