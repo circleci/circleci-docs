@@ -127,7 +127,7 @@ The following flags are available for `chunk init`:
 
 After initialization, run `chunk validate` to run the detected commands. You can also run `chunk build-prompt` to mine your GitHub PR history for a team-specific review prompt.
 
-For detailed information on using the chunk CLI, including generating review prompts, running validations, and installing skills, refer to xref:how-to-use-chunk-cli.adoc[How To Use the `chunk` CLI].
+For detailed information on using the chunk CLI, including generating review prompts, running validations, and installing skills, refer to xref:how-to-use-chunk-cli.adoc[How to Use the Chunk CLI].
 
 [#updating-the-cli]
 == Update the chunk CLI
