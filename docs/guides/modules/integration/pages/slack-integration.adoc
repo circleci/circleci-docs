@@ -1,6 +1,5 @@
 = Slack integration
 :page-platform: Cloud
-:page-badge: Beta
 :page-description: Install the CircleCI Slack app and configure project-level Slack notifications for workflow status updates.
 :experimental:
 
