@@ -5,10 +5,10 @@
 
 The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool for AI-assisted development workflows. It works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot, and does two things:
 
-. *Generates team review context* — mines your GitHub PR review history, analyzes it with Claude, and produces a `.chunk/context/review-prompt.md` file that encodes how your team actually reviews code. AI coding agents pick this file up automatically and apply your team's standards.
-. *Validates changes remotely* — runs your quality checks (tests, lint, format) in a clean CircleCI Cloud environment before you push, so you catch failures that only reproduce outside your machine.
+. *Generates team review context*: mines your GitHub PR review history, analyzes it with Claude, and produces a `.chunk/context/review-prompt.md` file that encodes how your team actually reviews code. AI coding agents pick this file up automatically and apply your team's standards.
+. *Validates changes remotely*: runs your quality checks (tests, lint, format) in a clean CircleCI Cloud environment before you push, so you catch failures that only reproduce outside your machine.
 
-After following these steps, you'll be able to say "review my changes" in Claude Code to get a review against your team's standards, and "validate on the sidecar" to run checks in a CircleCI Cloud environment that matches your CI pipeline.
+After following these steps, say "review my changes" in Claude Code to get a review against your team's standards. Say "validate on the sidecar" to run checks in a CircleCI Cloud environment.
 
 NOTE: **Chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
 
@@ -34,7 +34,7 @@ $ chunk --version
 [#authentication]
 == 2. Authentication
 
-After installing the `chunk` CLI, set credentials for each service you plan to use. Authentication is required for some commands, such as `chunk sidecar` and `chunk task`.
+After installing the `chunk` CLI, set credentials for each service you plan to use. Some commands require authentication, such as `chunk sidecar` and `chunk task`.
 
 [#auth-circleci]
 === 2.1 CircleCI
