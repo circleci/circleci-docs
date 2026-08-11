@@ -163,7 +163,7 @@ STATE=$(openssl rand -base64 16 | tr -d '=\n' | tr '+/' '-_')
 [#step-3-start-a-local-redirect-listener]
 == 3. Start a local redirect listener
 
-Before opening the authorization URL, start a process that receives the redirect from CircleCI. The listener below generates the PKCE values, prints them, then waits for CircleCI to redirect the browser to `http://127.0.0.1:9090/callback` with the authorization code.
+Before opening the authorization URL, start a process that receives the redirect from CircleCI. The listener below generates the PKCE values, prints them, then waits for CircleCI to redirect the browser to `\http://127.0.0.1:9090/callback` with the authorization code.
 
 Run this in a separate terminal:
 
