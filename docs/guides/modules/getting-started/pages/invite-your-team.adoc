@@ -52,7 +52,7 @@ NOTE: If you do not see the organization you would like to join listed, you will
 [#invite-teammates]
 == Invite teammates to join your organization
 
-The steps in this section show how an org admin can invite teammates to join their organization.
+The steps in this section show how an organization admin can invite teammates to join their organization.
 
 The steps are different depending on your organization type.
 
