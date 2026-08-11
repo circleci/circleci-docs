@@ -25,10 +25,10 @@ The guided setup is available for every project. What it generates depends on yo
 |CircleCI generates your configuration, opens a pull request for you to merge, and registers rollback and deploy pipelines. Automatic rollback is available.
 
 |GitHub App installed and AI features not enabled
-|The guided setup runs in the web app and shows configuration examples for you to copy into your repository. Rollback and deploy pipelines can still be registered when the GitHub App is installed.
+|The guided setup runs in the web app and shows configuration examples for you to copy into your repository. Edit each example to match your pipeline before you continue. Rollback and deploy pipelines can still be registered when the GitHub App is installed.
 
 |GitHub App not installed (skip the GitHub App step)
-|Deploy markers and release validation only. The wizard shows configuration to copy. Rollback and deploy pipelines and automatic rollback are not available until you install the CircleCI GitHub App.
+|Deploy markers and release validation only. The wizard shows configuration to copy. Edit each example to match your pipeline before you continue. Rollback and deploy pipelines and automatic rollback are not available until you install the CircleCI GitHub App.
 
 |Prefer to edit YAML directly
 |Follow the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide instead.
@@ -111,7 +111,7 @@ Select btn:[Generate configuration] to continue.
 
 In this step CircleCI writes the generated configuration to a branch in your repository, and you review and merge it. See <<setup-routes,Setup routes>> for other paths.
 
-NOTE: When AI features are not enabled, or when you skipped GitHub App installation, the wizard shows configuration examples instead of opening a pull request. Copy each example into your repository, then select btn:[I've updated my config] to continue.
+NOTE: When AI features are not enabled, or when you skipped GitHub App installation, the wizard shows configuration examples instead of opening a pull request. Copy each example into your repository, edit it to match your pipeline, then select btn:[I've updated my config] to continue.
 
 === 2.1. Select the config branch
 
