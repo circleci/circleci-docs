@@ -1,22 +1,44 @@
 = How to use the Chunk CLI
 :page-platform: Cloud
-:page-description: How to use the `chunk` CLI to generate AI review prompts, run validations, manage Chunk sidecars, and install AI agent skills.
+:page-description: How to use the `chunk` CLI to initialize projects, generate AI review prompts, run validations, manage Chunk sidecars, and install AI agent skills.
 :experimental:
 
-This page describes how to use the main features of the `chunk` CLI.
+This page describes how to use the main features of the `chunk` CLI. For installation, authentication, and first-time setup, see xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI].
 
 [#prerequisites]
 == Prerequisites
 
-* An installed and configured `chunk` CLI. See the xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI] page.
-* A project initialized with `chunk init`, or a `.chunk/config.json` file with commands configured.
+* An installed and configured `chunk` CLI with skills installed. See xref:install-and-configure-the-chunk-cli.adoc[Install and Configure the Chunk CLI].
+* A team review prompt generated with `chunk build-prompt`. See xref:#generate-a-review-prompt[Generate a team review prompt].
+
+[#concepts]
+== Concepts
+
+* **`.chunk/` directory** — holds `config.json` (your validation commands) and `context/review-prompt.md` (your team's review standards). Commit both so everyone on your team gets the same setup.
+* **Sidecars** — ephemeral Linux environments on CircleCI where you run checks remotely, catching failures that only reproduce outside your machine.
+* **Skills** — instructions installed into your AI coding agent that add commands like `/chunk-review` and `/chunk-sidecar`, triggered by slash commands or natural language.
+
+[#typical-workflow]
+== Typical workflow
+
+Once set up, your day-to-day workflow looks like this:
+
+. Make your changes.
+. Ask your agent to review: type `/chunk-review`, or say "review my changes" or "review PR #123".
+. Ask your agent to validate remotely: type `/chunk-sidecar`, or say "validate on the sidecar".
+. Push when checks pass.
 
 [#generate-a-review-prompt]
 == Generate a team review prompt
 
 The `chunk build-prompt` command mines your GitHub pull request review history and uses Claude to generate a team-specific review prompt. The prompt captures your reviewers' patterns and preferences so that AI coding agents apply your team's standards when reviewing code.
 
-The command saves the generated prompt to `.chunk/context/review-prompt.md`, which the `chunk-review` skill uses automatically.
+The command saves the generated prompt to `.chunk/context/review-prompt.md`, which the `chunk-review` skill uses automatically. Once this file exists, ask your agent to "review my changes" or "review PR #123" to start a review.
+
+[NOTE]
+====
+`chunk build-prompt` requires GitHub and Anthropic credentials. If you have not set these up, see xref:install-and-configure-the-chunk-cli.adoc#authentication[Authentication] in the install guide.
+====
 
 From your project directory:
 
@@ -58,6 +80,26 @@ You can customize this behavior with the following flags:
 |`--output`
 |`--output .chunk/context/review-prompt.md`
 |Path where the command saves the generated prompt.
+
+|`--max-comments`
+|`--max-comments 100`
+|Maximum number of comments to analyze per reviewer. No limit by default.
+
+|`--include-attribution`
+|`--include-attribution`
+|Include reviewer names in the generated prompt.
+
+|`--analyze-model`
+|`--analyze-model claude-opus-4-5`
+|Claude model to use for the analysis step.
+
+|`--prompt-model`
+|`--prompt-model claude-sonnet-5`
+|Claude model to use for the prompt generation step.
+
+|`--debug`
+|`--debug`
+|Write intermediate files alongside the prompt (details JSON, analysis, PR rankings CSV) for troubleshooting.
 |===
 --
 
@@ -82,6 +124,20 @@ $ chunk validate <name>
 
 Replace `<name>` with the name of the command as defined in `.chunk/config.json`.
 
+To run an inline command without adding it to your config:
+
+[source,console]
+----
+$ chunk validate --cmd "go test ./..."
+----
+
+Add `--save` to write the inline command to `.chunk/config.json` for future runs:
+
+[source,console]
+----
+$ chunk validate --cmd "go test ./..." --save
+----
+
 The following flags are available:
 
 [.table-scroll]
@@ -96,11 +152,26 @@ The following flags are available:
 |`--dry-run`
 |Show the commands that would run, without executing them.
 
-|`--force-run`
-|Ignore the cache and run all commands regardless of file changes.
+|`--cmd <command>`
+|Run an inline command instead of configured commands.
+
+|`--save`
+|Save the `--cmd` value to `.chunk/config.json`.
+
+|`--remote`
+|Run on the active sidecar. Creates a new sidecar if none is set.
 
 |`--sidecar-id <id>`
-|Validate commands remotely in the specified Chunk sidecar. Get a Chunk sidecar ID from `chunk sidecar create` output or `chunk sidecar list`.
+|Run commands in a specific Chunk sidecar. Get a sidecar ID from `chunk sidecar list`.
+
+|`-e <KEY=VALUE>`
+|Set an environment variable in the remote sidecar session. Repeatable.
+
+|`--env-file <path>`
+|Load environment variables from a file. Defaults to `.env.local`.
+
+|`--json`
+|Output results as JSON. Only applies with `--list`.
 |===
 --
 
@@ -112,11 +183,46 @@ CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The prod
 
 Chunk sidecars let you validate your changes in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses.
 
-Follow these steps to validate in a Chunk sidecar:
+The easiest way to get started is to ask your AI agent — type `/chunk-sidecar` or say "validate on the sidecar". The skill handles auth checks, sidecar creation, file sync, and validation automatically. If you prefer to run the steps yourself, continue below.
 
-=== 1. Authenticate with CircleCI
+TIP: Use `chunk watch` (or `chunk watch --all` for all projects) for a live dashboard of sidecar status and activity while validation runs.
 
-Before creating a Chunk sidecar, authenticate with CircleCI:
+You can set up sidecar validation in two ways: the `chunk sidecar setup` command handles everything in one step, or you can run each step manually for more control.
+
+[#fast-path-setup]
+=== Fast path: set up with one command
+
+The `chunk sidecar setup` command detects your tech stack, syncs your files, runs setup commands in a sidecar, and creates a snapshot — all in one step:
+
+[source,console]
+----
+$ chunk sidecar setup --name <name> --org-id <org-id>
+----
+
+Replace `<name>` with a descriptive name for the sidecar and `<org-id>` with your CircleCI organization ID.
+
+After the first run, the detected environment is saved to `.chunk/config.json`. Subsequent runs reuse the saved environment and skip detection. Pass `--force` to re-detect:
+
+[source,console]
+----
+$ chunk sidecar setup --force
+----
+
+[#manual-sidecar-setup]
+=== Manual setup: step by step
+
+Follow these steps to set up and use a Chunk sidecar manually:
+
+==== 1. Authenticate with CircleCI
+
+Before creating a Chunk sidecar, authenticate with CircleCI. The recommended method uses browser-based OAuth:
+
+[source,console]
+----
+$ chunk auth login
+----
+
+This opens your browser for a secure login flow. If you prefer to use a personal API token instead:
 
 [source,console]
 ----
@@ -125,7 +231,7 @@ $ chunk auth set circleci
 
 Enter your CircleCI personal API token when prompted. Generate a token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
 
-=== 2. Create a Chunk sidecar
+==== 2. Create a Chunk sidecar
 
 Create a new Chunk sidecar environment:
 
@@ -134,31 +240,57 @@ Create a new Chunk sidecar environment:
 $ chunk sidecar create --name <name>
 ----
 
-Replace `<name>` with a descriptive name for your sidecar. The command auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment. When ready, it prints the Chunk sidecar ID. Copy this ID for use in the validation step.
+Replace `<name>` with a descriptive name for your sidecar. The `--name` flag is optional — a name is auto-generated if you omit it. The command auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment. When ready, it prints the Chunk sidecar ID. Copy this ID for use in the validation step.
 
-=== 3. Sync your local files to the sidecar
+To launch a sidecar from an existing snapshot, pass the snapshot ID with `--image`:
 
-Sync your local project files to the Chunk sidecar:
+[source,console]
+----
+$ chunk sidecar create --name <name> --image <snapshot-id>
+----
+
+==== 3. Sync your local files to the sidecar
+
+Sync your current working directory to the Chunk sidecar:
 
 [source,console]
 ----
 $ chunk sidecar sync
 ----
 
-This copies your current working directory to the remote environment.
+==== 4. Set the active sidecar
 
-=== 4. Run validation in the sidecar
+Set the sidecar you just created as the active sidecar for this project, so you can omit `--sidecar-id` from future commands:
 
-Run your validation commands in the Chunk sidecar:
+[source,console]
+----
+$ chunk sidecar use <sidecar-id>
+----
+
+Replace `<sidecar-id>` with the ID printed by `chunk sidecar create`. To check which sidecar is currently active:
+
+[source,console]
+----
+$ chunk sidecar current
+----
+
+==== 5. Run validation in the sidecar
+
+Run your validation commands in the active Chunk sidecar:
+
+[source,console]
+----
+$ chunk validate --remote
+----
+
+To target a specific sidecar by ID instead of using the active one:
 
 [source,console]
 ----
 $ chunk validate --sidecar-id <sidecar-id>
 ----
 
-Replace `<sidecar-id>` with the ID from step 2. The command executes all configured validation commands from your `.chunk/config.json` in the remote environment.
-
-=== 5. (Optional) SSH into the sidecar for debugging
+==== 6. (Optional) SSH into the sidecar for debugging
 
 If validation fails and you need to investigate, SSH into the Chunk sidecar:
 
@@ -169,7 +301,7 @@ $ chunk sidecar ssh
 
 This opens an interactive shell in the remote environment.
 
-=== 6. (Optional) Snapshot the sidecar for reuse
+==== 7. (Optional) Snapshot the sidecar for reuse
 
 After configuring a Chunk sidecar successfully, capture its state as a snapshot for faster future sessions:
 
@@ -178,7 +310,9 @@ After configuring a Chunk sidecar successfully, capture its state as a snapshot 
 $ chunk sidecar snapshot create --name <snapshot-name>
 ----
 
-The command prints a snapshot ID. Use this ID to create new sidecars with `chunk sidecar create --name <name> --image <snapshot-id>`.
+The command captures the configured state of the active Chunk sidecar and prints the snapshot ID. Use this ID with `chunk sidecar create --image <snapshot-id>` to boot new sidecars from the snapshot.
+
+CAUTION: `chunk sidecar snapshot create` deletes the source Chunk sidecar after capturing the snapshot to avoid leaving the build instance running. If the deleted sidecar was the active one, local active-sidecar state is cleared. Launch a new Chunk sidecar from the snapshot with `chunk sidecar create --name <name> --image <snapshot-id>` to resume work.
 
 For more details on managing Chunk sidecars, see the <<manage-sidecars>> section.
 
@@ -186,78 +320,54 @@ For more details on managing Chunk sidecars, see the <<manage-sidecars>> section
 [badge="Preview"]
 == Manage Chunk sidecars
 
-CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The product is in its early stages and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature is made generally available, there will be a cost associated with access and usage.
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Task |Command
 
-Chunk sidecars are CircleCI Cloud environments where the `chunk` CLI validates your changes remotely. This lets you validate changes against the same environment your CI pipeline uses, without running them locally.
+|Create a sidecar
+|`chunk sidecar create --name <name>`
 
-[#create-a-sidecar]
-=== Create a Chunk sidecar
+|Create from a snapshot
+|`chunk sidecar create --name <name> --image <snapshot-id>`
 
-[source,console]
-----
-$ chunk sidecar create --name <name>
-----
+|Set the active sidecar
+|`chunk sidecar use <sidecar-id>`
 
-The `chunk` CLI auto-detects your tech stack, generates a Dockerfile, and provisions a cloud environment on CircleCI. The command prints the Chunk sidecar ID when the environment is ready. Use this ID with `chunk validate --sidecar-id` to run validations in that environment.
+|View the active sidecar
+|`chunk sidecar current`
 
-To launch a Chunk sidecar from an existing snapshot, pass the snapshot ID with `--image`:
+|Clear the active sidecar (without deleting)
+|`chunk sidecar forget`
 
-[source,console]
-----
-$ chunk sidecar create --name <name> --image <snapshot-id>
-----
+|List all sidecars
+|`chunk sidecar list`
 
-This skips environment detection and boots from the captured state. See <<snapshot-a-sidecar>> for how to produce a snapshot ID.
+|Sync local files to the active sidecar
+|`chunk sidecar sync`
 
-[#list-sidecars]
-=== List Chunk sidecars
+|SSH into the active sidecar
+|`chunk sidecar ssh`
 
-[source,console]
-----
-$ chunk sidecar list
-----
+|Execute a command in the active sidecar
+|`chunk sidecar exec <command>`
 
-Lists all your Chunk sidecars and their IDs. Use this to retrieve a Chunk sidecar ID if you need it after creation.
+|Create a snapshot
+|`chunk sidecar snapshot create --name <snapshot-name>`
 
-[#snapshot-a-sidecar]
-=== Snapshot a Chunk sidecar
+|List snapshots
+|`chunk sidecar snapshot list`
 
-After you have configured a Chunk sidecar and confirmed it works with `chunk validate`, capture its state as a snapshot so future sessions boot fast:
+|Delete the active sidecar
+|`chunk sidecar delete`
 
-[source,console]
-----
-$ chunk sidecar snapshot create --name <snapshot-name>
-----
+|Delete a specific sidecar
+|`chunk sidecar delete --sidecar-id <id>`
+|===
+--
 
-The command captures the configured state of the active Chunk sidecar and prints the snapshot ID. Pass `--sidecar-id <id>` to snapshot a specific Chunk sidecar instead of the active one. Snapshot names are limited to 255 characters.
-
-CAUTION: `chunk sidecar snapshot create` deletes the source Chunk sidecar after the snapshot is captured to avoid leaving the build instance running. If the deleted sidecar was the active one, local active-sidecar state is cleared. Launch a new Chunk sidecar from the snapshot with `chunk sidecar create --name <name> --image <snapshot-id>` to resume work.
-
-If the post-snapshot deletion fails, the command prints a warning but the snapshot itself still succeeds. Delete the source Chunk sidecar manually, or wait for it to expire.
-
-[#ssh-into-sidecar]
-=== SSH into a Chunk sidecar
-
-[source,console]
-----
-$ chunk sidecar ssh
-----
-
-[#sync-files-to-sidecar]
-=== Sync local files to a Chunk sidecar
-
-[source,console]
-----
-$ chunk sidecar sync
-----
-
-[#exec-in-chunk-sidecar]
-=== Execute a command in a sidecar
-
-[source,console]
-----
-$ chunk sidecar exec <command>
-----
+CAUTION: `chunk sidecar snapshot create` deletes the source sidecar after capturing to avoid leaving the build instance running. If the deleted sidecar was the active one, local active-sidecar state is cleared. Launch a new sidecar from the snapshot with `chunk sidecar create --name <name> --image <snapshot-id>` to resume work.
 
 [#trigger-chunk-tasks]
 == Trigger Chunk tasks
@@ -320,94 +430,15 @@ The following flags are available:
 |===
 --
 
-[#install-skills]
-== Install AI agent skills
-
-The `chunk skill install` command installs `chunk` CLI skills into your AI coding agent (Claude Code, Cursor, or VS Code Copilot).
-
-[source,console]
-----
-$ chunk skill install
-----
-
-To see available skills and their current installation status, run the following:
-
-[source,console]
-----
-$ chunk skill list
-----
-
-The following skills are available:
-
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-|Skill |Description
-
-|`chunk-review`
-|Reviews pull requests and diffs using your team's review standards from `.chunk/context/review-prompt.md`.
-
-|`chunk-sidecar`
-|Creates and manages Chunk sidecar environments.
-
-|`chunk-testing-gaps`
-|Identifies test coverage gaps through mutation testing.
-
-|`debug-ci-failures`
-|Debugs CircleCI pipeline failures and identifies flaky tests.
-|===
---
-
-After installation, you can invoke these skills directly in your AI coding agent. For example, in Claude Code, type `/chunk-review` to start a code review.
-
 [#configure-hooks]
-== Configure validation hooks
+== Validation hooks
 
-Running `chunk init` adds hooks to `.claude/settings.json` that trigger `chunk validate` automatically at key points:
+`chunk init` automatically adds two hooks to `.claude/settings.json`:
 
-* **PreToolUse hook**: Blocks `git commit` if validation fails, preventing bad code from entering the repository.
-* **Stop hook**: Validates your changes when your Claude Code session ends, catching uncommitted changes.
+* **PreToolUse hook** — runs before every `git commit` and blocks it if validation fails, preventing broken code from entering the repository.
+* **Stop hook** — runs when your Claude Code session ends. If your working tree has changes, it validates them automatically.
 
-To add or update hooks without re-running the full initialization, run the following:
-
-[source,console]
-----
-$ chunk init --skip-validate
-----
-
-[#view-config]
-== View and set configuration
-
-To display the fully resolved `chunk` CLI configuration for your project, run the following:
-
-[source,console]
-----
-$ chunk config show
-----
-
-To set a configuration value, run the following:
-
-[source,console]
-----
-$ chunk config set <key> <value>
-----
-
-Supported keys:
-
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-|Key |Description
-
-|`model`
-|The default Claude model to use for `chunk build-prompt`.
-
-|`apiKey`
-|Your Anthropic API key. You can also set this with `chunk auth set anthropic`.
-|===
---
+To reinstall hooks without re-running full initialization, run `chunk init --skip-validate`.
 
 [#next-steps]
 == Next steps

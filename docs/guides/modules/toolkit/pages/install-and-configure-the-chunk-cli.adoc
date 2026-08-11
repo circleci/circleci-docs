@@ -3,40 +3,28 @@
 :page-description: How to install and configure the Chunk CLI, a tool for integrating AI code review standards and remote validation into your development workflow.
 :experimental:
 
-The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool that brings AI-powered code review and remote validation to your local workflow. The `chunk` CLI works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot.
+The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a developer tool for AI-assisted development workflows. It works with AI coding agents such as Claude Code, Cursor, and VS Code Copilot, and does two things:
 
-Some of the things you can do with the `chunk` CLI include:
+. *Generates team review context* — mines your GitHub PR review history, analyzes it with Claude, and produces a `.chunk/context/review-prompt.md` file that encodes how your team actually reviews code. AI coding agents pick this file up automatically and apply your team's standards.
+. *Validates changes remotely* — runs your quality checks (tests, lint, format) in a clean CircleCI Cloud environment before you push, so you catch failures that only reproduce outside your machine.
 
-* Mine your team's GitHub pull request history to generate a team-specific review prompt for AI agents using `chunk build-prompt`.
-* Validate commands locally or in CircleCI Cloud environments using `chunk validate`.
-* Trigger Chunk tasks in CircleCI Cloud from your terminal using `chunk task`.
-* Install AI agent skills for code review, mutation testing, and CI failure debugging using `chunk skill install`.
-* Set up pre-commit and session-end hooks that automatically validate in Claude Code using `chunk init`.
+After following these steps, you'll be able to say "review my changes" in Claude Code to get a review against your team's standards, and "validate on the sidecar" to run checks in a CircleCI Cloud environment that matches your CI pipeline.
 
 NOTE: **Chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
-
-[#supported-platforms]
-== Supported platforms
-
-The `chunk` CLI supports macOS and Linux on both arm64 and x86_64 architectures. Windows is not supported.
 
 [#installation]
 == 1. Installation
 
-[#macos-install-with-homebrew]
-=== 1.1 macOS and Linux install with Homebrew
+NOTE: The `chunk` CLI supports macOS and Linux (arm64 and x86_64). Windows is not supported.
 
-The recommended installation method for both macOS and Linux is Homebrew:
+Install with Homebrew:
 
 [source,console]
 ----
 $ brew install CircleCI-Public/circleci/chunk
 ----
 
-[#verify-installation]
-=== 1.2 Verify the installation
-
-Confirm the `chunk` CLI is working and check the version:
+Verify the installation:
 
 [source,console]
 ----
@@ -51,14 +39,30 @@ After installing the `chunk` CLI, set credentials for each service you plan to u
 [#auth-circleci]
 === 2.1 CircleCI
 
-Required for `chunk sidecar` and `chunk task` commands. The `chunk` CLI uses your CircleCI token to create and manage cloud sidecar environments for running remote validations.
+Required for `chunk sidecar` and `chunk task` commands. The `chunk` CLI uses your CircleCI credentials to create and manage cloud sidecar environments for running remote validations.
+
+The recommended method uses browser-based OAuth. If you already have a CircleCI account:
+
+[source,console]
+----
+$ chunk auth login
+----
+
+If you are new to CircleCI:
+
+[source,console]
+----
+$ chunk auth signup
+----
+
+Both commands open your browser for a secure login flow. If you prefer to use a personal API token instead:
 
 [source,console]
 ----
 $ chunk auth set circleci
 ----
 
-Enter your CircleCI personal API token when prompted. Generate a personal API token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
+Enter your CircleCI personal API token when prompted. Generate a token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
 
 [#auth-anthropic]
 === 2.2 Anthropic
@@ -100,7 +104,9 @@ $ chunk init
 
 * Detects your build, test, lint, and format commands.
 * Creates a `.chunk/config.json` file with the detected commands.
+* Installs shell completions.
 * Generates hook configuration in `.claude/settings.json` for Claude Code.
+* Installs AI agent skills into your coding agent.
 
 The following flags are available for `chunk init`:
 
@@ -116,8 +122,17 @@ The following flags are available for `chunk init`:
 |`--skip-hooks`
 |Skip generating hook configuration in `.claude/settings.json`.
 
+|`--skip-git-hook`
+|Skip installing the git pre-commit hook.
+
+|`--skip-skills`
+|Skip installing AI agent skills.
+
+|`--skip-completions`
+|Skip installing shell completions.
+
 |`--skip-validate`
-|Skip command detection. Creates the config file without running command auto-detection.
+|Skip command detection. Creates the config file without auto-detecting commands.
 
 |`--project-dir <path>`
 |Set the project directory. Defaults to the current directory.
@@ -128,52 +143,75 @@ The following flags are available for `chunk init`:
 
 After initialization, run `chunk validate` to run the detected commands. You can also run `chunk build-prompt` to mine your GitHub PR history for a team-specific review prompt.
 
-For detailed information on using the `chunk` CLI, including generating review prompts, running validations, and installing skills, refer to xref:how-to-use-chunk-cli.adoc[How to Use the `chunk` CLI].
+For detailed information on using the `chunk` CLI, including generating review prompts and running validations, refer to xref:how-to-use-chunk-cli.adoc[How to Use the `chunk` CLI].
 
-[#updating-the-cli]
-== Update the Chunk CLI
+[#install-skills]
+== 4. Install AI agent skills
 
-Run the following command to update the `chunk` CLI:
-
-[source,console]
-----
-$ brew upgrade chunk
-----
-
-[#uninstall]
-== Uninstall the Chunk CLI
-
-To uninstall the `chunk` CLI, run the following command:
+`chunk init` installs skills automatically, but you can also run `chunk skill install` directly at any time to install or reinstall skills into your AI coding agent (Claude Code, Cursor, or VS Code Copilot):
 
 [source,console]
 ----
-$ brew uninstall chunk
+$ chunk skill install
 ----
 
-[#manage-credentials]
-== Manage credentials
-
-[#check-auth-status]
-=== Check authentication status
-
-To see which credentials you have configured:
+To see available skills and their current installation status:
 
 [source,console]
 ----
-$ chunk auth status
+$ chunk skill list
 ----
 
-[#remove-credentials]
-=== Remove credentials
+The following skills are available:
 
-To remove stored credentials for a provider:
+[.table-scroll]
+--
+[cols=3*, options="header"]
+|===
+|Skill |Trigger phrases |Description
 
-[source,console]
-----
-$ chunk auth remove <provider>
-----
+|`chunk-review`
+|"review my changes", "review PR #123"
+|Reviews pull requests and diffs using your team's review standards from `.chunk/context/review-prompt.md`.
 
-Replace `<provider>` with `circleci`, `anthropic`, or `github`.
+|`chunk-sidecar`
+|"validate on the sidecar", "sidecar dev loop"
+|Creates and manages Chunk sidecar environments for cloud validation.
+
+|`chunk-testing-gaps`
+|"find testing gaps", "mutation test"
+|Identifies test coverage gaps through mutation testing.
+
+|`debug-ci-failures`
+|"debug CI", "why is CI failing"
+|Debugs CircleCI pipeline failures and identifies flaky tests.
+|===
+--
+
+Once installed, invoke skills directly in your AI coding agent. In Claude Code, type `/chunk-review` to review a diff or `/chunk-sidecar` to validate changes in a CircleCI Cloud environment.
+
+[#maintenance]
+== Maintenance
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+|Task |Command
+
+|Update the CLI
+|`brew upgrade chunk`
+
+|Uninstall the CLI
+|`brew uninstall chunk`
+
+|Check authentication status
+|`chunk auth status`
+
+|Remove credentials for a provider
+|`chunk auth remove <provider>` (`circleci`, `anthropic`, or `github`)
+|===
+--
 
 [#next-steps]
 == Next steps
@@ -181,4 +219,3 @@ Replace `<provider>` with `circleci`, `anthropic`, or `github`.
 * xref:how-to-use-chunk-cli.adoc#generate-a-review-prompt[Generate a Team Review Prompt From Your GitHub PR History]
 * xref:how-to-use-chunk-cli.adoc#run-validation[Validate Your Changes]
 * xref:how-to-use-chunk-cli.adoc#trigger-chunk-tasks[Trigger Chunk Tasks]
-* xref:how-to-use-chunk-cli.adoc#install-skills[Install AI Agent Skills]
