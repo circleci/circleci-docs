@@ -29,8 +29,8 @@ With `enabled: true` and nothing else, CircleCI creates a system catch-all check
 
 You need to write this configuration by hand in the following cases:
 
-* You use a version control system other than GitHub, so the guided setup is unavailable.
-* Your organization does not have AI features enabled.
+* Your code is not in a GitHub repository, or your organization does not have AI features enabled. The guided setup can provide starting templates, but you must copy them into your repository and adapt them to match your pipeline.
+* You prefer to edit YAML directly rather than use the guided setup.
 * You want more than one named check per release.
 * Your monitoring tool sends payloads in a shape the provider defaults do not understand.
 

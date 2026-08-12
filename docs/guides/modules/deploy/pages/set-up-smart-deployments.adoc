@@ -3,13 +3,37 @@
 :page-description: Use the guided setup in the CircleCI web app to configure Smart Deployments, including release validation and automatic rollback, from one flow.
 :experimental:
 
-This guide shows how to configure Smart Deployments using the guided setup in the CircleCI web app. You answer a few questions, and CircleCI generates the configuration and opens a pull request for you to merge.
+This guide shows how to configure Smart Deployments using the guided setup in the CircleCI web app. You answer a few questions, and CircleCI prepares configuration for your repository. When AI features are enabled and the CircleCI GitHub App is installed, CircleCI opens a pull request for you to merge.
 
 Smart Deployments is the CircleCI continuous validation feature. For more information, see the xref:smart-deployments-overview.adoc[Smart Deployments Overview] page.
 
 The guided setup configures deploy markers, release validation, rollback and deploy pipelines, and automatic rollback in one flow. It replaces working through the deploy marker, rollback pipeline, and deploy pipeline guides separately.
 
-TIP: If your code is not in a GitHub repository, or your organization does not have AI features enabled, the guided setup is unavailable. Follow the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide instead.
+[#setup-routes]
+== Setup routes
+
+The guided setup is available for every project. What it generates depends on your GitHub App and AI settings:
+
+[.table-scroll]
+--
+[cols="1,2", options="header"]
+|===
+|Your setup
+|What the guided setup does
+
+|GitHub App installed and AI features enabled
+|CircleCI generates your configuration, opens a pull request for you to merge, and registers rollback and deploy pipelines. Automatic rollback is available.
+
+|GitHub App installed and AI features not enabled
+|The guided setup runs in the web app and shows configuration examples for you to copy into your repository. Edit each example to match your pipeline before you continue. Rollback and deploy pipelines can still be registered when the GitHub App is installed.
+
+|GitHub App not installed (skip the GitHub App step)
+|Deploy markers and release validation only. The wizard shows configuration to copy. Edit each example to match your pipeline before you continue. Rollback and deploy pipelines and automatic rollback are not available until you install the CircleCI GitHub App.
+
+|Prefer to edit YAML directly
+|Follow the xref:set-up-release-validation-manually.adoc[Set up Release Validation Manually] guide instead.
+|===
+--
 
 == Prerequisites
 
@@ -17,10 +41,10 @@ Before you start, confirm the following:
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
-* Your code must be stored in a *GitHub* repository. CircleCI installs the GitHub App in your organization during setup if it is not installed already. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+* For pull request generation and rollback or deploy pipelines, the CircleCI GitHub App installed in your organization. The guided setup prompts you to install it if it is not installed already. You can skip this step to configure deploy markers and release validation without pipelines. For more information, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 +
 NOTE: Only organization administrators can install the GitHub App.
-* AI features enabled for your organization, because the guided setup generates your configuration with AI. See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps.
+* When AI features are enabled, CircleCI generates configuration and opens a pull request. When AI features are not enabled, the guided setup shows configuration examples for you to copy. See the xref:toolkit:enable-ai-powered-features.adoc[Enable AI-Powered Features] page for steps.
 * For continuous validation, a monitoring tool that can send outbound webhooks. Datadog and Prometheus-compatible tools are supported directly, and you can connect any other tool as a custom provider.
 
 == Start the guided setup
@@ -46,13 +70,17 @@ The first step of the guided setup asks how much protection you want, and which 
 
 Select *Continuous validation*, marked *Suggested*, to validate every release against your monitoring tool. Select *Deploy tracking* to log your deploys and set up the pipelines without validating anything.
 
-Both levels generate deploy markers, a rollback pipeline, and a deploy pipeline. The difference is that continuous validation also adds a validation policy, so the release validation engine decides whether each release is healthy.
+Both levels generate deploy markers, a rollback pipeline, and a deploy pipeline when the CircleCI GitHub App is installed. The difference is that continuous validation also adds a validation policy, so the release validation engine decides whether each release is healthy.
+
+If you skip GitHub App installation, the wizard configures deploy markers only for deploy tracking, or deploy markers and release validation for continuous validation.
 
 If you select deploy tracking, the guided setup skips monitoring provider selection and the Connect monitoring step. You can return later and add a validation policy to your configuration.
 
 === 1.2. Configure automatic rollback
 
 Leave *Auto rollback on failure* enabled unless you want failure detection without an automatic revert. When the toggle is enabled, CircleCI attempts a rollback to the last healthy version if validation fails during the evaluation window.
+
+When the CircleCI GitHub App is not installed, the auto rollback toggle is not shown. Validation failures still mark the release failed, but CircleCI cannot trigger an automatic rollback without a rollback pipeline.
 
 You can also change this setting later in your configuration file. See the xref:release-validation-reference.adoc#optional-validation-fields[Optional Validation Fields] section.
 
@@ -81,7 +109,9 @@ Select btn:[Generate configuration] to continue.
 
 == 2. Generate configuration and merge the pull request
 
-In this step CircleCI writes the generated configuration to a branch in your repository, and you review and merge it.
+In this step CircleCI writes the generated configuration to a branch in your repository, and you review and merge it. See <<setup-routes,Setup routes>> for other paths.
+
+NOTE: When AI features are not enabled, or when you skipped GitHub App installation, the wizard shows configuration examples instead of opening a pull request. Copy each example into your repository, edit it to match your pipeline, then select btn:[I've updated my config] to continue.
 
 === 2.1. Select the config branch
 
