@@ -229,6 +229,7 @@ Leiningen
 Likert
 Linux
 [Ll]iveness
+[Ll]oopback
 LLMs?
 LLMOps
 [Ll]ockfiles?
@@ -253,6 +254,9 @@ NUnit
 OAuth
 OIDC
 OIDC Identity Provider
+PKCE
+DCR
+PAR
 Okta
 OOM
 OPA
