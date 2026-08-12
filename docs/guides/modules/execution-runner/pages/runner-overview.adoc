@@ -13,7 +13,7 @@ Self-hosted runner installation options are as follows:
 
 * Install in a Kubernetes cluster, using a **container runner**.
 * Install in a machine execution environment using a **machine runner**.
-* Automatically scale runner VMs in a Kubernetes cluster using **runner provisioner** (preview).
+* Automatically scale runner VMs in a Kubernetes cluster using **runner provisioner** (beta).
 
 The diagrams below illustrate how CircleCI's container and machine runners extend our existing systems.
 
@@ -89,13 +89,13 @@ If you do not use Kubernetes but still want to run your CI job in a container on
 Machine runner is not compatible with CircleCI's Convenience Images or custom Docker images.
 
 [#runner-provisioner-use-case]
-=== Runner provisioner (preview)
+=== Runner provisioner (beta)
 
 Runner Provisioner is a Kubernetes controller that automatically scales CircleCI runner VMs using KubeVirt. Rather than running jobs in containers, each job runs inside a full virtual machine that is provisioned on demand and shut down after the job completes. This approach provides stronger isolation than container runner. It is suited for workloads that require a full OS environment, hardware-level isolation, or privileged access that is impractical inside a container.
 
 Runner Provisioner polls the CircleCI API for pending and running tasks, then adjusts a `VirtualMachinePool` replica count to match demand. A configurable `minReplicas` setting keeps a pre-warmed pool of VMs ready to claim jobs immediately.
 
-CAUTION: Runner Provisioner is currently in preview and not recommended for production workloads. Its image and Helm chart are publicly available. Refer to the xref:runner-provisioner.adoc[Runner Provisioner] page for installation and configuration details.
+NOTE: Runner Provisioner is currently in beta and not recommended for critical workloads. Its image and Helm chart are publicly available. Refer to the xref:runner-provisioner.adoc[Runner Provisioner] page for installation and configuration details.
 
 [#getting-started]
 == Getting started
