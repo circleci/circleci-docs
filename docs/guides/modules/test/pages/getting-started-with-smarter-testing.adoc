@@ -4,6 +4,7 @@
 :page-platform: Cloud
 :experimental:
 :page-show-readtime: true
+:tabs-sync-option:
 
 include::ROOT:partial$notes/smarter-testing-beta.adoc[]
 
@@ -20,10 +21,9 @@ This guide walks you through the foundational setup that all three features buil
 
 == Before you begin
 
-* You need to install the link:https://cli.circleci.com/[latest CircleCI CLI, window=_blank]. If you have the previous stable version installed you will need to link:https://github.com/CircleCI-Public/circleci-cli#preview-installation[uninstall it first, window=_blank].
-* You need a repository with an existing test suite. The following setup process guides you through configuring JUnit XML output and installing the CLI `testsuite` plugin.
+You need a repository with an existing test suite. The following setup process guides you through configuring JUnit XML output and running tests.
 
-NOTE: You can complete step 1 (configure and validate locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required for step 2, when you run tests in CI.
+NOTE: You can complete local steps (setup and run locally) without a CircleCI account. A CircleCI account with a project connected to your VCS is only required when you run tests in CI.
 
 === Terminology
 
@@ -32,26 +32,75 @@ The following terms are used throughout the Smarter Testing documentation:
 Test atom:: The smallest unit of work your test runner can execute independently - typically a test file (for example, `tests/auth_test.py`), but can also be a test package or module.
 Test suite:: A named configuration in `.circleci/test-suites.yml` that defines how to discover and run your test atoms.
 
-== 1. Validate and run locally
+== 1. Setup
 
 Use the `doctor` command to set up and validate your `test-suites.yml`. The CLI runs through a series of checks, executing tests and validating the output. If any results look incorrect, action items are provided to resolve them.
+
+[tabs]
+====
+Local::
++
+--
+
+Ensure the link:https://cli.circleci.com/[latest CircleCI CLI, window=_blank] is installed to validate locally.
+
+Run the doctor command in your terminal where you usually run tests.
 
 [source,console]
 ----
 $ circleci testsuite doctor "ci tests"
 ----
+--
+
+CI::
++
+--
+
+The CLI is already available in CI, no install is needed.
+
+Run the doctor command in your job with your usual test setup.
+
+[source,yaml]
+----
+version: 2.1
+jobs:
+  doctor:
+    executor: docker
+    steps:
+      - setup
+      - run: circleci testsuite doctor "ci tests"
+----
+--
+====
 
 Follow the steps until all checks pass.
 
 include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 
-== 2. Run in CI
+== 2. Run
 
-In your CircleCI configuration file, replace your existing test command with `circleci testsuite run "ci tests"` -- the same command you used locally. Keep all other job steps the same.
+[tabs]
+====
+Local::
++
+--
+
+Run the test command in your terminal where you usually run tests.
+
+[source,console]
+----
+$ circleci testsuite run "ci tests"
+----
+--
+
+CI::
++
+--
+
+In your CircleCI configuration file, replace your existing test command with `circleci testsuite run "ci tests"` -- the same command you used to setup. Keep all other job steps the same.
 
 Verify that `store_test_results` points to the directory that matches `outputs.junit` in your `test-suites.yml` file.
 
-.Example CircleCI test job configuration with the testsuite command
 [source,yaml]
 ----
 version: 2.1
@@ -69,8 +118,10 @@ jobs:
 ----
 
 Commit both `.circleci/test-suites.yml` and `.circleci/config.yml` to your feature branch and push to your VCS.
+--
+====
 
-=== Verify in CI
+== 3. Verify in CI
 
 After your pipeline runs, verify the test job behaves as expected before merging:
 
