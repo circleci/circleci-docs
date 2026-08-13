@@ -117,7 +117,7 @@ When `max-auto-rerun` is also set, test atoms rerun until one of the two conditi
 |===
 --
 
-== 2. Run locally
+== 2. Run
 
 Use the `doctor` command to validate that your `test-suites.yml` is set up correctly. The CLI runs additional checks when auto rerun is enabled. If any results look incorrect, an action item is provided to resolve it.
 
@@ -136,8 +136,6 @@ To verify auto rerun locally, modify a test to cause it to fail, then run the te
 ----
 $ circleci testsuite run "ci tests"
 ----
-
-== 3. Run in CI
 
 Commit `.circleci/test-suites.yml` to your feature branch and push to your VCS.
 

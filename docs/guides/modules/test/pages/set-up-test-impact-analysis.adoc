@@ -139,7 +139,7 @@ options:
   test-impact-analysis: true
 ----
 
-== 2. Run locally
+== 2. Run
 
 Use the `doctor` command to validate the `test-suites.yml` is set up correctly. The CLI runs additional analysis checks when test impact analysis is enabled. If any results look incorrect, action items are provided to resolve them.
 
@@ -155,8 +155,6 @@ include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 Once all checks pass, follow the "Next steps" from the doctor output to generate initial impact data locally and send it to CircleCI.
 
 NOTE: Depending on the test runner, the first run of analysis can take a long time because every test atom needs to run analysis.
-
-== 3. Run in CI
 
 Commit the `.circleci/test-suites.yml` changes to your feature branch and push to your VCS. Follow your usual process to merge to your default branch.
 
