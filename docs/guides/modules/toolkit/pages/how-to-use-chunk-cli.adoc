@@ -31,9 +31,9 @@ Once set up, your day-to-day workflow looks like this:
 [badge="Preview"]
 == Validate in a Chunk sidecar
 
-CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The product is in active development and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature becomes generally available, there will be a cost associated with access and usage.
+CAUTION: Chunk sidecars are available in preview on all CircleCI plans. The product is in active development and you may encounter bugs, unexpected behavior, or incomplete features. If you have feedback, you can share it on our link:https://discord.com/invite/circleci[Discord]. When the feature becomes generally available, a cost applies for access and usage.
 
-Chunk sidecars run your validation commands in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses, catching failures that don't reproduce on your machine.
+Chunk sidecars validate changes in a CircleCI Cloud environment instead of locally. This ensures your code runs against the same environment your CI pipeline uses, catching failures that do not reproduce on your machine.
 
 The easiest way to get started is to ask your AI agent — type `/chunk-sidecar` or say "validate on the sidecar". The skill handles auth checks, sidecar creation, file sync, and validation automatically. If you prefer to run the steps yourself, continue below.
 
@@ -65,7 +65,7 @@ $ chunk sidecar setup --force
 
 Follow these steps to set up and use a Chunk sidecar manually:
 
-==== 1. Authenticate with CircleCI
+==== 1: Authenticate with CircleCI
 
 Before creating a Chunk sidecar, authenticate with CircleCI. The recommended method uses browser-based OAuth:
 
@@ -83,7 +83,7 @@ $ chunk auth set circleci
 
 Enter your CircleCI personal API token when prompted. Generate a token from your link:https://app.circleci.com/settings/user/tokens[User Settings, window=_blank] in the CircleCI web app.
 
-==== 2. Create a Chunk sidecar
+==== 2: Create a Chunk sidecar
 
 Create a new Chunk sidecar environment:
 
@@ -101,7 +101,7 @@ To launch a sidecar from an existing snapshot, pass the snapshot ID with `--imag
 $ chunk sidecar create --name <name> --image <snapshot-id>
 ----
 
-==== 3. Sync your local files to the sidecar
+==== 3: Sync your local files to the sidecar
 
 Sync your current working directory to the Chunk sidecar:
 
@@ -110,7 +110,7 @@ Sync your current working directory to the Chunk sidecar:
 $ chunk sidecar sync
 ----
 
-==== 4. Set the active Chunk sidecar
+==== 4: Set the active Chunk sidecar
 
 Set the Chunk sidecar you just created as the active Chunk sidecar for this project, so you can omit `--sidecar-id` from future commands:
 
@@ -126,9 +126,9 @@ Replace `<sidecar-id>` with the ID printed by `chunk sidecar create`. To check w
 $ chunk sidecar current
 ----
 
-==== 5. Run validation in the Chunk sidecar
+==== 5: Validate in the Chunk sidecar
 
-Run your validation commands in the active Chunk sidecar:
+Validate commands in the active Chunk sidecar:
 
 [source,console]
 ----
@@ -142,7 +142,7 @@ To target a specific Chunk sidecar by ID instead of using the active one:
 $ chunk validate --sidecar-id <sidecar-id>
 ----
 
-==== 6. (Optional) SSH into the Chunk sidecar for debugging
+==== 6: (Optional) SSH into the Chunk sidecar for debugging
 
 If validation fails and you need to investigate, SSH into the Chunk sidecar:
 
@@ -153,7 +153,7 @@ $ chunk sidecar ssh
 
 This opens an interactive shell in the remote environment.
 
-==== 7. (Optional) Snapshot the Chunk sidecar for reuse
+==== 7: (Optional) Snapshot the Chunk sidecar for reuse
 
 After configuring a Chunk sidecar successfully, capture its state as a snapshot for faster future sessions:
 
@@ -228,7 +228,7 @@ The `chunk validate` command runs the commands configured in your project's `.ch
 
 [NOTE]
 ====
-For CI parity, use `chunk validate --remote` to run validation in a Chunk sidecar instead of locally. See <<run-validation-in-a-sidecar>>.
+For CI parity, use `chunk validate --remote` to validate in a Chunk sidecar instead of locally. See <<run-validation-in-a-sidecar>>.
 ====
 
 [source,console]
