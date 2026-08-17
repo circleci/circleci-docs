@@ -285,7 +285,7 @@ TIP: You can find your CircleCI organization ID by navigating to menu:Org[Overvi
 
 The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in <<format-of-the-openid-connect-id-token,the table below>>). This audience is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] page.
 
-=== 2. Configure GCP workload identity federation
+=== 2. Configure GCP Workload Identity federation
 
 GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. It allows applications outside Google Cloud to access Google Cloud resources without storing service account credentials. You can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
 
