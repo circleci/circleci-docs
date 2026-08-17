@@ -82,7 +82,7 @@ Navigate to menu:Plan[Plan Usage > Users] in the CircleCI web app to view all ac
 
 . *Send invites*:
 +
-Navigate to menu:Organization Settings[People] and use the btn:[Invite] button to send email invitations to team members. See the xref:guides:getting-started:invite-your-team.adoc#invite-teammates[Join Teammates] section for detailed steps.
+Navigate to menu:Organization Settings[People] and use the btn:[Invite] button to send email invitations to team members. See the xref:guides:getting-started:invite-your-team.adoc#invite-teammates[Invite Your Team] section for detailed steps.
 
 . *Enable unregistered user spend prevention* (Performance and Scale Plans only):
 +
@@ -96,6 +96,6 @@ Let your team know about the benefits of registering and provide them with instr
 == See also
 
 * xref:guides:getting-started:first-steps.adoc[Sign up and Try CircleCI]
-* xref:guides:getting-started:invite-your-team.adoc[Join Teammates on CircleCI]
+* xref:guides:getting-started:invite-your-team.adoc[Invite Your Team]
 * xref:prevent-unregistered-users-from-spending-credits.adoc[Prevent Unregistered Users From Spending Credits]
 * xref:guides:permissions-authentication:roles-and-permissions-overview.adoc[Roles and Permissions Overview]

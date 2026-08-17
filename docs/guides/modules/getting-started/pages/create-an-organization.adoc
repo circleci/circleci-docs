@@ -24,7 +24,7 @@ To create a `circleci` organization, follow these steps:
 Once your new organization is created, you can start creating projects and inviting team members:
 
 * xref:create-project.adoc#create-a-project[Create a Project].
-* xref:invite-your-team.adoc#invite-teammates[Join Teammates on CircleCI].
+* xref:invite-your-team.adoc#invite-teammates[Invite Your Team].
 
 == Create a github organization
 
