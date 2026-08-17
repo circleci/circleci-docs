@@ -205,7 +205,7 @@ AWS STS maps CircleCI's `oidc.circleci.com/project-id` OIDC claim to a link:http
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.circleci.com/org/<organization_id>:aud": "sts.amazonaws.com",
+          "oidc.circleci.com/org/<organization_id>:aud": "<organization_id>",
           "oidc.circleci.com/org/<organization_id>:oidc.circleci.com/project-id": "<project-id>"
         }
       }
