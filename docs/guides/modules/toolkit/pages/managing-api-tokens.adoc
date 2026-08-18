@@ -40,7 +40,7 @@ your deletion in the dialog window.
 [#creating-a-project-api-token]
 === Create a project API token
 
-. In the CircleCI application, go to your project's settings. One way to get there is to select *Projects* in the sidebar, then the ellipsis (`+...+`) next to your project and select *Project Settings*.
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select *API Permissions*.
 . Select btn:[Add API Token].
 . Choose a scope from the dropdown menu. These are described in the <<overview,Overview>> section above.
