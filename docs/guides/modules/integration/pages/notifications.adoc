@@ -20,6 +20,7 @@ CircleCI uses your "default" email address to send mandatory communications, whi
 * System and security messages.
 * Billing and account updates.
 * Deprecation notices.
+* Personal API token expiry notifications.
 
 To set or change your default email address, follow these steps:
 
@@ -108,6 +109,13 @@ Chunk also sends an email digest at 09:00 UTC every Monday summarizing your team
 image::guides:ROOT:chunk/chunk-notification-settings.png[Chunk notification settings on the Notifications page]
 
 For a full guide to setting up and using Chunk, including the email digest, see the xref:guides:toolkit:chunk-setup-and-overview.adoc#email-digest[Email Digest] section of the Chunk Overview and Setup guide.
+
+[#personal-api-token-expiry-notifications]
+=== Personal API token expiry notifications
+
+CircleCI emails you 30 days, 15 days, seven days, and one day before a personal API token expires.
+
+Expiry notifications are mandatory communications rather than a notification category, so you cannot opt out of them. To stop the emails for a token you no longer need, delete the token. For help creating, rotating, and deleting tokens, see the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] guide.
 
 [badge="Beta"]
 == Slack notifications
