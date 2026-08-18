@@ -169,6 +169,7 @@
 
 * Deploy with CircleCI
 ** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
+** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 ** Smart Deployments
 *** xref:deploy:smart-deployments-overview.adoc[Smart Deployments overview]
 *** xref:deploy:set-up-smart-deployments.adoc[Set up Smart Deployments]
@@ -179,7 +180,6 @@
 *** xref:deploy:set-up-deploys.adoc[Set up a deploy pipeline]
 *** xref:deploy:deploy-a-component.adoc[Deploy a component]
 *** xref:deploy:rollback-a-deployment.adoc[Rollback a deployment]
-*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 *** xref:deploy:environment-hierarchy-and-version-promotion.adoc[Environment hierarchy and version promotion]
 ** Release agent setup
 *** xref:deploy:release-agent-overview.adoc[Release agent overview]
