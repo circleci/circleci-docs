@@ -168,8 +168,9 @@
 *** xref:test:testing-macos.adoc[Testing macOS applications]
 
 * Deploy with CircleCI
-** xref:deploy:deployment-overview.adoc[Deployment and deploy management]
-** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
+** Deployment management
+*** xref:deploy:deployment-overview.adoc[Overview]
+*** xref:deploy:configure-deploy-markers.adoc[Configure deploy markers]
 ** Smart Deployments
 *** xref:deploy:smart-deployments-overview.adoc[Smart Deployments overview]
 *** xref:deploy:set-up-smart-deployments.adoc[Set up Smart Deployments]
