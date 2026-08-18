@@ -104,9 +104,48 @@ A subcommand of `run`. The `circleci run oidc` command runs authentication using
 
 For more information, including an example, see the xref:permissions-authentication:oidc-tokens-with-custom-claims.adoc[OpenID Connect tokens with custom claims] page.
 
+==== Deploy
+
+A subcommand of `run`. The `circleci run deploy` command logs a deployment in the Deploys UI with a single command. Use it when you want to record a deployment without configuring component names, target versions, or status updates manually.
+
+CircleCI sets the component name to your project name and the target version to the job number. The deployment appears with `LOGGED` status.
+
+*Flags*
+
+[.table-scroll]
+--
+[cols="2,3"]
+|===
+| Flag | Description
+
+| `environment`
+| Sets the target environment. If the specified environment does not exist, it will be created. Defaults to `production`.
+
+| `namespace`
+| Optional flag to use a namespace value other than `default`.
+|===
+--
+
+*Example usage:*
+
+[source,yaml]
+----
+jobs:
+  deploy-my-service:
+    docker:
+      - image: cimg/base:current
+    steps:
+      - run:
+          command: |
+            ## example usage of run deploy
+            circleci run deploy --environment=production
+----
+
+For more information on using the `circleci run deploy` command, see the xref:deploy:configure-deploy-markers.adoc#log-a-deployment-with-one-command[Log a Deployment With One Command] section of the Configure Deploy Markers page. For advanced control over component names, target versions, and deployment status, use the `circleci run release` commands described below.
+
 ==== Release
 
-A subcommand of `run`. The `circleci run release` commands allow you to manage your deployments.
+A subcommand of `run`. The `circleci run release` commands allow you to manage your deployments with advanced control over component names, target versions, and status updates.
 
 ==== Plan
 
