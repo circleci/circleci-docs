@@ -312,7 +312,7 @@ The chart ships a default VM `spec` (2 GiB memory, 1 CPU). It boots the CircleCI
 ----
 $ helm repo add circleci_runner-provisioner https://packagecloud.io/circleci/runner-provisioner/helm
 $ helm repo update
-$ helm install runner-provisioner circleci_runner-provisioner \
+$ helm install runner-provisioner circleci_runner-provisioner/runner-provisioner \
   --namespace runner-provisioner \
   --values my-values.yaml
 ----
