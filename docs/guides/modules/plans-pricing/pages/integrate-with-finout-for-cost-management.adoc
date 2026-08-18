@@ -40,6 +40,7 @@ To connect Finout to CircleCI, you need to create a personal API token.
 . Select **Personal API Tokens**.
 . Select btn:[Create new token].
 . Provide a descriptive name for the token (for example, "Finout Integration").
+. Set an expiry date for the token. You must choose a date no more than one year in the future.
 . Select **Add API Token**.
 . Copy the token right away, as you cannot view it again.
 
@@ -80,8 +81,8 @@ image::guides:ROOT:finout-integration.png[screenshot showing the Finout CircleCI
 
 Configure your CircleCI credit pricing to ensure accurate cost calculations. Finout calculates costs based on your usage data and the configured price per credit. Configure ongoing and historical pricing, as follows:
 
-* Ongoing pricing. This is for your current usage but you can backdate this to the start of your contract.
-* Historical pricing for backfilling. This is an optional section that you can use if you have had different contracted USD per credit agreements over the time you have used CircleCI.
+* Ongoing pricing covers your current usage, but you can backdate it to the start of your contract.
+* Historical pricing for backfilling is an optional section that you can use if you have had different contracted USD per credit agreements over the time you have used CircleCI.
 
 . In the "Ongoing pricing" section, enter $0.0006, which is the standard price you pay (in US dollars) to purchase a credit. If you have an alternative pricing agreement, alter this value to reflect your contracted rate.
 . Select a start date for usage at this rate.
