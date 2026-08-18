@@ -25,7 +25,7 @@ The current categories of API v2 endpoints are:
 * Usage
 * Schedule
 
-NOTE: Currently, xref:managing-api-tokens.adoc#creating-a-personal-api-token[Personal API Tokens] are the only supported tokens on API v2. xref:managing-api-tokens.adoc#creating-a-project-api-token[Project Tokens] are not currently supported on API v2.
+NOTE: Personal API tokens are the only supported tokens on API v2. Project tokens are not supported on API v2. You can create a personal API token manually through the web app (see xref:managing-api-tokens.adoc#creating-a-personal-api-token[Managing API Tokens]) or programmatically using the xref:oauth-dynamic-client-registration.adoc[OAuth 2.0 Dynamic Client Registration] flow.
 
 [#authentication-and-authorization]
 == Authentication and authorization

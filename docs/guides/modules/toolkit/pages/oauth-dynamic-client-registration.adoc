@@ -3,12 +3,22 @@
 :page-description: Register OAuth 2.0 clients dynamically and use the authorization code flow with PKCE to obtain a CircleCI personal API token.
 :experimental:
 
-CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use this flow to let a tool, CLI, or integration get a personal API token on behalf of a user. It avoids a pre-shared client secret or manual token creation in the CircleCI web app. The resulting token is a standard 90-day CircleCI personal API token, and works with all existing API v2 endpoints.
+This guide is for developers building a tool, CLI, or integration that needs to access the CircleCI API on behalf of a user.
+
+CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use this flow to let your tool get a personal API token on behalf of a user without requiring a pre-shared client secret or manual token creation in the CircleCI web app.
+
+Using this flow gives you the following benefits:
+
+* No long-lived secrets stored in your tool's configuration — PKCE secures the flow instead of a client secret.
+* User-controlled access scopes — the user chooses the permission level (Read, Write, or Admin) at authorization time.
+* Tokens are visible to and revocable by the user from their CircleCI Personal API Tokens page.
+
+The resulting token is a standard 90-day CircleCI personal API token and works with all existing API v2 endpoints.
 
 TIP: For background on CircleCI API tokens, refer to xref:managing-api-tokens.adoc[Managing API Tokens]. For general API usage, refer to the xref:api-developers-guide.adoc[CircleCI API Developer's Guide].
 
-[#overview]
-== Overview
+[#how-the-oauth-flow-works]
+== How the OAuth flow works
 
 The OAuth flow consists of four high-level stages:
 
@@ -16,6 +26,38 @@ The OAuth flow consists of four high-level stages:
 *Authorize*:: A user opens an authorization URL in a browser, selects an access level, and clicks *Allow*. CircleCI redirects to a loopback address with a short-lived authorization code.
 *Exchange*:: Your tool exchanges the code, plus the PKCE verifier, for a 90-day personal API token.
 *Use*:: The token is passed as a standard Bearer header on any CircleCI API v2 call.
+
+[#prerequisites]
+== Prerequisites
+
+* The redirect URI used during registration and authorization must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025-65535, and no query parameters. This restriction ensures the authorization code is delivered only to the local machine running the tool.
+* PKCE with S256 is mandatory. Plain code challenges are not accepted.
+* `state` is required on every authorization request. Omitting it returns a 400 error.
+* Your tool needs a way to open a browser and briefly listen for an HTTP redirect on localhost. The Python listener in <<step-3-start-a-local-redirect-listener,Step 3>> provides a minimal reference implementation.
+
+[#discovery-document]
+=== OAuth endpoints
+
+All OAuth endpoints are published in a standard discovery document:
+
+[,shell]
+----
+curl -s https://app.circleci.com/.well-known/oauth-authorization-server | jq .
+----
+
+[,json]
+----
+{
+  "issuer": "https://app.circleci.com",
+  "authorization_endpoint": "https://app.circleci.com/oauth/authorize",
+  "token_endpoint": "https://app.circleci.com/oauth/token",
+  "pushed_authorization_request_endpoint": "https://app.circleci.com/oauth/par",
+  "registration_endpoint": "https://app.circleci.com/oauth/register",
+  "response_types_supported": ["code"],
+  "grant_types_supported": ["authorization_code"],
+  "code_challenge_methods_supported": ["S256"]
+}
+----
 
 [#access-levels]
 == Access levels
@@ -42,42 +84,12 @@ During the authorization consent screen, the user chooses the access level to gr
 
 These scopes restrict what the token can do. They cannot grant more access than the authorizing user already holds in CircleCI. A user with read-only org permissions who selects Admin, for example, receives a token scoped to their actual permissions, not elevated ones.
 
+NOTE: Personal API tokens created manually through the web app always carry the user's full permissions. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization.
+
 [#sso-organizations]
 === SSO organizations
 
 If the authorizing user belongs to one or more SSO-enabled organizations, the consent screen includes an SSO organizations section. The user can authorize individual SSO orgs to be included in the token's scope. SSO org access can also be managed later from the OAuth Clients page in user settings.
-
-[#discovery-document]
-=== Discovery document
-
-All OAuth endpoints are published in a standard discovery document:
-
-[,shell]
-----
-curl -s https://app.circleci.com/.well-known/oauth-authorization-server | jq .
-----
-
-[,json]
-----
-{
-  "issuer": "https://app.circleci.com",
-  "authorization_endpoint": "https://app.circleci.com/oauth/authorize",
-  "token_endpoint": "https://app.circleci.com/oauth/token",
-  "pushed_authorization_request_endpoint": "https://app.circleci.com/oauth/par",
-  "registration_endpoint": "https://app.circleci.com/oauth/register",
-  "response_types_supported": ["code"],
-  "grant_types_supported": ["authorization_code"],
-  "code_challenge_methods_supported": ["S256"]
-}
-----
-
-[#prerequisites]
-== Prerequisites
-
-* The redirect URI used during registration and authorization must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025-65535, and no query parameters. This restriction ensures the authorization code is delivered only to the local machine running the tool.
-* PKCE with S256 is mandatory. Plain code challenges are not accepted.
-* `state` is required on every authorization request. Omitting it returns a 400 error.
-* Your tool needs a way to open a browser and briefly listen for an HTTP redirect on localhost. The Python listener in <<step-3-start-a-local-redirect-listener,Step 3>> provides a minimal reference implementation.
 
 [#step-1-register-your-client]
 == 1. Register your client
@@ -300,7 +312,7 @@ A successful exchange returns `200 OK`:
 }
 ----
 
-`expires_in` is 7,776,000 seconds, or 90 days. This flow does not issue refresh tokens. When the token expires, run the authorization flow again to get a new token.
+`expires_in` is 7,776,000 seconds (90 days). This flow does not issue refresh tokens. See <<token-lifecycle,Token lifecycle>> for expiry and rotation details.
 
 CAUTION: Store the `access_token` securely. Treat it with the same care as a password.
 
@@ -328,7 +340,9 @@ curl -s https://circleci.com/api/v2/me \
 See the link:https://circleci.com/docs/api/v2/[API v2 Reference] for the full list of available endpoints.
 
 [#token-lifecycle]
-== Token lifecycle
+== Manage your token's expiry and rotation
+
+Tokens issued through this flow are standard 90-day CircleCI personal API tokens. The following sections describe how expiry, rotation, and manual revocation work.
 
 [#expiry]
 === Expiry

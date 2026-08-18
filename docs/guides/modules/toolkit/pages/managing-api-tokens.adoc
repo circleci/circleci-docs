@@ -10,7 +10,7 @@ To use the CircleCI API or view details about your pipelines, you will need API 
 
 In CircleCI you can create personal and project API tokens:
 
-*Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2), and grant full read and write permissions.
+*Personal API tokens*:: These tokens are used to interact with the CircleCI APIs (v1 and v2). Tokens created manually through the web app grant full read and write permissions. Tokens created through the xref:oauth-dynamic-client-registration.adoc[OAuth 2.0 Dynamic Client Registration] flow are scoped to the access level (Read, Write, or Admin) chosen by the user during authorization.
 *Project API tokens*:: These tokens allow you to read/write information for specific projects. Project tokens have three scope options: _Status_, _Read Only_, and _Admin_.
 * _Status_ tokens grant read access to the project's build statuses. Used for xref:integration:status-badges.adoc[Embedding Status Badges].
 * _Read Only_ tokens grant read only access to the project's API (v1 only).
