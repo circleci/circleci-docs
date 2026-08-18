@@ -16,6 +16,11 @@ runtime:
   log:
     format: pretty
 content:
+  # Only build the current checkout. Without this, Antora falls back to its
+  # default branch filter (which includes the `v{0..9}*` glob) and pulls in
+  # any remote branch whose name matches (e.g. `v3-api-docs-link`), causing
+  # duplicate-page and missing-object build failures.
+  branches: HEAD
   sources:
   - url: .
     start_path: docs/root
@@ -56,8 +61,8 @@ asciidoc:
     serverversion45: 4.5.5
     serverversion46: 4.6.6
     serverversion47: 4.7.15
-    serverversion48: 4.8.11
-    serverversion49: 4.9.4
+    serverversion48: 4.8.12
+    serverversion49: 4.9.5
     serverversion410: 4.10.0
     terraformversion: 0.15.4
     dockerversion: v28
@@ -65,6 +70,7 @@ asciidoc:
     helmversion: 3.9.2
     helmdiffversion: 3.5.0
     kotsversion: 1.65.0
+    xcodeversion: 26.6.0
     page-toclevels: 6
     idprefix: ""
     idseparator: "-"

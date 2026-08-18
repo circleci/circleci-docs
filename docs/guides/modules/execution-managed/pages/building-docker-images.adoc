@@ -27,7 +27,7 @@ jobs:
       - setup_remote_docker
 ----
 
-Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that is used to spin up the primary container.
+Using `setup_remote_docker` for a job means that all Docker commands execute locally on the same virtual machine that spins up the primary container.
 
 In the CircleCI web app, jobs that run in the remote Docker environment have the **Remote Docker** label, as follows:
 
@@ -48,15 +48,19 @@ A remote Docker environment uses a **Linux VM machine** resource class that corr
 * `small` maps to `medium` (Linux VM).
 * `medium+` maps to `large` (Linux VM).
 
-Gen2 resource classes are also available for remote Docker (for example, `medium.gen2`). The `small.gen2` resource class is not supported for remote Docker; the smallest available size is `medium.gen2`.
+Gen2/Gen3 resource classes are also available for remote Docker (for example, `medium.gen2`/`medium.gen3`). The `small.gen2`/`small.gen3` resource classes are not supported for remote Docker; the smallest available size is `medium.gen2`/`medium.gen3`.
 
-NOTE: Gen2 does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
+[NOTE]
+====
+* **Gen3 resource classes for remote Docker are part of an Open Beta.** See the xref:using-linuxvm.adoc#gen3-beta-notice[Gen3 Beta Release Notes] for full details.
+* Gen2/Gen3 does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
+====
 
 === Arm architecture
 
 Arm-based Docker jobs use an equivalent **Arm machine** resource class for remote Docker.
 
-NOTE: Gen2 resource classes are not currently available for Arm-based remote Docker.
+NOTE: Gen2/Gen3 resource classes are not currently available for Arm-based remote Docker. Arm-based remote Docker also does not currently support the xref:security:ip-ranges.adoc[IP Ranges].
 
 === Docker executor to Remote Docker (Linux/Arm Machine) mapping
 
@@ -101,6 +105,28 @@ NOTE: Gen2 resource classes are not currently available for Arm-based remote Doc
 | `2xlarge.gen2` (Linux VM)
 | `2xlarge+.gen2`
 | `2xlarge+.gen2` (Linux VM)
+|===
+--
+
+[badge="Beta"]
+==== x86 gen3 architecture
+
+[.table-scroll]
+--
+[cols=2*, options="header"]
+|===
+| Docker resource class
+| Remote Docker (Linux Machine) resource class
+| `medium.gen3`
+| `medium.gen3` (Linux VM)
+| `large.gen3`
+| `large.gen3` (Linux VM)
+| `xlarge.gen3`
+| `xlarge.gen3` (Linux VM)
+| `2xlarge.gen3`
+| `2xlarge.gen3` (Linux VM)
+| `2xlarge+.gen3`
+| `2xlarge+.gen3` (Linux VM)
 |===
 --
 
@@ -168,7 +194,7 @@ Below is a breakdown of what is happening during this build's execution:
 [#install-the-docker-cli]
 == Install the Docker CLI
 
-xref:circleci-images.adoc[CircleCI Convenience Images] have the Docker CLI pre-installed. If you are using a third-party image that does not have the Docker CLI installed, link:https://docs.docker.com/install/#supported-platforms[you will need to install it] as part of your job.
+xref:circleci-images.adoc[CircleCI Convenience Images] have the Docker CLI pre-installed. If you are using a third-party image that does not have the Docker CLI installed, link:https://docs.docker.com/install/#supported-platforms[you need to install it] as part of your job.
 
 [,yml]
 ----
@@ -203,6 +229,8 @@ To use Docker 29, use the following tag:
 
 * `docker29`
 
+WARNING: Avoid `docker29` if you use DLC. See xref:optimize:docker-layer-caching.adoc#docker29-incompatibility[Known Issues] for details.
+
 To use Docker 27, use the following tag:
 
 * `docker27`
@@ -227,7 +255,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-2404:current
+      image: ubuntu-2604:current
     steps:
       - checkout
       # start proprietary DB using private Docker image
@@ -246,7 +274,7 @@ jobs:
 [#prefer-same-region-pulls]
 == Prefer same-region image pulls
 
-When `prefer_same_region` is set to `true`, CircleCI will attempt to pull the image from the same region as the VM on a best-effort basis. If the same-region pull fails, it falls back to pulling from the image's original region.
+When you set `prefer_same_region` to `true`, CircleCI attempts to pull the image from the same region as the VM on a best-effort basis. If the same-region pull fails, it falls back to pulling from the image's original region.
 
 [,yaml]
 ----

@@ -55,7 +55,9 @@ Jobs in a serial group move through several states:
 
 * First, the job enters a "queued" state.
 * Once a job starts (reaches its place in the queue), it transitions to a "running" state.
-* Upon completion (whether successful, failed, canceled, unauthorized, or not run), the next job in the queue starts. The queue continues to process jobs even if some jobs fail.
+* Upon completion (whether successful, failed, canceled, unauthorized, or not run), the lock is released and the next job in the queue starts. The queue continues to process jobs even if some jobs fail.
+
+Releasing the lock is separate from whether downstream workflow jobs run. A downstream job that uses `requires` to depend on a serial group job or job group invocation does not run just because the lock was released. By default, it only runs if that job succeeded. For a job group, this means all of the group's leaf jobs must have succeeded. You can change this default and react to other statuses instead of success by specifying the status (`success` and/or `not_run`) alongside the dependency in the downstream job's `requires`. See <<how-job-group-expansion-works,How job group expansion works>>.
 
 === Time limits
 
@@ -199,10 +201,13 @@ include::ROOT:example$orchestration-examples/job-group-multiple-invocations.yml[
 
 When CircleCI processes a job group invocation, it inlines all jobs from the group definition and adds synthetic boundary jobs at each end:
 
-* *Entry job*: Inserted before the root jobs (jobs in the group with no internal `requires` dependencies). With `serial-group`, this is a serial group start job. Without it, this is a no-op group-start job.
-* *Exit job*: Inserted after the leaf jobs (jobs in the group that no other group job depends on). With `serial-group`, this is a serial group end job. Without it, this is a no-op group-end job.
+* *Entry job*: Inserted before the root jobs (jobs in the group with no internal `requires` dependencies). With `serial-group`, this is a serial group start job that acquires the lock. Without it, this is a no-op group-start job.
+* *Exit job*: Inserted after the leaf jobs (jobs in the group that no other group job depends on). This is a no-op job that only runs if the leaf jobs succeed.
+** With `serial-group`, an additional serial group end job (unlock) is inserted after the group-end job. It runs regardless of the group-end job's outcome, so the lock is always released.
 
-The group invocation's `requires` and branch/tag filters are applied to the entry job. Jobs in the workflow that depend on the group invocation using `requires` are rewired to depend on the exit job.
+The group invocation's `requires` and branch/tag filters are applied to the entry job. Jobs in the workflow that depend on the group invocation using `requires` are rewired to depend on the group-end job. By default, this means downstream jobs only run if all leaf jobs in the group succeeded, even though the lock is released regardless of outcome. To run a downstream job on a different outcome, specify the status (`success` and/or `not_run`) alongside the dependency in `requires`.
+
+For a single job with a `serial-group` key (no job group), the same principle applies: downstream jobs depend directly on that job's own success. The serial group end job (unlock) runs regardless of outcome purely to release the lock, and nothing depends on it.
 
 == Troubleshooting serial groups
 
@@ -255,7 +260,7 @@ If your pipeline fails to compile after adding a job group, check for the follow
 
 pass:[<!-- vale off -->]
 
-If a downstream job configured to run on failure does not trigger after a job group fails, it may be waiting on the group's exit job rather than the individual job that failed. Downstream jobs that depend on a job group invocation observe the exit job's status, not the status of individual jobs inside the group.
+If a downstream job configured to run on failure does not trigger after a job group fails, this is because it depends on the group's group-end job. Downstream jobs that depend on a job group invocation react to the group-end job's status, not the status of any one job within the group. If a job within the job-group fails, group-end will have a status of `not_run`, rather than `failure`.
 
 pass:[<!-- vale on -->]
 

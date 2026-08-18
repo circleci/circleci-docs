@@ -43,14 +43,14 @@ All the examples on this page use Fastlane to configure deployment. For each exa
 
 NOTE: The environment variable `FL_OUTPUT_DIR` is the artifact directory where Fastlane logs and a signed `.ipa` file are stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 # .circleci/config.yml
 version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: 15.4.0
+      xcode: {xcodeversion}
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -67,7 +67,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: 15.4.0
+      xcode: {xcodeversion}
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -278,13 +278,13 @@ end
 
 To use the Firebase Fastlane plugin, the Firebase CLI must be installed as part of the job via the `+curl -sL https://firebase.tools | bash+` command:
 
-[,yaml]
+[,yaml,subs=attributes+]
 ----
 version: 2.1
 jobs:
   adhoc:
     macos:
-      xcode: "12.5.1"
+      xcode: {xcodeversion}
     environment:
       FL_OUTPUT_DIR: output
     steps:

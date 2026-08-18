@@ -215,7 +215,6 @@
   --heading-font-weight: 500;
   --alt-heading-font-weight: 500;
   --toc-line-height: 1.2;
-  --nav-line-height: 1.35;
   --footer-line-height: var(--doc-line-height);
   --caption-font-style: italic;
   --caption-font-weight: 300;
@@ -234,7 +233,6 @@
   --nav-height--desktop: var(--body-min-height);
   --nav-panel-menu-height: calc(100% - var(--drawer-height));
   --nav-panel-explore-height: calc(50% + var(--drawer-height));
-  --nav-width: calc(270 / var(--rem-base) * 1rem);
   --spacing: 0.25rem; /* Base spacing unit */
   --toc-top: calc(var(--header-height) + var(--spacing) * 2); /* Sticky TOC sits below the header with an 8px gap (≈10rem/160px). */
   --toc-height: calc(100vh - var(--toc-top) - 6.2rem);

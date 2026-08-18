@@ -1,0 +1,55 @@
+[#gen3-beta-notice]
+.Gen3 Beta Release Notes
+[NOTE]
+====
+**Gen3 is an Open Beta feature.**
+
+* This feature is under active development and behavior may change without notice.
+* We are still validating performance and reliability. We measure SLOs, but do not guarantee them yet.
+* Some jobs may see longer-than-expected queue times as we tune capacity.
+* We recommend testing on non-critical workloads first while we refine the Beta based on customer feedback.
+* **Known issue (temporary):** Enabling Docker Layer Caching (`docker_layer_caching: true`) on gen3 resource classes can currently cause infrastructure failures. We are actively working on a fix. See xref:guides:optimize:docker-layer-caching.adoc#gen3-infrastructure-failures[Known Issues] for details.
+====
+
+[.table-scroll]
+--
+[cols=6*, options="header"]
+|===
+|Class | vCPUs | RAM | Disk Size | Cloud | Server
+
+| `medium.gen3`
+| 2
+| 8 GiB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `large.gen3`
+| 4
+| 16 GiB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `xlarge.gen3`
+| 8
+| 32 GiB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `2xlarge.gen3`
+| 16
+| 64 GiB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+
+| `2xlarge+.gen3`
+| 32
+| 128 GiB
+| 150GB
+| [.circle-green]#**Yes**#
+| [.circle-red]#**No**#
+|===
+--

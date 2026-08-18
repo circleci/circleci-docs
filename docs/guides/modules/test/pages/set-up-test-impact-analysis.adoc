@@ -139,13 +139,13 @@ options:
   test-impact-analysis: true
 ----
 
-== 2. Run locally
+== 2. Run
 
-Use `--doctor` locally to validate the `test-suites.yml` is set up correctly. The CLI runs additional analysis checks when test impact analysis is enabled. If any results look incorrect, action items are provided to resolve them.
+Use the `doctor` command to validate the `test-suites.yml` is set up correctly. The CLI runs additional analysis checks when test impact analysis is enabled. If any results look incorrect, action items are provided to resolve them.
 
 [source,console]
 ----
-$ circleci testsuite "ci tests" --doctor
+$ circleci testsuite doctor "ci tests"
 ----
 
 Follow the steps until all checks pass.
@@ -155,8 +155,6 @@ include::ROOT:partial$tips/testsuite-working-directory.adoc[]
 Once all checks pass, follow the "Next steps" from the doctor output to generate initial impact data locally and send it to CircleCI.
 
 NOTE: Depending on the test runner, the first run of analysis can take a long time because every test atom needs to run analysis.
-
-== 3. Run in CI
 
 Commit the `.circleci/test-suites.yml` changes to your feature branch and push to your VCS. Follow your usual process to merge to your default branch.
 
@@ -294,7 +292,7 @@ jobs:
     steps:
       - setup
       # Disable analysis, run all tests on default branches, impacted tests on feature branches.
-      - run: circleci testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite run "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -303,7 +301,7 @@ jobs:
     steps:
       - setup
       # Disable running tests, default will analyze impacted tests on main.
-      - run: circleci testsuite "ci tests" --run-tests="none"
+      - run: circleci testsuite run "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -343,7 +341,7 @@ jobs:
       - setup
       # Disable analysis.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci testsuite "ci tests" --analyze-tests="none"
+      - run: circleci testsuite run "ci tests" --analyze-tests="none"
       - store_test_results:
           path: test-reports
 
@@ -353,7 +351,7 @@ jobs:
       - setup
       # Disable running tests.
       # Default will analyze impacted tests on main.
-      - run: circleci testsuite "ci tests" --run-tests="none"
+      - run: circleci testsuite run "ci tests" --run-tests="none"
 
   deploy:
     executor: my-executor
@@ -395,7 +393,7 @@ jobs:
       - setup
       # Analyze impacted tests on "develop" branch, otherwise disable.
       # (Default) Run all tests on default branches, run impacted tests on feature branches.
-      - run: circleci testsuite "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
+      - run: circleci testsuite run "ci tests" --analyze-tests=<< pipeline.git.branch == "develop" and "impacted" or "none" >>
       - store_test_results:
           path: test-reports
 ----

@@ -72,14 +72,14 @@ macOS::
 --
 The job `hello-job` spins up a macOS virtual machine running the specified Xcode version. Refer to xref:execution-managed:using-macos.adoc[Using the macOS Execution Environment] page for more information.
 
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 version: 2.1
 
 jobs:
   hello-job:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
     resource_class: m4pro.medium
     steps:
       - checkout # check out the code in the project directory

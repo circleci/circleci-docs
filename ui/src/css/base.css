@@ -313,17 +313,30 @@ html[data-theme="dark"] [data-page-navigation] .nav-link:hover {
   color: var(--dark-link-color);
 }
 
-/* Current page navigation item text color and weight in dark mode */
-html[data-theme="dark"] [data-page-navigation] [data-current] span,
-html[data-theme="dark"] [data-page-navigation] .bg-fog span {
-  color: var(--dark-text-primary);
-  font-weight: 400;
+/* Current page in the left nav (dark mode): blue text, matching light mode.
+   --color-link-on-light remaps to the dark link colour under data-theme="dark". */
+html[data-theme="dark"] [data-page-navigation] [data-current] .nav-link-text {
+  color: var(--color-link-on-light);
+  font-weight: 500;
 }
 
 /* Active parent navigation item (parent of current page) color and weight in dark mode */
 html[data-theme="dark"] [data-page-navigation] [data-active-parent] a,
 html[data-theme="dark"] [data-page-navigation] [data-active-parent] span {
   color: var(--dark-text-muted);
+  font-weight: 600;
+}
+
+/* Current page in the left nav: blue text, no background pill (matches design).
+   Dark mode keeps its own treatment via the higher-specificity rule above. */
+[data-page-navigation] [data-current] .nav-link-text {
+  color: var(--color-link-on-light);
+  font-weight: 500;
+}
+
+/* Active parent (ancestor of the current page) in the left nav: bold, to match
+   the design. Dark mode keeps its own treatment via the rule above. */
+[data-page-navigation] [data-active-parent] .nav-link-text {
   font-weight: 600;
 }
 

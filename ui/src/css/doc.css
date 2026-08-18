@@ -109,40 +109,41 @@
     font-size: 24px;
   }
 
-  /* Gives the breadcrumbs→title gap on mobile, matching the tablet/desktop rule.
-     Uses the same --rem-base calc as the ≥768 rule; with the 16px root and
-     --rem-base:16 this resolves to a true 40px. */
+  /* On mobile, the breadcrumbs→title gap and section-heading top margin are 32px
+     (desktop/tablet uses 24px — see the ≥768 rule below). */
   .doc h1.page {
-    margin-top: calc(40 / var(--rem-base) * 1rem);
+    margin-top: calc(32 / var(--rem-base) * 1rem); /* 32px */
   }
 
   .doc h2 {
     font-size: 20px;
+    margin-top: calc(32 / var(--rem-base) * 1rem); /* 32px */
     margin-bottom: 24px;
   }
 
   .doc h3 {
     font-size: 18px;
-    margin-top: 20px;
+    margin-top: calc(32 / var(--rem-base) * 1rem); /* 32px */
   }
 
   .doc h4 {
     font-size: 16px;
+    margin-top: calc(32 / var(--rem-base) * 1rem); /* 32px */
   }
 }
 
 /* Special case: Page title gets extra top margin on larger screens */
 @media screen and (min-width: 768px) {
   .doc h1.page {
-    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
+    margin-top: calc(24 / var(--rem-base) * 1rem); /* 24px */
     margin-bottom: calc(32 / var(--rem-base) * 1rem); /* 32px */
   }
 
-  /* Section headings should have 40px top margin */
+  /* Section headings should have 24px top margin */
   .doc h2,
   .doc h3,
   .doc h4 {
-    margin-top: calc(40 / var(--rem-base) * 1rem); /* 40px */
+    margin-top: calc(24 / var(--rem-base) * 1rem); /* 24px */
   }
 }
 

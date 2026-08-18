@@ -114,12 +114,12 @@ jobs:
 macOS::
 +
 --
-[source,yaml]
+[source,yaml,subs=attributes+]
 ----
 jobs:
   build:
     macos:
-      xcode: 26.4.0
+      xcode: {xcodeversion}
     resource_class: m4pro.medium
     steps:
     #  ...  other config

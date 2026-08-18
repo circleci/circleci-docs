@@ -42,6 +42,7 @@ Appium
 Arm
 Artifactory
 [Aa]rchitected
+Alertmanager
 Arweave
 Asciidoctor
 Atlassian
@@ -228,6 +229,7 @@ Leiningen
 Likert
 Linux
 [Ll]iveness
+[Ll]oopback
 LLMs?
 LLMOps
 [Ll]ockfiles?
@@ -252,6 +254,9 @@ NUnit
 OAuth
 OIDC
 OIDC Identity Provider
+PKCE
+DCR
+PAR
 Okta
 OOM
 OPA
@@ -334,6 +339,7 @@ SELinux
 [Ss]harded
 \b[Ss]ingle sign-on\b
 SLAs?
+SLOs?
 Slanger
 [Ss]ignup
 SKUs?
@@ -427,3 +433,4 @@ LangSmith
 [Tt]estsuite
 containerDisk
 routable
+DMs

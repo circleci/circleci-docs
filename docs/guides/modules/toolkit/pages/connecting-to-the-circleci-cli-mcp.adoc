@@ -1,7 +1,10 @@
 = Connecting to the CircleCI CLI MCP
-:page-platform: Cloud, Server v4+
+:page-platform: Cloud
+:page-badge: Preview
 :page-description: Enable the CircleCI CLI's built-in MCP server so AI coding assistants like Claude, Cursor, and VS Code can inspect your CI runs locally.
 :experimental:
+
+NOTE: The CircleCI CLI MCP server is currently in preview. You can expect changes to the available tools during this phase. If you have any issues, questions, or feedback, post on our link:https://discuss.circleci.com/t/hosted-and-cli-mcp-server-feedback/54827[community forum].
 
 The CircleCI CLI includes a built-in MCP server that runs locally on your machine, using your existing CLI authentication. For a comparison with CircleCI's hosted MCP server, see the xref:circleci-mcp-overview.adoc#hosted-vs-cli-mcp[Hosted and CLI MCP Comparison] section of the CircleCI MCP overview page.
 

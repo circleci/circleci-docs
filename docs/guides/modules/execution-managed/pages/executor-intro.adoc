@@ -107,16 +107,16 @@ To access the macOS execution environment, use the `macos` executor and specify 
 
 NOTE: If you want to run a macOS build on CircleCI Server, you will need to use xref:execution-runner:runner-overview.adoc[Self-hosted Runner].
 
-[,yml]
+[,yml,subs=attributes+]
 ----
 jobs:
   build: # name of your job
     macos: # executor type
-      xcode: 14.2.0
+      xcode: {xcodeversion}
 
     steps:
       # Commands run in a macOS virtual machine environment
-      # with Xcode 14.2.0 installed
+      # with Xcode {xcodeversion} installed
 ----
 
 Find out more about the macOS execution environment on the xref:using-macos.adoc[Using macOS] page.
