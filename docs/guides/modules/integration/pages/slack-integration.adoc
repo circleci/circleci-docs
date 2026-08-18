@@ -16,7 +16,7 @@ This guide explains how to:
 
 The Slack integration is the recommended way to set up workflow notifications in Slack for projects on CircleCI Cloud. The Slack integration offers several advantages over configuring notifications manually:
 
-* Install the Slack app once at the organization level, then turn it on per project. There is no app setup to repeat for every new project.
+* Install the Slack app once at the organization level, then turn it on per project. No app setup needed for every new project.
 * Notifications work without changes to your CircleCI config file. You do not need to add an orb or extra steps to your pipelines.
 * You do not need to create a Slack app or store OAuth tokens in a context or environment variable.
 * Link projects to channels and manage notification preferences from your project settings in the web app. Any organization member with write access to a project can configure it.

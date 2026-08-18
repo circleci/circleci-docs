@@ -79,7 +79,7 @@ The following commentary describes what occurs in the main elements of the sampl
 
 Now you have a basic `config.yml` file set up, you can connect CircleCI with Slack.
 
-IMPORTANT: If you commit your `config.yml` file at this point and trigger a pipeline, your build will fail. This is because you need to add your Slack credentials in the next step.
+IMPORTANT: If you commit your `config.yml` file at this point and trigger a pipeline, your build will fail. You need to add your Slack credentials in the next step.
 
 [#connect-circleci-with-slack]
 == 2. Connect CircleCI with Slack
@@ -126,7 +126,7 @@ pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 .Guides:Root:Slack Orb Permissions
 image::guides:ROOT:slack-orb-permissions.png[Slack app Permissions]
 +
-. On the _OAuth & Permissions_ page, scroll down to **Scopes**. This is where you need to create the permissions for your Slack app.
+. On the _OAuth & Permissions_ page, scroll down to **Scopes**. Create the permissions for your Slack app here.
 +
 .Guides:Root:Slack Orb Add Scope
 image::guides:ROOT:slack-orb-add-scope.png[Add an OAuth Scope]
