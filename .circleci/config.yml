@@ -197,12 +197,6 @@ workflows:
   main:
     jobs:
       - vale/lint:
-          # Pinned: vale v3.17.0 ignores the `prefix` key in
-          # styles/circleci-docs/CapitalizationDocs.yml, which turns lettered
-          # headings ("a. Create a context") into errors across ~113 headings.
-          executor:
-            name: vale/default
-            tag: v3.16.0
           reference_branch: main
           base_dir: docs
           filters: pipeline.git.branch != "main"
