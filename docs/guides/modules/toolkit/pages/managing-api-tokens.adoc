@@ -76,7 +76,7 @@ employee leaves the company or when a token has been considered leaked.
 [#rotating-a-project-api-token]
 ==== Rotating a project API token
 
-. In the CircleCI application, go to your project's settings. One way to get there is to select *Projects* in the sidebar, then the ellipsis (`+...+`) next to your project and select *Project Settings*.
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Select *API Permissions*.
 . Select the *X* in the *Remove* column for the token you wish to replace.
 When the confirmation window appears, enter the text `DELETE` in the form and click the *Delete API Token* button.
