@@ -5,6 +5,8 @@
 
 This guide gets you started with the CircleCI Slack orb.
 
+NOTE: *Using CircleCI Cloud?* We recommend the xref:guides:integration:slack-integration.adoc[Slack Integration] for workflow-status notifications instead of using the Slack orb. Set up once for your organization, no `config.yml` changes needed.
+
 [#introduction]
 == Introduction
 
@@ -77,7 +79,7 @@ The following commentary describes what occurs in the main elements of the sampl
 
 Now you have a basic `config.yml` file set up, you can connect CircleCI with Slack.
 
-IMPORTANT: If you commit your `config.yml` file at this point and trigger a pipeline, your build will fail. This is because you need to add your Slack credentials in the next step.
+IMPORTANT: If you commit your `config.yml` file at this point and trigger a pipeline, your build will fail. You need to add your Slack credentials in the next step.
 
 [#connect-circleci-with-slack]
 == 2. Connect CircleCI with Slack
@@ -93,6 +95,7 @@ In this step, you will:
 
 The Slack orb is an application that executes as part of your job on CircleCI. Before you can receive notifications, you need to authenticate your application.
 
+[#create-a-slack-app]
 ==== i. Create a Slack app
 
 . Visit https://api.slack.com/apps[*Your Apps* on the Slack API website] and select the green *Create an App* button.
@@ -120,7 +123,7 @@ image::guides:ROOT:slack-orb-name-app.png[Name your Slack app]
 .Guides:Root:Slack Orb Permissions
 image::guides:ROOT:slack-orb-permissions.png[Slack app Permissions]
 +
-. On the _OAuth & Permissions_ page, scroll down to **Scopes**. This is where you need to create the permissions for your Slack app.
+. On the _OAuth & Permissions_ page, scroll down to **Scopes**. Create the permissions for your Slack app here.
 +
 .Guides:Root:Slack Orb Add Scope
 image::guides:ROOT:slack-orb-add-scope.png[Add an OAuth Scope]

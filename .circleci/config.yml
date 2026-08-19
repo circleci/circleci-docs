@@ -197,6 +197,14 @@ workflows:
   main:
     jobs:
       - vale/lint:
+          # Pinned: vale v3.17.0+ truncates scope: heading text to its first
+          # sentence-fragment whenever any scope: sentence rule is loaded,
+          # which turns lettered/numbered headings ("a. Create a context")
+          # into errors. Filed upstream with vale-cli/vale. Unpin once fixed
+          # and released.
+          executor:
+            name: vale/default
+            tag: v3.16.0
           reference_branch: main
           base_dir: docs
           filters: pipeline.git.branch != "main"
