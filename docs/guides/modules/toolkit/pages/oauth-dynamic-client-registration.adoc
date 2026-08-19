@@ -195,6 +195,27 @@ printf 'https://app.circleci.com/oauth/authorize?response_type=code&client_id=%s
   "$STATE"
 ----
 
+NOTE: The URL contains the following parameters. This is for reference only — use the shell command above to generate the correctly encoded URL.
++
+`response_type=code`::: Requests an authorization code.
+`client_id`::: Your registered client ID from Step 1.
+`redirect_uri`::: The loopback address where CircleCI sends the authorization code.
+`code_challenge` and `code_challenge_method=S256`::: The PKCE challenge generated in Step 2.
+`state`::: The CSRF protection value generated in Step 2.
+
+=== URL parameter reference
+
+[,text]
+----
+https://app.circleci.com/oauth/authorize
+  ?response_type=code
+  &client_id=<CLIENT_ID>
+  &redirect_uri=<REDIRECT_URI>
+  &code_challenge=<CODE_CHALLENGE>
+  &code_challenge_method=S256
+  &state=<STATE>
+----
+
 Open the printed URL in a browser. If you are not already logged in to CircleCI, you are redirected to the login page first, then returned to the consent screen.
 
 On the consent screen:
