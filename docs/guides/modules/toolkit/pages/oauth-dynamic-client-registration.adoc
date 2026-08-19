@@ -33,7 +33,7 @@ The OAuth flow consists of four high-level stages:
 * The redirect URI used during registration and authorization must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025-65535, and no query parameters. This restriction ensures the authorization code is delivered only to the local machine running the tool.
 * PKCE with S256 is mandatory. Plain code challenges are not accepted.
 * `state` is required on every authorization request. Omitting it returns a 400 error.
-* Your tool needs a way to open a browser and briefly listen for an HTTP redirect on localhost. The Python listener in <<step-3-start-a-local-redirect-listener,Step 3>> provides a minimal reference implementation.
+* Your tool needs a way to open a browser and briefly listen for an HTTP redirect on localhost. The Python listener in <<step-2-start-a-local-redirect-listener,Step 2>> provides a minimal reference implementation.
 
 [#discovery-document]
 === OAuth endpoints
@@ -58,38 +58,6 @@ curl -s https://app.circleci.com/.well-known/oauth-authorization-server | jq .
   "code_challenge_methods_supported": ["S256"]
 }
 ----
-
-[#access-levels]
-== Access levels
-
-During the authorization consent screen, the user chooses the access level to grant the requesting tool.
-
-[.table-scroll]
---
-[cols="1,3", options="header"]
-|===
-| Access level
-| Permissions
-
-| Read
-| Read-only access to all resources the authorizing user can read.
-
-| Write
-| Read and write access to all resources the authorizing user can read and write.
-
-| Admin
-| Full access to all permissions the authorizing user holds, which may include org management and billing settings for organizations where the user is an admin.
-|===
---
-
-These scopes restrict what the token can do. They cannot grant more access than the authorizing user already holds in CircleCI. A user with read-only org permissions who selects Admin, for example, receives a token scoped to their actual permissions, not elevated ones.
-
-NOTE: Personal API tokens created manually through the web app always carry the user's full permissions. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization.
-
-[#sso-organizations]
-=== SSO organizations
-
-If the authorizing user belongs to one or more SSO-enabled organizations, the consent screen includes an SSO organizations section. The user can authorize individual SSO orgs to be included in the token's scope. SSO org access can also be managed later from the OAuth Clients page in user settings.
 
 [#step-1-register-your-client]
 == 1. Register your client
@@ -264,8 +232,31 @@ Open the printed URL in a browser. If you are not already logged in to CircleCI,
 
 On the consent screen:
 
-. Select the access level to grant the tool: Read, Write, or Admin. See <<access-levels,Access levels>> for a description of each. Choose the minimum level your tool requires.
-. If you belong to SSO-enabled organizations, the SSO organizations section appears below. Select *Authorize* next to any orgs you want to include in the token's scope.
+. Select the access level to grant the tool. Choose the minimum level your tool requires.
++
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Access level
+| Permissions
+
+| Read
+| Read-only access to all resources the authorizing user can read.
+
+| Write
+| Read and write access to all resources the authorizing user can read and write.
+
+| Admin
+| Full access to all permissions the authorizing user holds, which may include org management and billing settings for organizations where the user is an admin.
+|===
+--
++
+These scopes cannot grant more access than the authorizing user already holds in CircleCI. A user with read-only org permissions who selects Admin, for example, receives a token scoped to their actual permissions, not elevated ones.
++
+NOTE: Personal API tokens created manually through the web app always carry the user's full permissions. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization.
+
+. If you belong to SSO-enabled organizations, an SSO organizations section appears below the access level selector. Select *Authorize* next to any orgs you want to include in the token's scope. SSO org access can also be managed later from the OAuth Clients page in user settings.
 . Select *Allow* to approve, or select *Deny* to cancel the flow.
 
 CircleCI redirects the browser to your listener, which prints:
