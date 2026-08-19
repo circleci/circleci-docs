@@ -95,9 +95,8 @@ In this step, you will:
 
 The Slack orb is an application that executes as part of your job on CircleCI. Before you can receive notifications, you need to authenticate your application.
 
-pass:[<!-- vale circleci-docs.CapitalizationDocs = NO -->]
+[#create-a-slack-app]
 ==== i. Create a Slack app
-pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 
 . Visit https://api.slack.com/apps[*Your Apps* on the Slack API website] and select the green *Create an App* button.
 +
@@ -117,9 +116,7 @@ image::guides:ROOT:slack-orb-name-app.png[Name your Slack app]
 . Select the green **Create App** button.
 
 [#set-your-app-permissions]
-pass:[<!-- vale circleci-docs.CapitalizationDocs = NO -->]
 ==== ii. Set your app permissions
-pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 
 . On the Basic Information page, locate the **Permissions** tile under _Add features and functionality_.
 +
@@ -143,9 +140,7 @@ image::guides:ROOT:slack-orb-bot-token-scopes.png[Add Bot Token Scopes]
 TIP: To receive Slack notifications in a private channel, you need to add your Slack app to that channel. Open the channel, select the photos of the channel members in the top right-hand corner, then select the *Integrations* tab. From here, you can add an app.
 
 [#install-your-app]
-pass:[<!-- vale circleci-docs.CapitalizationDocs = NO -->]
 ==== iii. Install your app
-pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 
 . Once you have created your scopes, scroll up to the top of the page and select the **Install to Workspace** button.
 +
@@ -164,9 +159,7 @@ image::guides:ROOT:slack-orb-allow.png[Allow access]
 image::guides:ROOT:slack-orb-copy-token.png[Copy OAuth Token]
 
 [#creating-a-context]
-pass:[<!-- vale circleci-docs.CapitalizationDocs = NO -->]
 === b. Create a context
-pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 
 In CircleCI, contexts allow you to secure and share environment variables across projects. Once you have created a context with your Slack credentials, you and your colleagues will be able to reuse them.
 
@@ -215,9 +208,7 @@ workflows:
 NOTE: You can reuse this context in other jobs and projects.
 
 [#trigger-an-alert]
-pass:[<!-- vale circleci-docs.CapitalizationDocs = NO -->]
 === c. Trigger an alert
-pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 
 . Commit your `config.yml` file (and push it, if you are working remotely). This triggers your CircleCI pipeline, which uses the Slack orb with your credentials.
 +
@@ -279,9 +270,7 @@ Commit your updated `config.yml` file (and push it, if you are working remotely)
 image::guides:ROOT:slack-orb-deployment-successful.png[Deployment Successful alert]
 
 [#including-additional-parameters]
-pass:[<!-- vale circleci-docs.CapitalizationDocs = NO -->]
 === a. Including additional parameters
-pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 
 You can also include a mention for a failed job, to alert a specific person or team:
 
@@ -316,9 +305,7 @@ To restrict your alert to a specific branch, add a `branch_pattern` parameter:
 Restricting your alert to a specific branch is useful if, for example, you do not want to receive alerts for feature branches.
 
 [#use-the-slack-block-kit-builder]
-pass:[<!-- vale circleci-docs.CapitalizationDocs = NO -->]
 === b. Use the Slack Block Kit Builder
-pass:[<!-- vale circleci-docs.CapitalizationDocs = YES -->]
 
 If you would like to further customize your notifications, you can use the https://api.slack.com/block-kit/building[Slack Block Kit Builder]. This framework allows you to create sophisticated notifications, using images, form fields, and other interactive elements.
 
