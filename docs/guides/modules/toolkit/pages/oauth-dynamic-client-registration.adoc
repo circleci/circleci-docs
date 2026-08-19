@@ -1,12 +1,12 @@
 = OAuth 2.0 API access with Dynamic Client Registration
-:pag-show-readtime: true
+:page-show-readtime: true
 :page-platform: Cloud
 :page-description: Register OAuth 2.0 clients dynamically and use the authorization code flow with PKCE to obtain a CircleCI personal API token.
 :experimental:
 
 This guide is for you if you are building a tool or integration that needs to access the CircleCI API on behalf of a user.
 
-CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use the steps in this guide to let your tool get a personal API token on behalf of a user without requiring a pre-shared client secret or manual token creation in the CircleCI web app.
+CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use this guide to get your tool a personal API token on behalf of a user. No pre-shared client secret or manual token creation in the CircleCI web app is needed.
 
 Using Dynamic Client Registration has the following benefits:
 
@@ -58,7 +58,7 @@ curl -s -X POST https://app.circleci.com/oauth/register \
   }' | jq .
 ----
 
-A successful registration returns a JSON object containing your client_id. The JSON object is retuned with a `201 Created` status code:
+A successful registration returns a JSON object containing your `client_id`, with a `201 Created` status code:
 
 [,json]
 ----
@@ -90,10 +90,11 @@ CircleCI also supports link:https://datatracker.ietf.org/doc/html/rfc9126[RFC 91
 [#step-2-start-a-local-redirect-listener]
 == 2. Start a local redirect listener
 
-Before opening the authorization URL, start a process that receives the redirect from CircleCI. The listener below generates the PKCE values, prints them, then waits for CircleCI to redirect the browser to `\http://127.0.0.1:9090/callback` with the authorization code.
+The listener below generates the PKCE values, prints them, then waits for CircleCI to redirect the browser to `\http://127.0.0.1:9090/callback` with the authorization code.
 
-Run this in a separate terminal:
-
+. Run the following Python code in a separate terminal:
++
+.Start the listener in a separate terminal
 [,python]
 ----
 python3 -c "
@@ -136,8 +137,9 @@ with http.server.HTTPServer(('127.0.0.1', 9090), Handler) as s:
 "
 ----
 
-Once the listener is running, copy the printed values into your other terminal:
+. Once the listener is running, copy the printed values into your other terminal:
 
+.Copy the printed values
 [,shell]
 ----
 CODE_VERIFIER="<paste verifier>"
@@ -148,7 +150,7 @@ STATE="<paste state>"
 [#understanding-pkce-values]
 === Understanding PKCE values
 
-PKCE replaces the client secret. CircleCI requires the S256 challenge method — plain code challenges are not accepted. The listener generates all three values automatically using S256, but the following table describes what each one is and why it is needed — useful if you are implementing the flow in your own language rather than using the listener directly.
+PKCE replaces the client secret. CircleCI requires the S256 challenge method — plain code challenges are not accepted. The listener generates all three values automatically using S256. The following table describes each value — useful if you are implementing the flow in your own language rather than using the listener directly.
 
 [.table-scroll]
 --
@@ -186,8 +188,8 @@ STATE=$(openssl rand -base64 16 | tr -d '=\n' | tr '+/' '-_')
 [#step-3-open-the-authorization-url]
 == 3. Open the authorization URL
 
-Construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, then open it in a browser. The `state` parameter is required. Omitting it returns a 400 error.
-
+. To construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, run the following shell command. The `state` parameter is required. Omitting it returns a 400 error:
++
 [,shell]
 ----
 REDIRECT_URI="http://127.0.0.1:9090/callback"
@@ -199,32 +201,17 @@ printf 'https://app.circleci.com/oauth/authorize?response_type=code&client_id=%s
   "$STATE"
 ----
 
-The URL contains the following parameters. Use the shell command above to generate the correctly encoded URL.
-
-`response_type=code`::: Requests an authorization code.
-`client_id`::: Your registered client ID from Step 1.
-`redirect_uri`::: The loopback address where CircleCI sends the authorization code.
-`code_challenge` and `code_challenge_method=S256`::: The PKCE challenge generated in Step 2.
-`state`::: The CSRF protection value generated in Step 2.
-
-=== URL parameter reference
-
-[,text]
-----
-https://app.circleci.com/oauth/authorize
-  ?response_type=code
-  &client_id=<CLIENT_ID>
-  &redirect_uri=<REDIRECT_URI>
-  &code_challenge=<CODE_CHALLENGE>
-  &code_challenge_method=S256
-  &state=<STATE>
-----
-
+. The printed URL contains the following parameters:
++
+* `response_type=code`: Requests an authorization code.
+* `client_id`: Your registered client ID from Step 1.
+* `redirect_uri`: The loopback address where CircleCI sends the authorization code.
+* `code_challenge` and `code_challenge_method=S256`: The PKCE challenge generated in Step 2.
+* `state`: The CSRF protection value generated in Step 2.
++
 Open the printed URL in a browser. If you are not already logged in to CircleCI, you are redirected to the login page first, then returned to the consent screen.
 
-On the consent screen:
-
-. Select the access level to grant the tool. Choose the minimum level your tool requires.
+. On the consent screen select the access level to grant the tool. Choose the minimum level your tool requires.
 +
 [.table-scroll]
 --
@@ -251,18 +238,18 @@ NOTE: Personal API tokens created manually through the web app always carry the 
 . If you belong to SSO-enabled organizations, an SSO organizations section appears below the access level selector. Select *Authorize* next to any orgs you want to include in the token's scope. SSO org access can also be managed later from the OAuth Clients page in user settings.
 . Select *Allow* to approve, or select *Deny* to cancel the flow.
 
-CircleCI redirects the browser to your listener, which prints:
-
+. CircleCI redirects the browser to your listener, which prints:
++
 [,text]
 ----
 CODE : 5fa2b3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9
 STATE: rAnDoMsTaTe12345
 ----
-
++
 CAUTION: Before proceeding, verify that the `STATE` value printed by the listener matches the `STATE` value you sent in the authorization URL. A mismatch indicates a possible CSRF attack. If the values do not match, abort the flow.
 
-Copy the code into a shell variable in your working terminal:
-
+. Copy the code into a shell variable in your working terminal:
++
 [,shell]
 ----
 CODE="5fa2b3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9"
@@ -273,6 +260,8 @@ CODE="5fa2b3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9"
 
 The authorization code is single-use and short-lived. Exchange it before it expires.
 
+. Run the following curl command to exchange the code for a token:
++
 [,shell]
 ----
 curl -s -X POST https://app.circleci.com/oauth/token \
