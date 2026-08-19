@@ -30,41 +30,17 @@ The OAuth flow consists of four high-level stages:
 [#prerequisites]
 == Prerequisites
 
-* The redirect URI used during registration and authorization must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025-65535, and no query parameters. This restriction ensures the authorization code is delivered only to the local machine running the tool.
-* PKCE with S256 is mandatory. Plain code challenges are not accepted.
-* `state` is required on every authorization request. Omitting it returns a 400 error.
-* Your tool needs a way to open a browser and briefly listen for an HTTP redirect on localhost. The Python listener in <<step-2-start-a-local-redirect-listener,Step 2>> provides a minimal reference implementation.
-
-[#discovery-document]
-=== OAuth endpoints
-
-All OAuth endpoints are published in a standard discovery document:
-
-[,shell]
-----
-curl -s https://app.circleci.com/.well-known/oauth-authorization-server | jq .
-----
-
-[,json]
-----
-{
-  "issuer": "https://app.circleci.com",
-  "authorization_endpoint": "https://app.circleci.com/oauth/authorize",
-  "token_endpoint": "https://app.circleci.com/oauth/token",
-  "pushed_authorization_request_endpoint": "https://app.circleci.com/oauth/par",
-  "registration_endpoint": "https://app.circleci.com/oauth/register",
-  "response_types_supported": ["code"],
-  "grant_types_supported": ["authorization_code"],
-  "code_challenge_methods_supported": ["S256"]
-}
-----
+* A CircleCI account.
+* `curl` installed.
+* `python3` installed — used for the local redirect listener in Step 2.
+* `jq` installed (optional) — used in the examples to format JSON output. Install with `brew install jq` on macOS.
 
 [#step-1-register-your-client]
 == 1. Register your client
 
 Perform client registration once per tool. Send a POST request to the registration endpoint with a JSON body describing your client. No authentication header is required.
 
-IMPORTANT: The `redirect_uri` in this step must match the `redirect_uri` you use later in the authorization URL and token exchange.
+IMPORTANT: The `redirect_uri` must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025–65535 and no query parameters. It must also match exactly the `redirect_uri` you use in the authorization URL and token exchange.
 
 [,shell]
 ----
@@ -100,7 +76,7 @@ TIP: Register only once per tool. Store the `client_id` alongside your tool's co
 [#advanced-pushed-authorization-requests]
 === Advanced: pushed authorization requests
 
-CircleCI also supports link:https://datatracker.ietf.org/doc/html/rfc9126[RFC 9126 Pushed Authorization Requests] (PAR) via `POST /oauth/par`. PAR sends the authorization parameters directly to the server before the browser redirect, which provides an additional layer of request integrity. It is optional. The standard front-channel authorization URL described in <<step-4-open-the-authorization-url,Step 4>> is validated with the same rules.
+CircleCI also supports link:https://datatracker.ietf.org/doc/html/rfc9126[RFC 9126 Pushed Authorization Requests] (PAR) via `POST /oauth/par`. PAR sends the authorization parameters directly to the server before the browser redirect, which provides an additional layer of request integrity. It is optional. The standard front-channel authorization URL described in <<step-3-open-the-authorization-url,Step 3>> is validated with the same rules.
 
 [#step-2-start-a-local-redirect-listener]
 == 2. Start a local redirect listener
@@ -163,7 +139,7 @@ STATE="<paste state>"
 [#understanding-pkce-values]
 === Understanding PKCE values
 
-PKCE replaces the client secret. The listener generates three values automatically, but the following table describes what each one is and why it is needed — useful if you are implementing the flow in your own language rather than using the listener directly.
+PKCE replaces the client secret. CircleCI requires the S256 challenge method — plain code challenges are not accepted. The listener generates all three values automatically using S256, but the following table describes what each one is and why it is needed — useful if you are implementing the flow in your own language rather than using the listener directly.
 
 [.table-scroll]
 --
@@ -201,7 +177,7 @@ STATE=$(openssl rand -base64 16 | tr -d '=\n' | tr '+/' '-_')
 [#step-3-open-the-authorization-url]
 == 3. Open the authorization URL
 
-Construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, then open it in a browser.
+Construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, then open it in a browser. The `state` parameter is required — omitting it returns a 400 error.
 
 [,text]
 ----
