@@ -1,13 +1,14 @@
 = OAuth 2.0 API access with Dynamic Client Registration
+:pag-show-readtime: true
 :page-platform: Cloud
 :page-description: Register OAuth 2.0 clients dynamically and use the authorization code flow with PKCE to obtain a CircleCI personal API token.
 :experimental:
 
-This guide is for developers building a tool, CLI, or integration that needs to access the CircleCI API on behalf of a user.
+This guide is for you if you are building a tool or integration that needs to access the CircleCI API on behalf of a user.
 
-CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use this flow to let your tool get a personal API token on behalf of a user without requiring a pre-shared client secret or manual token creation in the CircleCI web app.
+CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use the steps in this guide to let your tool get a personal API token on behalf of a user without requiring a pre-shared client secret or manual token creation in the CircleCI web app.
 
-Using this flow gives you the following benefits:
+Using Dynamic Client Registration has the following benefits:
 
 * No long-lived secrets stored in your tool's configuration. PKCE secures the flow instead of a client secret.
 * User-controlled access scopes. The user chooses the permission level (Read, Write, or Admin) at authorization time.
@@ -31,23 +32,26 @@ The OAuth flow consists of four high-level stages:
 == Prerequisites
 
 * A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
-* `curl` installed. Install with `brew install curl` on macOS.
-* `python3` installed. Used for the local redirect listener in Step 2. Install with `brew install python3` on macOS.
-* `jq` installed (optional). Used in the examples to format JSON output. Install with `brew install jq` on macOS.
+* The following tools installed:
+** `curl` installed.
+** `python3` installed. Used for the local redirect listener in <<step-2-start-a-local-redirect-listener,Step 2>>.
+** `jq` installed (optional). Used in the examples to format JSON output.
 
 [#step-1-register-your-client]
 == 1. Register your client
 
 Perform client registration once per tool. Send a POST request to the registration endpoint with a JSON body describing your client. No authentication header is required.
 
-IMPORTANT: The `redirect_uri` must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025–65535 and no query parameters. It must also match exactly the `redirect_uri` you use in the authorization URL and token exchange.
+Replace `<your-tool-name>` with the name of your tool. You can also change the port (`9090`) and path (`/callback`) in the redirect URI to any values that suit your tool. The `grant_types` and `response_types` fields must remain as shown.
+
+IMPORTANT: The `redirect_uri` must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025–65535 and no query parameters. Use the same value in Steps 3 and 4.
 
 [,shell]
 ----
 curl -s -X POST https://app.circleci.com/oauth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "client_name": "My Tool",
+    "client_name": "<your-tool-name>",
     "redirect_uris": ["http://127.0.0.1:9090/callback"],
     "grant_types": ["authorization_code"],
     "response_types": ["code"]
@@ -195,8 +199,8 @@ printf 'https://app.circleci.com/oauth/authorize?response_type=code&client_id=%s
   "$STATE"
 ----
 
-NOTE: The URL contains the following parameters. This is for reference only — use the shell command above to generate the correctly encoded URL.
-+
+The URL contains the following parameters. Use the shell command above to generate the correctly encoded URL.
+
 `response_type=code`::: Requests an authorization code.
 `client_id`::: Your registered client ID from Step 1.
 `redirect_uri`::: The loopback address where CircleCI sends the authorization code.
