@@ -10,7 +10,14 @@ import (
 	"github.com/getkin/kin-openapi/openapi3"
 )
 
-const specialInstructions = "## Special Instructions\n\n" +
+const specialInstructions = "## Recommended: Use API v3\n\n" +
+	"**CircleCI API v3 is the latest and recommended API version.** For new integrations and projects, please use API v3 instead:\n\n" +
+	"- **API v3 Documentation**: <https://circleci.com/docs/api/v3/>\n" +
+	"- Modern RESTful design with improved features and performance\n" +
+	"- Comprehensive endpoint coverage\n" +
+	"- Preferred for all new integrations\n\n" +
+	"The information below describes API v2, which is still supported but not recommended for new projects.\n\n" +
+	"## API v2 Special Instructions\n\n" +
 	"- Base URL: `https://circleci.com/api/v2`\n" +
 	"- Authentication: send a personal API token in the `Circle-Token` header. Generate one at <https://app.circleci.com/settings/user/tokens>.\n" +
 	"- `project_id` parameters are UUIDs (not the `gh/org/repo` slug used by older endpoints).\n" +

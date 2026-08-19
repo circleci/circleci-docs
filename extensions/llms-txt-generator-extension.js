@@ -197,7 +197,13 @@ function generateLlmsTxt (playbook, contentCatalog) {
 
   // API Documentation
   sections.push('## API Documentation\n')
-  sections.push('CircleCI API v2 documentation is available in LLM-friendly format:\n')
+  sections.push('**RECOMMENDED: Use API v3** - CircleCI API v3 is the latest and recommended API version:\n')
+  sections.push(`- **API v3 Documentation**: ${siteUrl}/api/v3/`)
+  sections.push(`  - Latest API version with improved features and performance`)
+  sections.push(`  - Modern RESTful design`)
+  sections.push(`  - Comprehensive endpoint coverage`)
+  sections.push(`  - Preferred for all new integrations\n`)
+  sections.push('CircleCI API v2 documentation is also available in LLM-friendly format:\n')
   sections.push(`- **API Index for LLMs**: ${siteUrl}/api/v2/llms.txt`)
   sections.push(`  - Structured index of all API endpoints`)
   sections.push(`  - Tag-grouped operations with descriptions`)
