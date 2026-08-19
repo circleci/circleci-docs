@@ -69,7 +69,12 @@ A successful registration returns a JSON object containing your client_id. The J
 }
 ----
 
-Save the `client_id`. Use it for every subsequent authorization request. Because no client secret is issued, this value does not need to be treated as sensitive. PKCE protects the flow instead.
+Save the `client_id` as a shell variable. Use it for every subsequent authorization request. Because no client secret is issued, this value does not need to be treated as sensitive. PKCE protects the flow instead.
+
+[,shell]
+----
+CLIENT_ID="<your-client-id>"
+----
 
 TIP: Register only once per tool. Store the `client_id` alongside your tool's configuration, and reuse it for all future authorizations. Re-registering creates a new, separate client.
 
@@ -177,24 +182,10 @@ STATE=$(openssl rand -base64 16 | tr -d '=\n' | tr '+/' '-_')
 [#step-3-open-the-authorization-url]
 == 3. Open the authorization URL
 
-Construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, then open it in a browser. The `state` parameter is required — omitting it returns a 400 error.
-
-[,text]
-----
-https://app.circleci.com/oauth/authorize?
-  response_type=code
-  &client_id=019847ab-1234-7def-89ab-cdef01234567
-  &redirect_uri=http%3A%2F%2F127.0.0.1%3A9090%2Fcallback
-  &code_challenge=<CODE_CHALLENGE>
-  &code_challenge_method=S256
-  &state=<STATE>
-----
-
-To build and print the full URL in one shell command:
+Construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, then open it in a browser. The `state` parameter is required. Omitting it returns a 400 error.
 
 [,shell]
 ----
-CLIENT_ID="019847ab-1234-7def-89ab-cdef01234567"
 REDIRECT_URI="http://127.0.0.1:9090/callback"
 
 printf 'https://app.circleci.com/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s&code_challenge=%s&code_challenge_method=S256&state=%s\n' \
