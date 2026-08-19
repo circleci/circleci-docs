@@ -208,7 +208,7 @@ For a full list of SSH configuration options, refer to the link:https://github.c
 helm upgrade --wait --timeout=5m <release-name> container-agent/container-agent -n <namespace> -f values.yaml
 ----
 
-. Wait for the SSH link:https://gateway-api.sigs.k8s.io/api-types/gateway/#gateway[Gateway] to be programmed:
+. Wait for the SSH link:https://gateway-api.sigs.k8s.io/reference/api-types/gateway/#gateway[Gateway] to be programmed:
 +
 [source,shell]
 ----

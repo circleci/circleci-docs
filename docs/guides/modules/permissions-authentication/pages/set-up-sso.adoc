@@ -4,8 +4,7 @@
 :experimental:
 
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
-for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
-
+for further details.
 == Set up SAML SSO
 
 To set up SAML SSO, you must have the _Organization Admin_ role. For information on roles and permissions, see the xref:roles-and-permissions-overview.adoc[Roles and Permissions Overview].

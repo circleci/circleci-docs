@@ -79,7 +79,6 @@ CircleCI expects the server that responds to a webhook will return a 2xx respons
 
 Webhook requests may be duplicated. To deduplicate (prevent requests from being duplicated for a specific event), use the xref:reference:ROOT:outbound-webhooks-reference.adoc#common-top-level-keys[ID Property] in the webhook payload for identification.
 
-If you have feedback about timeouts and retries, link:https://circleci.canny.io/webhooks[get in touch] with our team.
 
 [#headers]
 === Outbound webhook headers

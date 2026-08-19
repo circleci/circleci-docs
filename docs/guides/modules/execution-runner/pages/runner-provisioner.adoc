@@ -35,7 +35,7 @@ Do not open a support ticket for issues with Runner Provisioner. Issues are rout
 
 == Prerequisites
 
-* A Kubernetes cluster with KubeVirt installed. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
+* A Kubernetes cluster with KubeVirt installed. Refer to the link:https://github.com/kubevirt/kubevirt/blob/main/docs/kubernetes-compatibility.md[KubeVirt compatibility matrix] for the appropriate version for your cluster. Runner Provisioner has been tested with v1.8.
 * `kubectl` configured against your cluster.
 * `helm` v3+.
 * A CircleCI API token with permission to query runner tasks. This may be a personal API token or a project API token with read-only access. See the xref:toolkit:managing-api-tokens.adoc[Managing API Tokens] page for more information.

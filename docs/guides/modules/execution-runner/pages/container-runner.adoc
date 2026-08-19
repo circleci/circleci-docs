@@ -417,7 +417,7 @@ Container runner needs the following Kubernetes permissions:
 
 If xref:container-runner-installation.adoc#enable-rerun-job-with-ssh[Rerun Job With SSH] is enabled, the following permissions are also required:
 
-* link:https://gateway-api.sigs.k8s.io/api-types/gateway/[Gateways], Services
+* link:https://gateway-api.sigs.k8s.io/reference/api-types/gateway/[Gateways], Services
 ** Get
 
 In addition, link:#logging-containers[Logging containers] require the following minimal permissions to get service container logs and stream them to the CircleCI web app:

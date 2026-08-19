@@ -24,7 +24,7 @@ Refer to the xref:execution-managed:circleci-images.adoc[Pre-Built CircleCI Conv
 
 Automation tools used for browser tests often use Selenium WebDriver, a widely-adopted browser driving standard.
 
-Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project[Selenium documentation] for details on setup. Refer to the link:https://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
+Selenium WebDriver provides a common API for programmatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the link:https://www.selenium.dev/documentation/webdriver/getting_started/[Selenium documentation] for details on setup. Refer to the link:https://www.xfree86.org/4.0.1/Xvfb.1.html[Xvfb man page] for virtual framebuffer X Server documentation.
 
 WebDriver can operate in two modes, local or remote:
 
@@ -157,7 +157,7 @@ Configure CircleCI to collect xref:optimize:artifacts.adoc[Build Artifacts] and 
 
 Saving screenshots is supported by most test suites, and is a built-in feature in WebKit and Selenium:
 
-* link:https://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver[Manually, using Selenium directly]
+* link:https://www.selenium.dev/documentation/webdriver/drivers/remote_webdriver/[Manually, using Selenium directly]
 * link:https://github.com/mattheworiordan/capybara-screenshot[Automatically on failure, using Cucumber]
 * link:https://gist.github.com/michalochman/3175175[Automatically on failure, using Behat and Mink]
 

@@ -254,5 +254,5 @@ For larger and more complex build files, we recommend moving over the build step
 . https://circleci.com/docs/workflows/[Workflows]
 . https://circleci.com/docs/artifacts/[Artifacts]
 . https://circleci.com/docs/caching/[Caching]
-. https://circleci.com/docs/triggers/#section=jobs[Triggers]
+. xref:orchestrate:triggers-overview.adoc[Triggers]
 . https://circleci.com/docs/optimizations/#section=projects[Performance options]

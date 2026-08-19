@@ -78,7 +78,7 @@ Using the `<<<` construct is more reliable than using `echo` or `printf`, which 
 
 When calling the CircleCI API with `curl` commands, you need to provide an API token. Several ways you can mitigate risk while supplying tokens are as follows:
 
-* Use a `.netrc` file: The link:https://everything.curl.dev/usingcurl/netrc[`.netrc` file format], which is supported by several different tools, allows you to provide HTTP basic auth credentials in a file, rather than at the command-line.
+* Use a `.netrc` file: The link:https://everything.curl.dev/usingcurl/netrc.html[`.netrc` file format], which is supported by several different tools, allows you to provide HTTP basic auth credentials in a file, rather than at the command-line.
 ** Create a file at a location of your choosing. The default used by some tools is `~/.netrc`. Be sure to `chmod 0600` this file before adding the secret, to prevent other users from viewing its contents.
 ** Add a line in the following format: `machine circleci.com login <your token> password`
 ** When invoking `curl` commands, tell it to look in your `.netrc` file for credentials: `curl --netrc-file ~/.netrc`
