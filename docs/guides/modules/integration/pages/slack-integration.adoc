@@ -12,6 +12,17 @@ This guide explains how to:
 * Update notification preferences for a project.
 * Link your Slack identity to receive personal notifications.
 
+== Benefits
+
+The Slack integration is the recommended way to set up workflow notifications in Slack for projects on CircleCI Cloud. The Slack integration offers several advantages over configuring notifications manually:
+
+* Install the Slack app once at the organization level, then turn it on per project. No app setup needed for every new project.
+* Notifications work without changes to your CircleCI config file. You do not need to add an orb or extra steps to your pipelines.
+* You do not need to create a Slack app or store OAuth tokens in a context or environment variable.
+* Link projects to channels and manage notification preferences from your project settings in the web app. Any organization member with write access to a project can configure it.
+* Receive notifications as direct messages. After you <<link-your-slack-identity,link your Slack identity>>, CircleCI can send workflow notifications to you directly, not only to shared channels.
+* Get tagged directly in notifications. Once your identity is linked, CircleCI mentions you in the Slack notifications for workflows you trigger.
+
 == Limitations
 
 Each Slack workspace can only be connected to one CircleCI organization at a time. This restriction is a Slack platform constraint. Slack issues a single bot token per workspace, and a new installation overwrites the existing one. If a second CircleCI organization installs the app into an already-connected workspace, it will invalidate the first organization's token and break their integration. Connecting multiple organizations to the same Slack workspace is not currently supported but is in development. If your integration is broken, an organization administrator or contributor can restore the connection by reinstalling the app from menu:Org[Slack Integration].
