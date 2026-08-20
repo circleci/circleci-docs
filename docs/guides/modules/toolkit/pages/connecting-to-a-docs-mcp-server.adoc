@@ -1,0 +1,183 @@
+= Connecting to the CircleCI docs MCP server
+:page-platform: Cloud
+:page-badge: Preview
+:page-description: Connect your AI assistant to CircleCI's documentation MCP server to search CircleCI docs and knowledge sources directly from your development environment.
+:experimental:
+
+NOTE: The CircleCI docs MCP server is currently in preview. You can expect changes to the available tools during this phase. If you have any issues, questions, or feedback, post on our link:https://discuss.circleci.com/t/hosted-and-cli-mcp-server-feedback/54827[community forum].
+
+The CircleCI docs MCP server gives your AI assistant direct access to CircleCI's documentation and knowledge sources. Instead of copying and pasting docs into your AI assistant, you can ask questions and the assistant will search CircleCI's documentation automatically.
+
+For information about CircleCI's operational MCP servers for managing pipelines and workflows, see the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
+
+== What you can do
+
+When connected to the CircleCI docs MCP server, your AI assistant can:
+
+* Search CircleCI documentation for relevant information
+* Answer questions about CircleCI features and configuration
+* Retrieve full documentation pages by URL
+* Provide accurate, up-to-date information from CircleCI's knowledge base
+* Help you write and troubleshoot CircleCI configuration
+
+This is useful when working on CircleCI configurations, debugging pipeline issues, or learning about CircleCI features without leaving your development environment.
+
+== Prerequisites
+
+Before connecting to the CircleCI docs MCP server, ensure you have:
+
+* An AI coding assistant or MCP client that supports remote MCP servers over HTTP (such as Claude Code, Claude Desktop, or Cursor)
+* A CircleCI account (for authentication)
+
+== Connecting your AI assistant
+
+The CircleCI docs MCP server is available at a public URL. The connection steps depend on your AI assistant.
+
+[tabs]
+====
+Claude Code::
++
+--
+. Use the following command to add the CircleCI docs MCP server to Claude Code:
++
+[source,console]
+----
+$ claude mcp add --transport http circleci-docs https://circleci.mcp.kapa.ai
+----
+
+. Run the `/mcp` command inside Claude Code and select `circleci-docs`.
+. Select *Authenticate* to complete the OAuth2 sign-in in your browser.
+--
+Claude Desktop and claude.ai::
++
+--
+For guidance on setting up custom connectors, see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude documentation].
+
+. Go to menu:Settings[Connectors].
+. Select *Add custom connector*.
+. Enter `https://circleci.mcp.kapa.ai` as the server URL.
+. Select *Add*, then complete the OAuth2 sign-in in your browser.
+--
+Cursor::
++
+--
+Add the following configuration to your Cursor `mcp.json` file:
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "circleci-docs": {
+      "url": "https://circleci.mcp.kapa.ai"
+    }
+  }
+}
+----
+
+Cursor will prompt you to authenticate when you first use the server. Complete the OAuth2 sign-in in your browser.
+--
+====
+
+== Test the connection
+
+After connecting your AI assistant to the CircleCI docs MCP server:
+
+. Ask a question about CircleCI, for example: "How do I configure parallelism in CircleCI?" or "What executor types does CircleCI support?"
+. The AI assistant should use the CircleCI docs MCP server to search CircleCI's documentation.
+. Verify the assistant receives relevant information from CircleCI docs.
+
+If the connection fails, see the <<troubleshooting>> section below.
+
+== Available tools
+
+The CircleCI docs MCP server exposes the following tools to AI assistants:
+
+[.table-scroll]
+--
+[cols="1,3"]
+|===
+|Tool |Description
+
+|`search_circleci_knowledge_sources`
+|Searches CircleCI documentation and knowledge sources. Returns the most relevant content chunks in descending order of relevance. Each chunk includes the source URL and content in Markdown.
+
+|`get_circleci_knowledge_documents`
+|Fetches full CircleCI documentation pages by their exact URL. Returns complete content in Markdown, paginated to avoid overwhelming the assistant's context window.
+
+|`give_feedback`
+|Lets the assistant provide feedback about CircleCI documentation quality or gaps. Feedback is sent to the CircleCI documentation team.
+|===
+--
+
+[#troubleshooting]
+== Troubleshooting
+
+=== Authentication fails
+
+If authentication fails when connecting to the CircleCI docs MCP server:
+
+* Ensure you have a CircleCI account
+* Try disconnecting and reconnecting the MCP server in your AI assistant
+* Check that your AI assistant supports OAuth2 authentication for MCP servers
+* Clear your browser cache and try authenticating again
+
+=== No results returned
+
+If searches return no results:
+
+* Verify the MCP server is connected in your AI assistant (check the `/mcp` command in Claude Code or your MCP settings)
+* Try rephrasing your question to be more specific
+* Check that you are asking about CircleCI features or documentation
+
+=== Rate limit errors
+
+The CircleCI docs MCP server has rate limits to ensure fair usage:
+
+[.table-scroll]
+--
+[cols="1,1"]
+|===
+|Tool |Per-user limit
+
+|Search tool
+|300 requests per day
+
+|Documents tool
+|300 requests per day
+|===
+--
+
+If you consistently hit rate limits, consider:
+
+* Asking more targeted questions to reduce the number of searches
+* Using the CircleCI web documentation at link:https://circleci.com/docs[circleci.com/docs] for extended research sessions
+
+=== Connection issues
+
+If your AI assistant cannot connect to the server:
+
+* Verify the server URL is correct: `https://circleci.mcp.kapa.ai`
+* Check that your AI assistant is up to date
+* Ensure your network allows HTTPS connections to external MCP servers
+* Try removing and re-adding the MCP server configuration
+
+== Example questions
+
+Here are example questions you can ask your AI assistant once connected to the CircleCI docs MCP server:
+
+* "How do I set up parallelism in CircleCI?"
+* "What are the available Docker executor resource classes?"
+* "How do I configure a schedule trigger?"
+* "What is the difference between contexts and environment variables?"
+* "How do I use workspaces to share data between jobs?"
+* "What executors support Apple Silicon?"
+* "How do I configure test splitting?"
+
+== Next steps
+
+Now that you have connected to the CircleCI docs MCP server, you can:
+
+* Connect to CircleCI's operational MCP servers to manage your pipelines: xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
+* Learn about the hosted CircleCI MCP server: xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server]
+* Explore the CircleCI CLI MCP: xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
+* Browse the full CircleCI documentation: link:https://circleci.com/docs[CircleCI Docs]
