@@ -1,0 +1,289 @@
+= Connecting to a docs MCP server
+:page-platform: Cloud
+:page-description: Set up a hosted documentation MCP server with Kapa to give AI assistants access to your documentation and knowledge sources.
+:experimental:
+
+A hosted documentation MCP server enables AI assistants to search your documentation and knowledge sources through natural language queries. This guide walks through setting up a documentation MCP server using Kapa's hosted MCP service.
+
+For information about CircleCI's own MCP servers, see the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
+
+== What is a docs MCP server
+
+A docs MCP server exposes your documentation and knowledge sources to AI assistants through the Model Context Protocol. When configured, AI assistants can:
+
+* Search your documentation for relevant information
+* Retrieve full documents by URL
+* Provide feedback on documentation quality
+* Answer questions about your product or service
+
+The hosted approach means you deploy the server once and any MCP-compatible client can access it.
+
+== Prerequisites
+
+Before setting up a docs MCP server, you need:
+
+* A Kapa account with a configured project
+* Knowledge sources connected to your Kapa project (documentation, help articles, or other content)
+* An AI coding assistant or MCP host that supports remote MCP servers
+* Depending on your authentication choice:
+** A project API key for API key authentication
+** A Google or GitHub account for public OAuth authentication
+** Team members with Kapa accounts for internal authentication
+
+== 1. Create the MCP integration
+
+. Go to your Kapa project at link:https://app.kapa.ai[app.kapa.ai].
+. Navigate to menu:Integrations[MCP].
+. Select *Create MCP server*.
+. Choose your subdomain. This subdomain determines your server URL and cannot be changed later:
++
+[source,console]
+----
+https://<your-subdomain>.mcp.kapa.ai
+----
+
+. Select an authentication type based on your use case:
+
+* *API key* - For agents and backends you operate. Requires an API key with every request.
+* *Public* - For your external users in tools like Cursor or Claude Code. Requires users to authenticate with Google or GitHub. Only available for projects with public information.
+* *Internal* - For your own team members. Requires users to log in with their Kapa account.
+
+. Select *Create*.
+
+The integration is created and your MCP server is now running at your chosen subdomain.
+
+== 2. Configure the MCP server
+
+After creating the integration, you can customize how the MCP server behaves.
+
+=== 2.a. Enable optional tools
+
+By default, the server provides a search tool and a feedback tool. You can enable additional tools:
+
+. In your MCP integration settings, go to the *Tools* section.
+. To enable the documents tool for fetching full documents by URL, select the checkbox for *Documents tool*.
+. Save your changes.
+
+The documents tool allows AI assistants to retrieve complete documents rather than just search snippets, which is useful when the assistant needs full context.
+
+=== 2.b. Customize tool names and descriptions
+
+You can modify how tools appear to AI assistants:
+
+. In the *Tools* section of your integration settings, find the tool you want to customize.
+. Edit the tool name or description.
+. Save your changes.
+
+TIP: The tool names and descriptions influence when AI assistants decide to call them. Kapa provides defaults suitable for most use cases. Only customize if you need to emphasize specific behaviors or align with your team's terminology.
+
+=== 2.c. Restrict to specific source groups
+
+If you want to limit the server to only search certain knowledge sources:
+
+. In your integration settings, find the *Source groups* section.
+. Select the source groups you want to include.
+. Save your changes.
+
+When configured, the server only returns results from sources in the selected groups, plus any global sources.
+
+== 3. Connect your AI assistant
+
+The connection steps depend on your AI assistant. Use the server URL you created in step 1.
+
+[tabs]
+====
+Claude Code::
++
+--
+. Use the following command to add your docs MCP server to Claude Code:
++
+[source,console]
+----
+$ claude mcp add --transport http docs-server https://<your-subdomain>.mcp.kapa.ai
+----
++
+Replace `<your-subdomain>` with the subdomain you chose when creating the integration.
+
+. Run the `/mcp` command inside Claude Code, select your docs server.
+. Complete the authentication flow:
++
+* For public OAuth, select *Authenticate* to complete the OAuth2 sign-in in your browser.
+* For API key authentication, add the API key to your Claude Code configuration.
+* For internal authentication, log in with your Kapa account.
+--
+Claude Desktop and claude.ai::
++
+--
+. Go to menu:Settings[Connectors].
+. Select *Add custom connector*.
+. Enter `https://<your-subdomain>.mcp.kapa.ai` as the server URL.
+. Select *Add*, then complete the authentication flow in your browser.
+--
+Cursor::
++
+--
+Add the following configuration to your Cursor `mcp.json` file:
+
+[source,json]
+----
+{
+  "mcpServers": {
+    "docs-server": {
+      "url": "https://<your-subdomain>.mcp.kapa.ai"
+    }
+  }
+}
+----
+
+Replace `<your-subdomain>` with your chosen subdomain. Complete the authentication flow when prompted.
+--
+====
+
+== 4. Test the connection
+
+After connecting your AI assistant:
+
+. Ask a question about your documentation, for example: "How do I configure authentication?"
+. The AI assistant should use your docs MCP server to search your knowledge sources.
+. Verify the assistant receives relevant information from your documentation.
+
+If the connection fails, see the <<troubleshooting>> section below.
+
+== Available tools
+
+Your docs MCP server exposes the following tools to AI assistants:
+
+[.table-scroll]
+--
+[cols="1,3"]
+|===
+|Tool |Description
+
+|`search_<product>_knowledge_sources`
+|Searches all connected knowledge sources and returns the most relevant chunks in descending order of relevance. Each chunk is a short, self-contained snippet with the source URL and content in Markdown.
+
+|`get_<product>_knowledge_documents` (optional)
+|Fetches full documents by their exact source URL. Returns complete content in Markdown, paginated and truncated to avoid flooding the assistant's context window.
+
+|`give_feedback`
+|Lets the assistant provide feedback on documentation quality, product gaps, or server issues. Feedback is recorded against your Kapa project.
+|===
+--
+
+The `<product>` placeholder in tool names is determined by your Kapa project name.
+
+[#troubleshooting]
+== Troubleshooting
+
+=== Authentication fails
+
+If authentication fails:
+
+* For public OAuth, ensure you are using a Google or GitHub account
+* For internal authentication, verify your Kapa account has the *Use Internal Chat Assistant* permission for the project
+* For API key authentication, confirm the API key is valid and properly configured in your MCP client
+
+=== No results returned
+
+If searches return no results:
+
+* Verify your Kapa project has connected knowledge sources
+* Check if source group restrictions are limiting the searchable content
+* Ensure your knowledge sources are successfully indexed in Kapa
+
+=== Rate limit errors
+
+The MCP server has rate limits per tool:
+
+[.table-scroll]
+--
+[cols="1,1,1"]
+|===
+|Tool |Per-user limit (OAuth) |Per-team limit
+
+|Search tool
+|300 requests per day
+|60 requests per minute
+
+|Documents tool
+|300 requests per day
+|100 requests per minute
+|===
+--
+
+API key authenticated servers use only the per-team limit across all projects. If you need higher limits, contact link:mailto:support@kapa.ai[support@kapa.ai].
+
+== Advanced configuration
+
+=== Programmatic configuration with `_meta`
+
+When integrating the MCP server into your agent via code with API key authentication, you can pass additional parameters via the MCP `_meta` field to control tool behavior:
+
+[source,python]
+----
+result = await session.call_tool(
+    name="search_acme_knowledge_sources",
+    arguments={"query": "How do I configure SSO?"},
+    meta={
+        "top_k": 5,
+        "max_chars": 35000,
+        "use_pruning": True,
+        "source_ids_include": ["550e8400-e29b-41d4-a716-446655440000"],
+        "user": {
+            "email": current_user.email,
+            "unique_client_id": current_user.id,
+        },
+    },
+)
+----
+
+Available parameters:
+
+[.table-scroll]
+--
+[cols="1,1,3"]
+|===
+|Parameter |Type |Description
+
+|`use_pruning`
+|boolean
+|Prune low relevance chunks after retrieval at the cost of added latency. Defaults to false.
+
+|`top_k`
+|integer (1-15)
+|Maximum number of chunks to return. Defaults to 15.
+
+|`max_chars`
+|integer (1-60000)
+|Maximum characters across all returned chunks. Defaults to 35,000.
+
+|`source_ids_include`
+|array of UUIDs
+|Only return results from these specific sources.
+
+|`source_group_ids_include`
+|array of UUIDs
+|Only return results from sources in these groups.
+
+|`redact_query`
+|boolean
+|Redact query text from analytics for sensitive queries.
+
+|`user.email`
+|string
+|User's email address for analytics.
+
+|`user.unique_client_id`
+|string
+|Your identifier for the user for linking analytics.
+|===
+--
+
+NOTE: Programmatic configuration via `_meta` requires API key authentication and is not available for public or internal OAuth-authenticated servers.
+
+== Next steps
+
+* xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
+* xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server]
+* xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
+* link:https://docs.kapa.ai/integrations/mcp/overview[Kapa MCP Documentation]
