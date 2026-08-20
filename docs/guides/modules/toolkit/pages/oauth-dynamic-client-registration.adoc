@@ -14,7 +14,7 @@ Using Dynamic Client Registration has the following benefits:
 * User-controlled access scopes. The user chooses the permission level (Read, Write, or Admin) at authorization time.
 * Tokens are visible to and revocable by the user from their CircleCI Personal API Tokens page.
 
-The resulting token is a standard 90-day CircleCI personal API token and works with all existing API v2 endpoints.
+The resulting token is a standard 90-day CircleCI personal API token and works with the API v3 and v2 endpoints.
 
 TIP: For background on CircleCI API tokens, refer to xref:managing-api-tokens.adoc[Managing API Tokens]. For general API usage, refer to the xref:api-developers-guide.adoc[CircleCI API Developer's Guide].
 
@@ -26,7 +26,7 @@ The OAuth flow consists of four high-level stages:
 *Register*:: Your tool registers itself once as an OAuth client using the Dynamic Client Registration endpoint. No authentication is required, and no client secret is issued.
 *Authorize*:: A user opens an authorization URL in a browser, selects an access level, and clicks *Allow*. CircleCI redirects to a loopback address with a short-lived authorization code.
 *Exchange*:: Your tool exchanges the code, plus the PKCE verifier, for a 90-day personal API token.
-*Use*:: The token is passed as a standard Bearer header on any CircleCI API v2 call.
+*Use*:: The token is passed as a standard Bearer header on any CircleCI API v3 or v2 call.
 
 [#prerequisites]
 == Prerequisites
@@ -291,17 +291,17 @@ CAUTION: Store the `access_token` securely. Treat it with the same care as a pas
 [#step-5-use-the-token]
 == 5. Use the token
 
-The `access_token` is a standard CircleCI personal API token. Pass it as a Bearer token on any API v2 call:
+The `access_token` is a standard CircleCI personal API token. Pass it as a Bearer token on any API v3 or v2 call:
 
 [,shell]
 ----
 TOKEN="ccipat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-curl -s https://circleci.com/api/v2/me \
+curl -s https://circleci.com/api/v3/orgs \
   -H "Authorization: Bearer $TOKEN" | jq .
 ----
 
-It is also accepted as a `Circle-Token` header for compatibility with existing integrations:
+For API v2, the token is also accepted as a `Circle-Token` header for compatibility with existing integrations:
 
 [,shell]
 ----
@@ -309,7 +309,7 @@ curl -s https://circleci.com/api/v2/me \
   -H "Circle-Token: $TOKEN" | jq .
 ----
 
-See the link:https://circleci.com/docs/api/v2/[API v2 Reference] for the full list of available endpoints.
+See the link:https://circleci.com/docs/api/v3[API v3 Reference] and link:https://circleci.com/docs/api/v2/[API v2 Reference] for the full list of available endpoints.
 
 [#token-lifecycle]
 == Manage your token's expiry and rotation
@@ -370,11 +370,12 @@ The following table describes the error responses you may encounter at each stag
 |===
 --
 
-For general API error codes, refer to the link:https://circleci.com/docs/api/v2/[API v2 Reference].
+For general API error codes, refer to the link:https://circleci.com/docs/api/v3[API v3 Reference] and link:https://circleci.com/docs/api/v2/[API v2 Reference].
 
 [#next-steps]
 == Next steps
 
 * xref:api-developers-guide.adoc[CircleCI API Developer's Guide] - authenticate, paginate results, and make common API calls.
+* link:https://circleci.com/docs/api/v3[API v3 Reference] - full endpoint documentation.
 * link:https://circleci.com/docs/api/v2/[API v2 Reference] - full endpoint documentation.
 </content>
