@@ -1,104 +1,64 @@
 = OAuth 2.0 API access with Dynamic Client Registration
+:page-show-readtime: true
 :page-platform: Cloud
 :page-description: Register OAuth 2.0 clients dynamically and use the authorization code flow with PKCE to obtain a CircleCI personal API token.
 :experimental:
 
-CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use this flow to let a tool, CLI, or integration get a personal API token on behalf of a user. It avoids a pre-shared client secret or manual token creation in the CircleCI web app. The resulting token is a standard 90-day CircleCI personal API token, and works with all existing API v2 endpoints.
+This guide is for you if you are building a tool or integration that needs to access the CircleCI API on behalf of a user.
+
+CircleCI supports the OAuth 2.0 authorization code flow with mandatory PKCE (Proof Key for Code Exchange) and Dynamic Client Registration (DCR). Use this guide to get your tool a personal API token on behalf of a user. No pre-shared client secret or manual token creation in the CircleCI web app is needed.
+
+Using Dynamic Client Registration has the following benefits:
+
+* No long-lived secrets stored in your tool's configuration. PKCE secures the flow instead of a client secret.
+* User-controlled access scopes. The user chooses the permission level (Read, Write, or Admin) at authorization time.
+* Tokens are visible to and revocable by the user from their CircleCI Personal API Tokens page.
+
+The resulting token is a standard 90-day CircleCI personal API token and works with the API v3 and v2 endpoints.
 
 TIP: For background on CircleCI API tokens, refer to xref:managing-api-tokens.adoc[Managing API Tokens]. For general API usage, refer to the xref:api-developers-guide.adoc[CircleCI API Developer's Guide].
 
-[#overview]
-== Overview
+[#how-the-oauth-flow-works]
+== How the OAuth flow works
 
 The OAuth flow consists of four high-level stages:
 
 *Register*:: Your tool registers itself once as an OAuth client using the Dynamic Client Registration endpoint. No authentication is required, and no client secret is issued.
 *Authorize*:: A user opens an authorization URL in a browser, selects an access level, and clicks *Allow*. CircleCI redirects to a loopback address with a short-lived authorization code.
 *Exchange*:: Your tool exchanges the code, plus the PKCE verifier, for a 90-day personal API token.
-*Use*:: The token is passed as a standard Bearer header on any CircleCI API v2 call.
-
-[#access-levels]
-== Access levels
-
-During the authorization consent screen, the user chooses the access level to grant the requesting tool.
-
-[.table-scroll]
---
-[cols="1,3", options="header"]
-|===
-| Access level
-| Permissions
-
-| Read
-| Read-only access to all resources the authorizing user can read.
-
-| Write
-| Read and write access to all resources the authorizing user can read and write.
-
-| Admin
-| Full access to all permissions the authorizing user holds, which may include org management and billing settings for organizations where the user is an admin.
-|===
---
-
-These scopes restrict what the token can do. They cannot grant more access than the authorizing user already holds in CircleCI. A user with read-only org permissions who selects Admin, for example, receives a token scoped to their actual permissions, not elevated ones.
-
-[#sso-organizations]
-=== SSO organizations
-
-If the authorizing user belongs to one or more SSO-enabled organizations, the consent screen includes an SSO organizations section. The user can authorize individual SSO orgs to be included in the token's scope. SSO org access can also be managed later from the OAuth Clients page in user settings.
-
-[#discovery-document]
-=== Discovery document
-
-All OAuth endpoints are published in a standard discovery document:
-
-[,shell]
-----
-curl -s https://app.circleci.com/.well-known/oauth-authorization-server | jq .
-----
-
-[,json]
-----
-{
-  "issuer": "https://app.circleci.com",
-  "authorization_endpoint": "https://app.circleci.com/oauth/authorize",
-  "token_endpoint": "https://app.circleci.com/oauth/token",
-  "pushed_authorization_request_endpoint": "https://app.circleci.com/oauth/par",
-  "registration_endpoint": "https://app.circleci.com/oauth/register",
-  "response_types_supported": ["code"],
-  "grant_types_supported": ["authorization_code"],
-  "code_challenge_methods_supported": ["S256"]
-}
-----
+*Use*:: The token is passed as a standard Bearer header on any CircleCI API v3 or v2 call.
 
 [#prerequisites]
 == Prerequisites
 
-* The redirect URI used during registration and authorization must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025-65535, and no query parameters. This restriction ensures the authorization code is delivered only to the local machine running the tool.
-* PKCE with S256 is mandatory. Plain code challenges are not accepted.
-* `state` is required on every authorization request. Omitting it returns a 400 error.
-* Your tool needs a way to open a browser and briefly listen for an HTTP redirect on localhost. The Python listener in <<step-3-start-a-local-redirect-listener,Step 3>> provides a minimal reference implementation.
+* A CircleCI account. You must be a member of an organization. See xref:getting-started:first-steps.adoc[Sign up and Try CircleCI] for more information.
+* The following tools installed:
+** `curl` installed.
+** `python3` installed. Used for the local redirect listener in <<step-2-start-a-local-redirect-listener,Step 2>>.
+** `jq` installed (optional). Used in the examples to format JSON output.
 
 [#step-1-register-your-client]
 == 1. Register your client
 
 Perform client registration once per tool. Send a POST request to the registration endpoint with a JSON body describing your client. No authentication header is required.
 
-IMPORTANT: The `redirect_uri` in this step must match the `redirect_uri` you use later in the authorization URL and token exchange.
+Replace `<your-tool-name>` with the name of your tool. You can also change the port (`9090`) and path (`/callback`) in the redirect URI to any values that suit your tool. The `grant_types` and `response_types` fields must remain as shown.
+
+IMPORTANT: The `redirect_uri` must be a loopback address (`127.0.0.1`, `::1`, or `localhost`) with a port in the range 1025–65535 and no query parameters. Use the same value in Steps 3 and 4.
 
 [,shell]
 ----
 curl -s -X POST https://app.circleci.com/oauth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "client_name": "My Tool",
+    "client_name": "<your-tool-name>",
     "redirect_uris": ["http://127.0.0.1:9090/callback"],
     "grant_types": ["authorization_code"],
     "response_types": ["code"]
   }' | jq .
 ----
 
-A successful registration returns `201 Created`:
+A successful registration returns a JSON object containing your `client_id`, with a `201 Created` status code:
 
 [,json]
 ----
@@ -113,60 +73,28 @@ A successful registration returns `201 Created`:
 }
 ----
 
-Save the `client_id`. Use it for every subsequent authorization request. Because no client secret is issued, this value does not need to be treated as sensitive. PKCE protects the flow instead.
+Save the `client_id` as a shell variable. Use it for every subsequent authorization request. Because no client secret is issued, this value does not need to be treated as sensitive. PKCE protects the flow instead.
+
+[,shell]
+----
+CLIENT_ID="<your-client-id>"
+----
 
 TIP: Register only once per tool. Store the `client_id` alongside your tool's configuration, and reuse it for all future authorizations. Re-registering creates a new, separate client.
 
 [#advanced-pushed-authorization-requests]
 === Advanced: pushed authorization requests
 
-CircleCI also supports link:https://datatracker.ietf.org/doc/html/rfc9126[RFC 9126 Pushed Authorization Requests] (PAR) via `POST /oauth/par`. PAR sends the authorization parameters directly to the server before the browser redirect, which provides an additional layer of request integrity. It is optional. The standard front-channel authorization URL described in <<step-4-open-the-authorization-url,Step 4>> is validated with the same rules.
+CircleCI also supports link:https://datatracker.ietf.org/doc/html/rfc9126[RFC 9126 Pushed Authorization Requests] (PAR) via `POST /oauth/par`. PAR sends the authorization parameters directly to the server before the browser redirect, which provides an additional layer of request integrity. It is optional. The standard front-channel authorization URL described in <<step-3-open-the-authorization-url,Step 3>> is validated with the same rules.
 
-[#step-2-understand-pkce-values]
-== 2. Understand PKCE values
+[#step-2-start-a-local-redirect-listener]
+== 2. Start a local redirect listener
 
-PKCE replaces the client secret. Before each authorization request, your tool must generate three values:
+The listener below generates the PKCE values, prints them, then waits for CircleCI to redirect the browser to `\http://127.0.0.1:9090/callback` with the authorization code.
 
-[.table-scroll]
---
-[cols="1,3", options="header"]
-|===
-| Value
-| Description
-
-| `code_verifier`
-| A random, URL-safe string between 43 and 128 characters. Keep this secret. It is sent only to the token endpoint.
-
-| `code_challenge`
-| The `code_challenge` is `base64url(sha256(code_verifier))`, sent in the authorization URL so the server can verify the exchange later.
-
-| `state`
-| A random value used to prevent CSRF attacks. Verify that the state returned in the redirect matches what you sent.
-|===
---
-
-The following shell commands illustrate how these values are derived. In practice, your code, or the Python listener in the next step, generates them automatically.
-
-[,shell]
-----
-# 43-128 character URL-safe random string
-CODE_VERIFIER=$(openssl rand -base64 48 | tr -d '=\n' | tr '+/' '-_')
-
-# S256 challenge = base64url(sha256(verifier))
-CODE_CHALLENGE=$(printf '%s' "$CODE_VERIFIER" | openssl dgst -sha256 -binary | \
-  openssl base64 | tr -d '=\n' | tr '+/' '-_')
-
-# Random state for CSRF protection
-STATE=$(openssl rand -base64 16 | tr -d '=\n' | tr '+/' '-_')
-----
-
-[#step-3-start-a-local-redirect-listener]
-== 3. Start a local redirect listener
-
-Before opening the authorization URL, start a process that receives the redirect from CircleCI. The listener below generates the PKCE values, prints them, then waits for CircleCI to redirect the browser to `\http://127.0.0.1:9090/callback` with the authorization code.
-
-Run this in a separate terminal:
-
+. Run the following Python code in a separate terminal:
++
+.Start the listener in a separate terminal
 [,python]
 ----
 python3 -c "
@@ -209,8 +137,9 @@ with http.server.HTTPServer(('127.0.0.1', 9090), Handler) as s:
 "
 ----
 
-Once the listener is running, copy the printed values into your other terminal:
+. Once the listener is running, copy the printed values into your other terminal:
 
+.Copy the printed values
 [,shell]
 ----
 CODE_VERIFIER="<paste verifier>"
@@ -218,27 +147,51 @@ CODE_CHALLENGE="<paste challenge>"
 STATE="<paste state>"
 ----
 
-[#step-4-open-the-authorization-url]
-== 4. Open the authorization URL
+[#understanding-pkce-values]
+=== Understanding PKCE values
 
-Construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-3-start-a-local-redirect-listener,Step 3>>, then open it in a browser.
+PKCE replaces the client secret. CircleCI requires the S256 challenge method — plain code challenges are not accepted. The listener generates all three values automatically using S256. The following table describes each value — useful if you are implementing the flow in your own language rather than using the listener directly.
 
-[,text]
-----
-https://app.circleci.com/oauth/authorize?
-  response_type=code
-  &client_id=019847ab-1234-7def-89ab-cdef01234567
-  &redirect_uri=http%3A%2F%2F127.0.0.1%3A9090%2Fcallback
-  &code_challenge=<CODE_CHALLENGE>
-  &code_challenge_method=S256
-  &state=<STATE>
-----
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Value
+| Description
 
-To build and print the full URL in one shell command:
+| `code_verifier`
+| A random, URL-safe string between 43 and 128 characters. Keep this secret. It is sent only to the token endpoint.
+
+| `code_challenge`
+| `base64url(sha256(code_verifier))`, sent in the authorization URL so the server can verify the exchange later.
+
+| `state`
+| A random value used to prevent CSRF attacks. Verify that the state returned in the redirect matches what you sent.
+|===
+--
+
+The following shell commands show how the values are derived:
 
 [,shell]
 ----
-CLIENT_ID="019847ab-1234-7def-89ab-cdef01234567"
+# 43-128 character URL-safe random string
+CODE_VERIFIER=$(openssl rand -base64 48 | tr -d '=\n' | tr '+/' '-_')
+
+# S256 challenge = base64url(sha256(verifier))
+CODE_CHALLENGE=$(printf '%s' "$CODE_VERIFIER" | openssl dgst -sha256 -binary | \
+  openssl base64 | tr -d '=\n' | tr '+/' '-_')
+
+# Random state for CSRF protection
+STATE=$(openssl rand -base64 16 | tr -d '=\n' | tr '+/' '-_')
+----
+
+[#step-3-open-the-authorization-url]
+== 3. Open the authorization URL
+
+. To construct the authorization URL using your `client_id` from <<step-1-register-your-client,Step 1>> and the PKCE values from <<step-2-start-a-local-redirect-listener,Step 2>>, run the following shell command. The `state` parameter is required. Omitting it returns a 400 error:
++
+[,shell]
+----
 REDIRECT_URI="http://127.0.0.1:9090/callback"
 
 printf 'https://app.circleci.com/oauth/authorize?response_type=code&client_id=%s&redirect_uri=%s&code_challenge=%s&code_challenge_method=S256&state=%s\n' \
@@ -248,36 +201,67 @@ printf 'https://app.circleci.com/oauth/authorize?response_type=code&client_id=%s
   "$STATE"
 ----
 
+. The printed URL contains the following parameters:
++
+* `response_type=code`: Requests an authorization code.
+* `client_id`: Your registered client ID from Step 1.
+* `redirect_uri`: The loopback address where CircleCI sends the authorization code.
+* `code_challenge` and `code_challenge_method=S256`: The PKCE challenge generated in Step 2.
+* `state`: The CSRF protection value generated in Step 2.
++
 Open the printed URL in a browser. If you are not already logged in to CircleCI, you are redirected to the login page first, then returned to the consent screen.
 
-On the consent screen:
+. On the consent screen select the access level to grant the tool. Choose the minimum level your tool requires.
++
+[.table-scroll]
+--
+[cols="1,3", options="header"]
+|===
+| Access level
+| Permissions
 
-. Select the access level to grant the tool: Read, Write, or Admin. See <<access-levels,Access levels>> for a description of each. Choose the minimum level your tool requires.
-. If you belong to SSO-enabled organizations, the SSO organizations section appears below. Select *Authorize* next to any orgs you want to include in the token's scope.
+| Read
+| Read-only access to all resources the authorizing user can read.
+
+| Write
+| Read and write access to all resources the authorizing user can read and write.
+
+| Admin
+| Full access to all permissions the authorizing user holds, which may include org management and billing settings for organizations where the user is an admin.
+|===
+--
++
+These scopes cannot grant more access than the authorizing user already holds in CircleCI. A user with read-only org permissions who selects Admin, for example, receives a token scoped to their actual permissions, not elevated ones.
++
+NOTE: Personal API tokens created manually through the web app always carry the user's full permissions. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization.
+
+. If you belong to SSO-enabled organizations, an SSO organizations section appears below the access level selector. Select *Authorize* next to any orgs you want to include in the token's scope. SSO org access can also be managed later from the OAuth Clients page in user settings.
 . Select *Allow* to approve, or select *Deny* to cancel the flow.
 
-CircleCI redirects the browser to your listener, which prints:
-
+. CircleCI redirects the browser to your listener, which prints:
++
 [,text]
 ----
 CODE : 5fa2b3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9
 STATE: rAnDoMsTaTe12345
 ----
-
++
 CAUTION: Before proceeding, verify that the `STATE` value printed by the listener matches the `STATE` value you sent in the authorization URL. A mismatch indicates a possible CSRF attack. If the values do not match, abort the flow.
 
-Copy the code into a shell variable in your working terminal:
-
+. Copy the code into a shell variable in your working terminal:
++
 [,shell]
 ----
 CODE="5fa2b3c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9"
 ----
 
-[#step-5-exchange-the-code-for-a-token]
-== 5. Exchange the code for a token
+[#step-4-exchange-the-code-for-a-token]
+== 4. Exchange the code for a token
 
 The authorization code is single-use and short-lived. Exchange it before it expires.
 
+. Run the following curl command to exchange the code for a token:
++
 [,shell]
 ----
 curl -s -X POST https://app.circleci.com/oauth/token \
@@ -300,24 +284,24 @@ A successful exchange returns `200 OK`:
 }
 ----
 
-`expires_in` is 7,776,000 seconds, or 90 days. This flow does not issue refresh tokens. When the token expires, run the authorization flow again to get a new token.
+`expires_in` is 7,776,000 seconds (90 days). This flow does not issue refresh tokens. See <<token-lifecycle,Manage your token's expiry and rotation>> for details.
 
 CAUTION: Store the `access_token` securely. Treat it with the same care as a password.
 
-[#step-6-use-the-token]
-== 6. Use the token
+[#step-5-use-the-token]
+== 5. Use the token
 
-The `access_token` is a standard CircleCI personal API token. Pass it as a Bearer token on any API v2 call:
+The `access_token` is a standard CircleCI personal API token. Pass it as a Bearer token on any API v3 or v2 call:
 
 [,shell]
 ----
 TOKEN="ccipat_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-curl -s https://circleci.com/api/v2/me \
+curl -s https://circleci.com/api/v3/orgs \
   -H "Authorization: Bearer $TOKEN" | jq .
 ----
 
-It is also accepted as a `Circle-Token` header for compatibility with existing integrations:
+For API v2, the token is also accepted as a `Circle-Token` header for compatibility with existing integrations:
 
 [,shell]
 ----
@@ -325,15 +309,17 @@ curl -s https://circleci.com/api/v2/me \
   -H "Circle-Token: $TOKEN" | jq .
 ----
 
-See the link:https://circleci.com/docs/api/v2/[API v2 Reference] for the full list of available endpoints.
+See the link:https://circleci.com/docs/api/v3[API v3 Reference] and link:https://circleci.com/docs/api/v2/[API v2 Reference] for the full list of available endpoints.
 
 [#token-lifecycle]
-== Token lifecycle
+== Manage your token's expiry and rotation
+
+Tokens issued through this flow are standard 90-day CircleCI personal API tokens. The following sections describe how expiry, rotation, and manual revocation work.
 
 [#expiry]
 === Expiry
 
-Tokens expire after 90 days (7,776,000 seconds). This flow does not issue refresh tokens. Re-run the authorization flow from <<step-3-start-a-local-redirect-listener,Step 3>> to get a new token when yours expires.
+Tokens expire after 90 days (7,776,000 seconds). This flow does not issue refresh tokens. Re-run the authorization flow from <<step-2-start-a-local-redirect-listener,Step 2>> to get a new token when yours expires.
 
 [#rotation]
 === Rotation
@@ -384,11 +370,12 @@ The following table describes the error responses you may encounter at each stag
 |===
 --
 
-For general API error codes, refer to the link:https://circleci.com/docs/api/v2/[API v2 Reference].
+For general API error codes, refer to the link:https://circleci.com/docs/api/v3[API v3 Reference] and link:https://circleci.com/docs/api/v2/[API v2 Reference].
 
 [#next-steps]
 == Next steps
 
 * xref:api-developers-guide.adoc[CircleCI API Developer's Guide] - authenticate, paginate results, and make common API calls.
+* link:https://circleci.com/docs/api/v3[API v3 Reference] - full endpoint documentation.
 * link:https://circleci.com/docs/api/v2/[API v2 Reference] - full endpoint documentation.
 </content>
