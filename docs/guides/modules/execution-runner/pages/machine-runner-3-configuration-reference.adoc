@@ -40,7 +40,7 @@ The token is used to identify the machine runner to CircleCI and can be generate
 
 `$CIRCLECI_RUNNER_API_URL`
 
-The URL points to `https://runner.circleci.com` by default. Do not modify it unless you have a CircleCI Server installation. In that case, set it to the URL of your Server installation.
+The URL points to ++`https://runner.circleci.com`++ by default. Do not modify it unless you have a CircleCI Server installation. In that case, set it to the URL of your Server installation.
 
 ---
 

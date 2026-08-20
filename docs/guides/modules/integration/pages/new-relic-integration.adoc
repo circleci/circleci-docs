@@ -29,10 +29,10 @@ Complete the following steps to set up a CircleCI webhook to forward your logs t
 +
 Replace `YOUR_LICENSE_KEY` with your New Relic license key, which you can link:https://docs.newrelic.com/docs/apis/intro-apis/new-relic-api-keys/#manage-license-key[retrieve from the UI or API].
 +
-**US**: `https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
+**US**: ++`https://log-api.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`++
 +
-**EU**: `https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`
-** **Events**: Select **Workflow Completed** or **Job Completed**, depending on the type of event you want to trigger the logpush.
+**EU**: ++`https://log-api.eu.newrelic.com/log/v1?Api-Key=YOUR_LICENSE_KEY`++
+** **Events**: Select **Workflow Completed** or **Job Completed**, depending on the type of event you want to trigger the log push.
 ** Enable the check: **Certificate verifications**.
 
 . Select **Add Webhook** to save the new webhook.
