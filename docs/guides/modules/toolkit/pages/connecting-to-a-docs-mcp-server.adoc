@@ -1,123 +1,62 @@
-= Connecting to a docs MCP server
+= Connecting to the CircleCI docs MCP server
 :page-platform: Cloud
-:page-description: Set up a hosted documentation MCP server with Kapa to give AI assistants access to your documentation and knowledge sources.
+:page-badge: Preview
+:page-description: Connect your AI assistant to CircleCI's documentation MCP server to search CircleCI docs and knowledge sources directly from your development environment.
 :experimental:
 
-A hosted documentation MCP server enables AI assistants to search your documentation and knowledge sources through natural language queries. This guide walks through setting up a documentation MCP server using Kapa's hosted MCP service.
+NOTE: The CircleCI docs MCP server is currently in preview. You can expect changes to the available tools during this phase. If you have any issues, questions, or feedback, post on our link:https://discuss.circleci.com/t/hosted-and-cli-mcp-server-feedback/54827[community forum].
 
-For information about CircleCI's own MCP servers, see the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
+The CircleCI docs MCP server gives your AI assistant direct access to CircleCI's documentation and knowledge sources. Instead of copying and pasting docs into your AI assistant, you can ask questions and the assistant will search CircleCI's documentation automatically.
 
-== What is a docs MCP server
+For information about CircleCI's operational MCP servers for managing pipelines and workflows, see the xref:circleci-mcp-overview.adoc[CircleCI MCP Overview] page.
 
-A docs MCP server exposes your documentation and knowledge sources to AI assistants through the Model Context Protocol. When configured, AI assistants can:
+== What you can do
 
-* Search your documentation for relevant information
-* Retrieve full documents by URL
-* Provide feedback on documentation quality
-* Answer questions about your product or service
+When connected to the CircleCI docs MCP server, your AI assistant can:
 
-The hosted approach means you deploy the server once and any MCP-compatible client can access it.
+* Search CircleCI documentation for relevant information
+* Answer questions about CircleCI features and configuration
+* Retrieve full documentation pages by URL
+* Provide accurate, up-to-date information from CircleCI's knowledge base
+* Help you write and troubleshoot CircleCI configuration
+
+This is useful when working on CircleCI configurations, debugging pipeline issues, or learning about CircleCI features without leaving your development environment.
 
 == Prerequisites
 
-Before setting up a docs MCP server, you need:
+Before connecting to the CircleCI docs MCP server, ensure you have:
 
-* A Kapa account with a configured project
-* Knowledge sources connected to your Kapa project (documentation, help articles, or other content)
-* An AI coding assistant or MCP host that supports remote MCP servers
-* Depending on your authentication choice:
-** A project API key for API key authentication
-** A Google or GitHub account for public OAuth authentication
-** Team members with Kapa accounts for internal authentication
+* An AI coding assistant or MCP client that supports remote MCP servers over HTTP (such as Claude Code, Claude Desktop, or Cursor)
+* A CircleCI account (for authentication)
 
-== 1. Create the MCP integration
+== Connecting your AI assistant
 
-. Go to your Kapa project at link:https://app.kapa.ai[app.kapa.ai].
-. Navigate to menu:Integrations[MCP].
-. Select *Create MCP server*.
-. Choose your subdomain. This subdomain determines your server URL and cannot be changed later:
-+
-[source,console]
-----
-https://<your-subdomain>.mcp.kapa.ai
-----
-
-. Select an authentication type based on your use case:
-
-* *API key* - For agents and backends you operate. Requires an API key with every request.
-* *Public* - For your external users in tools like Cursor or Claude Code. Requires users to authenticate with Google or GitHub. Only available for projects with public information.
-* *Internal* - For your own team members. Requires users to log in with their Kapa account.
-
-. Select *Create*.
-
-The integration is created and your MCP server is now running at your chosen subdomain.
-
-== 2. Configure the MCP server
-
-After creating the integration, you can customize how the MCP server behaves.
-
-=== 2.a. Enable optional tools
-
-By default, the server provides a search tool and a feedback tool. You can enable additional tools:
-
-. In your MCP integration settings, go to the *Tools* section.
-. To enable the documents tool for fetching full documents by URL, select the checkbox for *Documents tool*.
-. Save your changes.
-
-The documents tool allows AI assistants to retrieve complete documents rather than just search snippets, which is useful when the assistant needs full context.
-
-=== 2.b. Customize tool names and descriptions
-
-You can modify how tools appear to AI assistants:
-
-. In the *Tools* section of your integration settings, find the tool you want to customize.
-. Edit the tool name or description.
-. Save your changes.
-
-TIP: The tool names and descriptions influence when AI assistants decide to call them. Kapa provides defaults suitable for most use cases. Only customize if you need to emphasize specific behaviors or align with your team's terminology.
-
-=== 2.c. Restrict to specific source groups
-
-If you want to limit the server to only search certain knowledge sources:
-
-. In your integration settings, find the *Source groups* section.
-. Select the source groups you want to include.
-. Save your changes.
-
-When configured, the server only returns results from sources in the selected groups, plus any global sources.
-
-== 3. Connect your AI assistant
-
-The connection steps depend on your AI assistant. Use the server URL you created in step 1.
+The CircleCI docs MCP server is available at a public URL. The connection steps depend on your AI assistant.
 
 [tabs]
 ====
 Claude Code::
 +
 --
-. Use the following command to add your docs MCP server to Claude Code:
+. Use the following command to add the CircleCI docs MCP server to Claude Code:
 +
 [source,console]
 ----
-$ claude mcp add --transport http docs-server https://<your-subdomain>.mcp.kapa.ai
+$ claude mcp add --transport http circleci-docs https://circleci.mcp.kapa.ai
 ----
-+
-Replace `<your-subdomain>` with the subdomain you chose when creating the integration.
 
-. Run the `/mcp` command inside Claude Code, select your docs server.
-. Complete the authentication flow:
-+
-* For public OAuth, select *Authenticate* to complete the OAuth2 sign-in in your browser.
-* For API key authentication, add the API key to your Claude Code configuration.
-* For internal authentication, log in with your Kapa account.
+. Run the `/mcp` command inside Claude Code and select `circleci-docs`.
+. Select *Authenticate* to complete the OAuth2 sign-in in your browser.
 --
 Claude Desktop and claude.ai::
 +
 --
+For guidance on setting up custom connectors, see the link:https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp[Claude documentation].
+
 . Go to menu:Settings[Connectors].
 . Select *Add custom connector*.
-. Enter `https://<your-subdomain>.mcp.kapa.ai` as the server URL.
-. Select *Add*, then complete the authentication flow in your browser.
+. Enter `https://circleci.mcp.kapa.ai` as the server URL.
+. Select *Add*, then complete the OAuth2 sign-in in your browser.
 --
 Cursor::
 +
@@ -128,30 +67,30 @@ Add the following configuration to your Cursor `mcp.json` file:
 ----
 {
   "mcpServers": {
-    "docs-server": {
-      "url": "https://<your-subdomain>.mcp.kapa.ai"
+    "circleci-docs": {
+      "url": "https://circleci.mcp.kapa.ai"
     }
   }
 }
 ----
 
-Replace `<your-subdomain>` with your chosen subdomain. Complete the authentication flow when prompted.
+Cursor will prompt you to authenticate when you first use the server. Complete the OAuth2 sign-in in your browser.
 --
 ====
 
-== 4. Test the connection
+== Test the connection
 
-After connecting your AI assistant:
+After connecting your AI assistant to the CircleCI docs MCP server:
 
-. Ask a question about your documentation, for example: "How do I configure authentication?"
-. The AI assistant should use your docs MCP server to search your knowledge sources.
-. Verify the assistant receives relevant information from your documentation.
+. Ask a question about CircleCI, for example: "How do I configure parallelism in CircleCI?" or "What executor types does CircleCI support?"
+. The AI assistant should use the CircleCI docs MCP server to search CircleCI's documentation.
+. Verify the assistant receives relevant information from CircleCI docs.
 
 If the connection fails, see the <<troubleshooting>> section below.
 
 == Available tools
 
-Your docs MCP server exposes the following tools to AI assistants:
+The CircleCI docs MCP server exposes the following tools to AI assistants:
 
 [.table-scroll]
 --
@@ -159,131 +98,86 @@ Your docs MCP server exposes the following tools to AI assistants:
 |===
 |Tool |Description
 
-|`search_<product>_knowledge_sources`
-|Searches all connected knowledge sources and returns the most relevant chunks in descending order of relevance. Each chunk is a short, self-contained snippet with the source URL and content in Markdown.
+|`search_circleci_knowledge_sources`
+|Searches CircleCI documentation and knowledge sources. Returns the most relevant content chunks in descending order of relevance. Each chunk includes the source URL and content in Markdown.
 
-|`get_<product>_knowledge_documents` (optional)
-|Fetches full documents by their exact source URL. Returns complete content in Markdown, paginated and truncated to avoid flooding the assistant's context window.
+|`get_circleci_knowledge_documents`
+|Fetches full CircleCI documentation pages by their exact URL. Returns complete content in Markdown, paginated to avoid overwhelming the assistant's context window.
 
 |`give_feedback`
-|Lets the assistant provide feedback on documentation quality, product gaps, or server issues. Feedback is recorded against your Kapa project.
+|Lets the assistant provide feedback about CircleCI documentation quality or gaps. Feedback is sent to the CircleCI documentation team.
 |===
 --
-
-The `<product>` placeholder in tool names is determined by your Kapa project name.
 
 [#troubleshooting]
 == Troubleshooting
 
 === Authentication fails
 
-If authentication fails:
+If authentication fails when connecting to the CircleCI docs MCP server:
 
-* For public OAuth, ensure you are using a Google or GitHub account
-* For internal authentication, verify your Kapa account has the *Use Internal Chat Assistant* permission for the project
-* For API key authentication, confirm the API key is valid and properly configured in your MCP client
+* Ensure you have a CircleCI account
+* Try disconnecting and reconnecting the MCP server in your AI assistant
+* Check that your AI assistant supports OAuth2 authentication for MCP servers
+* Clear your browser cache and try authenticating again
 
 === No results returned
 
 If searches return no results:
 
-* Verify your Kapa project has connected knowledge sources
-* Check if source group restrictions are limiting the searchable content
-* Ensure your knowledge sources are successfully indexed in Kapa
+* Verify the MCP server is connected in your AI assistant (check the `/mcp` command in Claude Code or your MCP settings)
+* Try rephrasing your question to be more specific
+* Check that you are asking about CircleCI features or documentation
 
 === Rate limit errors
 
-The MCP server has rate limits per tool:
+The CircleCI docs MCP server has rate limits to ensure fair usage:
 
 [.table-scroll]
 --
-[cols="1,1,1"]
+[cols="1,1"]
 |===
-|Tool |Per-user limit (OAuth) |Per-team limit
+|Tool |Per-user limit
 
 |Search tool
 |300 requests per day
-|60 requests per minute
 
 |Documents tool
 |300 requests per day
-|100 requests per minute
 |===
 --
 
-API key authenticated servers use only the per-team limit across all projects. If you need higher limits, contact link:mailto:support@kapa.ai[support@kapa.ai].
+If you consistently hit rate limits, consider:
 
-== Advanced configuration
+* Asking more targeted questions to reduce the number of searches
+* Using the CircleCI web documentation at link:https://circleci.com/docs[circleci.com/docs] for extended research sessions
 
-=== Programmatic configuration with `_meta`
+=== Connection issues
 
-When integrating the MCP server into your agent via code with API key authentication, you can pass additional parameters via the MCP `_meta` field to control tool behavior:
+If your AI assistant cannot connect to the server:
 
-[source,python]
-----
-result = await session.call_tool(
-    name="search_acme_knowledge_sources",
-    arguments={"query": "How do I configure SSO?"},
-    meta={
-        "top_k": 5,
-        "max_chars": 35000,
-        "use_pruning": True,
-        "source_ids_include": ["550e8400-e29b-41d4-a716-446655440000"],
-        "user": {
-            "email": current_user.email,
-            "unique_client_id": current_user.id,
-        },
-    },
-)
-----
+* Verify the server URL is correct: `https://circleci.mcp.kapa.ai`
+* Check that your AI assistant is up to date
+* Ensure your network allows HTTPS connections to external MCP servers
+* Try removing and re-adding the MCP server configuration
 
-Available parameters:
+== Example questions
 
-[.table-scroll]
---
-[cols="1,1,3"]
-|===
-|Parameter |Type |Description
+Here are example questions you can ask your AI assistant once connected to the CircleCI docs MCP server:
 
-|`use_pruning`
-|boolean
-|Prune low relevance chunks after retrieval at the cost of added latency. Defaults to false.
-
-|`top_k`
-|integer (1-15)
-|Maximum number of chunks to return. Defaults to 15.
-
-|`max_chars`
-|integer (1-60000)
-|Maximum characters across all returned chunks. Defaults to 35,000.
-
-|`source_ids_include`
-|array of UUIDs
-|Only return results from these specific sources.
-
-|`source_group_ids_include`
-|array of UUIDs
-|Only return results from sources in these groups.
-
-|`redact_query`
-|boolean
-|Redact query text from analytics for sensitive queries.
-
-|`user.email`
-|string
-|User's email address for analytics.
-
-|`user.unique_client_id`
-|string
-|Your identifier for the user for linking analytics.
-|===
---
-
-NOTE: Programmatic configuration via `_meta` requires API key authentication and is not available for public or internal OAuth-authenticated servers.
+* "How do I set up parallelism in CircleCI?"
+* "What are the available Docker executor resource classes?"
+* "How do I configure a schedule trigger?"
+* "What is the difference between contexts and environment variables?"
+* "How do I use workspaces to share data between jobs?"
+* "What executors support Apple Silicon?"
+* "How do I configure test splitting?"
 
 == Next steps
 
-* xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
-* xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server]
-* xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
-* link:https://docs.kapa.ai/integrations/mcp/overview[Kapa MCP Documentation]
+Now that you have connected to the CircleCI docs MCP server, you can:
+
+* Connect to CircleCI's operational MCP servers to manage your pipelines: xref:circleci-mcp-overview.adoc[CircleCI MCP Overview]
+* Learn about the hosted CircleCI MCP server: xref:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP Server]
+* Explore the CircleCI CLI MCP: xref:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
+* Browse the full CircleCI documentation: link:https://circleci.com/docs[CircleCI Docs]
