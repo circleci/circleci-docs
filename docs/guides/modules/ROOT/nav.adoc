@@ -338,7 +338,7 @@
 *** xref:toolkit:circleci-mcp-overview.adoc[CircleCI MCP overview]
 *** xref:toolkit:connecting-to-the-circleci-mcp-server.adoc[Connecting to the CircleCI MCP server]
 *** xref:toolkit:connecting-to-the-circleci-cli-mcp.adoc[Connecting to the CircleCI CLI MCP]
-*** xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Connecting to a Docs MCP Server]
+*** xref:toolkit:connecting-to-a-docs-mcp-server.adoc[Connecting to the CircleCI Docs MCP Server]
 
 ** AI-powered features
 *** xref:guides:toolkit:enable-ai-powered-features.adoc[Enable AI-powered features]
