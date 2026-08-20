@@ -39,7 +39,7 @@ A job might end up being queued because you have reached your organization's con
 [#why-are-my-jobs-queuing-performance-plan]
 === Why are my jobs queuing even though I'm on the Performance Plan?
 
-Concurrency limits are set per xref:reference:ROOT:configuration-reference.adoc#resourceclass[resource class] and vary between Free, Performance, and Custom plans. For example, macOS resource classes have a lower concurrency limit than other resource classes on the same plan. If you are experiencing queuing on your jobs, it is possible you have reached the limit for that specific resource class, even if you have not reached your overall plan limit. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI Support] to request an increase to your limit.
+Concurrency limits are set per xref:reference:ROOT:configuration-reference.adoc#resourceclass[Resource Class] and vary between Free, Performance, and Custom plans. For example, macOS resource classes have a lower concurrency limit than other resource classes on the same plan. If you are experiencing queuing, you may have reached the limit for that specific resource class. This can happen even if you have not reached your overall plan limit. link:https://support.circleci.com/hc/en-us/requests/new[Contact CircleCI Support] to request an increase to your limit.
 
 [#find-project-projects-dashboard]
 === Why can I not find my project on the Projects dashboard?
