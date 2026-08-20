@@ -62,7 +62,7 @@ The Scale plan is designed for large organizations with advanced compliance, cus
 In addition to everything in the Performance plan, the Scale plan includes:
 
 * *All resource classes*: Access to every available machine size across all execution environments, including GPUs.
-* *Custom concurrency*: Configure exactly how many jobs run concurrently across all build configurations and execution environments.
+* *No concurrency limits*: Run an unlimited number of jobs concurrently across all build configurations and execution environments. macOS resource classes are the exception and retain a custom concurrency limit.
 * *Custom user seat count*: Set user limits based on your organization's needs.
 * *Unlimited self-hosted runners*: No cap on the number of jobs running on your own infrastructure.
 * *Custom storage retention*: Full customization of retention periods for artifacts, workspaces, and caches.

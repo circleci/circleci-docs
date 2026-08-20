@@ -55,7 +55,7 @@ In the context of <<deployment,deployments>>, a collection of code and configura
 
 == Concurrency
 
-Running multiple jobs at the same time, either multiple jobs within a single <<workflow>> or multiple workflows running across an organization. Concurrency is limited by soft limits on each <<resource-class>>. Concurrency is _not_ the same as <<parallelism>>, which splits the tests of a single job across multiple containers. See the xref:guides:optimize:concurrency.adoc[Concurrency] page.
+Running multiple jobs at the same time, either multiple jobs within a single <<workflow>> or multiple workflows running across an organization. Free, Performance, and Custom plans each have a concurrency limit that varies by <<resource-class>> and plan tier. Scale plan organizations have no concurrency limit, except for macOS resource classes, which retain a custom concurrency limit. Concurrency is _not_ the same as <<parallelism>>, which splits the tests of a single job across multiple containers. See the xref:guides:optimize:concurrency.adoc[Concurrency] page.
 
 == Config policies
 
