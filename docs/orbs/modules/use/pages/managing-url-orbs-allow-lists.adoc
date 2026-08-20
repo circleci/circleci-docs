@@ -310,11 +310,11 @@ For example, to use orbs from both public and private GitHub repositories in the
 
 . Create an allow-list entry with:
 ** **Name**: Public GitHub orbs
-** **URL Prefix**: `https://raw.githubusercontent.com/my-org/`
+** **URL Prefix**: ++`https://raw.githubusercontent.com/my-org/`++
 ** **Auth**: None
 . Create a second allow-list entry with:
 ** **Name**: Private GitHub orbs
-** **URL Prefix**: `https://raw.githubusercontent.com/my-org/`
+** **URL Prefix**: ++`https://raw.githubusercontent.com/my-org/`++
 ** **Auth**: GitHub App (or GitHub OAuth)
 
 When CircleCI encounters a URL orb reference, it tries each matching allow-list entry until it successfully fetches the orb content. This approach lets you use orbs from both public and private repositories in the same organization.
