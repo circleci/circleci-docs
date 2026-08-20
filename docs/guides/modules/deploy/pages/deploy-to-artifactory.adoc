@@ -8,7 +8,7 @@ In this how-to guide, you will learn how to upload artifacts to Artifactory in C
 [#introduction]
 == Introduction
 
-Artifactory has documentation explaining how to use their link:https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API[REST API].
+Artifactory has documentation explaining how to use their link:https://docs.jfrog.com/integrations/docs/jfrog-api[REST API].
 
 Below are some sample projects showing how to best use CircleCI and Artifactory together. Ensure that you have created your repository before starting this example, otherwise CircleCI will not have a place to store your dependencies.
 
@@ -17,18 +17,18 @@ Below are some sample projects showing how to best use CircleCI and Artifactory 
 
 Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to Artifactory using their respective deploy commands.
 
-* link:https://jfrog.com/help/r/jfrog-integrations-documentation/ecosystem-integration-maven-artifactory-plugin[Deploying with Maven]
-* link:https://www.jfrog.com/confluence/display/RTF/Gradle+Artifactory+Plugin[Deploying with Gradle]
+* link:https://docs.jfrog.com/integrations/docs/maven-artifactory-plugin[Deploying with Maven]
+* link:https://docs.jfrog.com/integrations/docs/artifactory-gradle-plugin[Deploying with Gradle]
 
 [#jfrog-cli]
 == JFrog CLI
 
-If you want to use the link:https://docs.jfrog-applications.jfrog.io/jfrog-applications/jfrog-cli[JFrog CLI], you can install it by following the steps below.
+If you want to use the link:https://docs.jfrog.com/integrations/docs/jfrog-cli[JFrog CLI], you can install it by following the steps below.
 
 [#add-jfrog-to-your-configuration]
 === 1. Add JFrog to your configuration
 
-You can install JFrog CLI in one of a few ways. Refer to the link:https://docs.jfrog-applications.jfrog.io/jfrog-applications/jfrog-cli/install#installation[JFrog documentation] for the method best suited for your pipeline.
+You can install JFrog CLI in one of a few ways. Refer to the link:https://docs.jfrog.com/integrations/docs/jfrog-cli-quick-start[JFrog documentation] for the method best suited for your pipeline.
 
 For example, if using Node, add the following to your `.circleci/config.yml`:
 

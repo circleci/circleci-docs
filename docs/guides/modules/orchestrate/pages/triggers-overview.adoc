@@ -59,7 +59,7 @@ This method is supported for GitHub (OAuth and App) and Bitbucket (Cloud and Dat
 
 TIP: **GitHub OAuth and Bitbucket Cloud pipelines** can also be triggered using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint, which is described in the **CircleCI Server** tab. However, the method outlined in this section is recommended.
 
-Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[v2 API endpoint] `https://circleci.com/api/v2/project/<project-slug>/pipeline/run`.
+Trigger a pipeline for a project using the link:https://circleci.com/docs/api/v2/index.html#tag/Pipeline/operation/triggerPipelineRun[v2 API endpoint] ++`https://circleci.com/api/v2/project/<project-slug>/pipeline/run`++.
 
 . If you have not already, get set up to use API v2 by following the steps in the  xref:toolkit:api-developers-guide#authentication-and-authorization[API Developers Guide].
 

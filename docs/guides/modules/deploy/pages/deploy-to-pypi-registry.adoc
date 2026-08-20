@@ -250,7 +250,7 @@ Trusted publishing from CircleCI self-hosted runners works.
 [#notes]
 == Notes
 
-* You can test the full flow against link:https://test.pypi.org[TestPyPI] before publishing to production PyPI. Configure a separate trusted publisher on TestPyPI and point `twine` at it with `twine upload --repository testpypi dist/*`. If you use the manual exchange, use the `testpypi` audience and the `https://test.pypi.org/_/oidc/mint-token` endpoint instead.
+* You can test the full flow against link:https://test.pypi.org[TestPyPI] before publishing to production PyPI. Configure a separate trusted publisher on TestPyPI and point `twine` at it with `twine upload --repository testpypi dist/*`. If you use the manual exchange, use the `testpypi` audience and the ++`https://test.pypi.org/_/oidc/mint-token`++ endpoint instead.
 * Pull requests from forks do not have access to CircleCI secrets, including OIDC tokens. A fork cannot trigger a publish.
 
 [#track-deployments-with-deploy-markers]

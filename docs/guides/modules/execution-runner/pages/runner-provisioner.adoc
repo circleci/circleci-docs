@@ -368,7 +368,7 @@ The merge is by field, so the `large` class above inherits everything except mem
 [#connecting-to-server]
 == Connecting to a CircleCI Server instance
 
-By default, Runner Provisioner connects to the CircleCI Cloud API at `https://runner.circleci.com`. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
+By default, Runner Provisioner connects to the CircleCI Cloud API at ++`https://runner.circleci.com`++. If you are running a self-hosted CircleCI Server instance, set `provisioner.circleciAPIAddr` to your server's hostname in `my-values.yaml`:
 
 .`my-values.yaml`
 [source,yaml]
@@ -501,7 +501,7 @@ When enabled, the provisioner attaches a containerDisk that ships the `circleci-
 | Description
 
 | `circleciAPIAddr`
-| `https://runner.circleci.com`
+| ++`https://runner.circleci.com`++
 | CircleCI Runner API address.
 
 | `circleToken`
