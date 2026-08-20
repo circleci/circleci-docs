@@ -56,7 +56,7 @@ NOTE: The test ping event has an abbreviated payload for ease of testing. See fu
 
 | Certificate Validation
 | Y
-| Ensure the receiving host has a valid SSL certificate before sending an event. You should only leave this unchecked for testing purposes.
+| Ensure the receiving host has a valid SSL certificate before sending an event. Only leave this unchecked for testing purposes.
 
 | Secret token
 | N
@@ -108,7 +108,7 @@ A number of HTTP headers are set on webhooks, as detailed in the table below.
 [#validate-webhooks]
 == Validate outbound webhooks
 
-You should validate webhooks as they come in to third party services to verify that they are coming from CircleCI. To support this, when creating a webhook, you can optionally provide a secret token. Each outgoing HTTP request to your service will contain a `circleci-signature` header. This header will consist of a comma-separated list of versioned signatures.
+Validate webhooks as they come in to third-party services to verify that they are coming from CircleCI. To support this, when creating a webhook, you can optionally provide a secret token. Each outgoing HTTP request to your service will contain a `circleci-signature` header. This header will consist of a comma-separated list of versioned signatures.
 
 [,shell]
 ----
@@ -117,7 +117,7 @@ Host: your-webhook-host
 circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41ccc2299f9,v2=...,v3=...
 ----
 
-Currently, the latest (and only) signature version is v1. You should _only_ check the latest signature type to prevent downgrade attacks.
+Currently, the latest (and only) signature version is v1. _Only_ check the latest signature type to prevent downgrade attacks.
 
 The v1 signature is the HMAC-SHA256 digest of the request body, using the configured signing secret as the secret key.
 

@@ -757,7 +757,7 @@ externalized MongoDB instance.
 
 |mongodb.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |mongodb.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"datadir"+` |
@@ -1139,7 +1139,7 @@ values are not used by the PostgreSQL chart.
 
 |postgresql.primary.persistence.existingClaim |string |`+""+` |To
 increase PVC size, follow this guide:
-xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |postgresql.primary.persistence.size |string |`+"8Gi"+` |
 
@@ -1227,7 +1227,7 @@ this value is '`15672`' else port of external rabbitmq instance
 
 |rabbitmq.persistence.existingClaim |string |`+""+` |To increase PVC
 size, follow this guide:
-xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |rabbitmq.persistence.size |string |`+"8Gi"+` |
 
@@ -1272,7 +1272,7 @@ xref:operator:expanding-internal-database-volumes.adoc[Expanding internal databa
 
 |redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1287,7 +1287,7 @@ xref:operator:expanding-internal-database-volumes.adoc[Expanding internal databa
 
 |redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-xref:operator:expanding-internal-database-volumes.adoc[Expanding internal database volumes]
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |

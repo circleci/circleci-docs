@@ -26,7 +26,7 @@ For TFVC repositories, we recommend using the git-tfs tool. Here are links to th
 Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
 
 . Create an empty repository on your GitHub Enterprise instance.
-. Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
+. Create a bare clone of your external repository on your local machine, fetching all remote tags (`refs/tags/\*`) and branch heads (`refs/heads/\*`).
 +
 ```shell
 git clone https://external-host.com/extuser/repo.git --bare

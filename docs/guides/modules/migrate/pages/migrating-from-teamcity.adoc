@@ -37,7 +37,7 @@ We have various other features that set our solution apart. https://circleci.com
 === High-level differences
 
 * CircleCI and TeamCity share the concept of projects.
-* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (for example, run unit tests).
+* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/concepts/#jobs[CircleCI jobs]. Jobs are atomic units of work consisting of many steps or commands to achieve a goal, such as running unit tests.
 * TeamCity has traditionally used the UI to configure most builds, with Kotlin Script configuration being a newer, recent feature. CircleCI uses YAML to configure the majority of pipeline functionality.
 
 [.table-scroll]
