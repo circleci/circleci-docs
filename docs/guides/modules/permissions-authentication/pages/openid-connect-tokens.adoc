@@ -205,7 +205,7 @@ AWS STS maps CircleCI's `oidc.circleci.com/project-id` OIDC claim to a link:http
       "Action": "sts:AssumeRoleWithWebIdentity",
       "Condition": {
         "StringEquals": {
-          "oidc.circleci.com/org/<organization_id>:aud": "sts.amazonaws.com",
+          "oidc.circleci.com/org/<organization_id>:aud": "<organization_id>",
           "oidc.circleci.com/org/<organization_id>:oidc.circleci.com/project-id": "<project-id>"
         }
       }
@@ -285,7 +285,7 @@ TIP: You can find your CircleCI organization ID by navigating to menu:Org[Overvi
 
 The default OpenID Connect ID tokens issued by CircleCI have a fixed audience (see `aud` in <<format-of-the-openid-connect-id-token,the table below>>). This audience is also the organization ID. To generate tokens with _custom_ audience claims, see the xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] page.
 
-=== 2. Configure GCP Workload Identity Federation
+=== 2. Configure GCP Workload Identity federation
 
 GCP Workload Identity Federation is a feature that allows you to use CircleCI's OIDC tokens to authenticate with GCP. It allows applications outside Google Cloud to access Google Cloud resources without storing service account credentials. You can use Identity and Access Management (IAM) to grant access to specific Google Cloud resources.
 
@@ -573,7 +573,7 @@ A string in which `organization_id`, `project-id`, and `user_id` are UUIDs that 
 | The audience. By default, this is `ORGANIZATION_ID`, a string containing a UUID that identifies the job's project's organization. To customize the audience you can generate an OIDC token with a custom audience. See xref:oidc-tokens-with-custom-claims.adoc[OIDC Tokens With Custom Claims] for more information.
 
 | `iat`
-| The time of issuance. This is the time the token was created, which is shortly before the job starts.
+| The time of issuance. CircleCI creates the token shortly before the job starts.
 
 | `exp`
 | The expiration time. Its value is one hour after the time of issuance.
@@ -613,10 +613,10 @@ CircleCI's OpenID Connect ID tokens also contain some https://openid.net/specs/o
 | A boolean indicating if the CI job is started using the SSH rerun feature.
 
 | `oidc.circleci.com/vcs-origin`
-| The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. This is not present for pipelines triggered by custom webhooks.
+| The URL of the repository that triggered the pipeline. Its value is a string similar to `github.com/organization-123/repo-1`. The claim is absent for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/vcs-ref`
-| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. This is not present for pipelines triggered by custom webhooks.
+| The reference to the change that triggered the pipeline. Its value is a string similar to `refs/heads/main`. The claim is absent for pipelines triggered by custom webhooks.
 
 | `oidc.circleci.com/workflow-id`
 | The unique identifier for the workflow running the job. Its value is a string containing a UUID identifying the CircleCI workflow.
