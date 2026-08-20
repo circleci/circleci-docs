@@ -10,7 +10,7 @@ The link:https://github.com/CircleCI-Public/chunk-cli[`chunk` CLI] is a develope
 
 After following these steps, say "review my changes" in Claude Code to get a review against your team's standards. Say "validate on the sidecar" to run checks in a CircleCI Cloud environment.
 
-NOTE: **Chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from link:https://circleci.com/docs/chunk-setup-and-overview/[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
+NOTE: **Chunk CLI vs Chunk by CircleCI.** The `chunk` CLI is a local developer tool. It is separate from xref:toolkit:chunk-setup-and-overview.adoc[Chunk by CircleCI], the AI-powered CI/CD assistant in the CircleCI web app.
 
 [#installation]
 == 1. Installation

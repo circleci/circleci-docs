@@ -166,7 +166,7 @@ The full `<vcs-type> <org-id> <project-id>` section of the subcommand is your pr
 .The project slug available in project settings
 image::guides:ROOT:project-settings-overview.png[Screenshot showing where to find the project slug]
 
-For full details on the `dlc purge` sub-command, refer to the link:https://circleci-public.github.io/circleci-cli/circleci_project_dlc.html[CLI reference].
+For full details on the `dlc purge` sub-command, refer to the link:https://cli.circleci.com/reference/[CLI reference].
 
 
 

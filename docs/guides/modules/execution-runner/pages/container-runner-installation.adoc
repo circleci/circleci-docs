@@ -172,7 +172,7 @@ CircleCI has tested, and currently supports link:https://gateway.envoyproxy.io/[
 ****
 
 
-=== a. Install Envoy Gateway to your cluster
+=== A. Install Envoy Gateway to your cluster
 . First, install the Gateway API `CRDs` and Envoy Gateway as defined in the link:https://gateway.envoyproxy.io/latest/install/install-helm/[Envoy Gateway Helm installation document].
 . Replace `<version>` with the link:https://gateway.envoyproxy.io/news/releases/matrix/[most recent stable release] compatible with your cluster, then run the following command:
 +
@@ -188,7 +188,7 @@ kubectl wait --timeout=5m -n envoy-gateway-system deployment/envoy-gateway --for
 ----
 
 
-=== b. Enable the Rerun job with SSH feature
+=== B. Enable the Rerun job with SSH feature
 
 . Once all Gateway API prerequisites are installed and available, add the `agent.ssh.enabled = true` parameter to the container runner configuration:
 +
@@ -208,7 +208,7 @@ For a full list of SSH configuration options, refer to the link:https://github.c
 helm upgrade --wait --timeout=5m <release-name> container-agent/container-agent -n <namespace> -f values.yaml
 ----
 
-. Wait for the SSH link:https://gateway-api.sigs.k8s.io/api-types/gateway/#gateway[Gateway] to be programmed:
+. Wait for the SSH link:https://gateway-api.sigs.k8s.io/reference/api-types/gateway/#gateway[Gateway] to be programmed:
 +
 [source,shell]
 ----

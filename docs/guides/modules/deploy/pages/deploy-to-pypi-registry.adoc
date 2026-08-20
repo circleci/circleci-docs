@@ -8,7 +8,7 @@ NOTE: Publishing to PyPI with trusted publishing is currently in preview.
 
 Follow this how-to guide to configure CircleCI to publish to the Python Package Index (PyPI) using trusted publishing. Trusted publishing uses OpenID Connect (OIDC) to exchange a short-lived CircleCI token for a PyPI API token at publish time. No long-lived `PYPI_API_TOKEN` exists to store, rotate, or leak.
 
-For a functional example you can clone and adapt, see the link:https://github.com/CircleCI-Public/sign-and-publish-examples/tree/main/pypi[CircleCI PyPI trusted publishing example].
+For a functional example you can clone and adapt, see the link:https://github.com/CircleCI-Public/sign-and-publish-examples[CircleCI sign and publish examples].
 
 [#introduction]
 == Introduction

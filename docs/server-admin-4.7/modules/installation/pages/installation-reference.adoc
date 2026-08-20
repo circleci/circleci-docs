@@ -12,7 +12,7 @@ The following are example manifests that contain the basic required parameters n
 
 [#aws]
 === AWS
-The snippet below is an example manifest of the necessary parameters for an installation of CircleCI server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
+The snippet below is an example manifest of the necessary parameters for an installation of CircleCI Server in an AWS environment. Note that this installation uses IAM roles for service accounts (IRSA), which is recommended. Fields with base64 encoding are marked as such.
 
 [source,yaml]
 ----
@@ -88,7 +88,7 @@ rabbitmq:
 
 [#gcp]
 === GCP
-The below is an example manifest of the necessary parameters for an installation of CircleCI server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
+The below is an example manifest of the necessary parameters for an installation of CircleCI Server in a GCP environment. Note that this installation uses Workload Identity, which is recommended. Fields with base64 encoding are marked as such.
 
 [source,yaml]
 ----
@@ -726,7 +726,7 @@ externalized MongoDB instance.
 
 |mongodb.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |mongodb.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"datadir"+` |
@@ -1070,7 +1070,7 @@ with your externalized postgres instance
 
 |postgresql.primary.persistence.existingClaim |string |`+""+` |To
 increase PVC size, follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |postgresql.primary.persistence.size |string |`+"8Gi"+` |
 
@@ -1130,7 +1130,7 @@ this value is '`15672`' else port of external rabbitmq instance
 
 |rabbitmq.persistence.existingClaim |string |`+""+` |To increase PVC
 size, follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |rabbitmq.persistence.size |string |`+"8Gi"+` |
 
@@ -1164,7 +1164,7 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.master.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |redis.master.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |
@@ -1179,7 +1179,7 @@ https://circleci.com/docs/server/operator/expanding-internal-database-volumes
 
 |redis.slave.persistence.size |string |`+"8Gi"+` |To increase PVC size,
 follow this guide:
-https://circleci.com/docs/server/operator/expanding-internal-database-volumes
+xref:operator:expanding-internal-database-volumes.adoc[Expanding Internal Database Volumes]
 
 |redis.slave.podAnnotations.”backup.velero.io/backup-volumes” |string
 |`+"redis-data"+` |

@@ -4,7 +4,7 @@
 :experimental:
 
 NOTE: SAML single sign-on for CircleCI is available for Scale Plan customers. See xref:sso-overview.adoc#prerequisites-and-limitations[Prerequisites and Limitations]
-for further details. Submit feedback on our link:https://circleci.canny.io/identities-permissions/p/single-sign-on-sso[Ideas board].
+for further details.
 
 == Set up SAML SSO
 
@@ -27,7 +27,7 @@ Next you will configure your IdP. The steps to do this will vary depending on yo
 . Open your IdP and paste the required configuration details (**Setup Parameters** and **Allowed iFrame Origin**) retrieved from CircleCI in the previous section to configure your IdP.
 +
 TIP: If your IdP requires a logo for the application (for example, Okta), you can download the CircleCI logo from our link:https://brand.circleci.com/613faff00/p/732047-logos[brand site].
-. Add `https://app.circleci.com` to your IdP's trusted origins for iframe embedding. This is required to validate a user's active SSO session when they are interacting with an SSO organization in CircleCI.
+. Add `https://app.circleci.com` to your IdP's trusted origins for iframe embedding. Adding this origin validates a user's active SSO session when they interact with an SSO organization in CircleCI.
 . The IdP will generate the following information, which you will need to copy in order to complete the next section:
 ** SSO URL
 ** x509 signing certificate

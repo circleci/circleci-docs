@@ -295,4 +295,4 @@ circleci orb list <my-namespace> --private
 [#next-steps]
 == Next steps
 
-For more information on how to use the `circleci orb` command, see the CLI link:https://circleci-public.github.io/circleci-cli/circleci_orb.html[documentation].
+For more information on how to use the `circleci orb` command, see the CLI link:https://cli.circleci.com/reference/[documentation].
