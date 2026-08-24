@@ -79,7 +79,7 @@ Resource classes running on gen2 infrastructure offer significant performance an
 [#performance-improvements]
 ==== Performance improvements
 
-Using more modern compute, gen2 instances deliver up to 25% faster performance compared to gen1 equivalents. This figure comes from real-world benchmarks across open source projects.
+Using more modern compute, gen2 instances deliver up to 24% faster performance compared to gen1 equivalents. This figure comes from real-world benchmarks across open source projects.
 
 On a per-resource-class basis, gen2 pricing can be higher or lower than its gen1 equivalent. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
@@ -109,7 +109,7 @@ NOTE: Gen3 is an Open Beta feature. See the <<gen3-beta-notice,Gen3 Beta Release
 [#gen3-performance-improvements]
 ==== Performance improvements
 
-Gen3 instances deliver up to 67% faster performance compared to gen1 equivalents, based on benchmarks collected during Beta across open source projects.
+Gen3 instances deliver up to 85% faster performance compared to gen1 equivalents, based on benchmarks collected during Beta across open source projects.
 
 Gen3 costs less than both its gen1 and gen2 equivalents. See our link:https://circleci.com/pricing/price-list/[Pricing Page] for details.
 
