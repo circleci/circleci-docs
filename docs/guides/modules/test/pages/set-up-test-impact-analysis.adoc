@@ -397,3 +397,88 @@ jobs:
       - store_test_results:
           path: test-reports
 ----
+
+[#dynamic-parallelism]
+=== Set parallelism from the number of selected tests
+
+Use the `circleci testsuite list-tests` command in a setup workflow to count the selected test atoms, then pass a parallelism value to the continued workflow as a pipeline parameter. This approach requires xref:orchestrate:dynamic-config.adoc[Dynamic Configuration] to be enabled for your project.
+
+The `list-tests` command prints the selected test atoms to stdout, one per line, without running them. It applies the same selection rules as `circleci testsuite run`, so the count reflects what the test job runs. The `--run-tests` and `--analyze-tests` flags accept the same values as `run`. If your test job passes either flag, pass the same flags to `list-tests` so the count matches.
+
+.Setup configuration that counts the selected test atoms
+[source,yaml]
+----
+# .circleci/config.yml
+version: 2.1
+setup: true
+
+orbs:
+  continuation: circleci/continuation@1
+
+jobs:
+  set-parallelism:
+    executor: my-executor
+    steps:
+      # Check out the code and install the dependencies the discover command needs.
+      - setup
+      - run:
+          name: Count selected test atoms
+          command: |
+            TESTS_PER_NODE=20
+            MAX_PARALLELISM=10
+
+            # List the test atoms that would be selected, without running them.
+            TEST_COUNT=$(circleci testsuite list-tests "ci tests" | wc -l)
+
+            # Round up to the next whole node, then clamp to the range 1-MAX_PARALLELISM.
+            PARALLELISM=$(( (TEST_COUNT + TESTS_PER_NODE - 1) / TESTS_PER_NODE ))
+            if [ "$PARALLELISM" -lt 1 ]; then
+              PARALLELISM=1
+            fi
+            if [ "$PARALLELISM" -gt "$MAX_PARALLELISM" ]; then
+              PARALLELISM=$MAX_PARALLELISM
+            fi
+
+            echo "Selected ${TEST_COUNT} test atoms, continuing with parallelism ${PARALLELISM}"
+            echo "{\"test_parallelism\": ${PARALLELISM}}" > /tmp/parameters.json
+      - continuation/continue:
+          configuration_path: .circleci/continue-config.yml
+          parameters: /tmp/parameters.json
+
+workflows:
+  setup-workflow:
+    jobs:
+      - set-parallelism
+----
+
+.Continue configuration that sets parallelism from the pipeline parameter
+[source,yaml]
+----
+# .circleci/continue-config.yml
+version: 2.1
+
+parameters:
+  test_parallelism:
+    type: integer
+    default: 1
+
+jobs:
+  test:
+    executor: my-executor
+    parallelism: << pipeline.parameters.test_parallelism >>
+    steps:
+      - setup
+      - run: circleci testsuite run "ci tests"
+      - store_test_results:
+          path: test-reports
+
+workflows:
+  test-workflow:
+    jobs:
+      - test
+----
+
+[TIP]
+====
+The setup job runs your `discover` command, so it needs a checkout and any dependencies that command relies on.
+====
