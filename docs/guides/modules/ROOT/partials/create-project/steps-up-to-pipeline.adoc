@@ -12,6 +12,3 @@
 ****
 
 . Next, set up your first pipeline for your project. Pipelines define the executable commands and scripts for your CI/CD processes. The first step is to name your pipeline. Use a name that describes the purpose of the pipeline, for example, `build-and-test`. Then select btn:[Next: Choose a repo].
-+
-.Set up a pipeline
-image::guides:ROOT:create-project/set-up-a-pipeline.png[Screenshot showing options to set up your pipeline]
