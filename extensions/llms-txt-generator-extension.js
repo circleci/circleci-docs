@@ -217,6 +217,19 @@ function generateLlmsTxt (playbook, contentCatalog) {
   sections.push(`- **Human-Readable Docs**: ${siteUrl}/api/v2/`)
   sections.push('')
 
+  // V3 API Documentation
+  sections.push('## V3 API Documentation\n')
+  sections.push('CircleCI is also building a V3 API, with more consistent conventions than v2 (UUID')
+  sections.push('identifiers, cursor pagination, a single error object). v2 remains fully supported;')
+  sections.push('start with v3 for new integrations:\n')
+  sections.push(`- **API Index for LLMs**: ${siteUrl}/docs/api/v3/llms.txt`)
+  sections.push(`- **Full Reference as Markdown**: ${siteUrl}/docs/api/v3/index.md`)
+  sections.push(`  - Every operation, and the v3 conventions in full`)
+  sections.push(`- **Conventions**: ${siteUrl}/docs/api/v3/conventions.md`)
+  sections.push(`- **Full OpenAPI Spec**: ${siteUrl}/fullopenapi.json (also ${siteUrl}/fullopenapi.yaml)`)
+  sections.push(`- **Human-Readable Docs**: ${siteUrl}/docs/api/v3`)
+  sections.push('')
+
   // Server Versions
   const serverVersions = extractServerVersions(playbook)
   if (Object.keys(serverVersions).length > 0) {
