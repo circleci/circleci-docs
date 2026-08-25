@@ -266,7 +266,7 @@ When a deploy marker reports `RUNNING`, CircleCI marks the target version as liv
 
 If CircleCI cannot find a prior successful version, the target version stays live. A component is never left with zero live versions.
 
-NOTE: This live-version restoration applies only to deploy markers (`circleci run release update`). If you use the CircleCI xref:release-agent-overview.adoc[release agent] for Kubernetes deployments, the release agent handles status and live-version updates for you.
+NOTE: This live-version restoration applies only to deploy markers (`circleci run release update`). If you use the CircleCI xref:release-agent-overview.adoc[release agent] for Kubernetes deployments, the release agent handles status and live-version updates for you. If you use xref:set-up-release-validation-manually.adoc[release validation], a failed validation leaves the target version marked live so automatic rollback can run correctly.
 
 If your deployment failed in CircleCI but the new version is still serving traffic (for example, a partial rollout that you mark as failed), pass `--keep-target-version-live` on the `FAILED` or `CANCELED` update to keep the target version marked live:
 
