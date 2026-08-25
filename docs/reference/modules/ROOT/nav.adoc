@@ -8,6 +8,7 @@
 
 * API
 ** xref:api-homepage.adoc[API v1 and v2 reference]
+** xref:guides:toolkit:api-availability-on-circleci-server.adoc[API availability on CircleCI Server]
 ** xref:guides:execution-runner:runner-api.adoc[Runner API reference]
 
 * General

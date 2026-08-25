@@ -1,0 +1,307 @@
+= API availability on CircleCI Server
+:page-platform: Cloud, Server v4+
+:page-description: Compare CircleCI API v1 and v2 availability on Server 4.7 to 4.10 with Cloud.
+:experimental:
+
+The link:../../../api/v2/[API v2 reference] describes CircleCI Cloud. Replacing `https://circleci.com` with your Server hostname is not enough to make every listed endpoint work.
+
+This page covers API v1.1, API v2, and Server admin v1. Tables list Server 4.7 through 4.10. This page does not cover API v3.
+
+CircleCI does not keep feature parity between Cloud and Server. For operator docs, see the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview].
+
+[#read-this-matrix]
+== Read this matrix
+
+Use these status values in the tables below:
+
+* **Available**: Server provides the endpoint.
+* **Unavailable**: The endpoint is not a working API on Server.
+* **Error**: Server accepts the path, but the Cloud backend is not part of Server. Requests fail. Some Cloud-only paths return HTTP 500 instead of HTTP 404.
+
+Authenticate with a personal API token. See the xref:managing-api-tokens.adoc[Managing API Tokens] guide.
+
+[#identify-cloud-only-endpoints]
+== Identify Cloud-only endpoints
+
+Start with this table when an endpoint from the Cloud reference fails on Server.
+
+[.table-scroll]
+--
+[cols=7*, options="header"]
+|===
+| Method
+| Path
+| 4.7
+| 4.8
+| 4.9
+| 4.10
+| Notes
+
+| POST
+| `/api/v2/organization`
+| Unavailable
+| Unavailable
+| Unavailable
+| Unavailable
+| Create organization is Cloud only.
+
+| DELETE
+| `/api/v2/organization/{org-id}`
+| Unavailable
+| Unavailable
+| Unavailable
+| Unavailable
+| Delete organization is Cloud only.
+
+| POST
+| `/api/v2/organization/{org-id}/project`
+| Unavailable
+| Available
+| Available
+| Available
+| Create a project. Available from Server 4.8.
+
+| GET/PATCH
+| `/api/v2/project/{project-slug}/settings`
+| Unavailable
+| Available
+| Available
+| Available
+| Project settings. Available from Server 4.8.
+
+| GET/POST/DELETE
+| `/api/v2/organization/{org-id}/url-orb-allow-list`
+| Unavailable
+| Unavailable
+| Unavailable
+| Unavailable
+| URL orb allow lists are Cloud only.
+
+| GET/POST/DELETE
+| `/api/v2/organizations/{org-id}/groups`
+| Unavailable
+| Error
+| Error
+| Error
+| Groups APIs target Cloud GitHub App organizations.
+
+| POST/GET
+| `/api/v2/organizations/{org-id}/usage_export_job`
+| Unavailable
+| Error
+| Error
+| Error
+| Usage export is Cloud only. Use Insights APIs for job duration.
+
+| POST
+| `/api/v2/project/{project-slug}/pipeline/run`
+| Unavailable
+| Available
+| Available
+| Available
+| Available from Server 4.8. Classic trigger remains `POST .../pipeline`.
+
+| *
+| `/api/v2/projects/{project-id}/pipeline-definitions`
+| Unavailable
+| Unavailable
+| Unavailable
+| Unavailable
+| Pipeline definitions require GitHub App. Server uses GitHub OAuth.
+
+| *
+| `/api/v2/projects/{project-id}/triggers`
+| Unavailable
+| Unavailable
+| Unavailable
+| Unavailable
+| GitHub App triggers. On Server, use `POST /api/v2/project/{project-slug}/pipeline`.
+
+| *
+| `/api/v2/deploy/*`
+| Unavailable
+| Unavailable
+| Unavailable
+| Unavailable
+| Deploys and rollback are Cloud only.
+
+| *
+| `/api/v2/otel/exporters`
+| Unavailable
+| Unavailable
+| Unavailable
+| Unavailable
+| OpenTelemetry exporters are Cloud only.
+
+| GET/POST
+| `/api/v2/orbs`
+| Unavailable
+| Available
+| Available
+| Available
+| Orb registry APIs. Available from Server 4.8.
+
+| GET/POST
+| `/api/v2/namespaces`
+| Unavailable
+| Unavailable
+| Unavailable
+| Available
+| Orb namespaces. Available from Server 4.10.
+|===
+--
+
+Replace `{org-id}` with your organization ID. Replace `{project-id}` with the project ID. Replace `{project-slug}` with the project slug. To find IDs, see the xref:how-to-find-ids.adoc[How to Find IDs] guide. That guide is Cloud-oriented. Your Server hostname still applies.
+
+[#review-apis-available-on-server]
+== Review APIs available on Server
+
+These families work on Server 4.7 through 4.10 unless a note says otherwise. They are the paths most scripts need.
+
+[.table-scroll]
+--
+[cols=3*, options="header"]
+|===
+| Family
+| Example endpoints
+| Notes
+
+| User
+| `GET /api/v2/me`, `GET /api/v2/me/collaborations`
+| Signed-in user and collaborations.
+
+| Pipelines, workflows, and jobs
+| `POST /api/v2/project/{project-slug}/pipeline`, list, get, cancel, rerun, approve
+| Classic pipeline trigger. Job details, artifacts, and tests are available.
+
+| Project environment variables
+| `/api/v2/project/{project-slug}/envvar`
+| Create, list, get, and delete project environment variables.
+
+| Checkout keys
+| `/api/v2/project/{project-slug}/checkout-key`
+| Create, list, get, and delete.
+
+| Schedules
+| `/api/v2/project/{project-slug}/schedule`
+| OAuth project schedules.
+
+| Outbound webhooks
+| `/api/v2/webhook`
+| Webhook management.
+
+| Contexts
+| `/api/v2/context`
+| Contexts and environment variables. Restriction APIs follow the same pattern.
+
+| Insights
+| `/api/v2/insights/...`
+| Duration, success rate, and similar metrics. Insights is not a usage export.
+
+| Config policies
+| `/api/v2/owner/{owner-id}/context/config/...`
+| Policy bundles and decision logs.
+
+| OIDC custom claims
+| `/api/v2/org/{org-id}/oidc-custom-claims`
+| Custom OIDC claims.
+
+| Self-hosted runners
+| `/api/v2/runner`
+| Resource classes and tokens with a personal API token. See the xref:execution-runner:runner-api.adoc[Self-Hosted Runner API] page for agent claim traffic.
+
+| API v1.1
+| `/api/v1.1/me`, projects, recent builds, follow, retry, environment variables, SSH keys
+| Still supported. Prefer v2 when an equivalent exists.
+|===
+--
+
+For request and response schemas, use the link:../../../api/v2/[API v2 Reference] and the link:../../../api/v1/[API v1.1 Reference]. Skip endpoints listed in <<identify-cloud-only-endpoints>>.
+
+[#review-server-admin-apis]
+== Review Server admin APIs
+
+These v1 admin endpoints exist on Server. They are not in the public Cloud API reference. Use a site-admin personal API token. Do not include an `app.` prefix in the hostname.
+
+[.table-scroll]
+--
+[cols=4*, options="header"]
+|===
+| Method
+| Path
+| Server 4.7-4.10
+| Cloud
+
+| GET
+| `/api/v1/admin/users`
+| Available
+| Unavailable
+
+| POST
+| `/api/v1/admin/user/{username}`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/projects`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/recent-builds`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/organization/{username}/plan`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/2.0/current-builds`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/audit-log`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/licensing`
+| Available
+| Unavailable
+
+| GET/POST
+| `/api/v1/admin/settings` and `/api/v1/admin/setting/{setting}`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/self-diagnostics`
+| Available
+| Unavailable
+
+| GET
+| `/api/v1/admin/build-state`
+| HTTP 410
+| HTTP 410
+|===
+--
+
+.List users on Server
+[source,console]
+----
+$ curl --header "Circle-Token: $CIRCLE_TOKEN" \
+  "https://<your-server-hostname>/api/v1/admin/users"
+----
+
+Replace `<your-server-hostname>` and `$CIRCLE_TOKEN`. Leave the angle brackets out of the hostname.
+
+[#next-steps]
+== Next steps
+
+* Authenticate and send example requests with the xref:api-developers-guide.adoc[API Developer's Guide].
+* Look up Cloud request schemas in the link:../../../api/v2/[API v2 Reference].
+* Review operator topics in the xref:server-admin:overview:circleci-server-overview.adoc[CircleCI Server Overview].
+* Selected Server product changes appear in the link:https://circleci.com/changelog/server/[Server changelog]
