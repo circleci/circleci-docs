@@ -1,10 +1,7 @@
 = Connecting to the CircleCI docs MCP server
 :page-platform: Cloud
-:page-badge: Preview
 :page-description: Connect your AI assistant to CircleCI's documentation MCP server to search CircleCI docs and knowledge sources directly from your development environment.
 :experimental:
-
-NOTE: The CircleCI docs MCP server is currently in preview. You can expect changes to the available tools during this phase. If you have any issues, questions, or feedback, post on our link:https://discuss.circleci.com/t/hosted-and-cli-mcp-server-feedback/54827[community forum].
 
 The CircleCI docs MCP server gives your AI assistant direct access to CircleCI's documentation and knowledge sources. Instead of copying and pasting docs into your AI assistant, you can ask questions and the assistant will search CircleCI's documentation automatically.
 
@@ -27,7 +24,9 @@ This is useful when working on CircleCI configurations, debugging pipeline issue
 Before connecting to the CircleCI docs MCP server, ensure you have:
 
 * An AI coding assistant or MCP client that supports remote MCP servers over HTTP (such as Claude Code, Claude Desktop, or Cursor)
-* A CircleCI account (for authentication)
+* A Google or GitHub account (for authentication and rate limiting)
+
+NOTE: Authentication with Google or GitHub is only used for rate limiting and abuse prevention. You do not need a CircleCI account to use the docs MCP server.
 
 == Connecting your AI assistant
 
@@ -46,7 +45,7 @@ $ claude mcp add --transport http circleci-docs https://circleci.mcp.kapa.ai
 ----
 
 . Run the `/mcp` command inside Claude Code and select `circleci-docs`.
-. Select *Authenticate* to complete the OAuth2 sign-in in your browser.
+. Select *Authenticate* to sign in with Google or GitHub in your browser.
 --
 Claude Desktop and claude.ai::
 +
@@ -56,7 +55,7 @@ For guidance on setting up custom connectors, see the link:https://support.claud
 . Go to menu:Settings[Connectors].
 . Select *Add custom connector*.
 . Enter `https://circleci.mcp.kapa.ai` as the server URL.
-. Select *Add*, then complete the OAuth2 sign-in in your browser.
+. Select *Add*, then sign in with Google or GitHub in your browser.
 --
 Cursor::
 +
@@ -74,7 +73,7 @@ Add the following configuration to your Cursor `mcp.json` file:
 }
 ----
 
-Cursor will prompt you to authenticate when you first use the server. Complete the OAuth2 sign-in in your browser.
+Cursor will prompt you to authenticate when you first use the server. Sign in with Google or GitHub in your browser.
 --
 ====
 
@@ -116,10 +115,12 @@ The CircleCI docs MCP server exposes the following tools to AI assistants:
 
 If authentication fails when connecting to the CircleCI docs MCP server:
 
-* Ensure you have a CircleCI account
+* Ensure you have a Google or GitHub account to authenticate with
 * Try disconnecting and reconnecting the MCP server in your AI assistant
 * Check that your AI assistant supports OAuth2 authentication for MCP servers
 * Clear your browser cache and try authenticating again
+
+NOTE: The CircleCI docs MCP server uses Google or GitHub OAuth for authentication. This is only for rate limiting purposes. You do not see the user's email or personal information.
 
 === No results returned
 
