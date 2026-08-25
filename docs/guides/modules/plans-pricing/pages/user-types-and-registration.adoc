@@ -44,8 +44,8 @@ Organizations on Performance or Scale Plans can control unregistered user spendi
 An *active user* is any user (registered or unregistered) who triggers the use of compute resources on non-OSS projects during a billing period. This includes activities such as:
 
 * Commits from users that trigger builds, including PR merge commits.
-* Re-running jobs in the CircleCI web application, including xref:guides:execution-managed:ssh-access-jobs.adoc[SSH debugging].
-* Approving xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[on-hold jobs]. The approver is considered the actor of all downstream jobs.
+* Re-running jobs in the CircleCI web application, including SSH debugging, as described on the xref:guides:execution-managed:ssh-access-jobs.adoc[Debug Jobs With SSH Rerun] page.
+* Approving on-hold jobs, as described in the xref:guides:orchestrate:workflows.adoc#holding-a-workflow-for-a-manual-approval[Hold a Workflow for a Manual Approval] section. The approver is considered the actor of all downstream jobs.
 * Using scheduled workflows.
 * Machine users.
 
