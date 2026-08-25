@@ -177,7 +177,7 @@ A subcommand of `release`. Use the `circleci run release update` command to upda
 | Optional text describing why the deploy failed. Use with `--status=FAILED`.
 
 | `keep-target-version-live`
-| Keep the target version marked live when the deploy reports `FAILED` or `CANCELED`. By default, CircleCI restores the last successful version as live. See xref:deploy:configure-deploy-markers.adoc#live-version-on-failed-or-canceled-deploys[Live version on failed or canceled deploys].
+| Keep the target version marked live when the deploy reports `FAILED` or `CANCELED`. By default, CircleCI restores the last successful version as live. See xref:deploy:configure-deploy-markers.adoc#live-version-on-failed-or-canceled-deploys[Live Version on Failed or Canceled Deploys].
 |===
 --
 
