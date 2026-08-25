@@ -30,7 +30,7 @@ include::ROOT:partial$tips/check-org-type.adoc[]
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Navigate to menu:Org[People], then select btn:[Invite].
-. To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
+. To send out email invites, enter your team members' email addresses, separating multiple emails with a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
 . Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage Roles and Permissions] page for more details.
 
 --
