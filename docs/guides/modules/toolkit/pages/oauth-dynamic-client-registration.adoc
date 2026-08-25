@@ -231,11 +231,20 @@ Open the printed URL in a browser. If you are not already logged in to CircleCI,
 |===
 --
 +
-These scopes cannot grant more access than the authorizing user already holds in CircleCI. A user with read-only org permissions who selects Admin, for example, receives a token scoped to their actual permissions, not elevated ones.
+These access levels are a ceiling on the token, not a grant of new permissions. They cannot grant more access than the authorizing user already holds in CircleCI, based on that user's organization and project role. See the xref:roles-and-permissions-overview.adoc[Roles and Permissions Overview] page for role definitions:
++
+* A user with the _Viewer_ role who selects Admin still receives a token limited to Viewer-level (read-only) actions.
+* A user with the _Contributor_ role who selects Admin receives a token limited to Contributor-level actions. Org management and billing actions still require the _Organization Admin_ role.
+* Only a user with the _Organization Admin_ role (or the _Project Admin_ role, for project-scoped actions) receives the full Admin permissions described above.
 +
 NOTE: Personal API tokens created manually through the web app always carry the user's full permissions. Tokens created through this OAuth flow are scoped to the access level the user selects during authorization.
 
-. If you belong to SSO-enabled organizations, an SSO organizations section appears below the access level selector. Select *Authorize* next to any orgs you want to include in the token's scope. SSO org access can also be managed later from the OAuth Clients page in user settings.
+. If you belong to SSO-enabled organizations, an SSO organizations section appears below the access level selector, listing each org individually:
++
+* Select *Authorize* next to an org to include that org's resources in the token's scope, subject to the access level chosen above.
+* Leaving an org unauthorized does not fail the flow. The token is still issued, but it cannot access that org's resources.
+* An org's resources stay inaccessible to the token until that org is explicitly authorized. This follows the same per-organization model used for xref:sso-overview.adoc#personal-api-tokens-with-sso[Personal API Tokens With SSO].
+* SSO org access can be granted or revoked for an existing token from the *OAuth Clients* page in user settings, without repeating the full authorization flow.
 . Select *Allow* to approve, or select *Deny* to cancel the flow.
 
 . CircleCI redirects the browser to your listener, which prints:
