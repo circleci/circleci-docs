@@ -34,6 +34,34 @@ Test suite:: A named configuration in `.circleci/test-suites.yml` that defines h
 
 == 1. Setup
 
+[TIP]
+=====
+If you use an AI coding assistant, CircleCI publishes a link:https://github.com/CircleCI-Public/skills[plugin of agent skills, window=_blank] that can complete this setup for you. Install the plugin, then ask your assistant to set up Smarter Testing for your project.
+
+[tabs]
+====
+Claude Code::
++
+--
+[source,console]
+----
+$ claude plugin marketplace add CircleCI-Public/skills
+$ claude plugin install circleci@circleci-public-skills
+----
+--
+
+Codex::
++
+--
+[source,console]
+----
+$ codex plugin marketplace add CircleCI-Public/skills
+$ codex plugin add circleci@circleci-skills
+----
+--
+====
+=====
+
 Use the `doctor` command to set up and validate your `test-suites.yml`. The CLI runs through a series of checks, executing tests and validating the output. If any results look incorrect, action items are provided to resolve them.
 
 [tabs]
