@@ -3,13 +3,13 @@
 :page-description: Create a new organization in CircleCI.
 :experimental:
 
-This guide covers creating a new organization in CircleCI.
+This guide covers creating a new organization in CircleCI. In CircleCI, an organization is a collection of projects and users.
 
 The following organization types are available in CircleCI:
 
-* `circleci`
-* `github`
-* `bitbucket`
+* `circleci`: This org types lets you connect to GitHub, GitLab, or Bitbucket Data Center.
+* `github`: This org type is created automatically when you log in using your GitHub login.
+* `bitbucket`: This org type is created automatically when you log in using your Bitbucket login.
 
 For a guide to organization types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#organizations[Users, Organizations, and Integrations Guide].
 

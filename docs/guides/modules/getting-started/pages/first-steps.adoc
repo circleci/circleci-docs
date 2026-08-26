@@ -11,7 +11,7 @@ Choose how to sign up:
 * Prefer to stay in the terminal, or signing up as part of a script or agent workflow? See <<sign-up-with-the-cli>>.
 * Joining a team that already uses CircleCI? See <<join-an-existing-org>>.
 
-TIP: Your sign-in method determines which kind of organization you get. If that sounds unfamiliar, see <<understand-org-types-and-sign-in-methods>> after you sign up.
+TIP: Your sign-in method determines which kind of organization you get. To learn more, see <<understand-org-types-and-sign-in-methods>> after you sign up.
 
 [#sign-up-in-the-web-app]
 == Sign up in the web app
@@ -34,7 +34,7 @@ TIP: If you want to collaborate on an existing org you can create an account and
 . Set up MFA by following the instructions in the web app.
 . Choose one of the following:
 ** Use the <<join-an-existing-org,Find Your Team>> option to connect your account to a shared org.
-** Follow the steps in <<sign-up-and-create-an-org>>.
+** Head straight to <<sign-up-and-create-an-org>>.
 
 [#bitbucket-cloud]
 === Sign up to build Bitbucket Cloud projects
@@ -70,8 +70,6 @@ circleci auth signup  # signup only, no project setup
 
 Both commands open a browser to complete the actual signup, using the same account types and VCS providers described in <<sign-up-in-the-web-app>>. Add `--no-browser` to either command to print the sign-in URL instead of opening a browser, for example if you are running the command on a remote or headless machine.
 
-Signing in this way still requires a browser at some point in the process. The `--no-browser` flag only changes where you see the sign-in URL; you still need a browser to open it and complete sign-in.
-
 [#join-an-existing-org]
 == Join an existing org
 
@@ -79,12 +77,10 @@ If your team already uses CircleCI, join their organization instead of creating 
 
 === Join using an invite link
 
-If you have an invite email from your team, you are _joining_ an existing CircleCI organization, whether you already have an account or are creating one for the first time.
+If you have an invite email from your team, you are _joining_ an existing CircleCI organization.
 
 . Follow the link in your invite email and follow the instructions in the web app.
-. CircleCI takes you to your organization's dashboard in the web app. From here, you can follow projects or trigger pipelines in projects to which you have access in your organization, or xref:create-project.adoc[Create New Projects].
-
-NOTE: If you are setting up a project for the first time, you may need to authenticate with your VCS provider. That authentication is a one-time step — subsequent projects do not require you to authenticate again. Refer to the xref:create-project.adoc[Creating a Project] guide for more information.
+. CircleCI takes you to your organization's dashboard in the web app. From here, you can follow projects or trigger pipelines in projects to which you have access in your organization, or xref:create-project.adoc[Create New Projects]. You will see a run banner at the top of the web app prompting you to authorize through your VCS provider.
 
 === Join without an invite
 
@@ -95,17 +91,16 @@ If you do not have an invite link, you can search for your team instead.
 .Welcome screen with the find your team menu expanded
 image::guides:ROOT:getting-started/find-your-team.png[Screenshot showing the welcome screen with the find your team menu expanded]
 . Choose one of the following:
-** *Search via GitHub*: authorize the GitHub OAuth app for read access to your GitHub organization membership. CircleCI then lists all matching organizations you are eligible to join — select btn:[Join Organizations] to complete joining.
-** *Search via Bitbucket Cloud*: enter your Bitbucket Cloud credentials to authorize CircleCI. CircleCI adds you to your organization automatically.
-
-NOTE: If you do not see the organization you want to join listed, ask your organization admin for an invite instead. For the steps admins use to send invites, see the xref:invite-your-team.adoc[Invite Your Team] page.
-
-For a guide to integrating your code with CircleCI, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
+** *Search via GitHub*: Authorize the GitHub OAuth app for read access to your GitHub organization membership. CircleCI then lists all matching organizations you are eligible to join. Select btn:[Join Organizations] to complete joining.
+** *Search via Bitbucket Cloud*: Enter your Bitbucket Cloud credentials to authorize CircleCI. CircleCI adds you to your organization automatically.
+** *Join via Invite*: If you do not see the organization you want to join listed, ask your organization admin for an invite instead. For the steps admins use to send invites, see the xref:invite-your-team.adoc[Invite Your Team] page.
 
 [#sign-up-and-create-an-org]
-== Create an org
+== Create an organization
 
-Once you have a CircleCI account, you can create a new organization for your team. For full steps, see the xref:create-an-organization.adoc[Create an Organization] page.
+Once you have a CircleCI account, you can create a new organization for your team. In CircleCI, an organization is a collection of projects and users.
+
+For full steps on creating an organization, see the xref:create-an-organization.adoc[Create an Organization] page.
 
 After you create your organization, create a project to get started, or invite your teammates:
 
@@ -117,7 +112,7 @@ After you create your organization, create a project to get started, or invite y
 
 Your sign-in method and VCS provider together determine what kind of CircleCI organization you get:
 
-* If you sign up with **email and password** and add **GitHub**, **GitLab**, or **Bitbucket Data Center** to your org, you choose the VCS integration type when you create the org. You authenticate with your VCS provider as part of that setup. Team members you invite can join without authenticating with your VCS, but they authenticate the first time they create a project.
+* If you sign up with **email and password** and add **GitHub**, **GitLab**, or **Bitbucket Data Center** to your org, you choose the VCS integration from menu:Org[VCS Connections]. You can also choose it when creating a project. You authenticate with your VCS provider as part of that setup.
 * If you sign up or sign in with a **GitHub** social login, CircleCI creates a matching organization for you automatically.
 * If you sign up or sign in with **Bitbucket Cloud**, CircleCI creates a matching organization for you automatically. Every team member joining your org authenticates with Bitbucket _during_ signup, not later.
 

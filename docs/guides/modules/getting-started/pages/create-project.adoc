@@ -34,7 +34,7 @@ Choose steps to follow below, depending on where your code is stored:
 
 [tabs]
 ====
-GitHub App::
+GitHub::
 +
 --
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
@@ -195,10 +195,10 @@ To create a CircleCI project without generating a config file or setting up a tr
 
 [,shell]
 ----
-circleci project create my-project --org gh/myorg
+circleci project create my-project --org <my-org-slug>
 ----
 
-Replace `my-project` with your project name and `gh/myorg` with your organization slug — for example, `gh/myorg`, `bb/myorg`, or `circleci/<orgID>`. If you omit the project name, CircleCI uses the current git repository's name.
+Replace `my-project` with your project name and `<my-org-slug>` with your organization slug. For example, `gh/myorg`, `bb/myorg`, or `circleci/<orgID>`. If you omit the project name, CircleCI uses the current git repository's name.
 
 This only creates the project record in CircleCI. You still need to add a `.circleci/config.yml` file to your repository and set up a trigger. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
 
@@ -299,4 +299,3 @@ To resolve this issue, choose one of the following options:
 * xref:toolkit:sample-config.adoc[Sample Config.yml Files]
 * xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
 * xref:toolkit:circleci-cli.adoc[CircleCI CLI]
-* xref:config-editor.adoc[Using the CircleCI Configuration Editor]

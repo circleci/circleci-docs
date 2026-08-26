@@ -1,5 +1,5 @@
 . In the link:https://app.circleci.com/home[CircleCI web app], select **Home** in the sidebar.
-. Select btn:[Create Project] at the top of the page, or anywhere in the btn:[Create a project] card if this is your first project. You will be prompted to choose an option to match the work you want to do in your project.
+. Select btn:[Create Project] at the top of the page, or anywhere in the *Create a project* card if this is your first project.
 
 . Give your project a descriptive name and then select btn:[Next: Set up a pipeline].
 +
