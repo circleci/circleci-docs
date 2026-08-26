@@ -13,9 +13,9 @@ When connected to the CircleCI docs MCP server, your AI assistant can:
 
 * Search CircleCI documentation for relevant information
 * Answer questions about CircleCI features and configuration
-* Retrieve full documentation pages by URL
 * Provide accurate, up-to-date information from CircleCI's knowledge base
 * Help you write and troubleshoot CircleCI configuration
+* Provide feedback to the CircleCI documentation team
 
 This is useful when working on CircleCI configurations, debugging pipeline issues, or learning about CircleCI features without leaving your development environment.
 
@@ -100,9 +100,6 @@ The CircleCI docs MCP server exposes the following tools to AI assistants:
 |`search_circleci_knowledge_sources`
 |Searches CircleCI documentation and knowledge sources. Returns the most relevant content chunks in descending order of relevance. Each chunk includes the source URL and content in Markdown.
 
-|`get_circleci_knowledge_documents`
-|Fetches full CircleCI documentation pages by their exact URL. Returns complete content in Markdown, paginated to avoid overwhelming the assistant's context window.
-
 |`give_feedback`
 |Lets the assistant provide feedback about CircleCI documentation quality or gaps. Feedback is sent to the CircleCI documentation team.
 |===
@@ -141,9 +138,6 @@ The CircleCI docs MCP server has rate limits to ensure fair usage:
 |Tool |Per-user limit
 
 |Search tool
-|300 requests per day
-
-|Documents tool
 |300 requests per day
 |===
 --
