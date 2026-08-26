@@ -43,12 +43,16 @@ The following table describes user authorization for the different VCS providers
 |GitLab
 |Managed in GitLab at link:https://gitlab.com/-/user_settings/applications[GitLab settings]. Not displayed in menu:User Settings[Account Integrations].
 |Mutually exclusive with other VCS authorizations except GitHub App.
+
+|Cursor Origin
+|Not applicable. Cursor Origin requires no user-level authorization.
+|Installing the CircleCI app into your Origin codebase is the only action required. See the <<manage-vcs-integrations>> section.
 |===
 --
 
 == Organizations
 
-An organization in CircleCI is a top-level account that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, or Bitbucket).
+An organization in CircleCI is a top-level account that serves as a container for your team's projects, settings, permissions, and billing. Organizations are typically linked to your version control system (VCS) account(s) (GitHub, GitLab, Bitbucket, or Cursor Origin).
 
 Each organization has its own settings, including security, integrations, and resource management, allowing you to coordinate and control your CI/CD processes across multiple projects and users.
 
@@ -65,6 +69,7 @@ a| * GitHub App (add-on, available for GitHub.com, GitHub Enterprise Cloud, and 
 * GitLab (add-on).
 * GitLab self-managed (add-on).
 * Bitbucket Data Center (add-on).
+* Cursor Origin (add-on, beta).
 | Created manually via web app or API
 | This organization type is created separately to any VCS connection between CircleCI and your code repositories.
 
@@ -82,7 +87,7 @@ a| * Bitbucket OAuth (built-in)
 |===
 --
 
-NOTE: The GitHub App integration for GitHub Enterprise Server is currently in Preview. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page.
+NOTE: The GitHub App integration for GitHub Enterprise Server is currently in Preview. For more information, see the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page. The Cursor Origin integration is in beta and is available for `circleci` type organizations only.
 
 The xref:guides:integration:version-control-system-integration-overview.adoc[VCS Integration Overview] page provides a full list of CircleCI features available for each organization and integration type.
 
@@ -147,9 +152,9 @@ The VCS integration options available to you depend on your organization type. B
 
 [.table-scroll]
 --
-[cols=6*, options="header"]
+[cols=7*, options="header"]
 |===
-| Organization type |GitHub App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab
+| Organization type |GitHub App | GitHub OAuth | Bitbucket Cloud | Bitbucket Data Center | GitLab | Cursor Origin (beta)
 
 | `circleci`
 | [.circle-green]#Yes#
@@ -157,10 +162,12 @@ The VCS integration options available to you depend on your organization type. B
 | [.circle-red]#No#
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
+| [.circle-green]#Yes#
 
 |`github`
 | [.circle-green]#Yes#
 | [.circle-green]#Yes#
+| [.circle-red]#No#
 | [.circle-red]#No#
 | [.circle-red]#No#
 | [.circle-red]#No#
@@ -171,6 +178,7 @@ The VCS integration options available to you depend on your organization type. B
 | [.circle-green]#Yes#
 | [.circle-red]#No#
 | [.circle-red]#No#
+| [.circle-red]#No#
 
 |===
 --
@@ -178,7 +186,7 @@ The VCS integration options available to you depend on your organization type. B
 Integrations are set up as follows:
 
 * GitHub OAuth and Bitbucket Cloud are set up when logging in to CircleCI with your GitHub or Bitbucket social login. No additional action is required, but the installation can be viewed at menu:Org[VCS Connections].
-* GitHub App, GitLab self-managed and Bitbucket Data Center are managed from menu:Org[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
+* GitHub App, GitLab self-managed, Bitbucket Data Center, and Cursor Origin are managed from menu:Org[VCS Connections]. However, when creating a project (if using a `circleci` organization) or creating a new pipeline from menu:Project Settings[Project setup] you will also be walked through the installation process.
 * GitLab SaaS installation is set up when creating a new project (menu:Projects[Create project]) or a new pipeline (menu:Project Settings[Pipelines]).
 
 If you are using a self-hosted GitLab instance or Bitbucket Data Center instance, some additional configuration is required as follows. See the <<manage-vcs-integrations>> section for more information.
@@ -328,6 +336,17 @@ To set up Bitbucket data center pipelines you will need to create a project HTTP
 
 *Disconnect*: Currently, there is no method to disconnect Bitbucket Data Center from your organization. You can delete projects that are connected to Bitbucket Data Center and delete the CircleCI webhooks in Bitbucket Data Center to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
 --
+Cursor Origin::
++
+--
+NOTE: The Cursor Origin integration is in beta.
+
+*Availability*: A Cursor Origin integration is installed into a `circleci` type organization. Cursor Origin is Cursor's git forge for storing and sharing code. For more information, see the link:https://cursor.com/docs/origin[Cursor Origin documentation].
+
+*Configure*: Set up an integration with Cursor Origin from menu:Org[VCS Connections]. Select btn:[Set up integration] next to Cursor Origin, then follow the instructions to install and authorize the CircleCI app in your Origin codebase. You are also walked through this installation when you create your first Cursor Origin project. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page for those steps.
+
+*View*: To view a Cursor Origin integration, navigate to menu:Org[VCS Connections].
+--
 ====
 
 === Can multiple CircleCI organizations connect to the same GitHub organization?
@@ -438,7 +457,7 @@ The trigger options available to you depend on your pipeline type. These options
 
 [.table-scroll]
 --
-[options="header",cols="9*"]
+[options="header",cols="10*"]
 |===
 |Pipeline type
 ^|GitHub OAuth trigger
@@ -447,6 +466,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|Schedule trigger
 ^|GitHub App trigger
 ^|Bitbucket Data Center trigger
+^|Cursor Origin trigger
 ^|Custom Webhook
 ^|API / Manual triggering
 
@@ -455,6 +475,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|Zero, one, many
+^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
@@ -467,6 +488,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|Zero, one, many
 ^|Zero, one, many
 ^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
 ^|Zero, one, many
 ^|[.circle-green]#*Yes*#
 
@@ -478,6 +500,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|Zero, one, many
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
 ^|[.circle-green]#*Yes*#
 
 |GitLab
@@ -485,6 +508,7 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|Zero, one, many
 ^|Zero, one, many
+^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
 ^|[.circle-red]#*No*#
@@ -498,6 +522,18 @@ The trigger options available to you depend on your pipeline type. These options
 ^|[.circle-red]#*No*#
 ^|Zero, one, many
 ^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|[.circle-green]#*Yes*#
+
+|Cursor Origin
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|Zero, one, many
+^|[.circle-red]#*No*#
+^|[.circle-red]#*No*#
+^|Zero, one, many
+^|Zero, one, many
 ^|[.circle-green]#*Yes*#
 |===
 --
@@ -588,6 +624,11 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 - Automatic git merging/tagging/etc.
 
 For GitLab self-managed instances, you will need to provide SSH host keys during the integration setup. You can retrieve these keys by running `ssh-keyscan <instance_url>`. See the <<manage-vcs-integrations>> section for more information on configuring GitLab self-managed integrations.
+--
+Cursor Origin::
++
+--
+When using the Cursor Origin integration, CircleCI uses HTTPS-based authentication to check out your code. No SSH keys or deploy keys are required.
 --
 ====
 

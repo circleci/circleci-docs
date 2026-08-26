@@ -149,6 +149,25 @@ If you set up your Bitbucket Data Center instance you will see your instance URL
 ** Select **Save**. You will then be redirected to the Pipelines page.
 ** The express CircleCI configuration setup is not currently available for Bitbucket Data Center projects. You will need to add a `.circleci/config.yml` file in your repository. If the repository you selected already contains a `.circleci/config.yml`, push a commit to see your pipeline on the dashboard.
 --
+Cursor Origin::
++
+--
+NOTE: The Cursor Origin integration is in beta. Cursor Origin is available for `circleci` type organizations only.
+
+include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
+
+. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add]. Select btn:[Cursor Origin] and then btn:[Authorize in Cursor Origin].
++
+If this is the first Cursor Origin project for your org, you are redirected to Cursor to install and authorize the CircleCI app in your Origin codebase. An organization administrator or someone with admin access to a repository in your codebase can complete this one-time authorization.
+
+. CircleCI prepares a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. Once you have your config, select btn:[Next: set up your triggers].
+
+. Set up triggers for your pipeline. Cursor Origin supports a subset of CircleCI's trigger presets, including building on all pushes, tags only, and a range of pull request events. Support for further presets is in progress.
+
+. Review everything you have just set up, then select btn:[Commit config and run], or btn:[Finish setup] if you already have a config file in your repo.
+
+Once your project is created you will land on your pipelines page.
+--
 ====
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.

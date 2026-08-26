@@ -7,7 +7,7 @@ This guide covers creating a new organization in CircleCI.
 
 The following organization types are available in CircleCI:
 
-* `circleci`: This org type lets you connect to GitHub, GitLab, or Bitbucket Data Center.
+* `circleci`: This org type lets you connect to GitHub, GitLab, Bitbucket Data Center, or Cursor Origin (beta).
 * `github`: This org type is created automatically when you log in using your GitHub login.
 * `bitbucket`: This org type is created automatically when you log in using your Bitbucket login.
 
