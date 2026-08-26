@@ -1,6 +1,6 @@
 = Invite your team
 :page-platform: Cloud
-:page-description: Invite teammates to your CircleCI organization.
+:page-description: Invite teammates to your CircleCI organization and assign them roles so your whole team gets access.
 :experimental:
 
 After setting up an organization in CircleCI, ensure your whole team gets access. Understanding the different user types (registered vs. unregistered) is important for managing costs and ensuring team members have proper access. For more information, see xref:plans-pricing:user-types-and-registration.adoc[User Types and Registration].
