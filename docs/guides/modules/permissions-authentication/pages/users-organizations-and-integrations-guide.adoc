@@ -104,7 +104,7 @@ For `github`  organizations projects are created automatically from your VCS rep
 
 If you install the CircleCI GitHub App into your organization you can create new GitHub App pipelines and triggers alongside existing OAuth pipelines. GitHub App pipelines and triggers are not bound to the project repository. For example:
 
-* You could set up a trigger for your pipeline that runs not only when someone pushes to the repository itself, but also when there is a push to the default branch of a library your project depends on.
+* You could set up a trigger for your pipeline that runs when someone pushes to the repository itself. It could also trigger when there is a push to the default branch of a library your project depends on.
 * You could create a new pipeline within the project that uses a configuration file from a centrally managed repository but is triggered on events in the project repository.
 
 When you set up a project to build with CircleCI, the following settings are added to the repository using the permissions you gave CircleCI when you signed up:
@@ -197,7 +197,7 @@ If you need more organizations or projects, consider upgrading to a Paid Plan or
 The following links take you to the sections you need to get set up with CircleCI:
 
 * xref:getting-started:first-steps.adoc[Sign up and Try].
-* xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI].
+* xref:getting-started:invite-your-team.adoc[Invite Your Team].
 * xref:getting-started:create-project.adoc[Create a Project].
 * xref:orchestrate:pipelines.adoc[Set up a Pipeline].
 * xref:orchestrate:set-up-triggers.adoc[Set up a Trigger].
@@ -249,7 +249,7 @@ GitLab self-managed::
 +
 --
 
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[VCS Connections] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you use both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, be aware of a known bug in menu:Org[VCS Connections]. Adding a `known_hosts` value to one integration also populates the `known_hosts` field for the other integration. To use both integrations in the same CircleCI organization, add both `known_hosts` values to the single input field, separated by a new line.
 
 *Availability*: A GitLab self-managed integration is installed into a `circleci` type organization.
 
@@ -258,7 +258,7 @@ NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-man
 . Select btn:[Set Up Integration] next to GitLab self-managed.
 . Enter your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
 +
-Your self-managed instance must already contain at least one GitLab project. The authorization attempt will be unsuccessful if your instance does not have any projects.  Note that the self-managed instance must be accessible via the public internet.  If the self-managed instance is behind a firewall, see link:https://discuss.circleci.com/t/gitlab-self-managed-support-on-circleci-is-now-here/47726/3?u=sebastian-lerner[a suggested workaround].
+Your self-managed instance must already contain at least one GitLab project — the authorization attempt fails if your instance has no projects. The self-managed instance must also be accessible via the public internet. If it is behind a firewall, see link:https://discuss.circleci.com/t/gitlab-self-managed-support-on-circleci-is-now-here/47726/3?u=sebastian-lerner[a suggested workaround].
 
 . Enter your instance's SSH public host keys. You can retrieve this from your instance by running `ssh-keyscan <instance_url>`, for example, `ssh-keyscan test-gitlab.circleci.com`, and copying the command's output.
 +
@@ -291,7 +291,7 @@ You cannot currently edit or delete existing GitLab self-managed integrations.
 Bitbucket Data Center::
 +
 --
-NOTE: If you are using both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, there is a known bug in the menu:Org[VCS Connections] section of the CircleCI web app. Adding a `known_hosts` to one integration will populate the `known_hosts`  for the other integration. To use both Bitbucket Data Center and GitLab self-managed integrations within the same CircleCI organization, add both respective `known_hosts` values to the one input field separated by a new line.
+NOTE: If you use both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, be aware of a known bug in menu:Org[VCS Connections]. Adding a `known_hosts` value to one integration also populates the `known_hosts` field for the other integration. To use both integrations in the same CircleCI organization, add both `known_hosts` values to the single input field, separated by a new line.
 
 *Availability*: A Bitbucket Data Center integration is installed into a `circleci` type organization.
 
@@ -334,14 +334,14 @@ To set up Bitbucket data center pipelines you will need to create a project HTTP
 
 A GitHub organization can only be connected via CircleCI GitHub App to a single CircleCI organization.
 
-If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. But, this successful installation refers to the existing connection to a different CircleCI organization, not the one you just tried to create. You can confirm this by checking the "installed at" date at the top of the page. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
+If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. That installation, however, refers to the existing connection to a different CircleCI organization, not the one you just tried to create. You can confirm this by checking the "installed at" date at the top of the page. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
 
 .GitHub settings showing the CircleCI App integration settings page.
 image::guides:ROOT:github-app-configuration-page.png[Create a project]
 
 == Invite your team to your organization
 
-For a guide to inviting your team, see the xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI] page. To understand the differences between registered users, unregistered users, and active users, and how they affect billing, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
+For a guide to inviting your team, see the xref:getting-started:invite-your-team.adoc[Invite Your Team] page. To understand the differences between registered users, unregistered users, and active users, and how they affect billing, see xref:plans-pricing:user-types-and-registration.adoc[User types and registration].
 
 == Organization user permissions
 
@@ -695,8 +695,8 @@ Create a user key in CircleCI when:
 
 Some example tasks where you might need a user key:
 
-* Pushing commits back to your repository. If your pipeline needs to commit and push changes back to GitHub (like updating a changelog, bumping version numbers, generating documentation, or creating automated pull requests) you need write permissions that a user key provides.
-* Accessing multiple private repositories. When your build depends on multiple private repos (beyond just the one being built), a user key gives your pipeline access to all repos your GitHub user can access. This is useful for:
+* Pushing commits back to your repository. If your pipeline needs to commit and push changes back to GitHub, you need the write permissions that a user key provides. Common examples include updating a changelog, bumping version numbers, generating documentation, or creating automated pull requests.
+* Accessing multiple private repositories. When your build depends on multiple private repos (beyond just the one being built), a user key gives your pipeline access to all repos your GitHub user can access. A user key is useful for:
 ** Pulling private dependencies from other repos your organization owns.
 ** Checking out submodules from private repositories.
 ** Running scripts that interact with multiple repos.
@@ -715,7 +715,7 @@ We recommend creating a dedicated "machine user" GitHub/Bitbucket account with m
 
 To create a user key, follow these steps:
 
-NOTE: To use the recommended approach of creating a machine user, you will need to create a new GitHub/Bitbucket account with minimal necessary permissions and then follow these steps logged in as that machine user account.
+NOTE: To use the recommended machine-user approach, create a new GitHub/Bitbucket account with minimal necessary permissions. Then follow these steps while logged in as that machine user account.
 
 include::ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 
@@ -756,7 +756,7 @@ Permission denied (publickey).
 
 You may need to add additional SSH keys to your pipelines. Some examples of when you might need to add additional SSH keys are as follows:
 
-* Secure authentication to remote systems. SSH keys allow your pipeline to authenticate to servers, repositories, or services without storing plaintext passwords. This is crucial when you need to deploy code to production servers, pull from private repositories, or interact with remote infrastructure.
+* Secure authentication to remote systems. SSH keys allow your pipeline to authenticate to servers, repositories, or services without storing plaintext passwords. That kind of authentication is crucial when you need to deploy code to production servers, pull from private repositories, or interact with remote infrastructure.
 * Git operations with private repositories. Many projects depend on private packages or modules hosted in private Git repositories. SSH keys enable your CI/CD pipeline to clone these dependencies during the build process.
 * Automated deployments. When deploying applications, pipelines often need to SSH into servers to transfer files, restart services, or run deployment scripts. SSH keys make this automation possible without manual intervention or exposing credentials.
 * Third-party service integration. Some services and tools require SSH authentication for secure communication. For example, interacting with certain package registries, backup systems, or specialized deployment tools may require SSH key authentication.
@@ -888,7 +888,7 @@ Now, CircleCI will use the machine user's SSH key for any Git commands that run 
 
 Before attempting to move your information from an org integrated with the GitHub OAuth app to an org integrated with CircleCI’s GitHub App, consider the following:
 
-* If the motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, consider using your existing organization and installing the GitHub App alongside your OAuth app integration, as described in the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
+* If your motivation for moving is to **leverage new functionality that is only available to the GitHub App integration**, you do not need to migrate at all. Instead, install the GitHub App alongside your existing OAuth app integration. See the xref:guides:integration:using-the-circleci-github-app-in-an-oauth-org.adoc[Using the CircleCI GitHub App in an OAuth Organization] page.
 * If the motivation is to **remove the OAuth app integration** for security, compliance, or other reasons, follow the steps below:
 
 [#Steps-to-migrate-to-an-organization-without-default-GitHub-OAuth-integration]
@@ -912,7 +912,7 @@ The following steps guide you through migrating you organization as follows:
 . On the "Connect your code" page, select btn:[Connect] next to "GitHub".
 . You will be redirected to GitHub to install the CircleCI GitHub App into your GitHub organization.
 +
-NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration, as long as your original CircleCI organization is not already connected to it.
+NOTE: You can install the CircleCI GitHub App into the same GitHub organization that already uses the GitHub OAuth App integration. This works as long as your original CircleCI organization is not already connected to it.
 . Follow the instructions to create a project that is connected to one of your GitHub repositories.
 . If you are on a **paid** pricing plan:
 .. Navigate back to the organization that is connected to the GitHub OAuth app.
@@ -921,10 +921,10 @@ NOTE: You can install the CircleCI GitHub App into the same GitHub organization 
 .. Select btn:[Add shared organization] and choose the new organization that you just created that integrates with CircleCI's GitHub App.
 . Navigate to the project that was created in step 4 in the "new" organization that is integrated with the GitHub App. Match any custom project settings that you had from your previous project to this new project on the **Project Settings** page.  This includes things like environment variables and outbound webhooks.
 . Perform a test push of code to your repository to ensure that a pipeline is triggered and is working as expected in your **new** CircleCI organization.
-. Assuming the repository you connected is also connected to your previous CircleCI organization, CircleCI will start pipelines when a push event happens to the repository in both the old and new organizations. If your test from step 8 above was successful, go to **Project Settings** in your organization connected to the GitHub OAuth App (your "old" org), scroll down and select btn:[Stop Building].  This will ensure that push events to your repository only trigger pipelines in the project connected to your GitHub App organization.
+. If the repository you connected is also connected to your previous CircleCI organization, CircleCI starts pipelines for both organizations on every push. If your test from step 8 was successful, go to **Project Settings** in your organization connected to the GitHub OAuth App (your "old" org) and select btn:[Stop Building]. This ensures that push events to your repository only trigger pipelines in the project connected to your GitHub App organization.
 . Repeat steps 6-9 by selecting menu:Projects[Create a Project] for each project that you had set up in your previous organization.
 . If you are using contexts, you will need to recreate the contexts in your new organization. See the xref:security:contexts.adoc[Contexts] page for more information.
-. Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on  the xref:getting-started:invite-your-team.adoc[Join Teammates on CircleCI] page.
+. Invite your teammates to the new organization (the one that is integrated with the CircleCI GitHub App) using the instructions on the xref:getting-started:invite-your-team.adoc[Invite Your Team] page.
 . If you are on a **paid** pricing plan and followed step 6:
 .. Navigate back to the "old" organization and select menu:Plan[Share and Transfer].
 .. Select the icon:cancel[Cancel icon] next to the "new" organization to remove the shared relationship between the "new" and "old" organizations.
