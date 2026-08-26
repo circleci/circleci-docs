@@ -1,6 +1,6 @@
-= Join teammates on CircleCI
+= Invite your team
 :page-platform: Cloud
-:page-description: Add your team to your CircleCI organization
+:page-description: Invite teammates to your CircleCI organization and assign them roles so your whole team gets access.
 :experimental:
 
 After setting up an organization in CircleCI, ensure your whole team gets access. Understanding the different user types (registered vs. unregistered) is important for managing costs and ensuring team members have proper access. For more information, see xref:plans-pricing:user-types-and-registration.adoc[User Types and Registration].
@@ -8,46 +8,11 @@ After setting up an organization in CircleCI, ensure your whole team gets access
 [#prerequisites]
 == Prerequisites
 
-* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
-* At least one project created in your organization. See the xref:create-project.adoc[Create a Project] page for instructions.
+* A CircleCI account and an organization you administer. See the xref:create-an-organization.adoc[Create an Organization] page if you have not created one yet.
 
-[#find-your-team]
-== Find your team
-
-After creating an account, you can join an existing CircleCI organization using the **Find Your Team** dropdown menu in the **Join Your Teammates** card on the link:https://app.circleci.com/home/[homepage].
-
-.Welcome screen with the find your team menu expanded
-image::guides:ROOT:getting-started/find-your-team.png[Screenshot showing the welcome screen with the find your team menu expanded]
-
-To join an organization, there are three options:
-
-* <<join-via-invite,Join via an invite>>
-* <<join-via-github,Search via GitHub>>
-* <<join-via-bitbucket,Search via Bitbucket Cloud>>
-
-These options are also available at any time using the **Join Organization** menu on your link:https://app.circleci.com/home/[homepage]. Steps for each option are outlined in the following sections.
-
-[#join-via-invite]
-=== Join an existing CircleCI organization via an invite
-
-. Reach out to your organization admin to request an invite.
-. Your organization admin will need to follow the steps below in the <<invite-teammates>> section to send you an email invite. Once you receive your invitation, follow the link to log in and join your organization.
-
-[#join-via-github]
-=== Join an existing CircleCI organization with a GitHub OAuth app integration
-
-. Select "Search via GitHub" from the **Find Your Team** dropdown.
-. Authorize the GitHub OAuth app for read access to your GitHub organization membership.
-. After authorization, you will be redirected to CircleCI where we will list all matching CircleCI organizations that you are eligible to join. Select btn:[Join Organizations] to successfully complete joining these organizations in CircleCI.
-+
-NOTE: If you do not see the organization you would like to join listed, you will need to receive an invite to join from an organization admin. Reach out to your admin to request an invite, and send them a link to this help doc for reference.
-
-[#join-via-bitbucket]
-=== Join an existing CircleCI organization with a Bitbucket Cloud integration
-
-. Select "Search via Bitbucket" from the **Find Your Team** dropdown to be redirected to Bitbucket Cloud.
-. Enter your Bitbucket Cloud credentials to authorize CircleCI to your Bitbucket Cloud account.
-. After authorization, you will be redirected back to CircleCI and will be added to your organization.
+//  If you are looking for "Find your team" / joining an existing org via invite or
+//  GitHub/Bitbucket search, that content now lives on the getting-started:first-steps.adoc
+//  page (Join an existing org section) since it is a signup-time decision, not an org-admin task.
 
 [#invite-teammates]
 == Invite teammates to join your organization
@@ -65,7 +30,7 @@ include::ROOT:partial$tips/check-org-type.adoc[]
 --
 . In the CircleCI web app, select your org from the org cards on your user homepage.
 . Navigate to menu:Org[People], then select btn:[Invite].
-. To send out email invites, enter your team members' email addresses. Multiple emails can be separated by a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
+. To send out email invites, enter your team members' email addresses, separating multiple emails with a space. Then, assign their role in your CircleCI organization. If you need to assign different roles to different team members, add team members in the Invite form based on role.
 . Once they join your org, you can then also assign each team member a role on an individual project level. See the xref:permissions-authentication:manage-roles-and-permissions.adoc[Manage Roles and Permissions] page for more details.
 
 --
@@ -80,8 +45,8 @@ include::ROOT:partial$tips/check-org-type.adoc[]
 --
 ====
 
-
 [#see-also]
 == See also
 
+- xref:first-steps.adoc#join-an-existing-org[Join an Existing Org], for the steps a teammate follows after receiving an invite.
 - xref:permissions-authentication:roles-and-permissions-overview.adoc[CircleCI Roles and Permissions Overview]
