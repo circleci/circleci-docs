@@ -3,12 +3,12 @@
 :page-description: "Learn how to create a project in CircleCI."
 :experimental:
 
-This guide gets you started with creating a new project in CircleCI.
+This guide walks you through creating a new project in CircleCI. Creating a project is the step where you connect your VCS and code to CircleCI, so you can start running pipelines.
 
 [#prerequisites]
 == Prerequisites
 
-* A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
+* A CircleCI account and organization. See the xref:create-an-organization.adoc[Create an Organization] page if you have not created one yet.
 * Code you want to build on CircleCI.
 
 == Build a new project on CircleCI
@@ -60,7 +60,7 @@ GitLab Cloud::
 +
 --
 
-NOTE: **Remove GitLab CI/CD config.** Remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. The GitLab UI also offers an option to _disable_ GitLab CI/CD for a project, but using this is **not recommended**.
+include::ROOT:partial$create-project/remove-gitlab-cicd-config.adoc[]
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
@@ -87,9 +87,9 @@ NOTE: **First GitLab project?** If you are creating the first GitLab project for
 GitLab self-managed::
 +
 --
-CAUTION: Before creating a project that you want to integrate with code in a GitLab self-managed instance, you need to set up an integration with your GitLab self-managed instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Organization Integration Setup] page for more information.
+Before creating a project that you want to integrate with code in a GitLab self-managed instance, you need to set up an integration with your GitLab self-managed instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Organization Integration Setup] page for more information.
 
-NOTE: **Remove GitLab CI/CD config** Remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. The GitLab UI also offers an option to _disable_ GitLab CI/CD for a project, but using this is **not recommended**.
+include::ROOT:partial$create-project/remove-gitlab-cicd-config.adoc[]
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
@@ -129,7 +129,7 @@ For guidance on creating a `config.yml` file, see the following pages:
 Bitbucket Data Center::
 +
 --
-CAUTION: Before creating a project that you want to integrate with code in a Bitbucket Data Center instance, you need to set up an integration with your Bitbucket Data Center instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Bitbucket Data Center Integration Setup] page for more information.
+Before creating a project that you want to integrate with code in a Bitbucket Data Center instance, you need to set up an integration with your Bitbucket Data Center instance. See the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Bitbucket Data Center Integration Setup] page for more information.
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
@@ -158,7 +158,7 @@ Through creating a project and connecting your code you have set up your pipelin
 [#set-up-a-project]
 === Set up a project
 
-NOTE: If you authenticated CircleCI with either the xref:integration:github-integration.adoc[GitHub OAuth App] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud], or if you use CircleCI Server, the steps in this section apply to you.
+If you authenticated CircleCI with either the xref:integration:github-integration.adoc[GitHub OAuth App] or xref:integration:bitbucket-integration.adoc[Bitbucket Cloud], or if you use CircleCI Server, the steps in this section apply to you.
 
 Follow these steps to  set up a new project in CircleCI:
 
@@ -195,7 +195,7 @@ To create a CircleCI project without generating a config file or setting up a tr
 
 [,shell]
 ----
-circleci project create my-project --org <my-org-slug>
+circleci project create my-project --org <my-org-slug>  # creates the project record only, no config or trigger
 ----
 
 Replace `my-project` with your project name and `<my-org-slug>` with your organization slug. For example, `gh/myorg`, `bb/myorg`, or `circleci/<orgID>`. If you omit the project name, CircleCI uses the current git repository's name.
@@ -245,7 +245,7 @@ If you are experiencing duplicate builds or conflicts:
 
 . **Commit and push the change**: After removing the file, commit and push the change to your repository.
 
-CAUTION: Do not use the option to disable GitLab CI/CD in the GitLab UI. Remove the `.gitlab-ci.yml` file instead to prevent conflicts.
+CAUTION: Disabling GitLab CI/CD in the GitLab UI is not a substitute for removing the file — the two systems can still conflict.
 
 [#self-managed-connection-problems]
 === Self-managed instance connection problems

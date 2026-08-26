@@ -100,12 +100,7 @@ image::guides:ROOT:getting-started/find-your-team.png[Screenshot showing the wel
 
 Once you have a CircleCI account, you can create a new organization for your team. In CircleCI, an organization is a collection of projects and users.
 
-For full steps on creating an organization, see the xref:create-an-organization.adoc[Create an Organization] page.
-
-After you create your organization, create a project to get started, or invite your teammates:
-
-* xref:create-project.adoc#create-a-project[Create a Project].
-* xref:invite-your-team.adoc#invite-teammates[Invite Your Team].
+For full steps on creating an organization, and what to do next, see the xref:create-an-organization.adoc[Create an Organization] page.
 
 [#understand-org-types-and-sign-in-methods]
 == Understand org types and sign-in methods

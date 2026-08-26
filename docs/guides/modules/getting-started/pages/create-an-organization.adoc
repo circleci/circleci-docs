@@ -3,7 +3,7 @@
 :page-description: Create a new organization in CircleCI.
 :experimental:
 
-This guide covers creating a new organization in CircleCI. In CircleCI, an organization is a collection of projects and users.
+This guide covers creating a new organization in CircleCI.
 
 The following organization types are available in CircleCI:
 
@@ -21,10 +21,10 @@ To create a `circleci` organization, follow these steps:
 . Select the btn:[+ Create organization] button.
 . Give your organization a name and select btn:[Let's Go].
 
-After you create your new organization, you can start creating projects and inviting team members:
+After you create your new organization, invite your team and create a project:
 
-* xref:create-project.adoc#create-a-project[Create a Project].
 * xref:invite-your-team.adoc#invite-teammates[Invite Your Team].
+* xref:create-project.adoc#create-a-project[Create a Project].
 
 == Create a github organization
 
@@ -35,8 +35,9 @@ CircleCI creates a `github` organization when you log in using your _social_ Git
 . At the bottom of the page, select the link that reads `Received instructions from the CircleCI Support team to authorize a GitHub OAuth app?`.
 . Follow the instructions to create a `github` organization.
 
-Once CircleCI creates your `github` organization, you can start setting up and following projects:
+Once CircleCI creates your `github` organization, you can invite your team and set up projects:
 
+* xref:invite-your-team.adoc#invite-teammates[Invite Your Team].
 * xref:create-project.adoc#set-up-a-project[Set up a Project].
 
 == Create a bitbucket organization
@@ -48,6 +49,7 @@ CircleCI creates a `bitbucket` organization when you log in using your _social_ 
 . Select btn:[Connect] next to Bitbucket.
 . Follow the instructions to authorize the Bitbucket OAuth app.
 
-Once CircleCI creates your `bitbucket` organization, you can start setting up and following projects:
+Once CircleCI creates your `bitbucket` organization, you can invite your team and set up projects:
 
+* xref:invite-your-team.adoc#invite-teammates[Invite Your Team].
 * xref:create-project.adoc#set-up-a-project[Set up a Project].

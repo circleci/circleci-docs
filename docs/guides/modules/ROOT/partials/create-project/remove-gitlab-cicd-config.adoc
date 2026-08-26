@@ -1,0 +1,1 @@
+NOTE: **Remove GitLab CI/CD config.** Remove the `.gitlab-ci.yml` file from projects you integrate with CircleCI. This prevents you from having CI/CD builds happening in both systems. The GitLab UI also offers an option to _disable_ GitLab CI/CD for a project, but using this is **not recommended**.
