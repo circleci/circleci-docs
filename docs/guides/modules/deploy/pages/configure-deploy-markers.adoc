@@ -37,7 +37,7 @@ You can set up deploy markers in two ways:
 * <<set-up-deploy-markers-for-multiple-projects,Set up deploy markers from the web app>>: Use the CircleCI web app to set up deploy marker configuration for a single project or multiple projects at once.
 ** With AI features enabled, CircleCI generates the configuration for you.
 ** Without AI features you receive a configuration template to apply manually.
-* <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. You can choose to configure deploy markers <<deploy-markers-with-status-updates,with status updates>> or <<deploy-marker-logs-without-status-updates,without status updates>>.
+* <<set-up-deploy-markers-manually,Set up deploy markers manually>>: Edit your CircleCI configuration file directly to add deploy markers. Use <<log-a-deployment-with-one-command,one line>> with `circleci run deploy` to log a deployment in production or another environment. For more control, use the `circleci run release` commands to set <<deploy-markers-with-status-updates,component name, target version, and status updates>> or <<deploy-marker-logs-without-status-updates,log without status updates>>.
 
 You can also set up deploy markers using AI as part of the rollback or deploy pipeline guided setup process. See the xref:set-up-rollbacks.adoc[Set up Rollbacks] or xref:set-up-deploys.adoc[Set up Deploys] guides for more details.
 
@@ -129,17 +129,50 @@ Generation will fail for a project in the following cases:
 [#set-up-deploy-markers-manually]
 == Set up deploy markers manually
 
-This section covers how to set up deploy markers by editing your CircleCI configuration file directly. You can configure deploy markers with or without status updates:
+This section covers how to set up deploy markers by editing your CircleCI configuration file directly.
+
+For a simple use case—logging a deployment to production or another environment—add one command to your deploy job.
+
+For advanced deploy marker configuration, use `circleci run release` commands:
 
 * <<deploy-markers-with-status-updates,With status updates>>: Track the full lifecycle of your deployments (pending, running, success, failed, canceled).
-* <<deploy-marker-logs-without-status-updates,Without status updates>>: Log deployments in the deploys UI without tracking their status.
+* <<deploy-marker-logs-without-status-updates,Without status updates>>: Log deployments with custom environment, component, and version values without tracking their status.
 
-NOTE: The `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
+NOTE: The `circleci run deploy` and `circleci run release` commands are part of the CircleCI environment CLI. They are only available in CircleCI builds and are not part of the CircleCI local CLI. You do not need to install the CircleCI local CLI in your CircleCI pipeline to use these commands. See also the full xref:toolkit:environment-cli-usage-guide.adoc[Environment CLI Usage Guide].
 
 === Prerequisites
 
 * A CircleCI account connected to your code. You can link:https://circleci.com/signup/[sign up for free].
 * A CircleCI project with a workflow configured to deploy your code.
+
+[#log-a-deployment-with-one-command]
+=== Log a deployment with one command
+
+If you want to log deployments in the Deploys UI without managing status updates, component names, or target versions manually, add `circleci run deploy` to your deployment job.
+
+.Log a deployment after your deploy steps
+[,yml]
+----
+jobs:
+  deploy-my-service:
+    executor: some-executor
+    steps:
+      ...
+      (existing deployment commands)
+      ...
+      - run: circleci run deploy
+----
+
+By default, `circleci run deploy` logs the deployment to the `production` environment. CircleCI sets the component name to your project name and the target version to the job number. The deployment appears in the Deploys UI with `LOGGED` status.
+
+To log a deployment to a different environment, use the `--environment` flag:
+
+[,yml]
+----
+- run: circleci run deploy --environment staging
+----
+
+You can also use the optional `--namespace` flag to set a namespace other than `default`.
 
 [#deploy-markers-with-status-updates]
 === Deploy markers with status updates
