@@ -66,6 +66,12 @@
     if (code.dataset.lang === 'console' && text.startsWith('$ ')) text = extractCommands(text)
     window.navigator.clipboard.writeText(text).then(
       function () {
+        if (typeof window.analytics === 'object') {
+          window.analytics.track('dd_docs_copy-code-button', {
+            page: window.location.pathname,
+          })
+        }
+
         // Create toast element dynamically
         var toast = document.createElement('span')
         toast.className = 'copy-toast'
