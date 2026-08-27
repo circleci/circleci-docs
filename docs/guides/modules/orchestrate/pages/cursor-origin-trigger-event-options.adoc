@@ -1,0 +1,63 @@
+= Cursor Origin trigger event options
+:page-platform: Cloud
+:page-badge: Beta
+:page-description: A guide to the options available for triggering Cursor Origin pipelines. Trigger pipelines on pushes, tags, and pull request events.
+:experimental:
+
+When you create a trigger for a Cursor Origin pipeline, you choose the event that runs your pipeline from a set of preset options. Using these options you can trigger a pipeline on pushes, tag pushes, and a range of pull request events.
+
+NOTE: The Cursor Origin integration is in beta. Cursor Origin is available for `circleci` type organizations only. For an overview of the integration, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Users, Organizations, and Integrations Guide].
+
+== Introduction
+
+CircleCI projects have pipelines and triggers.
+
+* Pipelines define the various CI/CD 'units' of work that make up your project.
+* Triggers define when and how to initiate a pipeline.
+
+When you create a Cursor Origin project, CircleCI sets up your first pipeline and one Cursor Origin trigger. That first trigger uses the **All pushes** event by default, and you can change it during project creation. For the project creation steps, see the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
+
+You set up one trigger during project creation. Once your project exists, you can configure additional triggers. See the xref:set-up-triggers.adoc[Set up Triggers] page for more information.
+
+[#supported-trigger-options]
+== Supported trigger options
+
+Select a trigger event from the dropdown under "When would you like to run your pipeline?". The following preset options are available:
+
+* **All pushes**: Trigger your pipeline on all pushes to your repository. CircleCI selects this option by default.
+* **Tag pushes**: Trigger a pipeline on pushes to tags only. When choosing this option, you also need to link:https://circleci.com/docs/workflows/#executing-workflows-for-a-git-tag[define tag filters in your config file].
+* **PR opened**: Trigger a pipeline when a pull request is opened.
+* **Non-draft PR opened**: Trigger a pipeline when a non-draft pull request is opened. Draft pull requests do not trigger a pipeline.
+* **PR marked ready for review**: Trigger a pipeline when a pull request is taken out of draft mode and marked ready for review.
+* **Pushes to open non-draft PRs**: Trigger a pipeline when there is a push to a branch with an open pull request that is not in draft mode.
+* **PR merged**: Trigger a pipeline when a pull request is merged only.
+* **PR merged or closed**: Trigger a pipeline when a pull request is merged or closed.
+
+#TODO Three trigger presets are not yet documented above: `only-open-prs`, `only-build-prs`, and `default-branch-pushes`. Confirm their user-facing labels and descriptions from the trigger dropdown in a real Origin project, then add them to this list. `default-branch-pushes` is expected to be "Pushes to default branch". Source of truth for the supported presets: https://github.com/circleci/soc-integrations/blob/main/internal/integrations/origin/trigger/rules.go#
+
+== Other ways to trigger a Cursor Origin pipeline
+
+As well as Cursor Origin events, you can start a Cursor Origin pipeline using:
+
+* xref:schedule-triggers.adoc[Schedule Triggers], to run a pipeline on a schedule.
+* xref:custom-webhooks.adoc[Custom Webhooks], to run a pipeline from events sent by a third party.
+
+For the full list of events that can trigger a pipeline, see the xref:triggers-overview.adoc[Trigger a Pipeline] page.
+
+== Configuration files in Cursor Origin
+
+CircleCI cannot commit files to a Cursor Origin repository. You add your CircleCI config file to the repository yourself. You set the path to this file when you create your project, and the default path is `.circleci/config.yml`.
+
+For guidance on creating a config file, see the following pages:
+
+* xref:getting-started:config-intro.adoc[Configuration Introduction]
+* xref:toolkit:sample-config.adoc[Sample Config.yml Files]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
+
+[#see-also]
+== See also
+
+* xref:getting-started:create-project.adoc[Create a Project]
+* xref:set-up-triggers.adoc[Set up Triggers]
+* xref:triggers-overview.adoc[Trigger a Pipeline]
+* xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide]

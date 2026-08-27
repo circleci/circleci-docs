@@ -162,7 +162,7 @@ include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from
 +
 If this is the first Cursor Origin project for your org, you are redirected to Cursor to install and authorize the CircleCI app in your Origin codebase. An organization administrator or someone with admin access to a repository in your codebase can complete this one-time authorization.
 
-. Set up the trigger for your pipeline. CircleCI creates one Cursor Origin trigger to get you started. Under "When would you like to run your pipeline?", use the dropdown to select the event that runs your pipeline. The default is **All pushes**. Other options include **Tag pushes** and a range of pull request events, such as **PR opened**, **PR merged**, and **PR marked ready for review**.
+. Set up the trigger for your pipeline. CircleCI creates one Cursor Origin trigger to get you started. Under "When would you like to run your pipeline?", use the dropdown to select the event that runs your pipeline. The default is **All pushes**. For the full list of options, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 +
 You set up one trigger during project creation. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
 

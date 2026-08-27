@@ -45,6 +45,7 @@
 *** xref:orchestrate:set-up-triggers.adoc[Set up triggers]
 *** xref:orchestrate:github-trigger-event-options.adoc[GitHub trigger event options]
 *** xref:orchestrate:gitlab-trigger-options.adoc[GitLab trigger options]
+*** xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin trigger event options]
 *** xref:orchestrate:custom-webhooks.adoc[Custom webhooks]
 *** xref:orchestrate:schedule-triggers.adoc[Schedule triggers]
 *** xref:orchestrate:set-up-cross-repo-triggers-for-library-consumers.adoc[Set up cross-repo triggers for library consumers]
