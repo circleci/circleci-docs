@@ -25,6 +25,8 @@ Triggers are available in the following types:
 
 To add a trigger for a pipeline, follow these steps:
 
+#TODO In the Cursor Origin tab below, confirm whether the trigger form has an Event Source field that can point at a different repository, as the GitHub App form does.#
+
 [tabs]
 ====
 GitHub App::
@@ -52,7 +54,7 @@ Using multiple pipelines and triggers, you can build different pipelines for dif
 
 For a full list, see the xref:github-trigger-event-options.adoc[GitHub Trigger Event Options] page.
 ****
-* The *Event Source* defaults to the repository associated with the pipeline. You can change the event source to a different repository if you wish. If you do change the event source so that it does not match the pipeline's config/checkout source an option will appear to specify which branch in the config/checkout source repository you wish to use for the trigger.
+* The *Event Source* defaults to the repository associated with the pipeline. You can change the event source to a different repository if you wish. If the event source does not match the pipeline's config or checkout source, an option appears to specify which branch to use for the trigger.
 . Select btn:[Save]
 
 To verify your trigger is set up correctly, trigger an event from your repository.
@@ -97,7 +99,7 @@ NOTE: For GitLab self-managed you can enter the URL for an instance you have pre
 ** (Optional) You can configure trigger filters to configure the event types that will trigger the pipeline. For more information, see the xref:gitlab-trigger-options.adoc[GitLab Trigger Options] page.
 . Select btn:[Save]
 +
-CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** requesting that you set up a webhook in GitLab. **You do not need to take action**. The webhook is set up automatically by CircleCI. This is a known issue and will be fixed.
+CAUTION: When setting up a trigger you will see a modal titled **Webhook URL** requesting that you set up a webhook in GitLab. **You do not need to take action**. CircleCI sets the webhook up automatically. The modal is a known issue and will be fixed.
 
 To verify your trigger is set up correctly, trigger an event from your repository.
 --
@@ -127,6 +129,24 @@ For help with creating a CircleCI `config.yml`, see the following pages:
 ****
 
 Each time you push changes to your Bitbucket Data Center repository, a new pipeline is triggered and you will see it running for the project within the CircleCI web app.
+--
+Cursor Origin::
++
+--
+NOTE: The Cursor Origin integration is in beta.
+
+When the CircleCI Origin app is installed in your Origin codebase, CircleCI receives events for the repositories it can access. When a trigger is created, CircleCI uses the event data to determine whether a pipeline is triggered.
+
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
++
+. Select *Project Setup* in the sidebar.
+. Select btn:[Cursor Origin trigger +] at the bottom of the pipeline box.
+. Choose when to run the pipeline by selecting an option from the *Event* menu. The default is *All pushes*.
++
+For the full list of event options, see the xref:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
+. Select btn:[Save].
+
+To verify your trigger is set up correctly, push a commit to your repository. Remember that your config file must already be committed to the repository, because CircleCI cannot commit it for you.
 --
 Scheduled::
 +
