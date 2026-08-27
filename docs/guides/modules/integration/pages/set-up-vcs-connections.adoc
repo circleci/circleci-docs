@@ -24,7 +24,7 @@ Some connections need extra configuration before pipelines can run. For example,
 
 The following tabs describe your options for each integration type. Select the tab for the provider you want to connect.
 
-#TODO The GitLab self-managed and Bitbucket Data Center tabs below say to select a "Set up integration" button next to the provider. The VCS Connections page now uses provider cards under "Available Providers". Confirm the current flow for both and update those steps.#
+How you start depends on the provider. GitLab self-managed and Bitbucket Data Center use a btn:[Set up integration] button, while other providers are shown as cards under "Available Providers".
 
 [tabs]
 ====
