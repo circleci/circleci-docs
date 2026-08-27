@@ -14,6 +14,10 @@ Environment variables are scoped at the job level and can be used within the con
 
 NOTE: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step to export the new environment variables using `BASH_ENV`. For more details, see xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[Setting an Environment Variable in a Shell Command].
 
+NOTE: Pull request variables are not populated for Cursor Origin pipelines. `CIRCLE_REPOSITORY_URL` and `CIRCLE_USERNAME` are set but empty for Cursor Origin pipelines.
+
+#TODO Confirm whether these variables are populated for Cursor Origin: CIRCLE_TAG, CIRCLE_OIDC_TOKEN, CIRCLE_OIDC_TOKEN_V2, CIRCLE_PREVIOUS_BUILD_NUM, CIRCLE_INTERNAL_TASK_DATA. A push build does not exercise them, so the sample output could not confirm them.#
+
 [.table-scroll]
 --
 [cols="2,2,1,2,1,1", options="header"]
@@ -26,58 +30,58 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | Server
 
 | `CI`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | Boolean
 | `true` (represents whether the current environment is a CI environment)
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLECI`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | Boolean
 | `true` (represents whether the current environment is a CircleCI environment)
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_BRANCH`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | The name of the Git branch currently being built.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_BUILD_NUM`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | Integer
 | The number of the current job. Job numbers are unique for each job.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_BUILD_URL`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | The URL for the current job on CircleCI.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_JOB`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | The name of the current job.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_NODE_INDEX`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | Integer
 | For jobs that run with parallelism enabled, this is the index of the current parallel run. The value ranges from 0 to (`CIRCLE_NODE_TOTAL` - 1).
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_NODE_TOTAL`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | Integer
-| For jobs that run with parallelism enabled, this is the number of parallel runs. This is equivalent to the value of `parallelism` in your config file.
+| For jobs that run with parallelism enabled, this is the number of parallel runs. The value is equivalent to the value of `parallelism` in your config file.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
@@ -96,14 +100,14 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | [.circle-green]#**Yes**# from v4.4
 
 | `CIRCLE_ORGANIZATION_ID`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | A unique identifier for the CircleCI organization.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_PIPELINE_ID`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | A unique identifier for the current pipeline.
 | [.circle-green]#**Yes**#
@@ -131,21 +135,21 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_PROJECT_ID`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | A unique identifier for the current project.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_PROJECT_REPONAME`
-| GitHub, GitLab, Bitbucket
+| GitHub, GitLab, Bitbucket, Cursor Origin
 | String
 | The name of the repository of the current project.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_PROJECT_USERNAME`
-| GitHub, GitLab, Bitbucket
+| GitHub, GitLab, Bitbucket, Cursor Origin
 | String
 | The GitHub or Bitbucket username of the current project.
 | [.circle-green]#**Yes**#
@@ -173,7 +177,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_SHA1`
-| GitHub, GitLab, Bitbucket
+| GitHub, GitLab, Bitbucket, Cursor Origin
 | String
 | The SHA1 hash of the last commit of the current build.
 | [.circle-green]#**Yes**#
@@ -194,28 +198,28 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_WORKFLOW_ID`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_WORKFLOW_JOB_ID`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | A unique identifier for the current job.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_WORKFLOW_WORKSPACE_ID`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | An identifier for the <<glossary#workspace,workspace>> of the current job. This identifier is the same for every job in a given workflow.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_WORKING_DIRECTORY`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | The value of the `working_directory` key of the current job.
 | [.circle-green]#**Yes**#
@@ -245,6 +249,8 @@ build:
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. Pipeline values are scoped at the pipeline level. They are interpolated at compilation time, not workflow/job runtime.
 
 The pipeline values available to you depend on your pipeline/integration type, as shown in the "Source" column of each table below. The tables below group values by their purpose and namespace.
+
+#TODO Confirm for Cursor Origin: `pipeline.git.tag`, `pipeline.git.base_revision`, `pipeline.schedule.*`, and `pipeline.deploy.*`. A push build does not exercise them.#
 
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
