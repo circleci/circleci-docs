@@ -27,6 +27,8 @@ To add a trigger for a pipeline, follow these steps:
 
 #TODO In the Cursor Origin tab below, confirm whether the trigger form has an Event Source field that can point at a different repository, as the GitHub App form does.#
 
+#TODO Confirm the button label in the Cursor Origin tab below. It is written as "Cursor Origin trigger +", based on the GitHub App tab's "GitHub trigger +".#
+
 [tabs]
 ====
 GitHub App::
