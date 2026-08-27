@@ -328,7 +328,7 @@ The following organization settings are available by selecting *Org* from the si
 | Find information on setting up deploys and/or the release agent.
 
 | Integrations
-| `circleci` organizations only. Integration set up for GitLab self-managed and Bitbucket Data Center.
+| `circleci` organizations only. Integration set up for GitLab self-managed, Bitbucket Data Center, and Cursor Origin. See the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
 
 | Singe sign-on
 | `circleci` organizations on Scale Plan only. Set up SSO for your organization.

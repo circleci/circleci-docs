@@ -10,6 +10,8 @@ Pipelines are triggered in response to actions or scheduled to run at specific t
 
 Trigger a pipeline on an event in your repository. The options available to you will be different depending on which integration you have set up, and for GitHub accounts, which GitHub authentication method you use. For steps to add a trigger for a project, see the xref:set-up-triggers.adoc[Set up Triggers] page.
 
+For the full list of event options per integration, see the xref:github-trigger-event-options.adoc[GitHub Trigger Event Options], xref:gitlab-trigger-options.adoc[GitLab Trigger Options], and xref:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] pages.
+
 Once triggered, a running pipeline appears on the pipelines dashboard, which is accessible by selecting **Pipelines** from the left hand sidebar in the CircleCI web app. This option is called *Dashboard* if you are using CircleCI Server.
 
 .Pipeline running and visible on the dashboard
@@ -17,6 +19,8 @@ image::guides:ROOT:pipelines-dashboard.png[Screenshot showing running pipelines 
 
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
+
+#TODO Cursor Origin is missing from this section. Confirm whether Origin pipelines support manual triggering from the web app, and whether they have a separate checkout source to select. Both questions are already tracked against the Origin cells in the VCS integration overview feature table.#
 
 NOTE: This feature is not available for GitLab integrations.
 
