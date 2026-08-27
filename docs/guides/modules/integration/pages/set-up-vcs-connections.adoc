@@ -19,6 +19,16 @@ The menu:Org[VCS Connections] page has two parts:
 Some connections need extra configuration before pipelines can run. For example, a self-managed provider may show a prompt to add `known_hosts` values. The tabs in the next section cover what each provider requires.
 
 
+[#removing-a-connection]
+== Removing a connection is not deleting an org or project
+
+Removing a VCS connection and deleting a CircleCI organization or project are separate actions, and what happens to your organization depends on the provider:
+
+* For `circleci` type organizations, the connection is an add-on. Removing it leaves your organization and projects in place.
+* For `github` and `bitbucket` type organizations, the organization exists *because* of the OAuth connection. Disconnecting GitHub OAuth or Bitbucket Cloud removes that organization from CircleCI.
+
+Check the tab for your provider below before removing a connection. To delete an organization or project itself, see the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page.
+
 [#connect-a-provider]
 == Connect a provider
 
@@ -159,6 +169,8 @@ NOTE: The Cursor Origin integration is in beta.
 *View*: To view a Cursor Origin integration, navigate to menu:Org[VCS Connections].
 
 *Triggers*: For the trigger events available to Cursor Origin pipelines, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
+
+*Disconnect*: You can remove a Cursor Origin connection from menu:Org[VCS Connections], or uninstall the CircleCI app from the Origin side. Removing the connection does not delete your CircleCI organization or your projects.
 --
 ====
 
