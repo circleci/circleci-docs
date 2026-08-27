@@ -154,19 +154,29 @@ Cursor Origin::
 --
 NOTE: The Cursor Origin integration is in beta. Cursor Origin is available for `circleci` type organizations only.
 
+CircleCI cannot commit files to a Cursor Origin repository. You add your CircleCI config file to the repository yourself, separately from the project creation steps below. CircleCI does not prepare a config file for you, and there is no option to commit one from the web app.
+
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add]. Select btn:[Cursor Origin] and then btn:[Authorize in Cursor Origin].
 +
 If this is the first Cursor Origin project for your org, you are redirected to Cursor to install and authorize the CircleCI app in your Origin codebase. An organization administrator or someone with admin access to a repository in your codebase can complete this one-time authorization.
 
-. CircleCI prepares a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. Once you have your config, select btn:[Next: set up your triggers].
+. Set up the trigger for your pipeline. Use the dropdown to select the event you want to trigger your pipeline. The default is all pushes to your repository.
++
+During project creation you set up one trigger. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
 
-. Set up triggers for your pipeline. Cursor Origin supports a subset of CircleCI's trigger presets, including building on all pushes, tags only, and a range of pull request events. Support for further presets is in progress.
+. Review your setup. At this point you can set the path to the config file in your repository. The default path is `.circleci/config.yml`. Then select btn:[Finish setup].
 
-. Review everything you have just set up, then select btn:[Commit config and run], or btn:[Finish setup] if you already have a config file in your repo.
+Once your project is created you will land on your pipelines page. To see your first pipeline run, push a commit to your repository in Cursor Origin. If you have not added a config file yet, add one at the path you specified and push it.
 
-Once your project is created you will land on your pipelines page.
+****
+For guidance on creating a `config.yml` file, see the following pages:
+
+* xref:config-intro.adoc[Configuration Introduction]
+* xref:toolkit:sample-config.adoc[Sample Config.yml Files]
+* xref:reference:ROOT:configuration-reference.adoc[Configuration Reference]
+****
 --
 ====
 
@@ -232,6 +242,8 @@ circleci onboard --scan
 ----
 
 This writes a starter `.circleci/config.yml` file if your repository does not already have one, creates the project on CircleCI, and adds a trigger that runs your pipeline on every push.
+
+NOTE: For Cursor Origin repositories, CircleCI cannot commit the config file for you. `circleci onboard --scan` writes the file into your local checkout, but you commit and push it to Cursor Origin yourself.
 
 Run `circleci onboard` without flags to get an interactive prompt that also offers to sign you up for CircleCI if you do not already have an account. See the xref:first-steps.adoc#sign-up-with-the-cli[Sign up With the CLI] section for more on that path.
 

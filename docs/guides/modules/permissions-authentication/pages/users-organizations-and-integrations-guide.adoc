@@ -346,6 +346,8 @@ NOTE: The Cursor Origin integration is in beta.
 *Configure*: Set up an integration with Cursor Origin from menu:Org[VCS Connections]. Select btn:[Set up integration] next to Cursor Origin, then follow the instructions to install and authorize the CircleCI app in your Origin codebase. You are also walked through this installation when you create your first Cursor Origin project. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page for those steps.
 
 *View*: To view a Cursor Origin integration, navigate to menu:Org[VCS Connections].
+
+*Configuration files*: CircleCI cannot commit files to a Cursor Origin repository. You add the `.circleci/config.yml` file to your repository yourself, rather than committing it from the CircleCI web app during project creation.
 --
 ====
 
@@ -454,6 +456,8 @@ If you have a `circleci` organization, you must create pipeline definitions manu
 == Triggers
 
 The trigger options available to you depend on your pipeline type. These options are described in the following table:
+
+#TODO Confirm whether manual and API triggering are supported for Cursor Origin pipelines. The Origin row currently asserts Yes, copied from the other pipeline types, and is unverified.#
 
 [.table-scroll]
 --
