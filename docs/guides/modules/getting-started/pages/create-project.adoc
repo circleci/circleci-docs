@@ -156,6 +156,8 @@ NOTE: The Cursor Origin integration is in beta. Cursor Origin is available for `
 
 CircleCI cannot commit files to a Cursor Origin repository. You add your CircleCI config file to the repository yourself, separately from the project creation steps below. CircleCI does not prepare a config file for you, and there is no option to commit one from the web app.
 
+TIP: To set up a Cursor Origin project from your terminal instead, see <<cli-cursor-origin>>.
+
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
 . Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add]. Select btn:[Cursor Origin] and then btn:[Authorize in Cursor Origin].
@@ -215,7 +217,40 @@ To make changes to your pipeline, choose one of the following:
 [#create-a-project-with-the-cli]
 === Create a project with the CLI
 
-You can also create a project from your terminal using the link:https://cli.circleci.com/[CircleCI CLI], instead of the web app.
+You can also create a project from your terminal using the link:https://cli.circleci.com/[CircleCI CLI], instead of the web app. Two commands create projects, and they differ in scope:
+
+* `circleci onboard` walks you through a guided setup. Use it when you want CircleCI to generate a config file, create the project, connect your repository, and set up your first trigger. It can also sign you up and install your VCS integration if you have not done that yet. See <<cli-onboard>>.
+* `circleci project create` creates the project record only. Use it when your VCS integration is already set up and you want to add the config file and triggers yourself. See <<cli-project-create>>.
+
+[#cli-onboard]
+==== Create a project and set it up in one step
+
+To scaffold a config file, create the project, and add a trigger in one command, run the following from inside your repository:
+
+[,shell]
+----
+circleci onboard
+----
+
+`circleci onboard` prompts you to choose what you want to do, then walks through the whole setup. It does the following:
+
+* Generates a starter `.circleci/config.yml` file, if your repository does not already have one.
+* Signs you up for CircleCI, if you are not already signed in.
+* Creates your project and connects your repository.
+* Creates your first pipeline definition and a trigger that runs on all pushes.
+
+To skip the initial prompt, add `--scan` to set up the current repository, or `--signup` to only sign up for CircleCI.
+
+CircleCI does not commit the config file for you. When setup finishes, the CLI prints the git commands to run:
+
+[,shell]
+----
+git add .circleci/
+git commit -m "Add CircleCI config"
+git push
+----
+
+Pushing triggers your first pipeline.
 
 [#cli-project-create]
 ==== Create a project directly
@@ -231,21 +266,17 @@ Replace `my-project` with your project name and `<my-org-slug>` with your organi
 
 This only creates the project record in CircleCI. You still need to add a `.circleci/config.yml` file to your repository and set up a trigger. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
 
-[#cli-onboard]
-==== Create a project and set it up in one step
+This command does not install a VCS integration. If your organization is not yet connected to your VCS provider, either install the integration first from menu:Org[VCS Connections], or use `circleci onboard`, which can install it for you.
 
-To scaffold a config file, create the project, and add a push trigger in one command, run the following from inside your repository:
+[#cli-cursor-origin]
+==== Cursor Origin projects
 
-[,shell]
-----
-circleci onboard --scan
-----
+Both commands work for Cursor Origin projects. Two things are specific to Origin:
 
-This writes a starter `.circleci/config.yml` file if your repository does not already have one, creates the project on CircleCI, and adds a trigger that runs your pipeline on every push.
+* If the CircleCI Origin app is not yet installed in your Origin codebase, `circleci onboard` opens a browser to install it, then finds your repository and creates the pipeline definition and trigger. `circleci project create` does not install the app, so install it first from menu:Org[VCS Connections] if you use that command.
+* CircleCI cannot commit files to a Cursor Origin repository. Committing and pushing the config file yourself is a required step, whichever command you use.
 
-NOTE: For Cursor Origin repositories, CircleCI cannot commit the config file for you. `circleci onboard --scan` writes the file into your local checkout, but you commit and push it to Cursor Origin yourself.
-
-Run `circleci onboard` without flags to get an interactive prompt that also offers to sign you up for CircleCI if you do not already have an account. See the xref:first-steps.adoc#sign-up-with-the-cli[Sign up With the CLI] section for more on that path.
+For the equivalent web app flow, see the Cursor Origin tab in <<create-a-project>>.
 
 TIP: If you created your project from a directory that is not yet linked to it, run `circleci project link` to bind the checkout to the project, so other CLI commands resolve it automatically. See the xref:toolkit:circleci-cli.adoc[CircleCI CLI] guide for more.
 
