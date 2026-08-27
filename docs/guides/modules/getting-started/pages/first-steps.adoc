@@ -109,7 +109,7 @@ For full steps on creating an organization, and what to do next, see the xref:cr
 
 Your sign-in method and VCS provider together determine what kind of CircleCI organization you get:
 
-* If you sign up with **email and password** and add **GitHub**, **GitLab**, **Bitbucket Data Center**, or **Cursor Origin** to your org, you choose the VCS integration from menu:Org[VCS Connections]. You can also choose it when creating a project. You authenticate with your VCS provider as part of that setup.
+* If you sign up with **email and password** and add **GitHub**, **GitLab**, **Bitbucket Data Center**, or **Cursor Origin** to your org, you choose the VCS integration from menu:Org[VCS Connections]. You can also choose it when creating a project. You authenticate with your VCS provider as part of that setup. For steps, see the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
 * If you sign up or sign in with a **GitHub** social login, CircleCI creates a matching organization for you automatically.
 * If you sign up or sign in with **Bitbucket Cloud**, CircleCI creates a matching organization for you automatically. Every team member joining your org authenticates with Bitbucket _during_ signup, not later.
 

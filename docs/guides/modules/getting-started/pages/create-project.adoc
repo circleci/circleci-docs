@@ -270,17 +270,15 @@ Replace `my-project` with your project name and `<my-org-slug>` with your organi
 
 This only creates the project record in CircleCI. You still need to add a `.circleci/config.yml` file to your repository and set up a trigger. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
 
-This command does not install a VCS integration. If your organization is not yet connected to your VCS provider, either install the integration first from menu:Org[VCS Connections], or use `circleci onboard`, which can install it for you.
+This command does not install a VCS integration. If your organization is not yet connected to your VCS provider, either install the integration first, or use `circleci onboard`, which can install it for you. For steps, see the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
 
 [#cli-cursor-origin]
 ==== Cursor Origin projects
 
 Both commands work for Cursor Origin projects. Two things are specific to Origin:
 
-* If the CircleCI Origin app is not yet installed in your Origin codebase, `circleci onboard` opens a browser to install it, then finds your repository and creates the pipeline definition and trigger. `circleci project create` does not install the app, so install it first from menu:Org[VCS Connections] if you use that command.
-* CircleCI cannot commit files to a Cursor Origin repository. Committing and pushing the config file yourself is a required step, whichever command you use.
-
-For the equivalent web app flow, see the Cursor Origin tab in <<create-a-project>>.
+* If the CircleCI Origin app is not yet installed in your Origin codebase, `circleci onboard` opens a browser to install it, then finds your repository and creates the pipeline definition and trigger. `circleci project create` does not install the app, so install it first. See the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
+* Committing and pushing the config file yourself is required, whichever command you use, for the reason described in the Cursor Origin tab in <<create-a-project>>.
 
 TIP: If you created your project from a directory that is not yet linked to it, run `circleci project link` to bind the checkout to the project, so other CLI commands resolve it automatically. See the xref:toolkit:circleci-cli.adoc[CircleCI CLI] guide for more.
 

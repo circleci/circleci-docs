@@ -21,8 +21,9 @@ To create a `circleci` organization, follow these steps:
 . Select the btn:[+ Create organization] button.
 . Give your organization a name and select btn:[Let's Go].
 
-After you create your new organization, invite your team and create a project:
+A new `circleci` organization is not yet connected to a VCS provider. Connect it, then invite your team and create a project:
 
+* xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections]. You can also do this while creating your first project.
 * xref:invite-your-team.adoc#invite-teammates[Invite Your Team].
 * xref:create-project.adoc#create-a-project[Create a Project].
 

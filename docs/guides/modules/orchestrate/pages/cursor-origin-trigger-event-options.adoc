@@ -46,7 +46,7 @@ For the full list of events that can trigger a pipeline, see the xref:triggers-o
 
 == Configuration files in Cursor Origin
 
-CircleCI cannot commit files to a Cursor Origin repository. You add your CircleCI config file to the repository yourself. You set the path to this file when you create your project, and the default path is `.circleci/config.yml`.
+Your trigger runs a pipeline defined by a config file in your repository. You add that file yourself, and you set its path when you create your project. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
 
 For guidance on creating a config file, see the following pages:
 

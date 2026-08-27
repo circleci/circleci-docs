@@ -158,8 +158,6 @@ NOTE: The Cursor Origin integration is in beta.
 
 *View*: To view a Cursor Origin integration, navigate to menu:Org[VCS Connections].
 
-*Configuration files*: CircleCI cannot commit files to a Cursor Origin repository. You add the `.circleci/config.yml` file to your repository yourself, rather than committing it from the CircleCI web app during project creation.
-
 *Triggers*: For the trigger events available to Cursor Origin pipelines, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 --
 ====

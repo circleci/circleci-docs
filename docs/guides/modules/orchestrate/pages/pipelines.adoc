@@ -157,7 +157,7 @@ NOTE: If you have not yet installed the CircleCI Origin app into your Origin cod
 ** Enter your config file path. The field is automatically populated with the default path `.circleci/config.yml` but you can edit this if needed.
 . Select btn:[Save].
 
-Remember that CircleCI cannot commit files to a Cursor Origin repository. Commit the config file to your repository yourself before your pipeline can run.
+For Cursor Origin, commit the config file to your repository yourself before your pipeline can run. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
 
 Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set up Triggers] page.
 --

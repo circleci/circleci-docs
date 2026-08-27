@@ -148,7 +148,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 For the full list of event options, see the xref:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 . Select btn:[Save].
 
-To verify your trigger is set up correctly, push a commit to your repository. Remember that your config file must already be committed to the repository, because CircleCI cannot commit it for you.
+To verify your trigger is set up correctly, push a commit to your repository. Your config file must already be committed there. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
 --
 Scheduled::
 +
