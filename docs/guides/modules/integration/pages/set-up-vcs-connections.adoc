@@ -1,0 +1,175 @@
+= Set up VCS connections
+:page-platform: Cloud
+:page-description: Connect your CircleCI organization to a version control system provider, and view, configure, or remove existing connections.
+:experimental:
+
+A VCS connection links your CircleCI organization to a version control system (VCS) provider, so CircleCI can read your code and receive events from it. You manage these connections at menu:Org[VCS Connections] in the CircleCI web app.
+
+You can also install a connection while creating a project. If you would rather set your connection up as part of that flow, see the xref:getting-started:create-project.adoc[Create a Project] page.
+
+For which connections are available to your organization type, and which features each supports, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc#vcs-integration[Users, Organizations, and Integrations Guide] and the xref:version-control-system-integration-overview.adoc[VCS, Pipeline Types, and Feature Support] page.
+
+== View your connections
+
+The menu:Org[VCS Connections] page has two parts:
+
+* **Connected** lists the providers your organization is already connected to. Expand a connection to see the permissions it has been granted and which repositories it can access. Each connection also has controls to configure or remove it.
+* **Available Providers** shows the providers you can still connect, as a set of cards. Select a provider card to start installing that connection.
+
+Some connections need extra configuration before pipelines can run. For example, a self-managed provider may show a prompt to add `known_hosts` values. The tabs in the next section cover what each provider requires.
+
+
+[#connect-a-provider]
+== Connect a provider
+
+The following tabs describe your options for each integration type. Select the tab for the provider you want to connect.
+
+#TODO The GitLab self-managed and Bitbucket Data Center tabs below say to select a "Set up integration" button next to the provider. The VCS Connections page now uses provider cards under "Available Providers". Confirm the current flow for both and update those steps.#
+
+[tabs]
+====
+GitHub App::
++
+--
+*Availability*: A GitHub App integration is available for `circleci` and `github` type organizations. The CircleCI GitHub App is installed into an organization. The GitHub App integration supports GitHub.com, GitHub Enterprise Cloud, and GitHub Enterprise Server. GitHub Enterprise Server support is currently in Preview. See the xref:integration:github-enterprise-server-integration.adoc[GitHub Enterprise Server Integration] page for more information.
+
+*View*: To view a GitHub App integration, navigate to menu:Org[VCS Connections]. If you are in a `circleci` or `github` organization you will either see your active GitHub App integration or an option to install the GitHub App.
+
+*Disconnect*: To *uninstall* the GitHub App from your organization, select the trash/bin button and follow the instructions.
+--
+GitHub OAuth::
++
+--
+*Availability*: A GitHub OAuth app integration is installed into a `github` type organization.
+
+*View*: To *view* a GitHub OAuth app integration, navigate to menu:Org[VCS Connections]. If the GitHub OAuth app is installed you will see this indicated in the OAuth app section.
+
+*Disconnect*: You can _disconnect_ your GitHub OAuth app integration. Doing so will remove your `github` organization from CircleCI. To disconnect your GitHub OAuth app integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your GitHub integration and follow the instructions.
+--
+Bitbucket::
++
+--
+*Availability*: A Bitbucket Cloud integration is installed into a `bitbucket` type organization.
+
+*View*: To *view* a Bitbucket Cloud integration, navigate to menu:Org[VCS Connections]. If the Bitbucket Cloud integration is installed you will see this indicated in the Bitbucket Cloud section.
+
+*Disconnect*: You can _disconnect_ your Bitbucket Cloud integration. Doing so will remove your `bitbucket` type organization from CircleCI. To disconnect your Bitbucket Cloud integration, navigate to menu:User Settings[Account Integrations], select btn:[Disconnect] next to your Bitbucket Cloud integration and follow the instructions.
+--
+GitLab::
++
+--
+*Availability*: A GitLab SaaS integration is installed into a `circleci` type organization.
+
+*View*: Currently, there is no method to manage the connection with GitLab outside of the project setup, trigger, and configuration settings.
+
+*Disconnect*: Currently, there is no method to disconnect GitLab from your organization. You can delete projects that are connected to GitLab, and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
+--
+GitLab self-managed::
++
+--
+
+NOTE: If you use both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, be aware of a known bug in menu:Org[VCS Connections]. Adding a `known_hosts` value to one integration also populates the `known_hosts` field for the other integration. To use both integrations in the same CircleCI organization, add both `known_hosts` values to the single input field, separated by a new line.
+
+*Availability*: A GitLab self-managed integration is installed into a `circleci` type organization.
+
+*Configure*: Set up an integration with your GitLab self-managed instance from menu:Org[VCS Connections] as follows:
+
+. Select btn:[Set Up Integration] next to GitLab self-managed.
+. Enter your GitLab self-managed instance URL, for example, `https://test-gitlab.circleci.com`.
++
+Your self-managed instance must already contain at least one GitLab project — the authorization attempt fails if your instance has no projects. The self-managed instance must also be accessible via the public internet. If it is behind a firewall, see link:https://discuss.circleci.com/t/gitlab-self-managed-support-on-circleci-is-now-here/47726/3?u=sebastian-lerner[a suggested workaround].
+
+. Enter your instance's SSH public host keys. You can retrieve this from your instance by running `ssh-keyscan <instance_url>`, for example, `ssh-keyscan test-gitlab.circleci.com`, and copying the command's output.
++
+The output looks something like:
++
+[,shell]
+----
+➜  ~ ssh-keyscan test-gitlab.circleci.com
+
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFSMqzJeV9rUzU4kWitGjeR4PWSa29SPqJ1fVkhtj3Hw9xjLVXVYrU9QlYWrOLXBpQ6KWjbjTDTdDkoohFzgbEY=
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+gitlab.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+# gitlab.com:22 SSH-2.0-GitLab-SSHD
+----
+
+. Select btn:[Set Up Integration].
+
+To create pipelines for your code in GitLab self-managed, you will need to generate a link:https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html[personal access token]. This token must have the `api` scope.
+
+You cannot currently edit or delete existing GitLab self-managed integrations.
+
+*View*: Currently, there is no method to manage the connection with GitLab self-managed outside of the project setup, trigger, and configuration settings.
+
+*Disconnect*: Currently, there is no method to disconnect GitLab self-managed from your organization. You can delete projects that are connected to GitLab self-managed and delete the CircleCI webhooks in GitLab to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
+--
+Bitbucket Data Center::
++
+--
+NOTE: If you use both CircleCI's Bitbucket Data Center and GitLab self-managed integrations, be aware of a known bug in menu:Org[VCS Connections]. Adding a `known_hosts` value to one integration also populates the `known_hosts` field for the other integration. To use both integrations in the same CircleCI organization, add both `known_hosts` values to the single input field, separated by a new line.
+
+*Availability*: A Bitbucket Data Center integration is installed into a `circleci` type organization.
+
+*Configure*: Set up an integration with your Bitbucket Data Center instance from menu:Org[VCS Connections] as follows:
+
+. Select btn:[Set up integration] next to Bitbucket Data Center.
+. In the modal enter your Bitbucket Data Center instance URL and your `known_hosts`:
++
+Integrating CircleCI with your Bitbucket Data Center instance requires that you store a public SSH host key within the CircleCI organization that will be accessing the Bitbucket Data Center instance.
++
+To get the required SSH host key, run `ssh-keyscan` with the hostname and port of your Bitbucket Data Center instance. For example:
++
+TIP: Replace the port with the correct port for your instance, and the hostname with your Bitbucket Data Center hostname.
++
+[,shell]
+----
+ssh-keyscan -p 1234 bitbucket-datacenter.example.com
+----
++
+The output will look something like the following:
++
+[,shell]
+----
+[bitbucket-datacenter.example.com]:1234 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAA//NF6iU86j0hfGxn8ncjgwvmk9tMKzhFqrRLaltP0TGt760PhfWk070raKLHS3L6H0BdN9qNVsTk63czziFDmtBehE82/XXX+59MuppY0DHG3brNvw4REPmzZkQNIR6Cs8b15iFbwnIL51IH9kBVMztWQaRDPkPPxihM6e0n/vo5n3uEIPCTZiwLgKRcpeks2LsfbsW0NN5Q7J1Irp/ACstfrsFWSntranbjMe6cIwELNY6FhvYmETzH0cY0=
+----
++
+Copy the full output from the `ssh-keyscan` command and enter it into the "known hosts" text box when setting up your integration in the CircleCI web app under menu:Org[VCS Connections].
+
+. Select btn:[Set Up Integration].
+
+To set up Bitbucket data center pipelines you will need to create a project HTTP access token with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
+
+*View*: Currently, there is no method to manage the connection with Bitbucket Data Center outside of the project setup, trigger, and configuration settings.
+
+*Disconnect*: Currently, there is no method to disconnect Bitbucket Data Center from your organization. You can delete projects that are connected to Bitbucket Data Center and delete the CircleCI webhooks in Bitbucket Data Center to achieve this. See the xref:security:delete-organizations-and-projects.adoc[Delete Organizations and Projects] page for more information.
+--
+Cursor Origin::
++
+--
+NOTE: The Cursor Origin integration is in beta.
+
+*Availability*: A Cursor Origin integration is installed into a `circleci` type organization. Cursor Origin is Cursor's git forge for storing and sharing code. For more information, see the link:https://cursor.com/docs/origin[Cursor Origin documentation].
+
+*Configure*: From menu:Org[VCS Connections], select the **Cursor Origin** card under "Available Providers". Follow the instructions to install and authorize the CircleCI app in your Origin codebase. You are also walked through this installation when you create your first Cursor Origin project. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page for those steps.
+
+*View*: To view a Cursor Origin integration, navigate to menu:Org[VCS Connections].
+
+*Configuration files*: CircleCI cannot commit files to a Cursor Origin repository. You add the `.circleci/config.yml` file to your repository yourself, rather than committing it from the CircleCI web app during project creation.
+
+*Triggers*: For the trigger events available to Cursor Origin pipelines, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
+--
+====
+
+== Can multiple CircleCI organizations connect to the same GitHub organization?
+
+A GitHub organization can only be connected via CircleCI GitHub App to a single CircleCI organization.
+
+If you attempt to connect your CircleCI organization to a GitHub organization that already has the CircleCI GitHub App installed, you will be redirected to the GitHub App installation page. You will not be redirected back to CircleCI. This can be confusing because GitHub will show a successful installation. That installation, however, refers to the existing connection to a different CircleCI organization, not the one you just tried to create. You can confirm this by checking the "installed at" date at the top of the page. Unfortunately, GitHub doesn't indicate which CircleCI organization is already connected, so if you need help identifying the existing connection, you can submit a request link:https://forms.gle/dvcXN8ArByXqNNbJ7[by filling out this form].
+
+.GitHub settings showing the CircleCI App integration settings page.
+image::guides:ROOT:github-app-configuration-page.png[Create a project]
+
