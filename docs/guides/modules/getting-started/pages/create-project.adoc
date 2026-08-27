@@ -162,11 +162,11 @@ include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from
 +
 If this is the first Cursor Origin project for your org, you are redirected to Cursor to install and authorize the CircleCI app in your Origin codebase. An organization administrator or someone with admin access to a repository in your codebase can complete this one-time authorization.
 
-. Set up the trigger for your pipeline. Use the dropdown to select the event you want to trigger your pipeline. The default is all pushes to your repository.
+. Set up the trigger for your pipeline. CircleCI creates one Cursor Origin trigger to get you started. Under "When would you like to run your pipeline?", use the dropdown to select the event that runs your pipeline. The default is **All pushes**. Other options include **Tag pushes** and a range of pull request events, such as **PR opened**, **PR merged**, and **PR marked ready for review**.
 +
-During project creation you set up one trigger. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
+You set up one trigger during project creation. You can configure additional triggers once your project is created. See the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page for more information.
 
-. Review your setup. At this point you can set the path to the config file in your repository. The default path is `.circleci/config.yml`. Then select btn:[Finish setup].
+. On the **Review and finish setup** step, set the path to the config file in your repository. The default path is `.circleci/config.yml`.
 
 Once your project is created you will land on your pipelines page. To see your first pipeline run, push a commit to your repository in Cursor Origin. If you have not added a config file yet, add one at the path you specified and push it.
 
