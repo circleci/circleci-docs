@@ -184,7 +184,7 @@ For guidance on creating a `config.yml` file, see the following pages:
 
 CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
 
-Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers at menu:Project settings[Project Setup] if your project integrates with GitHub, or at menu:Project settings[Triggers] if it integrates with GitLab or Bitbucket. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page.
+Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers in your project settings. Use menu:Project settings[Project Setup] for GitHub and Cursor Origin projects, or menu:Project settings[Triggers] for GitLab and Bitbucket projects. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page.
 
 [#set-up-a-project]
 === Set up a project
@@ -217,7 +217,7 @@ To make changes to your pipeline, choose one of the following:
 [#create-a-project-with-the-cli]
 === Create a project with the CLI
 
-You can also create a project from your terminal using the link:https://cli.circleci.com/[CircleCI CLI], instead of the web app. Two commands create projects, and they differ in scope:
+You can also create a project from your terminal using the link:https://cli.circleci.com/[CircleCI CLI]. Two commands create projects, and they differ in scope:
 
 * `circleci onboard` walks you through a guided setup. Use it when you want CircleCI to generate a config file, create the project, connect your repository, and set up your first trigger. It can also sign you up and install your VCS integration if you have not done that yet. See <<cli-onboard>>.
 * `circleci project create` creates the project record only. Use it in a `circleci` type organization when your VCS integration is already set up and you want to add the config file and triggers yourself. See <<cli-project-create>>.

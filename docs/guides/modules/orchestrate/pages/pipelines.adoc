@@ -63,7 +63,7 @@ NOTE: GitHub and Bitbucket OAuth pipelines are created automatically when settin
 
 The steps and options described in this section are for setting up a pipeline. Choose the tab to match your version control system to view the correct steps for your system.
 
-#TODO Add a Cursor Origin tab below. Confirm whether Origin pipelines are added under Project Setup or Pipelines in Project settings, and which form fields appear.#
+#TODO In the Cursor Origin tab below, confirm whether the pipeline form has separate config source and checkout source repository selectors, as the GitHub App form does.#
 
 [tabs]
 ====
@@ -139,6 +139,27 @@ To add or edit a pipeline, follow these steps:
 ** Define where the config file for this pipeline is stored:
 *** Select a repository from the dropdown.
 *** Enter the path to the config file.
+--
+Cursor Origin::
++
+--
+To add or edit a pipeline, follow these steps:
+
+include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
++
+. Select *Project Setup* in the sidebar.
+. Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon (icon:edit-solid[Edit icon]) to the right of the section you want to change.
++
+NOTE: If you have not yet installed the CircleCI Origin app into your Origin codebase you will be prompted to do so at this point. Installing the app is a one-time step.
+. Complete the form fields and options:
+** Give your pipeline a descriptive name, for example `Run tests and deploy`.
+** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
+** Enter your config file path. The field is automatically populated with the default path `.circleci/config.yml` but you can edit this if needed.
+. Select btn:[Save].
+
+Remember that CircleCI cannot commit files to a Cursor Origin repository. Commit the config file to your repository yourself before your pipeline can run.
+
+Once you have set up a pipeline you need to set up a trigger to connect it to. Setting up a trigger is covered in the xref:set-up-triggers.adoc[Set up Triggers] page.
 --
 ====
 

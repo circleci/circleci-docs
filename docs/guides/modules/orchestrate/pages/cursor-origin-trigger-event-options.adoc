@@ -17,7 +17,7 @@ CircleCI projects have pipelines and triggers.
 
 When you create a Cursor Origin project, CircleCI sets up your first pipeline and one Cursor Origin trigger. That first trigger uses the **All pushes** event by default, and you can change it during project creation. For the project creation steps, see the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
 
-You set up one trigger during project creation. Once your project exists, you can configure additional triggers. See the xref:set-up-triggers.adoc[Set up Triggers] page for more information.
+You set up one trigger during project creation. Once your project exists, you can configure additional triggers under menu:Project settings[Project Setup]. See the xref:set-up-triggers.adoc[Set up Triggers] page for more information.
 
 [#supported-trigger-options]
 == Supported trigger options
