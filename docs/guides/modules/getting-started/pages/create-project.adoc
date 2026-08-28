@@ -30,7 +30,7 @@ If you are using a `circleci` type organization, the steps in this section apply
 
 Choose steps to follow below, depending on where your code is stored:
 
-#TODO Add a screenshot of the "Let's choose a repo for your pipeline" step, showing the provider tiles. It replaces four per-provider screenshots that showed the previous UI and have been archived.#
+#TODO Add screenshots of the "Let's choose a repo for your pipeline" step. It has two states: the provider tiles shown when there is no VCS connection yet, and the repo list with the Add button shown when a connection already exists. These replace four per-provider screenshots of the previous UI, now archived.#
 
 #TODO The later steps in the GitLab Cloud, GitLab self-managed, and Bitbucket Data Center tabs describe a "Create New Project window" with Fastest, Faster, and Fast options. The wizard now has separate config and trigger steps, so confirm whether those steps are still accurate.#
 
