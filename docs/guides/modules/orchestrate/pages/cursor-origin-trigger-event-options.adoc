@@ -26,14 +26,16 @@ Select a trigger event from the dropdown under "When would you like to run your 
 
 * **All pushes**: Trigger your pipeline on all pushes to your repository. CircleCI selects this option by default.
 * **Tag pushes**: Trigger a pipeline on pushes to tags only. When choosing this option, you also need to link:https://circleci.com/docs/workflows/#executing-workflows-for-a-git-tag[define tag filters in your config file].
+* **Pushes to default branch**: Trigger a pipeline on pushes to the default branch only.
 * **PR opened**: Trigger a pipeline when a pull request is opened.
 * **Non-draft PR opened**: Trigger a pipeline when a non-draft pull request is opened. Draft pull requests do not trigger a pipeline.
+* **PR opened or pushed to, default branch and tag pushes**: Trigger a pipeline on four kinds of event. These are pushes to a branch with an open pull request, a pull request being opened, pushes to any tag, and pushes to the default branch. Reopening a closed pull request also triggers a pipeline.
 * **PR marked ready for review**: Trigger a pipeline when a pull request is taken out of draft mode and marked ready for review.
 * **Pushes to open non-draft PRs**: Trigger a pipeline when there is a push to a branch with an open pull request that is not in draft mode.
 * **PR merged**: Trigger a pipeline when a pull request is merged only.
 * **PR merged or closed**: Trigger a pipeline when a pull request is merged or closed.
 
-#TODO Three trigger presets are not yet documented above: `only-open-prs`, `only-build-prs`, and `default-branch-pushes`. Confirm their user-facing labels and descriptions from the trigger dropdown in a real Origin project, then add them to this list. `default-branch-pushes` is expected to be "Pushes to default branch". Source of truth for the supported presets: https://github.com/circleci/soc-integrations/blob/main/internal/integrations/origin/trigger/rules.go#
+These options match the equivalent xref:github-trigger-event-options.adoc[GitHub Trigger Event Options].
 
 == Other ways to trigger a Cursor Origin pipeline
 

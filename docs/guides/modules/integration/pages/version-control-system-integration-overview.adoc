@@ -76,6 +76,8 @@ For an overview of users, orgs, and pipeline types, see the xref:permissions-aut
 
 NOTE: The table below is not a full list of CircleCI features. Only features where the pipeline type is relevant to support are included. If a feature is not in this table, it is supported for all pipeline types.
 
+NOTE: The two open source support features are marked **No** for Cursor Origin because Origin has no public repositories and no forking.
+
 #TODO Confirm Cursor Origin support for every row marked `-` below, then replace each dash with Yes or No.#
 
 [.table-scroll]
@@ -166,7 +168,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| -
+| [.circle-green]#**Yes**#
 
 | *Edit your configuration file in the CircleCI web app*
 | Configuration
@@ -358,7 +360,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| -
+| [.circle-red]#**No**#
 
 | xref:oss.adoc#pass-secrets-to-builds-from-forked-pull-requests[Pass Secrets to Builds From Forked Pull Requests]
 |Open source support
@@ -370,7 +372,7 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| -
+| [.circle-red]#**No**#
 
 | *Chunk, CircleCI's AI CI/CD agent. Learn more in the xref:toolkit:chunk-setup-and-overview.adoc[Chunk Setup Guide]*
 | Agentic support
