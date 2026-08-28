@@ -43,7 +43,7 @@ include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from
 
 include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-NOTE: **First GitHub project?** Selecting the **GitHub Cloud** tile redirects you to GitHub, where you install and authorise the CircleCI GitHub App. You can connect CircleCI to all your repositories, or select a subset. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
+Select the **GitHub Cloud** tile to get set up. You can connect CircleCI to all your repositories, or select a subset. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
 
 . CircleCI prepares a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
 
@@ -149,7 +149,7 @@ include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from
 
 include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-Select the **Cursor Origin** tile. You are redirected to the CircleCI app page in Cursor, where you select btn:[Install]. An organization administrator, or someone with admin access to a repository in your codebase, can complete this one-time installation.
+Select the **Cursor Origin** tile to get set up. An organization administrator, or someone with admin access to a repository in your codebase, can complete this one-time installation.
 
 . Set up the trigger for your pipeline. CircleCI creates one Cursor Origin trigger to get you started. Under "When would you like to run your pipeline?", use the dropdown to select the event that runs your pipeline. The default is **All pushes**. For the full list of options, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 +
@@ -169,7 +169,7 @@ For guidance on creating a `config.yml` file, see the following pages:
 --
 ====
 
-CircleCI uses the specified `.circleci/config.yml` file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the `.circleci/config.yml` file in your repository.
+CircleCI uses the specified config file to run your pipeline. You can see the output on the pipelines page. To make changes to your pipeline, edit the config file in your repository.
 
 Through creating a project and connecting your code you have set up your pipeline and a trigger. The default trigger runs your pipeline when a change is committed to your code. You can create more triggers in your project settings. Use menu:Project settings[Project Setup] for GitHub and Cursor Origin projects, or menu:Project settings[Triggers] for GitLab and Bitbucket projects. For more information, see the xref:orchestrate:set-up-triggers.adoc[Set up Triggers] page.
 
