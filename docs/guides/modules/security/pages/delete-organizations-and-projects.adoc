@@ -41,17 +41,14 @@ If you only want to stop builds for a project and keep the complete build histor
 |===
 --
 
-
 [#delete-an-organization]
 == Delete an organization
 
-[NOTE]
-====
 You can only delete an organization when both the below conditions are met:
 
 - The organization is on a Free Plan.
 - The user performing the action has an admin role in the organization.
-====
+
 You can delete your organization from the CircleCI web app or via the CircleCI API:
 
 CAUTION: This action will permanently delete the organization for you and all organization members.
