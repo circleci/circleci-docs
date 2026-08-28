@@ -3,7 +3,7 @@
 :page-description: Connect your CircleCI organization to a version control system provider, and view, configure, or remove existing connections.
 :experimental:
 
-A VCS connection links your CircleCI organization to a version control system (VCS) provider, so CircleCI can read your code and receive events from it. You manage these connections at menu:Org[VCS Connections] in the CircleCI web app.
+A VCS connection links your CircleCI organization to your repositories in a version control system (VCS) provider, so CircleCI can read your code and receive events from it. You manage these connections at menu:Org[VCS Connections] in the CircleCI web app.
 
 You can also install a connection while creating a project. If you would rather set your connection up as part of that flow, see the xref:getting-started:create-project.adoc[Create a Project] page.
 
@@ -15,6 +15,8 @@ The menu:Org[VCS Connections] page has two parts:
 
 * **Connected** lists the providers your organization is already connected to. Expand a connection to see the permissions it has been granted and which repositories it can access. Each connection also has controls to configure or remove it.
 * **Available Providers** shows the providers you can still connect, as a set of cards. Select a provider card to start installing that connection.
+
+#TODO Add a screenshot of the menu:Org[VCS Connections] page, showing both the Connected and Available Providers sections. This page describes that screen entirely in prose, and no other page in the docs shows it.#
 
 Some connections need extra configuration before pipelines can run. For example, a self-managed provider may show a prompt to add `known_hosts` values. The tabs in the next section cover what each provider requires.
 
