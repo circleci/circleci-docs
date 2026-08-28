@@ -16,7 +16,7 @@ NOTE: You cannot use a built-in environment variable to define another environme
 
 NOTE: Pull request variables are not populated for Cursor Origin pipelines. `CIRCLE_REPOSITORY_URL` and `CIRCLE_USERNAME` are set but empty for Cursor Origin pipelines.
 
-#TODO Confirm whether these variables are populated for Cursor Origin: CIRCLE_TAG, CIRCLE_OIDC_TOKEN, CIRCLE_OIDC_TOKEN_V2, CIRCLE_PREVIOUS_BUILD_NUM, CIRCLE_INTERNAL_TASK_DATA. A push build does not exercise them, so the sample output could not confirm them.#
+#TODO Confirm whether CIRCLE_OIDC_TOKEN and CIRCLE_OIDC_TOKEN_V2 are populated for Cursor Origin. They appear to be set in the job, but this is not confirmed.#
 
 [.table-scroll]
 --
@@ -184,7 +184,7 @@ NOTE: Pull request variables are not populated for Cursor Origin pipelines. `CIR
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_TAG`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | The name of the git tag, if the current build is tagged. For more information, see the Git tag job execution section of the xref:guides:orchestrate:workflows.adoc#executing-workflows-for-a-git-tag[Workflows] page.
 | [.circle-green]#**Yes**#
@@ -250,7 +250,7 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 The pipeline values available to you depend on your pipeline/integration type, as shown in the "Source" column of each table below. The tables below group values by their purpose and namespace.
 
-#TODO Confirm for Cursor Origin: `pipeline.git.tag`, `pipeline.git.base_revision`, `pipeline.schedule.*`, and `pipeline.deploy.*`. A push build does not exercise them.#
+#TODO Confirm whether the `pipeline.deploy.*` values are populated for Cursor Origin. Deploy and rollback pipelines are unsupported for Origin, so these are expected to be unpopulated.#
 
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 

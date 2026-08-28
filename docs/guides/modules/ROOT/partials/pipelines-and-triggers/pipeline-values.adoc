@@ -147,7 +147,8 @@ d| [.nowrap]#GitHub App# +
 [.nowrap]#GitHub OAuth# +
 [.nowrap]#Bitbucket Cloud# +
 [.nowrap]#Bitbucket Data Center# +
-[.nowrap]#GitLab#
+[.nowrap]#GitLab# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the git tag that CircleCI checks out. Empty if the pipeline checks out from a branch.
 | [.circle-green]#**Yes**#
@@ -437,7 +438,8 @@ d| [.nowrap]#GitHub App# +
 
 | `pipeline.schedule.name`
 d| [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The name of the schedule trigger if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
@@ -445,7 +447,8 @@ d| [.nowrap]#GitHub OAuth# +
 
 | `pipeline.schedule.id`
 d| [.nowrap]#GitHub OAuth# +
-[.nowrap]#Bitbucket Cloud#
+[.nowrap]#Bitbucket Cloud# +
+[.nowrap]#Cursor Origin#
 | String
 | The unique ID of the schedule if the pipeline was triggered via schedule. Empty if the pipeline was not triggered via schedule.
 | [.circle-green]#**Yes**#
