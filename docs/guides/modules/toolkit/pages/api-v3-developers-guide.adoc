@@ -1,0 +1,646 @@
+= CircleCI API v3 developer's guide
+:page-platform: Cloud, Server v4+
+:page-description: API v3 guide for internal and external CircleCI developers
+:experimental:
+
+This guide assists developers in making API calls to CircleCI services using API v3 to return detailed information about users, pipelines, projects, workflows, and more. The API v3 specification may be viewed in the link:https://circleci.com/docs/api/v3/[API v3 Reference documentation].
+
+include::ROOT:partial$notes/server-api-examples.adoc[]
+
+[#about-api-v3]
+== About API v3
+
+API v3 is CircleCI's current API version and all new development uses v3. It provides a modern, efficient interface with consistent conventions across all endpoints.
+
+**Key differences from v2:**
+
+* UUID-based resource identification instead of slugs
+* Opaque cursor pagination instead of token-based pagination
+* Comprehensive error objects with optional fields
+* Standard rate limiting headers (IETF draft)
+* Support for ETags and conditional requests
+* Explicit idempotency guarantees where applicable
+
+[#api-v3-conventions]
+== API v3 conventions
+
+Understanding these conventions helps you work effectively with the API v3.
+
+[#authentication-and-authorization]
+=== Authentication and authorization
+
+API v3 uses token-based authentication to manage access to the API server and validate that you have permission to make requests.
+
+The following authentication methods are supported:
+
+* **Bearer Authentication** (recommended): Industry-standard (RFC 6750). Pass the token as a Bearer token in the `Authorization` header.
+* **Circle-Token header**: CircleCI-specific header, widely used in existing integrations. Pass the token in the `Circle-Token` header.
+
+[#add-an-api-token]
+==== Add an API token
+
+To add an API token, perform the steps listed below:
+
+. Log in to the link:https://app.circleci.com[CircleCI web app].
+. xref:managing-api-tokens.adoc#creating-a-personal-api-token[Create a Personal API Token] by visiting the link:https://app.circleci.com/settings/user/tokens[Personal API Tokens] page.
+. To test your token, call the API using the command below. Set your API token as an environment variable before making a cURL call.
++
+[,shell]
+----
+export CIRCLE_TOKEN={your_api_token}
+
+# using bearer authentication (recommended):
+curl https://circleci.com/api/v3/users?filter[user_id]=me \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+
+# or, using Circle-Token header:
+curl https://circleci.com/api/v3/users?filter[user_id]=me \
+  --header "Circle-Token: $CIRCLE_TOKEN"
+----
+
+. You will see a JSON response similar to the example shown below.
++
+[,json]
+----
+{
+  "data": [
+    {
+      "id": "string",
+      "attributes": {
+        "login": "string",
+        "name": "string"
+      }
+    }
+  ]
+}
+----
+
+All API calls are made in the same way, by making standard HTTP calls using JSON, a content-type, and your API token.
+
+[#using-the-api-securely-with-curl]
+==== Using the API securely with cURL
+
+CircleCI encourages security best practices when using cURL with the API. Visit the xref:security:security-recommendations.adoc#protect-the-api-token[Security Recommendations] page to learn how to mitigate risks and protect your API token and secrets.
+
+[#resource-identification]
+=== Resource identification
+
+API v3 uses UUIDs to identify resources, not slugs or names. When you need to reference a project, organization, workflow, or other resource, use its UUID.
+
+Some collections allow you to resolve a name or slug to a UUID using filters like `filter[slug]` or `filter[name]`.
+
+**Example: Finding a project by slug**
+
+[,shell]
+----
+curl https://circleci.com/api/v3/projects?filter[slug]=gh/myorg/myrepo \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+[#response-structure]
+=== Response structure
+
+API v3 uses consistent response structures across all endpoints.
+
+[#single-resource]
+==== Single resource
+
+When retrieving a single resource, the response contains a `data` object with `id`, `attributes`, and `references`:
+
+[,json]
+----
+{
+  "data": {
+    "id": "uuid",
+    "attributes": {
+      "name": "value",
+      "field": "value"
+    },
+    "references": {
+      "related_id": "uuid",
+      "related_items": ["uuid1", "uuid2"]
+    }
+  }
+}
+----
+
+The `references` object contains related resource IDs and may include denormalized fields for convenience. Check the operation's schema to see which fields are denormalized.
+
+[#collection-resources]
+==== Collection resources
+
+When retrieving a collection, the response contains a `data` array and a `page` object:
+
+[,json]
+----
+{
+  "data": [
+    {
+      "id": "uuid",
+      "attributes": { ... }
+    }
+  ],
+  "page": {
+    "next": "opaque-cursor-string",
+    "prev": "opaque-cursor-string"
+  }
+}
+----
+
+[#pagination]
+=== Pagination
+
+API v3 uses opaque cursor pagination. The `page.next` and `page.prev` values are opaque strings that you pass back as `page[cursor]` to retrieve the next or previous page.
+
+**Important pagination rules:**
+
+* Send cursor values unmodified
+* Stop when `page.next` is `null`
+* `page[limit]` bounds are per-operation and out-of-range values return 400
+* Do not attempt to parse or modify cursor values
+
+**Example: Paginating through results**
+
+[,shell]
+----
+# First page
+curl "https://circleci.com/api/v3/workflows?filter[run_id]={run-id}&page[limit]=10" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+
+# Next page (using cursor from previous response)
+curl "https://circleci.com/api/v3/workflows?filter[run_id]={run-id}&page[limit]=10&page[cursor]={cursor}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+[#filtering-and-scoping]
+=== Filtering and scoping
+
+Most list operations require a scope filter and return 400 without it. Common filters include:
+
+* `filter[org_id]` - Scope to an organization
+* `filter[project_id]` - Scope to a project
+* `filter[run_id]` - Scope to a run
+* `filter[workflow_id]` - Scope to a workflow
+
+Always check the operation's required parameters before making a request.
+
+[#http-methods]
+=== HTTP methods
+
+API v3 follows RESTful conventions:
+
+* `GET` - Read operations
+* `POST` - Create, actions, and partial updates
+* `PUT` - Replace a resource in full
+* `DELETE` - Remove a resource
+
+Note: There is no `PATCH` method. Use `POST` for partial updates.
+
+[#idempotency]
+=== Idempotency
+
+`GET`, `PUT`, and `DELETE` operations are idempotent. `POST` operations may be idempotent depending on the specific endpoint.
+
+**Important:** Do not assume a `POST` is replayable. Retrying a timed-out `POST` can create duplicate resources or fire an action twice. Only retry a `POST` if its documentation explicitly states it is idempotent.
+
+[#error-handling]
+=== Error handling
+
+Errors return a single `error` object (never an array):
+
+[,json]
+----
+{
+  "error": {
+    "type": "validation_error",
+    "id": "req_abc123",
+    "title": "Invalid parameter",
+    "detail": "The filter[org_id] parameter is required",
+    "source": {
+      "pointer": "/filter/org_id"
+    }
+  }
+}
+----
+
+**Error handling best practices:**
+
+* Branch on the HTTP status code
+* Use `error.type` to distinguish between causes within the same status
+* Never branch on `title` or `detail` text
+* Quote `error.id` in support requests
+* Invalid input is always 400, never 422
+
+[#rate-limits]
+=== Rate limits
+
+On 429 responses, wait the `Retry-After` seconds, then back off exponentially. Responses include:
+
+* `RateLimit-Policy` - The rate limit policy
+* `RateLimit` - Current state against the policy
+* `Retry-After` - Seconds to wait before retrying
+
+Rate limits are per-route and not published. Read the headers rather than assuming a figure.
+
+[#caching-and-conditional-requests]
+=== Caching and conditional requests
+
+Responses include an `ETag` and `Cache-Control` directive. Send the `ETag` back as `If-None-Match` to make the request conditional and receive a 304 when nothing has changed.
+
+**Example:**
+
+[,shell]
+----
+# First request
+curl -i "https://circleci.com/api/v3/workflows/{id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+
+# Returns ETag: "abc123def"
+
+# Conditional request
+curl "https://circleci.com/api/v3/workflows/{id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header 'If-None-Match: "abc123def"'
+
+# Returns 304 Not Modified if unchanged
+----
+
+[#deprecation]
+=== Deprecation
+
+Deprecated operations are marked `deprecated: true` and responses include:
+
+* `Deprecation: true` (RFC 9745)
+* `Sunset` - HTTP-date when the endpoint will be removed (RFC 8594)
+* `Link` with `rel="deprecation"` - Points to migration documentation (RFC 8288)
+
+Migrate before the `Sunset` date. Removed routes return 410 permanently.
+
+[#getting-started-with-api-v3]
+== Getting started with API v3
+
+[#finding-resource-ids]
+=== Finding resource IDs
+
+API v3 requires UUIDs for most operations. Here is how to find common resource IDs:
+
+[#find-organization-id]
+==== Find organization ID
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/orgs?filter[slug]={org-slug}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+[#find-project-id]
+==== Find project ID
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/projects?filter[slug]={project-slug}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+For more information, see xref:how-to-find-ids.adoc[How to Find IDs].
+
+[#example-end-to-end-api-request]
+== Example end-to-end API request
+
+This section walks through a complete API v3 workflow: finding a project, listing its pipelines, and triggering a new run.
+
+[#prerequisites]
+=== Prerequisites
+
+* A GitHub, Bitbucket, or GitLab account with a repository set up with CircleCI
+* A valid CircleCI personal API token
+
+[#steps]
+=== Steps
+
+. Set your API token as an environment variable:
++
+[,shell]
+----
+export CIRCLE_TOKEN={your_api_token}
+----
+
+. Find your project ID. Replace `{org-slug}` and `{project-name}` with your values:
++
+[,shell]
+----
+curl "https://circleci.com/api/v3/projects?filter[org_id]={org-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Accept: application/json"
+----
++
+This returns a list of projects. Find your project in the response and note its `id`.
+
+. List pipelines for your project:
++
+[,shell]
+----
+curl "https://circleci.com/api/v3/pipelines?filter[project_id]={project-id}&page[limit]=10" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Accept: application/json"
+----
+
+. Trigger a new run with parameters. First, you need a pipeline ID:
++
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/runs" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "pipeline_id": "{pipeline-id}",
+    "parameters": {
+      "branch": "main",
+      "custom-param": "value"
+    }
+  }'
+----
++
+This returns a run object with an `id` that you can use to track the run's progress.
+
+. Get details about the run:
++
+[,shell]
+----
+curl "https://circleci.com/api/v3/runs/{run-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+[#common-use-cases]
+== Common use cases
+
+[#list-workflows-in-a-run]
+=== List workflows in a run
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/workflows?filter[run_id]={run-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+[#list-jobs-in-a-workflow]
+=== List jobs in a workflow
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/jobs?filter[workflow_id]={workflow-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+[#get-job-details]
+=== Get job details
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/jobs/{job-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+The response includes steps, parallel executions, and other job metadata.
+
+[#get-job-artifacts]
+=== Get job artifacts
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/jobs/{job-id}/artifacts" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+[#download-artifacts]
+=== Download artifacts
+
+. List artifacts for a job:
++
+[,shell]
+----
+curl "https://circleci.com/api/v3/jobs/{job-id}/artifacts" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  | grep -o '"url":"[^"]*"' \
+  | sed 's/"url":"//;s/"$//' \
+  > artifact-urls.txt
+----
+
+. Download all artifacts:
++
+[,shell]
+----
+while read url; do
+  wget --header="Authorization: Bearer $CIRCLE_TOKEN" "$url"
+done < artifact-urls.txt
+----
+
+[#cancel-a-workflow]
+=== Cancel a workflow
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/workflows/{workflow-id}/cancel" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json"
+----
+
+[#rerun-a-workflow]
+=== Rerun a workflow
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/workflows/{workflow-id}/rerun" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json"
+----
+
+[#manage-contexts]
+=== Manage contexts
+
+**List contexts:**
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/contexts?filter[org_id]={org-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+**Create a context:**
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/contexts" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "org_id": "{org-id}",
+    "name": "my-context"
+  }'
+----
+
+**Set an environment variable in a context:**
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/contexts/{context-id}/env-vars/set" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "name": "MY_VAR",
+    "value": "my-value"
+  }'
+----
+
+[#insights-and-analytics]
+=== Insights and analytics
+
+API v3 provides powerful analytics endpoints for aggregating data across jobs, workflows, and pipelines.
+
+**Get workflow insights:**
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/analysis/jobs" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "project_id": "{project-id}",
+    "from": "2024-01-01T00:00:00Z",
+    "to": "2024-01-31T23:59:59Z"
+  }'
+----
+
+**Get credit usage:**
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/analysis/charges" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "project_id": "{project-id}",
+    "from": "2024-01-01T00:00:00Z",
+    "to": "2024-01-31T23:59:59Z"
+  }'
+----
+
+[#advanced-topics]
+== Advanced topics
+
+[#working-with-orbs]
+=== Working with orbs
+
+API v3 provides comprehensive orb management capabilities:
+
+**List orb packages:**
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/orb/packages?filter[namespace_id]={namespace-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+**Create an orb version:**
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/orb/versions" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "package_id": "{package-id}",
+    "version": "1.0.0",
+    "source": "version: 2.1\n..."
+  }'
+----
+
+[#runner-management]
+=== Runner management
+
+Manage self-hosted runners through the API:
+
+**List runner resource classes:**
+
+[,shell]
+----
+curl "https://circleci.com/api/v3/runner/resource-classes?filter[org_id]={org-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN"
+----
+
+**Create a runner token:**
+
+[,shell]
+----
+curl -X POST "https://circleci.com/api/v3/runner/tokens" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "resource_class_id": "{resource-class-id}",
+    "name": "my-runner-token"
+  }'
+----
+
+[#best-practices]
+== Best practices
+
+[#handle-errors-gracefully]
+=== Handle errors gracefully
+
+Always check the HTTP status code and handle errors appropriately:
+
+[,shell]
+----
+response=$(curl -s -w "\n%{http_code}" \
+  "https://circleci.com/api/v3/workflows/{workflow-id}" \
+  --header "Authorization: Bearer $CIRCLE_TOKEN")
+
+http_code=$(echo "$response" | tail -n1)
+body=$(echo "$response" | sed '$d')
+
+if [ "$http_code" -eq 200 ]; then
+  echo "Success: $body"
+elif [ "$http_code" -eq 404 ]; then
+  echo "Workflow not found"
+elif [ "$http_code" -eq 429 ]; then
+  echo "Rate limited, please wait and retry"
+else
+  echo "Error $http_code: $body"
+fi
+----
+
+[#respect-rate-limits]
+=== Respect rate limits
+
+Implement exponential backoff when you receive 429 responses:
+
+. Wait the duration specified in the `Retry-After` header
+. If subsequent requests also return 429, double your wait time
+. Continue doubling until the request succeeds
+
+[#use-etags-for-efficiency]
+=== Use ETags for efficiency
+
+Use conditional requests to reduce bandwidth and improve performance:
+
+. Store the `ETag` from initial requests
+. Send `If-None-Match` headers on subsequent requests
+. Handle 304 responses by using cached data
+
+[#paginate-efficiently]
+=== Paginate efficiently
+
+When retrieving large datasets:
+
+. Set an appropriate `page[limit]` for your use case
+. Store and reuse cursor values
+. Stop when `page.next` is `null`
+. Do not attempt to parse cursor values
+
+[#reference]
+== Reference
+
+* Refer to xref:api-intro.adoc[API Overview] for high-level information about all CircleCI API versions
+* Refer to link:https://circleci.com/docs/api/v3/[API v3 Reference] for detailed endpoint documentation
+* Refer to xref:managing-api-tokens.adoc[Managing API Tokens] for information on creating and managing tokens
+* Refer to xref:how-to-find-ids.adoc[How to Find IDs] for help locating resource identifiers

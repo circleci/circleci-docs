@@ -1,49 +1,110 @@
-= API v2 introduction
+= CircleCI API introduction
 :page-platform: Cloud, Server v4+
-:page-description: Introduction to the CircleCI API
+:page-description: Introduction to the CircleCI API versions and their capabilities
 :experimental:
 
-The CircleCI API may be used to make API calls to interact with your pipelines, projects, and orgs. This includes retrieving detailed information about users, jobs, workflows, and pipelines, as well as triggering pipelines. CircleCI currently supports two API versions:
+The CircleCI API enables you to interact with your pipelines, projects, and organizations programmatically. Use the API to retrieve detailed information about users, jobs, workflows, and pipelines, as well as trigger pipelines and manage resources. CircleCI currently supports three API versions:
+
+* link:../../../api/v1/[API v1.1 Reference] (Legacy)
+* link:../../../api/v2/[API v2 Reference] (Legacy)
+* link:../../../api/v3/[API v3 Reference] (Current)
+
+[#api-version-overview]
+== API version overview
+
+[#api-v3]
+=== API v3
+
+API v3 is the current version and all new development uses this API. It provides a modern, efficient interface with improved conventions and better performance characteristics.
+
+**Key features:**
+
+* UUID-based resource identification
+* Opaque cursor pagination for efficient large dataset handling
+* Consistent error handling with detailed error objects
+* Idempotent operations where applicable
+* ETags for caching and conditional requests
+* Rate limiting with standard headers
+* Comprehensive endpoints for workflows, jobs, pipelines, and analytics
+
+**When to use v3:**
+
+* All new integrations and scripts
+* Applications requiring modern API patterns
+* Projects needing advanced features like analysis endpoints, deploy management, and notification configuration
+
+To get started with API v3, see the xref:api-v3-developers-guide.adoc[API v3 Developers Guide].
+
+[#api-v2]
+=== API v2
+
+API v2 is a legacy version but remains supported and generally available. It includes support for pipelines and pipeline parameters that were unavailable in v1.1.
+
+**Key features:**
+
+* Token-based pagination
+* Pipeline triggering with parameters
+* Insights endpoints
+* Workflow and job management
+
+**When to use v2:**
+
+* Existing integrations that have not yet migrated to v3
+* Scripts and tools that depend on v2-specific behavior
+
+To get started with API v2, see the xref:api-developers-guide.adoc[API v2 Developers Guide].
+
+NOTE: While API v2 remains supported, CircleCI recommends migrating to API v3 for new work to take advantage of improved conventions and features.
+
+[#api-v1-1]
+=== API v1.1
+
+API v1.1 is a legacy version. CircleCI expects to eventually End-Of-Life (EOL) API v1.1. Further guidance on when API v1.1 will be discontinued will be communicated at a future date.
+
+**When to use v1.1:**
+
+* Maintaining existing integrations that have not yet been updated
+* Specific legacy use cases
+
+NOTE: CircleCI strongly recommends migrating from API v1.1 to API v3 as soon as possible.
+
+[#choosing-an-api-version]
+== Choosing an API version
+
+When starting a new integration or script, use API v3. It provides the most modern conventions, best performance, and will receive all new features and endpoints.
+
+**Migration path:**
+
+For existing integrations:
+
+* **From v1.1**: Migrate directly to v3 to take advantage of all modern features
+* **From v2**: Plan migration to v3 for new features and improved conventions
+
+[#authentication]
+== Authentication
+
+All CircleCI API versions use token-based authentication. You need a personal API token to authenticate your requests.
+
+**Supported authentication methods:**
+
+* **Bearer Authentication** (recommended): Pass the token as a Bearer token in the `Authorization` header
+* **Circle-Token header**: Pass the token in the `Circle-Token` header
+* **Basic Authentication**: Use the token as the username (Base64-encoded)
+
+See the xref:managing-api-tokens.adoc[Managing API Tokens] guide for information on creating and managing tokens.
+
+[#api-references]
+== API references
+
+For detailed endpoint documentation, HTTP methods, parameters, and response formats:
 
 * link:../../../api/v1/[API v1.1 Reference]
 * link:../../../api/v2/[API v2 Reference]
-
-API v2 includes several powerful features (for example, support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI users migrate their scripts to API v2 stable endpoints as soon as possible.
-
-CircleCI API v1.1 and v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
-
-To get started with the API v2, see the xref:api-developers-guide.adoc[API Developers Guide].
-
-[#changes-in-endpoints]
-== Changes in endpoints
-
-The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
-
-Refer to the link:../../../api/v2/[API v2 Reference Guide] for a complete list of all API v2 endpoints. The guide contains a detailed description of each individual endpoint, including required and optional parameters, HTTP status and error codes, and code samples.
-
-[#deprecated-endpoints]
-=== Deprecated endpoints
-
-With API v2, several endpoints from v1 have been deprecated, which are listed in the table below.
-
-[.table-scroll]
---
-[cols=2*, options="header"]
-|===
-| Endpoint | Description
-
-| `POST /project/:vcs-type/:username/:project`
-| This endpoint allowed users to trigger a new build.
-
-| `POST /project/:vcs-type/:username/:project/build`
-| This endpoint enabled users to trigger a new build by project.
-
-| `GET /recent-builds`
-| This endpoint enabled users to retrieve an array of recent builds.
-|===
---
+* link:../../../api/v3/[API v3 Reference]
 
 [#next-steps]
 == Next steps
 
-* Review the xref:api-developers-guide.adoc[API Developer's Guide] for a detailed walkthrough on authenticating as well as example API requests.
+* Review the xref:api-v3-developers-guide.adoc[API v3 Developers Guide] for a detailed walkthrough on using the current API version
+* Review the xref:api-developers-guide.adoc[API v2 Developers Guide] for information on the legacy v2 API
+* Explore the link:../../../api/v3/[API v3 Reference] for complete endpoint documentation
