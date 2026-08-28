@@ -43,7 +43,7 @@ include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from
 
 include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-Select the **GitHub Cloud** tile to get set up. You can connect CircleCI to all your repositories, or select a subset. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
+Select the **GitHub Cloud** tile to get set up. CircleCI redirects you to GitHub, where you install and authorise the CircleCI GitHub App. You can connect CircleCI to all your repositories, or select a subset. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
 
 . CircleCI prepares a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
 
@@ -149,7 +149,7 @@ include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from
 
 include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-Select the **Cursor Origin** tile to get set up. An organization administrator, or someone with admin access to a repository in your codebase, can complete this one-time installation.
+Select the **Cursor Origin** tile to get set up. CircleCI redirects you to Cursor, where you select btn:[Install] to install the CircleCI app into your Origin codebase. An organization administrator, or someone with admin access to a repository in your codebase, can complete this one-time installation.
 
 . Set up the trigger for your pipeline. CircleCI creates one Cursor Origin trigger to get you started. Under "When would you like to run your pipeline?", use the dropdown to select the event that runs your pipeline. The default is **All pushes**. For the full list of options, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 +
