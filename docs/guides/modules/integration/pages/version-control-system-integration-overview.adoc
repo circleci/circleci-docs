@@ -78,6 +78,8 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 
 NOTE: The two open source support features are marked **No** for Cursor Origin because Origin has no public repositories and no forking.
 
+NOTE: The deployment features work for Cursor Origin, but you set them up yourself. CircleCI has no write access to an Origin repository, so it cannot open a pull request on your behalf. This means the setup wizards are unavailable, and you create your deploy and rollback pipelines manually.
+
 #TODO Confirm Cursor Origin support for every row marked `-` below, then replace each dash with Yes or No.#
 
 [.table-scroll]
@@ -324,7 +326,7 @@ NOTE: The two open source support features are marked **No** for Cursor Origin b
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| -
+| [.circle-green]#**Yes**#
 
 | *Set up xref:deploy:set-up-rollbacks.adoc[Rollback Pipelines] to manually revert your application to a previous stable version directly from the CircleCI web app*
 | Deployment
@@ -336,7 +338,7 @@ NOTE: The two open source support features are marked **No** for Cursor Origin b
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| -
+| [.circle-green]#**Yes**#
 
 | *Set up xref:deploy:set-up-deploys.adoc[Deploy Pipelines] to automatically deploy your application to a target environment directly from the CircleCI web app*
 | Deployment
@@ -348,7 +350,7 @@ NOTE: The two open source support features are marked **No** for Cursor Origin b
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| -
+| [.circle-green]#**Yes**#
 
 | xref:oss.adoc#build-pull-requests-from-forked-repositories[Build Pull Requests From Forked Repositories]
 | Open source support
