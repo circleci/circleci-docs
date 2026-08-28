@@ -3,7 +3,7 @@
 :page-description: Connect your CircleCI organization to a version control system provider, and view, configure, or remove existing connections.
 :experimental:
 
-A VCS connection links your CircleCI organization to your repositories in a version control system (VCS) provider, so CircleCI can read your code and receive events from it. You manage these connections at menu:Org[VCS Connections] in the CircleCI web app.
+A VCS connection is what gives CircleCI access to the code in your repositories. It links your CircleCI organization to your version control system (VCS) provider. CircleCI can then check out your code, and receive events from your repositories such as a push or a pull request. You manage these connections at menu:Org[VCS Connections] in the CircleCI web app.
 
 You can also install a connection while creating a project. If you would rather set your connection up as part of that flow, see the xref:getting-started:create-project.adoc[Create a Project] page.
 
