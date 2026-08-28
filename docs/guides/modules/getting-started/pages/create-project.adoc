@@ -26,11 +26,13 @@ NOTE: Using CircleCI Server? Use the <<set-up-a-project>> steps below. Rather th
 [#create-a-project]
 === Create a project
 
-If you are using a `circleci` type organization, the steps in this section apply to you.
-
-include::ROOT:partial$tips/check-org-type.adoc[]
+If you are using a `circleci` type organization, the steps in this section apply to you. You will see a btn:[Create Project] button on the Home page.
 
 Choose steps to follow below, depending on where your code is stored:
+
+#TODO Add a screenshot of the "Let's choose a repo for your pipeline" step, showing the provider tiles. It replaces four per-provider screenshots that showed the previous UI and have been archived.#
+
+#TODO The later steps in the GitLab Cloud, GitLab self-managed, and Bitbucket Data Center tabs describe a "Create New Project window" with Fastest, Faster, and Fast options. The wizard now has separate config and trigger steps, so confirm whether those steps are still accurate.#
 
 [tabs]
 ====
@@ -39,14 +41,9 @@ GitHub::
 --
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project.
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-If you do not see your repo listed, select btn:[Add] to access repositories from GitHub. Select btn:[GitHub] and then btn:[Authorize in GitHub]
-+
-NOTE: **First GitHub project?** If this is the first GitHub project you are creating, you will be redirected to GitHub and asked to install and authorise the CircleCI GitHub App. At this point you can choose to connect CircleCI to all your repositories, or select a subset of repositories to connect. An organization administrator or someone with admin access to a repository in your org can complete this one-time authorization.
-+
-.Choose a repo to connect your code to your project
-image::guides:ROOT:create-project/choose-a-repo-github.png[Choose a repository window with option to add another VCS]
+NOTE: **First GitHub project?** Selecting the **GitHub Cloud** tile redirects you to GitHub, where you install and authorise the CircleCI GitHub App. You can connect CircleCI to all your repositories, or select a subset. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
 
 . CircleCI prepares a config file for you, unless your repo already contains a CircleCI config file. In a later step you will commit this config to your repo on a new branch. If you do already have a CircleCI config file in your repo it will be displayed. Once you have your config, select btn:[Next: set up your triggers].
 
@@ -64,12 +61,9 @@ include::ROOT:partial$create-project/remove-gitlab-cicd-config.adoc[]
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] or btn:[Connect to GitLab Cloud] to authorise access to your GitLab repositories.
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-.Choose a repo to connect your code to your project
-image::guides:ROOT:create-project/choose-a-repo-gitlab.png[Choose a repository window with option to add another VCS]
-+
-NOTE: **First GitLab project?** If you are creating the first GitLab project for your org, you will be redirected to GitLab to authorise the integration. An organization administrator or someone with admin access to a repository in your org can complete this one-time authorization.
+NOTE: **First GitLab project?** Selecting the **GitLab Cloud** tile redirects you to GitLab to authorise the integration. An organization administrator, or someone with admin access to a repository in your org, can complete this one-time authorization.
 
 . In the Create New Project window, ensure you have the right repo selected in the dropdown. If you have a CircleCI config file already available in your repo, CircleCI will detect it. If not you can select an option for adding one:
 ** **Fastest:** Use a config file that already exists in your repository.
@@ -93,15 +87,9 @@ include::ROOT:partial$create-project/remove-gitlab-cicd-config.adoc[]
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add] to access repositories from your GitLab self-managed instance.
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-.Choose a repo to connect your code to your project
-image::guides:ROOT:create-project/choose-a-repo-gitlab.png[Choose a repository window with option to add another VCS]
-+
-Select btn:[GitLab self-managed] and then btn:[Authorize in GitLab self-managed]
-+
-.Authorize GitLab self-managed
-image::guides:ROOT:create-project/authorize-gitlab-self-managed.png[Option to authorize a new VCS integration]
+Select the **GitLab self-managed** tile to authorise access to your instance.
 
 . In the Create New Project window, you have some options:
 +
@@ -133,10 +121,9 @@ Before creating a project that you want to integrate with code in a Bitbucket Da
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add]. Select btn:[Bitbucket Data Center] and then btn:[Authorize in Bitbucket Data Center].
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-.Access Bitbucket data center repos
-image::guides:ROOT:create-project/authorize-bitbucket-data-center.png[Choose a repository window with option to add another VCS]
+Select the **Bitbucket Data Center** tile to authorise access to your instance.
 
 . To set up your project you will need to create a project HTTP access token with the project admin scope. Create this under Projects in Bitbucket. For more information, see the link:https://confluence.atlassian.com/bitbucketserver/http-access-tokens-939515499.html[Bitbucket docs]. Copy the token somewhere safe, you will need to enter it when creating pipelines and triggers in CircleCI.
 +
@@ -152,17 +139,17 @@ If you set up your Bitbucket Data Center instance you will see your instance URL
 Cursor Origin::
 +
 --
-NOTE: The Cursor Origin integration is in beta. Cursor Origin is available for `circleci` type organizations only.
+NOTE: The Cursor Origin integration is in beta.
 
-CircleCI cannot commit files to a Cursor Origin repository. You add your CircleCI config file to the repository yourself, separately from the project creation steps below. CircleCI does not prepare a config file for you, and there is no option to commit one from the web app.
+CircleCI cannot commit files to a Cursor Origin repository. You add your CircleCI config file to the repository yourself, separately from the project creation steps below.
 
 TIP: To set up a Cursor Origin project from your terminal instead, see <<cli-cursor-origin>>.
 
 include::ROOT:partial$create-project/steps-up-to-pipeline.adoc[Insert steps from selecting Create project up to setting up a pipeline]
 
-. Choose a repo to connect to your project. If you do not see your repo listed, select btn:[Add]. Select btn:[Cursor Origin] and then btn:[Authorize in Cursor Origin].
+include::ROOT:partial$create-project/choose-a-repo.adoc[]
 +
-If this is the first Cursor Origin project for your org, you are redirected to Cursor to install and authorize the CircleCI app in your Origin codebase. An organization administrator or someone with admin access to a repository in your codebase can complete this one-time authorization.
+Select the **Cursor Origin** tile. You are redirected to the CircleCI app page in Cursor, where you select btn:[Install]. An organization administrator, or someone with admin access to a repository in your codebase, can complete this one-time installation.
 
 . Set up the trigger for your pipeline. CircleCI creates one Cursor Origin trigger to get you started. Under "When would you like to run your pipeline?", use the dropdown to select the event that runs your pipeline. The default is **All pushes**. For the full list of options, see the xref:orchestrate:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
 +

@@ -1,0 +1,5 @@
+. Choose a repo for your pipeline. CircleCI checks out the code from this repo when your pipeline runs.
++
+To connect a provider, select its tile under "Connect a VCS to choose a repo", then follow that provider's instructions. Granting access applies to any project in your organization, and you can update repo access at any time.
++
+Once you have chosen your repo, select btn:[Next: set up your config].
