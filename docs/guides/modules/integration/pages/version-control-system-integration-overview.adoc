@@ -384,7 +384,7 @@ NOTE: The two open source support features are marked **No** for Cursor Origin b
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| -
+| [.circle-red]#**No**#
 |===
 --
 
