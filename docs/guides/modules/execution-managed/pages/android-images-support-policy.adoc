@@ -30,16 +30,18 @@ Gen2 resource classes are available for the Android machine image on CircleCI Cl
 - `2xlarge`
 - `2xlarge+`
 
-Gen2 resource classes are not available on CircleCI Server.
+Gen2 images use the `current` tag instead of the `default` tag used by gen1 images. See <<tagging>> for details. Gen2 resource classes are not available on CircleCI Server.
 
 [#tagging]
 == Tagging
 
-The following tags specify which image version to request in your configuration:
+The following tags specify which image version to request in your configuration. Gen1 and gen2 images use different stable tags: gen1 uses `default` for legacy reasons, and gen2 uses `current` to stay consistent with the Linux VM tagging convention.
 
-- `default`: CircleCI updates this tag every three months. This image is the current stable version.
+- `default`: The stable tag for gen1 images. CircleCI updates this tag every three months.
 
-- `edge`: Use `edge` for previews of new releases that point to this tag initially. Edge tags may include incremental updates to the `default` image release, which may change without notice. Do not use `edge` for production CI workloads. CircleCI updates `default` with these changes after a period of stability, generally about a week.
+- `current`: The stable tag for gen2 images. CircleCI updates this tag every three months.
+
+- `edge`: Use `edge` for previews of new releases that point to this tag initially. Edge tags may include incremental updates to the stable image release, which may change without notice. Do not use `edge` for production CI workloads. CircleCI updates the stable tag with these changes after a period of stability, generally about a week.
 
 [#critical-cve-patches]
 == Critical CVE patches
@@ -54,7 +56,7 @@ You can file a link:https://support.circleci.com/hc/en-us/requests/new[support t
 [#image-lifespan-eol]
 == Image lifespan / EOL
 
-When a new Android API level ships, we release it to `edge`. We give a 3-month warning before we drop support for the oldest version in `default`. We post an announcement on our Discuss forum, along with additional outreach where possible.
+When a new Android API level ships, we release it to `edge`. We give a 3-month warning before we drop support for the oldest version in the stable tag (`default` for gen1, `current` for gen2). We post an announcement on our Discuss forum, along with additional outreach where possible.
 
 We aim to start the EOL process within 3 months of a new version release.
 

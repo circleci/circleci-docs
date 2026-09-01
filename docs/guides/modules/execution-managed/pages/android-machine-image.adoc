@@ -47,7 +47,7 @@ On a per-resource-class basis, gen2 pricing can be higher or lower than its gen1
 [#using-android-gen2]
 ==== Using gen2
 
-All Android gen1 resource classes are also available as gen2. To use a gen2 resource class, specify a `large.gen2` or equivalent class in your job configuration:
+All Android gen1 resource classes are also available as gen2. Gen2 images use the `current` tag instead of the `default` tag used by gen1, to stay consistent with the Linux VM tagging convention. To use a gen2 resource class, specify the `current` tag along with a `large.gen2` or equivalent resource class in your job configuration:
 
 [,yaml]
 ----
@@ -55,7 +55,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: android:default
+      image: android:current
     resource_class: large.gen2
     steps:
       # ... steps for your job
