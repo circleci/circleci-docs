@@ -14,9 +14,7 @@ Environment variables are scoped at the job level and can be used within the con
 
 NOTE: You cannot use a built-in environment variable to define another environment variable. Instead, you must use a `run` step to export the new environment variables using `BASH_ENV`. For more details, see xref:guides:security:set-environment-variable.adoc#set-an-environment-variable-in-a-shell-command[Setting an Environment Variable in a Shell Command].
 
-NOTE: Pull request variables are not populated for Cursor Origin pipelines. `CIRCLE_REPOSITORY_URL` and `CIRCLE_USERNAME` are set but empty for Cursor Origin pipelines.
-
-#TODO Confirm whether CIRCLE_OIDC_TOKEN and CIRCLE_OIDC_TOKEN_V2 are populated for Cursor Origin. They appear to be set in the job, but this is not confirmed.#
+NOTE: Pull request variables, `CIRCLE_REPOSITORY_URL`, and `CIRCLE_USERNAME` are not supported for Cursor Origin pipelines.
 
 [.table-scroll]
 --
@@ -86,14 +84,14 @@ NOTE: Pull request variables are not populated for Cursor Origin pipelines. `CIR
 | [.circle-green]#**Yes**#
 
 | `CIRCLE_OIDC_TOKEN`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | An OpenID Connect token signed by CircleCI which includes details about the current job.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**# from v4.4
 
 | `CIRCLE_OIDC_TOKEN_V2`
-| GitHub, Bitbucket, GitLab
+| GitHub, Bitbucket, GitLab, Cursor Origin
 | String
 | An OpenID Connect token signed by CircleCI which includes details about the current job.
 | [.circle-green]#**Yes**#
