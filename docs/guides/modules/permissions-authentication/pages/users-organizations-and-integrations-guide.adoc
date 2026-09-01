@@ -312,8 +312,6 @@ If you have a `circleci` organization, you must create pipeline definitions manu
 
 The trigger options available to you depend on your pipeline type. These options are described in the following table:
 
-#TODO Confirm whether manual and API triggering are supported for Cursor Origin pipelines. The Origin row currently asserts Yes, copied from the other pipeline types, and is unverified.#
-
 [.table-scroll]
 --
 [options="header",cols="10*"]

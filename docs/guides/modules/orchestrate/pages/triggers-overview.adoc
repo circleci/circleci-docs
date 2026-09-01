@@ -20,8 +20,6 @@ image::guides:ROOT:pipelines-dashboard.png[Screenshot showing running pipelines 
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
 
-#TODO Cursor Origin is missing from this section. Confirm whether Origin pipelines support manual triggering from the web app. If they do, add Cursor Origin to the checkout source step below, as Origin pipelines have a separate checkout source. The same question is tracked against the UI triggers row of the VCS integration overview feature table.#
-
 NOTE: This feature is not available for GitLab integrations.
 
 . In the link:https://app.circleci.com/home[CircleCI web app], select your organization from your homepage.
@@ -39,7 +37,7 @@ image::guides:ROOT:trigger-pipeline-app.png[Screenshot showing location on trigg
 .Screenshot showing the trigger pipeline modal
 image::guides:ROOT:trigger-pipeline-app-modal.png[Trigger a pipeline modal in the CircleCI web app]
 
-. If your code is integrated via the **GitHub App or Bitbucket Data Center**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` step]. If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can skip this step, the same location is used for both config and checkout source.
+. If your code is integrated via the **GitHub App, Bitbucket Data Center, or Cursor Origin**, select your checkout source and branch. This tells CircleCI which code to check out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[`checkout` step]. If your code is integrated via **GitHub OAuth or Bitbucket Cloud**, you can skip this step, the same location is used for both config and checkout source.
 
 . If you would like to specify any pipeline parameters, select **Add +** and enter the required fields.
 
@@ -56,10 +54,10 @@ NOTE: Triggering a pipeline via the CircleCI v2 API is not currently supported f
 
 [tabs]
 ====
-GitHub and Bitbucket::
+GitHub, Bitbucket, and Cursor Origin::
 +
 --
-This method is supported for GitHub (OAuth and App) and Bitbucket (Cloud and Data Center) orgs.
+This method is supported for GitHub (OAuth and App), Bitbucket (Cloud and Data Center), and Cursor Origin orgs.
 
 TIP: **GitHub OAuth and Bitbucket Cloud pipelines** can also be triggered using the link:https://circleci.com/docs/api/v2/index.html#operation/triggerPipeline[Trigger a New Pipeline] endpoint, which is described in the **CircleCI Server** tab. However, the method outlined in this section is recommended.
 
@@ -132,7 +130,7 @@ TIP: You can also specify pipeline parameters when triggering a pipeline using t
 [#trigger-a-pipeline-from-a-custom-webhook]
 == Trigger a pipeline from a custom webhook
 
-NOTE: Custom webhooks are available for projects integrated via the GitHub App. Custom webhooks are not available on CircleCI Server.
+NOTE: Custom webhooks are available for projects integrated via the GitHub App or Cursor Origin. Custom webhooks are not available on CircleCI Server.
 
 Follow these steps to set up and test a custom webhook trigger for a pipeline from anywhere that can emit a webhook or run a curl command:
 

@@ -266,7 +266,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| -
+| [.circle-green]#**Yes**#
 
 | *xref:orchestrate:triggers-overview.adoc#run-a-pipeline-from-the-circleci-web-app[UI Triggers]. Trigger pipelines via the CircleCI web app.*
 | Triggers
@@ -278,7 +278,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| -
+| [.circle-green]#**Yes**#
 
 | *Pull request event triggers. See more in the xref:orchestrate:triggers-overview.adoc#run-a-pipeline-on-commit-to-your-code-repository[Triggers Overview].*
 | Triggers
