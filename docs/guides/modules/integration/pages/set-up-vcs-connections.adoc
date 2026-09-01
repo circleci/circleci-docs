@@ -16,8 +16,6 @@ The menu:Org[VCS Connections] page has two parts:
 * **Connected** lists the providers your organization is already connected to. Expand a connection to see the permissions it has been granted and which repositories it can access. Each connection also has controls to configure or remove it.
 * **Available Providers** shows the providers you can still connect, as a set of cards. Select a provider card to start installing that connection.
 
-#TODO Add a screenshot of the menu:Org[VCS Connections] page, showing both the Connected and Available Providers sections. This page describes that screen entirely in prose, and no other page in the docs shows it.#
-
 Some connections need extra configuration before pipelines can run. For example, a self-managed provider may show a prompt to add `known_hosts` values. The tabs in the next section cover what each provider requires.
 
 
