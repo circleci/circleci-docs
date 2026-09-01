@@ -73,11 +73,7 @@ The following table shows feature support for each pipeline type.
 
 For an overview of users, orgs, and pipeline types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
-NOTE: The table below is not a full list of CircleCI features. Only features where the pipeline type is relevant to support are included. If a feature is not in this table, it is supported for all pipeline types.
-
-NOTE: The two open source support features are marked **No** for Cursor Origin because Origin has no public repositories and no forking.
-
-NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourself. CircleCI has no write access to an Origin repository, so it cannot open a pull request on your behalf, and the guided setup is unavailable. See the xref:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] guide for the manual steps.
+The table below is not a full list of CircleCI features. Only features where the pipeline type is relevant to support are included. If a feature is not in this table, it is supported for all pipeline types.
 
 [.table-scroll]
 --
