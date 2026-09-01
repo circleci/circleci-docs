@@ -30,8 +30,6 @@ If you are using a `circleci` type organization, the steps in this section apply
 
 Choose steps to follow below, depending on where your code is stored:
 
-#TODO The later steps in the GitLab Cloud, GitLab self-managed, and Bitbucket Data Center tabs describe a "Create New Project window" with Fastest, Faster, and Fast options. The wizard now has separate config and trigger steps, so confirm whether those steps are still accurate.#
-
 [tabs]
 ====
 GitHub::
