@@ -248,8 +248,6 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 The pipeline values available to you depend on your pipeline/integration type, as shown in the "Source" column of each table below. The tables below group values by their purpose and namespace.
 
-#TODO Confirm whether the `pipeline.deploy.*` values are populated for Cursor Origin. Deploy and rollback pipelines are unsupported for Origin, so these are expected to be unpopulated.#
-
 include::guides:ROOT:partial$pipelines-and-triggers/pipeline-values.adoc[]
 
 === Usage example
