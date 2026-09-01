@@ -43,12 +43,11 @@ The pipeline and trigger options and features available to you depend on how you
 A pipeline defines a unit of work that can be run within your project. Each pipeline is defined by two key characteristics:
 
 * A config source, which is a configuration file stored in a repository. The default config source location is `.circleci/config.yml` within the same repository as your code.
-** For GitHub App and Bitbucket Data Center pipelines you can choose any file path (with extension `*.yml`) in any repository to be your config source.
+** For GitHub App, Bitbucket Data Center, and Cursor Origin pipelines you can choose any file path (with extension `*.yml`) in any repository to be your config source.
 ** GitHub OAuth pipelines require config files to be stored in the repository that gives the project its name, at `.circleci/config.yml`.
-** For Cursor Origin pipelines you can set a custom config file path. You set this path when you create your project. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
 
 * A checkout source, which determines which repository will be checked out when running a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step].
-** For GitHub App and Bitbucket Data Center pipelines you can choose any of your repositories as your checkout source. This model allows your CircleCI config to be stored in a different repository from your code.
+** For GitHub App, Bitbucket Data Center, and Cursor Origin pipelines you can choose any of your repositories as your checkout source. This model allows your CircleCI config to be stored in a different repository from your code.
 ** GitHub OAuth and GitLab pipelines require the same project repository for your config source and checkout source.
 
 A project can have one or more pipelines, and each pipeline can be associated with zero or more triggers.
@@ -62,8 +61,6 @@ If you are using GitHub, you can identify the pipeline type (GitHub App, GitHub 
 NOTE: GitHub and Bitbucket OAuth pipelines are created automatically when setting up a project and they cannot be edited.
 
 The steps and options described in this section are for setting up a pipeline. Choose the tab to match your version control system to view the correct steps for your system.
-
-#TODO In the Cursor Origin tab below, confirm whether the pipeline form has separate config source and checkout source repository selectors, as the GitHub App form does.#
 
 [tabs]
 ====
@@ -154,7 +151,9 @@ NOTE: If you have not yet installed the CircleCI Origin app into your Origin cod
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
+** Select a repository to be your config source.
 ** Enter your config file path. The field is automatically populated with the default path `.circleci/config.yml` but you can edit this if needed.
+** Select a checkout source for this pipeline. This repository will be checked out when a xref:reference:ROOT:configuration-reference.adoc#checkout[Checkout Step] is run. If your config is stored in the same repository as your code, pick the same repository you selected for the config source.
 . Select btn:[Save].
 
 For Cursor Origin, commit the config file to your repository yourself before your pipeline can run. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.

@@ -20,7 +20,7 @@ image::guides:ROOT:pipelines-dashboard.png[Screenshot showing running pipelines 
 [#run-a-pipeline-from-the-circleci-web-app]
 == Trigger a pipeline from the CircleCI web app
 
-#TODO Cursor Origin is missing from this section. Confirm whether Origin pipelines support manual triggering from the web app, and whether they have a separate checkout source to select. Both questions are already tracked against the Origin cells in the VCS integration overview feature table.#
+#TODO Cursor Origin is missing from this section. Confirm whether Origin pipelines support manual triggering from the web app. If they do, add Cursor Origin to the checkout source step below, as Origin pipelines have a separate checkout source. The same question is tracked against the UI triggers row of the VCS integration overview feature table.#
 
 NOTE: This feature is not available for GitLab integrations.
 

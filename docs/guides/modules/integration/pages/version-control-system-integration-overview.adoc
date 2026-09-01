@@ -218,7 +218,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| -
+| [.circle-green]#**Yes**#
 
 | *xref:orchestrate:custom-webhooks.adoc[Custom Webhook Triggers]. Trigger pipelines from external services.*
 | Triggers

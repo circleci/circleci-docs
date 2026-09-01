@@ -25,8 +25,6 @@ Triggers are available in the following types:
 
 To add a trigger for a pipeline, follow these steps:
 
-#TODO In the Cursor Origin tab below, confirm whether the trigger form has an Event Source field that can point at a different repository, as the GitHub App form does.#
-
 #TODO Confirm the button label in the Cursor Origin tab below. It is written as "Cursor Origin trigger +", based on the GitHub App tab's "GitHub trigger +".#
 
 [tabs]
@@ -146,6 +144,7 @@ include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 . Choose when to run the pipeline by selecting an option from the *Event* menu. The default is *All pushes*.
 +
 For the full list of event options, see the xref:cursor-origin-trigger-event-options.adoc[Cursor Origin Trigger Event Options] page.
+* The *Event Source* defaults to the repository associated with the pipeline. You can change the event source to a different repository if you wish. If the event source does not match the pipeline's config or checkout source, an option appears to specify which branch to use for the trigger.
 . Select btn:[Save].
 
 To verify your trigger is set up correctly, push a commit to your repository. Your config file must already be committed there. See the xref:getting-started:create-project.adoc#create-a-project[Create a Project] page.
