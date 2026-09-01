@@ -16,7 +16,7 @@ You can use DLC with both the `machine` executor and in a xref:execution-managed
 
 DLC costs 200 credits per job run. For more information about DLC charges, see the xref:plans-pricing:credits.adoc#charge-for-docker-layer-caching[FAQ].
 
-NOTE: DLC has a couple of temporary, known issues. See <<known-issues,Known Issues>> before enabling it on gen3 resource classes or newer Docker versions.
+NOTE: DLC has a known issue with QEMU/binfmt multi-arch `buildx` builds. See <<known-issues,Known Issues>> before enabling it.
 
 [#quickstart]
 == Quickstart
@@ -63,20 +63,22 @@ jobs:
 [#known-issues]
 == Known issues
 
-[#gen3-infrastructure-failures]
-=== Gen3 resource classes causing infrastructure failures
+[#qemu-binfmt-corruption]
+=== DLC corruption with QEMU/binfmt multi-arch builds
 
 [WARNING]
 ====
-We are investigating reports that enabling DLC (`docker_layer_caching: true`) on gen3 resource classes (`*.gen3`) can cause infrastructure failures. This incompatibility is a temporary, known issue, not a permanent limitation of DLC or gen3. Avoid enabling DLC on gen3 resource classes for now, whether you are using the `machine` executor or a xref:execution-managed:building-docker-images.adoc[Remote Docker Environment].
-====
+Registering QEMU `binfmt` handlers (for example, with `tonistiigi/binfmt --install all`) for multi-architecture `buildx` builds can corrupt the DLC cache. When this happens, CircleCI automatically resets the Docker filesystem, so the job usually still succeeds. However, DLC discards the cached layers instead of reusing them, and the same corruption tends to recur on the next run that registers `binfmt` handlers.
 
-[#docker29-incompatibility]
-=== Docker 29 compatibility
+**Workaround:** Uninstall the QEMU `binfmt` handlers as the last step of your job (using `when: always`), then <<purge-dlc,purge the existing DLC cache>>:
 
-[WARNING]
-====
-DLC is not currently compatible with Docker 29 or later. This incompatibility is a temporary, known issue, and we are working on a fix. Avoid `docker29` if you use DLC. See xref:execution-managed:building-docker-images.adoc#docker-version[Specify a Docker Version for Remote Docker] for how to pin a version.
+[,yaml]
+----
+- run:
+    name: Uninstall QEMU binfmt handlers
+    when: always
+    command: docker run --privileged --rm tonistiigi/binfmt --uninstall qemu-*
+----
 ====
 
 [#limitations]
