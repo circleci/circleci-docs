@@ -338,6 +338,7 @@ SemVer
 SELinux
 [Ss]erverless
 \b[Ss]hellchecking\b
+SHAs?
 [Ss]harded
 \b[Ss]ingle sign-on\b
 SLAs?
