@@ -140,14 +140,14 @@ To add or edit a pipeline, follow these steps:
 Cursor Origin::
 +
 --
+Before you can add a Cursor Origin pipeline, the CircleCI Origin app must be installed in your Origin codebase. Installing the app is a one-time step. You can install it from your menu:Org[VCS Connections] page, from the Cursor Origin marketplace, or as part of creating a project. See the xref:integration:set-up-vcs-connections.adoc[Set up VCS Connections] page.
+
 To add or edit a pipeline, follow these steps:
 
 include::guides:ROOT:partial$app-navigation/steps-to-project-settings.adoc[]
 +
 . Select *Project Setup* in the sidebar.
 . Select btn:[Add Pipeline], or, if you wish to edit an existing pipeline select the pencil icon (icon:edit-solid[Edit icon]) to the right of the section you want to change.
-+
-NOTE: If you have not yet installed the CircleCI Origin app into your Origin codebase you will be prompted to do so at this point. Installing the app is a one-time step.
 . Complete the form fields and options:
 ** Give your pipeline a descriptive name, for example `Run tests and deploy`.
 ** Authorize your connection if this is not already showing with a check mark image:guides:ROOT:icons/passed.svg[passed icon, role="no-border"].
