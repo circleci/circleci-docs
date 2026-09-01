@@ -70,7 +70,6 @@ The following table shows feature support for each pipeline type.
 
 * Features that are supported for a pipeline type are indicated with [.circle-green]#**Yes**#.
 * Features that are not supported for a pipeline type are indicated with [.circle-red]#**No**#.
-* Features that are not yet confirmed for a pipeline type are indicated with `-`.
 
 For an overview of users, orgs, and pipeline types, see the xref:permissions-authentication:users-organizations-and-integrations-guide.adoc[Users, Organizations, and Integrations Guide].
 
@@ -79,8 +78,6 @@ NOTE: The table below is not a full list of CircleCI features. Only features whe
 NOTE: The two open source support features are marked **No** for Cursor Origin because Origin has no public repositories and no forking.
 
 NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourself. CircleCI has no write access to an Origin repository, so it cannot open a pull request on your behalf, and the guided setup is unavailable. See the xref:deploy:configure-deploy-markers.adoc[Configure Deploy Markers] guide for the manual steps.
-
-#TODO Confirm Cursor Origin support for every row marked `-` below, then replace each dash with Yes or No.#
 
 [.table-scroll]
 --
@@ -122,7 +119,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
-| -
+| [.circle-green]#**Yes**#
 
 | *Custom configuration file path. If _No_ then CircleCI config is stored at `.circleci/config.yml` in the repository.*
 | Configuration
@@ -146,7 +143,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
 | [.circle-red]#**No**#
-| -
+| [.circle-green]#**Yes**#
 
 | xref:toolkit:vs-code-extension-overview.adoc#test-run-your-config-from-vs-code[Test Run Config From VS Code]
 | Configuration
@@ -158,7 +155,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| -
+| [.circle-red]#**No**#
 
 | *View your configuration file in the CircleCI web app*
 | Configuration
@@ -206,7 +203,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| -
+| [.circle-green]#**Yes**#
 
 | *Cross-repo pipeline and trigger setups*
 | Triggers
@@ -254,7 +251,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-red]#**No**#
 | [.circle-green]#**Yes**#
 | [.circle-red]#**No**#
-| -
+| [.circle-red]#**No**#
 
 | *link:https://circleci.com/docs/api/v2/#operation/triggerPipeline[API Triggers]. Trigger pipelines via the API.*
 | Triggers
@@ -314,7 +311,7 @@ NOTE: Deploy markers are supported for Cursor Origin, but you set them up yourse
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
-| -
+| [.circle-green]#**Yes**#
 
 | *Use link:https://circleci.com/changelog/release-markers-and-release-jobs/[Deploy Markers] to track deployments in the CircleCI web app*
 | Deployment
