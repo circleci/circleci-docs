@@ -130,13 +130,6 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 
-| `CIRCLE_PREVIOUS_BUILD_NUM`
-| GitHub, Bitbucket, GitLab
-| Integer
-| The largest job number in a given branch that is less than the current job number. **Note**: The variable is not always set, and is not deterministic. It is also not set on runner executors. This variable will be deprecated and is not recommended for use.
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
 | `CIRCLE_PROJECT_ID`
 | GitHub, Bitbucket, GitLab
 | String
@@ -225,13 +218,6 @@ NOTE: You cannot use a built-in environment variable to define another environme
 | GitHub, Bitbucket, GitLab
 | String
 | The value of the `working_directory` key of the current job.
-| [.circle-green]#**Yes**#
-| [.circle-green]#**Yes**#
-
-| `CIRCLE_INTERNAL_TASK_DATA`
-| GitHub, Bitbucket, GitLab
-| String
-| **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
 | [.circle-green]#**Yes**#
 | [.circle-green]#**Yes**#
 |===
