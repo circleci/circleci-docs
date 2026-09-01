@@ -125,7 +125,7 @@ compatibility with the OpenTelemetry semantic conventions.
 the CircleCI organization in which this ran.
 
 |`com.circleci.pipeline.id` |f74a9582-9dd4-4b89-8801-4357de39ca5f |The
-CircleCI pipeline ID. This is the same value as `cicd.pipeline.run.id`.
+CircleCI pipeline ID. The value is the same as `cicd.pipeline.run.id`.
 
 |`com.circleci.pipeline.number` |42 |The CircleCI pipeline number.
 
@@ -164,7 +164,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |++`https://github.com/my-org/my-repo`++ |The URL for
+|`vcs.repository.url.full` |`\https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
@@ -267,7 +267,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |++`https://github.com/my-org/my-repo`++ |The URL for
+|`vcs.repository.url.full` |`\https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
@@ -394,7 +394,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |++`https://github.com/my-org/my-repo`++ |The URL for
+|`vcs.repository.url.full` |`\https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
@@ -593,7 +593,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |++`https://github.com/my-org/my-repo`++ |The URL for
+|`vcs.repository.url.full` |`\https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
@@ -770,7 +770,7 @@ of the ref. Only present when the pipeline is building a branch or tag.
 |`vcs.repository.name` |my-repo |The name of the VCS repository, derived
 from the last path segment of the repository URL.
 
-|`vcs.repository.url.full` |++`https://github.com/my-org/my-repo`++ |The URL for
+|`vcs.repository.url.full` |`\https://github.com/my-org/my-repo` |The URL for
 the VCS repository.
 |===
 --
