@@ -225,8 +225,6 @@ To use Docker 29, use the following tag:
 
 * `docker29`
 
-WARNING: Avoid `docker29` if you use DLC. See xref:optimize:docker-layer-caching.adoc#docker29-incompatibility[Known Issues] for details.
-
 To use Docker 27, use the following tag:
 
 * `docker27`
